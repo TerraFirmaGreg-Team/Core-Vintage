@@ -5,6 +5,7 @@
 
 package net.dries007.tfc;
 
+import net.dries007.tfc.compat.top.TOPPlugin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import net.minecraft.server.MinecraftServer;
@@ -150,6 +151,8 @@ public final class TerraFirmaCraft
         {
             ClientEvents.preInit();
         }
+
+        TOPPlugin.onPreInit();
     }
 
     @Mod.EventHandler
@@ -193,8 +196,6 @@ public final class TerraFirmaCraft
         CapabilityItemSize.init();
         CapabilityItemHeat.init();
         CapabilityMetalItem.init();
-
-        FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "net.dries007.tfc.compat.waila.TOPPlugin");
     }
 
     @Mod.EventHandler

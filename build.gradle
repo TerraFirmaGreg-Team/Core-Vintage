@@ -205,11 +205,11 @@ if (project.property('use_access_transformer').toBoolean()) {
 processResources {
     inputs.property 'version', project.property('version')
     if (project.property('use_mixins').toBoolean()) {
-        inputs.property 'refmap', interpolate(project.property('mixin_refmap'))
+        // inputs.property 'refmap', interpolate(project.property('mixin_refmap'))
     }
 
     if (project.property('use_mixins').toBoolean()) {
-        include('mixins.*.json').exclude(interpolate(project.property('mixin_refmap'))).expand('refmap': interpolate(project.property('mixin_refmap')))
+        // include('mixins.*.json').exclude(interpolate(project.property('mixin_refmap'))).expand('refmap': interpolate(project.property('mixin_refmap')))
     }
     
     // Replace various properties in mcmod.info and pack.mcmeta if applicable
@@ -246,6 +246,14 @@ jar {
     }
     // Add all embedded dependencies into the jar
     from(provider{ configurations.embed.collect {it.isDirectory() ? it : zipTree(it)} })
+}
+
+runClient {
+    workingDir = file('run/client')
+}
+
+runServer {
+    workingDir = file('run/server')
 }
 
 idea {

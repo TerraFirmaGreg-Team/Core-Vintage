@@ -1,0 +1,40 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:sluice/upper",
+    "textures": {
+      "texture": "tfc:blocks/devices/sluice/sluice_sheetwood",
+      "particle": "tfc:blocks/devices/sluice/sluice_sheetwood"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": {
+      "model": "tfc:sluice/inventory"
+    },
+    "upper": {
+      "true": {
+        "model": "tfc:sluice/upper"
+      },
+      "false": {
+        "model": "tfc:sluice/lower"
+      }
+    },
+    "facing": {
+      "north": {
+        "y": 0
+      },
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      },
+      "east": {
+        "y": 90
+      }
+    }
+  }
+}

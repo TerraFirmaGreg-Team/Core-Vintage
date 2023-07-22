@@ -1,0 +1,262 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
+/*
+ * !!README!!
+ *
+ * Willing contributors: Do not change anything in this file that is not marked with a comment saying you can edit it!
+ *
+ * !!README!!
+ *
+ */
+// Allow json magic in build script (used for update json file)
+import groovy.json.JsonBuilder
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+// Required build script stuff
+buildscript {
+    repositories {
+        // Repositories required for ForgeGradle go here.
+        jcenter()
+        maven {
+            name = "forge"
+            url = "https://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "curseforge"
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT"
+        classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
+        classpath "com.wynprice.cursemaven:CurseMaven:2.1.0"
+    }
+}
+plugins {
+    id 'java'
+    id 'idea'
+}
+// Go Forge go!
+apply plugin: "net.minecraftforge.gradle.forge"
+apply plugin: "com.matthewprenger.cursegradle"
+apply plugin: 'com.wynprice.cursemaven'
+
+// Load properties file, easier to manage versions of required dependencies
+file "build.properties" withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
+/**
+ * Version in dev is set to 'dev'
+ * Any builds produced by the github actions build script will have a version matching their tag.
+ * Versioning is highly based on semantic versioning: [MAJOR].[MINOR].[REVISION].[BUILD]
+ *  - Major version resets on MC version changes
+ *  - Minor version resets on added features or major changes
+ *  - Revision resets on any bugfixes or small changes
+ *  - Build increments, only resets on a new major version.
+ */
+if (System.getenv('VERSION') != null) {
+    version = System.getenv('VERSION')
+} else {
+    version = 'dev'
+}
+
+group = "net.dries007.tfc" // According to java standards, as I have control over this domain. If you fork this and release your own version, change this.
+archivesBaseName = "TerraFirmaCraft" // Jar filename. The final result must match ^[\w-\.]+$. (Alphanumerical + `_-.`)
+sourceCompatibility = targetCompatibility = "1.8" // We require Java 8
+
+String runGitCommand(String cmd_args)
+{
+    // Create a new function that gets the changelog from git (used for updates json file)
+    try
+    {
+        def outStream = new ByteArrayOutputStream()
+        exec {
+            executable = 'git'
+            args(cmd_args.split(' '))
+            standardOutput = outStream
+        }
+        return outStream.toString().replaceAll("^\\s*'\\s*|\\s*'\\s*\$", "").replaceAll("[\\r\\n]+", "\n")
+    }
+    catch (exception)
+    {
+        logger.warn("No changelog due to error with git command line. Ignoring...", exception)
+        return "<ERROR>"
+    }
+}
+
+minecraft { // Only change any of this with prior approval from the dev team!
+    version = "${config.minecraft.version}-${config.forge.version}"
+    runDir = "run"
+    mappings = "stable_39"
+}
+
+repositories {
+    // Repositories required for dependencies, not ForgeGradle go here.
+    mavenCentral()
+    maven {
+        name = "CraftTweaker Maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    //maven {
+    //    name = "Hwyla maven"
+    //    url "http://tehnut.info/maven"
+    //}
+    maven { // TOP
+        name 'tterrag maven'
+        url "https://maven.tterrag.com/"
+    }
+    maven {
+        name = "CoFH Maven"
+        url = "https://maven.covers1624.net/"
+    }
+    maven {
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
+    maven {
+        url "https://cursemaven.com"
+    }
+}
+
+String mcVersion = config.minecraft.version
+String shortVersion = mcVersion.substring(0, mcVersion.lastIndexOf('.'))
+String strippedVersion = shortVersion.replace(".", "") + "0"
+
+dependencies {
+    // Mod dependencies go here.
+    // Do not add dependencies without prior approval from the dev team. You can update existing ones.
+    deobfProvided "CraftTweaker2:CraftTweaker2-MC${strippedVersion}-Main:${config.crafttweaker.version}"
+    deobfProvided "mezz.jei:jei_${config.minecraft.version}:${config.jei.version}"
+
+    // For now, since maven is no show, use the curse maven plugin to resolve the exact file name
+    compileOnly "curse.maven:hwyla-253449:2568751"
+    //compileOnly "mcp.mobius.waila:Hwyla:${config.HWYLA.version}_${config.minecraft.version}"
+    deobfProvided "mcjty.theoneprobe:TheOneProbe-${shortVersion}:${config.TOP.version}"
+    deobfProvided "vazkii.patchouli:Patchouli:${config.patchouli.version}"
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", version
+    inputs.property "mcversion", config.minecraft.version
+
+    // copy mcmod.info from resources
+    from(sourceSets.main.resources.srcDirs) {
+        include "mcmod.info"
+
+        // replace version and mcversion variables/placeholders
+        expand "mod_version": version, "mc_version": config.minecraft.version
+    }
+
+    // copy everything else from resources
+    from(sourceSets.main.resources.srcDirs) {
+        exclude "mcmod.info"
+    }
+
+    // from the project root, include the LICENSE file
+    from('.') {
+        include "LICENSE.txt"
+    }
+
+    // move any Access Transformer (there is/should be only 1, but this is nice and safe) to the right folder.
+    rename '(.+_at.cfg)', 'META-INF/$1'
+
+    // Write the update's json file. This file is kept by jenkins and put in a WWW accessible folder.
+    // For more info on the exact format, see Forge documentation & source code.
+    doLast {
+        //noinspection GroovyAssignabilityCheck
+        def updateFile = new File('tfc.json')
+        def json
+        if (updateFile.exists()) {
+            json = new JsonSlurper().parseText(updateFile.getText())
+        } else {
+            def builder = new JsonBuilder()
+            json = builder(homepage: "https://tng.terrafirmacraft.com", promos: new HashMap<>()) // defaults: Again, change if you fork & release
+        }
+        //noinspection GroovyAssignabilityCheck
+        json['promos'][project.minecraft.version + '-latest'] = project.version
+        //noinspection GroovyAssignabilityCheck
+        json['promos'][project.minecraft.version + '-recommended'] = project.version
+        if (!json.containsKey(project.minecraft.version)) json.put(project.minecraft.version, new HashMap<>())
+        //noinspection GroovyAssignabilityCheck
+        def version = json[project.minecraft.version]
+        version.put(project.version, runGitCommand("log -n 1 --format='%B'"))
+        updateFile.write JsonOutput.prettyPrint(JsonOutput.toJson(json)) // Pretty print cause why not, it's a small file anyway.
+    }
+}
+
+// Deobf jar allows people to drop this in mod folder on a dev environment
+task deobfJar(type: Jar, dependsOn: 'jar') {
+    from sourceSets.main.output
+    classifier "deobf"
+}
+
+artifacts {
+    archives deobfJar // Default jars are already in there.
+}
+
+project.tasks.withType(Jar) { jarTask -> // For all jar tasks
+    jarTask.manifest {
+        attributes 'FMLAT': 'tfc_at.cfg' // See FML source code
+        attributes 'GIT_HASH': runGitCommand("log -n 1 --format='%H'")
+        attributes 'GIT_SUBJECT': runGitCommand("log -n 1 --format='%s'")
+    }
+    // Add "MC${mcversion}" to the jar, so the name ends up `TerraFirmaCraft-MC1.12.2-0.0.0.0.jar`
+    // This didn't used to have the `MC` prefix, but it confuses some hosting websites as the actual version numbers then.
+    jarTask.appendix = "MC" + project.minecraft.version
+}
+
+// If the keystore properties are installed (in ~/.gradle/gradle.properties) only.
+// Only really relevant on the build server, but usable in dev also.
+task signJar(type: SignJar, dependsOn: reobfJar) {
+    if (!project.hasProperty("signjar.keystore")) return
+    keyStore = project.getProperty("signjar.keystore")
+    alias = project.getProperty("signjar.alias")
+    storePass = project.getProperty("signjar.storePass")
+    keyPass = project.getProperty("signjar.keyPass")
+    inputFile = jar.archivePath
+    outputFile = jar.archivePath
+}
+
+// If the keystore properties are installed (in ~/.gradle/gradle.properties) only.
+// Only really relevant on the build server, but usable in dev also.
+// Makes it so you don't have to add the sign task in the command line, building will do.
+if (project.hasProperty("signjar.keystore"))
+{
+    build.dependsOn signJar
+    // Makes curseforge upload the signed jar
+    tasks.curseforge.mustRunAfter signJar
+    tasks.curseforge.dependsOn build
+}
+
+// Allow automatic uploading to curseforge
+curseforge {
+    def envApiKey = System.getenv('CURSEFORGE_API_KEY')
+    if (envApiKey == null) {
+        println 'No Curseforge API Key'
+        envApiKey = 'kaput'
+        return
+    }
+    project {
+        apiKey = envApiKey
+        id = '302973'
+        changelog = "[Release Notes ${version}](https://github.com/TerraFirmaCraft/TerraFirmaCraft/releases/tag/v${version})"
+        changelogType = "markdown"
+        releaseType = 'release'
+        addGameVersion "${mcVersion}"
+    }
+    options {
+        javaVersionAutoDetect = false
+    }
+}

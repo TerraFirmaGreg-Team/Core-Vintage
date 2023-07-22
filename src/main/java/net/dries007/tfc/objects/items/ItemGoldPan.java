@@ -31,10 +31,8 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -163,6 +161,7 @@ public class ItemGoldPan extends ItemTFC
                             if (damage == 1 || damage == 2)
                             {
                                 Random rand = new Random(world.getSeed() + chunk.getPos().x * 241179128412L + chunk.getPos().z * 327910215471L);
+                                /*
                                 TFCRegistries.ORES.getValuesCollection()
                                     .stream()
                                     .filter(Ore::canPan)
@@ -172,7 +171,7 @@ public class ItemGoldPan extends ItemTFC
                                         {
                                             Helpers.spawnItemStack(world, position, new ItemStack(ItemSmallOre.get(x)));
                                         }
-                                    });
+                                    });*/
                                 // player.inventory.setInventorySlotContents(player.inventory.currentItem, stack); //only way to get it to refresh! <- do we really *need* this?
                             }
                             else if (damage == 3 || damage == 4)

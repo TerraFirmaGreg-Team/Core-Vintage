@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.dries007.tfc.api.recipes.AlloyRecipe;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.objects.ArmorMaterialTFC;
 import net.dries007.tfc.objects.ToolMaterialsTFC;
 
@@ -95,48 +94,6 @@ public final class DefaultMetals
     public static final ResourceLocation BORAX = new ResourceLocation(MOD_ID, "borax");
     public static final ResourceLocation OLIVINE = new ResourceLocation(MOD_ID, "olivine");
     public static final ResourceLocation LAPIS_LAZULI = new ResourceLocation(MOD_ID, "lapis_lazuli");
-
-    @SubscribeEvent
-    public static void onPreRegisterOre(TFCRegistryEvent.RegisterPreBlock<Ore> event)
-    {
-        event.getRegistry().registerAll(
-            new Ore(NATIVE_COPPER, COPPER, 0.75D, 0.33D),
-            new Ore(NATIVE_GOLD, GOLD, 0.25D, 0.15D),
-            new Ore(NATIVE_PLATINUM, PLATINUM, 1D, 0.002D),
-            new Ore(HEMATITE, WROUGHT_IRON, false),
-            new Ore(NATIVE_SILVER, SILVER, 0.50D, 0.15D),
-            new Ore(CASSITERITE, TIN),
-            new Ore(GALENA, LEAD),
-            new Ore(BISMUTHINITE, BISMUTH),
-            new Ore(GARNIERITE, NICKEL),
-            new Ore(MALACHITE, COPPER),
-            new Ore(MAGNETITE, WROUGHT_IRON, false),
-            new Ore(LIMONITE, WROUGHT_IRON, false),
-            new Ore(SPHALERITE, ZINC),
-            new Ore(TETRAHEDRITE, COPPER),
-            new Ore(BITUMINOUS_COAL),
-            new Ore(LIGNITE),
-            new Ore(KAOLINITE),
-            new Ore(GYPSUM),
-            new Ore(SATINSPAR),
-            new Ore(SELENITE),
-            new Ore(GRAPHITE),
-            new Ore(KIMBERLITE),
-            new Ore(PETRIFIED_WOOD),
-            new Ore(SULFUR),
-            new Ore(JET),
-            new Ore(MICROCLINE),
-            new Ore(PITCHBLENDE),
-            new Ore(CINNABAR),
-            new Ore(CRYOLITE),
-            new Ore(SALTPETER),
-            new Ore(SERPENTINE),
-            new Ore(SYLVITE),
-            new Ore(BORAX),
-            new Ore(OLIVINE),
-            new Ore(LAPIS_LAZULI)
-        );
-    }
 
     @SubscribeEvent
     public static void onPreRegisterMetal(TFCRegistryEvent.RegisterPreBlock<Metal> event)

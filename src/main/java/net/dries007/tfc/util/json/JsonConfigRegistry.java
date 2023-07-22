@@ -21,7 +21,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
@@ -30,7 +29,6 @@ public enum JsonConfigRegistry
     INSTANCE;
     private static final String DEFAULT_ANIMAL_FOOD = "assets/tfc/config/animal_food_data.json";
     private static final String DEFAULT_DAMAGE_RESISTANCE = "assets/tfc/config/entity_resistance_data.json";
-    private static final String DEFAULT_ORE_SPAWN = "assets/tfc/config/ore_spawn_data.json";
 
     private File tfcConfigDir;
 
@@ -49,31 +47,6 @@ public enum JsonConfigRegistry
             throw new Error("Problem creating TFC extra config directory.");
         }
 
-        // Create or overwrite our default ore gen file
-        if (ConfigTFC.General.OVERRIDES.forceDefaultOreGenFile)
-        {
-            // Create default vein file
-            try
-            {
-                File defaultFile = new File(tfcConfigDir, "ore_spawn_data.json");
-                if (defaultFile.exists())
-                {
-                    // Back up the file, in case of illiteracy
-                    FileUtils.copyFile(defaultFile, new File(defaultFile.getPath() + ".old"));
-                    // And replace the contents
-                    System.out.println(JsonConfigRegistry.class.getClassLoader().getResourceAsStream(DEFAULT_ORE_SPAWN));
-                    FileUtils.copyInputStreamToFile(Objects.requireNonNull(JsonConfigRegistry.class.getClassLoader().getResourceAsStream(DEFAULT_ORE_SPAWN)), defaultFile);
-                }
-                else if (defaultFile.createNewFile())
-                {
-                    FileUtils.copyInputStreamToFile(Objects.requireNonNull(JsonConfigRegistry.class.getClassLoader().getResourceAsStream(DEFAULT_ORE_SPAWN)), defaultFile);
-                }
-            }
-            catch (IOException e)
-            {
-                throw new Error("Problem creating default ore vein config file.", e);
-            }
-        }
         File defaultFile = new File(tfcConfigDir, "entity_resistance_data.json");
         try
         {
@@ -129,12 +102,6 @@ public enum JsonConfigRegistry
                 {
                     AnimalFood.readFile(jsonObject.entrySet());
                 }
-                else
-                {
-                    // Defaults to the vein loader, this will be thrown out at 1.15 anyway
-                    String veinPath = tfcConfigDir.toPath().relativize(path.getParent()).toString();
-                    VeinRegistry.INSTANCE.readFile(jsonObject.entrySet(), veinPath);
-                }
 
             }
             catch (IOException e)
@@ -144,7 +111,6 @@ public enum JsonConfigRegistry
                 TerraFirmaCraft.getLog().error("Error: ", e);
             }
         }
-        VeinRegistry.INSTANCE.postInit();
         CapabilityDamageResistance.postInit();
     }
 

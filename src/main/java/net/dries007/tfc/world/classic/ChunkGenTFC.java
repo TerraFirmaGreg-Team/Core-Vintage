@@ -80,7 +80,6 @@ public class ChunkGenTFC implements IChunkGenerator
     /* This is done here rather than GameRegistry.registerWorldGenerator since we need to control the ordering of them better */
     private static final IWorldGenerator LAVA_FISSURE_GEN = new RarityBasedWorldGen(x -> x.lavaFissureRarity, new WorldGenFissure(true));
     private static final IWorldGenerator WATER_FISSURE_GEN = new RarityBasedWorldGen(x -> x.waterFissureRarity, new WorldGenFissure(false));
-    private static final IWorldGenerator ORE_VEINS_GEN = new WorldGenOreVeins();
     private static final IWorldGenerator SOIL_PITS_GEN = new WorldGenSoilPits();
     private static final IWorldGenerator LARGE_ROCKS_GEN = new RarityBasedWorldGen(x -> x.largeRockRarity, new WorldGenLargeRocks());
     private static final IWorldGenerator TREE_GEN = new WorldGenTrees();
@@ -293,7 +292,6 @@ public class ChunkGenTFC implements IChunkGenerator
 
         // First, do all terrain related features
         SOIL_PITS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
-        ORE_VEINS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         LAVA_FISSURE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         WATER_FISSURE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         LARGE_ROCKS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());

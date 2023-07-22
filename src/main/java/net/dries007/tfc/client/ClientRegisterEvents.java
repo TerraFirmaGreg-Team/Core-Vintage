@@ -40,7 +40,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.render.*;
 import net.dries007.tfc.objects.Gem;
@@ -59,9 +58,7 @@ import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.objects.items.ItemGoldPan;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
-import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.dries007.tfc.objects.te.*;
-import net.dries007.tfc.types.DefaultPlants;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
@@ -98,14 +95,6 @@ public final class ClientRegisterEvents
         for (ItemGem item : ItemsTFC.getAllGemItems())
             for (Gem.Grade grade : Gem.Grade.values())
                 registerEnumBasedMetaItems("gem", grade, item);
-
-        // Ore Items
-        for (ItemOreTFC item : ItemsTFC.getAllOreItems())
-            if (item.ore.isGraded())
-                for (Ore.Grade grade : Ore.Grade.values())
-                    registerEnumBasedMetaItems("ore", grade, item);
-            else
-                registerEnumBasedMetaItems("ore", Ore.Grade.NORMAL, item);
 
         // Gold Pan
         ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES).map(e -> new ResourceLocation(MOD_ID, "goldpan/" + e)).toArray(ResourceLocation[]::new));
@@ -173,9 +162,6 @@ public final class ClientRegisterEvents
 
         for (Block block : BlocksTFC.getAllLeafBlocks())
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
-
-        for (Block block : BlocksTFC.getAllOreBlocks())
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockOreTFC.GRADE).build());
 
         for (Block block : BlocksTFC.getAllWallBlocks())
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockWall.VARIANT).build());

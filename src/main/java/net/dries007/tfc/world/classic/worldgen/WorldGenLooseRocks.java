@@ -26,7 +26,6 @@ import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 
 public class WorldGenLooseRocks implements IWorldGenerator
 {
@@ -55,7 +54,6 @@ public class WorldGenLooseRocks implements IWorldGenerator
             final ChunkDataTFC baseChunkData = ChunkDataTFC.get(world, chunkBlockPos);
 
             // Get the proper list of veins
-            List<Vein> veins = Collections.emptyList();
             int xoff = chunkX * 16 + 8;
             int zoff = chunkZ * 16 + 8;
 
@@ -76,26 +74,6 @@ public class WorldGenLooseRocks implements IWorldGenerator
                 // Default to 35 below the surface, like classic
                 int lowestYScan = Math.max(10, world.getTopSolidOrLiquidBlock(chunkBlockPos).getY() - ConfigTFC.General.WORLD.looseRockScan);
 
-
-                veins = WorldGenOreVeins.getNearbyVeins(chunkX, chunkZ, world.getSeed(), 1);
-                if (!veins.isEmpty())
-                {
-                    veins.removeIf(v -> {
-                        if (v.getType() == null || !v.getType().hasLooseRocks() || v.getHighestY() < lowestYScan)
-                        {
-                            return true;
-                        }
-                        for (ChunkDataTFC data : chunkData)
-                        {
-                            // No need to check for initialized chunk data, ores will be empty.
-                            if (data.getGeneratedVeins().contains(v))
-                            {
-                                return false;
-                            }
-                        }
-                        return true;
-                    });
-                }
             }
 
             for (int i = 0; i < ConfigTFC.General.WORLD.looseRocksFrequency * factor; i++)
@@ -106,12 +84,12 @@ public class WorldGenLooseRocks implements IWorldGenerator
                     zoff + random.nextInt(16)
                 );
                 Rock rock = baseChunkData.getRock1(pos);
-                generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), getRandomVein(veins, pos, random), rock);
+                generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), rock);
             }
         }
     }
 
-    protected void generateRock(World world, BlockPos pos, @Nullable Vein vein, Rock rock)
+    protected void generateRock(World world, BlockPos pos, Rock rock)
     {
         // Use air, so it doesn't replace other replaceable world gen
         // This matches the check in BlockPlacedItemFlat for if the block can stay
@@ -123,13 +101,6 @@ public class WorldGenLooseRocks implements IWorldGenerator
             if (tile != null)
             {
                 ItemStack stack = ItemStack.EMPTY;
-                if (vein != null && vein.getType() != null)
-                {
-                    if (ConfigTFC.General.WORLD.enableLooseOres)
-                    {
-                        stack = vein.getType().getLooseRockItem();
-                    }
-                }
                 if (stack.isEmpty())
                 {
                     if (ConfigTFC.General.WORLD.enableLooseRocks)
@@ -143,19 +114,5 @@ public class WorldGenLooseRocks implements IWorldGenerator
                 }
             }
         }
-    }
-
-    @Nullable
-    protected Vein getRandomVein(List<Vein> veins, BlockPos pos, Random rand)
-    {
-        if (!veins.isEmpty() && rand.nextDouble() < 0.4)
-        {
-            Vein vein = veins.get(rand.nextInt(veins.size()));
-            if (vein.inRange(pos.getX(), pos.getZ(), 8))
-            {
-                return vein;
-            }
-        }
-        return null;
     }
 }

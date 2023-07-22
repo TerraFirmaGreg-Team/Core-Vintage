@@ -53,7 +53,6 @@ import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockKnife;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 
 @JEIPlugin
 public final class TFCJEIPlugin implements IModPlugin
@@ -74,7 +73,6 @@ public final class TFCJEIPlugin implements IModPlugin
     public static final String LOOM_UID = TerraFirmaCraft.MOD_ID + ".loom";
     public static final String QUERN_UID = TerraFirmaCraft.MOD_ID + ".quern";
     public static final String ROCK_LAYER_UID = TerraFirmaCraft.MOD_ID + ".rock_layer";
-    public static final String VEIN_UID = TerraFirmaCraft.MOD_ID + ".vein";
     public static final String WELDING_UID = TerraFirmaCraft.MOD_ID + ".welding";
     public static final String SCRAPING_UID = TerraFirmaCraft.MOD_ID + ".scraping";
 
@@ -110,7 +108,6 @@ public final class TFCJEIPlugin implements IModPlugin
         registry.addRecipeCategories(new MetalHeatingCategory(registry.getJeiHelpers().getGuiHelper(), METAL_HEAT_UID));
         registry.addRecipeCategories(new QuernCategory(registry.getJeiHelpers().getGuiHelper(), QUERN_UID));
         registry.addRecipeCategories(new RockLayerCategory(registry.getJeiHelpers().getGuiHelper(), ROCK_LAYER_UID));
-        registry.addRecipeCategories(new VeinCategory(registry.getJeiHelpers().getGuiHelper(), VEIN_UID));
         registry.addRecipeCategories(new WeldingCategory(registry.getJeiHelpers().getGuiHelper(), WELDING_UID));
         registry.addRecipeCategories(new ScrapingCategory(registry.getJeiHelpers().getGuiHelper(), SCRAPING_UID));
     }
@@ -293,13 +290,6 @@ public final class TFCJEIPlugin implements IModPlugin
 
         registry.addRecipes(rockLayerList, ROCK_LAYER_UID);
 
-        //Wraps all veins
-        List<VeinWrapper> veinList = VeinRegistry.INSTANCE.getVeins().values()
-            .stream().map(VeinWrapper::new)
-            .collect(Collectors.toList());
-
-        registry.addRecipes(veinList, VEIN_UID);
-
         // Register metal related stuff (put everything here for performance + sorted registration)
         List<UnmoldRecipeWrapper> unmoldList = new ArrayList<>();
         List<CastingRecipeWrapper> castingList = new ArrayList<>();
@@ -321,7 +311,6 @@ public final class TFCJEIPlugin implements IModPlugin
             if (Metal.ItemType.PROPICK.hasType(metal))
             {
                 registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.PROPICK)), ROCK_LAYER_UID);
-                registry.addRecipeCatalyst(new ItemStack(ItemMetalTool.get(metal, Metal.ItemType.PROPICK)), VEIN_UID);
             }
             if (Metal.ItemType.KNIFE.hasType(metal))
             {

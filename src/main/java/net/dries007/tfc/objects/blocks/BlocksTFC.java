@@ -100,7 +100,6 @@ public final class BlocksTFC
 
     private static ImmutableList<BlockFluidBase> allFluidBlocks;
     private static ImmutableList<BlockRockVariant> allBlockRockVariants;
-    private static ImmutableList<BlockOreTFC> allOreBlocks;
     private static ImmutableList<BlockWallTFC> allWallBlocks;
     private static ImmutableList<BlockLogTFC> allLogBlocks;
     private static ImmutableList<BlockLeavesTFC> allLeafBlocks;
@@ -166,10 +165,6 @@ public final class BlocksTFC
         return allLeafBlocks;
     }
 
-    public static ImmutableList<BlockOreTFC> getAllOreBlocks()
-    {
-        return allOreBlocks;
-    }
 
     public static ImmutableList<BlockFenceGateTFC> getAllFenceGateBlocks()
     {
@@ -445,15 +440,6 @@ public final class BlocksTFC
                     }
                 }
             }
-        }
-
-        {
-            Builder<BlockOreTFC> b = ImmutableList.builder();
-            for (Ore ore : TFCRegistries.ORES.getValuesCollection())
-                for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-                    b.add(register(r, ("ore/" + ore.getRegistryName().getPath() + "/" + rock.getRegistryName().getPath()).toLowerCase(), new BlockOreTFC(ore, rock), CT_ROCK_BLOCKS));
-            allOreBlocks = b.build();
-            allOreBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
         }
 
         {

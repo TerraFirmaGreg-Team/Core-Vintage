@@ -32,7 +32,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.objects.blocks.stone.BlockOreTFC;
 
 public class EntityFallingBlockTFC extends EntityFallingBlock implements IEntityAdditionalSpawnData
 {
@@ -166,11 +165,6 @@ public class EntityFallingBlockTFC extends EntityFallingBlock implements IEntity
                 if (!downState.getBlock().isAir(downState, world, downPos) && FallingBlockManager.canFallThrough(world, downPos, material, downState))
                 {
                     world.destroyBlock(downPos, true);
-                    return;
-                }
-                else if (ConfigTFC.General.FALLABLE.destroyOres && downState.getBlock() instanceof BlockOreTFC)
-                {
-                    world.destroyBlock(downPos, false);
                     return;
                 }
 

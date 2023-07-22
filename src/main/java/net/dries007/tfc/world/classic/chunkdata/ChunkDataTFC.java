@@ -30,7 +30,6 @@ import net.dries007.tfc.util.NBTBuilder;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.world.classic.DataLayer;
-import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;
@@ -130,7 +129,6 @@ public final class ChunkDataTFC
     private float avgTemp;
     private float floraDensity;
     private float floraDiversity;
-    private Set<Vein> generatedVeins = new HashSet<>();
     private int chunkWorkage;
     private long protectedTicks; // Used for hostile spawn protection. Starts negative, increases by players in the area
     private long lastUpdateTick, lastUpdateYear; // The last time this chunk was updated by world regen
@@ -159,25 +157,6 @@ public final class ChunkDataTFC
 
         this.lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
         this.lastUpdateYear = CalendarTFC.CALENDAR_TIME.getTotalYears();
-    }
-
-    /**
-     * Adds generated ores to this chunk list of ores
-     * Should be used by ore vein generators to save in this chunk which ores generated here
-     *
-     * @param vein the ore added by ore vein generator
-     */
-    public void markVeinGenerated(@Nonnull Vein vein)
-    {
-        generatedVeins.add(vein);
-    }
-
-    /**
-     * @return the veins generated in this chunk. Note: the veins here are soft (non-functional) copies. They are used for data markers, not for actual world generation
-     */
-    public Set<Vein> getGeneratedVeins()
-    {
-        return generatedVeins;
     }
 
     public boolean canWork(int amount)
@@ -432,13 +411,6 @@ public final class ChunkDataTFC
             root.setLong("lastUpdateTick", instance.lastUpdateTick);
             root.setLong("lastUpdateYear", instance.lastUpdateYear);
 
-            NBTTagList veinList = new NBTTagList();
-            for (Vein vein : instance.generatedVeins)
-            {
-                veinList.appendTag(Vein.serialize(vein));
-            }
-            root.setTag("veins", veinList);
-
             return root;
         }
 
@@ -468,14 +440,6 @@ public final class ChunkDataTFC
                 instance.protectedTicks = root.getLong("protectedTicks");
                 instance.lastUpdateTick = root.getLong("lastUpdateTick");
                 instance.lastUpdateYear = root.getLong("lastUpdateYear");
-
-                instance.generatedVeins = new HashSet<>();
-
-                NBTTagList veinList = root.getTagList("veins", Constants.NBT.TAG_COMPOUND);
-                for (int i = 0; i < veinList.tagCount(); i++)
-                {
-                    instance.generatedVeins.add(Vein.deserialize(veinList.getCompoundTagAt(i)));
-                }
 
                 instance.initialized = true;
             }

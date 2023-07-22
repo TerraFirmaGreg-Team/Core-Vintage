@@ -5,21 +5,10 @@
 
 package net.dries007.tfc.compat.waila.interfaces;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
-
-import mcp.mobius.waila.api.*;
-
 /**
  * Does the direct "translation" from IWailaEntity to Hwyla
  */
-public class HwylaEntityInterface implements IWailaEntityProvider, IWailaPlugin
+public class HwylaEntityInterface
 {
     protected final IWailaEntity internal;
 
@@ -29,6 +18,7 @@ public class HwylaEntityInterface implements IWailaEntityProvider, IWailaPlugin
     }
 
 
+    /*
     @Override
     public void register(IWailaRegistrar registrar)
     {
@@ -66,5 +56,5 @@ public class HwylaEntityInterface implements IWailaEntityProvider, IWailaPlugin
     public NBTTagCompound getNBTData(EntityPlayerMP player, Entity ent, NBTTagCompound tag, World world)
     {
         return ent.writeToNBT(tag);
-    }
+    }*/
 }

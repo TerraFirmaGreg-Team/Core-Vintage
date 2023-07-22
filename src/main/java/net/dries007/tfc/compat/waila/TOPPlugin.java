@@ -10,14 +10,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
+import mcjty.theoneprobe.TheOneProbe;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import net.dries007.tfc.compat.waila.interfaces.TOPBlockInterface;
 import net.dries007.tfc.compat.waila.interfaces.TOPEntityInterface;
 import net.dries007.tfc.compat.waila.providers.*;
 
-public class TOPPlugin implements Function<ITheOneProbe, Void>
+public class TOPPlugin
 {
-    public static final List<TOPBlockInterface> TOP_BLOCK_INTERFACES = Arrays.asList(
+    public static void onPreInit() {
+        ITheOneProbe oneProbe = TheOneProbe.theOneProbeImp;
+
+        //oneProbe.registerProvider(new StoneCategoryBlockProvider());
+        //oneProbe.registerProvider(new JuiceExtractorProvider());
+
+
+        /*
         new TOPBlockInterface(new BarrelProvider()),
         new TOPBlockInterface(new BerryBushProvider()),
         new TOPBlockInterface(new BlastFurnaceProvider()),
@@ -34,31 +42,6 @@ public class TOPPlugin implements Function<ITheOneProbe, Void>
         new TOPBlockInterface(new IngotPileProvider()),
         new TOPBlockInterface(new LogPileProvider()),
         new TOPBlockInterface(new QuernProvider())
-    );
-
-    public static final List<TOPEntityInterface> TOP_ENTITY_INTERFACES = Collections.singletonList(
-        new TOPEntityInterface(new AnimalProvider())
-    );
-
-    @Override
-    public Void apply(ITheOneProbe probe)
-    {
-        for (TOPBlockInterface blockInterface : TOP_BLOCK_INTERFACES)
-        {
-            probe.registerProvider(blockInterface);
-            if (blockInterface.overridesHeadInfo())
-            {
-                probe.registerBlockDisplayOverride(blockInterface);
-            }
-        }
-        for (TOPEntityInterface entityInterface : TOP_ENTITY_INTERFACES)
-        {
-            probe.registerEntityProvider(entityInterface);
-            if (entityInterface.overridesHeadInfo())
-            {
-                probe.registerEntityDisplayOverride(entityInterface);
-            }
-        }
-        return null;
+        * */
     }
 }

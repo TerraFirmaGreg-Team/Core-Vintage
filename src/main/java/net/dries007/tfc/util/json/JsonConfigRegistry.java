@@ -61,6 +61,7 @@ public enum JsonConfigRegistry
                     // Back up the file, in case of illiteracy
                     FileUtils.copyFile(defaultFile, new File(defaultFile.getPath() + ".old"));
                     // And replace the contents
+                    System.out.println(JsonConfigRegistry.class.getClassLoader().getResourceAsStream(DEFAULT_ORE_SPAWN));
                     FileUtils.copyInputStreamToFile(Objects.requireNonNull(JsonConfigRegistry.class.getClassLoader().getResourceAsStream(DEFAULT_ORE_SPAWN)), defaultFile);
                 }
                 else if (defaultFile.createNewFile())

@@ -13,45 +13,41 @@ repositories {
 }
 
 dependencies {
-    // Example - Dependency descriptor:
-    // 'com.google.code.gson:gson:2.8.6' << group: com.google.code.gson, name:gson, version:2.8.6
-    // 'group:name:version:classifier' where classifier is optional
 
-    // Example - Deobfuscating dependencies:
-    // rfg.deobf('curse.maven:had-enough-items-557549:4543375')
-    // By wrapping a dependency descriptor in rfg.deobf() method call, the dependency is queued for deobfuscation
-    // When deobfuscating, RFG respects the mapping_channel + mapping_version stated in gradle.properties
+    // Util dependencies
+    if (project.use_util.toBoolean()) {
+        implementation rfg.deobf("curse.maven:2.2.4-fluidloggedapi-485654:4564413")
+        implementation rfg.deobf("curse.maven:2.0.5-modularui-624243:4635658-sources-4635660")
+        implementation rfg.deobf('curse.maven:top-245211:2667280')
+        implementation rfg.deobf("curse.maven:had-enough-items-557549:4571247")
+        implementation rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.690")
+    }
 
-    // Example - CurseMaven dependencies:
-    // 'curse.maven:had-enough-items-557549:4543375' << had-enough-items = project slug, 557549 = project id, 4543375 = file id
-    // Full documentation: https://cursemaven.com/
+    // Dramatic Trees dependencies
+    if (project.use_dramatic_trees.toBoolean())
+        implementation rfg.deobf("curse.maven:0.13.2-dramatictrees-637540:4398759")
 
-    // Example - Modrinth dependencies:
-    // 'maven.modrinth:jei:4.16.1.1000' << jei = project name, 4.16.1.1000 = file version
-    // Full documentation: https://docs.modrinth.com/docs/tutorials/maven/
 
-    // Common dependency types (configuration):
-    // implementation = dependency available at both compile time and runtime
-    // runtimeOnly = runtime dependency
-    // compileOnly = compile time dependency
-    // annotationProcessor = annotation processing dependencies
+    // Tinkers Construct dependencies
+    if (project.use_tconstruct.toBoolean()) {
+        implementation rfg.deobf("curse.maven:2.13.0.183-tinkers-construct-74072:2902483")
+        implementation rfg.deobf("curse.maven:1.3.3.55-mantle-74924:2713386")
+        implementation rfg.deobf("curse.maven:1.2.5.10-constructs-armory-287683:3174535")
+        implementation rfg.deobf("curse.maven:0.4.3-tinkers-complement-272671:2843439")
+        if (project.use_dramatic_trees.toBoolean())
+            runtimeOnly("curse.maven:1.2.7-dynamic-trees-tinkers-construct-386747:3283263")
+        if (project.use_util.toBoolean())
+            runtimeOnly("curse.maven:1.2-tinkers-jei-291786:2701203")
+    }
 
-    // Transitive dependencies:
-    // (Dependencies that your dependency depends on)
-    // If you wish to exclude transitive dependencies in the described dependencies
-    // Use a closure as such:
-    // implementation ('com.google.code.gson:gson:2.8.6') {
-    //     transitive = false
-    // }
+    // GregTech dependencies
+    if (project.use_gregtech.toBoolean()) {
+        runtimeOnly("curse.maven:3.2.3.358-codechicken-lib-1-8-242818:2779848")
+        implementation rfg.deobf("curse.maven:2.7.2-gregtech-557242:4644635-sources-4644637")
+        implementation rfg.deobf("curse.maven:1.2.4-gregicality-multiblocks-564858:4638270-sources-4638272")
 
-    // Mod dependencies go here.
-    // Do not add dependencies without prior approval from the dev team. You can update existing ones.
+        //implementation("curse.maven:0.5.2-groovyscript-687577:4635839")
+        // implementation("curse.maven:1.0.2.31-ctm-267602:2915363")
+    }
 
-    implementation rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${crafttweaker_version}")
-    implementation rfg.deobf("curse.maven:hei-${hei_pid}:${hei_fid}")
-
-    implementation rfg.deobf("curse.maven:top-${top_pid}:${top_fid}")
-
-    implementation rfg.deobf("curse.maven:ccl-${ccl_pid}:${ccl_fid}")
-    implementation rfg.deobf("curse.maven:gtceu-${gregtech_pid}:${gregtech_main_fid}-deobf-${gregtech_dev_fid}-sources-${gregtech_source_fid}")
 }

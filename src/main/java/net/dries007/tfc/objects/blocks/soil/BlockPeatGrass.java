@@ -3,12 +3,13 @@
  * See the project README.md and LICENSE.txt for more information.
  */
 
-package net.dries007.tfc.objects.blocks;
+package net.dries007.tfc.objects.blocks.soil;
 
 import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;

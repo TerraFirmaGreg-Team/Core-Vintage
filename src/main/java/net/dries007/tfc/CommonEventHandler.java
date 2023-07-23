@@ -5,8 +5,6 @@
 
 package net.dries007.tfc;
 
-import java.util.Arrays;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockSnow;
@@ -48,7 +46,6 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.GameRuleChangeEvent;
@@ -66,7 +63,6 @@ import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -111,7 +107,6 @@ import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.items.ItemsTFC;
@@ -129,6 +124,11 @@ import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ROCK;
+import static net.dries007.tfc.api.types2.rock.RockType.BASALT;
+import static net.dries007.tfc.api.types2.rock.RockType.RHYOLITE;
+import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -1042,11 +1042,11 @@ public final class CommonEventHandler
         {
             if (event.getNewState().getBlock() == Blocks.STONE)
             {
-                event.setNewState(BlockRockVariant.get(Rock.BASALT, Rock.Type.RAW).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                event.setNewState(getBlockRockMap(ROCK, RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
             }
             if (event.getNewState().getBlock() == Blocks.COBBLESTONE)
             {
-                event.setNewState(BlockRockVariant.get(Rock.RHYOLITE, Rock.Type.RAW).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                event.setNewState(getBlockRockMap(ROCK, RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
             }
         }
     }

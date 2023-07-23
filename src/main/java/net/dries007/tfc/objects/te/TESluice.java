@@ -126,8 +126,7 @@ public class TESluice extends TEBase implements ITickable
                         if (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof BlockRockVariant)
                         {
                             BlockRockVariant rockBlock = (BlockRockVariant) ((ItemBlock) stack.getItem()).getBlock();
-                            if (rockBlock.getType() == Rock.Type.SAND || rockBlock.getType() == Rock.Type.GRAVEL)
-                            {
+                            if (rockBlock.getType() == Rock.Type.SAND || rockBlock.getType() == Rock.Type.GRAVEL) {
                                 soil += 20; // Overflows to not consume an stack until a full soil worth is consumed
                                 stack.shrink(1);
                                 if (stack.getCount() <= 0)

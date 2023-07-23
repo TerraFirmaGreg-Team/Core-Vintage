@@ -5,11 +5,15 @@
 
 package net.dries007.tfc.objects.items.rock;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.types2.rock.RockCategory;
+import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.util.IRockObject;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.items.ItemTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -17,35 +21,30 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
-import net.dries007.tfc.api.util.IRockObject;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.items.ItemTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemRock extends ItemTFC implements IRockObject
 {
-    private static final Map<Rock, ItemRock> MAP = new HashMap<>();
+    private static final Map<RockType, ItemRock> MAP = new HashMap<>();
 
-    public static ItemRock get(Rock rock)
+    public static ItemRock get(RockType rock)
     {
         return MAP.get(rock);
     }
 
-    public static ItemStack get(Rock rock, int amount)
+    public static ItemStack get(RockType rock, int amount)
     {
         return new ItemStack(MAP.get(rock), amount);
     }
 
-    private final Rock rock;
+    private final RockType rock;
 
-    public ItemRock(Rock rock)
+    public ItemRock(RockType rock)
     {
         this.rock = rock;
         if (MAP.put(rock, this) != null) throw new IllegalStateException("There can only be one.");
@@ -54,15 +53,15 @@ public class ItemRock extends ItemTFC implements IRockObject
         OreDictionaryHelper.register(this, "rock", rock);
         OreDictionaryHelper.register(this, "rock", rock.getRockCategory());
 
-        if (rock.isFluxStone())
-        {
-            OreDictionaryHelper.register(this, "rock", "flux");
-        }
+//        if (rock.isFluxStone())
+//        {
+//            OreDictionaryHelper.register(this, "rock", "flux");
+//        }
     }
 
     @Override
     @Nonnull
-    public Rock getRock(ItemStack stack)
+    public RockType getRock(ItemStack stack)
     {
         return rock;
     }

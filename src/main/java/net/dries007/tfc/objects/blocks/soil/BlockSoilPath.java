@@ -3,10 +3,11 @@
  * See the project README.md and LICENSE.txt for more information.
  */
 
-package net.dries007.tfc.objects.blocks.stone;
+package net.dries007.tfc.objects.blocks.soil;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariantFallable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
@@ -18,19 +19,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockPathTFC extends BlockRockVariantFallable
+public class BlockSoilPath extends BlockRockVariantFallable
 {
     private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
     private static final AxisAlignedBB FLIPPED_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-    public BlockPathTFC(Rock.Type type, Rock rock)
-    {
+    public BlockSoilPath(Rock.Type type, Rock rock) {
         super(type, rock);
         setLightOpacity(255);
         useNeighborBrightness = true;

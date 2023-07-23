@@ -36,7 +36,6 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeVessel;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
-import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipeRandomGem;
@@ -61,7 +60,6 @@ import net.dries007.tfc.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.items.metal.ItemMetalArmor;
-import net.dries007.tfc.objects.items.rock.ItemRockToolHead;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -256,21 +254,21 @@ public final class DefaultRecipes
     {
         /* STONE TOOL HEADS */
 
-        for (Rock.ToolType type : Rock.ToolType.values())
-        {
-            // This covers all stone -> single tool head recipes
-            KnappingRecipe r = new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), type)), type.getPattern());
-            event.getRegistry().register(r.setRegistryName(type.name().toLowerCase() + "_head"));
-        }
-        // these recipes cover all cases where multiple stone items can be made
-        // recipes are already mirror checked
-        event.getRegistry().registerAll(
-            new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.KNIFE), 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("knife_head_1"),
-            new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.KNIFE), 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("knife_head_2"),
-            new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.KNIFE), 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("knife_head_3"),
-            new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.HOE), 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName("hoe_head_1"),
-            new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.HOE), 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName("hoe_head_2")
-        );
+//        for (Rock.ToolType type : Rock.ToolType.values())
+//        {
+//            // This covers all stone -> single tool head recipes
+//            KnappingRecipe r = new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), type)), type.getPattern());
+//            event.getRegistry().register(r.setRegistryName(type.name().toLowerCase() + "_head"));
+//        }
+//        // these recipes cover all cases where multiple stone items can be made
+//        // recipes are already mirror checked
+//        event.getRegistry().registerAll(
+//            new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.KNIFE), 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("knife_head_1"),
+//            new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.KNIFE), 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("knife_head_2"),
+//            new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.KNIFE), 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("knife_head_3"),
+//            new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.HOE), 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName("hoe_head_1"),
+//            new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.HOE), 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName("hoe_head_2")
+//        );
 
         /* CLAY ITEMS */
 

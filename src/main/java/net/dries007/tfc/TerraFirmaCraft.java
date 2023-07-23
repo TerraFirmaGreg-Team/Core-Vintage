@@ -6,6 +6,7 @@
 package net.dries007.tfc;
 
 import net.dries007.tfc.compat.top.TOPPlugin;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import net.minecraft.server.MinecraftServer;
@@ -61,6 +62,8 @@ public final class TerraFirmaCraft
 
     @Mod.Instance
     private static TerraFirmaCraft INSTANCE = null;
+
+    public static final TFCLogger LOGGER = new TFCLogger(TerraFirmaCraft.class, Level.INFO);
 
     @SidedProxy(modId = MOD_ID, clientSide = "net.dries007.tfc.proxy.ClientProxy", serverSide = "net.dries007.tfc.proxy.ServerProxy")
     private static IProxy PROXY = null;

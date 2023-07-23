@@ -1,10 +1,10 @@
-package net.dries007.tfc.objects.blocks.stone2;
+package net.dries007.tfc.objects.blocks.rock;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.util.IStoneTypeBlock;
+import net.dries007.tfc.api.util.IRockTypeBlock;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
@@ -41,21 +41,21 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockSpeleothemTFG extends Block implements IStoneTypeBlock {
+public class BlockRockSpeleothem extends Block implements IRockTypeBlock {
 	public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockSpeleothemTFG(RockBlockType blockType, RockVariant rockVariant, RockType rockType) {
+	public BlockRockSpeleothem(RockBlockType blockType, RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
 
-		if (BLOCK_MAP.put(new Triple<>(blockType, rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(blockType, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 		this.rockVariant = rockVariant;
@@ -223,7 +223,7 @@ public class BlockSpeleothemTFG extends Block implements IStoneTypeBlock {
 	}
 
 	private boolean isThis(IBlockAccess world, BlockPos pos) {
-		return world.getBlockState(pos).getBlock() instanceof BlockSpeleothemTFG;
+		return world.getBlockState(pos).getBlock() instanceof BlockRockSpeleothem;
 	}
 
 	@Override

@@ -95,34 +95,34 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
         return getRegistryName().getPath();
     }
 
-    public enum ToolType
-    {
-        AXE(ItemRockAxe::new, " X   ", "XXXX ", "XXXXX", "XXXX ", " X   "),
-        SHOVEL(ItemRockShovel::new, "XXX", "XXX", "XXX", "XXX", " X "),
-        HOE(ItemRockHoe::new, "XXXXX", "   XX"),
-        KNIFE(ItemRockKnife::new, "X ", "XX", "XX", "XX", "XX"),
-        JAVELIN(ItemRockJavelin::new, "XXX  ", "XXXX ", "XXXXX", " XXX ", "  X  "),
-        HAMMER(ItemRockHammer::new, "XXXXX", "XXXXX", "  X  ");
-
-        private final Function<RockCategory, Item> supplier;
-        private final String[] pattern;
-
-        ToolType(@Nonnull Function<RockCategory, Item> supplier, String... pattern)
-        {
-            this.supplier = supplier;
-            this.pattern = pattern;
-        }
-
-        public Item create(RockCategory category)
-        {
-            return supplier.apply(category);
-        }
-
-        public String[] getPattern()
-        {
-            return pattern;
-        }
-    }
+//    public enum ToolType
+//    {
+//        AXE(ItemRockAxe::new, " X   ", "XXXX ", "XXXXX", "XXXX ", " X   "),
+//        SHOVEL(ItemRockShovel::new, "XXX", "XXX", "XXX", "XXX", " X "),
+//        HOE(ItemRockHoe::new, "XXXXX", "   XX"),
+//        KNIFE(ItemRockKnife::new, "X ", "XX", "XX", "XX", "XX"),
+//        JAVELIN(ItemRockJavelin::new, "XXX  ", "XXXX ", "XXXXX", " XXX ", "  X  "),
+//        HAMMER(ItemRockHammer::new, "XXXXX", "XXXXX", "  X  ");
+//
+//        private final Function<RockCategory, Item> supplier;
+//        private final String[] pattern;
+//
+//        ToolType(@Nonnull Function<RockCategory, Item> supplier, String... pattern)
+//        {
+//            this.supplier = supplier;
+//            this.pattern = pattern;
+//        }
+//
+//        public Item create(RockCategory category)
+//        {
+//            return supplier.apply(category);
+//        }
+//
+//        public String[] getPattern()
+//        {
+//            return pattern;
+//        }
+//    }
 
     public enum Type
     {

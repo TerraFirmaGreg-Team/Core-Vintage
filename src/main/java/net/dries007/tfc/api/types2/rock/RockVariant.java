@@ -3,6 +3,7 @@ package net.dries007.tfc.api.types2.rock;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.client.TFCSounds;
+import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nullable;
@@ -24,10 +25,20 @@ public enum RockVariant implements IStringSerializable {
 	SPIKE(0, 4f, 10f, null);
 
 
+	public static final RockVariant[] VALUES = RockVariant.values();
+
+	public static RockVariant valueOf(int i)
+	{
+		return i >= 0 && i < VALUES.length ? VALUES[i] : RAW;
+	}
+
+
+
 	private final int harvestLevel;
 	private final float hardnessBase;
 	private final float resistance;
-	@Nullable private final Specification fallingSpecification;
+	@Nullable
+	private final Specification fallingSpecification;
 
 
 	RockVariant(int harvestLevel, float hardnessBase, float resistance, @Nullable Specification fallingSpecification) {

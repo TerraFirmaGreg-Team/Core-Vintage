@@ -1,10 +1,8 @@
 package net.dries007.tfc.api.types2.rock;
 
-import net.dries007.tfc.api.util.IStoneTypeBlock;
+import net.dries007.tfc.api.util.IRockTypeBlock;
 import net.dries007.tfc.api.util.TriFunction;
-import net.dries007.tfc.objects.blocks.rock.BlockRock;
-import net.dries007.tfc.objects.blocks.rock.BlockRockFallable;
-import net.dries007.tfc.objects.blocks.stone2.*;
+import net.dries007.tfc.objects.blocks.rock.*;
 import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nonnull;
@@ -20,11 +18,11 @@ public enum RockBlockType implements IStringSerializable {
 	/**
 	 * Обычный блок без каких-либо доп. механик
 	 */
-	ORDINARY(BlockRock::new, RAW, SMOOTH, BRICK),
+	ROCK(BlockRock::new, RAW, SMOOTH, BRICK),
 	/**
 	 * Обычный блок, но с механикой падения
 	 */
-	FALLABLE(BlockRockFallable::new, GRAVEL, COBBLE, SAND),
+	FALLING(BlockRockFallable::new, GRAVEL, COBBLE, SAND),
 	/**
 	 * Обычный блок без каких-либо доп. механик
 	 */
@@ -36,31 +34,35 @@ public enum RockBlockType implements IStringSerializable {
 	/**
 	 * Обычный блок, но с механикой мха
 	 */
-	MOSSY(BlockMossyTFG::new, COBBLE, BRICK),
+	MOSSY(BlockRockMossy::new, COBBLE, BRICK);
+	/**
+	 * Каменная наковальня
+	 */
+	//ANVIL(BlockRockAnvil::new, RAW);
 	/**
 	 * Ступенька
 	 */
-	STAIRS(BlockStairTFG::new, RAW, COBBLE, BRICK, SMOOTH),
+	//STAIRS(BlockRockStair::new, RAW, COBBLE, BRICK, SMOOTH),
 	/**
 	 * Двойной полублок
 	 */
-	SLAB_DOUBLE(BlockSlabTFG.Double::new, RAW, COBBLE, BRICK, SMOOTH),
+	//SLAB_DOUBLE(BlockRockSlab.Double::new, RAW, COBBLE, BRICK, SMOOTH),
 	/**
 	 * Полублок
 	 */
-	SLAB(BlockSlabTFG.Half::new, RAW, COBBLE, BRICK, SMOOTH),
+	//SLAB(BlockRockSlab.Half::new, RAW, COBBLE, BRICK, SMOOTH),
 	/**
 	 * Блок стены
 	 */
-	WALL(BlockWallTFG::new, RAW, COBBLE, BRICK, SMOOTH),
+	//WALL(BlockRockWall::new, RAW, COBBLE, BRICK, SMOOTH),
 	/**
 	 * Блок кнопки
 	 */
-	BUTTON(BlockButtonTFG::new, RAW),
+	//BUTTON(BlockRockButton::new, RAW),
 	/**
 	 * Блок нажимной пластины
 	 */
-	PRESSURE_PLATE(BlockPressurePlateTFG::new, RAW),
+	//PRESSURE_PLATE(BlockRockPressurePlate::new, RAW),
 	/**
 	 * Лежачие предметы
 	 */
@@ -68,21 +70,21 @@ public enum RockBlockType implements IStringSerializable {
 	/**
 	 * Сталагмиты, сталактиты
 	 */
-	SPELEOTHEM(BlockSpeleothemTFG::new, RAW);
+	//SPELEOTHEM(BlockRockSpeleothem::new, RAW);
 
-	private final TriFunction<RockBlockType, RockVariant, RockType, IStoneTypeBlock> blockFactory;
+	private final TriFunction<RockBlockType, RockVariant, RockType, IRockTypeBlock> blockFactory;
 	private final RockVariant[] rockVariants;
 
-	RockBlockType(TriFunction<RockBlockType, RockVariant, RockType, IStoneTypeBlock> blockFactory, RockVariant... rockVariants) {
+	RockBlockType(TriFunction<RockBlockType, RockVariant, RockType, IRockTypeBlock> blockFactory, RockVariant... rockVariants) {
 		this.rockVariants = rockVariants;
 		this.blockFactory = blockFactory;
 	}
 
-	public IStoneTypeBlock createBlock(RockVariant rockVariant, RockType stoneType) {
+	public IRockTypeBlock createBlock(RockVariant rockVariant, RockType stoneType) {
 		return this.blockFactory.apply(this, rockVariant, stoneType);
 	}
 
-	public RockVariant[] getBlockVariants() {
+	public RockVariant[] getRockVariants() {
 		return rockVariants;
 	}
 

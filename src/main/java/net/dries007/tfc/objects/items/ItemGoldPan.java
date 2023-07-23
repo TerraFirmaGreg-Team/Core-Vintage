@@ -9,6 +9,7 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -176,7 +177,7 @@ public class ItemGoldPan extends ItemTFC
                             }
                             else if (damage == 3 || damage == 4)
                             {
-                                Rock rock = chunkDataTFC.getRockHeight(position);
+                                RockType rock = chunkDataTFC.getRockHeight(position);
                                 if (Constants.RNG.nextDouble() < 0.35)
                                 {
                                     Helpers.spawnItemStack(world, position, new ItemStack(ItemRock.get(rock), 1));

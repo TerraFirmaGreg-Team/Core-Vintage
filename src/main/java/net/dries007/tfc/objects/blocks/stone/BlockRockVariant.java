@@ -22,7 +22,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -31,16 +30,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
@@ -217,7 +213,7 @@ public class BlockRockVariant extends Block implements IItemSize
         {
             case RAW:
             case SPIKE:
-                return ItemRock.get(rock);
+//                return ItemRock.get(rock);
             case CLAY:
             case CLAY_GRASS:
                 return Items.CLAY_BALL;

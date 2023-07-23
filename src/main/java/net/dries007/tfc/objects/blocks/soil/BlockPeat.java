@@ -3,7 +3,7 @@
  * See the project README.md and LICENSE.txt for more information.
  */
 
-package net.dries007.tfc.objects.blocks;
+package net.dries007.tfc.objects.blocks.soil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

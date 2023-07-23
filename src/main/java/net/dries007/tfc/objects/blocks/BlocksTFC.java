@@ -14,12 +14,20 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.types2.rock.RockBlockType;
+import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.types2.rock.RockVariant;
+import net.dries007.tfc.api.types2.soil.SoilBlockType;
+import net.dries007.tfc.api.types2.soil.SoilType;
+import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.devices.*;
 import net.dries007.tfc.objects.blocks.metal.*;
 import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.soil.BlockPeat;
+import net.dries007.tfc.objects.blocks.soil.BlockPeatGrass;
 import net.dries007.tfc.objects.blocks.stone.*;
 import net.dries007.tfc.objects.blocks.wood.*;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -272,6 +280,28 @@ public final class BlocksTFC {
 		Builder<ItemBlock> normalItemBlocks = ImmutableList.builder();
 		Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();
 
+		for (RockType rockType : RockType.values()) {
+			for (RockBlockType rockBlockType : RockBlockType.values()) {
+				for (RockVariant rockVariant : rockBlockType.getRockVariants()) {
+					Block block = (Block) rockBlockType.createBlock(rockVariant, rockType);
+
+					TerraFirmaCraft.LOGGER.debug("Registering block: {}", block.getRegistryName());
+					r.register(block);
+				}
+			}
+		}
+
+		for (SoilType soilType : SoilType.values()) {
+			for (SoilBlockType soilBlockType : SoilBlockType.values()) {
+				for (SoilVariant soilVariant : soilBlockType.getSoilVariants()) {
+					Block block = (Block) soilBlockType.createBlock(soilVariant, soilType);
+
+					TerraFirmaCraft.LOGGER.debug("Registering block: {}", block.getRegistryName());
+					r.register(block);
+				}
+			}
+		}
+
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "debug", new BlockDebug(), CT_MISC)));
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), CT_ROCK_BLOCKS)));
@@ -497,17 +527,9 @@ public final class BlocksTFC {
 				register(r, "double_slab/wood/" + wood.getRegistryName().getPath(), new BlockRockSlabTFC.Double(wood));
 
 			// Slabs
-			for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS})
-				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-					slab.add(register(r, "slab/" + (type.name() + "/" + rock.getRegistryName().getPath()).toLowerCase(), new BlockRockSlabTFC.Half(rock, type), CT_DECORATIONS));
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				slab.add(register(r, "slab/wood/" + wood.getRegistryName().getPath(), new BlockRockSlabTFC.Half(wood), CT_DECORATIONS));
 
-			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-				// Redstone things
-				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "stone/button/" + rock.getRegistryName().getPath().toLowerCase(), new BlockButtonStoneTFC(rock), CT_DECORATIONS)));
-				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "stone/pressure_plate/" + rock.getRegistryName().getPath().toLowerCase(), new BlockPressurePlateTFC(rock), CT_DECORATIONS)));
-			}
 
 			allWallBlocks = b.build();
 			allStairsBlocks = stairs.build();

@@ -54,7 +54,9 @@ public enum RockType implements IStringSerializable {
 	KOMATIITE(METAMORPHIC);
 
 	public static final RockType[] VALUES = values();
-
+	public static RockType valueOf(int i) {
+		return i >= 0 && i < VALUES.length ? VALUES[i] : GRANITE;
+	}
 
 	private final RockCategory rockCategory;
 
@@ -62,9 +64,15 @@ public enum RockType implements IStringSerializable {
 		this.rockCategory = rockCategory;
 	}
 
+
 	public RockCategory getRockCategory() {
 		return rockCategory;
 	}
+
+//	public boolean isFluxStone()
+//	{
+//		return isFluxStone;
+//	}
 
 
 	/**

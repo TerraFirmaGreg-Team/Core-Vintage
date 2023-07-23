@@ -7,6 +7,7 @@ package net.dries007.tfc.objects.items;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -43,7 +44,6 @@ import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.items.metal.ItemMetalBucket;
 import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.objects.items.rock.ItemRockToolHead;
 import net.dries007.tfc.objects.items.wood.ItemBoatTFC;
 import net.dries007.tfc.objects.items.wood.ItemDoorTFC;
 import net.dries007.tfc.objects.items.wood.ItemLumberTFC;
@@ -198,10 +198,10 @@ public final class ItemsTFC
         register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET), CT_METAL); //not a simple item, use a custom model
 
         {
-            for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-                simpleItems.add(register(r, "rock/" + rock.getRegistryName().getPath().toLowerCase(), new ItemRock(rock), CT_ROCK_ITEMS));
-            for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-                simpleItems.add(register(r, "brick/" + rock.getRegistryName().getPath().toLowerCase(), new ItemBrickTFC(rock), CT_ROCK_ITEMS));
+            for (RockType rock : RockType.values()) {
+                simpleItems.add(register(r, "brick/" + rock.getName(), new ItemBrickTFC(rock), CT_ROCK_ITEMS));
+                simpleItems.add(register(r, "rock/" + rock.getName(), new ItemRock(rock), CT_ROCK_ITEMS));
+            }
         }
 
         {
@@ -244,15 +244,6 @@ public final class ItemsTFC
         simpleItems.add(register(r, "stick_bunch", new ItemMisc(Size.NORMAL, Weight.LIGHT), CT_WOOD));
         simpleItems.add(register(r, "stick_bundle", new ItemMisc(Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"), CT_WOOD));
         simpleItems.add(register(r, "wood_ash", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_WOOD));
-
-        for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection())
-        {
-            for (Rock.ToolType type : Rock.ToolType.values())
-            {
-                simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getRegistryName().getPath(), type.create(cat), CT_ROCK_ITEMS));
-                simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "_head/" + cat.getRegistryName().getPath(), new ItemRockToolHead(cat, type), CT_ROCK_ITEMS));
-            }
-        }
 
         for (Powder powder : Powder.values())
             simpleItems.add(register(r, "powder/" + powder.name().toLowerCase(), new ItemPowder(powder), CT_MISC));

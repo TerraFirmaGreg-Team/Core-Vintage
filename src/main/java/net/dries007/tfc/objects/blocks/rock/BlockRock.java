@@ -1,11 +1,10 @@
 package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.util.IStoneTypeBlock;
+import net.dries007.tfc.api.util.IRockTypeBlock;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.items.rock.ItemRockHammer;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -14,13 +13,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -36,18 +32,17 @@ import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-public class BlockRock extends Block implements IStoneTypeBlock {
+public class BlockRock extends Block implements IRockTypeBlock {
 
-	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IStoneTypeBlock> BLOCK_MAP = new LinkedHashMap<>();
+	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockTypeBlock> BLOCK_ROCK_MAP = new LinkedHashMap<>();
 
-
-	public static Block getBlockFromMap(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
-		return (Block) BLOCK_MAP.get(new Triple<>(rockBlockType, rockVariant, rockType));
+	public static Block getBlockRockMap(RockBlockType blockType, RockVariant blockVariant, RockType stoneType) {
+		return (Block) BLOCK_ROCK_MAP.get(new Triple<>(blockType, blockVariant, stoneType));
 	}
+
 	private final RockBlockType rockBlockType;
 	private final RockType rockType;
 	private final RockVariant rockVariant;
@@ -56,7 +51,7 @@ public class BlockRock extends Block implements IStoneTypeBlock {
 	public BlockRock(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
 
-		if (BLOCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 		this.rockBlockType = rockBlockType;
@@ -94,47 +89,47 @@ public class BlockRock extends Block implements IStoneTypeBlock {
 		return itemBlock;
 	}
 
-	@Override
-	public boolean removedByPlayer(@Nonnull IBlockState state, World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player, boolean willHarvest) {
-		if (!world.isRemote) {
-			ItemStack heldItemStack = player.getHeldItem(EnumHand.MAIN_HAND);
-			Item heldItem = heldItemStack.getItem();
-
-			// Проверяем, можно ли игроку собрать блок с использованием текущего инструмента
-			if (player.canHarvestBlock(state)) {
-				// Проверяем, является ли удерживаемый предмет инструментом с классом инструмента pickaxe и кроме инструмента HARD_HAMMER
-				if ((heldItem.getToolClasses(heldItemStack).contains("pickaxe")) && !(heldItem instanceof ItemRockHammer)) {
-					switch (rockVariant) {
-						case RAW:
-						case SMOOTH:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(3) + 2));
-							break;
-						case COBBLE:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(3) + 4));
-							break;
-						case BRICK:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(2) + 4));
-							break;
-					}
-				} else if (heldItem instanceof ItemRockHammer) {
-					switch (rockVariant) {
-						case RAW:
-						case SMOOTH:
-							//Block.spawnAsEntity(world, pos, new ItemStack(getBlockFromMap(blockType, COBBLE, stoneType), 1));
-							break;
-						case COBBLE:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(3) + 4));
-							Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек глины?
-							break;
-						case BRICK:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get("brick/" + stoneType.getName()), new Random().nextInt(3) + 3));
-							break;
-					}
-				}
-			}
-		}
-		return super.removedByPlayer(state, world, pos, player, willHarvest);
-	}
+//	@Override
+//	public boolean removedByPlayer(@Nonnull IBlockState state, World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player, boolean willHarvest) {
+//		if (!world.isRemote) {
+//			ItemStack heldItemStack = player.getHeldItem(EnumHand.MAIN_HAND);
+//			Item heldItem = heldItemStack.getItem();
+//
+//			// Проверяем, можно ли игроку собрать блок с использованием текущего инструмента
+//			if (player.canHarvestBlock(state)) {
+//				// Проверяем, является ли удерживаемый предмет инструментом с классом инструмента pickaxe и кроме инструмента HARD_HAMMER
+//				if ((heldItem.getToolClasses(heldItemStack).contains("pickaxe")) && !(heldItem instanceof ItemRockHammer)) {
+//					switch (rockVariant) {
+//						case RAW:
+//						case SMOOTH:
+//							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(3) + 2));
+//							break;
+//						case COBBLE:
+//							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(3) + 4));
+//							break;
+//						case BRICK:
+//							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(2) + 4));
+//							break;
+//					}
+//				} else if (heldItem instanceof ItemRockHammer) {
+//					switch (rockVariant) {
+//						case RAW:
+//						case SMOOTH:
+//							//Block.spawnAsEntity(world, pos, new ItemStack(getBlockSoilMap(blockType, COBBLE, stoneType), 1));
+//							break;
+//						case COBBLE:
+//							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(3) + 4));
+//							Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек глины?
+//							break;
+//						case BRICK:
+//							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get("brick/" + stoneType.getName()), new Random().nextInt(3) + 3));
+//							break;
+//					}
+//				}
+//			}
+//		}
+//		return super.removedByPlayer(state, world, pos, player, willHarvest);
+//	}
 
 	@Override
 	public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {

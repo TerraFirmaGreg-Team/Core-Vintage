@@ -15,6 +15,8 @@ public enum RockCategory implements IStringSerializable {
     METAMORPHIC(TextFormatting.AQUA, true, true, false, 0.2f, 0f, -0.2f,  false),
     SEDIMENTARY(TextFormatting.GREEN, true, false, false, 0.3f, 5f, -0.4f, false);
 
+    public static final RockCategory[] VALUES = values();
+
     private final TextFormatting textFormatting;
 
     private final boolean layer1;

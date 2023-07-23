@@ -18,14 +18,17 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+
+import static net.dries007.tfc.api.types2.soil.SoilBlockType.*;
+import static net.dries007.tfc.api.types2.soil.SoilType.SILT;
+import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
+import static net.dries007.tfc.objects.blocks.soil.BlockSoil.getBlockSoilMap;
 
 /**
  * todo: make these bigger without causing cascading lag.
@@ -70,12 +73,12 @@ public class WorldGenSoilPits implements IWorldGenerator
                     final IBlockState current = world.getBlockState(pos);
                     if (BlocksTFC.isDirt(current))
                     {
-                        world.setBlockState(pos, BlockRockVariant.get(ChunkDataTFC.getRockHeight(world, pos), Rock.Type.CLAY).getDefaultState(), 2);
+                        world.setBlockState(pos, getBlockSoilMap(FALLING, CLAY, SILT).getDefaultState(), 2); //TODO ChunkDataTFC.getRockHeight(world, pos)
                         flag = true;
                     }
                     else if (BlocksTFC.isGrass(current))
                     {
-                        world.setBlockState(pos, BlockRockVariant.get(ChunkDataTFC.getRockHeight(world, pos), Rock.Type.CLAY_GRASS).getDefaultState(), 2);
+                        world.setBlockState(pos, getBlockSoilMap(SOIL, CLAY_GRASS, SILT).getDefaultState(), 2); // ChunkDataTFC.getRockHeight(world, pos)
                         flag = true;
                     }
                 }

@@ -1,20 +1,20 @@
-package net.dries007.tfc.objects.blocks.stone2;
+package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.util.IStoneTypeBlock;
+import net.dries007.tfc.api.util.IRockTypeBlock;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockWall;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -37,28 +37,28 @@ import java.util.Random;
 
 import static gregtech.common.items.ToolItems.HARD_HAMMER;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.COBBLE;
-import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_MAP;
-import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockFromMap;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 
-public class BlockWallTFG extends BlockWall implements IStoneTypeBlock {
+public class BlockRockStair extends BlockStairs implements IRockTypeBlock {
 
 	private final RockBlockType blockType;
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockWallTFG(RockBlockType blockType, RockVariant rockVariant, RockType rockType) {
-		super((Block) BLOCK_MAP.get(new Triple<>(ORDINARY, rockVariant, rockType)));
+	public BlockRockStair(RockBlockType blockType, RockVariant rockVariant, RockType rockType) {
+		super(Blocks.BRICK_STAIRS.getDefaultState());
 
-		if (BLOCK_MAP.put(new Triple<>(blockType, rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(blockType, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 		this.blockType = blockType;
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
 		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + rockVariant);
+		useNeighborBrightness = true;
 
 		String blockRegistryName = String.format("%s/%s/%s", blockType, rockVariant, rockType);
 		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
@@ -91,11 +91,6 @@ public class BlockWallTFG extends BlockWall implements IStoneTypeBlock {
 	}
 
 	@Override
-	public void getSubBlocks(@Nonnull CreativeTabs itemIn, @Nonnull NonNullList<ItemStack> items) {
-		items.add(new ItemStack(this));
-	}
-
-	@Override
 	public boolean removedByPlayer(@Nonnull IBlockState state, World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player, boolean willHarvest) {
 		if (!world.isRemote) {
 			ItemStack heldItemStack = player.getHeldItem(EnumHand.MAIN_HAND);
@@ -109,10 +104,10 @@ public class BlockWallTFG extends BlockWall implements IStoneTypeBlock {
 						case RAW:
 						case SMOOTH:
 						case COBBLE:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 2));
+							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 3));
 							break;
 						case BRICK:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 2));
+							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 3));
 							Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек цемента?
 							break;
 					}
@@ -120,13 +115,13 @@ public class BlockWallTFG extends BlockWall implements IStoneTypeBlock {
 					switch (rockVariant) {
 						case RAW:
 						case SMOOTH:
-							Block.spawnAsEntity(world, pos, new ItemStack(getBlockFromMap(blockType, COBBLE, rockType), 1));
+							Block.spawnAsEntity(world, pos, new ItemStack(getBlockRockMap(blockType, COBBLE, rockType), 1));
 							break;
 						case COBBLE:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 2));
+							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 3));
 							break;
 						case BRICK:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 2));
+							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get("brick/" + rockType.getName()), new Random().nextInt(2) + 3));
 							Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек цемента?
 							break;
 					}
@@ -144,25 +139,25 @@ public class BlockWallTFG extends BlockWall implements IStoneTypeBlock {
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
 		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-					@Nonnull
-					protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-						return new ModelResourceLocation(modelLocation,
-								"east=" + state.getValue(EAST) + "," +
-										"north=" + state.getValue(NORTH) + "," +
-										"south=" + state.getValue(SOUTH) + "," +
-										"stonetype=" + rockType.getName() + "," +
-										"up=" + state.getValue(UP) + "," +
-										"west=" + state.getValue(WEST));
-					}
-				}
-		);
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation,
+						"facing=" + state.getValue(FACING) + "," +
+								"half=" + state.getValue(HALF) + "," +
+								"shape=" + state.getValue(SHAPE) + "," +
+								"stonetype=" + rockType.getName());
+			}
+		});
 
 		for (IBlockState state : this.getBlockState().getValidStates()) {
 			ModelLoader.setCustomModelResourceLocation(
 					Item.getItemFromBlock(this),
 					this.getMetaFromState(state),
 					new ModelResourceLocation(modelLocation,
-							"inventory=" + rockType.getName()));
+							"facing=east," +
+									"half=bottom," +
+									"shape=straight," +
+									"stonetype=" + rockType.getName()));
 		}
 	}
 
@@ -173,6 +168,5 @@ public class BlockWallTFG extends BlockWall implements IStoneTypeBlock {
 
 		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
 	}
-
 }
 

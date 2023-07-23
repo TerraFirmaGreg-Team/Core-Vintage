@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -24,7 +25,6 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -35,7 +35,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.compat.jei.categories.*;
@@ -51,7 +50,6 @@ import net.dries007.tfc.objects.items.metal.ItemAnvil;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.objects.items.rock.ItemRockKnife;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 
 @JEIPlugin
@@ -100,10 +98,10 @@ public final class TFCJEIPlugin implements IModPlugin
         registry.addRecipeCategories(new CastingCategory(registry.getJeiHelpers().getGuiHelper(), CASTING_UID));
         registry.addRecipeCategories(new ChiselCategory(registry.getJeiHelpers().getGuiHelper(), CHISEL_UID));
         registry.addRecipeCategories(new HeatCategory(registry.getJeiHelpers().getGuiHelper(), HEAT_UID));
-        registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_CLAY_UID));
-        registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_FIRECLAY_UID));
-        registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_LEATHER_UID));
-        registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_STONE_UID));
+        //registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_CLAY_UID));
+        //registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_FIRECLAY_UID));
+        //registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_LEATHER_UID));
+        //registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_STONE_UID));
         registry.addRecipeCategories(new LoomCategory(registry.getJeiHelpers().getGuiHelper(), LOOM_UID));
         registry.addRecipeCategories(new MetalHeatingCategory(registry.getJeiHelpers().getGuiHelper(), METAL_HEAT_UID));
         registry.addRecipeCategories(new QuernCategory(registry.getJeiHelpers().getGuiHelper(), QUERN_UID));
@@ -175,52 +173,52 @@ public final class TFCJEIPlugin implements IModPlugin
         registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), ALLOY_UID);
 
         // Clay Knapping
-        List<KnappingRecipeWrapper> clayknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-            .filter(recipe -> recipe.getType() == KnappingType.CLAY)
-            .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
-            .collect(Collectors.toList());
-
-        registry.addRecipes(clayknapRecipes, KNAP_CLAY_UID);
-        for (ItemStack stack : OreDictionary.getOres("clay"))
-        {
-            registry.addRecipeCatalyst(stack, KNAP_CLAY_UID);
-        }
+//        List<KnappingRecipeWrapper> clayknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
+//            .filter(recipe -> recipe.getType() == KnappingType.CLAY)
+//            .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
+//            .collect(Collectors.toList());
+//
+//        registry.addRecipes(clayknapRecipes, KNAP_CLAY_UID);
+//        for (ItemStack stack : OreDictionary.getOres("clay"))
+//        {
+//            registry.addRecipeCatalyst(stack, KNAP_CLAY_UID);
+//        }
 
         // Fire Clay Knapping
-        List<KnappingRecipeWrapper> fireclayknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-            .filter(recipe -> recipe.getType() == KnappingType.FIRE_CLAY)
-            .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
-            .collect(Collectors.toList());
-
-        registry.addRecipes(fireclayknapRecipes, KNAP_FIRECLAY_UID);
-        for (ItemStack stack : OreDictionary.getOres("fireClay"))
-        {
-            registry.addRecipeCatalyst(stack, KNAP_FIRECLAY_UID);
-        }
+//        List<KnappingRecipeWrapper> fireclayknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
+//            .filter(recipe -> recipe.getType() == KnappingType.FIRE_CLAY)
+//            .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
+//            .collect(Collectors.toList());
+//
+//        registry.addRecipes(fireclayknapRecipes, KNAP_FIRECLAY_UID);
+//        for (ItemStack stack : OreDictionary.getOres("fireClay"))
+//        {
+//            registry.addRecipeCatalyst(stack, KNAP_FIRECLAY_UID);
+//        }
 
         // Leather Knapping
-        List<KnappingRecipeWrapper> leatherknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-            .filter(recipe -> recipe.getType() == KnappingType.LEATHER)
-            .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
-            .collect(Collectors.toList());
-
-        registry.addRecipes(leatherknapRecipes, KNAP_LEATHER_UID);
-        for (ItemStack stack : OreDictionary.getOres("leather"))
-        {
-            registry.addRecipeCatalyst(stack, KNAP_LEATHER_UID);
-        }
+//        List<KnappingRecipeWrapper> leatherknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
+//            .filter(recipe -> recipe.getType() == KnappingType.LEATHER)
+//            .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
+//            .collect(Collectors.toList());
+//
+//        registry.addRecipes(leatherknapRecipes, KNAP_LEATHER_UID);
+//        for (ItemStack stack : OreDictionary.getOres("leather"))
+//        {
+//            registry.addRecipeCatalyst(stack, KNAP_LEATHER_UID);
+//        }
 
         // Leather Knapping Recipes
-        List<KnappingRecipeWrapper> stoneknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-            .filter(recipe -> recipe.getType() == KnappingType.STONE)
-            .flatMap(recipe -> TFCRegistries.ROCKS.getValuesCollection().stream().map(rock -> new KnappingRecipeWrapper.Stone(recipe, registry.getJeiHelpers().getGuiHelper(), rock)))
-            .collect(Collectors.toList());
-
-        registry.addRecipes(stoneknapRecipes, KNAP_STONE_UID);
-        for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-        {
-            registry.addRecipeCatalyst(new ItemStack(ItemRock.get(rock)), KNAP_STONE_UID);
-        }
+//        List<KnappingRecipeWrapper> stoneknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
+//            .filter(recipe -> recipe.getType() == KnappingType.STONE)
+//            .flatMap(recipe -> TFCRegistries.ROCKS.getValuesCollection().stream().map(rock -> new KnappingRecipeWrapper.Stone(recipe, registry.getJeiHelpers().getGuiHelper(), rock)))
+//            .collect(Collectors.toList());
+//
+//        registry.addRecipes(stoneknapRecipes, KNAP_STONE_UID);
+//        for (RockType rock : RockType.values())
+//        {
+//            registry.addRecipeCatalyst(new ItemStack(ItemRock.get(rock)), KNAP_STONE_UID);
+//        }
 
         //Wraps all barrel recipes
         List<BarrelRecipeWrapper> barrelRecipes = TFCRegistries.BARREL.getValuesCollection()
@@ -356,7 +354,7 @@ public final class TFCJEIPlugin implements IModPlugin
             scrapingList.add(new ScrapingWrapper(ItemAnimalHide.get(HideType.SOAKED, size), ItemAnimalHide.get(HideType.SCRAPED, size)));
         }
         registry.addRecipes(scrapingList, SCRAPING_UID);
-        TFCRegistries.ROCK_CATEGORIES.forEach(category -> registry.addRecipeCatalyst(new ItemStack(ItemRockKnife.get(category)), SCRAPING_UID));
+//        TFCRegistries.ROCK_CATEGORIES.forEach(category -> registry.addRecipeCatalyst(new ItemStack(ItemRockKnife.get(category)), SCRAPING_UID));
 
         //Custom handlers
         registry.handleRecipes(SaltingRecipe.class, SaltingRecipeWrapper::new, VanillaRecipeCategoryUid.CRAFTING);

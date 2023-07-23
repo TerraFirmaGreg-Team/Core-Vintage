@@ -1,12 +1,11 @@
-package net.dries007.tfc.objects.blocks.stone2;
+package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.util.IStoneTypeBlock;
+import net.dries007.tfc.api.util.IRockTypeBlock;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.blocks.rock.BlockRock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -37,21 +36,21 @@ import java.util.Random;
 
 import static gregtech.common.items.ToolItems.HARD_HAMMER;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 
 /**
  * Пока это почти полная копия {@link BlockRock}
  * Этот клас в будущем планируется использовать для механики распространения мха
  */
-public class BlockMossyTFG extends Block implements IStoneTypeBlock {
+public class BlockRockMossy extends Block implements IRockTypeBlock {
 
 	private final RockType stoneType;
 	private final RockVariant rockVariant;
 	private final ResourceLocation modelLocation;
 
-	public BlockMossyTFG(RockBlockType blockType, RockVariant rockVariant, RockType stoneType) {
+	public BlockRockMossy(RockBlockType blockType, RockVariant rockVariant, RockType stoneType) {
 		super(Material.ROCK);
-		if (BLOCK_MAP.put(new Triple<>(blockType, rockVariant, stoneType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(blockType, rockVariant, stoneType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + stoneType);
 
 		this.rockVariant = rockVariant;

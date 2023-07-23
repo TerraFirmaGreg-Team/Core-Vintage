@@ -8,6 +8,7 @@ package net.dries007.tfc.client;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -159,12 +160,12 @@ public class TFCGuiHandler implements IGuiHandler
                 return new GuiAnvilTFC(container, player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
             case ANVIL_PLAN:
                 return new GuiAnvilPlan(container, player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
-            case KNAPPING_STONE:
-                ItemStack stack = player.getHeldItemMainhand();
-                Rock rock = stack.getItem() instanceof IRockObject ? ((IRockObject) stack.getItem()).getRock(stack) :
-                    ((IRockObject) player.getHeldItemOffhand().getItem()).getRock(player.getHeldItemOffhand());
-                //noinspection ConstantConditions
-                return new GuiKnapping(container, player, KnappingType.STONE, rock.getTexture());
+//            case KNAPPING_STONE:
+//                ItemStack stack = player.getHeldItemMainhand();
+//                RockType rock = stack.getItem() instanceof IRockObject ? ((IRockObject) stack.getItem()).getRock(stack) :
+//                    ((IRockObject) player.getHeldItemOffhand().getItem()).getRock(player.getHeldItemOffhand());
+//                //noinspection ConstantConditions
+//                return new GuiKnapping(container, player, KnappingType.STONE, rock.getTexture());
             case KNAPPING_CLAY:
                 return new GuiKnapping(container, player, KnappingType.CLAY, CLAY_TEXTURE);
             case KNAPPING_LEATHER:

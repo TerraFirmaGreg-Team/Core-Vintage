@@ -1,20 +1,19 @@
 package net.dries007.tfc.api.util;
 
-import net.dries007.tfc.api.types2.BlockVariant;
-import net.dries007.tfc.api.types2.StoneType;
-import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.api.types2.rock.RockVariant;
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.item.ItemBlock;
 
 ;
 
 public interface IStoneTypeBlock extends IHasModel {
-	BlockVariant getBlockVariant();
+	RockVariant getRockVariant();
 
-	StoneType getStoneType();
+	RockType getRockType();
 
 	ItemBlock getItemBlock();
 
 	default float getFinalHardness() {
-		return getStoneType().getHardnessMultiplier() * getStoneType().getStoneCategory().getHardnessMultiplier();
+		return getRockVariant().getHardnessBase() + getRockType().getRockCategory().getHardnessModifier();
 	}
 }

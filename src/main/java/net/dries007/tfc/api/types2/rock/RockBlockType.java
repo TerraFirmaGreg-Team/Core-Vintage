@@ -1,36 +1,38 @@
-package net.dries007.tfc.api.types2;
+package net.dries007.tfc.api.types2.rock;
 
 import net.dries007.tfc.api.util.IStoneTypeBlock;
 import net.dries007.tfc.api.util.TriFunction;
+import net.dries007.tfc.objects.blocks.rock.BlockRock;
+import net.dries007.tfc.objects.blocks.rock.BlockRockFallable;
 import net.dries007.tfc.objects.blocks.stone2.*;
 import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.api.types2.BlockVariant.*;
+import static net.dries007.tfc.api.types2.rock.RockVariant.*;
 
 /**
  * Тип блока, принимает первым параметром, класс,
  * который будет создаваться, вторым параметром варианты для которых он создаст класс
  */
 @Nonnull
-public enum BlockType implements IStringSerializable {
+public enum RockBlockType implements IStringSerializable {
 	/**
 	 * Обычный блок без каких-либо доп. механик
 	 */
-	ORDINARY(BlockOrdinaryTFG::new, RAW, SMOOTH, COBBLE, BRICK),
+	ORDINARY(BlockRock::new, RAW, SMOOTH, BRICK),
 	/**
 	 * Обычный блок, но с механикой падения
 	 */
-	FALLABLE(BlockFallableTFG::new, GRAVEL),
+	FALLABLE(BlockRockFallable::new, GRAVEL, COBBLE, SAND),
 	/**
 	 * Обычный блок без каких-либо доп. механик
 	 */
-	CRACKED(BlockOrdinaryTFG::new, BRICK),
+	CRACKED(BlockRock::new, BRICK),
 	/**
 	 * Обычный блок без каких-либо доп. механик
 	 */
-	CHISELED(BlockOrdinaryTFG::new, BRICK),
+	CHISELED(BlockRock::new, BRICK),
 	/**
 	 * Обычный блок, но с механикой мха
 	 */
@@ -68,20 +70,20 @@ public enum BlockType implements IStringSerializable {
 	 */
 	SPELEOTHEM(BlockSpeleothemTFG::new, RAW);
 
-	private final TriFunction<BlockType, BlockVariant, StoneType, IStoneTypeBlock> blockFactory;
-	private final BlockVariant[] blockVariants;
+	private final TriFunction<RockBlockType, RockVariant, RockType, IStoneTypeBlock> blockFactory;
+	private final RockVariant[] rockVariants;
 
-	BlockType(TriFunction<BlockType, BlockVariant, StoneType, IStoneTypeBlock> blockFactory, BlockVariant... blockVariants) {
-		this.blockVariants = blockVariants;
+	RockBlockType(TriFunction<RockBlockType, RockVariant, RockType, IStoneTypeBlock> blockFactory, RockVariant... rockVariants) {
+		this.rockVariants = rockVariants;
 		this.blockFactory = blockFactory;
 	}
 
-	public IStoneTypeBlock createBlock(BlockVariant blockVariant, StoneType stoneType) {
-		return this.blockFactory.apply(this, blockVariant, stoneType);
+	public IStoneTypeBlock createBlock(RockVariant rockVariant, RockType stoneType) {
+		return this.blockFactory.apply(this, rockVariant, stoneType);
 	}
 
-	public BlockVariant[] getBlockVariants() {
-		return blockVariants;
+	public RockVariant[] getBlockVariants() {
+		return rockVariants;
 	}
 
 	@Nonnull

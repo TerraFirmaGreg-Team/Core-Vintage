@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks.stone2;
 
-import net.dries007.tfc.api.types2.BlockType;
-import net.dries007.tfc.api.types2.BlockVariant;
+import net.dries007.tfc.api.types2.rock.RockBlockType;
+import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.IStoneTypeBlock;
-import net.dries007.tfc.api.types2.StoneType;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.BlockButtonStone;
@@ -29,43 +29,43 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.stone2.BlockOrdinaryTFG.BLOCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_MAP;
 
 public class BlockButtonTFG extends BlockButtonStone implements IStoneTypeBlock {
 
-	private final BlockVariant blockVariant;
-	private final StoneType stoneType;
+	private final RockVariant rockVariant;
+	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockButtonTFG(BlockType blockType, BlockVariant blockVariant, StoneType stoneType) {
+	public BlockButtonTFG(RockBlockType blockType, RockVariant rockVariant, RockType rockType) {
 
-		if (BLOCK_MAP.put(new Triple<>(blockType, blockVariant, stoneType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + blockVariant + " " + stoneType);
+		if (BLOCK_MAP.put(new Triple<>(blockType, rockVariant, rockType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
-		this.blockVariant = blockVariant;
-		this.stoneType = stoneType;
-		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + blockVariant);
+		this.rockVariant = rockVariant;
+		this.rockType = rockType;
+		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("%s/%s/%s", blockType, blockVariant, stoneType);
+		String blockRegistryName = String.format("%s/%s/%s", blockType, rockVariant, rockType);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(0.5F);
-		this.setResistance(stoneType.getResistance());
+		this.setResistance(rockVariant.getResistance());
 		this.setHarvestLevel("pickaxe", 0);
 		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-		//OreDictionaryModule.register(this, blockType.getName(), blockVariant.getName(), blockVariant.getName() + WordUtils.capitalize(stoneType.getName()));
+		//OreDictionaryModule.register(this, blockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
 	}
 
 	@Override
-	public BlockVariant getBlockVariant() {
-		return blockVariant;
+	public RockVariant getRockVariant() {
+		return rockVariant;
 	}
 
 	@Override
-	public StoneType getStoneType() {
-		return stoneType;
+	public RockType getRockType() {
+		return rockType;
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class BlockButtonTFG extends BlockButtonStone implements IStoneTypeBlock 
 				return new ModelResourceLocation(modelLocation,
 						"facing=" + state.getValue(FACING) + "," +
 								"powered=" + state.getValue(POWERED) + "," +
-								"stonetype=" + stoneType.getName());
+								"stonetype=" + rockType.getName());
 			}
 		});
 
@@ -93,7 +93,7 @@ public class BlockButtonTFG extends BlockButtonStone implements IStoneTypeBlock 
 			ModelLoader.setCustomModelResourceLocation(
 					Item.getItemFromBlock(this),
 					this.getMetaFromState(state),
-					new ModelResourceLocation(modelLocation, "inventory=" + stoneType.getName()));
+					new ModelResourceLocation(modelLocation, "inventory=" + rockType.getName()));
 		}
 	}
 
@@ -111,6 +111,6 @@ public class BlockButtonTFG extends BlockButtonStone implements IStoneTypeBlock 
 	public void addInformation(@Nonnull ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + stoneType.getStoneCategory().getLocalizedName());
+		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
 	}
 }

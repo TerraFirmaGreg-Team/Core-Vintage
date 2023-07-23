@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks.stone2;
 
-import net.dries007.tfc.api.types2.BlockType;
-import net.dries007.tfc.api.types2.BlockVariant;
+import net.dries007.tfc.api.types2.rock.RockBlockType;
+import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.IStoneTypeBlock;
-import net.dries007.tfc.api.types2.StoneType;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
@@ -41,11 +41,11 @@ import java.util.Random;
 
 import static gregtech.common.items.ToolItems.HARD_HAMMER;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.BlockType.ORDINARY;
-import static net.dries007.tfc.api.types2.BlockType.SLAB;
-import static net.dries007.tfc.api.types2.BlockVariant.COBBLE;
-import static net.dries007.tfc.objects.blocks.stone2.BlockOrdinaryTFG.BLOCK_MAP;
-import static net.dries007.tfc.objects.blocks.stone2.BlockOrdinaryTFG.getBlockFromMap;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.SLAB;
+import static net.dries007.tfc.api.types2.rock.RockVariant.COBBLE;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockFromMap;
 
 public abstract class BlockSlabTFG extends BlockSlab implements IStoneTypeBlock {
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
@@ -53,10 +53,10 @@ public abstract class BlockSlabTFG extends BlockSlab implements IStoneTypeBlock 
 	public final Block modelBlock;
 	protected Half halfSlab;
 
-	private BlockSlabTFG(BlockType blockType, BlockVariant blockVariant, StoneType stoneType) {
-		this(getBlockFromMap(ORDINARY, blockVariant, stoneType));
+	private BlockSlabTFG(RockBlockType blockType, RockVariant rockVariant, RockType rockType) {
+		this(getBlockFromMap(ORDINARY, rockVariant, rockType));
 
-		Block c = getBlockFromMap(ORDINARY, blockVariant, stoneType);
+		Block c = getBlockFromMap(ORDINARY, rockVariant, rockType);
 		//noinspection ConstantConditions
 		setHarvestLevel(c.getHarvestTool(c.getDefaultState()), c.getHarvestLevel(c.getDefaultState()));
 		useNeighborBrightness = true;
@@ -164,23 +164,23 @@ public abstract class BlockSlabTFG extends BlockSlab implements IStoneTypeBlock 
 	}
 
 	public static class Double extends BlockSlabTFG {
-		private final BlockType blockType;
-		private final BlockVariant blockVariant;
-		private final StoneType stoneType;
+		private final RockBlockType blockType;
+		private final RockVariant rockVariant;
+		private final RockType rockType;
 		private final ResourceLocation modelLocation;
 
-		public Double(BlockType blockType, BlockVariant blockVariant, StoneType stoneType) {
-			super(blockType, blockVariant, stoneType);
+		public Double(RockBlockType blockType, RockVariant rockVariant, RockType rockType) {
+			super(blockType, rockVariant, rockType);
 
-			if (BLOCK_MAP.put(new Triple<>(blockType, blockVariant, stoneType), this) != null)
-				throw new RuntimeException("Duplicate registry entry detected for block: " + blockVariant + " " + stoneType);
+			if (BLOCK_MAP.put(new Triple<>(blockType, rockVariant, rockType), this) != null)
+				throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 			this.blockType = blockType;
-			this.blockVariant = blockVariant;
-			this.stoneType = stoneType;
-			this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + blockVariant);
+			this.rockVariant = rockVariant;
+			this.rockType = rockType;
+			this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + rockVariant);
 
-			String blockRegistryName = String.format("%s/%s/%s", blockType, blockVariant, stoneType);
+			String blockRegistryName = String.format("%s/%s/%s", blockType, rockVariant, rockType);
 			this.setRegistryName(MOD_ID, blockRegistryName);
 			this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 		}
@@ -191,13 +191,13 @@ public abstract class BlockSlabTFG extends BlockSlab implements IStoneTypeBlock 
 		}
 
 		@Override
-		public BlockVariant getBlockVariant() {
-			return blockVariant;
+		public RockVariant getRockVariant() {
+			return rockVariant;
 		}
 
 		@Override
-		public StoneType getStoneType() {
-			return stoneType;
+		public RockType getRockType() {
+			return rockType;
 		}
 
 		@Override
@@ -213,7 +213,7 @@ public abstract class BlockSlabTFG extends BlockSlab implements IStoneTypeBlock 
 				@Nonnull
 				protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
 					return new ModelResourceLocation(modelLocation,
-							"stonetype=" + stoneType.getName());
+							"stonetype=" + rockType.getName());
 				}
 			});
 		}
@@ -221,36 +221,36 @@ public abstract class BlockSlabTFG extends BlockSlab implements IStoneTypeBlock 
 
 	public static class Half extends BlockSlabTFG {
 		public final Double doubleSlab;
-		private final BlockType blockType;
-		private final StoneType stoneType;
+		private final RockBlockType blockType;
+		private final RockType rockType;
 		private final ResourceLocation modelLocation;
-		private final BlockVariant blockVariant;
+		private final RockVariant rockVariant;
 
-		public Half(BlockType blockType, BlockVariant blockVariant, StoneType stoneType) {
-			super(blockType, blockVariant, stoneType);
+		public Half(RockBlockType blockType, RockVariant rockVariant, RockType rockType) {
+			super(blockType, rockVariant, rockType);
 
-			if (BLOCK_MAP.put(new Triple<>(blockType, blockVariant, stoneType), this) != null)
-				throw new RuntimeException("Duplicate registry entry detected for block: " + blockVariant + " " + stoneType);
+			if (BLOCK_MAP.put(new Triple<>(blockType, rockVariant, rockType), this) != null)
+				throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
-			doubleSlab = (Double) BLOCK_MAP.get(new Triple<>(BlockType.SLAB_DOUBLE, blockVariant, stoneType));
+			doubleSlab = (Double) BLOCK_MAP.get(new Triple<>(RockBlockType.SLAB_DOUBLE, rockVariant, rockType));
 			doubleSlab.halfSlab = this;
 			halfSlab = this;
 
 			this.blockType = blockType;
-			this.blockVariant = blockVariant;
-			this.stoneType = stoneType;
-			this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + blockVariant);
+			this.rockVariant = rockVariant;
+			this.rockType = rockType;
+			this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + rockVariant);
 
-			String blockRegistryName = String.format("%s/%s/%s", blockType, blockVariant, stoneType);
+			String blockRegistryName = String.format("%s/%s/%s", blockType, rockVariant, rockType);
 			this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
 			this.setSoundType(SoundType.STONE);
 			this.setHardness(getFinalHardness());
-			this.setResistance(stoneType.getResistance());
-			this.setHarvestLevel("pickaxe", blockVariant.getHarvestLevel());
+			this.setResistance(rockVariant.getResistance());
+			this.setHarvestLevel("pickaxe", rockVariant.getHarvestLevel());
 			this.setRegistryName(MOD_ID, blockRegistryName);
 			this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-			//OreDictionaryModule.register(this, blockType.getName(), blockVariant.getName(), blockVariant.getName() + WordUtils.capitalize(stoneType.getName()));
+			//OreDictionaryModule.register(this, blockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
 		}
 
 		@Override
@@ -259,13 +259,13 @@ public abstract class BlockSlabTFG extends BlockSlab implements IStoneTypeBlock 
 		}
 
 		@Override
-		public BlockVariant getBlockVariant() {
-			return blockVariant;
+		public RockVariant getRockVariant() {
+			return rockVariant;
 		}
 
 		@Override
-		public StoneType getStoneType() {
-			return stoneType;
+		public RockType getRockType() {
+			return rockType;
 		}
 
 		@Override
@@ -286,28 +286,28 @@ public abstract class BlockSlabTFG extends BlockSlab implements IStoneTypeBlock 
 				if (player.canHarvestBlock(state)) {
 					// Проверяем, является ли удерживаемый предмет инструментом с классом инструмента pickaxe и кроме инструмента HARD_HAMMER
 					if ((heldItem.getToolClasses(heldItemStack).contains("pickaxe")) && !(heldItem == HARD_HAMMER.get())) {
-						switch (blockVariant) {
+						switch (rockVariant) {
 							case RAW:
 							case SMOOTH:
 							case COBBLE:
-								//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(2) + 2));
+								//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 2));
 								break;
 							case BRICK:
-								//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(2) + 2));
+								//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 2));
 								Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек цемента?
 								break;
 						}
 					} else if (heldItem == HARD_HAMMER.get()) {
-						switch (blockVariant) {
+						switch (rockVariant) {
 							case RAW:
 							case SMOOTH:
-								Block.spawnAsEntity(world, pos, new ItemStack(getBlockFromMap(SLAB, COBBLE, stoneType), 1));
+								Block.spawnAsEntity(world, pos, new ItemStack(getBlockFromMap(SLAB, COBBLE, rockType), 1));
 								break;
 							case COBBLE:
-								//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(2) + 3));
+								//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 3));
 								break;
 							case BRICK:
-								//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get("brick/" + stoneType.getName()), new Random().nextInt(2) + 3));
+								//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get("brick/" + rockType.getName()), new Random().nextInt(2) + 3));
 								Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек цемента?
 								break;
 						}
@@ -329,7 +329,7 @@ public abstract class BlockSlabTFG extends BlockSlab implements IStoneTypeBlock 
 				protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
 					return new ModelResourceLocation(modelLocation,
 							"half=" + state.getValue(HALF) + "," +
-									"stonetype=" + stoneType.getName());
+									"stonetype=" + rockType.getName());
 				}
 			});
 
@@ -339,7 +339,7 @@ public abstract class BlockSlabTFG extends BlockSlab implements IStoneTypeBlock 
 						this.getMetaFromState(state),
 						new ModelResourceLocation(modelLocation,
 								"half=bottom," +
-										"stonetype=" + stoneType.getName()));
+										"stonetype=" + rockType.getName()));
 			}
 		}
 
@@ -348,7 +348,7 @@ public abstract class BlockSlabTFG extends BlockSlab implements IStoneTypeBlock 
 		public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
 			super.addInformation(stack, worldIn, tooltip, flagIn);
 
-			tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + stoneType.getStoneCategory().getLocalizedName());
+			tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
 		}
 	}
 }

@@ -22,10 +22,10 @@ import net.dries007.tfc.objects.items.rock.*;
 import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.util.FallingBlockManager.Specification.*;
 
 
-public class Rock extends IForgeRegistryEntry.Impl<Rock>
-{
+public class Rock extends IForgeRegistryEntry.Impl<Rock> {
     @GameRegistry.ObjectHolder("tfc:granite")
     public static final Rock GRANITE = Helpers.getNull();
     @GameRegistry.ObjectHolder("tfc:basalt")
@@ -127,21 +127,21 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock>
 
     public enum Type
     {
-        RAW(Material.ROCK, false, Specification.COLLAPSABLE),
-        ANVIL(Material.ROCK, false, Specification.COLLAPSABLE),
+        RAW(Material.ROCK, false, COLLAPSABLE),
+        ANVIL(Material.ROCK, false, COLLAPSABLE),
         SPIKE(Material.ROCK, false, null),
-        SMOOTH(Material.ROCK, false, Specification.COLLAPSABLE),
+        SMOOTH(Material.ROCK, false, COLLAPSABLE),
         COBBLE(Material.ROCK, false, new Specification(true, () -> TFCSounds.ROCK_SLIDE_SHORT)),
         BRICKS(Material.ROCK, false, null),
-        SAND(Material.SAND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        GRAVEL(Material.SAND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        DIRT(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        GRASS(Material.GRASS, true, Specification.VERTICAL_AND_HORIZONTAL),
-        DRY_GRASS(Material.GRASS, true, Specification.VERTICAL_AND_HORIZONTAL),
-        CLAY(Material.CLAY, false, Specification.VERTICAL_ONLY),
-        CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        FARMLAND(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        PATH(Material.GROUND, false, Specification.VERTICAL_ONLY);
+        SAND(Material.SAND, false, VERTICAL_AND_HORIZONTAL),
+        GRAVEL(Material.SAND, false, VERTICAL_AND_HORIZONTAL),
+        DIRT(Material.GROUND, false, VERTICAL_AND_HORIZONTAL),
+        GRASS(Material.GRASS, true, VERTICAL_AND_HORIZONTAL),
+        DRY_GRASS(Material.GRASS, true, VERTICAL_AND_HORIZONTAL),
+        CLAY(Material.CLAY, false, VERTICAL_ONLY),
+        CLAY_GRASS(Material.GRASS, true, VERTICAL_ONLY),
+        FARMLAND(Material.GROUND, false, VERTICAL_ONLY),
+        PATH(Material.GROUND, false, VERTICAL_ONLY);
 
         public final Material material;
         public final boolean isGrass;

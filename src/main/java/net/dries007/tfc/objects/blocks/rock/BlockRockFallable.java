@@ -1,9 +1,9 @@
-package net.dries007.tfc.objects.blocks.stone2;
+package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.types2.BlockType;
-import net.dries007.tfc.api.types2.BlockVariant;
+import net.dries007.tfc.api.types2.rock.RockBlockType;
+import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.IStoneTypeBlock;
-import net.dries007.tfc.api.types2.StoneType;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.BlockGravel;
@@ -26,42 +26,42 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.stone2.BlockOrdinaryTFG.BLOCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_MAP;
 
-public class BlockFallableTFG extends BlockGravel implements IStoneTypeBlock {
+public class BlockRockFallable extends BlockGravel implements IStoneTypeBlock {
 
-	private final BlockVariant blockVariant;
-	private final StoneType stoneType;
+	private final RockVariant blockVariant;
+	private final RockType stoneType;
 	private final ResourceLocation modelLocation;
 
-	public BlockFallableTFG(BlockType blockType, BlockVariant blockVariant, StoneType stoneType) {
+	public BlockRockFallable(RockBlockType blockType, RockVariant rockVariant, RockType stoneType) {
 
-		if (BLOCK_MAP.put(new Triple<>(blockType, blockVariant, stoneType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + blockVariant + " " + stoneType);
+		if (BLOCK_MAP.put(new Triple<>(blockType, rockVariant, stoneType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + stoneType);
 
-		this.blockVariant = blockVariant;
+		this.blockVariant = rockVariant;
 		this.stoneType = stoneType;
-		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + blockVariant);
+		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("%s/%s/%s", blockType, blockVariant, stoneType);
+		String blockRegistryName = String.format("%s/%s/%s", blockType, rockVariant, stoneType);
 		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
 		this.setSoundType(SoundType.GROUND);
 		this.setHardness(0.6F);
-		this.setResistance(stoneType.getResistance());
-		this.setHarvestLevel("shovel", blockVariant.getHarvestLevel());
+		this.setResistance(rockVariant.getResistance());
+		this.setHarvestLevel("shovel", rockVariant.getHarvestLevel());
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-		//OreDictionaryModule.register(this, blockVariant.getName(), blockVariant.getName() + WordUtils.capitalize(stoneType.getName()));
+		//OreDictionaryModule.register(this, rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(stoneType.getName()));
 	}
 
 	@Override
-	public BlockVariant getBlockVariant() {
+	public RockVariant getRockVariant() {
 		return blockVariant;
 	}
 
 	@Override
-	public StoneType getStoneType() {
+	public RockType getRockType() {
 		return stoneType;
 	}
 
@@ -94,6 +94,6 @@ public class BlockFallableTFG extends BlockGravel implements IStoneTypeBlock {
 	public void addInformation(@Nonnull ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + stoneType.getStoneCategory().getLocalizedName());
+		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + stoneType.getRockCategory().getLocalizedName());
 	}
 }

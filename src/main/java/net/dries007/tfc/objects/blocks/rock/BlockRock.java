@@ -1,12 +1,12 @@
-package net.dries007.tfc.objects.blocks.stone2;
+package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.types2.BlockType;
-import net.dries007.tfc.api.types2.BlockVariant;
+import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.IStoneTypeBlock;
-import net.dries007.tfc.api.types2.StoneType;
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.rock.ItemRockHammer;
+import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -39,37 +39,37 @@ import java.util.Map;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.stone2.BlockOrdinaryTFG.BLOCK_MAP;
 
-public class BlockOrdinaryTFG extends Block implements IStoneTypeBlock {
+public class BlockRock extends Block implements IStoneTypeBlock {
 
-	public static final Map<Triple<BlockType, BlockVariant, StoneType>, IStoneTypeBlock> BLOCK_MAP = new LinkedHashMap<>();
+	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IStoneTypeBlock> BLOCK_MAP = new LinkedHashMap<>();
 
-	public static Block getBlockFromMap(BlockType blockType, BlockVariant blockVariant, StoneType stoneType) {
-		return (Block) BLOCK_MAP.get(new Triple<>(blockType, blockVariant, stoneType));
+
+	public static Block getBlockFromMap(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
+		return (Block) BLOCK_MAP.get(new Triple<>(rockBlockType, rockVariant, rockType));
 	}
-	private final BlockType blockType;
-	private final StoneType stoneType;
-	private final BlockVariant blockVariant;
+	private final RockBlockType rockBlockType;
+	private final RockType rockType;
+	private final RockVariant rockVariant;
 	private final ResourceLocation modelLocation;
 
-	public BlockOrdinaryTFG(BlockType blockType, BlockVariant blockVariant, StoneType stoneType) {
+	public BlockRock(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
 
-		if (BLOCK_MAP.put(new Triple<>(blockType, blockVariant, stoneType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + blockVariant + " " + stoneType);
+		if (BLOCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
-		this.blockType = blockType;
-		this.blockVariant = blockVariant;
-		this.stoneType = stoneType;
-		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + blockVariant);
+		this.rockBlockType = rockBlockType;
+		this.rockVariant = rockVariant;
+		this.rockType = rockType;
+		this.modelLocation = new ResourceLocation(MOD_ID, rockBlockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("%s/%s/%s", blockType, blockVariant, stoneType);
+		String blockRegistryName = String.format("%s/%s/%s", rockBlockType, rockVariant, rockType);
 		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(getFinalHardness());
-		this.setResistance(stoneType.getResistance());
-		this.setHarvestLevel("pickaxe", blockVariant.getHarvestLevel());
+		this.setResistance(rockVariant.getResistance());
+		this.setHarvestLevel("pickaxe", rockVariant.getHarvestLevel());
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
@@ -77,13 +77,13 @@ public class BlockOrdinaryTFG extends Block implements IStoneTypeBlock {
 	}
 
 	@Override
-	public BlockVariant getBlockVariant() {
-		return blockVariant;
+	public RockVariant getRockVariant() {
+		return rockVariant;
 	}
 
 	@Override
-	public StoneType getStoneType() {
-		return stoneType;
+	public RockType getRockType() {
+		return rockType;
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class BlockOrdinaryTFG extends Block implements IStoneTypeBlock {
 			if (player.canHarvestBlock(state)) {
 				// Проверяем, является ли удерживаемый предмет инструментом с классом инструмента pickaxe и кроме инструмента HARD_HAMMER
 				if ((heldItem.getToolClasses(heldItemStack).contains("pickaxe")) && !(heldItem instanceof ItemRockHammer)) {
-					switch (blockVariant) {
+					switch (rockVariant) {
 						case RAW:
 						case SMOOTH:
 							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(3) + 2));
@@ -117,7 +117,7 @@ public class BlockOrdinaryTFG extends Block implements IStoneTypeBlock {
 							break;
 					}
 				} else if (heldItem instanceof ItemRockHammer) {
-					switch (blockVariant) {
+					switch (rockVariant) {
 						case RAW:
 						case SMOOTH:
 							//Block.spawnAsEntity(world, pos, new ItemStack(getBlockFromMap(blockType, COBBLE, stoneType), 1));
@@ -146,7 +146,7 @@ public class BlockOrdinaryTFG extends Block implements IStoneTypeBlock {
 		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
 			@Nonnull
 			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation, "stonetype=" + stoneType.getName());
+				return new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName());
 			}
 		});
 
@@ -154,7 +154,7 @@ public class BlockOrdinaryTFG extends Block implements IStoneTypeBlock {
 		ModelLoader.setCustomModelResourceLocation(
 				Item.getItemFromBlock(this),
 				this.getMetaFromState(this.getBlockState().getBaseState()),
-				new ModelResourceLocation(modelLocation, "stonetype=" + stoneType.getName()));
+				new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName()));
 	}
 
 	@Override
@@ -162,7 +162,7 @@ public class BlockOrdinaryTFG extends Block implements IStoneTypeBlock {
 	public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + stoneType.getStoneCategory().getLocalizedName());
+		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
 	}
 
 	@Nonnull

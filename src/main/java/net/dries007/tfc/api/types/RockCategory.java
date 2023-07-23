@@ -97,8 +97,7 @@ public class RockCategory extends IForgeRegistryEntry.Impl<RockCategory>
         return getRegistryName().getPath();
     }
 
-    public enum Layer implements Predicate<Rock>
-    {
+    public enum Layer implements Predicate<Rock> {
         BOTTOM(3, x -> x.getRockCategory().layer3),
         MIDDLE(2, x -> x.getRockCategory().layer2),
         TOP(1, x -> x.getRockCategory().layer1);

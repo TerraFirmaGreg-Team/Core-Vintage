@@ -1,11 +1,12 @@
 package net.dries007.tfc.objects.blocks.stone2;
 
-import net.dries007.tfc.api.types2.BlockType;
-import net.dries007.tfc.api.types2.BlockVariant;
+import net.dries007.tfc.api.types2.rock.RockBlockType;
+import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.IStoneTypeBlock;
-import net.dries007.tfc.api.types2.StoneType;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
+import net.dries007.tfc.objects.blocks.rock.BlockRock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -36,46 +37,46 @@ import java.util.Random;
 
 import static gregtech.common.items.ToolItems.HARD_HAMMER;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.stone2.BlockOrdinaryTFG.BLOCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_MAP;
 
 /**
- * Пока это почти полная копия {@link BlockOrdinaryTFG}
+ * Пока это почти полная копия {@link BlockRock}
  * Этот клас в будущем планируется использовать для механики распространения мха
  */
 public class BlockMossyTFG extends Block implements IStoneTypeBlock {
 
-	private final StoneType stoneType;
-	private final BlockVariant blockVariant;
+	private final RockType stoneType;
+	private final RockVariant rockVariant;
 	private final ResourceLocation modelLocation;
 
-	public BlockMossyTFG(BlockType blockType, BlockVariant blockVariant, StoneType stoneType) {
+	public BlockMossyTFG(RockBlockType blockType, RockVariant rockVariant, RockType stoneType) {
 		super(Material.ROCK);
-		if (BLOCK_MAP.put(new Triple<>(blockType, blockVariant, stoneType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + blockVariant + " " + stoneType);
+		if (BLOCK_MAP.put(new Triple<>(blockType, rockVariant, stoneType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + stoneType);
 
-		this.blockVariant = blockVariant;
+		this.rockVariant = rockVariant;
 		this.stoneType = stoneType;
-		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + blockVariant);
+		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("%s/%s/%s", blockType, blockVariant, stoneType);
+		String blockRegistryName = String.format("%s/%s/%s", blockType, rockVariant, stoneType);
 		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(getFinalHardness());
-		this.setResistance(stoneType.getResistance());
-		this.setHarvestLevel("pickaxe", blockVariant.getHarvestLevel());
+		this.setResistance(rockVariant.getResistance());
+		this.setHarvestLevel("pickaxe", rockVariant.getHarvestLevel());
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-		//OreDictionaryModule.register(this, blockType.getName(), blockVariant.getName(), blockVariant.getName() + WordUtils.capitalize(stoneType.getName()));
+		//OreDictionaryModule.register(this, blockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(stoneType.getName()));
 	}
 
 	@Override
-	public BlockVariant getBlockVariant() {
-		return blockVariant;
+	public RockVariant getRockVariant() {
+		return rockVariant;
 	}
 
 	@Override
-	public StoneType getStoneType() {
+	public RockType getRockType() {
 		return stoneType;
 	}
 
@@ -98,7 +99,7 @@ public class BlockMossyTFG extends Block implements IStoneTypeBlock {
 				// Проверяем, является ли удерживаемый предмет инструментом с классом инструмента pickaxe и кроме инструмента HARD_HAMMER
 				if ((heldItem.getToolClasses(heldItemStack).contains("pickaxe")) && !(heldItem == HARD_HAMMER.get())) {
 					Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек мха
-					switch (blockVariant) {
+					switch (rockVariant) {
 						case COBBLE:
 							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(3) + 4));
 							break;
@@ -108,7 +109,7 @@ public class BlockMossyTFG extends Block implements IStoneTypeBlock {
 					}
 				} else if (heldItem == HARD_HAMMER.get()) {
 					Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек мха
-					switch (blockVariant) {
+					switch (rockVariant) {
 						case COBBLE:
 							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(3) + 4));
 							Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек глины?
@@ -150,7 +151,7 @@ public class BlockMossyTFG extends Block implements IStoneTypeBlock {
 	public void addInformation(@Nonnull ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + stoneType.getStoneCategory().getLocalizedName());
+		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + stoneType.getRockCategory().getLocalizedName());
 	}
 
 	@Nonnull

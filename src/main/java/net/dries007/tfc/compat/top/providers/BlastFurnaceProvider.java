@@ -5,28 +5,19 @@
 
 package net.dries007.tfc.compat.top.providers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
-
 import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.compat.top.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.devices.BlockBlastFurnace;
 import net.dries007.tfc.objects.te.TEBlastFurnace;
 import net.dries007.tfc.util.Helpers;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 
 public class BlastFurnaceProvider implements IProbeInfoProvider
 {

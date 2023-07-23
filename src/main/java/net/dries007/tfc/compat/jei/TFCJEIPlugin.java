@@ -107,7 +107,7 @@ public final class TFCJEIPlugin implements IModPlugin
         registry.addRecipeCategories(new LoomCategory(registry.getJeiHelpers().getGuiHelper(), LOOM_UID));
         registry.addRecipeCategories(new MetalHeatingCategory(registry.getJeiHelpers().getGuiHelper(), METAL_HEAT_UID));
         registry.addRecipeCategories(new QuernCategory(registry.getJeiHelpers().getGuiHelper(), QUERN_UID));
-        registry.addRecipeCategories(new RockLayerCategory(registry.getJeiHelpers().getGuiHelper(), ROCK_LAYER_UID));
+        //registry.addRecipeCategories(new RockLayerCategory(registry.getJeiHelpers().getGuiHelper(), ROCK_LAYER_UID));
         registry.addRecipeCategories(new WeldingCategory(registry.getJeiHelpers().getGuiHelper(), WELDING_UID));
         registry.addRecipeCategories(new ScrapingCategory(registry.getJeiHelpers().getGuiHelper(), SCRAPING_UID));
     }
@@ -283,12 +283,12 @@ public final class TFCJEIPlugin implements IModPlugin
         registry.addRecipes(chiselList, CHISEL_UID);
 
         //Wraps all rock layers
-        List<RockLayerWrapper> rockLayerList = TFCRegistries.ROCKS.getValuesCollection()
-            .stream()
-            .map(RockLayerWrapper::new)
-            .collect(Collectors.toList());
-
-        registry.addRecipes(rockLayerList, ROCK_LAYER_UID);
+//        List<RockLayerWrapper> rockLayerList = TFCRegistries.ROCKS.getValuesCollection()
+//            .stream()
+//            .map(RockLayerWrapper::new)
+//            .collect(Collectors.toList());
+//
+//        registry.addRecipes(rockLayerList, ROCK_LAYER_UID);
 
         // Register metal related stuff (put everything here for performance + sorted registration)
         List<UnmoldRecipeWrapper> unmoldList = new ArrayList<>();

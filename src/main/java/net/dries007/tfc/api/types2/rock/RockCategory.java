@@ -1,9 +1,12 @@
 package net.dries007.tfc.api.types2.rock;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Rock;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+
+import java.util.function.Predicate;
 
 @MethodsReturnNonnullByDefault
 public enum RockCategory implements IStringSerializable {
@@ -69,6 +72,25 @@ public enum RockCategory implements IStringSerializable {
 
     public String getLocalizedName() {
         return textFormatting + new TextComponentTranslation(String.format("stonecategory.%s.name", this.getName())).getFormattedText();
+    }
+
+    public enum Layer implements Predicate<RockType> {
+        BOTTOM(3, x -> x.getRockCategory().layer3),
+        MIDDLE(2, x -> x.getRockCategory().layer2),
+        TOP(1, x -> x.getRockCategory().layer1);
+
+        public final int layer;
+        private final Predicate<RockType> filter;
+
+        Layer(int layer, Predicate<RockType> filter) {
+            this.layer = layer;
+            this.filter = filter;
+        }
+
+        @Override
+        public boolean test(RockType rockType) {
+            return filter.test(rockType);
+        }
     }
 
 }

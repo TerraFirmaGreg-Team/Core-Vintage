@@ -74,8 +74,7 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
         return textureLocation;
     }
 
-    public RockCategory getRockCategory()
-    {
+    public RockCategory getRockCategory() {
         return rockCategory;
     }
 

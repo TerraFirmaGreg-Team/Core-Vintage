@@ -21,7 +21,6 @@ import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.BlockFluidBase;
@@ -43,8 +42,7 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.render.*;
 import net.dries007.tfc.objects.Gem;
-import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
-import net.dries007.tfc.objects.blocks.BlockSlabTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockRockSlabTFC;
 import net.dries007.tfc.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
@@ -178,10 +176,10 @@ public final class ClientRegisterEvents
         for (Block block : BlocksTFC.getAllChestBlocks())
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockChest.FACING).build());
 
-        for (BlockSlabTFC.Half block : BlocksTFC.getAllSlabBlocks())
+        for (BlockRockSlabTFC.Half block : BlocksTFC.getAllSlabBlocks())
         {
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSlabTFC.VARIANT).build());
-            ModelLoader.setCustomStateMapper(block.doubleSlab, new StateMap.Builder().ignore(BlockSlabTFC.VARIANT).build());
+            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockRockSlabTFC.VARIANT).build());
+            ModelLoader.setCustomStateMapper(block.doubleSlab, new StateMap.Builder().ignore(BlockRockSlabTFC.VARIANT).build());
         }
 
         for (Block block : BlocksTFC.getAllCropBlocks())

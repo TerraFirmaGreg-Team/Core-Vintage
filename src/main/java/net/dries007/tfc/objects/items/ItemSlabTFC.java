@@ -15,13 +15,13 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.blocks.BlockSlabTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockRockSlabTFC;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemSlabTFC extends ItemSlab implements IItemSize
 {
-    public ItemSlabTFC(BlockSlabTFC.Half slab, BlockSlabTFC.Half slab1, BlockSlabTFC.Double doubleSlab)
+    public ItemSlabTFC(BlockRockSlabTFC.Half slab, BlockRockSlabTFC.Half slab1, BlockRockSlabTFC.Double doubleSlab)
     {
         super(slab, slab1, doubleSlab);
     }

@@ -29,7 +29,7 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.*;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.blocks.BlockSlabTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockRockSlabTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockDoorTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
@@ -232,7 +232,7 @@ public final class ItemsTFC
         for (BlockDoorTFC door : BlocksTFC.getAllDoorBlocks())
             simpleItems.add(register(r, door.getRegistryName().getPath(), new ItemDoorTFC(door), CT_DECORATIONS));
 
-        for (BlockSlabTFC.Half slab : BlocksTFC.getAllSlabBlocks())
+        for (BlockRockSlabTFC.Half slab : BlocksTFC.getAllSlabBlocks())
             simpleItems.add(register(r, slab.getRegistryName().getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_DECORATIONS));
 
         for (Tree wood : TFCRegistries.TREES.getValuesCollection())

@@ -3,7 +3,7 @@
  * See the project README.md and LICENSE.txt for more information.
  */
 
-package net.dries007.tfc.objects.blocks;
+package net.dries007.tfc.objects.blocks.stone;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -29,19 +29,18 @@ import net.minecraft.world.World;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public abstract class BlockSlabTFC extends BlockSlab
+public abstract class BlockRockSlabTFC extends BlockSlab
 {
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockSlabTFC(Rock rock, Rock.Type type)
+    private BlockRockSlabTFC(Rock rock, Rock.Type type)
     {
         this(BlockRockVariant.get(rock, type));
         Block c = BlockRockVariant.get(rock, type);
@@ -50,7 +49,7 @@ public abstract class BlockSlabTFC extends BlockSlab
         useNeighborBrightness = true;
     }
 
-    private BlockSlabTFC(Tree wood)
+    private BlockRockSlabTFC(Tree wood)
     {
         this(BlockPlanksTFC.get(wood));
         Block c = BlockPlanksTFC.get(wood);
@@ -60,7 +59,7 @@ public abstract class BlockSlabTFC extends BlockSlab
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
-    private BlockSlabTFC(Block block)
+    private BlockRockSlabTFC(Block block)
     {
         super(block.getDefaultState().getMaterial());
         IBlockState state = blockState.getBaseState();
@@ -166,7 +165,7 @@ public abstract class BlockSlabTFC extends BlockSlab
         }
     }
 
-    public static class Double extends BlockSlabTFC
+    public static class Double extends BlockRockSlabTFC
     {
         private static final Map<Rock, EnumMap<Rock.Type, Double>> ROCK_TABLE = new HashMap<>();
         private static final Map<Tree, Double> WOOD_MAP = new HashMap<>();
@@ -206,7 +205,7 @@ public abstract class BlockSlabTFC extends BlockSlab
         }
     }
 
-    public static class Half extends BlockSlabTFC
+    public static class Half extends BlockRockSlabTFC
     {
         private static final Map<Rock, EnumMap<Rock.Type, Half>> ROCK_TABLE = new HashMap<>();
         private static final Map<Tree, Half> WOOD_MAP = new HashMap<>();

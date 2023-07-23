@@ -10,6 +10,13 @@ import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -22,14 +29,17 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 
-public class PitKilnProvider implements IWailaBlock
+public class PitKilnProvider implements IProbeInfoProvider
 {
-    @Nonnull
     @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
-        List<String> currentTooltip = new ArrayList<>();
-        TEPitKiln te = Helpers.getTE(world, pos, TEPitKiln.class);
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":pit_klin";
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+
+        var te = Helpers.getTE(world, iProbeHitData.getPos(), TEPitKiln.class);
         if (te != null)
         {
             boolean isLit = te.isLit();
@@ -42,15 +52,15 @@ public class PitKilnProvider implements IWailaBlock
                     case NONE:
                         break;
                     case TICKS:
-                        currentTooltip.add(new TextComponentTranslation("waila.tfc.devices.ticks_remaining", remainingTicks).getFormattedText());
+                        iProbeInfo.text(new TextComponentTranslation("waila.tfc.devices.ticks_remaining", remainingTicks).getFormattedText());
                         break;
                     case MINECRAFT_HOURS:
                         long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
-                        currentTooltip.add(new TextComponentTranslation("waila.tfc.devices.hours_remaining", remainingHours).getFormattedText());
+                        iProbeInfo.text(new TextComponentTranslation("waila.tfc.devices.hours_remaining", remainingHours).getFormattedText());
                         break;
                     case REAL_MINUTES:
                         long remainingMinutes = Math.round(remainingTicks / 1200.0f);
-                        currentTooltip.add(new TextComponentTranslation("waila.tfc.devices.minutes_remaining", remainingMinutes).getFormattedText());
+                        iProbeInfo.text(new TextComponentTranslation("waila.tfc.devices.minutes_remaining", remainingMinutes).getFormattedText());
                         break;
                 }
             }
@@ -60,28 +70,20 @@ public class PitKilnProvider implements IWailaBlock
                 int logs = te.getLogCount();
                 if (straw == 8 && logs == 8)
                 {
-                    currentTooltip.add(new TextComponentTranslation("waila.tfc.pitkiln.unlit").getFormattedText());
+                    iProbeInfo.text(new TextComponentTranslation("waila.tfc.pitkiln.unlit").getFormattedText());
                 }
                 else
                 {
                     if (straw < 8)
                     {
-                        currentTooltip.add(new TextComponentTranslation("waila.tfc.pitkiln.straw", 8 - straw).getFormattedText());
+                        iProbeInfo.text(new TextComponentTranslation("waila.tfc.pitkiln.straw", 8 - straw).getFormattedText());
                     }
                     if (logs < 8)
                     {
-                        currentTooltip.add(new TextComponentTranslation("waila.tfc.pitkiln.logs", 8 - logs).getFormattedText());
+                        iProbeInfo.text(new TextComponentTranslation("waila.tfc.pitkiln.logs", 8 - logs).getFormattedText());
                     }
                 }
             }
         }
-        return currentTooltip;
-    }
-
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass()
-    {
-        return Collections.singletonList(TEPitKiln.class);
     }
 }

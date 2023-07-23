@@ -90,6 +90,8 @@ tfc.command.work.nonentity=Объект не найден.
 # Gui
 
 ## Tooltips
+tfc.tooltip.temperature=Температура: %s
+tfc.tooltip.rainfall=Осадки: %s`
 tfc.tooltip.food_expiry_date.days=Сгниёт примерно через %s дня(дней)!
 tfc.tooltip.toolclass=§fКласс предмета:§7 %s
 tfc.tooltip.toolclasses=§fКлассы предметов:

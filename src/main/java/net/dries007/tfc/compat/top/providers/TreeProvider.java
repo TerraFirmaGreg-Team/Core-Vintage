@@ -10,7 +10,13 @@ import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -23,35 +29,30 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 
-public class TreeProvider implements IWailaBlock
+public class TreeProvider implements IProbeInfoProvider
 {
-    @Nonnull
     @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
-        List<String> currentTooltip = new ArrayList<>();
-        IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockSaplingTFC)
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":tree";
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+        var blockPos = iProbeHitData.getPos();
+        var state = world.getBlockState(blockPos);
+
+        if (state.getBlock() instanceof BlockSaplingTFC block)
         {
-            BlockSaplingTFC block = ((BlockSaplingTFC) state.getBlock());
-            Tree wood = block.getWood();
-            TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+            var wood = block.getWood();
+            var te = Helpers.getTE(world, blockPos, TETickCounter.class);
+
             if (te != null)
             {
                 long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
                 float perc = Math.min(0.99F, days / wood.getMinGrowthTime()) * 100;
-                String growth = String.format("%d%%", Math.round(perc));
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
+                var growth = String.format("%d%%", Math.round(perc));
+                iProbeInfo.text(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
             }
-
         }
-        return currentTooltip;
-    }
-
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass()
-    {
-        return Collections.singletonList(BlockSaplingTFC.class);
     }
 }

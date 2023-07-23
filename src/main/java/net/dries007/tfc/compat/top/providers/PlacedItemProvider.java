@@ -10,6 +10,13 @@ import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -22,40 +29,32 @@ import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
 
-public class PlacedItemProvider implements IWailaBlock
+public class PlacedItemProvider implements IProbeInfoProvider
 {
-    @Nonnull
     @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
-        List<String> currentTooltip = new ArrayList<>();
-        TEPlacedItemFlat te = Helpers.getTE(world, pos, TEPlacedItemFlat.class);
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":placed_item";
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+
+        var te = Helpers.getTE(world, iProbeHitData.getPos(), TEPlacedItemFlat.class);
         if (te != null)
         {
             ItemStack stack = te.getStack();
-            /*
-            if (stack.getItem() instanceof ItemSmallOre)
-            {
 
-            }*/
-            if (stack.getItem() instanceof ItemRock)
+            if (stack.getItem() instanceof ItemRock pebble)
             {
-                ItemRock pebble = (ItemRock) stack.getItem();
                 Rock rock = pebble.getRock(stack);
                 if (rock.isFluxStone())
                 {
-                    currentTooltip.add(new TextComponentTranslation("waila.tfc.flux_stone").getFormattedText());
+                    iProbeInfo.text(new TextComponentTranslation("waila.tfc.flux_stone").getFormattedText());
                 }
 
             }
         }
-        return currentTooltip;
     }
 
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass()
-    {
-        return Collections.singletonList(TEPlacedItemFlat.class);
-    }
+
 }

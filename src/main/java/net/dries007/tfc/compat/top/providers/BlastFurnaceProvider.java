@@ -10,6 +10,13 @@ import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -21,14 +28,16 @@ import net.dries007.tfc.objects.blocks.devices.BlockBlastFurnace;
 import net.dries007.tfc.objects.te.TEBlastFurnace;
 import net.dries007.tfc.util.Helpers;
 
-public class BlastFurnaceProvider implements IWailaBlock
+public class BlastFurnaceProvider implements IProbeInfoProvider
 {
-    @Nonnull
     @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
-        List<String> currentTooltip = new ArrayList<>();
-        TEBlastFurnace blastFurnace = Helpers.getTE(world, pos, TEBlastFurnace.class);
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":blast_furnace";
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData probeData) {
+        var blastFurnace = Helpers.getTE(world, probeData.getPos(), TEBlastFurnace.class);
         if (blastFurnace != null)
         {
             int chinmey = BlockBlastFurnace.getChimneyLevels(blastFurnace.getWorld(), blastFurnace.getPos());
@@ -37,27 +46,20 @@ public class BlastFurnaceProvider implements IWailaBlock
                 int maxItems = chinmey * 4;
                 int oreStacks = blastFurnace.getOreStacks().size();
                 int fuelStacks = blastFurnace.getFuelStacks().size();
-                float temperature = nbt.getFloat("temperature");
+                float temperature = blastFurnace.getTemperature();
                 String heatTooltip = Heat.getTooltip(temperature);
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.bloomery.ores", oreStacks, maxItems).getFormattedText());
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.bloomery.fuel", fuelStacks, maxItems).getFormattedText());
+                probeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.ores", oreStacks, maxItems).getFormattedText());
+                probeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.fuel", fuelStacks, maxItems).getFormattedText());
                 if (heatTooltip != null)
                 {
-                    currentTooltip.add(heatTooltip);
+                    probeInfo.text(heatTooltip);
                 }
             }
             else
             {
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.blast_furnace.not_formed").getFormattedText());
+                probeInfo.text(new TextComponentTranslation("waila.tfc.blast_furnace.not_formed").getFormattedText());
             }
         }
-        return currentTooltip;
-    }
 
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass()
-    {
-        return Collections.singletonList(TEBlastFurnace.class);
     }
 }

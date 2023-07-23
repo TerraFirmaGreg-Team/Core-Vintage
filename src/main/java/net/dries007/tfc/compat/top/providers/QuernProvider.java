@@ -6,6 +6,13 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -22,29 +29,23 @@ import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.objects.te.TEQuern.SLOT_HANDSTONE;
 
-public class QuernProvider implements IWailaBlock
+public class QuernProvider implements IProbeInfoProvider
 {
-
-    @Nonnull
     @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
-        List<String> currentTooltip = new ArrayList<>(1);
-        TEQuern quern = Helpers.getTE(world, pos, TEQuern.class);
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":quern";
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+
+        var quern = Helpers.getTE(world, iProbeHitData.getPos(), TEQuern.class);
         IItemHandler handler;
         ItemStack handstone;
+
         if (quern != null && quern.hasHandstone() && (handler = quern.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) != null && !(handstone = handler.getStackInSlot(SLOT_HANDSTONE)).isEmpty())
         {
-            currentTooltip.add(new TextComponentTranslation("waila.tfc.quern.handstone_durability", handstone.getItemDamage(), handstone.getMaxDamage()).getFormattedText());
+            iProbeInfo.text(new TextComponentTranslation("waila.tfc.quern.handstone_durability", handstone.getItemDamage(), handstone.getMaxDamage()).getFormattedText());
         }
-        return currentTooltip;
     }
-
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass()
-    {
-        return Collections.singletonList(BlockQuern.class);
-    }
-
 }

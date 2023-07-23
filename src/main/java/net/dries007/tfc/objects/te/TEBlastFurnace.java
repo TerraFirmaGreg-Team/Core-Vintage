@@ -87,6 +87,10 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
         return burnTicksLeft;
     }
 
+    public float getTemperature() {
+        return temperature;
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound nbt)
     {

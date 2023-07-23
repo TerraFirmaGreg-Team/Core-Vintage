@@ -5,30 +5,21 @@
 
 package net.dries007.tfc.compat.top.providers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.objects.te.TEBarrel;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.compat.top.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.util.Helpers;
 
 public class BarrelProvider implements IProbeInfoProvider
 {
@@ -39,7 +30,8 @@ public class BarrelProvider implements IProbeInfoProvider
 
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
-        TEBarrel te = Helpers.getTE(world, iProbeHitData.getPos(), TEBarrel.class);
+        var te = Helpers.getTE(world, iProbeHitData.getPos(), TEBarrel.class);
+
         if (te != null)
         {
             IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);

@@ -5,70 +5,47 @@
 
 package net.dries007.tfc.compat.top.providers;
 
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-
-import net.dries007.tfc.compat.top.interfaces.IWailaBlock;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.te.TELogPile;
 import net.dries007.tfc.util.Helpers;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
 
-public class LogPileProvider implements IWailaBlock
+public class LogPileProvider implements IProbeInfoProvider
 {
-
-    @Nonnull
     @Override
-    public ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
-        TELogPile logPile = Helpers.getTE(world, pos, TELogPile.class);
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":log_pile";
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+        var logPile = Helpers.getTE(world, iProbeHitData.getPos(), TELogPile.class);
         if (logPile != null)
         {
-            IItemHandler inventory = logPile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            ItemStack icon = ItemStack.EMPTY;
-            for (int i = 0; i < inventory.getSlots(); i++)
+            var inventory = logPile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+
+            if (inventory != null)
             {
-                ItemStack slotStack = inventory.getStackInSlot(i);
-                if (!slotStack.isEmpty())
+                var horizontalLayout = iProbeInfo.horizontal();
+
+                for (int i = 0; i < inventory.getSlots(); i++)
                 {
-                    if (icon.isEmpty())
+                    var slotStack = inventory.getStackInSlot(i);
+                    if (!slotStack.isEmpty())
                     {
-                        icon = slotStack.copy();
-                    }
-                    else if (slotStack.isItemEqual(icon))
-                    {
-                        icon.grow(slotStack.getCount());
+                        horizontalLayout.item(slotStack);
                     }
                 }
             }
-
-            return icon;
         }
-        return ItemStack.EMPTY;
-    }
-
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass()
-    {
-        return Collections.singletonList(TELogPile.class);
-    }
-
-    @Override
-    public boolean appendBody()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean overrideIcon()
-    {
-        return true;
     }
 }

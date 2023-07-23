@@ -80,6 +80,8 @@ tfc.command.work.nonentity=Entity not found.
 # Gui
 
 ## Tooltips
+tfc.tooltip.temperature=Temperature: %s
+tfc.tooltip.rainfall=Rainfall: %s`
 tfc.tooltip.food_expiry_date.days=Will decay in about %s day(s)!
 tfc.tooltip.toolclass=§fTool Class:§7 %s
 tfc.tooltip.toolclasses=§fTool Classes:

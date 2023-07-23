@@ -5,20 +5,12 @@
 
 package net.dries007.tfc.compat.top.providers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
-
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.compat.top.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
@@ -27,55 +19,56 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 
-public class BerryBushProvider implements IWailaBlock
+public class BerryBushProvider implements IProbeInfoProvider
 {
-    @Nonnull
     @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
-        List<String> currentTooltip = new ArrayList<>();
-        IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockBerryBush)
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":berry_bush";
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData probeHitData) {
+        var blockPos = probeHitData.getPos();
+        var state = world.getBlockState(blockPos);
+
+        if (state.getBlock() instanceof BlockBerryBush block)
         {
-            BlockBerryBush block = (BlockBerryBush) state.getBlock();
             if (block.getBush().isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING))
             {
-                float temp = ClimateTFC.getActualTemp(world, pos);
-                float rainfall = ChunkDataTFC.getRainfall(world, pos);
-                TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+                var temp = ClimateTFC.getActualTemp(world, blockPos);
+                var rainfall = ChunkDataTFC.getRainfall(world, blockPos);
+
+                var te = Helpers.getTE(world, blockPos, TETickCounter.class);
+
                 if (te != null && block.getBush().isValidForGrowth(temp, rainfall))
                 {
                     long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                     // Don't show 100% since it still needs to check on randomTick to grow
                     float perc = Math.min(0.99F, hours / (block.getBush().getGrowthTime() * (float) ConfigTFC.General.FOOD.berryBushGrowthTimeModifier)) * 100;
                     String growth = String.format("%d%%", Math.round(perc));
-                    currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
+                    probeInfo.text(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
                 }
                 else
                 {
-                    currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
+                    probeInfo.text(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
                 }
             }
             else
             {
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.agriculture.harvesting_months").getFormattedText());
+                probeInfo.text(new TextComponentTranslation("waila.tfc.agriculture.harvesting_months").getFormattedText());
                 for (Month month : Month.values())
                 {
                     if (block.getBush().isHarvestMonth(month))
                     {
-                        currentTooltip.add(TerraFirmaCraft.getProxy().getMonthName(month, true));
+                        probeInfo.text(TerraFirmaCraft.getProxy().getMonthName(month, true));
                     }
                 }
             }
         }
-        return currentTooltip;
-    }
-
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass()
-    {
-        return Collections.singletonList(BlockBerryBush.class);
     }
 }

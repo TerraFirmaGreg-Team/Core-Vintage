@@ -30,9 +30,8 @@ public class AnimalProvider implements IProbeInfoEntityProvider
 
     @Override
     public void addProbeEntityInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, Entity entity, IProbeHitEntityData probeHitEntityData) {
-        if (entity instanceof IAnimalTFC)
+        if (entity instanceof IAnimalTFC animal)
         {
-            IAnimalTFC animal = (IAnimalTFC) entity;
             boolean familiarized = animal.getFamiliarity() > 0.15f;
             if (animal.getAdultFamiliarityCap() > 0)
             {

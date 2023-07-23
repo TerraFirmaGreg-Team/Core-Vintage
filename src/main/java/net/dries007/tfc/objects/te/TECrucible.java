@@ -85,6 +85,10 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
         }
     }
 
+    public float getTemperature() {
+        return temperature;
+    }
+
     public int addMetal(Metal metal, int amount)
     {
         int overflow = Math.max(0, alloy.getAmount() + amount - alloy.getMaxAmount()); // Amount which cannot be inserted

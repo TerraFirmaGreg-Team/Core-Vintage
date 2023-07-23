@@ -5,51 +5,44 @@
 
 package net.dries007.tfc.compat.top.providers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.te.TECrucible;
+import net.dries007.tfc.util.Helpers;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.compat.top.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.te.TECrucible;
-import net.dries007.tfc.util.Helpers;
-
-public class CrucibleProvider implements IWailaBlock
+public class CrucibleProvider implements IProbeInfoProvider
 {
-    @Nonnull
     @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
-        List<String> currentTooltip = new ArrayList<>();
-        TECrucible crucible = Helpers.getTE(world, pos, TECrucible.class);
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":crucible";
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+        var blockPos = iProbeHitData.getPos();
+        var crucible = Helpers.getTE(world, blockPos, TECrucible.class);
         if (crucible != null)
         {
             if (crucible.getAlloy().getAmount() > 0)
             {
                 Metal metal = crucible.getAlloyResult();
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.metal.output", crucible.getAlloy().getAmount(), new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
+                iProbeInfo.text(new TextComponentTranslation("waila.tfc.metal.output", crucible.getAlloy().getAmount(), new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
             }
-            float temperature = nbt.getFloat("temp");
+            float temperature = crucible.getTemperature();
             String heatTooltip = Heat.getTooltip(temperature);
             if (heatTooltip != null)
             {
-                currentTooltip.add(heatTooltip);
+                iProbeInfo.text(heatTooltip);
             }
         }
-        return currentTooltip;
-    }
-
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass()
-    {
-        return Collections.singletonList(TECrucible.class);
     }
 }

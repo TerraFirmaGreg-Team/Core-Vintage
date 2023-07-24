@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ROCK;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 
@@ -66,7 +66,7 @@ public class WorldGenLargeRocks implements IWorldGenerator
                 for (int y = -2; y <= 2; y++)
                 {
                     if (x * x + z * z + y * y > size * size) continue;
-                    world.setBlockState(start.add(x, y, z), getBlockRockMap(ROCK, RAW, rock).getDefaultState());
+                    world.setBlockState(start.add(x, y, z), getBlockRockMap(ORDINARY, RAW, rock).getDefaultState());
                 }
             }
         }

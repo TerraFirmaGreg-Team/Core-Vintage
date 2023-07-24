@@ -43,24 +43,24 @@ import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 
 public class BlockRockStair extends BlockStairs implements IRockTypeBlock {
 
-	private final RockBlockType blockType;
+	private final RockBlockType rockBlockType;
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockRockStair(RockBlockType blockType, RockVariant rockVariant, RockType rockType) {
+	public BlockRockStair(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 		super(Blocks.BRICK_STAIRS.getDefaultState());
 
-		if (BLOCK_ROCK_MAP.put(new Triple<>(blockType, rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
-		this.blockType = blockType;
+		this.rockBlockType = rockBlockType;
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
-		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + rockVariant);
+		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 		useNeighborBrightness = true;
 
-		String blockRegistryName = String.format("%s/%s/%s", blockType, rockVariant, rockType);
+		String blockRegistryName = String.format("%s/%s/%s", rockBlockType, rockVariant, rockType);
 		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(getFinalHardness());
@@ -69,7 +69,7 @@ public class BlockRockStair extends BlockStairs implements IRockTypeBlock {
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-		//OreDictionaryModule.register(this, blockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
+		//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class BlockRockStair extends BlockStairs implements IRockTypeBlock {
 					switch (rockVariant) {
 						case RAW:
 						case SMOOTH:
-							Block.spawnAsEntity(world, pos, new ItemStack(getBlockRockMap(blockType, COBBLE, rockType), 1));
+							Block.spawnAsEntity(world, pos, new ItemStack(getBlockRockMap(rockBlockType, COBBLE, rockType), 1));
 							break;
 						case COBBLE:
 							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 3));

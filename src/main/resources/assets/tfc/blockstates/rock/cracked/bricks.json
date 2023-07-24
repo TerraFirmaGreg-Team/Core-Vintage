@@ -1,0 +1,171 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "uvlock": true
+  },
+  "variants": {
+    "stonetype": {
+      "granite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/granite"
+        }
+      },
+      "diorite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/diorite"
+        }
+      },
+      "gabbro": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/gabbro"
+        }
+      },
+      "breccia": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/breccia"
+        }
+      },
+      "porphyry": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/porphyry"
+        }
+      },
+      "rhyolite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/rhyolite"
+        }
+      },
+      "basalt": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/basalt"
+        }
+      },
+      "andesite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/andesite"
+        }
+      },
+      "dacite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/dacite"
+        }
+      },
+      "peridotite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/peridotite"
+        }
+      },
+      "shale": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/shale"
+        }
+      },
+      "claystone": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/claystone"
+        }
+      },
+      "limestone": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/limestone"
+        }
+      },
+      "conglomerate": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/conglomerate"
+        }
+      },
+      "dolomite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/dolomite"
+        }
+      },
+      "chert": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/chert"
+        }
+      },
+      "chalk": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/chalk"
+        }
+      },
+      "mudstone": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/mudstone"
+        }
+      },
+      "psammolite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/psammolite"
+        }
+      },
+      "siltstone": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/siltstone"
+        }
+      },
+      "orthoquartzite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/orthoquartzite"
+        }
+      },
+      "slate": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/slate"
+        }
+      },
+      "phyllite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/phyllite"
+        }
+      },
+      "schist": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/schist"
+        }
+      },
+      "gneiss": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/gneiss"
+        }
+      },
+      "marble": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/marble"
+        }
+      },
+      "catlinite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/catlinite"
+        }
+      },
+      "blueschist": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/blueschist"
+        }
+      },
+      "greenschist": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/greenschist"
+        }
+      },
+      "novaculite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/novaculite"
+        }
+      },
+      "steatite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/steatite"
+        }
+      },
+      "komatiite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cracked/bricks/komatiite"
+        }
+      }
+    }
+  }
+}

@@ -8,6 +8,8 @@ package net.dries007.tfc.types;
 import java.util.Arrays;
 import javax.annotation.Nullable;
 
+import net.dries007.tfc.api.types2.rock.RockBlockType;
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -69,6 +71,10 @@ import net.dries007.tfc.util.skills.SmithingSkill;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.Metal.ItemType.*;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
+import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
+import static net.dries007.tfc.api.types2.rock.RockVariant.SMOOTH;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 import static net.dries007.tfc.objects.fluids.FluidsTFC.*;
 import static net.dries007.tfc.types.DefaultMetals.*;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
@@ -708,11 +714,10 @@ public final class DefaultRecipes
     public static void onRegisterChiselRecipeEvent(RegistryEvent.Register<ChiselRecipe> event)
     {
         // Rock smoothing
-        for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-        {
-            Block rawRock = BlockRockVariant.get(rock, Rock.Type.RAW);
-            IBlockState smoothRock = BlockRockVariant.get(rock, Rock.Type.SMOOTH).getDefaultState();
-            event.getRegistry().register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rock.getRegistryName().getPath()));
+        for (RockType rockType : RockType.values()) {
+            Block rawRock = getBlockRockMap(ORDINARY, RAW, rockType);
+            IBlockState smoothRock = getBlockRockMap(ORDINARY, SMOOTH, rockType).getDefaultState();
+            event.getRegistry().register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rockType.getName()));
         }
 
         // Alabaster smoothing

@@ -37,26 +37,28 @@ import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 
 public class BlockRockFallable extends Block implements IRockTypeBlock {
 
-	private final RockVariant blockVariant;
-	private final RockType stoneType;
+	private final RockBlockType rockBlockType;
+	private final RockVariant rockVariant;
+	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockRockFallable(RockBlockType blockType, RockVariant rockVariant, RockType stoneType) {
+	public BlockRockFallable(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 		super(Material.SAND);
 
-		if (BLOCK_ROCK_MAP.put(new Triple<>(blockType, rockVariant, stoneType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + stoneType);
+		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 		if (rockVariant.canFall())
 		{
 			FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
 		}
 
-		this.blockVariant = rockVariant;
-		this.stoneType = stoneType;
-		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + rockVariant);
+		this.rockBlockType = rockBlockType;
+		this.rockVariant = rockVariant;
+		this.rockType = rockType;
+		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("%s/%s/%s", blockType, rockVariant, stoneType);
+		String blockRegistryName = String.format("%s/%s/%s", rockBlockType, rockVariant, rockType);
 		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
 		this.setSoundType(SoundType.GROUND);
 		this.setHardness(0.6F);
@@ -65,17 +67,17 @@ public class BlockRockFallable extends Block implements IRockTypeBlock {
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-		//OreDictionaryModule.register(this, rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(stoneType.getName()));
+		//OreDictionaryModule.register(this, rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
 	}
 
 	@Override
 	public RockVariant getRockVariant() {
-		return blockVariant;
+		return rockVariant;
 	}
 
 	@Override
 	public RockType getRockType() {
-		return stoneType;
+		return rockType;
 	}
 
 	@Override
@@ -92,14 +94,14 @@ public class BlockRockFallable extends Block implements IRockTypeBlock {
 		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
 			@Nonnull
 			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation, "stonetype=" + stoneType.getName());
+				return new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName());
 			}
 		});
 
 		ModelLoader.setCustomModelResourceLocation(
 				Item.getItemFromBlock(this),
 				this.getMetaFromState(this.getBlockState().getBaseState()),
-				new ModelResourceLocation(modelLocation, "stonetype=" + stoneType.getName()));
+				new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName()));
 	}
 
 	@Override
@@ -107,14 +109,14 @@ public class BlockRockFallable extends Block implements IRockTypeBlock {
 	public void addInformation(@Nonnull ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + stoneType.getRockCategory().getLocalizedName());
+		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
 	{
-		if (this.blockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false))
+		if (this.rockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false))
 		{
 			double d0 = (float) pos.getX() + rand.nextFloat();
 			double d1 = (double) pos.getY() - 0.05D;
@@ -126,7 +128,7 @@ public class BlockRockFallable extends Block implements IRockTypeBlock {
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		if (blockVariant == GRAVEL)
+		if (rockVariant == GRAVEL)
 		{
 			if (fortune > 3)
 			{

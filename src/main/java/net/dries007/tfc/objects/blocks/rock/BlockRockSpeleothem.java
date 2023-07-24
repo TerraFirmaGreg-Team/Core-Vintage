@@ -48,21 +48,23 @@ import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 public class BlockRockSpeleothem extends Block implements IRockTypeBlock {
 	public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
+	private final RockBlockType rockBlockType;
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockRockSpeleothem(RockBlockType blockType, RockVariant rockVariant, RockType rockType) {
+	public BlockRockSpeleothem(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
 
-		if (BLOCK_ROCK_MAP.put(new Triple<>(blockType, rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
+		this.rockBlockType = rockBlockType;
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
-		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + rockVariant);
+		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("%s/%s/%s", blockType, rockVariant, rockType);
+		String blockRegistryName = String.format("%s/%s/%s", rockBlockType, rockVariant, rockType);
 		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(getFinalHardness());
@@ -72,7 +74,7 @@ public class BlockRockSpeleothem extends Block implements IRockTypeBlock {
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 		this.setDefaultState(blockState.getBaseState().withProperty(SIZE, EnumSize.MEDIUM));
 
-		//OreDictionaryModule.register(this, blockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
+		//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
 	}
 
 	@Override

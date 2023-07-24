@@ -18,7 +18,7 @@ public enum RockBlockType implements IStringSerializable {
 	/**
 	 * Обычный блок без каких-либо доп. механик
 	 */
-	ROCK(BlockRock::new, RAW, SMOOTH, BRICK),
+	ORDINARY(BlockRock::new, RAW, SMOOTH, BRICK),
 	/**
 	 * Обычный блок, но с механикой падения
 	 */
@@ -34,23 +34,23 @@ public enum RockBlockType implements IStringSerializable {
 	/**
 	 * Обычный блок, но с механикой мха
 	 */
-	MOSSY(BlockRockMossy::new, COBBLE, BRICK);
+	MOSSY(BlockRockMossy::new, COBBLE, BRICK),
 	/**
 	 * Каменная наковальня
 	 */
-	//ANVIL(BlockRockAnvil::new, RAW);
+	ANVIL(BlockRockAnvil::new, RAW),
 	/**
 	 * Ступенька
 	 */
-	//STAIRS(BlockRockStair::new, RAW, COBBLE, BRICK, SMOOTH),
+	STAIRS(BlockRockStair::new, RAW, COBBLE, BRICK, SMOOTH),
 	/**
 	 * Двойной полублок
 	 */
-	//SLAB_DOUBLE(BlockRockSlab.Double::new, RAW, COBBLE, BRICK, SMOOTH),
+	SLAB_DOUBLE(BlockRockSlab.Double::new, RAW, COBBLE, BRICK, SMOOTH),
 	/**
 	 * Полублок
 	 */
-	//SLAB(BlockRockSlab.Half::new, RAW, COBBLE, BRICK, SMOOTH),
+	SLAB(BlockRockSlab.Half::new, RAW, COBBLE, BRICK, SMOOTH),
 	/**
 	 * Блок стены
 	 */
@@ -58,11 +58,11 @@ public enum RockBlockType implements IStringSerializable {
 	/**
 	 * Блок кнопки
 	 */
-	//BUTTON(BlockRockButton::new, RAW),
+	BUTTON(BlockRockButton::new, RAW),
 	/**
 	 * Блок нажимной пластины
 	 */
-	//PRESSURE_PLATE(BlockRockPressurePlate::new, RAW),
+	PRESSURE_PLATE(BlockRockPressurePlate::new, RAW),
 	/**
 	 * Лежачие предметы
 	 */
@@ -70,7 +70,7 @@ public enum RockBlockType implements IStringSerializable {
 	/**
 	 * Сталагмиты, сталактиты
 	 */
-	//SPELEOTHEM(BlockRockSpeleothem::new, RAW);
+	SPELEOTHEM(BlockRockSpeleothem::new, RAW);
 
 	private final TriFunction<RockBlockType, RockVariant, RockType, IRockTypeBlock> blockFactory;
 	private final RockVariant[] rockVariants;

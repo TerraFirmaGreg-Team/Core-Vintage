@@ -1,0 +1,26 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "terrafirmacraft:loose_flint",
+    "uvlock": false
+  },
+  "variants": {
+    "flint": [
+      {
+        "model": "terrafirmacraft:loose_flint"
+      },
+      {
+        "model": "terrafirmacraft:loose_flint",
+        "y": 90
+      },
+      {
+        "model": "terrafirmacraft:loose_flint",
+        "y": 180
+      },
+      {
+        "model": "terrafirmacraft:loose_flint",
+        "y": 270
+      }
+    ]
+  }
+}

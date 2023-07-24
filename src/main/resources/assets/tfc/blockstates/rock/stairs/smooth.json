@@ -1,0 +1,271 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "stairs",
+    "uvlock": true
+  },
+  "variants": {
+    "facing": {
+      "east": {},
+      "west": {
+        "y": 180,
+        "uvlock": true
+      },
+      "south": {
+        "y": 90,
+        "uvlock": true
+      },
+      "north": {
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    "half": {
+      "bottom": {},
+      "top": { "x": 180 }
+    },
+    "shape": {
+      "straight": {
+        "model": "stairs"
+      },
+      "inner_left": {
+        "model": "inner_stairs"
+      },
+      "inner_right": {
+        "model": "inner_stairs"
+      },
+      "outer_left": {
+        "model": "outer_stairs"
+      },
+      "outer_right": {
+        "model": "outer_stairs"
+      }
+    },
+    "stonetype": {
+      "granite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/granite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/granite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/granite"
+        }
+      },
+      "diorite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/diorite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/diorite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/diorite"
+        }
+      },
+      "gabbro": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/gabbro",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/gabbro",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/gabbro"
+        }
+      },
+      "breccia": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/breccia",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/breccia",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/breccia"
+        }
+      },
+      "porphyry": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/porphyry",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/porphyry",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/porphyry"
+        }
+      },
+      "rhyolite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/rhyolite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/rhyolite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/rhyolite"
+        }
+      },
+      "basalt": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/basalt",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/basalt",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/basalt"
+        }
+      },
+      "andesite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/andesite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/andesite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/andesite"
+        }
+      },
+      "dacite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/dacite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/dacite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/dacite"
+        }
+      },
+      "peridotite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/peridotite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/peridotite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/peridotite"
+        }
+      },
+      "shale": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/shale",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/shale",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/shale"
+        }
+      },
+      "claystone": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/claystone",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/claystone",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/claystone"
+        }
+      },
+      "limestone": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/limestone",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/limestone",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/limestone"
+        }
+      },
+      "conglomerate": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/conglomerate",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/conglomerate",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/conglomerate"
+        }
+      },
+      "dolomite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/dolomite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/dolomite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/dolomite"
+        }
+      },
+      "chert": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/chert",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/chert",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/chert"
+        }
+      },
+      "chalk": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/chalk",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/chalk",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/chalk"
+        }
+      },
+      "mudstone": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/mudstone",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/mudstone",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/mudstone"
+        }
+      },
+      "psammolite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/psammolite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/psammolite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/psammolite"
+        }
+      },
+      "siltstone": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/siltstone",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/siltstone",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/siltstone"
+        }
+      },
+      "orthoquartzite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/orthoquartzite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/orthoquartzite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/orthoquartzite"
+        }
+      },
+      "slate": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/slate",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/slate",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/slate"
+        }
+      },
+      "phyllite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/phyllite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/phyllite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/phyllite"
+        }
+      },
+      "schist": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/schist",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/schist",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/schist"
+        }
+      },
+      "gneiss": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/gneiss",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/gneiss",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/gneiss"
+        }
+      },
+      "marble": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/marble",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/marble",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/marble"
+        }
+      },
+      "catlinite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/catlinite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/catlinite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/catlinite"
+        }
+      },
+      "blueschist": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/blueschist",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/blueschist",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/blueschist"
+        }
+      },
+      "greenschist": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/greenschist",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/greenschist",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/greenschist"
+        }
+      },
+      "novaculite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/novaculite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/novaculite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/novaculite"
+        }
+      },
+      "steatite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/steatite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/steatite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/steatite"
+        }
+      },
+      "komatiite": {
+        "textures": {
+          "bottom": "terrafirmacraft:blocks/stonetypes/smooth/komatiite",
+          "top": "terrafirmacraft:blocks/stonetypes/smooth/komatiite",
+          "side": "terrafirmacraft:blocks/stonetypes/smooth/komatiite"
+        }
+      }
+    }
+  }
+}

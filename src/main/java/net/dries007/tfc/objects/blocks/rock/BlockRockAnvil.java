@@ -10,19 +10,24 @@ import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.api.util.IRockTypeBlock;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -39,26 +44,36 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ROCK;
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 
 @ParametersAreNonnullByDefault
-public class BlockRockAnvil extends BlockRock
-{
+public class BlockRockAnvil extends Block implements IRockTypeBlock {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
-    private final RockType rockType;
+    private final RockBlockType rockBlockType;
     private final RockVariant rockVariant;
+    private final RockType rockType;
+    private final ResourceLocation modelLocation;
 
     public BlockRockAnvil(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
-        super(rockBlockType, rockVariant, rockType);
+        super(Material.ROCK);
 
         if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
             throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
+        this.rockBlockType = rockBlockType;
         this.rockVariant = rockVariant;
         this.rockType = rockType;
+        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
+
+        String blockRegistryName = String.format("%s/%s/%s", rockBlockType, rockVariant, rockType);
+
+        this.setRegistryName(MOD_ID, blockRegistryName);
 
         FallingBlockManager.Specification spec = new FallingBlockManager.Specification(rockVariant.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
         FallingBlockManager.registerFallable(this, spec);
@@ -256,7 +271,7 @@ public class BlockRockAnvil extends BlockRock
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
     {
-        return new ItemStack(getBlockRockMap(ROCK,RAW, rockType));
+        return new ItemStack(getBlockRockMap(ORDINARY,RAW, rockType));
     }
 
     @Override
@@ -266,4 +281,23 @@ public class BlockRockAnvil extends BlockRock
         return ItemRock.get(rockType);
     }
 
+    @Override
+    public void onModelRegister() {
+
+    }
+
+    @Override
+    public RockVariant getRockVariant() {
+        return null;
+    }
+
+    @Override
+    public RockType getRockType() {
+        return null;
+    }
+
+    @Override
+    public ItemBlock getItemBlock() {
+        return null;
+    }
 }

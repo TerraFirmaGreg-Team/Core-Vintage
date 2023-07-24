@@ -124,7 +124,7 @@ import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ROCK;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockType.BASALT;
 import static net.dries007.tfc.api.types2.rock.RockType.RHYOLITE;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
@@ -1042,11 +1042,11 @@ public final class CommonEventHandler
         {
             if (event.getNewState().getBlock() == Blocks.STONE)
             {
-                event.setNewState(getBlockRockMap(ROCK, RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                event.setNewState(getBlockRockMap(ORDINARY, RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
             }
             if (event.getNewState().getBlock() == Blocks.COBBLESTONE)
             {
-                event.setNewState(getBlockRockMap(ROCK, RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                event.setNewState(getBlockRockMap(ORDINARY, RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
             }
         }
     }

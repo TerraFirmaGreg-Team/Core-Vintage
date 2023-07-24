@@ -1,0 +1,480 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "up": {
+      "true": {
+        "submodel": {
+          "wall_post": {
+            "model": "wall_post"
+          }
+        }
+      },
+      "false": {}
+    },
+    "north": {
+      "true": {
+        "submodel": {
+          "wall_north": {
+            "model": "wall_side",
+            "uvlock": true
+          }
+        }
+      },
+      "false": {}
+    },
+    "east": {
+      "true": {
+        "submodel": {
+          "wall_east": {
+            "model": "wall_side",
+            "y": 90,
+            "uvlock": true
+          }
+        }
+      },
+      "false": {}
+    },
+    "south": {
+      "true": {
+        "submodel": {
+          "wall_south": {
+            "model": "wall_side",
+            "y": 180,
+            "uvlock": true
+          }
+        }
+      },
+      "false": {}
+    },
+    "west": {
+      "true": {
+        "submodel": {
+          "wall_west": {
+            "model": "wall_side",
+            "y": 270,
+            "uvlock": true
+          }
+        }
+      },
+      "false": {}
+    },
+    "stonetype": {
+      "granite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/granite"
+        }
+      },
+      "diorite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/diorite"
+        }
+      },
+      "gabbro": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/gabbro"
+        }
+      },
+      "breccia": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/breccia"
+        }
+      },
+      "porphyry": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/porphyry"
+        }
+      },
+      "rhyolite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/rhyolite"
+        }
+      },
+      "basalt": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/basalt"
+        }
+      },
+      "andesite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/andesite"
+        }
+      },
+      "dacite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/dacite"
+        }
+      },
+      "peridotite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/peridotite"
+        }
+      },
+      "shale": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/shale"
+        }
+      },
+      "claystone": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/claystone"
+        }
+      },
+      "limestone": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/limestone"
+        }
+      },
+      "conglomerate": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/conglomerate"
+        }
+      },
+      "dolomite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/dolomite"
+        }
+      },
+      "chert": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/chert"
+        }
+      },
+      "chalk": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/chalk"
+        }
+      },
+      "mudstone": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/mudstone"
+        }
+      },
+      "psammolite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/psammolite"
+        }
+      },
+      "siltstone": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/siltstone"
+        }
+      },
+      "orthoquartzite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/orthoquartzite"
+        }
+      },
+      "slate": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/slate"
+        }
+      },
+      "phyllite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/phyllite"
+        }
+      },
+      "schist": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/schist"
+        }
+      },
+      "gneiss": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/gneiss"
+        }
+      },
+      "marble": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/marble"
+        }
+      },
+      "catlinite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/catlinite"
+        }
+      },
+      "blueschist": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/blueschist"
+        }
+      },
+      "greenschist": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/greenschist"
+        }
+      },
+      "novaculite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/novaculite"
+        }
+      },
+      "steatite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/steatite"
+        }
+      },
+      "komatiite": {
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/komatiite"
+        }
+      }
+    },
+    "inventory=granite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/granite"
+        }
+      }
+    ],
+    "inventory=diorite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/diorite"
+        }
+      }
+    ],
+    "inventory=gabbro": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/gabbro"
+        }
+      }
+    ],
+    "inventory=breccia": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/breccia"
+        }
+      }
+    ],
+    "inventory=porphyry": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/porphyry"
+        }
+      }
+    ],
+    "inventory=rhyolite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/rhyolite"
+        }
+      }
+    ],
+    "inventory=basalt": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/basalt"
+        }
+      }
+    ],
+    "inventory=andesite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/andesite"
+        }
+      }
+    ],
+    "inventory=dacite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/dacite"
+        }
+      }
+    ],
+    "inventory=peridotite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/peridotite"
+        }
+      }
+    ],
+    "inventory=shale": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/shale"
+        }
+      }
+    ],
+    "inventory=claystone": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/claystone"
+        }
+      }
+    ],
+    "inventory=limestone": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/limestone"
+        }
+      }
+    ],
+    "inventory=conglomerate": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/conglomerate"
+        }
+      }
+    ],
+    "inventory=dolomite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/dolomite"
+        }
+      }
+    ],
+    "inventory=chert": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/chert"
+        }
+      }
+    ],
+    "inventory=chalk": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/chalk"
+        }
+      }
+    ],
+    "inventory=mudstone": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/mudstone"
+        }
+      }
+    ],
+    "inventory=psammolite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/psammolite"
+        }
+      }
+    ],
+    "inventory=siltstone": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/siltstone"
+        }
+      }
+    ],
+    "inventory=orthoquartzite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/orthoquartzite"
+        }
+      }
+    ],
+    "inventory=slate": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/slate"
+        }
+      }
+    ],
+    "inventory=phyllite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/phyllite"
+        }
+      }
+    ],
+    "inventory=schist": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/schist"
+        }
+      }
+    ],
+    "inventory=gneiss": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/gneiss"
+        }
+      }
+    ],
+    "inventory=marble": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/marble"
+        }
+      }
+    ],
+    "inventory=catlinite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/catlinite"
+        }
+      }
+    ],
+    "inventory=blueschist": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/blueschist"
+        }
+      }
+    ],
+    "inventory=greenschist": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/greenschist"
+        }
+      }
+    ],
+    "inventory=novaculite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/novaculite"
+        }
+      }
+    ],
+    "inventory=steatite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/steatite"
+        }
+      }
+    ],
+    "inventory=komatiite": [
+      {
+        "model": "wall_inventory",
+        "textures": {
+          "wall": "terrafirmacraft:blocks/stonetypes/smooth/komatiite"
+        }
+      }
+    ]
+  }
+}

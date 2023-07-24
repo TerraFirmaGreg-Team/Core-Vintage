@@ -44,20 +44,22 @@ import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
  */
 public class BlockRockMossy extends Block implements IRockTypeBlock {
 
-	private final RockType stoneType;
+	private final RockBlockType rockBlockType;
 	private final RockVariant rockVariant;
+	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockRockMossy(RockBlockType blockType, RockVariant rockVariant, RockType stoneType) {
+	public BlockRockMossy(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
-		if (BLOCK_ROCK_MAP.put(new Triple<>(blockType, rockVariant, stoneType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + stoneType);
+		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
+		this.rockBlockType = rockBlockType;
 		this.rockVariant = rockVariant;
-		this.stoneType = stoneType;
-		this.modelLocation = new ResourceLocation(MOD_ID, blockType + "/" + rockVariant);
+		this.rockType = rockType;
+		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("%s/%s/%s", blockType, rockVariant, stoneType);
+		String blockRegistryName = String.format("%s/%s/%s", rockBlockType, rockVariant, rockType);
 		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(getFinalHardness());
@@ -66,7 +68,7 @@ public class BlockRockMossy extends Block implements IRockTypeBlock {
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-		//OreDictionaryModule.register(this, blockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(stoneType.getName()));
+		//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
 	}
 
 	@Override
@@ -76,7 +78,7 @@ public class BlockRockMossy extends Block implements IRockTypeBlock {
 
 	@Override
 	public RockType getRockType() {
-		return stoneType;
+		return rockType;
 	}
 
 	@Override
@@ -100,21 +102,21 @@ public class BlockRockMossy extends Block implements IRockTypeBlock {
 					Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек мха
 					switch (rockVariant) {
 						case COBBLE:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(3) + 4));
+							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(3) + 4));
 							break;
 						case BRICK:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(2) + 4));
+							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 4));
 							break;
 					}
 				} else if (heldItem == HARD_HAMMER.get()) {
 					Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек мха
 					switch (rockVariant) {
 						case COBBLE:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + stoneType.getName()), new Random().nextInt(3) + 4));
+							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(3) + 4));
 							Block.spawnAsEntity(world, pos, new ItemStack(Items.CLAY_BALL, new Random().nextInt(2))); //TODO кусочек глины?
 							break;
 						case BRICK:
-							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get("brick/" + stoneType.getName()), new Random().nextInt(3) + 3));
+							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get("brick/" + rockType.getName()), new Random().nextInt(3) + 3));
 							break;
 					}
 				}
@@ -134,7 +136,7 @@ public class BlockRockMossy extends Block implements IRockTypeBlock {
 		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
 			@Nonnull
 			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation, "stonetype=" + stoneType.getName());
+				return new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName());
 			}
 		});
 
@@ -142,7 +144,7 @@ public class BlockRockMossy extends Block implements IRockTypeBlock {
 		ModelLoader.setCustomModelResourceLocation(
 				Item.getItemFromBlock(this),
 				this.getMetaFromState(this.getBlockState().getBaseState()),
-				new ModelResourceLocation(modelLocation, "stonetype=" + stoneType.getName()));
+				new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName()));
 	}
 
 	@Override
@@ -150,7 +152,7 @@ public class BlockRockMossy extends Block implements IRockTypeBlock {
 	public void addInformation(@Nonnull ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + stoneType.getRockCategory().getLocalizedName());
+		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
 	}
 
 	@Nonnull

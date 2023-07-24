@@ -22,7 +22,7 @@ import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ROCK;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 import static net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC.getRock3;
@@ -61,7 +61,7 @@ public class WorldGenFissure implements IWorldGenerator
             return;
         }
 
-        final IBlockState rock = getBlockRockMap(ROCK, RAW, getRock3(world, start)).getDefaultState();
+        final IBlockState rock = getBlockRockMap(ORDINARY, RAW, getRock3(world, start)).getDefaultState();
 
         int depth = 2 + random.nextInt(3);
         int radius = 1 + random.nextInt(2);

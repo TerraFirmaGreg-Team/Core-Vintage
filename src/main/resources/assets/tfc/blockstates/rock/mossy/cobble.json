@@ -1,0 +1,203 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "terrafirmacraft:mossy",
+    "uvlock": true
+  },
+  "variants": {
+    "stonetype": {
+      "granite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/granite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "diorite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/diorite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "gabbro": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/gabbro",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "breccia": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/breccia",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "porphyry": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/porphyry",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "rhyolite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/rhyolite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "basalt": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/basalt",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "andesite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/andesite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "dacite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/dacite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "peridotite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/peridotite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "shale": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/shale",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "claystone": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/claystone",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "limestone": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/limestone",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "conglomerate": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/conglomerate",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "dolomite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/dolomite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "chert": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/chert",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "chalk": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/chalk",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "mudstone": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/mudstone",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "psammolite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/psammolite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "siltstone": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/siltstone",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "orthoquartzite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/orthoquartzite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "slate": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/slate",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "phyllite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/phyllite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "schist": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/schist",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "gneiss": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/gneiss",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "marble": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/marble",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "catlinite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/catlinite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "blueschist": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/blueschist",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "greenschist": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/greenschist",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "novaculite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/novaculite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "steatite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/steatite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      },
+      "komatiite": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/stonetypes/cobble/komatiite",
+          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/cobble"
+        }
+      }
+    }
+  }
+}

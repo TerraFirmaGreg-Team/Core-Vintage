@@ -8,7 +8,7 @@ import static net.dries007.tfc.api.types2.rock.RockCategory.*;
 
 
 /**
- * Перечисление, которое представляет различные типы камня.
+ * Перечисление, которое представляет различные типы камня. 20 типов
  */
 @Nonnull
 public enum RockType implements IStringSerializable {
@@ -17,7 +17,6 @@ public enum RockType implements IStringSerializable {
 	GRANITE(IGNEOUS_INTRUSIVE),
 	DIORITE(IGNEOUS_INTRUSIVE),
 	GABBRO(IGNEOUS_INTRUSIVE),
-	BRECCIA(IGNEOUS_INTRUSIVE),
 
 	// Sedimentary
 	SHALE(SEDIMENTARY),
@@ -27,17 +26,12 @@ public enum RockType implements IStringSerializable {
 	DOLOMITE(SEDIMENTARY),
 	CHERT(SEDIMENTARY),
 	CHALK(SEDIMENTARY),
-	MUDSTONE(SEDIMENTARY),
-	PSAMMOLITE(SEDIMENTARY),
-	SILTSTONE(SEDIMENTARY),
 
 	// igneous_extrusive
 	RHYOLITE(IGNEOUS_EXTRUSIVE),
 	BASALT(IGNEOUS_EXTRUSIVE),
 	ANDESITE(IGNEOUS_EXTRUSIVE),
 	DACITE(IGNEOUS_EXTRUSIVE),
-	PORPHYRY(IGNEOUS_EXTRUSIVE),
-	PERIDOTITE(IGNEOUS_EXTRUSIVE),
 
 	// Metamorphic
 	QUARTZITE(METAMORPHIC),
@@ -45,13 +39,7 @@ public enum RockType implements IStringSerializable {
 	PHYLLITE(METAMORPHIC),
 	SCHIST(METAMORPHIC),
 	GNEISS(METAMORPHIC),
-	MARBLE(METAMORPHIC),
-	CATLINITE(METAMORPHIC),
-	BLUESCHIST(METAMORPHIC),
-	GREENSCHIST(METAMORPHIC),
-	NOVACULITE(METAMORPHIC),
-	STEATITE(METAMORPHIC),
-	KOMATIITE(METAMORPHIC);
+	MARBLE(METAMORPHIC);
 
 	public static final RockType[] VALUES = values();
 	public static RockType valueOf(int i) {

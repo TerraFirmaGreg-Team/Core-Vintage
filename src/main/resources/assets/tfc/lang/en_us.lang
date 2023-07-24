@@ -1204,6 +1204,7 @@ jei.category.tfc.rock_layer=Rock Layer Ores
 jei.category.tfc.vein=Vein Information
 jei.category.tfc.welding=Welding recipes
 jei.category.tfc.scraping=Scraping recipes
+jei.category.tfc.unmold=Unmold recipes
 
 ## JEI Tooltips
 jei.tooltips.tfc.barrel.instant=Instant

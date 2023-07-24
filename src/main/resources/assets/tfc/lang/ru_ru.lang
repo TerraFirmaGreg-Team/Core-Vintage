@@ -1181,6 +1181,8 @@ jei.category.tfc.quern=Жёрнов
 jei.category.tfc.rock_layer=Руды породного слоя
 jei.category.tfc.vein=Информация о жилах
 jei.category.tfc.welding=Рецепты сварки
+jei.category.tfc.scraping=Рецепты очистки кожи
+jei.category.tfc.unmold=Рецепты разбора форм
 
 ## JEI Tooltips
 jei.tooltips.tfc.barrel.instant=Мгновенно

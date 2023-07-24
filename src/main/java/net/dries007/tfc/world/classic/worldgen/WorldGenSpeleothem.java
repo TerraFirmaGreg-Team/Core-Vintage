@@ -104,7 +104,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 		Block block = state.getBlock();
 		for (RockType rockType : RockType.values()) {
 			if (getBlockRockMap(ORDINARY, RAW, rockType) == block) {
-				return getBlockRockMap(SPELEOTHEM, RockVariant.SPELEOTHEM, rockType);
+				return getBlockRockMap(SPELEOTHEM, RAW, rockType);
 			}
 		}
 

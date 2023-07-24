@@ -3,7 +3,6 @@ package net.dries007.tfc.api.types2.rock;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.client.TFCSounds;
-import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nullable;
@@ -22,7 +21,7 @@ public enum RockVariant implements IStringSerializable {
 	GRAVEL(0, 2.0f, 0f, VERTICAL_AND_HORIZONTAL),
 	SAND(0, 0.5f, 0f, VERTICAL_AND_HORIZONTAL),
 	ANVIL(0, 2.0f, 10f, COLLAPSABLE),
-	SPIKE(0, 4f, 10f, null);
+	SPELEOTHEM(0, 4f, 10f, null);
 
 
 	public static final RockVariant[] VALUES = RockVariant.values();

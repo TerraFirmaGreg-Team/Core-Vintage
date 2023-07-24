@@ -9,12 +9,13 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
+import net.dries007.tfc.api.types2.rock.RockCategory;
 
 public interface IRockObject
 {
@@ -25,7 +26,7 @@ public interface IRockObject
      * @return The rock, or null if it isn't relavant / doesn't exist
      */
     @Nullable
-    Rock getRock(ItemStack stack);
+    RockType getRock(ItemStack stack);
 
     @Nonnull
     RockCategory getRockCategory(ItemStack stack);
@@ -41,7 +42,7 @@ public interface IRockObject
     default void addRockInfo(ItemStack stack, List<String> text)
     {
         text.add("");
-        Rock rock = getRock(stack);
+        RockType rock = getRock(stack);
         if (rock != null) text.add("Rock: " + rock.toString());
         text.add("Category: " + getRockCategory(stack).toString());
     }

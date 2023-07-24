@@ -11,6 +11,7 @@ import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
@@ -37,11 +38,11 @@ public class PlacedItemProvider implements IProbeInfoProvider
 
             if (stack.getItem() instanceof ItemRock pebble)
             {
-                Rock rock = pebble.getRock(stack);
-                if (rock.isFluxStone())
-                {
-                    iProbeInfo.text(new TextComponentTranslation("waila.tfc.flux_stone").getFormattedText());
-                }
+                RockType rock = pebble.getRock(stack);
+//                if (rock.isFluxStone())
+//                {
+//                    iProbeInfo.text(new TextComponentTranslation("waila.tfc.flux_stone").getFormattedText());
+//                }
 
             }
         }

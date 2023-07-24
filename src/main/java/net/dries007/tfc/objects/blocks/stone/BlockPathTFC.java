@@ -7,6 +7,7 @@ package net.dries007.tfc.objects.blocks.stone;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariantFallable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;

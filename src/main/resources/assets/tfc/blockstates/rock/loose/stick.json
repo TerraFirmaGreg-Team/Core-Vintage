@@ -1,0 +1,26 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "terrafirmacraft:loose_stick",
+    "uvlock": false
+  },
+  "variants": {
+    "stick": [
+      {
+        "model": "terrafirmacraft:loose_stick"
+      },
+      {
+        "model": "terrafirmacraft:loose_stick",
+        "y": 90
+      },
+      {
+        "model": "terrafirmacraft:loose_stick",
+        "y": 180
+      },
+      {
+        "model": "terrafirmacraft:loose_stick",
+        "y": 270
+      }
+    ]
+  }
+}

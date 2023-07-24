@@ -10,12 +10,13 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.item.ItemStack;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
+import net.dries007.tfc.api.types2.rock.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -23,21 +24,21 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 @ParametersAreNonnullByDefault
 public class ItemBrickTFC extends ItemTFC implements IRockObject
 {
-    private static final Map<Rock, ItemBrickTFC> MAP = new HashMap<>();
+    private static final Map<RockType, ItemBrickTFC> MAP = new HashMap<>();
 
-    public static ItemBrickTFC get(Rock ore)
+    public static ItemBrickTFC get(RockType ore)
     {
         return MAP.get(ore);
     }
 
-    public static ItemStack get(Rock ore, int amount)
+    public static ItemStack get(RockType ore, int amount)
     {
         return new ItemStack(MAP.get(ore), amount);
     }
 
-    private final Rock rock;
+    private final RockType rock;
 
-    public ItemBrickTFC(Rock rock)
+    public ItemBrickTFC(RockType rock)
     {
         this.rock = rock;
         if (MAP.put(rock, this) != null) throw new IllegalStateException("There can only be one.");
@@ -62,7 +63,7 @@ public class ItemBrickTFC extends ItemTFC implements IRockObject
 
     @Nonnull
     @Override
-    public Rock getRock(ItemStack stack)
+    public RockType getRock(ItemStack stack)
     {
         return rock;
     }

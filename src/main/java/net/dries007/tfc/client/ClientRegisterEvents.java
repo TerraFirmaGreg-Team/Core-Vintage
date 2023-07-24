@@ -10,6 +10,9 @@ import javax.annotation.Nonnull;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
+import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.objects.blocks.rock.BlockRock;
+import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.minecraft.block.*;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -150,6 +153,8 @@ public final class ClientRegisterEvents
         }
 
         // BLOCKS - STATE MAPPERS //
+
+        BlockRock.BLOCK_ROCK_MAP.values().forEach(IHasModel::onModelRegister);
 
         // Blocks with Ignored Properties
         for (Block block : BlocksTFC.getAllFluidBlocks())

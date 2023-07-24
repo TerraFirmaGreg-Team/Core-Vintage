@@ -6,25 +6,21 @@
 package net.dries007.tfc.world.classic.chunkdata;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.nbt.*;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.registries.ForgeRegistry;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.NBTBuilder;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -61,17 +57,17 @@ public final class ChunkDataTFC
         return data == null ? EMPTY : data;
     }
 
-    public static Rock getRock1(World world, BlockPos pos)
+    public static RockType getRock1(World world, BlockPos pos)
     {
         return get(world, pos).getRockLayer1(pos.getX() & 15, pos.getZ() & 15);
     }
 
-    public static Rock getRock2(World world, BlockPos pos)
+    public static RockType getRock2(World world, BlockPos pos)
     {
         return get(world, pos).getRockLayer2(pos.getX() & 15, pos.getZ() & 15);
     }
 
-    public static Rock getRock3(World world, BlockPos pos)
+    public static RockType getRock3(World world, BlockPos pos)
     {
         return get(world, pos).getRockLayer3(pos.getX() & 15, pos.getZ() & 15);
     }
@@ -111,7 +107,7 @@ public final class ChunkDataTFC
         return get(world, pos).getFishPopulation();
     }
 
-    public static Rock getRockHeight(World world, BlockPos pos)
+    public static RockType getRockHeight(World world, BlockPos pos)
     {
         return get(world, pos).getRockLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
     }
@@ -184,32 +180,32 @@ public final class ChunkDataTFC
         return initialized;
     }
 
-    public Rock getRock1(BlockPos pos)
+    public RockType getRock1(BlockPos pos)
     {
         return getRock1(pos.getX() & 15, pos.getY() & 15);
     }
 
-    public Rock getRock1(int x, int z)
+    public RockType getRock1(int x, int z)
     {
         return getRockLayer1(x, z);
     }
 
-    public Rock getRock2(BlockPos pos)
+    public RockType getRock2(BlockPos pos)
     {
         return getRock2(pos.getX() & 15, pos.getY() & 15);
     }
 
-    public Rock getRock2(int x, int z)
+    public RockType getRock2(int x, int z)
     {
         return getRockLayer2(x, z);
     }
 
-    public Rock getRock3(BlockPos pos)
+    public RockType getRock3(BlockPos pos)
     {
         return getRock3(pos.getX() & 15, pos.getY() & 15);
     }
 
-    public Rock getRock3(int x, int z)
+    public RockType getRock3(int x, int z)
     {
         return getRockLayer3(x, z);
     }
@@ -224,12 +220,12 @@ public final class ChunkDataTFC
         return getDrainageLayer(x, z).valueInt;
     }
 
-    public Rock getRockHeight(BlockPos pos)
+    public RockType getRockHeight(BlockPos pos)
     {
         return getRockHeight(pos.getX(), pos.getY(), pos.getZ());
     }
 
-    public Rock getRockHeight(int x, int y, int z)
+    public RockType getRockHeight(int x, int y, int z)
     {
         return getRockLayerHeight(x & 15, y, z & 15);
     }
@@ -331,19 +327,19 @@ public final class ChunkDataTFC
     }
 
     // Directly accessing the DataLayer is discouraged (except for getting the name). It's easy to use the wrong value.
-    public Rock getRockLayer1(int x, int z)
+    public RockType getRockLayer1(int x, int z)
     {
-        return ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getValue(rockLayer1[z << 4 | x]);
+        return RockType.valueOf(rockLayer1[z << 4 | x]);
     }
 
-    public Rock getRockLayer2(int x, int z)
+    public RockType getRockLayer2(int x, int z)
     {
-        return ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getValue(rockLayer2[z << 4 | x]);
+        return RockType.valueOf(rockLayer2[z << 4 | x]);
     }
 
-    public Rock getRockLayer3(int x, int z)
+    public RockType getRockLayer3(int x, int z)
     {
-        return ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getValue(rockLayer3[z << 4 | x]);
+        return RockType.valueOf(rockLayer3[z << 4 | x]);
     }
 
     public DataLayer getStabilityLayer(int x, int z)
@@ -356,8 +352,7 @@ public final class ChunkDataTFC
         return drainageLayer[z << 4 | x];
     }
 
-    public Rock getRockLayerHeight(int x, int y, int z)
-    {
+    public RockType getRockLayerHeight(int x, int y, int z) {
         int offset = getSeaLevelOffset(x, z);
         if (y <= ROCKLAYER3 + offset) return getRockLayer3(x, z);
         if (y <= ROCKLAYER2 + offset) return getRockLayer2(x, z);

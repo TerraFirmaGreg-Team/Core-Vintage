@@ -14,12 +14,20 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.types2.rock.RockBlockType;
+import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.types2.rock.RockVariant;
+import net.dries007.tfc.api.types2.soil.SoilBlockType;
+import net.dries007.tfc.api.types2.soil.SoilType;
+import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.devices.*;
 import net.dries007.tfc.objects.blocks.metal.*;
 import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.soil.BlockPeat;
+import net.dries007.tfc.objects.blocks.soil.BlockPeatGrass;
 import net.dries007.tfc.objects.blocks.stone.*;
 import net.dries007.tfc.objects.blocks.wood.*;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -272,6 +280,28 @@ public final class BlocksTFC {
 		Builder<ItemBlock> normalItemBlocks = ImmutableList.builder();
 		Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();
 
+		for (RockType rockType : RockType.values()) {
+			for (RockBlockType rockBlockType : RockBlockType.values()) {
+				for (RockVariant rockVariant : rockBlockType.getRockVariants()) {
+					Block block = (Block) rockBlockType.createBlock(rockVariant, rockType);
+
+					TerraFirmaCraft.LOGGER.debug("Registering block: {}", block.getRegistryName());
+					r.register(block);
+				}
+			}
+		}
+
+		for (SoilType soilType : SoilType.values()) {
+			for (SoilBlockType soilBlockType : SoilBlockType.values()) {
+				for (SoilVariant soilVariant : soilBlockType.getSoilVariants()) {
+					Block block = (Block) soilBlockType.createBlock(soilVariant, soilType);
+
+					TerraFirmaCraft.LOGGER.debug("Registering block: {}", block.getRegistryName());
+					r.register(block);
+				}
+			}
+		}
+
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "debug", new BlockDebug(), CT_MISC)));
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), CT_ROCK_BLOCKS)));
@@ -342,9 +372,7 @@ public final class BlocksTFC {
 			Builder<BlockRockVariant> b = ImmutableList.builder();
 			for (Rock.Type type : Rock.Type.values()) {
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-					if (type != Rock.Type.ANVIL) {
-						b.add(register(r, type.name().toLowerCase() + "/" + rock.getRegistryName().getPath(), BlockRockVariant.create(rock, type), CT_ROCK_BLOCKS));
-					} else if (rock.getRockCategory().hasAnvil()) {
+					if (type == Rock.Type.ANVIL) {
 						// Anvil registration is special, is has it's own folder
 						register(r, "anvil/" + rock.getRegistryName().getPath(), BlockRockVariant.create(rock, type));
 					}
@@ -361,37 +389,37 @@ public final class BlocksTFC {
 			});
 		}
 
-		{
-			// Add resultingState to the registered collapsable blocks.
-			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-				for (Rock.Type type : Rock.Type.values()) {
-					FallingBlockManager.Specification spec = type.getFallingSpecification();
-					switch (type) {
-						case ANVIL:
-							if (!rock.getRockCategory().hasAnvil()) {
-								break;
-							}
-						case RAW:
-							spec = new FallingBlockManager.Specification(spec);
-							spec.setResultingState(BlockRockVariant.get(rock, COBBLE).getDefaultState());
-							FallingBlockManager.registerFallable(BlockRockVariant.get(rock, RAW), spec);
-							break;
-						case SMOOTH:
-							spec = new FallingBlockManager.Specification(spec);
-							spec.setResultingState(BlockRockVariant.get(rock, COBBLE).getDefaultState());
-							FallingBlockManager.registerFallable(BlockRockVariant.get(rock, SMOOTH).getDefaultState().withProperty(BlockRockSmooth.CAN_FALL, true), spec);
-							break;
-						default:
-							Rock.Type nonGrassType = type.getNonGrassVersion();
-							if (nonGrassType != type) {
-								spec = new FallingBlockManager.Specification(spec);
-								spec.setResultingState(BlockRockVariant.get(rock, nonGrassType).getDefaultState());
-							}
-							FallingBlockManager.registerFallable(BlockRockVariant.get(rock, type), spec);
-					}
-				}
-			}
-		}
+//		{
+//			// Add resultingState to the registered collapsable blocks.
+//			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
+//				for (Rock.Type type : Rock.Type.values()) {
+//					FallingBlockManager.Specification spec = type.getFallingSpecification();
+//					switch (type) {
+//						case ANVIL:
+//							if (!rock.getRockCategory().hasAnvil()) {
+//								break;
+//							}
+//						case RAW:
+//							spec = new FallingBlockManager.Specification(spec);
+//							spec.setResultingState(BlockRockVariant.get(rock, COBBLE).getDefaultState());
+//							FallingBlockManager.registerFallable(BlockRockVariant.get(rock, RAW), spec);
+//							break;
+//						case SMOOTH:
+//							spec = new FallingBlockManager.Specification(spec);
+//							spec.setResultingState(BlockRockVariant.get(rock, COBBLE).getDefaultState());
+//							FallingBlockManager.registerFallable(BlockRockVariant.get(rock, SMOOTH).getDefaultState().withProperty(BlockRockSmooth.CAN_FALL, true), spec);
+//							break;
+//						default:
+//							Rock.Type nonGrassType = type.getNonGrassVersion();
+//							if (nonGrassType != type) {
+//								spec = new FallingBlockManager.Specification(spec);
+//								spec.setResultingState(BlockRockVariant.get(rock, nonGrassType).getDefaultState());
+//							}
+//							FallingBlockManager.registerFallable(BlockRockVariant.get(rock, type), spec);
+//					}
+//				}
+//			}
+//		}
 
 		{
 			Builder<BlockLogTFC> logs = ImmutableList.builder();
@@ -478,36 +506,17 @@ public final class BlocksTFC {
 			Builder<BlockStairsTFC> stairs = new Builder<>();
 			Builder<BlockRockSlabTFC.Half> slab = new Builder<>();
 
-			// Walls
-			for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS})
-				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-					b.add(register(r, ("wall/" + type.name() + "/" + rock.getRegistryName().getPath()).toLowerCase(), new BlockWallTFC(BlockRockVariant.get(rock, type)), CT_DECORATIONS));
-			// Stairs
-			for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS})
-				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-					stairs.add(register(r, "stairs/" + (type.name() + "/" + rock.getRegistryName().getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_DECORATIONS));
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				stairs.add(register(r, "stairs/wood/" + wood.getRegistryName().getPath(), new BlockStairsTFC(wood), CT_DECORATIONS));
 
 			// Full slabs are the same as full blocks, they are not saved to a list, they are kept track of by the halfslab version.
-			for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS})
-				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-					register(r, "double_slab/" + (type.name() + "/" + rock.getRegistryName().getPath()).toLowerCase(), new BlockRockSlabTFC.Double(rock, type));
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				register(r, "double_slab/wood/" + wood.getRegistryName().getPath(), new BlockRockSlabTFC.Double(wood));
 
 			// Slabs
-			for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS})
-				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-					slab.add(register(r, "slab/" + (type.name() + "/" + rock.getRegistryName().getPath()).toLowerCase(), new BlockRockSlabTFC.Half(rock, type), CT_DECORATIONS));
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				slab.add(register(r, "slab/wood/" + wood.getRegistryName().getPath(), new BlockRockSlabTFC.Half(wood), CT_DECORATIONS));
 
-			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-				// Redstone things
-				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "stone/button/" + rock.getRegistryName().getPath().toLowerCase(), new BlockButtonStoneTFC(rock), CT_DECORATIONS)));
-				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "stone/pressure_plate/" + rock.getRegistryName().getPath().toLowerCase(), new BlockPressurePlateTFC(rock), CT_DECORATIONS)));
-			}
 
 			allWallBlocks = b.build();
 			allStairsBlocks = stairs.build();

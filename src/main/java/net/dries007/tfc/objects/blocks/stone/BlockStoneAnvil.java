@@ -247,11 +247,11 @@ public class BlockStoneAnvil extends BlockRockVariant
         return new ItemStack(BlockRockRaw.get(rock, Rock.Type.RAW));
     }
 
-    @Override
-    @Nonnull
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        return ItemRock.get(rock);
-    }
+//    @Override
+//    @Nonnull
+//    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+//    {
+//        return ItemRock.get(rock);
+//    }
 
 }

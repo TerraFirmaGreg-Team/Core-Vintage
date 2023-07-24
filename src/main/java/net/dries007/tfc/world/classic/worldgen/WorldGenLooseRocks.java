@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;
 
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -83,13 +84,13 @@ public class WorldGenLooseRocks implements IWorldGenerator
                     0,
                     zoff + random.nextInt(16)
                 );
-                Rock rock = baseChunkData.getRock1(pos);
+                RockType rock = baseChunkData.getRock1(pos);
                 generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), rock);
             }
         }
     }
 
-    protected void generateRock(World world, BlockPos pos, Rock rock)
+    protected void generateRock(World world, BlockPos pos, RockType rock)
     {
         // Use air, so it doesn't replace other replaceable world gen
         // This matches the check in BlockPlacedItemFlat for if the block can stay

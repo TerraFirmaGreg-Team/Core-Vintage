@@ -5,14 +5,27 @@
 
 package net.dries007.tfc.world.classic;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.types2.soil.SoilBlockType;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.util.calendar.Month;
+import net.dries007.tfc.util.climate.ClimateHelper;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
+import net.dries007.tfc.world.classic.genlayers.datalayers.drainage.GenDrainageLayer;
+import net.dries007.tfc.world.classic.genlayers.datalayers.ph.GenPHLayer;
+import net.dries007.tfc.world.classic.mapgen.MapGenCavesTFC;
+import net.dries007.tfc.world.classic.mapgen.MapGenRavineTFC;
+import net.dries007.tfc.world.classic.mapgen.MapGenRiverRavine;
+import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
+import net.dries007.tfc.world.classic.worldgen.*;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.state.IBlockState;
@@ -34,30 +47,15 @@ import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateHelper;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
-import net.dries007.tfc.world.classic.genlayers.datalayers.drainage.GenDrainageLayer;
-import net.dries007.tfc.world.classic.genlayers.datalayers.ph.GenPHLayer;
-import net.dries007.tfc.world.classic.mapgen.MapGenCavesTFC;
-import net.dries007.tfc.world.classic.mapgen.MapGenRavineTFC;
-import net.dries007.tfc.world.classic.mapgen.MapGenRiverRavine;
-import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
-import net.dries007.tfc.world.classic.worldgen.*;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
-import static net.dries007.tfc.api.types2.rock.RockVariant.*;
-import static net.dries007.tfc.api.types2.soil.SoilBlockType.FALLING;
+import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
+import static net.dries007.tfc.api.types2.rock.RockVariant.SAND;
 import static net.dries007.tfc.api.types2.soil.SoilType.LOAM;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
@@ -94,8 +92,7 @@ public class ChunkGenTFC implements IChunkGenerator
     private static final IWorldGenerator FRUIT_TREE_GEN = new WorldGenFruitTrees();
     private static final IWorldGenerator WILD_CROPS_GEN = new WorldGenWildCrops();
     private static final IWorldGenerator LOOSE_ROCKS_GEN = new WorldGenLooseRocks(true);
-    private static final IWorldGenerator STALACTITE_GEN = new WorldGenSpikes(true, 300);
-    private static final IWorldGenerator STALAGMITE_GEN = new WorldGenSpikes(false, 300);
+    private static final IWorldGenerator SPELEOTHEM_GEN = new WorldGenSpeleothem();
     private static final IWorldGenerator WATERFALL_GEN = new WorldGenFalls(FRESH_WATER, 15);
     private static final IWorldGenerator LAVAFALL_GEN = new WorldGenFalls(Blocks.FLOWING_LAVA.getDefaultState(), 5);
     private static final IWorldGenerator SNOW_ICE_GEN = new WorldGenSnowIce();
@@ -316,8 +313,7 @@ public class ChunkGenTFC implements IChunkGenerator
         LOOSE_ROCKS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         WATERFALL_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         LAVAFALL_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
-        STALACTITE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
-        STALAGMITE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
+        SPELEOTHEM_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         SNOW_ICE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
 
         if (TerrainGen.populate(this, world, rand, chunkX, chunkZ, false, ANIMALS))
@@ -551,8 +547,8 @@ public class ChunkGenTFC implements IChunkGenerator
                 int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
                 int smooth = -1;
 
-                IBlockState surfaceBlock = getBlockSoilMap(SoilBlockType.ORDINARY,  rainfall + 1.3 * rand.nextGaussian() >= 150f ? GRASS : DRY_GRASS, LOAM).getDefaultState(); // TODO rock1 заменить на soil
-                IBlockState subSurfaceBlock = getBlockSoilMap(FALLING, DIRT, LOAM).getDefaultState(); // TODO rock1 заменить на soil
+                IBlockState surfaceBlock = getBlockSoilMap(rainfall + 1.3 * rand.nextGaussian() >= 150f ? GRASS : DRY_GRASS, LOAM).getDefaultState(); // TODO rock1 заменить на soil
+                IBlockState subSurfaceBlock = getBlockSoilMap(DIRT, LOAM).getDefaultState(); // TODO rock1 заменить на soil
 
                 if (BiomesTFC.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x + 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z - 1)))
                 {

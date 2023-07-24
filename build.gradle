@@ -412,7 +412,7 @@ idea.project.settings {
 }
 
 apply from: 'publishing.gradle'
-apply from: 'extra.gradle'
+//apply from: 'extra.gradle'
 
 void assertProperty(String propertyName) {
     def property = project.findProperty(propertyName)

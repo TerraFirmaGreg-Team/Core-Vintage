@@ -1,6 +1,6 @@
 def stones = [
         rocktype: [
-                RockVariant  : [    "raw", "cobble", "bricks", "smooth", "overgrown", "overgrown_snowed", "gravel"],
+                RockVariant  : [    "raw", "cobble", "bricks", "smooth", "gravel", "sand", "anvil", "speleothem"],
                 RockBlockType: [    "ordinary"      : ["raw",  "brick", "smooth"],
                                     "falling"       : ["gravel", "cobble", "sand"],
                                     "mossy"         : ["cobble", "brick"],
@@ -18,13 +18,13 @@ def stones = [
                                     "speleothem"    : ["raw"]],
                 RockType     : [
                                     // igneous_intrusive
-                                    "granite", "diorite", "gabbro", "breccia",
+                                    "granite", "diorite", "gabbro",
                                     // sedimentary
-                                    "shale", "claystone", "limestone", "conglomerate", "dolomite", "chert", "chalk", "mudstone", "psammolite", "siltstone",
+                                    "shale", "claystone", "limestone", "conglomerate", "dolomite", "chert", "chalk",
                                     // igneous_extrusive
-                                    "rhyolite", "basalt", "andesite", "dacite", "porphyry", "peridotite",
+                                    "rhyolite", "basalt", "andesite", "dacite",
                                     // metamorphic"
-                                    "quartzite", "slate", "phyllite", "schist", "gneiss", "marble", "catlinite", "blueschist", "greenschist", "novaculite", "steatite", "komatiite"]
+                                    "quartzite", "slate", "phyllite", "schist", "gneiss", "marble"]
         ],
         soiltype: [
                 SoilVariant  : [    "dirt", "grass", "dry_grass", "path", "clay", "clay_grass", "farmland", "rooted_dirt", "mud", "mud_bricks", "drying_bricks"],

@@ -25,7 +25,6 @@ import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
-import static net.dries007.tfc.api.types2.soil.SoilBlockType.*;
 import static net.dries007.tfc.api.types2.soil.SoilType.SILT;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
 import static net.dries007.tfc.objects.blocks.soil.BlockSoil.getBlockSoilMap;
@@ -73,12 +72,12 @@ public class WorldGenSoilPits implements IWorldGenerator
                     final IBlockState current = world.getBlockState(pos);
                     if (BlocksTFC.isDirt(current))
                     {
-                        world.setBlockState(pos, getBlockSoilMap(FALLING, CLAY, SILT).getDefaultState(), 2); //TODO ChunkDataTFC.getRockHeight(world, pos)
+                        world.setBlockState(pos, getBlockSoilMap(CLAY, SILT).getDefaultState(), 2); //TODO ChunkDataTFC.getRockHeight(world, pos)
                         flag = true;
                     }
                     else if (BlocksTFC.isGrass(current))
                     {
-                        world.setBlockState(pos, getBlockSoilMap(ORDINARY, CLAY_GRASS, SILT).getDefaultState(), 2); // ChunkDataTFC.getRockHeight(world, pos)
+                        world.setBlockState(pos, getBlockSoilMap(CLAY_GRASS, SILT).getDefaultState(), 2); // ChunkDataTFC.getRockHeight(world, pos)
                         flag = true;
                     }
                 }

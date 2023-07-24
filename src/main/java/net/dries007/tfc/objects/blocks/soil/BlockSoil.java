@@ -60,7 +60,6 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
     public static final Map<Pair<SoilVariant, SoilType>, ISoilTypeBlock> BLOCK_SOIL_MAP = new LinkedHashMap<>();
-
     public static Block getBlockSoilMap(SoilVariant soilVariant, SoilType soilType) {
         return (Block) BLOCK_SOIL_MAP.get(new Pair<>(soilVariant, soilType));
     }
@@ -209,7 +208,8 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, "soiltype=" + soilType.getName());
+                return new ModelResourceLocation(modelLocation,
+                        "soiltype=" + soilType.getName());
             }
         });
 

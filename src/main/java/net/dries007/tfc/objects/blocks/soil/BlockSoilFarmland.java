@@ -225,7 +225,7 @@ public class BlockSoilFarmland extends BlockSoilFallable implements ISoilTypeBlo
 //    }
 
     private void turnToDirt(World world, BlockPos pos) {
-        world.setBlockState(pos, getBlockSoilMap(DIRT, SILT).getDefaultState()); //TODO тип земли
+        world.setBlockState(pos, getBlockSoilMap(DIRT, SILT).getDefaultState()); //TODO SILT на тип земли
         AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
         for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb)) {
             double d0 = Math.min(axisalignedbb.maxY - axisalignedbb.minY, axisalignedbb.maxY - entity.getEntityBoundingBox().minY);

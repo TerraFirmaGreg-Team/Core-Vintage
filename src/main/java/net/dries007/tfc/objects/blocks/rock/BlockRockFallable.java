@@ -37,7 +37,6 @@ import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 
 public class BlockRockFallable extends Block implements IRockTypeBlock {
 
-	private final RockBlockType rockBlockType;
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
@@ -48,12 +47,10 @@ public class BlockRockFallable extends Block implements IRockTypeBlock {
 		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
-		if (rockVariant.canFall())
-		{
+		if (rockVariant.canFall()) {
 			FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
 		}
 
-		this.rockBlockType = rockBlockType;
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
@@ -111,8 +108,7 @@ public class BlockRockFallable extends Block implements IRockTypeBlock {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
-	{
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
 		if (this.rockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false))
 		{
 			double d0 = (float) pos.getX() + rand.nextFloat();
@@ -123,19 +119,13 @@ public class BlockRockFallable extends Block implements IRockTypeBlock {
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		if (rockVariant == GRAVEL)
-		{
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		if (rockVariant == GRAVEL) {
 			if (fortune > 3)
-			{
 				fortune = 3;
-			}
 
 			if (rand.nextInt(10 - fortune * 3) == 0)
-			{
 				return Items.FLINT;
-			}
 		}
 		return super.getItemDropped(state, rand, fortune);
 	}

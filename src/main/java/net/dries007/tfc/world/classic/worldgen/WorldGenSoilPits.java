@@ -77,7 +77,7 @@ public class WorldGenSoilPits implements IWorldGenerator
                     }
                     else if (BlocksTFC.isGrass(current))
                     {
-                        world.setBlockState(pos, getBlockSoilMap(CLAY_GRASS, SILT).getDefaultState(), 2); // ChunkDataTFC.getRockHeight(world, pos)
+                        world.setBlockState(pos, getBlockSoilMap(CLAY_GRASS, SILT).getDefaultState(), 2); //TODO ChunkDataTFC.getRockHeight(world, pos)
                         flag = true;
                     }
                 }

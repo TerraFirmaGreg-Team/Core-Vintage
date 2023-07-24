@@ -114,28 +114,29 @@ public class BlockRockVariant extends Block implements IItemSize {
 	}
 
 	public static BlockRockVariant create(Rock rock, Rock.Type type) {
-		switch (type) {
-			case RAW:
-				return new BlockRockRaw(type, rock);
-			case ANVIL:
-				return new BlockStoneAnvil(type, rock);
-			case FARMLAND:
-				return new BlockFarmlandTFC(type, rock);
-			case PATH:
-				return new BlockPathTFC(type, rock);
-			case GRASS:
-			case DRY_GRASS:
-			case CLAY_GRASS:
-				return new BlockRockVariantConnected(type, rock);
-			case SAND:
-			case DIRT:
-			case CLAY:
-			case GRAVEL:
-			case COBBLE:
-				return new BlockRockVariantFallable(type, rock);
-			default:
-				return new BlockRockVariant(type, rock);
-		}
+//		switch (type) {
+//			case RAW:
+//				return new BlockRockRaw(type, rock);
+//			case ANVIL:
+//				return new BlockStoneAnvil(type, rock);
+//			case FARMLAND:
+//				return new BlockFarmlandTFC(type, rock);
+//			case PATH:
+//				return new BlockPathTFC(type, rock);
+//			case GRASS:
+//			case DRY_GRASS:
+//			case CLAY_GRASS:
+//				return new BlockRockVariantConnected(type, rock);
+//			case SAND:
+//			case DIRT:
+//			case CLAY:
+//			case GRAVEL:
+//			case COBBLE:
+//				return new BlockRockVariantFallable(type, rock);
+//			default:
+//				return new BlockRockVariant(type, rock);
+//		}
+		return null;
 	}
 
 	public BlockRockVariant getVariant(Rock.Type t) {

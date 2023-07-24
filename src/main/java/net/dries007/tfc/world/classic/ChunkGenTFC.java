@@ -53,9 +53,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import static net.dries007.tfc.api.types2.rock.RockBlockType.FALLING;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
-import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
-import static net.dries007.tfc.api.types2.rock.RockVariant.SAND;
+import static net.dries007.tfc.api.types2.rock.RockVariant.*;
 import static net.dries007.tfc.api.types2.soil.SoilType.LOAM;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
@@ -659,11 +659,11 @@ public class ChunkGenTFC implements IChunkGenerator
 
                         if (biome == BiomesTFC.BEACH || biome == BiomesTFC.OCEAN || biome == BiomesTFC.DEEP_OCEAN)
                         {
-                            subSurfaceBlock = surfaceBlock = getBlockRockMap(ORDINARY, RAW, rock1).getDefaultState(); //TODO SAND
+                            subSurfaceBlock = surfaceBlock = getBlockRockMap(FALLING, SAND, rock1).getDefaultState();
                         }
                         else if (biome == BiomesTFC.GRAVEL_BEACH)
                         {
-                            subSurfaceBlock = surfaceBlock = getBlockRockMap(ORDINARY, RAW, rock1).getDefaultState();  //TODO GRAVEL
+                            subSurfaceBlock = surfaceBlock = getBlockRockMap(FALLING, GRAVEL, rock1).getDefaultState();
                         }
 
                         if (smooth == -1)
@@ -715,7 +715,7 @@ public class ChunkGenTFC implements IChunkGenerator
                                     for (int c = 1; c < dirtH && !mountains && !cliffMap[colIndex]; c++) {
                                         outp.setBlockState(x, y - c + yOffset, z, subSurfaceBlock);
                                         if (c > 1 + (5 - drainage.valueInt))
-                                            outp.setBlockState(x, y - c + yOffset, z, getBlockRockMap(ORDINARY, RAW, rock1).getDefaultState()); //TODO GRAVEL
+                                            outp.setBlockState(x, y - c + yOffset, z, getBlockRockMap(FALLING, GRAVEL, rock1).getDefaultState());
                                     }
                                 }
                             }
@@ -726,13 +726,13 @@ public class ChunkGenTFC implements IChunkGenerator
                         {
                             if (biome != BiomesTFC.SWAMPLAND) // Most areas have gravel and sand bottoms
                             {
-                                if (outp.getBlockState(x, y + yOffset, z) != getBlockRockMap(ORDINARY, RAW, rock1).getDefaultState() && rand.nextInt(5) != 0) //TODO SAND
-                                    outp.setBlockState(x, y + yOffset, z, getBlockRockMap(ORDINARY, RAW, rock1).getDefaultState()); //TODO GRAVEL
+                                if (outp.getBlockState(x, y + yOffset, z) != getBlockRockMap(FALLING, SAND, rock1).getDefaultState() && rand.nextInt(5) != 0)
+                                    outp.setBlockState(x, y + yOffset, z, getBlockRockMap(FALLING, GRAVEL, rock1).getDefaultState());
                             }
                             else // Swamp biomes have bottoms that are mostly dirt
                             {
-                                if (outp.getBlockState(x, y + yOffset, z) != getBlockRockMap(ORDINARY, RAW, rock1).getDefaultState()) //TODO SAND
-                                    outp.setBlockState(x, y + yOffset, z, BlockRockVariant.get(Rock.GRANITE, Rock.Type.DIRT).getDefaultState()); // TODO rock1 заменить на soil
+                                if (outp.getBlockState(x, y + yOffset, z) != getBlockRockMap(FALLING, SAND, rock1).getDefaultState())
+                                    outp.setBlockState(x, y + yOffset, z, getBlockSoilMap(DIRT, LOAM).getDefaultState()); // TODO LOAM заменить на soil ип
                             }
                         }
                     }
@@ -765,8 +765,8 @@ public class ChunkGenTFC implements IChunkGenerator
                         {
                             if (outp.getBlockState(x, y + 1, z) == SALT_WATER)
                             {
-                                outp.setBlockState(x, y, z, getBlockRockMap(ORDINARY, RAW, rock1).getDefaultState()); //TODO SAND
-                                outp.setBlockState(x, y - 1, z, getBlockRockMap(ORDINARY, RAW, rock1).getDefaultState()); //TODO SAND
+                                outp.setBlockState(x, y, z, getBlockRockMap(FALLING, SAND, rock1).getDefaultState());
+                                outp.setBlockState(x, y - 1, z, getBlockRockMap(FALLING, SAND, rock1).getDefaultState());
                             }
                         }
                     }

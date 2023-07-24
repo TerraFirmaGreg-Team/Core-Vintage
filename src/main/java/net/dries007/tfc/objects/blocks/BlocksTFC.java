@@ -46,7 +46,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.BlockFluidBase;
@@ -112,8 +111,6 @@ public final class BlocksTFC {
 	private static ImmutableList<ItemBlockBarrel> allBarrelItemBlocks;
 
 	private static ImmutableList<BlockFluidBase> allFluidBlocks;
-	private static ImmutableList<IRockTypeBlock> allBlockRockVariants;
-	private static ImmutableList<BlockWallTFC> allWallBlocks;
 	private static ImmutableList<BlockLogTFC> allLogBlocks;
 	private static ImmutableList<BlockLeavesTFC> allLeafBlocks;
 	private static ImmutableList<BlockFenceGateTFC> allFenceGateBlocks;
@@ -159,10 +156,6 @@ public final class BlocksTFC {
 		return allFluidBlocks;
 	}
 
-	public static ImmutableList<IRockTypeBlock> getAllBlockRockVariants() {
-		return allBlockRockVariants;
-	}
-
 	public static ImmutableList<BlockLogTFC> getAllLogBlocks() {
 		return allLogBlocks;
 	}
@@ -176,9 +169,6 @@ public final class BlocksTFC {
 		return allFenceGateBlocks;
 	}
 
-	public static ImmutableList<BlockWallTFC> getAllWallBlocks() {
-		return allWallBlocks;
-	}
 
 	public static ImmutableList<BlockSaplingTFC> getAllSaplingBlocks() {
 		return allSaplingBlocks;
@@ -499,7 +489,6 @@ public final class BlocksTFC {
 		}
 
 		{
-			Builder<BlockWallTFC> b = ImmutableList.builder();
 			Builder<BlockStairsTFC> stairs = new Builder<>();
 			Builder<BlockRockSlabTFC.Half> slab = new Builder<>();
 
@@ -515,10 +504,8 @@ public final class BlocksTFC {
 				slab.add(register(r, "slab/wood/" + wood.getRegistryName().getPath(), new BlockRockSlabTFC.Half(wood), DECORATIONS));
 
 
-			allWallBlocks = b.build();
 			allStairsBlocks = stairs.build();
 			allSlabBlocks = slab.build();
-			allWallBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
 			allStairsBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
 		}
 

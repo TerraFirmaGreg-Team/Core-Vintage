@@ -152,8 +152,9 @@ public final class ClientRegisterEvents
 
         // BLOCKS - STATE MAPPERS //
 
-        BlockRock.BLOCK_ROCK_MAP.values().forEach(IHasModel::onModelRegister);
         BlockSoil.BLOCK_SOIL_MAP.values().forEach(IHasModel::onModelRegister);
+        BlockRock.BLOCK_ROCK_MAP.values().forEach(IHasModel::onModelRegister);
+
 
         // Blocks with Ignored Properties
         for (Block block : BlocksTFC.getAllFluidBlocks())
@@ -164,9 +165,6 @@ public final class ClientRegisterEvents
 
         for (Block block : BlocksTFC.getAllLeafBlocks())
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
-
-        for (Block block : BlocksTFC.getAllWallBlocks())
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
 
         for (Block block : BlocksTFC.getAllLogBlocks())
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockLogTFC.PLACED).build());

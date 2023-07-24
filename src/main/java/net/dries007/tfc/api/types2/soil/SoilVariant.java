@@ -5,6 +5,7 @@ import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.api.util.ISoilTypeBlock;
 import net.dries007.tfc.objects.blocks.soil.BlockSoil;
+import net.dries007.tfc.objects.blocks.soil.BlockSoilDirt;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilFallable;
 import net.minecraft.util.IStringSerializable;
 
@@ -16,13 +17,13 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTIC
 
 @MethodsReturnNonnullByDefault
 public enum SoilVariant implements IStringSerializable {
-	DIRT(VERTICAL_AND_HORIZONTAL, BlockSoilFallable::new),
-	GRASS(VERTICAL_AND_HORIZONTAL, BlockSoil::new),
-	DRY_GRASS(VERTICAL_AND_HORIZONTAL, BlockSoil::new),
-	PATH(VERTICAL_ONLY, BlockSoil::new),
-	CLAY(VERTICAL_ONLY, BlockSoilFallable::new),
-	CLAY_GRASS(VERTICAL_ONLY, BlockSoil::new),
-	FARMLAND(VERTICAL_ONLY, BlockSoil::new);
+	DIRT(VERTICAL_AND_HORIZONTAL, BlockSoilDirt::new),
+	GRASS(VERTICAL_AND_HORIZONTAL, BlockSoilDirt::new),
+	DRY_GRASS(VERTICAL_AND_HORIZONTAL, BlockSoilDirt::new),
+	PATH(VERTICAL_ONLY, BlockSoilDirt::new),
+	CLAY(VERTICAL_ONLY, BlockSoilDirt::new),
+	CLAY_GRASS(VERTICAL_ONLY, BlockSoilDirt::new),
+	FARMLAND(VERTICAL_ONLY, BlockSoilDirt::new);
 //	ROOTED_DIRT(VERTICAL_ONLY),
 //	MUD(VERTICAL_ONLY),
 //	MUD_BRICKS(VERTICAL_ONLY),

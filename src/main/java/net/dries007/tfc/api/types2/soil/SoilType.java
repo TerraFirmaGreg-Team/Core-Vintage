@@ -12,8 +12,7 @@ public enum SoilType implements IStringSerializable {
 	SILTY_LOAM;
 
 	private static final SoilType[] VALUES = values();
-	public static SoilType valueOf(int i)
-	{
+	public static SoilType valueOf(int i) {
 		return i >= 0 && i < VALUES.length ? VALUES[i] : SILT;
 	}
 

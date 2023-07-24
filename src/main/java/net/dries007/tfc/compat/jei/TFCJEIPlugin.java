@@ -173,40 +173,45 @@ public final class TFCJEIPlugin implements IModPlugin
         registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), ALLOY_UID);
 
         // Clay Knapping
+        /*
         List<KnappingRecipeWrapper> clayknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
             .filter(recipe -> recipe.getType() == KnappingType.CLAY)
             .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
-            .collect(Collectors.toList());
+            .collect(Collectors.toList());*/
 
+        /*
         registry.addRecipes(clayknapRecipes, KNAP_CLAY_UID);
         for (ItemStack stack : OreDictionary.getOres("clay"))
         {
             registry.addRecipeCatalyst(stack, KNAP_CLAY_UID);
-        }
+        }*/
 
         // Fire Clay Knapping
+        /*
         List<KnappingRecipeWrapper> fireclayknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
             .filter(recipe -> recipe.getType() == KnappingType.FIRE_CLAY)
             .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
-            .collect(Collectors.toList());
+            .collect(Collectors.toList());*/
 
+        /*
         registry.addRecipes(fireclayknapRecipes, KNAP_FIRECLAY_UID);
         for (ItemStack stack : OreDictionary.getOres("fireClay"))
         {
             registry.addRecipeCatalyst(stack, KNAP_FIRECLAY_UID);
-        }
+        }*/
 
         // Leather Knapping
+        /*
         List<KnappingRecipeWrapper> leatherknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
             .filter(recipe -> recipe.getType() == KnappingType.LEATHER)
             .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
-            .collect(Collectors.toList());
+            .collect(Collectors.toList());*/
 
-        registry.addRecipes(leatherknapRecipes, KNAP_LEATHER_UID);
-        for (ItemStack stack : OreDictionary.getOres("leather"))
-        {
-            registry.addRecipeCatalyst(stack, KNAP_LEATHER_UID);
-        }
+        //registry.addRecipes(leatherknapRecipes, KNAP_LEATHER_UID);
+        //for (ItemStack stack : OreDictionary.getOres("leather"))
+        //{
+        //    registry.addRecipeCatalyst(stack, KNAP_LEATHER_UID);
+        //}
 
         // Leather Knapping Recipes
 //        List<KnappingRecipeWrapper> stoneknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
@@ -281,12 +286,12 @@ public final class TFCJEIPlugin implements IModPlugin
         registry.addRecipes(chiselList, CHISEL_UID);
 
         //Wraps all rock layers
-        List<RockLayerWrapper> rockLayerList = TFCRegistries.ROCKS.getValuesCollection()
-            .stream()
-            .map(RockLayerWrapper::new)
-            .collect(Collectors.toList());
+        //List<RockLayerWrapper> rockLayerList = TFCRegistries.ROCKS.getValuesCollection()
+        //    .stream()
+        //    .map(RockLayerWrapper::new)
+        //    .collect(Collectors.toList());
 
-        registry.addRecipes(rockLayerList, ROCK_LAYER_UID);
+        //registry.addRecipes(rockLayerList, ROCK_LAYER_UID);
 
         // Register metal related stuff (put everything here for performance + sorted registration)
         List<UnmoldRecipeWrapper> unmoldList = new ArrayList<>();

@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.blocks.rock;
 
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.IRockTypeBlock;
 import net.dries007.tfc.api.types2.rock.RockType;
@@ -32,10 +35,11 @@ import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-public class BlockRock extends Block implements IRockTypeBlock {
+public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
 
 	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockTypeBlock> BLOCK_ROCK_MAP = new LinkedHashMap<>();
 
@@ -43,7 +47,6 @@ public class BlockRock extends Block implements IRockTypeBlock {
 		return (Block) BLOCK_ROCK_MAP.get(new Triple<>(blockType, blockVariant, stoneType));
 	}
 
-	private final RockBlockType rockBlockType;
 	private final RockType rockType;
 	private final RockVariant rockVariant;
 	private final ResourceLocation modelLocation;
@@ -54,13 +57,12 @@ public class BlockRock extends Block implements IRockTypeBlock {
 		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
-		this.rockBlockType = rockBlockType;
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 
 		String blockRegistryName = String.format("%s/%s/%s", rockBlockType, rockVariant, rockType);
-		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
+		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(getFinalHardness());
 		this.setResistance(rockVariant.getResistance());
@@ -87,6 +89,34 @@ public class BlockRock extends Block implements IRockTypeBlock {
 		//noinspection ConstantConditions
 		itemBlock.setRegistryName(this.getRegistryName());
 		return itemBlock;
+	}
+
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack stack) {
+		return Size.SMALL; // Store anywhere
+	}
+
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack stack) {
+		return Weight.LIGHT; // Stacksize = 32
+	}
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state);
+	}
+
+	@Override
+	public int quantityDropped(IBlockState state, int fortune, Random random) {
+		switch (rockVariant) {
+			case RAW:
+			case SPELEOTHEM:
+				return 1 + random.nextInt(3);
+			default:
+				return super.quantityDropped(state, fortune, random);
+		}
 	}
 
 //	@Override
@@ -132,8 +162,7 @@ public class BlockRock extends Block implements IRockTypeBlock {
 //	}
 
 	@Override
-	public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
-	}
+	public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {}
 
 	@Override
 	@SideOnly(Side.CLIENT)

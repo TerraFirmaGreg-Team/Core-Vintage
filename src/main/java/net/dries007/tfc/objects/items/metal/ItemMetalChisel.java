@@ -42,8 +42,7 @@ import net.dries007.tfc.objects.container.ContainerEmpty;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 @ParametersAreNonnullByDefault
-public class ItemMetalChisel extends ItemMetalTool
-{
+public class ItemMetalChisel extends ItemMetalTool {
     private static final int[] STAIR_PATTERN_INDICES = {0, 3, 4, 6, 7, 8};
     private static final int[] SLAB_PATTERN_INDICES = {0, 1, 2};
 

@@ -52,7 +52,7 @@ public class BlockRockButton extends BlockButtonStone implements IRockTypeBlock 
 		String blockRegistryName = String.format("%s/%s/%s", rockBlockType, rockVariant, rockType);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(0.5f);
-		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
+		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 

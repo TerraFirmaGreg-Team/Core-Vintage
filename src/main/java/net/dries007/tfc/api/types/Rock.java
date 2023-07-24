@@ -169,8 +169,7 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
             return fallingSpecification != null && fallingSpecification.canFallHorizontally();
         }
 
-        public Type getNonGrassVersion()
-        {
+        public Type getNonGrassVersion() {
             if (!isGrass) return this;
             switch (this)
             {

@@ -61,7 +61,7 @@ public class BlockRockWall extends BlockWall implements IRockTypeBlock {
 
 		String blockRegistryName = String.format("%s/%s/%s", rockBlockType, rockVariant, rockType);
 
-		this.setCreativeTab(CreativeTabsTFC.CT_ROCK_BLOCKS);
+		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(getFinalHardness());
 		this.setResistance(rockVariant.getResistance());

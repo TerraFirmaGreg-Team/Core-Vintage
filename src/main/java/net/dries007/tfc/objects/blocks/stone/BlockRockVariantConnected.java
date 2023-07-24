@@ -52,8 +52,8 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable
             }
             else if (usBlock instanceof BlockRockVariant)
             {
-                BlockRockVariant rock = ((BlockRockVariant) usBlock);
-                world.setBlockState(pos, rock.getVariant(rock.getType().getNonGrassVersion()).getDefaultState());
+                BlockRockVariant soil = ((BlockRockVariant) usBlock);
+                world.setBlockState(pos, soil.getVariant(soil.getType().getNonGrassVersion()).getDefaultState());
             }
         }
         else if (neighborLight >= 9)

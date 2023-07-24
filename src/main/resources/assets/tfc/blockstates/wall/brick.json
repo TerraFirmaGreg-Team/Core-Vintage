@@ -1,0 +1,384 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"up": {
+			"true": {
+				"submodel": {
+					"wall_post": {
+						"model": "wall_post"
+					}
+				}
+			},
+			"false": {}
+		},
+		"north": {
+			"true": {
+				"submodel": {
+					"wall_north": {
+						"model": "wall_side",
+						"uvlock": true
+					}
+				}
+			},
+			"false": {}
+		},
+		"east": {
+			"true": {
+				"submodel": {
+					"wall_east": {
+						"model": "wall_side",
+						"y": 90,
+						"uvlock": true
+					}
+				}
+			},
+			"false": {}
+		},
+		"south": {
+			"true": {
+				"submodel": {
+					"wall_south": {
+						"model": "wall_side",
+						"y": 180,
+						"uvlock": true
+					}
+				}
+			},
+			"false": {}
+		},
+		"west": {
+			"true": {
+				"submodel": {
+					"wall_west": {
+						"model": "wall_side",
+						"y": 270,
+						"uvlock": true
+					}
+				}
+			},
+			"false": {}
+		},
+		"stonetype": {
+      "granite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/granite"
+      }}, 
+      "diorite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/diorite"
+      }}, 
+      "gabbro": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/gabbro"
+      }}, 
+      "breccia": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/breccia"
+      }}, 
+      "shale": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/shale"
+      }}, 
+      "claystone": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/claystone"
+      }}, 
+      "limestone": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/limestone"
+      }}, 
+      "conglomerate": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/conglomerate"
+      }}, 
+      "dolomite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/dolomite"
+      }}, 
+      "chert": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/chert"
+      }}, 
+      "chalk": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/chalk"
+      }}, 
+      "mudstone": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/mudstone"
+      }}, 
+      "psammolite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/psammolite"
+      }}, 
+      "siltstone": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/siltstone"
+      }}, 
+      "rhyolite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/rhyolite"
+      }}, 
+      "basalt": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/basalt"
+      }}, 
+      "andesite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/andesite"
+      }}, 
+      "dacite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/dacite"
+      }}, 
+      "porphyry": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/porphyry"
+      }}, 
+      "peridotite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/peridotite"
+      }}, 
+      "quartzite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/quartzite"
+      }}, 
+      "slate": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/slate"
+      }}, 
+      "phyllite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/phyllite"
+      }}, 
+      "schist": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/schist"
+      }}, 
+      "gneiss": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/gneiss"
+      }}, 
+      "marble": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/marble"
+      }}, 
+      "catlinite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/catlinite"
+      }}, 
+      "blueschist": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/blueschist"
+      }}, 
+      "greenschist": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/greenschist"
+      }}, 
+      "novaculite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/novaculite"
+      }}, 
+      "steatite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/steatite"
+      }}, 
+      "komatiite": {
+        "textures": {
+          "wall": "tfc:blocks/stonetypes/brick/komatiite"
+      }}
+    },
+	  "inventory=granite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/granite"
+      }}
+    ],
+	  "inventory=diorite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/diorite"
+      }}
+    ],
+	  "inventory=gabbro": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/gabbro"
+      }}
+    ],
+	  "inventory=breccia": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/breccia"
+      }}
+    ],
+	  "inventory=shale": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/shale"
+      }}
+    ],
+	  "inventory=claystone": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/claystone"
+      }}
+    ],
+	  "inventory=limestone": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/limestone"
+      }}
+    ],
+	  "inventory=conglomerate": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/conglomerate"
+      }}
+    ],
+	  "inventory=dolomite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/dolomite"
+      }}
+    ],
+	  "inventory=chert": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/chert"
+      }}
+    ],
+	  "inventory=chalk": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/chalk"
+      }}
+    ],
+	  "inventory=mudstone": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/mudstone"
+      }}
+    ],
+	  "inventory=psammolite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/psammolite"
+      }}
+    ],
+	  "inventory=siltstone": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/siltstone"
+      }}
+    ],
+	  "inventory=rhyolite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/rhyolite"
+      }}
+    ],
+	  "inventory=basalt": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/basalt"
+      }}
+    ],
+	  "inventory=andesite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/andesite"
+      }}
+    ],
+	  "inventory=dacite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/dacite"
+      }}
+    ],
+	  "inventory=porphyry": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/porphyry"
+      }}
+    ],
+	  "inventory=peridotite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/peridotite"
+      }}
+    ],
+	  "inventory=quartzite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/quartzite"
+      }}
+    ],
+	  "inventory=slate": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/slate"
+      }}
+    ],
+	  "inventory=phyllite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/phyllite"
+      }}
+    ],
+	  "inventory=schist": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/schist"
+      }}
+    ],
+	  "inventory=gneiss": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/gneiss"
+      }}
+    ],
+	  "inventory=marble": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/marble"
+      }}
+    ],
+	  "inventory=catlinite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/catlinite"
+      }}
+    ],
+	  "inventory=blueschist": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/blueschist"
+      }}
+    ],
+	  "inventory=greenschist": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/greenschist"
+      }}
+    ],
+	  "inventory=novaculite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/novaculite"
+      }}
+    ],
+	  "inventory=steatite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/steatite"
+      }}
+    ],
+	  "inventory=komatiite": [{
+      "model": "wall_inventory",
+      "textures": {
+        "wall": "tfc:blocks/stonetypes/brick/komatiite"
+      }}
+    ]
+  }
+}

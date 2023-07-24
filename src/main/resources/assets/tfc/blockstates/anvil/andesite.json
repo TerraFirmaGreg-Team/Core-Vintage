@@ -4,13 +4,11 @@
   "defaults": {
     "model": "tfc:stone_anvil",
     "textures": {
-      "all": "tfc:blocks/stonetypes/raw/andesite",
-      "particle": "tfc:blocks/stonetypes/raw/andesite"
+      "all": "tfc:blocks/rock/raw/andesite",
+      "particle": "tfc:blocks/rock/raw/andesite"
     }
   },
   "variants": {
-    "normal": [
-      {}
-    ]
+    "normal": [{}]
   }
 }

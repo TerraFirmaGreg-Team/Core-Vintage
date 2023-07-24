@@ -12,7 +12,7 @@ import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
 
 public enum SoilBlockType implements IStringSerializable {
 
-	SOIL(BlockSoil::new, GRASS, DRY_GRASS, CLAY_GRASS),
+	ORDINARY(BlockSoil::new, GRASS, DRY_GRASS, CLAY_GRASS),
 	FALLING(BlockSoilFallable::new, DIRT, CLAY);
 
 	private final TriFunction<SoilBlockType, SoilVariant, SoilType, ISoilTypeBlock> blockFactory;

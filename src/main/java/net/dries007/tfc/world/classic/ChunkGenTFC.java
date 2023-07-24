@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.types2.soil.SoilBlockType;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.state.IBlockState;
@@ -57,7 +58,6 @@ import net.dries007.tfc.world.classic.worldgen.*;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.*;
 import static net.dries007.tfc.api.types2.soil.SoilBlockType.FALLING;
-import static net.dries007.tfc.api.types2.soil.SoilBlockType.SOIL;
 import static net.dries007.tfc.api.types2.soil.SoilType.LOAM;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
@@ -551,7 +551,7 @@ public class ChunkGenTFC implements IChunkGenerator
                 int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
                 int smooth = -1;
 
-                IBlockState surfaceBlock = getBlockSoilMap(SOIL,  rainfall + 1.3 * rand.nextGaussian() >= 150f ? GRASS : DRY_GRASS, LOAM).getDefaultState(); // TODO rock1 заменить на soil
+                IBlockState surfaceBlock = getBlockSoilMap(SoilBlockType.ORDINARY,  rainfall + 1.3 * rand.nextGaussian() >= 150f ? GRASS : DRY_GRASS, LOAM).getDefaultState(); // TODO rock1 заменить на soil
                 IBlockState subSurfaceBlock = getBlockSoilMap(FALLING, DIRT, LOAM).getDefaultState(); // TODO rock1 заменить на soil
 
                 if (BiomesTFC.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x + 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z - 1)))

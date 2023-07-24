@@ -1,0 +1,139 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:loose_rock",
+    "uvlock": false
+  },
+  "variants": {
+    "stonetype": {
+      "granite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/granite"
+      }}, 
+      "diorite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/diorite"
+      }}, 
+      "gabbro": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/gabbro"
+      }}, 
+      "breccia": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/breccia"
+      }}, 
+      "shale": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/shale"
+      }}, 
+      "claystone": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/claystone"
+      }}, 
+      "limestone": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/limestone"
+      }}, 
+      "conglomerate": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/conglomerate"
+      }}, 
+      "dolomite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/dolomite"
+      }}, 
+      "chert": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/chert"
+      }}, 
+      "chalk": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/chalk"
+      }}, 
+      "mudstone": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/mudstone"
+      }}, 
+      "psammolite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/psammolite"
+      }}, 
+      "siltstone": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/siltstone"
+      }}, 
+      "rhyolite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/rhyolite"
+      }}, 
+      "basalt": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/basalt"
+      }}, 
+      "andesite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/andesite"
+      }}, 
+      "dacite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/dacite"
+      }}, 
+      "porphyry": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/porphyry"
+      }}, 
+      "peridotite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/peridotite"
+      }}, 
+      "quartzite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/quartzite"
+      }}, 
+      "slate": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/slate"
+      }}, 
+      "phyllite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/phyllite"
+      }}, 
+      "schist": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/schist"
+      }}, 
+      "gneiss": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/gneiss"
+      }}, 
+      "marble": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/marble"
+      }}, 
+      "catlinite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/catlinite"
+      }}, 
+      "blueschist": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/blueschist"
+      }}, 
+      "greenschist": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/greenschist"
+      }}, 
+      "novaculite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/novaculite"
+      }}, 
+      "steatite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/steatite"
+      }}, 
+      "komatiite": {
+          "textures": {
+            "stone": "tfc:blocks/stonetypes/raw/komatiite"
+      }}
+    }
+  }
+}

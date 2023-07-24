@@ -1,0 +1,54 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:grass",
+    "textures": {
+      "particle": "tfc:blocks/soil/overlay/grass/top",
+      "top": "tfc:blocks/soil/overlay/grass/top",
+      "north": "tfc:blocks/soil/overlay/grass/side",
+      "south": "tfc:blocks/soil/overlay/grass/side",
+      "east": "tfc:blocks/soil/overlay/grass/side",
+      "west": "tfc:blocks/soil/overlay/grass/side"
+    }
+  },
+  "variants": {
+    "soiltype": {<%for (i=0; i < types.size; i++) { %>
+      "${types[i]}": {
+          "textures": {
+            "all": "tfc:blocks/soil/dirt/clay/${types[i]}"
+      }}<% if(i < types.size - 1) { %>, <%}} %>
+    },
+    "north": {
+      "true": {
+        "textures": {
+          "north": "tfc:blocks/soil/overlay/grass/top"
+        }
+      },
+      "false": {}
+    },
+    "south": {
+      "true": {
+        "textures": {
+          "south": "tfc:blocks/soil/overlay/grass/top"
+        }
+      },
+      "false": {}
+    },
+    "east": {
+      "true": {
+        "textures": {
+          "east": "tfc:blocks/soil/overlay/grass/top"
+        }
+      },
+      "false": {}
+    },
+    "west": {
+      "true": {
+        "textures": {
+          "west": "tfc:blocks/soil/overlay/grass/top"
+        }
+      },
+      "false": {}
+    }
+  }
+}

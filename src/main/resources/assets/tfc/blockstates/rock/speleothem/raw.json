@@ -3,181 +3,149 @@
   "defaults": {
     "uvlock": true,
     "transform": "forge:default-block",
-    "model": "terrafirmacraft:speleothem_medium"
+    "model": "tfc:speleothem_medium"
   },
   "variants": {
     "size": {
       "small": {
-        "model": "terrafirmacraft:speleothem_small"
+        "model": "tfc:speleothem_small"
       },
       "medium": {
-        "model": "terrafirmacraft:speleothem_medium"
+        "model": "tfc:speleothem_medium"
       },
       "big": {
-        "model": "terrafirmacraft:speleothem_big"
+        "model": "tfc:speleothem_big"
       }
     },
     "stonetype": {
       "granite": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/granite"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/granite"
+        }}, 
       "diorite": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/diorite"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/diorite"
+        }}, 
       "gabbro": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/gabbro"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/gabbro"
+        }}, 
       "breccia": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/breccia"
-        }
-      },
-      "porphyry": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/porphyry"
-        }
-      },
-      "rhyolite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/rhyolite"
-        }
-      },
-      "basalt": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/basalt"
-        }
-      },
-      "andesite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/andesite"
-        }
-      },
-      "dacite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/dacite"
-        }
-      },
-      "peridotite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/peridotite"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/breccia"
+        }}, 
       "shale": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/shale"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/shale"
+        }}, 
       "claystone": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/claystone"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/claystone"
+        }}, 
       "limestone": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/limestone"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/limestone"
+        }}, 
       "conglomerate": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/conglomerate"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/conglomerate"
+        }}, 
       "dolomite": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/dolomite"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/dolomite"
+        }}, 
       "chert": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/chert"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/chert"
+        }}, 
       "chalk": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/chalk"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/chalk"
+        }}, 
       "mudstone": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/mudstone"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/mudstone"
+        }}, 
       "psammolite": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/psammolite"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/psammolite"
+        }}, 
       "siltstone": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/siltstone"
-        }
-      },
-      "orthoquartzite": {
+          "all": "tfc:blocks/rock/raw/siltstone"
+        }}, 
+      "rhyolite": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/orthoquartzite"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/rhyolite"
+        }}, 
+      "basalt": {
+        "textures": {
+          "all": "tfc:blocks/rock/raw/basalt"
+        }}, 
+      "andesite": {
+        "textures": {
+          "all": "tfc:blocks/rock/raw/andesite"
+        }}, 
+      "dacite": {
+        "textures": {
+          "all": "tfc:blocks/rock/raw/dacite"
+        }}, 
+      "porphyry": {
+        "textures": {
+          "all": "tfc:blocks/rock/raw/porphyry"
+        }}, 
+      "peridotite": {
+        "textures": {
+          "all": "tfc:blocks/rock/raw/peridotite"
+        }}, 
+      "quartzite": {
+        "textures": {
+          "all": "tfc:blocks/rock/raw/quartzite"
+        }}, 
       "slate": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/slate"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/slate"
+        }}, 
       "phyllite": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/phyllite"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/phyllite"
+        }}, 
       "schist": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/schist"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/schist"
+        }}, 
       "gneiss": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/gneiss"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/gneiss"
+        }}, 
       "marble": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/marble"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/marble"
+        }}, 
       "catlinite": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/catlinite"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/catlinite"
+        }}, 
       "blueschist": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/blueschist"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/blueschist"
+        }}, 
       "greenschist": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/greenschist"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/greenschist"
+        }}, 
       "novaculite": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/novaculite"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/novaculite"
+        }}, 
       "steatite": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/steatite"
-        }
-      },
+          "all": "tfc:blocks/rock/raw/steatite"
+        }}, 
       "komatiite": {
         "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/raw/komatiite"
-        }
-      }
+          "all": "tfc:blocks/rock/raw/komatiite"
+        }}
     }
   }
 }

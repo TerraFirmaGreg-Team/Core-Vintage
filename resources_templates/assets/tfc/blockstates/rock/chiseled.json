@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "uvlock": true
+  },
+  "variants": {
+    "stonetype": {<%for (i=0; i < types.size; i++) { %>
+      "${types[i]}": {
+          "textures": {
+            "all": "tfc:blocks/rock/$texture_type/$texture_variant/${types[i]}"
+      }}<% if(i < types.size - 1) { %>, <%}} %>
+    }
+  }
+}

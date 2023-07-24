@@ -1,0 +1,26 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cube_all"
+  },
+  "variants": {
+    "soiltype": {
+      "silt": {
+          "textures": {
+            "all": "tfc:blocks/soil/dirt/clay/silt"
+      }}, 
+      "loam": {
+          "textures": {
+            "all": "tfc:blocks/soil/dirt/clay/loam"
+      }}, 
+      "sandy_loam": {
+          "textures": {
+            "all": "tfc:blocks/soil/dirt/clay/sandy_loam"
+      }}, 
+      "silty_loam": {
+          "textures": {
+            "all": "tfc:blocks/soil/dirt/clay/silty_loam"
+      }}
+    }
+  }
+}

@@ -1,203 +1,171 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "terrafirmacraft:mossy",
+    "model": "tfc:mossy",
     "uvlock": true
   },
   "variants": {
     "stonetype": {
       "granite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/granite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/granite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "diorite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/diorite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/diorite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "gabbro": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/gabbro",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/gabbro",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "breccia": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/breccia",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
-      "porphyry": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/porphyry",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
-      "rhyolite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/rhyolite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
-      "basalt": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/basalt",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
-      "andesite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/andesite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
-      "dacite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/dacite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
-      "peridotite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/peridotite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/breccia",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "shale": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/shale",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/shale",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "claystone": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/claystone",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/claystone",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "limestone": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/limestone",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/limestone",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "conglomerate": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/conglomerate",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/conglomerate",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "dolomite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/dolomite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/dolomite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "chert": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/chert",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/chert",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "chalk": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/chalk",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/chalk",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "mudstone": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/mudstone",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/mudstone",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "psammolite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/psammolite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/psammolite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "siltstone": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/siltstone",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
-      "orthoquartzite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/orthoquartzite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/siltstone",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
+      "rhyolite": {
+          "textures": {
+            "all": "tfc:blocks/rock/brick/rhyolite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
+      "basalt": {
+          "textures": {
+            "all": "tfc:blocks/rock/brick/basalt",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
+      "andesite": {
+          "textures": {
+            "all": "tfc:blocks/rock/brick/andesite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
+      "dacite": {
+          "textures": {
+            "all": "tfc:blocks/rock/brick/dacite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
+      "porphyry": {
+          "textures": {
+            "all": "tfc:blocks/rock/brick/porphyry",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
+      "peridotite": {
+          "textures": {
+            "all": "tfc:blocks/rock/brick/peridotite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
+      "quartzite": {
+          "textures": {
+            "all": "tfc:blocks/rock/brick/quartzite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "slate": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/slate",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/slate",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "phyllite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/phyllite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/phyllite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "schist": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/schist",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/schist",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "gneiss": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/gneiss",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/gneiss",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "marble": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/marble",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/marble",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "catlinite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/catlinite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/catlinite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "blueschist": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/blueschist",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/blueschist",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "greenschist": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/greenschist",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/greenschist",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "novaculite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/novaculite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/novaculite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "steatite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/steatite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/brick/steatite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}, 
       "komatiite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/brick/komatiite",
-          "overlay": "terrafirmacraft:blocks/stonetypes/overlay/mossy/brick"
-        }
-      }
+          "textures": {
+            "all": "tfc:blocks/rock/brick/komatiite",
+            "overlay": "tfc:blocks/rock/overlay/mossy/brick"
+      }}
     }
   }
 }

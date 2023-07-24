@@ -1,0 +1,54 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "stairs",
+    "uvlock": true
+  },
+  "variants": {
+    "facing": {
+      "east": {},
+      "west": {
+        "y": 180,
+        "uvlock": true
+      },
+      "south": {
+        "y": 90,
+        "uvlock": true
+      },
+      "north": {
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    "half": {
+      "bottom": {},
+      "top": { "x": 180 }
+    },
+    "shape": {
+      "straight": {
+        "model": "stairs"
+      },
+      "inner_left": {
+        "model": "inner_stairs"
+      },
+      "inner_right": {
+        "model": "inner_stairs"
+      },
+      "outer_left": {
+        "model": "outer_stairs"
+      },
+      "outer_right": {
+        "model": "outer_stairs"
+      }
+    },
+    "stonetype": {<%for (i=0; i < types.size; i++) { %>
+      "${types[i]}": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/$texture_variant/${types[i]}",
+          "top": "tfc:blocks/rock/$texture_variant/${types[i]}",
+          "side": "tfc:blocks/rock/$texture_variant/${types[i]}"
+        }}<% if(i < types.size - 1) { %>, <%}
+      } %>
+    }
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:mossy",
+    "uvlock": true
+  },
+  "variants": {
+    "stonetype": {
+      "granite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/granite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "diorite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/diorite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "gabbro": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/gabbro",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "breccia": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/breccia",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "shale": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/shale",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "claystone": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/claystone",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "limestone": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/limestone",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "conglomerate": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/conglomerate",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "dolomite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/dolomite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "chert": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/chert",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "chalk": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/chalk",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "mudstone": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/mudstone",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "psammolite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/psammolite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "siltstone": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/siltstone",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "rhyolite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/rhyolite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "basalt": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/basalt",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "andesite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/andesite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "dacite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/dacite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "porphyry": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/porphyry",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "peridotite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/peridotite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "quartzite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/quartzite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "slate": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/slate",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "phyllite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/phyllite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "schist": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/schist",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "gneiss": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/gneiss",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "marble": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/marble",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "catlinite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/catlinite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "blueschist": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/blueschist",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "greenschist": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/greenschist",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "novaculite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/novaculite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "steatite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/steatite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}, 
+      "komatiite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/brick/komatiite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/brick"
+      }}
+    }
+  }
+}

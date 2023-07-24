@@ -1,0 +1,14 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cube_all"
+  },
+  "variants": {
+    "soiltype": {<%for (i=0; i < types.size; i++) { %>
+      "${types[i]}": {
+          "textures": {
+            "all": "tfc:blocks/soil/dirt/clay/${types[i]}"
+      }}<% if(i < types.size - 1) { %>, <%}} %>
+    }
+  }
+}

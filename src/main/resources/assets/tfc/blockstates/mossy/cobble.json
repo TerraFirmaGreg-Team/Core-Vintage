@@ -1,0 +1,171 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:mossy",
+    "uvlock": true
+  },
+  "variants": {
+    "stonetype": {
+      "granite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/granite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "diorite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/diorite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "gabbro": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/gabbro",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "breccia": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/breccia",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "shale": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/shale",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "claystone": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/claystone",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "limestone": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/limestone",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "conglomerate": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/conglomerate",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "dolomite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/dolomite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "chert": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/chert",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "chalk": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/chalk",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "mudstone": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/mudstone",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "psammolite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/psammolite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "siltstone": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/siltstone",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "rhyolite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/rhyolite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "basalt": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/basalt",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "andesite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/andesite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "dacite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/dacite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "porphyry": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/porphyry",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "peridotite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/peridotite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "quartzite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/quartzite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "slate": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/slate",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "phyllite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/phyllite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "schist": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/schist",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "gneiss": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/gneiss",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "marble": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/marble",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "catlinite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/catlinite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "blueschist": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/blueschist",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "greenschist": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/greenschist",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "novaculite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/novaculite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "steatite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/steatite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}, 
+      "komatiite": {
+          "textures": {
+            "all": "tfc:blocks/stonetypes/cobble/komatiite",
+            "overlay": "tfc:blocks/stonetypes/overlay/mossy/cobble"
+      }}
+    }
+  }
+}

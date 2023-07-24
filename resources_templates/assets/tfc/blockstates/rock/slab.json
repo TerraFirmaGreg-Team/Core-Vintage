@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "upper_slab"
+  },
+  "variants": {
+    "half": {
+      "bottom": {
+        "model": "half_slab"
+      },
+      "top": {
+        "model": "upper_slab"
+      }
+    },
+    "stonetype": {<%for (i=0; i < types.size; i++) { %>
+      "${types[i]}": {
+          "textures": {
+            "bottom": "tfc:blocks/rock/$texture_variant/${types[i]}",
+            "top": "tfc:blocks/rock/$texture_variant/${types[i]}",
+            "side": "tfc:blocks/rock/$texture_variant/${types[i]}"
+          }}<% if(i < types.size - 1) { %>, <%}} %>
+    }
+  }
+}

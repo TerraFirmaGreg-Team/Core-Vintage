@@ -7,165 +7,133 @@
   "variants": {
     "stonetype": {
       "granite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/granite"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/granite"
+      }}, 
       "diorite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/diorite"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/diorite"
+      }}, 
       "gabbro": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/gabbro"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/gabbro"
+      }}, 
       "breccia": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/breccia"
-        }
-      },
-      "porphyry": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/porphyry"
-        }
-      },
-      "rhyolite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/rhyolite"
-        }
-      },
-      "basalt": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/basalt"
-        }
-      },
-      "andesite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/andesite"
-        }
-      },
-      "dacite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/dacite"
-        }
-      },
-      "peridotite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/peridotite"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/breccia"
+      }}, 
       "shale": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/shale"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/shale"
+      }}, 
       "claystone": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/claystone"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/claystone"
+      }}, 
       "limestone": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/limestone"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/limestone"
+      }}, 
       "conglomerate": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/conglomerate"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/conglomerate"
+      }}, 
       "dolomite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/dolomite"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/dolomite"
+      }}, 
       "chert": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/chert"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/chert"
+      }}, 
       "chalk": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/chalk"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/chalk"
+      }}, 
       "mudstone": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/mudstone"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/mudstone"
+      }}, 
       "psammolite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/psammolite"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/psammolite"
+      }}, 
       "siltstone": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/siltstone"
-        }
-      },
-      "orthoquartzite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/orthoquartzite"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/siltstone"
+      }}, 
+      "rhyolite": {
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/rhyolite"
+      }}, 
+      "basalt": {
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/basalt"
+      }}, 
+      "andesite": {
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/andesite"
+      }}, 
+      "dacite": {
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/dacite"
+      }}, 
+      "porphyry": {
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/porphyry"
+      }}, 
+      "peridotite": {
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/peridotite"
+      }}, 
+      "quartzite": {
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/quartzite"
+      }}, 
       "slate": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/slate"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/slate"
+      }}, 
       "phyllite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/phyllite"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/phyllite"
+      }}, 
       "schist": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/schist"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/schist"
+      }}, 
       "gneiss": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/gneiss"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/gneiss"
+      }}, 
       "marble": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/marble"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/marble"
+      }}, 
       "catlinite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/catlinite"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/catlinite"
+      }}, 
       "blueschist": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/blueschist"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/blueschist"
+      }}, 
       "greenschist": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/greenschist"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/greenschist"
+      }}, 
       "novaculite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/novaculite"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/novaculite"
+      }}, 
       "steatite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/steatite"
-        }
-      },
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/steatite"
+      }}, 
       "komatiite": {
-        "textures": {
-          "all": "terrafirmacraft:blocks/stonetypes/chiseled/brick/komatiite"
-        }
-      }
+          "textures": {
+            "all": "tfc:blocks/rock/chiseled/brick/komatiite"
+      }}
     }
   }
 }

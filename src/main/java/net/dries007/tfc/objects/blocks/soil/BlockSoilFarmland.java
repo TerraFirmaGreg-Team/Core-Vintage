@@ -6,43 +6,42 @@
 package net.dries007.tfc.objects.blocks.soil;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types2.soil.SoilBlockType;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.api.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.ISoilTypeBlock;
-import net.dries007.tfc.api.util.Triple;
+import net.dries007.tfc.api.util.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types2.soil.SoilBlockType.FALLING;
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.soil.SoilType.SILT;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.getBlockSoilMap;
+import static net.dries007.tfc.objects.blocks.soil.BlockSoil.*;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -70,16 +69,34 @@ public class BlockSoilFarmland extends BlockSoilFallable implements ISoilTypeBlo
     private static final AxisAlignedBB FARMLAND_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
     private static final AxisAlignedBB FLIPPED_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-    public BlockSoilFarmland(SoilBlockType soilBlockType, SoilVariant soilVariant, SoilType soilType) {
-        super(soilBlockType, soilVariant, soilType);
+    private final SoilVariant soilVariant;
+    private final SoilType soilType;
+    private final ResourceLocation modelLocation;
 
-        if (BLOCK_SOIL_MAP.put(new Triple<>(soilBlockType, soilVariant, soilType), this) != null)
+    public BlockSoilFarmland(SoilVariant soilVariant, SoilType soilType) {
+        super(soilVariant, soilType);
+
+        if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
             throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
+
+        this.soilVariant = soilVariant;
+        this.soilType = soilType;
+        this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant.getName());
 
         setDefaultState(blockState.getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
         setTickRandomly(true);
         setLightOpacity(255);
         useNeighborBrightness = true;
+    }
+
+    @Override
+    public SoilVariant getSoilVariant() {
+        return soilVariant;
+    }
+
+    @Override
+    public SoilType getSoilType() {
+        return soilType;
     }
 
     @Override
@@ -201,12 +218,10 @@ public class BlockSoilFarmland extends BlockSoilFallable implements ISoilTypeBlo
 //        return Item.getItemFromBlock(get(rock, Rock.Type.DIRT));
 //    }
 
-    private void turnToDirt(World world, BlockPos pos)
-    {
-        world.setBlockState(pos, getBlockSoilMap(FALLING, DIRT, SILT).getDefaultState()); //TODO тип земли
+    private void turnToDirt(World world, BlockPos pos) {
+        world.setBlockState(pos, getBlockSoilMap(DIRT, SILT).getDefaultState()); //TODO тип земли
         AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
-        for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb))
-        {
+        for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb)) {
             double d0 = Math.min(axisalignedbb.maxY - axisalignedbb.minY, axisalignedbb.maxY - entity.getEntityBoundingBox().minY);
             entity.setPositionAndUpdate(entity.posX, entity.posY + d0 + 0.001D, entity.posZ);
         }
@@ -218,23 +233,22 @@ public class BlockSoilFarmland extends BlockSoilFallable implements ISoilTypeBlo
         return block instanceof IPlantable && canSustainPlant(worldIn.getBlockState(pos), worldIn, pos, EnumFacing.UP, (IPlantable) block);
     }
 
+
     @Override
+    @SideOnly(Side.CLIENT)
     public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(modelLocation, "soiltype=" + soilType.getName());
+            }
+        });
 
+
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this),
+                this.getMetaFromState(this.getBlockState().getBaseState()),
+                new ModelResourceLocation(modelLocation, "soiltype=" + soilType.getName()));
     }
 
-    @Override
-    public SoilVariant getSoilVariant() {
-        return null;
-    }
-
-    @Override
-    public SoilType getSoilType() {
-        return null;
-    }
-
-    @Override
-    public ItemBlock getItemBlock() {
-        return null;
-    }
 }

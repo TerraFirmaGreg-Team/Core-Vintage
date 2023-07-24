@@ -69,7 +69,7 @@ public class BlockPeatGrass extends BlockPeat
     public void randomTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
         if (world.isRemote) return;
-        BlockRockVariantConnected.spreadGrass(world, pos, state, rand);
+        BlockSoil.spreadGrass(world, pos, state, rand);
     }
 
     @Override

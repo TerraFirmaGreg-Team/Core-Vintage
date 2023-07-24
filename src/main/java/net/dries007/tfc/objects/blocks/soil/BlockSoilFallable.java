@@ -6,31 +6,24 @@
 package net.dries007.tfc.objects.blocks.soil;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types2.rock.RockBlockType;
-import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.soil.SoilBlockType;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.api.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.ISoilTypeBlock;
-import net.dries007.tfc.api.util.Triple;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.api.util.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Items;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
@@ -41,15 +34,14 @@ import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
 @ParametersAreNonnullByDefault
 public class BlockSoilFallable extends Block implements ISoilTypeBlock {
 
-    private final SoilBlockType soilBlockType;
     private final SoilVariant soilVariant;
     private final SoilType soilType;
     private final ResourceLocation modelLocation;
 
-    public BlockSoilFallable(SoilBlockType soilBlockType, SoilVariant soilVariant, SoilType soilType) {
+    public BlockSoilFallable(SoilVariant soilVariant, SoilType soilType) {
         super(Material.GROUND);
 
-        if (BLOCK_SOIL_MAP.put(new Triple<>(soilBlockType, soilVariant, soilType), this) != null)
+        if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
             throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
 
         if (soilVariant.canFall())
@@ -57,14 +49,23 @@ public class BlockSoilFallable extends Block implements ISoilTypeBlock {
             FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());
         }
 
-        this.soilBlockType = soilBlockType;
         this.soilVariant = soilVariant;
         this.soilType = soilType;
-        this.modelLocation = new ResourceLocation(MOD_ID, soilBlockType + "/" + soilType);
+        this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant);
 
-        String blockRegistryName = String.format("%s/%s/%s", soilBlockType, soilVariant, soilType);
+        String blockRegistryName = String.format("%s/%s/%s", "soil", soilVariant, soilType);
 
         this.setRegistryName(MOD_ID, blockRegistryName);
+    }
+
+    @Override
+    public SoilVariant getSoilVariant() {
+        return soilVariant;
+    }
+
+    @Override
+    public SoilType getSoilType() {
+        return soilType;
     }
 
     @SideOnly(Side.CLIENT)
@@ -86,22 +87,20 @@ public class BlockSoilFallable extends Block implements ISoilTypeBlock {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(modelLocation, "soiltype=" + soilType.getName());
+            }
+        });
 
+
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this),
+                this.getMetaFromState(this.getBlockState().getBaseState()),
+                new ModelResourceLocation(modelLocation, "soiltype=" + soilType.getName()));
     }
 
-    @Override
-    public SoilVariant getSoilVariant() {
-        return null;
-    }
-
-    @Override
-    public SoilType getSoilType() {
-        return null;
-    }
-
-    @Override
-    public ItemBlock getItemBlock() {
-        return null;
-    }
 }

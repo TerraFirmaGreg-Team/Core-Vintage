@@ -12,7 +12,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.objects.blocks.rock.BlockRock;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
+import net.dries007.tfc.objects.blocks.soil.BlockSoil;
 import net.minecraft.block.*;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -42,7 +42,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.render.*;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.stone.BlockRockSlabTFC;
@@ -50,7 +49,6 @@ import net.dries007.tfc.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.stone.*;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
@@ -155,6 +153,7 @@ public final class ClientRegisterEvents
         // BLOCKS - STATE MAPPERS //
 
         BlockRock.BLOCK_ROCK_MAP.values().forEach(IHasModel::onModelRegister);
+        BlockSoil.BLOCK_SOIL_MAP.values().forEach(IHasModel::onModelRegister);
 
         // Blocks with Ignored Properties
         for (Block block : BlocksTFC.getAllFluidBlocks())
@@ -193,20 +192,20 @@ public final class ClientRegisterEvents
         for (Block block : BlocksTFC.getAllFruitTreeLeavesBlocks())
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE).ignore(BlockFruitTreeLeaves.HARVESTABLE).build());
 
-        BlocksTFC.getAllBlockRockVariants().forEach(e -> {
-            if (e.getType() == Rock.Type.FARMLAND)
-            {
-                ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockFarmlandTFC.MOISTURE).build());
-            }
-            else if (e.getType() == Rock.Type.RAW)
-            {
-                ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockRockRaw.CAN_FALL).build());
-            }
-            else if (e.getType() == Rock.Type.SMOOTH)
-            {
-                ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockRockSmooth.CAN_FALL).build());
-            }
-        });
+//        BlocksTFC.getAllBlockRockVariants().forEach(e -> {
+////            if (e.getType() == Rock.Type.FARMLAND)
+////            {
+////                ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockFarmlandTFC.MOISTURE).build());
+////            }
+//            if (e.getRockVariant() == RAW)
+//            {
+//                ModelLoader.setCustomStateMapper((Block) e, new StateMap.Builder().ignore(BlockRockRaw.CAN_FALL).build());
+//            }
+//            else if (e.getRockVariant() == SMOOTH)
+//            {
+//                ModelLoader.setCustomStateMapper((Block) e, new StateMap.Builder().ignore(BlockRockSmooth.CAN_FALL).build());
+//            }
+//        });
 
         ModelLoader.setCustomStateMapper(BlocksTFC.THATCH_BED, new StateMap.Builder().ignore(BlockThatchBed.OCCUPIED).build());
 
@@ -254,7 +253,7 @@ public final class ClientRegisterEvents
         IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
 
         blockColors.registerBlockColorHandler(grassColor, BlocksTFC.PEAT_GRASS);
-        blockColors.registerBlockColorHandler(grassColor, BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType().isGrass).toArray(BlockRockVariant[]::new));
+        //blockColors.registerBlockColorHandler(grassColor, BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType().isGrass).toArray(BlockRockVariant[]::new));
         // This is talking about tall grass vs actual grass blocks
         blockColors.registerBlockColorHandler(grassColor, BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
 
@@ -265,8 +264,8 @@ public final class ClientRegisterEvents
 
         blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFlowerPots().toArray(new Block[0]));
 
-        blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockFarmlandTFC.TINT[state.getValue(BlockFarmlandTFC.MOISTURE)],
-            BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType() == Rock.Type.FARMLAND).toArray(BlockRockVariant[]::new));
+        //blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockFarmlandTFC.TINT[state.getValue(BlockFarmlandTFC.MOISTURE)],
+            //BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType() == Rock.Type.FARMLAND).toArray(BlockRockVariant[]::new));
     }
 
     @SubscribeEvent
@@ -276,9 +275,9 @@ public final class ClientRegisterEvents
     {
         ItemColors itemColors = event.getItemColors();
 
-        itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-            BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType().isGrass).toArray(BlockRockVariant[]::new));
+//        itemColors.registerItemColorHandler((stack, tintIndex) ->
+//                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+//            BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType().isGrass).toArray(BlockRockVariant[]::new));
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
                 event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),

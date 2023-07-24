@@ -31,12 +31,6 @@
             "top": "tfc:blocks/rock/raw/gabbro",
             "side": "tfc:blocks/rock/raw/gabbro"
           }}, 
-      "breccia": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/breccia",
-            "top": "tfc:blocks/rock/raw/breccia",
-            "side": "tfc:blocks/rock/raw/breccia"
-          }}, 
       "shale": {
           "textures": {
             "bottom": "tfc:blocks/rock/raw/shale",
@@ -79,24 +73,6 @@
             "top": "tfc:blocks/rock/raw/chalk",
             "side": "tfc:blocks/rock/raw/chalk"
           }}, 
-      "mudstone": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/mudstone",
-            "top": "tfc:blocks/rock/raw/mudstone",
-            "side": "tfc:blocks/rock/raw/mudstone"
-          }}, 
-      "psammolite": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/psammolite",
-            "top": "tfc:blocks/rock/raw/psammolite",
-            "side": "tfc:blocks/rock/raw/psammolite"
-          }}, 
-      "siltstone": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/siltstone",
-            "top": "tfc:blocks/rock/raw/siltstone",
-            "side": "tfc:blocks/rock/raw/siltstone"
-          }}, 
       "rhyolite": {
           "textures": {
             "bottom": "tfc:blocks/rock/raw/rhyolite",
@@ -120,18 +96,6 @@
             "bottom": "tfc:blocks/rock/raw/dacite",
             "top": "tfc:blocks/rock/raw/dacite",
             "side": "tfc:blocks/rock/raw/dacite"
-          }}, 
-      "porphyry": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/porphyry",
-            "top": "tfc:blocks/rock/raw/porphyry",
-            "side": "tfc:blocks/rock/raw/porphyry"
-          }}, 
-      "peridotite": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/peridotite",
-            "top": "tfc:blocks/rock/raw/peridotite",
-            "side": "tfc:blocks/rock/raw/peridotite"
           }}, 
       "quartzite": {
           "textures": {
@@ -168,42 +132,6 @@
             "bottom": "tfc:blocks/rock/raw/marble",
             "top": "tfc:blocks/rock/raw/marble",
             "side": "tfc:blocks/rock/raw/marble"
-          }}, 
-      "catlinite": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/catlinite",
-            "top": "tfc:blocks/rock/raw/catlinite",
-            "side": "tfc:blocks/rock/raw/catlinite"
-          }}, 
-      "blueschist": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/blueschist",
-            "top": "tfc:blocks/rock/raw/blueschist",
-            "side": "tfc:blocks/rock/raw/blueschist"
-          }}, 
-      "greenschist": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/greenschist",
-            "top": "tfc:blocks/rock/raw/greenschist",
-            "side": "tfc:blocks/rock/raw/greenschist"
-          }}, 
-      "novaculite": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/novaculite",
-            "top": "tfc:blocks/rock/raw/novaculite",
-            "side": "tfc:blocks/rock/raw/novaculite"
-          }}, 
-      "steatite": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/steatite",
-            "top": "tfc:blocks/rock/raw/steatite",
-            "side": "tfc:blocks/rock/raw/steatite"
-          }}, 
-      "komatiite": {
-          "textures": {
-            "bottom": "tfc:blocks/rock/raw/komatiite",
-            "top": "tfc:blocks/rock/raw/komatiite",
-            "side": "tfc:blocks/rock/raw/komatiite"
           }}
     }
   }

@@ -9,12 +9,15 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.*;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -44,8 +47,7 @@ public class BlockSoilFallable extends Block implements ISoilTypeBlock {
         if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
             throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
 
-        if (soilVariant.canFall())
-        {
+        if (soilVariant.canFall()) {
             FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());
         }
 
@@ -55,7 +57,10 @@ public class BlockSoilFallable extends Block implements ISoilTypeBlock {
 
         String blockRegistryName = String.format("%s/%s/%s", "soil", soilVariant, soilType);
 
+        this.setCreativeTab(CreativeTabsTFC.EARTH);
+        this.setSoundType(SoundType.STONE);
         this.setRegistryName(MOD_ID, blockRegistryName);
+        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
     }
 
     @Override
@@ -66,6 +71,11 @@ public class BlockSoilFallable extends Block implements ISoilTypeBlock {
     @Override
     public SoilType getSoilType() {
         return soilType;
+    }
+
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this);
     }
 
     @SideOnly(Side.CLIENT)

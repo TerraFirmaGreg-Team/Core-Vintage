@@ -9,4 +9,6 @@ public interface ISoilTypeBlock extends IHasModel {
 	SoilVariant getSoilVariant();
 
 	SoilType getSoilType();
+
+	ItemBlock getItemBlock();
 }

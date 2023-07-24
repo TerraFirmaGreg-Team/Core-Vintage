@@ -72,10 +72,7 @@ public class BlockRockButton extends BlockButtonStone implements IRockTypeBlock 
 
 	@Override
 	public ItemBlock getItemBlock() {
-		ItemBlock itemBlock = new ItemBlock(this);
-		//noinspection ConstantConditions
-		itemBlock.setRegistryName(this.getRegistryName());
-		return itemBlock;
+		return new ItemBlock(this);
 	}
 
 	@Override

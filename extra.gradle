@@ -1,11 +1,9 @@
 def stones = [
         rocktype: [
                 RockVariant  : [    "raw", "cobble", "bricks", "smooth", "gravel", "sand", "anvil", "speleothem"],
-                RockBlockType: [    "ordinary"      : ["raw",  "brick", "smooth"],
+                RockBlockType: [    "ordinary"      : ["raw",  "brick", "smooth", "chiseled", "cracked"],
                                     "falling"       : ["gravel", "cobble", "sand"],
                                     "mossy"         : ["cobble", "brick"],
-                                    "chiseled"      : ["brick"],
-                                    "cracked"       : ["brick"],
                                     "stairs"        : ["raw", "cobble", "brick", "smooth"],
                                     "slab"          : ["raw", "cobble", "brick", "smooth"],
                                     "slab_double"   : ["raw", "cobble", "brick", "smooth"],

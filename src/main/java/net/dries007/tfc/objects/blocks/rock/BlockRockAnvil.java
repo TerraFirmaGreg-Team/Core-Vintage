@@ -20,6 +20,8 @@ import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -34,6 +36,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -77,6 +80,21 @@ public class BlockRockAnvil extends Block implements IRockTypeBlock {
 
         FallingBlockManager.Specification spec = new FallingBlockManager.Specification(rockVariant.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
         FallingBlockManager.registerFallable(this, spec);
+    }
+
+    @Override
+    public RockVariant getRockVariant() {
+        return rockVariant;
+    }
+
+    @Override
+    public RockType getRockType() {
+        return rockType;
+    }
+
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this);
     }
 
     @Override
@@ -282,22 +300,19 @@ public class BlockRockAnvil extends Block implements IRockTypeBlock {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName());
+            }
+        });
 
-    }
 
-    @Override
-    public RockVariant getRockVariant() {
-        return null;
-    }
-
-    @Override
-    public RockType getRockType() {
-        return null;
-    }
-
-    @Override
-    public ItemBlock getItemBlock() {
-        return null;
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this),
+                this.getMetaFromState(this.getBlockState().getBaseState()),
+                new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName()));
     }
 }

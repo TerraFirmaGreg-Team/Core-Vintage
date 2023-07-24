@@ -16,6 +16,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
@@ -38,7 +39,7 @@ public class BlockSoilDirt extends Block implements ISoilTypeBlock {
 
         String blockRegistryName = String.format("%s/%s/%s", "soil", soilVariant, soilType);
 
-        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        this.setCreativeTab(CreativeTabsTFC.EARTH);
         this.setSoundType(SoundType.STONE);
         this.setRegistryName(MOD_ID, blockRegistryName);
         this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
@@ -52,6 +53,11 @@ public class BlockSoilDirt extends Block implements ISoilTypeBlock {
     @Override
     public SoilType getSoilType() {
         return soilType;
+    }
+
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this);
     }
 
     @Override

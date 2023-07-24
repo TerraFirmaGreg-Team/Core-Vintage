@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -97,6 +98,11 @@ public class BlockSoilFarmland extends BlockSoilFallable implements ISoilTypeBlo
     @Override
     public SoilType getSoilType() {
         return soilType;
+    }
+
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this);
     }
 
     @Override

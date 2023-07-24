@@ -17,6 +17,8 @@ public enum RockVariant implements IStringSerializable {
 	RAW(0, 6.5f, 10f, COLLAPSABLE),
 	COBBLE(0, 5.5f, 10f, new Specification(true, () -> TFCSounds.ROCK_SLIDE_SHORT)),
 	BRICK(0, 6.5f, 10f, null),
+	CRACKED(0, 6.5f, 10f, null),
+	CHISELED(0, 6.5f, 10f, null),
 	SMOOTH(0, 6.5f, 10f, COLLAPSABLE),
 	GRAVEL(0, 2.0f, 0f, VERTICAL_AND_HORIZONTAL),
 	SAND(0, 0.5f, 0f, VERTICAL_AND_HORIZONTAL),

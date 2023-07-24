@@ -8,83 +8,83 @@
     "stonetype": {
       "granite": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/granite"
+            "all": "tfc:blocks/rock/chiseled/granite"
       }}, 
       "diorite": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/diorite"
+            "all": "tfc:blocks/rock/chiseled/diorite"
       }}, 
       "gabbro": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/gabbro"
+            "all": "tfc:blocks/rock/chiseled/gabbro"
       }}, 
       "shale": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/shale"
+            "all": "tfc:blocks/rock/chiseled/shale"
       }}, 
       "claystone": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/claystone"
+            "all": "tfc:blocks/rock/chiseled/claystone"
       }}, 
       "limestone": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/limestone"
+            "all": "tfc:blocks/rock/chiseled/limestone"
       }}, 
       "conglomerate": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/conglomerate"
+            "all": "tfc:blocks/rock/chiseled/conglomerate"
       }}, 
       "dolomite": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/dolomite"
+            "all": "tfc:blocks/rock/chiseled/dolomite"
       }}, 
       "chert": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/chert"
+            "all": "tfc:blocks/rock/chiseled/chert"
       }}, 
       "chalk": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/chalk"
+            "all": "tfc:blocks/rock/chiseled/chalk"
       }}, 
       "rhyolite": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/rhyolite"
+            "all": "tfc:blocks/rock/chiseled/rhyolite"
       }}, 
       "basalt": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/basalt"
+            "all": "tfc:blocks/rock/chiseled/basalt"
       }}, 
       "andesite": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/andesite"
+            "all": "tfc:blocks/rock/chiseled/andesite"
       }}, 
       "dacite": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/dacite"
+            "all": "tfc:blocks/rock/chiseled/dacite"
       }}, 
       "quartzite": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/quartzite"
+            "all": "tfc:blocks/rock/chiseled/quartzite"
       }}, 
       "slate": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/slate"
+            "all": "tfc:blocks/rock/chiseled/slate"
       }}, 
       "phyllite": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/phyllite"
+            "all": "tfc:blocks/rock/chiseled/phyllite"
       }}, 
       "schist": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/schist"
+            "all": "tfc:blocks/rock/chiseled/schist"
       }}, 
       "gneiss": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/gneiss"
+            "all": "tfc:blocks/rock/chiseled/gneiss"
       }}, 
       "marble": {
           "textures": {
-            "all": "tfc:blocks/rock/sand/marble"
+            "all": "tfc:blocks/rock/chiseled/marble"
       }}
     }
   }

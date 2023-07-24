@@ -18,19 +18,11 @@ public enum RockBlockType implements IStringSerializable {
 	/**
 	 * Обычный блок без каких-либо доп. механик
 	 */
-	ORDINARY(BlockRock::new, RAW, SMOOTH, BRICK),
+	ORDINARY(BlockRock::new, RAW, SMOOTH, BRICK, CRACKED, CHISELED),
 	/**
 	 * Обычный блок, но с механикой падения
 	 */
 	FALLING(BlockRockFallable::new, GRAVEL, COBBLE, SAND),
-	/**
-	 * Обычный блок без каких-либо доп. механик
-	 */
-	CRACKED(BlockRock::new, BRICK),
-	/**
-	 * Обычный блок без каких-либо доп. механик
-	 */
-	CHISELED(BlockRock::new, BRICK),
 	/**
 	 * Обычный блок, но с механикой мха
 	 */
@@ -66,7 +58,7 @@ public enum RockBlockType implements IStringSerializable {
 	/**
 	 * Лежачие предметы
 	 */
-	//LOOSE(BlockLooseRockTFG::new, RAW),
+	LOOSE(BlockRockLoose::new, RAW),
 	/**
 	 * Сталагмиты, сталактиты
 	 */

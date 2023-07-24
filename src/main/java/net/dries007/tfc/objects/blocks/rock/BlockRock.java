@@ -42,7 +42,6 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
 
 	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockTypeBlock> BLOCK_ROCK_MAP = new LinkedHashMap<>();
-
 	public static Block getBlockRockMap(RockBlockType blockType, RockVariant blockVariant, RockType stoneType) {
 		return (Block) BLOCK_ROCK_MAP.get(new Triple<>(blockType, blockVariant, stoneType));
 	}
@@ -85,10 +84,7 @@ public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
 
 	@Override
 	public ItemBlock getItemBlock() {
-		ItemBlock itemBlock = new ItemBlock(this);
-		//noinspection ConstantConditions
-		itemBlock.setRegistryName(this.getRegistryName());
-		return itemBlock;
+		return new ItemBlock(this);
 	}
 
 	@Nonnull

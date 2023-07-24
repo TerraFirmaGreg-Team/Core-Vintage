@@ -49,7 +49,7 @@ public class BlockRockWall extends BlockWall implements IRockTypeBlock {
 	private final ResourceLocation modelLocation;
 
 	public BlockRockWall(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
-		super((Block) BLOCK_ROCK_MAP.get(new Triple<>(ORDINARY, rockVariant, rockType)));
+		super((Block) BLOCK_ROCK_MAP.get(new Triple<>(rockBlockType, rockVariant, rockType)));
 
 		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
@@ -84,10 +84,7 @@ public class BlockRockWall extends BlockWall implements IRockTypeBlock {
 
 	@Override
 	public ItemBlock getItemBlock() {
-		ItemBlock itemBlock = new ItemBlock(this);
-		//noinspection ConstantConditions
-		itemBlock.setRegistryName(this.getRegistryName());
-		return itemBlock;
+		return new ItemBlock(this);
 	}
 
 	@Override

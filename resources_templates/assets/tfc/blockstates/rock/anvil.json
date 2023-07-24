@@ -1,14 +1,14 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "cube_all",
-    "uvlock": true
+    "model": "tfc:stone_anvil"
   },
   "variants": {
     "stonetype": {<%for (i=0; i < types.size; i++) { %>
       "${types[i]}": {
           "textures": {
-            "all": "tfc:blocks/rock/$texture_type/$texture_variant/${types[i]}"
+            "all": "tfc:blocks/rock/$texture_variant/${types[i]}",
+            "particle": "tfc:blocks/rock/$texture_variant/${types[i]}"
       }}<% if(i < types.size - 1) { %>, <%}} %>
     }
   }

@@ -18,10 +18,6 @@
           "textures": {
             "all": "tfc:blocks/rock/cobble/gabbro"
       }}, 
-      "breccia": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/breccia"
-      }}, 
       "shale": {
           "textures": {
             "all": "tfc:blocks/rock/cobble/shale"
@@ -50,18 +46,6 @@
           "textures": {
             "all": "tfc:blocks/rock/cobble/chalk"
       }}, 
-      "mudstone": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/mudstone"
-      }}, 
-      "psammolite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/psammolite"
-      }}, 
-      "siltstone": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/siltstone"
-      }}, 
       "rhyolite": {
           "textures": {
             "all": "tfc:blocks/rock/cobble/rhyolite"
@@ -77,14 +61,6 @@
       "dacite": {
           "textures": {
             "all": "tfc:blocks/rock/cobble/dacite"
-      }}, 
-      "porphyry": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/porphyry"
-      }}, 
-      "peridotite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/peridotite"
       }}, 
       "quartzite": {
           "textures": {
@@ -109,30 +85,6 @@
       "marble": {
           "textures": {
             "all": "tfc:blocks/rock/cobble/marble"
-      }}, 
-      "catlinite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/catlinite"
-      }}, 
-      "blueschist": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/blueschist"
-      }}, 
-      "greenschist": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/greenschist"
-      }}, 
-      "novaculite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/novaculite"
-      }}, 
-      "steatite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/steatite"
-      }}, 
-      "komatiite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/komatiite"
       }}
     }
   }

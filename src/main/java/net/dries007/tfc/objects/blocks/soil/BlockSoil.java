@@ -29,6 +29,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -139,7 +140,7 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
 
         String blockRegistryName = String.format("%s/%s/%s", "soil", soilVariant, soilType);
 
-        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        this.setCreativeTab(CreativeTabsTFC.EARTH);
         this.setSoundType(SoundType.STONE);
         this.setRegistryName(MOD_ID, blockRegistryName);
         this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
@@ -154,6 +155,11 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
     @Override
     public SoilType getSoilType() {
         return soilType;
+    }
+
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this);
     }
 
     @Override

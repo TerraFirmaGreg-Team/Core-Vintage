@@ -20,6 +20,7 @@ import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.IRockTypeBlock;
+import net.dries007.tfc.api.util.ISoilTypeBlock;
 import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.devices.*;
 import net.dries007.tfc.objects.blocks.metal.*;
@@ -45,6 +46,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.BlockFluidBase;
@@ -57,6 +59,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.Rock.Type.*;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
+import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
 import static net.dries007.tfc.util.Helpers.getNull;
 
 @SuppressWarnings("unused")
@@ -289,9 +293,13 @@ public final class BlocksTFC {
 
 					TerraFirmaCraft.LOGGER.debug("Registering block: {}", block.getRegistryName());
 					r.register(block);
-					normalItemBlocks.add(new ItemBlockTFC(block));
 				}
 			}
+		}
+		for (IRockTypeBlock stoneTypeBlock : BLOCK_ROCK_MAP.values()) {
+			ItemBlock itemBlock = stoneTypeBlock.getItemBlock();
+			if (itemBlock != null)
+				normalItemBlocks.add(itemBlock);
 		}
 
 		//=== Soil ===================================================================================================//
@@ -302,11 +310,15 @@ public final class BlocksTFC {
 
 				TerraFirmaCraft.LOGGER.debug("Registering block: {}", block.getRegistryName());
 				r.register(block);
-				normalItemBlocks.add(new ItemBlockTFC(block));
 			}
 		}
+		for (ISoilTypeBlock soilTypeBlock : BLOCK_SOIL_MAP.values()) {
+			ItemBlock itemBlock = soilTypeBlock.getItemBlock();
+			if (itemBlock != null)
+				normalItemBlocks.add(itemBlock);
+		}
 
-
+		//=== Other ==================================================================================================//
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "debug", new BlockDebug(), MISC)));
 

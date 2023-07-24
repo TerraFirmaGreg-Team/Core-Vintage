@@ -272,10 +272,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockTypeBlock 
 
 		@Override
 		public ItemBlock getItemBlock() {
-//			ItemBlock itemBlock = new ItemSlabTFG(this, this, this.doubleSlab);
-//			//noinspection ConstantConditions
-//			itemBlock.setRegistryName(this.getRegistryName());
-			return null;
+			return new ItemBlock(this);
 		}
 
 		@Override

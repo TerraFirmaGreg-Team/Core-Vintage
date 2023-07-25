@@ -728,12 +728,34 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isSand(IBlockState current) {
+		if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock) {
+			return rockTypeBlock.getRockVariant() == RockVariant.SAND;
+		}
+		return false;
+	}
+
+	public static boolean isSoil(IBlockState current) {
+		if (current.getBlock() instanceof BlockPeat) return true;
+		return current.getBlock() instanceof ISoilTypeBlock;
+	}
+
+	public static boolean isGrowableSoil(IBlockState current) {
+		return current.getBlock() instanceof ISoilTypeBlock;
+	}
+
+	public static boolean isSoilOrGravel(IBlockState current) {
+		if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock) {
+			return rockTypeBlock.getRockVariant() == RockVariant.GRAVEL && isSoil(current);
+		}
+		return false;
+	}
+
+	/*
+	public static boolean isSand(IBlockState current) {
 		if (!(current.getBlock() instanceof BlockRockVariant)) return false;
 		Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
 		return type == SAND;
 	}
-
-	// todo: change to property of type? (soil & stone maybe?)
 
 	public static boolean isSoil(IBlockState current) {
 		if (current.getBlock() instanceof BlockPeat) return true;
@@ -743,18 +765,16 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isGrowableSoil(IBlockState current) {
-		if (current.getBlock() instanceof BlockPeat) return false;
-		if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-		Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-		return type == GRASS || type == DRY_GRASS || type == DIRT || type == CLAY || type == CLAY_GRASS;
+		return current.getBlock() instanceof ISoilTypeBlock;
 	}
 
 	public static boolean isSoilOrGravel(IBlockState current) {
-		if (current.getBlock() instanceof BlockPeat) return true;
-		if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-		Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-		return type == GRASS || type == DRY_GRASS || type == DIRT || type == GRAVEL;
+		if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock) {
+			return rockTypeBlock.getRockVariant() == RockVariant.GRAVEL && isSoil(current);
+		}
+		return false;
 	}
+	*/
 
 	public static boolean isGrass(IBlockState current) {
 		if (current.getBlock() instanceof BlockPeatGrass) return true;

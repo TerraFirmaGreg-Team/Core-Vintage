@@ -46,6 +46,10 @@ public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
 		return (Block) BLOCK_ROCK_MAP.get(new Triple<>(blockType, blockVariant, stoneType));
 	}
 
+	public static Block getBlockRockMapRaw(RockType stoneType) {
+		return (Block) BLOCK_ROCK_MAP.get(new Triple<>(RockBlockType.ORDINARY, RockVariant.RAW, stoneType));
+	}
+
 	private final RockType rockType;
 	private final RockVariant rockVariant;
 	private final ResourceLocation modelLocation;

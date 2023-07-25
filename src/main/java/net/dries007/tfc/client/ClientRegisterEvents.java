@@ -10,9 +10,13 @@ import javax.annotation.Nonnull;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
+import net.dries007.tfc.api.types2.soil.SoilType;
+import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.api.util.ISoilTypeBlock;
 import net.dries007.tfc.objects.blocks.rock.BlockRock;
 import net.dries007.tfc.objects.blocks.soil.BlockSoil;
+import net.dries007.tfc.objects.blocks.soil.BlockSoilGrass;
 import net.minecraft.block.*;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -251,7 +255,8 @@ public final class ClientRegisterEvents
         IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
 
         blockColors.registerBlockColorHandler(grassColor, BlocksTFC.PEAT_GRASS);
-        //blockColors.registerBlockColorHandler(grassColor, BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType().isGrass).toArray(BlockRockVariant[]::new));
+
+        blockColors.registerBlockColorHandler(grassColor, BlockSoil.BLOCK_SOIL_MAP.values().stream().filter(x -> x.getSoilVariant() == SoilVariant.GRASS).map(s -> (Block) s).toArray(Block[]::new));
         // This is talking about tall grass vs actual grass blocks
         blockColors.registerBlockColorHandler(grassColor, BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
 
@@ -262,8 +267,8 @@ public final class ClientRegisterEvents
 
         blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFlowerPots().toArray(new Block[0]));
 
-        //blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockFarmlandTFC.TINT[state.getValue(BlockFarmlandTFC.MOISTURE)],
-            //BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType() == Rock.Type.FARMLAND).toArray(BlockRockVariant[]::new));
+        // blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockFarmlandTFC.TINT[state.getValue(BlockFarmlandTFC.MOISTURE)],
+        // BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType() == Rock.Type.FARMLAND).toArray(BlockRockVariant[]::new));
     }
 
     @SubscribeEvent
@@ -273,9 +278,9 @@ public final class ClientRegisterEvents
     {
         ItemColors itemColors = event.getItemColors();
 
-//        itemColors.registerItemColorHandler((stack, tintIndex) ->
-//                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-//            BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType().isGrass).toArray(BlockRockVariant[]::new));
+        itemColors.registerItemColorHandler((stack, tintIndex) ->
+                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+            BlockSoil.BLOCK_SOIL_MAP.values().stream().filter(x -> x.getSoilVariant() == SoilVariant.GRASS).map(s -> (Block) s).toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
                 event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),

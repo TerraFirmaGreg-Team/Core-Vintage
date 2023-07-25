@@ -5,6 +5,9 @@
 
 package net.dries007.tfc;
 
+import gregtech.api.unification.material.event.MaterialEvent;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
+import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockSnow;
@@ -135,6 +138,12 @@ import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 public final class CommonEventHandler
 {
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+
+    @SubscribeEvent
+    public static void onMaterialsInit(MaterialEvent event) {
+        TFGMaterialHandler.init();
+        TFGOrePrefixHandler.init();
+    }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onNeighborNotify(BlockEvent.NeighborNotifyEvent event)

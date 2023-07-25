@@ -5,6 +5,7 @@
 
 package net.dries007.tfc;
 
+import net.dries007.tfc.compat.gregtech.stonetypes.StoneTypeHandler;
 import net.dries007.tfc.compat.top.TOPPlugin;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -199,6 +200,8 @@ public final class TerraFirmaCraft
         CapabilityItemSize.init();
         CapabilityItemHeat.init();
         CapabilityMetalItem.init();
+
+        //StoneTypeHandler.init();
     }
 
     @Mod.EventHandler

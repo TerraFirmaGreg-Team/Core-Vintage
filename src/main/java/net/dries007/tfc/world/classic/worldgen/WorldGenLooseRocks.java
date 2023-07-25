@@ -58,25 +58,6 @@ public class WorldGenLooseRocks implements IWorldGenerator
             int xoff = chunkX * 16 + 8;
             int zoff = chunkZ * 16 + 8;
 
-            if (generateOres)
-            {
-                // Grab 2x2 area
-                ChunkDataTFC[] chunkData = {
-                    baseChunkData, // This chunk
-                    ChunkDataTFC.get(world, chunkBlockPos.add(16, 0, 0)),
-                    ChunkDataTFC.get(world, chunkBlockPos.add(0, 0, 16)),
-                    ChunkDataTFC.get(world, chunkBlockPos.add(16, 0, 16))
-                };
-                if (!chunkData[0].isInitialized())
-                {
-                    return;
-                }
-
-                // Default to 35 below the surface, like classic
-                int lowestYScan = Math.max(10, world.getTopSolidOrLiquidBlock(chunkBlockPos).getY() - ConfigTFC.General.WORLD.looseRockScan);
-
-            }
-
             for (int i = 0; i < ConfigTFC.General.WORLD.looseRocksFrequency * factor; i++)
             {
                 BlockPos pos = new BlockPos(

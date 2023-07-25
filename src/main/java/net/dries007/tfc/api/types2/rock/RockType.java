@@ -13,7 +13,7 @@ import static net.dries007.tfc.api.types2.rock.RockCategory.*;
 @Nonnull
 public enum RockType implements IStringSerializable {
 
-	// igneous_intrusive
+	// Igneous Intrusive
 	GRANITE(IGNEOUS_INTRUSIVE),
 	DIORITE(IGNEOUS_INTRUSIVE),
 	GABBRO(IGNEOUS_INTRUSIVE),
@@ -25,43 +25,46 @@ public enum RockType implements IStringSerializable {
 	CONGLOMERATE(SEDIMENTARY),
 	DOLOMITE(SEDIMENTARY),
 	CHERT(SEDIMENTARY),
-	CHALK(SEDIMENTARY),
+	CHALK(SEDIMENTARY, true),
 
-	// igneous_extrusive
+	// Igneous Extrusive
 	RHYOLITE(IGNEOUS_EXTRUSIVE),
 	BASALT(IGNEOUS_EXTRUSIVE),
-	ANDESITE(IGNEOUS_EXTRUSIVE),
+	ANDESITE(IGNEOUS_EXTRUSIVE, true),
 	DACITE(IGNEOUS_EXTRUSIVE),
 
 	// Metamorphic
-	QUARTZITE(METAMORPHIC),
+	QUARTZITE(METAMORPHIC, true),
 	SLATE(METAMORPHIC),
 	PHYLLITE(METAMORPHIC),
 	SCHIST(METAMORPHIC),
 	GNEISS(METAMORPHIC),
-	MARBLE(METAMORPHIC);
+	MARBLE(METAMORPHIC, true);
 
-	public static final RockType[] VALUES = values();
+	private static final RockType[] VALUES = values();
 	public static RockType valueOf(int i) {
 		return i >= 0 && i < VALUES.length ? VALUES[i] : GRANITE;
 	}
 
 	private final RockCategory rockCategory;
+	private final boolean isFlux;
 
 	RockType(@Nonnull RockCategory rockCategory) {
-		this.rockCategory = rockCategory;
+		this(rockCategory, false);
 	}
 
+	RockType(@Nonnull RockCategory rockCategory, boolean isFlux) {
+		this.rockCategory = rockCategory;
+		this.isFlux = isFlux;
+	}
 
-	public RockCategory getRockCategory() {
+	public @Nonnull RockCategory getRockCategory() {
 		return rockCategory;
 	}
 
-//	public boolean isFluxStone()
-//	{
-//		return isFluxStone;
-//	}
-
+	public boolean isFlux() {
+		return isFlux;
+	}
 
 	/**
 	 * Возвращает имя перечисления в нижнем регистре.

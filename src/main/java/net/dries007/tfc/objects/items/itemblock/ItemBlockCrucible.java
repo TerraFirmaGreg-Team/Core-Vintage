@@ -33,15 +33,14 @@ public class ItemBlockCrucible extends ItemBlockTFC
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    {
-        NBTTagCompound nbt = stack.getTagCompound();
-        if (nbt != null)
-        {
-            Alloy alloy = new Alloy(ConfigTFC.Devices.CRUCIBLE.tank);
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        var nbt = stack.getTagCompound();
+
+        if (nbt != null) {
+            var alloy = new Alloy(ConfigTFC.Devices.CRUCIBLE.tank);
+
             alloy.deserializeNBT(nbt.getCompoundTag("alloy"));
-            String metalName = (new TextComponentTranslation(alloy.getResult().getTranslationKey())).getFormattedText();
-            tooltip.add(I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.crucible_alloy", alloy.getAmount(), metalName));
+            tooltip.add(I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.crucible_alloy", alloy.getAmount(), alloy.getResult().getLocalizedName()));
         }
     }
 }

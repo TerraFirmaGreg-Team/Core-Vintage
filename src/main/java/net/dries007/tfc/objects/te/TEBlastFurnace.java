@@ -31,7 +31,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.objects.blocks.BlockMolten;
@@ -353,7 +353,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
 
                 oreCount = oreStacks.size();
                 oreUnits = oreStacks.stream().mapToInt(stack -> {
-                    IMetalItem metalObject = CapabilityMetalItem.getMetalItem(stack);
+                    IMaterialItem metalObject = CapabilityMetalItem.getMaterialItem(stack);
                     if (metalObject != null)
                     {
                         return metalObject.getSmeltAmount(stack);

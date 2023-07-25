@@ -12,6 +12,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import gregtech.api.unification.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -24,21 +25,23 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockMetalLamp;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 @ParametersAreNonnullByDefault
-public class ItemMetal extends ItemTFC implements IMetalItem
+public class ItemMetal extends ItemTFC implements IMaterialItem
 {
     private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetal>> TABLE = new HashMap<>();
+
+    public ItemMetal() {
+
+    }
 
     public static Item get(Metal metal, Metal.ItemType type)
     {
@@ -58,15 +61,16 @@ public class ItemMetal extends ItemTFC implements IMetalItem
         return TABLE.get(metal).get(type);
     }
 
-    protected final Metal metal;
-    protected final Metal.ItemType type;
+    protected Material metal;
+    protected Metal.ItemType type;
 
     @SuppressWarnings("ConstantConditions")
-    public ItemMetal(Metal metal, Metal.ItemType type)
+    public ItemMetal(Material metal, Metal.ItemType type)
     {
         this.metal = metal;
         this.type = type;
 
+        /*
         if (!TABLE.containsKey(metal))
             TABLE.put(metal, new EnumMap<>(Metal.ItemType.class));
         TABLE.get(metal).put(type, this);
@@ -125,11 +129,11 @@ public class ItemMetal extends ItemTFC implements IMetalItem
         if (type == Metal.ItemType.TUYERE)
         {
             setMaxDamage(metal.getToolMetal() != null ? (int) (metal.getToolMetal().getMaxUses() * 0.2) : 100);
-        }
+        }*/
     }
 
     @Override
-    public Metal getMetal(ItemStack stack)
+    public Material getMaterial(ItemStack stack)
     {
         return metal;
     }
@@ -142,11 +146,6 @@ public class ItemMetal extends ItemTFC implements IMetalItem
         return d < 0 ? 0 : MathHelper.floor(type.getSmeltAmount() * d);
     }
 
-    @Override
-    public float getMeltTemp(ItemStack stack)
-    {
-        return metal.getMeltTemp();
-    }
 
     @Nonnull
     @Override
@@ -209,75 +208,5 @@ public class ItemMetal extends ItemTFC implements IMetalItem
         }
     }
 
-    @Override
-    public boolean canStack(@Nonnull ItemStack stack)
-    {
-        switch (type)
-        {
-            case ROD:
-            case DUST:
-            case LAMP:
-            case ANVIL:
-            case TRAPDOOR:
-            case SCRAP:
-            case INGOT:
-            case SHEET:
-            case NUGGET:
-            case AXE_HEAD:
-            case HOE_HEAD:
-            case MACE_HEAD:
-            case PICK_HEAD:
-            case SAW_BLADE:
-            case CHISEL_HEAD:
-            case HAMMER_HEAD:
-            case KNIFE_BLADE:
-            case SHOVEL_HEAD:
-            case SWORD_BLADE:
-            case DOUBLE_INGOT:
-            case DOUBLE_SHEET:
-            case JAVELIN_HEAD:
-            case PROPICK_HEAD:
-            case SCYTHE_BLADE:
-                return true;
-            default:
-                return false;
-        }
-    }
 
-    @Override
-    public boolean doesSneakBypassUse(ItemStack stack, IBlockAccess world, BlockPos pos, EntityPlayer player)
-    {
-        return this.type == Metal.ItemType.KNIFE || super.doesSneakBypassUse(stack, world, pos, player);
-    }
-
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt)
-    {
-        return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
-    }
-
-    @Override
-    @Nonnull
-    public IRarity getForgeRarity(@Nonnull ItemStack stack)
-    {
-        switch (metal.getTier())
-        {
-            case TIER_I:
-            case TIER_II:
-                return EnumRarity.COMMON;
-            case TIER_III:
-                return EnumRarity.UNCOMMON;
-            case TIER_IV:
-                return EnumRarity.RARE;
-            case TIER_V:
-                return EnumRarity.EPIC;
-        }
-        return super.getForgeRarity(stack);
-    }
-
-    public Metal.ItemType getType()
-    {
-        return type;
-    }
 }

@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.api.capability.forge;
 
+import gregtech.api.unification.material.Material;
 import net.dries007.tfc.api.types.Metal;
 
 /**
@@ -31,12 +32,12 @@ public interface IForgeableMeasurableMetal extends IForgeableHeatable
      *
      * @return the metal obj
      */
-    Metal getMetal();
+    Material getMaterial();
 
     /**
      * Sets the metal this item stores
      *
-     * @param metal the metal obj
+     * @param material the metal obj
      */
-    void setMetal(Metal metal);
+    void setMaterial(Material material);
 }

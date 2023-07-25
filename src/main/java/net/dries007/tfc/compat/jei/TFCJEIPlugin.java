@@ -11,14 +11,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -31,10 +29,8 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.compat.jei.categories.*;
@@ -49,7 +45,6 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.metal.ItemAnvil;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
-import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 
 @JEIPlugin
@@ -115,6 +110,7 @@ public final class TFCJEIPlugin implements IModPlugin
     {
         REGISTRY = registry;
 
+        /*
         //Wraps all quern recipes
         List<SimpleRecipeWrapper> quernList = TFCRegistries.QUERN.getValuesCollection()
             .stream()
@@ -171,7 +167,7 @@ public final class TFCJEIPlugin implements IModPlugin
         registry.addRecipes(alloyRecipes, ALLOY_UID);
         registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), ALLOY_UID);
         registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), ALLOY_UID);
-
+        */
         // Clay Knapping
         /*
         List<KnappingRecipeWrapper> clayknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
@@ -225,6 +221,7 @@ public final class TFCJEIPlugin implements IModPlugin
 //            registry.addRecipeCatalyst(new ItemStack(ItemRock.get(rock)), KNAP_STONE_UID);
 //        }
 
+        /*
         //Wraps all barrel recipes
         List<BarrelRecipeWrapper> barrelRecipes = TFCRegistries.BARREL.getValuesCollection()
             .stream().filter(recipe -> recipe instanceof BarrelRecipeFoodTraits || recipe instanceof BarrelRecipeFoodPreservation || recipe.getOutputStack() != ItemStack.EMPTY || recipe.getOutputFluid() != null)
@@ -266,9 +263,9 @@ public final class TFCJEIPlugin implements IModPlugin
             {
                 FluidStack fluidStack = recipe.getOutputFluid(stack);
                 // Don't add not meltable (ie: iron ore)
-                if (fluidStack != null && FluidsTFC.getMetalFromFluid(fluidStack.getFluid()) == recipe.getMetal())
+                if (fluidStack != null && FluidsTFC.getMetalFromFluid(fluidStack.getFluid()) == recipe.getMaterial())
                 {
-                    MetalHeatingRecipeWrapper wrapper = new MetalHeatingRecipeWrapper(stack, recipe.getMetal(), fluidStack.amount, recipe.getTransformTemp());
+                    MetalHeatingRecipeWrapper wrapper = new MetalHeatingRecipeWrapper(stack, recipe.getMaterial(), fluidStack.amount, recipe.getTransformTemp());
                     heatMetalList.add(wrapper);
                 }
             }
@@ -367,5 +364,6 @@ public final class TFCJEIPlugin implements IModPlugin
         //ContainerInventoryCrafting - Add ability to transfer recipe items
         IRecipeTransferRegistry transferRegistry = registry.getRecipeTransferRegistry();
         transferRegistry.addRecipeTransferHandler(ContainerInventoryCrafting.class, VanillaRecipeCategoryUid.CRAFTING, 1, 9, 10, 36);
+        */
     }
 }

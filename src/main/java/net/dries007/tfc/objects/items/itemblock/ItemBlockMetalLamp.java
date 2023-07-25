@@ -9,6 +9,7 @@ import java.util.*;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import gregtech.api.unification.material.Material;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -30,14 +31,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalLamp;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.Helpers;
 
-public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
+public class ItemBlockMetalLamp extends ItemBlockTFC implements IMaterialItem
 {
     private static final Map<Metal, ItemBlockMetalLamp> TABLE = new HashMap<>();
     public static int CAPACITY;
@@ -131,9 +132,9 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
      */
     @Nullable
     @Override
-    public Metal getMetal(ItemStack stack)
+    public Material getMaterial(ItemStack stack)
     {
-        return ((BlockMetalLamp) (super.block)).getMetal();
+        return null;
     }
 
     /**
@@ -150,6 +151,7 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
     @Override
     public void addMetalInfo(ItemStack stack, List<String> text) // shamelessly co-opted to show liquid too
     {
+        /*
         IFluidHandler fluidCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         boolean spacer = false;
         if (fluidCap != null)
@@ -163,7 +165,7 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
                 text.add(I18n.format("tfc.tooltip.barrel_fluid", fluidStack.amount, fluidName));
             }
         }
-        Metal metal = getMetal(stack);
+        Metal metal = getMaterial(stack);
         if (metal != null)
         {
             if (!spacer)
@@ -173,6 +175,6 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
             text.add(I18n.format("tfc.tooltip.metal", I18n.format(Helpers.getTypeName(metal))));
             text.add(I18n.format("tfc.tooltip.units", getSmeltAmount(stack)));
             text.add(I18n.format(Helpers.getEnumName(metal.getTier())));
-        }
+        }*/
     }
 }

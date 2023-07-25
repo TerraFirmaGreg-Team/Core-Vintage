@@ -515,6 +515,7 @@ public final class BlocksTFC {
 			Builder<BlockMetalLamp> lamps = ImmutableList.builder();
 			Builder<BlockTrapDoorMetalTFC> metalTrapdoors = ImmutableList.builder();
 
+			/*
 			for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
 				if (Metal.ItemType.ANVIL.hasType(metal))
 					anvils.add(register(r, "anvil/" + metal.getRegistryName().getPath(), new BlockAnvilTFC(metal), METAL));
@@ -525,7 +526,7 @@ public final class BlocksTFC {
 				if (Metal.ItemType.LAMP.hasType(metal))
 					lamps.add(register(r, "lamp/" + metal.getRegistryName().getPath(), new BlockMetalLamp(metal), METAL));
 
-			}
+			}*/
 
 			allAnvils = anvils.build();
 			allSheets = sheets.build();

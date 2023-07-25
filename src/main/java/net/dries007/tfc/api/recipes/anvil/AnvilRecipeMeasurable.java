@@ -50,7 +50,7 @@ public class AnvilRecipeMeasurable extends AnvilRecipe
             if (inputCap instanceof IForgeableMeasurableMetal && outputCap instanceof IForgeableMeasurableMetal)
             {
                 ((IForgeableMeasurableMetal) outputCap).setMetalAmount(((IForgeableMeasurableMetal) inputCap).getMetalAmount());
-                ((IForgeableMeasurableMetal) outputCap).setMetal(((IForgeableMeasurableMetal) inputCap).getMetal());
+                ((IForgeableMeasurableMetal) outputCap).setMaterial(((IForgeableMeasurableMetal) inputCap).getMaterial());
             }
             return out;
         }

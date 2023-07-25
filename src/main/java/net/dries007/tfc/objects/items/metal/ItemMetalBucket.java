@@ -48,11 +48,12 @@ public class ItemMetalBucket extends ItemMetal // quite a bit copied out of Item
 
     public ItemMetalBucket(Metal metal, Metal.ItemType type)
     {
+        /*
         super(metal, type);
         setHasSubtypes(true);
         setContainerItem(this);
 
-        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseFluidContainer.getInstance());
+        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseFluidContainer.getInstance());*/
     }
 
     @SuppressWarnings("ConstantConditions")

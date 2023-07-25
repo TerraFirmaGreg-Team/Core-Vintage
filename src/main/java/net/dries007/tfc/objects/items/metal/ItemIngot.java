@@ -31,9 +31,10 @@ public class ItemIngot extends ItemMetal
 {
     public ItemIngot(Metal metal, Metal.ItemType type)
     {
-        super(metal, type);
+
     }
 
+    /*
     @Override
     @Nonnull
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
@@ -61,7 +62,7 @@ public class ItemIngot extends ItemMetal
                             TEIngotPile te = Helpers.getTE(worldIn, up, TEIngotPile.class);
                             if (te != null)
                             {
-                                te.setMetal(item.metal);
+                                //te.setMetal(item.metal);
                                 te.setCount(1);
                             }
                             worldIn.playSound(null, up, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 0.3F, 1.5F);
@@ -74,6 +75,7 @@ public class ItemIngot extends ItemMetal
             }
             else
             {
+
                 // Place an ingot pile on top of the existing one
                 BlockPos posTop = pos.down();
                 IBlockState stateTop;
@@ -117,5 +119,5 @@ public class ItemIngot extends ItemMetal
             return EnumActionResult.FAIL;
         }
         return EnumActionResult.PASS;
-    }
+    }*/
 }

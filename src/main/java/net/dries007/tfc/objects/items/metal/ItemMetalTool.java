@@ -43,15 +43,17 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 @MethodsReturnNonnullByDefault
 public class ItemMetalTool extends ItemMetal
 {
-    public final ToolMaterial material;
-    private final double attackDamage;
-    private final int areaOfEffect;
-    private final float attackSpeed;
+    public  ToolMaterial material;
+    private  double attackDamage;
+    private  int areaOfEffect;
+    private  float attackSpeed;
     private float efficiency;
     private boolean canDisableShield;
 
     public ItemMetalTool(Metal metal, Metal.ItemType type)
     {
+        super();
+        /*
         super(metal, type);
         if (metal.getToolMetal() == null)
             throw new IllegalArgumentException("You can't make tools out of non tool metals.");
@@ -203,7 +205,7 @@ public class ItemMetalTool extends ItemMetal
                 throw new IllegalArgumentException("Tool from non tool type.");
         }
 
-        attackDamage = typeDamage * material.getAttackDamage();
+        attackDamage = typeDamage * material.getAttackDamage();*/
     }
 
     @Override

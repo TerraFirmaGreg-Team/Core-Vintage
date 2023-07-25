@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import gregtech.api.unification.material.Material;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,12 +20,12 @@ import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemArmorTFC;
 
-public class ItemMetalArmor extends ItemArmorTFC implements IMetalItem, IItemSize
+public class ItemMetalArmor extends ItemArmorTFC implements IMaterialItem, IItemSize
 {
     private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetalArmor>> TABLE = new HashMap<>();
 
@@ -49,9 +50,9 @@ public class ItemMetalArmor extends ItemArmorTFC implements IMetalItem, IItemSiz
 
     @Nullable
     @Override
-    public Metal getMetal(ItemStack stack)
+    public Material getMaterial(ItemStack stack)
     {
-        return metal;
+        return null;
     }
 
     @Override

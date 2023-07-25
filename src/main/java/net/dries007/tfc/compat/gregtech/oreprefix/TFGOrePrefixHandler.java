@@ -47,6 +47,7 @@ public class TFGOrePrefixHandler {
             var extendedOrePrefix = (IOrePrefixExtension) item;
 
             extendedOrePrefix.setHasMold(true);
+            extendedOrePrefix.setShouldHasMetalCapability(true);
         }
 
         //

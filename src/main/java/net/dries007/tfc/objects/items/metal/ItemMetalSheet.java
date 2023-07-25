@@ -29,7 +29,7 @@ public class ItemMetalSheet extends ItemMetal
 {
     public ItemMetalSheet(Metal metal, Metal.ItemType type)
     {
-        super(metal, type);
+
     }
 
     @Override
@@ -55,19 +55,14 @@ public class ItemMetalSheet extends ItemMetal
             {
                 // Existing sheet block
                 Metal metal = ((BlockMetalSheet) stateAt.getBlock()).getMetal();
-                if (metal == sheet.metal)
-                {
-                    stack.shrink(1);
-                    player.setHeldItem(hand, stack);
-                    return placeSheet(worldIn, posAt, facing);
-                }
+
             }
             else if (stateAt.getBlock().isReplaceable(worldIn, posAt))
             {
                 // Place a new block
                 if (!worldIn.isRemote)
                 {
-                    worldIn.setBlockState(posAt, BlockMetalSheet.get(sheet.metal).getDefaultState());
+
                     stack.shrink(1);
                     player.setHeldItem(hand, stack);
                     placeSheet(worldIn, posAt, facing);

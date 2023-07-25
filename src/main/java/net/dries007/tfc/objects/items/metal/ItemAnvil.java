@@ -31,7 +31,7 @@ public class ItemAnvil extends ItemMetal
 {
     public ItemAnvil(Metal metal, Metal.ItemType type)
     {
-        super(metal, type);
+
     }
 
     @Override
@@ -71,7 +71,7 @@ public class ItemAnvil extends ItemMetal
                 if (!worldIn.isRemote)
                 {
                     ItemAnvil anvil = (ItemAnvil) stack.getItem();
-                    worldIn.setBlockState(placedPos, BlockAnvilTFC.get(anvil.metal).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
+                    //worldIn.setBlockState(placedPos, BlockAnvilTFC.get(anvil.metal).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
                     worldIn.playSound(null, placedPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     stack.shrink(1);
                     player.setHeldItem(hand, stack);

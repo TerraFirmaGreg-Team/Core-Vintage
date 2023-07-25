@@ -7,6 +7,7 @@ package net.dries007.tfc;
 
 import gregtech.api.unification.material.event.MaterialEvent;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -83,7 +84,7 @@ import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.capability.player.PlayerDataHandler;
@@ -507,52 +508,39 @@ public final class CommonEventHandler
             ICapabilityProvider forgeHandler = CapabilityForgeable.getCustomForgeable(stack);
             boolean isForgeable = false;
             boolean isHeatable = false;
-            if (forgeHandler != null)
-            {
+            if (forgeHandler != null) {
                 isForgeable = true;
                 event.addCapability(CapabilityForgeable.KEY, forgeHandler);
                 isHeatable = forgeHandler instanceof IItemHeat;
             }
             // Metal
             ICapabilityProvider metalCapability = CapabilityMetalItem.getCustomMetalItem(stack);
-            if (metalCapability != null)
-            {
+            if (metalCapability != null) {
                 event.addCapability(CapabilityMetalItem.KEY, metalCapability);
-                if (!isForgeable)
-                {
+                if (!isForgeable) {
                     // Add a forgeable capability for this item, if none is found
-                    IMetalItem cap = (IMetalItem) metalCapability;
-                    Metal metal = cap.getMetal(stack);
-                    if (metal != null)
-                    {
-                        event.addCapability(CapabilityForgeable.KEY, new ForgeableHeatableHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
+                    IMaterialItem cap = (IMaterialItem) metalCapability;
+                    var metal = cap.getMaterial(stack);
+                    if (metal != null) {
+                        var property = metal.getProperty(TFGPropertyKey.HEAT);
+
+                        if (property == null) throw new RuntimeException(String.format("No heat property for: %s", metal));
+
+                        event.addCapability(CapabilityForgeable.KEY, new ForgeableHeatableHandler(null, property.getSpecificHeat(), property.getMeltTemp()));
                         isHeatable = true;
                     }
                 }
             }
             // If one of the above is also heatable, skip this
-            if (!isHeatable)
-            {
+            if (!isHeatable) {
                 ICapabilityProvider heatHandler = CapabilityItemHeat.getCustomHeat(stack);
-                if (heatHandler != null)
-                {
+                if (heatHandler != null) {
                     event.addCapability(CapabilityItemHeat.KEY, heatHandler);
                 }
             }
 
-            // Armor
-            if (item instanceof ItemArmor)
-            {
-                ICapabilityProvider damageResistance = CapabilityDamageResistance.getCustomDamageResistance(stack);
-                if (damageResistance != null)
-                {
-                    event.addCapability(CapabilityDamageResistance.KEY, damageResistance);
-                }
-            }
-
             // Eggs
-            if (stack.getItem() == Items.EGG)
-            {
+            if (stack.getItem() == Items.EGG) {
                 event.addCapability(CapabilityEgg.KEY, new EggHandler());
             }
         }
@@ -851,6 +839,7 @@ public final class CommonEventHandler
             }
             if (ConfigTFC.General.DIFFICULTY.giveVanillaMobsEquipment)
             {
+                /*
                 // Set equipment to some mobs
                 MonsterEquipment equipment = MonsterEquipment.get(entity);
                 if (equipment != null)
@@ -859,7 +848,7 @@ public final class CommonEventHandler
                     {
                         equipment.getEquipment(slot, Constants.RNG).ifPresent(stack -> entity.setItemStackToSlot(slot, stack));
                     }
-                }
+                }*/
             }
         }
         if (ConfigTFC.Devices.TEMPERATURE.coolHeatablesInWorld && entity instanceof EntityItem)

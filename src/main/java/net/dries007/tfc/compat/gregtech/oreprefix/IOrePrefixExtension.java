@@ -2,8 +2,12 @@ package net.dries007.tfc.compat.gregtech.oreprefix;
 
 public interface IOrePrefixExtension {
 
-    void setHasMold(boolean bool);
+    void setHasMold(boolean value);
 
     boolean getHasMold();
+
+    void setShouldHasMetalCapability(boolean value);
+
+    boolean getShouldHasMetalCapability();
 
 }

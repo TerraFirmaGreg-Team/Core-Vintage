@@ -8,36 +8,35 @@ package net.dries007.tfc.api.capability.metal;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import gregtech.api.unification.material.Material;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.api.types.Metal;
-
-public class MetalItemHandler implements ICapabilityProvider, IMetalItem
+public class MetalItemHandler implements ICapabilityProvider, IMaterialItem
 {
-    private final Metal metal;
+    private final Material material;
     private final int amount;
     private final boolean canMelt;
 
-    public MetalItemHandler(Metal metal, int amount, boolean canMelt)
-    {
-        this.metal = metal;
+    public MetalItemHandler(Material metal, int amount, boolean canMelt) {
+        this.material = metal;
         this.amount = amount;
         this.canMelt = canMelt;
     }
 
     public MetalItemHandler()
     {
-        this(Metal.UNKNOWN, 0, false);
+        this(TFGMaterials.Unknown, 0, false);
     }
 
     @Nullable
     @Override
-    public Metal getMetal(ItemStack stack)
+    public Material getMaterial(ItemStack stack)
     {
-        return metal;
+        return material;
     }
 
     @Override

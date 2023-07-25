@@ -52,7 +52,7 @@ import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
@@ -66,7 +66,6 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
 @ParametersAreNonnullByDefault
@@ -167,19 +166,18 @@ public class ItemSmallVessel extends ItemPottery
     public ItemStack getFiringResult(ItemStack input)
     {
         IItemHandler capItemHandler = input.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (capItemHandler instanceof ISmallVesselHandler)
+        if (capItemHandler instanceof ISmallVesselHandler cap)
         {
-            ISmallVesselHandler cap = (ISmallVesselHandler) capItemHandler;
-            Alloy alloy = new Alloy();
+            var alloy = new Alloy();
 
             for (int i = 0; i < cap.getSlots(); i++)
             {
-                alloy.add(cap.getStackInSlot(i), Metal.Tier.TIER_VI, 1600f);
+                alloy.add(cap.getStackInSlot(i), 1600f);
                 cap.setStackInSlot(i, ItemStack.EMPTY);
             }
 
             cap.setFluidMode(true);
-            cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(alloy.getResult()), alloy.getAmount()), true);
+            cap.fill(new FluidStack(alloy.getResult().getFluid(), alloy.getAmount()), true);
             cap.setTemperature(1600f);
         }
         return input;
@@ -290,16 +288,13 @@ public class ItemSmallVessel extends ItemPottery
             else
             {
                 boolean hasContent = false;
-                Object2IntMap<Metal> materials = new Object2IntOpenHashMap<>();
+                Object2IntMap<Material> materials = new Object2IntOpenHashMap<>();
                 boolean onlySmeltables = true;
-                for (ItemStack slot : super.stacks)
-                {
-                    if (!slot.isEmpty())
-                    {
-                        IMetalItem itemMetal = CapabilityMetalItem.getMetalItem(slot);
-                        if (itemMetal != null)
-                        {
-                            materials.merge(itemMetal.getMetal(slot), itemMetal.getSmeltAmount(slot) * slot.getCount(), Integer::sum);
+                for (ItemStack slot : super.stacks) {
+                    if (!slot.isEmpty()) {
+                        IMaterialItem itemMetal = CapabilityMetalItem.getMaterialItem(slot);
+                        if (itemMetal != null) {
+                            materials.merge(itemMetal.getMaterial(slot), itemMetal.getSmeltAmount(slot) * slot.getCount(), Integer::sum);
                         }
                         else
                         {
@@ -316,13 +311,11 @@ public class ItemSmallVessel extends ItemPottery
                     {
                         int textPosition = (int) super.stacks.stream().filter(itemstack -> !ItemStack.EMPTY.equals(itemstack)).count() + 1;
                         int totalAmount = materials.values().stream().reduce(0, Integer::sum);
-                        for (Entry<Metal, Integer> entry : materials.entrySet())
-                        {
-                            Metal key = entry.getKey();
-                            if (key != null)
-                            {
+                        for (Entry<Material, Integer> entry : materials.entrySet()) {
+                            var key = entry.getKey();
+                            if (key != null) {
                                 int metalAmount = entry.getValue();
-                                text.add(textPosition, I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.small_vessel_unit_total", I18n.format(key.getTranslationKey()), metalAmount, Math.round((float) metalAmount / totalAmount * 1000) / 10f));
+                                text.add(textPosition, I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.small_vessel_unit_total", key.getLocalizedName(), metalAmount, Math.round((float) metalAmount / totalAmount * 1000) / 10f));
                             }
                         }
                         text.add(textPosition, ""); // Separator between the contents of the vessel and the above units text, not needed but I feel that it helps visually

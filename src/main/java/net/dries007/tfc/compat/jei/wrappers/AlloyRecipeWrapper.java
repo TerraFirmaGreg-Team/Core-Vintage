@@ -10,6 +10,7 @@ import java.util.List;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.Lists;
+import gregtech.api.unification.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -38,17 +39,16 @@ public class AlloyRecipeWrapper implements IRecipeWrapper
     {
         int i = 0;
         List<List<FluidStack>> allInputs = new ArrayList<>();
-        for (Metal metal : recipe.getMetals().keySet())
-        {
-            int min = (int) (recipe.getMetals().get(metal).getMin() * 100);
-            int max = (int) (recipe.getMetals().get(metal).getMax() * 100);
+        for (Material material : recipe.getMetals().keySet()) {
+            int min = (int) (recipe.getMetals().get(material).getMin() * 100);
+            int max = (int) (recipe.getMetals().get(material).getMax() * 100);
             slotContent[i] = min + "-" + max + "%";
-            FluidStack fluidInput = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 1000);
+            FluidStack fluidInput = new FluidStack(material.getFluid(), 1000);
             allInputs.add(Lists.newArrayList(fluidInput));
             i++;
         }
         ingredients.setInputLists(VanillaTypes.FLUID, allInputs);
-        ingredients.setOutput(VanillaTypes.FLUID, new FluidStack(FluidsTFC.getFluidFromMetal(recipe.getResult()), 1000));
+        ingredients.setOutput(VanillaTypes.FLUID, new FluidStack(recipe.getResult().getFluid(), 1000));
     }
 
     @Override

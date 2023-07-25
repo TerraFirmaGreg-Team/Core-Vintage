@@ -13,6 +13,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import gregtech.api.unification.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -27,7 +28,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -41,7 +42,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
  */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemMetalSword extends ItemSword implements IMetalItem, IItemSize
+public class ItemMetalSword extends ItemSword implements IMaterialItem, IItemSize
 {
     private static final Map<Metal, ItemMetalSword> TABLE = new HashMap<>();
 
@@ -100,9 +101,9 @@ public class ItemMetalSword extends ItemSword implements IMetalItem, IItemSize
 
     @Nullable
     @Override
-    public Metal getMetal(ItemStack stack)
+    public Material getMaterial(ItemStack stack)
     {
-        return metal;
+        return null;
     }
 
     @Override

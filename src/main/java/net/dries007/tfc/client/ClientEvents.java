@@ -20,7 +20,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.GuiScreenEvent;
@@ -46,7 +45,7 @@ import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.util.IRockObject;
@@ -292,7 +291,7 @@ public class ClientEvents
 
             if (event.getFlags().isAdvanced()) // Only added with advanced tooltip mode
             {
-                IMetalItem metalObject = CapabilityMetalItem.getMetalItem(stack);
+                IMaterialItem metalObject = CapabilityMetalItem.getMaterialItem(stack);
                 if (metalObject != null)
                 {
                     metalObject.addMetalInfo(stack, tt);

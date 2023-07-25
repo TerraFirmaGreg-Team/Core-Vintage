@@ -8,9 +8,13 @@ package net.dries007.tfc.types;
 import java.util.Arrays;
 import javax.annotation.Nullable;
 
+import gregtech.api.GregTechAPI;
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -45,13 +49,11 @@ import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipeRandomGem;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlockDecorativeStone;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
@@ -324,7 +326,7 @@ public final class DefaultRecipes
     public static void onRegisterBloomeryRecipeEvent(RegistryEvent.Register<BloomeryRecipe> event)
     {
         event.getRegistry().registerAll(
-            new BloomeryRecipe(Metal.WROUGHT_IRON, FuelManager::isItemBloomeryFuel)
+            new BloomeryRecipe(Materials.Iron, FuelManager::isItemBloomeryFuel)
         );
     }
 
@@ -332,7 +334,7 @@ public final class DefaultRecipes
     public static void onRegisterBlastFurnaceRecipeEvent(RegistryEvent.Register<BlastFurnaceRecipe> event)
     {
         event.getRegistry().registerAll(
-            new BlastFurnaceRecipe(Metal.PIG_IRON, Metal.WROUGHT_IRON, IIngredient.of("dustFlux"))
+            new BlastFurnaceRecipe(TFGMaterials.PigIron, Materials.Iron, IIngredient.of("dustFlux"))
         );
     }
 
@@ -341,15 +343,13 @@ public final class DefaultRecipes
     {
         IForgeRegistry<HeatRecipe> r = event.getRegistry();
 
-        for (Metal metal : TFCRegistries.METALS.getValuesCollection())
-        {
-            //noinspection ConstantConditions
-            r.register(new HeatRecipeMetalMelting(metal).setRegistryName(metal.getRegistryName().getPath() + "_melting"));
+        for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
+            if (material.hasProperty(TFGPropertyKey.HEAT))
+                r.register(new HeatRecipeMetalMelting(material).setRegistryName(material.getUnlocalizedName() + "_melting"));
         }
 
         // Pottery Items with metadata
-        for (EnumDyeColor dye : EnumDyeColor.values())
-        {
+        for (EnumDyeColor dye : EnumDyeColor.values()) {
             r.register(
                 new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsTFC.UNFIRED_VESSEL_GLAZED, 1, dye.getMetadata())), new ItemStack(ItemsTFC.FIRED_VESSEL_GLAZED, 1, dye.getMetadata()), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_vessel_glazed_" + dye.getName())
             );
@@ -480,6 +480,7 @@ public final class DefaultRecipes
     {
         IForgeRegistry<AnvilRecipe> r = event.getRegistry();
 
+        /*
         // Misc
         addAnvil(r, DOUBLE_INGOT, SHEET, false, GENERAL, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST);
         addAnvil(r, DOUBLE_SHEET, TUYERE, true, GENERAL, BEND_LAST, BEND_SECOND_LAST);
@@ -516,11 +517,11 @@ public final class DefaultRecipes
                 IForgeable cap = x.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
                 if (cap instanceof IForgeableMeasurableMetal)
                 {
-                    return ((IForgeableMeasurableMetal) cap).getMetal() == Metal.WROUGHT_IRON && ((IForgeableMeasurableMetal) cap).getMetalAmount() == 100;
+                    return ((IForgeableMeasurableMetal) cap).getMaterial() == Materials.Iron && ((IForgeableMeasurableMetal) cap).getMetalAmount() == 100;
                 }
             }
             return false;
-        }, new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, INGOT)), Metal.Tier.TIER_II, null, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
+        }, OreDictUnifier.get(OrePrefix.ingot, Materials.Iron), Metal.Tier.TIER_II, null, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
 
         // Shields
         addAnvil(r, DOUBLE_SHEET, SHIELD, true, ARMOR, UPSET_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
@@ -546,7 +547,7 @@ public final class DefaultRecipes
             Metal metalObj = TFCRegistries.METALS.getValue(metal);
             //noinspection ConstantConditions
             addAnvil(r, metal.getPath() + "_rod", INGOT, metal, new ItemStack(ItemMetal.get(metalObj, ROD), 2), metalObj.getTier().previous(), GENERAL, DRAW_LAST, DRAW_NOT_LAST, PUNCH_NOT_LAST);
-        });
+        });*/
     }
 
     @SubscribeEvent
@@ -554,6 +555,7 @@ public final class DefaultRecipes
     {
         IForgeRegistry<WeldingRecipe> r = event.getRegistry();
 
+        /*
         // Basic Parts
         addWelding(r, INGOT, DOUBLE_INGOT, null);
         addWelding(r, SHEET, DOUBLE_SHEET, null);
@@ -570,7 +572,7 @@ public final class DefaultRecipes
         addWelding(r, WEAK_RED_STEEL, BLACK_STEEL, HIGH_CARBON_RED_STEEL);
 
         // Special Recipes
-        addWelding(r, KNIFE_BLADE, KNIFE_BLADE, SHEARS, true, TOOLS);
+        addWelding(r, KNIFE_BLADE, KNIFE_BLADE, SHEARS, true, TOOLS);*/
     }
 
     @SubscribeEvent

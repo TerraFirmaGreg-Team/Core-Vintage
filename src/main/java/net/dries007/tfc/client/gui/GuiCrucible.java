@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import gregtech.api.unification.material.Material;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
@@ -63,7 +64,7 @@ public class GuiCrucible extends GuiContainerTE<TECrucible>
             if (mouseX >= guiLeft + startX && mouseX < guiLeft + endX && mouseY >= guiTop + startY && mouseY < guiTop + endY)
             {
                 List<String> tooltip = new ArrayList<>();
-                tooltip.add(I18n.format(tile.getAlloy().getResult().getTranslationKey()));
+                tooltip.add(I18n.format(tile.getAlloy().getResult().getLocalizedName()));
                 int amount = tile.getAlloy().getAmount();
                 int maxAmount = tile.getAlloy().getMaxAmount();
                 tooltip.add(I18n.format(MOD_ID + ".tooltip.crucible_units", amount, maxAmount));
@@ -127,7 +128,7 @@ public class GuiCrucible extends GuiContainerTE<TECrucible>
 
             int fillHeight = (int) Math.ceil((float) (endY - startY) * alloy.getAmount() / alloy.getMaxAmount());
 
-            Fluid fluid = FluidsTFC.getFluidFromMetal(alloy.getResult());
+            Fluid fluid = alloy.getResult().getFluid();
             TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(fluid);
 
             Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
@@ -173,8 +174,8 @@ public class GuiCrucible extends GuiContainerTE<TECrucible>
             GlStateManager.color(1, 1, 1, 1);
 
             // Draw Title:
-            Metal result = tile.getAlloyResult();
-            String resultText = TextFormatting.UNDERLINE + I18n.format(result.getTranslationKey());
+            var result = tile.getAlloyResult();
+            String resultText = TextFormatting.UNDERLINE + result.getLocalizedName();
             fontRenderer.drawString(resultText, guiLeft + 10, guiTop + 11, 0x000000);
 
             int startElement = Math.max(0, (int) Math.floor(((alloy.getMetals().size() - MAX_ELEMENTS) / 49D) * (scrollPos + 1)));
@@ -182,7 +183,7 @@ public class GuiCrucible extends GuiContainerTE<TECrucible>
             // Draw Components
             yPos = guiTop + 22;
             int index = -1; // So the first +1 = 0
-            for (Map.Entry<Metal, Double> entry : alloy.getMetals().entrySet())
+            for (Map.Entry<Material, Double> entry : alloy.getMetals().entrySet())
             {
                 index++;
                 if (index < startElement)
@@ -199,7 +200,7 @@ public class GuiCrucible extends GuiContainerTE<TECrucible>
                 // Metal 2 name:
                 //   ZZZ units(WW.W)%
 
-                String metalName = fontRenderer.trimStringToWidth(I18n.format(entry.getKey().getTranslationKey()), 141);
+                String metalName = fontRenderer.trimStringToWidth(entry.getKey().getLocalizedName(), 141);
                 metalName += ":";
                 String units;
                 if (entry.getValue() >= 1)

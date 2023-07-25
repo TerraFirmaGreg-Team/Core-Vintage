@@ -75,7 +75,7 @@ public class BloomeryProvider implements IProbeInfoProvider
                     if (cap instanceof IForgeableMeasurableMetal)
                     {
                         IForgeableMeasurableMetal forgeCap = ((IForgeableMeasurableMetal) cap);
-                        iProbeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.output", forgeCap.getMetalAmount(), new TextComponentTranslation(forgeCap.getMetal().getTranslationKey()).getFormattedText()).getFormattedText());
+                        iProbeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.output", forgeCap.getMetalAmount(), forgeCap.getMaterial().getLocalizedName()).getFormattedText());
                     }
                 }
             }
@@ -97,7 +97,7 @@ public class BloomeryProvider implements IProbeInfoProvider
                 IForgeable forgeCap = bloomStack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
                 if (forgeCap instanceof IForgeableMeasurableMetal bloomCap)
                 {
-                    iProbeInfo.text(new TextComponentTranslation("waila.tfc.metal.output", bloomCap.getMetalAmount(), new TextComponentTranslation(bloomCap.getMetal().getTranslationKey()).getFormattedText()).getFormattedText());
+                    iProbeInfo.text(new TextComponentTranslation("waila.tfc.metal.output", bloomCap.getMetalAmount(), bloomCap.getMaterial().getLocalizedName()).getFormattedText());
                 }
             }
         }

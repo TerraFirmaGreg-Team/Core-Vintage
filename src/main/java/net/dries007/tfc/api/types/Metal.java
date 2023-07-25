@@ -246,12 +246,12 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal>
             return type.supplier.apply(metal, type);
         }
 
-        private final boolean toolItem;
-        private final int armorSlot; //Which armor slot this armor should go, from 0 = Helmet to 4 = Boots
-        private final int smeltAmount;
-        private final boolean hasMold;
-        private final BiFunction<Metal, ItemType, Item> supplier;
-        private final String[] pattern;
+        private boolean toolItem;
+        private int armorSlot; //Which armor slot this armor should go, from 0 = Helmet to 4 = Boots
+        private int smeltAmount;
+        private boolean hasMold;
+        private BiFunction<Metal, ItemType, Item> supplier;
+        private String[] pattern;
 
         ItemType(boolean toolItem, int armorSlot, int smeltAmount, @Nonnull BiFunction<Metal, ItemType, Item> supplier, boolean hasMold, String... moldPattern)
         {
@@ -265,7 +265,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal>
 
         ItemType(boolean toolItem, int smeltAmount, boolean hasMold, String... moldPattern)
         {
-            this(toolItem, -1, smeltAmount, ItemMetal::new, hasMold, moldPattern);
+            //this(toolItem, -1, smeltAmount, ItemMetal::new, hasMold, moldPattern);
         }
 
         ItemType(boolean toolItem, int smeltAmount)

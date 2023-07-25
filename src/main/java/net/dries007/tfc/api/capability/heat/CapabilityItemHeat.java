@@ -36,21 +36,21 @@ public final class CapabilityItemHeat
     @CapabilityInject(IItemHeat.class)
     public static Capability<IItemHeat> ITEM_HEAT_CAPABILITY;
 
-    public static void preInit()
-    {
+    public static void preInit() {
         CapabilityManager.INSTANCE.register(IItemHeat.class, new DumbStorage<>(), ItemHeatHandler::new);
 
     }
 
-    public static void init()
-    {
+    public static void init() {
         //register heat on vanilla egg for cooking
+
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(Items.EGG), () -> new ItemHeatHandler(null, 1, 480));
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of("blockClay"), () -> new ItemHeatHandler(null, 1, 600));
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(ItemsTFC.GLASS_SHARD), () -> new ItemHeatHandler(null, 1, 1000));
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(ItemsTFC.STICK_BUNCH), () -> new ItemHeatHandler(null, 1, 200));
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of("terracotta"), () -> new ItemHeatHandler(null, 1, 1200));
-        CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(Blocks.IRON_BARS), () -> new ItemHeatHandler(null, Metal.WROUGHT_IRON.getSpecificHeat(), Metal.WROUGHT_IRON.getMeltTemp()));
+        CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(Blocks.IRON_BARS), () -> new ItemHeatHandler(null, 1, 1535));
+        CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(Items.IRON_INGOT), () -> new ItemHeatHandler(null, 0.35F, 1535));
     }
 
     /**

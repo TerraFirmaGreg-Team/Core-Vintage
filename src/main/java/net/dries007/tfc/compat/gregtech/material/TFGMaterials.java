@@ -4,6 +4,16 @@ import gregtech.api.unification.material.Material;
 
 public class TFGMaterials {
 
+    public static Material Unknown;
+    public static Material PigIron;
+    public static Material HighCarbonSteel;
+    public static Material HighCarbonBlackSteel;
+    public static Material HighCarbonBlueSteel;
+    public static Material HighCarbonRedSteel;
+    public static Material WeakSteel;
+    public static Material WeakBlueSteel;
+    public static Material WeakRedSteel;
+
     public static Material Catlinite;
     public static Material Chalk;
     public static Material Chert;

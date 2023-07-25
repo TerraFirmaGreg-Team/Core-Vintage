@@ -33,8 +33,8 @@ public class TESRCrucible extends TileEntitySpecialRenderer<TECrucible>
     {
         int amount = te.getAlloy().getAmount();
         if (amount < 1) return;
-        Metal metal = te.getAlloyResult();
-        Fluid metalFluid = FluidsTFC.getFluidFromMetal(metal);
+        var material = te.getAlloyResult();
+        var metalFluid = material.getFluid();
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);

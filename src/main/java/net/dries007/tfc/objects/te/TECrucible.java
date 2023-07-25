@@ -5,11 +5,22 @@
 
 package net.dries007.tfc.objects.te;
 
-import java.util.Arrays;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import gregtech.api.unification.material.Material;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.IMoldHandler;
+import net.dries007.tfc.api.capability.ISmallVesselHandler;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.FoodTrait;
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.api.recipes.heat.HeatRecipe;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
+import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
+import net.dries007.tfc.util.Alloy;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,22 +36,10 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.ISmallVesselHandler;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
-import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
-import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Arrays;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
@@ -57,7 +56,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
     private final IItemHandler inventoryWrapperInsert;
 
     private final HeatRecipe[] cachedRecipes;
-    private Metal alloyResult;
+    private Material alloyResult;
     private float temperature;
     private float targetTemperature;
     private int lastFillTimer;
@@ -88,14 +87,23 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
         return temperature;
     }
 
-    public int addMetal(Metal metal, int amount)
+    public int addMetal(Material material, int amount)
     {
         int overflow = Math.max(0, alloy.getAmount() + amount - alloy.getMaxAmount()); // Amount which cannot be inserted
-        alloy.add(metal, amount);
+        alloy.add(material, amount);
 
-        // Update crucible temperature to match
-        temperature = metal.getMeltTemp();
-        targetTemperature = metal.getMeltTemp();
+        var property = material.getProperty(TFGPropertyKey.HEAT);
+
+        if (property != null) {
+            // Update crucible temperature to match
+            temperature = property.getMeltTemp();
+            targetTemperature = property.getMeltTemp();
+        }
+        else {
+            temperature = 0;
+            targetTemperature = 0;
+        }
+
 
         // Alloy changed, so sync to client
         markForSync();
@@ -161,7 +169,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
                                 {
                                     canFill = false;
                                 }
-                                //alloy.add(material, fluidStack.amount); // TODO Crucible
+                                alloy.add(material, fluidStack.amount); // TODO Crucible
                                 markForSync();
                             }
                         }
@@ -176,20 +184,24 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
             // Output filling
             ItemStack outputStack = inventory.getStackInSlot(SLOT_OUTPUT);
             IItemHeat capOut = outputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-            if (capOut instanceof IMoldHandler)
-            {
+            if (capOut instanceof IMoldHandler) {
                 IMoldHandler mold = (IMoldHandler) capOut;
 
                 // Check that the crucible metal is molten
-                Metal alloyMetal = alloy.getResult();
-                if (temperature > alloyMetal.getMeltTemp())
+                var alloyMetal = alloy.getResult();
+
+                var property = alloyMetal.getProperty(TFGPropertyKey.HEAT);
+
+                if (property == null) return;
+
+                if (temperature > property.getMeltTemp())
                 {
                     // Fill from the current alloy
                     int amountToFill = alloy.removeAlloy(1, true);
                     if (amountToFill > 0)
                     {
                         // Do fill of the mold
-                        Fluid metalFluid = FluidsTFC.getFluidFromMetal(alloyMetal);
+                        Fluid metalFluid = alloyMetal.getFluid();
                         FluidStack fluidStack = new FluidStack(metalFluid, amountToFill);
                         int amountFilled = mold.fill(fluidStack, true);
 
@@ -398,7 +410,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
      * @return the current result of getAlloy().getResult()
      */
     @Nonnull
-    public Metal getAlloyResult()
+    public Material getAlloyResult()
     {
         return alloyResult;
     }

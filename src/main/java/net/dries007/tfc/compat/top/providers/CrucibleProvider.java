@@ -30,12 +30,10 @@ public class CrucibleProvider implements IProbeInfoProvider
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
         var blockPos = iProbeHitData.getPos();
         var crucible = Helpers.getTE(world, blockPos, TECrucible.class);
-        if (crucible != null)
-        {
-            if (crucible.getAlloy().getAmount() > 0)
-            {
-                Metal metal = crucible.getAlloyResult();
-                iProbeInfo.text(new TextComponentTranslation("waila.tfc.metal.output", crucible.getAlloy().getAmount(), new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
+        if (crucible != null) {
+            if (crucible.getAlloy().getAmount() > 0) {
+                var material = crucible.getAlloyResult();
+                iProbeInfo.text(new TextComponentTranslation("waila.tfc.metal.output", crucible.getAlloy().getAmount(), material.getLocalizedName()).getFormattedText());
             }
             float temperature = crucible.getTemperature();
             String heatTooltip = Heat.getTooltip(temperature);

@@ -8,8 +8,10 @@ package net.dries007.tfc.types;
 import java.util.Arrays;
 import javax.annotation.Nullable;
 
+import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -277,7 +279,7 @@ public final class DefaultRecipes
 //        );
 
         /* CLAY ITEMS */
-
+/*
         for (Metal.ItemType type : Metal.ItemType.values())
         {
             if (type.hasMold(null))
@@ -285,7 +287,7 @@ public final class DefaultRecipes
                 int amount = type == INGOT ? 2 : 1;
                 event.getRegistry().register(new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemUnfiredMold.get(type), amount), type.getPattern()).setRegistryName(type.name().toLowerCase() + "_mold"));
             }
-        }
+        }*/
 
         event.getRegistry().registerAll(
             new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_VESSEL), " XXX ", "XXXXX", "XXXXX", "XXXXX", " XXX ").setRegistryName("clay_small_vessel"),
@@ -354,13 +356,15 @@ public final class DefaultRecipes
         }
 
         // Molds
-        for (Metal.ItemType type : Metal.ItemType.values())
-        {
-            ItemUnfiredMold unfiredMold = ItemUnfiredMold.get(type);
-            ItemMold firedMold = ItemMold.get(type);
-            if (unfiredMold != null && firedMold != null)
-            {
-                r.register(new HeatRecipeSimple(IIngredient.of(unfiredMold), new ItemStack(firedMold), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_mold_" + type.name().toLowerCase()));
+        for (var orePrefix : OrePrefix.values()) {
+            var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
+            if (extendedOrePrefix.getHasMold()) {
+                var unfiredMold = ItemUnfiredMold.get(orePrefix);
+                var firedMold = ItemMold.get(orePrefix);
+
+                if (unfiredMold != null && firedMold != null) {
+                    r.register(new HeatRecipeSimple(IIngredient.of(unfiredMold), new ItemStack(firedMold), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_mold_" + orePrefix.name.toLowerCase()));
+                }
             }
         }
 

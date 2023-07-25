@@ -106,7 +106,8 @@ public final class ClientRegisterEvents
         ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES).map(e -> new ResourceLocation(MOD_ID, "goldpan/" + e)).toArray(ResourceLocation[]::new));
 
         // Ceramic Molds
-        ModelBakery.registerItemVariants(ItemMold.get(Metal.ItemType.INGOT), new ModelResourceLocation(ItemMold.get(Metal.ItemType.INGOT).getRegistryName() + "/unknown"));
+        //ModelBakery.registerItemVariants(ItemMold.get(Metal.ItemType.INGOT), new ModelResourceLocation(ItemMold.get(Metal.ItemType.INGOT).getRegistryName() + "/unknown"));
+        /*
         for (Metal.ItemType value : Metal.ItemType.values())
         {
             ItemMold item = ItemMold.get(value);
@@ -138,7 +139,7 @@ public final class ClientRegisterEvents
                     return FALLBACK;
                 }
             });
-        }
+        }*/
 
         // Item Blocks
         for (ItemBlock item : BlocksTFC.getAllNormalItemBlocks())

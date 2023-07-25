@@ -174,6 +174,7 @@ public enum Crop implements ICrop
         return ItemStack.EMPTY;
     }
 
+    @SuppressWarnings("deprecation")
     public BlockCropTFC createGrowingBlock()
     {
         if (type == SIMPLE || type == PICKABLE)

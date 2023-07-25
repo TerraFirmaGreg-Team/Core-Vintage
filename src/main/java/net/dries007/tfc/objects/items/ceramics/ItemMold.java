@@ -5,12 +5,14 @@
 
 package net.dries007.tfc.objects.items.ceramics;
 
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import gregtech.api.unification.ore.OrePrefix;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
@@ -52,21 +54,19 @@ import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_
 @ParametersAreNonnullByDefault
 public class ItemMold extends ItemPottery
 {
-    private static final EnumMap<Metal.ItemType, ItemMold> MAP = new EnumMap<>(Metal.ItemType.class);
+    private static final Map<OrePrefix, ItemMold> MOLD_STORAGE_MAP = new HashMap<>();
 
-    public static ItemMold get(Metal.ItemType category)
-    {
-        return MAP.get(category);
+    public static ItemMold get(OrePrefix orePrefix) {
+        return MOLD_STORAGE_MAP.get(orePrefix);
     }
 
-    private final Metal.ItemType type;
+    private final OrePrefix orePrefix;
 
-    public ItemMold(Metal.ItemType type)
-    {
-        this.type = type;
-        if (MAP.put(type, this) != null)
-        {
-            throw new IllegalStateException("There can only be one.");
+    public ItemMold(OrePrefix type) {
+        this.orePrefix = type;
+
+        if (MOLD_STORAGE_MAP.put(type, this) != null) {
+            throw new IllegalStateException("There can only be one mold.");
         }
     }
 
@@ -144,9 +144,9 @@ public class ItemMold extends ItemPottery
         CapabilityContainerListener.applyShareTag(stack, nbt);
     }
 
-    public Metal.ItemType getType()
+    public OrePrefix getOrePrefix()
     {
-        return type;
+        return orePrefix;
     }
 
     @Nullable
@@ -171,7 +171,7 @@ public class ItemMold extends ItemPottery
 
         FilledMoldCapability(@Nullable NBTTagCompound nbt)
         {
-            tank = new FluidTank(100);
+            tank = new FluidTank(Helpers.getOrePrefixMaterialAmount(orePrefix));
 
             if (nbt != null)
             {
@@ -209,7 +209,7 @@ public class ItemMold extends ItemPottery
             {
                 Metal metal = FluidsTFC.getMetalFromFluid(resource.getFluid());
                 //noinspection ConstantConditions
-                if (metal != null && type.hasMold(metal))
+                if (metal != null) //  && orePrefix.hasMold(metal)
                 {
                     int fillAmount = tank.fill(resource, doFill);
                     if (fillAmount == tank.getFluidAmount())

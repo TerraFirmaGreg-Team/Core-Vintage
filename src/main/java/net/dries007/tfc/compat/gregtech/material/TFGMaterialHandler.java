@@ -1,6 +1,9 @@
 package net.dries007.tfc.compat.gregtech.material;
 
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.material.properties.ToolProperty;
 
 import static gregtech.api.util.GTUtility.gregtechId;
 
@@ -84,5 +87,7 @@ public class TFGMaterialHandler {
                 .dust()
                 .color(0x989287)
                 .build();
+
+        Materials.Copper.setProperty(PropertyKey.TOOL, new ToolProperty());
     }
 }

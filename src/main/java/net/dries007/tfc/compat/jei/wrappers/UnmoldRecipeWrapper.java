@@ -21,18 +21,19 @@ import net.dries007.tfc.objects.items.metal.ItemMetal;
 
 public class UnmoldRecipeWrapper implements IRecipeWrapper
 {
-    private final ItemStack mold;
-    private final ItemStack output;
+    private ItemStack mold;
+    private ItemStack output;
 
     public UnmoldRecipeWrapper(Metal metal, Metal.ItemType type)
     {
+        /*
         mold = new ItemStack(ItemMold.get(type));
         IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
         if (cap instanceof IMoldHandler)
         {
             cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100), true);
         }
-        output = new ItemStack(ItemMetal.get(metal, type));
+        output = new ItemStack(ItemMetal.get(metal, type));*/
     }
 
 

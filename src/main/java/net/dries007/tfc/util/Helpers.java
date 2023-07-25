@@ -12,6 +12,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Joiner;
+import gregtech.api.unification.ore.OrePrefix;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCommandBlock;
 import net.minecraft.block.BlockStructure;
@@ -46,6 +47,7 @@ import net.dries007.tfc.objects.entity.EntitySeatOn;
 import net.dries007.tfc.objects.entity.animal.*;
 
 import static com.google.common.math.DoubleMath.mean;
+import static gregtech.api.GTValues.M;
 
 public final class Helpers
 {
@@ -80,6 +82,10 @@ public final class Helpers
         VANILLA_REPLACEMENTS.put(EntityPolarBear.class, EntityPolarBearTFC.class);
         VANILLA_REPLACEMENTS.put(EntityParrot.class, EntityParrotTFC.class);
         VANILLA_REPLACEMENTS.put(EntityLlama.class, EntityLlamaTFC.class);
+    }
+
+    public static int getOrePrefixMaterialAmount(OrePrefix orePrefix) {
+        return (int) (orePrefix.getMaterialAmount(null) / M) * 144;
     }
 
     public static boolean isJEIEnabled()

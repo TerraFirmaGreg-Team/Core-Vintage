@@ -10,8 +10,15 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.gson.JsonObject;
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.registry.MaterialRegistry;
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.core.unification.material.internal.MaterialRegistryManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
@@ -21,6 +28,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -42,16 +50,18 @@ import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_
 @ParametersAreNonnullByDefault
 public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
-    private final NonNullList<Ingredient> input;
-    private final ResourceLocation group;
-    private final Metal.ItemType type;
-    private final float chance; // Return chance
+    private final ItemStack inputMold;
+    private final Material inputMaterial;
+    private final OrePrefix outputOrePrefix;
+    private final float chance;
 
-    private UnmoldRecipe(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @Nonnull Metal.ItemType type, float chance)
-    {
-        this.group = group;
-        this.input = input;
-        this.type = type;
+    public UnmoldRecipe(ResourceLocation group, ItemStack inputMold, Material inputMaterial, OrePrefix outputOrePrefix, float chance) {
+        super();
+
+        this.inputMold = inputMold;
+        this.inputMaterial = inputMaterial;
+        this.outputOrePrefix = outputOrePrefix;
+
         this.chance = chance;
     }
 
@@ -75,7 +85,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
                         if (!moldHandler.isMolten())
                         {
                             Metal metal = moldHandler.getMetal();
-                            if (metal != null && moldItem.getType().equals(this.type) && !foundMold)
+                            if (metal != null && moldItem.getType().equals(Metal.ItemType.AXE) && !foundMold)
                             {
                                 foundMold = true;
                             }
@@ -116,7 +126,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
                 if (stack.getItem() instanceof ItemMold)
                 {
                     ItemMold tmp = ((ItemMold) stack.getItem());
-                    if (tmp.getType().equals(this.type) && moldStack == null)
+                    if (tmp.getType().equals(Metal.ItemType.AXE) && moldStack == null)
                     {
                         moldStack = stack;
                     }
@@ -193,12 +203,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
         return ForgeHooks.defaultRecipeGetRemainingItems(inv);
     }
 
-    @Override
-    @Nonnull
-    public NonNullList<Ingredient> getIngredients()
-    {
-        return input;
-    }
+
 
     @Override
     public boolean isDynamic()
@@ -206,17 +211,9 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
         return true;
     }
 
-    @Override
-    @Nonnull
-    public String getGroup()
-    {
-        return group == null ? "" : group.toString();
-    }
 
-    public Metal.ItemType getType()
-    {
-        return type;
-    }
+
+
 
     public float getChance()
     {
@@ -244,9 +241,10 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public ItemStack getOutputItem(final IMoldHandler moldHandler)
     {
         Metal m = moldHandler.getMetal();
+        System.out.println(m.toString());
         if (m != null)
         {
-            ItemStack output = new ItemStack(ItemMetal.get(m, type));
+            ItemStack output = OreDictUnifier.get(outputOrePrefix, inputMaterial);
             IItemHeat heat = output.getCapability(ITEM_HEAT_CAPABILITY, null);
             if (heat != null)
             {
@@ -263,9 +261,10 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
         @Override
         public IRecipe parse(final JsonContext context, final JsonObject json)
         {
-            final NonNullList<Ingredient> ingredients = RecipeUtils.parseShapeless(context, json);
-            final String result = JsonUtils.getString(json, "result");
-            final Metal.ItemType type = Metal.ItemType.valueOf(result.toUpperCase());
+            final ItemStack inputMold = CraftingHelper.getItemStack(json, context);
+            final Material inputMaterial = MaterialRegistryManager.getInstance().getMaterial(JsonUtils.getString(json, "inputMaterial"));
+            final OrePrefix outputOrePrefix = OrePrefix.getPrefix(JsonUtils.getString(json, "outputOrePrefix"));
+
             final String group = JsonUtils.getString(json, "group", "");
 
             //Chance of getting the mold back
@@ -275,7 +274,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
                 chance = JsonUtils.getFloat(json, "chance");
             }
 
-            return new UnmoldRecipe(group.isEmpty() ? new ResourceLocation(result) : new ResourceLocation(group), ingredients, type, chance);
+            return new UnmoldRecipe(new ResourceLocation(group), inputMold, inputMaterial, outputOrePrefix, chance);
         }
     }
 }

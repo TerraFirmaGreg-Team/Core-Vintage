@@ -106,11 +106,14 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBl
     @Override
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
     {
+        System.out.println("cock 1");
         TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
         if (te != null)
         {
+            System.out.println("cock 2");
             if (!worldIn.isRemote && te.getTicksSinceUpdate() > ConfigTFC.General.OVERRIDES.torchTime && ConfigTFC.General.OVERRIDES.torchTime > 0)
             {
+                System.out.println("cock 3");
                 worldIn.setBlockState(pos, state.withProperty(LIT, false));
                 te.resetCounter();
             }

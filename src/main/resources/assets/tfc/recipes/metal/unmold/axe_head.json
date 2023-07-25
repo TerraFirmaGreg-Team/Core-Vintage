@@ -1,9 +1,7 @@
 {
   "type": "tfc:unmold_recipe",
-  "ingredients": [
-    {
-      "item": "tfc:ceramics/fired/mold/axe_head"
-    }
-  ],
-  "result": "axe_head"
+  "input": "tfc:ceramics/fired/mold/axe_head",
+  "inputMaterial": "copper",
+  "outputOrePrefix": "toolHeadAxe",
+  "group": "cock"
 }

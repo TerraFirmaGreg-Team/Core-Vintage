@@ -28,5 +28,6 @@ public class TOPPlugin
         oneProbe.registerProvider(new QuernProvider());
         oneProbe.registerProvider(new PlacedItemProvider());
         oneProbe.registerProvider(new TreeProvider());
+        oneProbe.registerProvider(new TorchProvider());
     }
 }

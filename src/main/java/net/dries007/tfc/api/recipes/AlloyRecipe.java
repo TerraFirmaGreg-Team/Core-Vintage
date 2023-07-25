@@ -28,7 +28,7 @@ public class AlloyRecipe extends IForgeRegistryEntry.Impl<AlloyRecipe>
         this.metalMap = alloyMap;
         this.result = result;
 
-        setRegistryName(result.getUnlocalizedName());
+        setRegistryName(result.getName());
     }
 
     public Material getResult() {

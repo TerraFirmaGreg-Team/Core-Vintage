@@ -296,7 +296,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound>
         NBTTagCompound alloys = new NBTTagCompound();
         for (Map.Entry<Material, Double> entry : this.metalMap.entrySet()) {
             //noinspection ConstantConditions
-            alloys.setDouble(entry.getKey().getUnlocalizedName(), entry.getValue());
+            alloys.setDouble(entry.getKey().getName(), entry.getValue());
         }
         nbt.setTag("contents", alloys);
         return nbt;
@@ -312,9 +312,8 @@ public class Alloy implements INBTSerializable<NBTTagCompound>
             NBTTagCompound alloys = nbt.getCompoundTag("contents");
             for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
                 //noinspection ConstantConditions
-                String key = material.getUnlocalizedName();
-                if (alloys.hasKey(key))
-                {
+                String key = material.getName();
+                if (alloys.hasKey(key)) {
                     double amount = alloys.getDouble(key);
                     this.metalMap.put(material, amount);
                 }

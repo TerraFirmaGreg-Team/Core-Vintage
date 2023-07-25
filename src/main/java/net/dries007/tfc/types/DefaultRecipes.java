@@ -345,7 +345,7 @@ public final class DefaultRecipes
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
             if (material.hasProperty(TFGPropertyKey.HEAT))
-                r.register(new HeatRecipeMetalMelting(material).setRegistryName(material.getUnlocalizedName() + "_melting"));
+                r.register(new HeatRecipeMetalMelting(material).setRegistryName(material.getName() + "_melting"));
         }
 
         // Pottery Items with metadata

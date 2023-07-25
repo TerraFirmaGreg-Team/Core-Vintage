@@ -5,13 +5,15 @@
 
 package net.dries007.tfc.objects.items;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
+import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
+import net.dries007.tfc.api.capability.forge.ForgeableMeasurableMetalHandler;
+import net.dries007.tfc.api.capability.forge.IForgeable;
+import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,15 +24,10 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.ForgeableMeasurableMetalHandler;
-import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
-import net.dries007.tfc.api.capability.metal.IMaterialItem;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class ItemBloom extends ItemTFC implements IMaterialItem
@@ -58,8 +55,7 @@ public class ItemBloom extends ItemTFC implements IMaterialItem
 
     @Nullable
     @Override
-    public Material getMaterial(ItemStack stack)
-    {
+    public Material getMaterial(ItemStack stack) {
         IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
         if (cap instanceof IForgeableMeasurableMetal) {
             return ((IForgeableMeasurableMetal) cap).getMaterial();
@@ -71,10 +67,9 @@ public class ItemBloom extends ItemTFC implements IMaterialItem
     public int getSmeltAmount(ItemStack stack)
     {
         IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-        if (cap instanceof IForgeableMeasurableMetal)
-        {
+        if (cap instanceof IForgeableMeasurableMetal) {
             int amount = ((IForgeableMeasurableMetal) cap).getMetalAmount();
-            if (amount > 100) amount = 100;
+            if (amount > 144) amount = 144;
             return amount;
         }
         return 0;
@@ -91,16 +86,18 @@ public class ItemBloom extends ItemTFC implements IMaterialItem
     public void addMetalInfo(ItemStack stack, List<String> text) {
         IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
         if (cap instanceof IForgeableMeasurableMetal) {
+            var material = ((IForgeableMeasurableMetal) cap).getMaterial();
+            var metalAmount = ((IForgeableMeasurableMetal) cap).getMetalAmount();
+
             text.add("");
-            text.add(I18n.format("tfc.tooltip.metal", ((IForgeableMeasurableMetal) cap).getMaterial().getLocalizedName()));
-            text.add(I18n.format("tfc.tooltip.units", ((IForgeableMeasurableMetal) cap).getMetalAmount()));
+            text.add(I18n.format("tfc.tooltip.metal", material.getUnlocalizedName()));
+            text.add(I18n.format("tfc.tooltip.units", metalAmount));
         }
     }
 
     @Override
     @Nonnull
-    public String getTranslationKey(ItemStack stack)
-    {
+    public String getTranslationKey(ItemStack stack) {
         //noinspection ConstantConditions
         return super.getTranslationKey(stack) + "." + getMaterial(stack).getUnlocalizedName();
     }
@@ -109,7 +106,7 @@ public class ItemBloom extends ItemTFC implements IMaterialItem
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (isInCreativeTab(tab)) {
-            for (int i = 100; i <= 400; i += 100) {
+            for (int i = 144; i <= 576; i += 144) {
                 ItemStack stack = new ItemStack(this);
                 IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
                 if (cap instanceof IForgeableMeasurableMetal handler) {
@@ -125,7 +122,7 @@ public class ItemBloom extends ItemTFC implements IMaterialItem
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
         if (nbt == null) {
-            return new ForgeableMeasurableMetalHandler(TFGMaterials.Unknown, 100);
+            return new ForgeableMeasurableMetalHandler(Materials.Iron, 144);
         }
         else {
             return new ForgeableMeasurableMetalHandler(nbt);

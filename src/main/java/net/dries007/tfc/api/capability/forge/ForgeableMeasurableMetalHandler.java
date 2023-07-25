@@ -82,7 +82,7 @@ public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler im
     public NBTTagCompound serializeNBT() {
         var nbt = super.serializeNBT();
         nbt.setInteger("metalAmount", metalAmount);
-        nbt.setString("metal", material.getUnlocalizedName());
+        nbt.setString("metal", material.getName());
         return nbt;
     }
 
@@ -92,7 +92,7 @@ public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler im
             metalAmount = nbt.getInteger("metalAmount");
             var materialName = nbt.getString("metal");
             material = MaterialRegistryManager.getInstance().getMaterial(materialName);;
-
+            System.out.println(materialName + " " + material);
             if (material == null) {
                 material = TFGMaterials.Unknown;
             }

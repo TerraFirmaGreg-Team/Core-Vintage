@@ -54,7 +54,7 @@ public class BlastFurnaceRecipe extends IForgeRegistryEntry.Impl<BlastFurnaceRec
 
         //Ensure one blast furnace recipe per input metal
         //noinspection ConstantConditions
-        setRegistryName(input.getUnlocalizedName());
+        setRegistryName(input.getName());
     }
 
     @Nullable

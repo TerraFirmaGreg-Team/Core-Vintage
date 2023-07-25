@@ -6,8 +6,6 @@ import gregtech.common.items.MetaItems;
 import java.util.Arrays;
 import java.util.List;
 
-import static gregtech.api.GTValues.M;
-
 public class TFGOrePrefixHandler {
     public static void init() {
 

@@ -5,17 +5,16 @@
 
 package net.dries007.tfc.objects.recipes;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.gson.JsonObject;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.core.unification.material.internal.MaterialRegistryManager;
+import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.api.capability.IMoldHandler;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
@@ -34,15 +33,9 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.items.ceramics.ItemMold;
-import org.lwjgl.Sys;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-import static gregtech.api.GTValues.M;
 import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
@@ -75,8 +68,8 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
                     IFluidHandler cap = stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
                     if (cap instanceof IMoldHandler moldHandler) {
                         if (!moldHandler.isMolten()) {
-                            Metal metal = moldHandler.getMetal();
-                            if (metal != null && moldItem.getOrePrefix().equals(outputOrePrefix) && !foundMold) {
+                            var material = moldHandler.getMaterial();
+                            if (material != null && moldItem.getOrePrefix().equals(outputOrePrefix) && !foundMold) {
                                 foundMold = true;
                             }
                             else {
@@ -196,15 +189,20 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
     }
 
     public ItemStack getOutputItem(final IMoldHandler moldHandler) {
-        Metal m = moldHandler.getMetal();
+        var materialInMold = moldHandler.getMaterial();
 
-        if (m != null) {
-            ItemStack output = OreDictUnifier.get(outputOrePrefix, inputMaterial);
-            IItemHeat heat = output.getCapability(ITEM_HEAT_CAPABILITY, null);
-            if (heat != null) {
-                heat.setTemperature(moldHandler.getTemperature());
+        if (materialInMold != null) {
+            if (inputMaterial == materialInMold) {
+                var output = OreDictUnifier.get(outputOrePrefix, inputMaterial);
+                var heat = output.getCapability(ITEM_HEAT_CAPABILITY, null);
+
+                if (heat != null) {
+                    heat.setTemperature(moldHandler.getTemperature());
+                }
+
+                return output;
             }
-            return output;
+            return ItemStack.EMPTY;
         }
         return ItemStack.EMPTY;
     }

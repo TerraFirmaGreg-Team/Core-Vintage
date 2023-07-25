@@ -32,7 +32,6 @@ import net.dries007.tfc.api.capability.ISmallVesselHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.Metal;
@@ -146,15 +145,14 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
                     }
                 }
                 // Try and drain fluid
-                if (cap instanceof IMoldHandler)
+                if (cap instanceof IMoldHandler mold)
                 {
-                    IMoldHandler mold = (IMoldHandler) cap;
                     if (canFill)
                     {
                         if (mold.isMolten())
                         {
                             // Use mold.getMetal() to avoid off by one errors during draining
-                            Metal metal = mold.getMetal();
+                            var material = mold.getMaterial();
                             FluidStack fluidStack = mold.drain(ConfigTFC.Devices.CRUCIBLE.pouringSpeed, true);
                             if (fluidStack != null && fluidStack.amount > 0)
                             {
@@ -163,7 +161,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
                                 {
                                     canFill = false;
                                 }
-                                alloy.add(metal, fluidStack.amount);
+                                //alloy.add(material, fluidStack.amount); // TODO Crucible
                                 markForSync();
                             }
                         }
@@ -235,7 +233,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
             {
                 if (cap instanceof ISmallVesselHandler)
                 {
-                    if (((ISmallVesselHandler) cap).getMetal() != null)
+                    if (((ISmallVesselHandler) cap).getMaterial() != null)
                     {
                         return true;
                     }

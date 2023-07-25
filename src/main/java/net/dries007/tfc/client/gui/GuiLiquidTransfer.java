@@ -41,12 +41,10 @@ public class GuiLiquidTransfer extends GuiContainerTFC
     {
         ItemStack stack = playerInv.getStackInSlot(slotIdx);
         IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler)
-        {
-            Metal metal = ((IMoldHandler) cap).getMetal();
-            if (metal != null)
-            {
-                String metalName = I18n.format(Helpers.getTypeName(metal));
+        if (cap instanceof IMoldHandler) {
+            var material = ((IMoldHandler) cap).getMaterial();
+            if (material != null) {
+                String metalName = material.getLocalizedName();
                 String amountName = I18n.format("tfc.tooltip.units", ((IMoldHandler) cap).getAmount());
                 fontRenderer.drawString(metalName, xSize / 2 - fontRenderer.getStringWidth(metalName) / 2, 14, 0x404040);
                 fontRenderer.drawString(amountName, xSize / 2 - fontRenderer.getStringWidth(amountName) / 2, 23, 0x404040);

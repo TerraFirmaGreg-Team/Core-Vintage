@@ -7,6 +7,7 @@ package net.dries007.tfc.api.capability;
 
 import javax.annotation.Nullable;
 
+import gregtech.api.unification.material.Material;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -28,7 +29,7 @@ public interface IMoldHandler extends IFluidHandler, INBTSerializable<NBTTagComp
      * @return The metal
      */
     @Nullable
-    Metal getMetal();
+    Material getMaterial();
 
     /**
      * Gets the current amount of metal in the mold. Zero if empty.

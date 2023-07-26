@@ -5,10 +5,9 @@
 
 package net.dries007.tfc.compat.jei;
 
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 /**
  * Wraps simple ItemStacks -> ItemStacks recipes to JEI

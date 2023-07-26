@@ -5,14 +5,13 @@
 
 package net.dries007.tfc.compat.jei;
 
+import mezz.jei.api.gui.IAdvancedGuiHandler;
+import net.minecraft.client.gui.inventory.GuiContainer;
+
+import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nonnull;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-
-import mezz.jei.api.gui.IAdvancedGuiHandler;
 
 public class TFCInventoryGuiHandler<T extends GuiContainer> implements IAdvancedGuiHandler<T>
 {

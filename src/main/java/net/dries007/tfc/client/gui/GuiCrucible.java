@@ -5,14 +5,11 @@
 
 package net.dries007.tfc.client.gui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import gregtech.api.unification.material.Material;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.objects.te.TECrucible;
+import net.dries007.tfc.util.Alloy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -26,13 +23,13 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.Fluid;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.te.TECrucible;
-import net.dries007.tfc.util.Alloy;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

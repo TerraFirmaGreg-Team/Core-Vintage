@@ -5,27 +5,10 @@
 
 package net.dries007.tfc.compat.jei;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.MetaFluids;
-import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
-import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
-import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fluids.FluidStack;
-
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
@@ -38,22 +21,31 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.client.gui.*;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
+import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.compat.jei.categories.*;
 import net.dries007.tfc.compat.jei.wrappers.*;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLoom;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.items.ItemAnimalHide.HideType;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.items.metal.ItemAnvil;
-import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
-import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @JEIPlugin
 public final class TFCJEIPlugin implements IModPlugin

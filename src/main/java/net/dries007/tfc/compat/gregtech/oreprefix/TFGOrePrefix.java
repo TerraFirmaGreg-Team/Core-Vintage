@@ -10,7 +10,6 @@ import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 
 import static gregtech.api.GTValues.M;
 import static gregtech.api.unification.ore.OrePrefix.Conditions.*;
-import static gregtech.api.unification.ore.OrePrefix.Conditions.hasToolProperty;
 import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
 
 public class TFGOrePrefix {

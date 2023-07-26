@@ -5,6 +5,10 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
+import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IRecipeWrapper;
+import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -12,11 +16,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeWrapper;
-import net.dries007.tfc.objects.items.ItemAnimalHide;
 
 public class ScrapingWrapper implements IRecipeWrapper
 {

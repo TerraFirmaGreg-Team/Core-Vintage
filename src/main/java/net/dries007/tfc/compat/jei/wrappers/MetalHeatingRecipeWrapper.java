@@ -6,16 +6,13 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
 import gregtech.api.unification.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 public class MetalHeatingRecipeWrapper implements IRecipeWrapper
 {

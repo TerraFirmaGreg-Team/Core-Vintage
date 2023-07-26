@@ -5,10 +5,10 @@
 
 package net.dries007.tfc.client.render.animal;
 
-import java.util.Map;
-import javax.annotation.Nonnull;
-
 import com.google.common.collect.Maps;
+import net.dries007.tfc.client.model.animal.ModelHorseTFC;
+import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
+import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -17,9 +17,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.client.model.animal.ModelHorseTFC;
-import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
-import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;
+import javax.annotation.Nonnull;
+import java.util.Map;
 
 /**
  * Used for mule and donkey, because vanilla uses it's own map from class -> resource

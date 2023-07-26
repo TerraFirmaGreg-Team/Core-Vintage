@@ -5,16 +5,15 @@
 
 package net.dries007.tfc.objects.container;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.objects.te.TEFirePit;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.objects.te.TEFirePit;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.objects.te.TEFirePit.*;
 

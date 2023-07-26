@@ -5,12 +5,12 @@
 
 package net.dries007.tfc.api.capability.damage;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class DamageResistance implements IDamageResistance, ICapabilityProvider
 {

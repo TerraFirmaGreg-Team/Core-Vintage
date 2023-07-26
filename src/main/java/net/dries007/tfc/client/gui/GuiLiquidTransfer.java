@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.client.gui;
 
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.IMoldHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -14,11 +16,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.Helpers;
 
 @SideOnly(Side.CLIENT)
 public class GuiLiquidTransfer extends GuiContainerTFC

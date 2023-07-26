@@ -5,12 +5,20 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.google.common.base.Predicates;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.api.types.ILivestock;
+import net.dries007.tfc.api.types.IPredator;
+import net.dries007.tfc.network.PacketSimpleMessage;
+import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.objects.advancements.TFCTriggers;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.entity.ai.EntityAIPanicTFC;
+import net.dries007.tfc.objects.entity.ai.EntityAITamableAvoidPlayer;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.ai.*;
@@ -32,19 +40,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.ILivestock;
-import net.dries007.tfc.api.types.IPredator;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.entity.ai.EntityAIPanicTFC;
-import net.dries007.tfc.objects.entity.ai.EntityAITamableAvoidPlayer;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

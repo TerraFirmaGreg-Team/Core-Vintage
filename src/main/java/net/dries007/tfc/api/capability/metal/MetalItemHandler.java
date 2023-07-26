@@ -5,15 +5,15 @@
 
 package net.dries007.tfc.api.capability.metal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import gregtech.api.unification.material.Material;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class MetalItemHandler implements ICapabilityProvider, IMaterialItem
 {

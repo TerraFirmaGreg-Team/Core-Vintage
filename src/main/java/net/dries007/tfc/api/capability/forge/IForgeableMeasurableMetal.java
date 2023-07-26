@@ -6,7 +6,6 @@
 package net.dries007.tfc.api.capability.forge;
 
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.api.types.Metal;
 
 /**
  * Interface for the forgeable heatable capability for items that store a metal amount, i.e. blooms

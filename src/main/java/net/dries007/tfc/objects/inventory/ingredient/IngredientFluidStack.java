@@ -5,12 +5,12 @@
 
 package net.dries007.tfc.objects.inventory.ingredient;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class IngredientFluidStack implements IIngredient<FluidStack>
 {

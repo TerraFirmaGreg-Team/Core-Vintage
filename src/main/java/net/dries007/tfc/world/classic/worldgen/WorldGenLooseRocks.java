@@ -5,12 +5,14 @@
 
 package net.dries007.tfc.world.classic.worldgen;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.items.rock.ItemRock;
+import net.dries007.tfc.objects.te.TEPlacedItemFlat;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.world.classic.ChunkGenTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -19,14 +21,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import java.util.Random;
 
 public class WorldGenLooseRocks implements IWorldGenerator
 {

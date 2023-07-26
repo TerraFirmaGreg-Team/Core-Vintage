@@ -5,10 +5,13 @@
 
 package net.dries007.tfc.objects.items;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.ArmorMaterialTFC;
+import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -29,13 +32,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.ArmorMaterialTFC;
-import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ItemQuiver extends ItemArmorTFC

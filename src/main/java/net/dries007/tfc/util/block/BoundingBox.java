@@ -5,12 +5,12 @@
 
 package net.dries007.tfc.util.block;
 
-import java.util.Arrays;
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
+
+import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 /**
  * Not Axis Aligned Bounding Box

@@ -5,19 +5,13 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
-import java.util.Collections;
-
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.client.gui.GuiAnvilTFC;
+import net.dries007.tfc.util.forge.ForgeRule;
+import net.dries007.tfc.util.forge.ForgeStep;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
-import net.minecraftforge.fml.client.config.GuiUtils;
-
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.client.gui.GuiAnvilTFC;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.forge.ForgeRule;
-import net.dries007.tfc.util.forge.ForgeStep;
 
 public class AnvilRecipeWrapper extends SimpleRecipeWrapper
 {

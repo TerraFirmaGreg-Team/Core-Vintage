@@ -5,10 +5,17 @@
 
 package net.dries007.tfc.objects.items.metal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
+import net.dries007.tfc.api.capability.player.IPlayerData;
+import net.dries007.tfc.api.recipes.ChiselRecipe;
+import net.dries007.tfc.api.recipes.ChiselRecipe.Mode;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
+import net.dries007.tfc.objects.blocks.wood.BlockSupport;
+import net.dries007.tfc.objects.container.ContainerEmpty;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
@@ -29,17 +36,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.recipes.ChiselRecipe;
-import net.dries007.tfc.api.recipes.ChiselRecipe.Mode;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
-import net.dries007.tfc.objects.blocks.wood.BlockSupport;
-import net.dries007.tfc.objects.container.ContainerEmpty;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ItemMetalChisel extends ItemMetalTool {

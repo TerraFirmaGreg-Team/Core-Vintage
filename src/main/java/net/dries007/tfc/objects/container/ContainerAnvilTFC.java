@@ -5,11 +5,17 @@
 
 package net.dries007.tfc.objects.container;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import gregtech.common.items.ToolItems;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
+import net.dries007.tfc.api.capability.forge.IForgeable;
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.forge.ForgeStep;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -20,16 +26,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.objects.te.TEAnvilTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.forge.ForgeStep;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.*;

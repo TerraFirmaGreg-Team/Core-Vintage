@@ -5,39 +5,26 @@
 
 package net.dries007.tfc.api.capability.metal;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Supplier;
-import javax.annotation.Nullable;
-
 import gregtech.api.items.materialitem.MetaPrefixItem;
-import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.api.capability.forge.ForgeableMeasurableMetalHandler;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.oredict.OreDictionary;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.DumbStorage;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class CapabilityMetalItem
 {

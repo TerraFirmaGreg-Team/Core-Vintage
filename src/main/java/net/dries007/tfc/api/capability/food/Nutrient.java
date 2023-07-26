@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.api.capability.food;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.text.TextFormatting;
+
+import javax.annotation.Nonnull;
 
 public enum Nutrient
 {

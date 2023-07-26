@@ -1,7 +1,9 @@
 package net.dries007.tfc.objects.items.itemblock;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowerPot;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,14 +14,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

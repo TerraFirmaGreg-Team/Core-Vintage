@@ -5,14 +5,12 @@
 
 package net.dries007.tfc.objects.recipes;
 
+import net.dries007.tfc.ConfigTFC;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
-
-import net.dries007.tfc.ConfigTFC;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

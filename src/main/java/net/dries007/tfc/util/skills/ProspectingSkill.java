@@ -5,14 +5,13 @@
 
 package net.dries007.tfc.util.skills;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
-import net.dries007.tfc.api.capability.player.IPlayerData;
+import javax.annotation.Nonnull;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ProspectingSkill extends Skill
 {

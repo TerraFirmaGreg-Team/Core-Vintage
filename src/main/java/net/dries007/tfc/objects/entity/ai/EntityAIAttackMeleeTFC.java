@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.objects.entity.ai;
 
+import net.dries007.tfc.api.types.IAnimalTFC;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIWander;
-
-import net.dries007.tfc.api.types.IAnimalTFC;
 
 /**
  * Extends vanilla AI to add a bit more in-depth to predators

@@ -5,13 +5,16 @@
 
 package net.dries007.tfc.objects.items.itemblock;
 
-import java.util.*;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import gregtech.api.unification.material.Material;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalLamp;
+import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -28,15 +31,9 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.capability.metal.IMaterialItem;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.blocks.metal.BlockMetalLamp;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class ItemBlockMetalLamp extends ItemBlockTFC implements IMaterialItem
 {

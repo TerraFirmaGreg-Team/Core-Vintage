@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.particle;
 
-import java.util.function.Supplier;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.network.PacketSpawnTFCParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -21,8 +20,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.network.PacketSpawnTFCParticle;
+import javax.annotation.Nonnull;
+import java.util.function.Supplier;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

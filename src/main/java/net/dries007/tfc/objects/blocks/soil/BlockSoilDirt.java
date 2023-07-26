@@ -9,10 +9,8 @@ package net.dries007.tfc.objects.blocks.soil;
 
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.api.util.ISoilTypeBlock;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -28,8 +26,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.function.Supplier;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;

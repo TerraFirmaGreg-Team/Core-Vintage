@@ -5,8 +5,8 @@
 
 package net.dries007.tfc.client.render;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.entity.EntityBoatTFC;
 import net.minecraft.client.model.IMultipassModel;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
@@ -19,8 +19,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.entity.EntityBoatTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

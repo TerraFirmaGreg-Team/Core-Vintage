@@ -2,7 +2,6 @@ package net.dries007.tfc.compat.gregtech.material;
 
 import gregtech.api.unification.material.properties.IMaterialProperty;
 import gregtech.api.unification.material.properties.MaterialProperties;
-import gregtech.api.unification.material.properties.PropertyKey;
 
 public class HeatProperty implements IMaterialProperty {
 

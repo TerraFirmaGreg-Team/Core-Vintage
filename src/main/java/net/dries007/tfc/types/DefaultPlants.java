@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.types;
 
+import net.dries007.tfc.api.registries.TFCRegistryEvent;
+import net.dries007.tfc.api.types.Plant;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import net.dries007.tfc.api.registries.TFCRegistryEvent;
-import net.dries007.tfc.api.types.Plant;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

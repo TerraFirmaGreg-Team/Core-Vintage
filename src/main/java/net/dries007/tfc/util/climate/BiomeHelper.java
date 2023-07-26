@@ -5,10 +5,10 @@
 
 package net.dries007.tfc.util.climate;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Helper class

@@ -5,14 +5,18 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiConsumer;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.egg.CapabilityEgg;
+import net.dries007.tfc.api.capability.egg.IEgg;
+import net.dries007.tfc.api.types.ILivestock;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.LootTablesTFC;
+import net.dries007.tfc.objects.entity.EntitiesTFC;
+import net.dries007.tfc.objects.entity.ai.EntityAIFindNest;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.climate.BiomeHelper;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -32,18 +36,13 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.IEgg;
-import net.dries007.tfc.api.types.ILivestock;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.objects.entity.EntitiesTFC;
-import net.dries007.tfc.objects.entity.ai.EntityAIFindNest;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.function.BiConsumer;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

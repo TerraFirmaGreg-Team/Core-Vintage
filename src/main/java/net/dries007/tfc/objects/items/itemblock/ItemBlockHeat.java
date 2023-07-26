@@ -5,14 +5,13 @@
 
 package net.dries007.tfc.objects.items.itemblock;
 
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import javax.annotation.Nullable;
 
 public class ItemBlockHeat extends ItemBlockTFC
 {

@@ -5,14 +5,13 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.minecraft.entity.EntityLiving;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
-
-import net.minecraft.entity.EntityLiving;
-
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
 
 /**
  * Helper enum with some default grouping rules for animals

@@ -5,15 +5,18 @@
 
 package net.dries007.tfc.objects.items.metal;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import gregtech.api.unification.material.Material;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.damage.DamageType;
+import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -25,15 +28,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMaterialItem;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
  * todo in 1.15+ put more thought in weapons + tools, make them extend the vanilla's classes where possible

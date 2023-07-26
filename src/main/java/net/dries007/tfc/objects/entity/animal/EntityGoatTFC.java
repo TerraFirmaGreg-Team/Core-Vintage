@@ -5,9 +5,15 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.types.ILivestock;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.LootTablesTFC;
+import net.dries007.tfc.objects.entity.ai.EntityAILawnmower;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.climate.BiomeHelper;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
@@ -22,15 +28,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.ILivestock;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.objects.entity.ai.EntityAILawnmower;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * A Cow of the colder regions!

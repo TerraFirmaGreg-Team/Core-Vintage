@@ -1,10 +1,5 @@
 package net.dries007.tfc.api.types2;
 
-import net.minecraft.util.IStringSerializable;
-
-import javax.annotation.Nonnull;
-import java.util.function.Function;
-
 //public enum FossilType implements IStringSerializable {
 //    STICK(BlockLooseStickTFG::new),
 //    MIXED_STONE(BlockLooseMixedStoneTFG::new),

@@ -5,15 +5,14 @@
 
 package net.dries007.tfc;
 
+import net.dries007.tfc.client.GrassColorHandler;
+import net.dries007.tfc.util.Alloy;
+import net.dries007.tfc.util.config.*;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import net.dries007.tfc.client.GrassColorHandler;
-import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.config.*;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

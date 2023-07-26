@@ -5,12 +5,14 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiConsumer;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.types.IHuntable;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.LootTablesTFC;
+import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.util.climate.BiomeHelper;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -26,14 +28,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.IHuntable;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
+import java.util.Random;
+import java.util.function.BiConsumer;
 
 @ParametersAreNonnullByDefault
 public class EntityDeerTFC extends EntityAnimalMammal implements IHuntable

@@ -5,12 +5,12 @@
 
 package net.dries007.tfc.objects.fluids.capability;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+
+import javax.annotation.Nullable;
 
 public class FluidHandlerSided implements IFluidHandler
 {

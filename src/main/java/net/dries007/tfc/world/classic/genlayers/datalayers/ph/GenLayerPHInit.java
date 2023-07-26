@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.world.classic.genlayers.datalayers.ph;
 
-import net.minecraft.world.gen.layer.IntCache;
-
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
+import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerPHInit extends GenLayerTFC
 {

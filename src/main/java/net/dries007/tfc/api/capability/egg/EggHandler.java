@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.api.capability.egg;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +12,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class EggHandler implements IEgg, ICapabilitySerializable<NBTTagCompound>
 {

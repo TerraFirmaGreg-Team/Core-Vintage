@@ -5,20 +5,19 @@
 
 package net.dries007.tfc.objects.entity.ai;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.objects.te.TENestBox;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.objects.te.TENestBox;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.ICalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class EntityAIFindNest extends EntityAIBase
 {

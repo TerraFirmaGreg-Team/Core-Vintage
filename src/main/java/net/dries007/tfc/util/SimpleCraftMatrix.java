@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.util;
 
-import java.util.Arrays;
-
 import net.dries007.tfc.TerraFirmaCraft;
+
+import java.util.Arrays;
 
 /**
  * A simple craft matrix for knapping / leather or clay working

@@ -5,10 +5,10 @@
 
 package net.dries007.tfc.objects.te;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.nbt.NBTTagCompound;
 
 
 @ParametersAreNonnullByDefault

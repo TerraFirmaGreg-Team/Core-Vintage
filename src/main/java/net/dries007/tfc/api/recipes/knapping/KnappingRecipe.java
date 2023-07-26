@@ -5,10 +5,9 @@
 
 package net.dries007.tfc.api.recipes.knapping;
 
+import net.dries007.tfc.util.SimpleCraftMatrix;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import net.dries007.tfc.util.SimpleCraftMatrix;
 
 /**
  * todo: in 1.13+ move this to a json recipe type

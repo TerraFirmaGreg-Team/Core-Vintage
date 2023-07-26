@@ -5,19 +5,18 @@
 
 package net.dries007.tfc.world.classic.genlayers.datalayers.rock;
 
-import java.util.Arrays;
-import java.util.Objects;
-import javax.annotation.Nonnull;
-
-import net.minecraft.world.gen.layer.IntCache;
-import net.minecraftforge.registries.ForgeRegistry;
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
+import net.minecraft.world.gen.layer.IntCache;
+import net.minecraftforge.registries.ForgeRegistry;
+
+import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class GenLayerRockInit extends GenLayerTFC
 {

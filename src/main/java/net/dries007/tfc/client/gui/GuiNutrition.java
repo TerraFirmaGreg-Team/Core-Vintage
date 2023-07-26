@@ -5,6 +5,13 @@
 
 package net.dries007.tfc.client.gui;
 
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
+import net.dries007.tfc.api.capability.food.Nutrient;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
+import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
@@ -14,14 +21,6 @@ import net.minecraft.util.FoodStats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
-import net.dries007.tfc.api.capability.food.Nutrient;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
-import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

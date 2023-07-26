@@ -5,8 +5,9 @@
 
 package net.dries007.tfc.client.render.animal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.client.model.animal.ModelPheasantTFC;
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityPheasantTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -15,9 +16,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.client.model.animal.ModelPheasantTFC;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityPheasantTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

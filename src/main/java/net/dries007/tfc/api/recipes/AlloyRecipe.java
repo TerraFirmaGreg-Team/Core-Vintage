@@ -5,16 +5,12 @@
 
 package net.dries007.tfc.api.recipes;
 
-import javax.annotation.Nonnull;
-
 import com.google.common.collect.ImmutableMap;
 import gregtech.api.unification.material.Material;
-import net.minecraft.util.ResourceLocation;
+import net.dries007.tfc.util.Alloy;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.Alloy;
+import javax.annotation.Nonnull;
 
 /**
  * todo: in 1.13+ move this to a json recipe type

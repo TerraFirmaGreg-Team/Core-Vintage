@@ -5,8 +5,6 @@
 
 package net.dries007.tfc.client.model;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.PositionTextureVertex;
@@ -14,6 +12,8 @@ import net.minecraft.client.model.TexturedQuad;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class ModelIngot extends ModelBox
 {

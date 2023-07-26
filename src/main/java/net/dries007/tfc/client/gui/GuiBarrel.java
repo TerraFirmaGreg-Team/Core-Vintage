@@ -5,11 +5,15 @@
 
 package net.dries007.tfc.client.gui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.client.button.GuiButtonBarrelSeal;
+import net.dries007.tfc.client.button.IButtonTooltip;
+import net.dries007.tfc.network.PacketGuiButton;
+import net.dries007.tfc.objects.container.ContainerBarrel;
+import net.dries007.tfc.objects.te.TEBarrel;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -29,16 +33,11 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.lwjgl.opengl.GL11;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.client.button.GuiButtonBarrelSeal;
-import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.network.PacketGuiButton;
-import net.dries007.tfc.objects.container.ContainerBarrel;
-import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.util.Helpers;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

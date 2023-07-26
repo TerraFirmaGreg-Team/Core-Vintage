@@ -5,13 +5,13 @@
 
 package net.dries007.tfc.objects.entity.ai;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+
+import javax.annotation.Nullable;
 
 /**
  * Makes predators wanders only in it's designed hunting area

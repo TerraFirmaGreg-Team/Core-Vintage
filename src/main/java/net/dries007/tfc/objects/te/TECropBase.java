@@ -5,15 +5,14 @@
 
 package net.dries007.tfc.objects.te;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
-
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ITickable;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class TECropBase extends TETickCounter implements ICalendarTickable, ITickable

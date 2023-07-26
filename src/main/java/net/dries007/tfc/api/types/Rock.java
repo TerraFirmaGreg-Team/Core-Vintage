@@ -5,21 +5,17 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.function.Function;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.util.FallingBlockManager.Specification;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.util.FallingBlockManager.Specification;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.items.rock.*;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.*;

@@ -5,15 +5,17 @@
 
 package net.dries007.tfc;
 
-import java.util.Random;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.util.ResourceLocation;
-
 import net.dries007.tfc.api.capability.damage.DamageResistance;
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
-import net.dries007.tfc.util.json.*;
+import net.dries007.tfc.util.json.AnimalFoodJson;
+import net.dries007.tfc.util.json.DamageResistanceJson;
+import net.dries007.tfc.util.json.LowercaseEnumTypeAdapterFactory;
+import net.dries007.tfc.util.json.ResourceLocationJson;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.Random;
 
 public final class Constants
 {

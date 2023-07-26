@@ -5,11 +5,13 @@
 
 package net.dries007.tfc.objects.recipes;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-
 import com.google.gson.JsonObject;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.objects.items.food.ItemSandwich;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -20,12 +22,9 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.items.food.ItemSandwich;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class SandwichRecipe extends ShapedDamageRecipe

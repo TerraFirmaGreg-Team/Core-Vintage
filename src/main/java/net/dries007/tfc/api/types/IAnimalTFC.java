@@ -5,16 +5,15 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.objects.entity.animal.AnimalFood;
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 
-import net.dries007.tfc.objects.entity.animal.AnimalFood;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Interface for animals with gender, familiarity and aging

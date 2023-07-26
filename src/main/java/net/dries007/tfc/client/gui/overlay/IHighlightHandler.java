@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.client.gui.overlay;
 
+import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
@@ -21,8 +22,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

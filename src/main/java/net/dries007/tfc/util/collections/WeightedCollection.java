@@ -5,8 +5,8 @@
 
 package net.dries007.tfc.util.collections;
 
-import java.util.*;
 import javax.annotation.Nonnull;
+import java.util.*;
 
 /**
  * Modified from https://stackoverflow.com/questions/6409652/random-weighted-selection-in-java

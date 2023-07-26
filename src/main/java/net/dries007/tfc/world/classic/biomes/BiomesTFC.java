@@ -5,9 +5,7 @@
 
 package net.dries007.tfc.world.classic.biomes;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.world.biome.Biome;
@@ -18,7 +16,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import net.dries007.tfc.util.Helpers;
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;

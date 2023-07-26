@@ -5,7 +5,11 @@
 
 package net.dries007.tfc.client;
 
-import org.lwjgl.input.Keyboard;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.network.PacketCycleItemMode;
+import net.dries007.tfc.network.PacketOpenCraftingGui;
+import net.dries007.tfc.network.PacketPlaceBlockSpecial;
+import net.dries007.tfc.network.PacketStackFood;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.inventory.Slot;
@@ -17,12 +21,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.network.PacketCycleItemMode;
-import net.dries007.tfc.network.PacketOpenCraftingGui;
-import net.dries007.tfc.network.PacketPlaceBlockSpecial;
-import net.dries007.tfc.network.PacketStackFood;
+import org.lwjgl.input.Keyboard;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;

@@ -5,22 +5,19 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.Lists;
 import gregtech.api.unification.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.fluids.FluidStack;
-
 import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.AlloyRecipe;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

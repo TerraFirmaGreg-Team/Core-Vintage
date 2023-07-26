@@ -5,9 +5,7 @@
 
 package net.dries007.tfc.objects.items;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +18,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.fluids.FluidsTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * todo: as per comment in ItemsTFC, turn this into a proper fluid handler item?

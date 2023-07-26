@@ -11,7 +11,6 @@ import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.te.TECrucible;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;

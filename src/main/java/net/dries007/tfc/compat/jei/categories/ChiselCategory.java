@@ -5,11 +5,6 @@
 
 package net.dries007.tfc.compat.jei.categories;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
-
 import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -21,6 +16,10 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.ChiselRecipeWrapper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

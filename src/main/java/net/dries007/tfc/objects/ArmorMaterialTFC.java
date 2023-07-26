@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.objects;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.types.IArmorMaterialTFC;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
-import net.dries007.tfc.api.types.IArmorMaterialTFC;
+import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

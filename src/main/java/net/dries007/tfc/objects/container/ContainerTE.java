@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.objects.container;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.te.ITileFields;
+import net.dries007.tfc.objects.te.TEInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IContainerListener;
@@ -16,8 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TEInventory;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * This is the mother of all Container-with-a-Tile-Entity implementations

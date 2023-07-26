@@ -5,18 +5,17 @@
 
 package net.dries007.tfc.client.gui;
 
-import java.io.IOException;
-
 import com.google.common.base.Strings;
 import com.google.gson.JsonParseException;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.world.classic.WorldGenSettings;
+import net.dries007.tfc.world.classic.WorldGenSettings.WorldGenSettingsBuilder;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.world.classic.WorldGenSettings;
-import net.dries007.tfc.world.classic.WorldGenSettings.WorldGenSettingsBuilder;
+import java.io.IOException;
 
 /**
  * todo: remove, won't be supported in 1.13 by vanilla anyway, there will be something else in 1.14.

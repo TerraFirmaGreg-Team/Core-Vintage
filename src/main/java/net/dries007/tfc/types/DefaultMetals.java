@@ -6,13 +6,11 @@
 package net.dries007.tfc.types;
 
 import gregtech.api.unification.material.Materials;
+import net.dries007.tfc.api.recipes.AlloyRecipe;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import net.dries007.tfc.api.recipes.AlloyRecipe;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

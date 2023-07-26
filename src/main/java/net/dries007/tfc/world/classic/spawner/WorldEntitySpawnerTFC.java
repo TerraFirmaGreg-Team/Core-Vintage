@@ -5,9 +5,13 @@
 
 package net.dries007.tfc.world.classic.spawner;
 
-import java.util.*;
-import java.util.function.Supplier;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.ICreatureTFC;
+import net.dries007.tfc.objects.entity.animal.*;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
@@ -23,13 +27,8 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.ICreatureTFC;
-import net.dries007.tfc.objects.entity.animal.*;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import java.util.*;
+import java.util.function.Supplier;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

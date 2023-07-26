@@ -5,11 +5,10 @@
 
 package net.dries007.tfc.api.types;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.capability.damage.DamageType;
 import net.minecraft.item.ItemArmor;
 
-import net.dries007.tfc.api.capability.damage.DamageType;
+import javax.annotation.Nonnull;
 
 /**
  * @see net.dries007.tfc.objects.ArmorMaterialTFC

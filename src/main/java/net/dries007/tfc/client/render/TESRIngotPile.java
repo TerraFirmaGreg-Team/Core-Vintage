@@ -5,15 +5,14 @@
 
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.client.model.ModelIngotPile;
+import net.dries007.tfc.objects.te.TEIngotPile;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.client.model.ModelIngotPile;
-import net.dries007.tfc.objects.te.TEIngotPile;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

@@ -5,16 +5,15 @@
 
 package net.dries007.tfc.util.climate;
 
-import java.util.Random;
-
-import net.minecraft.util.math.MathHelper;
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.config.TemperatureMode;
+import net.minecraft.util.math.MathHelper;
+
+import java.util.Random;
 
 import static net.dries007.tfc.world.classic.WorldTypeTFC.SEALEVEL;
 

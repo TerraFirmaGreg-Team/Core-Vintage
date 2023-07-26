@@ -5,8 +5,9 @@
 
 package net.dries007.tfc.objects.container;
 
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.objects.te.TEBarrel;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -14,9 +15,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.objects.te.TEBarrel;
+import javax.annotation.Nullable;
 
 import static net.dries007.tfc.objects.te.TEBarrel.*;
 

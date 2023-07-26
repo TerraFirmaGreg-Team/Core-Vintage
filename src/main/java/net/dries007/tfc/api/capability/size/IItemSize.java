@@ -5,15 +5,14 @@
 
 package net.dries007.tfc.api.capability.size;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * Interface for item size.

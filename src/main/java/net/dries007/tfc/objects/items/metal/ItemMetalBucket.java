@@ -5,13 +5,10 @@
 
 package net.dries007.tfc.objects.items.metal;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.block.BlockDispenser;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -32,10 +29,11 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashSet;
+import java.util.Set;
 
 import static net.dries007.tfc.api.types.Metal.BLUE_STEEL;
 import static net.dries007.tfc.api.types.Metal.RED_STEEL;

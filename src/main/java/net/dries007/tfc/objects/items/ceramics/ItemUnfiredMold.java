@@ -5,11 +5,10 @@
 
 package net.dries007.tfc.objects.items.ceramics;
 
+import gregtech.api.unification.ore.OrePrefix;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.api.types.Metal;
 
 public class ItemUnfiredMold extends ItemPottery
 {

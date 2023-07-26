@@ -5,14 +5,13 @@
 
 package net.dries007.tfc.api.capability.heat;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.client.resources.I18n;
-import net.minecraft.util.text.TextFormatting;
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.config.OreTooltipMode;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextFormatting;
+
+import javax.annotation.Nullable;
 
 public enum Heat
 {

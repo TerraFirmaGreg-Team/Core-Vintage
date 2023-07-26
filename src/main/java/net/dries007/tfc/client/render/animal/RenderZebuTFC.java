@@ -5,16 +5,15 @@
 
 package net.dries007.tfc.client.render.animal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.client.model.animal.ModelZebuTFC;
+import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.client.model.animal.ModelZebuTFC;
-import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

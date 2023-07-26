@@ -5,9 +5,7 @@
 
 package net.dries007.tfc.objects.inventory.capability;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.objects.te.TEChestTFC;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -19,7 +17,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.VanillaDoubleChestItemHandler;
 
-import net.dries007.tfc.objects.te.TEChestTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 @SuppressWarnings("WeakerAccess")
 public class TFCDoubleChestItemHandler extends VanillaDoubleChestItemHandler

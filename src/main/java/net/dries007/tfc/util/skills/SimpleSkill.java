@@ -5,11 +5,10 @@
 
 package net.dries007.tfc.util.skills;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.nbt.NBTTagCompound;
 
-import net.dries007.tfc.api.capability.player.IPlayerData;
+import javax.annotation.Nonnull;
 
 public class SimpleSkill extends Skill
 {

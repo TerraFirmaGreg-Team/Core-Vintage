@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.objects.recipes;
 
-import javax.annotation.Nonnull;
-
 import com.google.gson.JsonObject;
+import net.dries007.tfc.util.skills.SmithingSkill;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -18,7 +17,7 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-import net.dries007.tfc.util.skills.SmithingSkill;
+import javax.annotation.Nonnull;
 
 public class ShapedSkillRecipe extends ShapedOreRecipe
 {

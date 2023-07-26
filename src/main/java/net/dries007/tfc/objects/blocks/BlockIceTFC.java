@@ -5,10 +5,10 @@
 
 package net.dries007.tfc.objects.blocks;
 
-import java.util.ArrayList;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.ITemperatureBlock;
+import net.dries007.tfc.util.climate.IceMeltHandler;
 import net.minecraft.block.BlockIce;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,10 +25,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
 
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.util.climate.ITemperatureBlock;
-import net.dries007.tfc.util.climate.IceMeltHandler;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
 
 @ParametersAreNonnullByDefault
 public class BlockIceTFC extends BlockIce implements ITemperatureBlock

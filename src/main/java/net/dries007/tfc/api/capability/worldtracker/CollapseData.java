@@ -5,14 +5,14 @@
 
 package net.dries007.tfc.api.capability.worldtracker;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.INBTSerializable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CollapseData implements INBTSerializable<NBTTagCompound>
 {

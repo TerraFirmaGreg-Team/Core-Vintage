@@ -5,12 +5,19 @@
 
 package net.dries007.tfc.objects.blocks.devices;
 
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.util.IBellowsConsumerBlock;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.objects.advancements.TFCTriggers;
+import net.dries007.tfc.objects.blocks.property.ILightableBlock;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.objects.items.ItemFireStarter;
+import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.objects.te.TEBellows;
+import net.dries007.tfc.objects.te.TEFirePit;
+import net.dries007.tfc.util.DamageSourcesTFC;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -42,19 +49,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.api.util.IBellowsConsumerBlock;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.items.ItemFireStarter;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.te.TEBellows;
-import net.dries007.tfc.objects.te.TEFirePit;
-import net.dries007.tfc.util.DamageSourcesTFC;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
+import java.util.Random;
 
 import static net.dries007.tfc.Constants.RNG;
 

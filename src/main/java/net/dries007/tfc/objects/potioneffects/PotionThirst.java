@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.objects.potioneffects;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
+import javax.annotation.Nonnull;
 
 public class PotionThirst extends PotionTFC
 {

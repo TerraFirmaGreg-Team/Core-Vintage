@@ -5,12 +5,6 @@
 
 package net.dries007.tfc.api.registries;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.registries.IForgeRegistry;
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.*;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
@@ -19,6 +13,11 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.types.*;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 /**
  * Get Registry instances for standard TFC objects here.

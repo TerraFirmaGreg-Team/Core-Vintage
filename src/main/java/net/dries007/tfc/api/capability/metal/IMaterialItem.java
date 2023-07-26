@@ -5,17 +5,16 @@
 
 package net.dries007.tfc.api.capability.metal;
 
-import java.util.List;
-import javax.annotation.Nullable;
-
 import gregtech.api.unification.material.Material;
+import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
+import javax.annotation.Nullable;
+import java.util.List;
 
 /*
  * Must be on Item or Block (with ItemBlock, i.e. do not implement on blocks that have a separate item block)

@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.util.skills;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
-import net.dries007.tfc.api.capability.player.IPlayerData;
+import javax.annotation.Nonnull;
 
 /**
  * A wrapper interface for a single skill. The individual skill class should have methods to add skill

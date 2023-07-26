@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.objects.fluids.properties;
 
-import javax.annotation.Nonnull;
-
 import net.dries007.tfc.api.types.Metal;
+
+import javax.annotation.Nonnull;
 
 public class MetalProperty
 {

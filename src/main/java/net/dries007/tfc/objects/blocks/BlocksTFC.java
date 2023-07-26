@@ -284,7 +284,7 @@ public final class BlocksTFC {
 				for (RockVariant rockVariant : rockBlockType.getRockVariants()) {
 					Block block = (Block) rockBlockType.createBlock(rockVariant, rockType);
 
-					TerraFirmaCraft.LOGGER.debug("Registering block: {}", block.getRegistryName());
+					TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
 					r.register(block);
 				}
 			}
@@ -301,7 +301,7 @@ public final class BlocksTFC {
 			for (SoilVariant soilVariant : SoilVariant.values()) {
 				Block block = (Block) soilVariant.createBlock(soilType);
 
-				TerraFirmaCraft.LOGGER.debug("Registering block: {}", block.getRegistryName());
+				TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
 				r.register(block);
 			}
 		}

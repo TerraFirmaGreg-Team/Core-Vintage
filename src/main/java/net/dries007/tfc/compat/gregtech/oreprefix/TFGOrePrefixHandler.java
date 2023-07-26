@@ -50,6 +50,25 @@ public class TFGOrePrefixHandler {
             var extendedOrePrefix = (IOrePrefixExtension) item;
 
             extendedOrePrefix.setHasMold(true);
+        }
+
+        // Set ShouldHasMetalCapability = true for various OrePrefixes
+        final List<OrePrefix> orePrefixesThatHaveMetalCapability = Arrays.asList(
+                OrePrefix.plate,
+                TFGOrePrefix.ingotDouble,
+                TFGOrePrefix.ingotTriple,
+                TFGOrePrefix.ingotHex
+        );
+
+        for (var item : orePrefixesThatHaveMold) {
+            var extendedOrePrefix = (IOrePrefixExtension) item;
+
+            extendedOrePrefix.setShouldHasMetalCapability(true);
+        }
+
+        for (var item : orePrefixesThatHaveMetalCapability) {
+            var extendedOrePrefix = (IOrePrefixExtension) item;
+
             extendedOrePrefix.setShouldHasMetalCapability(true);
         }
 

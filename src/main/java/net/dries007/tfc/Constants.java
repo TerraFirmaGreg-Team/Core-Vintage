@@ -23,7 +23,7 @@ public final class Constants
         .registerTypeAdapter(DamageResistance.class, new DamageResistanceJson())
         .registerTypeAdapter(AnimalFood.class, new AnimalFoodJson())
         .create();
-    public static final String GUI_FACTORY = "net.dries007.tfc.client.TFCModGuiFactory";
+
 
     public static final Random RNG = new Random();
 }

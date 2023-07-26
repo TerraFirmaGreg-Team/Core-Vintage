@@ -34,13 +34,12 @@ public final class CapabilityForgeable
     @CapabilityInject(IForgeable.class)
     public static Capability<IForgeable> FORGEABLE_CAPABILITY;
 
-    public static void preInit()
-    {
+    public static void preInit() {
         CapabilityManager.INSTANCE.register(IForgeable.class, new DumbStorage<>(), ForgeableHandler::new);
     }
 
     public static void init() {
-        CUSTOM_ITEMS.put(IIngredient.of(ItemsTFC.UNREFINED_BLOOM), () -> new ForgeableMeasurableMetalHandler(Materials.Iron, 144));
+
     }
 
     @Nullable

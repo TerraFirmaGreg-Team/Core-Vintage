@@ -52,26 +52,33 @@ import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.*;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber
-@Mod(modid = MOD_ID, name = TerraFirmaCraft.MOD_NAME, useMetadata = true, guiFactory = Constants.GUI_FACTORY, dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
+@Mod(
+        modid = MOD_ID,
+        name = MOD_NAME,
+        useMetadata = true,
+        guiFactory = GUI_FACTORY,
+        dependencies = DEPENDENCIES)
 public final class TerraFirmaCraft
 {
     public static final String MOD_ID = "tfc";
     public static final String MOD_NAME = "TerraFirmaCraft";
+    public static final String GUI_FACTORY = "net.dries007.tfc.client.TFCModGuiFactory";
+    public static final String DEPENDENCIES = "required:forge@[14.23.5.2847,);after:jei@[4.14.2,);after:gregtech;after:top@(1.8.25,)";
 
     @Mod.Instance
     private static TerraFirmaCraft INSTANCE = null;
 
-    public static final TFCLogger LOGGER = new TFCLogger(TerraFirmaCraft.class, Level.INFO);
-
-    @SidedProxy(modId = MOD_ID, clientSide = "net.dries007.tfc.proxy.ClientProxy", serverSide = "net.dries007.tfc.proxy.ServerProxy")
+    @SidedProxy(
+            modId = MOD_ID,
+            clientSide = "net.dries007.tfc.proxy.ClientProxy",
+            serverSide = "net.dries007.tfc.proxy.ServerProxy")
     private static IProxy PROXY = null;
 
-    static
-    {
+    static {
         FluidRegistry.enableUniversalBucket();
     }
 
@@ -156,9 +163,7 @@ public final class TerraFirmaCraft
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-
+    public void init(FMLInitializationEvent event) {
         ItemsTFC.init();
         LootTablesTFC.init();
         CapabilityFood.init();

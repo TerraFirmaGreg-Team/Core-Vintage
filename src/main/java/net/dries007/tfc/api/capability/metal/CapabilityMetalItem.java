@@ -42,26 +42,19 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 public final class CapabilityMetalItem
 {
     public static final ResourceLocation KEY = new ResourceLocation(TerraFirmaCraft.MOD_ID, "metal_object");
-    public static final Map<ItemStack, Supplier<ICapabilityProvider>> CUSTOM_METAL_ITEMS = new HashMap<>(); //Used inside CT, set custom IMetalItem for items outside TFC
-    public static final Map<String, Metal.ItemType> ORE_DICT_METAL_ITEMS = new LinkedHashMap<>();
+    public static final Map<ItemStack, ICapabilityProvider> CUSTOM_METAL_ITEMS = new HashMap<>();
     @CapabilityInject(IMaterialItem.class)
     public static Capability<IMaterialItem> METAL_OBJECT_CAPABILITY;
 
     public static void preInit() {
         CapabilityManager.INSTANCE.register(IMaterialItem.class, new DumbStorage<>(), MetalItemHandler::new);
-
-        // Register ore dict prefix values
-        ORE_DICT_METAL_ITEMS.put("ingotDouble", Metal.ItemType.DOUBLE_INGOT);
-        ORE_DICT_METAL_ITEMS.put("ingot", Metal.ItemType.INGOT);
-        ORE_DICT_METAL_ITEMS.put("dust", Metal.ItemType.DUST);
-        ORE_DICT_METAL_ITEMS.put("nugget", Metal.ItemType.NUGGET);
     }
 
     public static void init() {
-        CUSTOM_METAL_ITEMS.put(new ItemStack(Blocks.IRON_BARS) , () -> new MetalItemHandler(Materials.Iron, 25, true));
-        CUSTOM_METAL_ITEMS.put(new ItemStack(Items.IRON_INGOT), () -> new MetalItemHandler(Materials.Iron, 144, true));
-        CUSTOM_METAL_ITEMS.put(new ItemStack(ItemsTFC.UNREFINED_BLOOM), () -> new MetalItemHandler(Materials.Iron, 144, true));
-        CUSTOM_METAL_ITEMS.put(new ItemStack(ItemsTFC.REFINED_BLOOM), () -> new MetalItemHandler(Materials.Iron, 144, true));
+        CUSTOM_METAL_ITEMS.put(new ItemStack(Blocks.IRON_BARS) , new MetalItemHandler(Materials.Iron, 25, true));
+        CUSTOM_METAL_ITEMS.put(new ItemStack(Items.IRON_INGOT), new MetalItemHandler(Materials.Iron, 144, true));
+        CUSTOM_METAL_ITEMS.put(new ItemStack(ItemsTFC.UNREFINED_BLOOM), new MetalItemHandler(Materials.Iron, 144, true));
+        CUSTOM_METAL_ITEMS.put(new ItemStack(ItemsTFC.REFINED_BLOOM), new MetalItemHandler(Materials.Iron, 144, true));
     }
 
     /**
@@ -80,22 +73,23 @@ public final class CapabilityMetalItem
 
     @Nullable
     public static ICapabilityProvider getCustomMetalItem(ItemStack stack) {
-        var customMetalItem = CUSTOM_METAL_ITEMS.entrySet().stream().filter(s -> s.getKey().getItem() == stack.getItem()).findFirst().orElse(null);
+        var customMetalProperty = CUSTOM_METAL_ITEMS.entrySet().stream().filter(s -> s.getKey().getItem() == stack.getItem()).findFirst().orElse(null);
 
-        if (customMetalItem != null) return customMetalItem.getValue().get();
+        if (customMetalProperty != null)
+            return customMetalProperty.getValue();
 
-        if (!(stack.getItem() instanceof MetaPrefixItem metaPrefixItem)) return null;
+        if (stack.getItem() instanceof MetaPrefixItem metaPrefixItem) {
+            var orePrefix = metaPrefixItem.getOrePrefix();
+            var material = metaPrefixItem.getMaterial(stack);
 
-        var orePrefix = metaPrefixItem.getOrePrefix();
-        var material = metaPrefixItem.getMaterial(stack);
+            if (material == null) return null;
+            if (!material.hasProperty(TFGPropertyKey.HEAT)) return null;
 
-        if (material == null) return null;
-        if (!material.hasProperty(TFGPropertyKey.HEAT)) return null;
+            var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
 
-        var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
-
-        if (extendedOrePrefix.getShouldHasMetalCapability()) {
-            return new MetalItemHandler(material, Helpers.getOrePrefixMaterialAmount(orePrefix), true);
+            if (extendedOrePrefix.getShouldHasMetalCapability()) {
+                return new MetalItemHandler(material, Helpers.getOrePrefixMaterialAmount(orePrefix), true);
+            }
         }
 
         return null;

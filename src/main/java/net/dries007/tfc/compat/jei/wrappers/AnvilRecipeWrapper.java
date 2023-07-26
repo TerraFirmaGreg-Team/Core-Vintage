@@ -56,6 +56,7 @@ public class AnvilRecipeWrapper extends SimpleRecipeWrapper
             Gui.drawScaledCustomSizeModalRect(x, y, step.getU(), step.getV(), 32, 32, 16, 16, 256, 256);
         }
         //Draw tier requirement info
+        /*
         String text = I18n.format("tfc.enum.tier." + recipe.getTier().name().toLowerCase());
         float xPos = 20f - minecraft.fontRenderer.getStringWidth(text) / 2.0f;
         float yPos = 33f;
@@ -74,7 +75,7 @@ public class AnvilRecipeWrapper extends SimpleRecipeWrapper
                     GuiUtils.drawHoveringText(Collections.singletonList(I18n.format(Helpers.getEnumName(rule))), mouseX, mouseY, 154, 80, -1, minecraft.fontRenderer);
                 }
             }
-        }
+        }*/
 
     }
 }

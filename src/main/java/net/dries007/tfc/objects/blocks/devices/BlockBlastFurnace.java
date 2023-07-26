@@ -48,10 +48,8 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
     {
         Predicate<IBlockState> stoneMatcher = state -> state.getBlock() instanceof BlockFireBrick;
         Predicate<IBlockState> sheetMatcher = state -> {
-            if (state.getBlock() instanceof BlockMetalSheet)
-            {
-                BlockMetalSheet block = (BlockMetalSheet) state.getBlock();
-                return block.getMetal().getTier().isAtLeast(Metal.Tier.TIER_III) && block.getMetal().isToolMetal();
+            if (state.getBlock() instanceof BlockMetalSheet block) {
+                //return block.getMetal().getTier().isAtLeast(Metal.Tier.TIER_III) && block.getMetal().isToolMetal(); // TODO
             }
             return false;
         };

@@ -28,6 +28,7 @@ public class TFGOrePrefix {
     public static final OrePrefix toolHeadChisel = new OrePrefix("toolHeadChisel", M * 2, null, TFGMaterialIconType.toolHeadChisel, ENABLE_UNIFICATION, hasToolProperty);
 
     public static final OrePrefix oreChunk = new OrePrefix("oreChunk", -1, null, TFGMaterialIconType.oreChunk, ENABLE_UNIFICATION, hasOreProperty);
+    public static final OrePrefix ingotDouble = new OrePrefix("ingotDouble", M, null, MaterialIconType.ingotDouble, ENABLE_UNIFICATION, hasIngotProperty);
 
     public static final OrePrefix oreRockSalt = new OrePrefix("oreRockSalt", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreSoapstone = new OrePrefix("oreSoapstone", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);

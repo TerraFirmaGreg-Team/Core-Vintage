@@ -10,6 +10,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import gregtech.common.items.ToolItems;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -51,8 +53,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @ParametersAreNonnullByDefault
 public class TEAnvilTFC extends TEInventory
 {
-    private static class AnvilItemHandler extends ItemStackHandlerCallback
-    {
+    private static class AnvilItemHandler extends ItemStackHandlerCallback {
 
         public AnvilItemHandler(ISlotCallback callback, int slots)
         {
@@ -60,14 +61,11 @@ public class TEAnvilTFC extends TEInventory
         }
 
         @Override
-        public ItemStack extractItem(int slot, int amount, boolean simulate)
-        {
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
             ItemStack result = super.extractItem(slot, amount, simulate);
-            if (slot == SLOT_INPUT_1 || slot == SLOT_INPUT_2)
-            {
+            if (slot == SLOT_INPUT_1 || slot == SLOT_INPUT_2) {
                 IForgeable cap = result.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-                if (cap != null && cap.getRecipeName() != null && (!cap.getSteps().hasWork() || cap.getWork() == 0))
-                {
+                if (cap != null && cap.getRecipeName() != null && (!cap.getSteps().hasWork() || cap.getWork() == 0)) {
                     cap.reset();
                 }
 
@@ -88,29 +86,24 @@ public class TEAnvilTFC extends TEInventory
     private int workingProgress = 0;
     private int workingTarget = 0;
 
-    public TEAnvilTFC()
-    {
+    public TEAnvilTFC() {
         super(AnvilItemHandler::new, 4);
 
         steps = new ForgeSteps();
         recipe = null;
     }
 
-    public boolean isStone()
-    {
+    public boolean isStone() {
         IBlockState state = world.getBlockState(pos);
         return state.getBlock() instanceof BlockStoneAnvil;
     }
 
-    @Nonnull
-    public Metal.Tier getTier()
-    {
+    public int getTier() {
         IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockAnvilTFC)
-        {
-            return ((BlockAnvilTFC) state.getBlock()).getMetal().getTier();
+        if (state.getBlock() instanceof BlockAnvilTFC) {
+            return ((BlockAnvilTFC) state.getBlock()).getMetal().getProperty(TFGPropertyKey.HEAT).getTier();
         }
-        return Metal.Tier.TIER_0;
+        return 0;
     }
 
     @Nullable
@@ -234,7 +227,7 @@ public class TEAnvilTFC extends TEInventory
             case SLOT_FLUX:
                 return OreDictionaryHelper.doesStackMatchOre(stack, "dustFlux");
             case SLOT_HAMMER:
-                return OreDictionaryHelper.doesStackMatchOre(stack, "hammer");
+                return stack.getItem() == ToolItems.HARD_HAMMER.get();
             default:
                 return false;
         }

@@ -171,8 +171,7 @@ public class ItemMetal extends ItemTFC implements IMaterialItem
             case SCYTHE_BLADE:
             case SWORD_BLADE:
                 return Size.NORMAL; // Tool heads fits in large vessels
-            case ANVIL:
-                return Size.HUGE; // Overburdens
+
             default:
                 return Size.LARGE; // Everything else fits only in chests
         }
@@ -193,7 +192,7 @@ public class ItemMetal extends ItemTFC implements IMaterialItem
             case SHEET:
             case DOUBLE_SHEET:
                 return Weight.LIGHT; // Stacksize = 32
-            case ANVIL:
+
             case HELMET:
             case GREAVES:
             case CHESTPLATE:

@@ -24,9 +24,9 @@ public class WeldingRecipeWrapper extends SimpleRecipeWrapper
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
     {
         //Draw tier requirement info
-        String text = I18n.format("tfc.enum.tier." + recipe.getTier().name().toLowerCase());
-        float xPos = 88f - minecraft.fontRenderer.getStringWidth(text) / 2.0f;
-        float yPos = 6f;
-        minecraft.fontRenderer.drawString(text, xPos, yPos, 0x000000, false);
+       // String text = I18n.format("tfc.enum.tier." + recipe.getTier().name().toLowerCase());
+        //float xPos = 88f - minecraft.fontRenderer.getStringWidth(text) / 2.0f;
+        //float yPos = 6f;
+        //minecraft.fontRenderer.drawString(text, xPos, yPos, 0x000000, false);
     }
 }

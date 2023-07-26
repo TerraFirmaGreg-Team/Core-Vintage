@@ -7,6 +7,7 @@ package net.dries007.tfc.objects.blocks;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
+import gregtech.api.GregTechAPI;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -21,6 +22,8 @@ import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.IRockTypeBlock;
 import net.dries007.tfc.api.util.ISoilTypeBlock;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.devices.*;
 import net.dries007.tfc.objects.blocks.metal.*;
@@ -515,10 +518,14 @@ public final class BlocksTFC {
 			Builder<BlockMetalLamp> lamps = ImmutableList.builder();
 			Builder<BlockTrapDoorMetalTFC> metalTrapdoors = ImmutableList.builder();
 
+			for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
+				if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL))
+					anvils.add(register(r, "anvil/" + material.getName(), new BlockAnvilTFC(material), METAL));
+			}
 			/*
 			for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
 				if (Metal.ItemType.ANVIL.hasType(metal))
-					anvils.add(register(r, "anvil/" + metal.getRegistryName().getPath(), new BlockAnvilTFC(metal), METAL));
+
 				if (Metal.ItemType.SHEET.hasType(metal)) {
 					sheets.add(register(r, "sheet/" + metal.getRegistryName().getPath(), new BlockMetalSheet(metal), METAL));
 					metalTrapdoors.add(register(r, "trapdoor/" + metal.getRegistryName().getPath(), new BlockTrapDoorMetalTFC(metal), METAL));
@@ -580,7 +587,7 @@ public final class BlocksTFC {
 
 			allBerryBushBlocks = fBerry.build();
 
-			//Add ItemBlocks
+			// Add ItemBlocks
 			allFruitTreeSaplingBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
 			allFruitTreeLeavesBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
 			allBerryBushBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));

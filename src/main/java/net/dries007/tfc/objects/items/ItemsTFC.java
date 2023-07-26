@@ -7,6 +7,8 @@ package net.dries007.tfc.objects.items;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
+import gregtech.api.GregTechAPI;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -16,7 +18,10 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -29,6 +34,7 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.food.ItemSandwich;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTorch;
+import net.dries007.tfc.objects.items.metal.ItemAnvil;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.items.metal.ItemMetalBucket;
 import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
@@ -250,6 +256,15 @@ public final class ItemsTFC
 
         for (Powder powder : Powder.values())
             simpleItems.add(register(r, "powder/" + powder.name().toLowerCase(), new ItemPowder(powder), MISC));
+
+        // METAL
+        {
+            for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
+                if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL)) {
+                    simpleItems.add(register(r, "metal/anvil/" + material.getName(), new ItemAnvil(material), MISC));
+                }
+            }
+        }
 
         // POTTERY
         {

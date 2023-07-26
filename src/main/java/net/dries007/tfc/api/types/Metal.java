@@ -174,9 +174,9 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal>
             return this == TIER_0 ? TIER_0 : VALUES[this.ordinal() - 1];
         }
 
-        public boolean isAtLeast(@Nonnull Tier requiredInclusive)
+        public boolean isAtLeast(int requiredInclusive)
         {
-            return this.ordinal() >= requiredInclusive.ordinal();
+            return this.ordinal() >= requiredInclusive;
         }
 
         public boolean isAtMost(@Nonnull Tier requiredInclusive)
@@ -196,7 +196,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal>
         DOUBLE_SHEET(false, 400),
         ROD(false, 50),
 
-        ANVIL(true, 1400, ItemAnvil::new),
+        //ANVIL(true, 1400, ItemAnvil::new),
         TUYERE(true, 400),
         LAMP(false, 100, (metal, itemType) -> new ItemBlockMetalLamp(metal)),
         TRAPDOOR(false, 200, (metal, itemType) -> new ItemBlock(BlockTrapDoorMetalTFC.get(metal))),

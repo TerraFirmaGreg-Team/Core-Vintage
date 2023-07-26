@@ -33,7 +33,7 @@ public class AnvilRecipeMeasurable extends AnvilRecipe
      * @param minTier the anvil's min tier required to work this recipe
      * @param rules   the forging rules
      */
-    public AnvilRecipeMeasurable(ResourceLocation name, IIngredient<ItemStack> input, ItemStack output, Metal.Tier minTier, ForgeRule... rules) throws IllegalArgumentException
+    public AnvilRecipeMeasurable(ResourceLocation name, IIngredient<ItemStack> input, ItemStack output, int minTier, ForgeRule... rules) throws IllegalArgumentException
     {
         super(name, input, output, minTier, null, rules);
     }

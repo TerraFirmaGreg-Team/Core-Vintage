@@ -40,19 +40,18 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
     private static long SEED = 0;
 
     @Nonnull
-    public static List<AnvilRecipe> getAllFor(ItemStack stack)
-    {
+    public static List<AnvilRecipe> getAllFor(ItemStack stack) {
         return TFCRegistries.ANVIL.getValuesCollection().stream().filter(x -> x.matches(stack)).collect(Collectors.toList());
     }
 
     protected final ForgeRule[] rules;
     protected final ItemStack output;
     protected final IIngredient<ItemStack> ingredient;
-    protected final Metal.Tier minTier;
+    protected final int minTier;
     protected final long workingSeed;
     protected final SmithingSkill.Type skillBonusType;
 
-    public AnvilRecipe(ResourceLocation name, IIngredient<ItemStack> ingredient, ItemStack output, Metal.Tier minTier, @Nullable SmithingSkill.Type skillBonusType, ForgeRule... rules)
+    public AnvilRecipe(ResourceLocation name, IIngredient<ItemStack> ingredient, ItemStack output, int minTier, @Nullable SmithingSkill.Type skillBonusType, ForgeRule... rules)
     {
         this.ingredient = ingredient;
         this.output = output;
@@ -98,9 +97,8 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
     {
         return rules;
     }
-
-    @Nonnull
-    public Metal.Tier getTier()
+    
+    public int getTier()
     {
         return minTier;
     }

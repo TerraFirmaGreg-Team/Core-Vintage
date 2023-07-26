@@ -8,6 +8,8 @@ package net.dries007.tfc.objects.container;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import gregtech.common.items.ToolItems;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -105,12 +107,12 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
             return false;
 
         // A recipe must exist
-        AnvilRecipe recipe = TFCRegistries.ANVIL.getValue(cap.getRecipeName());
+        var recipe = TFCRegistries.ANVIL.getValue(cap.getRecipeName());
         if (recipe == null)
         {
             return false;
         }
-        if (!tile.getTier().isAtLeast(recipe.getTier()))
+        if (!Helpers.isAtLeast(tile.getTier(), recipe.getTier()))
         {
             TerraFirmaCraft.getLog().info("Anvil Tier: {} + Recipe Tier: {}", tile.getTier(), recipe.getTier());
             player.sendMessage(new TextComponentTranslation(MOD_ID + ".tooltip.anvil_tier_too_low"));
@@ -145,8 +147,7 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
         {
             // Fallback to the held item if it is a hammer
             stack = player.inventory.mainInventory.get(player.inventory.currentItem);
-            if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, "hammer"))
-            {
+            if (stack.getItem() == ToolItems.HARD_HAMMER.get()) {
                 stack.damageItem(1, player);
                 return true;
             }

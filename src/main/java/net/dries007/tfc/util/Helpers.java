@@ -88,6 +88,14 @@ public final class Helpers
         return (int) (orePrefix.getMaterialAmount(null) / M) * 144;
     }
 
+    public static boolean isAtLeast(int value, int requiredInclusive) {
+        return value >= requiredInclusive;
+    }
+
+    public static boolean isAtMost(int value, int requiredInclusive) {
+        return value <= requiredInclusive;
+    }
+
     public static boolean isJEIEnabled()
     {
         return JEI;

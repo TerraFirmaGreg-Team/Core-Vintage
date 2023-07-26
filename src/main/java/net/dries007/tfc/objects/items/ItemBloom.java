@@ -85,12 +85,14 @@ public class ItemBloom extends ItemTFC implements IMaterialItem
     @Override
     public void addMetalInfo(ItemStack stack, List<String> text) {
         IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+        System.out.println("dalbaeb");
         if (cap instanceof IForgeableMeasurableMetal) {
             var material = ((IForgeableMeasurableMetal) cap).getMaterial();
             var metalAmount = ((IForgeableMeasurableMetal) cap).getMetalAmount();
 
-            text.add("");
-            text.add(I18n.format("tfc.tooltip.metal", material.getUnlocalizedName()));
+            System.out.println("cock");
+            text.add("dalbaeb");
+            text.add(I18n.format("tfc.tooltip.metal", material.getLocalizedName()));
             text.add(I18n.format("tfc.tooltip.units", metalAmount));
         }
     }
@@ -98,8 +100,7 @@ public class ItemBloom extends ItemTFC implements IMaterialItem
     @Override
     @Nonnull
     public String getTranslationKey(ItemStack stack) {
-        //noinspection ConstantConditions
-        return super.getTranslationKey(stack) + "." + getMaterial(stack).getUnlocalizedName();
+        return super.getTranslationKey(stack);
     }
 
     @SideOnly(Side.CLIENT)

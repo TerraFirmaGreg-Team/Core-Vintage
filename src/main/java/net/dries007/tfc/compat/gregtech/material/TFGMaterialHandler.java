@@ -1,14 +1,17 @@
 package net.dries007.tfc.compat.gregtech.material;
 
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.NO_UNIFICATION;
 import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
+import static gregtech.api.unification.material.properties.PropertyKey.TOOL;
 import static gregtech.api.util.GTUtility.gregtechId;
+import static net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags.GENERATE_ANVIL;
+import static net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags.UNUSABLE;
 import static net.dries007.tfc.compat.gregtech.material.TFGMaterials.*;
+import static net.dries007.tfc.compat.gregtech.material.TFGPropertyKey.HEAT;
 
 public class TFGMaterialHandler {
 
@@ -144,53 +147,63 @@ public class TFGMaterialHandler {
                 .color(0x989287)
                 .build();
 
-        Stone.setProperty(PropertyKey.TOOL, new ToolProperty(1.0f, 1f, 6, 1));
-        Copper.setProperty(PropertyKey.TOOL, new ToolProperty(1.5f, 2f, 88, 2));
-        BismuthBronze.setProperty(PropertyKey.TOOL, new ToolProperty(1.8f, 2f, 174, 2));
-        Bismuth.setProperty(PropertyKey.TOOL, new ToolProperty(2.0f, 2f, 192, 2));
-        BlackBronze.setProperty(PropertyKey.TOOL, new ToolProperty(2.2f, 2f, 212, 2));
-        BlackSteel.setProperty(PropertyKey.TOOL, new ToolProperty(6.0f, 3f, 784, 3));
+        Stone.setProperty(TOOL, new ToolProperty(1.0f, 1f, 6, 1));
+        Copper.setProperty(TOOL, new ToolProperty(1.5f, 2f, 88, 2));
+        BismuthBronze.setProperty(TOOL, new ToolProperty(1.8f, 2f, 174, 2));
+        Bismuth.setProperty(TOOL, new ToolProperty(2.0f, 2f, 192, 2));
+        BlackBronze.setProperty(TOOL, new ToolProperty(2.2f, 2f, 212, 2));
+        BlackSteel.setProperty(TOOL, new ToolProperty(6.0f, 3f, 784, 3));
 
-        Copper.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1080, 0.35f, 1));
-        Bismuth.setProperty(TFGPropertyKey.HEAT, new HeatProperty(270, 0.35F, 1));
-        Brass.setProperty(TFGPropertyKey.HEAT, new HeatProperty(930, 0.35F, 1));
-        Lead.setProperty(TFGPropertyKey.HEAT, new HeatProperty(328, 0.22F, 1));
-        Nickel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1453, 0.48F, 1));
-        RoseGold.setProperty(TFGPropertyKey.HEAT, new HeatProperty(960, 0.35F, 1));
-        Silver.setProperty(TFGPropertyKey.HEAT, new HeatProperty(961, 0.48F, 1));
-        Tin.setProperty(TFGPropertyKey.HEAT, new HeatProperty(230, 0.14F, 1));
-        Zinc.setProperty(TFGPropertyKey.HEAT, new HeatProperty(420, 0.21F, 1));
-        SterlingSilver.setProperty(TFGPropertyKey.HEAT, new HeatProperty(900, 0.35F, 1));
-        Bronze.setProperty(TFGPropertyKey.HEAT, new HeatProperty(950, 0.35F, 2));
-        BlackBronze.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1070, 0.35F, 2));
-        BismuthBronze.setProperty(TFGPropertyKey.HEAT, new HeatProperty(985, 0.35F, 2));
-        Gold.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1060, 0.6F, 1));
-        PigIron.setProperty(TFGPropertyKey.HEAT, new HeatProperty(0.35F, 1535, 3));
-        HighCarbonSteel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(0.35F, 1540, 3));
-        WroughtIron.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1535, 0.35F, 3));
-        HighCarbonBlackSteel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(0.35F, 1540, 6));
-        Steel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1540, 0.35F, 4));
-        WeakSteel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(0.35F, 1540, 4));
-        Platinum.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1730, 0.35F, 5));
-        BlackSteel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1485, 0.35F, 5));
-        WeakBlueSteel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(0.35F, 1540, 5));
-        WeakRedSteel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(0.35F, 1540, 5));
-        HighCarbonBlueSteel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(0.35F, 1540, 5));
-        HighCarbonRedSteel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(0.35F, 1540, 5));
-        BlueSteel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1540, 0.35F, 6));
-        RedSteel.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1540, 0.35F, 6));
-        Unknown.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1250, 0.3f, 1));
-        Iron.setProperty(TFGPropertyKey.HEAT, new HeatProperty(1535, 0.35F, 3));
+        Copper.setProperty(HEAT, new HeatProperty(1080, 0.35f, 1));
+        Bismuth.setProperty(HEAT, new HeatProperty(270, 0.35F, 1));
+        Brass.setProperty(HEAT, new HeatProperty(930, 0.35F, 1));
+        Lead.setProperty(HEAT, new HeatProperty(328, 0.22F, 1));
+        Nickel.setProperty(HEAT, new HeatProperty(1453, 0.48F, 1));
+        RoseGold.setProperty(HEAT, new HeatProperty(960, 0.35F, 1));
+        Silver.setProperty(HEAT, new HeatProperty(961, 0.48F, 1));
+        Tin.setProperty(HEAT, new HeatProperty(230, 0.14F, 1));
+        Zinc.setProperty(HEAT, new HeatProperty(420, 0.21F, 1));
+        SterlingSilver.setProperty(HEAT, new HeatProperty(900, 0.35F, 1));
+        Bronze.setProperty(HEAT, new HeatProperty(950, 0.35F, 2));
+        BlackBronze.setProperty(HEAT, new HeatProperty(1070, 0.35F, 2));
+        BismuthBronze.setProperty(HEAT, new HeatProperty(985, 0.35F, 2));
+        Gold.setProperty(HEAT, new HeatProperty(1060, 0.6F, 1));
+        PigIron.setProperty(HEAT, new HeatProperty(0.35F, 1535, 3));
+        HighCarbonSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 3));
+        WroughtIron.setProperty(HEAT, new HeatProperty(1535, 0.35F, 3));
+        HighCarbonBlackSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 6));
+        Steel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 4));
+        WeakSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 4));
+        Platinum.setProperty(HEAT, new HeatProperty(1730, 0.35F, 5));
+        BlackSteel.setProperty(HEAT, new HeatProperty(1485, 0.35F, 5));
+        WeakBlueSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 5));
+        WeakRedSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 5));
+        HighCarbonBlueSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 5));
+        HighCarbonRedSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 5));
+        BlueSteel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 6));
+        RedSteel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 6));
+        Unknown.setProperty(HEAT, new HeatProperty(1250, 0.3f, 1));
+        Iron.setProperty(HEAT, new HeatProperty(1535, 0.35F, 3));
 
-        Copper.addFlags(TFGMaterialFlags.GENERATE_ANVIL);
-        BismuthBronze.addFlags(TFGMaterialFlags.GENERATE_ANVIL);
-        Bronze.addFlags(TFGMaterialFlags.GENERATE_ANVIL);
-        BlackBronze.addFlags(TFGMaterialFlags.GENERATE_ANVIL);
-        BlackSteel.addFlags(TFGMaterialFlags.GENERATE_ANVIL);
-        Iron.addFlags(TFGMaterialFlags.GENERATE_ANVIL);
-        Steel.addFlags(TFGMaterialFlags.GENERATE_ANVIL);
-        BlackSteel.addFlags(TFGMaterialFlags.GENERATE_ANVIL);
-        RedSteel.addFlags(TFGMaterialFlags.GENERATE_ANVIL);
-        BlueSteel.addFlags(TFGMaterialFlags.GENERATE_ANVIL);
+        Copper.addFlags(GENERATE_ANVIL);
+        BismuthBronze.addFlags(GENERATE_ANVIL);
+        Bronze.addFlags(GENERATE_ANVIL);
+        BlackBronze.addFlags(GENERATE_ANVIL);
+        BlackSteel.addFlags(GENERATE_ANVIL);
+        Iron.addFlags(GENERATE_ANVIL);
+        Steel.addFlags(GENERATE_ANVIL);
+        BlackSteel.addFlags(GENERATE_ANVIL);
+        RedSteel.addFlags(GENERATE_ANVIL);
+        BlueSteel.addFlags(GENERATE_ANVIL);
+
+        Unknown.addFlags(UNUSABLE);
+        PigIron.addFlags(UNUSABLE);
+        HighCarbonSteel.addFlags(UNUSABLE);
+        HighCarbonBlackSteel.addFlags(UNUSABLE);
+        HighCarbonBlueSteel.addFlags(UNUSABLE);
+        HighCarbonRedSteel.addFlags(UNUSABLE);
+        WeakSteel.addFlags(UNUSABLE);
+        WeakRedSteel.addFlags(UNUSABLE);
+        WeakBlueSteel.addFlags(UNUSABLE);
     }
 }

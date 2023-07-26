@@ -26,6 +26,8 @@ public class TFGOrePrefixHandler {
 
         MetaItems.addOrePrefix(TFGOrePrefix.oreChunk);
         MetaItems.addOrePrefix(TFGOrePrefix.ingotDouble);
+        MetaItems.addOrePrefix(TFGOrePrefix.ingotTriple);
+        MetaItems.addOrePrefix(TFGOrePrefix.ingotHex);
 
         // Set HasMold = true for various OrePrefixes
         final List<OrePrefix> orePrefixesThatHaveMold = Arrays.asList(

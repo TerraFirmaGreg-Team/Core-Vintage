@@ -5,6 +5,10 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -21,25 +25,21 @@ import net.dries007.tfc.objects.items.metal.ItemMetal;
 
 public class UnmoldRecipeWrapper implements IRecipeWrapper
 {
-    private ItemStack mold;
-    private ItemStack output;
+    private final ItemStack mold;
+    private final ItemStack output;
 
-    public UnmoldRecipeWrapper(Metal metal, Metal.ItemType type)
-    {
-        /*
-        mold = new ItemStack(ItemMold.get(type));
-        IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler)
-        {
-            cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100), true);
+    public UnmoldRecipeWrapper(Material material, OrePrefix orePrefix) {
+        mold = new ItemStack(ItemMold.get(orePrefix));
+        var cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        if (cap instanceof IMoldHandler) {
+            cap.fill(new FluidStack(material.getFluid(), Helpers.getOrePrefixMaterialAmount(orePrefix)), true);
         }
-        output = new ItemStack(ItemMetal.get(metal, type));*/
+        output = OreDictUnifier.get(orePrefix, material);
     }
 
 
     @Override
-    public void getIngredients(IIngredients ingredients)
-    {
+    public void getIngredients(IIngredients ingredients) {
         ingredients.setInput(VanillaTypes.ITEM, mold);
         ingredients.setOutput(VanillaTypes.ITEM, output);
     }

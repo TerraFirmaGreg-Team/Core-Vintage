@@ -91,8 +91,7 @@ public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler im
         if (nbt != null) {
             metalAmount = nbt.getInteger("metalAmount");
             var materialName = nbt.getString("metal");
-            material = MaterialRegistryManager.getInstance().getMaterial(materialName);;
-            System.out.println(materialName + " " + material);
+            material = GregTechAPI.materialManager.getMaterial(materialName);
             if (material == null) {
                 material = TFGMaterials.Unknown;
             }

@@ -77,7 +77,6 @@ public class WeldingRecipe extends IForgeRegistryEntry.Impl<WeldingRecipe> imple
     }
 
     public boolean matches(ItemStack input1, ItemStack input2, int tier) {
-
         // Need to check both orientations
         return Helpers.isAtLeast(tier, minTier) && ((this.input1.test(input1) && this.input2.test(input2)) || (this.input1.test(input2) && this.input2.test(input1)));
     }

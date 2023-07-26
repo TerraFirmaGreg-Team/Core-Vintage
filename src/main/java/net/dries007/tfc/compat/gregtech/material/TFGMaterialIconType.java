@@ -11,4 +11,5 @@ public class TFGMaterialIconType {
     public static final MaterialIconType toolHeadTuyere = new MaterialIconType("toolHeadTuyere");
 
     public static final MaterialIconType oreChunk = new MaterialIconType("oreChunk");
+    public static final MaterialIconType ingotHex = new MaterialIconType("ingotHex");
 }

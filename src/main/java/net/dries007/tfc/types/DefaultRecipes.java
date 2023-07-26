@@ -9,9 +9,11 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
@@ -77,15 +79,13 @@ import static net.dries007.tfc.objects.fluids.FluidsTFC.*;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.*;
 
-/**
- * In 1.14+, every line in here needs to be a json file. Yay, but also ugh.
- */
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public final class DefaultRecipes
 {
     public static void init() {
         registerAnvilRecipes();
+        registerWeldingRecipes();
     }
 
     @SubscribeEvent
@@ -638,35 +638,38 @@ public final class DefaultRecipes
         event.getRegistry().register(new ChiselRecipe(BlocksTFC.ALABASTER_RAW_PLAIN, BlocksTFC.ALABASTER_POLISHED_PLAIN.getDefaultState()).setRegistryName("smooth_alabaster"));
     }
 
-    public static void registerAnvilRecipes()
-    {
+    public static void registerAnvilRecipes() {
         IForgeRegistry<AnvilRecipe> r = TFCRegistries.ANVIL;
 
-        for (Material material : GregTechAPI.materialManager.getRegistry("gregtech")) {
-            if (material.hasProperty(TFGPropertyKey.HEAT)) {
+        for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
+            if (material.hasProperty(TFGPropertyKey.HEAT) && !material.hasFlag(TFGMaterialFlags.UNUSABLE)) {
 
-                // Ingot -> Plate
-                r.register(new AnvilRecipe(
-                        new ResourceLocation(MOD_ID, "ingot_to_plate_" + material.getUnlocalizedName()),
-                        IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
-                        OreDictUnifier.get(OrePrefix.plate, material),
-                        material.getProperty(TFGPropertyKey.HEAT).getTier(),
-                        GENERAL,
-                        HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
+                if (material.hasFlag(MaterialFlags.GENERATE_PLATE)) {
+                    // Ingot -> Plate
+                    r.register(new AnvilRecipe(
+                            new ResourceLocation(MOD_ID, "ingot_to_plate_" + material.getName()),
+                            IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
+                            OreDictUnifier.get(OrePrefix.plate, material),
+                            material.getProperty(TFGPropertyKey.HEAT).getTier(),
+                            GENERAL,
+                            HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
+                }
 
-                // Ingot -> Stick
-                r.register(new AnvilRecipe(
-                        new ResourceLocation(MOD_ID, "ingot_to_stick_" + material.getUnlocalizedName()),
-                        IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
-                        OreDictUnifier.get(OrePrefix.stick, material, 2),
-                        material.getProperty(TFGPropertyKey.HEAT).getTier(),
-                        GENERAL,
-                        DRAW_LAST, DRAW_NOT_LAST, PUNCH_NOT_LAST));
+                if (material.hasFlag(MaterialFlags.GENERATE_ROD)) {
+                    // Ingot -> Stick
+                    r.register(new AnvilRecipe(
+                            new ResourceLocation(MOD_ID, "ingot_to_stick_" + material.getName()),
+                            IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
+                            OreDictUnifier.get(OrePrefix.stick, material, 2),
+                            material.getProperty(TFGPropertyKey.HEAT).getTier(),
+                            GENERAL,
+                            DRAW_LAST, DRAW_NOT_LAST, PUNCH_NOT_LAST));
+                }
 
                 if (material.hasProperty(PropertyKey.TOOL)) {
                     // Ingot x2 -> Sword Head
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "double_ingot_to_sword_" + material.getUnlocalizedName()),
+                            new ResourceLocation(MOD_ID, "double_ingot_to_sword_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotDouble, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadSword, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -674,28 +677,26 @@ public final class DefaultRecipes
                             HIT_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST));
 
                     // Ingot x3 -> Pickaxe Head
-                    /*
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "triple_ingot_to_pickaxe_" + material.getUnlocalizedName()),
+                            new ResourceLocation(MOD_ID, "triple_ingot_to_pickaxe_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadPickaxe, material),
-                            material.getProperty(TFGOrePrefix.TFC).getMaterialTier(),
+                            material.getProperty(TFGPropertyKey.HEAT).getTier(),
                             TOOLS,
-                            PUNCH_LAST, BEND_NOT_LAST, DRAW_NOT_LAST));*/
+                            PUNCH_LAST, BEND_NOT_LAST, DRAW_NOT_LAST));
 
                     // Ingot x3 -> Axe Head
-                    /*
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "ingot_to_axe_" + material.getUnlocalizedName()),
-                            IIngredient.of(OreDictUnifier.get(TFCOrePrefix.ingotTriple, material)),
-                            OreDictUnifier.get(TFCOrePrefix.toolHeadAxe, material),
-                            material.getProperty(TFCPropertyKey.TFC).getMaterialTier(),
+                            new ResourceLocation(MOD_ID, "ingot_to_axe_" + material.getName()),
+                            IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
+                            OreDictUnifier.get(TFGOrePrefix.toolHeadAxe, material),
+                            material.getProperty(TFGPropertyKey.HEAT).getTier(),
                             TOOLS,
-                            PUNCH_LAST, BEND_NOT_LAST, DRAW_NOT_LAST));*/
+                            PUNCH_LAST, BEND_NOT_LAST, DRAW_NOT_LAST));
 
                     // Ingot x1 -> Shovel Head
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "ingot_to_shovel_" + material.getUnlocalizedName()),
+                            new ResourceLocation(MOD_ID, "ingot_to_shovel_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadShovel, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -704,7 +705,7 @@ public final class DefaultRecipes
 
                     // Ingot x2 -> Saw Head
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "ingot_to_saw_" + material.getUnlocalizedName()),
+                            new ResourceLocation(MOD_ID, "ingot_to_saw_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotDouble, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadSaw, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -712,28 +713,26 @@ public final class DefaultRecipes
                             HIT_LAST, HIT_SECOND_LAST));
 
                     // Ingot x6 -> Hammer Head
-                    /*
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "ingot_to_hammer_" + material.getUnlocalizedName()),
-                            IIngredient.of(OreDictUnifier.get(TFCOrePrefix.ingotHex, material)),
-                            OreDictUnifier.get(TFCOrePrefix.toolHeadHammer, material),
-                            material.getProperty(TFCPropertyKey.TFC).getMaterialTier(),
+                            new ResourceLocation(MOD_ID, "ingot_to_hammer_" + material.getName()),
+                            IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotHex, material)),
+                            OreDictUnifier.get(TFGOrePrefix.toolHeadHammer, material),
+                            material.getProperty(TFGPropertyKey.HEAT).getTier(),
                             TOOLS,
-                            PUNCH_LAST, SHRINK_NOT_LAST));*/
+                            PUNCH_LAST, SHRINK_NOT_LAST));
 
                     // Ingot x3 -> Sense Head
-                    /*
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "ingot_to_sense_" + material.getUnlocalizedName()),
-                            IIngredient.of(OreDictUnifier.get(TFCOrePrefix.ingotTriple, material)),
-                            OreDictUnifier.get(TFCOrePrefix.toolHeadSense, material),
-                            material.getProperty(TFCPropertyKey.TFC).getMaterialTier(),
+                            new ResourceLocation(MOD_ID, "ingot_to_sense_" + material.getName()),
+                            IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
+                            OreDictUnifier.get(TFGOrePrefix.toolHeadSense, material),
+                            material.getProperty(TFGPropertyKey.HEAT).getTier(),
                             WEAPONS,
-                            HIT_LAST, DRAW_SECOND_LAST, BEND_THIRD_LAST));*/
+                            HIT_LAST, DRAW_SECOND_LAST, BEND_THIRD_LAST));
 
                     // Ingot x1 -> Knife Head
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "ingot_to_knife_" + material.getUnlocalizedName()),
+                            new ResourceLocation(MOD_ID, "ingot_to_knife_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -741,18 +740,17 @@ public final class DefaultRecipes
                             HIT_LAST, DRAW_SECOND_LAST, DRAW_THIRD_LAST));
 
                     // Ingot 3x -> Propick
-                    /*
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "ingot_to_propick_" + material.getUnlocalizedName()),
-                            IIngredient.of(OreDictUnifier.get(TFCOrePrefix.ingotTriple, material)),
-                            OreDictUnifier.get(TFCOrePrefix.toolHeadPropick, material),
+                            new ResourceLocation(MOD_ID, "ingot_to_propick_" + material.getName()),
+                            IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
+                            OreDictUnifier.get(TFGOrePrefix.toolHeadPropick, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
                             TOOLS,
-                            PUNCH_LAST, DRAW_NOT_LAST, BEND_NOT_LAST));*/
+                            PUNCH_LAST, DRAW_NOT_LAST, BEND_NOT_LAST));
 
                     // Ingot 2x -> Chisel Head
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "ingot_to_chisel_" + material.getUnlocalizedName()),
+                            new ResourceLocation(MOD_ID, "ingot_to_chisel_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotDouble, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadChisel, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -762,7 +760,7 @@ public final class DefaultRecipes
                     // Ingot 3x -> Javelin Head
                     /*
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "ingot_to_javelin_" + material.getUnlocalizedName()),
+                            new ResourceLocation(MOD_ID, "ingot_to_javelin_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadJavelin, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -772,7 +770,7 @@ public final class DefaultRecipes
                     // Ingot 6x -> TUYERE
                     /*
                     r.register(new AnvilRecipe(
-                            new ResourceLocation(MOD_ID, "ingot_to_tuyere_" + material.getUnlocalizedName()),
+                            new ResourceLocation(MOD_ID, "ingot_to_tuyere_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotHex, material)),
                             TFCToolItems.TUYERE.get(material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -822,19 +820,6 @@ public final class DefaultRecipes
                 null,
                 HIT_ANY, HIT_ANY, HIT_ANY));
 
-        // Misc
-        // addAnvil(r, INGOT, LAMP, false, GENERAL, BEND_LAST, BEND_SECOND_LAST, DRAW_THIRD_LAST);
-        // addAnvil(r, SHEET, TRAPDOOR, false, GENERAL, BEND_LAST, DRAW_SECOND_LAST, DRAW_THIRD_LAST);
-
-        // Armor
-        // addAnvil(r, DOUBLE_SHEET, UNFINISHED_HELMET, true, ARMOR, HIT_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
-        // addAnvil(r, DOUBLE_SHEET, UNFINISHED_CHESTPLATE, true, ARMOR, HIT_LAST, HIT_SECOND_LAST, UPSET_THIRD_LAST);
-        // addAnvil(r, DOUBLE_SHEET, UNFINISHED_GREAVES, true, ARMOR, BEND_ANY, DRAW_ANY, HIT_ANY);
-        // addAnvil(r, SHEET, UNFINISHED_BOOTS, true, ARMOR, BEND_LAST, BEND_SECOND_LAST, SHRINK_THIRD_LAST);
-
-        // Shields
-        // addAnvil(r, DOUBLE_SHEET, SHIELD, true, ARMOR, UPSET_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
-
         // Blooms
         r.register(new AnvilRecipeMeasurable(new ResourceLocation(MOD_ID, "refining_bloom"), IIngredient.of(ItemsTFC.UNREFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), 2, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
         r.register(new AnvilRecipeSplitting(new ResourceLocation(MOD_ID, "splitting_bloom"), IIngredient.of(ItemsTFC.REFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), 144, 2, PUNCH_LAST));
@@ -851,6 +836,19 @@ public final class DefaultRecipes
         }, OreDictUnifier.get(OrePrefix.ingot, Materials.Iron), 2, null, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
 
         // Misc
+        // addAnvil(r, INGOT, LAMP, false, GENERAL, BEND_LAST, BEND_SECOND_LAST, DRAW_THIRD_LAST);
+        // addAnvil(r, SHEET, TRAPDOOR, false, GENERAL, BEND_LAST, DRAW_SECOND_LAST, DRAW_THIRD_LAST);
+
+        // Armor
+        // addAnvil(r, DOUBLE_SHEET, UNFINISHED_HELMET, true, ARMOR, HIT_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
+        // addAnvil(r, DOUBLE_SHEET, UNFINISHED_CHESTPLATE, true, ARMOR, HIT_LAST, HIT_SECOND_LAST, UPSET_THIRD_LAST);
+        // addAnvil(r, DOUBLE_SHEET, UNFINISHED_GREAVES, true, ARMOR, BEND_ANY, DRAW_ANY, HIT_ANY);
+        // addAnvil(r, SHEET, UNFINISHED_BOOTS, true, ARMOR, BEND_LAST, BEND_SECOND_LAST, SHRINK_THIRD_LAST);
+
+        // Shields
+        // addAnvil(r, DOUBLE_SHEET, SHIELD, true, ARMOR, UPSET_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
+
+        // Misc
         // addAnvil(r, "iron_bars", SHEET, WROUGHT_IRON, new ItemStack(Blocks.IRON_BARS, 8), Metal.Tier.TIER_III, GENERAL, UPSET_LAST, PUNCH_SECOND_LAST, PUNCH_THIRD_LAST);
         // addAnvil(r, "iron_bars_double", DOUBLE_SHEET, WROUGHT_IRON, new ItemStack(Blocks.IRON_BARS, 16), Metal.Tier.TIER_III, GENERAL, UPSET_LAST, PUNCH_SECOND_LAST, PUNCH_THIRD_LAST);
         // addAnvil(r, "iron_door", SHEET, WROUGHT_IRON, new ItemStack(Items.IRON_DOOR), Metal.Tier.TIER_III, GENERAL, HIT_LAST, DRAW_NOT_LAST, PUNCH_NOT_LAST);
@@ -858,6 +856,71 @@ public final class DefaultRecipes
         // addAnvil(r, "blue_steel_bucket", SHEET, BLUE_STEEL, new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, BUCKET)), Metal.Tier.TIER_VI, GENERAL, BEND_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
         // addAnvil(r, "wrought_iron_grill", DOUBLE_SHEET, WROUGHT_IRON, new ItemStack(ItemsTFC.WROUGHT_IRON_GRILL), Metal.Tier.TIER_III, GENERAL, DRAW_ANY, PUNCH_LAST, PUNCH_NOT_LAST);
         // addAnvil(r, "brass_mechanisms", INGOT, BRASS, new ItemStack(ItemsTFC.BRASS_MECHANISMS, 2), Metal.Tier.TIER_II, GENERAL, PUNCH_LAST, HIT_SECOND_LAST, PUNCH_THIRD_LAST);
+    }
+
+    public static void registerWeldingRecipes()
+    {
+        IForgeRegistry<WeldingRecipe> r = TFCRegistries.WELDING;
+
+        for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
+            if (material.hasProperty(TFGPropertyKey.HEAT) && !material.hasFlag(TFGMaterialFlags.UNUSABLE)) {
+
+                r.register(new WeldingRecipe(
+                        new ResourceLocation(MOD_ID, "plate_" + material.getName()),
+                        IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
+                        IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
+                        OreDictUnifier.get(TFGOrePrefix.ingotDouble, material),
+                        material.getProperty(TFGPropertyKey.HEAT).getTier()
+                ));
+
+                r.register(new WeldingRecipe(
+                        new ResourceLocation(MOD_ID, "double_plate_" + material.getName()),
+                        IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotDouble, material)),
+                        IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
+                        OreDictUnifier.get(TFGOrePrefix.ingotTriple, material),
+                        material.getProperty(TFGPropertyKey.HEAT).getTier()
+                ));
+
+                r.register(new WeldingRecipe(
+                        new ResourceLocation(MOD_ID, "triple_plate_" + material.getName()),
+                        IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
+                        IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
+                        OreDictUnifier.get(TFGOrePrefix.ingotHex, material),
+                        material.getProperty(TFGPropertyKey.HEAT).getTier()
+                ));
+            }
+        }
+
+        r.register(new WeldingRecipe(
+                new ResourceLocation(MOD_ID, "high_carbon_black_steel"),
+                IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.WeakSteel)),
+                IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.PigIron)),
+                OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.HighCarbonBlackSteel),
+                TFGMaterials.HighCarbonBlackSteel.getProperty(TFGPropertyKey.HEAT).getTier()
+        ));
+
+        r.register(new WeldingRecipe(
+                new ResourceLocation(MOD_ID, "high_carbon_blue_steel"),
+                IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.WeakBlueSteel)),
+                IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, Materials.BlackSteel)),
+                OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.HighCarbonBlueSteel),
+                TFGMaterials.HighCarbonBlueSteel.getProperty(TFGPropertyKey.HEAT).getTier()
+        ));
+
+        r.register(new WeldingRecipe(
+                new ResourceLocation(MOD_ID, "high_carbon_red_steel"),
+                IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.WeakRedSteel)),
+                IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, Materials.BlackSteel)),
+                OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.HighCarbonRedSteel),
+                TFGMaterials.HighCarbonRedSteel.getProperty(TFGPropertyKey.HEAT).getTier()
+        ));
+
+        // Armor
+        // addWelding(r, UNFINISHED_HELMET, SHEET, HELMET, true, ARMOR);
+        // addWelding(r, UNFINISHED_CHESTPLATE, DOUBLE_SHEET, CHESTPLATE, true, ARMOR);
+        // addWelding(r, UNFINISHED_GREAVES, SHEET, GREAVES, true, ARMOR);
+        // addWelding(r, UNFINISHED_BOOTS, SHEET, BOOTS, true, ARMOR);
+        // addWelding(r, KNIFE_BLADE, KNIFE_BLADE, SHEARS, true, TOOLS);
     }
 
 }

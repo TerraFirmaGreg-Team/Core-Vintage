@@ -19,22 +19,6 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public final class DefaultMetals
 {
-    public static final ResourceLocation BRASS = new ResourceLocation(MOD_ID, "brass");
-    public static final ResourceLocation GOLD = new ResourceLocation(MOD_ID, "gold");
-    public static final ResourceLocation WROUGHT_IRON = new ResourceLocation(MOD_ID, "wrought_iron");
-    public static final ResourceLocation PIG_IRON = new ResourceLocation(MOD_ID, "pig_iron");
-    public static final ResourceLocation STEEL = new ResourceLocation(MOD_ID, "steel");
-    public static final ResourceLocation BLACK_STEEL = new ResourceLocation(MOD_ID, "black_steel");
-    public static final ResourceLocation BLUE_STEEL = new ResourceLocation(MOD_ID, "blue_steel");
-    public static final ResourceLocation RED_STEEL = new ResourceLocation(MOD_ID, "red_steel");
-    public static final ResourceLocation WEAK_STEEL = new ResourceLocation(MOD_ID, "weak_steel");
-    public static final ResourceLocation WEAK_BLUE_STEEL = new ResourceLocation(MOD_ID, "weak_blue_steel");
-    public static final ResourceLocation WEAK_RED_STEEL = new ResourceLocation(MOD_ID, "weak_red_steel");
-    public static final ResourceLocation HIGH_CARBON_STEEL = new ResourceLocation(MOD_ID, "high_carbon_steel");
-    public static final ResourceLocation HIGH_CARBON_BLUE_STEEL = new ResourceLocation(MOD_ID, "high_carbon_blue_steel");
-    public static final ResourceLocation HIGH_CARBON_RED_STEEL = new ResourceLocation(MOD_ID, "high_carbon_red_steel");
-    public static final ResourceLocation HIGH_CARBON_BLACK_STEEL = new ResourceLocation(MOD_ID, "high_carbon_black_steel");
-
     @SubscribeEvent
     public static void onRegisterAlloyRecipe(RegistryEvent.Register<AlloyRecipe> event) {
         event.getRegistry().registerAll(

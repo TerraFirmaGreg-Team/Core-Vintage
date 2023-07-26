@@ -291,8 +291,7 @@ public class ClientEvents
 
             if (event.getFlags().isAdvanced()) // Only added with advanced tooltip mode
             {
-                IMaterialItem metalObject = CapabilityMetalItem.getMaterialItem(stack);
-                System.out.println(stack + " " + metalObject);
+                var metalObject = CapabilityMetalItem.getMaterialItem(stack);
                 if (metalObject != null)
                 {
                     metalObject.addMetalInfo(stack, tt);

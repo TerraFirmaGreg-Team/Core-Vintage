@@ -17,7 +17,7 @@ public class TFGMaterialHandler {
 
     public static void init() {
         Unknown = new Material.Builder(32000, gregtechId("unknown"))
-                .fluid()
+                .ingot().fluid()
                 .color(0x2F2B27).iconSet(METALLIC)
                 .fluidTemp(1250)
                 .flags(NO_UNIFICATION)

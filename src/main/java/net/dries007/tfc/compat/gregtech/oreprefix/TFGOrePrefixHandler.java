@@ -54,6 +54,7 @@ public class TFGOrePrefixHandler {
 
         // Set ShouldHasMetalCapability = true for various OrePrefixes
         final List<OrePrefix> orePrefixesThatHaveMetalCapability = Arrays.asList(
+                OrePrefix.nugget,
                 OrePrefix.plate,
                 TFGOrePrefix.ingotDouble,
                 TFGOrePrefix.ingotTriple,

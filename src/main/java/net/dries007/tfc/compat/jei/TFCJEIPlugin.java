@@ -24,6 +24,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.gui.*;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
@@ -57,6 +58,7 @@ public final class TFCJEIPlugin implements IModPlugin
     public static final String ANVIL_UID = TerraFirmaCraft.MOD_ID + ".anvil";
     public static final String BARREL_UID = TerraFirmaCraft.MOD_ID + ".barrel";
     public static final String BLAST_FURNACE_UID = TerraFirmaCraft.MOD_ID + ".blast_furnace";
+    public static final String CASTING_UID = TerraFirmaCraft.MOD_ID + ".casting";
     public static final String BLOOMERY_UID = TerraFirmaCraft.MOD_ID + ".bloomery";
     public static final String CHISEL_UID = TerraFirmaCraft.MOD_ID + ".chisel";
     public static final String HEAT_UID = TerraFirmaCraft.MOD_ID + ".heat";
@@ -93,6 +95,7 @@ public final class TFCJEIPlugin implements IModPlugin
         registry.addRecipeCategories(new BarrelCategory(registry.getJeiHelpers().getGuiHelper(), BARREL_UID));
         registry.addRecipeCategories(new BlastFurnaceCategory(registry.getJeiHelpers().getGuiHelper(), BLAST_FURNACE_UID));
         registry.addRecipeCategories(new BloomeryCategory(registry.getJeiHelpers().getGuiHelper(), BLOOMERY_UID));
+        registry.addRecipeCategories(new CastingCategory(registry.getJeiHelpers().getGuiHelper(), CASTING_UID));
         registry.addRecipeCategories(new ChiselCategory(registry.getJeiHelpers().getGuiHelper(), CHISEL_UID));
         registry.addRecipeCategories(new HeatCategory(registry.getJeiHelpers().getGuiHelper(), HEAT_UID));
         // registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_CLAY_UID));
@@ -231,21 +234,25 @@ public final class TFCJEIPlugin implements IModPlugin
 
         registry.addRecipes(heatMetalList, METAL_HEAT_UID);
 
-        // Unmold Recipes
+        // Unmold + Casting Recipes
         for (var oreDictStack : OreDictionary.getOres("workbench")) {
             registry.addRecipeCatalyst(oreDictStack, UNMOLD_UID);
         }
 
+        registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), CASTING_UID);
+        registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), CASTING_UID);
+
         var unmoldList = new ArrayList<>();
+        var castingList = new ArrayList<>();
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
             for (var orePrefix : OrePrefix.values()) {
                 var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
 
-                if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold() && material != TFGMaterials.Unknown) {
-                    if (material.hasProperty(PropertyKey.TOOL)) {
-                        unmoldList.add(new UnmoldRecipeWrapper(material, orePrefix));
-                    } else if (orePrefix == OrePrefix.ingot) {
+                if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
+                    if (!material.hasFlag(TFGMaterialFlags.UNUSABLE)) {
+                        castingList.add(new CastingRecipeWrapper(material, orePrefix));
+                    } else {
                         unmoldList.add(new UnmoldRecipeWrapper(material, orePrefix));
                     }
                 }
@@ -253,6 +260,7 @@ public final class TFCJEIPlugin implements IModPlugin
         }
 
         registry.addRecipes(unmoldList, UNMOLD_UID);
+        registry.addRecipes(castingList, CASTING_UID);
 
         // Chisel Recipes
         // TODO: Add recipe catalyst

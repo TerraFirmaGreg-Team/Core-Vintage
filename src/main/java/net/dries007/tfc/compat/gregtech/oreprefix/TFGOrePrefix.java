@@ -4,6 +4,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialIconType;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialIconType;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
@@ -28,9 +29,9 @@ public class TFGOrePrefix {
     public static final OrePrefix toolHeadChisel = new OrePrefix("toolHeadChisel", M * 2, null, TFGMaterialIconType.toolHeadChisel, ENABLE_UNIFICATION, hasToolProperty);
 
     public static final OrePrefix oreChunk = new OrePrefix("oreChunk", -1, null, TFGMaterialIconType.oreChunk, ENABLE_UNIFICATION, hasOreProperty);
-    public static final OrePrefix ingotDouble = new OrePrefix("ingotDouble", M * 2, null, MaterialIconType.ingotDouble, ENABLE_UNIFICATION,  m -> m.hasProperty(TFGPropertyKey.HEAT));
-    public static final OrePrefix ingotTriple = new OrePrefix("ingotTriple", M * 3, null, MaterialIconType.ingotTriple, ENABLE_UNIFICATION,  m -> m.hasProperty(TFGPropertyKey.HEAT));
-    public static final OrePrefix ingotHex = new OrePrefix("ingotHex", M * 6, null, TFGMaterialIconType.ingotHex, ENABLE_UNIFICATION,  m -> m.hasProperty(TFGPropertyKey.HEAT));
+    public static final OrePrefix ingotDouble = new OrePrefix("ingotDouble", M * 2, null, MaterialIconType.ingotDouble, ENABLE_UNIFICATION,  m -> !m.hasFlag(TFGMaterialFlags.UNUSABLE) && m.hasProperty(TFGPropertyKey.HEAT));
+    public static final OrePrefix ingotTriple = new OrePrefix("ingotTriple", M * 3, null, MaterialIconType.ingotTriple, ENABLE_UNIFICATION,  m -> !m.hasFlag(TFGMaterialFlags.UNUSABLE) && m.hasProperty(TFGPropertyKey.HEAT));
+    public static final OrePrefix ingotHex = new OrePrefix("ingotHex", M * 6, null, TFGMaterialIconType.ingotHex, ENABLE_UNIFICATION,  m -> !m.hasFlag(TFGMaterialFlags.UNUSABLE) && m.hasProperty(TFGPropertyKey.HEAT));
 
     public static final OrePrefix oreRockSalt = new OrePrefix("oreRockSalt", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreSoapstone = new OrePrefix("oreSoapstone", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);

@@ -12,6 +12,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -77,6 +78,6 @@ public class BlastFurnaceRecipe extends IForgeRegistryEntry.Impl<BlastFurnaceRec
      * @return itemstack containing ingot of the specified metal
      */
     public ItemStack getOutput() {
-        return OreDictUnifier.get(OrePrefix.ingot, Materials.Iron);
+        return OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.PigIron);
     }
 }

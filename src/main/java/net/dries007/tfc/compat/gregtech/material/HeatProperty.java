@@ -9,7 +9,6 @@ public class HeatProperty implements IMaterialProperty {
     private final float specificHeat;
     private final int tier;
 
-
     // Use unknown metal values from tfc
     public HeatProperty() {
         this.meltTemp = 0.5f;

@@ -14,7 +14,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.compat.jei.BaseRecipeCategory;
+import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.AlloyRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;

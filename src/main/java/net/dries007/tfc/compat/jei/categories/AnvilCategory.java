@@ -11,7 +11,7 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.client.gui.GuiAnvilTFC;
-import net.dries007.tfc.compat.jei.BaseRecipeCategory;
+import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -19,7 +19,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class AnvilCategory extends BaseRecipeCategory<SimpleRecipeWrapper>
 {
-
     public AnvilCategory(IGuiHelper helper, String Uid)
     {
         super(helper.createDrawable(GuiAnvilTFC.ANVIL_BACKGROUND, 11, 7, 154, 80), Uid);

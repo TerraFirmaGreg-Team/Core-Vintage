@@ -3,7 +3,7 @@
  * See the project README.md and LICENSE.txt for more information.
  */
 
-package net.dries007.tfc.compat.jei;
+package net.dries007.tfc.compat.jei.util;
 
 import mezz.jei.api.gui.IAdvancedGuiHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;

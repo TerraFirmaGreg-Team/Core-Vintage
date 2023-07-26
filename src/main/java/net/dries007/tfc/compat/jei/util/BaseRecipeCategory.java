@@ -3,7 +3,7 @@
  * See the project README.md and LICENSE.txt for more information.
  */
 
-package net.dries007.tfc.compat.jei;
+package net.dries007.tfc.compat.jei.util;
 
 import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.gui.IDrawable;

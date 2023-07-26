@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +37,9 @@ public class ItemAnvil extends ItemTFC implements IMaterialItem
     private static final Map<Material, ItemAnvil> ANVIL_STORAGE_MAP = new HashMap<>();
     public static ItemAnvil get(Material material) {
         return ANVIL_STORAGE_MAP.get(material);
+    }
+    public static Collection<ItemAnvil> getAnvilStorage() {
+        return ANVIL_STORAGE_MAP.values();
     }
 
     private final Material material;

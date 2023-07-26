@@ -10,7 +10,7 @@ import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlockFireBrick;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEBellows;
@@ -46,7 +46,7 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
     {
         Predicate<IBlockState> stoneMatcher = state -> state.getBlock() instanceof BlockFireBrick;
         Predicate<IBlockState> sheetMatcher = state -> {
-            if (state.getBlock() instanceof BlockMetalSheet block) {
+            if (state.getBlock() instanceof BlockMetalCladding block) {
                 //return block.getMetal().getTier().isAtLeast(Metal.Tier.TIER_III) && block.getMetal().isToolMetal(); // TODO
             }
             return false;

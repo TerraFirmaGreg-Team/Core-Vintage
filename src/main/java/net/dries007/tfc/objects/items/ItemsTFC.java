@@ -8,6 +8,7 @@ package net.dries007.tfc.objects.items;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import gregtech.api.GregTechAPI;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -33,6 +34,7 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTorch;
 import net.dries007.tfc.objects.items.metal.ItemAnvil;
 import net.dries007.tfc.objects.items.metal.ItemMetalBucket;
+import net.dries007.tfc.objects.items.metal.ItemMetalCladding;
 import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.wood.ItemBoatTFC;
@@ -258,6 +260,9 @@ public final class ItemsTFC
                 if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL)) {
                     simpleItems.add(register(r, "metal/anvil/" + material.getName(), new ItemAnvil(material), MISC));
                 }
+
+                if (material == Materials.Iron)
+                    simpleItems.add(register(r, "metal/cladding/" + material.getName(), new ItemMetalCladding(material), MISC));
             }
         }
 

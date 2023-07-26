@@ -191,7 +191,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal>
         SCRAP(false, 100),
         DUST(false, 100),
         NUGGET(false, 10),
-        SHEET(false, 200, ItemMetalSheet::new),
+        //SHEET(false, 200, ItemMetalSheet::new),
         DOUBLE_SHEET(false, 400),
         ROD(false, 50),
 

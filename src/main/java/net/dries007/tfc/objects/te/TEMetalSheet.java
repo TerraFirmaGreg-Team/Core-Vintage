@@ -5,10 +5,9 @@
 
 package net.dries007.tfc.objects.te;
 
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.items.metal.ItemMetalSheet;
+import gregtech.api.unification.material.Material;
+import net.dries007.tfc.objects.items.metal.ItemMetalCladding;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -94,10 +93,10 @@ public class TEMetalSheet extends TEBase
         return super.writeToNBT(nbt);
     }
 
-    public void onBreakBlock(Metal outMetal)
+    public void onBreakBlock(Material outMetal)
     {
-        Item item = ItemMetalSheet.get(outMetal, Metal.ItemType.SHEET);
-        ItemStack output = new ItemStack(item, getFaceCount());
+        var item = ItemMetalCladding.get(outMetal);
+        var output = new ItemStack(item, getFaceCount());
         InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), output);
     }
 }

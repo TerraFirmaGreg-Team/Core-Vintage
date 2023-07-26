@@ -8,6 +8,7 @@ package net.dries007.tfc.objects.blocks;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import gregtech.api.GregTechAPI;
+import gregtech.api.unification.material.Materials;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -124,7 +125,7 @@ public final class BlocksTFC {
 	private static ImmutableList<BlockRockSlabTFC.Half> allSlabBlocks;
 	private static ImmutableList<BlockChestTFC> allChestBlocks;
 	private static ImmutableList<BlockAnvilTFC> allAnvils;
-	private static ImmutableList<BlockMetalSheet> allSheets;
+	private static ImmutableList<BlockMetalCladding> allCladdings;
 	private static ImmutableList<BlockMetalLamp> allLamps;
 	private static ImmutableList<BlockToolRack> allToolRackBlocks;
 	private static ImmutableList<BlockCropTFC> allCropBlocks;
@@ -204,8 +205,8 @@ public final class BlocksTFC {
 		return allAnvils;
 	}
 
-	public static ImmutableList<BlockMetalSheet> getAllSheets() {
-		return allSheets;
+	public static ImmutableList<BlockMetalCladding> getAllCladdings() {
+		return allCladdings;
 	}
 
 	public static ImmutableList<BlockMetalLamp> getAllLamps() {
@@ -513,15 +514,18 @@ public final class BlocksTFC {
 
 		{
 			Builder<BlockAnvilTFC> anvils = ImmutableList.builder();
-			Builder<BlockMetalSheet> sheets = ImmutableList.builder();
+			Builder<BlockMetalCladding> claddings = ImmutableList.builder();
 			Builder<BlockMetalLamp> lamps = ImmutableList.builder();
 			Builder<BlockTrapDoorMetalTFC> metalTrapdoors = ImmutableList.builder();
 
 			for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
 				if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL))
 					anvils.add(register(r, "anvil/" + material.getName(), new BlockAnvilTFC(material), METAL));
+
+				if (material == Materials.Iron)
+					claddings.add(register(r, "cladding/" + material.getName(), new BlockMetalCladding(material), METAL));
 			}
-			/*
+            /*
 			for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
 				if (Metal.ItemType.ANVIL.hasType(metal))
 
@@ -535,7 +539,7 @@ public final class BlocksTFC {
 			}*/
 
 			allAnvils = anvils.build();
-			allSheets = sheets.build();
+			allCladdings = claddings.build();
 			allLamps = lamps.build();
 			allTrapDoorMetalBlocks = metalTrapdoors.build();
 		}
@@ -757,7 +761,7 @@ public final class BlocksTFC {
 		return false;
 	}
 
-	/*
+    /*
 	public static boolean isSand(IBlockState current) {
 		if (!(current.getBlock() instanceof BlockRockVariant)) return false;
 		Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();

@@ -54,73 +54,7 @@ public class ItemMetal extends ItemTFC implements IMaterialItem
     protected Material metal;
     protected Metal.ItemType type;
 
-    @SuppressWarnings("ConstantConditions")
-    public ItemMetal(Material metal, Metal.ItemType type)
-    {
-        this.metal = metal;
-        this.type = type;
 
-        /*
-        if (!TABLE.containsKey(metal))
-            TABLE.put(metal, new EnumMap<>(Metal.ItemType.class));
-        TABLE.get(metal).put(type, this);
-
-        setNoRepair();
-        if (type == Metal.ItemType.DOUBLE_INGOT)
-        {
-            OreDictionaryHelper.register(this, "ingot", "double", metal.getRegistryName().getPath());
-            if (metal == Metal.BRONZE || metal == Metal.BISMUTH_BRONZE || metal == Metal.BLACK_BRONZE)
-            {
-                OreDictionaryHelper.register(this, "ingot", "double", "Any", "Bronze");
-            }
-            if (metal == Metal.WROUGHT_IRON && ConfigTFC.General.MISC.dictionaryIron)
-            {
-                OreDictionaryHelper.register(this, "ingot", "double", "Iron");
-            }
-        }
-        else if (type == Metal.ItemType.DOUBLE_SHEET)
-        {
-            OreDictionaryHelper.register(this, "sheet", "double", metal.getRegistryName().getPath());
-            if (metal == Metal.BRONZE || metal == Metal.BISMUTH_BRONZE || metal == Metal.BLACK_BRONZE)
-            {
-                OreDictionaryHelper.register(this, "sheet", "double", "Any", "Bronze");
-            }
-            if (metal == Metal.WROUGHT_IRON && ConfigTFC.General.MISC.dictionaryIron)
-            {
-                OreDictionaryHelper.register(this, "sheet", "double", "Iron");
-            }
-        }
-        else if (type.isToolItem())
-        {
-            OreDictionaryHelper.register(this, type);
-        }
-        else
-        {
-            OreDictionaryHelper.register(this, type, metal.getRegistryName().getPath());
-            if (metal == Metal.BRONZE || metal == Metal.BISMUTH_BRONZE || metal == Metal.BLACK_BRONZE)
-            {
-                OreDictionaryHelper.register(this, type, "Any", "Bronze");
-            }
-            if (type == Metal.ItemType.SHEET && ConfigTFC.General.MISC.dictionaryPlates)
-            {
-                OreDictionaryHelper.register(this, "plate", metal);
-            }
-            if (metal == Metal.WROUGHT_IRON && ConfigTFC.General.MISC.dictionaryIron)
-            {
-                OreDictionaryHelper.register(this, type, "Iron");
-                if (type == Metal.ItemType.SHEET && ConfigTFC.General.MISC.dictionaryPlates) //Register plate for iron too
-                {
-                    OreDictionaryHelper.register(this, "plate", "Iron");
-                }
-            }
-
-        }
-
-        if (type == Metal.ItemType.TUYERE)
-        {
-            setMaxDamage(metal.getToolMetal() != null ? (int) (metal.getToolMetal().getMaxUses() * 0.2) : 100);
-        }*/
-    }
 
     @Override
     public Material getMaterial(ItemStack stack)
@@ -129,8 +63,7 @@ public class ItemMetal extends ItemTFC implements IMaterialItem
     }
 
     @Override
-    public int getSmeltAmount(ItemStack stack)
-    {
+    public int getSmeltAmount(ItemStack stack) {
         if (!isDamageable() || !stack.isItemDamaged()) return type.getSmeltAmount();
         double d = (stack.getMaxDamage() - stack.getItemDamage()) / (double) stack.getMaxDamage() - .10;
         return d < 0 ? 0 : MathHelper.floor(type.getSmeltAmount() * d);
@@ -141,60 +74,14 @@ public class ItemMetal extends ItemTFC implements IMaterialItem
     @Override
     public Size getSize(@Nonnull ItemStack stack)
     {
-        switch (type)
-        {
-            case NUGGET:
-            case DUST:
-            case SCRAP:
-                return Size.SMALL; // Fits in Small Vessels
-            case PICK_HEAD:
-            case HAMMER_HEAD:
-            case HOE_HEAD:
-            case AXE_HEAD:
-            case CHISEL_HEAD:
-            case JAVELIN_HEAD:
-            case MACE_HEAD:
-            case PROPICK_HEAD:
-            case SHOVEL_HEAD:
-            case KNIFE_BLADE:
-            case SAW_BLADE:
-            case SCYTHE_BLADE:
-            case SWORD_BLADE:
-                return Size.NORMAL; // Tool heads fits in large vessels
-
-            default:
-                return Size.LARGE; // Everything else fits only in chests
-        }
+        return Size.LARGE;
     }
 
     @Nonnull
     @Override
     public Weight getWeight(@Nonnull ItemStack stack)
     {
-        switch (type)
-        {
-            case DUST:
-            case NUGGET:
-            case SCRAP:
-                return Weight.VERY_LIGHT; // Stacksize = 64
-            case INGOT:
-            case DOUBLE_INGOT:
-            case SHEET:
-            case DOUBLE_SHEET:
-                return Weight.LIGHT; // Stacksize = 32
-
-            case HELMET:
-            case GREAVES:
-            case CHESTPLATE:
-            case BOOTS:
-            case UNFINISHED_CHESTPLATE:
-            case UNFINISHED_GREAVES:
-            case UNFINISHED_HELMET:
-            case UNFINISHED_BOOTS:
-                return Weight.VERY_HEAVY; // Stacksize = 1
-            default:
-                return Weight.MEDIUM; // Stacksize = 16 for everything else, but tools will still stack only to 1
-        }
+        return Weight.VERY_HEAVY;
     }
 
 

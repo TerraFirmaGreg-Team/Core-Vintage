@@ -20,6 +20,7 @@ import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
 import net.dries007.tfc.command.*;
+import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.top.TOPPlugin;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.objects.LootTablesTFC;
@@ -112,8 +113,9 @@ public final class TerraFirmaCraft
     {
         log.debug("If you can see this, debug logging is working :)");
 
-        // No need to sync config here, forge magic
+        TFGToolItems.preInit();
 
+        // No need to sync config here, forge magic
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new TFCGuiHandler());
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
         int id = 0;

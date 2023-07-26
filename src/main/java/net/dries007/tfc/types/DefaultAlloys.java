@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public final class DefaultMetals
+public final class DefaultAlloys
 {
     @SubscribeEvent
     public static void onRegisterAlloyRecipe(RegistryEvent.Register<AlloyRecipe> event) {

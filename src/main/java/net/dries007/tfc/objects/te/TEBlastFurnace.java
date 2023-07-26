@@ -14,6 +14,7 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
+import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.objects.blocks.BlockMolten;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.devices.BlockBlastFurnace;
@@ -77,7 +78,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
     @Override
     public boolean isItemValid(int slot, ItemStack stack)
     {
-        return OreDictionaryHelper.doesStackMatchOre(stack, "tuyere");
+        return stack.getItem() == TFGToolItems.TUYERE.get();
     }
 
     @SuppressWarnings("unused")

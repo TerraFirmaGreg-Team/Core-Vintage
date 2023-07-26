@@ -5,8 +5,12 @@
 
 package net.dries007.tfc.objects.blocks.devices;
 
+import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.common.blocks.BlockMetalCasing;
+import gregtech.common.blocks.MetaBlocks;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlockFireBrick;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -44,34 +48,29 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
 
     static
     {
-        Predicate<IBlockState> stoneMatcher = state -> state.getBlock() instanceof BlockFireBrick;
-        Predicate<IBlockState> sheetMatcher = state -> {
-            if (state.getBlock() instanceof BlockMetalCladding block) {
-                //return block.getMetal().getTier().isAtLeast(Metal.Tier.TIER_III) && block.getMetal().isToolMetal(); // TODO
-            }
-            return false;
-        };
+        Predicate<IBlockState> stoneMatcher = state -> state.getBlock() == MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.COKE_BRICKS).getBlock();
+        Predicate<IBlockState> claddingMatcher = state -> state.getBlock() instanceof BlockMetalCladding;
         BLAST_FURNACE_CHIMNEY = new Multiblock()
             .match(new BlockPos(0, 0, 0), state -> state.getBlock() == BlocksTFC.MOLTEN || state.getMaterial().isReplaceable())
             .match(new BlockPos(0, 0, 1), stoneMatcher)
             .match(new BlockPos(0, 0, -1), stoneMatcher)
             .match(new BlockPos(1, 0, 0), stoneMatcher)
             .match(new BlockPos(-1, 0, 0), stoneMatcher)
-            .match(new BlockPos(0, 0, -2), sheetMatcher)
+            .match(new BlockPos(0, 0, -2), claddingMatcher)
             .match(new BlockPos(0, 0, -2), tile -> tile.getFace(EnumFacing.NORTH), TEMetalSheet.class)
-            .match(new BlockPos(0, 0, 2), sheetMatcher)
+            .match(new BlockPos(0, 0, 2), claddingMatcher)
             .match(new BlockPos(0, 0, 2), tile -> tile.getFace(EnumFacing.SOUTH), TEMetalSheet.class)
-            .match(new BlockPos(2, 0, 0), sheetMatcher)
+            .match(new BlockPos(2, 0, 0), claddingMatcher)
             .match(new BlockPos(2, 0, 0), tile -> tile.getFace(EnumFacing.EAST), TEMetalSheet.class)
-            .match(new BlockPos(-2, 0, 0), sheetMatcher)
+            .match(new BlockPos(-2, 0, 0), claddingMatcher)
             .match(new BlockPos(-2, 0, 0), tile -> tile.getFace(EnumFacing.WEST), TEMetalSheet.class)
-            .match(new BlockPos(-1, 0, -1), sheetMatcher)
+            .match(new BlockPos(-1, 0, -1), claddingMatcher)
             .match(new BlockPos(-1, 0, -1), tile -> tile.getFace(EnumFacing.NORTH) && tile.getFace(EnumFacing.WEST), TEMetalSheet.class)
-            .match(new BlockPos(1, 0, -1), sheetMatcher)
+            .match(new BlockPos(1, 0, -1), claddingMatcher)
             .match(new BlockPos(1, 0, -1), tile -> tile.getFace(EnumFacing.NORTH) && tile.getFace(EnumFacing.EAST), TEMetalSheet.class)
-            .match(new BlockPos(-1, 0, 1), sheetMatcher)
+            .match(new BlockPos(-1, 0, 1), claddingMatcher)
             .match(new BlockPos(-1, 0, 1), tile -> tile.getFace(EnumFacing.SOUTH) && tile.getFace(EnumFacing.WEST), TEMetalSheet.class)
-            .match(new BlockPos(1, 0, 1), sheetMatcher)
+            .match(new BlockPos(1, 0, 1), claddingMatcher)
             .match(new BlockPos(1, 0, 1), tile -> tile.getFace(EnumFacing.SOUTH) && tile.getFace(EnumFacing.EAST), TEMetalSheet.class);
     }
 

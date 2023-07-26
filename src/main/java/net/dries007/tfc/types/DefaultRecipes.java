@@ -30,6 +30,7 @@ import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipeRandomGem;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
@@ -766,14 +767,13 @@ public final class DefaultRecipes
                             HIT_LAST, HIT_SECOND_LAST, DRAW_THIRD_LAST));*/
 
                     // Ingot 6x -> TUYERE
-                    /*
                     r.register(new AnvilRecipe(
                             new ResourceLocation(MOD_ID, "ingot_to_tuyere_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotHex, material)),
-                            TFCToolItems.TUYERE.get(material),
+                            TFGToolItems.TUYERE.get(material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
                             GENERAL,
-                            BEND_LAST, BEND_SECOND_LAST));*/
+                            BEND_LAST, BEND_SECOND_LAST));
                 }
             }
         }

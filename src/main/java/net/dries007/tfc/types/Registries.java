@@ -40,11 +40,11 @@ public final class Registries
     {
         // Pre Block registries (dirty hack)
 
-        newRegistry(ROCK_TYPE, RockCategory.class, true); // Required before: ROCK
-        newRegistry(ROCK, Rock.class, true);
-        newRegistry(METAL, Metal.class, true); // Required before: ORE, ALLOY_RECIPE, WELDING_RECIPE
-        newRegistry(TREE, Tree.class, true);
-        newRegistry(PLANT, Plant.class, true);
+        newRegistry(ROCK_TYPE, RockCategory.class, true); // TODO: REMOVE THIS
+        newRegistry(ROCK, Rock.class, true); // TODO: REMOVE THIS
+        newRegistry(METAL, Metal.class, true);  // TODO: REMOVE THIS
+        newRegistry(TREE, Tree.class, true); // TODO: REMOVE THIS (Move to enum?)
+        newRegistry(PLANT, Plant.class, true); // TODO: REMOVE THIS (Move to enum?)
 
         // Normal registries
         newRegistry(ALLOY_RECIPE, AlloyRecipe.class, false);
@@ -60,6 +60,7 @@ public final class Registries
         newRegistry(BLAST_FURNACE_RECIPE, BlastFurnaceRecipe.class, false);
     }
 
+    // TODO: and then remove this
     /**
      * Danger: dirty hack.
      */

@@ -11,6 +11,10 @@ import java.util.Set;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
+import gregtech.api.unification.material.Materials;
+import net.dries007.tfc.api.capability.metal.MetalItemHandler;
+import net.dries007.tfc.objects.items.ItemsTFC;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -33,6 +37,10 @@ public final class CapabilityForgeable
     public static void preInit()
     {
         CapabilityManager.INSTANCE.register(IForgeable.class, new DumbStorage<>(), ForgeableHandler::new);
+    }
+
+    public static void init() {
+        CUSTOM_ITEMS.put(IIngredient.of(ItemsTFC.UNREFINED_BLOOM), () -> new ForgeableMeasurableMetalHandler(Materials.Iron, 144));
     }
 
     @Nullable

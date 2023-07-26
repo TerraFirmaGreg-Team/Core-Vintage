@@ -5,23 +5,21 @@
 
 package net.dries007.tfc.api.recipes;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import gregtech.api.unification.material.Material;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemsTFC;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe>
 {

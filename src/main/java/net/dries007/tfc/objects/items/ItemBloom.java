@@ -34,8 +34,7 @@ public class ItemBloom extends ItemTFC implements IMaterialItem
 {
     private final boolean meltable;
 
-    public ItemBloom(boolean meltable)
-    {
+    public ItemBloom(boolean meltable) {
         this.meltable = meltable;
     }
 
@@ -93,7 +92,7 @@ public class ItemBloom extends ItemTFC implements IMaterialItem
             System.out.println("cock");
             text.add("dalbaeb");
             text.add(I18n.format("tfc.tooltip.metal", material.getLocalizedName()));
-            text.add(I18n.format("tfc.tooltip.units", metalAmount));
+            text.add(I18n.format("tfc.tooltip.units", 123));
         }
     }
 
@@ -107,14 +106,12 @@ public class ItemBloom extends ItemTFC implements IMaterialItem
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (isInCreativeTab(tab)) {
-            for (int i = 144; i <= 576; i += 144) {
-                ItemStack stack = new ItemStack(this);
-                IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-                if (cap instanceof IForgeableMeasurableMetal handler) {
-                    handler.setMaterial(Materials.Iron);
-                    handler.setMetalAmount(i);
-                    items.add(stack);
-                }
+            ItemStack stack = new ItemStack(this);
+            var cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+            if (cap instanceof IForgeableMeasurableMetal handler) {
+                handler.setMaterial(Materials.Iron);
+                handler.setMetalAmount(144);
+                items.add(stack);
             }
         }
     }

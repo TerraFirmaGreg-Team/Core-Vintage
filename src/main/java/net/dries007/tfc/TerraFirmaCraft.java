@@ -101,7 +101,6 @@ public final class TerraFirmaCraft
     }
 
     private final Logger log = LogManager.getLogger(MOD_ID);
-    private final boolean isSignedBuild = true;
     private WorldTypeTFC worldTypeTFC;
     private SimpleNetworkWrapper network;
 
@@ -109,10 +108,6 @@ public final class TerraFirmaCraft
     public void preInit(FMLPreInitializationEvent event)
     {
         log.debug("If you can see this, debug logging is working :)");
-        if (!isSignedBuild)
-        {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
 
         // No need to sync config here, forge magic
 
@@ -163,10 +158,6 @@ public final class TerraFirmaCraft
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        if (!isSignedBuild)
-        {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
 
         ItemsTFC.init();
         LootTablesTFC.init();
@@ -201,18 +192,14 @@ public final class TerraFirmaCraft
         CapabilityItemSize.init();
         CapabilityItemHeat.init();
         CapabilityMetalItem.init();
+        CapabilityForgeable.init();
 
         DefaultRecipes.init();
         //StoneTypeHandler.init();
     }
 
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        if (!isSignedBuild)
-        {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
+    public void postInit(FMLPostInitializationEvent event) {
         FuelManager.postInit();
         JsonConfigRegistry.INSTANCE.postInit();
     }
@@ -228,10 +215,6 @@ public final class TerraFirmaCraft
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event)
     {
-        if (!isSignedBuild)
-        {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
 
         event.registerServerCommand(new CommandStripWorld());
         event.registerServerCommand(new CommandHeat());

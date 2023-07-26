@@ -648,7 +648,7 @@ public final class DefaultRecipes
                     // Ingot -> Plate
                     r.register(new AnvilRecipe(
                             new ResourceLocation(MOD_ID, "ingot_to_plate_" + material.getName()),
-                            IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
+                            IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotDouble, material, 2)),
                             OreDictUnifier.get(OrePrefix.plate, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
                             GENERAL,

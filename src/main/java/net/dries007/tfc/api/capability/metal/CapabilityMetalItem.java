@@ -16,8 +16,10 @@ import gregtech.api.items.materialitem.MetaPrefixItem;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.api.capability.forge.ForgeableMeasurableMetalHandler;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -58,6 +60,8 @@ public final class CapabilityMetalItem
     public static void init() {
         CUSTOM_METAL_ITEMS.put(new ItemStack(Blocks.IRON_BARS) , () -> new MetalItemHandler(Materials.Iron, 25, true));
         CUSTOM_METAL_ITEMS.put(new ItemStack(Items.IRON_INGOT), () -> new MetalItemHandler(Materials.Iron, 144, true));
+        CUSTOM_METAL_ITEMS.put(new ItemStack(ItemsTFC.UNREFINED_BLOOM), () -> new MetalItemHandler(Materials.Iron, 144, true));
+        CUSTOM_METAL_ITEMS.put(new ItemStack(ItemsTFC.REFINED_BLOOM), () -> new MetalItemHandler(Materials.Iron, 144, true));
     }
 
     /**

@@ -30,8 +30,7 @@ import net.dries007.tfc.util.Helpers;
 @ParametersAreNonnullByDefault
 public class BlockBloom extends Block
 {
-    public BlockBloom()
-    {
+    public BlockBloom() {
         super(Material.IRON);
         setHardness(3.0f);
         setHarvestLevel("pickaxe", 0);
@@ -39,28 +38,22 @@ public class BlockBloom extends Block
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TEBloom te = Helpers.getTE(worldIn, pos, TEBloom.class);
-        if (te != null)
-        {
+        if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
 
     @Override
-    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, @Nullable EntityPlayer player, boolean willHarvest)
-    {
-        if (player != null && player.canHarvestBlock(state) && !player.isCreative())
-        {
+    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, @Nullable EntityPlayer player, boolean willHarvest) {
+        if (player != null && player.canHarvestBlock(state) && !player.isCreative()) {
             // Try to give the contents of the TE directly to the player if possible
             TEBloom tile = Helpers.getTE(world, pos, TEBloom.class);
-            if (tile != null)
-            {
+            if (tile != null) {
                 IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (cap != null)
-                {
+                if (cap != null) {
                     ItemStack contents = cap.extractItem(0, 64, false);
                     ItemHandlerHelper.giveItemToPlayer(player, contents);
                 }
@@ -88,14 +81,11 @@ public class BlockBloom extends Block
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
     {
         TEBloom tile = Helpers.getTE(world, pos, TEBloom.class);
-        if (tile != null)
-        {
+        if (tile != null) {
             IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (cap != null)
-            {
+            if (cap != null) {
                 ItemStack stack = cap.extractItem(0, 1, true);
-                if (!stack.isEmpty())
-                {
+                if (!stack.isEmpty()) {
                     return stack;
                 }
             }

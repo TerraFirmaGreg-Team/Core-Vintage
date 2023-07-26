@@ -28,15 +28,25 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC.AXIS;
 
 @ParametersAreNonnullByDefault
 public class ItemAnvil extends ItemTFC implements IMaterialItem
 {
+    private static final Map<Material, ItemAnvil> ANVIL_STORAGE_MAP = new HashMap<>();
+    public static ItemAnvil get(Material material) {
+        return ANVIL_STORAGE_MAP.get(material);
+    }
+
     private final Material material;
 
     public ItemAnvil(Material material) {
         this.material = material;
+
+        if (ANVIL_STORAGE_MAP.put(material, this) != null) throw new IllegalStateException("There can only be one.");
     }
 
     @Override

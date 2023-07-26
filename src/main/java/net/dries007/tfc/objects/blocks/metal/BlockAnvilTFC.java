@@ -154,7 +154,7 @@ public class BlockAnvilTFC extends Block
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return new ItemStack(ANVIL_STORAGE_MAP.get(material)).getItem();
+        return ItemAnvil.get(material);
     }
 
     @Override
@@ -259,7 +259,7 @@ public class BlockAnvilTFC extends Block
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(ANVIL_STORAGE_MAP.get(material));
+        return new ItemStack(ItemAnvil.get(material));
     }
 
     public Material getMetal()

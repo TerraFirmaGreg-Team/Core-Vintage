@@ -5,11 +5,10 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -24,10 +23,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class BlockEpiphyteTFC extends BlockPlantTFC

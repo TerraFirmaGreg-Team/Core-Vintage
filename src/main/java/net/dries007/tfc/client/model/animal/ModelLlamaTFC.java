@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +15,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelLlamaTFC

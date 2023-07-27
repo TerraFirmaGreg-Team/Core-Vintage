@@ -5,10 +5,11 @@
 
 package net.dries007.tfc.objects.recipes;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.gson.JsonObject;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -23,10 +24,8 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SuppressWarnings("unused")
 @ParametersAreNonnullByDefault

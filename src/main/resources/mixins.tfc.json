@@ -1,9 +1,11 @@
 {
   "package": "net.dries007.tfc.mixins",
-  "refmap": "tfc.refmap.json",
+  "refmap": "mixins.tfc.refmap.json",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "gregtech.BlockOreMixin",
+    "gregtech.OrePrefixMixin"
   ]
 }

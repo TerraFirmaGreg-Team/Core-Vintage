@@ -5,12 +5,12 @@
 
 package net.dries007.tfc.objects.items.ceramics;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+
+import javax.annotation.Nonnull;
 
 public class ItemUnfiredSmallVessel extends ItemPottery
 {

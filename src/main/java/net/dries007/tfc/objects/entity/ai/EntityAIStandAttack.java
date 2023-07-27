@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.objects.entity.ai;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Extended Melee AI for standing attacks (bears and polar bears)

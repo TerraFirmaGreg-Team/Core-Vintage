@@ -5,8 +5,10 @@
 
 package net.dries007.tfc.objects.entity;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.objects.entity.animal.*;
+import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
@@ -19,10 +21,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DataSerializerEntry;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.objects.entity.animal.*;
-import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

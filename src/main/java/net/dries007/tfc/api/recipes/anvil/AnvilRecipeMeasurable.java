@@ -5,19 +5,17 @@
 
 package net.dries007.tfc.api.recipes.anvil;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
+import net.dries007.tfc.api.capability.forge.IForgeable;
+import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.util.forge.ForgeRule;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.forge.ForgeRule;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * AnvilRecipe implementation for copying {@link IForgeableMeasurableMetal} cap from one item to another
@@ -33,7 +31,7 @@ public class AnvilRecipeMeasurable extends AnvilRecipe
      * @param minTier the anvil's min tier required to work this recipe
      * @param rules   the forging rules
      */
-    public AnvilRecipeMeasurable(ResourceLocation name, IIngredient<ItemStack> input, ItemStack output, Metal.Tier minTier, ForgeRule... rules) throws IllegalArgumentException
+    public AnvilRecipeMeasurable(ResourceLocation name, IIngredient<ItemStack> input, ItemStack output, int minTier, ForgeRule... rules) throws IllegalArgumentException
     {
         super(name, input, output, minTier, null, rules);
     }
@@ -50,7 +48,7 @@ public class AnvilRecipeMeasurable extends AnvilRecipe
             if (inputCap instanceof IForgeableMeasurableMetal && outputCap instanceof IForgeableMeasurableMetal)
             {
                 ((IForgeableMeasurableMetal) outputCap).setMetalAmount(((IForgeableMeasurableMetal) inputCap).getMetalAmount());
-                ((IForgeableMeasurableMetal) outputCap).setMetal(((IForgeableMeasurableMetal) inputCap).getMetal());
+                ((IForgeableMeasurableMetal) outputCap).setMaterial(((IForgeableMeasurableMetal) inputCap).getMaterial());
             }
             return out;
         }

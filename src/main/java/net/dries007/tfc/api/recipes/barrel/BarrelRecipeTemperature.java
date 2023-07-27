@@ -5,10 +5,11 @@
 
 package net.dries007.tfc.api.recipes.barrel;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -19,11 +20,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BarrelRecipeTemperature extends BarrelRecipe
 {

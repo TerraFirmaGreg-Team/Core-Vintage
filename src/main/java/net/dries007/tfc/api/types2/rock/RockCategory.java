@@ -1,7 +1,6 @@
 package net.dries007.tfc.api.types2.rock;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Rock;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;

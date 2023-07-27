@@ -5,9 +5,12 @@
 
 package net.dries007.tfc.util.agriculture;
 
-import java.util.List;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.calendar.Month;
+import net.dries007.tfc.world.classic.worldgen.WorldGenFruitTrees;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -17,12 +20,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.objects.items.food.ItemFoodTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.world.classic.worldgen.WorldGenFruitTrees;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public enum FruitTree implements IFruitTree
 {

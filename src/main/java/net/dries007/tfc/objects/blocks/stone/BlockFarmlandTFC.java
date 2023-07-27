@@ -5,11 +5,9 @@
 
 package net.dries007.tfc.objects.blocks.stone;
 
-import java.util.Random;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariantFallable;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -29,9 +27,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

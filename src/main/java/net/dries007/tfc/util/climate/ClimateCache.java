@@ -5,12 +5,12 @@
 
 package net.dries007.tfc.util.climate;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+
+import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This stores climate data for when the world context is not available

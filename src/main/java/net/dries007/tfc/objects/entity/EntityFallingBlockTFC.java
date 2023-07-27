@@ -5,10 +5,9 @@
 
 package net.dries007.tfc.objects.entity;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -24,14 +23,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.util.FallingBlockManager;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class EntityFallingBlockTFC extends EntityFallingBlock implements IEntityAdditionalSpawnData
 {

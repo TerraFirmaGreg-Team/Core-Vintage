@@ -5,11 +5,10 @@
 
 package net.dries007.tfc.objects.inventory.capability;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import javax.annotation.Nonnull;
 
 /**
  * This is a callback for various methods on an ItemStackHandler.

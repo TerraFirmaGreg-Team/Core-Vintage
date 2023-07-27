@@ -5,9 +5,12 @@
 
 package net.dries007.tfc.objects.blocks.metal;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.items.metal.ItemMetal;
+import net.dries007.tfc.objects.te.TEIngotPile;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -27,12 +30,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.items.metal.ItemMetal;
-import net.dries007.tfc.objects.te.TEIngotPile;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

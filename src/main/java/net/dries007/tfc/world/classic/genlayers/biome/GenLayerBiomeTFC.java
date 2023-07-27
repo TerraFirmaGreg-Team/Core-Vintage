@@ -5,17 +5,16 @@
 
 package net.dries007.tfc.world.classic.genlayers.biome;
 
-import java.util.Arrays;
-import java.util.Objects;
-
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.gen.layer.IntCache;
+
+import java.util.Arrays;
+import java.util.Objects;
 
 public class GenLayerBiomeTFC extends GenLayerTFC
 {

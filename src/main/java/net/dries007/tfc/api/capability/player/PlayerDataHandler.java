@@ -5,11 +5,11 @@
 
 package net.dries007.tfc.api.capability.player;
 
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.recipes.ChiselRecipe;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.skills.Skill;
+import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByte;
@@ -18,11 +18,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-import net.dries007.tfc.api.recipes.ChiselRecipe;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillType;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound>, IPlayerData

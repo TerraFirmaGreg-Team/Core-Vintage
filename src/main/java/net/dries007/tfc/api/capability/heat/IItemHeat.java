@@ -5,14 +5,14 @@
 
 package net.dries007.tfc.api.capability.heat;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * It is recommended that if you extend {@link ItemHeatHandler} rather than implement this directly.

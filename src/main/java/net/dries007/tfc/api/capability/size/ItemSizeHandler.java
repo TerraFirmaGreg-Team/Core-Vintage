@@ -5,14 +5,14 @@
 
 package net.dries007.tfc.api.capability.size;
 
-import java.util.EnumMap;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.EnumMap;
 
 public class ItemSizeHandler implements ICapabilityProvider, IItemSize
 {

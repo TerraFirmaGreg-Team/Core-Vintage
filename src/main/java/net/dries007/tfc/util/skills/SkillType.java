@@ -5,17 +5,17 @@
 
 package net.dries007.tfc.util.skills;
 
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.player.IPlayerData;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 
 /**
  * The instance (i.e. Block or Item) of a skill. This holds the name, class, and supplier for the skill capability

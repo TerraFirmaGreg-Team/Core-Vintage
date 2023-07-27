@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.objects.inventory.slot;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
+import javax.annotation.Nonnull;
 
 public class SlotCallback extends SlotItemHandler
 {

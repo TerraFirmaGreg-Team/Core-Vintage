@@ -5,10 +5,9 @@
 
 package net.dries007.tfc.client;
 
-import java.awt.*;
-import java.time.Month;
-import java.util.Random;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -16,9 +15,9 @@ import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import java.awt.*;
+import java.time.Month;
+import java.util.Random;
 
 
 public class GrassColorHandler

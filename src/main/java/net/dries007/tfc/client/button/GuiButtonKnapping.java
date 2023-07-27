@@ -5,8 +5,8 @@
 
 package net.dries007.tfc.client.button;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,8 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.network.PacketGuiButton;
+import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonKnapping extends GuiButton

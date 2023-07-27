@@ -5,14 +5,14 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.List;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * This is the "model" that is used by BlockCropTFC

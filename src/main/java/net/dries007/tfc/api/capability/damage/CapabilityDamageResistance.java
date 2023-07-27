@@ -5,14 +5,11 @@
 
 package net.dries007.tfc.api.capability.damage;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Supplier;
-import javax.annotation.Nullable;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.DumbStorage;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.ItemStack;
@@ -25,9 +22,11 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.DumbStorage;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Supplier;
 
 import static net.dries007.tfc.Constants.GSON;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;

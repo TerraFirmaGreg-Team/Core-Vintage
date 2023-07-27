@@ -5,6 +5,11 @@
 
 package net.dries007.tfc.network;
 
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -13,12 +18,6 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 public class PacketChunkData implements IMessage
 {

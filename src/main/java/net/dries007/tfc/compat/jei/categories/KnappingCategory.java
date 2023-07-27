@@ -16,7 +16,7 @@
 //import mezz.jei.api.gui.IRecipeLayout;
 //import mezz.jei.api.ingredients.IIngredients;
 //import mezz.jei.api.ingredients.VanillaTypes;
-//import net.dries007.tfc.compat.jei.BaseRecipeCategory;
+//import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 //import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 //
 //import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;

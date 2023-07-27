@@ -5,12 +5,15 @@
 
 package net.dries007.tfc.objects.te;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.ImmutableList;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.recipes.BloomeryRecipe;
+import net.dries007.tfc.objects.blocks.BlockCharcoalPile;
+import net.dries007.tfc.objects.blocks.BlockMolten;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.devices.BlockBloomery;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.InventoryHelper;
@@ -26,14 +29,10 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.recipes.BloomeryRecipe;
-import net.dries007.tfc.objects.blocks.BlockCharcoalPile;
-import net.dries007.tfc.objects.blocks.BlockMolten;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.devices.BlockBloomery;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 import static net.minecraft.block.BlockHorizontal.FACING;

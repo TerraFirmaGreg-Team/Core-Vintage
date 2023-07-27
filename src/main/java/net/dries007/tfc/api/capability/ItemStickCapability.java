@@ -5,10 +5,11 @@
 
 package net.dries007.tfc.api.capability;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.api.capability.size.CapabilityItemSize;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,11 +19,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

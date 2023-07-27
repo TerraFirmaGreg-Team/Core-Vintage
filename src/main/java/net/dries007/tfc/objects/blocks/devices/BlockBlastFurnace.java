@@ -5,11 +5,23 @@
 
 package net.dries007.tfc.objects.blocks.devices;
 
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.common.blocks.BlockMetalCasing;
+import gregtech.common.blocks.MetaBlocks;
+import net.dries007.tfc.api.util.IBellowsConsumerBlock;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
+import net.dries007.tfc.objects.advancements.TFCTriggers;
+import net.dries007.tfc.objects.blocks.BlockFireBrick;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
+import net.dries007.tfc.objects.blocks.property.ILightableBlock;
+import net.dries007.tfc.objects.items.ItemFireStarter;
+import net.dries007.tfc.objects.te.TEBellows;
+import net.dries007.tfc.objects.te.TEBlastFurnace;
+import net.dries007.tfc.objects.te.TEMetalSheet;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.block.Multiblock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -24,20 +36,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.util.IBellowsConsumerBlock;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.blocks.BlockFireBrick;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.items.ItemFireStarter;
-import net.dries007.tfc.objects.te.TEBellows;
-import net.dries007.tfc.objects.te.TEBlastFurnace;
-import net.dries007.tfc.objects.te.TEMetalSheet;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.block.Multiblock;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Predicate;
 
 @ParametersAreNonnullByDefault
 public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, ILightableBlock
@@ -46,36 +48,29 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
 
     static
     {
-        Predicate<IBlockState> stoneMatcher = state -> state.getBlock() instanceof BlockFireBrick;
-        Predicate<IBlockState> sheetMatcher = state -> {
-            if (state.getBlock() instanceof BlockMetalSheet)
-            {
-                BlockMetalSheet block = (BlockMetalSheet) state.getBlock();
-                return block.getMetal().getTier().isAtLeast(Metal.Tier.TIER_III) && block.getMetal().isToolMetal();
-            }
-            return false;
-        };
+        Predicate<IBlockState> stoneMatcher = state -> state.getBlock() == MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.COKE_BRICKS).getBlock();
+        Predicate<IBlockState> claddingMatcher = state -> state.getBlock() instanceof BlockMetalCladding;
         BLAST_FURNACE_CHIMNEY = new Multiblock()
             .match(new BlockPos(0, 0, 0), state -> state.getBlock() == BlocksTFC.MOLTEN || state.getMaterial().isReplaceable())
             .match(new BlockPos(0, 0, 1), stoneMatcher)
             .match(new BlockPos(0, 0, -1), stoneMatcher)
             .match(new BlockPos(1, 0, 0), stoneMatcher)
             .match(new BlockPos(-1, 0, 0), stoneMatcher)
-            .match(new BlockPos(0, 0, -2), sheetMatcher)
+            .match(new BlockPos(0, 0, -2), claddingMatcher)
             .match(new BlockPos(0, 0, -2), tile -> tile.getFace(EnumFacing.NORTH), TEMetalSheet.class)
-            .match(new BlockPos(0, 0, 2), sheetMatcher)
+            .match(new BlockPos(0, 0, 2), claddingMatcher)
             .match(new BlockPos(0, 0, 2), tile -> tile.getFace(EnumFacing.SOUTH), TEMetalSheet.class)
-            .match(new BlockPos(2, 0, 0), sheetMatcher)
+            .match(new BlockPos(2, 0, 0), claddingMatcher)
             .match(new BlockPos(2, 0, 0), tile -> tile.getFace(EnumFacing.EAST), TEMetalSheet.class)
-            .match(new BlockPos(-2, 0, 0), sheetMatcher)
+            .match(new BlockPos(-2, 0, 0), claddingMatcher)
             .match(new BlockPos(-2, 0, 0), tile -> tile.getFace(EnumFacing.WEST), TEMetalSheet.class)
-            .match(new BlockPos(-1, 0, -1), sheetMatcher)
+            .match(new BlockPos(-1, 0, -1), claddingMatcher)
             .match(new BlockPos(-1, 0, -1), tile -> tile.getFace(EnumFacing.NORTH) && tile.getFace(EnumFacing.WEST), TEMetalSheet.class)
-            .match(new BlockPos(1, 0, -1), sheetMatcher)
+            .match(new BlockPos(1, 0, -1), claddingMatcher)
             .match(new BlockPos(1, 0, -1), tile -> tile.getFace(EnumFacing.NORTH) && tile.getFace(EnumFacing.EAST), TEMetalSheet.class)
-            .match(new BlockPos(-1, 0, 1), sheetMatcher)
+            .match(new BlockPos(-1, 0, 1), claddingMatcher)
             .match(new BlockPos(-1, 0, 1), tile -> tile.getFace(EnumFacing.SOUTH) && tile.getFace(EnumFacing.WEST), TEMetalSheet.class)
-            .match(new BlockPos(1, 0, 1), sheetMatcher)
+            .match(new BlockPos(1, 0, 1), claddingMatcher)
             .match(new BlockPos(1, 0, 1), tile -> tile.getFace(EnumFacing.SOUTH) && tile.getFace(EnumFacing.EAST), TEMetalSheet.class);
     }
 

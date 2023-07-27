@@ -5,11 +5,12 @@
 
 package net.dries007.tfc.objects.te;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.util.IBellowsConsumerBlock;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.blocks.devices.BlockCharcoalForge;
+import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -19,12 +20,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.util.IBellowsConsumerBlock;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.blocks.devices.BlockCharcoalForge;
-import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashSet;
+import java.util.Set;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 

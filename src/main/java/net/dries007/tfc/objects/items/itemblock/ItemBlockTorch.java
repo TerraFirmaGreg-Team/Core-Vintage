@@ -5,6 +5,10 @@
 
 package net.dries007.tfc.objects.items.itemblock;
 
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.te.TELogPile;
+import net.dries007.tfc.objects.te.TEPitKiln;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -12,11 +16,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.te.TELogPile;
-import net.dries007.tfc.objects.te.TEPitKiln;
-import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 

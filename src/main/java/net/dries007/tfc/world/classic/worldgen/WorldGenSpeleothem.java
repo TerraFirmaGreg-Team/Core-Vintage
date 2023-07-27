@@ -1,7 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.objects.blocks.rock.BlockRockSpeleothem;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

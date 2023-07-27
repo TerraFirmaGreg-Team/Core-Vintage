@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.api.capability;
 
+import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 
 /**
  * This is an interface for the capability that is returned by a Small Vessel. You can safely cast it to this.

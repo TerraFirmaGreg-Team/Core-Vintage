@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.objects.blocks;
 
-import java.util.Random;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
@@ -21,9 +21,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.util.climate.ITemperatureBlock;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock

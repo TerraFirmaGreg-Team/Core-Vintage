@@ -5,12 +5,12 @@
 
 package net.dries007.tfc.objects.inventory.slot;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+
+import javax.annotation.Nonnull;
 
 public class SlotKnappingOutput extends SlotItemHandler
 {

@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.client.button;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.objects.te.TELargeVessel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
-import net.dries007.tfc.objects.te.TELargeVessel;
+import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;

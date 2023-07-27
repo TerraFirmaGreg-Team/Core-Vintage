@@ -5,15 +5,22 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiConsumer;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.api.types.ILivestock;
+import net.dries007.tfc.network.PacketSimpleMessage;
+import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.objects.LootTablesTFC;
+import net.dries007.tfc.objects.entity.EntitiesTFC;
+import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.climate.BiomeHelper;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -39,22 +46,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.IShearable;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.types.ILivestock;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.objects.entity.EntitiesTFC;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.function.BiConsumer;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

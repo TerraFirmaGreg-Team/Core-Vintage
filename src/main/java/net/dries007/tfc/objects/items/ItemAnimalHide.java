@@ -5,11 +5,11 @@
 
 package net.dries007.tfc.objects.items;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -19,11 +19,10 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
 
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 

@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.objects.inventory.ingredient;
 
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,6 +12,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nonnull;
+import java.util.function.Predicate;
 
 /**
  * This is an ingredient wrapper for various types

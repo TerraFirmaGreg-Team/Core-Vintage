@@ -5,8 +5,6 @@
 
 package net.dries007.tfc.api.util;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.api.types.IAnimalTFC.Age;
@@ -18,6 +16,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public interface IRidable
 {

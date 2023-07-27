@@ -5,18 +5,17 @@
 
 package net.dries007.tfc.api.capability.food;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.util.agriculture.Food;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.util.agriculture.Food;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * This is a combined capability class that delegates to two implementations:

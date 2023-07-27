@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.world.classic;
 
-import java.util.Random;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -20,9 +20,8 @@ import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

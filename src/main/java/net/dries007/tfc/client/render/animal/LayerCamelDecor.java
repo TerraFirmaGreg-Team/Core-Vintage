@@ -5,17 +5,16 @@
 
 package net.dries007.tfc.client.render.animal;
 
-import java.util.stream.IntStream;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.client.model.animal.ModelCamelTFC;
+import net.dries007.tfc.objects.entity.animal.EntityCamelTFC;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.client.model.animal.ModelCamelTFC;
-import net.dries007.tfc.objects.entity.animal.EntityCamelTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.stream.IntStream;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

@@ -8,9 +8,8 @@ package net.dries007.tfc.client.model.animal;
 //Made with Blockbench
 //Paste this code into your mod.
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityLionTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -19,8 +18,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityLionTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelLionTFC

@@ -5,7 +5,9 @@
 
 package net.dries007.tfc.client.render;
 
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
+import net.dries007.tfc.objects.te.TEBarrel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -24,10 +26,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.te.TEBarrel;
+import org.lwjgl.opengl.GL11;
 
 public class TESRBarrel extends TileEntitySpecialRenderer<TEBarrel>
 {

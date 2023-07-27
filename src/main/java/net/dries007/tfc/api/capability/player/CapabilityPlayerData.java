@@ -5,18 +5,17 @@
 
 package net.dries007.tfc.api.capability.player;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.capability.DumbStorage;
+import net.dries007.tfc.util.skills.Skill;
+import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
-import net.dries007.tfc.api.capability.DumbStorage;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillType;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

@@ -5,11 +5,16 @@
 
 package net.dries007.tfc.objects.blocks.devices;
 
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.objects.advancements.TFCTriggers;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.property.ILightableBlock;
+import net.dries007.tfc.objects.items.ItemFireStarter;
+import net.dries007.tfc.objects.te.TEBloomery;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.block.Multiblock;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -30,16 +35,10 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.items.ItemFireStarter;
-import net.dries007.tfc.objects.te.TEBloomery;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.block.Multiblock;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Predicate;
 
 import static net.minecraft.block.BlockTrapDoor.OPEN;
 

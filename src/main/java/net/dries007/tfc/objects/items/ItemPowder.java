@@ -5,16 +5,15 @@
 
 package net.dries007.tfc.objects.items;
 
-import java.util.EnumMap;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.item.ItemStack;
-
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.EnumMap;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault

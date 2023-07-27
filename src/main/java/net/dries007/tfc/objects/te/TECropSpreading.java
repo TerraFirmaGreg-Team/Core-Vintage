@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.objects.te;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropSpreading;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 
-import net.dries007.tfc.objects.blocks.agriculture.BlockCropSpreading;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class TECropSpreading extends TECropBase

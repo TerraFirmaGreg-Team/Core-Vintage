@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.command;
 
-import java.util.Random;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Tree;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -20,9 +20,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Tree;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

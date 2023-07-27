@@ -5,13 +5,18 @@
 
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.IBerryBush;
+import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.te.TETickCounter;
+import net.dries007.tfc.util.DamageSourcesTFC;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,7 +30,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -36,18 +40,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.IBerryBush;
-import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.DamageSourcesTFC;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

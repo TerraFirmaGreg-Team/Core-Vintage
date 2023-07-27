@@ -5,10 +5,9 @@
 
 package net.dries007.tfc.objects.items.itemblock;
 
-import java.util.List;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.objects.blocks.BlockPowderKeg;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -18,9 +17,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.objects.blocks.BlockPowderKeg;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class ItemBlockPowderKeg extends ItemBlockTFC implements IItemSize

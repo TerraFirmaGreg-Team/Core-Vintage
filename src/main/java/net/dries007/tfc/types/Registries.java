@@ -5,9 +5,14 @@
 
 package net.dries007.tfc.types;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import net.dries007.tfc.api.recipes.*;
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.api.recipes.heat.HeatRecipe;
+import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
+import net.dries007.tfc.api.recipes.quern.QuernRecipe;
+import net.dries007.tfc.api.registries.TFCRegistryEvent;
+import net.dries007.tfc.api.types.*;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,14 +24,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
 
-import net.dries007.tfc.api.recipes.*;
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
-import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.api.registries.TFCRegistryEvent;
-import net.dries007.tfc.api.types.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
@@ -41,11 +40,11 @@ public final class Registries
     {
         // Pre Block registries (dirty hack)
 
-        newRegistry(ROCK_TYPE, RockCategory.class, true); // Required before: ROCK
-        newRegistry(ROCK, Rock.class, true);
-        newRegistry(METAL, Metal.class, true);// Required before: ORE, ALLOY_RECIPE, WELDING_RECIPE
-        newRegistry(TREE, Tree.class, true);
-        newRegistry(PLANT, Plant.class, true);
+        newRegistry(ROCK_TYPE, RockCategory.class, true); // TODO: REMOVE THIS
+        newRegistry(ROCK, Rock.class, true); // TODO: REMOVE THIS
+        newRegistry(METAL, Metal.class, true);  // TODO: REMOVE THIS
+        newRegistry(TREE, Tree.class, true); // TODO: REMOVE THIS (Move to enum?)
+        newRegistry(PLANT, Plant.class, true); // TODO: REMOVE THIS (Move to enum?)
 
         // Normal registries
         newRegistry(ALLOY_RECIPE, AlloyRecipe.class, false);
@@ -61,6 +60,7 @@ public final class Registries
         newRegistry(BLAST_FURNACE_RECIPE, BlastFurnaceRecipe.class, false);
     }
 
+    // TODO: and then remove this
     /**
      * Danger: dirty hack.
      */

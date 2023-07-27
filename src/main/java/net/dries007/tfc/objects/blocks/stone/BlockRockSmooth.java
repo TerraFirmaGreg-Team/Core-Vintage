@@ -5,15 +5,14 @@
 
 package net.dries007.tfc.objects.blocks.stone;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

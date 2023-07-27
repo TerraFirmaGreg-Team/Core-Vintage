@@ -5,10 +5,7 @@
 
 package net.dries007.tfc.api.capability.egg;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -19,7 +16,9 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Capability for egg item

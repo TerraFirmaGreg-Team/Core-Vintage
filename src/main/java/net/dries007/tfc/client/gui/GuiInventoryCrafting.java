@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.client.gui;
 
-import java.io.IOException;
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiButtonImage;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -21,6 +18,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
+import java.io.IOException;
 
 /**
  * This is copied from {@link GuiCrafting} since it needs to use a different container implementation

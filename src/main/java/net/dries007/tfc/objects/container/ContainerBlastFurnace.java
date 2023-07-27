@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.objects.container;
 
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.objects.te.TEBlastFurnace;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.objects.te.TEBlastFurnace;
 
 import static net.dries007.tfc.objects.te.TEBlastFurnace.SLOT_TUYERE;
 

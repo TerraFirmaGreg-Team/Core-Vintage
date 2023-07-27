@@ -5,8 +5,8 @@
 
 package net.dries007.tfc.util.calendar;
 
-import java.util.Arrays;
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 public enum Month
 {

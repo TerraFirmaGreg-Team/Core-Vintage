@@ -5,23 +5,8 @@
 
 package net.dries007.tfc.client;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.dries007.tfc.api.types2.rock.RockType;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ILockableContainer;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.IGuiHandler;
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
 import net.dries007.tfc.objects.container.*;
@@ -32,6 +17,17 @@ import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.te.*;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ILockableContainer;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

@@ -5,14 +5,19 @@
 
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
+import net.dries007.tfc.api.types.ICrop;
+import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
+import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.objects.te.TECropBase;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.agriculture.Crop;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.skills.SimpleSkill;
+import net.dries007.tfc.util.skills.SkillType;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -32,19 +37,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
-import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.util.skills.SimpleSkill;
-import net.dries007.tfc.util.skills.SkillType;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 @ParametersAreNonnullByDefault
 public abstract class BlockCropTFC extends BlockBush implements IGrowingPlant

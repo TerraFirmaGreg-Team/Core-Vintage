@@ -5,25 +5,6 @@
 
 package net.dries007.tfc;
 
-import net.dries007.tfc.compat.gregtech.stonetypes.StoneTypeHandler;
-import net.dries007.tfc.compat.top.TOPPlugin;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.dedicated.DedicatedServer;
-import net.minecraft.server.dedicated.PropertyManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.server.FMLServerHandler;
-
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -39,38 +20,62 @@ import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
 import net.dries007.tfc.command.*;
+import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
+import net.dries007.tfc.compat.top.TOPPlugin;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.proxy.IProxy;
+import net.dries007.tfc.types.DefaultRecipes;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.DedicatedServer;
+import net.minecraft.server.dedicated.PropertyManager;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.server.FMLServerHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.*;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber
-@Mod(modid = MOD_ID, name = TerraFirmaCraft.MOD_NAME, useMetadata = true, guiFactory = Constants.GUI_FACTORY, dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
+@Mod(
+        modid = MOD_ID,
+        name = MOD_NAME,
+        useMetadata = true,
+        guiFactory = GUI_FACTORY,
+        dependencies = DEPENDENCIES)
 public final class TerraFirmaCraft
 {
     public static final String MOD_ID = "tfc";
     public static final String MOD_NAME = "TerraFirmaCraft";
+    public static final String GUI_FACTORY = "net.dries007.tfc.client.TFCModGuiFactory";
+    public static final String DEPENDENCIES = "required:forge@[14.23.5.2847,);after:jei@[4.14.2,);after:gregtech;after:top@(1.8.25,)";
 
     @Mod.Instance
     private static TerraFirmaCraft INSTANCE = null;
 
-    public static final TFCLogger LOGGER = new TFCLogger(TerraFirmaCraft.class, Level.INFO);
-
-    @SidedProxy(modId = MOD_ID, clientSide = "net.dries007.tfc.proxy.ClientProxy", serverSide = "net.dries007.tfc.proxy.ServerProxy")
+    @SidedProxy(
+            modId = MOD_ID,
+            clientSide = "net.dries007.tfc.proxy.ClientProxy",
+            serverSide = "net.dries007.tfc.proxy.ServerProxy")
     private static IProxy PROXY = null;
 
-    static
-    {
+    static {
         FluidRegistry.enableUniversalBucket();
     }
 
@@ -100,7 +105,6 @@ public final class TerraFirmaCraft
     }
 
     private final Logger log = LogManager.getLogger(MOD_ID);
-    private final boolean isSignedBuild = true;
     private WorldTypeTFC worldTypeTFC;
     private SimpleNetworkWrapper network;
 
@@ -108,13 +112,10 @@ public final class TerraFirmaCraft
     public void preInit(FMLPreInitializationEvent event)
     {
         log.debug("If you can see this, debug logging is working :)");
-        if (!isSignedBuild)
-        {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
+
+        TFGToolItems.preInit();
 
         // No need to sync config here, forge magic
-
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new TFCGuiHandler());
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
         int id = 0;
@@ -160,13 +161,7 @@ public final class TerraFirmaCraft
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-        if (!isSignedBuild)
-        {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
-
+    public void init(FMLInitializationEvent event) {
         ItemsTFC.init();
         LootTablesTFC.init();
         CapabilityFood.init();
@@ -200,17 +195,14 @@ public final class TerraFirmaCraft
         CapabilityItemSize.init();
         CapabilityItemHeat.init();
         CapabilityMetalItem.init();
+        CapabilityForgeable.init();
 
+        DefaultRecipes.init();
         //StoneTypeHandler.init();
     }
 
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        if (!isSignedBuild)
-        {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
+    public void postInit(FMLPostInitializationEvent event) {
         FuelManager.postInit();
         JsonConfigRegistry.INSTANCE.postInit();
     }
@@ -226,10 +218,6 @@ public final class TerraFirmaCraft
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event)
     {
-        if (!isSignedBuild)
-        {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
 
         event.registerServerCommand(new CommandStripWorld());
         event.registerServerCommand(new CommandHeat());

@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.util.skills;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import net.dries007.tfc.api.capability.player.IPlayerData;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class SmithingSkill extends Skill
 {

@@ -5,14 +5,13 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import net.dries007.tfc.api.types.Tree;
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.SoundType;
 import net.minecraft.init.Blocks;
 
-import net.dries007.tfc.api.types.Tree;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BlockButtonWoodTFC extends BlockButtonWood
 {

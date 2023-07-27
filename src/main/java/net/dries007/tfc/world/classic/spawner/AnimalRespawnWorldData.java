@@ -1,9 +1,5 @@
 package net.dries007.tfc.world.classic.spawner;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,6 +10,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
+
+import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

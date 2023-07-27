@@ -5,15 +5,14 @@
 
 package net.dries007.tfc.util.json;
 
-import java.lang.reflect.Type;
-
 import com.google.gson.*;
+import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 
-import net.dries007.tfc.objects.entity.animal.AnimalFood;
+import java.lang.reflect.Type;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

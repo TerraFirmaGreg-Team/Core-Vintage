@@ -5,8 +5,10 @@
 
 package net.dries007.tfc.client.gui;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.button.GuiButtonKnapping;
+import net.dries007.tfc.objects.container.ContainerKnapping;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,10 +18,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.client.button.GuiButtonKnapping;
-import net.dries007.tfc.objects.container.ContainerKnapping;
+import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

@@ -5,10 +5,8 @@
 
 package net.dries007.tfc.objects.blocks;
 
-import java.util.Random;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
@@ -27,8 +25,9 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.items.ItemAnimalHide;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

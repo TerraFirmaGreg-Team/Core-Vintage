@@ -7,32 +7,23 @@ package net.dries007.tfc.objects.items;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
-import net.dries007.tfc.api.types2.rock.RockType;
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemSnow;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.registries.IForgeRegistry;
-
+import gregtech.api.GregTechAPI;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.*;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
+import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.blocks.stone.BlockRockSlabTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockRockSlabTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockDoorTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.items.ceramics.*;
@@ -41,8 +32,9 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.food.ItemSandwich;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTorch;
-import net.dries007.tfc.objects.items.metal.ItemMetal;
+import net.dries007.tfc.objects.items.metal.ItemAnvil;
 import net.dries007.tfc.objects.items.metal.ItemMetalBucket;
+import net.dries007.tfc.objects.items.metal.ItemMetalCladding;
 import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.wood.ItemBoatTFC;
@@ -52,9 +44,18 @@ import net.dries007.tfc.objects.items.wood.ItemWoodenBucket;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
-
-import java.util.HashMap;
-import java.util.Map;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemSnow;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
@@ -174,13 +175,17 @@ public final class ItemsTFC
     public static final Item WOOD_ASH = getNull();
 
     private static ImmutableList<Item> allSimpleItems;
+    private static ImmutableList<ItemMold> allMoldItems;
     private static ImmutableList<ItemGem> allGemItems;
 
     public static ImmutableList<Item> getAllSimpleItems()
     {
         return allSimpleItems;
     }
-
+    public static ImmutableList<ItemMold> getAllMoldItems()
+    {
+        return allMoldItems;
+    }
 
     public static ImmutableList<ItemGem> getAllGemItems()
     {
@@ -198,8 +203,8 @@ public final class ItemsTFC
         simpleItems.add(register(r, "mortar", new ItemMisc(Size.TINY, Weight.VERY_LIGHT, "mortar"), MISC));
         simpleItems.add(register(r, "halter", new ItemMisc(Size.SMALL, Weight.LIGHT, "halter"), MISC));
         register(r, "wooden_bucket", new ItemWoodenBucket(), WOOD); //not a simple item, use a custom model
-        register(r, "metal/bucket/blue_steel", new ItemMetalBucket(Metal.BLUE_STEEL, Metal.ItemType.BUCKET), METAL); //not a simple item, use a custom model
-        register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET), METAL); //not a simple item, use a custom model
+        //register(r, "metal/bucket/blue_steel", new ItemMetalBucket(Metal.BLUE_STEEL, Metal.ItemType.BUCKET), METAL); //not a simple item, use a custom model
+        //register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET), METAL); //not a simple item, use a custom model
 
         {
             for (RockType rock : RockType.values()) {
@@ -215,6 +220,7 @@ public final class ItemsTFC
             allGemItems = b.build();
         }
 
+        /*
         for (Metal.ItemType type : Metal.ItemType.values())
         {
             for (Metal metal : TFCRegistries.METALS.getValuesCollection())
@@ -224,7 +230,7 @@ public final class ItemsTFC
                     simpleItems.add(register(r, "metal/" + type.name().toLowerCase() + "/" + metal.getRegistryName().getPath(), Metal.ItemType.create(metal, type), METAL));
                 }
             }
-        }
+        }*/
 
 
         BlocksTFC.getAllNormalItemBlocks().forEach(x -> registerItemBlock(r, x));
@@ -253,17 +259,31 @@ public final class ItemsTFC
         for (Powder powder : Powder.values())
             simpleItems.add(register(r, "powder/" + powder.name().toLowerCase(), new ItemPowder(powder), MISC));
 
-        { // POTTERY
-            for (Metal.ItemType type : Metal.ItemType.values())
-            {
-                if (type.hasMold(null))
-                {
+        // METAL
+        {
+            for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
+                if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL)) {
+                    simpleItems.add(register(r, "metal/anvil/" + material.getName(), new ItemAnvil(material), MISC));
+                }
+
+                if (material == Materials.Iron)
+                    simpleItems.add(register(r, "metal/cladding/" + material.getName(), new ItemMetalCladding(material), MISC));
+            }
+        }
+
+        // POTTERY
+        Builder<ItemMold> clayMolds = ImmutableList.builder();
+
+        {
+            for (var orePrefix : OrePrefix.values()) {
+                var orePrefixExtension = (IOrePrefixExtension) orePrefix;
+                if (orePrefixExtension.getHasMold()) {
                     // Not using registerPottery here because the ItemMold uses a custom ItemModelMesher, meaning it can't be in simpleItems
-                    ItemPottery item = new ItemMold(type);
-                    register(r, "ceramics/fired/mold/" + type.name().toLowerCase(), item, POTTERY);
-                    simpleItems.add(register(r, "ceramics/unfired/mold/" + type.name().toLowerCase(), new ItemUnfiredMold(type), POTTERY));
+                    clayMolds.add(register(r, "ceramics/fired/mold/" + orePrefix.name.toLowerCase(), new ItemMold(orePrefix), POTTERY));
+                    simpleItems.add(register(r, "ceramics/unfired/mold/" + orePrefix.name.toLowerCase(), new ItemUnfiredMold(orePrefix), POTTERY));
                 }
             }
+
 
             simpleItems.add(register(r, "ceramics/unfired/large_vessel", new ItemUnfiredLargeVessel(), POTTERY));
             simpleItems.add(register(r, "ceramics/unfired/crucible", new ItemPottery(Size.LARGE, Weight.VERY_HEAVY), POTTERY));
@@ -366,6 +386,7 @@ public final class ItemsTFC
         register(r, "goldpan", new ItemGoldPan(), MISC);
         simpleItems.add(register(r, "wrought_iron_grill", new ItemMisc(Size.LARGE, Weight.HEAVY, "grill"), MISC));
 
+        allMoldItems = clayMolds.build();
         allSimpleItems = simpleItems.build();
 
         OreDictionaryHelper.init();
@@ -390,9 +411,10 @@ public final class ItemsTFC
 
     public static void init()
     {
+        /*
         for (Metal metal : TFCRegistries.METALS.getValuesCollection())
             if (metal.getToolMetal() != null)
-                metal.getToolMetal().setRepairItem(new ItemStack(ItemMetal.get(metal, Metal.ItemType.SCRAP)));
+                metal.getToolMetal().setRepairItem(new ItemStack(ItemMetal.get(metal, Metal.ItemType.SCRAP)));*/
     }
 
     private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired)

@@ -5,8 +5,11 @@
 
 package net.dries007.tfc.objects.items.metal;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
+import net.dries007.tfc.objects.items.ItemQuiver;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -19,11 +22,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
-import net.dries007.tfc.objects.items.ItemQuiver;
+import javax.annotation.Nonnull;
 
 public class ItemMetalJavelin extends ItemMetalTool
 {

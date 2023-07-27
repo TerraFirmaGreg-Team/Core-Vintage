@@ -5,10 +5,9 @@
 
 package net.dries007.tfc.objects.te;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.objects.fluids.capability.*;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockMetalLamp;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,13 +19,9 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.objects.fluids.capability.FluidHandlerSided;
-import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockMetalLamp;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidHandlerSidedCallback

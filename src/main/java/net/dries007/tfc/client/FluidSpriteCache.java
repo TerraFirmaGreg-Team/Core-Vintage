@@ -5,12 +5,12 @@
 
 package net.dries007.tfc.client;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraftforge.fluids.Fluid;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FluidSpriteCache
 {

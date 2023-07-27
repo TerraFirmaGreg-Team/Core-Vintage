@@ -5,11 +5,11 @@
 
 package net.dries007.tfc.world.classic.worldgen;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.ChunkGenTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -18,11 +18,10 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class WorldGenFruitTrees implements IWorldGenerator
 {

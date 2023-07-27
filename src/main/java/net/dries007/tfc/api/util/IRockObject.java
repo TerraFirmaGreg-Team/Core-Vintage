@@ -5,17 +5,15 @@
 
 package net.dries007.tfc.api.util;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.types2.rock.RockCategory;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types2.rock.RockCategory;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public interface IRockObject
 {

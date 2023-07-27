@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.objects.fluids.properties;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.player.EntityPlayer;
+
+import javax.annotation.Nonnull;
 
 @FunctionalInterface
 public interface DrinkableProperty

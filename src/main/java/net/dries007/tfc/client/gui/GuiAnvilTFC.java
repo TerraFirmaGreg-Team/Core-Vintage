@@ -5,15 +5,6 @@
 
 package net.dries007.tfc.client.gui;
 
-import java.io.IOException;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.util.ResourceLocation;
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilPlan;
@@ -25,6 +16,14 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.util.ResourceLocation;
+
+import java.io.IOException;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

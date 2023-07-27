@@ -5,17 +5,15 @@
 
 package net.dries007.tfc.api.recipes.heat;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class HeatRecipeSimple extends HeatRecipe
@@ -25,20 +23,20 @@ public class HeatRecipeSimple extends HeatRecipe
 
     public HeatRecipeSimple(IIngredient<ItemStack> ingredient, ItemStack output, float transformTemp)
     {
-        this(ingredient, output, transformTemp, Float.MAX_VALUE, Metal.Tier.TIER_0);
+        this(ingredient, output, transformTemp, Float.MAX_VALUE, 0);
     }
 
     public HeatRecipeSimple(IIngredient<ItemStack> ingredient, ItemStack output, float transformTemp, float maxTemp)
     {
-        this(ingredient, output, transformTemp, maxTemp, Metal.Tier.TIER_0);
+        this(ingredient, output, transformTemp, maxTemp, 0);
     }
 
-    public HeatRecipeSimple(IIngredient<ItemStack> ingredient, ItemStack output, float transformTemp, Metal.Tier minTier)
+    public HeatRecipeSimple(IIngredient<ItemStack> ingredient, ItemStack output, float transformTemp, int minTier)
     {
         this(ingredient, output, transformTemp, Float.MAX_VALUE, minTier);
     }
 
-    public HeatRecipeSimple(IIngredient<ItemStack> ingredient, ItemStack output, float transformTemp, float maxTemp, Metal.Tier minTier)
+    public HeatRecipeSimple(IIngredient<ItemStack> ingredient, ItemStack output, float transformTemp, float maxTemp, int minTier)
     {
         super(ingredient, transformTemp, minTier);
         this.output = output;

@@ -6,8 +6,62 @@
 package net.dries007.tfc;
 
 import gregtech.api.unification.material.event.MaterialEvent;
+import net.dries007.tfc.api.capability.damage.DamageType;
+import net.dries007.tfc.api.capability.egg.CapabilityEgg;
+import net.dries007.tfc.api.capability.egg.EggHandler;
+import net.dries007.tfc.api.capability.food.*;
+import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
+import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
+import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
+import net.dries007.tfc.api.capability.player.IPlayerData;
+import net.dries007.tfc.api.capability.player.PlayerDataHandler;
+import net.dries007.tfc.api.capability.size.CapabilityItemSize;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
+import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.api.types.ICreatureTFC;
+import net.dries007.tfc.api.types.IPredator;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
+import net.dries007.tfc.network.PacketCalendarUpdate;
+import net.dries007.tfc.network.PacketPlayerDataUpdate;
+import net.dries007.tfc.network.PacketSimpleMessage;
+import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.objects.blocks.BlockFluidTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.devices.BlockQuern;
+import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockSupport;
+import net.dries007.tfc.objects.container.CapabilityContainerListener;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.objects.items.ItemQuiver;
+import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
+import net.dries007.tfc.util.DamageSourcesTFC;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.CalendarWorldData;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.skills.SmithingSkill;
+import net.dries007.tfc.world.classic.WorldTypeTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockSnow;
@@ -30,9 +84,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -72,59 +124,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-
-import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
-import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.EggHandler;
-import net.dries007.tfc.api.capability.food.*;
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.capability.player.PlayerDataHandler;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
-import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
-import net.dries007.tfc.api.types.*;
-import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.network.PacketCalendarUpdate;
-import net.dries007.tfc.network.PacketPlayerDataUpdate;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.devices.BlockQuern;
-import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSupport;
-import net.dries007.tfc.objects.container.CapabilityContainerListener;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.items.ItemQuiver;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
-import net.dries007.tfc.util.DamageSourcesTFC;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.MonsterEquipment;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.CalendarWorldData;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.util.skills.SmithingSkill;
-import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
@@ -507,52 +506,39 @@ public final class CommonEventHandler
             ICapabilityProvider forgeHandler = CapabilityForgeable.getCustomForgeable(stack);
             boolean isForgeable = false;
             boolean isHeatable = false;
-            if (forgeHandler != null)
-            {
+            if (forgeHandler != null) {
                 isForgeable = true;
                 event.addCapability(CapabilityForgeable.KEY, forgeHandler);
                 isHeatable = forgeHandler instanceof IItemHeat;
             }
             // Metal
             ICapabilityProvider metalCapability = CapabilityMetalItem.getCustomMetalItem(stack);
-            if (metalCapability != null)
-            {
+            if (metalCapability != null) {
                 event.addCapability(CapabilityMetalItem.KEY, metalCapability);
-                if (!isForgeable)
-                {
+                if (!isForgeable) {
                     // Add a forgeable capability for this item, if none is found
-                    IMetalItem cap = (IMetalItem) metalCapability;
-                    Metal metal = cap.getMetal(stack);
-                    if (metal != null)
-                    {
-                        event.addCapability(CapabilityForgeable.KEY, new ForgeableHeatableHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
+                    IMaterialItem cap = (IMaterialItem) metalCapability;
+                    var metal = cap.getMaterial(stack);
+                    if (metal != null) {
+                        var property = metal.getProperty(TFGPropertyKey.HEAT);
+
+                        if (property == null) throw new RuntimeException(String.format("No heat property for: %s", metal));
+
+                        event.addCapability(CapabilityForgeable.KEY, new ForgeableHeatableHandler(null, property.getSpecificHeat(), property.getMeltTemp()));
                         isHeatable = true;
                     }
                 }
             }
             // If one of the above is also heatable, skip this
-            if (!isHeatable)
-            {
+            if (!isHeatable) {
                 ICapabilityProvider heatHandler = CapabilityItemHeat.getCustomHeat(stack);
-                if (heatHandler != null)
-                {
+                if (heatHandler != null) {
                     event.addCapability(CapabilityItemHeat.KEY, heatHandler);
                 }
             }
 
-            // Armor
-            if (item instanceof ItemArmor)
-            {
-                ICapabilityProvider damageResistance = CapabilityDamageResistance.getCustomDamageResistance(stack);
-                if (damageResistance != null)
-                {
-                    event.addCapability(CapabilityDamageResistance.KEY, damageResistance);
-                }
-            }
-
             // Eggs
-            if (stack.getItem() == Items.EGG)
-            {
+            if (stack.getItem() == Items.EGG) {
                 event.addCapability(CapabilityEgg.KEY, new EggHandler());
             }
         }
@@ -851,6 +837,7 @@ public final class CommonEventHandler
             }
             if (ConfigTFC.General.DIFFICULTY.giveVanillaMobsEquipment)
             {
+                /*
                 // Set equipment to some mobs
                 MonsterEquipment equipment = MonsterEquipment.get(entity);
                 if (equipment != null)
@@ -859,7 +846,7 @@ public final class CommonEventHandler
                     {
                         equipment.getEquipment(slot, Constants.RNG).ifPresent(stack -> entity.setItemStackToSlot(slot, stack));
                     }
-                }
+                }*/
             }
         }
         if (ConfigTFC.Devices.TEMPERATURE.coolHeatablesInWorld && entity instanceof EntityItem)

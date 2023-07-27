@@ -5,8 +5,10 @@
 
 package net.dries007.tfc.world.classic.worldgen.trees;
 
-import java.util.Random;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.api.util.IFruitTreeGenerator;
+import net.dries007.tfc.world.classic.StructureHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -14,10 +16,7 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.util.IFruitTreeGenerator;
-import net.dries007.tfc.world.classic.StructureHelper;
+import java.util.Random;
 
 public class FruitTreeGen implements IFruitTreeGenerator
 {

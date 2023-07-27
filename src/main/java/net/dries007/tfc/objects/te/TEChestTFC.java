@@ -5,10 +5,15 @@
 
 package net.dries007.tfc.objects.te;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.size.CapabilityItemSize;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
+import net.dries007.tfc.objects.container.ContainerChestTFC;
+import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
+import net.dries007.tfc.objects.inventory.capability.TFCDoubleChestItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
@@ -27,15 +32,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
-import net.dries007.tfc.objects.container.ContainerChestTFC;
-import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
-import net.dries007.tfc.objects.inventory.capability.TFCDoubleChestItemHandler;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

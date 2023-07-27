@@ -5,11 +5,11 @@
 
 package net.dries007.tfc.objects.fluids.properties;
 
+import net.minecraftforge.fluids.Fluid;
+
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Nonnull;
-
-import net.minecraftforge.fluids.Fluid;
 
 /**
  * This is a separate class from {@link Fluid} to avoid subclassing.

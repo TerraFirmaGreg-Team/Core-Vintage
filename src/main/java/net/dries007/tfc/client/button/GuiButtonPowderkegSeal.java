@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.client.button;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.objects.te.TEPowderKeg;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
-import net.dries007.tfc.objects.te.TEPowderKeg;
+import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.client.gui.GuiPowderkeg.POWDERKEG_BACKGROUND;

@@ -5,11 +5,10 @@
 
 package net.dries007.tfc.command;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.nbt.NBTBase;
@@ -17,11 +16,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * This is part of an effort to find the cause of TerraFirmaCraft#355 and TerraFirmaCraft#361

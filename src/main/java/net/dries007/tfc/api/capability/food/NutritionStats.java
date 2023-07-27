@@ -5,17 +5,16 @@
 
 package net.dries007.tfc.api.capability.food;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.ConfigTFC;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.INBTSerializable;
 
-import net.dries007.tfc.ConfigTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 /**
  * A wrapper class for nutrition stats for a player

@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.objects.recipes;
 
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.*;
@@ -22,6 +19,9 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3/blob/d064915183a4a3b803d779576f982279268b1ca3/src/main/java/choonster/testmod3/crafting/recipe/ShapelessCuttingRecipe.java">Source</a>

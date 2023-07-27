@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.api.capability.food;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Supplier;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.DumbStorage;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -20,11 +19,11 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.DumbStorage;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Supplier;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

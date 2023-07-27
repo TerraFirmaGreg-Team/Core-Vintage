@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.render;
 
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.objects.te.TEQuern;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -17,8 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import net.dries007.tfc.objects.te.TEQuern;
+import org.lwjgl.opengl.GL11;
 
 public class TESRQuern extends TileEntitySpecialRenderer<TEQuern>
 {

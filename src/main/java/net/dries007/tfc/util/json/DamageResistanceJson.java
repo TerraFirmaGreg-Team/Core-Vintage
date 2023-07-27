@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.util.json;
 
-import java.lang.reflect.Type;
-
 import com.google.gson.*;
+import net.dries007.tfc.api.capability.damage.DamageResistance;
 import net.minecraft.util.JsonUtils;
 
-import net.dries007.tfc.api.capability.damage.DamageResistance;
+import java.lang.reflect.Type;
 
 public class DamageResistanceJson implements JsonDeserializer<DamageResistance>
 {

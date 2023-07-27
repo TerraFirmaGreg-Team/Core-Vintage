@@ -5,26 +5,24 @@
 
 package net.dries007.tfc.api.recipes.anvil;
 
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
+import net.dries007.tfc.compat.jei.util.IJEISimpleRecipe;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeSteps;
 import net.dries007.tfc.util.skills.SmithingSkill;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Anvil Recipe
@@ -40,19 +38,18 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
     private static long SEED = 0;
 
     @Nonnull
-    public static List<AnvilRecipe> getAllFor(ItemStack stack)
-    {
+    public static List<AnvilRecipe> getAllFor(ItemStack stack) {
         return TFCRegistries.ANVIL.getValuesCollection().stream().filter(x -> x.matches(stack)).collect(Collectors.toList());
     }
 
     protected final ForgeRule[] rules;
     protected final ItemStack output;
     protected final IIngredient<ItemStack> ingredient;
-    protected final Metal.Tier minTier;
+    protected final int minTier;
     protected final long workingSeed;
     protected final SmithingSkill.Type skillBonusType;
 
-    public AnvilRecipe(ResourceLocation name, IIngredient<ItemStack> ingredient, ItemStack output, Metal.Tier minTier, @Nullable SmithingSkill.Type skillBonusType, ForgeRule... rules)
+    public AnvilRecipe(ResourceLocation name, IIngredient<ItemStack> ingredient, ItemStack output, int minTier, @Nullable SmithingSkill.Type skillBonusType, ForgeRule... rules)
     {
         this.ingredient = ingredient;
         this.output = output;
@@ -98,9 +95,8 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
     {
         return rules;
     }
-
-    @Nonnull
-    public Metal.Tier getTier()
+    
+    public int getTier()
     {
         return minTier;
     }

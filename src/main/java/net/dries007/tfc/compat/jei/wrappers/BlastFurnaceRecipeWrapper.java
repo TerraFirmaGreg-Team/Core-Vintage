@@ -5,17 +5,16 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.collect.Lists;
-import net.minecraft.item.ItemStack;
-
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.compat.jei.TFCJEIPlugin;
+import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlastFurnaceRecipeWrapper implements IRecipeWrapper
 {

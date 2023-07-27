@@ -5,11 +5,9 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.types.DefaultTrees;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -25,9 +23,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.types.DefaultTrees;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

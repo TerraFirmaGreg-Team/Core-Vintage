@@ -8,7 +8,9 @@ package net.dries007.tfc.objects.blocks.soil;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.util.*;
+import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.api.util.ISoilTypeBlock;
+import net.dries007.tfc.api.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -42,7 +44,8 @@ import java.util.Random;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.soil.SoilType.SILT;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.*;
+import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
+import static net.dries007.tfc.objects.blocks.soil.BlockSoil.getBlockSoilMap;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

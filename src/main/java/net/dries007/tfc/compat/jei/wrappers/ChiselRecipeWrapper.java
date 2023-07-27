@@ -5,20 +5,19 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.compat.jei.TFCJEIPlugin;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class ChiselRecipeWrapper implements IRecipeWrapper

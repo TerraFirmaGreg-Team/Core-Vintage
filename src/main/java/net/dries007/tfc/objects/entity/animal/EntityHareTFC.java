@@ -5,10 +5,12 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.types.IHuntable;
+import net.dries007.tfc.objects.LootTablesTFC;
+import net.dries007.tfc.util.climate.BiomeHelper;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -19,12 +21,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.IHuntable;
-import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class EntityHareTFC extends EntityRabbitTFC implements IHuntable

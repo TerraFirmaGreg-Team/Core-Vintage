@@ -5,11 +5,9 @@
 
 package net.dries007.tfc.objects.blocks;
 
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
+import net.dries007.tfc.objects.te.TEPlacedItemFlat;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -35,9 +33,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
-import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockPlacedItemFlat extends Block

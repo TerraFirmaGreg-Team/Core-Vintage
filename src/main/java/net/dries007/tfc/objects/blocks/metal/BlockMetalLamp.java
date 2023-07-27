@@ -5,13 +5,14 @@
 
 package net.dries007.tfc.objects.blocks.metal;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.advancements.TFCTriggers;
+import net.dries007.tfc.objects.blocks.BlockTorchTFC;
+import net.dries007.tfc.objects.blocks.property.ILightableBlock;
+import net.dries007.tfc.objects.te.TELamp;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -40,14 +41,12 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.blocks.BlockTorchTFC;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.te.TELamp;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.ICalendar;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockMetalLamp extends Block implements ILightableBlock

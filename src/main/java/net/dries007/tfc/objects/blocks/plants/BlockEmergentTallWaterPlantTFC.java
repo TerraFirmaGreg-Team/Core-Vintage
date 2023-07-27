@@ -5,19 +5,18 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.property.ITallPlant;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 

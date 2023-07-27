@@ -5,21 +5,12 @@
 
 package net.dries007.tfc.util;
 
-import javax.annotation.Nonnull;
-
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Converter;
 import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.types.Rock;
@@ -27,6 +18,14 @@ import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlockDecorativeStone;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.ItemPowder;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nonnull;
 
 /**
  * This is not the best example of good coding practice, but I do think it works rather well.

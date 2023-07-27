@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -12,8 +13,6 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import net.dries007.tfc.objects.te.TEAnvilTFC;
 
 import static net.dries007.tfc.objects.te.TEAnvilTFC.*;
 

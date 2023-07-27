@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.network;
 
-import java.nio.charset.Charset;
-import java.util.function.BooleanSupplier;
-
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -18,6 +15,9 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import java.nio.charset.Charset;
+import java.util.function.BooleanSupplier;
 
 public class PacketSimpleMessage implements IMessage
 {

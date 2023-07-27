@@ -5,9 +5,14 @@
 
 package net.dries007.tfc.api.capability.food;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.network.PacketFoodStatsReplace;
+import net.dries007.tfc.network.PacketFoodStatsUpdate;
+import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
+import net.dries007.tfc.util.DamageSourcesTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
@@ -20,14 +25,8 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.network.PacketFoodStatsReplace;
-import net.dries007.tfc.network.PacketFoodStatsUpdate;
-import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
-import net.dries007.tfc.util.DamageSourcesTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC

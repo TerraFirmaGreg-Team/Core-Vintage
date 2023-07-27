@@ -5,11 +5,10 @@
 
 package net.dries007.tfc.api.recipes.barrel;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -18,10 +17,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe>
 {

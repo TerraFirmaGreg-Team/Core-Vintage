@@ -5,11 +5,9 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.items.wood.ItemDoorTFC;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -23,9 +21,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.items.wood.ItemDoorTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

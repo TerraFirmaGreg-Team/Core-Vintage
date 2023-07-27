@@ -1,12 +1,8 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.categories;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
@@ -15,7 +11,6 @@ import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.CastingRecipeWrapper;
 
 @ParametersAreNonnullByDefault
@@ -52,11 +47,8 @@ public class CastingCategory extends BaseRecipeCategory<CastingRecipeWrapper>
         fluidStackGroup.init(0, false, 21, 17, 16, 16, ingredients.getInputs(VanillaTypes.FLUID).get(0).get(0).amount, false, null);
         fluidStackGroup.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
 
-
         IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
         itemStackGroup.init(0, true, 84, 16);
         itemStackGroup.set(0, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
-
-
     }
 }

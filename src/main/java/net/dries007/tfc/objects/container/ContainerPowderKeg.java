@@ -5,16 +5,15 @@
 
 package net.dries007.tfc.objects.container;
 
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.objects.blocks.BlockPowderKeg;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.objects.te.TEPowderKeg;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.blocks.BlockPowderKeg;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.objects.te.TEPowderKeg;
+import javax.annotation.Nullable;
 
 public class ContainerPowderKeg extends ContainerTE<TEPowderKeg> implements IButtonHandler
 {

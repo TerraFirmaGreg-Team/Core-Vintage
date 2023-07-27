@@ -251,9 +251,9 @@ public final class TFCJEIPlugin implements IModPlugin
 
                 if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
                     if (!material.hasFlag(TFGMaterialFlags.UNUSABLE)) {
-                        castingList.add(new CastingRecipeWrapper(material, orePrefix));
+                        //castingList.add(new CastingRecipeWrapper(material, orePrefix));
                     } else {
-                        unmoldList.add(new UnmoldRecipeWrapper(material, orePrefix));
+                        //unmoldList.add(new UnmoldRecipeWrapper(material, orePrefix));
                     }
                 }
             }

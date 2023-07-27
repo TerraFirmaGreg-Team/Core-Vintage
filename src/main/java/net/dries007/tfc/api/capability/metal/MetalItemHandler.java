@@ -40,8 +40,7 @@ public class MetalItemHandler implements ICapabilityProvider, IMaterialItem
     }
 
     @Override
-    public int getSmeltAmount(ItemStack stack)
-    {
+    public int getSmeltAmount(ItemStack stack) {
         return amount;
     }
 

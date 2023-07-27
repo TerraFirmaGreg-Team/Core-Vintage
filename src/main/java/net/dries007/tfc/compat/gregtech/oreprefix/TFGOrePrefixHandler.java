@@ -4,7 +4,9 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TFGOrePrefixHandler {
     public static void init() {
@@ -73,7 +75,33 @@ public class TFGOrePrefixHandler {
             extendedOrePrefix.setShouldHasMetalCapability(true);
         }
 
-        //
+        // Set metal amount for orePrefixes
+        Map<OrePrefix, Integer> someMap = new HashMap<>() {{
+            put(OrePrefix.nugget, 16);
+            put(OrePrefix.ingot, 144);
+            put(OrePrefix.plate, 144);
+            put(TFGOrePrefix.ingotDouble, 288);
+            put(TFGOrePrefix.ingotTriple, 432);
+            put(TFGOrePrefix.ingotHex, 864);
+            put(TFGOrePrefix.toolHeadSword, 288);
+            put(TFGOrePrefix.toolHeadPickaxe, 432);
+            put(TFGOrePrefix.toolHeadShovel, 144);
+            put(TFGOrePrefix.toolHeadAxe, 432);
+            put(TFGOrePrefix.toolHeadHoe, 288);
+            put(TFGOrePrefix.toolHeadSense, 432);
+            // (TFGOrePrefix.toolHeadFile, 144),
+            put(TFGOrePrefix.toolHeadHammer, 864);
+            put(TFGOrePrefix.toolHeadSaw, 288);
+            put(TFGOrePrefix.toolHeadKnife, 144);
+            put(TFGOrePrefix.toolHeadPropick, 432);
+            put(TFGOrePrefix.toolHeadChisel, 288);
 
+        }};
+
+        for (var item : someMap.entrySet()) {
+            var extendedOrePrefix = (IOrePrefixExtension) item.getKey();
+
+            extendedOrePrefix.setMetalAmount(item.getValue());
+        }
     }
 }

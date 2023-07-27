@@ -7,12 +7,17 @@ package net.dries007.tfc.client;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.render.*;
+import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -28,22 +33,25 @@ import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.objects.items.ItemGoldPan;
 import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.te.*;
 import net.minecraft.block.*;
+import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemFood;
+import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -51,6 +59,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
@@ -61,6 +70,21 @@ import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
 public final class ClientRegisterEvents
 {
+    public static final IItemColor moldItemColors = (stack, tintIndex) -> {
+        if (tintIndex != 1) return 0xFFFFFF;
+
+        IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        if (cap != null) {
+            if (cap instanceof IMoldHandler) {
+                var material = ((IMoldHandler) cap).getMaterial();
+                if (material != null) {
+                    return material.getMaterialRGB();
+                }
+            }
+        }
+        return 0xFFFFFF;
+    };
+
     @SubscribeEvent
     @SuppressWarnings("ConstantConditions")
     public static void registerModels(ModelRegistryEvent event)
@@ -96,40 +120,31 @@ public final class ClientRegisterEvents
         ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES).map(e -> new ResourceLocation(MOD_ID, "goldpan/" + e)).toArray(ResourceLocation[]::new));
 
         // Ceramic Molds
-        //ModelBakery.registerItemVariants(ItemMold.get(Metal.ItemType.INGOT), new ModelResourceLocation(ItemMold.get(Metal.ItemType.INGOT).getRegistryName() + "/unknown"));
-        /*
-        for (Metal.ItemType value : Metal.ItemType.values())
-        {
-            ItemMold item = ItemMold.get(value);
-            if (item == null) continue;
+        for (var orePrefix : OrePrefix.values()) {
+            var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
 
-            ModelBakery.registerItemVariants(item, new ModelResourceLocation(item.getRegistryName().toString() + "/empty"));
-            ModelBakery.registerItemVariants(item, TFCRegistries.METALS.getValuesCollection()
-                .stream()
-                .filter(value::hasMold)
-                .map(x -> new ModelResourceLocation(item.getRegistryName().toString() + "/" + x.getRegistryName().getPath()))
-                .toArray(ModelResourceLocation[]::new));
-            ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition()
-            {
-                private final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName().toString() + "/empty");
+            if (extendedOrePrefix.getHasMold()) {
+                var clayMold = ItemMold.get(orePrefix);
 
-                @Override
-                @Nonnull
-                public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack)
-                {
-                    IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                    if (cap instanceof IMoldHandler)
-                    {
-                        Metal metal = ((IMoldHandler) cap).getMetal();
-                        if (metal != null)
-                        {
-                            return new ModelResourceLocation(stack.getItem().getRegistryName() + "/" + metal.getRegistryName().getPath());
+                ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_empty"));
+                ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_filled"));
+
+                ModelLoader.setCustomMeshDefinition(clayMold, new ItemMeshDefinition() {
+                    @Override
+                    @Nonnull
+                    public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+                        IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+                        if (cap instanceof IMoldHandler) {
+                            Material material = ((IMoldHandler) cap).getMaterial();
+                            if (material != null) {
+                                return new ModelResourceLocation(clayMold.getRegistryName().toString() + "_filled");
+                            }
                         }
+                        return new ModelResourceLocation(clayMold.getRegistryName().toString() + "_empty");
                     }
-                    return FALLBACK;
-                }
-            });
-        }*/
+                });
+            }
+        }
 
         // Item Blocks
         for (ItemBlock item : BlocksTFC.getAllNormalItemBlocks())
@@ -300,6 +315,9 @@ public final class ClientRegisterEvents
             }
             return 0xFFFFFF;
         }, ForgeRegistries.ITEMS.getValuesCollection().stream().filter(x -> x instanceof ItemFood).toArray(Item[]::new));
+
+        // Colorize clay molds
+        itemColors.registerItemColorHandler(moldItemColors, ItemsTFC.getAllMoldItems().toArray(new Item[0]));
     }
 
     /**

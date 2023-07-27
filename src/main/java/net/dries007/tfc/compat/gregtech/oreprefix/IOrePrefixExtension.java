@@ -10,4 +10,8 @@ public interface IOrePrefixExtension {
 
     boolean getShouldHasMetalCapability();
 
+    void setMetalAmount(int value);
+
+    int getMatalAmount();
+
 }

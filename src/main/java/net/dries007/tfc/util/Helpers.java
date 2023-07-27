@@ -6,10 +6,12 @@
 package net.dries007.tfc.util;
 
 import com.google.common.base.Joiner;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.objects.entity.EntitySeatOn;
 import net.dries007.tfc.objects.entity.animal.*;
 import net.minecraft.block.Block;
@@ -84,7 +86,8 @@ public final class Helpers
     }
 
     public static int getOrePrefixMaterialAmount(OrePrefix orePrefix) {
-        return (int) (orePrefix.getMaterialAmount(null) / M) * 144;
+        var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
+        return extendedOrePrefix.getMatalAmount();
     }
 
     public static boolean isAtLeast(int value, int requiredInclusive) {

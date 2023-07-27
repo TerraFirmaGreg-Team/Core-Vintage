@@ -175,13 +175,17 @@ public final class ItemsTFC
     public static final Item WOOD_ASH = getNull();
 
     private static ImmutableList<Item> allSimpleItems;
+    private static ImmutableList<ItemMold> allMoldItems;
     private static ImmutableList<ItemGem> allGemItems;
 
     public static ImmutableList<Item> getAllSimpleItems()
     {
         return allSimpleItems;
     }
-
+    public static ImmutableList<ItemMold> getAllMoldItems()
+    {
+        return allMoldItems;
+    }
 
     public static ImmutableList<ItemGem> getAllGemItems()
     {
@@ -216,6 +220,7 @@ public final class ItemsTFC
             allGemItems = b.build();
         }
 
+        /*
         for (Metal.ItemType type : Metal.ItemType.values())
         {
             for (Metal metal : TFCRegistries.METALS.getValuesCollection())
@@ -225,7 +230,7 @@ public final class ItemsTFC
                     simpleItems.add(register(r, "metal/" + type.name().toLowerCase() + "/" + metal.getRegistryName().getPath(), Metal.ItemType.create(metal, type), METAL));
                 }
             }
-        }
+        }*/
 
 
         BlocksTFC.getAllNormalItemBlocks().forEach(x -> registerItemBlock(r, x));
@@ -267,13 +272,14 @@ public final class ItemsTFC
         }
 
         // POTTERY
+        Builder<ItemMold> clayMolds = ImmutableList.builder();
+
         {
             for (var orePrefix : OrePrefix.values()) {
                 var orePrefixExtension = (IOrePrefixExtension) orePrefix;
                 if (orePrefixExtension.getHasMold()) {
                     // Not using registerPottery here because the ItemMold uses a custom ItemModelMesher, meaning it can't be in simpleItems
-                    ItemPottery item = new ItemMold(orePrefix);
-                    register(r, "ceramics/fired/mold/" + orePrefix.name.toLowerCase(), item, POTTERY);
+                    clayMolds.add(register(r, "ceramics/fired/mold/" + orePrefix.name.toLowerCase(), new ItemMold(orePrefix), POTTERY));
                     simpleItems.add(register(r, "ceramics/unfired/mold/" + orePrefix.name.toLowerCase(), new ItemUnfiredMold(orePrefix), POTTERY));
                 }
             }
@@ -380,6 +386,7 @@ public final class ItemsTFC
         register(r, "goldpan", new ItemGoldPan(), MISC);
         simpleItems.add(register(r, "wrought_iron_grill", new ItemMisc(Size.LARGE, Weight.HEAVY, "grill"), MISC));
 
+        allMoldItems = clayMolds.build();
         allSimpleItems = simpleItems.build();
 
         OreDictionaryHelper.init();

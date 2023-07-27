@@ -67,6 +67,7 @@ public interface IMaterialItem
             if (property == null) throw new RuntimeException(String.format("No heat property for %s", material));
 
             var melttemp = (int) property.getMeltTemp();
+
             text.add("");
             text.add(I18n.format("tfc.tooltip.metal", material.getLocalizedName()));
             text.add(I18n.format("tfc.tooltip.units", getSmeltAmount(stack)));

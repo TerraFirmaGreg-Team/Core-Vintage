@@ -12,6 +12,8 @@ public class OrePrefixMixin implements IOrePrefixExtension {
 
     @Unique private boolean shouldHasMetalCapability;
 
+    @Unique private int metalAmount;
+
     @Override
     public void setHasMold(boolean value) {
         isHasMold = value;
@@ -30,5 +32,15 @@ public class OrePrefixMixin implements IOrePrefixExtension {
     @Override
     public boolean getShouldHasMetalCapability() {
         return shouldHasMetalCapability;
+    }
+
+    @Override
+    public void setMetalAmount(int value) {
+        metalAmount = value;
+    }
+
+    @Override
+    public int getMatalAmount() {
+        return metalAmount;
     }
 }

@@ -168,18 +168,18 @@ public class TFGMaterialHandler {
         BlackBronze.setProperty(HEAT, new HeatProperty(1070, 0.35F, 2));
         BismuthBronze.setProperty(HEAT, new HeatProperty(985, 0.35F, 2));
         Gold.setProperty(HEAT, new HeatProperty(1060, 0.6F, 1));
-        PigIron.setProperty(HEAT, new HeatProperty(0.35F, 1535, 3));
-        HighCarbonSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 3));
+        PigIron.setProperty(HEAT, new HeatProperty(1535, 0.35F, 3));
+        HighCarbonSteel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 3));
         WroughtIron.setProperty(HEAT, new HeatProperty(1535, 0.35F, 3));
         HighCarbonBlackSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 6));
         Steel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 4));
-        WeakSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 4));
+        WeakSteel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 4));
         Platinum.setProperty(HEAT, new HeatProperty(1730, 0.35F, 5));
         BlackSteel.setProperty(HEAT, new HeatProperty(1485, 0.35F, 5));
-        WeakBlueSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 5));
-        WeakRedSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 5));
-        HighCarbonBlueSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 5));
-        HighCarbonRedSteel.setProperty(HEAT, new HeatProperty(0.35F, 1540, 5));
+        WeakBlueSteel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 5));
+        WeakRedSteel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 5));
+        HighCarbonBlueSteel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 5));
+        HighCarbonRedSteel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 5));
         BlueSteel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 6));
         RedSteel.setProperty(HEAT, new HeatProperty(1540, 0.35F, 6));
         Unknown.setProperty(HEAT, new HeatProperty(1250, 0.3f, 1));
@@ -205,5 +205,9 @@ public class TFGMaterialHandler {
         WeakSteel.addFlags(UNUSABLE);
         WeakRedSteel.addFlags(UNUSABLE);
         WeakBlueSteel.addFlags(UNUSABLE);
+
+        var prop = WeakSteel.getProperty(HEAT);
+
+        System.out.println(prop.getMeltTemp() + " " + prop.getSpecificHeat());
     }
 }

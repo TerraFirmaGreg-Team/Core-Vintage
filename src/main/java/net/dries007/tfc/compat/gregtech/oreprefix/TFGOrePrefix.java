@@ -36,7 +36,6 @@ public class TFGOrePrefix {
     public static final OrePrefix oreRockSalt = new OrePrefix("oreRockSalt", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreSoapstone = new OrePrefix("oreSoapstone", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreQuartzite = new OrePrefix("oreQuartzite", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
-    public static final OrePrefix oreCatlinite = new OrePrefix("oreCatlinite", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreChalk = new OrePrefix("oreChalk", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreChert = new OrePrefix("oreChert", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreClaystone = new OrePrefix("oreClaystone", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
@@ -59,7 +58,6 @@ public class TFGOrePrefix {
         oreRockSalt.addSecondaryMaterial(new MaterialStack(Materials.RockSalt, M));
         oreSoapstone.addSecondaryMaterial(new MaterialStack(Materials.RockSalt, M));
         oreQuartzite.addSecondaryMaterial(new MaterialStack(Materials.Quartzite, M));
-        oreCatlinite.addSecondaryMaterial(new MaterialStack(TFGMaterials.Catlinite, M));
         oreChalk.addSecondaryMaterial(new MaterialStack(TFGMaterials.Chalk, M));
         oreChert.addSecondaryMaterial(new MaterialStack(TFGMaterials.Chert, M));
         oreClaystone.addSecondaryMaterial(new MaterialStack(TFGMaterials.Claystone, M));

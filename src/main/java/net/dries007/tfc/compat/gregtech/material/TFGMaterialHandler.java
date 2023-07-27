@@ -16,6 +16,8 @@ import static net.dries007.tfc.compat.gregtech.material.TFGPropertyKey.HEAT;
 public class TFGMaterialHandler {
 
     public static void init() {
+
+        // Metals
         Unknown = new Material.Builder(32000, gregtechId("unknown"))
                 .ingot().fluid()
                 .color(0x2F2B27).iconSet(METALLIC)
@@ -71,11 +73,7 @@ public class TFGMaterialHandler {
                 .fluidTemp(1540)
                 .build();
 
-        Catlinite = new Material.Builder(32101, gregtechId("catlinite"))
-                .dust()
-                .color(0xB46C62)
-                .build();
-
+        // StoneTypes
         Chalk = new Material.Builder(32102, gregtechId("chalk"))
                 .dust()
                 .color(0xA4A39F)
@@ -147,12 +145,11 @@ public class TFGMaterialHandler {
                 .color(0x989287)
                 .build();
 
+        // Some custom properties for materials
         Stone.setProperty(TOOL, new ToolProperty(1.0f, 1f, 6, 1));
         Copper.setProperty(TOOL, new ToolProperty(1.5f, 2f, 88, 2));
         BismuthBronze.setProperty(TOOL, new ToolProperty(1.8f, 2f, 174, 2));
-        Bismuth.setProperty(TOOL, new ToolProperty(2.0f, 2f, 192, 2));
         BlackBronze.setProperty(TOOL, new ToolProperty(2.2f, 2f, 212, 2));
-        BlackSteel.setProperty(TOOL, new ToolProperty(6.0f, 3f, 784, 3));
 
         Copper.setProperty(HEAT, new HeatProperty(1080, 0.35f, 1));
         Bismuth.setProperty(HEAT, new HeatProperty(270, 0.35F, 1));

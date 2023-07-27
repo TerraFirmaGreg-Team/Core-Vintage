@@ -14,7 +14,6 @@ public class TFGMaterials {
     public static Material WeakBlueSteel;
     public static Material WeakRedSteel;
 
-    public static Material Catlinite;
     public static Material Chalk;
     public static Material Chert;
     public static Material Claystone;
@@ -29,5 +28,4 @@ public class TFGMaterials {
     public static Material Schist;
     public static Material Shale;
     public static Material Slate;
-
 }

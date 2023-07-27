@@ -15,7 +15,7 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification.*;
 @MethodsReturnNonnullByDefault
 public enum RockVariant implements IStringSerializable {
 	RAW(0, 6.5f, 10f, COLLAPSABLE),
-	COBBLE(0, 5.5f, 10f, new Specification(true, () -> TFCSounds.ROCK_SLIDE_SHORT)),
+	COBBLE(0, 5.5f, 10f, VERTICAL_AND_HORIZONTAL_ROCK),
 	BRICK(0, 6.5f, 10f, null),
 	CRACKED(0, 6.5f, 10f, null),
 	CHISELED(0, 6.5f, 10f, null),

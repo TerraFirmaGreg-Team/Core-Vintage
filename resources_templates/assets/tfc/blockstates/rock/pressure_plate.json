@@ -13,15 +13,15 @@
 				"model": "stone_pressure_plate_down"
 			}
 		},
-		"stonetype": {<%for (i=0; i < types.size; i++) { %>
-    		  "${types[i]}": {
+		"stonetype": {<%for (i=0; i < rock_type.size; i++) { %>
+    		  "${rock_type[i]}": {
 							"textures": {
-								"texture": "tfc:blocks/rock/$texture_variant/${types[i]}"
-							}}<% if(i < types.size - 1) { %>, <%}} %>
-			}<%for (i=0; i < types.size; i++) { %>,
-      "inventory=${types[i]}": [
+								"texture": "tfc:blocks/rock/raw/${rock_type[i]}"
+							}}<% if(i < rock_type.size - 1) { %>, <%}} %>
+			}<%for (i=0; i < rock_type.size; i++) { %>,
+      "inventory=${rock_type[i]}": [
           { "model": "pressure_plate_up",
-            "textures": { "texture": "tfc:blocks/rock/$texture_variant/${types[i]}" }
+            "textures": { "texture": "tfc:blocks/rock/raw/${rock_type[i]}" }
           }
 						]<%
 					} %>

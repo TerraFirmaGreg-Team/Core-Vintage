@@ -1,11 +1,10 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Triple;
+import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -41,10 +40,10 @@ public class BlockRockFallable extends Block implements IRockTypeBlock {
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockRockFallable(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
+	public BlockRockFallable(RockVariant rockVariant, RockType rockType) {
 		super(Material.SAND);
 
-		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Pair<>(rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 		if (rockVariant.canFall()) {
@@ -53,9 +52,9 @@ public class BlockRockFallable extends Block implements IRockTypeBlock {
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
-		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
+		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
-		String blockRegistryName = String.format("%s/%s/%s", rockBlockType, rockVariant, rockType);
+		String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
 		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		this.setSoundType(SoundType.GROUND);
 		this.setHardness(0.6F);
@@ -109,8 +108,7 @@ public class BlockRockFallable extends Block implements IRockTypeBlock {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-		if (this.rockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false))
-		{
+		if (this.rockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
 			double d0 = (float) pos.getX() + rand.nextFloat();
 			double d1 = (double) pos.getY() - 0.05D;
 			double d2 = (float) pos.getZ() + rand.nextFloat();

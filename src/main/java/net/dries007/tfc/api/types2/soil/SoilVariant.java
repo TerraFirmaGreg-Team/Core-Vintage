@@ -28,15 +28,8 @@ public enum SoilVariant implements IStringSerializable {
 
 
 	public static final SoilVariant[] VALUES = SoilVariant.values();
-
-	public static SoilVariant valueOf(int i)
-	{
-		return i >= 0 && i < VALUES.length ? VALUES[i] : DIRT;
-	}
-
 	@Nullable
 	private final Specification fallingSpecification;
-
 	private final BiFunction<SoilVariant, SoilType, ISoilTypeBlock> blockFactory;
 
 	SoilVariant(@Nullable Specification fallingSpecification, BiFunction<SoilVariant, SoilType, ISoilTypeBlock> blockFactory) {
@@ -44,18 +37,20 @@ public enum SoilVariant implements IStringSerializable {
 		this.blockFactory = blockFactory;
 	}
 
+	public static SoilVariant valueOf(int i) {
+		return i >= 0 && i < VALUES.length ? VALUES[i] : DIRT;
+	}
+
 	public ISoilTypeBlock createBlock(SoilType soilType) {
 		return this.blockFactory.apply(this, soilType);
 	}
 
 	@Nullable
-	public Specification getFallingSpecification()
-	{
+	public Specification getFallingSpecification() {
 		return fallingSpecification;
 	}
 
-	public boolean canFall()
-	{
+	public boolean canFall() {
 		return fallingSpecification != null;
 	}
 

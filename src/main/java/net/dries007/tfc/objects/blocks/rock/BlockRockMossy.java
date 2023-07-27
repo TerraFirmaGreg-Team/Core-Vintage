@@ -1,10 +1,9 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Triple;
+import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -44,22 +43,21 @@ import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
  */
 public class BlockRockMossy extends Block implements IRockTypeBlock {
 
-	private final RockBlockType rockBlockType;
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockRockMossy(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
+	public BlockRockMossy(RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
-		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
+
+		if (BLOCK_ROCK_MAP.put(new Pair<>(rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
-		this.rockBlockType = rockBlockType;
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
-		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
+		this.modelLocation = new ResourceLocation(MOD_ID, "rock/mossy/" + rockVariant);
 
-		String blockRegistryName = String.format("%s/%s/%s", rockBlockType, rockVariant, rockType);
+		String blockRegistryName = String.format("rock/mossy/%s/%s", rockVariant, rockType);
 		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(getFinalHardness());

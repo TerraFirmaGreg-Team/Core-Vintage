@@ -69,8 +69,7 @@ configurations {
 }
 
 spotless {
-    if (project.property('spotless'))
-    {
+    if (project.property('spotless')) {
         encoding 'UTF-8'
         format 'misc', {
             target '.gitignore'
@@ -109,13 +108,13 @@ minecraft {
     // MCP Mappings
     mcpMappingChannel = project.property('mapping_channel')
     mcpMappingVersion = project.property('mapping_version')
-    
+
     // Set username here, the UUID will be looked up automatically
     username = project.property('minecraft_username')
-    
+
     // Add any additional tweaker classes here
     // extraTweakClasses.add('org.spongepowered.asm.launch.MixinTweaker')
-    
+
     // Add various JVM arguments here for runtime
     def args = ['-ea:' + project.group]
     if (project.property('is_coremod').toBoolean()) {
@@ -157,7 +156,7 @@ dependencies {
         annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
         // Workaround for https://github.com/bsideup/jabel/issues/174
         annotationProcessor 'net.java.dev.jna:jna-platform:5.13.0'
-        compileOnly ('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
+        compileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
             transitive = false
         }
         // Allow jdk.unsupported classes like sun.misc.Unsafe, workaround for JDK-8206937 and fixes crashes in tests
@@ -175,13 +174,13 @@ dependencies {
         // Change your mixin refmap name here:
         String mixin = modUtils.enableMixins("zone.rong:mixinbooter:${interpolate(project.property('mixin_booter_version'))}"
                 , "" + interpolate(project.property('mixin_refmap')))
-        api (mixin) {
+        api(mixin) {
             transitive = false
         }
         annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
         annotationProcessor 'com.google.guava:guava:24.1.1-jre'
         annotationProcessor 'com.google.code.gson:gson:2.8.6'
-        annotationProcessor (mixin) {
+        annotationProcessor(mixin) {
             transitive = false
         }
     }
@@ -211,16 +210,16 @@ processResources {
     if (project.property('use_mixins').toBoolean()) {
         // include('mixins.*.json').exclude(interpolate(project.property('mixin_refmap'))).expand('refmap': interpolate(project.property('mixin_refmap')))
     }
-    
+
     // Replace various properties in mcmod.info and pack.mcmeta if applicable
     filesMatching(['mcmod.info', 'pack.mcmeta']) { fcd ->
         // Replace version and mcversion
-        fcd.expand (
+        fcd.expand(
                 'version': project.version,
                 'mcversion': '1.12.2'
         )
     }
-    
+
     if (project.property('use_access_transformer').toBoolean()) {
         rename '(.+_at.cfg)', 'META-INF/$1' // Make sure Access Transformer files are in META-INF folder
     }
@@ -245,7 +244,7 @@ jar {
         attributes(attribute_map)
     }
     // Add all embedded dependencies into the jar
-    from(provider{ configurations.embed.collect {it.isDirectory() ? it : zipTree(it)} })
+    from(provider { configurations.embed.collect { it.isDirectory() ? it : zipTree(it) } })
 }
 
 runClient {

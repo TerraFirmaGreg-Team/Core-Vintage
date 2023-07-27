@@ -1,34 +1,24 @@
 def stones = [
         rocktype: [
-                RockVariant  : [    "raw", "cobble", "bricks", "smooth", "gravel", "sand", "anvil", "speleothem"],
-                RockBlockType: [    "ordinary"      : ["raw",  "brick", "smooth", "chiseled", "cracked"],
-                                    "falling"       : ["gravel", "cobble", "sand"],
-                                    "mossy"         : ["cobble", "brick"],
-                                    "stairs"        : ["raw", "cobble", "brick", "smooth"],
-                                    "slab"          : ["raw", "cobble", "brick", "smooth"],
-                                    "slab_double"   : ["raw", "cobble", "brick", "smooth"],
-                                    "wall"          : ["raw", "cobble", "brick", "smooth"],
-                                    "anvil"         : ["raw"],
-                                    "button"        : ["raw"],
-                                    "pressure_plate": ["raw"],
-                                    "loose"         : ["raw"],
-                                    "brick"         : ["raw"],
-                                    "speleothem"    : ["raw"]],
+                RockVariant  : ["raw", "cobble", "brick", "cracked", "chiseled", "smooth", "gravel", "sand", "anvil", "pressure_plate", "button", "loose", "speleothem"],
+                RockBlockType: ["mossy"      : ["cobble", "brick"],
+                                "stairs"     : ["raw", "cobble", "brick", "smooth"],
+                                "slab"       : ["raw", "cobble", "brick", "smooth"],
+                                "slab_double": ["raw", "cobble", "brick", "smooth"],
+                                "wall"       : ["raw", "cobble", "brick", "smooth"]],
                 RockType     : [
-                                    // igneous_intrusive
-                                    "granite", "diorite", "gabbro",
-                                    // sedimentary
-                                    "shale", "claystone", "limestone", "conglomerate", "dolomite", "chert", "chalk",
-                                    // igneous_extrusive
-                                    "rhyolite", "basalt", "andesite", "dacite",
-                                    // metamorphic"
-                                    "quartzite", "slate", "phyllite", "schist", "gneiss", "marble"]
+                        // igneous_intrusive
+                        "granite", "diorite", "gabbro",
+                        // sedimentary
+                        "shale", "claystone", "limestone", "conglomerate", "dolomite", "chert", "chalk",
+                        // igneous_extrusive
+                        "rhyolite", "basalt", "andesite", "dacite",
+                        // metamorphic"
+                        "quartzite", "slate", "phyllite", "schist", "gneiss", "marble"]
         ],
         soiltype: [
-                SoilVariant  : [    "dirt", "grass", "dry_grass", "path", "clay", "clay_grass", "farmland", "rooted_dirt", "mud", "mud_bricks", "drying_bricks"],
-                SoilBlockType: [    "ordinary"      : ["grass",  "dry_grass", "clay_grass"],
-                                    "falling"       : ["dirt", "clay"]],
-                SoilType     : [    "silt", "loam", "sandy_loam", "silty_loam"]
+                SoilVariant: ["dirt", "grass", "dry_grass", "path", "clay", "clay_grass", "farmland", "rooted_dirt", "mud", "mud_bricks", "drying_bricks"],
+                SoilType   : ["silt", "loam", "sandy_loam", "silty_loam"]
         ]
 ]
 
@@ -40,29 +30,37 @@ task processResourceTemplates(type: Copy, group: "tfg utils", description: "Crea
 }
 
 stones.each { key, value ->
+    value.RockVariant.each { rockVariant ->
+        task "processBlockstateTemplatesFor${key.capitalize()}${rockVariant.capitalize()}"(type: Copy) {
+            from "resources_templates"
+            into "src/main/resources"
+            include "**/blockstates/rock/${rockVariant}.json"
+            rename "(.*)", "${rockVariant}.json"
+            expand(rock_type: value.RockType)
+        }
+        processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${rockVariant.capitalize()}"
+    }
     value.RockBlockType.each { rockBlocktype, rockVariant ->
-        rockVariant.each { item_variant ->
-            task "processBlockstateTemplatesFor${key.capitalize()}${rockBlocktype.capitalize()}${item_variant.capitalize()}"(type: Copy) {
+        rockVariant.each { rock_variant ->
+            task "processBlockstateTemplatesFor${key.capitalize()}${rockBlocktype.capitalize()}${rock_variant.capitalize()}"(type: Copy) {
                 from "resources_templates"
                 into "src/main/resources"
                 include "**/blockstates/rock/${rockBlocktype}.json"
-                rename "(.*)", "${rockBlocktype}/${item_variant}.json"
-                expand(types: value.RockType, texture_variant: item_variant, texture_type: rockBlocktype)
+                rename "(.*)", "${rockBlocktype}/${rock_variant}.json"
+                expand(rock_type: value.RockType, rock_variant: rock_variant)
             }
-            processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${rockBlocktype.capitalize()}${item_variant.capitalize()}"
+            processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${rockBlocktype.capitalize()}${rock_variant.capitalize()}"
         }
     }
-    value.SoilBlockType.each { soilBlocktype, soilVariant ->
-        soilVariant.each { item_variant ->
-            task "processBlockstateTemplatesFor${key.capitalize()}${soilBlocktype.capitalize()}${item_variant.capitalize()}"(type: Copy) {
-                from "resources_templates"
-                into "src/main/resources"
-                include "**/blockstates/soil/${item_variant}.json"
-                rename "(.*)", "${item_variant}.json"
-                expand(types: value.SoilType, texture_variant: item_variant, texture_type: soilBlocktype)
-            }
-            processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${soilBlocktype.capitalize()}${item_variant.capitalize()}"
+    value.SoilVariant.each { soilVariant ->
+        task "processBlockstateTemplatesFor${key.capitalize()}${soilVariant.capitalize()}"(type: Copy) {
+            from "resources_templates"
+            into "src/main/resources"
+            include "**/blockstates/soil/${soilVariant}.json"
+            rename "(.*)", "${soilVariant}.json"
+            expand(soil_types: value.SoilType, soil_variant: soilVariant)
         }
+        processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${soilVariant.capitalize()}"
     }
 }
 

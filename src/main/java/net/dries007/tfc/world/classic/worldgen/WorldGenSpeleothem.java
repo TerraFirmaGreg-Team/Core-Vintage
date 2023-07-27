@@ -13,8 +13,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.SPELEOTHEM;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 
@@ -102,8 +100,8 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 	private Block getSpeleothemType(IBlockState state) {
 		Block block = state.getBlock();
 		for (RockType rockType : RockType.values()) {
-			if (getBlockRockMap(ORDINARY, RAW, rockType) == block) {
-				return getBlockRockMap(SPELEOTHEM, RAW, rockType);
+			if (getBlockRockMap(RAW, rockType) == block) {
+				return getBlockRockMap(RAW, rockType);
 			}
 		}
 

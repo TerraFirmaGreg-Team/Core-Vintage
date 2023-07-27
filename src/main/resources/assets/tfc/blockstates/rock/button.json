@@ -47,10 +47,6 @@
         "textures": {
           "texture": "tfc:blocks/rock/raw/gabbro"
       }}, 
-      "breccia": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/breccia"
-      }}, 
       "shale": {
         "textures": {
           "texture": "tfc:blocks/rock/raw/shale"
@@ -79,18 +75,6 @@
         "textures": {
           "texture": "tfc:blocks/rock/raw/chalk"
       }}, 
-      "mudstone": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/mudstone"
-      }}, 
-      "psammolite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/psammolite"
-      }}, 
-      "siltstone": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/siltstone"
-      }}, 
       "rhyolite": {
         "textures": {
           "texture": "tfc:blocks/rock/raw/rhyolite"
@@ -106,14 +90,6 @@
       "dacite": {
         "textures": {
           "texture": "tfc:blocks/rock/raw/dacite"
-      }}, 
-      "porphyry": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/porphyry"
-      }}, 
-      "peridotite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/peridotite"
       }}, 
       "quartzite": {
         "textures": {
@@ -138,30 +114,6 @@
       "marble": {
         "textures": {
           "texture": "tfc:blocks/rock/raw/marble"
-      }}, 
-      "catlinite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/catlinite"
-      }}, 
-      "blueschist": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/blueschist"
-      }}, 
-      "greenschist": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/greenschist"
-      }}, 
-      "novaculite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/novaculite"
-      }}, 
-      "steatite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/steatite"
-      }}, 
-      "komatiite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/komatiite"
       }}
     },
 	  "inventory=granite": [{
@@ -177,11 +129,6 @@
 	  "inventory=gabbro": [{
       "textures": {
         "texture": "tfc:blocks/rock/raw/gabbro"
-      }}
-    ],
-	  "inventory=breccia": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/breccia"
       }}
     ],
 	  "inventory=shale": [{
@@ -219,21 +166,6 @@
         "texture": "tfc:blocks/rock/raw/chalk"
       }}
     ],
-	  "inventory=mudstone": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/mudstone"
-      }}
-    ],
-	  "inventory=psammolite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/psammolite"
-      }}
-    ],
-	  "inventory=siltstone": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/siltstone"
-      }}
-    ],
 	  "inventory=rhyolite": [{
       "textures": {
         "texture": "tfc:blocks/rock/raw/rhyolite"
@@ -252,16 +184,6 @@
 	  "inventory=dacite": [{
       "textures": {
         "texture": "tfc:blocks/rock/raw/dacite"
-      }}
-    ],
-	  "inventory=porphyry": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/porphyry"
-      }}
-    ],
-	  "inventory=peridotite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/peridotite"
       }}
     ],
 	  "inventory=quartzite": [{
@@ -292,36 +214,6 @@
 	  "inventory=marble": [{
       "textures": {
         "texture": "tfc:blocks/rock/raw/marble"
-      }}
-    ],
-	  "inventory=catlinite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/catlinite"
-      }}
-    ],
-	  "inventory=blueschist": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/blueschist"
-      }}
-    ],
-	  "inventory=greenschist": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/greenschist"
-      }}
-    ],
-	  "inventory=novaculite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/novaculite"
-      }}
-    ],
-	  "inventory=steatite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/steatite"
-      }}
-    ],
-	  "inventory=komatiite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/komatiite"
       }}
     ]
   }

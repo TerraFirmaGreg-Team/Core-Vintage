@@ -71,10 +71,6 @@
         "textures": {
           "wall": "tfc:blocks/rock/raw/gabbro"
       }}, 
-      "breccia": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/breccia"
-      }}, 
       "shale": {
         "textures": {
           "wall": "tfc:blocks/rock/raw/shale"
@@ -103,18 +99,6 @@
         "textures": {
           "wall": "tfc:blocks/rock/raw/chalk"
       }}, 
-      "mudstone": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/mudstone"
-      }}, 
-      "psammolite": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/psammolite"
-      }}, 
-      "siltstone": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/siltstone"
-      }}, 
       "rhyolite": {
         "textures": {
           "wall": "tfc:blocks/rock/raw/rhyolite"
@@ -130,14 +114,6 @@
       "dacite": {
         "textures": {
           "wall": "tfc:blocks/rock/raw/dacite"
-      }}, 
-      "porphyry": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/porphyry"
-      }}, 
-      "peridotite": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/peridotite"
       }}, 
       "quartzite": {
         "textures": {
@@ -162,30 +138,6 @@
       "marble": {
         "textures": {
           "wall": "tfc:blocks/rock/raw/marble"
-      }}, 
-      "catlinite": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/catlinite"
-      }}, 
-      "blueschist": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/blueschist"
-      }}, 
-      "greenschist": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/greenschist"
-      }}, 
-      "novaculite": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/novaculite"
-      }}, 
-      "steatite": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/steatite"
-      }}, 
-      "komatiite": {
-        "textures": {
-          "wall": "tfc:blocks/rock/raw/komatiite"
       }}
     },
 	  "inventory=granite": [{
@@ -204,12 +156,6 @@
       "model": "wall_inventory",
       "textures": {
         "wall": "tfc:blocks/rock/raw/gabbro"
-      }}
-    ],
-	  "inventory=breccia": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/breccia"
       }}
     ],
 	  "inventory=shale": [{
@@ -254,24 +200,6 @@
         "wall": "tfc:blocks/rock/raw/chalk"
       }}
     ],
-	  "inventory=mudstone": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/mudstone"
-      }}
-    ],
-	  "inventory=psammolite": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/psammolite"
-      }}
-    ],
-	  "inventory=siltstone": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/siltstone"
-      }}
-    ],
 	  "inventory=rhyolite": [{
       "model": "wall_inventory",
       "textures": {
@@ -294,18 +222,6 @@
       "model": "wall_inventory",
       "textures": {
         "wall": "tfc:blocks/rock/raw/dacite"
-      }}
-    ],
-	  "inventory=porphyry": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/porphyry"
-      }}
-    ],
-	  "inventory=peridotite": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/peridotite"
       }}
     ],
 	  "inventory=quartzite": [{
@@ -342,42 +258,6 @@
       "model": "wall_inventory",
       "textures": {
         "wall": "tfc:blocks/rock/raw/marble"
-      }}
-    ],
-	  "inventory=catlinite": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/catlinite"
-      }}
-    ],
-	  "inventory=blueschist": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/blueschist"
-      }}
-    ],
-	  "inventory=greenschist": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/greenschist"
-      }}
-    ],
-	  "inventory=novaculite": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/novaculite"
-      }}
-    ],
-	  "inventory=steatite": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/steatite"
-      }}
-    ],
-	  "inventory=komatiite": [{
-      "model": "wall_inventory",
-      "textures": {
-        "wall": "tfc:blocks/rock/raw/komatiite"
       }}
     ]
   }

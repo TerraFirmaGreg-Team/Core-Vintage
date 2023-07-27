@@ -5,13 +5,13 @@
     "model": "tfc:farmland"
   },
   "variants": {
-    "soiltype": {<%for (i=0; i < types.size; i++) { %>
-      "${types[i]}": {
+    "soiltype": {<%for (i=0; i < soil_types.size; i++) { %>
+      "${soil_types[i]}": {
           "textures": {
-            "dirt": "tfc:blocks/soil/dirt/${types[i]}",
-            "particle": "tfc:blocks/soil/dirt/${types[i]}",
-            "top": "tfc:blocks/soil/farmland/${types[i]}"
-      }}<% if(i < types.size - 1) { %>, <%}} %>
+            "dirt": "tfc:blocks/soil/dirt/${soil_types[i]}",
+            "particle": "tfc:blocks/soil/dirt/${soil_types[i]}",
+            "top": "tfc:blocks/soil/farmland/${soil_types[i]}"
+      }}<% if(i < soil_types.size - 1) { %>, <%}} %>
     }
   }
 }

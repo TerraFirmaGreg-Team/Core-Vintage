@@ -18,10 +18,6 @@
           "textures": {
             "all": "tfc:blocks/rock/raw/gabbro"
       }}, 
-      "breccia": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/breccia"
-      }}, 
       "shale": {
           "textures": {
             "all": "tfc:blocks/rock/raw/shale"
@@ -50,18 +46,6 @@
           "textures": {
             "all": "tfc:blocks/rock/raw/chalk"
       }}, 
-      "mudstone": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/mudstone"
-      }}, 
-      "psammolite": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/psammolite"
-      }}, 
-      "siltstone": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/siltstone"
-      }}, 
       "rhyolite": {
           "textures": {
             "all": "tfc:blocks/rock/raw/rhyolite"
@@ -77,14 +61,6 @@
       "dacite": {
           "textures": {
             "all": "tfc:blocks/rock/raw/dacite"
-      }}, 
-      "porphyry": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/porphyry"
-      }}, 
-      "peridotite": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/peridotite"
       }}, 
       "quartzite": {
           "textures": {
@@ -109,30 +85,6 @@
       "marble": {
           "textures": {
             "all": "tfc:blocks/rock/raw/marble"
-      }}, 
-      "catlinite": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/catlinite"
-      }}, 
-      "blueschist": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/blueschist"
-      }}, 
-      "greenschist": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/greenschist"
-      }}, 
-      "novaculite": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/novaculite"
-      }}, 
-      "steatite": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/steatite"
-      }}, 
-      "komatiite": {
-          "textures": {
-            "all": "tfc:blocks/rock/raw/komatiite"
       }}
     }
   }

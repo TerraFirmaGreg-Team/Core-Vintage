@@ -58,16 +58,16 @@
 			},
 			"false": {}
 		},
-		"stonetype": {<%for (i=0; i < types.size; i++) { %>
-      "${types[i]}": {
+		"stonetype": {<%for (i=0; i < rock_type.size; i++) { %>
+      "${rock_type[i]}": {
         "textures": {
-          "wall": "tfc:blocks/rock/$texture_variant/${types[i]}"
-      }}<% if(i < types.size - 1) { %>, <%}} %>
-    }<%for (i=0; i < types.size; i++) { %>,
-	  "inventory=${types[i]}": [{
+          "wall": "tfc:blocks/rock/$rock_variant/${rock_type[i]}"
+      }}<% if(i < rock_type.size - 1) { %>, <%}} %>
+    }<%for (i=0; i < rock_type.size; i++) { %>,
+	  "inventory=${rock_type[i]}": [{
       "model": "wall_inventory",
       "textures": {
-        "wall": "tfc:blocks/rock/$texture_variant/${types[i]}"
+        "wall": "tfc:blocks/rock/$rock_variant/${rock_type[i]}"
       }}
     ]<%} %>
   }

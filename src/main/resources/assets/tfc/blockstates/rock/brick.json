@@ -18,10 +18,6 @@
           "textures": {
             "all": "tfc:blocks/rock/brick/gabbro"
       }}, 
-      "breccia": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/breccia"
-      }}, 
       "shale": {
           "textures": {
             "all": "tfc:blocks/rock/brick/shale"
@@ -50,18 +46,6 @@
           "textures": {
             "all": "tfc:blocks/rock/brick/chalk"
       }}, 
-      "mudstone": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/mudstone"
-      }}, 
-      "psammolite": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/psammolite"
-      }}, 
-      "siltstone": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/siltstone"
-      }}, 
       "rhyolite": {
           "textures": {
             "all": "tfc:blocks/rock/brick/rhyolite"
@@ -77,14 +61,6 @@
       "dacite": {
           "textures": {
             "all": "tfc:blocks/rock/brick/dacite"
-      }}, 
-      "porphyry": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/porphyry"
-      }}, 
-      "peridotite": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/peridotite"
       }}, 
       "quartzite": {
           "textures": {
@@ -109,30 +85,6 @@
       "marble": {
           "textures": {
             "all": "tfc:blocks/rock/brick/marble"
-      }}, 
-      "catlinite": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/catlinite"
-      }}, 
-      "blueschist": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/blueschist"
-      }}, 
-      "greenschist": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/greenschist"
-      }}, 
-      "novaculite": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/novaculite"
-      }}, 
-      "steatite": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/steatite"
-      }}, 
-      "komatiite": {
-          "textures": {
-            "all": "tfc:blocks/rock/brick/komatiite"
       }}
     }
   }

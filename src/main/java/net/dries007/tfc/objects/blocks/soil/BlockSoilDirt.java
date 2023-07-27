@@ -12,9 +12,8 @@ import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.ISoilTypeBlock;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
@@ -30,60 +29,59 @@ import javax.annotation.Nonnull;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
 
-public class BlockSoilDirt extends Block implements ISoilTypeBlock {
+public class BlockSoilDirt extends BlockDirt implements ISoilTypeBlock {
 
-    private final SoilVariant soilVariant;
-    private final SoilType soilType;
-    private final ResourceLocation modelLocation;
+	private final SoilVariant soilVariant;
+	private final SoilType soilType;
+	private final ResourceLocation modelLocation;
 
-    public BlockSoilDirt(SoilVariant soilVariant, SoilType soilType) {
-        super(Material.GROUND);
+	public BlockSoilDirt(SoilVariant soilVariant, SoilType soilType) {
 
-        if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
-            throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
-
-
-        this.soilVariant = soilVariant;
-        this.soilType = soilType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant);
-
-        String blockRegistryName = String.format("%s/%s/%s", "soil", soilVariant, soilType);
-
-        this.setCreativeTab(CreativeTabsTFC.EARTH);
-        this.setSoundType(SoundType.STONE);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-    }
-
-    @Override
-    public SoilVariant getSoilVariant() {
-        return soilVariant;
-    }
-
-    @Override
-    public SoilType getSoilType() {
-        return soilType;
-    }
-
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlock(this);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, "soiltype=" + soilType.getName());
-            }
-        });
+		if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
 
 
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(modelLocation, "soiltype=" + soilType.getName()));
-    }
+		this.soilVariant = soilVariant;
+		this.soilType = soilType;
+		this.modelLocation = new ResourceLocation(MOD_ID, "soil/dirt"); // + soilVariant
+
+		String blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
+
+		this.setCreativeTab(CreativeTabsTFC.EARTH);
+		this.setSoundType(SoundType.STONE);
+		this.setRegistryName(MOD_ID, blockRegistryName);
+		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+	}
+
+	@Override
+	public SoilVariant getSoilVariant() {
+		return soilVariant;
+	}
+
+	@Override
+	public SoilType getSoilType() {
+		return soilType;
+	}
+
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlock(this);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation, "soiltype=" + soilType.getName());
+			}
+		});
+
+
+		ModelLoader.setCustomModelResourceLocation(
+				Item.getItemFromBlock(this),
+				this.getMetaFromState(this.getBlockState().getBaseState()),
+				new ModelResourceLocation(modelLocation, "soiltype=" + soilType.getName()));
+	}
 }

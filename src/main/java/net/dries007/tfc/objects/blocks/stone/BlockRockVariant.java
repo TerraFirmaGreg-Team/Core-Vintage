@@ -13,7 +13,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
@@ -97,10 +96,6 @@ public class BlockRockVariant extends Block implements IItemSize {
 				setHardness(rock.getRockCategory().getHardness() * 0.2F);
 				setHarvestLevel("shovel", 0);
 				break;
-		}
-		if (type != Rock.Type.SPIKE && type != Rock.Type.ANVIL) //since spikes and anvils don't generate ItemBlocks
-		{
-			OreDictionaryHelper.registerRockType(this, type);
 		}
 	}
 

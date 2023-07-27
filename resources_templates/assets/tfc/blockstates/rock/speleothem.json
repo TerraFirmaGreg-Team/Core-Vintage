@@ -17,11 +17,11 @@
         "model": "tfc:speleothem_big"
       }
     },
-    "stonetype": {<%for (i=0; i < types.size; i++) { %>
-      "${types[i]}": {
+    "stonetype": {<%for (i=0; i < rock_type.size; i++) { %>
+      "${rock_type[i]}": {
         "textures": {
-          "all": "tfc:blocks/rock/$texture_variant/${types[i]}"
-        }}<% if(i < types.size - 1) { %>, <%}
+          "all": "tfc:blocks/rock/raw/${rock_type[i]}"
+        }}<% if(i < rock_type.size - 1) { %>, <%}
       } %>
     }
   }

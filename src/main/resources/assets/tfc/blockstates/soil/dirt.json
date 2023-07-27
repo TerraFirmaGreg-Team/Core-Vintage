@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfc:cube_all"
+    "model": "cube_all"
   },
   "variants": {
     "soiltype": {

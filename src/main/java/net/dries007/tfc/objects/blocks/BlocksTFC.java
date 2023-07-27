@@ -15,7 +15,6 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.soil.SoilType;
@@ -106,13 +105,11 @@ public final class BlocksTFC {
 	public static final BlockPowderKeg POWDERKEG = getNull();
 	public static final BlockGravel AGGREGATE = getNull();
 	public static final Block FIRE_BRICKS = getNull();
-
 	// All these are for use in model registration. Do not use for block lookups.
 	// Use the static get methods in the classes instead.
 	private static ImmutableList<ItemBlock> allNormalItemBlocks;
 	private static ImmutableList<ItemBlock> allInventoryItemBlocks;
 	private static ImmutableList<ItemBlockBarrel> allBarrelItemBlocks;
-
 	private static ImmutableList<BlockFluidBase> allFluidBlocks;
 	private static ImmutableList<BlockLogTFC> allLogBlocks;
 	private static ImmutableList<BlockLeavesTFC> allLeafBlocks;
@@ -135,12 +132,10 @@ public final class BlocksTFC {
 	private static ImmutableList<BlockLoom> allLoomBlocks;
 	private static ImmutableList<BlockSupport> allSupportBlocks;
 	private static ImmutableList<BlockFlowerPotTFC> allFlowerPots;
-
 	private static ImmutableList<BlockFruitTreeSapling> allFruitTreeSaplingBlocks;
 	private static ImmutableList<BlockFruitTreeTrunk> allFruitTreeTrunkBlocks;
 	private static ImmutableList<BlockFruitTreeBranch> allFruitTreeBranchBlocks;
 	private static ImmutableList<BlockFruitTreeLeaves> allFruitTreeLeavesBlocks;
-
 	private static ImmutableList<BlockBerryBush> allBerryBushBlocks;
 
 	public static ImmutableList<ItemBlock> getAllNormalItemBlocks() {
@@ -167,11 +162,9 @@ public final class BlocksTFC {
 		return allLeafBlocks;
 	}
 
-
 	public static ImmutableList<BlockFenceGateTFC> getAllFenceGateBlocks() {
 		return allFenceGateBlocks;
 	}
-
 
 	public static ImmutableList<BlockSaplingTFC> getAllSaplingBlocks() {
 		return allSaplingBlocks;
@@ -280,13 +273,11 @@ public final class BlocksTFC {
 		//=== Rock ===================================================================================================//
 
 		for (RockType rockType : RockType.values()) {
-			for (RockBlockType rockBlockType : RockBlockType.values()) {
-				for (RockVariant rockVariant : rockBlockType.getRockVariants()) {
-					Block block = (Block) rockBlockType.createBlock(rockVariant, rockType);
+			for (RockVariant rockVariant : RockVariant.values()) {
+				Block block = (Block) rockVariant.createBlock(rockType);
 
-					TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
-					r.register(block);
-				}
+				TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
+				r.register(block);
 			}
 		}
 		for (IRockTypeBlock stoneTypeBlock : BLOCK_ROCK_MAP.values()) {
@@ -294,6 +285,14 @@ public final class BlocksTFC {
 			if (itemBlock != null)
 				normalItemBlocks.add(itemBlock);
 		}
+
+
+//		for (RockVariant rockVariant : new RockVariant[] {RockVariant.RAW, RockVariant.SMOOTH, RockVariant.COBBLE, RockVariant.BRICK})
+//			for (RockType rockType : RockType.values()) {
+//				r.register(new BlockRockWall(rockVariant, rockType));
+//				r.register(new BlockRockStair(rockVariant, rockType));
+//				r.register(new BlockRockSlab.Half(rockVariant, rockType));
+//			}
 
 		//=== Soil ===================================================================================================//
 

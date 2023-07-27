@@ -21,11 +21,6 @@
             "all": "tfc:blocks/rock/cobble/gabbro",
             "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
       }}, 
-      "breccia": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/breccia",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
       "shale": {
           "textures": {
             "all": "tfc:blocks/rock/cobble/shale",
@@ -61,21 +56,6 @@
             "all": "tfc:blocks/rock/cobble/chalk",
             "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
       }}, 
-      "mudstone": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/mudstone",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "psammolite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/psammolite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "siltstone": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/siltstone",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
       "rhyolite": {
           "textures": {
             "all": "tfc:blocks/rock/cobble/rhyolite",
@@ -94,16 +74,6 @@
       "dacite": {
           "textures": {
             "all": "tfc:blocks/rock/cobble/dacite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "porphyry": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/porphyry",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "peridotite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/peridotite",
             "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
       }}, 
       "quartzite": {
@@ -134,36 +104,6 @@
       "marble": {
           "textures": {
             "all": "tfc:blocks/rock/cobble/marble",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "catlinite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/catlinite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "blueschist": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/blueschist",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "greenschist": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/greenschist",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "novaculite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/novaculite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "steatite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/steatite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "komatiite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/komatiite",
             "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
       }}
     }

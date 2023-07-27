@@ -12,13 +12,13 @@
         "model": "upper_slab"
       }
     },
-    "stonetype": {<%for (i=0; i < types.size; i++) { %>
-      "${types[i]}": {
+    "stonetype": {<%for (i=0; i < rock_type.size; i++) { %>
+      "${rock_type[i]}": {
           "textures": {
-            "bottom": "tfc:blocks/rock/$texture_variant/${types[i]}",
-            "top": "tfc:blocks/rock/$texture_variant/${types[i]}",
-            "side": "tfc:blocks/rock/$texture_variant/${types[i]}"
-          }}<% if(i < types.size - 1) { %>, <%}} %>
+            "bottom": "tfc:blocks/rock/$rock_variant/${rock_type[i]}",
+            "top": "tfc:blocks/rock/$rock_variant/${rock_type[i]}",
+            "side": "tfc:blocks/rock/$rock_variant/${rock_type[i]}"
+          }}<% if(i < rock_type.size - 1) { %>, <%}} %>
     }
   }
 }

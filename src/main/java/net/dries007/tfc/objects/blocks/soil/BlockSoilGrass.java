@@ -12,16 +12,22 @@ import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.ISoilTypeBlock;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.minecraft.block.BlockGlass;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,72 +37,103 @@ import javax.annotation.Nonnull;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
 
-public class BlockSoilGrass extends BlockGlass implements ISoilTypeBlock {
+public class BlockSoilGrass extends Block implements ISoilTypeBlock {
 
-    private final SoilVariant soilVariant;
-    private final SoilType soilType;
-    private final ResourceLocation modelLocation;
+	// Used for connected textures only.
+	public static final PropertyBool NORTH = PropertyBool.create("north");
+	public static final PropertyBool EAST = PropertyBool.create("east");
+	public static final PropertyBool SOUTH = PropertyBool.create("south");
+	public static final PropertyBool WEST = PropertyBool.create("west");
 
-    public BlockSoilGrass(SoilVariant soilVariant, SoilType soilType) {
-        super(Material.GROUND, false);
+	private final SoilVariant soilVariant;
+	private final SoilType soilType;
+	private final ResourceLocation modelLocation;
 
-        if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
-            throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
+	public BlockSoilGrass(SoilVariant soilVariant, SoilType soilType) {
+		super(Material.GROUND);
 
-
-        this.soilVariant = soilVariant;
-        this.soilType = soilType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant);
-
-        String blockRegistryName = String.format("%s/%s/%s", "soil", soilVariant, soilType);
-
-        this.setCreativeTab(CreativeTabsTFC.EARTH);
-        this.setSoundType(SoundType.STONE);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-    }
-
-    @Override
-    public SoilVariant getSoilVariant() {
-        return soilVariant;
-    }
-
-    @Override
-    public SoilType getSoilType() {
-        return soilType;
-    }
-
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlock(this);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation,
-                        "north=false,south=false,east=false,west=false," +
-                                "soiltype=" + soilType.getName());
-            }
-        });
+		if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
 
 
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(modelLocation,
-                        "north=false,south=false,east=false,west=false," +
-                                "soiltype=" + soilType.getName()));
-    }
+		this.soilVariant = soilVariant;
+		this.soilType = soilType;
+		this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant);
 
-    @Nonnull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer()
-    {
-        return BlockRenderLayer.CUTOUT;
-    }
+		String blockRegistryName = String.format("%s/%s/%s", "soil", soilVariant, soilType);
+
+		this.setCreativeTab(CreativeTabsTFC.EARTH);
+		this.setSoundType(SoundType.STONE);
+		this.setRegistryName(MOD_ID, blockRegistryName);
+		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+	}
+
+	@Override
+	public SoilVariant getSoilVariant() {
+		return soilVariant;
+	}
+
+	@Override
+	public SoilType getSoilType() {
+		return soilType;
+	}
+
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlock(this);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return 0;
+	}
+
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+		pos = pos.add(0, -1, 0);
+		return state.withProperty(NORTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+				.withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+				.withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+				.withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] {NORTH, EAST, WEST, SOUTH});
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation,
+						"north=" + state.getValue(NORTH) + "," +
+								"east=" + state.getValue(EAST) + "," +
+								"west=" + state.getValue(WEST) + "," +
+								"south=" + state.getValue(SOUTH) + "," +
+								"soiltype=" + soilType.getName());
+			}
+		});
+
+//		for (IBlockState state : this.getBlockState().getValidStates()) {
+//			ModelLoader.setCustomModelResourceLocation(
+//					Item.getItemFromBlock(this),
+//					this.getMetaFromState(state),
+//					new ModelResourceLocation(modelLocation,
+//							"north=false," +
+//									"south=false," +
+//									"east=false," +
+//									"west=false," +
+//									"soiltype=" + soilType.getName()));
+//		}
+	}
+
+	@Nonnull
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
 }

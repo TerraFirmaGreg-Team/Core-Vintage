@@ -2,13 +2,11 @@ package net.dries007.tfc.api.types2.rock;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.util.FallingBlockManager.Specification;
-import net.dries007.tfc.client.TFCSounds;
 import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nullable;
 
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification.COLLAPSABLE;
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
+import static net.dries007.tfc.api.util.FallingBlockManager.Specification.*;
 
 /**
  * Варианты блоков
@@ -29,11 +27,9 @@ public enum RockVariant implements IStringSerializable {
 
 	public static final RockVariant[] VALUES = RockVariant.values();
 
-	public static RockVariant valueOf(int i)
-	{
+	public static RockVariant valueOf(int i) {
 		return i >= 0 && i < VALUES.length ? VALUES[i] : RAW;
 	}
-
 
 
 	private final int harvestLevel;
@@ -58,19 +54,16 @@ public enum RockVariant implements IStringSerializable {
 		return hardnessBase;
 	}
 
-	public float getResistance()
-	{
+	public float getResistance() {
 		return resistance;
 	}
 
 	@Nullable
-	public Specification getFallingSpecification()
-	{
+	public Specification getFallingSpecification() {
 		return fallingSpecification;
 	}
 
-	public boolean canFall()
-	{
+	public boolean canFall() {
 		return fallingSpecification != null;
 	}
 

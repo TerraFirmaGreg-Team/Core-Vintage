@@ -205,9 +205,5 @@ public class TFGMaterialHandler {
         WeakSteel.addFlags(UNUSABLE);
         WeakRedSteel.addFlags(UNUSABLE);
         WeakBlueSteel.addFlags(UNUSABLE);
-
-        var prop = WeakSteel.getProperty(HEAT);
-
-        System.out.println(prop.getMeltTemp() + " " + prop.getSpecificHeat());
     }
 }

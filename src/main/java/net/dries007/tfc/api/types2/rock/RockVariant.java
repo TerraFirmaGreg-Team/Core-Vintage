@@ -7,8 +7,7 @@ import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nullable;
 
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification.COLLAPSABLE;
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
+import static net.dries007.tfc.api.util.FallingBlockManager.Specification.*;
 
 /**
  * Варианты блоков

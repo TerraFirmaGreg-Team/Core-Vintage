@@ -242,20 +242,13 @@ public final class TFCJEIPlugin implements IModPlugin
         registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), CASTING_UID);
         registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), CASTING_UID);
 
-        var unmoldList = new ArrayList<>();
-        var castingList = new ArrayList<>();
+        var unmoldList = new ArrayList<UnmoldRecipeWrapper>();
+        var castingList = new ArrayList<CastingRecipeWrapper>();
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
-            for (var orePrefix : OrePrefix.values()) {
-                var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
-
-                if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
-                    if (!material.hasFlag(TFGMaterialFlags.UNUSABLE)) {
-                        //castingList.add(new CastingRecipeWrapper(material, orePrefix));
-                    } else {
-                        //unmoldList.add(new UnmoldRecipeWrapper(material, orePrefix));
-                    }
-                }
+            if (material.hasProperty(TFGPropertyKey.HEAT)) {
+                unmoldList.add(new UnmoldRecipeWrapper(material, OrePrefix.ingot));
+                castingList.add(new CastingRecipeWrapper(material, OrePrefix.ingot));
             }
         }
 

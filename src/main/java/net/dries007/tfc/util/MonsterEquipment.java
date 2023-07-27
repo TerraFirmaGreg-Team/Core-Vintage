@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.util;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableMap;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.items.metal.ItemMetal;
+import net.dries007.tfc.objects.items.metal.ItemMetalArmor;
+import net.dries007.tfc.objects.items.metal.ItemMetalSword;
+import net.dries007.tfc.util.collections.WeightedCollection;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.init.Items;
@@ -19,11 +18,11 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.items.metal.ItemMetal;
-import net.dries007.tfc.objects.items.metal.ItemMetalArmor;
-import net.dries007.tfc.objects.items.metal.ItemMetalSword;
-import net.dries007.tfc.util.collections.WeightedCollection;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
 
 /**
  * Just a helper class to store which equipment we should give to some entities

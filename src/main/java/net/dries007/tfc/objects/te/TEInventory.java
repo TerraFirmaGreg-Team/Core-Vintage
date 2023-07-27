@@ -5,13 +5,8 @@
 
 package net.dries007.tfc.objects.te;
 
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
+import net.dries007.tfc.objects.inventory.capability.ItemStackHandlerCallback;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
@@ -23,8 +18,10 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
-import net.dries007.tfc.objects.inventory.capability.ItemStackHandlerCallback;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.BiFunction;
 
 /**
  * This is a helper class for TE's with a simple inventory that will respect automation

@@ -5,16 +5,15 @@
 
 package net.dries007.tfc.world.classic.worldgen;
 
-import java.util.Random;
-import java.util.function.ToIntFunction;
-
+import net.dries007.tfc.world.classic.ChunkGenTFC;
+import net.dries007.tfc.world.classic.WorldGenSettings;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.world.classic.WorldGenSettings;
+import java.util.Random;
+import java.util.function.ToIntFunction;
 
 public final class RarityBasedWorldGen implements IWorldGenerator
 {

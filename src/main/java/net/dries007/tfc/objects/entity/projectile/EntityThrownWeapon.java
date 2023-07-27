@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.objects.entity.projectile;
 
-import javax.annotation.Nonnull;
-
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -27,7 +26,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.common.registry.IThrowableEntity;
 
-import io.netty.buffer.ByteBuf;
+import javax.annotation.Nonnull;
 
 public class EntityThrownWeapon extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData
 {

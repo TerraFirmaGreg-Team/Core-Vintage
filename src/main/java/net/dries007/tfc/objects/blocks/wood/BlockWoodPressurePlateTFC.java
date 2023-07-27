@@ -5,16 +5,15 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BlockWoodPressurePlateTFC extends BlockPressurePlate
 {

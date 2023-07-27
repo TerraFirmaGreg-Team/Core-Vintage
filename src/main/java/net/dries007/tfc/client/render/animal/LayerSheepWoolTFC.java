@@ -5,8 +5,9 @@
 
 package net.dries007.tfc.client.render.animal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.client.model.animal.ModelSheepWoolTFC;
+import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.passive.EntitySheep;
@@ -14,9 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.client.model.animal.ModelSheepWoolTFC;
-import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault

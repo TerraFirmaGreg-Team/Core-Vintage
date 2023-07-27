@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
-import java.util.*;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.ImmutableList;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -33,10 +32,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.*;
 
 import static net.dries007.tfc.Constants.RNG;
 

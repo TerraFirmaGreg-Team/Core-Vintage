@@ -5,11 +5,6 @@
 
 package net.dries007.tfc.compat.jei.categories;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -19,8 +14,12 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.compat.jei.BaseRecipeCategory;
+import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.AlloyRecipeWrapper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class AlloyCategory extends BaseRecipeCategory<AlloyRecipeWrapper>

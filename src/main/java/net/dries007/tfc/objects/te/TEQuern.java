@@ -5,9 +5,10 @@
 
 package net.dries007.tfc.objects.te;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.recipes.quern.QuernRecipe;
+import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
@@ -19,10 +20,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.minecraft.init.SoundEvents.*;
 

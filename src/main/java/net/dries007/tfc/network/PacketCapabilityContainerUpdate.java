@@ -5,8 +5,11 @@
 
 package net.dries007.tfc.network;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import gnu.trove.map.TIntObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -17,11 +20,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.objects.container.CapabilityContainerListener;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * This is a packet which is sent to the client to sync capability data

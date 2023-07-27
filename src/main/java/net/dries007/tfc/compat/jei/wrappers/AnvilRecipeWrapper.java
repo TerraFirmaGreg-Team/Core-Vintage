@@ -5,19 +5,13 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
-import java.util.Collections;
-
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.client.gui.GuiAnvilTFC;
+import net.dries007.tfc.util.forge.ForgeRule;
+import net.dries007.tfc.util.forge.ForgeStep;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
-import net.minecraftforge.fml.client.config.GuiUtils;
-
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.client.gui.GuiAnvilTFC;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.forge.ForgeRule;
-import net.dries007.tfc.util.forge.ForgeStep;
 
 public class AnvilRecipeWrapper extends SimpleRecipeWrapper
 {
@@ -56,6 +50,7 @@ public class AnvilRecipeWrapper extends SimpleRecipeWrapper
             Gui.drawScaledCustomSizeModalRect(x, y, step.getU(), step.getV(), 32, 32, 16, 16, 256, 256);
         }
         //Draw tier requirement info
+        /*
         String text = I18n.format("tfc.enum.tier." + recipe.getTier().name().toLowerCase());
         float xPos = 20f - minecraft.fontRenderer.getStringWidth(text) / 2.0f;
         float yPos = 33f;
@@ -74,7 +69,7 @@ public class AnvilRecipeWrapper extends SimpleRecipeWrapper
                     GuiUtils.drawHoveringText(Collections.singletonList(I18n.format(Helpers.getEnumName(rule))), mouseX, mouseY, 154, 80, -1, minecraft.fontRenderer);
                 }
             }
-        }
+        }*/
 
     }
 }

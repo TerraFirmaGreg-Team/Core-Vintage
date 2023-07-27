@@ -39,9 +39,9 @@ import java.util.Random;
 
 import static gregtech.common.items.ToolItems.HARD_HAMMER;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.COBBLE;
-import static net.dries007.tfc.objects.blocks.rock.BlockRock.*;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 
 public class BlockRockWall extends BlockWall implements IRockTypeBlock {
 

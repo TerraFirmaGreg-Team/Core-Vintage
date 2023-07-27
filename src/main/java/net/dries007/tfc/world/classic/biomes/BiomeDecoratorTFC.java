@@ -5,9 +5,13 @@
 
 package net.dries007.tfc.world.classic.biomes;
 
-import java.util.Random;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
+import net.dries007.tfc.world.classic.worldgen.WorldGenSandTFC;
+import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -17,13 +21,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
-import net.dries007.tfc.world.classic.worldgen.WorldGenSandTFC;
-import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BiomeDecoratorTFC extends BiomeDecorator

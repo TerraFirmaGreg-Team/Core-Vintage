@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.objects.items;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.capability.size.IItemSize;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public abstract class ItemTFC extends Item implements IItemSize

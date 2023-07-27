@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "tfc:items/ceramics/fired/mold/ingot/empty",
+    "layer1": "tfc:items/ceramics/fired/mold/ingot/pattern"
+  }
+}

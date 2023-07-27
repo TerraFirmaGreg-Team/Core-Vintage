@@ -5,13 +5,15 @@
 
 package net.dries007.tfc.util;
 
-import java.util.*;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.google.common.base.Joiner;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.ore.OrePrefix;
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.objects.entity.EntitySeatOn;
+import net.dries007.tfc.objects.entity.animal.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCommandBlock;
 import net.minecraft.block.BlockStructure;
@@ -39,13 +41,14 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.objects.entity.EntitySeatOn;
-import net.dries007.tfc.objects.entity.animal.*;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static com.google.common.math.DoubleMath.mean;
+import static gregtech.api.GTValues.M;
 
 public final class Helpers
 {
@@ -80,6 +83,19 @@ public final class Helpers
         VANILLA_REPLACEMENTS.put(EntityPolarBear.class, EntityPolarBearTFC.class);
         VANILLA_REPLACEMENTS.put(EntityParrot.class, EntityParrotTFC.class);
         VANILLA_REPLACEMENTS.put(EntityLlama.class, EntityLlamaTFC.class);
+    }
+
+    public static int getOrePrefixMaterialAmount(OrePrefix orePrefix) {
+        var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
+        return extendedOrePrefix.getMatalAmount();
+    }
+
+    public static boolean isAtLeast(int value, int requiredInclusive) {
+        return value >= requiredInclusive;
+    }
+
+    public static boolean isAtMost(int value, int requiredInclusive) {
+        return value <= requiredInclusive;
     }
 
     public static boolean isJEIEnabled()

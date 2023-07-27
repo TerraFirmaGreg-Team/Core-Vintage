@@ -5,18 +5,17 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.Lists;
-import net.minecraft.item.ItemStack;
-
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.compat.jei.TFCJEIPlugin;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class BloomeryRecipeWrapper implements IRecipeWrapper

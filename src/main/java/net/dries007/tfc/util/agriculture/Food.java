@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.util.agriculture;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import static net.dries007.tfc.util.agriculture.Food.Category.*;
 

@@ -5,11 +5,11 @@
 
 package net.dries007.tfc.world.classic;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.chunk.ChunkPrimer;
+
+import javax.annotation.Nonnull;
 
 public class CustomChunkPrimer extends ChunkPrimer
 {

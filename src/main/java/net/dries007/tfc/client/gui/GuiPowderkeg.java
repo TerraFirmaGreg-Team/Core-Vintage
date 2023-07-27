@@ -5,10 +5,11 @@
 
 package net.dries007.tfc.client.gui;
 
-import java.io.IOException;
-import javax.annotation.Nonnull;
-
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.client.button.GuiButtonPowderkegSeal;
+import net.dries007.tfc.client.button.IButtonTooltip;
+import net.dries007.tfc.network.PacketGuiButton;
+import net.dries007.tfc.objects.te.TEPowderKeg;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -16,12 +17,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.lwjgl.opengl.GL11;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.button.GuiButtonPowderkegSeal;
-import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.network.PacketGuiButton;
-import net.dries007.tfc.objects.te.TEPowderKeg;
+import javax.annotation.Nonnull;
+import java.io.IOException;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

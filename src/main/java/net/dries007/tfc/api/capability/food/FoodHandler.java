@@ -5,11 +5,9 @@
 
 package net.dries007.tfc.api.capability.food;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.util.agriculture.Food;
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
@@ -17,9 +15,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.agriculture.Food;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompound>
 {

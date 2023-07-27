@@ -5,12 +5,10 @@
 
 package net.dries007.tfc.api.capability.size;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.DumbStorage;
+import net.dries007.tfc.api.capability.ItemStickCapability;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.block.BlockLadder;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -21,10 +19,11 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.DumbStorage;
-import net.dries007.tfc.api.capability.ItemStickCapability;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public final class CapabilityItemSize
 {

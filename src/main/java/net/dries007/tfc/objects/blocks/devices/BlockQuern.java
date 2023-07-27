@@ -5,11 +5,13 @@
 
 package net.dries007.tfc.objects.blocks.devices;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
+import net.dries007.tfc.objects.te.TEQuern;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -32,13 +34,10 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
-import net.dries007.tfc.objects.te.TEQuern;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 import static net.dries007.tfc.objects.te.TEQuern.SLOT_HANDSTONE;
 

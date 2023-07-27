@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.objects.potioneffects;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.entity.EntityLivingBase;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault

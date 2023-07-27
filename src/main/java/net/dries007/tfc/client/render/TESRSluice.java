@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.render;
 
-import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.objects.te.TESluice;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -23,9 +22,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
-import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.te.TESluice;
+import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class TESRSluice extends TileEntitySpecialRenderer<TESluice>

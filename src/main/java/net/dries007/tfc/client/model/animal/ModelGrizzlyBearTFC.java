@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityGrizzlyBearTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -17,8 +16,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityGrizzlyBearTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelGrizzlyBearTFC

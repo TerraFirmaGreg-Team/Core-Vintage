@@ -5,17 +5,6 @@
 
 package net.dries007.tfc.world.classic.genlayers;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.function.Function;
-import java.util.function.IntFunction;
-import javax.imageio.ImageIO;
-
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.RockCategory;
@@ -27,6 +16,16 @@ import net.dries007.tfc.world.classic.genlayers.datalayers.stability.GenLayerSta
 import net.dries007.tfc.world.classic.genlayers.river.GenLayerRiverInitTFC;
 import net.dries007.tfc.world.classic.genlayers.river.GenLayerRiverMixTFC;
 import net.dries007.tfc.world.classic.genlayers.river.GenLayerRiverTFC;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.function.Function;
+import java.util.function.IntFunction;
 
 public abstract class GenLayerTFC extends GenLayer
 {

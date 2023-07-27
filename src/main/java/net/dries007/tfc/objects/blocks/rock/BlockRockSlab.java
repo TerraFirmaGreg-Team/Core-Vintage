@@ -45,7 +45,8 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.SLAB;
 import static net.dries007.tfc.api.types2.rock.RockVariant.COBBLE;
-import static net.dries007.tfc.objects.blocks.rock.BlockRock.*;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 
 public abstract class BlockRockSlab extends BlockSlab implements IRockTypeBlock {
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);

@@ -5,9 +5,17 @@
 
 package net.dries007.tfc.objects.container;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import gregtech.common.items.ToolItems;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
+import net.dries007.tfc.api.capability.forge.IForgeable;
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.objects.te.TEAnvilTFC;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.forge.ForgeStep;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -18,16 +26,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.objects.te.TEAnvilTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.forge.ForgeStep;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.*;
@@ -105,12 +105,12 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
             return false;
 
         // A recipe must exist
-        AnvilRecipe recipe = TFCRegistries.ANVIL.getValue(cap.getRecipeName());
+        var recipe = TFCRegistries.ANVIL.getValue(cap.getRecipeName());
         if (recipe == null)
         {
             return false;
         }
-        if (!tile.getTier().isAtLeast(recipe.getTier()))
+        if (!Helpers.isAtLeast(tile.getTier(), recipe.getTier()))
         {
             TerraFirmaCraft.getLog().info("Anvil Tier: {} + Recipe Tier: {}", tile.getTier(), recipe.getTier());
             player.sendMessage(new TextComponentTranslation(MOD_ID + ".tooltip.anvil_tier_too_low"));
@@ -145,8 +145,7 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
         {
             // Fallback to the held item if it is a hammer
             stack = player.inventory.mainInventory.get(player.inventory.currentItem);
-            if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, "hammer"))
-            {
+            if (stack.getItem() == ToolItems.HARD_HAMMER.get()) {
                 stack.damageItem(1, player);
                 return true;
             }

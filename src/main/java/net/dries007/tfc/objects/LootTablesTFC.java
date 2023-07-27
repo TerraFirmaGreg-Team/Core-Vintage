@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects;
 
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.util.loot.ApplySimpleSkill;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.LootTableList;
@@ -12,9 +14,6 @@ import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.loot.ApplySimpleSkill;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

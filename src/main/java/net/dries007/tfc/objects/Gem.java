@@ -5,13 +5,13 @@
 
 package net.dries007.tfc.objects;
 
+import net.dries007.tfc.util.collections.WeightedCollection;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.dries007.tfc.util.collections.WeightedCollection;
 
 public enum Gem
 {

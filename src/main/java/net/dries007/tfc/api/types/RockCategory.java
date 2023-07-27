@@ -5,12 +5,12 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import javax.annotation.Nonnull;
+import java.util.function.Predicate;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

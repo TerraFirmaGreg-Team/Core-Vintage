@@ -5,11 +5,13 @@
 
 package net.dries007.tfc.objects.items.metal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -31,27 +33,24 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemMetalTool extends ItemMetal
 {
-    public final ToolMaterial material;
-    private final double attackDamage;
-    private final int areaOfEffect;
-    private final float attackSpeed;
+    public  ToolMaterial material;
+    private  double attackDamage;
+    private  int areaOfEffect;
+    private  float attackSpeed;
     private float efficiency;
     private boolean canDisableShield;
 
     public ItemMetalTool(Metal metal, Metal.ItemType type)
     {
+        super();
+        /*
         super(metal, type);
         if (metal.getToolMetal() == null)
             throw new IllegalArgumentException("You can't make tools out of non tool metals.");
@@ -203,7 +202,7 @@ public class ItemMetalTool extends ItemMetal
                 throw new IllegalArgumentException("Tool from non tool type.");
         }
 
-        attackDamage = typeDamage * material.getAttackDamage();
+        attackDamage = typeDamage * material.getAttackDamage();*/
     }
 
     @Override

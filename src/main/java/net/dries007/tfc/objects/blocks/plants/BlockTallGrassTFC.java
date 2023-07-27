@@ -5,12 +5,12 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.objects.blocks.property.ITallPlant;
+import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.PropertyEnum;
@@ -27,12 +27,11 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.property.ITallPlant;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, ITallPlant

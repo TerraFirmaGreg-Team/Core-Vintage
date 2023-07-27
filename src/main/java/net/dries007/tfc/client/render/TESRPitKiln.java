@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.objects.te.TEPitKiln;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -21,8 +22,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import net.dries007.tfc.objects.te.TEPitKiln;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

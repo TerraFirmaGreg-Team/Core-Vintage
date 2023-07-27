@@ -1,7 +1,6 @@
 package net.dries007.tfc.api.events;
 
 import net.dries007.tfc.objects.items.metal.ItemProspectorPick.ProspectResult.Type;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;

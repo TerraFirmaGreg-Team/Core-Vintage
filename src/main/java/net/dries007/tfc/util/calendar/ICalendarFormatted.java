@@ -5,11 +5,10 @@
 
 package net.dries007.tfc.util.calendar;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import javax.annotation.Nonnull;
 
 public interface ICalendarFormatted extends ICalendar
 {

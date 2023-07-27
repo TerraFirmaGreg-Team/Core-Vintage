@@ -12,7 +12,6 @@ import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.ISoilTypeBlock;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

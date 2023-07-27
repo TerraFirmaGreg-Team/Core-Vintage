@@ -5,10 +5,10 @@
 
 package net.dries007.tfc.api.capability.worldtracker;
 
-import java.util.*;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.client.TFCSounds;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,10 +21,12 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.Constants;
 
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.client.TFCSounds;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class WorldTracker implements ICapabilitySerializable<NBTTagCompound>
 {

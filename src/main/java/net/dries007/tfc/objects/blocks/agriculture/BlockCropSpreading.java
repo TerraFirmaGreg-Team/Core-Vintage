@@ -5,10 +5,9 @@
 
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import java.util.Random;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.ICrop;
+import net.dries007.tfc.objects.te.TECropSpreading;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -16,9 +15,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.objects.te.TECropSpreading;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 @Deprecated // For now, unused, needs design work
 @ParametersAreNonnullByDefault

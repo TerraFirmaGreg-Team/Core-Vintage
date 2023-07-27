@@ -5,6 +5,11 @@
 
 package net.dries007.tfc.network;
 
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.te.TEPlacedItem;
+import net.dries007.tfc.objects.te.TEPlacedItemFlat;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,12 +20,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.te.TEPlacedItem;
-import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.util.Helpers;
 
 /**
  * This packet is send when the client player presses the "Place Block Special" keybind. It has no special information

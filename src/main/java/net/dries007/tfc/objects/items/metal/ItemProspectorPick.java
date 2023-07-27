@@ -5,17 +5,14 @@
 
 package net.dries007.tfc.objects.items.metal;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.events.ProspectEvent;
+import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.network.PacketProspectResult;
-
+import net.dries007.tfc.util.skills.ProspectingSkill;
+import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -26,15 +23,15 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.skills.ProspectingSkill;
-import net.dries007.tfc.util.skills.SkillType;
-
 import net.minecraftforge.common.MinecraftForge;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class ItemProspectorPick extends ItemMetalTool

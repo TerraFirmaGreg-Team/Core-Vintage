@@ -5,17 +5,16 @@
 
 package net.dries007.tfc.world.classic.mapgen;
 
-import java.util.Random;
-
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.world.classic.DataLayer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.world.classic.DataLayer;
+import java.util.Random;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.AIR;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.LAVA;

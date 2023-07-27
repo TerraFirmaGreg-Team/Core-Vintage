@@ -5,21 +5,19 @@
 
 package net.dries007.tfc.objects.items.rock;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.dries007.tfc.api.types2.rock.RockType;
-import net.minecraft.item.ItemStack;
-
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types2.rock.RockCategory;
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class ItemBrickTFC extends ItemTFC implements IRockObject

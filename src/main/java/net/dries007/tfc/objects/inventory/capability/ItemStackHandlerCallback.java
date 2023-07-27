@@ -5,10 +5,10 @@
 
 package net.dries007.tfc.objects.inventory.capability;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nonnull;
 
 public class ItemStackHandlerCallback extends ItemStackHandler
 {

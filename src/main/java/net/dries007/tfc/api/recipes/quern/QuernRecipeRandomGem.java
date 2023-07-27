@@ -5,14 +5,13 @@
 
 package net.dries007.tfc.api.recipes.quern;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.item.ItemStack;
-
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemGem;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class QuernRecipeRandomGem extends QuernRecipe
 {

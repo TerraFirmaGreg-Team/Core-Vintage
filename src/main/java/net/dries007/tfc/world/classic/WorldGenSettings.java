@@ -6,7 +6,6 @@
 package net.dries007.tfc.world.classic;
 
 import com.google.common.base.Strings;
-
 import net.dries007.tfc.Constants;
 
 @SuppressWarnings("WeakerAccess")

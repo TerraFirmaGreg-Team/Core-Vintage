@@ -5,8 +5,12 @@
 
 package net.dries007.tfc.world.classic.worldgen.trees;
 
-import java.util.Random;
-
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -14,12 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 import static net.minecraft.block.BlockLeaves.DECAYABLE;

@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.api.capability.worldtracker;
 
+import net.dries007.tfc.api.capability.DumbStorage;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-
-import net.dries007.tfc.api.capability.DumbStorage;
-import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

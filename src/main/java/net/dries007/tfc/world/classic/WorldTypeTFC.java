@@ -5,8 +5,8 @@
 
 package net.dries007.tfc.world.classic;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.client.gui.GuiCustomizeWorld;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.server.MinecraftServer;
@@ -18,8 +18,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.client.gui.GuiCustomizeWorld;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * todo: spawn stuff, see worldevent.createspawn & worldProvider

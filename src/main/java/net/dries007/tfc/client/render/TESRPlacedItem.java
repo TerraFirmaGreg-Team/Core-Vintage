@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -17,8 +18,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import net.dries007.tfc.objects.te.TEPlacedItem;
 
 @SideOnly(Side.CLIENT)
 public class TESRPlacedItem extends TileEntitySpecialRenderer<TEPlacedItem>

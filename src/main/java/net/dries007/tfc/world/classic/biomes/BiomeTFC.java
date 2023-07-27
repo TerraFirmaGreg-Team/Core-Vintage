@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.world.classic.biomes;
 
-import java.awt.*;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
@@ -18,9 +18,8 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
+import javax.annotation.Nonnull;
+import java.awt.*;
 
 public class BiomeTFC extends Biome
 {

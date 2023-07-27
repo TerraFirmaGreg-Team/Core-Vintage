@@ -5,11 +5,11 @@
 
 package net.dries007.tfc.objects.container;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+
+import javax.annotation.Nullable;
 
 public class ContainerEmpty extends Container
 {

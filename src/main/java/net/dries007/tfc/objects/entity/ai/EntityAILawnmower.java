@@ -1,14 +1,12 @@
 package net.dries007.tfc.objects.entity.ai;
 
+import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 import net.minecraftforge.event.ForgeEventFactory;
-
-import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 
 public class EntityAILawnmower extends EntityAIBase
 {

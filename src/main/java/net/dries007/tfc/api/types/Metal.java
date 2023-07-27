@@ -5,10 +5,10 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.function.BiFunction;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockMetalLamp;
+import net.dries007.tfc.objects.items.metal.*;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -16,10 +16,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockMetalLamp;
-import net.dries007.tfc.objects.items.metal.*;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.function.BiFunction;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
@@ -174,9 +173,9 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal>
             return this == TIER_0 ? TIER_0 : VALUES[this.ordinal() - 1];
         }
 
-        public boolean isAtLeast(@Nonnull Tier requiredInclusive)
+        public boolean isAtLeast(int requiredInclusive)
         {
-            return this.ordinal() >= requiredInclusive.ordinal();
+            return this.ordinal() >= requiredInclusive;
         }
 
         public boolean isAtMost(@Nonnull Tier requiredInclusive)
@@ -192,11 +191,11 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal>
         SCRAP(false, 100),
         DUST(false, 100),
         NUGGET(false, 10),
-        SHEET(false, 200, ItemMetalSheet::new),
+        //SHEET(false, 200, ItemMetalSheet::new),
         DOUBLE_SHEET(false, 400),
         ROD(false, 50),
 
-        ANVIL(true, 1400, ItemAnvil::new),
+        //ANVIL(true, 1400, ItemAnvil::new),
         TUYERE(true, 400),
         LAMP(false, 100, (metal, itemType) -> new ItemBlockMetalLamp(metal)),
         TRAPDOOR(false, 200, (metal, itemType) -> new ItemBlock(BlockTrapDoorMetalTFC.get(metal))),
@@ -246,12 +245,12 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal>
             return type.supplier.apply(metal, type);
         }
 
-        private final boolean toolItem;
-        private final int armorSlot; //Which armor slot this armor should go, from 0 = Helmet to 4 = Boots
-        private final int smeltAmount;
-        private final boolean hasMold;
-        private final BiFunction<Metal, ItemType, Item> supplier;
-        private final String[] pattern;
+        private boolean toolItem;
+        private int armorSlot; //Which armor slot this armor should go, from 0 = Helmet to 4 = Boots
+        private int smeltAmount;
+        private boolean hasMold;
+        private BiFunction<Metal, ItemType, Item> supplier;
+        private String[] pattern;
 
         ItemType(boolean toolItem, int armorSlot, int smeltAmount, @Nonnull BiFunction<Metal, ItemType, Item> supplier, boolean hasMold, String... moldPattern)
         {
@@ -265,7 +264,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal>
 
         ItemType(boolean toolItem, int smeltAmount, boolean hasMold, String... moldPattern)
         {
-            this(toolItem, -1, smeltAmount, ItemMetal::new, hasMold, moldPattern);
+            //this(toolItem, -1, smeltAmount, ItemMetal::new, hasMold, moldPattern);
         }
 
         ItemType(boolean toolItem, int smeltAmount)

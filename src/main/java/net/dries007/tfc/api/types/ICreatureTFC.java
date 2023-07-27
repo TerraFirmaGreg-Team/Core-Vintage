@@ -5,14 +5,13 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiConsumer;
-
+import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.biome.Biome;
 
-import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
+import java.util.List;
+import java.util.Random;
+import java.util.function.BiConsumer;
 
 /**
  * Interface for creature spawning mechanics

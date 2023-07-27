@@ -5,9 +5,13 @@
 
 package net.dries007.tfc.client.gui.overlay;
 
-import java.awt.*;
-
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
+import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
+import net.dries007.tfc.api.capability.player.IPlayerData;
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
+import net.dries007.tfc.util.config.HealthDisplayFormat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -28,14 +32,9 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
-import net.dries007.tfc.util.config.HealthDisplayFormat;
+import java.awt.*;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

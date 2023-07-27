@@ -5,15 +5,16 @@
 
 package net.dries007.tfc.objects.blocks.metal;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import gregtech.api.unification.material.Material;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.objects.items.metal.ItemAnvil;
+import net.dries007.tfc.objects.te.TEAnvilTFC;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -35,15 +36,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.items.metal.ItemAnvil;
-import net.dries007.tfc.objects.te.TEAnvilTFC;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 import static net.dries007.tfc.Constants.RNG;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
@@ -53,28 +51,21 @@ import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 public class BlockAnvilTFC extends Block
 {
     public static final PropertyDirection AXIS = PropertyDirection.create("axis", EnumFacing.Plane.HORIZONTAL);
-    private static final Map<Metal, BlockAnvilTFC> MAP = new HashMap<>();
     private static final AxisAlignedBB AABB_Z = new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.6875, 1);
     private static final AxisAlignedBB AABB_X = new AxisAlignedBB(0, 0, 0.1875, 1, 0.6875, 0.8125);
 
-    public static BlockAnvilTFC get(Metal metal)
-    {
-        return MAP.get(metal);
+    private static final Map<Material, BlockAnvilTFC> ANVIL_STORAGE_MAP = new HashMap<>();
+    public static BlockAnvilTFC get(Material material) {
+        return ANVIL_STORAGE_MAP.get(material);
     }
 
-    public static ItemStack get(Metal metal, int amount)
-    {
-        return new ItemStack(MAP.get(metal), amount);
-    }
+    private final Material material;
 
-    private final Metal metal;
+    public BlockAnvilTFC(Material material) {
+        super(net.minecraft.block.material.Material.IRON);
 
-    public BlockAnvilTFC(Metal metal)
-    {
-        super(Material.IRON);
-
-        this.metal = metal;
-        if (MAP.put(metal, this) != null) throw new IllegalStateException("There can only be one.");
+        this.material = material;
+        if (ANVIL_STORAGE_MAP.put(material, this) != null) throw new IllegalStateException("There can only be one.");
 
         setHardness(4.0F);
         setResistance(10F);
@@ -92,8 +83,7 @@ public class BlockAnvilTFC extends Block
 
     @Override
     @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(meta));
     }
 
@@ -126,24 +116,21 @@ public class BlockAnvilTFC extends Block
 
     @Override
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return state.getValue(AXIS).getAxis() == EnumFacing.Axis.X ? AABB_Z : AABB_X;
     }
 
     @SuppressWarnings("deprecation")
     @Override
     @Nonnull
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
-    {
+    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
         return getBoundingBox(state, worldIn, pos).offset(pos);
     }
 
@@ -155,51 +142,40 @@ public class BlockAnvilTFC extends Block
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TEAnvilTFC te = Helpers.getTE(worldIn, pos, TEAnvilTFC.class);
-        if (te != null)
-        {
+        if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
 
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        return ItemAnvil.get(metal, Metal.ItemType.ANVIL);
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return ItemAnvil.get(material);
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        if (hand == EnumHand.OFF_HAND) //Avoid issues with insertion/extraction
-        {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (hand == EnumHand.OFF_HAND) {
             return false;
         }
         TEAnvilTFC te = Helpers.getTE(worldIn, pos, TEAnvilTFC.class);
-        if (te == null)
-        {
+        if (te == null) {
             return false;
         }
         IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (cap == null)
-        {
+        if (cap == null) {
             return false;
         }
-        if (playerIn.isSneaking())
-        {
+        if (playerIn.isSneaking()) {
             ItemStack heldItem = playerIn.getHeldItem(hand);
             // Extract requires main hand empty
-            if (heldItem.isEmpty())
-            {
+            if (heldItem.isEmpty()) {
                 // Only check the input slots
-                for (int i = 0; i < 2; i++)
-                {
+                for (int i = 0; i < 2; i++) {
                     ItemStack stack = cap.getStackInSlot(i);
-                    if (!stack.isEmpty())
-                    {
+                    if (!stack.isEmpty()) {
                         // Give the item to player in the main hand
                         ItemStack result = cap.extractItem(i, 1, false);
                         playerIn.setHeldItem(hand, result);
@@ -208,10 +184,8 @@ public class BlockAnvilTFC extends Block
                 }
             }
             // Welding requires a hammer in main hand
-            else if (te.isItemValid(SLOT_HAMMER, heldItem))
-            {
-                if (!worldIn.isRemote && te.attemptWelding(playerIn))
-                {
+            else if (te.isItemValid(SLOT_HAMMER, heldItem)) {
+                if (!worldIn.isRemote && te.attemptWelding(playerIn)) {
                     // Valid welding occurred.
                     worldIn.playSound(null, pos, TFCSounds.ANVIL_IMPACT, SoundCategory.PLAYERS, 1.0f, 1.0f);
                     double x = pos.getX() + 0.5;
@@ -223,17 +197,14 @@ public class BlockAnvilTFC extends Block
                 }
             }
             //If main hand isn't empty and is not a hammer
-            else
-            {
+            else {
                 //Try inserting items
-                for (int i = 0; i < 4; i++)
-                {
+                for (int i = 0; i < 4; i++) {
                     // Check the input slots and flux. Do NOT check the hammer slot
                     if (i == SLOT_HAMMER) continue;
                     // Try to insert an item
                     // Hammers will not be inserted since we already checked if heldItem is a hammer for attemptWelding
-                    if (te.isItemValid(i, heldItem) && te.getSlotLimit(i) > cap.getStackInSlot(i).getCount())
-                    {
+                    if (te.isItemValid(i, heldItem) && te.getSlotLimit(i) > cap.getStackInSlot(i).getCount()) {
                         ItemStack result = cap.insertItem(i, heldItem, false);
                         playerIn.setHeldItem(hand, result);
                         TerraFirmaCraft.getLog().info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
@@ -242,11 +213,9 @@ public class BlockAnvilTFC extends Block
                 }
             }
         }
-        else
-        {
+        else {
             // not sneaking, so try and open GUI
-            if (!worldIn.isRemote)
-            {
+            if (!worldIn.isRemote) {
                 TFCGuiHandler.openGui(worldIn, pos, playerIn, TFCGuiHandler.Type.ANVIL);
             }
             return true;
@@ -287,13 +256,12 @@ public class BlockAnvilTFC extends Block
     }
 
     @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
-        return new ItemStack(ItemAnvil.get(metal, Metal.ItemType.ANVIL));
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(ItemAnvil.get(material));
     }
 
-    public Metal getMetal()
+    public Material getMetal()
     {
-        return metal;
+        return material;
     }
 }

@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.util;
 
-import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.minecraft.item.ItemBlock;
 
 public interface IRockTypeBlock extends IHasModel {

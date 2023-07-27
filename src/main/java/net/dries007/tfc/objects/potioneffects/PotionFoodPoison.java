@@ -5,11 +5,10 @@
 
 package net.dries007.tfc.objects.potioneffects;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.util.DamageSourcesTFC;
 import net.minecraft.entity.EntityLivingBase;
 
-import net.dries007.tfc.util.DamageSourcesTFC;
+import javax.annotation.Nonnull;
 
 public class PotionFoodPoison extends PotionTFC
 {

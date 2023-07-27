@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.client.button;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.client.TFCGuiHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-import net.dries007.tfc.client.TFCGuiHandler;
+import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 

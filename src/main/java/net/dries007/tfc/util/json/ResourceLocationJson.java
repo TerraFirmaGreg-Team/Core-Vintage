@@ -5,10 +5,10 @@
 
 package net.dries007.tfc.util.json;
 
-import java.lang.reflect.Type;
-
 import com.google.gson.*;
 import net.minecraft.util.ResourceLocation;
+
+import java.lang.reflect.Type;
 
 public final class ResourceLocationJson implements JsonDeserializer<ResourceLocation>, JsonSerializer<ResourceLocation>
 {

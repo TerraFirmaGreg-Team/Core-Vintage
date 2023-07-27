@@ -5,19 +5,18 @@
 
 package net.dries007.tfc.api.recipes.heat;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.compat.jei.util.IJEISimpleRecipe;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Generic recipe for items that heat up and transform
@@ -34,12 +33,11 @@ public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> im
     @Nullable
     public static HeatRecipe get(ItemStack stack)
     {
-        return get(stack, Metal.Tier.TIER_VI);
+        return get(stack, 6);
     }
 
     @Nullable
-    public static HeatRecipe get(ItemStack stack, Metal.Tier tier)
-    {
+    public static HeatRecipe get(ItemStack stack, int tier) {
         return TFCRegistries.HEAT.getValuesCollection().stream().filter(r -> r.isValidInput(stack, tier)).findFirst().orElse(null);
     }
 
@@ -50,19 +48,19 @@ public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> im
      */
     public static HeatRecipeSimple destroy(IIngredient<ItemStack> ingredient, float destroyTemperature)
     {
-        return new HeatRecipeSimple(ingredient, ItemStack.EMPTY, destroyTemperature, 0f, Metal.Tier.TIER_0);
+        return new HeatRecipeSimple(ingredient, ItemStack.EMPTY, destroyTemperature, 0f, 0);
     }
 
     protected final IIngredient<ItemStack> ingredient;
     private final float transformTemp;
-    private final Metal.Tier minTier;
+    private final int minTier;
 
     protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp)
     {
-        this(ingredient, transformTemp, Metal.Tier.TIER_0);
+        this(ingredient, transformTemp, 0);
     }
 
-    protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp, Metal.Tier minTier)
+    protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp, int minTier)
     {
         this.ingredient = ingredient;
         this.transformTemp = transformTemp;
@@ -78,9 +76,8 @@ public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> im
      * @param tier  the tier of the device doing the heating
      * @return true if the recipe matches the input and tier
      */
-    public boolean isValidInput(ItemStack input, Metal.Tier tier)
-    {
-        return tier.isAtLeast(minTier) && ingredient.test(input);
+    public boolean isValidInput(ItemStack input, int tier) {
+        return Helpers.isAtLeast(tier, minTier) && ingredient.test(input);
     }
 
     /**

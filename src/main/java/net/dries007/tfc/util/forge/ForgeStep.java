@@ -5,10 +5,10 @@
 
 package net.dries007.tfc.util.forge;
 
-import javax.annotation.Nullable;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public enum ForgeStep
 {

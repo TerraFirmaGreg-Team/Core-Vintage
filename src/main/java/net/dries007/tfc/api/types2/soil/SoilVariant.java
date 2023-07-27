@@ -1,12 +1,9 @@
 package net.dries007.tfc.api.types2.soil;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.api.util.ISoilTypeBlock;
-import net.dries007.tfc.objects.blocks.soil.BlockSoil;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilDirt;
-import net.dries007.tfc.objects.blocks.soil.BlockSoilFallable;
 import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nullable;

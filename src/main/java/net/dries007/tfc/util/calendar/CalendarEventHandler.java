@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.util.calendar;
 
-import java.util.List;
-import java.util.Objects;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -21,9 +21,8 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
+import java.util.List;
+import java.util.Objects;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.minecraftforge.fml.common.gameevent.TickEvent.Phase;

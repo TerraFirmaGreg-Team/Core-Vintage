@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.objects.inventory.ingredient;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
 
 public class IngredientOreDict implements IIngredient<ItemStack>
 {

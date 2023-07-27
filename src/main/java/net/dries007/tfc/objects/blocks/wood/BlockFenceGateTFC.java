@@ -5,15 +5,14 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.init.Blocks;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BlockFenceGateTFC extends BlockFenceGate
 {

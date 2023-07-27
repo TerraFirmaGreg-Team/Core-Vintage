@@ -5,16 +5,15 @@
 
 package net.dries007.tfc.util.fuel;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-
-import net.minecraft.item.ItemStack;
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class FuelManager
 {

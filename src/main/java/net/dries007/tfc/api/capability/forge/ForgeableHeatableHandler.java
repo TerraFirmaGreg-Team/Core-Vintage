@@ -5,17 +5,16 @@
 
 package net.dries007.tfc.api.capability.forge;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.util.forge.ForgeStep;
+import net.dries007.tfc.util.forge.ForgeSteps;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.util.forge.ForgeStep;
-import net.dries007.tfc.util.forge.ForgeSteps;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ForgeableHeatableHandler extends ItemHeatHandler implements IForgeableHeatable
 {

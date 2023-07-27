@@ -5,20 +5,20 @@
 
 package net.dries007.tfc.api.capability.forge;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import gregtech.api.GregTechAPI;
+import gregtech.api.unification.material.Material;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Extension of forgeable heatable handler for blooms
@@ -26,22 +26,29 @@ import net.dries007.tfc.api.types.Metal;
 public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler implements IForgeableMeasurableMetal
 {
     private int metalAmount;
-    private Metal metal;
+    private Material material;
 
-    public ForgeableMeasurableMetalHandler(Metal metal, int metalAmount)
-    {
+    public ForgeableMeasurableMetalHandler(Material material, int metalAmount) {
         this.metalAmount = metalAmount;
-        this.metal = metal;
-        this.heatCapacity = metal.getSpecificHeat();
-        this.meltTemp = metal.getMeltTemp();
+        this.material = material;
+
+        var property = material.getProperty(TFGPropertyKey.HEAT);
+        if (property == null) throw new RuntimeException(String.format("No heat property for material: %s", material));
+
+        this.heatCapacity = property.getSpecificHeat();
+        this.meltTemp = property.getMeltTemp();
+
     }
 
-    public ForgeableMeasurableMetalHandler(@Nonnull NBTTagCompound nbt)
-    {
+    public ForgeableMeasurableMetalHandler(@Nonnull NBTTagCompound nbt) {
+        var property = TFGMaterials.Unknown.getProperty(TFGPropertyKey.HEAT);
+
+        if (property == null) throw new RuntimeException(String.format("No heat property for material: %s", material));
+
         this.metalAmount = 0;
-        this.metal = Metal.UNKNOWN;
-        this.heatCapacity = Metal.UNKNOWN.getSpecificHeat();
-        this.meltTemp = Metal.UNKNOWN.getMeltTemp();
+        this.material = TFGMaterials.Unknown;
+        this.heatCapacity = property.getSpecificHeat();
+        this.meltTemp = property.getMeltTemp();
         deserializeNBT(nbt);
     }
 
@@ -55,49 +62,48 @@ public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler im
         this.metalAmount = metalAmount;
     }
 
-    public Metal getMetal()
+    public Material getMaterial()
     {
-        return metal;
+        return material;
     }
 
-    public void setMetal(Metal metal)
+    public void setMaterial(Material material)
     {
-        this.metal = metal;
+        this.material = material;
     }
 
     @Override
     @Nonnull
-    public NBTTagCompound serializeNBT()
-    {
-        NBTTagCompound nbt = super.serializeNBT();
+    public NBTTagCompound serializeNBT() {
+        var nbt = super.serializeNBT();
         nbt.setInteger("metalAmount", metalAmount);
-        //noinspection ConstantConditions
-        nbt.setString("metal", metal.getRegistryName().toString());
+        nbt.setString("metal", material.getName());
         return nbt;
     }
 
     @Override
-    public void deserializeNBT(@Nullable NBTTagCompound nbt)
-    {
-        if (nbt != null)
-        {
+    public void deserializeNBT(@Nullable NBTTagCompound nbt) {
+        if (nbt != null) {
             metalAmount = nbt.getInteger("metalAmount");
-            ResourceLocation location = new ResourceLocation(nbt.getString("metal"));
-            metal = TFCRegistries.METALS.getValue(location);
-            if (metal == null)
-            {
-                metal = Metal.UNKNOWN;
+            var materialName = nbt.getString("metal");
+            material = GregTechAPI.materialManager.getMaterial(materialName);
+            if (material == null) {
+                material = TFGMaterials.Unknown;
             }
-            this.meltTemp = metal.getMeltTemp();
-            this.heatCapacity = metal.getSpecificHeat();
+
+            var property = material.getProperty(TFGPropertyKey.HEAT);
+
+            if (property == null) throw new RuntimeException(String.format("No heat property for material: %s", material));
+
+            this.meltTemp = property.getMeltTemp();
+            this.heatCapacity = property.getSpecificHeat();
         }
         super.deserializeNBT(nbt);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text)
-    {
+    public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
         String desc = TextFormatting.WHITE + I18n.format("tfc.tooltip.units", metalAmount);
         text.add(desc);
         super.addHeatInfo(stack, text);

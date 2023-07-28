@@ -20,7 +20,7 @@ public class TFGMaterialFlags {
     /**
      * Идентифицирует материалы, из которых можно отлить оголовье того или иного тула.
      * */
-    public static final MaterialFlag TOOL_ITEM_CAN_BE_UNMOLDED = new MaterialFlag.Builder("tool_item_can_be_unmolded")
+    public static final MaterialFlag TOOL_MATERIAL_CAN_BE_UNMOLDED = new MaterialFlag.Builder("tool_item_can_be_unmolded")
             .requireProps(TFGPropertyKey.HEAT)
             .build();
 }

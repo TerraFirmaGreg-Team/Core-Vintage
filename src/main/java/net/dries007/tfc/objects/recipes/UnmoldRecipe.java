@@ -46,7 +46,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
     private final Material inputMaterial;
     private final float chanceToBreakMold;
 
-    public UnmoldRecipe(ResourceLocation group, ItemStack inputMold, Material inputMaterial, float chanceToBreakMold) {
+    public UnmoldRecipe(ItemStack inputMold, Material inputMaterial, float chanceToBreakMold) {
         super();
 
         this.inputMold = inputMold;
@@ -134,8 +134,6 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
         return ForgeHooks.defaultRecipeGetRemainingItems(inv);
     }
 
-
-
     @Override
     public boolean isDynamic() {
         return true;
@@ -153,63 +151,6 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
         }
         else {
             return ItemStack.EMPTY;
-        }
-    }
-/*
-    public ItemStack getOutputItem(final IMoldHandler moldHandler) {
-        var materialInMold = moldHandler.getMaterial();
-
-
-        if (materialInMold != null) {
-            if (inputMaterial == materialInMold) {
-                var output = OreDictUnifier.get(outputOrePrefix, inputMaterial);
-                var heat = output.getCapability(ITEM_HEAT_CAPABILITY, null);
-
-                if (heat != null) {
-                    heat.setTemperature(moldHandler.getTemperature());
-                }
-
-                return output;
-            }
-            return ItemStack.EMPTY;
-        }
-        return ItemStack.EMPTY;
-    }*/
-
-    @SuppressWarnings("unused")
-    public static class Factory implements IRecipeFactory {
-        @Override
-        public IRecipe parse(final JsonContext context, final JsonObject json) {
-            final var inputItemName = JsonUtils.getString(json, "inputItem");
-            final var inputItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(inputItemName));
-            if (inputItem == null) throw new RuntimeException(String.format("Item [%s] not found", inputItemName));
-
-            final var materialName = JsonUtils.getString(json, "inputMaterial");
-            final var inputMaterial = MaterialRegistryManager.getInstance().getMaterial(materialName);
-            if (inputMaterial == null) throw new RuntimeException(String.format("Material [%s] not found", materialName));
-
-            OrePrefix orePrefix;
-
-            if (inputItem instanceof ItemMold itemMold) {
-                orePrefix = itemMold.getOrePrefix();
-            }
-            else {
-                throw new RuntimeException(String.format("ItemInput is not ItemMold [%s]", inputItemName));
-            }
-
-            final var inputMold = new ItemStack(inputItem);
-
-            float chanceToBreakMold = 0;
-            if (JsonUtils.hasField(json, "chance")) {
-                chanceToBreakMold = JsonUtils.getFloat(json, "chance");
-            }
-
-            return new UnmoldRecipe(
-                    new ResourceLocation(TerraFirmaCraft.MOD_ID, "unmold_" + orePrefix + "_" + materialName),
-                    inputMold,
-                    inputMaterial,
-                    chanceToBreakMold
-            );
         }
     }
 }

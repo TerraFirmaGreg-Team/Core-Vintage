@@ -194,10 +194,10 @@ public class TFGMaterialHandler {
         RedSteel.addFlags(GENERATE_ANVIL);
         BlueSteel.addFlags(GENERATE_ANVIL);
 
-        Copper.addFlags(TOOL_ITEM_CAN_BE_UNMOLDED);
-        BismuthBronze.addFlags(TOOL_ITEM_CAN_BE_UNMOLDED);
-        Bronze.addFlags(TOOL_ITEM_CAN_BE_UNMOLDED);
-        BlackBronze.addFlags(TOOL_ITEM_CAN_BE_UNMOLDED);
+        Copper.addFlags(TOOL_MATERIAL_CAN_BE_UNMOLDED);
+        BismuthBronze.addFlags(TOOL_MATERIAL_CAN_BE_UNMOLDED);
+        Bronze.addFlags(TOOL_MATERIAL_CAN_BE_UNMOLDED);
+        BlackBronze.addFlags(TOOL_MATERIAL_CAN_BE_UNMOLDED);
 
         Unknown.addFlags(UNUSABLE);
         PigIron.addFlags(UNUSABLE);

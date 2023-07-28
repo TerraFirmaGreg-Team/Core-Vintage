@@ -51,6 +51,7 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.objects.recipes.UnmoldRecipe;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -87,8 +88,22 @@ public final class DefaultRecipes {
 	}
 
 	@SubscribeEvent
-	public static void test(RegistryEvent.Register<IRecipe> event) {
+	public static void onRegisterWorkbenchRecipes(RegistryEvent.Register<IRecipe> event) {
+		var registry = event.getRegistry();
 
+		for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
+			for (var orePrefix : OrePrefix.values()) {
+				var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
+				if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
+					if (material.hasFlag(TFGMaterialFlags.TOOL_MATERIAL_CAN_BE_UNMOLDED) || orePrefix == OrePrefix.ingot) {
+						registry.register(
+								new UnmoldRecipe(new ItemStack(ItemMold.get(orePrefix)), material, 1).setRegistryName(MOD_ID, "unmold_" + orePrefix.name + "_" + material.getName())
+						);
+					}
+
+				}
+			}
+		}
 	}
 
 	@SubscribeEvent

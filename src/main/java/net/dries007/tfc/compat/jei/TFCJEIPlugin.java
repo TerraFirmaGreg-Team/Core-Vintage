@@ -8,7 +8,6 @@ package net.dries007.tfc.compat.jei;
 import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.MetaFluids;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.ToolItems;
 import mezz.jei.api.IModPlugin;
@@ -25,7 +24,6 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
-import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.compat.jei.categories.*;
@@ -249,7 +247,7 @@ public final class TFCJEIPlugin implements IModPlugin
             for (var orePrefix : OrePrefix.values()) {
                 var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
                 if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
-                    if (material.hasFlag(TFGMaterialFlags.TOOL_ITEM_CAN_BE_UNMOLDED) || orePrefix == OrePrefix.ingot) {
+                    if (material.hasFlag(TFGMaterialFlags.TOOL_MATERIAL_CAN_BE_UNMOLDED) || orePrefix == OrePrefix.ingot) {
                         unmoldList.add(new UnmoldRecipeWrapper(material, orePrefix));
                         castingList.add(new CastingRecipeWrapper(material, orePrefix));
                     }

@@ -36,52 +36,51 @@ import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 import static net.dries007.tfc.objects.blocks.rock.BlockRockVatiant.BLOCK_ROCK_MAP;
 
 public class BlockRockWall extends BlockWall implements IRockTypeBlock {
-	private final RockVariant rockVariant;
-	private final RockType rockType;
-	private final ResourceLocation modelLocation;
+    private final RockVariant rockVariant;
+    private final RockType rockType;
+    private final ResourceLocation modelLocation;
 
-	public BlockRockWall(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
-		super(getBlockRockMap(ORDINARY, rockVariant, rockType));
+    public BlockRockWall(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
+        super(getBlockRockMap(ORDINARY, rockVariant, rockType));
 
-		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+        if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
+            throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
-		this.rockVariant = rockVariant;
-		this.rockType = rockType;
-		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
+        this.rockVariant = rockVariant;
+        this.rockType = rockType;
+        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
+        String blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
 
-		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
-		this.setSoundType(SoundType.STONE);
-		this.setHardness(getFinalHardness());
-		this.setResistance(rockVariant.getResistance());
-		this.setHarvestLevel("pickaxe", rockVariant.getHarvestLevel());
-		this.setRegistryName(MOD_ID, blockRegistryName);
-		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        this.setSoundType(SoundType.STONE);
+        this.setHardness(getFinalHardness());
+        this.setHarvestLevel("pickaxe", 0);
+        this.setRegistryName(MOD_ID, blockRegistryName);
+        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-		//OreDictionaryHelper.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
-	}
+        //OreDictionaryHelper.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
+    }
 
-	@Override
-	public RockVariant getRockVariant() {
-		return rockVariant;
-	}
+    @Override
+    public RockVariant getRockVariant() {
+        return rockVariant;
+    }
 
-	@Override
-	public RockType getRockType() {
-		return rockType;
-	}
+    @Override
+    public RockType getRockType() {
+        return rockType;
+    }
 
-	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlock(this);
-	}
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this);
+    }
 
-	@Override
-	public void getSubBlocks(@Nonnull CreativeTabs itemIn, @Nonnull NonNullList<ItemStack> items) {
-		items.add(new ItemStack(this));
-	}
+    @Override
+    public void getSubBlocks(@Nonnull CreativeTabs itemIn, @Nonnull NonNullList<ItemStack> items) {
+        items.add(new ItemStack(this));
+    }
 
 //	@Override
 //	public boolean removedByPlayer(@Nonnull IBlockState state, World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player, boolean willHarvest) {
@@ -124,43 +123,42 @@ public class BlockRockWall extends BlockWall implements IRockTypeBlock {
 //		return super.removedByPlayer(state, world, pos, player, willHarvest);
 //	}
 
-	@Override
-	public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
-	}
+    @Override
+    public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onModelRegister() {
-		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-					@Nonnull
-					protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-						return new ModelResourceLocation(modelLocation,
-								"east=" + state.getValue(EAST) + "," +
-										"north=" + state.getValue(NORTH) + "," +
-										"south=" + state.getValue(SOUTH) + "," +
-										"rocktype=" + rockType.getName() + "," +
-										"up=" + state.getValue(UP) + "," +
-										"west=" + state.getValue(WEST));
-					}
-				}
-		);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+                    @Nonnull
+                    protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                        return new ModelResourceLocation(modelLocation,
+                                "east=" + state.getValue(EAST) + "," +
+                                        "north=" + state.getValue(NORTH) + "," +
+                                        "south=" + state.getValue(SOUTH) + "," +
+                                        "rocktype=" + rockType.getName() + "," +
+                                        "up=" + state.getValue(UP) + "," +
+                                        "west=" + state.getValue(WEST));
+                    }
+                }
+        );
 
-		for (IBlockState state : this.getBlockState().getValidStates()) {
-			ModelLoader.setCustomModelResourceLocation(
-					Item.getItemFromBlock(this),
-					this.getMetaFromState(state),
-					new ModelResourceLocation(modelLocation,
-							"inventory=" + rockType.getName()));
-		}
-	}
+        for (IBlockState state : this.getBlockState().getValidStates()) {
+            ModelLoader.setCustomModelResourceLocation(
+                    Item.getItemFromBlock(this),
+                    this.getMetaFromState(state),
+                    new ModelResourceLocation(modelLocation,
+                            "inventory=" + rockType.getName()));
+        }
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
-	}
-
+        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
+    }
 }
 

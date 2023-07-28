@@ -26,25 +26,21 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class CommandStripWorld extends CommandBase
-{
+public class CommandStripWorld extends CommandBase {
     @Override
     @Nonnull
-    public String getName()
-    {
+    public String getName() {
         return "stripworld";
     }
 
     @Override
     @Nonnull
-    public String getUsage(ICommandSender sender)
-    {
+    public String getUsage(ICommandSender sender) {
         return "tfc.command.stripworld.usage";
     }
 
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException
-    {
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         if (args.length != 1) throw new WrongUsageException("tfc.command.stripworld.failed");
         int radius = parseInt(args[0], 1, 250);
 
@@ -56,20 +52,14 @@ public class CommandStripWorld extends CommandBase
         final IBlockState fluidReplacement = Blocks.GLASS.getDefaultState();
         final IBlockState terrainReplacement = Blocks.AIR.getDefaultState();
 
-        for (int x = -radius; x < radius; x++)
-        {
-            for (int z = -radius; z < radius; z++)
-            {
-                for (int y = 255 - center.getY(); y > -center.getY(); y--)
-                {
+        for (int x = -radius; x < radius; x++) {
+            for (int z = -radius; z < radius; z++) {
+                for (int y = 255 - center.getY(); y > -center.getY(); y--) {
                     final BlockPos pos = center.add(x, y, z);
                     final Block current = world.getBlockState(pos).getBlock();
-                    if (current instanceof BlockFluidBase || current instanceof BlockDynamicLiquid || current instanceof BlockStaticLiquid)
-                    {
+                    if (current instanceof BlockFluidBase || current instanceof BlockDynamicLiquid || current instanceof BlockStaticLiquid) {
                         world.setBlockState(pos, fluidReplacement, 2);
-                    }
-                    else if (current instanceof BlockRockVariant || current instanceof BlockPlantTFC)
-                    {
+                    } else if (current instanceof BlockRockVariant || current instanceof BlockPlantTFC) {
                         world.setBlockState(pos, terrainReplacement, 2);
                     }
                 }
@@ -81,8 +71,7 @@ public class CommandStripWorld extends CommandBase
     }
 
     @Override
-    public int getRequiredPermissionLevel()
-    {
+    public int getRequiredPermissionLevel() {
         return 2;
     }
 }

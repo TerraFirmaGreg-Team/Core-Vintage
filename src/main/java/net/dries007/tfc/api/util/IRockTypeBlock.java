@@ -5,13 +5,13 @@ import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.minecraft.item.ItemBlock;
 
 public interface IRockTypeBlock extends IHasModel {
-	RockVariant getRockVariant();
+    RockVariant getRockVariant();
 
-	RockType getRockType();
+    RockType getRockType();
 
-	ItemBlock getItemBlock();
+    ItemBlock getItemBlock();
 
-	default float getFinalHardness() {
-		return getRockVariant().getHardnessBase() + getRockType().getRockCategory().getHardnessModifier();
-	}
+    default float getFinalHardness() {
+        return getRockVariant().getHardnessBase() + getRockType().getRockCategory().getHardnessModifier();
+    }
 }

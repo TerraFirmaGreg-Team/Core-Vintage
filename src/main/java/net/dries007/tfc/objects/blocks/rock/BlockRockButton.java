@@ -26,6 +26,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
@@ -33,81 +34,82 @@ import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 
 public class BlockRockButton extends BlockButtonStone implements IRockTypeBlock {
-	private final RockVariant rockVariant;
-	private final RockType rockType;
-	private final ResourceLocation modelLocation;
+    private final RockVariant rockVariant;
+    private final RockType rockType;
+    private final ResourceLocation modelLocation;
 
-	public BlockRockButton(RockVariant rockVariant, RockType rockType) {
+    public BlockRockButton(RockVariant rockVariant, RockType rockType) {
 
-		if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+        if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
+            throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 
-		this.rockVariant = rockVariant;
-		this.rockType = rockType;
-		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
+        this.rockVariant = rockVariant;
+        this.rockType = rockType;
+        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
-		String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
-		this.setSoundType(SoundType.STONE);
-		this.setHardness(0.5f);
-		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
-		this.setRegistryName(MOD_ID, blockRegistryName);
-		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
+        this.setSoundType(SoundType.STONE);
+        this.setHardness(0.5f);
+        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        this.setRegistryName(MOD_ID, blockRegistryName);
+        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-		OreDictionaryHelper.register(this, "button_stone");
-		//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
-	}
+        OreDictionaryHelper.register(this, "button_stone");
+        //OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
+    }
 
-	@Override
-	public RockVariant getRockVariant() {
-		return rockVariant;
-	}
+    @Override
+    public RockVariant getRockVariant() {
+        return rockVariant;
+    }
 
-	@Override
-	public RockType getRockType() {
-		return rockType;
-	}
+    @Override
+    public RockType getRockType() {
+        return rockType;
+    }
 
-	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlock(this);
-	}
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onModelRegister() {
-		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-			@Nonnull
-			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation,
-						"facing=" + state.getValue(FACING) + "," +
-								"powered=" + state.getValue(POWERED) + "," +
-								"rocktype=" + rockType.getName());
-			}
-		});
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(modelLocation,
+                        "facing=" + state.getValue(FACING) + "," +
+                                "powered=" + state.getValue(POWERED) + "," +
+                                "rocktype=" + rockType.getName());
+            }
+        });
 
-		for (IBlockState state : this.getBlockState().getValidStates()) {
-			ModelLoader.setCustomModelResourceLocation(
-					Item.getItemFromBlock(this),
-					this.getMetaFromState(state),
-					new ModelResourceLocation(modelLocation, "inventory=" + rockType.getName()));
-		}
-	}
+        for (IBlockState state : this.getBlockState().getValidStates()) {
+            ModelLoader.setCustomModelResourceLocation(
+                    Item.getItemFromBlock(this),
+                    this.getMetaFromState(state),
+                    new ModelResourceLocation(modelLocation, "inventory=" + rockType.getName()));
+        }
+    }
 
-	@Nonnull
-	@Override
-	public IBlockState getStateForPlacement(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY,
-											float hitZ, int meta, @Nonnull EntityLivingBase placer) {
-		IBlockState state = getStateFromMeta(meta);
-		return canPlaceBlock(worldIn, pos, facing) ? state.withProperty(FACING, facing)
-				: state.withProperty(FACING, EnumFacing.DOWN);
-	}
+    @Nonnull
+    @Override
+    public IBlockState getStateForPlacement(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY,
+                                            float hitZ, int meta, @Nonnull EntityLivingBase placer) {
+        IBlockState state = getStateFromMeta(meta);
+        return canPlaceBlock(worldIn, pos, facing) ? state.withProperty(FACING, facing)
+                : state.withProperty(FACING, EnumFacing.DOWN);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(@Nonnull ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
-	}
+        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
+    }
+
 }

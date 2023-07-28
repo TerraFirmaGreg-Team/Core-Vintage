@@ -59,16 +59,14 @@ import static net.dries007.tfc.TerraFirmaCraft.*;
         useMetadata = true,
         guiFactory = GUI_FACTORY,
         dependencies = DEPENDENCIES)
-public final class TerraFirmaCraft
-{
+public final class TerraFirmaCraft {
     public static final String MOD_ID = "tfc";
     public static final String MOD_NAME = "TerraFirmaCraft";
     public static final String GUI_FACTORY = "net.dries007.tfc.client.TFCModGuiFactory";
     public static final String DEPENDENCIES = "required:forge@[14.23.5.2847,);after:jei@[4.14.2,);after:gregtech;after:top@(1.8.25,)";
-
+    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     @Mod.Instance
     private static TerraFirmaCraft INSTANCE = null;
-
     @SidedProxy(
             modId = MOD_ID,
             clientSide = "net.dries007.tfc.proxy.ClientProxy",
@@ -79,38 +77,32 @@ public final class TerraFirmaCraft
         FluidRegistry.enableUniversalBucket();
     }
 
-    public static Logger getLog()
-    {
-        return INSTANCE.log;
-    }
-
-    public static IProxy getProxy()
-    {
-        return PROXY;
-    }
-
-    public static WorldTypeTFC getWorldType()
-    {
-        return INSTANCE.worldTypeTFC;
-    }
-
-    public static SimpleNetworkWrapper getNetwork()
-    {
-        return INSTANCE.network;
-    }
-
-    public static TerraFirmaCraft getInstance()
-    {
-        return INSTANCE;
-    }
-
-    private final Logger log = LogManager.getLogger(MOD_ID);
     private WorldTypeTFC worldTypeTFC;
     private SimpleNetworkWrapper network;
 
+    public static Logger getLog() {
+        return LOGGER;
+    }
+
+    public static IProxy getProxy() {
+        return PROXY;
+    }
+
+    public static WorldTypeTFC getWorldType() {
+        return INSTANCE.worldTypeTFC;
+    }
+
+    public static SimpleNetworkWrapper getNetwork() {
+        return INSTANCE.network;
+    }
+
+    public static TerraFirmaCraft getInstance() {
+        return INSTANCE;
+    }
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        log.debug("If you can see this, debug logging is working :)");
+        LOGGER.debug("If you can see this, debug logging is working :)");
 
         TFGToolItems.preInit();
 
@@ -151,8 +143,7 @@ public final class TerraFirmaCraft
         CapabilityMetalItem.preInit();
         CapabilityWorldTracker.preInit();
 
-        if (event.getSide().isClient())
-        {
+        if (event.getSide().isClient()) {
             ClientEvents.preInit();
         }
 
@@ -171,12 +162,9 @@ public final class TerraFirmaCraft
             // Enable overlay to render health, thirst and hunger bars, TFC style.
             // Also renders animal familiarity
             MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
-        }
-        else
-        {
+        } else {
             MinecraftServer server = FMLServerHandler.instance().getServer();
-            if (server instanceof DedicatedServer)
-            {
+            if (server instanceof DedicatedServer) {
                 PropertyManager settings = ((DedicatedServer) server).settings;
                 if (ConfigTFC.General.OVERRIDES.forceTFCWorldType) {
                     // This is called before vanilla defaults it, meaning we intercept it's default with ours
@@ -205,16 +193,14 @@ public final class TerraFirmaCraft
     }
 
     @Mod.EventHandler
-    public void onLoadComplete(FMLLoadCompleteEvent event)
-    {
+    public void onLoadComplete(FMLLoadCompleteEvent event) {
         // This is the latest point that we can possibly stop creating non-decaying stacks on both server + client
         // It should be safe to use as we're only using it internally
         FoodHandler.setNonDecaying(false);
     }
 
     @Mod.EventHandler
-    public void onServerStarting(FMLServerStartingEvent event)
-    {
+    public void onServerStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandGetHeat());
         event.registerServerCommand(new CommandStripWorld());
         event.registerServerCommand(new CommandHeat());

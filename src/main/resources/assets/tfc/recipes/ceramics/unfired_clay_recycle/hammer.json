@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "tfc:ceramics/unfired/mold/hammer_head"
+      "item": "tfc:ceramics/unfired/mold/toolheadhammer"
     }
   ],
   "result": {

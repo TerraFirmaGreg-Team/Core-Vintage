@@ -7,7 +7,8 @@
   ],
   "key": {
     "X": {
-      "item": "tfc:metal/double_ingot/bronze"
+      "type": "forge:ore_dict",
+      "ore": "ingotDoubleBronze"
     }
   },
   "result": {

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "tfc:ceramics/unfired/mold/saw_blade"
+      "item": "tfc:ceramics/unfired/mold/toolheadsaw"
     }
   ],
   "result": {

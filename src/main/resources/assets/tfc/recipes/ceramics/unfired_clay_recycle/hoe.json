@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "tfc:ceramics/unfired/mold/hoe_head"
+      "item": "tfc:ceramics/unfired/mold/toolheadhoe"
     }
   ],
   "result": {

@@ -12,38 +12,38 @@
     }
   },
   "variants": {
-    // "north": {
-    //   "true": {
-    //     "textures": {
-    //       "north": "tfc:blocks/soil/overlay/grass/top"
-    //     }
-    //   },
-    //   "false": {}
-    // },
-    // "south": {
-    //   "true": {
-    //     "textures": {
-    //       "south": "tfc:blocks/soil/overlay/grass/top"
-    //     }
-    //   },
-    //   "false": {}
-    // },
-    // "east": {
-    //   "true": {
-    //     "textures": {
-    //       "east": "tfc:blocks/soil/overlay/grass/top"
-    //     }
-    //   },
-    //   "false": {}
-    // },
-    // "west": {
-    //   "true": {
-    //     "textures": {
-    //       "west": "tfc:blocks/soil/overlay/grass/top"
-    //     }
-    //   },
-    //   "false": {}
-    // },
+    "north": {
+      "true": {
+        "textures": {
+          "north": "tfc:blocks/soil/overlay/grass/top"
+        }
+      },
+      "false": {}
+    },
+    "south": {
+      "true": {
+        "textures": {
+          "south": "tfc:blocks/soil/overlay/grass/top"
+        }
+      },
+      "false": {}
+    },
+    "east": {
+      "true": {
+        "textures": {
+          "east": "tfc:blocks/soil/overlay/grass/top"
+        }
+      },
+      "false": {}
+    },
+    "west": {
+      "true": {
+        "textures": {
+          "west": "tfc:blocks/soil/overlay/grass/top"
+        }
+      },
+      "false": {}
+    },
     "soiltype": {<%for (i=0; i < soil_types.size; i++) { %>
       "${soil_types[i]}": {
           "textures": {

@@ -41,7 +41,7 @@
         "model": "outer_stairs"
       }
     },
-    "stonetype": {<%for (i=0; i < rock_type.size; i++) { %>
+    "rocktype": {<%for (i=0; i < rock_type.size; i++) { %>
       "${rock_type[i]}": {
         "textures": {
           "bottom": "tfc:blocks/rock/$rock_variant/${rock_type[i]}",

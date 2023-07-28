@@ -16,7 +16,7 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification.*;
  */
 @MethodsReturnNonnullByDefault
 public enum RockVariant implements IStringSerializable {
-	RAW(BlockRock::new, 0, 6.5f, 10f, COLLAPSABLE, true),
+	RAW(BlockRock::new, 0, 6.5f, 10f, COLLAPSABLE),
 	COBBLE(BlockRockFallable::new, 0, 5.5f, 10f, VERTICAL_AND_HORIZONTAL_ROCK),
 	BRICK(BlockRock::new, 0, 6.5f, 10f, null),
 	CRACKED(BlockRock::new, 0, 6.5f, 10f, null),
@@ -32,29 +32,18 @@ public enum RockVariant implements IStringSerializable {
 
 
 	public static final RockVariant[] VALUES = RockVariant.values();
-	private final BiFunction<RockVariant, RockType, IRockTypeBlock> blockFactory;
+	public final BiFunction<RockVariant, RockType, IRockTypeBlock> blockFactory;
 	private final int harvestLevel;
 	private final float hardnessBase;
 	private final float resistance;
-	private final boolean variants;
 	@Nullable
 	private final Specification fallingSpecification;
-
-	RockVariant(BiFunction<RockVariant, RockType, IRockTypeBlock> blockFactory, int harvestLevel, float hardnessBase, float resistance, @Nullable Specification fallingSpecification, boolean variants) {
-		this.blockFactory = blockFactory;
-		this.harvestLevel = harvestLevel;
-		this.hardnessBase = hardnessBase;
-		this.resistance = resistance;
-		this.variants = variants;
-		this.fallingSpecification = fallingSpecification;
-	}
 
 	RockVariant(BiFunction<RockVariant, RockType, IRockTypeBlock> blockFactory, int harvestLevel, float hardnessBase, float resistance, @Nullable Specification fallingSpecification) {
 		this.blockFactory = blockFactory;
 		this.harvestLevel = harvestLevel;
 		this.hardnessBase = hardnessBase;
 		this.resistance = resistance;
-		this.variants = false;
 		this.fallingSpecification = fallingSpecification;
 	}
 
@@ -76,10 +65,6 @@ public enum RockVariant implements IStringSerializable {
 
 	public float getResistance() {
 		return resistance;
-	}
-
-	public boolean hasVariants() {
-		return variants;
 	}
 
 	@Nullable

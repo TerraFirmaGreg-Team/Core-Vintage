@@ -18,85 +18,71 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class TEMetalSheet extends TEBase
-{
-    private final boolean[] faces;
+public class TEMetalSheet extends TEBase {
+	private final boolean[] faces;
 
-    public TEMetalSheet()
-    {
-        this.faces = new boolean[6];
-    }
+	public TEMetalSheet() {
+		this.faces = new boolean[6];
+	}
 
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
-    {
-        super.onDataPacket(net, pkt);
-        markForBlockUpdate();
-    }
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		super.onDataPacket(net, pkt);
+		markForBlockUpdate();
+	}
 
-    /**
-     * Gets the number of faces that are present
-     *
-     * @return a number in [0, 6]
-     */
-    public int getFaceCount()
-    {
-        int n = 0;
-        for (boolean b : faces)
-        {
-            if (b)
-            {
-                n++;
-            }
-        }
-        return n;
-    }
+	/**
+	 * Gets the number of faces that are present
+	 *
+	 * @return a number in [0, 6]
+	 */
+	public int getFaceCount() {
+		int n = 0;
+		for (boolean b : faces) {
+			if (b) {
+				n++;
+			}
+		}
+		return n;
+	}
 
-    /**
-     * Checks if sheet is present for the given face
-     *
-     * @param face The face to check
-     * @return true if present
-     */
-    public boolean getFace(EnumFacing face)
-    {
-        return faces[face.getIndex()];
-    }
+	/**
+	 * Checks if sheet is present for the given face
+	 *
+	 * @param face The face to check
+	 * @return true if present
+	 */
+	public boolean getFace(EnumFacing face) {
+		return faces[face.getIndex()];
+	}
 
-    public void setFace(EnumFacing facing, boolean value)
-    {
-        if (!world.isRemote)
-        {
-            faces[facing.getIndex()] = value;
-            markForBlockUpdate();
-        }
-    }
+	public void setFace(EnumFacing facing, boolean value) {
+		if (!world.isRemote) {
+			faces[facing.getIndex()] = value;
+			markForBlockUpdate();
+		}
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
-        for (EnumFacing face : EnumFacing.values())
-        {
-            faces[face.getIndex()] = nbt.getBoolean(face.getName());
-        }
-        super.readFromNBT(nbt);
-    }
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		for (EnumFacing face : EnumFacing.values()) {
+			faces[face.getIndex()] = nbt.getBoolean(face.getName());
+		}
+		super.readFromNBT(nbt);
+	}
 
-    @Override
-    @Nonnull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-    {
-        for (EnumFacing face : EnumFacing.values())
-        {
-            nbt.setBoolean(face.getName(), faces[face.getIndex()]);
-        }
-        return super.writeToNBT(nbt);
-    }
+	@Override
+	@Nonnull
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		for (EnumFacing face : EnumFacing.values()) {
+			nbt.setBoolean(face.getName(), faces[face.getIndex()]);
+		}
+		return super.writeToNBT(nbt);
+	}
 
-    public void onBreakBlock(Material outMetal)
-    {
-        var item = ItemMetalCladding.get(outMetal);
-        var output = new ItemStack(item, getFaceCount());
-        InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), output);
-    }
+	public void onBreakBlock(Material outMetal) {
+		var item = ItemMetalCladding.get(outMetal);
+		var output = new ItemStack(item, getFaceCount());
+		InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), output);
+	}
 }

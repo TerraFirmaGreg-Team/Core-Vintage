@@ -24,67 +24,59 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemMetalArmor extends ItemArmorTFC implements IMaterialItem, IItemSize
-{
-    private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetalArmor>> TABLE = new HashMap<>();
+public class ItemMetalArmor extends ItemArmorTFC implements IMaterialItem, IItemSize {
+	private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetalArmor>> TABLE = new HashMap<>();
 
-    public static ItemMetalArmor get(Metal metal, Metal.ItemType type)
-    {
-        return TABLE.get(metal).get(type);
-    }
+	public static ItemMetalArmor get(Metal metal, Metal.ItemType type) {
+		return TABLE.get(metal).get(type);
+	}
 
-    private final Metal metal;
-    private final Metal.ItemType type;
+	private final Metal metal;
+	private final Metal.ItemType type;
 
-    public ItemMetalArmor(Metal metal, Metal.ItemType type)
-    {
-        //noinspection ConstantConditions
-        super(metal.getArmorMetal(), type.getArmorSlot(), type.getEquipmentSlot());
-        this.metal = metal;
-        this.type = type;
-        if (!TABLE.containsKey(metal))
-            TABLE.put(metal, new EnumMap<>(Metal.ItemType.class));
-        TABLE.get(metal).put(type, this);
-    }
+	public ItemMetalArmor(Metal metal, Metal.ItemType type) {
+		//noinspection ConstantConditions
+		super(metal.getArmorMetal(), type.getArmorSlot(), type.getEquipmentSlot());
+		this.metal = metal;
+		this.type = type;
+		if (!TABLE.containsKey(metal))
+			TABLE.put(metal, new EnumMap<>(Metal.ItemType.class));
+		TABLE.get(metal).put(type, this);
+	}
 
-    @Nullable
-    @Override
-    public Material getMaterial(ItemStack stack)
-    {
-        return null;
-    }
+	@Nullable
+	@Override
+	public Material getMaterial(ItemStack stack) {
+		return null;
+	}
 
-    @Override
-    public int getSmeltAmount(ItemStack stack)
-    {
-        if (!isDamageable() || !stack.isItemDamaged()) return type.getSmeltAmount();
-        double d = (stack.getMaxDamage() - stack.getItemDamage()) / (double) stack.getMaxDamage() - .10;
-        return d < 0 ? 0 : MathHelper.floor(type.getSmeltAmount() * d);
-    }
+	@Override
+	public int getSmeltAmount(ItemStack stack) {
+		if (!isDamageable() || !stack.isItemDamaged()) return type.getSmeltAmount();
+		double d = (stack.getMaxDamage() - stack.getItemDamage()) / (double) stack.getMaxDamage() - .10;
+		return d < 0 ? 0 : MathHelper.floor(type.getSmeltAmount() * d);
+	}
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt)
-    {
-        return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
-    }
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
+	}
 
-    @Override
-    @Nonnull
-    public IRarity getForgeRarity(@Nonnull ItemStack stack)
-    {
-        switch (metal.getTier())
-        {
-            case TIER_I:
-            case TIER_II:
-                return EnumRarity.COMMON;
-            case TIER_III:
-                return EnumRarity.UNCOMMON;
-            case TIER_IV:
-                return EnumRarity.RARE;
-            case TIER_V:
-                return EnumRarity.EPIC;
-        }
-        return super.getForgeRarity(stack);
-    }
+	@Override
+	@Nonnull
+	public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+		switch (metal.getTier()) {
+			case TIER_I:
+			case TIER_II:
+				return EnumRarity.COMMON;
+			case TIER_III:
+				return EnumRarity.UNCOMMON;
+			case TIER_IV:
+				return EnumRarity.RARE;
+			case TIER_V:
+				return EnumRarity.EPIC;
+		}
+		return super.getForgeRarity(stack);
+	}
 }

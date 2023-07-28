@@ -3,7 +3,7 @@
   "defaults": {
     "model": "cube_all",
     "textures": {
-      "all": "tfc:blocks/peat"
+      "all": "tfc:blocks/soil/peat"
     }
   },
   "variants": {

@@ -5,7 +5,7 @@
     "uvlock": false
   },
   "variants": {
-    "stonetype": {
+    "rocktype": {
       "granite": {
           "textures": {
             "stone": "tfc:blocks/rock/raw/granite"

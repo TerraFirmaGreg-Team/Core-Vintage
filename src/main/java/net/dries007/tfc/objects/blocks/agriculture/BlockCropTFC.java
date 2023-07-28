@@ -9,7 +9,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
+import net.dries007.tfc.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.Helpers;
@@ -46,280 +46,235 @@ import java.util.Random;
 import java.util.Set;
 
 @ParametersAreNonnullByDefault
-public abstract class BlockCropTFC extends BlockBush implements IGrowingPlant
-{
-    // stage properties
-    public static final PropertyInteger STAGE_8 = PropertyInteger.create("stage", 0, 7);
-    public static final PropertyInteger STAGE_7 = PropertyInteger.create("stage", 0, 6);
-    public static final PropertyInteger STAGE_6 = PropertyInteger.create("stage", 0, 5);
-    public static final PropertyInteger STAGE_5 = PropertyInteger.create("stage", 0, 4);
+public abstract class BlockCropTFC extends BlockBush implements IGrowingPlant {
+	// stage properties
+	public static final PropertyInteger STAGE_8 = PropertyInteger.create("stage", 0, 7);
+	public static final PropertyInteger STAGE_7 = PropertyInteger.create("stage", 0, 6);
+	public static final PropertyInteger STAGE_6 = PropertyInteger.create("stage", 0, 5);
+	public static final PropertyInteger STAGE_5 = PropertyInteger.create("stage", 0, 4);
 
-    // static map for conversion from maxValue to Stage Property
-    public static final HashMap<Integer, PropertyInteger> STAGE_MAP = new HashMap<>();
+	// static map for conversion from maxValue to Stage Property
+	public static final HashMap<Integer, PropertyInteger> STAGE_MAP = new HashMap<>();
 
-    /* true if the crop spawned in the wild, means it ignores growth conditions i.e. farmland */
-    public static final PropertyBool WILD = PropertyBool.create("wild");
+	/* true if the crop spawned in the wild, means it ignores growth conditions i.e. farmland */
+	public static final PropertyBool WILD = PropertyBool.create("wild");
 
-    // model boxes
-    private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[] {
-        new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.125D, 0.875D),
-        new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D),
-        new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.375D, 0.875D),
-        new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.5D, 0.875D),
-        new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.625D, 0.875D),
-        new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D),
-        new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.875D, 0.875D),
-        new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D)
-    };
+	// model boxes
+	private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[] {
+			new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.125D, 0.875D),
+			new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D),
+			new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.375D, 0.875D),
+			new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.5D, 0.875D),
+			new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.625D, 0.875D),
+			new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D),
+			new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.875D, 0.875D),
+			new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D)
+	};
 
-    // binary flags for state and metadata conversion
-    private static final int META_WILD = 8;
-    private static final int META_GROWTH = 7;
+	// binary flags for state and metadata conversion
+	private static final int META_WILD = 8;
+	private static final int META_GROWTH = 7;
 
-    // static field for conversion from crop to Block
-    private static final Map<ICrop, BlockCropTFC> MAP = new HashMap<>();
+	// static field for conversion from crop to Block
+	private static final Map<ICrop, BlockCropTFC> MAP = new HashMap<>();
 
-    static
-    {
-        STAGE_MAP.put(5, STAGE_5);
-        STAGE_MAP.put(6, STAGE_6);
-        STAGE_MAP.put(7, STAGE_7);
-        STAGE_MAP.put(8, STAGE_8);
-    }
+	static {
+		STAGE_MAP.put(5, STAGE_5);
+		STAGE_MAP.put(6, STAGE_6);
+		STAGE_MAP.put(7, STAGE_7);
+		STAGE_MAP.put(8, STAGE_8);
+	}
 
-    public static BlockCropTFC get(ICrop crop)
-    {
-        return MAP.get(crop);
-    }
+	private final ICrop crop;
 
-    public static Set<ICrop> getCrops()
-    {
-        return MAP.keySet();
-    }
+	public BlockCropTFC(ICrop crop) {
+		super(Material.PLANTS);
 
-    static PropertyInteger getStagePropertyForCrop(ICrop crop)
-    {
-        return STAGE_MAP.get(crop.getMaxStage() + 1);
-    }
+		this.crop = crop;
+		if (MAP.put(crop, this) != null) {
+			throw new IllegalStateException("There can only be one.");
+		}
 
-    private final ICrop crop;
+		setSoundType(SoundType.PLANT);
+		setHardness(0.6f);
+	}
 
-    public BlockCropTFC(ICrop crop)
-    {
-        super(Material.PLANTS);
+	public static BlockCropTFC get(ICrop crop) {
+		return MAP.get(crop);
+	}
 
-        this.crop = crop;
-        if (MAP.put(crop, this) != null)
-        {
-            throw new IllegalStateException("There can only be one.");
-        }
+	public static Set<ICrop> getCrops() {
+		return MAP.keySet();
+	}
 
-        setSoundType(SoundType.PLANT);
-        setHardness(0.6f);
-    }
+	static PropertyInteger getStagePropertyForCrop(ICrop crop) {
+		return STAGE_MAP.get(crop.getMaxStage() + 1);
+	}
 
-    @Override
-    @Nonnull
-    @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta)
-    {
-        return getDefaultState().withProperty(WILD, (meta & META_WILD) > 0).withProperty(getStageProperty(), meta & META_GROWTH);
-    }
+	@Override
+	@Nonnull
+	@SuppressWarnings("deprecation")
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(WILD, (meta & META_WILD) > 0).withProperty(getStageProperty(), meta & META_GROWTH);
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return state.getValue(getStageProperty()) + (state.getValue(WILD) ? META_WILD : 0);
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(getStageProperty()) + (state.getValue(WILD) ? META_WILD : 0);
+	}
 
-    @Override
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
-    {
-        super.updateTick(worldIn, pos, state, random);
-        checkGrowth(worldIn, pos, state, random);
-    }
+	@Override
+	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+		super.updateTick(worldIn, pos, state, random);
+		checkGrowth(worldIn, pos, state, random);
+	}
 
-    @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-    {
-        TECropBase tile = Helpers.getTE(worldIn, pos, TECropBase.class);
-        if (tile != null)
-        {
-            tile.resetCounter();
-        }
-    }
+	@Override
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+		TECropBase tile = Helpers.getTE(worldIn, pos, TECropBase.class);
+		if (tile != null) {
+			tile.resetCounter();
+		}
+	}
 
-    @Override
-    @Nonnull
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, getStageProperty(), WILD);
-    }
+	@Override
+	@Nonnull
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, getStageProperty(), WILD);
+	}
 
-    @Override
-    @Nonnull
-    public Block.EnumOffsetType getOffsetType()
-    {
-        return Block.EnumOffsetType.XZ;
-    }
+	@Override
+	@Nonnull
+	public Block.EnumOffsetType getOffsetType() {
+		return Block.EnumOffsetType.XZ;
+	}
 
-    @Override
-    public boolean hasTileEntity(IBlockState state)
-    {
-        return true;
-    }
+	@Override
+	public boolean hasTileEntity(IBlockState state) {
+		return true;
+	}
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
-    {
-        return new TECropBase();
-    }
+	@Nullable
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return new TECropBase();
+	}
 
-    @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
-        EntityPlayer player = harvesters.get();
-        ItemStack seedStack = new ItemStack(ItemSeedsTFC.get(crop));
-        ItemStack foodStack = crop.getFoodDrop(state.getValue(getStageProperty()));
+	@Override
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		EntityPlayer player = harvesters.get();
+		ItemStack seedStack = new ItemStack(ItemSeedsTFC.get(crop));
+		ItemStack foodStack = crop.getFoodDrop(state.getValue(getStageProperty()));
 
-        // if player and skills are present, update skills and increase amounts of items depending on skill
-        if (player != null)
-        {
-            SimpleSkill skill = CapabilityPlayerData.getSkill(player, SkillType.AGRICULTURE);
+		// if player and skills are present, update skills and increase amounts of items depending on skill
+		if (player != null) {
+			SimpleSkill skill = CapabilityPlayerData.getSkill(player, SkillType.AGRICULTURE);
 
-            if (skill != null)
-            {
-                if (!foodStack.isEmpty())
-                {
-                    foodStack.setCount(1 + Crop.getSkillFoodBonus(skill, RANDOM));
-                    seedStack.setCount(1 + Crop.getSkillSeedBonus(skill, RANDOM));
-                    skill.add(0.04f);
-                }
-            }
-        }
+			if (skill != null) {
+				if (!foodStack.isEmpty()) {
+					foodStack.setCount(1 + Crop.getSkillFoodBonus(skill, RANDOM));
+					seedStack.setCount(1 + Crop.getSkillSeedBonus(skill, RANDOM));
+					skill.add(0.04f);
+				}
+			}
+		}
 
-        // add items to drop
-        if (!foodStack.isEmpty())
-        {
-            drops.add(foodStack);
-        }
-        if (!seedStack.isEmpty())
-        {
-            drops.add(seedStack);
-        }
-    }
+		// add items to drop
+		if (!foodStack.isEmpty()) {
+			drops.add(foodStack);
+		}
+		if (!seedStack.isEmpty()) {
+			drops.add(seedStack);
+		}
+	}
 
-    @Override
-    @Nonnull
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
-        return new ItemStack(ItemSeedsTFC.get(crop));
-    }
+	@Override
+	@Nonnull
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+		return new ItemStack(ItemSeedsTFC.get(crop));
+	}
 
-    @Nonnull
-    public ICrop getCrop()
-    {
-        return crop;
-    }
+	@Nonnull
+	public ICrop getCrop() {
+		return crop;
+	}
 
-    public void checkGrowth(World worldIn, BlockPos pos, IBlockState state, Random random)
-    {
-        if (!worldIn.isRemote)
-        {
-            TECropBase te = Helpers.getTE(worldIn, pos, TECropBase.class);
-            if (te != null)
-            {
-                // If can't see sky, or isn't moisturized, reset growth *evil laughter* >:)
-                IBlockState stateFarmland = worldIn.getBlockState(pos.down());
-                if (!state.getValue(WILD))
-                {
-                    if (!worldIn.canSeeSky(pos) || (stateFarmland.getBlock() instanceof BlockFarmlandTFC && stateFarmland.getValue(BlockFarmlandTFC.MOISTURE) < 3))
-                    {
-                        te.resetCounter();
-                        return;
-                    }
-                }
+	public void checkGrowth(World worldIn, BlockPos pos, IBlockState state, Random random) {
+		if (!worldIn.isRemote) {
+			TECropBase te = Helpers.getTE(worldIn, pos, TECropBase.class);
+			if (te != null) {
+				// If can't see sky, or isn't moisturized, reset growth *evil laughter* >:)
+				IBlockState stateFarmland = worldIn.getBlockState(pos.down());
+				if (!state.getValue(WILD)) {
+					if (!worldIn.canSeeSky(pos) || (stateFarmland.getBlock() instanceof BlockSoilFarmland && stateFarmland.getValue(BlockSoilFarmland.MOISTURE) < 3)) {
+						te.resetCounter();
+						return;
+					}
+				}
 
-                long growthTicks = (long) (crop.getGrowthTicks() * ConfigTFC.General.FOOD.cropGrowthTimeModifier);
-                int fullGrownStages = 0;
-                while (te.getTicksSinceUpdate() > growthTicks)
-                {
-                    te.reduceCounter(growthTicks);
+				long growthTicks = (long) (crop.getGrowthTicks() * ConfigTFC.General.FOOD.cropGrowthTimeModifier);
+				int fullGrownStages = 0;
+				while (te.getTicksSinceUpdate() > growthTicks) {
+					te.reduceCounter(growthTicks);
 
-                    // find stats for the time in which the crop would have grown
-                    float temp = ClimateTFC.getActualTemp(worldIn, pos, -te.getTicksSinceUpdate());
-                    float rainfall = ChunkDataTFC.getRainfall(worldIn, pos);
+					// find stats for the time in which the crop would have grown
+					float temp = ClimateTFC.getActualTemp(worldIn, pos, -te.getTicksSinceUpdate());
+					float rainfall = ChunkDataTFC.getRainfall(worldIn, pos);
 
-                    // check if the crop could grow, if so, grow
-                    if (crop.isValidForGrowth(temp, rainfall))
-                    {
-                        grow(worldIn, pos, state, random);
-                        state = worldIn.getBlockState(pos);
-                        if (state.getBlock() instanceof BlockCropTFC && !state.getValue(WILD) && state.getValue(getStageProperty()) == crop.getMaxStage())
-                        {
-                            fullGrownStages++;
-                            if (fullGrownStages > 2)
-                            {
-                                die(worldIn, pos, state, random);
-                                return;
-                            }
-                        }
-                    }
-                    else if (!crop.isValidConditions(temp, rainfall))
-                    {
-                        die(worldIn, pos, state, random);
-                        return;
-                    }
-                }
-            }
-        }
-    }
+					// check if the crop could grow, if so, grow
+					if (crop.isValidForGrowth(temp, rainfall)) {
+						grow(worldIn, pos, state, random);
+						state = worldIn.getBlockState(pos);
+						if (state.getBlock() instanceof BlockCropTFC && !state.getValue(WILD) && state.getValue(getStageProperty()) == crop.getMaxStage()) {
+							fullGrownStages++;
+							if (fullGrownStages > 2) {
+								die(worldIn, pos, state, random);
+								return;
+							}
+						}
+					} else if (!crop.isValidConditions(temp, rainfall)) {
+						die(worldIn, pos, state, random);
+						return;
+					}
+				}
+			}
+		}
+	}
 
-    public abstract void grow(World worldIn, BlockPos pos, IBlockState state, Random random);
+	public abstract void grow(World worldIn, BlockPos pos, IBlockState state, Random random);
 
-    public void die(World worldIn, BlockPos pos, IBlockState state, Random random)
-    {
-        if (ConfigTFC.General.FOOD.enableCropDeath)
-        {
-            worldIn.setBlockState(pos, BlockCropDead.get(crop).getDefaultState().withProperty(BlockCropDead.MATURE, state.getValue(getStageProperty()) == crop.getMaxStage()));
-        }
-    }
+	public void die(World worldIn, BlockPos pos, IBlockState state, Random random) {
+		if (ConfigTFC.General.FOOD.enableCropDeath) {
+			worldIn.setBlockState(pos, BlockCropDead.get(crop).getDefaultState().withProperty(BlockCropDead.MATURE, state.getValue(getStageProperty()) == crop.getMaxStage()));
+		}
+	}
 
-    @Override
-    @Nonnull
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        return CROPS_AABB[state.getValue(getStageProperty())];
-    }
+	@Override
+	@Nonnull
+	@SuppressWarnings("deprecation")
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return CROPS_AABB[state.getValue(getStageProperty())];
+	}
 
-    @Nonnull
-    @Override
-    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos)
-    {
-        return EnumPlantType.Crop;
-    }
+	@Nonnull
+	@Override
+	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+		return EnumPlantType.Crop;
+	}
 
-    public abstract PropertyInteger getStageProperty();
+	public abstract PropertyInteger getStageProperty();
 
-    @Override
-    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos)
-    {
-        float temp = ClimateTFC.getActualTemp(world, pos);
-        float rainfall = ChunkDataTFC.getRainfall(world, pos);
-        if (state.getValue(getStageProperty()) >= crop.getMaxStage())
-        {
-            return GrowthStatus.FULLY_GROWN;
-        }
-        else if (!crop.isValidConditions(temp, rainfall) || !world.canSeeSky(pos))
-        {
-            return GrowthStatus.NOT_GROWING;
-        }
-        else if (crop.isValidForGrowth(temp, rainfall))
-        {
-            return GrowthStatus.GROWING;
-        }
-        return GrowthStatus.CAN_GROW;
-    }
+	@Override
+	public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
+		float temp = ClimateTFC.getActualTemp(world, pos);
+		float rainfall = ChunkDataTFC.getRainfall(world, pos);
+		if (state.getValue(getStageProperty()) >= crop.getMaxStage()) {
+			return GrowthStatus.FULLY_GROWN;
+		} else if (!crop.isValidConditions(temp, rainfall) || !world.canSeeSky(pos)) {
+			return GrowthStatus.NOT_GROWING;
+		} else if (crop.isValidForGrowth(temp, rainfall)) {
+			return GrowthStatus.GROWING;
+		}
+		return GrowthStatus.CAN_GROW;
+	}
 }

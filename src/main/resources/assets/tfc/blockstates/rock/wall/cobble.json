@@ -58,7 +58,7 @@
 			},
 			"false": {}
 		},
-		"stonetype": {
+		"rocktype": {
       "granite": {
         "textures": {
           "wall": "tfc:blocks/rock/cobble/granite"

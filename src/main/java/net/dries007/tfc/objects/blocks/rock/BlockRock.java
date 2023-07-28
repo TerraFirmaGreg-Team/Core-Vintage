@@ -1,16 +1,9 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.Triple;
-import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -19,7 +12,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -32,18 +24,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 
-public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
+public class BlockRock extends BlockRockVatiant {
 
-	public static final Map<Pair<RockVariant, RockType>, IRockTypeBlock> BLOCK_ROCK_MAP = new LinkedHashMap<>();
-
-	public static final Map<Triple<Map, RockVariant, RockType>, IRockTypeBlock> ROCK_DECORATIONS = new LinkedHashMap<>();
 	private final RockType rockType;
 	private final RockVariant rockVariant;
 	private final ResourceLocation modelLocation;
@@ -51,16 +39,19 @@ public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
 	public BlockRock(RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
 
-		if (BLOCK_ROCK_MAP.put(new Pair<>(rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+
+		if (rockVariant.canFall()) {
+			FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
+		}
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
 		String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
-		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
-		this.setSoundType(SoundType.STONE);
+
 		this.setHardness(getFinalHardness());
 		this.setResistance(rockVariant.getResistance());
 		this.setHarvestLevel("pickaxe", rockVariant.getHarvestLevel());
@@ -68,14 +59,6 @@ public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
 		//OreDictionaryModule.register(this, blockVariant.getName(), blockVariant.getName() + WordUtils.capitalize(stoneType.getName()));
-	}
-
-	public static Block getBlockRockMap(RockVariant blockVariant, RockType stoneType) {
-		return (Block) BLOCK_ROCK_MAP.get(new Pair<>(blockVariant, stoneType));
-	}
-
-	public static Block getBlockRockMapRaw(RockType stoneType) {
-		return (Block) BLOCK_ROCK_MAP.get(new Pair<>(RockVariant.RAW, stoneType));
 	}
 
 	@Override
@@ -91,18 +74,6 @@ public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
 	@Override
 	public ItemBlock getItemBlock() {
 		return new ItemBlock(this);
-	}
-
-	@Nonnull
-	@Override
-	public Size getSize(@Nonnull ItemStack stack) {
-		return Size.SMALL; // Store anywhere
-	}
-
-	@Nonnull
-	@Override
-	public Weight getWeight(@Nonnull ItemStack stack) {
-		return Weight.LIGHT; // Stacksize = 32
 	}
 
 	@Override
@@ -173,7 +144,7 @@ public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
 		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
 			@Nonnull
 			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName());
+				return new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName());
 			}
 		});
 
@@ -181,7 +152,7 @@ public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
 		ModelLoader.setCustomModelResourceLocation(
 				Item.getItemFromBlock(this),
 				this.getMetaFromState(this.getBlockState().getBaseState()),
-				new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName()));
+				new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName()));
 	}
 
 	@Override
@@ -190,12 +161,5 @@ public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
 		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
-	}
-
-	@Nonnull
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
 	}
 }

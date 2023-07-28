@@ -10,12 +10,10 @@ import net.dries007.tfc.api.types.Metal;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemIngot extends ItemMetal
-{
-    public ItemIngot(Metal metal, Metal.ItemType type)
-    {
+public class ItemIngot extends ItemMetal {
+	public ItemIngot(Metal metal, Metal.ItemType type) {
 
-    }
+	}
 
     /*
     @Override

@@ -3,7 +3,10 @@ package net.dries007.tfc.api.types2.soil;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.api.util.ISoilTypeBlock;
-import net.dries007.tfc.objects.blocks.soil.BlockSoilDirt;
+import net.dries007.tfc.objects.blocks.soil.BlockSoil;
+import net.dries007.tfc.objects.blocks.soil.BlockSoilFarmland;
+import net.dries007.tfc.objects.blocks.soil.BlockSoilGrass;
+import net.dries007.tfc.objects.blocks.soil.BlockSoilPath;
 import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nullable;
@@ -14,13 +17,13 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTIC
 
 @MethodsReturnNonnullByDefault
 public enum SoilVariant implements IStringSerializable {
-	DIRT(VERTICAL_AND_HORIZONTAL, BlockSoilDirt::new),
-	GRASS(VERTICAL_AND_HORIZONTAL, BlockSoilDirt::new),
-	DRY_GRASS(VERTICAL_AND_HORIZONTAL, BlockSoilDirt::new),
-	PATH(VERTICAL_ONLY, BlockSoilDirt::new),
-	CLAY(VERTICAL_ONLY, BlockSoilDirt::new),
-	CLAY_GRASS(VERTICAL_ONLY, BlockSoilDirt::new),
-	FARMLAND(VERTICAL_ONLY, BlockSoilDirt::new);
+	DIRT(VERTICAL_AND_HORIZONTAL, BlockSoil::new),
+	GRASS(VERTICAL_AND_HORIZONTAL, BlockSoilGrass::new),
+	DRY_GRASS(VERTICAL_AND_HORIZONTAL, BlockSoilGrass::new),
+	PATH(VERTICAL_ONLY, BlockSoilPath::new),
+	CLAY(VERTICAL_ONLY, BlockSoil::new),
+	CLAY_GRASS(VERTICAL_ONLY, BlockSoilGrass::new),
+	FARMLAND(VERTICAL_ONLY, BlockSoilFarmland::new);
 //	ROOTED_DIRT(VERTICAL_ONLY),
 //	MUD(VERTICAL_ONLY),
 //	MUD_BRICKS(VERTICAL_ONLY),
@@ -58,7 +61,6 @@ public enum SoilVariant implements IStringSerializable {
 	public SoilVariant getNonGrassVersion() {
 		switch (this) {
 			case GRASS:
-				return DIRT;
 			case DRY_GRASS:
 				return DIRT;
 			case CLAY_GRASS:

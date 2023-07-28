@@ -72,6 +72,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.api.types2.rock.RockVariant.SMOOTH;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
@@ -627,8 +628,8 @@ public final class DefaultRecipes {
 	public static void onRegisterChiselRecipeEvent(RegistryEvent.Register<ChiselRecipe> event) {
 		// Rock smoothing
 		for (RockType rockType : RockType.values()) {
-			Block rawRock = getBlockRockMap(RAW, rockType);
-			IBlockState smoothRock = getBlockRockMap(SMOOTH, rockType).getDefaultState();
+			Block rawRock = getBlockRockMap(ORDINARY, RAW, rockType);
+			IBlockState smoothRock = getBlockRockMap(ORDINARY, SMOOTH, rockType).getDefaultState();
 			event.getRegistry().register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rockType.getName()));
 		}
 

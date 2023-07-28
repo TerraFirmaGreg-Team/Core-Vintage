@@ -34,7 +34,7 @@
 				"model": "button_pressed"
 			}
 		},
-		"stonetype": {
+		"rocktype": {
       "granite": {
         "textures": {
           "texture": "tfc:blocks/rock/raw/granite"

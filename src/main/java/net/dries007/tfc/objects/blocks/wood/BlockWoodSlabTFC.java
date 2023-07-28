@@ -3,12 +3,12 @@
  * See the project README.md and LICENSE.txt for more information.
  */
 
-package net.dries007.tfc.objects.blocks.stone;
+package net.dries007.tfc.objects.blocks.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
@@ -32,12 +32,12 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public abstract class BlockRockSlabTFC extends BlockSlab {
+public abstract class BlockWoodSlabTFC extends BlockSlab {
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 	public final Block modelBlock;
 	protected Half halfSlab;
 
-	private BlockRockSlabTFC(Rock rock, Rock.Type type) {
+	private BlockWoodSlabTFC(Rock rock, Rock.Type type) {
 		this(BlockRockVariant.get(rock, type));
 		Block c = BlockRockVariant.get(rock, type);
 		//noinspection ConstantConditions
@@ -45,7 +45,7 @@ public abstract class BlockRockSlabTFC extends BlockSlab {
 		useNeighborBrightness = true;
 	}
 
-	private BlockRockSlabTFC(Tree wood) {
+	private BlockWoodSlabTFC(Tree wood) {
 		this(BlockPlanksTFC.get(wood));
 		Block c = BlockPlanksTFC.get(wood);
 		//noinspection ConstantConditions
@@ -54,7 +54,7 @@ public abstract class BlockRockSlabTFC extends BlockSlab {
 		Blocks.FIRE.setFireInfo(this, 5, 20);
 	}
 
-	private BlockRockSlabTFC(Block block) {
+	private BlockWoodSlabTFC(Block block) {
 		super(block.getDefaultState().getMaterial());
 		IBlockState state = blockState.getBaseState();
 		if (!isDouble()) state = state.withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM);
@@ -144,7 +144,7 @@ public abstract class BlockRockSlabTFC extends BlockSlab {
 		}
 	}
 
-	public static class Double extends BlockRockSlabTFC {
+	public static class Double extends BlockWoodSlabTFC {
 		private static final Map<Tree, Double> WOOD_MAP = new HashMap<>();
 
 
@@ -164,7 +164,7 @@ public abstract class BlockRockSlabTFC extends BlockSlab {
 		}
 	}
 
-	public static class Half extends BlockRockSlabTFC {
+	public static class Half extends BlockWoodSlabTFC {
 		private static final Map<Tree, Half> WOOD_MAP = new HashMap<>();
 		public final Double doubleSlab;
 

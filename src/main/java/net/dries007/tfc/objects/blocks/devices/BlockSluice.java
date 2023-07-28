@@ -39,197 +39,164 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockSluice extends BlockHorizontal implements IItemSize
-{
-    public static final PropertyBool UPPER = PropertyBool.create("upper"); //true if this is the upper half
-    // From bottom to top, 1 step (4/16 block) at a time
-    // [0=lower half, 1=upper half][step]
-    private static final BoundingBox[][] BOXES =
-        {
-            {
-                new BoundingBox(0.5D, 0.0625D, 0.125D, 0.5D, 0.0625D, 0.125D, EnumFacing.SOUTH),
-                new BoundingBox(0.5D, 0.125D, 0.375D, 0.5D, 0.125D, 0.125D, EnumFacing.SOUTH),
-                new BoundingBox(0.5D, 0.1875D, 0.625D, 0.5D, 0.1875D, 0.125D, EnumFacing.SOUTH),
-                new BoundingBox(0.5D, 0.25D, 0.875D, 0.5D, 0.25D, 0.125D, EnumFacing.SOUTH)
-            },
-            {
-                new BoundingBox(0.5D, 0.3125D, 0.125D, 0.5D, 0.3125D, 0.125D, EnumFacing.SOUTH),
-                new BoundingBox(0.5D, 0.375D, 0.375D, 0.5D, 0.375D, 0.125D, EnumFacing.SOUTH),
-                new BoundingBox(0.5D, 0.4375D, 0.625D, 0.5D, 0.4375D, 0.125D, EnumFacing.SOUTH),
-                new BoundingBox(0.5D, 0.5D, 0.875D, 0.5D, 0.5D, 0.125D, EnumFacing.SOUTH)
-            }
-        };
-    private static final AxisAlignedBB LOWER_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.5D, 1D);
+public class BlockSluice extends BlockHorizontal implements IItemSize {
+	public static final PropertyBool UPPER = PropertyBool.create("upper"); //true if this is the upper half
+	// From bottom to top, 1 step (4/16 block) at a time
+	// [0=lower half, 1=upper half][step]
+	private static final BoundingBox[][] BOXES =
+			{
+					{
+							new BoundingBox(0.5D, 0.0625D, 0.125D, 0.5D, 0.0625D, 0.125D, EnumFacing.SOUTH),
+							new BoundingBox(0.5D, 0.125D, 0.375D, 0.5D, 0.125D, 0.125D, EnumFacing.SOUTH),
+							new BoundingBox(0.5D, 0.1875D, 0.625D, 0.5D, 0.1875D, 0.125D, EnumFacing.SOUTH),
+							new BoundingBox(0.5D, 0.25D, 0.875D, 0.5D, 0.25D, 0.125D, EnumFacing.SOUTH)
+					},
+					{
+							new BoundingBox(0.5D, 0.3125D, 0.125D, 0.5D, 0.3125D, 0.125D, EnumFacing.SOUTH),
+							new BoundingBox(0.5D, 0.375D, 0.375D, 0.5D, 0.375D, 0.125D, EnumFacing.SOUTH),
+							new BoundingBox(0.5D, 0.4375D, 0.625D, 0.5D, 0.4375D, 0.125D, EnumFacing.SOUTH),
+							new BoundingBox(0.5D, 0.5D, 0.875D, 0.5D, 0.5D, 0.125D, EnumFacing.SOUTH)
+					}
+			};
+	private static final AxisAlignedBB LOWER_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.5D, 1D);
 
-    public BlockSluice()
-    {
-        super(Material.WOOD);
-        setDefaultState(blockState.getBaseState().withProperty(UPPER, false));
-        setHardness(8.0f);
-        setHarvestLevel("axe", 0);
-    }
+	public BlockSluice() {
+		super(Material.WOOD);
+		setDefaultState(blockState.getBaseState().withProperty(UPPER, false));
+		setHardness(8.0f);
+		setHarvestLevel("axe", 0);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack stack)
-    {
-        return Size.LARGE; // Only in chests
-    }
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack stack) {
+		return Size.LARGE; // Only in chests
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack stack)
-    {
-        return Weight.VERY_HEAVY; // Stack size = 1
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack stack) {
+		return Weight.VERY_HEAVY; // Stack size = 1
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta)).withProperty(UPPER, meta > 3);
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta)).withProperty(UPPER, meta > 3);
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return state.getValue(FACING).getHorizontalIndex() + (state.getValue(UPPER) ? 4 : 0);
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FACING).getHorizontalIndex() + (state.getValue(UPPER) ? 4 : 0);
+	}
 
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state)
-    {
-        return false;
-    }
+	@SuppressWarnings("deprecation")
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        if (state.getValue(UPPER))
-        {
-            return FULL_BLOCK_AABB;
-        }
-        else
-        {
-            return LOWER_AABB;
-        }
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		if (state.getValue(UPPER)) {
+			return FULL_BLOCK_AABB;
+		} else {
+			return LOWER_AABB;
+		}
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState)
-    {
-        EnumFacing facing = world.getBlockState(pos).getValue(FACING);
-        boolean upper = world.getBlockState(pos).getValue(UPPER);
+	@SuppressWarnings("deprecation")
+	@Override
+	public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+		EnumFacing facing = world.getBlockState(pos).getValue(FACING);
+		boolean upper = world.getBlockState(pos).getValue(UPPER);
 
-        BoundingBox[] part = BOXES[upper ? 1 : 0];
+		BoundingBox[] part = BOXES[upper ? 1 : 0];
 
-        for (int i = 0; i < 4; i++)
-        {
-            addCollisionBoxToList(pos, entityBox, collidingBoxes, part[i].getAABB(facing));
-        }
-    }
+		for (int i = 0; i < 4; i++) {
+			addCollisionBoxToList(pos, entityBox, collidingBoxes, part[i].getAABB(facing));
+		}
+	}
 
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state)
-    {
-        return false;
-    }
+	@SuppressWarnings("deprecation")
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state)
-    {
-        BlockPos fluidPos = pos.offset(state.getValue(FACING), -1).down();
-        Block block = state.getBlock();
-        if (block instanceof BlockFluidBase)
-        {
-            Fluid fluid = ((BlockFluidBase) block).getFluid();
-            if (TESluice.isValidFluid(fluid))
-            {
-                worldIn.setBlockToAir(fluidPos);
-            }
-        }
-        super.onPlayerDestroy(worldIn, pos, state);
-    }
+	@Override
+	public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
+		BlockPos fluidPos = pos.offset(state.getValue(FACING), -1).down();
+		Block block = state.getBlock();
+		if (block instanceof BlockFluidBase) {
+			Fluid fluid = ((BlockFluidBase) block).getFluid();
+			if (TESluice.isValidFluid(fluid)) {
+				worldIn.setBlockToAir(fluidPos);
+			}
+		}
+		super.onPlayerDestroy(worldIn, pos, state);
+	}
 
-    @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
-        EnumFacing enumfacing = state.getValue(FACING);
+	@SuppressWarnings("deprecation")
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		EnumFacing enumfacing = state.getValue(FACING);
 
-        if (!state.getValue(UPPER))
-        {
-            if (worldIn.getBlockState(pos.offset(enumfacing)).getBlock() != this)
-            {
-                worldIn.setBlockToAir(pos);
-            }
-        }
-        else if (worldIn.getBlockState(pos.offset(enumfacing.getOpposite())).getBlock() != this)
-        {
-            if (!worldIn.isRemote)
-            {
-                spawnAsEntity(worldIn, pos, new ItemStack(this));
-            }
-            worldIn.setBlockToAir(pos);
-        }
+		if (!state.getValue(UPPER)) {
+			if (worldIn.getBlockState(pos.offset(enumfacing)).getBlock() != this) {
+				worldIn.setBlockToAir(pos);
+			}
+		} else if (worldIn.getBlockState(pos.offset(enumfacing.getOpposite())).getBlock() != this) {
+			if (!worldIn.isRemote) {
+				spawnAsEntity(worldIn, pos, new ItemStack(this));
+			}
+			worldIn.setBlockToAir(pos);
+		}
 
-        //Keep flowing liquids from reaching the top of this block
-        IBlockState blockState = worldIn.getBlockState(pos.up());
-        if (blockState.getBlock() instanceof BlockFluidBase && blockState.getValue(BlockFluidBase.LEVEL) < 15)
-        {
-            worldIn.setBlockToAir(pos.up());
-        }
-    }
+		//Keep flowing liquids from reaching the top of this block
+		IBlockState blockState = worldIn.getBlockState(pos.up());
+		if (blockState.getBlock() instanceof BlockFluidBase && blockState.getValue(BlockFluidBase.LEVEL) < 15) {
+			worldIn.setBlockToAir(pos.up());
+		}
+	}
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        return state.getValue(UPPER) ? Item.getItemFromBlock(this) : Items.AIR;
-    }
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return state.getValue(UPPER) ? Item.getItemFromBlock(this) : Items.AIR;
+	}
 
-    @Override
-    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
-    {
-        if (state.getValue(UPPER))
-        {
-            super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
-        }
-    }
+	@Override
+	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {
+		if (state.getValue(UPPER)) {
+			super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
+		}
+	}
 
-    @Override
-    public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn)
-    {
-        IBlockState state = worldIn.getBlockState(pos);
-        BlockPos fluidPos = pos.offset(state.getValue(FACING), -1).down();
-        Block block = state.getBlock();
-        if (block instanceof BlockFluidBase)
-        {
-            Fluid fluid = ((BlockFluidBase) block).getFluid();
-            if (TESluice.isValidFluid(fluid))
-            {
-                worldIn.setBlockToAir(fluidPos);
-            }
-        }
-        super.onExplosionDestroy(worldIn, pos, explosionIn);
-    }
+	@Override
+	public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
+		IBlockState state = worldIn.getBlockState(pos);
+		BlockPos fluidPos = pos.offset(state.getValue(FACING), -1).down();
+		Block block = state.getBlock();
+		if (block instanceof BlockFluidBase) {
+			Fluid fluid = ((BlockFluidBase) block).getFluid();
+			if (TESluice.isValidFluid(fluid)) {
+				worldIn.setBlockToAir(fluidPos);
+			}
+		}
+		super.onExplosionDestroy(worldIn, pos, explosionIn);
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, FACING, UPPER);
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING, UPPER);
+	}
 
-    @Override
-    public boolean hasTileEntity(IBlockState state)
-    {
-        return state.getValue(UPPER);
-    }
+	@Override
+	public boolean hasTileEntity(IBlockState state) {
+		return state.getValue(UPPER);
+	}
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
-    {
-        return state.getValue(UPPER) ? new TESluice() : null;
-    }
+	@Nullable
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return state.getValue(UPPER) ? new TESluice() : null;
+	}
 }

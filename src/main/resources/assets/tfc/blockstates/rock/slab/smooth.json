@@ -12,7 +12,7 @@
         "model": "upper_slab"
       }
     },
-    "stonetype": {
+    "rocktype": {
       "granite": {
           "textures": {
             "bottom": "tfc:blocks/rock/smooth/granite",

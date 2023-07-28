@@ -3,10 +3,9 @@
  * See the project README.md and LICENSE.txt for more information.
  */
 
-package net.dries007.tfc.objects.blocks;
+package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;

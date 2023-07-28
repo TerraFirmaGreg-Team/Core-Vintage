@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.types2.rock;
 
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nonnull;
@@ -41,11 +43,9 @@ public enum RockType implements IStringSerializable {
 	GNEISS(METAMORPHIC),
 	MARBLE(METAMORPHIC, true);
 
+	public static final IProperty<RockType> ROCKTYPE = PropertyEnum.create("rocktype", RockType.class);
+	;
 	private static final RockType[] VALUES = values();
-	public static RockType valueOf(int i) {
-		return i >= 0 && i < VALUES.length ? VALUES[i] : GRANITE;
-	}
-
 	private final RockCategory rockCategory;
 	private final boolean isFlux;
 
@@ -56,6 +56,10 @@ public enum RockType implements IStringSerializable {
 	RockType(@Nonnull RockCategory rockCategory, boolean isFlux) {
 		this.rockCategory = rockCategory;
 		this.isFlux = isFlux;
+	}
+
+	public static RockType valueOf(int i) {
+		return i >= 0 && i < VALUES.length ? VALUES[i] : GRANITE;
 	}
 
 	public @Nonnull RockCategory getRockCategory() {

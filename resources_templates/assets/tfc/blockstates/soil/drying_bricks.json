@@ -12,12 +12,6 @@
     }
   },
   "variants": {
-    "soiltype": {<%for (i=0; i < soil_types.size; i++) { %>
-      "${soil_types[i]}": {
-          "textures": {
-            "all": "tfc:blocks/soil/dirt/${soil_types[i]}"
-      }}<% if(i < soil_types.size - 1) { %>, <%}} %>
-    },
     "north": {
       "true": {
         "textures": {
@@ -49,6 +43,12 @@
         }
       },
       "false": {}
+    },
+    "soiltype": {<%for (i=0; i < soil_types.size; i++) { %>
+      "${soil_types[i]}": {
+          "textures": {
+            "all": "tfc:blocks/soil/dirt/${soil_types[i]}"
+      }}<% if(i < soil_types.size - 1) { %>, <%}} %>
     }
   }
 }

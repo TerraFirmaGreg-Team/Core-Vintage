@@ -11,16 +11,13 @@ import net.minecraft.inventory.IInventory;
 
 import javax.annotation.Nullable;
 
-public class ContainerEmpty extends Container
-{
-    @Override
-    public void onCraftMatrixChanged(IInventory inventory)
-    {
-    }
+public class ContainerEmpty extends Container {
+	@Override
+	public void onCraftMatrixChanged(IInventory inventory) {
+	}
 
-    @Override
-    public boolean canInteractWith(@Nullable EntityPlayer player)
-    {
-        return false;
-    }
+	@Override
+	public boolean canInteractWith(@Nullable EntityPlayer player) {
+		return false;
+	}
 }

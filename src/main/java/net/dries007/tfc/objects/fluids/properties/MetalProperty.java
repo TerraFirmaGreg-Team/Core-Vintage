@@ -9,20 +9,17 @@ import net.dries007.tfc.api.types.Metal;
 
 import javax.annotation.Nonnull;
 
-public class MetalProperty
-{
-    public static final FluidProperty<MetalProperty> METAL = new FluidProperty<>("metal");
+public class MetalProperty {
+	public static final FluidProperty<MetalProperty> METAL = new FluidProperty<>("metal");
 
-    private final Metal metal;
+	private final Metal metal;
 
-    public MetalProperty(@Nonnull Metal metal)
-    {
-        this.metal = metal;
-    }
+	public MetalProperty(@Nonnull Metal metal) {
+		this.metal = metal;
+	}
 
-    @Nonnull
-    public Metal getMetal()
-    {
-        return metal;
-    }
+	@Nonnull
+	public Metal getMetal() {
+		return metal;
+	}
 }

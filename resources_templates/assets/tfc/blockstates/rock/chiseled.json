@@ -5,7 +5,7 @@
     "uvlock": true
   },
   "variants": {
-    "stonetype": {<%for (i=0; i < rock_type.size; i++) { %>
+    "rocktype": {<%for (i=0; i < rock_type.size; i++) { %>
       "${rock_type[i]}": {
           "textures": {
             "all": "tfc:blocks/rock/chiseled/${rock_type[i]}"

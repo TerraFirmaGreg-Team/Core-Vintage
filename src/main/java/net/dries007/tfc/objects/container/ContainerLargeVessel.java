@@ -15,37 +15,29 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 
-public class ContainerLargeVessel extends ContainerTE<TELargeVessel> implements IButtonHandler
-{
-    public ContainerLargeVessel(InventoryPlayer playerInv, TELargeVessel tile)
-    {
-        super(playerInv, tile);
-    }
+public class ContainerLargeVessel extends ContainerTE<TELargeVessel> implements IButtonHandler {
+	public ContainerLargeVessel(InventoryPlayer playerInv, TELargeVessel tile) {
+		super(playerInv, tile);
+	}
 
-    @Override
-    public void onButtonPress(int buttonID, @Nullable NBTTagCompound extraNBT)
-    {
-        // Slot will always be 0, extraNBT will be empty
-        if (!tile.getWorld().isRemote)
-        {
-            BlockLargeVessel.toggleLargeVesselSeal(tile.getWorld(), tile.getPos());
-        }
-    }
+	@Override
+	public void onButtonPress(int buttonID, @Nullable NBTTagCompound extraNBT) {
+		// Slot will always be 0, extraNBT will be empty
+		if (!tile.getWorld().isRemote) {
+			BlockLargeVessel.toggleLargeVesselSeal(tile.getWorld(), tile.getPos());
+		}
+	}
 
-    @Override
-    protected void addContainerSlots()
-    {
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+	@Override
+	protected void addContainerSlots() {
+		IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        if (inventory != null)
-        {
-            for (int y = 0; y < 3; y++)
-            {
-                for (int x = 0; x < 3; x++)
-                {
-                    addSlotToContainer(new SlotCallback(inventory, x * 3 + y, 34 + x * 18, 19 + y * 18, tile));
-                }
-            }
-        }
-    }
+		if (inventory != null) {
+			for (int y = 0; y < 3; y++) {
+				for (int x = 0; x < 3; x++) {
+					addSlotToContainer(new SlotCallback(inventory, x * 3 + y, 34 + x * 18, 19 + y * 18, tile));
+				}
+			}
+		}
+	}
 }

@@ -10,7 +10,7 @@ import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.rock.ItemRock;
@@ -47,6 +47,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
@@ -63,8 +64,9 @@ public class BlockRockAnvil extends Block implements IRockTypeBlock {
 	public BlockRockAnvil(RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
 
-		if (BLOCK_ROCK_MAP.put(new Pair<>(rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
@@ -253,7 +255,7 @@ public class BlockRockAnvil extends Block implements IRockTypeBlock {
 	@Override
 	@Nonnull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(getBlockRockMap(RAW, rockType));
+		return new ItemStack(getBlockRockMap(ORDINARY, RAW, rockType));
 	}
 
 	@Override
@@ -268,7 +270,7 @@ public class BlockRockAnvil extends Block implements IRockTypeBlock {
 		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
 			@Nonnull
 			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName());
+				return new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName());
 			}
 		});
 
@@ -276,6 +278,6 @@ public class BlockRockAnvil extends Block implements IRockTypeBlock {
 		ModelLoader.setCustomModelResourceLocation(
 				Item.getItemFromBlock(this),
 				this.getMetaFromState(this.getBlockState().getBaseState()),
-				new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName()));
+				new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName()));
 	}
 }

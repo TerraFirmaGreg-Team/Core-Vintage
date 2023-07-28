@@ -15,26 +15,23 @@ import net.minecraft.init.Blocks;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlockWoodPressurePlateTFC extends BlockPressurePlate
-{
-    private static final Map<Tree, BlockWoodPressurePlateTFC> MAP = new HashMap<>();
+public class BlockWoodPressurePlateTFC extends BlockPressurePlate {
+	private static final Map<Tree, BlockWoodPressurePlateTFC> MAP = new HashMap<>();
 
-    public static BlockWoodPressurePlateTFC get(Tree wood)
-    {
-        return MAP.get(wood);
-    }
+	public static BlockWoodPressurePlateTFC get(Tree wood) {
+		return MAP.get(wood);
+	}
 
-    public final Tree wood;
+	public final Tree wood;
 
-    public BlockWoodPressurePlateTFC(Tree wood)
-    {
-        super(Material.WOOD, Sensitivity.EVERYTHING);
-        this.wood = wood;
-        if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
-        setHardness(0.5F);
-        setSoundType(SoundType.WOOD);
-        Blocks.FIRE.setFireInfo(this, 5, 20);
+	public BlockWoodPressurePlateTFC(Tree wood) {
+		super(Material.WOOD, Sensitivity.EVERYTHING);
+		this.wood = wood;
+		if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
+		setHardness(0.5F);
+		setSoundType(SoundType.WOOD);
+		Blocks.FIRE.setFireInfo(this, 5, 20);
 
-        OreDictionaryHelper.register(this, "pressure_plate_wood");
-    }
+		OreDictionaryHelper.register(this, "pressure_plate_wood");
+	}
 }

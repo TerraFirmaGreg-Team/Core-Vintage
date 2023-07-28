@@ -11,21 +11,19 @@ import javax.annotation.Nonnull;
 
 public class ItemRockSlab extends ItemSlab implements IItemSize {
 
-    public ItemRockSlab(BlockRockSlab.Half slab, BlockRockSlab.Half slab1, BlockRockSlab.Double doubleSlab) {
-        super(slab, slab1, doubleSlab);
-    }
+	public ItemRockSlab(BlockRockSlab.Half slab, BlockRockSlab.Half slab1, BlockRockSlab.Double doubleSlab) {
+		super(slab, slab1, doubleSlab);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack)
-    {
-        return Size.SMALL; // if blocks fits in small vessels, this should too
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.SMALL; // if blocks fits in small vessels, this should too
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack)
-    {
-        return Weight.VERY_LIGHT; // Double the stacksize of a block (or 64)
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.VERY_LIGHT; // Double the stacksize of a block (or 64)
+	}
 }

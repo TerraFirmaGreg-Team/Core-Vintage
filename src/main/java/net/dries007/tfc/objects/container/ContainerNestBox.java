@@ -16,23 +16,19 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ContainerNestBox extends ContainerTE<TENestBox>
-{
-    public ContainerNestBox(InventoryPlayer playerInv, TENestBox te)
-    {
-        super(playerInv, te);
-    }
+public class ContainerNestBox extends ContainerTE<TENestBox> {
+	public ContainerNestBox(InventoryPlayer playerInv, TENestBox te) {
+		super(playerInv, te);
+	}
 
-    @Override
-    protected void addContainerSlots()
-    {
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (inventory != null)
-        {
-            addSlotToContainer(new SlotCallback(inventory, 0, 71, 23, tile));
-            addSlotToContainer(new SlotCallback(inventory, 1, 89, 23, tile));
-            addSlotToContainer(new SlotCallback(inventory, 2, 71, 41, tile));
-            addSlotToContainer(new SlotCallback(inventory, 3, 89, 41, tile));
-        }
-    }
+	@Override
+	protected void addContainerSlots() {
+		IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+		if (inventory != null) {
+			addSlotToContainer(new SlotCallback(inventory, 0, 71, 23, tile));
+			addSlotToContainer(new SlotCallback(inventory, 1, 89, 23, tile));
+			addSlotToContainer(new SlotCallback(inventory, 2, 71, 41, tile));
+			addSlotToContainer(new SlotCallback(inventory, 3, 89, 41, tile));
+		}
+	}
 }

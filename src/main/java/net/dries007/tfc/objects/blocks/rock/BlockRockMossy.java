@@ -1,12 +1,10 @@
 package net.dries007.tfc.objects.blocks.rock;
 
+import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.objects.CreativeTabsTFC;
+import net.dries007.tfc.api.util.Triple;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -35,31 +33,30 @@ import java.util.Random;
 
 import static gregtech.common.items.ToolItems.HARD_HAMMER;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 
 /**
  * Пока это почти полная копия {@link BlockRock}
  * Этот клас в будущем планируется использовать для механики распространения мха
  */
-public class BlockRockMossy extends Block implements IRockTypeBlock {
+public class BlockRockMossy extends BlockRockVatiant {
 
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockRockMossy(RockVariant rockVariant, RockType rockType) {
+	public BlockRockMossy(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
 
-		if (BLOCK_ROCK_MAP.put(new Pair<>(rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
-		this.modelLocation = new ResourceLocation(MOD_ID, "rock/mossy/" + rockVariant);
+		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("rock/mossy/%s/%s", rockVariant, rockType);
-		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
-		this.setSoundType(SoundType.STONE);
+		String blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
+
 		this.setHardness(getFinalHardness());
 		this.setResistance(rockVariant.getResistance());
 		this.setHarvestLevel("pickaxe", rockVariant.getHarvestLevel());
@@ -131,7 +128,7 @@ public class BlockRockMossy extends Block implements IRockTypeBlock {
 		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
 			@Nonnull
 			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName());
+				return new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName());
 			}
 		});
 
@@ -139,7 +136,7 @@ public class BlockRockMossy extends Block implements IRockTypeBlock {
 		ModelLoader.setCustomModelResourceLocation(
 				Item.getItemFromBlock(this),
 				this.getMetaFromState(this.getBlockState().getBaseState()),
-				new ModelResourceLocation(modelLocation, "stonetype=" + rockType.getName()));
+				new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName()));
 	}
 
 	@Override

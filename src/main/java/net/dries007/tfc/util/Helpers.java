@@ -43,8 +43,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -81,10 +79,6 @@ public final class Helpers {
 		VANILLA_REPLACEMENTS.put(EntityPolarBear.class, EntityPolarBearTFC.class);
 		VANILLA_REPLACEMENTS.put(EntityParrot.class, EntityParrotTFC.class);
 		VANILLA_REPLACEMENTS.put(EntityLlama.class, EntityLlamaTFC.class);
-	}
-
-	public static <E extends Enum<E>, V> EnumMap<E, V> mapOfKeys(Class<E> enumClass, Predicate<E> keyPredicate, Function<E, V> valueMapper) {
-		return Arrays.stream(enumClass.getEnumConstants()).filter(keyPredicate).collect(Collectors.toMap(Function.identity(), valueMapper, (v, v2) -> v, () -> new EnumMap<>(enumClass)));
 	}
 
 	public static int getOrePrefixMaterialAmount(OrePrefix orePrefix) {

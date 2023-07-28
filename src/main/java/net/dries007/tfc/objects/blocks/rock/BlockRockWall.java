@@ -1,9 +1,10 @@
 package net.dries007.tfc.objects.blocks.rock;
 
+import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
@@ -27,31 +28,29 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
+import static net.dries007.tfc.objects.blocks.rock.BlockRockVatiant.BLOCK_ROCK_MAP;
 
 public class BlockRockWall extends BlockWall implements IRockTypeBlock {
-
-	public static final Map<Pair<RockVariant, RockType>, IRockTypeBlock> BLOCK_ROCK_DECORATIONS = new LinkedHashMap<>();
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockRockWall(RockVariant rockVariant, RockType rockType) {
-		super(getBlockRockMap(rockVariant, rockType));
+	public BlockRockWall(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
+		super(getBlockRockMap(ORDINARY, rockVariant, rockType));
 
-		if (BLOCK_ROCK_DECORATIONS.put(new Pair<>(rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
-		this.modelLocation = new ResourceLocation(MOD_ID, "rock/wall/" + rockVariant);
+		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("rock/wall/%s/%s", rockVariant, rockType);
+		String blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
 
 		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		this.setSoundType(SoundType.STONE);
@@ -109,7 +108,7 @@ public class BlockRockWall extends BlockWall implements IRockTypeBlock {
 //					switch (rockVariant) {
 //						case RAW:
 //						case SMOOTH:
-//							Block.spawnAsEntity(world, pos, new ItemStack(getBlockRockMap(COBBLE, rockType), 1));
+//							Block.spawnAsEntity(world, pos, new ItemStack(getBlockRockMap(ORD, COBBLE, rockType), 1));
 //							break;
 //						case COBBLE:
 //							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 2));
@@ -139,7 +138,7 @@ public class BlockRockWall extends BlockWall implements IRockTypeBlock {
 								"east=" + state.getValue(EAST) + "," +
 										"north=" + state.getValue(NORTH) + "," +
 										"south=" + state.getValue(SOUTH) + "," +
-										"stonetype=" + rockType.getName() + "," +
+										"rocktype=" + rockType.getName() + "," +
 										"up=" + state.getValue(UP) + "," +
 										"west=" + state.getValue(WEST));
 					}

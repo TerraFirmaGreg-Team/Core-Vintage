@@ -29,78 +29,76 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class ItemMetalCladding extends ItemTFC
-{
-    private static final Map<Material, ItemMetalCladding> CLADDING_STORAGE_MAP = new HashMap<>();
-    public static ItemMetalCladding get(Material material) {
-        return CLADDING_STORAGE_MAP.get(material);
-    }
+public class ItemMetalCladding extends ItemTFC {
+	private static final Map<Material, ItemMetalCladding> CLADDING_STORAGE_MAP = new HashMap<>();
 
-    private final Material material;
+	public static ItemMetalCladding get(Material material) {
+		return CLADDING_STORAGE_MAP.get(material);
+	}
 
-    public ItemMetalCladding(Material material) {
-        this.material = material;
+	private final Material material;
 
-        if (CLADDING_STORAGE_MAP.put(material, this) != null) throw new IllegalStateException("There can only be one.");
-    }
+	public ItemMetalCladding(Material material) {
+		this.material = material;
 
-    @Override
-    @Nonnull
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        ItemStack stack = player.getHeldItem(hand);
-        if (worldIn.getBlockState(pos).isNormalCube() && stack.getItem() instanceof ItemMetalCladding sheet) {
+		if (CLADDING_STORAGE_MAP.put(material, this) != null) throw new IllegalStateException("There can only be one.");
+	}
 
-            if (!ItemStack.areItemStacksEqual(new ItemStack(stack.getItem(), stack.getCount()), stack)) {
-                return EnumActionResult.FAIL;
-            }
-            BlockPos posAt = pos.offset(facing);
-            IBlockState stateAt = worldIn.getBlockState(posAt);
+	@Override
+	@Nonnull
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
+		if (worldIn.getBlockState(pos).isNormalCube() && stack.getItem() instanceof ItemMetalCladding sheet) {
 
-            if (stateAt.getBlock() instanceof BlockMetalCladding) {
-                // Existing sheet block
-                var metal = ((BlockMetalCladding) stateAt.getBlock()).getMaterial();
-                if (metal == sheet.material) {
-                    stack.shrink(1);
-                    player.setHeldItem(hand, stack);
-                    return placeSheet(worldIn, posAt, facing);
-                }
-            }
-            else if (stateAt.getBlock().isReplaceable(worldIn, posAt)) {
-                // Place a new block
-                if (!worldIn.isRemote) {
-                    worldIn.setBlockState(posAt, BlockMetalCladding.get(sheet.material).getDefaultState());
-                    stack.shrink(1);
-                    player.setHeldItem(hand, stack);
-                    placeSheet(worldIn, posAt, facing);
-                }
-                return EnumActionResult.SUCCESS;
-            }
-        }
-        return EnumActionResult.FAIL;
-    }
+			if (!ItemStack.areItemStacksEqual(new ItemStack(stack.getItem(), stack.getCount()), stack)) {
+				return EnumActionResult.FAIL;
+			}
+			BlockPos posAt = pos.offset(facing);
+			IBlockState stateAt = worldIn.getBlockState(posAt);
 
-    private EnumActionResult placeSheet(World world, BlockPos pos, EnumFacing facing) {
-        TEMetalSheet tile = Helpers.getTE(world, pos, TEMetalSheet.class);
-        if (tile != null && !tile.getFace(facing)) {
-            if (!world.isRemote) {
-                tile.setFace(facing, true);
-                world.playSound(null, pos.offset(facing), SoundEvents.BLOCK_METAL_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            }
-            return EnumActionResult.SUCCESS;
-        }
-        return EnumActionResult.FAIL;
-    }
+			if (stateAt.getBlock() instanceof BlockMetalCladding) {
+				// Existing sheet block
+				var metal = ((BlockMetalCladding) stateAt.getBlock()).getMaterial();
+				if (metal == sheet.material) {
+					stack.shrink(1);
+					player.setHeldItem(hand, stack);
+					return placeSheet(worldIn, posAt, facing);
+				}
+			} else if (stateAt.getBlock().isReplaceable(worldIn, posAt)) {
+				// Place a new block
+				if (!worldIn.isRemote) {
+					worldIn.setBlockState(posAt, BlockMetalCladding.get(sheet.material).getDefaultState());
+					stack.shrink(1);
+					player.setHeldItem(hand, stack);
+					placeSheet(worldIn, posAt, facing);
+				}
+				return EnumActionResult.SUCCESS;
+			}
+		}
+		return EnumActionResult.FAIL;
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack stack) {
-        return Size.LARGE;
-    }
+	private EnumActionResult placeSheet(World world, BlockPos pos, EnumFacing facing) {
+		TEMetalSheet tile = Helpers.getTE(world, pos, TEMetalSheet.class);
+		if (tile != null && !tile.getFace(facing)) {
+			if (!world.isRemote) {
+				tile.setFace(facing, true);
+				world.playSound(null, pos.offset(facing), SoundEvents.BLOCK_METAL_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
+			}
+			return EnumActionResult.SUCCESS;
+		}
+		return EnumActionResult.FAIL;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack stack) {
-        return Weight.MEDIUM;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack stack) {
+		return Size.LARGE;
+	}
+
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack stack) {
+		return Weight.MEDIUM;
+	}
 }

@@ -4,7 +4,7 @@
     "model": "tfc:stone_anvil"
   },
   "variants": {
-    "stonetype": {
+    "rocktype": {
       "granite": {
           "textures": {
             "all": "tfc:blocks/rock/raw/granite",

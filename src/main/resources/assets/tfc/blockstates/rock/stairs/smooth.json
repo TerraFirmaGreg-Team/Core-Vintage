@@ -41,7 +41,7 @@
         "model": "outer_stairs"
       }
     },
-    "stonetype": {
+    "rocktype": {
       "granite": {
         "textures": {
           "bottom": "tfc:blocks/rock/smooth/granite",

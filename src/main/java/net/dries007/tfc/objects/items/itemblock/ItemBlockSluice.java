@@ -21,46 +21,35 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemBlockSluice extends ItemBlockTFC
-{
-    public ItemBlockSluice(Block block)
-    {
-        super(block);
-    }
+public class ItemBlockSluice extends ItemBlockTFC {
+	public ItemBlockSluice(Block block) {
+		super(block);
+	}
 
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        if (worldIn.isRemote)
-        {
-            return EnumActionResult.SUCCESS;
-        }
-        else if (facing != EnumFacing.UP)
-        {
-            return EnumActionResult.FAIL;
-        }
-        else
-        {
-            if (!worldIn.getBlockState(pos).getMaterial().isReplaceable() || !worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getMaterial().isReplaceable())
-            {
-                pos = pos.up(); //try the above
-            }
-            if (!worldIn.getBlockState(pos).getMaterial().isReplaceable() || !worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getMaterial().isReplaceable())
-            {
-                return EnumActionResult.FAIL;
-            }
-            ItemStack stack = player.getHeldItem(hand);
-            BlockPos upperPos = pos.offset(player.getHorizontalFacing());
-            //Creating a thatch bed
-            if (player.canPlayerEdit(upperPos, facing, stack) && player.canPlayerEdit(pos, facing, stack))
-            {
-                stack.shrink(1);
-                IBlockState lowerState = this.block.getDefaultState().withProperty(BlockSluice.FACING, player.getHorizontalFacing()).withProperty(BlockSluice.UPPER, false);
-                IBlockState upperState = this.block.getDefaultState().withProperty(BlockSluice.FACING, player.getHorizontalFacing()).withProperty(BlockSluice.UPPER, true);
-                worldIn.setBlockState(pos, lowerState);
-                worldIn.setBlockState(upperPos, upperState);
-                return EnumActionResult.SUCCESS;
-            }
-        }
-        return EnumActionResult.PASS;
-    }
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (worldIn.isRemote) {
+			return EnumActionResult.SUCCESS;
+		} else if (facing != EnumFacing.UP) {
+			return EnumActionResult.FAIL;
+		} else {
+			if (!worldIn.getBlockState(pos).getMaterial().isReplaceable() || !worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getMaterial().isReplaceable()) {
+				pos = pos.up(); //try the above
+			}
+			if (!worldIn.getBlockState(pos).getMaterial().isReplaceable() || !worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getMaterial().isReplaceable()) {
+				return EnumActionResult.FAIL;
+			}
+			ItemStack stack = player.getHeldItem(hand);
+			BlockPos upperPos = pos.offset(player.getHorizontalFacing());
+			//Creating a thatch bed
+			if (player.canPlayerEdit(upperPos, facing, stack) && player.canPlayerEdit(pos, facing, stack)) {
+				stack.shrink(1);
+				IBlockState lowerState = this.block.getDefaultState().withProperty(BlockSluice.FACING, player.getHorizontalFacing()).withProperty(BlockSluice.UPPER, false);
+				IBlockState upperState = this.block.getDefaultState().withProperty(BlockSluice.FACING, player.getHorizontalFacing()).withProperty(BlockSluice.UPPER, true);
+				worldIn.setBlockState(pos, lowerState);
+				worldIn.setBlockState(upperPos, upperState);
+				return EnumActionResult.SUCCESS;
+			}
+		}
+		return EnumActionResult.PASS;
+	}
 }

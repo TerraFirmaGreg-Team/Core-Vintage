@@ -1,9 +1,10 @@
 package net.dries007.tfc.objects.blocks.rock;
 
+import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockStairs;
@@ -12,7 +13,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -28,31 +28,31 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
+import static net.dries007.tfc.objects.blocks.rock.BlockRockVatiant.BLOCK_ROCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRockVatiant.getBlockRockMap;
 
 public class BlockRockStair extends BlockStairs implements IRockTypeBlock {
-
-	public static final Map<Pair<RockVariant, RockType>, IRockTypeBlock> BLOCK_ROCK_STAIR_MAP = new LinkedHashMap<>();
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
-	public BlockRockStair(RockVariant rockVariant, RockType rockType) {
-		super(Blocks.BRICK_STAIRS.getDefaultState());
+	public BlockRockStair(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
+		super(getBlockRockMap(ORDINARY, rockVariant, rockType).getDefaultState());
 
-		if (BLOCK_ROCK_STAIR_MAP.put(new Pair<>(rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
-		this.modelLocation = new ResourceLocation(MOD_ID, "rock/stair/" + rockVariant);
+		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 		useNeighborBrightness = true;
 
-		String blockRegistryName = String.format("rock/stair/%s/%s", rockVariant, rockType);
+		String blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
+
 		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(getFinalHardness());
@@ -105,7 +105,7 @@ public class BlockRockStair extends BlockStairs implements IRockTypeBlock {
 //					switch (rockVariant) {
 //						case RAW:
 //						case SMOOTH:
-//							Block.spawnAsEntity(world, pos, new ItemStack(getBlockRockMap(COBBLE, rockType), 1));
+//							Block.spawnAsEntity(world, pos, new ItemStack(getBlockRockMap(ORD, COBBLE, rockType), 1));
 //							break;
 //						case COBBLE:
 //							//Block.spawnAsEntity(world, pos, new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(LOOSE.getName() + "/" + rockType.getName()), new Random().nextInt(2) + 3));
@@ -134,8 +134,8 @@ public class BlockRockStair extends BlockStairs implements IRockTypeBlock {
 				return new ModelResourceLocation(modelLocation,
 						"facing=" + state.getValue(FACING) + "," +
 								"half=" + state.getValue(HALF) + "," +
-								"shape=" + state.getValue(SHAPE) + "," +
-								"stonetype=" + rockType.getName());
+								"rocktype=" + rockType.getName() + "," +
+								"shape=" + state.getValue(SHAPE));
 			}
 		});
 
@@ -146,8 +146,8 @@ public class BlockRockStair extends BlockStairs implements IRockTypeBlock {
 					new ModelResourceLocation(modelLocation,
 							"facing=east," +
 									"half=bottom," +
-									"shape=straight," +
-									"stonetype=" + rockType.getName()));
+									"rocktype=" + rockType.getName() + "," +
+									"shape=straight"));
 		}
 	}
 

@@ -20,56 +20,48 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class ItemBrickTFC extends ItemTFC implements IRockObject
-{
-    private static final Map<RockType, ItemBrickTFC> MAP = new HashMap<>();
+public class ItemBrickTFC extends ItemTFC implements IRockObject {
+	private static final Map<RockType, ItemBrickTFC> MAP = new HashMap<>();
 
-    public static ItemBrickTFC get(RockType ore)
-    {
-        return MAP.get(ore);
-    }
+	public static ItemBrickTFC get(RockType ore) {
+		return MAP.get(ore);
+	}
 
-    public static ItemStack get(RockType ore, int amount)
-    {
-        return new ItemStack(MAP.get(ore), amount);
-    }
+	public static ItemStack get(RockType ore, int amount) {
+		return new ItemStack(MAP.get(ore), amount);
+	}
 
-    private final RockType rock;
+	private final RockType rock;
 
-    public ItemBrickTFC(RockType rock)
-    {
-        this.rock = rock;
-        if (MAP.put(rock, this) != null) throw new IllegalStateException("There can only be one.");
-        setMaxDamage(0);
-        OreDictionaryHelper.register(this, "brick");
-        OreDictionaryHelper.register(this, "brick", rock.getRockCategory());
-    }
+	public ItemBrickTFC(RockType rock) {
+		this.rock = rock;
+		if (MAP.put(rock, this) != null) throw new IllegalStateException("There can only be one.");
+		setMaxDamage(0);
+		OreDictionaryHelper.register(this, "brick");
+		OreDictionaryHelper.register(this, "brick", rock.getRockCategory());
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack)
-    {
-        return Size.SMALL; // Stored everywhere
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.SMALL; // Stored everywhere
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack)
-    {
-        return Weight.LIGHT; // Stacksize = 32
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.LIGHT; // Stacksize = 32
+	}
 
-    @Nonnull
-    @Override
-    public RockType getRock(ItemStack stack)
-    {
-        return rock;
-    }
+	@Nonnull
+	@Override
+	public RockType getRock(ItemStack stack) {
+		return rock;
+	}
 
-    @Nonnull
-    @Override
-    public RockCategory getRockCategory(ItemStack stack)
-    {
-        return rock.getRockCategory();
-    }
+	@Nonnull
+	@Override
+	public RockCategory getRockCategory(ItemStack stack) {
+		return rock.getRockCategory();
+	}
 }

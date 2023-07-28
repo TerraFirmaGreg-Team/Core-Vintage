@@ -3,8 +3,7 @@ package net.dries007.tfc.objects.blocks.rock;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -40,11 +39,11 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockRockSpeleothem extends Block implements IRockTypeBlock {
+public class BlockRockSpeleothem extends BlockRockVatiant {
 	public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
 	private final RockVariant rockVariant;
@@ -54,8 +53,9 @@ public class BlockRockSpeleothem extends Block implements IRockTypeBlock {
 	public BlockRockSpeleothem(RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
 
-		if (BLOCK_ROCK_MAP.put(new Pair<>(rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
@@ -229,8 +229,8 @@ public class BlockRockSpeleothem extends Block implements IRockTypeBlock {
 			@Nonnull
 			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
 				return new ModelResourceLocation(modelLocation,
-						"size=" + state.getValue(SIZE) + "," +
-								"stonetype=" + rockType.getName());
+						"rocktype=" + rockType.getName() + "," +
+								"size=" + state.getValue(SIZE));
 			}
 		});
 
@@ -238,7 +238,9 @@ public class BlockRockSpeleothem extends Block implements IRockTypeBlock {
 		ModelLoader.setCustomModelResourceLocation(
 				Item.getItemFromBlock(this),
 				this.getMetaFromState(this.getBlockState().getBaseState()),
-				new ModelResourceLocation(modelLocation, "size=medium,stonetype=" + rockType.getName()));
+				new ModelResourceLocation(modelLocation,
+						"rocktype=" + rockType.getName() + "," +
+								"size=medium"));
 	}
 
 	@Override

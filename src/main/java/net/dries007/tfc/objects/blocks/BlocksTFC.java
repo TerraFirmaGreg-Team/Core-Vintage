@@ -15,6 +15,7 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.soil.SoilType;
@@ -29,7 +30,6 @@ import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.soil.BlockPeat;
 import net.dries007.tfc.objects.blocks.soil.BlockPeatGrass;
-import net.dries007.tfc.objects.blocks.stone.BlockRockSlabTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.wood.*;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -119,7 +119,7 @@ public final class BlocksTFC {
 	private static ImmutableList<BlockTrapDoorWoodTFC> allTrapDoorWoodBlocks;
 	private static ImmutableList<BlockTrapDoorMetalTFC> allTrapDoorMetalBlocks;
 	private static ImmutableList<BlockStairsTFC> allStairsBlocks;
-	private static ImmutableList<BlockRockSlabTFC.Half> allSlabBlocks;
+	private static ImmutableList<BlockWoodSlabTFC.Half> allSlabBlocks;
 	private static ImmutableList<BlockChestTFC> allChestBlocks;
 	private static ImmutableList<BlockAnvilTFC> allAnvils;
 	private static ImmutableList<BlockMetalCladding> allCladdings;
@@ -186,7 +186,7 @@ public final class BlocksTFC {
 		return allStairsBlocks;
 	}
 
-	public static ImmutableList<BlockRockSlabTFC.Half> getAllSlabBlocks() {
+	public static ImmutableList<BlockWoodSlabTFC.Half> getAllSlabBlocks() {
 		return allSlabBlocks;
 	}
 
@@ -273,11 +273,13 @@ public final class BlocksTFC {
 		//=== Rock ===================================================================================================//
 
 		for (RockType rockType : RockType.values()) {
-			for (RockVariant rockVariant : RockVariant.values()) {
-				Block block = (Block) rockVariant.createBlock(rockType);
+			for (RockBlockType rockBlockType : RockBlockType.values()) {
+				for (RockVariant rockVariant : rockBlockType.getRockVariants()) {
+					Block block = (Block) rockBlockType.createBlockType(rockVariant, rockType);
 
-				TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
-				r.register(block);
+					TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
+					r.register(block);
+				}
 			}
 		}
 		for (IRockTypeBlock stoneTypeBlock : BLOCK_ROCK_MAP.values()) {
@@ -285,14 +287,6 @@ public final class BlocksTFC {
 			if (itemBlock != null)
 				normalItemBlocks.add(itemBlock);
 		}
-
-
-//		for (RockVariant rockVariant : new RockVariant[] {RockVariant.RAW, RockVariant.SMOOTH, RockVariant.COBBLE, RockVariant.BRICK})
-//			for (RockType rockType : RockType.values()) {
-//				r.register(new BlockRockWall(rockVariant, rockType));
-//				r.register(new BlockRockStair(rockVariant, rockType));
-//				r.register(new BlockRockSlab.Half(rockVariant, rockType));
-//			}
 
 		//=== Soil ===================================================================================================//
 
@@ -317,8 +311,8 @@ public final class BlocksTFC {
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), ROCK_STUFFS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), ROCK_STUFFS)));
 
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat", new BlockPeat(Material.GROUND), ROCK_STUFFS)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat_grass", new BlockPeatGrass(Material.GRASS), ROCK_STUFFS)));
+		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat", new BlockPeat(Material.GROUND), EARTH)));
+		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat_grass", new BlockPeatGrass(Material.GRASS), EARTH)));
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "thatch", new BlockThatch(), DECORATIONS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), DECORATIONS)));
@@ -492,18 +486,18 @@ public final class BlocksTFC {
 
 		{
 			Builder<BlockStairsTFC> stairs = new Builder<>();
-			Builder<BlockRockSlabTFC.Half> slab = new Builder<>();
+			Builder<BlockWoodSlabTFC.Half> slab = new Builder<>();
 
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				stairs.add(register(r, "stairs/wood/" + wood.getRegistryName().getPath(), new BlockStairsTFC(wood), DECORATIONS));
 
 			// Full slabs are the same as full blocks, they are not saved to a list, they are kept track of by the halfslab version.
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
-				register(r, "double_slab/wood/" + wood.getRegistryName().getPath(), new BlockRockSlabTFC.Double(wood));
+				register(r, "double_slab/wood/" + wood.getRegistryName().getPath(), new BlockWoodSlabTFC.Double(wood));
 
 			// Slabs
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
-				slab.add(register(r, "slab/wood/" + wood.getRegistryName().getPath(), new BlockRockSlabTFC.Half(wood), DECORATIONS));
+				slab.add(register(r, "slab/wood/" + wood.getRegistryName().getPath(), new BlockWoodSlabTFC.Half(wood), DECORATIONS));
 
 
 			allStairsBlocks = stairs.build();

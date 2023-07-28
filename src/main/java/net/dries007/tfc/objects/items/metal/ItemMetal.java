@@ -25,64 +25,55 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class ItemMetal extends ItemTFC implements IMaterialItem
-{
-    private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetal>> TABLE = new HashMap<>();
+public class ItemMetal extends ItemTFC implements IMaterialItem {
+	private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetal>> TABLE = new HashMap<>();
 
-    public ItemMetal() {
+	public ItemMetal() {
 
-    }
+	}
 
-    public static Item get(Metal metal, Metal.ItemType type)
-    {
-        if (type == Metal.ItemType.SWORD)
-        {
-            // Make sure to not crash (in 1.15+, don't forget to rewrite all metal items to extend the proper vanilla classes)
-            return ItemMetalSword.get(metal);
-        }
-        if (type == Metal.ItemType.LAMP)
-        {
-            return ItemBlockMetalLamp.get(metal);
-        }
-        if (type == Metal.ItemType.TRAPDOOR)
-        {
-            return ItemBlock.getItemFromBlock(BlockTrapDoorMetalTFC.get(metal));
-        }
-        return TABLE.get(metal).get(type);
-    }
+	public static Item get(Metal metal, Metal.ItemType type) {
+		if (type == Metal.ItemType.SWORD) {
+			// Make sure to not crash (in 1.15+, don't forget to rewrite all metal items to extend the proper vanilla classes)
+			return ItemMetalSword.get(metal);
+		}
+		if (type == Metal.ItemType.LAMP) {
+			return ItemBlockMetalLamp.get(metal);
+		}
+		if (type == Metal.ItemType.TRAPDOOR) {
+			return ItemBlock.getItemFromBlock(BlockTrapDoorMetalTFC.get(metal));
+		}
+		return TABLE.get(metal).get(type);
+	}
 
-    protected Material metal;
-    protected Metal.ItemType type;
+	protected Material metal;
+	protected Metal.ItemType type;
 
 
+	@Override
+	public Material getMaterial(ItemStack stack) {
+		return metal;
+	}
 
-    @Override
-    public Material getMaterial(ItemStack stack)
-    {
-        return metal;
-    }
-
-    @Override
-    public int getSmeltAmount(ItemStack stack) {
-        if (!isDamageable() || !stack.isItemDamaged()) return type.getSmeltAmount();
-        double d = (stack.getMaxDamage() - stack.getItemDamage()) / (double) stack.getMaxDamage() - .10;
-        return d < 0 ? 0 : MathHelper.floor(type.getSmeltAmount() * d);
-    }
+	@Override
+	public int getSmeltAmount(ItemStack stack) {
+		if (!isDamageable() || !stack.isItemDamaged()) return type.getSmeltAmount();
+		double d = (stack.getMaxDamage() - stack.getItemDamage()) / (double) stack.getMaxDamage() - .10;
+		return d < 0 ? 0 : MathHelper.floor(type.getSmeltAmount() * d);
+	}
 
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack stack)
-    {
-        return Size.LARGE;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack stack) {
+		return Size.LARGE;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack stack)
-    {
-        return Weight.VERY_HEAVY;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack stack) {
+		return Weight.VERY_HEAVY;
+	}
 
 
 }

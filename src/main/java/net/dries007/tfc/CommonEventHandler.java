@@ -42,9 +42,9 @@ import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.devices.BlockQuern;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
+import net.dries007.tfc.objects.blocks.rock.BlockRockAnvil;
+import net.dries007.tfc.objects.blocks.rock.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
@@ -126,6 +126,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockType.BASALT;
 import static net.dries007.tfc.api.types2.rock.RockType.RHYOLITE;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
@@ -301,7 +302,7 @@ public final class CommonEventHandler {
 
 		// Fire onBlockActivated for in world crafting devices
 		if (state.getBlock() instanceof BlockAnvilTFC
-				|| state.getBlock() instanceof BlockStoneAnvil
+				|| state.getBlock() instanceof BlockRockAnvil
 				|| state.getBlock() instanceof BlockQuern
 				|| state.getBlock() instanceof BlockSupport) {
 			event.setUseBlock(Event.Result.ALLOW);
@@ -884,10 +885,10 @@ public final class CommonEventHandler {
 		// Since cobble is a gravity block, placing it can lead to world crashes, so we avoid doing that and place rhyolite instead
 		if (ConfigTFC.General.OVERRIDES.enableLavaWaterPlacesTFCBlocks) {
 			if (event.getNewState().getBlock() == Blocks.STONE) {
-				event.setNewState(getBlockRockMap(RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+				event.setNewState(getBlockRockMap(ORDINARY, RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
 			}
 			if (event.getNewState().getBlock() == Blocks.COBBLESTONE) {
-				event.setNewState(getBlockRockMap(RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+				event.setNewState(getBlockRockMap(ORDINARY, RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
 			}
 		}
 	}

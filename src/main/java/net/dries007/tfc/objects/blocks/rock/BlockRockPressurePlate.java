@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks.rock;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockPressurePlate;
@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 
 public class BlockRockPressurePlate extends BlockPressurePlate implements IRockTypeBlock {
@@ -38,8 +39,9 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockT
 	public BlockRockPressurePlate(RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK, Sensitivity.MOBS);
 
-		if (BLOCK_ROCK_MAP.put(new Pair<>(rockVariant, rockType), this) != null)
+		if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
@@ -81,7 +83,7 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockT
 			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
 				return new ModelResourceLocation(modelLocation,
 						"powered=" + state.getValue(POWERED) + "," +
-								"stonetype=" + rockType.getName());
+								"rocktype=" + rockType.getName());
 			}
 		});
 

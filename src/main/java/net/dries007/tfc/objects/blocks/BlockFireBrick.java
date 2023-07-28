@@ -17,26 +17,22 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class BlockFireBrick extends Block implements IItemSize
-{
-    public BlockFireBrick()
-    {
-        super(Material.ROCK);
-        setSoundType(SoundType.STONE);
-        setHardness(1.0F);
-    }
+public class BlockFireBrick extends Block implements IItemSize {
+	public BlockFireBrick() {
+		super(Material.ROCK);
+		setSoundType(SoundType.STONE);
+		setHardness(1.0F);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack)
-    {
-        return Size.SMALL; // Stored everywhere
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.SMALL; // Stored everywhere
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack)
-    {
-        return Weight.LIGHT; // Stacksize = 32
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.LIGHT; // Stacksize = 32
+	}
 }

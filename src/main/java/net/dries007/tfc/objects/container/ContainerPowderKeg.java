@@ -15,37 +15,29 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 
-public class ContainerPowderKeg extends ContainerTE<TEPowderKeg> implements IButtonHandler
-{
-    public ContainerPowderKeg(InventoryPlayer playerInv, TEPowderKeg tile)
-    {
-        super(playerInv, tile);
-    }
+public class ContainerPowderKeg extends ContainerTE<TEPowderKeg> implements IButtonHandler {
+	public ContainerPowderKeg(InventoryPlayer playerInv, TEPowderKeg tile) {
+		super(playerInv, tile);
+	}
 
-    @Override
-    public void onButtonPress(int buttonID, @Nullable NBTTagCompound extraNBT)
-    {
-        // Slot will always be 0, extraNBT will be empty
-        if (!tile.getWorld().isRemote)
-        {
-            BlockPowderKeg.togglePowderKegSeal(tile.getWorld(), tile.getPos());
-        }
-    }
+	@Override
+	public void onButtonPress(int buttonID, @Nullable NBTTagCompound extraNBT) {
+		// Slot will always be 0, extraNBT will be empty
+		if (!tile.getWorld().isRemote) {
+			BlockPowderKeg.togglePowderKegSeal(tile.getWorld(), tile.getPos());
+		}
+	}
 
-    @Override
-    protected void addContainerSlots()
-    {
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+	@Override
+	protected void addContainerSlots() {
+		IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        if (inventory != null)
-        {
-            for (int y = 0; y < 3; y++)
-            {
-                for (int x = 0; x < 4; x++)
-                {
-                    addSlotToContainer(new SlotCallback(inventory, x * 3 + y, 25 + x * 18, 19 + y * 18, tile));
-                }
-            }
-        }
-    }
+		if (inventory != null) {
+			for (int y = 0; y < 3; y++) {
+				for (int x = 0; x < 4; x++) {
+					addSlotToContainer(new SlotCallback(inventory, x * 3 + y, 25 + x * 18, 19 + y * 18, tile));
+				}
+			}
+		}
+	}
 }

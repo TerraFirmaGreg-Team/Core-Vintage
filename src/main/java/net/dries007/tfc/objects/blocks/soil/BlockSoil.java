@@ -54,177 +54,173 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @ParametersAreNonnullByDefault
 public class BlockSoil extends Block implements ISoilTypeBlock {
 
-    // Used for connected textures only.
-    public static final PropertyBool NORTH = PropertyBool.create("north");
-    public static final PropertyBool EAST = PropertyBool.create("east");
-    public static final PropertyBool SOUTH = PropertyBool.create("south");
-    public static final PropertyBool WEST = PropertyBool.create("west");
-    public static final Map<Pair<SoilVariant, SoilType>, ISoilTypeBlock> BLOCK_SOIL_MAP = new LinkedHashMap<>();
-    public static Block getBlockSoilMap(SoilVariant soilVariant, SoilType soilType) {
-        return (Block) BLOCK_SOIL_MAP.get(new Pair<>(soilVariant, soilType));
-    }
+	// Used for connected textures only.
+	public static final PropertyBool NORTH = PropertyBool.create("north");
+	public static final PropertyBool EAST = PropertyBool.create("east");
+	public static final PropertyBool SOUTH = PropertyBool.create("south");
+	public static final PropertyBool WEST = PropertyBool.create("west");
+	public static final Map<Pair<SoilVariant, SoilType>, ISoilTypeBlock> BLOCK_SOIL_MAP = new LinkedHashMap<>();
+	private final SoilVariant soilVariant;
+	private final SoilType soilType;
+	private final ResourceLocation modelLocation;
 
-    public static void spreadGrass(World world, BlockPos pos, IBlockState us, Random rand) {
-        BlockPos upPos = pos.up();
-        IBlockState up = world.getBlockState(upPos);
-        int neighborLight;
-        Block usBlock = us.getBlock();
-        if (up.getMaterial().isLiquid() || ((neighborLight = world.getLightFromNeighbors(upPos)) < 4 && up.getLightOpacity(world, upPos) > 2)) {
-            if (usBlock instanceof BlockPeat) {
-                world.setBlockState(pos, BlocksTFC.PEAT.getDefaultState());
-            }
+	public BlockSoil(SoilVariant soilVariant, SoilType soilType) {
+		super(Material.GROUND);
+
+		if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
+
+		if (soilVariant.canFall())
+			FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());
+
+		this.soilVariant = soilVariant;
+		this.soilType = soilType;
+		this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant.getName());
+
+		String blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
+
+		this.setCreativeTab(CreativeTabsTFC.EARTH);
+		this.setSoundType(SoundType.STONE);
+		this.setRegistryName(MOD_ID, blockRegistryName);
+		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+
+	}
+
+	public static Block getBlockSoilMap(SoilVariant soilVariant, SoilType soilType) {
+		return (Block) BLOCK_SOIL_MAP.get(new Pair<>(soilVariant, soilType));
+	}
+
+	public static void spreadGrass(World world, BlockPos pos, IBlockState us, Random rand) {
+		BlockPos upPos = pos.up();
+		IBlockState up = world.getBlockState(upPos);
+		int neighborLight;
+		Block usBlock = us.getBlock();
+		if (up.getMaterial().isLiquid() || ((neighborLight = world.getLightFromNeighbors(upPos)) < 4 && up.getLightOpacity(world, upPos) > 2)) {
+			if (usBlock instanceof BlockPeat) {
+				world.setBlockState(pos, BlocksTFC.PEAT.getDefaultState());
+			}
 //            else if (usBlock instanceof ISoilTypeBlock) {
 //                ISoilTypeBlock soil = ((ISoilTypeBlock) usBlock);
 //                world.setBlockState(pos, getBlockSoilMap(soil.getSoilVariant().getNonGrassVersion())).getDefaultState());
 //            }
-        }
-        else if (neighborLight >= 9) {
-            for (int i = 0; i < 4; ++i) {
-                BlockPos target = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
-                if (world.isOutsideBuildHeight(target) || !world.isBlockLoaded(target)) {
-                    return;
-                }
-                IBlockState current = world.getBlockState(target);
-                if (!BlocksTFC.isSoil(current) || BlocksTFC.isGrass(current)) {
-                    continue;
-                }
-                BlockPos targetUp = target.up();
-                IBlockState targetUpState;
-                if (world.getLightFromNeighbors(targetUp) < 4 || (targetUpState = world.getBlockState(targetUp)).getMaterial().isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
-                    continue;
-                }
-                Block currentBlock = current.getBlock();
-                if (currentBlock instanceof BlockPeat) {
-                    world.setBlockState(target, BlocksTFC.PEAT_GRASS.getDefaultState());
-                }
-                else if (currentBlock instanceof BlockRockVariant) {
-                    Rock.Type spreader = Rock.Type.GRASS;
-                    usBlock = us.getBlock();
-                    if ((usBlock instanceof BlockRockVariant) && ((BlockRockVariant) usBlock).getType() == Rock.Type.DRY_GRASS) {
-                        spreader = Rock.Type.DRY_GRASS;
-                    }
-                    BlockRockVariant block = ((BlockRockVariant) current.getBlock());
-                    world.setBlockState(target, block.getVariant(block.getType().getGrassVersion(spreader)).getDefaultState());
-                }
-            }
-            for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-                if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS && rand.nextFloat() < 0.5f) {
-                    float temp = ClimateTFC.getActualTemp(world, upPos);
-                    BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
+		} else if (neighborLight >= 9) {
+			for (int i = 0; i < 4; ++i) {
+				BlockPos target = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
+				if (world.isOutsideBuildHeight(target) || !world.isBlockLoaded(target)) {
+					return;
+				}
+				IBlockState current = world.getBlockState(target);
+				if (!BlocksTFC.isSoil(current) || BlocksTFC.isGrass(current)) {
+					continue;
+				}
+				BlockPos targetUp = target.up();
+				IBlockState targetUpState;
+				if (world.getLightFromNeighbors(targetUp) < 4 || (targetUpState = world.getBlockState(targetUp)).getMaterial().isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
+					continue;
+				}
+				Block currentBlock = current.getBlock();
+				if (currentBlock instanceof BlockPeat) {
+					world.setBlockState(target, BlocksTFC.PEAT_GRASS.getDefaultState());
+				} else if (currentBlock instanceof BlockRockVariant) {
+					Rock.Type spreader = Rock.Type.GRASS;
+					usBlock = us.getBlock();
+					if ((usBlock instanceof BlockRockVariant) && ((BlockRockVariant) usBlock).getType() == Rock.Type.DRY_GRASS) {
+						spreader = Rock.Type.DRY_GRASS;
+					}
+					BlockRockVariant block = ((BlockRockVariant) current.getBlock());
+					world.setBlockState(target, block.getVariant(block.getType().getGrassVersion(spreader)).getDefaultState());
+				}
+			}
+			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
+				if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS && rand.nextFloat() < 0.5f) {
+					float temp = ClimateTFC.getActualTemp(world, upPos);
+					BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
 
-                    if (world.isAirBlock(upPos) &&
-                        plant.isValidLocation(temp, ChunkDataTFC.getRainfall(world, upPos), Math.subtractExact(world.getLightFor(EnumSkyBlock.SKY, upPos), world.getSkylightSubtracted())) &&
-                        plant.isValidGrowthTemp(temp) &&
-                        rand.nextDouble() < plantBlock.getGrowthRate(world, upPos)) {
-                        world.setBlockState(upPos, plantBlock.getDefaultState());
-                    }
-                }
-            }
-        }
-    }
+					if (world.isAirBlock(upPos) &&
+							plant.isValidLocation(temp, ChunkDataTFC.getRainfall(world, upPos), Math.subtractExact(world.getLightFor(EnumSkyBlock.SKY, upPos), world.getSkylightSubtracted())) &&
+							plant.isValidGrowthTemp(temp) &&
+							rand.nextDouble() < plantBlock.getGrowthRate(world, upPos)) {
+						world.setBlockState(upPos, plantBlock.getDefaultState());
+					}
+				}
+			}
+		}
+	}
 
-    private final SoilVariant soilVariant;
-    private final SoilType soilType;
-    private final ResourceLocation modelLocation;
+	@Override
+	public SoilVariant getSoilVariant() {
+		return soilVariant;
+	}
 
-    public BlockSoil(SoilVariant soilVariant, SoilType soilType) {
-        super(Material.GROUND);
+	@Override
+	public SoilType getSoilType() {
+		return soilType;
+	}
 
-        if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
-            throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlock(this);
+	}
 
-        this.soilVariant = soilVariant;
-        this.soilType = soilType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant.getName());
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return 0;
+	}
 
-        String blockRegistryName = String.format("%s/%s/%s", "soil", soilVariant, soilType);
+	@SuppressWarnings("deprecation")
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+		pos = pos.add(0, -1, 0);
+		return state.withProperty(NORTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+				.withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+				.withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+				.withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+	}
 
-        this.setCreativeTab(CreativeTabsTFC.EARTH);
-        this.setSoundType(SoundType.STONE);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
+	}
 
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		if (this.soilVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+			double d0 = (float) pos.getX() + rand.nextFloat();
+			double d1 = (double) pos.getY() - 0.05D;
+			double d2 = (float) pos.getZ() + rand.nextFloat();
+			world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
+		}
+	}
 
-    @Override
-    public SoilVariant getSoilVariant() {
-        return soilVariant;
-    }
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return super.getItemDropped(state, rand, fortune);
+	}
 
-    @Override
-    public SoilType getSoilType() {
-        return soilType;
-    }
-
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlock(this);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return 0;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos)
-    {
-        pos = pos.add(0, -1, 0);
-        return state.withProperty(NORTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-            .withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-            .withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-            .withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
-    {
-        if (this.soilVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false))
-        {
-            double d0 = (float) pos.getX() + rand.nextFloat();
-            double d1 = (double) pos.getY() - 0.05D;
-            double d2 = (float) pos.getZ() + rand.nextFloat();
-            world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
-        }
-    }
-
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return super.getItemDropped(state, rand, fortune);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation,
-                        "soiltype=" + soilType.getName());
-            }
-        });
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation,
+						"soiltype=" + soilType.getName());
+			}
+		});
 
 
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(modelLocation, "soiltype=" + soilType.getName()));
-    }
+		ModelLoader.setCustomModelResourceLocation(
+				Item.getItemFromBlock(this),
+				this.getMetaFromState(this.getBlockState().getBaseState()),
+				new ModelResourceLocation(modelLocation,
+						"soiltype=" + soilType.getName()));
+	}
 
-    @Nonnull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer()
-    {
-        return BlockRenderLayer.CUTOUT;
-    }
+	@Nonnull
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
 }

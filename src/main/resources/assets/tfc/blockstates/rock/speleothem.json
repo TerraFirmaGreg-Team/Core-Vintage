@@ -17,7 +17,7 @@
         "model": "tfc:speleothem_big"
       }
     },
-    "stonetype": {
+    "rocktype": {
       "granite": {
         "textures": {
           "all": "tfc:blocks/rock/raw/granite"

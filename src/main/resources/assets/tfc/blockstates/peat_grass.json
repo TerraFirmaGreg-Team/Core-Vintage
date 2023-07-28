@@ -3,20 +3,20 @@
   "defaults": {
     "model": "tfc:grass",
     "textures": {
-      "all": "tfc:blocks/peat",
-      "particle": "tfc:blocks/peat",
-      "top": "tfc:blocks/grass_top",
-      "north": "tfc:blocks/grass_side",
-      "south": "tfc:blocks/grass_side",
-      "east": "tfc:blocks/grass_side",
-      "west": "tfc:blocks/grass_side"
+      "all": "tfc:blocks/soil/peat",
+      "particle": "tfc:blocks/soil/peat",
+      "top": "tfc:blocks/soil/overlay/grass/top",
+      "north": "tfc:blocks/soil/overlay/grass/side",
+      "south": "tfc:blocks/soil/overlay/grass/side",
+      "east": "tfc:blocks/soil/overlay/grass/side",
+      "west": "tfc:blocks/soil/overlay/grass/side"
     }
   },
   "variants": {
     "north": {
       "true": {
         "textures": {
-          "north": "tfc:blocks/grass_top"
+          "north": "tfc:blocks/soil/overlay/grass/top"
         }
       },
       "false": {}
@@ -24,7 +24,7 @@
     "south": {
       "true": {
         "textures": {
-          "south": "tfc:blocks/grass_top"
+          "south": "tfc:blocks/soil/overlay/grass/top"
         }
       },
       "false": {}
@@ -32,7 +32,7 @@
     "east": {
       "true": {
         "textures": {
-          "east": "tfc:blocks/grass_top"
+          "east": "tfc:blocks/soil/overlay/grass/top"
         }
       },
       "false": {}
@@ -40,13 +40,11 @@
     "west": {
       "true": {
         "textures": {
-          "west": "tfc:blocks/grass_top"
+          "west": "tfc:blocks/soil/overlay/grass/top"
         }
       },
       "false": {}
     },
-    "normal": [
-      {}
-    ]
+    "normal": [{}]
   }
 }

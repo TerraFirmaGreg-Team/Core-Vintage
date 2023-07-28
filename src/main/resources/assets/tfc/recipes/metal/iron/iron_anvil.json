@@ -8,11 +8,11 @@
   "key": {
     "X": {
       "type": "forge:ore_dict",
-      "ore": "ingotDoubleWroughtIron"
+      "ore": "ingotDoubleIron"
     }
   },
   "result": {
-    "item": "tfc:metal/anvil/wrought_iron",
+    "item": "tfc:metal/anvil/iron",
     "count": 1
   }
 }

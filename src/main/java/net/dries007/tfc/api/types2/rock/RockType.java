@@ -59,7 +59,7 @@ public enum RockType implements IStringSerializable {
 	}
 
 	public static RockType valueOf(int i) {
-		return i >= 0 && i < VALUES.length ? VALUES[i] : GRANITE;
+		return i >= 0 && i < VALUES.length ? VALUES[i] : VALUES[i % VALUES.length];
 	}
 
 	public @Nonnull RockCategory getRockCategory() {

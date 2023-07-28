@@ -1,6 +1,5 @@
 {
   "type": "tfc:unmold_recipe",
   "inputItem": "tfc:ceramics/fired/mold/toolheadshovel",
-  "inputMaterial": "copper",
-  "outputOrePrefix": "toolHeadShovel"
+  "inputMaterial": "copper"
 }

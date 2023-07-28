@@ -75,10 +75,8 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
         Arrays.fill(this.cachedRecipes, null);
     }
 
-    public void acceptHeat(float temperature)
-    {
-        if (temperature > targetTemperature)
-        {
+    public void acceptHeat(float temperature) {
+        if (temperature > targetTemperature) {
             targetTemperature = temperature;
         }
     }
@@ -122,6 +120,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
                 // Crucible target temperature decays constantly, since it is set by outside providers
                 targetTemperature -= (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier;
             }
+            //System.out.println(targetTemperature);
 
             // Input draining
             boolean canFill = lastFillTimer <= 0;
@@ -169,7 +168,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
                                 {
                                     canFill = false;
                                 }
-                                alloy.add(material, fluidStack.amount); // TODO Crucible
+                                alloy.add(material, fluidStack.amount);
                                 markForSync();
                             }
                         }

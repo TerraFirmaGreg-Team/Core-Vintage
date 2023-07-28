@@ -61,6 +61,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
@@ -83,6 +84,11 @@ public final class DefaultRecipes {
 	public static void init() {
 		registerAnvilRecipes();
 		registerWeldingRecipes();
+	}
+
+	@SubscribeEvent
+	public static void test(RegistryEvent.Register<IRecipe> event) {
+
 	}
 
 	@SubscribeEvent

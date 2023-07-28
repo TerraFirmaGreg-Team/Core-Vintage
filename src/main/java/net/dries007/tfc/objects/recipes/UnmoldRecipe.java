@@ -17,6 +17,7 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -28,7 +29,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -36,7 +36,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
 @SuppressWarnings("unused")
@@ -45,97 +44,66 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
 {
     private final ItemStack inputMold;
     private final Material inputMaterial;
-    private final OrePrefix outputOrePrefix;
-    private final float chance;
+    private final float chanceToBreakMold;
 
-    public UnmoldRecipe(ResourceLocation group, ItemStack inputMold, Material inputMaterial, OrePrefix outputOrePrefix, float chance) {
+    public UnmoldRecipe(ResourceLocation group, ItemStack inputMold, Material inputMaterial, float chanceToBreakMold) {
         super();
 
         this.inputMold = inputMold;
         this.inputMaterial = inputMaterial;
-        this.outputOrePrefix = outputOrePrefix;
 
-        this.chance = chance;
+        this.chanceToBreakMold = chanceToBreakMold;
     }
 
     @Override
     public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
-        boolean foundMold = false;
-        for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
-            ItemStack stack = inv.getStackInSlot(slot);
-            if (!stack.isEmpty()) {
-                if (stack.getItem() instanceof ItemMold moldItem) {
-                    IFluidHandler cap = stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
-                    if (cap instanceof IMoldHandler moldHandler) {
-                        if (!moldHandler.isMolten()) {
-                            var material = moldHandler.getMaterial();
-                            if (material != null && moldItem.getOrePrefix().equals(outputOrePrefix) && !foundMold) {
-                                foundMold = true;
-                            }
-                            else {
-                                return false;
-                            }
-                        }
-                        else {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
+        for (var slotId = 0; slotId < inv.getSizeInventory(); slotId++) {
+            var stack = inv.getStackInSlot(slotId);
+
+            if (stack.isEmpty()) continue;
+            if (stack.getItem() != inputMold.getItem()) continue;
+            if (!(stack.getItem() instanceof ItemMold itemMold)) continue;
+
+            var fluidHandler = stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
+
+            if (!(fluidHandler instanceof IMoldHandler moldHandler)) continue;
+            if (Helpers.getOrePrefixMaterialAmount(itemMold.getOrePrefix()) != moldHandler.getAmount()) continue;
+            if (moldHandler.isMolten()) continue;
+
+            var material = moldHandler.getMaterial();
+
+            if (material == inputMaterial) return true;
         }
-        return foundMold;
+
+        return false;
     }
 
     @Override
     @Nonnull
     public ItemStack getCraftingResult(InventoryCrafting inv) {
-        ItemStack moldStack = null;
-        for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
-            ItemStack stack = inv.getStackInSlot(slot);
-            if (!stack.isEmpty()) {
-                if (stack.getItem() instanceof ItemMold tmp) {
-                    if (tmp.getOrePrefix().equals(outputOrePrefix) && moldStack == null) {
-                        moldStack = stack;
-                    }
-                    else {
-                        return ItemStack.EMPTY;
-                    }
-                }
-                else {
-                    return ItemStack.EMPTY;
-                }
-            }
-        }
-        if (moldStack != null)
-        {
-            IFluidHandler moldCap = moldStack.getCapability(FLUID_HANDLER_CAPABILITY, null);
-            if (moldCap instanceof IMoldHandler moldHandler) {
-                if (!moldHandler.isMolten() && moldHandler.getAmount() == Helpers.getOrePrefixMaterialAmount(outputOrePrefix)) {
-                    return getOutputItem(moldHandler);
-                }
-            }
+        for (var slotId = 0; slotId < inv.getSizeInventory(); slotId++) {
+            var stack = inv.getStackInSlot(slotId);
+
+            if (stack.isEmpty()) continue;
+
+            var moldItem = (ItemMold) stack.getItem();
+            var capability = (IMoldHandler) stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
+
+            if (capability != null)
+                return OreDictUnifier.get(moldItem.getOrePrefix(), capability.getMaterial());
+
         }
         return ItemStack.EMPTY;
     }
 
     @Override
-    public boolean canFit(int width, int height)
-    {
+    public boolean canFit(int width, int height) {
         return true;
     }
 
     @Override
     @Nonnull
-    public ItemStack getRecipeOutput()
-    {
+    public ItemStack getRecipeOutput() {
         return ItemStack.EMPTY;
     }
 
@@ -180,16 +148,17 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
      * @return ItemStack.EMPTY on break, the mold (empty) if pass
      */
     public ItemStack getMoldResult(ItemStack moldIn) {
-        if (Constants.RNG.nextFloat() <= chance) {
+        if (Constants.RNG.nextFloat() <= chanceToBreakMold) {
             return new ItemStack(moldIn.getItem());
         }
         else {
             return ItemStack.EMPTY;
         }
     }
-
+/*
     public ItemStack getOutputItem(final IMoldHandler moldHandler) {
         var materialInMold = moldHandler.getMaterial();
+
 
         if (materialInMold != null) {
             if (inputMaterial == materialInMold) {
@@ -205,25 +174,30 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
             return ItemStack.EMPTY;
         }
         return ItemStack.EMPTY;
-    }
+    }*/
 
     @SuppressWarnings("unused")
     public static class Factory implements IRecipeFactory {
         @Override
         public IRecipe parse(final JsonContext context, final JsonObject json) {
-            final var itemName = JsonUtils.getString(json, "inputItem");
-            final var item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemName));
-            if (item == null) throw new RuntimeException(String.format("Item [%s] not found", itemName));
+            final var inputItemName = JsonUtils.getString(json, "inputItem");
+            final var inputItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(inputItemName));
+            if (inputItem == null) throw new RuntimeException(String.format("Item [%s] not found", inputItemName));
 
             final var materialName = JsonUtils.getString(json, "inputMaterial");
             final var inputMaterial = MaterialRegistryManager.getInstance().getMaterial(materialName);
             if (inputMaterial == null) throw new RuntimeException(String.format("Material [%s] not found", materialName));
 
-            final var orePrefixName = JsonUtils.getString(json, "outputOrePrefix");
-            final var outputOrePrefix = OrePrefix.getPrefix(orePrefixName);
-            if (outputOrePrefix == null) throw new RuntimeException(String.format("OrePrefix [%s] not found", orePrefixName));
+            OrePrefix orePrefix;
 
-            final var inputMold = new ItemStack(item);
+            if (inputItem instanceof ItemMold itemMold) {
+                orePrefix = itemMold.getOrePrefix();
+            }
+            else {
+                throw new RuntimeException(String.format("ItemInput is not ItemMold [%s]", inputItemName));
+            }
+
+            final var inputMold = new ItemStack(inputItem);
 
             float chanceToBreakMold = 0;
             if (JsonUtils.hasField(json, "chance")) {
@@ -231,10 +205,9 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
             }
 
             return new UnmoldRecipe(
-                    new ResourceLocation(TerraFirmaCraft.MOD_ID, "unmold_" + orePrefixName + "_" + materialName),
+                    new ResourceLocation(TerraFirmaCraft.MOD_ID, "unmold_" + orePrefix + "_" + materialName),
                     inputMold,
                     inputMaterial,
-                    outputOrePrefix,
                     chanceToBreakMold
             );
         }

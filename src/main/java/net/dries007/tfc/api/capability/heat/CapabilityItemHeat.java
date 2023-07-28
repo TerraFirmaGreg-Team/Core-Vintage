@@ -94,6 +94,10 @@ public final class CapabilityItemHeat
     public static float adjustToTargetTemperature(float temp, float burnTemp, int airTicks, int maxTempBonus) {
         boolean hasAir = airTicks > 0;
         float targetTemperature = burnTemp + (hasAir ? MathHelper.clamp(burnTemp, 0, maxTempBonus) : 0);
+
+        if (targetTemperature > 1601)
+            targetTemperature = 1601;
+
         if (temp != targetTemperature) {
             float delta = (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier;
             return adjustTempTowards(temp, targetTemperature, delta * (hasAir ? 2 : 1), delta * (hasAir ? 0.5f : 1));

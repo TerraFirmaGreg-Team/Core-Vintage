@@ -8,8 +8,7 @@ import static gregtech.api.unification.material.info.MaterialFlags.NO_UNIFICATIO
 import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
 import static gregtech.api.unification.material.properties.PropertyKey.TOOL;
 import static gregtech.api.util.GTUtility.gregtechId;
-import static net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags.GENERATE_ANVIL;
-import static net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags.UNUSABLE;
+import static net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags.*;
 import static net.dries007.tfc.compat.gregtech.material.TFGMaterials.*;
 import static net.dries007.tfc.compat.gregtech.material.TFGPropertyKey.HEAT;
 
@@ -146,6 +145,8 @@ public class TFGMaterialHandler {
                 .build();
 
         // Some custom properties for materials
+        SaltWater.setMaterialRGB(0xFF1F5099);
+
         Stone.setProperty(TOOL, new ToolProperty(1.0f, 1f, 6, 1));
         Copper.setProperty(TOOL, new ToolProperty(1.5f, 2f, 88, 2));
         BismuthBronze.setProperty(TOOL, new ToolProperty(1.8f, 2f, 174, 2));
@@ -192,6 +193,11 @@ public class TFGMaterialHandler {
         BlackSteel.addFlags(GENERATE_ANVIL);
         RedSteel.addFlags(GENERATE_ANVIL);
         BlueSteel.addFlags(GENERATE_ANVIL);
+
+        Copper.addFlags(TOOL_ITEM_CAN_BE_UNMOLDED);
+        BismuthBronze.addFlags(TOOL_ITEM_CAN_BE_UNMOLDED);
+        Bronze.addFlags(TOOL_ITEM_CAN_BE_UNMOLDED);
+        BlackBronze.addFlags(TOOL_ITEM_CAN_BE_UNMOLDED);
 
         Unknown.addFlags(UNUSABLE);
         PigIron.addFlags(UNUSABLE);

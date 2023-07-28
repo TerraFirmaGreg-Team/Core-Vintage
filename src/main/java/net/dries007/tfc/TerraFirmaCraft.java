@@ -218,7 +218,7 @@ public final class TerraFirmaCraft
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event)
     {
-
+        event.registerServerCommand(new CommandGetHeat());
         event.registerServerCommand(new CommandStripWorld());
         event.registerServerCommand(new CommandHeat());
         event.registerServerCommand(new CommandPlayerTFC());

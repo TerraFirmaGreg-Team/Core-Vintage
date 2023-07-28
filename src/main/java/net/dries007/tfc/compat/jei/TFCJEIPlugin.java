@@ -246,9 +246,15 @@ public final class TFCJEIPlugin implements IModPlugin
         var castingList = new ArrayList<CastingRecipeWrapper>();
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
-            if (material.hasProperty(TFGPropertyKey.HEAT)) {
-                unmoldList.add(new UnmoldRecipeWrapper(material, OrePrefix.ingot));
-                castingList.add(new CastingRecipeWrapper(material, OrePrefix.ingot));
+            for (var orePrefix : OrePrefix.values()) {
+                var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
+                if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
+                    if (material.hasFlag(TFGMaterialFlags.TOOL_ITEM_CAN_BE_UNMOLDED) || orePrefix == OrePrefix.ingot) {
+                        unmoldList.add(new UnmoldRecipeWrapper(material, orePrefix));
+                        castingList.add(new CastingRecipeWrapper(material, orePrefix));
+                    }
+
+                }
             }
         }
 

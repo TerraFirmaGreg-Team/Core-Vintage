@@ -1,6 +1,5 @@
 {
   "type": "tfc:unmold_recipe",
   "inputItem": "tfc:ceramics/fired/mold/ingot",
-  "inputMaterial": "copper",
-  "outputOrePrefix": "ingot"
+  "inputMaterial": "copper"
 }

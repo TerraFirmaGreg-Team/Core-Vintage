@@ -9,6 +9,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.calendar.Month;
@@ -53,7 +54,6 @@ import java.util.Random;
 
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.*;
-import static net.dries007.tfc.api.types2.soil.SoilType.LOAM;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 import static net.dries007.tfc.objects.blocks.soil.BlockSoil.getBlockSoilMap;
@@ -498,13 +498,15 @@ public class ChunkGenTFC implements IChunkGenerator {
 				RockType rock2 = RockType.valueOf(rockLayer2[colIndex]);
 				RockType rock3 = RockType.valueOf(rockLayer3[colIndex]);
 
+				SoilType soil1 = SoilType.valueOf(rockLayer1[colIndex]);
+
 				DataLayer drainage = drainageLayer[colIndex];
 				DataLayer stability = stabilityLayer[colIndex];
 				int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
 				int smooth = -1;
 
-				IBlockState surfaceBlock = getBlockSoilMap(rainfall + 1.3 * rand.nextGaussian() >= 150f ? GRASS : DRY_GRASS, LOAM).getDefaultState(); // TODO rock1 заменить на soil
-				IBlockState subSurfaceBlock = getBlockSoilMap(DIRT, LOAM).getDefaultState(); // TODO rock1 заменить на soil
+				IBlockState surfaceBlock = getBlockSoilMap(rainfall + 1.3 * rand.nextGaussian() >= 150f ? GRASS : DRY_GRASS, soil1).getDefaultState();
+				IBlockState subSurfaceBlock = getBlockSoilMap(DIRT, soil1).getDefaultState();
 
 				if (BiomesTFC.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x + 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z - 1))) {
 					if (!BiomesTFC.isBeachBiome(getBiomeOffset(x, z))) cliffMap[colIndex] = true;
@@ -656,7 +658,7 @@ public class ChunkGenTFC implements IChunkGenerator {
 							} else // Swamp biomes have bottoms that are mostly dirt
 							{
 								if (outp.getBlockState(x, y + yOffset, z) != getBlockRockMap(ORDINARY, SAND, rock1).getDefaultState())
-									outp.setBlockState(x, y + yOffset, z, getBlockSoilMap(DIRT, LOAM).getDefaultState()); // TODO LOAM заменить на soil ип
+									outp.setBlockState(x, y + yOffset, z, getBlockSoilMap(DIRT, soil1).getDefaultState());
 							}
 						}
 					}

@@ -124,19 +124,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
                 Block currentBlock = current.getBlock();
                 if (currentBlock instanceof BlockPeat) {
                     world.setBlockState(target, BlocksTFC.PEAT_GRASS.getDefaultState());
-                }
-//                else if (currentBlock instanceof BlockRockVariant) {
-//                    Rock.Type spreader = Rock.Type.GRASS;
-//                    usBlock = us.getBlock();
-//                    if ((usBlock instanceof BlockRockVariant) && ((BlockRockVariant) usBlock).getType() == Rock.Type.DRY_GRASS) {
-//                        spreader = Rock.Type.DRY_GRASS;
-//                    }
-//                    BlockRockVariant block = ((BlockRockVariant) current.getBlock());
-//                    TerraFirmaCraft.LOGGER.info("alalalal {} {}", spreader, block.getType());
-//                    world.setBlockState(target, block.getVariant(block.getType().getGrassVersion(spreader)).getDefaultState());
-//
-//                }
-                else if (currentBlock instanceof ISoilTypeBlock) {
+                } else if (currentBlock instanceof ISoilTypeBlock) {
                     SoilVariant spreader = GRASS;
                     usBlock = us.getBlock();
                     if ((usBlock instanceof ISoilTypeBlock) && ((ISoilTypeBlock) usBlock).getSoilVariant() == DRY_GRASS) {

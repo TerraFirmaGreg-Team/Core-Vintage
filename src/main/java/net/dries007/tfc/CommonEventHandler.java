@@ -31,6 +31,7 @@ import net.dries007.tfc.api.types.IPredator;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.api.util.IRockTypeBlock;
 import net.dries007.tfc.api.util.ISoilTypeBlock;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
@@ -45,7 +46,6 @@ import net.dries007.tfc.objects.blocks.devices.BlockQuern;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 import net.dries007.tfc.objects.blocks.rock.BlockRockAnvil;
 import net.dries007.tfc.objects.blocks.rock.BlockRockRaw;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
@@ -284,7 +284,7 @@ public final class CommonEventHandler {
                 event.setNewSpeed(event.getNewSpeed() + (event.getNewSpeed() * skillModifier));
             }
         }
-        if (event.getState().getBlock() instanceof BlockRockVariant) {
+        if (event.getState().getBlock() instanceof IRockTypeBlock) {
             event.setNewSpeed((float) (event.getNewSpeed() / ConfigTFC.General.MISC.rockMiningTimeModifier));
         }
         if (event.getState().getBlock() instanceof BlockLogTFC) {

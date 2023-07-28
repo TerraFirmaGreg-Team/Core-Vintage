@@ -6,6 +6,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "gregtech.BlockOreMixin",
-    "gregtech.OrePrefixMixin"
+    "gregtech.OrePrefixMixin",
+    "minecraft.GuiCreateWorldMixin"
   ]
 }

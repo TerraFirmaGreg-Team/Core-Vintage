@@ -10,6 +10,7 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -67,11 +68,14 @@ public interface IMaterialItem
             if (property == null) throw new RuntimeException(String.format("No heat property for %s", material));
 
             var melttemp = (int) property.getMeltTemp();
+            var metalTier = property.getTier();
 
             text.add("");
-            text.add(I18n.format("tfc.tooltip.metal", material.getLocalizedName()));
+            text.add(I18n.format("tfc.tooltip.containsmetal"));
+            text.add(I18n.format("tfc.tooltip.metalname", material.getLocalizedName()));
             text.add(I18n.format("tfc.tooltip.units", getSmeltAmount(stack)));
             text.add(I18n.format("tfc.tooltip.melttemp", melttemp));
+            text.add(I18n.format("tfc.tooltip.tier", metalTier));
         }
     }
 }

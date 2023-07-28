@@ -70,8 +70,7 @@ import static net.minecraft.util.text.TextFormatting.*;
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
 public class ClientEvents
 {
-    public static void preInit()
-    {
+    public static void preInit() {
         RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockTFC.class, RenderFallingBlock::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityThrownJavelin.class, RenderThrownJavelin::new);
         RenderingRegistry.registerEntityRenderingHandler(EntitySheepTFC.class, RenderSheepTFC::new);
@@ -118,26 +117,9 @@ public class ClientEvents
     }
 
     @SideOnly(Side.CLIENT)
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void onInitGuiPre(GuiScreenEvent.InitGuiEvent.Pre event)
-    {
-        if (ConfigTFC.General.OVERRIDES.forceTFCWorldType && event.getGui() instanceof GuiCreateWorld)
-        {
-            GuiCreateWorld gui = ((GuiCreateWorld) event.getGui());
-            // Only change if default is selected, because coming back from customisation, this will be set already.
-            if (gui.selectedIndex == WorldType.DEFAULT.getId())
-            {
-                gui.selectedIndex = TerraFirmaCraft.getWorldType().getId();
-            }
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public static void onInitGuiPost(GuiScreenEvent.InitGuiEvent.Post event)
-    {
-        if (event.getGui() instanceof GuiInventory)
-        {
+    public static void onInitGuiPost(GuiScreenEvent.InitGuiEvent.Post event) {
+        if (event.getGui() instanceof GuiInventory) {
             int buttonId = event.getButtonList().size();
             int guiLeft = ((GuiInventory) event.getGui()).getGuiLeft();
             int guiTop = ((GuiInventory) event.getGui()).getGuiTop();
@@ -151,12 +133,9 @@ public class ClientEvents
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public static void onGuiButtonPressPre(GuiScreenEvent.ActionPerformedEvent.Pre event)
-    {
-        if (event.getGui() instanceof GuiInventory)
-        {
-            if (event.getButton() instanceof GuiButtonPlayerInventoryTab)
-            {
+    public static void onGuiButtonPressPre(GuiScreenEvent.ActionPerformedEvent.Pre event) {
+        if (event.getGui() instanceof GuiInventory) {
+            if (event.getButton() instanceof GuiButtonPlayerInventoryTab) {
                 GuiButtonPlayerInventoryTab button = (GuiButtonPlayerInventoryTab) event.getButton();
                 // This is to prevent the button from immediately firing after moving (enabled is set to false then)
                 if (button.isActive() && button.enabled)
@@ -169,15 +148,11 @@ public class ClientEvents
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public static void onGuiButtonPressPost(GuiScreenEvent.ActionPerformedEvent.Post event)
-    {
-        if (event.getGui() instanceof GuiInventory)
-        {
+    public static void onGuiButtonPressPost(GuiScreenEvent.ActionPerformedEvent.Post event) {
+        if (event.getGui() instanceof GuiInventory) {
             // This is necessary to catch the resizing of the inventory gui when you open the recipe book
-            for (GuiButton button : event.getButtonList())
-            {
-                if (button instanceof GuiButtonPlayerInventoryTab)
-                {
+            for (GuiButton button : event.getButtonList()) {
+                if (button instanceof GuiButtonPlayerInventoryTab) {
                     ((GuiButtonPlayerInventoryTab) button).updateGuiLeft(((GuiInventory) event.getGui()).getGuiLeft());
                 }
             }
@@ -247,106 +222,61 @@ public class ClientEvents
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
-    public static void onItemTooltip(ItemTooltipEvent event)
-    {
-        ItemStack stack = event.getItemStack();
-        Item item = stack.getItem();
-        List<String> tt = event.getToolTip();
-        if (!stack.isEmpty())
-        {
-            // Stuff that should always be shown as part of the tooltip
-            IItemSize size = CapabilityItemSize.getIItemSize(stack);
-            if (size != null)
-            {
+    public static void onItemTooltip(ItemTooltipEvent event) {
+        var stack = event.getItemStack();
+        var tt = event.getToolTip();
+
+        if (!stack.isEmpty()) {
+            // Size
+            var size = CapabilityItemSize.getIItemSize(stack);
+            if (size != null) {
                 size.addSizeInfo(stack, tt);
             }
-            IItemHeat heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-            if (heat != null)
-            {
+
+            // Temperature
+            var heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+            if (heat != null) {
                 heat.addHeatInfo(stack, tt);
             }
-            IForgeable forging = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-            if (forging != null && forging.getWork() > 0)
-            {
+
+            // Forging steps
+            var forging = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+            if (forging != null && forging.getWork() > 0) {
                 tt.add(I18n.format("tfc.tooltip.forging_in_progress"));
             }
-            IFood nutrients = stack.getCapability(CapabilityFood.CAPABILITY, null);
-            if (nutrients != null)
-            {
+
+            // Nutriens
+            var nutrients = stack.getCapability(CapabilityFood.CAPABILITY, null);
+            if (nutrients != null) {
                 nutrients.addTooltipInfo(stack, tt, event.getEntityPlayer());
             }
-            IEgg eggInfo = stack.getCapability(CapabilityEgg.CAPABILITY, null);
-            if (eggInfo != null)
-            {
+
+            // Egg
+            var eggInfo = stack.getCapability(CapabilityEgg.CAPABILITY, null);
+            if (eggInfo != null) {
                 eggInfo.addEggInfo(stack, tt);
             }
-            float skillMod = SmithingSkill.getSkillBonus(stack);
-            if (skillMod > 0)
-            {
-                String skillValue = String.format("%.2f", skillMod * 100);
-                tt.add(I18n.format("tfc.tooltip.smithing_skill", skillValue));
+
+            // Metal
+            var metalObject = CapabilityMetalItem.getMaterialItem(stack);
+            if (metalObject != null) {
+                metalObject.addMetalInfo(stack, tt);
             }
 
-            if (event.getFlags().isAdvanced()) // Only added with advanced tooltip mode
-            {
-                var metalObject = CapabilityMetalItem.getMaterialItem(stack);
-                if (metalObject != null)
-                {
-                    metalObject.addMetalInfo(stack, tt);
-                }
-                if (item instanceof IRockObject)
-                {
-                    ((IRockObject) item).addRockInfo(stack, tt);
-                }
-                else if (item instanceof ItemBlock)
-                {
-                    Block block = ((ItemBlock) item).getBlock();
-                    if (block instanceof IRockObject)
-                    {
-                        ((IRockObject) block).addRockInfo(stack, tt);
-                    }
-                }
-
-                if (ConfigTFC.Client.TOOLTIP.showToolClassTooltip)
-                {
-                    Set<String> toolClasses = item.getToolClasses(stack);
-                    if (toolClasses.size() == 1)
-                    {
-                        tt.add(I18n.format("tfc.tooltip.toolclass", toolClasses.iterator().next()));
-                    }
-                    else if (toolClasses.size() > 1)
-                    {
-                        tt.add(I18n.format("tfc.tooltip.toolclasses"));
-                        for (String toolClass : toolClasses)
-                        {
-                            tt.add("+ " + toolClass);
-                        }
-                    }
-                }
-                if (ConfigTFC.Client.TOOLTIP.showOreDictionaryTooltip)
-                {
+            if (event.getFlags().isAdvanced()) {
+                if (ConfigTFC.Client.TOOLTIP.showOreDictionaryTooltip) {
                     int[] ids = OreDictionary.getOreIDs(stack);
-                    if (ids.length == 1)
-                    {
+                    if (ids.length == 1) {
                         tt.add(I18n.format("tfc.tooltip.oredictionaryentry", OreDictionary.getOreName(ids[0])));
                     }
-                    else if (ids.length > 1)
-                    {
+                    else if (ids.length > 1) {
                         tt.add(I18n.format("tfc.tooltip.oredictionaryentries"));
                         ArrayList<String> names = new ArrayList<>(ids.length);
-                        for (int id : ids)
-                        {
+                        for (int id : ids) {
                             names.add("+ " + OreDictionary.getOreName(id));
                         }
                         names.sort(null); // Natural order (String.compare)
                         tt.addAll(names);
-                    }
-                }
-                if (ConfigTFC.Client.TOOLTIP.showNBTTooltip)
-                {
-                    if (stack.hasTagCompound())
-                    {
-                        tt.add("NBT: " + stack.getTagCompound());
                     }
                 }
             }
@@ -355,8 +285,7 @@ public class ClientEvents
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
-    public static void textureStitched(TextureStitchEvent.Post event)
-    {
+    public static void textureStitched(TextureStitchEvent.Post event) {
         FluidSpriteCache.clear();
     }
 }

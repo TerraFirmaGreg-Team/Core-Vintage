@@ -109,8 +109,7 @@ public final class TerraFirmaCraft
     private SimpleNetworkWrapper network;
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         log.debug("If you can see this, debug logging is working :)");
 
         TFGToolItems.preInit();
@@ -167,8 +166,7 @@ public final class TerraFirmaCraft
         CapabilityFood.init();
         TFCTriggers.init();
 
-        if (event.getSide().isClient())
-        {
+        if (event.getSide().isClient()) {
             TFCKeybindings.init();
             // Enable overlay to render health, thirst and hunger bars, TFC style.
             // Also renders animal familiarity
@@ -180,8 +178,7 @@ public final class TerraFirmaCraft
             if (server instanceof DedicatedServer)
             {
                 PropertyManager settings = ((DedicatedServer) server).settings;
-                if (ConfigTFC.General.OVERRIDES.forceTFCWorldType)
-                {
+                if (ConfigTFC.General.OVERRIDES.forceTFCWorldType) {
                     // This is called before vanilla defaults it, meaning we intercept it's default with ours
                     // However, we can't actually set this due to fears of overriding the existing world
                     TerraFirmaCraft.getLog().info("Setting default level-type to `tfc_classic`");

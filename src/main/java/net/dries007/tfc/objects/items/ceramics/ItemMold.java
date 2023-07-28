@@ -72,52 +72,7 @@ public class ItemMold extends ItemPottery
 
     @Override
     @Nonnull
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand)
-    {
-        ItemStack stack = player.getHeldItem(hand);
-        if (!world.isRemote)
-        {
-            IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-            if (!player.isSneaking() && cap != null && cap.isMolten())
-            {
-                TFCGuiHandler.openGui(world, player, TFCGuiHandler.Type.MOLD);
-            }
-
-            if (player.isSneaking())
-            {
-                // Unmold on right click, if possible
-                InventoryCrafting craftMatrix = new InventoryCrafting(new ContainerEmpty(), 3, 3);
-                craftMatrix.setInventorySlotContents(0, stack);
-                for (IRecipe recipe : ForgeRegistries.RECIPES.getValuesCollection())
-                {
-                    if (recipe instanceof UnmoldRecipe && recipe.matches(craftMatrix, world))
-                    {
-                        ItemStack result = recipe.getCraftingResult(craftMatrix);
-                        if (!result.isEmpty())
-                        {
-                            ItemStack moldResult = ((UnmoldRecipe) recipe).getMoldResult(stack);
-                            player.setHeldItem(hand, result);
-                            if (!moldResult.isEmpty())
-                            {
-                                ItemHandlerHelper.giveItemToPlayer(player, moldResult);
-                            }
-                            else
-                            {
-                                player.world.playSound(null, player.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
-        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
-    }
-
-    @Override
-    @Nonnull
-    public String getTranslationKey(ItemStack stack)
-    {
+    public String getTranslationKey(ItemStack stack) {
         IFluidHandler capFluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
         if (capFluidHandler instanceof IMoldHandler) {
             var material = ((IMoldHandler) capFluidHandler).getMaterial();
@@ -159,8 +114,7 @@ public class ItemMold extends ItemPottery
     }
 
     // Extends ItemHeatHandler for ease of use
-    private class FilledMoldCapability extends ItemHeatHandler implements ICapabilityProvider, IMoldHandler
-    {
+    private class FilledMoldCapability extends ItemHeatHandler implements ICapabilityProvider, IMoldHandler {
         private final FluidTank tank;
         private IFluidTankProperties[] fluidTankProperties;
 

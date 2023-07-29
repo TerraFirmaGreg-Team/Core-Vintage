@@ -19,8 +19,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
-{
+public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
     public static final CalendarTFC INSTANCE = new CalendarTFC();
 
     /**
@@ -36,26 +35,22 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
      * Players can see this via the calendar GUI tab
      * Calendar Time 0 = Midnight, January 1, 1000
      */
-    public static final ICalendarFormatted CALENDAR_TIME = new ICalendarFormatted()
-    {
+    public static final ICalendarFormatted CALENDAR_TIME = new ICalendarFormatted() {
         @Override
-        public long getTicks()
-        {
+        public long getTicks() {
             return CalendarTFC.INSTANCE.calendarTime;
         }
 
         @Override
-        public long getDaysInMonth()
-        {
+        public long getDaysInMonth() {
             return CalendarTFC.INSTANCE.daysInMonth;
         }
     };
 
-    public static final String[] DAY_NAMES = new String[] {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
+    public static final String[] DAY_NAMES = new String[]{"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
     public static final Map<String, String> BIRTHDAYS = new HashMap<>();
 
-    static
-    {
+    static {
         // Original developers, all hail their glorious creation
         BIRTHDAYS.put("JULY7", "Bioxx's Birthday");
         BIRTHDAYS.put("JUNE18", "Kitty's Birthday");
@@ -72,38 +67,11 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
         BIRTHDAYS.put("MARCH10", "Disastermoo's Birthday");
     }
 
-    /**
-     * This runs a sequence of code, but first will set the calendar and player time by an offset
-     * Useful if we need to run code that technically needs to happen at a different calendar time
-     * The offsets are removed once the transaction is complete
-     *
-     * @param transactionPlayerTimeOffset   the offset to be added to the player time
-     * @param transactionCalendarTimeOffset the offset to be added to the calendar time
-     */
-    public static void runTransaction(long transactionPlayerTimeOffset, long transactionCalendarTimeOffset, Runnable transaction)
-    {
-        try
-        {
-            INSTANCE.playerTime += transactionPlayerTimeOffset;
-            INSTANCE.calendarTime += transactionCalendarTimeOffset;
-
-            transaction.run();
-        }
-        finally
-        {
-            // Always reset after transaction complete
-            INSTANCE.playerTime -= transactionPlayerTimeOffset;
-            INSTANCE.calendarTime -= transactionCalendarTimeOffset;
-        }
-    }
-
     private long playerTime, calendarTime;
     private int daysInMonth;
     private boolean doDaylightCycle, arePlayersLoggedOn;
     private MinecraftServer server;
-
-    public CalendarTFC()
-    {
+    public CalendarTFC() {
         // Initialize to default values
         daysInMonth = ConfigTFC.General.MISC.defaultMonthLength;
         playerTime = 0;
@@ -112,8 +80,28 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
         arePlayersLoggedOn = false;
     }
 
-    public void setTimeFromCalendarTime(long calendarTimeToSetTo)
-    {
+    /**
+     * This runs a sequence of code, but first will set the calendar and player time by an offset
+     * Useful if we need to run code that technically needs to happen at a different calendar time
+     * The offsets are removed once the transaction is complete
+     *
+     * @param transactionPlayerTimeOffset   the offset to be added to the player time
+     * @param transactionCalendarTimeOffset the offset to be added to the calendar time
+     */
+    public static void runTransaction(long transactionPlayerTimeOffset, long transactionCalendarTimeOffset, Runnable transaction) {
+        try {
+            INSTANCE.playerTime += transactionPlayerTimeOffset;
+            INSTANCE.calendarTime += transactionCalendarTimeOffset;
+
+            transaction.run();
+        } finally {
+            // Always reset after transaction complete
+            INSTANCE.playerTime -= transactionPlayerTimeOffset;
+            INSTANCE.calendarTime -= transactionCalendarTimeOffset;
+        }
+    }
+
+    public void setTimeFromCalendarTime(long calendarTimeToSetTo) {
         // Calculate the time jump
         long timeJump = calendarTimeToSetTo - calendarTime;
 
@@ -121,8 +109,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
         playerTime += timeJump;
 
         // Update the actual world times
-        for (World world : server.worlds)
-        {
+        for (World world : server.worlds) {
             long currentWorldTime = world.getWorldTime();
             world.setWorldTime(currentWorldTime + timeJump);
         }
@@ -136,12 +123,10 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
      *
      * @param worldTimeToSetTo a world time, obtained from {@link World#getWorldTime()}. Must be in [0, ICalendar.TICKS_IN_DAY]
      */
-    public long setTimeFromWorldTime(long worldTimeToSetTo)
-    {
+    public long setTimeFromWorldTime(long worldTimeToSetTo) {
         // Calculate the offset to jump to
         long worldTimeJump = (worldTimeToSetTo % ICalendar.TICKS_IN_DAY) - CalendarTFC.CALENDAR_TIME.getWorldTime();
-        if (worldTimeJump < 0)
-        {
+        if (worldTimeJump < 0) {
             worldTimeJump += ICalendar.TICKS_IN_DAY;
         }
 
@@ -156,8 +141,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
      * For serialization when saving to world data
      */
     @Override
-    public NBTTagCompound serializeNBT()
-    {
+    public NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
 
         nbt.setInteger("daysInMonth", daysInMonth);
@@ -175,10 +159,8 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
      * For serialization when reading from world data
      */
     @Override
-    public void deserializeNBT(@Nullable NBTTagCompound nbt)
-    {
-        if (nbt != null)
-        {
+    public void deserializeNBT(@Nullable NBTTagCompound nbt) {
+        if (nbt != null) {
             daysInMonth = nbt.getInteger("daysInMonth");
 
             playerTime = nbt.getLong("playerTime");
@@ -189,8 +171,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
         }
     }
 
-    public void write(ByteBuf buffer)
-    {
+    public void write(ByteBuf buffer) {
         buffer.writeInt(daysInMonth);
 
         buffer.writeLong(playerTime);
@@ -200,8 +181,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
         buffer.writeBoolean(arePlayersLoggedOn);
     }
 
-    public void read(ByteBuf buffer)
-    {
+    public void read(ByteBuf buffer) {
         daysInMonth = buffer.readInt();
 
         playerTime = buffer.readLong();
@@ -211,8 +191,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
         arePlayersLoggedOn = buffer.readBoolean();
     }
 
-    public void resetTo(CalendarTFC resetTo)
-    {
+    public void resetTo(CalendarTFC resetTo) {
         this.daysInMonth = resetTo.daysInMonth;
 
         this.playerTime = resetTo.playerTime;
@@ -226,8 +205,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
      * Called from {@link net.minecraftforge.fml.common.event.FMLServerStartingEvent}
      * Initializes the calendar with the current minecraft server instance, reloading all values from world saved data
      */
-    public void init(MinecraftServer server)
-    {
+    public void init(MinecraftServer server) {
         this.server = server;
 
         // Initialize doDaylightCycle to false as the server is just starting
@@ -240,14 +218,11 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
     /**
      * Called on server ticks, syncs to client
      */
-    public void onServerTick()
-    {
-        if (arePlayersLoggedOn)
-        {
+    public void onServerTick() {
+        if (arePlayersLoggedOn) {
             playerTime++;
         }
-        if (server.getTickCounter() % 10 == 0)
-        {
+        if (server.getTickCounter() % 10 == 0) {
             TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
         }
     }
@@ -255,44 +230,36 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
     /**
      * Called on each overworld tick, increments and syncs calendar time
      */
-    public void onOverworldTick(World world)
-    {
-        if (doDaylightCycle && arePlayersLoggedOn)
-        {
+    public void onOverworldTick(World world) {
+        if (doDaylightCycle && arePlayersLoggedOn) {
             calendarTime++;
         }
         long deltaWorldTime = (world.getWorldTime() % ICalendar.TICKS_IN_DAY) - CALENDAR_TIME.getWorldTime();
-        if (deltaWorldTime > 1 || deltaWorldTime < -1)
-        {
-            TerraFirmaCraft.getLog().info("World time and Calendar Time are out of sync! Trying to fix...");
-            TerraFirmaCraft.getLog().info("Calendar Time = {} ({}), Player Time = {}, World Time = {}, doDaylightCycle = {}, ArePlayersLoggedOn = {}", calendarTime, CALENDAR_TIME.getWorldTime(), playerTime, world.getWorldTime() % ICalendar.TICKS_IN_DAY, doDaylightCycle, arePlayersLoggedOn);
+        if (deltaWorldTime > 1 || deltaWorldTime < -1) {
+            TerraFirmaCraft.getLog().debug("World time and Calendar Time are out of sync! Trying to fix...");
+            TerraFirmaCraft.getLog().debug("Calendar Time = {} ({}), Player Time = {}, World Time = {}, doDaylightCycle = {}, ArePlayersLoggedOn = {}", calendarTime, CALENDAR_TIME.getWorldTime(), playerTime, world.getWorldTime() % ICalendar.TICKS_IN_DAY, doDaylightCycle, arePlayersLoggedOn);
 
             // Check if tracking values are wrong
             boolean checkArePlayersLoggedOn = server.getPlayerList().getPlayers().size() > 0;
-            if (arePlayersLoggedOn != checkArePlayersLoggedOn)
-            {
+            if (arePlayersLoggedOn != checkArePlayersLoggedOn) {
                 // Whoops, somehow we missed this.
-                TerraFirmaCraft.getLog().info("Setting ArePlayersLoggedOn = {}", checkArePlayersLoggedOn);
+                TerraFirmaCraft.getLog().debug("Setting ArePlayersLoggedOn = {}", checkArePlayersLoggedOn);
                 setPlayersLoggedOn(checkArePlayersLoggedOn);
             }
-            if (deltaWorldTime < 0)
-            {
+            if (deltaWorldTime < 0) {
                 // Calendar is ahead, so jump world time
                 world.setWorldTime(world.getWorldTime() - deltaWorldTime);
-                TerraFirmaCraft.getLog().info("Calendar is ahead by {} ticks, jumping world time to catch up", -deltaWorldTime);
-            }
-            else
-            {
+                TerraFirmaCraft.getLog().debug("Calendar is ahead by {} ticks, jumping world time to catch up", -deltaWorldTime);
+            } else {
                 // World time is ahead, so jump calendar
                 calendarTime += deltaWorldTime;
-                TerraFirmaCraft.getLog().info("Calendar is behind by {} ticks, jumping calendar time to catch up", deltaWorldTime);
+                TerraFirmaCraft.getLog().debug("Calendar is behind by {} ticks, jumping calendar time to catch up", deltaWorldTime);
             }
             TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
         }
     }
 
-    public void setMonthLength(int newMonthLength)
-    {
+    public void setMonthLength(int newMonthLength) {
         // Recalculate the new calendar time
         // Preserve the current month, time of day, and position within the month
         long baseMonths = CalendarTFC.CALENDAR_TIME.getTotalMonths();
@@ -307,17 +274,13 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
         TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
     }
 
-    public void setPlayersLoggedOn(boolean arePlayersLoggedOn)
-    {
+    public void setPlayersLoggedOn(boolean arePlayersLoggedOn) {
         GameRules rules = server.getEntityWorld().getGameRules();
         this.arePlayersLoggedOn = arePlayersLoggedOn;
-        if (arePlayersLoggedOn)
-        {
+        if (arePlayersLoggedOn) {
             rules.setOrCreateGameRule("doDaylightCycle", Boolean.toString(doDaylightCycle));
             TerraFirmaCraft.getLog().info("Reverted doDaylightCycle to {} as players are logged in.", doDaylightCycle);
-        }
-        else
-        {
+        } else {
             rules.setOrCreateGameRule("doDaylightCycle", Boolean.toString(false));
             TerraFirmaCraft.getLog().info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.", doDaylightCycle);
         }
@@ -325,12 +288,10 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound>
         TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
     }
 
-    public void setDoDaylightCycle()
-    {
+    public void setDoDaylightCycle() {
         GameRules rules = server.getEntityWorld().getGameRules();
         this.doDaylightCycle = rules.getBoolean("doDaylightCycle");
-        if (!arePlayersLoggedOn)
-        {
+        if (!arePlayersLoggedOn) {
             rules.setOrCreateGameRule("doDaylightCycle", "false");
             TerraFirmaCraft.getLog().info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.", doDaylightCycle);
         }

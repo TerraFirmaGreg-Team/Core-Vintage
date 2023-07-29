@@ -3,8 +3,6 @@ package net.dries007.tfc.objects.blocks.rock;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.util.IHasModel;
-import net.dries007.tfc.api.util.IRockTypeBlock;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.minecraft.block.Block;
@@ -37,11 +35,10 @@ import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
-import static net.dries007.tfc.objects.blocks.rock.BlockRockVatiant.BLOCK_ROCK_MAP;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockRockSpeleothem extends Block implements IRockTypeBlock, IHasModel {
+public class BlockRockSpeleothem extends BlockRockVariant {
     public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
     private final RockVariant rockVariant;
@@ -62,9 +59,9 @@ public class BlockRockSpeleothem extends Block implements IRockTypeBlock, IHasMo
         String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
         this.setHardness(getFinalHardness());
         this.setHarvestLevel("pickaxe", 0);
-        this.setDefaultState(blockState.getBaseState().withProperty(SIZE, EnumSize.MEDIUM));
         this.setRegistryName(MOD_ID, blockRegistryName);
         this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        this.setDefaultState(blockState.getBaseState().withProperty(SIZE, EnumSize.MEDIUM));
         //OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
     }
 

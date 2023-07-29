@@ -32,8 +32,8 @@ import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
-import static net.dries007.tfc.objects.blocks.rock.BlockRockVatiant.BLOCK_ROCK_MAP;
-import static net.dries007.tfc.objects.blocks.rock.BlockRockVatiant.getBlockRockMap;
+import static net.dries007.tfc.objects.blocks.rock.BlockRockVariant.BLOCK_ROCK_MAP;
+import static net.dries007.tfc.objects.blocks.rock.BlockRockVariant.getBlockRockMap;
 
 public class BlockRockStair extends BlockStairs implements IRockTypeBlock {
     private final RockVariant rockVariant;

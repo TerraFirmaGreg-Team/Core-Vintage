@@ -50,7 +50,7 @@ import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 
 @ParametersAreNonnullByDefault
-public class BlockRockAnvil extends BlockRockVatiant {
+public class BlockRockAnvil extends BlockRockVariant {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
     private final RockVariant rockVariant;

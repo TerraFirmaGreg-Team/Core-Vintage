@@ -88,9 +88,6 @@ public class ChunkGenTFC implements IChunkGenerator {
     private static final IWorldGenerator FRUIT_TREE_GEN = new WorldGenFruitTrees();
     private static final IWorldGenerator WILD_CROPS_GEN = new WorldGenWildCrops();
     private static final IWorldGenerator LOOSE_ROCKS_GEN = new WorldGenLooseRocks(true);
-
-    //private static final IWorldGenerator STALACTITE_GEN = new WorldGenSpikes(true, 300);
-    //private static final IWorldGenerator STALAGMITE_GEN = new WorldGenSpikes(false, 300);
     private static final IWorldGenerator SPELEOTHEM_GEN = new WorldGenSpeleothem();
     private static final IWorldGenerator WATERFALL_GEN = new WorldGenFalls(FRESH_WATER, 15);
     private static final IWorldGenerator LAVAFALL_GEN = new WorldGenFalls(Blocks.FLOWING_LAVA.getDefaultState(), 5);
@@ -300,9 +297,7 @@ public class ChunkGenTFC implements IChunkGenerator {
         LOOSE_ROCKS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         WATERFALL_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         LAVAFALL_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
-        //STALACTITE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
-        //STALAGMITE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
-        //SPELEOTHEM_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
+        SPELEOTHEM_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         SNOW_ICE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
 
         if (TerrainGen.populate(this, world, rand, chunkX, chunkZ, false, ANIMALS)) {

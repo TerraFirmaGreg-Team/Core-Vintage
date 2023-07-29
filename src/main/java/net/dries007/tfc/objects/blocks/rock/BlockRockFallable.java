@@ -29,7 +29,7 @@ import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.GRAVEL;
 import static net.dries007.tfc.api.types2.rock.RockVariant.SAND;
 
-public class BlockRockFallable extends BlockRockVatiant {
+public class BlockRockFallable extends BlockRockVariant {
 
     private final RockVariant rockVariant;
     private final RockType rockType;

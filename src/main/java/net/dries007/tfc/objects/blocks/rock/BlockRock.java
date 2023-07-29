@@ -25,7 +25,7 @@ import java.util.Random;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 
-public class BlockRock extends BlockRockVatiant {
+public class BlockRock extends BlockRockVariant {
 
     private final RockType rockType;
     private final RockVariant rockVariant;

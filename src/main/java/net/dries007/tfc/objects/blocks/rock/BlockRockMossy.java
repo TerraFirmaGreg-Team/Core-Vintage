@@ -35,7 +35,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
  * Пока это почти полная копия {@link BlockRock}
  * Этот клас в будущем планируется использовать для механики распространения мха
  */
-public class BlockRockMossy extends BlockRockVatiant {
+public class BlockRockMossy extends BlockRockVariant {
 
     private final RockVariant rockVariant;
     private final RockType rockType;

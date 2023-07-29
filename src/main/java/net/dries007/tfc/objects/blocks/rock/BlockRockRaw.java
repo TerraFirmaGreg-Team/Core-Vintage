@@ -46,7 +46,7 @@ import static net.dries007.tfc.api.types2.rock.RockVariant.ANVIL;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockRockRaw extends BlockRockVatiant {
+public class BlockRockRaw extends BlockRockVariant {
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
     public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
     private final RockType rockType;
@@ -64,17 +64,16 @@ public class BlockRockRaw extends BlockRockVatiant {
         this.rockType = rockType;
         this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
+        FallingBlockManager.Specification spec = new FallingBlockManager.Specification(rockVariant.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
+        FallingBlockManager.registerFallable(this, spec);
+
         String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
         this.setHardness(getFinalHardness());
 
         this.setHarvestLevel("pickaxe", 0);
-        this.setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
         this.setRegistryName(MOD_ID, blockRegistryName);
         this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-
-
-        FallingBlockManager.Specification spec = new FallingBlockManager.Specification(rockVariant.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
-        FallingBlockManager.registerFallable(this, spec);
+        setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
     }
 
     @Override

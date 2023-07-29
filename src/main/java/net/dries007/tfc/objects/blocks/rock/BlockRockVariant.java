@@ -26,11 +26,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BlockRockVatiant extends Block implements IRockTypeBlock, IItemSize {
+public abstract class BlockRockVariant extends Block implements IRockTypeBlock, IItemSize {
 
     public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockTypeBlock> BLOCK_ROCK_MAP = new LinkedHashMap<>();
 
-    public BlockRockVatiant(Material material) {
+    public BlockRockVariant(Material material) {
         super(material);
 
         setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);

@@ -44,7 +44,6 @@ public enum RockType implements IStringSerializable {
 	MARBLE(METAMORPHIC, true);
 
 	public static final IProperty<RockType> ROCKTYPE = PropertyEnum.create("rocktype", RockType.class);
-	;
 	private static final RockType[] VALUES = values();
 	private final RockCategory rockCategory;
 	private final boolean isFlux;

@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
 import net.dries007.tfc.api.util.Triple;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -30,41 +30,41 @@ import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 
 @ParametersAreNonnullByDefault
 public class BlockRockLoose extends BlockLoose implements IRockTypeBlock {
-    private final RockVariant rockVariant;
-    private final RockType rockType;
-    private final ResourceLocation modelLocation;
+	private final RockVariant rockVariant;
+	private final RockType rockType;
+	private final ResourceLocation modelLocation;
 
-    public BlockRockLoose(RockVariant rockVariant, RockType rockType) {
-        if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
-            throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+	public BlockRockLoose(RockVariant rockVariant, RockType rockType) {
+		if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 
-        this.rockVariant = rockVariant;
-        this.rockType = rockType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
+		this.rockVariant = rockVariant;
+		this.rockType = rockType;
+		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
-        String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
-        this.setSoundType(SoundType.STONE);
-        this.setHardness(getFinalHardness());
-        this.setHarvestLevel("pickaxe", 0);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-    }
+		String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
+		this.setSoundType(SoundType.STONE);
+		this.setHardness(getFinalHardness());
+		this.setHarvestLevel("pickaxe", 0);
+		this.setRegistryName(MOD_ID, blockRegistryName);
+		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+	}
 
-    @Override
-    public RockVariant getRockVariant() {
-        return rockVariant;
-    }
+	@Override
+	public RockVariant getRockVariant() {
+		return rockVariant;
+	}
 
-    @Override
-    public RockType getRockType() {
-        return rockType;
-    }
+	@Override
+	public RockType getRockType() {
+		return rockType;
+	}
 
-    @Override
-    public ItemBlock getItemBlock() {
-        return null;
-    }
+	@Override
+	public ItemBlock getItemBlock() {
+		return null;
+	}
 
 //    @Override
 //    @SuppressWarnings("ConstantConditions")
@@ -94,22 +94,22 @@ public class BlockRockLoose extends BlockLoose implements IRockTypeBlock {
 //    }
 
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName());
-            }
-        });
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName());
+			}
+		});
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
-    }
+		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
+	}
 }

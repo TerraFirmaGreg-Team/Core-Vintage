@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
 import net.dries007.tfc.objects.blocks.rock.BlockRockSpeleothem;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -23,7 +23,7 @@ import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 public class WorldGenSpeleothem implements IWorldGenerator {
 
 	@Override
-	public void generate (Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 
 		int x = chunkX * 16 + 8;
 		int z = chunkZ * 16 + 8;
@@ -32,7 +32,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 		int tries = 60;
 		int innerSpread = 6;
 		int innerTries = 12;
-		int upperBound = 150;  // Максимальная высота генерации
+		int upperBound = 140;  // Максимальная высота генерации
 		int offset = 6;
 
 		if (upperBound > 0)
@@ -43,7 +43,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 			}
 	}
 
-	private boolean placeSpeleothemCluster (Random random, World world, BlockPos pos, int spread, int tries) {
+	private boolean placeSpeleothemCluster(Random random, World world, BlockPos pos, int spread, int tries) {
 		if (!findAndPlaceSpeleothem(random, world, pos))
 			return false;
 
@@ -55,7 +55,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 		return true;
 	}
 
-	private boolean findAndPlaceSpeleothem (Random random, World world, BlockPos pos) {
+	private boolean findAndPlaceSpeleothem(Random random, World world, BlockPos pos) {
 		if (!world.isAirBlock(pos))
 			return false;
 
@@ -79,7 +79,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 		return true;
 	}
 
-	private void placeSpeleothem (Random random, World world, BlockPos pos, Block type, boolean up) {
+	private void placeSpeleothem(Random random, World world, BlockPos pos, Block type, boolean up) {
 		if (type == null)
 			return;
 
@@ -103,7 +103,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 	}
 
 	@SuppressWarnings("incomplete-switch")
-	private Block getSpeleothemType (IBlockState state) {
+	private Block getSpeleothemType(IBlockState state) {
 		Block block = state.getBlock();
 		for (RockType rockType : RockType.values()) {
 			if (getBlockRockMap(ORDINARY, RAW, rockType) == block) {

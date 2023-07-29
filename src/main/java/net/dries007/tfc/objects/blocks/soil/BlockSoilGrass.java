@@ -13,7 +13,7 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.api.util.ISoilTypeBlock;
+import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -66,7 +66,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 	private final SoilType soilType;
 	private final ResourceLocation modelLocation;
 
-	public BlockSoilGrass (SoilVariant soilVariant, SoilType soilType) {
+	public BlockSoilGrass(SoilVariant soilVariant, SoilType soilType) {
 
 		if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
 			throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
@@ -94,7 +94,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 				.withProperty(WEST, Boolean.FALSE));
 	}
 
-	public static void spreadGrass (World world, BlockPos pos, IBlockState us, Random rand) {
+	public static void spreadGrass(World world, BlockPos pos, IBlockState us, Random rand) {
 		// Получаем позицию верхнего блока
 		BlockPos upPos = pos.up();
 		// Получаем состояние верхнего блока
@@ -176,27 +176,27 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 	}
 
 	@Override
-	public SoilVariant getSoilVariant () {
+	public SoilVariant getSoilVariant() {
 		return soilVariant;
 	}
 
 	@Override
-	public SoilType getSoilType () {
+	public SoilType getSoilType() {
 		return soilType;
 	}
 
 	@Override
-	public ItemBlock getItemBlock () {
+	public ItemBlock getItemBlock() {
 		return new ItemBlock(this);
 	}
 
 	@Override
-	public int getMetaFromState (IBlockState state) {
+	public int getMetaFromState(IBlockState state) {
 		return 0;
 	}
 
 	@Override
-	public void updateTick (World worldIn, BlockPos pos, IBlockState state, Random rand) {
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isRemote) {
 			if (!worldIn.isAreaLoaded(pos, 3))
 				return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
@@ -229,7 +229,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 	}
 
 	@Override
-	public IBlockState getActualState (IBlockState state, IBlockAccess world, BlockPos pos) {
+	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		pos = pos.add(0, -1, 0);
 		Block blockUp = world.getBlockState(pos.up()).getBlock();
 		return state
@@ -241,12 +241,12 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState () {
+	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, new IProperty[]{EAST, NORTH, WEST, SOUTH, SNOWY});
 	}
 
 	@Override
-	public void randomTick (World world, BlockPos pos, IBlockState state, Random rand) {
+	public void randomTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		if (world.isRemote) return;
 		spreadGrass(world, pos, state, rand);
 		super.randomTick(world, pos, state, rand);
@@ -254,7 +254,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void randomDisplayTick (IBlockState state, World world, BlockPos pos, Random rand) {
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
 		if (this.soilVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
 			double d0 = (float) pos.getX() + rand.nextFloat();
 			double d1 = (double) pos.getY() - 0.05D;
@@ -266,16 +266,16 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings("deprecation")
-	public boolean shouldSideBeRendered (IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
 		return super.shouldSideBeRendered(blockState, world, pos, side);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void onModelRegister () {
+	public void onModelRegister() {
 		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
 			@Nonnull
-			protected ModelResourceLocation getModelResourceLocation (@Nonnull IBlockState state) {
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
 				return new ModelResourceLocation(modelLocation,
 						"east=" + state.getValue(EAST) + "," +
 								"north=" + state.getValue(NORTH) + "," +
@@ -297,7 +297,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 	@Nonnull
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getRenderLayer () {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 }

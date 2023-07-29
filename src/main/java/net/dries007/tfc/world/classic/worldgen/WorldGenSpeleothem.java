@@ -32,7 +32,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 		int tries = 60;
 		int innerSpread = 6;
 		int innerTries = 12;
-		int upperBound = 150;  // Максимальная высота генерации
+		int upperBound = 140;  // Максимальная высота генерации
 		int offset = 6;
 
 		if (upperBound > 0)

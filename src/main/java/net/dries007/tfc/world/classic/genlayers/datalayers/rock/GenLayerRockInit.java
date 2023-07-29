@@ -20,25 +20,10 @@ public class GenLayerRockInit extends GenLayerTFC {
 		super(par1);
 
 		layerRocks = Arrays.stream(RockType.values())
-				.filter(rock -> rocks.test(rock))
+				.filter(rocks::test)
 				.mapToInt(RockType::ordinal)
 				.sorted()
 				.toArray();
-//		layerRocks = TFCRegistries.ROCKS.getValuesCollection()
-//				.stream()
-//				.filter(rocks)
-//				.filter(Rock::isNaturallyGenerating)
-//				.mapToInt(((ForgeRegistry<Rock>) TFCRegistries.ROCKS)::getID)
-//				.sorted()
-//				.toArray();
-
-//		if (ConfigTFC.General.DEBUG.debugWorldGenSafe) {
-//			TerraFirmaCraft.getLog().info("Список камней для генерации мира (целые числа): {}", layerRocks);
-//			TerraFirmaCraft.getLog().info("Список камней для генерации мира (названия): {}", (Object) Arrays.stream(layerRocks)
-//					.mapToObj(((ForgeRegistry<Rock>) TFCRegistries.ROCKS)::getValue)
-//					.map(Objects::toString)
-//					.toArray());
-//		}
 	}
 
 	@Override

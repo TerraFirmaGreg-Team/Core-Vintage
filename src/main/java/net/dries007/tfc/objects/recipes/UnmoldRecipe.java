@@ -127,6 +127,14 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
 		return true;
 	}
 
+	public ItemStack getInputMold() {
+		return inputMold;
+	}
+
+	public Material getInputMaterial() {
+		return inputMaterial;
+	}
+
 	/**
 	 * Performs breaking check
 	 *

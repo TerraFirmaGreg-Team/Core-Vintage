@@ -35,20 +35,27 @@ import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.items.ItemAnimalHide.HideType;
 import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.metal.ItemAnvil;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
+import net.dries007.tfc.objects.recipes.UnmoldRecipe;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+@ParametersAreNonnullByDefault
 @JEIPlugin
 public final class TFCJEIPlugin implements IModPlugin
 {
@@ -243,17 +250,14 @@ public final class TFCJEIPlugin implements IModPlugin
         var unmoldList = new ArrayList<UnmoldRecipeWrapper>();
         var castingList = new ArrayList<CastingRecipeWrapper>();
 
-        for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
-            for (var orePrefix : OrePrefix.values()) {
-                var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
-                if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
-                    if (material.hasFlag(TFGMaterialFlags.TOOL_MATERIAL_CAN_BE_UNMOLDED) || orePrefix == OrePrefix.ingot) {
-                        unmoldList.add(new UnmoldRecipeWrapper(material, orePrefix));
-                        castingList.add(new CastingRecipeWrapper(material, orePrefix));
-                    }
+        for (var item : ForgeRegistries.RECIPES) {
+            if (!(item instanceof UnmoldRecipe unmoldRecipe)) continue;
 
-                }
-            }
+            var material = unmoldRecipe.getInputMaterial();
+            var orePrefix = ((ItemMold) unmoldRecipe.getInputMold().getItem()).getOrePrefix();
+
+            unmoldList.add(new UnmoldRecipeWrapper(material, orePrefix));
+            castingList.add(new CastingRecipeWrapper(material, orePrefix));
         }
 
         registry.addRecipes(unmoldList, UNMOLD_UID);

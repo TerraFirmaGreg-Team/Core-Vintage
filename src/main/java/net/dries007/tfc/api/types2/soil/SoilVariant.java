@@ -58,20 +58,19 @@ public enum SoilVariant implements IStringSerializable {
         return fallingSpecification != null;
     }
 
-
     public SoilVariant getNonGrassVersion() {
         switch (this) {
-            case GRASS:
-            case DRY_GRASS:
+            case GRASS, DRY_GRASS -> {
                 return DIRT;
-            case CLAY_GRASS:
+            }
+            case CLAY_GRASS -> {
                 return CLAY;
+            }
         }
         throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
     }
 
     public SoilVariant getGrassVersion(SoilVariant spreader) {
-        if (false) throw new IllegalArgumentException("Non-grass can't spread.");
         switch (this) {
             case DIRT:
                 return spreader == DRY_GRASS ? DRY_GRASS : GRASS;

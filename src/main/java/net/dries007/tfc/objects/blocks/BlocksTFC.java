@@ -715,21 +715,25 @@ public final class BlocksTFC {
     }
 
     public static boolean isRawStone(IBlockState current) {
-        if (!(current.getBlock() instanceof IRockTypeBlock)) return false;
-        RockVariant rockVariant = ((IRockTypeBlock) current.getBlock()).getRockVariant();
-        return rockVariant == RAW;
+        if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock)
+            return rockTypeBlock.getRockVariant() == RAW;
+        return false;
     }
 
     public static boolean isClay(IBlockState current) {
-        if (!(current.getBlock() instanceof ISoilTypeBlock)) return false;
-        SoilVariant soilVariant = ((ISoilTypeBlock) current.getBlock()).getSoilVariant();
-        return soilVariant == CLAY || soilVariant == CLAY_GRASS;
+        if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+            switch (soilTypeBlock.getSoilVariant()) {
+                case CLAY, CLAY_GRASS -> {
+                    return true;
+                }
+            }
+        return false;
     }
 
     public static boolean isDirt(IBlockState current) {
-        if (!(current.getBlock() instanceof ISoilTypeBlock)) return false;
-        SoilVariant soilVariant = ((ISoilTypeBlock) current.getBlock()).getSoilVariant();
-        return soilVariant == DIRT;
+        if (current.getBlock() instanceof  ISoilTypeBlock soilTypeBlock)
+            return soilTypeBlock.getSoilVariant() == DIRT;
+        return false;
     }
 
     public static boolean isSand(IBlockState current) {
@@ -740,65 +744,66 @@ public final class BlocksTFC {
     }
 
     public static boolean isSoil(IBlockState current) {
-        if (current.getBlock() instanceof BlockPeat) return true;
-        if (!(current.getBlock() instanceof ISoilTypeBlock)) return false;
-        return current instanceof BlockSoil || current instanceof BlockSoilGrass;
-    }
-
-    public static boolean isGrowableSoil(IBlockState current) {
-        return current.getBlock() instanceof ISoilTypeBlock;
-    }
-
-    public static boolean isSoilOrGravel(IBlockState current) {
-        if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock) {
-            return rockTypeBlock.getRockVariant() == RockVariant.GRAVEL && isSoil(current);
-        }
+        if (current.getBlock() instanceof  BlockPeat) return true;
+        if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+            switch (soilTypeBlock.getSoilVariant()) {
+                case GRASS, DRY_GRASS, DIRT, CLAY, CLAY_GRASS -> {
+                    return true;
+                }
+            }
         return false;
     }
 
-    /*
-	public static boolean isSand(IBlockState current) {
-		if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-		Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-		return type == SAND;
-	}
+    public static boolean isGrowableSoil(IBlockState current) {
+        if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+            switch (soilTypeBlock.getSoilVariant()) {
+                case GRASS, DRY_GRASS, DIRT, CLAY, CLAY_GRASS -> {
+                    return true;
+                }
+            }
+        return false;
+    }
 
-	public static boolean isSoil(IBlockState current) {
-		if (current.getBlock() instanceof BlockPeat) return true;
-		if (!(current.getBlock() instanceof BlockRockVariant)) return false;
-		Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
-		return type == GRASS || type == DRY_GRASS || type == DIRT || type == CLAY || type == CLAY_GRASS;
-	}
-
-	public static boolean isGrowableSoil(IBlockState current) {
-		return current.getBlock() instanceof ISoilTypeBlock;
-	}
-
-	public static boolean isSoilOrGravel(IBlockState current) {
-		if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock) {
-			return rockTypeBlock.getRockVariant() == RockVariant.GRAVEL && isSoil(current);
-		}
-		return false;
-	}
-	*/
+    public static boolean isSoilOrGravel(IBlockState current) {
+        if (current.getBlock() instanceof BlockPeat) return true;
+        if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+            switch (soilTypeBlock.getSoilVariant()) {
+                case GRASS, DRY_GRASS, DIRT -> {
+                    return true;
+                }
+            }
+        if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock)
+            return rockTypeBlock.getRockVariant() == GRAVEL;
+        return false;
+    }
 
     public static boolean isGrass(IBlockState current) {
         if (current.getBlock() instanceof BlockPeatGrass) return true;
-        return current instanceof BlockSoilGrass;
+        if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+            return soilTypeBlock.getSoilVariant() == GRASS;
+        return false;
     }
 
     public static boolean isDryGrass(IBlockState current) {
-        if (!(current.getBlock() instanceof ISoilTypeBlock)) return false;
-        SoilVariant soilVariant = ((ISoilTypeBlock) current.getBlock()).getSoilVariant();
-        return soilVariant == DRY_GRASS;
+        if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+            return soilTypeBlock.getSoilVariant() == DRY_GRASS;
+        return false;
     }
 
     public static boolean isGround(IBlockState current) {
-        if (!(current.getBlock() instanceof IRockTypeBlock)) return false;
-        if (!(current.getBlock() instanceof ISoilTypeBlock)) return false;
-        RockVariant rockVariant = ((IRockTypeBlock) current.getBlock()).getRockVariant();
-        SoilVariant soilVariant = ((ISoilTypeBlock) current.getBlock()).getSoilVariant();
-        return soilVariant == GRASS || soilVariant == DRY_GRASS || soilVariant == DIRT || rockVariant == GRAVEL || rockVariant == RAW || rockVariant == SAND;
+        if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock)
+            switch (rockTypeBlock.getRockVariant()) {
+                case GRAVEL, SAND, RAW -> {
+                    return true;
+                }
+            }
+        if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+            switch (soilTypeBlock.getSoilVariant()) {
+                case GRASS, DRY_GRASS, DIRT -> {
+                    return true;
+                }
+            }
+        return false;
     }
 
     private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block, CreativeTabs ct) {

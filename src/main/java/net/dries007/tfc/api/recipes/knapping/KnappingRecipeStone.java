@@ -10,7 +10,7 @@
 //import net.minecraft.item.ItemStack;
 //
 //import net.dries007.tfc.api.types.Rock;
-//import net.dries007.tfc.api.util.IRockObject;
+//import net.dries007.tfc.api.types2.rock.util.IRockObject;
 //
 //public class KnappingRecipeStone extends KnappingRecipe
 //{

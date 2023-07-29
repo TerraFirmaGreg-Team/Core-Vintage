@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -32,72 +32,72 @@ import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 
 public class BlockRockPressurePlate extends BlockPressurePlate implements IRockTypeBlock {
-    private final RockVariant rockVariant;
-    private final RockType rockType;
-    private final ResourceLocation modelLocation;
+	private final RockVariant rockVariant;
+	private final RockType rockType;
+	private final ResourceLocation modelLocation;
 
-    public BlockRockPressurePlate(RockVariant rockVariant, RockType rockType) {
-        super(Material.ROCK, Sensitivity.MOBS);
+	public BlockRockPressurePlate(RockVariant rockVariant, RockType rockType) {
+		super(Material.ROCK, Sensitivity.MOBS);
 
-        if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
-            throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+		if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 
-        this.rockVariant = rockVariant;
-        this.rockType = rockType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
+		this.rockVariant = rockVariant;
+		this.rockType = rockType;
+		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
-        String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
-        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
-        this.setSoundType(SoundType.STONE);
-        this.setHardness(0.5f);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+		String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
+		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+		this.setSoundType(SoundType.STONE);
+		this.setHardness(0.5f);
+		this.setRegistryName(MOD_ID, blockRegistryName);
+		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-        OreDictionaryHelper.register(this, "pressure_plate_stone");
-        //OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
-    }
+		OreDictionaryHelper.register(this, "pressure_plate_stone");
+		//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
+	}
 
-    @Override
-    public RockVariant getRockVariant() {
-        return rockVariant;
-    }
+	@Override
+	public RockVariant getRockVariant() {
+		return rockVariant;
+	}
 
-    @Override
-    public RockType getRockType() {
-        return rockType;
-    }
+	@Override
+	public RockType getRockType() {
+		return rockType;
+	}
 
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlock(this);
-    }
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlock(this);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation,
-                        "powered=" + state.getValue(POWERED) + "," +
-                                "rocktype=" + rockType.getName());
-            }
-        });
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation,
+						"powered=" + state.getValue(POWERED) + "," +
+								"rocktype=" + rockType.getName());
+			}
+		});
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(
-                    Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation, "inventory=" + rockType.getName()));
-        }
-    }
+		for (IBlockState state : this.getBlockState().getValidStates()) {
+			ModelLoader.setCustomModelResourceLocation(
+					Item.getItemFromBlock(this),
+					this.getMetaFromState(state),
+					new ModelResourceLocation(modelLocation, "inventory=" + rockType.getName()));
+		}
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
-    }
+		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
+	}
 }

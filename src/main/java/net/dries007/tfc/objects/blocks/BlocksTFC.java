@@ -19,8 +19,8 @@ import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
-import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
+import net.dries007.tfc.api.util.IRockTypeBlock;
+import net.dries007.tfc.api.util.ISoilTypeBlock;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.devices.*;
@@ -139,129 +139,129 @@ public final class BlocksTFC {
 	private static ImmutableList<BlockFruitTreeLeaves> allFruitTreeLeavesBlocks;
 	private static ImmutableList<BlockBerryBush> allBerryBushBlocks;
 
-	public static ImmutableList<ItemBlock> getAllNormalItemBlocks() {
+	public static ImmutableList<ItemBlock> getAllNormalItemBlocks () {
 		return allNormalItemBlocks;
 	}
 
-	public static ImmutableList<ItemBlock> getAllInventoryItemBlocks() {
+	public static ImmutableList<ItemBlock> getAllInventoryItemBlocks () {
 		return allInventoryItemBlocks;
 	}
 
-	public static ImmutableList<ItemBlockBarrel> getAllBarrelItemBlocks() {
+	public static ImmutableList<ItemBlockBarrel> getAllBarrelItemBlocks () {
 		return allBarrelItemBlocks;
 	}
 
-	public static ImmutableList<BlockFluidBase> getAllFluidBlocks() {
+	public static ImmutableList<BlockFluidBase> getAllFluidBlocks () {
 		return allFluidBlocks;
 	}
 
-	public static ImmutableList<BlockLogTFC> getAllLogBlocks() {
+	public static ImmutableList<BlockLogTFC> getAllLogBlocks () {
 		return allLogBlocks;
 	}
 
-	public static ImmutableList<BlockLeavesTFC> getAllLeafBlocks() {
+	public static ImmutableList<BlockLeavesTFC> getAllLeafBlocks () {
 		return allLeafBlocks;
 	}
 
-	public static ImmutableList<BlockFenceGateTFC> getAllFenceGateBlocks() {
+	public static ImmutableList<BlockFenceGateTFC> getAllFenceGateBlocks () {
 		return allFenceGateBlocks;
 	}
 
-	public static ImmutableList<BlockSaplingTFC> getAllSaplingBlocks() {
+	public static ImmutableList<BlockSaplingTFC> getAllSaplingBlocks () {
 		return allSaplingBlocks;
 	}
 
-	public static ImmutableList<BlockDoorTFC> getAllDoorBlocks() {
+	public static ImmutableList<BlockDoorTFC> getAllDoorBlocks () {
 		return allDoorBlocks;
 	}
 
-	public static ImmutableList<BlockTrapDoorWoodTFC> getAllTrapDoorWoodBlocks() {
+	public static ImmutableList<BlockTrapDoorWoodTFC> getAllTrapDoorWoodBlocks () {
 		return allTrapDoorWoodBlocks;
 	}
 
-	public static ImmutableList<BlockTrapDoorMetalTFC> getAllTrapDoorMetalBlocks() {
+	public static ImmutableList<BlockTrapDoorMetalTFC> getAllTrapDoorMetalBlocks () {
 		return allTrapDoorMetalBlocks;
 	}
 
-	public static ImmutableList<BlockStairsTFC> getAllStairsBlocks() {
+	public static ImmutableList<BlockStairsTFC> getAllStairsBlocks () {
 		return allStairsBlocks;
 	}
 
-	public static ImmutableList<BlockWoodSlabTFC.Half> getAllSlabBlocks() {
+	public static ImmutableList<BlockWoodSlabTFC.Half> getAllSlabBlocks () {
 		return allSlabBlocks;
 	}
 
-	public static ImmutableList<BlockChestTFC> getAllChestBlocks() {
+	public static ImmutableList<BlockChestTFC> getAllChestBlocks () {
 		return allChestBlocks;
 	}
 
-	public static ImmutableList<BlockAnvilTFC> getAllAnvils() {
+	public static ImmutableList<BlockAnvilTFC> getAllAnvils () {
 		return allAnvils;
 	}
 
-	public static ImmutableList<BlockMetalCladding> getAllCladdings() {
+	public static ImmutableList<BlockMetalCladding> getAllCladdings () {
 		return allCladdings;
 	}
 
-	public static ImmutableList<BlockMetalLamp> getAllLamps() {
+	public static ImmutableList<BlockMetalLamp> getAllLamps () {
 		return allLamps;
 	}
 
-	public static ImmutableList<BlockToolRack> getAllToolRackBlocks() {
+	public static ImmutableList<BlockToolRack> getAllToolRackBlocks () {
 		return allToolRackBlocks;
 	}
 
-	public static ImmutableList<BlockCropTFC> getAllCropBlocks() {
+	public static ImmutableList<BlockCropTFC> getAllCropBlocks () {
 		return allCropBlocks;
 	}
 
-	public static ImmutableList<BlockCropDead> getAllDeadCropBlocks() {
+	public static ImmutableList<BlockCropDead> getAllDeadCropBlocks () {
 		return allDeadCropBlocks;
 	}
 
-	public static ImmutableList<BlockPlantTFC> getAllPlantBlocks() {
+	public static ImmutableList<BlockPlantTFC> getAllPlantBlocks () {
 		return allPlantBlocks;
 	}
 
-	public static ImmutableList<BlockPlantTFC> getAllGrassBlocks() {
+	public static ImmutableList<BlockPlantTFC> getAllGrassBlocks () {
 		return allGrassBlocks;
 	}
 
-	public static ImmutableList<BlockLoom> getAllLoomBlocks() {
+	public static ImmutableList<BlockLoom> getAllLoomBlocks () {
 		return allLoomBlocks;
 	}
 
-	public static ImmutableList<BlockSupport> getAllSupportBlocks() {
+	public static ImmutableList<BlockSupport> getAllSupportBlocks () {
 		return allSupportBlocks;
 	}
 
-	public static ImmutableList<BlockFlowerPotTFC> getAllFlowerPots() {
+	public static ImmutableList<BlockFlowerPotTFC> getAllFlowerPots () {
 		return allFlowerPots;
 	}
 
-	public static ImmutableList<BlockFruitTreeSapling> getAllFruitTreeSaplingBlocks() {
+	public static ImmutableList<BlockFruitTreeSapling> getAllFruitTreeSaplingBlocks () {
 		return allFruitTreeSaplingBlocks;
 	}
 
-	public static ImmutableList<BlockFruitTreeTrunk> getAllFruitTreeTrunkBlocks() {
+	public static ImmutableList<BlockFruitTreeTrunk> getAllFruitTreeTrunkBlocks () {
 		return allFruitTreeTrunkBlocks;
 	}
 
-	public static ImmutableList<BlockFruitTreeBranch> getAllFruitTreeBranchBlocks() {
+	public static ImmutableList<BlockFruitTreeBranch> getAllFruitTreeBranchBlocks () {
 		return allFruitTreeBranchBlocks;
 	}
 
-	public static ImmutableList<BlockFruitTreeLeaves> getAllFruitTreeLeavesBlocks() {
+	public static ImmutableList<BlockFruitTreeLeaves> getAllFruitTreeLeavesBlocks () {
 		return allFruitTreeLeavesBlocks;
 	}
 
-	public static ImmutableList<BlockBerryBush> getAllBerryBushBlocks() {
+	public static ImmutableList<BlockBerryBush> getAllBerryBushBlocks () {
 		return allBerryBushBlocks;
 	}
 
 	@SubscribeEvent
 	@SuppressWarnings("ConstantConditions")
-	public static void registerBlocks(RegistryEvent.Register<Block> event) {
+	public static void registerBlocks (RegistryEvent.Register<Block> event) {
 		// This is called here because it needs to wait until Metal registry has fired
 		FluidsTFC.registerFluids();
 
@@ -683,7 +683,7 @@ public final class BlocksTFC {
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public static void registerVanillaOverrides(RegistryEvent.Register<Block> event) {
+	public static void registerVanillaOverrides (RegistryEvent.Register<Block> event) {
 		// Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
 		if (ConfigTFC.General.OVERRIDES.enableFrozenOverrides) {
 			TerraFirmaCraft.getLog().info("The below warnings about unintended overrides are normal. The override is intended. ;)");
@@ -698,29 +698,29 @@ public final class BlocksTFC {
 		}
 	}
 
-	public static boolean isWater(IBlockState current) {
+	public static boolean isWater (IBlockState current) {
 		return current.getMaterial() == Material.WATER;
 	}
 
-	public static boolean isFreshWater(IBlockState current) {
+	public static boolean isFreshWater (IBlockState current) {
 		return current == FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState();
 	}
 
-	public static boolean isSaltWater(IBlockState current) {
+	public static boolean isSaltWater (IBlockState current) {
 		return current == FluidsTFC.SALT_WATER.get().getBlock().getDefaultState();
 	}
 
-	public static boolean isFreshWaterOrIce(IBlockState current) {
+	public static boolean isFreshWaterOrIce (IBlockState current) {
 		return current.getBlock() == Blocks.ICE || isFreshWater(current);
 	}
 
-	public static boolean isRawStone(IBlockState current) {
+	public static boolean isRawStone (IBlockState current) {
 		if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock)
 			return rockTypeBlock.getRockVariant() == RAW;
 		return false;
 	}
 
-	public static boolean isClay(IBlockState current) {
+	public static boolean isClay (IBlockState current) {
 		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
 				case CLAY, CLAY_GRASS -> {
@@ -730,20 +730,20 @@ public final class BlocksTFC {
 		return false;
 	}
 
-	public static boolean isDirt(IBlockState current) {
+	public static boolean isDirt (IBlockState current) {
 		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
 			return soilTypeBlock.getSoilVariant() == DIRT;
 		return false;
 	}
 
-	public static boolean isSand(IBlockState current) {
+	public static boolean isSand (IBlockState current) {
 		if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock) {
 			return rockTypeBlock.getRockVariant() == RockVariant.SAND;
 		}
 		return false;
 	}
 
-	public static boolean isSoil(IBlockState current) {
+	public static boolean isSoil (IBlockState current) {
 		if (current.getBlock() instanceof BlockPeat) return true;
 		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
@@ -754,7 +754,7 @@ public final class BlocksTFC {
 		return false;
 	}
 
-	public static boolean isGrowableSoil(IBlockState current) {
+	public static boolean isGrowableSoil (IBlockState current) {
 		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
 				case GRASS, DRY_GRASS, DIRT, CLAY, CLAY_GRASS -> {
@@ -764,7 +764,7 @@ public final class BlocksTFC {
 		return false;
 	}
 
-	public static boolean isSoilOrGravel(IBlockState current) {
+	public static boolean isSoilOrGravel (IBlockState current) {
 		if (current.getBlock() instanceof BlockPeat) return true;
 		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
@@ -777,7 +777,7 @@ public final class BlocksTFC {
 		return false;
 	}
 
-	public static boolean isGrass(IBlockState current) {
+	public static boolean isGrass (IBlockState current) {
 		if (current.getBlock() instanceof BlockPeatGrass) return true;
 		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
@@ -788,13 +788,13 @@ public final class BlocksTFC {
 		return false;
 	}
 
-	public static boolean isDryGrass(IBlockState current) {
+	public static boolean isDryGrass (IBlockState current) {
 		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
 			return soilTypeBlock.getSoilVariant() == DRY_GRASS;
 		return false;
 	}
 
-	public static boolean isGround(IBlockState current) {
+	public static boolean isGround (IBlockState current) {
 		if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock)
 			switch (rockTypeBlock.getRockVariant()) {
 				case GRAVEL, SAND, RAW -> {
@@ -810,19 +810,19 @@ public final class BlocksTFC {
 		return false;
 	}
 
-	private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block, CreativeTabs ct) {
+	private static <T extends Block> T register (IForgeRegistry<Block> r, String name, T block, CreativeTabs ct) {
 		block.setCreativeTab(ct);
 		return register(r, name, block);
 	}
 
-	private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block) {
+	private static <T extends Block> T register (IForgeRegistry<Block> r, String name, T block) {
 		block.setRegistryName(MOD_ID, name);
 		block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
 		r.register(block);
 		return block;
 	}
 
-	private static <T extends TileEntity> void register(Class<T> te, String name) {
+	private static <T extends TileEntity> void register (Class<T> te, String name) {
 		TileEntity.register(MOD_ID + ":" + name, te);
 	}
 }

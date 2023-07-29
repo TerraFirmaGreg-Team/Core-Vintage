@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.util.IRockTypeBlock;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
@@ -28,43 +28,43 @@ import java.util.Map;
 
 public abstract class BlockRockVariant extends Block implements IRockTypeBlock, IItemSize {
 
-	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockTypeBlock> BLOCK_ROCK_MAP = new LinkedHashMap<>();
+    public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockTypeBlock> BLOCK_ROCK_MAP = new LinkedHashMap<>();
 
-	public BlockRockVariant(Material material) {
-		super(material);
+    public BlockRockVariant(Material material) {
+        super(material);
 
-		setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
-		setSoundType(SoundType.STONE);
-	}
+        setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        setSoundType(SoundType.STONE);
+    }
 
-	public static Block getBlockRockMap(RockBlockType rockBlockType, RockVariant blockVariant, RockType stoneType) {
-		return (Block) BLOCK_ROCK_MAP.get(new Triple<>(rockBlockType, blockVariant, stoneType));
-	}
+    public static Block getBlockRockMap(RockBlockType rockBlockType, RockVariant blockVariant, RockType stoneType) {
+        return (Block) BLOCK_ROCK_MAP.get(new Triple<>(rockBlockType, blockVariant, stoneType));
+    }
 
-	@Nonnull
-	@Override
-	public Size getSize(@Nonnull ItemStack stack) {
-		return Size.SMALL; // Store anywhere
-	}
+    @Nonnull
+    @Override
+    public Size getSize(@Nonnull ItemStack stack) {
+        return Size.SMALL; // Store anywhere
+    }
 
-	@Nonnull
-	@Override
-	public Weight getWeight(@Nonnull ItemStack stack) {
-		return Weight.LIGHT; // Stacksize = 32
-	}
+    @Nonnull
+    @Override
+    public Weight getWeight(@Nonnull ItemStack stack) {
+        return Weight.LIGHT; // Stacksize = 32
+    }
 
-	@Nonnull
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.SOLID;
-	}
+    @Nonnull
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.SOLID;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
-	}
+        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
+    }
 }

@@ -10,7 +10,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types2.rock.RockCategory;
 import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.types2.rock.util.IRockObject;
+import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -30,6 +30,15 @@ import java.util.Map;
 @ParametersAreNonnullByDefault
 public class ItemRock extends ItemTFC implements IRockObject {
 	private static final Map<RockType, ItemRock> MAP = new HashMap<>();
+
+	public static ItemRock get(RockType rock) {
+		return MAP.get(rock);
+	}
+
+	public static ItemStack get(RockType rock, int amount) {
+		return new ItemStack(MAP.get(rock), amount);
+	}
+
 	private final RockType rock;
 
 	public ItemRock(RockType rock) {
@@ -44,14 +53,6 @@ public class ItemRock extends ItemTFC implements IRockObject {
 //        {
 //            OreDictionaryHelper.register(this, "rock", "flux");
 //        }
-	}
-
-	public static ItemRock get(RockType rock) {
-		return MAP.get(rock);
-	}
-
-	public static ItemStack get(RockType rock, int amount) {
-		return new ItemStack(MAP.get(rock), amount);
 	}
 
 	@Override

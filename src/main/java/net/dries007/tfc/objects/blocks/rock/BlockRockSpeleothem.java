@@ -34,236 +34,235 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.registries.TFCRegistryNames.ROCK;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class BlockRockSpeleothem extends BlockRockVariant {
-	public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
+    public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
-	private final RockVariant rockVariant;
-	private final RockType rockType;
-	private final ResourceLocation modelLocation;
+    private final RockVariant rockVariant;
+    private final RockType rockType;
+    private final ResourceLocation modelLocation;
 
-	public BlockRockSpeleothem(RockVariant rockVariant, RockType rockType) {
-		super(Material.ROCK);
+    public BlockRockSpeleothem(RockVariant rockVariant, RockType rockType) {
+        super(Material.ROCK);
 
-		if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
-
-
-		this.rockVariant = rockVariant;
-		this.rockType = rockType;
-		this.modelLocation = new ResourceLocation(MOD_ID, ROCK + "/" + rockVariant);
-
-		String blockRegistryName = String.format("%s/%s/%s", ROCK, rockVariant, rockType);
-		this.setHardness(getFinalHardness());
-		this.setHarvestLevel("pickaxe", 0);
-		this.setRegistryName(MOD_ID, blockRegistryName);
-		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-		this.setDefaultState(blockState.getBaseState().withProperty(SIZE, EnumSize.MEDIUM));
-		//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
-	}
-
-	@Override
-	public RockVariant getRockVariant() {
-		return rockVariant;
-	}
-
-	@Override
-	public RockType getRockType() {
-		return rockType;
-	}
-
-	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlock(this);
-	}
-
-	@Override
-	public boolean canPlaceBlockAt(World worldIn, @Nonnull BlockPos pos) {
-		return getBearing(worldIn, pos) > 0;
-	}
-
-	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		EnumSize size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
-		worldIn.setBlockState(pos, state.withProperty(SIZE, size));
-	}
-
-	@Override
-	@SuppressWarnings("deprecation")
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		int size = state.getValue(SIZE).strength;
-		if (getBearing(worldIn, pos) < size + 1) {
-			worldIn.playEvent(2001, pos, Block.getStateId(worldIn.getBlockState(pos)));
-			dropBlockAsItem(worldIn, pos, state, 0);
-			worldIn.setBlockToAir(pos);
-		}
-	}
-
-	@Override
-	public int quantityDropped(Random random) {
-		return 0;
-	}
-
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ItemRock.get(rockType);
-	}
+        if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
+            throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
 
-	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, @Nonnull IBlockState state, EntityPlayer player) {
-		return true;
-	}
+        this.rockVariant = rockVariant;
+        this.rockType = rockType;
+        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
-	@Override
-	public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-		return false;
-	}
+        String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
+        this.setHardness(getFinalHardness());
+        this.setHarvestLevel("pickaxe", 0);
+        this.setRegistryName(MOD_ID, blockRegistryName);
+        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        this.setDefaultState(blockState.getBaseState().withProperty(SIZE, EnumSize.MEDIUM));
+        //OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
+    }
 
-	private int getBearing(IBlockAccess world, BlockPos pos) {
-		return Math.max(getStrength(world, pos.down()), getStrength(world, pos.up()));
-	}
+    @Override
+    public RockVariant getRockVariant() {
+        return rockVariant;
+    }
 
+    @Override
+    public RockType getRockType() {
+        return rockType;
+    }
 
-	private int getStrength(IBlockAccess world, BlockPos pos) {
-		IBlockState state = world.getBlockState(pos);
-		if (state.isFullBlock())
-			return 3;
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this);
+    }
 
-		if (state.getPropertyKeys().contains(SIZE))
-			return state.getValue(SIZE).strength;
+    @Override
+    public boolean canPlaceBlockAt(World worldIn, @Nonnull BlockPos pos) {
+        return getBearing(worldIn, pos) > 0;
+    }
 
-		return 0;
-	}
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        EnumSize size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
+        worldIn.setBlockState(pos, state.withProperty(SIZE, size));
+    }
 
-	@Nonnull
-	@Override
-	@SuppressWarnings("deprecation")
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return state.getValue(SIZE).aabb;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        int size = state.getValue(SIZE).strength;
+        if (getBearing(worldIn, pos) < size + 1) {
+            worldIn.playEvent(2001, pos, Block.getStateId(worldIn.getBlockState(pos)));
+            dropBlockAsItem(worldIn, pos, state, 0);
+            worldIn.setBlockToAir(pos);
+        }
+    }
 
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
-		return getBoundingBox(blockState, worldIn, pos);
-	}
-
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isFullCube(IBlockState state) {
-		return false;
-	}
-
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isFullBlock(IBlockState state) {
-		return false;
-	}
-
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
-
-	@Nonnull
-	@Override
-	@SuppressWarnings("deprecation")
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos blockPos, EnumFacing face) {
-		return BlockFaceShape.UNDEFINED;
-	}
-
-	@Override
-	public boolean canPlaceTorchOnTop(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-		return true;
-	}
-
-	@Override
-	public int damageDropped(IBlockState state) {
-		return 0;
-	}
-
-	@Nonnull
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, SIZE);
-	}
-
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return state.getValue(SIZE).ordinal();
-	}
-
-	@Nonnull
-	@Override
-	@SuppressWarnings("deprecation")
-	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(SIZE, EnumSize.values()[Math.min(EnumSize.values().length - 1, meta)]);
-	}
-
-	@Override
-	@SuppressWarnings("deprecation")
-	public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos) {
-		EnumSize size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
-		if (isCenter(worldIn, pos))
-			size = EnumSize.MEDIUM;
-		return state.withProperty(SIZE, size);
-	}
-
-	private boolean isCenter(IBlockAccess world, BlockPos pos) {
-		return isThis(world, pos.down()) && isThis(world, pos.up());
-	}
-
-	private boolean isThis(IBlockAccess world, BlockPos pos) {
-		return world.getBlockState(pos).getBlock() instanceof BlockRockSpeleothem;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onModelRegister() {
-		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-			@Nonnull
-			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation,
-						"rocktype=" + rockType.getName() + "," +
-								"size=" + state.getValue(SIZE));
-			}
-		});
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return ItemRock.get(rockType);
+    }
 
 
-		ModelLoader.setCustomModelResourceLocation(
-				Item.getItemFromBlock(this),
-				this.getMetaFromState(this.getBlockState().getBaseState()),
-				new ModelResourceLocation(modelLocation,
-						"rocktype=" + rockType.getName() + "," +
-								"size=medium"));
-	}
+    @Override
+    public boolean canSilkHarvest(World world, BlockPos pos, @Nonnull IBlockState state, EntityPlayer player) {
+        return true;
+    }
 
-	public enum EnumSize implements IStringSerializable {
+    @Override
+    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+        return false;
+    }
 
-		SMALL(0, 2),
-		MEDIUM(1, 4),
-		BIG(2, 8);
+    private int getBearing(IBlockAccess world, BlockPos pos) {
+        return Math.max(getStrength(world, pos.down()), getStrength(world, pos.up()));
+    }
 
-		public final int strength;
-		public final AxisAlignedBB aabb;
 
-		EnumSize(int strength, int width) {
-			this.strength = strength;
+    private int getStrength(IBlockAccess world, BlockPos pos) {
+        IBlockState state = world.getBlockState(pos);
+        if (state.isFullBlock())
+            return 3;
 
-			float pad = (((16 - width) / 2f) / 16F);
-			aabb = new AxisAlignedBB(pad, 0F, pad, 1F - pad, 1F, 1F - pad);
-		}
+        if (state.getPropertyKeys().contains(SIZE))
+            return state.getValue(SIZE).strength;
 
-		@Override
-		public String getName() {
-			return name().toLowerCase();
-		}
-	}
+        return 0;
+    }
+
+    @Nonnull
+    @Override
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return state.getValue(SIZE).aabb;
+    }
+
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
+        return getBoundingBox(blockState, worldIn, pos);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Nonnull
+    @Override
+    @SuppressWarnings("deprecation")
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos blockPos, EnumFacing face) {
+        return BlockFaceShape.UNDEFINED;
+    }
+
+    @Override
+    public boolean canPlaceTorchOnTop(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return 0;
+    }
+
+    @Nonnull
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, SIZE);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(SIZE).ordinal();
+    }
+
+    @Nonnull
+    @Override
+    @SuppressWarnings("deprecation")
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(SIZE, EnumSize.values()[Math.min(EnumSize.values().length - 1, meta)]);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos) {
+        EnumSize size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
+        if (isCenter(worldIn, pos))
+            size = EnumSize.MEDIUM;
+        return state.withProperty(SIZE, size);
+    }
+
+    private boolean isCenter(IBlockAccess world, BlockPos pos) {
+        return isThis(world, pos.down()) && isThis(world, pos.up());
+    }
+
+    private boolean isThis(IBlockAccess world, BlockPos pos) {
+        return world.getBlockState(pos).getBlock() instanceof BlockRockSpeleothem;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(modelLocation,
+                        "rocktype=" + rockType.getName() + "," +
+                                "size=" + state.getValue(SIZE));
+            }
+        });
+
+
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this),
+                this.getMetaFromState(this.getBlockState().getBaseState()),
+                new ModelResourceLocation(modelLocation,
+                        "rocktype=" + rockType.getName() + "," +
+                                "size=medium"));
+    }
+
+    public enum EnumSize implements IStringSerializable {
+
+        SMALL(0, 2),
+        MEDIUM(1, 4),
+        BIG(2, 8);
+
+        public final int strength;
+        public final AxisAlignedBB aabb;
+
+        EnumSize(int strength, int width) {
+            this.strength = strength;
+
+            float pad = (((16 - width) / 2f) / 16F);
+            aabb = new AxisAlignedBB(pad, 0F, pad, 1F - pad, 1F, 1F - pad);
+        }
+
+        @Override
+        public String getName() {
+            return name().toLowerCase();
+        }
+    }
 }

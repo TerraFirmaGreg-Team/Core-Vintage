@@ -2,7 +2,7 @@ package net.dries007.tfc.api.types2.soil;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.util.FallingBlockManager.Specification;
-import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
+import net.dries007.tfc.api.util.ISoilTypeBlock;
 import net.dries007.tfc.objects.blocks.soil.BlockSoil;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilGrass;
@@ -35,30 +35,30 @@ public enum SoilVariant implements IStringSerializable {
 	@Nullable
 	private final Specification fallingSpecification;
 
-	SoilVariant(BiFunction<SoilVariant, SoilType, ISoilTypeBlock> blockFactory, @Nullable Specification fallingSpecification) {
+	SoilVariant (BiFunction<SoilVariant, SoilType, ISoilTypeBlock> blockFactory, @Nullable Specification fallingSpecification) {
 		this.blockFactory = blockFactory;
 		this.fallingSpecification = fallingSpecification;
 
 	}
 
-	public static SoilVariant valueOf(int i) {
+	public static SoilVariant valueOf (int i) {
 		return i >= 0 && i < VALUES.length ? VALUES[i] : DIRT;
 	}
 
-	public ISoilTypeBlock createBlock(SoilType soilType) {
+	public ISoilTypeBlock createBlock (SoilType soilType) {
 		return this.blockFactory.apply(this, soilType);
 	}
 
 	@Nullable
-	public Specification getFallingSpecification() {
+	public Specification getFallingSpecification () {
 		return fallingSpecification;
 	}
 
-	public boolean canFall() {
+	public boolean canFall () {
 		return fallingSpecification != null;
 	}
 
-	public SoilVariant getNonGrassVersion() {
+	public SoilVariant getNonGrassVersion () {
 		switch (this) {
 			case GRASS, DRY_GRASS -> {
 				return DIRT;
@@ -70,7 +70,7 @@ public enum SoilVariant implements IStringSerializable {
 		throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
 	}
 
-	public SoilVariant getGrassVersion(SoilVariant spreader) {
+	public SoilVariant getGrassVersion (SoilVariant spreader) {
 		switch (this) {
 			case DIRT -> {
 				return spreader == DRY_GRASS ? DRY_GRASS : GRASS;
@@ -87,7 +87,7 @@ public enum SoilVariant implements IStringSerializable {
 	 * Возвращает имя перечисления в нижнем регистре.
 	 */
 	@Override
-	public String getName() {
+	public String getName () {
 		return name().toLowerCase();
 	}
 }

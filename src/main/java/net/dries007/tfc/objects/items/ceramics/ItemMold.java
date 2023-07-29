@@ -19,6 +19,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -58,18 +59,14 @@ public class ItemMold extends ItemPottery {
 		}
 	}
 
-	@Override
 	@Nonnull
-	public String getTranslationKey(ItemStack stack) {
-		IFluidHandler capFluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-		if (capFluidHandler instanceof IMoldHandler) {
-			var material = ((IMoldHandler) capFluidHandler).getMaterial();
-			if (material != null) {
-				//noinspection ConstantConditions
-				return super.getTranslationKey(stack) + "." + material.getName();
-			}
-		}
-		return super.getTranslationKey(stack);
+	@Override
+	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+		return
+				new TextComponentTranslation(
+						"item.tfc.ceramics.fired.mold.name",
+						new TextComponentTranslation("item.material.oreprefix." + orePrefix.name).getFormattedText().replaceFirst(" ", "")
+				).getFormattedText();
 	}
 
 	@Nullable

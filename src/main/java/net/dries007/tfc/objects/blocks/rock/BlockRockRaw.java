@@ -41,140 +41,139 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.registries.TFCRegistryNames.ROCK;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.ANVIL;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class BlockRockRaw extends BlockRockVariant {
-    /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
-    public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
-    private final RockType rockType;
-    private final RockVariant rockVariant;
-    private final ResourceLocation modelLocation;
+	/* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
+	public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
+	private final RockType rockType;
+	private final RockVariant rockVariant;
+	private final ResourceLocation modelLocation;
 
-    public BlockRockRaw(RockVariant rockVariant, RockType rockType) {
-        super(Material.ROCK);
+	public BlockRockRaw(RockVariant rockVariant, RockType rockType) {
+		super(Material.ROCK);
 
-        if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
-            throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+		if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
+			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
 
+		FallingBlockManager.Specification spec = new FallingBlockManager.Specification(rockVariant.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
+		FallingBlockManager.registerFallable(this, spec);
 
-        this.rockVariant = rockVariant;
-        this.rockType = rockType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
+		this.rockVariant = rockVariant;
+		this.rockType = rockType;
+		this.modelLocation = new ResourceLocation(MOD_ID, ROCK + "/" + rockVariant);
 
-        FallingBlockManager.Specification spec = new FallingBlockManager.Specification(rockVariant.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
-        FallingBlockManager.registerFallable(this, spec);
+		String blockRegistryName = String.format("%s/%s/%s", ROCK, rockVariant, rockType);
+		this.setHardness(getFinalHardness());
+		this.setHarvestLevel("pickaxe", 0);
+		this.setRegistryName(MOD_ID, blockRegistryName);
+		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+		setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
+	}
 
-        String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
-        this.setHardness(getFinalHardness());
+	@Override
+	public RockVariant getRockVariant() {
+		return rockVariant;
+	}
 
-        this.setHarvestLevel("pickaxe", 0);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
-    }
+	@Override
+	public RockType getRockType() {
+		return rockType;
+	}
 
-    @Override
-    public RockVariant getRockVariant() {
-        return rockVariant;
-    }
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlock(this);
+	}
 
-    @Override
-    public RockType getRockType() {
-        return rockType;
-    }
+	@Override
+	@SuppressWarnings("deprecation")
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(CAN_FALL, meta == 0);
+	}
 
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlock(this);
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		if (state.getBlock() != this) {
+			return 0;
+		} else {
+			return state.getValue(CAN_FALL) ? 0 : 1;
+		}
+	}
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(CAN_FALL, meta == 0);
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+		// Raw blocks that can't fall also can't pop off
+		if (state.getValue(CAN_FALL)) {
+			for (EnumFacing face : EnumFacing.VALUES) {
+				BlockPos offsetPos = pos.offset(face);
+				IBlockState faceState = worldIn.getBlockState(offsetPos);
+				if (faceState.getBlock().isSideSolid(faceState, worldIn, offsetPos, face.getOpposite())) {
+					return;
+				}
+			}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        if (state.getBlock() != this) {
-            return 0;
-        } else {
-            return state.getValue(CAN_FALL) ? 0 : 1;
-        }
-    }
+			// No supporting solid blocks, so pop off as an item
+			worldIn.setBlockToAir(pos);
+			Helpers.spawnItemStack(worldIn, pos, new ItemStack(state.getBlock(), 1));
+		}
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        // Raw blocks that can't fall also can't pop off
-        if (state.getValue(CAN_FALL)) {
-            for (EnumFacing face : EnumFacing.VALUES) {
-                BlockPos offsetPos = pos.offset(face);
-                IBlockState faceState = worldIn.getBlockState(offsetPos);
-                if (faceState.getBlock().isSideSolid(faceState, worldIn, offsetPos, face.getOpposite())) {
-                    return;
-                }
-            }
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = playerIn.getHeldItemMainhand();
+		if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
+			if (!worldIn.isRemote) {
+				// Create a stone anvil
+				Block anvil = getBlockRockMap(ORDINARY, ANVIL, rockType);
+				if (anvil instanceof BlockRockAnvil) {
+					worldIn.setBlockState(pos, anvil.getDefaultState());
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 
-            // No supporting solid blocks, so pop off as an item
-            worldIn.setBlockToAir(pos);
-            Helpers.spawnItemStack(worldIn, pos, new ItemStack(state.getBlock(), 1));
-        }
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, CAN_FALL);
+	}
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        ItemStack stack = playerIn.getHeldItemMainhand();
-        if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
-            if (!worldIn.isRemote) {
-                // Create a stone anvil
-                Block anvil = getBlockRockMap(ORDINARY, ANVIL, rockType);
-                if (anvil instanceof BlockRockAnvil) {
-                    worldIn.setBlockState(pos, anvil.getDefaultState());
-                }
-            }
-            return true;
-        }
-        return false;
-    }
+	@Override
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		super.getDrops(drops, world, pos, state, fortune);
+		// Raw rocks drop random gems
+		if (RANDOM.nextDouble() < ConfigTFC.General.MISC.stoneGemDropChance) {
+			drops.add(ItemGem.get(Gem.getRandomDropGem(RANDOM), Gem.Grade.randomGrade(RANDOM), 1));
+		}
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, CAN_FALL);
-    }
+	@Override
+	public int damageDropped(IBlockState state) {
+		return 0;
+	}
 
-    @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        super.getDrops(drops, world, pos, state, fortune);
-        // Raw rocks drop random gems
-        if (RANDOM.nextDouble() < ConfigTFC.General.MISC.stoneGemDropChance) {
-            drops.add(ItemGem.get(Gem.getRandomDropGem(RANDOM), Gem.Grade.randomGrade(RANDOM), 1));
-        }
-    }
-
-    @Override
-    public int damageDropped(IBlockState state) {
-        return 0;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName());
-            }
-        });
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName());
+			}
+		});
 
 
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName()));
-    }
+		ModelLoader.setCustomModelResourceLocation(
+				Item.getItemFromBlock(this),
+				this.getMetaFromState(this.getBlockState().getBaseState()),
+				new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName()));
+	}
 }

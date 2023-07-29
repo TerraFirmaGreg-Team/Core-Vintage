@@ -17,84 +17,77 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTIC
 
 @MethodsReturnNonnullByDefault
 public enum SoilVariant implements IStringSerializable {
-    DIRT(BlockSoil::new, VERTICAL_AND_HORIZONTAL),
-    GRASS(BlockSoilGrass::new, VERTICAL_AND_HORIZONTAL),
-    DRY_GRASS(BlockSoilGrass::new, VERTICAL_AND_HORIZONTAL),
-    PATH(BlockSoilPath::new, VERTICAL_ONLY),
-    CLAY(BlockSoil::new, VERTICAL_ONLY),
-    CLAY_GRASS(BlockSoilGrass::new, VERTICAL_ONLY),
-    FARMLAND(BlockSoilFarmland::new, VERTICAL_ONLY);
+	DIRT(BlockSoil::new, VERTICAL_AND_HORIZONTAL),
+	GRASS(BlockSoilGrass::new, VERTICAL_AND_HORIZONTAL),
+	DRY_GRASS(BlockSoilGrass::new, VERTICAL_AND_HORIZONTAL),
+	PATH(BlockSoilPath::new, VERTICAL_ONLY),
+	CLAY(BlockSoil::new, VERTICAL_ONLY),
+	CLAY_GRASS(BlockSoilGrass::new, VERTICAL_ONLY),
+	FARMLAND(BlockSoilFarmland::new, VERTICAL_ONLY);
 //	ROOTED_DIRT(VERTICAL_ONLY),
 //	MUD(VERTICAL_ONLY),
 //	MUD_BRICKS(VERTICAL_ONLY),
 //	DRYING_BRICKS(VERTICAL_ONLY);
 
 
-    public static final SoilVariant[] VALUES = SoilVariant.values();
-    private final BiFunction<SoilVariant, SoilType, ISoilTypeBlock> blockFactory;
-    @Nullable
-    private final Specification fallingSpecification;
+	public static final SoilVariant[] VALUES = SoilVariant.values();
+	private final BiFunction<SoilVariant, SoilType, ISoilTypeBlock> blockFactory;
+	@Nullable
+	private final Specification fallingSpecification;
 
-    SoilVariant(BiFunction<SoilVariant, SoilType, ISoilTypeBlock> blockFactory, @Nullable Specification fallingSpecification) {
-        this.blockFactory = blockFactory;
-        this.fallingSpecification = fallingSpecification;
+	SoilVariant (BiFunction<SoilVariant, SoilType, ISoilTypeBlock> blockFactory, @Nullable Specification fallingSpecification) {
+		this.blockFactory = blockFactory;
+		this.fallingSpecification = fallingSpecification;
 
-    }
+	}
 
-    public static SoilVariant valueOf(int i) {
-        return i >= 0 && i < VALUES.length ? VALUES[i] : DIRT;
-    }
+	public static SoilVariant valueOf (int i) {
+		return i >= 0 && i < VALUES.length ? VALUES[i] : DIRT;
+	}
 
-    public ISoilTypeBlock createBlock(SoilType soilType) {
-        return this.blockFactory.apply(this, soilType);
-    }
+	public ISoilTypeBlock createBlock (SoilType soilType) {
+		return this.blockFactory.apply(this, soilType);
+	}
 
-    @Nullable
-    public Specification getFallingSpecification() {
-        return fallingSpecification;
-    }
+	@Nullable
+	public Specification getFallingSpecification () {
+		return fallingSpecification;
+	}
 
-    public boolean canFall() {
-        return fallingSpecification != null;
-    }
+	public boolean canFall () {
+		return fallingSpecification != null;
+	}
 
-    public SoilVariant getNonGrassVersion() {
-        switch (this) {
-            case GRASS, DRY_GRASS -> {
-                return DIRT;
-            }
-            case CLAY_GRASS -> {
-                return CLAY;
-            }
-        }
-        throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
-    }
+	public SoilVariant getNonGrassVersion () {
+		switch (this) {
+			case GRASS, DRY_GRASS -> {
+				return DIRT;
+			}
+			case CLAY_GRASS -> {
+				return CLAY;
+			}
+		}
+		throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+	}
 
-    public SoilVariant getGrassVersion(SoilVariant spreader) {
-        switch (this) {
-            case DIRT:
-                return spreader == DRY_GRASS ? DRY_GRASS : GRASS;
-            case CLAY:
-                return CLAY_GRASS;
-        }
-        throw new IllegalArgumentException("You cannot get grass from |" + spreader.getName() + "| types.");
-    }
-
-    public SoilVariant transform() {
-        return switch (this) {
-            case DIRT -> GRASS;
-            case GRASS, DRY_GRASS, PATH, FARMLAND -> DIRT;
-            case CLAY -> CLAY_GRASS;
-            case CLAY_GRASS -> CLAY;
-        };
-    }
+	public SoilVariant getGrassVersion (SoilVariant spreader) {
+		switch (this) {
+			case DIRT -> {
+				return spreader == DRY_GRASS ? DRY_GRASS : GRASS;
+			}
+			case CLAY -> {
+				return CLAY_GRASS;
+			}
+		}
+		throw new IllegalArgumentException("You cannot get grass from |" + spreader.getName() + "| types.");
+	}
 
 
-    /**
-     * Возвращает имя перечисления в нижнем регистре.
-     */
-    @Override
-    public String getName() {
-        return name().toLowerCase();
-    }
+	/**
+	 * Возвращает имя перечисления в нижнем регистре.
+	 */
+	@Override
+	public String getName () {
+		return name().toLowerCase();
+	}
 }

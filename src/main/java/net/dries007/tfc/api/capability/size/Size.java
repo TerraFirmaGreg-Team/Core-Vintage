@@ -5,25 +5,27 @@
 
 package net.dries007.tfc.api.capability.size;
 
-public enum Size
-{
-    TINY("tiny"), // Fits in anything
-    VERY_SMALL("very_small"), // Fits in anything
-    SMALL("small"), // Fits in small vessels
-    NORMAL("normal"), // Fits in large vessels
-    LARGE("large"), // Fits in chests, Pit kilns can hold four
-    VERY_LARGE("very_large"), // Pit kilns can only hold one
-    HUGE("huge"); // Counts towards overburdened, fits in nothing
+import net.minecraft.util.IStringSerializable;
 
-    public final String name;
+import javax.annotation.Nonnull;
 
-    Size(String name)
-    {
-        this.name = name;
-    }
+public enum Size implements IStringSerializable {
+	TINY, // Fits in anything
+	VERY_SMALL, // Fits in anything
+	SMALL, // Fits in small vessels
+	NORMAL, // Fits in large vessels
+	LARGE, // Fits in chests, Pit kilns can hold four
+	VERY_LARGE, // Pit kilns can only hold one
+	HUGE; // Counts towards overburdened, fits in nothing
 
-    public boolean isSmallerThan(Size other)
-    {
-        return this.ordinal() < other.ordinal();
-    }
+
+	public boolean isSmallerThan(Size other) {
+		return this.ordinal() < other.ordinal();
+	}
+
+	@Nonnull
+	@Override
+	public String getName() {
+		return name().toLowerCase();
+	}
 }

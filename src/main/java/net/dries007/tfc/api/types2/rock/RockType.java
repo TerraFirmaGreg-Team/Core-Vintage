@@ -14,7 +14,6 @@ import static net.dries007.tfc.api.types2.rock.RockCategory.*;
  */
 @Nonnull
 public enum RockType implements IStringSerializable {
-
 	// Igneous Intrusive
 	GRANITE(IGNEOUS_INTRUSIVE),
 	DIORITE(IGNEOUS_INTRUSIVE),

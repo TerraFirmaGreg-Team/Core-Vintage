@@ -4,7 +4,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Triple;
+import net.dries007.tfc.objects.blocks.BlockGroundcover;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -26,25 +26,24 @@ import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
+import static net.dries007.tfc.api.types2.rock.RockVariant.LOOSE;
 
 
 @ParametersAreNonnullByDefault
-public class BlockRockLoose extends BlockLoose implements IRockTypeBlock {
+public class BlockRockLoose extends BlockGroundcover implements IRockTypeBlock {
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
 	public BlockRockLoose(RockVariant rockVariant, RockType rockType) {
-		TFCStorage.addRockBlock(ORDINARY, rockVariant, rockType, this);
+		TFCStorage.addRockBlock(ORDINARY, LOOSE, rockType, this);
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
-		String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
+		var blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
 		this.setSoundType(SoundType.STONE);
-		this.setHardness(getFinalHardness());
-		this.setHarvestLevel("pickaxe", 0);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 	}

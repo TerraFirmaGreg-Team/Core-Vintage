@@ -67,15 +67,14 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 	public BlockSoilGrass(SoilVariant soilVariant, SoilType soilType) {
 		TFCStorage.addSoilBlock(soilVariant, soilType, this);
 
-		if (soilVariant.canFall()) {
+		if (soilVariant.canFall())
 			FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());
-		}
 
 		this.soilVariant = soilVariant;
 		this.soilType = soilType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant);
 
-		String blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
+		var blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
 
 		this.setCreativeTab(CreativeTabsTFC.EARTH);
 		this.setSoundType(SoundType.PLANT);
@@ -186,7 +185,14 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 		return new ItemBlock(this);
 	}
 
-    @Override
+	@Override
+	public int quantityDropped(IBlockState state, int fortune, Random random) {
+		if (soilVariant == CLAY_GRASS)
+			return 4;
+		return super.quantityDropped(state, fortune, random);
+	}
+
+	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isRemote) {
 			if (!worldIn.isAreaLoaded(pos, 3))

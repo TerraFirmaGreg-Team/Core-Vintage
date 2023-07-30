@@ -9,9 +9,8 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
@@ -85,26 +84,24 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 
 		TFCStorage.addSoilBlock(soilVariant, soilType, this);
 
-		if (soilVariant.canFall()) {
+		if (soilVariant.canFall())
 			FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());
-		}
 
 		this.soilVariant = soilVariant;
 		this.soilType = soilType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant.getName());
-
-		this.setDefaultState(this.blockState.getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
-		this.setTickRandomly(true);
-		this.setLightOpacity(255);
 		this.useNeighborBrightness = true;
 
-		String blockRegistryName = String.format("%s/%s/%s", "soil", soilVariant, soilType);
+		var blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
 
 		this.setCreativeTab(CreativeTabsTFC.EARTH);
 		this.setSoundType(SoundType.GROUND);
 		this.setHarvestLevel("shovel", 0);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
+		this.setTickRandomly(true);
+		this.setLightOpacity(255);
 	}
 
 	protected static void turnToDirt(World world, BlockPos pos) {
@@ -197,7 +194,7 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 		return new ItemStack(this);
 	}
 
-    public int getWaterScore(IBlockAccess world, BlockPos pos) {
+	public int getWaterScore(IBlockAccess world, BlockPos pos) {
 		final int hRange = 7;
 		float score = 0;
 		for (BlockPos.MutableBlockPos i : BlockPos.getAllInBoxMutable(pos.add(-hRange, -1, -hRange), pos.add(hRange, 2, hRange))) {

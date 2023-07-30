@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.types2.rock;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.objects.blocks.rock.*;
 import net.minecraft.util.IStringSerializable;
 
@@ -12,7 +12,7 @@ import java.util.function.BiFunction;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.*;
 
 /**
- * Варианты блоков
+ * Перечисление, которое представляет различные варианты камня. 20 типов
  */
 @MethodsReturnNonnullByDefault
 public enum RockVariant implements IStringSerializable {
@@ -21,7 +21,7 @@ public enum RockVariant implements IStringSerializable {
 	BRICK(BlockRock::new, 6.5f, null),
 	CRACKED(BlockRock::new, 6.5f, null),
 	CHISELED(BlockRock::new, 6.5f, null),
-	SMOOTH(BlockRock::new, 6.5f, COLLAPSABLE),
+	SMOOTH(BlockRockSmooth::new, 6.5f, COLLAPSABLE),
 	GRAVEL(BlockRockFallable::new, 2.0f, VERTICAL_AND_HORIZONTAL),
 	SAND(BlockRockFallable::new, 0.5f, VERTICAL_AND_HORIZONTAL),
 	ANVIL(BlockRockAnvil::new, 2.0f, COLLAPSABLE),

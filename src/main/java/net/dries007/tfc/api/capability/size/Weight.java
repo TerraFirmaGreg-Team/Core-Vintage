@@ -5,25 +5,30 @@
 
 package net.dries007.tfc.api.capability.size;
 
-public enum Weight
-{
-    VERY_LIGHT("very_light", 64),
-    LIGHT("light", 32),
-    MEDIUM("medium", 16),
-    HEAVY("heavy", 4),
-    VERY_HEAVY("very_heavy", 1);
+import net.minecraft.util.IStringSerializable;
 
-    public final int stackSize;
-    public final String name;
+import javax.annotation.Nonnull;
 
-    Weight(String name, int stackSize)
-    {
-        this.name = name;
-        this.stackSize = stackSize;
-    }
+public enum Weight implements IStringSerializable {
+	VERY_LIGHT(64),
+	LIGHT(32),
+	MEDIUM(16),
+	HEAVY(4),
+	VERY_HEAVY(1);
 
-    public boolean isSmallerThan(Weight other)
-    {
-        return this.stackSize > other.stackSize;
-    }
+	public final int stackSize;
+
+	Weight(int stackSize) {
+		this.stackSize = stackSize;
+	}
+
+	public boolean isSmallerThan(Weight other) {
+		return this.stackSize > other.stackSize;
+	}
+
+	@Nonnull
+	@Override
+	public String getName() {
+		return name().toLowerCase();
+	}
 }

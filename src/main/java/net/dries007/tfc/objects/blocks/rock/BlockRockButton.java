@@ -4,7 +4,6 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockButtonStone;
@@ -45,10 +44,10 @@ public class BlockRockButton extends BlockButtonStone implements IRockTypeBlock 
 		this.rockType = rockType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
-		String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
+		var blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
 		this.setSoundType(SoundType.STONE);
-		this.setHardness(0.5f);
 		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+		this.setHardness(0.5f);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 

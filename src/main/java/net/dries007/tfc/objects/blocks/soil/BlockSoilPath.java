@@ -9,9 +9,8 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
@@ -54,17 +53,16 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilTypeBlock {
 		this.soilVariant = soilVariant;
 		this.soilType = soilType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant);
-
-		this.setLightOpacity(255);
 		this.useNeighborBrightness = true;
 
-		String blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
+		var blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
 
 		this.setCreativeTab(CreativeTabsTFC.EARTH);
 		this.setSoundType(SoundType.GROUND);
 		this.setHarvestLevel("shovel", 0);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+		this.setLightOpacity(255);
 	}
 
 	@Override

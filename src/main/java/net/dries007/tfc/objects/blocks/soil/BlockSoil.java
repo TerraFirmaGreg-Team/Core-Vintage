@@ -39,6 +39,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.soil.SoilVariant.CLAY;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -65,8 +66,7 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
 		this.soilType = soilType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant.getName());
 
-		String blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
-
+		var blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
 		this.setCreativeTab(CreativeTabsTFC.EARTH);
 		this.setSoundType(SoundType.GROUND);
 		this.setHarvestLevel("shovel", 0);
@@ -119,6 +119,13 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
 			double d2 = (float) pos.getZ() + rand.nextFloat();
 			world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
 		}
+	}
+
+	@Override
+	public int quantityDropped(IBlockState state, int fortune, Random random) {
+		if (soilVariant == CLAY)
+			return 4;
+		return super.quantityDropped(state, fortune, random);
 	}
 
 	@Override

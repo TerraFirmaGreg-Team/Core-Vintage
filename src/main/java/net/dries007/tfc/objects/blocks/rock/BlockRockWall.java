@@ -5,7 +5,6 @@ import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
@@ -48,10 +47,9 @@ public class BlockRockWall extends BlockWall implements IRockTypeBlock {
 		this.rockType = rockType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
-
-		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+		var blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
 		this.setSoundType(SoundType.STONE);
+		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		this.setHardness(getFinalHardness());
 		this.setHarvestLevel("pickaxe", 0);
 		this.setRegistryName(MOD_ID, blockRegistryName);

@@ -1,10 +1,13 @@
-package net.dries007.tfc.objects.blocks.rock;
+package net.dries007.tfc.objects.blocks;
 
+import net.dries007.tfc.api.types2.GroundcoverType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFalling;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -13,6 +16,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -23,24 +27,23 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockVariant.LOOSE;
 
-public abstract class BlockLoose extends BlockFalling implements IHasModel {
+public class BlockGroundcover extends Block implements IHasModel {
 	private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
 	protected final ResourceLocation modelLocation;
+	private final GroundcoverType groundcoverType;
 
-	protected BlockLoose(Material material) {
-
-		super(material);
+	public BlockGroundcover(GroundcoverType groundcoverType) {
+		super(Material.ROCK);
 		this.blockHardness = 0.1f;
 		this.blockResistance = 0.1f;
-		this.modelLocation = new ResourceLocation(MOD_ID, LOOSE.getName());
+		this.groundcoverType = groundcoverType;
+		this.modelLocation = new ResourceLocation(MOD_ID, LOOSE + "/" + groundcoverType);
+
+		this.setSoundType(SoundType.GROUND);
 	}
 
-	protected BlockLoose() {
-		this(Material.ROCK);
-	}
-
-	public Block getBlock() {
-		return this;
+	public BlockGroundcover() {
+		this(GroundcoverType.FLINT);
 	}
 
 	@Nonnull
@@ -99,5 +102,16 @@ public abstract class BlockLoose extends BlockFalling implements IHasModel {
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation, groundcoverType.getName());
+			}
+		});
 	}
 }

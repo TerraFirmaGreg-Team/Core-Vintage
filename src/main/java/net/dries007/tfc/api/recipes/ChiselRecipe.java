@@ -14,56 +14,46 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ChiselRecipe extends IForgeRegistryEntry.Impl<ChiselRecipe>
-{
-    @Nullable
-    public static ChiselRecipe get(IBlockState state)
-    {
-        return TFCRegistries.CHISEL.getValuesCollection().stream().filter(r -> r.matches(state)).findFirst().orElse(null);
-    }
+public class ChiselRecipe extends IForgeRegistryEntry.Impl<ChiselRecipe> {
+	private final IIngredient<IBlockState> ingredient;
+	private final IBlockState stateOut;
+	public ChiselRecipe(Block blockIn, IBlockState stateOut) {
+		this(state -> state.getBlock() == blockIn, stateOut);
+	}
 
-    private final IIngredient<IBlockState> ingredient;
-    private final IBlockState stateOut;
+	public ChiselRecipe(IIngredient<IBlockState> ingredient, IBlockState stateOut) {
+		this.ingredient = ingredient;
+		this.stateOut = stateOut;
+	}
 
-    public ChiselRecipe(Block blockIn, IBlockState stateOut)
-    {
-        this(state -> state.getBlock() == blockIn, stateOut);
-    }
+	@Nullable
+	public static ChiselRecipe get(IBlockState state) {
+		return TFCRegistries.CHISEL.getValuesCollection().stream().filter(r -> r.matches(state)).findFirst().orElse(null);
+	}
 
-    public ChiselRecipe(IIngredient<IBlockState> ingredient, IBlockState stateOut)
-    {
-        this.ingredient = ingredient;
-        this.stateOut = stateOut;
-    }
+	public IBlockState getOutputState() {
+		return stateOut;
+	}
 
-    public IBlockState getOutputState()
-    {
-        return stateOut;
-    }
+	public boolean matches(IBlockState stateIn) {
+		return ingredient.test(stateIn);
+	}
 
-    public boolean matches(IBlockState stateIn)
-    {
-        return ingredient.test(stateIn);
-    }
+	public enum Mode {
+		SMOOTH,
+		STAIR,
+		SLAB;
 
-    public enum Mode
-    {
-        SMOOTH,
-        STAIR,
-        SLAB;
+		private static final Mode[] VALUES = values();
 
-        private static final Mode[] VALUES = values();
+		@Nonnull
+		public static Mode valueOf(int i) {
+			return i >= 0 && i < VALUES.length ? VALUES[i] : SMOOTH;
+		}
 
-        @Nonnull
-        public static Mode valueOf(int i)
-        {
-            return i >= 0 && i < VALUES.length ? VALUES[i] : SMOOTH;
-        }
-
-        @Nonnull
-        public Mode next()
-        {
-            return VALUES[(ordinal() + 1) % VALUES.length];
-        }
-    }
+		@Nonnull
+		public Mode next() {
+			return VALUES[(ordinal() + 1) % VALUES.length];
+		}
+	}
 }

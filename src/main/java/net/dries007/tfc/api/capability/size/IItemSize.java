@@ -5,7 +5,6 @@
 
 package net.dries007.tfc.api.capability.size;
 
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -25,30 +24,26 @@ import java.util.List;
  * @see net.dries007.tfc.objects.items.ItemTFC
  * @see net.dries007.tfc.objects.items.itemblock.ItemBlockTFC
  */
-public interface IItemSize
-{
-    @Nonnull
-    Size getSize(@Nonnull ItemStack stack);
+public interface IItemSize {
+	@Nonnull
+	Size getSize(@Nonnull ItemStack stack);
 
-    @Nonnull
-    Weight getWeight(@Nonnull ItemStack stack);
+	@Nonnull
+	Weight getWeight(@Nonnull ItemStack stack);
 
-    default boolean canStack(@Nonnull ItemStack stack)
-    {
-        return true;
-    }
+	default boolean canStack(@Nonnull ItemStack stack) {
+		return true;
+	}
 
-    @SideOnly(Side.CLIENT)
-    default void addSizeInfo(@Nonnull ItemStack stack, @Nonnull List<String> text)
-    {
-        text.add("\u2696 " + I18n.format(Helpers.getEnumName(getWeight(stack))) + " \u21F2 " + I18n.format(Helpers.getEnumName(getSize(stack))));
-    }
+	@SideOnly(Side.CLIENT)
+	default void addSizeInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+		text.add("\u2696 " + I18n.format(getWeight(stack).getName()) + " \u21F2 " + I18n.format(getSize(stack).getName()));
+	}
 
-    /**
-     * Should be called from {@link net.minecraft.item.Item#getItemStackLimit(ItemStack)}
-     */
-    default int getStackSize(@Nonnull ItemStack stack)
-    {
-        return canStack(stack) ? getWeight(stack).stackSize : 1;
-    }
+	/**
+	 * Should be called from {@link net.minecraft.item.Item#getItemStackLimit(ItemStack)}
+	 */
+	default int getStackSize(@Nonnull ItemStack stack) {
+		return canStack(stack) ? getWeight(stack).stackSize : 1;
+	}
 }

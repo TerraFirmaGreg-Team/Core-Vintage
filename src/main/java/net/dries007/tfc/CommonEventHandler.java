@@ -133,7 +133,6 @@ import static net.dries007.tfc.api.types2.rock.RockType.BASALT;
 import static net.dries007.tfc.api.types2.rock.RockType.RHYOLITE;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.getBlockSoilMap;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -351,7 +350,7 @@ public final class CommonEventHandler {
 				if (soilVariant == GRASS || soilVariant == DIRT) {
 					if (!world.isRemote) {
 						world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-						world.setBlockState(pos, getBlockSoilMap(FARMLAND, blockRock.getSoilType()).getDefaultState());
+						world.setBlockState(pos, TFCStorage.getSoilBlock(FARMLAND, blockRock.getSoilType()).getDefaultState());
 					}
 					event.setResult(Event.Result.ALLOW);
 				}

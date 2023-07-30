@@ -62,7 +62,6 @@ import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.DRY_GRASS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
 import static net.dries007.tfc.util.Helpers.getNull;
 
 @SuppressWarnings("unused")
@@ -276,7 +275,7 @@ public final class BlocksTFC {
 		for (RockType rockType : RockType.values()) {
 			for (RockBlockType rockBlockType : RockBlockType.values()) {
 				for (RockVariant rockVariant : rockBlockType.getRockVariants()) {
-					Block block = (Block) rockBlockType.createBlockType(rockVariant, rockType);
+					var block = (Block) rockBlockType.createBlockType(rockVariant, rockType);
 
 					TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
 					r.register(block);
@@ -284,7 +283,7 @@ public final class BlocksTFC {
 			}
 		}
 		for (IRockTypeBlock stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
-			ItemBlock itemBlock = stoneTypeBlock.getItemBlock();
+			var itemBlock = stoneTypeBlock.getItemBlock();
 			if (itemBlock != null)
 				normalItemBlocks.add(itemBlock);
 		}
@@ -293,14 +292,14 @@ public final class BlocksTFC {
 
 		for (SoilType soilType : SoilType.values()) {
 			for (SoilVariant soilVariant : SoilVariant.values()) {
-				Block block = (Block) soilVariant.createBlock(soilType);
+				var block = (Block) soilVariant.createBlock(soilType);
 
 				TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
 				r.register(block);
 			}
 		}
-		for (ISoilTypeBlock soilTypeBlock : BLOCK_SOIL_MAP.values()) {
-			ItemBlock itemBlock = soilTypeBlock.getItemBlock();
+		for (ISoilTypeBlock soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
+			var itemBlock = soilTypeBlock.getItemBlock();
 			if (itemBlock != null)
 				normalItemBlocks.add(itemBlock);
 		}

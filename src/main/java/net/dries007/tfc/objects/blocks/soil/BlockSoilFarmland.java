@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.soil;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -48,8 +49,6 @@ import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.getBlockSoilMap;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -84,8 +83,7 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 	public BlockSoilFarmland(SoilVariant soilVariant, SoilType soilType) {
 		super(Material.GROUND);
 
-		if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
+		TFCStorage.addSoilBlock(soilVariant, soilType, this);
 
 		if (soilVariant.canFall()) {
 			FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());
@@ -114,7 +112,7 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 		if (block instanceof ISoilTypeBlock) {
 			SoilType soilType = ((ISoilTypeBlock) block).getSoilType();
 
-			world.setBlockState(pos, getBlockSoilMap(DIRT, soilType).getDefaultState());
+			world.setBlockState(pos, TFCStorage.getSoilBlock(DIRT, soilType).getDefaultState());
 			AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
 			for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb)) {
 				double d0 = Math.min(axisalignedbb.maxY - axisalignedbb.minY, axisalignedbb.maxY - entity.getEntityBoundingBox().minY);
@@ -199,12 +197,7 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 		return new ItemStack(this);
 	}
 
-	@Override
-	public int damageDropped(IBlockState state) {
-		return 0;
-	}
-
-	public int getWaterScore(IBlockAccess world, BlockPos pos) {
+    public int getWaterScore(IBlockAccess world, BlockPos pos) {
 		final int hRange = 7;
 		float score = 0;
 		for (BlockPos.MutableBlockPos i : BlockPos.getAllInBoxMutable(pos.add(-hRange, -1, -hRange), pos.add(hRange, 2, hRange))) {
@@ -229,7 +222,7 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(getBlockSoilMap(DIRT, this.soilType));
+		return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soilType));
 	}
 
 	private boolean hasCrops(World worldIn, BlockPos pos) {

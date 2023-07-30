@@ -7,6 +7,7 @@ package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
@@ -26,13 +27,7 @@ import java.util.Random;
 
 import static net.dries007.tfc.api.types2.soil.SoilVariant.CLAY;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.CLAY_GRASS;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.getBlockSoilMap;
 
-/**
- * todo: make these bigger without causing cascading lag.
- * This will require larger re-writes on the scale of oregen
- * Wait for 1.14+ as AlcatrazEscapee is doing a worldgen rewrite anyway
- */
 public class WorldGenSoilPits implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
@@ -64,10 +59,10 @@ public class WorldGenSoilPits implements IWorldGenerator {
 					final BlockPos pos = posHorizontal.add(0, y, 0);
 					final IBlockState current = world.getBlockState(pos);
 					if (BlocksTFC.isDirt(current)) {
-						world.setBlockState(pos, getBlockSoilMap(CLAY, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
+						world.setBlockState(pos, TFCStorage.getSoilBlock(CLAY, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
 						flag = true;
 					} else if (BlocksTFC.isGrass(current)) {
-						world.setBlockState(pos, getBlockSoilMap(CLAY_GRASS, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
+						world.setBlockState(pos, TFCStorage.getSoilBlock(CLAY_GRASS, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
 						flag = true;
 					}
 				}

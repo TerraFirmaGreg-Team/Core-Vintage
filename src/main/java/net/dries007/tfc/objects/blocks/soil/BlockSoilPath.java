@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.soil;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -36,7 +37,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -49,9 +49,7 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilTypeBlock {
 
 	public BlockSoilPath(SoilVariant soilVariant, SoilType soilType) {
 
-		if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
-
+		TFCStorage.addSoilBlock(soilVariant, soilType, this);
 
 		this.soilVariant = soilVariant;
 		this.soilType = soilType;

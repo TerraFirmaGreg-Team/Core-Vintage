@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.soil;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -14,6 +15,7 @@ import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -51,7 +53,6 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
 	public static final PropertyBool EAST = PropertyBool.create("east");
 	public static final PropertyBool SOUTH = PropertyBool.create("south");
 	public static final PropertyBool WEST = PropertyBool.create("west");
-	public static final Map<Pair<SoilVariant, SoilType>, ISoilTypeBlock> BLOCK_SOIL_MAP = new LinkedHashMap<>();
 	private final SoilVariant soilVariant;
 	private final SoilType soilType;
 	private final ResourceLocation modelLocation;
@@ -59,8 +60,7 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
 	public BlockSoil(SoilVariant soilVariant, SoilType soilType) {
 		super(Material.GROUND);
 
-		if (BLOCK_SOIL_MAP.put(new Pair<>(soilVariant, soilType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + soilVariant + " " + soilType);
+		TFCStorage.addSoilBlock(soilVariant, soilType, this);
 
 		if (soilVariant.canFall())
 			FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());
@@ -77,10 +77,6 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-	}
-
-	public static Block getBlockSoilMap(SoilVariant soilVariant, SoilType soilType) {
-		return (Block) BLOCK_SOIL_MAP.get(new Pair<>(soilVariant, soilType));
 	}
 
 	@Override

@@ -63,7 +63,6 @@ import java.util.Arrays;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
@@ -157,7 +156,7 @@ public final class ClientRegisterEvents {
 
         // BLOCKS - STATE MAPPERS //
 
-        BLOCK_SOIL_MAP.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
 
@@ -255,7 +254,7 @@ public final class ClientRegisterEvents {
 
         blockColors.registerBlockColorHandler(grassColor, BlocksTFC.PEAT_GRASS);
 
-        blockColors.registerBlockColorHandler(grassColor, BLOCK_SOIL_MAP.values().stream().filter(x -> x.getSoilVariant() == SoilVariant.GRASS).map(s -> (Block) s).toArray(Block[]::new));
+        blockColors.registerBlockColorHandler(grassColor, TFCStorage.SOIL_BLOCKS.values().stream().filter(x -> x.getSoilVariant() == SoilVariant.GRASS).map(s -> (Block) s).toArray(Block[]::new));
         // This is talking about tall grass vs actual grass blocks
         blockColors.registerBlockColorHandler(grassColor, BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
 
@@ -278,7 +277,7 @@ public final class ClientRegisterEvents {
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
                         event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-                BLOCK_SOIL_MAP.values().stream().filter(x -> x.getSoilVariant() == SoilVariant.GRASS).map(s -> (Block) s).toArray(Block[]::new));
+                TFCStorage.SOIL_BLOCKS.values().stream().filter(x -> x.getSoilVariant() == SoilVariant.GRASS).map(s -> (Block) s).toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
                         event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),

@@ -56,7 +56,6 @@ import java.util.Random;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.*;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.getBlockSoilMap;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;
@@ -505,8 +504,8 @@ public class ChunkGenTFC implements IChunkGenerator {
 				int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
 				int smooth = -1;
 
-				IBlockState surfaceBlock = getBlockSoilMap(rainfall + 1.3 * rand.nextGaussian() >= 150f ? GRASS : DRY_GRASS, soil1).getDefaultState();
-				IBlockState subSurfaceBlock = getBlockSoilMap(DIRT, soil1).getDefaultState();
+				IBlockState surfaceBlock = TFCStorage.getSoilBlock(rainfall + 1.3 * rand.nextGaussian() >= 150f ? GRASS : DRY_GRASS, soil1).getDefaultState();
+				IBlockState subSurfaceBlock = TFCStorage.getSoilBlock(DIRT, soil1).getDefaultState();
 
 				if (BiomesTFC.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x + 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z - 1))) {
 					if (!BiomesTFC.isBeachBiome(getBiomeOffset(x, z))) cliffMap[colIndex] = true;
@@ -658,7 +657,7 @@ public class ChunkGenTFC implements IChunkGenerator {
 							} else // Swamp biomes have bottoms that are mostly dirt
 							{
 								if (outp.getBlockState(x, y + yOffset, z) != TFCStorage.getRockBlock(ORDINARY, SAND, rock1).getDefaultState())
-									outp.setBlockState(x, y + yOffset, z, getBlockSoilMap(DIRT, soil1).getDefaultState());
+									outp.setBlockState(x, y + yOffset, z, TFCStorage.getSoilBlock(DIRT, soil1).getDefaultState());
 							}
 						}
 					}

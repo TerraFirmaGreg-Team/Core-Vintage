@@ -37,7 +37,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
-import static net.dries007.tfc.objects.blocks.soil.BlockSoil.getBlockSoilMap;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -225,11 +224,11 @@ public class ItemMetalTool extends ItemMetal {
 					worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
 					soilVariant == GRASS || soilVariant == DRY_GRASS || soilVariant == DIRT) {
 
-				IBlockState iblockstate1 = getBlockSoilMap(PATH, soilTypeBlock.getSoilType()).getDefaultState();
+				//IBlockState iblockstate1 = getBlockSoilMap(PATH, soilTypeBlock.getSoilType()).getDefaultState();
 				worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
 				if (!worldIn.isRemote) {
-					worldIn.setBlockState(pos, iblockstate1, 11);
+					//worldIn.setBlockState(pos, iblockstate1, 11);
 					itemstack.damageItem(1, player);
 				}
 

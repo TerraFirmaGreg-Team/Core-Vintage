@@ -3,6 +3,7 @@ package net.dries007.tfc.compat.gregtech.stonetypes;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.ore.StoneType;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 
@@ -15,33 +16,32 @@ import static net.dries007.tfc.api.types2.rock.RockType.*;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.compat.gregtech.material.TFGMaterials.*;
 import static net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix.*;
-import static net.dries007.tfc.objects.blocks.rock.BlockRockVariant.getBlockRockMap;
 
 public class StoneTypeHandler {
 
     @SuppressWarnings("ConstantConditions")
     public static void init() {
 
-        final var graniteBlock = getBlockRockMap(ORDINARY, RAW, GRANITE);
-        final var dioriteBlock = getBlockRockMap(ORDINARY, RAW, DIORITE);
-        final var gabbroBlock = getBlockRockMap(ORDINARY, RAW, GABBRO);
-        final var shaleBlock = getBlockRockMap(ORDINARY, RAW, SHALE);
-        final var claystoneBlock = getBlockRockMap(ORDINARY, RAW, CLAYSTONE);
-        final var limestoneBlock = getBlockRockMap(ORDINARY, RAW, LIMESTONE);
-        final var conglomerateBlock = getBlockRockMap(ORDINARY, RAW, CONGLOMERATE);
-        final var dolomiteBlock = getBlockRockMap(ORDINARY, RAW, DOLOMITE);
-        final var chertBlock = getBlockRockMap(ORDINARY, RAW, CHERT);
-        final var chalkBlock = getBlockRockMap(ORDINARY, RAW, CHALK);
-        final var rhyoliteBlock = getBlockRockMap(ORDINARY, RAW, RHYOLITE);
-        final var basaltBlock = getBlockRockMap(ORDINARY, RAW, BASALT);
-        final var andesiteBlock = getBlockRockMap(ORDINARY, RAW, ANDESITE);
-        final var daciteBlock = getBlockRockMap(ORDINARY, RAW, DACITE);
-        final var quartziteBlock = getBlockRockMap(ORDINARY, RAW, QUARTZITE);
-        final var slateBlock = getBlockRockMap(ORDINARY, RAW, SLATE);
-        final var phylliteBlock = getBlockRockMap(ORDINARY, RAW, PHYLLITE);
-        final var schistBlock = getBlockRockMap(ORDINARY, RAW, SCHIST);
-        final var gneissBlock = getBlockRockMap(ORDINARY, RAW, GNEISS);
-        final var marbleBlock = getBlockRockMap(ORDINARY, RAW, MARBLE);
+        final var graniteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, GRANITE);
+        final var dioriteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, DIORITE);
+        final var gabbroBlock = TFCStorage.getRockBlock(ORDINARY, RAW, GABBRO);
+        final var shaleBlock = TFCStorage.getRockBlock(ORDINARY, RAW, SHALE);
+        final var claystoneBlock = TFCStorage.getRockBlock(ORDINARY, RAW, CLAYSTONE);
+        final var limestoneBlock = TFCStorage.getRockBlock(ORDINARY, RAW, LIMESTONE);
+        final var conglomerateBlock = TFCStorage.getRockBlock(ORDINARY, RAW, CONGLOMERATE);
+        final var dolomiteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, DOLOMITE);
+        final var chertBlock = TFCStorage.getRockBlock(ORDINARY, RAW, CHERT);
+        final var chalkBlock = TFCStorage.getRockBlock(ORDINARY, RAW, CHALK);
+        final var rhyoliteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, RHYOLITE);
+        final var basaltBlock = TFCStorage.getRockBlock(ORDINARY, RAW, BASALT);
+        final var andesiteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, ANDESITE);
+        final var daciteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, DACITE);
+        final var quartziteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, QUARTZITE);
+        final var slateBlock = TFCStorage.getRockBlock(ORDINARY, RAW, SLATE);
+        final var phylliteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, PHYLLITE);
+        final var schistBlock = TFCStorage.getRockBlock(ORDINARY, RAW, SCHIST);
+        final var gneissBlock = TFCStorage.getRockBlock(ORDINARY, RAW, GNEISS);
+        final var marbleBlock = TFCStorage.getRockBlock(ORDINARY, RAW, MARBLE);
 
         createStoneType(16, "tfc_andesite", oreAndesite, Andesite, andesiteBlock);
         createStoneType(17, "tfc_basalt", oreBasalt, Basalt, basaltBlock);

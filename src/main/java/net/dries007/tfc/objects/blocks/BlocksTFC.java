@@ -12,6 +12,7 @@ import gregtech.api.unification.material.Materials;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
@@ -61,7 +62,6 @@ import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.DRY_GRASS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
-import static net.dries007.tfc.objects.blocks.rock.BlockRock.BLOCK_ROCK_MAP;
 import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
 import static net.dries007.tfc.util.Helpers.getNull;
 
@@ -283,7 +283,7 @@ public final class BlocksTFC {
 				}
 			}
 		}
-		for (IRockTypeBlock stoneTypeBlock : BLOCK_ROCK_MAP.values()) {
+		for (IRockTypeBlock stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
 			ItemBlock itemBlock = stoneTypeBlock.getItemBlock();
 			if (itemBlock != null)
 				normalItemBlocks.add(itemBlock);

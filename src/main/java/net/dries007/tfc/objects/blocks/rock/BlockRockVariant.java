@@ -28,17 +28,11 @@ import java.util.Map;
 
 public abstract class BlockRockVariant extends Block implements IRockTypeBlock, IItemSize {
 
-	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockTypeBlock> BLOCK_ROCK_MAP = new LinkedHashMap<>();
-
 	public BlockRockVariant(Material material) {
 		super(material);
 
 		setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		setSoundType(SoundType.STONE);
-	}
-
-	public static Block getBlockRockMap(RockBlockType rockBlockType, RockVariant blockVariant, RockType stoneType) {
-		return (Block) BLOCK_ROCK_MAP.get(new Triple<>(rockBlockType, blockVariant, stoneType));
 	}
 
 	@Nonnull

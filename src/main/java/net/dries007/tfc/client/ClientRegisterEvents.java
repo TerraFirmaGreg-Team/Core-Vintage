@@ -13,6 +13,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.render.*;
@@ -62,7 +63,6 @@ import java.util.Arrays;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
-import static net.dries007.tfc.objects.blocks.rock.BlockRockVariant.BLOCK_ROCK_MAP;
 import static net.dries007.tfc.objects.blocks.soil.BlockSoil.BLOCK_SOIL_MAP;
 
 @SideOnly(Side.CLIENT)
@@ -158,7 +158,7 @@ public final class ClientRegisterEvents {
         // BLOCKS - STATE MAPPERS //
 
         BLOCK_SOIL_MAP.values().forEach(IHasModel::onModelRegister);
-        BLOCK_ROCK_MAP.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
 
         // Blocks with Ignored Properties

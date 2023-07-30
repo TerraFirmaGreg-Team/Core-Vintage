@@ -1,5 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen;
 
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
 import net.dries007.tfc.objects.blocks.rock.BlockRockSpeleothem;
@@ -17,7 +18,6 @@ import java.util.Random;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.api.types2.rock.RockVariant.SPELEOTHEM;
-import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 
 
 public class WorldGenSpeleothem implements IWorldGenerator {
@@ -104,7 +104,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 			if (block instanceof IRockTypeBlock rockTypeBlock) {
 				BlockRockSpeleothem.EnumSize sizeType = BlockRockSpeleothem.EnumSize.values()[size - i - 1];
 				// Создаем блок сталактита с указанным размером и типом породы
-				IBlockState targetBlock = getBlockRockMap(ORDINARY, SPELEOTHEM, rockTypeBlock.getRockType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
+				IBlockState targetBlock = TFCStorage.getRockBlock(ORDINARY, SPELEOTHEM, rockTypeBlock.getRockType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
 				// Устанавливаем блок сталактита в мир
 				world.setBlockState(pos, targetBlock);
 			}
@@ -115,8 +115,8 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 	private Block getSpeleothemType(IBlockState state) {
 		var block = state.getBlock();
 		for (RockType rockType : RockType.values()) {
-			if (getBlockRockMap(ORDINARY, RAW, rockType) == block) {
-				return getBlockRockMap(ORDINARY, RAW, rockType);
+			if (TFCStorage.getRockBlock(ORDINARY, RAW, rockType) == block) {
+				return TFCStorage.getRockBlock(ORDINARY, RAW, rockType);
 			}
 		}
 

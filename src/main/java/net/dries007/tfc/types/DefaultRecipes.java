@@ -29,6 +29,7 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipeRandomGem;
 import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
@@ -75,7 +76,6 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.api.types2.rock.RockVariant.SMOOTH;
-import static net.dries007.tfc.objects.blocks.rock.BlockRock.getBlockRockMap;
 import static net.dries007.tfc.objects.fluids.FluidsTFC.*;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.*;
@@ -628,8 +628,8 @@ public final class DefaultRecipes {
 	public static void onRegisterChiselRecipeEvent(RegistryEvent.Register<ChiselRecipe> event) {
 		// Rock smoothing
 		for (RockType rockType : RockType.values()) {
-			Block rawRock = getBlockRockMap(ORDINARY, RAW, rockType);
-			IBlockState smoothRock = getBlockRockMap(ORDINARY, SMOOTH, rockType).getDefaultState();
+			var rawRock = TFCStorage.getRockBlock(ORDINARY, RAW, rockType);
+			var smoothRock = TFCStorage.getRockBlock(ORDINARY, SMOOTH, rockType).getDefaultState();
 			event.getRegistry().register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rockType.getName()));
 		}
 

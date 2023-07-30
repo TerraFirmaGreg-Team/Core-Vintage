@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.rock;
 
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
@@ -32,8 +33,6 @@ import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
-import static net.dries007.tfc.objects.blocks.rock.BlockRockVariant.BLOCK_ROCK_MAP;
-import static net.dries007.tfc.objects.blocks.rock.BlockRockVariant.getBlockRockMap;
 
 public class BlockRockStair extends BlockStairs implements IRockTypeBlock {
 	private final RockVariant rockVariant;
@@ -41,10 +40,9 @@ public class BlockRockStair extends BlockStairs implements IRockTypeBlock {
 	private final ResourceLocation modelLocation;
 
 	public BlockRockStair(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
-		super(getBlockRockMap(ORDINARY, rockVariant, rockType).getDefaultState());
+		super(TFCStorage.getRockBlock(ORDINARY, rockVariant, rockType).getDefaultState());
 
-		if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+		TFCStorage.addRockBlock(rockBlockType, rockVariant, rockType, this);
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;

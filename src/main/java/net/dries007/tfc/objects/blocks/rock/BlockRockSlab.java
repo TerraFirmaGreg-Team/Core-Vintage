@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.rock;
 
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
@@ -41,8 +42,6 @@ import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.*;
-import static net.dries007.tfc.objects.blocks.rock.BlockRockVariant.BLOCK_ROCK_MAP;
-import static net.dries007.tfc.objects.blocks.rock.BlockRockVariant.getBlockRockMap;
 
 public abstract class BlockRockSlab extends BlockSlab implements IRockTypeBlock {
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
@@ -58,7 +57,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockTypeBlock 
 		if (!isDouble())
 			state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-		this.modelBlock = getBlockRockMap(ORDINARY, rockVariant, rockType);
+		this.modelBlock = TFCStorage.getRockBlock(ORDINARY, rockVariant, rockType);
 		useNeighborBrightness = true;
 
 		setLightOpacity(255);
@@ -169,8 +168,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockTypeBlock 
 		public Double(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 			super(rockBlockType, rockVariant, rockType);
 
-			if (BLOCK_ROCK_MAP.put(new Triple<>(SLAB_DOUBLE, rockVariant, rockType), this) != null)
-				throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+			TFCStorage.addRockBlock(SLAB_DOUBLE, rockVariant, rockType, this);
 
 			this.rockVariant = rockVariant;
 			this.rockType = rockType;
@@ -224,10 +222,9 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockTypeBlock 
 		public Half(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 			super(rockBlockType, rockVariant, rockType);
 
-			if (BLOCK_ROCK_MAP.put(new Triple<>(SLAB, rockVariant, rockType), this) != null)
-				throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+			TFCStorage.addRockBlock(SLAB, rockVariant, rockType, this);
 
-			doubleSlab = (Double) getBlockRockMap(SLAB_DOUBLE, rockVariant, rockType);
+			doubleSlab = (Double) TFCStorage.getRockBlock(SLAB_DOUBLE, rockVariant, rockType);
 			doubleSlab.halfSlab = this;
 			halfSlab = this;
 

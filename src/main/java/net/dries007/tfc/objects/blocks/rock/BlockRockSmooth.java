@@ -9,6 +9,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -34,7 +35,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
-import static net.dries007.tfc.objects.blocks.rock.BlockRockVariant.BLOCK_ROCK_MAP;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -48,8 +48,7 @@ public class BlockRockSmooth extends Block implements IRockTypeBlock, IItemSize 
 	public BlockRockSmooth(RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
 
-		if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
-			throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
+		TFCStorage.addRockBlock(ORDINARY, rockVariant, rockType, this);
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;

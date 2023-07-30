@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.rock;
 
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
@@ -44,9 +45,7 @@ public class BlockRockMossy extends BlockRockVariant {
     public BlockRockMossy(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
         super(Material.ROCK);
 
-        if (BLOCK_ROCK_MAP.put(new Triple<>(rockBlockType, rockVariant, rockType), this) != null)
-            throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
-
+        TFCStorage.addRockBlock(rockBlockType, rockVariant, rockType, this);
 
         this.rockVariant = rockVariant;
         this.rockType = rockType;

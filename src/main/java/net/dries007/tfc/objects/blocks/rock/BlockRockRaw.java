@@ -8,6 +8,7 @@ package net.dries007.tfc.objects.blocks.rock;
 import gregtech.common.items.ToolItems;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -56,9 +57,7 @@ public class BlockRockRaw extends BlockRockVariant {
     public BlockRockRaw(RockVariant rockVariant, RockType rockType) {
         super(Material.ROCK);
 
-        if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
-            throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
-
+        TFCStorage.addRockBlock(ORDINARY, rockVariant, rockType, this);
 
         this.rockVariant = rockVariant;
         this.rockType = rockType;
@@ -132,7 +131,7 @@ public class BlockRockRaw extends BlockRockVariant {
         if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
             if (!worldIn.isRemote) {
                 // Create a stone anvil
-                Block anvil = getBlockRockMap(ORDINARY, ANVIL, rockType);
+                var anvil = TFCStorage.getRockBlock(ORDINARY, ANVIL, rockType);
                 if (anvil instanceof BlockRockAnvil) {
                     worldIn.setBlockState(pos, anvil.getDefaultState());
                 }

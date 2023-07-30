@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -60,9 +61,7 @@ public class BlockRockAnvil extends BlockRockVariant {
     public BlockRockAnvil(RockVariant rockVariant, RockType rockType) {
         super(Material.ROCK);
 
-        if (BLOCK_ROCK_MAP.put(new Triple<>(ORDINARY, rockVariant, rockType), this) != null)
-            throw new RuntimeException("Duplicate registry entry detected for block: " + rockVariant + " " + rockType);
-
+        TFCStorage.addRockBlock(ORDINARY, rockVariant, rockType, this);
 
         this.rockVariant = rockVariant;
         this.rockType = rockType;
@@ -251,7 +250,7 @@ public class BlockRockAnvil extends BlockRockVariant {
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(getBlockRockMap(ORDINARY, RAW, rockType));
+        return new ItemStack(TFCStorage.getRockBlock(ORDINARY, RAW, rockType));
     }
 
     @Override

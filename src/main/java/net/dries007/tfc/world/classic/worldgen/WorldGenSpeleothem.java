@@ -24,7 +24,6 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-
 		// Вычисляем координаты центра чанка
 		int x = chunkX * 16 + 8;
 		int z = chunkZ * 16 + 8;
@@ -38,7 +37,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 
 		for (int i = 0; i < tries; i++) {
 			// Генерируем случайную позицию в пределах разброса и устанавливаем высоту в пределах верхней границы
-			BlockPos target = new BlockPos(x + random.nextInt(spread), random.nextInt(upperBound) + offset, z + random.nextInt(spread));
+			var target = new BlockPos(x + random.nextInt(spread), random.nextInt(upperBound) + offset, z + random.nextInt(spread));
 			if (placeSpeleothemCluster(random, world, target, innerSpread, innerTries))
 				i++;
 		}
@@ -50,7 +49,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 
 		for (int i = 0; i < tries; i++) {
 			// Генерируем случайную позицию внутри кластера
-			BlockPos target = pos.add(random.nextInt(spread * 2 + 1) - spread, random.nextInt(spread + 1) - spread, random.nextInt(spread * 2 + 1) - spread);
+			var target = pos.add(random.nextInt(spread * 2 + 1) - spread, random.nextInt(spread + 1) - spread, random.nextInt(spread * 2 + 1) - spread);
 			findAndPlaceSpeleothem(random, world, target);
 		}
 
@@ -64,7 +63,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 
 		int off = world.provider.isNether() ? -1000 : 0; // Определяем смещение по вертикали. Если мир является "Nether", устанавливаем смещение в -1000, иначе 0.
 		boolean up = random.nextBoolean(); // Генерируем случайное булево значение для определения направления (вверх или вниз).
-		EnumFacing diff = (up ? EnumFacing.UP : EnumFacing.DOWN); // Определяем направление движения в зависимости от значения переменной "up".
+		var diff = (up ? EnumFacing.UP : EnumFacing.DOWN); // Определяем направление движения в зависимости от значения переменной "up".
 
 		// Если направление движения вниз и блок виден небу, возвращаем false.
 		if (!up && world.canBlockSeeSky(pos))
@@ -82,7 +81,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 			off++;
 		} while (pos.getY() > 4 && pos.getY() < 200 && !stateAt.isFullBlock() && off < 10);
 
-		Block type = getSpeleothemType(stateAt);
+		var type = getSpeleothemType(stateAt);
 		placeSpeleothem(random, world, pos, type, !up);
 
 		return true;
@@ -102,10 +101,10 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 			pos = pos.offset(diff);
 			if (!world.isAirBlock(pos))
 				return;
-			if (block instanceof IRockTypeBlock) {
+			if (block instanceof IRockTypeBlock rockTypeBlock) {
 				BlockRockSpeleothem.EnumSize sizeType = BlockRockSpeleothem.EnumSize.values()[size - i - 1];
 				// Создаем блок сталактита с указанным размером и типом породы
-				IBlockState targetBlock = getBlockRockMap(ORDINARY, SPELEOTHEM, ((IRockTypeBlock) block).getRockType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
+				IBlockState targetBlock = getBlockRockMap(ORDINARY, SPELEOTHEM, rockTypeBlock.getRockType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
 				// Устанавливаем блок сталактита в мир
 				world.setBlockState(pos, targetBlock);
 			}
@@ -114,7 +113,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 
 	@SuppressWarnings("incomplete-switch")
 	private Block getSpeleothemType(IBlockState state) {
-		Block block = state.getBlock();
+		var block = state.getBlock();
 		for (RockType rockType : RockType.values()) {
 			if (getBlockRockMap(ORDINARY, RAW, rockType) == block) {
 				return getBlockRockMap(ORDINARY, RAW, rockType);

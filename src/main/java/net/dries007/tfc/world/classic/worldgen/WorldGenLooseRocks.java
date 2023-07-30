@@ -8,6 +8,7 @@ package net.dries007.tfc.world.classic.worldgen;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.util.EnumFacing;
@@ -21,7 +22,6 @@ import java.util.Random;
 
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.LOOSE;
-import static net.dries007.tfc.objects.blocks.BlocksTFC.isSoil;
 
 public class WorldGenLooseRocks implements IWorldGenerator {
 
@@ -55,7 +55,7 @@ public class WorldGenLooseRocks implements IWorldGenerator {
 		// Также добавляем только на почву, так как это вызывается обработчиком регенерации мира позже
 		if (world.isAirBlock(pos) &&
 				world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) &&
-				isSoil(world.getBlockState(pos.down()))) {
+				BlocksTFC.isSoil(world.getBlockState(pos.down()))) {
 			if (ConfigTFC.General.WORLD.enableLooseRocks) {
 				world.setBlockState(pos, TFCStorage.getRockBlock(ORDINARY, LOOSE, rockType).getDefaultState(), 2);
 			}

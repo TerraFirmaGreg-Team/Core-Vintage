@@ -338,35 +338,6 @@ public final class CommonEventHandler {
 	}
 
 	@SubscribeEvent
-	public static void onUseHoe(UseHoeEvent event) {
-		World world = event.getWorld();
-		BlockPos pos = event.getPos();
-		IBlockState state = world.getBlockState(pos);
-		Block block = state.getBlock();
-
-		if (ConfigTFC.General.OVERRIDES.enableHoeing) {
-			if (block instanceof ISoilTypeBlock blockRock) {
-				SoilVariant soilVariant = blockRock.getSoilVariant();
-				if (soilVariant == GRASS || soilVariant == DIRT) {
-					if (!world.isRemote) {
-						world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-						world.setBlockState(pos, TFCStorage.getSoilBlock(FARMLAND, blockRock.getSoilType()).getDefaultState());
-					}
-					event.setResult(Event.Result.ALLOW);
-				}
-			}
-		}
-		if (block instanceof IGrowingPlant && !world.isRemote) {
-			IGrowingPlant plant = (IGrowingPlant) block;
-			Entity entity = event.getEntity();
-			if (entity instanceof EntityPlayerMP && entity.isSneaking()) {
-				TerraFirmaCraft.getNetwork().sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, plant.getGrowingStatus(state, world, pos).toString()), (EntityPlayerMP) entity);
-			}
-
-		}
-	}
-
-	@SubscribeEvent
 	public static void onLivingHurt(LivingHurtEvent event) {
 		float actualDamage = event.getAmount();
 		// Add damage bonus for weapons

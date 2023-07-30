@@ -7,6 +7,7 @@
   "mixins": [
     "gregtech.BlockOreMixin",
     "gregtech.OrePrefixMixin",
+    "gregtech.ToolItemsMixin",
     "minecraft.GuiCreateWorldMixin"
   ]
 }

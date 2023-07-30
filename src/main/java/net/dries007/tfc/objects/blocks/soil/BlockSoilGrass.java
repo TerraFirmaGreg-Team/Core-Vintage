@@ -78,7 +78,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 		String blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
 
 		this.setCreativeTab(CreativeTabsTFC.EARTH);
-		this.setSoundType(SoundType.GLASS);
+		this.setSoundType(SoundType.PLANT);
 		this.setHarvestLevel("shovel", 0);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));

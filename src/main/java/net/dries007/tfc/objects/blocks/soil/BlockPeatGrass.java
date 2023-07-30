@@ -37,7 +37,7 @@ public class BlockPeatGrass extends BlockPeat {
     public BlockPeatGrass(Material material) {
         super(material);
 
-        this.setSoundType(SoundType.GROUND);
+        this.setSoundType(SoundType.PLANT);
         this.setTickRandomly(true);
         OreDictionaryHelper.register(this, "peat");
         OreDictionaryHelper.register(this, "peat", "grass");

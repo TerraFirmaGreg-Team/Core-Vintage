@@ -32,6 +32,21 @@ public final class Triple<L, M, R> implements Serializable {
 	}
 
 	/**
+	 * Создает новую тройку из заданных элементов.
+	 *
+	 * @param left   левый элемент
+	 * @param middle средний элемент
+	 * @param right  правый элемент
+	 * @param <L>    тип левого элемента
+	 * @param <M>    тип среднего элемента
+	 * @param <R>    тип правого элемента
+	 * @return новая тройка
+	 */
+	public static <L, M, R> Triple<L, M, R> of(L left, M middle, R right) {
+		return new Triple<>(left, middle, right);
+	}
+
+	/**
 	 * Возвращает левый элемент этой тройки.
 	 *
 	 * @return левый элемент

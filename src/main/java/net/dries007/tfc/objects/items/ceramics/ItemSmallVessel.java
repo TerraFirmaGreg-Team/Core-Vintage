@@ -41,6 +41,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -99,13 +100,18 @@ public class ItemSmallVessel extends ItemPottery {
 		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
-	@Override
 	@Nonnull
-	public String getTranslationKey(ItemStack stack) {
+	@Override
+	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
 		if (!glazed) {
-			return super.getTranslationKey(stack);
+			return new TextComponentTranslation("item.tfc.ceramics.fired.vessel.name").getFormattedText();
 		}
-		return super.getTranslationKey(stack) + "." + EnumDyeColor.byDyeDamage(stack.getItemDamage()).getName();
+		else {
+			return new TextComponentTranslation(
+					"item.tfc.ceramics.fired.vessel_glazed.name",
+					new TextComponentTranslation("color." + EnumDyeColor.byDyeDamage(stack.getItemDamage()).getName())
+			).getFormattedText();
+		}
 	}
 
 	@Override

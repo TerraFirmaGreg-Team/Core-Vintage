@@ -9,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 
@@ -20,13 +21,18 @@ public class ItemUnfiredSmallVessel extends ItemPottery {
 		setHasSubtypes(glazed);
 	}
 
-	@Override
 	@Nonnull
-	public String getTranslationKey(ItemStack stack) {
+	@Override
+	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
 		if (!glazed) {
-			return super.getTranslationKey(stack);
+			return new TextComponentTranslation("item.tfc.ceramics.unfired.vessel.name").getFormattedText();
 		}
-		return super.getTranslationKey(stack) + "." + EnumDyeColor.byDyeDamage(stack.getItemDamage()).getName();
+		else {
+			return new TextComponentTranslation(
+							"item.tfc.ceramics.unfired.vessel_glazed.name",
+							new TextComponentTranslation("color." + EnumDyeColor.byDyeDamage(stack.getItemDamage()).getName())
+			).getFormattedText();
+		}
 	}
 
 	@Override

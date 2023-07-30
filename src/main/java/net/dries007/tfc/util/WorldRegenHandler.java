@@ -62,7 +62,7 @@ import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 public class WorldRegenHandler {
 
 	public static final WorldGenPlantTFC PLANT_GEN = new WorldGenPlantTFC();
-	private static final RegenRocksSticks ROCKS_GEN = new RegenRocksSticks(true);
+	private static final RegenRocksSticks ROCKS_GEN = new RegenRocksSticks();
 	private static final RegenWildCrops CROPS_GEN = new RegenWildCrops();
 	private static final WorldGenBerryBushes BUSH_GEN = new WorldGenBerryBushes();
 	private static final Random RANDOM = new Random();
@@ -158,8 +158,7 @@ public class WorldRegenHandler {
 				Block topBlock = topState.getBlock();
 				if (!topState.getMaterial().isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockMushroomTFC)) {
 					IBlockState soil = world.getBlockState(topPos.down());
-					if (soil.getBlock() instanceof ISoilTypeBlock) {
-						ISoilTypeBlock soilRock = (ISoilTypeBlock) soil.getBlock();
+					if (soil.getBlock() instanceof ISoilTypeBlock soilRock) {
 						//Stop removing dead crops from farmland please!
 						if (soilRock.getSoilVariant() != FARMLAND) {
 							world.removeTileEntity(topPos);
@@ -233,8 +232,7 @@ public class WorldRegenHandler {
 	private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random rand) {
 		List<EntityLiving> group = Lists.newArrayList();
 		EntityLiving creature = (EntityLiving) entityEntry.newInstance(worldIn);
-		if (creature instanceof ICreatureTFC) {
-			ICreatureTFC creatureTFC = (ICreatureTFC) creature;
+		if (creature instanceof ICreatureTFC creatureTFC) {
 			int fallback = 5;
 			int individuals = Math.max(1, creatureTFC.getMinGroupSize()) + rand.nextInt(creatureTFC.getMaxGroupSize() - Math.max(0, creatureTFC.getMinGroupSize() - 1));
 

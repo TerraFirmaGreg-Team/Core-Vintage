@@ -24,7 +24,7 @@ public class WorldGenLargeRocks implements IWorldGenerator {
 	@Override
 	public void generate(Random rng, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 		final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-		BlockPos start = world.getTopSolidOrLiquidBlock(chunkBlockPos.add(8 + rng.nextInt(16), 0, 8 + rng.nextInt(16))).add(0, -1, 0);
+		var start = world.getTopSolidOrLiquidBlock(chunkBlockPos.add(8 + rng.nextInt(16), 0, 8 + rng.nextInt(16))).add(0, -1, 0);
 		if (start.getY() > 155 && !BlocksTFC.isSoil(world.getBlockState(start))) return;
 
 		int y = 1;

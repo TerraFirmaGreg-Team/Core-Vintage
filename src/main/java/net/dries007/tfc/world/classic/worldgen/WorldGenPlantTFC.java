@@ -25,11 +25,11 @@ import java.util.Random;
 public class WorldGenPlantTFC extends WorldGenerator {
 	private Plant plant;
 
-	public void setGeneratedPlant (Plant plantIn) {
+	public void setGeneratedPlant(Plant plantIn) {
 		this.plant = plantIn;
 	}
 
-	public boolean generate (World worldIn, Random rand, BlockPos position) {
+	public boolean generate(World worldIn, Random rand, BlockPos position) {
 		if (plant.getIsClayMarking()) return false;
 		if (plant.getIsSwampPlant() && (/*!ClimateTFC.isSwamp(worldIn, position) ||*/ !BiomeDictionary.hasType(worldIn.getBiome(position), BiomeDictionary.Type.SWAMP)))
 			return false;

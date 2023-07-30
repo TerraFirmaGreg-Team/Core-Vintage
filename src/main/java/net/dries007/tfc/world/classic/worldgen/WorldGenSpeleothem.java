@@ -4,6 +4,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
 import net.dries007.tfc.objects.blocks.rock.BlockRockSpeleothem;
+import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -24,22 +25,24 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-		// Вычисляем координаты центра чанка
-		int x = chunkX * 16 + 8;
-		int z = chunkZ * 16 + 8;
+		if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0) {
+			// Вычисляем координаты центра чанка
+			int x = chunkX * 16 + 8;
+			int z = chunkZ * 16 + 8;
 
-		int spread = 10; // Разброс для генерации кластеров сталактитов
-		int tries = 60; // Количество попыток генерации кластеров сталактитов
-		int innerSpread = 6; // Разброс для генерации дополнительных сталактитов внутри кластера
-		int innerTries = 12; // Количество попыток генерации дополнительных сталактитов внутри кластера
-		int upperBound = 256; // Максимальная высота генерации сталактитов
-		int offset = 6; // Смещение по вертикали для начала генерации сталактитов
+			int spread = 10; // Разброс для генерации кластеров сталактитов
+			int tries = 60; // Количество попыток генерации кластеров сталактитов
+			int innerSpread = 6; // Разброс для генерации дополнительных сталактитов внутри кластера
+			int innerTries = 12; // Количество попыток генерации дополнительных сталактитов внутри кластера
+			int upperBound = 256; // Максимальная высота генерации сталактитов
+			int offset = 6; // Смещение по вертикали для начала генерации сталактитов
 
-		for (int i = 0; i < tries; i++) {
-			// Генерируем случайную позицию в пределах разброса и устанавливаем высоту в пределах верхней границы
-			var target = new BlockPos(x + random.nextInt(spread), random.nextInt(upperBound) + offset, z + random.nextInt(spread));
-			if (placeSpeleothemCluster(random, world, target, innerSpread, innerTries))
-				i++;
+			for (int i = 0; i < tries; i++) {
+				// Генерируем случайную позицию в пределах разброса и устанавливаем высоту в пределах верхней границы
+				var target = new BlockPos(x + random.nextInt(spread), random.nextInt(upperBound) + offset, z + random.nextInt(spread));
+				if (placeSpeleothemCluster(random, world, target, innerSpread, innerTries))
+					i++;
+			}
 		}
 	}
 

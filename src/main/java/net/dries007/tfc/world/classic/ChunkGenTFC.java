@@ -78,15 +78,15 @@ public class ChunkGenTFC implements IChunkGenerator {
 	private static final float[] parabolicField = new float[25];
 
 	/* This is done here rather than GameRegistry.registerWorldGenerator since we need to control the ordering of them better */
-	private static final IWorldGenerator LAVA_FISSURE_GEN = new RarityBasedWorldGen(x -> x.lavaFissureRarity, new WorldGenFissure(true));
-	private static final IWorldGenerator WATER_FISSURE_GEN = new RarityBasedWorldGen(x -> x.waterFissureRarity, new WorldGenFissure(false));
+	private static final IWorldGenerator LAVA_FISSURE_GEN = new WorldGenRarityBased(x -> x.lavaFissureRarity, new WorldGenFissure(true));
+	private static final IWorldGenerator WATER_FISSURE_GEN = new WorldGenRarityBased(x -> x.waterFissureRarity, new WorldGenFissure(false));
 	private static final IWorldGenerator SOIL_PITS_GEN = new WorldGenSoilPits();
-	private static final IWorldGenerator LARGE_ROCKS_GEN = new RarityBasedWorldGen(x -> x.largeRockRarity, new WorldGenLargeRocks());
+	private static final IWorldGenerator LARGE_ROCKS_GEN = new WorldGenRarityBased(x -> x.largeRockRarity, new WorldGenLargeRocks());
 	private static final IWorldGenerator TREE_GEN = new WorldGenTrees();
 	private static final IWorldGenerator BERRY_BUSH_GEN = new WorldGenBerryBushes();
 	private static final IWorldGenerator FRUIT_TREE_GEN = new WorldGenFruitTrees();
 	private static final IWorldGenerator WILD_CROPS_GEN = new WorldGenWildCrops();
-	private static final IWorldGenerator LOOSE_ROCKS_GEN = new WorldGenLooseRocks(true);
+	private static final IWorldGenerator LOOSE_ROCKS_GEN = new WorldGenLooseRocks();
 	private static final IWorldGenerator SPELEOTHEM_GEN = new WorldGenSpeleothem();
 	private static final IWorldGenerator WATERFALL_GEN = new WorldGenFalls(FRESH_WATER, 15);
 	private static final IWorldGenerator LAVAFALL_GEN = new WorldGenFalls(Blocks.FLOWING_LAVA.getDefaultState(), 5);

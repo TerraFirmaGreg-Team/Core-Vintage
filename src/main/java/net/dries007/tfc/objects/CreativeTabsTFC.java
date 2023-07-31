@@ -32,7 +32,7 @@ public final class CreativeTabsTFC {
 	public static final CreativeTabs POTTERY = new TFCCreativeTab("pottery", "tfc:ceramics/fired/mold/ingot");
 	public static final CreativeTabs FOOD = new TFCCreativeTab("food", "tfc:food/green_apple");
 	public static final CreativeTabs MISC = new TFCCreativeTab("misc", "tfc:wand");
-	public static final CreativeTabs FLORA = new TFCCreativeTab("flora", "tfc:plants/goldenrod");
+	public static final CreativeTabs FLORA = new TFCCreativeTab("flora", "tfc:plants/cactus/barrel_cactus");
 
 	private static class TFCCreativeTab extends CreativeTabs {
 		private final ResourceLocation iconResourceLocation;

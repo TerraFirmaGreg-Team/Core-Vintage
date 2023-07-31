@@ -6,10 +6,6 @@
 package net.dries007.tfc.util;
 
 import com.google.common.collect.ImmutableMap;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.items.metal.ItemMetal;
-import net.dries007.tfc.objects.items.metal.ItemMetalArmor;
-import net.dries007.tfc.objects.items.metal.ItemMetalSword;
 import net.dries007.tfc.util.collections.WeightedCollection;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -35,6 +31,7 @@ public class MonsterEquipment
 
     static
     {
+        /*
         WeightedCollection<ItemStack> weapons = new WeightedCollection<>();
         weapons.add(0.4, ItemStack.EMPTY);
         weapons.add(0.2, new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.MACE)));
@@ -72,7 +69,7 @@ public class MonsterEquipment
         ENTRIES.put("minecraft:stray", rangedEquipment);
         ENTRIES.put("minecraft:zombie", equipment);
         ENTRIES.put("minecraft:husk", equipment);
-        ENTRIES.put("minecraft:zombie_villager", equipment);
+        ENTRIES.put("minecraft:zombie_villager", equipment);*/
     }
 
     @Nullable

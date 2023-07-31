@@ -22,12 +22,11 @@ import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.util.Alloy;
@@ -450,11 +449,12 @@ public class ItemSmallVessel extends ItemPottery {
 			meltTemp = 1000;
 			heatCapacity = 1;
 			if (fluid != null) {
-				Metal metal = FluidsTFC.getMetalFromFluid(fluid.getFluid());
-				//noinspection ConstantConditions
-				if (metal != null) {
-					meltTemp = metal.getMeltTemp();
-					heatCapacity = metal.getSpecificHeat();
+				var material = MetaFluids.getMaterialFromFluid(fluid.getFluid());
+				if (material != null) {
+					var property = material.getProperty(TFGPropertyKey.HEAT);
+
+					meltTemp = property.getMeltTemp();
+					heatCapacity = property.getSpecificHeat();
 				}
 			}
 		}

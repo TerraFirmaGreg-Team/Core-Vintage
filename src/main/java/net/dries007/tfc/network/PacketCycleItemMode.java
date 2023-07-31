@@ -9,7 +9,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
-import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -26,6 +25,7 @@ public class PacketCycleItemMode implements IMessageEmpty
                 EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
                 if (player != null)
                 {
+                    /*
                     if (player.getHeldItemMainhand().getItem() instanceof ItemMetalChisel)
                     {
                         IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
@@ -36,7 +36,7 @@ public class PacketCycleItemMode implements IMessageEmpty
                             capability.setChiselMode(mode.next());
                             capability.updateAndSync();
                         }
-                    }
+                    }*/
 
                 }
             });

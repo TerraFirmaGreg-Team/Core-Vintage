@@ -94,7 +94,6 @@ public final class BlocksTFC {
 	public static final BlockCharcoalPile CHARCOAL_PILE = getNull();
 	public static final BlockNestBox NEST_BOX = getNull();
 	public static final BlockLogPile LOG_PILE = getNull();
-	public static final BlockIngotPile INGOT_PILE = getNull();
 	public static final BlockCharcoalForge CHARCOAL_FORGE = getNull();
 	public static final BlockCrucible CRUCIBLE = getNull();
 	public static final BlockMolten MOLTEN = getNull();
@@ -118,13 +117,11 @@ public final class BlocksTFC {
 	private static ImmutableList<BlockSaplingTFC> allSaplingBlocks;
 	private static ImmutableList<BlockDoorTFC> allDoorBlocks;
 	private static ImmutableList<BlockTrapDoorWoodTFC> allTrapDoorWoodBlocks;
-	private static ImmutableList<BlockTrapDoorMetalTFC> allTrapDoorMetalBlocks;
 	private static ImmutableList<BlockStairsTFC> allStairsBlocks;
 	private static ImmutableList<BlockWoodSlabTFC.Half> allSlabBlocks;
 	private static ImmutableList<BlockChestTFC> allChestBlocks;
 	private static ImmutableList<BlockAnvilTFC> allAnvils;
 	private static ImmutableList<BlockMetalCladding> allCladdings;
-	private static ImmutableList<BlockMetalLamp> allLamps;
 	private static ImmutableList<BlockToolRack> allToolRackBlocks;
 	private static ImmutableList<BlockCropTFC> allCropBlocks;
 	private static ImmutableList<BlockCropDead> allDeadCropBlocks;
@@ -179,10 +176,6 @@ public final class BlocksTFC {
 		return allTrapDoorWoodBlocks;
 	}
 
-	public static ImmutableList<BlockTrapDoorMetalTFC> getAllTrapDoorMetalBlocks() {
-		return allTrapDoorMetalBlocks;
-	}
-
 	public static ImmutableList<BlockStairsTFC> getAllStairsBlocks() {
 		return allStairsBlocks;
 	}
@@ -201,10 +194,6 @@ public final class BlocksTFC {
 
 	public static ImmutableList<BlockMetalCladding> getAllCladdings() {
 		return allCladdings;
-	}
-
-	public static ImmutableList<BlockMetalLamp> getAllLamps() {
-		return allLamps;
 	}
 
 	public static ImmutableList<BlockToolRack> getAllToolRackBlocks() {
@@ -363,9 +352,6 @@ public final class BlocksTFC {
 			for (FluidWrapper wrapper : FluidsTFC.getAllOtherFiniteFluids()) {
 				b.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));
 			}
-			for (FluidWrapper wrapper : FluidsTFC.getAllMetalFluids()) {
-				b.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.LAVA)));
-			}
 			for (EnumDyeColor color : EnumDyeColor.values()) {
 				FluidWrapper wrapper = FluidsTFC.getFluidFromDye(color);
 				b.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));
@@ -509,8 +495,6 @@ public final class BlocksTFC {
 		{
 			Builder<BlockAnvilTFC> anvils = ImmutableList.builder();
 			Builder<BlockMetalCladding> claddings = ImmutableList.builder();
-			Builder<BlockMetalLamp> lamps = ImmutableList.builder();
-			Builder<BlockTrapDoorMetalTFC> metalTrapdoors = ImmutableList.builder();
 
 			for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
 				if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL))
@@ -534,8 +518,6 @@ public final class BlocksTFC {
 
 			allAnvils = anvils.build();
 			allCladdings = claddings.build();
-			allLamps = lamps.build();
-			allTrapDoorMetalBlocks = metalTrapdoors.build();
 		}
 
 		{
@@ -636,7 +618,6 @@ public final class BlocksTFC {
 		register(r, "placed_item_flat", new BlockPlacedItemFlat());
 		register(r, "placed_hide", new BlockPlacedHide());
 		register(r, "charcoal_pile", new BlockCharcoalPile());
-		register(r, "ingot_pile", new BlockIngotPile());
 		register(r, "log_pile", new BlockLogPile());
 		register(r, "molten", new BlockMolten());
 		register(r, "bloom", new BlockBloom());
@@ -660,11 +641,9 @@ public final class BlocksTFC {
 		register(TEChestTFC.class, "chest");
 		register(TENestBox.class, "nest_box");
 		register(TELogPile.class, "log_pile");
-		register(TEIngotPile.class, "ingot_pile");
 		register(TEFirePit.class, "fire_pit");
 		register(TEToolRack.class, "tool_rack");
 		register(TELoom.class, "loom");
-		register(TELamp.class, "lamp");
 		register(TEBellows.class, "bellows");
 		register(TEBarrel.class, "barrel");
 		register(TECharcoalForge.class, "charcoal_forge");

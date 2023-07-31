@@ -1,6 +1,5 @@
 package net.dries007.tfc.api.events;
 
-import net.dries007.tfc.objects.items.metal.ItemProspectorPick.ProspectResult.Type;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -14,6 +13,10 @@ import net.minecraftforge.fml.relauncher.Side;
  */
 public abstract class ProspectEvent extends Event
 {
+
+    public static enum Type {
+        COCK
+    }
 
     public static class Server extends ProspectEvent
     {

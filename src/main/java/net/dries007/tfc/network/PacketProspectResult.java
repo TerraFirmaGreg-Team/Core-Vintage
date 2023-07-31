@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.events.ProspectEvent;
-import net.dries007.tfc.objects.items.metal.ItemProspectorPick.ProspectResult.Type;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -19,14 +18,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class PacketProspectResult implements IMessage
 {
     private BlockPos pos;
-    private Type type;
+    private ProspectEvent.Type type;
     private ItemStack vein;
 
     @SuppressWarnings("unused")
     @Deprecated
     public PacketProspectResult() {}
 
-    public PacketProspectResult(BlockPos pos, Type type, ItemStack vein)
+    public PacketProspectResult(BlockPos pos, ProspectEvent.Type type, ItemStack vein)
     {
         this.pos = pos;
         this.type = type;
@@ -37,9 +36,9 @@ public class PacketProspectResult implements IMessage
     public void fromBytes(ByteBuf buf)
     {
         pos = BlockPos.fromLong(buf.readLong());
-        type = Type.valueOf(buf.readByte());
+        type = ProspectEvent.Type.valueOf(String.valueOf(buf.readByte()));
 
-        if (type != Type.NOTHING)
+        if (type != ProspectEvent.Type.COCK)
         {
             vein = ByteBufUtils.readItemStack(buf);
         }
@@ -51,7 +50,7 @@ public class PacketProspectResult implements IMessage
         buf.writeLong(pos.toLong());
         buf.writeByte(type.ordinal());
 
-        if (type != Type.NOTHING)
+        if (type != ProspectEvent.Type.COCK)
         {
             ByteBufUtils.writeItemStack(buf, vein);
         }
@@ -66,8 +65,8 @@ public class PacketProspectResult implements IMessage
                 EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
                 if (player != null)
                 {
-                    ITextComponent text = new TextComponentTranslation(message.type.translation);
-                    if (message.type != Type.NOTHING)
+                    ITextComponent text = new TextComponentTranslation(null);
+                    if (message.type != ProspectEvent.Type.COCK)
                     {
                         text.appendText(" ").appendSibling(new TextComponentTranslation(message.vein.getTranslationKey() + ".name"));
                     }

@@ -12,7 +12,6 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Tree;
 import net.minecraft.block.Block;
@@ -40,7 +39,6 @@ public final class Registries {
 	public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
 		// Pre Block registries (dirty hack)
 
-		newRegistry(METAL, Metal.class, true);  // TODO: REMOVE THIS
 		newRegistry(TREE, Tree.class, true); // TODO: REMOVE THIS (Move to enum?)
 		newRegistry(PLANT, Plant.class, true); // TODO: REMOVE THIS (Move to enum?)
 

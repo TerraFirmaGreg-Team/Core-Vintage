@@ -7,7 +7,6 @@ package net.dries007.tfc.objects.items.metal;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockStaticLiquid;
@@ -15,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
@@ -35,16 +35,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashSet;
 import java.util.Set;
 
-import static net.dries007.tfc.api.types.Metal.BLUE_STEEL;
-import static net.dries007.tfc.api.types.Metal.RED_STEEL;
-
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemMetalBucket extends ItemMetal // quite a bit copied out of ItemWoodenBucket
+public class ItemMetalBucket extends Item // quite a bit copied out of ItemWoodenBucket
 {
 	private static final int CAPACITY = Fluid.BUCKET_VOLUME;
 
-	public ItemMetalBucket(Metal metal, Metal.ItemType type) {
+	public ItemMetalBucket() {
         /*
         super(metal, type);
         setHasSubtypes(true);
@@ -57,6 +54,7 @@ public class ItemMetalBucket extends ItemMetal // quite a bit copied out of Item
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nullable EntityPlayer playerIn, EnumHand handIn) {
+		/*
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if (!worldIn.isRemote && !stack.isEmpty()) {
 			IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
@@ -105,7 +103,7 @@ public class ItemMetalBucket extends ItemMetal // quite a bit copied out of Item
 								try {
 									BlockLiquid flowingBlock = BlockStaticLiquid.getFlowingBlock(fluid.getBlock().getDefaultState().getMaterial());
 									worldIn.setBlockState(pos, flowingBlock.getDefaultState());
-								} catch (IllegalArgumentException e) { /* Just skip */ }
+								} catch (IllegalArgumentException e) { }
 							}
 						}
 						worldIn.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.PLAYERS, 1.0F, 1.0F);
@@ -113,8 +111,8 @@ public class ItemMetalBucket extends ItemMetal // quite a bit copied out of Item
 					}
 				}
 			}
-		}
-		return new ActionResult<>(EnumActionResult.PASS, stack);
+		}*/
+		return new ActionResult<>(EnumActionResult.PASS, ItemStack.EMPTY);
 	}
 
 	@Override
@@ -149,11 +147,12 @@ public class ItemMetalBucket extends ItemMetal // quite a bit copied out of Item
 	public Set<Fluid> getValidFluids() {
 		String[] fluidNames = {};
 
+		/*
 		if (metal.equals(BLUE_STEEL)) {
 			fluidNames = ConfigTFC.General.MISC.blueSteelBucketWhitelist;
 		} else if (metal.equals(RED_STEEL)) {
 			fluidNames = ConfigTFC.General.MISC.redSteelBucketWhitelist;
-		} // No other metal buckets implemented
+		} // No other metal buckets implemented*/
 
 		Set<Fluid> validFluids = new HashSet<>();
 		for (String fluidName : fluidNames) {

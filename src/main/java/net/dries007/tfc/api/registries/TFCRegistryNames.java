@@ -14,10 +14,8 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
  */
 public final class TFCRegistryNames
 {
-    public static final ResourceLocation ROCK_TYPE = new ResourceLocation(MOD_ID, "rock_type");
     public static final ResourceLocation ROCK = new ResourceLocation(MOD_ID, "rock");
     public static final ResourceLocation TREE = new ResourceLocation(MOD_ID, "tree");
-    public static final ResourceLocation METAL = new ResourceLocation(MOD_ID, "metal");
     public static final ResourceLocation PLANT = new ResourceLocation(MOD_ID, "plant");
 
     public static final ResourceLocation ALLOY_RECIPE = new ResourceLocation(MOD_ID, "alloy_recipe");

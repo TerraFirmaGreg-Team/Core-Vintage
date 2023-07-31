@@ -22,7 +22,6 @@ public class TOPPlugin
         oneProbe.registerProvider(new CropProvider());
         oneProbe.registerProvider(new CrucibleProvider());
         oneProbe.registerProvider(new FruitTreeProvider());
-        oneProbe.registerProvider(new LampProvider());
         oneProbe.registerProvider(new LogPileProvider());
         oneProbe.registerProvider(new PitKilnProvider());
         oneProbe.registerProvider(new QuernProvider());

@@ -5,7 +5,6 @@
 
 package net.dries007.tfc.client.gui.overlay;
 
-import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
@@ -103,6 +102,8 @@ public interface IHighlightHandler
             //noinspection ConstantConditions
             if (lookingAt != null)
             {
+
+                /*
                 // Handle Chisel first
                 if (event.getPlayer().getHeldItemMainhand().getItem() instanceof ItemMetalChisel)
                 {
@@ -140,7 +141,7 @@ public interface IHighlightHandler
                         // Cancel drawing this block's bounding box
                         event.setCanceled(true);
                     }
-                }
+                }*/
             }
         }
     }

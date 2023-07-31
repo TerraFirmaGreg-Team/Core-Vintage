@@ -10,7 +10,6 @@ import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.dries007.tfc.util.config.HealthDisplayFormat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -219,6 +218,7 @@ public final class PlayerDataOverlay
         int itemModeX = mid + 100;
 
         // draw chisel mode if main hand item is tfc chisel
+        /*
         if (player.getHeldItemMainhand().getItem() instanceof ItemMetalChisel)
         {
             int iconU = 0;
@@ -253,7 +253,7 @@ public final class PlayerDataOverlay
             mc.renderEngine.bindTexture(ICONS);
             drawTexturedModalRect(itemModeX, itemModeY, iconU, 58, 20, 20);
             mc.renderEngine.bindTexture(MC_ICONS);
-        }
+        }*/
     }
 
     @SubscribeEvent

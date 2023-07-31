@@ -12,7 +12,6 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Tree;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -32,7 +31,6 @@ public class TFCRegistries {
 	 */
 
 	public static final IForgeRegistry<Tree> TREES = GameRegistry.findRegistry(Tree.class);
-	public static final IForgeRegistry<Metal> METALS = GameRegistry.findRegistry(Metal.class);
 
 	public static final IForgeRegistry<AlloyRecipe> ALLOYS = GameRegistry.findRegistry(AlloyRecipe.class);
 	public static final IForgeRegistry<KnappingRecipe> KNAPPING = GameRegistry.findRegistry(KnappingRecipe.class);

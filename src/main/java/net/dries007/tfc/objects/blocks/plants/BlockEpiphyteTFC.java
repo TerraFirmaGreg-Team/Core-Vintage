@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -25,8 +26,6 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class BlockEpiphyteTFC extends BlockPlantTFC {
@@ -38,15 +37,14 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
 	private static final AxisAlignedBB PLANT_WEST_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 	private static final AxisAlignedBB PLANT_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.75D, 1.0D, 1.0D);
 
-	private static final Map<PlantType, BlockEpiphyteTFC> MAP = new HashMap<>();
+	private final PlantType plantType;
+	private final PlantVariant plantVariant;
 
-	public BlockEpiphyteTFC(PlantType plant) {
-		super(plant);
-		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
-	}
+	public BlockEpiphyteTFC(PlantVariant plantVariant, PlantType plantType) {
+		super(plantVariant, plantType);
 
-	public static BlockEpiphyteTFC get(PlantType plant) {
-		return MAP.get(plant);
+		this.plantType = plantType;
+		this.plantVariant = plantVariant;
 	}
 
 	@Override
@@ -67,7 +65,7 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
 
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod()).withProperty(growthStageProperty, plant.getStageForMonth()));
+		world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod()).withProperty(growthStageProperty, plantType.getStageForMonth()));
 		checkAndDropBlock(world, pos, state);
 	}
 
@@ -97,7 +95,7 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
 		for (EnumFacing enumfacing : FACING.getAllowedValues()) {
 			if (this.canPlaceAt(worldIn, pos, enumfacing)) {
-				return plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+				return plantType.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plantType.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
 			}
 		}
 

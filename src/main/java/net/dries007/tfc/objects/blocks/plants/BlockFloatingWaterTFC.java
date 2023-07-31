@@ -6,6 +6,8 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.PlantVariant;
+import net.dries007.tfc.api.types2.plant.util.IPlantTypeBlock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -21,26 +23,25 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class BlockFloatingWaterTFC extends BlockPlantTFC {
+public class BlockFloatingWaterTFC extends BlockPlantTFC implements IPlantTypeBlock {
 	private static final AxisAlignedBB LILY_PAD_AABB = new AxisAlignedBB(0.0D, -0.125D, 0.0D, 1.0D, 0.0625D, 1.0D);
-	private static final Map<PlantType, BlockFloatingWaterTFC> MAP = new HashMap<>();
 
-	public BlockFloatingWaterTFC(PlantType plant) {
-		super(plant);
-		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+	private final PlantType plantType;
+	private final PlantVariant plantVariant;
+
+	public BlockFloatingWaterTFC(PlantVariant plantVariant, PlantType plantType) {
+		super(plantVariant, plantType);
+
+		this.plantType = plantType;
+		this.plantVariant = plantVariant;
 	}
 
-	public static BlockFloatingWaterTFC get(PlantType plant) {
-		return BlockFloatingWaterTFC.MAP.get(plant);
-	}
 
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod()).withProperty(growthStageProperty, plant.getStageForMonth()));
+		world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod()).withProperty(growthStageProperty, plantType.getStageForMonth()));
 		this.checkAndDropBlock(world, pos, state);
 	}
 
@@ -61,7 +62,7 @@ public class BlockFloatingWaterTFC extends BlockPlantTFC {
 
 	@Override
 	protected boolean canSustainBush(IBlockState state) {
-		return (BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) || (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
+		return (BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == plantType.getWaterType()) || (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
 	}
 
 	@Override
@@ -69,7 +70,7 @@ public class BlockFloatingWaterTFC extends BlockPlantTFC {
 		if (pos.getY() >= 0 && pos.getY() < 256) {
 			IBlockState stateDown = worldIn.getBlockState(pos.down());
 			Material material = stateDown.getMaterial();
-			return (material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == plant.getWaterType()) || material == Material.ICE || (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
+			return (material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == plantType.getWaterType()) || material == Material.ICE || (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
 		} else {
 			return false;
 		}

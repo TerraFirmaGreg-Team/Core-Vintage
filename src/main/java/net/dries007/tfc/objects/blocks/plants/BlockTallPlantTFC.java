@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -24,22 +25,20 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITallPlant {
 	private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
-	private static final Map<PlantType, BlockTallPlantTFC> MAP = new HashMap<>();
 
-	public BlockTallPlantTFC(PlantType plant) {
-		super(plant);
-		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
-	}
+	private final PlantType plantType;
+	private final PlantVariant plantVariant;
 
-	public static BlockTallPlantTFC get(PlantType plant) {
-		return BlockTallPlantTFC.MAP.get(plant);
+	public BlockTallPlantTFC(PlantVariant plantVariant, PlantType plantType) {
+		super(plantVariant, plantType);
+
+		this.plantType = plantType;
+		this.plantVariant = plantVariant;
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITall
 		int i;
 		//noinspection StatementWithEmptyBody
 		for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) ;
-		return i < plant.getMaxHeight() && worldIn.isAirBlock(pos.up()) && canBlockStay(worldIn, pos.up(), state);
+		return i < plantType.getMaxHeight() && worldIn.isAirBlock(pos.up()) && canBlockStay(worldIn, pos.up(), state);
 	}
 
 	@Override
@@ -58,7 +57,7 @@ public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITall
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		worldIn.setBlockState(pos.up(), this.getDefaultState());
-		IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(PART, getPlantPart(worldIn, pos));
+		IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plantType.getStageForMonth()).withProperty(PART, getPlantPart(worldIn, pos));
 		worldIn.setBlockState(pos, iblockstate);
 		iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
 	}
@@ -104,7 +103,7 @@ public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITall
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isAreaLoaded(pos, 1)) return;
 
-		if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+		if (plantType.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plantType.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
 			int j = state.getValue(AGE);
 
 			if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
@@ -115,7 +114,7 @@ public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITall
 				}
 				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
-		} else if (!plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+		} else if (!plantType.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plantType.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
 			int j = state.getValue(AGE);
 
 			if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -135,9 +134,9 @@ public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITall
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
 		IBlockState soil = worldIn.getBlockState(pos.down());
 
-		if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) return false;
+		if (worldIn.getBlockState(pos.down(plantType.getMaxHeight())).getBlock() == this) return false;
 		if (state.getBlock() == this) {
-			return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+			return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plantType.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plantType.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
 		}
 		return this.canSustainBush(soil);
 	}

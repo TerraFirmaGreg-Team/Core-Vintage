@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.types2.plant;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.block.material.Material;
@@ -17,6 +18,7 @@ import static net.dries007.tfc.api.types2.plant.PlantVariant.*;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
+@MethodsReturnNonnullByDefault
 public enum PlantType implements IStringSerializable {
 	ALLIUM(STANDARD, new int[]{6, 6, 7, 0, 1, 1, 2, 2, 3, 4, 5, 6}, false, false, 8f, 20f, -40f, 33f, 150f, 500f, 12, 15, 1, 0.8D, null),
 	ATHYRIUM_FERN(STANDARD, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, true, false, 13f, 25f, -35f, 31f, 200f, 500f, 9, 15, 1, 0.8D, null),
@@ -274,7 +276,7 @@ public enum PlantType implements IStringSerializable {
 	}
 
 	@Nonnull
-	public PlantVariant getPlantType() {
+	public PlantVariant getPlantVariant() {
 		return plantVariant;
 	}
 
@@ -305,31 +307,31 @@ public enum PlantType implements IStringSerializable {
 				plantVariant == MUSHROOM;
 	}
 
-	public final EnumPlantTypeTFC getEnumPlantTypeTFC() {
+	public final PlantTypeEnum getEnumPlantTypeTFC() {
 		switch (plantVariant) {
 			case DESERT, DESERT_TALL_PLANT -> {
-				if (isClayMarking) return EnumPlantTypeTFC.DESERT_CLAY;
-				else return EnumPlantTypeTFC.NONE;
+				if (isClayMarking) return PlantTypeEnum.DESERT_CLAY;
+				else return PlantTypeEnum.NONE;
 			}
 			case DRY, DRY_TALL_PLANT -> {
-				if (isClayMarking) return EnumPlantTypeTFC.DRY_CLAY;
-				else return EnumPlantTypeTFC.DRY;
+				if (isClayMarking) return PlantTypeEnum.DRY_CLAY;
+				else return PlantTypeEnum.DRY;
 			}
 			case REED, TALL_REED -> {
-				return EnumPlantTypeTFC.FRESH_BEACH;
+				return PlantTypeEnum.FRESH_BEACH;
 			}
 			case REED_SEA, TALL_REED_SEA -> {
-				return EnumPlantTypeTFC.SALT_BEACH;
+				return PlantTypeEnum.SALT_BEACH;
 			}
 			case WATER, TALL_WATER, EMERGENT_TALL_WATER -> {
-				return EnumPlantTypeTFC.FRESH_WATER;
+				return PlantTypeEnum.FRESH_WATER;
 			}
 			case WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA -> {
-				return EnumPlantTypeTFC.SALT_WATER;
+				return PlantTypeEnum.SALT_WATER;
 			}
 			default -> {
-				if (isClayMarking) return EnumPlantTypeTFC.CLAY;
-				else return EnumPlantTypeTFC.NONE;
+				if (isClayMarking) return PlantTypeEnum.CLAY;
+				else return PlantTypeEnum.NONE;
 			}
 		}
 	}
@@ -365,4 +367,23 @@ public enum PlantType implements IStringSerializable {
 	}
 
 
+	public enum PlantTypeEnum implements IStringSerializable {
+		CLAY,
+		DESERT_CLAY,
+		DRY_CLAY,
+		DRY,
+		FRESH_BEACH,
+		SALT_BEACH,
+		FRESH_WATER,
+		SALT_WATER,
+		NONE;
+
+		/**
+		 * Возвращает имя перечисления в нижнем регистре.
+		 */
+		@Override
+		public String getName() {
+			return name().toLowerCase();
+		}
+	}
 }

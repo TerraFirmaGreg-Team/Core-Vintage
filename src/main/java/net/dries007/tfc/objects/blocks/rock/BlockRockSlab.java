@@ -5,7 +5,6 @@ import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.rock.ItemRockSlab;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -64,8 +63,6 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockTypeBlock 
 		setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
 		setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		setSoundType(SoundType.STONE);
-
-		OreDictionaryHelper.register(this, "slab", "slab_" + rockType);
 	}
 
 	@Override
@@ -174,7 +171,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockTypeBlock 
 			this.rockType = rockType;
 			this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 
-			String blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
+			var blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
 			this.setRegistryName(MOD_ID, blockRegistryName);
 			this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 		}
@@ -232,12 +229,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockTypeBlock 
 			this.rockType = rockType;
 			this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
 
-			String blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
+			var blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
+			this.setRegistryName(MOD_ID, blockRegistryName);
+			this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
 			this.setHardness(getFinalHardness());
 			this.setHarvestLevel("pickaxe", 0);
-			this.setRegistryName(MOD_ID, blockRegistryName);
-			this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+
+			OreDictionaryHelper.register(this, "slab", "slab_" + rockType);
 
 			//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
 		}

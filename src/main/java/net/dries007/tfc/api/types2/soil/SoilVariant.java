@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.types2.soil;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
+import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.objects.blocks.soil.BlockSoil;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilGrass;
@@ -38,7 +38,6 @@ public enum SoilVariant implements IStringSerializable {
 	SoilVariant(BiFunction<SoilVariant, SoilType, ISoilTypeBlock> blockFactory, @Nullable Specification fallingSpecification) {
 		this.blockFactory = blockFactory;
 		this.fallingSpecification = fallingSpecification;
-
 	}
 
 	public static SoilVariant valueOf(int i) {

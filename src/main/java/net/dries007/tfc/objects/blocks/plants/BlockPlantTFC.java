@@ -9,9 +9,11 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types2.plant.EnumPlantTypeTFC;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.api.types2.plant.PlantVariant;
+import net.dries007.tfc.api.types2.plant.util.IPlantTypeBlock;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -25,32 +27,39 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
-public class BlockPlantTFC extends BlockBush implements IItemSize {
+public class BlockPlantTFC extends BlockBush implements IPlantTypeBlock, IItemSize {
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
 	/*
 	 * Time of day, used for rendering plants that bloom at different times
@@ -61,30 +70,35 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	 */
 	public final static PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
 	private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
-	private static final Map<PlantType, BlockPlantTFC> MAP = new HashMap<>();
 	/* Growth Stage of the plant, tied to the month of year */
 	public final PropertyInteger growthStageProperty;
-	protected final PlantType plant;
 	protected final BlockStateContainer blockState;
+	private final PlantType plantType;
+	private final PlantVariant plantVariant;
+	private final ResourceLocation modelLocation;
 
-	public BlockPlantTFC(PlantType plant) {
-		super(plant.getMaterial());
-		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+	public BlockPlantTFC(PlantVariant plantVariant, PlantType plantType) {
+		super(plantType.getMaterial());
 
-		plant.getOreDictName().ifPresent(name -> OreDictionaryHelper.register(this, name));
+		TFCStorage.addPlantBlock(plantVariant, plantType, this);
 
-		this.plant = plant;
-		this.growthStageProperty = PropertyInteger.create("stage", 0, plant.getNumStages());
+		this.plantType = plantType;
+		this.plantVariant = plantVariant;
+		this.modelLocation = new ResourceLocation(MOD_ID, "plants/" + plantType);
+		var blockRegistryName = String.format("plants/%s/%s", plantVariant, plantType);
+
+		this.setRegistryName(MOD_ID, blockRegistryName);
+		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+		this.setCreativeTab(CreativeTabsTFC.FLORA);
 		this.setTickRandomly(true);
-		setSoundType(SoundType.PLANT);
-		setHardness(0.0F);
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		this.setSoundType(SoundType.PLANT);
+		this.setHardness(0.0F);
+		this.growthStageProperty = PropertyInteger.create("stage", 0, plantType.getNumStages());
 		blockState = this.createPlantBlockState();
 		this.setDefaultState(this.blockState.getBaseState());
-	}
 
-	public static BlockPlantTFC get(PlantType plant) {
-		return MAP.get(plant);
+		plantType.getOreDictName().ifPresent(name -> OreDictionaryHelper.register(this, name));
+		Blocks.FIRE.setFireInfo(this, 5, 20);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -103,7 +117,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	@Override
 	@Nonnull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-		return state.withProperty(DAYPERIOD, getDayPeriod()).withProperty(growthStageProperty, plant.getStageForMonth());
+		return state.withProperty(DAYPERIOD, getDayPeriod()).withProperty(growthStageProperty, plantType.getStageForMonth());
 	}
 
 	@Override
@@ -116,7 +130,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 		if (!worldIn.isAreaLoaded(pos, 1)) return;
 		Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
 		int currentStage = state.getValue(growthStageProperty);
-		int expectedStage = plant.getStageForMonth(currentMonth);
+		int expectedStage = plantType.getStageForMonth(currentMonth);
 		int currentTime = state.getValue(DAYPERIOD);
 		int expectedTime = getDayPeriod();
 
@@ -137,14 +151,14 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod()).withProperty(growthStageProperty, plant.getStageForMonth()));
+		world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod()).withProperty(growthStageProperty, plantType.getStageForMonth()));
 		checkAndDropBlock(world, pos, state);
 	}
 
 	@Override
 	@Nonnull
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		if (!plant.getOreDictName().isPresent()) {
+		if (!plantType.getOreDictName().isPresent()) {
 			return Items.AIR;
 		}
 		return Item.getItemFromBlock(this);
@@ -155,7 +169,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 		// Entity X/Z motion is reduced by plants. Affine combination of age modifier and actual modifier
 		if (!(entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative())) {
 			double modifier = 0.25 * (4 - state.getValue(AGE));
-			modifier = (1 - modifier) * plant.getMovementMod() + modifier;
+			modifier = (1 - modifier) * plantType.getMovementMod() + modifier;
 			if (modifier < ConfigTFC.General.MISC.minimumPlantMovementModifier) {
 				modifier = ConfigTFC.General.MISC.minimumPlantMovementModifier;
 			}
@@ -166,9 +180,9 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
 	@Override
 	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-		if (!plant.getOreDictName().isPresent() &&
+		if (!plantType.getOreDictName().isPresent() &&
 				!worldIn.isRemote && (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1) &&
-				plant.getPlantType() != PlantVariant.SHORT_GRASS && plant.getPlantType() != PlantVariant.TALL_GRASS) {
+				plantType.getPlantVariant() != PlantVariant.SHORT_GRASS && plantType.getPlantVariant() != PlantVariant.TALL_GRASS) {
 			spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
 		}
 		super.harvestBlock(worldIn, player, pos, state, te, stack);
@@ -177,7 +191,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		if (!canBlockStay(worldIn, pos, state) && placer instanceof EntityPlayer) {
-			if (!((EntityPlayer) placer).isCreative() && !plant.getOreDictName().isPresent()) {
+			if (!((EntityPlayer) placer).isCreative() && !plantType.getOreDictName().isPresent()) {
 				spawnAsEntity(worldIn, pos, new ItemStack(this));
 			}
 		}
@@ -199,7 +213,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
 		ItemStack stack = player.getHeldItemMainhand();
 		IBlockState state = world.getBlockState(pos);
-		return switch (plant.getPlantType()) {
+		return switch (plantType.getPlantVariant()) {
 			case REED, REED_SEA, TALL_REED, TALL_REED_SEA, SHORT_GRASS, TALL_GRASS ->
 					(stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1);
 			default -> true;
@@ -207,7 +221,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	}
 
 	public PlantType getPlant() {
-		return plant;
+		return plantType;
 	}
 
 	@Nonnull
@@ -236,7 +250,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
 	@Override
 	protected boolean canSustainBush(IBlockState state) {
-		if (plant.getIsClayMarking()) return BlocksTFC.isClay(state) || isValidSoil(state);
+		if (plantType.getIsClayMarking()) return BlocksTFC.isClay(state) || isValidSoil(state);
 		else return isValidSoil(state);
 	}
 
@@ -244,7 +258,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isAreaLoaded(pos, 1)) return;
 
-		if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+		if (plantType.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plantType.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
 			int j = state.getValue(AGE);
 
 			if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
@@ -253,7 +267,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 				}
 				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
-		} else if (!plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+		} else if (!plantType.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plantType.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
 			int j = state.getValue(AGE);
 
 			if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -271,7 +285,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
 		IBlockState soil = worldIn.getBlockState(pos.down());
 		if (state.getBlock() == this) {
-			return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+			return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plantType.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plantType.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
 		}
 		return this.canSustainBush(soil);
 	}
@@ -287,7 +301,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	@Nullable
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		if (plant.getMovementMod() == 0.0D) {
+		if (plantType.getMovementMod() == 0.0D) {
 			return blockState.getBoundingBox(worldIn, pos);
 		} else {
 			return NULL_AABB;
@@ -296,8 +310,8 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
 	@Override
 	@Nonnull
-	public EnumPlantType getPlantType(net.minecraft.world.IBlockAccess world, BlockPos pos) {
-		return switch (plant.getPlantType()) {
+	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+		return switch (plantType.getPlantVariant()) {
 			case CACTUS, DESERT, DESERT_TALL_PLANT -> EnumPlantType.Desert;
 			case FLOATING, FLOATING_SEA -> EnumPlantType.Water;
 			case MUSHROOM -> EnumPlantType.Cave;
@@ -306,8 +320,8 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	}
 
 	@Nonnull
-	public EnumPlantTypeTFC getPlantTypeTFC() {
-		return plant.getEnumPlantTypeTFC();
+	public PlantType.PlantTypeEnum getPlantTypeTFC() {
+		return plantType.getEnumPlantTypeTFC();
 	}
 
 	@Nonnull
@@ -320,7 +334,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	}
 
 	private boolean isValidSoil(IBlockState state) {
-		return switch (plant.getPlantType()) {
+		return switch (plantType.getPlantVariant()) {
 			case CACTUS, DESERT, DESERT_TALL_PLANT -> BlocksTFC.isSand(state);
 			case DRY, DRY_TALL_PLANT -> BlocksTFC.isSand(state) || BlocksTFC.isDryGrass(state);
 			case REED, REED_SEA, TALL_REED, TALL_REED_SEA -> BlocksTFC.isSand(state) || BlocksTFC.isSoil(state);
@@ -329,5 +343,36 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 					BlocksTFC.isSand(state) || BlocksTFC.isSoilOrGravel(state);
 			default -> BlocksTFC.isSoil(state);
 		};
+	}
+
+	@Override
+	public PlantVariant getPlantVariant() {
+		return plantVariant;
+	}
+
+	@Override
+	public PlantType getPlantType() {
+		return plantType;
+	}
+
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlock(this);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation, "stage=" + plantType.getNumStages());
+			}
+		});
+
+		ModelLoader.setCustomModelResourceLocation(
+				Item.getItemFromBlock(this),
+				this.getMetaFromState(this.getBlockState().getBaseState()),
+				new ModelResourceLocation(modelLocation.toString()));
 	}
 }

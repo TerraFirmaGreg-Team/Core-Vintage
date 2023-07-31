@@ -1,16 +1,18 @@
 package net.dries007.tfc.api.types2.plant;
 
-import net.dries007.tfc.api.types2.plant.util.IPlantType;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types2.plant.util.IPlantTypeBlock;
 import net.dries007.tfc.objects.blocks.plants.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
 
-import javax.annotation.Nonnull;
-import java.util.function.Function;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.BiFunction;
 
-public enum PlantVariant implements IPlantType, IStringSerializable {
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public enum PlantVariant implements IStringSerializable {
 	STANDARD(BlockPlantTFC::new),
-	TALL_PLANT(BlockTallPlantTFC::new),
 	CREEPING(BlockCreepingPlantTFC::new),
 	HANGING(BlockHangingPlantTFC::new),
 	FLOATING(BlockFloatingWaterTFC::new),
@@ -19,6 +21,7 @@ public enum PlantVariant implements IPlantType, IStringSerializable {
 	DESERT_TALL_PLANT(BlockTallPlantTFC::new),
 	DRY(BlockPlantTFC::new),
 	DRY_TALL_PLANT(BlockTallPlantTFC::new),
+	TALL_PLANT(BlockTallPlantTFC::new),
 	CACTUS(BlockCactusTFC::new),
 	SHORT_GRASS(BlockShortGrassTFC::new),
 	TALL_GRASS(BlockTallGrassTFC::new),
@@ -35,18 +38,21 @@ public enum PlantVariant implements IPlantType, IStringSerializable {
 	EMERGENT_TALL_WATER_SEA(BlockEmergentTallWaterPlantTFC::new),
 	MUSHROOM(BlockMushroomTFC::new);
 
-	private final Function<PlantType, BlockPlantTFC> supplier;
+	public static final PlantVariant[] VALUES = PlantVariant.values();
+	private final BiFunction<PlantVariant, PlantType, IPlantTypeBlock> blockFactory;
 
-	PlantVariant(@Nonnull Function<PlantType, BlockPlantTFC> supplier) {
-		this.supplier = supplier;
+	PlantVariant(BiFunction<PlantVariant, PlantType, IPlantTypeBlock> blockFactory) {
+		this.blockFactory = blockFactory;
 	}
 
-	@Override
-	public BlockPlantTFC create(PlantType plantType) {
-		return supplier.apply(plantType);
+	public static PlantVariant valueOf(int i) {
+		return i >= 0 && i < VALUES.length ? VALUES[i] : STANDARD;
 	}
 
-	@Override
+	public IPlantTypeBlock create(PlantType plantType) {
+		return blockFactory.apply(this, plantType);
+	}
+
 	public Material getPlantMaterial() {
 		return switch (this) {
 			case CACTUS -> Material.CACTUS;

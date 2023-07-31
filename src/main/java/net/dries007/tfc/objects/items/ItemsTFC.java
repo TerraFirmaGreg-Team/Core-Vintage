@@ -17,6 +17,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.types2.plant.util.IPlantTypeBlock;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
@@ -208,6 +209,13 @@ public final class ItemsTFC {
 
 		for (ISoilTypeBlock soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
 			var itemBlock = soilTypeBlock.getItemBlock();
+			if (itemBlock != null) registerItemBlock(r, itemBlock);
+		}
+
+		//=== Plant ==================================================================================================//
+
+		for (IPlantTypeBlock plantTypeBlock : TFCStorage.PLANT_BLOCKS.values()) {
+			var itemBlock = plantTypeBlock.getItemBlock();
 			if (itemBlock != null) registerItemBlock(r, itemBlock);
 		}
 

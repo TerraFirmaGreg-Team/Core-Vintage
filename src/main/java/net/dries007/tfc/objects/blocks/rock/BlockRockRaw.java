@@ -193,7 +193,6 @@ public class BlockRockRaw extends Block implements IRockTypeBlock, IItemSize {
 			}
 		});
 
-
 		ModelLoader.setCustomModelResourceLocation(
 				Item.getItemFromBlock(this),
 				this.getMetaFromState(this.getBlockState().getBaseState()),

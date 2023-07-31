@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types2.plant.PlantType;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -21,6 +21,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockFlowerPotTFC extends Block {
@@ -28,12 +30,18 @@ public class BlockFlowerPotTFC extends Block {
 
 	private static final Map<PlantType, BlockFlowerPotTFC> MAP = new HashMap<>();
 
-	public final PlantType plant;
+	public final PlantType plantType;
 
-	public BlockFlowerPotTFC(PlantType plant) {
+	public BlockFlowerPotTFC(PlantType plantType) {
 		super(Material.CIRCUITS);
-		this.plant = plant;
-		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+		this.plantType = plantType;
+		if (MAP.put(plantType, this) != null) throw new IllegalStateException("There can only be one.");
+
+		var blockRegistryName = String.format("flowerpot/%s", plantType);
+
+		setCreativeTab(CreativeTabsTFC.FLORA);
+		setRegistryName(MOD_ID, blockRegistryName);
+		setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 	}
 
 	public static BlockFlowerPotTFC get(PlantType plant) {
@@ -67,7 +75,7 @@ public class BlockFlowerPotTFC extends Block {
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		drops.clear();
-		drops.add(new ItemStack(BlockPlantTFC.get(plant)));
+		//drops.add(new ItemStack(BlockPlantTFC.get(plant)));
 		drops.add(new ItemStack(Items.FLOWER_POT));
 	}
 

@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
@@ -15,21 +16,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
-	private static final Map<PlantType, BlockMushroomTFC> MAP = new HashMap<>();
 
-	public BlockMushroomTFC(PlantType plant) {
-		super(plant);
-		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
-	}
+	private final PlantType plantType;
+	private final PlantVariant plantVariant;
 
-	public static BlockMushroomTFC get(PlantType plant) {
-		return MAP.get(plant);
+	public BlockMushroomTFC(PlantVariant plantVariant, PlantType plantType) {
+		super(plantVariant, plantType);
+
+		this.plantType = plantType;
+		this.plantVariant = plantVariant;
 	}
 
 	@Override
@@ -46,7 +45,7 @@ public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isAreaLoaded(pos, 1)) return;
 
-		if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+		if (plantType.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plantType.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
 			int j = state.getValue(AGE);
 
 			if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
@@ -57,7 +56,7 @@ public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
 				}
 				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
-		} else if (!plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+		} else if (!plantType.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plantType.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
 			int j = state.getValue(AGE);
 
 			if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -77,7 +76,7 @@ public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
 		if (!worldIn.isOutsideBuildHeight(pos)) {
 			IBlockState soil = worldIn.getBlockState(pos.down());
-			return plant.isValidSunlight(worldIn.getLight(pos)) && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
+			return plantType.isValidSunlight(worldIn.getLight(pos)) && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
 		} else {
 			return false;
 		}

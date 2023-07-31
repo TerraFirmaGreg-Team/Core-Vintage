@@ -22,7 +22,6 @@ import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
@@ -159,6 +158,7 @@ public final class ClientRegisterEvents {
 
 		TFCStorage.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 		TFCStorage.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
+		TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
 
 		// Blocks with Ignored Properties
@@ -255,17 +255,19 @@ public final class ClientRegisterEvents {
 
 
 		blockColors.registerBlockColorHandler(grassColor, TFCStorage.SOIL_BLOCKS.values().stream().filter(x -> x.getSoilVariant().isGrass()).map(s -> (Block) s).toArray(Block[]::new));
+
+		blockColors.registerBlockColorHandler(grassColor, TFCStorage.PLANT_BLOCKS.values().stream().map(s -> (Block) s).toArray(Block[]::new));
 		// This is talking about tall grass vs actual grass blocks
 
-		blockColors.registerBlockColorHandler(grassColor, BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
-
-
+//		blockColors.registerBlockColorHandler(grassColor, BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
+//
+//
 		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllLeafBlocks().toArray(new Block[0]));
-		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllPlantBlocks().toArray(new BlockPlantTFC[0]));
-
+//		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllPlantBlocks().toArray(new BlockPlantTFC[0]));
+//
 		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFruitTreeLeavesBlocks().toArray(new Block[0]));
-
-		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFlowerPots().toArray(new Block[0]));
+//
+//		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFlowerPots().toArray(new Block[0]));
 
 		blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockSoilFarmland.TINT[state.getValue(BlockSoilFarmland.MOISTURE)],
 				TFCStorage.SOIL_BLOCKS.values().stream().filter(x -> x.getSoilVariant() == SoilVariant.FARMLAND).toArray(Block[]::new));
@@ -280,6 +282,10 @@ public final class ClientRegisterEvents {
 		itemColors.registerItemColorHandler((stack, tintIndex) ->
 						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
 				TFCStorage.SOIL_BLOCKS.values().stream().filter(x -> x.getSoilVariant().isGrass()).map(s -> (Block) s).toArray(Block[]::new));
+
+//		itemColors.registerItemColorHandler((stack, tintIndex) ->
+//						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+//				TFCStorage.PLANT_BLOCKS.values().stream().map(s -> (Block) s).toArray(Block[]::new));
 
 		itemColors.registerItemColorHandler((stack, tintIndex) ->
 						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
@@ -296,9 +302,9 @@ public final class ClientRegisterEvents {
 		itemColors.registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? EnumDyeColor.byDyeDamage(stack.getItemDamage()).getColorValue() : 0xFFFFFF,
 				ItemsTFC.UNFIRED_VESSEL_GLAZED, ItemsTFC.FIRED_VESSEL_GLAZED);
 
-		itemColors.registerItemColorHandler((stack, tintIndex) ->
-						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-				BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
+//		itemColors.registerItemColorHandler((stack, tintIndex) ->
+//						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+//				BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
 
 		itemColors.registerItemColorHandler((stack, tintIndex) -> {
 			IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);

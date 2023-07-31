@@ -1,74 +1,52 @@
 {
-  "multipart": [
-    {
-      "when": {
-        "stage": "0"
-      },
-      "apply": [
-        {
-          "model": "tfc:plants/butterfly_milkweed_0"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plants/butterfly_milkweed/0",
+          "particle": "tfc:blocks/plants/butterfly_milkweed/0"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "1"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/butterfly_milkweed_1"
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plants/butterfly_milkweed/1",
+          "particle": "tfc:blocks/plants/butterfly_milkweed/1"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "2"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/butterfly_milkweed_2"
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plants/butterfly_milkweed/2",
+          "particle": "tfc:blocks/plants/butterfly_milkweed/2"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "3"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/butterfly_milkweed_3"
+      "3": {
+        "textures": {
+          "cross": "tfc:blocks/plants/butterfly_milkweed/3",
+          "particle": "tfc:blocks/plants/butterfly_milkweed/3"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "4"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/butterfly_milkweed_4"
+      "4": {
+        "textures": {
+          "cross": "tfc:blocks/plants/butterfly_milkweed/4",
+          "particle": "tfc:blocks/plants/butterfly_milkweed/4"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "5"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/butterfly_milkweed_5"
+      "5": {
+        "textures": {
+          "cross": "tfc:blocks/plants/butterfly_milkweed/5",
+          "particle": "tfc:blocks/plants/butterfly_milkweed/5"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "6"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/butterfly_milkweed_6"
+      "6": {
+        "textures": {
+          "cross": "tfc:blocks/plants/butterfly_milkweed/6",
+          "particle": "tfc:blocks/plants/butterfly_milkweed/6"
         }
-      ]
+      }
     }
-  ]
+  }
 }

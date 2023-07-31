@@ -14,7 +14,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.types2.plant.PlantType;
-import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
@@ -27,7 +26,6 @@ import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.devices.*;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
-import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeat;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeatGrass;
@@ -284,43 +282,15 @@ public final class BlocksTFC {
 			}
 		}
 
-		//=== Plant ===================================================================================================//
+		//=== Plant ==================================================================================================//
 
-		{
+		for (PlantType plantType : PlantType.values()) {
+			var block = (Block) plantType.getPlantVariant().create(plantType);
 
-			Builder<BlockPlantTFC> b = ImmutableList.builder();
-			Builder<BlockFlowerPotTFC> pots = ImmutableList.builder();
-			for (PlantType plant : PlantType.values()) {
-				if (plant.getPlantType() != PlantVariant.SHORT_GRASS && plant.getPlantType() != PlantVariant.TALL_GRASS)
-					b.add(register(r, "plants/" + plant.getName(), plant.getPlantType().create(plant), FLORA));
-				if (plant.canBePotted())
-					pots.add(register(r, "flowerpot/" + plant.getName(), new BlockFlowerPotTFC(plant)));
-			}
-			allPlantBlocks = b.build();
-			allFlowerPots = pots.build();
-
-			for (BlockPlantTFC blockPlant : allPlantBlocks) {
-				if (blockPlant instanceof BlockFloatingWaterTFC) {
-					inventoryItemBlocks.add(new ItemBlockFloatingWaterTFC((BlockFloatingWaterTFC) blockPlant));
-				} else if (blockPlant.getPlant().canBePotted()) {
-					normalItemBlocks.add(new ItemBlockPlant(blockPlant, blockPlant.getPlant()));
-				} else {
-					normalItemBlocks.add(new ItemBlockTFC(blockPlant));
-				}
-			}
+			TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
+			r.register(block);
 		}
 
-		{
-			Builder<BlockPlantTFC> b = ImmutableList.builder();
-			for (PlantType plant : PlantType.values()) {
-				if (plant.getPlantType() == PlantVariant.SHORT_GRASS || plant.getPlantType() == PlantVariant.TALL_GRASS)
-					b.add(register(r, "plants/" + plant.getName(), plant.getPlantType().create(plant), FLORA));
-			}
-			allGrassBlocks = b.build();
-			for (BlockPlantTFC blockPlant : allGrassBlocks) {
-				normalItemBlocks.add(new ItemBlockTFC(blockPlant));
-			}
-		}
 
 		//=== Other ==================================================================================================//
 
@@ -397,7 +367,6 @@ public final class BlocksTFC {
 			Builder<BlockChestTFC> chests = ImmutableList.builder();
 			Builder<BlockToolRack> toolRacks = ImmutableList.builder();
 			Builder<ItemBlockBarrel> barrelItems = ImmutableList.builder();
-			Builder<BlockPlantTFC> plants = ImmutableList.builder();
 			Builder<BlockLoom> looms = ImmutableList.builder();
 			Builder<BlockSupport> supports = ImmutableList.builder();
 

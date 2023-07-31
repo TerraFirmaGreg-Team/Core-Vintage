@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -25,8 +26,6 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
@@ -34,27 +33,27 @@ import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 @ParametersAreNonnullByDefault
 public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowable, ITallPlant {
 	private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
-	private static final Map<PlantType, BlockTallWaterPlantTFC> MAP = new HashMap<>();
 
-	public BlockTallWaterPlantTFC(PlantType plant) {
-		super(plant);
-		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
-	}
+	private final PlantType plantType;
+	private final PlantVariant plantVariant;
 
-	public static BlockTallWaterPlantTFC get(PlantType plant) {
-		return BlockTallWaterPlantTFC.MAP.get(plant);
+	public BlockTallWaterPlantTFC(PlantVariant plantVariant, PlantType plantType) {
+		super(plantVariant, plantType);
+
+		this.plantType = plantType;
+		this.plantVariant = plantVariant;
 	}
 
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-		IBlockState water = plant.getWaterType();
+		IBlockState water = plantType.getWaterType();
 		int i;
 		//noinspection StatementWithEmptyBody
 		for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) ;
 		if (water == SALT_WATER)
-			return i < plant.getMaxHeight() && BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
+			return i < plantType.getMaxHeight() && BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
 		else
-			return i < plant.getMaxHeight() && BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
+			return i < plantType.getMaxHeight() && BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
 	}
 
 	@Override
@@ -65,13 +64,13 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		worldIn.setBlockState(pos.up(), this.getDefaultState());
-		IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(PART, getPlantPart(worldIn, pos));
+		IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plantType.getStageForMonth()).withProperty(PART, getPlantPart(worldIn, pos));
 		worldIn.setBlockState(pos, iblockstate);
 		iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
 	}
 
 	public void shrink(World worldIn, BlockPos pos) {
-		worldIn.setBlockState(pos, plant.getWaterType());
+		worldIn.setBlockState(pos, plantType.getWaterType());
 		worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
 	}
 
@@ -106,7 +105,7 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isAreaLoaded(pos, 1)) return;
 
-		if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+		if (plantType.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plantType.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
 			int j = state.getValue(AGE);
 
 			if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
@@ -117,7 +116,7 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
 				}
 				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
-		} else if (!plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+		} else if (!plantType.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plantType.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
 			int j = state.getValue(AGE);
 
 			if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -137,9 +136,9 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
 		IBlockState soil = worldIn.getBlockState(pos.down());
 
-		if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) return false;
+		if (worldIn.getBlockState(pos.down(plantType.getMaxHeight())).getBlock() == this) return false;
 		if (state.getBlock() == this) {
-			return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+			return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plantType.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plantType.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
 		}
 		return this.canSustainBush(soil);
 	}

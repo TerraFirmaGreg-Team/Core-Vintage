@@ -44,10 +44,7 @@ public interface ITallPlant {
 		LOWER,
 		SINGLE;
 
-		public String toString() {
-			return this.getName();
-		}
-
+		@Override
 		public String getName() {
 			return name().toLowerCase();
 		}

@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.IGrowable;
@@ -21,22 +22,20 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrowable {
 	private static final PropertyBool BOTTOM = PropertyBool.create("bottom");
-	private static final Map<PlantType, BlockHangingPlantTFC> MAP = new HashMap<>();
 
-	public BlockHangingPlantTFC(PlantType plant) {
-		super(plant);
-		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
-	}
+	private final PlantType plantType;
+	private final PlantVariant plantVariant;
 
-	public static BlockHangingPlantTFC get(PlantType plant) {
-		return BlockHangingPlantTFC.MAP.get(plant);
+	public BlockHangingPlantTFC(PlantVariant plantVariant, PlantType plantType) {
+		super(plantVariant, plantType);
+
+		this.plantType = plantType;
+		this.plantVariant = plantVariant;
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
 		int i;
 		//noinspection StatementWithEmptyBody
 		for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) ;
-		return i < plant.getMaxHeight() && worldIn.isAirBlock(pos.down()) && ((!material.isSolid() || material == Material.LEAVES)) && canBlockStay(worldIn, pos.down(), state);
+		return i < plantType.getMaxHeight() && worldIn.isAirBlock(pos.down()) && ((!material.isSolid() || material == Material.LEAVES)) && canBlockStay(worldIn, pos.down(), state);
 	}
 
 	@Override
@@ -58,7 +57,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		worldIn.setBlockState(pos.down(), this.getDefaultState());
-		IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(BOTTOM, false);
+		IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plantType.getStageForMonth()).withProperty(BOTTOM, false);
 		worldIn.setBlockState(pos, iblockstate);
 		iblockstate.neighborChanged(worldIn, pos.down(), this, pos);
 	}
@@ -92,7 +91,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
 			Material material = blockState.getMaterial();
 
 			if (material == Material.LEAVES || worldIn.getBlockState(pos.up()).getBlock() == this) {
-				return plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+				return plantType.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plantType.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
 			}
 		}
 		return false;
@@ -125,7 +124,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isAreaLoaded(pos, 1)) return;
 
-		if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+		if (plantType.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plantType.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
 			int j = state.getValue(AGE);
 
 			if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.down(), state, true)) {
@@ -138,7 +137,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
 				}
 				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
-		} else if (!plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+		} else if (!plantType.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plantType.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
 			int j = state.getValue(AGE);
 
 			if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -178,7 +177,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
 
 				if (rand.nextDouble() < 0.5D && worldIn.isAirBlock(sidePos) && worldIn.isAirBlock(sidePos.down())) {
 					worldIn.setBlockState(sidePos.down(), this.getDefaultState());
-					IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plant.getStageForMonth());
+					IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plantType.getStageForMonth());
 					worldIn.setBlockState(pos, iblockstate);
 					iblockstate.neighborChanged(worldIn, sidePos.down(), this, pos);
 					break;
@@ -207,7 +206,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
 
 			if (rand.nextDouble() < 0.01D && worldIn.isAirBlock(sidePos)) {
 				worldIn.setBlockState(sidePos, this.getDefaultState());
-				IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plant.getStageForMonth());
+				IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plantType.getStageForMonth());
 				worldIn.setBlockState(pos, iblockstate);
 				iblockstate.neighborChanged(worldIn, sidePos, this, pos);
 				break;

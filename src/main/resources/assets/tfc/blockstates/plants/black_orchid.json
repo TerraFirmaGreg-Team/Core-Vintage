@@ -1,34 +1,28 @@
 {
-  "multipart": [
-    {
-      "when": {
-        "stage": "0"
-      },
-      "apply": [
-        {
-          "model": "tfc:plants/black_orchid_0"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plants/black_orchid/0",
+          "particle": "tfc:blocks/plants/black_orchid/0"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "1"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/black_orchid_1"
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plants/black_orchid/1",
+          "particle": "tfc:blocks/plants/black_orchid/1"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "2"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/black_orchid_2"
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plants/black_orchid/2",
+          "particle": "tfc:blocks/plants/black_orchid/2"
         }
-      ]
+      }
     }
-  ]
+  }
 }

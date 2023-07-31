@@ -1,6 +1,9 @@
 package net.dries007.tfc.api.registries;
 
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.PlantVariant;
+import net.dries007.tfc.api.types2.plant.util.IPlantTypeBlock;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
@@ -15,6 +18,7 @@ import net.dries007.tfc.objects.items.ceramics.ItemUnfiredMold;
 import net.minecraft.block.Block;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -25,9 +29,10 @@ public final class TFCStorage {
 
 	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockTypeBlock> ROCK_BLOCKS = new LinkedHashMap<>();
 	public static final Map<Pair<SoilVariant, SoilType>, ISoilTypeBlock> SOIL_BLOCKS = new LinkedHashMap<>();
+	public static final Map<Pair<PlantVariant, PlantType>, IPlantTypeBlock> PLANT_BLOCKS = new LinkedHashMap<>();
 
-	public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new LinkedHashMap<>();
-	public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new LinkedHashMap<>();
+	public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
+	public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
 
 	// Add more, barrels, planks, fences and etc
 	public static void addRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull RockVariant blockVariant, @Nonnull RockType rockType, @Nonnull IRockTypeBlock rockTypeBlock) {
@@ -52,5 +57,17 @@ public final class TFCStorage {
 		var block = (Block) SOIL_BLOCKS.get(new Pair<>(soilVariant, soilType));
 		if (block != null) return block;
 		throw new RuntimeException(String.format("Block is null: %s, %s", soilVariant, soilType));
+	}
+
+	public static void addPlantBlock(@Nonnull PlantVariant plantVariant, @Nonnull PlantType plantType, @Nonnull IPlantTypeBlock plantTypeBlock) {
+		if (PLANT_BLOCKS.put(new Pair<>(plantVariant, plantType), plantTypeBlock) != null)
+			throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", plantVariant, plantType));
+	}
+
+	@Nonnull
+	public static Block getPlantBlock(@Nonnull PlantVariant plantVariant, @Nonnull PlantType plantType) {
+		var block = (Block) PLANT_BLOCKS.get(new Pair<>(plantVariant, plantType));
+		if (block != null) return block;
+		throw new RuntimeException(String.format("Block is null: %s, %s", plantVariant, plantType));
 	}
 }

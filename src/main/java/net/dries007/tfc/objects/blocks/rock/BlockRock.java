@@ -59,7 +59,7 @@ public class BlockRock extends Block implements IRockTypeBlock, IItemSize {
 		this.rockType = rockType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
-		String blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
+		var blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
 		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(getFinalHardness());

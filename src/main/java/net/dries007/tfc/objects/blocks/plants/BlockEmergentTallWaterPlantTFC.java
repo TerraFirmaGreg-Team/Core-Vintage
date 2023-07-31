@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.minecraft.block.state.IBlockState;
@@ -15,34 +16,32 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
 @ParametersAreNonnullByDefault
 public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC implements ITallPlant {
-	private static final Map<PlantType, BlockEmergentTallWaterPlantTFC> MAP = new HashMap<>();
 
-	public BlockEmergentTallWaterPlantTFC(PlantType plant) {
-		super(plant);
-		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
-	}
+	private final PlantType plantType;
+	private final PlantVariant plantVariant;
 
-	public static BlockEmergentTallWaterPlantTFC get(PlantType plant) {
-		return BlockEmergentTallWaterPlantTFC.MAP.get(plant);
+	public BlockEmergentTallWaterPlantTFC(PlantVariant plantVariant, PlantType plantType) {
+		super(plantVariant, plantType);
+
+		this.plantType = plantType;
+		this.plantVariant = plantVariant;
 	}
 
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-		IBlockState water = plant.getWaterType();
+		IBlockState water = plantType.getWaterType();
 		int i;
 		//noinspection StatementWithEmptyBody
 		for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) ;
 		if (water == SALT_WATER)
-			return i < plant.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up()))) && canBlockStay(worldIn, pos.up(), state);
+			return i < plantType.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up()))) && canBlockStay(worldIn, pos.up(), state);
 		else
-			return i < plant.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up()))) && canBlockStay(worldIn, pos.up(), state);
+			return i < plantType.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up()))) && canBlockStay(worldIn, pos.up(), state);
 	}
 
 	public void shrink(World worldIn, BlockPos pos) {
@@ -53,7 +52,7 @@ public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC imple
 			}
 		}
 
-		if (flag) worldIn.setBlockState(pos, plant.getWaterType());
+		if (flag) worldIn.setBlockState(pos, plantType.getWaterType());
 		else worldIn.setBlockToAir(pos);
 		worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
 	}
@@ -61,7 +60,7 @@ public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC imple
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		IBlockState soil = worldIn.getBlockState(pos.down());
-		if (plant.getWaterType() == SALT_WATER)
+		if (plantType.getWaterType() == SALT_WATER)
 			return (soil.getBlock() == this || BlocksTFC.isSaltWater(worldIn.getBlockState(pos))) && this.canSustainBush(soil);
 		return (soil.getBlock() == this || BlocksTFC.isFreshWater(worldIn.getBlockState(pos))) && this.canSustainBush(soil);
 	}
@@ -77,7 +76,7 @@ public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC imple
 			}
 		}
 
-		if (flag) return world.setBlockState(pos, plant.getWaterType(), world.isRemote ? 11 : 3);
+		if (flag) return world.setBlockState(pos, plantType.getWaterType(), world.isRemote ? 11 : 3);
 		else return world.setBlockState(pos, net.minecraft.init.Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
 	}
 
@@ -92,7 +91,7 @@ public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC imple
 			}
 
 			this.dropBlockAsItem(worldIn, pos, state, 0);
-			if (flag) worldIn.setBlockState(pos, plant.getWaterType());
+			if (flag) worldIn.setBlockState(pos, plantType.getWaterType());
 			else worldIn.setBlockToAir(pos);
 		}
 	}

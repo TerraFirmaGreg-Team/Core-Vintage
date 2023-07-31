@@ -68,7 +68,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
 		wildCropsGen = new WorldGenWildCrops();
 
 		for (PlantType plant : PlantType.values()) {
-			switch (plant.getPlantType()) {
+			switch (plant.getPlantVariant()) {
 				case TALL_PLANT -> tallCount++;
 				case CREEPING -> creepingCount++;
 				case HANGING -> hangingCount++;
@@ -108,7 +108,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
 
 		if (TerrainGen.decorate(world, rng, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.SHROOM)) {
 			for (PlantType plant : PlantType.values()) {
-				if (plant.getPlantType() == PlantVariant.MUSHROOM && plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
+				if (plant.getPlantVariant() == PlantVariant.MUSHROOM && plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
 					plantGen.setGeneratedPlant(plant);
 
 					for (float i = rng.nextInt(Math.round(mushroomCount / floraDiversity)); i < (1 + floraDensity) * 5; i++) {
@@ -121,7 +121,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
 
 		if (TerrainGen.decorate(world, rng, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.CACTUS)) {
 			for (PlantType plant : PlantType.values()) {
-				if (plant.getPlantType() == PlantVariant.CACTUS && plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
+				if (plant.getPlantVariant() == PlantVariant.CACTUS && plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
 					plantGen.setGeneratedPlant(plant);
 
 					for (int i = rng.nextInt(Math.round((cactusCount + 32) / floraDiversity)); i < (1 + floraDensity) * 3; i++) {
@@ -137,7 +137,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
 			for (PlantType plant : PlantType.values()) {
 				if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
 					plantGen.setGeneratedPlant(plant);
-					switch (plant.getPlantType()) {
+					switch (plant.getPlantVariant()) {
 						case FLOATING -> {
 							for (int i = rng.nextInt(Math.round(floatingCount / floraDiversity)); i < floraDensity * lilyPadPerChunk; i++) {
 								BlockPos blockPos = world.getPrecipitationHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
@@ -159,7 +159,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
 			for (PlantType plant : PlantType.values()) {
 				if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
 					plantGen.setGeneratedPlant(plant);
-					switch (plant.getPlantType()) {
+					switch (plant.getPlantVariant()) {
 						case REED, TALL_REED -> {
 							for (int i = rng.nextInt(Math.round(reedCount / floraDiversity)); i < (1 + floraDensity) * 5; i++) {
 								BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
@@ -181,7 +181,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
 			for (PlantType plant : PlantType.values()) {
 				if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
 					plantGen.setGeneratedPlant(plant);
-					switch (plant.getPlantType()) {
+					switch (plant.getPlantVariant()) {
 						case WATER, TALL_WATER, EMERGENT_TALL_WATER -> {
 							for (int i = rng.nextInt(Math.round(waterCount / floraDiversity)); i < floraDensity * waterPlantsPerChunk; i++) {
 								BlockPos blockPos = world.getPrecipitationHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
@@ -233,7 +233,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
 			for (PlantType plant : PlantType.values()) {
 				if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
 					plantGen.setGeneratedPlant(plant);
-					switch (plant.getPlantType()) {
+					switch (plant.getPlantVariant()) {
 						case DESERT, DESERT_TALL_PLANT -> {
 							for (float i = rng.nextInt(Math.round((desertCount + 16) / floraDiversity)); i < (1 + floraDensity) * 5; i++) {
 								BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
@@ -255,7 +255,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
 			for (PlantType plant : PlantType.values()) {
 				if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
 					plantGen.setGeneratedPlant(plant);
-					switch (plant.getPlantType()) {
+					switch (plant.getPlantVariant()) {
 						case SHORT_GRASS -> {
 							for (int i = rng.nextInt(Math.round(grassCount / floraDiversity)); i < (3 + floraDensity) * 5; i++) {
 								BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));

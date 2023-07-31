@@ -10,7 +10,6 @@ package net.dries007.tfc.objects.blocks.soil;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.plant.PlantType;
-import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
@@ -48,6 +47,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.plant.PlantVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
 
 @MethodsReturnNonnullByDefault
@@ -153,15 +153,15 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 				}
 			}
 			// Генерируем короткую траву на верхнем блоке с определенной вероятностью
-			for (PlantType plant : PlantType.values()) {
-				if (plant.getPlantType() == PlantVariant.SHORT_GRASS && rand.nextFloat() < 0.5f) {
+			for (PlantType plantType : PlantType.values()) {
+				if (plantType.getPlantVariant() == SHORT_GRASS && rand.nextFloat() < 0.5f) {
 					float temp = ClimateTFC.getActualTemp(world, upPos);
-					BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
+					var plantBlock = (BlockShortGrassTFC) TFCStorage.getPlantBlock(plantType.getPlantVariant(), plantType);
 
 					// Проверяем условия для генерации короткой травы
 					if (world.isAirBlock(upPos) &&
-							plant.isValidLocation(temp, ChunkDataTFC.getRainfall(world, upPos), Math.subtractExact(world.getLightFor(EnumSkyBlock.SKY, upPos), world.getSkylightSubtracted())) &&
-							plant.isValidGrowthTemp(temp) &&
+							plantType.isValidLocation(temp, ChunkDataTFC.getRainfall(world, upPos), Math.subtractExact(world.getLightFor(EnumSkyBlock.SKY, upPos), world.getSkylightSubtracted())) &&
+							plantType.isValidGrowthTemp(temp) &&
 							rand.nextDouble() < plantBlock.getGrowthRate(world, upPos)) {
 						world.setBlockState(upPos, plantBlock.getDefaultState());
 					}

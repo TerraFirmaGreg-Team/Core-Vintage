@@ -11,6 +11,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
@@ -154,7 +155,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 			}
 			// Генерируем короткую траву на верхнем блоке с определенной вероятностью
 			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-				if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS && rand.nextFloat() < 0.5f) {
+				if (plant.getPlantType() == PlantType.SHORT_GRASS && rand.nextFloat() < 0.5f) {
 					float temp = ClimateTFC.getActualTemp(world, upPos);
 					BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
 

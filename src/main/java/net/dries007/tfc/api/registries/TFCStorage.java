@@ -15,7 +15,7 @@ import net.dries007.tfc.objects.items.ceramics.ItemUnfiredMold;
 import net.minecraft.block.Block;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -23,11 +23,11 @@ import java.util.Map;
  */
 public final class TFCStorage {
 
-	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockTypeBlock> ROCK_BLOCKS = new HashMap<>();
-	public static final Map<Pair<SoilVariant, SoilType>, ISoilTypeBlock> SOIL_BLOCKS = new HashMap<>();
+	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockTypeBlock> ROCK_BLOCKS = new LinkedHashMap<>();
+	public static final Map<Pair<SoilVariant, SoilType>, ISoilTypeBlock> SOIL_BLOCKS = new LinkedHashMap<>();
 
-	public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
-	public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
+	public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new LinkedHashMap<>();
+	public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new LinkedHashMap<>();
 
 	// Add more, barrels, planks, fences and etc
 	public static void addRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull RockVariant blockVariant, @Nonnull RockType rockType, @Nonnull IRockTypeBlock rockTypeBlock) {

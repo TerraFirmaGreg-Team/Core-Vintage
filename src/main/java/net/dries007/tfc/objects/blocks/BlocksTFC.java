@@ -15,12 +15,13 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
+import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.agriculture.*;
@@ -594,7 +595,7 @@ public final class BlocksTFC {
 			Builder<BlockPlantTFC> b = ImmutableList.builder();
 			Builder<BlockFlowerPotTFC> pots = ImmutableList.builder();
 			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-				if (plant.getPlantType() != Plant.PlantType.SHORT_GRASS && plant.getPlantType() != Plant.PlantType.TALL_GRASS)
+				if (plant.getPlantType() != PlantType.SHORT_GRASS && plant.getPlantType() != PlantType.TALL_GRASS)
 					b.add(register(r, "plants/" + plant.getRegistryName().getPath(), plant.getPlantType().create(plant), FLORA));
 				if (plant.canBePotted())
 					pots.add(register(r, "flowerpot/" + plant.getRegistryName().getPath(), new BlockFlowerPotTFC(plant)));
@@ -616,7 +617,7 @@ public final class BlocksTFC {
 		{
 			Builder<BlockPlantTFC> b = ImmutableList.builder();
 			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-				if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS || plant.getPlantType() == Plant.PlantType.TALL_GRASS)
+				if (plant.getPlantType() == PlantType.SHORT_GRASS || plant.getPlantType() == PlantType.TALL_GRASS)
 					b.add(register(r, "plants/" + plant.getRegistryName().getPath(), plant.getPlantType().create(plant), FLORA));
 			}
 			allGrassBlocks = b.build();

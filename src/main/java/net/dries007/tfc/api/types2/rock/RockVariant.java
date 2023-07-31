@@ -21,7 +21,7 @@ public enum RockVariant implements IStringSerializable {
 	BRICK(BlockRock::new, 6.5f, null),
 	CRACKED(BlockRock::new, 6.5f, null),
 	CHISELED(BlockRock::new, 6.5f, null),
-	SMOOTH(BlockRockSmooth::new, 6.5f, COLLAPSABLE),
+	SMOOTH(BlockRock::new, 6.5f, COLLAPSABLE),
 	GRAVEL(BlockRockFallable::new, 2.0f, VERTICAL_AND_HORIZONTAL),
 	SAND(BlockRockFallable::new, 0.5f, VERTICAL_AND_HORIZONTAL),
 	ANVIL(BlockRockAnvil::new, 2.0f, COLLAPSABLE),

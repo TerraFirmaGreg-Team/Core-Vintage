@@ -10,6 +10,8 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.EnumPlantTypeTFC;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -60,11 +62,6 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	public final static PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
 	private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 	private static final Map<Plant, BlockPlantTFC> MAP = new HashMap<>();
-
-	public static BlockPlantTFC get(Plant plant) {
-		return MAP.get(plant);
-	}
-
 	/* Growth Stage of the plant, tied to the month of year */
 	public final PropertyInteger growthStageProperty;
 	protected final Plant plant;
@@ -84,6 +81,10 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 		Blocks.FIRE.setFireInfo(this, 5, 20);
 		blockState = this.createPlantBlockState();
 		this.setDefaultState(this.blockState.getBaseState());
+	}
+
+	public static BlockPlantTFC get(Plant plant) {
+		return MAP.get(plant);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -165,7 +166,9 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
 	@Override
 	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-		if (!plant.getOreDictName().isPresent() && !worldIn.isRemote && (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1) && plant.getPlantType() != Plant.PlantType.SHORT_GRASS && plant.getPlantType() != Plant.PlantType.TALL_GRASS) {
+		if (!plant.getOreDictName().isPresent() &&
+				!worldIn.isRemote && (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1) &&
+				plant.getPlantType() != PlantType.SHORT_GRASS && plant.getPlantType() != PlantType.TALL_GRASS) {
 			spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
 		}
 		super.harvestBlock(worldIn, player, pos, state, te, stack);
@@ -316,7 +319,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 	}
 
 	@Nonnull
-	public Plant.EnumPlantTypeTFC getPlantTypeTFC() {
+	public EnumPlantTypeTFC getPlantTypeTFC() {
 		return plant.getEnumPlantTypeTFC();
 	}
 

@@ -5,7 +5,9 @@
 
 package net.dries007.tfc.api.types;
 
-import net.dries007.tfc.objects.blocks.plants.*;
+import net.dries007.tfc.api.types2.plant.EnumPlantTypeTFC;
+import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.PlantValidity;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.block.material.Material;
@@ -19,7 +21,6 @@ import javax.annotation.Nonnull;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Random;
-import java.util.function.Function;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
@@ -247,31 +248,30 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 
 	public final EnumPlantTypeTFC getEnumPlantTypeTFC() {
 		switch (plantType) {
-			case DESERT:
-			case DESERT_TALL_PLANT:
+			case DESERT, DESERT_TALL_PLANT -> {
 				if (isClayMarking) return EnumPlantTypeTFC.DESERT_CLAY;
 				else return EnumPlantTypeTFC.NONE;
-			case DRY:
-			case DRY_TALL_PLANT:
+			}
+			case DRY, DRY_TALL_PLANT -> {
 				if (isClayMarking) return EnumPlantTypeTFC.DRY_CLAY;
 				else return EnumPlantTypeTFC.DRY;
-			case REED:
-			case TALL_REED:
+			}
+			case REED, TALL_REED -> {
 				return EnumPlantTypeTFC.FRESH_BEACH;
-			case REED_SEA:
-			case TALL_REED_SEA:
+			}
+			case REED_SEA, TALL_REED_SEA -> {
 				return EnumPlantTypeTFC.SALT_BEACH;
-			case WATER:
-			case TALL_WATER:
-			case EMERGENT_TALL_WATER:
+			}
+			case WATER, TALL_WATER, EMERGENT_TALL_WATER -> {
 				return EnumPlantTypeTFC.FRESH_WATER;
-			case WATER_SEA:
-			case TALL_WATER_SEA:
-			case EMERGENT_TALL_WATER_SEA:
+			}
+			case WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA -> {
 				return EnumPlantTypeTFC.SALT_WATER;
-			default:
+			}
+			default -> {
 				if (isClayMarking) return EnumPlantTypeTFC.CLAY;
 				else return EnumPlantTypeTFC.NONE;
+			}
 		}
 	}
 
@@ -299,88 +299,5 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 		return Float.sum(minTemp, maxTemp) / 2f;
 	}
 
-	public enum PlantValidity {
-		COLD,
-		HOT,
-		DRY,
-		WET,
-		VALID
-	}
-
-	// todo: switch usages to interface from enum, it will make custom plants by addons easier down the line. It's also a better design
-	public enum PlantType implements IPlantType {
-		STANDARD(BlockPlantTFC::new),
-		TALL_PLANT(BlockTallPlantTFC::new),
-		CREEPING(BlockCreepingPlantTFC::new),
-		HANGING(BlockHangingPlantTFC::new),
-		FLOATING(BlockFloatingWaterTFC::new),
-		FLOATING_SEA(BlockFloatingWaterTFC::new),
-		DESERT(BlockPlantTFC::new),
-		DESERT_TALL_PLANT(BlockTallPlantTFC::new),
-		DRY(BlockPlantTFC::new),
-		DRY_TALL_PLANT(BlockTallPlantTFC::new),
-		CACTUS(BlockCactusTFC::new),
-		SHORT_GRASS(BlockShortGrassTFC::new),
-		TALL_GRASS(BlockTallGrassTFC::new),
-		EPIPHYTE(BlockEpiphyteTFC::new),
-		REED(BlockPlantTFC::new),
-		REED_SEA(BlockPlantTFC::new),
-		TALL_REED(BlockTallPlantTFC::new),
-		TALL_REED_SEA(BlockTallPlantTFC::new),
-		WATER(BlockWaterPlantTFC::new),
-		WATER_SEA(BlockWaterPlantTFC::new),
-		TALL_WATER(BlockTallWaterPlantTFC::new),
-		TALL_WATER_SEA(BlockTallWaterPlantTFC::new),
-		EMERGENT_TALL_WATER(BlockEmergentTallWaterPlantTFC::new),
-		EMERGENT_TALL_WATER_SEA(BlockEmergentTallWaterPlantTFC::new),
-		MUSHROOM(BlockMushroomTFC::new);
-
-		private final Function<Plant, BlockPlantTFC> supplier;
-
-		PlantType(@Nonnull Function<Plant, BlockPlantTFC> supplier) {
-			this.supplier = supplier;
-		}
-
-		@Override
-		public BlockPlantTFC create(Plant plant) {
-			return supplier.apply(plant);
-		}
-
-		@Override
-		public Material getPlantMaterial() {
-			switch (this) {
-				case CACTUS:
-					return Material.CACTUS;
-				case HANGING:
-				case SHORT_GRASS:
-				case TALL_GRASS:
-					return Material.VINE;
-				case WATER:
-				case WATER_SEA:
-				case TALL_WATER:
-				case TALL_WATER_SEA:
-				case EMERGENT_TALL_WATER:
-				case EMERGENT_TALL_WATER_SEA:
-					return Material.CORAL;
-				default:
-					return Material.PLANTS;
-			}
-		}
-	}
-
-	public enum EnumPlantTypeTFC {
-		CLAY,
-		DESERT_CLAY,
-		DRY_CLAY,
-		DRY,
-		FRESH_BEACH,
-		SALT_BEACH,
-		FRESH_WATER,
-		SALT_WATER,
-		NONE;
-
-		public String toString() {
-			return name();
-		}
-	}
+	
 }

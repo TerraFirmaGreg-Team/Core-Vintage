@@ -100,7 +100,7 @@ public class BlockRockAnvil extends Block implements IRockTypeBlock, IItemSize {
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return new ItemBlock(this);
+		return null;
 	}
 
 	@Nonnull

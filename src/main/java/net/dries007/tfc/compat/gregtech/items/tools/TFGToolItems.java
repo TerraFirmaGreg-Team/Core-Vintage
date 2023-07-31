@@ -4,7 +4,7 @@ import gregtech.api.GTValues;
 import gregtech.api.items.toolitem.IGTTool;
 import gregtech.api.items.toolitem.ItemGTTool;
 import gregtech.common.items.ToolItems;
-import gregtech.core.sound.GTSoundEvents;
+import net.dries007.tfc.compat.gregtech.items.tools.behaviors.ChiselBehavior;
 
 public class TFGToolItems {
     public static IGTTool TONGS;
@@ -17,21 +17,19 @@ public class TFGToolItems {
         TUYERE = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "tuyere")
                 .toolStats(b -> b.crafting().cannotAttack().attackSpeed(-2.4F))
                 .oreDict("craftingToolTuyere")
-                .sound(GTSoundEvents.SOFT_MALLET_TOOL) // todo
                 .toolClasses("tuyere"));
+
+        CHISEL = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "chisel")
+                .toolStats(b -> b.crafting().cannotAttack().attackSpeed(-2.4F).behaviors(ChiselBehavior.INSTANCE))
+                .oreDict("craftingToolChisel")
+                .toolClasses("chisel"));
+
         /*
         TONGS = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "tongs")
                 .toolStats(b -> b.crafting().cannotAttack().attackSpeed(-2.4F))
                 .oreDict("craftingToolTongs")
                 .sound(GTSoundEvents.SOFT_MALLET_TOOL) // todo
                 .toolClasses("tongs"));*/
-
-        /*
-        CHISEL = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "chisel")
-                .toolStats(b -> b.crafting().cannotAttack().attackSpeed(-2.4F).behaviors(InWorldChiselingBehavior.INSTANCE))
-                .oreDict("craftingToolChisel")
-                .sound(GTSoundEvents.SOFT_MALLET_TOOL) // todo
-                .toolClasses("chisel"));*/
 
         /*
         PROPICK = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "propick")

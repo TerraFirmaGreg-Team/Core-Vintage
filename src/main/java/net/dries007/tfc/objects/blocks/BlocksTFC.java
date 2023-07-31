@@ -272,11 +272,6 @@ public final class BlocksTFC {
 				}
 			}
 		}
-		for (IRockTypeBlock stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
-			var itemBlock = stoneTypeBlock.getItemBlock();
-			if (itemBlock != null)
-				normalItemBlocks.add(itemBlock);
-		}
 
 		//=== Soil ===================================================================================================//
 
@@ -287,11 +282,6 @@ public final class BlocksTFC {
 				TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
 				r.register(block);
 			}
-		}
-		for (ISoilTypeBlock soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
-			var itemBlock = soilTypeBlock.getItemBlock();
-			if (itemBlock != null)
-				normalItemBlocks.add(itemBlock);
 		}
 
 		//=== Other ==================================================================================================//

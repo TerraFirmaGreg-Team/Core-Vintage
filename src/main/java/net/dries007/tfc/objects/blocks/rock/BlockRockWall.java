@@ -132,8 +132,8 @@ public class BlockRockWall extends BlockWall implements IRockTypeBlock {
 						return new ModelResourceLocation(modelLocation,
 								"east=" + state.getValue(EAST) + "," +
 										"north=" + state.getValue(NORTH) + "," +
-										"south=" + state.getValue(SOUTH) + "," +
 										"rocktype=" + rockType.getName() + "," +
+										"south=" + state.getValue(SOUTH) + "," +
 										"up=" + state.getValue(UP) + "," +
 										"west=" + state.getValue(WEST));
 					}

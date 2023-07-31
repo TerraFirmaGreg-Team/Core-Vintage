@@ -15,8 +15,11 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.objects.Gem;
@@ -193,6 +196,23 @@ public final class ItemsTFC {
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> r = event.getRegistry();
 		Builder<Item> simpleItems = ImmutableList.builder();
+
+		//=== Rock ===================================================================================================//
+
+		for (IRockTypeBlock stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
+			var itemBlock = stoneTypeBlock.getItemBlock();
+			if (itemBlock != null) registerItemBlock(r, itemBlock);
+		}
+
+		//=== Soil ===================================================================================================//
+
+		for (ISoilTypeBlock soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
+			var itemBlock = soilTypeBlock.getItemBlock();
+			if (itemBlock != null) registerItemBlock(r, itemBlock);
+		}
+
+		//=== Other ==================================================================================================//
+
 
 		simpleItems.add(register(r, "wand", new ItemDebug(), MISC));
 		simpleItems.add(register(r, "mortar", new ItemMisc(Size.TINY, Weight.VERY_LIGHT, "mortar"), MISC));

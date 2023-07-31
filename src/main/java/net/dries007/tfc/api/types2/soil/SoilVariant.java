@@ -82,6 +82,14 @@ public enum SoilVariant implements IStringSerializable {
 		throw new IllegalArgumentException("You cannot get grass from |" + spreader.getName() + "| types.");
 	}
 
+	public boolean isGrass() {
+		switch (this) {
+			case GRASS, DRY_GRASS, CLAY_GRASS -> {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Возвращает имя перечисления в нижнем регистре.

@@ -252,7 +252,7 @@ public final class ClientRegisterEvents {
 
         blockColors.registerBlockColorHandler(grassColor, BlocksTFC.PEAT_GRASS);
 
-        blockColors.registerBlockColorHandler(grassColor, TFCStorage.SOIL_BLOCKS.values().stream().filter(x -> x.getSoilVariant() == SoilVariant.GRASS).map(s -> (Block) s).toArray(Block[]::new));
+        blockColors.registerBlockColorHandler(grassColor, TFCStorage.SOIL_BLOCKS.values().stream().filter(x -> x.getSoilVariant().isGrass()).map(s -> (Block) s).toArray(Block[]::new));
         // This is talking about tall grass vs actual grass blocks
         blockColors.registerBlockColorHandler(grassColor, BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
 
@@ -275,7 +275,7 @@ public final class ClientRegisterEvents {
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
                         event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-                TFCStorage.SOIL_BLOCKS.values().stream().filter(x -> x.getSoilVariant() == SoilVariant.GRASS).map(s -> (Block) s).toArray(Block[]::new));
+                TFCStorage.SOIL_BLOCKS.values().stream().filter(x -> x.getSoilVariant().isGrass()).map(s -> (Block) s).toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
                         event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),

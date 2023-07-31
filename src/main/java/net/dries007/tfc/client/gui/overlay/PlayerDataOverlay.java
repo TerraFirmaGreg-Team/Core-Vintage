@@ -10,6 +10,8 @@ import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
+import net.dries007.tfc.compat.gregtech.items.tools.behaviors.ChiselBehavior;
 import net.dries007.tfc.util.config.HealthDisplayFormat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -218,18 +220,14 @@ public final class PlayerDataOverlay
         int itemModeX = mid + 100;
 
         // draw chisel mode if main hand item is tfc chisel
-        /*
-        if (player.getHeldItemMainhand().getItem() instanceof ItemMetalChisel)
-        {
+
+        if (player.getHeldItemMainhand().getItem() == TFGToolItems.CHISEL.get()) {
             int iconU = 0;
 
-            if (ItemMetalChisel.hasHammerForChisel(player))
-            {
+            if (ChiselBehavior.hasHammerForChisel(player)) {
                 IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-                if (capability != null)
-                {
-                    switch (capability.getChiselMode())
-                    {
+                if (capability != null) {
+                    switch (capability.getChiselMode()) {
                         case SMOOTH:
                             iconU = 0;
                             break;
@@ -242,8 +240,7 @@ public final class PlayerDataOverlay
                     }
                 }
             }
-            else
-            {
+            else {
                 // todo: display missing hammer art
                 iconU = 60;
             }
@@ -253,7 +250,7 @@ public final class PlayerDataOverlay
             mc.renderEngine.bindTexture(ICONS);
             drawTexturedModalRect(itemModeX, itemModeY, iconU, 58, 20, 20);
             mc.renderEngine.bindTexture(MC_ICONS);
-        }*/
+        }
     }
 
     @SubscribeEvent

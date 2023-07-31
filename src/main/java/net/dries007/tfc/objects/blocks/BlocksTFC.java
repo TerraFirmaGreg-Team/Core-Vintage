@@ -12,10 +12,9 @@ import gregtech.api.unification.material.Materials;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
@@ -26,11 +25,12 @@ import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.devices.*;
-import net.dries007.tfc.objects.blocks.metal.*;
+import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.soil.BlockPeat;
-import net.dries007.tfc.objects.blocks.soil.BlockPeatGrass;
+import net.dries007.tfc.objects.blocks.soil.BlockSoilPeat;
+import net.dries007.tfc.objects.blocks.soil.BlockSoilPeatGrass;
 import net.dries007.tfc.objects.blocks.wood.*;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
@@ -82,8 +82,8 @@ public final class BlocksTFC {
 	public static final BlockDecorativeStone ALABASTER_RAW_PLAIN = getNull();
 
 	public static final BlockDebug DEBUG = getNull();
-	public static final BlockPeat PEAT = getNull();
-	public static final BlockPeat PEAT_GRASS = getNull();
+	public static final BlockSoilPeat PEAT = getNull();
+	public static final BlockSoilPeat PEAT_GRASS = getNull();
 	public static final BlockFirePit FIREPIT = getNull();
 	public static final BlockThatch THATCH = getNull();
 	public static final BlockThatchBed THATCH_BED = getNull();
@@ -284,6 +284,44 @@ public final class BlocksTFC {
 			}
 		}
 
+		//=== Plant ===================================================================================================//
+
+		{
+
+			Builder<BlockPlantTFC> b = ImmutableList.builder();
+			Builder<BlockFlowerPotTFC> pots = ImmutableList.builder();
+			for (PlantType plant : PlantType.values()) {
+				if (plant.getPlantType() != PlantVariant.SHORT_GRASS && plant.getPlantType() != PlantVariant.TALL_GRASS)
+					b.add(register(r, "plants/" + plant.getName(), plant.getPlantType().create(plant), FLORA));
+				if (plant.canBePotted())
+					pots.add(register(r, "flowerpot/" + plant.getName(), new BlockFlowerPotTFC(plant)));
+			}
+			allPlantBlocks = b.build();
+			allFlowerPots = pots.build();
+
+			for (BlockPlantTFC blockPlant : allPlantBlocks) {
+				if (blockPlant instanceof BlockFloatingWaterTFC) {
+					inventoryItemBlocks.add(new ItemBlockFloatingWaterTFC((BlockFloatingWaterTFC) blockPlant));
+				} else if (blockPlant.getPlant().canBePotted()) {
+					normalItemBlocks.add(new ItemBlockPlant(blockPlant, blockPlant.getPlant()));
+				} else {
+					normalItemBlocks.add(new ItemBlockTFC(blockPlant));
+				}
+			}
+		}
+
+		{
+			Builder<BlockPlantTFC> b = ImmutableList.builder();
+			for (PlantType plant : PlantType.values()) {
+				if (plant.getPlantType() == PlantVariant.SHORT_GRASS || plant.getPlantType() == PlantVariant.TALL_GRASS)
+					b.add(register(r, "plants/" + plant.getName(), plant.getPlantType().create(plant), FLORA));
+			}
+			allGrassBlocks = b.build();
+			for (BlockPlantTFC blockPlant : allGrassBlocks) {
+				normalItemBlocks.add(new ItemBlockTFC(blockPlant));
+			}
+		}
+
 		//=== Other ==================================================================================================//
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "debug", new BlockDebug(), MISC)));
@@ -291,8 +329,8 @@ public final class BlocksTFC {
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), ROCK_STUFFS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), ROCK_STUFFS)));
 
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat", new BlockPeat(Material.GROUND), EARTH)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat_grass", new BlockPeatGrass(Material.GRASS), EARTH)));
+		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat", new BlockSoilPeat(Material.GROUND), EARTH)));
+		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat_grass", new BlockSoilPeatGrass(Material.GRASS), EARTH)));
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "thatch", new BlockThatch(), DECORATIONS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), DECORATIONS)));
@@ -348,38 +386,6 @@ public final class BlocksTFC {
 			}
 			allFluidBlocks = b.build();
 		}
-
-//		{
-//			// Add resultingState to the registered collapsable blocks.
-//			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-//				for (Rock.Type type : Rock.Type.values()) {
-//					FallingBlockManager.Specification spec = type.getFallingSpecification();
-//					switch (type) {
-//						case ANVIL:
-//							if (!rock.getRockCategory().hasAnvil()) {
-//								break;
-//							}
-//						case RAW:
-//							spec = new FallingBlockManager.Specification(spec);
-//							spec.setResultingState(BlockRockVariant.get(rock, COBBLE).getDefaultState());
-//							FallingBlockManager.registerFallable(BlockRockVariant.get(rock, RAW), spec);
-//							break;
-//						case SMOOTH:
-//							spec = new FallingBlockManager.Specification(spec);
-//							spec.setResultingState(BlockRockVariant.get(rock, COBBLE).getDefaultState());
-//							FallingBlockManager.registerFallable(BlockRockVariant.get(rock, SMOOTH).getDefaultState().withProperty(BlockRockSmooth.CAN_FALL, true), spec);
-//							break;
-//						default:
-//							Rock.Type nonGrassType = type.getNonGrassVersion();
-//							if (nonGrassType != type) {
-//								spec = new FallingBlockManager.Specification(spec);
-//								spec.setResultingState(BlockRockVariant.get(rock, nonGrassType).getDefaultState());
-//							}
-//							FallingBlockManager.registerFallable(BlockRockVariant.get(rock, type), spec);
-//					}
-//				}
-//			}
-//		}
 
 		{
 			Builder<BlockLogTFC> logs = ImmutableList.builder();
@@ -562,41 +568,6 @@ public final class BlocksTFC {
 			allBerryBushBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
 		}
 
-		{
-
-			Builder<BlockPlantTFC> b = ImmutableList.builder();
-			Builder<BlockFlowerPotTFC> pots = ImmutableList.builder();
-			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-				if (plant.getPlantType() != PlantType.SHORT_GRASS && plant.getPlantType() != PlantType.TALL_GRASS)
-					b.add(register(r, "plants/" + plant.getRegistryName().getPath(), plant.getPlantType().create(plant), FLORA));
-				if (plant.canBePotted())
-					pots.add(register(r, "flowerpot/" + plant.getRegistryName().getPath(), new BlockFlowerPotTFC(plant)));
-			}
-			allPlantBlocks = b.build();
-			allFlowerPots = pots.build();
-
-			for (BlockPlantTFC blockPlant : allPlantBlocks) {
-				if (blockPlant instanceof BlockFloatingWaterTFC) {
-					inventoryItemBlocks.add(new ItemBlockFloatingWaterTFC((BlockFloatingWaterTFC) blockPlant));
-				} else if (blockPlant.getPlant().canBePotted()) {
-					normalItemBlocks.add(new ItemBlockPlant(blockPlant, blockPlant.getPlant()));
-				} else {
-					normalItemBlocks.add(new ItemBlockTFC(blockPlant));
-				}
-			}
-		}
-
-		{
-			Builder<BlockPlantTFC> b = ImmutableList.builder();
-			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-				if (plant.getPlantType() == PlantType.SHORT_GRASS || plant.getPlantType() == PlantType.TALL_GRASS)
-					b.add(register(r, "plants/" + plant.getRegistryName().getPath(), plant.getPlantType().create(plant), FLORA));
-			}
-			allGrassBlocks = b.build();
-			for (BlockPlantTFC blockPlant : allGrassBlocks) {
-				normalItemBlocks.add(new ItemBlockTFC(blockPlant));
-			}
-		}
 
 		// Registering JEI only blocks (for info)
 		inventoryItemBlocks.add(new ItemBlock(register(r, "firepit", new BlockFirePit())));
@@ -713,7 +684,7 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isSoil(IBlockState current) {
-		if (current.getBlock() instanceof BlockPeat) return true;
+		if (current.getBlock() instanceof BlockSoilPeat) return true;
 		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
 				case GRASS, DRY_GRASS, DIRT, CLAY, CLAY_GRASS -> {
@@ -734,7 +705,7 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isSoilOrGravel(IBlockState current) {
-		if (current.getBlock() instanceof BlockPeat) return true;
+		if (current.getBlock() instanceof BlockSoilPeat) return true;
 		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
 				case GRASS, DRY_GRASS, DIRT -> {
@@ -747,7 +718,7 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isGrass(IBlockState current) {
-		if (current.getBlock() instanceof BlockPeatGrass) return true;
+		if (current.getBlock() instanceof BlockSoilPeatGrass) return true;
 		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
 				case GRASS, DRY_GRASS, CLAY_GRASS -> {

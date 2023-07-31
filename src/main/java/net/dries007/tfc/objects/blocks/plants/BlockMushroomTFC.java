@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
@@ -21,29 +21,29 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
-	private static final Map<Plant, BlockMushroomTFC> MAP = new HashMap<>();
+	private static final Map<PlantType, BlockMushroomTFC> MAP = new HashMap<>();
 
-	public BlockMushroomTFC (Plant plant) {
+	public BlockMushroomTFC(PlantType plant) {
 		super(plant);
 		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
 	}
 
-	public static BlockMushroomTFC get (Plant plant) {
+	public static BlockMushroomTFC get(PlantType plant) {
 		return MAP.get(plant);
 	}
 
 	@Override
-	public boolean canPlaceBlockAt (World worldIn, BlockPos pos) {
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, this.getDefaultState());
 	}
 
 	@Override
-	protected boolean canSustainBush (IBlockState state) {
+	protected boolean canSustainBush(IBlockState state) {
 		return state.isFullBlock();
 	}
 
 	@Override
-	public void updateTick (World worldIn, BlockPos pos, IBlockState state, Random rand) {
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isAreaLoaded(pos, 1)) return;
 
 		if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
@@ -74,7 +74,7 @@ public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
 	}
 
 	@Override
-	public boolean canBlockStay (World worldIn, BlockPos pos, IBlockState state) {
+	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
 		if (!worldIn.isOutsideBuildHeight(pos)) {
 			IBlockState soil = worldIn.getBlockState(pos.down());
 			return plant.isValidSunlight(worldIn.getLight(pos)) && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
@@ -84,7 +84,7 @@ public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
 	}
 
 	@Override
-	public boolean canGrow (World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
 		int i = 5;
 
 		for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
@@ -100,12 +100,12 @@ public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
 	}
 
 	@Override
-	public boolean canUseBonemeal (World worldIn, Random rand, BlockPos pos, IBlockState state) {
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		return true;
 	}
 
 	@Override
-	public void grow (World worldIn, Random rand, BlockPos pos, IBlockState state) {
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		BlockPos blockpos1 = pos.add(rand.nextInt(3) - 1, rand.nextInt(2) - rand.nextInt(2), rand.nextInt(3) - 1);
 
 		for (int k = 0; k < 4; ++k) {
@@ -121,7 +121,7 @@ public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
 		}
 	}
 
-	private boolean canShrink (World worldIn, BlockPos pos) {
+	private boolean canShrink(World worldIn, BlockPos pos) {
 		for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
 			if (worldIn.getBlockState(blockpos).getBlock() == this) {
 				return true;
@@ -130,7 +130,7 @@ public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
 		return false;
 	}
 
-	private void shrink (World worldIn, BlockPos pos) {
+	private void shrink(World worldIn, BlockPos pos) {
 		worldIn.setBlockToAir(pos);
 	}
 }

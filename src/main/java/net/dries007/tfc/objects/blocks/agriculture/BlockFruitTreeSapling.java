@@ -45,11 +45,6 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
 	private static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
 
 	private static final Map<IFruitTree, BlockFruitTreeSapling> MAP = new HashMap<>();
-
-	public static BlockFruitTreeSapling get(IFruitTree tree) {
-		return MAP.get(tree);
-	}
-
 	private final IFruitTree tree;
 
 	public BlockFruitTreeSapling(IFruitTree tree) {
@@ -61,6 +56,10 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
 		OreDictionaryHelper.register(this, "tree", "sapling");
 		OreDictionaryHelper.register(this, "tree", "sapling", tree.getName());
 		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
+
+	public static BlockFruitTreeSapling get(IFruitTree tree) {
+		return MAP.get(tree);
 	}
 
 	@Override

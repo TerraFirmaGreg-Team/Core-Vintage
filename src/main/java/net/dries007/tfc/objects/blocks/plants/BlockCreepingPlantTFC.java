@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -40,7 +40,7 @@ public class BlockCreepingPlantTFC extends BlockPlantTFC {
 	static final PropertyBool SOUTH = PropertyBool.create("south");
 	static final PropertyBool WEST = PropertyBool.create("west");
 
-	private static final PropertyBool[] ALL_FACES = new PropertyBool[] {DOWN, UP, NORTH, SOUTH, WEST, EAST};
+	private static final PropertyBool[] ALL_FACES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
 
 	private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
 	private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.0D, 0.875D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -48,15 +48,15 @@ public class BlockCreepingPlantTFC extends BlockPlantTFC {
 	private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 	private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
 	private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
-	private static final Map<Plant, BlockCreepingPlantTFC> MAP = new HashMap<>();
+	private static final Map<PlantType, BlockCreepingPlantTFC> MAP = new HashMap<>();
 
-	public static BlockCreepingPlantTFC get(Plant plant) {
-		return BlockCreepingPlantTFC.MAP.get(plant);
-	}
-
-	public BlockCreepingPlantTFC(Plant plant) {
+	public BlockCreepingPlantTFC(PlantType plant) {
 		super(plant);
 		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+	}
+
+	public static BlockCreepingPlantTFC get(PlantType plant) {
+		return BlockCreepingPlantTFC.MAP.get(plant);
 	}
 
 	@Override
@@ -104,32 +104,31 @@ public class BlockCreepingPlantTFC extends BlockPlantTFC {
 		for (PropertyBool propertybool : ALL_FACES) {
 			if ((state.getValue(propertybool))) {
 				switch (propertybool.getName()) {
-					case "down":
+					case "down" -> {
 						axisalignedbb = DOWN_AABB;
 						++i;
-						break;
-					case "up":
+					}
+					case "up" -> {
 						axisalignedbb = UP_AABB;
 						++i;
-						break;
-					case "north":
+					}
+					case "north" -> {
 						axisalignedbb = NORTH_AABB;
 						++i;
-						break;
-					case "south":
+					}
+					case "south" -> {
 						axisalignedbb = SOUTH_AABB;
 						++i;
-						break;
-					case "west":
+					}
+					case "west" -> {
 						axisalignedbb = WEST_AABB;
 						++i;
-						break;
-					case "east":
+					}
+					case "east" -> {
 						axisalignedbb = EAST_AABB;
 						++i;
-						break;
-					default:
-						axisalignedbb = FULL_BLOCK_AABB;
+					}
+					default -> axisalignedbb = FULL_BLOCK_AABB;
 				}
 			}
 		}
@@ -153,30 +152,28 @@ public class BlockCreepingPlantTFC extends BlockPlantTFC {
 	@Override
 	@Nonnull
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
-		switch (rot) {
-			case CLOCKWISE_180:
-				return state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(SOUTH)).withProperty(EAST, state.getValue(WEST)).withProperty(SOUTH, state.getValue(NORTH)).withProperty(WEST, state.getValue(EAST));
-			case COUNTERCLOCKWISE_90:
-				return state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(EAST)).withProperty(EAST, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(WEST)).withProperty(WEST, state.getValue(NORTH));
-			case CLOCKWISE_90:
-				return state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(WEST)).withProperty(EAST, state.getValue(NORTH)).withProperty(SOUTH, state.getValue(EAST)).withProperty(WEST, state.getValue(SOUTH));
-			default:
-				return state.withProperty(growthStageProperty, plant.getStageForMonth());
-		}
+		return switch (rot) {
+			case CLOCKWISE_180 ->
+					state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(SOUTH)).withProperty(EAST, state.getValue(WEST)).withProperty(SOUTH, state.getValue(NORTH)).withProperty(WEST, state.getValue(EAST));
+			case COUNTERCLOCKWISE_90 ->
+					state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(EAST)).withProperty(EAST, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(WEST)).withProperty(WEST, state.getValue(NORTH));
+			case CLOCKWISE_90 ->
+					state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(WEST)).withProperty(EAST, state.getValue(NORTH)).withProperty(SOUTH, state.getValue(EAST)).withProperty(WEST, state.getValue(SOUTH));
+			default -> state.withProperty(growthStageProperty, plant.getStageForMonth());
+		};
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	@Nonnull
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
-		switch (mirrorIn) {
-			case LEFT_RIGHT:
-				return state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(NORTH));
-			case FRONT_BACK:
-				return state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(EAST, state.getValue(WEST)).withProperty(WEST, state.getValue(EAST));
-			default:
-				return super.withMirror(state, mirrorIn);
-		}
+		return switch (mirrorIn) {
+			case LEFT_RIGHT ->
+					state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(NORTH));
+			case FRONT_BACK ->
+					state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(EAST, state.getValue(WEST)).withProperty(WEST, state.getValue(EAST));
+			default -> super.withMirror(state, mirrorIn);
+		};
 	}
 
 	@Override

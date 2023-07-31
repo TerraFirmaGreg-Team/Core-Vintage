@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.minecraft.block.state.IBlockState;
@@ -22,15 +22,15 @@ import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
 @ParametersAreNonnullByDefault
 public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC implements ITallPlant {
-	private static final Map<Plant, BlockEmergentTallWaterPlantTFC> MAP = new HashMap<>();
+	private static final Map<PlantType, BlockEmergentTallWaterPlantTFC> MAP = new HashMap<>();
 
-	public static BlockEmergentTallWaterPlantTFC get(Plant plant) {
-		return BlockEmergentTallWaterPlantTFC.MAP.get(plant);
-	}
-
-	public BlockEmergentTallWaterPlantTFC(Plant plant) {
+	public BlockEmergentTallWaterPlantTFC(PlantType plant) {
 		super(plant);
 		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+	}
+
+	public static BlockEmergentTallWaterPlantTFC get(PlantType plant) {
+		return BlockEmergentTallWaterPlantTFC.MAP.get(plant);
 	}
 
 	@Override

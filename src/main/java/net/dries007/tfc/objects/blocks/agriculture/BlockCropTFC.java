@@ -60,7 +60,7 @@ public abstract class BlockCropTFC extends BlockBush implements IGrowingPlant {
 	public static final PropertyBool WILD = PropertyBool.create("wild");
 
 	// model boxes
-	private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[] {
+	private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[]{
 			new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.125D, 0.875D),
 			new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D),
 			new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.375D, 0.875D),

@@ -277,11 +277,11 @@ public final class ItemsTFC {
 		{
 			for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
 				if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL)) {
-					simpleItems.add(register(r, "metal/anvil/" + material.getName(), new ItemAnvil(material), MISC));
+					simpleItems.add(register(r, "metal/anvil/" + material.getName(), new ItemAnvil(material), METAL));
 				}
 
 				if (material == Materials.Iron)
-					simpleItems.add(register(r, "metal/cladding/" + material.getName(), new ItemMetalCladding(material), MISC));
+					simpleItems.add(register(r, "metal/cladding/" + material.getName(), new ItemMetalCladding(material), METAL));
 			}
 		}
 
@@ -340,13 +340,13 @@ public final class ItemsTFC {
 			}
 		}
 		// Complex foods that require special classes go here
-		for (Food food : new Food[] {Food.BARLEY_BREAD_SANDWICH, Food.CORNBREAD_SANDWICH, Food.OAT_BREAD_SANDWICH, Food.RICE_BREAD_SANDWICH, Food.RYE_BREAD_SANDWICH, Food.WHEAT_BREAD_SANDWICH}) {
+		for (Food food : new Food[]{Food.BARLEY_BREAD_SANDWICH, Food.CORNBREAD_SANDWICH, Food.OAT_BREAD_SANDWICH, Food.RICE_BREAD_SANDWICH, Food.RYE_BREAD_SANDWICH, Food.WHEAT_BREAD_SANDWICH}) {
 			simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemSandwich(food), FOOD));
 		}
-		for (Food food : new Food[] {Food.SOUP_GRAIN, Food.SOUP_FRUIT, Food.SOUP_VEGETABLE, Food.SOUP_MEAT, Food.SOUP_DAIRY}) {
+		for (Food food : new Food[]{Food.SOUP_GRAIN, Food.SOUP_FRUIT, Food.SOUP_VEGETABLE, Food.SOUP_MEAT, Food.SOUP_DAIRY}) {
 			simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemDynamicBowlFood(food), FOOD));
 		}
-		for (Food food : new Food[] {Food.SALAD_GRAIN, Food.SALAD_FRUIT, Food.SALAD_VEGETABLE, Food.SALAD_MEAT, Food.SALAD_DAIRY}) {
+		for (Food food : new Food[]{Food.SALAD_GRAIN, Food.SALAD_FRUIT, Food.SALAD_VEGETABLE, Food.SALAD_MEAT, Food.SALAD_DAIRY}) {
 			simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemDynamicBowlFood(food), FOOD));
 		}
 

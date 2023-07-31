@@ -18,13 +18,10 @@ public interface ITallPlant {
 	default AxisAlignedBB getTallBoundingBax(int age, IBlockState state, IBlockAccess source, BlockPos pos) {
 		if (getPlantPart(source, pos) == EnumBlockPart.LOWER || getPlantPart(source, pos) == EnumBlockPart.MIDDLE)
 			return PLANT_AABB.offset(state.getOffset(source, pos));
-		switch (age) {
-			case 0:
-			case 1:
-				return SHORTER_PLANT_AABB.offset(state.getOffset(source, pos));
-			default:
-				return PLANT_AABB.offset(state.getOffset(source, pos));
-		}
+		return switch (age) {
+			case 0, 1 -> SHORTER_PLANT_AABB.offset(state.getOffset(source, pos));
+			default -> PLANT_AABB.offset(state.getOffset(source, pos));
+		};
 
 	}
 

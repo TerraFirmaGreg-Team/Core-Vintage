@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -34,15 +34,15 @@ import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 @ParametersAreNonnullByDefault
 public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowable, ITallPlant {
 	private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
-	private static final Map<Plant, BlockTallWaterPlantTFC> MAP = new HashMap<>();
+	private static final Map<PlantType, BlockTallWaterPlantTFC> MAP = new HashMap<>();
 
-	public static BlockTallWaterPlantTFC get(Plant plant) {
-		return BlockTallWaterPlantTFC.MAP.get(plant);
-	}
-
-	public BlockTallWaterPlantTFC(Plant plant) {
+	public BlockTallWaterPlantTFC(PlantType plant) {
 		super(plant);
 		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+	}
+
+	public static BlockTallWaterPlantTFC get(PlantType plant) {
+		return BlockTallWaterPlantTFC.MAP.get(plant);
 	}
 
 	@Override

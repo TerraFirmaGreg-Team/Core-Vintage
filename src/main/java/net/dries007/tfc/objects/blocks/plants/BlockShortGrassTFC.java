@@ -6,7 +6,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.Block;
@@ -38,15 +38,15 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 	private static final AxisAlignedBB SHORTER_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.5D, 0.875D);
 	private static final AxisAlignedBB SHORT_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D);
 	private static final AxisAlignedBB SHORTEST_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
-	private static final Map<Plant, BlockShortGrassTFC> MAP = new HashMap<>();
+	private static final Map<PlantType, BlockShortGrassTFC> MAP = new HashMap<>();
 
-	public static BlockShortGrassTFC get(Plant plant) {
-		return BlockShortGrassTFC.MAP.get(plant);
-	}
-
-	public BlockShortGrassTFC(Plant plant) {
+	public BlockShortGrassTFC(PlantType plant) {
 		super(plant);
 		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+	}
+
+	public static BlockShortGrassTFC get(PlantType plant) {
+		return BlockShortGrassTFC.MAP.get(plant);
 	}
 
 	@Override
@@ -100,16 +100,12 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 	@Override
 	@Nonnull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		switch (state.getValue(AGE)) {
-			case 0:
-				return SHORTEST_GRASS_AABB.offset(state.getOffset(source, pos));
-			case 1:
-				return SHORTER_GRASS_AABB.offset(state.getOffset(source, pos));
-			case 2:
-				return SHORT_GRASS_AABB.offset(state.getOffset(source, pos));
-			default:
-				return GRASS_AABB.offset(state.getOffset(source, pos));
-		}
+		return switch (state.getValue(AGE)) {
+			case 0 -> SHORTEST_GRASS_AABB.offset(state.getOffset(source, pos));
+			case 1 -> SHORTER_GRASS_AABB.offset(state.getOffset(source, pos));
+			case 2 -> SHORT_GRASS_AABB.offset(state.getOffset(source, pos));
+			default -> GRASS_AABB.offset(state.getOffset(source, pos));
+		};
 	}
 
 	@Override

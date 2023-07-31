@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,15 +21,15 @@ import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 // todo: either pull some trickery to make this look like water or simply wait until 1.13 and implement ILiquidContainer
 @ParametersAreNonnullByDefault
 public class BlockWaterPlantTFC extends BlockPlantTFC {
-	private static final Map<Plant, BlockWaterPlantTFC> MAP = new HashMap<>();
+	private static final Map<PlantType, BlockWaterPlantTFC> MAP = new HashMap<>();
 
-	public static BlockWaterPlantTFC get(Plant plant) {
-		return MAP.get(plant);
-	}
-
-	public BlockWaterPlantTFC(Plant plant) {
+	public BlockWaterPlantTFC(PlantType plant) {
 		super(plant);
 		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+	}
+
+	public static BlockWaterPlantTFC get(PlantType plant) {
+		return MAP.get(plant);
 	}
 
 	@Override

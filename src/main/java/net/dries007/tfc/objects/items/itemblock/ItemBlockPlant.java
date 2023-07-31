@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items.itemblock;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -22,9 +22,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemBlockPlant extends ItemBlockTFC {
-	private final Plant plant;
+	private final PlantType plant;
 
-	public ItemBlockPlant(Block block, Plant plant) {
+	public ItemBlockPlant(Block block, PlantType plant) {
 		super(block);
 		this.plant = plant;
 	}

@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -38,15 +38,15 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
 	private static final AxisAlignedBB PLANT_WEST_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 	private static final AxisAlignedBB PLANT_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.75D, 1.0D, 1.0D);
 
-	private static final Map<Plant, BlockEpiphyteTFC> MAP = new HashMap<>();
+	private static final Map<PlantType, BlockEpiphyteTFC> MAP = new HashMap<>();
 
-	public static BlockEpiphyteTFC get(Plant plant) {
-		return MAP.get(plant);
-	}
-
-	public BlockEpiphyteTFC(Plant plant) {
+	public BlockEpiphyteTFC(PlantType plant) {
 		super(plant);
 		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+	}
+
+	public static BlockEpiphyteTFC get(PlantType plant) {
+		return MAP.get(plant);
 	}
 
 	@Override
@@ -107,20 +107,14 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
 	@Override
 	@Nonnull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		switch (state.getValue(FACING)) {
-			case EAST:
-				return PLANT_EAST_AABB;
-			case WEST:
-				return PLANT_WEST_AABB;
-			case SOUTH:
-				return PLANT_SOUTH_AABB;
-			case NORTH:
-				return PLANT_NORTH_AABB;
-			case DOWN:
-				return PLANT_DOWN_AABB;
-			default:
-				return PLANT_UP_AABB;
-		}
+		return switch (state.getValue(FACING)) {
+			case EAST -> PLANT_EAST_AABB;
+			case WEST -> PLANT_WEST_AABB;
+			case SOUTH -> PLANT_SOUTH_AABB;
+			case NORTH -> PLANT_NORTH_AABB;
+			case DOWN -> PLANT_DOWN_AABB;
+			default -> PLANT_UP_AABB;
+		};
 	}
 
 	@Nonnull

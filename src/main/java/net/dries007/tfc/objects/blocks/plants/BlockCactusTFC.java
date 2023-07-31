@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -37,18 +37,18 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPlant {
 	private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
-	private static final Map<Plant, BlockCactusTFC> MAP = new HashMap<>();
+	private static final Map<PlantType, BlockCactusTFC> MAP = new HashMap<>();
 
-	public static BlockCactusTFC get(Plant plant) {
-		return MAP.get(plant);
-	}
-
-	public BlockCactusTFC(Plant plant) {
+	public BlockCactusTFC(PlantType plant) {
 		super(plant);
 		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
 
 		setSoundType(SoundType.GROUND);
 		setHardness(0.25F);
+	}
+
+	public static BlockCactusTFC get(PlantType plant) {
+		return MAP.get(plant);
 	}
 
 	@Override
@@ -96,12 +96,6 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
 	@Override
 	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
-	}
-
-	@Override
-	@Nonnull
-	public Block.EnumOffsetType getOffsetType() {
-		return EnumOffsetType.XYZ;
 	}
 
 	@Nonnull

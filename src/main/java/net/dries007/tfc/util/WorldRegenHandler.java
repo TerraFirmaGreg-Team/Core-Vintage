@@ -7,15 +7,16 @@ package net.dries007.tfc.util;
 
 import com.google.common.collect.Lists;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.*;
+import net.dries007.tfc.api.types.ICreatureTFC;
+import net.dries007.tfc.api.types.IHuntable;
+import net.dries007.tfc.api.types.IPredator;
+import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -115,8 +116,8 @@ public class WorldRegenHandler {
 
 						float floraDensity = chunkDataTFC.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)
 						float floraDiversity = chunkDataTFC.getFloraDiversity();
-						Plant mushroom = TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI);
-						if (mushroom != null) PLANT_GEN.setGeneratedPlant(mushroom);
+						//PlantType mushroom = TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI); //TODO алег
+						//if (null != null) PLANT_GEN.setGeneratedPlant(mushroom);
 						for (float i = RANDOM.nextInt(Math.round(3 / floraDiversity)); i < (1 + floraDensity) * 5; i++) {
 							BlockPos blockMushroomPos = event.world.getHeight(blockPos.add(RANDOM.nextInt(16) + 8, 0, RANDOM.nextInt(16) + 8));
 							PLANT_GEN.generate(event.world, RANDOM, blockMushroomPos);

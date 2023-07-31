@@ -47,15 +47,6 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
 
 	// static field and methods for conversion from crop to Block
 	private static final Map<ICrop, BlockCropDead> MAP = new HashMap<>();
-
-	public static BlockCropDead get(ICrop crop) {
-		return MAP.get(crop);
-	}
-
-	public static Set<ICrop> getCrops() {
-		return MAP.keySet();
-	}
-
 	protected final ICrop crop;
 
 	public BlockCropDead(ICrop crop) {
@@ -68,6 +59,14 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
 
 		setSoundType(SoundType.PLANT);
 		setHardness(0.6f);
+	}
+
+	public static BlockCropDead get(ICrop crop) {
+		return MAP.get(crop);
+	}
+
+	public static Set<ICrop> getCrops() {
+		return MAP.keySet();
 	}
 
 	@Nonnull

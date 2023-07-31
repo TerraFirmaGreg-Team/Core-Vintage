@@ -8,10 +8,9 @@ package net.dries007.tfc.objects.blocks.soil;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
@@ -103,7 +102,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 		// Проверяем условие для генерации торфа
 		if (up.getMaterial().isLiquid() || (neighborLight < 4 && up.getLightOpacity(world, upPos) > 2)) {
 			// Генерируем торф в зависимости от типа блока
-			if (usBlock instanceof BlockPeat) {
+			if (usBlock instanceof BlockSoilPeat) {
 				world.setBlockState(pos, BlocksTFC.PEAT.getDefaultState());
 			} else if (usBlock instanceof ISoilTypeBlock soil) {
 				world.setBlockState(pos, TFCStorage.getSoilBlock(soil.getSoilVariant().getNonGrassVersion(), soil.getSoilType()).getDefaultState());
@@ -140,7 +139,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 				Block currentBlock = current.getBlock();
 
 				// Генерируем траву в зависимости от типа текущего блока
-				if (currentBlock instanceof BlockPeat) {
+				if (currentBlock instanceof BlockSoilPeat) {
 					world.setBlockState(target, BlocksTFC.PEAT_GRASS.getDefaultState());
 				} else if (currentBlock instanceof ISoilTypeBlock block) {
 					SoilVariant spreader = GRASS;
@@ -154,8 +153,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 				}
 			}
 			// Генерируем короткую траву на верхнем блоке с определенной вероятностью
-			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-				if (plant.getPlantType() == PlantType.SHORT_GRASS && rand.nextFloat() < 0.5f) {
+			for (PlantType plant : PlantType.values()) {
+				if (plant.getPlantType() == PlantVariant.SHORT_GRASS && rand.nextFloat() < 0.5f) {
 					float temp = ClimateTFC.getActualTemp(world, upPos);
 					BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
 

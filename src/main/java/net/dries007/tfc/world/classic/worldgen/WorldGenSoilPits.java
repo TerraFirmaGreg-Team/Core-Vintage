@@ -6,9 +6,8 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -69,7 +68,7 @@ public class WorldGenSoilPits implements IWorldGenerator {
 				if (flag && rng.nextInt(15) == 0) {
 					final BlockPos pos = world.getTopSolidOrLiquidBlock(posHorizontal);
 
-					for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
+					for (PlantType plant : PlantType.values()) {
 						if (plant.getIsClayMarking()) {
 							BlockPlantTFC plantBlock = BlockPlantTFC.get(plant);
 							IBlockState state = plantBlock.getDefaultState();

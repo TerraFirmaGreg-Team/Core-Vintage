@@ -21,13 +21,13 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public final class CreativeTabsTFC {
 
-	public static final CreativeTabs ROCK_STUFFS = new TFCCreativeTab("rock", "tfc:rock/raw/blueschist");
+	public static final CreativeTabs ROCK_STUFFS = new TFCCreativeTab("rock", "tfc:rock/raw/shale");
 	public static final CreativeTabs EARTH = new TFCCreativeTab("earth", "tfc:soil/grass/silt");
 
 
 	public static final CreativeTabs WOOD = new TFCCreativeTab("wood", "tfc:wood/log/pine");
-	public static final CreativeTabs DECORATIONS = new TFCCreativeTab("decorations", "tfc:rock/chiseled/brick/blueschist");
-	public static final CreativeTabs METAL = new TFCCreativeTab("metal", "tfc:metal/ingot/bronze");
+	public static final CreativeTabs DECORATIONS = new TFCCreativeTab("decorations", "tfc:rock/wall/brick/shale");
+	public static final CreativeTabs METAL = new TFCCreativeTab("metal", "tfc:metal/anvil/red_steel");
 	public static final CreativeTabs GEMS = new TFCCreativeTab("gems", "tfc:gem/diamond");
 	public static final CreativeTabs POTTERY = new TFCCreativeTab("pottery", "tfc:ceramics/fired/mold/ingot");
 	public static final CreativeTabs FOOD = new TFCCreativeTab("food", "tfc:food/green_apple");

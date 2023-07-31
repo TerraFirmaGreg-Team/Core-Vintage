@@ -6,7 +6,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -36,15 +36,15 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, ITallPlant {
 	private static final PropertyEnum<BlockTallGrassTFC.EnumBlockPart> PART = PropertyEnum.create("part", BlockTallGrassTFC.EnumBlockPart.class);
-	private static final Map<Plant, BlockTallGrassTFC> MAP = new HashMap<>();
+	private static final Map<PlantType, BlockTallGrassTFC> MAP = new HashMap<>();
 
-	public static BlockTallGrassTFC get(Plant plant) {
-		return BlockTallGrassTFC.MAP.get(plant);
-	}
-
-	public BlockTallGrassTFC(Plant plant) {
+	public BlockTallGrassTFC(PlantType plant) {
 		super(plant);
 		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+	}
+
+	public static BlockTallGrassTFC get(PlantType plant) {
+		return BlockTallGrassTFC.MAP.get(plant);
 	}
 
 	@Override

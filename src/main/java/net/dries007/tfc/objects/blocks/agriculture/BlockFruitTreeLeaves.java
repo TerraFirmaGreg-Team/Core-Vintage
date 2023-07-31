@@ -48,11 +48,6 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 	public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", BlockFruitTreeLeaves.EnumLeafState.class);
 	public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
 	private static final Map<IFruitTree, BlockFruitTreeLeaves> MAP = new HashMap<>();
-
-	public static BlockFruitTreeLeaves get(IFruitTree tree) {
-		return MAP.get(tree);
-	}
-
 	private final IFruitTree tree;
 
 	public BlockFruitTreeLeaves(IFruitTree tree) {
@@ -64,6 +59,10 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 		OreDictionaryHelper.register(this, "tree", "leaves", tree.getName());
 		Blocks.FIRE.setFireInfo(this, 30, 60);
 		setTickRandomly(true);
+	}
+
+	public static BlockFruitTreeLeaves get(IFruitTree tree) {
+		return MAP.get(tree);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -262,6 +261,16 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 		world.setBlockToAir(pos);
 	}
 
+	@Override
+	public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
+		if (world.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT) {
+			return GrowthStatus.FULLY_GROWN;
+		} else if (!state.getValue(HARVESTABLE) && tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+			return GrowthStatus.GROWING;
+		}
+		return GrowthStatus.NOT_GROWING;
+	}
+
 	/**
 	 * Enum state for blockstate
 	 * Used to render the correct texture of this leaf block
@@ -280,15 +289,5 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 		public String getName() {
 			return this.name().toLowerCase();
 		}
-	}
-
-	@Override
-	public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-		if (world.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT) {
-			return GrowthStatus.FULLY_GROWN;
-		} else if (!state.getValue(HARVESTABLE) && tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
-			return GrowthStatus.GROWING;
-		}
-		return GrowthStatus.NOT_GROWING;
 	}
 }

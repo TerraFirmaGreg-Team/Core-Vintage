@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -27,15 +27,15 @@ import java.util.Map;
 @ParametersAreNonnullByDefault
 public class BlockFloatingWaterTFC extends BlockPlantTFC {
 	private static final AxisAlignedBB LILY_PAD_AABB = new AxisAlignedBB(0.0D, -0.125D, 0.0D, 1.0D, 0.0625D, 1.0D);
-	private static final Map<Plant, BlockFloatingWaterTFC> MAP = new HashMap<>();
+	private static final Map<PlantType, BlockFloatingWaterTFC> MAP = new HashMap<>();
 
-	public static BlockFloatingWaterTFC get(Plant plant) {
-		return BlockFloatingWaterTFC.MAP.get(plant);
-	}
-
-	public BlockFloatingWaterTFC(Plant plant) {
+	public BlockFloatingWaterTFC(PlantType plant) {
 		super(plant);
 		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+	}
+
+	public static BlockFloatingWaterTFC get(PlantType plant) {
+		return BlockFloatingWaterTFC.MAP.get(plant);
 	}
 
 	@Override

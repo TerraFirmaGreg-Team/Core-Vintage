@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.IGrowable;
@@ -28,15 +28,15 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrowable {
 	private static final PropertyBool BOTTOM = PropertyBool.create("bottom");
-	private static final Map<Plant, BlockHangingPlantTFC> MAP = new HashMap<>();
+	private static final Map<PlantType, BlockHangingPlantTFC> MAP = new HashMap<>();
 
-	public static BlockHangingPlantTFC get(Plant plant) {
-		return BlockHangingPlantTFC.MAP.get(plant);
-	}
-
-	public BlockHangingPlantTFC(Plant plant) {
+	public BlockHangingPlantTFC(PlantType plant) {
 		super(plant);
 		if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
+	}
+
+	public static BlockHangingPlantTFC get(PlantType plant) {
+		return BlockHangingPlantTFC.MAP.get(plant);
 	}
 
 	@Override

@@ -39,13 +39,11 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 	private static final AxisAlignedBB SHORTEST_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
 
 	private final PlantType plantType;
-	private final PlantVariant plantVariant;
 
 	public BlockShortGrassTFC(PlantVariant plantVariant, PlantType plantType) {
 		super(plantVariant, plantType);
 
 		this.plantType = plantType;
-		this.plantVariant = plantVariant;
 	}
 
 	@Override

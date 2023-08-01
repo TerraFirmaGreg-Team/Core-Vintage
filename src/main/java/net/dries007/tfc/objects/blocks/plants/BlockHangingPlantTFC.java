@@ -29,13 +29,11 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
 	private static final PropertyBool BOTTOM = PropertyBool.create("bottom");
 
 	private final PlantType plantType;
-	private final PlantVariant plantVariant;
 
 	public BlockHangingPlantTFC(PlantVariant plantVariant, PlantType plantType) {
 		super(plantVariant, plantType);
 
 		this.plantType = plantType;
-		this.plantVariant = plantVariant;
 	}
 
 	@Override

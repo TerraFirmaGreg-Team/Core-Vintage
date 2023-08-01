@@ -38,13 +38,11 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
 	private static final AxisAlignedBB PLANT_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.75D, 1.0D, 1.0D);
 
 	private final PlantType plantType;
-	private final PlantVariant plantVariant;
 
 	public BlockEpiphyteTFC(PlantVariant plantVariant, PlantType plantType) {
 		super(plantVariant, plantType);
 
 		this.plantType = plantType;
-		this.plantVariant = plantVariant;
 	}
 
 	@Override

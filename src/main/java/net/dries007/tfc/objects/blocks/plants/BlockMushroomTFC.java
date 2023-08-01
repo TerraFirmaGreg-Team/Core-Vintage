@@ -22,13 +22,11 @@ import java.util.Random;
 public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
 
 	private final PlantType plantType;
-	private final PlantVariant plantVariant;
 
 	public BlockMushroomTFC(PlantVariant plantVariant, PlantType plantType) {
 		super(plantVariant, plantType);
 
 		this.plantType = plantType;
-		this.plantVariant = plantVariant;
 	}
 
 	@Override

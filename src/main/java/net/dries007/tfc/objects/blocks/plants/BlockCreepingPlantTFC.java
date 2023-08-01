@@ -49,13 +49,11 @@ public class BlockCreepingPlantTFC extends BlockPlantTFC {
 	private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
 
 	private final PlantType plantType;
-	private final PlantVariant plantVariant;
 
 	public BlockCreepingPlantTFC(PlantVariant plantVariant, PlantType plantType) {
 		super(plantVariant, plantType);
 
 		this.plantType = plantType;
-		this.plantVariant = plantVariant;
 	}
 
 	@Override

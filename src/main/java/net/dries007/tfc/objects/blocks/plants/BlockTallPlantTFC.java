@@ -32,13 +32,11 @@ public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITall
 	private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
 
 	private final PlantType plantType;
-	private final PlantVariant plantVariant;
 
 	public BlockTallPlantTFC(PlantVariant plantVariant, PlantType plantType) {
 		super(plantVariant, plantType);
 
 		this.plantType = plantType;
-		this.plantVariant = plantVariant;
 	}
 
 	@Override

@@ -29,13 +29,11 @@ public class BlockFloatingWaterTFC extends BlockPlantTFC implements IPlantTypeBl
 	private static final AxisAlignedBB LILY_PAD_AABB = new AxisAlignedBB(0.0D, -0.125D, 0.0D, 1.0D, 0.0625D, 1.0D);
 
 	private final PlantType plantType;
-	private final PlantVariant plantVariant;
 
 	public BlockFloatingWaterTFC(PlantVariant plantVariant, PlantType plantType) {
 		super(plantVariant, plantType);
 
 		this.plantType = plantType;
-		this.plantVariant = plantVariant;
 	}
 
 

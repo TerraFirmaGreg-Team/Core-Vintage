@@ -35,13 +35,11 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
 	private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
 
 	private final PlantType plantType;
-	private final PlantVariant plantVariant;
 
 	public BlockTallWaterPlantTFC(PlantVariant plantVariant, PlantType plantType) {
 		super(plantVariant, plantType);
 
 		this.plantType = plantType;
-		this.plantVariant = plantVariant;
 	}
 
 	@Override

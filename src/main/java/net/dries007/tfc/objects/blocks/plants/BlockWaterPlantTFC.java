@@ -22,13 +22,11 @@ import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 public class BlockWaterPlantTFC extends BlockPlantTFC {
 
 	private final PlantType plantType;
-	private final PlantVariant plantVariant;
 
 	public BlockWaterPlantTFC(PlantVariant plantVariant, PlantType plantType) {
 		super(plantVariant, plantType);
 
 		this.plantType = plantType;
-		this.plantVariant = plantVariant;
 	}
 
 	@Override

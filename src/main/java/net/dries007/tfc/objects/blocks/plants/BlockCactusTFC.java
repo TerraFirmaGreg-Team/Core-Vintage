@@ -38,13 +38,11 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
 	private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
 
 	private final PlantType plantType;
-	private final PlantVariant plantVariant;
 
 	public BlockCactusTFC(PlantVariant plantVariant, PlantType plantType) {
 		super(plantVariant, plantType);
 
 		this.plantType = plantType;
-		this.plantVariant = plantVariant;
 
 		this.setSoundType(SoundType.GROUND);
 		this.setHardness(0.25F);

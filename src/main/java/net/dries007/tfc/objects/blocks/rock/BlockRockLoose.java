@@ -7,6 +7,7 @@ import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.objects.blocks.BlockGroundcover;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
@@ -78,6 +79,14 @@ public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 		if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
 			worldIn.destroyBlock(pos, false);
 		}
+	}
+
+
+	@Nonnull
+	@Override
+	@SuppressWarnings("deprecation")
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
 	}
 
 	@Override

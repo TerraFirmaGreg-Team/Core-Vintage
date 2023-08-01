@@ -283,9 +283,9 @@ public final class ClientRegisterEvents {
 						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
 				TFCStorage.SOIL_BLOCKS.values().stream().filter(x -> x.getSoilVariant().isGrass()).map(s -> (Block) s).toArray(Block[]::new));
 
-//		itemColors.registerItemColorHandler((stack, tintIndex) ->
-//						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-//				TFCStorage.PLANT_BLOCKS.values().stream().map(s -> (Block) s).toArray(Block[]::new));
+		itemColors.registerItemColorHandler((stack, tintIndex) ->
+						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+				TFCStorage.PLANT_BLOCKS.values().stream().map(s -> (Block) s).toArray(Block[]::new));
 
 		itemColors.registerItemColorHandler((stack, tintIndex) ->
 						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
@@ -301,10 +301,6 @@ public final class ClientRegisterEvents {
 
 		itemColors.registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? EnumDyeColor.byDyeDamage(stack.getItemDamage()).getColorValue() : 0xFFFFFF,
 				ItemsTFC.UNFIRED_VESSEL_GLAZED, ItemsTFC.FIRED_VESSEL_GLAZED);
-
-//		itemColors.registerItemColorHandler((stack, tintIndex) ->
-//						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-//				BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
 
 		itemColors.registerItemColorHandler((stack, tintIndex) -> {
 			IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);

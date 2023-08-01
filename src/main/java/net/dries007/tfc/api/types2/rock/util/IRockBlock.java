@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.types2.rock.util;
 
+import net.dries007.tfc.api.types2.rock.RockCategory;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.util.IHasModel;
@@ -12,7 +13,11 @@ public interface IRockBlock extends IHasModel {
 
 	ItemBlock getItemBlock();
 
+	default RockCategory getRockCategory() {
+		return getRockType().getRockCategory();
+	}
+
 	default float getFinalHardness() {
-		return getRockVariant().getHardnessBase() + getRockType().getRockCategory().getHardnessModifier();
+		return getRockVariant().getHardnessBase() + getRockCategory().getHardnessModifier();
 	}
 }

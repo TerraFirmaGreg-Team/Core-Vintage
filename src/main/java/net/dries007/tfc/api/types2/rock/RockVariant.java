@@ -12,7 +12,7 @@ import java.util.function.BiFunction;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.*;
 
 /**
- * Перечисление, которое представляет различные варианты камня. 20 типов
+ * Перечисление, которое представляет различные варианты камня.
  */
 @MethodsReturnNonnullByDefault
 public enum RockVariant implements IStringSerializable {

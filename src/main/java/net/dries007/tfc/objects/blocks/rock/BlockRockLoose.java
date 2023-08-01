@@ -11,12 +11,18 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -67,11 +73,6 @@ public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state) {
-		return false;
-	}
-
-	@Override
 	@SuppressWarnings("deprecation")
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
@@ -79,32 +80,31 @@ public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 		}
 	}
 
-	//    @Override
-//    @SuppressWarnings("ConstantConditions")
-//    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-//                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-//        ItemStack itemStack = new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(rockBlockType.getName() + "/" + rockType.getName()));
-//
-//        if (playerIn.addItemStackToInventory(itemStack)) {
-//            worldIn.setBlockToAir(pos);
-//
-//            playerIn.swingArm(EnumHand.MAIN_HAND);
-//            playerIn.playSound(SoundEvents.ENTITY_ITEMFRAME_REMOVE_ITEM, 1.0f, 1.0f);
-//        }
-//
-//        return true;
-//    }
-//
-//    @Override
-//    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-//        drops.add(new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(rockBlockType.getName() + "/" + rockType.getName())));
-//    }
-//
-//    @Nonnull
-//    @Override
-//    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-//        return new ItemStack(StoneTypeItems.ITEM_STONE_MAP.get(rockBlockType.getName() + "/" + rockType.getName()));
-//    }
+	@Override
+    @SuppressWarnings("ConstantConditions")
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        var itemStack = new ItemStack(TFCStorage.ITEMROCK_MAP.get(rockType));
+
+        if (playerIn.addItemStackToInventory(itemStack)) {
+            worldIn.setBlockToAir(pos);
+
+            playerIn.swingArm(EnumHand.MAIN_HAND);
+            playerIn.playSound(SoundEvents.ENTITY_ITEMFRAME_REMOVE_ITEM, 1.0f, 1.0f);
+        }
+
+        return true;
+    }
+
+	@Override
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		drops.add(new ItemStack(TFCStorage.ITEMROCK_MAP.get(rockType)));
+	}
+
+	@Nonnull
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(TFCStorage.ITEMROCK_MAP.get(rockType));
+    }
 
 
 	@Override
@@ -116,13 +116,5 @@ public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 				return new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName());
 			}
 		});
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
 	}
 }

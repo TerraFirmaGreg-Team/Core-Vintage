@@ -72,7 +72,7 @@ public enum RockCategory implements IStringSerializable {
     }
 
     public String getLocalizedName() {
-        return textFormatting + new TextComponentTranslation(String.format("stonecategory.%s.name", this.getName())).getFormattedText();
+        return textFormatting + new TextComponentTranslation(String.format("rockcategory.%s.name", getName())).getFormattedText();
     }
 
     public enum Layer implements Predicate<RockType> {

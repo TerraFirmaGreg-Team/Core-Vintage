@@ -47,6 +47,13 @@ color.green=Green
 color.red=Red
 color.black=Black
 
+rockcategory.name=Rock Category
+rockcategory.metamorphic.name=Metamorphic
+rockcategory.sedimentary.name=Sedimentary
+rockcategory.igneous_extrusive.name=Igneous Extrusive
+rockcategory.igneous_intrusive.name=Igneous Instrusive
+
+is_flux_rock.name=Can be used as Flux
 
 # Command
 tfc.command.timetfc.usage=/timetfc <add|query|set> [args...]

@@ -51,6 +51,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import java.util.*;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.plant.PlantType.PORCINI;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.FARMLAND;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
@@ -116,8 +117,8 @@ public class WorldRegenHandler {
 
 						float floraDensity = chunkDataTFC.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)
 						float floraDiversity = chunkDataTFC.getFloraDiversity();
-						//PlantType mushroom = TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI); //TODO алег
-						//if (null != null) PLANT_GEN.setGeneratedPlant(mushroom);
+
+						PLANT_GEN.setGeneratedPlant(PORCINI);
 						for (float i = RANDOM.nextInt(Math.round(3 / floraDiversity)); i < (1 + floraDensity) * 5; i++) {
 							BlockPos blockMushroomPos = event.world.getHeight(blockPos.add(RANDOM.nextInt(16) + 8, 0, RANDOM.nextInt(16) + 8));
 							PLANT_GEN.generate(event.world, RANDOM, blockMushroomPos);

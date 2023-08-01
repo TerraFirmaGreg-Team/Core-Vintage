@@ -27,9 +27,8 @@ public class TOPPlugin
         oneProbe.registerProvider(new QuernProvider());
         oneProbe.registerProvider(new PlacedItemProvider());
         oneProbe.registerProvider(new TreeProvider());
+        oneProbe.registerProvider(new RockBlockProvider());
 
         oneProbe.registerProvider(new TorchProvider());
-        oneProbe.registerProvider(new SoilTypeProvider());
-        oneProbe.registerProvider(new RockBlockProvider());
     }
 }

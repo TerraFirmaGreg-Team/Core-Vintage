@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.api.capability.size;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nonnull;
@@ -16,14 +17,18 @@ public enum Weight implements IStringSerializable {
 	HEAVY(4),
 	VERY_HEAVY(1);
 
-	public final int stackSize;
+	private final int stackSize;
 
 	Weight(int stackSize) {
 		this.stackSize = stackSize;
 	}
 
-	public boolean isSmallerThan(Weight other) {
-		return this.stackSize > other.stackSize;
+	public int getStackSize() {
+		return stackSize;
+	}
+
+	public String getLocalizedName() {
+		return I18n.format("tfc.enum.weight." + getName() + ".name");
 	}
 
 	@Nonnull

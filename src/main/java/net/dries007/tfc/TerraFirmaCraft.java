@@ -21,6 +21,7 @@ import net.dries007.tfc.client.TFCKeybindings;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
 import net.dries007.tfc.command.*;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
+import net.dries007.tfc.compat.gregtech.stonetypes.StoneTypeHandler;
 import net.dries007.tfc.compat.top.TOPPlugin;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.objects.LootTablesTFC;
@@ -183,7 +184,7 @@ public final class TerraFirmaCraft {
         CapabilityForgeable.init();
 
         DefaultRecipes.init();
-        //StoneTypeHandler.init();
+        // StoneTypeHandler.init();
     }
 
     @Mod.EventHandler

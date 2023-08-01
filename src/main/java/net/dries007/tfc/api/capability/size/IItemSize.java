@@ -37,13 +37,13 @@ public interface IItemSize {
 
 	@SideOnly(Side.CLIENT)
 	default void addSizeInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
-		text.add("\u2696 " + I18n.format(getWeight(stack).getName()) + " \u21F2 " + I18n.format(getSize(stack).getName()));
+		text.add(1, "\u2696 " + getWeight(stack).getLocalizedName() + " \u21F2 " + getSize(stack).getLocalizedName());
 	}
 
 	/**
 	 * Should be called from {@link net.minecraft.item.Item#getItemStackLimit(ItemStack)}
 	 */
 	default int getStackSize(@Nonnull ItemStack stack) {
-		return canStack(stack) ? getWeight(stack).stackSize : 1;
+		return canStack(stack) ? getWeight(stack).getStackSize() : 1;
 	}
 }

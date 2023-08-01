@@ -50,6 +50,6 @@ public class ItemBlockTFC extends ItemBlock implements IItemSize {
 	 */
 	@Override
 	public int getItemStackLimit(ItemStack stack) {
-		return getWeight(stack).stackSize;
+		return getWeight(stack).getStackSize();
 	}
 }

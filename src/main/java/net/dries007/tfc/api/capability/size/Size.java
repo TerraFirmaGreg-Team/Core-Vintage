@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.api.capability.size;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nonnull;
@@ -21,6 +22,10 @@ public enum Size implements IStringSerializable {
 
 	public boolean isSmallerThan(Size other) {
 		return this.ordinal() < other.ordinal();
+	}
+
+	public String getLocalizedName() {
+		return I18n.format("tfc.enum.size." + getName() + ".name");
 	}
 
 	@Nonnull

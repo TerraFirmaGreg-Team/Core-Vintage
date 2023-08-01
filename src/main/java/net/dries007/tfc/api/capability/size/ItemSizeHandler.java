@@ -79,6 +79,6 @@ public class ItemSizeHandler implements ICapabilityProvider, IItemSize {
 	 */
 	@Override
 	public int getStackSize(@Nonnull ItemStack stack) {
-		return this.canStack ? this.weight.stackSize : 1;
+		return this.canStack ? this.weight.getStackSize() : 1;
 	}
 }

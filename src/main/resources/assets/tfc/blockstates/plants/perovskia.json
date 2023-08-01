@@ -1,64 +1,46 @@
 {
-  "multipart": [
-    {
-      "when": {
-        "stage": "0"
-      },
-      "apply": [
-        {
-          "model": "tfc:plants/perovskia_0"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plants/perovskia/0",
+          "particle": "tfc:blocks/plants/perovskia/0"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "1"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/perovskia_1"
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plants/perovskia/1",
+          "particle": "tfc:blocks/plants/perovskia/1"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "2"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/perovskia_2"
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plants/perovskia/2",
+          "particle": "tfc:blocks/plants/perovskia/2"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "3"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/perovskia_3"
+      "3": {
+        "textures": {
+          "cross": "tfc:blocks/plants/perovskia/3",
+          "particle": "tfc:blocks/plants/perovskia/3"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "4"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/perovskia_4"
+      "4": {
+        "textures": {
+          "cross": "tfc:blocks/plants/perovskia/4",
+          "particle": "tfc:blocks/plants/perovskia/4"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "5"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/perovskia_5"
+      "5": {
+        "textures": {
+          "cross": "tfc:blocks/plants/perovskia/5",
+          "particle": "tfc:blocks/plants/perovskia/5"
         }
-      ]
+      }
     }
-  ]
+  }
 }

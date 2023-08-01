@@ -1,64 +1,46 @@
 {
-  "multipart": [
-    {
-      "when": {
-        "stage": "0"
-      },
-      "apply": [
-        {
-          "model": "tfc:plants/pulsatilla_0"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plants/pulsatilla/0",
+          "particle": "tfc:blocks/plants/pulsatilla/0"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "1"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/pulsatilla_1"
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plants/pulsatilla/1",
+          "particle": "tfc:blocks/plants/pulsatilla/1"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "2"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/pulsatilla_2"
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plants/pulsatilla/2",
+          "particle": "tfc:blocks/plants/pulsatilla/2"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "3"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/pulsatilla_3"
+      "3": {
+        "textures": {
+          "cross": "tfc:blocks/plants/pulsatilla/3",
+          "particle": "tfc:blocks/plants/pulsatilla/3"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "4"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/pulsatilla_4"
+      "4": {
+        "textures": {
+          "cross": "tfc:blocks/plants/pulsatilla/4",
+          "particle": "tfc:blocks/plants/pulsatilla/4"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "5"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/pulsatilla_5"
+      "5": {
+        "textures": {
+          "cross": "tfc:blocks/plants/pulsatilla/5",
+          "particle": "tfc:blocks/plants/pulsatilla/5"
         }
-      ]
+      }
     }
-  ]
+  }
 }

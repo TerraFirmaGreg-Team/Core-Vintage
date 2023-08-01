@@ -8,43 +8,21 @@
   "elements": [
     {
       "name": "stalk",
-      "from": [
-        8,
-        0,
-        -8
-      ],
-      "to": [
-        8,
-        11,
-        24
-      ],
+      "from": [8, 0, -8],
+      "to": [8, 11, 24],
       "rotation": {
         "angle": -45,
         "axis": "y",
-        "origin": [
-          8,
-          8,
-          8
-        ]
+        "origin": [8, 8, 8]
       },
       "faces": {
         "east": {
-          "uv": [
-            0,
-            0,
-            16,
-            5.5
-          ],
+          "uv": [0, 0, 16, 5.5],
           "texture": "#1",
           "tintindex": 0
         },
         "west": {
-          "uv": [
-            16,
-            0,
-            0,
-            5.5
-          ],
+          "uv": [16, 0, 0, 5.5],
           "texture": "#1",
           "tintindex": 0
         }
@@ -52,43 +30,21 @@
     },
     {
       "name": "stalk",
-      "from": [
-        8,
-        0,
-        -8
-      ],
-      "to": [
-        8,
-        11,
-        24
-      ],
+      "from": [8, 0, -8],
+      "to": [8, 11, 24],
       "rotation": {
         "angle": 45,
         "axis": "y",
-        "origin": [
-          8,
-          8,
-          8
-        ]
+        "origin": [8, 8, 8]
       },
       "faces": {
         "east": {
-          "uv": [
-            0,
-            0,
-            16,
-            5.5
-          ],
+          "uv": [0, 0, 16, 5.5],
           "texture": "#1",
           "tintindex": 0
         },
         "west": {
-          "uv": [
-            16,
-            0,
-            0,
-            5.5
-          ],
+          "uv": [16, 0, 0, 5.5],
           "texture": "#1",
           "tintindex": 0
         }

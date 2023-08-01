@@ -8,88 +8,44 @@
   "elements": [
     {
       "name": "cube",
-      "from": [
-        1,
-        8,
-        1
-      ],
-      "to": [
-        17,
-        8,
-        17
-      ],
+      "from": [1, 8, 1],
+      "to": [17, 8, 17],
       "faces": {
         "up": {
-          "uv": [
-            16,
-            0,
-            0,
-            16
-          ],
+          "uv": [16, 0, 0, 16],
           "texture": "#1",
           "tintindex": 0
         },
         "down": {
-          "uv": [
-            16,
-            16,
-            0,
-            0
-          ],
+          "uv": [16, 16, 0, 0],
           "texture": "#1",
           "tintindex": 0
         }
       },
       "rotation": {
-        "origin": [
-          9,
-          8,
-          9
-        ],
+        "origin": [9, 8, 9],
         "axis": "x",
         "angle": -22.5
       }
     },
     {
       "name": "cube",
-      "from": [
-        -1,
-        5,
-        1
-      ],
-      "to": [
-        15,
-        5,
-        17
-      ],
+      "from": [-1, 5, 1],
+      "to": [15, 5, 17],
       "faces": {
         "up": {
-          "uv": [
-            16,
-            0,
-            0,
-            16
-          ],
+          "uv": [16, 0, 0, 16],
           "texture": "#0",
           "tintindex": 0
         },
         "down": {
-          "uv": [
-            16,
-            16,
-            0,
-            0
-          ],
+          "uv": [16, 16, 0, 0],
           "texture": "#0",
           "tintindex": 0
         }
       },
       "rotation": {
-        "origin": [
-          7,
-          5,
-          9
-        ],
+        "origin": [7, 5, 9],
         "axis": "x",
         "angle": -22.5
       }
@@ -97,11 +53,7 @@
   ],
   "display": {
     "thirdperson_righthand": {
-      "scale": [
-        1,
-        1,
-        1
-      ]
+      "scale": [1, 1, 1]
     }
   }
 }

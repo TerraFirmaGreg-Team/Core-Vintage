@@ -1,44 +1,34 @@
 {
-  "multipart": [
-    {
-      "when": {
-        "stage": "0"
-      },
-      "apply": [
-        {
-          "model": "tfc:plants/yucca_0"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plants/yucca/0",
+          "particle": "tfc:blocks/plants/yucca/0"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "1"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/yucca_1"
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plants/yucca/1",
+          "particle": "tfc:blocks/plants/yucca/1"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "2"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/yucca_2"
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plants/yucca/2",
+          "particle": "tfc:blocks/plants/yucca/2"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "3"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/yucca_3"
+      "3": {
+        "textures": {
+          "cross": "tfc:blocks/plants/yucca/3",
+          "particle": "tfc:blocks/plants/yucca/3"
         }
-      ]
+      }
     }
-  ]
+  }
 }

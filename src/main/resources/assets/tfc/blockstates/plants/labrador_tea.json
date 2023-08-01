@@ -1,74 +1,52 @@
 {
-  "multipart": [
-    {
-      "when": {
-        "stage": "0"
-      },
-      "apply": [
-        {
-          "model": "tfc:plants/labrador_tea_0"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plants/labrador_tea/0",
+          "particle": "tfc:blocks/plants/labrador_tea/0"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "1"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/labrador_tea_1"
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plants/labrador_tea/1",
+          "particle": "tfc:blocks/plants/labrador_tea/1"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "2"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/labrador_tea_2"
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plants/labrador_tea/2",
+          "particle": "tfc:blocks/plants/labrador_tea/2"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "3"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/labrador_tea_3"
+      "3": {
+        "textures": {
+          "cross": "tfc:blocks/plants/labrador_tea/3",
+          "particle": "tfc:blocks/plants/labrador_tea/3"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "4"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/labrador_tea_4"
+      "4": {
+        "textures": {
+          "cross": "tfc:blocks/plants/labrador_tea/4",
+          "particle": "tfc:blocks/plants/labrador_tea/4"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "5"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/labrador_tea_5"
+      "5": {
+        "textures": {
+          "cross": "tfc:blocks/plants/labrador_tea/5",
+          "particle": "tfc:blocks/plants/labrador_tea/5"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "6"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/labrador_tea_6"
+      "6": {
+        "textures": {
+          "cross": "tfc:blocks/plants/labrador_tea/6",
+          "particle": "tfc:blocks/plants/labrador_tea/6"
         }
-      ]
+      }
     }
-  ]
+  }
 }

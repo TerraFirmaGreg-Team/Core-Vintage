@@ -1,11 +1,10 @@
 {
-  "multipart": [
-    {
-      "apply": [
-        {
-          "model": "tfc:plants/sago"
-        }
-      ]
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:tinted_cross",
+    "textures": {
+      "cross": "tfc:blocks/plants/sago/sago",
+      "particle": "tfc:blocks/plants/sago/sago"
     }
-  ]
+  }
 }

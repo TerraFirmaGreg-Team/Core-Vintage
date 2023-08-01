@@ -1,150 +1,70 @@
 {
-  "multipart": [
-    {
-      "when": {
-        "stage": "0"
-      },
-      "apply": [
-        {
-          "model": "tfc:plants/dandelion/0",
-          "weight": 5
-        },
-        {
-          "model": "tfc:plants/dandelion/1",
-          "weight": 1
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plants/dandelion/0",
+          "particle": "tfc:blocks/plants/dandelion/0"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "1"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/dandelion/1",
-          "weight": 5
-        },
-        {
-          "model": "tfc:plants/dandelion/2",
-          "weight": 3
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plants/dandelion/0",
+          "particle": "tfc:blocks/plants/dandelion/0"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "2"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/dandelion/2",
-          "weight": 5
-        },
-        {
-          "model": "tfc:plants/dandelion/3",
-          "weight": 1
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plants/dandelion/1",
+          "particle": "tfc:blocks/plants/dandelion/1"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "3"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/dandelion/2",
-          "weight": 1
-        },
-        {
-          "model": "tfc:plants/dandelion/3",
-          "weight": 5
+      "3": {
+        "textures": {
+          "cross": "tfc:blocks/plants/dandelion/1",
+          "particle": "tfc:blocks/plants/dandelion/1"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "4"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/dandelion/1",
-          "weight": 1
-        },
-        {
-          "model": "tfc:plants/dandelion/3",
-          "weight": 5
+      "4": {
+        "textures": {
+          "cross": "tfc:blocks/plants/dandelion/2",
+          "particle": "tfc:blocks/plants/dandelion/2"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "5"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/dandelion/1",
-          "weight": 5
-        },
-        {
-          "model": "tfc:plants/dandelion/3",
-          "weight": 1
+      "5": {
+        "textures": {
+          "cross": "tfc:blocks/plants/dandelion/2",
+          "particle": "tfc:blocks/plants/dandelion/2"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "6"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/dandelion/1",
-          "weight": 5
-        },
-        {
-          "model": "tfc:plants/dandelion/2",
-          "weight": 3
+      "6": {
+        "textures": {
+          "cross": "tfc:blocks/plants/dandelion/3",
+          "particle": "tfc:blocks/plants/dandelion/3"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "7"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/dandelion/2",
-          "weight": 5
-        },
-        {
-          "model": "tfc:plants/dandelion/3",
-          "weight": 1
+      "7": {
+        "textures": {
+          "cross": "tfc:blocks/plants/dandelion/1",
+          "particle": "tfc:blocks/plants/dandelion/1"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "8"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/dandelion/1",
-          "weight": 1
-        },
-        {
-          "model": "tfc:plants/dandelion/3",
-          "weight": 1
+      "8": {
+        "textures": {
+          "cross": "tfc:blocks/plants/dandelion/2",
+          "particle": "tfc:blocks/plants/dandelion/2"
         }
-      ]
-    },
-    {
-      "when": {
-        "stage": "9"
       },
-      "apply": [
-        {
-          "model": "tfc:plants/dandelion/0",
-          "weight": 1
+      "9": {
+        "textures": {
+          "cross": "tfc:blocks/plants/dandelion/3",
+          "particle": "tfc:blocks/plants/dandelion/3"
         }
-      ]
+      }
     }
-  ]
+  }
 }

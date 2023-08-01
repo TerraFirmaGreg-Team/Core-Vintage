@@ -281,7 +281,7 @@ public class BlockRockAnvil extends Block implements IRockTypeBlock, IItemSize {
 	@Override
 	@Nonnull
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ItemRock.get(rockType);
+		return TFCStorage.getRockItem(rockType);
 	}
 
 	@Override

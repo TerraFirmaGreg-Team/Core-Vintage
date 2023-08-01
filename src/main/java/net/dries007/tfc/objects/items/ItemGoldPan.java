@@ -10,6 +10,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.rock.ItemRock;
@@ -150,7 +151,7 @@ public class ItemGoldPan extends ItemTFC {
 							} else if (damage == 3 || damage == 4) {
 								RockType rock = chunkDataTFC.getRockHeight(position);
 								if (Constants.RNG.nextDouble() < 0.35) {
-									Helpers.spawnItemStack(world, position, new ItemStack(ItemRock.get(rock), 1));
+									Helpers.spawnItemStack(world, position, new ItemStack(TFCStorage.getRockItem(rock), 1));
 								} else if (damage == 3 && Constants.RNG.nextDouble() < 0.1) {
 									Helpers.spawnItemStack(world, position, new ItemStack(Items.BONE, 1));
 								} else if (damage != 3 && Constants.RNG.nextDouble() < 0.1) {

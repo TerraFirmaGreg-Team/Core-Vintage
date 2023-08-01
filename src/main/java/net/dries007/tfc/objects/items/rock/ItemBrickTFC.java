@@ -7,9 +7,8 @@ package net.dries007.tfc.objects.items.rock;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types2.rock.RockCategory;
 import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.types2.rock.util.IRockObject;
+import net.dries007.tfc.api.types2.rock.util.IRockItem;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
@@ -20,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class ItemBrickTFC extends ItemTFC implements IRockObject {
+public class ItemBrickTFC extends ItemTFC implements IRockItem {
 	private static final Map<RockType, ItemBrickTFC> MAP = new HashMap<>();
 	private final RockType rock;
 
@@ -54,13 +53,7 @@ public class ItemBrickTFC extends ItemTFC implements IRockObject {
 
 	@Nonnull
 	@Override
-	public RockType getRock(ItemStack stack) {
+	public RockType getRockType() {
 		return rock;
-	}
-
-	@Nonnull
-	@Override
-	public RockCategory getRockCategory(ItemStack stack) {
-		return rock.getRockCategory();
 	}
 }

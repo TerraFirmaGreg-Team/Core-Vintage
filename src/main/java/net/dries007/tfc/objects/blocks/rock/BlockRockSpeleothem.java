@@ -131,7 +131,7 @@ public class BlockRockSpeleothem extends Block implements IRockTypeBlock, IItemS
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ItemRock.get(rockType);
+		return TFCStorage.getRockItem(rockType);
 	}
 
 	@Override

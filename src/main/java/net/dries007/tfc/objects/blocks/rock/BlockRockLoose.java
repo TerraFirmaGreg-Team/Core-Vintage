@@ -5,6 +5,7 @@ import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
 import net.dries007.tfc.objects.blocks.BlockGroundcover;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -12,7 +13,9 @@ import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -63,7 +66,20 @@ public class BlockRockLoose extends BlockGroundcover implements IRockTypeBlock {
 		return null;
 	}
 
-//    @Override
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	@SuppressWarnings("deprecation")
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
+			worldIn.destroyBlock(pos, false);
+		}
+	}
+
+	//    @Override
 //    @SuppressWarnings("ConstantConditions")
 //    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 //                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

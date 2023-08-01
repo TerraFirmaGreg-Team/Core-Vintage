@@ -15,6 +15,7 @@ import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.ceramics.ItemUnfiredMold;
+import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.minecraft.block.Block;
 
 import javax.annotation.Nonnull;
@@ -33,8 +34,8 @@ public final class TFCStorage {
 
 	public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
 	public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
+	public static final Map<RockType, ItemRock> ITEMROCK_MAP = new HashMap<>();
 
-	// Add more, barrels, planks, fences and etc
 	public static void addRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull RockVariant blockVariant, @Nonnull RockType rockType, @Nonnull IRockTypeBlock rockTypeBlock) {
 		if (ROCK_BLOCKS.put(new Triple<>(rockBlockType, blockVariant, rockType), rockTypeBlock) != null)
 			throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", rockBlockType, blockVariant, rockType));
@@ -69,5 +70,17 @@ public final class TFCStorage {
 		var block = (Block) PLANT_BLOCKS.get(new Pair<>(plantVariant, plantType));
 		if (block != null) return block;
 		throw new RuntimeException(String.format("Block is null: %s, %s", plantVariant, plantType));
+	}
+
+	public static void addRockItem(@Nonnull RockType rockType, @Nonnull ItemRock itemRock) {
+		if (ITEMROCK_MAP.put(rockType, itemRock) != null)
+			throw new RuntimeException(String.format("Duplicate registry detected: %s", rockType));
+	}
+
+	@Nonnull
+	public static ItemRock getRockItem(@Nonnull RockType rockType) {
+		var item = (ItemRock) ITEMROCK_MAP.get(rockType);
+		if (item != null) return item;
+		throw new RuntimeException(String.format("Item is null: %s", rockType));
 	}
 }

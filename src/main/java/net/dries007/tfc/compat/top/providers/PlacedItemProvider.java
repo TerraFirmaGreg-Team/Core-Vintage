@@ -29,21 +29,7 @@ public class PlacedItemProvider implements IProbeInfoProvider
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
 
-        var te = Helpers.getTE(world, iProbeHitData.getPos(), TEPlacedItemFlat.class);
-        if (te != null)
-        {
-            ItemStack stack = te.getStack();
 
-            if (stack.getItem() instanceof ItemRock pebble)
-            {
-                RockType rock = pebble.getRock(stack);
-//                if (rock.isFluxStone())
-//                {
-//                    iProbeInfo.text(new TextComponentTranslation("waila.tfc.flux_stone").getFormattedText());
-//                }
-
-            }
-        }
     }
 
 

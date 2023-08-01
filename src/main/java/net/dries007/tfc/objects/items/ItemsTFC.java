@@ -200,26 +200,31 @@ public final class ItemsTFC {
 
 		//=== Rock ===================================================================================================//
 
-		for (IRockTypeBlock stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
+		for (var stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
 			var itemBlock = stoneTypeBlock.getItemBlock();
 			if (itemBlock != null) registerItemBlock(r, itemBlock);
 		}
 
 		//=== Soil ===================================================================================================//
 
-		for (ISoilTypeBlock soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
+		for (var soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
 			var itemBlock = soilTypeBlock.getItemBlock();
 			if (itemBlock != null) registerItemBlock(r, itemBlock);
 		}
 
 		//=== Plant ==================================================================================================//
 
-		for (IPlantTypeBlock plantTypeBlock : TFCStorage.PLANT_BLOCKS.values()) {
+		for (var plantTypeBlock : TFCStorage.PLANT_BLOCKS.values()) {
 			var itemBlock = plantTypeBlock.getItemBlock();
 			if (itemBlock != null) registerItemBlock(r, itemBlock);
 		}
 
 		//=== Other ==================================================================================================//
+
+		for (var rock : RockType.values()) {
+			simpleItems.add(register(r, "brick/" + rock.getName(), new ItemBrickTFC(rock), EARTH));
+			simpleItems.add(register(r, "rock/" + rock.getName(), new ItemRock(rock), EARTH));
+		}
 
 
 		simpleItems.add(register(r, "wand", new ItemDebug(), MISC));
@@ -228,13 +233,6 @@ public final class ItemsTFC {
 		register(r, "wooden_bucket", new ItemWoodenBucket(), WOOD); //not a simple item, use a custom model
 		//register(r, "metal/bucket/blue_steel", new ItemMetalBucket(Metal.BLUE_STEEL, Metal.ItemType.BUCKET), METAL); //not a simple item, use a custom model
 		//register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET), METAL); //not a simple item, use a custom model
-
-		{
-			for (RockType rock : RockType.values()) {
-				simpleItems.add(register(r, "brick/" + rock.getName(), new ItemBrickTFC(rock), EARTH));
-				simpleItems.add(register(r, "rock/" + rock.getName(), new ItemRock(rock), EARTH));
-			}
-		}
 
 		{
 			Builder<ItemGem> b = new Builder<>();

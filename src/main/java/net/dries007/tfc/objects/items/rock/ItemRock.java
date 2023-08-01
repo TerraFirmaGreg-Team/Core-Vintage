@@ -8,9 +8,9 @@ package net.dries007.tfc.objects.items.rock;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types2.rock.RockCategory;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.types2.rock.util.IRockObject;
+import net.dries007.tfc.api.types2.rock.util.IRockItem;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -23,57 +23,42 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemRock extends ItemTFC implements IRockObject {
-	private static final Map<RockType, ItemRock> MAP = new HashMap<>();
-	private final RockType rock;
+public class ItemRock extends ItemTFC implements IRockItem {
 
-	public ItemRock(RockType rock) {
-		this.rock = rock;
-		if (MAP.put(rock, this) != null) throw new IllegalStateException("There can only be one.");
-		setMaxDamage(0);
+	private final RockType rockType;
+
+	public ItemRock(RockType rockType) {
+		this.rockType = rockType;
+
+		TFCStorage.addRockItem(rockType, this);
+
 		OreDictionaryHelper.register(this, "rock");
-		OreDictionaryHelper.register(this, "rock", rock);
-		OreDictionaryHelper.register(this, "rock", rock.getRockCategory());
+		OreDictionaryHelper.register(this, "rock", rockType);
+		OreDictionaryHelper.register(this, "rock", rockType.getRockCategory());
 
-		if (rock.isFlux())
+		if (rockType.isFlux())
 			OreDictionaryHelper.register(this, "rock", "flux");
 	}
 
-	public static ItemRock get(RockType rock) {
-		return MAP.get(rock);
-	}
-
-	public static ItemStack get(RockType rock, int amount) {
-		return new ItemStack(MAP.get(rock), amount);
-	}
-
 	@Override
 	@Nonnull
-	public RockType getRock(ItemStack stack) {
-		return rock;
-	}
-
-	@Override
-	@Nonnull
-	public RockCategory getRockCategory(ItemStack stack) {
-		return rock.getRockCategory();
+	public RockType getRockType() {
+		return rockType;
 	}
 
 	@Nonnull
 	@Override
 	public Size getSize(ItemStack stack) {
-		return Size.SMALL; // Stored everywhere
+		return Size.SMALL;
 	}
 
 	@Nonnull
 	@Override
 	public Weight getWeight(ItemStack stack) {
-		return Weight.VERY_LIGHT; // Stacksize = 64
+		return Weight.VERY_LIGHT;
 	}
 
 	@Override

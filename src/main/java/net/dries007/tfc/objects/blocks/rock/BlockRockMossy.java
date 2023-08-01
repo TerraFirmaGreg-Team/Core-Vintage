@@ -7,7 +7,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -45,7 +45,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
  * Пока это почти полная копия {@link BlockRock}
  * Этот клас в будущем планируется использовать для механики распространения мха
  */
-public class BlockRockMossy extends Block implements IRockTypeBlock, IItemSize {
+public class BlockRockMossy extends Block implements IRockBlock, IItemSize {
 
 	private final RockVariant rockVariant;
 	private final RockType rockType;

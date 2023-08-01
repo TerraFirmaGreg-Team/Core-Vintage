@@ -29,7 +29,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.api.types.ICreatureTFC;
 import net.dries007.tfc.api.types.IPredator;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
@@ -280,7 +280,7 @@ public final class CommonEventHandler {
 				event.setNewSpeed(event.getNewSpeed() + (event.getNewSpeed() * skillModifier));
 			}
 		}
-		if (event.getState().getBlock() instanceof IRockTypeBlock) {
+		if (event.getState().getBlock() instanceof IRockBlock) {
 			event.setNewSpeed((float) (event.getNewSpeed() / ConfigTFC.General.MISC.rockMiningTimeModifier));
 		}
 		if (event.getState().getBlock() instanceof BlockLogTFC) {

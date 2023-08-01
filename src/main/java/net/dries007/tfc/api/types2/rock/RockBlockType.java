@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types2.rock;
 
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.util.TriFunction;
 import net.dries007.tfc.objects.blocks.rock.BlockRockMossy;
 import net.dries007.tfc.objects.blocks.rock.BlockRockSlab;
@@ -40,15 +40,15 @@ public enum RockBlockType implements IStringSerializable {
 	 */
 	WALL(BlockRockWall::new, RAW, COBBLE, BRICK, SMOOTH);
 
-	private final TriFunction<RockBlockType, RockVariant, RockType, IRockTypeBlock> blockFactory;
+	private final TriFunction<RockBlockType, RockVariant, RockType, IRockBlock> blockFactory;
 	private final RockVariant[] rockVariants;
 
-	RockBlockType(TriFunction<RockBlockType, RockVariant, RockType, IRockTypeBlock> blockFactory, RockVariant... rockVariants) {
+	RockBlockType(TriFunction<RockBlockType, RockVariant, RockType, IRockBlock> blockFactory, RockVariant... rockVariants) {
 		this.rockVariants = rockVariants;
 		this.blockFactory = blockFactory;
 	}
 
-	public IRockTypeBlock createBlockType(RockVariant rockVariant, RockType stoneType) {
+	public IRockBlock createBlockType(RockVariant rockVariant, RockType stoneType) {
 		if (this.blockFactory == null) {
 			return rockVariant.createBlock(stoneType);
 		}

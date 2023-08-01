@@ -7,7 +7,7 @@ import net.dries007.tfc.api.types2.plant.util.IPlantTypeBlock;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public final class TFCStorage {
 
-	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockTypeBlock> ROCK_BLOCKS = new LinkedHashMap<>();
+	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
 	public static final Map<Pair<SoilVariant, SoilType>, ISoilTypeBlock> SOIL_BLOCKS = new LinkedHashMap<>();
 	public static final Map<Pair<PlantVariant, PlantType>, IPlantTypeBlock> PLANT_BLOCKS = new LinkedHashMap<>();
 
@@ -36,7 +36,7 @@ public final class TFCStorage {
 	public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
 	public static final Map<RockType, ItemRock> ITEMROCK_MAP = new HashMap<>();
 
-	public static void addRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull RockVariant blockVariant, @Nonnull RockType rockType, @Nonnull IRockTypeBlock rockTypeBlock) {
+	public static void addRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull RockVariant blockVariant, @Nonnull RockType rockType, @Nonnull IRockBlock rockTypeBlock) {
 		if (ROCK_BLOCKS.put(new Triple<>(rockBlockType, blockVariant, rockType), rockTypeBlock) != null)
 			throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", rockBlockType, blockVariant, rockType));
 	}

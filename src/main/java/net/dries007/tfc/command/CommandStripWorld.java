@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.command;
 
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDynamicLiquid;
@@ -59,7 +59,7 @@ public class CommandStripWorld extends CommandBase {
 					final Block current = world.getBlockState(pos).getBlock();
 					if (current instanceof BlockFluidBase || current instanceof BlockDynamicLiquid || current instanceof BlockStaticLiquid) {
 						world.setBlockState(pos, fluidReplacement, 2);
-					} else if (current instanceof IRockTypeBlock || current instanceof BlockPlantTFC) {
+					} else if (current instanceof IRockBlock || current instanceof BlockPlantTFC) {
 						world.setBlockState(pos, terrainReplacement, 2);
 					}
 				}

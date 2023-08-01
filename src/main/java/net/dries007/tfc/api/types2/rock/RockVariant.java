@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types2.rock;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.objects.blocks.rock.*;
 import net.minecraft.util.IStringSerializable;
@@ -32,12 +32,12 @@ public enum RockVariant implements IStringSerializable {
 
 
 	public static final RockVariant[] VALUES = RockVariant.values();
-	public final BiFunction<RockVariant, RockType, IRockTypeBlock> blockFactory;
+	public final BiFunction<RockVariant, RockType, IRockBlock> blockFactory;
 	private final float hardnessBase;
 	@Nullable
 	private final Specification fallingSpecification;
 
-	RockVariant(BiFunction<RockVariant, RockType, IRockTypeBlock> blockFactory, float hardnessBase, @Nullable Specification fallingSpecification) {
+	RockVariant(BiFunction<RockVariant, RockType, IRockBlock> blockFactory, float hardnessBase, @Nullable Specification fallingSpecification) {
 		this.blockFactory = blockFactory;
 		this.hardnessBase = hardnessBase;
 		this.fallingSpecification = fallingSpecification;
@@ -47,7 +47,7 @@ public enum RockVariant implements IStringSerializable {
 		return i >= 0 && i < VALUES.length ? VALUES[i] : RAW;
 	}
 
-	public IRockTypeBlock createBlock(RockType stoneType) {
+	public IRockBlock createBlock(RockType stoneType) {
 		return this.blockFactory.apply(this, stoneType);
 	}
 

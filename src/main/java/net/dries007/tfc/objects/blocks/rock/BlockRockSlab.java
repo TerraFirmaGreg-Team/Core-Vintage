@@ -4,7 +4,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.rock.ItemRockSlab;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -42,7 +42,7 @@ import java.util.Random;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.*;
 
-public abstract class BlockRockSlab extends BlockSlab implements IRockTypeBlock {
+public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
 	public final Block modelBlock;

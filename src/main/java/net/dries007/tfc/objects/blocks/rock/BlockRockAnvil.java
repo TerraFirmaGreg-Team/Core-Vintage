@@ -12,12 +12,11 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -60,7 +59,7 @@ import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 
 @ParametersAreNonnullByDefault
-public class BlockRockAnvil extends Block implements IRockTypeBlock, IItemSize {
+public class BlockRockAnvil extends Block implements IRockBlock, IItemSize {
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
 	private final RockVariant rockVariant;

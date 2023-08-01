@@ -2,7 +2,7 @@ package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.objects.blocks.rock.BlockRockSpeleothem;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.minecraft.block.Block;
@@ -104,7 +104,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 			pos = pos.offset(diff);
 			if (!world.isAirBlock(pos))
 				return;
-			if (block instanceof IRockTypeBlock rockTypeBlock) {
+			if (block instanceof IRockBlock rockTypeBlock) {
 				BlockRockSpeleothem.EnumSize sizeType = BlockRockSpeleothem.EnumSize.values()[size - i - 1];
 				// Создаем блок сталактита с указанным размером и типом породы
 				IBlockState targetBlock = TFCStorage.getRockBlock(ORDINARY, SPELEOTHEM, rockTypeBlock.getRockType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);

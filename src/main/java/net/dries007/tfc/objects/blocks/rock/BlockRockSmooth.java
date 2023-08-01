@@ -12,7 +12,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
@@ -39,7 +39,7 @@ import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockRockSmooth extends Block implements IRockTypeBlock, IItemSize {
+public class BlockRockSmooth extends Block implements IRockBlock, IItemSize {
 	public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
 
 	private final RockType rockType;

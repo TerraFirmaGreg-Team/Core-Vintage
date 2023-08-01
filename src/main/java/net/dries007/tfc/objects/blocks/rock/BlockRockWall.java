@@ -4,7 +4,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
@@ -33,7 +33,7 @@ import java.util.List;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 
-public class BlockRockWall extends BlockWall implements IRockTypeBlock {
+public class BlockRockWall extends BlockWall implements IRockBlock {
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;

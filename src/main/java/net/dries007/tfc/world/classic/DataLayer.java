@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.world.classic;
 
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 
 /**
  * Todo: Get rid. PH is already obselete / Siesmic and drainage can be done much easier similar to rainfall / temperature
@@ -31,12 +31,12 @@ public final class DataLayer {
 	public static final DataLayer PH_ALKALINE_LOW = newIntDataLayer(133, "Low Alkalinity", 3);
 	public static final DataLayer PH_ALKALINE_HIGH = newIntDataLayer(134, "High Alkalinity", 4);
 	public final int layerID;
-	public final IRockTypeBlock block;
+	public final IRockBlock block;
 	public final String name;
 	public final int valueInt;
 	public final float valueFloat;
 
-	private DataLayer(int i, IRockTypeBlock block, String name, int valueInt, float valueFloat) {
+	private DataLayer(int i, IRockBlock block, String name, int valueInt, float valueFloat) {
 		this.layerID = i;
 		this.block = block;
 		this.name = name;

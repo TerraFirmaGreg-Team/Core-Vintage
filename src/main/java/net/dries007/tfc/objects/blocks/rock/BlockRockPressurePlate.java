@@ -3,8 +3,7 @@ package net.dries007.tfc.objects.blocks.rock;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
-import net.dries007.tfc.api.util.Triple;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockPressurePlate;
@@ -31,7 +30,7 @@ import java.util.List;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 
-public class BlockRockPressurePlate extends BlockPressurePlate implements IRockTypeBlock {
+public class BlockRockPressurePlate extends BlockPressurePlate implements IRockBlock {
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;

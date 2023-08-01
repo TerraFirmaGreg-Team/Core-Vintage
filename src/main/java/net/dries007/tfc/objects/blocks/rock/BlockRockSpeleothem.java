@@ -7,9 +7,8 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -48,7 +47,7 @@ import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockRockSpeleothem extends Block implements IRockTypeBlock, IItemSize {
+public class BlockRockSpeleothem extends Block implements IRockBlock, IItemSize {
 	public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
 	private final RockVariant rockVariant;

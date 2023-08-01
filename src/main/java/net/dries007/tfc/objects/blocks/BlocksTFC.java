@@ -17,7 +17,7 @@ import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
@@ -624,7 +624,7 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isRawStone(IBlockState current) {
-		if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock)
+		if (current.getBlock() instanceof IRockBlock rockTypeBlock)
 			return rockTypeBlock.getRockVariant() == RAW;
 		return false;
 	}
@@ -646,7 +646,7 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isSand(IBlockState current) {
-		if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock) {
+		if (current.getBlock() instanceof IRockBlock rockTypeBlock) {
 			return rockTypeBlock.getRockVariant() == RockVariant.SAND;
 		}
 		return false;
@@ -681,7 +681,7 @@ public final class BlocksTFC {
 					return true;
 				}
 			}
-		if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock)
+		if (current.getBlock() instanceof IRockBlock rockTypeBlock)
 			return rockTypeBlock.getRockVariant() == GRAVEL;
 		return false;
 	}
@@ -704,7 +704,7 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isGround(IBlockState current) {
-		if (current.getBlock() instanceof IRockTypeBlock rockTypeBlock)
+		if (current.getBlock() instanceof IRockBlock rockTypeBlock)
 			switch (rockTypeBlock.getRockVariant()) {
 				case GRAVEL, SAND, RAW -> {
 					return true;

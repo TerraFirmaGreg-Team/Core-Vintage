@@ -7,7 +7,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
@@ -43,7 +43,7 @@ import static net.dries007.tfc.api.types2.rock.RockVariant.SAND;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockRockFallable extends Block implements IRockTypeBlock, IItemSize {
+public class BlockRockFallable extends Block implements IRockBlock, IItemSize {
 
 	private final RockVariant rockVariant;
 	private final RockType rockType;

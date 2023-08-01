@@ -14,7 +14,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.Gem;
@@ -57,7 +57,7 @@ import static net.dries007.tfc.api.types2.rock.RockVariant.ANVIL;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockRockRaw extends Block implements IRockTypeBlock, IItemSize {
+public class BlockRockRaw extends Block implements IRockBlock, IItemSize {
 	/* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
 	public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
 	private final RockType rockType;

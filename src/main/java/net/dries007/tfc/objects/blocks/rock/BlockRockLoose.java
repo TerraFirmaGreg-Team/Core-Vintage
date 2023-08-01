@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks.rock;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockTypeBlock;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.objects.blocks.BlockGroundcover;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -33,7 +33,7 @@ import static net.dries007.tfc.api.types2.rock.RockVariant.LOOSE;
 
 
 @ParametersAreNonnullByDefault
-public class BlockRockLoose extends BlockGroundcover implements IRockTypeBlock {
+public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;

@@ -7,6 +7,7 @@ package net.dries007.tfc.objects.items.rock;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.util.IRockItem;
 import net.dries007.tfc.objects.items.ItemTFC;
@@ -20,23 +21,15 @@ import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class ItemBrickTFC extends ItemTFC implements IRockItem {
-	private static final Map<RockType, ItemBrickTFC> MAP = new HashMap<>();
 	private final RockType rock;
 
 	public ItemBrickTFC(RockType rock) {
 		this.rock = rock;
-		if (MAP.put(rock, this) != null) throw new IllegalStateException("There can only be one.");
-		setMaxDamage(0);
+
+		TFCStorage.addBrickItem(rock, this);
+
 		OreDictionaryHelper.register(this, "brick");
 		OreDictionaryHelper.register(this, "brick", rock.getRockCategory());
-	}
-
-	public static ItemBrickTFC get(RockType ore) {
-		return MAP.get(ore);
-	}
-
-	public static ItemStack get(RockType ore, int amount) {
-		return new ItemStack(MAP.get(ore), amount);
 	}
 
 	@Nonnull

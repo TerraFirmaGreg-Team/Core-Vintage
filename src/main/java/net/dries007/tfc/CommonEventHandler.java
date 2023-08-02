@@ -34,6 +34,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
+import net.dries007.tfc.compat.gregtech.stonetypes.StoneTypeHandler;
 import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
@@ -140,6 +141,7 @@ public final class CommonEventHandler {
 	public static void onMaterialsInit(MaterialEvent event) {
 		TFGMaterialHandler.init();
 		TFGOrePrefixHandler.init();
+		StoneTypeHandler.init();
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)

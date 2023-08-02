@@ -1,13 +1,8 @@
 package net.dries007.tfc.compat.gregtech.stonetypes;
 
-import gregtech.api.unification.material.Material;
-import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.ore.StoneType;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-
-import javax.annotation.Nonnull;
 
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
@@ -19,61 +14,144 @@ import static net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix.*;
 
 public class StoneTypeHandler {
 
-    @SuppressWarnings("ConstantConditions")
     public static void init() {
-
-        final var graniteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, GRANITE);
-        final var dioriteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, DIORITE);
-        final var gabbroBlock = TFCStorage.getRockBlock(ORDINARY, RAW, GABBRO);
-        final var shaleBlock = TFCStorage.getRockBlock(ORDINARY, RAW, SHALE);
-        final var claystoneBlock = TFCStorage.getRockBlock(ORDINARY, RAW, CLAYSTONE);
-        final var limestoneBlock = TFCStorage.getRockBlock(ORDINARY, RAW, LIMESTONE);
-        final var conglomerateBlock = TFCStorage.getRockBlock(ORDINARY, RAW, CONGLOMERATE);
-        final var dolomiteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, DOLOMITE);
-        final var chertBlock = TFCStorage.getRockBlock(ORDINARY, RAW, CHERT);
-        final var chalkBlock = TFCStorage.getRockBlock(ORDINARY, RAW, CHALK);
-        final var rhyoliteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, RHYOLITE);
-        final var basaltBlock = TFCStorage.getRockBlock(ORDINARY, RAW, BASALT);
-        final var andesiteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, ANDESITE);
-        final var daciteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, DACITE);
-        final var quartziteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, QUARTZITE);
-        final var slateBlock = TFCStorage.getRockBlock(ORDINARY, RAW, SLATE);
-        final var phylliteBlock = TFCStorage.getRockBlock(ORDINARY, RAW, PHYLLITE);
-        final var schistBlock = TFCStorage.getRockBlock(ORDINARY, RAW, SCHIST);
-        final var gneissBlock = TFCStorage.getRockBlock(ORDINARY, RAW, GNEISS);
-        final var marbleBlock = TFCStorage.getRockBlock(ORDINARY, RAW, MARBLE);
-
-        createStoneType(16, "tfc_andesite", oreAndesite, Andesite, andesiteBlock);
-        createStoneType(17, "tfc_basalt", oreBasalt, Basalt, basaltBlock);
-        createStoneType(18, "tfc_chalk", oreChalk, Chalk, chalkBlock);
-        createStoneType(19, "tfc_chert", oreChert, Chert, chertBlock);
-        createStoneType(20, "tfc_claystone", oreClaystone, Claystone, claystoneBlock);
-        createStoneType(21, "tfc_conglomerate", oreConglomerate, Conglomerate, conglomerateBlock);
-        createStoneType(22, "tfc_dacite", oreDacite, Dacite, daciteBlock);
-        createStoneType(23, "tfc_diorite", oreDiorite, Diorite, dioriteBlock);
-        createStoneType(24, "tfc_dolomite", oreDolomite, Dolomite, dolomiteBlock);
-        createStoneType(25, "tfc_gabbro", oreGabbro, Gabbro, gabbroBlock);
-        createStoneType(26, "tfc_gneiss", oreGneiss, Gneiss, gneissBlock);
-        createStoneType(27, "tfc_granite", oreGranite, Granite, graniteBlock);
-        createStoneType(28, "tfc_limestone", oreLimestone, Limestone, limestoneBlock);
-        createStoneType(29, "tfg_marble", oreMarble, Marble, marbleBlock);
-        createStoneType(30, "tfc_quartzite", oreQuartzite, Quartzite, quartziteBlock);
-        createStoneType(31, "tfc_rhyolite", oreRhyolite, Rhyolite, rhyoliteBlock);
-        createStoneType(32, "tfc_schist", oreSchist, Schist, schistBlock);
-        createStoneType(33, "tfc_shale", oreShale, Shale, shaleBlock);
-        createStoneType(34, "tfc_slate", oreSlate, Slate, slateBlock);
-        createStoneType(35, "tfc_phyllite", orePhyllite, Phyllite, phylliteBlock);
-    }
-
-    private static void createStoneType(int id, @Nonnull String name, @Nonnull OrePrefix orePrefix, @Nonnull Material material, @Nonnull Block predicateBlock) {
         new StoneType(
-                id,
-                name,
-                SoundType.STONE,
-                orePrefix,
-                material,
-                predicateBlock::getDefaultState,
-                state -> state.getBlock() == predicateBlock,
+                16, "tfc_andesite", SoundType.STONE, oreAndesite, Andesite,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, ANDESITE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, ANDESITE),
+                false
+        );
+
+        new StoneType(
+                17, "tfc_basalt", SoundType.STONE, oreBasalt, Basalt,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, BASALT).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, BASALT),
+                false
+        );
+
+        new StoneType(
+                18, "tfc_chalk", SoundType.STONE, oreChalk, Chalk,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, CHALK).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, CHALK),
+                false
+        );
+
+        new StoneType(
+                19, "tfc_chert", SoundType.STONE, oreChert, Chert,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, CHERT).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, CHERT),
+                false
+        );
+
+        new StoneType(
+                20, "tfc_claystone", SoundType.STONE, oreClaystone, Claystone,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, CLAYSTONE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, CLAYSTONE),
+                false
+        );
+
+        new StoneType(
+                21, "tfc_conglomerate", SoundType.STONE, oreConglomerate, Conglomerate,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, CONGLOMERATE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, CONGLOMERATE),
+                false
+        );
+
+        new StoneType(
+                22, "tfc_dacite", SoundType.STONE, oreDacite, Dacite,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, DACITE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, DACITE),
+                false
+        );
+
+        new StoneType(
+                23, "tfc_diorite", SoundType.STONE, oreDiorite, Diorite,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, DIORITE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, DIORITE),
+                false
+        );
+
+        new StoneType(
+                24, "tfc_dolomite", SoundType.STONE, oreDolomite, Dolomite,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, DOLOMITE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, DOLOMITE),
+                false
+        );
+
+        new StoneType(
+                25, "tfc_gabbro", SoundType.STONE, oreGabbro, Gabbro,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, GABBRO).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, GABBRO),
+                false
+        );
+
+        new StoneType(
+                26, "tfc_gneiss", SoundType.STONE, oreGneiss, Gneiss,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, GNEISS).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, GNEISS),
+                false
+        );
+
+        new StoneType(
+                27, "tfc_granite", SoundType.STONE, oreGranite, Granite,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, GRANITE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, GRANITE),
+                false
+        );
+
+        new StoneType(
+                28, "tfc_limestone", SoundType.STONE, oreLimestone, Limestone,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, LIMESTONE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, LIMESTONE),
+                false
+        );
+
+        new StoneType(
+                29, "tfg_marble", SoundType.STONE, oreMarble, Marble,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, MARBLE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, MARBLE),
+                false
+        );
+
+        new StoneType(
+                30, "tfc_quartzite", SoundType.STONE, oreQuartzite, Quartzite,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, QUARTZITE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, QUARTZITE),
+                false
+        );
+
+        new StoneType(
+                31, "tfc_rhyolite", SoundType.STONE, oreRhyolite, Rhyolite,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, RHYOLITE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, RHYOLITE),
+                false
+        );
+
+        new StoneType(
+                32, "tfc_schist", SoundType.STONE, oreSchist, Schist,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, SCHIST).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, SCHIST),
+                false
+        );
+
+        new StoneType(
+                33, "tfc_shale", SoundType.STONE, oreShale, Shale,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, SHALE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, SHALE),
+                false
+        );
+
+        new StoneType(
+                34, "tfc_slate", SoundType.STONE, oreSlate, Slate,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, SLATE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, SLATE),
+                false
+        );
+
+        new StoneType(
+                35, "tfc_phyllite", SoundType.STONE, orePhyllite, Phyllite,
+                () -> TFCStorage.getRockBlock(ORDINARY, RAW, PHYLLITE).getDefaultState(),
+                state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, PHYLLITE),
                 false
         );
     }

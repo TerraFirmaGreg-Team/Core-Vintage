@@ -184,7 +184,6 @@ public final class TerraFirmaCraft {
         CapabilityForgeable.init();
 
         DefaultRecipes.init();
-        // StoneTypeHandler.init();
     }
 
     @Mod.EventHandler

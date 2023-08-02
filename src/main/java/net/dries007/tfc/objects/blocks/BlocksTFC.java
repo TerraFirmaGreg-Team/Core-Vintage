@@ -56,8 +56,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockVariant.GRAVEL;
-import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
+import static net.dries007.tfc.api.types2.rock.RockVariant.*;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.DRY_GRASS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
@@ -647,7 +646,14 @@ public final class BlocksTFC {
 
 	public static boolean isSand(IBlockState current) {
 		if (current.getBlock() instanceof IRockBlock rockTypeBlock) {
-			return rockTypeBlock.getRockVariant() == RockVariant.SAND;
+			return rockTypeBlock.getRockVariant() == SAND;
+		}
+		return false;
+	}
+
+	public static boolean isGravel(IBlockState current) {
+		if (current.getBlock() instanceof IRockBlock rockTypeBlock) {
+			return rockTypeBlock.getRockVariant() == GRAVEL;
 		}
 		return false;
 	}

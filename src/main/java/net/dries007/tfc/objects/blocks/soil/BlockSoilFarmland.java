@@ -49,7 +49,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
+import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
+import static net.dries007.tfc.objects.blocks.BlocksTFC.isGravel;
+import static net.dries007.tfc.objects.blocks.BlocksTFC.isSand;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 @MethodsReturnNonnullByDefault
@@ -205,22 +207,22 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 		if (plantable instanceof BlockPlantTFC) {
 			switch (((BlockPlantTFC) plantable).getPlantTypeTFC()) {
 				case CLAY -> {
-					return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS || soilVariant == SoilVariant.CLAY || soilVariant == SoilVariant.CLAY_GRASS;
+					return soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || soilVariant == CLAY || soilVariant == CLAY_GRASS;
 				}
 				case DESERT_CLAY -> {
-					return soilVariant == SoilVariant.CLAY || soilVariant == SoilVariant.CLAY_GRASS; // || soilVariant == SoilVariant.SAND
+					return soilVariant == CLAY || soilVariant == CLAY_GRASS || isSand(state);
 				}
 				case DRY_CLAY -> {
-					return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.DRY_GRASS || soilVariant == SoilVariant.CLAY || soilVariant == SoilVariant.CLAY_GRASS; //|| soilVariant == SoilVariant.SAND;
+					return soilVariant == DIRT || soilVariant == DRY_GRASS || soilVariant == CLAY || soilVariant == CLAY_GRASS || isSand(state);
 				}
 				case DRY -> {
-					return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.DRY_GRASS; // || soilVariant == SoilVariant.SAND;
+					return soilVariant == DIRT || soilVariant == DRY_GRASS || isSand(state);
 				}
 				case FRESH_WATER -> {
-					return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS; // || soilVariant == SoilVariant.GRAVEL;
+					return soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isGravel(state);
 				}
 				case SALT_WATER -> {
-					return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS; // || soilVariant == SoilVariant.SAND || soilVariant == SoilVariant.GRAVEL;
+					return soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state) || isGravel(state);
 				}
 				case FRESH_BEACH -> {
 					boolean flag = false;
@@ -232,7 +234,7 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 							}
 						}
 					}
-					return (soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS) && flag; //|| soilVariant == SoilVariant.SAND
+					return (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state)) && flag;
 				}
 				case SALT_BEACH -> {
 					boolean flag = false;
@@ -242,7 +244,7 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 								flag = true;
 							}
 					}
-					return (soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS) && flag; //|| soilVariant == SoilVariant.SAND
+					return (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state)) && flag;
 				}
 			}
 		} else if (plantable instanceof BlockCropTFC) {
@@ -250,24 +252,24 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 			if (cropState.getBlock() instanceof BlockCropTFC) {
 				boolean isWild = cropState.getValue(WILD);
 				if (isWild) {
-					if (soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS || soilVariant == SoilVariant.CLAY_GRASS) {
+					if (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || soilVariant == CLAY_GRASS) {
 						return true;
 					}
 				}
-				return soilVariant == SoilVariant.FARMLAND;
+				return soilVariant == FARMLAND;
 			}
 		}
 
 		switch (plantable.getPlantType(world, pos.offset(direction))) {
 			case Plains -> {
-				return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.FARMLAND || soilVariant == SoilVariant.DRY_GRASS || soilVariant == SoilVariant.CLAY || soilVariant == SoilVariant.CLAY_GRASS;
+				return soilVariant == DIRT || soilVariant == GRASS || soilVariant == FARMLAND || soilVariant == DRY_GRASS || soilVariant == CLAY || soilVariant == CLAY_GRASS;
 			}
 			case Crop -> {
-				return soilVariant == SoilVariant.FARMLAND;
+				return soilVariant == FARMLAND;
 			}
-//			case Desert -> {
-//				return soilVariant == SoilVariant.SAND;
-//			}
+			case Desert -> {
+				return isSand(state);
+			}
 			case Cave -> {
 				return true;
 			}
@@ -282,7 +284,7 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 							flag = true;
 						}
 				}
-				return (soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS) && flag; //|| soilVariant == SoilVariant.SAND
+				return (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state)) && flag;
 			}
 		}
 

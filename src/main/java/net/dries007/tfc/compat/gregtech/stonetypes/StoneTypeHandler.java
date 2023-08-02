@@ -13,7 +13,6 @@ import static net.dries007.tfc.compat.gregtech.material.TFGMaterials.*;
 import static net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix.*;
 
 public class StoneTypeHandler {
-
     public static void init() {
         new StoneType(
                 16, "tfc_andesite", SoundType.STONE, oreAndesite, Andesite,

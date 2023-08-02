@@ -68,7 +68,6 @@ public class BlockRockFallable extends Block implements IRockBlock, IItemSize {
 		else
 			this.setSoundType(SoundType.GROUND);
 		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
-		this.setSoundType(SoundType.STONE);
 		this.setHardness(getFinalHardness() * 0.2F);
 		this.setHarvestLevel("shovel", 0);
 		this.setRegistryName(MOD_ID, blockRegistryName);
@@ -84,7 +83,7 @@ public class BlockRockFallable extends Block implements IRockBlock, IItemSize {
 	}
 
 	@Nonnull
-    @Override
+	@Override
 	public RockType getRockType() {
 		return rockType;
 	}

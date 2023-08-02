@@ -16,7 +16,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
@@ -34,8 +33,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -58,7 +59,8 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilTypeBlock {
 		var blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
 
 		this.setCreativeTab(CreativeTabsTFC.EARTH);
-		this.setSoundType(SoundType.GROUND);
+		this.setSoundType(SoundType.PLANT);
+		this.setHardness(0.65F);
 		this.setHarvestLevel("shovel", 0);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
@@ -82,26 +84,8 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilTypeBlock {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean isFullCube(IBlockState state) {
-		return false;
-	}
-
-	@Override
-	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return GRASS_PATH_AABB;
-	}
-
-	@Override
-	@SuppressWarnings("deprecation")
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-		return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
-	}
-
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
 	}
 
 	@Override
@@ -121,6 +105,11 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilTypeBlock {
 		if (up.isSideSolid(world, upPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
 			BlockSoilFarmland.turnToDirt(world, pos);
 		}
+	}
+
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soilType));
 	}
 
 	@Override

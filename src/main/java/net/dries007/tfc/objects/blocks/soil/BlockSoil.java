@@ -40,6 +40,7 @@ import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.CLAY;
+import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -69,6 +70,7 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
 		var blockRegistryName = String.format("soil/%s/%s", soilVariant, soilType);
 		this.setCreativeTab(CreativeTabsTFC.EARTH);
 		this.setSoundType(SoundType.GROUND);
+		this.setHardness(0.5F);
 		this.setHarvestLevel("shovel", 0);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
@@ -130,7 +132,7 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return super.getItemDropped(state, rand, fortune);
+		return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soilType));
 	}
 
 	@Override

@@ -78,6 +78,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 
 		this.setCreativeTab(CreativeTabsTFC.EARTH);
 		this.setSoundType(SoundType.PLANT);
+		this.setHardness(0.6F);
 		this.setHarvestLevel("shovel", 0);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
@@ -190,6 +191,11 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 		if (soilVariant == CLAY_GRASS)
 			return 4;
 		return super.quantityDropped(state, fortune, random);
+	}
+
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soilType));
 	}
 
 	@Override

@@ -12,6 +12,9 @@ import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
@@ -47,6 +50,7 @@ import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
+import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -95,6 +99,7 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 
 		this.setCreativeTab(CreativeTabsTFC.EARTH);
 		this.setSoundType(SoundType.GROUND);
+		this.setHardness(0.6F);
 		this.setHarvestLevel("shovel", 0);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
@@ -193,6 +198,97 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 		return new ItemStack(this);
 	}
 
+	@Override
+	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
+		int beachDistance = 2;
+
+		if (plantable instanceof BlockPlantTFC) {
+			switch (((BlockPlantTFC) plantable).getPlantTypeTFC()) {
+				case CLAY -> {
+					return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS || soilVariant == SoilVariant.CLAY || soilVariant == SoilVariant.CLAY_GRASS;
+				}
+				case DESERT_CLAY -> {
+					return soilVariant == SoilVariant.CLAY || soilVariant == SoilVariant.CLAY_GRASS; // || soilVariant == SoilVariant.SAND
+				}
+				case DRY_CLAY -> {
+					return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.DRY_GRASS || soilVariant == SoilVariant.CLAY || soilVariant == SoilVariant.CLAY_GRASS; //|| soilVariant == SoilVariant.SAND;
+				}
+				case DRY -> {
+					return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.DRY_GRASS; // || soilVariant == SoilVariant.SAND;
+				}
+				case FRESH_WATER -> {
+					return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS; // || soilVariant == SoilVariant.GRAVEL;
+				}
+				case SALT_WATER -> {
+					return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS; // || soilVariant == SoilVariant.SAND || soilVariant == SoilVariant.GRAVEL;
+				}
+				case FRESH_BEACH -> {
+					boolean flag = false;
+					for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+						for (int i = 1; i <= beachDistance; i++) {
+							if (BlocksTFC.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
+								flag = true;
+								break;
+							}
+						}
+					}
+					return (soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS) && flag; //|| soilVariant == SoilVariant.SAND
+				}
+				case SALT_BEACH -> {
+					boolean flag = false;
+					for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+						for (int i = 1; i <= beachDistance; i++)
+							if (BlocksTFC.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
+								flag = true;
+							}
+					}
+					return (soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS) && flag; //|| soilVariant == SoilVariant.SAND
+				}
+			}
+		} else if (plantable instanceof BlockCropTFC) {
+			IBlockState cropState = world.getBlockState(pos.up());
+			if (cropState.getBlock() instanceof BlockCropTFC) {
+				boolean isWild = cropState.getValue(WILD);
+				if (isWild) {
+					if (soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS || soilVariant == SoilVariant.CLAY_GRASS) {
+						return true;
+					}
+				}
+				return soilVariant == SoilVariant.FARMLAND;
+			}
+		}
+
+		switch (plantable.getPlantType(world, pos.offset(direction))) {
+			case Plains -> {
+				return soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.FARMLAND || soilVariant == SoilVariant.DRY_GRASS || soilVariant == SoilVariant.CLAY || soilVariant == SoilVariant.CLAY_GRASS;
+			}
+			case Crop -> {
+				return soilVariant == SoilVariant.FARMLAND;
+			}
+//			case Desert -> {
+//				return soilVariant == SoilVariant.SAND;
+//			}
+			case Cave -> {
+				return true;
+			}
+			case Water, Nether -> {
+				return false;
+			}
+			case Beach -> {
+				boolean flag = false;
+				for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+					for (int i = 1; i <= beachDistance; i++)
+						if (BlocksTFC.isWater(world.getBlockState(pos.offset(facing, i)))) {
+							flag = true;
+						}
+				}
+				return (soilVariant == SoilVariant.DIRT || soilVariant == SoilVariant.GRASS || soilVariant == SoilVariant.DRY_GRASS) && flag; //|| soilVariant == SoilVariant.SAND
+			}
+		}
+
+		return false;
+	}
+
 	public int getWaterScore(IBlockAccess world, BlockPos pos) {
 		final int hRange = 7;
 		float score = 0;
@@ -251,6 +347,18 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 		return new BlockStateContainer(this, MOISTURE);
 	}
 
+//	@SideOnly(Side.CLIENT)
+//	@Override
+//	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
+//	{
+//		if (this.soilType.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false))
+//		{
+//			double d0 = (float) pos.getX() + rand.nextFloat();
+//			double d1 = (double) pos.getY() - 0.05D;
+//			double d2 = (float) pos.getZ() + rand.nextFloat();
+//			world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
+//		}
+//	}
 
 	@Override
 	@SideOnly(Side.CLIENT)

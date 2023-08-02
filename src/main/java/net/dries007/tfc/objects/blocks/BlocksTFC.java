@@ -72,7 +72,7 @@ public final class BlocksTFC {
 	@GameRegistry.ObjectHolder("alabaster/raw/plain")
 	public static final BlockDecorativeStone ALABASTER_RAW_PLAIN = getNull();
 
-	public static final BlockDebug DEBUG = getNull();
+	//public static final BlockDebug DEBUG = getNull();
 	public static final BlockSoilPeat PEAT = getNull();
 	public static final BlockSoilPeat PEAT_GRASS = getNull();
 	public static final BlockFirePit FIREPIT = getNull();
@@ -253,7 +253,7 @@ public final class BlocksTFC {
 
 		//=== Other ==================================================================================================//
 
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "debug", new BlockDebug(), MISC)));
+		//normalItemBlocks.add(new ItemBlockTFC(register(r, "debug", new BlockDebug(), MISC)));
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), ROCK_STUFFS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), ROCK_STUFFS)));

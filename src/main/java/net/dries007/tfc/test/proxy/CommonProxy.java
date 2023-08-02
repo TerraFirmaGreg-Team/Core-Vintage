@@ -1,7 +1,7 @@
 package net.dries007.tfc.test.proxy;
 
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.util.IGetItems;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -42,6 +42,10 @@ public class CommonProxy {
 			r.register((Block) plantTypeBlock);
 		}
 
+		//=== Other ==================================================================================================//
+
+		TFCStorage.NORMAL_ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
+
 	}
 
 
@@ -71,11 +75,16 @@ public class CommonProxy {
 			if (itemBlock != null) registerItemBlock(r, itemBlock);
 		}
 
+		//=== Other ==================================================================================================//
+
+		TFCStorage.NORMAL_ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
+
+
 	}
 
 	@SuppressWarnings("ConstantConditions")
 	private static <T extends Block> ItemBlock createItemBlock(T block) {
-		var itemBlock = ((IGetItems) block).getItemBlock();
+		var itemBlock = ((IItemProvider) block).getItemBlock();
 		var registryName = block.getRegistryName();
 		if (registryName == null)
 			throw new IllegalArgumentException("Block " + block.getTranslationKey() + " has no registry name.");
@@ -90,7 +99,7 @@ public class CommonProxy {
 		var registryName = block.getRegistryName();
 		if (registryName == null)
 			throw new IllegalArgumentException("Block " + block.getTranslationKey() + " has no registry name.");
-		
+
 		itemBlock.setRegistryName(registryName);
 		return itemBlock;
 	}

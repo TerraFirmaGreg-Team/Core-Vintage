@@ -18,11 +18,10 @@ import net.dries007.tfc.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * In this class we can store any blocks, items, and other useful shit.
@@ -36,7 +35,9 @@ public final class TFCStorage {
 	public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
 	public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
 	public static final Map<RockType, ItemRock> ITEMROCK_MAP = new HashMap<>();
-	private static final Map<RockType, ItemBrickTFC> ITEMBRICK_MAP = new HashMap<>();
+	public static final Map<RockType, ItemBrickTFC> ITEMBRICK_MAP = new HashMap<>();
+
+	public static final List<ItemBlock> NORMAL_ITEM_BLOCKS = new ArrayList<>();
 
 	@Nonnull
 	public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull RockVariant blockVariant, @Nonnull RockType stoneType) {

@@ -8,12 +8,18 @@ import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.Triple;
+import net.dries007.tfc.objects.blocks.BlockDebug;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 
 import static net.dries007.tfc.api.registries.TFCStorage.*;
 
 public class TFCBlocks {
 
+	public static BlockDebug DEBUG;
+
 	// Тут возможно размещать карты
+	private TFCBlocks() {
+	}
 
 	public static void preInit() {
 
@@ -49,5 +55,9 @@ public class TFCBlocks {
 			if (PLANT_BLOCKS.put(new Pair<>(plantType.getPlantVariant(), plantType), plantTypeBlock) != null)
 				throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", plantType.getPlantVariant(), plantType));
 		}
+
+		//=== Other ==================================================================================================//
+
+		NORMAL_ITEM_BLOCKS.add(new ItemBlockTFC(new BlockDebug()));
 	}
 }

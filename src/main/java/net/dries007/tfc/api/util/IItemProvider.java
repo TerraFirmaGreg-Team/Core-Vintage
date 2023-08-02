@@ -4,7 +4,7 @@ import net.minecraft.item.ItemBlock;
 
 import javax.annotation.Nullable;
 
-public interface IGetItems {
+public interface IItemProvider {
 	@Nullable
 	ItemBlock getItemBlock();
 }

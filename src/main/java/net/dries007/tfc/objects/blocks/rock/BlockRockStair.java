@@ -61,12 +61,14 @@ public class BlockRockStair extends BlockStairs implements IRockBlock {
 		//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
 	}
 
+	@Nonnull
 	@Override
 	public RockVariant getRockVariant() {
 		return rockVariant;
 	}
 
-	@Override
+	@Nonnull
+    @Override
 	public RockType getRockType() {
 		return rockType;
 	}

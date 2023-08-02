@@ -181,12 +181,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 			return true;
 		}
 
+		@Nonnull
 		@Override
 		public RockVariant getRockVariant() {
 			return rockVariant;
 		}
 
-		@Override
+		@Nonnull
+        @Override
 		public RockType getRockType() {
 			return rockType;
 		}
@@ -246,12 +248,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 			return false;
 		}
 
+		@Nonnull
 		@Override
 		public RockVariant getRockVariant() {
 			return rockVariant;
 		}
 
-		@Override
+		@Nonnull
+        @Override
 		public RockType getRockType() {
 			return rockType;
 		}

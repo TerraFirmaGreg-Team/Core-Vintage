@@ -5,15 +5,6 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.rock.RockType;
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.ingredients.IIngredients;
@@ -21,8 +12,14 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.objects.items.rock.ItemRock;
+import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.util.Helpers;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
@@ -99,12 +96,10 @@ public class KnappingRecipeWrapper implements IRecipeWrapper
      * Extra wrapper for stone, since it needs to check the rock for the input and texture
      */
     public static class Stone extends KnappingRecipeWrapper {
-        private final RockType rock;
 
         public Stone(KnappingRecipe recipe, IGuiHelper helper, RockType rock) {
             super(recipe, helper, rock.getTexture(), null);
 
-            this.rock = rock;
         }
 
         @Override

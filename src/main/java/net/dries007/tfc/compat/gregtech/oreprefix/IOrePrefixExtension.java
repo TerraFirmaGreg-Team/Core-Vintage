@@ -12,6 +12,14 @@ public interface IOrePrefixExtension {
 
     void setMetalAmount(int value);
 
-    int getMatalAmount();
+    int getMetalAmount();
+
+    void setClayKnappingPattern(String... value);
+
+    String[] getClayKnappingPattern();
+
+    void setRockKnappingPattern(String... value);
+
+    String[] getRockKnappingPattern();
 
 }

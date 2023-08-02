@@ -84,7 +84,7 @@ public final class Helpers {
 
 	public static int getOrePrefixMaterialAmount(OrePrefix orePrefix) {
 		var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
-		return extendedOrePrefix.getMatalAmount();
+		return extendedOrePrefix.getMetalAmount();
 	}
 
 	public static boolean isAtLeast(int value, int requiredInclusive) {

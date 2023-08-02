@@ -9,7 +9,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.api.types2.plant.util.IPlantTypeBlock;
@@ -79,8 +78,6 @@ public class BlockPlantTFC extends BlockBush implements IPlantTypeBlock, IItemSi
 
 	public BlockPlantTFC(PlantVariant plantVariant, PlantType plantType) {
 		super(plantType.getMaterial());
-
-		TFCStorage.addPlantBlock(plantVariant, plantType, this);
 
 		this.plantType = plantType;
 		this.plantVariant = plantVariant;

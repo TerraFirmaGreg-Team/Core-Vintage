@@ -43,7 +43,6 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -56,8 +55,6 @@ public class BlockRockSpeleothem extends Block implements IRockBlock, IItemSize 
 
 	public BlockRockSpeleothem(RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
-
-		TFCStorage.addRockBlock(ORDINARY, rockVariant, rockType, this);
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;

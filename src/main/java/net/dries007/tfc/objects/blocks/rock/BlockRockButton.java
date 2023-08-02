@@ -1,6 +1,5 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
@@ -30,7 +29,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 
 public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 	private final RockVariant rockVariant;
@@ -38,7 +36,6 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 	private final ResourceLocation modelLocation;
 
 	public BlockRockButton(RockVariant rockVariant, RockType rockType) {
-		TFCStorage.addRockBlock(ORDINARY, rockVariant, rockType, this);
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;

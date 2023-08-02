@@ -40,7 +40,8 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.*;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.SLAB_DOUBLE;
 
 public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
@@ -165,8 +166,6 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 		public Double(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 			super(rockBlockType, rockVariant, rockType);
 
-			TFCStorage.addRockBlock(SLAB_DOUBLE, rockVariant, rockType, this);
-
 			this.rockVariant = rockVariant;
 			this.rockType = rockType;
 			this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
@@ -220,8 +219,6 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
 		public Half(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 			super(rockBlockType, rockVariant, rockType);
-
-			TFCStorage.addRockBlock(SLAB, rockVariant, rockType, this);
 
 			doubleSlab = (Double) TFCStorage.getRockBlock(SLAB_DOUBLE, rockVariant, rockType);
 			doubleSlab.halfSlab = this;

@@ -41,8 +41,6 @@ public class BlockRockStair extends BlockStairs implements IRockBlock {
 	public BlockRockStair(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 		super(TFCStorage.getRockBlock(ORDINARY, rockVariant, rockType).getDefaultState());
 
-		TFCStorage.addRockBlock(rockBlockType, rockVariant, rockType, this);
-
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);

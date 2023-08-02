@@ -13,13 +13,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.types2.plant.PlantType;
-import net.dries007.tfc.api.types2.rock.RockBlockType;
-import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
-import net.dries007.tfc.api.types2.soil.SoilType;
-import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.agriculture.*;
@@ -255,40 +249,6 @@ public final class BlocksTFC {
 
 		Builder<ItemBlock> normalItemBlocks = ImmutableList.builder();
 		Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();
-
-
-		//=== Rock ===================================================================================================//
-
-		for (RockType rockType : RockType.values()) {
-			for (RockBlockType rockBlockType : RockBlockType.values()) {
-				for (RockVariant rockVariant : rockBlockType.getRockVariants()) {
-					var block = (Block) rockBlockType.createBlockType(rockVariant, rockType);
-
-					TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
-					r.register(block);
-				}
-			}
-		}
-
-		//=== Soil ===================================================================================================//
-
-		for (SoilType soilType : SoilType.values()) {
-			for (SoilVariant soilVariant : SoilVariant.values()) {
-				var block = (Block) soilVariant.createBlock(soilType);
-
-				TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
-				r.register(block);
-			}
-		}
-
-		//=== Plant ==================================================================================================//
-
-		for (PlantType plantType : PlantType.values()) {
-			var block = (Block) plantType.getPlantVariant().create(plantType);
-
-			TerraFirmaCraft.getLog().debug("Registering block: {}", block.getRegistryName());
-			r.register(block);
-		}
 
 
 		//=== Other ==================================================================================================//

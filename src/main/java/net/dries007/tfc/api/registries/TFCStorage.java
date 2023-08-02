@@ -38,11 +38,6 @@ public final class TFCStorage {
 	public static final Map<RockType, ItemRock> ITEMROCK_MAP = new HashMap<>();
 	private static final Map<RockType, ItemBrickTFC> ITEMBRICK_MAP = new HashMap<>();
 
-	public static void addRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull RockVariant blockVariant, @Nonnull RockType rockType, @Nonnull IRockBlock rockTypeBlock) {
-		if (ROCK_BLOCKS.put(new Triple<>(rockBlockType, blockVariant, rockType), rockTypeBlock) != null)
-			throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", rockBlockType, blockVariant, rockType));
-	}
-
 	@Nonnull
 	public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull RockVariant blockVariant, @Nonnull RockType stoneType) {
 		var block = (Block) ROCK_BLOCKS.get(new Triple<>(rockBlockType, blockVariant, stoneType));
@@ -50,21 +45,11 @@ public final class TFCStorage {
 		throw new RuntimeException(String.format("Block is null: %s, %s, %s", rockBlockType, blockVariant, stoneType));
 	}
 
-	public static void addSoilBlock(@Nonnull SoilVariant soilVariant, @Nonnull SoilType soilType, @Nonnull ISoilTypeBlock soilTypeBlock) {
-		if (SOIL_BLOCKS.put(new Pair<>(soilVariant, soilType), soilTypeBlock) != null)
-			throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", soilVariant, soilType));
-	}
-
 	@Nonnull
 	public static Block getSoilBlock(@Nonnull SoilVariant soilVariant, @Nonnull SoilType soilType) {
 		var block = (Block) SOIL_BLOCKS.get(new Pair<>(soilVariant, soilType));
 		if (block != null) return block;
 		throw new RuntimeException(String.format("Block is null: %s, %s", soilVariant, soilType));
-	}
-
-	public static void addPlantBlock(@Nonnull PlantVariant plantVariant, @Nonnull PlantType plantType, @Nonnull IPlantTypeBlock plantTypeBlock) {
-		if (PLANT_BLOCKS.put(new Pair<>(plantVariant, plantType), plantTypeBlock) != null)
-			throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", plantVariant, plantType));
 	}
 
 	@Nonnull

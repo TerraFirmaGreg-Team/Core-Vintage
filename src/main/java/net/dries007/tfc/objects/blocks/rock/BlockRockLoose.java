@@ -4,25 +4,22 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
-import net.dries007.tfc.objects.blocks.BlockGroundcover;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -32,21 +29,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
-import static net.dries007.tfc.api.types2.rock.RockVariant.LOOSE;
 
 
 @ParametersAreNonnullByDefault
-public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
+public class BlockRockLoose extends Block implements IRockBlock {
+
+	private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
 
 	public BlockRockLoose(RockVariant rockVariant, RockType rockType) {
-		TFCStorage.addRockBlock(ORDINARY, LOOSE, rockType, this);
+		super(Material.ROCK);
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
@@ -54,6 +50,7 @@ public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 
 		var blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
 		this.setSoundType(SoundType.STONE);
+		this.setHardness(0.1f);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 	}
@@ -65,7 +62,7 @@ public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 	}
 
 	@Nonnull
-    @Override
+	@Override
 	public RockType getRockType() {
 		return rockType;
 	}
@@ -83,7 +80,6 @@ public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 		}
 	}
 
-
 	@Nonnull
 	@Override
 	@SuppressWarnings("deprecation")
@@ -92,19 +88,19 @@ public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 	}
 
 	@Override
-    @SuppressWarnings("ConstantConditions")
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var itemStack = new ItemStack(TFCStorage.ITEMROCK_MAP.get(rockType));
+	@SuppressWarnings("ConstantConditions")
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		var itemStack = new ItemStack(TFCStorage.ITEMROCK_MAP.get(rockType));
 
-        if (playerIn.addItemStackToInventory(itemStack)) {
-            worldIn.setBlockToAir(pos);
+		if (playerIn.addItemStackToInventory(itemStack)) {
+			worldIn.setBlockToAir(pos);
 
-            playerIn.swingArm(EnumHand.MAIN_HAND);
-            playerIn.playSound(SoundEvents.ENTITY_ITEMFRAME_REMOVE_ITEM, 1.0f, 1.0f);
-        }
+			playerIn.swingArm(EnumHand.MAIN_HAND);
+			playerIn.playSound(SoundEvents.ENTITY_ITEMFRAME_REMOVE_ITEM, 1.0f, 1.0f);
+		}
 
-        return true;
-    }
+		return true;
+	}
 
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
@@ -112,10 +108,61 @@ public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 	}
 
 	@Nonnull
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.ITEMROCK_MAP.get(rockType));
-    }
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+		return new ItemStack(TFCStorage.ITEMROCK_MAP.get(rockType));
+	}
+
+	@Nonnull
+	@Override
+	@SuppressWarnings("deprecation")
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
+		return STONE_AABB;
+	}
+
+	@Override
+	@ParametersAreNonnullByDefault
+	@SuppressWarnings("deprecation")
+	public boolean isTopSolid(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	@ParametersAreNonnullByDefault
+	@SuppressWarnings("deprecation")
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	@ParametersAreNonnullByDefault
+	@SuppressWarnings("deprecation")
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+	@Nullable
+	@Override
+	@ParametersAreNonnullByDefault
+	@SuppressWarnings("deprecation")
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+		return null;
+	}
+
+	@Override
+	@ParametersAreNonnullByDefault
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+		IBlockState state = worldIn.getBlockState(pos);
+		IBlockState stateDown = worldIn.getBlockState(pos.down());
+
+		return stateDown.isSideSolid(worldIn, pos, EnumFacing.DOWN) && state.getBlock().equals(Blocks.AIR);
+	}
+
+	@Override
+	@Nonnull
+	public Block.EnumOffsetType getOffsetType() {
+		return Block.EnumOffsetType.XZ;
+	}
 
 
 	@Override
@@ -124,8 +171,16 @@ public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
 			@Nonnull
 			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation, "rocktype=" + rockType.getName());
+				return new ModelResourceLocation(modelLocation,
+						"rocktype=" + rockType.getName());
 			}
 		});
+	}
+
+	@Override
+	@Nonnull
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
 	}
 }

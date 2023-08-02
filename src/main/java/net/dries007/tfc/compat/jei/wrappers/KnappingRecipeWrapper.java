@@ -35,8 +35,9 @@ public class KnappingRecipeWrapper implements IRecipeWrapper
     private static final ResourceLocation FIRE_CLAY_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/knapping/clay_button_fire.png");
     private static final ResourceLocation LEATHER_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/knapping/leather_button.png");
 
-    private static List<ResourceLocation> ROCK_TEXTURES = new ArrayList<>();
+    private static final List<ResourceLocation> ROCK_TEXTURES = new ArrayList<>();
 
+    private final int TIME_IN_TICKS = 150;
     private int ticks;
 
     protected final KnappingRecipe recipe;
@@ -89,10 +90,10 @@ public class KnappingRecipeWrapper implements IRecipeWrapper
     }
 
     private void drawRockKnappingUI(Minecraft minecraft) {
-        if (ticks == 0 || ticks % 150 == 0) {
-            squareHigh = guiHelper.drawableBuilder(ROCK_TEXTURES.get(ticks / 150), 0, 0, 16, 16).setTextureSize(16, 16).build();
+        if (ticks == 0 || ticks % TIME_IN_TICKS == 0) {
+            squareHigh = guiHelper.drawableBuilder(ROCK_TEXTURES.get(ticks / TIME_IN_TICKS), 0, 0, 16, 16).setTextureSize(16, 16).build();
 
-            if (ticks >= (RockType.values().length - 1) * 150)
+            if (ticks >= (RockType.values().length - 1) * TIME_IN_TICKS)
                 ticks = 0;
         }
 

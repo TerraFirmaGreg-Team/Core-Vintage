@@ -33,8 +33,6 @@ public class TFGOrePrefix {
     public static final OrePrefix ingotTriple = new OrePrefix("ingotTriple", M * 3, null, MaterialIconType.ingotTriple, ENABLE_UNIFICATION,  m -> !m.hasFlag(TFGMaterialFlags.UNUSABLE) && m.hasProperty(TFGPropertyKey.HEAT));
     public static final OrePrefix ingotHex = new OrePrefix("ingotHex", M * 6, null, TFGMaterialIconType.ingotHex, ENABLE_UNIFICATION,  m -> !m.hasFlag(TFGMaterialFlags.UNUSABLE) && m.hasProperty(TFGPropertyKey.HEAT));
 
-    public static final OrePrefix oreRockSalt = new OrePrefix("oreRockSalt", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
-    public static final OrePrefix oreSoapstone = new OrePrefix("oreSoapstone", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreQuartzite = new OrePrefix("oreQuartzite", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreChalk = new OrePrefix("oreChalk", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreChert = new OrePrefix("oreChert", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
@@ -55,8 +53,6 @@ public class TFGOrePrefix {
     {
         oreChunk.addSecondaryMaterial(new MaterialStack(Materials.Stone, M));
 
-        oreRockSalt.addSecondaryMaterial(new MaterialStack(Materials.RockSalt, M));
-        oreSoapstone.addSecondaryMaterial(new MaterialStack(Materials.RockSalt, M));
         oreQuartzite.addSecondaryMaterial(new MaterialStack(Materials.Quartzite, M));
         oreChalk.addSecondaryMaterial(new MaterialStack(TFGMaterials.Chalk, M));
         oreChert.addSecondaryMaterial(new MaterialStack(TFGMaterials.Chert, M));

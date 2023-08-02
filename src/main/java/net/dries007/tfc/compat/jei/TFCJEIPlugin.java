@@ -325,12 +325,12 @@ public final class TFCJEIPlugin implements IModPlugin
 
         var stoneknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
             .filter(recipe -> recipe.getType() == KnappingType.STONE)
-            .flatMap(recipe -> Arrays.stream(RockType.values()).map(rock -> new KnappingRecipeWrapper.Stone(recipe, registry.getJeiHelpers().getGuiHelper(), rock)))
+            .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
             .collect(Collectors.toList());
 
         registry.addRecipes(stoneknapRecipes, KNAP_STONE_UID);
 
-        //Wraps all rock layers
+        // Wraps all rock layers
         //List<RockLayerWrapper> rockLayerList = TFCRegistries.ROCKS.getValuesCollection()
         //    .stream()
         //    .map(RockLayerWrapper::new)

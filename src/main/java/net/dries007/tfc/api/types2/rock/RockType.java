@@ -62,7 +62,8 @@ public enum RockType implements IStringSerializable {
 		return i >= 0 && i < VALUES.length ? VALUES[i] : VALUES[i % VALUES.length];
 	}
 
-	public @Nonnull RockCategory getRockCategory() {
+	@Nonnull
+	public RockCategory getRockCategory() {
 		return rockCategory;
 	}
 
@@ -73,11 +74,13 @@ public enum RockType implements IStringSerializable {
 	/**
 	 * Возвращает имя перечисления в нижнем регистре.
 	 */
+	@Nonnull
 	@Override
-	public @Nonnull String getName() {
+	public String getName() {
 		return name().toLowerCase();
 	}
 
+	@Nonnull
     public ResourceLocation getTexture() {
 		return new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/blocks/rock/raw/" + this.getName() + ".png");
     }

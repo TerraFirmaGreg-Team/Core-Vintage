@@ -7,6 +7,7 @@ package net.dries007.tfc.client;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.types2.rock.util.IRockItem;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
 import net.dries007.tfc.objects.container.*;
@@ -156,12 +157,18 @@ public class TFCGuiHandler implements IGuiHandler
                 return new GuiAnvilTFC(container, player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
             case ANVIL_PLAN:
                 return new GuiAnvilPlan(container, player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
-//            case KNAPPING_STONE:
-//                ItemStack stack = player.getHeldItemMainhand();
-//                RockType rock = stack.getItem() instanceof IRockObject ? ((IRockObject) stack.getItem()).getRock(stack) :
-//                    ((IRockObject) player.getHeldItemOffhand().getItem()).getRock(player.getHeldItemOffhand());
-//                //noinspection ConstantConditions
-//                return new GuiKnapping(container, player, KnappingType.STONE, rock.getTexture());
+            case KNAPPING_STONE:
+                var stackInMainHand = player.getHeldItemMainhand();
+                var stackInOffHand = player.getHeldItemOffhand();
+
+                if (stackInMainHand.getItem() instanceof ItemRock itemRock) {
+                    return new GuiKnapping(container, player, KnappingType.STONE, itemRock.getRockType().getTexture());
+                }
+                else if (stackInOffHand.getItem() instanceof ItemRock itemRock) {
+                    return new GuiKnapping(container, player, KnappingType.STONE, itemRock.getRockType().getTexture());
+                }
+
+                throw new RuntimeException("Bad itemstack on open knapping gui");
             case KNAPPING_CLAY:
                 return new GuiKnapping(container, player, KnappingType.CLAY, CLAY_TEXTURE);
             case KNAPPING_LEATHER:

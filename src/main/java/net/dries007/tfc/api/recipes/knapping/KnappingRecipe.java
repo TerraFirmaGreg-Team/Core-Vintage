@@ -9,9 +9,6 @@ import net.dries007.tfc.util.SimpleCraftMatrix;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-/**
- * todo: in 1.13+ move this to a json recipe type
- */
 public abstract class KnappingRecipe extends IForgeRegistryEntry.Impl<KnappingRecipe>
 {
     private final KnappingType type;
@@ -28,7 +25,7 @@ public abstract class KnappingRecipe extends IForgeRegistryEntry.Impl<KnappingRe
         return matrix;
     }
 
-    public abstract ItemStack getOutput(ItemStack input);
+    public abstract ItemStack getOutput();
 
     public KnappingType getType()
     {

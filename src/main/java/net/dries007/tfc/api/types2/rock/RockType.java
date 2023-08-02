@@ -1,8 +1,10 @@
 package net.dries007.tfc.api.types2.rock;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
@@ -75,4 +77,8 @@ public enum RockType implements IStringSerializable {
 	public @Nonnull String getName() {
 		return name().toLowerCase();
 	}
+
+    public ResourceLocation getTexture() {
+		return new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/blocks/rock/raw/" + this.getName() + ".png");
+    }
 }

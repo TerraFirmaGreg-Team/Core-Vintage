@@ -25,6 +25,7 @@ import net.minecraft.entity.monster.EntityPolarBear;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -229,6 +230,25 @@ public final class Helpers {
 		}
 		for (ItemStack stack : playerInv.offHandInventory) {
 			if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean playerHasItemInInventory(InventoryPlayer playerInv, Item item) {
+		for (var stack : playerInv.mainInventory) {
+			if (!stack.isEmpty() && stack.getItem() == item) {
+				return true;
+			}
+		}
+		for (var stack : playerInv.armorInventory) {
+			if (!stack.isEmpty() && stack.getItem() == item) {
+				return true;
+			}
+		}
+		for (var stack : playerInv.offHandInventory) {
+			if (!stack.isEmpty() && stack.getItem() == item) {
 				return true;
 			}
 		}

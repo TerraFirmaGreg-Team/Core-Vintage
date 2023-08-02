@@ -18,8 +18,7 @@ public class KnappingRecipeSimple extends KnappingRecipe
     }
 
     @Override
-    public ItemStack getOutput(ItemStack input)
-    {
-        return output.copy();
+    public ItemStack getOutput() {
+        return output;
     }
 }

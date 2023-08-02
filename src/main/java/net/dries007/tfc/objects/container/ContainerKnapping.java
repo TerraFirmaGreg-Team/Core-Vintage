@@ -63,9 +63,9 @@ public class ContainerKnapping extends ContainerItemStack implements IButtonHand
 		// check the pattern
 		Slot slot = inventorySlots.get(0);
 		if (slot != null) {
-			KnappingRecipe recipe = getMatchingRecipe();
+			var recipe = getMatchingRecipe();
 			if (recipe != null) {
-				slot.putStack(recipe.getOutput(this.stackCopy));
+				slot.putStack(recipe.getOutput().copy());
 			} else {
 				slot.putStack(ItemStack.EMPTY);
 			}

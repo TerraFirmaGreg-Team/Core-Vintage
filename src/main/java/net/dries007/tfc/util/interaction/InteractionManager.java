@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.util.interaction;
 
+import gregtech.common.items.ToolItems;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -46,8 +47,7 @@ public final class InteractionManager
     {
         // Clay knapping
         putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "clay") && stack.getCount() >= KnappingType.CLAY.getAmountToConsume(), (worldIn, playerIn, handIn) -> {
-            if (!worldIn.isRemote)
-            {
+            if (!worldIn.isRemote) {
                 TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.KNAPPING_CLAY);
             }
             return EnumActionResult.SUCCESS;
@@ -55,8 +55,7 @@ public final class InteractionManager
 
         // Fire clay knapping
         putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") && stack.getCount() >= KnappingType.FIRE_CLAY.getAmountToConsume(), ((worldIn, playerIn, handIn) -> {
-            if (!worldIn.isRemote)
-            {
+            if (!worldIn.isRemote) {
                 TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.KNAPPING_FIRE_CLAY);
             }
             return EnumActionResult.SUCCESS;
@@ -64,10 +63,8 @@ public final class InteractionManager
 
         // Leather knapping
         putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "leather"), ((worldIn, playerIn, handIn) -> {
-            if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "knife"))
-            {
-                if (!worldIn.isRemote)
-                {
+            if (Helpers.playerHasItemInInventory(playerIn.inventory, ToolItems.KNIFE.get())) {
+                if (!worldIn.isRemote) {
                     TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.KNAPPING_LEATHER);
                 }
                 return EnumActionResult.SUCCESS;

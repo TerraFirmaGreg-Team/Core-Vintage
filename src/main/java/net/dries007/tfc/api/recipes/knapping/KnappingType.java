@@ -5,18 +5,18 @@
 
 package net.dries007.tfc.api.recipes.knapping;
 
-public class KnappingType
+public enum KnappingType
 {
-    public static final KnappingType STONE = new KnappingType(1, false);
-    public static final KnappingType CLAY = new KnappingType(5, true);
-    public static final KnappingType FIRE_CLAY = new KnappingType(5, true);
-    public static final KnappingType LEATHER = new KnappingType(1, false);
+    STONE(1, false),
+
+    CLAY(5, true),
+    FIRE_CLAY(5, true),
+    LEATHER(1, false);
 
     private final int amountToConsume;
     private final boolean consumeAfterComplete;
 
-    public KnappingType(int amountToConsume, boolean consumeAfterComplete)
-    {
+    KnappingType(int amountToConsume, boolean consumeAfterComplete) {
         this.amountToConsume = amountToConsume;
         this.consumeAfterComplete = consumeAfterComplete;
     }

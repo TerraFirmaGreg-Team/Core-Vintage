@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.api.types2.plant.PlantVariant;
-import net.dries007.tfc.api.types2.plant.util.IPlantTypeBlock;
+import net.dries007.tfc.api.types2.plant.util.IPlantBlock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class BlockFloatingWaterTFC extends BlockPlantTFC implements IPlantTypeBlock {
+public class BlockFloatingWaterTFC extends BlockPlantTFC implements IPlantBlock {
 	private static final AxisAlignedBB LILY_PAD_AABB = new AxisAlignedBB(0.0D, -0.125D, 0.0D, 1.0D, 0.0625D, 1.0D);
 
 	private final PlantType plantType;

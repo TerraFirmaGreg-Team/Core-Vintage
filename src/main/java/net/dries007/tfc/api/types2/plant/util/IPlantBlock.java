@@ -7,13 +7,11 @@ package net.dries007.tfc.api.types2.plant.util;
 
 import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.api.types2.plant.PlantVariant;
+import net.dries007.tfc.api.util.IGetItems;
 import net.dries007.tfc.api.util.IHasModel;
-import net.minecraft.item.ItemBlock;
 
-public interface IPlantTypeBlock extends IHasModel {
+public interface IPlantBlock extends IHasModel, IGetItems {
 	PlantVariant getPlantVariant();
 
 	PlantType getPlantType();
-
-	ItemBlock getItemBlock();
 }

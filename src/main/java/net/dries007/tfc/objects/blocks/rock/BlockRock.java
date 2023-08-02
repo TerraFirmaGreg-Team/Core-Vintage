@@ -9,6 +9,7 @@ import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -73,14 +74,14 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
 	}
 
 	@Nonnull
-    @Override
+	@Override
 	public RockType getRockType() {
 		return rockType;
 	}
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return new ItemBlock(this);
+		return new ItemBlockTFC(this);
 	}
 
 	@Nonnull

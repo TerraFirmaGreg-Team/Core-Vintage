@@ -9,10 +9,11 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
+import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -44,7 +45,7 @@ import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockSoil extends Block implements ISoilTypeBlock {
+public class BlockSoil extends Block implements ISoilBlock {
 
 	// Used for connected textures only.
 	public static final PropertyBool NORTH = PropertyBool.create("north");
@@ -87,7 +88,7 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return new ItemBlock(this);
+		return new ItemBlockTFC(this);
 	}
 
 	@Override

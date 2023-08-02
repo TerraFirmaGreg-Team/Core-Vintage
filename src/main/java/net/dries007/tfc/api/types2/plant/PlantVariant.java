@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types2.plant;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types2.plant.util.IPlantTypeBlock;
+import net.dries007.tfc.api.types2.plant.util.IPlantBlock;
 import net.dries007.tfc.objects.blocks.plants.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
@@ -39,9 +39,9 @@ public enum PlantVariant implements IStringSerializable {
 	MUSHROOM(BlockMushroomTFC::new);
 
 	public static final PlantVariant[] VALUES = PlantVariant.values();
-	private final BiFunction<PlantVariant, PlantType, IPlantTypeBlock> blockFactory;
+	private final BiFunction<PlantVariant, PlantType, IPlantBlock> blockFactory;
 
-	PlantVariant(BiFunction<PlantVariant, PlantType, IPlantTypeBlock> blockFactory) {
+	PlantVariant(BiFunction<PlantVariant, PlantType, IPlantBlock> blockFactory) {
 		this.blockFactory = blockFactory;
 	}
 
@@ -49,7 +49,7 @@ public enum PlantVariant implements IStringSerializable {
 		return i >= 0 && i < VALUES.length ? VALUES[i] : STANDARD;
 	}
 
-	public IPlantTypeBlock create(PlantType plantType) {
+	public IPlantBlock create(PlantType plantType) {
 		return blockFactory.apply(this, plantType);
 	}
 

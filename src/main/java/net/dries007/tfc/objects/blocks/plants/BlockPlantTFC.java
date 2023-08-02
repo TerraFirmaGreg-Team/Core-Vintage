@@ -11,7 +11,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.api.types2.plant.PlantVariant;
-import net.dries007.tfc.api.types2.plant.util.IPlantTypeBlock;
+import net.dries007.tfc.api.types2.plant.util.IPlantBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -58,7 +58,7 @@ import java.util.Random;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
-public class BlockPlantTFC extends BlockBush implements IPlantTypeBlock, IItemSize {
+public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
 	/*
 	 * Time of day, used for rendering plants that bloom at different times

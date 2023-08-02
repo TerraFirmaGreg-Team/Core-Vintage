@@ -9,12 +9,13 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
+import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
@@ -56,7 +57,7 @@ import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
+public class BlockSoilFarmland extends Block implements ISoilBlock {
 	public static final int MAX_MOISTURE = 15;
 	public static final PropertyInteger MOISTURE = PropertyInteger.create("moisture", 0, MAX_MOISTURE);
 	public static final int[] TINT = new int[]{
@@ -110,8 +111,8 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 
 	protected static void turnToDirt(World world, BlockPos pos) {
 		Block block = world.getBlockState(pos).getBlock();
-		if (block instanceof ISoilTypeBlock) {
-			SoilType soilType = ((ISoilTypeBlock) block).getSoilType();
+		if (block instanceof ISoilBlock) {
+			SoilType soilType = ((ISoilBlock) block).getSoilType();
 
 			world.setBlockState(pos, TFCStorage.getSoilBlock(DIRT, soilType).getDefaultState());
 			AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
@@ -134,7 +135,7 @@ public class BlockSoilFarmland extends Block implements ISoilTypeBlock {
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return new ItemBlock(this);
+		return new ItemBlockTFC(this);
 	}
 
 	@Override

@@ -3,14 +3,14 @@ package net.dries007.tfc.api.registries;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.api.types2.plant.PlantVariant;
-import net.dries007.tfc.api.types2.plant.util.IPlantTypeBlock;
+import net.dries007.tfc.api.types2.plant.util.IPlantBlock;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
+import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
@@ -30,8 +30,8 @@ import java.util.Map;
 public final class TFCStorage {
 
 	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
-	public static final Map<Pair<SoilVariant, SoilType>, ISoilTypeBlock> SOIL_BLOCKS = new LinkedHashMap<>();
-	public static final Map<Pair<PlantVariant, PlantType>, IPlantTypeBlock> PLANT_BLOCKS = new LinkedHashMap<>();
+	public static final Map<Pair<SoilVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
+	public static final Map<Pair<PlantVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
 
 	public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
 	public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();

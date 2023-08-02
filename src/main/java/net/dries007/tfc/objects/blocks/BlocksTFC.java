@@ -14,7 +14,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
-import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
+import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.devices.*;
@@ -589,7 +589,7 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isClay(IBlockState current) {
-		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+		if (current.getBlock() instanceof ISoilBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
 				case CLAY, CLAY_GRASS -> {
 					return true;
@@ -599,7 +599,7 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isDirt(IBlockState current) {
-		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+		if (current.getBlock() instanceof ISoilBlock soilTypeBlock)
 			return soilTypeBlock.getSoilVariant() == DIRT;
 		return false;
 	}
@@ -620,7 +620,7 @@ public final class BlocksTFC {
 
 	public static boolean isSoil(IBlockState current) {
 		if (current.getBlock() instanceof BlockSoilPeat) return true;
-		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+		if (current.getBlock() instanceof ISoilBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
 				case GRASS, DRY_GRASS, DIRT, CLAY, CLAY_GRASS -> {
 					return true;
@@ -630,7 +630,7 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isGrowableSoil(IBlockState current) {
-		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+		if (current.getBlock() instanceof ISoilBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
 				case GRASS, DRY_GRASS, DIRT, CLAY, CLAY_GRASS -> {
 					return true;
@@ -641,7 +641,7 @@ public final class BlocksTFC {
 
 	public static boolean isSoilOrGravel(IBlockState current) {
 		if (current.getBlock() instanceof BlockSoilPeat) return true;
-		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+		if (current.getBlock() instanceof ISoilBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
 				case GRASS, DRY_GRASS, DIRT -> {
 					return true;
@@ -654,7 +654,7 @@ public final class BlocksTFC {
 
 	public static boolean isGrass(IBlockState current) {
 		if (current.getBlock() instanceof BlockSoilPeatGrass) return true;
-		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+		if (current.getBlock() instanceof ISoilBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
 				case GRASS, DRY_GRASS, CLAY_GRASS -> {
 					return true;
@@ -664,7 +664,7 @@ public final class BlocksTFC {
 	}
 
 	public static boolean isDryGrass(IBlockState current) {
-		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+		if (current.getBlock() instanceof ISoilBlock soilTypeBlock)
 			return soilTypeBlock.getSoilVariant() == DRY_GRASS;
 		return false;
 	}
@@ -676,7 +676,7 @@ public final class BlocksTFC {
 					return true;
 				}
 			}
-		if (current.getBlock() instanceof ISoilTypeBlock soilTypeBlock)
+		if (current.getBlock() instanceof ISoilBlock soilTypeBlock)
 			switch (soilTypeBlock.getSoilVariant()) {
 				case GRASS, DRY_GRASS, DIRT -> {
 					return true;

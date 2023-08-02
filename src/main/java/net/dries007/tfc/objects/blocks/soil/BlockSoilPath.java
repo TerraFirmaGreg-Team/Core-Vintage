@@ -9,9 +9,10 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
+import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
@@ -40,7 +41,7 @@ import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockSoilPath extends BlockGrassPath implements ISoilTypeBlock {
+public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
 	private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 
 	private final SoilVariant soilVariant;
@@ -78,7 +79,7 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilTypeBlock {
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return new ItemBlock(this);
+		return new ItemBlockTFC(this);
 	}
 
 	@Override

@@ -12,13 +12,14 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
+import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
@@ -58,7 +59,7 @@ import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
+public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
 	// Used for connected textures only.
 	public static final PropertyBool NORTH = PropertyBool.create("north");
@@ -110,7 +111,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 			// Генерируем торф в зависимости от типа блока
 			if (usBlock instanceof BlockSoilPeat) {
 				world.setBlockState(pos, BlocksTFC.PEAT.getDefaultState());
-			} else if (usBlock instanceof ISoilTypeBlock soil) {
+			} else if (usBlock instanceof ISoilBlock soil) {
 				world.setBlockState(pos, TFCStorage.getSoilBlock(soil.getSoilVariant().getNonGrassVersion(), soil.getSoilType()).getDefaultState());
 			}
 		} else if (neighborLight >= 9) {
@@ -147,11 +148,11 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 				// Генерируем траву в зависимости от типа текущего блока
 				if (currentBlock instanceof BlockSoilPeat) {
 					world.setBlockState(target, BlocksTFC.PEAT_GRASS.getDefaultState());
-				} else if (currentBlock instanceof ISoilTypeBlock block) {
+				} else if (currentBlock instanceof ISoilBlock block) {
 					SoilVariant spreader = GRASS;
 
 					// Проверяем тип блока, с которого распространяется трава
-					if (usBlock instanceof ISoilTypeBlock && ((ISoilTypeBlock) usBlock).getSoilVariant() == DRY_GRASS) {
+					if (usBlock instanceof ISoilBlock && ((ISoilBlock) usBlock).getSoilVariant() == DRY_GRASS) {
 						spreader = DRY_GRASS;
 					}
 
@@ -188,7 +189,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return new ItemBlock(this);
+		return new ItemBlockTFC(this);
 	}
 
 	@Override
@@ -209,8 +210,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 			if (!worldIn.isAreaLoaded(pos, 3))
 				return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
 			Block block = worldIn.getBlockState(pos).getBlock();
-			if (block instanceof ISoilTypeBlock) {
-				SoilType soilType = ((ISoilTypeBlock) block).getSoilType();
+			if (block instanceof ISoilBlock) {
+				SoilType soilType = ((ISoilBlock) block).getSoilType();
 
 				if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
 					worldIn.setBlockState(pos, TFCStorage.getSoilBlock(DIRT, soilType).getDefaultState());

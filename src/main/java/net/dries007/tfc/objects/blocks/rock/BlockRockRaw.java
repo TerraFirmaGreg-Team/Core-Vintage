@@ -19,6 +19,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -91,14 +92,14 @@ public class BlockRockRaw extends Block implements IRockBlock, IItemSize {
 	}
 
 	@Nonnull
-    @Override
+	@Override
 	public RockType getRockType() {
 		return rockType;
 	}
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return new ItemBlock(this);
+		return new ItemBlockTFC(this);
 	}
 
 	@Nonnull

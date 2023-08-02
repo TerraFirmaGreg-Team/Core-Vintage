@@ -4,6 +4,7 @@ import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.SoundType;
@@ -59,14 +60,14 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 	}
 
 	@Nonnull
-    @Override
+	@Override
 	public RockType getRockType() {
 		return rockType;
 	}
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return new ItemBlock(this);
+		return new ItemBlockTFC(this);
 	}
 
 	@Override

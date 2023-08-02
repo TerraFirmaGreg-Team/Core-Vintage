@@ -6,8 +6,11 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "gregtech.BlockOreMixin",
+    "gregtech.MaterialRecipeHandlerMixin",
     "gregtech.OrePrefixMixin",
+    "gregtech.PartsRecipeHandlerMixin",
     "gregtech.ToolItemsMixin",
+    "gregtech.ToolRecipeHandlerMixin",
     "minecraft.GuiCreateWorldMixin"
   ]
 }

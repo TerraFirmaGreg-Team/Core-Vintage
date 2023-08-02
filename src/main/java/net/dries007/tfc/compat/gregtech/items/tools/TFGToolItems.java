@@ -5,6 +5,7 @@ import gregtech.api.items.toolitem.IGTTool;
 import gregtech.api.items.toolitem.ItemGTTool;
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.compat.gregtech.items.tools.behaviors.ChiselBehavior;
+import net.dries007.tfc.compat.gregtech.items.tools.behaviors.PropickBehavior;
 
 public class TFGToolItems {
     public static IGTTool TONGS;
@@ -24,25 +25,23 @@ public class TFGToolItems {
                 .oreDict("craftingToolChisel")
                 .toolClasses("chisel"));
 
+        PROPICK = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "propick")
+                .toolStats(b -> b.crafting().cannotAttack().attackSpeed(-2.4F).behaviors(PropickBehavior.INSTANCE))
+                .oreDict("craftingToolPropick")
+                .toolClasses("propick"));
+
         /*
         TONGS = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "tongs")
                 .toolStats(b -> b.crafting().cannotAttack().attackSpeed(-2.4F))
                 .oreDict("craftingToolTongs")
-                .sound(GTSoundEvents.SOFT_MALLET_TOOL) // todo
-                .toolClasses("tongs"));*/
-
-        /*
-        PROPICK = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "propick")
-                .toolStats(b -> b.crafting().cannotAttack().attackSpeed(-2.4F).behaviors(PropickBehavior.INSTANCE))
-                .oreDict("craftingToolPropick")
-                .sound(GTSoundEvents.SOFT_MALLET_TOOL) // todo
-                .toolClasses("propick"));*/
+                .toolClasses("tongs"));
+        */
 
         /*
         JAVELIN = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "javelin")
                 .toolStats(b -> b.crafting().cannotAttack().attackSpeed(-2.4F).behaviors(JavelinBehavior.INSTANCE))
                 .oreDict("craftingToolJavelin")
-                .sound(GTSoundEvents.SOFT_MALLET_TOOL) // todo
-                .toolClasses("javelin"));*/
+                .toolClasses("javelin"));
+        */
     }
 }

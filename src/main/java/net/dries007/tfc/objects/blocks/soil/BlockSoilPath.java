@@ -49,7 +49,6 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilTypeBlock {
 
 	public BlockSoilPath(SoilVariant soilVariant, SoilType soilType) {
 
-		TFCStorage.addSoilBlock(soilVariant, soilType, this);
 
 		this.soilVariant = soilVariant;
 		this.soilType = soilType;

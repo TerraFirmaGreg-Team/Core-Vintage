@@ -67,8 +67,6 @@ public class BlockRockRaw extends Block implements IRockBlock, IItemSize {
 	public BlockRockRaw(RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
 
-		TFCStorage.addRockBlock(ORDINARY, rockVariant, rockType, this);
-
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);

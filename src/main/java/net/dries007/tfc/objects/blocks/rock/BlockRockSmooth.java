@@ -9,7 +9,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
@@ -35,7 +34,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -48,8 +46,6 @@ public class BlockRockSmooth extends Block implements IRockBlock, IItemSize {
 
 	public BlockRockSmooth(RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
-
-		TFCStorage.addRockBlock(ORDINARY, rockVariant, rockType, this);
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;

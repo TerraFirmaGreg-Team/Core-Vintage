@@ -71,7 +71,6 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 	private final ResourceLocation modelLocation;
 
 	public BlockSoilGrass(SoilVariant soilVariant, SoilType soilType) {
-		TFCStorage.addSoilBlock(soilVariant, soilType, this);
 
 		if (soilVariant.canFall())
 			FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());

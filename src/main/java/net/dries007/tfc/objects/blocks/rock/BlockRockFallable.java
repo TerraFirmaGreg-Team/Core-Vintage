@@ -4,7 +4,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
@@ -37,7 +36,6 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.GRAVEL;
 import static net.dries007.tfc.api.types2.rock.RockVariant.SAND;
 
@@ -51,8 +49,6 @@ public class BlockRockFallable extends Block implements IRockBlock, IItemSize {
 
 	public BlockRockFallable(RockVariant rockVariant, RockType rockType) {
 		super(Material.SAND);
-
-		TFCStorage.addRockBlock(ORDINARY, rockVariant, rockType, this);
 
 		if (rockVariant.canFall()) {
 			FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());

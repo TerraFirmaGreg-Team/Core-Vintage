@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.blocks.rock;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockBlockType;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
@@ -53,8 +52,6 @@ public class BlockRockMossy extends Block implements IRockBlock, IItemSize {
 
 	public BlockRockMossy(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 		super(Material.ROCK);
-
-		TFCStorage.addRockBlock(rockBlockType, rockVariant, rockType, this);
 
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;

@@ -41,8 +41,6 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
 	public BlockRockWall(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
 		super(TFCStorage.getRockBlock(ORDINARY, rockVariant, rockType));
 
-		TFCStorage.addRockBlock(rockBlockType, rockVariant, rockType, this);
-
 		this.rockVariant = rockVariant;
 		this.rockType = rockType;
 		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);

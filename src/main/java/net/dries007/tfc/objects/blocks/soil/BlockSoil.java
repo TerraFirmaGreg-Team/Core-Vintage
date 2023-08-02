@@ -58,8 +58,6 @@ public class BlockSoil extends Block implements ISoilTypeBlock {
 	public BlockSoil(SoilVariant soilVariant, SoilType soilType) {
 		super(Material.GROUND);
 
-		TFCStorage.addSoilBlock(soilVariant, soilType, this);
-
 		if (soilVariant.canFall())
 			FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());
 

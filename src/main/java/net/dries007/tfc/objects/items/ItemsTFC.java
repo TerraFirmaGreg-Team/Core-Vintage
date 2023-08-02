@@ -15,7 +15,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
@@ -195,26 +194,6 @@ public final class ItemsTFC {
 		IForgeRegistry<Item> r = event.getRegistry();
 		Builder<Item> simpleItems = ImmutableList.builder();
 
-		//=== Rock ===================================================================================================//
-
-		for (var stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
-			var itemBlock = stoneTypeBlock.getItemBlock();
-			if (itemBlock != null) registerItemBlock(r, itemBlock);
-		}
-
-		//=== Soil ===================================================================================================//
-
-		for (var soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
-			var itemBlock = soilTypeBlock.getItemBlock();
-			if (itemBlock != null) registerItemBlock(r, itemBlock);
-		}
-
-		//=== Plant ==================================================================================================//
-
-		for (var plantTypeBlock : TFCStorage.PLANT_BLOCKS.values()) {
-			var itemBlock = plantTypeBlock.getItemBlock();
-			if (itemBlock != null) registerItemBlock(r, itemBlock);
-		}
 
 		//=== Other ==================================================================================================//
 

@@ -4,10 +4,14 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
@@ -32,11 +36,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-
 @ParametersAreNonnullByDefault
 public class BlockRockLoose extends Block implements IRockBlock {
 
 	private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
+
+	public static final PropertyDirection AXIS = PropertyDirection.create("axis", EnumFacing.Plane.HORIZONTAL);
+
 	private final RockVariant rockVariant;
 	private final RockType rockType;
 	private final ResourceLocation modelLocation;
@@ -53,6 +59,8 @@ public class BlockRockLoose extends Block implements IRockBlock {
 		this.setHardness(0.1f);
 		this.setRegistryName(MOD_ID, blockRegistryName);
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+
+		setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.NORTH));
 	}
 
 	@Nonnull
@@ -172,7 +180,8 @@ public class BlockRockLoose extends Block implements IRockBlock {
 			@Nonnull
 			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
 				return new ModelResourceLocation(modelLocation,
-						"rocktype=" + rockType.getName());
+						"axis=" + state.getValue(AXIS) + "," +
+								"rocktype=" + rockType.getName());
 			}
 		});
 	}
@@ -182,5 +191,23 @@ public class BlockRockLoose extends Block implements IRockBlock {
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Nonnull
+	@Override
+	@SuppressWarnings("deprecation")
+	public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(meta));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(AXIS).getHorizontalIndex();
+	}
+
+	@Nonnull
+	@Override
+	public BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, AXIS);
 	}
 }

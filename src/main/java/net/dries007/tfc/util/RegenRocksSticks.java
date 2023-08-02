@@ -34,15 +34,15 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
 			for (int i = 0; i < ConfigTFC.General.WORLD.looseRocksFrequency; i++) {
 				BlockPos pos = new BlockPos(xoff + random.nextInt(16), 0, zoff + random.nextInt(16));
 				RockType rock = baseChunkData.getRock1(pos);
-				generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), rock);
+				generateRock(random, world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), rock);
 			}
 		}
 	}
 
 	@Override
-	protected void generateRock(World world, BlockPos pos, RockType rockType) {
+	protected void generateRock(Random random, World world, BlockPos pos, RockType rockType) {
 		if (isReplaceable(world, pos)) {
-			super.generateRock(world, pos, rockType);
+			super.generateRock(random, world, pos, rockType);
 		}
 	}
 }

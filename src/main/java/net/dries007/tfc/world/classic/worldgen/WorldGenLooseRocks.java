@@ -9,6 +9,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.util.EnumFacing;
@@ -18,10 +19,13 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockVariant.LOOSE;
+import static net.dries007.tfc.objects.blocks.rock.BlockRockLoose.AXIS;
 
 public class WorldGenLooseRocks implements IWorldGenerator {
 
@@ -45,20 +49,21 @@ public class WorldGenLooseRocks implements IWorldGenerator {
 							zoff + random.nextInt(16)
 					);
 					var rock = baseChunkData.getRock1(pos);
-					generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), rock);
+					generateRock(random, world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), rock);
 				}
 			}
 		}
 	}
 
-	protected void generateRock(World world, BlockPos pos, RockType rockType) {
+	protected void generateRock(Random random, World world, BlockPos pos, RockType rockType) {
 		// Используем воздух, чтобы не заменять другие генерируемые блоки
 		// Это соответствует проверке в BlockPlacedItemFlat, если блок может оставаться
 		// Также добавляем только на почву, так как это вызывается обработчиком регенерации мира позже
+
 		if (world.isAirBlock(pos) &&
 				world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) &&
 				BlocksTFC.isSoil(world.getBlockState(pos.down()))) {
-			world.setBlockState(pos, TFCStorage.getRockBlock(ORDINARY, LOOSE, rockType).getDefaultState(), 2);
+			world.setBlockState(pos, TFCStorage.getRockBlock(ORDINARY, LOOSE, rockType).getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);
 		}
 	}
 }

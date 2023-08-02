@@ -166,37 +166,6 @@ public class BlockLogTFC extends BlockLog implements IItemSize {
 	}
 
 	@Override
-	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-		ItemStack stack = ItemStack.EMPTY;
-		IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-		if (cap != null) {
-			stack = cap.getHarvestingTool();
-		}
-		if (stack.isEmpty()) {
-			stack = player.getHeldItemMainhand();
-		}
-		final Set<String> toolClasses = stack.getItem().getToolClasses(stack);
-		if (toolClasses.contains("axe") && !toolClasses.contains("saw")) {
-			// Axes, not saws, cause tree felling
-			if (!state.getValue(PLACED) && ConfigTFC.General.TREE.enableFelling) {
-				player.setHeldItem(EnumHand.MAIN_HAND, stack); // Reset so we can damage however we want before vanilla
-				if (!removeTree(world, pos, player, stack, OreDictionaryHelper.doesStackMatchOre(stack, "axeStone") || OreDictionaryHelper.doesStackMatchOre(stack, "hammerStone"))) {
-					// Don't remove the block, the rest of the tree broke instead
-					return false;
-				}
-				return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
-			}
-		} else if (toolClasses.contains("hammer") && ConfigTFC.General.TREE.enableHammerSticks) {
-			// Hammers drop sticks instead
-			return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
-		} else if (!toolClasses.contains("saw") && ConfigTFC.General.TREE.requiresAxe) {
-			// Don't drop anything if broken by hand
-			return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
-		}
-		return super.removedByPlayer(state, world, pos, player, willHarvest);
-	}
-
-	@Override
 	public boolean isToolEffective(String type, IBlockState state) {
 		return ("hammer".equals(type) && ConfigTFC.General.TREE.enableHammerSticks) || super.isToolEffective(type, state);
 	}

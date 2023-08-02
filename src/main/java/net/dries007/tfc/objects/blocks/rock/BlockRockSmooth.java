@@ -68,12 +68,14 @@ public class BlockRockSmooth extends Block implements IRockBlock, IItemSize {
 		FallingBlockManager.registerFallable(this.getDefaultState().withProperty(CAN_FALL, true), spec);
 	}
 
+	@Nonnull
 	@Override
 	public RockVariant getRockVariant() {
 		return rockVariant;
 	}
 
-	@Override
+	@Nonnull
+    @Override
 	public RockType getRockType() {
 		return rockType;
 	}

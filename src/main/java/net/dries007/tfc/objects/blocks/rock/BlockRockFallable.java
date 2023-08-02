@@ -77,12 +77,14 @@ public class BlockRockFallable extends Block implements IRockBlock, IItemSize {
 		//OreDictionaryModule.register(this, rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
 	}
 
+	@Nonnull
 	@Override
 	public RockVariant getRockVariant() {
 		return rockVariant;
 	}
 
-	@Override
+	@Nonnull
+    @Override
 	public RockType getRockType() {
 		return rockType;
 	}

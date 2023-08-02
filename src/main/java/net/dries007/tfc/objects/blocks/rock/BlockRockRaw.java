@@ -86,12 +86,14 @@ public class BlockRockRaw extends Block implements IRockBlock, IItemSize {
 		this.setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
 	}
 
+	@Nonnull
 	@Override
 	public RockVariant getRockVariant() {
 		return rockVariant;
 	}
 
-	@Override
+	@Nonnull
+    @Override
 	public RockType getRockType() {
 		return rockType;
 	}

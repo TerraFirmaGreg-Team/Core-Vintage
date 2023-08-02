@@ -58,12 +58,14 @@ public class BlockRockLoose extends BlockGroundcover implements IRockBlock {
 		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 	}
 
+	@Nonnull
 	@Override
 	public RockVariant getRockVariant() {
 		return rockVariant;
 	}
 
-	@Override
+	@Nonnull
+    @Override
 	public RockType getRockType() {
 		return rockType;
 	}

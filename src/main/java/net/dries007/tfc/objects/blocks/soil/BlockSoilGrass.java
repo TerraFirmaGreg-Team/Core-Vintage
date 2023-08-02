@@ -16,6 +16,8 @@ import net.dries007.tfc.api.types2.soil.util.ISoilTypeBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -39,6 +41,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -49,6 +52,9 @@ import java.util.Random;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types2.plant.PlantVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
+import static net.dries007.tfc.objects.blocks.BlocksTFC.isGravel;
+import static net.dries007.tfc.objects.blocks.BlocksTFC.isSand;
+import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -302,5 +308,96 @@ public class BlockSoilGrass extends BlockGrass implements ISoilTypeBlock {
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
+	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
+		int beachDistance = 2;
+
+		if (plantable instanceof BlockPlantTFC) {
+			switch (((BlockPlantTFC) plantable).getPlantTypeTFC()) {
+				case CLAY -> {
+					return soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || soilVariant == CLAY || soilVariant == CLAY_GRASS;
+				}
+				case DESERT_CLAY -> {
+					return soilVariant == CLAY || soilVariant == CLAY_GRASS || isSand(state);
+				}
+				case DRY_CLAY -> {
+					return soilVariant == DIRT || soilVariant == DRY_GRASS || soilVariant == CLAY || soilVariant == CLAY_GRASS || isSand(state);
+				}
+				case DRY -> {
+					return soilVariant == DIRT || soilVariant == DRY_GRASS || isSand(state);
+				}
+				case FRESH_WATER -> {
+					return soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isGravel(state);
+				}
+				case SALT_WATER -> {
+					return soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state) || isGravel(state);
+				}
+				case FRESH_BEACH -> {
+					boolean flag = false;
+					for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+						for (int i = 1; i <= beachDistance; i++) {
+							if (BlocksTFC.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
+								flag = true;
+								break;
+							}
+						}
+					}
+					return (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state)) && flag;
+				}
+				case SALT_BEACH -> {
+					boolean flag = false;
+					for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+						for (int i = 1; i <= beachDistance; i++)
+							if (BlocksTFC.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
+								flag = true;
+							}
+					}
+					return (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state)) && flag;
+				}
+			}
+		} else if (plantable instanceof BlockCropTFC) {
+			IBlockState cropState = world.getBlockState(pos.up());
+			if (cropState.getBlock() instanceof BlockCropTFC) {
+				boolean isWild = cropState.getValue(WILD);
+				if (isWild) {
+					if (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || soilVariant == CLAY_GRASS) {
+						return true;
+					}
+				}
+				return soilVariant == FARMLAND;
+			}
+		}
+
+		switch (plantable.getPlantType(world, pos.offset(direction))) {
+			case Plains -> {
+				return soilVariant == DIRT || soilVariant == GRASS || soilVariant == FARMLAND || soilVariant == DRY_GRASS || soilVariant == CLAY || soilVariant == CLAY_GRASS;
+			}
+			case Crop -> {
+				return soilVariant == FARMLAND;
+			}
+			case Desert -> {
+				return isSand(state);
+			}
+			case Cave -> {
+				return true;
+			}
+			case Water, Nether -> {
+				return false;
+			}
+			case Beach -> {
+				boolean flag = false;
+				for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+					for (int i = 1; i <= beachDistance; i++)
+						if (BlocksTFC.isWater(world.getBlockState(pos.offset(facing, i)))) {
+							flag = true;
+						}
+				}
+				return (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state)) && flag;
+			}
+		}
+
+		return false;
 	}
 }

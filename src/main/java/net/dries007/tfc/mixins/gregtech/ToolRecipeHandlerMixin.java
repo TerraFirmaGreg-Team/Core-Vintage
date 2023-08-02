@@ -142,8 +142,6 @@ public class ToolRecipeHandlerMixin {
         ModHandler.addShapelessRecipe(String.format("knife_%s", material), ToolItems.KNIFE.get(material), toolHead, stick);
     }
 
-
-
     /**
      * Добавление рецептов новым инструментам.
      * */

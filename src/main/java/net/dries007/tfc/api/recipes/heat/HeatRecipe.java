@@ -1,5 +1,8 @@
 package net.dries007.tfc.api.recipes.heat;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.jei.util.IJEISimpleRecipe;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -9,10 +12,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * Generic recipe for items that heat up and transform
  * Used by pit kilns, fire pit, and charcoal forge for item transformations
@@ -21,90 +20,87 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 @ParametersAreNonnullByDefault
 public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> implements IJEISimpleRecipe {
-	protected final IIngredient<ItemStack> ingredient;
-	private final float transformTemp;
-	private final int minTier;
+    protected final IIngredient<ItemStack> ingredient;
+    private final float transformTemp;
+    private final int minTier;
 
-	protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp) {
-		this(ingredient, transformTemp, 0);
-	}
-	protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp, int minTier) {
-		this.ingredient = ingredient;
-		this.transformTemp = transformTemp;
-		this.minTier = minTier;
-	}
+    protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp) {
+        this(ingredient, transformTemp, 0);
+    }
+    protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp, int minTier) {
+        this.ingredient = ingredient;
+        this.transformTemp = transformTemp;
+        this.minTier = minTier;
+    }
 
-	/**
-	 * Overload that ignores the tier requirement by passing in the maximum tier
-	 */
-	@Nullable
-	public static HeatRecipe get(ItemStack stack) {
-		return get(stack, 6);
-	}
+    /**
+     * Overload that ignores the tier requirement by passing in the maximum tier
+     */
+    @Nullable public static HeatRecipe get(ItemStack stack) {
+        return get(stack, 6);
+    }
 
-	@Nullable
-	public static HeatRecipe get(ItemStack stack, int tier) {
-		return TFCRegistries.HEAT.getValuesCollection().stream().filter(r -> r.isValidInput(stack, tier)).findFirst().orElse(null);
-	}
+    @Nullable public static HeatRecipe get(ItemStack stack, int tier) {
+        return TFCRegistries.HEAT.getValuesCollection().stream().filter(r -> r.isValidInput(stack, tier)).findFirst().orElse(null);
+    }
 
-	/**
-	 * Wrapper constructor around a recipe that will destroy / melt an item at a specific temperature without producing any output
-	 *
-	 * @return a new recipe for the provided ingredient
-	 */
-	public static HeatRecipeSimple destroy(IIngredient<ItemStack> ingredient, float destroyTemperature) {
-		return new HeatRecipeSimple(ingredient, ItemStack.EMPTY, destroyTemperature, 0f, 0);
-	}
+    /**
+     * Wrapper constructor around a recipe that will destroy / melt an item at a specific temperature without producing any output
+     *
+     * @return a new recipe for the provided ingredient
+     */
+    public static HeatRecipeSimple destroy(IIngredient<ItemStack> ingredient, float destroyTemperature) {
+        return new HeatRecipeSimple(ingredient, ItemStack.EMPTY, destroyTemperature, 0f, 0);
+    }
 
-	/**
-	 * Use this to check if the recipe matches the input.
-	 * Since querying the recipe is somewhat intensive (i.e. not a do every tick thing), cache the recipe and only re-check on input change
-	 * Check if the recipe is hot enough to complete with {@link HeatRecipe#isValidTemperature(float)}
-	 *
-	 * @param input the input
-	 * @param tier  the tier of the device doing the heating
-	 * @return true if the recipe matches the input and tier
-	 */
-	public boolean isValidInput(ItemStack input, int tier) {
-		return Helpers.isAtLeast(tier, minTier) && ingredient.test(input);
-	}
+    /**
+     * Use this to check if the recipe matches the input.
+     * Since querying the recipe is somewhat intensive (i.e. not a do every tick thing), cache the recipe and only re-check on input change
+     * Check if the recipe is hot enough to complete with {@link HeatRecipe#isValidTemperature(float)}
+     *
+     * @param input the input
+     * @param tier  the tier of the device doing the heating
+     * @return true if the recipe matches the input and tier
+     */
+    public boolean isValidInput(ItemStack input, int tier) {
+        return Helpers.isAtLeast(tier, minTier) && ingredient.test(input);
+    }
 
-	/**
-	 * @param temperature a temperature
-	 * @return true if the recipe should melt / transform at this temperature
-	 */
-	public boolean isValidTemperature(float temperature) {
-		return temperature >= transformTemp;
-	}
+    /**
+     * @param temperature a temperature
+     * @return true if the recipe should melt / transform at this temperature
+     */
+    public boolean isValidTemperature(float temperature) {
+        return temperature >= transformTemp;
+    }
 
-	/**
-	 * Gets the output item. This output will be placed in the same slot if possible (charcoal forge), or an output slot if not (fire pit)
-	 * If EMPTY is returned, then this recipe produces no special output
-	 *
-	 * @param input the input stack
-	 * @return the stack to replace the input with
-	 */
-	@Nonnull
-	public ItemStack getOutputStack(ItemStack input) {
-		return ItemStack.EMPTY;
-	}
+    /**
+     * Gets the output item. This output will be placed in the same slot if possible (charcoal forge), or an output slot if not (fire pit)
+     * If EMPTY is returned, then this recipe produces no special output
+     *
+     * @param input the input stack
+     * @return the stack to replace the input with
+     */
+    @Nonnull
+    public ItemStack getOutputStack(ItemStack input) {
+        return ItemStack.EMPTY;
+    }
 
-	@Nullable
-	public FluidStack getOutputFluid(ItemStack input) {
-		return null;
-	}
+    @Nullable public FluidStack getOutputFluid(ItemStack input) {
+        return null;
+    }
 
-	@Override
-	public NonNullList<IIngredient<ItemStack>> getIngredients() {
-		return NonNullList.create();
-	}
+    @Override
+    public NonNullList<IIngredient<ItemStack>> getIngredients() {
+        return NonNullList.create();
+    }
 
-	@Override
-	public NonNullList<ItemStack> getOutputs() {
-		return NonNullList.create();
-	}
+    @Override
+    public NonNullList<ItemStack> getOutputs() {
+        return NonNullList.create();
+    }
 
-	public float getTransformTemp() {
-		return transformTemp;
-	}
+    public float getTransformTemp() {
+        return transformTemp;
+    }
 }

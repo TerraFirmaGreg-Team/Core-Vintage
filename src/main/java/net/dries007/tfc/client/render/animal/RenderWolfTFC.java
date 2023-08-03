@@ -8,8 +8,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderWolfTFC extends RenderWolf {
-	public RenderWolfTFC(RenderManager renderManager) {
-		super(renderManager);
-		this.mainModel = new ModelWolfTFC();
-	}
+    public RenderWolfTFC(RenderManager renderManager) {
+        super(renderManager);
+        this.mainModel = new ModelWolfTFC();
+    }
 }

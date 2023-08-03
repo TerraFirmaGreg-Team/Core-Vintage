@@ -2,7 +2,6 @@ package net.dries007.tfc.compat.gregtech.oreprefix;
 
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
-
 import java.util.Arrays;
 import java.util.HashMap;
 

@@ -6,20 +6,20 @@ import net.minecraft.util.IStringSerializable;
 @MethodsReturnNonnullByDefault
 public enum SoilType implements IStringSerializable {
 
-	SILT,
-	LOAM,
-	SANDY_LOAM,
-	SILTY_LOAM;
+    SILT,
+    LOAM,
+    SANDY_LOAM,
+    SILTY_LOAM;
 
-	private static final SoilType[] VALUES = values();
+    private static final SoilType[] VALUES = values();
 
-	public static SoilType valueOf(int i) {
-		return i >= 0 && i < VALUES.length ? VALUES[i] : VALUES[i % VALUES.length];
-	}
+    public static SoilType valueOf(int i) {
+        return i >= 0 && i < VALUES.length ? VALUES[i] : VALUES[i % VALUES.length];
+    }
 
 
-	@Override
-	public String getName() {
-		return name().toLowerCase();
-	}
+    @Override
+    public String getName() {
+        return name().toLowerCase();
+    }
 }

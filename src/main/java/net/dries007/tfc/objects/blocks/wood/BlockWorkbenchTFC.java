@@ -1,5 +1,10 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.container.ContainerWorkbenchTFC;
@@ -23,100 +28,94 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
-
 public class BlockWorkbenchTFC extends BlockWorkbench {
-	private static final Map<Tree, BlockWorkbenchTFC> MAP = new HashMap<>();
-	public final Tree wood;
+    private static final Map<Tree, BlockWorkbenchTFC> MAP = new HashMap<>();
+    public final Tree wood;
 
-	public BlockWorkbenchTFC(Tree wood) {
-		if (MAP.put(wood, this) != null) {
-			throw new IllegalStateException("There can only be one.");
-		}
-		this.wood = wood;
+    public BlockWorkbenchTFC(Tree wood) {
+        if (MAP.put(wood, this) != null) {
+            throw new IllegalStateException("There can only be one.");
+        }
+        this.wood = wood;
 
-		setSoundType(SoundType.WOOD);
-		setHardness(2.0F).setResistance(5.0F);
-		setHarvestLevel("axe", 0);
-		OreDictionaryHelper.register(this, "workbench");
-		OreDictionaryHelper.register(this, "crafting", "table", "wood");
-		Blocks.FIRE.setFireInfo(this, 5, 20);
-	}
+        setSoundType(SoundType.WOOD);
+        setHardness(2.0F).setResistance(5.0F);
+        setHarvestLevel("axe", 0);
+        OreDictionaryHelper.register(this, "workbench");
+        OreDictionaryHelper.register(this, "crafting", "table", "wood");
+        Blocks.FIRE.setFireInfo(this, 5, 20);
+    }
 
-	public static BlockWorkbenchTFC get(Tree wood) {
-		return MAP.get(wood);
-	}
+    public static BlockWorkbenchTFC get(Tree wood) {
+        return MAP.get(wood);
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Nonnull
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}
+    @SideOnly(Side.CLIENT)
+    @Nonnull
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 
-	@Override
-	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, IBlockState state, @Nullable EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (worldIn.isRemote || playerIn == null) {
-			return true;
-		} else {
-			playerIn.displayGui(new InterfaceCraftingTable(this, worldIn, pos));
-			playerIn.addStat(StatList.CRAFTING_TABLE_INTERACTION);
-			return true;
-		}
-	}
+    @Override
+    public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, IBlockState state, @Nullable EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (worldIn.isRemote || playerIn == null) {
+            return true;
+        } else {
+            playerIn.displayGui(new InterfaceCraftingTable(this, worldIn, pos));
+            playerIn.addStat(StatList.CRAFTING_TABLE_INTERACTION);
+            return true;
+        }
+    }
 
-	@SuppressWarnings("WeakerAccess")
-	@ParametersAreNonnullByDefault
-	@MethodsReturnNonnullByDefault
-	public static class InterfaceCraftingTable implements IInteractionObject {
-		//todo: replace with proper workbench mechanics + normal forge gui code
-		private final BlockWorkbenchTFC workbenchTFC;
-		private final World world;
-		private final BlockPos position;
+    @SuppressWarnings("WeakerAccess")
+    @ParametersAreNonnullByDefault
+    @MethodsReturnNonnullByDefault
+    public static class InterfaceCraftingTable implements IInteractionObject {
+        //todo: replace with proper workbench mechanics + normal forge gui code
+        private final BlockWorkbenchTFC workbenchTFC;
+        private final World world;
+        private final BlockPos position;
 
-		public InterfaceCraftingTable(BlockWorkbenchTFC workbenchTFC, World worldIn, BlockPos pos) {
-			this.workbenchTFC = workbenchTFC;
-			this.world = worldIn;
-			this.position = pos;
-		}
+        public InterfaceCraftingTable(BlockWorkbenchTFC workbenchTFC, World worldIn, BlockPos pos) {
+            this.workbenchTFC = workbenchTFC;
+            this.world = worldIn;
+            this.position = pos;
+        }
 
-		/**
-		 * Get the name of this object. For players this returns their username
-		 */
-		@Override
-		public String getName() {
-			return "crafting_table";
-		}
+        /**
+         * Get the name of this object. For players this returns their username
+         */
+        @Override
+        public String getName() {
+            return "crafting_table";
+        }
 
-		/**
-		 * Returns true if this thing is named
-		 */
-		@Override
-		public boolean hasCustomName() {
-			return false;
-		}
+        /**
+         * Returns true if this thing is named
+         */
+        @Override
+        public boolean hasCustomName() {
+            return false;
+        }
 
-		/**
-		 * Get the formatted ChatComponent that will be used for the sender's username in chat
-		 */
-		@Override
-		public ITextComponent getDisplayName() {
-			return new TextComponentTranslation(workbenchTFC.getTranslationKey() + ".name");
-		}
+        /**
+         * Get the formatted ChatComponent that will be used for the sender's username in chat
+         */
+        @Override
+        public ITextComponent getDisplayName() {
+            return new TextComponentTranslation(workbenchTFC.getTranslationKey() + ".name");
+        }
 
-		@Override
-		public Container createContainer(InventoryPlayer inv, EntityPlayer player) {
-			return new ContainerWorkbenchTFC(inv, world, position, workbenchTFC);
-		}
+        @Override
+        public Container createContainer(InventoryPlayer inv, EntityPlayer player) {
+            return new ContainerWorkbenchTFC(inv, world, position, workbenchTFC);
+        }
 
-		@Override
-		public String getGuiID() {
-			return "minecraft:crafting_table";
-		}
-	}
+        @Override
+        public String getGuiID() {
+            return "minecraft:crafting_table";
+        }
+    }
 
 }

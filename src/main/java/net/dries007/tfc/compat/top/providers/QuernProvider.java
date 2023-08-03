@@ -1,5 +1,7 @@
 package net.dries007.tfc.compat.top.providers;
 
+import static net.dries007.tfc.objects.te.TEQuern.SLOT_HANDSTONE;
+
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
@@ -14,8 +16,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import static net.dries007.tfc.objects.te.TEQuern.SLOT_HANDSTONE;
 
 public class QuernProvider implements IProbeInfoProvider
 {

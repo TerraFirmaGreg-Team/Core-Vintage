@@ -1,9 +1,8 @@
 package net.dries007.tfc;
 
-import zone.rong.mixinbooter.ILateMixinLoader;
-
 import java.util.ArrayList;
 import java.util.List;
+import zone.rong.mixinbooter.ILateMixinLoader;
 
 public class LateMixinLoader implements ILateMixinLoader {
 

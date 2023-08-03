@@ -1,8 +1,5 @@
 package net.dries007.tfc.compat.gregtech.material;
 
-import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.ToolProperty;
-
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.NO_UNIFICATION;
 import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
@@ -11,6 +8,9 @@ import static gregtech.api.util.GTUtility.gregtechId;
 import static net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags.*;
 import static net.dries007.tfc.compat.gregtech.material.TFGMaterials.*;
 import static net.dries007.tfc.compat.gregtech.material.TFGPropertyKey.HEAT;
+
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.properties.ToolProperty;
 
 public class TFGMaterialHandler {
 

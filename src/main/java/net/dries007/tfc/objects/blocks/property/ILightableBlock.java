@@ -8,5 +8,5 @@ import net.minecraft.block.properties.PropertyBool;
  * Includes the obnoxious static field.
  */
 public interface ILightableBlock {
-	PropertyBool LIT = PropertyBool.create("lit");
+    PropertyBool LIT = PropertyBool.create("lit");
 }

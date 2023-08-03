@@ -12,15 +12,15 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class RockBlockProvider implements IProbeInfoProvider {
-	@Override
-	public String getID() {
-		return TerraFirmaCraft.MOD_ID + ":rock_block";
-	}
+    @Override
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":rock_block";
+    }
 
-	@Override
-	public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, IBlockState blockState, IProbeHitData data) {
-		if (blockState.getBlock() instanceof IRockBlock rockBlock) {
-			probeInfo.text(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockBlock.getRockCategory().getLocalizedName());
-		}
-	}
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, IBlockState blockState, IProbeHitData data) {
+        if (blockState.getBlock() instanceof IRockBlock rockBlock) {
+            probeInfo.text(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockBlock.getRockCategory().getLocalizedName());
+        }
+    }
 }

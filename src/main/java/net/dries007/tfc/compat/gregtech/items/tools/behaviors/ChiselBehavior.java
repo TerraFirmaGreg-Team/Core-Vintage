@@ -3,6 +3,9 @@ package net.dries007.tfc.compat.gregtech.items.tools.behaviors;
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import gregtech.common.items.ToolItems;
+import java.util.List;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
@@ -34,10 +37,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.List;
 
 public class ChiselBehavior implements IToolBehavior {
 
@@ -127,8 +126,7 @@ public class ChiselBehavior implements IToolBehavior {
      * @param facing  side of block that was hit
      * @return null if the operation would not succeed. resulting state for if it would succeed.
      */
-    @Nullable
-    public static IBlockState getChiselResultState(EntityPlayer player, World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    @Nullable public static IBlockState getChiselResultState(EntityPlayer player, World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ) {
         // no chiseling if no hammer is present
         if (hasHammerForChisel(player)) {
             IBlockState state = worldIn.getBlockState(pos);
@@ -158,8 +156,7 @@ public class ChiselBehavior implements IToolBehavior {
         return false;
     }
 
-    @Nullable
-    @SuppressWarnings("deprecation")
+    @Nullable @SuppressWarnings("deprecation")
     private static IBlockState getRecipeResult(EntityPlayer player, World worldIn, BlockPos pos, EnumFacing facing, ChiselRecipe.Mode chiselMode, IBlockState targetState, float hitX, float hitY, float hitZ) {
         if (chiselMode == ChiselRecipe.Mode.SMOOTH) {
             ChiselRecipe recipe = ChiselRecipe.get(targetState);
@@ -198,8 +195,7 @@ public class ChiselBehavior implements IToolBehavior {
      * @param craftingIndices    stair pattern or slab pattern indices
      * @return the result of crafting the ingredient in the listed pattern, null if no crafting result
      */
-    @Nullable
-    private static ItemStack findCraftingResult(World world, ItemStack craftingIngredient, int[] craftingIndices)
+    @Nullable private static ItemStack findCraftingResult(World world, ItemStack craftingIngredient, int[] craftingIndices)
     {
         InventoryCrafting craftMatrix = new InventoryCrafting(new ContainerEmpty(), 3, 3);
         for (int index : craftingIndices)

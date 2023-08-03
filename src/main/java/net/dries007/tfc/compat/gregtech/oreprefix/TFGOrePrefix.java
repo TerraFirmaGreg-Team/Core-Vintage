@@ -1,5 +1,9 @@
 package net.dries007.tfc.compat.gregtech.oreprefix;
 
+import static gregtech.api.GTValues.M;
+import static gregtech.api.unification.ore.OrePrefix.Conditions.*;
+import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
+
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialIconType;
 import gregtech.api.unification.ore.OrePrefix;
@@ -8,10 +12,6 @@ import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialIconType;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
-
-import static gregtech.api.GTValues.M;
-import static gregtech.api.unification.ore.OrePrefix.Conditions.*;
-import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
 
 public class TFGOrePrefix {
 

@@ -1,10 +1,9 @@
 package net.dries007.tfc.api.capability;
 
+import javax.annotation.Nullable;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
-
-import javax.annotation.Nullable;
 
 /**
  * A no-op implementation of {@link net.minecraftforge.common.capabilities.Capability.IStorage} for capabilities that require custom serialize / deserialization logic
@@ -12,13 +11,12 @@ import javax.annotation.Nullable;
  * @param <T> The capability class
  */
 public final class DumbStorage<T> implements Capability.IStorage<T> {
-	@Nullable
-	@Override
-	public NBTBase writeNBT(Capability<T> capability, T instance, EnumFacing side) {
-		return null;
-	}
+    @Nullable @Override
+    public NBTBase writeNBT(Capability<T> capability, T instance, EnumFacing side) {
+        return null;
+    }
 
-	@Override
-	public void readNBT(Capability<T> capability, T instance, EnumFacing side, NBTBase nbt) {
-	}
+    @Override
+    public void readNBT(Capability<T> capability, T instance, EnumFacing side, NBTBase nbt) {
+    }
 }

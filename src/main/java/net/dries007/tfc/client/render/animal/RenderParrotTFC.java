@@ -8,8 +8,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderParrotTFC extends RenderParrot {
-	public RenderParrotTFC(RenderManager renderManager) {
-		super(renderManager);
-		this.mainModel = new ModelParrotTFC();
-	}
+    public RenderParrotTFC(RenderManager renderManager) {
+        super(renderManager);
+        this.mainModel = new ModelParrotTFC();
+    }
 }

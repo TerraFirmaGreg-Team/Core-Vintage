@@ -1,16 +1,15 @@
 package net.dries007.tfc.compat.gregtech.items.tools.behaviors;
 
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
+import java.util.List;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.List;
 
 public class PropickBehavior implements IToolBehavior {
 

@@ -13,27 +13,27 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 public class LogPileProvider implements IProbeInfoProvider {
-	@Override
-	public String getID() {
-		return TerraFirmaCraft.MOD_ID + ":log_pile";
-	}
+    @Override
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":log_pile";
+    }
 
-	@Override
-	public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
-		var logPile = Helpers.getTE(world, iProbeHitData.getPos(), TELogPile.class);
-		if (logPile != null) {
-			var inventory = logPile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+        var logPile = Helpers.getTE(world, iProbeHitData.getPos(), TELogPile.class);
+        if (logPile != null) {
+            var inventory = logPile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-			if (inventory != null) {
-				var horizontalLayout = iProbeInfo.horizontal();
+            if (inventory != null) {
+                var horizontalLayout = iProbeInfo.horizontal();
 
-				for (int i = 0; i < inventory.getSlots(); i++) {
-					var slotStack = inventory.getStackInSlot(i);
-					if (!slotStack.isEmpty()) {
-						horizontalLayout.item(slotStack);
-					}
-				}
-			}
-		}
-	}
+                for (int i = 0; i < inventory.getSlots(); i++) {
+                    var slotStack = inventory.getStackInSlot(i);
+                    if (!slotStack.isEmpty()) {
+                        horizontalLayout.item(slotStack);
+                    }
+                }
+            }
+        }
+    }
 }

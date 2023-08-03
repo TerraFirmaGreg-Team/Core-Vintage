@@ -1,9 +1,5 @@
 package net.dries007.tfc.compat.gregtech.stonetypes;
 
-import gregtech.api.unification.ore.StoneType;
-import net.dries007.tfc.api.registries.TFCStorage;
-import net.minecraft.block.SoundType;
-
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
@@ -11,6 +7,10 @@ import static net.dries007.tfc.api.types2.rock.RockType.*;
 import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
 import static net.dries007.tfc.compat.gregtech.material.TFGMaterials.*;
 import static net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix.*;
+
+import gregtech.api.unification.ore.StoneType;
+import net.dries007.tfc.api.registries.TFCStorage;
+import net.minecraft.block.SoundType;
 
 public class StoneTypeHandler {
     public static void init() {

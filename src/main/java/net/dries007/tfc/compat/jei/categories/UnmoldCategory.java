@@ -1,5 +1,6 @@
 package net.dries007.tfc.compat.jei.categories;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -11,8 +12,6 @@ import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.UnmoldRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class UnmoldCategory extends BaseRecipeCategory<UnmoldRecipeWrapper> {

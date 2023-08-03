@@ -1,5 +1,11 @@
 package net.dries007.tfc.objects.blocks;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockVariant.LOOSE;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.api.types2.GroundcoverType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.minecraft.block.Block;
@@ -20,98 +26,90 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockVariant.LOOSE;
-
 public class BlockGroundcover extends Block implements IHasModel {
-	private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
-	protected final ResourceLocation modelLocation;
-	private final GroundcoverType groundcoverType;
+    private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
+    protected final ResourceLocation modelLocation;
+    private final GroundcoverType groundcoverType;
 
-	public BlockGroundcover(GroundcoverType groundcoverType) {
-		super(Material.ROCK);
-		this.blockHardness = 0.1f;
-		this.blockResistance = 0.1f;
-		this.groundcoverType = groundcoverType;
-		this.modelLocation = new ResourceLocation(MOD_ID, LOOSE + "/" + groundcoverType);
+    public BlockGroundcover(GroundcoverType groundcoverType) {
+        super(Material.ROCK);
+        this.blockHardness = 0.1f;
+        this.blockResistance = 0.1f;
+        this.groundcoverType = groundcoverType;
+        this.modelLocation = new ResourceLocation(MOD_ID, LOOSE + "/" + groundcoverType);
 
-		this.setSoundType(SoundType.GROUND);
-	}
+        this.setSoundType(SoundType.GROUND);
+    }
 
-	public BlockGroundcover() {
-		this(GroundcoverType.FLINT);
-	}
+    public BlockGroundcover() {
+        this(GroundcoverType.FLINT);
+    }
 
-	@Nonnull
-	@Override
-	@SuppressWarnings("deprecation")
-	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
-		return STONE_AABB;
-	}
+    @Nonnull
+    @Override
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
+        return STONE_AABB;
+    }
 
-	@Override
-	@ParametersAreNonnullByDefault
-	@SuppressWarnings("deprecation")
-	public boolean isTopSolid(IBlockState state) {
-		return false;
-	}
+    @Override
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public boolean isTopSolid(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	@ParametersAreNonnullByDefault
-	@SuppressWarnings("deprecation")
-	public boolean isFullCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	@ParametersAreNonnullByDefault
-	@SuppressWarnings("deprecation")
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
-	@Nullable
-	@Override
-	@ParametersAreNonnullByDefault
-	@SuppressWarnings("deprecation")
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		return null;
-	}
+    @Nullable @Override
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return null;
+    }
 
-	@Override
-	@ParametersAreNonnullByDefault
-	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		IBlockState state = worldIn.getBlockState(pos);
-		IBlockState stateDown = worldIn.getBlockState(pos.down());
+    @Override
+    @ParametersAreNonnullByDefault
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+        IBlockState state = worldIn.getBlockState(pos);
+        IBlockState stateDown = worldIn.getBlockState(pos.down());
 
-		return stateDown.isSideSolid(worldIn, pos, EnumFacing.DOWN) && state.getBlock().equals(Blocks.AIR);
-	}
+        return stateDown.isSideSolid(worldIn, pos, EnumFacing.DOWN) && state.getBlock().equals(Blocks.AIR);
+    }
 
-	@Override
-	@Nonnull
-	public EnumOffsetType getOffsetType() {
-		return EnumOffsetType.XZ;
-	}
+    @Override
+    @Nonnull
+    public EnumOffsetType getOffsetType() {
+        return EnumOffsetType.XZ;
+    }
 
-	@Override
-	@Nonnull
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}
+    @Override
+    @Nonnull
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onModelRegister() {
-		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-			@Nonnull
-			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation, groundcoverType.getName());
-			}
-		});
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(modelLocation, groundcoverType.getName());
+            }
+        });
+    }
 }

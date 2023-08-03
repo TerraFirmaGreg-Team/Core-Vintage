@@ -3,6 +3,7 @@ package net.dries007.tfc.mixins.gregtech;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.common.blocks.BlockOre;
+import java.util.Random;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -12,8 +13,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.Random;
 
 @SuppressWarnings("all")
 @Mixin(value = BlockOre.class, remap = false)

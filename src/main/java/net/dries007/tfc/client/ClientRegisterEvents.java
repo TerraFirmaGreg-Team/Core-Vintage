@@ -161,6 +161,9 @@ public final class ClientRegisterEvents {
 		TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
 		TFCStorage.ALABASTER_BLOCK.values().forEach(IHasModel::onModelRegister);
 
+		for (ItemBlock item : TFCStorage.NORMAL_ITEM_BLOCKS)
+			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
+
 
 		// Blocks with Ignored Properties
 		for (Block block : BlocksTFC.getAllFluidBlocks())

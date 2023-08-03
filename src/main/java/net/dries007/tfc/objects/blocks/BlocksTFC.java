@@ -63,8 +63,6 @@ public final class BlocksTFC {
 
 	@GameRegistry.ObjectHolder("ceramics/fired/large_vessel")
 	public static final BlockLargeVessel FIRED_LARGE_VESSEL = getNull();
-
-	//public static final BlockDebug DEBUG = getNull();
 	public static final BlockSoilPeat PEAT = getNull();
 	public static final BlockSoilPeat PEAT_GRASS = getNull();
 	public static final BlockFirePit FIREPIT = getNull();

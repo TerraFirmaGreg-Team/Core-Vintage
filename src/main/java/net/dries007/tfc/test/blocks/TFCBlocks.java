@@ -75,6 +75,6 @@ public class TFCBlocks {
 
 		//=== Other ==================================================================================================//
 
-		NORMAL_ITEM_BLOCKS.add(new ItemBlockTFC(new BlockDebug()));
+		NORMAL_ITEM_BLOCKS.add(new ItemBlockTFC(DEBUG = new BlockDebug()));
 	}
 }

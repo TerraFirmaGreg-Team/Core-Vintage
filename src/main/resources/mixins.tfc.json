@@ -6,6 +6,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "gregtech.BlockOreMixin",
+    "gregtech.BlockSurfaceRockMixin",
     "gregtech.MaterialRecipeHandlerMixin",
     "gregtech.OrePrefixMixin",
     "gregtech.PartsRecipeHandlerMixin",

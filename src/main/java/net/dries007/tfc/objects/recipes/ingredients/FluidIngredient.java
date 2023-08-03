@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes.ingredients;
 
 import com.google.gson.JsonObject;
@@ -26,6 +21,13 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class FluidIngredient extends Ingredient {
+	private final FluidStack fluid;
+
+	public FluidIngredient(String fluidName) {
+		super(getValidBuckets(new FluidStack(FluidRegistry.getFluid(fluidName), Fluid.BUCKET_VOLUME)));
+		fluid = FluidRegistry.getFluidStack(fluidName, Fluid.BUCKET_VOLUME);
+	}
+
 	private static ItemStack[] getValidBuckets(FluidStack fluid) {
 		List<ItemStack> output = new ArrayList<>();
 		ItemStack woodenBucket = new ItemStack(ItemsTFC.WOODEN_BUCKET);
@@ -37,13 +39,6 @@ public class FluidIngredient extends Ingredient {
 		}
 		output.add(FluidUtil.getFilledBucket(fluid));
 		return output.toArray(new ItemStack[0]);
-	}
-
-	private final FluidStack fluid;
-
-	public FluidIngredient(String fluidName) {
-		super(getValidBuckets(new FluidStack(FluidRegistry.getFluid(fluidName), Fluid.BUCKET_VOLUME)));
-		fluid = FluidRegistry.getFluidStack(fluidName, Fluid.BUCKET_VOLUME);
 	}
 
 	@Override

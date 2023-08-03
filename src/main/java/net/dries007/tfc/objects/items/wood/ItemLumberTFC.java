@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -22,15 +17,6 @@ import java.util.Map;
 @ParametersAreNonnullByDefault
 public class ItemLumberTFC extends ItemTFC {
 	private static final Map<Tree, ItemLumberTFC> MAP = new HashMap<>();
-
-	public static ItemLumberTFC get(Tree wood) {
-		return MAP.get(wood);
-	}
-
-	public static ItemStack get(Tree wood, int amount) {
-		return new ItemStack(MAP.get(wood), amount);
-	}
-
 	public final Tree wood;
 
 	public ItemLumberTFC(Tree wood) {
@@ -40,6 +26,14 @@ public class ItemLumberTFC extends ItemTFC {
 		OreDictionaryHelper.register(this, "lumber");
 		//noinspection ConstantConditions
 		OreDictionaryHelper.register(this, "lumber", wood.getRegistryName().getPath());
+	}
+
+	public static ItemLumberTFC get(Tree wood) {
+		return MAP.get(wood);
+	}
+
+	public static ItemStack get(Tree wood, int amount) {
+		return new ItemStack(MAP.get(wood), amount);
 	}
 
 	@Nonnull

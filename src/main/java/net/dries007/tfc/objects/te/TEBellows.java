@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.ConfigTFC;
@@ -41,6 +36,8 @@ public class TEBellows extends TEBase {
 		addBellowsOffset(OFFSET_INSET);
 	}
 
+	private long lastPushed = 0L;
+
 	/**
 	 * Notify the bellows that it should check a certain offset when blowing air
 	 * X: front of the bellows, positive values go forward
@@ -56,8 +53,6 @@ public class TEBellows extends TEBase {
 	public static void addBellowsOffset(Vec3i offset) {
 		OFFSETS.add(offset);
 	}
-
-	private long lastPushed = 0L;
 
 	// Min 0.125, Max 0.625
 	@SideOnly(Side.CLIENT)

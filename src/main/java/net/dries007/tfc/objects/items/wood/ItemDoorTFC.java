@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -24,11 +19,6 @@ import java.util.Map;
 @MethodsReturnNonnullByDefault
 public class ItemDoorTFC extends ItemDoor implements IItemSize {
 	private static final Map<Tree, ItemDoorTFC> MAP = new HashMap<>();
-
-	public static ItemDoorTFC get(Tree wood) {
-		return MAP.get(wood);
-	}
-
 	public final Tree wood;
 
 	public ItemDoorTFC(BlockDoorTFC block) {
@@ -38,6 +28,10 @@ public class ItemDoorTFC extends ItemDoor implements IItemSize {
 		OreDictionaryHelper.register(this, "door", "wood");
 		//noinspection ConstantConditions
 		OreDictionaryHelper.register(this, "door", "wood", wood.getRegistryName().getPath());
+	}
+
+	public static ItemDoorTFC get(Tree wood) {
+		return MAP.get(wood);
 	}
 
 	@Nonnull

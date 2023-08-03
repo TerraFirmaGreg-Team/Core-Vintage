@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import net.dries007.tfc.api.capability.size.Size;
@@ -19,15 +14,6 @@ import java.util.EnumMap;
 @ParametersAreNonnullByDefault
 public class ItemPowder extends ItemTFC {
 	private static final EnumMap<Powder, ItemPowder> MAP = new EnumMap<>(Powder.class);
-
-	public static ItemPowder get(Powder powder) {
-		return MAP.get(powder);
-	}
-
-	public static ItemStack get(Powder powder, int amount) {
-		return new ItemStack(MAP.get(powder), amount);
-	}
-
 	private final Powder powder;
 
 	public ItemPowder(Powder powder) {
@@ -38,6 +24,14 @@ public class ItemPowder extends ItemTFC {
 		if (powder == Powder.LAPIS_LAZULI) {
 			OreDictionaryHelper.register(this, "dust", "lapis");
 		}
+	}
+
+	public static ItemPowder get(Powder powder) {
+		return MAP.get(powder);
+	}
+
+	public static ItemStack get(Powder powder, int amount) {
+		return new ItemStack(MAP.get(powder), amount);
 	}
 
 	@Nonnull

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import gregtech.api.unification.material.Material;
@@ -31,17 +26,16 @@ import java.util.Map;
 @ParametersAreNonnullByDefault
 public class ItemMetalCladding extends ItemTFC {
 	private static final Map<Material, ItemMetalCladding> CLADDING_STORAGE_MAP = new HashMap<>();
-
-	public static ItemMetalCladding get(Material material) {
-		return CLADDING_STORAGE_MAP.get(material);
-	}
-
 	private final Material material;
 
 	public ItemMetalCladding(Material material) {
 		this.material = material;
 
 		if (CLADDING_STORAGE_MAP.put(material, this) != null) throw new IllegalStateException("There can only be one.");
+	}
+
+	public static ItemMetalCladding get(Material material) {
+		return CLADDING_STORAGE_MAP.get(material);
 	}
 
 	@Override

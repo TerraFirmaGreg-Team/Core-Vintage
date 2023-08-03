@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.skills;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -24,73 +19,62 @@ import java.util.stream.Collectors;
  * @param <S> the skill class
  */
 @SuppressWarnings("WeakerAccess")
-public final class SkillType<S extends Skill>
-{
-    public static final SkillType<ProspectingSkill> PROSPECTING;
-    public static final SkillType<SmithingSkill> SMITHING;
-    public static final SkillType<SimpleSkill> AGRICULTURE;
-    public static final SkillType<SimpleSkill> BUTCHERING;
+public final class SkillType<S extends Skill> {
+	public static final SkillType<ProspectingSkill> PROSPECTING;
+	public static final SkillType<SmithingSkill> SMITHING;
+	public static final SkillType<SimpleSkill> AGRICULTURE;
+	public static final SkillType<SimpleSkill> BUTCHERING;
 
-    private static final Map<String, SkillType<? extends Skill>> SKILL_TYPES = new LinkedHashMap<>(4);
-    private static final List<SkillType<? extends Skill>> SKILL_ORDER = new ArrayList<>(4);
+	private static final Map<String, SkillType<? extends Skill>> SKILL_TYPES = new LinkedHashMap<>(4);
+	private static final List<SkillType<? extends Skill>> SKILL_ORDER = new ArrayList<>(4);
 
-    static
-    {
-        // This needs to happen after SKILL_TYPES and SKILL_ORDER are initialized, otherwise it causes an NPE
-        PROSPECTING = new SkillType<>("prospecting", ProspectingSkill::new);
-        SMITHING = new SkillType<>("smithing", SmithingSkill::new);
-        AGRICULTURE = new SkillType<>("agriculture", SimpleSkill::new);
-        BUTCHERING = new SkillType<>("butchering", SimpleSkill::new);
-    }
+	static {
+		// This needs to happen after SKILL_TYPES and SKILL_ORDER are initialized, otherwise it causes an NPE
+		PROSPECTING = new SkillType<>("prospecting", ProspectingSkill::new);
+		SMITHING = new SkillType<>("smithing", SmithingSkill::new);
+		AGRICULTURE = new SkillType<>("agriculture", SimpleSkill::new);
+		BUTCHERING = new SkillType<>("butchering", SimpleSkill::new);
+	}
 
-    @Nonnull
-    public static List<SkillType<? extends Skill>> getSkills()
-    {
-        return SKILL_ORDER;
-    }
+	private final String name;
+	private final Function<IPlayerData, S> skillSupplier;
 
-    @Nonnull
-    public static Map<String, Skill> createSkillMap(IPlayerData rootInstance)
-    {
-        return SKILL_TYPES.values().stream().collect(Collectors.toMap(SkillType::getName, e -> e.skillSupplier.apply(rootInstance)));
-    }
+	public SkillType(String name, Function<IPlayerData, S> skillSupplier) {
+		this.name = name;
+		this.skillSupplier = skillSupplier;
 
-    @Nullable
-    @SuppressWarnings("unchecked")
-    public static <S extends Skill> SkillType<S> get(String name, Class<S> returnClass)
-    {
-        SkillType<? extends Skill> skill = SKILL_TYPES.get(name);
-        try
-        {
-            return ((SkillType<S>) skill);
-        }
-        catch (ClassCastException e)
-        {
-            TerraFirmaCraft.getLog().warn("Tried to cast skill '" + skill + "' to an incorrect instance type: " + name + " / " + returnClass);
-            return null;
-        }
-    }
+		if (SKILL_TYPES.containsKey(name)) {
+			throw new IllegalArgumentException("Can't register multiple skills with the same name!");
+		}
 
-    private final String name;
-    private final Function<IPlayerData, S> skillSupplier;
+		SKILL_TYPES.put(name, this);
+		SKILL_ORDER.add(this);
+	}
 
-    public SkillType(String name, Function<IPlayerData, S> skillSupplier)
-    {
-        this.name = name;
-        this.skillSupplier = skillSupplier;
+	@Nonnull
+	public static List<SkillType<? extends Skill>> getSkills() {
+		return SKILL_ORDER;
+	}
 
-        if (SKILL_TYPES.containsKey(name))
-        {
-            throw new IllegalArgumentException("Can't register multiple skills with the same name!");
-        }
+	@Nonnull
+	public static Map<String, Skill> createSkillMap(IPlayerData rootInstance) {
+		return SKILL_TYPES.values().stream().collect(Collectors.toMap(SkillType::getName, e -> e.skillSupplier.apply(rootInstance)));
+	}
 
-        SKILL_TYPES.put(name, this);
-        SKILL_ORDER.add(this);
-    }
+	@Nullable
+	@SuppressWarnings("unchecked")
+	public static <S extends Skill> SkillType<S> get(String name, Class<S> returnClass) {
+		SkillType<? extends Skill> skill = SKILL_TYPES.get(name);
+		try {
+			return ((SkillType<S>) skill);
+		} catch (ClassCastException e) {
+			TerraFirmaCraft.getLog().warn("Tried to cast skill '" + skill + "' to an incorrect instance type: " + name + " / " + returnClass);
+			return null;
+		}
+	}
 
-    @Nonnull
-    public String getName()
-    {
-        return name;
-    }
+	@Nonnull
+	public String getName() {
+		return name;
+	}
 }

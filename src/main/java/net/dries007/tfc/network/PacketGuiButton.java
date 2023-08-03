@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
@@ -23,63 +18,53 @@ import javax.annotation.Nullable;
  *
  * @author AlcatrazEscapee
  */
-public class PacketGuiButton implements IMessage
-{
-    private int buttonID;
-    private NBTTagCompound extraNBT;
+public class PacketGuiButton implements IMessage {
+	private int buttonID;
+	private NBTTagCompound extraNBT;
 
-    @SuppressWarnings("unused")
-    @Deprecated
-    public PacketGuiButton() {}
+	@SuppressWarnings("unused")
+	@Deprecated
+	public PacketGuiButton() {
+	}
 
-    public PacketGuiButton(int buttonID, @Nullable NBTTagCompound extraNBT)
-    {
-        this.buttonID = buttonID;
-        this.extraNBT = extraNBT;
-    }
+	public PacketGuiButton(int buttonID, @Nullable NBTTagCompound extraNBT) {
+		this.buttonID = buttonID;
+		this.extraNBT = extraNBT;
+	}
 
-    public PacketGuiButton(int buttonID)
-    {
-        this(buttonID, null);
-    }
+	public PacketGuiButton(int buttonID) {
+		this(buttonID, null);
+	}
 
-    @Override
-    public void fromBytes(ByteBuf buf)
-    {
-        buttonID = buf.readInt();
-        if (buf.readBoolean())
-        {
-            extraNBT = ByteBufUtils.readTag(buf);
-        }
-    }
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		buttonID = buf.readInt();
+		if (buf.readBoolean()) {
+			extraNBT = ByteBufUtils.readTag(buf);
+		}
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf)
-    {
-        buf.writeInt(buttonID);
-        buf.writeBoolean(extraNBT != null);
-        if (extraNBT != null)
-        {
-            ByteBufUtils.writeTag(buf, extraNBT);
-        }
-    }
+	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeInt(buttonID);
+		buf.writeBoolean(extraNBT != null);
+		if (extraNBT != null) {
+			ByteBufUtils.writeTag(buf, extraNBT);
+		}
+	}
 
-    public static class Handler implements IMessageHandler<PacketGuiButton, IMessage>
-    {
-        @Override
-        public IMessage onMessage(PacketGuiButton message, MessageContext ctx)
-        {
-            EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-            if (player != null)
-            {
-                TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                    if (player.openContainer instanceof IButtonHandler)
-                    {
-                        ((IButtonHandler) player.openContainer).onButtonPress(message.buttonID, message.extraNBT);
-                    }
-                });
-            }
-            return null;
-        }
-    }
+	public static class Handler implements IMessageHandler<PacketGuiButton, IMessage> {
+		@Override
+		public IMessage onMessage(PacketGuiButton message, MessageContext ctx) {
+			EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+			if (player != null) {
+				TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+					if (player.openContainer instanceof IButtonHandler) {
+						((IButtonHandler) player.openContainer).onButtonPress(message.buttonID, message.extraNBT);
+					}
+				});
+			}
+			return null;
+		}
+	}
 }

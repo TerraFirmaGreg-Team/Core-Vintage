@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -54,6 +49,12 @@ public class CapabilityContainerListener implements IContainerListener {
 		SYNC_CAPS.put(CapabilityForgeable.KEY.toString(), CapabilityForgeable.FORGEABLE_CAPABILITY);
 		SYNC_CAPS.put(CapabilityFood.KEY.toString(), CapabilityFood.CAPABILITY);
 		SYNC_CAPS.put(CapabilityEgg.KEY.toString(), CapabilityEgg.CAPABILITY);
+	}
+
+	private final EntityPlayerMP player;
+
+	public CapabilityContainerListener(EntityPlayerMP player) {
+		this.player = player;
 	}
 
 	/**
@@ -169,12 +170,6 @@ public class CapabilityContainerListener implements IContainerListener {
 			}
 		}
 		return false;
-	}
-
-	private final EntityPlayerMP player;
-
-	public CapabilityContainerListener(EntityPlayerMP player) {
-		this.player = player;
 	}
 
 	/**

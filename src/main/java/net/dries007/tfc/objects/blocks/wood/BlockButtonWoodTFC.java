@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.Tree;
@@ -15,11 +10,6 @@ import java.util.Map;
 
 public class BlockButtonWoodTFC extends BlockButtonWood {
 	private static final Map<Tree, BlockButtonWoodTFC> MAP = new HashMap<>();
-
-	public static BlockButtonWoodTFC get(Tree wood) {
-		return MAP.get(wood);
-	}
-
 	public final Tree wood;
 
 	public BlockButtonWoodTFC(Tree wood) {
@@ -28,5 +18,9 @@ public class BlockButtonWoodTFC extends BlockButtonWood {
 		setHardness(0.5F);
 		setSoundType(SoundType.WOOD);
 		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
+
+	public static BlockButtonWoodTFC get(Tree wood) {
+		return MAP.get(wood);
 	}
 }

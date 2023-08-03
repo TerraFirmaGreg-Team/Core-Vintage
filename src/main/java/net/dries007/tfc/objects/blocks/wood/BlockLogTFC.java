@@ -1,15 +1,8 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -29,7 +22,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
@@ -49,11 +41,6 @@ public class BlockLogTFC extends BlockLog implements IItemSize {
 	public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);
 	public static final AxisAlignedBB SMALL_AABB_Z = new AxisAlignedBB(0.25, 0.25, 0, 0.75, 0.75, 1);
 	private static final Map<Tree, BlockLogTFC> MAP = new HashMap<>();
-
-	public static BlockLogTFC get(Tree wood) {
-		return MAP.get(wood);
-	}
-
 	private final Tree wood;
 
 	public BlockLogTFC(Tree wood) {
@@ -72,6 +59,10 @@ public class BlockLogTFC extends BlockLog implements IItemSize {
 
 		Blocks.FIRE.setFireInfo(this, 5, 5);
 		setTickRandomly(true);
+	}
+
+	public static BlockLogTFC get(Tree wood) {
+		return MAP.get(wood);
 	}
 
 	@SuppressWarnings("deprecation")

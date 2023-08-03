@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.ceramics;
 
 import gregtech.api.unification.ore.OrePrefix;
@@ -15,11 +10,6 @@ import java.util.Map;
 
 public class ItemUnfiredMold extends ItemPottery {
 	private static final Map<OrePrefix, ItemUnfiredMold> MOLD_STORAGE_MAP = new HashMap<>();
-
-	public static ItemUnfiredMold get(OrePrefix orePrefix) {
-		return MOLD_STORAGE_MAP.get(orePrefix);
-	}
-
 	public final OrePrefix orePrefix;
 
 	public ItemUnfiredMold(OrePrefix orePrefix) {
@@ -28,6 +18,10 @@ public class ItemUnfiredMold extends ItemPottery {
 		if (MOLD_STORAGE_MAP.put(orePrefix, this) != null) {
 			throw new IllegalStateException("There can only be one.");
 		}
+	}
+
+	public static ItemUnfiredMold get(OrePrefix orePrefix) {
+		return MOLD_STORAGE_MAP.get(orePrefix);
 	}
 
 	@Nonnull

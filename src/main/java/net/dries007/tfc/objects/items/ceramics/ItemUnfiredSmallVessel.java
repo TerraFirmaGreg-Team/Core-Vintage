@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.ceramics;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,11 +21,10 @@ public class ItemUnfiredSmallVessel extends ItemPottery {
 	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
 		if (!glazed) {
 			return new TextComponentTranslation("item.tfc.ceramics.unfired.vessel.name").getFormattedText();
-		}
-		else {
+		} else {
 			return new TextComponentTranslation(
-							"item.tfc.ceramics.unfired.vessel_glazed.name",
-							new TextComponentTranslation("color." + EnumDyeColor.byDyeDamage(stack.getItemDamage()).getName())
+					"item.tfc.ceramics.unfired.vessel_glazed.name",
+					new TextComponentTranslation("color." + EnumDyeColor.byDyeDamage(stack.getItemDamage()).getName())
 			).getFormattedText();
 		}
 	}

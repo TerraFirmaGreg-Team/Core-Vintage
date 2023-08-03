@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.size;
 
 import net.minecraft.item.ItemStack;
@@ -20,6 +15,7 @@ public class ItemSizeHandler implements ICapabilityProvider, IItemSize {
 	private final Size size;
 	private final Weight weight;
 	private final boolean canStack;
+
 	public ItemSizeHandler(Size size, Weight weight, boolean canStack) {
 		this.size = size;
 		this.weight = weight;

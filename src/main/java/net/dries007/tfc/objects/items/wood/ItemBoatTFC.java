@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -38,16 +33,15 @@ import java.util.Objects;
 @MethodsReturnNonnullByDefault
 public class ItemBoatTFC extends ItemTFC {
 	private static final Map<Tree, ItemBoatTFC> MAP = new HashMap<>();
-
-	public static ItemBoatTFC get(Tree wood) {
-		return MAP.get(wood);
-	}
-
 	private final Tree wood;
 
 	public ItemBoatTFC(Tree wood) {
 		this.wood = wood;
 		if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
+	}
+
+	public static ItemBoatTFC get(Tree wood) {
+		return MAP.get(wood);
 	}
 
 	public Tree getWood() {

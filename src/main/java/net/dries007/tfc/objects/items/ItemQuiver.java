@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import net.dries007.tfc.ConfigTFC;
@@ -38,6 +33,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ItemQuiver extends ItemArmorTFC {
+	public ItemQuiver() {
+		super(ArmorMaterialTFC.QUIVER, 1 /* chest*/, EntityEquipmentSlot.CHEST);
+	}
+
 	public static void replenishJavelin(InventoryPlayer playerInv) {
 		QuiverCapability quiver = findQuiver(playerInv);
 		if (quiver != null) {
@@ -140,10 +139,6 @@ public class ItemQuiver extends ItemArmorTFC {
 			return (QuiverCapability) quiverCapability;
 		}
 		return null;
-	}
-
-	public ItemQuiver() {
-		super(ArmorMaterialTFC.QUIVER, 1 /* chest*/, EntityEquipmentSlot.CHEST);
 	}
 
 	@Override

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.api.types.IAnimalTFC;
@@ -17,26 +12,22 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
-public abstract class RenderAnimalTFC<T extends EntityLiving> extends RenderLiving<T>
-{
-    private final ResourceLocation youngTexture;
-    private final ResourceLocation oldTexture;
+public abstract class RenderAnimalTFC<T extends EntityLiving> extends RenderLiving<T> {
+	private final ResourceLocation youngTexture;
+	private final ResourceLocation oldTexture;
 
-    protected RenderAnimalTFC(RenderManager rendermanagerIn, ModelBase modelbaseIn, float shadowsizeIn, @Nonnull ResourceLocation youngTextures, @Nonnull ResourceLocation oldTextures)
-    {
-        super(rendermanagerIn, modelbaseIn, shadowsizeIn);
-        this.youngTexture = youngTextures;
-        this.oldTexture = oldTextures;
-    }
+	protected RenderAnimalTFC(RenderManager rendermanagerIn, ModelBase modelbaseIn, float shadowsizeIn, @Nonnull ResourceLocation youngTextures, @Nonnull ResourceLocation oldTextures) {
+		super(rendermanagerIn, modelbaseIn, shadowsizeIn);
+		this.youngTexture = youngTextures;
+		this.oldTexture = oldTextures;
+	}
 
-    @Nonnull
-    @Override
-    protected ResourceLocation getEntityTexture(T entity)
-    {
-        if (entity instanceof IAnimalTFC && ((IAnimalTFC) entity).getAge() == IAnimalTFC.Age.OLD)
-        {
-            return oldTexture;
-        }
-        return youngTexture;
-    }
+	@Nonnull
+	@Override
+	protected ResourceLocation getEntityTexture(T entity) {
+		if (entity instanceof IAnimalTFC && ((IAnimalTFC) entity).getAge() == IAnimalTFC.Age.OLD) {
+			return oldTexture;
+		}
+		return youngTexture;
+	}
 }

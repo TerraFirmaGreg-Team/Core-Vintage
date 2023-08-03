@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.food;
 
 import net.dries007.tfc.api.capability.food.*;
@@ -25,15 +20,6 @@ import java.util.Map;
 @ParametersAreNonnullByDefault
 public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
 	private static final Map<Food, ItemFoodTFC> MAP = new HashMap<>();
-
-	public static ItemFoodTFC get(Food food) {
-		return MAP.get(food);
-	}
-
-	public static ItemStack get(Food food, int amount) {
-		return new ItemStack(MAP.get(food), amount);
-	}
-
 	protected final Food food;
 
 	public ItemFoodTFC(@Nonnull Food food) {
@@ -50,6 +36,14 @@ public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
 				OreDictionaryHelper.register(this, name);
 			}
 		}
+	}
+
+	public static ItemFoodTFC get(Food food) {
+		return MAP.get(food);
+	}
+
+	public static ItemStack get(Food food, int amount) {
+		return new ItemStack(MAP.get(food), amount);
 	}
 
 	@Override

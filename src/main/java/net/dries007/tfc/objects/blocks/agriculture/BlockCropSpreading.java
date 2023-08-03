@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import net.dries007.tfc.api.types.ICrop;
@@ -24,6 +19,12 @@ import java.util.Random;
 public abstract class BlockCropSpreading extends BlockCropTFC {
 	private static final int MAX_SPREAD_AGE = 16;
 
+	BlockCropSpreading(ICrop crop) {
+		super(crop);
+
+		setDefaultState(getBlockState().getBaseState().withProperty(WILD, false).withProperty(getStageProperty(), 0));
+	}
+
 	public static BlockCropSpreading create(ICrop crop) {
 		PropertyInteger property = getStagePropertyForCrop(crop);
 
@@ -36,12 +37,6 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
 				return property;
 			}
 		};
-	}
-
-	BlockCropSpreading(ICrop crop) {
-		super(crop);
-
-		setDefaultState(getBlockState().getBaseState().withProperty(WILD, false).withProperty(getStageProperty(), 0));
 	}
 
 	@Override

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -53,6 +48,16 @@ public class BlockPowderKeg extends Block implements IItemSize, ILightableBlock 
 
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
+	@SuppressWarnings("WeakerAccess")
+	public BlockPowderKeg() {
+		super(Material.WOOD);
+		setSoundType(SoundType.WOOD);
+		setHardness(2F);
+		setTickRandomly(true);
+
+		setDefaultState(blockState.getBaseState().withProperty(LIT, false).withProperty(SEALED, false));
+	}
+
 	/**
 	 * Used to update the keg seal state and the TE, in the correct order
 	 */
@@ -64,16 +69,6 @@ public class BlockPowderKeg extends Block implements IItemSize, ILightableBlock 
 			world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
 			tile.setSealed(!previousSealed);
 		}
-	}
-
-	@SuppressWarnings("WeakerAccess")
-	public BlockPowderKeg() {
-		super(Material.WOOD);
-		setSoundType(SoundType.WOOD);
-		setHardness(2F);
-		setTickRandomly(true);
-
-		setDefaultState(blockState.getBaseState().withProperty(LIT, false).withProperty(SEALED, false));
 	}
 
 	public void trigger(World worldIn, BlockPos pos, IBlockState state, @Nullable EntityLivingBase igniter) {
@@ -380,7 +375,7 @@ public class BlockPowderKeg extends Block implements IItemSize, ILightableBlock 
 	@Override
 	@Nonnull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world,
-								  BlockPos pos, EntityPlayer player) {
+			BlockPos pos, EntityPlayer player) {
 		TEPowderKeg tile = Helpers.getTE(world, pos, TEPowderKeg.class);
 		if (tile != null) {
 			return tile.getItemStack(state);

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.ceramics;
 
 import gregtech.api.fluids.MetaFluids;
@@ -27,7 +22,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.FluidTankPropertiesWrapper;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -44,11 +38,6 @@ import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_
 @ParametersAreNonnullByDefault
 public class ItemMold extends ItemPottery {
 	private static final Map<OrePrefix, ItemMold> MOLD_STORAGE_MAP = new HashMap<>();
-
-	public static ItemMold get(OrePrefix orePrefix) {
-		return MOLD_STORAGE_MAP.get(orePrefix);
-	}
-
 	private final OrePrefix orePrefix;
 
 	public ItemMold(OrePrefix type) {
@@ -57,6 +46,10 @@ public class ItemMold extends ItemPottery {
 		if (MOLD_STORAGE_MAP.put(type, this) != null) {
 			throw new IllegalStateException("There can only be one mold.");
 		}
+	}
+
+	public static ItemMold get(OrePrefix orePrefix) {
+		return MOLD_STORAGE_MAP.get(orePrefix);
 	}
 
 	@Nonnull
@@ -124,7 +117,7 @@ public class ItemMold extends ItemPottery {
 		@Override
 		public IFluidTankProperties[] getTankProperties() {
 			if (fluidTankProperties == null) {
-				fluidTankProperties = new IFluidTankProperties[] {new FluidTankPropertiesWrapper(tank)};
+				fluidTankProperties = new IFluidTankProperties[]{new FluidTankPropertiesWrapper(tank)};
 			}
 			return fluidTankProperties;
 		}

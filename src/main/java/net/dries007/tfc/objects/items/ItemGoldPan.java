@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -13,7 +8,6 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -50,7 +44,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemGoldPan extends ItemTFC {
-	public static final String[] TYPES = new String[] {"empty", "sand", "gravel", "clay", "dirt"};
+	public static final String[] TYPES = new String[]{"empty", "sand", "gravel", "clay", "dirt"};
 
 	public ItemGoldPan() {
 		setMaxDamage(0);

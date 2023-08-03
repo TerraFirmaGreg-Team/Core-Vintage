@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.genlayers;
 
 import net.dries007.tfc.ConfigTFC;
@@ -65,6 +60,7 @@ public abstract class GenLayerTFC extends GenLayer {
 	protected final int gravelBeachID = Biome.getIdForBiome(BiomesTFC.GRAVEL_BEACH);
 	protected final int mountainsID = Biome.getIdForBiome(BiomesTFC.MOUNTAINS);
 	protected final int mountainsEdgeID = Biome.getIdForBiome(BiomesTFC.MOUNTAINS_EDGE);
+
 	public GenLayerTFC(long seed) {
 		super(seed);
 	}

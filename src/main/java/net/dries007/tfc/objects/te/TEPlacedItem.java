@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -29,6 +24,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class TEPlacedItem extends TEInventory {
 	public static final int SLOT_LARGE_ITEM = 0;
+	protected boolean isHoldingLargeItem;
+
+	public TEPlacedItem() {
+		// the capability is used for the main inventory
+		super(4);
+		this.isHoldingLargeItem = false;
+	}
 
 	public static void convertPitKilnToPlacedItem(World world, BlockPos pos) {
 		TEPitKiln teOld = Helpers.getTE(world, pos, TEPitKiln.class);
@@ -60,14 +62,6 @@ public class TEPlacedItem extends TEInventory {
 				teNew.isHoldingLargeItem = teOld.isHoldingLargeItem;
 			}
 		}
-	}
-
-	protected boolean isHoldingLargeItem;
-
-	public TEPlacedItem() {
-		// the capability is used for the main inventory
-		super(4);
-		this.isHoldingLargeItem = false;
 	}
 
 	@Override

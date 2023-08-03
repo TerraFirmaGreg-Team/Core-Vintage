@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.top.providers;
 
 import mcjty.theoneprobe.api.IProbeHitData;
@@ -21,39 +16,32 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-public class BarrelProvider implements IProbeInfoProvider
-{
-    @Override
-    public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":barrel";
-    }
+public class BarrelProvider implements IProbeInfoProvider {
+	@Override
+	public String getID() {
+		return TerraFirmaCraft.MOD_ID + ":barrel";
+	}
 
-    @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
-        var te = Helpers.getTE(world, iProbeHitData.getPos(), TEBarrel.class);
+	@Override
+	public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+		var te = Helpers.getTE(world, iProbeHitData.getPos(), TEBarrel.class);
 
-        if (te != null)
-        {
-            IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-            FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
+		if (te != null) {
+			IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+			FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
 
-            if (te.isSealed())
-            {
-                probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.sealed", te.getSealedDate()).getFormattedText());
-                BarrelRecipe recipe = te.getRecipe();
-                if (recipe != null)
-                {
-                    probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.recipe", recipe.getResultName()).getFormattedText());
-                }
-                else
-                {
-                    probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.no_recipe").getFormattedText());
-                }
-            }
-            if (fluid != null && fluid.amount > 0)
-            {
-                probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.contents", fluid.amount, fluid.getLocalizedName()).getFormattedText());
-            }
-        }
-    }
+			if (te.isSealed()) {
+				probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.sealed", te.getSealedDate()).getFormattedText());
+				BarrelRecipe recipe = te.getRecipe();
+				if (recipe != null) {
+					probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.recipe", recipe.getResultName()).getFormattedText());
+				} else {
+					probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.no_recipe").getFormattedText());
+				}
+			}
+			if (fluid != null && fluid.amount > 0) {
+				probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.contents", fluid.amount, fluid.getLocalizedName()).getFormattedText());
+			}
+		}
+	}
 }

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -92,7 +87,7 @@ public class BlockRockAnvil extends Block implements IRockBlock, IItemSize {
 	}
 
 	@Nonnull
-    @Override
+	@Override
 	public RockType getRockType() {
 		return rockType;
 	}

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -30,11 +25,6 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 public class BlockDoorTFC extends BlockDoor {
 	private static final Map<Tree, BlockDoorTFC> MAP = new HashMap<>();
-
-	public static BlockDoorTFC get(Tree wood) {
-		return MAP.get(wood);
-	}
-
 	public final Tree wood;
 
 	public BlockDoorTFC(Tree wood) {
@@ -46,6 +36,10 @@ public class BlockDoorTFC extends BlockDoor {
 		disableStats();
 		// No direct item, so no oredict.
 		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
+
+	public static BlockDoorTFC get(Tree wood) {
+		return MAP.get(wood);
 	}
 
 	// todo: Is private, but it might be worth it making protected/public

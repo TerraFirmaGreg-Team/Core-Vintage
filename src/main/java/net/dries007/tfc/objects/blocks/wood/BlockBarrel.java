@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -54,6 +49,13 @@ public class BlockBarrel extends Block implements IItemSize {
 	public static final PropertyBool SEALED = PropertyBool.create("sealed");
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
+	public BlockBarrel() {
+		super(Material.WOOD);
+		setSoundType(SoundType.WOOD);
+		setHardness(2F);
+		setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+	}
+
 	/**
 	 * Used to toggle the barrel seal state and update the tile entity, in the correct order
 	 */
@@ -69,13 +71,6 @@ public class BlockBarrel extends Block implements IItemSize {
 				tile.onSealed();
 			}
 		}
-	}
-
-	public BlockBarrel() {
-		super(Material.WOOD);
-		setSoundType(SoundType.WOOD);
-		setHardness(2F);
-		setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
 	}
 
 	@Nonnull
@@ -273,7 +268,7 @@ public class BlockBarrel extends Block implements IItemSize {
 	@Override
 	@Nonnull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world,
-								  BlockPos pos, EntityPlayer player) {
+			BlockPos pos, EntityPlayer player) {
 		ItemStack stack = new ItemStack(state.getBlock());
 		TEBarrel tile = Helpers.getTE(world, pos, TEBarrel.class);
 		if (tile != null && tile.isSealed()) {

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability;
 
 import net.minecraft.nbt.NBTBase;
@@ -16,17 +11,14 @@ import javax.annotation.Nullable;
  *
  * @param <T> The capability class
  */
-public final class DumbStorage<T> implements Capability.IStorage<T>
-{
-    @Nullable
-    @Override
-    public NBTBase writeNBT(Capability<T> capability, T instance, EnumFacing side)
-    {
-        return null;
-    }
+public final class DumbStorage<T> implements Capability.IStorage<T> {
+	@Nullable
+	@Override
+	public NBTBase writeNBT(Capability<T> capability, T instance, EnumFacing side) {
+		return null;
+	}
 
-    @Override
-    public void readNBT(Capability<T> capability, T instance, EnumFacing side, NBTBase nbt)
-    {
-    }
+	@Override
+	public void readNBT(Capability<T> capability, T instance, EnumFacing side, NBTBase nbt) {
+	}
 }

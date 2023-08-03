@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic;
 
 import com.google.common.base.Strings;
@@ -25,6 +20,7 @@ public class WorldGenSettings {
 	public final int lavaFissureClusterRarity = 400; //todo
 	public final int waterFissureClusterRarity = 225; //todo
 	public final int largeRockRarity = 20; //todo
+
 	public WorldGenSettings(WorldGenSettingsBuilder b) {
 		spawnFuzz = b.spawnFuzz;
 		flatBedrock = b.flatBedrock;

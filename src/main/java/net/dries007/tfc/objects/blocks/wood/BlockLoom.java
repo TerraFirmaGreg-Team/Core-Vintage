@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 
@@ -47,11 +42,6 @@ public class BlockLoom extends BlockContainer implements IItemSize {
 	protected static final AxisAlignedBB LOOM_NORTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.4375D, 0.9375D, 1.0D, 0.875D);
 
 	private static final Map<Tree, BlockLoom> MAP = new HashMap<>();
-
-	public static BlockLoom get(Tree wood) {
-		return MAP.get(wood);
-	}
-
 	public Tree wood;
 
 	public BlockLoom(Tree wood) {
@@ -63,6 +53,10 @@ public class BlockLoom extends BlockContainer implements IItemSize {
 		setHardness(0.5f);
 		setResistance(3f);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+	}
+
+	public static BlockLoom get(Tree wood) {
+		return MAP.get(wood);
 	}
 
 	@Nonnull

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import gregtech.api.unification.material.Material;
@@ -34,6 +29,13 @@ import static net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC.AXIS;
 @ParametersAreNonnullByDefault
 public class ItemAnvil extends ItemTFC implements IMaterialItem {
 	private static final Map<Material, ItemAnvil> ANVIL_STORAGE_MAP = new HashMap<>();
+	private final Material material;
+
+	public ItemAnvil(Material material) {
+		this.material = material;
+
+		if (ANVIL_STORAGE_MAP.put(material, this) != null) throw new IllegalStateException("There can only be one.");
+	}
 
 	public static ItemAnvil get(Material material) {
 		return ANVIL_STORAGE_MAP.get(material);
@@ -41,14 +43,6 @@ public class ItemAnvil extends ItemTFC implements IMaterialItem {
 
 	public static Collection<ItemAnvil> getAnvilStorage() {
 		return ANVIL_STORAGE_MAP.values();
-	}
-
-	private final Material material;
-
-	public ItemAnvil(Material material) {
-		this.material = material;
-
-		if (ANVIL_STORAGE_MAP.put(material, this) != null) throw new IllegalStateException("There can only be one.");
 	}
 
 	@Override

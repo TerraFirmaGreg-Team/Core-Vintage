@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
@@ -34,7 +29,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class BlockMolten extends Block implements ILightableBlock {
 	public static final PropertyInteger LAYERS = PropertyInteger.create("layers", 1, 4);
 
-	private static final AxisAlignedBB[] MOLTEN_AABB = new AxisAlignedBB[] {
+	private static final AxisAlignedBB[] MOLTEN_AABB = new AxisAlignedBB[]{
 			new AxisAlignedBB(0, 0, 0, 1, 0.25, 1),
 			new AxisAlignedBB(0, 0, 0, 1, 0.5, 1),
 			new AxisAlignedBB(0, 0, 0, 1, 0.75, 1),

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.ceramics;
 
 import gregtech.api.fluids.MetaFluids;
@@ -104,8 +99,7 @@ public class ItemSmallVessel extends ItemPottery {
 	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
 		if (!glazed) {
 			return new TextComponentTranslation("item.tfc.ceramics.fired.vessel.name").getFormattedText();
-		}
-		else {
+		} else {
 			return new TextComponentTranslation(
 					"item.tfc.ceramics.fired.vessel_glazed.name",
 					new TextComponentTranslation("color." + EnumDyeColor.byDyeDamage(stack.getItemDamage()).getName())
@@ -313,7 +307,7 @@ public class ItemSmallVessel extends ItemPottery {
 		@Override
 		public IFluidTankProperties[] getTankProperties() {
 			if (fluidTankProperties == null) {
-				fluidTankProperties = new IFluidTankProperties[] {new FluidTankPropertiesWrapper(tank)};
+				fluidTankProperties = new IFluidTankProperties[]{new FluidTankPropertiesWrapper(tank)};
 			}
 			return fluidTankProperties;
 		}

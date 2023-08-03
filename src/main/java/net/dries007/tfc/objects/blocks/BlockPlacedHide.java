@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.objects.items.ItemAnimalHide;
@@ -48,6 +43,11 @@ public class BlockPlacedHide extends Block {
 		setHardness(0.2f);
 
 		setDefaultState(getBlockState().getBaseState().withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM));
+	}
+
+	private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {
+		Vec3d planeNormal = new Vec3d(0.0, 1.0, 0.0);
+		return rayPoint.subtract(rayVector.scale(rayPoint.dotProduct(planeNormal) / rayVector.dotProduct(planeNormal)));
 	}
 
 	@SuppressWarnings("deprecation")
@@ -149,11 +149,6 @@ public class BlockPlacedHide extends Block {
 			return true;
 		}
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-	}
-
-	private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {
-		Vec3d planeNormal = new Vec3d(0.0, 1.0, 0.0);
-		return rayPoint.subtract(rayVector.scale(rayPoint.dotProduct(planeNormal) / rayVector.dotProduct(planeNormal)));
 	}
 
 	@Nonnull

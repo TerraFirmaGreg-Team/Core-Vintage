@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.Tree;
@@ -17,11 +12,6 @@ import java.util.Map;
 
 public class BlockPlanksTFC extends Block {
 	private static final Map<Tree, BlockPlanksTFC> MAP = new HashMap<>();
-
-	public static BlockPlanksTFC get(Tree wood) {
-		return MAP.get(wood);
-	}
-
 	public final Tree wood;
 
 	public BlockPlanksTFC(Tree wood) {
@@ -35,5 +25,9 @@ public class BlockPlanksTFC extends Block {
 		//noinspection ConstantConditions
 		OreDictionaryHelper.register(this, "plank", "wood", wood.getRegistryName().getPath());
 		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
+
+	public static BlockPlanksTFC get(Tree wood) {
+		return MAP.get(wood);
 	}
 }

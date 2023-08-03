@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -17,6 +12,7 @@ import javax.annotation.Nullable;
 public class ChiselRecipe extends IForgeRegistryEntry.Impl<ChiselRecipe> {
 	private final IIngredient<IBlockState> ingredient;
 	private final IBlockState stateOut;
+
 	public ChiselRecipe(Block blockIn, IBlockState stateOut) {
 		this(state -> state.getBlock() == blockIn, stateOut);
 	}

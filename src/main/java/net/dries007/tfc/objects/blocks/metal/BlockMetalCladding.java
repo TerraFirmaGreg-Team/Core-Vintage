@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.metal;
 
 import gregtech.api.unification.material.Material;
@@ -38,7 +33,7 @@ import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class BlockMetalCladding extends Block {
-	public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[] {
+	public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{
 			PropertyBool.create("down"),
 			PropertyBool.create("up"),
 			PropertyBool.create("north"),
@@ -46,7 +41,7 @@ public class BlockMetalCladding extends Block {
 			PropertyBool.create("west"),
 			PropertyBool.create("east")
 	};
-	private static final AxisAlignedBB[] SHEET_AABB = new AxisAlignedBB[] {
+	private static final AxisAlignedBB[] SHEET_AABB = new AxisAlignedBB[]{
 			new AxisAlignedBB(0d, 0.9375d, 0d, 1d, 1d, 1d),
 			new AxisAlignedBB(0d, 0d, 0d, 1d, 0.0625d, 1d),
 			new AxisAlignedBB(0d, 0d, 0.9375d, 1d, 1d, 1d),
@@ -56,11 +51,6 @@ public class BlockMetalCladding extends Block {
 	};
 
 	private static final Map<Material, BlockMetalCladding> METAL_CLADDING_STORAGE = new HashMap<>();
-
-	public static BlockMetalCladding get(Material material) {
-		return METAL_CLADDING_STORAGE.get(material);
-	}
-
 	private final Material material;
 
 	public BlockMetalCladding(Material material) {
@@ -75,6 +65,10 @@ public class BlockMetalCladding extends Block {
 		setHarvestLevel("pickaxe", 0);
 
 		setDefaultState(this.blockState.getBaseState().withProperty(FACE_PROPERTIES[0], false).withProperty(FACE_PROPERTIES[1], false).withProperty(FACE_PROPERTIES[2], false).withProperty(FACE_PROPERTIES[3], false).withProperty(FACE_PROPERTIES[4], false).withProperty(FACE_PROPERTIES[5], false));
+	}
+
+	public static BlockMetalCladding get(Material material) {
+		return METAL_CLADDING_STORAGE.get(material);
 	}
 
 	@Nonnull

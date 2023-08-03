@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.devices;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -50,7 +45,7 @@ import static net.dries007.tfc.objects.blocks.BlockPlacedItem.PLACED_ITEM_AABB;
 public class BlockPitKiln extends Block implements ILightableBlock {
 	public static final PropertyBool FULL = PropertyBool.create("full");
 
-	private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[] {
+	private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[]{
 			PLACED_ITEM_AABB,
 			new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1),
 			new AxisAlignedBB(0, 0, 0, 1, 0.125, 1),

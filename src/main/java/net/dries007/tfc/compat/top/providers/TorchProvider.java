@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.top.providers;
 
 import mcjty.theoneprobe.api.IProbeHitData;
@@ -19,43 +14,36 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.List;
+public class TorchProvider implements IProbeInfoProvider {
+	@Override
+	public String getID() {
+		return TerraFirmaCraft.MOD_ID + ":torch";
+	}
 
-public class TorchProvider implements IProbeInfoProvider
-{
-    @Override
-    public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":torch";
-    }
+	@Override
+	public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+		var te = Helpers.getTE(world, iProbeHitData.getPos(), TETickCounter.class);
 
-    @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
-        var te = Helpers.getTE(world, iProbeHitData.getPos(), TETickCounter.class);
+		if (te != null && iBlockState.getBlock() instanceof BlockTorchTFC) {
+			int secValue = (int) ((ConfigTFC.General.OVERRIDES.torchTime - te.getTicksSinceUpdate()) / 20);
 
-        if (te != null && iBlockState.getBlock() instanceof BlockTorchTFC)
-        {
-            int secValue = (int) ((ConfigTFC.General.OVERRIDES.torchTime - te.getTicksSinceUpdate()) / 20);
+			int minValue = secValue / 60;
 
-            int minValue = secValue / 60;
+			secValue = secValue % 60;
 
-            secValue = secValue % 60;
+			int hourValue = minValue / 60;
 
-            int hourValue = minValue / 60;
+			minValue = minValue % 60;
 
-            minValue = minValue % 60;
+			var litProperty = iBlockState.getValue(BlockTorchTFC.LIT);
 
-            var litProperty = iBlockState.getValue(BlockTorchTFC.LIT);
-
-            if (litProperty && secValue >= 0) {
-                probeInfo.text(String.format(TextFormatting.GOLD + "Burn time left: %sh %sm %ss", hourValue, minValue, secValue));
-            }
-            else if (!litProperty) {
-                probeInfo.text(TextFormatting.RED + "This torch has gone out!");
-            }
-            else {
-                probeInfo.text(TextFormatting.RED + "The torch will go out soon!");
-            }
-        }
-    }
+			if (litProperty && secValue >= 0) {
+				probeInfo.text(String.format(TextFormatting.GOLD + "Burn time left: %sh %sm %ss", hourValue, minValue, secValue));
+			} else if (!litProperty) {
+				probeInfo.text(TextFormatting.RED + "This torch has gone out!");
+			} else {
+				probeInfo.text(TextFormatting.RED + "The torch will go out soon!");
+			}
+		}
+	}
 }

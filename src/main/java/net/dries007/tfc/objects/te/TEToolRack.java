@@ -1,16 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
-import net.dries007.tfc.objects.items.ItemFireStarter;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -24,6 +18,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class TEToolRack extends TEBase {
+	private final NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
+
 	/**
 	 * @return true if this item can be put on a tool rack, false otherwise
 	 */
@@ -33,10 +29,8 @@ public class TEToolRack extends TEBase {
 		}
 		Item item = stack.getItem();
 		return true;
-				/*item instanceof ItemMetalTool || item instanceof ItemTool || item instanceof ItemBow || item instanceof ItemHoe || item instanceof ItemSword || item instanceof ItemFireStarter || item instanceof ItemFlintAndSteel || !item.getToolClasses(stack).isEmpty() || OreDictionaryHelper.doesStackMatchOre(stack, "tool");*/
+		/*item instanceof ItemMetalTool || item instanceof ItemTool || item instanceof ItemBow || item instanceof ItemHoe || item instanceof ItemSword || item instanceof ItemFireStarter || item instanceof ItemFlintAndSteel || !item.getToolClasses(stack).isEmpty() || OreDictionaryHelper.doesStackMatchOre(stack, "tool");*/
 	}
-
-	private final NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
 
 	public NonNullList<ItemStack> getItems() {
 		return items;

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.top.providers;
 
 import mcjty.theoneprobe.api.IProbeHitData;
@@ -19,30 +14,27 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class TreeProvider implements IProbeInfoProvider
-{
-    @Override
-    public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":tree";
-    }
+public class TreeProvider implements IProbeInfoProvider {
+	@Override
+	public String getID() {
+		return TerraFirmaCraft.MOD_ID + ":tree";
+	}
 
-    @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
-        var blockPos = iProbeHitData.getPos();
-        var state = world.getBlockState(blockPos);
+	@Override
+	public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+		var blockPos = iProbeHitData.getPos();
+		var state = world.getBlockState(blockPos);
 
-        if (state.getBlock() instanceof BlockSaplingTFC block)
-        {
-            var wood = block.getWood();
-            var te = Helpers.getTE(world, blockPos, TETickCounter.class);
+		if (state.getBlock() instanceof BlockSaplingTFC block) {
+			var wood = block.getWood();
+			var te = Helpers.getTE(world, blockPos, TETickCounter.class);
 
-            if (te != null)
-            {
-                long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
-                float perc = Math.min(0.99F, days / wood.getMinGrowthTime()) * 100;
-                var growth = String.format("%d%%", Math.round(perc));
-                iProbeInfo.text(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
-            }
-        }
-    }
+			if (te != null) {
+				long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
+				float perc = Math.min(0.99F, days / wood.getMinGrowthTime()) * 100;
+				var growth = String.format("%d%%", Math.round(perc));
+				iProbeInfo.text(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
+			}
+		}
+	}
 }

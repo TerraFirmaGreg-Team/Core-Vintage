@@ -1,15 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util;
 
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.util.collections.WeightedCollection;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -25,12 +19,10 @@ import java.util.Random;
  * If needed, this functionality can be extended via json
  * and if this is done, may as well merge into entity resistance data
  */
-public class MonsterEquipment
-{
-    private static final Map<String, MonsterEquipment> ENTRIES = new HashMap<>();
+public class MonsterEquipment {
+	private static final Map<String, MonsterEquipment> ENTRIES = new HashMap<>();
 
-    static
-    {
+	static {
         /*
         WeightedCollection<ItemStack> weapons = new WeightedCollection<>();
         weapons.add(0.4, ItemStack.EMPTY);
@@ -70,50 +62,43 @@ public class MonsterEquipment
         ENTRIES.put("minecraft:zombie", equipment);
         ENTRIES.put("minecraft:husk", equipment);
         ENTRIES.put("minecraft:zombie_villager", equipment);*/
-    }
+	}
 
-    @Nullable
-    public static MonsterEquipment get(Entity entity)
-    {
-        ResourceLocation entityType = EntityList.getKey(entity);
-        if (entityType != null)
-        {
-            String entityTypeName = entityType.toString();
-            return ENTRIES.get(entityTypeName);
-        }
-        return null;
-    }
+	private final Map<EntityEquipmentSlot, WeightedCollection<ItemStack>> equipment;
 
-    @Nullable
-    public static MonsterEquipment get(String entityId)
-    {
-        return ENTRIES.get(entityId);
-    }
+	public MonsterEquipment(WeightedCollection<ItemStack> weapons, WeightedCollection<ItemStack> helmets, WeightedCollection<ItemStack> chestplates, WeightedCollection<ItemStack> leggings, WeightedCollection<ItemStack> boots) {
+		equipment = new ImmutableMap.Builder<EntityEquipmentSlot, WeightedCollection<ItemStack>>()
+				.put(EntityEquipmentSlot.MAINHAND, weapons)
+				.put(EntityEquipmentSlot.HEAD, helmets)
+				.put(EntityEquipmentSlot.CHEST, chestplates)
+				.put(EntityEquipmentSlot.LEGS, leggings)
+				.put(EntityEquipmentSlot.FEET, boots)
+				.build();
+	}
 
-    public static void put(String entityId, MonsterEquipment equipment)
-    {
-        ENTRIES.put(entityId, equipment);
-    }
+	@Nullable
+	public static MonsterEquipment get(Entity entity) {
+		ResourceLocation entityType = EntityList.getKey(entity);
+		if (entityType != null) {
+			String entityTypeName = entityType.toString();
+			return ENTRIES.get(entityTypeName);
+		}
+		return null;
+	}
 
-    private final Map<EntityEquipmentSlot, WeightedCollection<ItemStack>> equipment;
+	@Nullable
+	public static MonsterEquipment get(String entityId) {
+		return ENTRIES.get(entityId);
+	}
 
-    public MonsterEquipment(WeightedCollection<ItemStack> weapons, WeightedCollection<ItemStack> helmets, WeightedCollection<ItemStack> chestplates, WeightedCollection<ItemStack> leggings, WeightedCollection<ItemStack> boots)
-    {
-        equipment = new ImmutableMap.Builder<EntityEquipmentSlot, WeightedCollection<ItemStack>>()
-            .put(EntityEquipmentSlot.MAINHAND, weapons)
-            .put(EntityEquipmentSlot.HEAD, helmets)
-            .put(EntityEquipmentSlot.CHEST, chestplates)
-            .put(EntityEquipmentSlot.LEGS, leggings)
-            .put(EntityEquipmentSlot.FEET, boots)
-            .build();
-    }
+	public static void put(String entityId, MonsterEquipment equipment) {
+		ENTRIES.put(entityId, equipment);
+	}
 
-    public Optional<ItemStack> getEquipment(EntityEquipmentSlot slot, Random random)
-    {
-        if (equipment.containsKey(slot))
-        {
-            return Optional.of(equipment.get(slot).getRandomEntry(random));
-        }
-        return Optional.empty();
-    }
+	public Optional<ItemStack> getEquipment(EntityEquipmentSlot slot, Random random) {
+		if (equipment.containsKey(slot)) {
+			return Optional.of(equipment.get(slot).getRandomEntry(random));
+		}
+		return Optional.empty();
+	}
 }

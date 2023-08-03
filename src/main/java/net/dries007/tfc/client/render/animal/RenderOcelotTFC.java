@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelOcelotTFC;
@@ -12,11 +7,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderOcelotTFC extends RenderOcelot
-{
-    public RenderOcelotTFC(RenderManager renderManager)
-    {
-        super(renderManager);
-        this.mainModel = new ModelOcelotTFC();
-    }
+public class RenderOcelotTFC extends RenderOcelot {
+	public RenderOcelotTFC(RenderManager renderManager) {
+		super(renderManager);
+		this.mainModel = new ModelOcelotTFC();
+	}
 }

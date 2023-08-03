@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -47,15 +42,6 @@ public class BlockChestTFC extends BlockChest implements IItemSize {
 
 	private static final Map<Tree, BlockChestTFC> MAP_BASIC = new HashMap<>();
 	private static final Map<Tree, BlockChestTFC> MAP_TRAP = new HashMap<>();
-
-	public static BlockChestTFC getBasic(Tree wood) {
-		return MAP_BASIC.get(wood);
-	}
-
-	public static BlockChestTFC getTrap(Tree wood) {
-		return MAP_TRAP.get(wood);
-	}
-
 	public final Tree wood;
 
 	public BlockChestTFC(Type type, Tree wood) {
@@ -79,6 +65,14 @@ public class BlockChestTFC extends BlockChest implements IItemSize {
 			throw new IllegalStateException("TFC Chest must use TFC chest type");
 		}
 		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
+
+	public static BlockChestTFC getBasic(Tree wood) {
+		return MAP_BASIC.get(wood);
+	}
+
+	public static BlockChestTFC getTrap(Tree wood) {
+		return MAP_TRAP.get(wood);
 	}
 
 	@Override

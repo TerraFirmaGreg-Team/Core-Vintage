@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
@@ -26,6 +21,15 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public abstract class BlockCropSimple extends BlockCropTFC {
+	private final boolean isPickable;
+
+	protected BlockCropSimple(ICrop crop, boolean isPickable) {
+		super(crop);
+		this.isPickable = isPickable;
+
+		setDefaultState(getBlockState().getBaseState().withProperty(getStageProperty(), 0).withProperty(WILD, false));
+	}
+
 	public static BlockCropSimple create(ICrop crop, boolean isPickable) {
 		PropertyInteger property = getStagePropertyForCrop(crop);
 
@@ -38,15 +42,6 @@ public abstract class BlockCropSimple extends BlockCropTFC {
 				return property;
 			}
 		};
-	}
-
-	private final boolean isPickable;
-
-	protected BlockCropSimple(ICrop crop, boolean isPickable) {
-		super(crop);
-		this.isPickable = isPickable;
-
-		setDefaultState(getBlockState().getBaseState().withProperty(getStageProperty(), 0).withProperty(WILD, false));
 	}
 
 	@Override

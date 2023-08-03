@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelZebuTFC;
@@ -19,18 +14,15 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class RenderZebuTFC extends RenderAnimalTFC<EntityZebuTFC>
-{
-    private static final ResourceLocation ZEBU_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/zebu_young.png");
-    private static final ResourceLocation ZEBU_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/zebu_old.png");
+public class RenderZebuTFC extends RenderAnimalTFC<EntityZebuTFC> {
+	private static final ResourceLocation ZEBU_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/zebu_young.png");
+	private static final ResourceLocation ZEBU_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/zebu_old.png");
 
-    public RenderZebuTFC(RenderManager renderManager)
-    {
-        super(renderManager, new ModelZebuTFC(), 0.7F, ZEBU_YOUNG, ZEBU_OLD);
-    }
+	public RenderZebuTFC(RenderManager renderManager) {
+		super(renderManager, new ModelZebuTFC(), 0.7F, ZEBU_YOUNG, ZEBU_OLD);
+	}
 
-    protected void preRenderCallback(EntityZebuTFC zebuTFC, float par2)
-    {
-        GlStateManager.scale(0.9f, 0.9f, 0.9f);
-    }
+	protected void preRenderCallback(EntityZebuTFC zebuTFC, float par2) {
+		GlStateManager.scale(0.9f, 0.9f, 0.9f);
+	}
 }

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.metal;
 
 import gregtech.api.unification.material.Material;
@@ -54,11 +49,6 @@ public class BlockAnvilTFC extends Block {
 	private static final AxisAlignedBB AABB_X = new AxisAlignedBB(0, 0, 0.1875, 1, 0.6875, 0.8125);
 
 	private static final Map<Material, BlockAnvilTFC> ANVIL_STORAGE_MAP = new HashMap<>();
-
-	public static BlockAnvilTFC get(Material material) {
-		return ANVIL_STORAGE_MAP.get(material);
-	}
-
 	private final Material material;
 
 	public BlockAnvilTFC(Material material) {
@@ -72,6 +62,10 @@ public class BlockAnvilTFC extends Block {
 		setHarvestLevel("pickaxe", 0);
 
 		setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.NORTH));
+	}
+
+	public static BlockAnvilTFC get(Material material) {
+		return ANVIL_STORAGE_MAP.get(material);
 	}
 
 	@SuppressWarnings("deprecation")

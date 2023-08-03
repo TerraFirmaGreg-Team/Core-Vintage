@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.client.TFCSounds;
@@ -43,7 +38,7 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
 
 	public static final PropertyInteger LAYERS = PropertyInteger.create("type", 1, 8);
 
-	private static final AxisAlignedBB[] PILE_AABB = new AxisAlignedBB[] {
+	private static final AxisAlignedBB[] PILE_AABB = new AxisAlignedBB[]{
 			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D),
 			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D),
 			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D),

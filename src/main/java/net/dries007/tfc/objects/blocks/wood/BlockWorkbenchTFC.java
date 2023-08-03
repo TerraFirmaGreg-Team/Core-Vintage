@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -36,11 +31,6 @@ import java.util.Map;
 
 public class BlockWorkbenchTFC extends BlockWorkbench {
 	private static final Map<Tree, BlockWorkbenchTFC> MAP = new HashMap<>();
-
-	public static BlockWorkbenchTFC get(Tree wood) {
-		return MAP.get(wood);
-	}
-
 	public final Tree wood;
 
 	public BlockWorkbenchTFC(Tree wood) {
@@ -55,6 +45,10 @@ public class BlockWorkbenchTFC extends BlockWorkbench {
 		OreDictionaryHelper.register(this, "workbench");
 		OreDictionaryHelper.register(this, "crafting", "table", "wood");
 		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
+
+	public static BlockWorkbenchTFC get(Tree wood) {
+		return MAP.get(wood);
 	}
 
 	@SideOnly(Side.CLIENT)

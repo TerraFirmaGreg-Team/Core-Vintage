@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -48,6 +43,14 @@ public class BlockLargeVessel extends Block implements IItemSize {
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.625D, 0.8125D);
 	private static final AxisAlignedBB BOUNDING_BOX_SEALED = new AxisAlignedBB(0.15625D, 0.0D, 0.15625D, 0.84375D, 0.6875D, 0.84375D);
 
+	@SuppressWarnings("WeakerAccess")
+	public BlockLargeVessel() {
+		super(Material.CIRCUITS);
+		setSoundType(SoundType.STONE);
+		setHardness(2F);
+		setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+	}
+
 	/**
 	 * Used to update the vessel seal state and the TE, in the correct order
 	 */
@@ -63,14 +66,6 @@ public class BlockLargeVessel extends Block implements IItemSize {
 				tile.onSealed();
 			}
 		}
-	}
-
-	@SuppressWarnings("WeakerAccess")
-	public BlockLargeVessel() {
-		super(Material.CIRCUITS);
-		setSoundType(SoundType.STONE);
-		setHardness(2F);
-		setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
 	}
 
 	@Override

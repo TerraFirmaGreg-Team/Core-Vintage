@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.ConfigTFC;
@@ -51,6 +46,10 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBl
 		setSoundType(SoundType.WOOD);
 
 		OreDictionaryHelper.register(this, "torch");
+	}
+
+	public static boolean canLight(ItemStack stack) {
+		return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
 	}
 
 	@Nonnull
@@ -153,9 +152,5 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBl
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TETickCounter();
-	}
-
-	public static boolean canLight(ItemStack stack) {
-		return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
 	}
 }

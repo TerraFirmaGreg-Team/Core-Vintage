@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.ConfigTFC;
@@ -174,7 +169,7 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
 
 	public void onSealed() {
 		if (!world.isRemote) {
-			for (int slot : new int[] {SLOT_FLUID_CONTAINER_IN, SLOT_FLUID_CONTAINER_OUT}) {
+			for (int slot : new int[]{SLOT_FLUID_CONTAINER_IN, SLOT_FLUID_CONTAINER_OUT}) {
 				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(slot));
 				inventory.setStackInSlot(slot, ItemStack.EMPTY);
 			}

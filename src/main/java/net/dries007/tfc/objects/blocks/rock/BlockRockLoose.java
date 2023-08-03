@@ -155,7 +155,7 @@ public class BlockRockLoose extends Block implements IRockBlock {
     @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return null;
+        return STONE_AABB;
     }
 
     @Override

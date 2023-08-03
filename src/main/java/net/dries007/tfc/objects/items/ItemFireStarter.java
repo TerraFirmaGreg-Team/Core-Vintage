@@ -46,6 +46,13 @@ import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemFireStarter extends ItemTFC {
+	public ItemFireStarter() {
+		setMaxDamage(8);
+		setMaxStackSize(1);
+		setNoRepair();
+		OreDictionaryHelper.register(this, "fire", "starter");
+	}
+
 	/**
 	 * Causes ignition of fire based devices, consume or damage items if valid
 	 *
@@ -79,13 +86,6 @@ public class ItemFireStarter extends ItemTFC {
 			return false;
 		}
 		return OreDictionaryHelper.doesStackMatchOre(stack, "fireStarter") || OreDictionaryHelper.doesStackMatchOre(stack, "infiniteFire");
-	}
-
-	public ItemFireStarter() {
-		setMaxDamage(8);
-		setMaxStackSize(1);
-		setNoRepair();
-		OreDictionaryHelper.register(this, "fire", "starter");
 	}
 
 	@Override

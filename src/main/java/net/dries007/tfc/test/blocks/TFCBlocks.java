@@ -8,16 +8,18 @@ import net.dries007.tfc.api.types2.soil.SoilType;
 import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.Triple;
+import net.dries007.tfc.objects.blocks.BlockAlabaster;
 import net.dries007.tfc.objects.blocks.BlockDebug;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.minecraft.item.EnumDyeColor;
 
 import static net.dries007.tfc.api.registries.TFCStorage.*;
+import static net.dries007.tfc.api.types2.rock.RockVariant.*;
 
 public class TFCBlocks {
 
 	public static BlockDebug DEBUG;
 
-	// Тут возможно размещать карты
 	private TFCBlocks() {
 	}
 
@@ -55,6 +57,21 @@ public class TFCBlocks {
 			if (PLANT_BLOCKS.put(new Pair<>(plantType.getPlantVariant(), plantType), plantTypeBlock) != null)
 				throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", plantType.getPlantVariant(), plantType));
 		}
+
+		//=== Alabaster ==============================================================================================//
+
+		for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
+			for (RockVariant rockVariant : new RockVariant[]{RAW, BRICK, SMOOTH}) {
+				var alabasterColorBlock = new BlockAlabaster(rockVariant, dyeColor);
+				var alabasterBlock = new BlockAlabaster(rockVariant);
+
+				if (ALABASTER_BLOCK.put(new Pair<>(dyeColor.getName(), rockVariant), alabasterColorBlock) != null)
+					throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", dyeColor, rockVariant));
+
+				ALABASTER_BLOCK.put(new Pair<>("plain", rockVariant), alabasterBlock);
+			}
+		}
+
 
 		//=== Other ==================================================================================================//
 

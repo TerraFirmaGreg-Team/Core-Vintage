@@ -159,6 +159,7 @@ public final class ClientRegisterEvents {
 		TFCStorage.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 		TFCStorage.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
 		TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
+		TFCStorage.ALABASTER_BLOCK.values().forEach(IHasModel::onModelRegister);
 
 
 		// Blocks with Ignored Properties

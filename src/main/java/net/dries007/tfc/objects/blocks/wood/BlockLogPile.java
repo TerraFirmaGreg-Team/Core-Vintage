@@ -49,6 +49,16 @@ import java.util.Random;
 public class BlockLogPile extends Block implements ILightableBlock {
 	private static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class, EnumFacing.Axis.X, EnumFacing.Axis.Z);
 
+	public BlockLogPile() {
+		super(Material.WOOD);
+
+		setHardness(2.0F);
+		setSoundType(SoundType.WOOD);
+		setTickRandomly(true);
+		setHarvestLevel("axe", 0);
+		this.setDefaultState(this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(LIT, false));
+	}
+
 	// A simplified check for display (Patchouli) purposes
 	public static boolean isValidCoverBlock(IBlockState state) {
 		if (state.getBlock() == BlocksTFC.LOG_PILE || state.getBlock() == BlocksTFC.CHARCOAL_PILE) {
@@ -66,16 +76,6 @@ public class BlockLogPile extends Block implements ILightableBlock {
 			return offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID || offsetState.isSideSolid(world, pos, side);
 		}
 		return !offsetState.getMaterial().getCanBurn() && (offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID) || offsetState.isSideSolid(world, pos, side);
-	}
-
-	public BlockLogPile() {
-		super(Material.WOOD);
-
-		setHardness(2.0F);
-		setSoundType(SoundType.WOOD);
-		setTickRandomly(true);
-		setHarvestLevel("axe", 0);
-		this.setDefaultState(this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(LIT, false));
 	}
 
 	@Override

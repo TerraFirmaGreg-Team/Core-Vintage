@@ -33,7 +33,6 @@ import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.FruitTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGravel;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -64,13 +63,6 @@ public final class BlocksTFC {
 
 	@GameRegistry.ObjectHolder("ceramics/fired/large_vessel")
 	public static final BlockLargeVessel FIRED_LARGE_VESSEL = getNull();
-
-	@GameRegistry.ObjectHolder("alabaster/bricks/plain")
-	public static final BlockDecorativeStone ALABASTER_BRICKS_PLAIN = getNull();
-	@GameRegistry.ObjectHolder("alabaster/polished/plain")
-	public static final BlockDecorativeStone ALABASTER_POLISHED_PLAIN = getNull();
-	@GameRegistry.ObjectHolder("alabaster/raw/plain")
-	public static final BlockDecorativeStone ALABASTER_RAW_PLAIN = getNull();
 
 	//public static final BlockDebug DEBUG = getNull();
 	public static final BlockSoilPeat PEAT = getNull();
@@ -277,23 +269,6 @@ public final class BlocksTFC {
 		normalItemBlocks.add(new ItemBlockLargeVessel(register(r, "ceramics/fired/large_vessel", new BlockLargeVessel(), POTTERY)));
 		normalItemBlocks.add(new ItemBlockPowderKeg(register(r, "powderkeg", new BlockPowderKeg(), WOOD)));
 
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/raw/plain", new BlockDecorativeStone(MapColor.SNOW), DECORATIONS)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/polished/plain", new BlockDecorativeStone(MapColor.SNOW), DECORATIONS)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/bricks/plain", new BlockDecorativeStone(MapColor.SNOW), DECORATIONS)));
-
-		for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-			BlockDecorativeStone polished = new BlockDecorativeStone(MapColor.getBlockColor(dyeColor));
-			BlockDecorativeStone bricks = new BlockDecorativeStone(MapColor.getBlockColor(dyeColor));
-			BlockDecorativeStone raw = new BlockDecorativeStone(MapColor.getBlockColor(dyeColor));
-
-			normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/polished/" + dyeColor.getName(), polished, DECORATIONS)));
-			normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/bricks/" + dyeColor.getName(), bricks, DECORATIONS)));
-			normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/raw/" + dyeColor.getName(), raw, DECORATIONS)));
-
-			BlockDecorativeStone.ALABASTER_POLISHED.put(dyeColor, polished);
-			BlockDecorativeStone.ALABASTER_BRICKS.put(dyeColor, bricks);
-			BlockDecorativeStone.ALABASTER_RAW.put(dyeColor, raw);
-		}
 
 		{
 			// Apparently this is the way we're supposed to do things even though the fluid registry defaults. So we'll do it this way.

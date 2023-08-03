@@ -1,0 +1,95 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "color": {
+      "black": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/black"
+        }
+      },
+      "blue": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/blue"
+        }
+      },
+      "brown": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/brown"
+        }
+      },
+      "cyan": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/cyan"
+        }
+      },
+      "gray": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/gray"
+        }
+      },
+      "green": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/green"
+        }
+      },
+      "light_blue": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/light_blue"
+        }
+      },
+      "lime": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/lime"
+        }
+      },
+      "magenta": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/magenta"
+        }
+      },
+      "orange": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/orange"
+        }
+      },
+      "pink": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/pink"
+        }
+      },
+      "plain": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/plain"
+        }
+      },
+      "purple": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/purple"
+        }
+      },
+      "red": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/red"
+        }
+      },
+      "silver": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/silver"
+        }
+      },
+      "white": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/white"
+        }
+      },
+      "yellow": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/yellow"
+        }
+      }
+    }
+  }
+}

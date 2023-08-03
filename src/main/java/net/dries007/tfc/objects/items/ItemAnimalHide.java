@@ -29,12 +29,6 @@ import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 @ParametersAreNonnullByDefault
 public class ItemAnimalHide extends ItemTFC {
 	private static final Map<HideType, Map<HideSize, ItemAnimalHide>> TABLE = new HashMap<>();
-
-	@Nonnull
-	public static ItemAnimalHide get(HideType type, HideSize size) {
-		return TABLE.get(type).get(size);
-	}
-
 	protected final HideSize size;
 	private final HideType type;
 
@@ -49,10 +43,20 @@ public class ItemAnimalHide extends ItemTFC {
 	}
 
 	@Nonnull
+	public static ItemAnimalHide get(HideType type, HideSize size) {
+		return TABLE.get(type).get(size);
+	}
+
+	@Nonnull
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (ConfigTFC.General.OVERRIDES.enableThatchBed && type == HideType.RAW && size == HideSize.LARGE && facing == EnumFacing.UP && worldIn.getBlockState(pos).getBlock() == BlocksTFC.THATCH && worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getBlock() == BlocksTFC.THATCH) {
+		if (ConfigTFC.General.OVERRIDES.enableThatchBed &&
+				type == HideType.RAW &&
+				size == HideSize.LARGE &&
+				facing == EnumFacing.UP &&
+				worldIn.getBlockState(pos).getBlock() == BlocksTFC.THATCH &&
+				worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getBlock() == BlocksTFC.THATCH) {
 			// Try and create a thatch bed
 			BlockPos headPos = pos.offset(player.getHorizontalFacing());
 			//Creating a thatch bed
@@ -75,7 +79,9 @@ public class ItemAnimalHide extends ItemTFC {
 			BlockPos posAbove = pos.up();
 			IBlockState stateAbove = worldIn.getBlockState(posAbove);
 			ItemStack stackAt = stateAt.getBlock().getPickBlock(stateAt, null, worldIn, pos, player);
-			if (facing == EnumFacing.UP && OreDictionaryHelper.doesStackMatchOre(stackAt, "logWood") && stateAbove.getBlock().isAir(stateAbove, worldIn, posAbove)) {
+			if (facing == EnumFacing.UP &&
+					OreDictionaryHelper.doesStackMatchOre(stackAt, "logWood") &&
+					stateAbove.getBlock().isAir(stateAbove, worldIn, posAbove)) {
 				if (!worldIn.isRemote) {
 					worldIn.setBlockState(posAbove, BlocksTFC.PLACED_HIDE.getDefaultState().withProperty(SIZE, size));
 				}
@@ -91,15 +97,11 @@ public class ItemAnimalHide extends ItemTFC {
 	@Override
 	@Nonnull
 	public ItemStack getContainerItem(ItemStack itemStack) {
-		switch (size) {
-			case SMALL:
-				return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.SMALL));
-			case MEDIUM:
-				return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.MEDIUM));
-			case LARGE:
-				return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.LARGE));
-		}
-		return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.SMALL));
+		return switch (size) {
+			case SMALL -> new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.SMALL));
+			case MEDIUM -> new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.MEDIUM));
+			case LARGE -> new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.LARGE));
+		};
 	}
 
 	@Override
@@ -116,15 +118,11 @@ public class ItemAnimalHide extends ItemTFC {
 	@Override
 	@Nonnull
 	public Weight getWeight(ItemStack stack) {
-		switch (size) {
-			case LARGE:
-				return Weight.MEDIUM; // Stacksize = 16
-			case MEDIUM:
-				return Weight.LIGHT; // Stacksize = 32
-			case SMALL:
-			default:
-				return Weight.VERY_LIGHT; // Stacksize = 64
-		}
+		return switch (size) {
+			case LARGE -> Weight.MEDIUM; // Stacksize = 16
+			case MEDIUM -> Weight.LIGHT; // Stacksize = 32
+			default -> Weight.VERY_LIGHT; // Stacksize = 64
+		};
 	}
 
 	public enum HideSize implements IStringSerializable {

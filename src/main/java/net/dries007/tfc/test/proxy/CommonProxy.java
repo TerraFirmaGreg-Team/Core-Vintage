@@ -42,6 +42,12 @@ public class CommonProxy {
 			r.register((Block) plantTypeBlock);
 		}
 
+		//=== Alabaster ==============================================================================================//
+
+		for (var alabasterBlock : TFCStorage.ALABASTER_BLOCK.values()) {
+			r.register(alabasterBlock);
+		}
+
 		//=== Other ==================================================================================================//
 
 		TFCStorage.NORMAL_ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
@@ -73,6 +79,12 @@ public class CommonProxy {
 		for (var plantTypeBlock : TFCStorage.PLANT_BLOCKS.values()) {
 			var itemBlock = plantTypeBlock.getItemBlock();
 			if (itemBlock != null) registerItemBlock(r, itemBlock);
+		}
+
+		//=== Alabaster ==============================================================================================//
+
+		for (var alabasterBlock : TFCStorage.ALABASTER_BLOCK.values()) {
+			r.register(createItemBlock(alabasterBlock));
 		}
 
 		//=== Other ==================================================================================================//

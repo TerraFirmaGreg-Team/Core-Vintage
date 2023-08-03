@@ -13,11 +13,13 @@ import net.dries007.tfc.api.types2.soil.SoilVariant;
 import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.Triple;
+import net.dries007.tfc.objects.blocks.BlockAlabaster;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
 import javax.annotation.Nonnull;
@@ -31,6 +33,7 @@ public final class TFCStorage {
 	public static final Map<Triple<RockBlockType, RockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
 	public static final Map<Pair<SoilVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
 	public static final Map<Pair<PlantVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
+	public static final Map<Pair<String, RockVariant>, BlockAlabaster> ALABASTER_BLOCK = new LinkedHashMap<>();
 
 	public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
 	public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
@@ -38,6 +41,8 @@ public final class TFCStorage {
 	public static final Map<RockType, ItemBrickTFC> ITEMBRICK_MAP = new HashMap<>();
 
 	public static final List<ItemBlock> NORMAL_ITEM_BLOCKS = new ArrayList<>();
+	public static final List<Block> BLOCKS = new ArrayList<>();
+	public static final List<Item> ITEM = new ArrayList<>();
 
 	@Nonnull
 	public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull RockVariant blockVariant, @Nonnull RockType stoneType) {
@@ -58,6 +63,13 @@ public final class TFCStorage {
 		var block = (Block) PLANT_BLOCKS.get(new Pair<>(plantVariant, plantType));
 		if (block != null) return block;
 		throw new RuntimeException(String.format("Block is null: %s, %s", plantVariant, plantType));
+	}
+
+	@Nonnull
+	public static Block getAlabasterBlock(@Nonnull String string, @Nonnull RockVariant rockVariant) {
+		var block = (Block) ALABASTER_BLOCK.get(new Pair<>(string, rockVariant));
+		if (block != null) return block;
+		throw new RuntimeException(String.format("Block is null: %s, %s", string, rockVariant));
 	}
 
 	public static void addRockItem(@Nonnull RockType rockType, @Nonnull ItemRock itemRock) {

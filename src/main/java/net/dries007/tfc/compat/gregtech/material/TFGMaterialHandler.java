@@ -147,7 +147,7 @@ public class TFGMaterialHandler {
         // Some custom properties for materials
         SaltWater.setMaterialRGB(0xFF1F5099);
 
-        Stone.setProperty(TOOL, new ToolProperty(1.0f, 1f, 6, 1));
+        Stone.setProperty(TOOL, new ToolProperty(1.0f, 1f, 30, 1));
         Copper.setProperty(TOOL, new ToolProperty(1.5f, 2f, 88, 2));
         BismuthBronze.setProperty(TOOL, new ToolProperty(1.8f, 2f, 174, 2));
         BlackBronze.setProperty(TOOL, new ToolProperty(2.2f, 2f, 212, 2));

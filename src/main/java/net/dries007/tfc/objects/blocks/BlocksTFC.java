@@ -63,8 +63,6 @@ public final class BlocksTFC {
 
 	@GameRegistry.ObjectHolder("ceramics/fired/large_vessel")
 	public static final BlockLargeVessel FIRED_LARGE_VESSEL = getNull();
-	public static final BlockSoilPeat PEAT = getNull();
-	public static final BlockSoilPeat PEAT_GRASS = getNull();
 	public static final BlockFirePit FIREPIT = getNull();
 	public static final BlockThatch THATCH = getNull();
 	public static final BlockThatchBed THATCH_BED = getNull();
@@ -247,9 +245,6 @@ public final class BlocksTFC {
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), ROCK_STUFFS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), ROCK_STUFFS)));
-
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat", new BlockSoilPeat(Material.GROUND), EARTH)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat_grass", new BlockSoilPeatGrass(Material.GRASS), EARTH)));
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "thatch", new BlockThatch(), DECORATIONS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), DECORATIONS)));

@@ -33,6 +33,7 @@ import net.dries007.tfc.objects.items.ItemGoldPan;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.te.*;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.minecraft.block.*;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -255,7 +256,7 @@ public final class ClientRegisterEvents {
 		// todo: do something different for conifers - they should have a different color mapping through the seasons
 		IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
 
-		blockColors.registerBlockColorHandler(grassColor, BlocksTFC.PEAT_GRASS);
+		blockColors.registerBlockColorHandler(grassColor, TFCBlocks.PEAT_GRASS);
 
 
 		blockColors.registerBlockColorHandler(grassColor, TFCStorage.SOIL_BLOCKS.values().stream().filter(x -> x.getSoilVariant().isGrass()).map(s -> (Block) s).toArray(Block[]::new));
@@ -293,7 +294,7 @@ public final class ClientRegisterEvents {
 
 		itemColors.registerItemColorHandler((stack, tintIndex) ->
 						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-				BlocksTFC.PEAT_GRASS);
+				TFCBlocks.PEAT_GRASS);
 
 		itemColors.registerItemColorHandler((stack, tintIndex) ->
 						event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),

@@ -10,7 +10,10 @@ import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.blocks.BlockAlabaster;
 import net.dries007.tfc.objects.blocks.BlockDebug;
+import net.dries007.tfc.objects.blocks.soil.BlockSoilPeat;
+import net.dries007.tfc.objects.blocks.soil.BlockSoilPeatGrass;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
 
 import static net.dries007.tfc.api.registries.TFCStorage.*;
@@ -19,6 +22,8 @@ import static net.dries007.tfc.api.types2.rock.RockVariant.*;
 public class TFCBlocks {
 
 	public static BlockDebug DEBUG;
+	public static BlockSoilPeat PEAT;
+	public static BlockSoilPeatGrass PEAT_GRASS;
 
 	private TFCBlocks() {
 	}
@@ -76,5 +81,7 @@ public class TFCBlocks {
 		//=== Other ==================================================================================================//
 
 		NORMAL_ITEM_BLOCKS.add(new ItemBlockTFC(DEBUG = new BlockDebug()));
+		NORMAL_ITEM_BLOCKS.add(new ItemBlockTFC(PEAT = new BlockSoilPeat(Material.GROUND)));
+		NORMAL_ITEM_BLOCKS.add(new ItemBlockTFC(PEAT_GRASS = new BlockSoilPeatGrass(Material.GRASS)));
 	}
 }

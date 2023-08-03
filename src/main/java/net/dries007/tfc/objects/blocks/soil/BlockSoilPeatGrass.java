@@ -6,7 +6,9 @@
 package net.dries007.tfc.objects.blocks.soil;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -26,8 +28,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
-public class BlockSoilPeatGrass extends BlockSoilPeat {
+public class BlockSoilPeatGrass extends Block {
 	// Used for connected textures only.
 	public static final PropertyBool NORTH = PropertyBool.create("north");
 	public static final PropertyBool EAST = PropertyBool.create("east");
@@ -39,6 +43,9 @@ public class BlockSoilPeatGrass extends BlockSoilPeat {
 
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);
+		this.setRegistryName(MOD_ID, "peat_grass");
+		this.setTranslationKey(MOD_ID + ".peat_grass");
+
 		OreDictionaryHelper.register(this, "peat");
 		OreDictionaryHelper.register(this, "peat", "grass");
 		Blocks.FIRE.setFireInfo(this, 5, 5);
@@ -69,7 +76,7 @@ public class BlockSoilPeatGrass extends BlockSoilPeat {
 	@Override
 	@Nonnull
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(BlocksTFC.PEAT);
+		return Item.getItemFromBlock(TFCBlocks.PEAT);
 	}
 
 	@Override

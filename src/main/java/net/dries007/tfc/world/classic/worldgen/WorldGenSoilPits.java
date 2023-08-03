@@ -10,6 +10,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
@@ -107,9 +108,9 @@ public class WorldGenSoilPits implements IWorldGenerator {
 					final IBlockState current = world.getBlockState(pos);
 
 					if (BlocksTFC.isGrass(current)) {
-						world.setBlockState(pos, BlocksTFC.PEAT_GRASS.getDefaultState(), 2);
+						world.setBlockState(pos, TFCBlocks.PEAT_GRASS.getDefaultState(), 2);
 					} else if (BlocksTFC.isDirt(current) || BlocksTFC.isClay(current)) {
-						world.setBlockState(pos, BlocksTFC.PEAT.getDefaultState(), 2);
+						world.setBlockState(pos, TFCBlocks.PEAT.getDefaultState(), 2);
 					}
 				}
 			}

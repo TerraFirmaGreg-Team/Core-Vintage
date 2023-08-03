@@ -104,19 +104,8 @@ public class TFCBlocks {
             }
         }
 
-		//=== Fluid ==============================================================================================//
+		//=== Fluid ==================================================================================================//
 
-//		for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-//			for (RockVariant rockVariant : new RockVariant[]{RAW, BRICK, SMOOTH}) {
-//				var alabasterColorBlock = new BlockAlabaster(rockVariant, dyeColor);
-//				var alabasterBlock = new BlockAlabaster(rockVariant);
-//
-//				if (ALABASTER_BLOCK.put(new Pair<>(dyeColor.getName(), rockVariant), alabasterColorBlock) != null)
-//					throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", dyeColor, rockVariant));
-//
-//				ALABASTER_BLOCK.put(new Pair<>("plain", rockVariant), alabasterBlock);
-//			}
-//		}
 
 
         //=== Other ==================================================================================================//

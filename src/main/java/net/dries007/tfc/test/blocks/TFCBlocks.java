@@ -13,6 +13,7 @@ import net.dries007.tfc.objects.blocks.devices.*;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeat;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeatGrass;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockCrucible;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockSluice;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
@@ -103,7 +104,9 @@ public class TFCBlocks {
 		NORMAL_ITEM_BLOCKS.add(new ItemBlockCrucible(CRUCIBLE = new BlockCrucible()));
 		NORMAL_ITEM_BLOCKS.add(new ItemBlockTFC(FIRE_BRICKS = new BlockFireBrick()));
 		NORMAL_ITEM_BLOCKS.add(new ItemBlockTFC(BLAST_FURNACE = new BlockBlastFurnace()));
-
-
+		NORMAL_ITEM_BLOCKS.add(new ItemBlockTFC(BELLOWS = new BlockBellows()));
+		NORMAL_ITEM_BLOCKS.add(new ItemBlockTFC(BLOOMERY = new BlockBloomery()));
+		NORMAL_ITEM_BLOCKS.add(new ItemBlockTFC(NEST_BOX = new BlockNestBox()));
+		NORMAL_ITEM_BLOCKS.add(new ItemBlockSluice(SLUICE = new BlockSluice()));
 	}
 }

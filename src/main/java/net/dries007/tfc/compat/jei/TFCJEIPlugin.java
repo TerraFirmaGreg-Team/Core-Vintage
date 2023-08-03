@@ -3,10 +3,6 @@ package net.dries007.tfc.compat.jei;
 import gregtech.api.fluids.MetaFluids;
 import gregtech.api.unification.material.Materials;
 import gregtech.common.items.ToolItems;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.stream.Collectors;
-import javax.annotation.ParametersAreNonnullByDefault;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
@@ -45,6 +41,11 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
 @JEIPlugin
@@ -130,8 +131,8 @@ public final class TFCJEIPlugin implements IModPlugin {
         registry.addRecipes(quernList, QUERN_UID);
 
         // FirePit
-        registry.addRecipeCatalyst(new ItemStack(BlocksTFC.FIREPIT), HEAT_UID);
-        registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CHARCOAL_FORGE), HEAT_UID);
+        registry.addRecipeCatalyst(new ItemStack(TFCBlocks.FIREPIT), HEAT_UID);
+        registry.addRecipeCatalyst(new ItemStack(TFCBlocks.CHARCOAL_FORGE), HEAT_UID);
 
         var heatList = TFCRegistries.HEAT.getValuesCollection()
                 .stream()
@@ -337,8 +338,8 @@ public final class TFCJEIPlugin implements IModPlugin {
 
         // Add JEI descriptions for basic mechanics
 
-        registry.addIngredientInfo(new ItemStack(BlocksTFC.PIT_KILN, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.pit_kiln").getFormattedText());
-        registry.addIngredientInfo(new ItemStack(BlocksTFC.PLACED_ITEM, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.placed_item").getFormattedText());
+        registry.addIngredientInfo(new ItemStack(TFCBlocks.PIT_KILN, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.pit_kiln").getFormattedText());
+        registry.addIngredientInfo(new ItemStack(TFCBlocks.PLACED_ITEM, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.placed_item").getFormattedText());
         registry.addIngredientInfo(new ItemStack(Items.COAL, 1, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.charcoal_pit").getFormattedText());
 
 

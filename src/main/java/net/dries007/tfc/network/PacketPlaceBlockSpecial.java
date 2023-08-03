@@ -1,9 +1,9 @@
 package net.dries007.tfc.network;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,12 +37,12 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
                         double placeReach = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue();
                         if (player.getDistanceSq(pos) <= placeReach * placeReach && hitFace != null) {
                             IBlockState offsetState = world.getBlockState(pos.offset(hitFace));
-                            if (world.getBlockState(pos).getBlock() == BlocksTFC.PLACED_ITEM) {
+                            if (world.getBlockState(pos).getBlock() == TFCBlocks.PLACED_ITEM) {
                                 TEPlacedItem tile = Helpers.getTE(world, pos, TEPlacedItem.class);
                                 if (tile != null) {
                                     tile.onRightClick(player, stack, rayTrace);
                                 }
-                            } else if (offsetState.getBlock() == BlocksTFC.PLACED_ITEM) {
+                            } else if (offsetState.getBlock() == TFCBlocks.PLACED_ITEM) {
                                 TEPlacedItem tile = Helpers.getTE(world, pos.offset(hitFace), TEPlacedItem.class);
                                 if (tile != null) {
                                     tile.onRightClick(player, stack, rayTrace);
@@ -50,7 +50,7 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
                             } else if (!stack.isEmpty() && world.getBlockState(pos.offset(hitFace).down()).isSideSolid(world, pos.offset(hitFace).down(), EnumFacing.UP) && offsetState.getBlock().isAir(offsetState, world, pos)) {
                                 if (player.isSneaking()) {
                                     // If sneaking, place a flat item
-                                    world.setBlockState(pos.offset(hitFace), BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());
+                                    world.setBlockState(pos.offset(hitFace), TFCBlocks.PLACED_ITEM_FLAT.getDefaultState());
                                     TEPlacedItemFlat tile = Helpers.getTE(world, pos.offset(hitFace), TEPlacedItemFlat.class);
                                     if (tile != null) {
                                         ItemStack input;
@@ -63,7 +63,7 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
                                         tile.setStack(input);
                                     }
                                 } else {
-                                    world.setBlockState(pos.offset(hitFace), BlocksTFC.PLACED_ITEM.getDefaultState());
+                                    world.setBlockState(pos.offset(hitFace), TFCBlocks.PLACED_ITEM.getDefaultState());
                                     TEPlacedItem tile = Helpers.getTE(world, pos.offset(hitFace), TEPlacedItem.class);
                                     if (tile != null) {
                                         tile.insertItem(player, stack, rayTrace);

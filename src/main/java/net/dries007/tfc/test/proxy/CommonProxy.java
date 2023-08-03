@@ -1,8 +1,5 @@
 package net.dries007.tfc.test.proxy;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
-import java.util.function.Function;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.minecraft.block.Block;
@@ -13,6 +10,10 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.function.Function;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class CommonProxy {
@@ -49,7 +50,7 @@ public class CommonProxy {
 
         //=== Other ==================================================================================================//
 
-        TFCStorage.NORMAL_ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
+        TFCStorage.ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
 
     }
 
@@ -88,7 +89,7 @@ public class CommonProxy {
 
         //=== Other ==================================================================================================//
 
-        TFCStorage.NORMAL_ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
+        TFCStorage.ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
 
 
     }

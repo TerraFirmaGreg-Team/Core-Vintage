@@ -1,9 +1,5 @@
 package net.dries007.tfc.objects.blocks;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -22,6 +18,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockThatch extends Block {
     public BlockThatch() {
@@ -31,10 +32,12 @@ public class BlockThatch extends Block {
                 return false;
             }
         });
-        setCreativeTab(CreativeTabsTFC.DECORATIONS);
+
         setSoundType(SoundType.PLANT);
         setHardness(0.6F);
         setLightOpacity(255); //Blocks light
+
+        setCreativeTab(CreativeTabsTFC.DECORATIONS);
         setRegistryName(MOD_ID, "thatch");
         setTranslationKey(MOD_ID + ".thatch");
 

@@ -1,11 +1,11 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import java.util.*;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -23,6 +23,8 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
+import java.util.*;
+
 public class WorldGenTrees implements IWorldGenerator {
     public static void generateLooseSticks(Random rand, int chunkX, int chunkZ, World world, int amount) {
         if (ConfigTFC.General.WORLD.enableLooseSticks) {
@@ -36,7 +38,7 @@ public class WorldGenTrees implements IWorldGenerator {
                 // Also, only add on soil, since this is called by the world regen handler later
                 IBlockState stateDown = world.getBlockState(pos.down());
                 if (world.isAirBlock(pos) && stateDown.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGround(stateDown)) {
-                    world.setBlockState(pos, BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());
+                    world.setBlockState(pos, TFCBlocks.PLACED_ITEM_FLAT.getDefaultState());
                     TEPlacedItemFlat tile = (TEPlacedItemFlat) world.getTileEntity(pos);
                     if (tile != null) {
                         tile.setStack(new ItemStack(Items.STICK));

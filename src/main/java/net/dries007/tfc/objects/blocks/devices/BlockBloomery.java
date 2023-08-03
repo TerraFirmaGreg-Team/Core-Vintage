@@ -1,18 +1,10 @@
 package net.dries007.tfc.objects.blocks.devices;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.minecraft.block.BlockTrapDoor.OPEN;
-
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEBloomery;
@@ -38,6 +30,14 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Predicate;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.minecraft.block.BlockTrapDoor.OPEN;
 
 @ParametersAreNonnullByDefault
 public class BlockBloomery extends BlockHorizontal implements IItemSize, ILightableBlock {
@@ -72,8 +72,8 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
 
     static {
         Predicate<IBlockState> stoneMatcher = BlockBloomery::isValidSideBlock;
-        Predicate<IBlockState> insideChimney = state -> state.getBlock() == BlocksTFC.MOLTEN || state.getMaterial().isReplaceable();
-        Predicate<IBlockState> center = state -> state.getBlock() == BlocksTFC.CHARCOAL_PILE || state.getBlock() == BlocksTFC.BLOOM || state.getMaterial().isReplaceable();
+        Predicate<IBlockState> insideChimney = state -> state.getBlock() == TFCBlocks.MOLTEN || state.getMaterial().isReplaceable();
+        Predicate<IBlockState> center = state -> state.getBlock() == TFCBlocks.CHARCOAL_PILE || state.getBlock() == TFCBlocks.BLOOM || state.getMaterial().isReplaceable();
 
         // Bloomery center is the charcoal pile pos
         BLOOMERY_BASE = new Multiblock[4];

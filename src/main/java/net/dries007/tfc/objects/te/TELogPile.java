@@ -1,15 +1,11 @@
 package net.dries007.tfc.objects.te;
 
-import static net.dries007.tfc.objects.blocks.BlockCharcoalPile.LAYERS;
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.blocks.BlockCharcoalPile;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogPile;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -22,6 +18,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.dries007.tfc.objects.blocks.BlockCharcoalPile.LAYERS;
+import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -204,7 +205,7 @@ public class TELogPile extends TEInventory implements ITickable {
         }
         if (j == 1) {
             // This log pile is at the bottom of the charcoal pit
-            world.setBlockState(pos, BlocksTFC.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
+            world.setBlockState(pos, TFCBlocks.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
             return;
         }
         for (int k = j - 1; k >= 0; k--) {
@@ -212,7 +213,7 @@ public class TELogPile extends TEInventory implements ITickable {
             IBlockState state = world.getBlockState(pos.down(k));
             if (state.getBlock() == Blocks.AIR) {
                 // If it hits air, place the remaining pile in that block
-                world.setBlockState(pos.down(k), BlocksTFC.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
+                world.setBlockState(pos.down(k), TFCBlocks.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
                 world.setBlockState(pos, Blocks.AIR.getDefaultState());
                 return;
             }
@@ -221,7 +222,7 @@ public class TELogPile extends TEInventory implements ITickable {
                 // Place what it can in the existing charcoal pit, then continue climbing
                 charcoal += state.getValue(LAYERS);
                 int toCreate = Math.min(charcoal, 8);
-                world.setBlockState(pos.down(k), BlocksTFC.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, toCreate));
+                world.setBlockState(pos.down(k), TFCBlocks.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, toCreate));
                 charcoal -= toCreate;
             }
 
@@ -231,6 +232,6 @@ public class TELogPile extends TEInventory implements ITickable {
             }
         }
         // If you exit the loop, its arrived back at the original position OR needs to rest the original position, and needs to replace that block
-        world.setBlockState(pos, BlocksTFC.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
+        world.setBlockState(pos, TFCBlocks.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, charcoal));
     }
 }

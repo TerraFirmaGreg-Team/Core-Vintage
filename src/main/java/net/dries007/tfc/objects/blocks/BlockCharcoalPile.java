@@ -1,15 +1,13 @@
 package net.dries007.tfc.objects.blocks;
 
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.devices.BlockCharcoalForge;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TECharcoalForge;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -30,6 +28,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockCharcoalPile extends Block implements ILightableBlock {
@@ -55,6 +60,10 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
         setHarvestLevel("shovel", 0);
         setHardness(1.0F);
         this.setDefaultState(this.blockState.getBaseState().withProperty(LAYERS, 1));
+
+        setCreativeTab(CreativeTabsTFC.MISC);
+        setRegistryName(MOD_ID, "charcoal_pile");
+        setTranslationKey(MOD_ID + ".charcoal_pile");
     }
 
     @Override
@@ -151,7 +160,7 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
         if (state.getValue(LAYERS) >= 7 && BlockCharcoalForge.isValid(world, pos) && ItemFireStarter.onIgnition(stack)) {
             if (!world.isRemote) {
                 TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
-                world.setBlockState(pos, BlocksTFC.CHARCOAL_FORGE.getDefaultState().withProperty(LIT, true));
+                world.setBlockState(pos, TFCBlocks.CHARCOAL_FORGE.getDefaultState().withProperty(LIT, true));
                 TECharcoalForge te = Helpers.getTE(world, pos, TECharcoalForge.class);
                 if (te != null) {
                     te.onCreate();

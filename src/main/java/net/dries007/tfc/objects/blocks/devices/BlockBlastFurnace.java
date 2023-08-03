@@ -1,24 +1,18 @@
 package net.dries007.tfc.objects.blocks.devices;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.objects.te.TEBlastFurnace;
 import net.dries007.tfc.objects.te.TEMetalSheet;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.block.Multiblock;
 import net.minecraft.block.Block;
@@ -35,6 +29,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Predicate;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, ILightableBlock {
     private static final Multiblock BLAST_FURNACE_CHIMNEY;
@@ -43,7 +44,7 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
         Predicate<IBlockState> stoneMatcher = state -> state.getBlock() == MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.COKE_BRICKS).getBlock();
         Predicate<IBlockState> claddingMatcher = state -> state.getBlock() instanceof BlockMetalCladding;
         BLAST_FURNACE_CHIMNEY = new Multiblock()
-                .match(new BlockPos(0, 0, 0), state -> state.getBlock() == BlocksTFC.MOLTEN || state.getMaterial().isReplaceable())
+                .match(new BlockPos(0, 0, 0), state -> state.getBlock() == TFCBlocks.MOLTEN || state.getMaterial().isReplaceable())
                 .match(new BlockPos(0, 0, 1), stoneMatcher)
                 .match(new BlockPos(0, 0, -1), stoneMatcher)
                 .match(new BlockPos(1, 0, 0), stoneMatcher)

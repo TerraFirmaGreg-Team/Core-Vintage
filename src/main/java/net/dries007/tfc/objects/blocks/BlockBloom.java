@@ -1,8 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.te.TEBloom;
 import net.dries007.tfc.util.Helpers;
@@ -20,6 +18,12 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockBloom extends Block {
     public BlockBloom() {
@@ -27,6 +31,10 @@ public class BlockBloom extends Block {
         setHardness(3.0f);
         setHarvestLevel("pickaxe", 0);
         setSoundType(SoundType.STONE);
+
+        setCreativeTab(CreativeTabsTFC.MISC);
+        setRegistryName(MOD_ID, "bloom");
+        setTranslationKey(MOD_ID + ".bloom");
     }
 
     @Override

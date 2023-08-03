@@ -1,15 +1,10 @@
 package net.dries007.tfc.objects.te;
 
-import static net.dries007.tfc.objects.blocks.devices.BlockPitKiln.FULL;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.devices.BlockPitKiln;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.test.blocks.TFCBlocks;
@@ -38,6 +33,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.dries007.tfc.objects.blocks.devices.BlockPitKiln.FULL;
+
 @ParametersAreNonnullByDefault
 public class TEPitKiln extends TEPlacedItem implements ITickable {
     public static final int STRAW_NEEDED = 8;
@@ -62,7 +62,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
             }
 
             // Replace the block
-            world.setBlockState(pos, BlocksTFC.PIT_KILN.getDefaultState());
+            world.setBlockState(pos, TFCBlocks.PIT_KILN.getDefaultState());
             // Play placement sound
             world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);
             // Copy TE data

@@ -1,9 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
-import java.util.Random;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.minecraft.block.Block;
@@ -24,6 +22,12 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class BlockThatchBed extends BlockBed {
@@ -31,6 +35,10 @@ public class BlockThatchBed extends BlockBed {
         setSoundType(SoundType.PLANT);
         setHardness(0.6F);
         Blocks.FIRE.setFireInfo(this, 60, 20);
+
+        setCreativeTab(CreativeTabsTFC.MISC);
+        setRegistryName(MOD_ID, "thatch_bed");
+        setTranslationKey(MOD_ID + ".thatch_bed");
     }
 
     @Override

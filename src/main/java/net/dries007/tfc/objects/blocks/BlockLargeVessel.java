@@ -1,12 +1,10 @@
 package net.dries007.tfc.objects.blocks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.te.TELargeVessel;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -31,6 +29,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 /**
  * Large vessel is an inventory that preserves the contents when sealed
  * It can be picked up and keeps it's inventory
@@ -48,6 +52,11 @@ public class BlockLargeVessel extends Block implements IItemSize {
         setSoundType(SoundType.STONE);
         setHardness(2F);
         setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+
+        var blockRegistryName = "ceramics/fired/large_vessel";
+        setCreativeTab(CreativeTabsTFC.MISC);
+        setRegistryName(MOD_ID, blockRegistryName);
+        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
     }
 
     /**

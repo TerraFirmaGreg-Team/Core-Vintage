@@ -1,13 +1,10 @@
 package net.dries007.tfc.objects.blocks;
 
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TEPowderKeg;
 import net.dries007.tfc.util.Helpers;
@@ -36,6 +33,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 /**
  * Powderkeg is an inventory that preserves the contents when sealed
  * It can be picked up and keeps it's inventory
@@ -55,6 +59,10 @@ public class BlockPowderKeg extends Block implements IItemSize, ILightableBlock 
         setTickRandomly(true);
 
         setDefaultState(blockState.getBaseState().withProperty(LIT, false).withProperty(SEALED, false));
+
+        setCreativeTab(CreativeTabsTFC.MISC);
+        setRegistryName(MOD_ID, "powderkeg");
+        setTranslationKey(MOD_ID + ".powderkeg");
     }
 
     /**

@@ -1,10 +1,6 @@
 package net.dries007.tfc.objects.blocks.soil;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -24,6 +20,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockSoilPeatGrass extends Block {
     // Used for connected textures only.
@@ -35,10 +37,12 @@ public class BlockSoilPeatGrass extends Block {
     public BlockSoilPeatGrass(Material material) {
         super(material);
 
-        this.setSoundType(SoundType.PLANT);
-        this.setTickRandomly(true);
-        this.setRegistryName(MOD_ID, "peat_grass");
-        this.setTranslationKey(MOD_ID + ".peat_grass");
+        setSoundType(SoundType.PLANT);
+        setTickRandomly(true);
+
+        setCreativeTab(CreativeTabsTFC.EARTH);
+        setRegistryName(MOD_ID, "peat_grass");
+        setTranslationKey(MOD_ID + ".peat_grass");
 
         OreDictionaryHelper.register(this, "peat");
         OreDictionaryHelper.register(this, "peat", "grass");

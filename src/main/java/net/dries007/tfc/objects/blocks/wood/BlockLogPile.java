@@ -1,18 +1,16 @@
 package net.dries007.tfc.objects.blocks.wood;
 
 
-import java.util.Random;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.objects.te.TELogPile;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -38,6 +36,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockLogPile extends Block implements ILightableBlock {
@@ -51,11 +55,15 @@ public class BlockLogPile extends Block implements ILightableBlock {
         setTickRandomly(true);
         setHarvestLevel("axe", 0);
         this.setDefaultState(this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(LIT, false));
+
+        setCreativeTab(CreativeTabsTFC.MISC);
+        setRegistryName(MOD_ID, "log_pile");
+        setTranslationKey(MOD_ID + ".log_pile");
     }
 
     // A simplified check for display (Patchouli) purposes
     public static boolean isValidCoverBlock(IBlockState state) {
-        if (state.getBlock() == BlocksTFC.LOG_PILE || state.getBlock() == BlocksTFC.CHARCOAL_PILE) {
+        if (state.getBlock() == TFCBlocks.LOG_PILE || state.getBlock() == TFCBlocks.CHARCOAL_PILE) {
             return true;
         } else if (ConfigTFC.Devices.CHARCOAL_PIT.canAcceptGlass) {
             return state.getMaterial() == Material.GLASS && !(state.getBlock() instanceof BlockPane); // Not enough context to query IBlockProperties#isSideSolid, IBlockProperties#getBlockFaceShape
@@ -64,7 +72,7 @@ public class BlockLogPile extends Block implements ILightableBlock {
     }
 
     private static boolean isValidCoverBlock(IBlockState offsetState, World world, BlockPos pos, EnumFacing side) {
-        if (offsetState.getBlock() instanceof BlockLogPile || offsetState.getBlock() == BlocksTFC.CHARCOAL_PILE) {
+        if (offsetState.getBlock() instanceof BlockLogPile || offsetState.getBlock() == TFCBlocks.CHARCOAL_PILE) {
             return true;
         } else if (offsetState.getMaterial() == Material.GLASS && ConfigTFC.Devices.CHARCOAL_PIT.canAcceptGlass) {
             return offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID || offsetState.isSideSolid(world, pos, side);

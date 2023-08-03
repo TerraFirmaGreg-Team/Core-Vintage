@@ -1,12 +1,6 @@
 package net.dries007.tfc.objects.te;
 
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
-
 import com.google.common.collect.ImmutableList;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
@@ -17,8 +11,8 @@ import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.objects.blocks.BlockMolten;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.devices.BlockBlastFurnace;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.fuel.Fuel;
@@ -37,6 +31,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
+
+import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 
 @ParametersAreNonnullByDefault
 public class TEBlastFurnace extends TETickableInventory implements ITickable, ITileFields {
@@ -125,7 +126,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
     public void onBreakBlock(World worldIn, BlockPos pos, IBlockState state) {
         // Dump everything in world
         for (int i = 1; i < 6; i++) {
-            if (world.getBlockState(pos.up(i)).getBlock() == BlocksTFC.MOLTEN) {
+            if (world.getBlockState(pos.up(i)).getBlock() == TFCBlocks.MOLTEN) {
                 world.setBlockToAir(pos.up(i));
             }
         }
@@ -431,14 +432,14 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
             if (slagLayers > 0) {
                 if (slagLayers >= 4) {
                     slagLayers -= 4;
-                    world.setBlockState(pos.up(i), BlocksTFC.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, 4));
+                    world.setBlockState(pos.up(i), TFCBlocks.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, 4));
                 } else {
-                    world.setBlockState(pos.up(i), BlocksTFC.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, slagLayers));
+                    world.setBlockState(pos.up(i), TFCBlocks.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, slagLayers));
                     slagLayers = 0;
                 }
             } else {
                 //Remove any surplus slag(ie: after cooking/structure became compromised)
-                if (world.getBlockState(pos.up(i)).getBlock() == BlocksTFC.MOLTEN) {
+                if (world.getBlockState(pos.up(i)).getBlock() == TFCBlocks.MOLTEN) {
                     world.setBlockToAir(pos.up(i));
                 }
             }

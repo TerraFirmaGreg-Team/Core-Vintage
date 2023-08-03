@@ -1,12 +1,8 @@
 package net.dries007.tfc.objects.blocks.devices;
 
-import java.util.Random;
-import java.util.function.BiPredicate;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlockCharcoalPile;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
@@ -45,6 +41,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+import java.util.function.BiPredicate;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockCharcoalForge extends Block implements IBellowsConsumerBlock, ILightableBlock {
@@ -85,6 +89,10 @@ public class BlockCharcoalForge extends Block implements IBellowsConsumerBlock, 
         setHardness(1.0F);
         setTickRandomly(true); // Used for chimney checks -> extinguish
         this.setDefaultState(this.blockState.getBaseState().withProperty(LIT, false));
+
+        setCreativeTab(CreativeTabsTFC.MISC);
+        setRegistryName(MOD_ID, "charcoal_forge");
+        setTranslationKey(MOD_ID + ".charcoal_forge");
     }
 
     public static boolean isValid(World world, BlockPos pos) {

@@ -1,12 +1,5 @@
 package net.dries007.tfc.objects.blocks;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockVariant.*;
-import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
-import static net.dries007.tfc.api.types2.soil.SoilVariant.DRY_GRASS;
-import static net.dries007.tfc.objects.CreativeTabsTFC.*;
-import static net.dries007.tfc.util.Helpers.getNull;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import gregtech.api.GregTechAPI;
@@ -19,9 +12,6 @@ import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.agriculture.*;
-import net.dries007.tfc.objects.blocks.devices.BlockCharcoalForge;
-import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
-import net.dries007.tfc.objects.blocks.devices.BlockPitKiln;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
@@ -30,7 +20,9 @@ import net.dries007.tfc.objects.blocks.soil.BlockSoilPeatGrass;
 import net.dries007.tfc.objects.blocks.wood.*;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
-import net.dries007.tfc.objects.items.itemblock.*;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockSaplingTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.*;
 import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -51,27 +43,18 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockVariant.*;
+import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
+import static net.dries007.tfc.api.types2.soil.SoilVariant.DRY_GRASS;
+import static net.dries007.tfc.objects.CreativeTabsTFC.*;
+import static net.dries007.tfc.util.Helpers.getNull;
+
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
 @GameRegistry.ObjectHolder(MOD_ID)
 public final class BlocksTFC {
-
-
-    @GameRegistry.ObjectHolder("ceramics/fired/large_vessel")
-    public static final BlockLargeVessel FIRED_LARGE_VESSEL = getNull();
-    public static final BlockFirePit FIREPIT = getNull();
-    public static final BlockThatchBed THATCH_BED = getNull();
-    public static final BlockPitKiln PIT_KILN = getNull();
-    public static final BlockPlacedItemFlat PLACED_ITEM_FLAT = getNull();
-    public static final BlockPlacedItem PLACED_ITEM = getNull();
-    public static final BlockPlacedHide PLACED_HIDE = getNull();
-    public static final BlockCharcoalPile CHARCOAL_PILE = getNull();
-    public static final BlockLogPile LOG_PILE = getNull();
-    public static final BlockCharcoalForge CHARCOAL_FORGE = getNull();
-    public static final BlockMolten MOLTEN = getNull();
-    public static final BlockBloom BLOOM = getNull();
     public static final BlockIceTFC SEA_ICE = getNull();
-    public static final BlockPowderKeg POWDERKEG = getNull();
     // All these are for use in model registration. Do not use for block lookups.
     // Use the static get methods in the classes instead.
     private static ImmutableList<ItemBlock> allNormalItemBlocks;
@@ -231,9 +214,6 @@ public final class BlocksTFC {
 
 
         normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockIceTFC(FluidsTFC.SALT_WATER.get()), MISC)));
-
-        normalItemBlocks.add(new ItemBlockLargeVessel(register(r, "ceramics/fired/large_vessel", new BlockLargeVessel(), POTTERY)));
-        normalItemBlocks.add(new ItemBlockPowderKeg(register(r, "powderkeg", new BlockPowderKeg(), WOOD)));
 
 
         {
@@ -436,22 +416,6 @@ public final class BlocksTFC {
             allFruitTreeLeavesBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
             allBerryBushBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
         }
-
-
-        // Registering JEI only blocks (for info)
-        inventoryItemBlocks.add(new ItemBlock(register(r, "firepit", new BlockFirePit())));
-        inventoryItemBlocks.add(new ItemBlock(register(r, "charcoal_forge", new BlockCharcoalForge())));
-        inventoryItemBlocks.add(new ItemBlock(register(r, "pit_kiln", new BlockPitKiln())));
-        inventoryItemBlocks.add(new ItemBlock(register(r, "placed_item", new BlockPlacedItem())));
-        // technical blocks
-        // These have no ItemBlock or Creative Tab
-        register(r, "placed_item_flat", new BlockPlacedItemFlat());
-        register(r, "placed_hide", new BlockPlacedHide());
-        register(r, "charcoal_pile", new BlockCharcoalPile());
-        register(r, "log_pile", new BlockLogPile());
-        register(r, "molten", new BlockMolten());
-        register(r, "bloom", new BlockBloom());
-        register(r, "thatch_bed", new BlockThatchBed());
 
         // Note: if you add blocks you don't need to put them in this list of todos. Feel free to add them where they make sense :)
 

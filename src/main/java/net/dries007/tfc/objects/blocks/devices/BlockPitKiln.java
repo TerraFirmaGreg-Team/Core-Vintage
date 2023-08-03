@@ -1,12 +1,7 @@
 package net.dries007.tfc.objects.blocks.devices;
 
-import static net.dries007.tfc.objects.blocks.BlockPlacedItem.PLACED_ITEM_AABB;
-
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEPitKiln;
@@ -39,6 +34,14 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.objects.blocks.BlockPlacedItem.PLACED_ITEM_AABB;
+
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockPitKiln extends Block implements ILightableBlock {
@@ -62,6 +65,10 @@ public class BlockPitKiln extends Block implements ILightableBlock {
         super(Material.CIRCUITS);
         setHardness(0.5f);
         setDefaultState(blockState.getBaseState().withProperty(FULL, false).withProperty(LIT, false));
+
+        setCreativeTab(CreativeTabsTFC.MISC);
+        setRegistryName(MOD_ID, "pit_kiln");
+        setTranslationKey(MOD_ID + ".pit_kiln");
     }
 
     @Override

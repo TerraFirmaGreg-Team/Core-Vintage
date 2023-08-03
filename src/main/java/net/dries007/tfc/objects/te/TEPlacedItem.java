@@ -1,11 +1,9 @@
 package net.dries007.tfc.objects.te;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,6 +17,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class TEPlacedItem extends TEInventory {
@@ -44,7 +45,7 @@ public class TEPlacedItem extends TEInventory {
                 }
             }
             // Replace the block
-            world.setBlockState(pos, BlocksTFC.PLACED_ITEM.getDefaultState());
+            world.setBlockState(pos, TFCBlocks.PLACED_ITEM.getDefaultState());
 
             // Replace inventory items
             TEPlacedItem teNew = Helpers.getTE(world, pos, TEPlacedItem.class);

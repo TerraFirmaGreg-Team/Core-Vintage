@@ -1,22 +1,15 @@
 package net.dries007.tfc.objects.items;
 
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
-
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEFirePit;
 import net.dries007.tfc.objects.te.TELogPile;
 import net.dries007.tfc.objects.te.TEPitKiln;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.state.IBlockState;
@@ -36,6 +29,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
+
+import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -140,7 +141,7 @@ public class ItemFireStarter extends ItemTFC {
         {
             stack.damageItem(1, player);
             final IBlockState state = world.getBlockState(pos.down());
-            if (state.getBlock() == BlocksTFC.LOG_PILE) {
+            if (state.getBlock() == TFCBlocks.LOG_PILE) {
                 // Log pile
                 if (itemRand.nextFloat() < chance) {
                     world.setBlockState(pos.down(), state.withProperty(LIT, true));
@@ -153,7 +154,7 @@ public class ItemFireStarter extends ItemTFC {
                         world.setBlockState(pos, Blocks.FIRE.getDefaultState());
                     }
                 }
-            } else if (state.getBlock() == BlocksTFC.PIT_KILN) {
+            } else if (state.getBlock() == TFCBlocks.PIT_KILN) {
                 // Pit Kiln
                 if (itemRand.nextFloat() < chance) {
                     TEPitKiln te = Helpers.getTE(world, pos.down(), TEPitKiln.class);
@@ -186,7 +187,7 @@ public class ItemFireStarter extends ItemTFC {
                 if (sticks >= 3 && log != null) {
                     final float kindlingModifier = Math.min(0.1f * (float) kindling, 0.5f);
                     if (itemRand.nextFloat() < chance + kindlingModifier) {
-                        world.setBlockState(pos, BlocksTFC.FIREPIT.getDefaultState().withProperty(LIT, true));
+                        world.setBlockState(pos, TFCBlocks.FIREPIT.getDefaultState().withProperty(LIT, true));
                         TEFirePit te = Helpers.getTE(world, pos, TEFirePit.class);
                         if (te != null) {
                             te.onCreate(log.getItem());

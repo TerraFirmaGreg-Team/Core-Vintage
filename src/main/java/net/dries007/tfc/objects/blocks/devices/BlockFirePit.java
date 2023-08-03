@@ -1,15 +1,9 @@
 package net.dries007.tfc.objects.blocks.devices;
 
-import static net.dries007.tfc.Constants.RNG;
-
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -51,6 +45,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
+import java.util.Random;
+
+import static net.dries007.tfc.Constants.RNG;
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILightableBlock {
     public static final PropertyEnum<FirePitAttachment> ATTACHMENT = PropertyEnum.create("attachment", FirePitAttachment.class);
@@ -66,6 +69,10 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
         setTickRandomly(true);
         setLightLevel(1F);
         setHardness(0.3F);
+
+        setCreativeTab(CreativeTabsTFC.MISC);
+        setRegistryName(MOD_ID, "firepit");
+        setTranslationKey(MOD_ID + ".firepit");
     }
 
     @Override

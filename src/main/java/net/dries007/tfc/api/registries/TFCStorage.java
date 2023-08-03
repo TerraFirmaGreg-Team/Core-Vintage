@@ -1,8 +1,6 @@
 package net.dries007.tfc.api.registries;
 
 import gregtech.api.unification.ore.OrePrefix;
-import java.util.*;
-import javax.annotation.Nonnull;
 import net.dries007.tfc.api.types2.plant.PlantType;
 import net.dries007.tfc.api.types2.plant.PlantVariant;
 import net.dries007.tfc.api.types2.plant.util.IPlantBlock;
@@ -24,6 +22,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
+import javax.annotation.Nonnull;
+import java.util.*;
+
 /**
  * In this class we can store any blocks, items, and other useful shit.
  */
@@ -39,8 +40,13 @@ public final class TFCStorage {
     public static final Map<RockType, ItemRock> ITEMROCK_MAP = new HashMap<>();
     public static final Map<RockType, ItemBrickTFC> ITEMBRICK_MAP = new HashMap<>();
 
-    public static final List<ItemBlock> NORMAL_ITEM_BLOCKS = new ArrayList<>();
+    // Блоки, имеющие предмет
+    public static final List<ItemBlock> ITEM_BLOCKS = new ArrayList<>();
+
+    // Блоки, не имеющие предмета
     public static final List<Block> BLOCKS = new ArrayList<>();
+
+    // Предметы
     public static final List<Item> ITEM = new ArrayList<>();
 
     @Nonnull

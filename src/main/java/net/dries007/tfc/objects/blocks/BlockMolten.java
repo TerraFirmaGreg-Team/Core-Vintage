@@ -1,8 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -24,6 +22,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockMolten extends Block implements ILightableBlock {
     public static final PropertyInteger LAYERS = PropertyInteger.create("layers", 1, 4);
@@ -39,6 +43,10 @@ public class BlockMolten extends Block implements ILightableBlock {
         super(Material.ROCK);
         setHardness(-1);
         setDefaultState(this.getBlockState().getBaseState().withProperty(LIT, false).withProperty(LAYERS, 1));
+
+        setCreativeTab(CreativeTabsTFC.MISC);
+        setRegistryName(MOD_ID, "molten");
+        setTranslationKey(MOD_ID + ".molten");
     }
 
     @SuppressWarnings("deprecation")

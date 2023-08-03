@@ -1,9 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.te.TEPitKiln;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.util.Helpers;
@@ -32,6 +29,13 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockPlacedItem extends Block {
     public static final AxisAlignedBB PLACED_ITEM_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1);
@@ -39,6 +43,10 @@ public class BlockPlacedItem extends Block {
     public BlockPlacedItem() {
         super(Material.CIRCUITS);
         setHardness(0.5f);
+
+        setCreativeTab(CreativeTabsTFC.MISC);
+        setRegistryName(MOD_ID, "placed_item");
+        setTranslationKey(MOD_ID + ".placed_item");
     }
 
     @Override

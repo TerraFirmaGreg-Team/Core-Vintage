@@ -1,12 +1,5 @@
 package net.dries007.tfc.types;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
-import static net.dries007.tfc.api.types2.rock.RockVariant.*;
-import static net.dries007.tfc.objects.fluids.FluidsTFC.*;
-import static net.dries007.tfc.util.forge.ForgeRule.*;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.*;
-
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
@@ -41,7 +34,6 @@ import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
@@ -70,6 +62,13 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
+import static net.dries007.tfc.api.types2.rock.RockVariant.*;
+import static net.dries007.tfc.objects.fluids.FluidsTFC.*;
+import static net.dries007.tfc.util.forge.ForgeRule.*;
+import static net.dries007.tfc.util.skills.SmithingSkill.Type.*;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -378,7 +377,7 @@ public final class DefaultRecipes {
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_POT), new ItemStack(ItemsTFC.FIRED_POT), 1599f, 1).setRegistryName("unfired_pot"),
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_BOWL), new ItemStack(ItemsTFC.FIRED_BOWL), 1599f, 1).setRegistryName("unfired_bowl"),
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_SPINDLE), new ItemStack(ItemsTFC.FIRED_SPINDLE), 1599f, 1).setRegistryName("unfired_spindle"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_LARGE_VESSEL), new ItemStack(BlocksTFC.FIRED_LARGE_VESSEL), 1599f, 1).setRegistryName("unfired_large_vessel"),
+                new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_LARGE_VESSEL), new ItemStack(TFCBlocks.FIRED_LARGE_VESSEL), 1599f, 1).setRegistryName("unfired_large_vessel"),
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_CRUCIBLE), new ItemStack(TFCBlocks.CRUCIBLE), 1599f, 1).setRegistryName("unfired_crucible"),
 
                 // Fired Pottery - doesn't burn up
@@ -389,7 +388,7 @@ public final class DefaultRecipes {
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC.FIRED_POT), new ItemStack(ItemsTFC.FIRED_POT), 1599f, 1).setRegistryName("fired_pot"),
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC.FIRED_BOWL), new ItemStack(ItemsTFC.FIRED_BOWL), 1599f, 1).setRegistryName("fired_bowl"),
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC.FIRED_SPINDLE), new ItemStack(ItemsTFC.FIRED_SPINDLE), 1599f, 1).setRegistryName("fired_spindle"),
-                new HeatRecipeSimple(IIngredient.of(BlocksTFC.FIRED_LARGE_VESSEL), new ItemStack(BlocksTFC.FIRED_LARGE_VESSEL), 1599f, 1).setRegistryName("fired_large_vessel"),
+                new HeatRecipeSimple(IIngredient.of(TFCBlocks.FIRED_LARGE_VESSEL), new ItemStack(TFCBlocks.FIRED_LARGE_VESSEL), 1599f, 1).setRegistryName("fired_large_vessel"),
                 new HeatRecipeSimple(IIngredient.of(TFCBlocks.CRUCIBLE), new ItemStack(TFCBlocks.CRUCIBLE), 1599f, 1).setRegistryName("fired_crucible"),
 
                 // Misc

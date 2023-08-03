@@ -10,6 +10,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.te.TECrucible;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -38,6 +39,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockCrucible extends Block implements IHeatConsumerBlock, IItemSize {
 	private static final AxisAlignedBB CRUCIBLE_AABB = new AxisAlignedBB(0.0625, 0.0625, 0.0625, 0.9375, 0.9375, 0.9375);
@@ -53,6 +56,10 @@ public class BlockCrucible extends Block implements IHeatConsumerBlock, IItemSiz
 		setHardness(3.0f);
 		setHarvestLevel("pickaxe", 0);
 		setSoundType(SoundType.METAL);
+
+		setCreativeTab(CreativeTabsTFC.MISC);
+		setRegistryName(MOD_ID, "crucible");
+		setTranslationKey(MOD_ID + ".crucible");
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
@@ -37,6 +38,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Predicate;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, ILightableBlock {
@@ -74,6 +77,10 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
 		setHardness(2.0F);
 		setResistance(2.0F);
 		setHarvestLevel("pickaxe", 0);
+
+		setCreativeTab(CreativeTabsTFC.MISC);
+		setRegistryName(MOD_ID, "blast_furnace");
+		setTranslationKey(MOD_ID + ".blast_furnace");
 	}
 
 	/**

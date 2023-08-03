@@ -13,6 +13,7 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.devices.BlockPitKiln;
 import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -47,7 +48,11 @@ import static net.dries007.tfc.objects.blocks.devices.BlockPitKiln.FULL;
 public class TEPitKiln extends TEPlacedItem implements ITickable {
 	public static final int STRAW_NEEDED = 8;
 	public static final int WOOD_NEEDED = 8;
-	public static final Vec3i[] DIAGONALS = new Vec3i[] {new Vec3i(1, 0, 1), new Vec3i(-1, 0, 1), new Vec3i(1, 0, -1), new Vec3i(-1, 0, -1)};
+	public static final Vec3i[] DIAGONALS = new Vec3i[]{new Vec3i(1, 0, 1), new Vec3i(-1, 0, 1), new Vec3i(1, 0, -1), new Vec3i(-1, 0, -1)};
+	private final NonNullList<ItemStack> logItems = NonNullList.withSize(WOOD_NEEDED, ItemStack.EMPTY);
+	private final NonNullList<ItemStack> strawItems = NonNullList.withSize(STRAW_NEEDED, ItemStack.EMPTY);
+	private long litTick;
+	private boolean isLit;
 
 	public static void convertPlacedItemToPitKiln(World world, BlockPos pos, ItemStack strawStack) {
 		TEPlacedItem teOld = Helpers.getTE(world, pos, TEPlacedItem.class);
@@ -88,11 +93,6 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
 			}
 		}
 	}
-
-	private final NonNullList<ItemStack> logItems = NonNullList.withSize(WOOD_NEEDED, ItemStack.EMPTY);
-	private final NonNullList<ItemStack> strawItems = NonNullList.withSize(STRAW_NEEDED, ItemStack.EMPTY);
-	private long litTick;
-	private boolean isLit;
 
 	@Override
 	public void update() {
@@ -194,7 +194,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
 			}
 
 			// Straw via thatch block (special exception)
-			if (stack.getItem() == Item.getItemFromBlock(BlocksTFC.THATCH) && strawCount <= STRAW_NEEDED - 4) {
+			if (stack.getItem() == Item.getItemFromBlock(TFCBlocks.THATCH) && strawCount <= STRAW_NEEDED - 4) {
 				stack.shrink(1);
 				addStrawBlock();
 				world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);

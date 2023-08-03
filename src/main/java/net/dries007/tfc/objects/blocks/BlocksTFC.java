@@ -17,7 +17,9 @@ import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.agriculture.*;
-import net.dries007.tfc.objects.blocks.devices.*;
+import net.dries007.tfc.objects.blocks.devices.BlockCharcoalForge;
+import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
+import net.dries007.tfc.objects.blocks.devices.BlockPitKiln;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
@@ -32,7 +34,6 @@ import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.FruitTree;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockGravel;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -64,26 +65,18 @@ public final class BlocksTFC {
 	@GameRegistry.ObjectHolder("ceramics/fired/large_vessel")
 	public static final BlockLargeVessel FIRED_LARGE_VESSEL = getNull();
 	public static final BlockFirePit FIREPIT = getNull();
-	public static final BlockThatch THATCH = getNull();
 	public static final BlockThatchBed THATCH_BED = getNull();
 	public static final BlockPitKiln PIT_KILN = getNull();
 	public static final BlockPlacedItemFlat PLACED_ITEM_FLAT = getNull();
 	public static final BlockPlacedItem PLACED_ITEM = getNull();
 	public static final BlockPlacedHide PLACED_HIDE = getNull();
 	public static final BlockCharcoalPile CHARCOAL_PILE = getNull();
-	public static final BlockNestBox NEST_BOX = getNull();
 	public static final BlockLogPile LOG_PILE = getNull();
 	public static final BlockCharcoalForge CHARCOAL_FORGE = getNull();
-	public static final BlockCrucible CRUCIBLE = getNull();
 	public static final BlockMolten MOLTEN = getNull();
-	public static final BlockBlastFurnace BLAST_FURNACE = getNull();
 	public static final BlockBloom BLOOM = getNull();
-	public static final BlockBloomery BLOOMERY = getNull();
-	public static final BlockQuern QUERN = getNull();
 	public static final BlockIceTFC SEA_ICE = getNull();
 	public static final BlockPowderKeg POWDERKEG = getNull();
-	public static final BlockGravel AGGREGATE = getNull();
-	public static final Block FIRE_BRICKS = getNull();
 	// All these are for use in model registration. Do not use for block lookups.
 	// Use the static get methods in the classes instead.
 	private static ImmutableList<ItemBlock> allNormalItemBlocks;
@@ -241,21 +234,6 @@ public final class BlocksTFC {
 
 		//=== Other ==================================================================================================//
 
-		//normalItemBlocks.add(new ItemBlockTFC(register(r, "debug", new BlockDebug(), MISC)));
-
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), ROCK_STUFFS)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), ROCK_STUFFS)));
-
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "thatch", new BlockThatch(), DECORATIONS)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), DECORATIONS)));
-
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "quern", new BlockQuern(), MISC)));
-		normalItemBlocks.add(new ItemBlockCrucible(register(r, "crucible", new BlockCrucible(), MISC)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "blast_furnace", new BlockBlastFurnace(), MISC)));
-		inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bellows", new BlockBellows(), MISC)));
-		inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bloomery", new BlockBloomery(), MISC)));
-		inventoryItemBlocks.add(new ItemBlockTFC(register(r, "nest_box", new BlockNestBox(), MISC)));
-		inventoryItemBlocks.add(new ItemBlockSluice(register(r, "sluice", new BlockSluice(), MISC)));
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockIceTFC(FluidsTFC.SALT_WATER.get()), MISC)));
 

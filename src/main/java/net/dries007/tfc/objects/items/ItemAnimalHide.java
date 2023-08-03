@@ -9,6 +9,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
@@ -55,8 +56,8 @@ public class ItemAnimalHide extends ItemTFC {
 				type == HideType.RAW &&
 				size == HideSize.LARGE &&
 				facing == EnumFacing.UP &&
-				worldIn.getBlockState(pos).getBlock() == BlocksTFC.THATCH &&
-				worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getBlock() == BlocksTFC.THATCH) {
+				worldIn.getBlockState(pos).getBlock() == TFCBlocks.THATCH &&
+				worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getBlock() == TFCBlocks.THATCH) {
 			// Try and create a thatch bed
 			BlockPos headPos = pos.offset(player.getHorizontalFacing());
 			//Creating a thatch bed

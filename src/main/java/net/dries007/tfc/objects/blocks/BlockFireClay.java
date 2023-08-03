@@ -8,6 +8,7 @@ package net.dries007.tfc.objects.blocks;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -20,12 +21,18 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockFireClay extends Block implements IItemSize {
 	public BlockFireClay() {
 		super(Material.CLAY);
+
+		setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
 		setSoundType(SoundType.GROUND);
 		setHardness(1.0F);
+		setRegistryName(MOD_ID, "fire_clay_block");
+		setTranslationKey(MOD_ID + ".fire_clay_block");
 	}
 
 	@Override

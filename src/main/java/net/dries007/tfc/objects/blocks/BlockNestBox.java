@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.te.TENestBox;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -29,6 +30,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockNestBox extends Block {
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
@@ -36,6 +39,11 @@ public class BlockNestBox extends Block {
 	public BlockNestBox() {
 		super(Material.GRASS);
 		setHardness(0.5F);
+
+		setCreativeTab(CreativeTabsTFC.MISC);
+		setRegistryName(MOD_ID, "nest_box");
+		setTranslationKey(MOD_ID + ".nest_box");
+
 		Blocks.FIRE.setFireInfo(this, 60, 20);
 	}
 

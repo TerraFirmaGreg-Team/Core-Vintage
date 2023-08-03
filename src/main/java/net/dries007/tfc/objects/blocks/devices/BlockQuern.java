@@ -10,6 +10,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.te.TEQuern;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -39,6 +40,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.te.TEQuern.SLOT_HANDSTONE;
 
 @ParametersAreNonnullByDefault
@@ -50,6 +52,17 @@ public class BlockQuern extends Block implements IItemSize, IHighlightHandler {
 	private static final AxisAlignedBB HANDLE_AABB = new AxisAlignedBB(0.27125D, 0.86D, 0.27125D, 0.335D, 1.015D, 0.335D);
 
 	private static final AxisAlignedBB INPUT_SLOT_AABB = new AxisAlignedBB(0.375D, 0.86D, 0.375D, 0.625D, 1.015D, 0.625D);
+
+	public BlockQuern() {
+		super(Material.ROCK);
+
+		setHardness(3.0f);
+		setSoundType(SoundType.STONE);
+
+		setCreativeTab(CreativeTabsTFC.MISC);
+		setRegistryName(MOD_ID, "quern");
+		setTranslationKey(MOD_ID + ".quern");
+	}
 
 	/**
 	 * Gets the selection place player is looking at
@@ -76,12 +89,6 @@ public class BlockQuern extends Block implements IItemSize, IHighlightHandler {
 			}
 		}
 		return SelectionPlace.BASE;
-	}
-
-	public BlockQuern() {
-		super(Material.ROCK);
-		setHardness(3.0f);
-		setSoundType(SoundType.STONE);
 	}
 
 	@Override

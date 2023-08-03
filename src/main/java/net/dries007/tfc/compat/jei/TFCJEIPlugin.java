@@ -37,6 +37,7 @@ import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.metal.ItemAnvil;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 import net.dries007.tfc.objects.recipes.UnmoldRecipe;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -114,7 +115,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 		REGISTRY = registry;
 
 		// Alloy Recipes
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), ALLOY_UID);
+		registry.addRecipeCatalyst(new ItemStack(TFCBlocks.CRUCIBLE), ALLOY_UID);
 		registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), ALLOY_UID);
 
 		var alloyRecipes = TFCRegistries.ALLOYS.getValuesCollection().stream()
@@ -124,7 +125,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 		registry.addRecipes(alloyRecipes, ALLOY_UID);
 
 		// Quern Recipes
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.QUERN), QUERN_UID);
+		registry.addRecipeCatalyst(new ItemStack(TFCBlocks.QUERN), QUERN_UID);
 		registry.addRecipeCatalyst(new ItemStack(ItemsTFC.HANDSTONE), QUERN_UID);
 
 		var quernList = TFCRegistries.QUERN.getValuesCollection()
@@ -166,7 +167,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 		registry.addRecipes(weldList, WELDING_UID);
 
 		// Bloomery Recipes
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.BLOOMERY), BLOOMERY_UID);
+		registry.addRecipeCatalyst(new ItemStack(TFCBlocks.BLOOMERY), BLOOMERY_UID);
 
 		var bloomeryList = TFCRegistries.BLOOMERY.getValuesCollection()
 				.stream()
@@ -176,7 +177,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 		registry.addRecipes(bloomeryList, BLOOMERY_UID);
 
 		// Blast Furnace Recipes
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.BLAST_FURNACE), BLAST_FURNACE_UID);
+		registry.addRecipeCatalyst(new ItemStack(TFCBlocks.BLAST_FURNACE), BLAST_FURNACE_UID);
 
 		var blastList = TFCRegistries.BLAST_FURNACE.getValuesCollection()
 				.stream()
@@ -210,7 +211,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 		registry.addRecipes(loomRecipes, LOOM_UID);
 
 		// Metal Melting Recipes
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), METAL_HEAT_UID);
+		registry.addRecipeCatalyst(new ItemStack(TFCBlocks.CRUCIBLE), METAL_HEAT_UID);
 		registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), METAL_HEAT_UID);
 
 		var heatMetalList = new ArrayList<>();
@@ -236,7 +237,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 			registry.addRecipeCatalyst(oreDictStack, UNMOLD_UID);
 		}
 
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), CASTING_UID);
+		registry.addRecipeCatalyst(new ItemStack(TFCBlocks.CRUCIBLE), CASTING_UID);
 		registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), CASTING_UID);
 
 		var unmoldList = new ArrayList<UnmoldRecipeWrapper>();

@@ -12,6 +12,7 @@ import net.dries007.tfc.objects.blocks.BlockCharcoalPile;
 import net.dries007.tfc.objects.blocks.BlockMolten;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.devices.BlockBloomery;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.block.state.IBlockState;
@@ -140,7 +141,7 @@ public class TEBloomery extends TETickableInventory implements ITickable {
 			// Update multiblock status
 			int newMaxItems = BlockBloomery.getChimneyLevels(world, getInternalBlock()) * 8;
 			EnumFacing direction = world.getBlockState(pos).getValue(FACING);
-			if (!BlocksTFC.BLOOMERY.isFormed(world, getInternalBlock(), direction)) {
+			if (!TFCBlocks.BLOOMERY.isFormed(world, getInternalBlock(), direction)) {
 				newMaxItems = 0;
 			}
 
@@ -165,7 +166,7 @@ public class TEBloomery extends TETickableInventory implements ITickable {
 				state = state.withProperty(LIT, false);
 				world.setBlockState(pos, state);
 			}
-			if (!BlocksTFC.BLOOMERY.canGateStayInPlace(world, pos, direction.getAxis())) {
+			if (!TFCBlocks.BLOOMERY.canGateStayInPlace(world, pos, direction.getAxis())) {
 				// Bloomery gate (the front facing) structure became compromised
 				world.destroyBlock(pos, true);
 				return;

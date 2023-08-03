@@ -9,6 +9,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.te.TESluice;
 import net.dries007.tfc.util.block.BoundingBox;
 import net.minecraft.block.Block;
@@ -36,6 +37,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -65,6 +68,10 @@ public class BlockSluice extends BlockHorizontal implements IItemSize {
 		setDefaultState(blockState.getBaseState().withProperty(UPPER, false));
 		setHardness(8.0f);
 		setHarvestLevel("axe", 0);
+
+		setCreativeTab(CreativeTabsTFC.MISC);
+		setRegistryName(MOD_ID, "sluice");
+		setTranslationKey(MOD_ID + ".sluice");
 	}
 
 	@Nonnull

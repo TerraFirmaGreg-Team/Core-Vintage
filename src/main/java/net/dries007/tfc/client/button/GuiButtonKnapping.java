@@ -2,11 +2,17 @@ package net.dries007.tfc.client.button;
 
 import javax.annotation.Nonnull;
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -38,4 +44,19 @@ public class GuiButtonKnapping extends GuiButton {
             mouseDragged(mc, mouseX, mouseY);
         }
     }
+
+    public void playPressSoundBasedOnKnappingType(SoundHandler soundHandler, KnappingType knappingType) {
+        var soundEvent = SoundEvents.UI_BUTTON_CLICK;
+
+        switch (knappingType) {
+            case STONE -> soundEvent = TFCSounds.KNAPPING_ROCK;
+            case CLAY, FIRE_CLAY -> soundEvent = TFCSounds.KNAPPING_CLAY;
+            case LEATHER -> soundEvent = TFCSounds.KNAPPING_LEATHER;
+        }
+
+        soundHandler.playSound(PositionedSoundRecord.getMasterRecord(soundEvent, 1.0F));
+    }
+
+    @Override
+    public void playPressSound(@Nonnull SoundHandler soundHandlerIn) {}
 }

@@ -247,6 +247,15 @@ public class TFCSounds {
     @GameRegistry.ObjectHolder(MOD_ID + ":animal.feline.step")
     public static final SoundEvent ANIMAL_FELINE_STEP = getNull();
 
+    @GameRegistry.ObjectHolder(MOD_ID + ":knapping.rock")
+    public static final SoundEvent KNAPPING_ROCK = null;
+
+    @GameRegistry.ObjectHolder(MOD_ID + ":knapping.clay")
+    public static final SoundEvent KNAPPING_CLAY = null;
+
+    @GameRegistry.ObjectHolder(MOD_ID + ":knapping.leather")
+    public static final SoundEvent KNAPPING_LEATHER = null;
+
     // These are static initialized because we need a custom sound type which uses the sounds before initialization
     private static final SoundEvent CHARCOAL_PILE_BREAK = createSoundEvent("block.charcoal.break");
     private static final SoundEvent CHARCOAL_PILE_FALL = createSoundEvent("block.charcoal.fall");
@@ -368,12 +377,16 @@ public class TFCSounds {
                 createSoundEvent("animal.jackal.say"),
                 createSoundEvent("animal.jackal.hurt"),
                 createSoundEvent("animal.jackal.death"),
-                createSoundEvent("animal.feline.step")
+                createSoundEvent("animal.feline.step"),
+                // Knapping
+                createSoundEvent("knapping.rock"),
+                createSoundEvent("knapping.clay"),
+                createSoundEvent("knapping.leather")
         );
     }
 
     private static SoundEvent createSoundEvent(String name) {
-        final ResourceLocation soundID = new ResourceLocation(MOD_ID, name);
+        final var soundID = new ResourceLocation(MOD_ID, name);
         return new SoundEvent(soundID).setRegistryName(soundID);
     }
 }

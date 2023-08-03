@@ -1,4 +1,65 @@
 {
+  "knapping.rock": {
+    "category": "ambient",
+    "subtitle": "tfc.knapping.rock",
+    "sounds": [
+      "tfc:knapping_rock1",
+      "tfc:knapping_rock2",
+      "tfc:knapping_rock3",
+      "tfc:knapping_rock4",
+      "tfc:knapping_rock5",
+      "tfc:knapping_rock6"
+    ]
+  },
+  "knapping.clay": {
+    "category": "ambient",
+    "subtitle": "tfc.knapping.clay",
+    "sounds": [
+      "tfc:knapping_clay"
+    ]
+  },
+  "knapping.leather": {
+    "category": "ambient",
+    "subtitle": "tfc.knapping.leather",
+    "sounds": [
+      "tfc:knapping_leather"
+    ]
+  },
+  "groove.fit": {
+    "category": "ambient",
+    "subtitle": "tfc.groove.fit",
+    "sounds": [
+      "tfc:groove_fit"
+    ]
+  },
+  "mount.fit": {
+    "category": "ambient",
+    "subtitle": "tfc.mount.fit",
+    "sounds": [
+      "tfc:mount_fit"
+    ]
+  },
+  "bowl.fit": {
+    "category": "ambient",
+    "subtitle": "tfc.bowl.fit",
+    "sounds": [
+      "tfc:bowl_fit"
+    ]
+  },
+  "bowl.grab": {
+    "category": "ambient",
+    "subtitle": "tfc.bowl.grab",
+    "sounds": [
+      "tfc:bowl_grab"
+    ]
+  },
+  "trunk.scratch": {
+    "category": "ambient",
+    "subtitle": "tfc.trunk.scrath",
+    "sounds": [
+      "tfc:trunk_scratch"
+    ]
+  },
   "item.ceramicbreak": {
     "category": "ambient",
     "subtitle": "tfc.item.ceramicbreak",

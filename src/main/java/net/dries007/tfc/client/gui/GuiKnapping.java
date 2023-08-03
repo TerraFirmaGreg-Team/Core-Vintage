@@ -91,9 +91,9 @@ public class GuiKnapping extends GuiContainerTFC {
 
     @Override
     protected void actionPerformed(@Nonnull GuiButton button) {
-        if (button instanceof GuiButtonKnapping) {
-            ((GuiButtonKnapping) button).onClick();
-            button.playPressSound(mc.getSoundHandler());
+        if (button instanceof GuiButtonKnapping knappingButton) {
+            knappingButton.onClick();
+            knappingButton.playPressSoundBasedOnKnappingType(mc.getSoundHandler(), type);
             // Set the client-side matrix
             if (inventorySlots instanceof ContainerKnapping) {
                 ((ContainerKnapping) inventorySlots).setSlotState(button.id, false);

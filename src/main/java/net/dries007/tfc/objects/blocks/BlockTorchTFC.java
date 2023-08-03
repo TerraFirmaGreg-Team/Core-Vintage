@@ -43,10 +43,6 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBlock {
-	public static boolean canLight(ItemStack stack) {
-		return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
-	}
-
 	public BlockTorchTFC() {
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, true));
 		setHardness(0f);
@@ -95,12 +91,9 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBl
 
 	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-		System.out.println("cock 1");
 		TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
 		if (te != null) {
-			System.out.println("cock 2");
 			if (!worldIn.isRemote && te.getTicksSinceUpdate() > ConfigTFC.General.OVERRIDES.torchTime && ConfigTFC.General.OVERRIDES.torchTime > 0) {
-				System.out.println("cock 3");
 				worldIn.setBlockState(pos, state.withProperty(LIT, false));
 				te.resetCounter();
 			}
@@ -160,5 +153,9 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBl
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TETickCounter();
+	}
+
+	public static boolean canLight(ItemStack stack) {
+		return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
 	}
 }

@@ -68,39 +68,38 @@ configurations {
     implementation.extendsFrom(embed)
 }
 
-spotless {
-    if (project.property('spotless')) {
-        encoding 'UTF-8'
-        format 'misc', {
-            target '.gitignore'
-
-            endWithNewline()
-            indentWithSpaces()
-            trimTrailingWhitespace()
-        }
-        java {
-            target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
-
-            endWithNewline()
-            formatAnnotations()
-            importOrder()
-            indentWithSpaces()
-            removeUnusedImports()
-            toggleOffOn()
-            trimTrailingWhitespace()
-
-            if (project.property('cleanthat')) {
-                cleanthat().sourceCompatibility('1.8')
-            }
-        }
-        json {
-            target 'src/main/resources/**/*.json', 'src/test/resources/**/*.json'
-
-            simple().indentWithSpaces(6)
-        }
-    }
-
-}
+//spotless {
+//    if (project.property('spotless')) {
+//        encoding 'UTF-8'
+//        format 'misc', {
+//            target '.gitignore'
+//
+//            endWithNewline()
+//            indentWithSpaces()
+//            trimTrailingWhitespace()
+//        }
+//        java {
+//            target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
+//
+//            endWithNewline()
+//            formatAnnotations()
+//            importOrder()
+//            indentWithSpaces()
+//            removeUnusedImports()
+//            toggleOffOn()
+//            trimTrailingWhitespace()
+//
+//            if (project.property('cleanthat')) {
+//                cleanthat().sourceCompatibility('1.8')
+//            }
+//        }
+//        json {
+//            target 'src/main/resources/**/*.json', 'src/test/resources/**/*.json'
+//
+//            simple().indentWithSpaces(6)
+//        }
+//    }
+//}
 
 minecraft {
     mcVersion = '1.12.2'
@@ -413,7 +412,7 @@ idea.project.settings {
 }
 
 apply from: 'publishing.gradle'
-apply from: 'extra.gradle'
+//apply from: 'extra.gradle'
 
 void assertProperty(String propertyName) {
     def property = project.findProperty(propertyName)

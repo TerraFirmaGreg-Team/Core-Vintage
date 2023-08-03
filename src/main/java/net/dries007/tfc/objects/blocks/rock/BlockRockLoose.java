@@ -115,6 +115,11 @@ public class BlockRockLoose extends Block implements IRockBlock {
 		drops.add(new ItemStack(TFCStorage.ITEMROCK_MAP.get(rockType)));
 	}
 
+	@Override
+	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+		return true;
+	}
+
 	@Nonnull
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {

@@ -16,7 +16,11 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TorchProvider implements IProbeInfoProvider
 {
@@ -41,12 +45,17 @@ public class TorchProvider implements IProbeInfoProvider
 
             minValue = minValue % 60;
 
-            probeInfo.text(String.format("%s %s", ConfigTFC.General.OVERRIDES.torchTime, te.getTicksSinceUpdate()));
-            /*
-            if (secValue >= 0)
+            var litProperty = iBlockState.getValue(BlockTorchTFC.LIT);
+
+            if (litProperty && secValue >= 0) {
                 probeInfo.text(String.format(TextFormatting.GOLD + "Burn time left: %sh %sm %ss", hourValue, minValue, secValue));
-            else
-                probeInfo.text(TextFormatting.RED + "This torch has gone out!");*/
+            }
+            else if (!litProperty) {
+                probeInfo.text(TextFormatting.RED + "This torch has gone out!");
+            }
+            else {
+                probeInfo.text(TextFormatting.RED + "The torch will go out soon!");
+            }
         }
     }
 }

@@ -9,6 +9,7 @@
     "gregtech.MaterialRecipeHandlerMixin",
     "gregtech.OrePrefixMixin",
     "gregtech.PartsRecipeHandlerMixin",
+    "gregtech.SurfaceGeneratorMixin",
     "gregtech.ToolItemsMixin",
     "gregtech.ToolRecipeHandlerMixin",
     "minecraft.GuiCreateWorldMixin"

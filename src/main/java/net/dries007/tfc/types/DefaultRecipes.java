@@ -6,6 +6,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.loaders.recipe.handlers.OreRecipeHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
@@ -73,33 +74,15 @@ import static net.dries007.tfc.util.skills.SmithingSkill.Type.*;
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public final class DefaultRecipes {
-    public static void init() {
-        registerAnvilRecipes();
-        registerWeldingRecipes();
-        registerKnappingRecipes();
-    }
 
     @SubscribeEvent
     public static void onRegisterWorkbenchRecipes(RegistryEvent.Register<IRecipe> event) {
-        var registry = event.getRegistry();
-
-        for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
-            for (var orePrefix : OrePrefix.values()) {
-                var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
-                if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
-                    if (material.hasFlag(TFGMaterialFlags.TOOL_MATERIAL_CAN_BE_UNMOLDED) || orePrefix == OrePrefix.ingot) {
-                        registry.register(
-                                new UnmoldRecipe(new ItemStack(ItemMold.get(orePrefix)), material, 1).setRegistryName(MOD_ID, "unmold_" + orePrefix.name + "_" + material.getName())
-                        );
-                    }
-
-                }
-            }
-        }
+        registerUnmoldRecipes(event);
+        registerProcessingRecipes();
     }
 
     @SubscribeEvent
-    public static void onRegisterBarrelRecipeEvent(RegistryEvent.Register<BarrelRecipe> event) {
+    public static void onRegisterBarrelRecipes(RegistryEvent.Register<BarrelRecipe> event) {
         event.getRegistry().registerAll(
                 // Hide Processing (all three conversions)
                 new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 300), IIngredient.of(ItemAnimalHide.get(ItemAnimalHide.HideType.SCRAPED, ItemAnimalHide.HideSize.SMALL)), null, new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.PREPARED, ItemAnimalHide.HideSize.SMALL)), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("small_prepared_hide"),
@@ -263,84 +246,22 @@ public final class DefaultRecipes {
         );
     }
 
-    public static void registerKnappingRecipes() {
-        var registry = TFCRegistries.KNAPPING;
-
-        /* ROCK ITEMS */
-        registry.registerAll(
-                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("toolheadknife_head_1"),
-                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("toolheadknife_head_2"),
-                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("toolheadknife_head_3"),
-                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName("toolheadhoe_head_1"),
-                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName("toolheadhoe_head_2")
-        );
-
-        for (var orePrefix : OrePrefix.values()) {
-            var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
-
-            if (extendedOrePrefix.getRockKnappingPattern() != null) {
-                var amount = orePrefix == OrePrefix.ingot ? 2 : 1;
-
-                registry.register(new KnappingRecipeStone(OreDictUnifier.get(orePrefix, Materials.Stone, amount), extendedOrePrefix.getRockKnappingPattern()).setRegistryName(orePrefix.name.toLowerCase() + "_head"));
-            }
-        }
-
-        /* CLAY ITEMS */
-        for (var orePrefix : OrePrefix.values()) {
-            var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
-
-            if (extendedOrePrefix.getClayKnappingPattern() != null) {
-                var amount = orePrefix == OrePrefix.ingot ? 2 : 1;
-
-                registry.register(new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemUnfiredMold.get(orePrefix), amount), extendedOrePrefix.getClayKnappingPattern()).setRegistryName(orePrefix.name.toLowerCase() + "_mold"));
-            }
-        }
-
-        registry.registerAll(
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_VESSEL), " XXX ", "XXXXX", "XXXXX", "XXXXX", " XXX ").setRegistryName("clay_small_vessel"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_JUG), " X   ", "XXXX ", "XXX X", "XXXX ", "XXX  ").setRegistryName("clay_jug"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_POT), "X   X", "X   X", "X   X", "XXXXX", " XXX ").setRegistryName("clay_pot"),
-                new KnappingRecipeSimple(KnappingType.CLAY, false, new ItemStack(ItemsTFC.UNFIRED_BOWL, 2), "X   X", " XXX ").setRegistryName(MOD_ID, "clay_bowl"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_BOWL, 4), "X   X", " XXX ", "     ", "X   X", " XXX ").setRegistryName("clay_bowl_2"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_LARGE_VESSEL), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("clay_large_vessel"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("clay_brick"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_FLOWER_POT, 2), " X X ", " XXX ", "     ", " X X ", " XXX ").setRegistryName("clay_flower_pot")
-        );
-
-        /* LEATHER ITEMS */
-        registry.registerAll(
-                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.LEATHER_HELMET), "XXXXX", "X   X", "X   X", "     ", "     ").setRegistryName("leather_helmet"),
-                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.LEATHER_CHESTPLATE), "X   X", "XXXXX", "XXXXX", "XXXXX", "XXXXX").setRegistryName("leather_chestplate"),
-                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.LEATHER_LEGGINGS), "XXXXX", "XXXXX", "XX XX", "XX XX", "XX XX").setRegistryName("leather_leggings"),
-                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.LEATHER_BOOTS), "XX   ", "XX   ", "XX   ", "XXXX ", "XXXXX").setRegistryName("leather_boots"),
-                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.SADDLE), "  X  ", "XXXXX", "XXXXX", "XXXXX", "  X  ").setRegistryName("leather_saddle"),
-                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsTFC.QUIVER), " XXXX", "X XXX", "X XXX", "X XXX", " XXXX").setRegistryName("leather_quiver")
-        );
-
-        /* FIRE CLAY ITEMS */
-        registry.registerAll(
-                new KnappingRecipeSimple(KnappingType.FIRE_CLAY, true, new ItemStack(ItemsTFC.UNFIRED_CRUCIBLE), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("fire_clay_crucible"),
-                new KnappingRecipeSimple(KnappingType.FIRE_CLAY, true, new ItemStack(ItemsTFC.UNFIRED_FIRE_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("fire_clay_brick")
-        );
-
-    }
-
     @SubscribeEvent
-    public static void onRegisterBloomeryRecipeEvent(RegistryEvent.Register<BloomeryRecipe> event) {
+    public static void onRegisterBloomeryRecipes(RegistryEvent.Register<BloomeryRecipe> event) {
         event.getRegistry().registerAll(
                 new BloomeryRecipe(Materials.Iron, FuelManager::isItemBloomeryFuel)
         );
     }
 
     @SubscribeEvent
-    public static void onRegisterBlastFurnaceRecipeEvent(RegistryEvent.Register<BlastFurnaceRecipe> event) {
+    public static void onRegisterBlastFurnaceRecipes(RegistryEvent.Register<BlastFurnaceRecipe> event) {
         event.getRegistry().registerAll(
                 new BlastFurnaceRecipe(TFGMaterials.PigIron, Materials.Iron, IIngredient.of("dustFlux"))
         );
     }
 
     @SubscribeEvent
-    public static void onRegisterHeatRecipeEvent(RegistryEvent.Register<HeatRecipe> event) {
+    public static void onRegisterHeatRecipes(RegistryEvent.Register<HeatRecipe> event) {
         IForgeRegistry<HeatRecipe> r = event.getRegistry();
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
@@ -477,7 +398,7 @@ public final class DefaultRecipes {
 
 
     @SubscribeEvent
-    public static void onRegisterLoomRecipeEvent(RegistryEvent.Register<LoomRecipe> event) {
+    public static void onRegisterLoomRecipes(RegistryEvent.Register<LoomRecipe> event) {
         IForgeRegistry<LoomRecipe> r = event.getRegistry();
 
         r.registerAll(
@@ -491,7 +412,7 @@ public final class DefaultRecipes {
 
     @SubscribeEvent
     @SuppressWarnings("ConstantConditions")
-    public static void onRegisterQuernRecipeEvent(RegistryEvent.Register<QuernRecipe> event) {
+    public static void onRegisterQuernRecipes(RegistryEvent.Register<QuernRecipe> event) {
         IForgeRegistry<QuernRecipe> r = event.getRegistry();
 
         r.registerAll(
@@ -616,7 +537,7 @@ public final class DefaultRecipes {
 
     @SubscribeEvent
     @SuppressWarnings("ConstantConditions")
-    public static void onRegisterChiselRecipeEvent(RegistryEvent.Register<ChiselRecipe> event) {
+    public static void onRegisterChiselRecipes(RegistryEvent.Register<ChiselRecipe> event) {
         // Rock smoothing
         for (RockType rockType : RockType.values()) {
             var rawRock = TFCStorage.getRockBlock(ORDINARY, RAW, rockType);
@@ -636,7 +557,113 @@ public final class DefaultRecipes {
         event.getRegistry().register(new ChiselRecipe(rawAlabaster, smoothAlabaster).setRegistryName("smooth_alabaster"));
     }
 
-    public static void registerAnvilRecipes() {
+    public static void init() {
+        registerAnvilRecipes();
+        registerWeldingRecipes();
+        registerKnappingRecipes();
+    }
+
+    private static void registerUnmoldRecipes(RegistryEvent.Register<IRecipe> event) {
+        var registry = event.getRegistry();
+
+        for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
+            for (var orePrefix : OrePrefix.values()) {
+                var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
+                if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
+                    if (material.hasFlag(TFGMaterialFlags.TOOL_MATERIAL_CAN_BE_UNMOLDED) || orePrefix == OrePrefix.ingot) {
+                        registry.register(
+                                new UnmoldRecipe(new ItemStack(ItemMold.get(orePrefix)), material, 1).setRegistryName(MOD_ID, "unmold_" + orePrefix.name + "_" + material.getName())
+                        );
+                    }
+
+                }
+            }
+        }
+    }
+
+    private static void registerProcessingRecipes() {
+        TFGOrePrefix.oreChunk.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+
+        TFGOrePrefix.oreQuartzite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreChalk.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreChert.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreClaystone.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreConglomerate.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreDacite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreDolomite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreGabbro.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreGneiss.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreLimestone.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.orePhyllite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreRhyolite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreSchist.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreShale.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+        TFGOrePrefix.oreSlate.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+    }
+
+    private static void registerKnappingRecipes() {
+        var registry = TFCRegistries.KNAPPING;
+
+        /* ROCK ITEMS */
+        registry.registerAll(
+                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("toolheadknife_head_1"),
+                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("toolheadknife_head_2"),
+                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("toolheadknife_head_3"),
+                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName("toolheadhoe_head_1"),
+                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName("toolheadhoe_head_2")
+        );
+
+        for (var orePrefix : OrePrefix.values()) {
+            var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
+
+            if (extendedOrePrefix.getRockKnappingPattern() != null) {
+                var amount = orePrefix == OrePrefix.ingot ? 2 : 1;
+
+                registry.register(new KnappingRecipeStone(OreDictUnifier.get(orePrefix, Materials.Stone, amount), extendedOrePrefix.getRockKnappingPattern()).setRegistryName(orePrefix.name.toLowerCase() + "_head"));
+            }
+        }
+
+        /* CLAY ITEMS */
+        for (var orePrefix : OrePrefix.values()) {
+            var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
+
+            if (extendedOrePrefix.getClayKnappingPattern() != null) {
+                var amount = orePrefix == OrePrefix.ingot ? 2 : 1;
+
+                registry.register(new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemUnfiredMold.get(orePrefix), amount), extendedOrePrefix.getClayKnappingPattern()).setRegistryName(orePrefix.name.toLowerCase() + "_mold"));
+            }
+        }
+
+        registry.registerAll(
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_VESSEL), " XXX ", "XXXXX", "XXXXX", "XXXXX", " XXX ").setRegistryName("clay_small_vessel"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_JUG), " X   ", "XXXX ", "XXX X", "XXXX ", "XXX  ").setRegistryName("clay_jug"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_POT), "X   X", "X   X", "X   X", "XXXXX", " XXX ").setRegistryName("clay_pot"),
+                new KnappingRecipeSimple(KnappingType.CLAY, false, new ItemStack(ItemsTFC.UNFIRED_BOWL, 2), "X   X", " XXX ").setRegistryName(MOD_ID, "clay_bowl"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_BOWL, 4), "X   X", " XXX ", "     ", "X   X", " XXX ").setRegistryName("clay_bowl_2"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_LARGE_VESSEL), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("clay_large_vessel"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("clay_brick"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_FLOWER_POT, 2), " X X ", " XXX ", "     ", " X X ", " XXX ").setRegistryName("clay_flower_pot")
+        );
+
+        /* LEATHER ITEMS */
+        registry.registerAll(
+                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.LEATHER_HELMET), "XXXXX", "X   X", "X   X", "     ", "     ").setRegistryName("leather_helmet"),
+                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.LEATHER_CHESTPLATE), "X   X", "XXXXX", "XXXXX", "XXXXX", "XXXXX").setRegistryName("leather_chestplate"),
+                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.LEATHER_LEGGINGS), "XXXXX", "XXXXX", "XX XX", "XX XX", "XX XX").setRegistryName("leather_leggings"),
+                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.LEATHER_BOOTS), "XX   ", "XX   ", "XX   ", "XXXX ", "XXXXX").setRegistryName("leather_boots"),
+                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.SADDLE), "  X  ", "XXXXX", "XXXXX", "XXXXX", "  X  ").setRegistryName("leather_saddle"),
+                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsTFC.QUIVER), " XXXX", "X XXX", "X XXX", "X XXX", " XXXX").setRegistryName("leather_quiver")
+        );
+
+        /* FIRE CLAY ITEMS */
+        registry.registerAll(
+                new KnappingRecipeSimple(KnappingType.FIRE_CLAY, true, new ItemStack(ItemsTFC.UNFIRED_CRUCIBLE), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("fire_clay_crucible"),
+                new KnappingRecipeSimple(KnappingType.FIRE_CLAY, true, new ItemStack(ItemsTFC.UNFIRED_FIRE_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("fire_clay_brick")
+        );
+
+    }
+
+    private static void registerAnvilRecipes() {
         IForgeRegistry<AnvilRecipe> r = TFCRegistries.ANVIL;
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
@@ -853,7 +880,7 @@ public final class DefaultRecipes {
         // addAnvil(r, "brass_mechanisms", INGOT, BRASS, new ItemStack(ItemsTFC.BRASS_MECHANISMS, 2), Metal.Tier.TIER_II, GENERAL, PUNCH_LAST, HIT_SECOND_LAST, PUNCH_THIRD_LAST);
     }
 
-    public static void registerWeldingRecipes() {
+    private static void registerWeldingRecipes() {
         IForgeRegistry<WeldingRecipe> r = TFCRegistries.WELDING;
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {

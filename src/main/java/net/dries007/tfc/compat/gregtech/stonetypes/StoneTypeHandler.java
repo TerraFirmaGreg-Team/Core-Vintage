@@ -9,11 +9,16 @@ import static net.dries007.tfc.compat.gregtech.material.TFGMaterials.*;
 import static net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix.*;
 
 import gregtech.api.unification.ore.StoneType;
+import gregtech.integration.jei.basic.OreByProduct;
 import net.dries007.tfc.api.registries.TFCStorage;
+import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.minecraft.block.SoundType;
 
 public class StoneTypeHandler {
     public static void init() {
+
+        OreByProduct.addOreByProductPrefix(oreChunk);
+
         new StoneType(
                 16, "tfc_andesite", SoundType.STONE, oreAndesite, Andesite,
                 () -> TFCStorage.getRockBlock(ORDINARY, RAW, ANDESITE).getDefaultState(),

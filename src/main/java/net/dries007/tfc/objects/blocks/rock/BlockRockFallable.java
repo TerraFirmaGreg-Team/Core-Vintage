@@ -44,108 +44,108 @@ import static net.dries007.tfc.api.types.rock.RockVariant.SAND;
 @ParametersAreNonnullByDefault
 public class BlockRockFallable extends Block implements IRockBlock, IItemSize {
 
-	private final RockVariant rockVariant;
-	private final Rock rock;
-	private final ResourceLocation modelLocation;
+    private final RockVariant rockVariant;
+    private final Rock rock;
+    private final ResourceLocation modelLocation;
 
-	public BlockRockFallable(RockVariant rockVariant, Rock rock) {
-		super(Material.SAND);
+    public BlockRockFallable(RockVariant rockVariant, Rock rock) {
+        super(Material.SAND);
 
-		if (rockVariant.canFall()) {
-			FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
-		}
+        if (rockVariant.canFall()) {
+            FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
+        }
 
-		this.rockVariant = rockVariant;
-		this.rock = rock;
-		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
+        this.rockVariant = rockVariant;
+        this.rock = rock;
+        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
-		var blockRegistryName = String.format("rock/%s/%s", rockVariant, rock);
-		if (rockVariant == SAND)
-			this.setSoundType(SoundType.SAND);
-		else
-			this.setSoundType(SoundType.GROUND);
-		this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
-		this.setHardness(getFinalHardness() * 0.2F);
-		this.setHarvestLevel("shovel", 0);
-		this.setRegistryName(MOD_ID, blockRegistryName);
-		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        var blockRegistryName = String.format("rock/%s/%s", rockVariant, rock);
+        if (rockVariant == SAND)
+            this.setSoundType(SoundType.SAND);
+        else
+            this.setSoundType(SoundType.GROUND);
+        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        this.setHardness(getFinalHardness() * 0.2F);
+        this.setHarvestLevel("shovel", 0);
+        this.setRegistryName(MOD_ID, blockRegistryName);
+        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-		//OreDictionaryModule.register(this, rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
-	}
+        //OreDictionaryModule.register(this, rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
+    }
 
-	@Nonnull
-	@Override
-	public RockVariant getRockVariant() {
-		return rockVariant;
-	}
+    @Nonnull
+    @Override
+    public RockVariant getRockVariant() {
+        return rockVariant;
+    }
 
-	@Nonnull
-	@Override
-	public Rock getRock() {
-		return rock;
-	}
+    @Nonnull
+    @Override
+    public Rock getRock() {
+        return rock;
+    }
 
-	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlockTFC(this);
-	}
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
+    }
 
-	@Nonnull
-	@Override
-	public Size getSize(@Nonnull ItemStack stack) {
-		return Size.SMALL; // Store anywhere
-	}
+    @Nonnull
+    @Override
+    public Size getSize(@Nonnull ItemStack stack) {
+        return Size.SMALL; // Store anywhere
+    }
 
-	@Nonnull
-	@Override
-	public Weight getWeight(@Nonnull ItemStack stack) {
-		return Weight.LIGHT; // Stacksize = 32
-	}
+    @Nonnull
+    @Override
+    public Weight getWeight(@Nonnull ItemStack stack) {
+        return Weight.LIGHT; // Stacksize = 32
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		if (rockVariant == GRAVEL) {
-			if (fortune > 3)
-				fortune = 3;
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        if (rockVariant == GRAVEL) {
+            if (fortune > 3)
+                fortune = 3;
 
-			if (rand.nextInt(10 - fortune * 3) == 0)
-				return Items.FLINT;
-		}
-		return super.getItemDropped(state, rand, fortune);
-	}
+            if (rand.nextInt(10 - fortune * 3) == 0)
+                return Items.FLINT;
+        }
+        return super.getItemDropped(state, rand, fortune);
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void onModelRegister() {
-		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-			@Nonnull
-			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation, "rocktype=" + rock.getName());
-			}
-		});
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(modelLocation, "rocktype=" + rock.getName());
+            }
+        });
 
-		ModelLoader.setCustomModelResourceLocation(
-			Item.getItemFromBlock(this),
-			this.getMetaFromState(this.getBlockState().getBaseState()),
-			new ModelResourceLocation(modelLocation, "rocktype=" + rock.getName()));
-	}
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this),
+                this.getMetaFromState(this.getBlockState().getBaseState()),
+                new ModelResourceLocation(modelLocation, "rocktype=" + rock.getName()));
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-		if (this.rockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
-			double d0 = (float) pos.getX() + rand.nextFloat();
-			double d1 = (double) pos.getY() - 0.05D;
-			double d2 = (float) pos.getZ() + rand.nextFloat();
-			world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
-		}
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+        if (this.rockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+            double d0 = (float) pos.getX() + rand.nextFloat();
+            double d1 = (double) pos.getY() - 0.05D;
+            double d2 = (float) pos.getZ() + rand.nextFloat();
+            world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
+        }
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
-	}
+        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
+    }
 }

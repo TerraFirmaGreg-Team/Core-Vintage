@@ -1,16 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "XXX",
     "XXX"
   ],
-  "key": {
-    "X": {
-      "item": "tfc:wood/lumber/acacia"
+  "key" : {
+    "X" : {
+      "item" : "tfc:wood/lumber/acacia"
     }
   },
-  "result": {
-    "item": "tfc:wood/trapdoor/acacia",
-    "count": 3
+  "result" : {
+    "item" : "tfc:wood/trapdoor/acacia",
+    "count" : 3
   }
 }

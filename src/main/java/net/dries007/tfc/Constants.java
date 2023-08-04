@@ -13,13 +13,13 @@ import net.minecraft.util.ResourceLocation;
 import java.util.Random;
 
 public final class Constants {
-	public static final Gson GSON = new GsonBuilder().disableHtmlEscaping()
-		.registerTypeAdapter(ResourceLocation.class, new ResourceLocationJson())
-		.registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
-		.registerTypeAdapter(DamageResistance.class, new DamageResistanceJson())
-		.registerTypeAdapter(AnimalFood.class, new AnimalFoodJson())
-		.create();
+    public static final Gson GSON = new GsonBuilder().disableHtmlEscaping()
+            .registerTypeAdapter(ResourceLocation.class, new ResourceLocationJson())
+            .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
+            .registerTypeAdapter(DamageResistance.class, new DamageResistanceJson())
+            .registerTypeAdapter(AnimalFood.class, new AnimalFoodJson())
+            .create();
 
 
-	public static final Random RNG = new Random();
+    public static final Random RNG = new Random();
 }

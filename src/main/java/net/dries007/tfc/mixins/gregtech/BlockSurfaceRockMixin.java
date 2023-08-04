@@ -16,20 +16,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = BlockSurfaceRock.class, remap = false)
 public abstract class BlockSurfaceRockMixin extends BlockMaterialBase {
 
-	public BlockSurfaceRockMixin(Material material) {
-		super(material);
-	}
+    public BlockSurfaceRockMixin(Material material) {
+        super(material);
+    }
 
-	@Inject(method = "getDropStack", at = @At(value = "HEAD"), remap = false, cancellable = true)
-	private void onGetDropStack(IBlockState state, int amount, CallbackInfoReturnable<ItemStack> cir) {
-		var itemStack = OreDictUnifier.get(OrePrefix.nugget, getGtMaterial(state), amount);
-		var fallbackItemStack = OreDictUnifier.get(OrePrefix.dustTiny, getGtMaterial(state), amount);
+    @Inject(method = "getDropStack", at = @At(value = "HEAD"), remap = false, cancellable = true)
+    private void onGetDropStack(IBlockState state, int amount, CallbackInfoReturnable<ItemStack> cir) {
+        var itemStack = OreDictUnifier.get(OrePrefix.nugget, getGtMaterial(state), amount);
+        var fallbackItemStack = OreDictUnifier.get(OrePrefix.dustTiny, getGtMaterial(state), amount);
 
-		if (itemStack.getItem() == Items.AIR) {
-			cir.setReturnValue(fallbackItemStack);
-			return;
-		}
+        if (itemStack.getItem() == Items.AIR) {
+            cir.setReturnValue(fallbackItemStack);
+            return;
+        }
 
-		cir.setReturnValue(itemStack);
-	}
+        cir.setReturnValue(itemStack);
+    }
 }

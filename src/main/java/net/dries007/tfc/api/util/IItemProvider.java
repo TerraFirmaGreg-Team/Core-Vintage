@@ -5,6 +5,6 @@ import net.minecraft.item.ItemBlock;
 import javax.annotation.Nullable;
 
 public interface IItemProvider {
-	@Nullable
-	ItemBlock getItemBlock();
+    @Nullable
+    ItemBlock getItemBlock();
 }

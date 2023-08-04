@@ -14,19 +14,19 @@ import java.util.stream.Collectors;
 
 //This extends from the non-simple fluid handler, and FluidWhitelistHandler isn't labeled simple, so added -Complex here
 public class FluidWhitelistHandlerComplex extends FluidHandlerItemStack {
-	private final Set<Fluid> whitelist;
+    private final Set<Fluid> whitelist;
 
-	public FluidWhitelistHandlerComplex(@Nonnull ItemStack container, int capacity, String[] fluidNames) {
-		this(container, capacity, Arrays.stream(fluidNames).map(FluidRegistry::getFluid).filter(Objects::nonNull).collect(Collectors.toSet()));
-	}
+    public FluidWhitelistHandlerComplex(@Nonnull ItemStack container, int capacity, String[] fluidNames) {
+        this(container, capacity, Arrays.stream(fluidNames).map(FluidRegistry::getFluid).filter(Objects::nonNull).collect(Collectors.toSet()));
+    }
 
-	public FluidWhitelistHandlerComplex(@Nonnull ItemStack container, int capacity, Set<Fluid> whitelist) {
-		super(container, capacity);
-		this.whitelist = whitelist;
-	}
+    public FluidWhitelistHandlerComplex(@Nonnull ItemStack container, int capacity, Set<Fluid> whitelist) {
+        super(container, capacity);
+        this.whitelist = whitelist;
+    }
 
-	@Override
-	public boolean canFillFluidType(FluidStack fluid) {
-		return whitelist.contains(fluid.getFluid());
-	}
+    @Override
+    public boolean canFillFluidType(FluidStack fluid) {
+        return whitelist.contains(fluid.getFluid());
+    }
 }

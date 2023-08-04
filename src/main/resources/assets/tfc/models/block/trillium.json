@@ -1,136 +1,136 @@
 {
-  "credit": "Made with Blockbench",
-  "textures": {
-    "2": "tfc:blocks/plants/trillium/trillium_flower_back",
-    "cross": "tfc:blocks/plants/trillium/trillium",
-    "top": "tfc:blocks/plants/trillium/trillium_flower",
-    "particle": "tfc:blocks/plants/trillium/trillium_flower_back"
+  "credit" : "Made with Blockbench",
+  "textures" : {
+    "2" : "tfc:blocks/plants/trillium/trillium_flower_back",
+    "cross" : "tfc:blocks/plants/trillium/trillium",
+    "top" : "tfc:blocks/plants/trillium/trillium_flower",
+    "particle" : "tfc:blocks/plants/trillium/trillium_flower_back"
   },
-  "elements": [
+  "elements" : [
     {
-      "name": "cross",
-      "from": [
+      "name" : "cross",
+      "from" : [
         0,
         0,
         8
       ],
-      "to": [
+      "to" : [
         16,
         16,
         8
       ],
-      "rotation": {
-        "angle": 45,
-        "axis": "y",
-        "origin": [
+      "rotation" : {
+        "angle" : 45,
+        "axis" : "y",
+        "origin" : [
           8,
           8,
           8
         ]
       },
-      "faces": {
-        "north": {
-          "uv": [
+      "faces" : {
+        "north" : {
+          "uv" : [
             16,
             0,
             0,
             16
           ],
-          "texture": "#cross"
+          "texture" : "#cross"
         },
-        "south": {
-          "uv": [
+        "south" : {
+          "uv" : [
             16,
             0,
             0,
             16
           ],
-          "texture": "#cross"
+          "texture" : "#cross"
         }
       }
     },
     {
-      "name": "cross",
-      "from": [
+      "name" : "cross",
+      "from" : [
         0,
         0,
         8
       ],
-      "to": [
+      "to" : [
         16,
         16,
         8
       ],
-      "rotation": {
-        "angle": -45,
-        "axis": "y",
-        "origin": [
+      "rotation" : {
+        "angle" : -45,
+        "axis" : "y",
+        "origin" : [
           8,
           8,
           8
         ]
       },
-      "faces": {
-        "north": {
-          "uv": [
+      "faces" : {
+        "north" : {
+          "uv" : [
             0,
             0,
             16,
             16
           ],
-          "texture": "#cross"
+          "texture" : "#cross"
         },
-        "south": {
-          "uv": [
+        "south" : {
+          "uv" : [
             0,
             0,
             16,
             16
           ],
-          "texture": "#cross"
+          "texture" : "#cross"
         }
       }
     },
     {
-      "name": "top",
-      "from": [
+      "name" : "top",
+      "from" : [
         0,
         4,
         8
       ],
-      "to": [
+      "to" : [
         16,
         20,
         8
       ],
-      "rotation": {
-        "angle": -22.5,
-        "axis": "x",
-        "origin": [
+      "rotation" : {
+        "angle" : -22.5,
+        "axis" : "x",
+        "origin" : [
           8,
           12,
           8
         ]
       },
-      "faces": {
-        "north": {
-          "uv": [
+      "faces" : {
+        "north" : {
+          "uv" : [
             0,
             0,
             16,
             16
           ],
-          "rotation": 180,
-          "texture": "#2"
+          "rotation" : 180,
+          "texture" : "#2"
         },
-        "south": {
-          "uv": [
+        "south" : {
+          "uv" : [
             0,
             0,
             16,
             16
           ],
-          "texture": "#top"
+          "texture" : "#top"
         }
       }
     }

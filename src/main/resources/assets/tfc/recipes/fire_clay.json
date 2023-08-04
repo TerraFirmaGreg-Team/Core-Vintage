@@ -1,25 +1,25 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "XYX",
     "YZY",
     "XYX"
   ],
-  "key": {
-    "X": {
-      "type": "forge:ore_dict",
-      "ore": "dustKaolinite"
+  "key" : {
+    "X" : {
+      "type" : "forge:ore_dict",
+      "ore" : "dustKaolinite"
     },
-    "Y": {
-      "type": "forge:ore_dict",
-      "ore": "dustGraphite"
+    "Y" : {
+      "type" : "forge:ore_dict",
+      "ore" : "dustGraphite"
     },
-    "Z": {
-      "item": "minecraft:clay_ball"
+    "Z" : {
+      "item" : "minecraft:clay_ball"
     }
   },
-  "result": {
-    "item": "tfc:ceramics/fire_clay",
-    "count": 1
+  "result" : {
+    "item" : "tfc:ceramics/fire_clay",
+    "count" : 1
   }
 }

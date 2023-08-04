@@ -27,63 +27,63 @@ import net.minecraftforge.items.IItemHandler;
 import java.util.List;
 
 public class BloomeryProvider implements IProbeInfoProvider {
-	@Override
-	public String getID() {
-		return TerraFirmaCraft.MOD_ID + ":bloomery";
-	}
+    @Override
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":bloomery";
+    }
 
-	@Override
-	public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
 
-		var blockPos = iProbeHitData.getPos();
+        var blockPos = iProbeHitData.getPos();
 
-		IBlockState state = world.getBlockState(blockPos);
-		TileEntity tileEntity = world.getTileEntity(blockPos);
-		if (tileEntity instanceof TEBloomery bloomery) {
-			if (state.getValue(ILightableBlock.LIT)) {
-				List<ItemStack> oreStacks = bloomery.getOreStacks();
-				BloomeryRecipe recipe = oreStacks.size() > 0 ? BloomeryRecipe.get(oreStacks.get(0)) : null;
-				long remainingTicks = bloomery.getRemainingTicks();
-				switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
-					case NONE:
-						break;
-					case TICKS:
-						iProbeInfo.text(new TextComponentTranslation("waila.tfc.devices.ticks_remaining", remainingTicks).getFormattedText());
-						break;
-					case MINECRAFT_HOURS:
-						long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
-						iProbeInfo.text(new TextComponentTranslation("waila.tfc.devices.hours_remaining", remainingHours).getFormattedText());
-						break;
-					case REAL_MINUTES:
-						long remainingMinutes = Math.round(remainingTicks / 1200.0f);
-						iProbeInfo.text(new TextComponentTranslation("waila.tfc.devices.minutes_remaining", remainingMinutes).getFormattedText());
-						break;
-				}
-				if (recipe != null) {
-					ItemStack output = recipe.getOutput(oreStacks);
-					IForgeable cap = output.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-					if (cap instanceof IForgeableMeasurableMetal forgeCap) {
-						iProbeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.output", forgeCap.getMetalAmount(), forgeCap.getMaterial().getLocalizedName()).getFormattedText());
-					}
-				}
-			} else {
-				int ores = bloomery.getOreStacks().size();
-				int fuel = bloomery.getFuelStacks().size();
-				int max = BlockBloomery.getChimneyLevels(world, bloomery.getInternalBlock()) * 8;
-				iProbeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.ores", ores, max).getFormattedText());
-				iProbeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.fuel", fuel, max).getFormattedText());
-			}
-		} else if (tileEntity instanceof TEBloom bloom) {
-			IItemHandler cap = bloom.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-			if (cap != null) {
-				ItemStack bloomStack = cap.getStackInSlot(0);
-				IForgeable forgeCap = bloomStack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-				if (forgeCap instanceof IForgeableMeasurableMetal bloomCap) {
-					iProbeInfo.text(new TextComponentTranslation("waila.tfc.metal.output", bloomCap.getMetalAmount(), bloomCap.getMaterial().getLocalizedName()).getFormattedText());
-				}
-			}
-		}
-	}
+        IBlockState state = world.getBlockState(blockPos);
+        TileEntity tileEntity = world.getTileEntity(blockPos);
+        if (tileEntity instanceof TEBloomery bloomery) {
+            if (state.getValue(ILightableBlock.LIT)) {
+                List<ItemStack> oreStacks = bloomery.getOreStacks();
+                BloomeryRecipe recipe = oreStacks.size() > 0 ? BloomeryRecipe.get(oreStacks.get(0)) : null;
+                long remainingTicks = bloomery.getRemainingTicks();
+                switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
+                    case NONE:
+                        break;
+                    case TICKS:
+                        iProbeInfo.text(new TextComponentTranslation("waila.tfc.devices.ticks_remaining", remainingTicks).getFormattedText());
+                        break;
+                    case MINECRAFT_HOURS:
+                        long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
+                        iProbeInfo.text(new TextComponentTranslation("waila.tfc.devices.hours_remaining", remainingHours).getFormattedText());
+                        break;
+                    case REAL_MINUTES:
+                        long remainingMinutes = Math.round(remainingTicks / 1200.0f);
+                        iProbeInfo.text(new TextComponentTranslation("waila.tfc.devices.minutes_remaining", remainingMinutes).getFormattedText());
+                        break;
+                }
+                if (recipe != null) {
+                    ItemStack output = recipe.getOutput(oreStacks);
+                    IForgeable cap = output.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+                    if (cap instanceof IForgeableMeasurableMetal forgeCap) {
+                        iProbeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.output", forgeCap.getMetalAmount(), forgeCap.getMaterial().getLocalizedName()).getFormattedText());
+                    }
+                }
+            } else {
+                int ores = bloomery.getOreStacks().size();
+                int fuel = bloomery.getFuelStacks().size();
+                int max = BlockBloomery.getChimneyLevels(world, bloomery.getInternalBlock()) * 8;
+                iProbeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.ores", ores, max).getFormattedText());
+                iProbeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.fuel", fuel, max).getFormattedText());
+            }
+        } else if (tileEntity instanceof TEBloom bloom) {
+            IItemHandler cap = bloom.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            if (cap != null) {
+                ItemStack bloomStack = cap.getStackInSlot(0);
+                IForgeable forgeCap = bloomStack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+                if (forgeCap instanceof IForgeableMeasurableMetal bloomCap) {
+                    iProbeInfo.text(new TextComponentTranslation("waila.tfc.metal.output", bloomCap.getMetalAmount(), bloomCap.getMaterial().getLocalizedName()).getFormattedText());
+                }
+            }
+        }
+    }
 
 
 }

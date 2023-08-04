@@ -1,13 +1,13 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "cube_all",
-    "textures": {
-      "all": "tfc:blocks/sea_ice"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "cube_all",
+    "textures" : {
+      "all" : "tfc:blocks/sea_ice"
     }
   },
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {}
     ]
   }

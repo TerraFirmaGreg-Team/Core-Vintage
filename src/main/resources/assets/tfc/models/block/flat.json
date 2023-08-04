@@ -1,25 +1,25 @@
 {
-  "elements": [
+  "elements" : [
     {
-      "from": [
+      "from" : [
         1,
         0,
         1
       ],
-      "to": [
+      "to" : [
         15,
         0.1,
         15
       ],
-      "faces": {
-        "up": {
-          "uv": [
+      "faces" : {
+        "up" : {
+          "uv" : [
             1,
             1,
             15,
             15
           ],
-          "texture": "#texture"
+          "texture" : "#texture"
         }
       }
     }

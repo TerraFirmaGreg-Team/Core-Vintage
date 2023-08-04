@@ -1,80 +1,80 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:empty",
-    "textures": {
-      "all": "tfc:blocks/metal/wrought_iron",
-      "particle": "tfc:blocks/metal/wrought_iron"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:empty",
+    "textures" : {
+      "all" : "tfc:blocks/metal/wrought_iron",
+      "particle" : "tfc:blocks/metal/wrought_iron"
     }
   },
-  "variants": {
-    "north": {
-      "true": {
-        "submodel": {
-          "north": {
-            "model": "tfc:sheet",
-            "x": 90
+  "variants" : {
+    "north" : {
+      "true" : {
+        "submodel" : {
+          "north" : {
+            "model" : "tfc:sheet",
+            "x" : 90
           }
         }
       },
-      "false": {}
+      "false" : {}
     },
-    "south": {
-      "true": {
-        "submodel": {
-          "south": {
-            "model": "tfc:sheet",
-            "y": 180,
-            "x": 90
+    "south" : {
+      "true" : {
+        "submodel" : {
+          "south" : {
+            "model" : "tfc:sheet",
+            "y" : 180,
+            "x" : 90
           }
         }
       },
-      "false": {}
+      "false" : {}
     },
-    "east": {
-      "true": {
-        "submodel": {
-          "east": {
-            "model": "tfc:sheet",
-            "y": 90,
-            "x": 90
+    "east" : {
+      "true" : {
+        "submodel" : {
+          "east" : {
+            "model" : "tfc:sheet",
+            "y" : 90,
+            "x" : 90
           }
         }
       },
-      "false": {}
+      "false" : {}
     },
-    "west": {
-      "true": {
-        "submodel": {
-          "west": {
-            "model": "tfc:sheet",
-            "y": 270,
-            "x": 90
+    "west" : {
+      "true" : {
+        "submodel" : {
+          "west" : {
+            "model" : "tfc:sheet",
+            "y" : 270,
+            "x" : 90
           }
         }
       },
-      "false": {}
+      "false" : {}
     },
-    "up": {
-      "true": {
-        "submodel": {
-          "up": {
-            "model": "tfc:sheet"
+    "up" : {
+      "true" : {
+        "submodel" : {
+          "up" : {
+            "model" : "tfc:sheet"
           }
         }
       },
-      "false": {}
+      "false" : {}
     },
-    "down": {
-      "true": {
-        "submodel": {
-          "down": {
-            "model": "tfc:sheet",
-            "x": 180
+    "down" : {
+      "true" : {
+        "submodel" : {
+          "down" : {
+            "model" : "tfc:sheet",
+            "x" : 180
           }
         }
       },
-      "false": {}
+      "false" : {}
     }
   }
 }

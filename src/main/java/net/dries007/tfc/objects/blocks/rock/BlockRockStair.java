@@ -35,46 +35,46 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.rock.RockType.ORDINARY;
 
 public class BlockRockStair extends BlockStairs implements IRockBlock {
-	private final RockVariant rockVariant;
-	private final Rock rock;
-	private final ResourceLocation modelLocation;
+    private final RockVariant rockVariant;
+    private final Rock rock;
+    private final ResourceLocation modelLocation;
 
-	public BlockRockStair(RockType rockType, RockVariant rockVariant, Rock rock) {
-		super(TFCStorage.getRockBlock(ORDINARY, rockVariant, rock).getDefaultState());
+    public BlockRockStair(RockType rockType, RockVariant rockVariant, Rock rock) {
+        super(TFCStorage.getRockBlock(ORDINARY, rockVariant, rock).getDefaultState());
 
-		this.rockVariant = rockVariant;
-		this.rock = rock;
-		this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockType + "/" + rockVariant);
+        this.rockVariant = rockVariant;
+        this.rock = rock;
+        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockType + "/" + rockVariant);
 
-		String blockRegistryName = String.format("rock/%s/%s/%s", rockType, rockVariant, rock);
-		setRegistryName(MOD_ID, blockRegistryName);
-		setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-		setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
-		setSoundType(SoundType.STONE);
-		setHardness(getFinalHardness());
-		setHarvestLevel("pickaxe", 0);
-		useNeighborBrightness = true;
+        String blockRegistryName = String.format("rock/%s/%s/%s", rockType, rockVariant, rock);
+        setRegistryName(MOD_ID, blockRegistryName);
+        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        setSoundType(SoundType.STONE);
+        setHardness(getFinalHardness());
+        setHarvestLevel("pickaxe", 0);
+        useNeighborBrightness = true;
 
-		OreDictionaryHelper.register(this, "stair", "stair_" + rock);
-		//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
-	}
+        OreDictionaryHelper.register(this, "stair", "stair_" + rock);
+        //OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
+    }
 
-	@Nonnull
-	@Override
-	public RockVariant getRockVariant() {
-		return rockVariant;
-	}
+    @Nonnull
+    @Override
+    public RockVariant getRockVariant() {
+        return rockVariant;
+    }
 
-	@Nonnull
-	@Override
-	public Rock getRock() {
-		return rock;
-	}
+    @Nonnull
+    @Override
+    public Rock getRock() {
+        return rock;
+    }
 
-	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlockTFC(this);
-	}
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
+    }
 
 //	@Override
 //	public boolean removedByPlayer(@Nonnull IBlockState state, World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player, boolean willHarvest) {
@@ -117,41 +117,41 @@ public class BlockRockStair extends BlockStairs implements IRockBlock {
 //		return super.removedByPlayer(state, world, pos, player, willHarvest);
 //	}
 
-	@Override
-	public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
-	}
+    @Override
+    public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onModelRegister() {
-		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-			@Nonnull
-			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation,
-					"facing=" + state.getValue(FACING) + "," +
-						"half=" + state.getValue(HALF) + "," +
-						"rocktype=" + rock.getName() + "," +
-						"shape=" + state.getValue(SHAPE));
-			}
-		});
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(modelLocation,
+                        "facing=" + state.getValue(FACING) + "," +
+                                "half=" + state.getValue(HALF) + "," +
+                                "rocktype=" + rock.getName() + "," +
+                                "shape=" + state.getValue(SHAPE));
+            }
+        });
 
-		for (IBlockState state : this.getBlockState().getValidStates()) {
-			ModelLoader.setCustomModelResourceLocation(
-				Item.getItemFromBlock(this),
-				this.getMetaFromState(state),
-				new ModelResourceLocation(modelLocation,
-					"facing=east," +
-						"half=bottom," +
-						"rocktype=" + rock.getName() + "," +
-						"shape=straight"));
-		}
-	}
+        for (IBlockState state : this.getBlockState().getValidStates()) {
+            ModelLoader.setCustomModelResourceLocation(
+                    Item.getItemFromBlock(this),
+                    this.getMetaFromState(state),
+                    new ModelResourceLocation(modelLocation,
+                            "facing=east," +
+                                    "half=bottom," +
+                                    "rocktype=" + rock.getName() + "," +
+                                    "shape=straight"));
+        }
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
-	}
+        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
+    }
 }

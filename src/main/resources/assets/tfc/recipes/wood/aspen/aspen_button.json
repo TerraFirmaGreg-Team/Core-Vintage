@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
+  "type" : "minecraft:crafting_shapeless",
+  "ingredients" : [
     {
-      "item": "tfc:wood/planks/aspen"
+      "item" : "tfc:wood/planks/aspen"
     }
   ],
-  "result": {
-    "item": "tfc:wood/button/aspen",
-    "count": 1
+  "result" : {
+    "item" : "tfc:wood/button/aspen",
+    "count" : 1
   }
 }

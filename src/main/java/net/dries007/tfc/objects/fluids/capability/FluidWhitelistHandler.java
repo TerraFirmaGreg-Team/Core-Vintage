@@ -13,27 +13,27 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FluidWhitelistHandler extends FluidHandlerItemStackSimple {
-	private final Set<Fluid> whitelist;
+    private final Set<Fluid> whitelist;
 
-	public FluidWhitelistHandler(@Nonnull ItemStack container, int capacity, String[] fluidNames) {
-		this(container, capacity, Arrays.stream(fluidNames).map(FluidRegistry::getFluid).filter(Objects::nonNull).collect(Collectors.toSet()));
-	}
+    public FluidWhitelistHandler(@Nonnull ItemStack container, int capacity, String[] fluidNames) {
+        this(container, capacity, Arrays.stream(fluidNames).map(FluidRegistry::getFluid).filter(Objects::nonNull).collect(Collectors.toSet()));
+    }
 
-	public FluidWhitelistHandler(@Nonnull ItemStack container, int capacity, Set<Fluid> whitelist) {
-		super(container, capacity);
-		this.whitelist = whitelist;
-	}
+    public FluidWhitelistHandler(@Nonnull ItemStack container, int capacity, Set<Fluid> whitelist) {
+        super(container, capacity);
+        this.whitelist = whitelist;
+    }
 
-	@Override
-	public boolean canFillFluidType(FluidStack fluid) {
-		return whitelist.contains(fluid.getFluid());
-	}
+    @Override
+    public boolean canFillFluidType(FluidStack fluid) {
+        return whitelist.contains(fluid.getFluid());
+    }
 
-	@Override
-	protected void setContainerToEmpty() {
-		super.setContainerToEmpty();
-		if (container.getTagCompound() != null && container.getTagCompound().isEmpty()) {
-			container.setTagCompound(null);
-		}
-	}
+    @Override
+    protected void setContainerToEmpty() {
+        super.setContainerToEmpty();
+        if (container.getTagCompound() != null && container.getTagCompound().isEmpty()) {
+            container.setTagCompound(null);
+        }
+    }
 }

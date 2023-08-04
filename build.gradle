@@ -93,11 +93,11 @@ spotless {
                 cleanthat().sourceCompatibility('1.8')
             }
         }
-//        json {
-//            target 'src/main/resources/**/*.json', 'src/test/resources/**/*.json'
-//
-//            simple().indentWithSpaces(6)
-//        }
+        json {
+            target 'src/main/resources/**/*.json', 'src/test/resources/**/*.json'
+
+            simple().indentWithSpaces(6)
+        }
     }
 }
 

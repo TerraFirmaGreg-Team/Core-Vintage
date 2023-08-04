@@ -17,31 +17,31 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class ItemDoorTFC extends ItemDoor implements IItemSize {
 
-	public final Wood wood;
+    public final Wood wood;
 
-	public ItemDoorTFC(BlockWoodDoor blockWoodDoor) {
-		super(blockWoodDoor);
+    public ItemDoorTFC(BlockWoodDoor blockWoodDoor) {
+        super(blockWoodDoor);
 
-		wood = blockWoodDoor.getWood();
-		OreDictionaryHelper.register(this, "door", "wood");
-		//noinspection ConstantConditions
-		OreDictionaryHelper.register(this, "door", "wood", wood.getName());
-	}
+        wood = blockWoodDoor.getWood();
+        OreDictionaryHelper.register(this, "door", "wood");
+        //noinspection ConstantConditions
+        OreDictionaryHelper.register(this, "door", "wood", wood.getName());
+    }
 
-	@Nonnull
-	@Override
-	public Size getSize(ItemStack stack) {
-		return Size.VERY_LARGE; // Can't be stored
-	}
+    @Nonnull
+    @Override
+    public Size getSize(ItemStack stack) {
+        return Size.VERY_LARGE; // Can't be stored
+    }
 
-	@Nonnull
-	@Override
-	public Weight getWeight(ItemStack stack) {
-		return Weight.HEAVY; // Stacksize = 4
-	}
+    @Nonnull
+    @Override
+    public Weight getWeight(ItemStack stack) {
+        return Weight.HEAVY; // Stacksize = 4
+    }
 
-	@Override
-	public int getItemStackLimit(ItemStack stack) {
-		return getStackSize(stack);
-	}
+    @Override
+    public int getItemStackLimit(ItemStack stack) {
+        return getStackSize(stack);
+    }
 }

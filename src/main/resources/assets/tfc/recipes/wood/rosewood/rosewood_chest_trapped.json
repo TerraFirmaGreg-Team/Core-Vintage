@@ -1,15 +1,15 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
+  "type" : "minecraft:crafting_shapeless",
+  "ingredients" : [
     {
-      "item": "tfc:wood/chest/rosewood"
+      "item" : "tfc:wood/chest/rosewood"
     },
     {
-      "item": "minecraft:tripwire_hook"
+      "item" : "minecraft:tripwire_hook"
     }
   ],
-  "result": {
-    "item": "tfc:wood/chest_trap/rosewood",
-    "count": 1
+  "result" : {
+    "item" : "tfc:wood/chest_trap/rosewood",
+    "count" : 1
   }
 }

@@ -12,20 +12,20 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class CommandGenTree extends CommandBase {
-	private static final Random random = new Random();
+    private static final Random random = new Random();
 
-	@Override
-	public String getName() {
-		return "maketree";
-	}
+    @Override
+    public String getName() {
+        return "maketree";
+    }
 
-	@Override
-	public String getUsage(ICommandSender sender) {
-		return "tfc.command.gentree.useage";
-	}
+    @Override
+    public String getUsage(ICommandSender sender) {
+        return "tfc.command.gentree.useage";
+    }
 
-	@Override
-	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    @Override
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 //				if (args.length != 1) throw new WrongUsageException("tfc.command.gentree.failed");
 //
 //				Tree tree = TFCRegistries.TREES.getValue(new ResourceLocation(args[0]));
@@ -41,10 +41,10 @@ public class CommandGenTree extends CommandBase {
 //				if (!tree.makeTree(manager, world, center, random, false)) {
 //						sender.sendMessage(new TextComponentTranslation("tfc.command.gentree.failed.grow"));
 //				}
-	}
+    }
 
-	@Override
-	public int getRequiredPermissionLevel() {
-		return 2;
-	}
+    @Override
+    public int getRequiredPermissionLevel() {
+        return 2;
+    }
 }

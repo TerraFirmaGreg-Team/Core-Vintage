@@ -1,13 +1,13 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "cube_all",
-    "textures": {
-      "all": "tfc:blocks/fire_bricks"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "cube_all",
+    "textures" : {
+      "all" : "tfc:blocks/fire_bricks"
     }
   },
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {}
     ]
   }

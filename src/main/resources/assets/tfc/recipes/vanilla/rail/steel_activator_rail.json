@@ -1,25 +1,25 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "SRS",
     "SWS",
     "SRS"
   ],
-  "key": {
-    "S": {
-      "type": "forge:ore_dict",
-      "ore": "rodSteel"
+  "key" : {
+    "S" : {
+      "type" : "forge:ore_dict",
+      "ore" : "rodSteel"
     },
-    "W": {
-      "item": "minecraft:redstone_torch"
+    "W" : {
+      "item" : "minecraft:redstone_torch"
     },
-    "R": {
-      "type": "forge:ore_dict",
-      "ore": "stickWood"
+    "R" : {
+      "type" : "forge:ore_dict",
+      "ore" : "stickWood"
     }
   },
-  "result": {
-    "item": "minecraft:activator_rail",
-    "count": 4
+  "result" : {
+    "item" : "minecraft:activator_rail",
+    "count" : 4
   }
 }

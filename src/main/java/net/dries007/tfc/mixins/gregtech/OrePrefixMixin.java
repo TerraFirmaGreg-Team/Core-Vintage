@@ -9,64 +9,64 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin(value = OrePrefix.class, remap = false)
 public class OrePrefixMixin implements IOrePrefixExtension {
 
-	@Unique
-	private boolean isHasMold;
-	@Unique
-	private boolean shouldHasMetalCapability;
-	@Unique
-	private int metalAmount;
-	@Unique
-	private String[] clayKnappingPattern;
-	@Unique
-	private String[] rockKnappingPattern;
+    @Unique
+    private boolean isHasMold;
+    @Unique
+    private boolean shouldHasMetalCapability;
+    @Unique
+    private int metalAmount;
+    @Unique
+    private String[] clayKnappingPattern;
+    @Unique
+    private String[] rockKnappingPattern;
 
-	@Override
-	public boolean getHasMold() {
-		return isHasMold;
-	}
+    @Override
+    public boolean getHasMold() {
+        return isHasMold;
+    }
 
-	@Override
-	public void setHasMold(boolean value) {
-		isHasMold = value;
-	}
+    @Override
+    public void setHasMold(boolean value) {
+        isHasMold = value;
+    }
 
-	@Override
-	public boolean getShouldHasMetalCapability() {
-		return shouldHasMetalCapability;
-	}
+    @Override
+    public boolean getShouldHasMetalCapability() {
+        return shouldHasMetalCapability;
+    }
 
-	@Override
-	public void setShouldHasMetalCapability(boolean value) {
-		shouldHasMetalCapability = value;
-	}
+    @Override
+    public void setShouldHasMetalCapability(boolean value) {
+        shouldHasMetalCapability = value;
+    }
 
-	@Override
-	public int getMetalAmount() {
-		return metalAmount;
-	}
+    @Override
+    public int getMetalAmount() {
+        return metalAmount;
+    }
 
-	@Override
-	public void setMetalAmount(int value) {
-		metalAmount = value;
-	}
+    @Override
+    public void setMetalAmount(int value) {
+        metalAmount = value;
+    }
 
-	@Override
-	public String[] getClayKnappingPattern() {
-		return clayKnappingPattern;
-	}
+    @Override
+    public String[] getClayKnappingPattern() {
+        return clayKnappingPattern;
+    }
 
-	@Override
-	public void setClayKnappingPattern(String... value) {
-		clayKnappingPattern = value;
-	}
+    @Override
+    public void setClayKnappingPattern(String... value) {
+        clayKnappingPattern = value;
+    }
 
-	@Override
-	public String[] getRockKnappingPattern() {
-		return rockKnappingPattern;
-	}
+    @Override
+    public String[] getRockKnappingPattern() {
+        return rockKnappingPattern;
+    }
 
-	@Override
-	public void setRockKnappingPattern(String... value) {
-		rockKnappingPattern = value;
-	}
+    @Override
+    public void setRockKnappingPattern(String... value) {
+        rockKnappingPattern = value;
+    }
 }

@@ -1,16 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "XX",
     "XX"
   ],
-  "key": {
-    "X": {
-      "item": "tfc:wood/lumber/maple"
+  "key" : {
+    "X" : {
+      "item" : "tfc:wood/lumber/maple"
     }
   },
-  "result": {
-    "item": "tfc:wood/planks/maple",
-    "count": 1
+  "result" : {
+    "item" : "tfc:wood/planks/maple",
+    "count" : 1
   }
 }

@@ -1,24 +1,24 @@
 {
-  "pools": [
+  "pools" : [
     {
-      "name": "roll1",
-      "rolls": 1,
-      "entries": [
+      "name" : "roll1",
+      "rolls" : 1,
+      "entries" : [
         {
-          "type": "item",
-          "weight": 1,
-          "name": "tfc:hide/raw/small",
-          "functions": [
+          "type" : "item",
+          "weight" : 1,
+          "name" : "tfc:hide/raw/small",
+          "functions" : [
             {
-              "function": "set_count",
-              "add": 0.03,
-              "count": 1
+              "function" : "set_count",
+              "add" : 0.03,
+              "count" : 1
             },
             {
-              "function": "looting_enchant",
-              "count": {
-                "min": 0,
-                "max": 1
+              "function" : "looting_enchant",
+              "count" : {
+                "min" : 0,
+                "max" : 1
               }
             }
           ]
@@ -26,26 +26,26 @@
       ]
     },
     {
-      "name": "roll2",
-      "rolls": 1,
-      "entries": [
+      "name" : "roll2",
+      "rolls" : 1,
+      "entries" : [
         {
-          "type": "item",
-          "weight": 1,
-          "name": "minecraft:bone",
-          "functions": [
+          "type" : "item",
+          "weight" : 1,
+          "name" : "minecraft:bone",
+          "functions" : [
             {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 1
+              "function" : "set_count",
+              "count" : {
+                "min" : 0,
+                "max" : 1
               }
             },
             {
-              "function": "looting_enchant",
-              "count": {
-                "min": 0,
-                "max": 1
+              "function" : "looting_enchant",
+              "count" : {
+                "min" : 0,
+                "max" : 1
               }
             }
           ]

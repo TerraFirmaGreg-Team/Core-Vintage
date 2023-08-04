@@ -1,15 +1,15 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "XX"
   ],
-  "key": {
-    "X": {
-      "item": "tfc:wood/lumber/willow"
+  "key" : {
+    "X" : {
+      "item" : "tfc:wood/lumber/willow"
     }
   },
-  "result": {
-    "item": "tfc:wood/pressure_plate/willow",
-    "count": 1
+  "result" : {
+    "item" : "tfc:wood/pressure_plate/willow",
+    "count" : 1
   }
 }

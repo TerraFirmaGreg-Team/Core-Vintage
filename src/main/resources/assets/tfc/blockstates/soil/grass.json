@@ -1,66 +1,70 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:grass",
-    "textures": {
-      "particle": "tfc:blocks/soil/overlay/grass/top",
-      "top": "tfc:blocks/soil/overlay/grass/top",
-      "north": "tfc:blocks/soil/overlay/grass/side",
-      "south": "tfc:blocks/soil/overlay/grass/side",
-      "east": "tfc:blocks/soil/overlay/grass/side",
-      "west": "tfc:blocks/soil/overlay/grass/side"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:grass",
+    "textures" : {
+      "particle" : "tfc:blocks/soil/overlay/grass/top",
+      "top" : "tfc:blocks/soil/overlay/grass/top",
+      "north" : "tfc:blocks/soil/overlay/grass/side",
+      "south" : "tfc:blocks/soil/overlay/grass/side",
+      "east" : "tfc:blocks/soil/overlay/grass/side",
+      "west" : "tfc:blocks/soil/overlay/grass/side"
     }
   },
-  "variants": {
-    "north": {
-      "true": {
-        "textures": {
-          "north": "tfc:blocks/soil/overlay/grass/top"
+  "variants" : {
+    "north" : {
+      "true" : {
+        "textures" : {
+          "north" : "tfc:blocks/soil/overlay/grass/top"
         }
       },
-      "false": {}
+      "false" : {}
     },
-    "west": {
-      "true": {
-        "textures": {
-          "west": "tfc:blocks/soil/overlay/grass/top"
+    "west" : {
+      "true" : {
+        "textures" : {
+          "west" : "tfc:blocks/soil/overlay/grass/top"
         }
       },
-      "false": {}
+      "false" : {}
     },
-    "east": {
-      "true": {
-        "textures": {
-          "east": "tfc:blocks/soil/overlay/grass/top"
+    "east" : {
+      "true" : {
+        "textures" : {
+          "east" : "tfc:blocks/soil/overlay/grass/top"
         }
       },
-      "false": {}
+      "false" : {}
     },
-    "south": {
-      "true": {
-        "textures": {
-          "south": "tfc:blocks/soil/overlay/grass/top"
+    "south" : {
+      "true" : {
+        "textures" : {
+          "south" : "tfc:blocks/soil/overlay/grass/top"
         }
       },
-      "false": {}
+      "false" : {}
     },
-    "soiltype": {
-      "silt": {
-          "textures": {
-            "all": "tfc:blocks/soil/dirt/silt"
-      }}, 
-      "loam": {
-          "textures": {
-            "all": "tfc:blocks/soil/dirt/loam"
-      }}, 
-      "sandy_loam": {
-          "textures": {
-            "all": "tfc:blocks/soil/dirt/sandy_loam"
-      }}, 
-      "silty_loam": {
-          "textures": {
-            "all": "tfc:blocks/soil/dirt/silty_loam"
-      }}
+    "soiltype" : {
+      "silt" : {
+        "textures" : {
+          "all" : "tfc:blocks/soil/dirt/silt"
+        }
+      },
+      "loam" : {
+        "textures" : {
+          "all" : "tfc:blocks/soil/dirt/loam"
+        }
+      },
+      "sandy_loam" : {
+        "textures" : {
+          "all" : "tfc:blocks/soil/dirt/sandy_loam"
+        }
+      },
+      "silty_loam" : {
+        "textures" : {
+          "all" : "tfc:blocks/soil/dirt/silty_loam"
+        }
+      }
     }
   }
 }

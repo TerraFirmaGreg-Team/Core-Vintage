@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "XOX",
     "OXO",
     "XOX"
   ],
-  "key": {
-    "O": {
-      "type": "forge:ore_dict",
-      "ore": "mortar"
+  "key" : {
+    "O" : {
+      "type" : "forge:ore_dict",
+      "ore" : "mortar"
     },
-    "X": {
-      "item": "tfc:alabaster_brick"
+    "X" : {
+      "item" : "tfc:alabaster_brick"
     }
   },
-  "result": {
-    "item": "tfc:alabaster/bricks/plain",
-    "count": 4
+  "result" : {
+    "item" : "tfc:alabaster/bricks/plain",
+    "count" : 4
   }
 }

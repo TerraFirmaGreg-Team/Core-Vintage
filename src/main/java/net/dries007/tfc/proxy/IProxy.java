@@ -10,29 +10,29 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public interface IProxy {
-	@Nonnull
-	IThreadListener getThreadListener(MessageContext context);
+    @Nonnull
+    IThreadListener getThreadListener(MessageContext context);
 
-	@Nullable
-	EntityPlayer getPlayer(MessageContext context);
+    @Nullable
+    EntityPlayer getPlayer(MessageContext context);
 
-	@Nullable
-	World getWorld(MessageContext context);
+    @Nullable
+    World getWorld(MessageContext context);
 
-	// Calendar Translation / Localization Methods
+    // Calendar Translation / Localization Methods
 
-	@Nonnull
-	String getMonthName(Month month, boolean useSeasons);
+    @Nonnull
+    String getMonthName(Month month, boolean useSeasons);
 
-	@Nonnull
-	String getDayName(int dayOfMonth, long totalDays);
+    @Nonnull
+    String getDayName(int dayOfMonth, long totalDays);
 
-	@Nonnull
-	String getDate(int hour, int minute, String monthName, int day, long years);
+    @Nonnull
+    String getDate(int hour, int minute, String monthName, int day, long years);
 
-	class WrongSideException extends RuntimeException {
-		WrongSideException(String message) {
-			super(message);
-		}
-	}
+    class WrongSideException extends RuntimeException {
+        WrongSideException(String message) {
+            super(message);
+        }
+    }
 }

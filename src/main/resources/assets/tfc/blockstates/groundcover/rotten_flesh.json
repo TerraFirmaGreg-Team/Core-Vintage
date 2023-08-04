@@ -1,21 +1,20 @@
 {
-  "__comment__": "This file was automatically created by mcresources",
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {
-        "model": "tfc:groundcover/rotten_flesh",
-        "y": 90
+        "model" : "tfc:groundcover/rotten_flesh",
+        "y" : 90
       },
       {
-        "model": "tfc:groundcover/rotten_flesh"
+        "model" : "tfc:groundcover/rotten_flesh"
       },
       {
-        "model": "tfc:groundcover/rotten_flesh",
-        "y": 180
+        "model" : "tfc:groundcover/rotten_flesh",
+        "y" : 180
       },
       {
-        "model": "tfc:groundcover/rotten_flesh",
-        "y": 270
+        "model" : "tfc:groundcover/rotten_flesh",
+        "y" : 270
       }
     ]
   }

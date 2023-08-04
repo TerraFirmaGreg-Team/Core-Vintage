@@ -2,24 +2,24 @@ package net.dries007.tfc.compat.gregtech.oreprefix;
 
 public interface IOrePrefixExtension {
 
-	boolean getHasMold();
+    boolean getHasMold();
 
-	void setHasMold(boolean value);
+    void setHasMold(boolean value);
 
-	boolean getShouldHasMetalCapability();
+    boolean getShouldHasMetalCapability();
 
-	void setShouldHasMetalCapability(boolean value);
+    void setShouldHasMetalCapability(boolean value);
 
-	int getMetalAmount();
+    int getMetalAmount();
 
-	void setMetalAmount(int value);
+    void setMetalAmount(int value);
 
-	String[] getClayKnappingPattern();
+    String[] getClayKnappingPattern();
 
-	void setClayKnappingPattern(String... value);
+    void setClayKnappingPattern(String... value);
 
-	String[] getRockKnappingPattern();
+    String[] getRockKnappingPattern();
 
-	void setRockKnappingPattern(String... value);
+    void setRockKnappingPattern(String... value);
 
 }

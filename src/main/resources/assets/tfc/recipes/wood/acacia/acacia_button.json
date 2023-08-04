@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
+  "type" : "minecraft:crafting_shapeless",
+  "ingredients" : [
     {
-      "item": "tfc:wood/planks/acacia"
+      "item" : "tfc:wood/planks/acacia"
     }
   ],
-  "result": {
-    "item": "tfc:wood/button/acacia",
-    "count": 1
+  "result" : {
+    "item" : "tfc:wood/button/acacia",
+    "count" : 1
   }
 }

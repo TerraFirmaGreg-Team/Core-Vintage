@@ -1,16 +1,16 @@
 {
-  "type": "tfc:damage_item_shapeless",
-  "ingredients": [
+  "type" : "tfc:damage_item_shapeless",
+  "ingredients" : [
     {
-      "item": "tfc:wood/log/pine"
+      "item" : "tfc:wood/log/pine"
     },
     {
-      "type": "forge:ore_dict",
-      "ore": "saw"
+      "type" : "forge:ore_dict",
+      "ore" : "saw"
     }
   ],
-  "result": {
-    "item": "tfc:wood/lumber/pine",
-    "count": 8
+  "result" : {
+    "item" : "tfc:wood/lumber/pine",
+    "count" : 8
   }
 }

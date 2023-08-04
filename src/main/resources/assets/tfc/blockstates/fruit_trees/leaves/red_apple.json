@@ -1,38 +1,38 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "leaves",
-    "textures": {
-      "all": "tfc:blocks/fruit_trees/leaves/red_apple"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "leaves",
+    "textures" : {
+      "all" : "tfc:blocks/fruit_trees/leaves/red_apple"
     }
   },
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {}
     ],
-    "inventory": {
-      "model": "leaves",
-      "transform": "forge:default-block"
+    "inventory" : {
+      "model" : "leaves",
+      "transform" : "forge:default-block"
     },
-    "state": {
-      "normal": {
-        "model": "leaves"
+    "state" : {
+      "normal" : {
+        "model" : "leaves"
       },
-      "flowering": {
-        "model": "leaves",
-        "textures": {
-          "all": "tfc:blocks/fruit_trees/leaves/red_apple",
-          "texture": "tfc:blocks/fruit_trees/flowers/red_apple"
+      "flowering" : {
+        "model" : "leaves",
+        "textures" : {
+          "all" : "tfc:blocks/fruit_trees/leaves/red_apple",
+          "texture" : "tfc:blocks/fruit_trees/flowers/red_apple"
         },
-        "submodel": "tfc:fruit_trees/leaves_overlay"
+        "submodel" : "tfc:fruit_trees/leaves_overlay"
       },
-      "fruit": {
-        "model": "leaves",
-        "textures": {
-          "all": "tfc:blocks/fruit_trees/leaves/red_apple",
-          "texture": "tfc:blocks/fruit_trees/fruit/red_apple"
+      "fruit" : {
+        "model" : "leaves",
+        "textures" : {
+          "all" : "tfc:blocks/fruit_trees/leaves/red_apple",
+          "texture" : "tfc:blocks/fruit_trees/fruit/red_apple"
         },
-        "submodel": "tfc:fruit_trees/leaves_overlay"
+        "submodel" : "tfc:fruit_trees/leaves_overlay"
       }
     }
   }

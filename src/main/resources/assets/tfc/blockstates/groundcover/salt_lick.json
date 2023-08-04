@@ -1,21 +1,20 @@
 {
-  "__comment__": "This file was automatically created by mcresources",
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {
-        "model": "tfc:groundcover/salt_lick",
-        "y": 90
+        "model" : "tfc:groundcover/salt_lick",
+        "y" : 90
       },
       {
-        "model": "tfc:groundcover/salt_lick"
+        "model" : "tfc:groundcover/salt_lick"
       },
       {
-        "model": "tfc:groundcover/salt_lick",
-        "y": 180
+        "model" : "tfc:groundcover/salt_lick",
+        "y" : 180
       },
       {
-        "model": "tfc:groundcover/salt_lick",
-        "y": 270
+        "model" : "tfc:groundcover/salt_lick",
+        "y" : 270
       }
     ]
   }

@@ -1,13 +1,13 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "cube_all",
-    "textures": {
-      "all": "tfc:blocks/thatch"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "cube_all",
+    "textures" : {
+      "all" : "tfc:blocks/thatch"
     }
   },
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {}
     ]
   }

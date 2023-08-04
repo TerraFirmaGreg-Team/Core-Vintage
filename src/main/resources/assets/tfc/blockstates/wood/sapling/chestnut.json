@@ -1,17 +1,19 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "cross",
-    "textures": {
-      "cross": "tfc:blocks/wood/saplings/chestnut",
-      "layer0": "tfc:blocks/wood/saplings/chestnut"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "cross",
+    "textures" : {
+      "cross" : "tfc:blocks/wood/saplings/chestnut",
+      "layer0" : "tfc:blocks/wood/saplings/chestnut"
     }
   },
-  "variants": {
-    "normal": [{}],
-    "inventory": {
-      "model": "builtin/generated",
-      "transform": "forge:default-item"
+  "variants" : {
+    "normal" : [
+      {}
+    ],
+    "inventory" : {
+      "model" : "builtin/generated",
+      "transform" : "forge:default-item"
     }
   }
 }

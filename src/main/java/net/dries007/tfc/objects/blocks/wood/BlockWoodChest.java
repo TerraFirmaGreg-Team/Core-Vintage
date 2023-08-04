@@ -45,22 +45,22 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock {
-	private final WoodVariant woodVariant;
-	private final Wood wood;
-	private final ResourceLocation modelLocation;
+    private final WoodVariant woodVariant;
+    private final Wood wood;
+    private final ResourceLocation modelLocation;
 
-	public BlockWoodChest(WoodVariant woodVariant, Wood wood) {
-		super(Type.BASIC);
-		this.woodVariant = woodVariant;
-		this.wood = wood;
-		this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+    public BlockWoodChest(WoodVariant woodVariant, Wood wood) {
+        super(Type.BASIC);
+        this.woodVariant = woodVariant;
+        this.wood = wood;
+        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-		var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-		setRegistryName(MOD_ID, blockRegistryName);
-		setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-		setCreativeTab(CreativeTabsTFC.WOOD);
-		setHardness(2.5F);
-		setSoundType(SoundType.WOOD);
+        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+        setRegistryName(MOD_ID, blockRegistryName);
+        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setCreativeTab(CreativeTabsTFC.WOOD);
+        setHardness(2.5F);
+        setSoundType(SoundType.WOOD);
 //        if (type == TFCBASIC) {
 //            if (MAP_BASIC.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
 //            OreDictionaryHelper.register(this, "chest");
@@ -76,123 +76,123 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
 //        } else {
 //            throw new IllegalStateException("TFC Chest must use TFC chest type");
 //        }
-		Blocks.FIRE.setFireInfo(this, 5, 20);
-	}
+        Blocks.FIRE.setFireInfo(this, 5, 20);
+    }
 
-	@Override
-	public WoodVariant getWoodVariant() {
-		return woodVariant;
-	}
+    @Override
+    public WoodVariant getWoodVariant() {
+        return woodVariant;
+    }
 
-	@Override
-	public Wood getWood() {
-		return wood;
-	}
+    @Override
+    public Wood getWood() {
+        return wood;
+    }
 
-	@Nullable
-	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlockTFC(this);
-	}
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
+    }
 
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) {
-			TFCGuiHandler.openGui(worldIn, pos, playerIn, TFCGuiHandler.Type.CHEST);
-		}
-		return true;
-	}
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!worldIn.isRemote) {
+            TFCGuiHandler.openGui(worldIn, pos, playerIn, TFCGuiHandler.Type.CHEST);
+        }
+        return true;
+    }
 
-	/**
-	 * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff
-	 * Hoppers are hardcoded for vanilla chest insertions, which means we need to block them (to stop inserting items that aren't the correct size)
-	 */
-	@Nullable
-	public ILockableContainer getContainer(World worldIn, BlockPos pos, boolean allowBlocking) {
-		TileEntity tileentity = worldIn.getTileEntity(pos);
+    /**
+     * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff
+     * Hoppers are hardcoded for vanilla chest insertions, which means we need to block them (to stop inserting items that aren't the correct size)
+     */
+    @Nullable
+    public ILockableContainer getContainer(World worldIn, BlockPos pos, boolean allowBlocking) {
+        TileEntity tileentity = worldIn.getTileEntity(pos);
 
-		if (!(tileentity instanceof TileEntityChest)) {
-			return null;
-		} else {
-			ILockableContainer ilockablecontainer = (TileEntityChest) tileentity;
+        if (!(tileentity instanceof TileEntityChest)) {
+            return null;
+        } else {
+            ILockableContainer ilockablecontainer = (TileEntityChest) tileentity;
 
-			if (!allowBlocking && isBlocked(worldIn, pos)) {
-				return null;
-			} else {
-				for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-					BlockPos blockpos = pos.offset(enumfacing);
-					Block block = worldIn.getBlockState(blockpos).getBlock();
+            if (!allowBlocking && isBlocked(worldIn, pos)) {
+                return null;
+            } else {
+                for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
+                    BlockPos blockpos = pos.offset(enumfacing);
+                    Block block = worldIn.getBlockState(blockpos).getBlock();
 
-					if (block == this) {
-						if (!allowBlocking && isBlocked(worldIn, blockpos)) // Forge: fix MC-99321
-						{
-							return null;
-						}
+                    if (block == this) {
+                        if (!allowBlocking && isBlocked(worldIn, blockpos)) // Forge: fix MC-99321
+                        {
+                            return null;
+                        }
 
-						TileEntity tileentity1 = worldIn.getTileEntity(blockpos);
+                        TileEntity tileentity1 = worldIn.getTileEntity(blockpos);
 
-						if (tileentity1 instanceof TileEntityChest) {
-							if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
-								ilockablecontainer = new TFCInventoryLargeChest("container.chestDouble", ilockablecontainer, (TileEntityChest) tileentity1);
-							} else {
-								ilockablecontainer = new TFCInventoryLargeChest("container.chestDouble", (TileEntityChest) tileentity1, ilockablecontainer);
-							}
-						}
-					}
-				}
+                        if (tileentity1 instanceof TileEntityChest) {
+                            if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
+                                ilockablecontainer = new TFCInventoryLargeChest("container.chestDouble", ilockablecontainer, (TileEntityChest) tileentity1);
+                            } else {
+                                ilockablecontainer = new TFCInventoryLargeChest("container.chestDouble", (TileEntityChest) tileentity1, ilockablecontainer);
+                            }
+                        }
+                    }
+                }
 
-				return ilockablecontainer;
-			}
-		}
-	}
+                return ilockablecontainer;
+            }
+        }
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TEChestTFC();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TEChestTFC();
+    }
 
-	@Nonnull
-	@Override
-	public Size getSize(@Nonnull ItemStack stack) {
-		return Size.LARGE; // Can only be stored in itself (and since this can't be carried with items, makes sense
-	}
+    @Nonnull
+    @Override
+    public Size getSize(@Nonnull ItemStack stack) {
+        return Size.LARGE; // Can only be stored in itself (and since this can't be carried with items, makes sense
+    }
 
-	@Nonnull
-	@Override
-	public Weight getWeight(@Nonnull ItemStack stack) {
-		return Weight.LIGHT; // Stacksize = 32
-	}
+    @Nonnull
+    @Override
+    public Weight getWeight(@Nonnull ItemStack stack) {
+        return Weight.LIGHT; // Stacksize = 32
+    }
 
-	private boolean isBlocked(World worldIn, BlockPos pos) {
-		return this.isBelowSolidBlock(worldIn, pos) || this.isOcelotSittingOnChest(worldIn, pos);
-	}
+    private boolean isBlocked(World worldIn, BlockPos pos) {
+        return this.isBelowSolidBlock(worldIn, pos) || this.isOcelotSittingOnChest(worldIn, pos);
+    }
 
-	private boolean isBelowSolidBlock(World worldIn, BlockPos pos) {
-		return worldIn.getBlockState(pos.up()).doesSideBlockChestOpening(worldIn, pos.up(), EnumFacing.DOWN);
-	}
+    private boolean isBelowSolidBlock(World worldIn, BlockPos pos) {
+        return worldIn.getBlockState(pos.up()).doesSideBlockChestOpening(worldIn, pos.up(), EnumFacing.DOWN);
+    }
 
-	private boolean isOcelotSittingOnChest(World worldIn, BlockPos pos) {
-		for (Entity entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1))) {
-			EntityOcelot entityocelot = (EntityOcelot) entity;
+    private boolean isOcelotSittingOnChest(World worldIn, BlockPos pos) {
+        for (Entity entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1))) {
+            EntityOcelot entityocelot = (EntityOcelot) entity;
 
-			if (entityocelot.isSitting()) {
-				return true;
-			}
-		}
+            if (entityocelot.isSitting()) {
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onModelRegister() {
-		ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockChest.FACING).build());
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(modelLocation, "normal"));
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockChest.FACING).build());
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(modelLocation, "normal"));
 
 //				for (IBlockState state : this.getBlockState().getValidStates()) {
 //						ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
 //										this.getMetaFromState(state),
 //										new ModelResourceLocation(modelLocation, "normal"));
 //				}
-	}
+    }
 }

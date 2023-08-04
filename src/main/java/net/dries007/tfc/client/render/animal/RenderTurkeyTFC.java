@@ -18,30 +18,30 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderTurkeyTFC extends RenderLiving<EntityTurkeyTFC> {
-	private static final ResourceLocation MALE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/turkeym.png");
-	private static final ResourceLocation FEMALE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/turkeyf.png");
+    private static final ResourceLocation MALE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/turkeym.png");
+    private static final ResourceLocation FEMALE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/turkeyf.png");
 
-	public RenderTurkeyTFC(RenderManager manager) {
-		super(manager, new ModelTurkeyTFC(), 0.5F);
-	}
+    public RenderTurkeyTFC(RenderManager manager) {
+        super(manager, new ModelTurkeyTFC(), 0.5F);
+    }
 
-	@Override
-	public void doRender(@Nonnull EntityTurkeyTFC turkey, double par2, double par4, double par6, float par8, float par9) {
-		this.shadowSize = (float) (0.35f + (turkey.getPercentToAdulthood() * 0.35f));
-		super.doRender(turkey, par2, par4, par6, par8, par9);
-	}
+    @Override
+    public void doRender(@Nonnull EntityTurkeyTFC turkey, double par2, double par4, double par6, float par8, float par9) {
+        this.shadowSize = (float) (0.35f + (turkey.getPercentToAdulthood() * 0.35f));
+        super.doRender(turkey, par2, par4, par6, par8, par9);
+    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(EntityTurkeyTFC turkey) {
-		if (turkey.getGender() == EntityAnimalTFC.Gender.MALE) {
-			return MALE;
-		} else {
-			return FEMALE;
-		}
-	}
+    @Override
+    protected ResourceLocation getEntityTexture(EntityTurkeyTFC turkey) {
+        if (turkey.getGender() == EntityAnimalTFC.Gender.MALE) {
+            return MALE;
+        } else {
+            return FEMALE;
+        }
+    }
 
-	@Override
-	protected void preRenderCallback(EntityTurkeyTFC tukeyTFC, float par2) {
-		GlStateManager.scale(0.8f, 0.8f, 0.8f);
-	}
+    @Override
+    protected void preRenderCallback(EntityTurkeyTFC tukeyTFC, float par2) {
+        GlStateManager.scale(0.8f, 0.8f, 0.8f);
+    }
 }

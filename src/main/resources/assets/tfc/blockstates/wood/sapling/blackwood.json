@@ -1,17 +1,19 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "cross",
-    "textures": {
-      "cross": "tfc:blocks/wood/saplings/blackwood",
-      "layer0": "tfc:blocks/wood/saplings/blackwood"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "cross",
+    "textures" : {
+      "cross" : "tfc:blocks/wood/saplings/blackwood",
+      "layer0" : "tfc:blocks/wood/saplings/blackwood"
     }
   },
-  "variants": {
-    "normal": [{}],
-    "inventory": {
-      "model": "builtin/generated",
-      "transform": "forge:default-item"
+  "variants" : {
+    "normal" : [
+      {}
+    ],
+    "inventory" : {
+      "model" : "builtin/generated",
+      "transform" : "forge:default-item"
     }
   }
 }

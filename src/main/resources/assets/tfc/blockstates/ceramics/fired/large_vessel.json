@@ -1,18 +1,18 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:large_vessel_sealed"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:large_vessel_sealed"
   },
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {}
     ],
-    "sealed": {
-      "true": {
-        "model": "tfc:large_vessel_sealed"
+    "sealed" : {
+      "true" : {
+        "model" : "tfc:large_vessel_sealed"
       },
-      "false": {
-        "model": "tfc:large_vessel"
+      "false" : {
+        "model" : "tfc:large_vessel"
       }
     }
   }

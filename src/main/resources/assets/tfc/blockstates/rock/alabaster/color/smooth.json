@@ -1,93 +1,93 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "cube_all"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "cube_all"
   },
-  "variants": {
-    "color": {
-      "black": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/black"
+  "variants" : {
+    "color" : {
+      "black" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/black"
         }
       },
-      "blue": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/blue"
+      "blue" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/blue"
         }
       },
-      "brown": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/brown"
+      "brown" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/brown"
         }
       },
-      "cyan": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/cyan"
+      "cyan" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/cyan"
         }
       },
-      "gray": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/gray"
+      "gray" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/gray"
         }
       },
-      "green": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/green"
+      "green" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/green"
         }
       },
-      "light_blue": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/light_blue"
+      "light_blue" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/light_blue"
         }
       },
-      "lime": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/lime"
+      "lime" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/lime"
         }
       },
-      "magenta": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/magenta"
+      "magenta" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/magenta"
         }
       },
-      "orange": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/orange"
+      "orange" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/orange"
         }
       },
-      "pink": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/pink"
+      "pink" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/pink"
         }
       },
-      "plain": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/plain"
+      "plain" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/plain"
         }
       },
-      "purple": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/purple"
+      "purple" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/purple"
         }
       },
-      "red": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/red"
+      "red" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/red"
         }
       },
-      "silver": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/silver"
+      "silver" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/silver"
         }
       },
-      "white": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/white"
+      "white" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/white"
         }
       },
-      "yellow": {
-        "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/yellow"
+      "yellow" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/alabaster/smooth/yellow"
         }
       }
     }

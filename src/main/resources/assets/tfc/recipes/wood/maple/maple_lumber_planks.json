@@ -1,16 +1,16 @@
 {
-  "type": "tfc:damage_item_shapeless",
-  "ingredients": [
+  "type" : "tfc:damage_item_shapeless",
+  "ingredients" : [
     {
-      "item": "tfc:wood/planks/maple"
+      "item" : "tfc:wood/planks/maple"
     },
     {
-      "type": "forge:ore_dict",
-      "ore": "saw"
+      "type" : "forge:ore_dict",
+      "ore" : "saw"
     }
   ],
-  "result": {
-    "item": "tfc:wood/lumber/maple",
-    "count": 4
+  "result" : {
+    "item" : "tfc:wood/lumber/maple",
+    "count" : 4
   }
 }

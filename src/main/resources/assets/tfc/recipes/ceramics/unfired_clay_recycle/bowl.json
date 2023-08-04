@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
+  "type" : "minecraft:crafting_shapeless",
+  "ingredients" : [
     {
-      "item": "tfc:ceramics/unfired/bowl"
+      "item" : "tfc:ceramics/unfired/bowl"
     }
   ],
-  "result": {
-    "item": "minecraft:clay_ball",
-    "count": 1
+  "result" : {
+    "item" : "minecraft:clay_ball",
+    "count" : 1
   }
 }

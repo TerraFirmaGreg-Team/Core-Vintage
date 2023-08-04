@@ -1,21 +1,20 @@
 {
-  "__comment__": "This file was automatically created by mcresources",
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {
-        "model": "tfc:groundcover/feather",
-        "y": 90
+        "model" : "tfc:groundcover/feather",
+        "y" : 90
       },
       {
-        "model": "tfc:groundcover/feather"
+        "model" : "tfc:groundcover/feather"
       },
       {
-        "model": "tfc:groundcover/feather",
-        "y": 180
+        "model" : "tfc:groundcover/feather",
+        "y" : 180
       },
       {
-        "model": "tfc:groundcover/feather",
-        "y": 270
+        "model" : "tfc:groundcover/feather",
+        "y" : 270
       }
     ]
   }

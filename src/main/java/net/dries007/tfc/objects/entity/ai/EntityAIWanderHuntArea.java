@@ -14,22 +14,22 @@ import javax.annotation.Nullable;
  * A nice addition for 1.15: Make the home area changes over time, as if this entity is migrating to another place
  */
 public class EntityAIWanderHuntArea extends EntityAIWander {
-	public EntityAIWanderHuntArea(EntityCreature creature, double speed) {
-		super(creature, speed);
-	}
+    public EntityAIWanderHuntArea(EntityCreature creature, double speed) {
+        super(creature, speed);
+    }
 
-	@Override
-	public boolean shouldExecute() {
-		return super.shouldExecute();
-	}
+    @Override
+    public boolean shouldExecute() {
+        return super.shouldExecute();
+    }
 
-	@Nullable
-	@Override
-	protected Vec3d getPosition() {
-		if (this.entity.hasHome()) {
-			BlockPos blockpos = this.entity.getHomePosition();
-			return RandomPositionGenerator.findRandomTargetBlockTowards(this.entity, 16, 7, new Vec3d(blockpos.getX(), blockpos.getY(), blockpos.getZ()));
-		}
-		return null;
-	}
+    @Nullable
+    @Override
+    protected Vec3d getPosition() {
+        if (this.entity.hasHome()) {
+            BlockPos blockpos = this.entity.getHomePosition();
+            return RandomPositionGenerator.findRandomTargetBlockTowards(this.entity, 16, 7, new Vec3d(blockpos.getX(), blockpos.getY(), blockpos.getZ()));
+        }
+        return null;
+    }
 }

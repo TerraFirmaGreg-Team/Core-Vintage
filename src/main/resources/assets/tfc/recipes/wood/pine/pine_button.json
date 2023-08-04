@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
+  "type" : "minecraft:crafting_shapeless",
+  "ingredients" : [
     {
-      "item": "tfc:wood/planks/pine"
+      "item" : "tfc:wood/planks/pine"
     }
   ],
-  "result": {
-    "item": "tfc:wood/button/pine",
-    "count": 1
+  "result" : {
+    "item" : "tfc:wood/button/pine",
+    "count" : 1
   }
 }

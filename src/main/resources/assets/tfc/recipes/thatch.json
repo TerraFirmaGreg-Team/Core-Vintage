@@ -1,16 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "XX",
     "XX"
   ],
-  "key": {
-    "X": {
-      "item": "tfc:straw"
+  "key" : {
+    "X" : {
+      "item" : "tfc:straw"
     }
   },
-  "result": {
-    "item": "tfc:thatch",
-    "count": 1
+  "result" : {
+    "item" : "tfc:thatch",
+    "count" : 1
   }
 }

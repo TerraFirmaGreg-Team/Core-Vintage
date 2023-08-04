@@ -1,15 +1,15 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "XX"
   ],
-  "key": {
-    "X": {
-      "item": "tfc:wood/lumber/sequoia"
+  "key" : {
+    "X" : {
+      "item" : "tfc:wood/lumber/sequoia"
     }
   },
-  "result": {
-    "item": "tfc:wood/pressure_plate/sequoia",
-    "count": 1
+  "result" : {
+    "item" : "tfc:wood/pressure_plate/sequoia",
+    "count" : 1
   }
 }

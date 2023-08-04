@@ -1,220 +1,280 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"model": "button_inventory",
-		"uvlock": true
-	},
-	"variants": {
-		"facing": {
-			"up": {},
-			"down": {
-				"x": 180
-			},
-			"east": {
-				"x": 90,
-				"y": 90
-			},
-			"west": {
-				"x": 90,
-				"y": 270
-			},
-			"south": {
-				"x": 90,
-				"y": 180
-			},
-			"north": {
-				"x": 90
-			}
-		},
-		"powered": {
-			"false": {
-				"model": "button"
-			},
-			"true": {
-				"model": "button_pressed"
-			}
-		},
-		"rocktype": {
-      "granite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/granite"
-      }}, 
-      "diorite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/diorite"
-      }}, 
-      "gabbro": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/gabbro"
-      }}, 
-      "shale": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/shale"
-      }}, 
-      "claystone": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/claystone"
-      }}, 
-      "limestone": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/limestone"
-      }}, 
-      "conglomerate": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/conglomerate"
-      }}, 
-      "dolomite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/dolomite"
-      }}, 
-      "chert": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/chert"
-      }}, 
-      "chalk": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/chalk"
-      }}, 
-      "rhyolite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/rhyolite"
-      }}, 
-      "basalt": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/basalt"
-      }}, 
-      "andesite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/andesite"
-      }}, 
-      "dacite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/dacite"
-      }}, 
-      "quartzite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/quartzite"
-      }}, 
-      "slate": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/slate"
-      }}, 
-      "phyllite": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/phyllite"
-      }}, 
-      "schist": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/schist"
-      }}, 
-      "gneiss": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/gneiss"
-      }}, 
-      "marble": {
-        "textures": {
-          "texture": "tfc:blocks/rock/raw/marble"
-      }}
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "button_inventory",
+    "uvlock" : true
+  },
+  "variants" : {
+    "facing" : {
+      "up" : {},
+      "down" : {
+        "x" : 180
+      },
+      "east" : {
+        "x" : 90,
+        "y" : 90
+      },
+      "west" : {
+        "x" : 90,
+        "y" : 270
+      },
+      "south" : {
+        "x" : 90,
+        "y" : 180
+      },
+      "north" : {
+        "x" : 90
+      }
     },
-	  "inventory=granite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/granite"
-      }}
+    "powered" : {
+      "false" : {
+        "model" : "button"
+      },
+      "true" : {
+        "model" : "button_pressed"
+      }
+    },
+    "rocktype" : {
+      "granite" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/granite"
+        }
+      },
+      "diorite" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/diorite"
+        }
+      },
+      "gabbro" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/gabbro"
+        }
+      },
+      "shale" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/shale"
+        }
+      },
+      "claystone" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/claystone"
+        }
+      },
+      "limestone" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/limestone"
+        }
+      },
+      "conglomerate" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/conglomerate"
+        }
+      },
+      "dolomite" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/dolomite"
+        }
+      },
+      "chert" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/chert"
+        }
+      },
+      "chalk" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/chalk"
+        }
+      },
+      "rhyolite" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/rhyolite"
+        }
+      },
+      "basalt" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/basalt"
+        }
+      },
+      "andesite" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/andesite"
+        }
+      },
+      "dacite" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/dacite"
+        }
+      },
+      "quartzite" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/quartzite"
+        }
+      },
+      "slate" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/slate"
+        }
+      },
+      "phyllite" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/phyllite"
+        }
+      },
+      "schist" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/schist"
+        }
+      },
+      "gneiss" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/gneiss"
+        }
+      },
+      "marble" : {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/marble"
+        }
+      }
+    },
+    "inventory=granite" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/granite"
+        }
+      }
     ],
-	  "inventory=diorite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/diorite"
-      }}
+    "inventory=diorite" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/diorite"
+        }
+      }
     ],
-	  "inventory=gabbro": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/gabbro"
-      }}
+    "inventory=gabbro" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/gabbro"
+        }
+      }
     ],
-	  "inventory=shale": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/shale"
-      }}
+    "inventory=shale" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/shale"
+        }
+      }
     ],
-	  "inventory=claystone": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/claystone"
-      }}
+    "inventory=claystone" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/claystone"
+        }
+      }
     ],
-	  "inventory=limestone": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/limestone"
-      }}
+    "inventory=limestone" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/limestone"
+        }
+      }
     ],
-	  "inventory=conglomerate": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/conglomerate"
-      }}
+    "inventory=conglomerate" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/conglomerate"
+        }
+      }
     ],
-	  "inventory=dolomite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/dolomite"
-      }}
+    "inventory=dolomite" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/dolomite"
+        }
+      }
     ],
-	  "inventory=chert": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/chert"
-      }}
+    "inventory=chert" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/chert"
+        }
+      }
     ],
-	  "inventory=chalk": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/chalk"
-      }}
+    "inventory=chalk" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/chalk"
+        }
+      }
     ],
-	  "inventory=rhyolite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/rhyolite"
-      }}
+    "inventory=rhyolite" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/rhyolite"
+        }
+      }
     ],
-	  "inventory=basalt": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/basalt"
-      }}
+    "inventory=basalt" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/basalt"
+        }
+      }
     ],
-	  "inventory=andesite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/andesite"
-      }}
+    "inventory=andesite" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/andesite"
+        }
+      }
     ],
-	  "inventory=dacite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/dacite"
-      }}
+    "inventory=dacite" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/dacite"
+        }
+      }
     ],
-	  "inventory=quartzite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/quartzite"
-      }}
+    "inventory=quartzite" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/quartzite"
+        }
+      }
     ],
-	  "inventory=slate": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/slate"
-      }}
+    "inventory=slate" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/slate"
+        }
+      }
     ],
-	  "inventory=phyllite": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/phyllite"
-      }}
+    "inventory=phyllite" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/phyllite"
+        }
+      }
     ],
-	  "inventory=schist": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/schist"
-      }}
+    "inventory=schist" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/schist"
+        }
+      }
     ],
-	  "inventory=gneiss": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/gneiss"
-      }}
+    "inventory=gneiss" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/gneiss"
+        }
+      }
     ],
-	  "inventory=marble": [{
-      "textures": {
-        "texture": "tfc:blocks/rock/raw/marble"
-      }}
+    "inventory=marble" : [
+      {
+        "textures" : {
+          "texture" : "tfc:blocks/rock/raw/marble"
+        }
+      }
     ]
   }
 }

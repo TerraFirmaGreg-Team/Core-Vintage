@@ -1,33 +1,33 @@
 {
-  "multipart": [
+  "multipart" : [
     {
-      "when": {
-        "part": "lower|middle"
+      "when" : {
+        "part" : "lower|middle"
       },
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/tree_fern_lower"
+          "model" : "tfc:plants/tree_fern_lower"
         }
       ]
     },
     {
-      "when": {
-        "part": "upper|single"
+      "when" : {
+        "part" : "upper|single"
       },
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/tree_fern_upper"
+          "model" : "tfc:plants/tree_fern_upper"
         }
       ]
     },
     {
-      "when": {
-        "part": "upper|single"
+      "when" : {
+        "part" : "upper|single"
       },
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/tree_fern_upper",
-          "y": 180
+          "model" : "tfc:plants/tree_fern_upper",
+          "y" : 180
         }
       ]
     }

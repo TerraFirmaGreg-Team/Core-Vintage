@@ -13,8 +13,8 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
  * - When duplicate capabilities get attached, they will decay independently and can lead to stackability issues where invisible capability instances are preventing calls such as {@link CapabilityFood#areStacksStackableExceptCreationDate(ItemStack, ItemStack)}
  */
 public interface IItemFoodTFC {
-	/**
-	 * @return A capability provider which exposes an {@link IFood} capability, e.g. {@link FoodHandler}
-	 */
-	ICapabilityProvider getCustomFoodHandler();
+    /**
+     * @return A capability provider which exposes an {@link IFood} capability, e.g. {@link FoodHandler}
+     */
+    ICapabilityProvider getCustomFoodHandler();
 }

@@ -1,17 +1,17 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "X  ",
     "XX ",
     "XXX"
   ],
-  "key": {
-    "X": {
-      "item": "tfc:wood/planks/pine"
+  "key" : {
+    "X" : {
+      "item" : "tfc:wood/planks/pine"
     }
   },
-  "result": {
-    "item": "tfc:stairs/wood/pine",
-    "count": 8
+  "result" : {
+    "item" : "tfc:stairs/wood/pine",
+    "count" : 8
   }
 }

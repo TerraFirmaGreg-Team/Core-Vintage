@@ -27,42 +27,42 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
-	private final WoodVariant woodVariant;
-	private final Wood wood;
-	private final ResourceLocation modelLocation;
+    private final WoodVariant woodVariant;
+    private final Wood wood;
+    private final ResourceLocation modelLocation;
 
-	public BlockWoodDoor(WoodVariant woodVariant, Wood wood) {
-		super(Material.WOOD);
+    public BlockWoodDoor(WoodVariant woodVariant, Wood wood) {
+        super(Material.WOOD);
 
-		this.woodVariant = woodVariant;
-		this.wood = wood;
-		this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+        this.woodVariant = woodVariant;
+        this.wood = wood;
+        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-		var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-		setRegistryName(MOD_ID, blockRegistryName);
-		setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-		setCreativeTab(CreativeTabsTFC.WOOD);
-		setSoundType(SoundType.WOOD);
-		setHardness(3.0F);
-		disableStats();
-		// No direct item, so no oredict.
-		Blocks.FIRE.setFireInfo(this, 5, 20);
-	}
+        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+        setRegistryName(MOD_ID, blockRegistryName);
+        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setCreativeTab(CreativeTabsTFC.WOOD);
+        setSoundType(SoundType.WOOD);
+        setHardness(3.0F);
+        disableStats();
+        // No direct item, so no oredict.
+        Blocks.FIRE.setFireInfo(this, 5, 20);
+    }
 
-	@Override
-	public WoodVariant getWoodVariant() {
-		return woodVariant;
-	}
+    @Override
+    public WoodVariant getWoodVariant() {
+        return woodVariant;
+    }
 
-	@Override
-	public Wood getWood() {
-		return wood;
-	}
+    @Override
+    public Wood getWood() {
+        return wood;
+    }
 
-	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlockTFC(this);
-	}
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
+    }
 
 //		@Override
 //		public Item getItemDropped(IBlockState state, Random rand, int fortune) {
@@ -74,15 +74,15 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
 //				return new ItemStack(getItemBlock());
 //		}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onModelRegister() {
-		ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockDoor.POWERED).build());
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockDoor.POWERED).build());
 
-		for (IBlockState state : this.getBlockState().getValidStates()) {
-			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-				this.getMetaFromState(state),
-				new ModelResourceLocation(modelLocation, "normal"));
-		}
-	}
+        for (IBlockState state : this.getBlockState().getValidStates()) {
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
+                    this.getMetaFromState(state),
+                    new ModelResourceLocation(modelLocation, "normal"));
+        }
+    }
 }

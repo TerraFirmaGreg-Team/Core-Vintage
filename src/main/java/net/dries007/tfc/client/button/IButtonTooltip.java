@@ -5,7 +5,7 @@ package net.dries007.tfc.client.button;
  */
 public interface IButtonTooltip {
 
-	String getTooltip();
+    String getTooltip();
 
-	boolean hasTooltip();
+    boolean hasTooltip();
 }

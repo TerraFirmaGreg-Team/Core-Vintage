@@ -16,58 +16,58 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketProspectResult implements IMessage {
-	private BlockPos pos;
-	private ProspectEvent.Type type;
-	private ItemStack vein;
+    private BlockPos pos;
+    private ProspectEvent.Type type;
+    private ItemStack vein;
 
-	@SuppressWarnings("unused")
-	@Deprecated
-	public PacketProspectResult() {
-	}
+    @SuppressWarnings("unused")
+    @Deprecated
+    public PacketProspectResult() {
+    }
 
-	public PacketProspectResult(BlockPos pos, ProspectEvent.Type type, ItemStack vein) {
-		this.pos = pos;
-		this.type = type;
-		this.vein = vein;
-	}
+    public PacketProspectResult(BlockPos pos, ProspectEvent.Type type, ItemStack vein) {
+        this.pos = pos;
+        this.type = type;
+        this.vein = vein;
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf) {
-		pos = BlockPos.fromLong(buf.readLong());
-		type = ProspectEvent.Type.valueOf(String.valueOf(buf.readByte()));
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        pos = BlockPos.fromLong(buf.readLong());
+        type = ProspectEvent.Type.valueOf(String.valueOf(buf.readByte()));
 
-		if (type != ProspectEvent.Type.COCK) {
-			vein = ByteBufUtils.readItemStack(buf);
-		}
-	}
+        if (type != ProspectEvent.Type.COCK) {
+            vein = ByteBufUtils.readItemStack(buf);
+        }
+    }
 
-	@Override
-	public void toBytes(ByteBuf buf) {
-		buf.writeLong(pos.toLong());
-		buf.writeByte(type.ordinal());
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeLong(pos.toLong());
+        buf.writeByte(type.ordinal());
 
-		if (type != ProspectEvent.Type.COCK) {
-			ByteBufUtils.writeItemStack(buf, vein);
-		}
-	}
+        if (type != ProspectEvent.Type.COCK) {
+            ByteBufUtils.writeItemStack(buf, vein);
+        }
+    }
 
-	public static final class Handler implements IMessageHandler<PacketProspectResult, IMessage> {
-		@Override
-		public IMessage onMessage(PacketProspectResult message, MessageContext ctx) {
-			TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-				EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-				if (player != null) {
-					ITextComponent text = new TextComponentTranslation(null);
-					if (message.type != ProspectEvent.Type.COCK) {
-						text.appendText(" ").appendSibling(new TextComponentTranslation(message.vein.getTranslationKey() + ".name"));
-					}
-					player.sendStatusMessage(text, ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
-				}
+    public static final class Handler implements IMessageHandler<PacketProspectResult, IMessage> {
+        @Override
+        public IMessage onMessage(PacketProspectResult message, MessageContext ctx) {
+            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+                if (player != null) {
+                    ITextComponent text = new TextComponentTranslation(null);
+                    if (message.type != ProspectEvent.Type.COCK) {
+                        text.appendText(" ").appendSibling(new TextComponentTranslation(message.vein.getTranslationKey() + ".name"));
+                    }
+                    player.sendStatusMessage(text, ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+                }
 
-				ProspectEvent event = new ProspectEvent.Client(player, message.pos, message.type, message.vein);
-				MinecraftForge.EVENT_BUS.post(event);
-			});
-			return null;
-		}
-	}
+                ProspectEvent event = new ProspectEvent.Client(player, message.pos, message.type, message.vein);
+                MinecraftForge.EVENT_BUS.post(event);
+            });
+            return null;
+        }
+    }
 }

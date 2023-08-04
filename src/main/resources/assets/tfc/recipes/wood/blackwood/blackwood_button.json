@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
+  "type" : "minecraft:crafting_shapeless",
+  "ingredients" : [
     {
-      "item": "tfc:wood/planks/blackwood"
+      "item" : "tfc:wood/planks/blackwood"
     }
   ],
-  "result": {
-    "item": "tfc:wood/button/blackwood",
-    "count": 1
+  "result" : {
+    "item" : "tfc:wood/button/blackwood",
+    "count" : 1
   }
 }

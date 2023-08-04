@@ -9,36 +9,36 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 
 public class AnvilRecipeWrapper extends SimpleRecipeWrapper {
-	private final AnvilRecipe recipe;
+    private final AnvilRecipe recipe;
 
-	public AnvilRecipeWrapper(AnvilRecipe recipeWrapper) {
-		super(recipeWrapper);
-		recipe = recipeWrapper;
-	}
+    public AnvilRecipeWrapper(AnvilRecipe recipeWrapper) {
+        super(recipeWrapper);
+        recipe = recipeWrapper;
+    }
 
-	@Override
-	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		minecraft.renderEngine.bindTexture(GuiAnvilTFC.ANVIL_BACKGROUND);
-		for (int i = 0; i < recipe.getRules().length; i++) {
-			ForgeRule rule = recipe.getRules()[i];
-			if (rule != null) {
-				int xOffset = i * 19;
-				int x = 53 + xOffset;
-				int y = 3;
-				// The rule icon
-				Gui.drawScaledCustomSizeModalRect(x, y, rule.getU(), rule.getV(), 32, 32, 10, 10, 256, 256);
-				GlStateManager.color(0f, 0.6f, 0.2f);
-				Gui.drawScaledCustomSizeModalRect(x - 5, y - 3, 198, rule.getW(), 20, 22, 20, 22, 256, 256);
-				GlStateManager.color(1f, 1f, 1f);
-			}
-		}
-		//Draw steps
-		for (ForgeStep step : ForgeStep.values()) {
-			int x = step.getX() - 11;
-			int y = step.getY() - 7;
-			Gui.drawScaledCustomSizeModalRect(x, y, step.getU(), step.getV(), 32, 32, 16, 16, 256, 256);
-		}
-		//Draw tier requirement info
+    @Override
+    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+        minecraft.renderEngine.bindTexture(GuiAnvilTFC.ANVIL_BACKGROUND);
+        for (int i = 0; i < recipe.getRules().length; i++) {
+            ForgeRule rule = recipe.getRules()[i];
+            if (rule != null) {
+                int xOffset = i * 19;
+                int x = 53 + xOffset;
+                int y = 3;
+                // The rule icon
+                Gui.drawScaledCustomSizeModalRect(x, y, rule.getU(), rule.getV(), 32, 32, 10, 10, 256, 256);
+                GlStateManager.color(0f, 0.6f, 0.2f);
+                Gui.drawScaledCustomSizeModalRect(x - 5, y - 3, 198, rule.getW(), 20, 22, 20, 22, 256, 256);
+                GlStateManager.color(1f, 1f, 1f);
+            }
+        }
+        //Draw steps
+        for (ForgeStep step : ForgeStep.values()) {
+            int x = step.getX() - 11;
+            int y = step.getY() - 7;
+            Gui.drawScaledCustomSizeModalRect(x, y, step.getU(), step.getV(), 32, 32, 16, 16, 256, 256);
+        }
+        //Draw tier requirement info
         /*
         String text = I18n.format("tfc.enum.tier." + recipe.getTier().name().toLowerCase());
         float xPos = 20f - minecraft.fontRenderer.getStringWidth(text) / 2.0f;
@@ -60,5 +60,5 @@ public class AnvilRecipeWrapper extends SimpleRecipeWrapper {
             }
         }*/
 
-	}
+    }
 }

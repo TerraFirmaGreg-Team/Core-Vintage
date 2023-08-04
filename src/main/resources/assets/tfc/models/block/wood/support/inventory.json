@@ -1,49 +1,87 @@
 {
-  "credit": "Made with Blockbench",
-  "parent": "block/block",
-  "textures": {
-    "texture": "tfc:blocks/wood/sheet/pattern"
+  "credit" : "Made with Blockbench",
+  "parent" : "block/block",
+  "textures" : {
+    "texture" : "tfc:blocks/wood/sheet/pattern"
   },
-  "elements": [
+  "elements" : [
     {
-      "from": [5, 0, 5],
-      "to": [11, 16, 11],
-      "faces": {
-        "north": {
-          "uv": [5, 0, 11, 16],
-          "texture": "#texture",
-          "cullface": "north",
-          "tintindex": 0
+      "from" : [
+        5,
+        0,
+        5
+      ],
+      "to" : [
+        11,
+        16,
+        11
+      ],
+      "faces" : {
+        "north" : {
+          "uv" : [
+            5,
+            0,
+            11,
+            16
+          ],
+          "texture" : "#texture",
+          "cullface" : "north",
+          "tintindex" : 0
         },
-        "east": {
-          "uv": [5, 0, 11, 16],
-          "texture": "#texture",
-          "cullface": "east",
-          "tintindex": 0
+        "east" : {
+          "uv" : [
+            5,
+            0,
+            11,
+            16
+          ],
+          "texture" : "#texture",
+          "cullface" : "east",
+          "tintindex" : 0
         },
-        "south": {
-          "uv": [5, 0, 11, 16],
-          "texture": "#texture",
-          "cullface": "south",
-          "tintindex": 0
+        "south" : {
+          "uv" : [
+            5,
+            0,
+            11,
+            16
+          ],
+          "texture" : "#texture",
+          "cullface" : "south",
+          "tintindex" : 0
         },
-        "west": {
-          "uv": [5, 0, 11, 16],
-          "texture": "#texture",
-          "cullface": "west",
-          "tintindex": 0
+        "west" : {
+          "uv" : [
+            5,
+            0,
+            11,
+            16
+          ],
+          "texture" : "#texture",
+          "cullface" : "west",
+          "tintindex" : 0
         },
-        "up": {
-          "uv": [0, 0, 16, 16],
-          "texture": "#texture",
-          "cullface": "up",
-          "tintindex": 0
+        "up" : {
+          "uv" : [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture" : "#texture",
+          "cullface" : "up",
+          "tintindex" : 0
         },
-        "down": {
-          "uv": [0, 0, 16, 16],
-          "texture": "#texture",
-          "cullface": "down",
-          "tintindex": 0
+        "down" : {
+          "uv" : [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture" : "#texture",
+          "cullface" : "down",
+          "tintindex" : 0
         }
       }
     }

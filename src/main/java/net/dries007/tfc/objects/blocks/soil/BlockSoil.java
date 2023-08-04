@@ -43,121 +43,121 @@ import static net.dries007.tfc.api.types.soil.SoilVariant.DIRT;
 @ParametersAreNonnullByDefault
 public class BlockSoil extends Block implements ISoilBlock {
 
-	// Used for connected textures only.
-	public static final PropertyBool NORTH = PropertyBool.create("north");
-	public static final PropertyBool EAST = PropertyBool.create("east");
-	public static final PropertyBool SOUTH = PropertyBool.create("south");
-	public static final PropertyBool WEST = PropertyBool.create("west");
-	private final SoilVariant soilVariant;
-	private final Soil soil;
-	private final ResourceLocation modelLocation;
+    // Used for connected textures only.
+    public static final PropertyBool NORTH = PropertyBool.create("north");
+    public static final PropertyBool EAST = PropertyBool.create("east");
+    public static final PropertyBool SOUTH = PropertyBool.create("south");
+    public static final PropertyBool WEST = PropertyBool.create("west");
+    private final SoilVariant soilVariant;
+    private final Soil soil;
+    private final ResourceLocation modelLocation;
 
-	public BlockSoil(SoilVariant soilVariant, Soil soil) {
-		super(Material.GROUND);
+    public BlockSoil(SoilVariant soilVariant, Soil soil) {
+        super(Material.GROUND);
 
-		if (soilVariant.canFall())
-			FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());
+        if (soilVariant.canFall())
+            FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());
 
-		this.soilVariant = soilVariant;
-		this.soil = soil;
-		this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant.getName());
+        this.soilVariant = soilVariant;
+        this.soil = soil;
+        this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant.getName());
 
-		var blockRegistryName = String.format("soil/%s/%s", soilVariant, soil);
-		setRegistryName(MOD_ID, blockRegistryName);
-		setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-		setCreativeTab(CreativeTabsTFC.EARTH);
-		setSoundType(SoundType.GROUND);
-		setHardness(2.0F);
-		setHarvestLevel("shovel", 0);
+        var blockRegistryName = String.format("soil/%s/%s", soilVariant, soil);
+        setRegistryName(MOD_ID, blockRegistryName);
+        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setCreativeTab(CreativeTabsTFC.EARTH);
+        setSoundType(SoundType.GROUND);
+        setHardness(2.0F);
+        setHarvestLevel("shovel", 0);
 
-	}
+    }
 
-	@Override
-	public SoilVariant getSoilVariant() {
-		return soilVariant;
-	}
+    @Override
+    public SoilVariant getSoilVariant() {
+        return soilVariant;
+    }
 
-	@Override
-	public Soil getSoil() {
-		return soil;
-	}
+    @Override
+    public Soil getSoil() {
+        return soil;
+    }
 
-	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlockTFC(this);
-	}
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
+    }
 
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return 0;
-	}
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return 0;
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-		pos = pos.add(0, -1, 0);
-		return state.withProperty(NORTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-			.withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-			.withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-			.withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+        pos = pos.add(0, -1, 0);
+        return state.withProperty(NORTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+                .withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+                .withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+                .withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+    }
 
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
-	}
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-		if (this.soilVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
-			double d0 = (float) pos.getX() + rand.nextFloat();
-			double d1 = (double) pos.getY() - 0.05D;
-			double d2 = (float) pos.getZ() + rand.nextFloat();
-			world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
-		}
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+        if (this.soilVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+            double d0 = (float) pos.getX() + rand.nextFloat();
+            double d1 = (double) pos.getY() - 0.05D;
+            double d2 = (float) pos.getZ() + rand.nextFloat();
+            world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
+        }
+    }
 
-	@Override
-	public int quantityDropped(IBlockState state, int fortune, Random random) {
-		if (soilVariant == CLAY)
-			return 4;
-		return super.quantityDropped(state, fortune, random);
-	}
+    @Override
+    public int quantityDropped(IBlockState state, int fortune, Random random) {
+        if (soilVariant == CLAY)
+            return 4;
+        return super.quantityDropped(state, fortune, random);
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return switch (soilVariant) {
-			case CLAY -> Items.CLAY_BALL;
-			case DIRT -> Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soil));
-			default -> super.getItemDropped(state, rand, fortune);
-		};
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return switch (soilVariant) {
+            case CLAY -> Items.CLAY_BALL;
+            case DIRT -> Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soil));
+            default -> super.getItemDropped(state, rand, fortune);
+        };
 
-	}
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onModelRegister() {
-		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-			@Nonnull
-			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation,
-					"soiltype=" + soil.getName());
-			}
-		});
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(modelLocation,
+                        "soiltype=" + soil.getName());
+            }
+        });
 
 
-		ModelLoader.setCustomModelResourceLocation(
-			Item.getItemFromBlock(this),
-			this.getMetaFromState(this.getBlockState().getBaseState()),
-			new ModelResourceLocation(modelLocation,
-				"soiltype=" + soil.getName()));
-	}
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this),
+                this.getMetaFromState(this.getBlockState().getBaseState()),
+                new ModelResourceLocation(modelLocation,
+                        "soiltype=" + soil.getName()));
+    }
 
-	@Nonnull
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}
+    @Nonnull
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 }

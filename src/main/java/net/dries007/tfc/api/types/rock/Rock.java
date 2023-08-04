@@ -16,72 +16,72 @@ import static net.dries007.tfc.api.types.rock.RockCategory.*;
  */
 @Nonnull
 public enum Rock implements IStringSerializable {
-	// Igneous Intrusive
-	GRANITE(IGNEOUS_INTRUSIVE),
-	DIORITE(IGNEOUS_INTRUSIVE),
-	GABBRO(IGNEOUS_INTRUSIVE),
+    // Igneous Intrusive
+    GRANITE(IGNEOUS_INTRUSIVE),
+    DIORITE(IGNEOUS_INTRUSIVE),
+    GABBRO(IGNEOUS_INTRUSIVE),
 
-	// Sedimentary
-	SHALE(SEDIMENTARY),
-	CLAYSTONE(SEDIMENTARY),
-	LIMESTONE(SEDIMENTARY, true),
-	CONGLOMERATE(SEDIMENTARY),
-	DOLOMITE(SEDIMENTARY, true),
-	CHERT(SEDIMENTARY),
-	CHALK(SEDIMENTARY, true),
+    // Sedimentary
+    SHALE(SEDIMENTARY),
+    CLAYSTONE(SEDIMENTARY),
+    LIMESTONE(SEDIMENTARY, true),
+    CONGLOMERATE(SEDIMENTARY),
+    DOLOMITE(SEDIMENTARY, true),
+    CHERT(SEDIMENTARY),
+    CHALK(SEDIMENTARY, true),
 
-	// Igneous Extrusive
-	RHYOLITE(IGNEOUS_EXTRUSIVE),
-	BASALT(IGNEOUS_EXTRUSIVE),
-	ANDESITE(IGNEOUS_EXTRUSIVE),
-	DACITE(IGNEOUS_EXTRUSIVE),
+    // Igneous Extrusive
+    RHYOLITE(IGNEOUS_EXTRUSIVE),
+    BASALT(IGNEOUS_EXTRUSIVE),
+    ANDESITE(IGNEOUS_EXTRUSIVE),
+    DACITE(IGNEOUS_EXTRUSIVE),
 
-	// Metamorphic
-	QUARTZITE(METAMORPHIC),
-	SLATE(METAMORPHIC),
-	PHYLLITE(METAMORPHIC),
-	SCHIST(METAMORPHIC),
-	GNEISS(METAMORPHIC),
-	MARBLE(METAMORPHIC, true);
+    // Metamorphic
+    QUARTZITE(METAMORPHIC),
+    SLATE(METAMORPHIC),
+    PHYLLITE(METAMORPHIC),
+    SCHIST(METAMORPHIC),
+    GNEISS(METAMORPHIC),
+    MARBLE(METAMORPHIC, true);
 
-	public static final IProperty<Rock> ROCKTYPE = PropertyEnum.create("rocktype", Rock.class);
-	private static final Rock[] VALUES = values();
-	private final RockCategory rockCategory;
-	private final boolean isFlux;
+    public static final IProperty<Rock> ROCKTYPE = PropertyEnum.create("rocktype", Rock.class);
+    private static final Rock[] VALUES = values();
+    private final RockCategory rockCategory;
+    private final boolean isFlux;
 
-	Rock(@Nonnull RockCategory rockCategory) {
-		this(rockCategory, false);
-	}
+    Rock(@Nonnull RockCategory rockCategory) {
+        this(rockCategory, false);
+    }
 
-	Rock(@Nonnull RockCategory rockCategory, boolean isFlux) {
-		this.rockCategory = rockCategory;
-		this.isFlux = isFlux;
-	}
+    Rock(@Nonnull RockCategory rockCategory, boolean isFlux) {
+        this.rockCategory = rockCategory;
+        this.isFlux = isFlux;
+    }
 
-	public static Rock valueOf(int i) {
-		return i >= 0 && i < VALUES.length ? VALUES[i] : VALUES[i % VALUES.length];
-	}
+    public static Rock valueOf(int i) {
+        return i >= 0 && i < VALUES.length ? VALUES[i] : VALUES[i % VALUES.length];
+    }
 
-	@Nonnull
-	public RockCategory getRockCategory() {
-		return rockCategory;
-	}
+    @Nonnull
+    public RockCategory getRockCategory() {
+        return rockCategory;
+    }
 
-	public boolean isFlux() {
-		return isFlux;
-	}
+    public boolean isFlux() {
+        return isFlux;
+    }
 
-	/**
-	 * Возвращает имя перечисления в нижнем регистре.
-	 */
-	@Nonnull
-	@Override
-	public String getName() {
-		return name().toLowerCase();
-	}
+    /**
+     * Возвращает имя перечисления в нижнем регистре.
+     */
+    @Nonnull
+    @Override
+    public String getName() {
+        return name().toLowerCase();
+    }
 
-	@Nonnull
-	public ResourceLocation getTexture() {
-		return new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/blocks/rock/raw/" + this.getName() + ".png");
-	}
+    @Nonnull
+    public ResourceLocation getTexture() {
+        return new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/blocks/rock/raw/" + this.getName() + ".png");
+    }
 }

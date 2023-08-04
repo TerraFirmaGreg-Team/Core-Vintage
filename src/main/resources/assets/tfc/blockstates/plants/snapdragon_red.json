@@ -1,72 +1,72 @@
 {
-  "multipart": [
+  "multipart" : [
     {
-      "when": {
-        "stage": "0"
+      "when" : {
+        "stage" : "0"
       },
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/snapdragon_0"
+          "model" : "tfc:plants/snapdragon_0"
         }
       ]
     },
     {
-      "when": {
-        "stage": "1"
+      "when" : {
+        "stage" : "1"
       },
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/snapdragon_red_1"
+          "model" : "tfc:plants/snapdragon_red_1"
         }
       ]
     },
     {
-      "when": {
-        "stage": "2"
+      "when" : {
+        "stage" : "2"
       },
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/snapdragon_2"
+          "model" : "tfc:plants/snapdragon_2"
         }
       ]
     },
     {
-      "when": {
-        "stage": "3"
+      "when" : {
+        "stage" : "3"
       },
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/snapdragon_3"
+          "model" : "tfc:plants/snapdragon_3"
         }
       ]
     },
     {
-      "when": {
-        "stage": "4"
+      "when" : {
+        "stage" : "4"
       },
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/snapdragon_4"
+          "model" : "tfc:plants/snapdragon_4"
         }
       ]
     },
     {
-      "when": {
-        "stage": "5"
+      "when" : {
+        "stage" : "5"
       },
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/snapdragon_5"
+          "model" : "tfc:plants/snapdragon_5"
         }
       ]
     },
     {
-      "when": {
-        "stage": "6"
+      "when" : {
+        "stage" : "6"
       },
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/snapdragon_6"
+          "model" : "tfc:plants/snapdragon_6"
         }
       ]
     }

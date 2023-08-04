@@ -10,17 +10,17 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SuppressWarnings("WeakerAccess")
 public abstract class PotionTFC extends Potion {
-	private static final ResourceLocation POTION_ICONS = new ResourceLocation(MOD_ID, "textures/gui/icons/potion.png");
+    private static final ResourceLocation POTION_ICONS = new ResourceLocation(MOD_ID, "textures/gui/icons/potion.png");
 
-	protected PotionTFC(boolean isBadEffectIn, int liquidColorIn) {
-		super(isBadEffectIn, liquidColorIn);
-	}
+    protected PotionTFC(boolean isBadEffectIn, int liquidColorIn) {
+        super(isBadEffectIn, liquidColorIn);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getStatusIconIndex() {
-		Minecraft.getMinecraft().renderEngine.bindTexture(POTION_ICONS);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getStatusIconIndex() {
+        Minecraft.getMinecraft().renderEngine.bindTexture(POTION_ICONS);
 
-		return super.getStatusIconIndex();
-	}
+        return super.getStatusIconIndex();
+    }
 }

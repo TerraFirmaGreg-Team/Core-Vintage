@@ -21,54 +21,54 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class FluidIngredient extends Ingredient {
-	private final FluidStack fluid;
+    private final FluidStack fluid;
 
-	public FluidIngredient(String fluidName) {
-		super(getValidBuckets(new FluidStack(FluidRegistry.getFluid(fluidName), Fluid.BUCKET_VOLUME)));
-		fluid = FluidRegistry.getFluidStack(fluidName, Fluid.BUCKET_VOLUME);
-	}
+    public FluidIngredient(String fluidName) {
+        super(getValidBuckets(new FluidStack(FluidRegistry.getFluid(fluidName), Fluid.BUCKET_VOLUME)));
+        fluid = FluidRegistry.getFluidStack(fluidName, Fluid.BUCKET_VOLUME);
+    }
 
-	private static ItemStack[] getValidBuckets(FluidStack fluid) {
-		List<ItemStack> output = new ArrayList<>();
-		ItemStack woodenBucket = new ItemStack(ItemsTFC.WOODEN_BUCKET);
-		IFluidHandler bucketCap = woodenBucket.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-		if (bucketCap != null) {
-			if (bucketCap.fill(fluid, true) >= Fluid.BUCKET_VOLUME) {
-				output.add(woodenBucket);
-			}
-		}
-		output.add(FluidUtil.getFilledBucket(fluid));
-		return output.toArray(new ItemStack[0]);
-	}
+    private static ItemStack[] getValidBuckets(FluidStack fluid) {
+        List<ItemStack> output = new ArrayList<>();
+        ItemStack woodenBucket = new ItemStack(ItemsTFC.WOODEN_BUCKET);
+        IFluidHandler bucketCap = woodenBucket.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        if (bucketCap != null) {
+            if (bucketCap.fill(fluid, true) >= Fluid.BUCKET_VOLUME) {
+                output.add(woodenBucket);
+            }
+        }
+        output.add(FluidUtil.getFilledBucket(fluid));
+        return output.toArray(new ItemStack[0]);
+    }
 
-	@Override
-	public boolean apply(@Nullable ItemStack input) {
-		if (input == null || input.isEmpty()) {
-			return false;
-		}
+    @Override
+    public boolean apply(@Nullable ItemStack input) {
+        if (input == null || input.isEmpty()) {
+            return false;
+        }
 
-		ItemStack stack = input.copy();
-		stack.setCount(1);
-		IFluidHandler handler = input.getCount() > 1 ? FluidUtil.getFluidHandler(stack) : FluidUtil.getFluidHandler(input);
+        ItemStack stack = input.copy();
+        stack.setCount(1);
+        IFluidHandler handler = input.getCount() > 1 ? FluidUtil.getFluidHandler(stack) : FluidUtil.getFluidHandler(input);
 
-		if (handler == null) {
-			return false;
-		}
-		return fluid.isFluidStackIdentical(handler.drain(Fluid.BUCKET_VOLUME, false));
-	}
+        if (handler == null) {
+            return false;
+        }
+        return fluid.isFluidStackIdentical(handler.drain(Fluid.BUCKET_VOLUME, false));
+    }
 
-	@Override
-	public boolean isSimple() {
-		return false;
-	}
+    @Override
+    public boolean isSimple() {
+        return false;
+    }
 
-	public static class Factory implements IIngredientFactory {
-		@Nonnull
-		@Override
-		public Ingredient parse(JsonContext context, JsonObject json) {
-			String fluidName = JsonUtils.getString(json, "fluid", "");
+    public static class Factory implements IIngredientFactory {
+        @Nonnull
+        @Override
+        public Ingredient parse(JsonContext context, JsonObject json) {
+            String fluidName = JsonUtils.getString(json, "fluid", "");
 
-			return new FluidIngredient(fluidName);
-		}
-	}
+            return new FluidIngredient(fluidName);
+        }
+    }
 }

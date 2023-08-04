@@ -16,18 +16,18 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderYakTFC extends RenderAnimalTFC<EntityYakTFC> {
-	private static final ResourceLocation TEXTURE_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/yak_young.png");
-	private static final ResourceLocation TEXTURE_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/yak_young.png");
+    private static final ResourceLocation TEXTURE_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/yak_young.png");
+    private static final ResourceLocation TEXTURE_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/yak_young.png");
 
-	public RenderYakTFC(RenderManager renderManager) {
-		super(renderManager, new ModelYakTFC(), 0.7F, TEXTURE_YOUNG, TEXTURE_OLD);
-	}
+    public RenderYakTFC(RenderManager renderManager) {
+        super(renderManager, new ModelYakTFC(), 0.7F, TEXTURE_YOUNG, TEXTURE_OLD);
+    }
 
-	protected void preRenderCallback(EntityYakTFC yakTFC, float par2) {
-		if (yakTFC.getGender() == EntityAnimalTFC.Gender.MALE)
-			GlStateManager.scale(1.2f, 1.2f, 1.2f);
-		else {
-			GlStateManager.scale(1.15f, 1.15f, 1.15f);
-		}
-	}
+    protected void preRenderCallback(EntityYakTFC yakTFC, float par2) {
+        if (yakTFC.getGender() == EntityAnimalTFC.Gender.MALE)
+            GlStateManager.scale(1.2f, 1.2f, 1.2f);
+        else {
+            GlStateManager.scale(1.15f, 1.15f, 1.15f);
+        }
+    }
 }

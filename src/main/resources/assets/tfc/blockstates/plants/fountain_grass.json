@@ -1,35 +1,35 @@
 {
-  "multipart": [
+  "multipart" : [
     {
-      "when": {
-        "age": "0"
+      "when" : {
+        "age" : "0"
       },
-      "apply": {
-        "model": "tfc:plants/fountain_grass_shortest"
+      "apply" : {
+        "model" : "tfc:plants/fountain_grass_shortest"
       }
     },
     {
-      "when": {
-        "age": "1"
+      "when" : {
+        "age" : "1"
       },
-      "apply": {
-        "model": "tfc:plants/fountain_grass_shorter"
+      "apply" : {
+        "model" : "tfc:plants/fountain_grass_shorter"
       }
     },
     {
-      "when": {
-        "age": "2"
+      "when" : {
+        "age" : "2"
       },
-      "apply": {
-        "model": "tfc:plants/fountain_grass_short"
+      "apply" : {
+        "model" : "tfc:plants/fountain_grass_short"
       }
     },
     {
-      "when": {
-        "age": "3"
+      "when" : {
+        "age" : "3"
       },
-      "apply": {
-        "model": "tfc:plants/fountain_grass"
+      "apply" : {
+        "model" : "tfc:plants/fountain_grass"
       }
     }
   ]

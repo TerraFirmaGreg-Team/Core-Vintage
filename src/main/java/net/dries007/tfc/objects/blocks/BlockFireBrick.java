@@ -16,26 +16,26 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockFireBrick extends Block implements IItemSize {
-	public BlockFireBrick() {
-		super(Material.ROCK);
+    public BlockFireBrick() {
+        super(Material.ROCK);
 
-		setSoundType(SoundType.STONE);
-		setHardness(1.0F);
+        setSoundType(SoundType.STONE);
+        setHardness(1.0F);
 
-		setCreativeTab(CreativeTabsTFC.DECORATIONS);
-		setRegistryName(MOD_ID, "fire_bricks");
-		setTranslationKey(MOD_ID + ".fire_bricks");
-	}
+        setCreativeTab(CreativeTabsTFC.DECORATIONS);
+        setRegistryName(MOD_ID, "fire_bricks");
+        setTranslationKey(MOD_ID + ".fire_bricks");
+    }
 
-	@Nonnull
-	@Override
-	public Size getSize(ItemStack stack) {
-		return Size.SMALL; // Stored everywhere
-	}
+    @Nonnull
+    @Override
+    public Size getSize(ItemStack stack) {
+        return Size.SMALL; // Stored everywhere
+    }
 
-	@Nonnull
-	@Override
-	public Weight getWeight(ItemStack stack) {
-		return Weight.LIGHT; // Stacksize = 32
-	}
+    @Nonnull
+    @Override
+    public Weight getWeight(ItemStack stack) {
+        return Weight.LIGHT; // Stacksize = 32
+    }
 }

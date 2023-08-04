@@ -1,24 +1,24 @@
 {
-  "multipart": [
+  "multipart" : [
     {
-      "when": {
-        "part": "lower|single"
+      "when" : {
+        "part" : "lower|single"
       },
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/toquilla_palm"
+          "model" : "tfc:plants/toquilla_palm"
         },
         {
-          "model": "tfc:plants/toquilla_palm",
-          "y": 90
+          "model" : "tfc:plants/toquilla_palm",
+          "y" : 90
         },
         {
-          "model": "tfc:plants/toquilla_palm",
-          "y": 180
+          "model" : "tfc:plants/toquilla_palm",
+          "y" : 180
         },
         {
-          "model": "tfc:plants/toquilla_palm",
-          "y": 270
+          "model" : "tfc:plants/toquilla_palm",
+          "y" : 270
         }
       ]
     }

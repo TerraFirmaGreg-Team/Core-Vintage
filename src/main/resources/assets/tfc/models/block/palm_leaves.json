@@ -1,171 +1,171 @@
 {
-  "credit": "Made with Blockbench",
-  "ambientocclusion": false,
-  "textures": {
-    "0": "tfc:blocks/wood/leaves/palm",
-    "1": "tfc:blocks/wood/leaves/palm_top",
-    "particle": "tfc:blocks/wood/leaves/palm"
+  "credit" : "Made with Blockbench",
+  "ambientocclusion" : false,
+  "textures" : {
+    "0" : "tfc:blocks/wood/leaves/palm",
+    "1" : "tfc:blocks/wood/leaves/palm_top",
+    "particle" : "tfc:blocks/wood/leaves/palm"
   },
-  "elements": [
+  "elements" : [
     {
-      "name": "cube",
-      "from": [
+      "name" : "cube",
+      "from" : [
         0,
         0,
         0
       ],
-      "to": [
+      "to" : [
         16,
         16,
         16
       ],
-      "faces": {
-        "north": {
-          "uv": [
+      "faces" : {
+        "north" : {
+          "uv" : [
             0,
             0,
             16,
             16
           ],
-          "texture": "#0",
-          "tintindex": 0
+          "texture" : "#0",
+          "tintindex" : 0
         },
-        "east": {
-          "uv": [
+        "east" : {
+          "uv" : [
             0,
             0,
             16,
             16
           ],
-          "texture": "#0",
-          "tintindex": 0
+          "texture" : "#0",
+          "tintindex" : 0
         },
-        "south": {
-          "uv": [
+        "south" : {
+          "uv" : [
             0,
             0,
             16,
             16
           ],
-          "texture": "#0",
-          "tintindex": 0
+          "texture" : "#0",
+          "tintindex" : 0
         },
-        "west": {
-          "uv": [
+        "west" : {
+          "uv" : [
             0,
             0,
             16,
             16
           ],
-          "texture": "#0",
-          "tintindex": 0
+          "texture" : "#0",
+          "tintindex" : 0
         },
-        "up": {
-          "uv": [
+        "up" : {
+          "uv" : [
             0,
             0,
             16,
             16
           ],
-          "texture": "#1",
-          "tintindex": 0
+          "texture" : "#1",
+          "tintindex" : 0
         }
       }
     },
     {
-      "name": "bottom",
-      "from": [
+      "name" : "bottom",
+      "from" : [
         0,
         8,
         0
       ],
-      "to": [
+      "to" : [
         16,
         8,
         16
       ],
-      "faces": {
-        "down": {
-          "uv": [
+      "faces" : {
+        "down" : {
+          "uv" : [
             0,
             0,
             16,
             16
           ],
-          "texture": "#1",
-          "tintindex": 0
+          "texture" : "#1",
+          "tintindex" : 0
         }
       }
     }
   ],
-  "display": {
-    "thirdperson_righthand": {
-      "rotation": [
+  "display" : {
+    "thirdperson_righthand" : {
+      "rotation" : [
         75,
         45,
         0
       ],
-      "translation": [
+      "translation" : [
         0,
         2.5,
         0
       ],
-      "scale": [
+      "scale" : [
         0.375,
         0.375,
         0.375
       ]
     },
-    "firstperson_righthand": {
-      "rotation": [
+    "firstperson_righthand" : {
+      "rotation" : [
         0,
         45,
         0
       ],
-      "scale": [
+      "scale" : [
         0.4,
         0.4,
         0.4
       ]
     },
-    "firstperson_lefthand": {
-      "rotation": [
+    "firstperson_lefthand" : {
+      "rotation" : [
         0,
         225,
         0
       ],
-      "scale": [
+      "scale" : [
         0.4,
         0.4,
         0.4
       ]
     },
-    "ground": {
-      "translation": [
+    "ground" : {
+      "translation" : [
         0,
         3,
         0
       ],
-      "scale": [
+      "scale" : [
         0.25,
         0.25,
         0.25
       ]
     },
-    "gui": {
-      "rotation": [
+    "gui" : {
+      "rotation" : [
         30,
         225,
         0
       ],
-      "scale": [
+      "scale" : [
         0.625,
         0.625,
         0.625
       ]
     },
-    "fixed": {
-      "scale": [
+    "fixed" : {
+      "scale" : [
         0.5,
         0.5,
         0.5

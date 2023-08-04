@@ -1,21 +1,20 @@
 {
-  "__comment__": "This file was automatically created by mcresources",
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {
-        "model": "tfc:groundcover/bone",
-        "y": 90
+        "model" : "tfc:groundcover/bone",
+        "y" : 90
       },
       {
-        "model": "tfc:groundcover/bone"
+        "model" : "tfc:groundcover/bone"
       },
       {
-        "model": "tfc:groundcover/bone",
-        "y": 180
+        "model" : "tfc:groundcover/bone",
+        "y" : 180
       },
       {
-        "model": "tfc:groundcover/bone",
-        "y": 270
+        "model" : "tfc:groundcover/bone",
+        "y" : 270
       }
     ]
   }

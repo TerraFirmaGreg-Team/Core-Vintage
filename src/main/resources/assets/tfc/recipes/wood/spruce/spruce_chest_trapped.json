@@ -1,15 +1,15 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
+  "type" : "minecraft:crafting_shapeless",
+  "ingredients" : [
     {
-      "item": "tfc:wood/chest/spruce"
+      "item" : "tfc:wood/chest/spruce"
     },
     {
-      "item": "minecraft:tripwire_hook"
+      "item" : "minecraft:tripwire_hook"
     }
   ],
-  "result": {
-    "item": "tfc:wood/chest_trap/spruce",
-    "count": 1
+  "result" : {
+    "item" : "tfc:wood/chest_trap/spruce",
+    "count" : 1
   }
 }

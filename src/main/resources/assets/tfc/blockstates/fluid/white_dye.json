@@ -1,14 +1,14 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "forge:fluid",
-    "textures": {}
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "forge:fluid",
+    "textures" : {}
   },
-  "variants": {
-    "normal": {
-      "transform": "forge:default-item",
-      "custom": {
-        "fluid": "white_dye"
+  "variants" : {
+    "normal" : {
+      "transform" : "forge:default-item",
+      "custom" : {
+        "fluid" : "white_dye"
       }
     }
   }

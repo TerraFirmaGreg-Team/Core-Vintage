@@ -1,24 +1,26 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:berry_bush_large",
-    "textures": {
-      "texture": "tfc:blocks/berry_bush/bush/blueberry",
-      "particle": "tfc:blocks/berry_bush/bush/blueberry"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:berry_bush_large",
+    "textures" : {
+      "texture" : "tfc:blocks/berry_bush/bush/blueberry",
+      "particle" : "tfc:blocks/berry_bush/bush/blueberry"
     }
   },
-  "variants": {
-    "normal": [{}],
-    "inventory": {
-      "model": "tfc:berry_bush_large"
+  "variants" : {
+    "normal" : [
+      {}
+    ],
+    "inventory" : {
+      "model" : "tfc:berry_bush_large"
     },
-    "fruiting": {
-      "true": {
-        "textures": {
-          "texture": "tfc:blocks/berry_bush/berry/blueberry"
+    "fruiting" : {
+      "true" : {
+        "textures" : {
+          "texture" : "tfc:blocks/berry_bush/berry/blueberry"
         }
       },
-      "false": {}
+      "false" : {}
     }
   }
 }

@@ -1,132 +1,132 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "textures": {
-      "bottom": "tfc:blocks/wood/door/lower/pattern",
-      "top": "tfc:blocks/wood/door/upper/pattern",
-      "particle": "tfc:blocks/wood/planks/pattern"
+  "forge_marker" : 1,
+  "defaults" : {
+    "textures" : {
+      "bottom" : "tfc:blocks/wood/door/lower/pattern",
+      "top" : "tfc:blocks/wood/door/upper/pattern",
+      "particle" : "tfc:blocks/wood/planks/pattern"
     }
   },
-  "variants": {
-    "facing=east,half=lower,hinge=left,open=false": {
-      "model": "tfc:wood/door/lower/door"
+  "variants" : {
+    "facing=east,half=lower,hinge=left,open=false" : {
+      "model" : "tfc:wood/door/lower/door"
     },
-    "facing=south,half=lower,hinge=left,open=false": {
-      "model": "tfc:wood/door/lower/door",
-      "y": 90
+    "facing=south,half=lower,hinge=left,open=false" : {
+      "model" : "tfc:wood/door/lower/door",
+      "y" : 90
     },
-    "facing=west,half=lower,hinge=left,open=false": {
-      "model": "tfc:wood/door/lower/door",
-      "y": 180
+    "facing=west,half=lower,hinge=left,open=false" : {
+      "model" : "tfc:wood/door/lower/door",
+      "y" : 180
     },
-    "facing=north,half=lower,hinge=left,open=false": {
-      "model": "tfc:wood/door/lower/door",
-      "y": 270
+    "facing=north,half=lower,hinge=left,open=false" : {
+      "model" : "tfc:wood/door/lower/door",
+      "y" : 270
     },
-    "facing=east,half=lower,hinge=right,open=true": {
-      "model": "tfc:wood/door/lower/door",
-      "y": 270
+    "facing=east,half=lower,hinge=right,open=true" : {
+      "model" : "tfc:wood/door/lower/door",
+      "y" : 270
     },
-    "facing=south,half=lower,hinge=right,open=true": {
-      "model": "tfc:wood/door/lower/door"
+    "facing=south,half=lower,hinge=right,open=true" : {
+      "model" : "tfc:wood/door/lower/door"
     },
-    "facing=west,half=lower,hinge=right,open=true": {
-      "model": "tfc:wood/door/lower/door",
-      "y": 90
+    "facing=west,half=lower,hinge=right,open=true" : {
+      "model" : "tfc:wood/door/lower/door",
+      "y" : 90
     },
-    "facing=north,half=lower,hinge=right,open=true": {
-      "model": "tfc:wood/door/lower/door",
-      "y": 180
+    "facing=north,half=lower,hinge=right,open=true" : {
+      "model" : "tfc:wood/door/lower/door",
+      "y" : 180
     },
-    "facing=east,half=lower,hinge=right,open=false": {
-      "model": "tfc:wood/door/lower/door_rh"
+    "facing=east,half=lower,hinge=right,open=false" : {
+      "model" : "tfc:wood/door/lower/door_rh"
     },
-    "facing=south,half=lower,hinge=right,open=false": {
-      "model": "tfc:wood/door/lower/door_rh",
-      "y": 90
+    "facing=south,half=lower,hinge=right,open=false" : {
+      "model" : "tfc:wood/door/lower/door_rh",
+      "y" : 90
     },
-    "facing=west,half=lower,hinge=right,open=false": {
-      "model": "tfc:wood/door/lower/door_rh",
-      "y": 180
+    "facing=west,half=lower,hinge=right,open=false" : {
+      "model" : "tfc:wood/door/lower/door_rh",
+      "y" : 180
     },
-    "facing=north,half=lower,hinge=right,open=false": {
-      "model": "tfc:wood/door/lower/door_rh",
-      "y": 270
+    "facing=north,half=lower,hinge=right,open=false" : {
+      "model" : "tfc:wood/door/lower/door_rh",
+      "y" : 270
     },
-    "facing=east,half=lower,hinge=left,open=true": {
-      "model": "tfc:wood/door/lower/door_rh",
-      "y": 90
+    "facing=east,half=lower,hinge=left,open=true" : {
+      "model" : "tfc:wood/door/lower/door_rh",
+      "y" : 90
     },
-    "facing=south,half=lower,hinge=left,open=true": {
-      "model": "tfc:wood/door/lower/door_rh",
-      "y": 180
+    "facing=south,half=lower,hinge=left,open=true" : {
+      "model" : "tfc:wood/door/lower/door_rh",
+      "y" : 180
     },
-    "facing=west,half=lower,hinge=left,open=true": {
-      "model": "tfc:wood/door/lower/door_rh",
-      "y": 270
+    "facing=west,half=lower,hinge=left,open=true" : {
+      "model" : "tfc:wood/door/lower/door_rh",
+      "y" : 270
     },
-    "facing=north,half=lower,hinge=left,open=true": {
-      "model": "tfc:wood/door/lower/door_rh"
+    "facing=north,half=lower,hinge=left,open=true" : {
+      "model" : "tfc:wood/door/lower/door_rh"
     },
-    "facing=east,half=upper,hinge=left,open=false": {
-      "model": "tfc:wood/door/upper/door"
+    "facing=east,half=upper,hinge=left,open=false" : {
+      "model" : "tfc:wood/door/upper/door"
     },
-    "facing=south,half=upper,hinge=left,open=false": {
-      "model": "tfc:wood/door/upper/door",
-      "y": 90
+    "facing=south,half=upper,hinge=left,open=false" : {
+      "model" : "tfc:wood/door/upper/door",
+      "y" : 90
     },
-    "facing=west,half=upper,hinge=left,open=false": {
-      "model": "tfc:wood/door/upper/door",
-      "y": 180
+    "facing=west,half=upper,hinge=left,open=false" : {
+      "model" : "tfc:wood/door/upper/door",
+      "y" : 180
     },
-    "facing=north,half=upper,hinge=left,open=false": {
-      "model": "tfc:wood/door/upper/door",
-      "y": 270
+    "facing=north,half=upper,hinge=left,open=false" : {
+      "model" : "tfc:wood/door/upper/door",
+      "y" : 270
     },
-    "facing=east,half=upper,hinge=right,open=true": {
-      "model": "tfc:wood/door/upper/door",
-      "y": 270
+    "facing=east,half=upper,hinge=right,open=true" : {
+      "model" : "tfc:wood/door/upper/door",
+      "y" : 270
     },
-    "facing=south,half=upper,hinge=right,open=true": {
-      "model": "tfc:wood/door/upper/door"
+    "facing=south,half=upper,hinge=right,open=true" : {
+      "model" : "tfc:wood/door/upper/door"
     },
-    "facing=west,half=upper,hinge=right,open=true": {
-      "model": "tfc:wood/door/upper/door",
-      "y": 90
+    "facing=west,half=upper,hinge=right,open=true" : {
+      "model" : "tfc:wood/door/upper/door",
+      "y" : 90
     },
-    "facing=north,half=upper,hinge=right,open=true": {
-      "model": "tfc:wood/door/upper/door",
-      "y": 180
+    "facing=north,half=upper,hinge=right,open=true" : {
+      "model" : "tfc:wood/door/upper/door",
+      "y" : 180
     },
-    "facing=east,half=upper,hinge=right,open=false": {
-      "model": "tfc:wood/door/upper/door_rh"
+    "facing=east,half=upper,hinge=right,open=false" : {
+      "model" : "tfc:wood/door/upper/door_rh"
     },
-    "facing=south,half=upper,hinge=right,open=false": {
-      "model": "tfc:wood/door/upper/door_rh",
-      "y": 90
+    "facing=south,half=upper,hinge=right,open=false" : {
+      "model" : "tfc:wood/door/upper/door_rh",
+      "y" : 90
     },
-    "facing=west,half=upper,hinge=right,open=false": {
-      "model": "tfc:wood/door/upper/door_rh",
-      "y": 180
+    "facing=west,half=upper,hinge=right,open=false" : {
+      "model" : "tfc:wood/door/upper/door_rh",
+      "y" : 180
     },
-    "facing=north,half=upper,hinge=right,open=false": {
-      "model": "tfc:wood/door/upper/door_rh",
-      "y": 270
+    "facing=north,half=upper,hinge=right,open=false" : {
+      "model" : "tfc:wood/door/upper/door_rh",
+      "y" : 270
     },
-    "facing=east,half=upper,hinge=left,open=true": {
-      "model": "tfc:wood/door/upper/door_rh",
-      "y": 90
+    "facing=east,half=upper,hinge=left,open=true" : {
+      "model" : "tfc:wood/door/upper/door_rh",
+      "y" : 90
     },
-    "facing=south,half=upper,hinge=left,open=true": {
-      "model": "tfc:wood/door/upper/door_rh",
-      "y": 180
+    "facing=south,half=upper,hinge=left,open=true" : {
+      "model" : "tfc:wood/door/upper/door_rh",
+      "y" : 180
     },
-    "facing=west,half=upper,hinge=left,open=true": {
-      "model": "tfc:wood/door/upper/door_rh",
-      "y": 270
+    "facing=west,half=upper,hinge=left,open=true" : {
+      "model" : "tfc:wood/door/upper/door_rh",
+      "y" : 270
     },
-    "facing=north,half=upper,hinge=left,open=true": {
-      "model": "tfc:wood/door/upper/door_rh"
+    "facing=north,half=upper,hinge=left,open=true" : {
+      "model" : "tfc:wood/door/upper/door_rh"
     }
   }
 }

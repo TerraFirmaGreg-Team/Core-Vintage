@@ -18,27 +18,27 @@ import java.util.function.Supplier;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public final class CapabilityForgeable {
-	public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "item_forge");
-	public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IForgeable for items outside TFC
-	@CapabilityInject(IForgeable.class)
-	public static Capability<IForgeable> FORGEABLE_CAPABILITY;
+    public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "item_forge");
+    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IForgeable for items outside TFC
+    @CapabilityInject(IForgeable.class)
+    public static Capability<IForgeable> FORGEABLE_CAPABILITY;
 
-	public static void preInit() {
-		CapabilityManager.INSTANCE.register(IForgeable.class, new DumbStorage<>(), ForgeableHandler::new);
-	}
+    public static void preInit() {
+        CapabilityManager.INSTANCE.register(IForgeable.class, new DumbStorage<>(), ForgeableHandler::new);
+    }
 
-	public static void init() {
+    public static void init() {
 
-	}
+    }
 
-	@Nullable
-	public static ICapabilityProvider getCustomForgeable(ItemStack stack) {
-		Set<IIngredient<ItemStack>> itemItemSet = CUSTOM_ITEMS.keySet();
-		for (IIngredient<ItemStack> ingredient : itemItemSet) {
-			if (ingredient.testIgnoreCount(stack)) {
-				return CUSTOM_ITEMS.get(ingredient).get();
-			}
-		}
-		return null;
-	}
+    @Nullable
+    public static ICapabilityProvider getCustomForgeable(ItemStack stack) {
+        Set<IIngredient<ItemStack>> itemItemSet = CUSTOM_ITEMS.keySet();
+        for (IIngredient<ItemStack> ingredient : itemItemSet) {
+            if (ingredient.testIgnoreCount(stack)) {
+                return CUSTOM_ITEMS.get(ingredient).get();
+            }
+        }
+        return null;
+    }
 }

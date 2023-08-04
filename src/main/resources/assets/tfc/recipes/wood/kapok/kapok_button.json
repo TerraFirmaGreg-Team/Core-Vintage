@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
+  "type" : "minecraft:crafting_shapeless",
+  "ingredients" : [
     {
-      "item": "tfc:wood/planks/kapok"
+      "item" : "tfc:wood/planks/kapok"
     }
   ],
-  "result": {
-    "item": "tfc:wood/button/kapok",
-    "count": 1
+  "result" : {
+    "item" : "tfc:wood/button/kapok",
+    "count" : 1
   }
 }

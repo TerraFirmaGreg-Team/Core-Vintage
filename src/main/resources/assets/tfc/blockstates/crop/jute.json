@@ -1,42 +1,44 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:crop_tall",
-    "textures": {
-      "crop": "tfc:blocks/crop/jute_0"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:crop_tall",
+    "textures" : {
+      "crop" : "tfc:blocks/crop/jute_0"
     }
   },
-  "variants": {
-    "normal": [{}],
-    "stage": {
-      "0": {
-        "textures": {
-          "crop": "tfc:blocks/crop/jute_0"
+  "variants" : {
+    "normal" : [
+      {}
+    ],
+    "stage" : {
+      "0" : {
+        "textures" : {
+          "crop" : "tfc:blocks/crop/jute_0"
         }
       },
-      "1": {
-        "textures": {
-          "crop": "tfc:blocks/crop/jute_1"
+      "1" : {
+        "textures" : {
+          "crop" : "tfc:blocks/crop/jute_1"
         }
       },
-      "2": {
-        "textures": {
-          "crop": "tfc:blocks/crop/jute_2"
+      "2" : {
+        "textures" : {
+          "crop" : "tfc:blocks/crop/jute_2"
         }
       },
-      "3": {
-        "textures": {
-          "crop": "tfc:blocks/crop/jute_3"
+      "3" : {
+        "textures" : {
+          "crop" : "tfc:blocks/crop/jute_3"
         }
       },
-      "4": {
-        "textures": {
-          "crop": "tfc:blocks/crop/jute_4"
+      "4" : {
+        "textures" : {
+          "crop" : "tfc:blocks/crop/jute_4"
         }
       },
-      "5": {
-        "textures": {
-          "crop": "tfc:blocks/crop/jute_5"
+      "5" : {
+        "textures" : {
+          "crop" : "tfc:blocks/crop/jute_5"
         }
       }
     }

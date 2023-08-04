@@ -12,13 +12,13 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public enum GroundcoverType implements IStringSerializable {
-	BONE(() -> Items.BONE),
-	//    CLAM(),
+    BONE(() -> Items.BONE),
+    //    CLAM(),
 //    DEAD_GRASS(),
 //    DRIFTWOOD(),
 //    FEATHER(() -> Items.FEATHER),
-	FLINT(() -> Items.FLINT),
-	//    GUANO(),
+    FLINT(() -> Items.FLINT),
+    //    GUANO(),
 //    HUMUS(),
 //    MOLLUSK(),
 //    MUSSEL(),
@@ -27,28 +27,28 @@ public enum GroundcoverType implements IStringSerializable {
 //    SALT_LICK(),
 //    SEAWEED(),
 //    SEA_URCHIN(),
-	STICK(() -> Items.STICK);
+    STICK(() -> Items.STICK);
 
-	@Nullable
-	private final Supplier<? extends Item> vanillaItem; // The vanilla item this corresponds to
+    @Nullable
+    private final Supplier<? extends Item> vanillaItem; // The vanilla item this corresponds to
 
-	GroundcoverType(@Nullable Supplier<? extends Item> vanillaItem) {
-		this.vanillaItem = vanillaItem;
-	}
+    GroundcoverType(@Nullable Supplier<? extends Item> vanillaItem) {
+        this.vanillaItem = vanillaItem;
+    }
 
-	GroundcoverType() {
-		this.vanillaItem = null;
-	}
+    GroundcoverType() {
+        this.vanillaItem = null;
+    }
 
-	@Nullable
-	public Function<Block, ItemBlock> createBlockItem() {
-		return vanillaItem == null ? ItemBlock::new : null;
-	}
+    @Nullable
+    public Function<Block, ItemBlock> createBlockItem() {
+        return vanillaItem == null ? ItemBlock::new : null;
+    }
 
 
-	@Nonnull
-	@Override
-	public String getName() {
-		return name().toLowerCase();
-	}
+    @Nonnull
+    @Override
+    public String getName() {
+        return name().toLowerCase();
+    }
 }

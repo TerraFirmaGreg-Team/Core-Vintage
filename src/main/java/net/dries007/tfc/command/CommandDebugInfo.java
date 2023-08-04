@@ -19,37 +19,37 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 @ParametersAreNonnullByDefault
 public class CommandDebugInfo extends CommandBase {
-	private static final Logger LOGGER = LogManager.getLogger("tfc-infodump");
+    private static final Logger LOGGER = LogManager.getLogger("tfc-infodump");
 
-	@Override
-	@Nonnull
-	public String getName() {
-		return "tfcdebuginfodump";
-	}
+    @Override
+    @Nonnull
+    public String getName() {
+        return "tfcdebuginfodump";
+    }
 
-	@Override
-	@Nonnull
-	public String getUsage(ICommandSender sender) {
-		return "tfc.command.debuginfo.usage";
-	}
+    @Override
+    @Nonnull
+    public String getUsage(ICommandSender sender) {
+        return "tfc.command.debuginfo.usage";
+    }
 
-	@Override
-	public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
-		World world = sender.getEntityWorld();
-		BlockPos pos = sender.getPosition();
+    @Override
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
+        World world = sender.getEntityWorld();
+        BlockPos pos = sender.getPosition();
 
-		// Chunk data
-		ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        // Chunk data
+        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
 
-		LOGGER.info("ROCK LAYER DATA");
-		for (int x = 0; x < 16; x++) {
-			for (int z = 0; z < 16; z++) {
-				LOGGER.info("Pos: {} {} - Rock 1: {}, Rock 2: {}, Rock 3: {}", x, z, chunkData.getRock1(x, z), chunkData.getRock2(x, z), chunkData.getRock3(x, z));
-			}
-		}
+        LOGGER.info("ROCK LAYER DATA");
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                LOGGER.info("Pos: {} {} - Rock 1: {}, Rock 2: {}, Rock 3: {}", x, z, chunkData.getRock1(x, z), chunkData.getRock2(x, z), chunkData.getRock3(x, z));
+            }
+        }
 
-		LOGGER.info("RAW CHUNK DATA VIEW");
-		NBTBase nbt = ChunkDataProvider.CHUNK_DATA_CAPABILITY.writeNBT(chunkData, null);
-		LOGGER.info(nbt == null ? "writeNBT returned null" : nbt.toString());
-	}
+        LOGGER.info("RAW CHUNK DATA VIEW");
+        NBTBase nbt = ChunkDataProvider.CHUNK_DATA_CAPABILITY.writeNBT(chunkData, null);
+        LOGGER.info(nbt == null ? "writeNBT returned null" : nbt.toString());
+    }
 }

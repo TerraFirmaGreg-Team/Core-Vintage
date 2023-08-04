@@ -1,20 +1,20 @@
 {
-  "type": "tfc:damage_item_shaped",
-  "pattern": [
+  "type" : "tfc:damage_item_shaped",
+  "pattern" : [
     "XB",
     " B"
   ],
-  "key": {
-    "X": {
-      "type": "forge:ore_dict",
-      "ore": "saw"
+  "key" : {
+    "X" : {
+      "type" : "forge:ore_dict",
+      "ore" : "saw"
     },
-    "B": {
-      "item": "tfc:wood/log/ash"
+    "B" : {
+      "item" : "tfc:wood/log/ash"
     }
   },
-  "result": {
-    "item": "tfc:wood/support/ash",
-    "count": 8
+  "result" : {
+    "item" : "tfc:wood/support/ash",
+    "count" : 8
   }
 }

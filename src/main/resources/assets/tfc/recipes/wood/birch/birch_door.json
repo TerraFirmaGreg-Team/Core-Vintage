@@ -1,18 +1,18 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "XX",
     "XX",
     "XX"
   ],
-  "key": {
-    "X": {
-      "type": "forge:ore_dict",
-      "ore": "lumberBirch"
+  "key" : {
+    "X" : {
+      "type" : "forge:ore_dict",
+      "ore" : "lumberBirch"
     }
   },
-  "result": {
-    "item": "tfc:wood/door/birch",
-    "count": 2
+  "result" : {
+    "item" : "tfc:wood/door/birch",
+    "count" : 2
   }
 }

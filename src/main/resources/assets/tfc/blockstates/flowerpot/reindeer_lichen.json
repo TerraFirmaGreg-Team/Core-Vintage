@@ -1,10 +1,12 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:flowerpot/reindeer_lichen",
-    "textures": {}
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:flowerpot/reindeer_lichen",
+    "textures" : {}
   },
-  "variants": {
-    "normal": [{}]
+  "variants" : {
+    "normal" : [
+      {}
+    ]
   }
 }

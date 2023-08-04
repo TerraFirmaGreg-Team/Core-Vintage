@@ -1,13 +1,13 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:debug"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:debug"
   },
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {}
     ],
-    "inventory": [
+    "inventory" : [
       {}
     ]
   }

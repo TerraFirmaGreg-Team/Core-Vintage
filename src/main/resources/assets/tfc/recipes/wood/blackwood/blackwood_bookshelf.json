@@ -1,20 +1,20 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "XXX",
     "BBB",
     "XXX"
   ],
-  "key": {
-    "X": {
-      "item": "tfc:wood/planks/blackwood"
+  "key" : {
+    "X" : {
+      "item" : "tfc:wood/planks/blackwood"
     },
-    "B": {
-      "item": "minecraft:book"
+    "B" : {
+      "item" : "minecraft:book"
     }
   },
-  "result": {
-    "item": "tfc:wood/bookshelf/blackwood",
-    "count": 1
+  "result" : {
+    "item" : "tfc:wood/bookshelf/blackwood",
+    "count" : 1
   }
 }

@@ -18,20 +18,20 @@ import net.minecraftforge.items.IItemHandler;
 import static net.dries007.tfc.objects.te.TEQuern.SLOT_HANDSTONE;
 
 public class QuernProvider implements IProbeInfoProvider {
-	@Override
-	public String getID() {
-		return TerraFirmaCraft.MOD_ID + ":quern";
-	}
+    @Override
+    public String getID() {
+        return TerraFirmaCraft.MOD_ID + ":quern";
+    }
 
-	@Override
-	public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
 
-		var quern = Helpers.getTE(world, iProbeHitData.getPos(), TEQuern.class);
-		IItemHandler handler;
-		ItemStack handstone;
+        var quern = Helpers.getTE(world, iProbeHitData.getPos(), TEQuern.class);
+        IItemHandler handler;
+        ItemStack handstone;
 
-		if (quern != null && quern.hasHandstone() && (handler = quern.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) != null && !(handstone = handler.getStackInSlot(SLOT_HANDSTONE)).isEmpty()) {
-			iProbeInfo.text(new TextComponentTranslation("waila.tfc.quern.handstone_durability", handstone.getItemDamage(), handstone.getMaxDamage()).getFormattedText());
-		}
-	}
+        if (quern != null && quern.hasHandstone() && (handler = quern.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) != null && !(handstone = handler.getStackInSlot(SLOT_HANDSTONE)).isEmpty()) {
+            iProbeInfo.text(new TextComponentTranslation("waila.tfc.quern.handstone_durability", handstone.getItemDamage(), handstone.getMaxDamage()).getFormattedText());
+        }
+    }
 }

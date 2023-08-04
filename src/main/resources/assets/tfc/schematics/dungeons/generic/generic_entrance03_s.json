@@ -1,5 +1,5 @@
 {
-  "blockmap": [
+  "blockmap" : [
     "null|minecraft:stone",
     "dungeon_wall|minecraft:wool 5",
     "dungeon_floor|minecraft:wool 0",
@@ -7,13 +7,13 @@
     "dungeon_stairs_floor|minecraft:stone_brick_stairs",
     "dungeon_stairs_wall|minecraft:brick_stairs"
   ],
-  "floory": 0,
-  "connections": [
+  "floory" : 0,
+  "connections" : [
     "south"
   ],
-  "setpiecemap": [
+  "setpiecemap" : [
     "south|generic_hall_nsew"
   ],
-  "roomtype": "entrance",
-  "weight": 1.0
+  "roomtype" : "entrance",
+  "weight" : 1.0
 }

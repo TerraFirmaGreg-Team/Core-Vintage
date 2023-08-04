@@ -12,12 +12,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = GuiCreateWorld.class)
 public class GuiCreateWorldMixin {
 
-	@Shadow
-	private int selectedIndex = TerraFirmaCraft.getWorldType().getId();
+    @Shadow
+    private int selectedIndex = TerraFirmaCraft.getWorldType().getId();
 
-	@Inject(method = "canSelectCurWorldType", at = @At(value = "HEAD"), cancellable = true)
-	private void onCanSelectCurWorldType(CallbackInfoReturnable<Boolean> cir) {
-		selectedIndex = TerraFirmaCraft.getWorldType().getId();
-		cir.setReturnValue(true);
-	}
+    @Inject(method = "canSelectCurWorldType", at = @At(value = "HEAD"), cancellable = true)
+    private void onCanSelectCurWorldType(CallbackInfoReturnable<Boolean> cir) {
+        selectedIndex = TerraFirmaCraft.getWorldType().getId();
+        cir.setReturnValue(true);
+    }
 }

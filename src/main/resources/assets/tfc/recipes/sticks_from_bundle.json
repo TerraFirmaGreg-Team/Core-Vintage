@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
+  "type" : "minecraft:crafting_shapeless",
+  "ingredients" : [
     {
-      "item": "tfc:stick_bundle"
+      "item" : "tfc:stick_bundle"
     }
   ],
-  "result": {
-    "item": "minecraft:stick",
-    "count": 18
+  "result" : {
+    "item" : "minecraft:stick",
+    "count" : 18
   }
 }

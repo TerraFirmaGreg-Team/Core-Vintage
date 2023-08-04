@@ -1,50 +1,50 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:cross"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:cross"
   },
-  "variants": {
-    "stage": {
-      "0": {
-        "textures": {
-          "cross": "tfc:blocks/plants/calendula/0",
-          "particle": "tfc:blocks/plants/calendula/0"
+  "variants" : {
+    "stage" : {
+      "0" : {
+        "textures" : {
+          "cross" : "tfc:blocks/plants/calendula/0",
+          "particle" : "tfc:blocks/plants/calendula/0"
         }
       },
-      "1": {
-        "textures": {
-          "cross": "tfc:blocks/plants/calendula/1",
-          "particle": "tfc:blocks/plants/calendula/1"
+      "1" : {
+        "textures" : {
+          "cross" : "tfc:blocks/plants/calendula/1",
+          "particle" : "tfc:blocks/plants/calendula/1"
         }
       },
-      "2": {
-        "textures": {
-          "cross": "tfc:blocks/plants/calendula/2",
-          "particle": "tfc:blocks/plants/calendula/2"
+      "2" : {
+        "textures" : {
+          "cross" : "tfc:blocks/plants/calendula/2",
+          "particle" : "tfc:blocks/plants/calendula/2"
         }
       },
-      "3": {
-        "textures": {
-          "cross": "tfc:blocks/plants/calendula/3",
-          "particle": "tfc:blocks/plants/calendula/3"
+      "3" : {
+        "textures" : {
+          "cross" : "tfc:blocks/plants/calendula/3",
+          "particle" : "tfc:blocks/plants/calendula/3"
         }
       },
-      "4": {
-        "textures": {
-          "cross": "tfc:blocks/plants/calendula/3",
-          "particle": "tfc:blocks/plants/calendula/3"
+      "4" : {
+        "textures" : {
+          "cross" : "tfc:blocks/plants/calendula/3",
+          "particle" : "tfc:blocks/plants/calendula/3"
         }
       },
-      "5": {
-        "textures": {
-          "cross": "tfc:blocks/plants/calendula/4",
-          "particle": "tfc:blocks/plants/calendula/4"
+      "5" : {
+        "textures" : {
+          "cross" : "tfc:blocks/plants/calendula/4",
+          "particle" : "tfc:blocks/plants/calendula/4"
         }
       },
-      "6": {
-        "textures": {
-          "cross": "tfc:blocks/plants/calendula/5",
-          "particle": "tfc:blocks/plants/calendula/5"
+      "6" : {
+        "textures" : {
+          "cross" : "tfc:blocks/plants/calendula/5",
+          "particle" : "tfc:blocks/plants/calendula/5"
         }
       }
     }

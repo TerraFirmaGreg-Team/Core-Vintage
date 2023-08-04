@@ -1,41 +1,41 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "torch_wall",
-    "textures": {
-      "torch": "blocks/torch_on"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "torch_wall",
+    "textures" : {
+      "torch" : "blocks/torch_on"
     }
   },
-  "variants": {
-    "normal": {
-      "model": "torch"
+  "variants" : {
+    "normal" : {
+      "model" : "torch"
     },
-    "lit": {
-      "true": {},
-      "false": {
-        "textures": {
-          "torch": "tfc:blocks/torch_off"
+    "lit" : {
+      "true" : {},
+      "false" : {
+        "textures" : {
+          "torch" : "tfc:blocks/torch_off"
         }
       }
     },
-    "facing": {
-      "up": {
-        "model": "torch"
+    "facing" : {
+      "up" : {
+        "model" : "torch"
       },
-      "east": {},
-      "south": {
-        "y": 90
+      "east" : {},
+      "south" : {
+        "y" : 90
       },
-      "west": {
-        "y": 180
+      "west" : {
+        "y" : 180
       },
-      "north": {
-        "y": 270
+      "north" : {
+        "y" : 270
       }
     },
-    "inventory": [
+    "inventory" : [
       {
-        "model": "blocks/torch_on"
+        "model" : "blocks/torch_on"
       }
     ]
   }

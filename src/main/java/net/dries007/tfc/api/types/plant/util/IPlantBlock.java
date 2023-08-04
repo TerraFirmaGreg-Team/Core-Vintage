@@ -6,7 +6,7 @@ import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 
 public interface IPlantBlock extends IHasModel, IItemProvider {
-	PlantVariant getPlantVariant();
+    PlantVariant getPlantVariant();
 
-	Plant getPlantType();
+    Plant getPlantType();
 }

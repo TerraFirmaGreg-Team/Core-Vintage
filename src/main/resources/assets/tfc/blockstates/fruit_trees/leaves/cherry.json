@@ -1,38 +1,38 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "leaves",
-    "textures": {
-      "all": "tfc:blocks/fruit_trees/leaves/cherry"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "leaves",
+    "textures" : {
+      "all" : "tfc:blocks/fruit_trees/leaves/cherry"
     }
   },
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {}
     ],
-    "inventory": {
-      "model": "leaves",
-      "transform": "forge:default-block"
+    "inventory" : {
+      "model" : "leaves",
+      "transform" : "forge:default-block"
     },
-    "state": {
-      "normal": {
-        "model": "leaves"
+    "state" : {
+      "normal" : {
+        "model" : "leaves"
       },
-      "flowering": {
-        "model": "leaves",
-        "textures": {
-          "all": "tfc:blocks/fruit_trees/leaves/cherry",
-          "texture": "tfc:blocks/fruit_trees/flowers/cherry"
+      "flowering" : {
+        "model" : "leaves",
+        "textures" : {
+          "all" : "tfc:blocks/fruit_trees/leaves/cherry",
+          "texture" : "tfc:blocks/fruit_trees/flowers/cherry"
         },
-        "submodel": "tfc:fruit_trees/leaves_overlay"
+        "submodel" : "tfc:fruit_trees/leaves_overlay"
       },
-      "fruit": {
-        "model": "leaves",
-        "textures": {
-          "all": "tfc:blocks/fruit_trees/leaves/cherry",
-          "texture": "tfc:blocks/fruit_trees/fruit/cherry"
+      "fruit" : {
+        "model" : "leaves",
+        "textures" : {
+          "all" : "tfc:blocks/fruit_trees/leaves/cherry",
+          "texture" : "tfc:blocks/fruit_trees/fruit/cherry"
         },
-        "submodel": "tfc:fruit_trees/leaves_overlay"
+        "submodel" : "tfc:fruit_trees/leaves_overlay"
       }
     }
   }

@@ -30,57 +30,57 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class ItemRock extends ItemTFC implements IRockItem {
 
-	private final Rock rock;
+    private final Rock rock;
 
-	public ItemRock(Rock rock) {
-		this.rock = rock;
+    public ItemRock(Rock rock) {
+        this.rock = rock;
 
-		TFCStorage.addRockItem(rock, this);
+        TFCStorage.addRockItem(rock, this);
 
-		OreDictionaryHelper.register(this, "rock");
-		OreDictionaryHelper.register(this, "rock", rock);
-		OreDictionaryHelper.register(this, "rock", rock.getRockCategory());
+        OreDictionaryHelper.register(this, "rock");
+        OreDictionaryHelper.register(this, "rock", rock);
+        OreDictionaryHelper.register(this, "rock", rock.getRockCategory());
 
-		if (rock.isFlux())
-			OreDictionaryHelper.register(this, "rock", "flux");
-	}
+        if (rock.isFlux())
+            OreDictionaryHelper.register(this, "rock", "flux");
+    }
 
-	@Override
-	@Nonnull
-	public Rock getRock() {
-		return rock;
-	}
+    @Override
+    @Nonnull
+    public Rock getRock() {
+        return rock;
+    }
 
-	@Nonnull
-	@Override
-	public Size getSize(ItemStack stack) {
-		return Size.SMALL;
-	}
+    @Nonnull
+    @Override
+    public Size getSize(ItemStack stack) {
+        return Size.SMALL;
+    }
 
-	@Nonnull
-	@Override
-	public Weight getWeight(ItemStack stack) {
-		return Weight.VERY_LIGHT;
-	}
+    @Nonnull
+    @Override
+    public Weight getWeight(ItemStack stack) {
+        return Weight.VERY_LIGHT;
+    }
 
-	@Override
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
-		ItemStack stack = player.getHeldItem(hand);
-		if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
-			TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.KNAPPING_STONE);
-		}
-		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
-	}
+    @Override
+    @Nonnull
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+        ItemStack stack = player.getHeldItem(hand);
+        if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
+            TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.KNAPPING_STONE);
+        }
+        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
 
-		if (rock.isFlux())
-			tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());
-	}
+        if (rock.isFlux())
+            tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());
+    }
 }

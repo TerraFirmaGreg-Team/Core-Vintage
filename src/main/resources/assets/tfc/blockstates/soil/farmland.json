@@ -1,36 +1,36 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:farmland"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:farmland"
   },
-  "variants": {
-    "soiltype": {
-      "silt": {
-        "textures": {
-          "dirt": "tfc:blocks/soil/dirt/silt",
-          "particle": "tfc:blocks/soil/dirt/silt",
-          "top": "tfc:blocks/soil/farmland/silt"
+  "variants" : {
+    "soiltype" : {
+      "silt" : {
+        "textures" : {
+          "dirt" : "tfc:blocks/soil/dirt/silt",
+          "particle" : "tfc:blocks/soil/dirt/silt",
+          "top" : "tfc:blocks/soil/farmland/silt"
         }
       },
-      "loam": {
-        "textures": {
-          "dirt": "tfc:blocks/soil/dirt/loam",
-          "particle": "tfc:blocks/soil/dirt/loam",
-          "top": "tfc:blocks/soil/farmland/loam"
+      "loam" : {
+        "textures" : {
+          "dirt" : "tfc:blocks/soil/dirt/loam",
+          "particle" : "tfc:blocks/soil/dirt/loam",
+          "top" : "tfc:blocks/soil/farmland/loam"
         }
       },
-      "sandy_loam": {
-        "textures": {
-          "dirt": "tfc:blocks/soil/dirt/sandy_loam",
-          "particle": "tfc:blocks/soil/dirt/sandy_loam",
-          "top": "tfc:blocks/soil/farmland/sandy_loam"
+      "sandy_loam" : {
+        "textures" : {
+          "dirt" : "tfc:blocks/soil/dirt/sandy_loam",
+          "particle" : "tfc:blocks/soil/dirt/sandy_loam",
+          "top" : "tfc:blocks/soil/farmland/sandy_loam"
         }
       },
-      "silty_loam": {
-        "textures": {
-          "dirt": "tfc:blocks/soil/dirt/silty_loam",
-          "particle": "tfc:blocks/soil/dirt/silty_loam",
-          "top": "tfc:blocks/soil/farmland/silty_loam"
+      "silty_loam" : {
+        "textures" : {
+          "dirt" : "tfc:blocks/soil/dirt/silty_loam",
+          "particle" : "tfc:blocks/soil/dirt/silty_loam",
+          "top" : "tfc:blocks/soil/farmland/silty_loam"
         }
       }
     }

@@ -1,111 +1,131 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:mossy",
-    "uvlock": true
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:mossy",
+    "uvlock" : true
   },
-  "variants": {
-    "rocktype": {
-      "granite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/granite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "diorite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/diorite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "gabbro": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/gabbro",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "shale": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/shale",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "claystone": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/claystone",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "limestone": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/limestone",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "conglomerate": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/conglomerate",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "dolomite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/dolomite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "chert": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/chert",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "chalk": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/chalk",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "rhyolite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/rhyolite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "basalt": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/basalt",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "andesite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/andesite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "dacite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/dacite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "quartzite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/quartzite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "slate": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/slate",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "phyllite": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/phyllite",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "schist": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/schist",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "gneiss": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/gneiss",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}, 
-      "marble": {
-          "textures": {
-            "all": "tfc:blocks/rock/cobble/marble",
-            "overlay": "tfc:blocks/rock/overlay/mossy/cobble"
-      }}
+  "variants" : {
+    "rocktype" : {
+      "granite" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/granite",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "diorite" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/diorite",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "gabbro" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/gabbro",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "shale" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/shale",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "claystone" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/claystone",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "limestone" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/limestone",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "conglomerate" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/conglomerate",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "dolomite" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/dolomite",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "chert" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/chert",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "chalk" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/chalk",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "rhyolite" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/rhyolite",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "basalt" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/basalt",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "andesite" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/andesite",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "dacite" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/dacite",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "quartzite" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/quartzite",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "slate" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/slate",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "phyllite" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/phyllite",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "schist" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/schist",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "gneiss" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/gneiss",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      },
+      "marble" : {
+        "textures" : {
+          "all" : "tfc:blocks/rock/cobble/marble",
+          "overlay" : "tfc:blocks/rock/overlay/mossy/cobble"
+        }
+      }
     }
   }
 }

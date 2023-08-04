@@ -1,42 +1,42 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "tfc:fruit_trees/trunk",
-    "textures": {
-      "texture": "tfc:blocks/fruit_trees/bark/banana",
-      "particle": "tfc:blocks/fruit_trees/bark/banana"
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:fruit_trees/trunk",
+    "textures" : {
+      "texture" : "tfc:blocks/fruit_trees/bark/banana",
+      "particle" : "tfc:blocks/fruit_trees/bark/banana"
     }
   },
-  "variants": {
-    "normal": [
+  "variants" : {
+    "normal" : [
       {}
     ],
-    "north": {
-      "true": {
-        "submodel": "tfc:fruit_trees/trunk_connection"
+    "north" : {
+      "true" : {
+        "submodel" : "tfc:fruit_trees/trunk_connection"
       },
-      "false": {}
+      "false" : {}
     },
-    "east": {
-      "true": {
-        "submodel": "tfc:fruit_trees/trunk_connection",
-        "y": 90
+    "east" : {
+      "true" : {
+        "submodel" : "tfc:fruit_trees/trunk_connection",
+        "y" : 90
       },
-      "false": {}
+      "false" : {}
     },
-    "south": {
-      "true": {
-        "submodel": "tfc:fruit_trees/trunk_connection",
-        "y": 180
+    "south" : {
+      "true" : {
+        "submodel" : "tfc:fruit_trees/trunk_connection",
+        "y" : 180
       },
-      "false": {}
+      "false" : {}
     },
-    "west": {
-      "true": {
-        "submodel": "tfc:fruit_trees/trunk_connection",
-        "y": 270
+    "west" : {
+      "true" : {
+        "submodel" : "tfc:fruit_trees/trunk_connection",
+        "y" : 270
       },
-      "false": {}
+      "false" : {}
     }
   }
 }

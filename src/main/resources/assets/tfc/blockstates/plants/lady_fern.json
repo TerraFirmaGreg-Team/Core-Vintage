@@ -1,9 +1,9 @@
 {
-  "multipart": [
+  "multipart" : [
     {
-      "apply": [
+      "apply" : [
         {
-          "model": "tfc:plants/lady_fern"
+          "model" : "tfc:plants/lady_fern"
         }
       ]
     }

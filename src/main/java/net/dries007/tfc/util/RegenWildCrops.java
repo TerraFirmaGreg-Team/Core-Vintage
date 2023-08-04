@@ -12,10 +12,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class RegenWildCrops extends WorldGenWildCrops {
-	@Override
-	protected boolean isValidPosition(World world, BlockPos pos) {
-		//Modified to allow replacement of grass during spring regen
-		Block test = world.getBlockState(pos).getBlock();
-		return (test instanceof BlockShortGrassTFC || test.isAir(world.getBlockState(pos), world, pos) && BlocksTFC.isSoil(world.getBlockState(pos.down())));
-	}
+    @Override
+    protected boolean isValidPosition(World world, BlockPos pos) {
+        //Modified to allow replacement of grass during spring regen
+        Block test = world.getBlockState(pos).getBlock();
+        return (test instanceof BlockShortGrassTFC || test.isAir(world.getBlockState(pos), world, pos) && BlocksTFC.isSoil(world.getBlockState(pos.down())));
+    }
 }

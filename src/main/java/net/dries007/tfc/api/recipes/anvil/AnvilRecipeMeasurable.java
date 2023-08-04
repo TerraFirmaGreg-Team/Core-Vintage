@@ -17,31 +17,31 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 @ParametersAreNonnullByDefault
 public class AnvilRecipeMeasurable extends AnvilRecipe {
-	/**
-	 * Creates a new recipe that copies {@link IForgeableMeasurableMetal} capability from one item to another (both must implement it)
-	 *
-	 * @param input   the predicate for input.
-	 * @param output  the output stack
-	 * @param minTier the anvil's min tier required to work this recipe
-	 * @param rules   the forging rules
-	 */
-	public AnvilRecipeMeasurable(ResourceLocation name, IIngredient<ItemStack> input, ItemStack output, int minTier, ForgeRule... rules) throws IllegalArgumentException {
-		super(name, input, output, minTier, null, rules);
-	}
+    /**
+     * Creates a new recipe that copies {@link IForgeableMeasurableMetal} capability from one item to another (both must implement it)
+     *
+     * @param input   the predicate for input.
+     * @param output  the output stack
+     * @param minTier the anvil's min tier required to work this recipe
+     * @param rules   the forging rules
+     */
+    public AnvilRecipeMeasurable(ResourceLocation name, IIngredient<ItemStack> input, ItemStack output, int minTier, ForgeRule... rules) throws IllegalArgumentException {
+        super(name, input, output, minTier, null, rules);
+    }
 
-	@Override
-	@Nonnull
-	public NonNullList<ItemStack> getOutput(ItemStack input) {
-		if (matches(input)) {
-			NonNullList<ItemStack> out = super.getOutput(input);
-			IForgeable inputCap = input.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-			IForgeable outputCap = out.get(0).getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-			if (inputCap instanceof IForgeableMeasurableMetal && outputCap instanceof IForgeableMeasurableMetal) {
-				((IForgeableMeasurableMetal) outputCap).setMetalAmount(((IForgeableMeasurableMetal) inputCap).getMetalAmount());
-				((IForgeableMeasurableMetal) outputCap).setMaterial(((IForgeableMeasurableMetal) inputCap).getMaterial());
-			}
-			return out;
-		}
-		return EMPTY;
-	}
+    @Override
+    @Nonnull
+    public NonNullList<ItemStack> getOutput(ItemStack input) {
+        if (matches(input)) {
+            NonNullList<ItemStack> out = super.getOutput(input);
+            IForgeable inputCap = input.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+            IForgeable outputCap = out.get(0).getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+            if (inputCap instanceof IForgeableMeasurableMetal && outputCap instanceof IForgeableMeasurableMetal) {
+                ((IForgeableMeasurableMetal) outputCap).setMetalAmount(((IForgeableMeasurableMetal) inputCap).getMetalAmount());
+                ((IForgeableMeasurableMetal) outputCap).setMaterial(((IForgeableMeasurableMetal) inputCap).getMaterial());
+            }
+            return out;
+        }
+        return EMPTY;
+    }
 }

@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "X X",
     " C "
   ],
-  "key": {
-    "X": {
-      "type": "forge:ore_dict",
-      "ore": "sheetWroughtIron"
+  "key" : {
+    "X" : {
+      "type" : "forge:ore_dict",
+      "ore" : "sheetWroughtIron"
     },
-    "C": {
-      "type": "forge:ore_dict",
-      "ore": "chest"
+    "C" : {
+      "type" : "forge:ore_dict",
+      "ore" : "chest"
     }
   },
-  "result": {
-    "item": "minecraft:hopper",
-    "count": 1
+  "result" : {
+    "item" : "minecraft:hopper",
+    "count" : 1
   }
 }

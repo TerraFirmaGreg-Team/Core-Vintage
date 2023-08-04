@@ -41,210 +41,210 @@ import static net.dries007.tfc.api.types.wood.WoodVariant.SLAB_DOUBLE;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
-	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
-	public final Block modelBlock;
-	protected Half halfSlab;
+    public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
+    public final Block modelBlock;
+    protected Half halfSlab;
 
-	private BlockWoodSlab(WoodVariant woodVariant, Wood wood) {
-		super(Material.WOOD);
+    private BlockWoodSlab(WoodVariant woodVariant, Wood wood) {
+        super(Material.WOOD);
 
-		IBlockState state = blockState.getBaseState();
+        IBlockState state = blockState.getBaseState();
 
-		if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
+        if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-		this.modelBlock = TFCStorage.getWoodBlock(PLANKS, wood);
-		useNeighborBrightness = true;
+        this.modelBlock = TFCStorage.getWoodBlock(PLANKS, wood);
+        useNeighborBrightness = true;
 
-		setLightOpacity(255);
-		setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
-		setCreativeTab(CreativeTabsTFC.WOOD);
-		setSoundType(SoundType.STONE);
+        setLightOpacity(255);
+        setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
+        setCreativeTab(CreativeTabsTFC.WOOD);
+        setSoundType(SoundType.STONE);
 
-		Blocks.FIRE.setFireInfo(this, 5, 20);
-	}
+        Blocks.FIRE.setFireInfo(this, 5, 20);
+    }
 
-	@Override
-	public String getTranslationKey(int meta) {
-		return super.getTranslationKey();
-	}
+    @Override
+    public String getTranslationKey(int meta) {
+        return super.getTranslationKey();
+    }
 
-	@Override
-	public IProperty<?> getVariantProperty() {
-		return VARIANT; // why is this not null-tolerable ...
-	}
+    @Override
+    public IProperty<?> getVariantProperty() {
+        return VARIANT; // why is this not null-tolerable ...
+    }
 
-	@Override
-	public Comparable<?> getTypeForItem(ItemStack stack) {
-		return Variant.DEFAULT;
-	}
+    @Override
+    public Comparable<?> getTypeForItem(ItemStack stack) {
+        return Variant.DEFAULT;
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
+    @SuppressWarnings("deprecation")
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
 
-		if (!this.isDouble()) {
-			iblockstate = iblockstate.withProperty(HALF, (meta & 8) == 0 ? BlockSlab.EnumBlockHalf.BOTTOM : BlockSlab.EnumBlockHalf.TOP);
-		}
+        if (!this.isDouble()) {
+            iblockstate = iblockstate.withProperty(HALF, (meta & 8) == 0 ? BlockSlab.EnumBlockHalf.BOTTOM : BlockSlab.EnumBlockHalf.TOP);
+        }
 
-		return iblockstate;
-	}
+        return iblockstate;
+    }
 
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		int i = 0;
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        int i = 0;
 
-		if (!this.isDouble() && state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) {
-			i |= 8;
-		}
+        if (!this.isDouble() && state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) {
+            i |= 8;
+        }
 
-		return i;
-	}
+        return i;
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-		return modelBlock.getBlockHardness(blockState, worldIn, pos);
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+        return modelBlock.getBlockHardness(blockState, worldIn, pos);
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(halfSlab);
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Item.getItemFromBlock(halfSlab);
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public float getExplosionResistance(Entity exploder) {
-		return modelBlock.getExplosionResistance(exploder);
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public float getExplosionResistance(Entity exploder) {
+        return modelBlock.getExplosionResistance(exploder);
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-		return new ItemStack(halfSlab);
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+        return new ItemStack(halfSlab);
+    }
 
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
-	}
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public SoundType getSoundType() {
-		return modelBlock.getSoundType();
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public SoundType getSoundType() {
+        return modelBlock.getSoundType();
+    }
 
-	public enum Variant implements IStringSerializable {
-		DEFAULT;
+    public enum Variant implements IStringSerializable {
+        DEFAULT;
 
-		@Override
-		public String getName() {
-			return "default";
-		}
-	}
+        @Override
+        public String getName() {
+            return "default";
+        }
+    }
 
-	public static class Double extends BlockWoodSlab {
-		private final WoodVariant woodVariant;
-		private final Wood wood;
-		private final ResourceLocation modelLocation;
+    public static class Double extends BlockWoodSlab {
+        private final WoodVariant woodVariant;
+        private final Wood wood;
+        private final ResourceLocation modelLocation;
 
-		public Double(WoodVariant woodVariant, Wood wood) {
-			super(woodVariant, wood);
+        public Double(WoodVariant woodVariant, Wood wood) {
+            super(woodVariant, wood);
 
-			this.woodVariant = woodVariant;
-			this.wood = wood;
-			this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+            this.woodVariant = woodVariant;
+            this.wood = wood;
+            this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-			var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-			setRegistryName(MOD_ID, blockRegistryName);
-			setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-		}
+            var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+            setRegistryName(MOD_ID, blockRegistryName);
+            setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        }
 
-		@Override
-		public boolean isDouble() {
-			return true;
-		}
+        @Override
+        public boolean isDouble() {
+            return true;
+        }
 
-		@Override
-		public WoodVariant getWoodVariant() {
-			return woodVariant;
-		}
+        @Override
+        public WoodVariant getWoodVariant() {
+            return woodVariant;
+        }
 
-		@Override
-		public Wood getWood() {
-			return wood;
-		}
+        @Override
+        public Wood getWood() {
+            return wood;
+        }
 
-		@Override
-		public ItemBlock getItemBlock() {
-			return null;
-		}
+        @Override
+        public ItemBlock getItemBlock() {
+            return null;
+        }
 
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void onModelRegister() {
-			ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockWoodSlab.VARIANT).build());
-		}
-	}
+        @Override
+        @SideOnly(Side.CLIENT)
+        public void onModelRegister() {
+            ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockWoodSlab.VARIANT).build());
+        }
+    }
 
-	public static class Half extends BlockWoodSlab {
-		public final Double doubleSlab;
+    public static class Half extends BlockWoodSlab {
+        public final Double doubleSlab;
 
-		private final WoodVariant woodVariant;
-		private final Wood wood;
-		private final ResourceLocation modelLocation;
+        private final WoodVariant woodVariant;
+        private final Wood wood;
+        private final ResourceLocation modelLocation;
 
-		public Half(WoodVariant woodVariant, Wood wood) {
-			super(woodVariant, wood);
+        public Half(WoodVariant woodVariant, Wood wood) {
+            super(woodVariant, wood);
 
-			doubleSlab = (Double) TFCStorage.getWoodBlock(SLAB_DOUBLE, wood);
-			doubleSlab.halfSlab = this;
-			halfSlab = this;
+            doubleSlab = (Double) TFCStorage.getWoodBlock(SLAB_DOUBLE, wood);
+            doubleSlab.halfSlab = this;
+            halfSlab = this;
 
-			this.woodVariant = woodVariant;
-			this.wood = wood;
-			this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+            this.woodVariant = woodVariant;
+            this.wood = wood;
+            this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-			var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-			setRegistryName(MOD_ID, blockRegistryName);
-			setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+            var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+            setRegistryName(MOD_ID, blockRegistryName);
+            setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-			OreDictionaryHelper.register(this, "slab");
-			OreDictionaryHelper.register(this, "slab", "wood");
-			OreDictionaryHelper.register(this, "slab", "wood", wood);
-		}
+            OreDictionaryHelper.register(this, "slab");
+            OreDictionaryHelper.register(this, "slab", "wood");
+            OreDictionaryHelper.register(this, "slab", "wood", wood);
+        }
 
-		@Override
-		public boolean isDouble() {
-			return false;
-		}
+        @Override
+        public boolean isDouble() {
+            return false;
+        }
 
-		@Override
-		public WoodVariant getWoodVariant() {
-			return woodVariant;
-		}
+        @Override
+        public WoodVariant getWoodVariant() {
+            return woodVariant;
+        }
 
-		@Override
-		public Wood getWood() {
-			return wood;
-		}
+        @Override
+        public Wood getWood() {
+            return wood;
+        }
 
-		@Override
-		public ItemBlock getItemBlock() {
-			return new ItemWoodSlab(this, this, this.doubleSlab);
-		}
+        @Override
+        public ItemBlock getItemBlock() {
+            return new ItemWoodSlab(this, this, this.doubleSlab);
+        }
 
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void onModelRegister() {
-			ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockWoodSlab.VARIANT).build());
+        @Override
+        @SideOnly(Side.CLIENT)
+        public void onModelRegister() {
+            ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockWoodSlab.VARIANT).build());
 
-			for (IBlockState state : this.getBlockState().getValidStates()) {
-				ModelLoader.setCustomModelResourceLocation(
-					Item.getItemFromBlock(this),
-					this.getMetaFromState(state), new ModelResourceLocation(modelLocation, "normal"));
-			}
-		}
-	}
+            for (IBlockState state : this.getBlockState().getValidStates()) {
+                ModelLoader.setCustomModelResourceLocation(
+                        Item.getItemFromBlock(this),
+                        this.getMetaFromState(state), new ModelResourceLocation(modelLocation, "normal"));
+            }
+        }
+    }
 }

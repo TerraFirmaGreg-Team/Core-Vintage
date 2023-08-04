@@ -17,20 +17,20 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class ItemBlockCrucible extends ItemBlockTFC {
-	public ItemBlockCrucible(Block block) {
-		super(block);
-	}
+    public ItemBlockCrucible(Block block) {
+        super(block);
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		var nbt = stack.getTagCompound();
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        var nbt = stack.getTagCompound();
 
-		if (nbt != null) {
-			var alloy = new Alloy(ConfigTFC.Devices.CRUCIBLE.tank);
+        if (nbt != null) {
+            var alloy = new Alloy(ConfigTFC.Devices.CRUCIBLE.tank);
 
-			alloy.deserializeNBT(nbt.getCompoundTag("alloy"));
-			tooltip.add(I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.crucible_alloy", alloy.getAmount(), alloy.getResult().getLocalizedName()));
-		}
-	}
+            alloy.deserializeNBT(nbt.getCompoundTag("alloy"));
+            tooltip.add(I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.crucible_alloy", alloy.getAmount(), alloy.getResult().getLocalizedName()));
+        }
+    }
 }

@@ -8,11 +8,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class TEBloom extends TEInventory {
-	public TEBloom() {
-		super(1);
-	}
+    public TEBloom() {
+        super(1);
+    }
 
-	public void setBloom(ItemStack stack) {
-		inventory.setStackInSlot(0, stack);
-	}
+    public void setBloom(ItemStack stack) {
+        inventory.setStackInSlot(0, stack);
+    }
 }

@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
+  "type" : "minecraft:crafting_shaped",
+  "pattern" : [
     "  X",
     " XL",
     "XLL"
   ],
-  "key": {
-    "X": [
+  "key" : {
+    "X" : [
       {
-        "type": "forge:ore_dict",
-        "ore": "stickWood"
+        "type" : "forge:ore_dict",
+        "ore" : "stickWood"
       }
     ],
-    "L": {
-      "type": "forge:ore_dict",
-      "ore": "lumber"
+    "L" : {
+      "type" : "forge:ore_dict",
+      "ore" : "lumber"
     }
   },
-  "result": {
-    "item": "tfc:sluice",
-    "count": 1
+  "result" : {
+    "item" : "tfc:sluice",
+    "count" : 1
   }
 }

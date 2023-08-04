@@ -1,8 +1,9 @@
 package net.dries007.tfc.objects.items.itemblock;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types2.plant.PlantType;
+import net.dries007.tfc.api.types2.plant.Plant;
 import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -21,29 +22,29 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemBlockPlant extends ItemBlockTFC {
-    private final PlantType plant;
+		private final Plant plant;
 
-    public ItemBlockPlant(Block block, PlantType plant) {
-        super(block);
-        this.plant = plant;
-    }
+		public ItemBlockPlant(Block block, Plant plant) {
+				super(block);
+				this.plant = plant;
+		}
 
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote && world.getBlockState(pos).getBlock() instanceof BlockFlowerPot) {
-            TileEntityFlowerPot te = Helpers.getTE(world, pos, TileEntityFlowerPot.class);
-            if (te == null || te.getFlowerItemStack().isEmpty()) {
-                world.setBlockState(pos, BlockFlowerPotTFC.get(plant).getDefaultState(), 3);
-                player.getHeldItem(hand).shrink(1);
-                return EnumActionResult.SUCCESS;
-            }
-        }
-        return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
-    }
+		@Override
+		public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+				if (!world.isRemote && world.getBlockState(pos).getBlock() instanceof BlockFlowerPot) {
+						TileEntityFlowerPot te = Helpers.getTE(world, pos, TileEntityFlowerPot.class);
+						if (te == null || te.getFlowerItemStack().isEmpty()) {
+								world.setBlockState(pos, BlockFlowerPotTFC.get(plant).getDefaultState(), 3);
+								player.getHeldItem(hand).shrink(1);
+								return EnumActionResult.SUCCESS;
+						}
+				}
+				return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+		}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack) {
-        return worldIn.getBlockState(pos).getBlock() instanceof BlockFlowerPot || super.canPlaceBlockOnSide(worldIn, pos, side, player, stack);
-    }
+		@SideOnly(Side.CLIENT)
+		@Override
+		public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack) {
+				return worldIn.getBlockState(pos).getBlock() instanceof BlockFlowerPot || super.canPlaceBlockOnSide(worldIn, pos, side, player, stack);
+		}
 }

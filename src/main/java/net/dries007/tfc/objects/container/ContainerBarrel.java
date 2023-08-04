@@ -1,9 +1,6 @@
 package net.dries007.tfc.objects.container;
 
-import static net.dries007.tfc.objects.te.TEBarrel.*;
-
-import javax.annotation.Nullable;
-import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
+import net.dries007.tfc.objects.blocks.wood.BlockWoodBarrel;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,6 +9,10 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import javax.annotation.Nullable;
+
+import static net.dries007.tfc.objects.te.TEBarrel.*;
 
 public class ContainerBarrel extends ContainerTE<TEBarrel> implements IButtonHandler {
     public ContainerBarrel(InventoryPlayer playerInv, TEBarrel teBarrel) {
@@ -26,7 +27,7 @@ public class ContainerBarrel extends ContainerTE<TEBarrel> implements IButtonHan
     public void onButtonPress(int buttonID, @Nullable NBTTagCompound extraNBT) {
         // Slot will always be 0, extraNBT will be empty
         if (!tile.getWorld().isRemote) {
-            BlockBarrel.toggleBarrelSeal(tile.getWorld(), tile.getPos());
+            BlockWoodBarrel.toggleBarrelSeal(tile.getWorld(), tile.getPos());
         }
     }
 

@@ -1,12 +1,7 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.rock.RockType;
+import net.dries007.tfc.api.types2.rock.Rock;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
 import net.minecraft.block.Block;
@@ -33,182 +28,189 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockRockLoose extends Block implements IRockBlock {
 
-    private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
+		private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
 
-    public static final PropertyDirection AXIS = PropertyDirection.create("axis", EnumFacing.Plane.HORIZONTAL);
+		public static final PropertyDirection AXIS = PropertyDirection.create("axis", EnumFacing.Plane.HORIZONTAL);
 
-    private final RockVariant rockVariant;
-    private final RockType rockType;
-    private final ResourceLocation modelLocation;
+		private final RockVariant rockVariant;
+		private final Rock rock;
+		private final ResourceLocation modelLocation;
 
-    public BlockRockLoose(RockVariant rockVariant, RockType rockType) {
-        super(Material.ROCK);
+		public BlockRockLoose(RockVariant rockVariant, Rock rock) {
+				super(Material.ROCK);
 
-        this.rockVariant = rockVariant;
-        this.rockType = rockType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
+				this.rockVariant = rockVariant;
+				this.rock = rock;
+				this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
-        var blockRegistryName = String.format("rock/%s/%s", rockVariant, rockType);
-        this.setSoundType(SoundType.STONE);
-        this.setHardness(0.1f);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+				var blockRegistryName = String.format("rock/%s/%s", rockVariant, rock);
+				this.setSoundType(SoundType.STONE);
+				this.setHardness(0.1f);
+				this.setRegistryName(MOD_ID, blockRegistryName);
+				this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-        setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.NORTH));
-    }
+				setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.NORTH));
+		}
 
-    @Nonnull
-    @Override
-    public RockVariant getRockVariant() {
-        return rockVariant;
-    }
+		@Nonnull
+		@Override
+		public RockVariant getRockVariant() {
+				return rockVariant;
+		}
 
-    @Nonnull
-    @Override
-    public RockType getRockType() {
-        return rockType;
-    }
+		@Nonnull
+		@Override
+		public Rock getRock() {
+				return rock;
+		}
 
-    @Override
-    public ItemBlock getItemBlock() {
-        return null;
-    }
+		@Override
+		public ItemBlock getItemBlock() {
+				return null;
+		}
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
-            worldIn.destroyBlock(pos, false);
-        }
-    }
+		@Override
+		@SuppressWarnings("deprecation")
+		public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+				if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
+						worldIn.destroyBlock(pos, false);
+				}
+		}
 
-    @Nonnull
-    @Override
-    @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
+		@Nonnull
+		@Override
+		@SuppressWarnings("deprecation")
+		public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+				return BlockFaceShape.UNDEFINED;
+		}
 
-    @Override
-    @SuppressWarnings("ConstantConditions")
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var itemStack = new ItemStack(TFCStorage.ITEMROCK_MAP.get(rockType));
+		@Override
+		@SuppressWarnings("ConstantConditions")
+		public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+				var itemStack = new ItemStack(TFCStorage.ITEMROCK_MAP.get(rock));
 
-        if (playerIn.addItemStackToInventory(itemStack)) {
-            worldIn.setBlockToAir(pos);
+				if (playerIn.addItemStackToInventory(itemStack)) {
+						worldIn.setBlockToAir(pos);
 
-            playerIn.swingArm(EnumHand.MAIN_HAND);
-            playerIn.playSound(SoundEvents.ENTITY_ITEMFRAME_REMOVE_ITEM, 1.0f, 1.0f);
-        }
+						playerIn.swingArm(EnumHand.MAIN_HAND);
+						playerIn.playSound(SoundEvents.ENTITY_ITEMFRAME_REMOVE_ITEM, 1.0f, 1.0f);
+				}
 
-        return true;
-    }
+				return true;
+		}
 
-    @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(TFCStorage.ITEMROCK_MAP.get(rockType)));
-    }
+		@Override
+		public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+				drops.add(new ItemStack(TFCStorage.ITEMROCK_MAP.get(rock)));
+		}
 
-    @Override
-    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-        return true;
-    }
+		@Override
+		public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+				return true;
+		}
 
-    @Nonnull
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.ITEMROCK_MAP.get(rockType));
-    }
+		@Nonnull
+		@Override
+		public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+				return new ItemStack(TFCStorage.ITEMROCK_MAP.get(rock));
+		}
 
-    @Nonnull
-    @Override
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
-        return STONE_AABB;
-    }
+		@Nonnull
+		@Override
+		@SuppressWarnings("deprecation")
+		public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
+				return STONE_AABB;
+		}
 
-    @Override
-    @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
-    public boolean isTopSolid(IBlockState state) {
-        return false;
-    }
+		@Override
+		@ParametersAreNonnullByDefault
+		@SuppressWarnings("deprecation")
+		public boolean isTopSolid(IBlockState state) {
+				return false;
+		}
 
-    @Override
-    @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+		@Override
+		@ParametersAreNonnullByDefault
+		@SuppressWarnings("deprecation")
+		public boolean isFullCube(IBlockState state) {
+				return false;
+		}
 
-    @Override
-    @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+		@Override
+		@ParametersAreNonnullByDefault
+		@SuppressWarnings("deprecation")
+		public boolean isOpaqueCube(IBlockState state) {
+				return false;
+		}
 
-    @Nullable @Override
-    @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return STONE_AABB;
-    }
+		@Nullable
+		@Override
+		@ParametersAreNonnullByDefault
+		@SuppressWarnings("deprecation")
+		public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+				return STONE_AABB;
+		}
 
-    @Override
-    @ParametersAreNonnullByDefault
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        IBlockState state = worldIn.getBlockState(pos);
-        IBlockState stateDown = worldIn.getBlockState(pos.down());
+		@Override
+		@ParametersAreNonnullByDefault
+		public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+				IBlockState state = worldIn.getBlockState(pos);
+				IBlockState stateDown = worldIn.getBlockState(pos.down());
 
-        return stateDown.isSideSolid(worldIn, pos, EnumFacing.DOWN) && state.getBlock().equals(Blocks.AIR);
-    }
+				return stateDown.isSideSolid(worldIn, pos, EnumFacing.DOWN) && state.getBlock().equals(Blocks.AIR);
+		}
 
-    @Override
-    @Nonnull
-    public Block.EnumOffsetType getOffsetType() {
-        return Block.EnumOffsetType.XZ;
-    }
+		@Override
+		@Nonnull
+		public Block.EnumOffsetType getOffsetType() {
+				return Block.EnumOffsetType.XZ;
+		}
 
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation,
-                        "axis=" + state.getValue(AXIS) + "," +
-                                "rocktype=" + rockType.getName());
-            }
-        });
-    }
+		@Override
+		@SideOnly(Side.CLIENT)
+		public void onModelRegister() {
+				ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+						@Nonnull
+						protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+								return new ModelResourceLocation(modelLocation,
+												"axis=" + state.getValue(AXIS) + "," +
+																"rocktype=" + rock.getName());
+						}
+				});
+		}
 
-    @Override
-    @Nonnull
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
+		@Override
+		@Nonnull
+		@SideOnly(Side.CLIENT)
+		public BlockRenderLayer getRenderLayer() {
+				return BlockRenderLayer.CUTOUT;
+		}
 
-    @Nonnull
-    @Override
-    @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(meta));
-    }
+		@Nonnull
+		@Override
+		@SuppressWarnings("deprecation")
+		public IBlockState getStateFromMeta(int meta) {
+				return this.getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(meta));
+		}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(AXIS).getHorizontalIndex();
-    }
+		@Override
+		public int getMetaFromState(IBlockState state) {
+				return state.getValue(AXIS).getHorizontalIndex();
+		}
 
-    @Nonnull
-    @Override
-    public BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, AXIS);
-    }
+		@Nonnull
+		@Override
+		public BlockStateContainer createBlockState() {
+				return new BlockStateContainer(this, AXIS);
+		}
 }

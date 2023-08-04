@@ -3,9 +3,9 @@
   "defaults": {
     "model": "item/generated",
     "textures": {
-      "particle": "tfc:blocks/wood/log/blackwood",
-      "side": "tfc:blocks/wood/log/blackwood",
-      "end": "tfc:blocks/wood/top/blackwood",
+      "particle": "tfc:blocks/wood/log/side/blackwood",
+      "side": "tfc:blocks/wood/log/side/blackwood",
+      "end": "tfc:blocks/wood/log/top/blackwood",
       "layer0": "tfc:items/wood/log/blackwood"
     }
   },
@@ -27,7 +27,7 @@
       "none": {
         "model": "cube_column",
         "textures": {
-          "end": "tfc:blocks/wood/log/blackwood"
+          "end": "tfc:blocks/wood/log/side/blackwood"
         }
       }
     },

@@ -1,13 +1,7 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockBlockType.ORDINARY;
-
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.rock.RockBlockType;
+import net.dries007.tfc.api.types2.rock.Rock;
 import net.dries007.tfc.api.types2.rock.RockType;
 import net.dries007.tfc.api.types2.rock.RockVariant;
 import net.dries007.tfc.api.types2.rock.util.IRockBlock;
@@ -33,48 +27,54 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types2.rock.RockType.ORDINARY;
+
 public class BlockRockStair extends BlockStairs implements IRockBlock {
-    private final RockVariant rockVariant;
-    private final RockType rockType;
-    private final ResourceLocation modelLocation;
+		private final RockVariant rockVariant;
+		private final Rock rock;
+		private final ResourceLocation modelLocation;
 
-    public BlockRockStair(RockBlockType rockBlockType, RockVariant rockVariant, RockType rockType) {
-        super(TFCStorage.getRockBlock(ORDINARY, rockVariant, rockType).getDefaultState());
+		public BlockRockStair(RockType rockType, RockVariant rockVariant, Rock rock) {
+				super(TFCStorage.getRockBlock(ORDINARY, rockVariant, rock).getDefaultState());
 
-        this.rockVariant = rockVariant;
-        this.rockType = rockType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockBlockType + "/" + rockVariant);
-        useNeighborBrightness = true;
+				this.rockVariant = rockVariant;
+				this.rock = rock;
+				this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockType + "/" + rockVariant);
 
-        String blockRegistryName = String.format("rock/%s/%s/%s", rockBlockType, rockVariant, rockType);
+				String blockRegistryName = String.format("rock/%s/%s/%s", rockType, rockVariant, rock);
+				setRegistryName(MOD_ID, blockRegistryName);
+				setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+				setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+				setSoundType(SoundType.STONE);
+				setHardness(getFinalHardness());
+				setHarvestLevel("pickaxe", 0);
+				useNeighborBrightness = true;
 
-        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
-        this.setSoundType(SoundType.STONE);
-        this.setHardness(getFinalHardness());
-        this.setHarvestLevel("pickaxe", 0);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+				OreDictionaryHelper.register(this, "stair", "stair_" + rock);
+				//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
+		}
 
-        OreDictionaryHelper.register(this, "stair", "stair_" + rockType);
-        //OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
-    }
+		@Nonnull
+		@Override
+		public RockVariant getRockVariant() {
+				return rockVariant;
+		}
 
-    @Nonnull
-    @Override
-    public RockVariant getRockVariant() {
-        return rockVariant;
-    }
+		@Nonnull
+		@Override
+		public Rock getRock() {
+				return rock;
+		}
 
-    @Nonnull
-    @Override
-    public RockType getRockType() {
-        return rockType;
-    }
-
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
-    }
+		@Override
+		public ItemBlock getItemBlock() {
+				return new ItemBlockTFC(this);
+		}
 
 //	@Override
 //	public boolean removedByPlayer(@Nonnull IBlockState state, World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player, boolean willHarvest) {
@@ -117,41 +117,41 @@ public class BlockRockStair extends BlockStairs implements IRockBlock {
 //		return super.removedByPlayer(state, world, pos, player, willHarvest);
 //	}
 
-    @Override
-    public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
-    }
+		@Override
+		public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
+		}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation,
-                        "facing=" + state.getValue(FACING) + "," +
-                                "half=" + state.getValue(HALF) + "," +
-                                "rocktype=" + rockType.getName() + "," +
-                                "shape=" + state.getValue(SHAPE));
-            }
-        });
+		@Override
+		@SideOnly(Side.CLIENT)
+		public void onModelRegister() {
+				ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+						@Nonnull
+						protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+								return new ModelResourceLocation(modelLocation,
+												"facing=" + state.getValue(FACING) + "," +
+																"half=" + state.getValue(HALF) + "," +
+																"rocktype=" + rock.getName() + "," +
+																"shape=" + state.getValue(SHAPE));
+						}
+				});
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(
-                    Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation,
-                            "facing=east," +
-                                    "half=bottom," +
-                                    "rocktype=" + rockType.getName() + "," +
-                                    "shape=straight"));
-        }
-    }
+				for (IBlockState state : this.getBlockState().getValidStates()) {
+						ModelLoader.setCustomModelResourceLocation(
+										Item.getItemFromBlock(this),
+										this.getMetaFromState(state),
+										new ModelResourceLocation(modelLocation,
+														"facing=east," +
+																		"half=bottom," +
+																		"rocktype=" + rock.getName() + "," +
+																		"shape=straight"));
+				}
+		}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+		@Override
+		@SideOnly(Side.CLIENT)
+		public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+				super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
-    }
+				tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
+		}
 }

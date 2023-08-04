@@ -3,18 +3,18 @@
   "defaults": {
     "uvlock": true,
     "transform": "forge:default-block",
-    "model": "tfc:speleothem_medium"
+    "model": "tfc:rock/speleothem_medium"
   },
   "variants": {
     "size": {
       "small": {
-        "model": "tfc:speleothem_small"
+        "model": "tfc:rock/speleothem_small"
       },
       "medium": {
-        "model": "tfc:speleothem_medium"
+        "model": "tfc:rock/speleothem_medium"
       },
       "big": {
-        "model": "tfc:speleothem_big"
+        "model": "tfc:rock/speleothem_big"
       }
     },
     "rocktype": {

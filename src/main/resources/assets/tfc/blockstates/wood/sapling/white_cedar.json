@@ -3,8 +3,8 @@
   "defaults": {
     "model": "cross",
     "textures": {
-      "cross": "tfc:blocks/saplings/white_cedar",
-      "layer0": "tfc:blocks/saplings/white_cedar"
+      "cross": "tfc:blocks/wood/saplings/white_cedar",
+      "layer0": "tfc:blocks/wood/saplings/white_cedar"
     }
   },
   "variants": {

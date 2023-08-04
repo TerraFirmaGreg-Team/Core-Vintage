@@ -3,9 +3,9 @@
   "defaults": {
     "model": "item/generated",
     "textures": {
-      "particle": "tfc:blocks/wood/log/white_cedar",
-      "side": "tfc:blocks/wood/log/white_cedar",
-      "end": "tfc:blocks/wood/top/white_cedar",
+      "particle": "tfc:blocks/wood/log/side/white_cedar",
+      "side": "tfc:blocks/wood/log/side/white_cedar",
+      "end": "tfc:blocks/wood/log/top/white_cedar",
       "layer0": "tfc:items/wood/log/white_cedar"
     }
   },
@@ -27,7 +27,7 @@
       "none": {
         "model": "cube_column",
         "textures": {
-          "end": "tfc:blocks/wood/log/white_cedar"
+          "end": "tfc:blocks/wood/log/side/white_cedar"
         }
       }
     },

@@ -7,7 +7,7 @@
     "color": {
       "white": {
         "textures": {
-          "all": "tfc:blocks/rock/alabaster/smooth/plain"
+          "all": "tfc:blocks/rock/alabaster/smooth"
         }
       }
     }

@@ -3,9 +3,9 @@
   "defaults": {
     "model": "item/generated",
     "textures": {
-      "particle": "tfc:blocks/wood/log/pine",
-      "side": "tfc:blocks/wood/log/pine",
-      "end": "tfc:blocks/wood/top/pine",
+      "particle": "tfc:blocks/wood/log/side/pine",
+      "side": "tfc:blocks/wood/log/side/pine",
+      "end": "tfc:blocks/wood/log/top/pine",
       "layer0": "tfc:items/wood/log/pine"
     }
   },
@@ -27,7 +27,7 @@
       "none": {
         "model": "cube_column",
         "textures": {
-          "end": "tfc:blocks/wood/log/pine"
+          "end": "tfc:blocks/wood/log/side/pine"
         }
       }
     },

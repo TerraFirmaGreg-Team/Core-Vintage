@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.render;
 
 import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
+import net.dries007.tfc.objects.blocks.wood.BlockWoodBarrel;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -27,7 +27,7 @@ public class TESRBarrel extends TileEntitySpecialRenderer<TEBarrel> {
     @Override
     public void render(TEBarrel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         IBlockState state = te.getWorld().getBlockState(te.getPos());
-        if (!(state.getBlock() instanceof BlockBarrel) || state.getValue(BlockBarrel.SEALED)) {
+        if (!(state.getBlock() instanceof BlockWoodBarrel) || state.getValue(BlockWoodBarrel.SEALED)) {
             return;
         }
 

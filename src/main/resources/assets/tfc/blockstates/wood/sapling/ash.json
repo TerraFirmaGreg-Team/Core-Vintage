@@ -3,8 +3,8 @@
   "defaults": {
     "model": "cross",
     "textures": {
-      "cross": "tfc:blocks/saplings/ash",
-      "layer0": "tfc:blocks/saplings/ash"
+      "cross": "tfc:blocks/wood/saplings/ash",
+      "layer0": "tfc:blocks/wood/saplings/ash"
     }
   },
   "variants": {

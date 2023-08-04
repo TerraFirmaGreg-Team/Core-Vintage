@@ -19,124 +19,137 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 public class CommonProxy {
 
 
-    @SubscribeEvent
-    @SuppressWarnings("ConstantConditions")
-    public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        IForgeRegistry<Block> r = event.getRegistry();
+		@SubscribeEvent
+		@SuppressWarnings("ConstantConditions")
+		public static void registerBlocks(RegistryEvent.Register<Block> event) {
+				IForgeRegistry<Block> r = event.getRegistry();
 
-        //=== Rock ===================================================================================================//
+				//=== Rock ===================================================================================================//
 
-        for (var stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
-            r.register((Block) stoneTypeBlock);
-        }
+				for (var stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
+						r.register((Block) stoneTypeBlock);
+				}
 
-        //=== Soil ===================================================================================================//
+				//=== Soil ===================================================================================================//
 
-        for (var soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
-            r.register((Block) soilTypeBlock);
-        }
+				for (var soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
+						r.register((Block) soilTypeBlock);
+				}
 
-        //=== Plant ==================================================================================================//
+				//=== Plant ==================================================================================================//
 
-        for (var plantTypeBlock : TFCStorage.PLANT_BLOCKS.values()) {
-            r.register((Block) plantTypeBlock);
-        }
+				for (var plantTypeBlock : TFCStorage.PLANT_BLOCKS.values()) {
+						r.register((Block) plantTypeBlock);
+				}
 
-        //=== Alabaster ==============================================================================================//
+				//=== Wood ===================================================================================================//
 
-        for (var alabasterBlock : TFCStorage.ALABASTER_BLOCK.values()) {
-            r.register(alabasterBlock);
-        }
+				for (var woodTypeBlock : TFCStorage.WOOD_BLOCKS.values()) {
+						r.register((Block) woodTypeBlock);
+				}
 
-        //=== Other ==================================================================================================//
+				//=== Alabaster ==============================================================================================//
 
-        TFCStorage.ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
+				for (var alabasterBlock : TFCStorage.ALABASTER_BLOCK.values()) {
+						r.register(alabasterBlock);
+				}
 
-    }
+				//=== Other ==================================================================================================//
 
+				TFCStorage.ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
 
-    @SubscribeEvent
-    @SuppressWarnings("ConstantConditions")
-    public static void registerItems(RegistryEvent.Register<Item> event) {
-        IForgeRegistry<Item> r = event.getRegistry();
-
-        //=== Rock ===================================================================================================//
-
-        for (var stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
-            var itemBlock = stoneTypeBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
-
-        //=== Soil ===================================================================================================//
-
-        for (var soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
-            var itemBlock = soilTypeBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
-
-        //=== Plant ==================================================================================================//
-
-        for (var plantTypeBlock : TFCStorage.PLANT_BLOCKS.values()) {
-            var itemBlock = plantTypeBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
-
-        //=== Alabaster ==============================================================================================//
-
-        for (var alabasterBlock : TFCStorage.ALABASTER_BLOCK.values()) {
-            r.register(createItemBlock(alabasterBlock));
-        }
-
-        //=== Other ==================================================================================================//
-
-        TFCStorage.ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
+		}
 
 
-    }
+		@SubscribeEvent
+		@SuppressWarnings("ConstantConditions")
+		public static void registerItems(RegistryEvent.Register<Item> event) {
+				IForgeRegistry<Item> r = event.getRegistry();
 
-    @SuppressWarnings("ConstantConditions")
-    private static <T extends Block> ItemBlock createItemBlock(T block) {
-        var itemBlock = ((IItemProvider) block).getItemBlock();
-        var registryName = block.getRegistryName();
-        if (registryName == null)
-            throw new IllegalArgumentException("Block " + block.getTranslationKey() + " has no registry name.");
+				//=== Rock ===================================================================================================//
 
-        itemBlock.setRegistryName(registryName);
-        return itemBlock;
-    }
+				for (var stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
+						var itemBlock = stoneTypeBlock.getItemBlock();
+						if (itemBlock != null) registerItemBlock(r, itemBlock);
+				}
+
+				//=== Soil ===================================================================================================//
+
+				for (var soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
+						var itemBlock = soilTypeBlock.getItemBlock();
+						if (itemBlock != null) registerItemBlock(r, itemBlock);
+				}
+
+				//=== Plant ==================================================================================================//
+
+				for (var plantTypeBlock : TFCStorage.PLANT_BLOCKS.values()) {
+						var itemBlock = plantTypeBlock.getItemBlock();
+						if (itemBlock != null) registerItemBlock(r, itemBlock);
+				}
+
+				//=== Wood ===================================================================================================//
+
+				for (var woodTypeBlock : TFCStorage.WOOD_BLOCKS.values()) {
+						var itemBlock = woodTypeBlock.getItemBlock();
+						if (itemBlock != null) registerItemBlock(r, itemBlock);
+				}
+
+				//=== Alabaster ==============================================================================================//
+
+				for (var alabasterBlock : TFCStorage.ALABASTER_BLOCK.values()) {
+						r.register(createItemBlock(alabasterBlock));
+				}
+
+				//=== Other ==================================================================================================//
+
+				TFCStorage.ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
 
 
-    private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
-        var itemBlock = producer.apply(block);
-        var registryName = block.getRegistryName();
-        if (registryName == null)
-            throw new IllegalArgumentException("Block " + block.getTranslationKey() + " has no registry name.");
+		}
 
-        itemBlock.setRegistryName(registryName);
-        return itemBlock;
-    }
+		@SuppressWarnings("ConstantConditions")
+		private static <T extends Block> ItemBlock createItemBlock(T block) {
+				var itemBlock = ((IItemProvider) block).getItemBlock();
+				var registryName = block.getRegistryName();
+				if (registryName == null)
+						throw new IllegalArgumentException("Block " + block.getTranslationKey() + " has no registry name.");
 
-    @SuppressWarnings("ConstantConditions")
-    private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item) {
-        item.setRegistryName(item.getBlock().getRegistryName());
-        item.setCreativeTab(item.getBlock().getCreativeTab());
-        r.register(item);
-    }
+				itemBlock.setRegistryName(registryName);
+				return itemBlock;
+		}
 
-    // Для регистрации одиночных блоков
-    private static <T extends Block> T registerBlock(String name, T block, CreativeTabs ct) {
-        block.setRegistryName(MOD_ID, name);
-        block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
-        block.setCreativeTab(ct);
-        return block;
-    }
 
-    // Для регистрации одиночных предметов
-    private static <T extends Item> T registerItem(String name, T item, CreativeTabs ct) {
-        item.setRegistryName(MOD_ID, name);
-        item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
-        item.setCreativeTab(ct);
-        return item;
-    }
+		private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
+				var itemBlock = producer.apply(block);
+				var registryName = block.getRegistryName();
+				if (registryName == null)
+						throw new IllegalArgumentException("Block " + block.getTranslationKey() + " has no registry name.");
+
+				itemBlock.setRegistryName(registryName);
+				return itemBlock;
+		}
+
+		@SuppressWarnings("ConstantConditions")
+		private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item) {
+				item.setRegistryName(item.getBlock().getRegistryName());
+				item.setCreativeTab(item.getBlock().getCreativeTab());
+				r.register(item);
+		}
+
+		// Для регистрации одиночных блоков
+		private static <T extends Block> T registerBlock(String name, T block, CreativeTabs ct) {
+				block.setRegistryName(MOD_ID, name);
+				block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+				block.setCreativeTab(ct);
+				return block;
+		}
+
+		// Для регистрации одиночных предметов
+		private static <T extends Item> T registerItem(String name, T item, CreativeTabs ct) {
+				item.setRegistryName(MOD_ID, name);
+				item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+				item.setCreativeTab(ct);
+				return item;
+		}
 
 }

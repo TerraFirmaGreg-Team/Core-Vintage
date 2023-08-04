@@ -3,9 +3,9 @@
   "defaults": {
     "model": "item/generated",
     "textures": {
-      "particle": "tfc:blocks/wood/log/sycamore",
-      "side": "tfc:blocks/wood/log/sycamore",
-      "end": "tfc:blocks/wood/top/sycamore",
+      "particle": "tfc:blocks/wood/log/side/sycamore",
+      "side": "tfc:blocks/wood/log/side/sycamore",
+      "end": "tfc:blocks/wood/log/top/sycamore",
       "layer0": "tfc:items/wood/log/sycamore"
     }
   },
@@ -27,7 +27,7 @@
       "none": {
         "model": "cube_column",
         "textures": {
-          "end": "tfc:blocks/wood/log/sycamore"
+          "end": "tfc:blocks/wood/log/side/sycamore"
         }
       }
     },

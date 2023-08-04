@@ -3,9 +3,9 @@
   "defaults": {
     "model": "item/generated",
     "textures": {
-      "particle": "tfc:blocks/wood/log/aspen",
-      "side": "tfc:blocks/wood/log/aspen",
-      "end": "tfc:blocks/wood/top/aspen",
+      "particle": "tfc:blocks/wood/log/side/aspen",
+      "side": "tfc:blocks/wood/log/side/aspen",
+      "end": "tfc:blocks/wood/log/top/aspen",
       "layer0": "tfc:items/wood/log/aspen"
     }
   },
@@ -27,7 +27,7 @@
       "none": {
         "model": "cube_column",
         "textures": {
-          "end": "tfc:blocks/wood/log/aspen"
+          "end": "tfc:blocks/wood/log/side/aspen"
         }
       }
     },

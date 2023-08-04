@@ -1,15 +1,16 @@
 package net.dries007.tfc.api.types2.rock.util;
 
-import javax.annotation.Nonnull;
+import net.dries007.tfc.api.types2.rock.Rock;
 import net.dries007.tfc.api.types2.rock.RockCategory;
-import net.dries007.tfc.api.types2.rock.RockType;
+
+import javax.annotation.Nonnull;
 
 public interface IRockItem {
-    @Nonnull
-    RockType getRockType();
+		@Nonnull
+		Rock getRock();
 
-    @Nonnull
-    default RockCategory getRockCategory() {
-        return getRockType().getRockCategory();
-    }
+		@Nonnull
+		default RockCategory getRockCategory() {
+				return getRock().getRockCategory();
+		}
 }

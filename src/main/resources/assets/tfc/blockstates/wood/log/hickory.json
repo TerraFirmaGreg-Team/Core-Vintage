@@ -3,9 +3,9 @@
   "defaults": {
     "model": "item/generated",
     "textures": {
-      "particle": "tfc:blocks/wood/log/hickory",
-      "side": "tfc:blocks/wood/log/hickory",
-      "end": "tfc:blocks/wood/top/hickory",
+      "particle": "tfc:blocks/wood/log/side/hickory",
+      "side": "tfc:blocks/wood/log/side/hickory",
+      "end": "tfc:blocks/wood/log/top/hickory",
       "layer0": "tfc:items/wood/log/hickory"
     }
   },
@@ -27,7 +27,7 @@
       "none": {
         "model": "cube_column",
         "textures": {
-          "end": "tfc:blocks/wood/log/hickory"
+          "end": "tfc:blocks/wood/log/side/hickory"
         }
       }
     },

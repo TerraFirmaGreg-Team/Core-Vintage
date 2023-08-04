@@ -1,86 +1,67 @@
 package net.dries007.tfc.api.types2.rock;
 
-import static net.dries007.tfc.api.types2.rock.RockCategory.*;
+import net.dries007.tfc.api.types2.rock.util.IRockBlock;
+import net.dries007.tfc.api.util.TriFunction;
+import net.dries007.tfc.objects.blocks.rock.BlockRockMossy;
+import net.dries007.tfc.objects.blocks.rock.BlockRockSlab;
+import net.dries007.tfc.objects.blocks.rock.BlockRockStair;
+import net.dries007.tfc.objects.blocks.rock.BlockRockWall;
+import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nonnull;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
 
+import static net.dries007.tfc.api.types2.rock.RockVariant.*;
 
 /**
- * Перечисление, которое представляет различные типы камня. 20 типов
+ * Типы блока, принимает первым параметром, класс,
+ * который будет создаваться, вторым параметром варианты для которых он создаст класс
  */
 @Nonnull
 public enum RockType implements IStringSerializable {
-    // Igneous Intrusive
-    GRANITE(IGNEOUS_INTRUSIVE),
-    DIORITE(IGNEOUS_INTRUSIVE),
-    GABBRO(IGNEOUS_INTRUSIVE),
+		ORDINARY(null, RAW, COBBLE, BRICK, CRACKED, CHISELED, SMOOTH, GRAVEL, SAND, ANVIL, PRESSURE_PLATE, BUTTON, LOOSE, SPELEOTHEM),
+		/**
+		 * Блок с мхом
+		 */
+		MOSSY(BlockRockMossy::new, COBBLE, BRICK),
+		/**
+		 * Ступенька
+		 */
+		STAIRS(BlockRockStair::new, RAW, COBBLE, BRICK, SMOOTH),
+		/**
+		 * Двойной полублок
+		 */
+		SLAB_DOUBLE(BlockRockSlab.Double::new, RAW, COBBLE, BRICK, SMOOTH),
+		/**
+		 * Полублок
+		 */
+		SLAB(BlockRockSlab.Half::new, RAW, COBBLE, BRICK, SMOOTH),
+		/**
+		 * Блок стены
+		 */
+		WALL(BlockRockWall::new, RAW, COBBLE, BRICK, SMOOTH);
 
-    // Sedimentary
-    SHALE(SEDIMENTARY),
-    CLAYSTONE(SEDIMENTARY),
-    LIMESTONE(SEDIMENTARY, true),
-    CONGLOMERATE(SEDIMENTARY),
-    DOLOMITE(SEDIMENTARY, true),
-    CHERT(SEDIMENTARY),
-    CHALK(SEDIMENTARY, true),
+		private final TriFunction<RockType, RockVariant, Rock, IRockBlock> blockFactory;
+		private final RockVariant[] rockVariants;
 
-    // Igneous Extrusive
-    RHYOLITE(IGNEOUS_EXTRUSIVE),
-    BASALT(IGNEOUS_EXTRUSIVE),
-    ANDESITE(IGNEOUS_EXTRUSIVE),
-    DACITE(IGNEOUS_EXTRUSIVE),
+		RockType(TriFunction<RockType, RockVariant, Rock, IRockBlock> blockFactory, RockVariant... rockVariants) {
+				this.rockVariants = rockVariants;
+				this.blockFactory = blockFactory;
+		}
 
-    // Metamorphic
-    QUARTZITE(METAMORPHIC),
-    SLATE(METAMORPHIC),
-    PHYLLITE(METAMORPHIC),
-    SCHIST(METAMORPHIC),
-    GNEISS(METAMORPHIC),
-    MARBLE(METAMORPHIC, true);
+		public IRockBlock create(RockVariant rockVariant, Rock rock) {
+				if (this.blockFactory == null) {
+						return rockVariant.create(rock);
+				}
+				return this.blockFactory.apply(this, rockVariant, rock);
+		}
 
-    public static final IProperty<RockType> ROCKTYPE = PropertyEnum.create("rocktype", RockType.class);
-    private static final RockType[] VALUES = values();
-    private final RockCategory rockCategory;
-    private final boolean isFlux;
+		public RockVariant[] getRockVariants() {
+				return rockVariants;
+		}
 
-    RockType(@Nonnull RockCategory rockCategory) {
-        this(rockCategory, false);
-    }
-
-    RockType(@Nonnull RockCategory rockCategory, boolean isFlux) {
-        this.rockCategory = rockCategory;
-        this.isFlux = isFlux;
-    }
-
-    public static RockType valueOf(int i) {
-        return i >= 0 && i < VALUES.length ? VALUES[i] : VALUES[i % VALUES.length];
-    }
-
-    @Nonnull
-    public RockCategory getRockCategory() {
-        return rockCategory;
-    }
-
-    public boolean isFlux() {
-        return isFlux;
-    }
-
-    /**
-     * Возвращает имя перечисления в нижнем регистре.
-     */
-    @Nonnull
-    @Override
-    public String getName() {
-        return name().toLowerCase();
-    }
-
-    @Nonnull
-    public ResourceLocation getTexture() {
-        return new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/blocks/rock/raw/" + this.getName() + ".png");
-    }
+		@Nonnull
+		@Override
+		public String getName() {
+				return name().toLowerCase();
+		}
 }

@@ -3,8 +3,8 @@
   "defaults": {
     "model": "cross",
     "textures": {
-      "cross": "tfc:blocks/saplings/acacia",
-      "layer0": "tfc:blocks/saplings/acacia"
+      "cross": "tfc:blocks/wood/saplings/acacia",
+      "layer0": "tfc:blocks/wood/saplings/acacia"
     }
   },
   "variants": {

@@ -3,9 +3,9 @@
   "defaults": {
     "model": "item/generated",
     "textures": {
-      "particle": "tfc:blocks/wood/log/rosewood",
-      "side": "tfc:blocks/wood/log/rosewood",
-      "end": "tfc:blocks/wood/top/rosewood",
+      "particle": "tfc:blocks/wood/log/side/rosewood",
+      "side": "tfc:blocks/wood/log/side/rosewood",
+      "end": "tfc:blocks/wood/log/top/rosewood",
       "layer0": "tfc:items/wood/log/rosewood"
     }
   },
@@ -27,7 +27,7 @@
       "none": {
         "model": "cube_column",
         "textures": {
-          "end": "tfc:blocks/wood/log/rosewood"
+          "end": "tfc:blocks/wood/log/side/rosewood"
         }
       }
     },

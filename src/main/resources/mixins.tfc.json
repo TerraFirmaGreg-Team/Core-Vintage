@@ -12,7 +12,7 @@
     "gregtech.PartsRecipeHandlerMixin",
     "gregtech.SurfaceGeneratorMixin",
     "gregtech.ToolItemsMixin",
-    "gregtech.ToolRecipeHandlerMixin",
-    "minecraft.GuiCreateWorldMixin"
+    "gregtech.ToolRecipeHandlerMixin"
+    //    "minecraft.GuiCreateWorldMixin"
   ]
 }

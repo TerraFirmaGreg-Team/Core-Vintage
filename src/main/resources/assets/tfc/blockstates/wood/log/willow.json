@@ -3,9 +3,9 @@
   "defaults": {
     "model": "item/generated",
     "textures": {
-      "particle": "tfc:blocks/wood/log/willow",
-      "side": "tfc:blocks/wood/log/willow",
-      "end": "tfc:blocks/wood/top/willow",
+      "particle": "tfc:blocks/wood/log/side/willow",
+      "side": "tfc:blocks/wood/log/side/willow",
+      "end": "tfc:blocks/wood/log/top/willow",
       "layer0": "tfc:items/wood/log/willow"
     }
   },
@@ -27,7 +27,7 @@
       "none": {
         "model": "cube_column",
         "textures": {
-          "end": "tfc:blocks/wood/log/willow"
+          "end": "tfc:blocks/wood/log/side/willow"
         }
       }
     },

@@ -1,104 +1,107 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfc:loose_rock",
     "uvlock": false
   },
   "variants": {
     "axis": {
       "north": {
+        "model": "tfc:groundcover/rubble",
         "y": 0
       },
       "east": {
+        "model": "tfc:groundcover/pebble",
         "y": 90
       },
       "south": {
+        "model": "tfc:groundcover/boulder",
         "y": 180
       },
       "west": {
+        "model": "tfc:groundcover/loose_rock",
         "y": 270
       }
     },
     "rocktype": {
       "granite": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/granite"
+            "rock": "tfc:blocks/rock/raw/granite"
       }}, 
       "diorite": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/diorite"
+            "rock": "tfc:blocks/rock/raw/diorite"
       }}, 
       "gabbro": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/gabbro"
+            "rock": "tfc:blocks/rock/raw/gabbro"
       }}, 
       "shale": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/shale"
+            "rock": "tfc:blocks/rock/raw/shale"
       }}, 
       "claystone": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/claystone"
+            "rock": "tfc:blocks/rock/raw/claystone"
       }}, 
       "limestone": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/limestone"
+            "rock": "tfc:blocks/rock/raw/limestone"
       }}, 
       "conglomerate": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/conglomerate"
+            "rock": "tfc:blocks/rock/raw/conglomerate"
       }}, 
       "dolomite": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/dolomite"
+            "rock": "tfc:blocks/rock/raw/dolomite"
       }}, 
       "chert": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/chert"
+            "rock": "tfc:blocks/rock/raw/chert"
       }}, 
       "chalk": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/chalk"
+            "rock": "tfc:blocks/rock/raw/chalk"
       }}, 
       "rhyolite": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/rhyolite"
+            "rock": "tfc:blocks/rock/raw/rhyolite"
       }}, 
       "basalt": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/basalt"
+            "rock": "tfc:blocks/rock/raw/basalt"
       }}, 
       "andesite": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/andesite"
+            "rock": "tfc:blocks/rock/raw/andesite"
       }}, 
       "dacite": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/dacite"
+            "rock": "tfc:blocks/rock/raw/dacite"
       }}, 
       "quartzite": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/quartzite"
+            "rock": "tfc:blocks/rock/raw/quartzite"
       }}, 
       "slate": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/slate"
+            "rock": "tfc:blocks/rock/raw/slate"
       }}, 
       "phyllite": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/phyllite"
+            "rock": "tfc:blocks/rock/raw/phyllite"
       }}, 
       "schist": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/schist"
+            "rock": "tfc:blocks/rock/raw/schist"
       }}, 
       "gneiss": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/gneiss"
+            "rock": "tfc:blocks/rock/raw/gneiss"
       }}, 
       "marble": {
           "textures": {
-            "stone": "tfc:blocks/rock/raw/marble"
+            "rock": "tfc:blocks/rock/raw/marble"
       }}
     }
   }

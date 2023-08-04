@@ -1,6 +1,8 @@
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.api.types2.wood.Wood;
 import net.dries007.tfc.objects.te.TELoom;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -20,12 +22,14 @@ public class TESRLoom extends TESRBase<TELoom> {
 				GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
 				GlStateManager.rotate((te.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
 				GlStateManager.popMatrix();
+				Wood wood = null;
 
 				double tileZ = te.getAnimPos();
 
 				try {
+						wood = te.getWood();
 						GlStateManager.pushMatrix();
-						GlStateManager.color(1, 1, 1, 1);
+						Helpers.setWoodColor(wood.getColor());
 						this.bindTexture(new ResourceLocation(MOD_ID, "textures/blocks/wood/planks/pattern.png"));
 
 						GlStateManager.disableLighting();
@@ -54,7 +58,7 @@ public class TESRLoom extends TESRBase<TELoom> {
 				if (te.hasRecipe()) {
 						try {
 								GlStateManager.pushMatrix();
-								GlStateManager.color(1, 1, 1, 1);
+								Helpers.setWoodColor(wood.getColor());
 								this.bindTexture(te.getInProgressTexture());
 
 								GlStateManager.disableLighting();

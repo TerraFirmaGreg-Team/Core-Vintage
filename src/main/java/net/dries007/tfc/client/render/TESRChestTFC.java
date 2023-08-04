@@ -3,6 +3,7 @@ package net.dries007.tfc.client.render;
 import net.dries007.tfc.api.types2.wood.Wood;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodChest;
 import net.dries007.tfc.objects.te.TEChestTFC;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;
@@ -20,13 +21,6 @@ public class TESRChestTFC extends TileEntitySpecialRenderer<TEChestTFC> {
 
 		private final ModelChest simpleChest = new ModelChest();
 		private final ModelChest largeChest = new ModelLargeChest();
-
-		private void setWoodColor(int color) {
-				float red = ((color >> 16) & 0xFF) / 255.0F;
-				float green = ((color >> 8) & 0xFF) / 255.0F;
-				float blue = (color & 0xFF) / 255.0F;
-				GlStateManager.color(red, green, blue, 1.0F);
-		}
 
 		@Override
 		public void render(TEChestTFC te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -64,10 +58,10 @@ public class TESRChestTFC extends TileEntitySpecialRenderer<TEChestTFC> {
 								GlStateManager.matrixMode(5888);
 						} else if (te.getChestType() == BlockChest.Type.TRAP && wood != null) {
 								bindTexture(new ResourceLocation(MOD_ID, "textures/entity/chests/chest_trap.png"));
-								setWoodColor(wood.getColor());
+								Helpers.setWoodColor(wood.getColor());
 						} else if (wood != null) {
 								bindTexture(new ResourceLocation(MOD_ID, "textures/entity/chests/chest.png"));
-								setWoodColor(wood.getColor());
+								Helpers.setWoodColor(wood.getColor());
 						}
 				} else {
 						modelchest = largeChest;
@@ -81,17 +75,17 @@ public class TESRChestTFC extends TileEntitySpecialRenderer<TEChestTFC> {
 								GlStateManager.matrixMode(5888);
 						} else if (te.getChestType() == BlockChest.Type.TRAP && wood != null) {
 								bindTexture(new ResourceLocation(MOD_ID, "textures/entity/chests/chest_trap_double.png"));
-								setWoodColor(wood.getColor());
+								Helpers.setWoodColor(wood.getColor());
 						} else if (wood != null) {
 								bindTexture(new ResourceLocation(MOD_ID, "textures/entity/chests/chest_double.png"));
-								setWoodColor(wood.getColor());
+								Helpers.setWoodColor(wood.getColor());
 						}
 				}
 
 				GlStateManager.pushMatrix();
 				GlStateManager.enableRescaleNormal();
 
-				if (destroyStage < 0) setWoodColor(wood.getColor());
+				if (destroyStage < 0) Helpers.setWoodColor(wood.getColor());
 
 				GlStateManager.translate((float) x, (float) y + 1.0F, (float) z + 1.0F);
 				GlStateManager.scale(1.0F, -1.0F, -1.0F);
@@ -131,7 +125,7 @@ public class TESRChestTFC extends TileEntitySpecialRenderer<TEChestTFC> {
 				modelchest.renderAll();
 				GlStateManager.disableRescaleNormal();
 				GlStateManager.popMatrix();
-				setWoodColor(wood.getColor());
+				Helpers.setWoodColor(wood.getColor());
 
 				if (destroyStage >= 0) {
 						GlStateManager.matrixMode(5890);

@@ -269,8 +269,7 @@ public final class ClientRegisterEvents {
 
 				blockColors.registerBlockColorHandler(woodBlockColors, TFCStorage.WOOD_BLOCKS.values()
 								.stream()
-								.filter(block -> !(block.getWoodVariant() == LEAVES))
-								.filter(block -> !(block.getWoodVariant() == SAPLING))
+								.filter(block -> block.getWoodVariant() != LEAVES && block.getWoodVariant() != SAPLING)
 								.map(s -> (Block) s)
 								.toArray(Block[]::new));
 
@@ -300,8 +299,7 @@ public final class ClientRegisterEvents {
 
 				itemColors.registerItemColorHandler(woodItemBlockColors, TFCStorage.WOOD_BLOCKS.values()
 								.stream()
-								.filter(x -> !(x.getWoodVariant() == LEAVES))
-								.filter(x -> !(x.getWoodVariant() == SAPLING))
+								.filter(x -> x.getWoodVariant() != LEAVES && x.getWoodVariant() != SAPLING)
 								.map(s -> (Block) s)
 								.toArray(Block[]::new));
 
@@ -334,8 +332,7 @@ public final class ClientRegisterEvents {
 												event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
 								TFCStorage.PLANT_BLOCKS.values()
 												.stream()
-												.filter(x -> x.getPlantVariant() == SHORT_GRASS)
-												.filter(x -> x.getPlantVariant() == TALL_GRASS)
+												.filter(x -> x.getPlantVariant() == SHORT_GRASS && x.getPlantVariant() == TALL_GRASS)
 												.map(s -> (Block) s)
 												.toArray(Block[]::new));
 

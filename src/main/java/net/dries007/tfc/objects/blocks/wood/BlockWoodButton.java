@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.wood;
 
-import net.dries007.tfc.api.types2.wood.Wood;
-import net.dries007.tfc.api.types2.wood.WoodVariant;
-import net.dries007.tfc.api.types2.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.WoodVariant;
+import net.dries007.tfc.api.types.wood.util.IWoodBlock;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;

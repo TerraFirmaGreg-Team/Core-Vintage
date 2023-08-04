@@ -12,8 +12,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types2.rock.RockType.ORDINARY;
-import static net.dries007.tfc.api.types2.rock.RockVariant.SAND;
+import static net.dries007.tfc.api.types.rock.RockType.ORDINARY;
+import static net.dries007.tfc.api.types.rock.RockVariant.SAND;
 
 @ParametersAreNonnullByDefault
 public class WorldGenSandTFC extends WorldGenerator {

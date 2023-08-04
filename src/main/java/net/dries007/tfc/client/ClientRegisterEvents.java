@@ -9,7 +9,7 @@ import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.util.IWoodBlock;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.render.*;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
@@ -56,11 +56,11 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.plant.PlantVariant.SHORT_GRASS;
-import static net.dries007.tfc.api.types2.plant.PlantVariant.TALL_GRASS;
-import static net.dries007.tfc.api.types2.soil.SoilVariant.FARMLAND;
-import static net.dries007.tfc.api.types2.wood.WoodVariant.LEAVES;
-import static net.dries007.tfc.api.types2.wood.WoodVariant.SAPLING;
+import static net.dries007.tfc.api.types.plant.PlantVariant.SHORT_GRASS;
+import static net.dries007.tfc.api.types.plant.PlantVariant.TALL_GRASS;
+import static net.dries007.tfc.api.types.soil.SoilVariant.FARMLAND;
+import static net.dries007.tfc.api.types.wood.WoodVariant.LEAVES;
+import static net.dries007.tfc.api.types.wood.WoodVariant.SAPLING;
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 

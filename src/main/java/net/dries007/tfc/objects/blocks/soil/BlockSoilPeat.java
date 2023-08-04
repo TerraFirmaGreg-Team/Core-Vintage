@@ -13,13 +13,12 @@ public class BlockSoilPeat extends Block {
 	public BlockSoilPeat(Material material) {
 		super(material);
 
+		setRegistryName(MOD_ID, "peat");
+		setTranslationKey(MOD_ID + ".peat");
+		setCreativeTab(CreativeTabsTFC.EARTH);
 		setSoundType(SoundType.GROUND);
 		setHardness(0.6F);
 		setHarvestLevel("shovel", 0);
-
-		setCreativeTab(CreativeTabsTFC.EARTH);
-		setRegistryName(MOD_ID, "peat");
-		setTranslationKey(MOD_ID + ".peat");
 
 		OreDictionaryHelper.register(this, "peat");
 		Blocks.FIRE.setFireInfo(this, 5, 10);

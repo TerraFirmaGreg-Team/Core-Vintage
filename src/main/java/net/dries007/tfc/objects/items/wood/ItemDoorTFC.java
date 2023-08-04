@@ -4,7 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types2.wood.Wood;
+import net.dries007.tfc.api.types.wood.Wood;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodDoor;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemDoor;

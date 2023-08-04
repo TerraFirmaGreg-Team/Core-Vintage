@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.entity;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.wood.Wood;
-import net.dries007.tfc.api.types2.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.util.IWoodBlock;
 import net.dries007.tfc.objects.items.wood.ItemBoatTFC;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;

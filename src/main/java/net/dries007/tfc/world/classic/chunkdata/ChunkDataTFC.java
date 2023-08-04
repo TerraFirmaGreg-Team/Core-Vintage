@@ -2,10 +2,10 @@ package net.dries007.tfc.world.classic.chunkdata;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.rock.Rock;
-import net.dries007.tfc.api.types2.soil.Soil;
-import net.dries007.tfc.api.types2.wood.Wood;
-import net.dries007.tfc.api.types2.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.rock.Rock;
+import net.dries007.tfc.api.types.soil.Soil;
+import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.util.IWoodBlock;
 import net.dries007.tfc.util.NBTBuilder;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;

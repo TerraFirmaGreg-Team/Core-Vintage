@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.rock.Rock;
-import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.Rock;
+import net.dries007.tfc.api.types.rock.RockVariant;
+import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

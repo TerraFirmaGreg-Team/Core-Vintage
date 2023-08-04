@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types2.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.devices.BlockSluice;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -34,8 +34,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.api.types2.rock.RockVariant.GRAVEL;
-import static net.dries007.tfc.api.types2.rock.RockVariant.SAND;
+import static net.dries007.tfc.api.types.rock.RockVariant.GRAVEL;
+import static net.dries007.tfc.api.types.rock.RockVariant.SAND;
 
 @ParametersAreNonnullByDefault
 public class TESluice extends TEBase implements ITickable {

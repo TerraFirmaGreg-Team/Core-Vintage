@@ -2,7 +2,7 @@ package net.dries007.tfc.world.classic.genlayers;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types2.rock.RockCategory;
+import net.dries007.tfc.api.types.rock.RockCategory;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.genlayers.biome.*;

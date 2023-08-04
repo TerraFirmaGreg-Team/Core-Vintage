@@ -1,10 +1,10 @@
 package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.rock.Rock;
-import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.Rock;
+import net.dries007.tfc.api.types.rock.RockType;
+import net.dries007.tfc.api.types.rock.RockVariant;
+import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockType.ORDINARY;
+import static net.dries007.tfc.api.types.rock.RockType.ORDINARY;
 
 public class BlockRockStair extends BlockStairs implements IRockBlock {
 	private final RockVariant rockVariant;

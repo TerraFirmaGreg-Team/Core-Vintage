@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.items.wood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types2.wood.Wood;
+import net.dries007.tfc.api.types.wood.Wood;
 import net.dries007.tfc.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.minecraft.block.Block;

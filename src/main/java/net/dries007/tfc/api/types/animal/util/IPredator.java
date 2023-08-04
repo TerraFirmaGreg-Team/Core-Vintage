@@ -1,0 +1,12 @@
+package net.dries007.tfc.api.types.animal.util;
+
+/**
+ * Use this to tell TFC this is a predator (for respawning mechanics)
+ * Used only in TFC worlds.
+ */
+public interface IPredator extends ICreatureTFC {
+	@Override
+	default CreatureType getCreatureType() {
+		return CreatureType.PREDATOR;
+	}
+}

@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.types2.rock.RockVariant;
+import net.dries007.tfc.api.types.rock.RockVariant;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.minecraft.block.Block;

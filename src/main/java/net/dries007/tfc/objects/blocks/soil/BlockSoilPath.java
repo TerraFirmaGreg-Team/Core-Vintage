@@ -2,9 +2,9 @@ package net.dries007.tfc.objects.blocks.soil;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.soil.Soil;
-import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
+import net.dries007.tfc.api.types.soil.Soil;
+import net.dries007.tfc.api.types.soil.SoilVariant;
+import net.dries007.tfc.api.types.soil.util.ISoilBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -32,7 +32,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
+import static net.dries007.tfc.api.types.soil.SoilVariant.DIRT;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -52,14 +52,13 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
 		this.useNeighborBrightness = true;
 
 		var blockRegistryName = String.format("soil/%s/%s", soilVariant, soil);
-
-		this.setCreativeTab(CreativeTabsTFC.EARTH);
-		this.setSoundType(SoundType.PLANT);
-		this.setHardness(0.65F);
-		this.setHarvestLevel("shovel", 0);
-		this.setRegistryName(MOD_ID, blockRegistryName);
-		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-		this.setLightOpacity(255);
+		setRegistryName(MOD_ID, blockRegistryName);
+		setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+		setCreativeTab(CreativeTabsTFC.EARTH);
+		setSoundType(SoundType.PLANT);
+		setHardness(2.0F);
+		setHarvestLevel("shovel", 0);
+		setLightOpacity(255);
 	}
 
 	@Override

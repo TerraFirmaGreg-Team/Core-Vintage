@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types2.wood.Wood;
-import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
 import net.dries007.tfc.world.classic.StructureHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;

@@ -2,9 +2,9 @@ package net.dries007.tfc.objects.blocks.soil;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.soil.Soil;
-import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
+import net.dries007.tfc.api.types.soil.Soil;
+import net.dries007.tfc.api.types.soil.SoilVariant;
+import net.dries007.tfc.api.types.soil.util.ISoilBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -45,7 +45,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
+import static net.dries007.tfc.api.types.soil.SoilVariant.*;
 import static net.dries007.tfc.objects.blocks.BlocksTFC.isGravel;
 import static net.dries007.tfc.objects.blocks.BlocksTFC.isSand;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
@@ -92,16 +92,15 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
 		this.useNeighborBrightness = true;
 
 		var blockRegistryName = String.format("soil/%s/%s", soilVariant, soil);
-
-		this.setCreativeTab(CreativeTabsTFC.EARTH);
-		this.setSoundType(SoundType.GROUND);
-		this.setHardness(0.6F);
-		this.setHarvestLevel("shovel", 0);
-		this.setRegistryName(MOD_ID, blockRegistryName);
-		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-		this.setDefaultState(this.blockState.getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
-		this.setTickRandomly(true);
-		this.setLightOpacity(255);
+		setRegistryName(MOD_ID, blockRegistryName);
+		setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+		setCreativeTab(CreativeTabsTFC.EARTH);
+		setSoundType(SoundType.GROUND);
+		setHardness(2.0F);
+		setHarvestLevel("shovel", 0);
+		setDefaultState(blockState.getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
+		setTickRandomly(true);
+		setLightOpacity(255);
 	}
 
 	protected static void turnToDirt(World world, BlockPos pos) {

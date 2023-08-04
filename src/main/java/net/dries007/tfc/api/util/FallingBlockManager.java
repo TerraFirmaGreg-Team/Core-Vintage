@@ -8,7 +8,7 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.CollapseData;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
-import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
+import net.dries007.tfc.api.types.soil.util.ISoilBlock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlockCharcoalPile;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodSupport;
@@ -32,8 +32,8 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.api.types2.soil.SoilVariant.FARMLAND;
-import static net.dries007.tfc.api.types2.soil.SoilVariant.PATH;
+import static net.dries007.tfc.api.types.soil.SoilVariant.FARMLAND;
+import static net.dries007.tfc.api.types.soil.SoilVariant.PATH;
 
 public class FallingBlockManager {
 

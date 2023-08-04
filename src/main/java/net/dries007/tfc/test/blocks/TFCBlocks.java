@@ -1,14 +1,14 @@
 package net.dries007.tfc.test.blocks;
 
-import net.dries007.tfc.api.types2.GroundcoverType;
-import net.dries007.tfc.api.types2.plant.Plant;
-import net.dries007.tfc.api.types2.rock.Rock;
-import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.soil.Soil;
-import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.types2.wood.Wood;
-import net.dries007.tfc.api.types2.wood.WoodVariant;
+import net.dries007.tfc.api.types.GroundcoverType;
+import net.dries007.tfc.api.types.plant.Plant;
+import net.dries007.tfc.api.types.rock.Rock;
+import net.dries007.tfc.api.types.rock.RockType;
+import net.dries007.tfc.api.types.rock.RockVariant;
+import net.dries007.tfc.api.types.soil.Soil;
+import net.dries007.tfc.api.types.soil.SoilVariant;
+import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.WoodVariant;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.blocks.*;
@@ -21,7 +21,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 
 import static net.dries007.tfc.api.registries.TFCStorage.*;
-import static net.dries007.tfc.api.types2.rock.RockVariant.*;
+import static net.dries007.tfc.api.types.rock.RockVariant.*;
 
 public class TFCBlocks {
 	public static BlockDebug DEBUG;

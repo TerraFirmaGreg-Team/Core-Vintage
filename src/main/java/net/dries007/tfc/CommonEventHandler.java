@@ -21,10 +21,10 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.ICreatureTFC;
-import net.dries007.tfc.api.types.IPredator;
-import net.dries007.tfc.api.types2.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.animal.util.IAnimalTFC;
+import net.dries007.tfc.api.types.animal.util.ICreatureTFC;
+import net.dries007.tfc.api.types.animal.util.IPredator;
+import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
@@ -41,10 +41,10 @@ import net.dries007.tfc.objects.blocks.rock.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodSupport;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
+import net.dries007.tfc.objects.effects.PotionEffectsTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
 import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
@@ -123,10 +123,10 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.Rock.BASALT;
-import static net.dries007.tfc.api.types2.rock.Rock.RHYOLITE;
-import static net.dries007.tfc.api.types2.rock.RockType.ORDINARY;
-import static net.dries007.tfc.api.types2.rock.RockVariant.RAW;
+import static net.dries007.tfc.api.types.rock.Rock.BASALT;
+import static net.dries007.tfc.api.types.rock.Rock.RHYOLITE;
+import static net.dries007.tfc.api.types.rock.RockType.ORDINARY;
+import static net.dries007.tfc.api.types.rock.RockVariant.RAW;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)

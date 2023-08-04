@@ -1,6 +1,6 @@
 package net.dries007.tfc.types;
 
-import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
 import net.dries007.tfc.world.classic.worldgen.trees.*;
 import net.minecraftforge.fml.common.Mod;
 

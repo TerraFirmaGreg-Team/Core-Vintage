@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
-import net.dries007.tfc.api.types2.GroundcoverType;
+import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.CustomStateMap;
 import net.minecraft.block.Block;

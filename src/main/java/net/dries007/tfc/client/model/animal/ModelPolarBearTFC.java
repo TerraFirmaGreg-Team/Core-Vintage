@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.api.types.animal.util.IAnimalTFC;
 import net.dries007.tfc.objects.entity.animal.EntityPolarBearTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

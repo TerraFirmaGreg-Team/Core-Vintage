@@ -1,10 +1,10 @@
 package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.rock.Rock;
-import net.dries007.tfc.api.types2.rock.RockType;
-import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.Rock;
+import net.dries007.tfc.api.types.rock.RockType;
+import net.dries007.tfc.api.types.rock.RockVariant;
+import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.rock.ItemRockSlab;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -40,8 +40,8 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockType.ORDINARY;
-import static net.dries007.tfc.api.types2.rock.RockType.SLAB_DOUBLE;
+import static net.dries007.tfc.api.types.rock.RockType.ORDINARY;
+import static net.dries007.tfc.api.types.rock.RockType.SLAB_DOUBLE;
 
 public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);

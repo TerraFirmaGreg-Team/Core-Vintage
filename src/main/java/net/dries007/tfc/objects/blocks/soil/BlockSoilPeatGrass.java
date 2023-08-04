@@ -37,12 +37,11 @@ public class BlockSoilPeatGrass extends Block {
 	public BlockSoilPeatGrass(Material material) {
 		super(material);
 
-		setSoundType(SoundType.PLANT);
-		setTickRandomly(true);
-
-		setCreativeTab(CreativeTabsTFC.EARTH);
 		setRegistryName(MOD_ID, "peat_grass");
 		setTranslationKey(MOD_ID + ".peat_grass");
+		setCreativeTab(CreativeTabsTFC.EARTH);
+		setSoundType(SoundType.PLANT);
+		setTickRandomly(true);
 
 		OreDictionaryHelper.register(this, "peat");
 		OreDictionaryHelper.register(this, "peat", "grass");

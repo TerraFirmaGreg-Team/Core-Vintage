@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.items.food;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.food.Nutrient;
-import net.dries007.tfc.util.agriculture.Food;
+import net.dries007.tfc.api.types.food.Food;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

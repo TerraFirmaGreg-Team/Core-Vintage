@@ -4,9 +4,9 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types2.rock.Rock;
-import net.dries007.tfc.api.types2.rock.RockVariant;
-import net.dries007.tfc.api.types2.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.Rock;
+import net.dries007.tfc.api.types.rock.RockVariant;
+import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -37,8 +37,8 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockVariant.GRAVEL;
-import static net.dries007.tfc.api.types2.rock.RockVariant.SAND;
+import static net.dries007.tfc.api.types.rock.RockVariant.GRAVEL;
+import static net.dries007.tfc.api.types.rock.RockVariant.SAND;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

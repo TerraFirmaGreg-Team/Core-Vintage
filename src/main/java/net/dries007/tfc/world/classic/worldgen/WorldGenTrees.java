@@ -2,8 +2,8 @@ package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.wood.Wood;
-import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.*;
 
-import static net.dries007.tfc.api.types2.GroundcoverType.STICK;
+import static net.dries007.tfc.api.types.GroundcoverType.STICK;
 
 public class WorldGenTrees implements IWorldGenerator {
 	public static void generateLooseSticks(Random rand, int chunkX, int chunkZ, World world, int amount) {

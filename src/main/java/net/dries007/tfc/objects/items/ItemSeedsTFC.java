@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items;
 
-import net.dries007.tfc.api.types.ICrop;
+import net.dries007.tfc.api.types.agriculture.util.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilFarmland;
 import net.minecraft.advancements.CriteriaTriggers;

@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types2.rock.RockVariant;
+import net.dries007.tfc.api.types.rock.RockVariant;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.objects.CreativeTabsTFC;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.api.types.agriculture.util.IFruitTree;
+import net.dries007.tfc.api.types.agriculture.util.IGrowingPlant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;

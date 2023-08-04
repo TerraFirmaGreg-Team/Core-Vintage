@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.render;
 
-import net.dries007.tfc.api.types2.wood.Wood;
+import net.dries007.tfc.api.types.wood.Wood;
 import net.dries007.tfc.objects.te.TELoom;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.renderer.BufferBuilder;

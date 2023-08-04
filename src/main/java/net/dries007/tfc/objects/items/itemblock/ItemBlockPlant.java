@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items.itemblock;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types2.plant.Plant;
+import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;

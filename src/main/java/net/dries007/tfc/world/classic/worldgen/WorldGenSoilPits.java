@@ -2,7 +2,7 @@ package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.plant.Plant;
+import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.test.blocks.TFCBlocks;
@@ -20,8 +20,8 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import static net.dries007.tfc.api.types2.soil.SoilVariant.CLAY;
-import static net.dries007.tfc.api.types2.soil.SoilVariant.CLAY_GRASS;
+import static net.dries007.tfc.api.types.soil.SoilVariant.CLAY;
+import static net.dries007.tfc.api.types.soil.SoilVariant.CLAY_GRASS;
 
 public class WorldGenSoilPits implements IWorldGenerator {
 	@Override

@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects;
 
-import net.dries007.tfc.api.types.IArmorMaterialTFC;
+import net.dries007.tfc.api.util.IArmorMaterialTFC;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;

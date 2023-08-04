@@ -2,8 +2,8 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.wood.Wood;
-import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
@@ -19,7 +19,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.wood.WoodVariant.LOG;
+import static net.dries007.tfc.api.types.wood.WoodVariant.LOG;
 import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
 
 public class TreeGenSequoia implements ITreeGenerator {

@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.plant.Plant;
+import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.*;
 import net.dries007.tfc.util.climate.ClimateTFC;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.mapgen;
 
-import net.dries007.tfc.api.types2.rock.Rock;
+import net.dries007.tfc.api.types.rock.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.DataLayer;
 import net.minecraft.block.state.IBlockState;

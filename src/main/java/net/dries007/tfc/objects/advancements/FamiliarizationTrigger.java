@@ -4,7 +4,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.api.types.animal.util.IAnimalTFC;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.advancements.critereon.AbstractCriterionInstance;

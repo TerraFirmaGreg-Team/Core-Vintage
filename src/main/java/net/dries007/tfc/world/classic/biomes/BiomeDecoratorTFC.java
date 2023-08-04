@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.biomes;
 
-import net.dries007.tfc.api.types2.plant.Plant;
-import net.dries007.tfc.api.types2.plant.PlantVariant;
+import net.dries007.tfc.api.types.plant.Plant;
+import net.dries007.tfc.api.types.plant.PlantVariant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;

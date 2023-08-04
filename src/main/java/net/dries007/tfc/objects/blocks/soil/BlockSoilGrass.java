@@ -9,10 +9,10 @@ package net.dries007.tfc.objects.blocks.soil;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types2.plant.Plant;
-import net.dries007.tfc.api.types2.soil.Soil;
-import net.dries007.tfc.api.types2.soil.SoilVariant;
-import net.dries007.tfc.api.types2.soil.util.ISoilBlock;
+import net.dries007.tfc.api.types.plant.Plant;
+import net.dries007.tfc.api.types.soil.Soil;
+import net.dries007.tfc.api.types.soil.SoilVariant;
+import net.dries007.tfc.api.types.soil.util.ISoilBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -26,7 +26,6 @@ import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -53,8 +52,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.plant.PlantVariant.SHORT_GRASS;
-import static net.dries007.tfc.api.types2.soil.SoilVariant.*;
+import static net.dries007.tfc.api.types.plant.PlantVariant.SHORT_GRASS;
+import static net.dries007.tfc.api.types.soil.SoilVariant.*;
 import static net.dries007.tfc.objects.blocks.BlocksTFC.isGravel;
 import static net.dries007.tfc.objects.blocks.BlocksTFC.isSand;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
@@ -83,15 +82,14 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 		this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant);
 
 		var blockRegistryName = String.format("soil/%s/%s", soilVariant, soil);
-
-		this.setCreativeTab(CreativeTabsTFC.EARTH);
-		this.setSoundType(SoundType.PLANT);
-		this.setHardness(0.6F);
-		this.setHarvestLevel("shovel", 0);
-		this.setRegistryName(MOD_ID, blockRegistryName);
-		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-		this.setTickRandomly(true);
-		this.setDefaultState(this.blockState.getBaseState()
+		setRegistryName(MOD_ID, blockRegistryName);
+		setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+		setCreativeTab(CreativeTabsTFC.EARTH);
+		setSoundType(SoundType.PLANT);
+		setHardness(2.1F);
+		setHarvestLevel("shovel", 0);
+		setTickRandomly(true);
+		setDefaultState(this.blockState.getBaseState()
 			.withProperty(NORTH, Boolean.FALSE)
 			.withProperty(EAST, Boolean.FALSE)
 			.withProperty(SOUTH, Boolean.FALSE)
@@ -203,7 +201,6 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-
 		switch (soilVariant) {
 			case CLAY_GRASS:
 				return Items.CLAY_BALL;

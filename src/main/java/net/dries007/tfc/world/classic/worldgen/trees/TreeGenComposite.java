@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import com.google.common.collect.LinkedListMultimap;
-import net.dries007.tfc.api.types2.wood.Wood;
-import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.TemplateManager;

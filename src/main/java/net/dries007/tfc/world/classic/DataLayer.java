@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic;
 
-import net.dries007.tfc.api.types2.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.util.IRockBlock;
 
 /**
  * Todo: Get rid. PH is already obselete / Siesmic and drainage can be done much easier similar to rainfall / temperature

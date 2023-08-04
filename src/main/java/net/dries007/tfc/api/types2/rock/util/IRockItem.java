@@ -6,11 +6,11 @@ import net.dries007.tfc.api.types2.rock.RockCategory;
 import javax.annotation.Nonnull;
 
 public interface IRockItem {
-		@Nonnull
-		Rock getRock();
+	@Nonnull
+	Rock getRock();
 
-		@Nonnull
-		default RockCategory getRockCategory() {
-				return getRock().getRockCategory();
-		}
+	@Nonnull
+	default RockCategory getRockCategory() {
+		return getRock().getRockCategory();
+	}
 }

@@ -11,66 +11,54 @@ import net.minecraftforge.fml.relauncher.Side;
  * Carries all the data relative to the result displayed to the player.
  * One of the two subclasses will be used according to the logical side.
  */
-public abstract class ProspectEvent extends Event
-{
+public abstract class ProspectEvent extends Event {
 
-    public static enum Type {
-        COCK
-    }
+	private final Side side;
+	private final EntityPlayer player;
+	private final BlockPos pos;
+	private final Type type;
+	private final ItemStack vein;
+	protected ProspectEvent(Side side, EntityPlayer player, BlockPos pos, Type type, ItemStack vein) {
+		this.side = side;
+		this.player = player;
+		this.pos = pos;
+		this.type = type;
+		this.vein = vein;
+	}
 
-    public static class Server extends ProspectEvent
-    {
-        public Server(EntityPlayer player, BlockPos pos, Type type, ItemStack vein)
-        {
-            super(Side.SERVER, player, pos, type, vein);
-        }
-    }
+	public Side getSide() {
+		return side;
+	}
 
-    public static class Client extends ProspectEvent
-    {
-        public Client(EntityPlayer player, BlockPos pos, Type type, ItemStack vein)
-        {
-            super(Side.CLIENT, player, pos, type, vein);
-        }
-    }
+	public EntityPlayer getPlayer() {
+		return player;
+	}
 
-    private Side side;
-    private EntityPlayer player;
-    private BlockPos pos;
-    private Type type;
-    private ItemStack vein;
+	public BlockPos getBlockPos() {
+		return pos;
+	}
 
-    protected ProspectEvent(Side side, EntityPlayer player, BlockPos pos, Type type, ItemStack vein)
-    {
-        this.side = side;
-        this.player = player;
-        this.pos = pos;
-        this.type = type;
-        this.vein = vein;
-    }
+	public Type getResultType() {
+		return type;
+	}
 
-    public Side getSide()
-    {
-        return side;
-    }
+	public ItemStack getVein() {
+		return vein;
+	}
 
-    public EntityPlayer getPlayer()
-    {
-        return player;
-    }
+	public enum Type {
+		COCK
+	}
 
-    public BlockPos getBlockPos()
-    {
-        return pos;
-    }
+	public static class Server extends ProspectEvent {
+		public Server(EntityPlayer player, BlockPos pos, Type type, ItemStack vein) {
+			super(Side.SERVER, player, pos, type, vein);
+		}
+	}
 
-    public Type getResultType()
-    {
-        return type;
-    }
-
-    public ItemStack getVein()
-    {
-        return vein;
-    }
+	public static class Client extends ProspectEvent {
+		public Client(EntityPlayer player, BlockPos pos, Type type, ItemStack vein) {
+			super(Side.CLIENT, player, pos, type, vein);
+		}
+	}
 }

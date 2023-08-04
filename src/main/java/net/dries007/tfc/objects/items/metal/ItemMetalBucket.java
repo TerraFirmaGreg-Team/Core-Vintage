@@ -1,10 +1,5 @@
 package net.dries007.tfc.objects.items.metal;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,25 +21,31 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashSet;
+import java.util.Set;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemMetalBucket extends Item // quite a bit copied out of ItemWoodenBucket
 {
-    private static final int CAPACITY = Fluid.BUCKET_VOLUME;
+	private static final int CAPACITY = Fluid.BUCKET_VOLUME;
 
-    public ItemMetalBucket() {
+	public ItemMetalBucket() {
         /*
         super(metal, type);
         setHasSubtypes(true);
         setContainerItem(this);
 
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseFluidContainer.getInstance());*/
-    }
+	}
 
-    @SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("ConstantConditions")
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nullable EntityPlayer playerIn, EnumHand handIn) {
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nullable EntityPlayer playerIn, EnumHand handIn) {
         /*
         ItemStack stack = playerIn.getHeldItem(handIn);
         if (!worldIn.isRemote && !stack.isEmpty()) {
@@ -103,40 +104,40 @@ public class ItemMetalBucket extends Item // quite a bit copied out of ItemWoode
                 }
             }
         }*/
-        return new ActionResult<>(EnumActionResult.PASS, ItemStack.EMPTY);
-    }
+		return new ActionResult<>(EnumActionResult.PASS, ItemStack.EMPTY);
+	}
 
-    @Override
-    @Nonnull
-    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (bucketCap != null) {
-            FluidStack fluidStack = bucketCap.drain(CAPACITY, false);
-            if (fluidStack != null) {
-                String fluidName = fluidStack.getLocalizedName();
-                return new TextComponentTranslation(getTranslationKey() + ".filled.name", fluidName).getFormattedText();
-            }
-        }
-        return super.getItemStackDisplayName(stack);
-    }
+	@Override
+	@Nonnull
+	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+		IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+		if (bucketCap != null) {
+			FluidStack fluidStack = bucketCap.drain(CAPACITY, false);
+			if (fluidStack != null) {
+				String fluidName = fluidStack.getLocalizedName();
+				return new TextComponentTranslation(getTranslationKey() + ".filled.name", fluidName).getFormattedText();
+			}
+		}
+		return super.getItemStackDisplayName(stack);
+	}
 
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (isInCreativeTab(tab)) {
-            items.add(new ItemStack(this));
-            for (Fluid fluid : getValidFluids()) {
-                ItemStack stack = new ItemStack(this);
-                IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-                if (cap != null) {
-                    cap.fill(new FluidStack(fluid, CAPACITY), true);
-                }
-                items.add(stack);
-            }
-        }
-    }
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if (isInCreativeTab(tab)) {
+			items.add(new ItemStack(this));
+			for (Fluid fluid : getValidFluids()) {
+				ItemStack stack = new ItemStack(this);
+				IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+				if (cap != null) {
+					cap.fill(new FluidStack(fluid, CAPACITY), true);
+				}
+				items.add(stack);
+			}
+		}
+	}
 
-    public Set<Fluid> getValidFluids() {
-        String[] fluidNames = {};
+	public Set<Fluid> getValidFluids() {
+		String[] fluidNames = {};
 
         /*
         if (metal.equals(BLUE_STEEL)) {
@@ -145,15 +146,15 @@ public class ItemMetalBucket extends Item // quite a bit copied out of ItemWoode
             fluidNames = ConfigTFC.General.MISC.redSteelBucketWhitelist;
         } // No other metal buckets implemented*/
 
-        Set<Fluid> validFluids = new HashSet<>();
-        for (String fluidName : fluidNames) {
-            validFluids.add(FluidRegistry.getFluid(fluidName));
-        }
-        return validFluids;
-    }
+		Set<Fluid> validFluids = new HashSet<>();
+		for (String fluidName : fluidNames) {
+			validFluids.add(FluidRegistry.getFluid(fluidName));
+		}
+		return validFluids;
+	}
 
-    @Override
-    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new FluidWhitelistHandler(stack, CAPACITY, getValidFluids());
-    }
+	@Override
+	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return new FluidWhitelistHandler(stack, CAPACITY, getValidFluids());
+	}
 }

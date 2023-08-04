@@ -10,25 +10,25 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketCycleItemMode implements IMessageEmpty {
-    public static final class Handler implements IMessageHandler<PacketCycleItemMode, IMessage> {
-        @Override
-        public IMessage onMessage(PacketCycleItemMode message, MessageContext ctx) {
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                var player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-                if (player != null) {
-                    if (player.getHeldItemMainhand().getItem() == TFGToolItems.CHISEL.get()) {
-                        IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+	public static final class Handler implements IMessageHandler<PacketCycleItemMode, IMessage> {
+		@Override
+		public IMessage onMessage(PacketCycleItemMode message, MessageContext ctx) {
+			TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+				var player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+				if (player != null) {
+					if (player.getHeldItemMainhand().getItem() == TFGToolItems.CHISEL.get()) {
+						IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
 
-                        if (capability != null) {
-                            ChiselRecipe.Mode mode = capability.getChiselMode();
-                            capability.setChiselMode(mode.next());
-                            capability.updateAndSync();
-                        }
-                    }
+						if (capability != null) {
+							ChiselRecipe.Mode mode = capability.getChiselMode();
+							capability.setChiselMode(mode.next());
+							capability.updateAndSync();
+						}
+					}
 
-                }
-            });
-            return null;
-        }
-    }
+				}
+			});
+			return null;
+		}
+	}
 }

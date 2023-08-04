@@ -26,38 +26,38 @@ import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public final class Registries {
-		private static final Map<ResourceLocation, IForgeRegistry<?>> preBlockRegistries = new LinkedHashMap<>(); // Needs to respect insertion order
+	private static final Map<ResourceLocation, IForgeRegistry<?>> preBlockRegistries = new LinkedHashMap<>(); // Needs to respect insertion order
 
-		@SubscribeEvent
-		public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
-				// Normal registries
-				newRegistry(ALLOY_RECIPE, AlloyRecipe.class, false);
-				newRegistry(KNAPPING_RECIPE, KnappingRecipe.class, false);
-				newRegistry(ANVIL_RECIPE, AnvilRecipe.class, false);
-				newRegistry(WELDING_RECIPE, WeldingRecipe.class, false);
-				newRegistry(HEAT_RECIPE, HeatRecipe.class, false);
-				newRegistry(BARREL_RECIPE, BarrelRecipe.class, false);
-				newRegistry(LOOM_RECIPE, LoomRecipe.class, false);
-				newRegistry(QUERN_RECIPE, QuernRecipe.class, false);
-				newRegistry(CHISEL_RECIPE, ChiselRecipe.class, false);
-				newRegistry(BLOOMERY_RECIPE, BloomeryRecipe.class, false);
-				newRegistry(BLAST_FURNACE_RECIPE, BlastFurnaceRecipe.class, false);
+	@SubscribeEvent
+	public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
+		// Normal registries
+		newRegistry(ALLOY_RECIPE, AlloyRecipe.class, false);
+		newRegistry(KNAPPING_RECIPE, KnappingRecipe.class, false);
+		newRegistry(ANVIL_RECIPE, AnvilRecipe.class, false);
+		newRegistry(WELDING_RECIPE, WeldingRecipe.class, false);
+		newRegistry(HEAT_RECIPE, HeatRecipe.class, false);
+		newRegistry(BARREL_RECIPE, BarrelRecipe.class, false);
+		newRegistry(LOOM_RECIPE, LoomRecipe.class, false);
+		newRegistry(QUERN_RECIPE, QuernRecipe.class, false);
+		newRegistry(CHISEL_RECIPE, ChiselRecipe.class, false);
+		newRegistry(BLOOMERY_RECIPE, BloomeryRecipe.class, false);
+		newRegistry(BLAST_FURNACE_RECIPE, BlastFurnaceRecipe.class, false);
+	}
+
+	// TODO: and then remove this
+
+	/**
+	 * Danger: dirty hack.
+	 */
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onRegisterBlock(RegistryEvent.Register<Block> event) {
+		preBlockRegistries.forEach((e, r) -> MinecraftForge.EVENT_BUS.post(new TFCRegistryEvent.RegisterPreBlock<>(e, r)));
+	}
+
+	private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass, boolean isPreBlockRegistry) {
+		IForgeRegistry<T> reg = new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
+		if (isPreBlockRegistry) {
+			preBlockRegistries.put(name, reg);
 		}
-
-		// TODO: and then remove this
-
-		/**
-		 * Danger: dirty hack.
-		 */
-		@SubscribeEvent(priority = EventPriority.HIGHEST)
-		public static void onRegisterBlock(RegistryEvent.Register<Block> event) {
-				preBlockRegistries.forEach((e, r) -> MinecraftForge.EVENT_BUS.post(new TFCRegistryEvent.RegisterPreBlock<>(e, r)));
-		}
-
-		private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass, boolean isPreBlockRegistry) {
-				IForgeRegistry<T> reg = new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
-				if (isPreBlockRegistry) {
-						preBlockRegistries.put(name, reg);
-				}
-		}
+	}
 }

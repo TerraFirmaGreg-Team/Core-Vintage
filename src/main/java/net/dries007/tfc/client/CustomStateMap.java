@@ -18,72 +18,72 @@ import java.util.Map;
 
 public class CustomStateMap extends StateMapperBase {
 
-		private final IProperty<?> name;
-		private final String suffix;
-		private final List<IProperty<?>> ignored;
-		private final ResourceLocation customModelPath;
+	private final IProperty<?> name;
+	private final String suffix;
+	private final List<IProperty<?>> ignored;
+	private final ResourceLocation customModelPath;
 
-		private CustomStateMap(@Nullable IProperty<?> name, @Nullable String suffix, List<IProperty<?>> ignored, ResourceLocation customModelPath) {
-				this.name = name;
-				this.suffix = suffix;
-				this.ignored = ignored;
-				this.customModelPath = customModelPath;
+	private CustomStateMap(@Nullable IProperty<?> name, @Nullable String suffix, List<IProperty<?>> ignored, ResourceLocation customModelPath) {
+		this.name = name;
+		this.suffix = suffix;
+		this.ignored = ignored;
+		this.customModelPath = customModelPath;
+	}
+
+	protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+		Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
+		String s;
+
+		if (this.name == null) {
+			s = Block.REGISTRY.getNameForObject(state.getBlock()).toString();
+		} else {
+			s = String.format("%s:%s", Block.REGISTRY.getNameForObject(state.getBlock()).getNamespace(), this.removeName(this.name, map));
 		}
 
-		protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-				Map<IProperty<?>, Comparable<?>> map = Maps.<IProperty<?>, Comparable<?>> newLinkedHashMap(state.getProperties());
-				String s;
-
-				if (this.name == null) {
-						s = ((ResourceLocation) Block.REGISTRY.getNameForObject(state.getBlock())).toString();
-				} else {
-						s = String.format("%s:%s", Block.REGISTRY.getNameForObject(state.getBlock()).getNamespace(), this.removeName(this.name, map));
-				}
-
-				if (this.suffix != null) {
-						s = s + this.suffix;
-				}
-
-				for (IProperty<?> iproperty : this.ignored) {
-						map.remove(iproperty);
-				}
-
-				return new ModelResourceLocation(customModelPath, this.getPropertyString(map));
+		if (this.suffix != null) {
+			s = s + this.suffix;
 		}
 
-		private <T extends Comparable<T>> String removeName(IProperty<T> property, Map<IProperty<?>, Comparable<?>> values) {
-				return property.getName((T) values.remove(this.name));
+		for (IProperty<?> iproperty : this.ignored) {
+			map.remove(iproperty);
 		}
 
-		@SideOnly(Side.CLIENT)
-		public static class Builder {
-				private IProperty<?> name;
-				private String suffix;
-				private final List<IProperty<?>> ignored = Lists.<IProperty<?>> newArrayList();
-				private ResourceLocation resourceLocation;
+		return new ModelResourceLocation(customModelPath, this.getPropertyString(map));
+	}
 
-				public Builder withName(IProperty<?> builderPropertyIn) {
-						this.name = builderPropertyIn;
-						return this;
-				}
+	private <T extends Comparable<T>> String removeName(IProperty<T> property, Map<IProperty<?>, Comparable<?>> values) {
+		return property.getName((T) values.remove(this.name));
+	}
 
-				public Builder withSuffix(String builderSuffixIn) {
-						this.suffix = builderSuffixIn;
-						return this;
-				}
+	@SideOnly(Side.CLIENT)
+	public static class Builder {
+		private final List<IProperty<?>> ignored = Lists.newArrayList();
+		private IProperty<?> name;
+		private String suffix;
+		private ResourceLocation resourceLocation;
 
-				public Builder ignore(IProperty<?>... ignores) {
-						Collections.addAll(this.ignored, ignores);
-						return this;
-				}
-
-				public Builder customPath(ResourceLocation resourceLocation) {
-						this.resourceLocation = resourceLocation;
-						return this;
-				}
-
-				public CustomStateMap build() {
-						return new CustomStateMap(this.name, this.suffix, this.ignored, this.resourceLocation);
-				}
+		public Builder withName(IProperty<?> builderPropertyIn) {
+			this.name = builderPropertyIn;
+			return this;
 		}
+
+		public Builder withSuffix(String builderSuffixIn) {
+			this.suffix = builderSuffixIn;
+			return this;
+		}
+
+		public Builder ignore(IProperty<?>... ignores) {
+			Collections.addAll(this.ignored, ignores);
+			return this;
+		}
+
+		public Builder customPath(ResourceLocation resourceLocation) {
+			this.resourceLocation = resourceLocation;
+			return this;
+		}
+
+		public CustomStateMap build() {
+			return new CustomStateMap(this.name, this.suffix, this.ignored, this.resourceLocation);
+		}
+	}
 }

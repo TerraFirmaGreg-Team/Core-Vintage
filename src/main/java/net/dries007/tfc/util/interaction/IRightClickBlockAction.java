@@ -15,5 +15,5 @@ import net.minecraft.world.World;
  */
 @FunctionalInterface
 public interface IRightClickBlockAction {
-    EnumActionResult onRightClickBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing direction, float hitX, float hitY, float hitZ);
+	EnumActionResult onRightClickBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing direction, float hitX, float hitY, float hitZ);
 }

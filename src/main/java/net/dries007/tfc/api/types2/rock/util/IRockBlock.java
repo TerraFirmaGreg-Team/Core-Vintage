@@ -9,18 +9,18 @@ import net.dries007.tfc.api.util.IItemProvider;
 import javax.annotation.Nonnull;
 
 public interface IRockBlock extends IHasModel, IItemProvider {
-		@Nonnull
-		RockVariant getRockVariant();
+	@Nonnull
+	RockVariant getRockVariant();
 
-		@Nonnull
-		Rock getRock();
+	@Nonnull
+	Rock getRock();
 
-		@Nonnull
-		default RockCategory getRockCategory() {
-				return getRock().getRockCategory();
-		}
+	@Nonnull
+	default RockCategory getRockCategory() {
+		return getRock().getRockCategory();
+	}
 
-		default float getFinalHardness() {
-				return getRockVariant().getHardnessBase() + getRockCategory().getHardnessModifier();
-		}
+	default float getFinalHardness() {
+		return getRockVariant().getHardnessBase() + getRockCategory().getHardnessModifier();
+	}
 }

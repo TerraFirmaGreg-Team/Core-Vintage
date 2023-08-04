@@ -10,16 +10,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class PlacedItemProvider implements IProbeInfoProvider {
-    @Override
-    public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":placed_item";
-    }
+	@Override
+	public String getID() {
+		return TerraFirmaCraft.MOD_ID + ":placed_item";
+	}
 
-    @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
+	@Override
+	public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
 
 
-    }
+	}
 
 
 }

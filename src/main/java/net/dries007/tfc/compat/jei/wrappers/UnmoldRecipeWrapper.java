@@ -14,22 +14,22 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 public class UnmoldRecipeWrapper implements IRecipeWrapper {
-    private final ItemStack mold;
-    private final ItemStack output;
+	private final ItemStack mold;
+	private final ItemStack output;
 
-    public UnmoldRecipeWrapper(Material material, OrePrefix orePrefix) {
-        mold = new ItemStack(ItemMold.get(orePrefix));
-        var cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(new FluidStack(material.getFluid(), Helpers.getOrePrefixMaterialAmount(orePrefix)), true);
-        }
-        output = OreDictUnifier.get(orePrefix, material);
-    }
+	public UnmoldRecipeWrapper(Material material, OrePrefix orePrefix) {
+		mold = new ItemStack(ItemMold.get(orePrefix));
+		var cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+		if (cap instanceof IMoldHandler) {
+			cap.fill(new FluidStack(material.getFluid(), Helpers.getOrePrefixMaterialAmount(orePrefix)), true);
+		}
+		output = OreDictUnifier.get(orePrefix, material);
+	}
 
 
-    @Override
-    public void getIngredients(IIngredients ingredients) {
-        ingredients.setInput(VanillaTypes.ITEM, mold);
-        ingredients.setOutput(VanillaTypes.ITEM, output);
-    }
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+		ingredients.setInput(VanillaTypes.ITEM, mold);
+		ingredients.setOutput(VanillaTypes.ITEM, output);
+	}
 }

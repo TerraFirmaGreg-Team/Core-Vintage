@@ -7,7 +7,7 @@ import net.dries007.tfc.api.util.IItemProvider;
 
 
 public interface ISoilBlock extends IHasModel, IItemProvider {
-		SoilVariant getSoilVariant();
+	SoilVariant getSoilVariant();
 
-		Soil getSoil();
+	Soil getSoil();
 }

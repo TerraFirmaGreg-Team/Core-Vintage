@@ -8,8 +8,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderLlamaTFC extends RenderLlama {
-    public RenderLlamaTFC(RenderManager renderManager) {
-        super(renderManager);
-        this.mainModel = new ModelLlamaTFC(0);
-    }
+	public RenderLlamaTFC(RenderManager renderManager) {
+		super(renderManager);
+		this.mainModel = new ModelLlamaTFC(0);
+	}
 }

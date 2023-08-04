@@ -1,11 +1,14 @@
 package net.dries007.tfc.objects.entity;
 
-import java.util.UUID;
-import javax.annotation.Nullable;
 import net.minecraft.entity.Entity;
 
-public interface IEntityOwnableTFC {
-    @Nullable UUID getOwnerId();
+import javax.annotation.Nullable;
+import java.util.UUID;
 
-    @Nullable Entity getOwner();
+public interface IEntityOwnableTFC {
+	@Nullable
+	UUID getOwnerId();
+
+	@Nullable
+	Entity getOwner();
 }

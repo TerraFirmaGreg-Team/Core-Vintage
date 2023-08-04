@@ -14,32 +14,32 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ItemBrickTFC extends ItemTFC implements IRockItem {
-		private final Rock rock;
+	private final Rock rock;
 
-		public ItemBrickTFC(Rock rock) {
-				this.rock = rock;
+	public ItemBrickTFC(Rock rock) {
+		this.rock = rock;
 
-				TFCStorage.addBrickItem(rock, this);
+		TFCStorage.addBrickItem(rock, this);
 
-				OreDictionaryHelper.register(this, "brick");
-				OreDictionaryHelper.register(this, "brick", rock.getRockCategory());
-		}
+		OreDictionaryHelper.register(this, "brick");
+		OreDictionaryHelper.register(this, "brick", rock.getRockCategory());
+	}
 
-		@Nonnull
-		@Override
-		public Size getSize(ItemStack stack) {
-				return Size.SMALL; // Stored everywhere
-		}
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.SMALL; // Stored everywhere
+	}
 
-		@Nonnull
-		@Override
-		public Weight getWeight(ItemStack stack) {
-				return Weight.LIGHT; // Stacksize = 32
-		}
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.LIGHT; // Stacksize = 32
+	}
 
-		@Nonnull
-		@Override
-		public Rock getRock() {
-				return rock;
-		}
+	@Nonnull
+	@Override
+	public Rock getRock() {
+		return rock;
+	}
 }

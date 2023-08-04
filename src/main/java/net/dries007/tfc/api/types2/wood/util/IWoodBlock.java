@@ -7,7 +7,7 @@ import net.dries007.tfc.api.util.IItemProvider;
 
 
 public interface IWoodBlock extends IHasModel, IItemProvider {
-		WoodVariant getWoodVariant();
+	WoodVariant getWoodVariant();
 
-		Wood getWood();
+	Wood getWood();
 }

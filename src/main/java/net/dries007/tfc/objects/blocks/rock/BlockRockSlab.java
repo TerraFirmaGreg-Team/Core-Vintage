@@ -44,220 +44,220 @@ import static net.dries007.tfc.api.types2.rock.RockType.ORDINARY;
 import static net.dries007.tfc.api.types2.rock.RockType.SLAB_DOUBLE;
 
 public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
-		public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
+	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
-		public final Block modelBlock;
-		protected Half halfSlab;
+	public final Block modelBlock;
+	protected Half halfSlab;
 
-		private BlockRockSlab(RockType rockType, RockVariant rockVariant, Rock rock) {
-				super(Material.ROCK);
+	private BlockRockSlab(RockType rockType, RockVariant rockVariant, Rock rock) {
+		super(Material.ROCK);
 
-				IBlockState state = blockState.getBaseState();
+		IBlockState state = blockState.getBaseState();
 
-				if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
+		if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-				this.modelBlock = TFCStorage.getRockBlock(ORDINARY, rockVariant, rock);
-				useNeighborBrightness = true;
+		this.modelBlock = TFCStorage.getRockBlock(ORDINARY, rockVariant, rock);
+		useNeighborBrightness = true;
 
-				setLightOpacity(255);
-				setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
-				setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
-				setSoundType(SoundType.STONE);
+		setLightOpacity(255);
+		setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
+		setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+		setSoundType(SoundType.STONE);
+	}
+
+	@Override
+	@Nonnull
+	public String getTranslationKey(int meta) {
+		return super.getTranslationKey();
+	}
+
+	@Override
+	@Nonnull
+	public IProperty<?> getVariantProperty() {
+		return VARIANT; // why is this not null-tolerable ...
+	}
+
+	@Override
+	@Nonnull
+	public Comparable<?> getTypeForItem(@Nonnull ItemStack stack) {
+		return Variant.DEFAULT;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	@Nonnull
+	public IBlockState getStateFromMeta(int meta) {
+		IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
+
+		if (!this.isDouble()) {
+			iblockstate = iblockstate.withProperty(HALF, (meta & 8) == 0 ? EnumBlockHalf.BOTTOM : EnumBlockHalf.TOP);
 		}
+
+		return iblockstate;
+	}
+
+	@Override
+	public int getMetaFromState(@Nonnull IBlockState state) {
+		int i = 0;
+
+		if (!this.isDouble() && state.getValue(HALF) == EnumBlockHalf.TOP) {
+			i |= 8;
+		}
+
+		return i;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public float getBlockHardness(@Nonnull IBlockState blockState, @Nonnull World worldIn, @Nonnull BlockPos pos) {
+		return modelBlock.getBlockHardness(blockState, worldIn, pos);
+	}
+
+	@Override
+	@Nonnull
+	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
+		return Item.getItemFromBlock(halfSlab);
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public float getExplosionResistance(@Nonnull Entity exploder) {
+		return modelBlock.getExplosionResistance(exploder);
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	@Nonnull
+	public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+		return new ItemStack(halfSlab);
+	}
+
+	@Override
+	@Nonnull
+	protected BlockStateContainer createBlockState() {
+		return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
+	}
+
+	@SuppressWarnings("deprecation")
+	@Nonnull
+	@Override
+	public SoundType getSoundType() {
+		return modelBlock.getSoundType();
+	}
+
+
+	public enum Variant implements IStringSerializable {
+		DEFAULT;
 
 		@Override
 		@Nonnull
-		public String getTranslationKey(int meta) {
-				return super.getTranslationKey();
+		public String getName() {
+			return "default";
+		}
+	}
+
+	public static class Double extends BlockRockSlab {
+		private final RockVariant rockVariant;
+		private final Rock rock;
+		private final ResourceLocation modelLocation;
+
+		public Double(RockType rockType, RockVariant rockVariant, Rock rock) {
+			super(rockType, rockVariant, rock);
+
+			this.rockVariant = rockVariant;
+			this.rock = rock;
+			this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockType + "/" + rockVariant);
+
+			var blockRegistryName = String.format("rock/%s/%s/%s", rockType, rockVariant, rock);
+			this.setRegistryName(MOD_ID, blockRegistryName);
+			this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 		}
 
 		@Override
-		@Nonnull
-		public IProperty<?> getVariantProperty() {
-				return VARIANT; // why is this not null-tolerable ...
+		public boolean isDouble() {
+			return true;
 		}
 
-		@Override
-		@Nonnull
-		public Comparable<?> getTypeForItem(@Nonnull ItemStack stack) {
-				return Variant.DEFAULT;
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		@Nonnull
-		public IBlockState getStateFromMeta(int meta) {
-				IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
-
-				if (!this.isDouble()) {
-						iblockstate = iblockstate.withProperty(HALF, (meta & 8) == 0 ? EnumBlockHalf.BOTTOM : EnumBlockHalf.TOP);
-				}
-
-				return iblockstate;
-		}
-
-		@Override
-		public int getMetaFromState(@Nonnull IBlockState state) {
-				int i = 0;
-
-				if (!this.isDouble() && state.getValue(HALF) == EnumBlockHalf.TOP) {
-						i |= 8;
-				}
-
-				return i;
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public float getBlockHardness(@Nonnull IBlockState blockState, @Nonnull World worldIn, @Nonnull BlockPos pos) {
-				return modelBlock.getBlockHardness(blockState, worldIn, pos);
-		}
-
-		@Override
-		@Nonnull
-		public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-				return Item.getItemFromBlock(halfSlab);
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public float getExplosionResistance(@Nonnull Entity exploder) {
-				return modelBlock.getExplosionResistance(exploder);
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		@Nonnull
-		public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-				return new ItemStack(halfSlab);
-		}
-
-		@Override
-		@Nonnull
-		protected BlockStateContainer createBlockState() {
-				return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
-		}
-
-		@SuppressWarnings("deprecation")
 		@Nonnull
 		@Override
-		public SoundType getSoundType() {
-				return modelBlock.getSoundType();
+		public RockVariant getRockVariant() {
+			return rockVariant;
 		}
 
+		@Nonnull
+		@Override
+		public Rock getRock() {
+			return rock;
+		}
 
-		public enum Variant implements IStringSerializable {
-				DEFAULT;
+		@Override
+		public ItemBlock getItemBlock() {
+			return null;
+		}
 
-				@Override
+		@Override
+		@SideOnly(Side.CLIENT)
+		public void onModelRegister() {
+			ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
 				@Nonnull
-				public String getName() {
-						return "default";
+				protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+					return new ModelResourceLocation(modelLocation,
+						"rocktype=" + rock.getName());
 				}
+			});
+		}
+	}
+
+	public static class Half extends BlockRockSlab {
+		public final Double doubleSlab;
+		private final Rock rock;
+		private final ResourceLocation modelLocation;
+		private final RockVariant rockVariant;
+
+		public Half(RockType rockType, RockVariant rockVariant, Rock rock) {
+			super(rockType, rockVariant, rock);
+
+			doubleSlab = (Double) TFCStorage.getRockBlock(SLAB_DOUBLE, rockVariant, rock);
+			doubleSlab.halfSlab = this;
+			halfSlab = this;
+
+			this.rockVariant = rockVariant;
+			this.rock = rock;
+			this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockType + "/" + rockVariant);
+
+			var blockRegistryName = String.format("rock/%s/%s/%s", rockType, rockVariant, rock);
+			this.setRegistryName(MOD_ID, blockRegistryName);
+			this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+
+			this.setHardness(getFinalHardness());
+			this.setHarvestLevel("pickaxe", 0);
+
+			OreDictionaryHelper.register(this, "slab", "slab_" + rock);
+
+			//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
 		}
 
-		public static class Double extends BlockRockSlab {
-				private final RockVariant rockVariant;
-				private final Rock rock;
-				private final ResourceLocation modelLocation;
-
-				public Double(RockType rockType, RockVariant rockVariant, Rock rock) {
-						super(rockType, rockVariant, rock);
-
-						this.rockVariant = rockVariant;
-						this.rock = rock;
-						this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockType + "/" + rockVariant);
-
-						var blockRegistryName = String.format("rock/%s/%s/%s", rockType, rockVariant, rock);
-						this.setRegistryName(MOD_ID, blockRegistryName);
-						this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-				}
-
-				@Override
-				public boolean isDouble() {
-						return true;
-				}
-
-				@Nonnull
-				@Override
-				public RockVariant getRockVariant() {
-						return rockVariant;
-				}
-
-				@Nonnull
-				@Override
-				public Rock getRock() {
-						return rock;
-				}
-
-				@Override
-				public ItemBlock getItemBlock() {
-						return null;
-				}
-
-				@Override
-				@SideOnly(Side.CLIENT)
-				public void onModelRegister() {
-						ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-								@Nonnull
-								protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-										return new ModelResourceLocation(modelLocation,
-														"rocktype=" + rock.getName());
-								}
-						});
-				}
+		@Override
+		public boolean isDouble() {
+			return false;
 		}
 
-		public static class Half extends BlockRockSlab {
-				public final Double doubleSlab;
-				private final Rock rock;
-				private final ResourceLocation modelLocation;
-				private final RockVariant rockVariant;
+		@Nonnull
+		@Override
+		public RockVariant getRockVariant() {
+			return rockVariant;
+		}
 
-				public Half(RockType rockType, RockVariant rockVariant, Rock rock) {
-						super(rockType, rockVariant, rock);
+		@Nonnull
+		@Override
+		public Rock getRock() {
+			return rock;
+		}
 
-						doubleSlab = (Double) TFCStorage.getRockBlock(SLAB_DOUBLE, rockVariant, rock);
-						doubleSlab.halfSlab = this;
-						halfSlab = this;
-
-						this.rockVariant = rockVariant;
-						this.rock = rock;
-						this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockType + "/" + rockVariant);
-
-						var blockRegistryName = String.format("rock/%s/%s/%s", rockType, rockVariant, rock);
-						this.setRegistryName(MOD_ID, blockRegistryName);
-						this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-
-						this.setHardness(getFinalHardness());
-						this.setHarvestLevel("pickaxe", 0);
-
-						OreDictionaryHelper.register(this, "slab", "slab_" + rock);
-
-						//OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
-				}
-
-				@Override
-				public boolean isDouble() {
-						return false;
-				}
-
-				@Nonnull
-				@Override
-				public RockVariant getRockVariant() {
-						return rockVariant;
-				}
-
-				@Nonnull
-				@Override
-				public Rock getRock() {
-						return rock;
-				}
-
-				@Override
-				public ItemBlock getItemBlock() {
-						return new ItemRockSlab(this, this, this.doubleSlab);
-				}
+		@Override
+		public ItemBlock getItemBlock() {
+			return new ItemRockSlab(this, this, this.doubleSlab);
+		}
 
 //		@Override
 //		public boolean removedByPlayer(@Nonnull IBlockState state, World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player, boolean willHarvest) {
@@ -300,38 +300,38 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 //			return super.removedByPlayer(state, world, pos, player, willHarvest);
 //		}
 
-				@Override
-				public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
-				}
-
-				@SideOnly(Side.CLIENT)
-				@Override
-				public void onModelRegister() {
-						ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-								@Nonnull
-								protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-										return new ModelResourceLocation(modelLocation,
-														"half=" + state.getValue(HALF) + "," +
-																		"rocktype=" + rock.getName());
-								}
-						});
-
-						for (IBlockState state : this.getBlockState().getValidStates()) {
-								ModelLoader.setCustomModelResourceLocation(
-												Item.getItemFromBlock(this),
-												this.getMetaFromState(state),
-												new ModelResourceLocation(modelLocation,
-																"half=bottom," +
-																				"rocktype=" + rock.getName()));
-						}
-				}
-
-				@Override
-				@SideOnly(Side.CLIENT)
-				public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-						super.addInformation(stack, worldIn, tooltip, flagIn);
-
-						tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
-				}
+		@Override
+		public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
 		}
+
+		@SideOnly(Side.CLIENT)
+		@Override
+		public void onModelRegister() {
+			ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+				@Nonnull
+				protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+					return new ModelResourceLocation(modelLocation,
+						"half=" + state.getValue(HALF) + "," +
+							"rocktype=" + rock.getName());
+				}
+			});
+
+			for (IBlockState state : this.getBlockState().getValidStates()) {
+				ModelLoader.setCustomModelResourceLocation(
+					Item.getItemFromBlock(this),
+					this.getMetaFromState(state),
+					new ModelResourceLocation(modelLocation,
+						"half=bottom," +
+							"rocktype=" + rock.getName()));
+			}
+		}
+
+		@Override
+		@SideOnly(Side.CLIENT)
+		public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+			super.addInformation(stack, worldIn, tooltip, flagIn);
+
+			tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
+		}
+	}
 }

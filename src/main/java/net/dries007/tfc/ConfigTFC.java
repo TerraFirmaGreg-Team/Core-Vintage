@@ -421,15 +421,11 @@ public final class ConfigTFC {
 			@Config.Comment("The number of attempts per chunk to spawn loose rocks. Includes surface ore samples.")
 			@Config.RangeInt(min = 1)
 			@Config.LangKey("config." + MOD_ID + ".general.world.looseRocksFrequency")
-			public int looseRocksFrequency = 18;
+			public int looseRocksFrequency = 12;
 
 			@Config.Comment("Enable generation of loose rocks (just the rocks)?")
 			@Config.LangKey("config." + MOD_ID + ".general.world.enableLooseRocks")
 			public boolean enableLooseRocks = true;
-
-			@Config.Comment("Enable generation of loose ores?")
-			@Config.LangKey("config." + MOD_ID + ".general.world.enableLooseOres")
-			public boolean enableLooseOres = true;
 
 			@Config.Comment("Enable generation of loose rocks (just the rocks)?")
 			@Config.LangKey("config." + MOD_ID + ".general.world.enableLooseSticks")
@@ -440,11 +436,6 @@ public final class ConfigTFC {
 			@Config.RangeDouble(min = 0, max = 10)
 			@Config.LangKey("config." + MOD_ID + ".general.world.sticksDensityModifier")
 			public double sticksDensityModifier = 1;
-
-			@Config.Comment("This is how deep (in blocks) from the surface a loose rock will scan for a vein when generating, Higher values = More veins spawn samples thus adding more samples.")
-			@Config.RangeInt(min = 1, max = 255)
-			@Config.LangKey("config." + MOD_ID + ".general.world.looseRockScan")
-			public int looseRockScan = 35;
 
 			@Config.RequiresMcRestart
 			@Config.RangeDouble(min = 0.05, max = 0.4)

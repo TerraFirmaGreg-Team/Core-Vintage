@@ -1,17 +1,18 @@
 package net.dries007.tfc.util.json;
 
 import com.google.gson.*;
-import java.lang.reflect.Type;
 import net.minecraft.util.ResourceLocation;
 
-public final class ResourceLocationJson implements JsonDeserializer<ResourceLocation>, JsonSerializer<ResourceLocation> {
-    @Override
-    public ResourceLocation deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        return new ResourceLocation(json.getAsString());
-    }
+import java.lang.reflect.Type;
 
-    @Override
-    public JsonElement serialize(ResourceLocation src, Type typeOfSrc, JsonSerializationContext context) {
-        return new JsonPrimitive(src.toString());
-    }
+public final class ResourceLocationJson implements JsonDeserializer<ResourceLocation>, JsonSerializer<ResourceLocation> {
+	@Override
+	public ResourceLocation deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+		return new ResourceLocation(json.getAsString());
+	}
+
+	@Override
+	public JsonElement serialize(ResourceLocation src, Type typeOfSrc, JsonSerializationContext context) {
+		return new JsonPrimitive(src.toString());
+	}
 }

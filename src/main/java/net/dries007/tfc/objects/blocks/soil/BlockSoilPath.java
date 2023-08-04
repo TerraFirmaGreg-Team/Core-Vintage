@@ -37,110 +37,110 @@ import static net.dries007.tfc.api.types2.soil.SoilVariant.DIRT;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
-		private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
+	private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 
-		private final SoilVariant soilVariant;
-		private final Soil soil;
-		private final ResourceLocation modelLocation;
+	private final SoilVariant soilVariant;
+	private final Soil soil;
+	private final ResourceLocation modelLocation;
 
-		public BlockSoilPath(SoilVariant soilVariant, Soil soil) {
+	public BlockSoilPath(SoilVariant soilVariant, Soil soil) {
 
 
-				this.soilVariant = soilVariant;
-				this.soil = soil;
-				this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant);
-				this.useNeighborBrightness = true;
+		this.soilVariant = soilVariant;
+		this.soil = soil;
+		this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant);
+		this.useNeighborBrightness = true;
 
-				var blockRegistryName = String.format("soil/%s/%s", soilVariant, soil);
+		var blockRegistryName = String.format("soil/%s/%s", soilVariant, soil);
 
-				this.setCreativeTab(CreativeTabsTFC.EARTH);
-				this.setSoundType(SoundType.PLANT);
-				this.setHardness(0.65F);
-				this.setHarvestLevel("shovel", 0);
-				this.setRegistryName(MOD_ID, blockRegistryName);
-				this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-				this.setLightOpacity(255);
+		this.setCreativeTab(CreativeTabsTFC.EARTH);
+		this.setSoundType(SoundType.PLANT);
+		this.setHardness(0.65F);
+		this.setHarvestLevel("shovel", 0);
+		this.setRegistryName(MOD_ID, blockRegistryName);
+		this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+		this.setLightOpacity(255);
+	}
+
+	@Override
+	public SoilVariant getSoilVariant() {
+		return soilVariant;
+	}
+
+	@Override
+	public Soil getSoil() {
+		return soil;
+	}
+
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlockTFC(this);
+	}
+
+	@Override
+	@SuppressWarnings("deprecation")
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return GRASS_PATH_AABB;
+	}
+
+	@Override
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (fromPos.getY() == pos.getY() + 1) {
+			IBlockState up = world.getBlockState(fromPos);
+			if (up.isSideSolid(world, fromPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
+				BlockSoilFarmland.turnToDirt(world, pos);
+			}
 		}
+	}
 
-		@Override
-		public SoilVariant getSoilVariant() {
-				return soilVariant;
+	@Override
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+		BlockPos upPos = pos.up();
+		IBlockState up = world.getBlockState(upPos);
+		if (up.isSideSolid(world, upPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
+			BlockSoilFarmland.turnToDirt(world, pos);
 		}
+	}
 
-		@Override
-		public Soil getSoil() {
-				return soil;
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soil));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("deprecation")
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+		switch (side) {
+			case UP:
+				return true;
+			case NORTH:
+			case SOUTH:
+			case WEST:
+			case EAST:
+				IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
+				Block block = iblockstate.getBlock();
+				if (iblockstate.isOpaqueCube()) return false;
+				if (block instanceof BlockFarmland || block instanceof BlockGrassPath) return false;
+			default:
+				return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
 		}
+	}
 
-		@Override
-		public ItemBlock getItemBlock() {
-				return new ItemBlockTFC(this);
-		}
-
-		@Override
-		@SuppressWarnings("deprecation")
-		public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-				return GRASS_PATH_AABB;
-		}
-
-		@Override
-		public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-				if (fromPos.getY() == pos.getY() + 1) {
-						IBlockState up = world.getBlockState(fromPos);
-						if (up.isSideSolid(world, fromPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
-								BlockSoilFarmland.turnToDirt(world, pos);
-						}
-				}
-		}
-
-		@Override
-		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-				BlockPos upPos = pos.up();
-				IBlockState up = world.getBlockState(upPos);
-				if (up.isSideSolid(world, upPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
-						BlockSoilFarmland.turnToDirt(world, pos);
-				}
-		}
-
-		@Override
-		public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-				return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soil));
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		@SuppressWarnings("deprecation")
-		public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-				switch (side) {
-						case UP:
-								return true;
-						case NORTH:
-						case SOUTH:
-						case WEST:
-						case EAST:
-								IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
-								Block block = iblockstate.getBlock();
-								if (iblockstate.isOpaqueCube()) return false;
-								if (block instanceof BlockFarmland || block instanceof BlockGrassPath) return false;
-						default:
-								return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
-				}
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void onModelRegister() {
-				ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-						@Nonnull
-						protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-								return new ModelResourceLocation(modelLocation, "soiltype=" + soil.getName());
-						}
-				});
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation, "soiltype=" + soil.getName());
+			}
+		});
 
 
-				ModelLoader.setCustomModelResourceLocation(
-								Item.getItemFromBlock(this),
-								this.getMetaFromState(this.getBlockState().getBaseState()),
-								new ModelResourceLocation(modelLocation, "soiltype=" + soil.getName()));
-		}
+		ModelLoader.setCustomModelResourceLocation(
+			Item.getItemFromBlock(this),
+			this.getMetaFromState(this.getBlockState().getBaseState()),
+			new ModelResourceLocation(modelLocation, "soiltype=" + soil.getName()));
+	}
 }

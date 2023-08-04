@@ -26,66 +26,67 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockBloom extends Block {
-    public BlockBloom() {
-        super(Material.IRON);
-        setHardness(3.0f);
-        setHarvestLevel("pickaxe", 0);
-        setSoundType(SoundType.STONE);
+	public BlockBloom() {
+		super(Material.IRON);
+		setHardness(3.0f);
+		setHarvestLevel("pickaxe", 0);
+		setSoundType(SoundType.STONE);
 
-        setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "bloom");
-        setTranslationKey(MOD_ID + ".bloom");
-    }
+		setCreativeTab(CreativeTabsTFC.MISC);
+		setRegistryName(MOD_ID, "bloom");
+		setTranslationKey(MOD_ID + ".bloom");
+	}
 
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEBloom te = Helpers.getTE(worldIn, pos, TEBloom.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
-        }
-        super.breakBlock(worldIn, pos, state);
-    }
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		TEBloom te = Helpers.getTE(worldIn, pos, TEBloom.class);
+		if (te != null) {
+			te.onBreakBlock(worldIn, pos, state);
+		}
+		super.breakBlock(worldIn, pos, state);
+	}
 
-    @Override
-    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, @Nullable EntityPlayer player, boolean willHarvest) {
-        if (player != null && player.canHarvestBlock(state) && !player.isCreative()) {
-            // Try to give the contents of the TE directly to the player if possible
-            TEBloom tile = Helpers.getTE(world, pos, TEBloom.class);
-            if (tile != null) {
-                IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (cap != null) {
-                    ItemStack contents = cap.extractItem(0, 64, false);
-                    ItemHandlerHelper.giveItemToPlayer(player, contents);
-                }
-            }
-        }
-        //noinspection ConstantConditions
-        return super.removedByPlayer(state, world, pos, player, willHarvest);
-    }
+	@Override
+	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, @Nullable EntityPlayer player, boolean willHarvest) {
+		if (player != null && player.canHarvestBlock(state) && !player.isCreative()) {
+			// Try to give the contents of the TE directly to the player if possible
+			TEBloom tile = Helpers.getTE(world, pos, TEBloom.class);
+			if (tile != null) {
+				IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+				if (cap != null) {
+					ItemStack contents = cap.extractItem(0, 64, false);
+					ItemHandlerHelper.giveItemToPlayer(player, contents);
+				}
+			}
+		}
+		//noinspection ConstantConditions
+		return super.removedByPlayer(state, world, pos, player, willHarvest);
+	}
 
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
+	@Override
+	public boolean hasTileEntity(IBlockState state) {
+		return true;
+	}
 
-    @Nullable @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEBloom();
-    }
+	@Nullable
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return new TEBloom();
+	}
 
-    @Nonnull
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        TEBloom tile = Helpers.getTE(world, pos, TEBloom.class);
-        if (tile != null) {
-            IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (cap != null) {
-                ItemStack stack = cap.extractItem(0, 1, true);
-                if (!stack.isEmpty()) {
-                    return stack;
-                }
-            }
-        }
-        return new ItemStack(ItemsTFC.UNREFINED_BLOOM);
-    }
+	@Nonnull
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+		TEBloom tile = Helpers.getTE(world, pos, TEBloom.class);
+		if (tile != null) {
+			IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+			if (cap != null) {
+				ItemStack stack = cap.extractItem(0, 1, true);
+				if (!stack.isEmpty()) {
+					return stack;
+				}
+			}
+		}
+		return new ItemStack(ItemsTFC.UNREFINED_BLOOM);
+	}
 }

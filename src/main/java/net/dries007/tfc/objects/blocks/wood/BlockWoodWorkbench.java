@@ -40,127 +40,127 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
-		private final WoodVariant woodVariant;
-		private final Wood wood;
-		private final ResourceLocation modelLocation;
+	private final WoodVariant woodVariant;
+	private final Wood wood;
+	private final ResourceLocation modelLocation;
 
-		public BlockWoodWorkbench(WoodVariant woodVariant, Wood wood) {
+	public BlockWoodWorkbench(WoodVariant woodVariant, Wood wood) {
 
-				this.woodVariant = woodVariant;
-				this.wood = wood;
-				this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+		this.woodVariant = woodVariant;
+		this.wood = wood;
+		this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-				var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-				setRegistryName(MOD_ID, blockRegistryName);
-				setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-				setCreativeTab(CreativeTabsTFC.WOOD);
-				setSoundType(SoundType.WOOD);
-				setHardness(2.0F).setResistance(5.0F);
-				setHarvestLevel("axe", 0);
-				OreDictionaryHelper.register(this, "workbench");
-				OreDictionaryHelper.register(this, "crafting", "table", "wood");
-				Blocks.FIRE.setFireInfo(this, 5, 20);
+		var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+		setRegistryName(MOD_ID, blockRegistryName);
+		setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+		setCreativeTab(CreativeTabsTFC.WOOD);
+		setSoundType(SoundType.WOOD);
+		setHardness(2.0F).setResistance(5.0F);
+		setHarvestLevel("axe", 0);
+		OreDictionaryHelper.register(this, "workbench");
+		OreDictionaryHelper.register(this, "crafting", "table", "wood");
+		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
+
+	@Override
+	public WoodVariant getWoodVariant() {
+		return woodVariant;
+	}
+
+	@Override
+	public Wood getWood() {
+		return wood;
+	}
+
+	@Nullable
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlockTFC(this);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Nonnull
+	@Override
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, IBlockState state, @Nullable EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (worldIn.isRemote || playerIn == null) {
+			return true;
+		} else {
+			playerIn.displayGui(new InterfaceCraftingTable(this, worldIn, pos));
+			playerIn.addStat(StatList.CRAFTING_TABLE_INTERACTION);
+			return true;
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+			}
+		});
+
+		for (IBlockState state : this.getBlockState().getValidStates()) {
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
+				this.getMetaFromState(state),
+				new ModelResourceLocation(modelLocation, "normal"));
+		}
+	}
+
+	@SuppressWarnings("WeakerAccess")
+	@ParametersAreNonnullByDefault
+	@MethodsReturnNonnullByDefault
+	public static class InterfaceCraftingTable implements IInteractionObject {
+		//todo: replace with proper workbench mechanics + normal forge gui code
+		private final BlockWoodWorkbench workbenchTFC;
+		private final World world;
+		private final BlockPos position;
+
+		public InterfaceCraftingTable(BlockWoodWorkbench workbenchTFC, World worldIn, BlockPos pos) {
+			this.workbenchTFC = workbenchTFC;
+			this.world = worldIn;
+			this.position = pos;
+		}
+
+		/**
+		 * Get the name of this object. For players this returns their username
+		 */
+		@Override
+		public String getName() {
+			return "crafting_table";
+		}
+
+		/**
+		 * Returns true if this thing is named
+		 */
+		@Override
+		public boolean hasCustomName() {
+			return false;
+		}
+
+		/**
+		 * Get the formatted ChatComponent that will be used for the sender's username in chat
+		 */
+		@Override
+		public ITextComponent getDisplayName() {
+			return new TextComponentTranslation(workbenchTFC.getTranslationKey() + ".name");
 		}
 
 		@Override
-		public WoodVariant getWoodVariant() {
-				return woodVariant;
+		public Container createContainer(InventoryPlayer inv, EntityPlayer player) {
+			return new ContainerWorkbenchTFC(inv, world, position, workbenchTFC);
 		}
 
 		@Override
-		public Wood getWood() {
-				return wood;
+		public String getGuiID() {
+			return "minecraft:crafting_table";
 		}
-
-		@Nullable
-		@Override
-		public ItemBlock getItemBlock() {
-				return new ItemBlockTFC(this);
-		}
-
-		@SideOnly(Side.CLIENT)
-		@Nonnull
-		@Override
-		public BlockRenderLayer getRenderLayer() {
-				return BlockRenderLayer.CUTOUT;
-		}
-
-		@Override
-		public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, IBlockState state, @Nullable EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-				if (worldIn.isRemote || playerIn == null) {
-						return true;
-				} else {
-						playerIn.displayGui(new InterfaceCraftingTable(this, worldIn, pos));
-						playerIn.addStat(StatList.CRAFTING_TABLE_INTERACTION);
-						return true;
-				}
-		}
-
-		@SuppressWarnings("WeakerAccess")
-		@ParametersAreNonnullByDefault
-		@MethodsReturnNonnullByDefault
-		public static class InterfaceCraftingTable implements IInteractionObject {
-				//todo: replace with proper workbench mechanics + normal forge gui code
-				private final BlockWoodWorkbench workbenchTFC;
-				private final World world;
-				private final BlockPos position;
-
-				public InterfaceCraftingTable(BlockWoodWorkbench workbenchTFC, World worldIn, BlockPos pos) {
-						this.workbenchTFC = workbenchTFC;
-						this.world = worldIn;
-						this.position = pos;
-				}
-
-				/**
-				 * Get the name of this object. For players this returns their username
-				 */
-				@Override
-				public String getName() {
-						return "crafting_table";
-				}
-
-				/**
-				 * Returns true if this thing is named
-				 */
-				@Override
-				public boolean hasCustomName() {
-						return false;
-				}
-
-				/**
-				 * Get the formatted ChatComponent that will be used for the sender's username in chat
-				 */
-				@Override
-				public ITextComponent getDisplayName() {
-						return new TextComponentTranslation(workbenchTFC.getTranslationKey() + ".name");
-				}
-
-				@Override
-				public Container createContainer(InventoryPlayer inv, EntityPlayer player) {
-						return new ContainerWorkbenchTFC(inv, world, position, workbenchTFC);
-				}
-
-				@Override
-				public String getGuiID() {
-						return "minecraft:crafting_table";
-				}
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void onModelRegister() {
-				ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-						@Nonnull
-						protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-								return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
-						}
-				});
-
-				for (IBlockState state : this.getBlockState().getValidStates()) {
-						ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-										this.getMetaFromState(state),
-										new ModelResourceLocation(modelLocation, "normal"));
-				}
-		}
+	}
 
 }

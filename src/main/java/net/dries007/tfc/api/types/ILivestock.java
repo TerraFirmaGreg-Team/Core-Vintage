@@ -5,8 +5,8 @@ package net.dries007.tfc.api.types;
  * Used only in TFC worlds.
  */
 public interface ILivestock extends ICreatureTFC {
-    @Override
-    default CreatureType getCreatureType() {
-        return CreatureType.LIVESTOCK;
-    }
+	@Override
+	default CreatureType getCreatureType() {
+		return CreatureType.LIVESTOCK;
+	}
 }

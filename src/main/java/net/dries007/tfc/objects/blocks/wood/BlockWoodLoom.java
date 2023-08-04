@@ -47,169 +47,169 @@ import static net.minecraft.block.material.Material.WOOD;
 
 @ParametersAreNonnullByDefault
 public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlock {
-		protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
-		protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.875D, 1.0D, 0.9375D);
-		protected static final AxisAlignedBB LOOM_SOUTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.125D, 0.9375D, 1.0D, 0.5625D);
-		protected static final AxisAlignedBB LOOM_NORTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.4375D, 0.9375D, 1.0D, 0.875D);
+	protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
+	protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.875D, 1.0D, 0.9375D);
+	protected static final AxisAlignedBB LOOM_SOUTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.125D, 0.9375D, 1.0D, 0.5625D);
+	protected static final AxisAlignedBB LOOM_NORTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.4375D, 0.9375D, 1.0D, 0.875D);
 
-		private final WoodVariant woodVariant;
-		private final Wood wood;
-		private final ResourceLocation modelLocation;
+	private final WoodVariant woodVariant;
+	private final Wood wood;
+	private final ResourceLocation modelLocation;
 
-		public BlockWoodLoom(WoodVariant woodVariant, Wood wood) {
-				super(WOOD, MapColor.AIR);
-				this.woodVariant = woodVariant;
-				this.wood = wood;
-				this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+	public BlockWoodLoom(WoodVariant woodVariant, Wood wood) {
+		super(WOOD, MapColor.AIR);
+		this.woodVariant = woodVariant;
+		this.wood = wood;
+		this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-				var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-				setRegistryName(MOD_ID, blockRegistryName);
-				setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-				setCreativeTab(CreativeTabsTFC.WOOD);
-				setSoundType(SoundType.WOOD);
-				setHarvestLevel("axe", 0);
-				setHardness(0.5f);
-				setResistance(3f);
-				this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+		setRegistryName(MOD_ID, blockRegistryName);
+		setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+		setCreativeTab(CreativeTabsTFC.WOOD);
+		setSoundType(SoundType.WOOD);
+		setHarvestLevel("axe", 0);
+		setHardness(0.5f);
+		setResistance(3f);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+	}
+
+	@Override
+	public WoodVariant getWoodVariant() {
+		return woodVariant;
+	}
+
+	@Override
+	public Wood getWood() {
+		return wood;
+	}
+
+	@Nullable
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlockTFC(this);
+	}
+
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack stack) {
+		return Size.LARGE; // Can only store in chests
+	}
+
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack stack) {
+		return Weight.VERY_HEAVY; // Stacksize = 1
+	}
+
+	@Nullable
+	@Override
+	public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+		return new TELoom();
+	}
+
+	@Override
+	@SuppressWarnings("deprecation")
+	@Nonnull
+	public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FACING).getHorizontalIndex();
+	}
+
+	@Override
+	@SuppressWarnings("deprecation")
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	@SuppressWarnings("deprecation")
+	@Nonnull
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		switch (state.getValue(FACING)) {
+			case NORTH:
+			default:
+				return LOOM_NORTH_AABB;
+			case SOUTH:
+				return LOOM_SOUTH_AABB;
+			case WEST:
+				return LOOM_WEST_AABB;
+			case EAST:
+				return LOOM_EAST_AABB;
 		}
+	}
 
-		@Override
-		public WoodVariant getWoodVariant() {
-				return woodVariant;
+	@Override
+	@SuppressWarnings("deprecation")
+	@Nonnull
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
+	}
+
+	@Override
+	@SuppressWarnings("deprecation")
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		TELoom te = Helpers.getTE(worldIn, pos, TELoom.class);
+		if (te != null) {
+			return te.onRightClick(playerIn);
 		}
+		return true;
+	}
 
-		@Override
-		public Wood getWood() {
-				return wood;
+	@Override
+	@SuppressWarnings("deprecation")
+	@Nonnull
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		if (facing.getAxis() == EnumFacing.Axis.Y) {
+			facing = placer.getHorizontalFacing().getOpposite();
 		}
+		return getDefaultState().withProperty(FACING, facing);
+	}
 
-		@Nullable
-		@Override
-		public ItemBlock getItemBlock() {
-				return new ItemBlockTFC(this);
+	@Override
+	@Nonnull
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING);
+	}
+
+	@Override
+	@SuppressWarnings("deprecation")
+	@Nonnull
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
+	}
+
+	@Override
+	public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+		TELoom te = Helpers.getTE(worldIn, pos, TELoom.class);
+		if (te != null) {
+			te.onBreakBlock(worldIn, pos, state);
 		}
+		super.breakBlock(worldIn, pos, state);
+	}
 
-		@Nonnull
-		@Override
-		public Size getSize(@Nonnull ItemStack stack) {
-				return Size.LARGE; // Can only store in chests
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+				return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+			}
+		});
+
+		for (IBlockState state : this.getBlockState().getValidStates()) {
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
+				this.getMetaFromState(state),
+				new ModelResourceLocation(modelLocation, "normal"));
 		}
-
-		@Nonnull
-		@Override
-		public Weight getWeight(@Nonnull ItemStack stack) {
-				return Weight.VERY_HEAVY; // Stacksize = 1
-		}
-
-		@Nullable
-		@Override
-		public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
-				return new TELoom();
-		}
-
-		@Override
-		@SuppressWarnings("deprecation")
-		@Nonnull
-		public IBlockState getStateFromMeta(int meta) {
-				return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
-		}
-
-		@Override
-		public int getMetaFromState(IBlockState state) {
-				return state.getValue(FACING).getHorizontalIndex();
-		}
-
-		@Override
-		@SuppressWarnings("deprecation")
-		public boolean isFullCube(IBlockState state) {
-				return false;
-		}
-
-		@Override
-		@SuppressWarnings("deprecation")
-		@Nonnull
-		public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-				switch (state.getValue(FACING)) {
-						case NORTH:
-						default:
-								return LOOM_NORTH_AABB;
-						case SOUTH:
-								return LOOM_SOUTH_AABB;
-						case WEST:
-								return LOOM_WEST_AABB;
-						case EAST:
-								return LOOM_EAST_AABB;
-				}
-		}
-
-		@Override
-		@SuppressWarnings("deprecation")
-		@Nonnull
-		public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-				return BlockFaceShape.UNDEFINED;
-		}
-
-		@Override
-		@SuppressWarnings("deprecation")
-		public boolean isOpaqueCube(IBlockState state) {
-				return false;
-		}
-
-		@Override
-		public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-				TELoom te = Helpers.getTE(worldIn, pos, TELoom.class);
-				if (te != null) {
-						return te.onRightClick(playerIn);
-				}
-				return true;
-		}
-
-		@Override
-		@SuppressWarnings("deprecation")
-		@Nonnull
-		public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-				if (facing.getAxis() == EnumFacing.Axis.Y) {
-						facing = placer.getHorizontalFacing().getOpposite();
-				}
-				return getDefaultState().withProperty(FACING, facing);
-		}
-
-		@Override
-		@Nonnull
-		protected BlockStateContainer createBlockState() {
-				return new BlockStateContainer(this, FACING);
-		}
-
-		@Override
-		@SuppressWarnings("deprecation")
-		@Nonnull
-		public EnumBlockRenderType getRenderType(IBlockState state) {
-				return EnumBlockRenderType.MODEL;
-		}
-
-		@Override
-		public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-				TELoom te = Helpers.getTE(worldIn, pos, TELoom.class);
-				if (te != null) {
-						te.onBreakBlock(worldIn, pos, state);
-				}
-				super.breakBlock(worldIn, pos, state);
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void onModelRegister() {
-				ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-						@Nonnull
-						protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-								return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
-						}
-				});
-
-				for (IBlockState state : this.getBlockState().getValidStates()) {
-						ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-										this.getMetaFromState(state),
-										new ModelResourceLocation(modelLocation, "normal"));
-				}
-		}
+	}
 }

@@ -23,81 +23,81 @@ import static net.dries007.tfc.api.types2.wood.WoodVariant.LOG;
 import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
 
 public class TreeGenSequoia implements ITreeGenerator {
-		private static final BlockPos[] OFFSETS = new BlockPos[]{
-						new BlockPos(0, 0, 0), new BlockPos(-1, 0, 0), new BlockPos(0, 0, -1), new BlockPos(-1, 0, -1)
-		};
-		private final PlacementSettings settings = StructureHelper.getDefaultSettings();
-		private IBlockState trunk;
+	private static final BlockPos[] OFFSETS = new BlockPos[]{
+		new BlockPos(0, 0, 0), new BlockPos(-1, 0, 0), new BlockPos(0, 0, -1), new BlockPos(-1, 0, -1)
+	};
+	private final PlacementSettings settings = StructureHelper.getDefaultSettings();
+	private IBlockState trunk;
 
-		@Override
-		public void generateTree(TemplateManager manager, World world, BlockPos pos, Wood wood, Random rand, boolean isWorldGen) {
-				final int baseVariant = 1 + rand.nextInt(3);
-				final int topVariant = 1 + rand.nextInt(3);
-				final int layers = 4 + rand.nextInt(3);
-				final int height = 3 + rand.nextInt(4);
+	@Override
+	public void generateTree(TemplateManager manager, World world, BlockPos pos, Wood wood, Random rand, boolean isWorldGen) {
+		final int baseVariant = 1 + rand.nextInt(3);
+		final int topVariant = 1 + rand.nextInt(3);
+		final int layers = 4 + rand.nextInt(3);
+		final int height = 3 + rand.nextInt(4);
 
-				trunk = TFCStorage.getWoodBlock(LOG, wood).getDefaultState().withProperty(PLACED, false);
+		trunk = TFCStorage.getWoodBlock(LOG, wood).getDefaultState().withProperty(PLACED, false);
 
-				for (int i = -2; i < height; i++) {
-						placeTrunk(world, pos.add(0, i, 0));
-				}
-
-				int k = height;
-				for (int j = 0; j < layers; j++) {
-						if (j == layers - 1 || (j == layers - 2 && rand.nextBoolean())) {
-								k += placeLayer(manager, world, pos.up(k), wood.getName() + "/mid" + baseVariant);
-						} else {
-								k += placeLayer(manager, world, pos.up(k), wood.getName() + "/base" + baseVariant);
-						}
-				}
-				placeLayer(manager, world, pos.up(k), wood.getName() + "/top" + topVariant);
-
+		for (int i = -2; i < height; i++) {
+			placeTrunk(world, pos.add(0, i, 0));
 		}
 
-		@Override
-		public boolean canGenerateTree(World world, BlockPos pos, Wood wood) {
-				for (BlockPos p1 : OFFSETS) {
-						if (!BlocksTFC.isSoil(world.getBlockState(pos.add(p1).down()))) {
-								if (world.getBlockState(pos.add(p1)).getMaterial().isReplaceable()) {
-										if (BlocksTFC.isSoil(world.getBlockState(pos.add(p1).down(1))))
-												continue;
-										if (BlocksTFC.isSoil(world.getBlockState(pos.add(p1).down(2))) && world.getBlockState(pos.add(p1.down(1))).getMaterial().isReplaceable())
-												continue;
-								}
-								return false;
-						}
-				}
+		int k = height;
+		for (int j = 0; j < layers; j++) {
+			if (j == layers - 1 || (j == layers - 2 && rand.nextBoolean())) {
+				k += placeLayer(manager, world, pos.up(k), wood.getName() + "/mid" + baseVariant);
+			} else {
+				k += placeLayer(manager, world, pos.up(k), wood.getName() + "/base" + baseVariant);
+			}
+		}
+		placeLayer(manager, world, pos.up(k), wood.getName() + "/top" + topVariant);
 
-				return ITreeGenerator.super.canGenerateTree(world, pos, wood);
+	}
+
+	@Override
+	public boolean canGenerateTree(World world, BlockPos pos, Wood wood) {
+		for (BlockPos p1 : OFFSETS) {
+			if (!BlocksTFC.isSoil(world.getBlockState(pos.add(p1).down()))) {
+				if (world.getBlockState(pos.add(p1)).getMaterial().isReplaceable()) {
+					if (BlocksTFC.isSoil(world.getBlockState(pos.add(p1).down(1))))
+						continue;
+					if (BlocksTFC.isSoil(world.getBlockState(pos.add(p1).down(2))) && world.getBlockState(pos.add(p1.down(1))).getMaterial().isReplaceable())
+						continue;
+				}
+				return false;
+			}
 		}
 
-		private int placeLayer(TemplateManager manager, World world, BlockPos pos, String name) {
-				ResourceLocation base = new ResourceLocation(MOD_ID, name);
-				Template structureBase = manager.get(world.getMinecraftServer(), base);
+		return ITreeGenerator.super.canGenerateTree(world, pos, wood);
+	}
 
-				if (structureBase == null) {
-						TerraFirmaCraft.getLog().warn("Unable to find a template for " + base.toString());
-						return -1;
-				}
-				BlockPos size = structureBase.getSize();
-				pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
+	private int placeLayer(TemplateManager manager, World world, BlockPos pos, String name) {
+		ResourceLocation base = new ResourceLocation(MOD_ID, name);
+		Template structureBase = manager.get(world.getMinecraftServer(), base);
 
-				StructureHelper.addStructureToWorld(world, pos, structureBase, settings);
-				return size.getY();
+		if (structureBase == null) {
+			TerraFirmaCraft.getLog().warn("Unable to find a template for " + base);
+			return -1;
 		}
+		BlockPos size = structureBase.getSize();
+		pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
 
-		private void placeTrunk(World world, BlockPos pos) {
-				for (BlockPos p1 : OFFSETS) {
-						checkAndPlace(world, pos.add(p1));
-				}
-		}
+		StructureHelper.addStructureToWorld(world, pos, structureBase, settings);
+		return size.getY();
+	}
 
-		private void checkAndPlace(World world, BlockPos pos) {
-				if (world.getBlockState(pos).getMaterial().isReplaceable() ||
-								world.getBlockState(pos).getBlock() instanceof BlockWoodSapling ||
-								world.getBlockState(pos).getBlock() instanceof BlockWoodLeaves) {
-						world.setBlockState(pos, trunk);
-				}
+	private void placeTrunk(World world, BlockPos pos) {
+		for (BlockPos p1 : OFFSETS) {
+			checkAndPlace(world, pos.add(p1));
 		}
+	}
+
+	private void checkAndPlace(World world, BlockPos pos) {
+		if (world.getBlockState(pos).getMaterial().isReplaceable() ||
+			world.getBlockState(pos).getBlock() instanceof BlockWoodSapling ||
+			world.getBlockState(pos).getBlock() instanceof BlockWoodLeaves) {
+			world.setBlockState(pos, trunk);
+		}
+	}
 
 }

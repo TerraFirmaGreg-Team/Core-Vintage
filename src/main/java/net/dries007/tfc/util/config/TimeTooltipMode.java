@@ -4,22 +4,22 @@ package net.dries007.tfc.util.config;
  * Used in config to toggle modes instead of an integer
  */
 public enum TimeTooltipMode {
-    NONE("None"),
-    TICKS("Ticks"),
-    MINECRAFT_HOURS("Minecraft Hours"),
-    REAL_MINUTES("Real Minutes");
+	NONE("None"),
+	TICKS("Ticks"),
+	MINECRAFT_HOURS("Minecraft Hours"),
+	REAL_MINUTES("Real Minutes");
 
-    private final String name;
+	private final String name;
 
-    TimeTooltipMode(String name) {
-        this.name = name;
-    }
+	TimeTooltipMode(String name) {
+		this.name = name;
+	}
 
-    /**
-     * Shows this text in config instead of the enum name
-     */
-    @Override
-    public String toString() {
-        return name;
-    }
+	/**
+	 * Shows this text in config instead of the enum name
+	 */
+	@Override
+	public String toString() {
+		return name;
+	}
 }

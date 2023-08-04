@@ -5,8 +5,8 @@ package net.dries007.tfc.api.types;
  * Used only in TFC worlds.
  */
 public interface IHuntable extends ICreatureTFC {
-    @Override
-    default CreatureType getCreatureType() {
-        return CreatureType.HUNTABLE;
-    }
+	@Override
+	default CreatureType getCreatureType() {
+		return CreatureType.HUNTABLE;
+	}
 }

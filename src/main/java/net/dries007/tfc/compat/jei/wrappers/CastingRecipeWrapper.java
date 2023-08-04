@@ -12,23 +12,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
-public class CastingRecipeWrapper implements IRecipeWrapper
-{
-    private final ItemStack mold;
-    private final FluidStack input;
+public class CastingRecipeWrapper implements IRecipeWrapper {
+	private final ItemStack mold;
+	private final FluidStack input;
 
-    public CastingRecipeWrapper(Material metal, OrePrefix orePrefix) {
-        input = new FluidStack(metal.getFluid(), Helpers.getOrePrefixMaterialAmount(orePrefix));
-        mold = new ItemStack(ItemMold.get(orePrefix));
-        var cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(input, true);
-        }
-    }
+	public CastingRecipeWrapper(Material metal, OrePrefix orePrefix) {
+		input = new FluidStack(metal.getFluid(), Helpers.getOrePrefixMaterialAmount(orePrefix));
+		mold = new ItemStack(ItemMold.get(orePrefix));
+		var cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+		if (cap instanceof IMoldHandler) {
+			cap.fill(input, true);
+		}
+	}
 
-    @Override
-    public void getIngredients(IIngredients ingredients) {
-        ingredients.setInput(VanillaTypes.FLUID, input);
-        ingredients.setOutput(VanillaTypes.ITEM, mold);
-    }
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+		ingredients.setInput(VanillaTypes.FLUID, input);
+		ingredients.setOutput(VanillaTypes.ITEM, mold);
+	}
 }

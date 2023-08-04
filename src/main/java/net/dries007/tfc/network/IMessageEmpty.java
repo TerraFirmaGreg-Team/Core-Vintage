@@ -7,11 +7,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
  * Packets that don't need to send any data and just exist as signaling points
  */
 public interface IMessageEmpty extends IMessage {
-    @Override
-    default void fromBytes(ByteBuf buf) {
-    }
+	@Override
+	default void fromBytes(ByteBuf buf) {
+	}
 
-    @Override
-    default void toBytes(ByteBuf buf) {
-    }
+	@Override
+	default void toBytes(ByteBuf buf) {
+	}
 }

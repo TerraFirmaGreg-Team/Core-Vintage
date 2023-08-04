@@ -32,6 +32,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
@@ -202,7 +203,21 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
 		@Override
 		public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-				return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soil));
+
+				switch (soilVariant) {
+						case CLAY_GRASS:
+								return Items.CLAY_BALL;
+						case GRASS:
+						case DRY_GRASS:
+								Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soil));
+						default:
+								return super.getItemDropped(state, rand, fortune);
+				}
+		}
+
+		@Override
+		public int damageDropped(IBlockState state) {
+				return getMetaFromState(state);
 		}
 
 		@Override

@@ -120,10 +120,10 @@ public class TFCBlocks {
 		//=== Groundcover ============================================================================================//
 
 		for (GroundcoverType groundcoverType : GroundcoverType.values()) {
-			var groundcover = new BlockGroundcover(groundcoverType);
+			var groundcoverBlock = new BlockGroundcover(groundcoverType);
 
-			if (GROUNDCOVER_BLOCK.put(groundcoverType, groundcover) != null)
-				throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", groundcoverType, groundcover));
+			if (GROUNDCOVER_BLOCK.put(groundcoverType, groundcoverBlock) != null)
+				throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", groundcoverType, groundcoverBlock));
 		}
 
 		//=== Fluid ==================================================================================================//

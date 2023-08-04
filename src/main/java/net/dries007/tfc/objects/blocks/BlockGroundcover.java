@@ -2,12 +2,11 @@ package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.api.types2.GroundcoverType;
 import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.client.CustomStateMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -25,7 +24,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types2.rock.RockVariant.LOOSE;
 
 public class BlockGroundcover extends Block implements IHasModel {
 	private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
@@ -37,9 +35,9 @@ public class BlockGroundcover extends Block implements IHasModel {
 		this.blockHardness = 0.1f;
 		this.blockResistance = 0.1f;
 		this.groundcoverType = groundcoverType;
-		this.modelLocation = new ResourceLocation(MOD_ID, LOOSE + "/" + groundcoverType);
+		this.modelLocation = new ResourceLocation(MOD_ID, "groundcover/" + groundcoverType);
 
-		var blockRegistryName = String.format("%s/%s", LOOSE, groundcoverType);
+		var blockRegistryName = String.format("groundcover/%s", groundcoverType);
 		setRegistryName(MOD_ID, blockRegistryName);
 		setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 		setSoundType(SoundType.GROUND);
@@ -106,11 +104,6 @@ public class BlockGroundcover extends Block implements IHasModel {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-			@Nonnull
-			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-				return new ModelResourceLocation(modelLocation.toString());
-			}
-		});
+		ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).build());
 	}
 }

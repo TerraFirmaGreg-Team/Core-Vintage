@@ -165,6 +165,7 @@ public final class ClientRegisterEvents {
 		TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
 		TFCStorage.WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
 		TFCStorage.ALABASTER_BLOCK.values().forEach(IHasModel::onModelRegister);
+		TFCStorage.GROUNDCOVER_BLOCK.values().forEach(IHasModel::onModelRegister);
 
 		for (ItemBlock item : TFCStorage.ITEM_BLOCKS)
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
@@ -301,7 +302,7 @@ public final class ClientRegisterEvents {
 	public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
 		ItemColors itemColors = event.getItemColors();
 
-		//=== Wood ===================================================================================================// 
+		//=== Wood ===================================================================================================//
 
 		itemColors.registerItemColorHandler(woodItemBlockColors, TFCStorage.WOOD_BLOCKS.values()
 			.stream()

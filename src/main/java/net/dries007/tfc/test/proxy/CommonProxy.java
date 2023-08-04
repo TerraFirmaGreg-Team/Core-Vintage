@@ -108,9 +108,9 @@ public class CommonProxy {
 
 		//=== Groundcover ==============================================================================================//
 
-		for (var groundcoverBlock : TFCStorage.GROUNDCOVER_BLOCK.values()) {
-			r.register(createItemBlock(groundcoverBlock, ItemBlock::new));
-		}
+//		for (var groundcoverBlock : TFCStorage.GROUNDCOVER_BLOCK.values()) {
+//			r.register(createItemBlock(groundcoverBlock, ItemBlock::new));
+//		}
 
 		//=== Other ==================================================================================================//
 

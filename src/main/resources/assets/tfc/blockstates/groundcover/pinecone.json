@@ -1,0 +1,22 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "normal": [
+      {
+        "model": "tfc:groundcover/pinecone",
+        "y": 90
+      },
+      {
+        "model": "tfc:groundcover/pinecone"
+      },
+      {
+        "model": "tfc:groundcover/pinecone",
+        "y": 180
+      },
+      {
+        "model": "tfc:groundcover/pinecone",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -439,7 +439,7 @@ public final class ConfigTFC {
 				"The number of trees in the area and flora density is also a factor in this."})
 			@Config.RangeDouble(min = 0, max = 10)
 			@Config.LangKey("config." + MOD_ID + ".general.world.sticksDensityModifier")
-			public double sticksDensityModifier = 5;
+			public double sticksDensityModifier = 1;
 
 			@Config.Comment("This is how deep (in blocks) from the surface a loose rock will scan for a vein when generating, Higher values = More veins spawn samples thus adding more samples.")
 			@Config.RangeInt(min = 1, max = 255)

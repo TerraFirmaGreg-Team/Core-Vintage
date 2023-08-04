@@ -301,7 +301,7 @@ public final class ClientRegisterEvents {
 	public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
 		ItemColors itemColors = event.getItemColors();
 
-		//=== Wood ===================================================================================================//
+		//=== Wood ===================================================================================================// 
 
 		itemColors.registerItemColorHandler(woodItemBlockColors, TFCStorage.WOOD_BLOCKS.values()
 			.stream()

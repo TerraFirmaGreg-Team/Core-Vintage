@@ -435,7 +435,7 @@ public final class ConfigTFC {
 				"The number of trees in the area and flora density is also a factor in this."})
 			@Config.RangeDouble(min = 0, max = 10)
 			@Config.LangKey("config." + MOD_ID + ".general.world.sticksDensityModifier")
-			public double sticksDensityModifier = 1;
+			public double sticksDensityModifier = 0.2;
 
 			@Config.RequiresMcRestart
 			@Config.RangeDouble(min = 0.05, max = 0.4)

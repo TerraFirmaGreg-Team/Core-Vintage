@@ -273,6 +273,12 @@ public final class ClientRegisterEvents {
 								.map(s -> (Block) s)
 								.toArray(Block[]::new));
 
+				blockColors.registerBlockColorHandler(foliageColor, TFCStorage.WOOD_BLOCKS.values()
+								.stream()
+								.filter(x -> x.getWoodVariant() == LEAVES)
+								.map(s -> (Block) s)
+								.toArray(Block[]::new));
+
 
 				// This is talking about tall grass vs actual grass blocks
 
@@ -303,9 +309,13 @@ public final class ClientRegisterEvents {
 								.map(s -> (Block) s)
 								.toArray(Block[]::new));
 
-//				itemColors.registerItemColorHandler((stack, tintIndex) ->
-//												event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-//								TFCStorage.WOOD_BLOCKS.values().toArray(new BlockWoodLeaves[0]));
+				itemColors.registerItemColorHandler((stack, tintIndex) ->
+												event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+								TFCStorage.WOOD_BLOCKS.values()
+												.stream()
+												.filter(x -> x.getWoodVariant() == LEAVES)
+												.map(s -> (Block) s)
+												.toArray(Block[]::new));
 
 				itemColors.registerItemColorHandler((stack, tintIndex) ->
 												event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),

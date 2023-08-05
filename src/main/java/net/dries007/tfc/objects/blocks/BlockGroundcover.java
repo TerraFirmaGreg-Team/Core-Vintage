@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.CustomStateMap;
@@ -8,12 +9,14 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -42,6 +45,30 @@ public class BlockGroundcover extends Block implements IHasModel {
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setSoundType(SoundType.GROUND);
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player) {
+        return groundcoverType.getItemStackToDrop();
+    }
+
+    @Override
+    @SuppressWarnings("ConstantConditions")
+    public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (playerIn.addItemStackToInventory(groundcoverType.getItemStackToDrop())) {
+            worldIn.setBlockToAir(pos);
+
+            playerIn.swingArm(EnumHand.MAIN_HAND);
+            playerIn.playSound(SoundEvents.ENTITY_ITEMFRAME_REMOVE_ITEM, 1.0f, 1.0f);
+        }
+
+        return true;
+    }
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        drops.add(groundcoverType.getItemStackToDrop());
     }
 
     @Nonnull

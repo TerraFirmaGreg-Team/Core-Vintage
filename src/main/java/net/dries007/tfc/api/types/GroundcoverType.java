@@ -1,23 +1,19 @@
 package net.dries007.tfc.api.types;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public enum GroundcoverType implements IStringSerializable {
-    BONE(() -> Items.BONE),
+    BONE(Items.BONE),
     //    CLAM(),
 //    DEAD_GRASS(),
 //    DRIFTWOOD(),
 //    FEATHER(() -> Items.FEATHER),
-    FLINT(() -> Items.FLINT),
+    FLINT(Items.FLINT),
     //    GUANO(),
 //    HUMUS(),
 //    MOLLUSK(),
@@ -27,24 +23,17 @@ public enum GroundcoverType implements IStringSerializable {
 //    SALT_LICK(),
 //    SEAWEED(),
 //    SEA_URCHIN(),
-    STICK(() -> Items.STICK);
+    STICK(Items.STICK);
 
-    @Nullable
-    private final Supplier<? extends Item> vanillaItem; // The vanilla item this corresponds to
+    private final Item itemToDrop;
 
-    GroundcoverType(@Nullable Supplier<? extends Item> vanillaItem) {
-        this.vanillaItem = vanillaItem;
+    GroundcoverType(Item itemToDrop) {
+        this.itemToDrop = itemToDrop;
     }
 
-    GroundcoverType() {
-        this.vanillaItem = null;
+    public ItemStack getItemStackToDrop() {
+        return new ItemStack(itemToDrop);
     }
-
-    @Nullable
-    public Function<Block, ItemBlock> createBlockItem() {
-        return vanillaItem == null ? ItemBlock::new : null;
-    }
-
 
     @Nonnull
     @Override

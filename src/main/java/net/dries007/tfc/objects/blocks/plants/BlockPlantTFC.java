@@ -93,6 +93,12 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
+    @Nonnull
+    @Override
+    public String getTranslationKey() {
+        return "tile.tfc.plants." + plant.getName();
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     @Nonnull

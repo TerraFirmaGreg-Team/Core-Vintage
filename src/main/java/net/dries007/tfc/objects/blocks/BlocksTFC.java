@@ -23,7 +23,6 @@ import net.dries007.tfc.objects.blocks.soil.BlockSoilPeatGrass;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.objects.te.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -31,7 +30,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.Mod;
@@ -246,35 +244,6 @@ public final class BlocksTFC {
 
         allNormalItemBlocks = normalItemBlocks.build();
         allInventoryItemBlocks = inventoryItemBlocks.build();
-
-        // Register Tile Entities
-        // Putting tile entity registration in the respective block can call it multiple times. Just put here to avoid duplicates
-
-        register(TETickCounter.class, "tick_counter");
-        register(TEPlacedItem.class, "placed_item");
-        register(TEPlacedItemFlat.class, "placed_item_flat");
-        register(TEPlacedHide.class, "placed_hide");
-        register(TEPitKiln.class, "pit_kiln");
-        register(TEChestTFC.class, "chest");
-        register(TENestBox.class, "nest_box");
-        register(TELogPile.class, "log_pile");
-        register(TEFirePit.class, "fire_pit");
-        register(TEToolRack.class, "tool_rack");
-        register(TELoom.class, "loom");
-        register(TEBellows.class, "bellows");
-        register(TEBarrel.class, "barrel");
-        register(TECharcoalForge.class, "charcoal_forge");
-        register(TEAnvilTFC.class, "anvil");
-        register(TECrucible.class, "crucible");
-        register(TECropBase.class, "crop_base");
-        register(TECropSpreading.class, "crop_spreading");
-        register(TEBlastFurnace.class, "blast_furnace");
-        register(TEBloomery.class, "bloomery");
-        register(TEBloom.class, "bloom");
-        register(TEMetalSheet.class, "metal_sheet");
-        register(TEQuern.class, "quern");
-        register(TELargeVessel.class, "large_vessel");
-        register(TEPowderKeg.class, "powderkeg");
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -422,9 +391,5 @@ public final class BlocksTFC {
         block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
         r.register(block);
         return block;
-    }
-
-    private static <T extends TileEntity> void register(Class<T> te, String name) {
-        TileEntity.register(MOD_ID + ":" + name, te);
     }
 }

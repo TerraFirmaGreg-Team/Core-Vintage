@@ -36,9 +36,10 @@ public class ItemBloom extends ItemTFC implements IMaterialItem {
         if (meltable) {
             setRegistryName(MOD_ID, "bloom/refined");
             setTranslationKey(MOD_ID + ".bloom.refined");
+        } else {
+            setRegistryName(MOD_ID, "bloom/unrefined");
+            setTranslationKey(MOD_ID + ".bloom.unrefined");
         }
-        setRegistryName(MOD_ID, "bloom/unrefined");
-        setTranslationKey(MOD_ID + ".bloom.unrefined");
         setCreativeTab(CreativeTabsTFC.MISC);
     }
 

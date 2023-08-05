@@ -2,10 +2,12 @@ package net.dries007.tfc.test.proxy;
 
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.objects.te.*;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -54,7 +56,7 @@ public class CommonProxy {
             r.register(alabasterBlock);
         }
 
-        //=== Groundcover ==============================================================================================//
+        //=== Groundcover ============================================================================================//
 
         for (var groundcoverBlock : TFCStorage.GROUNDCOVER_BLOCK.values()) {
             r.register(groundcoverBlock);
@@ -63,6 +65,36 @@ public class CommonProxy {
         //=== Other ==================================================================================================//
 
         TFCStorage.ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
+
+
+        //=== TileEntity =============================================================================================//
+        // Помещение регистрации объекта тайла в соответствующий блок может вызывать его несколько раз. Просто поместите сюда, чтобы избежать дубликатов
+
+        register(TETickCounter.class, "tick_counter");
+        register(TEPlacedItem.class, "placed_item");
+        register(TEPlacedItemFlat.class, "placed_item_flat");
+        register(TEPlacedHide.class, "placed_hide");
+        register(TEPitKiln.class, "pit_kiln");
+        register(TEChestTFC.class, "chest");
+        register(TENestBox.class, "nest_box");
+        register(TELogPile.class, "log_pile");
+        register(TEFirePit.class, "fire_pit");
+        register(TEToolRack.class, "tool_rack");
+        register(TELoom.class, "loom");
+        register(TEBellows.class, "bellows");
+        register(TEBarrel.class, "barrel");
+        register(TECharcoalForge.class, "charcoal_forge");
+        register(TEAnvilTFC.class, "anvil");
+        register(TECrucible.class, "crucible");
+        register(TECropBase.class, "crop_base");
+        register(TECropSpreading.class, "crop_spreading");
+        register(TEBlastFurnace.class, "blast_furnace");
+        register(TEBloomery.class, "bloomery");
+        register(TEBloom.class, "bloom");
+        register(TEMetalSheet.class, "metal_sheet");
+        register(TEQuern.class, "quern");
+        register(TELargeVessel.class, "large_vessel");
+        register(TEPowderKeg.class, "powderkeg");
 
     }
 
@@ -162,6 +194,11 @@ public class CommonProxy {
         item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
         item.setCreativeTab(ct);
         return item;
+    }
+
+    // Для регистрации тайловых объектов
+    private static <T extends TileEntity> void register(Class<T> te, String name) {
+        TileEntity.register(MOD_ID + ":" + name, te);
     }
 
 }

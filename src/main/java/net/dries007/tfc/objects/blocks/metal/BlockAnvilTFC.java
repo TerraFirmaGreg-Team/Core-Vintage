@@ -6,7 +6,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.items.metal.ItemAnvil;
+import net.dries007.tfc.objects.items.metal.ItemMetalAnvil;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -140,7 +140,7 @@ public class BlockAnvilTFC extends Block {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ItemAnvil.get(material);
+        return ItemMetalAnvil.get(material);
     }
 
     @Override
@@ -239,7 +239,7 @@ public class BlockAnvilTFC extends Block {
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(ItemAnvil.get(material));
+        return new ItemStack(ItemMetalAnvil.get(material));
     }
 
     public Material getMetal() {

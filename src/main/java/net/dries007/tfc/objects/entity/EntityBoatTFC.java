@@ -4,7 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.Wood;
 import net.dries007.tfc.api.types.wood.util.IWoodBlock;
-import net.dries007.tfc.objects.items.wood.ItemBoatTFC;
+import net.dries007.tfc.objects.items.wood.ItemWoodBoat;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -62,7 +62,7 @@ public class EntityBoatTFC extends EntityBoat {
     public Item getItemBoat() {
         Wood wood = getWood();
         if (wood != null) {
-            return ItemBoatTFC.get(wood);
+            return ItemWoodBoat.get(wood);
         }
         return super.getItemBoat();
     }

@@ -31,16 +31,16 @@ import java.util.Objects;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemBoatTFC extends ItemTFC {
-    private static final Map<Wood, ItemBoatTFC> MAP = new HashMap<>();
+public class ItemWoodBoat extends ItemTFC {
+    private static final Map<Wood, ItemWoodBoat> MAP = new HashMap<>();
     private final Wood wood;
 
-    public ItemBoatTFC(Wood wood) {
+    public ItemWoodBoat(Wood wood) {
         this.wood = wood;
         if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
     }
 
-    public static ItemBoatTFC get(Wood wood) {
+    public static ItemWoodBoat get(Wood wood) {
         return MAP.get(wood);
     }
 

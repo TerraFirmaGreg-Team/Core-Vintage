@@ -10,7 +10,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
-import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.test.items.TFCItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -50,7 +50,7 @@ public class QuernCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
         itemStackGroup.init(2, false, 84, 16);
 
         itemStackGroup.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
-        itemStackGroup.set(1, new ItemStack(ItemsTFC.HANDSTONE)); // todo: use all ore dict entries with "handstone"
+        itemStackGroup.set(1, new ItemStack(TFCItems.HANDSTONE)); // todo: use all ore dict entries with "handstone"
         itemStackGroup.set(2, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
     }
 }

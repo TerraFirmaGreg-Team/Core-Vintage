@@ -21,8 +21,8 @@ import net.dries007.tfc.objects.blocks.BlockAlabaster;
 import net.dries007.tfc.objects.blocks.BlockGroundcover;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.ceramics.ItemUnfiredMold;
-import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
+import net.dries007.tfc.objects.items.rock.ItemRockBrick;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -31,21 +31,22 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 /**
- * In this class we can store any blocks, items, and other useful shit.
+ * В этом классе мы можем хранить любые блоки, предметы и прочую полезную хрень.
  */
 public final class TFCStorage {
+
 
     public static final Map<Triple<RockType, RockVariant, Rock>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<SoilVariant, Soil>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantVariant, Plant>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<WoodVariant, Wood>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<String, RockVariant>, BlockAlabaster> ALABASTER_BLOCK = new LinkedHashMap<>();
+    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCK = new HashMap<>();
 
+    public static final Map<Rock, ItemRock> ROCK_ITEM = new HashMap<>();
+    public static final Map<Rock, ItemRockBrick> BRICK_ITEM = new HashMap<>();
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
-    public static final Map<Rock, ItemRock> ITEMROCK_MAP = new HashMap<>();
-    public static final Map<Rock, ItemBrickTFC> ITEMBRICK_MAP = new HashMap<>();
-    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCK = new HashMap<>();
 
     // Блоки, имеющие предмет
     public static final List<ItemBlock> ITEM_BLOCKS = new ArrayList<>();
@@ -98,26 +99,17 @@ public final class TFCStorage {
         throw new RuntimeException(String.format("Item is null: %s", groundcoverType));
     }
 
-    public static void addRockItem(@Nonnull Rock rock, @Nonnull ItemRock itemRock) {
-        if (ITEMROCK_MAP.put(rock, itemRock) != null)
-            throw new RuntimeException(String.format("Duplicate registry detected: %s", rock));
-    }
-
     @Nonnull
-    public static ItemRock getRockItem(@Nonnull Rock rock) {
-        var item = (ItemRock) ITEMROCK_MAP.get(rock);
+    public static Item getRockItem(@Nonnull Rock rock) {
+        var item = (Item) ROCK_ITEM.get(rock);
         if (item != null) return item;
         throw new RuntimeException(String.format("Item is null: %s", rock));
     }
 
-    public static void addBrickItem(@Nonnull Rock rock, @Nonnull ItemBrickTFC itemBrick) {
-        if (ITEMBRICK_MAP.put(rock, itemBrick) != null)
-            throw new RuntimeException(String.format("Duplicate registry detected: %s", rock));
-    }
 
     @Nonnull
-    public static ItemBrickTFC getBrickItem(@Nonnull Rock rock) {
-        var item = (ItemBrickTFC) ITEMBRICK_MAP.get(rock);
+    public static Item getBrickItem(@Nonnull Rock rock) {
+        var item = (Item) BRICK_ITEM.get(rock);
         if (item != null) return item;
         throw new RuntimeException(String.format("Item is null: %s", rock));
     }

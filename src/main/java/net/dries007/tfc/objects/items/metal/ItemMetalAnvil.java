@@ -27,21 +27,21 @@ import java.util.Map;
 import static net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC.AXIS;
 
 @ParametersAreNonnullByDefault
-public class ItemAnvil extends ItemTFC implements IMaterialItem {
-    private static final Map<Material, ItemAnvil> ANVIL_STORAGE_MAP = new HashMap<>();
+public class ItemMetalAnvil extends ItemTFC implements IMaterialItem {
+    private static final Map<Material, ItemMetalAnvil> ANVIL_STORAGE_MAP = new HashMap<>();
     private final Material material;
 
-    public ItemAnvil(Material material) {
+    public ItemMetalAnvil(Material material) {
         this.material = material;
 
         if (ANVIL_STORAGE_MAP.put(material, this) != null) throw new IllegalStateException("There can only be one.");
     }
 
-    public static ItemAnvil get(Material material) {
+    public static ItemMetalAnvil get(Material material) {
         return ANVIL_STORAGE_MAP.get(material);
     }
 
-    public static Collection<ItemAnvil> getAnvilStorage() {
+    public static Collection<ItemMetalAnvil> getAnvilStorage() {
         return ANVIL_STORAGE_MAP.values();
     }
 
@@ -58,7 +58,7 @@ public class ItemAnvil extends ItemTFC implements IMaterialItem {
                     stateSupport.isSideSolid(worldIn, supportPos, EnumFacing.UP)) //forge says to do it this way, IBlockProperties#isTopSolid
             {
                 if (!worldIn.isRemote) {
-                    ItemAnvil anvil = (ItemAnvil) stack.getItem();
+                    ItemMetalAnvil anvil = (ItemMetalAnvil) stack.getItem();
                     worldIn.setBlockState(placedPos, BlockAnvilTFC.get(anvil.material).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
                     worldIn.playSound(null, placedPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     stack.shrink(1);

@@ -10,6 +10,7 @@ import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -24,12 +25,21 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class ItemBloom extends ItemTFC implements IMaterialItem {
     private final boolean meltable;
 
     public ItemBloom(boolean meltable) {
         this.meltable = meltable;
+        if (meltable) {
+            setRegistryName(MOD_ID, "bloom/refined");
+            setTranslationKey(MOD_ID + ".bloom.refined");
+        }
+        setRegistryName(MOD_ID, "bloom/unrefined");
+        setTranslationKey(MOD_ID + ".bloom.unrefined");
+        setCreativeTab(CreativeTabsTFC.MISC);
     }
 
     @Nonnull

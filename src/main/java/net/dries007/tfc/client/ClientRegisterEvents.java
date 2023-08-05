@@ -17,8 +17,8 @@ import net.dries007.tfc.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilFarmland;
+import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
-import net.dries007.tfc.objects.items.ItemGoldPan;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.te.*;
@@ -34,7 +34,6 @@ import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.*;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -51,7 +50,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.PlantVariant.SHORT_GRASS;
@@ -92,7 +90,39 @@ public final class ClientRegisterEvents {
     @SubscribeEvent
     @SuppressWarnings("ConstantConditions")
     public static void registerModels(ModelRegistryEvent event) {
-        // ITEMS //
+
+        //=== BLOCKS =================================================================================================//
+
+        TFCStorage.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.ALABASTER_BLOCK.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.GROUNDCOVER_BLOCK.values().forEach(IHasModel::onModelRegister);
+
+
+        for (ItemBlock item : TFCStorage.ITEM_BLOCKS)
+            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
+
+        //=== ITEMS ==================================================================================================//
+
+
+        //=== TESRs ==================================================================================================//
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TEChestTFC.class, new TESRChestTFC());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEToolRack.class, new TESRToolRack());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEPitKiln.class, new TESRPitKiln());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItem.class, new TESRPlacedItem());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEQuern.class, new TESRQuern());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEBellows.class, new TESRBellows());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEBarrel.class, new TESRBarrel());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEAnvilTFC.class, new TESRAnvil());
+        ClientRegistry.bindTileEntitySpecialRenderer(TELoom.class, new TESRLoom());
+        ClientRegistry.bindTileEntitySpecialRenderer(TECrucible.class, new TESRCrucible());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEFirePit.class, new TESRFirePit());
+
 
         // Registering fluid containers
         ModelLoader.setCustomModelResourceLocation(ItemsTFC.WOODEN_BUCKET, 0, new ModelResourceLocation(ItemsTFC.WOODEN_BUCKET.getRegistryName(), "inventory"));
@@ -109,12 +139,6 @@ public final class ClientRegisterEvents {
             ModelLoader.setCustomModelResourceLocation(ItemsTFC.UNFIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC.UNFIRED_VESSEL_GLAZED.getRegistryName().toString()));
             ModelLoader.setCustomModelResourceLocation(ItemsTFC.FIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC.FIRED_VESSEL_GLAZED.getRegistryName().toString()));
         }
-
-        // Gold Pan
-        ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES).map(e -> new ResourceLocation(MOD_ID, "goldpan/" + e)).toArray(ResourceLocation[]::new));
-        for (int meta = 0; meta < ItemGoldPan.TYPES.length; meta++)
-            ModelLoader.setCustomModelResourceLocation(ItemsTFC.GOLDPAN, meta, new ModelResourceLocation(MOD_ID + ":goldpan/" + ItemGoldPan.TYPES[meta]));
-        ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES).map(e -> new ResourceLocation(MOD_ID, "goldpan/" + e)).toArray(ResourceLocation[]::new));
 
         // Ceramic Molds
         for (var orePrefix : OrePrefix.values()) {
@@ -149,19 +173,6 @@ public final class ClientRegisterEvents {
 
         for (ItemBlock item : BlocksTFC.getAllInventoryItemBlocks())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-
-
-        // BLOCKS - STATE MAPPERS //
-
-        TFCStorage.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.ALABASTER_BLOCK.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.GROUNDCOVER_BLOCK.values().forEach(IHasModel::onModelRegister);
-
-        for (ItemBlock item : TFCStorage.ITEM_BLOCKS)
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
 
 
         // Blocks with Ignored Properties
@@ -205,22 +216,6 @@ public final class ClientRegisterEvents {
                 .withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM), empty, TFCBlocks.PLACED_HIDE.getDefaultState()
                 .withProperty(SIZE, ItemAnimalHide.HideSize.LARGE), empty));
 
-        // TESRs //
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TEChestTFC.class, new TESRChestTFC());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEToolRack.class, new TESRToolRack());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEPitKiln.class, new TESRPitKiln());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItem.class, new TESRPlacedItem());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEQuern.class, new TESRQuern());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEBellows.class, new TESRBellows());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEBarrel.class, new TESRBarrel());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEAnvilTFC.class, new TESRAnvil());
-        ClientRegistry.bindTileEntitySpecialRenderer(TELoom.class, new TESRLoom());
-        ClientRegistry.bindTileEntitySpecialRenderer(TECrucible.class, new TESRCrucible());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEFirePit.class, new TESRFirePit());
-        ClientRegistry.bindTileEntitySpecialRenderer(TESluice.class, new TESRSluice());
     }
 
     @SubscribeEvent
@@ -234,8 +229,6 @@ public final class ClientRegisterEvents {
         // Foliage Color
         // todo: do something different for conifers - they should have a different color mapping through the seasons
         IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
-
-        blockColors.registerBlockColorHandler(grassColor, TFCBlocks.PEAT_GRASS);
 
         //=== Soil ===================================================================================================//
 
@@ -251,6 +244,8 @@ public final class ClientRegisterEvents {
                 .filter(x -> x.getSoilVariant() == FARMLAND)
                 .map(s -> (Block) s)
                 .toArray(Block[]::new));
+
+        blockColors.registerBlockColorHandler(grassColor, TFCBlocks.PEAT_GRASS);
 
         //=== Plant ==================================================================================================//
 
@@ -295,27 +290,6 @@ public final class ClientRegisterEvents {
     public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
         ItemColors itemColors = event.getItemColors();
 
-        //=== Wood ===================================================================================================//
-
-        itemColors.registerItemColorHandler(woodItemBlockColors, TFCStorage.WOOD_BLOCKS.values()
-                .stream()
-                .filter(x -> x.getWoodVariant() != LEAVES && x.getWoodVariant() != SAPLING)
-                .map(s -> (Block) s)
-                .toArray(Block[]::new));
-
-        itemColors.registerItemColorHandler((stack, tintIndex) ->
-                        event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-                TFCStorage.WOOD_BLOCKS.values()
-                        .stream()
-                        .filter(x -> x.getWoodVariant() == LEAVES)
-                        .map(s -> (Block) s)
-                        .toArray(Block[]::new));
-
-        itemColors.registerItemColorHandler((stack, tintIndex) ->
-                        event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-                BlocksTFC.getAllFruitTreeLeavesBlocks()
-                        .toArray(new BlockFruitTreeLeaves[0]));
-
         //=== Soil ===================================================================================================//
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
@@ -339,6 +313,27 @@ public final class ClientRegisterEvents {
                         .filter(x -> x.getPlantVariant() == SHORT_GRASS || x.getPlantVariant() == TALL_GRASS)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
+
+        //=== Wood ===================================================================================================//
+
+        itemColors.registerItemColorHandler(woodItemBlockColors, TFCStorage.WOOD_BLOCKS.values()
+                .stream()
+                .filter(x -> x.getWoodVariant() != LEAVES && x.getWoodVariant() != SAPLING)
+                .map(s -> (Block) s)
+                .toArray(Block[]::new));
+
+        itemColors.registerItemColorHandler((stack, tintIndex) ->
+                        event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                TFCStorage.WOOD_BLOCKS.values()
+                        .stream()
+                        .filter(x -> x.getWoodVariant() == LEAVES)
+                        .map(s -> (BlockWoodLeaves) s)
+                        .toArray(Block[]::new));
+
+        itemColors.registerItemColorHandler((stack, tintIndex) ->
+                        event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                BlocksTFC.getAllFruitTreeLeavesBlocks()
+                        .toArray(new BlockFruitTreeLeaves[0]));
 
         //=== Other ==================================================================================================//
 

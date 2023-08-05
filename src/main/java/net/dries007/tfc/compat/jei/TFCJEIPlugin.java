@@ -28,10 +28,11 @@ import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.items.ItemAnimalHide.HideType;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
-import net.dries007.tfc.objects.items.metal.ItemAnvil;
+import net.dries007.tfc.objects.items.metal.ItemMetalAnvil;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 import net.dries007.tfc.objects.recipes.UnmoldRecipe;
 import net.dries007.tfc.test.blocks.TFCBlocks;
+import net.dries007.tfc.test.items.TFCItems;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -119,7 +120,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 
         // Quern Recipes
         registry.addRecipeCatalyst(new ItemStack(TFCBlocks.QUERN), QUERN_UID);
-        registry.addRecipeCatalyst(new ItemStack(ItemsTFC.HANDSTONE), QUERN_UID);
+        registry.addRecipeCatalyst(new ItemStack(TFCItems.HANDSTONE), QUERN_UID);
 
         var quernList = TFCRegistries.QUERN.getValuesCollection()
                 .stream()
@@ -141,7 +142,7 @@ public final class TFCJEIPlugin implements IModPlugin {
         registry.addRecipes(heatList, HEAT_UID);
 
         // Anvil + Welding Recipes
-        for (var anvil : ItemAnvil.getAnvilStorage()) {
+        for (var anvil : ItemMetalAnvil.getAnvilStorage()) {
             registry.addRecipeCatalyst(new ItemStack(anvil), ANVIL_UID);
             registry.addRecipeCatalyst(new ItemStack(anvil), WELDING_UID);
         }
@@ -280,7 +281,7 @@ public final class TFCJEIPlugin implements IModPlugin {
         registry.addRecipes(clayknapRecipes, KNAP_CLAY_UID);
 
         // Fire Clay Knapping
-        registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRE_CLAY), KNAP_FIRECLAY_UID);
+        registry.addRecipeCatalyst(new ItemStack(TFCItems.FIRE_CLAY), KNAP_FIRECLAY_UID);
 
         var fireclayknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
                 .filter(recipe -> recipe.getType() == KnappingType.FIRE_CLAY)

@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.test.items.TFCItems;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -51,14 +51,11 @@ public class TEQuern extends TEInventory implements ITickable {
 
     @Override
     public boolean isItemValid(int slot, ItemStack stack) {
-        switch (slot) {
-            case SLOT_HANDSTONE:
-                return OreDictionaryHelper.doesStackMatchOre(stack, "handstone");
-            case SLOT_INPUT:
-                return QuernRecipe.get(stack) != null;
-            default:
-                return false;
-        }
+        return switch (slot) {
+            case SLOT_HANDSTONE -> OreDictionaryHelper.doesStackMatchOre(stack, "handstone");
+            case SLOT_INPUT -> QuernRecipe.get(stack) != null;
+            default -> false;
+        };
     }
 
     @Override
@@ -118,7 +115,13 @@ public class TEQuern extends TEInventory implements ITickable {
 
                 if (inventory.getStackInSlot(SLOT_HANDSTONE).isEmpty()) {
                     for (int i = 0; i < 15; i++) {
-                        world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + 0.5D, pos.getY() + 0.875D, pos.getZ() + 0.5D, (world.rand.nextDouble() - world.rand.nextDouble()) / 4, world.rand.nextDouble() / 4, (world.rand.nextDouble() - world.rand.nextDouble()) / 4, Item.getIdFromItem(ItemsTFC.HANDSTONE));
+                        world.spawnParticle(EnumParticleTypes.ITEM_CRACK,
+                                pos.getX() + 0.5D,
+                                pos.getY() + 0.875D,
+                                pos.getZ() + 0.5D,
+                                (world.rand.nextDouble() - world.rand.nextDouble()) / 4,
+                                world.rand.nextDouble() / 4,
+                                (world.rand.nextDouble() - world.rand.nextDouble()) / 4, Item.getIdFromItem(TFCItems.HANDSTONE));
                     }
                     world.playSound(null, pos, BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
                     world.playSound(null, pos, ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.6f);

@@ -3,10 +3,10 @@ package net.dries007.tfc.objects.items.rock;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.Rock;
 import net.dries007.tfc.api.types.rock.util.IRockItem;
 import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.util.ITooltipFlag;
@@ -26,6 +26,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemRock extends ItemTFC implements IRockItem {
@@ -35,7 +37,11 @@ public class ItemRock extends ItemTFC implements IRockItem {
     public ItemRock(Rock rock) {
         this.rock = rock;
 
-        TFCStorage.addRockItem(rock, this);
+        var blockRegistryName = String.format("rock/%s", rock);
+        setRegistryName(MOD_ID, blockRegistryName);
+        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setCreativeTab(CreativeTabsTFC.ROCK);
+
 
         OreDictionaryHelper.register(this, "rock");
         OreDictionaryHelper.register(this, "rock", rock);

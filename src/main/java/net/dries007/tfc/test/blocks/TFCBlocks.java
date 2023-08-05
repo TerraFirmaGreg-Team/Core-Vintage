@@ -15,7 +15,10 @@ import net.dries007.tfc.objects.blocks.*;
 import net.dries007.tfc.objects.blocks.devices.*;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeat;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeatGrass;
-import net.dries007.tfc.objects.items.itemblock.*;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockCrucible;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockPowderKeg;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
@@ -37,7 +40,6 @@ public class TFCBlocks {
     public static BlockBellows BELLOWS;
     public static BlockBloomery BLOOMERY;
     public static BlockNestBox NEST_BOX;
-    public static BlockSluice SLUICE;
     public static BlockLargeVessel FIRED_LARGE_VESSEL;
     public static BlockFirePit FIREPIT;
     public static BlockThatchBed THATCH_BED;
@@ -144,7 +146,6 @@ public class TFCBlocks {
         ITEM_BLOCKS.add(new ItemBlockTFC(BELLOWS = new BlockBellows()));
         ITEM_BLOCKS.add(new ItemBlockTFC(BLOOMERY = new BlockBloomery()));
         ITEM_BLOCKS.add(new ItemBlockTFC(NEST_BOX = new BlockNestBox()));
-        ITEM_BLOCKS.add(new ItemBlockSluice(SLUICE = new BlockSluice()));
         ITEM_BLOCKS.add(new ItemBlockLargeVessel(FIRED_LARGE_VESSEL = new BlockLargeVessel()));
         ITEM_BLOCKS.add(new ItemBlock(FIREPIT = new BlockFirePit()));
         ITEM_BLOCKS.add(new ItemBlock(PIT_KILN = new BlockPitKiln()));

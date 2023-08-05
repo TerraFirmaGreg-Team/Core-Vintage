@@ -1,6 +1,5 @@
 package net.dries007.tfc.world.classic.chunkdata;
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.Rock;
 import net.dries007.tfc.api.types.soil.Soil;
@@ -141,10 +140,6 @@ public final class ChunkDataTFC {
 
         this.lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
         this.lastUpdateYear = CalendarTFC.CALENDAR_TIME.getTotalYears();
-    }
-
-    public boolean canWork(int amount) {
-        return ConfigTFC.Devices.SLUICE.maxWorkChunk == 0 || chunkWorkage <= ConfigTFC.Devices.SLUICE.maxWorkChunk + amount;
     }
 
     public void addWork(int amount) {

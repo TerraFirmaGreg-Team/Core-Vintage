@@ -32,9 +32,9 @@ import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
 import net.dries007.tfc.compat.gregtech.stonetypes.StoneTypeHandler;
 import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
-import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.devices.BlockQuern;
+import net.dries007.tfc.objects.blocks.fluid.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 import net.dries007.tfc.objects.blocks.rock.BlockRockAnvil;
 import net.dries007.tfc.objects.blocks.rock.BlockRockRaw;
@@ -44,8 +44,8 @@ import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.effects.PotionEffectsTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.test.blocks.TFCBlocks;
+import net.dries007.tfc.test.items.TFCItems;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -245,7 +245,7 @@ public final class CommonEventHandler {
         // Drop shards from glass
         ItemStack stackAt = new ItemStack(Item.getItemFromBlock(state.getBlock()), 1, state.getBlock().damageDropped(state));
         if (!event.isSilkTouching() && OreDictionaryHelper.doesStackMatchOre(stackAt, "blockGlass")) {
-            event.getDrops().add(new ItemStack(ItemsTFC.GLASS_SHARD));
+            event.getDrops().add(new ItemStack(TFCItems.GLASS_SHARD));
         }
 
         // Apply durability modifier on tools

@@ -8,7 +8,7 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.test.items.TFCItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -47,7 +47,7 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
                 metalAmount += metalItem.getSmeltAmount(stack);
             }
         }
-        ItemStack bloom = new ItemStack(ItemsTFC.UNREFINED_BLOOM);
+        ItemStack bloom = new ItemStack(TFCItems.UNREFINED_BLOOM);
         IForgeable cap = bloom.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
         if (cap instanceof IForgeableMeasurableMetal capBloom) {
             capBloom.setMetalAmount(metalAmount);
@@ -63,7 +63,7 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
      * @return Bloom itemstack containing 100 units
      */
     public ItemStack getOutput() {
-        ItemStack bloom = new ItemStack(ItemsTFC.UNREFINED_BLOOM);
+        ItemStack bloom = new ItemStack(TFCItems.UNREFINED_BLOOM);
         IForgeable cap = bloom.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
         if (cap instanceof IForgeableMeasurableMetal capBloom) {
             capBloom.setMetalAmount(100);

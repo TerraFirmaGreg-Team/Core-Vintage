@@ -15,11 +15,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemDoorTFC extends ItemDoor implements IItemSize {
+public class ItemWoodDoor extends ItemDoor implements IItemSize {
 
     public final Wood wood;
 
-    public ItemDoorTFC(BlockWoodDoor blockWoodDoor) {
+    public ItemWoodDoor(BlockWoodDoor blockWoodDoor) {
         super(blockWoodDoor);
 
         wood = blockWoodDoor.getWood();

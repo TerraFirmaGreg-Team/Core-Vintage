@@ -4,7 +4,7 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.plant.PlantVariant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
-import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.test.items.TFCItems;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
@@ -116,7 +116,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
                 for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
                     if (Constants.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i)).getValue(AGE) + 1) / 4.0D) //+25% change for each age
                     {
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
+                        spawnAsEntity(worldIn, pos, new ItemStack(TFCItems.STRAW, 1));
                     }
                 }
             }

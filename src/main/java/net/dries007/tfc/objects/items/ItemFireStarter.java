@@ -5,6 +5,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.te.TEFirePit;
 import net.dries007.tfc.objects.te.TELogPile;
@@ -36,15 +37,21 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemFireStarter extends ItemTFC {
     public ItemFireStarter() {
+
+        setRegistryName(MOD_ID, "firestarter");
+        setTranslationKey(MOD_ID + ".firestarter");
+        setCreativeTab(CreativeTabsTFC.MISC);
         setMaxDamage(8);
         setMaxStackSize(1);
         setNoRepair();
+
         OreDictionaryHelper.register(this, "fire", "starter");
     }
 

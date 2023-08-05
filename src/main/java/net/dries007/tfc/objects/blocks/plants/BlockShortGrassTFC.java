@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks.plants;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.plant.PlantVariant;
-import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.test.items.TFCItems;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
@@ -48,7 +48,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
         } else if (!worldIn.isRemote && stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1) {
             if (Constants.RNG.nextDouble() <= (state.getValue(AGE) + 1) / 4.0D) //+25% change for each age
             {
-                spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
+                spawnAsEntity(worldIn, pos, new ItemStack(TFCItems.STRAW, 1));
             }
         }
         super.harvestBlock(worldIn, player, pos, state, te, stack);

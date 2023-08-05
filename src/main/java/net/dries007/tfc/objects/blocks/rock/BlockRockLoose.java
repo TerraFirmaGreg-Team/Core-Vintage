@@ -94,7 +94,7 @@ public class BlockRockLoose extends Block implements IRockBlock {
     @Override
     @SuppressWarnings("ConstantConditions")
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var itemStack = new ItemStack(TFCStorage.ITEMROCK_MAP.get(rock));
+        var itemStack = new ItemStack(TFCStorage.ROCK_ITEM.get(rock));
 
         if (playerIn.addItemStackToInventory(itemStack)) {
             worldIn.setBlockToAir(pos);
@@ -108,7 +108,7 @@ public class BlockRockLoose extends Block implements IRockBlock {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(TFCStorage.ITEMROCK_MAP.get(rock)));
+        drops.add(new ItemStack(TFCStorage.ROCK_ITEM.get(rock)));
     }
 
     @Override
@@ -119,7 +119,7 @@ public class BlockRockLoose extends Block implements IRockBlock {
     @Nonnull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.ITEMROCK_MAP.get(rock));
+        return new ItemStack(TFCStorage.ROCK_ITEM.get(rock));
     }
 
     @Nonnull

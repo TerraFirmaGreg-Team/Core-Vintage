@@ -8,9 +8,9 @@ import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemFireStarter;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.objects.te.TEFirePit;
+import net.dries007.tfc.test.items.TFCItems;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -352,7 +352,7 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(ItemsTFC.WOOD_ASH, 3 + RNG.nextInt(5)));
+        drops.add(new ItemStack(TFCItems.WOOD_ASH, 3 + RNG.nextInt(5)));
     }
 
     @Nullable

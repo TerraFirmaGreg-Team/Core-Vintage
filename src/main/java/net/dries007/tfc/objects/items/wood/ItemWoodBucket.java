@@ -35,10 +35,10 @@ import static net.minecraftforge.fluids.BlockFluidBase.LEVEL;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemWoodenBucket extends ItemTFC {
+public class ItemWoodBucket extends ItemTFC {
     private static final int CAPACITY = Fluid.BUCKET_VOLUME;
 
-    public ItemWoodenBucket() {
+    public ItemWoodBucket() {
         setHasSubtypes(true);
         setContainerItem(this);
 

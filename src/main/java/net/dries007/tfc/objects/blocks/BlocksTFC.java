@@ -13,6 +13,9 @@ import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.dries007.tfc.api.types.soil.util.ISoilBlock;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.agriculture.*;
+import net.dries007.tfc.objects.blocks.fluid.BlockFluidHotWater;
+import net.dries007.tfc.objects.blocks.fluid.BlockFluidTFC;
+import net.dries007.tfc.objects.blocks.fluid.BlockFluidWater;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeat;
@@ -272,7 +275,6 @@ public final class BlocksTFC {
         register(TEQuern.class, "quern");
         register(TELargeVessel.class, "large_vessel");
         register(TEPowderKeg.class, "powderkeg");
-        register(TESluice.class, "sluice");
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

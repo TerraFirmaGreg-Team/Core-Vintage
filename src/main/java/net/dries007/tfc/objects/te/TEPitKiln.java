@@ -6,8 +6,8 @@ import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.blocks.devices.BlockPitKiln;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.test.blocks.TFCBlocks;
+import net.dries007.tfc.test.items.TFCItems;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -309,7 +309,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
 
     private void addStrawBlock() {
         for (int i = 0; i < 4; i++) {
-            addStraw(new ItemStack(ItemsTFC.STRAW));
+            addStraw(new ItemStack(TFCItems.STRAW));
         }
     }
 

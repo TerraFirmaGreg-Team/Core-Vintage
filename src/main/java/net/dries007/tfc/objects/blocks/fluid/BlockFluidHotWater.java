@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.blocks;
+package net.dries007.tfc.objects.blocks.fluid;
 
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;

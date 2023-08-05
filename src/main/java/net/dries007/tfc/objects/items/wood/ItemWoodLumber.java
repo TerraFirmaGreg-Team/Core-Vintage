@@ -16,11 +16,11 @@ import java.util.Map;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemLumberTFC extends ItemTFC {
-    private static final Map<Wood, ItemLumberTFC> MAP = new HashMap<>();
+public class ItemWoodLumber extends ItemTFC {
+    private static final Map<Wood, ItemWoodLumber> MAP = new HashMap<>();
     public final Wood wood;
 
-    public ItemLumberTFC(Wood wood) {
+    public ItemWoodLumber(Wood wood) {
         this.wood = wood;
         if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
         setMaxDamage(0);
@@ -29,7 +29,7 @@ public class ItemLumberTFC extends ItemTFC {
         OreDictionaryHelper.register(this, "lumber", wood.getName());
     }
 
-    public static ItemLumberTFC get(Tree wood) {
+    public static ItemWoodLumber get(Tree wood) {
         return MAP.get(wood);
     }
 

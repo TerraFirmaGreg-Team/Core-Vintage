@@ -3,13 +3,14 @@ package net.dries007.tfc.api.types.food;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import static net.dries007.tfc.api.types.food.Food.Category.*;
 
-public enum Food {
+public enum Food implements IStringSerializable {
     BANANA(FRUIT, 4, 0.2f, 0f, 0f, 0f, 1f, 0f, 0f, 2f),
     BLACKBERRY(FRUIT, 4, 0.2f, 5f, 0f, 0f, 0.75f, 0f, 0f, 4.9f),
     BLUEBERRY(FRUIT, 4, 0.2f, 5f, 0f, 0f, 0.75f, 0f, 0f, 4.9f),
@@ -175,7 +176,13 @@ public enum Food {
         return oreDictNames;
     }
 
-    public enum Category {
+    @Nonnull
+    @Override
+    public String getName() {
+        return name().toLowerCase();
+    }
+
+    public enum Category implements IStringSerializable {
         FRUIT,
         GRAIN,
         BREAD,
@@ -193,6 +200,12 @@ public enum Food {
                 }
             }
             return false;
+        }
+
+        @Nonnull
+        @Override
+        public String getName() {
+            return name().toLowerCase();
         }
     }
 }

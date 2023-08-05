@@ -1,6 +1,5 @@
 package net.dries007.tfc.test.proxy;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.objects.te.*;
 import net.minecraft.block.Block;
@@ -16,11 +15,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.function.Function;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.registries.TFCStorage.*;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class CommonProxy {
-
-
     @SubscribeEvent
     @SuppressWarnings("ConstantConditions")
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -28,43 +26,43 @@ public class CommonProxy {
 
         //=== Rock ===================================================================================================//
 
-        for (var stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
+        for (var stoneTypeBlock : ROCK_BLOCKS.values()) {
             r.register((Block) stoneTypeBlock);
         }
 
         //=== Soil ===================================================================================================//
 
-        for (var soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
+        for (var soilTypeBlock : SOIL_BLOCKS.values()) {
             r.register((Block) soilTypeBlock);
         }
 
         //=== Plant ==================================================================================================//
 
-        for (var plantTypeBlock : TFCStorage.PLANT_BLOCKS.values()) {
+        for (var plantTypeBlock : PLANT_BLOCKS.values()) {
             r.register((Block) plantTypeBlock);
         }
 
         //=== Wood ===================================================================================================//
 
-        for (var woodTypeBlock : TFCStorage.WOOD_BLOCKS.values()) {
+        for (var woodTypeBlock : WOOD_BLOCKS.values()) {
             r.register((Block) woodTypeBlock);
         }
 
         //=== Alabaster ==============================================================================================//
 
-        for (var alabasterBlock : TFCStorage.ALABASTER_BLOCK.values()) {
+        for (var alabasterBlock : ALABASTER_BLOCK.values()) {
             r.register(alabasterBlock);
         }
 
         //=== Groundcover ============================================================================================//
 
-        for (var groundcoverBlock : TFCStorage.GROUNDCOVER_BLOCK.values()) {
+        for (var groundcoverBlock : GROUNDCOVER_BLOCK.values()) {
             r.register(groundcoverBlock);
         }
 
         //=== Other ==================================================================================================//
 
-        TFCStorage.ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
+        ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
 
 
         //=== TileEntity =============================================================================================//
@@ -106,47 +104,47 @@ public class CommonProxy {
 
         //=== Rock ===================================================================================================//
 
-        for (var stoneTypeBlock : TFCStorage.ROCK_BLOCKS.values()) {
+        for (var stoneTypeBlock : ROCK_BLOCKS.values()) {
             var itemBlock = stoneTypeBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
         //=== Soil ===================================================================================================//
 
-        for (var soilTypeBlock : TFCStorage.SOIL_BLOCKS.values()) {
+        for (var soilTypeBlock : SOIL_BLOCKS.values()) {
             var itemBlock = soilTypeBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
         //=== Plant ==================================================================================================//
 
-        for (var plantTypeBlock : TFCStorage.PLANT_BLOCKS.values()) {
+        for (var plantTypeBlock : PLANT_BLOCKS.values()) {
             var itemBlock = plantTypeBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
         //=== Wood ===================================================================================================//
 
-        for (var woodTypeBlock : TFCStorage.WOOD_BLOCKS.values()) {
+        for (var woodTypeBlock : WOOD_BLOCKS.values()) {
             var itemBlock = woodTypeBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
         //=== Alabaster ==============================================================================================//
 
-        for (var alabasterBlock : TFCStorage.ALABASTER_BLOCK.values()) {
+        for (var alabasterBlock : ALABASTER_BLOCK.values()) {
             r.register(createItemBlock(alabasterBlock));
         }
 
         //=== Groundcover ==============================================================================================//
 
-//		for (var groundcoverBlock : TFCStorage.GROUNDCOVER_BLOCK.values()) {
+//		for (var groundcoverBlock : GROUNDCOVER_BLOCK.values()) {
 //			r.register(createItemBlock(groundcoverBlock, ItemBlock::new));
 //		}
 
         //=== Other ==================================================================================================//
 
-        TFCStorage.ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
+        ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
 
 
     }

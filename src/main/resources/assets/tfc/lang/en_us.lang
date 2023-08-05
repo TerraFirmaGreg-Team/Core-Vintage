@@ -1435,7 +1435,6 @@ tfc.tooltip.large_vessel_seal=Seal Large Vessel
 tfc.tooltip.large_vessel_unseal=Unseal Large Vessel
 tfc.tooltip.powderkeg_seal=Seal Powderkeg
 tfc.tooltip.powderkeg_unseal=Unseal Powderkeg
-tfc.tooltip.goldpan.chunkworked=This area seems to be overworked. You probably wouldn't find much.
 tfc.tooltip.smithing_skill=Skill Bonus: %0.1f%%
 tfc.tooltip.crucible_alloy=Contains %1$d mB of %2$s
 tfc.tooltip.crucible_less_than_one=< 1 unit
@@ -2056,28 +2055,6 @@ config.tfc.devices.small_vessel.tank=Small Vessel Storage
 config.tfc.devices.small_vessel.tank.tooltip=How much metal (units / mB) can a small vessel hold?
 
 
-### Sluice
-config.tfc.devices.sluice=Sluice
-
-config.tfc.devices.sluice.maxWorkChunk=Max Chunk Work
-config.tfc.devices.sluice.maxWorkChunk.tooltip=The amount of times a chunk can be worked (300 = default, 0 = disable). Note: While sluices increase work by 1, Goldpan increase by 6.
-
-config.tfc.devices.sluice.radius=Sluice Chunk Radius
-config.tfc.devices.sluice.radius.tooltip=The radius sluice works, in chunks.
-
-config.tfc.devices.sluice.ticks=Ticks
-config.tfc.devices.sluice.ticks.tooltip=The amount of ticks a sluice uses to work.
-
-config.tfc.devices.sluice.oreChance=Ore Chance
-config.tfc.devices.sluice.oreChance.tooltip=Chance that a sluice operation produce small ore.
-
-config.tfc.devices.sluice.gemChance=Gem Chance
-config.tfc.devices.sluice.gemChance.tooltip=Chance that a sluice operation produce gems.
-
-config.tfc.devices.sluice.diamondGemChance=Diamond Chance
-config.tfc.devices.sluice.diamondGemChance.tooltip=Chance that a diamond is dropped when sluice produce gems.
-
-
 ## Jug
 config.tfc.devices.jug.dumpWaterOnShiftRightClick=Dump Water on Shift Right-Clicking
 config.tfc.devices.jug.dumpWaterOnShiftRightClick.tooltip=Enable Shift-Right clicking of Jars to dump water out. Enabling this will not pour an actual water block onto the ground.
@@ -2516,8 +2493,6 @@ itemGroup.tfc.flora=TFC Flora
 
 
 
-
-
 ### ======================= ITEMS ======================
 
 item.tfc.wand.name=TFC Debug Wand
@@ -2645,12 +2620,6 @@ item.tfc.wood.door.acacia.name=Acacia Door
 item.tfc.wood.door.rosewood.name=Rosewood Door
 item.tfc.wood.door.blackwood.name=Blackwood Door
 item.tfc.wood.door.palm.name=Palm Door
-
-item.tfc.goldpan.empty.name=Empty Goldpan
-item.tfc.goldpan.sand.name=Goldpan with Sand
-item.tfc.goldpan.clay.name=Goldpan with Clay
-item.tfc.goldpan.dirt.name=Goldpan with Dirt
-item.tfc.goldpan.gravel.name=Goldpan with Gravel
 
 
 item.tfc.powder.flux.name=Flux

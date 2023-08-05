@@ -49,7 +49,7 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
         var blockRegistryName = String.format("rock/%s/%s/%s", rockType, rockVariant, rock);
         this.setRegistryName(MOD_ID, blockRegistryName);
         this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        this.setCreativeTab(CreativeTabsTFC.ROCK);
 
         this.setSoundType(SoundType.STONE);
         this.setHardness(getFinalHardness());

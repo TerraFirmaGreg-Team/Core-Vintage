@@ -26,7 +26,7 @@ public class BlockFireClay extends Block implements IItemSize {
         setSoundType(SoundType.GROUND);
         setHardness(1.0F);
 
-        setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        setCreativeTab(CreativeTabsTFC.ROCK);
         setRegistryName(MOD_ID, "fire_clay_block");
         setTranslationKey(MOD_ID + ".fire_clay_block");
     }

@@ -59,7 +59,7 @@ public class BlockRockMossy extends Block implements IRockBlock, IItemSize {
         this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockType + "/" + rockVariant);
 
         var blockRegistryName = String.format("rock/%s/%s/%s", rockType, rockVariant, rock);
-        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        this.setCreativeTab(CreativeTabsTFC.ROCK);
         this.setSoundType(SoundType.STONE);
         this.setHardness(getFinalHardness());
         this.setHarvestLevel("pickaxe", 0);

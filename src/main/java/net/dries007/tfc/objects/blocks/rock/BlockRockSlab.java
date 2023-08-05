@@ -61,7 +61,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
         setLightOpacity(255);
         setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
-        setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
     }
 

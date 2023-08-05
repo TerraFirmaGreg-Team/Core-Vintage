@@ -13,7 +13,7 @@ public class BlockAggregate extends BlockGravel {
         setSoundType(SoundType.SAND);
         setHardness(0.4f);
 
-        setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        setCreativeTab(CreativeTabsTFC.ROCK);
         setRegistryName(MOD_ID, "aggregate");
         setTranslationKey(MOD_ID + ".aggregate");
     }

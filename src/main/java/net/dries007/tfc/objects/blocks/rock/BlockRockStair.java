@@ -49,7 +49,7 @@ public class BlockRockStair extends BlockStairs implements IRockBlock {
         String blockRegistryName = String.format("rock/%s/%s/%s", rockType, rockVariant, rock);
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);

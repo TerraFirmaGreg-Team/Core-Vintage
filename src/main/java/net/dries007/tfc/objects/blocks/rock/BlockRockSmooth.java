@@ -48,7 +48,7 @@ public class BlockRockSmooth extends Block implements IRockBlock, IItemSize {
         this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
         var blockRegistryName = String.format("rock/%s/%s", rockVariant, rock);
-        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        this.setCreativeTab(CreativeTabsTFC.ROCK);
         this.setSoundType(SoundType.STONE);
         this.setHardness(getFinalHardness());
         this.setHarvestLevel("pickaxe", 0);

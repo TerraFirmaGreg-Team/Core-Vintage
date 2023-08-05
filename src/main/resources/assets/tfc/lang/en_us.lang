@@ -526,6 +526,39 @@ tile.tfc.rock.wall.brick.marble.name=Brick Wall (Marble)
 tile.tfc.rock.wall.smooth.marble.name=Smooth Wall (Marble)
 tile.tfc.rock.pressure_plate.marble.name=Pressure Plate (Marble)
 
+# Soil
+
+tile.tfc.soil.dirt.silt.name=Silt Dirt
+tile.tfc.soil.grass.silt.name=Silt Grass
+tile.tfc.soil.dry_grass.silt.name=Silt Dry Grass
+tile.tfc.soil.path.silt.name=Silt Path
+tile.tfc.soil.clay.silt.name=Silt Clay
+tile.tfc.soil.clay_grass.silt.name=Silt Clay Grass
+tile.tfc.soil.farmland.silt.name=Silt Farmland
+
+tile.tfc.soil.dirt.loam.name=Loam Dirt
+tile.tfc.soil.grass.loam.name=Loam Grass
+tile.tfc.soil.dry_grass.loam.name=Loam Dry Grass
+tile.tfc.soil.path.loam.name=Loam Path
+tile.tfc.soil.clay.loam.name=Loam Clay
+tile.tfc.soil.clay_grass.loam.name=Loam Clay Grass
+tile.tfc.soil.farmland.loam.name=Loam Farmland
+
+tile.tfc.soil.dirt.sandy_loam.name=Sandy Loam Dirt
+tile.tfc.soil.grass.sandy_loam.name=Sandy Loam Grass
+tile.tfc.soil.dry_grass.sandy_loam.name=Sandy Loam Dry Grass
+tile.tfc.soil.path.sandy_loam.name=Sandy Loam Path
+tile.tfc.soil.clay.sandy_loam.name=Sandy Loam Clay
+tile.tfc.soil.clay_grass.sandy_loam.name=Sandy Loam Clay Grass
+tile.tfc.soil.farmland.sandy_loam.name=Sandy Loam Farmland
+
+tile.tfc.soil.dirt.silty_loam.name=Silty Loam Dirt
+tile.tfc.soil.grass.silty_loam.name=Silty Loam Grass
+tile.tfc.soil.dry_grass.silty_loam.name=Silty Loam Dry Grass
+tile.tfc.soil.path.silty_loam.name=Silty Loam Path
+tile.tfc.soil.clay.silty_loam.name=Silty Loam Clay
+tile.tfc.soil.clay_grass.silty_loam.name=Silty Loam Clay Grass
+tile.tfc.soil.farmland.silty_loam.name=Silty Loam Farmland
 
 # Alabaster
 
@@ -3129,17 +3162,16 @@ tfc.enum.growstatus.fully_grown=This plant is fully grown
 
 # Creative tabs
 
-itemGroup.tfc.misc=TFC Misc
-itemGroup.tfc.rock.blocks=TFC Rock & Soil Blocks
-itemGroup.tfc.rock.items=TFC Rock Items
-itemGroup.tfc.wood=TFC Wood
-itemGroup.tfc.decorations=TFC Decorations
-itemGroup.tfc.pottery=TFC Pottery
-itemGroup.tfc.metal=TFC Metal
-itemGroup.tfc.gems=TFC Gems
-itemGroup.tfc.food=TFC Foodstuffs
-itemGroup.tfc.plants=TFC Plants
-itemGroup.tfc.flora=TFC Flora
+itemGroup.tfc.rock=TFC: Rock
+itemGroup.tfc.earth=TFC: Earth
+itemGroup.tfc.wood=TFC: Wood
+itemGroup.tfc.decorations=TFC: Decorations
+itemGroup.tfc.metal=TFC: Metal
+itemGroup.tfc.pottery=TFC: Pottery
+itemGroup.tfc.food=TFC: Foodstuffs
+itemGroup.tfc.plants=TFC: Plants
+itemGroup.tfc.flora=TFC: Flora
+itemGroup.tfc.misc=TFC: Misc
 
 # TFC death messages
 

@@ -70,7 +70,7 @@ public class BlockRockRaw extends Block implements IRockBlock, IItemSize {
         FallingBlockManager.registerFallable(this, spec);
 
         var blockRegistryName = String.format("rock/%s/%s", rockVariant, rock);
-        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        this.setCreativeTab(CreativeTabsTFC.ROCK);
         this.setSoundType(SoundType.STONE);
         this.setHardness(getFinalHardness());
         this.setHarvestLevel("pickaxe", 0);

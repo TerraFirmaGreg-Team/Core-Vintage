@@ -42,7 +42,7 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
         this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
 
         String blockRegistryName = String.format("rock/%s/%s", rockVariant, rock);
-        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        this.setCreativeTab(CreativeTabsTFC.ROCK);
         this.setSoundType(SoundType.STONE);
         this.setHardness(0.5f);
         this.setRegistryName(MOD_ID, blockRegistryName);

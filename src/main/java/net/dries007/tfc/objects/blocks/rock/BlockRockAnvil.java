@@ -70,7 +70,7 @@ public class BlockRockAnvil extends Block implements IRockBlock, IItemSize {
 
         var blockRegistryName = String.format("rock/%s/%s", rockVariant, rock);
         this.setSoundType(SoundType.STONE);
-        this.setCreativeTab(CreativeTabsTFC.ROCK_STUFFS);
+        this.setCreativeTab(CreativeTabsTFC.ROCK);
         this.setHardness(getFinalHardness());
         this.setHarvestLevel("pickaxe", 0);
         this.setRegistryName(MOD_ID, blockRegistryName);

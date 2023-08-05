@@ -3,7 +3,6 @@ package net.dries007.tfc.compat.gregtech.items.tools.behaviors;
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import gregtech.common.blocks.BlockOre;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.events.ProspectEvent;
@@ -38,7 +37,7 @@ public class PropickBehavior implements IToolBehavior {
 
     @Override
     public void addBehaviorNBT(@Nonnull ItemStack stack, @Nonnull NBTTagCompound tag) {
-        tag.setBoolean(TFGToolHelper.CHISEL_KEY, true);
+        tag.setBoolean(TFGToolHelper.PROSPECTOR_KEY, true);
     }
 
     @Override
@@ -52,21 +51,17 @@ public class PropickBehavior implements IToolBehavior {
 
     @Override
     @Nonnull
-    public EnumActionResult onItemUse(@Nonnull EntityPlayer player, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nullable EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
+    public EnumActionResult onItemUse(@Nonnull EntityPlayer player, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nullable EnumFacing facing, float hitX, float hitY, float hitZ) {
         IBlockState state = worldIn.getBlockState(pos);
-        if (facing != null)
-        {
+        if (facing != null) {
             SoundType soundType = state.getBlock().getSoundType(state, worldIn, pos, player);
             worldIn.playSound(player, pos, soundType.getHitSound(), SoundCategory.BLOCKS, 1.0f, soundType.getPitch());
 
-            if (!worldIn.isRemote)
-            {
+            if (!worldIn.isRemote) {
                 ProspectEvent event;
                 float falseNegativeChance = 0.3f; // Classic value was random(100) >= (60 + rank)
                 ProspectingSkill skill = CapabilityPlayerData.getSkill(player, SkillType.PROSPECTING);
-                if (skill != null)
-                {
+                if (skill != null) {
                     falseNegativeChance = 0.3f - (0.1f * skill.getTier().ordinal());
                 }
 
@@ -81,10 +76,12 @@ public class PropickBehavior implements IToolBehavior {
                  * more "random" results.
                  */
                 RANDOM.setSeed((pos.getX() * 92853) ^ (pos.getY() * 1959302) ^ (pos.getZ() * 2839402));
-                ItemStack targetStack = getOreStack(worldIn, pos, state, false);
-                if (!targetStack.isEmpty()) {
+
+                var block = worldIn.getBlockState(pos).getBlock();
+
+                if (block instanceof BlockOre blockOre) {
                     // Just clicked on an ore block
-                    event = new ProspectEvent.Server(player, pos, ProspectResult.Type.values()[ProspectResult.Type.FOUND.ordinal()], targetStack);
+                    event = new ProspectEvent.Server(player, pos, ProspectResult.Type.values()[ProspectResult.Type.FOUND.ordinal()], blockOre.material.getLocalizedName());
 
                     // Increment skill
                     if (skill != null) {
@@ -104,12 +101,12 @@ public class PropickBehavior implements IToolBehavior {
                     else {
                         // Found something
                         ProspectResult result = (ProspectResult) results.toArray()[RANDOM.nextInt(results.size())];
-                        event = new ProspectEvent.Server(player, pos, ProspectResult.Type.values()[result.getType().ordinal()], result.ore);
+                        event = new ProspectEvent.Server(player, pos, ProspectResult.Type.values()[result.getType().ordinal()], result.materialName);
                     }
                 }
 
                 MinecraftForge.EVENT_BUS.post(event);
-                PacketProspectResult packet = new PacketProspectResult(event.getBlockPos(), event.getResultType(), event.getVein());
+                PacketProspectResult packet = new PacketProspectResult(event.getBlockPos(), event.getResultType(), event.getMaterialName());
                 TerraFirmaCraft.getNetwork().sendTo(packet, (EntityPlayerMP) player);
             }
             else {
@@ -137,11 +134,11 @@ public class PropickBehavior implements IToolBehavior {
             var block = world.getBlockState(pos).getBlock();
 
             if (block instanceof BlockOre blockOre) {
-                if (results.containsKey(blockOre.material.getName())) {
-                    results.get(blockOre.material.getName()).score += 1;
+                if (results.containsKey(blockOre.material.getLocalizedName())) {
+                    results.get(blockOre.material.getLocalizedName()).score += 1;
                 }
                 else {
-                    results.put(blockOre.material.getName(), new ProspectResult(new ItemStack(blockOre), 1));
+                    results.put(blockOre.material.getLocalizedName(), new ProspectResult(blockOre.material.getLocalizedName(), 1));
                 }
             }
 
@@ -149,24 +146,12 @@ public class PropickBehavior implements IToolBehavior {
         return results.values();
     }
 
-    @Nonnull
-    private ItemStack getOreStack(World world, BlockPos pos, IBlockState state, boolean ignoreGrade)
-    {
-        Block block = state.getBlock();
-        if (block instanceof BlockOre blockOre) {
-            return blockOre.getPickBlock(state, null, world, pos, null);
-        }
-        return ItemStack.EMPTY;
-    }
-
-    private void addHitBlockParticle(World world, BlockPos pos, EnumFacing side, IBlockState state)
-    {
+    private void addHitBlockParticle(World world, BlockPos pos, EnumFacing side, IBlockState state) {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
         AxisAlignedBB axisalignedbb = state.getBoundingBox(world, pos);
-        for (int i = 0; i < 2; i++)
-        {
+        for (int i = 0; i < 2; i++) {
             double xOffset = x + RANDOM.nextDouble() * (axisalignedbb.maxX - axisalignedbb.minX - 0.2D) + 0.1D + axisalignedbb.minX;
             double yOffset = y + RANDOM.nextDouble() * (axisalignedbb.maxY - axisalignedbb.minY - 0.2D) + 0.1D + axisalignedbb.minY;
             double zOffset = z + RANDOM.nextDouble() * (axisalignedbb.maxZ - axisalignedbb.minZ - 0.2D) + 0.1D + axisalignedbb.minZ;
@@ -185,11 +170,11 @@ public class PropickBehavior implements IToolBehavior {
     }
 
     public static final class ProspectResult {
-        private final ItemStack ore;
+        private final String materialName;
         private double score;
 
-        ProspectResult(ItemStack itemStack, double num) {
-            ore = itemStack;
+        ProspectResult(String materialName, double num) {
+            this.materialName = materialName;
             score = num;
         }
 

@@ -1,9 +1,7 @@
 package net.dries007.tfc.api.events;
 
-import net.dries007.tfc.compat.gregtech.items.tools.behaviors.PropickBehavior;
 import net.dries007.tfc.compat.gregtech.items.tools.behaviors.PropickBehavior.ProspectResult.Type;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.relauncher.Side;
@@ -19,14 +17,14 @@ public abstract class ProspectEvent extends Event {
     private final EntityPlayer player;
     private final BlockPos pos;
     private final Type type;
-    private final ItemStack vein;
+    private final String materialName;
 
-    protected ProspectEvent(Side side, EntityPlayer player, BlockPos pos, Type type, ItemStack vein) {
+    protected ProspectEvent(Side side, EntityPlayer player, BlockPos pos, Type type, String materialName) {
         this.side = side;
         this.player = player;
         this.pos = pos;
         this.type = type;
-        this.vein = vein;
+        this.materialName = materialName;
     }
 
     public Side getSide() {
@@ -45,19 +43,19 @@ public abstract class ProspectEvent extends Event {
         return type;
     }
 
-    public ItemStack getVein() {
-        return vein;
+    public String getMaterialName() {
+        return materialName;
     }
 
     public static class Server extends ProspectEvent {
-        public Server(EntityPlayer player, BlockPos pos, Type type, ItemStack vein) {
-            super(Side.SERVER, player, pos, type, vein);
+        public Server(EntityPlayer player, BlockPos pos, Type type, String materialName) {
+            super(Side.SERVER, player, pos, type, materialName);
         }
     }
 
     public static class Client extends ProspectEvent {
-        public Client(EntityPlayer player, BlockPos pos, Type type, ItemStack vein) {
-            super(Side.CLIENT, player, pos, type, vein);
+        public Client(EntityPlayer player, BlockPos pos, Type type, String materialName) {
+            super(Side.CLIENT, player, pos, type, materialName);
         }
     }
 }

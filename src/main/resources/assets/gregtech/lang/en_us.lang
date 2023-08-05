@@ -43,6 +43,7 @@ item.material.oreprefix.toolHeadSense=%s Sense Head
 item.material.oreprefix.oreChalk=Chalk %s Ore
 item.material.oreprefix.oreChert=Chert %s Ore
 item.material.oreprefix.oreConglomerate=Conglomerate %s Ore
+item.material.oreprefix.oreClaystone=Claystone %s Ore
 item.material.oreprefix.oreDacite=Dacite %s Ore
 item.material.oreprefix.oreDolomite=Dolomite %s Ore
 item.material.oreprefix.oreGabbro=Gabbro %s Ore

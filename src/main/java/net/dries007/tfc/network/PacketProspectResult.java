@@ -19,17 +19,17 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class PacketProspectResult implements IMessage {
     private BlockPos pos;
     private Type type;
-    private ItemStack itemStack;
+    private String materialName;
 
     @SuppressWarnings("unused")
     @Deprecated
     public PacketProspectResult() {
     }
 
-    public PacketProspectResult(BlockPos pos, Type type, ItemStack itemStack) {
+    public PacketProspectResult(BlockPos pos, Type type, String materialName) {
         this.pos = pos;
         this.type = type;
-        this.itemStack = itemStack;
+        this.materialName = materialName;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class PacketProspectResult implements IMessage {
         type = Type.valueOf(buf.readByte());
 
         if (type != Type.NOTHING) {
-            itemStack = ByteBufUtils.readItemStack(buf);
+            materialName = ByteBufUtils.readUTF8String(buf);
         }
     }
 
@@ -48,7 +48,7 @@ public class PacketProspectResult implements IMessage {
         buf.writeByte(type.ordinal());
 
         if (type != Type.NOTHING) {
-            ByteBufUtils.writeItemStack(buf, itemStack);
+            ByteBufUtils.writeUTF8String(buf, materialName);
         }
     }
 
@@ -60,12 +60,12 @@ public class PacketProspectResult implements IMessage {
                 if (player != null) {
                     ITextComponent text = new TextComponentTranslation(message.type.translation);
                     if (message.type != Type.NOTHING) {
-                        text.appendText(" ").appendSibling(new TextComponentTranslation(message.itemStack.getDisplayName()));
+                        text.appendText(" ").appendSibling(new TextComponentTranslation(message.materialName));
                     }
                     player.sendStatusMessage(text, ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
                 }
 
-                ProspectEvent event = new ProspectEvent.Client(player, message.pos, message.type, message.itemStack);
+                ProspectEvent event = new ProspectEvent.Client(player, message.pos, message.type, message.materialName);
                 MinecraftForge.EVENT_BUS.post(event);
             });
             return null;

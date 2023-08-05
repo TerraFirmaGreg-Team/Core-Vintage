@@ -343,7 +343,7 @@ public final class ClientRegisterEvents {
                         event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
                 TFCStorage.PLANT_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getPlantVariant() == SHORT_GRASS && x.getPlantVariant() == TALL_GRASS)
+                        .filter(x -> x.getPlantVariant() == SHORT_GRASS || x.getPlantVariant() == TALL_GRASS)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 

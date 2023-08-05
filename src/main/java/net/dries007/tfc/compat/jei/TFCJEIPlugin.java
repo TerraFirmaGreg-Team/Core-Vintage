@@ -19,6 +19,7 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.Rock;
 import net.dries007.tfc.client.gui.*;
+import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.jei.categories.*;
 import net.dries007.tfc.compat.jei.util.TFCInventoryGuiHandler;
 import net.dries007.tfc.compat.jei.wrappers.*;
@@ -249,7 +250,7 @@ public final class TFCJEIPlugin implements IModPlugin {
         registry.addRecipes(castingList, CASTING_UID);
 
         // Chisel Recipes
-        // TODO: Add recipe catalyst
+        registry.addRecipeCatalyst(TFGToolItems.CHISEL.get(Materials.Iron), CHISEL_UID);
 
         var chiselList = TFCRegistries.CHISEL.getValuesCollection()
                 .stream()

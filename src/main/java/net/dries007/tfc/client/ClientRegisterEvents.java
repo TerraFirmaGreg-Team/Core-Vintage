@@ -13,13 +13,11 @@ import net.dries007.tfc.api.types.wood.util.IWoodBlock;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.render.*;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
-import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
-import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.objects.items.ItemGoldPan;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
@@ -111,11 +109,6 @@ public final class ClientRegisterEvents {
             ModelLoader.setCustomModelResourceLocation(ItemsTFC.UNFIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC.UNFIRED_VESSEL_GLAZED.getRegistryName().toString()));
             ModelLoader.setCustomModelResourceLocation(ItemsTFC.FIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC.FIRED_VESSEL_GLAZED.getRegistryName().toString()));
         }
-
-        // Gems
-        for (ItemGem item : ItemsTFC.getAllGemItems())
-            for (Gem.Grade grade : Gem.Grade.values())
-                registerEnumBasedMetaItems("gem", grade, item);
 
         // Gold Pan
         ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES).map(e -> new ResourceLocation(MOD_ID, "goldpan/" + e)).toArray(ResourceLocation[]::new));

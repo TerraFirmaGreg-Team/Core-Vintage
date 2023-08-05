@@ -14,7 +14,6 @@ import net.dries007.tfc.api.types.food.Food;
 import net.dries007.tfc.api.types.rock.Rock;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
-import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.ceramics.*;
@@ -160,7 +159,7 @@ public final class ItemsTFC {
 
     private static ImmutableList<Item> allSimpleItems;
     private static ImmutableList<ItemMold> allMoldItems;
-    private static ImmutableList<ItemGem> allGemItems;
+
 
     public static ImmutableList<Item> getAllSimpleItems() {
         return allSimpleItems;
@@ -170,9 +169,6 @@ public final class ItemsTFC {
         return allMoldItems;
     }
 
-    public static ImmutableList<ItemGem> getAllGemItems() {
-        return allGemItems;
-    }
 
     @SuppressWarnings("ConstantConditions")
     @SubscribeEvent
@@ -195,13 +191,6 @@ public final class ItemsTFC {
         register(r, "wooden_bucket", new ItemWoodenBucket(), WOOD); //not a simple item, use a custom model
         //register(r, "metal/bucket/blue_steel", new ItemMetalBucket(Metal.BLUE_STEEL, Metal.ItemType.BUCKET), METAL); //not a simple item, use a custom model
         //register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET), METAL); //not a simple item, use a custom model
-
-        {
-            Builder<ItemGem> b = new Builder<>();
-            for (Gem gem : Gem.values())
-                b.add(register(r, "gem/" + gem.name().toLowerCase(), new ItemGem(gem), GEMS));
-            allGemItems = b.build();
-        }
 
         /*
         for (Metal.ItemType type : Metal.ItemType.values())

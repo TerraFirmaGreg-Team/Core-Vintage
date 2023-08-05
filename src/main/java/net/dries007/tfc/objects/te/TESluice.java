@@ -3,11 +3,8 @@ package net.dries007.tfc.objects.te;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.rock.util.IRockBlock;
-import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.devices.BlockSluice;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.items.ItemGem;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -70,15 +67,7 @@ public class TESluice extends TEBase implements ITickable {
                     } else if (Constants.RNG.nextDouble() < ConfigTFC.Devices.SLUICE.gemChance) {
                         ChunkDataTFC chunkData = getChunkData(false);
                         if (chunkData != null) {
-                            Gem dropGem;
-                            if (Constants.RNG.nextDouble() < ConfigTFC.Devices.SLUICE.diamondGemChance) {
-                                dropGem = Gem.DIAMOND;
-                            } else {
-                                dropGem = Gem.getRandomDropGem(Constants.RNG);
-                            }
-                            Gem.Grade grade = Gem.Grade.randomGrade(Constants.RNG);
-                            Helpers.spawnItemStack(world, getFrontWaterPos(), ItemGem.get(dropGem, grade, 1));
-                            chunkData.addWork(3);
+
                         }
                     }
                     consumeSoil();

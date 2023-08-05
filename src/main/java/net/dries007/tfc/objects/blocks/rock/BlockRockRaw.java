@@ -12,8 +12,6 @@ import net.dries007.tfc.api.types.rock.RockVariant;
 import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.Gem;
-import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -168,10 +166,12 @@ public class BlockRockRaw extends Block implements IRockBlock, IItemSize {
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         super.getDrops(drops, world, pos, state, fortune);
+        // TODO:
+        /*
         // Raw rocks drop random gems
         if (RANDOM.nextDouble() < ConfigTFC.General.MISC.stoneGemDropChance) {
             drops.add(ItemGem.get(Gem.getRandomDropGem(RANDOM), Gem.Grade.randomGrade(RANDOM), 1));
-        }
+        }*/
     }
 
     @Override

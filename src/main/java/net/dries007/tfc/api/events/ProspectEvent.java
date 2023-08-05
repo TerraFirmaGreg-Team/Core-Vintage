@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.events;
 
+import net.dries007.tfc.compat.gregtech.items.tools.behaviors.PropickBehavior;
+import net.dries007.tfc.compat.gregtech.items.tools.behaviors.PropickBehavior.ProspectResult.Type;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -45,10 +47,6 @@ public abstract class ProspectEvent extends Event {
 
     public ItemStack getVein() {
         return vein;
-    }
-
-    public enum Type {
-        COCK
     }
 
     public static class Server extends ProspectEvent {

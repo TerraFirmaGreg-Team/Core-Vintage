@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.events.ProspectEvent;
+import net.dries007.tfc.compat.gregtech.items.tools.behaviors.PropickBehavior.ProspectResult.Type;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -17,27 +18,27 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketProspectResult implements IMessage {
     private BlockPos pos;
-    private ProspectEvent.Type type;
-    private ItemStack vein;
+    private Type type;
+    private ItemStack itemStack;
 
     @SuppressWarnings("unused")
     @Deprecated
     public PacketProspectResult() {
     }
 
-    public PacketProspectResult(BlockPos pos, ProspectEvent.Type type, ItemStack vein) {
+    public PacketProspectResult(BlockPos pos, Type type, ItemStack itemStack) {
         this.pos = pos;
         this.type = type;
-        this.vein = vein;
+        this.itemStack = itemStack;
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
         pos = BlockPos.fromLong(buf.readLong());
-        type = ProspectEvent.Type.valueOf(String.valueOf(buf.readByte()));
+        type = Type.valueOf(buf.readByte());
 
-        if (type != ProspectEvent.Type.COCK) {
-            vein = ByteBufUtils.readItemStack(buf);
+        if (type != Type.NOTHING) {
+            itemStack = ByteBufUtils.readItemStack(buf);
         }
     }
 
@@ -46,8 +47,8 @@ public class PacketProspectResult implements IMessage {
         buf.writeLong(pos.toLong());
         buf.writeByte(type.ordinal());
 
-        if (type != ProspectEvent.Type.COCK) {
-            ByteBufUtils.writeItemStack(buf, vein);
+        if (type != Type.NOTHING) {
+            ByteBufUtils.writeItemStack(buf, itemStack);
         }
     }
 
@@ -57,14 +58,14 @@ public class PacketProspectResult implements IMessage {
             TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                 EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
                 if (player != null) {
-                    ITextComponent text = new TextComponentTranslation(null);
-                    if (message.type != ProspectEvent.Type.COCK) {
-                        text.appendText(" ").appendSibling(new TextComponentTranslation(message.vein.getTranslationKey() + ".name"));
+                    ITextComponent text = new TextComponentTranslation(message.type.translation);
+                    if (message.type != Type.NOTHING) {
+                        text.appendText(" ").appendSibling(new TextComponentTranslation(message.itemStack.getDisplayName()));
                     }
                     player.sendStatusMessage(text, ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
                 }
 
-                ProspectEvent event = new ProspectEvent.Client(player, message.pos, message.type, message.vein);
+                ProspectEvent event = new ProspectEvent.Client(player, message.pos, message.type, message.itemStack);
                 MinecraftForge.EVENT_BUS.post(event);
             });
             return null;

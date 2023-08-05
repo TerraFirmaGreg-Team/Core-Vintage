@@ -57,7 +57,7 @@ public class TFCItems {
         ITEM.add(HALTER = new ItemMisc("halter", Size.SMALL, Weight.LIGHT, "halter"));
         ITEM.add(STICK_BUNCH = new ItemMisc("stick_bunch", Size.NORMAL, Weight.LIGHT, WOOD));
         ITEM.add(STICK_BUNDLE = new ItemMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, WOOD, "log_wood", "stick_bundle"));
-        ITEM.add(FIRE_CLAY = new ItemMisc("fire_clay", Size.VERY_SMALL, Weight.VERY_LIGHT, "fire_clay"));
+        ITEM.add(FIRE_CLAY = new ItemMisc("ceramics/fire_clay", Size.VERY_SMALL, Weight.VERY_LIGHT, "fire_clay"));
         ITEM.add(WOOD_ASH = new ItemMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT, WOOD, "slimeball", "glue"));
         ITEM.add(GLASS_SHARD = new ItemMisc("glass_shard", Size.VERY_SMALL, Weight.VERY_LIGHT));
         ITEM.add(ALABASTER_BRICK = new ItemMisc("alabaster_brick", Size.VERY_SMALL, Weight.LIGHT));

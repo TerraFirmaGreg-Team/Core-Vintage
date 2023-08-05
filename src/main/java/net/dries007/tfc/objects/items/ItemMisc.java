@@ -52,7 +52,7 @@ public class ItemMisc extends ItemTFC implements IItemSize {
         this.weight = weight;
 
         setRegistryName(MOD_ID, name);
-        setTranslationKey(MOD_ID + "." + name);
+        setTranslationKey(MOD_ID + "." + name.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.MISC);
     }
 

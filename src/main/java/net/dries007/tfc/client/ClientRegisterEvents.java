@@ -101,11 +101,13 @@ public final class ClientRegisterEvents {
         TFCStorage.GROUNDCOVER_BLOCK.values().forEach(IHasModel::onModelRegister);
 
 
-        for (ItemBlock item : TFCStorage.ITEM_BLOCKS)
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
+        for (ItemBlock itemBlock : TFCStorage.ITEM_BLOCKS)
+            ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName(), "normal"));
 
         //=== ITEMS ==================================================================================================//
 
+        for (Item item : TFCStorage.ITEM)
+            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
         //=== TESRs ==================================================================================================//
 

@@ -63,6 +63,7 @@ public class CommonProxy {
         //=== Other ==================================================================================================//
 
         ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
+        BLOCKS.forEach(r::register);
 
 
         //=== TileEntity =============================================================================================//
@@ -145,6 +146,7 @@ public class CommonProxy {
         //=== Other ==================================================================================================//
 
         ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
+        ITEM.forEach(r::register);
 
 
     }

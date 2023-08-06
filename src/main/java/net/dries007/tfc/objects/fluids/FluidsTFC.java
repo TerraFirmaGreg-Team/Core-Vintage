@@ -9,9 +9,9 @@ import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
+import net.dries007.tfc.api.types.fluid.properties.FluidWrapper;
+import net.dries007.tfc.api.types.fluid.util.DrinkableProperty;
 import net.dries007.tfc.objects.effects.PotionEffectsTFC;
-import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
-import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumDyeColor;
@@ -94,11 +94,10 @@ public final class FluidsTFC {
         return DYE_FLUIDS.get(dyeColor);
     }
 
-    public static void registerFluids() {
+    public static void preInit() {
+
         FRESH_WATER = registerFluid(new Fluid("fresh_water", STILL, FLOW, 0xFF296ACD)).with(DrinkableProperty.DRINKABLE, player -> {
-            if (player.getFoodStats() instanceof FoodStatsTFC) {
-                ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
-            }
+            if (player.getFoodStats() instanceof FoodStatsTFC) ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
         });
         HOT_WATER = registerFluid(new Fluid("hot_water", STILL, FLOW, 0xFF345FDA).setTemperature(350));
         SALT_WATER = registerFluid(new Fluid("salt_water", STILL, FLOW, 0xFF1F5099)).with(DrinkableProperty.DRINKABLE, player -> {

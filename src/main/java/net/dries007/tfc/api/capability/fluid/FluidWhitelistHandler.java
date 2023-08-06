@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.fluids.capability;
+package net.dries007.tfc.api.capability.fluid;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;

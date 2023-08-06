@@ -2,6 +2,7 @@ package net.dries007.tfc.test.blocks;
 
 import gregtech.api.GregTechAPI;
 import net.dries007.tfc.api.types.GroundcoverType;
+import net.dries007.tfc.api.types.fluid.properties.FluidWrapper;
 import net.dries007.tfc.api.types.metal.MetalVariant;
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.rock.Rock;
@@ -16,14 +17,13 @@ import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.*;
 import net.dries007.tfc.objects.blocks.devices.*;
-import net.dries007.tfc.objects.blocks.fluid.BlockFluidHotWater;
-import net.dries007.tfc.objects.blocks.fluid.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.fluid.BlockFluidWater;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeat;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeatGrass;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
+import net.dries007.tfc.objects.fluids.fluid.BlockFluidHotWater;
+import net.dries007.tfc.objects.fluids.fluid.BlockFluidTFC;
+import net.dries007.tfc.objects.fluids.fluid.BlockFluidWater;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockCrucible;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockPowderKeg;
@@ -70,7 +70,7 @@ public class TFCBlocks {
     }
 
     public static void preInit() {
-        FluidsTFC.registerFluids();
+        FluidsTFC.preInit();
 
         //=== Rock ===================================================================================================//
 

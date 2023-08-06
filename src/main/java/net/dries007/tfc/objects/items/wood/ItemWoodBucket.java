@@ -2,9 +2,9 @@ package net.dries007.tfc.objects.items.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;

@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.fluids.properties;
+package net.dries007.tfc.api.types.fluid.properties;
 
 public final class FluidProperty<T> {
     private final String name;

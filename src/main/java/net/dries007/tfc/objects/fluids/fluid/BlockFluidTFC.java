@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.blocks.fluid;
+package net.dries007.tfc.objects.fluids.fluid;
 
 import com.google.common.primitives.Ints;
 import net.minecraft.block.Block;

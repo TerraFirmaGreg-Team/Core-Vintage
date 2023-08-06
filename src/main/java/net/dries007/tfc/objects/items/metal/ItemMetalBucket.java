@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
+import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

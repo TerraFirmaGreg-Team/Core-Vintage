@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.blocks.fluid;
+package net.dries007.tfc.objects.fluids.fluid;
 
 import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.climate.ClimateTFC;

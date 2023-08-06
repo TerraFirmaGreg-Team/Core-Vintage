@@ -277,11 +277,6 @@ public final class ClientRegisterEvents {
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
-//        for (IMetalBlock block : TFCStorage.METAL_BLOCKS.values()) {
-//            blockColors.registerBlockColorHandler((s, w, p, i) ->
-//                    block.getMaterial().getMaterialRGB(), (Block) block);
-//        }
-
 
         // This is talking about tall grass vs actual grass blocks
 
@@ -344,6 +339,14 @@ public final class ClientRegisterEvents {
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 BlocksTFC.getAllFruitTreeLeavesBlocks()
                         .toArray(new BlockFruitTreeLeaves[0]));
+
+        //=== Metal ==================================================================================================//
+
+        itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IMetalBlock) ((ItemBlock) s.getItem()).getBlock()).getMaterial().getMaterialRGB() : 0xFFFFFF,
+                TFCStorage.METAL_BLOCKS.values()
+                        .stream()
+                        .map(s -> (Block) s)
+                        .toArray(Block[]::new));
 
         //=== Other ==================================================================================================//
 

@@ -11,7 +11,7 @@ import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.objects.blocks.devices.BlockBloomery;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
+import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TEBloom;
 import net.dries007.tfc.objects.te.TEBloomery;
 import net.dries007.tfc.util.calendar.ICalendar;

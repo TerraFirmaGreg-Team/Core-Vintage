@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
 
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
+import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
 
 @ParametersAreNonnullByDefault
 public class TECharcoalForge extends TETickableInventory implements ICalendarTickable, ITileFields {

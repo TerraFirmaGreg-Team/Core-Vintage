@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
+import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;

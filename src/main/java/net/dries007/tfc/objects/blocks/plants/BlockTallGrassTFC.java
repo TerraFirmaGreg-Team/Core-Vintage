@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks.plants;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.plant.PlantVariant;
-import net.dries007.tfc.objects.blocks.property.ITallPlant;
+import net.dries007.tfc.api.util.property.ITallPlant;
 import net.dries007.tfc.test.items.TFCItems;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;

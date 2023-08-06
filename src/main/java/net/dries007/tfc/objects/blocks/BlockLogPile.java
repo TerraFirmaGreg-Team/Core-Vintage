@@ -6,7 +6,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
+import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.objects.te.TELogPile;

@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.blocks.property;
+package net.dries007.tfc.api.util.property;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IStringSerializable;

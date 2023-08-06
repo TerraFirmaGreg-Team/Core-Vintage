@@ -37,7 +37,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
+import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
 
 @ParametersAreNonnullByDefault
 public class TEBlastFurnace extends TETickableInventory implements ITickable, ITileFields {

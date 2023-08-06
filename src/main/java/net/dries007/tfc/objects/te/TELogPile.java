@@ -22,7 +22,7 @@ import net.minecraft.util.math.MathHelper;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.objects.blocks.BlockCharcoalPile.LAYERS;
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
+import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

@@ -1,7 +1,10 @@
 package net.dries007.tfc.api.registries;
 
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.types.GroundcoverType;
+import net.dries007.tfc.api.types.metal.MetalVariant;
+import net.dries007.tfc.api.types.metal.util.IMetalBlock;
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.plant.PlantVariant;
 import net.dries007.tfc.api.types.plant.util.IPlantBlock;
@@ -41,6 +44,7 @@ public final class TFCStorage {
     public static final Map<Pair<PlantVariant, Plant>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<WoodVariant, Wood>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<String, RockVariant>, BlockAlabaster> ALABASTER_BLOCK = new LinkedHashMap<>();
+    public static final Map<Pair<MetalVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCK = new HashMap<>();
 
     public static final Map<Rock, ItemRock> ROCK_ITEM = new HashMap<>();
@@ -96,7 +100,14 @@ public final class TFCStorage {
     public static Block getGroundcoverBlock(@Nonnull GroundcoverType groundcoverType) {
         var block = (Block) GROUNDCOVER_BLOCK.get(groundcoverType);
         if (block != null) return block;
-        throw new RuntimeException(String.format("Item is null: %s", groundcoverType));
+        throw new RuntimeException(String.format("Block is null: %s", groundcoverType));
+    }
+
+    @Nonnull
+    public static Block getMetalBlock(@Nonnull MetalVariant metalVariant, @Nonnull Material material) {
+        var block = (Block) METAL_BLOCKS.get(new Pair<>(metalVariant, material));
+        if (block != null) return block;
+        throw new RuntimeException(String.format("Block is null: %s, %s", metalVariant, material));
     }
 
     @Nonnull

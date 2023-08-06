@@ -15,7 +15,7 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalAnvil;
 import net.dries007.tfc.objects.blocks.rock.BlockRockAnvil;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemStackHandlerCallback;
@@ -70,8 +70,8 @@ public class TEAnvilTFC extends TEInventory {
 
     public int getTier() {
         IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockAnvilTFC) {
-            return ((BlockAnvilTFC) state.getBlock()).getMetal().getProperty(TFGPropertyKey.HEAT).getTier();
+        if (state.getBlock() instanceof BlockMetalAnvil) {
+            return ((BlockMetalAnvil) state.getBlock()).getMetal().getProperty(TFGPropertyKey.HEAT).getTier();
         }
         return 0;
     }

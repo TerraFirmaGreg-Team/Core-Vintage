@@ -1,6 +1,8 @@
 package net.dries007.tfc.test.blocks;
 
+import gregtech.api.GregTechAPI;
 import net.dries007.tfc.api.types.GroundcoverType;
+import net.dries007.tfc.api.types.metal.MetalVariant;
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.rock.Rock;
 import net.dries007.tfc.api.types.rock.RockType;
@@ -11,8 +13,10 @@ import net.dries007.tfc.api.types.wood.Wood;
 import net.dries007.tfc.api.types.wood.WoodVariant;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.Triple;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.*;
 import net.dries007.tfc.objects.blocks.devices.*;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeat;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeatGrass;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockCrucible;
@@ -54,6 +58,7 @@ public class TFCBlocks {
     public static BlockBloom BLOOM;
     public static BlockIceTFC SEA_ICE;
     public static BlockPowderKeg POWDERKEG;
+    public static BlockMetalCladding CLADDING;
 
 
     private TFCBlocks() {
@@ -102,6 +107,26 @@ public class TFCBlocks {
 
                 if (WOOD_BLOCKS.put(new Pair<>(woodVariant, wood), woodVariantBlock) != null)
                     throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", woodVariant, wood));
+            }
+        }
+
+        //=== Metal ==================================================================================================//
+
+        for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
+            if (material.hasFlag(TFGMaterialFlags.GENERATE_TFC)) {
+                for (MetalVariant metalVariant : MetalVariant.values()) {
+                    var metalVariantBlock = metalVariant.create(material);
+
+                    if (METAL_BLOCKS.put(new Pair<>(metalVariant, material), metalVariantBlock) != null)
+                        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", metalVariant, material, metalVariantBlock));
+                }
+
+//                if (material == Materials.Iron) {
+//                    var metalCladdings = new BlockMetalCladding(material);
+//
+//                    if (METAL_BLOCK.put(material, metalCladdings) != null)
+//                        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", material, metalCladdings));
+//                }
             }
         }
 
@@ -161,6 +186,7 @@ public class TFCBlocks {
         BLOCKS.add(MOLTEN = new BlockMolten());
         BLOCKS.add(BLOOM = new BlockBloom());
         BLOCKS.add(THATCH_BED = new BlockThatchBed());
+        BLOCKS.add(CLADDING = new BlockMetalCladding());
 
     }
 }

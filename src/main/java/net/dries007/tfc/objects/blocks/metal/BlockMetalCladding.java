@@ -1,7 +1,10 @@
 package net.dries007.tfc.objects.blocks.metal;
 
-import gregtech.api.unification.material.Material;
-import net.dries007.tfc.objects.items.metal.ItemMetalCladding;
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.te.TEMetalSheet;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -9,30 +12,36 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
-public class BlockMetalCladding extends Block {
+public class BlockMetalCladding extends Block implements IHasModel {
     public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{
             PropertyBool.create("down"),
             PropertyBool.create("up"),
@@ -49,17 +58,17 @@ public class BlockMetalCladding extends Block {
             new AxisAlignedBB(0.9375d, 0d, 0d, 1d, 1d, 1d),
             new AxisAlignedBB(0d, 0d, 0d, 0.0625d, 1d, 1d)
     };
+    private final ResourceLocation modelLocation;
 
-    private static final Map<Material, BlockMetalCladding> METAL_CLADDING_STORAGE = new HashMap<>();
-    private final Material material;
-
-    public BlockMetalCladding(Material material) {
+    public BlockMetalCladding() {
         super(net.minecraft.block.material.Material.IRON);
 
-        this.material = material;
-        if (METAL_CLADDING_STORAGE.put(material, this) != null)
-            throw new IllegalStateException("There can only be one.");
+        this.modelLocation = new ResourceLocation(MOD_ID, "metal/cladding");
 
+        var blockRegistryName = "metal/cladding";
+        setRegistryName(MOD_ID, blockRegistryName);
+        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setCreativeTab(CreativeTabsTFC.METAL);
         setHardness(40F);
         setResistance(25F);
         setHarvestLevel("pickaxe", 0);
@@ -67,14 +76,12 @@ public class BlockMetalCladding extends Block {
         setDefaultState(this.blockState.getBaseState().withProperty(FACE_PROPERTIES[0], false).withProperty(FACE_PROPERTIES[1], false).withProperty(FACE_PROPERTIES[2], false).withProperty(FACE_PROPERTIES[3], false).withProperty(FACE_PROPERTIES[4], false).withProperty(FACE_PROPERTIES[5], false));
     }
 
-    public static BlockMetalCladding get(Material material) {
-        return METAL_CLADDING_STORAGE.get(material);
+
+    @Nullable
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this);
     }
 
-    @Nonnull
-    public Material getMaterial() {
-        return material;
-    }
 
     @Override
     @SuppressWarnings("deprecation")
@@ -191,7 +198,7 @@ public class BlockMetalCladding extends Block {
         if (tile != null) {
             for (EnumFacing face : EnumFacing.values()) {
                 if (tile.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face)) {
-                    InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemMetalCladding.get(material)));
+                    InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem()));
                     tile.setFace(face, false);
                 }
             }
@@ -205,7 +212,7 @@ public class BlockMetalCladding extends Block {
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TEMetalSheet te = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
-        if (te != null) te.onBreakBlock(this.material);
+        if (te != null) te.onBreakBlock();
         super.breakBlock(worldIn, pos, state);
     }
 
@@ -258,6 +265,23 @@ public class BlockMetalCladding extends Block {
     @Nonnull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(ItemMetalCladding.get(material));
+        return new ItemStack(OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem());
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+            }
+        });
+
+        for (IBlockState state : this.getBlockState().getValidStates()) {
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
+                    this.getMetaFromState(state),
+                    new ModelResourceLocation(modelLocation, "normal"));
+        }
     }
 }

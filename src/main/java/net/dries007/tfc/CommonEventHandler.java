@@ -35,7 +35,7 @@ import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.devices.BlockQuern;
 import net.dries007.tfc.objects.blocks.fluid.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalAnvil;
 import net.dries007.tfc.objects.blocks.rock.BlockRockAnvil;
 import net.dries007.tfc.objects.blocks.rock.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodSupport;
@@ -297,7 +297,7 @@ public final class CommonEventHandler {
         final EntityPlayer player = event.getEntityPlayer();
 
         // Fire onBlockActivated for in world crafting devices
-        if (state.getBlock() instanceof BlockAnvilTFC
+        if (state.getBlock() instanceof BlockMetalAnvil
                 || state.getBlock() instanceof BlockRockAnvil
                 || state.getBlock() instanceof BlockQuern
                 || state.getBlock() instanceof BlockWoodSupport) {

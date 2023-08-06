@@ -33,6 +33,8 @@ public class TFGOrePrefix {
     public static final OrePrefix ingotTriple = new OrePrefix("ingotTriple", M * 3, null, MaterialIconType.ingotTriple, ENABLE_UNIFICATION, m -> !m.hasFlag(TFGMaterialFlags.UNUSABLE) && m.hasProperty(TFGPropertyKey.HEAT));
     public static final OrePrefix ingotHex = new OrePrefix("ingotHex", M * 6, null, TFGMaterialIconType.ingotHex, ENABLE_UNIFICATION, m -> !m.hasFlag(TFGMaterialFlags.UNUSABLE) && m.hasProperty(TFGPropertyKey.HEAT));
 
+    public static final OrePrefix anvil = new OrePrefix("anvil", M * 6, null, TFGMaterialIconType.anvil, ENABLE_UNIFICATION, m -> !m.hasFlag(TFGMaterialFlags.UNUSABLE) && m.hasProperty(TFGPropertyKey.HEAT));
+
     public static final OrePrefix oreQuartzite = new OrePrefix("oreQuartzite", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreChalk = new OrePrefix("oreChalk", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);
     public static final OrePrefix oreChert = new OrePrefix("oreChert", -1, null, MaterialIconType.ore, ENABLE_UNIFICATION, hasOreProperty);

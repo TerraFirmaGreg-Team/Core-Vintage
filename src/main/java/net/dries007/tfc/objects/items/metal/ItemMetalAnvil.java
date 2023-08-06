@@ -4,7 +4,7 @@ import gregtech.api.unification.material.Material;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +24,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC.AXIS;
+import static net.dries007.tfc.api.types.metal.MetalVariant.ANVIL;
+import static net.dries007.tfc.objects.blocks.metal.BlockMetalAnvil.AXIS;
 
 @ParametersAreNonnullByDefault
 public class ItemMetalAnvil extends ItemTFC implements IMaterialItem {
@@ -59,7 +60,7 @@ public class ItemMetalAnvil extends ItemTFC implements IMaterialItem {
             {
                 if (!worldIn.isRemote) {
                     ItemMetalAnvil anvil = (ItemMetalAnvil) stack.getItem();
-                    worldIn.setBlockState(placedPos, BlockAnvilTFC.get(anvil.material).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
+                    worldIn.setBlockState(placedPos, TFCStorage.getMetalBlock(ANVIL, anvil.material).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
                     worldIn.playSound(null, placedPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     stack.shrink(1);
                     player.setHeldItem(hand, stack);

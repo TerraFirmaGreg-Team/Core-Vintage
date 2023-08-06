@@ -1,7 +1,8 @@
 package net.dries007.tfc.objects.te;
 
-import gregtech.api.unification.material.Material;
-import net.dries007.tfc.objects.items.metal.ItemMetalCladding;
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.ore.OrePrefix;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -75,8 +76,8 @@ public class TEMetalSheet extends TEBase {
         return super.writeToNBT(nbt);
     }
 
-    public void onBreakBlock(Material outMetal) {
-        var item = ItemMetalCladding.get(outMetal);
+    public void onBreakBlock() {
+        var item = OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem();
         var output = new ItemStack(item, getFaceCount());
         InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), output);
     }

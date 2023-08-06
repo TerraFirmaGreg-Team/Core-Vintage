@@ -3,9 +3,13 @@ package net.dries007.tfc.objects.blocks.metal;
 import gregtech.api.unification.material.Material;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.types.metal.MetalVariant;
+import net.dries007.tfc.api.types.metal.util.IMetalBlock;
+import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalAnvil;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
@@ -14,18 +18,23 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -34,29 +43,34 @@ import net.minecraftforge.items.IItemHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import static net.dries007.tfc.Constants.RNG;
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockAnvilTFC extends Block {
+public class BlockMetalAnvil extends Block implements IMetalBlock, IHasModel {
     public static final PropertyDirection AXIS = PropertyDirection.create("axis", EnumFacing.Plane.HORIZONTAL);
     private static final AxisAlignedBB AABB_Z = new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.6875, 1);
     private static final AxisAlignedBB AABB_X = new AxisAlignedBB(0, 0, 0.1875, 1, 0.6875, 0.8125);
 
-    private static final Map<Material, BlockAnvilTFC> ANVIL_STORAGE_MAP = new HashMap<>();
+    private final MetalVariant metalVariant;
     private final Material material;
+    private final ResourceLocation modelLocation;
 
-    public BlockAnvilTFC(Material material) {
+    public BlockMetalAnvil(MetalVariant metalVariant, Material material) {
         super(net.minecraft.block.material.Material.IRON);
 
+        this.metalVariant = metalVariant;
         this.material = material;
-        if (ANVIL_STORAGE_MAP.put(material, this) != null) throw new IllegalStateException("There can only be one.");
+        this.modelLocation = new ResourceLocation(MOD_ID, "metal/anvil");
 
+        var blockRegistryName = String.format("metal/anvil/%s", material);
+        setRegistryName(MOD_ID, blockRegistryName);
+        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setCreativeTab(CreativeTabsTFC.METAL);
         setHardness(4.0F);
         setResistance(10F);
         setHarvestLevel("pickaxe", 0);
@@ -64,8 +78,20 @@ public class BlockAnvilTFC extends Block {
         setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.NORTH));
     }
 
-    public static BlockAnvilTFC get(Material material) {
-        return ANVIL_STORAGE_MAP.get(material);
+    @Override
+    public MetalVariant getMetalVariant() {
+        return metalVariant;
+    }
+
+    @Nonnull
+    @Override
+    public Material getMaterial() {
+        return material;
+    }
+
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this);
     }
 
     @SuppressWarnings("deprecation")
@@ -244,5 +270,22 @@ public class BlockAnvilTFC extends Block {
 
     public Material getMetal() {
         return material;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+            }
+        });
+
+        for (IBlockState state : this.getBlockState().getValidStates()) {
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
+                    this.getMetaFromState(state),
+                    new ModelResourceLocation(modelLocation, "normal"));
+        }
     }
 }

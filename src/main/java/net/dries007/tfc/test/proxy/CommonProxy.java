@@ -48,6 +48,12 @@ public class CommonProxy {
             r.register((Block) woodTypeBlock);
         }
 
+        //=== Metal ==================================================================================================//
+
+        for (var metalTypeBlock : METAL_BLOCKS.values()) {
+            r.register((Block) metalTypeBlock);
+        }
+
         //=== Alabaster ==============================================================================================//
 
         for (var alabasterBlock : ALABASTER_BLOCK.values()) {
@@ -105,10 +111,13 @@ public class CommonProxy {
 
         //=== Rock ===================================================================================================//
 
-        for (var stoneTypeBlock : ROCK_BLOCKS.values()) {
-            var itemBlock = stoneTypeBlock.getItemBlock();
+        for (var rockBlock : ROCK_BLOCKS.values()) {
+            var itemBlock = rockBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
+        
+        for (var rockItem : ROCK_ITEM.values()) r.register(rockItem);
+        for (var brickItem : BRICK_ITEM.values()) r.register(brickItem);
 
         //=== Soil ===================================================================================================//
 
@@ -128,6 +137,13 @@ public class CommonProxy {
 
         for (var woodTypeBlock : WOOD_BLOCKS.values()) {
             var itemBlock = woodTypeBlock.getItemBlock();
+            if (itemBlock != null) registerItemBlock(r, itemBlock);
+        }
+
+        //=== Metal ==================================================================================================//
+
+        for (var metalTypeBlock : METAL_BLOCKS.values()) {
+            var itemBlock = metalTypeBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 

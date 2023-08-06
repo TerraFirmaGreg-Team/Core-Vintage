@@ -1,10 +1,10 @@
 {
   "forge_marker" : 1,
   "defaults" : {
-    "model" : "tfc:anvil",
+    "model" : "tfc:metal/anvil",
     "textures" : {
-      "all" : "tfc:blocks/metal/blue_steel",
-      "particle" : "tfc:blocks/metal/blue_steel"
+      "all" : "tfc:blocks/metal/metal",
+      "particle" : "tfc:blocks/metal/metal"
     }
   },
   "variants" : {

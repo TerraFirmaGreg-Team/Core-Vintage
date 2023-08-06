@@ -2,8 +2,6 @@ package net.dries007.tfc.objects.blocks;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
-import gregtech.api.GregTechAPI;
-import gregtech.api.unification.material.Materials;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.agriculture.BerryBush;
@@ -11,12 +9,11 @@ import net.dries007.tfc.api.types.agriculture.Crop;
 import net.dries007.tfc.api.types.agriculture.FruitTree;
 import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.dries007.tfc.api.types.soil.util.ISoilBlock;
-import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.fluid.BlockFluidHotWater;
 import net.dries007.tfc.objects.blocks.fluid.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.fluid.BlockFluidWater;
-import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalAnvil;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeat;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilPeatGrass;
@@ -55,7 +52,7 @@ public final class BlocksTFC {
     private static ImmutableList<ItemBlock> allNormalItemBlocks;
     private static ImmutableList<ItemBlock> allInventoryItemBlocks;
     private static ImmutableList<BlockFluidBase> allFluidBlocks;
-    private static ImmutableList<BlockAnvilTFC> allAnvils;
+    private static ImmutableList<BlockMetalAnvil> allAnvils;
     private static ImmutableList<BlockMetalCladding> allCladdings;
     private static ImmutableList<BlockCropTFC> allCropBlocks;
     private static ImmutableList<BlockCropDead> allDeadCropBlocks;
@@ -79,7 +76,7 @@ public final class BlocksTFC {
         return allFluidBlocks;
     }
 
-    public static ImmutableList<BlockAnvilTFC> getAllAnvils() {
+    public static ImmutableList<BlockMetalAnvil> getAllAnvils() {
         return allAnvils;
     }
 
@@ -159,16 +156,16 @@ public final class BlocksTFC {
         }
 
         {
-            Builder<BlockAnvilTFC> anvils = ImmutableList.builder();
-            Builder<BlockMetalCladding> claddings = ImmutableList.builder();
-
-            for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
-                if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL))
-                    anvils.add(register(r, "anvil/" + material.getName(), new BlockAnvilTFC(material), METAL));
-
-                if (material == Materials.Iron)
-                    claddings.add(register(r, "cladding/" + material.getName(), new BlockMetalCladding(material), METAL));
-            }
+//            Builder<BlockAnvilTFC> anvils = ImmutableList.builder();
+//            Builder<BlockMetalCladding> claddings = ImmutableList.builder();
+//
+//            for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
+//                if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL))
+//                    anvils.add(register(r, "anvil/" + material.getName(), new BlockAnvilTFC(material), METAL));
+//
+//                if (material == Materials.Iron)
+//                    claddings.add(register(r, "cladding/" + material.getName(), new BlockMetalCladding(material), METAL));
+//            }
             /*
             for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
                 if (Metal.ItemType.ANVIL.hasType(metal))
@@ -182,8 +179,8 @@ public final class BlocksTFC {
 
             }*/
 
-            allAnvils = anvils.build();
-            allCladdings = claddings.build();
+//            allAnvils = anvils.build();
+//            allCladdings = claddings.build();
         }
 
         {

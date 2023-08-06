@@ -20,16 +20,13 @@
         }
       }
     },
-    "inventory" : [
+    "normal" : [
       {
         "transform" : "forge:default-block",
         "textures" : {
           "top" : "tfc:blocks/devices/charcoal_forge/lit"
         }
       }
-    ],
-    "normal" : [
-      {}
     ]
   }
 }

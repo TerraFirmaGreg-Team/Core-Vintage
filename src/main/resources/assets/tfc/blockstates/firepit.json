@@ -26,14 +26,11 @@
         "submodel" : "tfc:firepit/grill"
       }
     },
-    "inventory" : [
+    "normal" : [
       {
         "transform" : "forge:default-block",
         "model" : "tfc:firepit/lit"
       }
-    ],
-    "normal" : [
-      {}
     ]
   }
 }

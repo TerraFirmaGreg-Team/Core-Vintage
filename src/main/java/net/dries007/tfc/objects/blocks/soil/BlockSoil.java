@@ -132,8 +132,13 @@ public class BlockSoil extends Block implements ISoilBlock {
             case DIRT -> Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soil));
             default -> super.getItemDropped(state, rand, fortune);
         };
-
     }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return getMetaFromState(state);
+    }
+
 
     @Override
     @SideOnly(Side.CLIENT)

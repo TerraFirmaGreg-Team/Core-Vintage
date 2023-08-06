@@ -204,11 +204,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
         switch (soilVariant) {
             case CLAY_GRASS:
                 return Items.CLAY_BALL;
-            case GRASS:
-            case DRY_GRASS:
-                Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soil));
             default:
-                return super.getItemDropped(state, rand, fortune);
+                return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soil));
         }
     }
 

@@ -75,9 +75,8 @@ public class BlockRockAnvil extends Block implements IRockBlock, IItemSize {
         this.setHarvestLevel("pickaxe", 0);
         this.setRegistryName(MOD_ID, blockRegistryName);
         this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-
-        FallingBlockManager.Specification spec = new FallingBlockManager.Specification(rockVariant.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
-        FallingBlockManager.registerFallable(this, spec);
+        
+        FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
     }
 
     @Nonnull

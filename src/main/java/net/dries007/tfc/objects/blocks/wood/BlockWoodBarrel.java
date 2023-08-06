@@ -9,7 +9,7 @@ import net.dries007.tfc.api.types.wood.WoodVariant;
 import net.dries007.tfc.api.types.wood.util.IWoodBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -46,8 +46,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.registries.TFCStorage.WOOD_BLOCKS;
+import static net.dries007.tfc.api.types.wood.WoodVariant.BARREL;
 
 /**
  * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes.
@@ -111,7 +115,7 @@ public class BlockWoodBarrel extends Block implements IItemSize, IWoodBlock {
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockBarrel(this);
     }
 
     @Nonnull
@@ -124,6 +128,13 @@ public class BlockWoodBarrel extends Block implements IItemSize, IWoodBlock {
     @Override
     public Weight getWeight(@Nonnull ItemStack stack) {
         return Weight.VERY_HEAVY; // Stacksize = 1
+    }
+
+    public static Collection<Block> getBarrelStorage() {
+        return WOOD_BLOCKS.values().stream()
+                .filter(block -> block.getWoodVariant() == BARREL)
+                .map(block -> (Block) block)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -342,14 +353,14 @@ public class BlockWoodBarrel extends Block implements IItemSize, IWoodBlock {
             }
         });
 
-        ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(this),
-                stack -> stack.getTagCompound() != null ? unsealed : sealed);
+        ModelLoader.setCustomMeshDefinition(
+                Item.getItemFromBlock(this),
+                stack -> stack.getTagCompound() != null ? sealed : unsealed);
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation, "normal"));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this),
+                this.getMetaFromState(this.getBlockState().getBaseState()),
+                new ModelResourceLocation(modelLocation, "normal"));
 
     }
 }

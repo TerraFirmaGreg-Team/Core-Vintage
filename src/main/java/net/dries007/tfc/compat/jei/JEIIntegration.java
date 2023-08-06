@@ -25,6 +25,8 @@ import net.dries007.tfc.compat.jei.categories.*;
 import net.dries007.tfc.compat.jei.util.TFCInventoryGuiHandler;
 import net.dries007.tfc.compat.jei.wrappers.*;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalAnvil;
+import net.dries007.tfc.objects.blocks.wood.BlockWoodBarrel;
+import net.dries007.tfc.objects.blocks.wood.BlockWoodLoom;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.items.ItemAnimalHide.HideType;
@@ -186,9 +188,9 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(blastList, BLAST_FURNACE_UID);
 
         // Barrel Recipes
-//				for (Item barrelItem : BlocksTFC.getAllBarrelItemBlocks()) {
-//						registry.addRecipeCatalyst(new ItemStack(barrelItem), BARREL_UID);
-//				}
+        for (var barrel : BlockWoodBarrel.getBarrelStorage()) {
+            registry.addRecipeCatalyst(new ItemStack(barrel), BARREL_UID);
+        }
 
         var barrelRecipes = TFCRegistries.BARREL.getValuesCollection()
                 .stream().filter(recipe -> recipe instanceof BarrelRecipeFoodTraits || recipe instanceof BarrelRecipeFoodPreservation || recipe.getOutputStack() != ItemStack.EMPTY || recipe.getOutputFluid() != null)
@@ -197,10 +199,10 @@ public final class JEIIntegration implements IModPlugin {
 
         registry.addRecipes(barrelRecipes, BARREL_UID);
 
-//				// Loom Recipes
-//				for (var tree : TFCRegistries.TREES.getValuesCollection()) {
-//						registry.addRecipeCatalyst(new ItemStack(BlockWoodLoom.get(tree)), LOOM_UID);
-//				}
+        // Loom Recipes
+        for (var loom : BlockWoodLoom.getLoomStorage()) {
+            registry.addRecipeCatalyst(new ItemStack(loom), LOOM_UID);
+        }
 
         var loomRecipes = TFCRegistries.LOOM.getValuesCollection()
                 .stream()

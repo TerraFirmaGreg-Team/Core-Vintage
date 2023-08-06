@@ -119,10 +119,10 @@ public class BlockMetalAnvil extends Block implements IMetalBlock, IMaterialItem
     }
 
 
-    public static Collection<BlockMetalAnvil> getAnvilStorage() {
+    public static Collection<Block> getAnvilStorage() {
         return METAL_BLOCKS.values().stream()
-                .filter(block -> block instanceof BlockMetalAnvil)
-                .map(block -> (BlockMetalAnvil) block)
+                .filter(block -> block.getMetalVariant() == ANVIL)
+                .map(block -> (Block) block)
                 .collect(Collectors.toList());
     }
 

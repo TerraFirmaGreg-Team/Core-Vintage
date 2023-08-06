@@ -5,7 +5,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
-import net.dries007.tfc.compat.jei.TFCJEIPlugin;
+import net.dries007.tfc.compat.jei.JEIIntegration;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -22,7 +22,7 @@ public class BloomeryRecipeWrapper implements IRecipeWrapper {
         ingredients = new ArrayList<>();
         additives = new ArrayList<>();
         // Although this looks resource-intensive, it's done one time only
-        TFCJEIPlugin.getAllIngredients().forEach(stack -> {
+        JEIIntegration.getAllIngredients().forEach(stack -> {
             if (recipe.isValidInput(stack)) {
                 ingredients.add(stack);
             } else if (recipe.isValidAdditive(stack)) {

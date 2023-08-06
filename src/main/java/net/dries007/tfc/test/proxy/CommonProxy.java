@@ -1,6 +1,11 @@
 package net.dries007.tfc.test.proxy;
 
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.objects.blocks.BlockIceTFC;
+import net.dries007.tfc.objects.blocks.BlockSnowTFC;
+import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.te.*;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -8,7 +13,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -70,6 +77,7 @@ public class CommonProxy {
 
         ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
         BLOCKS.forEach(r::register);
+        FLUID.forEach(r::register);
 
 
         //=== TileEntity =============================================================================================//
@@ -115,7 +123,7 @@ public class CommonProxy {
             var itemBlock = rockBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
-        
+
         for (var rockItem : ROCK_ITEM.values()) r.register(rockItem);
         for (var brickItem : BRICK_ITEM.values()) r.register(brickItem);
 
@@ -166,6 +174,23 @@ public class CommonProxy {
 
 
     }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void registerVanillaOverrides(RegistryEvent.Register<Block> event) {
+        // Ванильные переопределения. Используется для небольших настроек ванильных предметов, а не для их полной замены.
+        if (ConfigTFC.General.OVERRIDES.enableFrozenOverrides) {
+            TerraFirmaCraft.getLog().info("The below warnings about unintended overrides are normal. The override is intended. ;)");
+            event.getRegistry().registerAll(
+                    new BlockIceTFC(FluidRegistry.WATER),
+                    new BlockSnowTFC()
+            );
+        }
+
+        if (ConfigTFC.General.OVERRIDES.enableTorchOverride) {
+            event.getRegistry().register(new BlockTorchTFC());
+        }
+    }
+
 
     @SuppressWarnings("ConstantConditions")
     private static <T extends Block> ItemBlock createItemBlock(T block) {

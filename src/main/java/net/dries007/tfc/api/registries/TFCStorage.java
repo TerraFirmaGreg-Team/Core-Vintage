@@ -29,6 +29,7 @@ import net.dries007.tfc.objects.items.rock.ItemRockBrick;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fluids.BlockFluidBase;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -37,7 +38,6 @@ import java.util.*;
  * В этом классе мы можем хранить любые блоки, предметы и прочую полезную хрень.
  */
 public final class TFCStorage {
-
 
     public static final Map<Triple<RockType, RockVariant, Rock>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<SoilVariant, Soil>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
@@ -60,6 +60,9 @@ public final class TFCStorage {
 
     // Предметы
     public static final List<Item> ITEM = new ArrayList<>();
+
+    // Жидкости
+    public static final List<BlockFluidBase> FLUID = new ArrayList<>();
 
     @Nonnull
     public static Block getRockBlock(@Nonnull RockType rockType, @Nonnull RockVariant blockVariant, @Nonnull Rock stoneType) {

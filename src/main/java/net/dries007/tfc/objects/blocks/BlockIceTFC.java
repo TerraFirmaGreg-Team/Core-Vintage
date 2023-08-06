@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
@@ -19,10 +20,13 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
@@ -33,6 +37,15 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
         this.waterFluid = waterFluid;
         this.meltThreshold = waterFluid == FluidsTFC.SALT_WATER.get() ? IceMeltHandler.SALT_WATER_MELT_THRESHOLD : IceMeltHandler.ICE_MELT_THRESHOLD;
 
+        if (waterFluid == FluidRegistry.WATER) {
+            setRegistryName("minecraft", "ice");
+            setTranslationKey("ice");
+        } else {
+            setRegistryName(MOD_ID, "sea_ice");
+            setTranslationKey(MOD_ID + ".sea_ice.");
+            setCreativeTab(CreativeTabsTFC.MISC);
+        }
+        
         setHardness(0.5F);
         setLightOpacity(3);
         setSoundType(SoundType.GLASS);

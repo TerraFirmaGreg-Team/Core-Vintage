@@ -13,17 +13,17 @@ import javax.annotation.Nullable;
 import java.util.function.BiFunction;
 
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY;
+import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_SOIL;
 
 @MethodsReturnNonnullByDefault
 public enum SoilVariant implements IStringSerializable {
     DIRT(BlockSoil::new, VERTICAL_AND_HORIZONTAL),
     GRASS(BlockSoilGrass::new, VERTICAL_AND_HORIZONTAL),
     DRY_GRASS(BlockSoilGrass::new, VERTICAL_AND_HORIZONTAL),
-    PATH(BlockSoilPath::new, VERTICAL_ONLY),
-    CLAY(BlockSoil::new, VERTICAL_ONLY),
-    CLAY_GRASS(BlockSoilGrass::new, VERTICAL_ONLY),
-    FARMLAND(BlockSoilFarmland::new, VERTICAL_ONLY);
+    PATH(BlockSoilPath::new, VERTICAL_ONLY_SOIL),
+    CLAY(BlockSoil::new, VERTICAL_ONLY_SOIL),
+    CLAY_GRASS(BlockSoilGrass::new, VERTICAL_ONLY_SOIL),
+    FARMLAND(BlockSoilFarmland::new, VERTICAL_ONLY_SOIL);
 //	ROOTED_DIRT(VERTICAL_ONLY),
 //	MUD(VERTICAL_ONLY),
 //	MUD_BRICKS(VERTICAL_ONLY),

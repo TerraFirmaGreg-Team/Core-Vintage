@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.fluid;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.dries007.tfc.util.climate.IceMeltHandler;
@@ -31,7 +31,7 @@ public class BlockFluidWater extends BlockFluidTFC implements ITemperatureBlock 
         if (world.getLightFor(EnumSkyBlock.BLOCK, pos) < 10 && ClimateTFC.getActualTemp(world, pos) < freezeThreshold && state.getValue(LEVEL) == 0) {
             for (EnumFacing face : EnumFacing.HORIZONTALS) {
                 if (world.getBlockState(pos.offset(face)).getBlock() != this) {
-                    world.setBlockState(pos, isSalt ? BlocksTFC.SEA_ICE.getDefaultState() : Blocks.ICE.getDefaultState());
+                    world.setBlockState(pos, isSalt ? TFCBlocks.SEA_ICE.getDefaultState() : Blocks.ICE.getDefaultState());
                     break;
                 }
             }

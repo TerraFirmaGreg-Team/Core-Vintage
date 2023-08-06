@@ -3,6 +3,7 @@ package net.dries007.tfc.compat.jei;
 import gregtech.api.fluids.MetaFluids;
 import gregtech.api.unification.material.Materials;
 import gregtech.common.items.ToolItems;
+import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
@@ -23,12 +24,12 @@ import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.jei.categories.*;
 import net.dries007.tfc.compat.jei.util.TFCInventoryGuiHandler;
 import net.dries007.tfc.compat.jei.wrappers.*;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalAnvil;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.items.ItemAnimalHide.HideType;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
-import net.dries007.tfc.objects.items.metal.ItemMetalAnvil;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 import net.dries007.tfc.objects.recipes.UnmoldRecipe;
 import net.dries007.tfc.test.blocks.TFCBlocks;
@@ -48,7 +49,7 @@ import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
 @JEIPlugin
-public final class TFCJEIPlugin implements IModPlugin {
+public final class JEIIntegration implements IModPlugin {
     public static final String ALLOY_UID = TerraFirmaCraft.MOD_ID + ".alloy";
     public static final String ANVIL_UID = TerraFirmaCraft.MOD_ID + ".anvil";
     public static final String BARREL_UID = TerraFirmaCraft.MOD_ID + ".barrel";
@@ -82,26 +83,30 @@ public final class TFCJEIPlugin implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registry) {
+        final IGuiHelper gui = registry.getJeiHelpers().getGuiHelper();
+
         // Add new JEI recipe categories
-        registry.addRecipeCategories(new AlloyCategory(registry.getJeiHelpers().getGuiHelper(), ALLOY_UID));
-        registry.addRecipeCategories(new AnvilCategory(registry.getJeiHelpers().getGuiHelper(), ANVIL_UID));
-        registry.addRecipeCategories(new BarrelCategory(registry.getJeiHelpers().getGuiHelper(), BARREL_UID));
-        registry.addRecipeCategories(new BlastFurnaceCategory(registry.getJeiHelpers().getGuiHelper(), BLAST_FURNACE_UID));
-        registry.addRecipeCategories(new BloomeryCategory(registry.getJeiHelpers().getGuiHelper(), BLOOMERY_UID));
-        registry.addRecipeCategories(new CastingCategory(registry.getJeiHelpers().getGuiHelper(), CASTING_UID));
-        registry.addRecipeCategories(new ChiselCategory(registry.getJeiHelpers().getGuiHelper(), CHISEL_UID));
-        registry.addRecipeCategories(new HeatCategory(registry.getJeiHelpers().getGuiHelper(), HEAT_UID));
-        registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_CLAY_UID));
-        registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_FIRECLAY_UID));
-        registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_LEATHER_UID));
-        registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_STONE_UID));
-        registry.addRecipeCategories(new LoomCategory(registry.getJeiHelpers().getGuiHelper(), LOOM_UID));
-        registry.addRecipeCategories(new MetalHeatingCategory(registry.getJeiHelpers().getGuiHelper(), METAL_HEAT_UID));
-        registry.addRecipeCategories(new QuernCategory(registry.getJeiHelpers().getGuiHelper(), QUERN_UID));
-        // registry.addRecipeCategories(new RockLayerCategory(registry.getJeiHelpers().getGuiHelper(), ROCK_LAYER_UID));
-        registry.addRecipeCategories(new WeldingCategory(registry.getJeiHelpers().getGuiHelper(), WELDING_UID));
-        registry.addRecipeCategories(new ScrapingCategory(registry.getJeiHelpers().getGuiHelper(), SCRAPING_UID));
-        registry.addRecipeCategories(new UnmoldCategory(registry.getJeiHelpers().getGuiHelper(), UNMOLD_UID));
+        registry.addRecipeCategories(
+                new AlloyCategory(gui, ALLOY_UID),
+                new AnvilCategory(gui, ANVIL_UID),
+                new BarrelCategory(gui, BARREL_UID),
+                new BlastFurnaceCategory(gui, BLAST_FURNACE_UID),
+                new BloomeryCategory(gui, BLOOMERY_UID),
+                new CastingCategory(gui, CASTING_UID),
+                new ChiselCategory(gui, CHISEL_UID),
+                new HeatCategory(gui, HEAT_UID),
+                new KnappingCategory(gui, KNAP_CLAY_UID),
+                new KnappingCategory(gui, KNAP_FIRECLAY_UID),
+                new KnappingCategory(gui, KNAP_LEATHER_UID),
+                new KnappingCategory(gui, KNAP_STONE_UID),
+                new LoomCategory(gui, LOOM_UID),
+                new MetalHeatingCategory(gui, METAL_HEAT_UID),
+                new QuernCategory(gui, QUERN_UID),
+                // new RockLayerCategory(gui, ROCK_LAYER_UID),
+                new WeldingCategory(gui, WELDING_UID),
+                new ScrapingCategory(gui, SCRAPING_UID),
+                new UnmoldCategory(gui, UNMOLD_UID)
+        );
     }
 
     @Override
@@ -142,7 +147,7 @@ public final class TFCJEIPlugin implements IModPlugin {
         registry.addRecipes(heatList, HEAT_UID);
 
         // Anvil + Welding Recipes
-        for (var anvil : ItemMetalAnvil.getAnvilStorage()) {
+        for (var anvil : BlockMetalAnvil.getAnvilStorage()) {
             registry.addRecipeCatalyst(new ItemStack(anvil), ANVIL_UID);
             registry.addRecipeCatalyst(new ItemStack(anvil), WELDING_UID);
         }

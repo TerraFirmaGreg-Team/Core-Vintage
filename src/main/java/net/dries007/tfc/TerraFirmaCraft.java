@@ -16,7 +16,7 @@ import net.dries007.tfc.client.TFCKeybindings;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
 import net.dries007.tfc.command.*;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
-import net.dries007.tfc.compat.top.TOPPlugin;
+import net.dries007.tfc.compat.top.TOPIntegration;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
@@ -147,7 +147,7 @@ public final class TerraFirmaCraft {
             ClientEvents.preInit();
         }
 
-        TOPPlugin.onPreInit();
+        TOPIntegration.onPreInit();
     }
 
     @Mod.EventHandler

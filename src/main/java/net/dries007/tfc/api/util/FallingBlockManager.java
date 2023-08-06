@@ -18,6 +18,7 @@ import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -330,8 +331,9 @@ public class FallingBlockManager {
 
         public static final Specification VERTICAL_AND_HORIZONTAL = new Specification(true, () -> TFCSounds.DIRT_SLIDE_SHORT);
         public static final Specification VERTICAL_AND_HORIZONTAL_ROCK = new Specification(true, () -> TFCSounds.ROCK_SLIDE_SHORT);
-        public static final Specification VERTICAL_ONLY = new Specification(false, () -> TFCSounds.DIRT_SLIDE_SHORT);
-        public static final Specification COLLAPSABLE = new Specification(false, true, () -> TFCSounds.ROCK_SLIDE_LONG);
+        public static final Specification VERTICAL_ONLY_SOIL = new Specification(false, () -> TFCSounds.DIRT_SLIDE_SHORT);
+        public static final Specification VERTICAL_ONLY_METAL = new Specification(false, () -> SoundEvents.BLOCK_ANVIL_BREAK);
+        public static final Specification COLLAPSABLE_ROCK = new Specification(false, true, () -> TFCSounds.ROCK_SLIDE_LONG);
 
         private final boolean canFallHorizontally;
         private final Supplier<SoundEvent> soundEventDelegate;

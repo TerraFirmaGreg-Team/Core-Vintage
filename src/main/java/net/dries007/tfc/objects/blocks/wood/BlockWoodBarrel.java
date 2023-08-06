@@ -308,8 +308,7 @@ public class BlockWoodBarrel extends Block implements IItemSize, IWoodBlock {
 
     @Override
     @Nonnull
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world,
-                                  BlockPos pos, EntityPlayer player) {
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         ItemStack stack = new ItemStack(state.getBlock());
         TEBarrel tile = Helpers.getTE(world, pos, TEBarrel.class);
         if (tile != null && tile.isSealed()) {
@@ -344,7 +343,7 @@ public class BlockWoodBarrel extends Block implements IItemSize, IWoodBlock {
         });
 
         ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(this),
-                stack -> stack.getTagCompound() != null ? sealed : unsealed);
+                stack -> stack.getTagCompound() != null ? unsealed : sealed);
 
         for (IBlockState state : this.getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),

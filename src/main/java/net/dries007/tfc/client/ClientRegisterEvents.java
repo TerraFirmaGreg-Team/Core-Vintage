@@ -95,6 +95,10 @@ public final class ClientRegisterEvents {
         for (ItemBlock itemBlock : TFCStorage.ITEM_BLOCKS)
             ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName(), "normal"));
 
+        for (Block block : TFCStorage.FLUID)
+            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
+
+
         //=== ITEMS ==================================================================================================//
 
         for (Item item : TFCStorage.ROCK_ITEM.values())
@@ -175,8 +179,6 @@ public final class ClientRegisterEvents {
 
 
         // Blocks with Ignored Properties
-        for (Block block : BlocksTFC.getAllFluidBlocks())
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
 
 
         for (Block block : BlocksTFC.getAllCropBlocks())

@@ -20,6 +20,7 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockFluidHotWater extends BlockFluidTFC {
+
     public BlockFluidHotWater() {
         super(FluidsTFC.HOT_WATER.get(), Material.WATER, false);
 

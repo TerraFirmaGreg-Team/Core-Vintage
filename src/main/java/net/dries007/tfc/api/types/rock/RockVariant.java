@@ -16,15 +16,15 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification.*;
  */
 @MethodsReturnNonnullByDefault
 public enum RockVariant implements IStringSerializable {
-    RAW(BlockRockRaw::new, 6.5f, COLLAPSABLE),
+    RAW(BlockRockRaw::new, 6.5f, COLLAPSABLE_ROCK),
     COBBLE(BlockRockFallable::new, 5.5f, VERTICAL_AND_HORIZONTAL_ROCK),
     BRICK(BlockRock::new, 6.5f, null),
     CRACKED(BlockRock::new, 6.5f, null),
     CHISELED(BlockRock::new, 6.5f, null),
-    SMOOTH(BlockRock::new, 6.5f, COLLAPSABLE),
+    SMOOTH(BlockRock::new, 6.5f, COLLAPSABLE_ROCK),
     GRAVEL(BlockRockFallable::new, 2.0f, VERTICAL_AND_HORIZONTAL),
     SAND(BlockRockFallable::new, 0.5f, VERTICAL_AND_HORIZONTAL),
-    ANVIL(BlockRockAnvil::new, 2.0f, COLLAPSABLE),
+    ANVIL(BlockRockAnvil::new, 2.0f, COLLAPSABLE_ROCK),
     PRESSURE_PLATE(BlockRockPressurePlate::new, 4f, null),
     BUTTON(BlockRockButton::new, 4f, null),
     LOOSE(BlockRockLoose::new, 4f, null),

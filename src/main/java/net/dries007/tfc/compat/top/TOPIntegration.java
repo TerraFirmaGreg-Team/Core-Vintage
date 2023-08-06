@@ -4,7 +4,7 @@ import mcjty.theoneprobe.TheOneProbe;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import net.dries007.tfc.compat.top.providers.*;
 
-public class TOPPlugin {
+public class TOPIntegration {
     public static void onPreInit() {
         ITheOneProbe oneProbe = TheOneProbe.theOneProbeImp;
 

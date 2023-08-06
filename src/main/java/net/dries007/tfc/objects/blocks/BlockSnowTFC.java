@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.minecraft.block.Block;
@@ -22,6 +23,10 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock {
     public BlockSnowTFC() {
+
+        setRegistryName("minecraft", "snow_layer");
+        setTranslationKey("snow");
+
         setHardness(0.1F);
         setSoundType(SoundType.SNOW);
         setLightOpacity(0);
@@ -60,7 +65,7 @@ public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock {
         IBlockState stateDown = worldIn.getBlockState(pos.down());
         Block block = stateDown.getBlock();
 
-        if (block != Blocks.ICE && block != Blocks.PACKED_ICE && block != Blocks.BARRIER && block != BlocksTFC.SEA_ICE) {
+        if (block != Blocks.ICE && block != Blocks.PACKED_ICE && block != Blocks.BARRIER && block != TFCBlocks.SEA_ICE) {
             return stateDown.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID || stateDown.getBlock().isLeaves(stateDown, worldIn, pos.down()) || block == this && stateDown.getValue(LAYERS) == 8;
         } else {
             return false;

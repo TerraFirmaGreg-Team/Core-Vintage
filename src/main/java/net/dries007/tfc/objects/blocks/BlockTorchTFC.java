@@ -39,6 +39,11 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBlock {
     public BlockTorchTFC() {
+
+
+        setRegistryName("minecraft", "torch");
+        setTranslationKey("torch");
+
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, true));
         setHardness(0f);
         setLightLevel(0.9375F);

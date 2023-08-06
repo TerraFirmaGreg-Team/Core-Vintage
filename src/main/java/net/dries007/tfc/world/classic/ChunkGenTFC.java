@@ -8,6 +8,7 @@ import net.dries007.tfc.api.types.rock.RockCategory;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -68,7 +69,7 @@ public class ChunkGenTFC implements IChunkGenerator {
     public static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
     /* Layers must be one here - otherwise snow becomes non-replaceable and wrecks the rest of world gen */
     public static final IBlockState SNOW = Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1);
-    public static final IBlockState SALT_WATER_ICE = BlocksTFC.SEA_ICE.getDefaultState();
+    public static final IBlockState SALT_WATER_ICE = TFCBlocks.SEA_ICE.getDefaultState();
     public static final IBlockState FRESH_WATER_ICE = Blocks.ICE.getDefaultState();
     private static final float[] parabolicField = new float[25];
 

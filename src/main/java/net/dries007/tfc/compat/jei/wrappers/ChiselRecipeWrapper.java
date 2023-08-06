@@ -4,7 +4,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
-import net.dries007.tfc.compat.jei.TFCJEIPlugin;
+import net.dries007.tfc.compat.jei.JEIIntegration;
 import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
@@ -22,7 +22,7 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
     public ChiselRecipeWrapper(ChiselRecipe recipe) {
         ingredients = new ArrayList<>();
         // Although this looks resource-intensive, it's done one time only
-        TFCJEIPlugin.getAllIngredients().stream()
+        JEIIntegration.getAllIngredients().stream()
                 .filter(stack -> stack.getItem() instanceof ItemBlock)
                 .forEach(stack ->
                 {

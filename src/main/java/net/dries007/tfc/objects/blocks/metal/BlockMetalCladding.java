@@ -68,7 +68,7 @@ public class BlockMetalCladding extends Block implements IHasModel {
         var blockRegistryName = "metal/cladding";
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        setCreativeTab(CreativeTabsTFC.METAL);
+        setCreativeTab(CreativeTabsTFC.METAL); //GregTechAPI.TAB_GREGTECH_MATERIALS
         setHardness(40F);
         setResistance(25F);
         setHarvestLevel("pickaxe", 0);

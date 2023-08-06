@@ -25,10 +25,15 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 @ParametersAreNonnullByDefault
 public class BlockFluidTFC extends BlockFluidClassic {
     public BlockFluidTFC(Fluid fluid, Material material) {
         super(fluid, material);
+
+        setRegistryName(MOD_ID, "fluid/" + fluid.getName());
+        setTranslationKey(MOD_ID + ".fluid." + fluid.getName());
     }
 
     public BlockFluidTFC(Fluid fluid, Material material, boolean canCreateSources) {

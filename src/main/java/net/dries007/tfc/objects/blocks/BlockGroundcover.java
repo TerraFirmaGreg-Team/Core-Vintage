@@ -1,6 +1,5 @@
 package net.dries007.tfc.objects.blocks;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.CustomStateMap;
@@ -113,6 +112,7 @@ public class BlockGroundcover extends Block implements IHasModel {
     public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
+    
 
     @Override
     @ParametersAreNonnullByDefault
@@ -127,6 +127,14 @@ public class BlockGroundcover extends Block implements IHasModel {
     @Nonnull
     public EnumOffsetType getOffsetType() {
         return EnumOffsetType.XZ;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
+            worldIn.destroyBlock(pos, false);
+        }
     }
 
     @Override

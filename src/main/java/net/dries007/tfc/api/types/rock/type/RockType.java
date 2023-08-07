@@ -71,6 +71,6 @@ public class RockType {
         return i >= 0 && i < values.length ? values[i] : values[i % values.length];
     }
     public static int indexOf(RockType rockType) {
-        return new ArrayList<>().indexOf(rockType);
+        return new ArrayList<>(rockTypes).indexOf(rockType);
     }
 }

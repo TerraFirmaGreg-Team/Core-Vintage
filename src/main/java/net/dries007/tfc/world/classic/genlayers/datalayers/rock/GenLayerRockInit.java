@@ -6,7 +6,6 @@ import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
 import net.minecraft.world.gen.layer.IntCache;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 
 public class GenLayerRockInit extends GenLayerTFC {
     private final int[] layerRocks;
@@ -18,6 +17,10 @@ public class GenLayerRockInit extends GenLayerTFC {
                 .filter(rocks)
                 .mapToInt(RockType::indexOf)
                 .sorted().toArray();
+
+        for (var item : layerRocks) {
+            System.out.println(item);
+        }
     }
 
     @Override

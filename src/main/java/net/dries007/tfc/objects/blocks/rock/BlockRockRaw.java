@@ -138,12 +138,4 @@ public class BlockRockRaw extends BlockRock {
                 this.getMetaFromState(this.getBlockState().getBaseState()),
                 new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRock()));
     }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-
-        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
-    }
 }

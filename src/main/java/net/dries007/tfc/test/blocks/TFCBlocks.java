@@ -72,9 +72,9 @@ public class TFCBlocks {
 
         for (var rock : Rock.getRockTypes()) {
             for (var rockBlockType : RockBlockType.getRockBlockTypes()) {
-                for (var pairFactory : rockBlockType.getBlockFactoryMap()) {
-                    var rockBlockVariant = pairFactory.getLeft();
-                    var factory = pairFactory.getRight();
+                for (var pair : rockBlockType.getBlockFactoryMap()) {
+                    var rockBlockVariant = pair.getLeft();
+                    var factory = pair.getRight();
 
                     var resultBlock = factory.apply(rockBlockType, rockBlockVariant, rock);
 

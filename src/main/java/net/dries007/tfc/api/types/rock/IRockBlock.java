@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.rock.util;
+package net.dries007.tfc.api.types.rock;
 
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;

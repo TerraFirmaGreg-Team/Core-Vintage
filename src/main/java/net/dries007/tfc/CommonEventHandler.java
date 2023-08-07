@@ -24,7 +24,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.animal.util.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.util.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.util.IPredator;
-import net.dries007.tfc.api.types.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;

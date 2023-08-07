@@ -14,7 +14,7 @@ import net.dries007.tfc.api.types.rock.RockVariant;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.api.types.soil.SoilVariant;
 import net.dries007.tfc.api.types.soil.util.ISoilBlock;

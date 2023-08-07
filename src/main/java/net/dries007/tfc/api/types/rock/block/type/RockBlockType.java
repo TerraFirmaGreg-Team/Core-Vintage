@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types.rock.block.type;
 
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.TriFunction;

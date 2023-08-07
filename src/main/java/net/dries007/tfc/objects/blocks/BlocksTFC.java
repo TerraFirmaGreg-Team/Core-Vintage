@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.types.agriculture.BerryBush;
 import net.dries007.tfc.api.types.agriculture.Crop;
 import net.dries007.tfc.api.types.agriculture.FruitTree;
-import net.dries007.tfc.api.types.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.soil.util.ISoilBlock;
 import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalAnvil;

@@ -8,7 +8,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.types.rock.RockVariant;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.minecraft.block.Block;
@@ -54,10 +53,6 @@ public class OreDictionaryHelper {
 
     public static void registerMeta(Item thing, int meta, Object... parts) {
         register(new Thing(thing, meta), parts);
-    }
-
-    public static void registerRockType(Block thing, RockVariant rockVariant, Object... prefixParts) {
-        registerRockType(new Thing(thing), rockVariant, prefixParts);
     }
 
     public static void registerDamageType(Item thing, DamageType type) {
@@ -121,37 +116,7 @@ public class OreDictionaryHelper {
         MAP.put(thing, toString(parts));
     }
 
-    private static void registerRockType(Thing thing, RockVariant rockVariant, Object... prefixParts) {
-        switch (rockVariant) {
-            case RAW:
-                MAP.put(thing, toString(prefixParts, "stone"));
-                break;
-            case SMOOTH:
-                MAP.put(thing, toString(prefixParts, "stone", "polished"));
-                break;
-            case COBBLE:
-                MAP.put(thing, toString(prefixParts, "cobblestone"));
-                break;
-            case BRICK:
-                MAP.put(thing, toString(prefixParts, "stone", "brick"));
-                MAP.put(thing, toString(prefixParts, "brick", "stone"));
-                break;
-//            case DRY_GRASS:
-//                MAP.put(thing, toString(prefixParts, rockVariant, "dry"));
-//                break;
-//            case CLAY:
-//                MAP.put(thing, toString(prefixParts, "block", rockVariant, "dirt"));
-//                break;
-//            case CLAY_GRASS:
-//                MAP.put(thing, toString(prefixParts, "block", rockVariant));
-//                break;
-            case SAND:
-            case GRAVEL:
-//            case DIRT:
-//            case GRASS:
-            default:
-                MAP.put(thing, toString(prefixParts, rockVariant));
-        }
+    private static void registerRockType(Thing thing, Object... prefixParts) {
     }
 
     private static class Thing {

@@ -178,9 +178,6 @@ public class ChiselBehavior implements IToolBehavior {
                         }
                     }
                 }
-                if (newState.getProperties().containsKey(BlockRockSmooth.CAN_FALL)) {
-                    newState = newState.withProperty(BlockRockSmooth.CAN_FALL, true);
-                }
                 worldIn.setBlockState(pos, newState);
 
                 // spawn a slab if necessary

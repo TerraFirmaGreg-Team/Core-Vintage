@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.mapgen;
 
-import net.dries007.tfc.api.types.rock.Rock;
+import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.DataLayer;
 import net.minecraft.block.state.IBlockState;
@@ -14,9 +14,6 @@ import java.util.Random;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.AIR;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.LAVA;
 
-/**
- * todo: this is rewritten in 1.14 anyway
- */
 public class MapGenCavesTFC extends MapGenBase {
     private final DataLayer[] stabilityLayer;
     private int[] rockLayer1;
@@ -42,8 +39,8 @@ public class MapGenCavesTFC extends MapGenBase {
         double width = 1.5d + rainfall / 500d;
         int caveChance = 30 + (int) (rainfall / 50d);
 
-        width += Rock.valueOf(rockLayer1[dlIndex]).getRockCategory().getCaveGenMod();
-        runs += Rock.valueOf(rockLayer1[dlIndex]).getRockCategory().getCaveFreqMod();
+        width += RockType.valueOf(rockLayer1[dlIndex]).getRockCategory().getCaveGenMod();
+        runs += RockType.valueOf(rockLayer1[dlIndex]).getRockCategory().getCaveFreqMod();
 
         if (yCoord < 32) width *= 0.5;
         else if (yCoord < 64) width *= 0.65;

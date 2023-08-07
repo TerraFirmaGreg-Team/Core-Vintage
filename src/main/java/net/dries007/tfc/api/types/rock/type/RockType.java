@@ -1,8 +1,11 @@
 package net.dries007.tfc.api.types.rock.type;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
+import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -52,7 +55,19 @@ public class RockType {
         return isFlux;
     }
 
+    @Nonnull
+    public ResourceLocation getTexture() {
+        return new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/blocks/rock/raw/" + this + ".png");
+    }
+
     public static Set<RockType> getRockTypes() {
         return rockTypes;
+    }
+
+    public static RockType valueOf(int i) {
+        return new ArrayList<>(rockTypes).get(i);
+    }
+    public static int indexOf(RockType rockType) {
+        return new ArrayList<>().indexOf(rockType);
     }
 }

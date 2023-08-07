@@ -1,8 +1,12 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.Rock;
 import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
+import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
+import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants;
+import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.objects.blocks.rock.BlockRockSpeleothem;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.minecraft.block.Block;
@@ -15,11 +19,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
-
-import static net.dries007.tfc.api.types.rock.RockType.ORDINARY;
-import static net.dries007.tfc.api.types.rock.RockVariant.RAW;
-import static net.dries007.tfc.api.types.rock.RockVariant.SPELEOTHEM;
-
 
 public class WorldGenSpeleothem implements IWorldGenerator {
 
@@ -107,19 +106,18 @@ public class WorldGenSpeleothem implements IWorldGenerator {
             if (block instanceof IRockBlock rockTypeBlock) {
                 BlockRockSpeleothem.EnumSize sizeType = BlockRockSpeleothem.EnumSize.values()[size - i - 1];
                 // Создаем блок сталактита с указанным размером и типом породы
-                IBlockState targetBlock = TFCStorage.getRockBlock(ORDINARY, SPELEOTHEM, rockTypeBlock.getRock()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
+                IBlockState targetBlock = TFCStorage.getRockBlock(RockBlockTypes.Speleothem, rockTypeBlock.getRockType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
                 // Устанавливаем блок сталактита в мир
                 world.setBlockState(pos, targetBlock);
             }
         }
     }
 
-    @SuppressWarnings("incomplete-switch")
     private Block getSpeleothemType(IBlockState state) {
         var block = state.getBlock();
-        for (Rock rock : Rock.values()) {
-            if (TFCStorage.getRockBlock(ORDINARY, RAW, rock) == block) {
-                return TFCStorage.getRockBlock(ORDINARY, RAW, rock);
+        for (var rockType : RockType.getRockTypes()) {
+            if (TFCStorage.getRockBlock(RockBlockTypes.Common, RockBlockVariants.Raw, rockType) == block) {
+                return TFCStorage.getRockBlock(RockBlockTypes.Common, RockBlockVariants.Raw, rockType);
             }
         }
 

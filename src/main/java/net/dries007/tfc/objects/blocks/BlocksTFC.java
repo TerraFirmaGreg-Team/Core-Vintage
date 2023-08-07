@@ -6,6 +6,7 @@ import net.dries007.tfc.api.types.agriculture.BerryBush;
 import net.dries007.tfc.api.types.agriculture.Crop;
 import net.dries007.tfc.api.types.agriculture.FruitTree;
 import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants;
 import net.dries007.tfc.api.types.soil.util.ISoilBlock;
 import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalAnvil;
@@ -27,7 +28,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.rock.RockVariant.*;
 import static net.dries007.tfc.api.types.soil.SoilVariant.DIRT;
 import static net.dries007.tfc.api.types.soil.SoilVariant.DRY_GRASS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.FOOD;
@@ -162,7 +162,7 @@ public final class BlocksTFC {
 
     public static boolean isRawStone(IBlockState current) {
         if (current.getBlock() instanceof IRockBlock rockTypeBlock)
-            return rockTypeBlock.getRockVariant() == RAW;
+            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Raw;
         return false;
     }
 
@@ -184,14 +184,14 @@ public final class BlocksTFC {
 
     public static boolean isSand(IBlockState current) {
         if (current.getBlock() instanceof IRockBlock rockTypeBlock) {
-            return rockTypeBlock.getRockVariant() == SAND;
+            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Sand;
         }
         return false;
     }
 
     public static boolean isGravel(IBlockState current) {
         if (current.getBlock() instanceof IRockBlock rockTypeBlock) {
-            return rockTypeBlock.getRockVariant() == GRAVEL;
+            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Gravel;
         }
         return false;
     }
@@ -226,7 +226,7 @@ public final class BlocksTFC {
                 }
             }
         if (current.getBlock() instanceof IRockBlock rockTypeBlock)
-            return rockTypeBlock.getRockVariant() == GRAVEL;
+            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Gravel;
         return false;
     }
 
@@ -249,11 +249,10 @@ public final class BlocksTFC {
 
     public static boolean isGround(IBlockState current) {
         if (current.getBlock() instanceof IRockBlock rockTypeBlock)
-            switch (rockTypeBlock.getRockVariant()) {
-                case GRAVEL, SAND, RAW -> {
-                    return true;
-                }
-            }
+            if (rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Gravel ||
+                rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Sand ||
+                rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Raw)
+                return true;
         if (current.getBlock() instanceof ISoilBlock soilTypeBlock)
             switch (soilTypeBlock.getSoilVariant()) {
                 case GRASS, DRY_GRASS, DIRT -> {

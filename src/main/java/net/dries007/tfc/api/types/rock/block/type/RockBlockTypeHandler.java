@@ -30,7 +30,7 @@ public class RockBlockTypeHandler {
                 .build();
 
         RockBlockTypes.Stairs = new RockBlockType
-                .Builder("stairs", BlockRockStair::new)
+                .Builder("stairs", BlockRockStairs::new)
                 .addBlockVariation(RockBlockVariants.Raw)
                 .addBlockVariation(RockBlockVariants.Cobble)
                 .addBlockVariation(RockBlockVariants.Smooth)

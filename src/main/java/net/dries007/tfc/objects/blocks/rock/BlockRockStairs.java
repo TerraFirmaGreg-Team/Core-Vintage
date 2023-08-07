@@ -28,13 +28,13 @@ import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-public class BlockRockStair extends BlockStairs implements IRockBlock {
+public class BlockRockStairs extends BlockStairs implements IRockBlock {
 
     private final RockBlockType rockBlockType;
     private final RockBlockVariant rockBlockVariant;
     private final RockType rockType;
 
-    public BlockRockStair(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
+    public BlockRockStairs(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
         super(Blocks.COBBLESTONE.getDefaultState());
 
         this.rockBlockType = rockBlockType;

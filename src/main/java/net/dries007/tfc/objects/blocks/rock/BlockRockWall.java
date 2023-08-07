@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -40,7 +41,7 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
     private final ResourceLocation modelLocation;
 
     public BlockRockWall(RockType rockType, RockVariant rockVariant, Rock rock) {
-        super(TFCStorage.getRockBlock(ORDINARY, rockVariant, rock));
+        super(Blocks.COBBLESTONE);
 
         this.rockVariant = rockVariant;
         this.rock = rock;

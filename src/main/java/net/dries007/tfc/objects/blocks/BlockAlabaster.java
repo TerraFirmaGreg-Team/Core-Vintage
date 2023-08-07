@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.rock.RockVariant;
+import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -34,39 +34,39 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @ParametersAreNonnullByDefault
 public class BlockAlabaster extends Block implements IItemSize, IItemProvider, IHasModel {
 
-    private final RockVariant rockVariant;
+    private final RockBlockVariant rockBlockVariant;
     private final EnumDyeColor dyeColor;
     private final ResourceLocation modelLocation;
 
-    public BlockAlabaster(RockVariant rockVariant, EnumDyeColor dyeColor) {
+    public BlockAlabaster(RockBlockVariant rockBlockVariant, EnumDyeColor dyeColor) {
         super(Material.ROCK, MapColor.getBlockColor(dyeColor));
 
-        this.rockVariant = rockVariant;
+        this.rockBlockVariant = rockBlockVariant;
         this.dyeColor = dyeColor;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/color/" + rockVariant);
+        this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/color/" + rockBlockVariant);
 
         setCreativeTab(CreativeTabsTFC.DECORATIONS);
         setSoundType(SoundType.STONE);
         setHardness(1.0F);
 
-        var blockRegistryName = String.format("alabaster/%s/%s", rockVariant, dyeColor.getName());
+        var blockRegistryName = String.format("alabaster/%s/%s", rockBlockVariant, dyeColor.getName());
         this.setRegistryName(MOD_ID, blockRegistryName);
         this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        OreDictionaryHelper.register(this, "alabaster" + rockVariant);
+        OreDictionaryHelper.register(this, "alabaster" + rockBlockVariant);
     }
 
-    public BlockAlabaster(RockVariant rockVariant) {
+    public BlockAlabaster(RockBlockVariant rockBlockVariant) {
         super(Material.ROCK, MapColor.SNOW);
 
-        this.rockVariant = rockVariant;
+        this.rockBlockVariant = rockBlockVariant;
         this.dyeColor = EnumDyeColor.WHITE;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/" + rockVariant);
+        this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/" + rockBlockVariant);
 
-        var blockRegistryName = String.format("alabaster/%s/plain", rockVariant);
+        var blockRegistryName = String.format("alabaster/%s/plain", rockBlockVariant);
         this.setRegistryName(MOD_ID, blockRegistryName);
         this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-        OreDictionaryHelper.register(this, "alabaster" + rockVariant);
+        OreDictionaryHelper.register(this, "alabaster" + rockBlockVariant);
     }
 
     @Nonnull

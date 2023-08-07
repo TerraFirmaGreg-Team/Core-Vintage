@@ -10,7 +10,7 @@ public class RockBlockTypeHandler {
         RockBlockTypes.Common = new RockBlockType
                 .Builder("common", BlockRock::new)
                 .addBlockVariation(RockBlockVariants.Raw, BlockRockRaw::new)
-                .addBlockVariation(RockBlockVariants.Cobble, BlockRockGravel::new)
+                .addBlockVariation(RockBlockVariants.Cobble, BlockRockFallable::new)
                 .addBlockVariation(RockBlockVariants.Smooth)
                 .addBlockVariation(RockBlockVariants.Brick)
                 .addBlockVariation(RockBlockVariants.BrickCracked)
@@ -24,8 +24,8 @@ public class RockBlockTypeHandler {
                 .build();
 
         RockBlockTypes.Fallable = new RockBlockType
-                .Builder("fallable", BlockRockGravel::new)
-                .addBlockVariation(RockBlockVariants.Gravel)
+                .Builder("fallable", BlockRockFallable::new)
+                .addBlockVariation(RockBlockVariants.Gravel, BlockRockGravel::new)
                 .addBlockVariation(RockBlockVariants.Sand, BlockRockSand::new)
                 .build();
 

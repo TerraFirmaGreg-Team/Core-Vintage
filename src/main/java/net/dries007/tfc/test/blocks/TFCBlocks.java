@@ -5,9 +5,10 @@ import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.fluid.properties.FluidWrapper;
 import net.dries007.tfc.api.types.metal.MetalVariant;
 import net.dries007.tfc.api.types.plant.Plant;
-import net.dries007.tfc.api.types.rock.Rock;
-import net.dries007.tfc.api.types.rock.RockType;
-import net.dries007.tfc.api.types.rock.RockVariant;
+import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
+import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants;
+import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.api.types.soil.SoilVariant;
 import net.dries007.tfc.api.types.wood.Wood;
@@ -33,7 +34,6 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 
 import static net.dries007.tfc.api.registries.TFCStorage.*;
-import static net.dries007.tfc.api.types.rock.RockVariant.*;
 
 public class TFCBlocks {
     public static BlockDebug DEBUG;
@@ -65,22 +65,21 @@ public class TFCBlocks {
     public static BlockPowderKeg POWDERKEG;
     public static BlockMetalCladding CLADDING;
 
-
-    private TFCBlocks() {
-    }
-
     public static void preInit() {
         FluidsTFC.preInit();
 
         //=== Rock ===================================================================================================//
 
-        for (Rock rock : Rock.values()) {
-            for (RockType rockType : RockType.values()) {
-                for (RockVariant rockVariant : rockType.getRockVariants()) {
-                    var rockTypeBlock = rockType.create(rockVariant, rock);
+        for (var rockType : RockType.getRockTypes()) {
+            for (var rockBlockType : RockBlockType.getRockBlockTypes()) {
+                for (var pairFactory : rockBlockType.getBlockFactoryMap()) {
+                    var rockBlockVariant = pairFactory.getLeft();
+                    var factory = pairFactory.getRight();
 
-                    if (ROCK_BLOCKS.put(new Triple<>(rockType, rockVariant, rock), rockTypeBlock) != null)
-                        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", rockType, rockVariant, rock));
+                    var resultBlock = factory.apply(rockBlockType, rockBlockVariant, rockType);
+
+                    if (ROCK_BLOCKS.put(new Triple<>(rockBlockType, rockBlockVariant, rockType), resultBlock) != null)
+                        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", rockBlockType, rockBlockVariant, rockType));
                 }
             }
         }
@@ -132,7 +131,7 @@ public class TFCBlocks {
         //=== Alabaster ==============================================================================================//
 
         for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-            for (RockVariant rockVariant : new RockVariant[]{RAW, BRICK, SMOOTH}) {
+            for (var rockVariant : new RockBlockVariant[]{RockBlockVariants.Raw, RockBlockVariants.Brick, RockBlockVariants.Smooth}) {
                 var alabasterColorBlock = new BlockAlabaster(rockVariant, dyeColor);
                 var alabasterBlock = new BlockAlabaster(rockVariant);
 

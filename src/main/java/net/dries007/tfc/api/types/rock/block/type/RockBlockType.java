@@ -38,8 +38,6 @@ public class RockBlockType {
         if (!rockBlockTypes.add(this)) {
             throw new RuntimeException(String.format("RockType: [%s] already exists!", rockBlockTypeName));
         }
-
-        var a = rockBlockTypes.toArray()[3];
     }
 
     public static Set<RockBlockType> getRockBlockTypes() {
@@ -52,12 +50,7 @@ public class RockBlockType {
     }
 
     @Nonnull
-    public TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> getDefaultFactory() {
-        return defaultFactory;
-    }
-
-    @Nonnull
-    public Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> getRockBlockVariantToSupplierMap() {
+    public Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> getBlockFactoryMap() {
         return rockBlockVariantToSupplierMap;
     }
 
@@ -91,7 +84,7 @@ public class RockBlockType {
          * @param rockBlockVariant сюда указывается вариация блока для текущего типа.
          * */
         public Builder addBlockVariation(@Nonnull RockBlockVariant rockBlockVariant) {
-            rockBlockVariantToSupplierMap.add(new Pair<>(rockBlockVariant, null));
+            rockBlockVariantToSupplierMap.add(new Pair<>(rockBlockVariant, defaultFactory));
             return this;
         }
 

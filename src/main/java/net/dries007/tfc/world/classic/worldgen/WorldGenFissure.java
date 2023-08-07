@@ -50,7 +50,7 @@ public class WorldGenFissure implements IWorldGenerator {
             return;
         }
 
-        final IBlockState rock = TFCStorage.getRockBlock(COMMON, RAW, getRock3(world, start)).getDefaultState();
+        final IBlockState rock = TFCStorage.getCommonBlock(RAW, getRock3(world, start)).getDefaultState();
 
         int depth = 2 + random.nextInt(3);
         int radius = 1 + random.nextInt(2);

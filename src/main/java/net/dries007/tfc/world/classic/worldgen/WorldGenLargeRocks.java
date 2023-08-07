@@ -50,7 +50,7 @@ public class WorldGenLargeRocks implements IWorldGenerator {
             for (int z = -size; z <= size; z++) {
                 for (int y = -2; y <= 2; y++) {
                     if (x * x + z * z + y * y > size * size) continue;
-                    world.setBlockState(start.add(x, y, z), TFCStorage.getRockBlock(COMMON, RAW, rock).getDefaultState());
+                    world.setBlockState(start.add(x, y, z), TFCStorage.getCommonBlock(RAW, rock).getDefaultState());
                 }
             }
         }

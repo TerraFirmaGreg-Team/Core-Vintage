@@ -10,6 +10,7 @@ import net.dries007.tfc.api.types.plant.PlantVariant;
 import net.dries007.tfc.api.types.plant.util.IPlantBlock;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
+import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.types.soil.Soil;
@@ -75,6 +76,66 @@ public final class TFCStorage {
     @Nonnull
     public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull Rock rock) {
         return getRockBlock(rockBlockType, null, rock);
+    }
+
+    @Nonnull
+    public static Block getCommonBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.COMMON, blockVariant, rock);
+    }
+
+    @Nonnull
+    public static Block getMossyBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.MOSSY, blockVariant, rock);
+    }
+
+    @Nonnull
+    public static Block getFallableBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.FALLABLE, blockVariant, rock);
+    }
+
+    @Nonnull
+    public static Block getStairsBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.STAIRS, blockVariant, rock);
+    }
+
+    @Nonnull
+    public static Block getSlabDoubleBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.SLAB_DOUBLE, blockVariant, rock);
+    }
+
+    @Nonnull
+    public static Block getSlabBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.SLAB, blockVariant, rock);
+    }
+
+    @Nonnull
+    public static Block getWallBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.WALL, blockVariant, rock);
+    }
+
+    @Nonnull
+    public static Block getLooseBlock(@Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.LOOSE, rock);
+    }
+
+    @Nonnull
+    public static Block getSpeleothemBlock(@Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.SPELEOTHEM, rock);
+    }
+
+    @Nonnull
+    public static Block getButtonBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.BUTTON, blockVariant, rock);
+    }
+
+    @Nonnull
+    public static Block getPressurePlateBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.PRESSURE_PLATE, blockVariant, rock);
+    }
+
+    @Nonnull
+    public static Block getAnvilBlock(@Nonnull Rock rock) {
+        return getRockBlock(RockBlockTypes.ANVIL, rock);
     }
 
     @Nonnull

@@ -54,7 +54,7 @@ public class WorldGenLooseRocks implements IWorldGenerator {
         if (world.isAirBlock(pos) &&
                 world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) &&
                 BlocksTFC.isSoil(world.getBlockState(pos.down()))) {
-            world.setBlockState(pos, TFCStorage.getRockBlock(LOOSE, rock).getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);
+            world.setBlockState(pos, TFCStorage.getLooseBlock(rock).getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);
         }
     }
 }

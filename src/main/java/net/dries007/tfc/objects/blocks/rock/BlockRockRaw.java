@@ -93,7 +93,7 @@ public class BlockRockRaw extends BlockRock {
         if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
             if (!worldIn.isRemote) {
                 // Create a stone anvil
-                var anvil = TFCStorage.getRockBlock(ANVIL, getRock());
+                var anvil = TFCStorage.getAnvilBlock(getRock());
                 if (anvil instanceof BlockRockAnvil) {
                     worldIn.setBlockState(pos, anvil.getDefaultState());
                 }

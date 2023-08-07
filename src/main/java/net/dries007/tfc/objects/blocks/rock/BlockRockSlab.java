@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.COMMON;
 import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.SLAB_DOUBLE;
 
 public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
@@ -45,14 +44,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockRockSlab(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
+    private BlockRockSlab(RockBlockVariant rockBlockVariant, Rock rock) {
         super(Material.ROCK);
 
         IBlockState state = blockState.getBaseState();
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.modelBlock = TFCStorage.getRockBlock(COMMON, rockBlockVariant, rock);
+        this.modelBlock = TFCStorage.getCommonBlock(rockBlockVariant, rock);
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -158,7 +157,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
         private final Rock rock;
 
         public Double(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
-            super(rockBlockType, rockBlockVariant, rock);
+            super(rockBlockVariant, rock);
 
             this.rockBlockType = rockBlockType;
             this.rockBlockVariant = rockBlockVariant;
@@ -216,9 +215,9 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
         private final Rock rock;
 
         public Half(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
-            super(rockBlockType, rockBlockVariant, rock);
+            super(rockBlockVariant, rock);
 
-            doubleSlab = (Double) TFCStorage.getRockBlock(SLAB_DOUBLE, rockBlockVariant, rock);
+            doubleSlab = (Double) TFCStorage.getSlabDoubleBlock(rockBlockVariant, rock);
             doubleSlab.halfSlab = this;
             halfSlab = this;
 

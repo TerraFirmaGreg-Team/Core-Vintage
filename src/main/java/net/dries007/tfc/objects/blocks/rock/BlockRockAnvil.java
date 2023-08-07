@@ -4,6 +4,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
@@ -34,6 +35,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.COMMON;
+import static net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants.*;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 
 @ParametersAreNonnullByDefault
@@ -189,7 +191,7 @@ public class BlockRockAnvil extends BlockRock {
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.getRockBlock(COMMON, getRockBlockVariant(), getRock()));
+        return new ItemStack(TFCStorage.getRockBlock(COMMON, RAW, getRock()));
     }
 
     @Override

@@ -1,14 +1,11 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.types.rock.Rock;
-import net.dries007.tfc.api.types.rock.RockVariant;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -20,7 +17,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;

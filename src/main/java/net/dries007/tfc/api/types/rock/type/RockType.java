@@ -65,7 +65,10 @@ public class RockType {
     }
 
     public static RockType valueOf(int i) {
-        return new ArrayList<>(rockTypes).get(i);
+        var values = new RockType[rockTypes.size()];
+        values = rockTypes.toArray(values);
+
+        return i >= 0 && i < values.length ? values[i] : values[i % values.length];
     }
     public static int indexOf(RockType rockType) {
         return new ArrayList<>().indexOf(rockType);

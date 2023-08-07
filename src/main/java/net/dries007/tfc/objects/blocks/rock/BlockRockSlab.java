@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.blocks.rock;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
-import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -37,6 +36,8 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.COMMON;
+import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.SLAB_DOUBLE;
 
 public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
@@ -51,7 +52,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.modelBlock = TFCStorage.getRockBlock(RockBlockTypes.COMMON, rockBlockVariant, rock);
+        this.modelBlock = TFCStorage.getRockBlock(COMMON, rockBlockVariant, rock);
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -217,7 +218,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
         public Half(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
             super(rockBlockType, rockBlockVariant, rock);
 
-            doubleSlab = (Double) TFCStorage.getRockBlock(RockBlockTypes.SLAB_DOUBLE, rockBlockVariant, rock);
+            doubleSlab = (Double) TFCStorage.getRockBlock(SLAB_DOUBLE, rockBlockVariant, rock);
             doubleSlab.halfSlab = this;
             halfSlab = this;
 

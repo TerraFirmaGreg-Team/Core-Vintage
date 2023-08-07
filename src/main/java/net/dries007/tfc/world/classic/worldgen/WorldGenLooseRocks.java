@@ -2,7 +2,6 @@ package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
@@ -16,6 +15,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
+import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.LOOSE;
 import static net.dries007.tfc.objects.blocks.rock.BlockRockLoose.AXIS;
 
 public class WorldGenLooseRocks implements IWorldGenerator {
@@ -54,7 +54,7 @@ public class WorldGenLooseRocks implements IWorldGenerator {
         if (world.isAirBlock(pos) &&
                 world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) &&
                 BlocksTFC.isSoil(world.getBlockState(pos.down()))) {
-            world.setBlockState(pos, TFCStorage.getRockBlock(RockBlockTypes.LOOSE, rock).getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);
+            world.setBlockState(pos, TFCStorage.getRockBlock(LOOSE, rock).getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);
         }
     }
 }

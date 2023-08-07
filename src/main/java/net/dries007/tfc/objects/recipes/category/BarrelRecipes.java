@@ -5,7 +5,6 @@ import net.dries007.tfc.api.recipes.barrel.*;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.food.Food;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
@@ -24,6 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
+import static net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants.*;
 import static net.dries007.tfc.objects.fluids.FluidsTFC.*;
 
 public class BarrelRecipes {
@@ -81,7 +81,7 @@ public class BarrelRecipes {
                 // this ratio works for 9b + 1b = 10b (full barrel) of brine/milk_vinegar, but leaves odd ninths of fluid around for other mixtures.
                 new BarrelRecipeFluidMixing(IIngredient.of(MILK.get(), 9), new IngredientFluidItem(VINEGAR.get(), 1), new FluidStack(MILK_VINEGAR.get(), 10), 0).setRegistryName("milk_vinegar"),
                 new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 500), IIngredient.of("dustFlux"), new FluidStack(LIMEWATER.get(), 500), ItemStack.EMPTY, 0).setRegistryName("limewater"),
-                new BarrelRecipe(IIngredient.of(LIMEWATER.get(), 100), IIngredient.of("gemGypsum"), null, new ItemStack(TFCStorage.getAlabasterBlock("plain", RockBlockVariants.RAW)), ICalendar.TICKS_IN_HOUR).setRegistryName("plain_alabaster"),
+                new BarrelRecipe(IIngredient.of(LIMEWATER.get(), 100), IIngredient.of("gemGypsum"), null, new ItemStack(TFCStorage.getAlabasterBlock("plain", RAW)), ICalendar.TICKS_IN_HOUR).setRegistryName("plain_alabaster"),
 
                 //olive oil production
                 new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 125), IIngredient.of(ItemsTFC.OLIVE_PASTE), new FluidStack(OLIVE_OIL_WATER.get(), 125), ItemStack.EMPTY, 2 * ICalendar.TICKS_IN_HOUR).setRegistryName("olive_water"),
@@ -119,9 +119,9 @@ public class BarrelRecipes {
                     new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(new ItemStack(Blocks.CONCRETE_POWDER, 1, 0)), null, new ItemStack(Blocks.CONCRETE_POWDER, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_" + dyeName),
                     new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(TFCBlocks.AGGREGATE), null, new ItemStack(Blocks.CONCRETE_POWDER, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("aggregate_" + dyeName),
                     // Alabaster
-                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(TFCStorage.getAlabasterBlock("plain", RockBlockVariants.BRICK)), null, new ItemStack(TFCStorage.getAlabasterBlock(dyeColor.getName(), RockBlockVariants.BRICK)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_" + dyeColor.getName()),
-                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(TFCStorage.getAlabasterBlock("plain", RockBlockVariants.RAW)), null, new ItemStack(TFCStorage.getAlabasterBlock(dyeColor.getName(), RockBlockVariants.RAW)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_" + dyeColor.getName()),
-                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(TFCStorage.getAlabasterBlock("plain", RockBlockVariants.SMOOTH)), null, new ItemStack(TFCStorage.getAlabasterBlock(dyeColor.getName(), RockBlockVariants.SMOOTH)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_polished_" + dyeColor.getName())
+                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(TFCStorage.getAlabasterBlock("plain", BRICK)), null, new ItemStack(TFCStorage.getAlabasterBlock(dyeColor.getName(), BRICK)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_" + dyeColor.getName()),
+                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(TFCStorage.getAlabasterBlock("plain", RAW)), null, new ItemStack(TFCStorage.getAlabasterBlock(dyeColor.getName(), RAW)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_" + dyeColor.getName()),
+                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(TFCStorage.getAlabasterBlock("plain", SMOOTH)), null, new ItemStack(TFCStorage.getAlabasterBlock(dyeColor.getName(), SMOOTH)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_polished_" + dyeColor.getName())
             );
         }
         // Un-dyeing Recipes
@@ -136,9 +136,9 @@ public class BarrelRecipes {
                 // Concrete
                 new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("powderConcrete"), null, new ItemStack(TFCBlocks.AGGREGATE), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_undo"),
                 // Alabaster
-                new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterBricks"), null, new ItemStack(TFCStorage.getAlabasterBlock("plain", RockBlockVariants.BRICK)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_undo"),
-                new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterRaw"), null, new ItemStack(TFCStorage.getAlabasterBlock("plain", RockBlockVariants.RAW)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_undo"),
-                new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterPolished"), null, new ItemStack(TFCStorage.getAlabasterBlock("plain", RockBlockVariants.SMOOTH)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_polished_undo")
+                new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterBricks"), null, new ItemStack(TFCStorage.getAlabasterBlock("plain", BRICK)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_undo"),
+                new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterRaw"), null, new ItemStack(TFCStorage.getAlabasterBlock("plain", RAW)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_undo"),
+                new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterPolished"), null, new ItemStack(TFCStorage.getAlabasterBlock("plain", SMOOTH)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_polished_undo")
         );
         // Dye combinations.
         registry.registerAll(

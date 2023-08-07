@@ -7,7 +7,6 @@ import net.dries007.tfc.api.types.metal.MetalVariant;
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.api.types.soil.SoilVariant;
@@ -34,6 +33,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 
 import static net.dries007.tfc.api.registries.TFCStorage.*;
+import static net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants.*;
 
 public class TFCBlocks {
     public static BlockDebug DEBUG;
@@ -131,7 +131,7 @@ public class TFCBlocks {
         //=== Alabaster ==============================================================================================//
 
         for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-            for (var rockVariant : new RockBlockVariant[]{RockBlockVariants.RAW, RockBlockVariants.BRICK, RockBlockVariants.SMOOTH}) {
+            for (var rockVariant : new RockBlockVariant[]{RAW, BRICK, SMOOTH}) {
                 var alabasterColorBlock = new BlockAlabaster(rockVariant, dyeColor);
                 var alabasterBlock = new BlockAlabaster(rockVariant);
 

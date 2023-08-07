@@ -123,10 +123,10 @@ public final class TFCStorage {
     }
 
     @Nonnull
-    public static Item getRockItem(@Nonnull Rock rock) {
-        var item = (Item) ROCK_ITEM.get(rock);
+    public static Item getRockItem(@Nonnull RockType rockType) {
+        var item = (Item) ROCK_ITEM.get(rockType);
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", rock));
+        throw new RuntimeException(String.format("Item is null: %s", rockType));
     }
 
 

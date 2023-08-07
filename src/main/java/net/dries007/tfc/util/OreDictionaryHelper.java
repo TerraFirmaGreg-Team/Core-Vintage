@@ -112,8 +112,9 @@ public class OreDictionaryHelper {
     }
 
     private static void register(Thing thing, Object... parts) {
+        /*
         if (done) throw new IllegalStateException("Cannot use the helper to register after postInit has past.");
-        MAP.put(thing, toString(parts));
+        MAP.put(thing, toString(parts));*/
     }
 
     private static void registerRockType(Thing thing, Object... prefixParts) {

@@ -51,7 +51,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.modelBlock = TFCStorage.getRockBlock(rockBlockType, rockBlockVariant, rockType);
+        this.modelBlock = TFCStorage.getRockBlock(RockBlockTypes.Common, rockBlockVariant, rockType);
         useNeighborBrightness = true;
 
         setLightOpacity(255);

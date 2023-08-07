@@ -9,6 +9,7 @@ import net.dries007.tfc.api.util.TriFunction;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -17,19 +18,19 @@ import java.util.Set;
  * */
 public class RockBlockType {
 
-    private static final Set<RockBlockType> rockBlockTypes = new HashSet<>();
+    private static final Set<RockBlockType> rockBlockTypes = new LinkedHashSet<>();
 
     @Nonnull
     private final String rockBlockTypeName;
     @Nonnull
     private final TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> defaultFactory;
     @Nonnull
-    private final Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> rockBlockVariantToSupplierMap;
+    private final Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> rockBlockFactoryMap;
 
-    private RockBlockType(@Nonnull String rockBlockTypeName, @Nonnull TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> defaultFactory, @Nonnull Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> rockBlockVariantToSupplierMap) {
+    private RockBlockType(@Nonnull String rockBlockTypeName, @Nonnull TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> defaultFactory, @Nonnull Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> rockBlockFactoryMap) {
         this.rockBlockTypeName = rockBlockTypeName;
         this.defaultFactory = defaultFactory;
-        this.rockBlockVariantToSupplierMap = rockBlockVariantToSupplierMap;
+        this.rockBlockFactoryMap = rockBlockFactoryMap;
 
         if (rockBlockTypeName.isEmpty()) {
             throw new RuntimeException(String.format("RockBlockType name must contain any character: [%s]", rockBlockTypeName));
@@ -51,7 +52,7 @@ public class RockBlockType {
 
     @Nonnull
     public Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> getBlockFactoryMap() {
-        return rockBlockVariantToSupplierMap;
+        return rockBlockFactoryMap;
     }
 
     public static class Builder {
@@ -60,7 +61,7 @@ public class RockBlockType {
         @Nonnull
         private final TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> defaultFactory;
         @Nonnull
-        private final Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> rockBlockVariantToSupplierMap = new HashSet<>();
+        private final Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> rockBlockFactoryMap = new HashSet<>();
 
         public Builder(@Nonnull String rockBlockTypeName, @Nonnull TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> defaultFactory) {
             this.rockBlockTypeName = rockBlockTypeName;
@@ -74,7 +75,7 @@ public class RockBlockType {
          * @param rockBlockVariant сюда указывается вариация блока для текущего типа.
          * */
         public Builder addBlockVariation(@Nonnull RockBlockVariant rockBlockVariant, @Nullable TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> overridingFactory) {
-            rockBlockVariantToSupplierMap.add(new Pair<>(rockBlockVariant, overridingFactory));
+            rockBlockFactoryMap.add(new Pair<>(rockBlockVariant, overridingFactory));
             return this;
         }
 
@@ -84,12 +85,15 @@ public class RockBlockType {
          * @param rockBlockVariant сюда указывается вариация блока для текущего типа.
          * */
         public Builder addBlockVariation(@Nonnull RockBlockVariant rockBlockVariant) {
-            rockBlockVariantToSupplierMap.add(new Pair<>(rockBlockVariant, defaultFactory));
+            rockBlockFactoryMap.add(new Pair<>(rockBlockVariant, defaultFactory));
             return this;
         }
 
         public RockBlockType build() {
-            return new RockBlockType(rockBlockTypeName, defaultFactory, rockBlockVariantToSupplierMap);
+            if (rockBlockFactoryMap.isEmpty()) {
+                rockBlockFactoryMap.add(new Pair<>(null, defaultFactory));
+            }
+            return new RockBlockType(rockBlockTypeName, defaultFactory, rockBlockFactoryMap);
         }
     }
 }

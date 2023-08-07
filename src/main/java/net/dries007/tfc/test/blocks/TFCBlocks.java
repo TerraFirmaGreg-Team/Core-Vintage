@@ -78,8 +78,6 @@ public class TFCBlocks {
 
                     var resultBlock = factory.apply(rockBlockType, rockBlockVariant, rockType);
 
-                    System.out.println(String.format("%s %s %s %s", rockBlockType, rockBlockVariant, rockType, resultBlock));
-
                     if (ROCK_BLOCKS.put(new Triple<>(rockBlockType, rockBlockVariant, rockType), resultBlock) != null)
                         throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", rockBlockType, rockBlockVariant, rockType));
                 }

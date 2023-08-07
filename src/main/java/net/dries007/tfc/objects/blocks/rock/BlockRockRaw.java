@@ -6,6 +6,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.type.Rock;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.util.GemsFromRawRocks;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -45,10 +46,13 @@ public class BlockRockRaw extends BlockRock {
 
         this.setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
 
-        // TODO: 07.08.2023
-        /*
-        FallingBlockManager.Specification spec = new FallingBlockManager.Specification(rockVariant.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
-        FallingBlockManager.registerFallable(this, spec);*/
+        // Copy as each raw stone has an unique resultingState
+        var fallingSpec = rockBlockVariant.getFallingSpecification();
+
+        if (fallingSpec != null) {
+            var spec = new FallingBlockManager.Specification(fallingSpec);
+            FallingBlockManager.registerFallable(this, spec);
+        }
     }
 
     @Nonnull

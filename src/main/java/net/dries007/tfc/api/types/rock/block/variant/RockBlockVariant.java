@@ -1,6 +1,9 @@
 package net.dries007.tfc.api.types.rock.block.variant;
 
+import net.dries007.tfc.api.util.FallingBlockManager;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -13,16 +16,18 @@ public class RockBlockVariant {
     @Nonnull
     private final String rockBlockVariantName;
     private final float baseHardness;
-
+    @Nullable
+    private final FallingBlockManager.Specification fallingSpecification;
     /**
      * Создает экземпляр класса RockBlockVariant с указанными параметрами.
      *
      * @param rockBlockVariantName Название варианта блока породы.
      * @param baseHardness         Базовая прочность блока породы.
      */
-    public RockBlockVariant(@Nonnull String rockBlockVariantName, float baseHardness) {
+    public RockBlockVariant(@Nonnull String rockBlockVariantName, float baseHardness, @Nullable FallingBlockManager.Specification fallingSpecification) {
         this.rockBlockVariantName = rockBlockVariantName;
         this.baseHardness = baseHardness;
+        this.fallingSpecification = fallingSpecification;
 
         if (rockBlockVariantName.isEmpty()) {
             throw new RuntimeException(String.format("RockBlockVariant name must contain any character: [%s]", rockBlockVariantName));
@@ -40,6 +45,16 @@ public class RockBlockVariant {
      */
     public float getBaseHardness() {
         return baseHardness;
+    }
+
+    /**
+     * Возвращает спецификации для обработки физики текущего блока породы.
+     *
+     * @return Базовая прочность блока породы.
+     */
+    @Nullable
+    public FallingBlockManager.Specification getFallingSpecification() {
+        return fallingSpecification;
     }
 
     /**
@@ -62,11 +77,11 @@ public class RockBlockVariant {
     }
 
     /**
-     * Проверяет, может ли блок породы падать.
+     * Возвращает, может ли блок породы падать.
      *
      * @return true, если блок породы может падать, в противном случае - false.
      */
     public boolean canFall() {
-        return false;
+        return fallingSpecification != null;
     }
 }

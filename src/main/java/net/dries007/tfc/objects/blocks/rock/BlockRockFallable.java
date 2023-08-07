@@ -25,11 +25,8 @@ public class BlockRockFallable extends BlockRock {
     public BlockRockFallable(Material material, RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
         super(material, rockBlockType, rockBlockVariant, rock);
 
-        // TODO: 07.08.2023
-        /*
-        if (rockVariant.canFall()) {
-            FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
-        }*/
+        if (rockBlockVariant.canFall())
+            FallingBlockManager.registerFallable(this, rockBlockVariant.getFallingSpecification());
     }
 
     @SideOnly(Side.CLIENT)

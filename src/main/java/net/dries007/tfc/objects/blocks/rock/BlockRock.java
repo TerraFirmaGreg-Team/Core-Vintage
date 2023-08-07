@@ -7,6 +7,7 @@ import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.Block;
@@ -50,11 +51,6 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
         this.setHarvestLevel("pickaxe", 0);
         this.setRegistryName(MOD_ID, getRegistryString());
         this.setTranslationKey(getTranslationString());
-
-        // TODO: 07.08.2023
-        /*
-        if (rockVariant.canFall())
-            FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());*/
     }
 
     public BlockRock(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {

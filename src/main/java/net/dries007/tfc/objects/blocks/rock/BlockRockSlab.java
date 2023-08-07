@@ -1,9 +1,6 @@
 package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.Rock;
-import net.dries007.tfc.api.types.rock.RockType;
-import net.dries007.tfc.api.types.rock.RockVariant;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
@@ -11,7 +8,6 @@ import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.rock.ItemRockSlab;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -28,11 +24,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,8 +37,6 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.rock.RockType.ORDINARY;
-import static net.dries007.tfc.api.types.rock.RockType.SLAB_DOUBLE;
 
 public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);

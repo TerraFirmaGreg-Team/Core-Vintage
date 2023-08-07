@@ -11,6 +11,9 @@ import net.dries007.tfc.api.types.plant.util.IPlantBlock;
 import net.dries007.tfc.api.types.rock.Rock;
 import net.dries007.tfc.api.types.rock.RockType;
 import net.dries007.tfc.api.types.rock.RockVariant;
+import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
+import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.util.IRockBlock;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.api.types.soil.SoilVariant;
@@ -32,6 +35,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fluids.BlockFluidBase;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.*;
 
 /**
@@ -65,10 +69,15 @@ public final class TFCStorage {
     public static final List<BlockFluidBase> FLUID = new ArrayList<>();
 
     @Nonnull
-    public static Block getRockBlock(@Nonnull RockType rockType, @Nonnull RockVariant blockVariant, @Nonnull Rock stoneType) {
-        var block = (Block) ROCK_BLOCKS.get(new Triple<>(rockType, blockVariant, stoneType));
+    public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nullable RockBlockVariant blockVariant, @Nonnull RockType rockType) {
+        var block = (Block) ROCK_BLOCKS.get(new Triple<>(rockBlockType, blockVariant, rockType));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s, %s", rockType, blockVariant, stoneType));
+        throw new RuntimeException(String.format("Block is null: %s, %s, %s", rockBlockType, blockVariant, rockType));
+    }
+
+    @Nonnull
+    public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull RockType rockType) {
+        return getRockBlock(rockBlockType, null, rockType);
     }
 
     @Nonnull

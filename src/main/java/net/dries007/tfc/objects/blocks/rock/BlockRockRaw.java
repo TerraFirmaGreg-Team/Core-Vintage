@@ -7,11 +7,9 @@ import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.GemsFromRawRocks;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -37,8 +35,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class BlockRockRaw extends BlockRock {
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
     public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
@@ -46,19 +42,12 @@ public class BlockRockRaw extends BlockRock {
     public BlockRockRaw(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
         super(rockBlockType, rockBlockVariant, rockType);
 
-        this.setCreativeTab(CreativeTabsTFC.ROCK);
-        this.setSoundType(SoundType.STONE);
-        this.setHardness(getFinalHardness());
-        this.setHarvestLevel("pickaxe", 0);
-        this.setRegistryName(MOD_ID, getRegistryString());
-        this.setTranslationKey(getTranslationString());
         this.setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
 
         // TODO: 07.08.2023
         /*
         FallingBlockManager.Specification spec = new FallingBlockManager.Specification(rockVariant.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
         FallingBlockManager.registerFallable(this, spec);*/
-
     }
 
     @Nonnull

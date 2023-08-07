@@ -51,8 +51,8 @@ public final class TFCStorage {
     public static final Map<Pair<MetalVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCK = new HashMap<>();
 
-    public static final Map<Rock, ItemRock> ROCK_ITEM = new HashMap<>();
-    public static final Map<Rock, ItemRockBrick> BRICK_ITEM = new HashMap<>();
+    public static final Map<RockType, ItemRock> ROCK_ITEM = new HashMap<>();
+    public static final Map<RockType, ItemRockBrick> BRICK_ITEM = new HashMap<>();
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
 

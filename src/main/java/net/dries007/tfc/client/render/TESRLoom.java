@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.render;
 
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.te.TELoom;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -22,7 +22,7 @@ public class TESRLoom extends TESRBase<TELoom> {
         GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
         GlStateManager.rotate((te.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
         GlStateManager.popMatrix();
-        Wood wood = null;
+        Wood wood;
 
         double tileZ = te.getAnimPos();
 

@@ -3,8 +3,7 @@ package net.dries007.tfc.objects.items.wood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.tree.Tree;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
@@ -26,14 +25,14 @@ public class ItemWoodLumber extends ItemTFC {
         setMaxDamage(0);
         OreDictionaryHelper.register(this, "lumber");
         //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "lumber", wood.getName());
+        OreDictionaryHelper.register(this, "lumber", wood.toString());
     }
 
-    public static ItemWoodLumber get(Tree wood) {
+    public static ItemWoodLumber get(Wood wood) {
         return MAP.get(wood);
     }
 
-    public static ItemStack get(Tree wood, int amount) {
+    public static ItemStack get(Wood wood, int amount) {
         return new ItemStack(MAP.get(wood), amount);
     }
 

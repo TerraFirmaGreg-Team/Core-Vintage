@@ -1,6 +1,7 @@
-package net.dries007.tfc.api.types.wood;
+package net.dries007.tfc.api.types.wood.block.variant;
 
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.objects.blocks.wood.*;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog;

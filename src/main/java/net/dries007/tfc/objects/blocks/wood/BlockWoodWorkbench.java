@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.container.ContainerWorkbenchTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;

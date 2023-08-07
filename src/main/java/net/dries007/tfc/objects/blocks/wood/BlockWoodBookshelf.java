@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.wood;
 
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -48,7 +48,7 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         setHarvestLevel("axe", 0);
 
         OreDictionaryHelper.register(this, "bookshelf");
-        OreDictionaryHelper.register(this, "bookshelf", wood.getName());
+        OreDictionaryHelper.register(this, "bookshelf", wood.toString());
         Blocks.FIRE.setFireInfo(this, 30, 20);
     }
 

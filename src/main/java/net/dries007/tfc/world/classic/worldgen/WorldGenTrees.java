@@ -2,8 +2,8 @@ package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
@@ -104,7 +104,7 @@ public class WorldGenTrees implements IWorldGenerator {
             }
         }
 
-        woods.removeIf(t -> !t.getTree().hasBushes());
+        woods.removeIf(t -> !t.hasBushes());
         // Small bushes in high density areas
         if (density > 0.6f && !woods.isEmpty()) // Density requirement is the same for jungles (kapok trees) to generate
         {
@@ -113,8 +113,8 @@ public class WorldGenTrees implements IWorldGenerator {
                 final int z = chunkZ * 16 + random.nextInt(16) + 8;
                 final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
                 final Wood wood = getWood(woods, density, random);
-                ITreeGenerator bushGen = wood.getTree().getBushGen();
-                if (bushGen != null && wood.getTree().hasBushes() && bushGen.canGenerateTree(world, pos, wood)) {
+                ITreeGenerator bushGen = wood.getBushGenerator();
+                if (bushGen != null && wood.hasBushes() && bushGen.canGenerateTree(world, pos, wood)) {
                     bushGen.generateTree(manager, world, pos, wood, random, true);
                 }
             }

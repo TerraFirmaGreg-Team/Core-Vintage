@@ -2,8 +2,8 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
@@ -22,7 +22,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.WoodVariant.LOG;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.LOG;
 import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 import static net.minecraft.block.BlockVine.*;
@@ -57,13 +57,13 @@ public class TreeGenKapok implements ITreeGenerator {
             if (z1 == 0 || z1 == -1)
                 z1 = z1 * 3 + 1;
             type = 1 + rand.nextInt(3);
-            placeBranch(manager, world, pos.add(x1, y1, z1), wood.getName() + "/branch" + type);
+            placeBranch(manager, world, pos.add(x1, y1, z1), wood.toString() + "/branch" + type);
             checkAndPlace(world, pos.add(x1 - Math.abs(x1) / x1, y1 - 1, z1 - Math.abs(z1) / z1), true);
         }
 
         for (int i = -1; i < height; i++)
             placeTrunk(world, pos.add(0, i, 0));
-        placeBranch(manager, world, pos.add(0, height, 0), wood.getName() + "/top");
+        placeBranch(manager, world, pos.add(0, height, 0), wood.toString() + "/top");
 
     }
 

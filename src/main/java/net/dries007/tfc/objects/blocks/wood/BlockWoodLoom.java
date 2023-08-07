@@ -4,9 +4,9 @@ package net.dries007.tfc.objects.blocks.wood;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TELoom;
@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCStorage.WOOD_BLOCKS;
-import static net.dries007.tfc.api.types.wood.WoodVariant.LOOM;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.LOOM;
 import static net.minecraft.block.BlockHorizontal.FACING;
 import static net.minecraft.block.material.Material.WOOD;
 
@@ -78,6 +78,13 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
+    public static Collection<Block> getLoomStorage() {
+        return WOOD_BLOCKS.values().stream()
+                .filter(block -> block.getWoodVariant() == LOOM)
+                .map(block -> (Block) block)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public WoodVariant getWoodVariant() {
         return woodVariant;
@@ -104,13 +111,6 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
     @Override
     public Weight getWeight(@Nonnull ItemStack stack) {
         return Weight.VERY_HEAVY; // Stacksize = 1
-    }
-
-    public static Collection<Block> getLoomStorage() {
-        return WOOD_BLOCKS.values().stream()
-                .filter(block -> block.getWoodVariant() == LOOM)
-                .map(block -> (Block) block)
-                .collect(Collectors.toList());
     }
 
     @Nullable

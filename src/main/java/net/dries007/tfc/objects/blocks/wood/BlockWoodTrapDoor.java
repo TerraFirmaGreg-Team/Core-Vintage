@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.wood;
 
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -44,7 +44,7 @@ public class BlockWoodTrapDoor extends BlockTrapDoor implements IWoodBlock {
         setSoundType(SoundType.WOOD);
         OreDictionaryHelper.register(this, "trapdoor", "wood");
         //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "trapdoor", "wood", wood.getName());
+        OreDictionaryHelper.register(this, "trapdoor", "wood", wood.toString());
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 

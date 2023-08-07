@@ -1,21 +1,20 @@
 package net.dries007.tfc.api.types.wood.block.variant;
 
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
-
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 public class WoodBlockVariant {
 
-	private static final HashSet<WoodBlockVariant> woodBlockVariants = new HashSet<>();
+    private static final HashSet<WoodBlockVariant> woodBlockVariants = new HashSet<>();
 
 
-	public WoodBlockVariant(IWoodBlock woodBlock) {
-	}
+    public WoodBlockVariant(@Nonnull String name) {
+    }
 
 
-	public static List<WoodBlockVariant> getAllWoodBlockTypes() {
-		return new ArrayList<>(woodBlockVariants);
-	}
+    public static List<WoodBlockVariant> getAllWoodBlockTypes() {
+        return new ArrayList<>(woodBlockVariants);
+    }
 }

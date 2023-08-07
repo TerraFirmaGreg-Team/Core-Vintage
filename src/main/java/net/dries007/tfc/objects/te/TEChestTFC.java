@@ -4,7 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodChest;
 import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;

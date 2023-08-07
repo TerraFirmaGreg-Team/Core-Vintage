@@ -3,8 +3,8 @@ package net.dries007.tfc.world.classic.chunkdata;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.types.soil.Soil;
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.util.NBTBuilder;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -264,8 +264,8 @@ public final class ChunkDataTFC {
     public List<Wood> getValidTrees() {
         return TFCStorage.WOOD_BLOCKS.values().stream()
                 .map(IWoodBlock::getWood)
-                .filter(t -> t.getTree().isValidLocation(avgTemp, rainfall, floraDensity))
-                .sorted((s, t) -> (int) (t.getTree().getDominance() - s.getTree().getDominance()))
+                .filter(t -> t.isValidLocation(avgTemp, rainfall, floraDensity))
+                .sorted((s, t) -> (int) (t.getDominance() - s.getDominance()))
                 .collect(Collectors.toList());
     }
 
@@ -273,8 +273,8 @@ public final class ChunkDataTFC {
     public Wood getSparseGenTree() {
         return TFCStorage.WOOD_BLOCKS.values().stream()
                 .map(IWoodBlock::getWood)
-                .filter(t -> t.getTree().isValidLocation(0.5f * avgTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
-                .min((s, t) -> (int) (t.getTree().getDominance() - s.getTree().getDominance()))
+                .filter(t -> t.isValidLocation(0.5f * avgTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
+                .min((s, t) -> (int) (t.getDominance() - s.getDominance()))
                 .orElse(null);
     }
 

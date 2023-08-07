@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.render;
 
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodChest;
 import net.dries007.tfc.objects.te.TEChestTFC;
 import net.dries007.tfc.util.Helpers;

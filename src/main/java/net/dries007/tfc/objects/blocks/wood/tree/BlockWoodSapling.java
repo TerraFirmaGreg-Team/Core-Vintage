@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks.wood.tree;
 
 import net.dries007.tfc.api.types.agriculture.util.IGrowingPlant;
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -66,7 +66,7 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
         setHardness(0.0F);
         OreDictionaryHelper.register(this, "tree", "sapling");
         //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "tree", "sapling", wood.getName());
+        OreDictionaryHelper.register(this, "tree", "sapling", wood.toString());
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 

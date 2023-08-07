@@ -10,8 +10,8 @@ import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.api.types.soil.SoilVariant;
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
@@ -106,7 +106,7 @@ public class TFCBlocks {
 
         //=== Wood ===================================================================================================//
 
-        for (Wood wood : Wood.values()) {
+        for (Wood wood : Wood.getAllWoodTypes()) {
             for (WoodVariant woodVariant : WoodVariant.values()) {
                 var woodVariantBlock = woodVariant.create(wood);
 

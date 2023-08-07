@@ -4,7 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodDoor;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemDoor;
@@ -25,7 +25,7 @@ public class ItemWoodDoor extends ItemDoor implements IItemSize {
         wood = blockWoodDoor.getWood();
         OreDictionaryHelper.register(this, "door", "wood");
         //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "door", "wood", wood.getName());
+        OreDictionaryHelper.register(this, "door", "wood", wood.toString());
     }
 
     @Nonnull

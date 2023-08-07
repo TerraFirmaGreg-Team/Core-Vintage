@@ -3,9 +3,9 @@ package net.dries007.tfc.objects.blocks.wood.tree;
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -44,8 +44,8 @@ import java.util.*;
 
 import static net.dries007.tfc.Constants.RNG;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.WoodVariant.LOG;
-import static net.dries007.tfc.api.types.wood.WoodVariant.SAPLING;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.LOG;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.SAPLING;
 
 @ParametersAreNonnullByDefault
 public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
@@ -68,7 +68,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         leavesFancy = true; // Fast / Fancy graphics works correctly
         OreDictionaryHelper.register(this, "tree", "leaves");
         //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "tree", "leaves", wood.getName());
+        OreDictionaryHelper.register(this, "tree", "leaves", wood.toString());
         Blocks.FIRE.setFireInfo(this, 30, 60);
         setTickRandomly(true);
     }
@@ -272,7 +272,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(modelLocation,
-                        "wood=" + wood.getName());
+                        "wood=" + wood.toString());
             }
         });
 
@@ -282,7 +282,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
                     Item.getItemFromBlock(this),
                     this.getMetaFromState(state),
                     new ModelResourceLocation(modelLocation,
-                            "wood=" + wood.getName()));
+                            "wood=" + wood.toString()));
         }
     }
 }

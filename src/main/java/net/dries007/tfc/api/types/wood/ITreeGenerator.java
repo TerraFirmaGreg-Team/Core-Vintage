@@ -1,6 +1,6 @@
-package net.dries007.tfc.api.types.tree.util;
+package net.dries007.tfc.api.types.wood;
 
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
 import net.minecraft.block.material.Material;
@@ -34,7 +34,7 @@ public interface ITreeGenerator {
      */
     default boolean canGenerateTree(World world, BlockPos pos, Wood wood) {
         // Check if ground is flat enough
-        final int radius = wood.getTree().getMaxGrowthRadius();
+        final int radius = wood.getMaxGrowthRadius();
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 if ((x == 0 && z == 0) ||
@@ -45,7 +45,7 @@ public interface ITreeGenerator {
             }
         }
         // Check if there is room directly upwards
-        final int height = wood.getTree().getMaxHeight();
+        final int height = wood.getMaxHeight();
         for (int y = 1; y <= height; y++) {
             IBlockState state = world.getBlockState(pos.up(y));
             if (!state.getMaterial().isReplaceable() && state.getMaterial() != Material.LEAVES) {

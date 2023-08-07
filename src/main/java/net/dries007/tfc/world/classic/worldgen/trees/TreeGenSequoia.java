@@ -2,8 +2,8 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
@@ -19,7 +19,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.WoodVariant.LOG;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.LOG;
 import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
 
 public class TreeGenSequoia implements ITreeGenerator {
@@ -45,12 +45,12 @@ public class TreeGenSequoia implements ITreeGenerator {
         int k = height;
         for (int j = 0; j < layers; j++) {
             if (j == layers - 1 || (j == layers - 2 && rand.nextBoolean())) {
-                k += placeLayer(manager, world, pos.up(k), wood.getName() + "/mid" + baseVariant);
+                k += placeLayer(manager, world, pos.up(k), wood.toString() + "/mid" + baseVariant);
             } else {
-                k += placeLayer(manager, world, pos.up(k), wood.getName() + "/base" + baseVariant);
+                k += placeLayer(manager, world, pos.up(k), wood.toString() + "/base" + baseVariant);
             }
         }
-        placeLayer(manager, world, pos.up(k), wood.getName() + "/top" + topVariant);
+        placeLayer(manager, world, pos.up(k), wood.toString() + "/top" + topVariant);
 
     }
 

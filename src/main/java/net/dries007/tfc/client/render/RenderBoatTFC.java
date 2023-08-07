@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.render;
 
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.entity.EntityBoatTFC;
 import net.minecraft.client.model.IMultipassModel;
 import net.minecraft.client.model.ModelBase;
@@ -59,7 +59,7 @@ public class RenderBoatTFC extends Render<EntityBoatTFC> {
         final Wood wood = entity.getWood();
         if (wood != null) {
             //noinspection ConstantConditions
-            return new ResourceLocation(MOD_ID, "textures/entity/boat/" + wood.getName() + ".png");
+            return new ResourceLocation(MOD_ID, "textures/entity/boat/" + wood.toString() + ".png");
         }
         // Fallback
         return new ResourceLocation(MOD_ID, "textures/entity/boat/oak.png");

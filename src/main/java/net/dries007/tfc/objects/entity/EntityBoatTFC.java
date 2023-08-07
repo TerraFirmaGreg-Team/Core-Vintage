@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.entity;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.items.wood.ItemWoodBoat;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
@@ -39,7 +39,7 @@ public class EntityBoatTFC extends EntityBoat {
         //noinspection ConstantConditions
         return TFCStorage.WOOD_BLOCKS.values().stream()
                 .map(IWoodBlock::getWood)
-                .filter(wood -> wood.getName().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
+                .filter(wood -> wood.toString().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
                 .findFirst().orElse(null);
     }
 
@@ -47,7 +47,7 @@ public class EntityBoatTFC extends EntityBoat {
         String woodName = "";
         if (wood != null) {
             //noinspection ConstantConditions
-            woodName = wood.getName();
+            woodName = wood.toString();
         }
         this.dataManager.set(WOOD_NAME, woodName);
     }
@@ -146,7 +146,7 @@ public class EntityBoatTFC extends EntityBoat {
         Wood wood = getWood();
         if (wood != null) {
             //noinspection ConstantConditions
-            compound.setString("Wood", this.getWood().getName());
+            compound.setString("Wood", this.getWood().toString());
         }
     }
 

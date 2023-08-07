@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodLoom;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.entity.player.EntityPlayer;

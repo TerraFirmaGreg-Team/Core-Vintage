@@ -2,8 +2,8 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
 import net.dries007.tfc.world.classic.StructureHelper;
@@ -18,7 +18,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.WoodVariant.LOG;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.LOG;
 import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 
@@ -36,8 +36,8 @@ public class TreeGenWillow implements ITreeGenerator {
     @Override
     public void generateTree(TemplateManager manager, World world, BlockPos pos, Wood wood, Random rand, boolean isWorldGen) {
         //noinspection ConstantConditions
-        ResourceLocation base = new ResourceLocation(MOD_ID, wood.getName() + "/base");
-        ResourceLocation overlay = new ResourceLocation(MOD_ID, wood.getName() + "/overlay");
+        ResourceLocation base = new ResourceLocation(MOD_ID, wood.toString() + "/base");
+        ResourceLocation overlay = new ResourceLocation(MOD_ID, wood.toString() + "/overlay");
 
         structureBase = manager.get(world.getMinecraftServer(), base);
         structureOverlay = manager.get(world.getMinecraftServer(), overlay);

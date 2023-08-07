@@ -6,7 +6,7 @@ import net.dries007.tfc.api.types.animal.util.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.util.IHuntable;
 import net.dries007.tfc.api.types.animal.util.IPredator;
 import net.dries007.tfc.api.types.soil.util.ISoilBlock;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;

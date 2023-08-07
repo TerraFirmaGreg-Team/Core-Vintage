@@ -41,8 +41,8 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
     private final RockBlockVariant rockBlockVariant;
     private final RockType rockType;
 
-    public BlockRock(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(Material.ROCK);
+    public BlockRock(Material material, RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
+        super(material);
 
         this.rockBlockType = rockBlockType;
         this.rockBlockVariant = rockBlockVariant;
@@ -59,6 +59,10 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
         /*
         if (rockVariant.canFall())
             FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());*/
+    }
+
+    public BlockRock(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
+        this(Material.ROCK, rockBlockType, rockBlockVariant, rockType);
     }
 
     @Nonnull

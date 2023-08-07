@@ -26,7 +26,7 @@ import java.util.List;
  * Пока это почти полная копия {@link BlockRock}
  * Этот клас в будущем планируется использовать для механики распространения мха
  */
-public class BlockRockMossy extends BlockRock implements IRockBlock, IItemSize {
+public class BlockRockMossy extends BlockRock {
 
     public BlockRockMossy(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
         super(rockBlockType, rockBlockVariant, rockType);

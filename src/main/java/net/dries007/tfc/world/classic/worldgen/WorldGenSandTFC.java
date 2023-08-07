@@ -26,7 +26,7 @@ public class WorldGenSandTFC extends WorldGenerator {
     public boolean generate(World world, Random rng, BlockPos pos) {
         if (BlocksTFC.isWater(world.getBlockState(pos))) return false;
 
-        final Block sand = TFCStorage.getRockBlock(RockBlockTypes.Fallable, RockBlockVariants.Sand, ChunkDataTFC.getRock1(world, pos));
+        final Block sand = TFCStorage.getRockBlock(RockBlockTypes.FALLABLE, RockBlockVariants.SAND, ChunkDataTFC.getRock1(world, pos));
         final int rnd = rng.nextInt(this.radius - 2) + 2;
 
         for (int x = -rnd; x <= rnd; x++) {

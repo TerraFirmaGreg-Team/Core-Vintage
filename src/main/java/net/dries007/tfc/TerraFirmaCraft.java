@@ -13,7 +13,7 @@ import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockTypeHandler;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariantHandler;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
-import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
+import net.dries007.tfc.api.types.rock.type.RockHandler;
 import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
@@ -102,13 +102,12 @@ public final class TerraFirmaCraft {
     }
 
 
-
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         LOGGER.debug("If you can see this, debug logging is working :)");
 
         RockCategoryHandler.init();
-        RockTypeHandler.init();
+        RockHandler.init();
 
         RockBlockVariantHandler.init();
         RockBlockTypeHandler.init();

@@ -18,7 +18,7 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.jei.categories.*;
@@ -309,7 +309,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(leatherknapRecipes, KNAP_LEATHER_UID);
 
         // Stone Knapping Recipes
-        for (var rock : RockType.getRockTypes()) {
+        for (var rock : Rock.getRockTypes()) {
             registry.addRecipeCatalyst(new ItemStack(TFCStorage.getRockItem(rock)), KNAP_STONE_UID);
         }
 

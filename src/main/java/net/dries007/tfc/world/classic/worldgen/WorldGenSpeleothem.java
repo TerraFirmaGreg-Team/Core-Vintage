@@ -2,11 +2,9 @@ package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.IRockBlock;
-import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.objects.blocks.rock.BlockRockSpeleothem;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.minecraft.block.Block;
@@ -106,7 +104,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
             if (block instanceof IRockBlock rockTypeBlock) {
                 BlockRockSpeleothem.EnumSize sizeType = BlockRockSpeleothem.EnumSize.values()[size - i - 1];
                 // Создаем блок сталактита с указанным размером и типом породы
-                IBlockState targetBlock = TFCStorage.getRockBlock(RockBlockTypes.Speleothem, rockTypeBlock.getRockType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
+                IBlockState targetBlock = TFCStorage.getRockBlock(RockBlockTypes.SPELEOTHEM, rockTypeBlock.getRock()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
                 // Устанавливаем блок сталактита в мир
                 world.setBlockState(pos, targetBlock);
             }
@@ -115,9 +113,9 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 
     private Block getSpeleothemType(IBlockState state) {
         var block = state.getBlock();
-        for (var rockType : RockType.getRockTypes()) {
-            if (TFCStorage.getRockBlock(RockBlockTypes.Common, RockBlockVariants.Raw, rockType) == block) {
-                return TFCStorage.getRockBlock(RockBlockTypes.Common, RockBlockVariants.Raw, rockType);
+        for (var rock : Rock.getRockTypes()) {
+            if (TFCStorage.getRockBlock(RockBlockTypes.COMMON, RockBlockVariants.RAW, rock) == block) {
+                return TFCStorage.getRockBlock(RockBlockTypes.COMMON, RockBlockVariants.RAW, rock);
             }
         }
 

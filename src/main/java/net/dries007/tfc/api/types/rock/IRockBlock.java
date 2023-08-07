@@ -3,7 +3,7 @@ package net.dries007.tfc.api.types.rock;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -22,21 +22,21 @@ public interface IRockBlock extends IHasModel, IItemProvider {
     RockBlockVariant getRockBlockVariant();
 
     @Nonnull
-    RockType getRockType();
+    Rock getRock();
 
     @Nonnull
     default RockCategory getRockCategory() {
-        return getRockType().getRockCategory();
+        return getRock().getRockCategory();
     }
 
     @Nonnull
     default String getRegistryString() {
 
         if (getRockBlockVariant() == null) {
-            return String.format("rock/%s/%s", getRockBlockType(), getRockType());
+            return String.format("rock/%s/%s", getRockBlockType(), getRock());
         }
 
-        return String.format("rock/%s/%s/%s", getRockBlockType(), getRockBlockVariant(), getRockType());
+        return String.format("rock/%s/%s/%s", getRockBlockType(), getRockBlockVariant(), getRock());
     }
 
     @Nonnull

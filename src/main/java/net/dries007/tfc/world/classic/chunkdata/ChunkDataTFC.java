@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.chunkdata;
 
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.api.types.wood.Wood;
 import net.dries007.tfc.api.types.wood.util.IWoodBlock;
@@ -68,15 +68,15 @@ public final class ChunkDataTFC {
         return data == null ? EMPTY : data;
     }
 
-    public static RockType getRock1(World world, BlockPos pos) {
+    public static Rock getRock1(World world, BlockPos pos) {
         return get(world, pos).getRockLayer1(pos.getX() & 15, pos.getZ() & 15);
     }
 
-    public static RockType getRock2(World world, BlockPos pos) {
+    public static Rock getRock2(World world, BlockPos pos) {
         return get(world, pos).getRockLayer2(pos.getX() & 15, pos.getZ() & 15);
     }
 
-    public static RockType getRock3(World world, BlockPos pos) {
+    public static Rock getRock3(World world, BlockPos pos) {
         return get(world, pos).getRockLayer3(pos.getX() & 15, pos.getZ() & 15);
     }
 
@@ -108,7 +108,7 @@ public final class ChunkDataTFC {
         return get(world, pos).getFishPopulation();
     }
 
-    public static RockType getRockHeight(World world, BlockPos pos) {
+    public static Rock getRockHeight(World world, BlockPos pos) {
         return get(world, pos).getRockLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
     }
 
@@ -158,27 +158,27 @@ public final class ChunkDataTFC {
         return initialized;
     }
 
-    public RockType getRock1(BlockPos pos) {
+    public Rock getRock1(BlockPos pos) {
         return getRock1(pos.getX() & 15, pos.getY() & 15);
     }
 
-    public RockType getRock1(int x, int z) {
+    public Rock getRock1(int x, int z) {
         return getRockLayer1(x, z);
     }
 
-    public RockType getRock2(BlockPos pos) {
+    public Rock getRock2(BlockPos pos) {
         return getRock2(pos.getX() & 15, pos.getY() & 15);
     }
 
-    public RockType getRock2(int x, int z) {
+    public Rock getRock2(int x, int z) {
         return getRockLayer2(x, z);
     }
 
-    public RockType getRock3(BlockPos pos) {
+    public Rock getRock3(BlockPos pos) {
         return getRock3(pos.getX() & 15, pos.getY() & 15);
     }
 
-    public RockType getRock3(int x, int z) {
+    public Rock getRock3(int x, int z) {
         return getRockLayer3(x, z);
     }
 
@@ -190,11 +190,11 @@ public final class ChunkDataTFC {
         return getDrainageLayer(x, z).valueInt;
     }
 
-    public RockType getRockHeight(BlockPos pos) {
+    public Rock getRockHeight(BlockPos pos) {
         return getRockHeight(pos.getX(), pos.getY(), pos.getZ());
     }
 
-    public RockType getRockHeight(int x, int y, int z) {
+    public Rock getRockHeight(int x, int y, int z) {
         return getRockLayerHeight(x & 15, y, z & 15);
     }
 
@@ -279,16 +279,16 @@ public final class ChunkDataTFC {
     }
 
     // Directly accessing the DataLayer is discouraged (except for getting the name). It's easy to use the wrong value.
-    public RockType getRockLayer1(int x, int z) {
-        return RockType.valueOf(rockLayer1[z << 4 | x]);
+    public Rock getRockLayer1(int x, int z) {
+        return Rock.valueOf(rockLayer1[z << 4 | x]);
     }
 
-    public RockType getRockLayer2(int x, int z) {
-        return RockType.valueOf(rockLayer2[z << 4 | x]);
+    public Rock getRockLayer2(int x, int z) {
+        return Rock.valueOf(rockLayer2[z << 4 | x]);
     }
 
-    public RockType getRockLayer3(int x, int z) {
-        return RockType.valueOf(rockLayer3[z << 4 | x]);
+    public Rock getRockLayer3(int x, int z) {
+        return Rock.valueOf(rockLayer3[z << 4 | x]);
     }
 
     public DataLayer getStabilityLayer(int x, int z) {
@@ -299,7 +299,7 @@ public final class ChunkDataTFC {
         return drainageLayer[z << 4 | x];
     }
 
-    public RockType getRockLayerHeight(int x, int y, int z) {
+    public Rock getRockLayerHeight(int x, int y, int z) {
         int offset = getSeaLevelOffset(x, z);
         if (y <= ROCKLAYER3 + offset) return getRockLayer3(x, z);
         if (y <= ROCKLAYER2 + offset) return getRockLayer2(x, z);

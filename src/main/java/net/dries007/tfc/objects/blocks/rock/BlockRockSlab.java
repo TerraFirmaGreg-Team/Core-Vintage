@@ -1,11 +1,11 @@
 package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.registries.TFCStorage;
+import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.rock.ItemRockSlab;
 import net.minecraft.block.Block;
@@ -44,14 +44,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockRockSlab(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
+    private BlockRockSlab(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
         super(Material.ROCK);
 
         IBlockState state = blockState.getBaseState();
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.modelBlock = TFCStorage.getRockBlock(RockBlockTypes.Common, rockBlockVariant, rockType);
+        this.modelBlock = TFCStorage.getRockBlock(RockBlockTypes.COMMON, rockBlockVariant, rock);
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -154,14 +154,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     public static class Double extends BlockRockSlab {
         private final RockBlockType rockBlockType;
         private final RockBlockVariant rockBlockVariant;
-        private final RockType rockType;
+        private final Rock rock;
 
-        public Double(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
-            super(rockBlockType, rockBlockVariant, rockType);
+        public Double(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
+            super(rockBlockType, rockBlockVariant, rock);
 
             this.rockBlockType = rockBlockType;
             this.rockBlockVariant = rockBlockVariant;
-            this.rockType = rockType;
+            this.rock = rock;
 
             this.setRegistryName(MOD_ID, getRegistryString());
             this.setTranslationKey(getTranslationString());
@@ -186,8 +186,8 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
         @Nonnull
         @Override
-        public RockType getRockType() {
-            return rockType;
+        public Rock getRock() {
+            return rock;
         }
 
         @Override
@@ -202,7 +202,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
                 @Nonnull
                 protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                     return new ModelResourceLocation(getResourceLocation(),
-                            "rocktype=" + rockType.toString());
+                            "rocktype=" + rock.toString());
                 }
             });
         }
@@ -212,18 +212,18 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
         public final Double doubleSlab;
         private final RockBlockType rockBlockType;
         private final RockBlockVariant rockBlockVariant;
-        private final RockType rockType;
+        private final Rock rock;
 
-        public Half(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
-            super(rockBlockType, rockBlockVariant, rockType);
+        public Half(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
+            super(rockBlockType, rockBlockVariant, rock);
 
-            doubleSlab = (Double) TFCStorage.getRockBlock(RockBlockTypes.SlabDouble, rockBlockVariant, rockType);
+            doubleSlab = (Double) TFCStorage.getRockBlock(RockBlockTypes.SLAB_DOUBLE, rockBlockVariant, rock);
             doubleSlab.halfSlab = this;
             halfSlab = this;
 
             this.rockBlockType = rockBlockType;
             this.rockBlockVariant = rockBlockVariant;
-            this.rockType = rockType;
+            this.rock = rock;
 
             this.setRegistryName(MOD_ID, getRegistryString());
             this.setTranslationKey(getTranslationString());
@@ -251,8 +251,8 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
         @Nonnull
         @Override
-        public RockType getRockType() {
-            return rockType;
+        public Rock getRock() {
+            return rock;
         }
 
         @Override
@@ -269,7 +269,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
                 protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                     return new ModelResourceLocation(getResourceLocation(),
                             "half=" + state.getValue(HALF) + "," +
-                                    "rocktype=" + rockType.toString());
+                                    "rocktype=" + rock.toString());
                 }
             });
 
@@ -279,7 +279,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
                         this.getMetaFromState(state),
                         new ModelResourceLocation(getResourceLocation(),
                                 "half=bottom," +
-                                        "rocktype=" + rockType.toString()));
+                                        "rocktype=" + rock.toString()));
             }
         }
 
@@ -288,7 +288,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
         public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
             super.addInformation(stack, worldIn, tooltip, flagIn);
 
-            tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
+            tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rock.getRockCategory().getLocalizedName());
         }
     }
 }

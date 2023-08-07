@@ -6,7 +6,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.util.GemsFromRawRocks;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -39,8 +39,8 @@ public class BlockRockRaw extends BlockRock {
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
     public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
 
-    public BlockRockRaw(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockType, rockBlockVariant, rockType);
+    public BlockRockRaw(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
+        super(rockBlockType, rockBlockVariant, rock);
 
         this.setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
 
@@ -92,7 +92,7 @@ public class BlockRockRaw extends BlockRock {
         if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
             if (!worldIn.isRemote) {
                 // Create a stone anvil
-                var anvil = TFCStorage.getRockBlock(RockBlockTypes.Anvil, getRockType());
+                var anvil = TFCStorage.getRockBlock(RockBlockTypes.ANVIL, getRock());
                 if (anvil instanceof BlockRockAnvil) {
                     worldIn.setBlockState(pos, anvil.getDefaultState());
                 }
@@ -128,14 +128,14 @@ public class BlockRockRaw extends BlockRock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRockType());
+                return new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRock());
             }
         });
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),
                 this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRockType()));
+                new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRock()));
     }
 
     @Override
@@ -143,6 +143,6 @@ public class BlockRockRaw extends BlockRock {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
     }
 }

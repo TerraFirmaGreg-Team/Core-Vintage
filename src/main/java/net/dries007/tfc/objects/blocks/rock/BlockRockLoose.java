@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks.rock;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -40,8 +40,8 @@ public class BlockRockLoose extends BlockRock {
     private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
 
 
-    public BlockRockLoose(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockType, rockBlockVariant, rockType);
+    public BlockRockLoose(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
+        super(rockBlockType, rockBlockVariant, rock);
 
         this.setHardness(0.1f);
 
@@ -72,7 +72,7 @@ public class BlockRockLoose extends BlockRock {
     @Override
     @SuppressWarnings("ConstantConditions")
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var itemStack = new ItemStack(TFCStorage.ROCK_ITEM.get(getRockType()));
+        var itemStack = new ItemStack(TFCStorage.ROCK_ITEM.get(getRock()));
 
         if (playerIn.addItemStackToInventory(itemStack)) {
             worldIn.setBlockToAir(pos);
@@ -86,7 +86,7 @@ public class BlockRockLoose extends BlockRock {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(TFCStorage.ROCK_ITEM.get(getRockType())));
+        drops.add(new ItemStack(TFCStorage.ROCK_ITEM.get(getRock())));
     }
 
     @Override
@@ -97,7 +97,7 @@ public class BlockRockLoose extends BlockRock {
     @Nonnull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.ROCK_ITEM.get(getRockType()));
+        return new ItemStack(TFCStorage.ROCK_ITEM.get(getRock()));
     }
 
     @Nonnull
@@ -160,7 +160,7 @@ public class BlockRockLoose extends BlockRock {
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
                         "axis=" + state.getValue(AXIS) + "," +
-                                "rocktype=" + getRockType());
+                                "rocktype=" + getRock());
             }
         });
     }

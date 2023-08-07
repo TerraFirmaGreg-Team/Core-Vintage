@@ -162,7 +162,7 @@ public final class BlocksTFC {
 
     public static boolean isRawStone(IBlockState current) {
         if (current.getBlock() instanceof IRockBlock rockTypeBlock)
-            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Raw;
+            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.RAW;
         return false;
     }
 
@@ -184,14 +184,14 @@ public final class BlocksTFC {
 
     public static boolean isSand(IBlockState current) {
         if (current.getBlock() instanceof IRockBlock rockTypeBlock) {
-            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Sand;
+            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.SAND;
         }
         return false;
     }
 
     public static boolean isGravel(IBlockState current) {
         if (current.getBlock() instanceof IRockBlock rockTypeBlock) {
-            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Gravel;
+            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.GRAVEL;
         }
         return false;
     }
@@ -226,7 +226,7 @@ public final class BlocksTFC {
                 }
             }
         if (current.getBlock() instanceof IRockBlock rockTypeBlock)
-            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Gravel;
+            return rockTypeBlock.getRockBlockVariant() == RockBlockVariants.GRAVEL;
         return false;
     }
 
@@ -249,9 +249,9 @@ public final class BlocksTFC {
 
     public static boolean isGround(IBlockState current) {
         if (current.getBlock() instanceof IRockBlock rockTypeBlock)
-            if (rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Gravel ||
-                rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Sand ||
-                rockTypeBlock.getRockBlockVariant() == RockBlockVariants.Raw)
+            if (rockTypeBlock.getRockBlockVariant() == RockBlockVariants.GRAVEL ||
+                    rockTypeBlock.getRockBlockVariant() == RockBlockVariants.SAND ||
+                    rockTypeBlock.getRockBlockVariant() == RockBlockVariants.RAW)
                 return true;
         if (current.getBlock() instanceof ISoilBlock soilTypeBlock)
             switch (soilTypeBlock.getSoilVariant()) {

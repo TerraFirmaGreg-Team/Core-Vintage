@@ -1,12 +1,12 @@
 package net.dries007.tfc.api.types.wood.type;
 
-import static net.dries007.tfc.api.types.wood.type.WoodTypes.*;
+import static net.dries007.tfc.api.types.wood.type.Woods.*;
 import static net.dries007.tfc.types.DefaultTrees.*;
 
-public class WoodTypeHandler {
+public class WoodHandler {
 
     public static void init() {
-        ACACIA = new WoodType
+        ACACIA = new Wood
                 .Builder(0x8B3929, 30f, 210f, 19f, 31f)
                 .setGenerator(GEN_ACACIA)
                 .setHeight(12)
@@ -15,13 +15,13 @@ public class WoodTypeHandler {
                 .setBurnInfo(650f, 1000)
                 .build();
 
-        ASH = new WoodType
+        ASH = new Wood
                 .Builder(0xAE604E, 60f, 140f, -6f, 12f)
                 .setGenerator(GEN_NORMAL)
                 .setBurnInfo(696f, 1250)
                 .build();
 
-        ASPEN = new WoodType
+        ASPEN = new Wood
                 .Builder(0x373727, 10f, 80f, -10f, 16f)
                 .setGenerator(GEN_MEDIUM)
                 .setRadius(1)
@@ -29,7 +29,7 @@ public class WoodTypeHandler {
                 .setBurnInfo(611f, 1000)
                 .build();
 
-        BIRCH = new WoodType
+        BIRCH = new Wood
                 .Builder(0x897658, 20f, 180f, -15f, 7f)
                 .setGenerator(GEN_TALL)
                 .setRadius(1)
@@ -37,7 +37,7 @@ public class WoodTypeHandler {
                 .setBurnInfo(652f, 1750)
                 .build();
 
-        BLACKWOOD = new WoodType
+        BLACKWOOD = new Wood
                 .Builder(0x1A1A1A, 0f, 120f, 4f, 33f)
                 .setGenerator(GEN_MEDIUM)
                 .setHeight(12)
@@ -45,14 +45,14 @@ public class WoodTypeHandler {
                 .setBurnInfo(720f, 1750)
                 .build();
 
-        CHESTNUT = new WoodType
+        CHESTNUT = new Wood
                 .Builder(0x642C1E, 160f, 320f, 11f, 35f)
                 .setGenerator(GEN_NORMAL)
                 .setTannin()
                 .setBurnInfo(651f, 1500)
                 .build();
 
-        DOUGLAS_FIR = new WoodType
+        DOUGLAS_FIR = new Wood
                 .Builder(0xD7BC8D, 280f, 480f, -2f, 14f)
                 .setGenerator(GEN_TALL)
                 .setDominance(5.2f)
@@ -63,7 +63,7 @@ public class WoodTypeHandler {
                 .setBurnInfo(707f, 1500)
                 .build();
 
-        HICKORY = new WoodType
+        HICKORY = new Wood
                 .Builder(0x4E3418, 80f, 250f, 7f, 29f)
                 .setGenerator(GEN_TALL)
                 .setGrowthTime(10)
@@ -71,7 +71,7 @@ public class WoodTypeHandler {
                 .setBurnInfo(762f, 2000)
                 .build();
 
-        MAPLE = new WoodType
+        MAPLE = new Wood
                 .Builder(0xC3782F, 140f, 360f, 3f, 20f)
                 .setGenerator(GEN_MEDIUM)
                 .setDominance(6.3f)
@@ -80,7 +80,7 @@ public class WoodTypeHandler {
                 .setBurnInfo(745f, 2000)
                 .build();
 
-        OAK = new WoodType
+        OAK = new Wood
                 .Builder(0xC29D62, 180f, 430f, -8f, 12f)
                 .setGenerator(GEN_TALL)
                 .setHeight(16)
@@ -89,14 +89,14 @@ public class WoodTypeHandler {
                 .setBurnInfo(728f, 2250)
                 .build();
 
-        PALM = new WoodType
+        PALM = new Wood
                 .Builder(0xB56F38, 280f, 500f, 16f, 35f)
                 .setGenerator(GEN_TROPICAL)
                 .setDecayDist(6)
                 .setBurnInfo(730f, 1250)
                 .build();
 
-        PINE = new WoodType
+        PINE = new Wood
                 .Builder(0xD1BD9A, 60f, 250f, -15f, 7f)
                 .setGenerator(GEN_CONIFER)
                 .setRadius(1)
@@ -105,7 +105,7 @@ public class WoodTypeHandler {
                 .setBurnInfo(627f, 1250)
                 .build();
 
-        ROSEWOOD = new WoodType
+        ROSEWOOD = new Wood
                 .Builder(0x912222, 10f, 190f, 8f, 18f)
                 .setGenerator(GEN_MEDIUM)
                 .setHeight(12)
@@ -113,7 +113,7 @@ public class WoodTypeHandler {
                 .setBurnInfo(640f, 1500)
                 .build();
 
-        SEQUOIA = new WoodType
+        SEQUOIA = new Wood
                 .Builder(0x965B3B, 250f, 420f, -5f, 12f)
                 .setGenerator(GEN_SEQUOIA)
                 .setRadius(3)
@@ -127,7 +127,7 @@ public class WoodTypeHandler {
                 .setBurnInfo(612f, 1750)
                 .build();
 
-        SPRUCE = new WoodType
+        SPRUCE = new Wood
                 .Builder(0xBF806F, 120f, 380f, -11f, 6f)
                 .setGenerator(GEN_CONIFER)
                 .setRadius(1)
@@ -136,7 +136,7 @@ public class WoodTypeHandler {
                 .setBurnInfo(608f, 1500)
                 .build();
 
-        SYCAMORE = new WoodType
+        SYCAMORE = new Wood
                 .Builder(0xDCA448, 120f, 290f, 17f, 33f)
                 .setGenerator(GEN_MEDIUM)
                 .setGrowthTime(8)
@@ -145,14 +145,14 @@ public class WoodTypeHandler {
                 .setBurnInfo(653f, 1750)
                 .build();
 
-        WHITE_CEDAR = new WoodType
+        WHITE_CEDAR = new Wood
                 .Builder(0xD4D4D4, 10f, 240f, -8f, 17f)
                 .setGenerator(GEN_TALL)
                 .setHeight(16)
                 .setBurnInfo(625f, 1500)
                 .build();
 
-        WILLOW = new WoodType
+        WILLOW = new Wood
                 .Builder(0x3A430B, 230f, 400f, 15f, 32f)
                 .setGenerator(GEN_WILLOW)
                 .setRadius(1)
@@ -162,7 +162,7 @@ public class WoodTypeHandler {
                 .setBurnInfo(603f, 1000)
                 .build();
 
-        KAPOK = new WoodType
+        KAPOK = new Wood
                 .Builder(0xAD879F, 210f, 500f, 15f, 35f)
                 .setGenerator(GEN_ACACIA)
                 .setDominance(8.5f)

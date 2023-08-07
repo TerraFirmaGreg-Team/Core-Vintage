@@ -1,11 +1,10 @@
 package net.dries007.tfc.api.types.rock.category;
 
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nonnull;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -45,6 +44,7 @@ public class RockCategory {
             throw new RuntimeException(String.format("RockCategory: [%s] already exists!", rockCategoryName));
         }
     }
+
     @Override
     public String toString() {
         return rockCategoryName;
@@ -79,22 +79,22 @@ public class RockCategory {
         return rockCategories;
     }
 
-    public enum Layer implements Predicate<RockType> {
+    public enum Layer implements Predicate<Rock> {
         BOTTOM(3, x -> x.getRockCategory().layer3),
         MIDDLE(2, x -> x.getRockCategory().layer2),
         TOP(1, x -> x.getRockCategory().layer1);
 
         public final int layer;
-        private final Predicate<RockType> filter;
+        private final Predicate<Rock> filter;
 
-        Layer(int layer, Predicate<RockType> filter) {
+        Layer(int layer, Predicate<Rock> filter) {
             this.layer = layer;
             this.filter = filter;
         }
 
         @Override
-        public boolean test(RockType rockType) {
-            return filter.test(rockType);
+        public boolean test(Rock rock) {
+            return filter.test(rock);
         }
     }
 }

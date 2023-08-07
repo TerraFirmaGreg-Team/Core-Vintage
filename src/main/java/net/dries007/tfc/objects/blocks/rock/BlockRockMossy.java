@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -15,8 +15,8 @@ import javax.annotation.Nonnull;
  */
 public class BlockRockMossy extends BlockRock {
 
-    public BlockRockMossy(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockType, rockBlockVariant, rockType);
+    public BlockRockMossy(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
+        super(rockBlockType, rockBlockVariant, rock);
     }
 
     //@Override

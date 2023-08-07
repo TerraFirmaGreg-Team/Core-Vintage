@@ -5,7 +5,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
@@ -40,8 +40,8 @@ import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 public class BlockRockAnvil extends BlockRock {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
-    public BlockRockAnvil(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockType, rockBlockVariant, rockType);
+    public BlockRockAnvil(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
+        super(rockBlockType, rockBlockVariant, rock);
 
         // TODO: 07.08.2023
         // FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
@@ -183,13 +183,13 @@ public class BlockRockAnvil extends BlockRock {
     @Override
     @Nonnull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCStorage.getRockItem(getRockType());
+        return TFCStorage.getRockItem(getRock());
     }
 
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.getRockBlock(RockBlockTypes.Common, getRockBlockVariant(), getRockType()));
+        return new ItemStack(TFCStorage.getRockBlock(RockBlockTypes.COMMON, getRockBlockVariant(), getRock()));
     }
 
     @Override

@@ -8,7 +8,7 @@ import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.api.types.soil.SoilVariant;
 import net.dries007.tfc.api.types.wood.Wood;
@@ -70,16 +70,16 @@ public class TFCBlocks {
 
         //=== Rock ===================================================================================================//
 
-        for (var rockType : RockType.getRockTypes()) {
+        for (var rock : Rock.getRockTypes()) {
             for (var rockBlockType : RockBlockType.getRockBlockTypes()) {
                 for (var pairFactory : rockBlockType.getBlockFactoryMap()) {
                     var rockBlockVariant = pairFactory.getLeft();
                     var factory = pairFactory.getRight();
 
-                    var resultBlock = factory.apply(rockBlockType, rockBlockVariant, rockType);
+                    var resultBlock = factory.apply(rockBlockType, rockBlockVariant, rock);
 
-                    if (ROCK_BLOCKS.put(new Triple<>(rockBlockType, rockBlockVariant, rockType), resultBlock) != null)
-                        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", rockBlockType, rockBlockVariant, rockType));
+                    if (ROCK_BLOCKS.put(new Triple<>(rockBlockType, rockBlockVariant, rock), resultBlock) != null)
+                        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", rockBlockType, rockBlockVariant, rock));
                 }
             }
         }
@@ -131,7 +131,7 @@ public class TFCBlocks {
         //=== Alabaster ==============================================================================================//
 
         for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-            for (var rockVariant : new RockBlockVariant[]{RockBlockVariants.Raw, RockBlockVariants.Brick, RockBlockVariants.Smooth}) {
+            for (var rockVariant : new RockBlockVariant[]{RockBlockVariants.RAW, RockBlockVariants.BRICK, RockBlockVariants.SMOOTH}) {
                 var alabasterColorBlock = new BlockAlabaster(rockVariant, dyeColor);
                 var alabasterBlock = new BlockAlabaster(rockVariant);
 

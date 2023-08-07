@@ -4,7 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.rock.IRockItem;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
@@ -32,29 +32,29 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @ParametersAreNonnullByDefault
 public class ItemRock extends ItemTFC implements IRockItem {
 
-    private final RockType rockType;
+    private final Rock rock;
 
-    public ItemRock(RockType rockType) {
-        this.rockType = rockType;
+    public ItemRock(Rock rock) {
+        this.rock = rock;
 
-        var blockRegistryName = String.format("rock/%s", rockType);
+        var blockRegistryName = String.format("rock/%s", rock);
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.ROCK);
 
 
         OreDictionaryHelper.register(this, "rock");
-        OreDictionaryHelper.register(this, "rock", rockType);
-        OreDictionaryHelper.register(this, "rock", rockType.getRockCategory());
+        OreDictionaryHelper.register(this, "rock", rock);
+        OreDictionaryHelper.register(this, "rock", rock.getRockCategory());
 
-        if (rockType.isFlux())
+        if (rock.isFlux())
             OreDictionaryHelper.register(this, "rock", "flux");
     }
 
     @Override
     @Nonnull
-    public RockType getRockType() {
-        return rockType;
+    public Rock getRock() {
+        return rock;
     }
 
     @Nonnull
@@ -84,9 +84,9 @@ public class ItemRock extends ItemTFC implements IRockItem {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
 
-        if (rockType.isFlux())
+        if (rock.isFlux())
             tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());
     }
 }

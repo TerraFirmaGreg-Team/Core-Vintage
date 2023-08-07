@@ -3,7 +3,7 @@ package net.dries007.tfc.world.classic.worldgen;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -46,7 +46,7 @@ public class WorldGenLooseRocks implements IWorldGenerator {
         }
     }
 
-    protected void generateRock(Random random, World world, BlockPos pos, RockType rock) {
+    protected void generateRock(Random random, World world, BlockPos pos, Rock rock) {
         // Используем воздух, чтобы не заменять другие генерируемые блоки
         // Это соответствует проверке в BlockPlacedItemFlat, если блок может оставаться
         // Также добавляем только на почву, так как это вызывается обработчиком регенерации мира позже
@@ -54,7 +54,7 @@ public class WorldGenLooseRocks implements IWorldGenerator {
         if (world.isAirBlock(pos) &&
                 world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) &&
                 BlocksTFC.isSoil(world.getBlockState(pos.down()))) {
-            world.setBlockState(pos, TFCStorage.getRockBlock(RockBlockTypes.Loose, rock).getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);
+            world.setBlockState(pos, TFCStorage.getRockBlock(RockBlockTypes.LOOSE, rock).getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);
         }
     }
 }

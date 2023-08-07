@@ -2,7 +2,7 @@ package net.dries007.tfc.api.types.rock.block.type;
 
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.IRockBlock;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.TriFunction;
 
@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Базовый класс для типа каменного блока, хранит в себе имя,
  * дефолтный класс блока этого типа и Set из вариаций блоков с собственными классами для генерации блоков.
- * */
+ */
 public class RockBlockType {
 
     private static final Set<RockBlockType> rockBlockTypes = new LinkedHashSet<>();
@@ -23,11 +23,11 @@ public class RockBlockType {
     @Nonnull
     private final String rockBlockTypeName;
     @Nonnull
-    private final TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> defaultFactory;
+    private final TriFunction<RockBlockType, RockBlockVariant, Rock, IRockBlock> defaultFactory;
     @Nonnull
-    private final Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> rockBlockFactoryMap;
+    private final Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, Rock, IRockBlock>>> rockBlockFactoryMap;
 
-    private RockBlockType(@Nonnull String rockBlockTypeName, @Nonnull TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> defaultFactory, @Nonnull Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> rockBlockFactoryMap) {
+    private RockBlockType(@Nonnull String rockBlockTypeName, @Nonnull TriFunction<RockBlockType, RockBlockVariant, Rock, IRockBlock> defaultFactory, @Nonnull Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, Rock, IRockBlock>>> rockBlockFactoryMap) {
         this.rockBlockTypeName = rockBlockTypeName;
         this.defaultFactory = defaultFactory;
         this.rockBlockFactoryMap = rockBlockFactoryMap;
@@ -37,7 +37,7 @@ public class RockBlockType {
         }
 
         if (!rockBlockTypes.add(this)) {
-            throw new RuntimeException(String.format("RockType: [%s] already exists!", rockBlockTypeName));
+            throw new RuntimeException(String.format("Rock: [%s] already exists!", rockBlockTypeName));
         }
     }
 
@@ -51,7 +51,7 @@ public class RockBlockType {
     }
 
     @Nonnull
-    public Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> getBlockFactoryMap() {
+    public Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, Rock, IRockBlock>>> getBlockFactoryMap() {
         return rockBlockFactoryMap;
     }
 
@@ -59,22 +59,23 @@ public class RockBlockType {
         @Nonnull
         private final String rockBlockTypeName;
         @Nonnull
-        private final TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> defaultFactory;
+        private final TriFunction<RockBlockType, RockBlockVariant, Rock, IRockBlock> defaultFactory;
         @Nonnull
-        private final Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock>>> rockBlockFactoryMap = new HashSet<>();
+        private final Set<Pair<RockBlockVariant, TriFunction<RockBlockType, RockBlockVariant, Rock, IRockBlock>>> rockBlockFactoryMap = new HashSet<>();
 
-        public Builder(@Nonnull String rockBlockTypeName, @Nonnull TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> defaultFactory) {
+        public Builder(@Nonnull String rockBlockTypeName, @Nonnull TriFunction<RockBlockType, RockBlockVariant, Rock, IRockBlock> defaultFactory) {
             this.rockBlockTypeName = rockBlockTypeName;
             this.defaultFactory = defaultFactory;
         }
 
         /**
          * Метод добавляющий дополнительную вариацию блока для текущего типа.
+         *
          * @param overridingFactory сюда можно указать класс блока, которым вы хотите
          *                          заменить дефолтный класс блока при его создании.
-         * @param rockBlockVariant сюда указывается вариация блока для текущего типа.
-         * */
-        public Builder addBlockVariation(@Nonnull RockBlockVariant rockBlockVariant, @Nullable TriFunction<RockBlockType, RockBlockVariant, RockType, IRockBlock> overridingFactory) {
+         * @param rockBlockVariant  сюда указывается вариация блока для текущего типа.
+         */
+        public Builder addBlockVariation(@Nonnull RockBlockVariant rockBlockVariant, @Nullable TriFunction<RockBlockType, RockBlockVariant, Rock, IRockBlock> overridingFactory) {
             rockBlockFactoryMap.add(new Pair<>(rockBlockVariant, overridingFactory));
             return this;
         }
@@ -82,8 +83,9 @@ public class RockBlockType {
         /**
          * Метод добавляющий дополнительную вариацию блока для текущего типа.
          * При этом будет использоваться дефолтный класс генерации блока указанный в билдере.
+         *
          * @param rockBlockVariant сюда указывается вариация блока для текущего типа.
-         * */
+         */
         public Builder addBlockVariation(@Nonnull RockBlockVariant rockBlockVariant) {
             rockBlockFactoryMap.add(new Pair<>(rockBlockVariant, defaultFactory));
             return this;

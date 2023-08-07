@@ -10,7 +10,7 @@ import net.dries007.tfc.api.types.plant.PlantVariant;
 import net.dries007.tfc.api.types.plant.util.IPlantBlock;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.api.types.soil.SoilVariant;
@@ -40,7 +40,7 @@ import java.util.*;
  */
 public final class TFCStorage {
 
-    public static final Map<Triple<RockBlockType, RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Triple<RockBlockType, RockBlockVariant, Rock>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<SoilVariant, Soil>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantVariant, Plant>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<WoodVariant, Wood>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
@@ -48,8 +48,8 @@ public final class TFCStorage {
     public static final Map<Pair<MetalVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCK = new HashMap<>();
 
-    public static final Map<RockType, ItemRock> ROCK_ITEM = new HashMap<>();
-    public static final Map<RockType, ItemRockBrick> BRICK_ITEM = new HashMap<>();
+    public static final Map<Rock, ItemRock> ROCK_ITEM = new HashMap<>();
+    public static final Map<Rock, ItemRockBrick> BRICK_ITEM = new HashMap<>();
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
 
@@ -66,15 +66,15 @@ public final class TFCStorage {
     public static final List<BlockFluidBase> FLUID = new ArrayList<>();
 
     @Nonnull
-    public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nullable RockBlockVariant blockVariant, @Nonnull RockType rockType) {
-        var block = (Block) ROCK_BLOCKS.get(new Triple<>(rockBlockType, blockVariant, rockType));
+    public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nullable RockBlockVariant blockVariant, @Nonnull Rock rock) {
+        var block = (Block) ROCK_BLOCKS.get(new Triple<>(rockBlockType, blockVariant, rock));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s, %s", rockBlockType, blockVariant, rockType));
+        throw new RuntimeException(String.format("Block is null: %s, %s, %s", rockBlockType, blockVariant, rock));
     }
 
     @Nonnull
-    public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull RockType rockType) {
-        return getRockBlock(rockBlockType, null, rockType);
+    public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull Rock rock) {
+        return getRockBlock(rockBlockType, null, rock);
     }
 
     @Nonnull
@@ -120,17 +120,17 @@ public final class TFCStorage {
     }
 
     @Nonnull
-    public static Item getRockItem(@Nonnull RockType rockType) {
-        var item = (Item) ROCK_ITEM.get(rockType);
+    public static Item getRockItem(@Nonnull Rock rock) {
+        var item = (Item) ROCK_ITEM.get(rock);
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", rockType));
+        throw new RuntimeException(String.format("Item is null: %s", rock));
     }
 
 
     @Nonnull
-    public static Item getBrickItem(@Nonnull RockType rockType) {
-        var item = (Item) BRICK_ITEM.get(rockType);
+    public static Item getBrickItem(@Nonnull Rock rock) {
+        var item = (Item) BRICK_ITEM.get(rock);
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", rockType));
+        throw new RuntimeException(String.format("Item is null: %s", rock));
     }
 }

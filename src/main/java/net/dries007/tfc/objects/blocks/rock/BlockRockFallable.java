@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -18,12 +18,12 @@ import java.util.Random;
 
 public class BlockRockFallable extends BlockRock {
 
-    public BlockRockFallable(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
-        this(Material.ROCK, rockBlockType, rockBlockVariant, rockType);
+    public BlockRockFallable(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
+        this(Material.ROCK, rockBlockType, rockBlockVariant, rock);
     }
 
-    public BlockRockFallable(Material material, RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(material, rockBlockType, rockBlockVariant, rockType);
+    public BlockRockFallable(Material material, RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
+        super(material, rockBlockType, rockBlockVariant, rock);
 
         // TODO: 07.08.2023
         /*

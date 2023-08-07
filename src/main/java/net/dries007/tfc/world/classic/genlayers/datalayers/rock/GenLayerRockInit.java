@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.genlayers.datalayers.rock;
 
 import net.dries007.tfc.api.types.rock.category.RockCategory;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
 import net.minecraft.world.gen.layer.IntCache;
 
@@ -13,9 +13,9 @@ public class GenLayerRockInit extends GenLayerTFC {
     public GenLayerRockInit(long par1, final RockCategory.Layer rocks) {
         super(par1);
 
-        layerRocks = RockType.getRockTypes().stream()
+        layerRocks = Rock.getRockTypes().stream()
                 .filter(rocks)
-                .mapToInt(RockType::indexOf)
+                .mapToInt(Rock::indexOf)
                 .sorted().toArray();
     }
 

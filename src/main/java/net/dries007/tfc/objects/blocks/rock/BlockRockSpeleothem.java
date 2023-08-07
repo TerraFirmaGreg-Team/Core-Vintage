@@ -4,7 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
@@ -35,8 +35,8 @@ import java.util.Random;
 public class BlockRockSpeleothem extends BlockRock {
     public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
-    public BlockRockSpeleothem(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockType, rockBlockVariant, rockType);
+    public BlockRockSpeleothem(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
+        super(rockBlockType, rockBlockVariant, rock);
 
         this.setDefaultState(blockState.getBaseState().withProperty(SIZE, EnumSize.MEDIUM));
     }
@@ -70,7 +70,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCStorage.getRockItem(getRockType());
+        return TFCStorage.getRockItem(getRock());
     }
 
     @Override
@@ -183,7 +183,7 @@ public class BlockRockSpeleothem extends BlockRock {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
-                        "rocktype=" + getRockType() + "," +
+                        "rocktype=" + getRock() + "," +
                                 "size=" + state.getValue(SIZE));
             }
         });
@@ -193,7 +193,7 @@ public class BlockRockSpeleothem extends BlockRock {
                 Item.getItemFromBlock(this),
                 this.getMetaFromState(this.getBlockState().getBaseState()),
                 new ModelResourceLocation(getResourceLocation(),
-                        "rocktype=" + getRockType() + "," +
+                        "rocktype=" + getRock() + "," +
                                 "size=big"));
     }
 

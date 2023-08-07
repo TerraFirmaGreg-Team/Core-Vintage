@@ -3,81 +3,83 @@ package net.dries007.tfc.api.types.rock.block.type;
 import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants;
 import net.dries007.tfc.objects.blocks.rock.*;
 
+import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.*;
+
 public class RockBlockTypeHandler {
 
     public static void init() {
 
-        RockBlockTypes.Common = new RockBlockType
+        COMMON = new RockBlockType
                 .Builder("common", BlockRock::new)
-                .addBlockVariation(RockBlockVariants.Raw, BlockRockRaw::new)
-                .addBlockVariation(RockBlockVariants.Cobble, BlockRockFallable::new)
-                .addBlockVariation(RockBlockVariants.Smooth)
-                .addBlockVariation(RockBlockVariants.Brick)
-                .addBlockVariation(RockBlockVariants.BrickCracked)
-                .addBlockVariation(RockBlockVariants.BrickChiseled)
+                .addBlockVariation(RockBlockVariants.RAW, BlockRockRaw::new)
+                .addBlockVariation(RockBlockVariants.COBBLE, BlockRockFallable::new)
+                .addBlockVariation(RockBlockVariants.SMOOTH)
+                .addBlockVariation(RockBlockVariants.BRICK)
+                .addBlockVariation(RockBlockVariants.BRICK_CRACKED)
+                .addBlockVariation(RockBlockVariants.BRICK_CHISELED)
                 .build();
 
-        RockBlockTypes.Mossy = new RockBlockType
+        MOSSY = new RockBlockType
                 .Builder("mossy", BlockRockMossy::new)
-                .addBlockVariation(RockBlockVariants.Cobble)
-                .addBlockVariation(RockBlockVariants.Brick)
+                .addBlockVariation(RockBlockVariants.COBBLE)
+                .addBlockVariation(RockBlockVariants.BRICK)
                 .build();
 
-        RockBlockTypes.Fallable = new RockBlockType
+        FALLABLE = new RockBlockType
                 .Builder("fallable", BlockRockFallable::new)
-                .addBlockVariation(RockBlockVariants.Gravel, BlockRockGravel::new)
-                .addBlockVariation(RockBlockVariants.Sand, BlockRockSand::new)
+                .addBlockVariation(RockBlockVariants.GRAVEL, BlockRockGravel::new)
+                .addBlockVariation(RockBlockVariants.SAND, BlockRockSand::new)
                 .build();
 
-        RockBlockTypes.Stairs = new RockBlockType
+        STAIRS = new RockBlockType
                 .Builder("stairs", BlockRockStairs::new)
-                .addBlockVariation(RockBlockVariants.Raw)
-                .addBlockVariation(RockBlockVariants.Cobble)
-                .addBlockVariation(RockBlockVariants.Smooth)
-                .addBlockVariation(RockBlockVariants.Brick)
+                .addBlockVariation(RockBlockVariants.RAW)
+                .addBlockVariation(RockBlockVariants.COBBLE)
+                .addBlockVariation(RockBlockVariants.SMOOTH)
+                .addBlockVariation(RockBlockVariants.BRICK)
                 .build();
 
-        RockBlockTypes.SlabDouble = new RockBlockType
+        SLAB_DOUBLE = new RockBlockType
                 .Builder("slab_double", BlockRockSlab.Double::new)
-                .addBlockVariation(RockBlockVariants.Raw)
-                .addBlockVariation(RockBlockVariants.Cobble)
-                .addBlockVariation(RockBlockVariants.Smooth)
-                .addBlockVariation(RockBlockVariants.Brick)
+                .addBlockVariation(RockBlockVariants.RAW)
+                .addBlockVariation(RockBlockVariants.COBBLE)
+                .addBlockVariation(RockBlockVariants.SMOOTH)
+                .addBlockVariation(RockBlockVariants.BRICK)
                 .build();
 
-        RockBlockTypes.Slab = new RockBlockType
+        SLAB = new RockBlockType
                 .Builder("slab", BlockRockSlab.Half::new)
-                .addBlockVariation(RockBlockVariants.Raw)
-                .addBlockVariation(RockBlockVariants.Cobble)
-                .addBlockVariation(RockBlockVariants.Smooth)
-                .addBlockVariation(RockBlockVariants.Brick)
+                .addBlockVariation(RockBlockVariants.RAW)
+                .addBlockVariation(RockBlockVariants.COBBLE)
+                .addBlockVariation(RockBlockVariants.SMOOTH)
+                .addBlockVariation(RockBlockVariants.BRICK)
                 .build();
 
-        RockBlockTypes.Wall = new RockBlockType
+        WALL = new RockBlockType
                 .Builder("wall", BlockRockWall::new)
-                .addBlockVariation(RockBlockVariants.Raw)
-                .addBlockVariation(RockBlockVariants.Cobble)
-                .addBlockVariation(RockBlockVariants.Smooth)
-                .addBlockVariation(RockBlockVariants.Brick)
+                .addBlockVariation(RockBlockVariants.RAW)
+                .addBlockVariation(RockBlockVariants.COBBLE)
+                .addBlockVariation(RockBlockVariants.SMOOTH)
+                .addBlockVariation(RockBlockVariants.BRICK)
                 .build();
 
-        RockBlockTypes.Loose = new RockBlockType
+        LOOSE = new RockBlockType
                 .Builder("loose", BlockRockLoose::new)
                 .build();
 
-        RockBlockTypes.Speleothem = new RockBlockType
+        SPELEOTHEM = new RockBlockType
                 .Builder("speleothem", BlockRockSpeleothem::new)
                 .build();
 
-        RockBlockTypes.Button = new RockBlockType
+        BUTTON = new RockBlockType
                 .Builder("button", BlockRockButton::new)
                 .build();
 
-        RockBlockTypes.PressurePlate = new RockBlockType
+        PRESSURE_PLATE = new RockBlockType
                 .Builder("pressure_plate", BlockRockPressurePlate::new)
                 .build();
 
-        RockBlockTypes.Anvil = new RockBlockType
+        ANVIL = new RockBlockType
                 .Builder("anvil", BlockRockAnvil::new)
                 .build();
     }

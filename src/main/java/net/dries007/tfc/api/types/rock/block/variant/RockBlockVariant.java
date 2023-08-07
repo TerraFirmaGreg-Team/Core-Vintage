@@ -2,11 +2,12 @@ package net.dries007.tfc.api.types.rock.block.variant;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class RockBlockVariant {
 
-    private static final Set<RockBlockVariant> rockBlockVariants = new HashSet<>();
+    private static final Set<RockBlockVariant> rockBlockVariants = new LinkedHashSet<>();
 
     @Nonnull
     private final String rockBlockVariantName;

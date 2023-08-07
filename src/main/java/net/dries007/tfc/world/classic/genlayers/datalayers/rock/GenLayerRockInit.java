@@ -17,10 +17,6 @@ public class GenLayerRockInit extends GenLayerTFC {
                 .filter(rocks)
                 .mapToInt(RockType::indexOf)
                 .sorted().toArray();
-
-        for (var item : layerRocks) {
-            System.out.println(item);
-        }
     }
 
     @Override

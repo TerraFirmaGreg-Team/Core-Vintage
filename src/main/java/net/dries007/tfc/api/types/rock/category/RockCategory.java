@@ -6,11 +6,12 @@ import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
 public class RockCategory {
-    private static final Set<RockCategory> rockCategories = new HashSet<>();
+    private static final Set<RockCategory> rockCategories = new LinkedHashSet<>();
 
     private final String rockCategoryName;
     private final boolean layer1;

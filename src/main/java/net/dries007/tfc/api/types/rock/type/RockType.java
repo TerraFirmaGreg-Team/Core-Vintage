@@ -15,7 +15,7 @@ import java.util.Set;
  * */
 public class RockType {
 
-    private static final Set<RockType> rockTypes = new HashSet<>();
+    private static final Set<RockType> rockTypes = new LinkedHashSet<>();
 
     @Nonnull
     private final String rockTypeName;

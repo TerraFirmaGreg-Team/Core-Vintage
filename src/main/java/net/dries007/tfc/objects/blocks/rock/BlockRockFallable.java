@@ -19,11 +19,17 @@ import java.util.Random;
 public class BlockRockFallable extends BlockRock {
 
     public BlockRockFallable(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockType, rockBlockVariant, rockType);
+        this(Material.ROCK, rockBlockType, rockBlockVariant, rockType);
     }
 
     public BlockRockFallable(Material material, RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
         super(material, rockBlockType, rockBlockVariant, rockType);
+
+        // TODO: 07.08.2023
+        /*
+        if (rockVariant.canFall()) {
+            FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
+        }*/
     }
 
     @SideOnly(Side.CLIENT)

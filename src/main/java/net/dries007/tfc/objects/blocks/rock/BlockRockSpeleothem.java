@@ -1,36 +1,25 @@
 package net.dries007.tfc.objects.blocks.rock;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.Rock;
-import net.dries007.tfc.api.types.rock.RockVariant;
-import net.dries007.tfc.api.types.rock.util.IRockBlock;
-import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
+import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.type.RockType;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -38,67 +27,18 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
 import java.util.Random;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockRockSpeleothem extends Block implements IRockBlock, IItemSize {
+public class BlockRockSpeleothem extends BlockRock {
     public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
-    private final RockVariant rockVariant;
-    private final Rock rock;
-    private final ResourceLocation modelLocation;
+    public BlockRockSpeleothem(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, RockType rockType) {
+        super(rockBlockType, rockBlockVariant, rockType);
 
-    public BlockRockSpeleothem(RockVariant rockVariant, Rock rock) {
-        super(Material.ROCK);
-
-        this.rockVariant = rockVariant;
-        this.rock = rock;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
-
-        var blockRegistryName = String.format("rock/%s/%s", rockVariant, rock);
-        this.setCreativeTab(CreativeTabsTFC.ROCK);
-        this.setSoundType(SoundType.STONE);
-        this.setHardness(getFinalHardness());
-        this.setHarvestLevel("pickaxe", 0);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         this.setDefaultState(blockState.getBaseState().withProperty(SIZE, EnumSize.MEDIUM));
-        //OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
-    }
-
-    @Nonnull
-    @Override
-    public RockVariant getRockVariant() {
-        return rockVariant;
-    }
-
-    @Nonnull
-    @Override
-    public Rock getRock() {
-        return rock;
-    }
-
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
-    }
-
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack stack) {
-        return Size.SMALL; // Store anywhere
-    }
-
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack stack) {
-        return Weight.LIGHT; // Stacksize = 32
     }
 
     @Override
@@ -130,7 +70,7 @@ public class BlockRockSpeleothem extends Block implements IRockBlock, IItemSize 
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCStorage.getRockItem(rock);
+        return TFCStorage.getRockItem(getRockType());
     }
 
     @Override
@@ -242,8 +182,8 @@ public class BlockRockSpeleothem extends Block implements IRockBlock, IItemSize 
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation,
-                        "rocktype=" + rock.getName() + "," +
+                return new ModelResourceLocation(getResourceLocation(),
+                        "rocktype=" + getRockType() + "," +
                                 "size=" + state.getValue(SIZE));
             }
         });
@@ -252,16 +192,9 @@ public class BlockRockSpeleothem extends Block implements IRockBlock, IItemSize 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),
                 this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(modelLocation,
-                        "rocktype=" + rock.getName() + "," +
+                new ModelResourceLocation(getResourceLocation(),
+                        "rocktype=" + getRockType() + "," +
                                 "size=big"));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
     }
 
     public enum EnumSize implements IStringSerializable {

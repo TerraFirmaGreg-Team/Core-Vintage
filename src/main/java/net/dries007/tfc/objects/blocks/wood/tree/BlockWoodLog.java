@@ -240,12 +240,12 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockWoodLog.PLACED).build());
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getRegistryLocation()).ignore(BlockWoodLog.PLACED).build());
 
         for (var state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
                     getMetaFromState(state),
-                    new ModelResourceLocation(getRegistryLocation().toString()));
+                    new ModelResourceLocation(getRegistryLocation(), "normal"));
         }
     }
 }

@@ -447,14 +447,14 @@ public class BlockWoodSupport extends Block implements IWoodBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), this.getPropertyString(state.getProperties()));
+                return new ModelResourceLocation(getResourceLocation(), getPropertyString(state.getProperties()));
             }
         });
 
         for (IBlockState state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
                     getMetaFromState(state),
-                    new ModelResourceLocation(getRegistryLocation(), "normal"));
+                    new ModelResourceLocation(getResourceLocation(), "normal"));
         }
     }
 }

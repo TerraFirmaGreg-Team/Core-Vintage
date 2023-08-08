@@ -187,7 +187,7 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
 
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockWoodSapling.STAGE).build());
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getRegistryLocation()).ignore(BlockWoodSapling.STAGE).build());
 
         for (var state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),

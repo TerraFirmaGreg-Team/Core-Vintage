@@ -269,7 +269,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
             ModelLoader.setCustomModelResourceLocation(
                     Item.getItemFromBlock(this),
                     getMetaFromState(state),
-                    new ModelResourceLocation(getRegistryLocation(),
+                    new ModelResourceLocation(getResourceLocation(),
                             "wood=" + woodType.toString()));
         }
     }

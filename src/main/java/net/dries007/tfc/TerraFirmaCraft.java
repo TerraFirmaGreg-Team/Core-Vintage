@@ -227,6 +227,7 @@ public final class TerraFirmaCraft {
         event.registerServerCommand(new CommandTimeTFC());
         event.registerServerCommand(new CommandDebugInfo());
         event.registerServerCommand(new CommandWorkChunk());
+        event.registerServerCommand(new CommandGenTree());
 
         // Initialize calendar for the current server
         CalendarTFC.INSTANCE.init(event.getServer());

@@ -29,7 +29,7 @@ public class WoodBlockVariantHandler {
         SLAB_DOUBLE = new WoodBlockVariant("slab_double", BlockWoodSlab.Double::new);
         SLAB = new WoodBlockVariant("slab", BlockWoodSlab.Half::new);
         STAIRS = new WoodBlockVariant("stairs", BlockWoodStairs::new);
-        TOOL_RACK = new WoodBlockVariant("tool_rack", BlockWoodToolRack::new));
+        TOOL_RACK = new WoodBlockVariant("tool_rack", BlockWoodToolRack::new);
         SUPPORT = new WoodBlockVariant("support", BlockWoodSupport::new);
         WORKBENCH = new WoodBlockVariant("workbench", BlockWoodWorkbench::new);
         CHEST_TRAP = new WoodBlockVariant("chest_trap", BlockWoodChest::new);

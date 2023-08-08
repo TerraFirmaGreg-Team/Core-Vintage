@@ -19,6 +19,7 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.jei.categories.*;
@@ -36,6 +37,7 @@ import net.dries007.tfc.objects.recipes.SaltingRecipe;
 import net.dries007.tfc.objects.recipes.UnmoldRecipe;
 import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.test.items.TFCItems;
+import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -188,8 +190,8 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(blastList, BLAST_FURNACE_UID);
 
         // Barrel Recipes
-        for (var barrel : BlockWoodBarrel.getBarrelStorage()) {
-            registry.addRecipeCatalyst(new ItemStack(barrel), BARREL_UID);
+        for (var barrel : TFCStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getWoodBlockVariant() == WoodBlockVariants.BARREL).toArray()) {
+            registry.addRecipeCatalyst(new ItemStack((Block) barrel), BARREL_UID);
         }
 
         var barrelRecipes = TFCRegistries.BARREL.getValuesCollection()
@@ -200,8 +202,8 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(barrelRecipes, BARREL_UID);
 
         // Loom Recipes
-        for (var loom : BlockWoodLoom.getLoomStorage()) {
-            registry.addRecipeCatalyst(new ItemStack(loom), LOOM_UID);
+        for (var loom : TFCStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getWoodBlockVariant() == WoodBlockVariants.LOOM).toArray()) {
+            registry.addRecipeCatalyst(new ItemStack((Block) loom), LOOM_UID);
         }
 
         var loomRecipes = TFCRegistries.LOOM.getValuesCollection()

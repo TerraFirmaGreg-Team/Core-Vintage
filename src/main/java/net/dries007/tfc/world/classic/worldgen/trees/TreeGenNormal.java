@@ -4,6 +4,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.world.classic.StructureHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +17,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.LOG;
 import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
 
 public class TreeGenNormal implements ITreeGenerator {
@@ -60,7 +60,7 @@ public class TreeGenNormal implements ITreeGenerator {
             StructureHelper.addStructureToWorld(world, pos, structureOverlay, settingsWeak);
         }
 
-        final IBlockState log = TFCStorage.getWoodBlock(LOG, woodType).getDefaultState().withProperty(PLACED, false);
+        final IBlockState log = TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
         for (int i = 0; i < height; i++)
             world.setBlockState(pos.add(size.getX() / 2, i - height, size.getZ() / 2), log);
     }

@@ -4,6 +4,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
 import net.dries007.tfc.world.classic.StructureHelper;
@@ -18,7 +19,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.LOG;
 import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 
@@ -89,6 +89,6 @@ public class TreeGenWillow implements ITreeGenerator {
 
     private void tryPlaceLog(World world, BlockPos pos, WoodType woodType, BlockLog.EnumAxis axis) {
         if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos).getBlock() instanceof BlockWoodSapling || world.getBlockState(pos).getBlock() instanceof BlockWoodLeaves)
-            world.setBlockState(pos, TFCStorage.getWoodBlock(LOG, woodType).getDefaultState().withProperty(LOG_AXIS, axis).withProperty(PLACED, false));
+            world.setBlockState(pos, TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(LOG_AXIS, axis).withProperty(PLACED, false));
     }
 }

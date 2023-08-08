@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.blocks.wood;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -53,12 +52,12 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
     }
 
     @Override
-    public WoodVariant_old getWoodVariant() {
+    public WoodVariant_old getWoodBlockVariant() {
         return woodVariant;
     }
 
     @Override
-    public WoodType getWood() {
+    public WoodType getWoodType() {
         return woodType;
     }
 

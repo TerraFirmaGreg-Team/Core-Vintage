@@ -22,7 +22,7 @@ public class ItemWoodDoor extends ItemDoor implements IItemSize {
     public ItemWoodDoor(BlockWoodDoor blockWoodDoor) {
         super(blockWoodDoor);
 
-        woodType = blockWoodDoor.getWood();
+        woodType = blockWoodDoor.getWoodType();
         OreDictionaryHelper.register(this, "door", "wood");
         //noinspection ConstantConditions
         OreDictionaryHelper.register(this, "door", "wood", woodType.toString());

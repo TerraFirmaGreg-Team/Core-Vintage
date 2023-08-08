@@ -263,7 +263,7 @@ public final class ChunkDataTFC {
 
     public List<WoodType> getValidTrees() {
         return TFCStorage.WOOD_BLOCKS.values().stream()
-                .map(IWoodBlock::getWood)
+                .map(IWoodBlock::getWoodType)
                 .filter(t -> t.isValidLocation(avgTemp, rainfall, floraDensity))
                 .sorted((s, t) -> (int) (t.getDominance() - s.getDominance()))
                 .collect(Collectors.toList());
@@ -272,7 +272,7 @@ public final class ChunkDataTFC {
     @Nullable
     public WoodType getSparseGenTree() {
         return TFCStorage.WOOD_BLOCKS.values().stream()
-                .map(IWoodBlock::getWood)
+                .map(IWoodBlock::getWoodType)
                 .filter(t -> t.isValidLocation(0.5f * avgTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
                 .min((s, t) -> (int) (t.getDominance() - s.getDominance()))
                 .orElse(null);

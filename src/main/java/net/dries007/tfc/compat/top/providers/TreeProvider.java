@@ -26,7 +26,7 @@ public class TreeProvider implements IProbeInfoProvider {
         var state = world.getBlockState(blockPos);
 
         if (state.getBlock() instanceof BlockWoodSapling block) {
-            var wood = block.getWood();
+            var wood = block.getWoodType();
             var te = Helpers.getTE(world, blockPos, TETickCounter.class);
 
             if (te != null) {

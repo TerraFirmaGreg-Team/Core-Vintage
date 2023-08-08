@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -25,9 +25,8 @@ import javax.annotation.Nullable;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodBlock {
-    private final WoodVariant_old woodVariant;
+    private final WoodBlockVariant woodBlockVariant;
     private final WoodType woodType;
-    private final ResourceLocation modelLocation;
 
     public BlockWoodPressurePlate(WoodVariant_old woodVariant, WoodType woodType) {
         super(Material.WOOD, Sensitivity.EVERYTHING);
@@ -48,12 +47,12 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
     }
 
     @Override
-    public WoodVariant_old getWoodVariant() {
+    public WoodVariant_old getWoodBlockVariant() {
         return woodVariant;
     }
 
     @Override
-    public WoodType getWood() {
+    public WoodType getWoodType() {
         return woodType;
     }
 

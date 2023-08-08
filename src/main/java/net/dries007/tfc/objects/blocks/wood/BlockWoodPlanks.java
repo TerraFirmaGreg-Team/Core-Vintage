@@ -1,11 +1,10 @@
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -15,7 +14,6 @@ import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -23,43 +21,33 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class BlockWoodPlanks extends Block implements IWoodBlock {
-    private final WoodVariant_old woodVariant;
+    private final WoodBlockVariant woodBlockVariant;
     private final WoodType woodType;
-    private final ResourceLocation modelLocation;
 
-    public BlockWoodPlanks(WoodVariant_old woodVariant, WoodType woodType) {
+    public BlockWoodPlanks(WoodBlockVariant woodBlockVariant, WoodType woodType) {
         super(Material.WOOD);
 
-        this.woodVariant = woodVariant;
+        this.woodBlockVariant = woodBlockVariant;
         this.woodType = woodType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
-
         setSoundType(SoundType.WOOD);
         setHardness(2.0F);
         setResistance(5.0F);
         setHarvestLevel("axe", 0);
-
-        OreDictionaryHelper.register(this, "plank", "wood");
-        //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "plank", "wood", woodType.toString());
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
     @Override
-    public WoodVariant_old getWoodVariant() {
-        return woodVariant;
+    public WoodBlockVariant getWoodBlockVariant() {
+        return woodBlockVariant;
     }
 
     @Override
-    public WoodType getWood() {
+    public WoodType getWoodType() {
         return woodType;
     }
 
@@ -77,13 +65,13 @@ public class BlockWoodPlanks extends Block implements IWoodBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+                return new ModelResourceLocation(getResourceLocation(), this.getPropertyString(state.getProperties()));
             }
         });
 
         for (IBlockState state : this.getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    this.getMetaFromState(state), new ModelResourceLocation(modelLocation, "normal"));
+                    this.getMetaFromState(state), new ModelResourceLocation(getResourceLocation(), "normal"));
         }
     }
 }

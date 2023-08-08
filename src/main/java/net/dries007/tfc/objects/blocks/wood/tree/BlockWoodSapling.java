@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.blocks.wood.tree;
 import net.dries007.tfc.api.types.agriculture.util.IGrowingPlant;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -71,12 +70,12 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     }
 
     @Override
-    public WoodVariant_old getWoodVariant() {
+    public WoodVariant_old getWoodBlockVariant() {
         return woodVariant;
     }
 
     @Override
-    public WoodType getWood() {
+    public WoodType getWoodType() {
         return woodType;
     }
 

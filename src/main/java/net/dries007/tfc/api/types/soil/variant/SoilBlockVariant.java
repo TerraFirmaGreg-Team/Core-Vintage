@@ -35,6 +35,7 @@ public class SoilBlockVariant {
         }
     }
 
+    @Nonnull
     @Override
     public String toString() {
         return soilBlockVariantName;

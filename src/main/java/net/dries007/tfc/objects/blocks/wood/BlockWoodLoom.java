@@ -5,8 +5,8 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TELoom;
@@ -57,19 +57,17 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
     protected static final AxisAlignedBB LOOM_SOUTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.125D, 0.9375D, 1.0D, 0.5625D);
     protected static final AxisAlignedBB LOOM_NORTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.4375D, 0.9375D, 1.0D, 0.875D);
 
-    private final WoodVariant_old woodVariant;
+    private final WoodBlockVariant woodBlockVariant;
     private final WoodType woodType;
-    private final ResourceLocation modelLocation;
 
-    public BlockWoodLoom(WoodVariant_old woodVariant, WoodType woodType) {
+    public BlockWoodLoom(WoodBlockVariant woodBlockVariant, WoodType woodType) {
         super(WOOD, MapColor.AIR);
-        this.woodVariant = woodVariant;
-        this.woodType = woodType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        this.woodBlockVariant = woodBlockVariant;
+        this.woodType = woodType;
+
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
         setSoundType(SoundType.WOOD);
         setHarvestLevel("axe", 0);
@@ -78,20 +76,13 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
-    public static Collection<Block> getLoomStorage() {
-        return WOOD_BLOCKS.values().stream()
-                .filter(block -> block.getWoodVariant() == LOOM)
-                .map(block -> (Block) block)
-                .collect(Collectors.toList());
+    @Override
+    public WoodBlockVariant getWoodBlockVariant() {
+        return woodBlockVariant;
     }
 
     @Override
-    public WoodVariant_old getWoodVariant() {
-        return woodVariant;
-    }
-
-    @Override
-    public WoodType getWood() {
+    public WoodType getWoodType() {
         return woodType;
     }
 
@@ -104,13 +95,13 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
     @Nonnull
     @Override
     public Size getSize(@Nonnull ItemStack stack) {
-        return Size.LARGE; // Can only store in chests
+        return Size.LARGE;
     }
 
     @Nonnull
     @Override
     public Weight getWeight(@Nonnull ItemStack stack) {
-        return Weight.VERY_HEAVY; // Stacksize = 1
+        return Weight.VERY_HEAVY;
     }
 
     @Nullable
@@ -141,17 +132,12 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
     @SuppressWarnings("deprecation")
     @Nonnull
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        switch (state.getValue(FACING)) {
-            case NORTH:
-            default:
-                return LOOM_NORTH_AABB;
-            case SOUTH:
-                return LOOM_SOUTH_AABB;
-            case WEST:
-                return LOOM_WEST_AABB;
-            case EAST:
-                return LOOM_EAST_AABB;
-        }
+        return switch (state.getValue(FACING)) {
+            default -> LOOM_NORTH_AABB;
+            case SOUTH -> LOOM_SOUTH_AABB;
+            case WEST -> LOOM_WEST_AABB;
+            case EAST -> LOOM_EAST_AABB;
+        };
     }
 
     @Override
@@ -169,7 +155,7 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        TELoom te = Helpers.getTE(worldIn, pos, TELoom.class);
+        var te = Helpers.getTE(worldIn, pos, TELoom.class);
         if (te != null) {
             return te.onRightClick(playerIn);
         }
@@ -214,14 +200,14 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+                return new ModelResourceLocation(getResourceLocation(), this.getPropertyString(state.getProperties()));
             }
         });
 
         for (IBlockState state : this.getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
                     this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation, "normal"));
+                    new ModelResourceLocation(getResourceLocation(), "normal"));
         }
     }
 }

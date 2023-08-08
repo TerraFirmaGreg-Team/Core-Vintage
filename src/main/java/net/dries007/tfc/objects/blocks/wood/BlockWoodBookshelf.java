@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -28,19 +28,15 @@ import javax.annotation.Nullable;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
-    private final WoodVariant_old woodVariant;
+    private final WoodBlockVariant woodVariant;
     private final WoodType woodType;
-    private final ResourceLocation modelLocation;
 
-    public BlockWoodBookshelf(WoodVariant_old woodVariant, WoodType woodType) {
-
+    public BlockWoodBookshelf(WoodBlockVariant woodVariant, WoodType woodType) {
         this.woodVariant = woodVariant;
         this.woodType = woodType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
         setSoundType(SoundType.WOOD);
         setHardness(2.0F);
@@ -53,12 +49,12 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
     }
 
     @Override
-    public WoodVariant_old getWoodVariant() {
+    public WoodBlockVariant getWoodBlockVariant() {
         return woodVariant;
     }
 
     @Override
-    public WoodType getWood() {
+    public WoodType getWoodType() {
         return woodType;
     }
 
@@ -76,8 +72,8 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
     }
 
     @Override
-    public float getEnchantPowerBonus(World world, BlockPos pos) {
-        return 1.0F; // Same as vanilla
+    public float getEnchantPowerBonus(@Nonnull World world, @Nonnull BlockPos pos) {
+        return 1.0F;
     }
 
     @Override
@@ -86,12 +82,12 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+            return new ModelResourceLocation(getResourceLocation(), getPropertyString(state.getProperties()));
             }
         });
 
         for (IBlockState state : this.getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), this.getMetaFromState(state), new ModelResourceLocation(modelLocation, "normal"));
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), getMetaFromState(state), new ModelResourceLocation(getResourceLocation(), "normal"));
         }
     }
 }

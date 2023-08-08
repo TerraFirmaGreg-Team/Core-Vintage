@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -17,7 +17,6 @@ import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -28,7 +27,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
@@ -39,53 +37,32 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
-@ParametersAreNonnullByDefault
 public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock {
-    private final WoodVariant_old woodVariant;
+    private final WoodBlockVariant woodBlockVariant;
     private final WoodType woodType;
-    private final ResourceLocation modelLocation;
 
-    public BlockWoodChest(WoodVariant_old woodVariant, WoodType woodType) {
+    public BlockWoodChest(WoodBlockVariant woodBlockVariant, WoodType woodType) {
         super(Type.BASIC);
-        this.woodVariant = woodVariant;
-        this.woodType = woodType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        this.woodBlockVariant = woodBlockVariant;
+        this.woodType = woodType;
+
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
         setHardness(2.5F);
         setSoundType(SoundType.WOOD);
-//        if (type == TFCBASIC) {
-//            if (MAP_BASIC.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
-//            OreDictionaryHelper.register(this, "chest");
-//            OreDictionaryHelper.register(this, "chest", "wood");
-//            //noinspection ConstantConditions
-//            OreDictionaryHelper.register(this, "chest", wood.getRegistryName().getPath());
-//        } else if (type == TFCTRAP) {
-//            if (MAP_TRAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
-//            OreDictionaryHelper.register(this, "chest", "trapped");
-//            OreDictionaryHelper.register(this, "chest", "wood");
-//            //noinspection ConstantConditions
-//            OreDictionaryHelper.register(this, "chest", "trapped", wood.getRegistryName().getPath());
-//        } else {
-//            throw new IllegalStateException("TFC Chest must use TFC chest type");
-//        }
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
     @Override
-    public WoodVariant_old getWoodVariant() {
-        return woodVariant;
+    public WoodBlockVariant getWoodBlockVariant() {
+        return woodBlockVariant;
     }
 
     @Override
-    public WoodType getWood() {
+    public WoodType getWoodType() {
         return woodType;
     }
 
@@ -96,7 +73,7 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             TFCGuiHandler.openGui(worldIn, pos, playerIn, TFCGuiHandler.Type.CHEST);
         }
@@ -108,7 +85,8 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
      * Hoppers are hardcoded for vanilla chest insertions, which means we need to block them (to stop inserting items that aren't the correct size)
      */
     @Nullable
-    public ILockableContainer getContainer(World worldIn, BlockPos pos, boolean allowBlocking) {
+    @Override
+    public ILockableContainer getContainer(World worldIn, @Nonnull BlockPos pos, boolean allowBlocking) {
         TileEntity tileentity = worldIn.getTileEntity(pos);
 
         if (!(tileentity instanceof TileEntityChest)) {
@@ -147,20 +125,20 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
     }
 
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
+    public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
         return new TEChestTFC();
     }
 
     @Nonnull
     @Override
     public Size getSize(@Nonnull ItemStack stack) {
-        return Size.LARGE; // Can only be stored in itself (and since this can't be carried with items, makes sense
+        return Size.LARGE;
     }
 
     @Nonnull
     @Override
     public Weight getWeight(@Nonnull ItemStack stack) {
-        return Weight.LIGHT; // Stacksize = 32
+        return Weight.LIGHT;
     }
 
     private boolean isBlocked(World worldIn, BlockPos pos) {
@@ -172,10 +150,9 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
     }
 
     private boolean isOcelotSittingOnChest(World worldIn, BlockPos pos) {
-        for (Entity entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1))) {
-            EntityOcelot entityocelot = (EntityOcelot) entity;
+        for (EntityOcelot entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1))) {
 
-            if (entityocelot.isSitting()) {
+            if (entity.isSitting()) {
                 return true;
             }
         }
@@ -186,13 +163,7 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockChest.FACING).build());
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(modelLocation, "normal"));
-
-//				for (IBlockState state : this.getBlockState().getValidStates()) {
-//						ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-//										this.getMetaFromState(state),
-//										new ModelResourceLocation(modelLocation, "normal"));
-//				}
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockChest.FACING).build());
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

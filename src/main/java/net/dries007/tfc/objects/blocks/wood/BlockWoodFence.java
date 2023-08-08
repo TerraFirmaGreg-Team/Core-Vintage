@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -25,37 +25,31 @@ import javax.annotation.Nullable;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodFence extends BlockFence implements IWoodBlock {
-    private final WoodVariant_old woodVariant;
+    private final WoodBlockVariant woodBlockVariant;
     private final WoodType woodType;
-    private final ResourceLocation modelLocation;
 
-    public BlockWoodFence(WoodVariant_old woodVariant, WoodType woodType) {
+    public BlockWoodFence(WoodBlockVariant woodBlockVariant, WoodType woodType) {
         super(Material.WOOD, Material.WOOD.getMaterialMapColor());
 
-        this.woodVariant = woodVariant;
+        this.woodBlockVariant = woodBlockVariant;
         this.woodType = woodType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
         setHarvestLevel("axe", 0);
-        setHardness(2.0F); // match vanilla
+        setHardness(2.0F);
         setResistance(15.0F);
-        OreDictionaryHelper.register(this, "fence", "wood");
-        //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "fence", "wood", woodType.toString());
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
     @Override
-    public WoodVariant_old getWoodVariant() {
-        return woodVariant;
+    public WoodBlockVariant getWoodBlockVariant() {
+        return woodBlockVariant;
     }
 
     @Override
-    public WoodType getWood() {
+    public WoodType getWoodType() {
         return woodType;
     }
 
@@ -71,14 +65,14 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+                return new ModelResourceLocation(getResourceLocation(), this.getPropertyString(state.getProperties()));
             }
         });
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
+        for (IBlockState state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation, "inventory"));
+                    getMetaFromState(state),
+                    new ModelResourceLocation(getResourceLocation(), "inventory"));
         }
     }
 }

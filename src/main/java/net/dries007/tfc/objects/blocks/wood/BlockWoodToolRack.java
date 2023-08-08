@@ -4,7 +4,6 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -76,12 +75,12 @@ public class BlockWoodToolRack extends Block implements IItemSize, IWoodBlock {
     }
 
     @Override
-    public WoodVariant_old getWoodVariant() {
+    public WoodVariant_old getWoodBlockVariant() {
         return woodVariant;
     }
 
     @Override
-    public WoodType getWood() {
+    public WoodType getWoodType() {
         return woodType;
     }
 

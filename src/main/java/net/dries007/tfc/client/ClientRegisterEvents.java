@@ -257,17 +257,17 @@ public final class ClientRegisterEvents {
 
         //=== Wood ===================================================================================================//
 
-        blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IWoodBlock) s.getBlock()).getWood().getColor() : 0xFFFFFF,
+        blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IWoodBlock) s.getBlock()).getWoodType().getColor() : 0xFFFFFF,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(block -> block.getWoodVariant() != LEAVES && block.getWoodVariant() != SAPLING)
+                        .filter(block -> block.getWoodBlockVariant() != LEAVES && block.getWoodBlockVariant() != SAPLING)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler(foliageColor,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getWoodVariant() == LEAVES)
+                        .filter(x -> x.getWoodBlockVariant() == LEAVES)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
@@ -324,17 +324,17 @@ public final class ClientRegisterEvents {
 
         //=== Wood ===================================================================================================//
 
-        itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getWood().getColor() : 0xFFFFFF,
+        itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getWoodType().getColor() : 0xFFFFFF,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getWoodVariant() != LEAVES && x.getWoodVariant() != SAPLING)
+                        .filter(x -> x.getWoodBlockVariant() != LEAVES && x.getWoodBlockVariant() != SAPLING)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getWoodVariant() == LEAVES)
+                        .filter(x -> x.getWoodBlockVariant() == LEAVES)
                         .map(s -> (BlockWoodLeaves) s)
                         .toArray(Block[]::new));
 

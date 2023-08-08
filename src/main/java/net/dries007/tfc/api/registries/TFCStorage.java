@@ -15,7 +15,6 @@ import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.objects.blocks.BlockAlabaster;

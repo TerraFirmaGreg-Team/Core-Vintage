@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types.wood;
 
-import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
 import net.minecraft.block.material.Material;
@@ -19,22 +19,22 @@ public interface ITreeGenerator {
      * @param manager an instance of the world's template manager. Used for getting structures.
      * @param world   The world
      * @param pos     The position where the sapling was / would've been
-     * @param wood    The tree type to spawn
+     * @param woodType    The tree type to spawn
      * @param rand    A random to use in generation
      */
-    void generateTree(TemplateManager manager, World world, BlockPos pos, Wood wood, Random rand, boolean isWorldGen);
+    void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen);
 
     /**
      * Checks if a tree can be generated. This implementation checks height, radius, and light level
      *
      * @param world The world
      * @param pos   The pos of the tree
-     * @param wood  The tree type (for checking if the tree can generate)
+     * @param woodType  The tree type (for checking if the tree can generate)
      * @return true if the tree can generate.
      */
-    default boolean canGenerateTree(World world, BlockPos pos, Wood wood) {
+    default boolean canGenerateTree(World world, BlockPos pos, WoodType woodType) {
         // Check if ground is flat enough
-        final int radius = wood.getMaxGrowthRadius();
+        final int radius = woodType.getMaxGrowthRadius();
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 if ((x == 0 && z == 0) ||
@@ -45,7 +45,7 @@ public interface ITreeGenerator {
             }
         }
         // Check if there is room directly upwards
-        final int height = wood.getMaxHeight();
+        final int height = woodType.getMaxHeight();
         for (int y = 1; y <= height; y++) {
             IBlockState state = world.getBlockState(pos.up(y));
             if (!state.getMaterial().isReplaceable() && state.getMaterial() != Material.LEAVES) {

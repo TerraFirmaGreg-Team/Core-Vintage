@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.blocks.wood.tree;
 
 import net.dries007.tfc.api.types.agriculture.util.IGrowingPlant;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
-import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -47,16 +47,16 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
     private final WoodVariant_old woodVariant;
-    private final Wood wood;
+    private final WoodType woodType;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodSapling(WoodVariant_old woodVariant, Wood wood) {
+    public BlockWoodSapling(WoodVariant_old woodVariant, WoodType woodType) {
 
         this.woodVariant = woodVariant;
-        this.wood = wood;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant + "/" + wood);
+        this.woodType = woodType;
+        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant + "/" + woodType);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.WOOD);
@@ -66,7 +66,7 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
         setHardness(0.0F);
         OreDictionaryHelper.register(this, "tree", "sapling");
         //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "tree", "sapling", wood.toString());
+        OreDictionaryHelper.register(this, "tree", "sapling", woodType.toString());
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
@@ -76,8 +76,8 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     }
 
     @Override
-    public Wood getWood() {
-        return wood;
+    public WoodType getWood() {
+        return woodType;
     }
 
     @Nullable

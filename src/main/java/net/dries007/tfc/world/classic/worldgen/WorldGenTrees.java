@@ -3,7 +3,7 @@ package net.dries007.tfc.world.classic.worldgen;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.ITreeGenerator;
-import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
@@ -59,11 +59,11 @@ public class WorldGenTrees implements IWorldGenerator {
         final float diversity = chunkData.getFloraDiversity();
         final float density = chunkData.getFloraDensity();
 
-        List<Wood> woods = chunkData.getValidTrees();
-        Collections.rotate(woods, -(int) (diversity * (woods.size() - 1f)));
+        List<WoodType> woodTypes = chunkData.getValidTrees();
+        Collections.rotate(woodTypes, -(int) (diversity * (woodTypes.size() - 1f)));
 
-        int stickDensity = 3 + (int) (4f * density + 1.5f * woods.size());
-        if (woods.isEmpty()) {
+        int stickDensity = 3 + (int) (4f * density + 1.5f * woodTypes.size());
+        if (woodTypes.isEmpty()) {
             stickDensity = 1 + (int) (1.5f * density);
         }
         generateLooseSticks(random, chunkX, chunkZ, world, (int) (Math.ceil(stickDensity * ConfigTFC.General.WORLD.sticksDensityModifier)));
@@ -71,11 +71,11 @@ public class WorldGenTrees implements IWorldGenerator {
         // This is to avoid giant regions of no trees whatsoever.
         // It will create sparse trees ( < 1 per chunk) by averaging the climate data to make it more temperate
         // The thought is in very harsh conditions, a few trees might survive outside their typical temperature zone
-        if (woods.isEmpty()) {
+        if (woodTypes.isEmpty()) {
             if (random.nextFloat() > 0.2f)
                 return;
 
-            Wood extra = chunkData.getSparseGenTree();
+            WoodType extra = chunkData.getSparseGenTree();
             if (extra != null) {
                 final int x = chunkX * 16 + random.nextInt(16) + 8;
                 final int z = chunkZ * 16 + random.nextInt(16) + 8;
@@ -86,8 +86,8 @@ public class WorldGenTrees implements IWorldGenerator {
         }
 
         final int treesPerChunk = (int) (density * 16 - 2);
-        final int maxTrees = Math.min(woods.size(), Math.min(5, (int) (1 + (density + diversity) * 2.5f)));
-        woods = woods.subList(0, maxTrees);
+        final int maxTrees = Math.min(woodTypes.size(), Math.min(5, (int) (1 + (density + diversity) * 2.5f)));
+        woodTypes = woodTypes.subList(0, maxTrees);
 
         int treesPlaced = 0;
         Set<BlockPos> checkedPositions = new HashSet<>();
@@ -95,36 +95,36 @@ public class WorldGenTrees implements IWorldGenerator {
             BlockPos column = new BlockPos(chunkX * 16 + random.nextInt(16) + 8, 0, chunkZ * 16 + random.nextInt(16) + 8);
             if (!checkedPositions.contains(column)) {
                 final BlockPos pos = world.getTopSolidOrLiquidBlock(column);
-                final Wood wood = getWood(woods, density, random);
+                final WoodType woodType = getWood(woodTypes, density, random);
 
                 checkedPositions.add(column);
-                if (wood.makeTree(manager, world, pos, random, true)) {
+                if (woodType.makeTree(manager, world, pos, random, true)) {
                     treesPlaced++;
                 }
             }
         }
 
-        woods.removeIf(t -> !t.hasBushes());
+        woodTypes.removeIf(t -> !t.hasBushes());
         // Small bushes in high density areas
-        if (density > 0.6f && !woods.isEmpty()) // Density requirement is the same for jungles (kapok trees) to generate
+        if (density > 0.6f && !woodTypes.isEmpty()) // Density requirement is the same for jungles (kapok trees) to generate
         {
-            for (int i = 0; i < woods.size() * 4f * density; i++) {
+            for (int i = 0; i < woodTypes.size() * 4f * density; i++) {
                 final int x = chunkX * 16 + random.nextInt(16) + 8;
                 final int z = chunkZ * 16 + random.nextInt(16) + 8;
                 final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
-                final Wood wood = getWood(woods, density, random);
-                ITreeGenerator bushGen = wood.getBushGenerator();
-                if (bushGen != null && wood.hasBushes() && bushGen.canGenerateTree(world, pos, wood)) {
-                    bushGen.generateTree(manager, world, pos, wood, random, true);
+                final WoodType woodType = getWood(woodTypes, density, random);
+                ITreeGenerator bushGen = woodType.getBushGenerator();
+                if (bushGen != null && woodType.hasBushes() && bushGen.canGenerateTree(world, pos, woodType)) {
+                    bushGen.generateTree(manager, world, pos, woodType, random, true);
                 }
             }
         }
     }
 
-    private Wood getWood(List<Wood> woods, float density, Random random) {
-        if (woods.size() == 1 || random.nextFloat() < 0.8f - density * 0.4f) {
-            return woods.get(0);
+    private WoodType getWood(List<WoodType> woodTypes, float density, Random random) {
+        if (woodTypes.size() == 1 || random.nextFloat() < 0.8f - density * 0.4f) {
+            return woodTypes.get(0);
         }
-        return woods.get(1 + random.nextInt(woods.size() - 1));
+        return woodTypes.get(1 + random.nextInt(woodTypes.size() - 1));
     }
 }

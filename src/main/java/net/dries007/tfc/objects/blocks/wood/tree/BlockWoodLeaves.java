@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
-import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -50,15 +50,15 @@ import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.SAPLING;
 @ParametersAreNonnullByDefault
 public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     private final WoodVariant_old woodVariant;
-    private final Wood wood;
+    private final WoodType woodType;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodLeaves(WoodVariant_old woodVariant, Wood wood) {
+    public BlockWoodLeaves(WoodVariant_old woodVariant, WoodType woodType) {
         this.woodVariant = woodVariant;
-        this.wood = wood;
+        this.woodType = woodType;
         this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.WOOD);
@@ -68,7 +68,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         leavesFancy = true; // Fast / Fancy graphics works correctly
         OreDictionaryHelper.register(this, "tree", "leaves");
         //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "tree", "leaves", wood.toString());
+        OreDictionaryHelper.register(this, "tree", "leaves", woodType.toString());
         Blocks.FIRE.setFireInfo(this, 30, 60);
         setTickRandomly(true);
     }
@@ -79,8 +79,8 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     }
 
     @Override
-    public Wood getWood() {
-        return wood;
+    public WoodType getWood() {
+        return woodType;
     }
 
     @Nullable
@@ -142,7 +142,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @Override
     @Nonnull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(TFCStorage.getWoodBlock(SAPLING, wood)) : Items.AIR;
+        return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(TFCStorage.getWoodBlock(SAPLING, woodType)) : Items.AIR;
     }
 
     @Override
@@ -237,7 +237,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
                     if (evaluated.contains(pos1) || !world.isBlockLoaded(pos1))
                         continue;
                     state1 = world.getBlockState(pos1);
-                    if (state1.getBlock() == TFCStorage.getWoodBlock(LOG, wood))
+                    if (state1.getBlock() == TFCStorage.getWoodBlock(LOG, woodType))
                         return;
                     if (state1.getBlock() == this)
                         pathsToAdd.add(pos1.toImmutable());
@@ -272,7 +272,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(modelLocation,
-                        "wood=" + wood.toString());
+                        "wood=" + woodType.toString());
             }
         });
 
@@ -282,7 +282,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
                     Item.getItemFromBlock(this),
                     this.getMetaFromState(state),
                     new ModelResourceLocation(modelLocation,
-                            "wood=" + wood.toString()));
+                            "wood=" + woodType.toString()));
         }
     }
 }

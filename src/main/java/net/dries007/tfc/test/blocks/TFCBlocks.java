@@ -10,7 +10,7 @@ import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.api.types.soil.SoilVariant;
 import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
-import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.*;
@@ -99,12 +99,12 @@ public class TFCBlocks {
 
         //=== Wood ===================================================================================================//
 
-        for (Wood wood : Wood.getAllWood()) {
+        for (WoodType woodType : WoodType.getAllWood()) {
             for (WoodVariant_old woodVariant : WoodVariant_old.values()) {
-                var woodVariantBlock = woodVariant.create(wood);
+                var woodVariantBlock = woodVariant.create(woodType);
 
-                if (WOOD_BLOCKS.put(new Pair<>(woodVariant, wood), woodVariantBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", woodVariant, wood));
+                if (WOOD_BLOCKS.put(new Pair<>(woodVariant, woodType), woodVariantBlock) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", woodVariant, woodType));
             }
         }
 

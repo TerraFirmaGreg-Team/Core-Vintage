@@ -23,9 +23,9 @@ import static net.dries007.tfc.types.DefaultTrees.GEN_NORMAL;
 /**
  * Класс Wood представляет тип дерева с определенными характеристиками.
  */
-public class Wood {
+public class WoodType {
 
-    private static final Set<Wood> WOOD = new LinkedHashSet<>();
+    private static final Set<WoodType> WOOD_TYPES = new LinkedHashSet<>();
 
     @Nonnull
     private final String name;
@@ -73,11 +73,11 @@ public class Wood {
      * @param burnTemp         температура, при которой дерево будет гореть в костре или подобном устройстве
      * @param burnTicks        количество тиков, в течение которых дерево будет гореть в костре или подобном устройстве
      */
-    public Wood(@Nonnull String name, int color, @Nonnull ITreeGenerator generator, float minTemp, float maxTemp,
-                float minRain, float maxRain, float minDensity, float maxDensity,
-                float dominance, int maxGrowthRadius, int maxHeight, int maxDecayDistance,
-                boolean isConifer, @Nullable ITreeGenerator bushGenerator,
-                boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks) {
+    public WoodType(@Nonnull String name, int color, @Nonnull ITreeGenerator generator, float minTemp, float maxTemp,
+                    float minRain, float maxRain, float minDensity, float maxDensity,
+                    float dominance, int maxGrowthRadius, int maxHeight, int maxDecayDistance,
+                    boolean isConifer, @Nullable ITreeGenerator bushGenerator,
+                    boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks) {
         this.name = name;
         this.color = color;
         this.minTemp = minTemp;
@@ -102,7 +102,7 @@ public class Wood {
             throw new RuntimeException(String.format("Wood name must contain any character: [%s]", name));
         }
 
-        if (!WOOD.add(this)) {
+        if (!WOOD_TYPES.add(this)) {
             throw new RuntimeException(String.format("Wood: [%s] already exists!", name));
         }
     }
@@ -339,8 +339,8 @@ public class Wood {
      *
      * @return список типов дерева
      */
-    public static List<Wood> getAllWood() {
-        return new ArrayList<>(WOOD);
+    public static List<WoodType> getAllWood() {
+        return new ArrayList<>(WOOD_TYPES);
     }
 
     @SideOnly(Side.CLIENT)
@@ -476,8 +476,8 @@ public class Wood {
         }
 
         // Метод для построения объекта Wood
-        public Wood build() {
-            return new Wood(
+        public WoodType build() {
+            return new WoodType(
                     name, color, gen, minTemp, maxTemp, minRain,
                     maxRain, minDensity, maxDensity, dominance,
                     maxGrowthRadius, maxHeight, maxDecayDistance, isConifer,

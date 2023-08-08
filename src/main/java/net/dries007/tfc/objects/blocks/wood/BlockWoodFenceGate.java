@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
-import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -25,17 +25,17 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
     private final WoodVariant_old woodVariant;
-    private final Wood wood;
+    private final WoodType woodType;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodFenceGate(WoodVariant_old woodVariant, Wood wood) {
+    public BlockWoodFenceGate(WoodVariant_old woodVariant, WoodType woodType) {
         super(BlockPlanks.EnumType.OAK);
 
         this.woodVariant = woodVariant;
-        this.wood = wood;
+        this.woodType = woodType;
         this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.WOOD);
@@ -44,7 +44,7 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
         setResistance(15.0F);
         OreDictionaryHelper.register(this, "fence", "gate", "wood");
         //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "fence", "gate", "wood", wood.toString());
+        OreDictionaryHelper.register(this, "fence", "gate", "wood", woodType.toString());
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
@@ -54,8 +54,8 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
     }
 
     @Override
-    public Wood getWood() {
-        return wood;
+    public WoodType getWood() {
+        return woodType;
     }
 
     @Nullable

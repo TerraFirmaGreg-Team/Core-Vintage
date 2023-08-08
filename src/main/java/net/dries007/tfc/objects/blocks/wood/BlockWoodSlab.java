@@ -3,8 +3,8 @@ package net.dries007.tfc.objects.blocks.wood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
-import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.wood.ItemWoodSlab;
@@ -45,14 +45,14 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockWoodSlab(WoodVariant_old woodVariant, Wood wood) {
+    private BlockWoodSlab(WoodVariant_old woodVariant, WoodType woodType) {
         super(Material.WOOD);
 
         IBlockState state = blockState.getBaseState();
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.modelBlock = TFCStorage.getWoodBlock(PLANKS, wood);
+        this.modelBlock = TFCStorage.getWoodBlock(PLANKS, woodType);
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -146,17 +146,17 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
     public static class Double extends BlockWoodSlab {
         private final WoodVariant_old woodVariant;
-        private final Wood wood;
+        private final WoodType woodType;
         private final ResourceLocation modelLocation;
 
-        public Double(WoodVariant_old woodVariant, Wood wood) {
-            super(woodVariant, wood);
+        public Double(WoodVariant_old woodVariant, WoodType woodType) {
+            super(woodVariant, woodType);
 
             this.woodVariant = woodVariant;
-            this.wood = wood;
+            this.woodType = woodType;
             this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-            var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+            var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
             setRegistryName(MOD_ID, blockRegistryName);
             setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         }
@@ -172,8 +172,8 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         }
 
         @Override
-        public Wood getWood() {
-            return wood;
+        public WoodType getWood() {
+            return woodType;
         }
 
         @Override
@@ -192,27 +192,27 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         public final Double doubleSlab;
 
         private final WoodVariant_old woodVariant;
-        private final Wood wood;
+        private final WoodType woodType;
         private final ResourceLocation modelLocation;
 
-        public Half(WoodVariant_old woodVariant, Wood wood) {
-            super(woodVariant, wood);
+        public Half(WoodVariant_old woodVariant, WoodType woodType) {
+            super(woodVariant, woodType);
 
-            doubleSlab = (Double) TFCStorage.getWoodBlock(SLAB_DOUBLE, wood);
+            doubleSlab = (Double) TFCStorage.getWoodBlock(SLAB_DOUBLE, woodType);
             doubleSlab.halfSlab = this;
             halfSlab = this;
 
             this.woodVariant = woodVariant;
-            this.wood = wood;
+            this.woodType = woodType;
             this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-            var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+            var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
             setRegistryName(MOD_ID, blockRegistryName);
             setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
             OreDictionaryHelper.register(this, "slab");
             OreDictionaryHelper.register(this, "slab", "wood");
-            OreDictionaryHelper.register(this, "slab", "wood", wood);
+            OreDictionaryHelper.register(this, "slab", "wood", woodType);
         }
 
         @Override
@@ -226,8 +226,8 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         }
 
         @Override
-        public Wood getWood() {
-            return wood;
+        public WoodType getWood() {
+            return woodType;
         }
 
         @Override

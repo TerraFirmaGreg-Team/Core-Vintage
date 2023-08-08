@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodLoom;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +20,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class TELoom extends TEInventory implements ITickable {
-    private Wood cachedWood;
+    private WoodType cachedWoodType;
 
     private int progress = 0;
 
@@ -33,13 +33,13 @@ public class TELoom extends TEInventory implements ITickable {
     }
 
     @Nullable
-    public Wood getWood() {
-        if (cachedWood == null) {
+    public WoodType getWood() {
+        if (cachedWoodType == null) {
             if (world != null) {
-                cachedWood = ((BlockWoodLoom) world.getBlockState(pos).getBlock()).getWood();
+                cachedWoodType = ((BlockWoodLoom) world.getBlockState(pos).getBlock()).getWood();
             }
         }
-        return cachedWood;
+        return cachedWoodType;
     }
 
     @Override

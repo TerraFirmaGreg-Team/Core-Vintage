@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.items.wood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.minecraft.block.Block;
@@ -32,20 +32,20 @@ import java.util.Objects;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemWoodBoat extends ItemTFC {
-    private static final Map<Wood, ItemWoodBoat> MAP = new HashMap<>();
-    private final Wood wood;
+    private static final Map<WoodType, ItemWoodBoat> MAP = new HashMap<>();
+    private final WoodType woodType;
 
-    public ItemWoodBoat(Wood wood) {
-        this.wood = wood;
-        if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
+    public ItemWoodBoat(WoodType woodType) {
+        this.woodType = woodType;
+        if (MAP.put(woodType, this) != null) throw new IllegalStateException("There can only be one.");
     }
 
-    public static ItemWoodBoat get(Wood wood) {
-        return MAP.get(wood);
+    public static ItemWoodBoat get(WoodType woodType) {
+        return MAP.get(woodType);
     }
 
-    public Wood getWood() {
-        return wood;
+    public WoodType getWood() {
+        return woodType;
     }
 
     @Nonnull
@@ -113,7 +113,7 @@ public class ItemWoodBoat extends ItemTFC {
                 boolean flag1 = block == Blocks.WATER || block == Blocks.FLOWING_WATER;
                 EntityBoatTFC entityboat = new EntityBoatTFC(worldIn, raytraceresult.hitVec.x, flag1 ? raytraceresult.hitVec.y - 0.12D : raytraceresult.hitVec.y, raytraceresult.hitVec.z);
                 entityboat.setBoatType(EntityBoat.Type.OAK); // not sure if required
-                entityboat.setWood(wood);
+                entityboat.setWood(woodType);
                 entityboat.rotationYaw = playerIn.rotationYaw;
 
                 if (!worldIn.getCollisionBoxes(entityboat, entityboat.getEntityBoundingBox().grow(-0.1D)).isEmpty()) {

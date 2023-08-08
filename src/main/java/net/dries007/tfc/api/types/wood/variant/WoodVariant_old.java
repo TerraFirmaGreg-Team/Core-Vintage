@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types.wood.variant;
 
-import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.objects.blocks.wood.*;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
@@ -44,14 +44,14 @@ public enum WoodVariant_old implements IStringSerializable {
 //	SCRIBING_TABLE();
 
     public static final WoodVariant_old[] VALUES = WoodVariant_old.values();
-    private final BiFunction<WoodVariant_old, Wood, IWoodBlock> blockFactory;
+    private final BiFunction<WoodVariant_old, WoodType, IWoodBlock> blockFactory;
 
-    WoodVariant_old(BiFunction<WoodVariant_old, Wood, IWoodBlock> blockFactory) {
+    WoodVariant_old(BiFunction<WoodVariant_old, WoodType, IWoodBlock> blockFactory) {
         this.blockFactory = blockFactory;
     }
 
-    public IWoodBlock create(Wood wood) {
-        return this.blockFactory.apply(this, wood);
+    public IWoodBlock create(WoodType woodType) {
+        return this.blockFactory.apply(this, woodType);
     }
 
     /**

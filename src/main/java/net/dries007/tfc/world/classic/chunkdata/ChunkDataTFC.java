@@ -4,7 +4,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.util.NBTBuilder;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -261,7 +261,7 @@ public final class ChunkDataTFC {
         this.lastUpdateYear = CalendarTFC.CALENDAR_TIME.getTotalYears();
     }
 
-    public List<Wood> getValidTrees() {
+    public List<WoodType> getValidTrees() {
         return TFCStorage.WOOD_BLOCKS.values().stream()
                 .map(IWoodBlock::getWood)
                 .filter(t -> t.isValidLocation(avgTemp, rainfall, floraDensity))
@@ -270,7 +270,7 @@ public final class ChunkDataTFC {
     }
 
     @Nullable
-    public Wood getSparseGenTree() {
+    public WoodType getSparseGenTree() {
         return TFCStorage.WOOD_BLOCKS.values().stream()
                 .map(IWoodBlock::getWood)
                 .filter(t -> t.isValidLocation(0.5f * avgTemp + 10f, 0.5f * rainfall + 120f, 0.5f))

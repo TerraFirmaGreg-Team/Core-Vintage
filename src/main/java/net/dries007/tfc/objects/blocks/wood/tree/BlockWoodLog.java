@@ -8,7 +8,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
-import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -53,16 +53,16 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);
     public static final AxisAlignedBB SMALL_AABB_Z = new AxisAlignedBB(0.25, 0.25, 0, 0.75, 0.75, 1);
     private final WoodVariant_old woodVariant;
-    private final Wood wood;
+    private final WoodType woodType;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodLog(WoodVariant_old woodVariant, Wood wood) {
+    public BlockWoodLog(WoodVariant_old woodVariant, WoodType woodType) {
 
         this.woodVariant = woodVariant;
-        this.wood = wood;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant + "/" + wood);
+        this.woodType = woodType;
+        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant + "/" + woodType);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.WOOD);
@@ -88,8 +88,8 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     }
 
     @Override
-    public Wood getWood() {
-        return wood;
+    public WoodType getWood() {
+        return woodType;
     }
 
     @Nullable

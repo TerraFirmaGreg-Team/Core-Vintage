@@ -4,27 +4,31 @@ import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class WoodVariant {
+public class WoodBlockVariant {
 
-    private static final Set<WoodVariant> WOOD_VARIANT = new LinkedHashSet<>();
+    private static final Set<WoodBlockVariant> WOOD_VARIANTS = new LinkedHashSet<>();
 
     @Nonnull
     private final String name;
 
-    public WoodVariant(@Nonnull String name) {
+    public WoodBlockVariant(@Nonnull String name) {
         this.name = name;
 
         if (name.isEmpty()) {
             throw new RuntimeException(String.format("WoodVariant name must contain any character: [%s]", name));
         }
 
-        if (!WOOD_VARIANT.add(this)) {
+        if (!WOOD_VARIANTS.add(this)) {
             throw new RuntimeException(String.format("WoodVariant: [%s] already exists!", name));
         }
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 
-    public static Set<WoodVariant> getAllWoodVariant() {
-        return WOOD_VARIANT;
+    public static Set<WoodBlockVariant> getWoodVariants() {
+        return WOOD_VARIANTS;
     }
 }

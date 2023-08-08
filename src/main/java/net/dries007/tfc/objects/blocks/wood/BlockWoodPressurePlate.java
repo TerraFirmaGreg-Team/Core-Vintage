@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
-import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -26,17 +26,17 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodBlock {
     private final WoodVariant_old woodVariant;
-    private final Wood wood;
+    private final WoodType woodType;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodPressurePlate(WoodVariant_old woodVariant, Wood wood) {
+    public BlockWoodPressurePlate(WoodVariant_old woodVariant, WoodType woodType) {
         super(Material.WOOD, Sensitivity.EVERYTHING);
 
         this.woodVariant = woodVariant;
-        this.wood = wood;
+        this.woodType = woodType;
         this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.WOOD);
@@ -53,8 +53,8 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
     }
 
     @Override
-    public Wood getWood() {
-        return wood;
+    public WoodType getWood() {
+        return woodType;
     }
 
     @Nullable

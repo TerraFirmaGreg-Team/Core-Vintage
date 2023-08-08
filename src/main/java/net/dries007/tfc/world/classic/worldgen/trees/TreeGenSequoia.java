@@ -3,7 +3,7 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.ITreeGenerator;
-import net.dries007.tfc.api.types.wood.type.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
@@ -30,13 +30,13 @@ public class TreeGenSequoia implements ITreeGenerator {
     private IBlockState trunk;
 
     @Override
-    public void generateTree(TemplateManager manager, World world, BlockPos pos, Wood wood, Random rand, boolean isWorldGen) {
+    public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
         final int baseVariant = 1 + rand.nextInt(3);
         final int topVariant = 1 + rand.nextInt(3);
         final int layers = 4 + rand.nextInt(3);
         final int height = 3 + rand.nextInt(4);
 
-        trunk = TFCStorage.getWoodBlock(LOG, wood).getDefaultState().withProperty(PLACED, false);
+        trunk = TFCStorage.getWoodBlock(LOG, woodType).getDefaultState().withProperty(PLACED, false);
 
         for (int i = -2; i < height; i++) {
             placeTrunk(world, pos.add(0, i, 0));
@@ -45,17 +45,17 @@ public class TreeGenSequoia implements ITreeGenerator {
         int k = height;
         for (int j = 0; j < layers; j++) {
             if (j == layers - 1 || (j == layers - 2 && rand.nextBoolean())) {
-                k += placeLayer(manager, world, pos.up(k), wood.toString() + "/mid" + baseVariant);
+                k += placeLayer(manager, world, pos.up(k), woodType.toString() + "/mid" + baseVariant);
             } else {
-                k += placeLayer(manager, world, pos.up(k), wood.toString() + "/base" + baseVariant);
+                k += placeLayer(manager, world, pos.up(k), woodType.toString() + "/base" + baseVariant);
             }
         }
-        placeLayer(manager, world, pos.up(k), wood.toString() + "/top" + topVariant);
+        placeLayer(manager, world, pos.up(k), woodType.toString() + "/top" + topVariant);
 
     }
 
     @Override
-    public boolean canGenerateTree(World world, BlockPos pos, Wood wood) {
+    public boolean canGenerateTree(World world, BlockPos pos, WoodType woodType) {
         for (BlockPos p1 : OFFSETS) {
             if (!BlocksTFC.isSoil(world.getBlockState(pos.add(p1).down()))) {
                 if (world.getBlockState(pos.add(p1)).getMaterial().isReplaceable()) {
@@ -68,7 +68,7 @@ public class TreeGenSequoia implements ITreeGenerator {
             }
         }
 
-        return ITreeGenerator.super.canGenerateTree(world, pos, wood);
+        return ITreeGenerator.super.canGenerateTree(world, pos, woodType);
     }
 
     private int placeLayer(TemplateManager manager, World world, BlockPos pos, String name) {

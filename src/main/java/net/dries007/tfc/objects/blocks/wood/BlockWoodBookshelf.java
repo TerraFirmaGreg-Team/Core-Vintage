@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
-import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -29,16 +29,16 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
     private final WoodVariant_old woodVariant;
-    private final Wood wood;
+    private final WoodType woodType;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodBookshelf(WoodVariant_old woodVariant, Wood wood) {
+    public BlockWoodBookshelf(WoodVariant_old woodVariant, WoodType woodType) {
 
         this.woodVariant = woodVariant;
-        this.wood = wood;
+        this.woodType = woodType;
         this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
+        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.WOOD);
@@ -48,7 +48,7 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         setHarvestLevel("axe", 0);
 
         OreDictionaryHelper.register(this, "bookshelf");
-        OreDictionaryHelper.register(this, "bookshelf", wood.toString());
+        OreDictionaryHelper.register(this, "bookshelf", woodType.toString());
         Blocks.FIRE.setFireInfo(this, 30, 20);
     }
 
@@ -58,8 +58,8 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
     }
 
     @Override
-    public Wood getWood() {
-        return wood;
+    public WoodType getWood() {
+        return woodType;
     }
 
     @Nullable

@@ -2,9 +2,9 @@ package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.block.type.RockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
-import net.dries007.tfc.api.types.rock.type.Rock;
+import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
@@ -33,18 +33,17 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.*;
+import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.RAW;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 
 @ParametersAreNonnullByDefault
 public class BlockRockAnvil extends BlockRock {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
-    public BlockRockAnvil(RockType rockType, RockVariant rockVariant, Rock rock) {
-        super(rockType, rockVariant, rock);
+    public BlockRockAnvil(RockBlockVariant rockBlockVariant, RockType rockType) {
+        super(rockBlockVariant, rockType);
 
-        // TODO: 07.08.2023
-        // FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
+        FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.COLLAPSABLE_ROCK);
     }
 
     @Override
@@ -183,13 +182,13 @@ public class BlockRockAnvil extends BlockRock {
     @Override
     @Nonnull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCStorage.getRockItem(getRock());
+        return TFCStorage.getRockItem(getRockType());
     }
 
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.getCommonBlock(RAW, getRock()));
+        return new ItemStack(TFCStorage.getRockBlock(RAW, getRockType()));
     }
 
     @Override

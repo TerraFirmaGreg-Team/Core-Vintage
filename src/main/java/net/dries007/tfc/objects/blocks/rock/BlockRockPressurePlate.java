@@ -1,9 +1,8 @@
 package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.types.rock.IRockBlock;
-import net.dries007.tfc.api.types.rock.block.type.RockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
-import net.dries007.tfc.api.types.rock.type.Rock;
+import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.BlockPressurePlate;
@@ -26,44 +25,34 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class BlockRockPressurePlate extends BlockPressurePlate implements IRockBlock {
 
+    private final RockBlockVariant rockBlockVariant;
     private final RockType rockType;
-    private final RockVariant rockVariant;
-    private final Rock rock;
 
-    public BlockRockPressurePlate(RockType rockType, RockVariant rockVariant, Rock rock) {
+    public BlockRockPressurePlate(RockBlockVariant rockBlockVariant, RockType rockType) {
         super(Material.ROCK, Sensitivity.MOBS);
 
+        this.rockBlockVariant = rockBlockVariant;
         this.rockType = rockType;
-        this.rockVariant = rockVariant;
-        this.rock = rock;
 
         this.setCreativeTab(CreativeTabsTFC.ROCK);
         this.setSoundType(SoundType.STONE);
         this.setHardness(0.5f);
-        this.setRegistryName(MOD_ID, getRegistryString());
-        this.setTranslationKey(getTranslationString());
+        this.setRegistryName(getRegistryLocation());
+        this.setTranslationKey(getTranslationName());
+    }
+
+    @Nonnull
+    @Override
+    public RockBlockVariant getRockBlockVariant() {
+        return rockBlockVariant;
     }
 
     @Nonnull
     @Override
     public RockType getRockType() {
         return rockType;
-    }
-
-    @Nullable
-    @Override
-    public RockVariant getRockVariant() {
-        return rockVariant;
-    }
-
-    @Nonnull
-    @Override
-    public Rock getRock() {
-        return rock;
     }
 
     @Override
@@ -79,15 +68,15 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
                         "powered=" + state.getValue(POWERED) + "," +
-                                "rocktype=" + rock.toString());
+                                "rocktype=" + rockType.toString());
             }
         });
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
+        for (IBlockState state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(
                     Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(), "inventory=" + rock.toString()));
+                    getMetaFromState(state),
+                    new ModelResourceLocation(getResourceLocation(), "inventory=" + rockType.toString()));
         }
     }
 
@@ -96,6 +85,6 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rock.getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
     }
 }

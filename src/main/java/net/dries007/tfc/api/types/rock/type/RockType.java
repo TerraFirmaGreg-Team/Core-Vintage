@@ -12,9 +12,9 @@ import java.util.Set;
 /**
  * Основной класс для типов камней.
  */
-public class Rock {
+public class RockType {
 
-    private static final Set<Rock> ROCK = new LinkedHashSet<>();
+    private static final Set<RockType> ROCK_TYPE = new LinkedHashSet<>();
 
     @Nonnull
     private final String name;
@@ -29,7 +29,7 @@ public class Rock {
      * @param rockCategory Категория породы.
      * @param isFlux       Флаг, указывающий, является ли порода флюсом.
      */
-    public Rock(@Nonnull String name, @Nonnull RockCategory rockCategory, boolean isFlux) {
+    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, boolean isFlux) {
         this.name = name;
         this.rockCategory = rockCategory;
         this.isFlux = isFlux;
@@ -38,7 +38,7 @@ public class Rock {
             throw new RuntimeException(String.format("Rock name must contain any character: [%s]", name));
         }
 
-        if (!ROCK.add(this)) {
+        if (!ROCK_TYPE.add(this)) {
             throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
         }
     }
@@ -49,7 +49,7 @@ public class Rock {
      * @param name         Название породы.
      * @param rockCategory Категория породы.
      */
-    public Rock(@Nonnull String name, @Nonnull RockCategory rockCategory) {
+    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory) {
         this(name, rockCategory, false);
     }
 
@@ -97,8 +97,8 @@ public class Rock {
      *
      * @return Список всех типов пород.
      */
-    public static Set<Rock> getAllRock() {
-        return ROCK;
+    public static Set<RockType> getAllRockTypes() {
+        return ROCK_TYPE;
     }
 
     /**
@@ -107,9 +107,9 @@ public class Rock {
      * @param i Индекс породы.
      * @return Экземпляр породы.
      */
-    public static Rock valueOf(int i) {
-        var values = new Rock[ROCK.size()];
-        values = ROCK.toArray(values);
+    public static RockType valueOf(int i) {
+        var values = new RockType[ROCK_TYPE.size()];
+        values = ROCK_TYPE.toArray(values);
 
         return i >= 0 && i < values.length ? values[i] : values[i % values.length];
     }
@@ -117,10 +117,10 @@ public class Rock {
     /**
      * Возвращает индекс породы в списке.
      *
-     * @param rock Порода.
+     * @param rockType Порода.
      * @return Индекс породы.
      */
-    public static int indexOf(Rock rock) {
-        return new ArrayList<>(ROCK).indexOf(rock);
+    public static int indexOf(RockType rockType) {
+        return new ArrayList<>(ROCK_TYPE).indexOf(rockType);
     }
 }

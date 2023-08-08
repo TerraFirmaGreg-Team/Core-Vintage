@@ -1,8 +1,7 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.types.rock.block.type.RockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
-import net.dries007.tfc.api.types.rock.type.Rock;
+import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -16,25 +15,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockRockFallable extends BlockRock {
+public abstract class BlockRockFallable extends BlockRock {
 
-    public BlockRockFallable(RockType rockType, RockVariant rockVariant, Rock rock) {
-        this(Material.ROCK, rockType, rockVariant, rock);
+    public BlockRockFallable(RockBlockVariant rockBlockVariant, RockType rockType) {
+        this(Material.ROCK, rockBlockVariant, rockType);
     }
 
-    public BlockRockFallable(Material material, RockType rockType, RockVariant rockVariant, Rock rock) {
-        super(material, rockType, rockVariant, rock);
-
-        if (rockVariant.canFall())
-            FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
+    public BlockRockFallable(Material material, RockBlockVariant rockBlockVariant, RockType rockType) {
+        super(material, rockBlockVariant, rockType);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Random rand) {
-        var rockVariant = getRockVariant();
-
-        if (rockVariant != null && rockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+        if (rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
             double d0 = (float) pos.getX() + rand.nextFloat();
             double d1 = (double) pos.getY() - 0.05D;
             double d2 = (float) pos.getZ() + rand.nextFloat();

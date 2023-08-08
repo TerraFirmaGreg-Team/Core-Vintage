@@ -23,7 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.*;
+import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
 import static net.dries007.tfc.objects.fluids.FluidsTFC.*;
 
 public class BarrelRecipes {

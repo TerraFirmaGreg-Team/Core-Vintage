@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.*;
 
-import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.RAW;
+import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.RAW;
 import static net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC.getRock3;
 
 /**
@@ -49,7 +49,7 @@ public class WorldGenFissure implements IWorldGenerator {
             return;
         }
 
-        final IBlockState rock = TFCStorage.getCommonBlock(RAW, getRock3(world, start)).getDefaultState();
+        final IBlockState rock = TFCStorage.getRockBlock(RAW, getRock3(world, start)).getDefaultState();
 
         int depth = 2 + random.nextInt(3);
         int radius = 1 + random.nextInt(2);

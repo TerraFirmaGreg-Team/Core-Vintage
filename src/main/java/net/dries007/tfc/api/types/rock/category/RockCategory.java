@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types.rock.category;
 
-import net.dries007.tfc.api.types.rock.type.Rock;
+import net.dries007.tfc.api.types.rock.type.RockType;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
@@ -138,13 +138,13 @@ public class RockCategory {
     /**
      * Представляет слой породы и определяет, принадлежит ли порода к данному слою.
      */
-    public enum Layer implements Predicate<Rock> {
+    public enum Layer implements Predicate<RockType> {
         BOTTOM(3, x -> x.getRockCategory().layer3),
         MIDDLE(2, x -> x.getRockCategory().layer2),
         TOP(1, x -> x.getRockCategory().layer1);
 
         public final int layer;
-        private final Predicate<Rock> filter;
+        private final Predicate<RockType> filter;
 
         /**
          * Создает экземпляр слоя породы с указанными параметрами.
@@ -152,7 +152,7 @@ public class RockCategory {
          * @param layer  Номер слоя породы.
          * @param filter Фильтр, определяющий, принадлежит ли порода к данному слою.
          */
-        Layer(int layer, Predicate<Rock> filter) {
+        Layer(int layer, Predicate<RockType> filter) {
             this.layer = layer;
             this.filter = filter;
         }
@@ -160,12 +160,12 @@ public class RockCategory {
         /**
          * Проверяет, принадлежит ли указанная порода к данному слою.
          *
-         * @param rock Порода для проверки.
+         * @param rockType Порода для проверки.
          * @return true, если порода принадлежит к данному слою, в противном случае - false.
          */
         @Override
-        public boolean test(Rock rock) {
-            return filter.test(rock);
+        public boolean test(RockType rockType) {
+            return filter.test(rockType);
         }
     }
 }

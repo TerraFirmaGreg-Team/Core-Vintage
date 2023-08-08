@@ -3,11 +3,11 @@ package net.dries007.tfc.objects.recipes.category;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.type.Rock;
+import net.dries007.tfc.api.types.rock.type.RockType;
 import net.minecraft.item.EnumDyeColor;
 
-import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.RAW;
-import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.SMOOTH;
+import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.RAW;
+import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.SMOOTH;
 
 
 public class ChiselRecipes {
@@ -16,10 +16,10 @@ public class ChiselRecipes {
         var registry = TFCRegistries.CHISEL;
 
         // Rock smoothing
-        for (Rock rock : Rock.getAllRock()) {
-            var rawRock = TFCStorage.getCommonBlock(RAW, rock);
-            var smoothRock = TFCStorage.getCommonBlock(SMOOTH, rock).getDefaultState();
-            registry.register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rock));
+        for (RockType rockType : RockType.getAllRockTypes()) {
+            var rawRock = TFCStorage.getRockBlock(RAW, rockType);
+            var smoothRock = TFCStorage.getRockBlock(SMOOTH, rockType).getDefaultState();
+            registry.register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rockType));
         }
 
         // Alabaster smoothing

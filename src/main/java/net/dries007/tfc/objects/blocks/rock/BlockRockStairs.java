@@ -1,9 +1,8 @@
 package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.types.rock.IRockBlock;
-import net.dries007.tfc.api.types.rock.block.type.RockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
-import net.dries007.tfc.api.types.rock.type.Rock;
+import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.BlockStairs;
@@ -26,23 +25,19 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class BlockRockStairs extends BlockStairs implements IRockBlock {
 
+    private final RockBlockVariant rockBlockVariant;
     private final RockType rockType;
-    private final RockVariant rockVariant;
-    private final Rock rock;
 
-    public BlockRockStairs(RockType rockType, RockVariant rockVariant, Rock rock) {
+    public BlockRockStairs(RockBlockVariant rockBlockVariant, RockType rockType) {
         super(Blocks.COBBLESTONE.getDefaultState());
 
+        this.rockBlockVariant = rockBlockVariant;
         this.rockType = rockType;
-        this.rockVariant = rockVariant;
-        this.rock = rock;
 
-        setRegistryName(MOD_ID, getRegistryString());
-        setTranslationKey(getTranslationString());
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
         setHardness(getFinalHardness());
@@ -52,20 +47,14 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
 
     @Nonnull
     @Override
-    public RockType getRockType() {
-        return rockType;
-    }
-
-    @Nullable
-    @Override
-    public RockVariant getRockVariant() {
-        return rockVariant;
+    public RockBlockVariant getRockBlockVariant() {
+        return rockBlockVariant;
     }
 
     @Nonnull
     @Override
-    public Rock getRock() {
-        return rock;
+    public RockType getRockType() {
+        return rockType;
     }
 
     @Override
@@ -82,19 +71,19 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
                 return new ModelResourceLocation(getResourceLocation(),
                         "facing=" + state.getValue(FACING) + "," +
                                 "half=" + state.getValue(HALF) + "," +
-                                "rocktype=" + rock.toString() + "," +
+                                "rocktype=" + rockType.toString() + "," +
                                 "shape=" + state.getValue(SHAPE));
             }
         });
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
+        for (IBlockState state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(
                     Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
+                    getMetaFromState(state),
                     new ModelResourceLocation(getResourceLocation(),
                             "facing=east," +
                                     "half=bottom," +
-                                    "rocktype=" + rock.toString() + "," +
+                                    "rocktype=" + rockType.toString() + "," +
                                     "shape=straight"));
         }
     }
@@ -104,7 +93,7 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rock.getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
     }
 
 

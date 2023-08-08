@@ -3,9 +3,9 @@ package net.dries007.tfc.objects.blocks.rock;
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.block.type.RockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
-import net.dries007.tfc.api.types.rock.type.Rock;
+import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.variant.RockBlockVariants;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.util.GemsFromRawRocks;
 import net.dries007.tfc.util.Helpers;
@@ -31,22 +31,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
+import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.ANVIL;
+
 public class BlockRockRaw extends BlockRock {
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
     public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
 
-    public BlockRockRaw(RockType rockType, RockVariant rockVariant, Rock rock) {
-        super(rockType, rockVariant, rock);
+    public BlockRockRaw(RockBlockVariant rockBlockVariant, RockType rockType) {
+        super(rockBlockVariant, rockType);
 
         this.setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
 
         // Copy as each raw stone has an unique resultingState
-        var fallingSpec = rockVariant.getFallingSpecification();
+        var spec =  FallingBlockManager.Specification.COLLAPSABLE_ROCK;
+        spec.setResultingState(TFCStorage.getRockBlock(RockBlockVariants.COBBLE, rockType).getDefaultState());
 
-        if (fallingSpec != null) {
-            var spec = new FallingBlockManager.Specification(fallingSpec);
-            FallingBlockManager.registerFallable(this, spec);
-        }
+        FallingBlockManager.registerFallable(this, spec);
     }
 
     @Nonnull
@@ -67,7 +67,7 @@ public class BlockRockRaw extends BlockRock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    public void neighborChanged(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Block blockIn, @Nonnull BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         // Raw blocks that can't fall also can't pop off
         if (state.getValue(CAN_FALL)) {
@@ -91,7 +91,7 @@ public class BlockRockRaw extends BlockRock {
         if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
             if (!worldIn.isRemote) {
                 // Create a stone anvil
-                var anvil = TFCStorage.getAnvilBlock(getRock());
+                var anvil = TFCStorage.getRockBlock(ANVIL, getRockType());
                 if (anvil instanceof BlockRockAnvil) {
                     worldIn.setBlockState(pos, anvil.getDefaultState());
                 }
@@ -127,13 +127,13 @@ public class BlockRockRaw extends BlockRock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRock());
+                return new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRockType());
             }
         });
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),
-                this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRock()));
+                getMetaFromState(getBlockState().getBaseState()),
+                new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRockType()));
     }
 }

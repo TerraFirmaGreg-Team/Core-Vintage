@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.wood.block.variant;
+package net.dries007.tfc.api.types.wood.variant;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;

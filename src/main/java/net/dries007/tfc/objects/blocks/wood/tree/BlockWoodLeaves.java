@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
+import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -44,8 +44,8 @@ import java.util.*;
 
 import static net.dries007.tfc.Constants.RNG;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.LOG;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.SAPLING;
+import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.LOG;
+import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.SAPLING;
 
 @ParametersAreNonnullByDefault
 public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {

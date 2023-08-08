@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
+import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -51,7 +51,7 @@ import java.util.stream.Collectors;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCStorage.WOOD_BLOCKS;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.BARREL;
+import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.BARREL;
 
 /**
  * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes.

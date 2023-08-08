@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks.wood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
+import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -35,8 +35,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.PLANKS;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.SLAB_DOUBLE;
+import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.PLANKS;
+import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.SLAB_DOUBLE;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

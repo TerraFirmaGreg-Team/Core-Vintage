@@ -52,8 +52,8 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.PlantVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.PlantVariant.TALL_GRASS;
 import static net.dries007.tfc.api.types.soil.SoilVariant.FARMLAND;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.LEAVES;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.SAPLING;
+import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.LEAVES;
+import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.SAPLING;
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 

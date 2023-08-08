@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.wood.block.variant;
+package net.dries007.tfc.api.types.wood.variant;
 
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.api.types.wood.IWoodBlock;

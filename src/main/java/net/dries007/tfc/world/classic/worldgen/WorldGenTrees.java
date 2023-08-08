@@ -60,6 +60,7 @@ public class WorldGenTrees implements IWorldGenerator {
         final float density = chunkData.getFloraDensity();
 
         List<WoodType> woodTypes = chunkData.getValidTrees();
+
         Collections.rotate(woodTypes, -(int) (diversity * (woodTypes.size() - 1f)));
 
         int stickDensity = 3 + (int) (4f * density + 1.5f * woodTypes.size());

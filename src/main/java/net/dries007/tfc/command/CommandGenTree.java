@@ -1,8 +1,6 @@
 package net.dries007.tfc.command;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.type.WoodTypes;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -15,7 +13,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 import java.util.Random;
 
@@ -38,7 +35,7 @@ public class CommandGenTree extends CommandBase {
     public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, String[] args) throws CommandException {
         if (args.length != 1) throw new WrongUsageException("tfc.command.gentree.failed");
 
-        var tree = WoodType.getAllWood().stream().filter(s -> Objects.equals(s.toString(), args[0])).findFirst().orElse(null);
+        var tree = WoodType.getWoodTypes().stream().filter(s -> Objects.equals(s.toString(), args[0])).findFirst().orElse(null);
 
         if (tree == null) throw new WrongUsageException("tfc.command.gentree.failed.woodtype", args[0]);
 

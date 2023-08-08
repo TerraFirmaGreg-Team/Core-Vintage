@@ -64,5 +64,4 @@ public class TreeGenNormal implements ITreeGenerator {
         for (int i = 0; i < height; i++)
             world.setBlockState(pos.add(size.getX() / 2, i - height, size.getZ() / 2), log);
     }
-
 }

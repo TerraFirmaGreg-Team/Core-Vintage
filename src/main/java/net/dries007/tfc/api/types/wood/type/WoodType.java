@@ -339,8 +339,8 @@ public class WoodType {
      *
      * @return список типов дерева
      */
-    public static List<WoodType> getAllWood() {
-        return new ArrayList<>(WOOD_TYPES);
+    public static Set<WoodType> getWoodTypes() {
+        return WOOD_TYPES;
     }
 
     @SideOnly(Side.CLIENT)

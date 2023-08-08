@@ -49,17 +49,13 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     public static final AxisAlignedBB SMALL_AABB_Z = new AxisAlignedBB(0.25, 0.25, 0, 0.75, 0.75, 1);
     private final WoodBlockVariant woodBlockVariant;
     private final WoodType woodType;
-    private final ResourceLocation modelLocation;
 
     public BlockWoodLog(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-
         this.woodBlockVariant = woodBlockVariant;
         this.woodType = woodType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodBlockVariant + "/" + woodType);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodBlockVariant, woodType);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
 
         setDefaultState(blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y).withProperty(PLACED, true).withProperty(SMALL, false));
@@ -72,7 +68,7 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     }
 
     @Override
-    public WoodVariant_old getWoodBlockVariant() {
+    public WoodBlockVariant getWoodBlockVariant() {
         return woodBlockVariant;
     }
 
@@ -244,12 +240,12 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockWoodLog.PLACED).build());
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockWoodLog.PLACED).build());
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
+        for (var state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation.toString()));
+                    getMetaFromState(state),
+                    new ModelResourceLocation(getRegistryLocation().toString()));
         }
     }
 }

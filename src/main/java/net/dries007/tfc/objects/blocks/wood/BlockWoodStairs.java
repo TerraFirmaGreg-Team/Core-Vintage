@@ -3,6 +3,8 @@ package net.dries007.tfc.objects.blocks.wood;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -27,33 +29,26 @@ import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.PLANKS;
 
 @ParametersAreNonnullByDefault
 public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
-    private final WoodVariant_old woodVariant;
+    private final WoodBlockVariant woodBlockVariant;
     private final WoodType woodType;
-    private final ResourceLocation modelLocation;
 
-    public BlockWoodStairs(WoodVariant_old woodVariant, WoodType woodType) {
-        super(TFCStorage.getWoodBlock(PLANKS, woodType).getDefaultState());
-        this.woodVariant = woodVariant;
+    public BlockWoodStairs(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+        super(TFCStorage.getWoodBlock(WoodBlockVariants.PLANKS, woodType).getDefaultState());
+
+        this.woodBlockVariant = woodBlockVariant;
         this.woodType = woodType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        setCreativeTab(CreativeTabsTFC.WOOD);
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
 
         useNeighborBrightness = true;
-
-        OreDictionaryHelper.register(this, "stair");
-        OreDictionaryHelper.register(this, "stair", "wood");
-        OreDictionaryHelper.register(this, "stair", "wood", woodType);
-
+        setCreativeTab(CreativeTabsTFC.WOOD);
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
     @Override
-    public WoodVariant_old getWoodBlockVariant() {
-        return woodVariant;
+    public WoodBlockVariant getWoodBlockVariant() {
+        return woodBlockVariant;
     }
 
     @Override
@@ -73,14 +68,14 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+                return new ModelResourceLocation(getResourceLocation(), getPropertyString(state.getProperties()));
             }
         });
 
         for (IBlockState state : this.getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation, "normal"));
+                    getMetaFromState(state),
+                    new ModelResourceLocation(getResourceLocation(), "normal"));
         }
     }
 }

@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.blocks.wood.tree;
 import net.dries007.tfc.api.types.agriculture.util.IGrowingPlant;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -41,37 +42,31 @@ import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-@ParametersAreNonnullByDefault
 public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPlant, IWoodBlock {
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
-    private final WoodVariant_old woodVariant;
+
+    private final WoodBlockVariant woodBlockVariant;
     private final WoodType woodType;
-    private final ResourceLocation modelLocation;
 
-    public BlockWoodSapling(WoodVariant_old woodVariant, WoodType woodType) {
+    public BlockWoodSapling(WoodBlockVariant woodBlockVariant, WoodType woodType) {
 
-        this.woodVariant = woodVariant;
+        this.woodBlockVariant = woodBlockVariant;
         this.woodType = woodType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant + "/" + woodType);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
 
         setDefaultState(blockState.getBaseState().withProperty(STAGE, 0));
         setSoundType(SoundType.PLANT);
         setHardness(0.0F);
-        OreDictionaryHelper.register(this, "tree", "sapling");
-        //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "tree", "sapling", woodType.toString());
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
     @Override
-    public WoodVariant_old getWoodBlockVariant() {
-        return woodVariant;
+    public WoodBlockVariant getWoodBlockVariant() {
+        return woodBlockVariant;
     }
 
     @Override
@@ -99,7 +94,7 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack) {
         TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
         if (te != null) {
             te.resetCounter();
@@ -120,18 +115,18 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(@Nonnull IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
         return new TETickCounter();
     }
 
     @Override
-    public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
+    public void updateTick(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random random) {
         super.updateTick(world, pos, state, random);
 
         if (!world.isRemote) {
@@ -148,37 +143,39 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     @SuppressWarnings("deprecation")
     @Override
     @Nonnull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
         return SAPLING_AABB;
     }
 
     @Override
     @Nonnull
-    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+    public EnumPlantType getPlantType(@Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
         return EnumPlantType.Plains;
     }
 
     @Override
-    public boolean canGrow(World world, BlockPos blockPos, IBlockState iBlockState, boolean b) {
+    public boolean canGrow(@Nonnull World world, @Nonnull BlockPos blockPos, @Nonnull IBlockState iBlockState, boolean b) {
         return true;
     }
 
     @Override
-    public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState iBlockState) {
+    public boolean canUseBonemeal(@Nonnull World world, @Nonnull Random random, @Nonnull BlockPos blockPos, @Nonnull IBlockState iBlockState) {
         return false;
     }
 
     @Override
-    public void grow(World world, Random random, BlockPos blockPos, IBlockState blockState) {
-//        woodType.makeTree(world, blockPos, random, false);
+    public void grow(@Nonnull World world, @Nonnull Random random, @Nonnull BlockPos blockPos, @Nonnull IBlockState blockState) {
+        woodType.makeTree(world, blockPos, random, false);
     }
-//
-//    @SideOnly(Side.CLIENT)
-//    @Override
-//    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-//        super.addInformation(stack, worldIn, tooltip, flagIn);
-//        woodType.addInfo(stack, worldIn, tooltip, flagIn);
-//    }
+
+    // TODO: 08.08.2023
+    /*
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        woodType.addInfo(stack, worldIn, tooltip, flagIn);
+    }*/
 
     @Override
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
@@ -190,12 +187,12 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
 
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockWoodSapling.STAGE).build());
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockWoodSapling.STAGE).build());
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
+        for (var state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation, "inventory"));
+                    getMetaFromState(state),
+                    new ModelResourceLocation(getRegistryLocation(), "inventory"));
         }
     }
 }

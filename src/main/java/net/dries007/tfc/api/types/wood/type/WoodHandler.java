@@ -7,7 +7,7 @@ public class WoodHandler {
 
     public static void init() {
         ACACIA = new Wood
-                .Builder(0x8B3929, 30f, 210f, 19f, 31f)
+                .Builder("acacia", 0x8B3929, 30f, 210f, 19f, 31f)
                 .setGenerator(GEN_ACACIA)
                 .setHeight(12)
                 .setGrowthTime(11)
@@ -16,13 +16,13 @@ public class WoodHandler {
                 .build();
 
         ASH = new Wood
-                .Builder(0xAE604E, 60f, 140f, -6f, 12f)
+                .Builder("ash", 0xAE604E, 60f, 140f, -6f, 12f)
                 .setGenerator(GEN_NORMAL)
                 .setBurnInfo(696f, 1250)
                 .build();
 
         ASPEN = new Wood
-                .Builder(0x373727, 10f, 80f, -10f, 16f)
+                .Builder("aspen", 0x373727, 10f, 80f, -10f, 16f)
                 .setGenerator(GEN_MEDIUM)
                 .setRadius(1)
                 .setGrowthTime(8)
@@ -30,7 +30,7 @@ public class WoodHandler {
                 .build();
 
         BIRCH = new Wood
-                .Builder(0x897658, 20f, 180f, -15f, 7f)
+                .Builder("birch", 0x897658, 20f, 180f, -15f, 7f)
                 .setGenerator(GEN_TALL)
                 .setRadius(1)
                 .setTannin()
@@ -38,7 +38,7 @@ public class WoodHandler {
                 .build();
 
         BLACKWOOD = new Wood
-                .Builder(0x1A1A1A, 0f, 120f, 4f, 33f)
+                .Builder("blackwood", 0x1A1A1A, 0f, 120f, 4f, 33f)
                 .setGenerator(GEN_MEDIUM)
                 .setHeight(12)
                 .setGrowthTime(8)
@@ -46,14 +46,14 @@ public class WoodHandler {
                 .build();
 
         CHESTNUT = new Wood
-                .Builder(0x642C1E, 160f, 320f, 11f, 35f)
+                .Builder("chestnut", 0x642C1E, 160f, 320f, 11f, 35f)
                 .setGenerator(GEN_NORMAL)
                 .setTannin()
                 .setBurnInfo(651f, 1500)
                 .build();
 
         DOUGLAS_FIR = new Wood
-                .Builder(0xD7BC8D, 280f, 480f, -2f, 14f)
+                .Builder("douglas_fir", 0xD7BC8D, 280f, 480f, -2f, 14f)
                 .setGenerator(GEN_TALL)
                 .setDominance(5.2f)
                 .setHeight(16)
@@ -64,7 +64,7 @@ public class WoodHandler {
                 .build();
 
         HICKORY = new Wood
-                .Builder(0x4E3418, 80f, 250f, 7f, 29f)
+                .Builder("hickory", 0x4E3418, 80f, 250f, 7f, 29f)
                 .setGenerator(GEN_TALL)
                 .setGrowthTime(10)
                 .setTannin()
@@ -72,7 +72,7 @@ public class WoodHandler {
                 .build();
 
         MAPLE = new Wood
-                .Builder(0xC3782F, 140f, 360f, 3f, 20f)
+                .Builder("maple", 0xC3782F, 140f, 360f, 3f, 20f)
                 .setGenerator(GEN_MEDIUM)
                 .setDominance(6.3f)
                 .setRadius(1)
@@ -81,7 +81,7 @@ public class WoodHandler {
                 .build();
 
         OAK = new Wood
-                .Builder(0xC29D62, 180f, 430f, -8f, 12f)
+                .Builder("oak", 0xC29D62, 180f, 430f, -8f, 12f)
                 .setGenerator(GEN_TALL)
                 .setHeight(16)
                 .setGrowthTime(10)
@@ -90,14 +90,14 @@ public class WoodHandler {
                 .build();
 
         PALM = new Wood
-                .Builder(0xB56F38, 280f, 500f, 16f, 35f)
+                .Builder("palm", 0xB56F38, 280f, 500f, 16f, 35f)
                 .setGenerator(GEN_TROPICAL)
                 .setDecayDist(6)
                 .setBurnInfo(730f, 1250)
                 .build();
 
         PINE = new Wood
-                .Builder(0xD1BD9A, 60f, 250f, -15f, 7f)
+                .Builder("pine", 0xD1BD9A, 60f, 250f, -15f, 7f)
                 .setGenerator(GEN_CONIFER)
                 .setRadius(1)
                 .setConifer()
@@ -106,7 +106,7 @@ public class WoodHandler {
                 .build();
 
         ROSEWOOD = new Wood
-                .Builder(0x912222, 10f, 190f, 8f, 18f)
+                .Builder("rosewood", 0x912222, 10f, 190f, 8f, 18f)
                 .setGenerator(GEN_MEDIUM)
                 .setHeight(12)
                 .setGrowthTime(8)
@@ -114,7 +114,7 @@ public class WoodHandler {
                 .build();
 
         SEQUOIA = new Wood
-                .Builder(0x965B3B, 250f, 420f, -5f, 12f)
+                .Builder("sequoia", 0x965B3B, 250f, 420f, -5f, 12f)
                 .setGenerator(GEN_SEQUOIA)
                 .setRadius(3)
                 .setHeight(24)
@@ -128,7 +128,7 @@ public class WoodHandler {
                 .build();
 
         SPRUCE = new Wood
-                .Builder(0xBF806F, 120f, 380f, -11f, 6f)
+                .Builder("spruce", 0xBF806F, 120f, 380f, -11f, 6f)
                 .setGenerator(GEN_CONIFER)
                 .setRadius(1)
                 .setConifer()
@@ -137,7 +137,7 @@ public class WoodHandler {
                 .build();
 
         SYCAMORE = new Wood
-                .Builder(0xDCA448, 120f, 290f, 17f, 33f)
+                .Builder("sycamore", 0xDCA448, 120f, 290f, 17f, 33f)
                 .setGenerator(GEN_MEDIUM)
                 .setGrowthTime(8)
                 .setBushes()
@@ -146,14 +146,14 @@ public class WoodHandler {
                 .build();
 
         WHITE_CEDAR = new Wood
-                .Builder(0xD4D4D4, 10f, 240f, -8f, 17f)
+                .Builder("white_cedar", 0xD4D4D4, 10f, 240f, -8f, 17f)
                 .setGenerator(GEN_TALL)
                 .setHeight(16)
                 .setBurnInfo(625f, 1500)
                 .build();
 
         WILLOW = new Wood
-                .Builder(0x3A430B, 230f, 400f, 15f, 32f)
+                .Builder("willow", 0x3A430B, 230f, 400f, 15f, 32f)
                 .setGenerator(GEN_WILLOW)
                 .setRadius(1)
                 .setGrowthTime(11)
@@ -163,7 +163,7 @@ public class WoodHandler {
                 .build();
 
         KAPOK = new Wood
-                .Builder(0xAD879F, 210f, 500f, 15f, 35f)
+                .Builder("kapok", 0xAD879F, 210f, 500f, 15f, 35f)
                 .setGenerator(GEN_ACACIA)
                 .setDominance(8.5f)
                 .setRadius(3)

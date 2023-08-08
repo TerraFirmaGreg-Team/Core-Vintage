@@ -24,7 +24,7 @@ public class WoodVariant {
     }
 
 
-    public static Set<WoodVariant> getAllWoodBlockVariant() {
+    public static Set<WoodVariant> getAllWoodVariant() {
         return WOOD_BLOCK_VARIANTS;
     }
 }

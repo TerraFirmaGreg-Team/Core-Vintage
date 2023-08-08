@@ -28,27 +28,23 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
     private final WoodBlockVariant woodBlockVariant;
     private final WoodType woodType;
 
-    public BlockWoodPressurePlate(WoodVariant_old woodVariant, WoodType woodType) {
+    public BlockWoodPressurePlate(WoodBlockVariant woodBlockVariant, WoodType woodType) {
         super(Material.WOOD, Sensitivity.EVERYTHING);
 
-        this.woodVariant = woodVariant;
+        this.woodBlockVariant = woodBlockVariant;
         this.woodType = woodType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, woodType);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
         Blocks.FIRE.setFireInfo(this, 5, 20);
-
-        OreDictionaryHelper.register(this, "pressure_plate_wood");
     }
 
     @Override
-    public WoodVariant_old getWoodBlockVariant() {
-        return woodVariant;
+    public WoodBlockVariant getWoodBlockVariant() {
+        return woodBlockVariant;
     }
 
     @Override
@@ -65,10 +61,10 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).build());
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), this.getMetaFromState(state), new ModelResourceLocation(modelLocation, "normal"));
+        for (IBlockState state : getBlockState().getValidStates()) {
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), getMetaFromState(state), new ModelResourceLocation(getResourceLocation(), "normal"));
         }
     }
 }

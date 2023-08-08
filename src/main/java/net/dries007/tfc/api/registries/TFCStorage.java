@@ -16,6 +16,7 @@ import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.objects.blocks.BlockAlabaster;
 import net.dries007.tfc.objects.blocks.BlockGroundcover;
@@ -39,7 +40,7 @@ public final class TFCStorage {
     public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantVariant, Plant>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<WoodVariant_old, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCK = new LinkedHashMap<>();
     public static final Map<Pair<MetalVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCK = new HashMap<>();
@@ -83,10 +84,10 @@ public final class TFCStorage {
     }
 
     @Nonnull
-    public static Block getWoodBlock(@Nonnull WoodVariant_old woodVariant, @Nonnull WoodType woodType) {
-        var block = (Block) WOOD_BLOCKS.get(new Pair<>(woodVariant, woodType));
+    public static Block getWoodBlock(@Nonnull WoodBlockVariant woodBlockVariant, @Nonnull WoodType woodType) {
+        var block = (Block) WOOD_BLOCKS.get(new Pair<>(woodBlockVariant, woodType));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", woodVariant, woodType));
+        throw new RuntimeException(String.format("Block is null: %s, %s", woodBlockVariant, woodType));
     }
 
     @Nonnull

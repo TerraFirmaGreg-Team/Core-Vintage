@@ -39,8 +39,8 @@ public class TreeGenNormal implements ITreeGenerator {
 
     @Override
     public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
-        ResourceLocation base = new ResourceLocation(MOD_ID, woodType.toString() + "/base");
-        ResourceLocation overlay = new ResourceLocation(MOD_ID, woodType.toString() + "/overlay");
+        ResourceLocation base = new ResourceLocation(MOD_ID, woodType + "/base");
+        ResourceLocation overlay = new ResourceLocation(MOD_ID, woodType + "/overlay");
 
         Template structureBase = manager.get(world.getMinecraftServer(), base);
         Template structureOverlay = manager.get(world.getMinecraftServer(), overlay);

@@ -45,12 +45,12 @@ public class TreeGenSequoia implements ITreeGenerator {
         int k = height;
         for (int j = 0; j < layers; j++) {
             if (j == layers - 1 || (j == layers - 2 && rand.nextBoolean())) {
-                k += placeLayer(manager, world, pos.up(k), woodType.toString() + "/mid" + baseVariant);
+                k += placeLayer(manager, world, pos.up(k), woodType + "/mid" + baseVariant);
             } else {
-                k += placeLayer(manager, world, pos.up(k), woodType.toString() + "/base" + baseVariant);
+                k += placeLayer(manager, world, pos.up(k), woodType + "/base" + baseVariant);
             }
         }
-        placeLayer(manager, world, pos.up(k), woodType.toString() + "/top" + topVariant);
+        placeLayer(manager, world, pos.up(k), woodType + "/top" + topVariant);
 
     }
 

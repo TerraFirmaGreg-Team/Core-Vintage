@@ -3,6 +3,7 @@ package net.dries007.tfc.world.classic.worldgen;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.plant.Plant;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.test.blocks.TFCBlocks;
@@ -19,9 +20,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
-
-import static net.dries007.tfc.api.types.soil.SoilVariant.CLAY;
-import static net.dries007.tfc.api.types.soil.SoilVariant.CLAY_GRASS;
 
 public class WorldGenSoilPits implements IWorldGenerator {
     @Override
@@ -54,10 +52,10 @@ public class WorldGenSoilPits implements IWorldGenerator {
                     final BlockPos pos = posHorizontal.add(0, y, 0);
                     final IBlockState current = world.getBlockState(pos);
                     if (BlocksTFC.isDirt(current)) {
-                        world.setBlockState(pos, TFCStorage.getSoilBlock(CLAY, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
+                        world.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.CLAY, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
                         flag = true;
                     } else if (BlocksTFC.isGrass(current)) {
-                        world.setBlockState(pos, TFCStorage.getSoilBlock(CLAY_GRASS, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
+                        world.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.CLAY_GRASS, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
                         flag = true;
                     }
                 }

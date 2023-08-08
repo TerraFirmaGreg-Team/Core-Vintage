@@ -2,7 +2,7 @@ package net.dries007.tfc.world.classic.chunkdata;
 
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.soil.Soil;
+import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.util.NBTBuilder;
@@ -112,7 +112,7 @@ public final class ChunkDataTFC {
         return get(world, pos).getRockLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
     }
 
-    public static Soil getSoilHeight(World world, BlockPos pos) {
+    public static SoilType getSoilHeight(World world, BlockPos pos) {
         return get(world, pos).getSoilLayerHeight(pos.getX() & 15, pos.getY(), pos.getZ() & 15);
     }
 
@@ -306,8 +306,8 @@ public final class ChunkDataTFC {
         return getRockLayer1(x, z);
     }
 
-    public Soil getSoilLayerHeight(int x, int y, int z) {
-        return Soil.valueOf(rockLayer1[z << 4 | x]);
+    public SoilType getSoilLayerHeight(int x, int y, int z) {
+        return SoilType.valueOf(rockLayer1[z << 4 | x]);
     }
 
     public static final class ChunkDataStorage implements Capability.IStorage<ChunkDataTFC> {

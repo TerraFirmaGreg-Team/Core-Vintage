@@ -11,9 +11,9 @@ import net.dries007.tfc.api.types.plant.util.IPlantBlock;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.soil.Soil;
-import net.dries007.tfc.api.types.soil.SoilVariant;
-import net.dries007.tfc.api.types.soil.util.ISoilBlock;
+import net.dries007.tfc.api.types.soil.ISoilBlock;
+import net.dries007.tfc.api.types.soil.type.SoilType;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.WoodType;
@@ -38,7 +38,7 @@ import java.util.*;
 public final class TFCStorage {
 
     public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<SoilVariant, Soil>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantVariant, Plant>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<WoodVariant_old, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCK = new LinkedHashMap<>();
@@ -70,10 +70,10 @@ public final class TFCStorage {
     }
 
     @Nonnull
-    public static Block getSoilBlock(@Nonnull SoilVariant soilVariant, @Nonnull Soil soil) {
-        var block = (Block) SOIL_BLOCKS.get(new Pair<>(soilVariant, soil));
+    public static Block getSoilBlock(@Nonnull SoilBlockVariant soilBlockVariant, @Nonnull SoilType soilType) {
+        var block = (Block) SOIL_BLOCKS.get(new Pair<>(soilBlockVariant, soilType));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", soilVariant, soil));
+        throw new RuntimeException(String.format("Block is null: %s, %s", soilBlockVariant, soilType));
     }
 
     @Nonnull

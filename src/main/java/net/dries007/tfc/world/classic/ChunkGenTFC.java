@@ -5,7 +5,8 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.soil.Soil;
+import net.dries007.tfc.api.types.soil.type.SoilType;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.test.blocks.TFCBlocks;
@@ -50,7 +51,6 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
-import static net.dries007.tfc.api.types.soil.SoilVariant.*;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;
@@ -492,15 +492,15 @@ public class ChunkGenTFC implements IChunkGenerator {
                 var rock2 = RockType.valueOf(rockLayer2[colIndex]);
                 var rock3 = RockType.valueOf(rockLayer3[colIndex]);
 
-                Soil soil1 = Soil.valueOf(rockLayer1[colIndex]);
+                var soil1 = SoilType.valueOf(rockLayer1[colIndex]);
 
                 DataLayer drainage = drainageLayer[colIndex];
                 DataLayer stability = stabilityLayer[colIndex];
                 int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
                 int smooth = -1;
 
-                IBlockState surfaceBlock = TFCStorage.getSoilBlock(rainfall + 1.3 * rand.nextGaussian() >= 150f ? GRASS : DRY_GRASS, soil1).getDefaultState();
-                IBlockState subSurfaceBlock = TFCStorage.getSoilBlock(DIRT, soil1).getDefaultState();
+                IBlockState surfaceBlock = TFCStorage.getSoilBlock(rainfall + 1.3 * rand.nextGaussian() >= 150f ? SoilBlockVariants.GRASS : SoilBlockVariants.DRY_GRASS, soil1).getDefaultState();
+                IBlockState subSurfaceBlock = TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soil1).getDefaultState();
 
                 if (BiomesTFC.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x + 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z - 1))) {
                     if (!BiomesTFC.isBeachBiome(getBiomeOffset(x, z))) cliffMap[colIndex] = true;
@@ -651,7 +651,7 @@ public class ChunkGenTFC implements IChunkGenerator {
                             } else // Swamp biomes have bottoms that are mostly dirt
                             {
                                 if (outp.getBlockState(x, y + yOffset, z) != TFCStorage.getRockBlock(SAND, rock1).getDefaultState())
-                                    outp.setBlockState(x, y + yOffset, z, TFCStorage.getSoilBlock(DIRT, soil1).getDefaultState());
+                                    outp.setBlockState(x, y + yOffset, z, TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soil1).getDefaultState());
                             }
                         }
                     }

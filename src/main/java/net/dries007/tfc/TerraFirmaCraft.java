@@ -13,6 +13,9 @@ import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
 import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariantHandler;
+import net.dries007.tfc.api.types.soil.type.SoilTypeHandler;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariantHandler;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
@@ -107,8 +110,10 @@ public final class TerraFirmaCraft {
 
         RockCategoryHandler.init();
         RockTypeHandler.init();
-
         RockBlockVariantHandler.init();
+
+        SoilTypeHandler.init();
+        SoilBlockVariantHandler.init();
 
         TFCBlocks.preInit();
         TFCItems.preInit();

@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.blocks.soil;
+package net.dries007.tfc.objects.blocks.soil.peat;
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -9,8 +9,8 @@ import net.minecraft.init.Blocks;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-public class BlockSoilPeat extends Block {
-    public BlockSoilPeat(Material material) {
+public class BlockPeat extends Block {
+    public BlockPeat(Material material) {
         super(material);
 
         setRegistryName(MOD_ID, "peat");

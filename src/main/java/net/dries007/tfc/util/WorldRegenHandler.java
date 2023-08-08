@@ -5,7 +5,8 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.animal.util.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.util.IHuntable;
 import net.dries007.tfc.api.types.animal.util.IPredator;
-import net.dries007.tfc.api.types.soil.util.ISoilBlock;
+import net.dries007.tfc.api.types.soil.ISoilBlock;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
@@ -47,7 +48,6 @@ import java.util.*;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.Plant.PORCINI;
-import static net.dries007.tfc.api.types.soil.SoilVariant.FARMLAND;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 /**
@@ -157,7 +157,7 @@ public class WorldRegenHandler {
                     IBlockState soil = world.getBlockState(topPos.down());
                     if (soil.getBlock() instanceof ISoilBlock soilRock) {
                         //Stop removing dead crops from farmland please!
-                        if (soilRock.getSoilVariant() != FARMLAND) {
+                        if (soilRock.getSoilBlockVariant() != SoilBlockVariants.FARMLAND) {
                             world.removeTileEntity(topPos);
                             world.setBlockToAir(topPos);
                         }

@@ -1,7 +1,8 @@
-package net.dries007.tfc.objects.blocks.soil;
+package net.dries007.tfc.objects.blocks.soil.peat;
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.soil.BlockSoilGrass;
 import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -27,14 +28,14 @@ import java.util.Random;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
-public class BlockSoilPeatGrass extends Block {
+public class BlockPeatGrass extends Block {
     // Used for connected textures only.
     public static final PropertyBool NORTH = PropertyBool.create("north");
     public static final PropertyBool EAST = PropertyBool.create("east");
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
 
-    public BlockSoilPeatGrass(Material material) {
+    public BlockPeatGrass(Material material) {
         super(material);
 
         setRegistryName(MOD_ID, "peat_grass");

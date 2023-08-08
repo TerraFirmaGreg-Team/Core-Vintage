@@ -1,15 +1,12 @@
 package net.dries007.tfc.objects.blocks.soil;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.soil.Soil;
-import net.dries007.tfc.api.types.soil.SoilVariant;
-import net.dries007.tfc.api.types.soil.util.ISoilBlock;
+import net.dries007.tfc.api.types.soil.ISoilBlock;
+import net.dries007.tfc.api.types.soil.type.SoilType;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
@@ -28,7 +25,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -41,17 +37,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.soil.SoilVariant.*;
-import static net.dries007.tfc.objects.blocks.BlocksTFC.isGravel;
-import static net.dries007.tfc.objects.blocks.BlocksTFC.isSand;
-import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
-
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class BlockSoilFarmland extends Block implements ISoilBlock {
     public static final int MAX_MOISTURE = 15;
     public static final PropertyInteger MOISTURE = PropertyInteger.create("moisture", 0, MAX_MOISTURE);
@@ -76,24 +63,22 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
     private static final AxisAlignedBB FARMLAND_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
     private static final AxisAlignedBB FLIPPED_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-    private final SoilVariant soilVariant;
-    private final Soil soil;
-    private final ResourceLocation modelLocation;
+    private final SoilBlockVariant soilBlockVariant;
+    private final SoilType soilType;
 
-    public BlockSoilFarmland(SoilVariant soilVariant, Soil soil) {
+    public BlockSoilFarmland(SoilBlockVariant soilBlockVariant, SoilType soilType) {
         super(Material.GROUND);
 
-        if (soilVariant.canFall())
-            FallingBlockManager.registerFallable(this, soilVariant.getFallingSpecification());
+        if (soilBlockVariant.canFall())
+            FallingBlockManager.registerFallable(this, soilBlockVariant.getFallingSpecification());
 
-        this.soilVariant = soilVariant;
-        this.soil = soil;
-        this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilVariant.getName());
+        this.soilBlockVariant = soilBlockVariant;
+        this.soilType = soilType;
+
         this.useNeighborBrightness = true;
 
-        var blockRegistryName = String.format("soil/%s/%s", soilVariant, soil);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.EARTH);
         setSoundType(SoundType.GROUND);
         setHardness(2.0F);
@@ -106,9 +91,9 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
     protected static void turnToDirt(World world, BlockPos pos) {
         Block block = world.getBlockState(pos).getBlock();
         if (block instanceof ISoilBlock) {
-            Soil soil = ((ISoilBlock) block).getSoil();
+            var soil = ((ISoilBlock) block).getSoilType();
 
-            world.setBlockState(pos, TFCStorage.getSoilBlock(DIRT, soil).getDefaultState());
+            world.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
             AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
             for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb)) {
                 double d0 = Math.min(axisalignedbb.maxY - axisalignedbb.minY, axisalignedbb.maxY - entity.getEntityBoundingBox().minY);
@@ -117,14 +102,16 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         }
     }
 
+    @Nonnull
     @Override
-    public SoilVariant getSoilVariant() {
-        return soilVariant;
+    public SoilBlockVariant getSoilBlockVariant() {
+        return soilBlockVariant;
     }
 
+    @Nonnull
     @Override
-    public Soil getSoil() {
-        return soil;
+    public SoilType getSoilType() {
+        return soilType;
     }
 
     @Override
@@ -132,6 +119,7 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         return new ItemBlockTFC(this);
     }
 
+    @Nonnull
     @Override
     @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
@@ -145,30 +133,32 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
+    public boolean isFullCube(@Nonnull IBlockState state) {
         return false;
     }
 
+    @Nonnull
     @Override
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
         return FARMLAND_AABB;
     }
 
+    @Nonnull
     @Override
     @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
         return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@Nonnull IBlockState state) {
         return false;
     }
 
     @Override
-    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+    public void updateTick(World world, BlockPos pos, IBlockState state, @Nonnull Random rand) {
         int current = state.getValue(MOISTURE);
         int target = world.isRainingAt(pos.up()) ? MAX_MOISTURE : getWaterScore(world, pos);
 
@@ -184,104 +174,20 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+    public boolean isSideSolid(@Nonnull IBlockState baseState, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
         return (side != EnumFacing.DOWN && side != EnumFacing.UP);
     }
 
+    @Nonnull
     @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player) {
         return new ItemStack(this);
     }
 
     @Override
-    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
-        int beachDistance = 2;
-
-        if (plantable instanceof BlockPlantTFC) {
-            switch (((BlockPlantTFC) plantable).getPlantTypeTFC()) {
-                case CLAY -> {
-                    return soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || soilVariant == CLAY || soilVariant == CLAY_GRASS;
-                }
-                case DESERT_CLAY -> {
-                    return soilVariant == CLAY || soilVariant == CLAY_GRASS || isSand(state);
-                }
-                case DRY_CLAY -> {
-                    return soilVariant == DIRT || soilVariant == DRY_GRASS || soilVariant == CLAY || soilVariant == CLAY_GRASS || isSand(state);
-                }
-                case DRY -> {
-                    return soilVariant == DIRT || soilVariant == DRY_GRASS || isSand(state);
-                }
-                case FRESH_WATER -> {
-                    return soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isGravel(state);
-                }
-                case SALT_WATER -> {
-                    return soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state) || isGravel(state);
-                }
-                case FRESH_BEACH -> {
-                    boolean flag = false;
-                    for (EnumFacing facing : EnumFacing.HORIZONTALS) {
-                        for (int i = 1; i <= beachDistance; i++) {
-                            if (BlocksTFC.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
-                                flag = true;
-                                break;
-                            }
-                        }
-                    }
-                    return (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state)) && flag;
-                }
-                case SALT_BEACH -> {
-                    boolean flag = false;
-                    for (EnumFacing facing : EnumFacing.HORIZONTALS) {
-                        for (int i = 1; i <= beachDistance; i++)
-                            if (BlocksTFC.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
-                                flag = true;
-                            }
-                    }
-                    return (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state)) && flag;
-                }
-            }
-        } else if (plantable instanceof BlockCropTFC) {
-            IBlockState cropState = world.getBlockState(pos.up());
-            if (cropState.getBlock() instanceof BlockCropTFC) {
-                boolean isWild = cropState.getValue(WILD);
-                if (isWild) {
-                    if (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || soilVariant == CLAY_GRASS) {
-                        return true;
-                    }
-                }
-                return soilVariant == FARMLAND;
-            }
-        }
-
-        switch (plantable.getPlantType(world, pos.offset(direction))) {
-            case Plains -> {
-                return soilVariant == DIRT || soilVariant == GRASS || soilVariant == FARMLAND || soilVariant == DRY_GRASS || soilVariant == CLAY || soilVariant == CLAY_GRASS;
-            }
-            case Crop -> {
-                return soilVariant == FARMLAND;
-            }
-            case Desert -> {
-                return isSand(state);
-            }
-            case Cave -> {
-                return true;
-            }
-            case Water, Nether -> {
-                return false;
-            }
-            case Beach -> {
-                boolean flag = false;
-                for (EnumFacing facing : EnumFacing.HORIZONTALS) {
-                    for (int i = 1; i <= beachDistance; i++)
-                        if (BlocksTFC.isWater(world.getBlockState(pos.offset(facing, i)))) {
-                            flag = true;
-                        }
-                }
-                return (soilVariant == DIRT || soilVariant == GRASS || soilVariant == DRY_GRASS || isSand(state)) && flag;
-            }
-        }
-
-        return false;
+    public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing direction, @Nonnull IPlantable plantable) {
+        var block = TFCStorage.getSoilBlock(SoilBlockVariants.GRASS, soilType);
+        return block.canSustainPlant(state, world, pos, direction, plantable);
     }
 
     public int getWaterScore(IBlockAccess world, BlockPos pos) {
@@ -297,8 +203,9 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         return score > 1 ? MAX_MOISTURE : Math.round(score * MAX_MOISTURE);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
+    public void neighborChanged(@Nonnull IBlockState state, @Nonnull World world, BlockPos pos, @Nonnull Block block, BlockPos fromPos) {
         if (fromPos.getY() == pos.getY() + 1) {
             IBlockState up = world.getBlockState(fromPos);
             if (up.isSideSolid(world, fromPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
@@ -307,9 +214,10 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         }
     }
 
+    @Nonnull
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soil));
+    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
+        return Item.getItemFromBlock(TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soilType));
     }
 
     private boolean hasCrops(World worldIn, BlockPos pos) {
@@ -320,7 +228,7 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
     @Override
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("deprecation")
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, EnumFacing side) {
         switch (side) {
             case UP:
                 return true;
@@ -337,23 +245,11 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         }
     }
 
+    @Nonnull
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, MOISTURE);
     }
-
-//	@SideOnly(Side.CLIENT)
-//	@Override
-//	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
-//	{
-//		if (this.soilType.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false))
-//		{
-//			double d0 = (float) pos.getX() + rand.nextFloat();
-//			double d1 = (double) pos.getY() - 0.05D;
-//			double d2 = (float) pos.getZ() + rand.nextFloat();
-//			world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
-//		}
-//	}
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -361,7 +257,7 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, "soiltype=" + soil.getName());
+                return new ModelResourceLocation(getResourceLocation(), "soiltype=" + soilType.toString());
             }
 
         });
@@ -370,7 +266,7 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),
                 this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(modelLocation, "soiltype=" + soil.getName()));
+                new ModelResourceLocation(getResourceLocation(), "soiltype=" + soilType.toString()));
     }
 
 }

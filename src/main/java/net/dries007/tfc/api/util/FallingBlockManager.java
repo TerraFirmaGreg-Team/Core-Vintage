@@ -8,7 +8,8 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.CollapseData;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
-import net.dries007.tfc.api.types.soil.util.ISoilBlock;
+import net.dries007.tfc.api.types.soil.ISoilBlock;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlockCharcoalPile;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodSupport;
@@ -32,9 +33,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
-
-import static net.dries007.tfc.api.types.soil.SoilVariant.FARMLAND;
-import static net.dries007.tfc.api.types.soil.SoilVariant.PATH;
 
 public class FallingBlockManager {
 
@@ -122,7 +120,7 @@ public class FallingBlockManager {
 
     public static boolean hasSupportingSideBlock(IBlockState state) {
         return state.isNormalCube() || SIDE_SUPPORTS.contains(state) || state.getBlock() instanceof ISoilBlock &&
-                (((ISoilBlock) state.getBlock()).getSoilVariant() == FARMLAND || ((ISoilBlock) state.getBlock()).getSoilVariant() == PATH);
+                (((ISoilBlock) state.getBlock()).getSoilBlockVariant() == SoilBlockVariants.FARMLAND || ((ISoilBlock) state.getBlock()).getSoilBlockVariant() == SoilBlockVariants.PATH);
     }
 
     public static boolean shouldFall(World world, BlockPos posToFallFrom, BlockPos originalPos, IBlockState originalState, boolean ignoreSupportChecks) {

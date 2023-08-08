@@ -9,6 +9,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.metal.util.IMetalBlock;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.render.*;
@@ -51,7 +52,6 @@ import javax.annotation.Nonnull;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.PlantVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.PlantVariant.TALL_GRASS;
-import static net.dries007.tfc.api.types.soil.SoilVariant.FARMLAND;
 import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.LEAVES;
 import static net.dries007.tfc.api.types.wood.variant.WoodVariant_old.SAPLING;
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
@@ -235,14 +235,14 @@ public final class ClientRegisterEvents {
 
         blockColors.registerBlockColorHandler(grassColor, TFCStorage.SOIL_BLOCKS.values()
                 .stream()
-                .filter(x -> x.getSoilVariant().isGrass())
+                .filter(x -> x.getSoilBlockVariant().isGrass())
                 .map(s -> (Block) s)
                 .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
                 BlockSoilFarmland.TINT[state.getValue(BlockSoilFarmland.MOISTURE)], TFCStorage.SOIL_BLOCKS.values()
                 .stream()
-                .filter(x -> x.getSoilVariant() == FARMLAND)
+                .filter(x -> x.getSoilBlockVariant() == SoilBlockVariants.FARMLAND)
                 .map(s -> (Block) s)
                 .toArray(Block[]::new));
 
@@ -306,7 +306,7 @@ public final class ClientRegisterEvents {
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCStorage.SOIL_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getSoilVariant().isGrass())
+                        .filter(x -> x.getSoilBlockVariant().isGrass())
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 

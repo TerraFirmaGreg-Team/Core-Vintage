@@ -7,8 +7,9 @@ import net.dries007.tfc.api.types.metal.MetalVariant;
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.soil.Soil;
-import net.dries007.tfc.api.types.soil.SoilVariant;
+import net.dries007.tfc.api.types.soil.type.SoilType;
+import net.dries007.tfc.api.types.soil.type.SoilTypes;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 import net.dries007.tfc.api.types.wood.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.util.Pair;
@@ -16,8 +17,8 @@ import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.objects.blocks.*;
 import net.dries007.tfc.objects.blocks.devices.*;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
-import net.dries007.tfc.objects.blocks.soil.BlockSoilPeat;
-import net.dries007.tfc.objects.blocks.soil.BlockSoilPeatGrass;
+import net.dries007.tfc.objects.blocks.soil.peat.BlockPeat;
+import net.dries007.tfc.objects.blocks.soil.peat.BlockPeatGrass;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.fluid.BlockFluidHotWater;
 import net.dries007.tfc.objects.fluids.fluid.BlockFluidTFC;
@@ -35,8 +36,8 @@ import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
 
 public class TFCBlocks {
     public static BlockDebug DEBUG;
-    public static BlockSoilPeat PEAT;
-    public static BlockSoilPeatGrass PEAT_GRASS;
+    public static BlockPeat PEAT;
+    public static BlockPeatGrass PEAT_GRASS;
     public static BlockAggregate AGGREGATE;
     public static BlockFireClay FIRE_CLAY_BLOCK;
     public static BlockThatch THATCH;
@@ -79,12 +80,12 @@ public class TFCBlocks {
 
         //=== Soil ===================================================================================================//
 
-        for (Soil soil : Soil.values()) {
-            for (SoilVariant soilVariant : SoilVariant.values()) {
-                var soilTypeBlock = soilVariant.create(soil);
+        for (var soilType : SoilType.getSoilTypes()) {
+            for (var soilBlockVariant : SoilBlockVariant.getSoilBlockVariants()) {
+                var soilTypeBlock = soilBlockVariant.applyToFactory(soilType);
 
-                if (SOIL_BLOCKS.put(new Pair<>(soilVariant, soil), soilTypeBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", soilVariant, soil));
+                if (SOIL_BLOCKS.put(new Pair<>(soilBlockVariant, soilType), soilTypeBlock) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", soilBlockVariant, soilType));
             }
         }
 
@@ -165,8 +166,8 @@ public class TFCBlocks {
         //=== Other ==================================================================================================//
 
         ITEM_BLOCKS.add(new ItemBlockTFC(DEBUG = new BlockDebug()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(PEAT = new BlockSoilPeat(Material.GROUND)));
-        ITEM_BLOCKS.add(new ItemBlockTFC(PEAT_GRASS = new BlockSoilPeatGrass(Material.GRASS)));
+        ITEM_BLOCKS.add(new ItemBlockTFC(PEAT = new BlockPeat(Material.GROUND)));
+        ITEM_BLOCKS.add(new ItemBlockTFC(PEAT_GRASS = new BlockPeatGrass(Material.GRASS)));
         ITEM_BLOCKS.add(new ItemBlockTFC(AGGREGATE = new BlockAggregate()));
         ITEM_BLOCKS.add(new ItemBlockTFC(FIRE_CLAY_BLOCK = new BlockFireClay()));
         ITEM_BLOCKS.add(new ItemBlockTFC(THATCH = new BlockThatch()));

@@ -43,7 +43,7 @@ public class BlockRockRaw extends BlockRock {
         this.setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
 
         // Copy as each raw stone has an unique resultingState
-        var spec =  FallingBlockManager.Specification.COLLAPSABLE_ROCK;
+        var spec = new FallingBlockManager.Specification(FallingBlockManager.Specification.COLLAPSABLE_ROCK);
         spec.setResultingState(TFCStorage.getRockBlock(RockBlockVariants.COBBLE, rockType).getDefaultState());
 
         FallingBlockManager.registerFallable(this, spec);

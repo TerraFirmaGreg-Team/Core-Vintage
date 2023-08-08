@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.IRockBlock;
-import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.block.type.RockType;
+import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.rock.ItemRockSlab;
@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.SLAB_DOUBLE;
 
 public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
@@ -44,14 +43,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockRockSlab(RockBlockVariant rockBlockVariant, Rock rock) {
+    private BlockRockSlab(RockVariant rockVariant, Rock rock) {
         super(Material.ROCK);
 
         IBlockState state = blockState.getBaseState();
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.modelBlock = TFCStorage.getCommonBlock(rockBlockVariant, rock);
+        this.modelBlock = TFCStorage.getCommonBlock(rockVariant, rock);
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -152,15 +151,15 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     }
 
     public static class Double extends BlockRockSlab {
-        private final RockBlockType rockBlockType;
-        private final RockBlockVariant rockBlockVariant;
+        private final RockType rockType;
+        private final RockVariant rockVariant;
         private final Rock rock;
 
-        public Double(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
-            super(rockBlockVariant, rock);
+        public Double(RockType rockType, RockVariant rockVariant, Rock rock) {
+            super(rockVariant, rock);
 
-            this.rockBlockType = rockBlockType;
-            this.rockBlockVariant = rockBlockVariant;
+            this.rockType = rockType;
+            this.rockVariant = rockVariant;
             this.rock = rock;
 
             this.setRegistryName(MOD_ID, getRegistryString());
@@ -174,14 +173,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
         @Nonnull
         @Override
-        public RockBlockType getRockBlockType() {
-            return rockBlockType;
+        public RockType getRockType() {
+            return rockType;
         }
 
         @Nullable
         @Override
-        public RockBlockVariant getRockBlockVariant() {
-            return rockBlockVariant;
+        public RockVariant getRockVariant() {
+            return rockVariant;
         }
 
         @Nonnull
@@ -210,19 +209,19 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
     public static class Half extends BlockRockSlab {
         public final Double doubleSlab;
-        private final RockBlockType rockBlockType;
-        private final RockBlockVariant rockBlockVariant;
+        private final RockType rockType;
+        private final RockVariant rockVariant;
         private final Rock rock;
 
-        public Half(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
-            super(rockBlockVariant, rock);
+        public Half(RockType rockType, RockVariant rockVariant, Rock rock) {
+            super(rockVariant, rock);
 
-            doubleSlab = (Double) TFCStorage.getSlabDoubleBlock(rockBlockVariant, rock);
+            doubleSlab = (Double) TFCStorage.getSlabDoubleBlock(rockVariant, rock);
             doubleSlab.halfSlab = this;
             halfSlab = this;
 
-            this.rockBlockType = rockBlockType;
-            this.rockBlockVariant = rockBlockVariant;
+            this.rockType = rockType;
+            this.rockVariant = rockVariant;
             this.rock = rock;
 
             this.setRegistryName(MOD_ID, getRegistryString());
@@ -239,14 +238,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
         @Nonnull
         @Override
-        public RockBlockType getRockBlockType() {
-            return rockBlockType;
+        public RockType getRockType() {
+            return rockType;
         }
 
         @Nullable
         @Override
-        public RockBlockVariant getRockBlockVariant() {
-            return rockBlockVariant;
+        public RockVariant getRockVariant() {
+            return rockVariant;
         }
 
         @Nonnull

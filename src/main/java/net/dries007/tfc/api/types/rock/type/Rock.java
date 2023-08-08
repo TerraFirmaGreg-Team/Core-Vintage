@@ -17,7 +17,7 @@ public class Rock {
     private static final Set<Rock> ROCKS = new LinkedHashSet<>();
 
     @Nonnull
-    private final String rockTypeName;
+    private final String name;
     @Nonnull
     private final RockCategory rockCategory;
     private final boolean isFlux;
@@ -25,32 +25,32 @@ public class Rock {
     /**
      * Создает экземпляр класса Rock с указанными параметрами.
      *
-     * @param rockTypeName Название породы.
+     * @param name         Название породы.
      * @param rockCategory Категория породы.
      * @param isFlux       Флаг, указывающий, является ли порода флюсом.
      */
-    public Rock(@Nonnull String rockTypeName, @Nonnull RockCategory rockCategory, boolean isFlux) {
-        this.rockTypeName = rockTypeName;
+    public Rock(@Nonnull String name, @Nonnull RockCategory rockCategory, boolean isFlux) {
+        this.name = name;
         this.rockCategory = rockCategory;
         this.isFlux = isFlux;
 
-        if (rockTypeName.isEmpty()) {
-            throw new RuntimeException(String.format("Rock name must contain any character: [%s]", rockTypeName));
+        if (name.isEmpty()) {
+            throw new RuntimeException(String.format("Rock name must contain any character: [%s]", name));
         }
 
         if (!ROCKS.add(this)) {
-            throw new RuntimeException(String.format("Rock: [%s] already exists!", rockTypeName));
+            throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
         }
     }
 
     /**
      * Создает экземпляр класса Rock с указанными параметрами и флагом флюса, установленным в false.
      *
-     * @param rockTypeName Название породы.
+     * @param name         Название породы.
      * @param rockCategory Категория породы.
      */
-    public Rock(@Nonnull String rockTypeName, @Nonnull RockCategory rockCategory) {
-        this(rockTypeName, rockCategory, false);
+    public Rock(@Nonnull String name, @Nonnull RockCategory rockCategory) {
+        this(name, rockCategory, false);
     }
 
     /**
@@ -60,7 +60,7 @@ public class Rock {
      */
     @Override
     public String toString() {
-        return rockTypeName;
+        return name;
     }
 
     /**
@@ -97,7 +97,7 @@ public class Rock {
      *
      * @return Список всех типов пород.
      */
-    public static Set<Rock> getRockTypes() {
+    public static Set<Rock> getAllRock() {
         return ROCKS;
     }
 

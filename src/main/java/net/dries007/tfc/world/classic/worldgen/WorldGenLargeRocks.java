@@ -11,8 +11,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.COMMON;
-import static net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants.RAW;
+import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.RAW;
 
 public class WorldGenLargeRocks implements IWorldGenerator {
     @Override

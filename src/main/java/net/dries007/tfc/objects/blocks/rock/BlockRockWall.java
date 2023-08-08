@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.types.rock.block.type.RockType;
+import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
+import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.BlockWall;
@@ -32,15 +32,15 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockRockWall extends BlockWall implements IRockBlock {
 
-    private final RockBlockType rockBlockType;
-    private final RockBlockVariant rockBlockVariant;
+    private final RockType rockType;
+    private final RockVariant rockVariant;
     private final Rock rock;
 
-    public BlockRockWall(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
+    public BlockRockWall(RockType rockType, RockVariant rockVariant, Rock rock) {
         super(Blocks.COBBLESTONE);
 
-        this.rockBlockType = rockBlockType;
-        this.rockBlockVariant = rockBlockVariant;
+        this.rockType = rockType;
+        this.rockVariant = rockVariant;
         this.rock = rock;
 
 
@@ -55,14 +55,14 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
 
     @Nonnull
     @Override
-    public RockBlockType getRockBlockType() {
-        return rockBlockType;
+    public RockType getRockType() {
+        return rockType;
     }
 
     @Nullable
     @Override
-    public RockBlockVariant getRockBlockVariant() {
-        return rockBlockVariant;
+    public RockVariant getRockVariant() {
+        return rockVariant;
     }
 
     @Nonnull

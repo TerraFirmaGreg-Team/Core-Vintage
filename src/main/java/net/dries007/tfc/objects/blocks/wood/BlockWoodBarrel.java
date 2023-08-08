@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -51,7 +51,7 @@ import java.util.stream.Collectors;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCStorage.WOOD_BLOCKS;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.BARREL;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.BARREL;
 
 /**
  * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes.
@@ -65,11 +65,11 @@ public class BlockWoodBarrel extends Block implements IItemSize, IWoodBlock {
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
-    private final WoodVariant woodVariant;
+    private final WoodVariant_old woodVariant;
     private final Wood wood;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodBarrel(WoodVariant woodVariant, Wood wood) {
+    public BlockWoodBarrel(WoodVariant_old woodVariant, Wood wood) {
         super(Material.WOOD);
 
         this.woodVariant = woodVariant;
@@ -110,7 +110,7 @@ public class BlockWoodBarrel extends Block implements IItemSize, IWoodBlock {
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
+    public WoodVariant_old getWoodVariant() {
         return woodVariant;
     }
 

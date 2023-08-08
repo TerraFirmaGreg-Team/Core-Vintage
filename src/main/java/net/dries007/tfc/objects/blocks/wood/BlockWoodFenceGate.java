@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -24,11 +24,11 @@ import javax.annotation.Nullable;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
-    private final WoodVariant woodVariant;
+    private final WoodVariant_old woodVariant;
     private final Wood wood;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodFenceGate(WoodVariant woodVariant, Wood wood) {
+    public BlockWoodFenceGate(WoodVariant_old woodVariant, Wood wood) {
         super(BlockPlanks.EnumType.OAK);
 
         this.woodVariant = woodVariant;
@@ -49,7 +49,7 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
+    public WoodVariant_old getWoodVariant() {
         return woodVariant;
     }
 

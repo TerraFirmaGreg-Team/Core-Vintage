@@ -16,10 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static net.dries007.tfc.types.DefaultTrees.GEN_NORMAL;
 
@@ -28,8 +25,10 @@ import static net.dries007.tfc.types.DefaultTrees.GEN_NORMAL;
  */
 public class Wood {
 
-    private static final HashSet<Wood> WOODS = new HashSet<>();
+    private static final Set<Wood> WOODS = new LinkedHashSet<>();
 
+    @Nonnull
+    private final String name;
     private final int color;
     private final int maxGrowthRadius;
     private final float dominance;
@@ -54,6 +53,7 @@ public class Wood {
     /**
      * Создает объект Wood с заданными характеристиками.
      *
+     * @param name             Название древесины.
      * @param color            цвет дерева
      * @param generator        генератор, который будет вызываться для создания этого дерева
      * @param minTemp          минимальная температура
@@ -73,11 +73,12 @@ public class Wood {
      * @param burnTemp         температура, при которой дерево будет гореть в костре или подобном устройстве
      * @param burnTicks        количество тиков, в течение которых дерево будет гореть в костре или подобном устройстве
      */
-    public Wood(int color, @Nonnull ITreeGenerator generator, float minTemp, float maxTemp,
+    public Wood(@Nonnull String name, int color, @Nonnull ITreeGenerator generator, float minTemp, float maxTemp,
                 float minRain, float maxRain, float minDensity, float maxDensity,
                 float dominance, int maxGrowthRadius, int maxHeight, int maxDecayDistance,
                 boolean isConifer, @Nullable ITreeGenerator bushGenerator,
                 boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks) {
+        this.name = name;
         this.color = color;
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
@@ -97,7 +98,13 @@ public class Wood {
         this.bushGenerator = bushGenerator;
         this.canMakeTannin = canMakeTannin;
 
-        WOODS.add(this);
+        if (name.isEmpty()) {
+            throw new RuntimeException(String.format("Wood name must contain any character: [%s]", name));
+        }
+
+        if (!WOODS.add(this)) {
+            throw new RuntimeException(String.format("Wood: [%s] already exists!", name));
+        }
     }
 
     /**
@@ -322,7 +329,7 @@ public class Wood {
      *
      * @return список типов дерева
      */
-    public static List<Wood> getAllWoodTypes() {
+    public static List<Wood> getAllWood() {
         return new ArrayList<>(WOODS);
     }
 
@@ -339,6 +346,7 @@ public class Wood {
 
     public static class Builder {
         // Поля
+        private final String name;
         private final int color; // цвет
         private final float minTemp; // минимальная температура
         private final float maxTemp; // максимальная температура
@@ -359,7 +367,8 @@ public class Wood {
         private int burnTicks; // количество тиков горения
 
         // Конструктор
-        public Builder(int color, float minTemp, float maxTemp, float minRain, float maxRain) {
+        public Builder(@Nonnull String name, int color, float minTemp, float maxTemp, float minRain, float maxRain) {
+            this.name = name;
             this.color = color; // обязательные значения
             this.minTemp = minTemp;
             this.maxTemp = maxTemp;
@@ -459,7 +468,7 @@ public class Wood {
         // Метод для построения объекта Wood
         public Wood build() {
             return new Wood(
-                    color, gen, minTemp, maxTemp, minRain,
+                    name, color, gen, minTemp, maxTemp, minRain,
                     maxRain, minDensity, maxDensity, dominance,
                     maxGrowthRadius, maxHeight, maxDecayDistance, isConifer,
                     bushGenerator, canMakeTannin, minGrowthTime, burnTemp, burnTicks);

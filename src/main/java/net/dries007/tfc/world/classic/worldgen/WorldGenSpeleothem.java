@@ -16,9 +16,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.COMMON;
-import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.SPELEOTHEM;
-import static net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants.RAW;
+import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.RAW;
 
 public class WorldGenSpeleothem implements IWorldGenerator {
 
@@ -115,7 +113,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
 
     private Block getSpeleothemType(IBlockState state) {
         var block = state.getBlock();
-        for (var rock : Rock.getRockTypes()) {
+        for (var rock : Rock.getAllRock()) {
             if (TFCStorage.getCommonBlock(RAW, rock) == block) {
                 return TFCStorage.getCommonBlock(RAW, rock);
             }

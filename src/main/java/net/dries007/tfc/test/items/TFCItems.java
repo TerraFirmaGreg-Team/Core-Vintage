@@ -40,7 +40,7 @@ public class TFCItems {
 
         //=== ItemRock ===============================================================================================//
 
-        for (var rock : Rock.getRockTypes()) {
+        for (var rock : Rock.getAllRock()) {
             if (BRICK_ITEM.put(rock, new ItemRockBrick(rock)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s", rock));
 

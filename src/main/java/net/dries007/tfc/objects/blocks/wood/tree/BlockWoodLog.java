@@ -7,7 +7,7 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -52,11 +52,11 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     public static final AxisAlignedBB SMALL_AABB_Y = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 1, 0.75);
     public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);
     public static final AxisAlignedBB SMALL_AABB_Z = new AxisAlignedBB(0.25, 0.25, 0, 0.75, 0.75, 1);
-    private final WoodVariant woodVariant;
+    private final WoodVariant_old woodVariant;
     private final Wood wood;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodLog(WoodVariant woodVariant, Wood wood) {
+    public BlockWoodLog(WoodVariant_old woodVariant, Wood wood) {
 
         this.woodVariant = woodVariant;
         this.wood = wood;
@@ -83,7 +83,7 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
+    public WoodVariant_old getWoodVariant() {
         return woodVariant;
     }
 

@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -44,16 +44,16 @@ import java.util.*;
 
 import static net.dries007.tfc.Constants.RNG;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.LOG;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.SAPLING;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.LOG;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.SAPLING;
 
 @ParametersAreNonnullByDefault
 public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
-    private final WoodVariant woodVariant;
+    private final WoodVariant_old woodVariant;
     private final Wood wood;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodLeaves(WoodVariant woodVariant, Wood wood) {
+    public BlockWoodLeaves(WoodVariant_old woodVariant, Wood wood) {
         this.woodVariant = woodVariant;
         this.wood = wood;
         this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
@@ -74,7 +74,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
+    public WoodVariant_old getWoodVariant() {
         return woodVariant;
     }
 

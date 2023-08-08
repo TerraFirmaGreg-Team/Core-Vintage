@@ -309,7 +309,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(leatherknapRecipes, KNAP_LEATHER_UID);
 
         // Stone Knapping Recipes
-        for (var rock : Rock.getRockTypes()) {
+        for (var rock : Rock.getAllRock()) {
             registry.addRecipeCatalyst(new ItemStack(TFCStorage.getRockItem(rock)), KNAP_STONE_UID);
         }
 

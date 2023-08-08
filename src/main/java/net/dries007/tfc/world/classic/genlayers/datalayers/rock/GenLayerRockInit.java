@@ -13,7 +13,7 @@ public class GenLayerRockInit extends GenLayerTFC {
     public GenLayerRockInit(long par1, final RockCategory.Layer rocks) {
         super(par1);
 
-        layerRocks = Rock.getRockTypes().stream()
+        layerRocks = Rock.getAllRock().stream()
                 .filter(rocks)
                 .mapToInt(Rock::indexOf)
                 .sorted().toArray();

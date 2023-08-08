@@ -13,9 +13,9 @@ import java.util.function.Predicate;
  * Класс, представляющий категорию породы.
  */
 public class RockCategory {
-    private static final Set<RockCategory> rockCategories = new LinkedHashSet<>();
+    private static final Set<RockCategory> ROCK_CATEGORIES = new LinkedHashSet<>();
 
-    private final String rockCategoryName;
+    private final String name;
     private final boolean layer1;
     private final boolean layer2;
     private final boolean layer3;
@@ -31,7 +31,7 @@ public class RockCategory {
     /**
      * Создает экземпляр класса RockCategory с указанными параметрами.
      *
-     * @param rockCategoryName Название категории породы.
+     * @param name             Название категории породы.
      * @param layer1           Флаг, указывающий, присутствует ли категория в первом слое пород.
      * @param layer2           Флаг, указывающий, присутствует ли категория во втором слое пород.
      * @param layer3           Флаг, указывающий, присутствует ли категория в третьем слое пород.
@@ -41,8 +41,8 @@ public class RockCategory {
      * @param textFormatting   Форматирование текста для отображения категории.
      * @param hasAnvil         Флаг, указывающий, имеет ли категория наковальню.
      */
-    RockCategory(@Nonnull String rockCategoryName, boolean layer1, boolean layer2, boolean layer3, float caveGenMod, float caveFreqMod, float hardnessModifier, @Nonnull TextFormatting textFormatting, boolean hasAnvil) {
-        this.rockCategoryName = rockCategoryName;
+    RockCategory(@Nonnull String name, boolean layer1, boolean layer2, boolean layer3, float caveGenMod, float caveFreqMod, float hardnessModifier, @Nonnull TextFormatting textFormatting, boolean hasAnvil) {
+        this.name = name;
         this.layer1 = layer1;
         this.layer2 = layer2;
         this.layer3 = layer3;
@@ -52,12 +52,12 @@ public class RockCategory {
         this.textFormatting = textFormatting;
         this.hasAnvil = hasAnvil;
 
-        if (rockCategoryName.isEmpty()) {
-            throw new RuntimeException(String.format("RockCategory name must contain any character: [%s]", rockCategoryName));
+        if (name.isEmpty()) {
+            throw new RuntimeException(String.format("RockCategory name must contain any character: [%s]", name));
         }
 
-        if (!rockCategories.add(this)) {
-            throw new RuntimeException(String.format("RockCategory: [%s] already exists!", rockCategoryName));
+        if (!ROCK_CATEGORIES.add(this)) {
+            throw new RuntimeException(String.format("RockCategory: [%s] already exists!", name));
         }
     }
 
@@ -68,7 +68,7 @@ public class RockCategory {
      */
     @Override
     public String toString() {
-        return rockCategoryName;
+        return name;
     }
 
     /**
@@ -131,8 +131,8 @@ public class RockCategory {
      *
      * @return Набор всех категорий пород.
      */
-    public static Set<RockCategory> getRockCategories() {
-        return rockCategories;
+    public static Set<RockCategory> getAllRockCategories() {
+        return ROCK_CATEGORIES;
     }
 
     /**

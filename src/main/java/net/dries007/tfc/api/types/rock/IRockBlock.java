@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types.rock;
 
-import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.block.type.RockType;
+import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.util.IHasModel;
@@ -16,10 +16,10 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 public interface IRockBlock extends IHasModel, IItemProvider {
 
     @Nonnull
-    RockBlockType getRockBlockType();
+    RockType getRockType();
 
     @Nullable
-    RockBlockVariant getRockBlockVariant();
+    RockVariant getRockVariant();
 
     @Nonnull
     Rock getRock();
@@ -32,20 +32,20 @@ public interface IRockBlock extends IHasModel, IItemProvider {
     @Nonnull
     default String getRegistryString() {
 
-        if (getRockBlockVariant() == null) {
-            return String.format("rock/%s/%s", getRockBlockType(), getRock());
+        if (getRockVariant() == null) {
+            return String.format("rock/%s/%s", getRockType(), getRock());
         }
 
-        return String.format("rock/%s/%s/%s", getRockBlockType(), getRockBlockVariant(), getRock());
+        return String.format("rock/%s/%s/%s", getRockType(), getRockVariant(), getRock());
     }
 
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        if (getRockBlockVariant() == null) {
-            return new ResourceLocation(MOD_ID, String.format("rock/%s", getRockBlockType()));
+        if (getRockVariant() == null) {
+            return new ResourceLocation(MOD_ID, String.format("rock/%s", getRockType()));
         }
 
-        return new ResourceLocation(MOD_ID, String.format("rock/%s/%s", getRockBlockType(), getRockBlockVariant()));
+        return new ResourceLocation(MOD_ID, String.format("rock/%s/%s", getRockType(), getRockVariant()));
     }
 
     @Nonnull
@@ -55,10 +55,10 @@ public interface IRockBlock extends IHasModel, IItemProvider {
 
 
     default float getFinalHardness() {
-        var rockBlockVariant = getRockBlockVariant();
+        var rockVariant = getRockVariant();
 
-        if (rockBlockVariant != null) {
-            return getRockCategory().getHardnessModifier() + rockBlockVariant.getBaseHardness();
+        if (rockVariant != null) {
+            return getRockCategory().getHardnessModifier() + rockVariant.getBaseHardness();
         }
 
         return getRockCategory().getHardnessModifier();

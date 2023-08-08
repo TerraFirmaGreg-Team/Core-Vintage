@@ -46,7 +46,7 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
         this.squareHigh = highTexture == null ? null : helper.drawableBuilder(highTexture, 0, 0, 16, 16).setTextureSize(16, 16).build();
         this.squareLow = lowTexture == null ? null : helper.drawableBuilder(lowTexture, 0, 0, 16, 16).setTextureSize(16, 16).build();
 
-        for (var rock : Rock.getRockTypes()) {
+        for (var rock : Rock.getAllRock()) {
             ROCK_TEXTURES.add(rock.getTexture());
         }
     }
@@ -104,7 +104,7 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
         if (ticks == 0 || ticks % TIME_IN_TICKS == 0) {
             squareHigh = guiHelper.drawableBuilder(ROCK_TEXTURES.get(ticks / TIME_IN_TICKS), 0, 0, 16, 16).setTextureSize(16, 16).build();
 
-            if (ticks >= (Rock.getRockTypes().size() - 1) * TIME_IN_TICKS)
+            if (ticks >= (Rock.getAllRock().size() - 1) * TIME_IN_TICKS)
                 ticks = 0;
         }
 

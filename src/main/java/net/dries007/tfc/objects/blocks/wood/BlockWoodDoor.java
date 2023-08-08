@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -27,11 +27,11 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
-    private final WoodVariant woodVariant;
+    private final WoodVariant_old woodVariant;
     private final Wood wood;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodDoor(WoodVariant woodVariant, Wood wood) {
+    public BlockWoodDoor(WoodVariant_old woodVariant, Wood wood) {
         super(Material.WOOD);
 
         this.woodVariant = woodVariant;
@@ -50,7 +50,7 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
+    public WoodVariant_old getWoodVariant() {
         return woodVariant;
     }
 

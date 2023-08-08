@@ -49,9 +49,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.COMMON;
-import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.FALLABLE;
-import static net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants.*;
+import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.*;
 import static net.dries007.tfc.api.types.soil.SoilVariant.*;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;

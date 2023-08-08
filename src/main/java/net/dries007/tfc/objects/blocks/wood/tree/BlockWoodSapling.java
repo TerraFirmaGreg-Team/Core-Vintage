@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.wood.tree;
 
 import net.dries007.tfc.api.types.agriculture.util.IGrowingPlant;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -46,11 +46,11 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPlant, IWoodBlock {
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
-    private final WoodVariant woodVariant;
+    private final WoodVariant_old woodVariant;
     private final Wood wood;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodSapling(WoodVariant woodVariant, Wood wood) {
+    public BlockWoodSapling(WoodVariant_old woodVariant, Wood wood) {
 
         this.woodVariant = woodVariant;
         this.wood = wood;
@@ -71,7 +71,7 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
+    public WoodVariant_old getWoodVariant() {
         return woodVariant;
     }
 

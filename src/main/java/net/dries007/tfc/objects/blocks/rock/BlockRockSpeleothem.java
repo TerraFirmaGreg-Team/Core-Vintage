@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.blocks.rock;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.block.type.RockType;
+import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyEnum;
@@ -35,8 +35,8 @@ import java.util.Random;
 public class BlockRockSpeleothem extends BlockRock {
     public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
-    public BlockRockSpeleothem(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
-        super(rockBlockType, rockBlockVariant, rock);
+    public BlockRockSpeleothem(RockType rockType, RockVariant rockVariant, Rock rock) {
+        super(rockType, rockVariant, rock);
 
         this.setDefaultState(blockState.getBaseState().withProperty(SIZE, EnumSize.MEDIUM));
     }

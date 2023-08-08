@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.block.type.RockType;
+import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyDirection;
@@ -40,8 +40,8 @@ public class BlockRockLoose extends BlockRock {
     private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
 
 
-    public BlockRockLoose(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
-        super(rockBlockType, rockBlockVariant, rock);
+    public BlockRockLoose(RockType rockType, RockVariant rockVariant, Rock rock) {
+        super(rockType, rockVariant, rock);
 
         this.setHardness(0.1f);
 

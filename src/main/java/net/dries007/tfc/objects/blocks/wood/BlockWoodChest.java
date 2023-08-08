@@ -4,7 +4,7 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -45,11 +45,11 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock {
-    private final WoodVariant woodVariant;
+    private final WoodVariant_old woodVariant;
     private final Wood wood;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodChest(WoodVariant woodVariant, Wood wood) {
+    public BlockWoodChest(WoodVariant_old woodVariant, Wood wood) {
         super(Type.BASIC);
         this.woodVariant = woodVariant;
         this.wood = wood;
@@ -80,7 +80,7 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
+    public WoodVariant_old getWoodVariant() {
         return woodVariant;
     }
 

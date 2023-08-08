@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -61,11 +61,11 @@ public class BlockWoodSupport extends Block implements IWoodBlock {
     private static final AxisAlignedBB CONNECTION_E_AABB = new AxisAlignedBB(0.6875D, 0.625D, 0.3125D, 1.0D, 1.0D, 0.6875D);
     private static final AxisAlignedBB CONNECTION_W_AABB = new AxisAlignedBB(0.0D, 0.625D, 0.3125D, 0.3125D, 1.0D, 0.6875D);
 
-    private final WoodVariant woodVariant;
+    private final WoodVariant_old woodVariant;
     private final Wood wood;
     private final ResourceLocation modelLocation;
 
-    public BlockWoodSupport(WoodVariant woodVariant, Wood wood) {
+    public BlockWoodSupport(WoodVariant_old woodVariant, Wood wood) {
         super(Material.WOOD, Material.WOOD.getMaterialMapColor());
 
         this.woodVariant = woodVariant;
@@ -160,7 +160,7 @@ public class BlockWoodSupport extends Block implements IWoodBlock {
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
+    public WoodVariant_old getWoodVariant() {
         return woodVariant;
     }
 

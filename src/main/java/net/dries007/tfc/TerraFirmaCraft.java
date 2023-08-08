@@ -10,8 +10,8 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
-import net.dries007.tfc.api.types.rock.block.type.RockBlockTypeHandler;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariantHandler;
+import net.dries007.tfc.api.types.rock.block.type.RockTypeHandler;
+import net.dries007.tfc.api.types.rock.block.variant.RockVariantHandler;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
 import net.dries007.tfc.api.types.rock.type.RockHandler;
 import net.dries007.tfc.client.ClientEvents;
@@ -109,8 +109,8 @@ public final class TerraFirmaCraft {
         RockCategoryHandler.init();
         RockHandler.init();
 
-        RockBlockVariantHandler.init();
-        RockBlockTypeHandler.init();
+        RockVariantHandler.init();
+        RockTypeHandler.init();
 
         TFCBlocks.preInit();
         TFCItems.preInit();

@@ -17,8 +17,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.*;
 
-import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.COMMON;
-import static net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants.RAW;
+import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.RAW;
 import static net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC.getRock3;
 
 /**

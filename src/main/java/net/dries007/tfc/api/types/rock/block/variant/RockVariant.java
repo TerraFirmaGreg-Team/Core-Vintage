@@ -10,31 +10,32 @@ import java.util.Set;
 /**
  * Класс, представляющий вариант блока породы.
  */
-public class RockBlockVariant {
-    private static final Set<RockBlockVariant> rockBlockVariants = new LinkedHashSet<>();
+public class RockVariant {
+    private static final Set<RockVariant> ROCK_BLOCK_VARIANTS = new LinkedHashSet<>();
 
     @Nonnull
-    private final String rockBlockVariantName;
+    private final String name;
     private final float baseHardness;
     @Nullable
     private final FallingBlockManager.Specification fallingSpecification;
+
     /**
-     * Создает экземпляр класса RockBlockVariant с указанными параметрами.
+     * Создает экземпляр класса RockVariant с указанными параметрами.
      *
-     * @param rockBlockVariantName Название варианта блока породы.
-     * @param baseHardness         Базовая прочность блока породы.
+     * @param name         Название варианта блока породы.
+     * @param baseHardness Базовая прочность блока породы.
      */
-    public RockBlockVariant(@Nonnull String rockBlockVariantName, float baseHardness, @Nullable FallingBlockManager.Specification fallingSpecification) {
-        this.rockBlockVariantName = rockBlockVariantName;
+    public RockVariant(@Nonnull String name, float baseHardness, @Nullable FallingBlockManager.Specification fallingSpecification) {
+        this.name = name;
         this.baseHardness = baseHardness;
         this.fallingSpecification = fallingSpecification;
 
-        if (rockBlockVariantName.isEmpty()) {
-            throw new RuntimeException(String.format("RockBlockVariant name must contain any character: [%s]", rockBlockVariantName));
+        if (name.isEmpty()) {
+            throw new RuntimeException(String.format("RockVariant name must contain any character: [%s]", name));
         }
 
-        if (!rockBlockVariants.add(this)) {
-            throw new RuntimeException(String.format("RockBlockVariant: [%s] already exists!", rockBlockVariantName));
+        if (!ROCK_BLOCK_VARIANTS.add(this)) {
+            throw new RuntimeException(String.format("RockVariant: [%s] already exists!", name));
         }
     }
 
@@ -64,7 +65,7 @@ public class RockBlockVariant {
      */
     @Override
     public String toString() {
-        return rockBlockVariantName;
+        return name;
     }
 
     /**
@@ -72,8 +73,8 @@ public class RockBlockVariant {
      *
      * @return Набор всех вариантов блоков породы.
      */
-    public static Set<RockBlockVariant> getRockBlockVariants() {
-        return rockBlockVariants;
+    public static Set<RockVariant> getAllRockVariants() {
+        return ROCK_BLOCK_VARIANTS;
     }
 
     /**

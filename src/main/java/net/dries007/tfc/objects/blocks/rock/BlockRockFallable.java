@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.block.type.RockType;
+import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
@@ -18,23 +18,23 @@ import java.util.Random;
 
 public class BlockRockFallable extends BlockRock {
 
-    public BlockRockFallable(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
-        this(Material.ROCK, rockBlockType, rockBlockVariant, rock);
+    public BlockRockFallable(RockType rockType, RockVariant rockVariant, Rock rock) {
+        this(Material.ROCK, rockType, rockVariant, rock);
     }
 
-    public BlockRockFallable(Material material, RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
-        super(material, rockBlockType, rockBlockVariant, rock);
+    public BlockRockFallable(Material material, RockType rockType, RockVariant rockVariant, Rock rock) {
+        super(material, rockType, rockVariant, rock);
 
-        if (rockBlockVariant.canFall())
-            FallingBlockManager.registerFallable(this, rockBlockVariant.getFallingSpecification());
+        if (rockVariant.canFall())
+            FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Random rand) {
-        var rockBlockVariant = getRockBlockVariant();
+        var rockVariant = getRockVariant();
 
-        if (rockBlockVariant != null && rockBlockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+        if (rockVariant != null && rockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
             double d0 = (float) pos.getX() + rand.nextFloat();
             double d1 = (double) pos.getY() - 0.05D;
             double d2 = (float) pos.getZ() + rand.nextFloat();

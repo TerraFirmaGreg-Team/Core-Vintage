@@ -23,7 +23,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.LOG;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.LOG;
 import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 

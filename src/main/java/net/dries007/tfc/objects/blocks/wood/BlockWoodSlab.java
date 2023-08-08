@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks.wood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
 import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -35,8 +35,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.PLANKS;
-import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant.SLAB_DOUBLE;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.PLANKS;
+import static net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old.SLAB_DOUBLE;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -45,7 +45,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockWoodSlab(WoodVariant woodVariant, Wood wood) {
+    private BlockWoodSlab(WoodVariant_old woodVariant, Wood wood) {
         super(Material.WOOD);
 
         IBlockState state = blockState.getBaseState();
@@ -145,11 +145,11 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     }
 
     public static class Double extends BlockWoodSlab {
-        private final WoodVariant woodVariant;
+        private final WoodVariant_old woodVariant;
         private final Wood wood;
         private final ResourceLocation modelLocation;
 
-        public Double(WoodVariant woodVariant, Wood wood) {
+        public Double(WoodVariant_old woodVariant, Wood wood) {
             super(woodVariant, wood);
 
             this.woodVariant = woodVariant;
@@ -167,7 +167,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         }
 
         @Override
-        public WoodVariant getWoodVariant() {
+        public WoodVariant_old getWoodVariant() {
             return woodVariant;
         }
 
@@ -191,11 +191,11 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     public static class Half extends BlockWoodSlab {
         public final Double doubleSlab;
 
-        private final WoodVariant woodVariant;
+        private final WoodVariant_old woodVariant;
         private final Wood wood;
         private final ResourceLocation modelLocation;
 
-        public Half(WoodVariant woodVariant, Wood wood) {
+        public Half(WoodVariant_old woodVariant, Wood wood) {
             super(woodVariant, wood);
 
             doubleSlab = (Double) TFCStorage.getWoodBlock(SLAB_DOUBLE, wood);
@@ -221,7 +221,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         }
 
         @Override
-        public WoodVariant getWoodVariant() {
+        public WoodVariant_old getWoodVariant() {
             return woodVariant;
         }
 

@@ -9,16 +9,16 @@ import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.plant.PlantVariant;
 import net.dries007.tfc.api.types.plant.util.IPlantBlock;
 import net.dries007.tfc.api.types.rock.IRockBlock;
-import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
-import net.dries007.tfc.api.types.rock.block.type.RockBlockTypes;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.block.type.RockType;
+import net.dries007.tfc.api.types.rock.block.type.RockTypes;
+import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.api.types.soil.Soil;
 import net.dries007.tfc.api.types.soil.SoilVariant;
 import net.dries007.tfc.api.types.soil.util.ISoilBlock;
-import net.dries007.tfc.api.types.wood.block.variant.WoodVariant;
-import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.block.variant.WoodVariant_old;
+import net.dries007.tfc.api.types.wood.type.Wood;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.blocks.BlockAlabaster;
@@ -41,11 +41,11 @@ import java.util.*;
  */
 public final class TFCStorage {
 
-    public static final Map<Triple<RockBlockType, RockBlockVariant, Rock>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Triple<RockType, RockVariant, Rock>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<SoilVariant, Soil>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantVariant, Plant>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<WoodVariant, Wood>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCK = new LinkedHashMap<>();
+    public static final Map<Pair<WoodVariant_old, Wood>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<String, RockVariant>, BlockAlabaster> ALABASTER_BLOCK = new LinkedHashMap<>();
     public static final Map<Pair<MetalVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCK = new HashMap<>();
 
@@ -67,75 +67,75 @@ public final class TFCStorage {
     public static final List<BlockFluidBase> FLUID = new ArrayList<>();
 
     @Nonnull
-    public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nullable RockBlockVariant blockVariant, @Nonnull Rock rock) {
-        var block = (Block) ROCK_BLOCKS.get(new Triple<>(rockBlockType, blockVariant, rock));
+    public static Block getRockBlock(@Nonnull RockType rockType, @Nullable RockVariant rockVariant, @Nonnull Rock rock) {
+        var block = (Block) ROCK_BLOCKS.get(new Triple<>(rockType, rockVariant, rock));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s, %s", rockBlockType, blockVariant, rock));
+        throw new RuntimeException(String.format("Block is null: %s, %s, %s", rockType, rockVariant, rock));
     }
 
     @Nonnull
-    public static Block getRockBlock(@Nonnull RockBlockType rockBlockType, @Nonnull Rock rock) {
-        return getRockBlock(rockBlockType, null, rock);
+    public static Block getRockBlock(@Nonnull RockType rockType, @Nonnull Rock rock) {
+        return getRockBlock(rockType, null, rock);
     }
 
     @Nonnull
-    public static Block getCommonBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.COMMON, blockVariant, rock);
+    public static Block getCommonBlock(@Nonnull RockVariant rockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockTypes.COMMON, rockVariant, rock);
     }
 
     @Nonnull
-    public static Block getMossyBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.MOSSY, blockVariant, rock);
+    public static Block getMossyBlock(@Nonnull RockVariant rockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockTypes.MOSSY, rockVariant, rock);
     }
 
     @Nonnull
-    public static Block getFallableBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.FALLABLE, blockVariant, rock);
+    public static Block getFallableBlock(@Nonnull RockVariant rockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockTypes.FALLABLE, rockVariant, rock);
     }
 
     @Nonnull
-    public static Block getStairsBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.STAIRS, blockVariant, rock);
+    public static Block getStairsBlock(@Nonnull RockVariant rockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockTypes.STAIRS, rockVariant, rock);
     }
 
     @Nonnull
-    public static Block getSlabDoubleBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.SLAB_DOUBLE, blockVariant, rock);
+    public static Block getSlabDoubleBlock(@Nonnull RockVariant rockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockTypes.SLAB_DOUBLE, rockVariant, rock);
     }
 
     @Nonnull
-    public static Block getSlabBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.SLAB, blockVariant, rock);
+    public static Block getSlabBlock(@Nonnull RockVariant rockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockTypes.SLAB, rockVariant, rock);
     }
 
     @Nonnull
-    public static Block getWallBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.WALL, blockVariant, rock);
+    public static Block getWallBlock(@Nonnull RockVariant rockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockTypes.WALL, rockVariant, rock);
     }
 
     @Nonnull
     public static Block getLooseBlock(@Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.LOOSE, rock);
+        return getRockBlock(RockTypes.LOOSE, rock);
     }
 
     @Nonnull
     public static Block getSpeleothemBlock(@Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.SPELEOTHEM, rock);
+        return getRockBlock(RockTypes.SPELEOTHEM, rock);
     }
 
     @Nonnull
-    public static Block getButtonBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.BUTTON, blockVariant, rock);
+    public static Block getButtonBlock(@Nonnull RockVariant rockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockTypes.BUTTON, rockVariant, rock);
     }
 
     @Nonnull
-    public static Block getPressurePlateBlock(@Nonnull RockBlockVariant blockVariant, @Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.PRESSURE_PLATE, blockVariant, rock);
+    public static Block getPressurePlateBlock(@Nonnull RockVariant rockVariant, @Nonnull Rock rock) {
+        return getRockBlock(RockTypes.PRESSURE_PLATE, rockVariant, rock);
     }
 
     @Nonnull
     public static Block getAnvilBlock(@Nonnull Rock rock) {
-        return getRockBlock(RockBlockTypes.ANVIL, rock);
+        return getRockBlock(RockTypes.ANVIL, rock);
     }
 
     @Nonnull
@@ -153,14 +153,14 @@ public final class TFCStorage {
     }
 
     @Nonnull
-    public static Block getWoodBlock(@Nonnull WoodVariant woodVariant, @Nonnull Wood wood) {
+    public static Block getWoodBlock(@Nonnull WoodVariant_old woodVariant, @Nonnull Wood wood) {
         var block = (Block) WOOD_BLOCKS.get(new Pair<>(woodVariant, wood));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block is null: %s, %s", woodVariant, wood));
     }
 
     @Nonnull
-    public static Block getAlabasterBlock(@Nonnull String string, @Nonnull RockBlockVariant rockVariant) {
+    public static Block getAlabasterBlock(@Nonnull String string, @Nonnull RockVariant rockVariant) {
         var block = (Block) ALABASTER_BLOCK.get(new Pair<>(string, rockVariant));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block is null: %s, %s", string, rockVariant));

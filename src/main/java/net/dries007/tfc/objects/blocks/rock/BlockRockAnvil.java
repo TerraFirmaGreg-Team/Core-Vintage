@@ -2,9 +2,8 @@ package net.dries007.tfc.objects.blocks.rock;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.block.type.RockBlockType;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants;
+import net.dries007.tfc.api.types.rock.block.type.RockType;
+import net.dries007.tfc.api.types.rock.block.variant.RockVariant;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
@@ -34,16 +33,15 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.COMMON;
-import static net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants.*;
+import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.*;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 
 @ParametersAreNonnullByDefault
 public class BlockRockAnvil extends BlockRock {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
-    public BlockRockAnvil(RockBlockType rockBlockType, RockBlockVariant rockBlockVariant, Rock rock) {
-        super(rockBlockType, rockBlockVariant, rock);
+    public BlockRockAnvil(RockType rockType, RockVariant rockVariant, Rock rock) {
+        super(rockType, rockVariant, rock);
 
         // TODO: 07.08.2023
         // FallingBlockManager.registerFallable(this, rockVariant.getFallingSpecification());

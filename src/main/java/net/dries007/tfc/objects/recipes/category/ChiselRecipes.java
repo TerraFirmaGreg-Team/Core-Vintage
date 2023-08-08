@@ -6,9 +6,8 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.Rock;
 import net.minecraft.item.EnumDyeColor;
 
-import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.COMMON;
-import static net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants.RAW;
-import static net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants.SMOOTH;
+import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.RAW;
+import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.SMOOTH;
 
 
 public class ChiselRecipes {
@@ -17,7 +16,7 @@ public class ChiselRecipes {
         var registry = TFCRegistries.CHISEL;
 
         // Rock smoothing
-        for (Rock rock : Rock.getRockTypes()) {
+        for (Rock rock : Rock.getAllRock()) {
             var rawRock = TFCStorage.getCommonBlock(RAW, rock);
             var smoothRock = TFCStorage.getCommonBlock(SMOOTH, rock).getDefaultState();
             registry.register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rock));

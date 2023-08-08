@@ -123,8 +123,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.rock.block.type.RockBlockTypes.COMMON;
-import static net.dries007.tfc.api.types.rock.block.variant.RockBlockVariants.RAW;
+import static net.dries007.tfc.api.types.rock.block.variant.RockVariants.RAW;
 import static net.dries007.tfc.api.types.rock.type.Rocks.BASALT;
 import static net.dries007.tfc.api.types.rock.type.Rocks.RHYOLITE;
 

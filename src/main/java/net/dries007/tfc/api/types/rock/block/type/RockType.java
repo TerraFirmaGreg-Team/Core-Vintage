@@ -16,7 +16,7 @@ import java.util.Set;
  * Класс, представляющий тип блока породы.
  */
 public class RockType {
-    private static final Set<RockType> ROCK_BLOCK_TYPES = new LinkedHashSet<>();
+    private static final Set<RockType> ROCK_TYPE = new LinkedHashSet<>();
 
     @Nonnull
     private final String name;
@@ -41,7 +41,7 @@ public class RockType {
             throw new RuntimeException(String.format("RockType name must contain any character: [%s]", name));
         }
 
-        if (!ROCK_BLOCK_TYPES.add(this)) {
+        if (!ROCK_TYPE.add(this)) {
             throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
         }
     }
@@ -52,7 +52,7 @@ public class RockType {
      * @return Набор всех типов блоков породы.
      */
     public static Set<RockType> getAllRockTypes() {
-        return ROCK_BLOCK_TYPES;
+        return ROCK_TYPE;
     }
 
     /**

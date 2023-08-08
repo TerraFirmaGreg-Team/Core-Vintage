@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class Rock {
 
-    private static final Set<Rock> ROCKS = new LinkedHashSet<>();
+    private static final Set<Rock> ROCK = new LinkedHashSet<>();
 
     @Nonnull
     private final String name;
@@ -38,7 +38,7 @@ public class Rock {
             throw new RuntimeException(String.format("Rock name must contain any character: [%s]", name));
         }
 
-        if (!ROCKS.add(this)) {
+        if (!ROCK.add(this)) {
             throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
         }
     }
@@ -98,7 +98,7 @@ public class Rock {
      * @return Список всех типов пород.
      */
     public static Set<Rock> getAllRock() {
-        return ROCKS;
+        return ROCK;
     }
 
     /**
@@ -108,8 +108,8 @@ public class Rock {
      * @return Экземпляр породы.
      */
     public static Rock valueOf(int i) {
-        var values = new Rock[ROCKS.size()];
-        values = ROCKS.toArray(values);
+        var values = new Rock[ROCK.size()];
+        values = ROCK.toArray(values);
 
         return i >= 0 && i < values.length ? values[i] : values[i % values.length];
     }
@@ -121,6 +121,6 @@ public class Rock {
      * @return Индекс породы.
      */
     public static int indexOf(Rock rock) {
-        return new ArrayList<>(ROCKS).indexOf(rock);
+        return new ArrayList<>(ROCK).indexOf(rock);
     }
 }

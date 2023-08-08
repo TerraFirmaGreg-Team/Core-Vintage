@@ -25,7 +25,7 @@ import static net.dries007.tfc.types.DefaultTrees.GEN_NORMAL;
  */
 public class Wood {
 
-    private static final Set<Wood> WOODS = new LinkedHashSet<>();
+    private static final Set<Wood> WOOD = new LinkedHashSet<>();
 
     @Nonnull
     private final String name;
@@ -102,7 +102,7 @@ public class Wood {
             throw new RuntimeException(String.format("Wood name must contain any character: [%s]", name));
         }
 
-        if (!WOODS.add(this)) {
+        if (!WOOD.add(this)) {
             throw new RuntimeException(String.format("Wood: [%s] already exists!", name));
         }
     }
@@ -340,7 +340,7 @@ public class Wood {
      * @return список типов дерева
      */
     public static List<Wood> getAllWood() {
-        return new ArrayList<>(WOODS);
+        return new ArrayList<>(WOOD);
     }
 
     @SideOnly(Side.CLIENT)

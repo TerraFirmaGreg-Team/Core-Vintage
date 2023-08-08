@@ -11,7 +11,7 @@ import java.util.Set;
  * Класс, представляющий вариант блока породы.
  */
 public class RockVariant {
-    private static final Set<RockVariant> ROCK_BLOCK_VARIANTS = new LinkedHashSet<>();
+    private static final Set<RockVariant> ROCK_VARIANT = new LinkedHashSet<>();
 
     @Nonnull
     private final String name;
@@ -34,7 +34,7 @@ public class RockVariant {
             throw new RuntimeException(String.format("RockVariant name must contain any character: [%s]", name));
         }
 
-        if (!ROCK_BLOCK_VARIANTS.add(this)) {
+        if (!ROCK_VARIANT.add(this)) {
             throw new RuntimeException(String.format("RockVariant: [%s] already exists!", name));
         }
     }
@@ -74,7 +74,7 @@ public class RockVariant {
      * @return Набор всех вариантов блоков породы.
      */
     public static Set<RockVariant> getAllRockVariants() {
-        return ROCK_BLOCK_VARIANTS;
+        return ROCK_VARIANT;
     }
 
     /**

@@ -62,7 +62,7 @@ public class EntityBoatTFC extends EntityBoat {
     public Item getItemBoat() {
         WoodType woodType = getWood();
         if (woodType != null) {
-            return ItemWoodBoat.get(woodType);
+            return TFCStorage.getBoatItem(woodType);
         }
         return super.getItemBoat();
     }

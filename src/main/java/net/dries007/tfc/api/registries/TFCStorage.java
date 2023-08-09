@@ -24,6 +24,8 @@ import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockBrick;
+import net.dries007.tfc.objects.items.wood.ItemWoodBoat;
+import net.dries007.tfc.objects.items.wood.ItemWoodLumber;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -47,7 +49,8 @@ public final class TFCStorage {
 
     public static final Map<RockType, ItemRock> ROCK_ITEMS = new HashMap<>();
     public static final Map<RockType, ItemRockBrick> BRICK_ITEMS = new HashMap<>();
-    public static final Map<WoodType, ItemUnfiredMold> LUMBER_ITEMS = new HashMap<>();
+    public static final Map<WoodType, ItemWoodLumber> LUMBER_ITEMS = new HashMap<>();
+    public static final Map<WoodType, ItemWoodBoat> BOAT_ITEMS = new HashMap<>();
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
 
@@ -119,6 +122,19 @@ public final class TFCStorage {
         throw new RuntimeException(String.format("Item is null: %s", rockType));
     }
 
+    @Nonnull
+    public static Item getLumberItem(@Nonnull WoodType woodType) {
+        var item = (Item) LUMBER_ITEMS.get(woodType);
+        if (item != null) return item;
+        throw new RuntimeException(String.format("Item is null: %s", woodType));
+    }
+
+    @Nonnull
+    public static Item getBoatItem(@Nonnull WoodType woodType) {
+        var item = (Item) BOAT_ITEMS.get(woodType);
+        if (item != null) return item;
+        throw new RuntimeException(String.format("Item is null: %s", woodType));
+    }
 
     @Nonnull
     public static Item getBrickItem(@Nonnull RockType rockType) {

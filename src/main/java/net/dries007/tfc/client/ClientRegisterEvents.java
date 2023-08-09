@@ -11,6 +11,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.metal.util.IMetalBlock;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.render.*;
@@ -91,22 +92,28 @@ public final class ClientRegisterEvents {
         TFCStorage.METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
 
-        for (ItemBlock itemBlock : TFCStorage.ITEM_BLOCKS)
+        for (var itemBlock : TFCStorage.ITEM_BLOCKS)
             ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName(), "normal"));
 
-        for (Block block : TFCStorage.FLUID)
+        for (var block : TFCStorage.FLUID)
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
 
 
         //=== ITEMS ==================================================================================================//
 
-        for (Item item : TFCStorage.ROCK_ITEMS.values())
+        for (var item : TFCStorage.ROCK_ITEMS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (Item item : TFCStorage.BRICK_ITEMS.values())
+        for (var item : TFCStorage.BRICK_ITEMS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (Item item : TFCStorage.ITEM)
+        for (var item : TFCStorage.LUMBER_ITEMS.values())
+            item.onModelRegister();
+
+        for (var item : TFCStorage.BOAT_ITEMS.values())
+            item.onModelRegister();
+
+        for (var item : TFCStorage.ITEM)
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
         //=== TESRs ==================================================================================================//
@@ -340,6 +347,18 @@ public final class ClientRegisterEvents {
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 BlocksTFC.getAllFruitTreeLeavesBlocks()
                         .toArray(new BlockFruitTreeLeaves[0]));
+
+        itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getWoodType().getColor(),
+                TFCStorage.LUMBER_ITEMS.values()
+                        .stream()
+                        .map(s -> (Item) s)
+                        .toArray(Item[]::new));
+
+        itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getWoodType().getColor(),
+                TFCStorage.BOAT_ITEMS.values()
+                        .stream()
+                        .map(s -> (Item) s)
+                        .toArray(Item[]::new));
 
         //=== Metal ==================================================================================================//
 

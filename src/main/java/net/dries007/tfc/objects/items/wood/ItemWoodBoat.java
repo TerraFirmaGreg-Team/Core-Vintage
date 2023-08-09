@@ -1,12 +1,16 @@
 package net.dries007.tfc.objects.items.wood;
 
-import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,43 +25,44 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class ItemWoodBoat extends ItemTFC {
-    private static final Map<WoodType, ItemWoodBoat> MAP = new HashMap<>();
+import static net.dries007.tfc.TerraFirmaCraft.*;
+
+public class ItemWoodBoat extends ItemTFC implements IHasModel, IWoodItem {
+
     private final WoodType woodType;
 
     public ItemWoodBoat(WoodType woodType) {
         this.woodType = woodType;
-        if (MAP.put(woodType, this) != null) throw new IllegalStateException("There can only be one.");
+
+        setRegistryName(getRegistryLocation("boat"));
+        setTranslationKey(getTranslationName("boat"));
+
+        OreDictionaryHelper.register(this, "boat");
+        OreDictionaryHelper.register(this, "boat", woodType.toString());
     }
 
-    public static ItemWoodBoat get(WoodType woodType) {
-        return MAP.get(woodType);
-    }
-
-    public WoodType getWood() {
+    @Nonnull
+    @Override
+    public WoodType getWoodType() {
         return woodType;
     }
 
     @Nonnull
     @Override
     public Size getSize(@Nonnull ItemStack stack) {
-        return Size.LARGE; // Stored in chests
+        return Size.LARGE;
     }
 
     @Nonnull
     @Override
     public Weight getWeight(@Nonnull ItemStack stack) {
-        return Weight.MEDIUM; // Stacksize = 16
+        return Weight.MEDIUM;
     }
 
     @Override
@@ -68,8 +73,9 @@ public class ItemWoodBoat extends ItemTFC {
     /**
      * Copy from vanilla ItemBoat, but setting EntityBoatTFC's wood type
      */
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         float f = 1.0F;
         float f1 = playerIn.prevRotationPitch + (playerIn.rotationPitch - playerIn.prevRotationPitch);
@@ -132,5 +138,13 @@ public class ItemWoodBoat extends ItemTFC {
                 }
             }
         }
+    }
+
+    @Override
+    public void onModelRegister() {
+        ModelLoader.setCustomModelResourceLocation(
+                this,
+                0,
+                new ModelResourceLocation(getResourceLocation("boat"), "inventory"));
     }
 }

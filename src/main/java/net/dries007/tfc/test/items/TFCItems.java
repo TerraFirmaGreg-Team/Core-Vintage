@@ -3,9 +3,12 @@ package net.dries007.tfc.test.items;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.objects.items.*;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockBrick;
+import net.dries007.tfc.objects.items.wood.ItemWoodBoat;
+import net.dries007.tfc.objects.items.wood.ItemWoodLumber;
 import net.minecraft.item.Item;
 
 import static net.dries007.tfc.api.registries.TFCStorage.*;
@@ -50,14 +53,13 @@ public class TFCItems {
 
         //=== ItemWood ===============================================================================================//
 
-        /*
         for (var woodType : WoodType.getWoodTypes()) {
-            if (BRICK_ITEM.put(rock, new ItemRockBrick(rock)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", rock));
+            if (LUMBER_ITEMS.put(woodType, new ItemWoodLumber(woodType)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s", woodType));
 
-            if (ROCK_ITEM.put(rock, new ItemRock(rock)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", rock));
-        }*/
+            if (BOAT_ITEMS.put(woodType, new ItemWoodBoat(woodType)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s", woodType));
+        }
 
         //=== ItemMisc ===============================================================================================//
 

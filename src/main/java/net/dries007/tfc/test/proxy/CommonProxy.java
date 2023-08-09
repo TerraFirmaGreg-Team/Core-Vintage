@@ -148,6 +148,9 @@ public class CommonProxy {
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
+        for (var lumberItem : LUMBER_ITEMS.values()) r.register(lumberItem);
+        for (var boatItem : BOAT_ITEMS.values()) r.register(boatItem);
+
         //=== Metal ==================================================================================================//
 
         for (var metalTypeBlock : METAL_BLOCKS.values()) {

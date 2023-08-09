@@ -20,7 +20,7 @@ public class ItemPowder extends ItemTFC {
         this.powder = powder;
         if (MAP.put(powder, this) != null) throw new IllegalStateException("There can only be one.");
         setMaxDamage(0);
-        OreDictionaryHelper.register(this, "dust", powder);
+        OreDictionaryHelper.register(this, "dust", powder.toString());
         if (powder == Powder.LAPIS_LAZULI) {
             OreDictionaryHelper.register(this, "dust", "lapis");
         }

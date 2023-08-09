@@ -44,8 +44,8 @@ public class ItemRock extends ItemTFC implements IRockItem {
 
 
         OreDictionaryHelper.register(this, "rock");
-        OreDictionaryHelper.register(this, "rock", rockType);
-        OreDictionaryHelper.register(this, "rock", rockType.getRockCategory());
+        OreDictionaryHelper.register(this, "rock", rockType.toString());
+        OreDictionaryHelper.register(this, "rock", rockType.getRockCategory().toString());
 
         if (rockType.isFlux())
             OreDictionaryHelper.register(this, "rock", "flux");

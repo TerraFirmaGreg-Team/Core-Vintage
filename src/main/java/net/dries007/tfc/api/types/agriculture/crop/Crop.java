@@ -1,6 +1,5 @@
-package net.dries007.tfc.api.types.agriculture;
+package net.dries007.tfc.api.types.agriculture.crop;
 
-import net.dries007.tfc.api.types.agriculture.util.ICrop;
 import net.dries007.tfc.api.types.food.Food;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropSimple;
@@ -28,7 +27,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.api.types.agriculture.Crop.CropType.*;
+import static net.dries007.tfc.api.types.agriculture.crop.Crop.CropType.*;
 
 public enum Crop implements ICrop {
     // these definitions are defined in the spreadsheet at

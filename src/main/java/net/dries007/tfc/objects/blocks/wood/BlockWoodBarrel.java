@@ -3,18 +3,13 @@ package net.dries007.tfc.objects.blocks.wood;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneComparator;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,7 +20,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -45,23 +39,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockWoodBarrel extends Block implements IItemSize, IWoodBlock {
+public class BlockWoodBarrel extends BlockWood implements IItemSize {
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
-
     public BlockWoodBarrel(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-        super(Material.WOOD);
+        super(woodBlockVariant, woodType);
 
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
-
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.WOOD);
-        setSoundType(SoundType.WOOD);
         setHardness(2F);
         setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
     }
@@ -83,21 +67,6 @@ public class BlockWoodBarrel extends Block implements IItemSize, IWoodBlock {
         }
     }
 
-    @Override
-    public WoodBlockVariant getWoodBlockVariant() {
-        return woodBlockVariant;
-    }
-
-    @Override
-    public WoodType getWoodType() {
-        return woodType;
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockBarrel(this);
-    }
 
     @Nonnull
     @Override

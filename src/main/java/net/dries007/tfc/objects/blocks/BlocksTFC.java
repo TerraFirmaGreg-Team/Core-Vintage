@@ -2,9 +2,9 @@ package net.dries007.tfc.objects.blocks;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
-import net.dries007.tfc.api.types.agriculture.BerryBush;
-import net.dries007.tfc.api.types.agriculture.Crop;
-import net.dries007.tfc.api.types.agriculture.FruitTree;
+import net.dries007.tfc.api.types.agriculture.bush.BerryBush;
+import net.dries007.tfc.api.types.agriculture.crop.Crop;
+import net.dries007.tfc.api.types.agriculture.fruit.FruitTree;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;

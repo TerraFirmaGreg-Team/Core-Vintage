@@ -7,7 +7,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.agriculture.Crop;
+import net.dries007.tfc.api.types.agriculture.crop.Crop;
 import net.dries007.tfc.api.types.food.Food;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.objects.Powder;

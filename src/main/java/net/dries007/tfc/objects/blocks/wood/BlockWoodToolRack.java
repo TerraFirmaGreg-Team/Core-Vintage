@@ -3,25 +3,16 @@ package net.dries007.tfc.objects.blocks.wood;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
-import net.dries007.tfc.client.CustomStateMap;
-import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TEToolRack;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -33,57 +24,29 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
-import static net.minecraft.block.material.Material.WOOD;
 
 @ParametersAreNonnullByDefault
-public class BlockWoodToolRack extends Block implements IItemSize, IWoodBlock {
+public class BlockWoodToolRack extends BlockWood implements IItemSize {
     protected static final AxisAlignedBB RACK_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
     protected static final AxisAlignedBB RACK_WEST_AABB = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
     protected static final AxisAlignedBB RACK_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
     protected static final AxisAlignedBB RACK_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
 
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
 
     public BlockWoodToolRack(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-        super(WOOD, MapColor.AIR);
+        super(woodBlockVariant, woodType);
 
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
-
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.WOOD);
-        setSoundType(SoundType.WOOD);
         setHarvestLevel("axe", 0);
         setHardness(0.5f);
         setResistance(3f);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-    }
-
-    @Override
-    public WoodBlockVariant getWoodBlockVariant() {
-        return woodBlockVariant;
-    }
-
-    @Override
-    public WoodType getWoodType() {
-        return woodType;
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        this.setDefaultState(this.blockState.getBaseState()
+                .withProperty(FACING, EnumFacing.NORTH));
     }
 
     @Nonnull
@@ -239,17 +202,5 @@ public class BlockWoodToolRack extends Block implements IItemSize, IWoodBlock {
             slot += 2;
         }
         return slot;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
-
-        for (IBlockState state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(), "normal"));
-        }
     }
 }

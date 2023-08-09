@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.agriculture.util;
+package net.dries007.tfc.api.types.agriculture.crop;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;

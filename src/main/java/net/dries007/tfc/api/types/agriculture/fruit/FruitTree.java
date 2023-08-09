@@ -1,6 +1,5 @@
-package net.dries007.tfc.api.types.agriculture;
+package net.dries007.tfc.api.types.agriculture.fruit;
 
-import net.dries007.tfc.api.types.agriculture.util.IFruitTree;
 import net.dries007.tfc.api.types.food.Food;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;

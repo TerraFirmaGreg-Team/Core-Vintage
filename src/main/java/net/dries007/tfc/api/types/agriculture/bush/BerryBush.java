@@ -1,6 +1,5 @@
-package net.dries007.tfc.api.types.agriculture;
+package net.dries007.tfc.api.types.agriculture.bush;
 
-import net.dries007.tfc.api.types.agriculture.util.IBerryBush;
 import net.dries007.tfc.api.types.food.Food;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -9,7 +8,7 @@ import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
 import net.minecraft.item.ItemStack;
 
-import static net.dries007.tfc.api.types.agriculture.util.IBerryBush.Size.*;
+import static net.dries007.tfc.api.types.agriculture.bush.IBerryBush.Size.*;
 
 public enum BerryBush implements IBerryBush {
     BLACKBERRY(Food.BLACKBERRY, Month.MAY, 4, 7f, 20f, 100f, 400f, 0.8f, LARGE, true),

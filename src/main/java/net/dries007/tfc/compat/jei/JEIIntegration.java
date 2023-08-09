@@ -26,8 +26,6 @@ import net.dries007.tfc.compat.jei.categories.*;
 import net.dries007.tfc.compat.jei.util.TFCInventoryGuiHandler;
 import net.dries007.tfc.compat.jei.wrappers.*;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalAnvil;
-import net.dries007.tfc.objects.blocks.wood.BlockWoodBarrel;
-import net.dries007.tfc.objects.blocks.wood.BlockWoodLoom;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.items.ItemAnimalHide.HideType;
@@ -311,7 +309,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(leatherknapRecipes, KNAP_LEATHER_UID);
 
         // Stone Knapping Recipes
-        for (var rock : RockType.getAllRockTypes()) {
+        for (var rock : RockType.getRockTypes()) {
             registry.addRecipeCatalyst(new ItemStack(TFCStorage.getRockItem(rock)), KNAP_STONE_UID);
         }
 

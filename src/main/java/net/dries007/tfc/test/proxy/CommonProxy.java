@@ -63,13 +63,13 @@ public class CommonProxy {
 
         //=== Alabaster ==============================================================================================//
 
-        for (var alabasterBlock : ALABASTER_BLOCK.values()) {
+        for (var alabasterBlock : ALABASTER_BLOCKS.values()) {
             r.register(alabasterBlock);
         }
 
         //=== Groundcover ============================================================================================//
 
-        for (var groundcoverBlock : GROUNDCOVER_BLOCK.values()) {
+        for (var groundcoverBlock : GROUNDCOVER_BLOCKS.values()) {
             r.register(groundcoverBlock);
         }
 
@@ -124,8 +124,8 @@ public class CommonProxy {
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
-        for (var rockItem : ROCK_ITEM.values()) r.register(rockItem);
-        for (var brickItem : BRICK_ITEM.values()) r.register(brickItem);
+        for (var rockItem : ROCK_ITEMS.values()) r.register(rockItem);
+        for (var brickItem : BRICK_ITEMS.values()) r.register(brickItem);
 
         //=== Soil ===================================================================================================//
 
@@ -157,7 +157,7 @@ public class CommonProxy {
 
         //=== Alabaster ==============================================================================================//
 
-        for (var alabasterBlock : ALABASTER_BLOCK.values()) {
+        for (var alabasterBlock : ALABASTER_BLOCKS.values()) {
             r.register(createItemBlock(alabasterBlock));
         }
 

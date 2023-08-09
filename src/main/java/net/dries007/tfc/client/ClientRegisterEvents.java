@@ -86,8 +86,8 @@ public final class ClientRegisterEvents {
         TFCStorage.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.ALABASTER_BLOCK.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.GROUNDCOVER_BLOCK.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.ALABASTER_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.GROUNDCOVER_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
 
@@ -100,10 +100,10 @@ public final class ClientRegisterEvents {
 
         //=== ITEMS ==================================================================================================//
 
-        for (Item item : TFCStorage.ROCK_ITEM.values())
+        for (Item item : TFCStorage.ROCK_ITEMS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (Item item : TFCStorage.BRICK_ITEM.values())
+        for (Item item : TFCStorage.BRICK_ITEMS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
         for (Item item : TFCStorage.ITEM)

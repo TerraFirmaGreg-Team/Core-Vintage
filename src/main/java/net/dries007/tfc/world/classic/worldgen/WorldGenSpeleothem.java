@@ -117,7 +117,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
     @Nullable
     private Block getSpeleothemType(IBlockState state) {
         var block = state.getBlock();
-        for (var rock : RockType.getAllRockTypes()) {
+        for (var rock : RockType.getRockTypes()) {
             if (TFCStorage.getRockBlock(RAW, rock) == block) {
                 return TFCStorage.getRockBlock(RAW, rock);
             }

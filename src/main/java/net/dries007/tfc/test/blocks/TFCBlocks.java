@@ -68,7 +68,7 @@ public class TFCBlocks {
 
         //=== Rock ===================================================================================================//
 
-        for (var rockType : RockType.getAllRockTypes()) {
+        for (var rockType : RockType.getRockTypes()) {
             for (var rockBlockVariant : RockBlockVariant.getAllRockTypes()) {
                 var rockTypeBlock = rockBlockVariant.applyToFactory(rockType);
 
@@ -128,10 +128,10 @@ public class TFCBlocks {
                 var alabasterColorBlock = new BlockAlabaster(rockVariant, dyeColor);
                 var alabasterBlock = new BlockAlabaster(rockVariant);
 
-                if (ALABASTER_BLOCK.put(new Pair<>(dyeColor.getName(), rockVariant), alabasterColorBlock) != null)
+                if (ALABASTER_BLOCKS.put(new Pair<>(dyeColor.getName(), rockVariant), alabasterColorBlock) != null)
                     throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", dyeColor, rockVariant));
 
-                ALABASTER_BLOCK.put(new Pair<>("plain", rockVariant), alabasterBlock);
+                ALABASTER_BLOCKS.put(new Pair<>("plain", rockVariant), alabasterBlock);
             }
         }
 
@@ -140,7 +140,7 @@ public class TFCBlocks {
         for (GroundcoverType groundcoverType : GroundcoverType.values()) {
             var groundcoverBlock = new BlockGroundcover(groundcoverType);
 
-            if (GROUNDCOVER_BLOCK.put(groundcoverType, groundcoverBlock) != null)
+            if (GROUNDCOVER_BLOCKS.put(groundcoverType, groundcoverBlock) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", groundcoverType, groundcoverBlock));
         }
 

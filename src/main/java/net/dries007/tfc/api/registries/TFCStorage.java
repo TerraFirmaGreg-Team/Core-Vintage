@@ -41,12 +41,13 @@ public final class TFCStorage {
     public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantVariant, Plant>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCK = new LinkedHashMap<>();
+    public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<MetalVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
-    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCK = new HashMap<>();
+    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new HashMap<>();
 
-    public static final Map<RockType, ItemRock> ROCK_ITEM = new HashMap<>();
-    public static final Map<RockType, ItemRockBrick> BRICK_ITEM = new HashMap<>();
+    public static final Map<RockType, ItemRock> ROCK_ITEMS = new HashMap<>();
+    public static final Map<RockType, ItemRockBrick> BRICK_ITEMS = new HashMap<>();
+    public static final Map<WoodType, ItemUnfiredMold> LUMBER_ITEMS = new HashMap<>();
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
 
@@ -92,14 +93,14 @@ public final class TFCStorage {
 
     @Nonnull
     public static Block getAlabasterBlock(@Nonnull String string, @Nonnull RockBlockVariant rockBlockVariant) {
-        var block = (Block) ALABASTER_BLOCK.get(new Pair<>(string, rockBlockVariant));
+        var block = (Block) ALABASTER_BLOCKS.get(new Pair<>(string, rockBlockVariant));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block is null: %s, %s", string, rockBlockVariant));
     }
 
     @Nonnull
     public static Block getGroundcoverBlock(@Nonnull GroundcoverType groundcoverType) {
-        var block = (Block) GROUNDCOVER_BLOCK.get(groundcoverType);
+        var block = (Block) GROUNDCOVER_BLOCKS.get(groundcoverType);
         if (block != null) return block;
         throw new RuntimeException(String.format("Block is null: %s", groundcoverType));
     }
@@ -113,7 +114,7 @@ public final class TFCStorage {
 
     @Nonnull
     public static Item getRockItem(@Nonnull RockType rockType) {
-        var item = (Item) ROCK_ITEM.get(rockType);
+        var item = (Item) ROCK_ITEMS.get(rockType);
         if (item != null) return item;
         throw new RuntimeException(String.format("Item is null: %s", rockType));
     }
@@ -121,7 +122,7 @@ public final class TFCStorage {
 
     @Nonnull
     public static Item getBrickItem(@Nonnull RockType rockType) {
-        var item = (Item) BRICK_ITEM.get(rockType);
+        var item = (Item) BRICK_ITEMS.get(rockType);
         if (item != null) return item;
         throw new RuntimeException(String.format("Item is null: %s", rockType));
     }

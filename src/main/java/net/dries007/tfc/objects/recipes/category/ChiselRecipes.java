@@ -16,7 +16,7 @@ public class ChiselRecipes {
         var registry = TFCRegistries.CHISEL;
 
         // Rock smoothing
-        for (RockType rockType : RockType.getAllRockTypes()) {
+        for (RockType rockType : RockType.getRockTypes()) {
             var rawRock = TFCStorage.getRockBlock(RAW, rockType);
             var smoothRock = TFCStorage.getRockBlock(SMOOTH, rockType).getDefaultState();
             registry.register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rockType));

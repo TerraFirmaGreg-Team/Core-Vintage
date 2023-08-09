@@ -40,13 +40,24 @@ public class TFCItems {
 
         //=== ItemRock ===============================================================================================//
 
-        for (var rock : RockType.getAllRockTypes()) {
+        for (var rockType : RockType.getRockTypes()) {
+            if (BRICK_ITEMS.put(rockType, new ItemRockBrick(rockType)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s", rockType));
+
+            if (ROCK_ITEMS.put(rockType, new ItemRock(rockType)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s", rockType));
+        }
+
+        //=== ItemWood ===============================================================================================//
+
+        /*
+        for (var woodType : WoodType.getWoodTypes()) {
             if (BRICK_ITEM.put(rock, new ItemRockBrick(rock)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s", rock));
 
             if (ROCK_ITEM.put(rock, new ItemRock(rock)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s", rock));
-        }
+        }*/
 
         //=== ItemMisc ===============================================================================================//
 

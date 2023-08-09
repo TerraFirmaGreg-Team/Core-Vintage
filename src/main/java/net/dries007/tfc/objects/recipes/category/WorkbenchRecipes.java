@@ -75,7 +75,7 @@ public class WorkbenchRecipes {
     private static void registerWoodRecipes() {
         for (var woodType : WoodType.getWoodTypes()) {
             // Barrel
-            registerRecipe(
+            register(
                     "barrel_" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.BARREL, woodType)),
                     "L L", "L L", "LLL",
@@ -84,7 +84,7 @@ public class WorkbenchRecipes {
         }
     }
 
-    private static void registerRecipe(String recipeName, @Nonnull ItemStack output, Object... recipePattern) {
+    private static void register(String recipeName, @Nonnull ItemStack output, Object... recipePattern) {
         var recipeLocation = new ResourceLocation(MOD_ID, recipeName);
         workbenchRegistry.register(new ShapedOreRecipe(recipeLocation, output, recipePattern).setRegistryName(recipeLocation));
     }

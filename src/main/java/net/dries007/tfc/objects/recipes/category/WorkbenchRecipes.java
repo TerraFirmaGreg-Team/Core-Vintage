@@ -4,6 +4,9 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.loaders.recipe.handlers.OreRecipeHandler;
+import net.dries007.tfc.api.registries.TFCStorage;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
@@ -12,20 +15,27 @@ import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.recipes.UnmoldRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.registries.IForgeRegistry;
+
+import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class WorkbenchRecipes {
 
+    private static final IForgeRegistry<IRecipe> workbenchRegistry = ForgeRegistries.RECIPES;
 
-    public static void onRegisterWorkbenchRecipes(RegistryEvent.Register<IRecipe> event) {
-        registerUnmoldRecipes(event);
+    public static void onRegisterWorkbenchRecipes() {
+        registerUnmoldRecipes();
         registerProcessingRecipes();
+        registerWoodRecipes();
     }
 
-    private static void registerUnmoldRecipes(RegistryEvent.Register<IRecipe> event) {
-        var registry = event.getRegistry();
+    private static void registerUnmoldRecipes() {
+        var registry = ForgeRegistries.RECIPES;
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
             for (var orePrefix : OrePrefix.values()) {
@@ -60,5 +70,21 @@ public class WorkbenchRecipes {
         TFGOrePrefix.oreSchist.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
         TFGOrePrefix.oreShale.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
         TFGOrePrefix.oreSlate.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+    }
+
+    private static void registerWoodRecipes() {
+        for (var woodType : WoodType.getWoodTypes()) {
+            // Barrel
+            registerRecipe(
+                    "barrel_" + woodType,
+                    new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.BARREL, woodType)),
+                    "L L", "L L", "LLL",
+                    'L', new ItemStack(TFCStorage.getLumberItem(woodType))
+            );
+        }
+    }
+
+    private static void registerRecipe(String recipeName, @Nonnull ItemStack output, Object... recipePattern) {
+        workbenchRegistry.register(new ShapedOreRecipe(new ResourceLocation(MOD_ID), output, recipePattern).setRegistryName(resourceLocation));
     }
 }

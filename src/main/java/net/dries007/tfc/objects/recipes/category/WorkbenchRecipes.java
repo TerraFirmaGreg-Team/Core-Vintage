@@ -85,6 +85,7 @@ public class WorkbenchRecipes {
     }
 
     private static void registerRecipe(String recipeName, @Nonnull ItemStack output, Object... recipePattern) {
-        workbenchRegistry.register(new ShapedOreRecipe(new ResourceLocation(MOD_ID), output, recipePattern).setRegistryName(resourceLocation));
+        var recipeLocation = new ResourceLocation(MOD_ID, recipeName);
+        workbenchRegistry.register(new ShapedOreRecipe(recipeLocation, output, recipePattern).setRegistryName(recipeLocation));
     }
 }

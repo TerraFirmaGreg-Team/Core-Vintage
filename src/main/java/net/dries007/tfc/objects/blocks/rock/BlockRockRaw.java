@@ -9,6 +9,7 @@ import net.dries007.tfc.api.types.rock.variant.RockBlockVariants;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.util.GemsFromRawRocks;
 import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -45,8 +46,9 @@ public class BlockRockRaw extends BlockRock {
         // Copy as each raw stone has an unique resultingState
         var spec = new FallingBlockManager.Specification(FallingBlockManager.Specification.COLLAPSABLE_ROCK);
         spec.setResultingState(TFCStorage.getRockBlock(RockBlockVariants.COBBLE, rockType).getDefaultState());
-
         FallingBlockManager.registerFallable(this, spec);
+
+        OreDictionaryHelper.register(this, "stone");
     }
 
     @Nonnull

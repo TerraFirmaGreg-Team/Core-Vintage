@@ -12,6 +12,7 @@ import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.inventory.capability.TFCInventoryLargeChest;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TEChestTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
@@ -53,7 +54,9 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
         setCreativeTab(CreativeTabsTFC.WOOD);
         setHardness(2.5F);
         setSoundType(SoundType.WOOD);
+
         Blocks.FIRE.setFireInfo(this, 5, 20);
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override

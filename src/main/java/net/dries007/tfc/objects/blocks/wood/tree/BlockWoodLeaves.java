@@ -10,6 +10,7 @@ import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -53,12 +54,14 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
-
-        setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
+        setTickRandomly(true);
+        setDefaultState(blockState.getBaseState()
+                .withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
 
         leavesFancy = true; // Fast / Fancy graphics works correctly
+
         Blocks.FIRE.setFireInfo(this, 30, 60);
-        setTickRandomly(true);
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override

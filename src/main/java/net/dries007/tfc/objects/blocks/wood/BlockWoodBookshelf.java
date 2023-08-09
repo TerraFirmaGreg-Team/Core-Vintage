@@ -15,7 +15,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -25,14 +24,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
-    private final WoodBlockVariant woodVariant;
+    private final WoodBlockVariant woodBlockVariant;
     private final WoodType woodType;
 
-    public BlockWoodBookshelf(WoodBlockVariant woodVariant, WoodType woodType) {
-        this.woodVariant = woodVariant;
+    public BlockWoodBookshelf(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+        this.woodBlockVariant = woodBlockVariant;
         this.woodType = woodType;
 
         setRegistryName(getRegistryLocation());
@@ -43,14 +40,14 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         setResistance(5.0F);
         setHarvestLevel("axe", 0);
 
-        OreDictionaryHelper.register(this, "bookshelf");
-        OreDictionaryHelper.register(this, "bookshelf", woodType.toString());
         Blocks.FIRE.setFireInfo(this, 30, 20);
+
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override
     public WoodBlockVariant getWoodBlockVariant() {
-        return woodVariant;
+        return woodBlockVariant;
     }
 
     @Override
@@ -82,7 +79,7 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-            return new ModelResourceLocation(getResourceLocation(), getPropertyString(state.getProperties()));
+                return new ModelResourceLocation(getResourceLocation(), getPropertyString(state.getProperties()));
             }
         });
 

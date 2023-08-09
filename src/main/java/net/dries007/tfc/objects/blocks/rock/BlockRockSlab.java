@@ -7,6 +7,7 @@ import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariants;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.rock.ItemRockSlab;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -142,11 +143,9 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
             return TFCStorage.getRockBlock(RockBlockVariants.RAW, rockType);
         } else if (rockBlockVariant == RockBlockVariants.SLAB_COBBLE || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_COBBLE) {
             return TFCStorage.getRockBlock(RockBlockVariants.COBBLE, rockType);
-        }
-        else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_SMOOTH) {
+        } else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_SMOOTH) {
             return TFCStorage.getRockBlock(RockBlockVariants.SMOOTH, rockType);
-        }
-        else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_BRICK) {
+        } else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_BRICK) {
             return TFCStorage.getRockBlock(RockBlockVariants.BRICK, rockType);
         }
 
@@ -158,11 +157,9 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
             return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_RAW, rockType);
         } else if (rockBlockVariant == RockBlockVariants.SLAB_COBBLE) {
             return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_COBBLE, rockType);
-        }
-        else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH) {
+        } else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH) {
             return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_SMOOTH, rockType);
-        }
-        else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK) {
+        } else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK) {
             return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_BRICK, rockType);
         }
 
@@ -248,6 +245,8 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
             setHardness(getFinalHardness());
             setHarvestLevel("pickaxe", 0);
+
+            OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
         }
 
         @Override

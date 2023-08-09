@@ -1,6 +1,5 @@
 package net.dries007.tfc.objects.blocks.wood.tree;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -13,6 +12,7 @@ import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,7 +25,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
@@ -36,10 +35,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     public static final PropertyBool PLACED = PropertyBool.create("placed");
@@ -62,9 +58,10 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         setHarvestLevel("axe", 0);
         setHardness(2.0F);
         setResistance(5.0F);
+        setTickRandomly(true);
 
         Blocks.FIRE.setFireInfo(this, 5, 5);
-        setTickRandomly(true);
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override

@@ -5,6 +5,7 @@ import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -33,7 +34,9 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
         setCreativeTab(CreativeTabsTFC.WOOD);
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
+
         Blocks.FIRE.setFireInfo(this, 5, 20);
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override

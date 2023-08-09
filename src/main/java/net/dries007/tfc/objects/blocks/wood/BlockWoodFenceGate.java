@@ -14,14 +14,11 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
     private final WoodBlockVariant woodBlockVariant;
@@ -39,7 +36,9 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
         setHarvestLevel("axe", 0);
         setHardness(2.0F);
         setResistance(15.0F);
+
         Blocks.FIRE.setFireInfo(this, 5, 20);
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override

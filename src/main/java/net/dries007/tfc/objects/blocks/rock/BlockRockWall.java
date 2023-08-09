@@ -5,6 +5,7 @@ import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -39,13 +40,15 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
         this.rockType = rockType;
 
 
-        this.setRegistryName(getRegistryLocation());
-        this.setTranslationKey(getTranslationName());
-        this.setCreativeTab(CreativeTabsTFC.ROCK);
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
+        setCreativeTab(CreativeTabsTFC.ROCK);
 
-        this.setSoundType(SoundType.STONE);
-        this.setHardness(getFinalHardness());
-        this.setHarvestLevel("pickaxe", 0);
+        setSoundType(SoundType.STONE);
+        setHardness(getFinalHardness());
+        setHarvestLevel("pickaxe", 0);
+
+        OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
     }
 
     @Nonnull

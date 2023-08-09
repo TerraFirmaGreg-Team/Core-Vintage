@@ -11,6 +11,7 @@ import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TELoom;
 import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -66,7 +67,9 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
         setHarvestLevel("axe", 0);
         setHardness(0.5f);
         setResistance(3f);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override

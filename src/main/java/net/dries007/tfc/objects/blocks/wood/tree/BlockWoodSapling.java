@@ -9,6 +9,7 @@ import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -56,7 +57,9 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
         setDefaultState(blockState.getBaseState().withProperty(STAGE, 0));
         setSoundType(SoundType.PLANT);
         setHardness(0.0F);
+
         Blocks.FIRE.setFireInfo(this, 5, 20);
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override

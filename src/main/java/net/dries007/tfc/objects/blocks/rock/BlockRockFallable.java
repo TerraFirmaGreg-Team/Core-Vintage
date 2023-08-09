@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.blocks.rock;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -23,6 +24,8 @@ public abstract class BlockRockFallable extends BlockRock {
 
     public BlockRockFallable(Material material, RockBlockVariant rockBlockVariant, RockType rockType) {
         super(material, rockBlockVariant, rockType);
+
+        OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
     }
 
     @SideOnly(Side.CLIENT)

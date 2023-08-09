@@ -9,24 +9,28 @@ public class SoilType {
     private static final Set<SoilType> SOIL_TYPES = new LinkedHashSet<>();
 
     @Nonnull
-    private final String soilTypeName;
+    private final String name;
 
-    public SoilType(@Nonnull String soilTypeName) {
-        this.soilTypeName = soilTypeName;
+    public SoilType(@Nonnull String name) {
+        this.name = name;
 
-        if (soilTypeName.isEmpty()) {
-            throw new RuntimeException(String.format("Rock name must contain any character: [%s]", soilTypeName));
+        if (name.isEmpty()) {
+            throw new RuntimeException(String.format("Rock name must contain any character: [%s]", name));
         }
 
         if (!SOIL_TYPES.add(this)) {
-            throw new RuntimeException(String.format("Rock: [%s] already exists!", soilTypeName));
+            throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
         }
     }
 
     @Nonnull
     @Override
     public String toString() {
-        return soilTypeName;
+        return name;
+    }
+
+    public String name() {
+        return name;
     }
 
     public static Set<SoilType> getSoilTypes() {

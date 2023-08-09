@@ -63,6 +63,10 @@ public class RockType {
         return name;
     }
 
+    public String name() {
+        return name;
+    }
+
     /**
      * Возвращает категорию породы.
      *

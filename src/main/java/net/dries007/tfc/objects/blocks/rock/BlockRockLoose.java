@@ -42,9 +42,7 @@ public class BlockRockLoose extends BlockRock {
     public BlockRockLoose(RockBlockVariant rockBlockVariant, RockType rockType) {
         super(rockBlockVariant, rockType);
 
-        this.setHardness(0.1f);
-
-
+        setHardness(0.1f);
         setDefaultState(blockState.getBaseState().withProperty(AXIS, EnumFacing.NORTH));
     }
 

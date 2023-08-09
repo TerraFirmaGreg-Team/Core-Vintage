@@ -40,7 +40,8 @@ public class OreDictionaryHelper {
      */
     public static void register(Block block, String... parts) {
         for (String partBlock : parts) {
-            MAP_BLOCK_ORE.put(block, partBlock);
+            var oreDict = convertString(partBlock);
+            MAP_BLOCK_ORE.put(block, oreDict);
         }
     }
 
@@ -49,8 +50,29 @@ public class OreDictionaryHelper {
      */
     public static void register(Item item, String... parts) {
         for (String partItem : parts) {
-            MAP_ITEM_ORE.put(item, partItem);
+            var oreDict = convertString(partItem);
+            MAP_ITEM_ORE.put(item, oreDict);
         }
+    }
+
+
+    public static String convertString(String string) {
+        StringBuilder result = new StringBuilder();
+        boolean isFirstChar = true;
+        for (int i = 0; i < string.length(); i++) {
+            if (string.charAt(i) == '_' || string.charAt(i) == '/')
+                continue;
+            if (isFirstChar) {
+                result.append(string.charAt(i));
+                isFirstChar = false;
+            } else if (string.charAt(i - 1) == '_' || string.charAt(i - 1) == '/') {
+                result.append(Character.toUpperCase(string.charAt(i)));
+            } else {
+                result.append(string.charAt(i));
+            }
+        }
+
+        return result.toString();
     }
 
     public static void init_old() {

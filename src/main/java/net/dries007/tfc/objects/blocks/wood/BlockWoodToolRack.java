@@ -7,6 +7,7 @@ import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.objects.te.TEToolRack;
 import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -45,8 +46,10 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
         setHarvestLevel("axe", 0);
         setHardness(0.5f);
         setResistance(3f);
-        this.setDefaultState(this.blockState.getBaseState()
+        setDefaultState(this.blockState.getBaseState()
                 .withProperty(FACING, EnumFacing.NORTH));
+
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Nonnull

@@ -5,6 +5,7 @@ import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -35,6 +36,8 @@ public abstract class BlockWood extends Block implements IWoodBlock {
         setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
         setSoundType(SoundType.WOOD);
+
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override

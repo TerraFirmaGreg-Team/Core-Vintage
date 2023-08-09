@@ -25,8 +25,8 @@ public class RockBlockVariant {
     /**
      * Создает экземпляр класса RockType с указанными параметрами.
      *
-     * @param name                Название типа блока породы.
-     * @param factory      Функция-фабрика для создания блока породы по умолчанию.
+     * @param name    Название типа блока породы.
+     * @param factory Функция-фабрика для создания блока породы по умолчанию.
      */
     public RockBlockVariant(@Nonnull String name, float baseHardness, @Nonnull BiFunction<RockBlockVariant, RockType, IRockBlock> factory) {
         this.name = name;
@@ -58,6 +58,10 @@ public class RockBlockVariant {
      */
     @Override
     public String toString() {
+        return name;
+    }
+
+    public String name() {
         return name;
     }
 

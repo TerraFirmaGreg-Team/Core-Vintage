@@ -13,28 +13,32 @@ public class WoodBlockVariant {
     private static final Set<WoodBlockVariant> WOOD_VARIANTS = new LinkedHashSet<>();
 
     @Nonnull
-    private final String woodName;
+    private final String name;
 
     @Nonnull
     private final BiFunction<WoodBlockVariant, WoodType, IWoodBlock> factory;
 
-    public WoodBlockVariant(@Nonnull String woodName, @Nonnull BiFunction<WoodBlockVariant, WoodType, IWoodBlock> factory) {
-        this.woodName = woodName;
+    public WoodBlockVariant(@Nonnull String name, @Nonnull BiFunction<WoodBlockVariant, WoodType, IWoodBlock> factory) {
+        this.name = name;
         this.factory = factory;
 
-        if (woodName.isEmpty()) {
-            throw new RuntimeException(String.format("WoodVariant name must contain any character: [%s]", woodName));
+        if (name.isEmpty()) {
+            throw new RuntimeException(String.format("WoodVariant name must contain any character: [%s]", name));
         }
 
         if (!WOOD_VARIANTS.add(this)) {
-            throw new RuntimeException(String.format("WoodVariant: [%s] already exists!", woodName));
+            throw new RuntimeException(String.format("WoodVariant: [%s] already exists!", name));
         }
     }
 
     @Nonnull
     @Override
     public String toString() {
-        return woodName;
+        return name;
+    }
+
+    public String name() {
+        return name;
     }
 
     @Nonnull

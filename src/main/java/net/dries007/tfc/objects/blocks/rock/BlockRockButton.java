@@ -5,6 +5,7 @@ import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -40,6 +41,8 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
         setHardness(0.5f);
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
+
+        OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
     }
 
     @Nonnull

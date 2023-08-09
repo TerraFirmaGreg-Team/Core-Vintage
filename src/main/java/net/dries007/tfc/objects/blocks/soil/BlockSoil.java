@@ -7,6 +7,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -57,6 +58,7 @@ public abstract class BlockSoil extends Block implements ISoilBlock {
         setHardness(2.0F);
         setHarvestLevel("shovel", 0);
 
+        OreDictionaryHelper.register(this, soilBlockVariant.name(), soilType.name());
     }
 
     @Nonnull

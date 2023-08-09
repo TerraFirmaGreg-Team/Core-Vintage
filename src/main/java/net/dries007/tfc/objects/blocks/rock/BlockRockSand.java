@@ -13,7 +13,7 @@ public class BlockRockSand extends BlockRockFallable {
 
         FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL);
 
-        this.setSoundType(SoundType.SAND);
+        setSoundType(SoundType.SAND);
     }
 
 }

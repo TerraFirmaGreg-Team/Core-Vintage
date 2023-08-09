@@ -7,6 +7,7 @@ import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.container.ContainerWorkbenchTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -50,7 +51,9 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
         setSoundType(SoundType.WOOD);
         setHardness(2.0F).setResistance(5.0F);
         setHarvestLevel("axe", 0);
+
         Blocks.FIRE.setFireInfo(this, 5, 20);
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override

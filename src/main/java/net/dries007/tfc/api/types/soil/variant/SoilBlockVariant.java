@@ -15,30 +15,34 @@ public class SoilBlockVariant {
     private static final Set<SoilBlockVariant> SOIL_BLOCK_VARIANTS = new LinkedHashSet<>();
 
     @Nonnull
-    private final String soilBlockVariantName;
+    private final String name;
     @Nonnull
     private final BiFunction<SoilBlockVariant, SoilType, ISoilBlock> factory;
     @Nullable
     private final FallingBlockManager.Specification fallingSpecification;
 
-    public SoilBlockVariant(@Nonnull String soilBlockVariantName, @Nonnull BiFunction<SoilBlockVariant, SoilType, ISoilBlock> factory, @Nullable FallingBlockManager.Specification fallingSpecification) {
-        this.soilBlockVariantName = soilBlockVariantName;
+    public SoilBlockVariant(@Nonnull String name, @Nonnull BiFunction<SoilBlockVariant, SoilType, ISoilBlock> factory, @Nullable FallingBlockManager.Specification fallingSpecification) {
+        this.name = name;
         this.factory = factory;
         this.fallingSpecification = fallingSpecification;
 
-        if (soilBlockVariantName.isEmpty()) {
-            throw new RuntimeException(String.format("Rock name must contain any character: [%s]", soilBlockVariantName));
+        if (name.isEmpty()) {
+            throw new RuntimeException(String.format("Rock name must contain any character: [%s]", name));
         }
 
         if (!SOIL_BLOCK_VARIANTS.add(this)) {
-            throw new RuntimeException(String.format("Rock: [%s] already exists!", soilBlockVariantName));
+            throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
         }
     }
 
     @Nonnull
     @Override
     public String toString() {
-        return soilBlockVariantName;
+        return name;
+    }
+
+    public String name() {
+        return name;
     }
 
     @Nullable

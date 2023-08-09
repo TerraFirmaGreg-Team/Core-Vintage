@@ -15,15 +15,12 @@ import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodTrapDoor extends BlockTrapDoor implements IWoodBlock {
     private final WoodBlockVariant woodBlockVariant;
@@ -39,10 +36,9 @@ public class BlockWoodTrapDoor extends BlockTrapDoor implements IWoodBlock {
         setCreativeTab(CreativeTabsTFC.WOOD);
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
-        OreDictionaryHelper.register(this, "trapdoor", "wood");
-        //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "trapdoor", "wood", woodType.toString());
+
         Blocks.FIRE.setFireInfo(this, 5, 20);
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override

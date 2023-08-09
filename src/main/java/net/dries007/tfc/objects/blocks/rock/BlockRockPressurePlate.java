@@ -5,6 +5,7 @@ import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -36,11 +37,13 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
         this.rockBlockVariant = rockBlockVariant;
         this.rockType = rockType;
 
-        this.setCreativeTab(CreativeTabsTFC.ROCK);
-        this.setSoundType(SoundType.STONE);
-        this.setHardness(0.5f);
-        this.setRegistryName(getRegistryLocation());
-        this.setTranslationKey(getTranslationName());
+        setCreativeTab(CreativeTabsTFC.ROCK);
+        setSoundType(SoundType.STONE);
+        setHardness(0.5f);
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
+
+        OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
     }
 
     @Nonnull

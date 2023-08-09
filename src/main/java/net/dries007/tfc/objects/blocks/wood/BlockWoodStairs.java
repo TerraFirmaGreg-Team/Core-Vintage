@@ -7,6 +7,7 @@ import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -36,7 +37,9 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
 
         useNeighborBrightness = true;
         setCreativeTab(CreativeTabsTFC.WOOD);
+
         Blocks.FIRE.setFireInfo(this, 5, 20);
+        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 
     @Override

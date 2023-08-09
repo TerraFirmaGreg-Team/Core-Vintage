@@ -8,6 +8,7 @@ import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.wood.ItemWoodSlab;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -204,6 +205,8 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
             setRegistryName(getRegistryLocation());
             setTranslationKey(getTranslationName());
+
+            OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
         }
 
         @Override

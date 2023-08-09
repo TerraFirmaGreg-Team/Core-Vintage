@@ -117,6 +117,10 @@ public class WoodType {
         return name;
     }
 
+    public String name() {
+        return name;
+    }
+
     /**
      * Возвращает цвет дерева.
      *

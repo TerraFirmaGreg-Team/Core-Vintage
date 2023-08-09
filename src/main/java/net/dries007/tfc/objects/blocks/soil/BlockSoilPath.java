@@ -8,6 +8,7 @@ import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
@@ -49,6 +50,8 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
         setHardness(2.0F);
         setHarvestLevel("shovel", 0);
         setLightOpacity(255);
+
+        OreDictionaryHelper.register(this, soilBlockVariant.name(), soilType.name());
     }
 
     @Nonnull

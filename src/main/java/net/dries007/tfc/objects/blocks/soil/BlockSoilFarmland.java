@@ -8,6 +8,7 @@ import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
@@ -83,9 +84,12 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         setSoundType(SoundType.GROUND);
         setHardness(2.0F);
         setHarvestLevel("shovel", 0);
-        setDefaultState(blockState.getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
+        setDefaultState(blockState.getBaseState()
+                .withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
         setTickRandomly(true);
         setLightOpacity(255);
+
+        OreDictionaryHelper.register(this, soilBlockVariant.name(), soilType.name());
     }
 
     protected static void turnToDirt(World world, BlockPos pos) {

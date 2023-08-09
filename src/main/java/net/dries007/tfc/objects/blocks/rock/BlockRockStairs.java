@@ -5,6 +5,7 @@ import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -43,6 +44,8 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);
         useNeighborBrightness = true;
+
+        OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
     }
 
     @Nonnull

@@ -47,7 +47,7 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
 
-        OreDictionaryHelper.register(this, rockBlockVariant.toString());
+        OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
     }
 
     public BlockRock(RockBlockVariant rockBlockVariant, RockType rockType) {
@@ -92,7 +92,6 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
                 return new ModelResourceLocation(getResourceLocation(), "rocktype=" + rockType.toString());
             }
         });
-
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),

@@ -43,6 +43,7 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
         setSoundType(SoundType.WOOD);
         setHardness(3.0F);
         disableStats();
+
         // No direct item, so no oredict.
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
@@ -69,8 +70,7 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
 
         if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER) {
             return Items.AIR;
-        }
-        else if (itemBlock != null) {
+        } else if (itemBlock != null) {
             return itemBlock;
         }
 

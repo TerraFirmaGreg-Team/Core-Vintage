@@ -22,6 +22,7 @@ import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.objects.blocks.soil.peat.BlockPeat;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.test.blocks.TFCBlocks;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
@@ -90,6 +91,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 .withProperty(EAST, Boolean.FALSE)
                 .withProperty(SOUTH, Boolean.FALSE)
                 .withProperty(WEST, Boolean.FALSE));
+
+        OreDictionaryHelper.register(this, soilBlockVariant.name(), soilType.name());
     }
 
     public static void spreadGrass(World world, BlockPos pos, IBlockState us, Random rand) {

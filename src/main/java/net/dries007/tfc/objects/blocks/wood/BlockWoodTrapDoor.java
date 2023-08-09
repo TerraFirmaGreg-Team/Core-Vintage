@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.wood;
 
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -26,36 +26,33 @@ import javax.annotation.Nullable;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodTrapDoor extends BlockTrapDoor implements IWoodBlock {
-    private final WoodVariant woodVariant;
-    private final Wood wood;
-    private final ResourceLocation modelLocation;
+    private final WoodBlockVariant woodBlockVariant;
+    private final WoodType woodType;
 
-    public BlockWoodTrapDoor(WoodVariant woodVariant, Wood wood) {
+    public BlockWoodTrapDoor(WoodBlockVariant woodBlockVariant, WoodType woodType) {
         super(Material.WOOD);
-        this.woodVariant = woodVariant;
-        this.wood = wood;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+        this.woodBlockVariant = woodBlockVariant;
+        this.woodType = woodType;
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
         OreDictionaryHelper.register(this, "trapdoor", "wood");
         //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "trapdoor", "wood", wood.getName());
+        OreDictionaryHelper.register(this, "trapdoor", "wood", woodType.toString());
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
-        return woodVariant;
+    public WoodBlockVariant getWoodBlockVariant() {
+        return woodBlockVariant;
     }
 
     @Override
-    public Wood getWood() {
-        return wood;
+    public WoodType getWoodType() {
+        return woodType;
     }
 
     @Nullable
@@ -70,14 +67,14 @@ public class BlockWoodTrapDoor extends BlockTrapDoor implements IWoodBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+                return new ModelResourceLocation(getResourceLocation(), getPropertyString(state.getProperties()));
             }
         });
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
+        for (IBlockState state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation, "normal"));
+                    getMetaFromState(state),
+                    new ModelResourceLocation(getResourceLocation(), "normal"));
         }
     }
 }

@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.wood;
 
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -28,19 +28,15 @@ import javax.annotation.Nullable;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
-    private final WoodVariant woodVariant;
-    private final Wood wood;
-    private final ResourceLocation modelLocation;
+    private final WoodBlockVariant woodVariant;
+    private final WoodType woodType;
 
-    public BlockWoodBookshelf(WoodVariant woodVariant, Wood wood) {
-
+    public BlockWoodBookshelf(WoodBlockVariant woodVariant, WoodType woodType) {
         this.woodVariant = woodVariant;
-        this.wood = wood;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+        this.woodType = woodType;
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
         setSoundType(SoundType.WOOD);
         setHardness(2.0F);
@@ -48,18 +44,18 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         setHarvestLevel("axe", 0);
 
         OreDictionaryHelper.register(this, "bookshelf");
-        OreDictionaryHelper.register(this, "bookshelf", wood.getName());
+        OreDictionaryHelper.register(this, "bookshelf", woodType.toString());
         Blocks.FIRE.setFireInfo(this, 30, 20);
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
+    public WoodBlockVariant getWoodBlockVariant() {
         return woodVariant;
     }
 
     @Override
-    public Wood getWood() {
-        return wood;
+    public WoodType getWoodType() {
+        return woodType;
     }
 
     @Nullable
@@ -76,8 +72,8 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
     }
 
     @Override
-    public float getEnchantPowerBonus(World world, BlockPos pos) {
-        return 1.0F; // Same as vanilla
+    public float getEnchantPowerBonus(@Nonnull World world, @Nonnull BlockPos pos) {
+        return 1.0F;
     }
 
     @Override
@@ -86,12 +82,12 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+            return new ModelResourceLocation(getResourceLocation(), getPropertyString(state.getProperties()));
             }
         });
 
         for (IBlockState state : this.getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), this.getMetaFromState(state), new ModelResourceLocation(modelLocation, "normal"));
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), getMetaFromState(state), new ModelResourceLocation(getResourceLocation(), "normal"));
         }
     }
 }

@@ -5,8 +5,9 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.animal.util.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.util.IHuntable;
 import net.dries007.tfc.api.types.animal.util.IPredator;
-import net.dries007.tfc.api.types.soil.util.ISoilBlock;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.soil.ISoilBlock;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
@@ -47,7 +48,6 @@ import java.util.*;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.Plant.PORCINI;
-import static net.dries007.tfc.api.types.soil.SoilVariant.FARMLAND;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 /**
@@ -98,9 +98,9 @@ public class WorldRegenHandler {
                             ROCKS_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
 
                             final float density = chunkDataTFC.getFloraDensity();
-                            List<Wood> woods = chunkDataTFC.getValidTrees();
-                            int stickDensity = 3 + (int) (4f * density + 1.5f * woods.size() * rockModifier);
-                            if (woods.isEmpty()) {
+                            List<WoodType> woodTypes = chunkDataTFC.getValidTrees();
+                            int stickDensity = 3 + (int) (4f * density + 1.5f * woodTypes.size() * rockModifier);
+                            if (woodTypes.isEmpty()) {
                                 stickDensity = 1 + (int) (1.5f * density * rockModifier);
                             }
                             WorldGenTrees.generateLooseSticks(RANDOM, pos.x, pos.z, event.world, stickDensity);
@@ -157,7 +157,7 @@ public class WorldRegenHandler {
                     IBlockState soil = world.getBlockState(topPos.down());
                     if (soil.getBlock() instanceof ISoilBlock soilRock) {
                         //Stop removing dead crops from farmland please!
-                        if (soilRock.getSoilVariant() != FARMLAND) {
+                        if (soilRock.getSoilBlockVariant() != SoilBlockVariants.FARMLAND) {
                             world.removeTileEntity(topPos);
                             world.setBlockToAir(topPos);
                         }

@@ -2,8 +2,9 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.world.classic.StructureHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +17,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.WoodVariant.LOG;
 import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
 
 public class TreeGenNormal implements ITreeGenerator {
@@ -38,9 +38,9 @@ public class TreeGenNormal implements ITreeGenerator {
     }
 
     @Override
-    public void generateTree(TemplateManager manager, World world, BlockPos pos, Wood wood, Random rand, boolean isWorldGen) {
-        ResourceLocation base = new ResourceLocation(MOD_ID, wood.getName() + "/base");
-        ResourceLocation overlay = new ResourceLocation(MOD_ID, wood.getName() + "/overlay");
+    public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
+        ResourceLocation base = new ResourceLocation(MOD_ID, woodType + "/base");
+        ResourceLocation overlay = new ResourceLocation(MOD_ID, woodType + "/overlay");
 
         Template structureBase = manager.get(world.getMinecraftServer(), base);
         Template structureOverlay = manager.get(world.getMinecraftServer(), overlay);
@@ -60,9 +60,8 @@ public class TreeGenNormal implements ITreeGenerator {
             StructureHelper.addStructureToWorld(world, pos, structureOverlay, settingsWeak);
         }
 
-        final IBlockState log = TFCStorage.getWoodBlock(LOG, wood).getDefaultState().withProperty(PLACED, false);
+        final IBlockState log = TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
         for (int i = 0; i < height; i++)
             world.setBlockState(pos.add(size.getX() / 2, i - height, size.getZ() / 2), log);
     }
-
 }

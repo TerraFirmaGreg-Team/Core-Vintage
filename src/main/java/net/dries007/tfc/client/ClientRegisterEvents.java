@@ -9,7 +9,9 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.metal.util.IMetalBlock;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.render.*;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
@@ -51,9 +53,6 @@ import javax.annotation.Nonnull;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.PlantVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.PlantVariant.TALL_GRASS;
-import static net.dries007.tfc.api.types.soil.SoilVariant.FARMLAND;
-import static net.dries007.tfc.api.types.wood.WoodVariant.LEAVES;
-import static net.dries007.tfc.api.types.wood.WoodVariant.SAPLING;
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
@@ -235,14 +234,14 @@ public final class ClientRegisterEvents {
 
         blockColors.registerBlockColorHandler(grassColor, TFCStorage.SOIL_BLOCKS.values()
                 .stream()
-                .filter(x -> x.getSoilVariant().isGrass())
+                .filter(x -> x.getSoilBlockVariant().isGrass())
                 .map(s -> (Block) s)
                 .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
                 BlockSoilFarmland.TINT[state.getValue(BlockSoilFarmland.MOISTURE)], TFCStorage.SOIL_BLOCKS.values()
                 .stream()
-                .filter(x -> x.getSoilVariant() == FARMLAND)
+                .filter(x -> x.getSoilBlockVariant() == SoilBlockVariants.FARMLAND)
                 .map(s -> (Block) s)
                 .toArray(Block[]::new));
 
@@ -257,17 +256,17 @@ public final class ClientRegisterEvents {
 
         //=== Wood ===================================================================================================//
 
-        blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IWoodBlock) s.getBlock()).getWood().getColor() : 0xFFFFFF,
+        blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IWoodBlock) s.getBlock()).getWoodType().getColor() : 0xFFFFFF,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(block -> block.getWoodVariant() != LEAVES && block.getWoodVariant() != SAPLING)
+                        .filter(block -> block.getWoodBlockVariant() != WoodBlockVariants.LEAVES && block.getWoodBlockVariant() != WoodBlockVariants.SAPLING)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler(foliageColor,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getWoodVariant() == LEAVES)
+                        .filter(x -> x.getWoodBlockVariant() == WoodBlockVariants.LEAVES)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
@@ -306,7 +305,7 @@ public final class ClientRegisterEvents {
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCStorage.SOIL_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getSoilVariant().isGrass())
+                        .filter(x -> x.getSoilBlockVariant().isGrass())
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
@@ -324,17 +323,17 @@ public final class ClientRegisterEvents {
 
         //=== Wood ===================================================================================================//
 
-        itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getWood().getColor() : 0xFFFFFF,
+        itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getWoodType().getColor() : 0xFFFFFF,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getWoodVariant() != LEAVES && x.getWoodVariant() != SAPLING)
+                        .filter(x -> x.getWoodBlockVariant() != WoodBlockVariants.LEAVES && x.getWoodBlockVariant() != WoodBlockVariants.SAPLING)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getWoodVariant() == LEAVES)
+                        .filter(x -> x.getWoodBlockVariant() == WoodBlockVariants.LEAVES)
                         .map(s -> (BlockWoodLeaves) s)
                         .toArray(Block[]::new));
 

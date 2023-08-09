@@ -6,9 +6,9 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -21,12 +21,9 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -44,52 +41,40 @@ import java.util.*;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     public static final PropertyBool PLACED = PropertyBool.create("placed");
     public static final PropertyBool SMALL = PropertyBool.create("small");
     public static final AxisAlignedBB SMALL_AABB_Y = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 1, 0.75);
     public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);
     public static final AxisAlignedBB SMALL_AABB_Z = new AxisAlignedBB(0.25, 0.25, 0, 0.75, 0.75, 1);
-    private final WoodVariant woodVariant;
-    private final Wood wood;
-    private final ResourceLocation modelLocation;
+    private final WoodBlockVariant woodBlockVariant;
+    private final WoodType woodType;
 
-    public BlockWoodLog(WoodVariant woodVariant, Wood wood) {
+    public BlockWoodLog(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+        this.woodBlockVariant = woodBlockVariant;
+        this.woodType = woodType;
 
-        this.woodVariant = woodVariant;
-        this.wood = wood;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant + "/" + wood);
-
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
 
         setDefaultState(blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y).withProperty(PLACED, true).withProperty(SMALL, false));
         setHarvestLevel("axe", 0);
         setHardness(2.0F);
         setResistance(5.0F);
-//        OreDictionaryHelper.register(this, "log", "wood");
-//        //noinspection ConstantConditions
-//        OreDictionaryHelper.register(this, "log", "wood", wood.getRegistryName().getPath());
-//        if (woodType.canMakeTannin()) {
-//            OreDictionaryHelper.register(this, "log", "wood", "tannin");
-//        }
 
         Blocks.FIRE.setFireInfo(this, 5, 5);
         setTickRandomly(true);
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
-        return woodVariant;
+    public WoodBlockVariant getWoodBlockVariant() {
+        return woodBlockVariant;
     }
 
     @Override
-    public Wood getWood() {
-        return wood;
+    public WoodType getWoodType() {
+        return woodType;
     }
 
     @Nullable
@@ -156,33 +141,6 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
         if (!worldIn.isRemote) {
             removeTree(worldIn, pos, null, ItemStack.EMPTY, false);
-        }
-    }
-
-    @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        // Do this check again, so we can drop items now
-        final Set<String> toolClasses = stack.getItem().getToolClasses(stack);
-        if (toolClasses.contains("axe") || toolClasses.contains("saw")) {
-            // Harvest the block normally, saws and axes are valid tools regardless
-            super.harvestBlock(worldIn, player, pos, state, te, stack);
-        } else if (toolClasses.contains("hammer") && ConfigTFC.General.TREE.enableHammerSticks) {
-            // Hammers drop sticks here - we duplicate the original method
-            //noinspection ConstantConditions
-            player.addStat(StatList.getBlockStats(this));
-            player.addExhaustion(0.005F);
-
-            if (!worldIn.isRemote) {
-                Helpers.spawnItemStack(worldIn, pos.add(0.5D, 0.5D, 0.5D), new ItemStack(Items.STICK, 1 + (int) (Math.random() * 3)));
-            }
-        } else if (ConfigTFC.General.TREE.requiresAxe) {
-            // Here, there was no valid tool used. Deny spawning any drops since logs require axes
-            //noinspection ConstantConditions
-            player.addStat(StatList.getBlockStats(this));
-            player.addExhaustion(0.005F);
-        } else {
-            // No tool, but handle normally
-            super.harvestBlock(worldIn, player, pos, state, te, stack);
         }
     }
 
@@ -282,12 +240,12 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockWoodLog.PLACED).build());
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getRegistryLocation()).ignore(BlockWoodLog.PLACED).build());
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
+        for (var state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation.toString()));
+                    getMetaFromState(state),
+                    new ModelResourceLocation(getRegistryLocation(), "normal"));
         }
     }
 }

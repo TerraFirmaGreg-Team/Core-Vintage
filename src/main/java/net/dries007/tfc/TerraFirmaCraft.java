@@ -10,6 +10,15 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
+import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
+import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
+import net.dries007.tfc.api.types.rock.variant.RockBlockVariantHandler;
+import net.dries007.tfc.api.types.soil.type.SoilTypeHandler;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariantHandler;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
+import net.dries007.tfc.api.types.wood.type.WoodTypeHandler;
+import net.dries007.tfc.api.types.wood.type.WoodTypes;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariantHandler;
 import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
@@ -98,10 +107,19 @@ public final class TerraFirmaCraft {
     }
 
 
-
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         LOGGER.debug("If you can see this, debug logging is working :)");
+
+        RockCategoryHandler.init();
+        RockTypeHandler.init();
+        RockBlockVariantHandler.init();
+
+        SoilTypeHandler.init();
+        SoilBlockVariantHandler.init();
+
+        WoodTypeHandler.init();
+        WoodBlockVariantHandler.init();
 
         TFCBlocks.preInit();
         TFCItems.preInit();
@@ -209,6 +227,7 @@ public final class TerraFirmaCraft {
         event.registerServerCommand(new CommandTimeTFC());
         event.registerServerCommand(new CommandDebugInfo());
         event.registerServerCommand(new CommandWorkChunk());
+        event.registerServerCommand(new CommandGenTree());
 
         // Initialize calendar for the current server
         CalendarTFC.INSTANCE.init(event.getServer());

@@ -2,9 +2,9 @@ package net.dries007.tfc.objects.blocks.agriculture;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.agriculture.Crop;
-import net.dries007.tfc.api.types.agriculture.util.ICrop;
-import net.dries007.tfc.api.types.agriculture.util.IGrowingPlant;
+import net.dries007.tfc.api.types.agriculture.crop.Crop;
+import net.dries007.tfc.api.types.agriculture.crop.ICrop;
+import net.dries007.tfc.api.types.agriculture.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;

@@ -1,11 +1,10 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.types.rock.Rock;
-import net.dries007.tfc.api.types.rock.RockVariant;
-import net.dries007.tfc.api.types.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,7 +15,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -27,41 +25,34 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class BlockRockPressurePlate extends BlockPressurePlate implements IRockBlock {
-    private final RockVariant rockVariant;
-    private final Rock rock;
-    private final ResourceLocation modelLocation;
 
-    public BlockRockPressurePlate(RockVariant rockVariant, Rock rock) {
+    private final RockBlockVariant rockBlockVariant;
+    private final RockType rockType;
+
+    public BlockRockPressurePlate(RockBlockVariant rockBlockVariant, RockType rockType) {
         super(Material.ROCK, Sensitivity.MOBS);
 
-        this.rockVariant = rockVariant;
-        this.rock = rock;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
+        this.rockBlockVariant = rockBlockVariant;
+        this.rockType = rockType;
 
-        String blockRegistryName = String.format("rock/%s/%s", rockVariant, rock);
         this.setCreativeTab(CreativeTabsTFC.ROCK);
         this.setSoundType(SoundType.STONE);
         this.setHardness(0.5f);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-
-        OreDictionaryHelper.register(this, "pressure_plate_stone");
-        //OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
+        this.setRegistryName(getRegistryLocation());
+        this.setTranslationKey(getTranslationName());
     }
 
     @Nonnull
     @Override
-    public RockVariant getRockVariant() {
-        return rockVariant;
+    public RockBlockVariant getRockBlockVariant() {
+        return rockBlockVariant;
     }
 
     @Nonnull
     @Override
-    public Rock getRock() {
-        return rock;
+    public RockType getRockType() {
+        return rockType;
     }
 
     @Override
@@ -75,17 +66,17 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation,
+                return new ModelResourceLocation(getResourceLocation(),
                         "powered=" + state.getValue(POWERED) + "," +
-                                "rocktype=" + rock.getName());
+                                "rocktype=" + rockType.toString());
             }
         });
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
+        for (IBlockState state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(
                     Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation, "inventory=" + rock.getName()));
+                    getMetaFromState(state),
+                    new ModelResourceLocation(getResourceLocation(), "inventory=" + rockType.toString()));
         }
     }
 
@@ -94,6 +85,6 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
     }
 }

@@ -7,9 +7,6 @@ import net.minecraft.block.SoundType;
 
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static net.dries007.tfc.api.types.rock.Rock.*;
-import static net.dries007.tfc.api.types.rock.RockType.ORDINARY;
-import static net.dries007.tfc.api.types.rock.RockVariant.RAW;
 import static net.dries007.tfc.compat.gregtech.material.TFGMaterials.*;
 import static net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix.*;
 
@@ -18,6 +15,7 @@ public class StoneTypeHandler {
 
         OreByProduct.addOreByProductPrefix(oreChunk);
 
+        /*
         new StoneType(
                 16, "tfc_andesite", SoundType.STONE, oreAndesite, Andesite,
                 () -> TFCStorage.getRockBlock(ORDINARY, RAW, ANDESITE).getDefaultState(),
@@ -156,6 +154,6 @@ public class StoneTypeHandler {
                 () -> TFCStorage.getRockBlock(ORDINARY, RAW, PHYLLITE).getDefaultState(),
                 state -> state.getBlock() == TFCStorage.getRockBlock(ORDINARY, RAW, PHYLLITE),
                 false
-        );
+        );*/
     }
 }

@@ -17,25 +17,19 @@ public class ItemMisc extends ItemTFC implements IItemSize {
     private final Size size;
     private final Weight weight;
 
-    public ItemMisc(String name, Size size, Weight weight, CreativeTabs ct, Object... oreNameParts) {
+    public ItemMisc(String name, Size size, Weight weight, CreativeTabs ct, String... oreNameParts) {
         this(name, size, weight, ct);
 
-        for (Object obj : oreNameParts) {
-            if (obj instanceof Object[])
-                OreDictionaryHelper.register(this, (Object[]) obj);
-            else
-                OreDictionaryHelper.register(this, obj);
+        for (String oreName : oreNameParts) {
+            OreDictionaryHelper.register(this, oreName);
         }
     }
 
-    public ItemMisc(String name, Size size, Weight weight, Object... oreNameParts) {
+    public ItemMisc(String name, Size size, Weight weight, String... oreNameParts) {
         this(name, size, weight);
 
-        for (Object obj : oreNameParts) {
-            if (obj instanceof Object[])
-                OreDictionaryHelper.register(this, (Object[]) obj);
-            else
-                OreDictionaryHelper.register(this, obj);
+        for (String oreName : oreNameParts) {
+            OreDictionaryHelper.register(this, oreName);
         }
     }
 

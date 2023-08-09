@@ -2,7 +2,7 @@ package net.dries007.tfc.util;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.rock.Rock;
+import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -33,16 +33,16 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
 
             for (int i = 0; i < ConfigTFC.General.WORLD.looseRocksFrequency; i++) {
                 BlockPos pos = new BlockPos(xoff + random.nextInt(16), 0, zoff + random.nextInt(16));
-                Rock rock = baseChunkData.getRock1(pos);
+                var rock = baseChunkData.getRock1(pos);
                 generateRock(random, world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), rock);
             }
         }
     }
 
     @Override
-    protected void generateRock(Random random, World world, BlockPos pos, Rock rock) {
+    protected void generateRock(Random random, World world, BlockPos pos, RockType rockType) {
         if (isReplaceable(world, pos)) {
-            super.generateRock(random, world, pos, rock);
+            super.generateRock(random, world, pos, rockType);
         }
     }
 }

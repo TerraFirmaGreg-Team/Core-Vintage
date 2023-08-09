@@ -179,7 +179,7 @@ public class ClientEvents {
                         list.add(GRAY + "Flora Diversity: " + WHITE + data.getFloraDiversity());
 
                         list.add(GRAY + "Valid Trees: ");
-                        data.getValidTrees().forEach(t -> list.add(String.format("%s %s (%.1f)", WHITE, t.getName(), t.getTree().getDominance())));
+                        data.getValidTrees().forEach(t -> list.add(String.format("%s %s (%.1f)", WHITE, t.toString(), t.getDominance())));
 
                         list.add(GRAY + "Sea level offset: " + WHITE + data.getSeaLevelOffset(x, z));
                         list.add(GRAY + "Spawn Protection: " + WHITE + data.getSpawnProtection());

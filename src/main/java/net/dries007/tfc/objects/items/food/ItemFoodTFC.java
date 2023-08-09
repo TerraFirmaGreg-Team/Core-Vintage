@@ -30,9 +30,9 @@ public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
         }
 
         // Use "category" here as to not conflict with actual items, i.e. grain
-        OreDictionaryHelper.register(this, "category", food.getCategory());
+        OreDictionaryHelper.register(this, "category", food.getCategory().toString());
         if (food.getOreDictNames() != null) {
-            for (Object name : food.getOreDictNames()) {
+            for (String name : food.getOreDictNames()) {
                 OreDictionaryHelper.register(this, name);
             }
         }

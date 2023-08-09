@@ -1,12 +1,11 @@
 package net.dries007.tfc.world.classic.genlayers.datalayers.rock;
 
-import net.dries007.tfc.api.types.rock.Rock;
-import net.dries007.tfc.api.types.rock.RockCategory;
+import net.dries007.tfc.api.types.rock.category.RockCategory;
+import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
 import net.minecraft.world.gen.layer.IntCache;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 
 public class GenLayerRockInit extends GenLayerTFC {
     private final int[] layerRocks;
@@ -14,11 +13,10 @@ public class GenLayerRockInit extends GenLayerTFC {
     public GenLayerRockInit(long par1, final RockCategory.Layer rocks) {
         super(par1);
 
-        layerRocks = Arrays.stream(Rock.values())
-                .filter(rocks::test)
-                .mapToInt(Rock::ordinal)
-                .sorted()
-                .toArray();
+        layerRocks = RockType.getAllRockTypes().stream()
+                .filter(rocks)
+                .mapToInt(RockType::indexOf)
+                .sorted().toArray();
     }
 
     @Override

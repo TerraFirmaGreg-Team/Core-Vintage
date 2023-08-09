@@ -2,8 +2,9 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
 import net.dries007.tfc.world.classic.StructureHelper;
@@ -18,7 +19,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.WoodVariant.LOG;
 import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 
@@ -34,10 +34,9 @@ public class TreeGenWillow implements ITreeGenerator {
     private Template structureOverlay;
 
     @Override
-    public void generateTree(TemplateManager manager, World world, BlockPos pos, Wood wood, Random rand, boolean isWorldGen) {
-        //noinspection ConstantConditions
-        ResourceLocation base = new ResourceLocation(MOD_ID, wood.getName() + "/base");
-        ResourceLocation overlay = new ResourceLocation(MOD_ID, wood.getName() + "/overlay");
+    public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
+        ResourceLocation base = new ResourceLocation(MOD_ID, woodType + "/base");
+        ResourceLocation overlay = new ResourceLocation(MOD_ID, woodType + "/overlay");
 
         structureBase = manager.get(world.getMinecraftServer(), base);
         structureOverlay = manager.get(world.getMinecraftServer(), overlay);
@@ -52,7 +51,7 @@ public class TreeGenWillow implements ITreeGenerator {
         for (int n = 0; n <= height; n++) {
             if (n > 3)
                 createLeafGroup(world, pos.up(n));
-            tryPlaceLog(world, pos.up(n), wood, BlockLog.EnumAxis.Y);
+            tryPlaceLog(world, pos.up(n), woodType, BlockLog.EnumAxis.Y);
         }
 
         for (int n = 0; n < branches; n++) {
@@ -60,11 +59,11 @@ public class TreeGenWillow implements ITreeGenerator {
             z1 = (rand.nextBoolean() ? 1 : -1) * (1 + rand.nextInt(3));
             y1 = 3 + rand.nextInt(2);
             createLeafGroup(world, pos.add(x1, y1, z1));
-            createBranch(world, pos, x1, y1, z1, rand, wood);
+            createBranch(world, pos, x1, y1, z1, rand, woodType);
         }
     }
 
-    private void createBranch(World world, BlockPos pos1, int x, int y, int z, Random rand, Wood wood) {
+    private void createBranch(World world, BlockPos pos1, int x, int y, int z, Random rand, WoodType woodType) {
         int x1 = x < 0 ? 1 : -1,
                 z1 = z < 0 ? 1 : -1;
         do {
@@ -72,7 +71,7 @@ public class TreeGenWillow implements ITreeGenerator {
                 x += x1;
             if (z != 0 && rand.nextBoolean())
                 z += z1;
-            tryPlaceLog(world, pos1.add(x, y, z), wood, BlockLog.EnumAxis.NONE);
+            tryPlaceLog(world, pos1.add(x, y, z), woodType, BlockLog.EnumAxis.NONE);
             if (rand.nextBoolean())
                 createLeafGroup(world, pos1.add(x, y, z));
         }
@@ -87,8 +86,8 @@ public class TreeGenWillow implements ITreeGenerator {
         StructureHelper.addStructureToWorld(world, pos, structureOverlay, settingsWeak);
     }
 
-    private void tryPlaceLog(World world, BlockPos pos, Wood wood, BlockLog.EnumAxis axis) {
+    private void tryPlaceLog(World world, BlockPos pos, WoodType woodType, BlockLog.EnumAxis axis) {
         if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos).getBlock() instanceof BlockWoodSapling || world.getBlockState(pos).getBlock() instanceof BlockWoodLeaves)
-            world.setBlockState(pos, TFCStorage.getWoodBlock(LOG, wood).getDefaultState().withProperty(LOG_AXIS, axis).withProperty(PLACED, false));
+            world.setBlockState(pos, TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(LOG_AXIS, axis).withProperty(PLACED, false));
     }
 }

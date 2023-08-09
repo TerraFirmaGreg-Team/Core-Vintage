@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.agriculture.util.IFruitTree;
-import net.dries007.tfc.api.types.agriculture.util.IGrowingPlant;
+import net.dries007.tfc.api.types.agriculture.fruit.IFruitTree;
+import net.dries007.tfc.api.types.agriculture.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;

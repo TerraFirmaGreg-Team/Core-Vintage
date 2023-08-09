@@ -9,7 +9,6 @@ import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
-import net.dries007.tfc.objects.blocks.rock.BlockRockSmooth;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodSupport;
 import net.dries007.tfc.objects.container.ContainerEmpty;
 import net.minecraft.block.Block;
@@ -178,9 +177,6 @@ public class ChiselBehavior implements IToolBehavior {
                             return EnumActionResult.SUCCESS; // Collapse mechanic triggered, cancel chisel!
                         }
                     }
-                }
-                if (newState.getProperties().containsKey(BlockRockSmooth.CAN_FALL)) {
-                    newState = newState.withProperty(BlockRockSmooth.CAN_FALL, true);
                 }
                 worldIn.setBlockState(pos, newState);
 

@@ -1,14 +1,13 @@
 package net.dries007.tfc.objects.blocks.wood;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.wood.ItemWoodSlab;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -24,35 +23,28 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.Nonnull;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.WoodVariant.PLANKS;
-import static net.dries007.tfc.api.types.wood.WoodVariant.SLAB_DOUBLE;
-
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockWoodSlab(WoodVariant woodVariant, Wood wood) {
+    private BlockWoodSlab(WoodType woodType) {
         super(Material.WOOD);
 
         IBlockState state = blockState.getBaseState();
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.modelBlock = TFCStorage.getWoodBlock(PLANKS, wood);
+        this.modelBlock = TFCStorage.getWoodBlock(WoodBlockVariants.PLANKS, woodType);
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -63,21 +55,25 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
+    @Nonnull
     @Override
     public String getTranslationKey(int meta) {
         return super.getTranslationKey();
     }
 
+    @Nonnull
     @Override
     public IProperty<?> getVariantProperty() {
         return VARIANT; // why is this not null-tolerable ...
     }
 
+    @Nonnull
     @Override
-    public Comparable<?> getTypeForItem(ItemStack stack) {
+    public Comparable<?> getTypeForItem(@Nonnull ItemStack stack) {
         return Variant.DEFAULT;
     }
 
+    @Nonnull
     @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
@@ -91,7 +87,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     }
 
     @Override
-    public int getMetaFromState(IBlockState state) {
+    public int getMetaFromState(@Nonnull IBlockState state) {
         int i = 0;
 
         if (!this.isDouble() && state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) {
@@ -103,32 +99,36 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+    public float getBlockHardness(@Nonnull IBlockState blockState, @Nonnull World worldIn, @Nonnull BlockPos pos) {
         return modelBlock.getBlockHardness(blockState, worldIn, pos);
     }
 
+    @Nonnull
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
         return Item.getItemFromBlock(halfSlab);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public float getExplosionResistance(Entity exploder) {
+    public float getExplosionResistance(@Nonnull Entity exploder) {
         return modelBlock.getExplosionResistance(exploder);
     }
 
+    @Nonnull
     @SuppressWarnings("deprecation")
     @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+    public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         return new ItemStack(halfSlab);
     }
 
+    @Nonnull
     @Override
     protected BlockStateContainer createBlockState() {
         return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
     }
 
+    @Nonnull
     @SuppressWarnings("deprecation")
     @Override
     public SoundType getSoundType() {
@@ -138,6 +138,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     public enum Variant implements IStringSerializable {
         DEFAULT;
 
+        @Nonnull
         @Override
         public String getName() {
             return "default";
@@ -145,20 +146,17 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     }
 
     public static class Double extends BlockWoodSlab {
-        private final WoodVariant woodVariant;
-        private final Wood wood;
-        private final ResourceLocation modelLocation;
+        private final WoodBlockVariant woodBlockVariant;
+        private final WoodType woodType;
 
-        public Double(WoodVariant woodVariant, Wood wood) {
-            super(woodVariant, wood);
+        public Double(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+            super(woodType);
 
-            this.woodVariant = woodVariant;
-            this.wood = wood;
-            this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+            this.woodBlockVariant = woodBlockVariant;
+            this.woodType = woodType;
 
-            var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-            setRegistryName(MOD_ID, blockRegistryName);
-            setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+            setRegistryName(getRegistryLocation());
+            setTranslationKey(getTranslationName());
         }
 
         @Override
@@ -167,13 +165,13 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         }
 
         @Override
-        public WoodVariant getWoodVariant() {
-            return woodVariant;
+        public WoodBlockVariant getWoodBlockVariant() {
+            return woodBlockVariant;
         }
 
         @Override
-        public Wood getWood() {
-            return wood;
+        public WoodType getWoodType() {
+            return woodType;
         }
 
         @Override
@@ -184,35 +182,28 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         @Override
         @SideOnly(Side.CLIENT)
         public void onModelRegister() {
-            ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockWoodSlab.VARIANT).build());
+            ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockWoodSlab.VARIANT).build());
         }
     }
 
     public static class Half extends BlockWoodSlab {
         public final Double doubleSlab;
 
-        private final WoodVariant woodVariant;
-        private final Wood wood;
-        private final ResourceLocation modelLocation;
+        private final WoodBlockVariant woodBlockVariant;
+        private final WoodType woodType;
 
-        public Half(WoodVariant woodVariant, Wood wood) {
-            super(woodVariant, wood);
+        public Half(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+            super(woodType);
 
-            doubleSlab = (Double) TFCStorage.getWoodBlock(SLAB_DOUBLE, wood);
+            doubleSlab = (Double) TFCStorage.getWoodBlock(WoodBlockVariants.SLAB_DOUBLE, woodType);
             doubleSlab.halfSlab = this;
             halfSlab = this;
 
-            this.woodVariant = woodVariant;
-            this.wood = wood;
-            this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+            this.woodBlockVariant = woodBlockVariant;
+            this.woodType = woodType;
 
-            var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-            setRegistryName(MOD_ID, blockRegistryName);
-            setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-
-            OreDictionaryHelper.register(this, "slab");
-            OreDictionaryHelper.register(this, "slab", "wood");
-            OreDictionaryHelper.register(this, "slab", "wood", wood);
+            setRegistryName(getRegistryLocation());
+            setTranslationKey(getTranslationName());
         }
 
         @Override
@@ -221,13 +212,13 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         }
 
         @Override
-        public WoodVariant getWoodVariant() {
-            return woodVariant;
+        public WoodBlockVariant getWoodBlockVariant() {
+            return woodBlockVariant;
         }
 
         @Override
-        public Wood getWood() {
-            return wood;
+        public WoodType getWoodType() {
+            return woodType;
         }
 
         @Override
@@ -238,12 +229,12 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         @Override
         @SideOnly(Side.CLIENT)
         public void onModelRegister() {
-            ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).ignore(BlockWoodSlab.VARIANT).build());
+            ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockWoodSlab.VARIANT).build());
 
             for (IBlockState state : this.getBlockState().getValidStates()) {
                 ModelLoader.setCustomModelResourceLocation(
                         Item.getItemFromBlock(this),
-                        this.getMetaFromState(state), new ModelResourceLocation(modelLocation, "normal"));
+                        this.getMetaFromState(state), new ModelResourceLocation(getResourceLocation(), "normal"));
             }
         }
     }

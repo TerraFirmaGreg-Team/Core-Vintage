@@ -8,18 +8,16 @@ import net.dries007.tfc.api.types.metal.util.IMetalBlock;
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.plant.PlantVariant;
 import net.dries007.tfc.api.types.plant.util.IPlantBlock;
-import net.dries007.tfc.api.types.rock.Rock;
-import net.dries007.tfc.api.types.rock.RockType;
-import net.dries007.tfc.api.types.rock.RockVariant;
-import net.dries007.tfc.api.types.rock.util.IRockBlock;
-import net.dries007.tfc.api.types.soil.Soil;
-import net.dries007.tfc.api.types.soil.SoilVariant;
-import net.dries007.tfc.api.types.soil.util.ISoilBlock;
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.soil.ISoilBlock;
+import net.dries007.tfc.api.types.soil.type.SoilType;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.api.util.Triple;
 import net.dries007.tfc.objects.blocks.BlockAlabaster;
 import net.dries007.tfc.objects.blocks.BlockGroundcover;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
@@ -39,16 +37,16 @@ import java.util.*;
  */
 public final class TFCStorage {
 
-    public static final Map<Triple<RockType, RockVariant, Rock>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<SoilVariant, Soil>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantVariant, Plant>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<WoodVariant, Wood>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<String, RockVariant>, BlockAlabaster> ALABASTER_BLOCK = new LinkedHashMap<>();
+    public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCK = new LinkedHashMap<>();
     public static final Map<Pair<MetalVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCK = new HashMap<>();
 
-    public static final Map<Rock, ItemRock> ROCK_ITEM = new HashMap<>();
-    public static final Map<Rock, ItemRockBrick> BRICK_ITEM = new HashMap<>();
+    public static final Map<RockType, ItemRock> ROCK_ITEM = new HashMap<>();
+    public static final Map<RockType, ItemRockBrick> BRICK_ITEM = new HashMap<>();
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
 
@@ -65,17 +63,17 @@ public final class TFCStorage {
     public static final List<BlockFluidBase> FLUID = new ArrayList<>();
 
     @Nonnull
-    public static Block getRockBlock(@Nonnull RockType rockType, @Nonnull RockVariant blockVariant, @Nonnull Rock stoneType) {
-        var block = (Block) ROCK_BLOCKS.get(new Triple<>(rockType, blockVariant, stoneType));
+    public static Block getRockBlock(@Nonnull RockBlockVariant rockBlockVariant, @Nonnull RockType rockType) {
+        var block = (Block) ROCK_BLOCKS.get(new Pair<>(rockBlockVariant, rockType));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s, %s", rockType, blockVariant, stoneType));
+        throw new RuntimeException(String.format("Block is null: %s, %s", rockBlockVariant, rockType));
     }
 
     @Nonnull
-    public static Block getSoilBlock(@Nonnull SoilVariant soilVariant, @Nonnull Soil soil) {
-        var block = (Block) SOIL_BLOCKS.get(new Pair<>(soilVariant, soil));
+    public static Block getSoilBlock(@Nonnull SoilBlockVariant soilBlockVariant, @Nonnull SoilType soilType) {
+        var block = (Block) SOIL_BLOCKS.get(new Pair<>(soilBlockVariant, soilType));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", soilVariant, soil));
+        throw new RuntimeException(String.format("Block is null: %s, %s", soilBlockVariant, soilType));
     }
 
     @Nonnull
@@ -86,17 +84,17 @@ public final class TFCStorage {
     }
 
     @Nonnull
-    public static Block getWoodBlock(@Nonnull WoodVariant woodVariant, @Nonnull Wood wood) {
-        var block = (Block) WOOD_BLOCKS.get(new Pair<>(woodVariant, wood));
+    public static Block getWoodBlock(@Nonnull WoodBlockVariant woodBlockVariant, @Nonnull WoodType woodType) {
+        var block = (Block) WOOD_BLOCKS.get(new Pair<>(woodBlockVariant, woodType));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", woodVariant, wood));
+        throw new RuntimeException(String.format("Block is null: %s, %s", woodBlockVariant, woodType));
     }
 
     @Nonnull
-    public static Block getAlabasterBlock(@Nonnull String string, @Nonnull RockVariant rockVariant) {
-        var block = (Block) ALABASTER_BLOCK.get(new Pair<>(string, rockVariant));
+    public static Block getAlabasterBlock(@Nonnull String string, @Nonnull RockBlockVariant rockBlockVariant) {
+        var block = (Block) ALABASTER_BLOCK.get(new Pair<>(string, rockBlockVariant));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", string, rockVariant));
+        throw new RuntimeException(String.format("Block is null: %s, %s", string, rockBlockVariant));
     }
 
     @Nonnull
@@ -114,17 +112,17 @@ public final class TFCStorage {
     }
 
     @Nonnull
-    public static Item getRockItem(@Nonnull Rock rock) {
-        var item = (Item) ROCK_ITEM.get(rock);
+    public static Item getRockItem(@Nonnull RockType rockType) {
+        var item = (Item) ROCK_ITEM.get(rockType);
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", rock));
+        throw new RuntimeException(String.format("Item is null: %s", rockType));
     }
 
 
     @Nonnull
-    public static Item getBrickItem(@Nonnull Rock rock) {
-        var item = (Item) BRICK_ITEM.get(rock);
+    public static Item getBrickItem(@Nonnull RockType rockType) {
+        var item = (Item) BRICK_ITEM.get(rockType);
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", rock));
+        throw new RuntimeException(String.format("Item is null: %s", rockType));
     }
 }

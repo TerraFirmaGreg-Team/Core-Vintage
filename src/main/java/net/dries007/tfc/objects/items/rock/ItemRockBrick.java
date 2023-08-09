@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.items.rock;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.rock.Rock;
-import net.dries007.tfc.api.types.rock.util.IRockItem;
+import net.dries007.tfc.api.types.rock.IRockItem;
+import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -16,18 +16,18 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class ItemRockBrick extends ItemTFC implements IRockItem {
-    private final Rock rock;
+    private final RockType rockType;
 
-    public ItemRockBrick(Rock rock) {
-        this.rock = rock;
+    public ItemRockBrick(RockType rockType) {
+        this.rockType = rockType;
 
-        var blockRegistryName = String.format("brick/%s", rock);
+        var blockRegistryName = String.format("brick/%s", rockType);
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.ROCK);
 
         OreDictionaryHelper.register(this, "brick");
-        OreDictionaryHelper.register(this, "brick", rock.getRockCategory());
+        OreDictionaryHelper.register(this, "brick", rockType.getRockCategory().toString());
     }
 
     @Nonnull
@@ -44,7 +44,7 @@ public class ItemRockBrick extends ItemTFC implements IRockItem {
 
     @Nonnull
     @Override
-    public Rock getRock() {
-        return rock;
+    public RockType getRock() {
+        return rockType;
     }
 }

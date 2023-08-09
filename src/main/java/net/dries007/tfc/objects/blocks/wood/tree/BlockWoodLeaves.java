@@ -3,13 +3,13 @@ package net.dries007.tfc.objects.blocks.wood.tree;
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -28,7 +28,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -39,48 +38,37 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 
 import static net.dries007.tfc.Constants.RNG;
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.WoodVariant.LOG;
-import static net.dries007.tfc.api.types.wood.WoodVariant.SAPLING;
 
-@ParametersAreNonnullByDefault
 public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
-    private final WoodVariant woodVariant;
-    private final Wood wood;
-    private final ResourceLocation modelLocation;
+    private final WoodBlockVariant woodBlockVariant;
+    private final WoodType woodType;
 
-    public BlockWoodLeaves(WoodVariant woodVariant, Wood wood) {
-        this.woodVariant = woodVariant;
-        this.wood = wood;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+    public BlockWoodLeaves(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+        this.woodBlockVariant = woodBlockVariant;
+        this.woodType = woodType;
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
 
         setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
 
         leavesFancy = true; // Fast / Fancy graphics works correctly
-        OreDictionaryHelper.register(this, "tree", "leaves");
-        //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "tree", "leaves", wood.getName());
         Blocks.FIRE.setFireInfo(this, 30, 60);
         setTickRandomly(true);
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
-        return woodVariant;
+    public WoodBlockVariant getWoodBlockVariant() {
+        return woodBlockVariant;
     }
 
     @Override
-    public Wood getWood() {
-        return wood;
+    public WoodType getWoodType() {
+        return woodType;
     }
 
     @Nullable
@@ -103,18 +91,18 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
         return NULL_AABB;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, @Nullable Block blockIn, @Nullable BlockPos fromPos) {
+    public void neighborChanged(@Nonnull IBlockState state, World world, @Nonnull BlockPos pos, @Nullable Block blockIn, @Nullable BlockPos fromPos) {
         world.scheduleUpdate(pos, this, 0);
     }
 
     @Override
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+    public void onEntityCollision(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Entity entityIn) {
         if (!(entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative())) {
             // Player will take damage when falling through leaves if fall is over 9 blocks, fall damage is then set to 0.
             entityIn.fall((entityIn.fallDistance - 6), 1.0F);
@@ -135,24 +123,24 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     }
 
     @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
         doLeafDecay(worldIn, pos, state);
     }
 
     @Override
     @Nonnull
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(TFCStorage.getWoodBlock(SAPLING, wood)) : Items.AIR;
+    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
+        return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(TFCStorage.getWoodBlock(WoodBlockVariants.SAPLING, woodType)) : Items.AIR;
     }
 
     @Override
-    protected int getSaplingDropChance(IBlockState state) {
-        return 1; //wood == Tree.SEQUOIA ? 0 : 25;
+    protected int getSaplingDropChance(@Nonnull IBlockState state) {
+        return 1;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@Nonnull IBlockState state) {
         return false;
     }
 
@@ -178,12 +166,12 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     }
 
     @Override
-    public void beginLeavesDecay(IBlockState state, World world, BlockPos pos) {
+    public void beginLeavesDecay(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos) {
         // Don't do vanilla decay
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
         int chance = this.getSaplingDropChance(state);
         if (chance > 0) {
             if (fortune > 0) {
@@ -203,7 +191,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @SuppressWarnings("deprecation")
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
         /*
          * See comment on getRenderLayer()
          */
@@ -213,7 +201,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
 
     @Override
     @Nonnull
-    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+    public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
         return ImmutableList.of(new ItemStack(this));
     }
 
@@ -237,7 +225,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
                     if (evaluated.contains(pos1) || !world.isBlockLoaded(pos1))
                         continue;
                     state1 = world.getBlockState(pos1);
-                    if (state1.getBlock() == TFCStorage.getWoodBlock(LOG, wood))
+                    if (state1.getBlock() == TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType))
                         return;
                     if (state1.getBlock() == this)
                         pathsToAdd.add(pos1.toImmutable());
@@ -271,18 +259,18 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation,
-                        "wood=" + wood.getName());
+                return new ModelResourceLocation(getResourceLocation(),
+                        "wood=" + woodType.toString());
             }
         });
 
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
+        for (IBlockState state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(
                     Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation,
-                            "wood=" + wood.getName()));
+                    getMetaFromState(state),
+                    new ModelResourceLocation(getResourceLocation(),
+                            "wood=" + woodType.toString()));
         }
     }
 }

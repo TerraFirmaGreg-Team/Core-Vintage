@@ -3,8 +3,8 @@ package net.dries007.tfc.compat.gregtech.items.tools.behaviors;
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.soil.SoilVariant;
-import net.dries007.tfc.api.types.soil.util.ISoilBlock;
+import net.dries007.tfc.api.types.soil.ISoilBlock;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -33,8 +33,8 @@ public class HoeBehavior implements IToolBehavior {
         var hitBlock = worldIn.getBlockState(pos);
 
         if (hitBlock.getBlock() instanceof ISoilBlock soilTypeBlock) {
-            if (soilTypeBlock.getSoilVariant() == SoilVariant.DIRT || soilTypeBlock.getSoilVariant() == SoilVariant.GRASS) {
-                worldIn.setBlockState(pos, TFCStorage.getSoilBlock(SoilVariant.FARMLAND, soilTypeBlock.getSoil()).getDefaultState());
+            if (soilTypeBlock.getSoilBlockVariant() == SoilBlockVariants.DIRT || soilTypeBlock.getSoilBlockVariant() == SoilBlockVariants.GRASS) {
+                worldIn.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.FARMLAND, soilTypeBlock.getSoilType()).getDefaultState());
                 ToolHelper.onActionDone(player, worldIn, hand);
                 return EnumActionResult.SUCCESS;
             }

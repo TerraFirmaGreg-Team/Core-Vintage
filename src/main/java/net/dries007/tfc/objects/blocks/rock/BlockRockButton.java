@@ -1,11 +1,10 @@
 package net.dries007.tfc.objects.blocks.rock;
 
-import net.dries007.tfc.api.types.rock.Rock;
-import net.dries007.tfc.api.types.rock.RockVariant;
-import net.dries007.tfc.api.types.rock.util.IRockBlock;
+import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +16,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -29,40 +27,31 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class BlockRockButton extends BlockButtonStone implements IRockBlock {
-    private final RockVariant rockVariant;
-    private final Rock rock;
-    private final ResourceLocation modelLocation;
+    private final RockBlockVariant rockBlockVariant;
+    private final RockType rockType;
 
-    public BlockRockButton(RockVariant rockVariant, Rock rock) {
+    public BlockRockButton(RockBlockVariant rockBlockVariant, RockType rockType) {
+        this.rockBlockVariant = rockBlockVariant;
+        this.rockType = rockType;
 
-        this.rockVariant = rockVariant;
-        this.rock = rock;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/" + rockVariant);
-
-        var blockRegistryName = String.format("rock/%s/%s", rockVariant, rock);
-        this.setSoundType(SoundType.STONE);
-        this.setCreativeTab(CreativeTabsTFC.ROCK);
-        this.setHardness(0.5f);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-
-        OreDictionaryHelper.register(this, "button_stone");
-        //OreDictionaryModule.register(this, rockBlockType.getName(), rockVariant.getName(), rockVariant.getName() + WordUtils.capitalize(rockType.getName()));
+        setSoundType(SoundType.STONE);
+        setCreativeTab(CreativeTabsTFC.ROCK);
+        setHardness(0.5f);
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
     }
 
     @Nonnull
     @Override
-    public RockVariant getRockVariant() {
-        return rockVariant;
+    public RockBlockVariant getRockBlockVariant() {
+        return rockBlockVariant;
     }
 
     @Nonnull
     @Override
-    public Rock getRock() {
-        return rock;
+    public RockType getRockType() {
+        return rockType;
     }
 
     @Override
@@ -76,18 +65,18 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation,
+                return new ModelResourceLocation(getResourceLocation(),
                         "facing=" + state.getValue(FACING) + "," +
                                 "powered=" + state.getValue(POWERED) + "," +
-                                "rocktype=" + rock.getName());
+                                "rocktype=" + getRockType());
             }
         });
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
+        for (IBlockState state : getBlockState().getValidStates()) {
             ModelLoader.setCustomModelResourceLocation(
                     Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation, "inventory=" + rock.getName()));
+                    getMetaFromState(state),
+                    new ModelResourceLocation(getResourceLocation(), "inventory=" + getRockType()));
         }
     }
 
@@ -105,7 +94,6 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("stonecategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
     }
-
 }

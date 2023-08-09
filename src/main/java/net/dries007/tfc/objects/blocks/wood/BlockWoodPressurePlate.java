@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.wood;
 
-import net.dries007.tfc.api.types.wood.Wood;
-import net.dries007.tfc.api.types.wood.WoodVariant;
-import net.dries007.tfc.api.types.wood.util.IWoodBlock;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -25,36 +25,31 @@ import javax.annotation.Nullable;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodBlock {
-    private final WoodVariant woodVariant;
-    private final Wood wood;
-    private final ResourceLocation modelLocation;
+    private final WoodBlockVariant woodBlockVariant;
+    private final WoodType woodType;
 
-    public BlockWoodPressurePlate(WoodVariant woodVariant, Wood wood) {
+    public BlockWoodPressurePlate(WoodBlockVariant woodBlockVariant, WoodType woodType) {
         super(Material.WOOD, Sensitivity.EVERYTHING);
 
-        this.woodVariant = woodVariant;
-        this.wood = wood;
-        this.modelLocation = new ResourceLocation(MOD_ID, "wood/" + woodVariant);
+        this.woodBlockVariant = woodBlockVariant;
+        this.woodType = woodType;
 
-        var blockRegistryName = String.format("wood/%s/%s", woodVariant, wood);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
         Blocks.FIRE.setFireInfo(this, 5, 20);
-
-        OreDictionaryHelper.register(this, "pressure_plate_wood");
     }
 
     @Override
-    public WoodVariant getWoodVariant() {
-        return woodVariant;
+    public WoodBlockVariant getWoodBlockVariant() {
+        return woodBlockVariant;
     }
 
     @Override
-    public Wood getWood() {
-        return wood;
+    public WoodType getWoodType() {
+        return woodType;
     }
 
     @Nullable
@@ -66,10 +61,10 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(modelLocation).build());
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), this.getMetaFromState(state), new ModelResourceLocation(modelLocation, "normal"));
+        for (IBlockState state : getBlockState().getValidStates()) {
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), getMetaFromState(state), new ModelResourceLocation(getResourceLocation(), "normal"));
         }
     }
 }

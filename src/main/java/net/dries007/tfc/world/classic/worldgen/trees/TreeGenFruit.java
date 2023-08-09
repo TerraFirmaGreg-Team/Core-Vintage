@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.agriculture.util.IFruitTree;
-import net.dries007.tfc.api.types.agriculture.util.IFruitTreeGenerator;
+import net.dries007.tfc.api.types.agriculture.fruit.IFruitTree;
+import net.dries007.tfc.api.types.agriculture.fruit.IFruitTreeGenerator;
 import net.dries007.tfc.world.classic.StructureHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;

@@ -3,9 +3,10 @@ package net.dries007.tfc.world.classic;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.rock.Rock;
-import net.dries007.tfc.api.types.rock.RockCategory;
-import net.dries007.tfc.api.types.soil.Soil;
+import net.dries007.tfc.api.types.rock.category.RockCategory;
+import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.soil.type.SoilType;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.test.blocks.TFCBlocks;
@@ -49,9 +50,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.RockType.ORDINARY;
-import static net.dries007.tfc.api.types.rock.RockVariant.*;
-import static net.dries007.tfc.api.types.soil.SoilVariant.*;
+import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;
@@ -489,19 +488,19 @@ public class ChunkGenTFC implements IChunkGenerator {
                 int colIndex = z << 4 | x;
                 Biome biome = getBiomeOffset(x, z);
 
-                Rock rock1 = Rock.valueOf(rockLayer1[colIndex]);
-                Rock rock2 = Rock.valueOf(rockLayer2[colIndex]);
-                Rock rock3 = Rock.valueOf(rockLayer3[colIndex]);
+                var rock1 = RockType.valueOf(rockLayer1[colIndex]);
+                var rock2 = RockType.valueOf(rockLayer2[colIndex]);
+                var rock3 = RockType.valueOf(rockLayer3[colIndex]);
 
-                Soil soil1 = Soil.valueOf(rockLayer1[colIndex]);
+                var soil1 = SoilType.valueOf(rockLayer1[colIndex]);
 
                 DataLayer drainage = drainageLayer[colIndex];
                 DataLayer stability = stabilityLayer[colIndex];
                 int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
                 int smooth = -1;
 
-                IBlockState surfaceBlock = TFCStorage.getSoilBlock(rainfall + 1.3 * rand.nextGaussian() >= 150f ? GRASS : DRY_GRASS, soil1).getDefaultState();
-                IBlockState subSurfaceBlock = TFCStorage.getSoilBlock(DIRT, soil1).getDefaultState();
+                IBlockState surfaceBlock = TFCStorage.getSoilBlock(rainfall + 1.3 * rand.nextGaussian() >= 150f ? SoilBlockVariants.GRASS : SoilBlockVariants.DRY_GRASS, soil1).getDefaultState();
+                IBlockState subSurfaceBlock = TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soil1).getDefaultState();
 
                 if (BiomesTFC.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x + 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z - 1))) {
                     if (!BiomesTFC.isBeachBiome(getBiomeOffset(x, z))) cliffMap[colIndex] = true;
@@ -578,22 +577,21 @@ public class ChunkGenTFC implements IChunkGenerator {
                             chunkHeightMap[colIndex] = y + yOffset;
 
                         if (y + yOffset <= ROCKLAYER3 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(ORDINARY, RAW, rock3).getDefaultState());
+                            outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(RAW, rock3).getDefaultState());
                         else if (y + yOffset <= ROCKLAYER2 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(ORDINARY, RAW, rock2).getDefaultState());
+                            outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(RAW, rock2).getDefaultState());
                         else
-                            outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(ORDINARY, RAW, rock1).getDefaultState());
+                            outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(RAW, rock1).getDefaultState());
 
                         // Deserts / dry areas
                         if (rainfall < +1.3 * rand.nextGaussian() + 75f) {
-                            //subSurfaceBlock = surfaceBlock = getBlockSoilMap(ORDINARY, RAW, rock1).getVariant(Rock.Type.SAND).getDefaultState();
-                            subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(ORDINARY, SAND, rock1).getDefaultState();
+                            subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(SAND, rock1).getDefaultState();
                         }
 
                         if (biome == BiomesTFC.BEACH || biome == BiomesTFC.OCEAN || biome == BiomesTFC.DEEP_OCEAN) {
-                            subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(ORDINARY, SAND, rock1).getDefaultState();
+                            subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(SAND, rock1).getDefaultState();
                         } else if (biome == BiomesTFC.GRAVEL_BEACH) {
-                            subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(ORDINARY, GRAVEL, rock1).getDefaultState();
+                            subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(GRAVEL, rock1).getDefaultState();
                         }
 
                         if (smooth == -1) {
@@ -638,7 +636,7 @@ public class ChunkGenTFC implements IChunkGenerator {
                                     for (int c = 1; c < dirtH && !mountains && !cliffMap[colIndex]; c++) {
                                         outp.setBlockState(x, y - c + yOffset, z, subSurfaceBlock);
                                         if (c > 1 + (5 - drainage.valueInt))
-                                            outp.setBlockState(x, y - c + yOffset, z, TFCStorage.getRockBlock(ORDINARY, GRAVEL, rock1).getDefaultState());
+                                            outp.setBlockState(x, y - c + yOffset, z, TFCStorage.getRockBlock(GRAVEL, rock1).getDefaultState());
                                     }
                                 }
                             }
@@ -648,12 +646,12 @@ public class ChunkGenTFC implements IChunkGenerator {
                                 y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER) {
                             if (biome != BiomesTFC.SWAMPLAND) // Most areas have gravel and sand bottoms
                             {
-                                if (outp.getBlockState(x, y + yOffset, z) != TFCStorage.getRockBlock(ORDINARY, SAND, rock1).getDefaultState() && rand.nextInt(5) != 0)
-                                    outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(ORDINARY, GRAVEL, rock1).getDefaultState());
+                                if (outp.getBlockState(x, y + yOffset, z) != TFCStorage.getRockBlock(SAND, rock1).getDefaultState() && rand.nextInt(5) != 0)
+                                    outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(GRAVEL, rock1).getDefaultState());
                             } else // Swamp biomes have bottoms that are mostly dirt
                             {
-                                if (outp.getBlockState(x, y + yOffset, z) != TFCStorage.getRockBlock(ORDINARY, SAND, rock1).getDefaultState())
-                                    outp.setBlockState(x, y + yOffset, z, TFCStorage.getSoilBlock(DIRT, soil1).getDefaultState());
+                                if (outp.getBlockState(x, y + yOffset, z) != TFCStorage.getRockBlock(SAND, rock1).getDefaultState())
+                                    outp.setBlockState(x, y + yOffset, z, TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soil1).getDefaultState());
                             }
                         }
                     }
@@ -673,16 +671,16 @@ public class ChunkGenTFC implements IChunkGenerator {
                         outp.setBlockState(x, y, z, BEDROCK);
                     } else if (outp.isEmpty(x, y, z)) {
                         if (y <= ROCKLAYER3 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y, z, TFCStorage.getRockBlock(ORDINARY, RAW, rock3).getDefaultState());
+                            outp.setBlockState(x, y, z, TFCStorage.getRockBlock(RAW, rock3).getDefaultState());
                         else if (y <= ROCKLAYER2 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y, z, TFCStorage.getRockBlock(ORDINARY, RAW, rock2).getDefaultState());
+                            outp.setBlockState(x, y, z, TFCStorage.getRockBlock(RAW, rock2).getDefaultState());
                         else
-                            outp.setBlockState(x, y, z, TFCStorage.getRockBlock(ORDINARY, RAW, rock1).getDefaultState());
+                            outp.setBlockState(x, y, z, TFCStorage.getRockBlock(RAW, rock1).getDefaultState());
 
                         if (BiomesTFC.isBeachBiome(biome) || BiomesTFC.isOceanicBiome(biome)) {
                             if (outp.getBlockState(x, y + 1, z) == SALT_WATER) {
-                                outp.setBlockState(x, y, z, TFCStorage.getRockBlock(ORDINARY, SAND, rock1).getDefaultState());
-                                outp.setBlockState(x, y - 1, z, TFCStorage.getRockBlock(ORDINARY, SAND, rock1).getDefaultState());
+                                outp.setBlockState(x, y, z, TFCStorage.getRockBlock(SAND, rock1).getDefaultState());
+                                outp.setBlockState(x, y - 1, z, TFCStorage.getRockBlock(SAND, rock1).getDefaultState());
                             }
                         }
                     }

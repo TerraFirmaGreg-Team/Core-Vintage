@@ -4,7 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodChest;
 import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
@@ -36,7 +36,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class TEChestTFC extends TileEntityChest implements ISlotCallback {
     public static final int SIZE = 18;
 
-    private Wood cachedWood;
+    private WoodType cachedWoodType;
     private int shadowTicksSinceSync;
 
     {
@@ -45,13 +45,13 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
     }
 
     @Nullable
-    public Wood getWood() {
-        if (cachedWood == null) {
+    public WoodType getWood() {
+        if (cachedWoodType == null) {
             if (world != null) {
-                cachedWood = ((BlockWoodChest) world.getBlockState(pos).getBlock()).getWood();
+                cachedWoodType = ((BlockWoodChest) world.getBlockState(pos).getBlock()).getWoodType();
             }
         }
-        return cachedWood;
+        return cachedWoodType;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
         if (world == null) return false;
 
         Block block = this.world.getBlockState(posIn).getBlock();
-        return block instanceof BlockWoodChest && ((BlockWoodChest) block).getWood() == getWood() && ((BlockChest) block).chestType == getChestType();
+        return block instanceof BlockWoodChest && ((BlockWoodChest) block).getWoodType() == getWood() && ((BlockChest) block).chestType == getChestType();
     }
 
     @Override

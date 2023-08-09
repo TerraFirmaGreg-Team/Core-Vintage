@@ -2,8 +2,9 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.tree.util.ITreeGenerator;
-import net.dries007.tfc.api.types.wood.Wood;
+import net.dries007.tfc.api.types.wood.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
 import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
 import net.dries007.tfc.world.classic.StructureHelper;
@@ -23,7 +24,6 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.WoodVariant.LOG;
 import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 
@@ -33,9 +33,9 @@ public class TreeGenAcacia implements ITreeGenerator {
     private IBlockState bark;
 
     @Override
-    public void generateTree(TemplateManager manager, World world, BlockPos pos, Wood wood, Random rand, boolean isWorldGen) {
-        trunk = TFCStorage.getWoodBlock(LOG, wood).getDefaultState().withProperty(PLACED, false);
-        bark = TFCStorage.getWoodBlock(LOG, wood).getDefaultState().withProperty(PLACED, false).withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
+    public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
+        trunk = TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
+        bark = TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false).withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
 
         final boolean smallBranch = rand.nextBoolean();
         final int branches = 2 + rand.nextInt(2);
@@ -48,7 +48,7 @@ public class TreeGenAcacia implements ITreeGenerator {
         if (smallBranch) {
             y3 = rand.nextInt(3) + 2;
             side = sides.get(rand.nextInt(sides.size()));
-            placeBranch(manager, world, pos.offset(side).add(0, y3, 0), wood.getName() + "/branch3");
+            placeBranch(manager, world, pos.offset(side).add(0, y3, 0), woodType + "/branch3");
         }
         for (int i = 0; i < branches; i++) {
             x1 = 2 + rand.nextInt(3);
@@ -59,7 +59,7 @@ public class TreeGenAcacia implements ITreeGenerator {
             for (int j = 1; j < x1; j++)
                 placeLog(world, pos.add(0, y1 - j, 0).offset(face, x1 - j), true);
             int branch = 1 + rand.nextInt(2);
-            placeBranch(manager, world, pos.add(0, y1, 0).offset(face, x1), wood.getName() + "/branch" + branch);
+            placeBranch(manager, world, pos.add(0, y1, 0).offset(face, x1), woodType + "/branch" + branch);
         }
         for (int i = 0; i < height; i++) {
             if (smallBranch && i == y3) {
@@ -70,7 +70,7 @@ public class TreeGenAcacia implements ITreeGenerator {
             }
             placeLog(world, pos.add(0, i, 0), false);
         }
-        placeBranch(manager, world, pos.add(0, height, 0), wood.getName() + "/branch3");
+        placeBranch(manager, world, pos.add(0, height, 0), woodType + "/branch3");
     }
 
     private void placeBranch(TemplateManager manager, World world, BlockPos pos, String name) {

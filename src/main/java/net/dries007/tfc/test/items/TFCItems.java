@@ -2,7 +2,7 @@ package net.dries007.tfc.test.items;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.rock.Rock;
+import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.objects.items.*;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockBrick;
@@ -40,7 +40,7 @@ public class TFCItems {
 
         //=== ItemRock ===============================================================================================//
 
-        for (var rock : Rock.values()) {
+        for (var rock : RockType.getAllRockTypes()) {
             if (BRICK_ITEM.put(rock, new ItemRockBrick(rock)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s", rock));
 

@@ -5,8 +5,8 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
-import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
-import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
+import net.dries007.tfc.objects.blocks.wood.BlockWoodLeaves;
+import net.dries007.tfc.objects.blocks.wood.BlockWoodSapling;
 import net.dries007.tfc.world.classic.StructureHelper;
 import net.minecraft.block.BlockLog;
 import net.minecraft.util.ResourceLocation;
@@ -19,7 +19,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
+import static net.dries007.tfc.objects.blocks.wood.BlockWoodLog.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 
 /**

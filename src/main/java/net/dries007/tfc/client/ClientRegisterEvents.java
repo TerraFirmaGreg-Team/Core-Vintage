@@ -19,7 +19,7 @@ import net.dries007.tfc.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.soil.BlockSoilFarmland;
-import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLeaves;
+import net.dries007.tfc.objects.blocks.wood.BlockWoodLeaves;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;

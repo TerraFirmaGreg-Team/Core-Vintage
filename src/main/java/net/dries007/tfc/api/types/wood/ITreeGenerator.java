@@ -2,7 +2,7 @@ package net.dries007.tfc.api.types.wood;
 
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
+import net.dries007.tfc.objects.blocks.wood.BlockWoodSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -16,20 +16,20 @@ public interface ITreeGenerator {
     /**
      * Called to generate a tree. Each Tree must have one of these. Used for world gen and sapling growth
      *
-     * @param manager an instance of the world's template manager. Used for getting structures.
-     * @param world   The world
-     * @param pos     The position where the sapling was / would've been
-     * @param woodType    The tree type to spawn
-     * @param rand    A random to use in generation
+     * @param manager  an instance of the world's template manager. Used for getting structures.
+     * @param world    The world
+     * @param pos      The position where the sapling was / would've been
+     * @param woodType The tree type to spawn
+     * @param rand     A random to use in generation
      */
     void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen);
 
     /**
      * Checks if a tree can be generated. This implementation checks height, radius, and light level
      *
-     * @param world The world
-     * @param pos   The pos of the tree
-     * @param woodType  The tree type (for checking if the tree can generate)
+     * @param world    The world
+     * @param pos      The pos of the tree
+     * @param woodType The tree type (for checking if the tree can generate)
      * @return true if the tree can generate.
      */
     default boolean canGenerateTree(World world, BlockPos pos, WoodType woodType) {

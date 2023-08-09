@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.plant.PlantVariant;
-import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog;
+import net.dries007.tfc.objects.blocks.wood.BlockWoodLog;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;

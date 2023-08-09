@@ -5,7 +5,7 @@ import net.dries007.tfc.api.types.wood.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.wood.tree.BlockWoodSapling;
+import net.dries007.tfc.objects.blocks.wood.BlockWoodSapling;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -15,7 +15,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
-import static net.dries007.tfc.objects.blocks.wood.tree.BlockWoodLog.PLACED;
+import static net.dries007.tfc.objects.blocks.wood.BlockWoodLog.PLACED;
 import static net.minecraft.block.BlockLeaves.DECAYABLE;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 

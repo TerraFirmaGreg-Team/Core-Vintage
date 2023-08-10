@@ -41,10 +41,6 @@ public class SoilBlockVariant {
         return name;
     }
 
-    public String name() {
-        return name;
-    }
-
     @Nullable
     public FallingBlockManager.Specification getFallingSpecification() {
         return fallingSpecification;

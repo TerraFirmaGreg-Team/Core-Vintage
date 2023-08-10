@@ -61,10 +61,6 @@ public class RockBlockVariant {
         return name;
     }
 
-    public String name() {
-        return name;
-    }
-
     public float getBaseHardness() {
         return baseHardness;
     }

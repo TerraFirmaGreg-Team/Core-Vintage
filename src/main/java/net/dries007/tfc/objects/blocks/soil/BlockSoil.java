@@ -58,7 +58,7 @@ public abstract class BlockSoil extends Block implements ISoilBlock {
         setHardness(2.0F);
         setHarvestLevel("shovel", 0);
 
-        OreDictionaryHelper.register(this, soilBlockVariant.name(), soilType.name());
+        OreDictionaryHelper.register(this, soilBlockVariant.toString(), soilType.toString());
     }
 
     @Nonnull

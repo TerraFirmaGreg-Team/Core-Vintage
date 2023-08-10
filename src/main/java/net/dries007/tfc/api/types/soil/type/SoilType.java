@@ -29,10 +29,6 @@ public class SoilType {
         return name;
     }
 
-    public String name() {
-        return name;
-    }
-
     public static Set<SoilType> getSoilTypes() {
         return SOIL_TYPES;
     }

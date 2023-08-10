@@ -59,7 +59,7 @@ public class BlockWoodSupport extends BlockWood {
                 .withProperty(WEST, false));
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
+        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
     }
 
     /**

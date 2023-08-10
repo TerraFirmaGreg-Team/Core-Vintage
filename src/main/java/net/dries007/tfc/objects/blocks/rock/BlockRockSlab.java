@@ -246,7 +246,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
             setHardness(getFinalHardness());
             setHarvestLevel("pickaxe", 0);
 
-            OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
+            OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
         }
 
         @Override

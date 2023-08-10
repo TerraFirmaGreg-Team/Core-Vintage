@@ -49,7 +49,7 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(FACING, EnumFacing.NORTH));
 
-        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
+        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
     }
 
     @Nonnull

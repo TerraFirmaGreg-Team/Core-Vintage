@@ -48,7 +48,7 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);
 
-        OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
+        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
     }
 
     @Nonnull

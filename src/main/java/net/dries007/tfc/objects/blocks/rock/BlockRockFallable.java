@@ -25,7 +25,7 @@ public abstract class BlockRockFallable extends BlockRock {
     public BlockRockFallable(Material material, RockBlockVariant rockBlockVariant, RockType rockType) {
         super(material, rockBlockVariant, rockType);
 
-        OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
+        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
     }
 
     @SideOnly(Side.CLIENT)

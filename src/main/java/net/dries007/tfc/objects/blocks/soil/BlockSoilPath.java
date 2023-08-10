@@ -51,7 +51,7 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
         setHarvestLevel("shovel", 0);
         setLightOpacity(255);
 
-        OreDictionaryHelper.register(this, soilBlockVariant.name(), soilType.name());
+        OreDictionaryHelper.register(this, soilBlockVariant.toString(), soilType.toString());
     }
 
     @Nonnull

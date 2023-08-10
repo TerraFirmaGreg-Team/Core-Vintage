@@ -42,7 +42,7 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
 
         Blocks.FIRE.setFireInfo(this, 30, 20);
 
-        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
+        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
     }
 
     @Override

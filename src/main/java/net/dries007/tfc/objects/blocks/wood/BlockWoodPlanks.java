@@ -15,6 +15,6 @@ public class BlockWoodPlanks extends BlockWood {
         setHarvestLevel("axe", 0);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
+        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
     }
 }

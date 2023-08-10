@@ -61,7 +61,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         leavesFancy = true; // Fast / Fancy graphics works correctly
 
         Blocks.FIRE.setFireInfo(this, 30, 60);
-        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
+        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
     }
 
     @Override

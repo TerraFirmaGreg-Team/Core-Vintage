@@ -47,7 +47,7 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
 
-        OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
+        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
     }
 
     public BlockRock(RockBlockVariant rockBlockVariant, RockType rockType) {

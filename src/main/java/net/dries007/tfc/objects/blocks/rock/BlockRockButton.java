@@ -42,7 +42,7 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
 
-        OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
+        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
     }
 
     @Nonnull

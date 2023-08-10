@@ -37,10 +37,6 @@ public class WoodBlockVariant {
         return name;
     }
 
-    public String name() {
-        return name;
-    }
-
     @Nonnull
     public IWoodBlock applyToFactory(@Nonnull WoodType woodType) {
         return factory.apply(this, woodType);

@@ -37,7 +37,7 @@ public abstract class BlockWood extends Block implements IWoodBlock {
         setCreativeTab(CreativeTabsTFC.WOOD);
         setSoundType(SoundType.WOOD);
 
-        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
+        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
     }
 
     @Override

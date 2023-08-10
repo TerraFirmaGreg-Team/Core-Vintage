@@ -89,7 +89,7 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         setTickRandomly(true);
         setLightOpacity(255);
 
-        OreDictionaryHelper.register(this, soilBlockVariant.name(), soilType.name());
+        OreDictionaryHelper.register(this, soilBlockVariant.toString(), soilType.toString());
     }
 
     protected static void turnToDirt(World world, BlockPos pos) {

@@ -92,7 +92,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 .withProperty(SOUTH, Boolean.FALSE)
                 .withProperty(WEST, Boolean.FALSE));
 
-        OreDictionaryHelper.register(this, soilBlockVariant.name(), soilType.name());
+        OreDictionaryHelper.register(this, soilBlockVariant.toString(), soilType.toString());
     }
 
     public static void spreadGrass(World world, BlockPos pos, IBlockState us, Random rand) {

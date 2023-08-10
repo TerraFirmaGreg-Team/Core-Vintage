@@ -206,7 +206,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
             setRegistryName(getRegistryLocation());
             setTranslationKey(getTranslationName());
 
-            OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
+            OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
         }
 
         @Override

@@ -59,7 +59,7 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
         setHardness(0.0F);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
+        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
     }
 
     @Override

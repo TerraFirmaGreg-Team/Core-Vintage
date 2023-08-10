@@ -69,7 +69,7 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
         setResistance(3f);
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 
-        OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
+        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
     }
 
     @Override

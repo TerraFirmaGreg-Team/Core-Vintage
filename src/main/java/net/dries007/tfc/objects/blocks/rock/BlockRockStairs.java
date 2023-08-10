@@ -45,7 +45,7 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
         setHarvestLevel("pickaxe", 0);
         useNeighborBrightness = true;
 
-        OreDictionaryHelper.register(this, rockBlockVariant.name(), rockType.name());
+        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
     }
 
     @Nonnull

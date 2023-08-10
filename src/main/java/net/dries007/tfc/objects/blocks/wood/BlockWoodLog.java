@@ -63,7 +63,7 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         Blocks.FIRE.setFireInfo(this, 5, 5);
 
         OreDictionaryHelper.register(this, "logWood");
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, woodBlockVariant.toString(), "wood", woodType.toString());
     }
 
     @Override

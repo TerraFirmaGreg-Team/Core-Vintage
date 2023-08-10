@@ -94,7 +94,7 @@ public class OreDictionaryHelper {
      */
     public static String upperCaseToCamelCase(String... strings) {
         if (strings.length > 1)
-            return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, String.join("_", strings).toUpperCase());
+            return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, String.join("_", strings).replace("/", "_").toUpperCase());
 
         return strings[0];
     }

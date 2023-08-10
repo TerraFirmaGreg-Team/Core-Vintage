@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.animal.util;
+package net.dries007.tfc.api.types.animal;
 
 /**
  * Use this to tell TFC this is a predator (for respawning mechanics)

@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.animal.util;
+package net.dries007.tfc.api.types.animal;
 
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.util.calendar.CalendarTFC;

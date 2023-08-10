@@ -10,7 +10,7 @@ import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.types.fluid.properties.FluidWrapper;
-import net.dries007.tfc.api.types.fluid.util.DrinkableProperty;
+import net.dries007.tfc.api.types.fluid.DrinkableProperty;
 import net.dries007.tfc.objects.effects.PotionEffectsTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.init.MobEffects;

@@ -8,7 +8,7 @@ import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.metal.util.IMetalBlock;
+import net.dries007.tfc.api.types.metal.IMetalBlock;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.IWoodItem;

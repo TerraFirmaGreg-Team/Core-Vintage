@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.plant.PlantVariant;
-import net.dries007.tfc.api.types.plant.util.IPlantBlock;
+import net.dries007.tfc.api.types.plant.IPlantBlock;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.api.types.animal.util.IAnimalTFC;
+import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
 import net.dries007.tfc.objects.entity.animal.EntityHorseTFC;
 import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;

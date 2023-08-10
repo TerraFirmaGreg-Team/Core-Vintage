@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.render.animal;
 
-import net.dries007.tfc.api.types.animal.util.IAnimalTFC;
+import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.client.model.animal.ModelSheepWoolTFC;
 import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 import net.minecraft.client.renderer.GlStateManager;

@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
-import net.dries007.tfc.api.types.animal.util.IAnimalTFC;
+import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.util.Helpers;

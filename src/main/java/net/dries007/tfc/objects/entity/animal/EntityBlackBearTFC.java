@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.animal.util.IPredator;
+import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIStandAttack;

@@ -4,7 +4,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.types.animal.util.IAnimalTFC;
+import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.items.tools.behaviors.ChiselBehavior;
 import net.dries007.tfc.util.config.HealthDisplayFormat;

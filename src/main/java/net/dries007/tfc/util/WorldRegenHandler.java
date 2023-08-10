@@ -2,9 +2,9 @@ package net.dries007.tfc.util;
 
 import com.google.common.collect.Lists;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.animal.util.ICreatureTFC;
-import net.dries007.tfc.api.types.animal.util.IHuntable;
-import net.dries007.tfc.api.types.animal.util.IPredator;
+import net.dries007.tfc.api.types.animal.ICreatureTFC;
+import net.dries007.tfc.api.types.animal.IHuntable;
+import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.types.wood.type.WoodType;

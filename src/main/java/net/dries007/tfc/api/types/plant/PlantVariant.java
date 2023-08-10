@@ -1,7 +1,6 @@
 package net.dries007.tfc.api.types.plant;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.plant.util.IPlantBlock;
 import net.dries007.tfc.objects.blocks.plants.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;

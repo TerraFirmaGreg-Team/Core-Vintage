@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
-import net.dries007.tfc.api.types.animal.util.IAnimalTFC;
+import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.nbt.NBTTagCompound;

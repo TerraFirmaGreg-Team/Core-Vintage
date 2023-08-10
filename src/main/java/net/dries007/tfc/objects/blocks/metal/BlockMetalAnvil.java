@@ -9,7 +9,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.metal.MetalVariant;
-import net.dries007.tfc.api.types.metal.util.IMetalBlock;
+import net.dries007.tfc.api.types.metal.IMetalBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.TFCGuiHandler;

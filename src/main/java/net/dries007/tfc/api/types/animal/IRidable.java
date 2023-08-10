@@ -1,7 +1,7 @@
-package net.dries007.tfc.api.types.animal.util;
+package net.dries007.tfc.api.types.animal;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.animal.util.IAnimalTFC.Age;
+import net.dries007.tfc.api.types.animal.IAnimalTFC.Age;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.OreDictionaryHelper;

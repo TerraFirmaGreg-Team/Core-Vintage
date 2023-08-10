@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.plant.util;
+package net.dries007.tfc.api.types.plant;
 
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.plant.PlantVariant;

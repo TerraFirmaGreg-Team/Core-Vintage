@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.fluid.util;
+package net.dries007.tfc.api.types.fluid;
 
 import net.dries007.tfc.api.types.fluid.properties.FluidProperty;
 import net.minecraft.entity.player.EntityPlayer;

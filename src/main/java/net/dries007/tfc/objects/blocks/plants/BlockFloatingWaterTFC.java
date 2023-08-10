@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import net.dries007.tfc.api.types.plant.IPlantBlock;
 import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.plant.PlantVariant;
-import net.dries007.tfc.api.types.plant.IPlantBlock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;

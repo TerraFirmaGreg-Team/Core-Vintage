@@ -1,12 +1,10 @@
 package net.dries007.tfc.objects.te;
 
 import gregtech.api.items.toolitem.IGTTool;
-import gregtech.common.items.ToolItems;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

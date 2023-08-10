@@ -62,6 +62,15 @@ public class RockCategory {
     }
 
     /**
+     * Возвращает набор всех категорий пород.
+     *
+     * @return Набор всех категорий пород.
+     */
+    public static Set<RockCategory> getAllRockCategories() {
+        return ROCK_CATEGORY;
+    }
+
+    /**
      * Возвращает строковое представление категории породы.
      *
      * @return Строковое представление категории породы.
@@ -124,15 +133,6 @@ public class RockCategory {
      */
     public String getLocalizedName() {
         return textFormatting + new TextComponentTranslation(String.format("rockcategory.%s.name", this)).getFormattedText();
-    }
-
-    /**
-     * Возвращает набор всех категорий пород.
-     *
-     * @return Набор всех категорий пород.
-     */
-    public static Set<RockCategory> getAllRockCategories() {
-        return ROCK_CATEGORY;
     }
 
     /**

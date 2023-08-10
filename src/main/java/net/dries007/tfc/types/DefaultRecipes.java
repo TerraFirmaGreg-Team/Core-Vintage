@@ -1,6 +1,5 @@
 package net.dries007.tfc.types;
 
-import net.dries007.tfc.objects.recipes.UnmoldRecipe;
 import net.dries007.tfc.objects.recipes.category.*;
 import net.minecraftforge.fml.common.Mod;
 

@@ -1,17 +1,27 @@
 //file:noinspection DependencyNotationArgument
 
 repositories {
-    maven {
-        name 'CurseMaven'
-        url 'https://cursemaven.com'
+    exclusiveContent {
+        forRepository {
+            maven {
+                name 'CurseMaven'
+                url 'https://cursemaven.com'
+            }
+        }
+        filter {
+            includeGroup 'curse.maven'
+        }
     }
-    maven {
-        name 'Modrinth'
-        url 'https://api.modrinth.com/maven'
-    }
-    maven {
-        name 'BlameJared Maven'
-        url 'https://maven.blamejared.com'
+    exclusiveContent {
+        forRepository {
+            maven {
+                name 'Modrinth'
+                url 'https://api.modrinth.com/maven'
+            }
+        }
+        filter {
+            includeGroup 'maven.modrinth'
+        }
     }
     mavenLocal() // Must be last for caching to work
 }

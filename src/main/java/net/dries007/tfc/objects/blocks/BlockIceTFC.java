@@ -45,7 +45,7 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
             setTranslationKey(MOD_ID + ".sea_ice.");
             setCreativeTab(CreativeTabsTFC.MISC);
         }
-        
+
         setHardness(0.5F);
         setLightOpacity(3);
         setSoundType(SoundType.GLASS);

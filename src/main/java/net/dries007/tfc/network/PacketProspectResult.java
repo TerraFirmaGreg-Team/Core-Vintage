@@ -6,7 +6,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.events.ProspectEvent;
 import net.dries007.tfc.compat.gregtech.items.tools.behaviors.PropickBehavior.ProspectResult.Type;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;

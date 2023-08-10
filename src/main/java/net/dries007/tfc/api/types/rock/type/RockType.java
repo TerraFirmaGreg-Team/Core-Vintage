@@ -54,6 +54,38 @@ public class RockType {
     }
 
     /**
+     * Возвращает список всех типов пород.
+     *
+     * @return Список всех типов пород.
+     */
+    public static Set<RockType> getRockTypes() {
+        return ROCK_TYPES;
+    }
+
+    /**
+     * Возвращает экземпляр породы по индексу.
+     *
+     * @param i Индекс породы.
+     * @return Экземпляр породы.
+     */
+    public static RockType valueOf(int i) {
+        var values = new RockType[ROCK_TYPES.size()];
+        values = ROCK_TYPES.toArray(values);
+
+        return i >= 0 && i < values.length ? values[i] : values[i % values.length];
+    }
+
+    /**
+     * Возвращает индекс породы в списке.
+     *
+     * @param rockType Порода.
+     * @return Индекс породы.
+     */
+    public static int indexOf(RockType rockType) {
+        return new ArrayList<>(ROCK_TYPES).indexOf(rockType);
+    }
+
+    /**
      * Возвращает строковое представление породы.
      *
      * @return Строковое представление породы.
@@ -90,37 +122,5 @@ public class RockType {
     @Nonnull
     public ResourceLocation getTexture() {
         return new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/blocks/rock/raw/" + this + ".png");
-    }
-
-    /**
-     * Возвращает список всех типов пород.
-     *
-     * @return Список всех типов пород.
-     */
-    public static Set<RockType> getRockTypes() {
-        return ROCK_TYPES;
-    }
-
-    /**
-     * Возвращает экземпляр породы по индексу.
-     *
-     * @param i Индекс породы.
-     * @return Экземпляр породы.
-     */
-    public static RockType valueOf(int i) {
-        var values = new RockType[ROCK_TYPES.size()];
-        values = ROCK_TYPES.toArray(values);
-
-        return i >= 0 && i < values.length ? values[i] : values[i % values.length];
-    }
-
-    /**
-     * Возвращает индекс породы в списке.
-     *
-     * @param rockType Порода.
-     * @return Индекс породы.
-     */
-    public static int indexOf(RockType rockType) {
-        return new ArrayList<>(ROCK_TYPES).indexOf(rockType);
     }
 }

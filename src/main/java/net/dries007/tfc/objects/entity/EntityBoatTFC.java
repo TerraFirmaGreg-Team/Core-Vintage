@@ -4,7 +4,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.objects.items.wood.ItemWoodBoat;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;

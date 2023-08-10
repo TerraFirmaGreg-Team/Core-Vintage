@@ -27,8 +27,7 @@ public class GemsFromRawRocks {
             Olivine
     );
 
-    public static ItemStack getRandomGem()
-    {
+    public static ItemStack getRandomGem() {
         int lower_bound = 0;
         int upper_bound = 100;
 
@@ -36,14 +35,11 @@ public class GemsFromRawRocks {
 
         if (random_value <= 5) {
             return OreDictUnifier.get(OrePrefix.gemExquisite, ALLOWED_MATERIALS_FOR_GEMS.get(new Random().nextInt(ALLOWED_MATERIALS_FOR_GEMS.size())));
-        }
-        else if (random_value < 20) {
+        } else if (random_value < 20) {
             return OreDictUnifier.get(OrePrefix.gemFlawless, ALLOWED_MATERIALS_FOR_GEMS.get(new Random().nextInt(ALLOWED_MATERIALS_FOR_GEMS.size())));
-        }
-        else if (random_value < 50) {
+        } else if (random_value < 50) {
             return OreDictUnifier.get(OrePrefix.gemFlawed, ALLOWED_MATERIALS_FOR_GEMS.get(new Random().nextInt(ALLOWED_MATERIALS_FOR_GEMS.size())));
-        }
-        else {
+        } else {
             return OreDictUnifier.get(OrePrefix.gemChipped, ALLOWED_MATERIALS_FOR_GEMS.get(new Random().nextInt(ALLOWED_MATERIALS_FOR_GEMS.size())));
         }
     }

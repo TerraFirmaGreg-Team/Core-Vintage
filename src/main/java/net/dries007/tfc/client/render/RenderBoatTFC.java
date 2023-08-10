@@ -59,7 +59,7 @@ public class RenderBoatTFC extends Render<EntityBoatTFC> {
         final WoodType woodType = entity.getWood();
         if (woodType != null) {
             //noinspection ConstantConditions
-            return new ResourceLocation(MOD_ID, "textures/entity/boat/" + woodType.toString() + ".png");
+            return new ResourceLocation(MOD_ID, "textures/entity/boat/" + woodType + ".png");
         }
         // Fallback
         return new ResourceLocation(MOD_ID, "textures/entity/boat/oak.png");

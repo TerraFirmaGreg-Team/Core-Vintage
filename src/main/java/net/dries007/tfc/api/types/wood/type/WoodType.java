@@ -16,7 +16,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import static net.dries007.tfc.types.DefaultTrees.GEN_NORMAL;
 
@@ -105,6 +108,15 @@ public class WoodType {
         if (!WOOD_TYPES.add(this)) {
             throw new RuntimeException(String.format("Wood: [%s] already exists!", name));
         }
+    }
+
+    /**
+     * Возвращает список всех доступных типов дерева.
+     *
+     * @return список типов дерева
+     */
+    public static Set<WoodType> getWoodTypes() {
+        return WOOD_TYPES;
     }
 
     /**
@@ -332,15 +344,6 @@ public class WoodType {
             return makeTree(((WorldServer) world).getStructureTemplateManager(), world, pos, rand, isWorldGen);
         }
         return false;
-    }
-
-    /**
-     * Возвращает список всех доступных типов дерева.
-     *
-     * @return список типов дерева
-     */
-    public static Set<WoodType> getWoodTypes() {
-        return WOOD_TYPES;
     }
 
     @SideOnly(Side.CLIENT)

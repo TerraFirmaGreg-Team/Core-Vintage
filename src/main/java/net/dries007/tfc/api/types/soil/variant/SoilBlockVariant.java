@@ -35,6 +35,10 @@ public class SoilBlockVariant {
         }
     }
 
+    public static Set<SoilBlockVariant> getSoilBlockVariants() {
+        return SOIL_BLOCK_VARIANTS;
+    }
+
     @Nonnull
     @Override
     public String toString() {
@@ -74,10 +78,6 @@ public class SoilBlockVariant {
 
     public boolean isGrass() {
         return this == SoilBlockVariants.GRASS || this == SoilBlockVariants.DRY_GRASS || this == SoilBlockVariants.CLAY_GRASS;
-    }
-
-    public static Set<SoilBlockVariant> getSoilBlockVariants() {
-        return SOIL_BLOCK_VARIANTS;
     }
 
     @Nonnull

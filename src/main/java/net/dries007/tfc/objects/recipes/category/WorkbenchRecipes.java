@@ -4,7 +4,6 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.common.items.ToolItems;
 import gregtech.loaders.recipe.handlers.OreRecipeHandler;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.type.WoodType;
@@ -19,9 +18,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;

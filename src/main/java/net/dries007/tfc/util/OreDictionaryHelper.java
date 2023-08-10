@@ -1,14 +1,10 @@
 package net.dries007.tfc.util;
 
 import com.google.common.base.CaseFormat;
-import com.google.common.base.Converter;
-import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.items.ItemPowder;
-import net.dries007.tfc.test.items.TFCItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

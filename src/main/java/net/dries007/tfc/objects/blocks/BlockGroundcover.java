@@ -112,7 +112,7 @@ public class BlockGroundcover extends Block implements IHasModel {
     public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
-    
+
 
     @Override
     @ParametersAreNonnullByDefault

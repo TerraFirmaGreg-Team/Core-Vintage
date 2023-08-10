@@ -31,6 +31,10 @@ public class WoodBlockVariant {
         }
     }
 
+    public static Set<WoodBlockVariant> getWoodVariants() {
+        return WOOD_VARIANTS;
+    }
+
     @Nonnull
     @Override
     public String toString() {
@@ -40,9 +44,5 @@ public class WoodBlockVariant {
     @Nonnull
     public IWoodBlock applyToFactory(@Nonnull WoodType woodType) {
         return factory.apply(this, woodType);
-    }
-
-    public static Set<WoodBlockVariant> getWoodVariants() {
-        return WOOD_VARIANTS;
     }
 }

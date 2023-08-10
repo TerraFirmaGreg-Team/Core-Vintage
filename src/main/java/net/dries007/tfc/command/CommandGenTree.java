@@ -46,7 +46,7 @@ public class CommandGenTree extends CommandBase {
         final TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
 
         if (!tree.makeTree(manager, world, center, random, false)) {
-                sender.sendMessage(new TextComponentTranslation("tfc.command.gentree.failed.grow"));
+            sender.sendMessage(new TextComponentTranslation("tfc.command.gentree.failed.grow"));
         }
     }
 

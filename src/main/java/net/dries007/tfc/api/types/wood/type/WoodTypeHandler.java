@@ -64,7 +64,7 @@ public class WoodTypeHandler {
                 .build();
 
         HICKORY = new WoodType
-                .Builder("hickory", 0x4E3418, 7f, 29f,  80f, 250f)
+                .Builder("hickory", 0x4E3418, 7f, 29f, 80f, 250f)
                 .setGenerator(GEN_TALL)
                 .setGrowthTime(10)
                 .setTannin()

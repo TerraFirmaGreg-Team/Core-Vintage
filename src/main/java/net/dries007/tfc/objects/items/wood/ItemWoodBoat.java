@@ -1,6 +1,5 @@
 package net.dries007.tfc.objects.items.wood;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodItem;
@@ -30,8 +29,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Objects;
-
-import static net.dries007.tfc.TerraFirmaCraft.*;
 
 public class ItemWoodBoat extends ItemTFC implements IHasModel, IWoodItem {
 

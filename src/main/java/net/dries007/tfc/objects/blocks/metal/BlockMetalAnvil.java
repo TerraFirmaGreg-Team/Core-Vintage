@@ -8,8 +8,8 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.metal.MetalVariant;
 import net.dries007.tfc.api.types.metal.IMetalBlock;
+import net.dries007.tfc.api.types.metal.MetalVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -91,6 +91,13 @@ public class BlockMetalAnvil extends Block implements IMetalBlock, IMaterialItem
         FallingBlockManager.registerFallable(this, spec);
     }
 
+    public static Collection<Block> getAnvilStorage() {
+        return METAL_BLOCKS.values().stream()
+                .filter(block -> block.getMetalVariant() == ANVIL)
+                .map(block -> (Block) block)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public MetalVariant getMetalVariant() {
         return metalVariant;
@@ -116,14 +123,6 @@ public class BlockMetalAnvil extends Block implements IMetalBlock, IMaterialItem
     @Override
     public int getSmeltAmount(ItemStack stack) {
         return 2016;
-    }
-
-
-    public static Collection<Block> getAnvilStorage() {
-        return METAL_BLOCKS.values().stream()
-                .filter(block -> block.getMetalVariant() == ANVIL)
-                .map(block -> (Block) block)
-                .collect(Collectors.toList());
     }
 
     protected EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

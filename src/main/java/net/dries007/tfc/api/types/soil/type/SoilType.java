@@ -23,12 +23,6 @@ public class SoilType {
         }
     }
 
-    @Nonnull
-    @Override
-    public String toString() {
-        return name;
-    }
-
     public static Set<SoilType> getSoilTypes() {
         return SOIL_TYPES;
     }
@@ -39,5 +33,11 @@ public class SoilType {
         values = SOIL_TYPES.toArray(values);
 
         return i >= 0 && i < values.length ? values[i] : values[i % values.length];
+    }
+
+    @Nonnull
+    @Override
+    public String toString() {
+        return name;
     }
 }

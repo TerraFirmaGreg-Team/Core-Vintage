@@ -27,11 +27,17 @@ import net.minecraftforge.common.MinecraftForge;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 public class PropickBehavior implements IToolBehavior {
 
     public static final PropickBehavior INSTANCE = new PropickBehavior();
+    private static final Random RANDOM = new Random();
+    private static final int PROSPECT_RADIUS = 30;
+    private static final int COOLDOWN = 10;
 
     protected PropickBehavior() {/**/}
 
@@ -44,10 +50,6 @@ public class PropickBehavior implements IToolBehavior {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flag) {
         tooltip.add(I18n.format("item.gt.tool.behavior.propick"));
     }
-
-    private static final Random RANDOM = new Random();
-    private static final int PROSPECT_RADIUS = 30;
-    private static final int COOLDOWN = 10;
 
     @Override
     @Nonnull
@@ -75,7 +77,7 @@ public class PropickBehavior implements IToolBehavior {
                  * of pos.toLong(). Solved this by multiplying coordinates by primes and XOR's results. Verified produces
                  * more "random" results.
                  */
-                RANDOM.setSeed((pos.getX() * 92853) ^ (pos.getY() * 1959302) ^ (pos.getZ() * 2839402));
+                RANDOM.setSeed((pos.getX() * 92853L) ^ (pos.getY() * 1959302L) ^ (pos.getZ() * 2839402L));
 
                 var block = worldIn.getBlockState(pos).getBlock();
 
@@ -87,18 +89,15 @@ public class PropickBehavior implements IToolBehavior {
                     if (skill != null) {
                         skill.addSkill(pos);
                     }
-                }
-                else if (RANDOM.nextFloat() < falseNegativeChance) {
+                } else if (RANDOM.nextFloat() < falseNegativeChance) {
                     // False negative
                     event = new ProspectEvent.Server(player, pos, ProspectResult.Type.values()[ProspectResult.Type.NOTHING.ordinal()], null);
-                }
-                else {
+                } else {
                     Collection<ProspectResult> results = scanSurroundingBlocks(worldIn, pos);
                     if (results.isEmpty()) {
                         // Found nothing
                         event = new ProspectEvent.Server(player, pos, ProspectResult.Type.values()[ProspectResult.Type.NOTHING.ordinal()], null);
-                    }
-                    else {
+                    } else {
                         // Found something
                         ProspectResult result = (ProspectResult) results.toArray()[RANDOM.nextInt(results.size())];
                         event = new ProspectEvent.Server(player, pos, ProspectResult.Type.values()[result.getType().ordinal()], result.materialName);
@@ -108,8 +107,7 @@ public class PropickBehavior implements IToolBehavior {
                 MinecraftForge.EVENT_BUS.post(event);
                 PacketProspectResult packet = new PacketProspectResult(event.getBlockPos(), event.getResultType(), event.getMaterialName());
                 TerraFirmaCraft.getNetwork().sendTo(packet, (EntityPlayerMP) player);
-            }
-            else {
+            } else {
                 //client side, add hit particles
                 addHitBlockParticle(worldIn, pos, facing, state);
             }
@@ -136,8 +134,7 @@ public class PropickBehavior implements IToolBehavior {
             if (block instanceof BlockOre blockOre) {
                 if (results.containsKey(blockOre.material.getLocalizedName())) {
                     results.get(blockOre.material.getLocalizedName()).score += 1;
-                }
-                else {
+                } else {
                     results.put(blockOre.material.getLocalizedName(), new ProspectResult(blockOre.material.getLocalizedName(), 1));
                 }
             }
@@ -181,17 +178,13 @@ public class PropickBehavior implements IToolBehavior {
         public Type getType() {
             if (score < 10) {
                 return Type.TRACES;
-            }
-            else if (score < 20) {
+            } else if (score < 20) {
                 return Type.SMALL;
-            }
-            else if (score < 40) {
+            } else if (score < 40) {
                 return Type.MEDIUM;
-            }
-            else if (score < 80) {
+            } else if (score < 80) {
                 return Type.LARGE;
-            }
-            else {
+            } else {
                 return Type.VERY_LARGE;
             }
         }

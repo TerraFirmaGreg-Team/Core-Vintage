@@ -58,6 +58,34 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
         setSoundType(SoundType.STONE);
     }
 
+    protected static Block getFullBlockFromSlab(RockBlockVariant rockBlockVariant, RockType rockType) {
+        if (rockBlockVariant == RockBlockVariants.SLAB_RAW || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_RAW) {
+            return TFCStorage.getRockBlock(RockBlockVariants.RAW, rockType);
+        } else if (rockBlockVariant == RockBlockVariants.SLAB_COBBLE || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_COBBLE) {
+            return TFCStorage.getRockBlock(RockBlockVariants.COBBLE, rockType);
+        } else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_SMOOTH) {
+            return TFCStorage.getRockBlock(RockBlockVariants.SMOOTH, rockType);
+        } else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_BRICK) {
+            return TFCStorage.getRockBlock(RockBlockVariants.BRICK, rockType);
+        }
+
+        throw new RuntimeException(String.format("Full block from slab not founded: %s, %s", rockBlockVariant, rockType));
+    }
+
+    protected static Block getDoubleSlabFromSlab(RockBlockVariant rockBlockVariant, RockType rockType) {
+        if (rockBlockVariant == RockBlockVariants.SLAB_RAW) {
+            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_RAW, rockType);
+        } else if (rockBlockVariant == RockBlockVariants.SLAB_COBBLE) {
+            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_COBBLE, rockType);
+        } else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH) {
+            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_SMOOTH, rockType);
+        } else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK) {
+            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_BRICK, rockType);
+        }
+
+        throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", rockBlockVariant, rockType));
+    }
+
     @Override
     @Nonnull
     public String getTranslationKey(int meta) {
@@ -136,34 +164,6 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     @Override
     public SoundType getSoundType() {
         return modelBlock.getSoundType();
-    }
-
-    protected static Block getFullBlockFromSlab(RockBlockVariant rockBlockVariant, RockType rockType) {
-        if (rockBlockVariant == RockBlockVariants.SLAB_RAW || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_RAW) {
-            return TFCStorage.getRockBlock(RockBlockVariants.RAW, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_COBBLE || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_COBBLE) {
-            return TFCStorage.getRockBlock(RockBlockVariants.COBBLE, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_SMOOTH) {
-            return TFCStorage.getRockBlock(RockBlockVariants.SMOOTH, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_BRICK) {
-            return TFCStorage.getRockBlock(RockBlockVariants.BRICK, rockType);
-        }
-
-        throw new RuntimeException(String.format("Full block from slab not founded: %s, %s", rockBlockVariant, rockType));
-    }
-
-    protected static Block getDoubleSlabFromSlab(RockBlockVariant rockBlockVariant, RockType rockType) {
-        if (rockBlockVariant == RockBlockVariants.SLAB_RAW) {
-            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_RAW, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_COBBLE) {
-            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_COBBLE, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH) {
-            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_SMOOTH, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK) {
-            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_BRICK, rockType);
-        }
-
-        throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", rockBlockVariant, rockType));
     }
 
     public enum Variant implements IStringSerializable {

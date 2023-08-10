@@ -10,14 +10,13 @@ import net.minecraft.block.SoundType;
 import static net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix.oreChunk;
 
 public class StoneTypeHandler {
+    private static int counter = 16;
     public static void init() {
 
         OreByProduct.addOreByProductPrefix(oreChunk);
 
-        int counter = 16;
-
-        System.out.println(RockType.getRockTypes().size());
         for (var rockType : RockType.getRockTypes()) {
+            System.out.println(counter + " " + rockType + " " + rockType.getAssociatedOrePrefix() + " " + rockType.getAssociatedMaterial());
             new StoneType(
                     counter, "tfc_" + rockType.toString(), SoundType.STONE, rockType.getAssociatedOrePrefix(), rockType.getAssociatedMaterial(),
                     () -> TFCStorage.getRockBlock(RockBlockVariants.RAW, rockType).getDefaultState(),

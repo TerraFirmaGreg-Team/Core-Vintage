@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.te;
 
+import gregtech.api.items.toolitem.IGTTool;
+import gregtech.common.items.ToolItems;
+import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
@@ -27,9 +30,8 @@ public class TEToolRack extends TEBase {
         if (stack == null || stack.isEmpty()) {
             return false;
         }
-        Item item = stack.getItem();
-        return true;
-        /*item instanceof ItemMetalTool || item instanceof ItemTool || item instanceof ItemBow || item instanceof ItemHoe || item instanceof ItemSword || item instanceof ItemFireStarter || item instanceof ItemFlintAndSteel || !item.getToolClasses(stack).isEmpty() || OreDictionaryHelper.doesStackMatchOre(stack, "tool");*/
+        var item = stack.getItem();
+        return item instanceof IGTTool || item instanceof ItemFireStarter;
     }
 
     public NonNullList<ItemStack> getItems() {

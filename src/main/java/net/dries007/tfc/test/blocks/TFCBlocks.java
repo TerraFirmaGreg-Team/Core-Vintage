@@ -111,7 +111,7 @@ public class TFCBlocks {
         //=== Metal ==================================================================================================//
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
-            if (material.hasFlag(TFGMaterialFlags.GENERATE_TFC)) {
+            if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL)) {
                 for (MetalVariant metalVariant : MetalVariant.values()) {
                     var metalVariantBlock = metalVariant.create(material);
 

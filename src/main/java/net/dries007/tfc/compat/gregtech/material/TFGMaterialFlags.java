@@ -10,10 +10,6 @@ public class TFGMaterialFlags {
             .requireProps(TFGPropertyKey.HEAT)
             .build();
 
-    public static final MaterialFlag GENERATE_TFC = new MaterialFlag.Builder("generate_anvil")
-            .requireProps(TFGPropertyKey.HEAT)
-            .build();
-
     /**
      * Идентифицирует материалы, которые не должны иметь расширенных рецептов.
      */

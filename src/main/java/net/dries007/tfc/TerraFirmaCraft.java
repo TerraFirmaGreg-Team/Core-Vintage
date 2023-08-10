@@ -108,20 +108,10 @@ public final class TerraFirmaCraft {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         LOGGER.debug("If you can see this, debug logging is working :)");
-
-        RockCategoryHandler.init();
-        RockTypeHandler.init();
-        RockBlockVariantHandler.init();
-
-        SoilTypeHandler.init();
-        SoilBlockVariantHandler.init();
-
-        WoodTypeHandler.init();
-        WoodBlockVariantHandler.init();
+        LOGGER.info("PRE INIT START!");
 
         TFCBlocks.preInit();
         TFCItems.preInit();
-
         TFGToolItems.preInit();
 
         // No need to sync config here, forge magic

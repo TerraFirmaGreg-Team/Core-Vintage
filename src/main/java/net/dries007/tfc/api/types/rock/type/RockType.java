@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.types.rock.type;
 
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.minecraft.util.ResourceLocation;
@@ -8,6 +10,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * Основной класс для типов камней.
@@ -20,18 +23,26 @@ public class RockType {
     private final String name;
     @Nonnull
     private final RockCategory rockCategory;
+    @Nonnull
+    private final Supplier<OrePrefix> associatedOrePrefix;
+    @Nonnull
+    private final Supplier<Material> associatedMaterial;
     private final boolean isFlux;
 
     /**
      * Создает экземпляр класса Rock с указанными параметрами.
      *
-     * @param name         Название породы.
+     * @param name Название породы.
      * @param rockCategory Категория породы.
-     * @param isFlux       Флаг, указывающий, является ли порода флюсом.
+     * @param associatedOrePrefix Орпрефикс для типа породы, для использования в стоунтайпах.
+     * @param associatedMaterial Материал для типа породы, для использования в стоунтайпах.
+     * @param isFlux Флаг, указывающий, является ли порода флюсом.
      */
-    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, boolean isFlux) {
+    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull Supplier<OrePrefix> associatedOrePrefix, @Nonnull Supplier<Material> associatedMaterial, boolean isFlux) {
         this.name = name;
         this.rockCategory = rockCategory;
+        this.associatedOrePrefix = associatedOrePrefix;
+        this.associatedMaterial = associatedMaterial;
         this.isFlux = isFlux;
 
         if (name.isEmpty()) {
@@ -46,11 +57,13 @@ public class RockType {
     /**
      * Создает экземпляр класса Rock с указанными параметрами и флагом флюса, установленным в false.
      *
-     * @param name         Название породы.
+     * @param name Название породы.
      * @param rockCategory Категория породы.
+     * @param associatedOrePrefix Орпрефикс для типа породы, для использования в стоунтайпах.
+     * @param associatedMaterial Материал для типа породы, для использования в стоунтайпах.
      */
-    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory) {
-        this(name, rockCategory, false);
+    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull Supplier<OrePrefix> associatedOrePrefix, @Nonnull Supplier<Material> associatedMaterial) {
+        this(name, rockCategory, associatedOrePrefix, associatedMaterial, false);
     }
 
     /**
@@ -103,6 +116,26 @@ public class RockType {
     @Nonnull
     public RockCategory getRockCategory() {
         return rockCategory;
+    }
+
+    /**
+     * Возвращает орпрефикс породы.
+     *
+     * @return ОрПрефикс породы.
+     */
+    @Nonnull
+    public Supplier<OrePrefix> getAssociatedOrePrefix() {
+        return associatedOrePrefix;
+    }
+
+    /**
+     * Возвращает материал породы.
+     *
+     * @return Материал породы.
+     */
+    @Nonnull
+    public Supplier<Material> getAssociatedMaterial() {
+        return associatedMaterial;
     }
 
     /**

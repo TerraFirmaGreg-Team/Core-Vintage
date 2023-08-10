@@ -25,6 +25,13 @@ import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
+import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
+import net.dries007.tfc.api.types.rock.variant.RockBlockVariantHandler;
+import net.dries007.tfc.api.types.soil.type.SoilTypeHandler;
+import net.dries007.tfc.api.types.soil.variant.SoilBlockVariantHandler;
+import net.dries007.tfc.api.types.wood.type.WoodTypeHandler;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariantHandler;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
@@ -136,6 +143,17 @@ public final class CommonEventHandler {
     public static void onMaterialsInit(MaterialEvent event) {
         TFGMaterialHandler.init();
         TFGOrePrefixHandler.init();
+
+        RockCategoryHandler.init();
+        RockTypeHandler.init();
+        RockBlockVariantHandler.init();
+
+        SoilTypeHandler.init();
+        SoilBlockVariantHandler.init();
+
+        WoodTypeHandler.init();
+        WoodBlockVariantHandler.init();
+
         StoneTypeHandler.init();
     }
 

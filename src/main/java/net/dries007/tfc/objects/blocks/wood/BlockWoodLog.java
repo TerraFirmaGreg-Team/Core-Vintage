@@ -61,6 +61,8 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         setTickRandomly(true);
 
         Blocks.FIRE.setFireInfo(this, 5, 5);
+
+        OreDictionaryHelper.register(this, "logWood");
         OreDictionaryHelper.register(this, woodBlockVariant.name(), woodType.name());
     }
 

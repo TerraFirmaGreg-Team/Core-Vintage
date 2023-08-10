@@ -195,7 +195,7 @@ public enum Food implements IStringSerializable {
 
         public static boolean doesStackMatchCategories(ItemStack stack, Category... categories) {
             for (Category cat : categories) {
-                if (OreDictionaryHelper.doesStackMatchOre(stack, OreDictionaryHelper.toString("category_" + cat.name()))) {
+                if (OreDictionaryHelper.doesStackMatchOre(stack, OreDictionaryHelper.upperCaseToCamelCase("category", cat.name()))) {
                     return true;
                 }
             }

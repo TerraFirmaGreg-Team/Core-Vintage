@@ -23,10 +23,6 @@ public class HeatRecipeSimple extends HeatRecipe {
         this(ingredient, output, transformTemp, maxTemp, 0);
     }
 
-    public HeatRecipeSimple(IIngredient<ItemStack> ingredient, ItemStack output, float transformTemp, int minTier) {
-        this(ingredient, output, transformTemp, Float.MAX_VALUE, minTier);
-    }
-
     public HeatRecipeSimple(IIngredient<ItemStack> ingredient, ItemStack output, float transformTemp, float maxTemp, int minTier) {
         super(ingredient, transformTemp, minTier);
         this.output = output;

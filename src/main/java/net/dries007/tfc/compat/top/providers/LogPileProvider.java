@@ -32,6 +32,8 @@ public class LogPileProvider implements IProbeInfoProvider {
                     if (!slotStack.isEmpty()) {
                         horizontalLayout.item(slotStack);
                     }
+
+                    iProbeInfo.itemLabel(slotStack);
                 }
             }
         }

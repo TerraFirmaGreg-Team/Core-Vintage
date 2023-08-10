@@ -80,7 +80,7 @@ public class WorkbenchRecipes {
         for (var woodType : WoodType.getWoodTypes()) {
             // Barrel
             registerShaped(
-                    "barrel_" + woodType,
+                    "barrel/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.BARREL, woodType)),
                     "L L", "L L", "LLL",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType))
@@ -88,7 +88,7 @@ public class WorkbenchRecipes {
 
             // Boat
             registerShaped(
-                    "boat_" + woodType,
+                    "boat/" + woodType,
                     new ItemStack(TFCStorage.getBoatItem(woodType)),
                     "   ", "L L", "LLL",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType))
@@ -96,7 +96,7 @@ public class WorkbenchRecipes {
 
             // Bookshelf
             registerShaped(
-                    "bookshelf_" + woodType,
+                    "bookshelf/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.BOOKSHELF, woodType)),
                     "LLL", "BBB", "LLL",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType)),
@@ -105,14 +105,14 @@ public class WorkbenchRecipes {
 
             // Button
             registerShapeless(
-                    "button_" + woodType,
+                    "button/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.BOOKSHELF, woodType)),
                     new ItemStack(TFCStorage.getLumberItem(woodType))
             );
 
             // Chest
             registerShaped(
-                    "chest_" + woodType,
+                    "chest/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.CHEST, woodType)),
                     "LLL", "L L", "LLL",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType))
@@ -120,7 +120,7 @@ public class WorkbenchRecipes {
 
             // Trapped chest
             registerShapeless(
-                    "trapped_chest_" + woodType,
+                    "trapped_chest/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.CHEST_TRAP, woodType)),
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.CHEST, woodType)),
                     new ItemStack(Blocks.TRIPWIRE)
@@ -130,7 +130,7 @@ public class WorkbenchRecipes {
 
             // Fence
             registerShaped(
-                    "fence_" + woodType,
+                    "fence/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.FENCE, woodType), 8),
                     "PLP", "PLP",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType)),
@@ -139,7 +139,7 @@ public class WorkbenchRecipes {
 
             // Fence Gate
             registerShaped(
-                    "fence_gate_" + woodType,
+                    "fence_gate/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.FENCE_GATE, woodType), 2),
                     "LPL", "LPL",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType)),
@@ -158,7 +158,7 @@ public class WorkbenchRecipes {
 
             // Loom
             registerShaped(
-                    "loom_" + woodType,
+                    "loom/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.LOOM, woodType)),
                     "LLL", "LSL", "L L",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType)),
@@ -167,7 +167,7 @@ public class WorkbenchRecipes {
 
             // Log -> Lumber
             registerShaped(
-                    "lumber_log_" + woodType,
+                    "lumber_log/" + woodType,
                     new ItemStack(TFCStorage.getLumberItem(woodType), 8),
                     "s", "L",
                     'L', new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType))
@@ -183,7 +183,7 @@ public class WorkbenchRecipes {
 
             // Planks
             registerShaped(
-                    "planks_" + woodType,
+                    "planks/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.PLANKS, woodType)),
                     "LL", "LL",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType))
@@ -191,7 +191,7 @@ public class WorkbenchRecipes {
 
             // Pressure Plate
             registerShaped(
-                    "pressure_plate_" + woodType,
+                    "pressure_plate/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.PRESSURE_PLATE, woodType)),
                     "LL",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType))
@@ -199,7 +199,7 @@ public class WorkbenchRecipes {
 
             // Slab
             registerShaped(
-                    "slab_" + woodType,
+                    "slab/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.SLAB, woodType), 6),
                     "LLL",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType))
@@ -207,7 +207,7 @@ public class WorkbenchRecipes {
 
             // Stairs
             registerShaped(
-                    "slab_" + woodType,
+                    "stairs/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.STAIRS, woodType), 8),
                     "L  ", "LL ", "LLL",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType))
@@ -215,7 +215,7 @@ public class WorkbenchRecipes {
 
             // Support
             registerShaped(
-                    "support_" + woodType,
+                    "support/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.SUPPORT, woodType), 8),
                     "sL", " L",
                     'L', new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType))
@@ -223,7 +223,7 @@ public class WorkbenchRecipes {
 
             // Tool Rack
             registerShaped(
-                    "tool_rack_" + woodType,
+                    "tool_rack/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.TOOL_RACK, woodType)),
                     "LLL", "   ", "LLL",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType))
@@ -231,7 +231,7 @@ public class WorkbenchRecipes {
 
             // Trapdoor
             registerShaped(
-                    "trapdoor_" + woodType,
+                    "trapdoor/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.TRAPDOOR, woodType), 3),
                     "LLL", "LLL",
                     'L', new ItemStack(TFCStorage.getLumberItem(woodType))
@@ -239,7 +239,7 @@ public class WorkbenchRecipes {
 
             // Trapdoor
             registerShaped(
-                    "workbench_" + woodType,
+                    "workbench/" + woodType,
                     new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.WORKBENCH, woodType)),
                     "PP", "PP",
                     'P', new ItemStack(TFCStorage.getWoodBlock(WoodBlockVariants.PLANKS, woodType))

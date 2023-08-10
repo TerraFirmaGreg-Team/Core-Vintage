@@ -6,7 +6,6 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.minecraft.block.Block;
@@ -18,14 +17,13 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 
-
 public class OreDictionaryHelper {
 
     private static final Multimap<Block, String> MAP_BLOCK_ORE = HashMultimap.create();
     private static final Multimap<Item, String> MAP_ITEM_ORE = HashMultimap.create();
 
     /**
-     * Вызови это после инициализации всех остальных модулей!
+     * Вызови это в событии регистрации предметов, один раз, в самом конце!
      */
     public static void init() {
         MAP_BLOCK_ORE.forEach((block, oreDict) -> OreDictionary.registerOre(oreDict, block));
@@ -33,49 +31,6 @@ public class OreDictionaryHelper {
 
         MAP_BLOCK_ORE.clear();
         MAP_ITEM_ORE.clear();
-    }
-
-    /**
-     * Вызови это если хочешь зарегистрировать блоку его oreDict.
-     */
-    public static void register(Block block, String... parts) {
-        for (String partBlock : parts) {
-            var oreDict = convertString(partBlock);
-            MAP_BLOCK_ORE.put(block, oreDict);
-        }
-    }
-
-    /**
-     * Вызови это если хочешь зарегистрировать предмету его oreDict.
-     */
-    public static void register(Item item, String... parts) {
-        for (String partItem : parts) {
-            var oreDict = convertString(partItem);
-            MAP_ITEM_ORE.put(item, oreDict);
-        }
-    }
-
-
-    public static String convertString(String string) {
-        StringBuilder result = new StringBuilder();
-        boolean isFirstChar = true;
-        for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) == '_' || string.charAt(i) == '/')
-                continue;
-            if (isFirstChar) {
-                result.append(string.charAt(i));
-                isFirstChar = false;
-            } else if (string.charAt(i - 1) == '_' || string.charAt(i - 1) == '/') {
-                result.append(Character.toUpperCase(string.charAt(i)));
-            } else {
-                result.append(string.charAt(i));
-            }
-        }
-
-        return result.toString();
-    }
-
-    public static void init_old() {
 
         // Vanilla ore dict values
         OreDictionary.registerOre("clay", Items.CLAY_BALL);
@@ -108,19 +63,31 @@ public class OreDictionaryHelper {
         OreDictionary.getOres("infiniteFire", true);
     }
 
-    private static final Converter<String, String> UPPER_UNDERSCORE_TO_LOWER_CAMEL = CaseFormat.UPPER_UNDERSCORE.converterTo(CaseFormat.LOWER_CAMEL);
-    private static final Joiner JOINER_UNDERSCORE = Joiner.on('_').skipNulls();
-
-    public static String toString(Object... parts) {
-        return UPPER_UNDERSCORE_TO_LOWER_CAMEL.convert(JOINER_UNDERSCORE.join(parts));
+    /**
+     * Вызови это если хочешь зарегистрировать блоку его oreDict.
+     */
+    public static void register(Block block, String... parts) {
+        var oreDict = upperCaseToCamelCase(parts);
+        MAP_BLOCK_ORE.put(block, oreDict);
     }
 
-    public static String toString(Iterable<Object> parts) {
-        return UPPER_UNDERSCORE_TO_LOWER_CAMEL.convert(JOINER_UNDERSCORE.join(parts));
+    /**
+     * Вызови это если хочешь зарегистрировать предмету его oreDict.
+     */
+    public static void register(Item item, String... parts) {
+        var oreDict = upperCaseToCamelCase(parts);
+        MAP_ITEM_ORE.put(item, oreDict);
     }
 
-    public static String toString(Object[] prefix, Object... parts) {
-        return toString(ImmutableList.builder().add(prefix).add(parts).build());
+    /**
+     * Конвертирует массив из строк в oreDict, передавай в массив строки содержащие только буквы,
+     * регистр значения не имеет, каждый элемент массива будет отформатирован в соответствие с camelCase.
+     */
+    public static String upperCaseToCamelCase(String... strings) {
+        if (strings.length > 1)
+            return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, String.join("_", strings).toUpperCase());
+
+        return strings[0];
     }
 
     /**
@@ -128,7 +95,7 @@ public class OreDictionaryHelper {
      */
     public static boolean doesStackMatchOre(@Nonnull ItemStack stack, String name) {
         if (!OreDictionary.doesOreNameExist(name)) {
-            //TerraFirmaCraft.getLog().warn("doesStackMatchOre called with non-existing name. stack: {} name: {}", stack, name);
+            // TerraFirmaCraft.getLog().warn("doesStackMatchOre called with non-existing name. stack: {} name: {}", stack, name);
             return false;
         }
         if (stack.isEmpty()) return false;
@@ -138,6 +105,4 @@ public class OreDictionaryHelper {
         }
         return false;
     }
-
-
 }

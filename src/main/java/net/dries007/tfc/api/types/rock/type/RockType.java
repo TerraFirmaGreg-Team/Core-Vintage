@@ -24,9 +24,9 @@ public class RockType {
     @Nonnull
     private final RockCategory rockCategory;
     @Nonnull
-    private final Supplier<OrePrefix> associatedOrePrefix;
+    private final OrePrefix associatedOrePrefix;
     @Nonnull
-    private final Supplier<Material> associatedMaterial;
+    private final Material associatedMaterial;
     private final boolean isFlux;
 
     /**
@@ -38,7 +38,7 @@ public class RockType {
      * @param associatedMaterial Материал для типа породы, для использования в стоунтайпах.
      * @param isFlux Флаг, указывающий, является ли порода флюсом.
      */
-    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull Supplier<OrePrefix> associatedOrePrefix, @Nonnull Supplier<Material> associatedMaterial, boolean isFlux) {
+    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull OrePrefix associatedOrePrefix, @Nonnull Material associatedMaterial, boolean isFlux) {
         this.name = name;
         this.rockCategory = rockCategory;
         this.associatedOrePrefix = associatedOrePrefix;
@@ -62,7 +62,7 @@ public class RockType {
      * @param associatedOrePrefix Орпрефикс для типа породы, для использования в стоунтайпах.
      * @param associatedMaterial Материал для типа породы, для использования в стоунтайпах.
      */
-    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull Supplier<OrePrefix> associatedOrePrefix, @Nonnull Supplier<Material> associatedMaterial) {
+    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull OrePrefix associatedOrePrefix, @Nonnull Material associatedMaterial) {
         this(name, rockCategory, associatedOrePrefix, associatedMaterial, false);
     }
 
@@ -124,7 +124,7 @@ public class RockType {
      * @return ОрПрефикс породы.
      */
     @Nonnull
-    public Supplier<OrePrefix> getAssociatedOrePrefix() {
+    public OrePrefix getAssociatedOrePrefix() {
         return associatedOrePrefix;
     }
 
@@ -134,7 +134,7 @@ public class RockType {
      * @return Материал породы.
      */
     @Nonnull
-    public Supplier<Material> getAssociatedMaterial() {
+    public Material getAssociatedMaterial() {
         return associatedMaterial;
     }
 

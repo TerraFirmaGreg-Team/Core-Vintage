@@ -41,6 +41,6 @@ public interface IRockBlock extends IHasModel, IItemProvider {
 
 
     default float getFinalHardness() {
-        return getRockBlockVariant().getBaseHardness() * getRockCategory().getHardnessModifier();
+        return getRockBlockVariant().getBaseHardness() + getRockCategory().getHardnessModifier();
     }
 }

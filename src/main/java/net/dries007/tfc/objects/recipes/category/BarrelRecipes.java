@@ -5,7 +5,7 @@ import net.dries007.tfc.api.recipes.barrel.*;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.food.Food;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.api.types.fluid.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFood;
@@ -24,7 +24,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
-import static net.dries007.tfc.objects.fluids.FluidsTFC.*;
+import static net.dries007.tfc.api.types.fluid.FluidsTFC.*;
 
 public class BarrelRecipes {
 

@@ -2,6 +2,8 @@ package net.dries007.tfc.api.types.plant;
 
 import net.minecraft.util.IStringSerializable;
 
+import javax.annotation.Nonnull;
+
 public enum PlantTypeEnum implements IStringSerializable {
     CLAY,
     DESERT_CLAY,
@@ -16,6 +18,7 @@ public enum PlantTypeEnum implements IStringSerializable {
     /**
      * Возвращает имя перечисления в нижнем регистре.
      */
+    @Nonnull
     @Override
     public String getName() {
         return name().toLowerCase();

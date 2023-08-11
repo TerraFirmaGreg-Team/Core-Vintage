@@ -7,7 +7,7 @@ import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
 import net.dries007.tfc.api.types.fluid.DrinkableProperty;
 import net.dries007.tfc.api.types.fluid.properties.FluidWrapper;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.api.types.fluid.FluidsTFC;
 import net.dries007.tfc.util.FluidTransferHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;

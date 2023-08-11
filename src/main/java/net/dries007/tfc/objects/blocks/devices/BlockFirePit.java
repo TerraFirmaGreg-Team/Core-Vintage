@@ -6,7 +6,7 @@ import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.api.types.fluid.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.objects.te.TEFirePit;

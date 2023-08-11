@@ -1,9 +1,9 @@
-package net.dries007.tfc.objects.fluids.fluid;
+package net.dries007.tfc.objects.blocks.fluid;
 
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.api.types.fluid.FluidsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

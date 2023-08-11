@@ -2,7 +2,7 @@ package net.dries007.tfc.client.render;
 
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.api.types.fluid.FluidsTFC;
 import net.dries007.tfc.objects.te.TEFirePit;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

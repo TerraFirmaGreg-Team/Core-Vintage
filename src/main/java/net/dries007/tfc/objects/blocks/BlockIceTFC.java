@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.api.types.fluid.FluidsTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.dries007.tfc.util.climate.IceMeltHandler;

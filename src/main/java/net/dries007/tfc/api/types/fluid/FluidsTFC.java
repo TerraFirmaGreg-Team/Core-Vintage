@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.fluids;
+package net.dries007.tfc.api.types.fluid;
 
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;

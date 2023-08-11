@@ -6,6 +6,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.plant.IPlantBlock;
 import net.dries007.tfc.api.types.plant.Plant;
+import net.dries007.tfc.api.types.plant.PlantTypeEnum;
 import net.dries007.tfc.api.types.plant.PlantVariant;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -318,7 +319,7 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
     }
 
     @Nonnull
-    public Plant.PlantTypeEnum getPlantTypeTFC() {
+    public PlantTypeEnum getPlantTypeTFC() {
         return plant.getEnumPlantTypeTFC();
     }
 

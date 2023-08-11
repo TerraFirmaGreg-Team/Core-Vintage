@@ -1,19 +1,28 @@
 package net.dries007.tfc.api.types.plant.type;
 
+import net.dries007.tfc.api.types.plant.Plant;
+import net.dries007.tfc.api.types.plant.PlantTypeEnum;
+import net.dries007.tfc.api.types.plant.PlantValidity;
 import net.dries007.tfc.api.types.plant.PlantVariant;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+
+import static net.dries007.tfc.api.types.plant.PlantVariant.*;
+import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
+import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
 public class PlantType {
 
     private static final Set<PlantType> PLANT_TYPES = new LinkedHashSet<>();
 
-    private String name;
+    private final String name;
     private final int[] stages;
     private final int numStages;
     private final float minGrowthTemp;
@@ -98,9 +107,328 @@ public class PlantType {
         this.numStages = hashSet.size() <= 1 ? 1 : hashSet.size() - 1;
     }
 
+    /**
+     * Получить имя этого растения.
+     *
+     * @return имя растения
+     */
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    /**
+     * Получить массив стадий роста этого растения.
+     *
+     * @return массив стадий роста
+     */
+    public int[] getStages() {
+        return stages;
+    }
+
+    /**
+     * Получить количество стадий роста этого растения.
+     *
+     * @return количество стадий роста
+     */
+    public int getNumStages() {
+        return numStages;
+    }
+
+    /**
+     * Получить минимальную температуру для роста этого растения.
+     *
+     * @return минимальная температура для роста
+     */
+    public float getMinGrowthTemp() {
+        return minGrowthTemp;
+    }
+
+    /**
+     * Получить максимальную температуру для роста этого растения.
+     *
+     * @return максимальная температура для роста
+     */
+    public float getMaxGrowthTemp() {
+        return maxGrowthTemp;
+    }
+
+    /**
+     * Получить минимальную температуру для этого растения.
+     *
+     * @return минимальная температура
+     */
+    public float getMinTemp() {
+        return minTemp;
+    }
+
+    /**
+     * Получить максимальную температуру для этого растения.
+     *
+     * @return максимальная температура
+     */
+    public float getMaxTemp() {
+        return maxTemp;
+    }
+
+    /**
+     * Получить минимальное количество осадков для этого растения.
+     *
+     * @return минимальное количество осадков
+     */
+    public float getMinRain() {
+        return minRain;
+    }
+
+    /**
+     * Получить максимальное количество осадков для этого растения.
+     *
+     * @return максимальное количество осадков
+     */
+    public float getMaxRain() {
+        return maxRain;
+    }
+
+    /**
+     * Получить минимальный уровень освещенности для этого растения.
+     *
+     * @return минимальный уровень освещенности
+     */
+    public int getMinSun() {
+        return minSun;
+    }
+
+    /**
+     * Получить максимальный уровень освещенности для этого растения.
+     *
+     * @return максимальный уровень освещенности
+     */
+    public int getMaxSun() {
+        return maxSun;
+    }
+
+    /**
+     * Получить максимальную высоту для двойных+ растений этого типа.
+     *
+     * @return максимальная высота
+     */
+    public int getMaxHeight() {
+        return maxHeight;
+    }
+
+    /**
+     * Получить минимальную глубину воды для этого растения.
+     *
+     * @return минимальная глубина воды
+     */
+    public int getMinWaterDepth() {
+        return minWaterDepth;
+    }
+
+    /**
+     * Получить максимальную глубину воды для этого растения.
+     *
+     * @return максимальная глубина воды
+     */
+    public int getMaxWaterDepth() {
+        return maxWaterDepth;
+    }
+
+    /**
+     * Получить модификатор перемещения игрока по этому растению по X/Z.
+     *
+     * @return модификатор перемещения
+     */
+    public double getMovementMod() {
+        return movementMod;
+    }
+
+    /**
+     * Получить тип растения этого растения.
+     *
+     * @return тип растения
+     */
+    public PlantVariant getPlantVariant() {
+        return plantVariant;
+    }
+
+    /**
+     * Получить материал, связанный с этим растением.
+     *
+     * @return материал растения
+     */
+    public Material getMaterial() {
+        return material;
+    }
+
+    /**
+     * Проверить, помечает ли это растение землю с глиной.
+     *
+     * @return true, если растение помечает землю с глиной, в противном случае - false
+     */
+    public boolean isClayMarking() {
+        return isClayMarking;
+    }
+
+    /**
+     * Проверить, может ли это растение появиться только в болотах.
+     *
+     * @return true, если растение может появиться только в болотах, в противном случае - false
+     */
+    public boolean isSwampPlant() {
+        return isSwampPlant;
+    }
+
+    /**
+     * Получить имя записи в словаре растений для этого растения.
+     *
+     * @return имя записи в словаре растений, если оно задано, иначе пустое значение
+     */
+    public Optional<String> getOreDictName() {
+        return oreDictName;
+    }
+
+
+    public boolean isValidLocation(float temp, float rain, int sunlight) {
+        return isValidTemp(temp) && isValidRain(rain) && isValidSunlight(sunlight);
+    }
+
+    public boolean isValidTemp(float temp) {
+        return getTempValidity(temp) == PlantValidity.VALID;
+    }
+
+    public boolean isValidTempForWorldGen(float temp) {
+        return Math.abs(temp - getAvgTemp()) < Float.sum(maxTemp, -minTemp) / 4f;
+    }
+
+    public boolean isValidRain(float rain) {
+        return getRainValidity(rain) == PlantValidity.VALID;
+    }
+
+    public boolean isValidSunlight(int sunlight) {
+        return minSun <= sunlight && maxSun >= sunlight;
+    }
+
+    public boolean isValidFloatingWaterDepth(World world, BlockPos pos, IBlockState water) {
+        int depthCounter = minWaterDepth;
+        int maxDepth = maxWaterDepth;
+
+        for (int i = 1; i <= depthCounter; ++i) {
+            if (world.getBlockState(pos.down(i)) != water && world.getBlockState(pos.down(i)).getMaterial() != Material.CORAL)
+                return false;
+        }
+
+        while (world.getBlockState(pos.down(depthCounter)) == water || world.getBlockState(pos.down(depthCounter)).getMaterial() == Material.CORAL) {
+            depthCounter++;
+        }
+        return (maxDepth > 0) && depthCounter <= maxDepth + 1;
+    }
+
+    public int getValidWaterDepth(World world, BlockPos pos, IBlockState water) {
+        int depthCounter = minWaterDepth;
+        int maxDepth = maxWaterDepth;
+
+        if (depthCounter == 0 || maxDepth == 0) return -1;
+
+        for (int i = 1; i <= depthCounter; ++i) {
+            if (world.getBlockState(pos.down(i)) != water) return -1;
+        }
+
+        while (world.getBlockState(pos.down(depthCounter)) == water) {
+            depthCounter++;
+            if (depthCounter > maxDepth + 1) return -1;
+        }
+        return depthCounter;
+    }
+
+    public int getStageForMonth(Month month) {
+        return stages[month.ordinal()];
+    }
+
+    public int getStageForMonth() {
+        return getStageForMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear());
+    }
+
+    public boolean isValidGrowthTemp(float temp) {
+        return minGrowthTemp <= temp && maxGrowthTemp >= temp;
+    }
+
+    public IBlockState getWaterType() {
+        if (plantVariant == FLOATING_SEA || plantVariant == WATER_SEA || plantVariant == TALL_WATER_SEA || plantVariant == EMERGENT_TALL_WATER_SEA) {
+            return SALT_WATER;
+        } else {
+            return FRESH_WATER;
+        }
+    }
+
+    public int getAgeForWorldgen(Random rand, float temp) {
+        return rand.nextInt(Math.max(1, Math.min(Math.round(2.5f + ((temp - minGrowthTemp) / minGrowthTemp)), 4)));
+    }
+
+    public boolean canBePotted() {
+        return plantVariant == STANDARD ||
+                plantVariant == CACTUS ||
+                plantVariant == CREEPING ||
+                plantVariant == TALL_PLANT ||
+                plantVariant == DRY ||
+                plantVariant == DESERT ||
+                plantVariant == MUSHROOM;
+    }
+
+    public final PlantTypeEnum getEnumPlantTypeTFC() {
+        switch (plantVariant) {
+            case DESERT, DESERT_TALL_PLANT -> {
+                if (isClayMarking) return PlantTypeEnum.DESERT_CLAY;
+                else return PlantTypeEnum.NONE;
+            }
+            case DRY, DRY_TALL_PLANT -> {
+                if (isClayMarking) return PlantTypeEnum.DRY_CLAY;
+                else return PlantTypeEnum.DRY;
+            }
+            case REED, TALL_REED -> {
+                return PlantTypeEnum.FRESH_BEACH;
+            }
+            case REED_SEA, TALL_REED_SEA -> {
+                return PlantTypeEnum.SALT_BEACH;
+            }
+            case WATER, TALL_WATER, EMERGENT_TALL_WATER -> {
+                return PlantTypeEnum.FRESH_WATER;
+            }
+            case WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA -> {
+                return PlantTypeEnum.SALT_WATER;
+            }
+            default -> {
+                if (isClayMarking) return PlantTypeEnum.CLAY;
+                else return PlantTypeEnum.NONE;
+            }
+        }
+    }
+
+    public PlantValidity getTempValidity(float temp) {
+        if (temp < minTemp) {
+            return PlantValidity.COLD;
+        }
+        if (temp > maxTemp) {
+            return PlantValidity.HOT;
+        }
+        return PlantValidity.VALID;
+    }
+
+    public PlantValidity getRainValidity(float rain) {
+        if (rain < minRain)
+            return PlantValidity.DRY;
+        if (rain > maxRain)
+            return PlantValidity.WET;
+        return PlantValidity.VALID;
+    }
+
+    private float getAvgTemp() {
+        return Float.sum(minTemp, maxTemp) / 2f;
+    }
+
     public static class Builder {
-        private String name;
-        private PlantVariant plantVariant;
+        private final String name;
+        private final PlantVariant plantVariant;
         private int[] stages;
         private float minGrowthTemp;
         private float maxGrowthTemp;

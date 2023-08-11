@@ -1,5 +1,11 @@
 package net.dries007.tfc.api.types.fluid.type;
 
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
+import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
+import net.dries007.tfc.api.capability.player.IPlayerData;
+
+import static net.dries007.tfc.api.types.fluid.properties.DrinkableProperty.DRINKABLE;
 import static net.dries007.tfc.api.types.fluid.type.FluidTypes.*;
 
 public class FluidTypeHandler {
@@ -23,34 +29,42 @@ public class FluidTypeHandler {
         // Алкоголь
         RUM = new FluidType
                 .Builder("rum", 0xFF6E0123)
+                .isAlcohol()
                 .build();
 
         BEER = new FluidType
                 .Builder("beer", 0xFFC39E37)
+                .isAlcohol()
                 .build();
 
         WHISKEY = new FluidType
                 .Builder("whiskey", 0xFF583719)
+                .isAlcohol()
                 .build();
 
         RYE_WHISKEY = new FluidType
                 .Builder("rye_whiskey", 0xFFC77D51)
+                .isAlcohol()
                 .build();
 
         CORN_WHISKEY = new FluidType
                 .Builder("corn_whiskey", 0xFFD9C7B7)
+                .isAlcohol()
                 .build();
 
         SAKE = new FluidType
                 .Builder("sake", 0xFFB7D9BC)
+                .isAlcohol()
                 .build();
 
         VODKA = new FluidType
                 .Builder("vodka", 0xFFDCDCDC)
+                .isAlcohol()
                 .build();
 
         CIDER = new FluidType
                 .Builder("cider", 0xFFB0AE32)
+                .isAlcohol()
                 .build();
 
         // Другие жидкости

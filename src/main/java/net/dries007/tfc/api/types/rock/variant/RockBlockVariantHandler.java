@@ -15,7 +15,7 @@ public class RockBlockVariantHandler {
         SMOOTH = new RockBlockVariant("smooth", 6f, BlockRock::new);
 
         BRICK = new RockBlockVariant("brick", 6f, BlockRock::new);
-        BRICK_MOSSY = new RockBlockVariant("brick/mossy", 6f, BlockRock::new);
+        BRICK_MOSSY = new RockBlockVariant("brick/mossy", 6f, BlockRockMossy::new);
         BRICK_CRACKED = new RockBlockVariant("brick/cracked", 6f, BlockRock::new);
         BRICK_CHISELED = new RockBlockVariant("brick/chiseled", 6f, BlockRock::new);
 

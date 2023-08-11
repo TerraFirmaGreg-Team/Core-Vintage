@@ -68,8 +68,8 @@ public class TFCBlocks {
 
         //=== Rock ===================================================================================================//
 
-        for (var rockType : RockType.getRockTypes()) {
-            for (var rockBlockVariant : RockBlockVariant.getAllRockTypes()) {
+        for (var rockBlockVariant : RockBlockVariant.getAllRockTypes()) {
+            for (var rockType : RockType.getRockTypes()) {
                 var rockTypeBlock = rockBlockVariant.applyToFactory(rockType);
 
                 if (ROCK_BLOCKS.put(new Pair<>(rockBlockVariant, rockType), rockTypeBlock) != null)
@@ -79,8 +79,8 @@ public class TFCBlocks {
 
         //=== Soil ===================================================================================================//
 
-        for (var soilType : SoilType.getSoilTypes()) {
-            for (var soilBlockVariant : SoilBlockVariant.getSoilBlockVariants()) {
+        for (var soilBlockVariant : SoilBlockVariant.getSoilBlockVariants()) {
+            for (var soilType : SoilType.getSoilTypes()) {
                 var soilTypeBlock = soilBlockVariant.applyToFactory(soilType);
 
                 if (SOIL_BLOCKS.put(new Pair<>(soilBlockVariant, soilType), soilTypeBlock) != null)
@@ -99,8 +99,8 @@ public class TFCBlocks {
 
         //=== Wood ===================================================================================================//
 
-        for (var woodType : WoodType.getWoodTypes()) {
-            for (var woodBlockVariant : WoodBlockVariant.getWoodVariants()) {
+        for (var woodBlockVariant : WoodBlockVariant.getWoodVariants()) {
+            for (var woodType : WoodType.getWoodTypes()) {
                 var woodVariantBlock = woodBlockVariant.applyToFactory(woodType);
 
                 if (WOOD_BLOCKS.put(new Pair<>(woodBlockVariant, woodType), woodVariantBlock) != null)

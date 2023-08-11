@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.plant.Plant;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -28,11 +28,11 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 public class BlockFlowerPotTFC extends Block {
     protected static final AxisAlignedBB FLOWER_POT_AABB = new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 0.375D, 0.6875D);
 
-    private static final Map<Plant, BlockFlowerPotTFC> MAP = new HashMap<>();
+    private static final Map<PlantType, BlockFlowerPotTFC> MAP = new HashMap<>();
 
-    public final Plant plant;
+    public final PlantType plant;
 
-    public BlockFlowerPotTFC(Plant plant) {
+    public BlockFlowerPotTFC(PlantType plant) {
         super(Material.CIRCUITS);
         this.plant = plant;
         if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
@@ -44,7 +44,7 @@ public class BlockFlowerPotTFC extends Block {
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
     }
 
-    public static BlockFlowerPotTFC get(Plant plant) {
+    public static BlockFlowerPotTFC get(PlantType plant) {
         return MAP.get(plant);
     }
 

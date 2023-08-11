@@ -1,9 +1,8 @@
 package net.dries007.tfc.api.types.plant.type;
 
-import net.dries007.tfc.api.types.plant.Plant;
 import net.dries007.tfc.api.types.plant.PlantTypeEnum;
 import net.dries007.tfc.api.types.plant.PlantValidity;
-import net.dries007.tfc.api.types.plant.PlantVariant;
+import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.block.material.Material;
@@ -14,7 +13,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.*;
 
-import static net.dries007.tfc.api.types.plant.PlantVariant.*;
+import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.*;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
@@ -22,6 +21,7 @@ public class PlantType {
 
     private static final Set<PlantType> PLANT_TYPES = new LinkedHashSet<>();
 
+    @Nonnull
     private final String name;
     private final int[] stages;
     private final int numStages;
@@ -38,7 +38,7 @@ public class PlantType {
     private final int maxWaterDepth;
     private final double movementMod;
 
-    private final PlantVariant plantVariant;
+    private final PlantBlockVariant plantBlockVariant;
     private final Material material;
     private final boolean isClayMarking;
     private final boolean isSwampPlant;
@@ -58,7 +58,7 @@ public class PlantType {
      * Диапазон температуры при генерации мира: 20-40 (30 +- 10)
      *
      * @param name          имя этого растения
-     * @param plantVariant  тип растения
+     * @param plantBlockVariant  тип растения
      * @param isClayMarking если это растение помечает землю с глиной
      * @param isSwampPlant  если это растение может появиться только в болотах
      * @param minGrowthTemp минимальная температура для роста
@@ -75,7 +75,7 @@ public class PlantType {
      * @param movementMod   модификатор для перемещения игрока по этому растению по X/Z
      * @param oreDictName   если не пустая, то запись в словаре растений для этого растения
      */
-    public PlantType(@Nonnull String name, PlantVariant plantVariant, int[] stages, boolean isClayMarking,
+    public PlantType(@Nonnull String name, PlantBlockVariant plantBlockVariant, int[] stages, boolean isClayMarking,
                      boolean isSwampPlant, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp,
                      float minRain, float maxRain, int minSun, int maxSun, int maxHeight, int minWaterDepth,
                      int maxWaterDepth, double movementMod, String oreDictName) {
@@ -94,10 +94,10 @@ public class PlantType {
         this.maxWaterDepth = maxWaterDepth;
         this.movementMod = movementMod;
 
-        this.plantVariant = plantVariant;
+        this.plantBlockVariant = plantBlockVariant;
         this.isClayMarking = isClayMarking;
         this.isSwampPlant = isSwampPlant;
-        this.material = plantVariant.getPlantMaterial();
+        this.material = plantBlockVariant.getPlantMaterial();
         this.oreDictName = Optional.ofNullable(oreDictName);
 
         HashSet<Integer> hashSet = new HashSet<>();
@@ -105,6 +105,23 @@ public class PlantType {
             hashSet.add(stage);
         }
         this.numStages = hashSet.size() <= 1 ? 1 : hashSet.size() - 1;
+
+        if (name.isEmpty()) {
+            throw new RuntimeException(String.format("Plant name must contain any character: [%s]", name));
+        }
+
+        if (!PLANT_TYPES.add(this)) {
+            throw new RuntimeException(String.format("Plant: [%s] already exists!", name));
+        }
+    }
+
+    /**
+     * Возвращает список всех типов растений.
+     *
+     * @return Список всех типов растений.
+     */
+    public static Set<PlantType> getPlantTypes() {
+        return PLANT_TYPES;
     }
 
     /**
@@ -248,8 +265,8 @@ public class PlantType {
      *
      * @return тип растения
      */
-    public PlantVariant getPlantVariant() {
-        return plantVariant;
+    public PlantBlockVariant getPlantVariant() {
+        return plantBlockVariant;
     }
 
     /**
@@ -354,7 +371,7 @@ public class PlantType {
     }
 
     public IBlockState getWaterType() {
-        if (plantVariant == FLOATING_SEA || plantVariant == WATER_SEA || plantVariant == TALL_WATER_SEA || plantVariant == EMERGENT_TALL_WATER_SEA) {
+        if (plantBlockVariant == FLOATING_SEA || plantBlockVariant == WATER_SEA || plantBlockVariant == TALL_WATER_SEA || plantBlockVariant == EMERGENT_TALL_WATER_SEA) {
             return SALT_WATER;
         } else {
             return FRESH_WATER;
@@ -366,17 +383,17 @@ public class PlantType {
     }
 
     public boolean canBePotted() {
-        return plantVariant == STANDARD ||
-                plantVariant == CACTUS ||
-                plantVariant == CREEPING ||
-                plantVariant == TALL_PLANT ||
-                plantVariant == DRY ||
-                plantVariant == DESERT ||
-                plantVariant == MUSHROOM;
+        return plantBlockVariant == STANDARD ||
+                plantBlockVariant == CACTUS ||
+                plantBlockVariant == CREEPING ||
+                plantBlockVariant == TALL_PLANT ||
+                plantBlockVariant == DRY ||
+                plantBlockVariant == DESERT ||
+                plantBlockVariant == MUSHROOM;
     }
 
     public final PlantTypeEnum getEnumPlantTypeTFC() {
-        switch (plantVariant) {
+        switch (plantBlockVariant) {
             case DESERT, DESERT_TALL_PLANT -> {
                 if (isClayMarking) return PlantTypeEnum.DESERT_CLAY;
                 else return PlantTypeEnum.NONE;
@@ -428,7 +445,7 @@ public class PlantType {
 
     public static class Builder {
         private final String name;
-        private final PlantVariant plantVariant;
+        private final PlantBlockVariant plantBlockVariant;
         private int[] stages;
         private float minGrowthTemp;
         private float maxGrowthTemp;
@@ -447,9 +464,9 @@ public class PlantType {
         private String oreDictName;
 
         // Конструктор
-        public Builder(@Nonnull String name, PlantVariant plantVariant) {
+        public Builder(@Nonnull String name, PlantBlockVariant plantBlockVariant) {
             this.name = name;
-            this.plantVariant = plantVariant;
+            this.plantBlockVariant = plantBlockVariant;
             this.stages = new int[]{0};
             this.minGrowthTemp = 0;
             this.maxGrowthTemp = 0;
@@ -543,7 +560,7 @@ public class PlantType {
 
         // Метод для создания объекта PlantType с использованием заданных значений
         public PlantType build() {
-            return new PlantType(name, plantVariant, stages, isClayMarking, isSwampPlant, minGrowthTemp, maxGrowthTemp,
+            return new PlantType(name, plantBlockVariant, stages, isClayMarking, isSwampPlant, minGrowthTemp, maxGrowthTemp,
                     minTemp, maxTemp, minRain, maxRain, minSun, maxSun, maxHeight, minWaterDepth, maxWaterDepth,
                     movementMod, oreDictName);
         }

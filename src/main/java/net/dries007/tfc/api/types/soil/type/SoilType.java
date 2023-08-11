@@ -15,11 +15,11 @@ public class SoilType {
         this.name = name;
 
         if (name.isEmpty()) {
-            throw new RuntimeException(String.format("Rock name must contain any character: [%s]", name));
+            throw new RuntimeException(String.format("Soil name must contain any character: [%s]", name));
         }
 
         if (!SOIL_TYPES.add(this)) {
-            throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
+            throw new RuntimeException(String.format("Soil: [%s] already exists!", name));
         }
     }
 

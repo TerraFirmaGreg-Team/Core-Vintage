@@ -40,8 +40,6 @@ public final class BlocksTFC {
     // Use the static get methods in the classes instead.
     private static ImmutableList<ItemBlock> allNormalItemBlocks;
     private static ImmutableList<ItemBlock> allInventoryItemBlocks;
-    private static ImmutableList<BlockMetalAnvil> allAnvils;
-    private static ImmutableList<BlockMetalCladding> allCladdings;
     private static ImmutableList<BlockCropTFC> allCropBlocks;
     private static ImmutableList<BlockCropDead> allDeadCropBlocks;
     private static ImmutableList<BlockFlowerPotTFC> allFlowerPots;

@@ -52,8 +52,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.plant.PlantVariant.SHORT_GRASS;
-import static net.dries007.tfc.api.types.plant.PlantVariant.TALL_GRASS;
+import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.SHORT_GRASS;
+import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.TALL_GRASS;
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 

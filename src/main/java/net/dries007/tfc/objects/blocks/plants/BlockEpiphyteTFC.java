@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.plant.Plant;
-import net.dries007.tfc.api.types.plant.PlantVariant;
+import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodLog;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -32,10 +32,10 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
     private static final AxisAlignedBB PLANT_WEST_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
     private static final AxisAlignedBB PLANT_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.75D, 1.0D, 1.0D);
 
-    private final Plant plant;
+    private final PlantType plant;
 
-    public BlockEpiphyteTFC(PlantVariant plantVariant, Plant plant) {
-        super(plantVariant, plant);
+    public BlockEpiphyteTFC(PlantBlockVariant plantBlockVariant, PlantType plant) {
+        super(plantBlockVariant, plant);
 
         this.plant = plant;
     }

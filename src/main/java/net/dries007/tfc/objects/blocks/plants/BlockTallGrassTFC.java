@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.plant.Plant;
-import net.dries007.tfc.api.types.plant.PlantVariant;
+import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.util.property.ITallPlant;
 import net.dries007.tfc.test.items.TFCItems;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -31,10 +31,10 @@ import java.util.Random;
 public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, ITallPlant {
     private static final PropertyEnum<BlockTallGrassTFC.EnumBlockPart> PART = PropertyEnum.create("part", BlockTallGrassTFC.EnumBlockPart.class);
 
-    private final Plant plant;
+    private final PlantType plant;
 
-    public BlockTallGrassTFC(PlantVariant plantVariant, Plant plant) {
-        super(plantVariant, plant);
+    public BlockTallGrassTFC(PlantBlockVariant plantBlockVariant, PlantType plant) {
+        super(plantBlockVariant, plant);
 
         this.plant = plant;
     }

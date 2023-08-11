@@ -4,7 +4,7 @@ import gregtech.api.GregTechAPI;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.fluid.properties.FluidWrapper;
 import net.dries007.tfc.api.types.metal.MetalVariant;
-import net.dries007.tfc.api.types.plant.Plant;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.soil.type.SoilType;
@@ -90,7 +90,7 @@ public class TFCBlocks {
 
         //=== Plant ==================================================================================================//
 
-        for (Plant plant : Plant.values()) {
+        for (PlantType plant : PlantType.getPlantTypes()) {
             var plantTypeBlock = plant.getPlantVariant().create(plant);
 
             if (PLANT_BLOCKS.put(new Pair<>(plant.getPlantVariant(), plant), plantTypeBlock) != null)

@@ -1,6 +1,8 @@
-package net.dries007.tfc.api.types.plant;
+package net.dries007.tfc.api.types.plant.variant;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.plant.IPlantBlock;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.objects.blocks.plants.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
@@ -10,7 +12,7 @@ import java.util.function.BiFunction;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public enum PlantVariant implements IStringSerializable {
+public enum PlantBlockVariant implements IStringSerializable {
     STANDARD(BlockPlantTFC::new),
     CREEPING(BlockCreepingPlantTFC::new),
     HANGING(BlockHangingPlantTFC::new),
@@ -37,18 +39,18 @@ public enum PlantVariant implements IStringSerializable {
     EMERGENT_TALL_WATER_SEA(BlockEmergentTallWaterPlantTFC::new),
     MUSHROOM(BlockMushroomTFC::new);
 
-    public static final PlantVariant[] VALUES = PlantVariant.values();
-    private final BiFunction<PlantVariant, Plant, IPlantBlock> blockFactory;
+    public static final PlantBlockVariant[] VALUES = PlantBlockVariant.values();
+    private final BiFunction<PlantBlockVariant, PlantType, IPlantBlock> blockFactory;
 
-    PlantVariant(BiFunction<PlantVariant, Plant, IPlantBlock> blockFactory) {
+    PlantBlockVariant(BiFunction<PlantBlockVariant, PlantType, IPlantBlock> blockFactory) {
         this.blockFactory = blockFactory;
     }
 
-    public static PlantVariant valueOf(int i) {
+    public static PlantBlockVariant valueOf(int i) {
         return i >= 0 && i < VALUES.length ? VALUES[i] : STANDARD;
     }
 
-    public IPlantBlock create(Plant plant) {
+    public IPlantBlock create(PlantType plant) {
         return blockFactory.apply(this, plant);
     }
 
@@ -56,8 +58,7 @@ public enum PlantVariant implements IStringSerializable {
         return switch (this) {
             case CACTUS -> Material.CACTUS;
             case HANGING, SHORT_GRASS, TALL_GRASS -> Material.VINE;
-            case WATER, WATER_SEA, TALL_WATER, TALL_WATER_SEA, EMERGENT_TALL_WATER, EMERGENT_TALL_WATER_SEA ->
-                    Material.CORAL;
+            case WATER, WATER_SEA, TALL_WATER, TALL_WATER_SEA, EMERGENT_TALL_WATER, EMERGENT_TALL_WATER_SEA -> Material.CORAL;
             default -> Material.PLANTS;
         };
     }

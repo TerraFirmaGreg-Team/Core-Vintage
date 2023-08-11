@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.plant.Plant;
-import net.dries007.tfc.api.types.plant.PlantVariant;
+import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,10 +16,10 @@ import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 @ParametersAreNonnullByDefault
 public class BlockWaterPlantTFC extends BlockPlantTFC {
 
-    private final Plant plant;
+    private final PlantType plant;
 
-    public BlockWaterPlantTFC(PlantVariant plantVariant, Plant plant) {
-        super(plantVariant, plant);
+    public BlockWaterPlantTFC(PlantBlockVariant plantBlockVariant, PlantType plant) {
+        super(plantBlockVariant, plant);
 
         this.plant = plant;
     }

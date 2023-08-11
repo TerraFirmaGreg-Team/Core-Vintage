@@ -5,9 +5,9 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.plant.IPlantBlock;
-import net.dries007.tfc.api.types.plant.Plant;
+import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
 import net.dries007.tfc.api.types.plant.PlantTypeEnum;
-import net.dries007.tfc.api.types.plant.PlantVariant;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -68,27 +68,27 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
     /* Growth Stage of the plant, tied to the month of year */
     public final PropertyInteger growthStageProperty;
     protected final BlockStateContainer blockState;
-    private final Plant plant;
-    private final PlantVariant plantVariant;
+    private final PlantType plant;
+    private final PlantBlockVariant plantBlockVariant;
     private final ResourceLocation modelLocation;
 
-    public BlockPlantTFC(PlantVariant plantVariant, Plant plant) {
+    public BlockPlantTFC(PlantBlockVariant plantBlockVariant, PlantType plant) {
         super(plant.getMaterial());
 
         this.plant = plant;
-        this.plantVariant = plantVariant;
+        this.plantBlockVariant = plantBlockVariant;
         this.modelLocation = new ResourceLocation(MOD_ID, "plants/" + plant);
-        var blockRegistryName = String.format("plants/%s/%s", plantVariant, plant);
+        var blockRegistryName = String.format("plants/%s/%s", plantBlockVariant, plant);
 
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        this.setCreativeTab(CreativeTabsTFC.FLORA);
-        this.setTickRandomly(true);
-        this.setSoundType(SoundType.PLANT);
-        this.setHardness(0.0F);
-        this.growthStageProperty = PropertyInteger.create("stage", 0, plant.getNumStages());
+        setRegistryName(MOD_ID, blockRegistryName);
+        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setCreativeTab(CreativeTabsTFC.FLORA);
+        setTickRandomly(true);
+        setSoundType(SoundType.PLANT);
+        setHardness(0.0F);
+        growthStageProperty = PropertyInteger.create("stage", 0, plant.getNumStages());
         blockState = this.createPlantBlockState();
-        this.setDefaultState(this.blockState.getBaseState());
+        setDefaultState(this.blockState.getBaseState());
 
         plant.getOreDictName().ifPresent(name -> OreDictionaryHelper.register(this, name));
         Blocks.FIRE.setFireInfo(this, 5, 20);
@@ -97,7 +97,7 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
     @Nonnull
     @Override
     public String getTranslationKey() {
-        return "tile.tfc.plants." + plant.getName();
+        return "tile.tfc.plants." + plant.toString();
     }
 
     @SuppressWarnings("deprecation")
@@ -181,7 +181,7 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
         if (!plant.getOreDictName().isPresent() &&
                 !worldIn.isRemote && (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1) &&
-                plant.getPlantVariant() != PlantVariant.SHORT_GRASS && plant.getPlantVariant() != PlantVariant.TALL_GRASS) {
+                plant.getPlantVariant() != PlantBlockVariant.SHORT_GRASS && plant.getPlantVariant() != PlantBlockVariant.TALL_GRASS) {
             spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
         }
         super.harvestBlock(worldIn, player, pos, state, te, stack);
@@ -219,7 +219,7 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
         };
     }
 
-    public Plant getPlant() {
+    public PlantType getPlant() {
         return plant;
     }
 
@@ -249,7 +249,7 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
 
     @Override
     protected boolean canSustainBush(IBlockState state) {
-        if (plant.getIsClayMarking()) return BlocksTFC.isClay(state) || isValidSoil(state);
+        if (plant.isClayMarking()) return BlocksTFC.isClay(state) || isValidSoil(state);
         else return isValidSoil(state);
     }
 
@@ -345,12 +345,12 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
     }
 
     @Override
-    public PlantVariant getPlantVariant() {
-        return plantVariant;
+    public PlantBlockVariant getPlantVariant() {
+        return plantBlockVariant;
     }
 
     @Override
-    public Plant getPlantType() {
+    public PlantType getPlantType() {
         return plant;
     }
 

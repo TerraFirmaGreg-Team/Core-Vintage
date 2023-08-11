@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.plant.Plant;
-import net.dries007.tfc.api.types.plant.PlantVariant;
+import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.IGrowable;
@@ -23,10 +23,10 @@ import java.util.Random;
 public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrowable {
     private static final PropertyBool BOTTOM = PropertyBool.create("bottom");
 
-    private final Plant plant;
+    private final PlantType plant;
 
-    public BlockHangingPlantTFC(PlantVariant plantVariant, Plant plant) {
-        super(plantVariant, plant);
+    public BlockHangingPlantTFC(PlantBlockVariant plantBlockVariant, PlantType plant) {
+        super(plantBlockVariant, plant);
 
         this.plant = plant;
     }

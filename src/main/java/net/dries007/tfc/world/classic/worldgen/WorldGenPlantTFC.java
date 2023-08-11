@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.plant.Plant;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.*;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -19,15 +19,15 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class WorldGenPlantTFC extends WorldGenerator {
-    private Plant plant;
+    private PlantType plant;
 
-    public void setGeneratedPlant(Plant plantIn) {
+    public void setGeneratedPlant(PlantType plantIn) {
         this.plant = plantIn;
     }
 
     public boolean generate(World worldIn, Random rand, BlockPos position) {
-        if (plant.getIsClayMarking()) return false;
-        if (plant.getIsSwampPlant() && (/*!ClimateTFC.isSwamp(worldIn, position) ||*/ !BiomeDictionary.hasType(worldIn.getBiome(position), BiomeDictionary.Type.SWAMP)))
+        if (plant.isClayMarking()) return false;
+        if (plant.isSwampPlant() && (/*!ClimateTFC.isSwamp(worldIn, position) ||*/ !BiomeDictionary.hasType(worldIn.getBiome(position), BiomeDictionary.Type.SWAMP)))
             return false;
 
         switch (plant.getPlantVariant()) {

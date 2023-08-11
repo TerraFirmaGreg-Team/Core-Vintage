@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.plant.Plant;
-import net.dries007.tfc.api.types.plant.PlantVariant;
+import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.test.items.TFCItems;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.Block;
@@ -33,10 +33,10 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
     private static final AxisAlignedBB SHORT_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D);
     private static final AxisAlignedBB SHORTEST_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
 
-    private final Plant plant;
+    private final PlantType plant;
 
-    public BlockShortGrassTFC(PlantVariant plantVariant, Plant plant) {
-        super(plantVariant, plant);
+    public BlockShortGrassTFC(PlantBlockVariant plantBlockVariant, PlantType plant) {
+        super(plantBlockVariant, plant);
 
         this.plant = plant;
     }

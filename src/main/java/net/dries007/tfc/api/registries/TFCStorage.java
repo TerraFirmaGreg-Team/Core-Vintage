@@ -6,8 +6,8 @@ import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.metal.IMetalBlock;
 import net.dries007.tfc.api.types.metal.MetalVariant;
 import net.dries007.tfc.api.types.plant.IPlantBlock;
-import net.dries007.tfc.api.types.plant.Plant;
-import net.dries007.tfc.api.types.plant.PlantVariant;
+import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
@@ -41,7 +41,7 @@ public final class TFCStorage {
 
     public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<PlantVariant, Plant>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<PlantBlockVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<MetalVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
@@ -81,10 +81,10 @@ public final class TFCStorage {
     }
 
     @Nonnull
-    public static Block getPlantBlock(@Nonnull PlantVariant plantVariant, @Nonnull Plant plant) {
-        var block = (Block) PLANT_BLOCKS.get(new Pair<>(plantVariant, plant));
+    public static Block getPlantBlock(@Nonnull PlantBlockVariant plantBlockVariant, @Nonnull PlantType plant) {
+        var block = (Block) PLANT_BLOCKS.get(new Pair<>(plantBlockVariant, plant));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", plantVariant, plant));
+        throw new RuntimeException(String.format("Block is null: %s, %s", plantBlockVariant, plant));
     }
 
     @Nonnull

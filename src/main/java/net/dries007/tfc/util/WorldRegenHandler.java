@@ -47,7 +47,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import java.util.*;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.plant.Plant.PORCINI;
+import static net.dries007.tfc.api.types.plant.type.PlantTypes.PORCINI;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 /**

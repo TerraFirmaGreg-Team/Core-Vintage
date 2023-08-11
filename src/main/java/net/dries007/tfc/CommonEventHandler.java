@@ -36,6 +36,7 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IPredator;
+import net.dries007.tfc.api.types.plant.type.PlantTypeHandler;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
 import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
@@ -166,6 +167,8 @@ public final class CommonEventHandler {
 
         SoilTypeHandler.init();
         SoilBlockVariantHandler.init();
+
+        PlantTypeHandler.init();
 
         WoodTypeHandler.init();
         WoodBlockVariantHandler.init();

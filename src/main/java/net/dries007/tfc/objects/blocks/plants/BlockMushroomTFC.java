@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.plant.Plant;
-import net.dries007.tfc.api.types.plant.PlantVariant;
+import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
+import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
@@ -16,10 +16,10 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class BlockMushroomTFC extends BlockPlantTFC implements IGrowable {
 
-    private final Plant plant;
+    private final PlantType plant;
 
-    public BlockMushroomTFC(PlantVariant plantVariant, Plant plant) {
-        super(plantVariant, plant);
+    public BlockMushroomTFC(PlantBlockVariant plantBlockVariant, PlantType plant) {
+        super(plantBlockVariant, plant);
 
         this.plant = plant;
     }

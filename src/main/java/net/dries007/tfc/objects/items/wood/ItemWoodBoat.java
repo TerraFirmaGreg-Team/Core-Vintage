@@ -5,6 +5,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -39,6 +40,7 @@ public class ItemWoodBoat extends ItemTFC implements IHasModel, IWoodItem {
 
         setRegistryName(getRegistryLocation("boat"));
         setTranslationKey(getTranslationName("boat"));
+        setCreativeTab(CreativeTabsTFC.WOOD);
 
         OreDictionaryHelper.register(this, "boat");
         OreDictionaryHelper.register(this, "boat", woodType.toString());

@@ -5,6 +5,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -22,6 +23,7 @@ public class ItemWoodLumber extends ItemTFC implements IHasModel, IWoodItem {
 
         setRegistryName(getRegistryLocation("lumber"));
         setTranslationKey(getTranslationName("lumber"));
+        setCreativeTab(CreativeTabsTFC.WOOD);
 
         OreDictionaryHelper.register(this, "lumber");
         OreDictionaryHelper.register(this, "lumber", woodType.toString());

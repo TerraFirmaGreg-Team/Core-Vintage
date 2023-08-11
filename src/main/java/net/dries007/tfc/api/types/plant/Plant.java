@@ -169,8 +169,6 @@ public enum Plant implements IStringSerializable {
             hashSet.add(stage);
         }
         this.numStages = hashSet.size() <= 1 ? 1 : hashSet.size() - 1;
-
-//		setRegistryName(name);
     }
 
     Plant(PlantVariant plantVariant, int[] stages, boolean isClayMarking, boolean isSwampPlantType, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight, double movementMod, String oreDictName) {

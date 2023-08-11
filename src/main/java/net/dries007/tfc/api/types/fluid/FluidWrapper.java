@@ -1,5 +1,6 @@
-package net.dries007.tfc.api.types.fluid.properties;
+package net.dries007.tfc.api.types.fluid;
 
+import net.dries007.tfc.api.types.fluid.properties.FluidProperty;
 import net.minecraftforge.fluids.Fluid;
 
 import javax.annotation.Nonnull;

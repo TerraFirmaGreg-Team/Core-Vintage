@@ -9,6 +9,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
@@ -24,6 +25,7 @@ import net.dries007.tfc.api.types.soil.variant.SoilBlockVariantHandler;
 import net.dries007.tfc.api.types.wood.type.WoodTypeHandler;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariantHandler;
 import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.command.*;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
@@ -31,13 +33,17 @@ import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
 import net.dries007.tfc.compat.gregtech.stonetypes.StoneTypeHandler;
 import net.dries007.tfc.compat.top.TOPIntegration;
 import net.dries007.tfc.network.*;
+import net.dries007.tfc.objects.LootTablesTFC;
+import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlockIceTFC;
 import net.dries007.tfc.objects.blocks.BlockSnowTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.blocks.TFCBlocks;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
+import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.TFCItems;
 import net.dries007.tfc.objects.te.*;
+import net.dries007.tfc.types.DefaultRecipes;
 import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
@@ -50,20 +56,22 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.DedicatedServer;
+import net.minecraft.server.dedicated.PropertyManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.server.FMLServerHandler;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
@@ -123,12 +131,43 @@ public class CommonProxy {
     }
 
     public void onInit(FMLInitializationEvent event) {
+        LootTablesTFC.init();
+        CapabilityFood.init();
+        TFCTriggers.init();
 
+        setTFCWorldTypeAsDefault(event);
+
+        CapabilityItemSize.init();
+        CapabilityItemHeat.init();
+        CapabilityMetalItem.init();
+        CapabilityForgeable.init();
+
+        DefaultRecipes.init();
     }
 
     public void onPostInit(FMLPostInitializationEvent event) {
         FuelManager.postInit();
         JsonConfigRegistry.INSTANCE.postInit();
+    }
+
+    public void onLoadComplete(FMLLoadCompleteEvent event) {
+        // This is the latest point that we can possibly stop creating non-decaying stacks on both server + client
+        // It should be safe to use as we're only using it internally
+        FoodHandler.setNonDecaying(false);
+    }
+
+    public void onServerStarting(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandGetHeat());
+        event.registerServerCommand(new CommandStripWorld());
+        event.registerServerCommand(new CommandHeat());
+        event.registerServerCommand(new CommandPlayerTFC());
+        event.registerServerCommand(new CommandTimeTFC());
+        event.registerServerCommand(new CommandDebugInfo());
+        event.registerServerCommand(new CommandWorkChunk());
+        event.registerServerCommand(new CommandGenTree());
+
+        // Initialize calendar for the current server
+        CalendarTFC.INSTANCE.init(event.getServer());
     }
 
     @SubscribeEvent
@@ -367,9 +406,26 @@ public class CommonProxy {
         r.register(item);
     }
 
-    // Для регистрации тайловых объектов
+    /**
+     * Регистрирует TE.
+     * */
     private static <T extends TileEntity> void registerTE(Class<T> te, String name) {
         TileEntity.register(MOD_ID + ":" + name, te);
+    }
+
+    private void setTFCWorldTypeAsDefault(FMLInitializationEvent event) {
+        if (event.getSide().isServer()) {
+            MinecraftServer server = FMLServerHandler.instance().getServer();
+            if (server instanceof DedicatedServer) {
+                PropertyManager settings = ((DedicatedServer) server).settings;
+                if (ConfigTFC.General.OVERRIDES.forceTFCWorldType) {
+                    // This is called before vanilla defaults it, meaning we intercept it's default with ours
+                    // However, we can't actually set this due to fears of overriding the existing world
+                    TerraFirmaCraft.LOGGER.info("Setting default level-type to `tfc_classic`");
+                    settings.getStringProperty("level-type", "tfc_classic");
+                }
+            }
+        }
     }
 
     @Nonnull

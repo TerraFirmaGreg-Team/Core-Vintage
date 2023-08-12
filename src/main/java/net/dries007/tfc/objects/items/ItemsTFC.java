@@ -289,13 +289,6 @@ public final class ItemsTFC {
         }
     }
 
-    public static void init() {
-        /*
-        for (Metal metal : TFCRegistries.METALS.getValuesCollection())
-            if (metal.getToolMetal() != null)
-                metal.getToolMetal().setRepairItem(new ItemStack(ItemMetal.get(metal, Metal.ItemType.SCRAP)));*/
-    }
-
     private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired) {
         registerPottery(items, r, nameUnfired, nameFired, new ItemPottery(), new ItemPottery());
     }

@@ -4,14 +4,17 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
+import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
 import net.dries007.tfc.client.render.RenderBoatTFC;
 import net.dries007.tfc.client.render.animal.*;
 import net.dries007.tfc.client.render.projectile.RenderThrownJavelin;
+import net.dries007.tfc.command.*;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.objects.entity.EntityFallingBlockTFC;
@@ -38,12 +41,11 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
@@ -74,12 +76,23 @@ public class ClientProxy extends CommonProxy {
     public void onInit(FMLInitializationEvent event) {
         super.onInit(event);
 
+        TFCKeybindings.init();
+        // Enable overlay to render health, thirst and hunger bars, TFC style.
+        // Also renders animal familiarity
+        MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
     }
 
     @Override
     public void onPostInit(FMLPostInitializationEvent event) {
         super.onPostInit(event);
+    }
 
+    public void onLoadComplete(FMLLoadCompleteEvent event) {
+        super.onLoadComplete(event);
+    }
+
+    public void onServerStarting(FMLServerStartingEvent event) {
+        super.onServerStarting(event);
     }
 
     public static void registerEntityRenderer() {

@@ -6,7 +6,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
-import net.dries007.tfc.test.items.TFCItems;
+import net.dries007.tfc.objects.items.TFCItems;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

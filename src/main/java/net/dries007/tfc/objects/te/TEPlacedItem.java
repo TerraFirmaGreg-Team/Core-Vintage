@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.te;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.test.blocks.TFCBlocks;
+import net.dries007.tfc.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

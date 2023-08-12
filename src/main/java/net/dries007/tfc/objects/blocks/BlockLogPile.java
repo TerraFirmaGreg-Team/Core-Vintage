@@ -10,7 +10,6 @@ import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.objects.te.TELogPile;
-import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;

@@ -3,7 +3,7 @@ package net.dries007.tfc.network;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.test.blocks.TFCBlocks;
+import net.dries007.tfc.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

@@ -9,7 +9,7 @@ import net.dries007.tfc.objects.blocks.BlockCharcoalPile;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.objects.te.TECharcoalForge;
-import net.dries007.tfc.test.blocks.TFCBlocks;
+import net.dries007.tfc.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.block.Multiblock;
 import net.minecraft.block.Block;

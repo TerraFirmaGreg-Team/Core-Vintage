@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.blocks;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
-import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.fluid;
 
-import net.dries007.tfc.test.blocks.TFCBlocks;
+import net.dries007.tfc.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.dries007.tfc.util.climate.IceMeltHandler;

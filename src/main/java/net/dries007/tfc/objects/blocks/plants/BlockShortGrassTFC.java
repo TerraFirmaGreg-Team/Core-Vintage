@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.blocks.plants;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
 import net.dries007.tfc.api.types.plant.type.PlantType;
-import net.dries007.tfc.test.items.TFCItems;
+import net.dries007.tfc.objects.items.TFCItems;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;

@@ -1,4 +1,4 @@
-package net.dries007.tfc.test.blocks;
+package net.dries007.tfc.objects.blocks;
 
 import gregtech.api.GregTechAPI;
 import net.dries007.tfc.api.types.GroundcoverType;

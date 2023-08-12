@@ -1,7 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.minecraft.block.Block;

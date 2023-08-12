@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.items.itemblock;
 
 import net.dries007.tfc.objects.te.TELogPile;
 import net.dries007.tfc.objects.te.TEPitKiln;
-import net.dries007.tfc.test.blocks.TFCBlocks;
+import net.dries007.tfc.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

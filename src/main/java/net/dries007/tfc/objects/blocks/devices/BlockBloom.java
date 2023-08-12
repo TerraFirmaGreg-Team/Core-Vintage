@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.devices;
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.te.TEBloom;
-import net.dries007.tfc.test.items.TFCItems;
+import net.dries007.tfc.objects.items.TFCItems;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

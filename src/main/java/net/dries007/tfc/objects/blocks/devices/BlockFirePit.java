@@ -10,7 +10,7 @@ import net.dries007.tfc.api.types.fluid.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.objects.te.TEFirePit;
-import net.dries007.tfc.test.items.TFCItems;
+import net.dries007.tfc.objects.items.TFCItems;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;

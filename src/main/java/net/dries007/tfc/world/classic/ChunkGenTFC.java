@@ -9,7 +9,7 @@ import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.api.types.fluid.FluidsTFC;
-import net.dries007.tfc.test.blocks.TFCBlocks;
+import net.dries007.tfc.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;

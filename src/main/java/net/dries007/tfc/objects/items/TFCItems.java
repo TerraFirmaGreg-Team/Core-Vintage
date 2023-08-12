@@ -1,4 +1,4 @@
-package net.dries007.tfc.test.items;
+package net.dries007.tfc.objects.items;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;

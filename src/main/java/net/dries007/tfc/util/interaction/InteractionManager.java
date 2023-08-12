@@ -6,7 +6,7 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.te.TELogPile;
-import net.dries007.tfc.test.blocks.TFCBlocks;
+import net.dries007.tfc.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.state.IBlockState;

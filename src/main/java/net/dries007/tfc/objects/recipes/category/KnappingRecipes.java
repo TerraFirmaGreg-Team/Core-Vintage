@@ -11,7 +11,7 @@ import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemUnfiredMold;
-import net.dries007.tfc.test.items.TFCItems;
+import net.dries007.tfc.objects.items.TFCItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 

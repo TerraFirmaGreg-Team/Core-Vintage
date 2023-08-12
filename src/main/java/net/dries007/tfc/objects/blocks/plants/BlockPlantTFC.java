@@ -6,7 +6,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.plant.IPlantBlock;
 import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
-import net.dries007.tfc.api.types.plant.PlantTypeEnum;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -311,16 +310,16 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
     @Nonnull
     public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
         return switch (plant.getPlantVariant()) {
-            case CACTUS, DESERT, DESERT_TALL_PLANT -> EnumPlantType.Desert;
-            case FLOATING, FLOATING_SEA -> EnumPlantType.Water;
-            case MUSHROOM -> EnumPlantType.Cave;
-            default -> EnumPlantType.Plains;
+            case CACTUS, DESERT, DESERT_TALL_PLANT -> net.minecraftforge.common.EnumPlantType.Desert;
+            case FLOATING, FLOATING_SEA -> net.minecraftforge.common.EnumPlantType.Water;
+            case MUSHROOM -> net.minecraftforge.common.EnumPlantType.Cave;
+            default -> net.minecraftforge.common.EnumPlantType.Plains;
         };
     }
 
     @Nonnull
-    public PlantTypeEnum getPlantTypeTFC() {
-        return plant.getEnumPlantTypeTFC();
+    public PlantType.EnumPlantType getEnumType() {
+        return plant.getEnumPlantType();
     }
 
     @Nonnull

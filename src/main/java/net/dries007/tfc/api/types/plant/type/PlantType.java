@@ -1,12 +1,11 @@
 package net.dries007.tfc.api.types.plant.type;
 
-import net.dries007.tfc.api.types.plant.PlantTypeEnum;
-import net.dries007.tfc.api.types.plant.PlantValidity;
 import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -392,31 +391,31 @@ public class PlantType {
                 plantBlockVariant == MUSHROOM;
     }
 
-    public final PlantTypeEnum getEnumPlantTypeTFC() {
+    public final EnumPlantType getEnumPlantType() {
         switch (plantBlockVariant) {
             case DESERT, DESERT_TALL_PLANT -> {
-                if (isClayMarking) return PlantTypeEnum.DESERT_CLAY;
-                else return PlantTypeEnum.NONE;
+                if (isClayMarking) return EnumPlantType.DESERT_CLAY;
+                else return EnumPlantType.NONE;
             }
             case DRY, DRY_TALL_PLANT -> {
-                if (isClayMarking) return PlantTypeEnum.DRY_CLAY;
-                else return PlantTypeEnum.DRY;
+                if (isClayMarking) return EnumPlantType.DRY_CLAY;
+                else return EnumPlantType.DRY;
             }
             case REED, TALL_REED -> {
-                return PlantTypeEnum.FRESH_BEACH;
+                return EnumPlantType.FRESH_BEACH;
             }
             case REED_SEA, TALL_REED_SEA -> {
-                return PlantTypeEnum.SALT_BEACH;
+                return EnumPlantType.SALT_BEACH;
             }
             case WATER, TALL_WATER, EMERGENT_TALL_WATER -> {
-                return PlantTypeEnum.FRESH_WATER;
+                return EnumPlantType.FRESH_WATER;
             }
             case WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA -> {
-                return PlantTypeEnum.SALT_WATER;
+                return EnumPlantType.SALT_WATER;
             }
             default -> {
-                if (isClayMarking) return PlantTypeEnum.CLAY;
-                else return PlantTypeEnum.NONE;
+                if (isClayMarking) return EnumPlantType.CLAY;
+                else return EnumPlantType.NONE;
             }
         }
     }
@@ -563,6 +562,44 @@ public class PlantType {
             return new PlantType(name, plantBlockVariant, stages, isClayMarking, isSwampPlant, minGrowthTemp, maxGrowthTemp,
                     minTemp, maxTemp, minRain, maxRain, minSun, maxSun, maxHeight, minWaterDepth, maxWaterDepth,
                     movementMod, oreDictName);
+        }
+    }
+
+    public enum EnumPlantType implements IStringSerializable {
+        CLAY,
+        DESERT_CLAY,
+        DRY_CLAY,
+        DRY,
+        FRESH_BEACH,
+        SALT_BEACH,
+        FRESH_WATER,
+        SALT_WATER,
+        NONE;
+
+        /**
+         * Возвращает имя перечисления в нижнем регистре.
+         */
+        @Nonnull
+        @Override
+        public String getName() {
+            return name().toLowerCase();
+        }
+    }
+
+    public enum PlantValidity implements IStringSerializable {
+        COLD,
+        HOT,
+        DRY,
+        WET,
+        VALID;
+
+        /**
+         * Возвращает имя перечисления в нижнем регистре.
+         */
+        @Nonnull
+        @Override
+        public String getName() {
+            return name().toLowerCase();
         }
     }
 }

@@ -304,10 +304,10 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
         int beachDistance = 2;
 
         if (plantable instanceof BlockPlantTFC) {
-            switch (((BlockPlantTFC) plantable).getPlantTypeTFC()) {
+            switch (((BlockPlantTFC) plantable).getEnumType()) {
                 case CLAY -> {
-                    return soilBlockVariant == DIRT || soilBlockVariant == GRASS || soilBlockVariant == DRY_GRASS ||
-                            soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS;
+                    return soilBlockVariant == DIRT || soilBlockVariant == GRASS ||
+                            soilBlockVariant == DRY_GRASS || soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS;
                 }
                 case DESERT_CLAY -> {
                     return soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS || isSand(state);

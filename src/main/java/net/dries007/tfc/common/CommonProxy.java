@@ -5,7 +5,6 @@ import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.loaders.recipe.handlers.OreRecipeHandler;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -25,7 +24,6 @@ import net.dries007.tfc.api.types.soil.variant.SoilBlockVariantHandler;
 import net.dries007.tfc.api.types.wood.type.WoodTypeHandler;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariantHandler;
 import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.command.*;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
@@ -39,8 +37,8 @@ import net.dries007.tfc.objects.blocks.BlockIceTFC;
 import net.dries007.tfc.objects.blocks.BlockSnowTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.blocks.TFCBlocks;
+import net.dries007.tfc.objects.commands.*;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.TFCItems;
 import net.dries007.tfc.objects.te.*;
 import net.dries007.tfc.types.DefaultRecipes;
@@ -79,7 +77,6 @@ import javax.annotation.Nullable;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCStorage.*;
-import static net.dries007.tfc.api.registries.TFCStorage.ITEM;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TerraFirmaCraft.MOD_ID)

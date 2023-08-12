@@ -1,4 +1,4 @@
-package net.dries007.tfc.command;
+package net.dries007.tfc.objects.commands;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.util.calendar.CalendarTFC;

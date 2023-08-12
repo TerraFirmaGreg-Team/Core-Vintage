@@ -148,47 +148,6 @@ import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.RAW;
 public final class EventHandlers {
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
-    @SubscribeEvent
-    public static void onMaterialsInit(MaterialEvent event) {
-        TFGMaterialHandler.init();
-        TFGOrePrefixHandler.init();
-
-        RockCategoryHandler.init();
-        RockTypeHandler.init();
-        RockBlockVariantHandler.init();
-
-        SoilTypeHandler.init();
-        SoilBlockVariantHandler.init();
-
-        PlantTypeHandler.init();
-
-        WoodTypeHandler.init();
-        WoodBlockVariantHandler.init();
-
-        StoneTypeHandler.init();
-    }
-
-    @SubscribeEvent
-    public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-        TFGOrePrefix.oreChunk.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-
-        TFGOrePrefix.oreQuartzite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreChalk.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreChert.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreClaystone.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreConglomerate.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreDacite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreDolomite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreGabbro.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreGneiss.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreLimestone.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.orePhyllite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreRhyolite.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreSchist.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreShale.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-        TFGOrePrefix.oreSlate.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
-    }
-
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onNeighborNotify(BlockEvent.NeighborNotifyEvent event) {
         IBlockState state = event.getState();

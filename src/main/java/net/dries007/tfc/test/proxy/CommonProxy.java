@@ -75,9 +75,9 @@ public class CommonProxy {
 
         //=== Fluid ==================================================================================================//
 
-        for (var groundcoverBlock : GROUNDCOVER_BLOCKS.values()) {
-            r.register(groundcoverBlock);
-        }
+//        for (var groundcoverBlock : GROUNDCOVER_BLOCKS.values()) {
+//            r.register(groundcoverBlock);
+//        }
 
         //=== Other ==================================================================================================//
 

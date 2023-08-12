@@ -129,7 +129,7 @@ import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.RAW;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public final class EventHandlers {
+public final class CommonEventHandler {
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

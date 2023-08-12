@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.common.EventHandlers;
+import net.dries007.tfc.common.CommonEventHandler;
 import net.dries007.tfc.network.PacketCapabilityContainerUpdate;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -31,7 +31,7 @@ import java.util.Map;
  * - This listener itself is used to sync capability data WITHOUT overwriting the client side item stack. It uses {@link INBTSerializable} capabilities and calls deserialization on the client to accomplish this. This avoids issues with packets arriving out of order resulting in perceived "flickering" on the client.
  * <p>
  * To register a capability for synchronization, add it to {@link CapabilityContainerListener#SYNC_CAPS}
- * This will automatically sync any containers it can, as it is added during various spots from {@link EventHandlers}
+ * This will automatically sync any containers it can, as it is added during various spots from {@link CommonEventHandler}
  */
 @ParametersAreNonnullByDefault
 public class CapabilityContainerListener implements IContainerListener {

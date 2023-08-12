@@ -2,11 +2,15 @@ package net.dries007.tfc.compat.gregtech.material;
 
 import gregtech.api.fluids.fluidType.FluidTypes;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.properties.FluidProperty;
+import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 
+import static gregtech.api.fluids.fluidType.FluidTypes.LIQUID;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.NO_UNIFICATION;
 import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
+import static gregtech.api.unification.material.properties.PropertyKey.FLUID;
 import static gregtech.api.unification.material.properties.PropertyKey.TOOL;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags.*;
@@ -75,12 +79,12 @@ public class TFGMaterialHandler {
 
         // FluidTypes
         HotWater = new Material.Builder(32050, gregtechId("hot_water"))
-                .fluid(FluidTypes.LIQUID, true)
+                .fluid()
                 .color(0x345FDA)
                 .build();
 
         FreshWater = new Material.Builder(32051, gregtechId("fresh_water"))
-                .fluid(FluidTypes.LIQUID, true)
+                .fluid()
                 .color(0x296ACD)
                 .build();
 
@@ -242,7 +246,7 @@ public class TFGMaterialHandler {
                 .build();
 
         // Some custom properties for materials
-        SaltWater.setMaterialRGB(0x1F5099);
+        SaltWater.setMaterialRGB(0xFF1F5099);
 
         Stone.setProperty(TOOL, new ToolProperty(1.0f, 1f, 30, 1));
         Copper.setProperty(TOOL, new ToolProperty(1.5f, 2f, 88, 2));

@@ -2,8 +2,6 @@ package net.dries007.tfc.objects.blocks;
 
 import gregtech.api.GregTechAPI;
 import net.dries007.tfc.api.types.GroundcoverType;
-import net.dries007.tfc.api.types.fluid.FluidWrapper;
-import net.dries007.tfc.api.types.fluid.type.FluidType;
 import net.dries007.tfc.api.types.metal.MetalVariant;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.rock.type.RockType;
@@ -14,15 +12,12 @@ import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
-import net.dries007.tfc.objects.blocks.*;
 import net.dries007.tfc.objects.blocks.devices.*;
+import net.dries007.tfc.objects.blocks.fluid.BlockFluidHotWater;
+import net.dries007.tfc.objects.blocks.fluid.BlockFluidWater;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.objects.blocks.soil.peat.BlockPeat;
 import net.dries007.tfc.objects.blocks.soil.peat.BlockPeatGrass;
-import net.dries007.tfc.api.types.fluid.FluidsTFC;
-import net.dries007.tfc.objects.blocks.fluid.BlockFluidHotWater;
-import net.dries007.tfc.objects.blocks.fluid.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.fluid.BlockFluidWater;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockCrucible;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockPowderKeg;
@@ -30,6 +25,7 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fluids.FluidRegistry;
 
 import static net.dries007.tfc.api.registries.TFCStorage.*;
 import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
@@ -65,7 +61,6 @@ public class TFCBlocks {
     public static BlockMetalCladding CLADDING;
 
     public static void preInit() {
-        FluidsTFC.preInit();
 
         //=== Rock ===================================================================================================//
 
@@ -147,25 +142,9 @@ public class TFCBlocks {
 
         //=== Fluid ==================================================================================================//
 
-//        for (var water : FluidType.getFluidTypes()) {
-//            FLUID.add(new BlockFluidTFC(water, Material.WATER));
-//        }
-
-        for (FluidWrapper wrapper : FluidsTFC.getAllAlcoholsFluids()) {
-            FLUID.add(new BlockFluidTFC(wrapper.get(), Material.WATER));
-        }
-
-        for (FluidWrapper wrapper : FluidsTFC.getAllOtherFiniteFluids()) {
-            FLUID.add(new BlockFluidTFC(wrapper.get(), Material.WATER));
-        }
-        for (EnumDyeColor color : EnumDyeColor.values()) {
-            FluidWrapper wrapper = FluidsTFC.getFluidFromDye(color);
-            FLUID.add(new BlockFluidTFC(wrapper.get(), Material.WATER));
-        }
-
         FLUID.add(new BlockFluidHotWater());
-        FLUID.add(new BlockFluidWater(FluidsTFC.FRESH_WATER.get(), Material.WATER, false));
-        FLUID.add(new BlockFluidWater(FluidsTFC.SALT_WATER.get(), Material.WATER, true));
+        FLUID.add(new BlockFluidWater(FluidRegistry.getFluid("fresh_water"), Material.WATER, false));
+        FLUID.add(new BlockFluidWater(FluidRegistry.getFluid("salt_water"), Material.WATER, true));
 
         //=== Other ==================================================================================================//
 
@@ -187,7 +166,7 @@ public class TFCBlocks {
         ITEM_BLOCKS.add(new ItemBlock(PIT_KILN = new BlockPitKiln()));
         ITEM_BLOCKS.add(new ItemBlock(PLACED_ITEM = new BlockPlacedItem()));
         ITEM_BLOCKS.add(new ItemBlock(CHARCOAL_FORGE = new BlockCharcoalForge()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(SEA_ICE = new BlockIceTFC(FluidsTFC.SALT_WATER.get())));
+        ITEM_BLOCKS.add(new ItemBlockTFC(SEA_ICE = new BlockIceTFC(FluidRegistry.getFluid("salt_water"))));
         ITEM_BLOCKS.add(new ItemBlockPowderKeg(POWDERKEG = new BlockPowderKeg()));
 
         BLOCKS.add(PLACED_ITEM_FLAT = new BlockPlacedItemFlat());

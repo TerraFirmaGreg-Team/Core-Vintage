@@ -5,6 +5,7 @@ import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.loaders.recipe.handlers.OreRecipeHandler;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
+
 import net.dries007.tfc.api.types.plant.type.PlantTypeHandler;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
 import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
@@ -21,11 +22,14 @@ import net.dries007.tfc.compat.gregtech.stonetypes.StoneTypeHandler;
 import net.dries007.tfc.objects.blocks.BlockIceTFC;
 import net.dries007.tfc.objects.blocks.BlockSnowTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
+import net.dries007.tfc.objects.blocks.fluid.BlockFluidHotWater;
+import net.dries007.tfc.objects.blocks.fluid.BlockFluidWater;
 import net.dries007.tfc.objects.te.*;
 import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -154,11 +158,6 @@ public class CommonProxy {
             r.register(groundcoverBlock);
         }
 
-        //=== Fluid ==================================================================================================//
-
-//        for (var groundcoverBlock : GROUNDCOVER_BLOCKS.values()) {
-//            r.register(groundcoverBlock);
-//        }
 
         //=== Other ==================================================================================================//
 

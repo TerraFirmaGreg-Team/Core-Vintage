@@ -6,7 +6,7 @@ import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.api.types.fluid.FluidsTFC;
+
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.objects.te.TEFirePit;
@@ -37,6 +37,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -255,7 +256,7 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
                     // Interact with the cooking pot
                     if (tile.getCookingPotStage() == TEFirePit.CookingPotStage.EMPTY) {
                         FluidStack fluidStack = FluidUtil.getFluidContained(held);
-                        if (fluidStack != null && fluidStack.amount >= 1000 && fluidStack.getFluid() == FluidsTFC.FRESH_WATER.get()) {
+                        if (fluidStack != null && fluidStack.amount >= 1000 && fluidStack.getFluid() == FluidRegistry.getFluid("fresh_water")) {
                             // Add water
                             tile.addWaterToCookingPot();
                             IFluidHandler fluidHandler = FluidUtil.getFluidHandler(held);

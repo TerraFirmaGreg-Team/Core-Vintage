@@ -2,38 +2,26 @@ package net.dries007.tfc.objects.items.ceramics;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
-import net.dries007.tfc.api.types.fluid.properties.DrinkableProperty;
-import net.dries007.tfc.api.types.fluid.FluidWrapper;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.api.types.fluid.FluidsTFC;
 import net.dries007.tfc.util.FluidTransferHelper;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.stream.Collectors;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -85,26 +73,26 @@ public class ItemJug extends ItemPottery {
         return new ActionResult<>(EnumActionResult.PASS, stack);
     }
 
-    @Override
-    @Nonnull
-    public ItemStack onItemUseFinish(@Nonnull ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-        IFluidHandler jugCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (jugCap != null) {
-            FluidStack fluidConsumed = jugCap.drain(CAPACITY, true);
-            if (fluidConsumed != null && entityLiving instanceof EntityPlayer) {
-                DrinkableProperty drinkable = FluidsTFC.getWrapper(fluidConsumed.getFluid()).get(DrinkableProperty.DRINKABLE);
-                if (drinkable != null) {
-                    drinkable.onDrink((EntityPlayer) entityLiving);
-                }
-            }
-            if (Constants.RNG.nextFloat() < 0.02) // 1/50 chance, same as 1.7.10
-            {
-                stack.shrink(1);
-                worldIn.playSound(null, entityLiving.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);
-            }
-        }
-        return stack;
-    }
+//    @Override
+//    @Nonnull
+//    public ItemStack onItemUseFinish(@Nonnull ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
+//        IFluidHandler jugCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+//        if (jugCap != null) {
+//            FluidStack fluidConsumed = jugCap.drain(CAPACITY, true);
+//            if (fluidConsumed != null && entityLiving instanceof EntityPlayer) {
+//                DrinkableProperty drinkable = FluidsTFC.getWrapper(fluidConsumed.getFluid()).get(DrinkableProperty.DRINKABLE);
+//                if (drinkable != null) {
+//                    drinkable.onDrink((EntityPlayer) entityLiving);
+//                }
+//            }
+//            if (Constants.RNG.nextFloat() < 0.02) // 1/50 chance, same as 1.7.10
+//            {
+//                stack.shrink(1);
+//                worldIn.playSound(null, entityLiving.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);
+//            }
+//        }
+//        return stack;
+//    }
 
     @Override
     @Nonnull
@@ -131,30 +119,30 @@ public class ItemJug extends ItemPottery {
         return super.getItemStackDisplayName(stack);
     }
 
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (isInCreativeTab(tab)) {
-            items.add(new ItemStack(this));
-            for (FluidWrapper wrapper : FluidsTFC.getAllWrappers()) {
-                if (wrapper.get(DrinkableProperty.DRINKABLE) != null) {
-                    ItemStack stack = new ItemStack(this);
-                    IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-                    if (cap != null) {
-                        cap.fill(new FluidStack(wrapper.get(), CAPACITY), true);
-                    }
-                    items.add(stack);
-                }
-            }
-        }
-    }
+//    @Override
+//    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+//        if (isInCreativeTab(tab)) {
+//            items.add(new ItemStack(this));
+//            for (Fluid wrapper : FluidsTFC.getAllWrappers()) {
+//                if (wrapper.get(DrinkableProperty.DRINKABLE) != null) {
+//                    ItemStack stack = new ItemStack(this);
+//                    IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+//                    if (cap != null) {
+//                        cap.fill(new FluidStack(wrapper, CAPACITY), true);
+//                    }
+//                    items.add(stack);
+//                }
+//            }
+//        }
+//    }
 
     @Override
     public boolean canStack(ItemStack stack) {
         return false;
     }
 
-    @Override
-    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new FluidWhitelistHandler(stack, CAPACITY, FluidsTFC.getAllWrappers().stream().filter(x -> x.get(DrinkableProperty.DRINKABLE) != null).map(FluidWrapper::get).collect(Collectors.toSet()));
-    }
+//    @Override
+//    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+//        return new FluidWhitelistHandler(stack, CAPACITY, FluidsTFC.getAllWrappers().stream().filter(x -> x.get(DrinkableProperty.DRINKABLE) != null).map(FluidWrapper::get).collect(Collectors.toSet()));
+//    }
 }

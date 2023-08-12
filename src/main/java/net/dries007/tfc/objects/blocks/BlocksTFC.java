@@ -11,7 +11,7 @@ import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.blocks.soil.peat.BlockPeat;
 import net.dries007.tfc.objects.blocks.soil.peat.BlockPeatGrass;
-import net.dries007.tfc.api.types.fluid.FluidsTFC;
+
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -20,6 +20,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -144,11 +145,11 @@ public final class BlocksTFC {
     }
 
     public static boolean isFreshWater(IBlockState current) {
-        return current == FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState();
+        return current == FluidRegistry.getFluid("fresh_water").getBlock().getDefaultState();
     }
 
     public static boolean isSaltWater(IBlockState current) {
-        return current == FluidsTFC.SALT_WATER.get().getBlock().getDefaultState();
+        return current == FluidRegistry.getFluid("salt_water").getBlock().getDefaultState();
     }
 
     public static boolean isFreshWaterOrIce(IBlockState current) {

@@ -2,7 +2,7 @@ package net.dries007.tfc.client.render;
 
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
-import net.dries007.tfc.api.types.fluid.FluidsTFC;
+
 import net.dries007.tfc.objects.te.TEFirePit;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -39,7 +40,7 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TEFirePit> {
 
         // Rendering liquid in the soup pot
         if (te.getCookingPotStage() != TEFirePit.CookingPotStage.EMPTY) {
-            Fluid water = FluidsTFC.FRESH_WATER.get();
+            Fluid water = FluidRegistry.getFluid("fresh_water");
 
             GlStateManager.pushMatrix();
             GlStateManager.translate(x, y, z);

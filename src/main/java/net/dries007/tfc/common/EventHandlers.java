@@ -40,7 +40,7 @@ import net.dries007.tfc.objects.blocks.wood.BlockWoodLog;
 import net.dries007.tfc.objects.blocks.wood.BlockWoodSupport;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.effects.PotionEffectsTFC;
-import net.dries007.tfc.api.types.fluid.FluidsTFC;
+
 import net.dries007.tfc.objects.blocks.fluid.BlockFluidTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.blocks.TFCBlocks;
@@ -114,6 +114,7 @@ import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -587,7 +588,7 @@ public final class EventHandlers {
             if (event.getEntity() instanceof EntitySquid && world.getBlockState(pos).getBlock() instanceof BlockFluidTFC) {
                 // Prevents squids spawning outside of salt water (eg: oceans)
                 Fluid fluid = ((BlockFluidTFC) world.getBlockState(pos).getBlock()).getFluid();
-                if (FluidsTFC.SALT_WATER.get() != fluid) {
+                if (FluidRegistry.getFluid("salt_water") != fluid) {
                     event.setResult(Event.Result.DENY);
                 }
             }
@@ -761,14 +762,14 @@ public final class EventHandlers {
                     entityItem.world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + rand * 0.4f);
                     ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY, entityItem.posZ, 42, 0.0D, 0.15D, 0.0D, 0.08D);
                     if (rand <= 0.01F) {
-                        entityItem.world.setBlockState(pos, FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState(), 2); // 1/100 chance of the ice turning into water.
+                        entityItem.world.setBlockState(pos, FluidRegistry.getFluid("fresh_water").getBlock().getDefaultState(), 2); // 1/100 chance of the ice turning into water.
                     }
                 } else if (state.getMaterial() == Material.PACKED_ICE) {
                     heatCap.setTemperature(Math.max(0, itemTemp - 125));
                     entityItem.world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 1f, 0.8f + rand * 0.4f);
                     ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY, entityItem.posZ, 42, 0.0D, 0.15D, 0.0D, 0.08D);
                     if (rand <= 0.005F) {
-                        entityItem.world.setBlockState(pos, FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState(), 2); // 1/200 chance of the packed ice turning into water.
+                        entityItem.world.setBlockState(pos, FluidRegistry.getFluid("fresh_water").getBlock().getDefaultState(), 2); // 1/200 chance of the packed ice turning into water.
                     }
                 }
                 event.setExtraLife(itemTemp == 0 ? lifespan : ConfigTFC.Devices.TEMPERATURE.ticksBeforeAttemptToCool); // Set lifespan accordingly

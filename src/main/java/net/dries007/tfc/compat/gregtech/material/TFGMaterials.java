@@ -17,7 +17,6 @@ public class TFGMaterials {
     // Варианты воды
     public static Material HotWater;
     public static Material FreshWater;
-//    public static Material SaltWater;
 
     // Алкоголь
     public static Material Cider;
@@ -34,13 +33,13 @@ public class TFGMaterials {
     public static Material Tannin;
     public static Material Vinegar;
     public static Material Brine;
-//    public static Material Milk;
     public static Material CurdledMilk;
     public static Material MilkVinegar;
     public static Material OliveOil;
     public static Material OliveOilWater;
     public static Material Lye;
 
+    // Каменные породы
     public static Material Chalk;
     public static Material Chert;
     public static Material Claystone;

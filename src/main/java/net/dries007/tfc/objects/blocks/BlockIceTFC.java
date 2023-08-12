@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.api.types.fluid.FluidsTFC;
+
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.dries007.tfc.util.climate.IceMeltHandler;
@@ -35,7 +35,7 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
 
     public BlockIceTFC(Fluid waterFluid) {
         this.waterFluid = waterFluid;
-        this.meltThreshold = waterFluid == FluidsTFC.SALT_WATER.get() ? IceMeltHandler.SALT_WATER_MELT_THRESHOLD : IceMeltHandler.ICE_MELT_THRESHOLD;
+        this.meltThreshold = waterFluid == FluidRegistry.getFluid("salt_water") ? IceMeltHandler.SALT_WATER_MELT_THRESHOLD : IceMeltHandler.ICE_MELT_THRESHOLD;
 
         if (waterFluid == FluidRegistry.WATER) {
             setRegistryName("minecraft", "ice");

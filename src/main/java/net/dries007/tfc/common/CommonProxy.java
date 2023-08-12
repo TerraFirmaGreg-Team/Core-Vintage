@@ -6,6 +6,15 @@ import gregtech.loaders.recipe.handlers.OreRecipeHandler;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 
+import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
+import net.dries007.tfc.api.capability.egg.CapabilityEgg;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
+import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
+import net.dries007.tfc.api.capability.size.CapabilityItemSize;
+import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.types.plant.type.PlantTypeHandler;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
 import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
@@ -15,19 +24,27 @@ import net.dries007.tfc.api.types.soil.variant.SoilBlockVariantHandler;
 import net.dries007.tfc.api.types.wood.type.WoodTypeHandler;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariantHandler;
 import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
 import net.dries007.tfc.compat.gregtech.stonetypes.StoneTypeHandler;
+import net.dries007.tfc.compat.top.TOPIntegration;
+import net.dries007.tfc.network.*;
 import net.dries007.tfc.objects.blocks.BlockIceTFC;
 import net.dries007.tfc.objects.blocks.BlockSnowTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
+import net.dries007.tfc.objects.blocks.TFCBlocks;
 import net.dries007.tfc.objects.blocks.fluid.BlockFluidHotWater;
 import net.dries007.tfc.objects.blocks.fluid.BlockFluidWater;
+import net.dries007.tfc.objects.entity.EntitiesTFC;
+import net.dries007.tfc.objects.items.TFCItems;
 import net.dries007.tfc.objects.te.*;
 import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
+import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -43,7 +60,9 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
@@ -59,7 +78,46 @@ import static net.dries007.tfc.api.registries.TFCStorage.ITEM;
 public class CommonProxy {
 
     public void onPreInit() {
+        TFCBlocks.preInit();
+        TFCItems.preInit();
+        TFGToolItems.preInit();
 
+        // No need to sync config here, forge magic
+        NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.getInstance(), new TFCGuiHandler());
+
+        // Received on server
+        TerraFirmaCraft.registerNetwork(new PacketGuiButton.Handler(), PacketGuiButton.class, Side.SERVER);
+        TerraFirmaCraft.registerNetwork(new PacketPlaceBlockSpecial.Handler(), PacketPlaceBlockSpecial.class, Side.SERVER);
+        TerraFirmaCraft.registerNetwork(new PacketSwitchPlayerInventoryTab.Handler(), PacketSwitchPlayerInventoryTab.class, Side.SERVER);
+        TerraFirmaCraft.registerNetwork(new PacketOpenCraftingGui.Handler(), PacketOpenCraftingGui.class, Side.SERVER);
+        TerraFirmaCraft.registerNetwork(new PacketCycleItemMode.Handler(), PacketCycleItemMode.class, Side.SERVER);
+        TerraFirmaCraft.registerNetwork(new PacketStackFood.Handler(), PacketStackFood.class, Side.SERVER);
+
+        // Received on client
+        TerraFirmaCraft.registerNetwork(new PacketChunkData.Handler(), PacketChunkData.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketCapabilityContainerUpdate.Handler(), PacketCapabilityContainerUpdate.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketCalendarUpdate.Handler(), PacketCalendarUpdate.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketFoodStatsUpdate.Handler(), PacketFoodStatsUpdate.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketFoodStatsReplace.Handler(), PacketFoodStatsReplace.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketPlayerDataUpdate.Handler(), PacketPlayerDataUpdate.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketSpawnTFCParticle.Handler(), PacketSpawnTFCParticle.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketSimpleMessage.Handler(), PacketSimpleMessage.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketProspectResult.Handler(), PacketProspectResult.class, Side.CLIENT);
+
+        EntitiesTFC.preInit();
+
+        CapabilityChunkData.preInit();
+        CapabilityItemSize.preInit();
+        CapabilityItemHeat.preInit();
+        CapabilityForgeable.preInit();
+        CapabilityFood.preInit();
+        CapabilityEgg.preInit();
+        CapabilityPlayerData.preInit();
+        CapabilityDamageResistance.preInit();
+        CapabilityMetalItem.preInit();
+        CapabilityWorldTracker.preInit();
+
+        TOPIntegration.onPreInit();
     }
 
     public void onInit() {
@@ -158,7 +216,6 @@ public class CommonProxy {
             r.register(groundcoverBlock);
         }
 
-
         //=== Other ==================================================================================================//
 
         ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
@@ -194,7 +251,6 @@ public class CommonProxy {
         register(TEQuern.class, "quern");
         register(TELargeVessel.class, "large_vessel");
         register(TEPowderKeg.class, "powderkeg");
-
     }
 
 

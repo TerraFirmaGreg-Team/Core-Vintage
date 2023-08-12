@@ -39,7 +39,11 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.network.FMLEmbeddedChannel;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleIndexedCodec;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
@@ -68,14 +72,14 @@ public final class TerraFirmaCraft {
             modId = MOD_ID,
             clientSide = "net.dries007.tfc.client.ClientProxy",
             serverSide = "net.dries007.tfc.common.CommonProxy")
-    private static CommonProxy PROXY = null;
+    private static CommonProxy PROXY;
 
     static {
         FluidRegistry.enableUniversalBucket();
     }
 
-    private WorldTypeTFC worldTypeTFC;
-    private SimpleNetworkWrapper network;
+    private static WorldTypeTFC worldTypeTFC;
+    private static SimpleNetworkWrapper network = new SimpleNetworkWrapper(MOD_ID);
 
     public static Logger getLog() {
         return LOGGER;
@@ -86,67 +90,31 @@ public final class TerraFirmaCraft {
     }
 
     public static WorldTypeTFC getWorldType() {
-        return INSTANCE.worldTypeTFC;
+        return worldTypeTFC;
     }
 
     public static SimpleNetworkWrapper getNetwork() {
-        return INSTANCE.network;
+        return network;
     }
 
     public static TerraFirmaCraft getInstance() {
         return INSTANCE;
     }
 
+    private static int networkIdCounter = 0;
+
+    /**
+     * Используй это только на preInit фазе.
+     * */
+    public static <T extends IMessage> void registerNetwork(IMessageHandler<T, IMessage> handler, Class<T> packetLatexUpdateClass, Side side) {
+        network.registerMessage(handler, packetLatexUpdateClass, networkIdCounter++, side);
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        LOGGER.debug("If you can see this, debug logging is working :)");
-        LOGGER.info("PRE INIT START!");
-
-        TFCBlocks.preInit();
-        TFCItems.preInit();
-        TFGToolItems.preInit();
-
-        // No need to sync config here, forge magic
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new TFCGuiHandler());
-        network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
-        int id = 0;
-        // Received on server
-        network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, ++id, Side.SERVER);
-        network.registerMessage(new PacketPlaceBlockSpecial.Handler(), PacketPlaceBlockSpecial.class, ++id, Side.SERVER);
-        network.registerMessage(new PacketSwitchPlayerInventoryTab.Handler(), PacketSwitchPlayerInventoryTab.class, ++id, Side.SERVER);
-        network.registerMessage(new PacketOpenCraftingGui.Handler(), PacketOpenCraftingGui.class, ++id, Side.SERVER);
-        network.registerMessage(new PacketCycleItemMode.Handler(), PacketCycleItemMode.class, ++id, Side.SERVER);
-        network.registerMessage(new PacketStackFood.Handler(), PacketStackFood.class, ++id, Side.SERVER);
-
-        // Received on client
-        network.registerMessage(new PacketChunkData.Handler(), PacketChunkData.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketCapabilityContainerUpdate.Handler(), PacketCapabilityContainerUpdate.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketCalendarUpdate.Handler(), PacketCalendarUpdate.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketFoodStatsUpdate.Handler(), PacketFoodStatsUpdate.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketFoodStatsReplace.Handler(), PacketFoodStatsReplace.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketPlayerDataUpdate.Handler(), PacketPlayerDataUpdate.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketSpawnTFCParticle.Handler(), PacketSpawnTFCParticle.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketSimpleMessage.Handler(), PacketSimpleMessage.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketProspectResult.Handler(), PacketProspectResult.class, ++id, Side.CLIENT);
-
-        EntitiesTFC.preInit();
-        JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
-
-        CapabilityChunkData.preInit();
-        CapabilityItemSize.preInit();
-        CapabilityItemHeat.preInit();
-        CapabilityForgeable.preInit();
-        CapabilityFood.preInit();
-        CapabilityEgg.preInit();
-        CapabilityPlayerData.preInit();
-        CapabilityDamageResistance.preInit();
-        CapabilityMetalItem.preInit();
-        CapabilityWorldTracker.preInit();
-
         PROXY.onPreInit();
 
-        TOPIntegration.onPreInit();
+        JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
     }
 
     @Mod.EventHandler

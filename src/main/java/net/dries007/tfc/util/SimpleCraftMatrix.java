@@ -69,7 +69,7 @@ public class SimpleCraftMatrix {
     private static void logMatrix(boolean[] matrix) {
         StringBuilder b = new StringBuilder();
         for (boolean m : matrix) b.append(m ? "X" : " ");
-        TerraFirmaCraft.getLog().debug("Matrix: {" + b + "}");
+        TerraFirmaCraft.LOGGER.debug("Matrix: {" + b + "}");
     }
 
     public void setAll(boolean value) {

@@ -92,7 +92,7 @@ public enum TFCParticles {
         final int range = 80;
         PacketSpawnTFCParticle packet = new PacketSpawnTFCParticle(this, x, y, z, speedX, speedY, speedZ, duration);
         NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldIn.provider.getDimension(), x, y, z, range);
-        TerraFirmaCraft.getNetwork().sendToAllAround(packet, point);
+        TerraFirmaCraft.NETWORK.sendToAllAround(packet, point);
     }
 
     /**

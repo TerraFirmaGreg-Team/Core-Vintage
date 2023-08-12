@@ -42,7 +42,7 @@ public class TreeGenWillow implements ITreeGenerator {
         structureOverlay = manager.get(world.getMinecraftServer(), overlay);
 
         if (structureBase == null || structureOverlay == null) {
-            TerraFirmaCraft.getLog().warn("Unable to find a template for " + base + " or " + overlay);
+            TerraFirmaCraft.LOGGER.warn("Unable to find a template for " + base + " or " + overlay);
             return;
         }
 

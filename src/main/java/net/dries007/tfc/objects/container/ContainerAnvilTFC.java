@@ -92,7 +92,7 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
             return false;
         }
         if (!Helpers.isAtLeast(tile.getTier(), recipe.getTier())) {
-            TerraFirmaCraft.getLog().info("Anvil Tier: {} + Recipe Tier: {}", tile.getTier(), recipe.getTier());
+            TerraFirmaCraft.LOGGER.info("Anvil Tier: {} + Recipe Tier: {}", tile.getTier(), recipe.getTier());
             player.sendMessage(new TextComponentTranslation(MOD_ID + ".tooltip.anvil_tier_too_low"));
             return false;
         }

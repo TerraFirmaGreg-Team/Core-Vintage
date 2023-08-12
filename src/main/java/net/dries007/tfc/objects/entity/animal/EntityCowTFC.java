@@ -138,7 +138,7 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
                 //Return chat message indicating why this entity isn't giving milk
                 TextComponentTranslation tooltip = getTooltip();
                 if (tooltip != null) {
-                    TerraFirmaCraft.getNetwork().sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+                    TerraFirmaCraft.NETWORK.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
                 }
             }
             return true;

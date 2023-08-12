@@ -19,7 +19,7 @@ public final class ConfigTFC {
     @SubscribeEvent
     public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(MOD_ID)) {
-            TerraFirmaCraft.getLog().warn("Config changed");
+            TerraFirmaCraft.LOGGER.warn("Config changed");
             ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
             GrassColorHandler.resetColors();
         }

@@ -46,7 +46,7 @@ public class TreeGenNormal implements ITreeGenerator {
         Template structureOverlay = manager.get(world.getMinecraftServer(), overlay);
 
         if (structureBase == null) {
-            TerraFirmaCraft.getLog().warn("Unable to find a template for " + base);
+            TerraFirmaCraft.LOGGER.warn("Unable to find a template for " + base);
             return;
         }
 

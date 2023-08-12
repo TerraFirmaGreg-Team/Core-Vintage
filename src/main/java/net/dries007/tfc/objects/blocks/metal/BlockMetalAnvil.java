@@ -272,7 +272,7 @@ public class BlockMetalAnvil extends Block implements IMetalBlock, IMaterialItem
                     if (te.isItemValid(i, heldItem) && te.getSlotLimit(i) > cap.getStackInSlot(i).getCount()) {
                         ItemStack result = cap.insertItem(i, heldItem, false);
                         playerIn.setHeldItem(hand, result);
-                        TerraFirmaCraft.getLog().info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
+                        TerraFirmaCraft.LOGGER.info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
                         return true;
                     }
                 }

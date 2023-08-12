@@ -41,13 +41,13 @@ public class TFCKeybindings {
     public static void onKeyEvent(InputEvent event) {
         // todo: move this to a button on the inventory GUI
         if (OPEN_CRAFTING_TABLE.isPressed()) {
-            TerraFirmaCraft.getNetwork().sendToServer(new PacketOpenCraftingGui());
+            TerraFirmaCraft.NETWORK.sendToServer(new PacketOpenCraftingGui());
         }
         if (PLACE_BLOCK.isPressed()) {
-            TerraFirmaCraft.getNetwork().sendToServer(new PacketPlaceBlockSpecial());
+            TerraFirmaCraft.NETWORK.sendToServer(new PacketPlaceBlockSpecial());
         }
         if (CHANGE_ITEM_MODE.isPressed()) {
-            TerraFirmaCraft.getNetwork().sendToServer(new PacketCycleItemMode());
+            TerraFirmaCraft.NETWORK.sendToServer(new PacketCycleItemMode());
         }
     }
 
@@ -59,7 +59,7 @@ public class TFCKeybindings {
             if (event.getGui() instanceof GuiContainer) {
                 Slot slotUnderMouse = ((GuiContainer) event.getGui()).getSlotUnderMouse();
                 if (slotUnderMouse != null) {
-                    TerraFirmaCraft.getNetwork().sendToServer(new PacketStackFood(slotUnderMouse.slotNumber));
+                    TerraFirmaCraft.NETWORK.sendToServer(new PacketStackFood(slotUnderMouse.slotNumber));
                 }
             }
         }

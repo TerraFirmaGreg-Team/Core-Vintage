@@ -45,7 +45,7 @@ public final class CreativeTabsTFC {
                 CapabilityFood.setStackNonDecaying(stack);
                 return stack;
             }
-            TerraFirmaCraft.getLog().error("[Please inform developers] No icon stack for creative tab {}", getTabLabel());
+            TerraFirmaCraft.LOGGER.error("[Please inform developers] No icon stack for creative tab {}", getTabLabel());
             return new ItemStack(Items.STICK);
         }
     }

@@ -184,10 +184,10 @@ public abstract class GenLayerTFC extends GenLayer {
                 }
             }
             name = "_" + name + ".png";
-            TerraFirmaCraft.getLog().info("Worldgen debug image {}", name);
+            TerraFirmaCraft.LOGGER.info("Worldgen debug image {}", name);
             ImageIO.write(outBitmap, "PNG", new File(name));
         } catch (Exception e) {
-            TerraFirmaCraft.getLog().catching(e);
+            TerraFirmaCraft.LOGGER.catching(e);
         }
     }
 

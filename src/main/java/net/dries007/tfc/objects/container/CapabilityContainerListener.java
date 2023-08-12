@@ -192,7 +192,7 @@ public class CapabilityContainerListener implements IContainerListener {
 
         final PacketCapabilityContainerUpdate message = new PacketCapabilityContainerUpdate(container.windowId, filteredItems);
         if (message.hasData()) {
-            TerraFirmaCraft.getNetwork().sendTo(message, player);
+            TerraFirmaCraft.NETWORK.sendTo(message, player);
         }
     }
 
@@ -206,7 +206,7 @@ public class CapabilityContainerListener implements IContainerListener {
             final PacketCapabilityContainerUpdate message = new PacketCapabilityContainerUpdate(container.windowId, slotIndex, stack);
             if (message.hasData()) {
                 // Don't send the message if there's nothing to update
-                TerraFirmaCraft.getNetwork().sendTo(message, player);
+                TerraFirmaCraft.NETWORK.sendTo(message, player);
             }
         }
     }

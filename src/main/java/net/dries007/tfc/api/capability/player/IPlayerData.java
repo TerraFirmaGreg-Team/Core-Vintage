@@ -76,7 +76,7 @@ public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
     default void updateAndSync() {
         EntityPlayer player = getPlayer();
         if (player instanceof EntityPlayerMP) {
-            TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(serializeNBT()), (EntityPlayerMP) player);
+            TerraFirmaCraft.NETWORK.sendTo(new PacketPlayerDataUpdate(serializeNBT()), (EntityPlayerMP) player);
         }
     }
 }

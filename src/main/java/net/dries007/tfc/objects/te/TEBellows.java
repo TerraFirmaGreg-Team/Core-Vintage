@@ -96,9 +96,9 @@ public class TEBellows extends TEBase {
     }
 
     public void debug() {
-        TerraFirmaCraft.getLog().debug("Debugging Bellows");
-        TerraFirmaCraft.getLog().debug("Now: {} | Then: {} | Difference: {}", world.getTotalWorldTime(), lastPushed, (world.getTotalWorldTime() - lastPushed));
-        TerraFirmaCraft.getLog().debug("Total Height: {}", getHeight());
+        TerraFirmaCraft.LOGGER.debug("Debugging Bellows");
+        TerraFirmaCraft.LOGGER.debug("Now: {} | Then: {} | Difference: {}", world.getTotalWorldTime(), lastPushed, (world.getTotalWorldTime() - lastPushed));
+        TerraFirmaCraft.LOGGER.debug("Total Height: {}", getHeight());
     }
 
     @Override

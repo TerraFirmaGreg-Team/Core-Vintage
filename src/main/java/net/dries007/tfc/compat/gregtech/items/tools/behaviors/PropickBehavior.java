@@ -106,7 +106,7 @@ public class PropickBehavior implements IToolBehavior {
 
                 MinecraftForge.EVENT_BUS.post(event);
                 PacketProspectResult packet = new PacketProspectResult(event.getBlockPos(), event.getResultType(), event.getMaterialName());
-                TerraFirmaCraft.getNetwork().sendTo(packet, (EntityPlayerMP) player);
+                TerraFirmaCraft.NETWORK.sendTo(packet, (EntityPlayerMP) player);
             } else {
                 //client side, add hit particles
                 addHitBlockParticle(worldIn, pos, facing, state);

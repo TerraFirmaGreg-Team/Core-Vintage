@@ -125,7 +125,7 @@ public class GuiAnvilTFC extends GuiContainerTE<TEAnvilTFC> {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
-        TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(button.id));
+        TerraFirmaCraft.NETWORK.sendToServer(new PacketGuiButton(button.id));
         super.actionPerformed(button);
     }
 }

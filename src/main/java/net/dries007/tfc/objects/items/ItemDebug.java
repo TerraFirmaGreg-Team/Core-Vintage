@@ -55,19 +55,19 @@ public class ItemDebug extends Item {
                 try {
                     tile.getClass().getMethod("debug").invoke(tile);
                 } catch (Exception t) {
-                    TerraFirmaCraft.getLog().info("No debug method found to invoke on {}", tile);
+                    TerraFirmaCraft.LOGGER.info("No debug method found to invoke on {}", tile);
                 }
 
-                TerraFirmaCraft.getLog().info("Tile Data: {}", tile.serializeNBT());
+                TerraFirmaCraft.LOGGER.info("Tile Data: {}", tile.serializeNBT());
 
                 IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (inventory != null) {
-                    TerraFirmaCraft.getLog().info("Found item handler: {}", inventory);
+                    TerraFirmaCraft.LOGGER.info("Found item handler: {}", inventory);
                 }
 
                 IFluidHandler fluids = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
                 if (fluids != null) {
-                    TerraFirmaCraft.getLog().info("Found fluid handler: {}", fluids);
+                    TerraFirmaCraft.LOGGER.info("Found fluid handler: {}", fluids);
                 }
             }
         } catch (Exception t) { /* Nothing Burger */ }

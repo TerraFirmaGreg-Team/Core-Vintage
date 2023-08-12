@@ -1,36 +1,21 @@
 package net.dries007.tfc;
 
-import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
-
-import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
 import net.dries007.tfc.command.*;
-import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
-import net.dries007.tfc.compat.top.TOPIntegration;
-import net.dries007.tfc.network.*;
+import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
-import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.common.CommonProxy;
-import net.dries007.tfc.objects.blocks.TFCBlocks;
-import net.dries007.tfc.objects.items.TFCItems;
 import net.dries007.tfc.types.DefaultRecipes;
 import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.fuel.FuelManager;
-import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.dedicated.PropertyManager;
@@ -39,11 +24,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.network.FMLEmbeddedChannel;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleIndexedCodec;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
@@ -52,7 +34,7 @@ import org.apache.logging.log4j.Logger;
 
 import static net.dries007.tfc.TerraFirmaCraft.*;
 
-@SuppressWarnings("FieldMayBeFinal")
+@SuppressWarnings({"unused", "FieldMayBeFinal"})
 @Mod.EventBusSubscriber
 @Mod(
         modid = MOD_ID,
@@ -66,6 +48,9 @@ public final class TerraFirmaCraft {
     public static final String GUI_FACTORY = "net.dries007.tfc.client.TFCModGuiFactory";
     public static final String DEPENDENCIES = "required:forge@[14.23.5.2847,);after:jei@[4.14.2,);after:gregtech;after:top@(1.8.25,)";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+    public static final WorldTypeTFC WORLD_TYPE_TFC = new WorldTypeTFC();
+    public static SimpleNetworkWrapper NETWORK = new SimpleNetworkWrapper(MOD_ID);
+
     @Mod.Instance
     private static TerraFirmaCraft INSTANCE = null;
     @SidedProxy(
@@ -78,23 +63,8 @@ public final class TerraFirmaCraft {
         FluidRegistry.enableUniversalBucket();
     }
 
-    private static WorldTypeTFC worldTypeTFC;
-    private static SimpleNetworkWrapper network = new SimpleNetworkWrapper(MOD_ID);
-
-    public static Logger getLog() {
-        return LOGGER;
-    }
-
     public static CommonProxy getProxy() {
         return PROXY;
-    }
-
-    public static WorldTypeTFC getWorldType() {
-        return worldTypeTFC;
-    }
-
-    public static SimpleNetworkWrapper getNetwork() {
-        return network;
     }
 
     public static TerraFirmaCraft getInstance() {
@@ -107,14 +77,14 @@ public final class TerraFirmaCraft {
      * Используй это только на preInit фазе.
      * */
     public static <T extends IMessage> void registerNetwork(IMessageHandler<T, IMessage> handler, Class<T> packetLatexUpdateClass, Side side) {
-        network.registerMessage(handler, packetLatexUpdateClass, networkIdCounter++, side);
+        NETWORK.registerMessage(handler, packetLatexUpdateClass, networkIdCounter++, side);
     }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        PROXY.onPreInit();
-
-        JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
+        LOGGER.info("Started PreInitialization Phase!");
+        PROXY.onPreInit(event);
+        LOGGER.info("Finished PreInitialization Phase!");
     }
 
     @Mod.EventHandler
@@ -124,7 +94,7 @@ public final class TerraFirmaCraft {
         CapabilityFood.init();
         TFCTriggers.init();
 
-        PROXY.onInit();
+        PROXY.onInit(event);
 
         if (event.getSide().isClient()) {
             TFCKeybindings.init();
@@ -138,13 +108,13 @@ public final class TerraFirmaCraft {
                 if (ConfigTFC.General.OVERRIDES.forceTFCWorldType) {
                     // This is called before vanilla defaults it, meaning we intercept it's default with ours
                     // However, we can't actually set this due to fears of overriding the existing world
-                    TerraFirmaCraft.getLog().info("Setting default level-type to `tfc_classic`");
+                    TerraFirmaCraft.LOGGER.info("Setting default level-type to `tfc_classic`");
                     settings.getStringProperty("level-type", "tfc_classic");
                 }
             }
         }
 
-        worldTypeTFC = new WorldTypeTFC();
+
 
         CapabilityItemSize.init();
         CapabilityItemHeat.init();
@@ -156,10 +126,7 @@ public final class TerraFirmaCraft {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        PROXY.onPostInit();
-
-        FuelManager.postInit();
-        JsonConfigRegistry.INSTANCE.postInit();
+        PROXY.onPostInit(event);
     }
 
     @Mod.EventHandler

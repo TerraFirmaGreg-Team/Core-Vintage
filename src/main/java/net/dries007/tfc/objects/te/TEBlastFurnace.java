@@ -181,7 +181,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
                 chimney = value;
                 return;
         }
-        TerraFirmaCraft.getLog().warn("Illegal field id {} in TEBlastFurnace#setField", index);
+        TerraFirmaCraft.LOGGER.warn("Illegal field id {} in TEBlastFurnace#setField", index);
     }
 
     @Override
@@ -200,7 +200,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
             case CHIMNEY_LEVELS:
                 return chimney;
         }
-        TerraFirmaCraft.getLog().warn("Illegal field id {} in TEBlastFurnace#getField", index);
+        TerraFirmaCraft.LOGGER.warn("Illegal field id {} in TEBlastFurnace#getField", index);
         return 0;
     }
 
@@ -326,12 +326,12 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
 
 
     public void debug() {
-        TerraFirmaCraft.getLog().debug("Debugging Blast Furnace:");
-        TerraFirmaCraft.getLog().debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature, burnTicksLeft);
-        TerraFirmaCraft.getLog().debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
+        TerraFirmaCraft.LOGGER.debug("Debugging Blast Furnace:");
+        TerraFirmaCraft.LOGGER.debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature, burnTicksLeft);
+        TerraFirmaCraft.LOGGER.debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
         int i = 0;
         for (ItemStack item : oreStacks) {
-            TerraFirmaCraft.getLog().debug("Slot: {} - NBT: {}", i, item.serializeNBT().toString());
+            TerraFirmaCraft.LOGGER.debug("Slot: {} - NBT: {}", i, item.serializeNBT().toString());
         }
     }
 

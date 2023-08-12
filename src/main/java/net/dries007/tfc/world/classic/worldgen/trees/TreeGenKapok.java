@@ -89,7 +89,7 @@ public class TreeGenKapok implements ITreeGenerator {
         Template structureBase = manager.get(world.getMinecraftServer(), base);
 
         if (structureBase == null) {
-            TerraFirmaCraft.getLog().warn("Unable to find a template for " + base);
+            TerraFirmaCraft.LOGGER.warn("Unable to find a template for " + base);
             return;
         }
         BlockPos size = structureBase.getSize();

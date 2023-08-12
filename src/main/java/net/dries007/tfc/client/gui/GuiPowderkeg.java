@@ -75,7 +75,7 @@ public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
     @Override
     protected void actionPerformed(@Nonnull GuiButton button) throws IOException {
         if (button instanceof GuiButtonPowderkegSeal) {
-            TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(button.id));
+            TerraFirmaCraft.NETWORK.sendToServer(new PacketGuiButton(button.id));
         }
         super.actionPerformed(button);
     }

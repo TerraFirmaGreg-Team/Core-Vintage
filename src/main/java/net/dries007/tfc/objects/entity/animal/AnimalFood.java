@@ -52,10 +52,10 @@ public class AnimalFood {
                 AnimalFood animalFood = GSON.fromJson(entry.getValue(), AnimalFood.class);
 
                 ANIMAL_FOOD_MAP.put(entityEntry.getEntityClass(), animalFood);
-                TerraFirmaCraft.getLog().info("Registered animal food data for " + entityName);
+                TerraFirmaCraft.LOGGER.info("Registered animal food data for " + entityName);
             } catch (JsonParseException e) {
-                TerraFirmaCraft.getLog().error("Error while reading an entry! Skipping.");
-                TerraFirmaCraft.getLog().error("Error: ", e);
+                TerraFirmaCraft.LOGGER.error("Error while reading an entry! Skipping.");
+                TerraFirmaCraft.LOGGER.error("Error: ", e);
             }
         }
     }

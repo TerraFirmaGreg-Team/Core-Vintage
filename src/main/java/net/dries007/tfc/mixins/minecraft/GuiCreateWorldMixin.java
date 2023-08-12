@@ -13,11 +13,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class GuiCreateWorldMixin {
 
     @Shadow
-    private int selectedIndex = TerraFirmaCraft.getWorldType().getId();
+    private int selectedIndex = TerraFirmaCraft.WORLD_TYPE_TFC.getId();
 
     @Inject(method = "canSelectCurWorldType", at = @At(value = "HEAD"), cancellable = true)
     private void onCanSelectCurWorldType(CallbackInfoReturnable<Boolean> cir) {
-        selectedIndex = TerraFirmaCraft.getWorldType().getId();
+        selectedIndex = TerraFirmaCraft.WORLD_TYPE_TFC.getId();
         cir.setReturnValue(true);
     }
 }

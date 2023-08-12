@@ -68,7 +68,7 @@ public final class SkillType<S extends Skill> {
         try {
             return ((SkillType<S>) skill);
         } catch (ClassCastException e) {
-            TerraFirmaCraft.getLog().warn("Tried to cast skill '" + skill + "' to an incorrect instance type: " + name + " / " + returnClass);
+            TerraFirmaCraft.LOGGER.warn("Tried to cast skill '" + skill + "' to an incorrect instance type: " + name + " / " + returnClass);
             return null;
         }
     }

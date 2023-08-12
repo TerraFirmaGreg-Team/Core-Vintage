@@ -21,7 +21,7 @@ public interface IFoodStatsTFC {
         if (foodCap != null) {
             addStats(foodCap);
         } else {
-            TerraFirmaCraft.getLog().info("Player ate a weird food: {} / {} that was missing a food capability! This is likely the error of an addon!", stack.getItem(), stack);
+            TerraFirmaCraft.LOGGER.info("Player ate a weird food: {} / {} that was missing a food capability! This is likely the error of an addon!", stack.getItem(), stack);
         }
     }
 

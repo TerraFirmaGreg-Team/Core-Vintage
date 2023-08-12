@@ -521,7 +521,7 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
                 this.soupServings = value;
                 break;
             default:
-                TerraFirmaCraft.getLog().warn("Invalid Field ID {} in TEFirePit#setField", index);
+                TerraFirmaCraft.LOGGER.warn("Invalid Field ID {} in TEFirePit#setField", index);
         }
     }
 
@@ -535,7 +535,7 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
             case FIELD_COOKING_POT_SERVINGS:
                 return soupServings;
             default:
-                TerraFirmaCraft.getLog().warn("Invalid Field ID {} in TEFirePit#getField", index);
+                TerraFirmaCraft.LOGGER.warn("Invalid Field ID {} in TEFirePit#getField", index);
                 return 0;
         }
     }

@@ -91,7 +91,7 @@ public class GuiSkills extends GuiContainerTFC {
                 if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
                     this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
                 }
-                TerraFirmaCraft.getNetwork().sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
+                TerraFirmaCraft.NETWORK.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
             }
         } else if (button == buttonLeft) {
             currentPage--;
@@ -113,7 +113,7 @@ public class GuiSkills extends GuiContainerTFC {
             int totalSkills = skillOrder.size();
             int startSkill = currentPage * 4;
             if (startSkill >= totalSkills || startSkill < 0) {
-                TerraFirmaCraft.getLog().warn("Invalid skill page! Page: {}, Start at: {}, Skill Order is: {}", currentPage, startSkill, skillOrder);
+                TerraFirmaCraft.LOGGER.warn("Invalid skill page! Page: {}, Start at: {}, Skill Order is: {}", currentPage, startSkill, skillOrder);
                 return;
             }
             buttonRight.enabled = startSkill + 4 < totalSkills;

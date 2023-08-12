@@ -203,8 +203,8 @@ public class GuiCustomizeWorld extends GuiScreen implements GuiSlider.FormatHelp
             try {
                 return WorldGenSettings.fromString(str);
             } catch (JsonParseException e) {
-                TerraFirmaCraft.getLog().error("Error parsing s: {}", str);
-                TerraFirmaCraft.getLog().catching(e);
+                TerraFirmaCraft.LOGGER.error("Error parsing s: {}", str);
+                TerraFirmaCraft.LOGGER.catching(e);
             }
         }
         return new WorldGenSettingsBuilder();

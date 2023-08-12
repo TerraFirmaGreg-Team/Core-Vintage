@@ -277,7 +277,7 @@ public class TECharcoalForge extends TETickableInventory implements ICalendarTic
         if (index == FIELD_TEMPERATURE) {
             this.temperature = (float) value;
         } else {
-            TerraFirmaCraft.getLog().warn("Invalid field ID {} in TECharcoalForge#setField", index);
+            TerraFirmaCraft.LOGGER.warn("Invalid field ID {} in TECharcoalForge#setField", index);
         }
     }
 
@@ -286,7 +286,7 @@ public class TECharcoalForge extends TETickableInventory implements ICalendarTic
         if (index == FIELD_TEMPERATURE) {
             return (int) temperature;
         }
-        TerraFirmaCraft.getLog().warn("Invalid field ID {} in TECharcoalForge#getField", index);
+        TerraFirmaCraft.LOGGER.warn("Invalid field ID {} in TECharcoalForge#getField", index);
         return 0;
     }
 

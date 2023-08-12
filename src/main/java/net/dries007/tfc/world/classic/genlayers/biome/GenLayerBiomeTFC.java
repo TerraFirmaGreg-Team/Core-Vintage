@@ -18,8 +18,8 @@ public class GenLayerBiomeTFC extends GenLayerTFC {
         super(seed);
         this.parent = parent;
         if (ConfigTFC.General.DEBUG.debugWorldGenSafe) {
-            TerraFirmaCraft.getLog().info("Worldgen biome list (ints): {}", biomes);
-            TerraFirmaCraft.getLog().info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes).mapToObj(Biome::getBiomeForId).map(Objects::toString).toArray());
+            TerraFirmaCraft.LOGGER.info("Worldgen biome list (ints): {}", biomes);
+            TerraFirmaCraft.LOGGER.info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes).mapToObj(Biome::getBiomeForId).map(Objects::toString).toArray());
         }
     }
 

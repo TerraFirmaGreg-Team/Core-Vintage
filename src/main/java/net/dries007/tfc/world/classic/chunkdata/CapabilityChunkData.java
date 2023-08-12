@@ -26,7 +26,7 @@ public final class CapabilityChunkData {
     public static void onAttachCapabilitiesChunk(AttachCapabilitiesEvent<Chunk> event) {
         // Per #922, if there's no world or no world type, something is seriously violating our assumptions and we will just fail.
         //noinspection ConstantConditions
-        if (event.getObject().getWorld() != null && event.getObject().getWorld().getWorldType() == TerraFirmaCraft.getWorldType()) {
+        if (event.getObject().getWorld() != null && event.getObject().getWorld().getWorldType() == TerraFirmaCraft.WORLD_TYPE_TFC) {
             event.addCapability(CHUNK_DATA, new ChunkDataProvider());
         }
     }
@@ -42,7 +42,7 @@ public final class CapabilityChunkData {
 
                 // Update client side data
                 NBTTagCompound nbt = (NBTTagCompound) ChunkDataProvider.CHUNK_DATA_CAPABILITY.writeNBT(data, null);
-                TerraFirmaCraft.getNetwork().sendTo(new PacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(), data.getRainfall()), event.getPlayer());
+                TerraFirmaCraft.NETWORK.sendTo(new PacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(), data.getRainfall()), event.getPlayer());
             }
         }
     }

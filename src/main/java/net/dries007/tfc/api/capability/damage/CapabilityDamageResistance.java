@@ -42,7 +42,7 @@ public final class CapabilityDamageResistance {
      * Output to log
      */
     public static void postInit() {
-        TerraFirmaCraft.getLog().info("Entity resistance data initialized, loaded a total of {} resistance configurations", ENTITY_RESISTANCE.size());
+        TerraFirmaCraft.LOGGER.info("Entity resistance data initialized, loaded a total of {} resistance configurations", ENTITY_RESISTANCE.size());
     }
 
     /**
@@ -59,8 +59,8 @@ public final class CapabilityDamageResistance {
 
                 ENTITY_RESISTANCE.put(entityName, () -> resistance);
             } catch (JsonParseException e) {
-                TerraFirmaCraft.getLog().error("An entity resistance is specified incorrectly! Skipping.");
-                TerraFirmaCraft.getLog().error("Error: ", e);
+                TerraFirmaCraft.LOGGER.error("An entity resistance is specified incorrectly! Skipping.");
+                TerraFirmaCraft.LOGGER.error("Error: ", e);
             }
         }
     }

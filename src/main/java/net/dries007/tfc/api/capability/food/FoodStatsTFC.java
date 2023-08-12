@@ -49,7 +49,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
         }
         // Send the update regardless so the client can perform the same logic
         if (player instanceof EntityPlayerMP) {
-            TerraFirmaCraft.getNetwork().sendTo(new PacketFoodStatsReplace(), (EntityPlayerMP) player);
+            TerraFirmaCraft.NETWORK.sendTo(new PacketFoodStatsReplace(), (EntityPlayerMP) player);
         }
     }
 
@@ -65,7 +65,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
         if (foodCap != null) {
             addStats(foodCap);
         } else {
-            TerraFirmaCraft.getLog().info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
+            TerraFirmaCraft.LOGGER.info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
         }
     }
 
@@ -169,7 +169,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 
         // Since this is only called server side, and vanilla has a custom packet for this stuff, we need our own
         if (player instanceof EntityPlayerMP) {
-            TerraFirmaCraft.getNetwork().sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
+            TerraFirmaCraft.NETWORK.sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
         }
     }
 

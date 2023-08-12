@@ -31,7 +31,7 @@ public enum JsonConfigRegistry {
      */
     public void preInit(File dir) {
         // Init base config dir
-        TerraFirmaCraft.getLog().info("Loading or creating TFC config directory");
+        TerraFirmaCraft.LOGGER.info("Loading or creating TFC config directory");
         tfcConfigDir = new File(dir, MOD_ID);
         if (!tfcConfigDir.exists() && !tfcConfigDir.mkdir()) {
             throw new Error("Problem creating TFC extra config directory.");
@@ -60,8 +60,8 @@ public enum JsonConfigRegistry {
         try {
             recursivePathList = Files.walk(tfcConfigDir.toPath()).filter(f -> Files.isRegularFile(f) && f.toString().endsWith(".json")).toArray(Path[]::new);
         } catch (IOException e) {
-            TerraFirmaCraft.getLog().error("Unable to read files in the config directory! TFC will not generate any ore veins or load any damage resitances!");
-            TerraFirmaCraft.getLog().error("Error: ", e);
+            TerraFirmaCraft.LOGGER.error("Unable to read files in the config directory! TFC will not generate any ore veins or load any damage resitances!");
+            TerraFirmaCraft.LOGGER.error("Error: ", e);
             return;
         }
         for (Path path : recursivePathList) {
@@ -78,8 +78,8 @@ public enum JsonConfigRegistry {
 
             } catch (IOException e) {
                 // Don't crash the game if one of the files error-ed, just show it in log
-                TerraFirmaCraft.getLog().error("There was an error reading a json file at: " + path);
-                TerraFirmaCraft.getLog().error("Error: ", e);
+                TerraFirmaCraft.LOGGER.error("There was an error reading a json file at: " + path);
+                TerraFirmaCraft.LOGGER.error("Error: ", e);
             }
         }
         CapabilityDamageResistance.postInit();

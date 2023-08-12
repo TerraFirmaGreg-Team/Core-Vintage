@@ -145,7 +145,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
                 } else {
                     TextComponentTranslation tooltip = getTooltip();
                     if (tooltip != null) {
-                        TerraFirmaCraft.getNetwork().sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+                        TerraFirmaCraft.NETWORK.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
                     }
                 }
             }
@@ -155,7 +155,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
                 if (!isReadyForAnimalProduct()) {
                     TextComponentTranslation tooltip = getTooltip();
                     if (tooltip != null) {
-                        TerraFirmaCraft.getNetwork().sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+                        TerraFirmaCraft.NETWORK.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
                     }
                 }
             }

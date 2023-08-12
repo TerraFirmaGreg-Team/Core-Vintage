@@ -41,12 +41,12 @@ public class WorldTypeTFC extends WorldType {
 
     @Override
     public int getMinimumSpawnHeight(World world) {
-        return SEALEVEL; //todo
+        return SEALEVEL; // todo
     }
 
     @Override
     public double getHorizon(World world) {
-        return SEALEVEL; //todo
+        return SEALEVEL; // todo
     }
 
     @Override

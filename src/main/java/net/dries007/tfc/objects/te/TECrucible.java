@@ -304,7 +304,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
             this.temperature = value;
             return;
         }
-        TerraFirmaCraft.getLog().warn("Illegal field id {} in TECrucible#setField", index);
+        TerraFirmaCraft.LOGGER.warn("Illegal field id {} in TECrucible#setField", index);
     }
 
     @Override
@@ -312,7 +312,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
         if (index == FIELD_TEMPERATURE) {
             return (int) temperature;
         }
-        TerraFirmaCraft.getLog().warn("Illegal field id {} in TECrucible#getField", index);
+        TerraFirmaCraft.LOGGER.warn("Illegal field id {} in TECrucible#getField", index);
         return 0;
     }
 

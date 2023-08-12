@@ -89,7 +89,7 @@ public class CalendarEventHandler {
             // Check total players and reset player / calendar time ticking
             MinecraftServer server = event.player.getServer();
             if (server != null) {
-                TerraFirmaCraft.getLog().info("Player Logged Out - Checking for Calendar Updates.");
+                TerraFirmaCraft.LOGGER.info("Player Logged Out - Checking for Calendar Updates.");
                 List<EntityPlayerMP> players = server.getPlayerList().getPlayers();
                 int playerCount = players.size();
                 // The player logging out doesn't count
@@ -112,7 +112,7 @@ public class CalendarEventHandler {
             // Check total players and reset player / calendar time ticking
             MinecraftServer server = event.player.getServer();
             if (server != null) {
-                TerraFirmaCraft.getLog().info("Player Logged In - Checking for Calendar Updates.");
+                TerraFirmaCraft.LOGGER.info("Player Logged In - Checking for Calendar Updates.");
                 int players = server.getPlayerList().getPlayers().size();
                 CalendarTFC.INSTANCE.setPlayersLoggedOn(players > 0);
             }

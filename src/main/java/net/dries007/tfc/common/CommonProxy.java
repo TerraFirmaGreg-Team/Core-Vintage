@@ -44,6 +44,8 @@ import net.dries007.tfc.objects.te.*;
 import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
+import net.dries007.tfc.util.fuel.FuelManager;
+import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -58,6 +60,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -77,10 +82,12 @@ import static net.dries007.tfc.api.registries.TFCStorage.ITEM;
 @Mod.EventBusSubscriber(modid = TerraFirmaCraft.MOD_ID)
 public class CommonProxy {
 
-    public void onPreInit() {
+    public void onPreInit(FMLPreInitializationEvent event) {
         TFCBlocks.preInit();
         TFCItems.preInit();
         TFGToolItems.preInit();
+
+        JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
 
         // No need to sync config here, forge magic
         NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.getInstance(), new TFCGuiHandler());
@@ -120,12 +127,13 @@ public class CommonProxy {
         TOPIntegration.onPreInit();
     }
 
-    public void onInit() {
+    public void onInit(FMLInitializationEvent event) {
 
     }
 
-    public void onPostInit() {
-
+    public void onPostInit(FMLPostInitializationEvent event) {
+        FuelManager.postInit();
+        JsonConfigRegistry.INSTANCE.postInit();
     }
 
     @SubscribeEvent
@@ -324,7 +332,7 @@ public class CommonProxy {
     public static void registerVanillaOverrides(RegistryEvent.Register<Block> event) {
         // Ванильные переопределения. Используется для небольших настроек ванильных предметов, а не для их полной замены.
         if (ConfigTFC.General.OVERRIDES.enableFrozenOverrides) {
-            TerraFirmaCraft.getLog().info("The below warnings about unintended overrides are normal. The override is intended. ;)");
+            TerraFirmaCraft.LOGGER.info("The below warnings about unintended overrides are normal. The override is intended. ;)");
             event.getRegistry().registerAll(
                     new BlockIceTFC(FluidRegistry.WATER),
                     new BlockSnowTFC()

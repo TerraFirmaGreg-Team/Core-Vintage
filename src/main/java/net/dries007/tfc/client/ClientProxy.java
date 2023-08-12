@@ -41,6 +41,9 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
@@ -61,21 +64,21 @@ import static net.minecraft.util.text.TextFormatting.WHITE;
 public class ClientProxy extends CommonProxy {
 
     @Override
-    public void onPreInit() {
-        super.onPreInit();
+    public void onPreInit(FMLPreInitializationEvent event) {
+        super.onPreInit(event);
 
         registerEntityRenderer();
     }
 
     @Override
-    public void onInit() {
-        super.onInit();
+    public void onInit(FMLInitializationEvent event) {
+        super.onInit(event);
 
     }
 
     @Override
-    public void onPostInit() {
-        super.onPostInit();
+    public void onPostInit(FMLPostInitializationEvent event) {
+        super.onPostInit(event);
 
     }
 
@@ -147,7 +150,7 @@ public class ClientProxy extends CommonProxy {
             if (event.getButton() instanceof GuiButtonPlayerInventoryTab button) {
                 // This is to prevent the button from immediately firing after moving (enabled is set to false then)
                 if (button.isActive() && button.enabled) {
-                    TerraFirmaCraft.getNetwork().sendToServer(new PacketSwitchPlayerInventoryTab(button.getGuiType()));
+                    TerraFirmaCraft.NETWORK.sendToServer(new PacketSwitchPlayerInventoryTab(button.getGuiType()));
                 }
             }
         }

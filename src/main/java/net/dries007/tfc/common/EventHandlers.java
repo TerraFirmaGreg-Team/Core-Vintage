@@ -469,7 +469,7 @@ public final class EventHandlers {
             IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
             if (playerData != null) {
                 // Sync
-                TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(playerData.serializeNBT()), player);
+                TerraFirmaCraft.NETWORK.sendTo(new PacketPlayerDataUpdate(playerData.serializeNBT()), player);
             }
         }
     }
@@ -504,7 +504,7 @@ public final class EventHandlers {
             // Skills / Player data
             IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
             if (cap != null) {
-                TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
+                TerraFirmaCraft.NETWORK.sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
             }
         }
     }
@@ -544,7 +544,7 @@ public final class EventHandlers {
             // Skills
             IPlayerData skills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
             if (skills != null) {
-                TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(skills.serializeNBT()), player);
+                TerraFirmaCraft.NETWORK.sendTo(new PacketPlayerDataUpdate(skills.serializeNBT()), player);
             }
         }
     }
@@ -564,7 +564,7 @@ public final class EventHandlers {
     public static void onLivingSpawnEvent(LivingSpawnEvent.CheckSpawn event) {
         World world = event.getWorld();
         BlockPos pos = new BlockPos(event.getX(), event.getY(), event.getZ());
-        if (world.getWorldType() == TerraFirmaCraft.getWorldType() && event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
+        if (world.getWorldType() == TerraFirmaCraft.WORLD_TYPE_TFC && event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
             if (ConfigTFC.General.SPAWN_PROTECTION.preventMobs && event.getEntity().isCreatureType(EnumCreatureType.MONSTER, false)) {
                 // Prevent Mobs
                 ChunkDataTFC data = ChunkDataTFC.get(event.getWorld(), pos);
@@ -628,7 +628,7 @@ public final class EventHandlers {
     @SubscribeEvent
     public static void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
         Entity entity = event.getEntity();
-        if (event.getWorld().getWorldType() == TerraFirmaCraft.getWorldType() && event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
+        if (event.getWorld().getWorldType() == TerraFirmaCraft.WORLD_TYPE_TFC && event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
             // Fix skeleton rider traps spawning during thunderstorms
             if (entity instanceof EntitySkeletonHorse && ConfigTFC.General.DIFFICULTY.preventMobsOnSurface && ((EntitySkeletonHorse) entity).isTrap()) {
                 entity.setDropItemsWhenDead(false);
@@ -796,7 +796,7 @@ public final class EventHandlers {
         if ("naturalRegeneration".equals(event.getRuleName()) && ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {
             // Natural regeneration should be disabled, allows TFC to have custom regeneration
             event.getRules().setOrCreateGameRule("naturalRegeneration", "false");
-            TerraFirmaCraft.getLog().warn("Something tried to set natural regeneration to true, reverting!");
+            TerraFirmaCraft.LOGGER.warn("Something tried to set natural regeneration to true, reverting!");
         }
     }
 
@@ -808,13 +808,13 @@ public final class EventHandlers {
             // Calendar Sync / Initialization
             CalendarWorldData data = CalendarWorldData.get(world);
             CalendarTFC.INSTANCE.resetTo(data.getCalendar());
-            TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(CalendarTFC.INSTANCE));
+            TerraFirmaCraft.NETWORK.sendToAll(new PacketCalendarUpdate(CalendarTFC.INSTANCE));
         }
 
         if (ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {
             // Natural regeneration should be disabled, allows TFC to have custom regeneration
             event.getWorld().getGameRules().setOrCreateGameRule("naturalRegeneration", "false");
-            TerraFirmaCraft.getLog().warn("Updating gamerule naturalRegeneration to false!");
+            TerraFirmaCraft.LOGGER.warn("Updating gamerule naturalRegeneration to false!");
         }
     }
 
@@ -826,7 +826,7 @@ public final class EventHandlers {
     @SubscribeEvent
     public static void onCreateSpawn(WorldEvent.CreateSpawnPosition event) {
         event.getSettings().bonusChestEnabled = false;
-        TerraFirmaCraft.getLog().info("Disabling bonus chest, you cheaty cheater!");
+        TerraFirmaCraft.LOGGER.info("Disabling bonus chest, you cheaty cheater!");
     }
 
     @SubscribeEvent

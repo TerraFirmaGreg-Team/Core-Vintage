@@ -42,11 +42,11 @@ public class TFCRegistries {
 
             for (Field field : TFCRegistries.class.getFields()) {
                 if (!field.getType().isAssignableFrom(IForgeRegistry.class)) {
-                    TerraFirmaCraft.getLog().warn("[Please inform developers] Weird field? (Not a registry) {}", field);
+                    TerraFirmaCraft.LOGGER.warn("[Please inform developers] Weird field? (Not a registry) {}", field);
                     continue;
                 }
                 if ((field.getModifiers() & publicStaticFinal) != publicStaticFinal) {
-                    TerraFirmaCraft.getLog().warn("[Please inform developers] Weird field? (not Public Static Final) {}", field);
+                    TerraFirmaCraft.LOGGER.warn("[Please inform developers] Weird field? (not Public Static Final) {}", field);
                     continue;
                 }
                 if (field.get(null) == null) {
@@ -54,7 +54,7 @@ public class TFCRegistries {
                 }
             }
         } catch (Exception e) {
-            TerraFirmaCraft.getLog().fatal("Fatal error! This is likely a programming mistake.", e);
+            TerraFirmaCraft.LOGGER.fatal("Fatal error! This is likely a programming mistake.", e);
             throw new RuntimeException(e);
         }
     }

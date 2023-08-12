@@ -193,21 +193,6 @@ public final class ClientRegisterEvents {
         for (Block block : BlocksTFC.getAllFruitTreeLeavesBlocks())
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE).ignore(BlockFruitTreeLeaves.HARVESTABLE).build());
 
-//        BlocksTFC.getAllBlockRockVariants().forEach(e -> {
-////            if (e.getType() == Rock.Type.FARMLAND)
-////            {
-////                ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockFarmlandTFC.MOISTURE).build());
-////            }
-//            if (e.getRockVariant() == RAW)
-//            {
-//                ModelLoader.setCustomStateMapper((Block) e, new StateMap.Builder().ignore(BlockRockRaw.CAN_FALL).build());
-//            }
-//            else if (e.getRockVariant() == SMOOTH)
-//            {
-//                ModelLoader.setCustomStateMapper((Block) e, new StateMap.Builder().ignore(BlockRockSmooth.CAN_FALL).build());
-//            }
-//        });
-
         ModelLoader.setCustomStateMapper(TFCBlocks.THATCH_BED, new StateMap.Builder().ignore(BlockThatchBed.OCCUPIED).build());
 
         // Empty Models

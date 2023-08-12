@@ -73,6 +73,12 @@ public class CommonProxy {
             r.register(groundcoverBlock);
         }
 
+        //=== Fluid ==================================================================================================//
+
+        for (var groundcoverBlock : GROUNDCOVER_BLOCKS.values()) {
+            r.register(groundcoverBlock);
+        }
+
         //=== Other ==================================================================================================//
 
         ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));

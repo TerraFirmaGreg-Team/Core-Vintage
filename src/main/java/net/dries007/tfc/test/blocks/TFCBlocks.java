@@ -3,6 +3,7 @@ package net.dries007.tfc.test.blocks;
 import gregtech.api.GregTechAPI;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.fluid.FluidWrapper;
+import net.dries007.tfc.api.types.fluid.type.FluidType;
 import net.dries007.tfc.api.types.metal.MetalVariant;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.rock.type.RockType;
@@ -145,6 +146,10 @@ public class TFCBlocks {
         }
 
         //=== Fluid ==================================================================================================//
+
+//        for (var water : FluidType.getFluidTypes()) {
+//            FLUID.add(new BlockFluidTFC(water, Material.WATER));
+//        }
 
         for (FluidWrapper wrapper : FluidsTFC.getAllAlcoholsFluids()) {
             FLUID.add(new BlockFluidTFC(wrapper.get(), Material.WATER));

@@ -1212,7 +1212,6 @@ tile.tfc.quern.name=Quern
 tile.tfc.ceramics.fired.large_vessel.name=Large Vessel
 tile.tfc.fire_clay_block.name=Fire Clay
 tile.tfc.aggregate.name=Aggregate
-tile.tfc.sluice.name=Sluice
 tile.tfc.ice.name=Ice
 tile.tfc.sea_ice.name=Sea Ice
 tile.tfc.nest_box.name=Nest Box
@@ -2539,28 +2538,6 @@ config.tfc.devices.small_vessel=Small Vessel
 config.tfc.devices.small_vessel.tank=Small Vessel Storage
 config.tfc.devices.small_vessel.tank.tooltip=How much metal (units / mB) can a small vessel hold?
 
-# Sluice
-
-config.tfc.devices.sluice=Sluice
-
-config.tfc.devices.sluice.maxWorkChunk=Max Chunk Work
-config.tfc.devices.sluice.maxWorkChunk.tooltip=The amount of times a chunk can be worked (300 = default, 0 = disable). Note: While sluices increase work by 1, Goldpan increase by 6.
-
-config.tfc.devices.sluice.radius=Sluice Chunk Radius
-config.tfc.devices.sluice.radius.tooltip=The radius sluice works, in chunks.
-
-config.tfc.devices.sluice.ticks=Ticks
-config.tfc.devices.sluice.ticks.tooltip=The amount of ticks a sluice uses to work.
-
-config.tfc.devices.sluice.oreChance=Ore Chance
-config.tfc.devices.sluice.oreChance.tooltip=Chance that a sluice operation produce small ore.
-
-config.tfc.devices.sluice.gemChance=Gem Chance
-config.tfc.devices.sluice.gemChance.tooltip=Chance that a sluice operation produce gems.
-
-config.tfc.devices.sluice.diamondGemChance=Diamond Chance
-config.tfc.devices.sluice.diamondGemChance.tooltip=Chance that a diamond is dropped when sluice produce gems.
-
 # Jug
 
 config.tfc.devices.jug.dumpWaterOnShiftRightClick=Dump Water on Shift Right-Clicking
@@ -2934,7 +2911,6 @@ tfc.command.stripworld.usage=/stripworld <radiusInBlocks> -> [DANGER] Strips all
 tfc.command.stripworld.failed=Missing radius! /stripworld <radiusInBlocks>
 tfc.command.stripworld.done=Done!
 
-tfc.command.work.usage=/work [set|add] <amount> -> Modifies the amount of sluice work done to the chunk you're in.
 tfc.command.work.args=Arguments not recognized.
 tfc.command.work.string=First argument must be set or add.
 tfc.command.work.nonentity=Entity not found.

@@ -689,10 +689,6 @@ public final class ConfigTFC {
         @Config.LangKey("config." + MOD_ID + ".devices.small_vessel")
         public static final SmallVesselCFG SMALL_VESSEL = new SmallVesselCFG();
 
-        @Config.Comment("Sluice")
-        @Config.LangKey("config." + MOD_ID + ".devices.sluice")
-        public static final SluiceCFG SLUICE = new SluiceCFG();
-
         @Config.Comment("Jug")
         @Config.LangKey("config." + MOD_ID + ".devices.jug")
         public static final JugCFG JUG = new JugCFG();
@@ -837,39 +833,6 @@ public final class ConfigTFC {
             @Config.RangeInt(min = 100, max = Alloy.SAFE_MAX_ALLOY)
             @Config.LangKey("config." + MOD_ID + ".devices.small_vessel.tank")
             public int tank = 4_000;
-        }
-
-        public static final class SluiceCFG {
-            @Config.Comment({"The amount of times a chunk can be worked (300 = default, 0 = disable).",
-                    "Note: While sluices increase work by 1, Goldpan increase by 6."})
-            @Config.LangKey("config." + MOD_ID + ".devices.sluice.maxWorkChunk")
-            @Config.RangeInt(min = 0, max = 10_000)
-            public int maxWorkChunk = 300;
-
-            @Config.Comment("The radius sluice works, in chunks.")
-            @Config.LangKey("config." + MOD_ID + ".devices.sluice.radius")
-            @Config.RangeInt(min = 0, max = 10)
-            public int radius = 1;
-
-            @Config.Comment("The amount of ticks a sluice uses to work.")
-            @Config.LangKey("config." + MOD_ID + ".devices.sluice.ticks")
-            @Config.RangeInt(min = 20)
-            public int ticks = 100;
-
-            @Config.Comment("Chance that a sluice operation produce small ore.")
-            @Config.RangeDouble(min = 0, max = 1)
-            @Config.LangKey("config." + MOD_ID + ".devices.sluice.oreChance")
-            public double oreChance = 0.05;
-
-            @Config.Comment("Chance that a sluice operation produce gems.")
-            @Config.RangeDouble(min = 0, max = 1)
-            @Config.LangKey("config." + MOD_ID + ".devices.sluice.gemChance")
-            public double gemChance = 0.05;
-
-            @Config.Comment("Chance that a diamond is dropped when sluice produce gems.")
-            @Config.RangeDouble(min = 0, max = 1)
-            @Config.LangKey("config." + MOD_ID + ".devices.sluice.diamondGemChance")
-            public double diamondGemChance = 0.01;
         }
 
         public static final class JugCFG {

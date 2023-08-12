@@ -4,6 +4,7 @@ import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
+import net.minecraft.item.EnumRarity;
 
 import static net.dries007.tfc.api.types.fluid.properties.DrinkableProperty.DRINKABLE;
 import static net.dries007.tfc.api.types.fluid.type.FluidTypes.*;
@@ -16,6 +17,7 @@ public class FluidTypeHandler {
         // Варианты воды
         HOT_WATER = new FluidType
                 .Builder("hot_water", 0xFF345FDA)
+                .setTemperature(350)
                 .build();
 
         FRESH_WATER = new FluidType
@@ -29,42 +31,42 @@ public class FluidTypeHandler {
         // Алкоголь
         RUM = new FluidType
                 .Builder("rum", 0xFF6E0123)
-                .isAlcohol()
+                .setRarity(EnumRarity.UNCOMMON)
                 .build();
 
         BEER = new FluidType
                 .Builder("beer", 0xFFC39E37)
-                .isAlcohol()
+                .setRarity(EnumRarity.UNCOMMON)
                 .build();
 
         WHISKEY = new FluidType
                 .Builder("whiskey", 0xFF583719)
-                .isAlcohol()
+                .setRarity(EnumRarity.UNCOMMON)
                 .build();
 
         RYE_WHISKEY = new FluidType
                 .Builder("rye_whiskey", 0xFFC77D51)
-                .isAlcohol()
+                .setRarity(EnumRarity.UNCOMMON)
                 .build();
 
         CORN_WHISKEY = new FluidType
                 .Builder("corn_whiskey", 0xFFD9C7B7)
-                .isAlcohol()
+                .setRarity(EnumRarity.UNCOMMON)
                 .build();
 
         SAKE = new FluidType
                 .Builder("sake", 0xFFB7D9BC)
-                .isAlcohol()
+                .setRarity(EnumRarity.UNCOMMON)
                 .build();
 
         VODKA = new FluidType
                 .Builder("vodka", 0xFFDCDCDC)
-                .isAlcohol()
+                .setRarity(EnumRarity.UNCOMMON)
                 .build();
 
         CIDER = new FluidType
                 .Builder("cider", 0xFFB0AE32)
-                .isAlcohol()
+                .setRarity(EnumRarity.UNCOMMON)
                 .build();
 
         // Другие жидкости
@@ -98,6 +100,7 @@ public class FluidTypeHandler {
 
         OLIVE_OIL = new FluidType
                 .Builder("olive_oil", 0xFF6A7537)
+                .setRarity(EnumRarity.RARE)
                 .build();
 
         OLIVE_OIL_WATER = new FluidType

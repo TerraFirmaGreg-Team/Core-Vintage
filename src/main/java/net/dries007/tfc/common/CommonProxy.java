@@ -23,7 +23,6 @@ import net.dries007.tfc.api.types.soil.type.SoilTypeHandler;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariantHandler;
 import net.dries007.tfc.api.types.wood.type.WoodTypeHandler;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariantHandler;
-import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
@@ -36,8 +35,6 @@ import net.dries007.tfc.objects.blocks.BlockIceTFC;
 import net.dries007.tfc.objects.blocks.BlockSnowTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.blocks.TFCBlocks;
-import net.dries007.tfc.objects.blocks.fluid.BlockFluidHotWater;
-import net.dries007.tfc.objects.blocks.fluid.BlockFluidWater;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.TFCItems;
 import net.dries007.tfc.objects.te.*;
@@ -48,7 +45,6 @@ import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -72,7 +68,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.function.Function;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCStorage.*;
@@ -178,7 +173,6 @@ public class CommonProxy {
     }
 
     @SubscribeEvent
-    @SuppressWarnings("ConstantConditions")
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         IForgeRegistry<Block> r = event.getRegistry();
 
@@ -230,40 +224,40 @@ public class CommonProxy {
         BLOCKS.forEach(r::register);
         FLUID.forEach(r::register);
 
-
         //=== TileEntity =============================================================================================//
-        // Помещение регистрации объекта тайла в соответствующий блок может вызывать его несколько раз. Просто поместите сюда, чтобы избежать дубликатов
 
-        register(TETickCounter.class, "tick_counter");
-        register(TEPlacedItem.class, "placed_item");
-        register(TEPlacedItemFlat.class, "placed_item_flat");
-        register(TEPlacedHide.class, "placed_hide");
-        register(TEPitKiln.class, "pit_kiln");
-        register(TEChestTFC.class, "chest");
-        register(TENestBox.class, "nest_box");
-        register(TELogPile.class, "log_pile");
-        register(TEFirePit.class, "fire_pit");
-        register(TEToolRack.class, "tool_rack");
-        register(TELoom.class, "loom");
-        register(TEBellows.class, "bellows");
-        register(TEBarrel.class, "barrel");
-        register(TECharcoalForge.class, "charcoal_forge");
-        register(TEAnvilTFC.class, "anvil");
-        register(TECrucible.class, "crucible");
-        register(TECropBase.class, "crop_base");
-        register(TECropSpreading.class, "crop_spreading");
-        register(TEBlastFurnace.class, "blast_furnace");
-        register(TEBloomery.class, "bloomery");
-        register(TEBloom.class, "bloom");
-        register(TEMetalSheet.class, "metal_sheet");
-        register(TEQuern.class, "quern");
-        register(TELargeVessel.class, "large_vessel");
-        register(TEPowderKeg.class, "powderkeg");
+        // Если поместить регистрацию TE в конструктор класса блока,
+        // то она может вызваться несколько раз, поэтому помещаем ее сюда.
+
+        registerTE(TETickCounter.class, "tick_counter");
+        registerTE(TEPlacedItem.class, "placed_item");
+        registerTE(TEPlacedItemFlat.class, "placed_item_flat");
+        registerTE(TEPlacedHide.class, "placed_hide");
+        registerTE(TEPitKiln.class, "pit_kiln");
+        registerTE(TEChestTFC.class, "chest");
+        registerTE(TENestBox.class, "nest_box");
+        registerTE(TELogPile.class, "log_pile");
+        registerTE(TEFirePit.class, "fire_pit");
+        registerTE(TEToolRack.class, "tool_rack");
+        registerTE(TELoom.class, "loom");
+        registerTE(TEBellows.class, "bellows");
+        registerTE(TEBarrel.class, "barrel");
+        registerTE(TECharcoalForge.class, "charcoal_forge");
+        registerTE(TEAnvilTFC.class, "anvil");
+        registerTE(TECrucible.class, "crucible");
+        registerTE(TECropBase.class, "crop_base");
+        registerTE(TECropSpreading.class, "crop_spreading");
+        registerTE(TEBlastFurnace.class, "blast_furnace");
+        registerTE(TEBloomery.class, "bloomery");
+        registerTE(TEBloom.class, "bloom");
+        registerTE(TEMetalSheet.class, "metal_sheet");
+        registerTE(TEQuern.class, "quern");
+        registerTE(TELargeVessel.class, "large_vessel");
+        registerTE(TEPowderKeg.class, "powderkeg");
     }
 
 
     @SubscribeEvent
-    @SuppressWarnings("ConstantConditions")
     public static void registerItems(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> r = event.getRegistry();
 
@@ -311,21 +305,20 @@ public class CommonProxy {
         //=== Alabaster ==============================================================================================//
 
         for (var alabasterBlock : ALABASTER_BLOCKS.values()) {
-            r.register(createItemBlock(alabasterBlock));
+            var itemBlock = alabasterBlock.getItemBlock();
+            if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
         //=== Groundcover ==============================================================================================//
 
-//		for (var groundcoverBlock : GROUNDCOVER_BLOCK.values()) {
-//			r.register(createItemBlock(groundcoverBlock, ItemBlock::new));
-//		}
+		// for (var groundcoverBlock : GROUNDCOVER_BLOCK.values()) {
+		// 	r.register(createItemBlock(groundcoverBlock, ItemBlock::new));
+		// }
 
         //=== Other ==================================================================================================//
 
         ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
         ITEM.forEach(r::register);
-
-
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -345,26 +338,26 @@ public class CommonProxy {
     }
 
 
-    @SuppressWarnings("ConstantConditions")
-    private static <T extends Block> ItemBlock createItemBlock(T block) {
-        var itemBlock = ((IItemProvider) block).getItemBlock();
-        var registryName = block.getRegistryName();
-        if (registryName == null)
-            throw new IllegalArgumentException("Block " + block.getTranslationKey() + " has no registry name.");
-
-        itemBlock.setRegistryName(registryName);
-        return itemBlock;
+    /**
+     * Для регистрации отдельных предметов. В идеале не использовать этот метод.
+     * Ведь в нашем TFC все прописывается в конструкторе класса. Но если приспичит то можно.
+     * */
+    private static <T extends Item> T registerItem(String name, T item, CreativeTabs ct) {
+        item.setRegistryName(MOD_ID, name);
+        item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+        item.setCreativeTab(ct);
+        return item;
     }
 
-
-    private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
-        var itemBlock = producer.apply(block);
-        var registryName = block.getRegistryName();
-        if (registryName == null)
-            throw new IllegalArgumentException("Block " + block.getTranslationKey() + " has no registry name.");
-
-        itemBlock.setRegistryName(registryName);
-        return itemBlock;
+     /**
+      * Для регистрации отдельных блоков. В идеале не использовать этот метод.
+      * Ведь в нашем TFC все прописывается в конструкторе класса. Но если приспичит то можно.
+      * */
+    private static <T extends Block> T registerBlock(String name, T block, CreativeTabs ct) {
+        block.setRegistryName(MOD_ID, name);
+        block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+        block.setCreativeTab(ct);
+        return block;
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -374,24 +367,8 @@ public class CommonProxy {
         r.register(item);
     }
 
-    // Для регистрации одиночных блоков
-    private static <T extends Block> T registerBlock(String name, T block, CreativeTabs ct) {
-        block.setRegistryName(MOD_ID, name);
-        block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
-        block.setCreativeTab(ct);
-        return block;
-    }
-
-    // Для регистрации одиночных предметов
-    private static <T extends Item> T registerItem(String name, T item, CreativeTabs ct) {
-        item.setRegistryName(MOD_ID, name);
-        item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
-        item.setCreativeTab(ct);
-        return item;
-    }
-
     // Для регистрации тайловых объектов
-    private static <T extends TileEntity> void register(Class<T> te, String name) {
+    private static <T extends TileEntity> void registerTE(Class<T> te, String name) {
         TileEntity.register(MOD_ID + ":" + name, te);
     }
 

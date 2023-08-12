@@ -4,7 +4,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
@@ -14,13 +13,12 @@ import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
 import net.dries007.tfc.client.render.RenderBoatTFC;
 import net.dries007.tfc.client.render.animal.*;
 import net.dries007.tfc.client.render.projectile.RenderThrownJavelin;
-import net.dries007.tfc.command.*;
+import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.objects.entity.animal.*;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
-import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
@@ -58,7 +56,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.minecraft.util.text.TextFormatting.*;
-import static net.minecraft.util.text.TextFormatting.WHITE;
 
 @SuppressWarnings("unused")
 @SideOnly(Side.CLIENT)

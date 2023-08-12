@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.recipes.category;
 
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.food.Food;
+import net.dries007.tfc.api.types.food.type.FoodTypes;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFood;
@@ -21,14 +21,14 @@ public class QuernRecipes {
 
         registry.registerAll(
                 //Grain
-                new QuernRecipe(IIngredient.of("grainBarley"), new ItemStack(ItemFoodTFC.get(Food.BARLEY_FLOUR), 1)).setRegistryName("barley"),
-                new QuernRecipe(IIngredient.of("grainOat"), new ItemStack(ItemFoodTFC.get(Food.OAT_FLOUR), 1)).setRegistryName("oat"),
-                new QuernRecipe(IIngredient.of("grainRice"), new ItemStack(ItemFoodTFC.get(Food.RICE_FLOUR), 1)).setRegistryName("rice"),
-                new QuernRecipe(IIngredient.of("grainRye"), new ItemStack(ItemFoodTFC.get(Food.RYE_FLOUR), 1)).setRegistryName("rye"),
-                new QuernRecipe(IIngredient.of("grainWheat"), new ItemStack(ItemFoodTFC.get(Food.WHEAT_FLOUR), 1)).setRegistryName("wheat"),
-                new QuernRecipe(IIngredient.of("grainMaize"), new ItemStack(ItemFoodTFC.get(Food.CORNMEAL_FLOUR), 1)).setRegistryName("maize"),
+                new QuernRecipe(IIngredient.of("grainBarley"), new ItemStack(ItemFoodTFC.get(FoodTypes.BARLEY_FLOUR), 1)).setRegistryName("barley"),
+                new QuernRecipe(IIngredient.of("grainOat"), new ItemStack(ItemFoodTFC.get(FoodTypes.OAT_FLOUR), 1)).setRegistryName("oat"),
+                new QuernRecipe(IIngredient.of("grainRice"), new ItemStack(ItemFoodTFC.get(FoodTypes.RICE_FLOUR), 1)).setRegistryName("rice"),
+                new QuernRecipe(IIngredient.of("grainRye"), new ItemStack(ItemFoodTFC.get(FoodTypes.RYE_FLOUR), 1)).setRegistryName("rye"),
+                new QuernRecipe(IIngredient.of("grainWheat"), new ItemStack(ItemFoodTFC.get(FoodTypes.WHEAT_FLOUR), 1)).setRegistryName("wheat"),
+                new QuernRecipe(IIngredient.of("grainMaize"), new ItemStack(ItemFoodTFC.get(FoodTypes.CORNMEAL_FLOUR), 1)).setRegistryName("maize"),
 
-                new QuernRecipe(new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(Food.OLIVE))), new ItemStack(ItemsTFC.OLIVE_PASTE, 1)).setRegistryName("olive"),
+                new QuernRecipe(new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(FoodTypes.OLIVE))), new ItemStack(ItemsTFC.OLIVE_PASTE, 1)).setRegistryName("olive"),
 
                 //Flux
                 new QuernRecipe(IIngredient.of("gemBorax"), new ItemStack(ItemPowder.get(Powder.FLUX), 6)).setRegistryName("borax"),

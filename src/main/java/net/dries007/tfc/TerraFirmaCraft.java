@@ -1,9 +1,7 @@
 package net.dries007.tfc;
 
-import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.command.*;
+
 import net.dries007.tfc.common.CommonProxy;
-import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;

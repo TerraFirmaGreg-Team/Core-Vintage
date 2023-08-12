@@ -7,7 +7,9 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.api.types.food.Food;
+import net.dries007.tfc.api.types.food.category.FoodCategories;
+import net.dries007.tfc.api.types.food.category.FoodCategory;
+import net.dries007.tfc.api.types.food.type.FoodTypes;
 import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
@@ -240,7 +242,7 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
                                     }
                                 }
 
-                                soupContents = new FoodData(4, water, saturation, nutrition, Food.SOUP_GRAIN.getData().getDecayModifier());
+                                soupContents = new FoodData(4, water, saturation, nutrition, FoodTypes.SOUP_GRAIN.getData().getDecayModifier());
                                 soupServings = (int) (ingredientCount / 2f) + 1;
                                 soupNutrient = maxNutrient; // the max nutrient determines the item you get
                                 soupCreationDate = CapabilityFood.getRoundedCreationDate();
@@ -455,7 +457,7 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
                 BlockFirePit.FirePitAttachment attachment = world.getBlockState(pos).getValue(ATTACHMENT);
                 if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
                     // Cooking pot inputs must be food & category of veg, cooked or uncooked meat
-                    return stack.hasCapability(CapabilityFood.CAPABILITY, null) && Food.Category.doesStackMatchCategories(stack, Food.Category.FRUIT, Food.Category.VEGETABLE, Food.Category.COOKED_MEAT, Food.Category.MEAT);
+                    return stack.hasCapability(CapabilityFood.CAPABILITY, null) && FoodCategory.doesStackMatchCategories(stack, FoodCategories.FRUIT, FoodCategories.VEGETABLE, FoodCategories.COOKED_MEAT, FoodCategories.MEAT);
                 } else if (attachment == BlockFirePit.FirePitAttachment.GRILL) {
                     // Grill can only do food + heatable
                     return stack.hasCapability(CapabilityFood.CAPABILITY, null) && stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
@@ -688,15 +690,15 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
     private Item getSoupItem() {
         switch (soupNutrient) {
             case GRAIN:
-                return ItemFoodTFC.get(Food.SOUP_GRAIN);
+                return ItemFoodTFC.get(FoodTypes.SOUP_GRAIN);
             case VEGETABLES:
-                return ItemFoodTFC.get(Food.SOUP_VEGETABLE);
+                return ItemFoodTFC.get(FoodTypes.SOUP_VEGETABLE);
             case FRUIT:
-                return ItemFoodTFC.get(Food.SOUP_FRUIT);
+                return ItemFoodTFC.get(FoodTypes.SOUP_FRUIT);
             case PROTEIN:
-                return ItemFoodTFC.get(Food.SOUP_MEAT);
+                return ItemFoodTFC.get(FoodTypes.SOUP_MEAT);
             default:
-                return ItemFoodTFC.get(Food.SOUP_DAIRY);
+                return ItemFoodTFC.get(FoodTypes.SOUP_DAIRY);
         }
     }
 

@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.items.food;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.food.Nutrient;
-import net.dries007.tfc.api.types.food.Food;
+import net.dries007.tfc.api.types.food.type.FoodType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -15,14 +15,14 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class ItemSandwich extends ItemFoodTFC {
-    public ItemSandwich(@Nonnull Food food) {
-        super(food);
+    public ItemSandwich(@Nonnull FoodType foodOld) {
+        super(foodOld);
     }
 
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new SandwichHandler(nbt, food.getData());
+        return new SandwichHandler(nbt, foodOld.getData());
     }
 
     public static class SandwichHandler extends FoodHandler {

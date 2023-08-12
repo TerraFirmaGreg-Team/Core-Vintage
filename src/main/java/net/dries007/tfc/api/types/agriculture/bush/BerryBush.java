@@ -1,6 +1,7 @@
 package net.dries007.tfc.api.types.agriculture.bush;
 
-import net.dries007.tfc.api.types.food.Food;
+import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.food.type.FoodTypes;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -11,17 +12,17 @@ import net.minecraft.item.ItemStack;
 import static net.dries007.tfc.api.types.agriculture.bush.IBerryBush.Size.*;
 
 public enum BerryBush implements IBerryBush {
-    BLACKBERRY(Food.BLACKBERRY, Month.MAY, 4, 7f, 20f, 100f, 400f, 0.8f, LARGE, true),
-    BLUEBERRY(Food.BLUEBERRY, Month.JUNE, 3, 7f, 25f, 100f, 400f, 0.8f, LARGE, false),
-    BUNCH_BERRY(Food.BUNCH_BERRY, Month.JUNE, 3, 15f, 30f, 100f, 400f, 0.8f, SMALL, false),
-    CLOUD_BERRY(Food.CLOUD_BERRY, Month.JUNE, 2, 3f, 17f, 100f, 400f, 0.8f, MEDIUM, false),
-    CRANBERRY(Food.CRANBERRY, Month.AUGUST, 3, 1f, 19f, 100f, 400f, 0.8f, MEDIUM, false),
-    ELDERBERRY(Food.ELDERBERRY, Month.JULY, 2, 10f, 29f, 100f, 400f, 0.8f, LARGE, false),
-    GOOSEBERRY(Food.GOOSEBERRY, Month.MARCH, 4, 5f, 27f, 100f, 400f, 0.8f, MEDIUM, false),
-    RASPBERRY(Food.RASPBERRY, Month.JUNE, 2, 5f, 20f, 100f, 400f, 0.8f, LARGE, true),
-    SNOW_BERRY(Food.SNOW_BERRY, Month.JULY, 2, -5f, 18f, 100f, 400f, 0.8f, SMALL, false),
-    STRAWBERRY(Food.STRAWBERRY, Month.MARCH, 3, 5f, 28f, 100f, 400f, 0.8f, SMALL, false),
-    WINTERGREEN_BERRY(Food.WINTERGREEN_BERRY, Month.AUGUST, 2, -5f, 17f, 100f, 400f, 0.8f, SMALL, false);
+    BLACKBERRY(FoodTypes.BLACKBERRY, Month.MAY, 4, 7f, 20f, 100f, 400f, 0.8f, LARGE, true),
+    BLUEBERRY(FoodTypes.BLUEBERRY, Month.JUNE, 3, 7f, 25f, 100f, 400f, 0.8f, LARGE, false),
+    BUNCH_BERRY(FoodTypes.BUNCH_BERRY, Month.JUNE, 3, 15f, 30f, 100f, 400f, 0.8f, SMALL, false),
+    CLOUD_BERRY(FoodTypes.CLOUD_BERRY, Month.JUNE, 2, 3f, 17f, 100f, 400f, 0.8f, MEDIUM, false),
+    CRANBERRY(FoodTypes.CRANBERRY, Month.AUGUST, 3, 1f, 19f, 100f, 400f, 0.8f, MEDIUM, false),
+    ELDERBERRY(FoodTypes.ELDERBERRY, Month.JULY, 2, 10f, 29f, 100f, 400f, 0.8f, LARGE, false),
+    GOOSEBERRY(FoodTypes.GOOSEBERRY, Month.MARCH, 4, 5f, 27f, 100f, 400f, 0.8f, MEDIUM, false),
+    RASPBERRY(FoodTypes.RASPBERRY, Month.JUNE, 2, 5f, 20f, 100f, 400f, 0.8f, LARGE, true),
+    SNOW_BERRY(FoodTypes.SNOW_BERRY, Month.JULY, 2, -5f, 18f, 100f, 400f, 0.8f, SMALL, false),
+    STRAWBERRY(FoodTypes.STRAWBERRY, Month.MARCH, 3, 5f, 28f, 100f, 400f, 0.8f, SMALL, false),
+    WINTERGREEN_BERRY(FoodTypes.WINTERGREEN_BERRY, Month.AUGUST, 2, -5f, 17f, 100f, 400f, 0.8f, SMALL, false);
 
     static {
         for (IBerryBush bush : values()) {
@@ -29,7 +30,7 @@ public enum BerryBush implements IBerryBush {
         }
     }
 
-    private final Food fruit;
+    private final FoodType fruit;
     private final Month harvestMonthStart;
     private final int harvestingMonths;
     private final float growthTime;
@@ -40,7 +41,7 @@ public enum BerryBush implements IBerryBush {
     private final Size size;
     private final boolean hasSpikes;
 
-    BerryBush(Food fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, Size size, boolean spiky) {
+    BerryBush(FoodType fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, Size size, boolean spiky) {
         this.fruit = fruit;
         this.harvestMonthStart = harvestMonthStart;
         this.harvestingMonths = harvestingMonths;
@@ -55,7 +56,7 @@ public enum BerryBush implements IBerryBush {
         this.hasSpikes = spiky;
     }
 
-    public Food getFruit() {
+    public FoodType getFruit() {
         return this.fruit;
     }
 

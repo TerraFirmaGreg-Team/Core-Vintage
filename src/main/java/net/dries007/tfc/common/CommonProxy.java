@@ -15,6 +15,8 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
+import net.dries007.tfc.api.types.food.category.FoodCategoryHandler;
+import net.dries007.tfc.api.types.food.type.FoodTypeHandler;
 import net.dries007.tfc.api.types.plant.type.PlantTypeHandler;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
 import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
@@ -178,6 +180,9 @@ public class CommonProxy {
 
         SoilTypeHandler.init();
         SoilBlockVariantHandler.init();
+
+        FoodCategoryHandler.init();
+        FoodTypeHandler.init();
 
         PlantTypeHandler.init();
 

@@ -8,7 +8,9 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.agriculture.crop.Crop;
-import net.dries007.tfc.api.types.food.Food;
+import net.dries007.tfc.api.types.food.category.FoodCategories;
+import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.food.type.FoodTypes;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -227,20 +229,20 @@ public final class ItemsTFC {
 //        simpleItems.add(register(r, "crop/product/burlap_cloth", new ItemMisc(Size.SMALL, Weight.VERY_LIGHT), MISC));
 
         // All simple foods (not meals) just use ItemFood and are registered here
-        for (Food food : Food.values()) {
-            if (food.getCategory() != Food.Category.MEAL) {
-                simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemFoodTFC(food), FOOD));
+        for (FoodType foodOld : FoodType.getAllFoodTypes()) {
+            if (foodOld.getFoodCategory() != FoodCategories.MEAL) {
+                simpleItems.add(register(r, "food/" + foodOld.toString().toLowerCase(), new ItemFoodTFC(foodOld), FOOD));
             }
         }
         // Complex foods that require special classes go here
-        for (Food food : new Food[]{Food.BARLEY_BREAD_SANDWICH, Food.CORNBREAD_SANDWICH, Food.OAT_BREAD_SANDWICH, Food.RICE_BREAD_SANDWICH, Food.RYE_BREAD_SANDWICH, Food.WHEAT_BREAD_SANDWICH}) {
-            simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemSandwich(food), FOOD));
+        for (FoodType foodOld : new FoodType[]{FoodTypes.BARLEY_BREAD_SANDWICH, FoodTypes.CORNBREAD_SANDWICH, FoodTypes.OAT_BREAD_SANDWICH, FoodTypes.RICE_BREAD_SANDWICH, FoodTypes.RYE_BREAD_SANDWICH, FoodTypes.WHEAT_BREAD_SANDWICH}) {
+            simpleItems.add(register(r, "food/" + foodOld.toString().toLowerCase(), new ItemSandwich(foodOld), FOOD));
         }
-        for (Food food : new Food[]{Food.SOUP_GRAIN, Food.SOUP_FRUIT, Food.SOUP_VEGETABLE, Food.SOUP_MEAT, Food.SOUP_DAIRY}) {
-            simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemDynamicBowlFood(food), FOOD));
+        for (FoodType foodOld : new FoodType[]{FoodTypes.SOUP_GRAIN, FoodTypes.SOUP_FRUIT, FoodTypes.SOUP_VEGETABLE, FoodTypes.SOUP_MEAT, FoodTypes.SOUP_DAIRY}) {
+            simpleItems.add(register(r, "food/" + foodOld.toString().toLowerCase(), new ItemDynamicBowlFood(foodOld), FOOD));
         }
-        for (Food food : new Food[]{Food.SALAD_GRAIN, Food.SALAD_FRUIT, Food.SALAD_VEGETABLE, Food.SALAD_MEAT, Food.SALAD_DAIRY}) {
-            simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemDynamicBowlFood(food), FOOD));
+        for (FoodType foodOld : new FoodType[]{FoodTypes.SALAD_GRAIN, FoodTypes.SALAD_FRUIT, FoodTypes.SALAD_VEGETABLE, FoodTypes.SALAD_MEAT, FoodTypes.SALAD_DAIRY}) {
+            simpleItems.add(register(r, "food/" + foodOld.toString().toLowerCase(), new ItemDynamicBowlFood(foodOld), FOOD));
         }
 
         //olive oil production

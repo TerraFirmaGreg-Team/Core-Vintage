@@ -1,5 +1,6 @@
 package net.dries007.tfc.compat.gregtech.material;
 
+import gregtech.api.fluids.fluidType.FluidTypes;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.ToolProperty;
 
@@ -74,97 +75,97 @@ public class TFGMaterialHandler {
 
         // FluidTypes
         HotWater = new Material.Builder(32050, gregtechId("hot_water"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, true)
                 .color(0x345FDA)
                 .build();
 
         FreshWater = new Material.Builder(32051, gregtechId("fresh_water"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, true)
                 .color(0x296ACD)
                 .build();
 
         Cider = new Material.Builder(32052, gregtechId("cider"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XB0AE32)
                 .build();
 
         Vodka = new Material.Builder(32053, gregtechId("vodka"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XDCDCDC)
                 .build();
 
         Sake = new Material.Builder(32054, gregtechId("sake"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XB7D9BC)
                 .build();
 
         CornWhiskey = new Material.Builder(32055, gregtechId("corn_whiskey"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XD9C7B7)
                 .build();
 
         RyeWhiskey = new Material.Builder(32056, gregtechId("rye_whiskey"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XC77D51)
                 .build();
 
         Whiskey = new Material.Builder(32057, gregtechId("whiskey"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0X583719)
                 .build();
 
         Beer = new Material.Builder(32058, gregtechId("beer"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XC39E37)
                 .build();
 
         Rum = new Material.Builder(32059, gregtechId("rum"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0X6E0123)
                 .build();
 
         Limewater = new Material.Builder(32060, gregtechId("limewater"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XB4B4B4)
                 .build();
 
         Tannin = new Material.Builder(32061, gregtechId("tannin"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0X63594E)
                 .build();
 
         Vinegar = new Material.Builder(32062, gregtechId("vinegar"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XC7C2AA)
                 .build();
 
         Brine = new Material.Builder(32063, gregtechId("brine"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XDCD3C9)
                 .build();
 
         CurdledMilk = new Material.Builder(32064, gregtechId("curdled_milk"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XFFFBE8)
                 .build();
 
         MilkVinegar = new Material.Builder(32065, gregtechId("milk_vinegar"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XFFFBE8)
                 .build();
 
         OliveOil = new Material.Builder(32066, gregtechId("olive_oil"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0X6A7537)
                 .build();
 
         OliveOilWater = new Material.Builder(32067, gregtechId("olive_oil_water"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0X4A4702)
                 .build();
 
         Lye = new Material.Builder(32068, gregtechId("lye"))
-                .fluid()
+                .fluid(FluidTypes.LIQUID, false)
                 .color(0XFEFFDE)
                 .build();
 

@@ -1,7 +1,6 @@
 package net.dries007.tfc.compat.gregtech.material;
 
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.api.types.fluid.type.Material;
 
 public class TFGMaterials {
 

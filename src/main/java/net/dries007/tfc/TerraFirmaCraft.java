@@ -10,14 +10,6 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
-import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
-import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
-import net.dries007.tfc.api.types.rock.variant.RockBlockVariantHandler;
-import net.dries007.tfc.api.types.soil.type.SoilTypeHandler;
-import net.dries007.tfc.api.types.soil.variant.SoilBlockVariantHandler;
-import net.dries007.tfc.api.types.wood.type.WoodTypeHandler;
-import net.dries007.tfc.api.types.wood.variant.WoodBlockVariantHandler;
-import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
@@ -29,7 +21,7 @@ import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.proxy.IProxy;
+import net.dries007.tfc.proxy.CommonProxy;
 import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.test.items.TFCItems;
 import net.dries007.tfc.types.DefaultRecipes;
@@ -74,8 +66,8 @@ public final class TerraFirmaCraft {
     @SidedProxy(
             modId = MOD_ID,
             clientSide = "net.dries007.tfc.proxy.ClientProxy",
-            serverSide = "net.dries007.tfc.proxy.ServerProxy")
-    private static IProxy PROXY = null;
+            serverSide = "net.dries007.tfc.proxy.CommonProxy")
+    private static CommonProxy PROXY = null;
 
     static {
         FluidRegistry.enableUniversalBucket();
@@ -88,7 +80,7 @@ public final class TerraFirmaCraft {
         return LOGGER;
     }
 
-    public static IProxy getProxy() {
+    public static CommonProxy getProxy() {
         return PROXY;
     }
 
@@ -151,9 +143,7 @@ public final class TerraFirmaCraft {
         CapabilityMetalItem.preInit();
         CapabilityWorldTracker.preInit();
 
-        if (event.getSide().isClient()) {
-            ClientEvents.preInit();
-        }
+        PROXY.onPreInit();
 
         TOPIntegration.onPreInit();
     }
@@ -164,6 +154,8 @@ public final class TerraFirmaCraft {
         LootTablesTFC.init();
         CapabilityFood.init();
         TFCTriggers.init();
+
+        PROXY.onInit();
 
         if (event.getSide().isClient()) {
             TFCKeybindings.init();
@@ -195,6 +187,8 @@ public final class TerraFirmaCraft {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+        PROXY.onPostInit();
+
         FuelManager.postInit();
         JsonConfigRegistry.INSTANCE.postInit();
     }

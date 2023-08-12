@@ -1,4 +1,4 @@
-package net.dries007.tfc.proxy;
+package net.dries007.tfc.proxy_old;
 
 import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,21 +1,33 @@
 package net.dries007.tfc.proxy;
 
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-@SuppressWarnings("unused")
-@SideOnly(Side.SERVER)
-public class ServerProxy implements IProxy {
-    @Override
+@Mod.EventBusSubscriber(modid = TerraFirmaCraft.MOD_ID)
+public class CommonProxy {
+
+    public void onPreInit() {
+
+    }
+
+    public void onInit() {
+
+    }
+
+    public void onPostInit() {
+
+    }
+
     @Nonnull
     public IThreadListener getThreadListener(MessageContext context) {
         if (context.side.isServer()) {
@@ -25,7 +37,6 @@ public class ServerProxy implements IProxy {
         }
     }
 
-    @Override
     @Nullable
     public EntityPlayer getPlayer(MessageContext context) {
         if (context.side.isServer()) {
@@ -35,7 +46,6 @@ public class ServerProxy implements IProxy {
         }
     }
 
-    @Override
     @Nullable
     public World getWorld(MessageContext context) {
         if (context.side.isServer()) {
@@ -46,20 +56,18 @@ public class ServerProxy implements IProxy {
     }
 
     @Nonnull
-    @Override
     public String getMonthName(Month month, boolean useSeasons) {
         return month.name().toLowerCase();
     }
 
     @Nonnull
-    @Override
     public String getDayName(int dayOfMonth, long totalDays) {
         return CalendarTFC.DAY_NAMES[(int) (totalDays % 7)];
     }
 
     @Nonnull
-    @Override
     public String getDate(int hour, int minute, String monthName, int day, long years) {
         return String.format("%02d:%02d %s %02d, %04d", hour, minute, monthName, day, years);
     }
+
 }

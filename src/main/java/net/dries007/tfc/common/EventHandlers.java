@@ -1,8 +1,11 @@
-package net.dries007.tfc;
+package net.dries007.tfc.common;
 
 import gregtech.api.unification.material.event.MaterialEvent;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.loaders.recipe.handlers.OreRecipeHandler;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.EggHandler;
@@ -142,7 +145,7 @@ import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.RAW;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public final class CommonEventHandler {
+public final class EventHandlers {
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
     @SubscribeEvent

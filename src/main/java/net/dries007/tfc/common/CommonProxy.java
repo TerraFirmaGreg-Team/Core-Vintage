@@ -1,4 +1,4 @@
-package net.dries007.tfc.proxy;
+package net.dries007.tfc.common;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.util.WrongSideException;

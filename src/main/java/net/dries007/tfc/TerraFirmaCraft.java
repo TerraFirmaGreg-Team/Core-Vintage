@@ -21,7 +21,7 @@ import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.proxy.CommonProxy;
+import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.test.blocks.TFCBlocks;
 import net.dries007.tfc.test.items.TFCItems;
 import net.dries007.tfc.types.DefaultRecipes;
@@ -65,8 +65,8 @@ public final class TerraFirmaCraft {
     private static TerraFirmaCraft INSTANCE = null;
     @SidedProxy(
             modId = MOD_ID,
-            clientSide = "net.dries007.tfc.proxy.ClientProxy",
-            serverSide = "net.dries007.tfc.proxy.CommonProxy")
+            clientSide = "net.dries007.tfc.client.ClientProxy",
+            serverSide = "net.dries007.tfc.common.CommonProxy")
     private static CommonProxy PROXY = null;
 
     static {

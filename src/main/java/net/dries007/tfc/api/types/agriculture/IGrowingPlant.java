@@ -5,6 +5,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
 public interface IGrowingPlant {
     GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos);
 
@@ -32,7 +34,7 @@ public interface IGrowingPlant {
 
         @Override
         public String toString() {
-            return TerraFirmaCraft.MOD_ID + ".enum.growstatus." + name().toLowerCase();
+            return MOD_ID + ".enum.growstatus." + name().toLowerCase();
         }
     }
 

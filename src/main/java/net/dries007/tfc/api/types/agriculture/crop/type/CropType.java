@@ -4,6 +4,7 @@ import net.dries007.tfc.api.types.agriculture.crop.category.CropCategory;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.food.type.FoodTypes;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.LinkedHashSet;
@@ -31,8 +32,8 @@ public class CropType {
     public CropType(String name, CropCategory cropCategory,
                     Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly,
                     int growthStages, float growthTime,
-                    float tempMinGrow, float tempMaxGrow, float tempMinAlive, float tempMaxAlive,
-                    float rainMinGrow, float rainMaxGrow, float rainMinAlive, float rainMaxAlive) {
+                    float tempMinAlive,float tempMinGrow, float tempMaxGrow, float tempMaxAlive,
+                    float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive) {
 
         this.name = name;
         this.cropCategory = cropCategory;
@@ -42,14 +43,14 @@ public class CropType {
         this.growthStages = growthStages;
         this.growthTime = growthTime;
 
+        this.tempMinAlive = tempMinAlive;
         this.tempMinGrow = tempMinGrow;
         this.tempMaxGrow = tempMaxGrow;
-        this.tempMinAlive = tempMinAlive;
         this.tempMaxAlive = tempMaxAlive;
 
+        this.rainMinAlive = rainMinAlive;
         this.rainMinGrow = rainMinGrow;
         this.rainMaxGrow = rainMaxGrow;
-        this.rainMinAlive = rainMinAlive;
         this.rainMaxAlive = rainMaxAlive;
     }
 
@@ -84,13 +85,15 @@ public class CropType {
         private Supplier<ItemStack> foodDropEarly;
         private int growthStages;
         private float growthTime;
+
+        private float tempMinAlive;
         private float tempMinGrow;
         private float tempMaxGrow;
-        private float tempMinAlive;
         private float tempMaxAlive;
+
+        private float rainMinAlive;
         private float rainMinGrow;
         private float rainMaxGrow;
-        private float rainMinAlive;
         private float rainMaxAlive;
 
         public Builder(String name) {
@@ -109,13 +112,8 @@ public class CropType {
             return this;
         }
 
-        public Builder setGrowthStages (int growthStages) {
-            this.growthStages = growthStages;
-            return this;
-        }
-
-        public Builder setGrowthTime (int growthTime) {
-            this.growthTime = growthTime;
+        public Builder setDrop (Item item) {
+            this.foodDrop = () -> new ItemStack(item);
             return this;
         }
 
@@ -124,26 +122,33 @@ public class CropType {
             return this;
         }
 
-        public Builder setTempGrow (float tempMinGrow, float tempMaxGrow) {
+        public Builder setDropEarly (Item item) {
+            this.foodDropEarly = () -> new ItemStack(item);
+            return this;
+        }
+
+        public Builder setGrowthStages (int growthStages) {
+            this.growthStages = growthStages;
+            return this;
+        }
+
+        public Builder setGrowthTime (float growthTime) {
+            this.growthTime = growthTime;
+            return this;
+        }
+
+        public Builder setTemp (float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive) {
+            this.tempMinAlive = tempMinAlive;
             this.tempMinGrow = tempMinGrow;
             this.tempMaxGrow = tempMaxGrow;
+            this.tempMaxAlive = tempMaxAlive;
             return this;
         }
 
-        public Builder setTempAlive (float tempMinAlive, float tempMaxAlive) {
-            this.tempMinAlive = tempMinGrow;
-            this.tempMaxAlive = tempMaxGrow;
-            return this;
-        }
-
-        public Builder setRainGrow (float rainMinGrow, float rainMaxGrow) {
+        public Builder setRain (float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive) {
+            this.rainMinAlive = rainMinAlive;
             this.rainMinGrow = rainMinGrow;
             this.rainMaxGrow = rainMaxGrow;
-            return this;
-        }
-
-        public Builder setRainAlive (float rainMinAlive, float rainMaxAlive) {
-            this.rainMinAlive = rainMinAlive;
             this.rainMaxAlive = rainMaxAlive;
             return this;
         }
@@ -153,8 +158,8 @@ public class CropType {
             return new CropType(
                     name, category, foodDrop, foodDropEarly,
                     growthStages, growthTime,
-                    tempMinGrow, tempMaxGrow, tempMinAlive, tempMaxAlive,
-                    rainMinGrow, rainMaxGrow, rainMinAlive, rainMaxAlive);
+                    tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive,
+                    rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive);
         }
     }
 }

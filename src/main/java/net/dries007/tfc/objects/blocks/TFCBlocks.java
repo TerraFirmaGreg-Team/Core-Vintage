@@ -86,7 +86,7 @@ public class TFCBlocks {
 
         //=== Plant ==================================================================================================//
 
-        for (PlantType plant : PlantType.getPlantTypes()) {
+        for (var plant : PlantType.getPlantTypes()) {
             var plantTypeBlock = plant.getPlantVariant().create(plant);
 
             if (PLANT_BLOCKS.put(new Pair<>(plant.getPlantVariant(), plant), plantTypeBlock) != null)

@@ -27,7 +27,6 @@ import static net.dries007.tfc.types.DefaultTrees.GEN_NORMAL;
  * Класс Wood представляет тип дерева с определенными характеристиками.
  */
 public class WoodType {
-
     private static final Set<WoodType> WOOD_TYPES = new LinkedHashSet<>();
 
     @Nonnull
@@ -102,11 +101,11 @@ public class WoodType {
         this.canMakeTannin = canMakeTannin;
 
         if (name.isEmpty()) {
-            throw new RuntimeException(String.format("Wood name must contain any character: [%s]", name));
+            throw new RuntimeException(String.format("WoodType name must contain any character: [%s]", name));
         }
 
         if (!WOOD_TYPES.add(this)) {
-            throw new RuntimeException(String.format("Wood: [%s] already exists!", name));
+            throw new RuntimeException(String.format("WoodType: [%s] already exists!", name));
         }
     }
 
@@ -358,37 +357,35 @@ public class WoodType {
     }
 
     public static class Builder {
-        // Поля
         private final String name;
-        private final int color; // цвет
-        private final float minTemp; // минимальная температура
-        private final float maxTemp; // максимальная температура
-        private final float minRain; // минимальное количество осадков
-        private final float maxRain; // максимальное количество осадков
-        private ITreeGenerator gen; // генератор деревьев
-        private float minDensity; // минимальная плотность
-        private float maxDensity; // максимальная плотность
-        private float dominance; // доминирование
-        private int maxHeight; // максимальная высота
-        private int maxGrowthRadius; // максимальный радиус роста
-        private int maxDecayDistance; // максимальное расстояние разложения
-        private boolean isConifer; // является ли хвойным
-        private ITreeGenerator bushGenerator; // генератор кустов
-        private boolean canMakeTannin; // может ли производить танин
-        private float minGrowthTime; // минимальное время роста
-        private float burnTemp; // температура горения
-        private int burnTicks; // количество тиков горения
+        private final int color;
+        private final float minTemp;
+        private final float maxTemp;
+        private final float minRain;
+        private final float maxRain;
+        private ITreeGenerator gen;
+        private float minDensity;
+        private float maxDensity;
+        private float dominance;
+        private int maxHeight;
+        private int maxGrowthRadius;
+        private int maxDecayDistance;
+        private boolean isConifer;
+        private ITreeGenerator bushGenerator;
+        private boolean canMakeTannin;
+        private float minGrowthTime;
+        private float burnTemp;
+        private int burnTicks;
 
-        // Конструктор
         public Builder(@Nonnull String name, int color, float minTemp, float maxTemp, float minRain, float maxRain) {
             this.name = name;
-            this.color = color; // обязательные значения
+            this.color = color;
             this.minTemp = minTemp;
             this.maxTemp = maxTemp;
             this.minRain = minRain;
             this.maxRain = maxRain;
             this.gen = GEN_NORMAL; // Заменить на ген DT по умолчанию, и удалить setGenerator(), так как для кустов вызывается setBushes()
-            this.maxGrowthRadius = 1; // значения по умолчанию
+            this.maxGrowthRadius = 1;
             this.dominance = 0.001f * (maxTemp - minTemp) * (maxRain - minRain);
             this.maxHeight = 6;
             this.maxDecayDistance = 4;
@@ -401,8 +398,6 @@ public class WoodType {
             this.burnTemp = 675;
             this.burnTicks = 1500;
         }
-
-        // Методы для установки значений полей
 
         // Установить генератор деревьев
         public Builder setGenerator(@Nonnull ITreeGenerator gen) {

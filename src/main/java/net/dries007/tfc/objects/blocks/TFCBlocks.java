@@ -95,7 +95,7 @@ public class TFCBlocks {
 
         //=== Wood ===================================================================================================//
 
-        for (var woodBlockVariant : WoodBlockVariant.getWoodVariants()) {
+        for (var woodBlockVariant : WoodBlockVariant.getWoodBlockVariants()) {
             for (var woodType : WoodType.getWoodTypes()) {
                 var woodVariantBlock = woodBlockVariant.applyToFactory(woodType);
 

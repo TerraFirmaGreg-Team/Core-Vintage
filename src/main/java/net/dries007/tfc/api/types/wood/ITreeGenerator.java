@@ -11,29 +11,34 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
+/**
+ * Интерфейс ITreeGenerator представляет генератор деревьев.
+ */
 public interface ITreeGenerator {
 
     /**
-     * Called to generate a tree. Each Tree must have one of these. Used for world gen and sapling growth
+     * Вызывается для генерации дерева. Каждое дерево должно иметь этот метод.
+     * Используется для генерации деревьев в мире и роста саженцев.
      *
-     * @param manager  an instance of the world's template manager. Used for getting structures.
-     * @param world    The world
-     * @param pos      The position where the sapling was / would've been
-     * @param woodType The tree type to spawn
-     * @param rand     A random to use in generation
+     * @param manager  экземпляр менеджера шаблонов мира. Используется для получения структур.
+     * @param world    мир
+     * @param pos      позиция, где находился или должен был находиться саженец
+     * @param woodType тип дерева для генерации
+     * @param rand     случайное число для использования в генерации
+     * @param isWorldGen флаг, указывающий, является ли генерация частью генерации мира
      */
     void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen);
 
     /**
-     * Checks if a tree can be generated. This implementation checks height, radius, and light level
+     * Проверяет, может ли быть сгенерировано дерево. Эта реализация проверяет высоту, радиус и уровень освещения.
      *
-     * @param world    The world
-     * @param pos      The pos of the tree
-     * @param woodType The tree type (for checking if the tree can generate)
-     * @return true if the tree can generate.
+     * @param world    мир
+     * @param pos      позиция дерева
+     * @param woodType тип дерева (для проверки возможности генерации)
+     * @return true, если дерево может быть сгенерировано
      */
     default boolean canGenerateTree(World world, BlockPos pos, WoodType woodType) {
-        // Check if ground is flat enough
+        // Проверяем, достаточно ли ровный грунт
         final int radius = woodType.getMaxGrowthRadius();
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
@@ -44,7 +49,7 @@ public interface ITreeGenerator {
                 return false;
             }
         }
-        // Check if there is room directly upwards
+        // Проверяем, есть ли пространство прямо вверх
         final int height = woodType.getMaxHeight();
         for (int y = 1; y <= height; y++) {
             IBlockState state = world.getBlockState(pos.up(y));
@@ -53,12 +58,12 @@ public interface ITreeGenerator {
             }
         }
 
-        // Check if there is a solid block beneath
+        // Проверяем, есть ли твердый блок снизу
         if (!BlocksTFC.isGrowableSoil(world.getBlockState(pos.down()))) {
             return false;
         }
 
-        // Check the position for liquids, etc.
+        // Проверяем позицию на наличие жидкостей и т.д.
         IBlockState stateAt = world.getBlockState(pos);
         return !stateAt.getMaterial().isLiquid() && (stateAt.getMaterial().isReplaceable() || stateAt.getBlock() instanceof BlockWoodSapling);
     }

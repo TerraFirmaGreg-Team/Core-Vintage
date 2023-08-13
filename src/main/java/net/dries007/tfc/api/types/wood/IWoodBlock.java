@@ -11,21 +11,50 @@ import javax.annotation.Nonnull;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 
+/**
+ * Интерфейс IWoodBlock представляет деревянный блок.
+ */
 public interface IWoodBlock extends IHasModel, IItemProvider {
+
+    /**
+     * Возвращает вариант деревянного блока.
+     *
+     * @return вариант деревянного блока
+     */
     WoodBlockVariant getWoodBlockVariant();
 
+    /**
+     * Возвращает тип дерева блока.
+     *
+     * @return тип дерева
+     */
     WoodType getWoodType();
 
+    /**
+     * Возвращает расположение в реестре для данного деревянного блока.
+     *
+     * @return расположение в реестре
+     */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
         return new ResourceLocation(MOD_ID, String.format("wood/%s/%s", getWoodBlockVariant(), getWoodType()));
     }
 
+    /**
+     * Возвращает расположение ресурса для данного деревянного блока.
+     *
+     * @return расположение ресурса
+     */
     @Nonnull
     default ResourceLocation getResourceLocation() {
         return new ResourceLocation(MOD_ID, String.format("wood/%s", getWoodBlockVariant()));
     }
 
+    /**
+     * Возвращает локализованное имя для данного деревянного блока.
+     *
+     * @return локализованное имя
+     */
     @Nonnull
     default String getTranslationName() {
         return getRegistryLocation().toString().toLowerCase().replace(":", ".").replace("/", ".");

@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
-import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
+import net.dries007.tfc.common.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;

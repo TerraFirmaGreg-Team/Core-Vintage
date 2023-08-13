@@ -1,11 +1,11 @@
 package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.network.PacketFoodStatsReplace;
-import net.dries007.tfc.network.PacketFoodStatsUpdate;
-import net.dries007.tfc.objects.effects.PotionEffectsTFC;
+import net.dries007.tfc.common.network.PacketFoodStatsReplace;
+import net.dries007.tfc.common.network.PacketFoodStatsUpdate;
+import net.dries007.tfc.common.objects.effects.PotionEffectsTFC;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.entity.player.EntityPlayer;

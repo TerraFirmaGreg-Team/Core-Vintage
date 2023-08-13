@@ -5,8 +5,8 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.te.TELogPile;
-import net.dries007.tfc.objects.blocks.TFCBlocks;
+import net.dries007.tfc.common.objects.te.TELogPile;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.BlockCharcoalPile.LAYERS;
+import static net.dries007.tfc.common.objects.blocks.BlockCharcoalPile.LAYERS;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public final class InteractionManager {

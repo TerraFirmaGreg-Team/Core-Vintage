@@ -2,7 +2,7 @@ package net.dries007.tfc.api.types.agriculture.bush;
 
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.food.type.FoodTypes;
-import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;

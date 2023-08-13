@@ -10,7 +10,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
-import net.dries007.tfc.objects.items.TFCItems;
+import net.dries007.tfc.common.objects.items.TFCItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

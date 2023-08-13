@@ -7,7 +7,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.objects.items.ceramics.ItemMold;
+import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;

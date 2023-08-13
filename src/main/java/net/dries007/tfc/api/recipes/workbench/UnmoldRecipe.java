@@ -2,10 +2,10 @@ package net.dries007.tfc.api.recipes.workbench;
 
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.Constants;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.items.ceramics.ItemMold;
+import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;

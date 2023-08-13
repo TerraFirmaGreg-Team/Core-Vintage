@@ -15,17 +15,17 @@ import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.render.*;
+import net.dries007.tfc.common.objects.te.*;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
-import net.dries007.tfc.objects.blocks.BlockThatchBed;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
-import net.dries007.tfc.objects.blocks.soil.BlockSoilFarmland;
-import net.dries007.tfc.objects.blocks.wood.BlockWoodLeaves;
-import net.dries007.tfc.objects.items.ItemAnimalHide;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.items.ceramics.ItemMold;
-import net.dries007.tfc.objects.te.*;
-import net.dries007.tfc.objects.blocks.TFCBlocks;
+import net.dries007.tfc.common.objects.blocks.BlockThatchBed;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.agriculture.BlockFruitTreeLeaves;
+import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
+import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;
+import net.dries007.tfc.common.objects.items.ItemAnimalHide;
+import net.dries007.tfc.common.objects.items.ItemsTFC;
+import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -54,8 +54,8 @@ import javax.annotation.Nonnull;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.TALL_GRASS;
-import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
-import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
+import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
+import static net.dries007.tfc.common.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)

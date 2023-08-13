@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.render;
 
-import net.dries007.tfc.objects.te.TEQuern;
+import net.dries007.tfc.common.objects.te.TEQuern;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;

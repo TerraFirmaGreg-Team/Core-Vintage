@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.Constants.RNG;
+import static net.dries007.tfc.util.Constants.RNG;
 
 @SideOnly(Side.CLIENT)
 public class ParticleBubbleTFC extends Particle {

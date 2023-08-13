@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelMuskOxWoolTFC;
-import net.dries007.tfc.objects.entity.animal.EntityMuskOxTFC;
+import net.dries007.tfc.common.objects.entity.animal.EntityMuskOxTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.passive.EntitySheep;

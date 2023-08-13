@@ -17,7 +17,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.wood.BlockWoodLog.PLACED;
+import static net.dries007.tfc.common.objects.blocks.wood.BlockWoodLog.PLACED;
 
 public class TreeGenNormal implements ITreeGenerator {
     private static final PlacementSettings settingsFull = StructureHelper.getDefaultSettings();

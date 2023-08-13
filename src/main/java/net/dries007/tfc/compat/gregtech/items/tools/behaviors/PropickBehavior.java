@@ -7,7 +7,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.events.ProspectEvent;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
-import net.dries007.tfc.network.PacketProspectResult;
+import net.dries007.tfc.common.network.PacketProspectResult;
 import net.dries007.tfc.util.skills.ProspectingSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.block.Block;

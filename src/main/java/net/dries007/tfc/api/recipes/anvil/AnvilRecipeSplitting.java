@@ -3,7 +3,7 @@ package net.dries007.tfc.api.recipes.anvil;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

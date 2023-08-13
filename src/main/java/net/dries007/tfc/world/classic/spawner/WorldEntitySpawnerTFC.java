@@ -2,7 +2,7 @@ package net.dries007.tfc.world.classic.spawner;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
-import net.dries007.tfc.objects.entity.animal.*;
+import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;

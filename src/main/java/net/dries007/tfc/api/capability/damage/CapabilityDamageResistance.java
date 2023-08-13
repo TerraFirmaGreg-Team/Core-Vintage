@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.Constants.GSON;
+import static net.dries007.tfc.util.Constants.GSON;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public final class CapabilityDamageResistance {

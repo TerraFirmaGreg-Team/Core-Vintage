@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.particle;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.network.PacketSpawnTFCParticle;
+import net.dries007.tfc.common.network.PacketSpawnTFCParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;

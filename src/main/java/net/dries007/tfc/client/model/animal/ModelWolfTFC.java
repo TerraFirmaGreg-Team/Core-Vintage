@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.model.animal;
 
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
+import net.dries007.tfc.common.objects.entity.animal.EntityWolfTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

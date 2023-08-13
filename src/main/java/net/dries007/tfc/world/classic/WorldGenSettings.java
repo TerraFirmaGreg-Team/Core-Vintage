@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic;
 
 import com.google.common.base.Strings;
-import net.dries007.tfc.Constants;
+import net.dries007.tfc.util.Constants;
 
 @SuppressWarnings("WeakerAccess")
 public class WorldGenSettings {

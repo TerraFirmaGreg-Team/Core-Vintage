@@ -1,7 +1,7 @@
 package net.dries007.tfc.util.json;
 
 import com.google.gson.*;
-import net.dries007.tfc.objects.entity.animal.AnimalFood;
+import net.dries007.tfc.common.objects.entity.animal.AnimalFood;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.CraftingHelper;

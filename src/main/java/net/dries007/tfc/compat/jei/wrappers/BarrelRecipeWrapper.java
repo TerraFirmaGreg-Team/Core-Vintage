@@ -8,7 +8,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
-import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
+import net.dries007.tfc.common.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;

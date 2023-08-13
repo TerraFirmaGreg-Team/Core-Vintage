@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui;
 
-import net.dries007.tfc.objects.container.ContainerChestTFC;
+import net.dries007.tfc.common.objects.container.ContainerChestTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;

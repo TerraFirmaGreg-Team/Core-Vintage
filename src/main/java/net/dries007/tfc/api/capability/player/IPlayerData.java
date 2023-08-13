@@ -3,7 +3,7 @@ package net.dries007.tfc.api.capability.player;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
-import net.dries007.tfc.network.PacketPlayerDataUpdate;
+import net.dries007.tfc.common.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.entity.player.EntityPlayer;

@@ -3,7 +3,7 @@ package net.dries007.tfc.world.classic.worldgen;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.util.EnumFacing;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.Random;
 
 import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.LOOSE;
-import static net.dries007.tfc.objects.blocks.rock.BlockRockLoose.AXIS;
+import static net.dries007.tfc.common.objects.blocks.rock.BlockRockLoose.AXIS;
 
 public class WorldGenLooseRocks implements IWorldGenerator {
 

@@ -7,9 +7,9 @@ import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 
-import net.dries007.tfc.objects.blocks.TFCBlocks;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -51,7 +51,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static gregtech.api.unification.material.Materials.SaltWater;
 import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;

@@ -2,8 +2,7 @@ package net.dries007.tfc.api.types.agriculture.crop.type;
 
 import net.dries007.tfc.api.types.agriculture.crop.category.CropCategory;
 import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.api.types.food.type.FoodTypes;
-import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

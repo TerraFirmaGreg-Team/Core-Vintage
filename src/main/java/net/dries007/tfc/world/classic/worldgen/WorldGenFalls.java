@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;

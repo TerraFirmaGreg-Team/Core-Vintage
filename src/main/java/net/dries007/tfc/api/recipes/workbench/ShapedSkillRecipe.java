@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.recipes.workbench;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.objects.recipes.RecipeUtils;
+import net.dries007.tfc.common.objects.recipes.RecipeUtils;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;

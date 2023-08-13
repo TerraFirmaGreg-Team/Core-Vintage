@@ -1,12 +1,13 @@
 package net.dries007.tfc.api.util;
 
 import net.dries007.tfc.api.capability.damage.DamageType;
+import net.dries007.tfc.common.objects.ArmorMaterialTFC;
 import net.minecraft.item.ItemArmor;
 
 import javax.annotation.Nonnull;
 
 /**
- * @see net.dries007.tfc.objects.ArmorMaterialTFC
+ * @see ArmorMaterialTFC
  */
 public interface IArmorMaterialTFC {
     /**

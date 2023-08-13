@@ -2,7 +2,7 @@ package net.dries007.tfc.api.types.plant.variant;
 
 import net.dries007.tfc.api.types.plant.IPlantBlock;
 import net.dries007.tfc.api.types.plant.type.PlantType;
-import net.dries007.tfc.objects.blocks.plants.*;
+import net.dries007.tfc.common.objects.blocks.plants.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
 

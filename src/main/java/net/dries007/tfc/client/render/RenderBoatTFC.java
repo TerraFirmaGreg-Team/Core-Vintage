@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.render;
 
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.objects.entity.EntityBoatTFC;
+import net.dries007.tfc.common.objects.entity.EntityBoatTFC;
 import net.minecraft.client.model.IMultipassModel;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;

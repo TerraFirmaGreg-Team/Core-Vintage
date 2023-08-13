@@ -6,7 +6,7 @@ import mcjty.theoneprobe.api.IProbeInfoEntityProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalMammal;
+import net.dries007.tfc.common.objects.entity.animal.EntityAnimalMammal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;

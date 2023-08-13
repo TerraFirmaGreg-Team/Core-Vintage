@@ -1,8 +1,8 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelTurkeyTFC;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityTurkeyTFC;
+import net.dries007.tfc.common.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.common.objects.entity.animal.EntityTurkeyTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

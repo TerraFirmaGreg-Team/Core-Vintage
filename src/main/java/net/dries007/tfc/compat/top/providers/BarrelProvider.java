@@ -6,7 +6,7 @@ import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.objects.te.TEBarrel;
+import net.dries007.tfc.common.objects.te.TEBarrel;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

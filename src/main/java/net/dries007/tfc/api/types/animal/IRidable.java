@@ -2,8 +2,8 @@ package net.dries007.tfc.api.types.animal;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.animal.IAnimalTFC.Age;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.common.network.PacketSimpleMessage;
+import net.dries007.tfc.common.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;

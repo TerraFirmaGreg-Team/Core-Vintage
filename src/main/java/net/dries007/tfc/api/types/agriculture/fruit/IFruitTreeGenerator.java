@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types.agriculture.fruit;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenFruit;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

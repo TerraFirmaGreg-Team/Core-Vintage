@@ -1,9 +1,9 @@
 package net.dries007.tfc.client.model.animal;
 
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
-import net.dries007.tfc.objects.entity.animal.EntityHorseTFC;
-import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;
+import net.dries007.tfc.common.objects.entity.animal.EntityDonkeyTFC;
+import net.dries007.tfc.common.objects.entity.animal.EntityHorseTFC;
+import net.dries007.tfc.common.objects.entity.animal.EntityMuleTFC;
 import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

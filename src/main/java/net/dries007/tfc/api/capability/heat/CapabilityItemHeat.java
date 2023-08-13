@@ -2,8 +2,8 @@ package net.dries007.tfc.api.capability.heat;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.DumbStorage;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.items.TFCItems;
+import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.common.objects.items.TFCItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

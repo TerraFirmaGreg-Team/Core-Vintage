@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
-import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
+import net.dries007.tfc.common.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;

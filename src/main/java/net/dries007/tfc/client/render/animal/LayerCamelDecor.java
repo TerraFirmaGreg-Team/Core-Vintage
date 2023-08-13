@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelCamelTFC;
-import net.dries007.tfc.objects.entity.animal.EntityCamelTFC;
+import net.dries007.tfc.common.objects.entity.animal.EntityCamelTFC;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.ResourceLocation;

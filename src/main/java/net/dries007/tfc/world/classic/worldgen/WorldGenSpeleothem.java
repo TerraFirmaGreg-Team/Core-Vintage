@@ -3,7 +3,7 @@ package net.dries007.tfc.world.classic.worldgen;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.objects.blocks.rock.BlockRockSpeleothem;
+import net.dries007.tfc.common.objects.blocks.rock.BlockRockSpeleothem;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

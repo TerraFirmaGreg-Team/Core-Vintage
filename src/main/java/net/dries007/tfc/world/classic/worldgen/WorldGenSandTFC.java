@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

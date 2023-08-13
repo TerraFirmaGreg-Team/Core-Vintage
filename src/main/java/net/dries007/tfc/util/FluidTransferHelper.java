@@ -1,7 +1,7 @@
 package net.dries007.tfc.util;
 
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.common.objects.items.ItemsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;

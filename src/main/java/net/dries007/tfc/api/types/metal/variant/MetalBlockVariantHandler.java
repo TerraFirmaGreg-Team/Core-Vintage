@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types.metal.variant;
 
-import net.dries007.tfc.objects.blocks.metal.BlockMetalAnvil;
+import net.dries007.tfc.common.objects.blocks.metal.BlockMetalAnvil;
 
 import static net.dries007.tfc.api.types.metal.variant.MetalBlockVariants.*;
 

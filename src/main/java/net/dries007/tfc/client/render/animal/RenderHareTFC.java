@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelHareTFC;
-import net.dries007.tfc.objects.entity.animal.EntityHareTFC;
+import net.dries007.tfc.common.objects.entity.animal.EntityHareTFC;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

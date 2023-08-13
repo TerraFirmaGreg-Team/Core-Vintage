@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types.agriculture.crop.type;
 
 import net.dries007.tfc.api.types.food.type.FoodTypes;
-import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.common.objects.items.ItemsTFC;
 
 import static net.dries007.tfc.api.types.agriculture.crop.category.CropCategories.PICKABLE;
 import static net.dries007.tfc.api.types.agriculture.crop.category.CropCategories.SIMPLE;

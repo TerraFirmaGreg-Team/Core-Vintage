@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
-import net.dries007.tfc.objects.entity.animal.AnimalFood;
+import net.dries007.tfc.common.objects.entity.animal.AnimalFood;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

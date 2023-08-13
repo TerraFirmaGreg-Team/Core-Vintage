@@ -3,7 +3,7 @@ package net.dries007.tfc.util.calendar;
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.network.PacketCalendarUpdate;
+import net.dries007.tfc.common.network.PacketCalendarUpdate;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.GameRules;

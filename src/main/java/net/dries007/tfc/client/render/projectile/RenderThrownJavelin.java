@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.render.projectile;
 
-import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
+import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.relauncher.Side;

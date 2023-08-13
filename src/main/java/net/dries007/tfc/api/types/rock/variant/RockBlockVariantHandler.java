@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types.rock.variant;
 
-import net.dries007.tfc.objects.blocks.rock.*;
+import net.dries007.tfc.common.objects.blocks.rock.*;
 
 import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
 

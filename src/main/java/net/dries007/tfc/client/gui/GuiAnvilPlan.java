@@ -5,8 +5,8 @@ import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilPlanIcon;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.network.PacketGuiButton;
-import net.dries007.tfc.objects.te.TEAnvilTFC;
+import net.dries007.tfc.common.network.PacketGuiButton;
+import net.dries007.tfc.common.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.NBTBuilder;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_INPUT_1;
+import static net.dries007.tfc.common.objects.te.TEAnvilTFC.SLOT_INPUT_1;
 
 @SideOnly(Side.CLIENT)
 public class GuiAnvilPlan extends GuiContainerTE<TEAnvilTFC> {

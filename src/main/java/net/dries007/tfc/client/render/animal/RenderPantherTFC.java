@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelPantherTFC;
-import net.dries007.tfc.objects.entity.animal.EntityPantherTFC;
+import net.dries007.tfc.common.objects.entity.animal.EntityPantherTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

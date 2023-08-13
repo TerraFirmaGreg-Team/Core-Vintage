@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelCowTFC;
-import net.dries007.tfc.objects.entity.animal.EntityCowTFC;
+import net.dries007.tfc.common.objects.entity.animal.EntityCowTFC;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;

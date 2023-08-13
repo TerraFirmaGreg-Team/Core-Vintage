@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types.wood.variant;
 
-import net.dries007.tfc.objects.blocks.wood.*;
+import net.dries007.tfc.common.objects.blocks.wood.*;
 
 import static net.dries007.tfc.api.types.wood.variant.WoodBlockVariants.*;
 

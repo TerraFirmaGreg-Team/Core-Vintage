@@ -1,0 +1,17 @@
+package net.dries007.tfc.common.network;
+
+import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+
+/**
+ * Packets that don't need to send any data and just exist as signaling points
+ */
+public interface IMessageEmpty extends IMessage {
+    @Override
+    default void fromBytes(ByteBuf buf) {
+    }
+
+    @Override
+    default void toBytes(ByteBuf buf) {
+    }
+}

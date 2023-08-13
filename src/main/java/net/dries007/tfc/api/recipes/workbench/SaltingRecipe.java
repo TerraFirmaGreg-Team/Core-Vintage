@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.recipes.RecipeUtils;
+import net.dries007.tfc.common.objects.recipes.RecipeUtils;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;

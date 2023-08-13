@@ -4,7 +4,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.metal.IMetalBlock;
-import net.dries007.tfc.api.types.metal.MetalVariant;
+import net.dries007.tfc.api.types.metal.variant.MetalBlockVariant;
 import net.dries007.tfc.api.types.plant.IPlantBlock;
 import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
 import net.dries007.tfc.api.types.plant.type.PlantType;
@@ -43,8 +43,9 @@ public final class TFCStorage {
     public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantBlockVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<MetalBlockVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
+
     public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<MetalVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new HashMap<>();
 
     public static final Map<RockType, ItemRock> ROCK_ITEMS = new HashMap<>();
@@ -109,7 +110,7 @@ public final class TFCStorage {
     }
 
     @Nonnull
-    public static Block getMetalBlock(@Nonnull MetalVariant metalVariant, @Nonnull Material material) {
+    public static Block getMetalBlock(@Nonnull MetalBlockVariant metalVariant, @Nonnull Material material) {
         var block = (Block) METAL_BLOCKS.get(new Pair<>(metalVariant, material));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block is null: %s, %s", metalVariant, material));

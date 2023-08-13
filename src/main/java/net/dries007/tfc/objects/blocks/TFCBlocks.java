@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks;
 
 import gregtech.api.GregTechAPI;
 import net.dries007.tfc.api.types.GroundcoverType;
-import net.dries007.tfc.api.types.metal.MetalVariant;
+import net.dries007.tfc.api.types.metal.variant.MetalBlockVariant;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
@@ -66,7 +66,7 @@ public class TFCBlocks {
 
         for (var rockBlockVariant : RockBlockVariant.getRockBlockVariants()) {
             for (var rockType : RockType.getRockTypes()) {
-                var rockTypeBlock = rockBlockVariant.applyToFactory(rockType);
+                var rockTypeBlock = rockBlockVariant.create(rockType);
 
                 if (ROCK_BLOCKS.put(new Pair<>(rockBlockVariant, rockType), rockTypeBlock) != null)
                     throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", rockBlockVariant, rockType));
@@ -77,7 +77,7 @@ public class TFCBlocks {
 
         for (var soilBlockVariant : SoilBlockVariant.getSoilBlockVariants()) {
             for (var soilType : SoilType.getSoilTypes()) {
-                var soilTypeBlock = soilBlockVariant.applyToFactory(soilType);
+                var soilTypeBlock = soilBlockVariant.create(soilType);
 
                 if (SOIL_BLOCKS.put(new Pair<>(soilBlockVariant, soilType), soilTypeBlock) != null)
                     throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", soilBlockVariant, soilType));
@@ -108,11 +108,11 @@ public class TFCBlocks {
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
             if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL)) {
-                for (MetalVariant metalVariant : MetalVariant.values()) {
-                    var metalVariantBlock = metalVariant.create(material);
+                for (MetalBlockVariant metalBlockVariant : MetalBlockVariant.getMetalBlockVariants()) {
+                    var metalVariantBlock = metalBlockVariant.create(material);
 
-                    if (METAL_BLOCKS.put(new Pair<>(metalVariant, material), metalVariantBlock) != null)
-                        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", metalVariant, material, metalVariantBlock));
+                    if (METAL_BLOCKS.put(new Pair<>(metalBlockVariant, material), metalVariantBlock) != null)
+                        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", metalBlockVariant, material, metalVariantBlock));
                 }
             }
         }

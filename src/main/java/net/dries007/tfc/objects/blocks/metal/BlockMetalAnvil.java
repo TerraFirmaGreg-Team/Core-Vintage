@@ -9,7 +9,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.metal.IMetalBlock;
-import net.dries007.tfc.api.types.metal.MetalVariant;
+import net.dries007.tfc.api.types.metal.variant.MetalBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -54,7 +54,7 @@ import java.util.stream.Collectors;
 import static net.dries007.tfc.Constants.RNG;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCStorage.METAL_BLOCKS;
-import static net.dries007.tfc.api.types.metal.MetalVariant.ANVIL;
+import static net.dries007.tfc.api.types.metal.variant.MetalBlockVariants.ANVIL;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_METAL;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 
@@ -65,14 +65,14 @@ public class BlockMetalAnvil extends Block implements IMetalBlock, IMaterialItem
     private static final AxisAlignedBB AABB_Z = new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.6875, 1);
     private static final AxisAlignedBB AABB_X = new AxisAlignedBB(0, 0, 0.1875, 1, 0.6875, 0.8125);
 
-    private final MetalVariant metalVariant;
+    private final MetalBlockVariant metalBlockVariant;
     private final Material material;
     private final ResourceLocation modelLocation;
 
-    public BlockMetalAnvil(MetalVariant metalVariant, Material material) {
+    public BlockMetalAnvil(MetalBlockVariant metalBlockVariant, Material material) {
         super(net.minecraft.block.material.Material.IRON);
 
-        this.metalVariant = metalVariant;
+        this.metalBlockVariant = metalBlockVariant;
         this.material = material;
         this.modelLocation = new ResourceLocation(MOD_ID, "metal/anvil");
 
@@ -93,14 +93,14 @@ public class BlockMetalAnvil extends Block implements IMetalBlock, IMaterialItem
 
     public static Collection<Block> getAnvilStorage() {
         return METAL_BLOCKS.values().stream()
-                .filter(block -> block.getMetalVariant() == ANVIL)
+                .filter(block -> block.getMetalBlockVariant() == ANVIL)
                 .map(block -> (Block) block)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public MetalVariant getMetalVariant() {
-        return metalVariant;
+    public MetalBlockVariant getMetalBlockVariant() {
+        return metalBlockVariant;
     }
 
     @Override

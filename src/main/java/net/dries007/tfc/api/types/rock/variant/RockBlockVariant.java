@@ -77,7 +77,7 @@ public class RockBlockVariant {
      * @return Созданный блок породы.
      */
     @Nonnull
-    public IRockBlock applyToFactory(RockType rockType) {
+    public IRockBlock create(RockType rockType) {
         return factory.apply(this, rockType);
     }
 }

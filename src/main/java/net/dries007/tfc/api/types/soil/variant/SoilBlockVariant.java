@@ -135,7 +135,7 @@ public class SoilBlockVariant {
      * @return Блок почвы.
      */
     @Nonnull
-    public ISoilBlock applyToFactory(SoilType soilType) {
+    public ISoilBlock create(SoilType soilType) {
         return factory.apply(this, soilType);
     }
 }

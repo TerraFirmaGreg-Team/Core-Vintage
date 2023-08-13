@@ -20,6 +20,8 @@ import net.dries007.tfc.api.types.agriculture.crop.category.CropCategoryHandler;
 import net.dries007.tfc.api.types.agriculture.crop.type.CropTypeHandler;
 import net.dries007.tfc.api.types.food.category.FoodCategoryHandler;
 import net.dries007.tfc.api.types.food.type.FoodTypeHandler;
+import net.dries007.tfc.api.types.metal.variant.MetalBlockVariantHandler;
+import net.dries007.tfc.api.types.metal.variant.MetalBlockVariants;
 import net.dries007.tfc.api.types.plant.type.PlantTypeHandler;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
 import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
@@ -184,6 +186,9 @@ public class CommonProxy {
         SoilTypeHandler.init();
         SoilBlockVariantHandler.init();
 
+        WoodTypeHandler.init();
+        WoodBlockVariantHandler.init();
+
         FoodCategoryHandler.init();
         FoodTypeHandler.init();
 
@@ -193,8 +198,7 @@ public class CommonProxy {
         CropCategoryHandler.init();
         CropTypeHandler.init();
 
-        WoodTypeHandler.init();
-        WoodBlockVariantHandler.init();
+        MetalBlockVariantHandler.init();
 
         StoneTypeHandler.init();
     }

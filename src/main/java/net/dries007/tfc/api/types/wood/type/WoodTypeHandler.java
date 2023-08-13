@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types.wood.type;
 
+import static net.dries007.tfc.api.types.trees.TreeGenerators.*;
 import static net.dries007.tfc.api.types.wood.type.WoodTypes.*;
-import static net.dries007.tfc.types.DefaultTrees.*;
 
 public class WoodTypeHandler {
 

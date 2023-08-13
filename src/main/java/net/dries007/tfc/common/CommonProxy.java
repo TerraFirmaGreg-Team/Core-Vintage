@@ -15,6 +15,12 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
+import net.dries007.tfc.api.recipes.*;
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.api.recipes.heat.HeatRecipe;
+import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
+import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.types.agriculture.crop.category.CropCategory;
 import net.dries007.tfc.api.types.agriculture.crop.category.CropCategoryHandler;
 import net.dries007.tfc.api.types.agriculture.crop.type.CropTypeHandler;
@@ -28,6 +34,7 @@ import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariantHandler;
 import net.dries007.tfc.api.types.soil.type.SoilTypeHandler;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariantHandler;
+import net.dries007.tfc.api.types.trees.TreeGeneratorHandler;
 import net.dries007.tfc.api.types.wood.type.WoodTypeHandler;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariantHandler;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -66,6 +73,7 @@ import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.dedicated.PropertyManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IThreadListener;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -78,11 +86,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.RegistryBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
 import static net.dries007.tfc.api.registries.TFCStorage.*;
 
 @SuppressWarnings("unused")
@@ -186,6 +197,8 @@ public class CommonProxy {
         SoilTypeHandler.init();
         SoilBlockVariantHandler.init();
 
+        TreeGeneratorHandler.init();
+
         WoodTypeHandler.init();
         WoodBlockVariantHandler.init();
 
@@ -222,6 +235,21 @@ public class CommonProxy {
         TFGOrePrefix.oreSchist.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
         TFGOrePrefix.oreShale.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
         TFGOrePrefix.oreSlate.addProcessingHandler(PropertyKey.ORE, OreRecipeHandler::processOre);
+    }
+
+    @SubscribeEvent
+    public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
+        newRegistry(ALLOY_RECIPE, AlloyRecipe.class);
+        newRegistry(KNAPPING_RECIPE, KnappingRecipe.class);
+        newRegistry(ANVIL_RECIPE, AnvilRecipe.class);
+        newRegistry(WELDING_RECIPE, WeldingRecipe.class);
+        newRegistry(HEAT_RECIPE, HeatRecipe.class);
+        newRegistry(BARREL_RECIPE, BarrelRecipe.class);
+        newRegistry(LOOM_RECIPE, LoomRecipe.class);
+        newRegistry(QUERN_RECIPE, QuernRecipe.class);
+        newRegistry(CHISEL_RECIPE, ChiselRecipe.class);
+        newRegistry(BLOOMERY_RECIPE, BloomeryRecipe.class);
+        newRegistry(BLAST_FURNACE_RECIPE, BlastFurnaceRecipe.class);
     }
 
     @SubscribeEvent
@@ -439,6 +467,10 @@ public class CommonProxy {
                 }
             }
         }
+    }
+
+    private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass) {
+        IForgeRegistry<T> reg = new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
     }
 
     @Nonnull

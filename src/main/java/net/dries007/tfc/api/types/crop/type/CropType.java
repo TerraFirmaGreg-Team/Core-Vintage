@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types.crop.type;
 
 import net.dries007.tfc.api.types.crop.category.CropCategory;
-import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.food.type.FoodVariant;
 import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -106,7 +106,7 @@ public class CropType {
             return this;
         }
 
-        public Builder setDrop(FoodType foodTypes) {
+        public Builder setDrop(FoodVariant foodTypes) {
             this.foodDrop = () -> new ItemStack(ItemFoodTFC.get(foodTypes));
             return this;
         }
@@ -116,7 +116,7 @@ public class CropType {
             return this;
         }
 
-        public Builder setDropEarly(FoodType foodTypes) {
+        public Builder setDropEarly(FoodVariant foodTypes) {
             this.foodDropEarly = () -> new ItemStack(ItemFoodTFC.get(foodTypes));
             return this;
         }

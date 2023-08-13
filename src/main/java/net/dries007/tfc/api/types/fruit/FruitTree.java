@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types.fruit;
 
-import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.api.types.food.type.FoodTypes;
+import net.dries007.tfc.api.types.food.type.FoodVariant;
+import net.dries007.tfc.api.types.food.type.FoodVariants;
 import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -20,15 +20,15 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public enum FruitTree implements IFruitTree {
-    BANANA(FoodTypes.BANANA, Month.APRIL, 2, Month.SEPTEMBER, 1, 23f, 35f, 280f, 400f, 0.33f),
-    CHERRY(FoodTypes.CHERRY, Month.APRIL, 1, Month.JUNE, 1, 5f, 21f, 100f, 350f, 0.33f),
-    GREEN_APPLE(FoodTypes.GREEN_APPLE, Month.MAY, 2, Month.OCTOBER, 2, 8f, 25f, 110f, 280f, 0.33f),
-    LEMON(FoodTypes.LEMON, Month.MAY, 2, Month.AUGUST, 1, 10f, 30f, 180f, 400f, 0.33f),
-    OLIVE(FoodTypes.OLIVE, Month.JUNE, 1, Month.OCTOBER, 2, 13f, 30f, 150f, 380f, 0.33f),
-    ORANGE(FoodTypes.ORANGE, Month.FEBRUARY, 3, Month.NOVEMBER, 1, 23f, 36f, 250f, 400f, 0.33f),
-    PEACH(FoodTypes.PEACH, Month.APRIL, 2, Month.SEPTEMBER, 1, 9f, 27f, 60f, 230f, 0.33f),
-    PLUM(FoodTypes.PLUM, Month.MAY, 2, Month.JULY, 2, 18f, 31f, 250f, 400f, 0.33f),
-    RED_APPLE(FoodTypes.RED_APPLE, Month.MAY, 2, Month.OCTOBER, 2, 9f, 25f, 100f, 280f, 0.33f);
+    BANANA(FoodVariants.BANANA, Month.APRIL, 2, Month.SEPTEMBER, 1, 23f, 35f, 280f, 400f, 0.33f),
+    CHERRY(FoodVariants.CHERRY, Month.APRIL, 1, Month.JUNE, 1, 5f, 21f, 100f, 350f, 0.33f),
+    GREEN_APPLE(FoodVariants.GREEN_APPLE, Month.MAY, 2, Month.OCTOBER, 2, 8f, 25f, 110f, 280f, 0.33f),
+    LEMON(FoodVariants.LEMON, Month.MAY, 2, Month.AUGUST, 1, 10f, 30f, 180f, 400f, 0.33f),
+    OLIVE(FoodVariants.OLIVE, Month.JUNE, 1, Month.OCTOBER, 2, 13f, 30f, 150f, 380f, 0.33f),
+    ORANGE(FoodVariants.ORANGE, Month.FEBRUARY, 3, Month.NOVEMBER, 1, 23f, 36f, 250f, 400f, 0.33f),
+    PEACH(FoodVariants.PEACH, Month.APRIL, 2, Month.SEPTEMBER, 1, 9f, 27f, 60f, 230f, 0.33f),
+    PLUM(FoodVariants.PLUM, Month.MAY, 2, Month.JULY, 2, 18f, 31f, 250f, 400f, 0.33f),
+    RED_APPLE(FoodVariants.RED_APPLE, Month.MAY, 2, Month.OCTOBER, 2, 9f, 25f, 100f, 280f, 0.33f);
 
     static {
         for (IFruitTree tree : values()) {
@@ -36,7 +36,7 @@ public enum FruitTree implements IFruitTree {
         }
     }
 
-    private final FoodType fruit;
+    private final FoodVariant fruit;
     private final Month flowerMonthStart;
     private final int floweringMonths;
     private final Month harvestMonthStart;
@@ -47,7 +47,7 @@ public enum FruitTree implements IFruitTree {
     private final float minRain;
     private final float maxRain;
 
-    FruitTree(FoodType fruit, Month flowerMonthStart, int floweringMonths, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime) {
+    FruitTree(FoodVariant fruit, Month flowerMonthStart, int floweringMonths, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime) {
         this.fruit = fruit;
         this.flowerMonthStart = flowerMonthStart;
         this.floweringMonths = floweringMonths;
@@ -61,7 +61,7 @@ public enum FruitTree implements IFruitTree {
         this.maxRain = maxRain;
     }
 
-    public FoodType getFruit() {
+    public FoodVariant getFruit() {
         return this.fruit;
     }
 

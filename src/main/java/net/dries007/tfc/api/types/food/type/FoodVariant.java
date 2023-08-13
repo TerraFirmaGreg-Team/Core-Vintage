@@ -11,8 +11,8 @@ import java.util.Set;
 /**
  * Класс, представляющий типы еды.
  */
-public class FoodType {
-    private static final Set<FoodType> FOOD_TYPES = new LinkedHashSet<>();
+public class FoodVariant {
+    private static final Set<FoodVariant> FOOD_VARIANTS = new LinkedHashSet<>();
 
     private final String name;
     private final FoodCategory category;
@@ -25,16 +25,16 @@ public class FoodType {
     private final String[] oreDictNames;
 
     /**
-     * Конструктор класса FoodType.
+     * Конструктор класса FoodVariant.
      *
-     * @param name          название типа еды
-     * @param category      категория еды
-     * @param foodData      данные о пищевой ценности
-     * @param heatCapacity  теплоемкость
-     * @param cookingTemp   температура приготовления
-     * @param oreNames      имена в словаре руд
+     * @param name         название варианта еды
+     * @param category     категория еды
+     * @param foodData     данные о пищевой ценности
+     * @param heatCapacity теплоемкость
+     * @param cookingTemp  температура приготовления
+     * @param oreNames     имена в словаре руд
      */
-    FoodType(String name, @Nonnull FoodCategory category, FoodData foodData, float heatCapacity, float cookingTemp, String... oreNames) {
+    FoodVariant(String name, @Nonnull FoodCategory category, FoodData foodData, float heatCapacity, float cookingTemp, String... oreNames) {
         this.name = name;
         this.category = category;
         this.foodData = foodData;
@@ -46,27 +46,27 @@ public class FoodType {
         this.oreDictNames = oreNames == null || oreNames.length == 0 ? null : oreNames;
 
         if (name.isEmpty()) {
-            throw new RuntimeException(String.format("FoodType name must contain any character: [%s]", name));
+            throw new RuntimeException(String.format("FoodVariant name must contain any character: [%s]", name));
         }
 
-        if (!FOOD_TYPES.add(this)) {
-            throw new RuntimeException(String.format("FoodType: [%s] already exists!", name));
+        if (!FOOD_VARIANTS.add(this)) {
+            throw new RuntimeException(String.format("FoodVariant: [%s] already exists!", name));
         }
     }
 
     /**
-     * Возвращает набор всех типов еды.
+     * Возвращает набор всех вариантов еды.
      *
-     * @return Набор всех типов еды.
+     * @return Набор всех вариантов еды.
      */
-    public static Set<FoodType> getFoodTypes() {
-        return FOOD_TYPES;
+    public static Set<FoodVariant> getFoodVariants() {
+        return FOOD_VARIANTS;
     }
 
     /**
-     * Возвращает строковое представление типов еды.
+     * Возвращает строковое представление варианта еды.
      *
-     * @return Строковое представление типов еды.
+     * @return Строковое представление варианта еды.
      */
     @Override
     public String toString() {
@@ -131,7 +131,7 @@ public class FoodType {
     }
 
     /**
-     * Внутренний класс Builder для создания экземпляров класса FoodType.
+     * Внутренний класс Builder для создания экземпляров класса FoodVariant.
      */
     public static class Builder {
 
@@ -145,7 +145,7 @@ public class FoodType {
         /**
          * Конструктор класса Builder.
          *
-         * @param name название типа еды
+         * @param name название варианта еды
          */
         public Builder(String name) {
             this.name = name;
@@ -184,7 +184,7 @@ public class FoodType {
         }
 
         /**
-         * Устанавливает теплоемкость типа еды.
+         * Устанавливает теплоемкость варианта еды.
          *
          * @param heatCapacity теплоемкость
          * @return объект Builder для цепочки вызовов
@@ -195,7 +195,7 @@ public class FoodType {
         }
 
         /**
-         * Устанавливает температуру приготовления типа еды.
+         * Устанавливает температуру приготовления варианта еды.
          *
          * @param cookingTemp температура приготовления
          * @return объект Builder для цепочки вызовов
@@ -206,7 +206,7 @@ public class FoodType {
         }
 
         /**
-         * Устанавливает имена в словаре руд для типа еды.
+         * Устанавливает имена в словаре руд для варианта еды.
          *
          * @param oreDictNames имена в словаре руд
          * @return объект Builder для цепочки вызовов
@@ -217,12 +217,12 @@ public class FoodType {
         }
 
         /**
-         * Создает и возвращает экземпляр класса FoodType с заданными параметрами.
+         * Создает и возвращает экземпляр класса FoodVariant с заданными параметрами.
          *
-         * @return экземпляр класса FoodType
+         * @return экземпляр класса FoodVariant
          */
-        public FoodType build() {
-            return new FoodType(name, category, foodData, heatCapacity, cookingTemp, oreDictNames);
+        public FoodVariant build() {
+            return new FoodVariant(name, category, foodData, heatCapacity, cookingTemp, oreDictNames);
         }
     }
 }

@@ -9,8 +9,8 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.crop.CropBlock;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
-import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.api.types.food.type.FoodTypes;
+import net.dries007.tfc.api.types.food.type.FoodVariant;
+import net.dries007.tfc.api.types.food.type.FoodVariants;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.Powder;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
@@ -229,19 +229,19 @@ public final class ItemsTFC {
 //        simpleItems.add(register(r, "crop/product/burlap_cloth", new ItemMisc(Size.SMALL, Weight.VERY_LIGHT), MISC));
 
         // All simple foods (not meals) just use ItemFood and are registered here
-        for (FoodType foodOld : FoodType.getFoodTypes()) {
+        for (FoodVariant foodOld : FoodVariant.getFoodVariants()) {
             if (foodOld.getFoodCategory() != FoodCategories.MEAL) {
                 simpleItems.add(register(r, "food/" + foodOld.toString().toLowerCase(), new ItemFoodTFC(foodOld), CreativeTabsTFC.FOOD));
             }
         }
         // Complex foods that require special classes go here
-        for (FoodType foodOld : new FoodType[]{FoodTypes.BARLEY_BREAD_SANDWICH, FoodTypes.CORNBREAD_SANDWICH, FoodTypes.OAT_BREAD_SANDWICH, FoodTypes.RICE_BREAD_SANDWICH, FoodTypes.RYE_BREAD_SANDWICH, FoodTypes.WHEAT_BREAD_SANDWICH}) {
+        for (FoodVariant foodOld : new FoodVariant[]{FoodVariants.BARLEY_BREAD_SANDWICH, FoodVariants.CORNBREAD_SANDWICH, FoodVariants.OAT_BREAD_SANDWICH, FoodVariants.RICE_BREAD_SANDWICH, FoodVariants.RYE_BREAD_SANDWICH, FoodVariants.WHEAT_BREAD_SANDWICH}) {
             simpleItems.add(register(r, "food/" + foodOld.toString().toLowerCase(), new ItemSandwich(foodOld), CreativeTabsTFC.FOOD));
         }
-        for (FoodType foodOld : new FoodType[]{FoodTypes.SOUP_GRAIN, FoodTypes.SOUP_FRUIT, FoodTypes.SOUP_VEGETABLE, FoodTypes.SOUP_MEAT, FoodTypes.SOUP_DAIRY}) {
+        for (FoodVariant foodOld : new FoodVariant[]{FoodVariants.SOUP_GRAIN, FoodVariants.SOUP_FRUIT, FoodVariants.SOUP_VEGETABLE, FoodVariants.SOUP_MEAT, FoodVariants.SOUP_DAIRY}) {
             simpleItems.add(register(r, "food/" + foodOld.toString().toLowerCase(), new ItemDynamicBowlFood(foodOld), CreativeTabsTFC.FOOD));
         }
-        for (FoodType foodOld : new FoodType[]{FoodTypes.SALAD_GRAIN, FoodTypes.SALAD_FRUIT, FoodTypes.SALAD_VEGETABLE, FoodTypes.SALAD_MEAT, FoodTypes.SALAD_DAIRY}) {
+        for (FoodVariant foodOld : new FoodVariant[]{FoodVariants.SALAD_GRAIN, FoodVariants.SALAD_FRUIT, FoodVariants.SALAD_VEGETABLE, FoodVariants.SALAD_MEAT, FoodVariants.SALAD_DAIRY}) {
             simpleItems.add(register(r, "food/" + foodOld.toString().toLowerCase(), new ItemDynamicBowlFood(foodOld), CreativeTabsTFC.FOOD));
         }
 

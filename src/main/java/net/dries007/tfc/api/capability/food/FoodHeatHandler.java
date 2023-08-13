@@ -2,7 +2,7 @@ package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.food.type.FoodVariant;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -24,7 +24,7 @@ public class FoodHeatHandler extends ItemHeatHandler implements IFood, ICapabili
         this(null, new FoodData(), 1, 100);
     }
 
-    public FoodHeatHandler(@Nullable NBTTagCompound nbt, @Nonnull FoodType food) {
+    public FoodHeatHandler(@Nullable NBTTagCompound nbt, @Nonnull FoodVariant food) {
         this(nbt, food.getData(), food.getHeatCapacity(), food.getCookingTemp());
     }
 

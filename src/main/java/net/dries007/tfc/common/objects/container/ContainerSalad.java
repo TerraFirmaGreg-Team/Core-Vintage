@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.category.FoodCategory;
-import net.dries007.tfc.api.types.food.type.FoodTypes;
+import net.dries007.tfc.api.types.food.type.FoodVariants;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
@@ -89,8 +89,7 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
         return switch (slot) {
             case SLOT_BOWLS -> OreDictionaryHelper.doesStackMatchOre(stack, "bowl");
             case SLOT_OUTPUT -> false;
-            default ->
-                    stack.hasCapability(CapabilityFood.CAPABILITY, null) &&
+            default -> stack.hasCapability(CapabilityFood.CAPABILITY, null) &&
                     FoodCategory.doesStackMatchCategories(stack, FoodCategories.VEGETABLE, FoodCategories.FRUIT, FoodCategories.COOKED_MEAT, FoodCategories.DAIRY);
         };
     }
@@ -149,7 +148,7 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
                         IFood saladCap = salad.getCapability(CapabilityFood.CAPABILITY, null);
                         if (saladCap instanceof ItemDynamicBowlFood.DynamicFoodHandler) {
                             saladCap.setCreationDate(CapabilityFood.getRoundedCreationDate());
-                            ((ItemDynamicBowlFood.DynamicFoodHandler) saladCap).initCreationDataAndBowl(bowlStack.copy().splitStack(1), new FoodData(4, water, saturation, nutrition, FoodTypes.SALAD_VEGETABLE.getData().getDecayModifier()));
+                            ((ItemDynamicBowlFood.DynamicFoodHandler) saladCap).initCreationDataAndBowl(bowlStack.copy().splitStack(1), new FoodData(4, water, saturation, nutrition, FoodVariants.SALAD_VEGETABLE.getData().getDecayModifier()));
                         }
                         inventory.setStackInSlot(SLOT_OUTPUT, salad);
                         return;
@@ -222,15 +221,15 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
     private Item getSaladItem(Nutrient nutrient) {
         switch (nutrient) {
             case GRAIN:
-                return ItemFoodTFC.get(FoodTypes.SALAD_GRAIN);
+                return ItemFoodTFC.get(FoodVariants.SALAD_GRAIN);
             case VEGETABLES:
-                return ItemFoodTFC.get(FoodTypes.SALAD_VEGETABLE);
+                return ItemFoodTFC.get(FoodVariants.SALAD_VEGETABLE);
             case FRUIT:
-                return ItemFoodTFC.get(FoodTypes.SALAD_FRUIT);
+                return ItemFoodTFC.get(FoodVariants.SALAD_FRUIT);
             case PROTEIN:
-                return ItemFoodTFC.get(FoodTypes.SALAD_MEAT);
+                return ItemFoodTFC.get(FoodVariants.SALAD_MEAT);
             default:
-                return ItemFoodTFC.get(FoodTypes.SALAD_DAIRY);
+                return ItemFoodTFC.get(FoodVariants.SALAD_DAIRY);
         }
     }
 }

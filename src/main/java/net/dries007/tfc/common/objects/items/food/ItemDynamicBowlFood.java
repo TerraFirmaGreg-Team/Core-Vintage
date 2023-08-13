@@ -4,7 +4,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.food.type.FoodVariant;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ItemDynamicBowlFood extends ItemFoodTFC {
-    public ItemDynamicBowlFood(FoodType foodOld) {
+    public ItemDynamicBowlFood(FoodVariant foodOld) {
         super(foodOld);
     }
 

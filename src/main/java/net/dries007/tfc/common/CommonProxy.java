@@ -22,7 +22,7 @@ import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.types.crop.category.CropCategoryHandler;
 import net.dries007.tfc.api.types.crop.type.CropTypeHandler;
 import net.dries007.tfc.api.types.food.category.FoodCategoryHandler;
-import net.dries007.tfc.api.types.food.type.FoodTypeHandler;
+import net.dries007.tfc.api.types.food.type.FoodVariantHandler;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariantHandler;
 import net.dries007.tfc.api.types.plant.type.PlantTypeHandler;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
@@ -112,7 +112,7 @@ public class CommonProxy {
         WoodBlockVariantHandler.init();
 
         FoodCategoryHandler.init();
-        FoodTypeHandler.init();
+        FoodVariantHandler.init();
 
         //PlantCategoryHandler.init();
         PlantTypeHandler.init();

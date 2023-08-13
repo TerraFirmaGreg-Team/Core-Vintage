@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
-import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.food.type.FoodVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemFood;
@@ -20,10 +20,10 @@ import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
-    private static final Map<FoodType, ItemFoodTFC> MAP = new HashMap<>();
-    protected final FoodType foodOld;
+    private static final Map<FoodVariant, ItemFoodTFC> MAP = new HashMap<>();
+    protected final FoodVariant foodOld;
 
-    public ItemFoodTFC(@Nonnull FoodType foodOld) {
+    public ItemFoodTFC(@Nonnull FoodVariant foodOld) {
         super(0, 0, foodOld.getFoodCategory() == FoodCategories.MEAT || foodOld.getFoodCategory() == FoodCategories.COOKED_MEAT);
         this.foodOld = foodOld;
         if (MAP.put(foodOld, this) != null) {
@@ -39,11 +39,11 @@ public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
         }
     }
 
-    public static ItemFoodTFC get(FoodType foodOld) {
+    public static ItemFoodTFC get(FoodVariant foodOld) {
         return MAP.get(foodOld);
     }
 
-    public static ItemStack get(FoodType foodOld, int amount) {
+    public static ItemStack get(FoodVariant foodOld, int amount) {
         return new ItemStack(MAP.get(foodOld), amount);
     }
 

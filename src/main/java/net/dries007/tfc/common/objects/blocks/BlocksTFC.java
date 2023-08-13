@@ -118,7 +118,7 @@ public final class BlocksTFC {
             Builder<BlockBerryBush> fBerry = ImmutableList.builder();
 
             for (BerryBush bush : BerryBush.values()) {
-                fBerry.add(register(r, "berry_bush/" + bush.name().toLowerCase(), new BlockBerryBush(bush), CreativeTabsTFC.FOOD));
+                fBerry.add(register(r, "berry_bush/" + bush.name().toLowerCase(), new BlockBerryBush(bush), CreativeTabsTFC.FLORA));
             }
 
             allBerryBushBlocks = fBerry.build();

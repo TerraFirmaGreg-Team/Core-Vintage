@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types.bush;
 
-import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.api.types.food.type.FoodTypes;
+import net.dries007.tfc.api.types.food.type.FoodVariant;
+import net.dries007.tfc.api.types.food.type.FoodVariants;
 import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -10,17 +10,17 @@ import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
 import net.minecraft.item.ItemStack;
 
 public enum BerryBush implements IBerryBush {
-    BLACKBERRY(FoodTypes.BLACKBERRY, Month.MAY, 4, 7f, 20f, 100f, 400f, 0.8f, Size.LARGE, true),
-    BLUEBERRY(FoodTypes.BLUEBERRY, Month.JUNE, 3, 7f, 25f, 100f, 400f, 0.8f, Size.LARGE, false),
-    BUNCH_BERRY(FoodTypes.BUNCH_BERRY, Month.JUNE, 3, 15f, 30f, 100f, 400f, 0.8f, Size.SMALL, false),
-    CLOUD_BERRY(FoodTypes.CLOUD_BERRY, Month.JUNE, 2, 3f, 17f, 100f, 400f, 0.8f, Size.MEDIUM, false),
-    CRANBERRY(FoodTypes.CRANBERRY, Month.AUGUST, 3, 1f, 19f, 100f, 400f, 0.8f, Size.MEDIUM, false),
-    ELDERBERRY(FoodTypes.ELDERBERRY, Month.JULY, 2, 10f, 29f, 100f, 400f, 0.8f, Size.LARGE, false),
-    GOOSEBERRY(FoodTypes.GOOSEBERRY, Month.MARCH, 4, 5f, 27f, 100f, 400f, 0.8f, Size.MEDIUM, false),
-    RASPBERRY(FoodTypes.RASPBERRY, Month.JUNE, 2, 5f, 20f, 100f, 400f, 0.8f, Size.LARGE, true),
-    SNOW_BERRY(FoodTypes.SNOW_BERRY, Month.JULY, 2, -5f, 18f, 100f, 400f, 0.8f, Size.SMALL, false),
-    STRAWBERRY(FoodTypes.STRAWBERRY, Month.MARCH, 3, 5f, 28f, 100f, 400f, 0.8f, Size.SMALL, false),
-    WINTERGREEN_BERRY(FoodTypes.WINTERGREEN_BERRY, Month.AUGUST, 2, -5f, 17f, 100f, 400f, 0.8f, Size.SMALL, false);
+    BLACKBERRY(FoodVariants.BLACKBERRY, Month.MAY, 4, 7f, 20f, 100f, 400f, 0.8f, Size.LARGE, true),
+    BLUEBERRY(FoodVariants.BLUEBERRY, Month.JUNE, 3, 7f, 25f, 100f, 400f, 0.8f, Size.LARGE, false),
+    BUNCH_BERRY(FoodVariants.BUNCH_BERRY, Month.JUNE, 3, 15f, 30f, 100f, 400f, 0.8f, Size.SMALL, false),
+    CLOUD_BERRY(FoodVariants.CLOUD_BERRY, Month.JUNE, 2, 3f, 17f, 100f, 400f, 0.8f, Size.MEDIUM, false),
+    CRANBERRY(FoodVariants.CRANBERRY, Month.AUGUST, 3, 1f, 19f, 100f, 400f, 0.8f, Size.MEDIUM, false),
+    ELDERBERRY(FoodVariants.ELDERBERRY, Month.JULY, 2, 10f, 29f, 100f, 400f, 0.8f, Size.LARGE, false),
+    GOOSEBERRY(FoodVariants.GOOSEBERRY, Month.MARCH, 4, 5f, 27f, 100f, 400f, 0.8f, Size.MEDIUM, false),
+    RASPBERRY(FoodVariants.RASPBERRY, Month.JUNE, 2, 5f, 20f, 100f, 400f, 0.8f, Size.LARGE, true),
+    SNOW_BERRY(FoodVariants.SNOW_BERRY, Month.JULY, 2, -5f, 18f, 100f, 400f, 0.8f, Size.SMALL, false),
+    STRAWBERRY(FoodVariants.STRAWBERRY, Month.MARCH, 3, 5f, 28f, 100f, 400f, 0.8f, Size.SMALL, false),
+    WINTERGREEN_BERRY(FoodVariants.WINTERGREEN_BERRY, Month.AUGUST, 2, -5f, 17f, 100f, 400f, 0.8f, Size.SMALL, false);
 
     static {
         for (IBerryBush bush : values()) {
@@ -28,7 +28,7 @@ public enum BerryBush implements IBerryBush {
         }
     }
 
-    private final FoodType fruit;
+    private final FoodVariant fruit;
     private final Month harvestMonthStart;
     private final int harvestingMonths;
     private final float growthTime;
@@ -39,7 +39,7 @@ public enum BerryBush implements IBerryBush {
     private final Size size;
     private final boolean hasSpikes;
 
-    BerryBush(FoodType fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, Size size, boolean spiky) {
+    BerryBush(FoodVariant fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, Size size, boolean spiky) {
         this.fruit = fruit;
         this.harvestMonthStart = harvestMonthStart;
         this.harvestingMonths = harvestingMonths;
@@ -54,7 +54,7 @@ public enum BerryBush implements IBerryBush {
         this.hasSpikes = spiky;
     }
 
-    public FoodType getFruit() {
+    public FoodVariant getFruit() {
         return this.fruit;
     }
 

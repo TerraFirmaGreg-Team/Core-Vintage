@@ -9,7 +9,7 @@ import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.category.FoodCategory;
-import net.dries007.tfc.api.types.food.type.FoodTypes;
+import net.dries007.tfc.api.types.food.type.FoodVariants;
 import net.dries007.tfc.common.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
@@ -242,7 +242,7 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
                                     }
                                 }
 
-                                soupContents = new FoodData(4, water, saturation, nutrition, FoodTypes.SOUP_GRAIN.getData().getDecayModifier());
+                                soupContents = new FoodData(4, water, saturation, nutrition, FoodVariants.SOUP_GRAIN.getData().getDecayModifier());
                                 soupServings = (int) (ingredientCount / 2f) + 1;
                                 soupNutrient = maxNutrient; // the max nutrient determines the item you get
                                 soupCreationDate = CapabilityFood.getRoundedCreationDate();
@@ -690,15 +690,15 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
     private Item getSoupItem() {
         switch (soupNutrient) {
             case GRAIN:
-                return ItemFoodTFC.get(FoodTypes.SOUP_GRAIN);
+                return ItemFoodTFC.get(FoodVariants.SOUP_GRAIN);
             case VEGETABLES:
-                return ItemFoodTFC.get(FoodTypes.SOUP_VEGETABLE);
+                return ItemFoodTFC.get(FoodVariants.SOUP_VEGETABLE);
             case FRUIT:
-                return ItemFoodTFC.get(FoodTypes.SOUP_FRUIT);
+                return ItemFoodTFC.get(FoodVariants.SOUP_FRUIT);
             case PROTEIN:
-                return ItemFoodTFC.get(FoodTypes.SOUP_MEAT);
+                return ItemFoodTFC.get(FoodVariants.SOUP_MEAT);
             default:
-                return ItemFoodTFC.get(FoodTypes.SOUP_DAIRY);
+                return ItemFoodTFC.get(FoodVariants.SOUP_DAIRY);
         }
     }
 

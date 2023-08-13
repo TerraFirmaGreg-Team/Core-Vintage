@@ -34,7 +34,7 @@ public class FoodCategory {
      *
      * @return Набор всех категорий еды.
      */
-    public static Set<FoodCategory> getAllFoodCategories() {
+    public static Set<FoodCategory> getFoodCategories() {
         return FOOD_CATEGORY;
     }
 

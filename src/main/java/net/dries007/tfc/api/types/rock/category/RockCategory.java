@@ -13,7 +13,7 @@ import java.util.function.Predicate;
  * Класс, представляющий категорию породы.
  */
 public class RockCategory {
-    private static final Set<RockCategory> ROCK_CATEGORY = new LinkedHashSet<>();
+    private static final Set<RockCategory> ROCK_CATEGORIES = new LinkedHashSet<>();
 
     private final String name;
     private final boolean layer1;
@@ -56,7 +56,7 @@ public class RockCategory {
             throw new RuntimeException(String.format("RockCategory name must contain any character: [%s]", name));
         }
 
-        if (!ROCK_CATEGORY.add(this)) {
+        if (!ROCK_CATEGORIES.add(this)) {
             throw new RuntimeException(String.format("RockCategory: [%s] already exists!", name));
         }
     }
@@ -66,8 +66,8 @@ public class RockCategory {
      *
      * @return Набор всех категорий пород.
      */
-    public static Set<RockCategory> getAllRockCategories() {
-        return ROCK_CATEGORY;
+    public static Set<RockCategory> getRockCategories() {
+        return ROCK_CATEGORIES;
     }
 
     /**

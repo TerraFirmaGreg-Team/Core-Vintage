@@ -46,7 +46,7 @@ public class FoodType {
      *
      * @return Набор всех типов еды.
      */
-    public static Set<FoodType> getAllFoodTypes() {
+    public static Set<FoodType> getFoodTypes() {
         return FOOD_TYPES;
     }
 

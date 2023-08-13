@@ -47,7 +47,7 @@ public class RockBlockVariant {
      *
      * @return Набор всех типов блоков породы.
      */
-    public static Set<RockBlockVariant> getAllRockTypes() {
+    public static Set<RockBlockVariant> getRockBlockVariants() {
         return ROCK_BLOCK_VARIANTS;
     }
 

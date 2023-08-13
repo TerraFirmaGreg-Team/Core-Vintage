@@ -229,7 +229,7 @@ public final class ItemsTFC {
 //        simpleItems.add(register(r, "crop/product/burlap_cloth", new ItemMisc(Size.SMALL, Weight.VERY_LIGHT), MISC));
 
         // All simple foods (not meals) just use ItemFood and are registered here
-        for (FoodType foodOld : FoodType.getAllFoodTypes()) {
+        for (FoodType foodOld : FoodType.getFoodTypes()) {
             if (foodOld.getFoodCategory() != FoodCategories.MEAL) {
                 simpleItems.add(register(r, "food/" + foodOld.toString().toLowerCase(), new ItemFoodTFC(foodOld), FOOD));
             }

@@ -64,7 +64,7 @@ public class TFCBlocks {
 
         //=== Rock ===================================================================================================//
 
-        for (var rockBlockVariant : RockBlockVariant.getAllRockTypes()) {
+        for (var rockBlockVariant : RockBlockVariant.getRockBlockVariants()) {
             for (var rockType : RockType.getRockTypes()) {
                 var rockTypeBlock = rockBlockVariant.applyToFactory(rockType);
 

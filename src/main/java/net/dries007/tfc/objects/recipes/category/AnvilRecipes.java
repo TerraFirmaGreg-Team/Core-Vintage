@@ -29,7 +29,7 @@ import static net.dries007.tfc.util.skills.SmithingSkill.Type.*;
 
 public class AnvilRecipes {
 
-    public static void registerAnvilRecipes() {
+    public static void register() {
         var registry = TFCRegistries.ANVIL;
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {

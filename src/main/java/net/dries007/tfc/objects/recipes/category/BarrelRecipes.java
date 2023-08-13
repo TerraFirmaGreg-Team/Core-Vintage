@@ -26,7 +26,7 @@ import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
 
 public class BarrelRecipes {
 
-    public static void registerBarrelRecipes() {
+    public static void register() {
         var registry = TFCRegistries.BARREL;
 
         registry.registerAll(

@@ -1,19 +1,15 @@
-package net.dries007.tfc.types;
+package net.dries007.tfc.objects.recipes.category;
 
 import gregtech.api.unification.material.Materials;
 import net.dries007.tfc.api.recipes.AlloyRecipe;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+public class AlloyRecipes {
+    public static void register() {
+        var registry = TFCRegistries.ALLOYS;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
-public final class DefaultAlloys {
-    @SubscribeEvent
-    public static void onRegisterAlloyRecipe(RegistryEvent.Register<AlloyRecipe> event) {
-        event.getRegistry().registerAll(
+        registry.registerAll(
                 new AlloyRecipe
                         .Builder(Materials.BismuthBronze)
                         .add(Materials.Zinc, 0.2, 0.3)

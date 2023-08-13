@@ -7,7 +7,7 @@ import net.dries007.tfc.util.fuel.FuelManager;
 
 public class BloomeryRecipes {
 
-    public static void registerBloomeryRecipes() {
+    public static void register() {
         var registry = TFCRegistries.BLOOMERY;
 
         registry.registerAll(

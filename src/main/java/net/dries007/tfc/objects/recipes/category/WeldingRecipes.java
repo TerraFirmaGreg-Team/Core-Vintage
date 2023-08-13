@@ -17,7 +17,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class WeldingRecipes {
 
-    public static void registerWeldingRecipes() {
+    public static void register() {
         var registry = TFCRegistries.WELDING;
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {

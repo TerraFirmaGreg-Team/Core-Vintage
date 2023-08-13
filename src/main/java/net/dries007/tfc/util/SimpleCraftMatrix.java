@@ -1,6 +1,7 @@
 package net.dries007.tfc.util;
 
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.objects.recipes.RecipeHandler;
 
 import java.util.Arrays;
 
@@ -38,7 +39,7 @@ public class SimpleCraftMatrix {
 
     /**
      * Create a patterned matrix based on a string pattern input.
-     * See {@link net.dries007.tfc.types.DefaultRecipes} for usage of how to construct recipes
+     * See {@link RecipeHandler} for usage of how to construct recipes
      *
      * @param outsideSlotRequired If the recipe is smaller than MAX_WIDTH x MAX_HEIGHT, what is the slot outside of the recipe required to be?
      *                            true = outside slots need to be full

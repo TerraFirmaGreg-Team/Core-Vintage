@@ -8,7 +8,7 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 public class BlastFurnaceRecipes {
 
-    public static void registerBlastFurnaceRecipes() {
+    public static void register() {
         var registry = TFCRegistries.BLAST_FURNACE;
 
         registry.registerAll(

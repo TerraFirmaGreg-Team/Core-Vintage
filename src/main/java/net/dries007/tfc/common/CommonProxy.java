@@ -21,13 +21,11 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.api.types.agriculture.crop.category.CropCategory;
 import net.dries007.tfc.api.types.agriculture.crop.category.CropCategoryHandler;
 import net.dries007.tfc.api.types.agriculture.crop.type.CropTypeHandler;
 import net.dries007.tfc.api.types.food.category.FoodCategoryHandler;
 import net.dries007.tfc.api.types.food.type.FoodTypeHandler;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariantHandler;
-import net.dries007.tfc.api.types.metal.variant.MetalBlockVariants;
 import net.dries007.tfc.api.types.plant.type.PlantTypeHandler;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
 import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
@@ -55,7 +53,7 @@ import net.dries007.tfc.objects.commands.*;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.TFCItems;
 import net.dries007.tfc.objects.te.*;
-import net.dries007.tfc.types.DefaultRecipes;
+import net.dries007.tfc.objects.recipes.RecipeHandler;
 import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
@@ -157,7 +155,7 @@ public class CommonProxy {
         CapabilityMetalItem.init();
         CapabilityForgeable.init();
 
-        DefaultRecipes.init();
+        RecipeHandler.init();
     }
 
     public void onPostInit(FMLPostInitializationEvent event) {

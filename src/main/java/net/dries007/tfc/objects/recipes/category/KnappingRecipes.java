@@ -19,7 +19,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class KnappingRecipes {
 
-    public static void registerKnappingRecipes() {
+    public static void register() {
         var registry = TFCRegistries.KNAPPING;
 
         /* ROCK ITEMS */

@@ -2,24 +2,19 @@ package net.dries007.tfc.objects.recipes.category;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.recipes.ModHandler;
-import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.loaders.recipe.handlers.OreRecipeHandler;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
-import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.recipes.UnmoldRecipe;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
 
@@ -27,7 +22,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class WorkbenchRecipes {
 
-    public static void onRegisterWorkbenchRecipes() {
+    public static void register() {
         registerUnmoldRecipes();
         registerWoodRecipes();
     }

@@ -24,7 +24,7 @@ import net.minecraft.item.ItemStack;
 
 public class HeatRecipes {
 
-    public static void registerHeatRecipes() {
+    public static void register() {
         var registry = TFCRegistries.HEAT;
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {

@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
 
 public class QuernRecipes {
 
-    public static void registerQuernRecipes() {
+    public static void register() {
         var registry = TFCRegistries.QUERN;
 
         registry.registerAll(

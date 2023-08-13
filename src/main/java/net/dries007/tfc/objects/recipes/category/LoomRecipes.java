@@ -4,7 +4,7 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 
 public class LoomRecipes {
 
-    public static void registerLoomRecipes() {
+    public static void register() {
         var registry = TFCRegistries.LOOM;
 
 //        registry.registerAll(

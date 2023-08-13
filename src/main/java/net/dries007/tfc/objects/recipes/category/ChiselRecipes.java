@@ -12,7 +12,7 @@ import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.SMOOTH;
 
 public class ChiselRecipes {
 
-    public static void registerChiselRecipes() {
+    public static void register() {
         var registry = TFCRegistries.CHISEL;
 
         // Rock smoothing

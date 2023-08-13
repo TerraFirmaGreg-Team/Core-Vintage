@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.util;
 
-import net.dries007.tfc.common.objects.te.TEBellows;
+import net.dries007.tfc.common.objects.tileentities.TEBellows;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;

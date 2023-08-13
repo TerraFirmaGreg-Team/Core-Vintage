@@ -1,11 +1,10 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.api.types.animal.IHuntable;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.items.ItemsTFC;
+import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.block.Block;
@@ -16,12 +15,15 @@ import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -113,9 +115,10 @@ public class EntityGazelleTFC extends EntityAnimalMammal implements IHuntable {
         double speedMult = 1.4D;
         EntityAnimalTFC.addWildPreyAI(this, speedMult);
         EntityAnimalTFC.addCommonPreyAI(this, speedMult);
-
-        this.tasks.addTask(3, new EntityAITempt(this, 1.1D, ItemsTFC.SALT, false));
-
+        for (ItemStack is : OreDictionary.getOres("dustSult")) {
+            Item item = is.getItem();
+            this.tasks.addTask(3, new EntityAITempt(this, 1.1D, item, false));
+        }
         this.tasks.addTask(5, new EntityAIFollowParent(this, 1.0D));
         this.tasks.addTask(6, new EntityAIEatGrass(this));
     }

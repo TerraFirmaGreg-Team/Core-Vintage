@@ -9,7 +9,7 @@ import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.common.objects.te.TELoom;
+import net.dries007.tfc.common.objects.tileentities.TELoom;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockContainer;

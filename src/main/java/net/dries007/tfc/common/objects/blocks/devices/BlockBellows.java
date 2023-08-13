@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.blocks.devices;
 
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.te.TEBellows;
+import net.dries007.tfc.common.objects.tileentities.TEBellows;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

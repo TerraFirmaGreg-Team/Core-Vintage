@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
-import net.dries007.tfc.common.objects.te.TETickCounter;
+import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.common.objects.advancements.TFCTriggers;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;

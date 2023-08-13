@@ -15,7 +15,7 @@ import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.render.*;
-import net.dries007.tfc.common.objects.te.*;
+import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.common.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;

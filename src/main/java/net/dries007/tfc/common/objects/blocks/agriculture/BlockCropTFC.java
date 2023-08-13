@@ -7,7 +7,7 @@ import net.dries007.tfc.api.types.crop.CropBlock;
 import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.common.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.common.objects.te.TECropBase;
+import net.dries007.tfc.common.objects.tileentities.TECropBase;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;

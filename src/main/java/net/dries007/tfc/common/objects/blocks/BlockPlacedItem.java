@@ -1,8 +1,8 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.te.TEPitKiln;
-import net.dries007.tfc.common.objects.te.TEPlacedItem;
+import net.dries007.tfc.common.objects.tileentities.TEPitKiln;
+import net.dries007.tfc.common.objects.tileentities.TEPlacedItem;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;

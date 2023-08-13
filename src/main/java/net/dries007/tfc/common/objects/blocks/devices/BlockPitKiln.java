@@ -5,7 +5,7 @@ import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.BlockPlacedItem;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
-import net.dries007.tfc.common.objects.te.TEPitKiln;
+import net.dries007.tfc.common.objects.tileentities.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

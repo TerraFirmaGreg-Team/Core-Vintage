@@ -3,7 +3,6 @@ package net.dries007.tfc.common.objects.items;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -12,7 +11,6 @@ import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.variant.FoodVariant;
 import net.dries007.tfc.api.types.food.variant.FoodVariants;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.Powder;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.common.objects.items.ceramics.*;
 import net.dries007.tfc.common.objects.items.food.ItemDynamicBowlFood;
@@ -22,6 +20,7 @@ import net.dries007.tfc.common.objects.items.itemblock.ItemBlockTorch;
 import net.dries007.tfc.common.objects.items.metal.ItemMetalBucket;
 import net.dries007.tfc.common.objects.items.wood.ItemWoodBucket;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -91,8 +90,6 @@ public final class ItemsTFC {
     @GameRegistry.ObjectHolder("ceramics/unfired/crucible")
     public static final ItemPottery UNFIRED_CRUCIBLE = getNull();
 
-    @GameRegistry.ObjectHolder("powder/salt")
-    public static final ItemPowder SALT = getNull();
 
     public static final ItemWoodBucket WOODEN_BUCKET = getNull();
 
@@ -166,21 +163,6 @@ public final class ItemsTFC {
 
         BlocksTFC.getAllNormalItemBlocks().forEach(x -> registerItemBlock(r, x));
         BlocksTFC.getAllInventoryItemBlocks().forEach(x -> registerItemBlock(r, x));
-
-        for (Powder powder : Powder.values())
-            simpleItems.add(register(r, "powder/" + powder.name().toLowerCase(), new ItemPowder(powder), CreativeTabsTFC.MISC));
-
-        // METAL
-        {
-//            for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
-//                if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL)) {
-//                    simpleItems.add(register(r, "metal/anvil/" + material.getName(), new ItemMetalAnvil(material), METAL));
-//                }
-//
-////                if (material == Materials.Iron)
-////                    simpleItems.add(register(r, "metal/cladding/" + material.getName(), new ItemMetalCladding(material), METAL));
-//            }
-        }
 
         // POTTERY
         Builder<ItemMold> clayMolds = ImmutableList.builder();

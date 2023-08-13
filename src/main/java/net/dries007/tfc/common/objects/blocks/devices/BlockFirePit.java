@@ -8,8 +8,8 @@ import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.advancements.TFCTriggers;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.items.TFCItems;
-import net.dries007.tfc.common.objects.te.TEBellows;
-import net.dries007.tfc.common.objects.te.TEFirePit;
+import net.dries007.tfc.common.objects.tileentities.TEBellows;
+import net.dries007.tfc.common.objects.tileentities.TEFirePit;
 
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.common.objects.te.TELargeVessel;
+import net.dries007.tfc.common.objects.tileentities.TELargeVessel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 

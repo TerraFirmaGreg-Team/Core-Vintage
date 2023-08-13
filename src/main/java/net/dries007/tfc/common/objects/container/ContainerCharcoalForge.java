@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.container;
 
-import net.dries007.tfc.common.objects.te.TECharcoalForge;
+import net.dries007.tfc.common.objects.tileentities.TECharcoalForge;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;

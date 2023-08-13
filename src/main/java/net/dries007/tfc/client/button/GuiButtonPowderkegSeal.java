@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.common.objects.te.TEPowderKeg;
+import net.dries007.tfc.common.objects.tileentities.TEPowderKeg;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 

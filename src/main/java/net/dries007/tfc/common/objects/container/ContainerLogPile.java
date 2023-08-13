@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.container;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.common.objects.te.TELogPile;
+import net.dries007.tfc.common.objects.tileentities.TELogPile;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

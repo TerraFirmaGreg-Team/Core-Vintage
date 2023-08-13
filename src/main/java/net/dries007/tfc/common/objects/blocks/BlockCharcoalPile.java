@@ -4,7 +4,7 @@ import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
-import net.dries007.tfc.common.objects.te.TECharcoalForge;
+import net.dries007.tfc.common.objects.tileentities.TECharcoalForge;
 import net.dries007.tfc.common.objects.advancements.TFCTriggers;
 import net.dries007.tfc.common.objects.blocks.devices.BlockCharcoalForge;
 import net.dries007.tfc.util.Helpers;

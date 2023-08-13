@@ -2,7 +2,7 @@ package net.dries007.tfc.common.objects.blocks;
 
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
-import net.dries007.tfc.common.objects.te.TEPlacedHide;
+import net.dries007.tfc.common.objects.tileentities.TEPlacedHide;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;

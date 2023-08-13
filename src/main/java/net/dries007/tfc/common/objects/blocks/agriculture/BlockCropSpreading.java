@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.blocks.agriculture;
 
 import net.dries007.tfc.api.types.crop.ICropBlock;
-import net.dries007.tfc.common.objects.te.TECropSpreading;
+import net.dries007.tfc.common.objects.tileentities.TECropSpreading;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;

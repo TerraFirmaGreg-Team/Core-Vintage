@@ -1,8 +1,8 @@
 package net.dries007.tfc.common.objects.items.itemblock;
 
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.te.TELogPile;
-import net.dries007.tfc.common.objects.te.TEPitKiln;
+import net.dries007.tfc.common.objects.tileentities.TELogPile;
+import net.dries007.tfc.common.objects.tileentities.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

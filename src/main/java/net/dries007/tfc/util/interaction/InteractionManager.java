@@ -5,7 +5,7 @@ import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.common.objects.te.TELogPile;
+import net.dries007.tfc.common.objects.tileentities.TELogPile;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;

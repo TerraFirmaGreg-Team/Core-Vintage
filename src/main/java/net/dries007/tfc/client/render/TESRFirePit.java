@@ -3,7 +3,7 @@ package net.dries007.tfc.client.render;
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.common.objects.blocks.devices.BlockFirePit;
 
-import net.dries007.tfc.common.objects.te.TEFirePit;
+import net.dries007.tfc.common.objects.tileentities.TEFirePit;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -25,8 +25,8 @@ import org.lwjgl.opengl.GL11;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.common.objects.te.TEFirePit.SLOT_EXTRA_INPUT_END;
-import static net.dries007.tfc.common.objects.te.TEFirePit.SLOT_EXTRA_INPUT_START;
+import static net.dries007.tfc.common.objects.tileentities.TEFirePit.SLOT_EXTRA_INPUT_END;
+import static net.dries007.tfc.common.objects.tileentities.TEFirePit.SLOT_EXTRA_INPUT_START;
 
 /**
  * Render water in the cooking pot

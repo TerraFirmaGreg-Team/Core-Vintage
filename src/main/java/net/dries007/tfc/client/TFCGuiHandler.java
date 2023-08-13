@@ -5,7 +5,7 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodChest;
 import net.dries007.tfc.common.objects.container.*;
-import net.dries007.tfc.common.objects.te.*;
+import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.common.objects.items.ItemQuiver;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.common.objects.items.ceramics.ItemSmallVessel;

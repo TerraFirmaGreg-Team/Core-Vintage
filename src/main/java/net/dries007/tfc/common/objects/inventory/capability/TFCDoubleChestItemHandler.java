@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.inventory.capability;
 
-import net.dries007.tfc.common.objects.te.TEChestTFC;
+import net.dries007.tfc.common.objects.tileentities.TEChestTFC;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

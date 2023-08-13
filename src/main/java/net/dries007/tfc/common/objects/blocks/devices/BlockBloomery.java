@@ -8,7 +8,7 @@ import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.advancements.TFCTriggers;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
-import net.dries007.tfc.common.objects.te.TEBloomery;
+import net.dries007.tfc.common.objects.tileentities.TEBloomery;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.block.Multiblock;
 import net.minecraft.block.BlockHorizontal;

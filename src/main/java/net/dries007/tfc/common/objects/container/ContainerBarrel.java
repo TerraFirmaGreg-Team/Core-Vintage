@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.container;
 
-import net.dries007.tfc.common.objects.te.TEBarrel;
+import net.dries007.tfc.common.objects.tileentities.TEBarrel;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBarrel;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
 import net.minecraft.entity.player.InventoryPlayer;

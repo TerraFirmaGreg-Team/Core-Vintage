@@ -7,7 +7,7 @@ import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.objects.blocks.BlockTorchTFC;
-import net.dries007.tfc.common.objects.te.TETickCounter;
+import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

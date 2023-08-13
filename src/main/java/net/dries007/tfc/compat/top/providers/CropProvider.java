@@ -9,7 +9,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.common.objects.te.TECropBase;
+import net.dries007.tfc.common.objects.tileentities.TECropBase;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;

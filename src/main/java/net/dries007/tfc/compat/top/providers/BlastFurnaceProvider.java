@@ -7,7 +7,7 @@ import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.common.objects.blocks.devices.BlockBlastFurnace;
-import net.dries007.tfc.common.objects.te.TEBlastFurnace;
+import net.dries007.tfc.common.objects.tileentities.TEBlastFurnace;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

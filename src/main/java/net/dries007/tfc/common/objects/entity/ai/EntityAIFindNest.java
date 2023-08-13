@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.entity.ai;
 
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
-import net.dries007.tfc.common.objects.te.TENestBox;
+import net.dries007.tfc.common.objects.tileentities.TENestBox;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.entity.ai.EntityAIBase;

@@ -2,8 +2,8 @@ package net.dries007.tfc.network;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.te.TEPlacedItem;
-import net.dries007.tfc.common.objects.te.TEPlacedItemFlat;
+import net.dries007.tfc.common.objects.tileentities.TEPlacedItem;
+import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types.bush;
 
-import net.dries007.tfc.api.types.food.type.FoodVariant;
-import net.dries007.tfc.api.types.food.type.FoodVariants;
+import net.dries007.tfc.api.types.food.variant.FoodVariant;
+import net.dries007.tfc.api.types.food.variant.FoodVariants;
 import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;

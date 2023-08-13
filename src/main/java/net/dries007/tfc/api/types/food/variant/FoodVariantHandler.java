@@ -1,7 +1,7 @@
-package net.dries007.tfc.api.types.food.type;
+package net.dries007.tfc.api.types.food.variant;
 
 import static net.dries007.tfc.api.types.food.category.FoodCategories.*;
-import static net.dries007.tfc.api.types.food.type.FoodVariants.*;
+import static net.dries007.tfc.api.types.food.variant.FoodVariants.*;
 
 public class FoodVariantHandler {
 

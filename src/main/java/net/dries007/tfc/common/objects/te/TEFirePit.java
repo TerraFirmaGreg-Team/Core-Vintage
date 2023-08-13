@@ -9,7 +9,7 @@ import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.category.FoodCategory;
-import net.dries007.tfc.api.types.food.type.FoodVariants;
+import net.dries007.tfc.api.types.food.variant.FoodVariants;
 import net.dries007.tfc.common.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;

@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.food.type;
+package net.dries007.tfc.api.types.food.variant;
 
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.types.food.category.FoodCategory;

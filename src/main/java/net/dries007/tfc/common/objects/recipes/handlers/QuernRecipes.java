@@ -2,7 +2,7 @@ package net.dries007.tfc.common.objects.recipes.handlers;
 
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.food.type.FoodVariants;
+import net.dries007.tfc.api.types.food.variant.FoodVariants;
 import net.dries007.tfc.common.objects.Powder;
 import net.dries007.tfc.common.objects.items.ItemPowder;
 import net.dries007.tfc.common.objects.items.ItemsTFC;

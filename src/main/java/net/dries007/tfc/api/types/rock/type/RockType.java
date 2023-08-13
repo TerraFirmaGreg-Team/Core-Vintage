@@ -10,7 +10,8 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.function.Supplier;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * Основной класс для типов камней.
@@ -24,9 +25,9 @@ public class RockType {
     @Nonnull
     private final RockCategory rockCategory;
     @Nonnull
-    private final OrePrefix associatedOrePrefix;
+    private final OrePrefix orePrefix;
     @Nonnull
-    private final Material associatedMaterial;
+    private final Material material;
     private final boolean isFlux;
 
     /**
@@ -34,15 +35,15 @@ public class RockType {
      *
      * @param name Название породы.
      * @param rockCategory Категория породы.
-     * @param associatedOrePrefix Орпрефикс для типа породы, для использования в стоунтайпах.
-     * @param associatedMaterial Материал для типа породы, для использования в стоунтайпах.
+     * @param orePrefix Орпрефикс для типа породы, для использования в стоунтайпах.
+     * @param material Материал для типа породы, для использования в стоунтайпах.
      * @param isFlux Флаг, указывающий, является ли порода флюсом.
      */
-    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull OrePrefix associatedOrePrefix, @Nonnull Material associatedMaterial, boolean isFlux) {
+    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull OrePrefix orePrefix, @Nonnull Material material, boolean isFlux) {
         this.name = name;
         this.rockCategory = rockCategory;
-        this.associatedOrePrefix = associatedOrePrefix;
-        this.associatedMaterial = associatedMaterial;
+        this.orePrefix = orePrefix;
+        this.material = material;
         this.isFlux = isFlux;
 
         if (name.isEmpty()) {
@@ -59,11 +60,11 @@ public class RockType {
      *
      * @param name Название породы.
      * @param rockCategory Категория породы.
-     * @param associatedOrePrefix Орпрефикс для типа породы, для использования в стоунтайпах.
-     * @param associatedMaterial Материал для типа породы, для использования в стоунтайпах.
+     * @param orePrefix Орпрефикс для типа породы, для использования в стоунтайпах.
+     * @param material Материал для типа породы, для использования в стоунтайпах.
      */
-    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull OrePrefix associatedOrePrefix, @Nonnull Material associatedMaterial) {
-        this(name, rockCategory, associatedOrePrefix, associatedMaterial, false);
+    public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull OrePrefix orePrefix, @Nonnull Material material) {
+        this(name, rockCategory, orePrefix, material, false);
     }
 
     /**
@@ -124,8 +125,8 @@ public class RockType {
      * @return ОрПрефикс породы.
      */
     @Nonnull
-    public OrePrefix getAssociatedOrePrefix() {
-        return associatedOrePrefix;
+    public OrePrefix getOrePrefix() {
+        return orePrefix;
     }
 
     /**
@@ -134,8 +135,8 @@ public class RockType {
      * @return Материал породы.
      */
     @Nonnull
-    public Material getAssociatedMaterial() {
-        return associatedMaterial;
+    public Material getMaterial() {
+        return material;
     }
 
     /**
@@ -154,6 +155,6 @@ public class RockType {
      */
     @Nonnull
     public ResourceLocation getTexture() {
-        return new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/blocks/rock/raw/" + this + ".png");
+        return new ResourceLocation(MOD_ID, "textures/blocks/rock/raw/" + this + ".png");
     }
 }

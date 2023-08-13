@@ -17,7 +17,7 @@ public class StoneTypeHandler {
 
         for (var rockType : RockType.getRockTypes()) {
             new StoneType(
-                    counter, "tfc_" + rockType.toString(), SoundType.STONE, rockType.getAssociatedOrePrefix(), rockType.getAssociatedMaterial(),
+                    counter, "tfc_" + rockType.toString(), SoundType.STONE, rockType.getOrePrefix(), rockType.getMaterial(),
                     () -> TFCStorage.getRockBlock(RockBlockVariants.RAW, rockType).getDefaultState(),
                     state -> state.getBlock() == TFCStorage.getRockBlock(RockBlockVariants.RAW, rockType),
                     false

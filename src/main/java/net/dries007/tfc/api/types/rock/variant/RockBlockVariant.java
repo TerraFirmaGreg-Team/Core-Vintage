@@ -61,14 +61,20 @@ public class RockBlockVariant {
         return name;
     }
 
+    /**
+     * Возвращает базовую твердость блока породы.
+     *
+     * @return Базовая твердость блока породы.
+     */
     public float getBaseHardness() {
         return baseHardness;
     }
 
     /**
-     * Возвращает карту вариантов блоков породы и соответствующих функций-фабрик.
+     * Применяет функцию-фабрику к типу блока породы и возвращает созданный блок породы.
      *
-     * @return Карта вариантов блоков породы и соответствующих функций-фабрик.
+     * @param rockType Тип породы.
+     * @return Созданный блок породы.
      */
     @Nonnull
     public IRockBlock applyToFactory(RockType rockType) {

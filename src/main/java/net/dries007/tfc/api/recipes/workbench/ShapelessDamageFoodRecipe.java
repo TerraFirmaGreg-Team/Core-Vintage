@@ -1,9 +1,10 @@
-package net.dries007.tfc.objects.recipes;
+package net.dries007.tfc.api.recipes.workbench;
 
 import com.google.gson.JsonObject;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.items.TFCItems;
+import net.dries007.tfc.objects.recipes.RecipeUtils;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;

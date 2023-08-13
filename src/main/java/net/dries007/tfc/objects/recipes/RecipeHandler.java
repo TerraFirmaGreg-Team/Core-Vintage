@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.recipes;
 
-import net.dries007.tfc.objects.recipes.category.*;
+import net.dries007.tfc.objects.recipes.handlers.*;
 
 public final class RecipeHandler {
 

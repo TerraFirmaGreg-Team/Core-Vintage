@@ -1,11 +1,12 @@
-package net.dries007.tfc.objects.recipes;
+package net.dries007.tfc.api.recipes;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.util.skills.SmithingSkill;
+import net.dries007.tfc.objects.recipes.RecipeUtils;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.JsonUtils;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
@@ -14,36 +15,25 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import javax.annotation.Nonnull;
 
-public class ShapedSkillRecipe extends ShapedOreRecipe {
-    private ShapedSkillRecipe(ResourceLocation group, @Nonnull ItemStack result, CraftingHelper.ShapedPrimer primer) {
+@SuppressWarnings("unused")
+public class NoContainerItemShapedRecipe extends ShapedOreRecipe {
+    private NoContainerItemShapedRecipe(ResourceLocation group, @Nonnull ItemStack result, CraftingHelper.ShapedPrimer primer) {
         super(group, result, primer);
     }
 
     @Nonnull
     @Override
-    public ItemStack getCraftingResult(@Nonnull InventoryCrafting inventory) {
-        for (int i = 0; i < inventory.getSizeInventory(); i++) {
-            ItemStack inputStack = inventory.getStackInSlot(i);
-            float skillBonus = SmithingSkill.getSkillBonus(inputStack);
-            if (skillBonus > 0) {
-                ItemStack outputStack = super.getCraftingResult(inventory);
-                SmithingSkill.copySkillBonus(outputStack, inputStack);
-                return outputStack;
-            }
-        }
-        return super.getCraftingResult(inventory);
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
+        return NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
     }
 
-    @SuppressWarnings("unused")
     public static class Factory implements IRecipeFactory {
         @Override
         public IRecipe parse(final JsonContext context, final JsonObject json) {
             String group = JsonUtils.getString(json, "group", "");
-
             CraftingHelper.ShapedPrimer primer = RecipeUtils.parsePhaped(context, json);
-
             ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
-            return new ShapedSkillRecipe(group.isEmpty() ? null : new ResourceLocation(group), result, primer);
+            return new NoContainerItemShapedRecipe(group.isEmpty() ? null : new ResourceLocation(group), result, primer);
         }
     }
 }

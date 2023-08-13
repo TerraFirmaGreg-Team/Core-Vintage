@@ -6,7 +6,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.recipes.SaltingRecipe;
+import net.dries007.tfc.api.recipes.workbench.SaltingRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 

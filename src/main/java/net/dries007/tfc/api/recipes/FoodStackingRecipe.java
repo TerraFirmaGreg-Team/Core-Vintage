@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.recipes;
+package net.dries007.tfc.api.recipes;
 
 import com.google.gson.JsonObject;
 import net.dries007.tfc.api.capability.food.CapabilityFood;

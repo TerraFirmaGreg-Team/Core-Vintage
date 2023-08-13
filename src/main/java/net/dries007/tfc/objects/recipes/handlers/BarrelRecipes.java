@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.recipes.category;
+package net.dries007.tfc.objects.recipes.handlers;
 
 
 import net.dries007.tfc.api.recipes.barrel.*;

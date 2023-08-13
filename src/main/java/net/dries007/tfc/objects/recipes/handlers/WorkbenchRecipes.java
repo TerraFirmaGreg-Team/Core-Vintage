@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.recipes.category;
+package net.dries007.tfc.objects.recipes.handlers;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.recipes.ModHandler;
@@ -10,7 +10,7 @@ import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
-import net.dries007.tfc.objects.recipes.UnmoldRecipe;
+import net.dries007.tfc.api.recipes.workbench.UnmoldRecipe;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

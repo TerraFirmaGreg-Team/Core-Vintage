@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.recipes;
+package net.dries007.tfc.api.recipes.workbench;
 
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;

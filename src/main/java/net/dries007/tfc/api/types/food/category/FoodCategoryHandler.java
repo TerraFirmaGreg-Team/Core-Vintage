@@ -14,7 +14,7 @@ public class FoodCategoryHandler {
         MEAT = new FoodCategory("meat", TextFormatting.RED);
         COOKED_MEAT = new FoodCategory("cooked_meat", TextFormatting.RED);
         DAIRY = new FoodCategory("dairy", TextFormatting.WHITE);
-        MEAL = new FoodCategory("meal", TextFormatting.GRAY);
-        OTHER = new FoodCategory("other", TextFormatting.GRAY);
+        MEAL = new FoodCategory("meal", TextFormatting.AQUA);
+        OTHER = new FoodCategory("other", TextFormatting.DARK_GRAY);
     }
 }

@@ -15,6 +15,9 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
+import net.dries007.tfc.api.types.agriculture.crop.category.CropCategory;
+import net.dries007.tfc.api.types.agriculture.crop.category.CropCategoryHandler;
+import net.dries007.tfc.api.types.agriculture.crop.type.CropTypeHandler;
 import net.dries007.tfc.api.types.food.category.FoodCategoryHandler;
 import net.dries007.tfc.api.types.food.type.FoodTypeHandler;
 import net.dries007.tfc.api.types.plant.type.PlantTypeHandler;
@@ -184,7 +187,11 @@ public class CommonProxy {
         FoodCategoryHandler.init();
         FoodTypeHandler.init();
 
+        //PlantCategoryHandler.init();
         PlantTypeHandler.init();
+
+        CropCategoryHandler.init();
+        CropTypeHandler.init();
 
         WoodTypeHandler.init();
         WoodBlockVariantHandler.init();

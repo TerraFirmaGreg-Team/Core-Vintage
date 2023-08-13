@@ -8,6 +8,9 @@ import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Класс, представляющий категории еды.
+ */
 public class FoodCategory {
 
     private static final Set<FoodCategory> FOOD_CATEGORY = new LinkedHashSet<>();
@@ -16,16 +19,23 @@ public class FoodCategory {
     @Nonnull
     private final TextFormatting textFormatting;
 
+    /**
+     * Конструктор класса FoodCategory.
+     *
+     * @param name            имя категории еды
+     * @param textFormatting форматирование текста для отображения категории
+     * @throws RuntimeException если имя категории пустое или уже существует
+     */
     public FoodCategory(String name, @Nonnull TextFormatting textFormatting) {
         this.name = name;
         this.textFormatting = textFormatting;
 
         if (name.isEmpty()) {
-            throw new RuntimeException(String.format("FoodCategory name must contain any character: [%s]", name));
+            throw new RuntimeException(String.format("Имя категории еды не может быть пустым: [%s]", name));
         }
 
         if (!FOOD_CATEGORY.add(this)) {
-            throw new RuntimeException(String.format("FoodCategory: [%s] already exists!", name));
+            throw new RuntimeException(String.format("Категория еды уже существует: [%s]", name));
         }
     }
 
@@ -58,6 +68,13 @@ public class FoodCategory {
         return textFormatting;
     }
 
+    /**
+     * Проверяет, соответствует ли предмет указанным категориям еды.
+     *
+     * @param stack      предмет для проверки
+     * @param categories категории еды
+     * @return true, если предмет соответствует хотя бы одной из категорий, иначе false
+     */
     public static boolean doesStackMatchCategories(ItemStack stack, FoodCategory... categories) {
         for (FoodCategory cat : categories) {
             if (OreDictionaryHelper.doesStackMatchOre(stack, OreDictionaryHelper.upperCaseToCamelCase("category", cat.toString()))) {

@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.types.agriculture.crop;
 
+import net.dries007.tfc.api.types.agriculture.crop.category.CropCategory;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.food.type.FoodTypes;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
@@ -28,7 +29,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.api.types.agriculture.crop.Crop.CropType.*;
+import static net.dries007.tfc.api.types.agriculture.crop.category.CropCategories.*;
 
 public enum Crop implements ICrop {
     // these definitions are defined in the spreadsheet at
@@ -72,13 +73,13 @@ public enum Crop implements ICrop {
     private final int growthStages; // the number of blockstates the crop has for growing, ignoring wild state
     private final float growthTime; // Time is measured in % of months, scales with calendar month length
     // which crop block behavior implementation is used
-    private final CropType type;
+    private final CropCategory cropCategory;
 
-    Crop(FoodType foodOldDrop, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType type) {
-        this(() -> new ItemStack(ItemFoodTFC.get(foodOldDrop)), () -> ItemStack.EMPTY, tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive, rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive, growthStages, growthTime, type);
+    Crop(FoodType foodOldDrop, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropCategory cropCategory) {
+        this(() -> new ItemStack(ItemFoodTFC.get(foodOldDrop)), () -> ItemStack.EMPTY, tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive, rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive, growthStages, growthTime, cropCategory);
     }
 
-    Crop(Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType type) {
+    Crop(Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropCategory cropCategory) {
         this.foodDrop = foodDrop;
         this.foodDropEarly = foodDropEarly;
 
@@ -95,7 +96,7 @@ public enum Crop implements ICrop {
         this.growthStages = growthStages;
         this.growthTime = growthTime; // This is measured in % of months
 
-        this.type = type;
+        this.cropCategory = cropCategory;
     }
 
     /**
@@ -156,9 +157,9 @@ public enum Crop implements ICrop {
 
     @SuppressWarnings("deprecation")
     public BlockCropTFC createGrowingBlock() {
-        if (type == SIMPLE || type == PICKABLE) {
-            return BlockCropSimple.create(this, type == PICKABLE);
-        } else if (type == SPREADING) {
+        if (cropCategory == SIMPLE || cropCategory == PICKABLE) {
+            return BlockCropSimple.create(this, cropCategory == PICKABLE);
+        } else if (cropCategory == SPREADING) {
             return BlockCropSpreading.create(this);
         }
         throw new IllegalStateException("Invalid growthstage property " + growthStages + " for crop");
@@ -178,9 +179,5 @@ public enum Crop implements ICrop {
         } else {
             tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
         }
-    }
-
-    enum CropType {
-        SIMPLE, PICKABLE, SPREADING
     }
 }

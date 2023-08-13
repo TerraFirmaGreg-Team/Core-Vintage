@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.capability.heat;
 
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.config.OreTooltipMode;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 

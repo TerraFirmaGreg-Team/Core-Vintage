@@ -1,12 +1,12 @@
 package net.dries007.tfc.client.gui.overlay;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.items.tools.behaviors.ChiselBehavior;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.config.HealthDisplayFormat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

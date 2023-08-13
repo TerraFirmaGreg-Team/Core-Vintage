@@ -5,7 +5,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.advancements.TFCTriggers;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.tileentities.TEBloomery;
@@ -19,7 +18,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -316,7 +314,6 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
                 if (!state.getValue(LIT) && te.canIgnite()) {
                     ItemStack held = player.getHeldItem(hand);
                     if (ItemFireStarter.onIgnition(held)) {
-                        TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
                         worldIn.setBlockState(pos, state.withProperty(LIT, true).withProperty(OPEN, false));
                         te.onIgnite();
                         return true;

@@ -1,9 +1,9 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.util.EnumFacing;

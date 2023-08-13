@@ -1,13 +1,12 @@
 package net.dries007.tfc.common.objects.blocks;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
-import net.dries007.tfc.common.objects.advancements.TFCTriggers;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockTorch;
@@ -16,7 +15,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -121,7 +119,6 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBl
                 }
             } else {
                 if (BlockTorchTFC.canLight(stack)) {
-                    TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) playerIn, state.getBlock()); // Trigger lit block
                     worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
                     TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
                     if (tile != null) {

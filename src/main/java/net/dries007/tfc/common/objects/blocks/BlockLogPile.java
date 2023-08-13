@@ -2,14 +2,13 @@ package net.dries007.tfc.common.objects.blocks;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.tileentities.TEInventory;
 import net.dries007.tfc.common.objects.tileentities.TELogPile;
-import net.dries007.tfc.common.objects.advancements.TFCTriggers;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -22,7 +21,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -143,7 +141,6 @@ public class BlockLogPile extends Block implements ILightableBlock {
             if (!state.getValue(LIT) && side == EnumFacing.UP && world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos) && ItemFireStarter.onIgnition(stack)) {
                 // Light the Pile
                 if (!world.isRemote) {
-                    TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
                     world.setBlockState(pos, state.withProperty(LIT, true));
                     te.light();
                     world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());

@@ -1,11 +1,11 @@
 package net.dries007.tfc.common.objects.blocks.agriculture;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.api.types.bush.IBerryBush;
+import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;

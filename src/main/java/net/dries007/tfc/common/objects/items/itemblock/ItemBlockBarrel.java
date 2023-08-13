@@ -1,11 +1,11 @@
 package net.dries007.tfc.common.objects.items.itemblock;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.common.objects.tileentities.TEBarrel;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBarrel;
+import net.dries007.tfc.common.objects.tileentities.TEBarrel;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;

@@ -1,8 +1,8 @@
 package net.dries007.tfc.common.objects.items.ceramics;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.FluidTransferHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;

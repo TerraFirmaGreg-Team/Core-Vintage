@@ -36,6 +36,6 @@ public class RockTypeHandler {
         PHYLLITE = new RockType("phyllite", METAMORPHIC, orePhyllite, Phyllite);
         SCHIST = new RockType("schist", METAMORPHIC, oreSchist, Schist);
         GNEISS = new RockType("gneiss", METAMORPHIC, oreGneiss, Gneiss);
-        MARBLE = new RockType("marble", METAMORPHIC,  oreMarble, Marble, true);
+        MARBLE = new RockType("marble", METAMORPHIC, oreMarble, Marble, true);
     }
 }

@@ -1,9 +1,9 @@
 package net.dries007.tfc.common.objects.tileentities;
 
-import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.common.objects.blocks.BlockPowderKeg;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.PowderKegExplosion;
 import net.minecraft.block.state.IBlockState;

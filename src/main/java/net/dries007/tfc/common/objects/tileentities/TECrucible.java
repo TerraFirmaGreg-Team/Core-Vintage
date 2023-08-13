@@ -1,7 +1,6 @@
 package net.dries007.tfc.common.objects.tileentities;
 
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
@@ -11,9 +10,10 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;

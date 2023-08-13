@@ -60,7 +60,7 @@ public class PlantTypes {
     public static PlantType TREE_FERN;
     public static PlantType TRILLIUM;
     public static PlantType TROPICAL_MILKWEED;
-    public static PlantType TULIP_ORANGE ;
+    public static PlantType TULIP_ORANGE;
     public static PlantType TULIP_PINK;
     public static PlantType TULIP_RED;
     public static PlantType TULIP_WHITE;

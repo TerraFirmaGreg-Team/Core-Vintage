@@ -51,11 +51,11 @@ import java.util.Collection;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.util.Constants.RNG;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCStorage.METAL_BLOCKS;
 import static net.dries007.tfc.api.types.metal.variant.MetalBlockVariants.ANVIL;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_METAL;
+import static net.dries007.tfc.util.Constants.RNG;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

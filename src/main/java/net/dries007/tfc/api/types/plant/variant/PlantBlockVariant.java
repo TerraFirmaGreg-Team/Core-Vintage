@@ -55,7 +55,8 @@ public enum PlantBlockVariant implements IStringSerializable {
         return switch (this) {
             case CACTUS -> Material.CACTUS;
             case HANGING, SHORT_GRASS, TALL_GRASS -> Material.VINE;
-            case WATER, WATER_SEA, TALL_WATER, TALL_WATER_SEA, EMERGENT_TALL_WATER, EMERGENT_TALL_WATER_SEA -> Material.CORAL;
+            case WATER, WATER_SEA, TALL_WATER, TALL_WATER_SEA, EMERGENT_TALL_WATER, EMERGENT_TALL_WATER_SEA ->
+                    Material.CORAL;
             default -> Material.PLANTS;
         };
     }

@@ -1,14 +1,13 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ILivestock;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.advancements.TFCTriggers;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -18,7 +17,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityParrot;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -140,7 +138,6 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
                             this.setFamiliarity(familiarity);
                         }
                         world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.AMBIENT, 1.0F, 1.0F);
-                        TFCTriggers.FAMILIARIZATION_TRIGGER.trigger((EntityPlayerMP) player, this); // Trigger familiarization change
                     }
                     return true;
                 }

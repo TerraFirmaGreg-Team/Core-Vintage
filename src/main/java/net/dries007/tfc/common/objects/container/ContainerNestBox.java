@@ -1,8 +1,8 @@
 package net.dries007.tfc.common.objects.container;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.common.objects.tileentities.TENestBox;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.common.objects.tileentities.TENestBox;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;

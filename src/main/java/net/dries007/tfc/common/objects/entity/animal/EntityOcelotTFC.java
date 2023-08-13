@@ -1,17 +1,16 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ILivestock;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.advancements.TFCTriggers;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -372,7 +371,6 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimalTFC, ILivest
                             this.setFamiliarity(familiarity);
                         }
                         world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.AMBIENT, 1.0F, 1.0F);
-                        TFCTriggers.FAMILIARIZATION_TRIGGER.trigger((EntityPlayerMP) player, this); // Trigger familiarization change
                     }
                     return true;
                 } else {

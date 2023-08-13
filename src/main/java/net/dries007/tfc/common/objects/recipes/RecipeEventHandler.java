@@ -2,8 +2,8 @@ package net.dries007.tfc.common.objects.recipes;
 
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.loaders.recipe.handlers.OreRecipeHandler;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
+import net.dries007.tfc.config.ConfigTFC;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;

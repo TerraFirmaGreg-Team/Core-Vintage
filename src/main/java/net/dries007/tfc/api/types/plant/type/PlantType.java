@@ -56,23 +56,23 @@ public class PlantType {
      * Четверть этого диапазона: 10 (40/4)
      * Диапазон температуры при генерации мира: 20-40 (30 +- 10)
      *
-     * @param name          имя этого растения
-     * @param plantBlockVariant  тип растения
-     * @param isClayMarking если это растение помечает землю с глиной
-     * @param isSwampPlant  если это растение может появиться только в болотах
-     * @param minGrowthTemp минимальная температура для роста
-     * @param maxGrowthTemp максимальная температура для роста
-     * @param minTemp       минимальная температура
-     * @param maxTemp       максимальная температура
-     * @param minRain       минимальные осадки
-     * @param maxRain       максимальные осадки
-     * @param minSun        минимальный уровень освещенности при генерации мира
-     * @param maxSun        максимальный уровень освещенности при генерации мира
-     * @param maxHeight     максимальная высота для двойных+ растений
-     * @param minWaterDepth минимальное глубина воды для водных растений при генерации мира
-     * @param maxWaterDepth максимальное глубина воды для водных растений при генерации мира
-     * @param movementMod   модификатор для перемещения игрока по этому растению по X/Z
-     * @param oreDictName   если не пустая, то запись в словаре растений для этого растения
+     * @param name              имя этого растения
+     * @param plantBlockVariant тип растения
+     * @param isClayMarking     если это растение помечает землю с глиной
+     * @param isSwampPlant      если это растение может появиться только в болотах
+     * @param minGrowthTemp     минимальная температура для роста
+     * @param maxGrowthTemp     максимальная температура для роста
+     * @param minTemp           минимальная температура
+     * @param maxTemp           максимальная температура
+     * @param minRain           минимальные осадки
+     * @param maxRain           максимальные осадки
+     * @param minSun            минимальный уровень освещенности при генерации мира
+     * @param maxSun            максимальный уровень освещенности при генерации мира
+     * @param maxHeight         максимальная высота для двойных+ растений
+     * @param minWaterDepth     минимальное глубина воды для водных растений при генерации мира
+     * @param maxWaterDepth     максимальное глубина воды для водных растений при генерации мира
+     * @param movementMod       модификатор для перемещения игрока по этому растению по X/Z
+     * @param oreDictName       если не пустая, то запись в словаре растений для этого растения
      */
     public PlantType(@Nonnull String name, PlantBlockVariant plantBlockVariant, int[] stages, boolean isClayMarking,
                      boolean isSwampPlant, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp,
@@ -442,6 +442,44 @@ public class PlantType {
         return Float.sum(minTemp, maxTemp) / 2f;
     }
 
+    public enum EnumPlantType implements IStringSerializable {
+        CLAY,
+        DESERT_CLAY,
+        DRY_CLAY,
+        DRY,
+        FRESH_BEACH,
+        SALT_BEACH,
+        FRESH_WATER,
+        SALT_WATER,
+        NONE;
+
+        /**
+         * Возвращает имя перечисления в нижнем регистре.
+         */
+        @Nonnull
+        @Override
+        public String getName() {
+            return name().toLowerCase();
+        }
+    }
+
+    public enum PlantValidity implements IStringSerializable {
+        COLD,
+        HOT,
+        DRY,
+        WET,
+        VALID;
+
+        /**
+         * Возвращает имя перечисления в нижнем регистре.
+         */
+        @Nonnull
+        @Override
+        public String getName() {
+            return name().toLowerCase();
+        }
+    }
+
     public static class Builder {
         private final String name;
         private final PlantBlockVariant plantBlockVariant;
@@ -562,44 +600,6 @@ public class PlantType {
             return new PlantType(name, plantBlockVariant, stages, isClayMarking, isSwampPlant, minGrowthTemp, maxGrowthTemp,
                     minTemp, maxTemp, minRain, maxRain, minSun, maxSun, maxHeight, minWaterDepth, maxWaterDepth,
                     movementMod, oreDictName);
-        }
-    }
-
-    public enum EnumPlantType implements IStringSerializable {
-        CLAY,
-        DESERT_CLAY,
-        DRY_CLAY,
-        DRY,
-        FRESH_BEACH,
-        SALT_BEACH,
-        FRESH_WATER,
-        SALT_WATER,
-        NONE;
-
-        /**
-         * Возвращает имя перечисления в нижнем регистре.
-         */
-        @Nonnull
-        @Override
-        public String getName() {
-            return name().toLowerCase();
-        }
-    }
-
-    public enum PlantValidity implements IStringSerializable {
-        COLD,
-        HOT,
-        DRY,
-        WET,
-        VALID;
-
-        /**
-         * Возвращает имя перечисления в нижнем регистре.
-         */
-        @Nonnull
-        @Override
-        public String getName() {
-            return name().toLowerCase();
         }
     }
 }

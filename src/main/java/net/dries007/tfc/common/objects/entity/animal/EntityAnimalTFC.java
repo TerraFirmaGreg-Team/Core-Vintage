@@ -1,17 +1,16 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
 import com.google.common.base.Predicates;
-import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ILivestock;
 import net.dries007.tfc.api.types.animal.IPredator;
-import net.dries007.tfc.common.objects.advancements.TFCTriggers;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.common.objects.entity.ai.EntityAIPanicTFC;
 import net.dries007.tfc.common.objects.entity.ai.EntityAITamableAvoidPlayer;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.entity.EntityAgeable;
@@ -398,7 +397,6 @@ public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC
                 this.setFamiliarity(familiarity);
             }
             world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.AMBIENT, 1.0F, 1.0F);
-            TFCTriggers.FAMILIARIZATION_TRIGGER.trigger((EntityPlayerMP) player, this); // Trigger familiarization change
         }
         return true;
     }

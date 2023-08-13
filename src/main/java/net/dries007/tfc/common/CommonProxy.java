@@ -34,7 +34,6 @@ import net.dries007.tfc.api.types.wood.type.WoodTypeHandler;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariantHandler;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.advancements.TFCTriggers;
 import net.dries007.tfc.common.objects.blocks.BlockIceTFC;
 import net.dries007.tfc.common.objects.blocks.BlockSnowTFC;
 import net.dries007.tfc.common.objects.blocks.BlockTorchTFC;
@@ -392,7 +391,6 @@ public class CommonProxy {
     public void onInit(FMLInitializationEvent event) {
         LootTablesTFC.init();
         CapabilityFood.init();
-        TFCTriggers.init();
 
         setTFCWorldTypeAsDefault(event);
 

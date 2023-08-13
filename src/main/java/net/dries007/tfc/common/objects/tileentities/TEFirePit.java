@@ -1,6 +1,5 @@
 package net.dries007.tfc.common.objects.tileentities;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.*;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
@@ -15,6 +14,7 @@ import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCal
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.common.objects.items.food.ItemDynamicBowlFood;
 import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.dries007.tfc.util.fuel.Fuel;

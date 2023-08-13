@@ -1,11 +1,11 @@
 package net.dries007.tfc.common.objects.tileentities;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Constants;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.BlockCharcoalPile;
 import net.dries007.tfc.common.objects.blocks.BlockLogPile;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;

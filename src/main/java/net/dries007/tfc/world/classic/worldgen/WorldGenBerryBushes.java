@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.types.bush.IBerryBush;
 import net.dries007.tfc.common.objects.blocks.agriculture.BlockBerryBush;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;

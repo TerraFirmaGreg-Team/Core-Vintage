@@ -23,8 +23,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.util.Constants.GSON;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.util.Constants.GSON;
 
 public final class CapabilityDamageResistance {
     public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "damage_resistance");

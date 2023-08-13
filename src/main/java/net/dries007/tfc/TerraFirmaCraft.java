@@ -40,6 +40,7 @@ public final class TerraFirmaCraft {
             clientSide = "net.dries007.tfc.client.ClientProxy",
             serverSide = "net.dries007.tfc.common.CommonProxy")
     private static CommonProxy PROXY;
+    private static int networkIdCounter = 0;
 
     static {
         FluidRegistry.enableUniversalBucket();
@@ -53,11 +54,9 @@ public final class TerraFirmaCraft {
         return INSTANCE;
     }
 
-    private static int networkIdCounter = 0;
-
     /**
      * Используй это только на preInit фазе.
-     * */
+     */
     public static <T extends IMessage> void registerNetwork(IMessageHandler<T, IMessage> handler, Class<T> packetLatexUpdateClass, Side side) {
         NETWORK.registerMessage(handler, packetLatexUpdateClass, networkIdCounter++, side);
     }

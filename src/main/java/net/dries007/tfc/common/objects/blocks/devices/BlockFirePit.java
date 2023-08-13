@@ -5,12 +5,10 @@ import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.advancements.TFCTriggers;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.tileentities.TEBellows;
 import net.dries007.tfc.common.objects.tileentities.TEFirePit;
-
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -24,7 +22,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -52,8 +49,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.util.Constants.RNG;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.util.Constants.RNG;
 
 @ParametersAreNonnullByDefault
 public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILightableBlock {
@@ -232,7 +229,6 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
             // Try to light the fire pit
             if (!state.getValue(LIT)) {
                 if (ItemFireStarter.onIgnition(held)) {
-                    TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
                     worldIn.setBlockState(pos, state.withProperty(LIT, true));
                     return true;
                 }

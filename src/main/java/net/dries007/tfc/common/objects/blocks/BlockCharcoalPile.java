@@ -3,10 +3,9 @@ package net.dries007.tfc.common.objects.blocks;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.devices.BlockCharcoalForge;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.tileentities.TECharcoalForge;
-import net.dries007.tfc.common.objects.advancements.TFCTriggers;
-import net.dries007.tfc.common.objects.blocks.devices.BlockCharcoalForge;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -16,7 +15,6 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -159,7 +157,6 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
         ItemStack stack = player.getHeldItem(hand);
         if (state.getValue(LAYERS) >= 7 && BlockCharcoalForge.isValid(world, pos) && ItemFireStarter.onIgnition(stack)) {
             if (!world.isRemote) {
-                TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
                 world.setBlockState(pos, TFCBlocks.CHARCOAL_FORGE.getDefaultState().withProperty(LIT, true));
                 TECharcoalForge te = Helpers.getTE(world, pos, TECharcoalForge.class);
                 if (te != null) {

@@ -1,10 +1,10 @@
 package net.dries007.tfc.common.objects.blocks.agriculture;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.api.types.fruit.IFruitTree;
+import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;

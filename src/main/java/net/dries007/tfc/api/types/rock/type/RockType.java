@@ -2,7 +2,6 @@ package net.dries007.tfc.api.types.rock.type;
 
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.minecraft.util.ResourceLocation;
 
@@ -33,11 +32,11 @@ public class RockType {
     /**
      * Создает экземпляр класса Rock с указанными параметрами.
      *
-     * @param name Название породы.
+     * @param name         Название породы.
      * @param rockCategory Категория породы.
-     * @param orePrefix Орпрефикс для типа породы, для использования в стоунтайпах.
-     * @param material Материал для типа породы, для использования в стоунтайпах.
-     * @param isFlux Флаг, указывающий, является ли порода флюсом.
+     * @param orePrefix    Орпрефикс для типа породы, для использования в стоунтайпах.
+     * @param material     Материал для типа породы, для использования в стоунтайпах.
+     * @param isFlux       Флаг, указывающий, является ли порода флюсом.
      */
     public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull OrePrefix orePrefix, @Nonnull Material material, boolean isFlux) {
         this.name = name;
@@ -58,10 +57,10 @@ public class RockType {
     /**
      * Создает экземпляр класса Rock с указанными параметрами и флагом флюса, установленным в false.
      *
-     * @param name Название породы.
+     * @param name         Название породы.
      * @param rockCategory Категория породы.
-     * @param orePrefix Орпрефикс для типа породы, для использования в стоунтайпах.
-     * @param material Материал для типа породы, для использования в стоунтайпах.
+     * @param orePrefix    Орпрефикс для типа породы, для использования в стоунтайпах.
+     * @param material     Материал для типа породы, для использования в стоунтайпах.
      */
     public RockType(@Nonnull String name, @Nonnull RockCategory rockCategory, @Nonnull OrePrefix orePrefix, @Nonnull Material material) {
         this(name, rockCategory, orePrefix, material, false);

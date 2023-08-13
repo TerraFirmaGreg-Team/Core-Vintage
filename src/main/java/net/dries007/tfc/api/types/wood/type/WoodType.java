@@ -1,6 +1,5 @@
 package net.dries007.tfc.api.types.wood.type;
 
-import net.dries007.tfc.api.types.trees.TreeGenerators;
 import net.dries007.tfc.api.types.wood.ITreeGenerator;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -21,7 +20,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import static net.dries007.tfc.api.types.trees.TreeGenerators.*;
+import static net.dries007.tfc.api.types.trees.TreeGenerators.GEN_BUSHES;
+import static net.dries007.tfc.api.types.trees.TreeGenerators.GEN_NORMAL;
 
 /**
  * Класс Wood представляет тип дерева с определенными характеристиками.

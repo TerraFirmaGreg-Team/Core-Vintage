@@ -1,14 +1,14 @@
 package net.dries007.tfc.common.objects.blocks.plants;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.plant.IPlantBlock;
-import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
 import net.dries007.tfc.api.types.plant.type.PlantType;
+import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;

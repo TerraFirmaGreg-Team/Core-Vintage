@@ -1,7 +1,5 @@
 package net.dries007.tfc.common.objects.blocks.wood;
 
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -11,6 +9,8 @@ import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockLog;

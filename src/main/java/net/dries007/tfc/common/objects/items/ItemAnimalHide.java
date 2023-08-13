@@ -1,9 +1,9 @@
 package net.dries007.tfc.common.objects.items;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;

@@ -1,8 +1,6 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -12,10 +10,11 @@ import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ILivestock;
 import net.dries007.tfc.api.types.animal.IRidable;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.advancements.TFCTriggers;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.common.objects.effects.PotionEffectsTFC;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
+import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -31,7 +30,6 @@ import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityDonkey;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBlock;
@@ -362,7 +360,6 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
                             this.setFamiliarity(familiarity);
                         }
                         world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.AMBIENT, 1.0F, 1.0F);
-                        TFCTriggers.FAMILIARIZATION_TRIGGER.trigger((EntityPlayerMP) player, this); // Trigger familiarization change
                     }
                     return true;
                 } else {

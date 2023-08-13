@@ -1,12 +1,12 @@
 package net.dries007.tfc.common.objects.tileentities;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.BlockCharcoalPile;
 import net.dries007.tfc.common.objects.blocks.BlockMolten;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.devices.BlockBloomery;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.block.state.IBlockState;

@@ -1,16 +1,11 @@
 package net.dries007.tfc.compat.gregtech.material;
 
-import gregtech.api.fluids.fluidType.FluidTypes;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.FluidProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 
-import static gregtech.api.fluids.fluidType.FluidTypes.LIQUID;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.NO_UNIFICATION;
 import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
-import static gregtech.api.unification.material.properties.PropertyKey.FLUID;
 import static gregtech.api.unification.material.properties.PropertyKey.TOOL;
 import static gregtech.api.util.GTUtility.gregtechId;
 import static net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags.*;

@@ -22,8 +22,8 @@ public class MetalBlockVariant {
     /**
      * Создает экземпляр класса MetalBlockVariant с указанными параметрами.
      *
-     * @param name                 Имя варианта металлического блока.
-     * @param factory              Фабричная функция для создания металлического блока.
+     * @param name    Имя варианта металлического блока.
+     * @param factory Фабричная функция для создания металлического блока.
      */
     public MetalBlockVariant(@Nonnull String name, @Nonnull BiFunction<MetalBlockVariant, Material, IMetalBlock> factory) {
         this.name = name;

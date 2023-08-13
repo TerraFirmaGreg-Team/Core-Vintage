@@ -1,7 +1,6 @@
 package net.dries007.tfc.util;
 
 import com.google.common.collect.Lists;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IHuntable;
 import net.dries007.tfc.api.types.animal.IPredator;
@@ -13,6 +12,7 @@ import net.dries007.tfc.common.objects.blocks.plants.BlockMushroomTFC;
 import net.dries007.tfc.common.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.common.objects.tileentities.TECropBase;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;

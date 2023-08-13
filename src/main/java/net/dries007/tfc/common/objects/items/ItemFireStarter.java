@@ -1,7 +1,6 @@
 package net.dries007.tfc.common.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCSounds;
@@ -10,7 +9,7 @@ import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.tileentities.TEFirePit;
 import net.dries007.tfc.common.objects.tileentities.TELogPile;
 import net.dries007.tfc.common.objects.tileentities.TEPitKiln;
-import net.dries007.tfc.common.objects.advancements.TFCTriggers;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.state.IBlockState;
@@ -18,7 +17,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -155,7 +153,6 @@ public class ItemFireStarter extends ItemTFC {
                     TELogPile te = Helpers.getTE(world, pos.down(), TELogPile.class);
                     if (te != null) {
                         te.light();
-                        TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
                     }
                     if (Blocks.FIRE.canPlaceBlockAt(world, pos)) {
                         world.setBlockState(pos, Blocks.FIRE.getDefaultState());
@@ -167,7 +164,6 @@ public class ItemFireStarter extends ItemTFC {
                     TEPitKiln te = Helpers.getTE(world, pos.down(), TEPitKiln.class);
                     if (te != null) {
                         te.tryLight();
-                        TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
                     }
                 }
             } else {
@@ -204,7 +200,6 @@ public class ItemFireStarter extends ItemTFC {
                         if (log.getItem().getCount() == 0) {
                             log.setDead();
                         }
-                        TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, world.getBlockState(pos).getBlock()); // Trigger lit block
                     }
                 } else {
                     // Can't make fire pit, so start a fire

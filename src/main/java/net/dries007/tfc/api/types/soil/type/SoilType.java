@@ -41,17 +41,6 @@ public class SoilType {
     }
 
     /**
-     * Возвращает строковое представление типа почвы.
-     *
-     * @return Строковое представление типа почвы.
-     */
-    @Nonnull
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    /**
      * Возвращает тип почвы по индексу.
      *
      * @param i Индекс типа почвы.
@@ -63,5 +52,16 @@ public class SoilType {
         values = SOIL_TYPES.toArray(values);
 
         return i >= 0 && i < values.length ? values[i] : values[i % values.length];
+    }
+
+    /**
+     * Возвращает строковое представление типа почвы.
+     *
+     * @return Строковое представление типа почвы.
+     */
+    @Nonnull
+    @Override
+    public String toString() {
+        return name;
     }
 }

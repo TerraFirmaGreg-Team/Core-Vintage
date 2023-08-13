@@ -270,6 +270,7 @@ public class BlockFluidTFC extends BlockFluidClassic {
 
         return this.density > density;
     }
+
     @Override
     public float getFluidHeightForRender(IBlockAccess world, BlockPos adjPos, @Nonnull IBlockState upState) {
         IBlockState adjState = world.getBlockState(adjPos);

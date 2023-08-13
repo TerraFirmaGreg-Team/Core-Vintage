@@ -1,7 +1,6 @@
 package net.dries007.tfc.common.objects.tileentities;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
@@ -9,10 +8,11 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.common.objects.blocks.BlockMolten;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.devices.BlockBlastFurnace;
+import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.fuel.Fuel;

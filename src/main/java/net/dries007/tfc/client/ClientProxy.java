@@ -1,6 +1,5 @@
 package net.dries007.tfc.client;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -14,11 +13,12 @@ import net.dries007.tfc.client.render.RenderBoatTFC;
 import net.dries007.tfc.client.render.animal.*;
 import net.dries007.tfc.client.render.projectile.RenderThrownJavelin;
 import net.dries007.tfc.common.CommonProxy;
-import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.common.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
+import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;

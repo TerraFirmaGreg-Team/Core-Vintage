@@ -6,11 +6,11 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
-import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.util.ResourceLocation;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;

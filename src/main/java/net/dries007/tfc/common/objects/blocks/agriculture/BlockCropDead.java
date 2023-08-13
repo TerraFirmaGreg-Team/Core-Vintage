@@ -1,9 +1,9 @@
 package net.dries007.tfc.common.objects.blocks.agriculture;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.api.types.crop.CropBlock;
 import net.dries007.tfc.api.types.crop.ICropBlock;
+import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.common.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;

@@ -1,12 +1,12 @@
 package net.dries007.tfc.common.objects.items;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.common.objects.ArmorMaterialTFC;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

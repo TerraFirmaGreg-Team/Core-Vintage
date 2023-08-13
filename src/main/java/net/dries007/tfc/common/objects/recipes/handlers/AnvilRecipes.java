@@ -13,13 +13,13 @@ import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipeMeasurable;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipeSplitting;
 import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
-import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 

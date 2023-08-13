@@ -22,7 +22,7 @@ public class FoodCategory {
     /**
      * Конструктор класса FoodCategory.
      *
-     * @param name            имя категории еды
+     * @param name           имя категории еды
      * @param textFormatting форматирование текста для отображения категории
      * @throws RuntimeException если имя категории пустое или уже существует
      */
@@ -49,6 +49,22 @@ public class FoodCategory {
     }
 
     /**
+     * Проверяет, соответствует ли предмет указанным категориям еды.
+     *
+     * @param stack      предмет для проверки
+     * @param categories категории еды
+     * @return true, если предмет соответствует хотя бы одной из категорий, иначе false
+     */
+    public static boolean doesStackMatchCategories(ItemStack stack, FoodCategory... categories) {
+        for (FoodCategory cat : categories) {
+            if (OreDictionaryHelper.doesStackMatchOre(stack, OreDictionaryHelper.upperCaseToCamelCase("category", cat.toString()))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Возвращает строковое представление категории еды.
      *
      * @return Строковое представление категории еды.
@@ -66,21 +82,5 @@ public class FoodCategory {
     @Nonnull
     public TextFormatting getTextFormatting() {
         return textFormatting;
-    }
-
-    /**
-     * Проверяет, соответствует ли предмет указанным категориям еды.
-     *
-     * @param stack      предмет для проверки
-     * @param categories категории еды
-     * @return true, если предмет соответствует хотя бы одной из категорий, иначе false
-     */
-    public static boolean doesStackMatchCategories(ItemStack stack, FoodCategory... categories) {
-        for (FoodCategory cat : categories) {
-            if (OreDictionaryHelper.doesStackMatchOre(stack, OreDictionaryHelper.upperCaseToCamelCase("category", cat.toString()))) {
-                return true;
-            }
-        }
-        return false;
     }
 }

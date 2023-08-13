@@ -1,7 +1,5 @@
 package net.dries007.tfc.common.objects.tileentities;
 
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
@@ -9,6 +7,8 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
+import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.dries007.tfc.util.fuel.Fuel;

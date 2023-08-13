@@ -1,7 +1,5 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.api.types.animal.ILivestock;
@@ -9,6 +7,8 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.objects.LootTablesTFC;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
 import net.dries007.tfc.common.objects.entity.ai.EntityAIFindNest;
+import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;

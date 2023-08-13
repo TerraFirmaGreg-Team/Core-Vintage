@@ -1,13 +1,13 @@
 package net.dries007.tfc.common.objects.tileentities;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.blocks.devices.BlockPitKiln;
+import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;

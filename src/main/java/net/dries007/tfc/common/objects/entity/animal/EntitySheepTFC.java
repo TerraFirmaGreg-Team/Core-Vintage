@@ -1,7 +1,5 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -9,8 +7,10 @@ import net.dries007.tfc.api.types.animal.ILivestock;
 import net.dries007.tfc.common.objects.LootTablesTFC;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
 import net.dries007.tfc.common.objects.items.ItemsTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;

@@ -1,8 +1,8 @@
 package net.dries007.tfc.common.objects.container;
 
 import net.dries007.tfc.common.objects.blocks.BlockLargeVessel;
-import net.dries007.tfc.common.objects.tileentities.TELargeVessel;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.common.objects.tileentities.TELargeVessel;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;

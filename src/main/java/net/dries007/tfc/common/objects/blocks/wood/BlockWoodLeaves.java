@@ -1,7 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.wood;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
@@ -10,6 +9,7 @@ import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;

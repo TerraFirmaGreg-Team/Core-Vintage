@@ -3,7 +3,6 @@ package net.dries007.tfc.api.recipes.barrel;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
-
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientItemFoodTrait;
 import net.dries007.tfc.util.Helpers;

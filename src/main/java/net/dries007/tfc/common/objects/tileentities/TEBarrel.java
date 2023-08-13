@@ -1,6 +1,5 @@
 package net.dries007.tfc.common.objects.tileentities;
 
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.capability.fluid.FluidHandlerSided;
 import net.dries007.tfc.api.capability.fluid.FluidTankCallback;
 import net.dries007.tfc.api.capability.fluid.IFluidHandlerSidedCallback;
@@ -12,6 +11,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.common.objects.items.itemblock.ItemBlockBarrel;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.FluidTransferHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;

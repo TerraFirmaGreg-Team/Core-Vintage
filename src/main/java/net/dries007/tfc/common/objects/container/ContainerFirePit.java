@@ -1,8 +1,8 @@
 package net.dries007.tfc.common.objects.container;
 
-import net.dries007.tfc.common.objects.tileentities.TEFirePit;
 import net.dries007.tfc.common.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.common.objects.tileentities.TEFirePit;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;

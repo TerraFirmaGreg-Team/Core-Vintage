@@ -11,6 +11,7 @@ import static net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix.oreChunk;
 
 public class StoneTypeHandler {
     private static int counter = 16;
+
     public static void init() {
 
         OreByProduct.addOreByProductPrefix(oreChunk);

@@ -1,7 +1,5 @@
 package net.dries007.tfc.common;
 
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
@@ -28,11 +26,10 @@ import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
-import net.dries007.tfc.network.PacketCalendarUpdate;
-import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.devices.BlockQuern;
+import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidTFC;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalAnvil;
 import net.dries007.tfc.common.objects.blocks.rock.BlockRockAnvil;
 import net.dries007.tfc.common.objects.blocks.rock.BlockRockRaw;
@@ -40,11 +37,13 @@ import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLog;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSupport;
 import net.dries007.tfc.common.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.common.objects.effects.PotionEffectsTFC;
-
-import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidTFC;
 import net.dries007.tfc.common.objects.items.ItemQuiver;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
+import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.network.PacketCalendarUpdate;
+import net.dries007.tfc.network.PacketPlayerDataUpdate;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;

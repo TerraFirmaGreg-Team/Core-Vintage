@@ -1,7 +1,6 @@
 package net.dries007.tfc.common.objects.tileentities;
 
 import gregtech.common.items.ToolItems;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
@@ -12,13 +11,14 @@ import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalAnvil;
 import net.dries007.tfc.common.objects.blocks.rock.BlockRockAnvil;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
+import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.network.PacketSimpleMessage;
+import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.forge.ForgeStep;

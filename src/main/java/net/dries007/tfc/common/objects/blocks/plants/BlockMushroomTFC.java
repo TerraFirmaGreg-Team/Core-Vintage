@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.blocks.plants;
 
-import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
 import net.dries007.tfc.api.types.plant.type.PlantType;
+import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;

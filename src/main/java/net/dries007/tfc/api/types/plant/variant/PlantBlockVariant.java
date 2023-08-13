@@ -1,17 +1,14 @@
 package net.dries007.tfc.api.types.plant.variant;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.plant.IPlantBlock;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.objects.blocks.plants.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.Nonnull;
 import java.util.function.BiFunction;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public enum PlantBlockVariant implements IStringSerializable {
     STANDARD(BlockPlantTFC::new),
     CREEPING(BlockCreepingPlantTFC::new),
@@ -63,6 +60,7 @@ public enum PlantBlockVariant implements IStringSerializable {
         };
     }
 
+    @Nonnull
     @Override
     public String getName() {
         return name().toLowerCase();

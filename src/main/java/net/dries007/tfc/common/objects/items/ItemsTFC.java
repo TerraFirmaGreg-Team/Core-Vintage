@@ -3,7 +3,7 @@ package net.dries007.tfc.common.objects.items;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;

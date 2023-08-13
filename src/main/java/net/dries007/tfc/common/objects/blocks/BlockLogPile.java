@@ -2,7 +2,7 @@ package net.dries007.tfc.common.objects.blocks;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;

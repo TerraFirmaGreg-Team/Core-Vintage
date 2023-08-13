@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;

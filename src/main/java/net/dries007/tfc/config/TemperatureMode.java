@@ -1,14 +1,12 @@
-package net.dries007.tfc.util.config;
+package net.dries007.tfc.config;
 
-public enum QuiverSearch {
-    DISABLED("Disabled"),
-    ARMOR("Armor"),
-    HOTBAR("Hotbar"),
-    INVENTORY("Inventory");
+public enum TemperatureMode {
+    CYCLIC("Cyclic"),
+    ENDLESS("Endless");
 
     private final String name;
 
-    QuiverSearch(String name) {
+    TemperatureMode(String name) {
         this.name = name;
     }
 

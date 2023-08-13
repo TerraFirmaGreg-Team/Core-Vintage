@@ -1,6 +1,6 @@
 package net.dries007.tfc.common;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.DamageType;
@@ -29,8 +29,8 @@ import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
-import net.dries007.tfc.common.network.PacketCalendarUpdate;
-import net.dries007.tfc.common.network.PacketPlayerDataUpdate;
+import net.dries007.tfc.network.PacketCalendarUpdate;
+import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.common.objects.blocks.devices.BlockQuern;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalAnvil;

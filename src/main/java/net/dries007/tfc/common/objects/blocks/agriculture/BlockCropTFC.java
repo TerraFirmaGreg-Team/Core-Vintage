@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.agriculture;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.api.types.crop.CropBlock;

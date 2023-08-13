@@ -1,11 +1,11 @@
 package net.dries007.tfc.util.climate;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.config.TemperatureMode;
+import net.dries007.tfc.config.TemperatureMode;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.Random;

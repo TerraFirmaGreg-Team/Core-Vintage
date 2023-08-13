@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.network;
+package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;

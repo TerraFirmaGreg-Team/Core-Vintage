@@ -1,10 +1,10 @@
-package net.dries007.tfc.common.network;
+package net.dries007.tfc.network;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.config.InventoryCraftingMode;
+import net.dries007.tfc.config.InventoryCraftingMode;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.te;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.item.ItemStack;

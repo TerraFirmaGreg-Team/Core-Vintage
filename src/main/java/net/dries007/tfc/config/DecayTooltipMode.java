@@ -1,4 +1,4 @@
-package net.dries007.tfc.util.config;
+package net.dries007.tfc.config;
 
 public enum DecayTooltipMode {
     HIDE("Hide decay information"),

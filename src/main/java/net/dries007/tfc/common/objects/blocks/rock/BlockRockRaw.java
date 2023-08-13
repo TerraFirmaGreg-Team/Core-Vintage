@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.blocks.rock;
 
 import gregtech.common.items.ToolItems;
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;

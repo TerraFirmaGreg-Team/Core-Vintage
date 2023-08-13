@@ -1,10 +1,10 @@
 package net.dries007.tfc.client;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.common.network.PacketCycleItemMode;
-import net.dries007.tfc.common.network.PacketOpenCraftingGui;
-import net.dries007.tfc.common.network.PacketPlaceBlockSpecial;
-import net.dries007.tfc.common.network.PacketStackFood;
+import net.dries007.tfc.network.PacketCycleItemMode;
+import net.dries007.tfc.network.PacketOpenCraftingGui;
+import net.dries007.tfc.network.PacketPlaceBlockSpecial;
+import net.dries007.tfc.network.PacketStackFood;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.inventory.Slot;

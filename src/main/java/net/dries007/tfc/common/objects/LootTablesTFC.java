@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.loot.ApplySimpleSkill;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;

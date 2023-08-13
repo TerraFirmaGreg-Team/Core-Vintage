@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.network;
+package net.dries007.tfc.network;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;

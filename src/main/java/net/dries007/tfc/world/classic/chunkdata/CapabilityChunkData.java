@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.chunkdata;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.common.network.PacketChunkData;
+import net.dries007.tfc.network.PacketChunkData;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;

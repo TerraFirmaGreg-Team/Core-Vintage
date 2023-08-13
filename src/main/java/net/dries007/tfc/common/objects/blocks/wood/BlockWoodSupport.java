@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.wood;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;

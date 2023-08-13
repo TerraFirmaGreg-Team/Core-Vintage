@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.network;
+package net.dries007.tfc.network;
 
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;

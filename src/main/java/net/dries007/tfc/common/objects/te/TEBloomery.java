@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.te;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.BlockCharcoalPile;

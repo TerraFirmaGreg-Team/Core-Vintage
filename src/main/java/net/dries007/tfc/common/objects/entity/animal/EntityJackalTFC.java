@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.client.TFCSounds;

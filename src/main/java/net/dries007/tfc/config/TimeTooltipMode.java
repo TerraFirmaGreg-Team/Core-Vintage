@@ -1,4 +1,4 @@
-package net.dries007.tfc.util.config;
+package net.dries007.tfc.config;
 
 /**
  * Used in config to toggle modes instead of an integer

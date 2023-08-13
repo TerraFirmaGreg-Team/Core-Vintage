@@ -1,6 +1,6 @@
 package net.dries007.tfc.client;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -14,7 +14,7 @@ import net.dries007.tfc.client.render.RenderBoatTFC;
 import net.dries007.tfc.client.render.animal.*;
 import net.dries007.tfc.client.render.projectile.RenderThrownJavelin;
 import net.dries007.tfc.common.CommonProxy;
-import net.dries007.tfc.common.network.PacketSwitchPlayerInventoryTab;
+import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.common.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.common.objects.entity.animal.*;
@@ -61,36 +61,6 @@ import static net.minecraft.util.text.TextFormatting.*;
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
-
-    @Override
-    public void onPreInit(FMLPreInitializationEvent event) {
-        super.onPreInit(event);
-
-        registerEntityRenderer();
-    }
-
-    @Override
-    public void onInit(FMLInitializationEvent event) {
-        super.onInit(event);
-
-        TFCKeybindings.init();
-        // Enable overlay to render health, thirst and hunger bars, TFC style.
-        // Also renders animal familiarity
-        MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
-    }
-
-    @Override
-    public void onPostInit(FMLPostInitializationEvent event) {
-        super.onPostInit(event);
-    }
-
-    public void onLoadComplete(FMLLoadCompleteEvent event) {
-        super.onLoadComplete(event);
-    }
-
-    public void onServerStarting(FMLServerStartingEvent event) {
-        super.onServerStarting(event);
-    }
 
     public static void registerEntityRenderer() {
         RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockTFC.class, RenderFallingBlock::new);
@@ -298,6 +268,36 @@ public class ClientProxy extends CommonProxy {
     @SideOnly(Side.CLIENT)
     public static void textureStitched(TextureStitchEvent.Post event) {
         FluidSpriteCache.clear();
+    }
+
+    @Override
+    public void onPreInit(FMLPreInitializationEvent event) {
+        super.onPreInit(event);
+
+        registerEntityRenderer();
+    }
+
+    @Override
+    public void onInit(FMLInitializationEvent event) {
+        super.onInit(event);
+
+        TFCKeybindings.init();
+        // Enable overlay to render health, thirst and hunger bars, TFC style.
+        // Also renders animal familiarity
+        MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
+    }
+
+    @Override
+    public void onPostInit(FMLPostInitializationEvent event) {
+        super.onPostInit(event);
+    }
+
+    public void onLoadComplete(FMLLoadCompleteEvent event) {
+        super.onLoadComplete(event);
+    }
+
+    public void onServerStarting(FMLServerStartingEvent event) {
+        super.onServerStarting(event);
     }
 
     @Nonnull

@@ -1,7 +1,7 @@
 package net.dries007.tfc.util.interaction;
 
 import gregtech.common.items.ToolItems;
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.blocks.agriculture;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.api.types.bush.IBerryBush;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;

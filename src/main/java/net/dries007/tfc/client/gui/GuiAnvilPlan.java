@@ -5,7 +5,7 @@ import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilPlanIcon;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.common.network.PacketGuiButton;
+import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.common.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.NBTBuilder;
 import net.minecraft.client.gui.GuiButton;

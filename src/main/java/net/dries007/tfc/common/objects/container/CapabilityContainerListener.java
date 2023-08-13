@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.common.CommonEventHandler;
-import net.dries007.tfc.common.network.PacketCapabilityContainerUpdate;
+import net.dries007.tfc.network.PacketCapabilityContainerUpdate;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;

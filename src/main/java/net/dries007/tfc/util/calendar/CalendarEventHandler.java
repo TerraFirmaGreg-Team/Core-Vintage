@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.calendar;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.minecraft.entity.player.EntityPlayer;

@@ -5,7 +5,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.client.button.GuiButtonBarrelSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.common.network.PacketGuiButton;
+import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.common.objects.container.ContainerBarrel;
 import net.dries007.tfc.common.objects.te.TEBarrel;
 import net.dries007.tfc.util.Helpers;

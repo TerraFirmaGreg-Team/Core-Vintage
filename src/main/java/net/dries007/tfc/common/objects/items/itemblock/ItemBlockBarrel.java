@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.items.itemblock;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;

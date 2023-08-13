@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.entity;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

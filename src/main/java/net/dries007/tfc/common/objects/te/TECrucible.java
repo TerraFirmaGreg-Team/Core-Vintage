@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.te;
 
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;

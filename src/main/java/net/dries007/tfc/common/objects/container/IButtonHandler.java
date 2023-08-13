@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.container;
 
-import net.dries007.tfc.common.network.PacketGuiButton;
+import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nullable;

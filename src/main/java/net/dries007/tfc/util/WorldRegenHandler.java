@@ -1,7 +1,7 @@
 package net.dries007.tfc.util;
 
 import com.google.common.collect.Lists;
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IHuntable;
 import net.dries007.tfc.api.types.animal.IPredator;

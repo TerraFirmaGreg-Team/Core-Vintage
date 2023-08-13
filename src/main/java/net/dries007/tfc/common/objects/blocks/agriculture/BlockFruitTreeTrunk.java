@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.agriculture;
 
-import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.api.types.fruit.IFruitTree;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;

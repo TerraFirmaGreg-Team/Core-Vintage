@@ -16,7 +16,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
 import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.common.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeat;
@@ -53,7 +53,7 @@ import java.util.Random;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.*;
-import static net.dries007.tfc.common.objects.blocks.agriculture.BlockCropTFC.WILD;
+import static net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC.WILD;
 
 public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.tileentities;
 
-import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropSpreading;
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropSpreading;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 

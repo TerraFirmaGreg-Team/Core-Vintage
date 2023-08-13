@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.items;
 
 import net.dries007.tfc.api.types.crop.ICropBlock;
-import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;

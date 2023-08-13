@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types.crop.type;
 
-import net.dries007.tfc.api.types.crop.category.CropCategory;
+import net.dries007.tfc.api.types.crop.category.CropType;
 import net.dries007.tfc.api.types.food.variant.FoodVariant;
 import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.minecraft.item.Item;
@@ -10,11 +10,11 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public class CropType {
-    private static final Set<CropType> CROP_TYPES = new LinkedHashSet<>();
+public class CropBlockVariant {
+    private static final Set<CropBlockVariant> CROP_TYPES = new LinkedHashSet<>();
 
     private final String name;
-    private final CropCategory cropCategory;
+    private final CropType cropType;
     private final Supplier<ItemStack> foodDrop;
     private final Supplier<ItemStack> foodDropEarly;
     private final int growthStages;
@@ -28,14 +28,14 @@ public class CropType {
     private final float rainMinAlive;
     private final float rainMaxAlive;
 
-    public CropType(String name, CropCategory cropCategory,
-                    Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly,
-                    int growthStages, float growthTime,
-                    float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive,
-                    float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive) {
+    public CropBlockVariant(String name, CropType cropType,
+                            Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly,
+                            int growthStages, float growthTime,
+                            float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive,
+                            float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive) {
 
         this.name = name;
-        this.cropCategory = cropCategory;
+        this.cropType = cropType;
         this.foodDrop = foodDrop;
         this.foodDropEarly = foodDropEarly;
 
@@ -58,7 +58,7 @@ public class CropType {
      *
      * @return Набор всех типов культур.
      */
-    public static Set<CropType> getCropTypes() {
+    public static Set<CropBlockVariant> getCropTypes() {
         return CROP_TYPES;
     }
 
@@ -72,14 +72,14 @@ public class CropType {
         return name;
     }
 
-    public CropCategory getCropCategory() {
-        return cropCategory;
+    public CropType getCropCategory() {
+        return cropType;
     }
 
     public static class Builder {
 
         private final String name;
-        private CropCategory category;
+        private CropType category;
         private Supplier<ItemStack> foodDrop;
         private Supplier<ItemStack> foodDropEarly;
         private int growthStages;
@@ -101,7 +101,7 @@ public class CropType {
             this.foodDropEarly = () -> ItemStack.EMPTY;
         }
 
-        public Builder setCategory(CropCategory category) {
+        public Builder setCategory(CropType category) {
             this.category = category;
             return this;
         }
@@ -153,8 +153,8 @@ public class CropType {
         }
 
 
-        public CropType build() {
-            return new CropType(
+        public CropBlockVariant build() {
+            return new CropBlockVariant(
                     name, category, foodDrop, foodDropEarly,
                     growthStages, growthTime,
                     tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive,

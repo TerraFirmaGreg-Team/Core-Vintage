@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.blocks.agriculture;
+package net.dries007.tfc.common.objects.blocks.agriculture.crop_old;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.crop.CropBlock;

@@ -1,13 +1,13 @@
 package net.dries007.tfc.api.types.crop;
 
-import net.dries007.tfc.api.types.crop.category.CropCategories;
-import net.dries007.tfc.api.types.crop.category.CropCategory;
+import net.dries007.tfc.api.types.crop.category.CropType;
+import net.dries007.tfc.api.types.crop.category.CropTypes;
 import net.dries007.tfc.api.types.food.variant.FoodVariant;
 import net.dries007.tfc.api.types.food.variant.FoodVariants;
-import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropDead;
-import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropSimple;
-import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropSpreading;
-import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropDead;
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropSimple;
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropSpreading;
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
 import net.dries007.tfc.common.objects.items.ItemsTFC;
 import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -34,26 +34,26 @@ public enum CropBlock implements ICropBlock {
     // these definitions are defined in the spreadsheet at
     // https://docs.google.com/spreadsheets/d/1Ghw3dCmVO5Gv0MMGBydUxox_nwLYmmcZkGSbbf0QSAE/edit#gid=893781093
     // It should be modified first, and then the resulting definitions copied to this space here
-    BARLEY(FoodVariants.BARLEY, 0f, 1f, 26f, 33f, 50f, 70f, 310f, 330f, 8, 0.4f, CropCategories.SIMPLE),
-    MAIZE(FoodVariants.MAIZE, 10f, 19f, 40f, 45f, 110f, 140f, 400f, 450f, 6, 0.6f, CropCategories.SIMPLE),
-    OAT(FoodVariants.OAT, 0f, 3f, 30f, 34f, 50f, 100f, 350f, 400f, 8, 0.5f, CropCategories.SIMPLE),
-    RICE(FoodVariants.RICE, 20f, 22f, 40f, 45f, 250f, 300f, 450f, 500f, 8, 0.6f, CropCategories.SIMPLE),
-    RYE(FoodVariants.RYE, 0f, 4f, 35f, 40f, 50f, 100f, 400f, 450f, 8, 0.5f, CropCategories.SIMPLE),
-    WHEAT(FoodVariants.WHEAT, 0f, 3f, 30f, 34f, 50f, 100f, 350f, 400f, 8, 0.5f, CropCategories.SIMPLE),
-    BEET(FoodVariants.BEET, -5f, 0f, 20f, 25f, 50f, 70f, 300f, 320f, 7, 0.6f, CropCategories.SIMPLE),
-    CABBAGE(FoodVariants.CABBAGE, -10f, 0f, 27f, 33f, 50f, 60f, 280f, 300f, 6, 0.6f, CropCategories.SIMPLE),
-    CARROT(FoodVariants.CARROT, 3f, 10f, 30f, 36f, 50f, 100f, 400f, 450f, 5, 0.6f, CropCategories.SIMPLE),
-    GARLIC(FoodVariants.GARLIC, -20f, -1f, 18f, 26f, 50f, 60f, 310f, 340f, 5, 0.65f, CropCategories.SIMPLE),
-    GREEN_BEAN(FoodVariants.GREEN_BEAN, 2f, 9f, 35f, 41f, 70f, 150f, 410f, 450f, 7, 0.45f, CropCategories.PICKABLE),
-    ONION(FoodVariants.ONION, -1f, 10f, 37f, 40f, 70f, 200f, 410f, 450f, 7, 0.4f, CropCategories.SIMPLE),
-    POTATO(FoodVariants.POTATO, 0f, 4f, 30f, 35f, 50f, 100f, 390f, 440f, 7, 0.55f, CropCategories.SIMPLE),
-    SOYBEAN(FoodVariants.SOYBEAN, 8f, 12f, 30f, 36f, 55f, 160f, 410f, 450f, 7, 0.5f, CropCategories.SIMPLE),
-    SQUASH(FoodVariants.SQUASH, 5f, 14f, 33f, 37f, 45f, 90f, 390f, 440f, 8, 0.5f, CropCategories.SIMPLE),
-    SUGARCANE(FoodVariants.SUGARCANE, 12f, 20f, 38f, 45f, 50f, 160f, 410f, 450f, 8, 0.5f, CropCategories.SIMPLE),
-    TOMATO(FoodVariants.TOMATO, 0f, 8f, 36f, 40f, 50f, 120f, 390f, 430f, 8, 0.45f, CropCategories.PICKABLE),
-    RED_BELL_PEPPER(() -> new ItemStack(ItemFoodTFC.get(FoodVariants.RED_BELL_PEPPER)), () -> new ItemStack(ItemFoodTFC.get(FoodVariants.GREEN_BELL_PEPPER)), 4f, 12f, 32f, 38f, 50f, 100f, 400f, 450f, 7, 0.55f, CropCategories.PICKABLE),
-    YELLOW_BELL_PEPPER(() -> new ItemStack(ItemFoodTFC.get(FoodVariants.YELLOW_BELL_PEPPER)), () -> new ItemStack(ItemFoodTFC.get(FoodVariants.GREEN_BELL_PEPPER)), 4f, 12f, 32f, 38f, 50f, 100f, 400f, 450f, 7, 0.55f, CropCategories.PICKABLE),
-    JUTE(() -> new ItemStack(ItemsTFC.JUTE), () -> ItemStack.EMPTY, 5f, 11f, 37f, 42f, 50f, 100f, 410f, 450f, 6, 0.5f, CropCategories.SIMPLE);
+    BARLEY(FoodVariants.BARLEY, 0f, 1f, 26f, 33f, 50f, 70f, 310f, 330f, 8, 0.4f, CropTypes.SIMPLE),
+    MAIZE(FoodVariants.MAIZE, 10f, 19f, 40f, 45f, 110f, 140f, 400f, 450f, 6, 0.6f, CropTypes.SIMPLE),
+    OAT(FoodVariants.OAT, 0f, 3f, 30f, 34f, 50f, 100f, 350f, 400f, 8, 0.5f, CropTypes.SIMPLE),
+    RICE(FoodVariants.RICE, 20f, 22f, 40f, 45f, 250f, 300f, 450f, 500f, 8, 0.6f, CropTypes.SIMPLE),
+    RYE(FoodVariants.RYE, 0f, 4f, 35f, 40f, 50f, 100f, 400f, 450f, 8, 0.5f, CropTypes.SIMPLE),
+    WHEAT(FoodVariants.WHEAT, 0f, 3f, 30f, 34f, 50f, 100f, 350f, 400f, 8, 0.5f, CropTypes.SIMPLE),
+    BEET(FoodVariants.BEET, -5f, 0f, 20f, 25f, 50f, 70f, 300f, 320f, 7, 0.6f, CropTypes.SIMPLE),
+    CABBAGE(FoodVariants.CABBAGE, -10f, 0f, 27f, 33f, 50f, 60f, 280f, 300f, 6, 0.6f, CropTypes.SIMPLE),
+    CARROT(FoodVariants.CARROT, 3f, 10f, 30f, 36f, 50f, 100f, 400f, 450f, 5, 0.6f, CropTypes.SIMPLE),
+    GARLIC(FoodVariants.GARLIC, -20f, -1f, 18f, 26f, 50f, 60f, 310f, 340f, 5, 0.65f, CropTypes.SIMPLE),
+    GREEN_BEAN(FoodVariants.GREEN_BEAN, 2f, 9f, 35f, 41f, 70f, 150f, 410f, 450f, 7, 0.45f, CropTypes.PICKABLE),
+    ONION(FoodVariants.ONION, -1f, 10f, 37f, 40f, 70f, 200f, 410f, 450f, 7, 0.4f, CropTypes.SIMPLE),
+    POTATO(FoodVariants.POTATO, 0f, 4f, 30f, 35f, 50f, 100f, 390f, 440f, 7, 0.55f, CropTypes.SIMPLE),
+    SOYBEAN(FoodVariants.SOYBEAN, 8f, 12f, 30f, 36f, 55f, 160f, 410f, 450f, 7, 0.5f, CropTypes.SIMPLE),
+    SQUASH(FoodVariants.SQUASH, 5f, 14f, 33f, 37f, 45f, 90f, 390f, 440f, 8, 0.5f, CropTypes.SIMPLE),
+    SUGARCANE(FoodVariants.SUGARCANE, 12f, 20f, 38f, 45f, 50f, 160f, 410f, 450f, 8, 0.5f, CropTypes.SIMPLE),
+    TOMATO(FoodVariants.TOMATO, 0f, 8f, 36f, 40f, 50f, 120f, 390f, 430f, 8, 0.45f, CropTypes.PICKABLE),
+    RED_BELL_PEPPER(() -> new ItemStack(ItemFoodTFC.get(FoodVariants.RED_BELL_PEPPER)), () -> new ItemStack(ItemFoodTFC.get(FoodVariants.GREEN_BELL_PEPPER)), 4f, 12f, 32f, 38f, 50f, 100f, 400f, 450f, 7, 0.55f, CropTypes.PICKABLE),
+    YELLOW_BELL_PEPPER(() -> new ItemStack(ItemFoodTFC.get(FoodVariants.YELLOW_BELL_PEPPER)), () -> new ItemStack(ItemFoodTFC.get(FoodVariants.GREEN_BELL_PEPPER)), 4f, 12f, 32f, 38f, 50f, 100f, 400f, 450f, 7, 0.55f, CropTypes.PICKABLE),
+    JUTE(() -> new ItemStack(ItemsTFC.JUTE), () -> ItemStack.EMPTY, 5f, 11f, 37f, 42f, 50f, 100f, 410f, 450f, 6, 0.5f, CropTypes.SIMPLE);
 
     static {
         for (ICropBlock crop : values()) {
@@ -72,13 +72,13 @@ public enum CropBlock implements ICropBlock {
     private final int growthStages; // the number of blockstates the crop has for growing, ignoring wild state
     private final float growthTime; // Time is measured in % of months, scales with calendar month length
     // which crop block behavior implementation is used
-    private final CropCategory cropCategory;
+    private final CropType cropType;
 
-    CropBlock(FoodVariant foodOldDrop, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropCategory cropCategory) {
-        this(() -> new ItemStack(ItemFoodTFC.get(foodOldDrop)), () -> ItemStack.EMPTY, tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive, rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive, growthStages, growthTime, cropCategory);
+    CropBlock(FoodVariant foodOldDrop, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType cropType) {
+        this(() -> new ItemStack(ItemFoodTFC.get(foodOldDrop)), () -> ItemStack.EMPTY, tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive, rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive, growthStages, growthTime, cropType);
     }
 
-    CropBlock(Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropCategory cropCategory) {
+    CropBlock(Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType cropType) {
         this.foodDrop = foodDrop;
         this.foodDropEarly = foodDropEarly;
 
@@ -95,7 +95,7 @@ public enum CropBlock implements ICropBlock {
         this.growthStages = growthStages;
         this.growthTime = growthTime; // This is measured in % of months
 
-        this.cropCategory = cropCategory;
+        this.cropType = cropType;
     }
 
     /**
@@ -156,9 +156,9 @@ public enum CropBlock implements ICropBlock {
 
     @SuppressWarnings("deprecation")
     public BlockCropTFC createGrowingBlock() {
-        if (cropCategory == CropCategories.SIMPLE || cropCategory == CropCategories.PICKABLE) {
-            return BlockCropSimple.create(this, cropCategory == CropCategories.PICKABLE);
-        } else if (cropCategory == CropCategories.SPREADING) {
+        if (cropType == CropTypes.SIMPLE || cropType == CropTypes.PICKABLE) {
+            return BlockCropSimple.create(this, cropType == CropTypes.PICKABLE);
+        } else if (cropType == CropTypes.SPREADING) {
             return BlockCropSpreading.create(this);
         }
         throw new IllegalStateException("Invalid growthstage property " + growthStages + " for crop");

@@ -1,14 +1,14 @@
 package net.dries007.tfc.api.types.crop.type;
 
-import net.dries007.tfc.api.types.crop.category.CropCategories;
+import net.dries007.tfc.api.types.crop.category.CropTypes;
 import net.dries007.tfc.api.types.food.variant.FoodVariants;
 import net.dries007.tfc.common.objects.items.ItemsTFC;
 
-public class CropTypeHandler {
+public class CropBlockVariantHandler {
 
     public static void init() {
-        CropTypes.BARLEY = new CropType.Builder("barley")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.BARLEY = new CropBlockVariant.Builder("barley")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.BARLEY)
                 .setGrowthStages(8)
                 .setGrowthTime(0.4f)
@@ -16,8 +16,8 @@ public class CropTypeHandler {
                 .setRain(50f, 70f, 310f, 330f)
                 .build();
 
-        CropTypes.MAIZE = new CropType.Builder("maize")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.MAIZE = new CropBlockVariant.Builder("maize")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.MAIZE)
                 .setGrowthStages(6)
                 .setGrowthTime(0.6f)
@@ -25,8 +25,8 @@ public class CropTypeHandler {
                 .setRain(110f, 140f, 400f, 450f)
                 .build();
 
-        CropTypes.OAT = new CropType.Builder("oat")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.OAT = new CropBlockVariant.Builder("oat")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.OAT)
                 .setGrowthStages(8)
                 .setGrowthTime(0.5f)
@@ -34,8 +34,8 @@ public class CropTypeHandler {
                 .setRain(50f, 100f, 350f, 400f)
                 .build();
 
-        CropTypes.RICE = new CropType.Builder("rice")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.RICE = new CropBlockVariant.Builder("rice")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.RICE)
                 .setGrowthStages(8)
                 .setGrowthTime(0.6f)
@@ -43,8 +43,8 @@ public class CropTypeHandler {
                 .setRain(250f, 300f, 450f, 500f)
                 .build();
 
-        CropTypes.RYE = new CropType.Builder("rye")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.RYE = new CropBlockVariant.Builder("rye")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.RYE)
                 .setGrowthStages(8)
                 .setGrowthTime(0.5f)
@@ -52,8 +52,8 @@ public class CropTypeHandler {
                 .setRain(50f, 100f, 400f, 450f)
                 .build();
 
-        CropTypes.WHEAT = new CropType.Builder("wheat")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.WHEAT = new CropBlockVariant.Builder("wheat")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.WHEAT)
                 .setGrowthStages(8)
                 .setGrowthTime(0.5f)
@@ -61,8 +61,8 @@ public class CropTypeHandler {
                 .setRain(50f, 100f, 350f, 400f)
                 .build();
 
-        CropTypes.BEET = new CropType.Builder("beet")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.BEET = new CropBlockVariant.Builder("beet")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.BEET)
                 .setGrowthStages(7)
                 .setGrowthTime(0.6f)
@@ -70,8 +70,8 @@ public class CropTypeHandler {
                 .setRain(50f, 70f, 300f, 320f)
                 .build();
 
-        CropTypes.CABBAGE = new CropType.Builder("cabbage")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.CABBAGE = new CropBlockVariant.Builder("cabbage")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.CABBAGE)
                 .setGrowthStages(6)
                 .setGrowthTime(0.6f)
@@ -79,8 +79,8 @@ public class CropTypeHandler {
                 .setRain(50f, 60f, 280f, 300f)
                 .build();
 
-        CropTypes.CARROT = new CropType.Builder("carrot")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.CARROT = new CropBlockVariant.Builder("carrot")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.CARROT)
                 .setGrowthStages(5)
                 .setGrowthTime(0.6f)
@@ -88,8 +88,8 @@ public class CropTypeHandler {
                 .setRain(50f, 100f, 400f, 450f)
                 .build();
 
-        CropTypes.GARLIC = new CropType.Builder("garlic")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.GARLIC = new CropBlockVariant.Builder("garlic")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.GARLIC)
                 .setGrowthStages(5)
                 .setGrowthTime(0.65f)
@@ -97,8 +97,8 @@ public class CropTypeHandler {
                 .setRain(50f, 60f, 310f, 340f)
                 .build();
 
-        CropTypes.GREEN_BEAN = new CropType.Builder("green_bean")
-                .setCategory(CropCategories.PICKABLE)
+        CropBlockVariants.GREEN_BEAN = new CropBlockVariant.Builder("green_bean")
+                .setCategory(CropTypes.PICKABLE)
                 .setDrop(FoodVariants.GREEN_BEAN)
                 .setGrowthStages(7)
                 .setGrowthTime(0.45f)
@@ -106,8 +106,8 @@ public class CropTypeHandler {
                 .setRain(70f, 150f, 410f, 450f)
                 .build();
 
-        CropTypes.ONION = new CropType.Builder("onion")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.ONION = new CropBlockVariant.Builder("onion")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.ONION)
                 .setGrowthStages(7)
                 .setGrowthTime(0.4f)
@@ -115,8 +115,8 @@ public class CropTypeHandler {
                 .setRain(70f, 200f, 410f, 450f)
                 .build();
 
-        CropTypes.POTATO = new CropType.Builder("potato")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.POTATO = new CropBlockVariant.Builder("potato")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.POTATO)
                 .setGrowthStages(7)
                 .setGrowthTime(0.55f)
@@ -124,8 +124,8 @@ public class CropTypeHandler {
                 .setRain(50f, 100f, 390f, 440f)
                 .build();
 
-        CropTypes.SOYBEAN = new CropType.Builder("soybean")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.SOYBEAN = new CropBlockVariant.Builder("soybean")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.SOYBEAN)
                 .setGrowthStages(7)
                 .setGrowthTime(0.5f)
@@ -133,8 +133,8 @@ public class CropTypeHandler {
                 .setRain(55f, 160f, 410f, 450f)
                 .build();
 
-        CropTypes.SQUASH = new CropType.Builder("squash")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.SQUASH = new CropBlockVariant.Builder("squash")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.SQUASH)
                 .setGrowthStages(8)
                 .setGrowthTime(0.5f)
@@ -142,8 +142,8 @@ public class CropTypeHandler {
                 .setRain(45f, 90f, 390f, 440f)
                 .build();
 
-        CropTypes.SUGARCANE = new CropType.Builder("sugarcane")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.SUGARCANE = new CropBlockVariant.Builder("sugarcane")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.SUGARCANE)
                 .setGrowthStages(8)
                 .setGrowthTime(0.5f)
@@ -151,8 +151,8 @@ public class CropTypeHandler {
                 .setRain(50f, 160f, 410f, 450f)
                 .build();
 
-        CropTypes.TOMATO = new CropType.Builder("tomato")
-                .setCategory(CropCategories.PICKABLE)
+        CropBlockVariants.TOMATO = new CropBlockVariant.Builder("tomato")
+                .setCategory(CropTypes.PICKABLE)
                 .setDrop(FoodVariants.TOMATO)
                 .setGrowthStages(8)
                 .setGrowthTime(0.45f)
@@ -160,8 +160,8 @@ public class CropTypeHandler {
                 .setRain(50f, 120f, 390f, 430f)
                 .build();
 
-        CropTypes.RED_BELL_PEPPER = new CropType.Builder("red_bell_pepper")
-                .setCategory(CropCategories.PICKABLE)
+        CropBlockVariants.RED_BELL_PEPPER = new CropBlockVariant.Builder("red_bell_pepper")
+                .setCategory(CropTypes.PICKABLE)
                 .setDrop(FoodVariants.RED_BELL_PEPPER)
                 .setDropEarly(FoodVariants.GREEN_BELL_PEPPER)
                 .setGrowthStages(7)
@@ -170,8 +170,8 @@ public class CropTypeHandler {
                 .setRain(50f, 100f, 400f, 450f)
                 .build();
 
-        CropTypes.YELLOW_BELL_PEPPER = new CropType.Builder("yellow_bell_pepper")
-                .setCategory(CropCategories.PICKABLE)
+        CropBlockVariants.YELLOW_BELL_PEPPER = new CropBlockVariant.Builder("yellow_bell_pepper")
+                .setCategory(CropTypes.PICKABLE)
                 .setDrop(FoodVariants.YELLOW_BELL_PEPPER)
                 .setDropEarly(FoodVariants.GREEN_BELL_PEPPER)
                 .setGrowthStages(7)
@@ -180,8 +180,8 @@ public class CropTypeHandler {
                 .setRain(50f, 100f, 400f, 450f)
                 .build();
 
-        CropTypes.JUTE = new CropType.Builder("jute")
-                .setCategory(CropCategories.SIMPLE)
+        CropBlockVariants.JUTE = new CropBlockVariant.Builder("jute")
+                .setCategory(CropTypes.SIMPLE)
                 .setDrop(ItemsTFC.JUTE)
                 .setGrowthStages(6)
                 .setGrowthTime(0.5f)

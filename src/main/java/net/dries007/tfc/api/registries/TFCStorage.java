@@ -3,6 +3,9 @@ package net.dries007.tfc.api.registries;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.types.GroundcoverType;
+import net.dries007.tfc.api.types.crop.ICropBlock;
+import net.dries007.tfc.api.types.crop.type.CropBlockVariant;
+import net.dries007.tfc.api.types.crop.variant.CropCategory;
 import net.dries007.tfc.api.types.metal.IMetalBlock;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariant;
 import net.dries007.tfc.api.types.plant.IPlantBlock;
@@ -43,6 +46,7 @@ public final class TFCStorage {
     public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantBlockVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<CropCategory, CropBlockVariant>, ICropBlock> CROP_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<MetalBlockVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
 
     public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();

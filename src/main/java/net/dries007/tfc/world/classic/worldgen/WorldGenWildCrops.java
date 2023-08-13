@@ -2,7 +2,7 @@ package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
-import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;

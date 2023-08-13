@@ -18,8 +18,8 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.api.types.crop.category.CropCategoryHandler;
-import net.dries007.tfc.api.types.crop.type.CropTypeHandler;
+import net.dries007.tfc.api.types.crop.category.CropTypeHandler;
+import net.dries007.tfc.api.types.crop.type.CropBlockVariantHandler;
 import net.dries007.tfc.api.types.food.category.FoodCategoryHandler;
 import net.dries007.tfc.api.types.food.variant.FoodVariantHandler;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariantHandler;
@@ -116,8 +116,8 @@ public class CommonProxy {
         //PlantCategoryHandler.init();
         PlantTypeHandler.init();
 
-        CropCategoryHandler.init();
         CropTypeHandler.init();
+        CropBlockVariantHandler.init();
 
         MetalBlockVariantHandler.init();
 

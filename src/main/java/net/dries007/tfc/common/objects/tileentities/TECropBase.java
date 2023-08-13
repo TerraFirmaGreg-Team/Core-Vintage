@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.tileentities;
 
-import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.minecraft.nbt.NBTTagCompound;

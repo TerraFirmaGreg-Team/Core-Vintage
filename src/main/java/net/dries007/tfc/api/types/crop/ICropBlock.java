@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.types.crop;
 
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -10,47 +11,47 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * This is the "model" that is used by BlockCropTFC
- * In vanilla TFC, they are all used as Crop enum instances
+ * Это "модель", которая используется классом {@link BlockCropTFC}.
+ * В оригинальном TFC они все используются как экземпляры перечисления Crop.
  */
 public interface ICropBlock {
     /**
-     * @return the minimum time the crop will take to grow one stage (in ticks)
+     * @return минимальное время, которое требуется для роста одной стадии урожая (в тиках)
      */
     long getGrowthTicks();
 
     /**
-     * @return the maximum stage of growth (when current stage == max stage, the crop is fully grown)
+     * @return максимальная стадия роста (когда текущая стадия равна максимальной, урожай полностью вырос)
      */
     int getMaxStage();
 
     /**
-     * Checks if the conditions are valid for world gen spawning / living
+     * Проверяет, являются ли условия подходящими для генерации в мире / жизни
      *
-     * @param temperature the temperature, in -30 - +30
-     * @param rainfall    the rainfall, in 0 - 500
-     * @return true if the crop should spawn here
+     * @param temperature температура, от -30 до +30
+     * @param rainfall    осадки, от 0 до 500
+     * @return true, если урожай должен появиться здесь
      */
     boolean isValidConditions(float temperature, float rainfall);
 
     /**
-     * A stricter version of the above check. Allows the crop to grow (advance in stages)
+     * Более строгая версия предыдущей проверки. Позволяет урожаю расти (переходить на следующую стадию)
      *
-     * @param temperature the temperature, in -30 - +30
-     * @param rainfall    the rainfall, in 0 - 500
-     * @return true if the crop is allowed to grow.(false doesn't mean death)
+     * @param temperature температура, от -30 до +30
+     * @param rainfall    осадки, от 0 до 500
+     * @return true, если урожай может расти (false не означает смерть)
      */
     boolean isValidForGrowth(float temperature, float rainfall);
 
     /**
-     * Get the food item dropped by the crop upon breaking / picking
+     * Получить предмет с едой, выпадающий при сборе / срыве урожая
      *
-     * @param growthStage the current growth stage
+     * @param growthStage текущая стадия роста
      */
     ItemStack getFoodDrop(int growthStage);
 
     /**
-     * Add tooltip info
+     * Добавить информацию в подсказку
      */
     @SideOnly(Side.CLIENT)
     default void addInfo(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {

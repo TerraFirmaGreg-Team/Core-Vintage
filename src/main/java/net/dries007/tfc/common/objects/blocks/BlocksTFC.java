@@ -10,6 +10,8 @@ import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.agriculture.*;
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropDead;
+import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeat;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeatGrass;
 import net.dries007.tfc.common.objects.items.itemblock.ItemBlockTFC;

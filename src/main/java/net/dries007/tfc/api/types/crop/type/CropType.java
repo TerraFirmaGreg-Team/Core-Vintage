@@ -1,6 +1,6 @@
-package net.dries007.tfc.api.types.agriculture.crop.type;
+package net.dries007.tfc.api.types.crop.type;
 
-import net.dries007.tfc.api.types.agriculture.crop.category.CropCategory;
+import net.dries007.tfc.api.types.crop.category.CropCategory;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.minecraft.item.Item;
@@ -31,7 +31,7 @@ public class CropType {
     public CropType(String name, CropCategory cropCategory,
                     Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly,
                     int growthStages, float growthTime,
-                    float tempMinAlive,float tempMinGrow, float tempMaxGrow, float tempMaxAlive,
+                    float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive,
                     float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive) {
 
         this.name = name;
@@ -106,37 +106,37 @@ public class CropType {
             return this;
         }
 
-        public Builder setDrop (FoodType foodTypes) {
+        public Builder setDrop(FoodType foodTypes) {
             this.foodDrop = () -> new ItemStack(ItemFoodTFC.get(foodTypes));
             return this;
         }
 
-        public Builder setDrop (Item item) {
+        public Builder setDrop(Item item) {
             this.foodDrop = () -> new ItemStack(item);
             return this;
         }
 
-        public Builder setDropEarly (FoodType foodTypes) {
+        public Builder setDropEarly(FoodType foodTypes) {
             this.foodDropEarly = () -> new ItemStack(ItemFoodTFC.get(foodTypes));
             return this;
         }
 
-        public Builder setDropEarly (Item item) {
+        public Builder setDropEarly(Item item) {
             this.foodDropEarly = () -> new ItemStack(item);
             return this;
         }
 
-        public Builder setGrowthStages (int growthStages) {
+        public Builder setGrowthStages(int growthStages) {
             this.growthStages = growthStages;
             return this;
         }
 
-        public Builder setGrowthTime (float growthTime) {
+        public Builder setGrowthTime(float growthTime) {
             this.growthTime = growthTime;
             return this;
         }
 
-        public Builder setTemp (float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive) {
+        public Builder setTemp(float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive) {
             this.tempMinAlive = tempMinAlive;
             this.tempMinGrow = tempMinGrow;
             this.tempMaxGrow = tempMaxGrow;
@@ -144,7 +144,7 @@ public class CropType {
             return this;
         }
 
-        public Builder setRain (float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive) {
+        public Builder setRain(float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive) {
             this.rainMinAlive = rainMinAlive;
             this.rainMinGrow = rainMinGrow;
             this.rainMaxGrow = rainMaxGrow;

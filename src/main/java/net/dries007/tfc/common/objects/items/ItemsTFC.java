@@ -7,7 +7,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.agriculture.crop.Crop;
+import net.dries007.tfc.api.types.crop.CropBlock;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.food.type.FoodTypes;
@@ -220,7 +220,7 @@ public final class ItemsTFC {
 
         }
 
-        for (Crop crop : Crop.values()) {
+        for (CropBlock crop : CropBlock.values()) {
             simpleItems.add(register(r, "crop/seeds/" + crop.name().toLowerCase(), new ItemSeedsTFC(crop), CreativeTabsTFC.FOOD));
         }
 

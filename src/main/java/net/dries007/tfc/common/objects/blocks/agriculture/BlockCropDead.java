@@ -1,9 +1,9 @@
 package net.dries007.tfc.common.objects.blocks.agriculture;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.agriculture.IGrowingPlant;
-import net.dries007.tfc.api.types.agriculture.crop.Crop;
-import net.dries007.tfc.api.types.agriculture.crop.ICrop;
+import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.api.types.crop.CropBlock;
+import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.common.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
@@ -41,10 +41,10 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
     private static final int META_MATURE = 1;
 
     // static field and methods for conversion from crop to Block
-    private static final Map<ICrop, BlockCropDead> MAP = new HashMap<>();
-    protected final ICrop crop;
+    private static final Map<ICropBlock, BlockCropDead> MAP = new HashMap<>();
+    protected final ICropBlock crop;
 
-    public BlockCropDead(ICrop crop) {
+    public BlockCropDead(ICropBlock crop) {
         super(Material.PLANTS);
 
         this.crop = crop;
@@ -56,16 +56,16 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
         setHardness(0.6f);
     }
 
-    public static BlockCropDead get(ICrop crop) {
+    public static BlockCropDead get(ICropBlock crop) {
         return MAP.get(crop);
     }
 
-    public static Set<ICrop> getCrops() {
+    public static Set<ICropBlock> getCrops() {
         return MAP.keySet();
     }
 
     @Nonnull
-    public ICrop getCrop() {
+    public ICropBlock getCrop() {
         return crop;
     }
 
@@ -111,7 +111,7 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
             if (player != null) {
                 SimpleSkill skill = CapabilityPlayerData.getSkill(player, SkillType.AGRICULTURE);
                 if (skill != null) {
-                    count += Crop.getSkillSeedBonus(skill, RANDOM);
+                    count += CropBlock.getSkillSeedBonus(skill, RANDOM);
                     skill.add(0.04f);
                 }
             }

@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.agriculture.bush;
+package net.dries007.tfc.api.types.bush;
 
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.food.type.FoodTypes;
@@ -9,20 +9,18 @@ import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
 import net.minecraft.item.ItemStack;
 
-import static net.dries007.tfc.api.types.agriculture.bush.IBerryBush.Size.*;
-
 public enum BerryBush implements IBerryBush {
-    BLACKBERRY(FoodTypes.BLACKBERRY, Month.MAY, 4, 7f, 20f, 100f, 400f, 0.8f, LARGE, true),
-    BLUEBERRY(FoodTypes.BLUEBERRY, Month.JUNE, 3, 7f, 25f, 100f, 400f, 0.8f, LARGE, false),
-    BUNCH_BERRY(FoodTypes.BUNCH_BERRY, Month.JUNE, 3, 15f, 30f, 100f, 400f, 0.8f, SMALL, false),
-    CLOUD_BERRY(FoodTypes.CLOUD_BERRY, Month.JUNE, 2, 3f, 17f, 100f, 400f, 0.8f, MEDIUM, false),
-    CRANBERRY(FoodTypes.CRANBERRY, Month.AUGUST, 3, 1f, 19f, 100f, 400f, 0.8f, MEDIUM, false),
-    ELDERBERRY(FoodTypes.ELDERBERRY, Month.JULY, 2, 10f, 29f, 100f, 400f, 0.8f, LARGE, false),
-    GOOSEBERRY(FoodTypes.GOOSEBERRY, Month.MARCH, 4, 5f, 27f, 100f, 400f, 0.8f, MEDIUM, false),
-    RASPBERRY(FoodTypes.RASPBERRY, Month.JUNE, 2, 5f, 20f, 100f, 400f, 0.8f, LARGE, true),
-    SNOW_BERRY(FoodTypes.SNOW_BERRY, Month.JULY, 2, -5f, 18f, 100f, 400f, 0.8f, SMALL, false),
-    STRAWBERRY(FoodTypes.STRAWBERRY, Month.MARCH, 3, 5f, 28f, 100f, 400f, 0.8f, SMALL, false),
-    WINTERGREEN_BERRY(FoodTypes.WINTERGREEN_BERRY, Month.AUGUST, 2, -5f, 17f, 100f, 400f, 0.8f, SMALL, false);
+    BLACKBERRY(FoodTypes.BLACKBERRY, Month.MAY, 4, 7f, 20f, 100f, 400f, 0.8f, Size.LARGE, true),
+    BLUEBERRY(FoodTypes.BLUEBERRY, Month.JUNE, 3, 7f, 25f, 100f, 400f, 0.8f, Size.LARGE, false),
+    BUNCH_BERRY(FoodTypes.BUNCH_BERRY, Month.JUNE, 3, 15f, 30f, 100f, 400f, 0.8f, Size.SMALL, false),
+    CLOUD_BERRY(FoodTypes.CLOUD_BERRY, Month.JUNE, 2, 3f, 17f, 100f, 400f, 0.8f, Size.MEDIUM, false),
+    CRANBERRY(FoodTypes.CRANBERRY, Month.AUGUST, 3, 1f, 19f, 100f, 400f, 0.8f, Size.MEDIUM, false),
+    ELDERBERRY(FoodTypes.ELDERBERRY, Month.JULY, 2, 10f, 29f, 100f, 400f, 0.8f, Size.LARGE, false),
+    GOOSEBERRY(FoodTypes.GOOSEBERRY, Month.MARCH, 4, 5f, 27f, 100f, 400f, 0.8f, Size.MEDIUM, false),
+    RASPBERRY(FoodTypes.RASPBERRY, Month.JUNE, 2, 5f, 20f, 100f, 400f, 0.8f, Size.LARGE, true),
+    SNOW_BERRY(FoodTypes.SNOW_BERRY, Month.JULY, 2, -5f, 18f, 100f, 400f, 0.8f, Size.SMALL, false),
+    STRAWBERRY(FoodTypes.STRAWBERRY, Month.MARCH, 3, 5f, 28f, 100f, 400f, 0.8f, Size.SMALL, false),
+    WINTERGREEN_BERRY(FoodTypes.WINTERGREEN_BERRY, Month.AUGUST, 2, -5f, 17f, 100f, 400f, 0.8f, Size.SMALL, false);
 
     static {
         for (IBerryBush bush : values()) {

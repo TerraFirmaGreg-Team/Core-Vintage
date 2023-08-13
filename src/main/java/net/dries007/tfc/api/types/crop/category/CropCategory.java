@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.agriculture.crop.category;
+package net.dries007.tfc.api.types.crop.category;
 
 import net.minecraft.util.text.TextFormatting;
 
@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class CropCategory {
 
-private static final Set<CropCategory> CROP_CATEGORIES = new LinkedHashSet<>();
+    private static final Set<CropCategory> CROP_CATEGORIES = new LinkedHashSet<>();
 
     private final String name;
     @Nonnull

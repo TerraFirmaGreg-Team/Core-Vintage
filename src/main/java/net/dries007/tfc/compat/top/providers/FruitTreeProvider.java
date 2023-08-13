@@ -6,7 +6,7 @@ import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.agriculture.fruit.IFruitTree;
+import net.dries007.tfc.api.types.fruit.IFruitTree;
 import net.dries007.tfc.common.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.common.objects.blocks.agriculture.BlockFruitTreeSapling;
 import net.dries007.tfc.common.objects.blocks.agriculture.BlockFruitTreeTrunk;

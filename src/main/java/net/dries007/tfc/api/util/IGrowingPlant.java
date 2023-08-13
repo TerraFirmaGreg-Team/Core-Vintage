@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.agriculture;
+package net.dries007.tfc.api.util;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.block.state.IBlockState;

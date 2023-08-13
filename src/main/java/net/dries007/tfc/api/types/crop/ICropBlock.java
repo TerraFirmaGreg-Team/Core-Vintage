@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.agriculture.crop;
+package net.dries007.tfc.api.types.crop;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ import java.util.List;
  * This is the "model" that is used by BlockCropTFC
  * In vanilla TFC, they are all used as Crop enum instances
  */
-public interface ICrop {
+public interface ICropBlock {
     /**
      * @return the minimum time the crop will take to grow one stage (in ticks)
      */

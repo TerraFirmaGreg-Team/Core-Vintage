@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.agriculture.bush;
+package net.dries007.tfc.api.types.bush;
 
 import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.item.ItemStack;

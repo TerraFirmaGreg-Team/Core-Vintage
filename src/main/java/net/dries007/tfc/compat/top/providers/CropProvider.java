@@ -6,7 +6,7 @@ import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.agriculture.crop.ICrop;
+import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.common.objects.te.TECropBase;
@@ -31,7 +31,7 @@ public class CropProvider implements IProbeInfoProvider {
         var te = Helpers.getTE(world, blockPos, TECropBase.class);
 
         if (state.getBlock() instanceof BlockCropTFC bs && te != null) {
-            ICrop crop = bs.getCrop();
+            ICropBlock crop = bs.getCrop();
 
             boolean isWild = state.getValue(BlockCropTFC.WILD);
             float temp = ClimateTFC.getActualTemp(world, blockPos, -te.getLastUpdateTick());

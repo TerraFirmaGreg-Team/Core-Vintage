@@ -19,8 +19,8 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.api.types.agriculture.crop.category.CropCategoryHandler;
-import net.dries007.tfc.api.types.agriculture.crop.type.CropTypeHandler;
+import net.dries007.tfc.api.types.crop.category.CropCategoryHandler;
+import net.dries007.tfc.api.types.crop.type.CropTypeHandler;
 import net.dries007.tfc.api.types.food.category.FoodCategoryHandler;
 import net.dries007.tfc.api.types.food.type.FoodTypeHandler;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariantHandler;
@@ -93,91 +93,6 @@ import static net.dries007.tfc.api.registries.TFCStorage.*;
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TerraFirmaCraft.MOD_ID)
 public class CommonProxy {
-
-    public void onPreInit(FMLPreInitializationEvent event) {
-        TFCBlocks.preInit();
-        TFCItems.preInit();
-        TFGToolItems.preInit();
-
-        JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
-
-        // No need to sync config here, forge magic
-        NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.getInstance(), new TFCGuiHandler());
-
-        // Received on server
-        TerraFirmaCraft.registerNetwork(new PacketGuiButton.Handler(), PacketGuiButton.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketPlaceBlockSpecial.Handler(), PacketPlaceBlockSpecial.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketSwitchPlayerInventoryTab.Handler(), PacketSwitchPlayerInventoryTab.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketOpenCraftingGui.Handler(), PacketOpenCraftingGui.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketCycleItemMode.Handler(), PacketCycleItemMode.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketStackFood.Handler(), PacketStackFood.class, Side.SERVER);
-
-        // Received on client
-        TerraFirmaCraft.registerNetwork(new PacketChunkData.Handler(), PacketChunkData.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketCapabilityContainerUpdate.Handler(), PacketCapabilityContainerUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketCalendarUpdate.Handler(), PacketCalendarUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketFoodStatsUpdate.Handler(), PacketFoodStatsUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketFoodStatsReplace.Handler(), PacketFoodStatsReplace.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketPlayerDataUpdate.Handler(), PacketPlayerDataUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketSpawnTFCParticle.Handler(), PacketSpawnTFCParticle.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketSimpleMessage.Handler(), PacketSimpleMessage.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketProspectResult.Handler(), PacketProspectResult.class, Side.CLIENT);
-
-        EntitiesTFC.preInit();
-
-        CapabilityChunkData.preInit();
-        CapabilityItemSize.preInit();
-        CapabilityItemHeat.preInit();
-        CapabilityForgeable.preInit();
-        CapabilityFood.preInit();
-        CapabilityEgg.preInit();
-        CapabilityPlayerData.preInit();
-        CapabilityDamageResistance.preInit();
-        CapabilityMetalItem.preInit();
-        CapabilityWorldTracker.preInit();
-
-        TOPIntegration.onPreInit();
-    }
-
-    public void onInit(FMLInitializationEvent event) {
-        LootTablesTFC.init();
-        CapabilityFood.init();
-        TFCTriggers.init();
-
-        setTFCWorldTypeAsDefault(event);
-
-        CapabilityItemSize.init();
-        CapabilityItemHeat.init();
-        CapabilityMetalItem.init();
-        CapabilityForgeable.init();
-
-        RecipeHandler.init();
-    }
-
-    public void onPostInit(FMLPostInitializationEvent event) {
-        FuelManager.postInit();
-        JsonConfigRegistry.INSTANCE.postInit();
-    }
-
-    public void onLoadComplete(FMLLoadCompleteEvent event) {
-        // This is the latest point that we can possibly stop creating non-decaying stacks on both server + client
-        // It should be safe to use as we're only using it internally
-        FoodHandler.setNonDecaying(false);
-    }
-
-    public void onServerStarting(FMLServerStartingEvent event) {
-        event.registerServerCommand(new CommandGetHeat());
-        event.registerServerCommand(new CommandStripWorld());
-        event.registerServerCommand(new CommandHeat());
-        event.registerServerCommand(new CommandPlayerTFC());
-        event.registerServerCommand(new CommandTimeTFC());
-        event.registerServerCommand(new CommandDebugInfo());
-        event.registerServerCommand(new CommandWorkChunk());
-        event.registerServerCommand(new CommandGenTree());
-
-        // Initialize calendar for the current server
-        CalendarTFC.INSTANCE.init(event.getServer());
-    }
 
     @SubscribeEvent
     public static void onMaterialsInit(MaterialEvent event) {
@@ -309,7 +224,6 @@ public class CommonProxy {
         registerTE(TEPowderKeg.class, "powderkeg");
     }
 
-
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> r = event.getRegistry();
@@ -364,9 +278,9 @@ public class CommonProxy {
 
         //=== Groundcover ==============================================================================================//
 
-		// for (var groundcoverBlock : GROUNDCOVER_BLOCK.values()) {
-		// 	r.register(createItemBlock(groundcoverBlock, ItemBlock::new));
-		// }
+        // for (var groundcoverBlock : GROUNDCOVER_BLOCK.values()) {
+        // 	r.register(createItemBlock(groundcoverBlock, ItemBlock::new));
+        // }
 
         //=== Other ==================================================================================================//
 
@@ -390,11 +304,10 @@ public class CommonProxy {
         }
     }
 
-
     /**
      * Для регистрации отдельных предметов. В идеале не использовать этот метод.
      * Ведь в нашем TFC все прописывается в конструкторе класса. Но если приспичит то можно.
-     * */
+     */
     private static <T extends Item> T registerItem(String name, T item, CreativeTabs ct) {
         item.setRegistryName(MOD_ID, name);
         item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
@@ -402,10 +315,10 @@ public class CommonProxy {
         return item;
     }
 
-     /**
-      * Для регистрации отдельных блоков. В идеале не использовать этот метод.
-      * Ведь в нашем TFC все прописывается в конструкторе класса. Но если приспичит то можно.
-      * */
+    /**
+     * Для регистрации отдельных блоков. В идеале не использовать этот метод.
+     * Ведь в нашем TFC все прописывается в конструкторе класса. Но если приспичит то можно.
+     */
     private static <T extends Block> T registerBlock(String name, T block, CreativeTabs ct) {
         block.setRegistryName(MOD_ID, name);
         block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
@@ -422,9 +335,98 @@ public class CommonProxy {
 
     /**
      * Регистрирует TE.
-     * */
+     */
     private static <T extends TileEntity> void registerTE(Class<T> te, String name) {
         TileEntity.register(MOD_ID + ":" + name, te);
+    }
+
+    private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass) {
+        IForgeRegistry<T> reg = new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
+    }
+
+    public void onPreInit(FMLPreInitializationEvent event) {
+        TFCBlocks.preInit();
+        TFCItems.preInit();
+        TFGToolItems.preInit();
+
+        JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
+
+        // No need to sync config here, forge magic
+        NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.getInstance(), new TFCGuiHandler());
+
+        // Received on server
+        TerraFirmaCraft.registerNetwork(new PacketGuiButton.Handler(), PacketGuiButton.class, Side.SERVER);
+        TerraFirmaCraft.registerNetwork(new PacketPlaceBlockSpecial.Handler(), PacketPlaceBlockSpecial.class, Side.SERVER);
+        TerraFirmaCraft.registerNetwork(new PacketSwitchPlayerInventoryTab.Handler(), PacketSwitchPlayerInventoryTab.class, Side.SERVER);
+        TerraFirmaCraft.registerNetwork(new PacketOpenCraftingGui.Handler(), PacketOpenCraftingGui.class, Side.SERVER);
+        TerraFirmaCraft.registerNetwork(new PacketCycleItemMode.Handler(), PacketCycleItemMode.class, Side.SERVER);
+        TerraFirmaCraft.registerNetwork(new PacketStackFood.Handler(), PacketStackFood.class, Side.SERVER);
+
+        // Received on client
+        TerraFirmaCraft.registerNetwork(new PacketChunkData.Handler(), PacketChunkData.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketCapabilityContainerUpdate.Handler(), PacketCapabilityContainerUpdate.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketCalendarUpdate.Handler(), PacketCalendarUpdate.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketFoodStatsUpdate.Handler(), PacketFoodStatsUpdate.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketFoodStatsReplace.Handler(), PacketFoodStatsReplace.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketPlayerDataUpdate.Handler(), PacketPlayerDataUpdate.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketSpawnTFCParticle.Handler(), PacketSpawnTFCParticle.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketSimpleMessage.Handler(), PacketSimpleMessage.class, Side.CLIENT);
+        TerraFirmaCraft.registerNetwork(new PacketProspectResult.Handler(), PacketProspectResult.class, Side.CLIENT);
+
+        EntitiesTFC.preInit();
+
+        CapabilityChunkData.preInit();
+        CapabilityItemSize.preInit();
+        CapabilityItemHeat.preInit();
+        CapabilityForgeable.preInit();
+        CapabilityFood.preInit();
+        CapabilityEgg.preInit();
+        CapabilityPlayerData.preInit();
+        CapabilityDamageResistance.preInit();
+        CapabilityMetalItem.preInit();
+        CapabilityWorldTracker.preInit();
+
+        TOPIntegration.onPreInit();
+    }
+
+    public void onInit(FMLInitializationEvent event) {
+        LootTablesTFC.init();
+        CapabilityFood.init();
+        TFCTriggers.init();
+
+        setTFCWorldTypeAsDefault(event);
+
+        CapabilityItemSize.init();
+        CapabilityItemHeat.init();
+        CapabilityMetalItem.init();
+        CapabilityForgeable.init();
+
+        RecipeHandler.init();
+    }
+
+    public void onPostInit(FMLPostInitializationEvent event) {
+        FuelManager.postInit();
+        JsonConfigRegistry.INSTANCE.postInit();
+    }
+
+    public void onLoadComplete(FMLLoadCompleteEvent event) {
+        // This is the latest point that we can possibly stop creating non-decaying stacks on both server + client
+        // It should be safe to use as we're only using it internally
+        FoodHandler.setNonDecaying(false);
+    }
+
+    public void onServerStarting(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandGetHeat());
+        event.registerServerCommand(new CommandStripWorld());
+        event.registerServerCommand(new CommandHeat());
+        event.registerServerCommand(new CommandPlayerTFC());
+        event.registerServerCommand(new CommandTimeTFC());
+        event.registerServerCommand(new CommandDebugInfo());
+        event.registerServerCommand(new CommandWorkChunk());
+        event.registerServerCommand(new CommandGenTree());
+
+        // Initialize calendar for the current server
+        CalendarTFC.INSTANCE.init(event.getServer());
     }
 
     private void setTFCWorldTypeAsDefault(FMLInitializationEvent event) {
@@ -440,10 +442,6 @@ public class CommonProxy {
                 }
             }
         }
-    }
-
-    private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass) {
-        IForgeRegistry<T> reg = new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
     }
 
     @Nonnull

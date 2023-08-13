@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.wood;
 
-import net.dries007.tfc.api.types.agriculture.IGrowingPlant;
+import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;

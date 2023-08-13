@@ -1,8 +1,4 @@
-package net.dries007.tfc.api.types.agriculture.crop.type;
-
-import net.dries007.tfc.api.types.agriculture.crop.category.CropCategory;
-import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.api.types.food.type.FoodTypes;
+package net.dries007.tfc.api.types.crop.type;
 
 public class CropTypes {
 

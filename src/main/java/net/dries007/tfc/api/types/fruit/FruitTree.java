@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.agriculture.fruit;
+package net.dries007.tfc.api.types.fruit;
 
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.food.type.FoodTypes;

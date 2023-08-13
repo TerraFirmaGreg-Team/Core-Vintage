@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.items;
 
-import net.dries007.tfc.api.types.agriculture.crop.ICrop;
+import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.common.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -28,21 +28,21 @@ import java.util.List;
 import java.util.Map;
 
 public class ItemSeedsTFC extends Item implements IPlantable {
-    private static final Map<ICrop, ItemSeedsTFC> MAP = new HashMap<>();
-    private final ICrop crop;
+    private static final Map<ICropBlock, ItemSeedsTFC> MAP = new HashMap<>();
+    private final ICropBlock crop;
 
-    public ItemSeedsTFC(ICrop crop) {
+    public ItemSeedsTFC(ICropBlock crop) {
         this.crop = crop;
         if (MAP.put(crop, this) != null) {
             throw new IllegalStateException("There can only be one.");
         }
     }
 
-    public static ItemSeedsTFC get(ICrop crop) {
+    public static ItemSeedsTFC get(ICropBlock crop) {
         return MAP.get(crop);
     }
 
-    public static ItemStack get(ICrop crop, int amount) {
+    public static ItemStack get(ICropBlock crop, int amount) {
         return new ItemStack(MAP.get(crop), amount);
     }
 

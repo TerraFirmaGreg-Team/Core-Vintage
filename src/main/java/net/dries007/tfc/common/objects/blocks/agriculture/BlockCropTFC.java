@@ -2,9 +2,9 @@ package net.dries007.tfc.common.objects.blocks.agriculture;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.agriculture.IGrowingPlant;
-import net.dries007.tfc.api.types.agriculture.crop.Crop;
-import net.dries007.tfc.api.types.agriculture.crop.ICrop;
+import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.api.types.crop.CropBlock;
+import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.common.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.common.objects.te.TECropBase;
@@ -71,7 +71,7 @@ public abstract class BlockCropTFC extends BlockBush implements IGrowingPlant {
     private static final int META_GROWTH = 7;
 
     // static field for conversion from crop to Block
-    private static final Map<ICrop, BlockCropTFC> MAP = new HashMap<>();
+    private static final Map<ICropBlock, BlockCropTFC> MAP = new HashMap<>();
 
     static {
         STAGE_MAP.put(5, STAGE_5);
@@ -80,9 +80,9 @@ public abstract class BlockCropTFC extends BlockBush implements IGrowingPlant {
         STAGE_MAP.put(8, STAGE_8);
     }
 
-    private final ICrop crop;
+    private final ICropBlock crop;
 
-    public BlockCropTFC(ICrop crop) {
+    public BlockCropTFC(ICropBlock crop) {
         super(Material.PLANTS);
 
         this.crop = crop;
@@ -94,15 +94,15 @@ public abstract class BlockCropTFC extends BlockBush implements IGrowingPlant {
         setHardness(0.6f);
     }
 
-    public static BlockCropTFC get(ICrop crop) {
+    public static BlockCropTFC get(ICropBlock crop) {
         return MAP.get(crop);
     }
 
-    public static Set<ICrop> getCrops() {
+    public static Set<ICropBlock> getCrops() {
         return MAP.keySet();
     }
 
-    static PropertyInteger getStagePropertyForCrop(ICrop crop) {
+    static PropertyInteger getStagePropertyForCrop(ICropBlock crop) {
         return STAGE_MAP.get(crop.getMaxStage() + 1);
     }
 
@@ -167,8 +167,8 @@ public abstract class BlockCropTFC extends BlockBush implements IGrowingPlant {
 
             if (skill != null) {
                 if (!foodStack.isEmpty()) {
-                    foodStack.setCount(1 + Crop.getSkillFoodBonus(skill, RANDOM));
-                    seedStack.setCount(1 + Crop.getSkillSeedBonus(skill, RANDOM));
+                    foodStack.setCount(1 + CropBlock.getSkillFoodBonus(skill, RANDOM));
+                    seedStack.setCount(1 + CropBlock.getSkillSeedBonus(skill, RANDOM));
                     skill.add(0.04f);
                 }
             }
@@ -190,7 +190,7 @@ public abstract class BlockCropTFC extends BlockBush implements IGrowingPlant {
     }
 
     @Nonnull
-    public ICrop getCrop() {
+    public ICropBlock getCrop() {
         return crop;
     }
 

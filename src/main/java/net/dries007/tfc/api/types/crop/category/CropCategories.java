@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.agriculture.crop.category;
+package net.dries007.tfc.api.types.crop.category;
 
 public class CropCategories {
 

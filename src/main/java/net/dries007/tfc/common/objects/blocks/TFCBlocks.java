@@ -119,17 +119,19 @@ public class TFCBlocks {
 
         //=== Alabaster ==============================================================================================//
 
-        for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-            for (var rockVariant : new RockBlockVariant[]{RAW, BRICK, SMOOTH}) {
+        for (var rockVariant : new RockBlockVariant[]{RAW, BRICK, SMOOTH}) {
+            var alabasterBlock = new BlockAlabaster(rockVariant);
+
+            ALABASTER_BLOCKS.put(new Pair<>("plain", rockVariant), alabasterBlock);
+
+            for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
                 var alabasterColorBlock = new BlockAlabaster(rockVariant, dyeColor);
-                var alabasterBlock = new BlockAlabaster(rockVariant);
 
                 if (ALABASTER_BLOCKS.put(new Pair<>(dyeColor.getName(), rockVariant), alabasterColorBlock) != null)
                     throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", dyeColor, rockVariant));
-
-                ALABASTER_BLOCKS.put(new Pair<>("plain", rockVariant), alabasterBlock);
             }
         }
+
 
         //=== Groundcover ============================================================================================//
 
@@ -148,9 +150,12 @@ public class TFCBlocks {
 
         //=== Other ==================================================================================================//
 
+        PEAT = new BlockPeat();
+        PEAT_GRASS = new BlockPeatGrass();
+
+        ITEM_BLOCKS.add(PEAT.getItemBlock());
+        ITEM_BLOCKS.add(PEAT_GRASS.getItemBlock());
         ITEM_BLOCKS.add(new ItemBlockTFC(DEBUG = new BlockDebug()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(PEAT = new BlockPeat(Material.GROUND)));
-        ITEM_BLOCKS.add(new ItemBlockTFC(PEAT_GRASS = new BlockPeatGrass(Material.GRASS)));
         ITEM_BLOCKS.add(new ItemBlockTFC(AGGREGATE = new BlockAggregate()));
         ITEM_BLOCKS.add(new ItemBlockTFC(FIRE_CLAY_BLOCK = new BlockFireClay()));
         ITEM_BLOCKS.add(new ItemBlockTFC(THATCH = new BlockThatch()));

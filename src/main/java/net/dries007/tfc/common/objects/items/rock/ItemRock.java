@@ -1,6 +1,5 @@
 package net.dries007.tfc.common.objects.items.rock;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.rock.IRockItem;
@@ -23,13 +22,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class ItemRock extends ItemTFC implements IRockItem {
 
     private final RockType rockType;
@@ -59,13 +55,13 @@ public class ItemRock extends ItemTFC implements IRockItem {
 
     @Nonnull
     @Override
-    public Size getSize(ItemStack stack) {
+    public Size getSize(@Nonnull ItemStack stack) {
         return Size.SMALL;
     }
 
     @Nonnull
     @Override
-    public Weight getWeight(ItemStack stack) {
+    public Weight getWeight(@Nonnull ItemStack stack) {
         return Weight.VERY_LIGHT;
     }
 

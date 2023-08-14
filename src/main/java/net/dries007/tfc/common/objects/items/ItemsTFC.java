@@ -254,8 +254,6 @@ public final class ItemsTFC {
 
         allMoldItems = clayMolds.build();
         allSimpleItems = simpleItems.build();
-
-        OreDictionaryHelper.init();
     }
 
     @SuppressWarnings("ConstantConditions")

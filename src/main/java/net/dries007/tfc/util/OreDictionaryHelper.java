@@ -3,6 +3,8 @@ package net.dries007.tfc.util;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -54,8 +56,13 @@ public class OreDictionaryHelper {
      * Вызови это если хочешь зарегистрировать блоку его oreDict.
      */
     public static void register(Block block, String... parts) {
-        var oreDict = upperCaseToCamelCase(parts);
-        MAP_BLOCK_ORE.put(block, oreDict);
+        if (block instanceof IItemProvider itemBlock && itemBlock.getItemBlock() != null) {
+            var oreDict = upperCaseToCamelCase(parts);
+            MAP_BLOCK_ORE.put(block, oreDict);
+        }
+        else {
+            TerraFirmaCraft.LOGGER.warn(String.format("[%s] has no item block, but trying to register OreDict!", block));
+        }
     }
 
     /**

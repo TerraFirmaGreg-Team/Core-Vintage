@@ -34,7 +34,7 @@ public class BlockBellows extends Block {
         setHardness(2.0F);
         setResistance(2.0F);
         setHarvestLevel("axe", 0);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(MOD_ID, "bellows");

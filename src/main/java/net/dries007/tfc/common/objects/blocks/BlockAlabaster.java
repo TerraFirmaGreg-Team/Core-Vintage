@@ -50,9 +50,12 @@ public class BlockAlabaster extends Block implements IItemSize, IItemProvider, I
         setHardness(1.0F);
 
         var blockRegistryName = String.format("alabaster/%s/%s", rockBlockVariant, dyeColor.getName());
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        OreDictionaryHelper.register(this, "alabaster" + rockBlockVariant);
+        setRegistryName(MOD_ID, blockRegistryName);
+        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+
+        OreDictionaryHelper.register(this, "alabaster");
+        OreDictionaryHelper.register(this, "alabaster", rockBlockVariant.toString());
+        OreDictionaryHelper.register(this, "alabaster", rockBlockVariant.toString(), dyeColor.getName());
     }
 
     public BlockAlabaster(RockBlockVariant rockBlockVariant) {
@@ -63,10 +66,11 @@ public class BlockAlabaster extends Block implements IItemSize, IItemProvider, I
         this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/" + rockBlockVariant);
 
         var blockRegistryName = String.format("alabaster/%s/plain", rockBlockVariant);
-        this.setRegistryName(MOD_ID, blockRegistryName);
-        this.setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(MOD_ID, blockRegistryName);
+        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
-        OreDictionaryHelper.register(this, "alabaster" + rockBlockVariant);
+        OreDictionaryHelper.register(this, "alabaster");
+        OreDictionaryHelper.register(this, "alabaster", rockBlockVariant.toString());
     }
 
     @Nonnull

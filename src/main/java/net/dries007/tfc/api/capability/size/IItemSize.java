@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.capability.size;
 
 import net.dries007.tfc.common.objects.items.ItemTFC;
-import net.dries007.tfc.common.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

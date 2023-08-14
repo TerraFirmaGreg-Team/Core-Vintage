@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.items.itemblock;
+package net.dries007.tfc.common.objects.items.itemblocks;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.plant.type.PlantType;

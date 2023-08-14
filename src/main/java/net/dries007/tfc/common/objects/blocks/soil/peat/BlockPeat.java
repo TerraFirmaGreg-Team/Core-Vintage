@@ -2,7 +2,7 @@ package net.dries007.tfc.common.objects.blocks.soil.peat;
 
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

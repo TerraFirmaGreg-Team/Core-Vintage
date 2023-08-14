@@ -1,6 +1,7 @@
-package net.dries007.tfc.common.objects.items.itemblock;
+package net.dries007.tfc.common.objects.items.wood.itemblocks;
 
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

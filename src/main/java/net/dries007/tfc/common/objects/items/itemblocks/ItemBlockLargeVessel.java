@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.items.itemblock;
+package net.dries007.tfc.common.objects.items.itemblocks;
 
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.size.IItemSize;

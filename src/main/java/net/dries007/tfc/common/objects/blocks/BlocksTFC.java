@@ -14,7 +14,7 @@ import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropDead
 import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeat;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeatGrass;
-import net.dries007.tfc.common.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

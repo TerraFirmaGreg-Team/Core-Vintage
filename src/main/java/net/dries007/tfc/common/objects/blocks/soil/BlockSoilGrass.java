@@ -20,7 +20,7 @@ import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
 import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.common.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeat;
-import net.dries007.tfc.common.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;

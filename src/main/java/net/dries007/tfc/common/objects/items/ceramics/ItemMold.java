@@ -3,10 +3,12 @@ package net.dries007.tfc.common.objects.items.ceramics;
 import gregtech.api.fluids.MetaFluids;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.util.Helpers;
@@ -33,23 +35,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.dries007.tfc.TerraFirmaCraft.*;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
 @ParametersAreNonnullByDefault
 public class ItemMold extends ItemPottery {
-    private static final Map<OrePrefix, ItemMold> MOLD_STORAGE_MAP = new HashMap<>();
+
     private final OrePrefix orePrefix;
 
     public ItemMold(OrePrefix type) {
         this.orePrefix = type;
 
-        if (MOLD_STORAGE_MAP.put(type, this) != null) {
-            throw new IllegalStateException("There can only be one mold.");
-        }
-    }
-
-    public static ItemMold get(OrePrefix orePrefix) {
-        return MOLD_STORAGE_MAP.get(orePrefix);
+        setCreativeTab(CreativeTabsTFC.POTTERY);
+        setRegistryName(MOD_ID, "ceramics/fired/mold/" + orePrefix.name.toLowerCase());
     }
 
     @Nonnull

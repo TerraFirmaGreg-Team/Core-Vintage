@@ -8,7 +8,7 @@
   "key" : {
     "X" : {
       "type" : "forge:ore_dict",
-      "ore" : "rodWroughtIron"
+      "ore" : "rodIron"
     },
     "S" : {
       "type" : "forge:ore_dict",
@@ -19,7 +19,7 @@
       "ore" : "lumber"
     },
     "B" : {
-      "item" : "tfc:brass_mechanisms"
+      "item" : "minecraft:stick"
     }
   },
   "result" : {

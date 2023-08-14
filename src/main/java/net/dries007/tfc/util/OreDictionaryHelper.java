@@ -61,7 +61,7 @@ public class OreDictionaryHelper {
             MAP_BLOCK_ORE.put(block, oreDict);
         }
         else {
-            TerraFirmaCraft.LOGGER.warn(String.format("[%s] [%s] has no item block, but trying to register OreDict!", block, parts[0]));
+            TerraFirmaCraft.LOGGER.warn(String.format("Trying to register [%s] oredict, but itemblock is null. Skipping!", parts[0]));
         }
     }
 

@@ -1,6 +1,7 @@
 package net.dries007.tfc.common;
 
 import gregtech.api.unification.material.event.MaterialEvent;
+import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
@@ -18,6 +19,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.crop.category.CropTypeHandler;
 import net.dries007.tfc.api.types.crop.type.CropBlockVariantHandler;
 import net.dries007.tfc.api.types.food.category.FoodCategoryHandler;
@@ -41,10 +43,13 @@ import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.commands.*;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
 import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
+import net.dries007.tfc.common.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.common.objects.recipes.RecipeHandler;
 import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
+import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
 import net.dries007.tfc.compat.gregtech.stonetypes.StoneTypeHandler;
 import net.dries007.tfc.compat.top.TOPIntegration;
@@ -226,6 +231,16 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> r = event.getRegistry();
+
+        //=== Molds ==================================================================================================//
+
+        for (var mold : UNFIRED_MOLDS.values()) {
+            r.register(mold);
+        }
+
+        for (var mold : FIRED_MOLDS.values()) {
+            r.register(mold);
+        }
 
         //=== Rock ===================================================================================================//
 

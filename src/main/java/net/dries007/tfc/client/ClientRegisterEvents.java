@@ -154,7 +154,7 @@ public final class ClientRegisterEvents {
             var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
 
             if (extendedOrePrefix.getHasMold()) {
-                var clayMold = ItemMold.get(orePrefix);
+                var clayMold = TFCStorage.FIRED_MOLDS.get(orePrefix);
 
                 ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_empty"));
                 ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_filled"));
@@ -368,6 +368,6 @@ public final class ClientRegisterEvents {
         }, ForgeRegistries.ITEMS.getValuesCollection().stream().filter(x -> x instanceof ItemFood).toArray(Item[]::new));
 
         // Colorize clay molds
-        itemColors.registerItemColorHandler(moldItemColors, ItemsTFC.getAllMoldItems().toArray(new Item[0]));
+        itemColors.registerItemColorHandler(moldItemColors, TFCStorage.FIRED_MOLDS.values().toArray(new Item[0]));
     }
 }

@@ -123,15 +123,10 @@ public final class ItemsTFC {
     public static final Item OLIVE_PASTE = getNull();
 
     private static ImmutableList<Item> allSimpleItems;
-    private static ImmutableList<ItemMold> allMoldItems;
 
 
     public static ImmutableList<Item> getAllSimpleItems() {
         return allSimpleItems;
-    }
-
-    public static ImmutableList<ItemMold> getAllMoldItems() {
-        return allMoldItems;
     }
 
 
@@ -141,43 +136,15 @@ public final class ItemsTFC {
         IForgeRegistry<Item> r = event.getRegistry();
         Builder<Item> simpleItems = ImmutableList.builder();
 
-
         //=== Other ==================================================================================================//
 
         register(r, "wooden_bucket", new ItemWoodBucket(), CreativeTabsTFC.WOOD); //not a simple item, use a custom model
-        //register(r, "metal/bucket/blue_steel", new ItemMetalBucket(Metal.BLUE_STEEL, Metal.ItemType.BUCKET), METAL); //not a simple item, use a custom model
-        //register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET), METAL); //not a simple item, use a custom model
-
-        /*
-        for (Metal.ItemType type : Metal.ItemType.values())
-        {
-            for (Metal metal : TFCRegistries.METALS.getValuesCollection())
-            {
-                if (type != Metal.ItemType.BUCKET && type.hasType(metal)) // buckets registered separately
-                {
-                    simpleItems.add(register(r, "metal/" + type.name().toLowerCase() + "/" + metal.getRegistryName().getPath(), Metal.ItemType.create(metal, type), METAL));
-                }
-            }
-        }*/
-
 
         BlocksTFC.getAllNormalItemBlocks().forEach(x -> registerItemBlock(r, x));
         BlocksTFC.getAllInventoryItemBlocks().forEach(x -> registerItemBlock(r, x));
 
         // POTTERY
-        Builder<ItemMold> clayMolds = ImmutableList.builder();
-
         {
-            for (var orePrefix : OrePrefix.values()) {
-                var orePrefixExtension = (IOrePrefixExtension) orePrefix;
-                if (orePrefixExtension.getHasMold()) {
-                    // Not using registerPottery here because the ItemMold uses a custom ItemModelMesher, meaning it can't be in simpleItems
-                    clayMolds.add(register(r, "ceramics/fired/mold/" + orePrefix.name.toLowerCase(), new ItemMold(orePrefix), CreativeTabsTFC.POTTERY));
-                    simpleItems.add(register(r, "ceramics/unfired/mold/" + orePrefix.name.toLowerCase(), new ItemUnfiredMold(orePrefix), CreativeTabsTFC.POTTERY));
-                }
-            }
-
-
             simpleItems.add(register(r, "ceramics/unfired/large_vessel", new ItemUnfiredLargeVessel(), CreativeTabsTFC.POTTERY));
             simpleItems.add(register(r, "ceramics/unfired/crucible", new ItemPottery(Size.LARGE, Weight.VERY_HEAVY), CreativeTabsTFC.POTTERY));
 
@@ -252,7 +219,6 @@ public final class ItemsTFC {
 //        simpleItems.add(register(r, "dye/white", new ItemMisc(Size.TINY, Weight.LIGHT, "dye_white"), MISC));
 //        simpleItems.add(register(r, "dye/brown", new ItemMisc(Size.TINY, Weight.LIGHT, "dye_brown"), MISC));
 
-        allMoldItems = clayMolds.build();
         allSimpleItems = simpleItems.build();
     }
 

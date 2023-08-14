@@ -7,6 +7,7 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeVessel;
 import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.food.variant.FoodVariants;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
@@ -43,8 +44,8 @@ public class HeatRecipes {
         for (var orePrefix : OrePrefix.values()) {
             var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
             if (extendedOrePrefix.getHasMold()) {
-                var unfiredMold = ItemUnfiredMold.get(orePrefix);
-                var firedMold = ItemMold.get(orePrefix);
+                var unfiredMold = TFCStorage.UNFIRED_MOLDS.get(orePrefix);
+                var firedMold = TFCStorage.FIRED_MOLDS.get(orePrefix);
 
                 if (unfiredMold != null && firedMold != null) {
                     registry.register(new HeatRecipeSimple(IIngredient.of(unfiredMold), new ItemStack(firedMold), 1599f, 1).setRegistryName("fired_mold_" + orePrefix.name.toLowerCase()));

@@ -1,6 +1,8 @@
 package net.dries007.tfc.common.objects.items.ceramics;
 
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -9,19 +11,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ItemUnfiredMold extends ItemPottery {
-    private static final Map<OrePrefix, ItemUnfiredMold> MOLD_STORAGE_MAP = new HashMap<>();
+
     public final OrePrefix orePrefix;
 
     public ItemUnfiredMold(OrePrefix orePrefix) {
         this.orePrefix = orePrefix;
 
-        if (MOLD_STORAGE_MAP.put(orePrefix, this) != null) {
-            throw new IllegalStateException("There can only be one.");
-        }
-    }
-
-    public static ItemUnfiredMold get(OrePrefix orePrefix) {
-        return MOLD_STORAGE_MAP.get(orePrefix);
+        setCreativeTab(CreativeTabsTFC.POTTERY);
+        setRegistryName(TerraFirmaCraft.MOD_ID, "ceramics/unfired/mold/" + orePrefix.name.toLowerCase());
     }
 
     @Nonnull

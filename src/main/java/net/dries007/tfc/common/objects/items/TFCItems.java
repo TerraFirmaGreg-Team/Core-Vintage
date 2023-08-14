@@ -1,13 +1,18 @@
 package net.dries007.tfc.common.objects.items;
 
+import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
+import net.dries007.tfc.common.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.common.objects.items.rock.ItemRock;
 import net.dries007.tfc.common.objects.items.rock.ItemRockBrick;
 import net.dries007.tfc.common.objects.items.wood.ItemWoodBoat;
 import net.dries007.tfc.common.objects.items.wood.ItemWoodLumber;
+import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.minecraft.item.Item;
 
 import static net.dries007.tfc.api.registries.TFCStorage.*;
@@ -39,6 +44,18 @@ public class TFCItems {
 
     public static void preInit() {
 
+        //=== Molds ==================================================================================================//
+
+        for (var orePrefix : OrePrefix.values()) {
+            var orePrefixExtension = (IOrePrefixExtension) orePrefix;
+            if (orePrefixExtension.getHasMold()) {
+                if (UNFIRED_MOLDS.put(orePrefix, new ItemUnfiredMold(orePrefix)) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s", orePrefix));
+
+                if (FIRED_MOLDS.put(orePrefix, new ItemMold(orePrefix)) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s", orePrefix));
+            }
+        }
 
         //=== ItemRock ===============================================================================================//
 

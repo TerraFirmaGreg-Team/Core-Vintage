@@ -7,7 +7,7 @@ import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.items.wood.ItemWoodSlab;
+import net.dries007.tfc.common.objects.items.wood.itemblocks.ItemBlockWoodSlab;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
@@ -226,7 +226,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
         @Override
         public ItemBlock getItemBlock() {
-            return new ItemWoodSlab(this, this, this.doubleSlab);
+            return new ItemBlockWoodSlab(this, this, this.doubleSlab);
         }
 
         @Override

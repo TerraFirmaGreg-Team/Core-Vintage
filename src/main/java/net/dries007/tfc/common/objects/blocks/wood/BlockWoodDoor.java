@@ -5,7 +5,7 @@ import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.common.objects.items.wood.itemblocks.ItemBlockWoodDoor;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,10 +21,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
@@ -44,7 +46,6 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
         setHardness(3.0F);
         disableStats();
 
-        // No direct item, so no oredict.
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
@@ -58,30 +59,37 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
         return woodType;
     }
 
+    @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockWoodDoor(this);
     }
 
+    /**
+     * Вызов из ForgeRegistries сопряжен с тем, что при вызове getItemBlock возвращается null.
+     * Я так и не разобрался почему так происходит.
+     * */
+    @SuppressWarnings("ConstantConditions")
     @Nonnull
     @Override
     public Item getItemDropped(IBlockState state, @Nonnull Random rand, int fortune) {
-        var itemBlock = getItemBlock();
-
         if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER) {
             return Items.AIR;
-        } else if (itemBlock != null) {
-            return itemBlock;
+        } else {
+            return ForgeRegistries.ITEMS.getValue(getRegistryLocation());
         }
-
-        return Items.AIR;
     }
 
+    /**
+     * Вызов из ForgeRegistries сопряжен с тем, что при вызове getItemBlock возвращается null.
+     * Я так и не разобрался почему так происходит.
+     * */
+    @SuppressWarnings("ConstantConditions")
     @Nonnull
     @Override
     public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player) {
-        var itemBlock = getItemBlock();
-        return itemBlock == null ? ItemStack.EMPTY : new ItemStack(getItemBlock());
+
+        return new ItemStack(ForgeRegistries.ITEMS.getValue(getRegistryLocation()));
     }
 
     @Override

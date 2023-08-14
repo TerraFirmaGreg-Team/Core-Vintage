@@ -6,6 +6,7 @@ import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.client.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblock.ItemBlockSaplingTFC;
 import net.dries007.tfc.common.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.util.Helpers;
@@ -75,7 +76,7 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockSaplingTFC(this);
     }
 
 
@@ -165,15 +166,6 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     public void grow(@Nonnull World world, @Nonnull Random random, @Nonnull BlockPos blockPos, @Nonnull IBlockState blockState) {
         woodType.makeTree(world, blockPos, random, false);
     }
-
-    // TODO: 08.08.2023
-    /*
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-        woodType.addInfo(stack, worldIn, tooltip, flagIn);
-    }*/
 
     @Override
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {

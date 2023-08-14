@@ -345,17 +345,6 @@ public class WoodType {
         return false;
     }
 
-    @SideOnly(Side.CLIENT)
-    public void addInfo(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        if (GuiScreen.isShiftKeyDown()) {
-            tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
-            tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) minRain, (int) maxRain));
-            tooltip.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", minTemp), String.format("%.1f", maxTemp)));
-        } else {
-            tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
-        }
-    }
-
     public static class Builder {
         private final String name;
         private final int color;

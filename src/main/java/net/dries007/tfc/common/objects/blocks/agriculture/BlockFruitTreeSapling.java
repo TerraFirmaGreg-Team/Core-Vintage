@@ -48,8 +48,9 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
         setSoundType(SoundType.PLANT);
         setHardness(0.0F);
         setTickRandomly(true);
-        OreDictionaryHelper.register(this, "tree", "sapling");
-        OreDictionaryHelper.register(this, "tree", "sapling", tree.getName());
+        // TODO: 14.08.2023
+        // OreDictionaryHelper.register(this, "tree", "sapling");
+        // OreDictionaryHelper.register(this, "tree", "sapling", tree.getName());
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 

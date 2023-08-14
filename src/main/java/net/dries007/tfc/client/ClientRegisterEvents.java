@@ -113,6 +113,9 @@ public final class ClientRegisterEvents {
         for (var item : TFCStorage.BOAT_ITEMS.values())
             item.onModelRegister();
 
+        for (var item : TFCStorage.UNFIRED_MOLDS.values())
+            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
+
         for (var item : TFCStorage.ITEM)
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
@@ -136,8 +139,6 @@ public final class ClientRegisterEvents {
         // Registering fluid containers
         ModelLoader.setCustomModelResourceLocation(ItemsTFC.WOODEN_BUCKET, 0, new ModelResourceLocation(ItemsTFC.WOODEN_BUCKET.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(ItemsTFC.FIRED_JUG, 0, new ModelResourceLocation(ItemsTFC.FIRED_JUG.getRegistryName(), "inventory"));
-        //ModelLoader.setCustomModelResourceLocation(ItemsTFC.BLUE_STEEL_BUCKET, 0, new ModelResourceLocation(ItemsTFC.BLUE_STEEL_BUCKET.getRegistryName(), "inventory"));
-        //ModelLoader.setCustomModelResourceLocation(ItemsTFC.RED_STEEL_BUCKET, 0, new ModelResourceLocation(ItemsTFC.RED_STEEL_BUCKET.getRegistryName(), "inventory"));
 
         // Simple Items
         for (Item item : ItemsTFC.getAllSimpleItems())

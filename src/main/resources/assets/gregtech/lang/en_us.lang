@@ -31,6 +31,14 @@ gregtech.material.slate=Slate
 
 gregtech.material.flux=Flux
 gregtech.material.fresh_water=Fresh Water
+gregtech.material.cider=Cider
+gregtech.material.vodka=Vodka
+gregtech.material.sake=Sake
+gregtech.material.corn_whiskey=Cron Whiskey
+gregtech.material.rye_whiskey=Rye Whiskey
+gregtech.material.whiskey=Whiskey
+gregtech.material.beer=Beer
+gregtech.material.rum=Rum
 
 # ОрПрефиксы
 item.material.oreprefix.ingotDouble=%s Ingot Double

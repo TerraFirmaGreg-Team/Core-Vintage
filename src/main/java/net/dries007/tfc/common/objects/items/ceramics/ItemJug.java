@@ -85,10 +85,10 @@ public class ItemJug extends ItemPottery {
         IFluidHandler jugCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (jugCap != null) {
             FluidStack fluidConsumed = jugCap.drain(CAPACITY, true);
-            if (fluidConsumed != null && entityLiving instanceof EntityPlayer) {
+            if (fluidConsumed != null && entityLiving instanceof EntityPlayer player) {
                 var drinkable = Drinkable.getActionByFluid(fluidConsumed.getFluid());
                 if (drinkable != null) {
-                    drinkable.onDrink((EntityPlayer) entityLiving);
+                    drinkable.onDrink(player);
                 }
             }
             if (Constants.RNG.nextFloat() < 0.02) {

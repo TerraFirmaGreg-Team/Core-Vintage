@@ -12,7 +12,7 @@ public class RockBlockVariantHandler {
 
         RAW = new RockBlockVariant("raw", 6f, BlockRockRaw::new);
 
-        SMOOTH = new RockBlockVariant("smooth", 6f, BlockRock::new);
+        SMOOTH = new RockBlockVariant("smooth", 6f, BlockRockSmooth::new);
 
         BRICK = new RockBlockVariant("brick", 6f, BlockRock::new);
         BRICK_MOSSY = new RockBlockVariant("brick/mossy", 6f, BlockRockMossy::new);

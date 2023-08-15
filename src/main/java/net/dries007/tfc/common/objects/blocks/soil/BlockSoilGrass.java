@@ -6,7 +6,6 @@
 
 package net.dries007.tfc.common.objects.blocks.soil;
 
-
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
@@ -65,7 +64,6 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
     private final SoilBlockVariant soilBlockVariant;
     private final SoilType soilType;
-    private final ResourceLocation modelLocation;
 
     public BlockSoilGrass(SoilBlockVariant soilBlockVariant, SoilType soilType) {
 
@@ -74,11 +72,10 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
         this.soilBlockVariant = soilBlockVariant;
         this.soilType = soilType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "soil/" + soilBlockVariant);
 
-        var blockRegistryName = String.format("soil/%s/%s", soilBlockVariant, soilType);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.EARTH);
         setSoundType(SoundType.PLANT);
         setHardness(2.1F);
@@ -90,6 +87,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 .withProperty(SOUTH, Boolean.FALSE)
                 .withProperty(WEST, Boolean.FALSE));
 
+        OreDictionaryHelper.register(this, soilBlockVariant.toString());
         OreDictionaryHelper.register(this, soilBlockVariant.toString(), soilType.toString());
     }
 
@@ -224,6 +222,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
         }
     }
 
+    @Nonnull
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, @Nonnull BlockPos pos) {
         pos = pos.add(0, -1, 0);
@@ -233,12 +232,20 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 .withProperty(EAST, world.getBlockState(pos.offset(EnumFacing.EAST)).getBlock() instanceof BlockSoilGrass)
                 .withProperty(SOUTH, world.getBlockState(pos.offset(EnumFacing.SOUTH)).getBlock() instanceof BlockSoilGrass)
                 .withProperty(WEST, world.getBlockState(pos.offset(EnumFacing.WEST)).getBlock() instanceof BlockSoilGrass);
-//				.withProperty(SNOWY, Boolean.valueOf(blockUp == Blocks.SNOW || blockUp == Blocks.SNOW_LAYER));
+        // TODO: 15.08.2023
+        //.withProperty(SNOWY, Boolean.valueOf(blockUp == Blocks.SNOW || blockUp == Blocks.SNOW_LAYER));
     }
 
+    @Nonnull
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, EAST, NORTH, WEST, SOUTH, SNOWY);
+    }
+
+    @Nonnull
+    @Override
+    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
+        return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soilType));
     }
 
     @Override
@@ -272,7 +279,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation,
+                return new ModelResourceLocation(getResourceLocation(),
                         "east=" + state.getValue(EAST) + "," +
                                 "north=" + state.getValue(NORTH) + "," +
                                 "soiltype=" + soilType.toString() + "," +
@@ -283,8 +290,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),
-                this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(modelLocation,
+                getMetaFromState(getBlockState().getBaseState()),
+                new ModelResourceLocation(getResourceLocation(),
                         "east=false,north=false," +
                                 "soiltype=" + soilType.toString() + "," +
                                 "south=false,west=false"));

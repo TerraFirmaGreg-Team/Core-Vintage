@@ -23,6 +23,7 @@ public class TFGToolItems {
         CHISEL = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "chisel")
                 .toolStats(b -> b.crafting().cannotAttack().attackSpeed(-2.4F).behaviors(ChiselBehavior.INSTANCE))
                 .oreDict("craftingToolChisel")
+                .symbol('e')
                 .toolClasses("chisel"));
 
         PROPICK = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "propick")

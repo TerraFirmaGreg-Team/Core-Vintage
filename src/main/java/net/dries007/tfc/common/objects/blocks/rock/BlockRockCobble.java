@@ -12,6 +12,8 @@ public class BlockRockCobble extends BlockRockFallable {
 
         FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL_ROCK);
 
+        setHardness(getFinalHardness());
+
         OreDictionaryHelper.register(this, "cobblestone");
     }
 

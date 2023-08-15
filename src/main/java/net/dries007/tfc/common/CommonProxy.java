@@ -22,6 +22,7 @@ import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.crop.category.CropTypeHandler;
 import net.dries007.tfc.api.types.crop.type.CropBlockVariantHandler;
+import net.dries007.tfc.api.types.drinkable.DrinkableHandler;
 import net.dries007.tfc.api.types.food.category.FoodCategoryHandler;
 import net.dries007.tfc.api.types.food.variant.FoodVariantHandler;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariantHandler;
@@ -102,6 +103,8 @@ public class CommonProxy {
     public static void onMaterialsInit(MaterialEvent event) {
         TFGMaterialHandler.init();
         TFGOrePrefixHandler.init();
+
+        DrinkableHandler.init();
 
         RockCategoryHandler.init();
         RockTypeHandler.init();

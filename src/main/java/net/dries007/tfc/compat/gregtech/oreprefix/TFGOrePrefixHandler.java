@@ -56,6 +56,8 @@ public class TFGOrePrefixHandler {
         final var orePrefixesThatHaveMetalCapability = Arrays.asList(
                 OrePrefix.nugget,
                 OrePrefix.plate,
+                OrePrefix.dustTiny,
+                OrePrefix.dustSmall,
                 TFGOrePrefix.ingotDouble,
                 TFGOrePrefix.ingotTriple,
                 TFGOrePrefix.ingotHex
@@ -78,6 +80,8 @@ public class TFGOrePrefixHandler {
             put(OrePrefix.nugget, 16);
             put(OrePrefix.ingot, 144);
             put(OrePrefix.plate, 144);
+            put(OrePrefix.dustTiny, 16);
+            put(OrePrefix.dustSmall, 36);
             put(TFGOrePrefix.ingotDouble, 288);
             put(TFGOrePrefix.ingotTriple, 432);
             put(TFGOrePrefix.ingotHex, 864);

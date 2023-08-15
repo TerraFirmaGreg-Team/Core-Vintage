@@ -30,6 +30,7 @@ gregtech.material.siltstone=Siltstone
 gregtech.material.slate=Slate
 
 gregtech.material.flux=Flux
+gregtech.material.fresh_water=Fresh Water
 
 # ОрПрефиксы
 item.material.oreprefix.ingotDouble=%s Ingot Double

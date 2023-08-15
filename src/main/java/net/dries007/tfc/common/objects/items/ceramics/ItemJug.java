@@ -1,18 +1,24 @@
 package net.dries007.tfc.common.objects.items.ceramics;
 
-import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
+import net.dries007.tfc.api.types.drinkable.Drinkable;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.FluidTransferHelper;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidStack;
@@ -21,10 +27,9 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.Nullable;
+import java.util.stream.Collectors;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class ItemJug extends ItemPottery {
     private static final int CAPACITY = 100;
 
@@ -33,9 +38,10 @@ public class ItemJug extends ItemPottery {
         setContainerItem(this);
     }
 
+    @Nonnull
     @SuppressWarnings("ConstantConditions")
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty()) {
             IFluidHandler jugCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
@@ -73,26 +79,25 @@ public class ItemJug extends ItemPottery {
         return new ActionResult<>(EnumActionResult.PASS, stack);
     }
 
-//    @Override
-//    @Nonnull
-//    public ItemStack onItemUseFinish(@Nonnull ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-//        IFluidHandler jugCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-//        if (jugCap != null) {
-//            FluidStack fluidConsumed = jugCap.drain(CAPACITY, true);
-//            if (fluidConsumed != null && entityLiving instanceof EntityPlayer) {
-//                DrinkableProperty drinkable = FluidsTFC.getWrapper(fluidConsumed.getFluid()).get(DrinkableProperty.DRINKABLE);
-//                if (drinkable != null) {
-//                    drinkable.onDrink((EntityPlayer) entityLiving);
-//                }
-//            }
-//            if (Constants.RNG.nextFloat() < 0.02) // 1/50 chance, same as 1.7.10
-//            {
-//                stack.shrink(1);
-//                worldIn.playSound(null, entityLiving.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);
-//            }
-//        }
-//        return stack;
-//    }
+    @Override
+    @Nonnull
+    public ItemStack onItemUseFinish(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull EntityLivingBase entityLiving) {
+        IFluidHandler jugCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        if (jugCap != null) {
+            FluidStack fluidConsumed = jugCap.drain(CAPACITY, true);
+            if (fluidConsumed != null && entityLiving instanceof EntityPlayer) {
+                var drinkable = Drinkable.getActionByFluid(fluidConsumed.getFluid());
+                if (drinkable != null) {
+                    drinkable.onDrink((EntityPlayer) entityLiving);
+                }
+            }
+            if (Constants.RNG.nextFloat() < 0.02) {
+                stack.shrink(1);
+                worldIn.playSound(null, entityLiving.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            }
+        }
+        return stack;
+    }
 
     @Override
     @Nonnull
@@ -101,7 +106,7 @@ public class ItemJug extends ItemPottery {
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack) {
+    public int getMaxItemUseDuration(@Nonnull ItemStack stack) {
         return 32;
     }
 
@@ -119,30 +124,30 @@ public class ItemJug extends ItemPottery {
         return super.getItemStackDisplayName(stack);
     }
 
-//    @Override
-//    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-//        if (isInCreativeTab(tab)) {
-//            items.add(new ItemStack(this));
-//            for (Fluid wrapper : FluidsTFC.getAllWrappers()) {
-//                if (wrapper.get(DrinkableProperty.DRINKABLE) != null) {
-//                    ItemStack stack = new ItemStack(this);
-//                    IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-//                    if (cap != null) {
-//                        cap.fill(new FluidStack(wrapper, CAPACITY), true);
-//                    }
-//                    items.add(stack);
-//                }
-//            }
-//        }
-//    }
+    @Override
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+
+        if (isInCreativeTab(tab)) {
+            items.add(new ItemStack(this));
+            for (var drinkable : Drinkable.getDrinkables()) {
+                var stack = new ItemStack(this);
+                var cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+                if (cap != null) {
+                    cap.fill(new FluidStack(drinkable.getFluid(), CAPACITY), true);
+                }
+                items.add(stack);
+            }
+
+        }
+    }
 
     @Override
-    public boolean canStack(ItemStack stack) {
+    public boolean canStack(@Nonnull ItemStack stack) {
         return false;
     }
 
-//    @Override
-//    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-//        return new FluidWhitelistHandler(stack, CAPACITY, FluidsTFC.getAllWrappers().stream().filter(x -> x.get(DrinkableProperty.DRINKABLE) != null).map(FluidWrapper::get).collect(Collectors.toSet()));
-//    }
+    @Override
+    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+        return new FluidWhitelistHandler(stack, CAPACITY, Drinkable.getDrinkables().stream().map(Drinkable::getFluid).collect(Collectors.toSet()));
+    }
 }

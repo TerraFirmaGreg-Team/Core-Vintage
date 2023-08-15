@@ -1,7 +1,7 @@
 package net.dries007.tfc.config;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.GrassColorHandler;
+import net.dries007.tfc.client.util.GrassColorHandler;
 import net.dries007.tfc.util.Alloy;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;

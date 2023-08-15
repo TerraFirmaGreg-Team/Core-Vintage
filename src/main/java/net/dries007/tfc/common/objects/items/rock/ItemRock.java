@@ -4,7 +4,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.rock.IRockItem;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;

@@ -1,4 +1,4 @@
-package net.dries007.tfc.client;
+package net.dries007.tfc.client.util;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

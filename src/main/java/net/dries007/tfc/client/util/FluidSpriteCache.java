@@ -1,4 +1,4 @@
-package net.dries007.tfc.client;
+package net.dries007.tfc.client.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;

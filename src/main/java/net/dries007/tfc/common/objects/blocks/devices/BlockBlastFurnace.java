@@ -4,7 +4,7 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.api.util.property.ILightableBlock;
-import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalCladding;

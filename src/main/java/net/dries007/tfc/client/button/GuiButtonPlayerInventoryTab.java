@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;

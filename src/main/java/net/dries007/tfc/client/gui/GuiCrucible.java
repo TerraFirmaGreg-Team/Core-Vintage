@@ -2,7 +2,7 @@ package net.dries007.tfc.client.gui;
 
 import gregtech.api.unification.material.Material;
 import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.client.util.FluidSpriteCache;
 import net.dries007.tfc.common.objects.tileentities.TECrucible;
 import net.dries007.tfc.util.Alloy;
 import net.minecraft.client.Minecraft;

@@ -27,7 +27,7 @@ import static net.dries007.tfc.TerraFirmaCraft.*;
 public final class TerraFirmaCraft {
     public static final String MOD_ID = "tfc";
     public static final String MOD_NAME = "TerraFirmaCraft";
-    public static final String GUI_FACTORY = "net.dries007.tfc.client.TFCModGuiFactory";
+    public static final String GUI_FACTORY = "net.dries007.tfc.client.util.TFCModGuiFactory";
     public static final String DEPENDENCIES = "required:forge@[14.23.5.2847,);after:jei@[4.14.2,);after:gregtech;after:top@(1.8.25,)";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     public static final WorldTypeTFC WORLD_TYPE_TFC = new WorldTypeTFC();

@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.render;
 
-import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.client.util.FluidSpriteCache;
 import net.dries007.tfc.common.objects.tileentities.TECrucible;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

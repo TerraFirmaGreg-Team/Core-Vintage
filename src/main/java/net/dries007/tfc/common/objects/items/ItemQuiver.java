@@ -2,7 +2,7 @@ package net.dries007.tfc.common.objects.items;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.ArmorMaterialTFC;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;

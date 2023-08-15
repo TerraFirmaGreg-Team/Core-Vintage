@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.common.objects.tileentities.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;

@@ -12,7 +12,7 @@ import net.dries007.tfc.api.types.metal.IMetalBlock;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IHasModel;
-import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;

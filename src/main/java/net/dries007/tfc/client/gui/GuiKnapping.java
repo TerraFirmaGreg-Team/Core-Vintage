@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.gui;
 
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonKnapping;
 import net.dries007.tfc.common.objects.container.ContainerKnapping;
 import net.minecraft.client.gui.Gui;

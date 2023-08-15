@@ -1,4 +1,4 @@
-package net.dries007.tfc.client;
+package net.dries007.tfc.client.util;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;

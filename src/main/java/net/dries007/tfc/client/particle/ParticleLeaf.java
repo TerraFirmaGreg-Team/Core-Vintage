@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.particle;
 
-import net.dries007.tfc.client.GrassColorHandler;
+import net.dries007.tfc.client.util.GrassColorHandler;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;

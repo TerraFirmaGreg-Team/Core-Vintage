@@ -1,4 +1,4 @@
-package net.dries007.tfc.client;
+package net.dries007.tfc.client.util;
 
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
-import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.tileentities.TENestBox;
 import net.dries007.tfc.util.Helpers;

@@ -13,6 +13,7 @@ public class TFGMaterials {
     public static Material WeakSteel;
     public static Material WeakBlueSteel;
     public static Material WeakRedSteel;
+    public static Material Flux;
 
     // Варианты воды
     public static Material HotWater;

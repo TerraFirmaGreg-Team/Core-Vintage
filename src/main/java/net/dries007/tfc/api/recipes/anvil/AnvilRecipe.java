@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.recipes.anvil;
 
+import gregtech.common.items.ToolItems;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.tileentities.TEAnvilTFC;
@@ -100,7 +101,7 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
     public NonNullList<IIngredient<ItemStack>> getIngredients() {
         NonNullList<IIngredient<ItemStack>> list = NonNullList.create();
         list.add(ingredient);
-        list.add(IIngredient.of("hammer"));
+        list.add(IIngredient.of(ToolItems.HARD_HAMMER.get()));
         return list;
     }
 

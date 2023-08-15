@@ -1,6 +1,8 @@
 package net.dries007.tfc.compat.gregtech.material;
 
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.info.MaterialFlag;
+import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.properties.ToolProperty;
 
 import static gregtech.api.unification.material.Materials.*;
@@ -166,6 +168,12 @@ public class TFGMaterialHandler {
         Lye = new Material.Builder(32068, gregtechId("lye"))
                 .fluid()
                 .color(0XFEFFDE)
+                .build();
+
+        Flux = new Material.Builder(32090, gregtechId("flux"))
+                .dust()
+                .color(0XFFFBE8)
+                .flags(NO_UNIFICATION)
                 .build();
 
         // StoneTypes

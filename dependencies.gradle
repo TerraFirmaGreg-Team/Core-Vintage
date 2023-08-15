@@ -31,7 +31,6 @@ dependencies {
     // Util dependencies
     if (project.use_util.toBoolean()) {
         implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
-        //implementation rfg.deobf("curse.maven:2.0.5-modularui-624243:4635658-sources-4635660")
         implementation rfg.deobf("maven.modrinth:the-one-probe:1.12-1.4.28")
         implementation rfg.deobf("curse.maven:had-enough-items-557549:4571247")
     }
@@ -42,8 +41,7 @@ dependencies {
         implementation rfg.deobf("maven.modrinth:gregtech-ce-unofficial:2.7.3-beta")
         implementation rfg.deobf("maven.modrinth:gregicality-multiblocks:1.2.4")
 
-        // implementation("curse.maven:0.5.2-groovyscript-687577:4635839")
-        // implementation("curse.maven:1.0.2.31-ctm-267602:2915363")
+        compileOnly("curse.maven:ctm-267602:2915363")
     }
 
     // Dramatic Trees dependencies

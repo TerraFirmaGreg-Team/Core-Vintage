@@ -1,7 +1,9 @@
 package net.dries007.tfc.api.types.drinkable;
 
 import gregtech.api.unification.material.Materials;
+import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
+import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.common.objects.effects.PotionEffectsTFC;
@@ -40,16 +42,21 @@ public class DrinkableHandler {
             });
 
         SALT_WATER = new Drinkable(() -> Materials.SaltWater.getFluid(),
-                (player) -> {
-                    if (player.getFoodStats() instanceof FoodStatsTFC) {
-                        ((FoodStatsTFC) player.getFoodStats()).addThirst(-10);
-                        if (Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
-                            player.addPotionEffect(new PotionEffect(PotionEffectsTFC.THIRST, 600, 0));
-                        }
+            (player) -> {
+                if (player.getFoodStats() instanceof FoodStatsTFC) {
+                    ((FoodStatsTFC) player.getFoodStats()).addThirst(-10);
+                    if (Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectsTFC.THIRST, 600, 0));
                     }
-                });
+                }
+            });
 
-        MILK = new Drinkable(() -> Materials.Milk.getFluid(), alcoholAction);
+        MILK = new Drinkable(() -> Materials.Milk.getFluid(), (player -> {
+            if (player.getFoodStats() instanceof IFoodStatsTFC foodStats) {
+                foodStats.addThirst(10);
+                foodStats.getNutrition().addBuff(FoodData.MILK);
+            }
+        }));
 
         CIDER = new Drinkable(() -> TFGMaterials.Cider.getFluid(), alcoholAction);
         VODKA = new Drinkable(() -> TFGMaterials.Vodka.getFluid(), alcoholAction);

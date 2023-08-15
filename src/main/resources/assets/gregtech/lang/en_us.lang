@@ -29,6 +29,8 @@ gregtech.material.shale=Shale
 gregtech.material.siltstone=Siltstone
 gregtech.material.slate=Slate
 
+gregtech.material.flux=Flux
+
 # ОрПрефиксы
 item.material.oreprefix.ingotDouble=%s Ingot Double
 item.material.oreprefix.ingotTriple=%s Ingot Triple

@@ -12,15 +12,35 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
+/**
+ * Класс WorldGenFalls реализует интерфейс IWorldGenerator и используется для генерации водопадов в мире.
+ * Он размещает блоки водопада на случайных координатах в заданном чанке.
+ */
 public class WorldGenFalls implements IWorldGenerator {
     private final IBlockState block;
     private final int rarity;
 
+    /**
+     * Конструктор класса WorldGenFalls.
+     *
+     * @param blockIn Блок, представляющий водопад.
+     * @param rarity  Частота генерации водопадов.
+     */
     public WorldGenFalls(IBlockState blockIn, int rarity) {
         this.block = blockIn;
         this.rarity = rarity;
     }
 
+    /**
+     * Генерирует водопады в мире.
+     *
+     * @param random          Генератор случайных чисел.
+     * @param chunkX          Координата X чанка.
+     * @param chunkZ          Координата Z чанка.
+     * @param world           Мир, в котором происходит генерация.
+     * @param chunkGenerator  Генератор чанков.
+     * @param chunkProvider   Поставщик чанков.
+     */
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         for (int k5 = 0; k5 < rarity; ++k5) {

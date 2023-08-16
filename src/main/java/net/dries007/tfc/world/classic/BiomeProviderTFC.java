@@ -12,9 +12,18 @@ import net.minecraft.world.gen.layer.GenLayer;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+/**
+ * Класс BiomeProviderTFC расширяет класс BiomeProvider и предоставляет пользовательский провайдер биомов для TFC (Terrafirmacraft).
+ */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BiomeProviderTFC extends BiomeProvider {
+    /**
+     * Конструктор класса BiomeProviderTFC.
+     *
+     * @param world Мир, для которого создается провайдер биомов.
+     * @throws RuntimeException Если тип мира не является WorldTypeTFC.
+     */
     public BiomeProviderTFC(World world) {
         super(world.getWorldInfo());
 
@@ -23,13 +32,23 @@ public class BiomeProviderTFC extends BiomeProvider {
         }
     }
 
+    /**
+     * Возвращает список биомов, в которых могут появляться игроки.
+     *
+     * @return Список биомов для спавна.
+     */
     @Override
     public List<Biome> getBiomesToSpawnIn() {
         return BiomesTFC.getSpawnBiomes();
     }
 
     /**
-     * This is where we do the actual override of the generation, we discard the original and insert our own.
+     * Здесь происходит фактическое переопределение генерации биомов. Мы отбрасываем оригинальный генератор и вставляем свой собственный.
+     *
+     * @param worldType Тип мира.
+     * @param seed      Семя генерации.
+     * @param original  Оригинальные генераторы биомов.
+     * @return Модифицированные генераторы биомов.
      */
     @Override
     public GenLayer[] getModdedBiomeGenerators(WorldType worldType, long seed, GenLayer[] original) {

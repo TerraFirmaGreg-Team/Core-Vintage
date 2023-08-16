@@ -144,12 +144,19 @@ public class ChunkGenTFC implements IChunkGenerator {
     private float rainfall;
     private float averageTemp;
 
+    /**
+     * Конструктор класса ChunkGenTFC.
+     *
+     * @param w             Мир, для которого будет генерироваться чанк.
+     * @param settingsString Строка с настройками генерации мира.
+     */
     public ChunkGenTFC(World w, String settingsString) {
         world = w;
         seed = world.getSeed();
         rand = new Random(seed);
         s = WorldGenSettings.fromString(settingsString).build();
 
+        // Инициализация шумовых генераторов
         noiseGen1 = new NoiseGeneratorOctaves(rand, 4);
         noiseGen2 = new NoiseGeneratorOctaves(rand, 16);
         noiseGen3 = new NoiseGeneratorOctaves(rand, 8);
@@ -158,34 +165,50 @@ public class ChunkGenTFC implements IChunkGenerator {
         noiseGen6 = new NoiseGeneratorOctaves(rand, 1);
         mobSpawnerNoise = new NoiseGeneratorOctaves(rand, 8);
 
+        // Инициализация генераторов породных слоев
         rocksGenLayer1 = GenLayerTFC.initializeRock(seed + 1, RockCategory.Layer.TOP, s.rockLayerSize);
         rocksGenLayer2 = GenLayerTFC.initializeRock(seed + 2, RockCategory.Layer.MIDDLE, s.rockLayerSize);
         rocksGenLayer3 = GenLayerTFC.initializeRock(seed + 3, RockCategory.Layer.BOTTOM, s.rockLayerSize);
 
+        // Инициализация шумовых генераторов Перлина
         noiseGen7 = new NoiseGeneratorPerlin(new Random(seed + 4), 4);
         noiseGen8 = new NoiseGeneratorPerlin(new Random(seed + 5), 4);
         noiseGen9 = new NoiseGeneratorPerlin(new Random(seed + 6), 4);
         noiseGen10 = new NoiseGeneratorPerlin(new Random(seed + 7), 4);
 
+        // Инициализация генераторов стабильности, pH и дренажа
         stabilityGenLayer = GenLayerTFC.initializeStability(seed + 9);
         phGenLayer = GenPHLayer.initializePH(seed + 10);
         drainageGenLayer = GenDrainageLayer.initialize(seed + 11);
 
+        // Инициализация генераторов пещер и рек
         caveGen = TerrainGen.getModdedMapGen(new MapGenCavesTFC(stabilityLayer), InitMapGenEvent.EventType.CAVE);
         surfaceRavineGen = new MapGenRavineTFC(s.surfaceRavineRarity, s.surfaceRavineHeight, s.surfaceRavineVariability);
         ravineGen = new MapGenRavineTFC(s.ravineRarity, s.ravineHeight, s.ravineVariability);
         riverRavineGen = new MapGenRiverRavine(s.riverRavineRarity);
 
-        // Load these now, because if config changes, shit will break
+        // Загрузка настроек, которые могут измениться в конфигурации
         rainfallSpread = (float) ConfigTFC.General.WORLD.rainfallSpreadFactor;
         floraDiversitySpread = (float) ConfigTFC.General.WORLD.floraDiversitySpreadFactor;
         floraDensitySpread = (float) ConfigTFC.General.WORLD.floraDensitySpreadFactor;
-        world.setSeaLevel(WorldTypeTFC.SEALEVEL); // Set sea level so squids can spawn
-        WorldEntitySpawnerTFC.init(); // Called here so only TFC Worlds are affected
+
+        // Установка уровня моря для возможности появления кальмаров
+        world.setSeaLevel(WorldTypeTFC.SEALEVEL);
+
+        // Инициализация спавнера сущностей мира
+        WorldEntitySpawnerTFC.init();
     }
 
+    /**
+     * Генерирует чанк мира на основе заданных координат чанка.
+     *
+     * @param chunkX Координата X чанка
+     * @param chunkZ Координата Z чанка
+     * @return Сгенерированный чанк мира
+     */
     @Override
     public Chunk generateChunk(int chunkX, int chunkZ) {
+        // Заполняем массивы шума нулями
         Arrays.fill(noise1, 0);
         Arrays.fill(noise2, 0);
         Arrays.fill(noise3, 0);
@@ -196,38 +219,55 @@ public class ChunkGenTFC implements IChunkGenerator {
         Arrays.fill(chunkHeightMap, 0);
         Arrays.fill(heightMap, 0);
 
+        // Устанавливаем сид генератора случайных чисел на основе координат чанка
         rand.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
+
+        // Создаем объект ChunkPrimer для хранения данных о блоках в чанке
         ChunkPrimer chunkPrimerIn = new ChunkPrimer();
+
+        // Генерируем грубый рельеф местности
         generateRoughTerrain(chunkX, chunkZ, chunkPrimerIn);
 
+        // Получаем биомы для данного чанка
         world.getBiomeProvider().getBiomes(biomes, chunkX * 16 - 1, chunkZ * 16 - 1, 18, 18);
 
+        // Загружаем данные генератора слоев стабильности и дренажа
         loadLayerGeneratorData(stabilityGenLayer, stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
         loadLayerGeneratorData(drainageGenLayer, drainageLayer, chunkX * 16, chunkZ * 16, 16, 16);
 
+        // Вычисляем значения осадков, разнообразия флоры и плотности флоры на основе шумовых генераторов
         rainfall = MathHelper.clamp(250f + 250f * rainfallSpread * (float) noiseGen7.getValue(chunkX * 0.005, chunkZ * 0.005), 0, 500);
         float floraDiversity = MathHelper.clamp(0.5f + 0.5f * floraDiversitySpread * (float) noiseGen9.getValue(chunkX * 0.005, chunkZ * 0.005), 0, 1);
         float floraDensity = MathHelper.clamp((0.3f + 0.2f * rainfall / 500f) + 0.4f * floraDensitySpread * (float) noiseGen8.getValue(chunkX * 0.05, chunkZ * 0.05), 0, 1);
 
+        // Копируем значения слоев пород в массивы
         rockLayer1 = rocksGenLayer1.getInts(chunkX * 16, chunkZ * 16, 16, 16).clone();
         rockLayer2 = rocksGenLayer2.getInts(chunkX * 16, chunkZ * 16, 16, 16).clone();
         rockLayer3 = rocksGenLayer3.getInts(chunkX * 16, chunkZ * 16, 16, 16).clone();
 
-        final float regionalFactor = 5f * 0.09f * (float) noiseGen10.getValue(chunkX * 0.05, chunkZ * 0.05); // Range -5 <> 5
+        // Вычисляем среднюю температуру на основе регионального фактора
+        final float regionalFactor = 5f * 0.09f * (float) noiseGen10.getValue(chunkX * 0.05, chunkZ * 0.05); // Диапазон -5 <> 5
         averageTemp = ClimateHelper.monthFactor(regionalFactor, Month.AVERAGE_TEMPERATURE_MODIFIER, chunkZ << 4);
 
+        // Создаем объект CustomChunkPrimer для хранения данных о блоках в чанке после замены
         CustomChunkPrimer chunkPrimerOut = new CustomChunkPrimer();
+
+        // Заменяем блоки в чанке на основе биомов
         replaceBlocksForBiomeHigh(chunkX, chunkZ, chunkPrimerIn, chunkPrimerOut);
 
+        // Проверяем, является ли генератор пещер экземпляром MapGenCavesTFC
         if (caveGen instanceof MapGenCavesTFC) {
-            // Since this may be replaced by other mods (we give them the option, since 1.12 caves are bad)
+            // Устанавливаем данные генерации для пещер
             ((MapGenCavesTFC) caveGen).setGenerationData(rainfall, rockLayer1.clone());
         }
+
+        // Генерируем пещеры и русловые овраги
         caveGen.generate(world, chunkX, chunkZ, chunkPrimerOut);
         surfaceRavineGen.generate(world, chunkX, chunkZ, chunkPrimerOut);
         ravineGen.generate(world, chunkX, chunkZ, chunkPrimerOut);
         riverRavineGen.generate(world, chunkX, chunkZ, chunkPrimerOut);
 
+        // Если включен режим отладки, устанавливаем определенные блоки на высотах для отображения опасности
         if (ConfigTFC.General.DEBUG.debugWorldGenDanger) {
             for (int x = 0; x < 16; ++x) {
                 for (int z = 0; z < 16; ++z) {
@@ -243,12 +283,15 @@ public class ChunkGenTFC implements IChunkGenerator {
             }
         }
 
+        // Создаем объект Chunk с использованием данных из ChunkPrimer
         Chunk chunk = new Chunk(world, chunkPrimerOut, chunkX, chunkZ);
 
+        // Получаем объект ChunkDataTFC из Chunk и устанавливаем в него данные генерации
         ChunkDataTFC chunkData = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
         if (chunkData == null) throw new IllegalStateException("ChunkData capability is missing.");
         chunkData.setGenerationData(rockLayer1, rockLayer2, rockLayer3, stabilityLayer, drainageLayer, seaLevelOffsetMap, rainfall, regionalFactor, averageTemp, floraDensity, floraDiversity);
 
+        // Устанавливаем значения биомов в массив biomeIds
         byte[] biomeIds = chunk.getBiomeArray();
         for (int x = 0; x < 16; ++x) {
             for (int z = 0; z < 16; ++z) {
@@ -256,11 +299,33 @@ public class ChunkGenTFC implements IChunkGenerator {
             }
         }
 
+        // Устанавливаем высотную карту чанка и генерируем карту освещенности
         chunk.setHeightMap(chunkHeightMap);
         chunk.generateSkylightMap();
+
+        // Возвращаем сгенерированный чанк
         return chunk;
     }
 
+    /**
+     * Метод populate используется для генерации содержимого чанка.
+     * Он переопределен в данном классе и выполняет следующие действия:
+     *
+     * 1. Устанавливает флаги события ForgeEventFactory.onChunkPopulate в true и BlockFalling.fallInstantly в true.
+     * 2. Вычисляет координаты чанка в мире.
+     * 3. Получает биом чанка на основе координат блока в середине чанка.
+     * 4. Устанавливает сид генератора случайных чисел на основе сида мира и координат чанка.
+     * 5. Генерирует различные террейн-фичи, такие как ямы в почве, трещины лавы, трещины воды и большие камни.
+     * 6. Генерирует различные растения, такие как деревья, кусты ягод и плодовые деревья.
+     * 7. Вызывает метод decorate у биома, который генерирует мелкие растения.
+     * 8. Генерирует оставшиеся фичи, такие как разбросанные камни, водопады, лавовые водопады, сталактиты и снежный лед.
+     * 9. Если флаг ANIMALS равен true, то вызывает метод performWorldGenSpawning для генерации животных.
+     * 10. Генерирует дикие культуры.
+     * 11. Устанавливает флаги события ForgeEventFactory.onChunkPopulate в false и BlockFalling.fallInstantly в false.
+     *
+     * @param chunkX координата X чанка
+     * @param chunkZ координата Z чанка
+     */
     @Override
     public void populate(int chunkX, int chunkZ) {
         ForgeEventFactory.onChunkPopulate(true, this, world, rand, chunkX, chunkZ, false);
@@ -272,22 +337,22 @@ public class ChunkGenTFC implements IChunkGenerator {
         rand.setSeed(world.getSeed());
         rand.setSeed((long) chunkX * (rand.nextLong() / 2L * 2L + 1L) + (long) chunkZ * (rand.nextLong() / 2L * 2L + 1L) ^ world.getSeed());
 
-        // First, do all terrain related features
+        // Во-первых, выполните все функции, связанные с местностью.
         SOIL_PITS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         LAVA_FISSURE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         WATER_FISSURE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         LARGE_ROCKS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         // todo: cave decorator
 
-        // Next, larger plant type features
+        // Далее, более крупные особенности типа растения
         TREE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         BERRY_BUSH_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         FRUIT_TREE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
 
-        // Calls through biome decorator which includes all small plants
+        // Вызовы через декоратор биома, который включает в себя все маленькие растения
         biome.decorate(world, rand, blockpos);
 
-        // Finally
+        // Окончательно
         LOOSE_ROCKS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         WATERFALL_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         LAVAFALL_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
@@ -298,40 +363,95 @@ public class ChunkGenTFC implements IChunkGenerator {
             WorldEntitySpawnerTFC.performWorldGenSpawning(world, biome, worldX + 8, worldZ + 8, 16, 16, rand);
         }
 
-        // To minimize the effects of this change, i'm putting this here, in the end of chunk generation
+        // Чтобы свести к минимуму последствия этого изменения, я помещаю это здесь, в конце генерации чанка.
         WILD_CROPS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
 
         ForgeEventFactory.onChunkPopulate(false, this, world, rand, chunkX, chunkZ, false);
         BlockFalling.fallInstantly = false;
     }
 
+    /**
+     * Метод generateStructures используется для генерации структур в чанке.
+     * В данном случае, метод всегда возвращает false, что означает, что структуры не генерируются.
+     *
+     * @param chunkIn чанк
+     * @param x       координата X чанка
+     * @param z       координата Z чанка
+     * @return всегда возвращает false
+     */
     @Override
     public boolean generateStructures(Chunk chunkIn, int x, int z) {
         return false; //todo
     }
 
+    /**
+     * Метод getPossibleCreatures возвращает список возможных существ определенного типа для заданного положения.
+     * В данном случае, метод возвращает список спавнабельных существ для биома, определенного по заданной позиции.
+     *
+     * @param creatureType тип существа
+     * @param pos         позиция
+     * @return список спавнабельных существ
+     */
     @Override
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
         // This is a temporary measure for making 1.12 closer to playable
         return world.getBiome(pos).getSpawnableList(creatureType);
     }
 
+    /**
+     * Метод getNearestStructurePos возвращает ближайшую позицию указанной структуры от заданной позиции в мире.
+     * В данном случае, метод всегда возвращает null, что означает, что структура не найдена.
+     *
+     * @param worldIn        мир
+     * @param structureName  имя структуры
+     * @param position       позиция
+     * @param findUnexplored флаг, указывающий на неисследованные области
+     * @return null
+     */
     @Nullable
     @Override
     public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
         return null; //todo
     }
 
+    /**
+     * Метод recreateStructures используется для восстановления структур в чанке.
+     * В данном случае, метод пустой и не выполняет никаких действий.
+     *
+     * @param chunkIn чанк
+     * @param x       координата X чанка
+     * @param z       координата Z чанка
+     */
     @Override
     public void recreateStructures(Chunk chunkIn, int x, int z) {
         //todo
     }
 
+    /**
+     * Метод isInsideStructure проверяет, находится ли заданная позиция внутри указанной структуры в мире.
+     * В данном случае, метод всегда возвращает false, что означает, что позиция не находится внутри структуры.
+     *
+     * @param worldIn       мир
+     * @param structureName имя структуры
+     * @param pos           позиция
+     * @return всегда возвращает false
+     */
     @Override
     public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
         return false; //todo
     }
 
+    /**
+     * Приватный метод loadLayerGeneratorData используется для загрузки данных генератора слоев.
+     * В данном случае, метод загружает данные слоев из генератора и сохраняет их в массиве layers.
+     *
+     * @param gen    генератор слоев
+     * @param layers массив слоев данных
+     * @param x      координата X
+     * @param y      координата Y
+     * @param width  ширина
+     * @param height высота
+     */
     @SuppressWarnings("SameParameterValue")
     private void loadLayerGeneratorData(GenLayerTFC gen, DataLayer[] layers, int x, int y, int width, int height) {
         IntCache.resetIntCache();
@@ -341,14 +461,26 @@ public class ChunkGenTFC implements IChunkGenerator {
         }
     }
 
+    /**
+     * Генерирует грубый рельеф для указанного чанка.
+     *
+     * @param chunkX  координата X чанка
+     * @param chunkZ  координата Z чанка
+     * @param primer  объект ChunkPrimer, представляющий чанк
+     */
     @SuppressWarnings("PointlessArithmeticExpression")
     private void generateRoughTerrain(int chunkX, int chunkZ, ChunkPrimer primer) {
+        // Получаем биомы для генерации в указанном чанке
         world.getBiomeProvider().getBiomesForGeneration(biomes, chunkX * 4 - 2, chunkZ * 4 - 2, 10, 10);
+
+        // Генерируем карту высот для указанного чанка
         generateHeightMap(chunkX * 4, chunkZ * 4);
 
+        // Проходим по каждому кубу из блоков в чанке
         for (int x = 0; x < 4; ++x) {
             for (int z = 0; z < 4; ++z) {
                 for (int y = 0; y < 16; ++y) {
+                    // Получаем значения шума для текущего блока
                     double noiseDL = heightMap[((x + 0) * 5 + z + 0) * 17 + y];
                     double noiseUL = heightMap[((x + 0) * 5 + z + 1) * 17 + y];
                     double noiseDR = heightMap[((x + 1) * 5 + z + 0) * 17 + y];
@@ -358,6 +490,7 @@ public class ChunkGenTFC implements IChunkGenerator {
                     final double noiseDRA = (heightMap[((x + 1) * 5 + z + 0) * 17 + y + 1] - noiseDR) * 0.125D;
                     final double noiseURA = (heightMap[((x + 1) * 5 + z + 1) * 17 + y + 1] - noiseUR) * 0.125D;
 
+                    // Проходим по каждому блоку внутри текущего куба
                     for (int yy = 0; yy < 8; ++yy) {
                         double var34 = noiseDL;
                         double var36 = noiseUL;
@@ -369,11 +502,13 @@ public class ChunkGenTFC implements IChunkGenerator {
                             double var47 = var34 - var49;
 
                             for (int zz = 0; zz < 4; ++zz) {
+                                // Устанавливаем состояние блока в зависимости от значения шума
                                 if ((var47 += var49) > 0.0D)
                                     primer.setBlockState(x * 4 + xx, y * 8 + yy, z * 4 + zz, STONE);
                                 else if (y * 8 + yy < seaLevel)
                                     primer.setBlockState(x * 4 + xx, y * 8 + yy, z * 4 + zz, SALT_WATER);
-                                else primer.setBlockState(x * 4 + xx, y * 8 + yy, z * 4 + zz, AIR);
+                                else
+                                    primer.setBlockState(x * 4 + xx, y * 8 + yy, z * 4 + zz, AIR);
                             }
                             var34 += var38;
                             var36 += var40;
@@ -388,22 +523,33 @@ public class ChunkGenTFC implements IChunkGenerator {
         }
     }
 
+    /**
+     * Генерирует карту высот для заданной позиции.
+     *
+     * @param xPos Координата X позиции
+     * @param zPos Координата Z позиции
+     */
     private void generateHeightMap(int xPos, int zPos) {
+        // Генерация шума с использованием различных генераторов шума
         noiseGen6.generateNoiseOctaves(noise6, xPos, zPos, 5, 5, 200.0D, 200.0D, 0.5D);
         noiseGen3.generateNoiseOctaves(noise3, xPos, 0, zPos, 5, 17, 5, 12.5, 6.25, 12.5);
         noiseGen1.generateNoiseOctaves(noise1, xPos, 0, zPos, 5, 17, 5, 1000D, 1000D, 1000D);
         noiseGen2.generateNoiseOctaves(noise2, xPos, 0, zPos, 5, 17, 5, 1000D, 1000D, 1000D);
 
+        // Инициализация переменных
         int i = 0;
         int j = 0;
 
+        // Цикл для обхода всех точек на карте
         for (int x = 0; x < 5; ++x) {
             for (int z = 0; z < 5; ++z) {
+                // Инициализация переменных для смешивания биомов
                 float variationBlended = 0.0F;
                 float rootBlended = 0.0F;
                 float totalBlendedHeight = 0.0F;
                 Biome baseBiome = biomes[x + 2 + (z + 2) * 10];
 
+                // Цикл для смешивания биомов
                 for (int xR = -2; xR <= 2; ++xR) {
                     for (int zR = -2; zR <= 2; ++zR) {
                         Biome blendBiome = biomes[x + xR + 2 + (z + zR + 2) * 10];
@@ -417,28 +563,29 @@ public class ChunkGenTFC implements IChunkGenerator {
                     }
                 }
 
+                // Вычисление среднего значения для смешивания
                 variationBlended /= totalBlendedHeight;
                 rootBlended /= totalBlendedHeight;
                 variationBlended = variationBlended * 0.9F + 0.1F;
                 rootBlended = (rootBlended * 4.0F - 1.0F) / 8.0F;
 
+                // Генерация шума и его масштабирование
                 double scaledNoise6Value = noise6[j++] / 8000.0D;
 
                 if (scaledNoise6Value < 0.0D)
-                    scaledNoise6Value = -scaledNoise6Value * 0.3D; //If negative, make positive and shrink by a third?
+                    scaledNoise6Value = -scaledNoise6Value * 0.3D;
 
                 scaledNoise6Value = scaledNoise6Value * 3.0D - 2.0D;
 
-                if (scaledNoise6Value < 0.0D) // Only true when noise6[index2] is between -17,777 and 0, scaledNoise6Value will be at maximum -2
-                {
-                    scaledNoise6Value /= 2.0D; // Results in values between 0 and -1
-                    if (scaledNoise6Value < -1.0D) //Error Checking
+                if (scaledNoise6Value < 0.0D) {
+                    scaledNoise6Value /= 2.0D;
+                    if (scaledNoise6Value < -1.0D)
                         scaledNoise6Value = -1.0D;
-                    scaledNoise6Value /= 1.4D * 2.0D; // Results in values between 0 and -0.357143
+                    scaledNoise6Value /= 1.4D * 2.0D;
                 } else {
                     if (scaledNoise6Value > 1.0D)
                         scaledNoise6Value = 1.0D;
-                    scaledNoise6Value /= 8.0D; // Results in values between 0 and 0.125
+                    scaledNoise6Value /= 8.0D;
                 }
 
                 for (int y = 0; y < 17; ++y) {
@@ -475,10 +622,23 @@ public class ChunkGenTFC implements IChunkGenerator {
         }
     }
 
+    /**
+     * Метод getBiomeOffset возвращает биом по смещению координаты (x, z).
+     * @param x Координата x
+     * @param z Координата z
+     * @return Биом
+     */
     private Biome getBiomeOffset(int x, int z) {
-        return biomes[(z + 1) * 18 + (x + 1)]; //todo: check, was (z + 1) + (x + 1) * 18
+        return biomes[(z + 1) * 18 + (x + 1)]; //todo: проверить, было (z + 1) + (x + 1) * 18
     }
 
+    /**
+     * Метод replaceBlocksForBiomeHigh заменяет блоки для высоких биомов.
+     * @param chunkX Координата чанка по оси X
+     * @param chunkZ Координата чанка по оси Z
+     * @param inp Входной ChunkPrimer
+     * @param outp Выходной CustomChunkPrimer
+     */
     private void replaceBlocksForBiomeHigh(int chunkX, int chunkZ, ChunkPrimer inp, CustomChunkPrimer outp) {
         double var6 = 0.03125D;
         noiseGen4.generateNoiseOctaves(noise4, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, var6 * 4.0D, var6, var6 * 4.0D);
@@ -506,8 +666,7 @@ public class ChunkGenTFC implements IChunkGenerator {
                     if (!BiomesTFC.isBeachBiome(getBiomeOffset(x, z))) cliffMap[colIndex] = true;
                 }
 
-
-                //Used to make better rivers
+                // Используется для улучшения рек
                 int nonRiverTiles = 0;
                 int nonBeachTiles = 0;
                 for (int a = x - 1; a <= x + 1; a++) {
@@ -524,13 +683,14 @@ public class ChunkGenTFC implements IChunkGenerator {
 
                 int highestStone = 0;
 
+                // Итерируемся по оси y сверху вниз
                 for (int y = 255 - yOffset; y >= 0; y--) {
                     /*
-                     * HIGH PART (yOffset is used)
+                     * ВЕРХНЯЯ ЧАСТЬ (используется yOffset)
                      */
                     if (outp.isEmpty(x, y + yOffset, z)) {
                         outp.setBlockState(x, y + yOffset, z, inp.getBlockState(x, y, z));
-                        if (y + 1 < yOffset && outp.getBlockState(x, y + yOffset, z) == AIR/* no need to check again && BlocksTFC.isSoilOrGravel(outp.getBlockState(x, y + yOffset + 1, z))*/) {
+                        if (y + 1 < yOffset && outp.getBlockState(x, y + yOffset, z) == AIR/* нет необходимости проверять снова && BlocksTFC.isSoilOrGravel(outp.getBlockState(x, y + yOffset + 1, z))*/) {
                             for (int upCount = 1; BlocksTFC.isSoilOrGravel(outp.getBlockState(x, y + yOffset + upCount, z)); upCount++) {
                                 outp.setBlockState(x, y + yOffset + upCount, z, AIR);
                             }
@@ -544,12 +704,12 @@ public class ChunkGenTFC implements IChunkGenerator {
                     int highestBeachTheoretical = (highestStone - seaLevel) / 4 + seaLevel;
                     int beachCliffHeight = nonBeachTiles > 0 ? (int) ((highestStone - highestBeachTheoretical) * (nonBeachTiles) / 6.0 + highestBeachTheoretical) : highestBeachTheoretical;
 
-                    //Redo cliffs
+                    // Перестраиваем утесы на пляже
                     if (BiomesTFC.isBeachBiome(biome) && y > seaLevel && outp.getBlockState(x, y + yOffset, z) != AIR && y >= beachCliffHeight) {
                         inp.setBlockState(x, y, z, AIR);
                         outp.setBlockState(x, y + yOffset, z, AIR);
                     }
-                    //Ensure rivers can't get blocked
+                    // Гарантируем, что реки не будут заблокированы
                     if (BiomesTFC.isRiverBiome(biome) && y >= seaLevel - 2 && outp.getBlockState(x, y + yOffset, z) != AIR) {
 
                         if (nonRiverTiles > 0) {
@@ -583,19 +743,25 @@ public class ChunkGenTFC implements IChunkGenerator {
                         else
                             outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(RAW, rock1).getDefaultState());
 
-                        // Deserts / dry areas
+                        // Пустыни / сухие районы
                         if (rainfall < +1.3 * rand.nextGaussian() + 75f) {
+                            // Устанавливаем блоки поверхности и подповерхности как песок
                             subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(SAND, rock1).getDefaultState();
                         }
 
-                        if (biome == BiomesTFC.BEACH || biome == BiomesTFC.OCEAN || biome == BiomesTFC.DEEP_OCEAN) {
+                        // Если биом пляж, океан или глубокий океан, устанавливаем блоки поверхности и подповерхности как песок
+                        else if (biome == BiomesTFC.BEACH || biome == BiomesTFC.OCEAN || biome == BiomesTFC.DEEP_OCEAN) {
                             subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(SAND, rock1).getDefaultState();
-                        } else if (biome == BiomesTFC.GRAVEL_BEACH) {
+                        }
+
+                        // Если биом гравелевый пляж, устанавливаем блоки поверхности и подповерхности как гравий
+                        else if (biome == BiomesTFC.GRAVEL_BEACH) {
                             subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(GRAVEL, rock1).getDefaultState();
                         }
 
+                        // Если smooth равно -1, выполняем следующие действия для сглаживания поверхности
                         if (smooth == -1) {
-                            //The following makes dirt behave nicer and more smoothly, instead of forming sharp cliffs.
+                            // Сглаживаем поверхность, чтобы избежать резких обрывов
                             int arrayIndexx = x > 0 ? x - 1 + (z * 16) : -1;
                             int arrayIndexX = x < 15 ? x + 1 + (z * 16) : -1;
                             int arrayIndexz = z > 0 ? x + ((z - 1) * 16) : -1;
@@ -612,7 +778,7 @@ public class ChunkGenTFC implements IChunkGenerator {
                             }
                             smooth = (int) (noise * (1d - Math.max(Math.min((y - 16) / 80d, 1), 0)));
 
-                            // Set soil below water
+                            // Устанавливаем блоки почвы под водой
                             for (int c = 1; c < 3; c++) {
                                 if (yOffset + y + c > 256) continue;
 
@@ -625,9 +791,10 @@ public class ChunkGenTFC implements IChunkGenerator {
                                 }
                             }
 
-                            // Determine the soil depth based on world y
+                            // Определяем глубину почвы на основе высоты мира
                             int dirtH = Math.max(8 - ((y + yOffset - 24 - WorldTypeTFC.SEALEVEL) / 16), 0);
 
+                            // Если сглаживание больше 0 и выполняются определенные условия, устанавливаем блоки поверхности и подповерхности
                             if (smooth > 0) {
                                 if (y >= seaLevel - 1 && y + 1 < yOffset && inp.getBlockState(x, y + 1, z) != SALT_WATER && dirtH > 0 && !(BiomesTFC.isBeachBiome(biome) && y > highestBeachTheoretical + 2)) {
                                     outp.setBlockState(x, y + yOffset, z, surfaceBlock);
@@ -644,31 +811,33 @@ public class ChunkGenTFC implements IChunkGenerator {
 
                         if (y > seaLevel - 2 && y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER ||
                                 y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER) {
-                            if (biome != BiomesTFC.SWAMPLAND) // Most areas have gravel and sand bottoms
+                            if (biome != BiomesTFC.SWAMPLAND) // Большинство областей имеют дно из гравия и песка
                             {
                                 if (outp.getBlockState(x, y + yOffset, z) != TFCStorage.getRockBlock(SAND, rock1).getDefaultState() && rand.nextInt(5) != 0)
                                     outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(GRAVEL, rock1).getDefaultState());
-                            } else // Swamp biomes have bottoms that are mostly dirt
+                            } else // Болотные биомы имеют дно, состоящее в основном из земли
                             {
                                 if (outp.getBlockState(x, y + yOffset, z) != TFCStorage.getRockBlock(SAND, rock1).getDefaultState())
                                     outp.setBlockState(x, y + yOffset, z, TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soil1).getDefaultState());
                             }
                         }
                     }
+                    // Проверяем блоки соленой воды и устанавливаем блоки пресной воды
                     //  && biome != BiomesTFC.OCEAN && biome != BiomesTFC.DEEP_OCEAN && biome != BiomesTFC.BEACH && biome != BiomesTFC.GRAVEL_BEACH
                     else if (inp.getBlockState(x, y, z) == SALT_WATER && !(BiomesTFC.isOceanicBiome(biome) || BiomesTFC.isBeachBiome(biome))) {
+                        // Устанавливаем блок FRESH_WATER в позиции (x, y + yOffset, z)
                         outp.setBlockState(x, y + yOffset, z, FRESH_WATER);
                     }
                 }
 
-                for (int y = yOffset - 1; y >= 0; y--) // This cannot be optimized with the prev for loop, because the sealeveloffset won't be ready yet.
+                for (int y = yOffset - 1; y >= 0; y--) // Это не может быть оптимизировано с предыдущим циклом for, потому что sealeveloffset еще не будет готов.
                 {
                     /*
-                     * LOW PART (yOffset is NOT used)
+                     * НИЖНЯЯ ЧАСТЬ (yOffset НЕ используется)
                      */
                     if (y < 1 + (s.flatBedrock ? 0 : rand.nextInt(3))) //  + (seaLevelOffsetMap[colIndex] / 3)
                     {
-                        outp.setBlockState(x, y, z, BEDROCK);
+                        outp.setBlockState(x, y, z, Blocks.MAGMA.getDefaultState());
                     } else if (outp.isEmpty(x, y, z)) {
                         if (y <= ROCKLAYER3 + seaLevelOffsetMap[colIndex])
                             outp.setBlockState(x, y, z, TFCStorage.getRockBlock(RAW, rock3).getDefaultState());

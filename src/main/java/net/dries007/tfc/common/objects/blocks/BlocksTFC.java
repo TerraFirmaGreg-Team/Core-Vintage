@@ -3,7 +3,7 @@ package net.dries007.tfc.common.objects.blocks;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.types.bush.BerryBush;
-import net.dries007.tfc.api.types.crop.CropBlock;
+import net.dries007.tfc.api.types.crop.Crop;
 import net.dries007.tfc.api.types.fruit.FruitTree;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
@@ -82,7 +82,7 @@ public final class BlocksTFC {
         {
             Builder<BlockCropTFC> b = ImmutableList.builder();
 
-            for (CropBlock crop : CropBlock.values()) {
+            for (Crop crop : Crop.values()) {
                 b.add(register(r, "crop/" + crop.name().toLowerCase(), crop.createGrowingBlock()));
             }
 
@@ -92,7 +92,7 @@ public final class BlocksTFC {
         {
             Builder<BlockCropDead> b = ImmutableList.builder();
 
-            for (CropBlock crop : CropBlock.values()) {
+            for (Crop crop : Crop.values()) {
                 b.add(register(r, "dead_crop/" + crop.name().toLowerCase(), crop.createDeadBlock()));
             }
 

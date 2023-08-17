@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.api.types.crop.ICropBlock;
+import net.dries007.tfc.api.types.crop.ICrop;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
 import net.dries007.tfc.config.ConfigTFC;
@@ -22,9 +22,9 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class WorldGenWildCrops implements IWorldGenerator {
-    private static final List<ICropBlock> CROPS = new ArrayList<>();
+    private static final List<ICrop> CROPS = new ArrayList<>();
 
-    public static void register(ICropBlock bush) {
+    public static void register(ICrop bush) {
         CROPS.add(bush);
     }
 
@@ -39,7 +39,7 @@ public class WorldGenWildCrops implements IWorldGenerator {
                 float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
                 float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
 
-                ICropBlock crop = CROPS.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
+                ICrop crop = CROPS.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
                 if (crop != null) {
                     BlockCropTFC cropBlock = BlockCropTFC.get(crop);
                     int cropsInChunk = 3 + random.nextInt(5);

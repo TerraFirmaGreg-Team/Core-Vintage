@@ -14,7 +14,7 @@ import java.util.List;
  * Это "модель", которая используется классом {@link BlockCropTFC}.
  * В оригинальном TFC они все используются как экземпляры перечисления Crop.
  */
-public interface ICropBlock {
+public interface ICrop {
     /**
      * @return минимальное время, которое требуется для роста одной стадии урожая (в тиках)
      */

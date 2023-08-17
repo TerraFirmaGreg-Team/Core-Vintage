@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.agriculture.crop_old;
 
-import net.dries007.tfc.api.types.crop.ICropBlock;
+import net.dries007.tfc.api.types.crop.ICrop;
 import net.dries007.tfc.common.objects.tileentities.TECropSpreading;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.properties.PropertyInteger;
@@ -19,7 +19,7 @@ import java.util.Random;
 public abstract class BlockCropSpreading extends BlockCropTFC {
     private static final int MAX_SPREAD_AGE = 16;
 
-    BlockCropSpreading(ICropBlock crop) {
+    BlockCropSpreading(ICrop crop) {
         super(crop);
 
         setDefaultState(getBlockState().getBaseState()
@@ -27,7 +27,7 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
                 .withProperty(WILD, false));
     }
 
-    public static BlockCropSpreading create(ICropBlock crop) {
+    public static BlockCropSpreading create(ICrop crop) {
         PropertyInteger property = getStagePropertyForCrop(crop);
 
         if (property == null)

@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public enum CropBlock implements ICropBlock {
+public enum Crop implements ICrop {
     // these definitions are defined in the spreadsheet at
     // https://docs.google.com/spreadsheets/d/1Ghw3dCmVO5Gv0MMGBydUxox_nwLYmmcZkGSbbf0QSAE/edit#gid=893781093
     // It should be modified first, and then the resulting definitions copied to this space here
@@ -56,7 +56,7 @@ public enum CropBlock implements ICropBlock {
     JUTE(() -> new ItemStack(ItemsTFC.JUTE), () -> ItemStack.EMPTY, 5f, 11f, 37f, 42f, 50f, 100f, 410f, 450f, 6, 0.5f, CropTypes.SIMPLE);
 
     static {
-        for (ICropBlock crop : values()) {
+        for (ICrop crop : values()) {
             WorldGenWildCrops.register(crop);
         }
     }
@@ -74,11 +74,11 @@ public enum CropBlock implements ICropBlock {
     // which crop block behavior implementation is used
     private final CropType cropType;
 
-    CropBlock(FoodVariant foodOldDrop, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType cropType) {
+    Crop(FoodVariant foodOldDrop, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType cropType) {
         this(() -> new ItemStack(ItemFoodTFC.get(foodOldDrop)), () -> ItemStack.EMPTY, tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive, rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive, growthStages, growthTime, cropType);
     }
 
-    CropBlock(Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType cropType) {
+    Crop(Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive, float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive, int growthStages, float growthTime, CropType cropType) {
         this.foodDrop = foodDrop;
         this.foodDropEarly = foodDropEarly;
 

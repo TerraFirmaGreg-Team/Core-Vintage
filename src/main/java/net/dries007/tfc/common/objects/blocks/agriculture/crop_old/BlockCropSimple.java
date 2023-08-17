@@ -1,8 +1,8 @@
 package net.dries007.tfc.common.objects.blocks.agriculture.crop_old;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.crop.CropBlock;
-import net.dries007.tfc.api.types.crop.ICropBlock;
+import net.dries007.tfc.api.types.crop.Crop;
+import net.dries007.tfc.api.types.crop.ICrop;
 import net.dries007.tfc.common.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
@@ -23,7 +23,7 @@ import java.util.Random;
 public abstract class BlockCropSimple extends BlockCropTFC {
     private final boolean isPickable;
 
-    protected BlockCropSimple(ICropBlock crop, boolean isPickable) {
+    protected BlockCropSimple(ICrop crop, boolean isPickable) {
         super(crop);
         this.isPickable = isPickable;
 
@@ -32,7 +32,7 @@ public abstract class BlockCropSimple extends BlockCropTFC {
                 .withProperty(WILD, false));
     }
 
-    public static BlockCropSimple create(ICropBlock crop, boolean isPickable) {
+    public static BlockCropSimple create(ICrop crop, boolean isPickable) {
         PropertyInteger property = getStagePropertyForCrop(crop);
 
         if (property == null)
@@ -64,9 +64,9 @@ public abstract class BlockCropSimple extends BlockCropTFC {
                 SimpleSkill skill = CapabilityPlayerData.getSkill(playerIn, SkillType.AGRICULTURE);
 
                 if (skill != null) {
-                    foodDrop.setCount(1 + CropBlock.getSkillFoodBonus(skill, RANDOM));
+                    foodDrop.setCount(1 + Crop.getSkillFoodBonus(skill, RANDOM));
                     // omit the +1 because the plant stays alive.
-                    seedDrop.setCount(CropBlock.getSkillSeedBonus(skill, RANDOM));
+                    seedDrop.setCount(Crop.getSkillSeedBonus(skill, RANDOM));
                 }
 
                 if (!worldIn.isRemote) {

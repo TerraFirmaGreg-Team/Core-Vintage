@@ -2,8 +2,8 @@ package net.dries007.tfc.common.objects.blocks;
 
 import gregtech.api.GregTechAPI;
 import net.dries007.tfc.api.types.GroundcoverType;
-import net.dries007.tfc.api.types.crop.variant.CropBlockVariant;
 import net.dries007.tfc.api.types.crop.type.CropType;
+import net.dries007.tfc.api.types.crop.variant.CropBlockVariant;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariant;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.rock.type.RockType;
@@ -107,7 +107,6 @@ public class TFCBlocks {
                     throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", woodBlockVariant, woodType));
             }
         }
-
 
 
         //=== Plant ==================================================================================================//

@@ -46,8 +46,8 @@ public class BlockWoodSupport extends BlockWood {
     private static final AxisAlignedBB CONNECTION_W_AABB = new AxisAlignedBB(0.0D, 0.625D, 0.3125D, 0.3125D, 1.0D, 0.6875D);
 
 
-    public BlockWoodSupport(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-        super(woodBlockVariant, woodType);
+    public BlockWoodSupport(WoodBlockVariant variant, WoodType type) {
+        super(variant, type);
 
         setHardness(2.0F);
         setHarvestLevel("axe", 0);
@@ -59,7 +59,7 @@ public class BlockWoodSupport extends BlockWood {
                 .withProperty(WEST, false));
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     /**

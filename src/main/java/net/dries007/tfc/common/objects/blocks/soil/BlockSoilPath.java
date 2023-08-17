@@ -33,14 +33,14 @@ import java.util.Random;
 public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
     private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 
-    private final SoilBlockVariant soilBlockVariant;
-    private final SoilType soilType;
+    private final SoilBlockVariant variant;
+    private final SoilType type;
 
-    public BlockSoilPath(SoilBlockVariant soilBlockVariant, SoilType soilType) {
+    public BlockSoilPath(SoilBlockVariant variant, SoilType type) {
 
 
-        this.soilBlockVariant = soilBlockVariant;
-        this.soilType = soilType;
+        this.variant = variant;
+        this.type = type;
 
         this.useNeighborBrightness = true;
         setRegistryName(getRegistryLocation());
@@ -51,19 +51,19 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
         setHarvestLevel("shovel", 0);
         setLightOpacity(255);
 
-        OreDictionaryHelper.register(this, soilBlockVariant.toString(), soilType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Nonnull
     @Override
     public SoilBlockVariant getBlockVariant() {
-        return soilBlockVariant;
+        return variant;
     }
 
     @Nonnull
     @Override
     public SoilType getType() {
-        return soilType;
+        return type;
     }
 
     @Override
@@ -100,7 +100,7 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
     @Nonnull
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        return Item.getItemFromBlock(TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soilType));
+        return Item.getItemFromBlock(TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, type));
     }
 
     @Override
@@ -129,7 +129,7 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), "soiltype=" + soilType.toString());
+                return new ModelResourceLocation(getResourceLocation(), "soiltype=" + type.toString());
             }
         });
 
@@ -137,6 +137,6 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),
                 this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(getResourceLocation(), "soiltype=" + soilType.toString()));
+                new ModelResourceLocation(getResourceLocation(), "soiltype=" + type.toString()));
     }
 }

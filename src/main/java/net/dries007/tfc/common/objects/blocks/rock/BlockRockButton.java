@@ -29,12 +29,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockRockButton extends BlockButtonStone implements IRockBlock {
-    private final RockBlockVariant rockBlockVariant;
-    private final RockType rockType;
+    private final RockBlockVariant variant;
+    private final RockType type;
 
-    public BlockRockButton(RockBlockVariant rockBlockVariant, RockType rockType) {
-        this.rockBlockVariant = rockBlockVariant;
-        this.rockType = rockType;
+    public BlockRockButton(RockBlockVariant variant, RockType type) {
+        this.variant = variant;
+        this.type = type;
 
         setSoundType(SoundType.STONE);
         setCreativeTab(CreativeTabsTFC.ROCK);
@@ -42,19 +42,19 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
 
-        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Nonnull
     @Override
     public RockBlockVariant getBlockVariant() {
-        return rockBlockVariant;
+        return variant;
     }
 
     @Nonnull
     @Override
     public RockType getType() {
-        return rockType;
+        return type;
     }
 
     @Override

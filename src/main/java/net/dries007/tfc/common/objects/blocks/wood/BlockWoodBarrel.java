@@ -43,8 +43,8 @@ public class BlockWoodBarrel extends BlockWood implements IItemSize {
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
-    public BlockWoodBarrel(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-        super(woodBlockVariant, woodType);
+    public BlockWoodBarrel(WoodBlockVariant variant, WoodType type) {
+        super(variant, type);
 
         setHardness(2F);
         setDefaultState(blockState.getBaseState().withProperty(SEALED, false));

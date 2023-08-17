@@ -67,14 +67,14 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
     private final SoilBlockVariant soilBlockVariant;
     private final SoilType soilType;
 
-    public BlockSoilFarmland(SoilBlockVariant soilBlockVariant, SoilType soilType) {
+    public BlockSoilFarmland(SoilBlockVariant variant, SoilType type) {
         super(Material.GROUND);
 
-        if (soilBlockVariant.canFall())
-            FallingBlockManager.registerFallable(this, soilBlockVariant.getFallingSpecification());
+        if (variant.canFall())
+            FallingBlockManager.registerFallable(this, variant.getFallingSpecification());
 
-        this.soilBlockVariant = soilBlockVariant;
-        this.soilType = soilType;
+        this.soilBlockVariant = variant;
+        this.soilType = type;
 
         this.useNeighborBrightness = true;
 
@@ -89,7 +89,7 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         setTickRandomly(true);
         setLightOpacity(255);
 
-        OreDictionaryHelper.register(this, soilBlockVariant.toString(), soilType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     protected static void turnToDirt(World world, BlockPos pos) {

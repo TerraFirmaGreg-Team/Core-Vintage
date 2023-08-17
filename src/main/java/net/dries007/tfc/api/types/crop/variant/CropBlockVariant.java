@@ -18,7 +18,7 @@ public class CropBlockVariant {
     /**
      * Создает экземпляр класса CropBlockVariant с указанными параметрами.
      *
-     * @param name    Имя категории блока культур.
+     * @param name Имя категории блока культур.
      */
     public CropBlockVariant(@Nonnull String name, @Nonnull BiFunction<CropBlockVariant, CropType, ICropBlock> factory) {
         this.name = name;

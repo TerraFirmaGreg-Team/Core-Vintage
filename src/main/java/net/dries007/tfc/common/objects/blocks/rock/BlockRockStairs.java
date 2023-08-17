@@ -31,11 +31,11 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
     private final RockBlockVariant rockBlockVariant;
     private final RockType rockType;
 
-    public BlockRockStairs(RockBlockVariant rockBlockVariant, RockType rockType) {
+    public BlockRockStairs(RockBlockVariant variant, RockType type) {
         super(Blocks.COBBLESTONE.getDefaultState());
 
-        this.rockBlockVariant = rockBlockVariant;
-        this.rockType = rockType;
+        this.rockBlockVariant = variant;
+        this.rockType = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -45,7 +45,7 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
         setHarvestLevel("pickaxe", 0);
         useNeighborBrightness = true;
 
-        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Nonnull

@@ -51,14 +51,14 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
     protected static final AxisAlignedBB LOOM_SOUTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.125D, 0.9375D, 1.0D, 0.5625D);
     protected static final AxisAlignedBB LOOM_NORTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.4375D, 0.9375D, 1.0D, 0.875D);
 
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockWoodLoom(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+    public BlockWoodLoom(WoodBlockVariant variant, WoodType type) {
         super(WOOD, MapColor.AIR);
 
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -69,17 +69,17 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
         setResistance(3f);
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override
     public WoodBlockVariant getBlockVariant() {
-        return woodBlockVariant;
+        return variant;
     }
 
     @Override
     public WoodType getType() {
-        return woodType;
+        return type;
     }
 
     @Nullable

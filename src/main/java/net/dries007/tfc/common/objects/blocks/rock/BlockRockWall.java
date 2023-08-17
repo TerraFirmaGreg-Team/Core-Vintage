@@ -33,11 +33,11 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
     private final RockBlockVariant rockBlockVariant;
     private final RockType rockType;
 
-    public BlockRockWall(RockBlockVariant rockBlockVariant, RockType rockType) {
+    public BlockRockWall(RockBlockVariant variant, RockType type) {
         super(Blocks.COBBLESTONE);
 
-        this.rockBlockVariant = rockBlockVariant;
-        this.rockType = rockType;
+        this.rockBlockVariant = variant;
+        this.rockType = type;
 
 
         setRegistryName(getRegistryLocation());
@@ -48,7 +48,7 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);
 
-        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Nonnull

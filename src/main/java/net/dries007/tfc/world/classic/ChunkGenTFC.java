@@ -147,7 +147,7 @@ public class ChunkGenTFC implements IChunkGenerator {
     /**
      * Конструктор класса ChunkGenTFC.
      *
-     * @param w             Мир, для которого будет генерироваться чанк.
+     * @param w              Мир, для которого будет генерироваться чанк.
      * @param settingsString Строка с настройками генерации мира.
      */
     public ChunkGenTFC(World w, String settingsString) {
@@ -310,7 +310,7 @@ public class ChunkGenTFC implements IChunkGenerator {
     /**
      * Метод populate используется для генерации содержимого чанка.
      * Он переопределен в данном классе и выполняет следующие действия:
-     *
+     * <p>
      * 1. Устанавливает флаги события ForgeEventFactory.onChunkPopulate в true и BlockFalling.fallInstantly в true.
      * 2. Вычисляет координаты чанка в мире.
      * 3. Получает биом чанка на основе координат блока в середине чанка.
@@ -364,7 +364,7 @@ public class ChunkGenTFC implements IChunkGenerator {
         }
 
         // Чтобы свести к минимуму последствия этого изменения, я помещаю это здесь, в конце генерации чанка.
-        //WILD_CROPS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
+        WILD_CROPS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
 
         ForgeEventFactory.onChunkPopulate(false, this, world, rand, chunkX, chunkZ, false);
         BlockFalling.fallInstantly = false;
@@ -389,7 +389,7 @@ public class ChunkGenTFC implements IChunkGenerator {
      * В данном случае, метод возвращает список спавнабельных существ для биома, определенного по заданной позиции.
      *
      * @param creatureType тип существа
-     * @param pos         позиция
+     * @param pos          позиция
      * @return список спавнабельных существ
      */
     @Override
@@ -464,9 +464,9 @@ public class ChunkGenTFC implements IChunkGenerator {
     /**
      * Генерирует грубый рельеф для указанного чанка.
      *
-     * @param chunkX  координата X чанка
-     * @param chunkZ  координата Z чанка
-     * @param primer  объект ChunkPrimer, представляющий чанк
+     * @param chunkX координата X чанка
+     * @param chunkZ координата Z чанка
+     * @param primer объект ChunkPrimer, представляющий чанк
      */
     @SuppressWarnings("PointlessArithmeticExpression")
     private void generateRoughTerrain(int chunkX, int chunkZ, ChunkPrimer primer) {
@@ -624,6 +624,7 @@ public class ChunkGenTFC implements IChunkGenerator {
 
     /**
      * Метод getBiomeOffset возвращает биом по смещению координаты (x, z).
+     *
      * @param x Координата x
      * @param z Координата z
      * @return Биом
@@ -634,10 +635,11 @@ public class ChunkGenTFC implements IChunkGenerator {
 
     /**
      * Метод replaceBlocksForBiomeHigh заменяет блоки для высоких биомов.
+     *
      * @param chunkX Координата чанка по оси X
      * @param chunkZ Координата чанка по оси Z
-     * @param inp Входной ChunkPrimer
-     * @param outp Выходной CustomChunkPrimer
+     * @param inp    Входной ChunkPrimer
+     * @param outp   Выходной CustomChunkPrimer
      */
     private void replaceBlocksForBiomeHigh(int chunkX, int chunkZ, ChunkPrimer inp, CustomChunkPrimer outp) {
         double var6 = 0.03125D;

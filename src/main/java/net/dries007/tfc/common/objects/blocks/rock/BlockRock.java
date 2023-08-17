@@ -31,14 +31,14 @@ import java.util.List;
 
 public class BlockRock extends Block implements IRockBlock, IItemSize {
 
-    private final RockBlockVariant rockBlockVariant;
-    private final RockType rockType;
+    private final RockBlockVariant variant;
+    private final RockType type;
 
-    public BlockRock(Material material, RockBlockVariant rockBlockVariant, RockType rockType) {
+    public BlockRock(Material material, RockBlockVariant variant, RockType type) {
         super(material);
 
-        this.rockBlockVariant = rockBlockVariant;
-        this.rockType = rockType;
+        this.variant = variant;
+        this.type = type;
 
         setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
@@ -48,26 +48,26 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
         setTranslationKey(getTranslationName());
 
         if (getItemBlock() != null) {
-            OreDictionaryHelper.register(this, rockBlockVariant.toString());
-            OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
+            OreDictionaryHelper.register(this, variant.toString());
+            OreDictionaryHelper.register(this, variant.toString(), type.toString());
         }
 
     }
 
-    public BlockRock(RockBlockVariant rockBlockVariant, RockType rockType) {
-        this(Material.ROCK, rockBlockVariant, rockType);
+    public BlockRock(RockBlockVariant variant, RockType type) {
+        this(Material.ROCK, variant, type);
     }
 
     @Nonnull
     @Override
     public RockBlockVariant getBlockVariant() {
-        return rockBlockVariant;
+        return variant;
     }
 
     @Nonnull
     @Override
     public RockType getType() {
-        return rockType;
+        return type;
     }
 
     @Override
@@ -93,14 +93,14 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), "rocktype=" + rockType.toString());
+                return new ModelResourceLocation(getResourceLocation(), "rocktype=" + type.toString());
             }
         });
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),
                 getMetaFromState(getBlockState().getBaseState()),
-                new ModelResourceLocation(getResourceLocation(), "rocktype=" + rockType.toString()));
+                new ModelResourceLocation(getResourceLocation(), "rocktype=" + type.toString()));
     }
 
     @Override

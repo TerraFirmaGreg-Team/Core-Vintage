@@ -34,8 +34,8 @@ import java.util.Random;
 public class BlockRockSpeleothem extends BlockRock {
     public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
-    public BlockRockSpeleothem(RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockVariant, rockType);
+    public BlockRockSpeleothem(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
         setDefaultState(blockState.getBaseState().withProperty(SIZE, EnumSize.MEDIUM));
     }

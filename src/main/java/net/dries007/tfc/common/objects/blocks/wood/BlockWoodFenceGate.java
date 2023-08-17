@@ -21,14 +21,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 
 public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockWoodFenceGate(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+    public BlockWoodFenceGate(WoodBlockVariant variant, WoodType type) {
         super(BlockPlanks.EnumType.OAK);
 
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -38,17 +38,17 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
         setResistance(15.0F);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override
     public WoodBlockVariant getBlockVariant() {
-        return woodBlockVariant;
+        return variant;
     }
 
     @Override
     public WoodType getType() {
-        return woodType;
+        return type;
     }
 
     @Nullable

@@ -92,7 +92,7 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
     private final CropBlockVariant variant;
     private final CropType type;
 
-    public BlockCrop(CropBlockVariant variant, CropType  type) {
+    public BlockCrop(CropBlockVariant variant, CropType type) {
         super(Material.PLANTS);
 
         this.variant = variant;
@@ -221,11 +221,11 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
      * @param state Состояние блока.
      * @return Тайл-энтити блока.
      */
-//    @Nullable
-//    @Override
-//    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
-//        return new TECropBase();
-//    }
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
+        return new TECropBase();
+    }
 
     /**
      * Метод, который добавляет предметы в список drops.

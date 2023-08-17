@@ -37,13 +37,13 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockWoodWorkbench(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+    public BlockWoodWorkbench(WoodBlockVariant variant, WoodType type) {
 
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -53,17 +53,17 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
         setHarvestLevel("axe", 0);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override
     public WoodBlockVariant getBlockVariant() {
-        return woodBlockVariant;
+        return variant;
     }
 
     @Override
     public WoodType getType() {
-        return woodType;
+        return type;
     }
 
     @Nullable

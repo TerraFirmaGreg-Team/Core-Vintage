@@ -38,14 +38,14 @@ public class BlockRockRaw extends BlockRock {
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
     public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
 
-    public BlockRockRaw(RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockVariant, rockType);
+    public BlockRockRaw(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
         setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
 
         // Copy as each raw stone has an unique resultingState
         var spec = new FallingBlockManager.Specification(FallingBlockManager.Specification.COLLAPSABLE_ROCK);
-        spec.setResultingState(TFCStorage.getRockBlock(RockBlockVariants.COBBLE, rockType).getDefaultState());
+        spec.setResultingState(TFCStorage.getRockBlock(RockBlockVariants.COBBLE, type).getDefaultState());
         FallingBlockManager.registerFallable(this, spec);
 
         OreDictionaryHelper.register(this, "stone");

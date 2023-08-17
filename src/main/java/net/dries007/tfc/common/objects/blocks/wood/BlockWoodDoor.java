@@ -30,14 +30,14 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockWoodDoor(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+    public BlockWoodDoor(WoodBlockVariant variant, WoodType type) {
         super(Material.WOOD);
 
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -51,12 +51,12 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
 
     @Override
     public WoodBlockVariant getBlockVariant() {
-        return woodBlockVariant;
+        return variant;
     }
 
     @Override
     public WoodType getType() {
-        return woodType;
+        return type;
     }
 
     @Nullable
@@ -68,7 +68,7 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
     /**
      * Вызов из ForgeRegistries сопряжен с тем, что при вызове getItemBlock возвращается null.
      * Я так и не разобрался почему так происходит.
-     * */
+     */
     @SuppressWarnings("ConstantConditions")
     @Nonnull
     @Override
@@ -83,7 +83,7 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
     /**
      * Вызов из ForgeRegistries сопряжен с тем, что при вызове getItemBlock возвращается null.
      * Я так и не разобрался почему так происходит.
-     * */
+     */
     @SuppressWarnings("ConstantConditions")
     @Nonnull
     @Override

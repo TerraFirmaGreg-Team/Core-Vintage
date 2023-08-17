@@ -25,12 +25,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockWoodBookshelf(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
+    public BlockWoodBookshelf(WoodBlockVariant variant, WoodType type) {
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -42,17 +42,17 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
 
         Blocks.FIRE.setFireInfo(this, 30, 20);
 
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override
     public WoodBlockVariant getBlockVariant() {
-        return woodBlockVariant;
+        return variant;
     }
 
     @Override
     public WoodType getType() {
-        return woodType;
+        return type;
     }
 
     @Nullable

@@ -42,14 +42,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockRockSlab(RockBlockVariant rockBlockVariant, RockType rockType) {
+    private BlockRockSlab(RockBlockVariant variant, RockType type) {
         super(Material.ROCK);
 
         IBlockState state = blockState.getBaseState();
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.modelBlock = getFullBlockFromSlab(rockBlockVariant, rockType);
+        this.modelBlock = getFullBlockFromSlab(variant, type);
         useNeighborBrightness = true;
 
         setLightOpacity(255);

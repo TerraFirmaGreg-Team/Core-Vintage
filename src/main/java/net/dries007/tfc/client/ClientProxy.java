@@ -124,36 +124,6 @@ public class ClientProxy extends CommonProxy {
         return 0xFFFFFF;
     };
 
-    @Override
-    public void onPreInit(FMLPreInitializationEvent event) {
-        super.onPreInit(event);
-
-        registerEntityRenderer();
-    }
-
-    @Override
-    public void onInit(FMLInitializationEvent event) {
-        super.onInit(event);
-
-        TFCKeybindings.onInit();
-        // Enable overlay to render health, thirst and hunger bars, TFC style.
-        // Also renders animal familiarity
-        MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
-    }
-
-    @Override
-    public void onPostInit(FMLPostInitializationEvent event) {
-        super.onPostInit(event);
-    }
-
-    public void onLoadComplete(FMLLoadCompleteEvent event) {
-        super.onLoadComplete(event);
-    }
-
-    public void onServerStarting(FMLServerStartingEvent event) {
-        super.onServerStarting(event);
-    }
-
     @SubscribeEvent
     @SuppressWarnings("ConstantConditions")
     public static void registerModels(ModelRegistryEvent event) {
@@ -683,6 +653,36 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityBlackBearTFC.class, RenderBlackBearTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCougarTFC.class, RenderCougarTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCoyoteTFC.class, RenderCoyoteTFC::new);
+    }
+
+    @Override
+    public void onPreInit(FMLPreInitializationEvent event) {
+        super.onPreInit(event);
+
+        registerEntityRenderer();
+    }
+
+    @Override
+    public void onInit(FMLInitializationEvent event) {
+        super.onInit(event);
+
+        TFCKeybindings.onInit();
+        // Enable overlay to render health, thirst and hunger bars, TFC style.
+        // Also renders animal familiarity
+        MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
+    }
+
+    @Override
+    public void onPostInit(FMLPostInitializationEvent event) {
+        super.onPostInit(event);
+    }
+
+    public void onLoadComplete(FMLLoadCompleteEvent event) {
+        super.onLoadComplete(event);
+    }
+
+    public void onServerStarting(FMLServerStartingEvent event) {
+        super.onServerStarting(event);
     }
 
     @Nonnull

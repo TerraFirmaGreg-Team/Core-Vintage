@@ -55,8 +55,7 @@ public class AnvilRecipeWrapper extends SimpleRecipeWrapper {
                 int xOffset = i * 19;
                 int x = 50 + xOffset;
                 int y = 0;
-                if (mouseX >= x && mouseX <= x + 14 && mouseY >= y && mouseY <= y + 19)
-                {
+                if (mouseX >= x && mouseX <= x + 14 && mouseY >= y && mouseY <= y + 19) {
                     GuiUtils.drawHoveringText(Collections.singletonList(I18n.format(Helpers.getEnumName(rule))), mouseX, mouseY, 154, 80, -1, minecraft.fontRenderer);
                 }
             }

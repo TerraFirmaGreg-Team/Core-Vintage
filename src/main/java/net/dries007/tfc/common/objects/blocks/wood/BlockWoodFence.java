@@ -22,14 +22,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class BlockWoodFence extends BlockFence implements IWoodBlock {
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockWoodFence(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+    public BlockWoodFence(WoodBlockVariant variant, WoodType type) {
         super(Material.WOOD, Material.WOOD.getMaterialMapColor());
 
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -40,18 +40,18 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock {
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
 
-        OreDictionaryHelper.register(this, woodBlockVariant.toString());
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override
     public WoodBlockVariant getBlockVariant() {
-        return woodBlockVariant;
+        return variant;
     }
 
     @Override
     public WoodType getType() {
-        return woodType;
+        return type;
     }
 
     @Nullable

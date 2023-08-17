@@ -39,8 +39,8 @@ public class BlockRockLoose extends BlockRock {
     private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
 
 
-    public BlockRockLoose(RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockVariant, rockType);
+    public BlockRockLoose(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
         setHardness(0.1f);
         setDefaultState(blockState.getBaseState().withProperty(AXIS, EnumFacing.NORTH));

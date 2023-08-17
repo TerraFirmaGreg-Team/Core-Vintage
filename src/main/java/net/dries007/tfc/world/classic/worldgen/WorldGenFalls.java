@@ -34,12 +34,12 @@ public class WorldGenFalls implements IWorldGenerator {
     /**
      * Генерирует водопады в мире.
      *
-     * @param random          Генератор случайных чисел.
-     * @param chunkX          Координата X чанка.
-     * @param chunkZ          Координата Z чанка.
-     * @param world           Мир, в котором происходит генерация.
-     * @param chunkGenerator  Генератор чанков.
-     * @param chunkProvider   Поставщик чанков.
+     * @param random         Генератор случайных чисел.
+     * @param chunkX         Координата X чанка.
+     * @param chunkZ         Координата Z чанка.
+     * @param world          Мир, в котором происходит генерация.
+     * @param chunkGenerator Генератор чанков.
+     * @param chunkProvider  Поставщик чанков.
      */
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {

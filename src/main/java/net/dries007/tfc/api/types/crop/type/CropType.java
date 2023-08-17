@@ -77,20 +77,6 @@ public class CropType {
     }
 
     /**
-     * Возвращает строковое представление типов культур.
-     *
-     * @return Строковое представление типов культур.
-     */
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    public CropCategory getCropCategory() {
-        return cropCategory;
-    }
-
-    /**
      * the count to add to the amount of food dropped when applying the skill bonus
      *
      * @param skill  agriculture skill of the harvester
@@ -113,6 +99,20 @@ public class CropType {
             return 1;
         else
             return 0;
+    }
+
+    /**
+     * Возвращает строковое представление типов культур.
+     *
+     * @return Строковое представление типов культур.
+     */
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public CropCategory getCropCategory() {
+        return cropCategory;
     }
 
     public long getGrowthTicks() {

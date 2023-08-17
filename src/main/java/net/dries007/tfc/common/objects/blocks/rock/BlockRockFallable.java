@@ -17,16 +17,16 @@ import java.util.Random;
 
 public abstract class BlockRockFallable extends BlockRock {
 
-    public BlockRockFallable(RockBlockVariant rockBlockVariant, RockType rockType) {
-        this(Material.ROCK, rockBlockVariant, rockType);
+    public BlockRockFallable(RockBlockVariant variant, RockType type) {
+        this(Material.ROCK, variant, type);
     }
 
-    public BlockRockFallable(Material material, RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(material, rockBlockVariant, rockType);
+    public BlockRockFallable(Material material, RockBlockVariant variant, RockType type) {
+        super(material, variant, type);
 
         setHardness(getFinalHardness() * 0.03f);
 
-        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @SideOnly(Side.CLIENT)

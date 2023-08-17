@@ -60,16 +60,16 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
 
-    private final SoilBlockVariant soilBlockVariant;
-    private final SoilType soilType;
+    private final SoilBlockVariant variant;
+    private final SoilType type;
 
-    public BlockSoilGrass(SoilBlockVariant soilBlockVariant, SoilType soilType) {
+    public BlockSoilGrass(SoilBlockVariant variant, SoilType type) {
 
-        if (soilBlockVariant.canFall())
-            FallingBlockManager.registerFallable(this, soilBlockVariant.getFallingSpecification());
+        if (variant.canFall())
+            FallingBlockManager.registerFallable(this, variant.getFallingSpecification());
 
-        this.soilBlockVariant = soilBlockVariant;
-        this.soilType = soilType;
+        this.variant = variant;
+        this.type = type;
 
 
         setRegistryName(getRegistryLocation());
@@ -85,8 +85,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 .withProperty(SOUTH, Boolean.FALSE)
                 .withProperty(WEST, Boolean.FALSE));
 
-        OreDictionaryHelper.register(this, soilBlockVariant.toString());
-        OreDictionaryHelper.register(this, soilBlockVariant.toString(), soilType.toString());
+        OreDictionaryHelper.register(this, variant.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     public static void spreadGrass(World world, BlockPos pos, IBlockState us, Random rand) {
@@ -173,13 +173,13 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
     @Nonnull
     @Override
     public SoilBlockVariant getBlockVariant() {
-        return soilBlockVariant;
+        return variant;
     }
 
     @Nonnull
     @Override
     public SoilType getType() {
-        return soilType;
+        return type;
     }
 
     @Override
@@ -243,7 +243,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
     @Nonnull
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, soilType));
+        return Item.getItemFromBlock(TFCStorage.getSoilBlock(DIRT, type));
     }
 
     @Override
@@ -256,7 +256,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Random rand) {
-        if (this.soilBlockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+        if (this.variant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
             double d0 = (float) pos.getX() + rand.nextFloat();
             double d1 = (double) pos.getY() - 0.05D;
             double d2 = (float) pos.getZ() + rand.nextFloat();
@@ -280,7 +280,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 return new ModelResourceLocation(getResourceLocation(),
                         "east=" + state.getValue(EAST) + "," +
                                 "north=" + state.getValue(NORTH) + "," +
-                                "soiltype=" + soilType.toString() + "," +
+                                "soiltype=" + type.toString() + "," +
                                 "south=" + state.getValue(SOUTH) + "," +
                                 "west=" + state.getValue(WEST));
             }
@@ -291,7 +291,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 getMetaFromState(getBlockState().getBaseState()),
                 new ModelResourceLocation(getResourceLocation(),
                         "east=false,north=false," +
-                                "soiltype=" + soilType.toString() + "," +
+                                "soiltype=" + type.toString() + "," +
                                 "south=false,west=false"));
     }
 
@@ -309,26 +309,26 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
         if (plantable instanceof BlockPlantTFC) {
             switch (((BlockPlantTFC) plantable).getEnumType()) {
                 case CLAY -> {
-                    return soilBlockVariant == DIRT || soilBlockVariant == GRASS ||
-                            soilBlockVariant == DRY_GRASS || soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS;
+                    return variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || variant == CLAY || variant == CLAY_GRASS;
                 }
                 case DESERT_CLAY -> {
-                    return soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS || BlocksTFC.isSand(state);
+                    return variant == CLAY || variant == CLAY_GRASS || BlocksTFC.isSand(state);
                 }
                 case DRY_CLAY -> {
-                    return soilBlockVariant == DIRT || soilBlockVariant == DRY_GRASS ||
-                            soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS || BlocksTFC.isSand(state);
+                    return variant == DIRT || variant == DRY_GRASS ||
+                            variant == CLAY || variant == CLAY_GRASS || BlocksTFC.isSand(state);
                 }
                 case DRY -> {
-                    return soilBlockVariant == DIRT || soilBlockVariant == DRY_GRASS || BlocksTFC.isSand(state);
+                    return variant == DIRT || variant == DRY_GRASS || BlocksTFC.isSand(state);
                 }
                 case FRESH_WATER -> {
-                    return soilBlockVariant == DIRT || soilBlockVariant == GRASS ||
-                            soilBlockVariant == DRY_GRASS || BlocksTFC.isGravel(state);
+                    return variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || BlocksTFC.isGravel(state);
                 }
                 case SALT_WATER -> {
-                    return soilBlockVariant == DIRT || soilBlockVariant == GRASS ||
-                            soilBlockVariant == DRY_GRASS || BlocksTFC.isSand(state) || BlocksTFC.isGravel(state);
+                    return variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || BlocksTFC.isSand(state) || BlocksTFC.isGravel(state);
                 }
                 case FRESH_BEACH -> {
                     boolean flag = false;
@@ -340,8 +340,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                             }
                         }
                     }
-                    return (soilBlockVariant == DIRT || soilBlockVariant == GRASS ||
-                            soilBlockVariant == DRY_GRASS || BlocksTFC.isSand(state)) && flag;
+                    return (variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || BlocksTFC.isSand(state)) && flag;
                 }
                 case SALT_BEACH -> {
                     boolean flag = false;
@@ -351,8 +351,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                                 flag = true;
                             }
                     }
-                    return (soilBlockVariant == DIRT || soilBlockVariant == GRASS ||
-                            soilBlockVariant == DRY_GRASS || BlocksTFC.isSand(state)) && flag;
+                    return (variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || BlocksTFC.isSand(state)) && flag;
                 }
             }
         } else if (plantable instanceof BlockCrop) {
@@ -360,23 +360,23 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
             if (cropState.getBlock() instanceof BlockCrop) {
                 boolean isWild = cropState.getValue(WILD);
                 if (isWild) {
-                    if (soilBlockVariant == DIRT || soilBlockVariant == GRASS ||
-                            soilBlockVariant == DRY_GRASS || soilBlockVariant == CLAY_GRASS) {
+                    if (variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || variant == CLAY_GRASS) {
                         return true;
                     }
                 }
-                return soilBlockVariant == FARMLAND;
+                return variant == FARMLAND;
             }
         }
 
         switch (plantable.getPlantType(world, pos.offset(direction))) {
             case Plains -> {
-                return soilBlockVariant == DIRT || soilBlockVariant == GRASS ||
-                        soilBlockVariant == FARMLAND || soilBlockVariant == DRY_GRASS ||
-                        soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS;
+                return variant == DIRT || variant == GRASS ||
+                        variant == FARMLAND || variant == DRY_GRASS ||
+                        variant == CLAY || variant == CLAY_GRASS;
             }
             case Crop -> {
-                return soilBlockVariant == FARMLAND;
+                return variant == FARMLAND;
             }
             case Desert -> {
                 return BlocksTFC.isSand(state);
@@ -395,7 +395,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                             flag = true;
                         }
                 }
-                return (soilBlockVariant == DIRT || soilBlockVariant == GRASS || soilBlockVariant == DRY_GRASS || BlocksTFC.isSand(state)) && flag;
+                return (variant == DIRT || variant == GRASS || variant == DRY_GRASS || BlocksTFC.isSand(state)) && flag;
             }
         }
 

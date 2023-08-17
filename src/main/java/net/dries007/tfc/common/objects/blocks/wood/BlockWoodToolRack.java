@@ -40,8 +40,8 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
     protected static final AxisAlignedBB RACK_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
 
 
-    public BlockWoodToolRack(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-        super(woodBlockVariant, woodType);
+    public BlockWoodToolRack(WoodBlockVariant variant, WoodType type) {
+        super(variant, type);
 
         setHarvestLevel("axe", 0);
         setHardness(0.5f);
@@ -49,7 +49,7 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(FACING, EnumFacing.NORTH));
 
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Nonnull

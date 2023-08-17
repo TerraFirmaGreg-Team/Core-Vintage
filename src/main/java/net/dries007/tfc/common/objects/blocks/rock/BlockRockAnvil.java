@@ -39,8 +39,8 @@ import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.RAW;
 public class BlockRockAnvil extends BlockRock {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
-    public BlockRockAnvil(RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockVariant, rockType);
+    public BlockRockAnvil(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
         FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.COLLAPSABLE_ROCK);
     }

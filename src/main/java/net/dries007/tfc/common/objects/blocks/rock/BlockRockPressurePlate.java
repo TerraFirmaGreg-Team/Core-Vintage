@@ -28,14 +28,14 @@ import java.util.List;
 
 public class BlockRockPressurePlate extends BlockPressurePlate implements IRockBlock {
 
-    private final RockBlockVariant rockBlockVariant;
-    private final RockType rockType;
+    private final RockBlockVariant variant;
+    private final RockType type;
 
-    public BlockRockPressurePlate(RockBlockVariant rockBlockVariant, RockType rockType) {
+    public BlockRockPressurePlate(RockBlockVariant variant, RockType type) {
         super(Material.ROCK, Sensitivity.MOBS);
 
-        this.rockBlockVariant = rockBlockVariant;
-        this.rockType = rockType;
+        this.variant = variant;
+        this.type = type;
 
         setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
@@ -43,19 +43,19 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
 
-        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Nonnull
     @Override
     public RockBlockVariant getBlockVariant() {
-        return rockBlockVariant;
+        return variant;
     }
 
     @Nonnull
     @Override
     public RockType getType() {
-        return rockType;
+        return type;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
                         "powered=" + state.getValue(POWERED) + "," +
-                                "rocktype=" + rockType.toString());
+                                "rocktype=" + type.toString());
             }
         });
 
@@ -79,7 +79,7 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
             ModelLoader.setCustomModelResourceLocation(
                     Item.getItemFromBlock(this),
                     getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(), "inventory=" + rockType.toString()));
+                    new ModelResourceLocation(getResourceLocation(), "inventory=" + type.toString()));
         }
     }
 
@@ -88,6 +88,6 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockType.getCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + type.getCategory().getLocalizedName());
     }
 }

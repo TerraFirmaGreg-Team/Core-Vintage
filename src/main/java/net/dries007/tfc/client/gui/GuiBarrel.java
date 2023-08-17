@@ -2,9 +2,9 @@ package net.dries007.tfc.client.gui;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.client.util.FluidSpriteCache;
 import net.dries007.tfc.client.button.GuiButtonBarrelSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
+import net.dries007.tfc.client.util.FluidSpriteCache;
 import net.dries007.tfc.common.objects.container.ContainerBarrel;
 import net.dries007.tfc.common.objects.tileentities.TEBarrel;
 import net.dries007.tfc.network.PacketGuiButton;

@@ -1,11 +1,11 @@
 package net.dries007.tfc.common.objects.items;
 
-import net.dries007.tfc.api.types.crop.ICrop;
-import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
+import net.dries007.tfc.api.registries.TFCStorage;
+import net.dries007.tfc.api.types.crop.type.CropType;
+import net.dries007.tfc.common.objects.blocks.crop.BlockCrop;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -18,42 +18,26 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.GROWING;
 
 public class ItemSeedsTFC extends Item implements IPlantable {
-    private static final Map<ICrop, ItemSeedsTFC> MAP = new HashMap<>();
-    private final ICrop crop;
+    private final CropType type;
 
-    public ItemSeedsTFC(ICrop crop) {
-        this.crop = crop;
-        if (MAP.put(crop, this) != null) {
-            throw new IllegalStateException("There can only be one.");
-        }
-    }
-
-    public static ItemSeedsTFC get(ICrop crop) {
-        return MAP.get(crop);
-    }
-
-    public static ItemStack get(ICrop crop, int amount) {
-        return new ItemStack(MAP.get(crop), amount);
+    public ItemSeedsTFC(CropType type) {
+        this.type = type;
     }
 
     @Nonnull
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack itemstack = player.getHeldItem(hand);
         IBlockState state = worldIn.getBlockState(pos);
         if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) &&
                 state.getBlock().canSustainPlant(state, worldIn, pos, EnumFacing.UP, this) &&
                 worldIn.isAirBlock(pos.up()) && state.getBlock() instanceof BlockSoilFarmland) {
-            worldIn.setBlockState(pos.up(), BlockCropTFC.get(crop).getDefaultState());
+            worldIn.setBlockState(pos.up(), TFCStorage.getCropBlock(GROWING, type).getDefaultState());
 
             if (player instanceof EntityPlayerMP) {
                 CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, pos.up(), itemstack);
@@ -74,16 +58,16 @@ public class ItemSeedsTFC extends Item implements IPlantable {
     @Override
     public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockCropTFC && ((BlockCropTFC) state.getBlock()).getCrop() == this.crop) {
+        if (state.getBlock() instanceof BlockCrop && ((BlockCrop) state.getBlock()).getType() == this.type) {
             return state;
         }
-        return BlockCropTFC.get(crop).getDefaultState();
+        return TFCStorage.getCropBlock(GROWING, type).getDefaultState();
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-        crop.addInfo(stack, worldIn, tooltip, flagIn);
-    }
+//    @SideOnly(Side.CLIENT)
+//    @Override
+//    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+//        super.addInformation(stack, worldIn, tooltip, flagIn);
+//        variant.addInfo(stack, worldIn, tooltip, flagIn);
+//    }
 }

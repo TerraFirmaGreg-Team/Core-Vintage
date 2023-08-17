@@ -10,7 +10,6 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.common.objects.items.ItemsTFC;
 import net.dries007.tfc.common.objects.items.TFCItems;
-import net.dries007.tfc.common.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.minecraft.init.Items;

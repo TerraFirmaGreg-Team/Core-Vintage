@@ -13,8 +13,6 @@ import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.items.ItemsTFC;
 import net.dries007.tfc.common.objects.items.TFCItems;
-import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
-import net.dries007.tfc.common.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;

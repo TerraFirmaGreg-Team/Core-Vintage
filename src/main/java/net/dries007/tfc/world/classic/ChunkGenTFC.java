@@ -364,7 +364,7 @@ public class ChunkGenTFC implements IChunkGenerator {
         }
 
         // Чтобы свести к минимуму последствия этого изменения, я помещаю это здесь, в конце генерации чанка.
-        WILD_CROPS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
+        //WILD_CROPS_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
 
         ForgeEventFactory.onChunkPopulate(false, this, world, rand, chunkX, chunkZ, false);
         BlockFalling.fallInstantly = false;

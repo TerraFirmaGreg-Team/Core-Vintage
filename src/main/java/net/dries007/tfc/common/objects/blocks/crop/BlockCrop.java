@@ -1,13 +1,15 @@
-package net.dries007.tfc.common.objects.blocks.agriculture.crop;
+package net.dries007.tfc.common.objects.blocks.crop;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.crop.Crop;
-import net.dries007.tfc.api.types.crop.ICrop;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.crop.ICropBlock;
+import net.dries007.tfc.api.types.crop.type.CropType;
+import net.dries007.tfc.api.types.crop.variant.CropBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropDead;
+import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
-import net.dries007.tfc.common.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TECropBase;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
@@ -22,27 +24,35 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
-@ParametersAreNonnullByDefault
-public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
+import static net.dries007.tfc.api.types.crop.category.CropCategories.PICKABLE;
+import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.DEAD;
+
+
+public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
 
     // Свойства стадии роста
     public static final PropertyInteger STAGE_8 = PropertyInteger.create("stage", 0, 7);
@@ -72,9 +82,6 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
     private static final int META_WILD = 8;
     private static final int META_GROWTH = 7;
 
-    // Статическое поле для преобразования культуры в блок
-    private static final Map<ICrop, BlockCrop> MAP = new HashMap<>();
-
     static {
         STAGE_MAP.put(5, STAGE_5);
         STAGE_MAP.put(6, STAGE_6);
@@ -82,47 +89,42 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
         STAGE_MAP.put(8, STAGE_8);
     }
 
-    private final ICrop crop;
+    private final CropBlockVariant variant;
+    private final CropType type;
 
-    public BlockCrop(ICrop crop) {
+    public BlockCrop(CropBlockVariant variant, CropType  type) {
         super(Material.PLANTS);
 
-        this.crop = crop;
-        if (MAP.put(crop, this) != null) {
-            throw new IllegalStateException("Может быть только один экземпляр.");
-        }
+        this.variant = variant;
+        this.type = type;
 
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
+        setCreativeTab(CreativeTabsTFC.FLORA);
         setSoundType(SoundType.PLANT);
         setHardness(0.6f);
+
+        setDefaultState(blockState.getBaseState()
+                .withProperty(getStageProperty(), 0)
+                .withProperty(WILD, false));
     }
 
-    /**
-     * Получить экземпляр BlockCrop, связанный с заданным ICrop.
-     *
-     * @param crop Экземпляр ICrop.
-     * @return Экземпляр BlockCrop.
-     */
-    public static BlockCrop get(ICrop crop) {
-        return MAP.get(crop);
+    @Nonnull
+    @Override
+    public CropType getType() {
+        return type;
     }
 
-    /**
-     * Получить набор всех зарегистрированных экземпляров ICrop.
-     *
-     * @return Набор экземпляров ICrop.
-     */
-    public static Set<ICrop> getCrops() {
-        return MAP.keySet();
+    @Nonnull
+    @Override
+    public CropBlockVariant getBlockVariant() {
+        return variant;
     }
 
-    /**
-     * Получить свойство стадии роста для заданного ICrop.
-     *
-     * @param crop Экземпляр ICrop.
-     * @return Свойство стадии роста.
-     */
-    static PropertyInteger getStagePropertyForCrop(ICrop crop) {
-        return STAGE_MAP.get(crop.getMaxStage() + 1);
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     /**
@@ -135,7 +137,8 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
     @Nonnull
     @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(WILD, (meta & META_WILD) > 0).withProperty(getStageProperty(), meta & META_GROWTH);
+        return getDefaultState().withProperty(WILD, (meta & META_WILD) > 0)
+                .withProperty(getStageProperty(), meta & META_GROWTH);
     }
 
     /**
@@ -153,25 +156,25 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
      * Выполняет случайное обновление блока.
      *
      * @param worldIn Мир, в котором находится блок.
-     * @param pos Позиция блока.
-     * @param state Состояние блока.
-     * @param random Генератор случайных чисел.
+     * @param pos     Позиция блока.
+     * @param state   Состояние блока.
+     * @param random  Генератор случайных чисел.
      */
     @Override
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+    public void randomTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random random) {
         super.updateTick(worldIn, pos, state, random);
-        checkGrowth(worldIn, pos, state, random);
+        //checkGrowth(worldIn, pos, state, random);
     }
 
     /**
      * Вызывается при добавлении блока в мир.
      *
      * @param worldIn Мир, в котором находится блок.
-     * @param pos Позиция блока.
-     * @param state Состояние блока.
+     * @param pos     Позиция блока.
+     * @param state   Состояние блока.
      */
     @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+    public void onBlockAdded(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         TECropBase tile = Helpers.getTE(worldIn, pos, TECropBase.class);
         if (tile != null) {
             tile.resetCounter();
@@ -207,7 +210,7 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
      * @return {@code true}, если блок имеет тайл-энтити, иначе {@code false}.
      */
     @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(@Nonnull IBlockState state) {
         return true;
     }
 
@@ -218,25 +221,26 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
      * @param state Состояние блока.
      * @return Тайл-энтити блока.
      */
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TECropBase();
-    }
+//    @Nullable
+//    @Override
+//    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
+//        return new TECropBase();
+//    }
 
     /**
      * Метод, который добавляет предметы в список drops.
-     * @param drops Список предметов, в который будут добавлены предметы.
-     * @param world Объект IBlockAccess, представляющий мир.
-     * @param pos Позиция блока в мире.
-     * @param state Состояние блока.
+     *
+     * @param drops   Список предметов, в который будут добавлены предметы.
+     * @param world   Объект IBlockAccess, представляющий мир.
+     * @param pos     Позиция блока в мире.
+     * @param state   Состояние блока.
      * @param fortune Уровень фортуны.
      */
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, IBlockState state, int fortune) {
         EntityPlayer player = harvesters.get();
-        ItemStack seedStack = new ItemStack(ItemSeedsTFC.get(crop));
-        ItemStack foodStack = crop.getFoodDrop(state.getValue(getStageProperty()));
+        //ItemStack seedStack = new ItemStack(ItemSeedsTFC.get(type));
+        ItemStack foodStack = type.getFoodDrop(state.getValue(getStageProperty()));
 
         // Если игрок и навыки присутствуют, обновляем навыки и увеличиваем количество предметов в зависимости от навыка
         if (player != null) {
@@ -244,8 +248,8 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
 
             if (skill != null) {
                 if (!foodStack.isEmpty()) {
-                    foodStack.setCount(1 + Crop.getSkillFoodBonus(skill, RANDOM));
-                    seedStack.setCount(1 + Crop.getSkillSeedBonus(skill, RANDOM));
+                    foodStack.setCount(1 + CropType.getSkillFoodBonus(skill, RANDOM));
+                    //seedStack.setCount(1 + CropType.getSkillSeedBonus(skill, RANDOM));
                     skill.add(0.04f);
                 }
             }
@@ -255,32 +259,34 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
         if (!foodStack.isEmpty()) {
             drops.add(foodStack);
         }
-        if (!seedStack.isEmpty()) {
-            drops.add(seedStack);
-        }
+//        if (!seedStack.isEmpty()) {
+//            drops.add(seedStack);
+//        }
     }
 
     /**
      * Метод, который возвращает предмет, который будет получен при использовании правой кнопки мыши на блоке.
-     * @param state Состояние блока.
+     *
+     * @param state  Состояние блока.
      * @param target Объект RayTraceResult, представляющий результат трассировки луча.
-     * @param world Объект World, представляющий мир.
-     * @param pos Позиция блока в мире.
+     * @param world  Объект World, представляющий мир.
+     * @param pos    Позиция блока в мире.
      * @param player Игрок, который использовал правую кнопку мыши.
      * @return Предмет, который будет получен при использовании правой кнопки мыши на блоке.
      */
-    @Override
-    @Nonnull
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(ItemSeedsTFC.get(crop));
-    }
+//    @Override
+//    @Nonnull
+//    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+//        return new ItemStack(ItemSeedsTFC.get(type));
+//    }
 
     /**
      * Метод, который проверяет рост культуры.
+     *
      * @param worldIn Объект World, представляющий мир.
-     * @param pos Позиция блока в мире.
-     * @param state Состояние блока.
-     * @param random Объект Random для генерации случайных чисел.
+     * @param pos     Позиция блока в мире.
+     * @param state   Состояние блока.
+     * @param random  Объект Random для генерации случайных чисел.
      */
     public void checkGrowth(World worldIn, BlockPos pos, IBlockState state, Random random) {
         if (!worldIn.isRemote) {
@@ -289,13 +295,14 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
                 // Если нельзя видеть небо или почва не увлажнена, сбрасываем счетчик роста
                 IBlockState stateFarmland = worldIn.getBlockState(pos.down());
                 if (!state.getValue(WILD)) {
-                    if (!worldIn.canSeeSky(pos) || (stateFarmland.getBlock() instanceof BlockSoilFarmland && stateFarmland.getValue(BlockSoilFarmland.MOISTURE) < 3)) {
+                    if (!worldIn.canSeeSky(pos) || (stateFarmland.getBlock() instanceof BlockSoilFarmland &&
+                            stateFarmland.getValue(BlockSoilFarmland.MOISTURE) < 3)) {
                         te.resetCounter();
                         return;
                     }
                 }
 
-                long growthTicks = (long) (crop.getGrowthTicks() * ConfigTFC.General.FOOD.cropGrowthTimeModifier);
+                long growthTicks = (long) (type.getGrowthTicks() * ConfigTFC.General.FOOD.cropGrowthTimeModifier);
                 int fullGrownStages = 0;
                 while (te.getTicksSinceUpdate() > growthTicks) {
                     te.reduceCounter(growthTicks);
@@ -305,17 +312,17 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
                     float rainfall = ChunkDataTFC.getRainfall(worldIn, pos);
 
                     // Проверяем, может ли культура вырасти, и если да, то растим ее
-                    if (crop.isValidForGrowth(temp, rainfall)) {
+                    if (type.isValidForGrowth(temp, rainfall)) {
                         grow(worldIn, pos, state, random);
                         state = worldIn.getBlockState(pos);
-                        if (state.getBlock() instanceof BlockCrop && !state.getValue(WILD) && state.getValue(getStageProperty()) == crop.getMaxStage()) {
+                        if (state.getBlock() instanceof BlockCrop && !state.getValue(WILD) && state.getValue(getStageProperty()) == type.getMaxStage()) {
                             fullGrownStages++;
                             if (fullGrownStages > 2) {
                                 die(worldIn, pos, state, random);
                                 return;
                             }
                         }
-                    } else if (!crop.isValidConditions(temp, rainfall)) {
+                    } else if (!type.isValidConditions(temp, rainfall)) {
                         die(worldIn, pos, state, random);
                         return;
                     }
@@ -326,76 +333,132 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
 
     /**
      * Проверяет, может ли культура вырасти, и если да, то растит ее.
+     *
      * @param worldIn Объект World, представляющий мир.
-     * @param pos Позиция блока в мире.
-     * @param state Состояние блока.
-     * @param random Объект Random для генерации случайных чисел.
+     * @param pos     Позиция блока в мире.
+     * @param state   Состояние блока.
+     * @param random  Объект Random для генерации случайных чисел.
      */
-    public abstract void grow(World worldIn, BlockPos pos, IBlockState state, Random random);
+    public void grow(World worldIn, BlockPos pos, IBlockState state, Random random) {
+        if (!worldIn.isRemote) {
+            if (state.getValue(getStageProperty()) < getType().getMaxStage()) {
+                worldIn.setBlockState(pos, state.withProperty(getStageProperty(), state.getValue(getStageProperty()) + 1), 2);
+            }
+        }
+    }
 
     /**
      * Уничтожает культуру, превращая ее в мертвый блок культуры.
+     *
      * @param worldIn Объект World, представляющий мир.
-     * @param pos Позиция блока в мире.
-     * @param state Состояние блока.
-     * @param random Объект Random для генерации случайных чисел.
+     * @param pos     Позиция блока в мире.
+     * @param state   Состояние блока.
+     * @param random  Объект Random для генерации случайных чисел.
      */
     public void die(World worldIn, BlockPos pos, IBlockState state, Random random) {
         if (ConfigTFC.General.FOOD.enableCropDeath) {
-            worldIn.setBlockState(pos, BlockCropDead.get(crop).getDefaultState().withProperty(BlockCropDead.MATURE, state.getValue(getStageProperty()) == crop.getMaxStage()));
+            worldIn.setBlockState(pos, TFCStorage.getCropBlock(DEAD, type).getDefaultState()
+                    .withProperty(BlockCropDead.MATURE, state.getValue(getStageProperty()) == type.getMaxStage()));
         }
     }
 
     /**
      * Возвращает ограничивающий параллелепипед для данного состояния блока.
-     * @param state Состояние блока.
+     *
+     * @param state  Состояние блока.
      * @param source Источник доступа к блокам.
-     * @param pos Позиция блока в мире.
+     * @param pos    Позиция блока в мире.
      * @return Ограничивающий параллелепипед для данного состояния блока.
      */
     @Override
     @Nonnull
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
         return CROPS_AABB[state.getValue(getStageProperty())];
     }
 
     /**
      * Возвращает тип растения для данной культуры.
+     *
      * @param world Мир.
-     * @param pos Позиция блока в мире.
+     * @param pos   Позиция блока в мире.
      * @return Тип растения.
      */
     @Nonnull
     @Override
-    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+    public EnumPlantType getPlantType(@Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
         return EnumPlantType.Crop;
     }
 
     /**
      * Возвращает свойство, представляющее стадию роста культуры.
+     *
      * @return Свойство стадии роста.
      */
-    public abstract PropertyInteger getStageProperty();
+    public PropertyInteger getStageProperty() {
+        var property = STAGE_MAP.get(5);//type.getMaxStage() + 1);
+        if (property == null)
+            throw new IllegalStateException("Invalid growthstage property " + (type.getMaxStage() + 1) + " for crop");
+
+        return property;
+    }
 
     /**
      * Возвращает статус роста культуры на основе ее состояния, температуры и осадков.
+     *
      * @param state Состояние блока.
      * @param world Мир.
-     * @param pos Позиция блока в мире.
+     * @param pos   Позиция блока в мире.
      * @return Статус роста культуры.
      */
     @Override
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         float temp = ClimateTFC.getActualTemp(world, pos);
         float rainfall = ChunkDataTFC.getRainfall(world, pos);
-        if (state.getValue(getStageProperty()) >= crop.getMaxStage()) {
+        if (state.getValue(getStageProperty()) >= type.getMaxStage()) {
             return GrowthStatus.FULLY_GROWN;
-        } else if (!crop.isValidConditions(temp, rainfall) || !world.canSeeSky(pos)) {
+        } else if (!type.isValidConditions(temp, rainfall) || !world.canSeeSky(pos)) {
             return GrowthStatus.NOT_GROWING;
-        } else if (crop.isValidForGrowth(temp, rainfall)) {
+        } else if (type.isValidForGrowth(temp, rainfall)) {
             return GrowthStatus.GROWING;
         }
         return GrowthStatus.CAN_GROW;
+    }
+
+    @Override
+    public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (getType().getCropCategory() == PICKABLE) {
+            ItemStack foodDrop = getType().getFoodDrop(state.getValue(getStageProperty()));
+            if (!foodDrop.isEmpty()) {
+                //ItemStack seedDrop = new ItemStack(ItemSeedsTFC.get(getBlockVariant()), 0);
+                SimpleSkill skill = CapabilityPlayerData.getSkill(playerIn, SkillType.AGRICULTURE);
+
+                if (skill != null) {
+                    foodDrop.setCount(1 + CropType.getSkillFoodBonus(skill, RANDOM));
+                    // omit the +1 because the plant stays alive.
+                    //seedDrop.setCount(CropType.getSkillSeedBonus(skill, RANDOM));
+                }
+
+                if (!worldIn.isRemote) {
+                    worldIn.setBlockState(pos, state.withProperty(getStageProperty(), state.getValue(getStageProperty()) - 3));
+                    ItemHandlerHelper.giveItemToPlayer(playerIn, foodDrop);
+//                    if (!seedDrop.isEmpty())
+//                        ItemHandlerHelper.giveItemToPlayer(playerIn, seedDrop);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(WILD).build());
+
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

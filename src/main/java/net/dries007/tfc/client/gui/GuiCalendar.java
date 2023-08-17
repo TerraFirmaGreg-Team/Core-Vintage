@@ -1,8 +1,8 @@
 package net.dries007.tfc.client.gui;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;

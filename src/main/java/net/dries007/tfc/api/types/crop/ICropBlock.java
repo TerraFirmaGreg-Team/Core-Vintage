@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types.crop;
 
-import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.types.crop.variant.CropBlockVariant;
+import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +18,7 @@ public interface ICropBlock extends IHasModel, IItemProvider {
      * @return Вариант блока культуры.
      */
     @Nonnull
-    CropBlockVariant getBlockVariant();
+    CropType getType();
 
     /**
      * Возвращает тип культуры.
@@ -26,7 +26,7 @@ public interface ICropBlock extends IHasModel, IItemProvider {
      * @return Тип культуры.
      */
     @Nonnull
-    CropType getType();
+    CropBlockVariant getBlockVariant();
 
     /**
      * Возвращает местоположение регистрации блока культуры.
@@ -45,7 +45,7 @@ public interface ICropBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return new ResourceLocation(MOD_ID, String.format("crop/%s", getBlockVariant()));
+        return new ResourceLocation(MOD_ID, String.format("crop/%s/%s", getBlockVariant(), getType()));
     }
 
     /**

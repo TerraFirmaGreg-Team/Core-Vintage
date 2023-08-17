@@ -2,6 +2,8 @@ package net.dries007.tfc.common.objects.blocks;
 
 import gregtech.api.GregTechAPI;
 import net.dries007.tfc.api.types.GroundcoverType;
+import net.dries007.tfc.api.types.crop.variant.CropBlockVariant;
+import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariant;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.rock.type.RockType;
@@ -62,13 +64,24 @@ public class TFCBlocks {
 
     public static void preInit() {
 
+        //=== Crop ===================================================================================================//
+
+        for (var cropBlockVariant : CropBlockVariant.getCropBlockVariants()) {
+            for (var cropType : CropType.getCropTypes()) {
+                var cropBlock = cropBlockVariant.create(cropType);
+
+                if (CROP_BLOCKS.put(new Pair<>(cropBlockVariant, cropType), cropBlock) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", cropBlockVariant, cropType));
+            }
+        }
+
         //=== Rock ===================================================================================================//
 
         for (var rockBlockVariant : RockBlockVariant.getRockBlockVariants()) {
             for (var rockType : RockType.getRockTypes()) {
-                var rockTypeBlock = rockBlockVariant.create(rockType);
+                var rockBlock = rockBlockVariant.create(rockType);
 
-                if (ROCK_BLOCKS.put(new Pair<>(rockBlockVariant, rockType), rockTypeBlock) != null)
+                if (ROCK_BLOCKS.put(new Pair<>(rockBlockVariant, rockType), rockBlock) != null)
                     throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", rockBlockVariant, rockType));
             }
         }
@@ -77,12 +90,25 @@ public class TFCBlocks {
 
         for (var soilBlockVariant : SoilBlockVariant.getSoilBlockVariants()) {
             for (var soilType : SoilType.getSoilTypes()) {
-                var soilTypeBlock = soilBlockVariant.create(soilType);
+                var soilBlock = soilBlockVariant.create(soilType);
 
-                if (SOIL_BLOCKS.put(new Pair<>(soilBlockVariant, soilType), soilTypeBlock) != null)
+                if (SOIL_BLOCKS.put(new Pair<>(soilBlockVariant, soilType), soilBlock) != null)
                     throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", soilBlockVariant, soilType));
             }
         }
+
+        //=== Wood ===================================================================================================//
+
+        for (var woodBlockVariant : WoodBlockVariant.getWoodBlockVariants()) {
+            for (var woodType : WoodType.getWoodTypes()) {
+                var woodBlock = woodBlockVariant.create(woodType);
+
+                if (WOOD_BLOCKS.put(new Pair<>(woodBlockVariant, woodType), woodBlock) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", woodBlockVariant, woodType));
+            }
+        }
+
+
 
         //=== Plant ==================================================================================================//
 
@@ -91,17 +117,6 @@ public class TFCBlocks {
 
             if (PLANT_BLOCKS.put(new Pair<>(plant.getPlantVariant(), plant), plantTypeBlock) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", plant.getPlantVariant(), plant));
-        }
-
-        //=== Wood ===================================================================================================//
-
-        for (var woodBlockVariant : WoodBlockVariant.getWoodBlockVariants()) {
-            for (var woodType : WoodType.getWoodTypes()) {
-                var woodVariantBlock = woodBlockVariant.applyToFactory(woodType);
-
-                if (WOOD_BLOCKS.put(new Pair<>(woodBlockVariant, woodType), woodVariantBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", woodBlockVariant, woodType));
-            }
         }
 
         //=== Metal ==================================================================================================//

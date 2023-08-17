@@ -102,7 +102,6 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.TALL_GRASS;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
-import static net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC.WILD;
 import static net.minecraft.util.text.TextFormatting.*;
 
 @SuppressWarnings("unused")
@@ -161,10 +160,11 @@ public class ClientProxy extends CommonProxy {
 
         //=== BLOCKS =================================================================================================//
 
-        TFCStorage.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.CROP_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.ALABASTER_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.GROUNDCOVER_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
@@ -264,10 +264,6 @@ public class ClientProxy extends CommonProxy {
 
 
         // Blocks with Ignored Properties
-
-
-        for (Block block : BlocksTFC.getAllCropBlocks())
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(WILD).build());
 
         for (Block block : BlocksTFC.getAllFruitTreeLeavesBlocks())
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE).ignore(BlockFruitTreeLeaves.HARVESTABLE).build());

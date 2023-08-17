@@ -6,7 +6,6 @@ import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;

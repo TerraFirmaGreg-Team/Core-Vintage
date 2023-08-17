@@ -3,7 +3,6 @@ package net.dries007.tfc.common.objects.items.ceramics;
 import gregtech.api.fluids.MetaFluids;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
@@ -31,11 +30,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.*;
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
 @ParametersAreNonnullByDefault

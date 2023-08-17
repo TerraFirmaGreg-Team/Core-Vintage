@@ -3,8 +3,6 @@ package net.dries007.tfc.mixins.gregtech;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.StoneType;
-import gregtech.api.unification.ore.StoneTypes;
-import gregtech.api.worldgen.config.OreConfigUtils;
 import gregtech.common.blocks.BlockOre;
 import gregtech.common.blocks.properties.PropertyStoneType;
 import net.dries007.tfc.api.registries.TFCStorage;

@@ -13,7 +13,7 @@ public class TOPIntegration {
         oneProbe.registerProvider(new BerryBushProvider());
         oneProbe.registerProvider(new BlastFurnaceProvider());
         oneProbe.registerProvider(new BloomeryProvider());
-        oneProbe.registerProvider(new CropProvider());
+        //oneProbe.registerProvider(new CropProvider());
         oneProbe.registerProvider(new CrucibleProvider());
         oneProbe.registerProvider(new FruitTreeProvider());
         oneProbe.registerProvider(new LogPileProvider());

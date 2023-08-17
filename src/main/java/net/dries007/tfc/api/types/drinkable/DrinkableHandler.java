@@ -13,7 +13,6 @@ import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.fluids.FluidRegistry;
 
 import static net.dries007.tfc.api.types.drinkable.Drinkables.*;
 

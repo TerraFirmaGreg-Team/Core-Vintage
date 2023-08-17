@@ -67,7 +67,7 @@ public class WoodBlockVariant {
      * @return объект IWoodBlock, созданный фабрикой
      */
     @Nonnull
-    public IWoodBlock applyToFactory(@Nonnull WoodType woodType) {
+    public IWoodBlock create(@Nonnull WoodType woodType) {
         return factory.apply(this, woodType);
     }
 }

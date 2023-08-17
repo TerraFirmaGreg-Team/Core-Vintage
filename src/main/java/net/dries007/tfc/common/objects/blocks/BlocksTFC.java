@@ -3,15 +3,12 @@ package net.dries007.tfc.common.objects.blocks;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.types.bush.BerryBush;
-import net.dries007.tfc.api.types.crop.Crop;
 import net.dries007.tfc.api.types.fruit.FruitTree;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.agriculture.*;
-import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropDead;
-import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeat;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeatGrass;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
@@ -39,8 +36,6 @@ public final class BlocksTFC {
     // Use the static get methods in the classes instead.
     private static ImmutableList<ItemBlock> allNormalItemBlocks;
     private static ImmutableList<ItemBlock> allInventoryItemBlocks;
-    private static ImmutableList<BlockCropTFC> allCropBlocks;
-    private static ImmutableList<BlockCropDead> allDeadCropBlocks;
     private static ImmutableList<BlockFlowerPotTFC> allFlowerPots;
     private static ImmutableList<BlockFruitTreeSapling> allFruitTreeSaplingBlocks;
     private static ImmutableList<BlockFruitTreeTrunk> allFruitTreeTrunkBlocks;
@@ -56,9 +51,6 @@ public final class BlocksTFC {
         return allInventoryItemBlocks;
     }
 
-    public static ImmutableList<BlockCropTFC> getAllCropBlocks() {
-        return allCropBlocks;
-    }
 
     public static ImmutableList<BlockFruitTreeLeaves> getAllFruitTreeLeavesBlocks() {
         return allFruitTreeLeavesBlocks;
@@ -77,27 +69,6 @@ public final class BlocksTFC {
 
 
         //=== Other ==================================================================================================//
-
-
-        {
-            Builder<BlockCropTFC> b = ImmutableList.builder();
-
-            for (Crop crop : Crop.values()) {
-                b.add(register(r, "crop/" + crop.name().toLowerCase(), crop.createGrowingBlock()));
-            }
-
-            allCropBlocks = b.build();
-        }
-
-        {
-            Builder<BlockCropDead> b = ImmutableList.builder();
-
-            for (Crop crop : Crop.values()) {
-                b.add(register(r, "dead_crop/" + crop.name().toLowerCase(), crop.createDeadBlock()));
-            }
-
-            allDeadCropBlocks = b.build();
-        }
 
         {
             Builder<BlockFruitTreeSapling> fSaplings = ImmutableList.builder();

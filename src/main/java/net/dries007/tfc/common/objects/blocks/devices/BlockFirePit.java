@@ -2,8 +2,8 @@ package net.dries007.tfc.common.objects.blocks.devices;
 
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.api.util.property.ILightableBlock;
-import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.items.TFCItems;

@@ -3,7 +3,7 @@ package net.dries007.tfc.api.registries;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.types.GroundcoverType;
-import net.dries007.tfc.api.types.crop.ICropBlock;
+import net.dries007.tfc.api.types.crop.ICrop;
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.types.crop.variant.CropBlockVariant;
 import net.dries007.tfc.api.types.metal.IMetalBlock;
@@ -36,28 +36,29 @@ import net.minecraftforge.fluids.BlockFluidBase;
 
 import javax.annotation.Nonnull;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * В этом классе мы можем хранить любые блоки, предметы и прочую полезную хрень.
  */
 public final class TFCStorage {
 
-    public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<PlantBlockVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<CropBlockVariant, CropType>, ICropBlock> CROP_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<MetalBlockVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new ConcurrentHashMap<>();
+    public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new ConcurrentHashMap<>();
+    public static final Map<Pair<PlantBlockVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new ConcurrentHashMap<>();
+    public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new ConcurrentHashMap<>();
+    public static final Map<Pair<CropBlockVariant, CropType>, ICrop> CROP_BLOCKS = new ConcurrentHashMap<>();
+    public static final Map<Pair<MetalBlockVariant, Material>, IMetalBlock> METAL_BLOCKS = new ConcurrentHashMap<>();
 
-    public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
-    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new HashMap<>();
+    public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCKS = new ConcurrentHashMap<>();
+    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new ConcurrentHashMap<>();
 
-    public static final Map<RockType, ItemRock> ROCK_ITEMS = new HashMap<>();
-    public static final Map<RockType, ItemRockBrick> BRICK_ITEMS = new HashMap<>();
-    public static final Map<WoodType, ItemWoodLumber> LUMBER_ITEMS = new HashMap<>();
-    public static final Map<WoodType, ItemWoodBoat> BOAT_ITEMS = new HashMap<>();
-    public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new HashMap<>();
-    public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new HashMap<>();
+    public static final Map<RockType, ItemRock> ROCK_ITEMS = new ConcurrentHashMap<>();
+    public static final Map<RockType, ItemRockBrick> BRICK_ITEMS = new ConcurrentHashMap<>();
+    public static final Map<WoodType, ItemWoodLumber> LUMBER_ITEMS = new ConcurrentHashMap<>();
+    public static final Map<WoodType, ItemWoodBoat> BOAT_ITEMS = new ConcurrentHashMap<>();
+    public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new ConcurrentHashMap<>();
+    public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new ConcurrentHashMap<>();
 
     // Блоки, имеющие предмет
     public static final List<ItemBlock> ITEM_BLOCKS = new ArrayList<>();

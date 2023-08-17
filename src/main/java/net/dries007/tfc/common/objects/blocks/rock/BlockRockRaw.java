@@ -41,7 +41,7 @@ public class BlockRockRaw extends BlockRock {
     public BlockRockRaw(RockBlockVariant rockBlockVariant, RockType rockType) {
         super(rockBlockVariant, rockType);
 
-        this.setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
+        setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
 
         // Copy as each raw stone has an unique resultingState
         var spec = new FallingBlockManager.Specification(FallingBlockManager.Specification.COLLAPSABLE_ROCK);

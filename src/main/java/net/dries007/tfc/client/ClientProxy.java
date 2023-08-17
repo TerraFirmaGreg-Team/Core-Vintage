@@ -579,6 +579,8 @@ public class ClientProxy extends CommonProxy {
         var stack = event.getItemStack();
         var tt = event.getToolTip();
 
+        // GuiScreen.isShiftKeyDown()
+
         if (!stack.isEmpty()) {
             // Size
             var size = CapabilityItemSize.getIItemSize(stack);

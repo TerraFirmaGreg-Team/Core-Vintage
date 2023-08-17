@@ -65,7 +65,7 @@ public interface IMaterialItem {
             text.add("");
             text.add(I18n.format("tfc.tooltip.containsmetal"));
             text.add(I18n.format("tfc.tooltip.metalname", material.getLocalizedName()));
-            text.add(I18n.format("tfc.tooltip.units", getSmeltAmount(stack)));
+            text.add(I18n.format("tfc.tooltip.units", getSmeltAmount(stack) * stack.getCount()));
             text.add(I18n.format("tfc.tooltip.melttemp", melttemp));
             text.add(I18n.format("tfc.tooltip.tier", metalTier));
         }

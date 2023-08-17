@@ -6,6 +6,7 @@ import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -73,6 +74,11 @@ public class RockType {
      */
     public static Set<RockType> getRockTypes() {
         return ROCK_TYPES;
+    }
+
+    @Nullable
+    public static RockType getByName(@Nonnull String name) {
+        return RockType.getRockTypes().stream().filter(s -> s.toString().equals(name)).findFirst().orElse(null);
     }
 
     /**

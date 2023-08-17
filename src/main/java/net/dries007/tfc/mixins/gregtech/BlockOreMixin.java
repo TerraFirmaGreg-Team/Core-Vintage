@@ -51,7 +51,7 @@ public abstract class BlockOreMixin extends Block {
             spec.setResultingState(TFCStorage.getRockBlock(RockBlockVariants.COBBLE, rockType).getDefaultState());
             FallingBlockManager.registerFallable(this, spec);
 
-            var hardness = rockType.getRockCategory().getHardnessModifier() + RockBlockVariants.RAW.getBaseHardness();
+            var hardness = rockType.getCategory().getHardnessModifier() + RockBlockVariants.RAW.getBaseHardness();
             setHardness(hardness * 2F);
         }
     }

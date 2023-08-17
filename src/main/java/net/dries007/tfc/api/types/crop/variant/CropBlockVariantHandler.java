@@ -1,6 +1,6 @@
-package net.dries007.tfc.api.types.crop.type;
+package net.dries007.tfc.api.types.crop.variant;
 
-import net.dries007.tfc.api.types.crop.category.CropTypes;
+import net.dries007.tfc.api.types.crop.type.CropTypes;
 import net.dries007.tfc.api.types.food.variant.FoodVariants;
 import net.dries007.tfc.common.objects.items.ItemsTFC;
 

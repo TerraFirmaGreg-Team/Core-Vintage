@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.crop.category;
+package net.dries007.tfc.api.types.crop.type;
 
 import net.minecraft.util.text.TextFormatting;
 

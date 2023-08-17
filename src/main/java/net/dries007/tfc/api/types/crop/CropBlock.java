@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types.crop;
 
-import net.dries007.tfc.api.types.crop.category.CropType;
-import net.dries007.tfc.api.types.crop.category.CropTypes;
+import net.dries007.tfc.api.types.crop.type.CropType;
+import net.dries007.tfc.api.types.crop.type.CropTypes;
 import net.dries007.tfc.api.types.food.variant.FoodVariant;
 import net.dries007.tfc.api.types.food.variant.FoodVariants;
 import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropDead;

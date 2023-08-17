@@ -1,6 +1,6 @@
-package net.dries007.tfc.api.types.crop.type;
+package net.dries007.tfc.api.types.crop.variant;
 
-import net.dries007.tfc.api.types.crop.category.CropType;
+import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.types.food.variant.FoodVariant;
 import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.minecraft.item.Item;
@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public class CropBlockVariant {
-    private static final Set<CropBlockVariant> CROP_TYPES = new LinkedHashSet<>();
+    private static final Set<CropBlockVariant> CROP_BLOCK_VARIANTS = new LinkedHashSet<>();
 
     private final String name;
     private final CropType cropType;
@@ -58,8 +58,8 @@ public class CropBlockVariant {
      *
      * @return Набор всех типов культур.
      */
-    public static Set<CropBlockVariant> getCropTypes() {
-        return CROP_TYPES;
+    public static Set<CropBlockVariant> getCropBlockVariants() {
+        return CROP_BLOCK_VARIANTS;
     }
 
     /**
@@ -72,7 +72,7 @@ public class CropBlockVariant {
         return name;
     }
 
-    public CropType getCropCategory() {
+    public CropType getCropType() {
         return cropType;
     }
 

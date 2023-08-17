@@ -8,7 +8,7 @@ public class CropBlockVariantHandler {
 
     public static void init() {
         CropBlockVariants.BARLEY = new CropBlockVariant.Builder("barley")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.BARLEY)
                 .setGrowthStages(8)
                 .setGrowthTime(0.4f)
@@ -17,7 +17,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.MAIZE = new CropBlockVariant.Builder("maize")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.MAIZE)
                 .setGrowthStages(6)
                 .setGrowthTime(0.6f)
@@ -26,7 +26,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.OAT = new CropBlockVariant.Builder("oat")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.OAT)
                 .setGrowthStages(8)
                 .setGrowthTime(0.5f)
@@ -35,7 +35,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.RICE = new CropBlockVariant.Builder("rice")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.RICE)
                 .setGrowthStages(8)
                 .setGrowthTime(0.6f)
@@ -44,7 +44,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.RYE = new CropBlockVariant.Builder("rye")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.RYE)
                 .setGrowthStages(8)
                 .setGrowthTime(0.5f)
@@ -53,7 +53,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.WHEAT = new CropBlockVariant.Builder("wheat")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.WHEAT)
                 .setGrowthStages(8)
                 .setGrowthTime(0.5f)
@@ -62,7 +62,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.BEET = new CropBlockVariant.Builder("beet")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.BEET)
                 .setGrowthStages(7)
                 .setGrowthTime(0.6f)
@@ -71,7 +71,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.CABBAGE = new CropBlockVariant.Builder("cabbage")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.CABBAGE)
                 .setGrowthStages(6)
                 .setGrowthTime(0.6f)
@@ -80,7 +80,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.CARROT = new CropBlockVariant.Builder("carrot")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.CARROT)
                 .setGrowthStages(5)
                 .setGrowthTime(0.6f)
@@ -89,7 +89,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.GARLIC = new CropBlockVariant.Builder("garlic")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.GARLIC)
                 .setGrowthStages(5)
                 .setGrowthTime(0.65f)
@@ -98,7 +98,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.GREEN_BEAN = new CropBlockVariant.Builder("green_bean")
-                .setCategory(CropTypes.PICKABLE)
+                .setType(CropTypes.PICKABLE)
                 .setDrop(FoodVariants.GREEN_BEAN)
                 .setGrowthStages(7)
                 .setGrowthTime(0.45f)
@@ -107,7 +107,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.ONION = new CropBlockVariant.Builder("onion")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.ONION)
                 .setGrowthStages(7)
                 .setGrowthTime(0.4f)
@@ -116,7 +116,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.POTATO = new CropBlockVariant.Builder("potato")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.POTATO)
                 .setGrowthStages(7)
                 .setGrowthTime(0.55f)
@@ -125,7 +125,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.SOYBEAN = new CropBlockVariant.Builder("soybean")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.SOYBEAN)
                 .setGrowthStages(7)
                 .setGrowthTime(0.5f)
@@ -134,7 +134,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.SQUASH = new CropBlockVariant.Builder("squash")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.SQUASH)
                 .setGrowthStages(8)
                 .setGrowthTime(0.5f)
@@ -143,7 +143,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.SUGARCANE = new CropBlockVariant.Builder("sugarcane")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(FoodVariants.SUGARCANE)
                 .setGrowthStages(8)
                 .setGrowthTime(0.5f)
@@ -152,7 +152,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.TOMATO = new CropBlockVariant.Builder("tomato")
-                .setCategory(CropTypes.PICKABLE)
+                .setType(CropTypes.PICKABLE)
                 .setDrop(FoodVariants.TOMATO)
                 .setGrowthStages(8)
                 .setGrowthTime(0.45f)
@@ -161,7 +161,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.RED_BELL_PEPPER = new CropBlockVariant.Builder("red_bell_pepper")
-                .setCategory(CropTypes.PICKABLE)
+                .setType(CropTypes.PICKABLE)
                 .setDrop(FoodVariants.RED_BELL_PEPPER)
                 .setDropEarly(FoodVariants.GREEN_BELL_PEPPER)
                 .setGrowthStages(7)
@@ -171,7 +171,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.YELLOW_BELL_PEPPER = new CropBlockVariant.Builder("yellow_bell_pepper")
-                .setCategory(CropTypes.PICKABLE)
+                .setType(CropTypes.PICKABLE)
                 .setDrop(FoodVariants.YELLOW_BELL_PEPPER)
                 .setDropEarly(FoodVariants.GREEN_BELL_PEPPER)
                 .setGrowthStages(7)
@@ -181,7 +181,7 @@ public class CropBlockVariantHandler {
                 .build();
 
         CropBlockVariants.JUTE = new CropBlockVariant.Builder("jute")
-                .setCategory(CropTypes.SIMPLE)
+                .setType(CropTypes.SIMPLE)
                 .setDrop(ItemsTFC.JUTE)
                 .setGrowthStages(6)
                 .setGrowthTime(0.5f)

@@ -101,7 +101,7 @@ public class CropBlockVariant {
             this.foodDropEarly = () -> ItemStack.EMPTY;
         }
 
-        public Builder setCategory(CropType category) {
+        public Builder setType(CropType category) {
             this.category = category;
             return this;
         }

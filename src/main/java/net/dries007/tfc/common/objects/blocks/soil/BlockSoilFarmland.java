@@ -95,7 +95,7 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
     protected static void turnToDirt(World world, BlockPos pos) {
         Block block = world.getBlockState(pos).getBlock();
         if (block instanceof ISoilBlock) {
-            var soil = ((ISoilBlock) block).getSoilType();
+            var soil = ((ISoilBlock) block).getType();
 
             world.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
             AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
@@ -108,13 +108,13 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
 
     @Nonnull
     @Override
-    public SoilBlockVariant getSoilBlockVariant() {
+    public SoilBlockVariant getBlockVariant() {
         return soilBlockVariant;
     }
 
     @Nonnull
     @Override
-    public SoilType getSoilType() {
+    public SoilType getType() {
         return soilType;
     }
 

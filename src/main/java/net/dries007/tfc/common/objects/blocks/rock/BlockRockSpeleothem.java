@@ -69,7 +69,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCStorage.getRockItem(getRockType());
+        return TFCStorage.getRockItem(getType());
     }
 
     @Override
@@ -182,7 +182,7 @@ public class BlockRockSpeleothem extends BlockRock {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
-                        "rocktype=" + getRockType() + "," +
+                        "rocktype=" + getType() + "," +
                                 "size=" + state.getValue(SIZE));
             }
         });
@@ -192,7 +192,7 @@ public class BlockRockSpeleothem extends BlockRock {
                 Item.getItemFromBlock(this),
                 getMetaFromState(getBlockState().getBaseState()),
                 new ModelResourceLocation(getResourceLocation(),
-                        "rocktype=" + getRockType() + "," +
+                        "rocktype=" + getType() + "," +
                                 "size=big"));
     }
 

@@ -22,7 +22,7 @@ public interface IRockBlock extends IHasModel, IItemProvider {
      * @return Вариант блока породы.
      */
     @Nonnull
-    RockBlockVariant getRockBlockVariant();
+    RockBlockVariant getBlockVariant();
 
     /**
      * Возвращает тип породы.
@@ -30,7 +30,7 @@ public interface IRockBlock extends IHasModel, IItemProvider {
      * @return Тип породы.
      */
     @Nonnull
-    RockType getRockType();
+    RockType getType();
 
     /**
      * Возвращает категорию породы.
@@ -38,8 +38,8 @@ public interface IRockBlock extends IHasModel, IItemProvider {
      * @return Категория породы.
      */
     @Nonnull
-    default RockCategory getRockCategory() {
-        return getRockType().getRockCategory();
+    default RockCategory getCategory() {
+        return getType().getCategory();
     }
 
     /**
@@ -49,7 +49,7 @@ public interface IRockBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return new ResourceLocation(MOD_ID, String.format("rock/%s/%s", getRockBlockVariant(), getRockType()));
+        return new ResourceLocation(MOD_ID, String.format("rock/%s/%s", getBlockVariant(), getType()));
     }
 
     /**
@@ -59,7 +59,7 @@ public interface IRockBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return new ResourceLocation(MOD_ID, String.format("rock/%s", getRockBlockVariant()));
+        return new ResourceLocation(MOD_ID, String.format("rock/%s", getBlockVariant()));
     }
 
     /**
@@ -69,7 +69,9 @@ public interface IRockBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default String getTranslationName() {
-        return getRegistryLocation().toString().toLowerCase().replace(":", ".").replace("/", ".");
+        return getRegistryLocation().toString().toLowerCase()
+                .replace(":", ".")
+                .replace("/", ".");
     }
 
     /**
@@ -78,6 +80,6 @@ public interface IRockBlock extends IHasModel, IItemProvider {
      * @return Окончательная твердость блока породы.
      */
     default float getFinalHardness() {
-        return getRockBlockVariant().getBaseHardness() + getRockCategory().getHardnessModifier();
+        return getBlockVariant().getBaseHardness() + getCategory().getHardnessModifier();
     }
 }

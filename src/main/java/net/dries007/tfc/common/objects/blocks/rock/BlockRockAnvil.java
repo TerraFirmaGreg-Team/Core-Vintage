@@ -181,13 +181,13 @@ public class BlockRockAnvil extends BlockRock {
     @Override
     @Nonnull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCStorage.getRockItem(getRockType());
+        return TFCStorage.getRockItem(getType());
     }
 
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.getRockBlock(RAW, getRockType()));
+        return new ItemStack(TFCStorage.getRockBlock(RAW, getType()));
     }
 
     @Override

@@ -45,12 +45,12 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock {
     }
 
     @Override
-    public WoodBlockVariant getWoodBlockVariant() {
+    public WoodBlockVariant getBlockVariant() {
         return woodBlockVariant;
     }
 
     @Override
-    public WoodType getWoodType() {
+    public WoodType getType() {
         return woodType;
     }
 

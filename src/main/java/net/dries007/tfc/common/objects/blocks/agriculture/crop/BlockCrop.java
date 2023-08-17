@@ -3,6 +3,7 @@ package net.dries007.tfc.common.objects.blocks.agriculture.crop;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.crop.Crop;
 import net.dries007.tfc.api.types.crop.ICrop;
+import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropDead;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
@@ -41,7 +42,8 @@ import java.util.Random;
 import java.util.Set;
 
 @ParametersAreNonnullByDefault
-public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICrop {
+public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
+
     // Свойства стадии роста
     public static final PropertyInteger STAGE_8 = PropertyInteger.create("stage", 0, 7);
     public static final PropertyInteger STAGE_7 = PropertyInteger.create("stage", 0, 6);
@@ -51,7 +53,7 @@ public abstract class BlockCrop extends BlockBush implements IGrowingPlant, ICro
     // Статическое отображение для преобразования значения maxValue в свойство Stage
     public static final HashMap<Integer, PropertyInteger> STAGE_MAP = new HashMap<>();
 
-    /* true, если культура появилась в дикой природе, это означает, что она игнорирует условия роста, например, пашня */
+    // true, если культура появилась в дикой природе, это означает, что она игнорирует условия роста, например, пашня
     public static final PropertyBool WILD = PropertyBool.create("wild");
 
     // Модельные коробки

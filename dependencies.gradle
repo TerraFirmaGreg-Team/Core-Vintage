@@ -39,7 +39,7 @@ dependencies {
     if (project.use_gregtech.toBoolean()) {
         runtimeOnly("curse.maven:3.2.3.358-codechicken-lib-1-8-242818:2779848")
         implementation rfg.deobf("maven.modrinth:gregtech-ce-unofficial:2.7.3-beta")
-        implementation rfg.deobf("maven.modrinth:gregicality-multiblocks:1.2.4")
+        implementation rfg.deobf("maven.modrinth:gregicality-multiblocks:1.2.5")
 
         compileOnly("curse.maven:ctm-267602:2915363")
     }

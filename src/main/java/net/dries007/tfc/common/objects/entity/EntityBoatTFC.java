@@ -37,7 +37,7 @@ public class EntityBoatTFC extends EntityBoat {
     public WoodType getWood() {
         //noinspection ConstantConditions
         return TFCStorage.WOOD_BLOCKS.values().stream()
-                .map(IWoodBlock::getWoodType)
+                .map(IWoodBlock::getType)
                 .filter(wood -> wood.toString().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
                 .findFirst().orElse(null);
     }

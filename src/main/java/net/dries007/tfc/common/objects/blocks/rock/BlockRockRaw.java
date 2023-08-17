@@ -93,7 +93,7 @@ public class BlockRockRaw extends BlockRock {
         if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
             if (!worldIn.isRemote) {
                 // Create a stone anvil
-                var anvil = TFCStorage.getRockBlock(ANVIL, getRockType());
+                var anvil = TFCStorage.getRockBlock(ANVIL, getType());
                 if (anvil instanceof BlockRockAnvil) {
                     worldIn.setBlockState(pos, anvil.getDefaultState());
                 }
@@ -129,13 +129,13 @@ public class BlockRockRaw extends BlockRock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRockType());
+                return new ModelResourceLocation(getResourceLocation(), "rocktype=" + getType());
             }
         });
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),
                 getMetaFromState(getBlockState().getBaseState()),
-                new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRockType()));
+                new ModelResourceLocation(getResourceLocation(), "rocktype=" + getType()));
     }
 }

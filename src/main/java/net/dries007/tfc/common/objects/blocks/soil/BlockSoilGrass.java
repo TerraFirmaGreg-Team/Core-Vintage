@@ -36,7 +36,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
@@ -49,7 +48,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.*;
 import static net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC.WILD;
@@ -107,7 +105,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
             if (usBlock instanceof BlockPeat) {
                 world.setBlockState(pos, TFCBlocks.PEAT.getDefaultState());
             } else if (usBlock instanceof ISoilBlock soil) {
-                world.setBlockState(pos, TFCStorage.getSoilBlock(soil.getSoilBlockVariant().getNonGrassVersion(), soil.getSoilType()).getDefaultState());
+                world.setBlockState(pos, TFCStorage.getSoilBlock(soil.getBlockVariant().getNonGrassVersion(), soil.getType()).getDefaultState());
             }
         } else if (neighborLight >= 9) {
             for (int i = 0; i < 4; ++i) {
@@ -147,11 +145,11 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                     SoilBlockVariant spreader = GRASS;
 
                     // Проверяем тип блока, с которого распространяется трава
-                    if (usBlock instanceof ISoilBlock && ((ISoilBlock) usBlock).getSoilBlockVariant() == DRY_GRASS) {
+                    if (usBlock instanceof ISoilBlock && ((ISoilBlock) usBlock).getBlockVariant() == DRY_GRASS) {
                         spreader = DRY_GRASS;
                     }
 
-                    world.setBlockState(pos, TFCStorage.getSoilBlock(block.getSoilBlockVariant().getGrassVersion(spreader), block.getSoilType()).getDefaultState());
+                    world.setBlockState(pos, TFCStorage.getSoilBlock(block.getBlockVariant().getGrassVersion(spreader), block.getType()).getDefaultState());
                 }
             }
             // Генерируем короткую траву на верхнем блоке с определенной вероятностью
@@ -174,13 +172,13 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
     @Nonnull
     @Override
-    public SoilBlockVariant getSoilBlockVariant() {
+    public SoilBlockVariant getBlockVariant() {
         return soilBlockVariant;
     }
 
     @Nonnull
     @Override
-    public SoilType getSoilType() {
+    public SoilType getType() {
         return soilType;
     }
 
@@ -196,7 +194,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
             Block block = worldIn.getBlockState(pos).getBlock();
             if (block instanceof ISoilBlock) {
-                var soil = ((ISoilBlock) block).getSoilType();
+                var soil = ((ISoilBlock) block).getType();
 
                 if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
                     worldIn.setBlockState(pos, TFCStorage.getSoilBlock(DIRT, soil).getDefaultState());

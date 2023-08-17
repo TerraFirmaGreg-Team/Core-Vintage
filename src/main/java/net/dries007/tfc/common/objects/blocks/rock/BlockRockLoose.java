@@ -69,7 +69,7 @@ public class BlockRockLoose extends BlockRock {
     @Override
     @SuppressWarnings("ConstantConditions")
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var itemStack = new ItemStack(TFCStorage.ROCK_ITEMS.get(getRockType()));
+        var itemStack = new ItemStack(TFCStorage.ROCK_ITEMS.get(getType()));
 
         if (playerIn.addItemStackToInventory(itemStack)) {
             worldIn.setBlockToAir(pos);
@@ -83,7 +83,7 @@ public class BlockRockLoose extends BlockRock {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(TFCStorage.ROCK_ITEMS.get(getRockType())));
+        drops.add(new ItemStack(TFCStorage.ROCK_ITEMS.get(getType())));
     }
 
     @Override
@@ -94,7 +94,7 @@ public class BlockRockLoose extends BlockRock {
     @Nonnull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.ROCK_ITEMS.get(getRockType()));
+        return new ItemStack(TFCStorage.ROCK_ITEMS.get(getType()));
     }
 
     @Nonnull
@@ -157,7 +157,7 @@ public class BlockRockLoose extends BlockRock {
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
                         "axis=" + state.getValue(AXIS) + "," +
-                                "rocktype=" + getRockType());
+                                "rocktype=" + getType());
             }
         });
     }

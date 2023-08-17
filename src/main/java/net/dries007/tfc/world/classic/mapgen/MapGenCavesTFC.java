@@ -39,8 +39,8 @@ public class MapGenCavesTFC extends MapGenBase {
         double width = 1.5d + rainfall / 500d;
         int caveChance = 30 + (int) (rainfall / 50d);
 
-        width += RockType.valueOf(rockLayer1[dlIndex]).getRockCategory().getCaveGenMod();
-        runs += RockType.valueOf(rockLayer1[dlIndex]).getRockCategory().getCaveFreqMod();
+        width += RockType.valueOf(rockLayer1[dlIndex]).getCategory().getCaveGenMod();
+        runs += RockType.valueOf(rockLayer1[dlIndex]).getCategory().getCaveFreqMod();
 
         if (yCoord < 32) width *= 0.5;
         else if (yCoord < 64) width *= 0.65;

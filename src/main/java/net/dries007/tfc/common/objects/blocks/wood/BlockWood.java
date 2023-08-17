@@ -41,12 +41,12 @@ public abstract class BlockWood extends Block implements IWoodBlock {
     }
 
     @Override
-    public WoodBlockVariant getWoodBlockVariant() {
+    public WoodBlockVariant getBlockVariant() {
         return woodBlockVariant;
     }
 
     @Override
-    public WoodType getWoodType() {
+    public WoodType getType() {
         return woodType;
     }
 

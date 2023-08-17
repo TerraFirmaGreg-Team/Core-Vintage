@@ -42,12 +42,12 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
     }
 
     @Override
-    public WoodBlockVariant getWoodBlockVariant() {
+    public WoodBlockVariant getBlockVariant() {
         return woodBlockVariant;
     }
 
     @Override
-    public WoodType getWoodType() {
+    public WoodType getType() {
         return woodType;
     }
 

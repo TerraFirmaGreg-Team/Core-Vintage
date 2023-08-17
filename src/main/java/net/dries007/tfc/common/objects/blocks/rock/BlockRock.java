@@ -60,13 +60,13 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
 
     @Nonnull
     @Override
-    public RockBlockVariant getRockBlockVariant() {
+    public RockBlockVariant getBlockVariant() {
         return rockBlockVariant;
     }
 
     @Nonnull
     @Override
-    public RockType getRockType() {
+    public RockType getType() {
         return rockType;
     }
 
@@ -108,6 +108,6 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
     }
 }

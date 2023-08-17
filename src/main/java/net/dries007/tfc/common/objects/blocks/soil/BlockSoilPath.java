@@ -56,13 +56,13 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
 
     @Nonnull
     @Override
-    public SoilBlockVariant getSoilBlockVariant() {
+    public SoilBlockVariant getBlockVariant() {
         return soilBlockVariant;
     }
 
     @Nonnull
     @Override
-    public SoilType getSoilType() {
+    public SoilType getType() {
         return soilType;
     }
 

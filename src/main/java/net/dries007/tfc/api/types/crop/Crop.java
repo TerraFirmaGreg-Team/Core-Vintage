@@ -158,8 +158,6 @@ public enum Crop implements ICrop {
     public BlockCropTFC createGrowingBlock() {
         if (cropType == CropTypes.SIMPLE || cropType == CropTypes.PICKABLE) {
             return BlockCropSimple.create(this, cropType == CropTypes.PICKABLE);
-        } else if (cropType == CropTypes.SPREADING) {
-            return BlockCropSpreading.create(this);
         }
         throw new IllegalStateException("Invalid growthstage property " + growthStages + " for crop");
     }

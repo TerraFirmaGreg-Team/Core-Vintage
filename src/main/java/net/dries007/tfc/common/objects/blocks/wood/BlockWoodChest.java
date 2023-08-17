@@ -60,12 +60,12 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
     }
 
     @Override
-    public WoodBlockVariant getWoodBlockVariant() {
+    public WoodBlockVariant getBlockVariant() {
         return woodBlockVariant;
     }
 
     @Override
-    public WoodType getWoodType() {
+    public WoodType getType() {
         return woodType;
     }
 

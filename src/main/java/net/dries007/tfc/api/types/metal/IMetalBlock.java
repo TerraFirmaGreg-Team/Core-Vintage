@@ -17,7 +17,7 @@ public interface IMetalBlock extends IHasModel, IItemProvider {
      *
      * @return Вариант металлического блока.
      */
-    MetalBlockVariant getMetalBlockVariant();
+    MetalBlockVariant getBlockVariant();
 
     /**
      * Возвращает материал металлического блока.

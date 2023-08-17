@@ -33,8 +33,8 @@ public class HoeBehavior implements IToolBehavior {
         var hitBlock = worldIn.getBlockState(pos);
 
         if (hitBlock.getBlock() instanceof ISoilBlock soilTypeBlock) {
-            if (soilTypeBlock.getSoilBlockVariant() == SoilBlockVariants.DIRT || soilTypeBlock.getSoilBlockVariant() == SoilBlockVariants.GRASS) {
-                worldIn.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.FARMLAND, soilTypeBlock.getSoilType()).getDefaultState());
+            if (soilTypeBlock.getBlockVariant() == SoilBlockVariants.DIRT || soilTypeBlock.getBlockVariant() == SoilBlockVariants.GRASS) {
+                worldIn.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.FARMLAND, soilTypeBlock.getType()).getDefaultState());
                 ToolHelper.onActionDone(player, worldIn, hand);
                 return EnumActionResult.SUCCESS;
             }

@@ -21,14 +21,14 @@ public interface IWoodBlock extends IHasModel, IItemProvider {
      *
      * @return вариант деревянного блока
      */
-    WoodBlockVariant getWoodBlockVariant();
+    WoodBlockVariant getBlockVariant();
 
     /**
      * Возвращает тип дерева блока.
      *
      * @return тип дерева
      */
-    WoodType getWoodType();
+    WoodType getType();
 
     /**
      * Возвращает расположение в реестре для данного деревянного блока.
@@ -37,7 +37,7 @@ public interface IWoodBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return new ResourceLocation(MOD_ID, String.format("wood/%s/%s", getWoodBlockVariant(), getWoodType()));
+        return new ResourceLocation(MOD_ID, String.format("wood/%s/%s", getBlockVariant(), getType()));
     }
 
     /**
@@ -47,7 +47,7 @@ public interface IWoodBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return new ResourceLocation(MOD_ID, String.format("wood/%s", getWoodBlockVariant()));
+        return new ResourceLocation(MOD_ID, String.format("wood/%s", getBlockVariant()));
     }
 
     /**

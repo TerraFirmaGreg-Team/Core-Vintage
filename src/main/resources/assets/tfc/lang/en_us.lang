@@ -1570,11 +1570,8 @@ item.tfc.crop.product.jute_disc.name=Jute Disc
 item.tfc.crop.product.olive_jute_disc.name=Olive Jute Disc
 item.tfc.crop.product.burlap_cloth.name=Burlap Cloth
 
-item.tfc.bloom.unrefined.unknown.name=Raw Bloom
-item.tfc.bloom.refined.unknown.name=Refined Bloom
-
-item.tfc.bloom.unrefined.wrought_iron.name=Raw Iron Bloom
-item.tfc.bloom.refined.wrought_iron.name=Refined Iron Bloom
+item.tfc.bloom.unrefined.name=Raw Bloom
+item.tfc.bloom.refined.name=Refined Bloom
 
 item.tfc.animal.product.wool.name=Wool
 item.tfc.animal.product.wool_yarn.name=Wool Yarn
@@ -1843,24 +1840,26 @@ tfc.animal.frog=Frogs
 
 # Tooltips
 
-tfc.tooltip.temperature=Temperature: %s
+tfc.tooltip.food_data=§fFood data:
+tfc.tooltip.temperature=§fTemperature: §7%s
 tfc.tooltip.rainfall=Rainfall: %s`
-tfc.tooltip.food_expiry_date.days=Will decay in about %s day(s)!
+tfc.tooltip.food_expiry_date.days=§9(%s day(s) left!)
 tfc.tooltip.toolclass=§fTool Class:§7 %s
 tfc.tooltip.toolclasses=§fTool Classes:
 tfc.tooltip.oredictionaryentry=§fOre Dictionary name:§7 %s
 tfc.tooltip.oredictionaryentries=§fOre Dictionary names:
 tfc.tooltip.containsmetal=§aContains metal:
-tfc.tooltip.metalname=§fName: §d%s
-tfc.tooltip.units=§fUnits: §b%s
-tfc.tooltip.melttemp=§fMelting temp: §6%s§7°C
-tfc.tooltip.tier=§fTier: §e%s
+tfc.tooltip.metalname=§7- Name: §d%s
+tfc.tooltip.units=§7- Units: §b%s
+tfc.tooltip.melttemp=§7- Melting temp: §6%s§7°C
+tfc.tooltip.tier=§7- Tier: §e%s
 tfc.tooltip.crucible_units=%d / %d units
 tfc.tooltip.units.total=§6%d total units
 tfc.tooltip.units.info_total=%d units / §6%d total
 tfc.tooltip.smelting=Smelt in %s
-tfc.tooltip.liquid= - Liquid
-tfc.tooltip.solid= - Solid
+tfc.tooltip.state=- State: %s
+tfc.tooltip.liquid=Liquid
+tfc.tooltip.solid=Solid
 tfc.tooltip.barrel_empty=Empty
 tfc.tooltip.barrel_fluid=Contains %1$d mB of %2$s
 tfc.tooltip.barrel_fluid_amount=%d mB
@@ -1891,10 +1890,11 @@ tfc.tooltip.day=Day : %s
 tfc.tooltip.date=Date : %s
 tfc.tooltip.calendar_full_date=%s %s %02d, %04d
 tfc.tooltip.debug_times=PT: %d | CT: %d
-tfc.tooltip.food_expiry_date=Expires on: %s
-tfc.tooltip.food_rotten=Rotten - I wouldn't eat that.
-tfc.tooltip.food_infinite_expiry=Never Expires
-tfc.tooltip.nutrition=Nutrition:
+tfc.tooltip.food_expiry_date=§2- Expires on: %s
+tfc.tooltip.food_rotten=§c- Rotten - I wouldn't eat that.
+tfc.tooltip.food_infinite_expiry=§6- Never Expires
+tfc.tooltip.nutrition=§2- Nutrition:
+tfc.tooltip.nutrition.none=§b- Nutrition: None.
 tfc.tooltip.nutrition_saturation= - Saturation: %s%%
 tfc.tooltip.nutrition_water= - Water: %s%%
 tfc.tooltip.nutrition_nutrient= - %s: %s
@@ -1967,19 +1967,21 @@ tfc.thatch_bed.spawnpoint=Spawn point set.
 tfc.thatch_bed.not_thundering=This bed is too uncomfortable to sleep.
 
 # Food Traits
-tfc.food_traits.smoked=Smoked
-tfc.food_traits.brined=Brined
-tfc.food_traits.brined_active=Brining
-tfc.food_traits.salted=Salted
-tfc.food_traits.pickled=Pickled
-tfc.food_traits.preserved=Preserved
-tfc.food_traits.vinegar=Vinegar preserved
-tfc.food_traits.charcoal_grilled=Charcoal Grilled
-tfc.food_traits.wood_grilled=Wood Grilled
-tfc.food_traits.burnt_to_a_crisp=A Blackened Crusty Disgusting Pile of Ash
-tfc.tooltip.barrel_recipe_pickling=Pickling
-tfc.tooltip.barrel_recipe_brining=Brining
-tfc.tooltip.barrel_recipe_vinegar=Preserving in vinegar
+tfc.food_traits=§2- Food traits:
+tfc.food_traits.none=§b- Food traits: None.
+tfc.food_traits.smoked= - Smoked
+tfc.food_traits.brined= - Brined
+tfc.food_traits.brined_active= - Brining
+tfc.food_traits.salted= - Salted
+tfc.food_traits.pickled= - Pickled
+tfc.food_traits.preserved= - Preserved
+tfc.food_traits.vinegar= - Vinegar preserved
+tfc.food_traits.charcoal_grilled= - Charcoal Grilled
+tfc.food_traits.wood_grilled= - Wood Grilled
+tfc.food_traits.burnt_to_a_crisp= - A Blackened Crusty Disgusting Pile of Ash
+tfc.tooltip.barrel_recipe_pickling= - Pickling
+tfc.tooltip.barrel_recipe_brining= - Brining
+tfc.tooltip.barrel_recipe_vinegar= - Preserving in vinegar
 
 # Skills
 tfc.skill.prospecting=Prospecting: %s

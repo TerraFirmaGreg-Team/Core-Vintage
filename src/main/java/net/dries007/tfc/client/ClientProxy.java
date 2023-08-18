@@ -543,7 +543,7 @@ public class ClientProxy extends CommonProxy {
     @SideOnly(Side.CLIENT)
     public static void onItemTooltip(ItemTooltipEvent event) {
         var stack = event.getItemStack();
-        var tt = event.getToolTip();
+        var toolTip = event.getToolTip();
 
         // GuiScreen.isShiftKeyDown()
 
@@ -551,52 +551,52 @@ public class ClientProxy extends CommonProxy {
             // Size
             var size = CapabilityItemSize.getIItemSize(stack);
             if (size != null) {
-                size.addSizeInfo(stack, tt);
+                size.addSizeInfo(stack, toolTip);
             }
 
             // Temperature
             var heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
             if (heat != null) {
-                heat.addHeatInfo(stack, tt);
+                heat.addHeatInfo(stack, toolTip);
             }
 
             // Forging steps
             var forging = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
             if (forging != null && forging.getWork() > 0) {
-                tt.add(I18n.format("tfc.tooltip.forging_in_progress"));
+                toolTip.add(I18n.format("tfc.tooltip.forging_in_progress"));
             }
 
             // Nutriens
             var nutrients = stack.getCapability(CapabilityFood.CAPABILITY, null);
             if (nutrients != null) {
-                nutrients.addTooltipInfo(stack, tt, event.getEntityPlayer());
+                nutrients.addTooltipInfo(stack, toolTip);
             }
 
             // Egg
             var eggInfo = stack.getCapability(CapabilityEgg.CAPABILITY, null);
             if (eggInfo != null) {
-                eggInfo.addEggInfo(stack, tt);
+                eggInfo.addEggInfo(stack, toolTip);
             }
 
             // Metal
             var metalObject = CapabilityMetalItem.getMaterialItem(stack);
             if (metalObject != null) {
-                metalObject.addMetalInfo(stack, tt);
+                metalObject.addMetalInfo(stack, toolTip);
             }
 
             if (event.getFlags().isAdvanced()) {
                 if (ConfigTFC.Client.TOOLTIP.showOreDictionaryTooltip) {
                     int[] ids = OreDictionary.getOreIDs(stack);
                     if (ids.length == 1) {
-                        tt.add(I18n.format("tfc.tooltip.oredictionaryentry", OreDictionary.getOreName(ids[0])));
+                        toolTip.add(I18n.format("tfc.tooltip.oredictionaryentry", OreDictionary.getOreName(ids[0])));
                     } else if (ids.length > 1) {
-                        tt.add(I18n.format("tfc.tooltip.oredictionaryentries"));
+                        toolTip.add(I18n.format("tfc.tooltip.oredictionaryentries"));
                         ArrayList<String> names = new ArrayList<>(ids.length);
                         for (int id : ids) {
                             names.add("+ " + OreDictionary.getOreName(id));
                         }
                         names.sort(null); // Natural order (String.compare)
-                        tt.addAll(names);
+                        toolTip.addAll(names);
                     }
                 }
             }

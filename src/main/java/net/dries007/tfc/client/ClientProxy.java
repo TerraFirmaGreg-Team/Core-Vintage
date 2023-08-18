@@ -102,7 +102,6 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.TALL_GRASS;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
-import static net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC.WILD;
 import static net.minecraft.util.text.TextFormatting.*;
 
 @SuppressWarnings("unused")
@@ -125,46 +124,17 @@ public class ClientProxy extends CommonProxy {
         return 0xFFFFFF;
     };
 
-    @Override
-    public void onPreInit(FMLPreInitializationEvent event) {
-        super.onPreInit(event);
-
-        registerEntityRenderer();
-    }
-
-    @Override
-    public void onInit(FMLInitializationEvent event) {
-        super.onInit(event);
-
-        TFCKeybindings.onInit();
-        // Enable overlay to render health, thirst and hunger bars, TFC style.
-        // Also renders animal familiarity
-        MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
-    }
-
-    @Override
-    public void onPostInit(FMLPostInitializationEvent event) {
-        super.onPostInit(event);
-    }
-
-    public void onLoadComplete(FMLLoadCompleteEvent event) {
-        super.onLoadComplete(event);
-    }
-
-    public void onServerStarting(FMLServerStartingEvent event) {
-        super.onServerStarting(event);
-    }
-
     @SubscribeEvent
     @SuppressWarnings("ConstantConditions")
     public static void registerModels(ModelRegistryEvent event) {
 
         //=== BLOCKS =================================================================================================//
 
-        TFCStorage.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.CROP_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.ALABASTER_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.GROUNDCOVER_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
@@ -264,8 +234,6 @@ public class ClientProxy extends CommonProxy {
 
 
         // Blocks with Ignored Properties
-        for (Block block : BlocksTFC.getAllCropBlocks())
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(WILD).build());
 
         for (Block block : BlocksTFC.getAllFruitTreeLeavesBlocks())
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE).ignore(BlockFruitTreeLeaves.HARVESTABLE).build());
@@ -303,14 +271,14 @@ public class ClientProxy extends CommonProxy {
 
         blockColors.registerBlockColorHandler(grassColor, TFCStorage.SOIL_BLOCKS.values()
                 .stream()
-                .filter(x -> x.getSoilBlockVariant().isGrass())
+                .filter(x -> x.getBlockVariant().isGrass())
                 .map(s -> (Block) s)
                 .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
                 BlockSoilFarmland.TINT[state.getValue(BlockSoilFarmland.MOISTURE)], TFCStorage.SOIL_BLOCKS.values()
                 .stream()
-                .filter(x -> x.getSoilBlockVariant() == SoilBlockVariants.FARMLAND)
+                .filter(x -> x.getBlockVariant() == SoilBlockVariants.FARMLAND)
                 .map(s -> (Block) s)
                 .toArray(Block[]::new));
 
@@ -325,17 +293,17 @@ public class ClientProxy extends CommonProxy {
 
         //=== Wood ===================================================================================================//
 
-        blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IWoodBlock) s.getBlock()).getWoodType().getColor() : 0xFFFFFF,
+        blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IWoodBlock) s.getBlock()).getType().getColor() : 0xFFFFFF,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(block -> block.getWoodBlockVariant() != WoodBlockVariants.LEAVES && block.getWoodBlockVariant() != WoodBlockVariants.SAPLING)
+                        .filter(block -> block.getBlockVariant() != WoodBlockVariants.LEAVES && block.getBlockVariant() != WoodBlockVariants.SAPLING)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler(foliageColor,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getWoodBlockVariant() == WoodBlockVariants.LEAVES)
+                        .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
@@ -374,7 +342,7 @@ public class ClientProxy extends CommonProxy {
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCStorage.SOIL_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getSoilBlockVariant().isGrass())
+                        .filter(x -> x.getBlockVariant().isGrass())
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
@@ -386,23 +354,23 @@ public class ClientProxy extends CommonProxy {
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCStorage.PLANT_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getPlantVariant() == SHORT_GRASS || x.getPlantVariant() == TALL_GRASS)
+                        .filter(x -> x.getBlockVariant() == SHORT_GRASS || x.getBlockVariant() == TALL_GRASS)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         //=== Wood ===================================================================================================//
 
-        itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getWoodType().getColor() : 0xFFFFFF,
+        itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor() : 0xFFFFFF,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getWoodBlockVariant() != WoodBlockVariants.LEAVES && x.getWoodBlockVariant() != WoodBlockVariants.SAPLING)
+                        .filter(x -> x.getBlockVariant() != WoodBlockVariants.LEAVES && x.getBlockVariant() != WoodBlockVariants.SAPLING)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getWoodBlockVariant() == WoodBlockVariants.LEAVES)
+                        .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES)
                         .map(s -> (BlockWoodLeaves) s)
                         .toArray(Block[]::new));
 
@@ -575,7 +543,7 @@ public class ClientProxy extends CommonProxy {
     @SideOnly(Side.CLIENT)
     public static void onItemTooltip(ItemTooltipEvent event) {
         var stack = event.getItemStack();
-        var toolTip = event.getToolTip();
+        var tt = event.getToolTip();
 
         // GuiScreen.isShiftKeyDown()
 
@@ -583,52 +551,52 @@ public class ClientProxy extends CommonProxy {
             // Size
             var size = CapabilityItemSize.getIItemSize(stack);
             if (size != null) {
-                size.addSizeInfo(stack, toolTip);
+                size.addSizeInfo(stack, tt);
             }
 
             // Temperature
             var heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
             if (heat != null) {
-                heat.addHeatInfo(stack, toolTip);
+                heat.addHeatInfo(stack, tt);
             }
 
             // Forging steps
             var forging = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
             if (forging != null && forging.getWork() > 0) {
-                toolTip.add(I18n.format("tfc.tooltip.forging_in_progress"));
+                tt.add(I18n.format("tfc.tooltip.forging_in_progress"));
             }
 
             // Nutriens
             var nutrients = stack.getCapability(CapabilityFood.CAPABILITY, null);
             if (nutrients != null) {
-                nutrients.addTooltipInfo(stack, toolTip);
+                nutrients.addTooltipInfo(stack, tt, event.getEntityPlayer());
             }
 
             // Egg
             var eggInfo = stack.getCapability(CapabilityEgg.CAPABILITY, null);
             if (eggInfo != null) {
-                eggInfo.addEggInfo(stack, toolTip);
+                eggInfo.addEggInfo(stack, tt);
             }
 
             // Metal
             var metalObject = CapabilityMetalItem.getMaterialItem(stack);
             if (metalObject != null) {
-                metalObject.addMetalInfo(stack, toolTip);
+                metalObject.addMetalInfo(stack, tt);
             }
 
             if (event.getFlags().isAdvanced()) {
                 if (ConfigTFC.Client.TOOLTIP.showOreDictionaryTooltip) {
                     int[] ids = OreDictionary.getOreIDs(stack);
                     if (ids.length == 1) {
-                        toolTip.add(I18n.format("tfc.tooltip.oredictionaryentry", OreDictionary.getOreName(ids[0])));
+                        tt.add(I18n.format("tfc.tooltip.oredictionaryentry", OreDictionary.getOreName(ids[0])));
                     } else if (ids.length > 1) {
-                        toolTip.add(I18n.format("tfc.tooltip.oredictionaryentries"));
+                        tt.add(I18n.format("tfc.tooltip.oredictionaryentries"));
                         ArrayList<String> names = new ArrayList<>(ids.length);
                         for (int id : ids) {
                             names.add("+ " + OreDictionary.getOreName(id));
                         }
                         names.sort(null); // Natural order (String.compare)
-                        toolTip.addAll(names);
+                        tt.addAll(names);
                     }
                 }
             }
@@ -685,6 +653,36 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityBlackBearTFC.class, RenderBlackBearTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCougarTFC.class, RenderCougarTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCoyoteTFC.class, RenderCoyoteTFC::new);
+    }
+
+    @Override
+    public void onPreInit(FMLPreInitializationEvent event) {
+        super.onPreInit(event);
+
+        registerEntityRenderer();
+    }
+
+    @Override
+    public void onInit(FMLInitializationEvent event) {
+        super.onInit(event);
+
+        TFCKeybindings.onInit();
+        // Enable overlay to render health, thirst and hunger bars, TFC style.
+        // Also renders animal familiarity
+        MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
+    }
+
+    @Override
+    public void onPostInit(FMLPostInitializationEvent event) {
+        super.onPostInit(event);
+    }
+
+    public void onLoadComplete(FMLLoadCompleteEvent event) {
+        super.onLoadComplete(event);
+    }
+
+    public void onServerStarting(FMLServerStartingEvent event) {
+        super.onServerStarting(event);
     }
 
     @Nonnull

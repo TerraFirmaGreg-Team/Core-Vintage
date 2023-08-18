@@ -5,7 +5,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.common.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.common.objects.items.rock.ItemRock;

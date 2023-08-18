@@ -33,11 +33,11 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
     private final RockBlockVariant rockBlockVariant;
     private final RockType rockType;
 
-    public BlockRockWall(RockBlockVariant rockBlockVariant, RockType rockType) {
+    public BlockRockWall(RockBlockVariant variant, RockType type) {
         super(Blocks.COBBLESTONE);
 
-        this.rockBlockVariant = rockBlockVariant;
-        this.rockType = rockType;
+        this.rockBlockVariant = variant;
+        this.rockType = type;
 
 
         setRegistryName(getRegistryLocation());
@@ -48,18 +48,18 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);
 
-        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Nonnull
     @Override
-    public RockBlockVariant getRockBlockVariant() {
+    public RockBlockVariant getBlockVariant() {
         return rockBlockVariant;
     }
 
     @Nonnull
     @Override
-    public RockType getRockType() {
+    public RockType getType() {
         return rockType;
     }
 
@@ -104,6 +104,6 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockType.getCategory().getLocalizedName());
     }
 }

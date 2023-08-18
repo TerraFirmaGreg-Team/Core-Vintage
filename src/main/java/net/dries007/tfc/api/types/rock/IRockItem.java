@@ -24,6 +24,6 @@ public interface IRockItem {
      */
     @Nonnull
     default RockCategory getRockCategory() {
-        return getRock().getRockCategory();
+        return getRock().getCategory();
     }
 }

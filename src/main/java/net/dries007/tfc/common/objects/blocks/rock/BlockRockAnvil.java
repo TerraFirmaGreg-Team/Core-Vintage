@@ -5,8 +5,8 @@ import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.tileentities.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
@@ -39,8 +39,8 @@ import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.RAW;
 public class BlockRockAnvil extends BlockRock {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
-    public BlockRockAnvil(RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockVariant, rockType);
+    public BlockRockAnvil(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
         FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.COLLAPSABLE_ROCK);
     }
@@ -181,13 +181,13 @@ public class BlockRockAnvil extends BlockRock {
     @Override
     @Nonnull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCStorage.getRockItem(getRockType());
+        return TFCStorage.getRockItem(getType());
     }
 
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.getRockBlock(RAW, getRockType()));
+        return new ItemStack(TFCStorage.getRockBlock(RAW, getType()));
     }
 
     @Override

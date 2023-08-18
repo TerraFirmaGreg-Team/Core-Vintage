@@ -7,7 +7,7 @@ import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropDead;
+import net.dries007.tfc.common.objects.blocks.crop.BlockCropDead;
 import net.dries007.tfc.common.objects.blocks.plants.BlockMushroomTFC;
 import net.dries007.tfc.common.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.common.objects.tileentities.TECropBase;
@@ -48,7 +48,7 @@ import java.util.*;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.type.PlantTypes.PORCINI;
-import static net.dries007.tfc.common.objects.blocks.agriculture.crop_old.BlockCropTFC.WILD;
+import static net.dries007.tfc.common.objects.blocks.crop.BlockCrop.WILD;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.
@@ -157,7 +157,7 @@ public class WorldRegenHandler {
                     IBlockState soil = world.getBlockState(topPos.down());
                     if (soil.getBlock() instanceof ISoilBlock soilRock) {
                         //Stop removing dead crops from farmland please!
-                        if (soilRock.getSoilBlockVariant() != SoilBlockVariants.FARMLAND) {
+                        if (soilRock.getBlockVariant() != SoilBlockVariants.FARMLAND) {
                             world.removeTileEntity(topPos);
                             world.setBlockToAir(topPos);
                         }

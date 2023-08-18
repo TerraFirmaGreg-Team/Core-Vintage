@@ -20,7 +20,7 @@ public class RockBlockProvider implements IProbeInfoProvider {
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, IBlockState blockState, IProbeHitData data) {
         if (blockState.getBlock() instanceof IRockBlock rockBlock) {
-            probeInfo.text(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockBlock.getRockCategory().getLocalizedName());
+            probeInfo.text(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockBlock.getCategory().getLocalizedName());
         }
     }
 }

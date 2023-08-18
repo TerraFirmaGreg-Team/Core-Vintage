@@ -44,12 +44,12 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     public static final AxisAlignedBB SMALL_AABB_Y = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 1, 0.75);
     public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);
     public static final AxisAlignedBB SMALL_AABB_Z = new AxisAlignedBB(0.25, 0.25, 0, 0.75, 0.75, 1);
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockWoodLog(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
+    public BlockWoodLog(WoodBlockVariant variant, WoodType type) {
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -64,17 +64,17 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         Blocks.FIRE.setFireInfo(this, 5, 5);
 
         OreDictionaryHelper.register(this, "logWood");
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), "wood", woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
     }
 
     @Override
-    public WoodBlockVariant getWoodBlockVariant() {
-        return woodBlockVariant;
+    public WoodBlockVariant getBlockVariant() {
+        return variant;
     }
 
     @Override
-    public WoodType getWoodType() {
-        return woodType;
+    public WoodType getType() {
+        return type;
     }
 
     @Nullable

@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.crop.Crop;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.variant.FoodVariant;
 import net.dries007.tfc.api.types.food.variant.FoodVariants;
@@ -167,9 +166,9 @@ public final class ItemsTFC {
 
         }
 
-        for (Crop crop : Crop.values()) {
-            simpleItems.add(register(r, "crop/seeds/" + crop.name().toLowerCase(), new ItemSeedsTFC(crop), CreativeTabsTFC.FOOD));
-        }
+//        for (CropType crop : Crop.values()) {
+//            simpleItems.add(register(r, "crop/seeds/" + crop.name().toLowerCase(), new ItemSeedsTFC(crop), CreativeTabsTFC.FOOD));
+//        }
 
 //        simpleItems.add(register(r, "crop/product/jute", new ItemMisc(Size.SMALL, Weight.VERY_LIGHT), MISC));
 //        simpleItems.add(register(r, "crop/product/jute_fiber", new ItemMisc(Size.SMALL, Weight.VERY_LIGHT), MISC));

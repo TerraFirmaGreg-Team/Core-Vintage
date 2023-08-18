@@ -59,8 +59,7 @@ public class OreDictionaryHelper {
         if (block instanceof IItemProvider itemBlock && itemBlock.getItemBlock() != null) {
             var oreDict = upperCaseToCamelCase(parts);
             MAP_BLOCK_ORE.put(block, oreDict);
-        }
-        else {
+        } else {
             TerraFirmaCraft.LOGGER.warn(String.format("Trying to register [%s] oredict, but itemblock is null. Skipping!", parts[0]));
         }
     }

@@ -12,9 +12,9 @@ import net.dries007.tfc.api.types.metal.IMetalBlock;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IHasModel;
-import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.tileentities.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
@@ -92,13 +92,13 @@ public class BlockMetalAnvil extends Block implements IMetalBlock, IMaterialItem
 
     public static Collection<Block> getAnvilStorage() {
         return METAL_BLOCKS.values().stream()
-                .filter(block -> block.getMetalBlockVariant() == ANVIL)
+                .filter(block -> block.getBlockVariant() == ANVIL)
                 .map(block -> (Block) block)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public MetalBlockVariant getMetalBlockVariant() {
+    public MetalBlockVariant getBlockVariant() {
         return metalBlockVariant;
     }
 

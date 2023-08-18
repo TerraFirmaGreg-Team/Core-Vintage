@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class BlockSoilClay extends BlockSoil {
 
-    public BlockSoilClay(SoilBlockVariant soilBlockVariant, SoilType soilType) {
-        super(soilBlockVariant, soilType);
+    public BlockSoilClay(SoilBlockVariant variant, SoilType type) {
+        super(variant, type);
     }
 
     @Override

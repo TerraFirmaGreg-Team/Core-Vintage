@@ -18,6 +18,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
+import net.dries007.tfc.api.types.crop.category.CropCategoryHandler;
 import net.dries007.tfc.api.types.crop.type.CropTypeHandler;
 import net.dries007.tfc.api.types.crop.variant.CropBlockVariantHandler;
 import net.dries007.tfc.api.types.drinkable.DrinkableHandler;
@@ -96,6 +97,10 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void onMaterialsInit(MaterialEvent event) {
+        CropCategoryHandler.init();
+        CropTypeHandler.init();
+        CropBlockVariantHandler.init();
+
         TFGMaterialHandler.init();
         TFGOrePrefixHandler.init();
 
@@ -109,7 +114,6 @@ public class CommonProxy {
         SoilBlockVariantHandler.init();
 
         TreeGeneratorHandler.init();
-
         WoodTypeHandler.init();
         WoodBlockVariantHandler.init();
 
@@ -118,9 +122,6 @@ public class CommonProxy {
 
         //PlantCategoryHandler.init();
         PlantTypeHandler.init();
-
-        CropTypeHandler.init();
-        CropBlockVariantHandler.init();
 
         MetalBlockVariantHandler.init();
 
@@ -148,32 +149,38 @@ public class CommonProxy {
 
         //=== Rock ===================================================================================================//
 
-        for (var stoneTypeBlock : ROCK_BLOCKS.values()) {
-            r.register((Block) stoneTypeBlock);
+        for (var rockBlock : ROCK_BLOCKS.values()) {
+            r.register((Block) rockBlock);
         }
 
         //=== Soil ===================================================================================================//
 
-        for (var soilTypeBlock : SOIL_BLOCKS.values()) {
-            r.register((Block) soilTypeBlock);
-        }
-
-        //=== Plant ==================================================================================================//
-
-        for (var plantTypeBlock : PLANT_BLOCKS.values()) {
-            r.register((Block) plantTypeBlock);
+        for (var soilBlock : SOIL_BLOCKS.values()) {
+            r.register((Block) soilBlock);
         }
 
         //=== Wood ===================================================================================================//
 
-        for (var woodTypeBlock : WOOD_BLOCKS.values()) {
-            r.register((Block) woodTypeBlock);
+        for (var woodBlock : WOOD_BLOCKS.values()) {
+            r.register((Block) woodBlock);
+        }
+
+        //=== Crop ===================================================================================================//
+
+        for (var cropBlock : CROP_BLOCKS.values()) {
+            r.register((Block) cropBlock);
+        }
+
+        //=== Plant ==================================================================================================//
+
+        for (var plantBlock : PLANT_BLOCKS.values()) {
+            r.register((Block) plantBlock);
         }
 
         //=== Metal ==================================================================================================//
 
-        for (var metalTypeBlock : METAL_BLOCKS.values()) {
-            r.register((Block) metalTypeBlock);
+        for (var metalBlock : METAL_BLOCKS.values()) {
+            r.register((Block) metalBlock);
         }
 
         //=== Alabaster ==============================================================================================//
@@ -216,7 +223,6 @@ public class CommonProxy {
         registerTE(TEAnvilTFC.class, "anvil");
         registerTE(TECrucible.class, "crucible");
         registerTE(TECropBase.class, "crop_base");
-        registerTE(TECropSpreading.class, "crop_spreading");
         registerTE(TEBlastFurnace.class, "blast_furnace");
         registerTE(TEBloomery.class, "bloomery");
         registerTE(TEBloom.class, "bloom");
@@ -252,32 +258,41 @@ public class CommonProxy {
 
         //=== Soil ===================================================================================================//
 
-        for (var soilTypeBlock : SOIL_BLOCKS.values()) {
-            var itemBlock = soilTypeBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
-
-        //=== Plant ==================================================================================================//
-
-        for (var plantTypeBlock : PLANT_BLOCKS.values()) {
-            var itemBlock = plantTypeBlock.getItemBlock();
+        for (var soilBlock : SOIL_BLOCKS.values()) {
+            var itemBlock = soilBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
         //=== Wood ===================================================================================================//
 
-        for (var woodTypeBlock : WOOD_BLOCKS.values()) {
-            var itemBlock = woodTypeBlock.getItemBlock();
+        for (var woodBlock : WOOD_BLOCKS.values()) {
+            var itemBlock = woodBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
         for (var lumberItem : LUMBER_ITEMS.values()) r.register(lumberItem);
         for (var boatItem : BOAT_ITEMS.values()) r.register(boatItem);
 
+
+        //=== Plant ==================================================================================================//
+
+        for (var plantBlock : PLANT_BLOCKS.values()) {
+            var itemBlock = plantBlock.getItemBlock();
+            if (itemBlock != null) registerItemBlock(r, itemBlock);
+        }
+
+        //=== Crop ==================================================================================================//
+
+        for (var cropBlock : CROP_BLOCKS.values()) {
+            var itemBlock = cropBlock.getItemBlock();
+            if (itemBlock != null) registerItemBlock(r, itemBlock);
+        }
+
+
         //=== Metal ==================================================================================================//
 
-        for (var metalTypeBlock : METAL_BLOCKS.values()) {
-            var itemBlock = metalTypeBlock.getItemBlock();
+        for (var metalBlock : METAL_BLOCKS.values()) {
+            var itemBlock = metalBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 

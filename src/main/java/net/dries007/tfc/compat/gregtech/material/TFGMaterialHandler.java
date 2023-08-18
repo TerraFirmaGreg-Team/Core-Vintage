@@ -1,8 +1,6 @@
 package net.dries007.tfc.compat.gregtech.material;
 
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.info.MaterialFlag;
-import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.properties.ToolProperty;
 
 import static gregtech.api.unification.material.Materials.*;

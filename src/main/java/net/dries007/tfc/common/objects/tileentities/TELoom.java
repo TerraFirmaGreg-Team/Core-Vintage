@@ -36,7 +36,7 @@ public class TELoom extends TEInventory implements ITickable {
     public WoodType getWood() {
         if (cachedWoodType == null) {
             if (world != null) {
-                cachedWoodType = ((BlockWoodLoom) world.getBlockState(pos).getBlock()).getWoodType();
+                cachedWoodType = ((BlockWoodLoom) world.getBlockState(pos).getBlock()).getType();
             }
         }
         return cachedWoodType;

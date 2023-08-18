@@ -60,7 +60,7 @@ public class ItemBlockSaplingTFC extends ItemBlockTFC {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        var woodType = blockWoodSapling.getWoodType();
+        var woodType = blockWoodSapling.getType();
 
         if (GuiScreen.isShiftKeyDown()) {
             tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));

@@ -22,12 +22,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockWoodButton(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
+    public BlockWoodButton(WoodBlockVariant variant, WoodType type) {
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -36,17 +36,17 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
         setSoundType(SoundType.WOOD);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override
-    public WoodBlockVariant getWoodBlockVariant() {
-        return woodBlockVariant;
+    public WoodBlockVariant getBlockVariant() {
+        return variant;
     }
 
     @Override
-    public WoodType getWoodType() {
-        return woodType;
+    public WoodType getType() {
+        return type;
     }
 
     @Nullable

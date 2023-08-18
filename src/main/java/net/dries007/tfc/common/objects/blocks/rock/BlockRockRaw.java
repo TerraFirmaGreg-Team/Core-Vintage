@@ -38,14 +38,14 @@ public class BlockRockRaw extends BlockRock {
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
     public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
 
-    public BlockRockRaw(RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockVariant, rockType);
+    public BlockRockRaw(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
         setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
 
         // Copy as each raw stone has an unique resultingState
         var spec = new FallingBlockManager.Specification(FallingBlockManager.Specification.COLLAPSABLE_ROCK);
-        spec.setResultingState(TFCStorage.getRockBlock(RockBlockVariants.COBBLE, rockType).getDefaultState());
+        spec.setResultingState(TFCStorage.getRockBlock(RockBlockVariants.COBBLE, type).getDefaultState());
         FallingBlockManager.registerFallable(this, spec);
 
         OreDictionaryHelper.register(this, "stone");
@@ -93,7 +93,7 @@ public class BlockRockRaw extends BlockRock {
         if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
             if (!worldIn.isRemote) {
                 // Create a stone anvil
-                var anvil = TFCStorage.getRockBlock(ANVIL, getRockType());
+                var anvil = TFCStorage.getRockBlock(ANVIL, getType());
                 if (anvil instanceof BlockRockAnvil) {
                     worldIn.setBlockState(pos, anvil.getDefaultState());
                 }
@@ -129,13 +129,13 @@ public class BlockRockRaw extends BlockRock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRockType());
+                return new ModelResourceLocation(getResourceLocation(), "rocktype=" + getType());
             }
         });
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),
                 getMetaFromState(getBlockState().getBaseState()),
-                new ModelResourceLocation(getResourceLocation(), "rocktype=" + getRockType()));
+                new ModelResourceLocation(getResourceLocation(), "rocktype=" + getType()));
     }
 }

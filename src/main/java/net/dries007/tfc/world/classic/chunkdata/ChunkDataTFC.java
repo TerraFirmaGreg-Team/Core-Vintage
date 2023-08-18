@@ -264,17 +264,17 @@ public final class ChunkDataTFC {
      * ТОЛЬКО ВНУТРЕННЕЕ ИСПОЛЬЗОВАНИЕ.
      * Нет необходимости помечать как "dirty", так как это будет вызываться только при генерации мира, перед первым сохранением чанка.
      *
-     * @param rockLayer1       Массив данных первого слоя камня.
-     * @param rockLayer2       Массив данных второго слоя камня.
-     * @param rockLayer3       Массив данных третьего слоя камня.
-     * @param stabilityLayer   Массив слоев стабильности.
-     * @param drainageLayer    Массив слоев дренажа.
-     * @param seaLevelOffset   Массив смещений уровня моря.
-     * @param rainfall         Количество осадков.
-     * @param regionalTemp     Региональная температура.
-     * @param avgTemp          Средняя температура.
-     * @param floraDensity     Плотность растительности.
-     * @param floraDiversity   Разнообразие растительности.
+     * @param rockLayer1     Массив данных первого слоя камня.
+     * @param rockLayer2     Массив данных второго слоя камня.
+     * @param rockLayer3     Массив данных третьего слоя камня.
+     * @param stabilityLayer Массив слоев стабильности.
+     * @param drainageLayer  Массив слоев дренажа.
+     * @param seaLevelOffset Массив смещений уровня моря.
+     * @param rainfall       Количество осадков.
+     * @param regionalTemp   Региональная температура.
+     * @param avgTemp        Средняя температура.
+     * @param floraDensity   Плотность растительности.
+     * @param floraDiversity Разнообразие растительности.
      */
     public void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, DataLayer[] stabilityLayer, DataLayer[] drainageLayer, int[] seaLevelOffset, float rainfall, float regionalTemp, float avgTemp, float floraDensity, float floraDiversity) {
         this.initialized = true;

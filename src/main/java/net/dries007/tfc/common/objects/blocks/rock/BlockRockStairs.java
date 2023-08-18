@@ -31,11 +31,11 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
     private final RockBlockVariant rockBlockVariant;
     private final RockType rockType;
 
-    public BlockRockStairs(RockBlockVariant rockBlockVariant, RockType rockType) {
+    public BlockRockStairs(RockBlockVariant variant, RockType type) {
         super(Blocks.COBBLESTONE.getDefaultState());
 
-        this.rockBlockVariant = rockBlockVariant;
-        this.rockType = rockType;
+        this.rockBlockVariant = variant;
+        this.rockType = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -45,18 +45,18 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
         setHarvestLevel("pickaxe", 0);
         useNeighborBrightness = true;
 
-        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Nonnull
     @Override
-    public RockBlockVariant getRockBlockVariant() {
+    public RockBlockVariant getBlockVariant() {
         return rockBlockVariant;
     }
 
     @Nonnull
     @Override
-    public RockType getRockType() {
+    public RockType getType() {
         return rockType;
     }
 
@@ -96,7 +96,7 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockType.getCategory().getLocalizedName());
     }
 
 

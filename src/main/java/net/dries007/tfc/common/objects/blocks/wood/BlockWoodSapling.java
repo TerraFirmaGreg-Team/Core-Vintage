@@ -42,13 +42,13 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
 
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockWoodSapling(WoodBlockVariant woodBlockVariant, WoodType woodType) {
+    public BlockWoodSapling(WoodBlockVariant variant, WoodType type) {
 
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -59,17 +59,17 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
         setHardness(0.0F);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override
-    public WoodBlockVariant getWoodBlockVariant() {
-        return woodBlockVariant;
+    public WoodBlockVariant getBlockVariant() {
+        return variant;
     }
 
     @Override
-    public WoodType getWoodType() {
-        return woodType;
+    public WoodType getType() {
+        return type;
     }
 
     @Nullable
@@ -163,7 +163,7 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
 
     @Override
     public void grow(@Nonnull World world, @Nonnull Random random, @Nonnull BlockPos blockPos, @Nonnull IBlockState blockState) {
-        woodType.makeTree(world, blockPos, random, false);
+        type.makeTree(world, blockPos, random, false);
     }
 
     @Override

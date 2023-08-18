@@ -13,7 +13,7 @@ import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 
 public class BlockSoilDirtGrass extends BlockSoilGrass implements ISoilBlock {
 
-    public BlockSoilDirtGrass(SoilBlockVariant soilBlockVariant, SoilType soilType) {
-        super(soilBlockVariant, soilType);
+    public BlockSoilDirtGrass(SoilBlockVariant variant, SoilType type) {
+        super(variant, type);
     }
 }

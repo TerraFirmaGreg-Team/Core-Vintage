@@ -120,7 +120,7 @@ public class FallingBlockManager {
 
     public static boolean hasSupportingSideBlock(IBlockState state) {
         return state.isNormalCube() || SIDE_SUPPORTS.contains(state) || state.getBlock() instanceof ISoilBlock &&
-                (((ISoilBlock) state.getBlock()).getSoilBlockVariant() == SoilBlockVariants.FARMLAND || ((ISoilBlock) state.getBlock()).getSoilBlockVariant() == SoilBlockVariants.PATH);
+                (((ISoilBlock) state.getBlock()).getBlockVariant() == SoilBlockVariants.FARMLAND || ((ISoilBlock) state.getBlock()).getBlockVariant() == SoilBlockVariants.PATH);
     }
 
     public static boolean shouldFall(World world, BlockPos posToFallFrom, BlockPos originalPos, IBlockState originalState, boolean ignoreSupportChecks) {

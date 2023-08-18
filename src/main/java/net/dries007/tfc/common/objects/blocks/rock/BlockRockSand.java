@@ -8,8 +8,8 @@ import net.minecraft.block.material.Material;
 
 public class BlockRockSand extends BlockRockFallable {
 
-    public BlockRockSand(RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(Material.SAND, rockBlockVariant, rockType);
+    public BlockRockSand(RockBlockVariant variant, RockType type) {
+        super(Material.SAND, variant, type);
 
         FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL);
 

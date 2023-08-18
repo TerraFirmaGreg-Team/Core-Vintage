@@ -20,7 +20,7 @@ public interface ISoilBlock extends IHasModel, IItemProvider {
      * @return Вариант блока почвы.
      */
     @Nonnull
-    SoilBlockVariant getSoilBlockVariant();
+    SoilBlockVariant getBlockVariant();
 
     /**
      * Возвращает тип почвы.
@@ -28,7 +28,7 @@ public interface ISoilBlock extends IHasModel, IItemProvider {
      * @return Тип почвы.
      */
     @Nonnull
-    SoilType getSoilType();
+    SoilType getType();
 
     /**
      * Возвращает местоположение регистрации блока почвы.
@@ -37,7 +37,7 @@ public interface ISoilBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return new ResourceLocation(MOD_ID, String.format("soil/%s/%s", getSoilBlockVariant(), getSoilType()));
+        return new ResourceLocation(MOD_ID, String.format("soil/%s/%s", getBlockVariant(), getType()));
     }
 
     /**
@@ -47,7 +47,7 @@ public interface ISoilBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return new ResourceLocation(MOD_ID, String.format("soil/%s", getSoilBlockVariant()));
+        return new ResourceLocation(MOD_ID, String.format("soil/%s", getBlockVariant()));
     }
 
     /**

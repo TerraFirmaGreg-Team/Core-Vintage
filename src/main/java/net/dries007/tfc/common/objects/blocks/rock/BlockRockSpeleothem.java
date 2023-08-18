@@ -34,8 +34,8 @@ import java.util.Random;
 public class BlockRockSpeleothem extends BlockRock {
     public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
-    public BlockRockSpeleothem(RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockVariant, rockType);
+    public BlockRockSpeleothem(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
         setDefaultState(blockState.getBaseState().withProperty(SIZE, EnumSize.MEDIUM));
     }
@@ -69,7 +69,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCStorage.getRockItem(getRockType());
+        return TFCStorage.getRockItem(getType());
     }
 
     @Override
@@ -182,7 +182,7 @@ public class BlockRockSpeleothem extends BlockRock {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
-                        "rocktype=" + getRockType() + "," +
+                        "rocktype=" + getType() + "," +
                                 "size=" + state.getValue(SIZE));
             }
         });
@@ -192,7 +192,7 @@ public class BlockRockSpeleothem extends BlockRock {
                 Item.getItemFromBlock(this),
                 getMetaFromState(getBlockState().getBaseState()),
                 new ModelResourceLocation(getResourceLocation(),
-                        "rocktype=" + getRockType() + "," +
+                        "rocktype=" + getType() + "," +
                                 "size=big"));
     }
 

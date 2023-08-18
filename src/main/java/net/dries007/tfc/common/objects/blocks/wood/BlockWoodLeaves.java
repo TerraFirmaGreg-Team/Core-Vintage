@@ -44,12 +44,12 @@ import java.util.*;
 import static net.dries007.tfc.util.Constants.RNG;
 
 public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockWoodLeaves(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
+    public BlockWoodLeaves(WoodBlockVariant variant, WoodType type) {
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -61,17 +61,17 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         leavesFancy = true; // Fast / Fancy graphics works correctly
 
         Blocks.FIRE.setFireInfo(this, 30, 60);
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override
-    public WoodBlockVariant getWoodBlockVariant() {
-        return woodBlockVariant;
+    public WoodBlockVariant getBlockVariant() {
+        return variant;
     }
 
     @Override
-    public WoodType getWoodType() {
-        return woodType;
+    public WoodType getType() {
+        return type;
     }
 
     @Nullable
@@ -133,7 +133,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @Override
     @Nonnull
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(TFCStorage.getWoodBlock(WoodBlockVariants.SAPLING, woodType)) : Items.AIR;
+        return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(TFCStorage.getWoodBlock(WoodBlockVariants.SAPLING, type)) : Items.AIR;
     }
 
     @Override
@@ -228,7 +228,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
                     if (evaluated.contains(pos1) || !world.isBlockLoaded(pos1))
                         continue;
                     state1 = world.getBlockState(pos1);
-                    if (state1.getBlock() == TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType))
+                    if (state1.getBlock() == TFCStorage.getWoodBlock(WoodBlockVariants.LOG, type))
                         return;
                     if (state1.getBlock() == this)
                         pathsToAdd.add(pos1.toImmutable());
@@ -263,7 +263,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
-                        "wood=" + woodType.toString());
+                        "wood=" + type.toString());
             }
         });
 
@@ -273,7 +273,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
                     Item.getItemFromBlock(this),
                     getMetaFromState(state),
                     new ModelResourceLocation(getResourceLocation(),
-                            "wood=" + woodType.toString()));
+                            "wood=" + type.toString()));
         }
     }
 }

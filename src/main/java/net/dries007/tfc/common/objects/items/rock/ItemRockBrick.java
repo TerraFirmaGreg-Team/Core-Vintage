@@ -27,7 +27,7 @@ public class ItemRockBrick extends ItemTFC implements IRockItem {
         setCreativeTab(CreativeTabsTFC.ROCK);
 
         OreDictionaryHelper.register(this, "brick");
-        OreDictionaryHelper.register(this, "brick", rockType.getRockCategory().toString());
+        OreDictionaryHelper.register(this, "brick", rockType.getCategory().toString());
     }
 
     @Nonnull

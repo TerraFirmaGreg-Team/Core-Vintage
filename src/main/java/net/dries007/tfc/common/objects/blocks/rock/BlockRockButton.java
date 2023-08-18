@@ -29,12 +29,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockRockButton extends BlockButtonStone implements IRockBlock {
-    private final RockBlockVariant rockBlockVariant;
-    private final RockType rockType;
+    private final RockBlockVariant variant;
+    private final RockType type;
 
-    public BlockRockButton(RockBlockVariant rockBlockVariant, RockType rockType) {
-        this.rockBlockVariant = rockBlockVariant;
-        this.rockType = rockType;
+    public BlockRockButton(RockBlockVariant variant, RockType type) {
+        this.variant = variant;
+        this.type = type;
 
         setSoundType(SoundType.STONE);
         setCreativeTab(CreativeTabsTFC.ROCK);
@@ -42,19 +42,19 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
 
-        OreDictionaryHelper.register(this, rockBlockVariant.toString(), rockType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Nonnull
     @Override
-    public RockBlockVariant getRockBlockVariant() {
-        return rockBlockVariant;
+    public RockBlockVariant getBlockVariant() {
+        return variant;
     }
 
     @Nonnull
     @Override
-    public RockType getRockType() {
-        return rockType;
+    public RockType getType() {
+        return type;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
                 return new ModelResourceLocation(getResourceLocation(),
                         "facing=" + state.getValue(FACING) + "," +
                                 "powered=" + state.getValue(POWERED) + "," +
-                                "rocktype=" + getRockType());
+                                "rocktype=" + getType());
             }
         });
 
@@ -79,7 +79,7 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
             ModelLoader.setCustomModelResourceLocation(
                     Item.getItemFromBlock(this),
                     getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(), "inventory=" + getRockType()));
+                    new ModelResourceLocation(getResourceLocation(), "inventory=" + getType()));
         }
     }
 
@@ -97,6 +97,6 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getRockType().getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
     }
 }

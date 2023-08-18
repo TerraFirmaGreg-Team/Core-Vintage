@@ -38,14 +38,14 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockWoodSlab(WoodType woodType) {
+    private BlockWoodSlab(WoodType type) {
         super(Material.WOOD);
 
         IBlockState state = blockState.getBaseState();
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.modelBlock = TFCStorage.getWoodBlock(WoodBlockVariants.PLANKS, woodType);
+        this.modelBlock = TFCStorage.getWoodBlock(WoodBlockVariants.PLANKS, type);
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -147,14 +147,14 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     }
 
     public static class Double extends BlockWoodSlab {
-        private final WoodBlockVariant woodBlockVariant;
-        private final WoodType woodType;
+        private final WoodBlockVariant variant;
+        private final WoodType type;
 
-        public Double(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-            super(woodType);
+        public Double(WoodBlockVariant variant, WoodType type) {
+            super(type);
 
-            this.woodBlockVariant = woodBlockVariant;
-            this.woodType = woodType;
+            this.variant = variant;
+            this.type = type;
 
             setRegistryName(getRegistryLocation());
             setTranslationKey(getTranslationName());
@@ -166,13 +166,13 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         }
 
         @Override
-        public WoodBlockVariant getWoodBlockVariant() {
-            return woodBlockVariant;
+        public WoodBlockVariant getBlockVariant() {
+            return variant;
         }
 
         @Override
-        public WoodType getWoodType() {
-            return woodType;
+        public WoodType getType() {
+            return type;
         }
 
         @Override
@@ -190,23 +190,23 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     public static class Half extends BlockWoodSlab {
         public final Double doubleSlab;
 
-        private final WoodBlockVariant woodBlockVariant;
-        private final WoodType woodType;
+        private final WoodBlockVariant variant;
+        private final WoodType type;
 
-        public Half(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-            super(woodType);
+        public Half(WoodBlockVariant variant, WoodType type) {
+            super(type);
 
-            doubleSlab = (Double) TFCStorage.getWoodBlock(WoodBlockVariants.SLAB_DOUBLE, woodType);
+            doubleSlab = (Double) TFCStorage.getWoodBlock(WoodBlockVariants.SLAB_DOUBLE, type);
             doubleSlab.halfSlab = this;
             halfSlab = this;
 
-            this.woodBlockVariant = woodBlockVariant;
-            this.woodType = woodType;
+            this.variant = variant;
+            this.type = type;
 
             setRegistryName(getRegistryLocation());
             setTranslationKey(getTranslationName());
 
-            OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+            OreDictionaryHelper.register(this, variant.toString(), type.toString());
         }
 
         @Override
@@ -215,13 +215,13 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         }
 
         @Override
-        public WoodBlockVariant getWoodBlockVariant() {
-            return woodBlockVariant;
+        public WoodBlockVariant getBlockVariant() {
+            return variant;
         }
 
         @Override
-        public WoodType getWoodType() {
-            return woodType;
+        public WoodType getType() {
+            return type;
         }
 
         @Override

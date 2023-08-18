@@ -188,7 +188,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(blastList, BLAST_FURNACE_UID);
 
         // Barrel Recipes
-        for (var barrel : TFCStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getWoodBlockVariant() == WoodBlockVariants.BARREL).toArray()) {
+        for (var barrel : TFCStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.BARREL).toArray()) {
             registry.addRecipeCatalyst(new ItemStack((Block) barrel), BARREL_UID);
         }
 
@@ -200,7 +200,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(barrelRecipes, BARREL_UID);
 
         // Loom Recipes
-        for (var loom : TFCStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getWoodBlockVariant() == WoodBlockVariants.LOOM).toArray()) {
+        for (var loom : TFCStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.LOOM).toArray()) {
             registry.addRecipeCatalyst(new ItemStack((Block) loom), LOOM_UID);
         }
 

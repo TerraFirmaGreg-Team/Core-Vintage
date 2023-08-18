@@ -107,7 +107,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
             if (block instanceof IRockBlock rockTypeBlock) {
                 BlockRockSpeleothem.EnumSize sizeType = BlockRockSpeleothem.EnumSize.values()[size - i - 1];
                 // Создаем блок сталактита с указанным размером и типом породы
-                IBlockState targetBlock = TFCStorage.getRockBlock(SPELEOTHEM, rockTypeBlock.getRockType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
+                IBlockState targetBlock = TFCStorage.getRockBlock(SPELEOTHEM, rockTypeBlock.getType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
                 // Устанавливаем блок сталактита в мир
                 world.setBlockState(pos, targetBlock);
             }

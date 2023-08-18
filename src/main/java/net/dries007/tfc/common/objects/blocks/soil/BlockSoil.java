@@ -38,18 +38,18 @@ public abstract class BlockSoil extends Block implements ISoilBlock {
     public static final PropertyBool EAST = PropertyBool.create("east");
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
-    private final SoilBlockVariant soilBlockVariant;
-    private final SoilType soilType;
+    private final SoilBlockVariant variant;
+    private final SoilType type;
 
 
-    public BlockSoil(SoilBlockVariant soilBlockVariant, SoilType soilType) {
+    public BlockSoil(SoilBlockVariant variant, SoilType type) {
         super(Material.GROUND);
 
-        if (soilBlockVariant.canFall())
-            FallingBlockManager.registerFallable(this, soilBlockVariant.getFallingSpecification());
+        if (variant.canFall())
+            FallingBlockManager.registerFallable(this, variant.getFallingSpecification());
 
-        this.soilBlockVariant = soilBlockVariant;
-        this.soilType = soilType;
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -58,19 +58,19 @@ public abstract class BlockSoil extends Block implements ISoilBlock {
         setHardness(2.0F);
         setHarvestLevel("shovel", 0);
 
-        OreDictionaryHelper.register(this, soilBlockVariant.toString(), soilType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Nonnull
     @Override
-    public SoilBlockVariant getSoilBlockVariant() {
-        return soilBlockVariant;
+    public SoilBlockVariant getBlockVariant() {
+        return variant;
     }
 
     @Nonnull
     @Override
-    public SoilType getSoilType() {
-        return soilType;
+    public SoilType getType() {
+        return type;
     }
 
     @Override
@@ -103,7 +103,7 @@ public abstract class BlockSoil extends Block implements ISoilBlock {
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Random rand) {
-        if (soilBlockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+        if (variant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
             double d0 = (float) pos.getX() + rand.nextFloat();
             double d1 = (double) pos.getY() - 0.05D;
             double d2 = (float) pos.getZ() + rand.nextFloat();
@@ -124,7 +124,7 @@ public abstract class BlockSoil extends Block implements ISoilBlock {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
-                        "soiltype=" + soilType.toString());
+                        "soiltype=" + type.toString());
             }
         });
 
@@ -133,7 +133,7 @@ public abstract class BlockSoil extends Block implements ISoilBlock {
                 Item.getItemFromBlock(this),
                 getMetaFromState(this.getBlockState().getBaseState()),
                 new ModelResourceLocation(getResourceLocation(),
-                        "soiltype=" + soilType.toString()));
+                        "soiltype=" + type.toString()));
     }
 
     @Nonnull

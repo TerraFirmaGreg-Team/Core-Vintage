@@ -344,12 +344,12 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
     }
 
     @Override
-    public PlantBlockVariant getPlantVariant() {
+    public PlantBlockVariant getBlockVariant() {
         return plantBlockVariant;
     }
 
     @Override
-    public PlantType getPlantType() {
+    public PlantType getType() {
         return plant;
     }
 

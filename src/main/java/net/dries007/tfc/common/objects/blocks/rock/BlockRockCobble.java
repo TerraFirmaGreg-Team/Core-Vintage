@@ -7,8 +7,8 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 
 public class BlockRockCobble extends BlockRockFallable {
 
-    public BlockRockCobble(RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockVariant, rockType);
+    public BlockRockCobble(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
         FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL_ROCK);
 

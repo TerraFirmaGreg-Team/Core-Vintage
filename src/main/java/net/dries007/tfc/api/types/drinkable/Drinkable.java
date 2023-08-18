@@ -27,16 +27,6 @@ public class Drinkable {
         }
     }
 
-    @Nonnull
-    public Fluid getFluid() {
-        return fluid.get();
-    }
-
-    @Nonnull
-    public IActionAfterDrink getAction() {
-        return action;
-    }
-
     @Nullable
     public static IActionAfterDrink getActionByFluid(@Nonnull Fluid fluid) {
         var drinkable = DRINKABLES.stream().filter(s -> s.getFluid() == fluid).findFirst().orElse(null);
@@ -47,5 +37,15 @@ public class Drinkable {
 
     public static Set<Drinkable> getDrinkables() {
         return DRINKABLES;
+    }
+
+    @Nonnull
+    public Fluid getFluid() {
+        return fluid.get();
+    }
+
+    @Nonnull
+    public IActionAfterDrink getAction() {
+        return action;
     }
 }

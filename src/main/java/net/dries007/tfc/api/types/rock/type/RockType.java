@@ -120,7 +120,7 @@ public class RockType {
      * @return Категория породы.
      */
     @Nonnull
-    public RockCategory getRockCategory() {
+    public RockCategory getCategory() {
         return rockCategory;
     }
 

@@ -13,7 +13,6 @@ import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.fluids.FluidRegistry;
 
 import static net.dries007.tfc.api.types.drinkable.Drinkables.*;
 
@@ -21,12 +20,10 @@ public class DrinkableHandler {
 
     private static final IActionAfterDrink alcoholAction = player -> {
         IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-        if (player.getFoodStats() instanceof FoodStatsTFC && playerData != null)
-        {
+        if (player.getFoodStats() instanceof FoodStatsTFC && playerData != null) {
             ((FoodStatsTFC) player.getFoodStats()).addThirst(10);
             playerData.addIntoxicatedTime(4 * ICalendar.TICKS_IN_HOUR);
-            if (playerData.getIntoxicatedTime() > 24 * ICalendar.TICKS_IN_HOUR && Constants.RNG.nextFloat() < 0.5f)
-            {
+            if (playerData.getIntoxicatedTime() > 24 * ICalendar.TICKS_IN_HOUR && Constants.RNG.nextFloat() < 0.5f) {
                 player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 1200, 1));
             }
         }
@@ -34,22 +31,21 @@ public class DrinkableHandler {
 
     public static void init() {
         FRESH_WATER = new Drinkable(() -> TFGMaterials.FreshWater.getFluid(),
-            (player) -> {
-                if (player.getFoodStats() instanceof FoodStatsTFC)
-                {
-                    ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
-                }
-            });
+                (player) -> {
+                    if (player.getFoodStats() instanceof FoodStatsTFC) {
+                        ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
+                    }
+                });
 
         SALT_WATER = new Drinkable(() -> Materials.SaltWater.getFluid(),
-            (player) -> {
-                if (player.getFoodStats() instanceof FoodStatsTFC) {
-                    ((FoodStatsTFC) player.getFoodStats()).addThirst(-10);
-                    if (Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectsTFC.THIRST, 600, 0));
+                (player) -> {
+                    if (player.getFoodStats() instanceof FoodStatsTFC) {
+                        ((FoodStatsTFC) player.getFoodStats()).addThirst(-10);
+                        if (Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
+                            player.addPotionEffect(new PotionEffect(PotionEffectsTFC.THIRST, 600, 0));
+                        }
                     }
-                }
-            });
+                });
 
         MILK = new Drinkable(() -> Materials.Milk.getFluid(), (player -> {
             if (player.getFoodStats() instanceof IFoodStatsTFC foodStats) {

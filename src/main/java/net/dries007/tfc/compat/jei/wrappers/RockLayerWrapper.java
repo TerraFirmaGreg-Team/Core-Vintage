@@ -51,7 +51,7 @@
 //        x = x - minecraft.fontRenderer.getStringWidth(text) / 2.0f;
 //        minecraft.fontRenderer.drawString(text, x, y, 0x00C300, false);
 //
-//        text = I18n.format(rock.getRockCategory().getTranslationKey());
+//        text = I18n.format(rock.getCategory().getTranslationKey());
 //        List<String> listString = minecraft.fontRenderer.listFormattedStringToWidth(text, 64); // To fit igneous intrusive/extrusive
 //        for (String str : listString)
 //        {

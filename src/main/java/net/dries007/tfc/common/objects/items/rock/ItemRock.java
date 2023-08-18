@@ -41,7 +41,7 @@ public class ItemRock extends ItemTFC implements IRockItem {
 
         OreDictionaryHelper.register(this, "rock");
         OreDictionaryHelper.register(this, "rock", rockType.toString());
-        OreDictionaryHelper.register(this, "rock", rockType.getRockCategory().toString());
+        OreDictionaryHelper.register(this, "rock", rockType.getCategory().toString());
 
         if (rockType.isFlux())
             OreDictionaryHelper.register(this, "rock", "flux");
@@ -80,7 +80,7 @@ public class ItemRock extends ItemTFC implements IRockItem {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getRock().getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getRock().getCategory().getLocalizedName());
 
         if (rockType.isFlux())
             tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());

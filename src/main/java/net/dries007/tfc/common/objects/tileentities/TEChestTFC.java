@@ -48,7 +48,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
     public WoodType getWood() {
         if (cachedWoodType == null) {
             if (world != null) {
-                cachedWoodType = ((BlockWoodChest) world.getBlockState(pos).getBlock()).getWoodType();
+                cachedWoodType = ((BlockWoodChest) world.getBlockState(pos).getBlock()).getType();
             }
         }
         return cachedWoodType;
@@ -64,7 +64,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
         if (world == null) return false;
 
         Block block = this.world.getBlockState(posIn).getBlock();
-        return block instanceof BlockWoodChest && ((BlockWoodChest) block).getWoodType() == getWood() && ((BlockChest) block).chestType == getChestType();
+        return block instanceof BlockWoodChest && ((BlockWoodChest) block).getType() == getWood() && ((BlockChest) block).chestType == getChestType();
     }
 
     @Override

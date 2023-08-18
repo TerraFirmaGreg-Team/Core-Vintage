@@ -42,14 +42,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockRockSlab(RockBlockVariant rockBlockVariant, RockType rockType) {
+    private BlockRockSlab(RockBlockVariant variant, RockType type) {
         super(Material.ROCK);
 
         IBlockState state = blockState.getBaseState();
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.modelBlock = getFullBlockFromSlab(rockBlockVariant, rockType);
+        this.modelBlock = getFullBlockFromSlab(variant, type);
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -197,13 +197,13 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
         @Nonnull
         @Override
-        public RockBlockVariant getRockBlockVariant() {
+        public RockBlockVariant getBlockVariant() {
             return rockBlockVariant;
         }
 
         @Nonnull
         @Override
-        public RockType getRockType() {
+        public RockType getType() {
             return rockType;
         }
 
@@ -256,13 +256,13 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
         @Nonnull
         @Override
-        public RockBlockVariant getRockBlockVariant() {
+        public RockBlockVariant getBlockVariant() {
             return rockBlockVariant;
         }
 
         @Nonnull
         @Override
-        public RockType getRockType() {
+        public RockType getType() {
             return rockType;
         }
 
@@ -299,7 +299,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
         public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
             super.addInformation(stack, worldIn, tooltip, flagIn);
 
-            tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockType.getRockCategory().getLocalizedName());
+            tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockType.getCategory().getLocalizedName());
         }
     }
 }

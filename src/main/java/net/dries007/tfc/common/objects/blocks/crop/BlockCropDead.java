@@ -1,72 +1,80 @@
-package net.dries007.tfc.common.objects.blocks.agriculture.crop_old;
+package net.dries007.tfc.common.objects.blocks.crop;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.crop.Crop;
-import net.dries007.tfc.api.types.crop.ICrop;
+import net.dries007.tfc.api.types.crop.ICropBlock;
+import net.dries007.tfc.api.types.crop.type.CropType;
+import net.dries007.tfc.api.types.crop.variant.CropBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.common.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 @ParametersAreNonnullByDefault
-public class BlockCropDead extends BlockBush implements IGrowingPlant {
+public class BlockCropDead extends BlockBush implements IGrowingPlant, ICropBlock {
     /* true if the crop spawned in the wild, means it ignores growth conditions i.e. farmland */
     public static final PropertyBool MATURE = PropertyBool.create("mature");
 
     // binary flags for state and metadata conversion
     private static final int META_MATURE = 1;
 
-    // static field and methods for conversion from crop to Block
-    private static final Map<ICrop, BlockCropDead> MAP = new HashMap<>();
-    protected final ICrop crop;
+    private final CropType type;
+    private final CropBlockVariant variant;
 
-    public BlockCropDead(ICrop crop) {
+    public BlockCropDead(CropBlockVariant variant, CropType type) {
         super(Material.PLANTS);
 
-        this.crop = crop;
-        if (MAP.put(crop, this) != null) {
-            throw new IllegalStateException("There can only be one.");
-        }
+        this.variant = variant;
+        this.type = type;
 
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
+        setCreativeTab(CreativeTabsTFC.FLORA);
         setSoundType(SoundType.PLANT);
         setHardness(0.6f);
     }
 
-    public static BlockCropDead get(ICrop crop) {
-        return MAP.get(crop);
-    }
-
-    public static Set<ICrop> getCrops() {
-        return MAP.keySet();
+    @Nonnull
+    @Override
+    public CropType getType() {
+        return type;
     }
 
     @Nonnull
-    public ICrop getCrop() {
-        return crop;
+    @Override
+    public CropBlockVariant getBlockVariant() {
+        return variant;
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     @Override
@@ -81,11 +89,11 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
         return state.getValue(MATURE) ? META_MATURE : 0;
     }
 
-    @Nonnull
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ItemSeedsTFC.get(crop);
-    }
+//    @Nonnull
+//    @Override
+//    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+//        return ItemSeedsTFC.get(type);
+//    }
 
     @Override
     @Nonnull
@@ -95,8 +103,8 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
 
     @Override
     @Nonnull
-    public Block.EnumOffsetType getOffsetType() {
-        return Block.EnumOffsetType.XZ;
+    public EnumOffsetType getOffsetType() {
+        return EnumOffsetType.XZ;
     }
 
     @Override
@@ -111,7 +119,7 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
             if (player != null) {
                 SimpleSkill skill = CapabilityPlayerData.getSkill(player, SkillType.AGRICULTURE);
                 if (skill != null) {
-                    count += Crop.getSkillSeedBonus(skill, RANDOM);
+                    count += CropType.getSkillSeedBonus(skill, RANDOM);
                     skill.add(0.04f);
                 }
             }
@@ -120,11 +128,11 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
         return count;
     }
 
-    @Override
-    @Nonnull
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(ItemSeedsTFC.get(crop));
-    }
+//    @Override
+//    @Nonnull
+//    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+//        return new ItemStack(ItemSeedsTFC.get(type));
+//    }
 
     @Override
     public boolean canBlockStay(World world, BlockPos pos, IBlockState state) {
@@ -148,5 +156,22 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
     @Override
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         return GrowthStatus.DEAD;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(getResourceLocation(), this.getPropertyString(state.getProperties()));
+            }
+        });
+
+        for (IBlockState state : this.getBlockState().getValidStates()) {
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
+                    this.getMetaFromState(state), new ModelResourceLocation(getResourceLocation(), "normal"));
+        }
     }
 }

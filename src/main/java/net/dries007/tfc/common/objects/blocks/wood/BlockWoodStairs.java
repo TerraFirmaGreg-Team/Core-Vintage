@@ -23,14 +23,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
-    private final WoodBlockVariant woodBlockVariant;
-    private final WoodType woodType;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockWoodStairs(WoodBlockVariant woodBlockVariant, WoodType woodType) {
-        super(TFCStorage.getWoodBlock(WoodBlockVariants.PLANKS, woodType).getDefaultState());
+    public BlockWoodStairs(WoodBlockVariant variant, WoodType type) {
+        super(TFCStorage.getWoodBlock(WoodBlockVariants.PLANKS, type).getDefaultState());
 
-        this.woodBlockVariant = woodBlockVariant;
-        this.woodType = woodType;
+        this.variant = variant;
+        this.type = type;
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
@@ -39,17 +39,17 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
         setCreativeTab(CreativeTabsTFC.WOOD);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, woodBlockVariant.toString(), woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override
-    public WoodBlockVariant getWoodBlockVariant() {
-        return woodBlockVariant;
+    public WoodBlockVariant getBlockVariant() {
+        return variant;
     }
 
     @Override
-    public WoodType getWoodType() {
-        return woodType;
+    public WoodType getType() {
+        return type;
     }
 
     @Nullable

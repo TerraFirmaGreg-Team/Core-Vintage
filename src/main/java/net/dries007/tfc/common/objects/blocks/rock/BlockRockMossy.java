@@ -14,8 +14,8 @@ import javax.annotation.Nonnull;
  */
 public class BlockRockMossy extends BlockRock {
 
-    public BlockRockMossy(RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockVariant, rockType);
+    public BlockRockMossy(RockBlockVariant variant, RockType type) {
+        super(variant, type);
     }
 
     @Nonnull

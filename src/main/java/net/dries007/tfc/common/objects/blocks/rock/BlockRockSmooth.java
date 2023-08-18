@@ -6,8 +6,8 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 
 public class BlockRockSmooth extends BlockRock {
 
-    public BlockRockSmooth(RockBlockVariant rockBlockVariant, RockType rockType) {
-        super(rockBlockVariant, rockType);
+    public BlockRockSmooth(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
         OreDictionaryHelper.register(this, "stonePolished");
     }

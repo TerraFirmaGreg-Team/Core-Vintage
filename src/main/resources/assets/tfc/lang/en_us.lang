@@ -1850,6 +1850,7 @@ tfc.tooltip.oredictionaryentry=§fOre Dictionary name:§7 %s
 tfc.tooltip.oredictionaryentries=§fOre Dictionary names:
 tfc.tooltip.containsmetal=§aContains metal:
 tfc.tooltip.metalname=§7- Name: §d%s
+tfc.tooltip.crucible.units=Units: %s
 tfc.tooltip.units=§7- Units: §b%s
 tfc.tooltip.melttemp=§7- Melting temp: §6%s§7°C
 tfc.tooltip.tier=§7- Tier: §e%s

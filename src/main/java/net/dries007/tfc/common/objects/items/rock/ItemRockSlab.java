@@ -17,13 +17,13 @@ public class ItemRockSlab extends ItemSlab implements IItemSize {
 
     @Nonnull
     @Override
-    public Size getSize(ItemStack stack) {
+    public Size getSize(@Nonnull ItemStack stack) {
         return Size.SMALL; // if blocks fits in small vessels, this should too
     }
 
     @Nonnull
     @Override
-    public Weight getWeight(ItemStack stack) {
+    public Weight getWeight(@Nonnull ItemStack stack) {
         return Weight.VERY_LIGHT; // Double the stacksize of a block (or 64)
     }
 }

@@ -61,8 +61,13 @@ public interface IForgeableHeatable extends IForgeable, IItemHeat {
     @Override
     default void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
         float temperature = getTemperature();
-        String tooltip = Heat.getTooltip(temperature);
-        if (tooltip != null) {
+
+        var heatTooltip = Heat.getTooltip(temperature);
+
+        if (heatTooltip != null) {
+            text.add("");
+            var tooltip = I18n.format("tfc.tooltip.temperature", heatTooltip);
+
             tooltip += TextFormatting.WHITE;
             if (temperature > getMeltTemp()) {
                 tooltip += " - " + I18n.format(MOD_ID + ".tooltip.liquid");

@@ -158,26 +158,23 @@ public class ItemMold extends ItemPottery {
         @Override
         public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
             var material = getMaterial();
-            if (material != null) {
-                String desc = TextFormatting.DARK_GREEN + material.getLocalizedName() + ": " + I18n.format("tfc.tooltip.units", getAmount());
-                if (isMolten()) {
-                    desc += I18n.format("tfc.tooltip.liquid");
-                } else {
-                    desc += I18n.format("tfc.tooltip.solid");
-                }
-                text.add(desc);
-            }
+
             IMoldHandler.super.addHeatInfo(stack, text);
-        }
 
-        @Override
-        public float getHeatCapacity() {
-            return heatCapacity;
-        }
+            if (material != null) {
+                text.add("");
+                text.add(I18n.format("tfc.tooltip.containsmetal"));
 
-        @Override
-        public float getMeltTemp() {
-            return meltTemp;
+                if (isMolten()) {
+                    text.add(I18n.format("tfc.tooltip.state", I18n.format("tfc.tooltip.liquid")));
+                }
+                else {
+                    text.add(I18n.format("tfc.tooltip.state", I18n.format("tfc.tooltip.solid")));
+                }
+
+                text.add(I18n.format("tfc.tooltip.metalname", material.getLocalizedName()));
+                text.add(I18n.format("tfc.tooltip.units", getAmount()));
+            }
         }
 
         @Override

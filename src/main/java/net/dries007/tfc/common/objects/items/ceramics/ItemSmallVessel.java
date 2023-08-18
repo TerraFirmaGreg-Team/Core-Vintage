@@ -236,14 +236,22 @@ public class ItemSmallVessel extends ItemPottery {
         @Override
         public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
             var material = getMaterial();
+
+            ISmallVesselHandler.super.addHeatInfo(stack, text);
+
             if (material != null) {
-                String desc = TextFormatting.DARK_GREEN + material.getLocalizedName() + ": " + I18n.format("tfc.tooltip.units", getAmount());
+                text.add("");
+                text.add(I18n.format("tfc.tooltip.containsmetal"));
+
                 if (isMolten()) {
-                    desc += I18n.format("tfc.tooltip.liquid");
-                } else {
-                    desc += I18n.format("tfc.tooltip.solid");
+                    text.add(I18n.format("tfc.tooltip.state", I18n.format("tfc.tooltip.liquid")));
                 }
-                text.add(desc);
+                else {
+                    text.add(I18n.format("tfc.tooltip.state", I18n.format("tfc.tooltip.solid")));
+                }
+
+                text.add(I18n.format("tfc.tooltip.metalname", material.getLocalizedName()));
+                text.add(I18n.format("tfc.tooltip.units", getAmount()));
             } else {
                 boolean hasContent = false;
                 Object2IntMap<Material> materials = new Object2IntOpenHashMap<>();
@@ -256,7 +264,7 @@ public class ItemSmallVessel extends ItemPottery {
                         } else {
                             onlySmeltables = false;
                         }
-                        text.add(1, I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.small_vessel_item", slot.getCount(), slot.getItem().getItemStackDisplayName(slot)));
+                        text.add(I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.small_vessel_item", slot.getCount(), slot.getItem().getItemStackDisplayName(slot)));
                         hasContent = true;
                     }
                 }
@@ -278,7 +286,7 @@ public class ItemSmallVessel extends ItemPottery {
                     text.add(1, I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.small_vessel_empty"));
                 }
             }
-            ISmallVesselHandler.super.addHeatInfo(stack, text);
+
         }
 
         @Nullable

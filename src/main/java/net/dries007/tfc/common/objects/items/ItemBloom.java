@@ -81,22 +81,6 @@ public class ItemBloom extends ItemTFC implements IMaterialItem {
         return meltable;
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addMetalInfo(ItemStack stack, List<String> text) {
-        IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-        System.out.println("dalbaeb");
-        if (cap instanceof IForgeableMeasurableMetal) {
-            var material = ((IForgeableMeasurableMetal) cap).getMaterial();
-            var metalAmount = ((IForgeableMeasurableMetal) cap).getMetalAmount();
-
-            System.out.println("cock");
-            text.add("dalbaeb");
-            text.add(I18n.format("tfc.tooltip.metal", material.getLocalizedName()));
-            text.add(I18n.format("tfc.tooltip.units", 123));
-        }
-    }
-
     @Override
     @Nonnull
     public String getTranslationKey(ItemStack stack) {

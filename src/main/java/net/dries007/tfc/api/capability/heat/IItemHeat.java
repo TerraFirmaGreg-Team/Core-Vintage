@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.capability.heat;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -65,7 +66,8 @@ public interface IItemHeat extends INBTSerializable<NBTTagCompound> {
     default void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
         String tooltip = Heat.getTooltip(getTemperature());
         if (tooltip != null) {
-            text.add(tooltip);
+            text.add("");
+            text.add(I18n.format("tfc.tooltip.temperature", tooltip));
         }
     }
 }

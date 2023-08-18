@@ -40,10 +40,13 @@ public class ItemStickCapability extends ItemHeatHandler implements IItemSize {
     @Override
     public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
         float temperature = getTemperature();
+
+        text.add("");
+
         if (temperature > getMeltTemp() * 0.9f) {
-            text.add(I18n.format("tfc.enum.heat.torch.lit"));
+            text.add(I18n.format("tfc.tooltip.temperature", I18n.format("tfc.enum.heat.torch.lit")));
         } else if (temperature > 1f) {
-            text.add(I18n.format("tfc.enum.heat.torch.catching_fire"));
+            text.add(I18n.format("tfc.tooltip.temperature", I18n.format("tfc.enum.heat.torch.catching_fire")));
         }
     }
 

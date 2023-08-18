@@ -34,6 +34,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
@@ -174,13 +175,15 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(PLACED, true);
     }
 
+    @Nonnull
     @Override
-    public Size getSize(ItemStack stack) {
+    public Size getSize(@Nonnull ItemStack stack) {
         return Size.VERY_LARGE; // Can't store anywhere, but not overburden
     }
 
+    @Nonnull
     @Override
-    public Weight getWeight(ItemStack stack) {
+    public Weight getWeight(@Nonnull ItemStack stack) {
         return Weight.MEDIUM; // Stacksize = 16
     }
 

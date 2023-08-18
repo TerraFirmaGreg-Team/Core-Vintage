@@ -91,12 +91,4 @@ public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler im
         }
         super.deserializeNBT(nbt);
     }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
-        String desc = TextFormatting.WHITE + I18n.format("tfc.tooltip.units", metalAmount);
-        text.add(desc);
-        super.addHeatInfo(stack, text);
-    }
 }

@@ -33,7 +33,7 @@ dependencies {
         implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
         implementation rfg.deobf("maven.modrinth:the-one-probe:1.12-1.4.28")
         implementation rfg.deobf("curse.maven:had-enough-items-557549:4571247")
-        implementation rfg.deobf("curse.maven:spark-361579:3542217")
+        //runtimeOnly("curse.maven:spark-361579:3542217")
     }
 
     // GregTech dependencies

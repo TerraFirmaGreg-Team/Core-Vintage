@@ -37,6 +37,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -49,7 +50,7 @@ import static net.dries007.tfc.api.types.crop.category.CropCategories.PICKABLE;
 import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.DEAD;
 
 
-public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, ICropBlock {
+public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlantable, ICropBlock {
 
     private static final int MATURE_AGE = 7;
     // Свойства стадии роста

@@ -396,7 +396,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                             flag = true;
                         }
                 }
-                return (variant == DIRT || variant == GRASS || variant == DRY_GRASS || BlocksTFC_old.isSand(state)) && flag;
+                return (variant == DIRT || variant == GRASS ||
+                        variant == DRY_GRASS || BlocksTFC_old.isSand(state)) && flag;
             }
         }
 

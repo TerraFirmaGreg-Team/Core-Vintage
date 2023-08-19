@@ -48,7 +48,6 @@ public class ItemCropSeeds extends Item implements IPlantable, ICropItem {
     }
 
     @Nonnull
-    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack itemstack = player.getHeldItem(hand);
         IBlockState state = worldIn.getBlockState(pos);

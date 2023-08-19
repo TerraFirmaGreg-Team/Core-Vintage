@@ -7,6 +7,9 @@ import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
+import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -40,6 +43,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
+import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.*;
+import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.DRY_GRASS;
+import static net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing.WILD;
+
 public class BlockSoilFarmland extends Block implements ISoilBlock {
     public static final int MAX_MOISTURE = 15;
     public static final PropertyInteger MOISTURE = PropertyInteger.create("moisture", 0, MAX_MOISTURE);
@@ -64,8 +71,8 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
     private static final AxisAlignedBB FARMLAND_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
     private static final AxisAlignedBB FLIPPED_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-    private final SoilBlockVariant soilBlockVariant;
-    private final SoilType soilType;
+    private final SoilBlockVariant variant;
+    private final SoilType type;
 
     public BlockSoilFarmland(SoilBlockVariant variant, SoilType type) {
         super(Material.GROUND);
@@ -73,8 +80,8 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         if (variant.canFall())
             FallingBlockManager.registerFallable(this, variant.getFallingSpecification());
 
-        this.soilBlockVariant = variant;
-        this.soilType = type;
+        this.variant = variant;
+        this.type = type;
 
         this.useNeighborBrightness = true;
 
@@ -109,13 +116,13 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
     @Nonnull
     @Override
     public SoilBlockVariant getBlockVariant() {
-        return soilBlockVariant;
+        return variant;
     }
 
     @Nonnull
     @Override
     public SoilType getType() {
-        return soilType;
+        return type;
     }
 
     @Override
@@ -188,10 +195,107 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         return new ItemStack(this);
     }
 
+
     @Override
     public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing direction, @Nonnull IPlantable plantable) {
-        var block = (BlockSoilGrass) TFCStorage.getSoilBlock(SoilBlockVariants.GRASS, soilType);
-        return block.canSustainPlant(state, world, pos, direction, plantable);
+        int beachDistance = 2;
+
+        if (plantable instanceof BlockPlantTFC) {
+            switch (((BlockPlantTFC) plantable).getEnumType()) {
+                case CLAY -> {
+                    return variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || variant == CLAY || variant == CLAY_GRASS;
+                }
+                case DESERT_CLAY -> {
+                    return variant == CLAY || variant == CLAY_GRASS || BlocksTFC_old.isSand(state);
+                }
+                case DRY_CLAY -> {
+                    return variant == DIRT || variant == DRY_GRASS ||
+                            variant == CLAY || variant == CLAY_GRASS || BlocksTFC_old.isSand(state);
+                }
+                case DRY -> {
+                    return variant == DIRT || variant == DRY_GRASS || BlocksTFC_old.isSand(state);
+                }
+                case FRESH_WATER -> {
+                    return variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || BlocksTFC_old.isGravel(state);
+                }
+                case SALT_WATER -> {
+                    return variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || BlocksTFC_old.isSand(state) || BlocksTFC_old.isGravel(state);
+                }
+                case FRESH_BEACH -> {
+                    boolean flag = false;
+                    for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+                        for (int i = 1; i <= beachDistance; i++) {
+                            if (BlocksTFC_old.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
+                                flag = true;
+                                break;
+                            }
+                        }
+                    }
+                    return (variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || BlocksTFC_old.isSand(state)) && flag;
+                }
+                case SALT_BEACH -> {
+                    boolean flag = false;
+                    for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+                        for (int i = 1; i <= beachDistance; i++)
+                            if (BlocksTFC_old.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
+                                flag = true;
+                            }
+                    }
+                    return (variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || BlocksTFC_old.isSand(state)) && flag;
+                }
+            }
+        }
+        else if (plantable instanceof BlockCropGrowing) {
+            IBlockState cropState = world.getBlockState(pos.up());
+            if (cropState.getBlock() instanceof BlockCropGrowing) {
+                boolean isWild = cropState.getValue(WILD);
+                if (isWild) {
+                    if (variant == DIRT || variant == GRASS ||
+                            variant == DRY_GRASS || variant == CLAY_GRASS) {
+                        return true;
+                    }
+                }
+                return variant == FARMLAND;
+            }
+        }
+
+        switch (plantable.getPlantType(world, pos.offset(direction))) {
+            case Plains -> {
+                return variant == DIRT || variant == GRASS ||
+                        variant == FARMLAND || variant == DRY_GRASS ||
+                        variant == CLAY || variant == CLAY_GRASS;
+            }
+            case Crop -> {
+                return variant == FARMLAND;
+            }
+            case Desert -> {
+                return BlocksTFC_old.isSand(state);
+            }
+            case Cave -> {
+                return true;
+            }
+            case Water, Nether -> {
+                return false;
+            }
+            case Beach -> {
+                boolean flag = false;
+                for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+                    for (int i = 1; i <= beachDistance; i++)
+                        if (BlocksTFC_old.isWater(world.getBlockState(pos.offset(facing, i)))) {
+                            flag = true;
+                        }
+                }
+                return (variant == DIRT || variant == GRASS ||
+                        variant == DRY_GRASS || BlocksTFC_old.isSand(state)) && flag;
+            }
+        }
+
+        return false;
     }
 
     public int getWaterScore(IBlockAccess world, BlockPos pos) {
@@ -221,7 +325,7 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
     @Nonnull
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        return Item.getItemFromBlock(TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soilType));
+        return Item.getItemFromBlock(TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, type));
     }
 
     private boolean hasCrops(World worldIn, BlockPos pos) {
@@ -261,7 +365,7 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), "soiltype=" + soilType.toString());
+                return new ModelResourceLocation(getResourceLocation(), "soiltype=" + type.toString());
             }
 
         });
@@ -270,7 +374,7 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),
                 this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(getResourceLocation(), "soiltype=" + soilType.toString()));
+                new ModelResourceLocation(getResourceLocation(), "soiltype=" + type.toString()));
     }
 
 }

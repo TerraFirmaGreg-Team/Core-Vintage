@@ -9,7 +9,7 @@ import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.crop.BlockCropDead;
 import net.dries007.tfc.common.objects.blocks.plants.BlockMushroomTFC;
-import net.dries007.tfc.common.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.common.objects.items.ItemCropSeeds;
 import net.dries007.tfc.common.objects.tileentities.TECropBase;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.config.ConfigTFC;
@@ -185,7 +185,7 @@ public class WorldRegenHandler {
         List<Entity> removals = new ArrayList<>();
         for (ClassInheritanceMultiMap<Entity> target : world.getChunk(pos.x, pos.z).getEntityLists()) {
             target.forEach(entity -> {
-                if (entity instanceof EntityItem && ((EntityItem) entity).getItem().getItem() instanceof ItemSeedsTFC) {
+                if (entity instanceof EntityItem && ((EntityItem) entity).getItem().getItem() instanceof ItemCropSeeds) {
                     removals.add(entity);
                 }
             });

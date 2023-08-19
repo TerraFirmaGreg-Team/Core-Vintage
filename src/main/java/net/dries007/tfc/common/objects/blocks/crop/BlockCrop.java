@@ -17,9 +17,8 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -45,23 +44,18 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.HashMap;
 import java.util.Random;
 
 import static net.dries007.tfc.api.types.crop.category.CropCategories.PICKABLE;
 import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.DEAD;
 
 
-public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
+public class BlockCrop extends BlockCrops implements IGrowingPlant, ICropBlock {
 
+    private static final int MATURE_AGE = 7;
     // Свойства стадии роста
-    public static final PropertyInteger STAGE_8 = PropertyInteger.create("stage", 0, 7);
-    public static final PropertyInteger STAGE_7 = PropertyInteger.create("stage", 0, 6);
-    public static final PropertyInteger STAGE_6 = PropertyInteger.create("stage", 0, 5);
-    public static final PropertyInteger STAGE_5 = PropertyInteger.create("stage", 0, 4);
+    public static final PropertyInteger AGE = PropertyInteger.create("age", 0, MATURE_AGE);
 
-    // Статическое отображение для преобразования значения maxValue в свойство Stage
-    public static final HashMap<Integer, PropertyInteger> STAGE_MAP = new HashMap<>();
 
     // true, если культура появилась в дикой природе, это означает, что она игнорирует условия роста, например, пашня
     public static final PropertyBool WILD = PropertyBool.create("wild");
@@ -82,18 +76,11 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
     private static final int META_WILD = 8;
     private static final int META_GROWTH = 7;
 
-    static {
-        STAGE_MAP.put(5, STAGE_5);
-        STAGE_MAP.put(6, STAGE_6);
-        STAGE_MAP.put(7, STAGE_7);
-        STAGE_MAP.put(8, STAGE_8);
-    }
-
     private final CropBlockVariant variant;
     private final CropType type;
 
     public BlockCrop(CropBlockVariant variant, CropType type) {
-        super(Material.PLANTS);
+        super();
 
         this.variant = variant;
         this.type = type;
@@ -105,8 +92,17 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
         setHardness(0.6f);
 
         setDefaultState(blockState.getBaseState()
-                .withProperty(getStageProperty(), 0)
+                .withProperty(getAgeProperty(), 0)
                 .withProperty(WILD, false));
+    }
+    @Override
+    public Item getSeed() {
+        return type.getDropSeed().getItem();
+    }
+
+    @Override
+    public Item getCrop() {
+        return type.getDropFood().getItem();
     }
 
     @Nonnull
@@ -124,7 +120,7 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return null;
     }
 
     /**
@@ -135,10 +131,9 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
      */
     @Override
     @Nonnull
-    @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(WILD, (meta & META_WILD) > 0)
-                .withProperty(getStageProperty(), meta & META_GROWTH);
+                .withProperty(getAgeProperty(), meta & META_GROWTH);
     }
 
     /**
@@ -149,7 +144,7 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
      */
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(getStageProperty()) + (state.getValue(WILD) ? META_WILD : 0);
+        return state.getValue(getAgeProperty()) + (state.getValue(WILD) ? META_WILD : 0);
     }
 
     /**
@@ -189,7 +184,7 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
     @Override
     @Nonnull
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, getStageProperty(), WILD);
+        return new BlockStateContainer(this, AGE, WILD);
     }
 
     /**
@@ -227,6 +222,16 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
         return new TECropBase();
     }
 
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        if(!isMature(state)) {
+            return getSeed();
+        }
+        else {
+            return getCrop();
+        }
+    }
+
     /**
      * Метод, который добавляет предметы в список drops.
      *
@@ -239,8 +244,11 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
     @Override
     public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, IBlockState state, int fortune) {
         EntityPlayer player = harvesters.get();
-        //ItemStack seedStack = new ItemStack(ItemSeedsTFC.get(type));
-        ItemStack foodStack = type.getFoodDrop(state.getValue(getStageProperty()));
+        var seedStack = new ItemStack(this.getSeed());
+        var foodStack = new ItemStack(this.getCrop());
+
+        final Random rand = world instanceof World ? ((World) world).rand : new Random();
+        final int age = getMetaFromState(state);
 
         // Если игрок и навыки присутствуют, обновляем навыки и увеличиваем количество предметов в зависимости от навыка
         if (player != null) {
@@ -249,7 +257,7 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
             if (skill != null) {
                 if (!foodStack.isEmpty()) {
                     foodStack.setCount(1 + CropType.getSkillFoodBonus(skill, RANDOM));
-                    //seedStack.setCount(1 + CropType.getSkillSeedBonus(skill, RANDOM));
+                    seedStack.setCount(1 + CropType.getSkillSeedBonus(skill, RANDOM));
                     skill.add(0.04f);
                 }
             }
@@ -259,9 +267,18 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
         if (!foodStack.isEmpty()) {
             drops.add(foodStack);
         }
-//        if (!seedStack.isEmpty()) {
-//            drops.add(seedStack);
-//        }
+        if (!seedStack.isEmpty()) {
+            drops.add(seedStack);
+        }
+
+        // Генерируем дополнительные предметы семян, если возраст растения больше или равен getMatureAge()
+        if (age >= getMatureAge()) {
+            for (int i = 0; i < 3 + fortune; ++i) {
+                if (rand.nextInt(2 * getMatureAge()) <= age) {
+                    drops.add(new ItemStack(getSeed(), 1, 0));
+                }
+            }
+        }
     }
 
     /**
@@ -277,7 +294,7 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
 //    @Override
 //    @Nonnull
 //    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-//        return new ItemStack(ItemSeedsTFC.get(type));
+//        return new ItemStack(ItemCropSeeds.get(type));
 //    }
 
     /**
@@ -307,23 +324,31 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
                 while (te.getTicksSinceUpdate() > growthTicks) {
                     te.reduceCounter(growthTicks);
 
-                    // Находим показатели для времени, в которое культура должна была вырасти
+                    // Получаем показатели температуры и осадков для времени, в которое культура должна была вырасти
                     float temp = ClimateTFC.getActualTemp(worldIn, pos, -te.getTicksSinceUpdate());
                     float rainfall = ChunkDataTFC.getRainfall(worldIn, pos);
 
                     // Проверяем, может ли культура вырасти, и если да, то растим ее
                     if (type.isValidForGrowth(temp, rainfall)) {
-                        grow(worldIn, pos, state, random);
+                        grow(worldIn, pos, state);
                         state = worldIn.getBlockState(pos);
-                        if (state.getBlock() instanceof BlockCrop && !state.getValue(WILD) && state.getValue(getStageProperty()) == type.getMaxStage()) {
+
+                        // Проверяем, является ли блок культурным растением,
+                        // не является ли он диким и достиг ли он максимального возраста
+                        if (state.getBlock() instanceof BlockCrop &&
+                                !state.getValue(WILD) &&
+                                state.getValue(getAgeProperty()) == getMaxAge()) {
                             fullGrownStages++;
+
+                            // Если количество полностью выросших стадий превышает 2, уничтожаем растение
                             if (fullGrownStages > 2) {
-                                die(worldIn, pos, state, random);
+                                die(worldIn, pos, state);
                                 return;
                             }
                         }
                     } else if (!type.isValidConditions(temp, rainfall)) {
-                        die(worldIn, pos, state, random);
+                        // Если условия для роста культуры недопустимы, уничтожаем растение
+                        die(worldIn, pos, state);
                         return;
                     }
                 }
@@ -337,12 +362,12 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
      * @param worldIn Объект World, представляющий мир.
      * @param pos     Позиция блока в мире.
      * @param state   Состояние блока.
-     * @param random  Объект Random для генерации случайных чисел.
      */
-    public void grow(World worldIn, BlockPos pos, IBlockState state, Random random) {
+    @Override
+    public void grow(World worldIn, BlockPos pos, IBlockState state) {
         if (!worldIn.isRemote) {
-            if (state.getValue(getStageProperty()) < getType().getMaxStage()) {
-                worldIn.setBlockState(pos, state.withProperty(getStageProperty(), state.getValue(getStageProperty()) + 1), 2);
+            if (state.getValue(getAgeProperty()) < MATURE_AGE) {
+                worldIn.setBlockState(pos, state.withProperty(getAgeProperty(), state.getValue(getAgeProperty()) + 1), 2);
             }
         }
     }
@@ -353,12 +378,13 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
      * @param worldIn Объект World, представляющий мир.
      * @param pos     Позиция блока в мире.
      * @param state   Состояние блока.
-     * @param random  Объект Random для генерации случайных чисел.
      */
-    public void die(World worldIn, BlockPos pos, IBlockState state, Random random) {
+    public void die(World worldIn, BlockPos pos, IBlockState state) {
+        // Проверяем, включена ли опция смерти культурных растений в конфигурации
         if (ConfigTFC.General.FOOD.enableCropDeath) {
+            // Устанавливаем состояние блока на месте умирающего растения
             worldIn.setBlockState(pos, TFCStorage.getCropBlock(DEAD, type).getDefaultState()
-                    .withProperty(BlockCropDead.MATURE, state.getValue(getStageProperty()) == type.getMaxStage()));
+                    .withProperty(BlockCropDead.MATURE, state.getValue(getAgeProperty()) == MATURE_AGE));
         }
     }
 
@@ -374,7 +400,7 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
     @Nonnull
     @SuppressWarnings("deprecation")
     public AxisAlignedBB getBoundingBox(IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
-        return CROPS_AABB[state.getValue(getStageProperty())];
+        return CROPS_AABB[state.getValue(getAgeProperty())];
     }
 
     /**
@@ -395,12 +421,32 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
      *
      * @return Свойство стадии роста.
      */
-    public PropertyInteger getStageProperty() {
-        var property = STAGE_MAP.get(5);//type.getMaxStage() + 1);
-        if (property == null)
-            throw new IllegalStateException("Invalid growthstage property " + (type.getMaxStage() + 1) + " for crop");
+    @Override
+    public PropertyInteger getAgeProperty() {
+        return AGE;
+    }
 
-        return property;
+    @Override
+    public int getMaxAge() {
+        return getMatureAge();
+    }
+
+    public static int getMatureAge() {
+        return MATURE_AGE;
+    }
+
+    public boolean isMature(IBlockState state) {
+        return state.getValue(getAgeProperty()) >= MATURE_AGE;
+    }
+
+    @Override
+    public boolean isMaxAge(IBlockState state) {
+        return getAge(state) >= getMaxAge();
+    }
+
+    @Override
+    public int getAge(IBlockState state) {
+        return getMetaFromState(state);
     }
 
     /**
@@ -415,7 +461,7 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         float temp = ClimateTFC.getActualTemp(world, pos);
         float rainfall = ChunkDataTFC.getRainfall(world, pos);
-        if (state.getValue(getStageProperty()) >= type.getMaxStage()) {
+        if (state.getValue(getAgeProperty()) >= MATURE_AGE) {
             return GrowthStatus.FULLY_GROWN;
         } else if (!type.isValidConditions(temp, rainfall) || !world.canSeeSky(pos)) {
             return GrowthStatus.NOT_GROWING;
@@ -428,22 +474,23 @@ public class BlockCrop extends BlockBush implements IGrowingPlant, ICropBlock {
     @Override
     public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (getType().getCropCategory() == PICKABLE) {
-            ItemStack foodDrop = getType().getFoodDrop(state.getValue(getStageProperty()));
-            if (!foodDrop.isEmpty()) {
-                //ItemStack seedDrop = new ItemStack(ItemSeedsTFC.get(getBlockVariant()), 0);
-                SimpleSkill skill = CapabilityPlayerData.getSkill(playerIn, SkillType.AGRICULTURE);
+
+            if (isMature(state)) {
+                var seedDrop = this.getType().getDropSeed();
+                var foodDrop = this.getType().getDropFood();
+                var skill = CapabilityPlayerData.getSkill(playerIn, SkillType.AGRICULTURE);
 
                 if (skill != null) {
                     foodDrop.setCount(1 + CropType.getSkillFoodBonus(skill, RANDOM));
                     // omit the +1 because the plant stays alive.
-                    //seedDrop.setCount(CropType.getSkillSeedBonus(skill, RANDOM));
+                    seedDrop.setCount(CropType.getSkillSeedBonus(skill, RANDOM));
                 }
 
                 if (!worldIn.isRemote) {
-                    worldIn.setBlockState(pos, state.withProperty(getStageProperty(), state.getValue(getStageProperty()) - 3));
+                    worldIn.setBlockState(pos, state.withProperty(getAgeProperty(), state.getValue(getAgeProperty()) - 3));
                     ItemHandlerHelper.giveItemToPlayer(playerIn, foodDrop);
-//                    if (!seedDrop.isEmpty())
-//                        ItemHandlerHelper.giveItemToPlayer(playerIn, seedDrop);
+                    if (!seedDrop.isEmpty())
+                        ItemHandlerHelper.giveItemToPlayer(playerIn, seedDrop);
                 }
                 return true;
             }

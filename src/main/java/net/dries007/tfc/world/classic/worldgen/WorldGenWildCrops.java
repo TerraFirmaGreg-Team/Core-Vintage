@@ -62,7 +62,7 @@ public class WorldGenWildCrops implements IWorldGenerator {
                         final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
                         if (isValidPosition(world, pos)) {
                             double yearProgress = CalendarTFC.CALENDAR_TIME.getMonthOfYear().ordinal() / 11.0;
-                            int maxStage = type.getMaxStage();
+                            int maxStage = cropBlock.getMaxAge();
                             int growth = (int) (yearProgress * maxStage) + 3 - random.nextInt(2);
                             if (growth > maxStage)
                                 growth = maxStage;

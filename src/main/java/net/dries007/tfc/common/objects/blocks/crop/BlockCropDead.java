@@ -89,11 +89,11 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant, ICropBloc
         return state.getValue(MATURE) ? META_MATURE : 0;
     }
 
-//    @Nonnull
-//    @Override
-//    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-//        return ItemSeedsTFC.get(type);
-//    }
+    @Nonnull
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return type.getDropSeed().getItem();
+    }
 
     @Override
     @Nonnull
@@ -131,7 +131,7 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant, ICropBloc
 //    @Override
 //    @Nonnull
 //    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-//        return new ItemStack(ItemSeedsTFC.get(type));
+//        return new ItemStack(ItemCropSeeds.get(type));
 //    }
 
     @Override

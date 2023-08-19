@@ -44,8 +44,8 @@ public class CropProvider implements IProbeInfoProvider {
                 iProbeInfo.text(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
             }
 
-            int curStage = state.getValue(blockCrop.getStageProperty());
-            int maxStage = type.getMaxStage();
+            int curStage = state.getValue(blockCrop.getAgeProperty());
+            int maxStage = ((BlockCrop) state.getBlock()).getMaxAge();
 
             if (curStage == maxStage) {
                 iProbeInfo.text(new TextComponentTranslation("waila.tfc.crop.growth", new TextComponentTranslation("waila.tfc.crop.mature").getFormattedText()).getFormattedText());

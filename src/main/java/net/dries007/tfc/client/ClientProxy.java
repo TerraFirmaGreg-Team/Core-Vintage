@@ -161,6 +161,12 @@ public class ClientProxy extends CommonProxy {
         for (var item : TFCStorage.BOAT_ITEMS.values())
             item.onModelRegister();
 
+        for (var item : TFCStorage.SEED_ITEMS.values())
+            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
+
+        for (var item : TFCStorage.FOOD_ITEMS.values())
+            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
+
         for (var item : TFCStorage.UNFIRED_MOLDS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
@@ -378,13 +384,13 @@ public class ClientProxy extends CommonProxy {
                 BlocksTFC.getAllFruitTreeLeavesBlocks()
                         .toArray(new BlockFruitTreeLeaves[0]));
 
-        itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getWoodType().getColor(),
+        itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
                 TFCStorage.LUMBER_ITEMS.values()
                         .stream()
                         .map(s -> (Item) s)
                         .toArray(Item[]::new));
 
-        itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getWoodType().getColor(),
+        itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
                 TFCStorage.BOAT_ITEMS.values()
                         .stream()
                         .map(s -> (Item) s)

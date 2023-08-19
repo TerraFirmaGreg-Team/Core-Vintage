@@ -23,7 +23,7 @@ import net.dries007.tfc.api.types.crop.type.CropTypeHandler;
 import net.dries007.tfc.api.types.crop.variant.CropBlockVariantHandler;
 import net.dries007.tfc.api.types.drinkable.DrinkableHandler;
 import net.dries007.tfc.api.types.food.category.FoodCategoryHandler;
-import net.dries007.tfc.api.types.food.variant.FoodVariantHandler;
+import net.dries007.tfc.api.types.food.type.FoodTypeHandler;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariantHandler;
 import net.dries007.tfc.api.types.plant.type.PlantTypeHandler;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
@@ -97,10 +97,6 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void onMaterialsInit(MaterialEvent event) {
-        CropCategoryHandler.init();
-        CropTypeHandler.init();
-        CropBlockVariantHandler.init();
-
         TFGMaterialHandler.init();
         TFGOrePrefixHandler.init();
 
@@ -118,7 +114,11 @@ public class CommonProxy {
         WoodBlockVariantHandler.init();
 
         FoodCategoryHandler.init();
-        FoodVariantHandler.init();
+        FoodTypeHandler.init();
+
+        CropCategoryHandler.init();
+        CropTypeHandler.init();
+        CropBlockVariantHandler.init();
 
         //PlantCategoryHandler.init();
         PlantTypeHandler.init();
@@ -283,11 +283,15 @@ public class CommonProxy {
 
         //=== Crop ==================================================================================================//
 
-        for (var cropBlock : CROP_BLOCKS.values()) {
-            var itemBlock = cropBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
+        for (var seed : SEED_ITEMS.values()) {
+            r.register(seed);
         }
 
+        //=== Food ==================================================================================================//
+
+        for (var food : FOOD_ITEMS.values()) {
+            r.register(food);
+        }
 
         //=== Metal ==================================================================================================//
 

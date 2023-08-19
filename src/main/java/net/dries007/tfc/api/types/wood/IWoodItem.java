@@ -18,7 +18,7 @@ public interface IWoodItem {
      * @return тип дерева
      */
     @Nonnull
-    WoodType getWoodType();
+    WoodType getType();
 
     /**
      * Возвращает расположение в реестре для данного подтипа деревянного предмета.
@@ -28,7 +28,7 @@ public interface IWoodItem {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation(String subType) {
-        return new ResourceLocation(MOD_ID, String.format("wood/%s/%s", subType, getWoodType()));
+        return new ResourceLocation(MOD_ID, String.format("wood/%s/%s", subType, getType()));
     }
 
     /**

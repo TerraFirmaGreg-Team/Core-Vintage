@@ -1,7 +1,9 @@
-package net.dries007.tfc.api.types.food.variant;
+package net.dries007.tfc.api.types.food.type;
 
 import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.food.category.FoodCategory;
+import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -11,8 +13,8 @@ import java.util.Set;
 /**
  * Класс, представляющий типы еды.
  */
-public class FoodVariant {
-    private static final Set<FoodVariant> FOOD_VARIANTS = new LinkedHashSet<>();
+public class FoodType {
+    private static final Set<FoodType> FOOD_TYPES = new LinkedHashSet<>();
 
     private final String name;
     private final FoodCategory category;
@@ -25,7 +27,7 @@ public class FoodVariant {
     private final String[] oreDictNames;
 
     /**
-     * Конструктор класса FoodVariant.
+     * Конструктор класса FoodType.
      *
      * @param name         название варианта еды
      * @param category     категория еды
@@ -34,7 +36,7 @@ public class FoodVariant {
      * @param cookingTemp  температура приготовления
      * @param oreNames     имена в словаре руд
      */
-    FoodVariant(String name, @Nonnull FoodCategory category, FoodData foodData, float heatCapacity, float cookingTemp, String... oreNames) {
+    FoodType(String name, @Nonnull FoodCategory category, FoodData foodData, float heatCapacity, float cookingTemp, String... oreNames) {
         this.name = name;
         this.category = category;
         this.foodData = foodData;
@@ -46,11 +48,11 @@ public class FoodVariant {
         this.oreDictNames = oreNames == null || oreNames.length == 0 ? null : oreNames;
 
         if (name.isEmpty()) {
-            throw new RuntimeException(String.format("FoodVariant name must contain any character: [%s]", name));
+            throw new RuntimeException(String.format("FoodType name must contain any character: [%s]", name));
         }
 
-        if (!FOOD_VARIANTS.add(this)) {
-            throw new RuntimeException(String.format("FoodVariant: [%s] already exists!", name));
+        if (!FOOD_TYPES.add(this)) {
+            throw new RuntimeException(String.format("FoodType: [%s] already exists!", name));
         }
     }
 
@@ -59,8 +61,8 @@ public class FoodVariant {
      *
      * @return Набор всех вариантов еды.
      */
-    public static Set<FoodVariant> getFoodVariants() {
-        return FOOD_VARIANTS;
+    public static Set<FoodType> getFoodType() {
+        return FOOD_TYPES;
     }
 
     /**
@@ -91,6 +93,10 @@ public class FoodVariant {
     @Nonnull
     public FoodData getData() {
         return foodData;
+    }
+
+    public Item get() {
+        return TFCStorage.getFoodItem(this);
     }
 
     /**
@@ -131,7 +137,7 @@ public class FoodVariant {
     }
 
     /**
-     * Внутренний класс Builder для создания экземпляров класса FoodVariant.
+     * Внутренний класс Builder для создания экземпляров класса FoodType.
      */
     public static class Builder {
 
@@ -217,12 +223,12 @@ public class FoodVariant {
         }
 
         /**
-         * Создает и возвращает экземпляр класса FoodVariant с заданными параметрами.
+         * Создает и возвращает экземпляр класса FoodType с заданными параметрами.
          *
-         * @return экземпляр класса FoodVariant
+         * @return экземпляр класса FoodType
          */
-        public FoodVariant build() {
-            return new FoodVariant(name, category, foodData, heatCapacity, cookingTemp, oreDictNames);
+        public FoodType build() {
+            return new FoodType(name, category, foodData, heatCapacity, cookingTemp, oreDictNames);
         }
     }
 }

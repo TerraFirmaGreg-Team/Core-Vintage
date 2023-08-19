@@ -113,9 +113,9 @@ public class LootTablesTFC {
         }
 
         // Add calamari to squid's loot table
-        if ("minecraft:entities/squid".equals(event.getName().toString())) {
-            event.getTable().addPool(event.getLootTableManager().getLootTableFromLocation(ANIMALS_SQUID).getPool("roll1"));
-        }
+//        if ("minecraft:entities/squid".equals(event.getName().toString())) {
+//            event.getTable().addPool(event.getLootTableManager().getLootTableFromLocation(ANIMALS_SQUID).getPool("roll1"));
+//        }
     }
 
     private static ResourceLocation register(String id) {

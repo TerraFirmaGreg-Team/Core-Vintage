@@ -4,8 +4,8 @@ package net.dries007.tfc.common.objects.recipes.handlers;
 import net.dries007.tfc.api.recipes.barrel.*;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCStorage;
-import net.dries007.tfc.api.types.food.variant.FoodVariant;
-import net.dries007.tfc.api.types.food.variant.FoodVariants;
+import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.food.type.FoodTypes;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientFluidItem;
@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import static net.dries007.tfc.api.types.food.type.FoodTypes.*;
 import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
 
 public class BarrelRecipes {
@@ -43,17 +44,17 @@ public class BarrelRecipes {
                 // Misc
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 1000), IIngredient.of("logWoodTannin"), new FluidStack(FluidRegistry.getFluid("tannin"), 10000), ItemStack.EMPTY, 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("tannin"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 200), IIngredient.of(ItemsTFC.JUTE), null, new ItemStack(ItemsTFC.JUTE_FIBER), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("jute_fiber"),
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 600), new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(FoodVariants.SUGARCANE), 5)), null, new ItemStack(Items.SUGAR), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("sugar"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 600), new IngredientItemFood(IIngredient.of(TFCStorage.getFoodItem(SUGARCANE), 5)), null, new ItemStack(Items.SUGAR), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("sugar"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("limewater"), 500), IIngredient.of(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage())), null, new ItemStack(TFCItems.GLUE), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("glue"),
                 // Alcohol - Classic created 1000mb with 4oz, which would be 8 items per full barrel at 5 oz/item. Instead we now require 20 items, so conversion is 2 oz/item here
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(FoodVariants.BARLEY_FLOUR))), new FluidStack(FluidRegistry.getFluid("beer"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("beer"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(TFCStorage.getFoodItem(BARLEY_FLOUR))), new FluidStack(FluidRegistry.getFluid("beer"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("beer"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of("apple")), new FluidStack(FluidRegistry.getFluid("cider"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("cider"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), IIngredient.of(Items.SUGAR), new FluidStack(FluidRegistry.getFluid("rum"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("rum"),
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(FoodVariants.RICE_FLOUR))), new FluidStack(FluidRegistry.getFluid("sake"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("sake"),
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(FoodVariants.POTATO))), new FluidStack(FluidRegistry.getFluid("vodka"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("vodka"),
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(FoodVariants.WHEAT_FLOUR))), new FluidStack(FluidRegistry.getFluid("whiskey"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("whiskey"),
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(FoodVariants.CORNMEAL_FLOUR))), new FluidStack(FluidRegistry.getFluid("corn_whiskey"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("corn_whiskey"),
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(FoodVariants.RYE_FLOUR))), new FluidStack(FluidRegistry.getFluid("rye_whiskey"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("rye_whiskey"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(TFCStorage.getFoodItem(RICE_FLOUR))), new FluidStack(FluidRegistry.getFluid("sake"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("sake"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(TFCStorage.getFoodItem(POTATO))), new FluidStack(FluidRegistry.getFluid("vodka"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("vodka"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(TFCStorage.getFoodItem(WHEAT_FLOUR))), new FluidStack(FluidRegistry.getFluid("whiskey"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("whiskey"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(TFCStorage.getFoodItem(CORNMEAL_FLOUR))), new FluidStack(FluidRegistry.getFluid("corn_whiskey"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("corn_whiskey"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), new IngredientItemFood(IIngredient.of(TFCStorage.getFoodItem(RYE_FLOUR))), new FluidStack(FluidRegistry.getFluid("rye_whiskey"), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("rye_whiskey"),
                 // Vinegar - Classic created 1000mb with 10 oz, which would be 20 items per full barrel at 5 oz/item. Instead we now require 40 items, so conversion is 2.5 oz/item.
                 new BarrelRecipe(IIngredient.of(250, FluidRegistry.getFluid("beer"),
                         FluidRegistry.getFluid("cider"), FluidRegistry.getFluid("rum"),
@@ -78,7 +79,7 @@ public class BarrelRecipes {
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("hot_water"), 125), IIngredient.of(new ItemStack(TFCItems.WOOD_ASH)), new FluidStack(FluidRegistry.getFluid("lye"), 125), ItemStack.EMPTY, 0).setRegistryName("lye"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("milk_vinegar"), 1), IIngredient.of(ItemStack.EMPTY), new FluidStack(FluidRegistry.getFluid("curdled_milk"), 1), ItemStack.EMPTY, 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("curdled_milk"),
                 // based on eating 5 oz in classic, and 1 item in TNG, the full barrel recipe generated 160 oz of cheese, now 32 items. Therefore 625mb creates 2 cheese.
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("curdled_milk"), 625), IIngredient.of(ItemStack.EMPTY), null, new ItemStack(ItemFoodTFC.get(FoodVariants.CHEESE), 2), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("cheese"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("curdled_milk"), 625), IIngredient.of(ItemStack.EMPTY), null, new ItemStack(TFCStorage.getFoodItem(CHEESE), 2), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("cheese"),
 
                 // Instant recipes: set the duration to 0
                 new BarrelRecipeFluidMixing(IIngredient.of(FluidRegistry.getFluid("salt_water"), 9), new IngredientFluidItem(FluidRegistry.getFluid("vinegar"), 1), new FluidStack(FluidRegistry.getFluid("brine"), 10), 0).setRegistryName("brine"),
@@ -98,8 +99,8 @@ public class BarrelRecipes {
                 new BarrelRecipeTemperature(IIngredient.of(FluidRegistry.getFluid("salt_water"), 1), 50).setRegistryName("salt_water_cooling")
         );
 
-        for (FoodVariant foodOld : new FoodVariant[]{FoodVariants.SALAD_DAIRY, FoodVariants.SALAD_FRUIT, FoodVariants.SALAD_GRAIN, FoodVariants.SALAD_MEAT, FoodVariants.SALAD_VEGETABLE, FoodVariants.SOUP_DAIRY, FoodVariants.SOUP_FRUIT, FoodVariants.SOUP_GRAIN, FoodVariants.SOUP_MEAT, FoodVariants.SOUP_VEGETABLE}) {
-            registry.register(new BarrelRecipeDynamicBowlFood(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 200), IIngredient.of(ItemFoodTFC.get(foodOld)), 0).setRegistryName(foodOld.toString().toLowerCase() + "_cleaning"));
+        for (FoodType foodOld : new FoodType[]{FoodTypes.SALAD_DAIRY, FoodTypes.SALAD_FRUIT, FoodTypes.SALAD_GRAIN, FoodTypes.SALAD_MEAT, FoodTypes.SALAD_VEGETABLE, FoodTypes.SOUP_DAIRY, FoodTypes.SOUP_FRUIT, FoodTypes.SOUP_GRAIN, FoodTypes.SOUP_MEAT, FoodTypes.SOUP_VEGETABLE}) {
+            registry.register(new BarrelRecipeDynamicBowlFood(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 200), IIngredient.of(TFCStorage.getFoodItem(foodOld)), 0).setRegistryName(foodOld.toString().toLowerCase() + "_cleaning"));
         }
 
         // The many many many recipes that is dye. This assumes that the standard meta values for colored objects are followed.

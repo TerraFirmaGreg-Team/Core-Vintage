@@ -4,9 +4,10 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.food.Nutrient;
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.category.FoodCategory;
-import net.dries007.tfc.api.types.food.variant.FoodVariants;
+import net.dries007.tfc.api.types.food.type.FoodTypes;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
@@ -24,6 +25,8 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.dries007.tfc.api.types.food.type.FoodTypes.*;
 
 /**
  * We don't extend the item stack container because it's not linked to the item stack
@@ -148,7 +151,7 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
                         IFood saladCap = salad.getCapability(CapabilityFood.CAPABILITY, null);
                         if (saladCap instanceof ItemDynamicBowlFood.DynamicFoodHandler) {
                             saladCap.setCreationDate(CapabilityFood.getRoundedCreationDate());
-                            ((ItemDynamicBowlFood.DynamicFoodHandler) saladCap).initCreationDataAndBowl(bowlStack.copy().splitStack(1), new FoodData(4, water, saturation, nutrition, FoodVariants.SALAD_VEGETABLE.getData().getDecayModifier()));
+                            ((ItemDynamicBowlFood.DynamicFoodHandler) saladCap).initCreationDataAndBowl(bowlStack.copy().splitStack(1), new FoodData(4, water, saturation, nutrition, FoodTypes.SALAD_VEGETABLE.getData().getDecayModifier()));
                         }
                         inventory.setStackInSlot(SLOT_OUTPUT, salad);
                         return;
@@ -221,15 +224,15 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
     private Item getSaladItem(Nutrient nutrient) {
         switch (nutrient) {
             case GRAIN:
-                return ItemFoodTFC.get(FoodVariants.SALAD_GRAIN);
+                return TFCStorage.getFoodItem(SALAD_GRAIN);
             case VEGETABLES:
-                return ItemFoodTFC.get(FoodVariants.SALAD_VEGETABLE);
+                return TFCStorage.getFoodItem(SALAD_VEGETABLE);
             case FRUIT:
-                return ItemFoodTFC.get(FoodVariants.SALAD_FRUIT);
+                return TFCStorage.getFoodItem(SALAD_FRUIT);
             case PROTEIN:
-                return ItemFoodTFC.get(FoodVariants.SALAD_MEAT);
+                return TFCStorage.getFoodItem(SALAD_MEAT);
             default:
-                return ItemFoodTFC.get(FoodVariants.SALAD_DAIRY);
+                return TFCStorage.getFoodItem(SALAD_DAIRY);
         }
     }
 }

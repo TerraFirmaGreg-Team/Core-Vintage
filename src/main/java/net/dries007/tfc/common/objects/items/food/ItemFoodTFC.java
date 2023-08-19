@@ -4,8 +4,10 @@ import net.dries007.tfc.api.capability.food.*;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.types.food.IFoodItem;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
-import net.dries007.tfc.api.types.food.variant.FoodVariant;
+import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemFood;
@@ -15,37 +17,30 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
-public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
-    private static final Map<FoodVariant, ItemFoodTFC> MAP = new HashMap<>();
-    protected final FoodVariant foodOld;
+public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC, IFoodItem {
+    protected final FoodType type;
 
-    public ItemFoodTFC(@Nonnull FoodVariant foodOld) {
-        super(0, 0, foodOld.getFoodCategory() == FoodCategories.MEAT || foodOld.getFoodCategory() == FoodCategories.COOKED_MEAT);
-        this.foodOld = foodOld;
-        if (MAP.put(foodOld, this) != null) {
-            throw new IllegalStateException("There can only be one.");
-        }
+    public ItemFoodTFC(@Nonnull FoodType type) {
+        super(0, 0, type.getFoodCategory() == FoodCategories.MEAT || type.getFoodCategory() == FoodCategories.COOKED_MEAT);
+        this.type = type;
 
         // Use "category" here as to not conflict with actual items, i.e. grain
-        OreDictionaryHelper.register(this, "category", foodOld.getFoodCategory().toString());
-        if (foodOld.getOreDictNames() != null) {
-            for (String name : foodOld.getOreDictNames()) {
+        OreDictionaryHelper.register(this, "category", this.type.getFoodCategory().toString());
+        if (this.type.getOreDictNames() != null) {
+            for (String name : this.type.getOreDictNames()) {
                 OreDictionaryHelper.register(this, name);
             }
         }
+
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
+        setCreativeTab(CreativeTabsTFC.FOOD);
     }
 
-    public static ItemFoodTFC get(FoodVariant foodOld) {
-        return MAP.get(foodOld);
-    }
-
-    public static ItemStack get(FoodVariant foodOld, int amount) {
-        return new ItemStack(MAP.get(foodOld), amount);
-    }
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
@@ -58,6 +53,12 @@ public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
             }
             items.add(stack);
         }
+    }
+
+    @Nonnull
+    @Override
+    public FoodType getType() {
+        return type;
     }
 
     @Override
@@ -79,6 +80,6 @@ public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
 
     @Override
     public ICapabilityProvider getCustomFoodHandler() {
-        return foodOld.isHeatable() ? new FoodHeatHandler(null, foodOld) : new FoodHandler(null, foodOld);
+        return type.isHeatable() ? new FoodHeatHandler(null, type) : new FoodHandler(null, type);
     }
 }

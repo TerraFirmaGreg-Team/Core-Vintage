@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.types.crop.type;
 
+import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.crop.category.CropCategory;
-import net.dries007.tfc.api.types.food.variant.FoodVariant;
-import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.skills.Skill;
@@ -10,7 +10,6 @@ import net.dries007.tfc.util.skills.SkillTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
@@ -22,8 +21,7 @@ public class CropType {
     private final String name;
     private final CropCategory cropCategory;
     private final Supplier<ItemStack> foodDrop;
-    private final Supplier<ItemStack> foodDropEarly;
-    private final int growthStages;
+    private final Supplier<ItemStack> seedDrop;
     private final float growthTime;
     private final float tempMinGrow;
     private final float tempMaxGrow;
@@ -35,16 +33,16 @@ public class CropType {
     private final float rainMaxAlive;
 
     public CropType(String name, CropCategory cropCategory,
-                    Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float growthTime,
+                    Supplier<ItemStack> foodDrop, Supplier<ItemStack> seedDrop,
+                    float growthTime,
                     float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive,
                     float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive) {
 
         this.name = name;
         this.cropCategory = cropCategory;
         this.foodDrop = foodDrop;
-        this.foodDropEarly = foodDropEarly;
+        this.seedDrop = seedDrop;
 
-        this.growthStages = 7;
         this.growthTime = growthTime;
 
         this.tempMinAlive = tempMinAlive;
@@ -114,13 +112,17 @@ public class CropType {
         return cropCategory;
     }
 
+    public ItemStack getDropSeed() {
+        return seedDrop.get();
+    }
+    public ItemStack getDropFood() {
+        return foodDrop.get();
+    }
+
     public long getGrowthTicks() {
         return (long) (growthTime * CalendarTFC.CALENDAR_TIME.getDaysInMonth() * ICalendar.TICKS_IN_DAY);
     }
 
-    public int getMaxStage() {
-        return growthStages - 1;
-    }
 
     public boolean isValidConditions(float temperature, float rainfall) {
         return tempMinAlive < temperature && temperature < tempMaxAlive && rainMinAlive < rainfall && rainfall < rainMaxAlive;
@@ -130,22 +132,12 @@ public class CropType {
         return tempMinGrow < temperature && temperature < tempMaxGrow && rainMinGrow < rainfall && rainfall < rainMaxGrow;
     }
 
-    @Nonnull
-    public ItemStack getFoodDrop(int currentStage) {
-        if (currentStage == getMaxStage()) {
-            return foodDrop.get();
-        } else if (currentStage == getMaxStage() - 1) {
-            return foodDropEarly.get();
-        }
-        return ItemStack.EMPTY;
-    }
-
     public static class Builder {
 
         private final String name;
         private CropCategory category;
         private Supplier<ItemStack> foodDrop;
-        private Supplier<ItemStack> foodDropEarly;
+        private Supplier<ItemStack> seedDrop;
         private float growthTime;
 
         private float tempMinAlive;
@@ -161,31 +153,26 @@ public class CropType {
         public Builder(String name) {
             this.name = name;
             this.foodDrop = () -> ItemStack.EMPTY;
-            this.foodDropEarly = () -> ItemStack.EMPTY;
+            this.seedDrop = () -> ItemStack.EMPTY;
         }
 
-        public Builder setType(CropCategory category) {
+        public Builder setCategory(CropCategory category) {
             this.category = category;
             return this;
         }
 
-        public Builder setDrop(FoodVariant foodTypes) {
-            this.foodDrop = () -> new ItemStack(ItemFoodTFC.get(foodTypes));
+        public Builder setFoodDrop(FoodType food) {
+            this.foodDrop = () -> new ItemStack(food.get());
             return this;
         }
 
-        public Builder setDrop(Item item) {
+        public Builder setFoodDrop(Item item) {
             this.foodDrop = () -> new ItemStack(item);
             return this;
         }
 
-        public Builder setDropEarly(FoodVariant foodTypes) {
-            this.foodDropEarly = () -> new ItemStack(ItemFoodTFC.get(foodTypes));
-            return this;
-        }
-
-        public Builder setDropEarly(Item item) {
-            this.foodDropEarly = () -> new ItemStack(item);
+        public Builder setSeed() {
+            this.seedDrop = () -> new ItemStack(TFCStorage.getSeedItem(this.build()));
             return this;
         }
 
@@ -213,7 +200,7 @@ public class CropType {
 
         public CropType build() {
             return new CropType(
-                    name, category, foodDrop, foodDropEarly, growthTime,
+                    name, category, foodDrop, seedDrop, growthTime,
                     tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive,
                     rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive);
         }

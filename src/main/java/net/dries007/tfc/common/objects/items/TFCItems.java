@@ -3,10 +3,13 @@ package net.dries007.tfc.common.objects.items;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.types.crop.type.CropType;
+import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.common.objects.items.ceramics.ItemUnfiredMold;
+import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.common.objects.items.rock.ItemRock;
 import net.dries007.tfc.common.objects.items.rock.ItemRockBrick;
 import net.dries007.tfc.common.objects.items.wood.ItemWoodBoat;
@@ -58,22 +61,36 @@ public class TFCItems {
 
         //=== ItemRock ===============================================================================================//
 
-        for (var rockType : RockType.getRockTypes()) {
-            if (BRICK_ITEMS.put(rockType, new ItemRockBrick(rockType)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", rockType));
+        for (var type : RockType.getRockTypes()) {
+            if (BRICK_ITEMS.put(type, new ItemRockBrick(type)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
 
-            if (ROCK_ITEMS.put(rockType, new ItemRock(rockType)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", rockType));
+            if (ROCK_ITEMS.put(type, new ItemRock(type)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
         }
 
         //=== ItemWood ===============================================================================================//
 
-        for (var woodType : WoodType.getWoodTypes()) {
-            if (LUMBER_ITEMS.put(woodType, new ItemWoodLumber(woodType)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", woodType));
+        for (var type : WoodType.getWoodTypes()) {
+            if (LUMBER_ITEMS.put(type, new ItemWoodLumber(type)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
 
-            if (BOAT_ITEMS.put(woodType, new ItemWoodBoat(woodType)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", woodType));
+            if (BOAT_ITEMS.put(type, new ItemWoodBoat(type)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
+        }
+
+        //=== ItemSeed ===============================================================================================//
+
+        for (var type : CropType.getCropTypes()) {
+            if (SEED_ITEMS.put(type, new ItemCropSeeds(type)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
+        }
+
+        //=== ItemFood ===============================================================================================//
+
+        for (var type : FoodType.getFoodType()) {
+            if (FOOD_ITEMS.put(type, new ItemFoodTFC(type)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
         }
 
         //=== ItemMisc ===============================================================================================//

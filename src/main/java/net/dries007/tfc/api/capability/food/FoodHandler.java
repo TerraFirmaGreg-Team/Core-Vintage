@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.food;
 
-import net.dries007.tfc.api.types.food.variant.FoodVariant;
+import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,7 +30,7 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
         this(null, new FoodData(4, 0, 0, 0, 0, 0, 0, 0, 1));
     }
 
-    public FoodHandler(@Nullable NBTTagCompound nbt, @Nonnull FoodVariant food) {
+    public FoodHandler(@Nullable NBTTagCompound nbt, @Nonnull FoodType food) {
         this(nbt, food.getData());
     }
 

@@ -32,7 +32,7 @@ public class ItemWoodLumber extends ItemTFC implements IHasModel, IWoodItem {
 
     @Nonnull
     @Override
-    public WoodType getWoodType() {
+    public WoodType getType() {
         return woodType;
     }
 

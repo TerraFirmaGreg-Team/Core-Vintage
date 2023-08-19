@@ -1,11 +1,15 @@
 package net.dries007.tfc.common.objects.items;
 
 import net.dries007.tfc.api.registries.TFCStorage;
+import net.dries007.tfc.api.types.crop.ICropItem;
 import net.dries007.tfc.api.types.crop.type.CropType;
+import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.crop.BlockCrop;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -16,18 +20,30 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
 import javax.annotation.Nonnull;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.GROWING;
 
-public class ItemSeedsTFC extends Item implements IPlantable {
+public class ItemCropSeeds extends Item implements IPlantable, ICropItem {
     private final CropType type;
 
-    public ItemSeedsTFC(CropType type) {
+    public ItemCropSeeds(CropType type) {
         this.type = type;
+
+        setRegistryName(getRegistryLocation("seeds"));
+        setTranslationKey(getTranslationName("seeds"));
+        setCreativeTab(CreativeTabsTFC.FLORA);
+    }
+
+    @Nonnull
+    @Override
+    public CropType getType() {
+        return type;
     }
 
     @Nonnull

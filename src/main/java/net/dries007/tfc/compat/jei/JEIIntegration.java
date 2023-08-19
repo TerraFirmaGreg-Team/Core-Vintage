@@ -28,7 +28,7 @@ import net.dries007.tfc.common.objects.blocks.metal.BlockMetalAnvil;
 import net.dries007.tfc.common.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide.HideType;
-import net.dries007.tfc.common.objects.items.ItemsTFC;
+import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
@@ -117,7 +117,7 @@ public final class JEIIntegration implements IModPlugin {
 
         // Alloy Recipes
         registry.addRecipeCatalyst(new ItemStack(TFCBlocks.CRUCIBLE), ALLOY_UID);
-        registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), ALLOY_UID);
+        registry.addRecipeCatalyst(new ItemStack(ItemsTFC_old.FIRED_VESSEL), ALLOY_UID);
 
         var alloyRecipes = TFCRegistries.ALLOYS.getValuesCollection().stream()
                 .map(AlloyRecipeWrapper::new)
@@ -213,7 +213,7 @@ public final class JEIIntegration implements IModPlugin {
 
         // Metal Melting Recipes
         registry.addRecipeCatalyst(new ItemStack(TFCBlocks.CRUCIBLE), METAL_HEAT_UID);
-        registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), METAL_HEAT_UID);
+        registry.addRecipeCatalyst(new ItemStack(ItemsTFC_old.FIRED_VESSEL), METAL_HEAT_UID);
 
         var heatMetalList = new ArrayList<>();
         getAllIngredients().forEach(stack -> {
@@ -239,7 +239,7 @@ public final class JEIIntegration implements IModPlugin {
         }
 
         registry.addRecipeCatalyst(new ItemStack(TFCBlocks.CRUCIBLE), CASTING_UID);
-        registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), CASTING_UID);
+        registry.addRecipeCatalyst(new ItemStack(ItemsTFC_old.FIRED_VESSEL), CASTING_UID);
 
         var unmoldList = new ArrayList<UnmoldRecipeWrapper>();
         var castingList = new ArrayList<CastingRecipeWrapper>();

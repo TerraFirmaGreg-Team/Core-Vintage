@@ -1,7 +1,7 @@
 package net.dries007.tfc.util;
 
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.common.objects.items.ItemsTFC;
+import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -68,7 +68,7 @@ public final class FluidTransferHelper {
                     if (drained != null) {
                         containerFluidHandler.fill(drained, true);
                         SoundEvent soundevent = drained.getFluid().getFillSound(drained);
-                        if (playerIn.getHeldItemMainhand().getItem() == ItemsTFC.FIRED_JUG) {
+                        if (playerIn.getHeldItemMainhand().getItem() == ItemsTFC_old.FIRED_JUG) {
                             soundevent = TFCSounds.JUG_FILL;
                         }
                         playerIn.world.playSound(null, playerIn.posX, playerIn.posY + 0.5, playerIn.posZ, soundevent, SoundCategory.BLOCKS, 1.0F, 1.0F);

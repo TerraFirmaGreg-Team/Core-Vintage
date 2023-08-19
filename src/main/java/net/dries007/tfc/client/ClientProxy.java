@@ -29,7 +29,7 @@ import net.dries007.tfc.client.util.GrassColorHandler;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.common.objects.blocks.BlockThatchBed;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
@@ -39,7 +39,7 @@ import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
-import net.dries007.tfc.common.objects.items.ItemsTFC;
+import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.config.ConfigTFC;
@@ -191,17 +191,17 @@ public class ClientProxy extends CommonProxy {
 
 
         // Registering fluid containers
-        ModelLoader.setCustomModelResourceLocation(ItemsTFC.WOODEN_BUCKET, 0, new ModelResourceLocation(ItemsTFC.WOODEN_BUCKET.getRegistryName(), "inventory"));
-        ModelLoader.setCustomModelResourceLocation(ItemsTFC.FIRED_JUG, 0, new ModelResourceLocation(ItemsTFC.FIRED_JUG.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.WOODEN_BUCKET, 0, new ModelResourceLocation(ItemsTFC_old.WOODEN_BUCKET.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.FIRED_JUG, 0, new ModelResourceLocation(ItemsTFC_old.FIRED_JUG.getRegistryName(), "inventory"));
 
         // Simple Items
-        for (Item item : ItemsTFC.getAllSimpleItems())
+        for (Item item : ItemsTFC_old.getAllSimpleItems())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
         // Dye color Items
         for (EnumDyeColor color : EnumDyeColor.values()) {
-            ModelLoader.setCustomModelResourceLocation(ItemsTFC.UNFIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC.UNFIRED_VESSEL_GLAZED.getRegistryName().toString()));
-            ModelLoader.setCustomModelResourceLocation(ItemsTFC.FIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC.FIRED_VESSEL_GLAZED.getRegistryName().toString()));
+            ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.UNFIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC_old.UNFIRED_VESSEL_GLAZED.getRegistryName().toString()));
+            ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.FIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC_old.FIRED_VESSEL_GLAZED.getRegistryName().toString()));
         }
 
         // Ceramic Molds
@@ -232,16 +232,16 @@ public class ClientProxy extends CommonProxy {
         }
 
         // Item Blocks
-        for (ItemBlock item : BlocksTFC.getAllNormalItemBlocks())
+        for (ItemBlock item : BlocksTFC_old.getAllNormalItemBlocks())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
 
-        for (ItemBlock item : BlocksTFC.getAllInventoryItemBlocks())
+        for (ItemBlock item : BlocksTFC_old.getAllInventoryItemBlocks())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 
 
         // Blocks with Ignored Properties
 
-        for (Block block : BlocksTFC.getAllFruitTreeLeavesBlocks())
+        for (Block block : BlocksTFC_old.getAllFruitTreeLeavesBlocks())
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE).ignore(BlockFruitTreeLeaves.HARVESTABLE).build());
 
         ModelLoader.setCustomStateMapper(TFCBlocks.THATCH_BED, new StateMap.Builder().ignore(BlockThatchBed.OCCUPIED).build());
@@ -324,15 +324,15 @@ public class ClientProxy extends CommonProxy {
 
         // This is talking about tall grass vs actual grass blocks
 
-//		blockColors.registerBlockColorHandler(grassColor, BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
+//		blockColors.registerBlockColorHandler(grassColor, BlocksTFC_old.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
 //
 //
-//				blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllLeafBlocks().toArray(new Block[0]));
-//		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllPlantBlocks().toArray(new BlockPlantTFC[0]));
+//				blockColors.registerBlockColorHandler(foliageColor, BlocksTFC_old.getAllLeafBlocks().toArray(new Block[0]));
+//		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC_old.getAllPlantBlocks().toArray(new BlockPlantTFC[0]));
 //
-        blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFruitTreeLeavesBlocks().toArray(new Block[0]));
+        blockColors.registerBlockColorHandler(foliageColor, BlocksTFC_old.getAllFruitTreeLeavesBlocks().toArray(new Block[0]));
 //
-//		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC.getAllFlowerPots().toArray(new Block[0]));
+//		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC_old.getAllFlowerPots().toArray(new Block[0]));
 
 
     }
@@ -381,7 +381,7 @@ public class ClientProxy extends CommonProxy {
                         .toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
-                BlocksTFC.getAllFruitTreeLeavesBlocks()
+                BlocksTFC_old.getAllFruitTreeLeavesBlocks()
                         .toArray(new BlockFruitTreeLeaves[0]));
 
         itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
@@ -408,7 +408,7 @@ public class ClientProxy extends CommonProxy {
 
 
         itemColors.registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? EnumDyeColor.byDyeDamage(stack.getItemDamage()).getColorValue() : 0xFFFFFF,
-                ItemsTFC.UNFIRED_VESSEL_GLAZED, ItemsTFC.FIRED_VESSEL_GLAZED);
+                ItemsTFC_old.UNFIRED_VESSEL_GLAZED, ItemsTFC_old.FIRED_VESSEL_GLAZED);
 
         itemColors.registerItemColorHandler((stack, tintIndex) -> {
             IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);

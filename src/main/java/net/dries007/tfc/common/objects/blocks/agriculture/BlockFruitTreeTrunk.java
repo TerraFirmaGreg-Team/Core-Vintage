@@ -2,7 +2,7 @@ package net.dries007.tfc.common.objects.blocks.agriculture;
 
 import net.dries007.tfc.api.types.fruit.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
@@ -231,7 +231,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        if (!(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockFruitTreeTrunk) && !BlocksTFC.isGrowableSoil(worldIn.getBlockState(pos.down()))) {
+        if (!(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockFruitTreeTrunk) && !BlocksTFC_old.isGrowableSoil(worldIn.getBlockState(pos.down()))) {
             worldIn.destroyBlock(pos, true);
         }
     }

@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * todo: as per comment in ItemsTFC, turn this into a proper fluid handler item?
+ * todo: as per comment in ItemsTFC_old, turn this into a proper fluid handler item?
  */
 @ParametersAreNonnullByDefault
 public class ItemGlassBottleTFC extends ItemGlassBottle {

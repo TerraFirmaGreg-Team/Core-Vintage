@@ -3,7 +3,7 @@ package net.dries007.tfc.world.classic.worldgen;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.config.ConfigTFC;
@@ -51,10 +51,10 @@ public class WorldGenSoilPits implements IWorldGenerator {
                 for (int y = -depth; y <= +depth; y++) {
                     final BlockPos pos = posHorizontal.add(0, y, 0);
                     final IBlockState current = world.getBlockState(pos);
-                    if (BlocksTFC.isDirt(current)) {
+                    if (BlocksTFC_old.isDirt(current)) {
                         world.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.CLAY, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
                         flag = true;
-                    } else if (BlocksTFC.isGrass(current)) {
+                    } else if (BlocksTFC_old.isGrass(current)) {
                         world.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.CLAY_GRASS, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
                         flag = true;
                     }
@@ -100,9 +100,9 @@ public class WorldGenSoilPits implements IWorldGenerator {
                     final BlockPos pos = start.add(x, y, z);
                     final IBlockState current = world.getBlockState(pos);
 
-                    if (BlocksTFC.isGrass(current)) {
+                    if (BlocksTFC_old.isGrass(current)) {
                         world.setBlockState(pos, TFCBlocks.PEAT_GRASS.getDefaultState(), 2);
-                    } else if (BlocksTFC.isDirt(current) || BlocksTFC.isClay(current)) {
+                    } else if (BlocksTFC_old.isDirt(current) || BlocksTFC_old.isClay(current)) {
                         world.setBlockState(pos, TFCBlocks.PEAT.getDefaultState(), 2);
                     }
                 }

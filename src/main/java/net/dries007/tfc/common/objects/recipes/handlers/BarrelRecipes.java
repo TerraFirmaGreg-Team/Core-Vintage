@@ -11,9 +11,8 @@ import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientItemFood;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
-import net.dries007.tfc.common.objects.items.ItemsTFC;
+import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.common.objects.items.TFCItems;
-import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -43,7 +42,7 @@ public class BarrelRecipes {
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("tannin"), 500), IIngredient.of(ItemAnimalHide.get(ItemAnimalHide.HideType.PREPARED, ItemAnimalHide.HideSize.LARGE)), null, new ItemStack(Items.LEATHER, 3), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("leather_large_hide"),
                 // Misc
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 1000), IIngredient.of("logWoodTannin"), new FluidStack(FluidRegistry.getFluid("tannin"), 10000), ItemStack.EMPTY, 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("tannin"),
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 200), IIngredient.of(ItemsTFC.JUTE), null, new ItemStack(ItemsTFC.JUTE_FIBER), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("jute_fiber"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 200), IIngredient.of(ItemsTFC_old.JUTE), null, new ItemStack(ItemsTFC_old.JUTE_FIBER), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("jute_fiber"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 600), new IngredientItemFood(IIngredient.of(TFCStorage.getFoodItem(SUGARCANE), 5)), null, new ItemStack(Items.SUGAR), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("sugar"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("limewater"), 500), IIngredient.of(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage())), null, new ItemStack(TFCItems.GLUE), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("glue"),
                 // Alcohol - Classic created 1000mb with 4oz, which would be 8 items per full barrel at 5 oz/item. Instead we now require 20 items, so conversion is 2 oz/item here
@@ -89,11 +88,11 @@ public class BarrelRecipes {
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("limewater"), 100), IIngredient.of("gemGypsum"), null, new ItemStack(TFCStorage.getAlabasterBlock("plain", RAW)), ICalendar.TICKS_IN_HOUR).setRegistryName("plain_alabaster"),
 
                 //olive oil production
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("hot_water"), 125), IIngredient.of(ItemsTFC.OLIVE_PASTE), new FluidStack(FluidRegistry.getFluid("olive_oil_water"), 125), ItemStack.EMPTY, 2 * ICalendar.TICKS_IN_HOUR).setRegistryName("olive_water"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("hot_water"), 125), IIngredient.of(ItemsTFC_old.OLIVE_PASTE), new FluidStack(FluidRegistry.getFluid("olive_oil_water"), 125), ItemStack.EMPTY, 2 * ICalendar.TICKS_IN_HOUR).setRegistryName("olive_water"),
                 // Balance note: Classic gave 250mb for 160oz of olives ~= 32 items. We give 800 mb for that, so 3.2x more. Hopefully will help with lamp usage
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("olive_oil_water"), 250), IIngredient.of(ItemsTFC.JUTE_NET), new FluidStack(FluidRegistry.getFluid("olive_oil"), 50), new ItemStack(ItemsTFC.DIRTY_JUTE_NET), 0).setRegistryName("olive_oil"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("olive_oil_water"), 250), IIngredient.of(ItemsTFC_old.JUTE_NET), new FluidStack(FluidRegistry.getFluid("olive_oil"), 50), new ItemStack(ItemsTFC_old.DIRTY_JUTE_NET), 0).setRegistryName("olive_oil"),
                 // Balance: switch to fresh water. Hot water use that way is broken
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 125), IIngredient.of(ItemsTFC.DIRTY_JUTE_NET), null, new ItemStack(ItemsTFC.JUTE_NET), ICalendar.TICKS_IN_HOUR).setRegistryName("clean_net"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 125), IIngredient.of(ItemsTFC_old.DIRTY_JUTE_NET), null, new ItemStack(ItemsTFC_old.JUTE_NET), ICalendar.TICKS_IN_HOUR).setRegistryName("clean_net"),
                 // Temperature recipes
                 new BarrelRecipeTemperature(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 1), 50).setRegistryName("fresh_water_cooling"),
                 new BarrelRecipeTemperature(IIngredient.of(FluidRegistry.getFluid("salt_water"), 1), 50).setRegistryName("salt_water_cooling")
@@ -119,7 +118,7 @@ public class BarrelRecipes {
 //                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(Blocks.GLASS), null, new ItemStack(Blocks.STAINED_GLASS, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("glass_" + dyeName),
 //                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(Blocks.GLASS_PANE), null, new ItemStack(Blocks.STAINED_GLASS_PANE, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("glass_pane_" + dyeName),
 //                    // Glazed Vessels
-//                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(ItemsTFC.UNFIRED_VESSEL), null, new ItemStack(ItemsTFC.UNFIRED_VESSEL_GLAZED, 1, 15 - dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("glazed_vessel_" + dyeName),
+//                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(ItemsTFC_old.UNFIRED_VESSEL), null, new ItemStack(ItemsTFC_old.UNFIRED_VESSEL_GLAZED, 1, 15 - dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("glazed_vessel_" + dyeName),
 //                    // Concrete (vanilla + aggregate)
 //                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(new ItemStack(Blocks.CONCRETE_POWDER, 1, 0)), null, new ItemStack(Blocks.CONCRETE_POWDER, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_" + dyeName),
 //                    new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(TFCBlocks.AGGREGATE), null, new ItemStack(Blocks.CONCRETE_POWDER, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("aggregate_" + dyeName),

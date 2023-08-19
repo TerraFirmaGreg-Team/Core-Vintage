@@ -2,7 +2,7 @@ package net.dries007.tfc.api.types.crop.type;
 
 import net.dries007.tfc.api.types.crop.category.CropCategories;
 import net.dries007.tfc.api.types.food.type.FoodTypes;
-import net.dries007.tfc.common.objects.items.ItemsTFC;
+import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 
 public class CropTypeHandler {
 
@@ -162,7 +162,7 @@ public class CropTypeHandler {
 
         CropTypes.JUTE = new CropType.Builder("jute")
                 .setCategory(CropCategories.SIMPLE)
-                .setFoodDrop(ItemsTFC.JUTE)
+                .setFoodDrop(ItemsTFC_old.JUTE)
                 .setGrowthTime(0.5f)
                 .setTemp(5f, 11f, 37f, 42f)
                 .setRain(50f, 100f, 410f, 450f)

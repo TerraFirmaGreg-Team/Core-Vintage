@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.types.animal.ILivestock;
 import net.dries007.tfc.common.objects.LootTablesTFC;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
-import net.dries007.tfc.common.objects.items.ItemsTFC;
+import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
@@ -138,7 +138,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
             if (!world.isRemote) {
                 if (isReadyForAnimalProduct()) {
                     stack.damageItem(1, player);
-                    ItemStack woolStack = new ItemStack(ItemsTFC.WOOL, 1);
+                    ItemStack woolStack = new ItemStack(ItemsTFC_old.WOOL, 1);
                     Helpers.spawnItemStack(player.world, new BlockPos(posX, posY, posZ), woolStack);
                     playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
                     setProductsCooldown();
@@ -205,7 +205,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
     @Override
     public List<ItemStack> getProducts() {
         // Only white for now
-        return Collections.singletonList(new ItemStack(ItemsTFC.WOOL, 1));
+        return Collections.singletonList(new ItemStack(ItemsTFC_old.WOOL, 1));
     }
 
     @Override

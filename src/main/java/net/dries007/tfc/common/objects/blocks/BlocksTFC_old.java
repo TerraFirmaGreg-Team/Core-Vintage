@@ -31,7 +31,7 @@ import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
 @GameRegistry.ObjectHolder(MOD_ID)
-public final class BlocksTFC {
+public final class BlocksTFC_old {
     // All these are for use in model registration. Do not use for block lookups.
     // Use the static get methods in the classes instead.
     private static ImmutableList<ItemBlock> allNormalItemBlocks;

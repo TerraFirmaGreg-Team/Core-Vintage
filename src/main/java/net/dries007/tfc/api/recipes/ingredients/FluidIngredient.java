@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.recipes.ingredients;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.common.objects.items.ItemsTFC;
+import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
@@ -30,7 +30,7 @@ public class FluidIngredient extends Ingredient {
 
     private static ItemStack[] getValidBuckets(FluidStack fluid) {
         List<ItemStack> output = new ArrayList<>();
-        ItemStack woodenBucket = new ItemStack(ItemsTFC.WOODEN_BUCKET);
+        ItemStack woodenBucket = new ItemStack(ItemsTFC_old.WOODEN_BUCKET);
         IFluidHandler bucketCap = woodenBucket.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (bucketCap != null) {
             if (bucketCap.fill(fluid, true) >= Fluid.BUCKET_VOLUME) {

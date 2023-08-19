@@ -6,7 +6,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.items.ceramics.*;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.common.objects.items.metal.ItemMetalBucket;
@@ -31,7 +31,7 @@ import static net.dries007.tfc.util.Helpers.getNull;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 @GameRegistry.ObjectHolder(MOD_ID)
-public final class ItemsTFC {
+public final class ItemsTFC_old {
 
     @GameRegistry.ObjectHolder("crop/product/jute")
     public static final ItemMisc JUTE = getNull();
@@ -50,8 +50,6 @@ public final class ItemsTFC {
 
     @GameRegistry.ObjectHolder("ceramics/unfired/fire_brick")
     public static final ItemPottery UNFIRED_FIRE_BRICK = getNull();
-    @GameRegistry.ObjectHolder("ceramics/fired/fire_brick")
-    public static final ItemPottery FIRED_FIRE_BRICK = getNull();
     @GameRegistry.ObjectHolder("ceramics/unfired/vessel")
     public static final ItemPottery UNFIRED_VESSEL = getNull();
     @GameRegistry.ObjectHolder("ceramics/fired/vessel")
@@ -131,8 +129,8 @@ public final class ItemsTFC {
 
         register(r, "wooden_bucket", new ItemWoodBucket(), CreativeTabsTFC.WOOD); //not a simple item, use a custom model
 
-        BlocksTFC.getAllNormalItemBlocks().forEach(x -> registerItemBlock(r, x));
-        BlocksTFC.getAllInventoryItemBlocks().forEach(x -> registerItemBlock(r, x));
+        BlocksTFC_old.getAllNormalItemBlocks().forEach(x -> registerItemBlock(r, x));
+        BlocksTFC_old.getAllInventoryItemBlocks().forEach(x -> registerItemBlock(r, x));
 
         // POTTERY
         {
@@ -151,7 +149,6 @@ public final class ItemsTFC {
             OreDictionaryHelper.register(firedBowl, "bowl");
 
             registerPottery(simpleItems, r, "ceramics/unfired/spindle", "ceramics/fired/spindle");
-            registerPottery(simpleItems, r, "ceramics/unfired/fire_brick", "ceramics/fired/fire_brick");
 
             simpleItems.add(register(r, "ceramics/unfired/jug", new ItemPottery(), CreativeTabsTFC.POTTERY));
             register(r, "ceramics/fired/jug", new ItemJug(), CreativeTabsTFC.POTTERY);

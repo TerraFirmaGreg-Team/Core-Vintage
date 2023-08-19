@@ -3,7 +3,7 @@ package net.dries007.tfc.common.objects.blocks.agriculture;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.bush.IBerryBush;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.DamageSourcesTFC;
@@ -240,9 +240,9 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     private boolean canStay(IBlockAccess world, BlockPos pos) {
         IBlockState below = world.getBlockState(pos.down());
         if (bush.getSize() == IBerryBush.Size.LARGE && below.getBlock() instanceof BlockBerryBush && ((BlockBerryBush) below.getBlock()).bush == this.bush) {
-            return BlocksTFC.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
+            return BlocksTFC_old.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
         }
-        return BlocksTFC.isGrowableSoil(below);
+        return BlocksTFC_old.isGrowableSoil(below);
     }
 
     @Override

@@ -13,7 +13,7 @@ import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
 import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
@@ -121,7 +121,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 IBlockState current = world.getBlockState(target);
 
                 // Пропускаем итерацию, если текущий блок не является почвой или уже имеет траву
-                if (!BlocksTFC.isSoil(current) || BlocksTFC.isGrass(current)) {
+                if (!BlocksTFC_old.isSoil(current) || BlocksTFC_old.isGrass(current)) {
                     continue;
                 }
 
@@ -313,46 +313,46 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                             variant == DRY_GRASS || variant == CLAY || variant == CLAY_GRASS;
                 }
                 case DESERT_CLAY -> {
-                    return variant == CLAY || variant == CLAY_GRASS || BlocksTFC.isSand(state);
+                    return variant == CLAY || variant == CLAY_GRASS || BlocksTFC_old.isSand(state);
                 }
                 case DRY_CLAY -> {
                     return variant == DIRT || variant == DRY_GRASS ||
-                            variant == CLAY || variant == CLAY_GRASS || BlocksTFC.isSand(state);
+                            variant == CLAY || variant == CLAY_GRASS || BlocksTFC_old.isSand(state);
                 }
                 case DRY -> {
-                    return variant == DIRT || variant == DRY_GRASS || BlocksTFC.isSand(state);
+                    return variant == DIRT || variant == DRY_GRASS || BlocksTFC_old.isSand(state);
                 }
                 case FRESH_WATER -> {
                     return variant == DIRT || variant == GRASS ||
-                            variant == DRY_GRASS || BlocksTFC.isGravel(state);
+                            variant == DRY_GRASS || BlocksTFC_old.isGravel(state);
                 }
                 case SALT_WATER -> {
                     return variant == DIRT || variant == GRASS ||
-                            variant == DRY_GRASS || BlocksTFC.isSand(state) || BlocksTFC.isGravel(state);
+                            variant == DRY_GRASS || BlocksTFC_old.isSand(state) || BlocksTFC_old.isGravel(state);
                 }
                 case FRESH_BEACH -> {
                     boolean flag = false;
                     for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                         for (int i = 1; i <= beachDistance; i++) {
-                            if (BlocksTFC.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
+                            if (BlocksTFC_old.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
                                 flag = true;
                                 break;
                             }
                         }
                     }
                     return (variant == DIRT || variant == GRASS ||
-                            variant == DRY_GRASS || BlocksTFC.isSand(state)) && flag;
+                            variant == DRY_GRASS || BlocksTFC_old.isSand(state)) && flag;
                 }
                 case SALT_BEACH -> {
                     boolean flag = false;
                     for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                         for (int i = 1; i <= beachDistance; i++)
-                            if (BlocksTFC.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
+                            if (BlocksTFC_old.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
                                 flag = true;
                             }
                     }
                     return (variant == DIRT || variant == GRASS ||
-                            variant == DRY_GRASS || BlocksTFC.isSand(state)) && flag;
+                            variant == DRY_GRASS || BlocksTFC_old.isSand(state)) && flag;
                 }
             }
         }
@@ -380,7 +380,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 return variant == FARMLAND;
             }
             case Desert -> {
-                return BlocksTFC.isSand(state);
+                return BlocksTFC_old.isSand(state);
             }
             case Cave -> {
                 return true;
@@ -392,11 +392,11 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 boolean flag = false;
                 for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                     for (int i = 1; i <= beachDistance; i++)
-                        if (BlocksTFC.isWater(world.getBlockState(pos.offset(facing, i)))) {
+                        if (BlocksTFC_old.isWater(world.getBlockState(pos.offset(facing, i)))) {
                             flag = true;
                         }
                 }
-                return (variant == DIRT || variant == GRASS || variant == DRY_GRASS || BlocksTFC.isSand(state)) && flag;
+                return (variant == DIRT || variant == GRASS || variant == DRY_GRASS || BlocksTFC_old.isSand(state)) && flag;
             }
         }
 

@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ILivestock;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
 import net.dries007.tfc.common.objects.entity.ai.EntityAITamableAvoidPlayer;
 import net.dries007.tfc.config.ConfigTFC;
@@ -216,7 +216,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimalTFC, ILivestock 
         return this.world.checkNoEntityCollision(getEntityBoundingBox())
                 && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
                 && !this.world.containsAnyLiquid(getEntityBoundingBox())
-                && BlocksTFC.isGround(this.world.getBlockState(this.getPosition().down()));
+                && BlocksTFC_old.isGround(this.world.getBlockState(this.getPosition().down()));
     }
 
     @Override

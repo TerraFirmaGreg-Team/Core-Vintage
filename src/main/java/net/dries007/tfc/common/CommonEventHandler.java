@@ -26,7 +26,7 @@ import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC;
+import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.devices.BlockQuern;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidTFC;
@@ -301,7 +301,7 @@ public final class CommonEventHandler {
             RayTraceResult result = Helpers.rayTrace(event.getWorld(), player, true);
             if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
                 IBlockState waterState = world.getBlockState(result.getBlockPos());
-                boolean isFreshWater = BlocksTFC.isFreshWater(waterState), isSaltWater = BlocksTFC.isSaltWater(waterState);
+                boolean isFreshWater = BlocksTFC_old.isFreshWater(waterState), isSaltWater = BlocksTFC_old.isSaltWater(waterState);
                 if ((isFreshWater && foodStats.attemptDrink(10, true)) || (isSaltWater && foodStats.attemptDrink(-1, true))) {
                     //Simulated so client will check if he would drink before updating stats
                     if (!world.isRemote) {

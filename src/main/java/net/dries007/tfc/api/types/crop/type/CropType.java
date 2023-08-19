@@ -35,8 +35,7 @@ public class CropType {
     private final float rainMaxAlive;
 
     public CropType(String name, CropCategory cropCategory,
-                    Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly,
-                    int growthStages, float growthTime,
+                    Supplier<ItemStack> foodDrop, Supplier<ItemStack> foodDropEarly, float growthTime,
                     float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive,
                     float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive) {
 
@@ -45,7 +44,7 @@ public class CropType {
         this.foodDrop = foodDrop;
         this.foodDropEarly = foodDropEarly;
 
-        this.growthStages = growthStages;
+        this.growthStages = 7;
         this.growthTime = growthTime;
 
         this.tempMinAlive = tempMinAlive;
@@ -147,7 +146,6 @@ public class CropType {
         private CropCategory category;
         private Supplier<ItemStack> foodDrop;
         private Supplier<ItemStack> foodDropEarly;
-        private int growthStages;
         private float growthTime;
 
         private float tempMinAlive;
@@ -191,11 +189,6 @@ public class CropType {
             return this;
         }
 
-        public Builder setGrowthStages(int growthStages) {
-            this.growthStages = growthStages;
-            return this;
-        }
-
         public Builder setGrowthTime(float growthTime) {
             this.growthTime = growthTime;
             return this;
@@ -220,8 +213,7 @@ public class CropType {
 
         public CropType build() {
             return new CropType(
-                    name, category, foodDrop, foodDropEarly,
-                    growthStages, growthTime,
+                    name, category, foodDrop, foodDropEarly, growthTime,
                     tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive,
                     rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive);
         }

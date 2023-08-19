@@ -23,16 +23,29 @@ import java.util.Random;
 
 import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.GROWING;
 
+/**
+ * Генератор мира для дикорастущих культур.
+ */
 @ParametersAreNonnullByDefault
 public class WorldGenWildCrops implements IWorldGenerator {
 
-    List<CropType> types = new ArrayList<>(CropType.getCropTypes());
+    private List<CropType> types = new ArrayList<>(CropType.getCropTypes());
 
+    /**
+     * Генерирует дикорастущие культуры в мире.
+     *
+     * @param random         генератор случайных чисел
+     * @param chunkX         координата X чанка
+     * @param chunkZ         координата Z чанка
+     * @param world          экземпляр мира
+     * @param chunkGenerator генератор чанков
+     * @param chunkProvider  поставщик чанков
+     */
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0 && !types.isEmpty() && ConfigTFC.General.FOOD.cropRarity > 0) {
             if (random.nextInt(ConfigTFC.General.FOOD.cropRarity) == 0) {
-                // Guarantees crop generation if possible (easier to balance by config file while also making it random)
+                // Гарантирует генерацию культур, если это возможно (легче настроить через файл конфигурации, сохраняя при этом случайность)
                 BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
                 Collections.shuffle(types);
@@ -53,7 +66,7 @@ public class WorldGenWildCrops implements IWorldGenerator {
                             int growth = (int) (yearProgress * maxStage) + 3 - random.nextInt(2);
                             if (growth > maxStage)
                                 growth = maxStage;
-                            world.setBlockState(pos, cropBlock.getDefaultState().withProperty(cropBlock.getStageProperty(), growth).withProperty(BlockCrop.WILD, true), 2);
+                            world.setBlockState(pos, cropBlock.getDefaultState().withProperty(cropBlock.getAgeProperty(), growth).withProperty(BlockCrop.WILD, true), 2);
 
                         }
                     }
@@ -62,6 +75,13 @@ public class WorldGenWildCrops implements IWorldGenerator {
         }
     }
 
+    /**
+     * Проверяет, является ли позиция допустимой для генерации культуры.
+     *
+     * @param world мир
+     * @param pos   позиция
+     * @return {@code true}, если позиция допустима, иначе {@code false}
+     */
     protected boolean isValidPosition(World world, BlockPos pos) {
         return world.isAirBlock(pos) && BlocksTFC.isSoil(world.getBlockState(pos.down()));
     }

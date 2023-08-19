@@ -41,15 +41,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.*;
 import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.DRY_GRASS;
 import static net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing.WILD;
 
-public class BlockSoilFarmland extends Block implements ISoilBlock {
-    public static final int MAX_MOISTURE = 15;
-    public static final PropertyInteger MOISTURE = PropertyInteger.create("moisture", 0, MAX_MOISTURE);
+@ParametersAreNonnullByDefault
+public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
     public static final int[] TINT = new int[]{
             0xffffffff,
             0xfff7f7f7,
@@ -67,15 +67,13 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
             0xff979797,
             0xff8f8f8f,
             0xff878787,
-    };
-    private static final AxisAlignedBB FARMLAND_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
+    };;
     private static final AxisAlignedBB FLIPPED_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);
 
     private final SoilBlockVariant variant;
     private final SoilType type;
 
     public BlockSoilFarmland(SoilBlockVariant variant, SoilType type) {
-        super(Material.GROUND);
 
         if (variant.canFall())
             FallingBlockManager.registerFallable(this, variant.getFallingSpecification());
@@ -91,13 +89,11 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         setSoundType(SoundType.GROUND);
         setHardness(2.0F);
         setHarvestLevel("shovel", 0);
-        setDefaultState(blockState.getBaseState()
-                .withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
-        setTickRandomly(true);
-        setLightOpacity(255);
+        setDefaultState(blockState.getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
 
         OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
+
 
     protected static void turnToDirt(World world, BlockPos pos) {
         Block block = world.getBlockState(pos).getBlock();
@@ -130,74 +126,22 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         return new ItemBlockTFC(this);
     }
 
-    @Nonnull
-    @Override
-    @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(MOISTURE, meta);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(MOISTURE);
-    }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isFullCube(@Nonnull IBlockState state) {
-        return false;
-    }
-
-    @Nonnull
-    @Override
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
-        return FARMLAND_AABB;
-    }
-
-    @Nonnull
-    @Override
-    @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
-        return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(@Nonnull IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public void updateTick(World world, BlockPos pos, IBlockState state, @Nonnull Random rand) {
-        int current = state.getValue(MOISTURE);
-        int target = world.isRainingAt(pos.up()) ? MAX_MOISTURE : getWaterScore(world, pos);
-
-        if (current < target) {
-            if (current < MAX_MOISTURE) world.setBlockState(pos, state.withProperty(MOISTURE, current + 1), 2);
-        } else if (current > target || target == 0) {
-            if (current > 0) world.setBlockState(pos, state.withProperty(MOISTURE, current - 1), 2);
-            else if (!hasCrops(world, pos)) turnToDirt(world, pos);
-        }
-
-        super.updateTick(world, pos, state, rand);
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isSideSolid(@Nonnull IBlockState baseState, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
+    public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return (side != EnumFacing.DOWN && side != EnumFacing.UP);
     }
 
     @Nonnull
     @Override
-    public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player) {
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(this);
     }
 
 
     @Override
-    public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing direction, @Nonnull IPlantable plantable) {
+    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
         int beachDistance = 2;
 
         if (plantable instanceof BlockPlantTFC) {
@@ -298,22 +242,8 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         return false;
     }
 
-    public int getWaterScore(IBlockAccess world, BlockPos pos) {
-        final int hRange = 7;
-        float score = 0;
-        for (BlockPos.MutableBlockPos i : BlockPos.getAllInBoxMutable(pos.add(-hRange, -1, -hRange), pos.add(hRange, 2, hRange))) {
-            BlockPos diff = i.subtract(pos);
-            float hDist = MathHelper.sqrt(diff.getX() * diff.getX() + diff.getZ() * diff.getZ());
-            if (hDist > hRange) continue;
-            if (world.getBlockState(i).getMaterial() != Material.WATER) continue;
-            score += ((hRange - hDist) / (float) hRange);
-        }
-        return score > 1 ? MAX_MOISTURE : Math.round(score * MAX_MOISTURE);
-    }
-
-    @SuppressWarnings("deprecation")
     @Override
-    public void neighborChanged(@Nonnull IBlockState state, @Nonnull World world, BlockPos pos, @Nonnull Block block, BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
         if (fromPos.getY() == pos.getY() + 1) {
             IBlockState up = world.getBlockState(fromPos);
             if (up.isSideSolid(world, fromPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
@@ -324,19 +254,14 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
 
     @Nonnull
     @Override
-    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, type));
-    }
-
-    private boolean hasCrops(World worldIn, BlockPos pos) {
-        Block block = worldIn.getBlockState(pos.up()).getBlock();
-        return block instanceof IPlantable && canSustainPlant(worldIn.getBlockState(pos), worldIn, pos, EnumFacing.UP, (IPlantable) block);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("deprecation")
-    public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, EnumFacing side) {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         switch (side) {
             case UP:
                 return true;
@@ -353,18 +278,12 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
         }
     }
 
-    @Nonnull
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, MOISTURE);
-    }
-
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(), "soiltype=" + type.toString());
             }
 

@@ -53,6 +53,7 @@ public class ItemCropSeeds extends Item implements IPlantable, ICropItem {
     }
 
     @Nonnull
+    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack itemstack = player.getHeldItem(hand);
         IBlockState state = worldIn.getBlockState(pos);
@@ -69,6 +70,7 @@ public class ItemCropSeeds extends Item implements IPlantable, ICropItem {
             itemstack.shrink(1);
             return EnumActionResult.SUCCESS;
         } else {
+
             return EnumActionResult.FAIL;
         }
     }
@@ -88,6 +90,7 @@ public class ItemCropSeeds extends Item implements IPlantable, ICropItem {
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         type.addInfo(stack, worldIn, tooltip, flagIn);

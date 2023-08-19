@@ -138,10 +138,6 @@ public final class ConfigTFC {
             @Config.LangKey("config." + MOD_ID + ".general.overrides.forceTFCWorldType")
             public boolean forceTFCWorldType = true;
 
-            @Config.Comment("If true, TFC will override default ore gen file. Pack Makers: Disable this to keep your ore gen file from being reset to default.")
-            @Config.LangKey("config." + MOD_ID + ".general.overrides.forceDefaultOreGenFile")
-            public boolean forceDefaultOreGenFile = true;
-
             @Config.Comment("Enable/Disable the vanilla recipe removal spam. False = Those recipes are left in place.")
             @Config.LangKey("config." + MOD_ID + ".general.overrides.removeVanillaRecipes")
             public boolean removeVanillaRecipes = true;
@@ -165,10 +161,6 @@ public final class ConfigTFC {
             @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never fall.")
             @Config.LangKey("config." + MOD_ID + ".general.fallable.enable")
             public boolean enable = true;
-
-            @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never destroy ore blocks.")
-            @Config.LangKey("config." + MOD_ID + ".general.fallable.destroyOres")
-            public boolean destroyOres = true;
 
             @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never destroy loose items.")
             @Config.LangKey("config." + MOD_ID + ".general.fallable.destroyItems")
@@ -238,18 +230,9 @@ public final class ConfigTFC {
         }
 
         public static final class TreeCFG {
-            @Config.Comment({"Enable trees being fully cut by axes.",
-                    "Disable it if you want other mods to handle tree felling."})
-            @Config.LangKey("config." + MOD_ID + ".general.tree.enableFelling")
-            public boolean enableFelling = true;
-
             @Config.Comment("Enable smacking logs with a hammer giving sticks.")
             @Config.LangKey("config." + MOD_ID + ".general.tree.enableHammerSticks")
             public boolean enableHammerSticks = true;
-
-            @Config.Comment("Should logs require tools (axes and saws, or hammers for sticks) to be cut? If false, breaking logs with an empty hand will not drop logs.")
-            @Config.LangKey("config." + MOD_ID + ".general.tree.requiresAxe")
-            public boolean requiresAxe = true;
 
             @Config.Comment("If false, leaves will not drop saplings.")
             @Config.LangKey("config." + MOD_ID + ".general.tree.enableSaplings")
@@ -531,10 +514,6 @@ public final class ConfigTFC {
 
         public static final class MiscCFG {
 
-            @Config.Comment("If true, the player will spawn with the TFC guidebook")
-            @Config.LangKey("config." + MOD_ID + ".general.misc.guidebook")
-            public boolean giveBook = true;
-
             @Config.Comment("The default length of a month (in days) when a new world is started. This can be changed in existing worlds via the /timetfc command.")
             @Config.LangKey("config." + MOD_ID + ".general.misc.defaultMonthLength")
             @Config.RangeInt(min = 1)
@@ -576,45 +555,9 @@ public final class ConfigTFC {
             @Config.LangKey("config." + MOD_ID + ".general.misc.fireStarterChance")
             public double fireStarterChance = 0.5;
 
-            @Config.Comment("The amount of metal contained in a small ore / nugget.")
-            @Config.LangKey("config." + MOD_ID + ".general.misc.smallOreMetalAmount")
-            @Config.RangeInt(min = 1, max = 10_000)
-            public int smallOreMetalAmount = 10;
-
-            @Config.Comment("The amount of metal contained in a poor ore.")
-            @Config.LangKey("config." + MOD_ID + ".general.misc.poorOreMetalAmount")
-            @Config.RangeInt(min = 1, max = 10_000)
-            public int poorOreMetalAmount = 15;
-
-            @Config.Comment("The amount of metal contained in a normal ore.")
-            @Config.LangKey("config." + MOD_ID + ".general.misc.normalOreMetalAmount")
-            @Config.RangeInt(min = 1, max = 10_000)
-            public int normalOreMetalAmount = 25;
-
-            @Config.Comment("The amount of metal contained in a rich ore.")
-            @Config.LangKey("config." + MOD_ID + ".general.misc.richOreMetalAmount")
-            @Config.RangeInt(min = 1, max = 10_000)
-            public int richOreMetalAmount = 35;
-
-            @Config.Comment("Add iron ore dictionary (ie: ingotIron, oreIron) to wrought iron items?")
-            @Config.LangKey("config." + MOD_ID + ".general.misc.dictionaryIron")
-            public boolean dictionaryIron = false;
-
-            @Config.Comment("Add plate ore dictionary (plateIron, plateBronze) to sheets?")
-            @Config.LangKey("config." + MOD_ID + ".general.misc.dictionaryPlates")
-            public boolean dictionaryPlates = false;
-
             @Config.Comment("List of fluids allowed to be picked up by wooden bucket")
             @Config.LangKey("config." + MOD_ID + ".general.misc.woodenBucketWhitelist")
             public String[] woodenBucketWhitelist = new String[]{"fresh_water", "hot_water", "salt_water", "water", "limewater", "tannin", "olive_oil", "olive_oil_water", "vinegar", "rum", "beer", "whiskey", "rye_whiskey", "corn_whiskey", "sake", "vodka", "cider", "brine", "milk", "milk_curdled", "milk_vinegar", "white_dye", "orange_dye", "magenta_dye", "light_blue_dye", "yellow_dye", "lime_dye", "pink_dye", "gray_dye", "light_gray_dye", "cyan_dye", "purple_dye", "blue_dye", "brown_dye", "green_dye", "red_dye", "black_dye"};
-
-            @Config.Comment("List of fluids allowed to be picked up by blue steel bucket")
-            @Config.LangKey("config." + MOD_ID + ".general.misc.blueSteelBucketWhitelist")
-            public String[] blueSteelBucketWhitelist = new String[]{"lava"};
-
-            @Config.Comment("List of fluids allowed to be picked up by red steel bucket")
-            @Config.LangKey("config." + MOD_ID + ".general.misc.redSteelBucketWhitelist")
-            public String[] redSteelBucketWhitelist = new String[]{"fresh_water", "hot_water", "salt_water", "water"};
 
             @Config.Comment("Entities that can be plucked for feathers.")
             @Config.LangKey("config." + MOD_ID + ".general.misc.pluckableEntities")
@@ -692,10 +635,6 @@ public final class ConfigTFC {
         @Config.Comment("Jug")
         @Config.LangKey("config." + MOD_ID + ".devices.jug")
         public static final JugCFG JUG = new JugCFG();
-
-        @Config.Comment("GoldPan")
-        @Config.LangKey("config." + MOD_ID + ".devices.goldpan")
-        public static final GoldPanCFG GOLD_PAN = new GoldPanCFG();
 
         @Config.Comment("Bellows")
         @Config.LangKey("config." + MOD_ID + ".devices.bellows")
@@ -841,12 +780,6 @@ public final class ConfigTFC {
             public boolean dumpWaterOnShiftRightClick = true;
         }
 
-        public static final class GoldPanCFG {
-            @Config.Comment("Cooldown ticks after panning.")
-            @Config.LangKey("config." + MOD_ID + ".devices.gold_pan.cooldownTicks")
-            public int cooldownTicks = 20;
-        }
-
         public static final class BellowsCFG {
             @Config.Comment("The max number of air ticks, devices get a temperature bonus up to this amount. (1000 = 1 in game hour = 50 seconds), default is 600 ticks.")
             @Config.RangeInt(min = 0)
@@ -881,17 +814,10 @@ public final class ConfigTFC {
         public static final RenderCFG RENDER = new RenderCFG();
 
         public static final class TooltipCFG {
-            @Config.Comment({"Show ItemStack tool classes when advanced tooltips are enabled. (F3+H)"})
-            @Config.LangKey("config." + MOD_ID + ".client.tooltip.showToolClassTooltip")
-            public boolean showToolClassTooltip = true;
 
             @Config.Comment({"Show ItemStack OreDictionary matches when advanced tooltips are enabled. (F3+H)"})
             @Config.LangKey("config." + MOD_ID + ".client.tooltip.showOreDictionaryTooltip")
             public boolean showOreDictionaryTooltip = true;
-
-            @Config.Comment({"Show ItemStack NBT on the tooltip when advanced tooltips are enabled. (F3+H)"})
-            @Config.LangKey("config." + MOD_ID + ".client.tooltip.showNBTTooltip")
-            public boolean showNBTTooltip = true;
 
             @Config.Comment("Should the prospectors pick output to the actionbar? (the space just above the hotbar)")
             @Config.LangKey("config." + MOD_ID + ".client.tooltip.propickOutputToActionBar")

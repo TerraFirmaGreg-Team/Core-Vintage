@@ -33,11 +33,6 @@ import java.util.Random;
 
 public abstract class BlockSoil extends Block implements ISoilBlock {
 
-    // Used for connected textures only.
-    public static final PropertyBool NORTH = PropertyBool.create("north");
-    public static final PropertyBool EAST = PropertyBool.create("east");
-    public static final PropertyBool SOUTH = PropertyBool.create("south");
-    public static final PropertyBool WEST = PropertyBool.create("west");
     private final SoilBlockVariant variant;
     private final SoilType type;
 
@@ -83,22 +78,6 @@ public abstract class BlockSoil extends Block implements ISoilBlock {
         return 0;
     }
 
-    @Nonnull
-    @SuppressWarnings("deprecation")
-    @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess world, @Nonnull BlockPos pos) {
-        pos = pos.add(0, -1, 0);
-        return state.withProperty(NORTH, BlocksTFC_old.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-                .withProperty(EAST, BlocksTFC_old.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-                .withProperty(SOUTH, BlocksTFC_old.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-                .withProperty(WEST, BlocksTFC_old.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
-    }
-
-    @Nonnull
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
-    }
 
     @SideOnly(Side.CLIENT)
     @Override

@@ -37,7 +37,7 @@ public class BlockThatch extends Block {
         setHardness(0.6F);
         setLightOpacity(255); //Blocks light
 
-        setCreativeTab(CreativeTabsTFC.DECORATIONS);
+        setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(MOD_ID, "thatch");
         setTranslationKey(MOD_ID + ".thatch");
 

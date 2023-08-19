@@ -124,7 +124,7 @@ public class ItemBlockBarrel extends ItemBlockTFC {
             }
 
             String formattedDate = ICalendarFormatted.getTimeAndDate(stack.getTagCompound().getLong("sealedCalendarTick"), CalendarTFC.CALENDAR_TIME.getDaysInMonth());
-            tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("waila.tfc.barrel.sealed", formattedDate).getFormattedText());
+            tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("top.tfc.barrel.sealed", formattedDate).getFormattedText());
         }
     }
 

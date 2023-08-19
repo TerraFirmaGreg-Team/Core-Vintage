@@ -27,7 +27,7 @@ public class AnimalProvider implements IProbeInfoEntityProvider {
         if (entity instanceof IAnimalTFC animal) {
             boolean familiarized = animal.getFamiliarity() > 0.15f;
             if (animal.getAdultFamiliarityCap() > 0) {
-                probeInfo.text(new TextComponentTranslation(familiarized ? "waila.tfc.animal.familiarized" : "waila.tfc.animal.not_familiarized").getFormattedText());
+                probeInfo.text(new TextComponentTranslation(familiarized ? "top.tfc.animal.familiarized" : "top.tfc.animal.not_familiarized").getFormattedText());
             }
             switch (animal.getAge()) {
                 case CHILD:
@@ -35,24 +35,24 @@ public class AnimalProvider implements IProbeInfoEntityProvider {
                     long delta = endPlayerTick - CalendarTFC.PLAYER_TIME.getTicks();
                     long endCalendarTick = CalendarTFC.CALENDAR_TIME.getTicks() + delta;
                     String date = ICalendarFormatted.getTimeAndDate(endCalendarTick, CalendarTFC.CALENDAR_TIME.getDaysInMonth());
-                    probeInfo.text(new TextComponentTranslation("waila.tfc.animal.childhood_end", date).getFormattedText());
+                    probeInfo.text(new TextComponentTranslation("top.tfc.animal.childhood_end", date).getFormattedText());
                     break;
                 case OLD:
-                    probeInfo.text(new TextComponentTranslation("waila.tfc.animal.old").getFormattedText());
+                    probeInfo.text(new TextComponentTranslation("top.tfc.animal.old").getFormattedText());
                     // fall through here, can become old yet still be pregnant and give birth and/or give wool. All data retrieval below check correctly for age.
                 case ADULT:
                     if (familiarized) {
                         if (animal.isReadyToMate()) {
-                            probeInfo.text(new TextComponentTranslation("waila.tfc.animal.can_mate").getFormattedText());
+                            probeInfo.text(new TextComponentTranslation("top.tfc.animal.can_mate").getFormattedText());
                         }
                         if (animal.isFertilized()) {
                             if (animal.getType() == IAnimalTFC.Type.MAMMAL) {
-                                probeInfo.text(new TextComponentTranslation("waila.tfc.animal.pregnant").getFormattedText());
+                                probeInfo.text(new TextComponentTranslation("top.tfc.animal.pregnant").getFormattedText());
                                 // In 1.15+ this will move to AnimalProperties and everything needed will be there
                                 // For 1.12, addons will need to either extend EntityAnimalMammal or handle the tooltip themselves
                                 if (animal instanceof EntityAnimalMammal mother) {
                                     long gestationDaysRemaining = mother.getPregnantTime() + mother.gestationDays() - CalendarTFC.PLAYER_TIME.getTotalDays();
-                                    probeInfo.text(new TextComponentTranslation("waila.tfc.animal.pregnant_end", gestationDaysRemaining).getFormattedText());
+                                    probeInfo.text(new TextComponentTranslation("top.tfc.animal.pregnant_end", gestationDaysRemaining).getFormattedText());
                                 }
                             } else {
                                 probeInfo.text(new TextComponentTranslation("tfc.tooltip.fertilized").getFormattedText());
@@ -60,11 +60,11 @@ public class AnimalProvider implements IProbeInfoEntityProvider {
                         }
                         if (animal.isReadyForAnimalProduct()) {
                             if (animal instanceof IShearable) {
-                                probeInfo.text(new TextComponentTranslation("waila.tfc.animal.can_shear").getFormattedText());
+                                probeInfo.text(new TextComponentTranslation("top.tfc.animal.can_shear").getFormattedText());
                             } else if (animal.getType() == IAnimalTFC.Type.OVIPAROUS) {
-                                probeInfo.text(new TextComponentTranslation("waila.tfc.animal.has_eggs").getFormattedText());
+                                probeInfo.text(new TextComponentTranslation("top.tfc.animal.has_eggs").getFormattedText());
                             } else {
-                                probeInfo.text(new TextComponentTranslation("waila.tfc.animal.has_milk").getFormattedText());
+                                probeInfo.text(new TextComponentTranslation("top.tfc.animal.has_milk").getFormattedText());
                             }
                         }
                     }

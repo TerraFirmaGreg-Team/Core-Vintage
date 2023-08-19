@@ -22,7 +22,7 @@ import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.common.objects.blocks.BlockAlabaster;
+import net.dries007.tfc.common.objects.blocks.rock.BlockAlabaster;
 import net.dries007.tfc.common.objects.blocks.BlockGroundcover;
 import net.dries007.tfc.common.objects.items.ItemCropSeeds;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;

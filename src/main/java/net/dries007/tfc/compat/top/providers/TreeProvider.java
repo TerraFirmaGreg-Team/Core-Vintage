@@ -33,7 +33,7 @@ public class TreeProvider implements IProbeInfoProvider {
                 long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
                 float perc = Math.min(0.99F, days / 8) * 100; //todo wood.getMinGrowthTime()
                 var growth = String.format("%d%%", Math.round(perc));
-                iProbeInfo.text(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
+                iProbeInfo.text(new TextComponentTranslation("top.tfc.crop.growth", growth).getFormattedText());
             }
         }
     }

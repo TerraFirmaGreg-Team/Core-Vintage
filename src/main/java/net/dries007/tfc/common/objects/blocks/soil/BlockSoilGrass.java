@@ -15,7 +15,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.crop.BlockCrop;
+import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
 import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.common.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeat;
@@ -50,7 +50,7 @@ import java.util.Random;
 
 import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.*;
-import static net.dries007.tfc.common.objects.blocks.crop.BlockCrop.WILD;
+import static net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing.WILD;
 
 public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
@@ -355,9 +355,10 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                             variant == DRY_GRASS || BlocksTFC.isSand(state)) && flag;
                 }
             }
-        } else if (plantable instanceof BlockCrop) {
+        }
+        else if (plantable instanceof BlockCropGrowing) {
             IBlockState cropState = world.getBlockState(pos.up());
-            if (cropState.getBlock() instanceof BlockCrop) {
+            if (cropState.getBlock() instanceof BlockCropGrowing) {
                 boolean isWild = cropState.getValue(WILD);
                 if (isWild) {
                     if (variant == DIRT || variant == GRASS ||

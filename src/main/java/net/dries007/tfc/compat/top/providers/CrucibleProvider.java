@@ -26,7 +26,7 @@ public class CrucibleProvider implements IProbeInfoProvider {
         if (crucible != null) {
             if (crucible.getAlloy().getAmount() > 0) {
                 var material = crucible.getAlloyResult();
-                iProbeInfo.text(new TextComponentTranslation("waila.tfc.metal.output", crucible.getAlloy().getAmount(), material.getLocalizedName()).getFormattedText());
+                iProbeInfo.text(new TextComponentTranslation("top.tfc.metal.output", crucible.getAlloy().getAmount(), material.getLocalizedName()).getFormattedText());
             }
             float temperature = crucible.getTemperature();
             String heatTooltip = Heat.getTooltip(temperature);

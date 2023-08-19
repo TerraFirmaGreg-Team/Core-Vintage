@@ -31,16 +31,16 @@ public class BarrelProvider implements IProbeInfoProvider {
             FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
 
             if (te.isSealed()) {
-                probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.sealed", te.getSealedDate()).getFormattedText());
+                probeInfo.text(new TextComponentTranslation("top.tfc.barrel.sealed", te.getSealedDate()).getFormattedText());
                 BarrelRecipe recipe = te.getRecipe();
                 if (recipe != null) {
-                    probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.recipe", recipe.getResultName()).getFormattedText());
+                    probeInfo.text(new TextComponentTranslation("top.tfc.barrel.recipe", recipe.getResultName()).getFormattedText());
                 } else {
-                    probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.no_recipe").getFormattedText());
+                    probeInfo.text(new TextComponentTranslation("top.tfc.barrel.no_recipe").getFormattedText());
                 }
             }
             if (fluid != null && fluid.amount > 0) {
-                probeInfo.text(new TextComponentTranslation("waila.tfc.barrel.contents", fluid.amount, fluid.getLocalizedName()).getFormattedText());
+                probeInfo.text(new TextComponentTranslation("top.tfc.barrel.contents", fluid.amount, fluid.getLocalizedName()).getFormattedText());
             }
         }
     }

@@ -3,13 +3,11 @@ package net.dries007.tfc.common.objects.items;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.crop.ICropItem;
 import net.dries007.tfc.api.types.crop.type.CropType;
-import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.blocks.crop.BlockCrop;
+import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -21,7 +19,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -29,10 +26,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.GROWING;
 
 public class ItemCropSeeds extends Item implements IPlantable, ICropItem {
@@ -83,7 +78,7 @@ public class ItemCropSeeds extends Item implements IPlantable, ICropItem {
     @Override
     public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockCrop && ((BlockCrop) state.getBlock()).getType() == this.type) {
+        if (state.getBlock() instanceof BlockCropGrowing && ((BlockCropGrowing) state.getBlock()).getType() == this.type) {
             return state;
         }
         return TFCStorage.getCropBlock(GROWING, type).getDefaultState();

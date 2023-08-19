@@ -2790,52 +2790,52 @@ jei.description.tfc.hide_scraping=Place a log horizontally on the ground. Right 
 
 # Main tooltips
 
-waila.tfc.ore_drop=Contains %s
-waila.tfc.flux_stone=Flux
-waila.tfc.temperature=Air Temperature: %dºC
-waila.tfc.rainfall=Rainfall: %d
-waila.tfc.metal.output=Contains %d units of %s
-waila.tfc.quern.handstone_durability=Handstone Durability: %d / %d
+top.tfc.ore_drop=Contains %s
+top.tfc.flux_stone=Flux
+top.tfc.temperature=Air Temperature: %dºC
+top.tfc.rainfall=Rainfall: %d
+top.tfc.metal.output=Contains %d units of %s
+top.tfc.quern.handstone_durability=Handstone Durability: %d / %d
 
 # Devices
 
-waila.tfc.devices.minutes_remaining=%d Minutes Remaining
-waila.tfc.devices.hours_remaining=%d Hours Remaining
-waila.tfc.devices.ticks_remaining=%d Ticks Remaining
-waila.tfc.pitkiln.unlit=Unlit
-waila.tfc.pitkiln.straw=Needs %d Straw
-waila.tfc.pitkiln.logs=Needs %d Logs
-waila.tfc.barrel.recipe=Making: %s
-waila.tfc.barrel.no_recipe=No Recipe
-waila.tfc.barrel.contents=Contains %dmB of %s
-waila.tfc.barrel.sealed=Sealed: %s
-waila.tfc.bloomery.output=Making: %d units of %s
-waila.tfc.bloomery.ores=Ores: %d/%d
-waila.tfc.bloomery.fuel=Fuel: %d/%d
-waila.tfc.blast_furnace.not_formed=Not Formed
+top.tfc.devices.minutes_remaining=%d Minutes Remaining
+top.tfc.devices.hours_remaining=%d Hours Remaining
+top.tfc.devices.ticks_remaining=%d Ticks Remaining
+top.tfc.pitkiln.unlit=Unlit
+top.tfc.pitkiln.straw=Needs %d Straw
+top.tfc.pitkiln.logs=Needs %d Logs
+top.tfc.barrel.recipe=Making: %s
+top.tfc.barrel.no_recipe=No Recipe
+top.tfc.barrel.contents=Contains %dmB of %s
+top.tfc.barrel.sealed=Sealed: %s
+top.tfc.bloomery.output=Making: %d units of %s
+top.tfc.bloomery.ores=Ores: %d/%d
+top.tfc.bloomery.fuel=Fuel: %d/%d
+top.tfc.blast_furnace.not_formed=Not Formed
 
 # Agriculture
 
-waila.tfc.agriculture.harvesting_months=Harvesting Seasons:
-waila.tfc.crop.mature=Mature
-waila.tfc.crop.dead_crop=Dead Crop
-waila.tfc.crop.wild=Wild Crop
-waila.tfc.crop.growth=Growth: %s
-waila.tfc.crop.growing=Growing
-waila.tfc.crop.not_growing=Not Growing
+top.tfc.agriculture.harvesting_months=Harvesting Seasons:
+top.tfc.crop.mature=Mature
+top.tfc.crop.dead_crop=Dead Crop
+top.tfc.crop.wild=Wild Crop
+top.tfc.crop.growth=Growth: %s
+top.tfc.crop.growing=Growing
+top.tfc.crop.not_growing=Not Growing
 
 # Animal stuff
 
-waila.tfc.animal.has_milk=Can Milk
-waila.tfc.animal.can_mate=Can Mate
-waila.tfc.animal.has_eggs=Has Eggs
-waila.tfc.animal.childhood_end=Becomes adult in %s
-waila.tfc.animal.familiarized=Familiarized
-waila.tfc.animal.not_familiarized=Not familiarized
-waila.tfc.animal.old=Animal is old
-waila.tfc.animal.pregnant=Pregnant
-waila.tfc.animal.can_shear=Shearable
-waila.tfc.animal.pregnant_end=Will give birth in %s days
+top.tfc.animal.has_milk=Can Milk
+top.tfc.animal.can_mate=Can Mate
+top.tfc.animal.has_eggs=Has Eggs
+top.tfc.animal.childhood_end=Becomes adult in %s
+top.tfc.animal.familiarized=Familiarized
+top.tfc.animal.not_familiarized=Not familiarized
+top.tfc.animal.old=Animal is old
+top.tfc.animal.pregnant=Pregnant
+top.tfc.animal.can_shear=Shearable
+top.tfc.animal.pregnant_end=Will give birth in %s days
 
 ######################################
 ### Commands #########################

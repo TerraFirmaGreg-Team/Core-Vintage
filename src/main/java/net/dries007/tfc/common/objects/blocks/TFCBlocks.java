@@ -17,6 +17,7 @@ import net.dries007.tfc.common.objects.blocks.devices.*;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidHotWater;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidWater;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalCladding;
+import net.dries007.tfc.common.objects.blocks.rock.BlockAlabaster;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeat;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeatGrass;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockCrucible;
@@ -24,13 +25,10 @@ import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockPowderKeg;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fluids.FluidRegistry;
-
-import java.util.Collection;
 
 import static net.dries007.tfc.api.registries.TFCStorage.*;
 import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
@@ -44,7 +42,6 @@ public class TFCBlocks {
     public static BlockThatch THATCH;
     public static BlockQuern QUERN;
     public static BlockCrucible CRUCIBLE;
-    public static BlockFireBrick FIRE_BRICKS;
     public static BlockBlastFurnace BLAST_FURNACE;
     public static BlockBellows BELLOWS;
     public static BlockBloomery BLOOMERY;
@@ -178,7 +175,6 @@ public class TFCBlocks {
         ITEM_BLOCKS.add(new ItemBlockTFC(THATCH = new BlockThatch()));
         ITEM_BLOCKS.add(new ItemBlockTFC(QUERN = new BlockQuern()));
         ITEM_BLOCKS.add(new ItemBlockCrucible(CRUCIBLE = new BlockCrucible()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(FIRE_BRICKS = new BlockFireBrick()));
         ITEM_BLOCKS.add(new ItemBlockTFC(BLAST_FURNACE = new BlockBlastFurnace()));
         ITEM_BLOCKS.add(new ItemBlockTFC(BELLOWS = new BlockBellows()));
         ITEM_BLOCKS.add(new ItemBlockTFC(BLOOMERY = new BlockBloomery()));

@@ -3,7 +3,7 @@ package net.dries007.tfc.world.classic.worldgen;
 import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC;
-import net.dries007.tfc.common.objects.blocks.crop.BlockCrop;
+import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -54,7 +54,7 @@ public class WorldGenWildCrops implements IWorldGenerator {
 
                 var type = types.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
                 if (type != null) {
-                    BlockCrop cropBlock = (BlockCrop) TFCStorage.getCropBlock(GROWING, type);
+                    BlockCropGrowing cropBlock = (BlockCropGrowing) TFCStorage.getCropBlock(GROWING, type);
                     int cropsInChunk = 3 + random.nextInt(5);
                     for (int i = 0; i < cropsInChunk; i++) {
                         final int x = (chunkX << 4) + random.nextInt(16) + 8;
@@ -66,7 +66,7 @@ public class WorldGenWildCrops implements IWorldGenerator {
                             int growth = (int) (yearProgress * maxStage) + 3 - random.nextInt(2);
                             if (growth > maxStage)
                                 growth = maxStage;
-                            world.setBlockState(pos, cropBlock.getDefaultState().withProperty(cropBlock.getAgeProperty(), growth).withProperty(BlockCrop.WILD, true), 2);
+                            world.setBlockState(pos, cropBlock.getDefaultState().withProperty(cropBlock.getAgeProperty(), growth).withProperty(BlockCropGrowing.WILD, true), 2);
 
                         }
                     }

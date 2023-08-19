@@ -48,7 +48,7 @@ import java.util.*;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.type.PlantTypes.PORCINI;
-import static net.dries007.tfc.common.objects.blocks.crop.BlockCrop.WILD;
+import static net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing.WILD;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.

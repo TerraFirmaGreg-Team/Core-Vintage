@@ -25,16 +25,16 @@ import net.minecraft.world.World;
 public class FruitTreeProvider implements IProbeInfoProvider {
     private static void addInfo(IFruitTree tree, TETickCounter te, float temperature, float rainfall, IProbeInfo probeInfo) {
         if (tree.isValidForGrowth(temperature, rainfall)) {
-            probeInfo.text(new TextComponentTranslation("waila.tfc.crop.growing").getFormattedText());
+            probeInfo.text(new TextComponentTranslation("top.tfc.crop.growing").getFormattedText());
             if (te != null) {
                 long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                 // Don't show 100% since it still needs to check on randomTick to grow
                 float perc = Math.min(0.99F, hours / (tree.getGrowthTime() * (float) ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) * 100;
                 String growth = String.format("%d%%", Math.round(perc));
-                probeInfo.text(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
+                probeInfo.text(new TextComponentTranslation("top.tfc.crop.growth", growth).getFormattedText());
             }
         } else {
-            probeInfo.text(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
+            probeInfo.text(new TextComponentTranslation("top.tfc.crop.not_growing").getFormattedText());
         }
     }
 
@@ -55,7 +55,7 @@ public class FruitTreeProvider implements IProbeInfoProvider {
                     addInfo(block.getTree(), te, ClimateTFC.getActualTemp(world, blockPos), ChunkDataTFC.getRainfall(world, blockPos), iProbeInfo);
                 }
             } else {
-                iProbeInfo.text(new TextComponentTranslation("waila.tfc.agriculture.harvesting_months").getFormattedText());
+                iProbeInfo.text(new TextComponentTranslation("top.tfc.agriculture.harvesting_months").getFormattedText());
                 for (Month month : Month.values()) {
                     if (block.getTree().isHarvestMonth(month)) {
                         iProbeInfo.text(TerraFirmaCraft.getProxy().getMonthName(month, true));

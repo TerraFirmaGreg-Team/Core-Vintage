@@ -31,13 +31,13 @@ public class BlastFurnaceProvider implements IProbeInfoProvider {
                 int fuelStacks = blastFurnace.getFuelStacks().size();
                 float temperature = blastFurnace.getTemperature();
                 String heatTooltip = Heat.getTooltip(temperature);
-                probeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.ores", oreStacks, maxItems).getFormattedText());
-                probeInfo.text(new TextComponentTranslation("waila.tfc.bloomery.fuel", fuelStacks, maxItems).getFormattedText());
+                probeInfo.text(new TextComponentTranslation("top.tfc.bloomery.ores", oreStacks, maxItems).getFormattedText());
+                probeInfo.text(new TextComponentTranslation("top.tfc.bloomery.fuel", fuelStacks, maxItems).getFormattedText());
                 if (heatTooltip != null) {
                     probeInfo.text(heatTooltip);
                 }
             } else {
-                probeInfo.text(new TextComponentTranslation("waila.tfc.blast_furnace.not_formed").getFormattedText());
+                probeInfo.text(new TextComponentTranslation("top.tfc.blast_furnace.not_formed").getFormattedText());
             }
         }
 

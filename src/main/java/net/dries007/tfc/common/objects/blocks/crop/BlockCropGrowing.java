@@ -9,12 +9,10 @@ import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
-import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TECropBase;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.BlockCrops;
@@ -23,10 +21,7 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -37,7 +32,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -48,14 +43,13 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.api.types.crop.category.CropCategories.PICKABLE;
 import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.DEAD;
 
 
-public class BlockCrop extends BlockCrops implements IGrowingPlant, ICropBlock {
+public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, ICropBlock {
 
     private static final int MATURE_AGE = 7;
     // Свойства стадии роста
@@ -84,7 +78,7 @@ public class BlockCrop extends BlockCrops implements IGrowingPlant, ICropBlock {
     private final CropBlockVariant variant;
     private final CropType type;
 
-    public BlockCrop(CropBlockVariant variant, CropType type) {
+    public BlockCropGrowing(CropBlockVariant variant, CropType type) {
         super();
 
         this.variant = variant;
@@ -163,7 +157,7 @@ public class BlockCrop extends BlockCrops implements IGrowingPlant, ICropBlock {
     @Override
     public void randomTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random random) {
         super.updateTick(worldIn, pos, state, random);
-        //checkGrowth(worldIn, pos, state, random);
+        checkGrowth(worldIn, pos, state, random);
     }
 
     /**
@@ -231,8 +225,7 @@ public class BlockCrop extends BlockCrops implements IGrowingPlant, ICropBlock {
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         if(!isMature(state)) {
             return getSeed();
-        }
-        else {
+        } else {
             return getCrop();
         }
     }
@@ -248,19 +241,16 @@ public class BlockCrop extends BlockCrops implements IGrowingPlant, ICropBlock {
      */
     @Override
     public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, IBlockState state, int fortune) {
-        EntityPlayer player = harvesters.get();
+        var player = harvesters.get();
         var seedStack = new ItemStack(this.getSeed());
         var foodStack = new ItemStack(this.getCrop());
 
-        final Random rand = world instanceof World ? ((World) world).rand : new Random();
-        final int age = getMetaFromState(state);
-
         // Если игрок и навыки присутствуют, обновляем навыки и увеличиваем количество предметов в зависимости от навыка
         if (player != null) {
-            SimpleSkill skill = CapabilityPlayerData.getSkill(player, SkillType.AGRICULTURE);
+            var skill = CapabilityPlayerData.getSkill(player, SkillType.AGRICULTURE);
 
             if (skill != null) {
-                if (!foodStack.isEmpty()) {
+                if (isMature(state)) {
                     foodStack.setCount(1 + CropType.getSkillFoodBonus(skill, RANDOM));
                     seedStack.setCount(1 + CropType.getSkillSeedBonus(skill, RANDOM));
                     skill.add(0.04f);
@@ -269,20 +259,11 @@ public class BlockCrop extends BlockCrops implements IGrowingPlant, ICropBlock {
         }
 
         // Добавляем предметы в список drops
-        if (!foodStack.isEmpty()) {
+        if (isMature(state)) {
             drops.add(foodStack);
         }
         if (!seedStack.isEmpty()) {
             drops.add(seedStack);
-        }
-
-        // Генерируем дополнительные предметы семян, если возраст растения больше или равен getMatureAge()
-        if (age >= getMatureAge()) {
-            for (int i = 0; i < 3 + fortune; ++i) {
-                if (rand.nextInt(2 * getMatureAge()) <= age) {
-                    drops.add(new ItemStack(getSeed(), 1, 0));
-                }
-            }
         }
     }
 
@@ -296,11 +277,11 @@ public class BlockCrop extends BlockCrops implements IGrowingPlant, ICropBlock {
      * @param player Игрок, который использовал правую кнопку мыши.
      * @return Предмет, который будет получен при использовании правой кнопки мыши на блоке.
      */
-//    @Override
-//    @Nonnull
-//    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-//        return new ItemStack(ItemCropSeeds.get(type));
-//    }
+    @Override
+    @Nonnull
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(this.getSeed());
+    }
 
     /**
      * Метод, который проверяет рост культуры.
@@ -340,7 +321,7 @@ public class BlockCrop extends BlockCrops implements IGrowingPlant, ICropBlock {
 
                         // Проверяем, является ли блок культурным растением,
                         // не является ли он диким и достиг ли он максимального возраста
-                        if (state.getBlock() instanceof BlockCrop &&
+                        if (state.getBlock() instanceof BlockCropGrowing &&
                                 !state.getValue(WILD) &&
                                 state.getValue(getAgeProperty()) == getMaxAge()) {
                             fullGrownStages++;

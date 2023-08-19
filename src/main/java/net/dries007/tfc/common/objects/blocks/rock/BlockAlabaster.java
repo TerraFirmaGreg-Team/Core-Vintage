@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.blocks;
+package net.dries007.tfc.common.objects.blocks.rock;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
@@ -45,7 +45,7 @@ public class BlockAlabaster extends Block implements IItemSize, IItemProvider, I
         this.dyeColor = dyeColor;
         this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/color/" + rockBlockVariant);
 
-        setCreativeTab(CreativeTabsTFC.DECORATIONS);
+        setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
         setHardness(1.0F);
 

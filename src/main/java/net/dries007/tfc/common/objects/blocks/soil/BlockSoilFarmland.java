@@ -190,7 +190,7 @@ public class BlockSoilFarmland extends Block implements ISoilBlock {
 
     @Override
     public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing direction, @Nonnull IPlantable plantable) {
-        var block = TFCStorage.getSoilBlock(SoilBlockVariants.GRASS, soilType);
+        var block = (BlockSoilGrass) TFCStorage.getSoilBlock(SoilBlockVariants.GRASS, soilType);
         return block.canSustainPlant(state, world, pos, direction, plantable);
     }
 

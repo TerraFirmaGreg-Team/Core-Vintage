@@ -442,7 +442,7 @@ public class PlantType {
         return Float.sum(minTemp, maxTemp) / 2f;
     }
 
-    public enum EnumPlantType implements IStringSerializable {
+    public enum EnumPlantType {
         CLAY,
         DESERT_CLAY,
         DRY_CLAY,
@@ -452,32 +452,14 @@ public class PlantType {
         FRESH_WATER,
         SALT_WATER,
         NONE;
-
-        /**
-         * Возвращает имя перечисления в нижнем регистре.
-         */
-        @Nonnull
-        @Override
-        public String getName() {
-            return name().toLowerCase();
-        }
     }
 
-    public enum PlantValidity implements IStringSerializable {
+    public enum PlantValidity {
         COLD,
         HOT,
         DRY,
         WET,
         VALID;
-
-        /**
-         * Возвращает имя перечисления в нижнем регистре.
-         */
-        @Nonnull
-        @Override
-        public String getName() {
-            return name().toLowerCase();
-        }
     }
 
     public static class Builder {

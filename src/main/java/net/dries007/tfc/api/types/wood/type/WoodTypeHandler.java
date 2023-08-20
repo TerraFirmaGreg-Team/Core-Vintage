@@ -163,9 +163,9 @@ public class WoodTypeHandler {
                 .Builder("kapok")
                 .setColor(0xAD879F).setTemp(15f, 35f).setRain(210f, 500f)
                 .setBurnInfo(645f, 1000)
-                .setGenerator(GEN_ACACIA)
                 .setDominance(8.5f).setRadius(3).setHeight(24).setDecayDist(6)
                 .setGrowthTime(18).setDensity(0.6f, 2f)
+                .setGenerator(GEN_ACACIA)
                 .setBushes()
                 .build();
     }

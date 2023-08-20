@@ -2817,10 +2817,8 @@ top.tfc.blast_furnace.not_formed=Not Formed
 # Agriculture
 
 top.tfc.agriculture.harvesting_months=Harvesting Seasons:
-top.tfc.crop.mature=Mature
 top.tfc.crop.dead_crop=Dead Crop
 top.tfc.crop.wild=Wild Crop
-top.tfc.crop.growth=Growth: %s
 top.tfc.crop.growing=Growing
 top.tfc.crop.not_growing=Not Growing
 

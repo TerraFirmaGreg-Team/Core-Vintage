@@ -173,7 +173,7 @@ public class WoodTypeHandler {
 
         BANANA = new WoodType
                 .Builder("banana")
-                .setColor(0xFFFFFF).setTemp(23f, 35f).setRain(280f, 400f)
+                .setColor(0xBB9C7D).setTemp(23f, 35f).setRain(280f, 400f)
                 .setBurnInfo(720f, 1750)
                 .setHeight(5).setDecayDist(2)
                 .setFruitTree(FoodTypes.BANANA, 0.33f)
@@ -183,7 +183,7 @@ public class WoodTypeHandler {
 
         CHERRY = new WoodType
                 .Builder("cherry")
-                .setColor(0xFFFFFF).setTemp(5f, 21f).setRain(100f, 350f)
+                .setColor(0xDC5E2C).setTemp(5f, 21f).setRain(100f, 350f)
                 .setBurnInfo(720f, 1750)
                 .setHeight(5).setDecayDist(2)
                 .setFruitTree(FoodTypes.CHERRY, 0.33f)
@@ -193,7 +193,7 @@ public class WoodTypeHandler {
 
         GREEN_APPLE = new WoodType
                 .Builder("green_apple")
-                .setColor(0xFFFFFF).setTemp(8f, 25f).setRain(110f, 280f)
+                .setColor(0xCFC498).setTemp(8f, 25f).setRain(110f, 280f)
                 .setBurnInfo(720f, 1750)
                 .setHeight(5).setDecayDist(2)
                 .setFruitTree(FoodTypes.GREEN_APPLE, 0.33f)
@@ -203,7 +203,7 @@ public class WoodTypeHandler {
 
         LEMON = new WoodType
                 .Builder("lemon")
-                .setColor(0xFFFFFF).setTemp(10f, 30f).setRain(180f, 400f)
+                .setColor(0xE8DD8C).setTemp(10f, 30f).setRain(180f, 400f)
                 .setBurnInfo(720f, 1750)
                 .setHeight(5).setDecayDist(2)
                 .setFruitTree(FoodTypes.LEMON, 0.33f)
@@ -213,7 +213,7 @@ public class WoodTypeHandler {
 
         OLIVE = new WoodType
                 .Builder("olive")
-                .setColor(0xFFFFFF).setTemp(13f, 30f).setRain(150f, 380f)
+                .setColor(0x97492B).setTemp(13f, 30f).setRain(150f, 380f)
                 .setBurnInfo(720f, 1750)
                 .setHeight(5).setDecayDist(2)
                 .setFruitTree(FoodTypes.OLIVE, 0.33f)
@@ -223,7 +223,7 @@ public class WoodTypeHandler {
 
         ORANGE = new WoodType
                 .Builder("orange")
-                .setColor(0xFFFFFF).setTemp(23f, 36f).setRain(250f, 400f)
+                .setColor(0xC18C52).setTemp(23f, 36f).setRain(250f, 400f)
                 .setBurnInfo(720f, 1750)
                 .setHeight(5).setDecayDist(2)
                 .setFruitTree(FoodTypes.ORANGE, 0.33f)
@@ -233,7 +233,7 @@ public class WoodTypeHandler {
 
         PEACH = new WoodType
                 .Builder("peach")
-                .setColor(0xFFFFFF).setTemp(9f, 27f).setRain(60f, 230f)
+                .setColor(0x9A5B37).setTemp(9f, 27f).setRain(60f, 230f)
                 .setBurnInfo(720f, 1750)
                 .setHeight(5).setDecayDist(2)
                 .setFruitTree(FoodTypes.PEACH, 0.33f)
@@ -243,7 +243,7 @@ public class WoodTypeHandler {
 
         PLUM = new WoodType
                 .Builder("plum")
-                .setColor(0xFFFFFF).setTemp(18f, 31f).setRain(250f, 400f)
+                .setColor(0x9F573B).setTemp(18f, 31f).setRain(250f, 400f)
                 .setBurnInfo(720f, 1750)
                 .setHeight(5).setDecayDist(2)
                 .setFruitTree(FoodTypes.PLUM, 0.33f)
@@ -253,7 +253,7 @@ public class WoodTypeHandler {
 
         RED_APPLE = new WoodType
                 .Builder("red_apple")
-                .setColor(0xFFFFFF).setTemp(9f, 25f).setRain(100f, 280f)
+                .setColor(0x6E150E).setTemp(9f, 25f).setRain(100f, 280f)
                 .setBurnInfo(720f, 1750)
                 .setHeight(5).setDecayDist(2)
                 .setFruitTree(FoodTypes.RED_APPLE, 0.33f)

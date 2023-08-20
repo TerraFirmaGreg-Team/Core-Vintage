@@ -63,7 +63,9 @@ public abstract class BlockWood extends Block implements IWoodBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), this.getPropertyString(state.getProperties()));
+                return new ModelResourceLocation(
+                        getResourceLocation(),
+                        this.getPropertyString(state.getProperties()));
             }
         });
 

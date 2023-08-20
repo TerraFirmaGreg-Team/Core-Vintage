@@ -1,10 +1,9 @@
-package net.dries007.tfc.api.types.wood;
+package net.dries007.tfc.api.types.trees;
 
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.TemplateManager;
@@ -52,19 +51,21 @@ public interface ITreeGenerator {
         // Проверяем, есть ли пространство прямо вверх
         final int height = woodType.getMaxHeight();
         for (int y = 1; y <= height; y++) {
-            IBlockState state = world.getBlockState(pos.up(y));
-            if (!state.getMaterial().isReplaceable() && state.getMaterial() != Material.LEAVES) {
+            var state = world.getBlockState(pos.up(y));
+            if (!state.getMaterial().isReplaceable() && state.getMaterial() != Material.LEAVES)
                 return false;
-            }
         }
 
         // Проверяем, есть ли твердый блок снизу
-        if (!BlocksTFC_old.isGrowableSoil(world.getBlockState(pos.down()))) {
+        if (!BlocksTFC_old.isGrowableSoil(world.getBlockState(pos.down())))
             return false;
-        }
+
+
+        // Проверьте, достаточен ли уровень освещенности
+        // world.getLightFromNeighbors(pos) >= 7;
 
         // Проверяем позицию на наличие жидкостей и т.д.
-        IBlockState stateAt = world.getBlockState(pos);
+        var stateAt = world.getBlockState(pos);
         return !stateAt.getMaterial().isLiquid() && (stateAt.getMaterial().isReplaceable() || stateAt.getBlock() instanceof BlockWoodSapling);
     }
 }

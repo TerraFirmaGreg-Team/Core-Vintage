@@ -1,8 +1,14 @@
-package net.dries007.tfc.common.objects.blocks.agriculture;
+package net.dries007.tfc.common.objects.blocks.wood.fruit;
 
-import net.dries007.tfc.api.types.fruit.IFruitTree;
+import net.dries007.tfc.api.registries.TFCStorage;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
@@ -19,6 +25,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -27,41 +34,70 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+import static net.dries007.tfc.api.types.wood.variant.WoodBlockVariants.*;
 
 @ParametersAreNonnullByDefault
-public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
+public class BlockFruitTreeTrunk extends Block implements IGrowingPlant, IWoodBlock {
     /* Connection sides (used if there's a branch on facing) */
     public static final PropertyBool NORTH = PropertyBool.create("north");
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool EAST = PropertyBool.create("east");
     public static final PropertyBool WEST = PropertyBool.create("west");
-    private static final Map<IFruitTree, BlockFruitTreeTrunk> MAP = new HashMap<>();
     private static final AxisAlignedBB TRUNK_AABB = new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 1.0D, 0.6875D);
     private static final AxisAlignedBB CONNECTION_N_AABB = new AxisAlignedBB(0.3125D, 0.375D, 0.0D, 0.0D, 0.625D, 0.3125D);
     private static final AxisAlignedBB CONNECTION_S_AABB = new AxisAlignedBB(0.3125D, 0.375D, 0.6875D, 0.0D, 0.625D, 1.0D);
     private static final AxisAlignedBB CONNECTION_W_AABB = new AxisAlignedBB(0.0D, 0.375D, 0.3125D, 0.3125D, 0.625D, 0.6875D);
     private static final AxisAlignedBB CONNECTION_E_AABB = new AxisAlignedBB(0.6875D, 0.375D, 0.3125D, 1.0D, 0.625D, 0.6875D);
-    private final IFruitTree tree;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockFruitTreeTrunk(IFruitTree tree) {
+    public BlockFruitTreeTrunk(WoodBlockVariant variant, WoodType type) {
         super(Material.WOOD, Material.WOOD.getMaterialMapColor());
-        if (MAP.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
+
+        this.variant = variant;
+        this.type = type;
+
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
+        setCreativeTab(CreativeTabsTFC.WOOD);
+
         setHardness(2.0F);
         setTickRandomly(true);
         setHarvestLevel("axe", 0);
         setSoundType(SoundType.WOOD);
+        setDefaultState(blockState.getBaseState()
+                .withProperty(NORTH, false)
+                .withProperty(SOUTH, false)
+                .withProperty(EAST, false)
+                .withProperty(WEST, false));
+
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        this.tree = tree;
-        setDefaultState(blockState.getBaseState().withProperty(NORTH, false).withProperty(SOUTH, false).withProperty(EAST, false).withProperty(WEST, false));
     }
 
-    public static BlockFruitTreeTrunk get(IFruitTree tree) {
-        return MAP.get(tree);
+    @Override
+    public WoodBlockVariant getBlockVariant() {
+        return variant;
+    }
+
+    @Override
+    public WoodType getType() {
+        return type;
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     @Override
@@ -74,7 +110,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     @Nonnull
     public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         for (EnumFacing face : EnumFacing.HORIZONTALS) {
-            if (worldIn.getBlockState(pos.offset(face)).getBlock() == BlockFruitTreeBranch.get(tree)) {
+            if (worldIn.getBlockState(pos.offset(face)).getBlock() == TFCStorage.getWoodBlock(FRUIT_BRANCH, type)) {
                 if (face == EnumFacing.NORTH) {
                     state = state.withProperty(NORTH, true);
                 } else if (face == EnumFacing.SOUTH) {
@@ -145,7 +181,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
             TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
             if (te != null) {
                 long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-                if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
+                if (hours > (type.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && type.isValidForGrowth(temp, rainfall)) {
                     te.resetCounter();
                     if (worldIn.getBlockState(pos.up()).getBlock() != this) //If the above block is a trunk, this one don't need to do anything
                     {
@@ -154,7 +190,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                             if (missingLeaf != null) {
                                 //Missing leaf, spawn that first
                                 if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-                                    worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree).getDefaultState().withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
+                                    worldIn.setBlockState(missingLeaf, TFCStorage.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+                                            .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
                                 }
                             } else {
                                 //Time to grow one trunk
@@ -164,16 +201,17 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                             }
                         } else {
                             //Starting with top
-                            if (worldIn.getBlockState(pos.up()).getBlock() != BlockFruitTreeBranch.get(tree)) {
+                            if (worldIn.getBlockState(pos.up()).getBlock() != TFCStorage.getWoodBlock(FRUIT_BRANCH, type)) {
                                 BlockPos missingLeaf = getMissingLeaf(worldIn, pos);
                                 if (missingLeaf != null) {
                                     //There is a missing leaf
                                     if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-                                        worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree).getDefaultState().withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                        worldIn.setBlockState(missingLeaf, TFCStorage.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+                                                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
                                     }
                                     return; //Done what we needed to do on this stage
                                 } else {
-                                    worldIn.setBlockState(pos.up(), BlockFruitTreeBranch.get(tree).getDefaultState());
+                                    worldIn.setBlockState(pos.up(), TFCStorage.getWoodBlock(FRUIT_BRANCH, type).getDefaultState());
                                     levelUpLeaves(worldIn, pos, true);
                                     return; //Done what we needed to do on this stage
                                 }
@@ -182,7 +220,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                                 if (missingLeaf != null) {
                                     //There is a missing leaf
                                     if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-                                        worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree).getDefaultState().withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                        worldIn.setBlockState(missingLeaf, TFCStorage.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+                                                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
                                     }
                                     return; //Done what we needed to do on this stage
                                 }
@@ -190,14 +229,16 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                                 missingLeaf = getMissingLeaf(worldIn, pos.up(), EnumFacing.NORTH);
                                 if (missingLeaf != null) {
                                     if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-                                        worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree).getDefaultState().withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                        worldIn.setBlockState(missingLeaf, TFCStorage.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+                                                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
                                     }
                                     return; //Done what we needed to do on this stage
                                 }
                                 missingLeaf = getMissingLeaf(worldIn, pos.up(), EnumFacing.SOUTH);
                                 if (missingLeaf != null) {
                                     if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-                                        worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree).getDefaultState().withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                        worldIn.setBlockState(missingLeaf, TFCStorage.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+                                                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
                                     }
                                     return; //Done what we needed to do on this stage
                                 }
@@ -206,16 +247,17 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
                             Collections.shuffle(shuffledList, new Random(pos.toLong()));
                             for (EnumFacing branchFacing : shuffledList) {
                                 BlockPos branchPos = pos.offset(branchFacing);
-                                if (worldIn.getBlockState(branchPos).getBlock() != BlockFruitTreeBranch.get(tree)) {
+                                if (worldIn.getBlockState(branchPos).getBlock() != TFCStorage.getWoodBlock(FRUIT_BRANCH, type)) {
                                     if (worldIn.getBlockState(branchPos).getMaterial().isReplaceable()) {
-                                        worldIn.setBlockState(branchPos, BlockFruitTreeBranch.get(tree).getDefaultState());
+                                        worldIn.setBlockState(branchPos, TFCStorage.getWoodBlock(FRUIT_BRANCH, type).getDefaultState());
                                     }
                                     return; //Done what we needed to do on this stage
                                 }
                                 BlockPos missingLeaf = getMissingLeaf(worldIn, branchPos, branchFacing);
                                 if (missingLeaf != null) {
                                     if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-                                        worldIn.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree).getDefaultState().withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
+                                        worldIn.setBlockState(missingLeaf, TFCStorage.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+                                                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
                                         return; //Done what we needed to do on this stage
                                     }
                                 }
@@ -250,7 +292,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
         if (!worldIn.isRemote) {
             //Destroy this tree upwards starting from this block
             //Not needed to destroy leaves, they will decay by itself
-            Block branch = BlockFruitTreeBranch.get(tree);
+            Block branch = TFCStorage.getWoodBlock(FRUIT_BRANCH, type);
             if (worldIn.getBlockState(pos.up()).getBlock() == this || worldIn.getBlockState(pos.up()).getBlock() == branch) {
                 worldIn.destroyBlock(pos.up(), true);
             }
@@ -289,19 +331,14 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(BlockFruitTreeSapling.get(tree));
-    }
-
-    @Nonnull
-    public IFruitTree getTree() {
-        return tree;
+        return new ItemStack(TFCStorage.getWoodBlock(FRUIT_SAPLING, type));
     }
 
     private BlockPos getMissingLeaf(World world, BlockPos branchPos, EnumFacing branchFacing) {
         //Helper method, gets a missing leaf block position that connects to this branch
 
         //the same facing has priority
-        if (world.getBlockState(branchPos.offset(branchFacing)).getBlock() != BlockFruitTreeLeaves.get(tree)) {
+        if (world.getBlockState(branchPos.offset(branchFacing)).getBlock() != TFCStorage.getWoodBlock(FRUIT_LEAVES, type)) {
             return branchPos.offset(branchFacing);
         }
 
@@ -313,7 +350,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
         );
         Collections.shuffle(positions);
         for (BlockPos pos : positions) {
-            if (world.getBlockState(pos).getBlock() != BlockFruitTreeLeaves.get(tree)) {
+            if (world.getBlockState(pos).getBlock() != TFCStorage.getWoodBlock(FRUIT_LEAVES, type)) {
                 return pos;
             }
         }
@@ -325,13 +362,13 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
         //Helper method, checks if all 5 leafs blocks(horizontals + above) has a missing block leaf
 
         //Above first
-        if (world.getBlockState(pos.offset(EnumFacing.UP)).getBlock() != BlockFruitTreeLeaves.get(tree)) {
+        if (world.getBlockState(pos.offset(EnumFacing.UP)).getBlock() != TFCStorage.getWoodBlock(FRUIT_LEAVES, type)) {
             return pos.offset(EnumFacing.UP);
         }
         List<EnumFacing> shuffledList = Arrays.asList(EnumFacing.HORIZONTALS.clone()); //if i don't clone, the original array shuffes!
         Collections.shuffle(shuffledList);
         for (EnumFacing facing : shuffledList) {
-            if (world.getBlockState(pos.offset(facing)).getBlock() != BlockFruitTreeLeaves.get(tree)) {
+            if (world.getBlockState(pos.offset(facing)).getBlock() != TFCStorage.getWoodBlock(FRUIT_LEAVES, type)) {
                 return pos.offset(facing);
             }
         }
@@ -341,7 +378,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     private void levelUpLeaves(World world, BlockPos oldCenter, boolean hasvestable) {
         //Remove the old ones
         for (EnumFacing facing : EnumFacing.HORIZONTALS) {
-            if (world.getBlockState(oldCenter.offset(facing)).getBlock() == BlockFruitTreeLeaves.get(tree)) {
+            if (world.getBlockState(oldCenter.offset(facing)).getBlock() == TFCStorage.getWoodBlock(FRUIT_LEAVES, type)) {
                 world.setBlockToAir(oldCenter.offset(facing));
             }
         }
@@ -351,7 +388,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
             //Respawn leafs in the new height
             missingLeaf = getMissingLeaf(world, oldCenter.up());
             if (missingLeaf != null && world.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-                world.setBlockState(missingLeaf, BlockFruitTreeLeaves.get(tree).getDefaultState().withProperty(BlockFruitTreeLeaves.HARVESTABLE, hasvestable));
+                world.setBlockState(missingLeaf, TFCStorage.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+                        .withProperty(BlockFruitTreeLeaves.HARVESTABLE, hasvestable));
             } else {
                 //Found a block(ceiling?) that prevents this tree to grow leafs, aborting
                 break;
@@ -370,10 +408,15 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         float temp = ClimateTFC.getActualTemp(world, pos);
         float rainfall = ChunkDataTFC.getRainfall(world, pos);
-        boolean canGrow = tree.isValidForGrowth(temp, rainfall);
+        boolean canGrow = type.isValidForGrowth(temp, rainfall);
         if (canGrow) {
             return GrowthStatus.GROWING;
         }
         return GrowthStatus.NOT_GROWING;
+    }
+
+    @Override
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getRegistryLocation()).build());
     }
 }

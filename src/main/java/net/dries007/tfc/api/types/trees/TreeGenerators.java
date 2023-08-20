@@ -1,7 +1,5 @@
 package net.dries007.tfc.api.types.trees;
 
-import net.dries007.tfc.api.types.wood.ITreeGenerator;
-
 public class TreeGenerators {
 
     public static ITreeGenerator GEN_NORMAL;
@@ -15,5 +13,6 @@ public class TreeGenerators {
     public static ITreeGenerator GEN_SEQUOIA;
     public static ITreeGenerator GEN_KAPOK_COMPOSITE;
     public static ITreeGenerator GEN_BUSHES;
+    public static ITreeGenerator GEN_FRUIT;
 
 }

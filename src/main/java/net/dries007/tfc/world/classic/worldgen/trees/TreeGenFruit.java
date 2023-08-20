@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.fruit.IFruitTree;
-import net.dries007.tfc.api.types.fruit.IFruitTreeGenerator;
+import net.dries007.tfc.api.types.trees.ITreeGenerator;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.world.classic.StructureHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -13,12 +13,14 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
-public class TreeGenFruit implements IFruitTreeGenerator {
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
+public class TreeGenFruit implements ITreeGenerator {
     private static final PlacementSettings SETTINGS = StructureHelper.getDefaultSettings();
 
     @Override
-    public void generateTree(TemplateManager manager, World world, BlockPos pos, IFruitTree tree, Random rand) {
-        ResourceLocation base = new ResourceLocation("tfc:fruit_trees/" + tree.getName());
+    public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
+        ResourceLocation base = new ResourceLocation(MOD_ID,"fruit_trees/" + woodType.toString());
         Template structureBase = manager.get(world.getMinecraftServer(), base);
 
         if (structureBase == null) {

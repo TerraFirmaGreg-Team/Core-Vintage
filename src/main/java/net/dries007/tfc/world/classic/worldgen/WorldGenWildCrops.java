@@ -29,7 +29,7 @@ import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.GROWING;
 @ParametersAreNonnullByDefault
 public class WorldGenWildCrops implements IWorldGenerator {
 
-    private List<CropType> types = new ArrayList<>(CropType.getCropTypes());
+    private static final List<CropType> CROP = new ArrayList<>(CropType.getCropTypes());
 
     /**
      * Генерирует дикорастущие культуры в мире.
@@ -43,16 +43,16 @@ public class WorldGenWildCrops implements IWorldGenerator {
      */
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0 && !types.isEmpty() && ConfigTFC.General.FOOD.cropRarity > 0) {
+        if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0 && !CROP.isEmpty() && ConfigTFC.General.FOOD.cropRarity > 0) {
             if (random.nextInt(ConfigTFC.General.FOOD.cropRarity) == 0) {
                 // Гарантирует генерацию культур, если это возможно (легче настроить через файл конфигурации, сохраняя при этом случайность)
                 BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-                Collections.shuffle(types);
+                Collections.shuffle(CROP);
                 float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
                 float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
 
-                var type = types.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
+                var type = CROP.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
                 if (type != null) {
                     BlockCropGrowing cropBlock = (BlockCropGrowing) TFCStorage.getCropBlock(GROWING, type);
                     int cropsInChunk = 3 + random.nextInt(5);

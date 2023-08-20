@@ -16,6 +16,7 @@ public class TreeGeneratorHandler {
         TreeGenerators.GEN_SEQUOIA = new TreeGenSequoia();
         TreeGenerators.GEN_KAPOK_COMPOSITE = new TreeGenComposite().add(0.4f, TreeGenerators.GEN_TALL).add(0.6f, TreeGenerators.GEN_KAPOK);
         TreeGenerators.GEN_BUSHES = new TreeGenBushes();
+        TreeGenerators.GEN_FRUIT = new TreeGenFruit();
     }
 
 }

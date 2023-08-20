@@ -1,7 +1,6 @@
 package net.dries007.tfc.api.types.crop;
 
 import net.dries007.tfc.api.types.crop.type.CropType;
-import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;

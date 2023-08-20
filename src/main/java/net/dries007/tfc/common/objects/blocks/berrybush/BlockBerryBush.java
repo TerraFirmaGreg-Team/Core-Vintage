@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.blocks.agriculture;
+package net.dries007.tfc.common.objects.blocks.berrybush;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.bush.IBerryBush;

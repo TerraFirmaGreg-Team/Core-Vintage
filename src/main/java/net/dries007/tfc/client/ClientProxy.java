@@ -31,7 +31,6 @@ import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.common.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;
 import net.dries007.tfc.common.objects.entity.EntityBoatTFC;
@@ -241,9 +240,6 @@ public class ClientProxy extends CommonProxy {
 
         // Blocks with Ignored Properties
 
-        for (Block block : BlocksTFC_old.getAllFruitTreeLeavesBlocks())
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE).ignore(BlockFruitTreeLeaves.HARVESTABLE).build());
-
         ModelLoader.setCustomStateMapper(TFCBlocks.THATCH_BED, new StateMap.Builder().ignore(BlockThatchBed.OCCUPIED).build());
 
         // Empty Models
@@ -309,7 +305,7 @@ public class ClientProxy extends CommonProxy {
         blockColors.registerBlockColorHandler(foliageColor,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES)
+                        .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES || x.getBlockVariant() == WoodBlockVariants.FRUIT_LEAVES)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
@@ -330,7 +326,6 @@ public class ClientProxy extends CommonProxy {
 //				blockColors.registerBlockColorHandler(foliageColor, BlocksTFC_old.getAllLeafBlocks().toArray(new Block[0]));
 //		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC_old.getAllPlantBlocks().toArray(new BlockPlantTFC[0]));
 //
-        blockColors.registerBlockColorHandler(foliageColor, BlocksTFC_old.getAllFruitTreeLeavesBlocks().toArray(new Block[0]));
 //
 //		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC_old.getAllFlowerPots().toArray(new Block[0]));
 
@@ -376,13 +371,9 @@ public class ClientProxy extends CommonProxy {
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES)
+                        .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES || x.getBlockVariant() == WoodBlockVariants.FRUIT_LEAVES)
                         .map(s -> (BlockWoodLeaves) s)
                         .toArray(Block[]::new));
-
-        itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
-                BlocksTFC_old.getAllFruitTreeLeavesBlocks()
-                        .toArray(new BlockFruitTreeLeaves[0]));
 
         itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
                 TFCStorage.LUMBER_ITEMS.values()

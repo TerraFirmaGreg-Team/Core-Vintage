@@ -1,19 +1,31 @@
 package net.dries007.tfc.api.types.wood.type;
 
-import net.dries007.tfc.api.types.wood.ITreeGenerator;
+import net.dries007.tfc.api.registries.TFCStorage;
+import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.trees.ITreeGenerator;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.calendar.Month;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import static net.dries007.tfc.api.types.trees.TreeGenerators.GEN_BUSHES;
-import static net.dries007.tfc.api.types.trees.TreeGenerators.GEN_NORMAL;
+import static net.dries007.tfc.api.types.trees.TreeGenerators.*;
 
 /**
  * Класс Wood представляет тип дерева с определенными характеристиками.
@@ -41,8 +53,15 @@ public class WoodType {
     private final float burnTemp;
     private final int burnTicks;
 
-    /* This is open to be replaced, i.e. for dynamic trees */
+    private final Month flowerMonthStart;
+    private final int floweringMonths;
+    private final Month harvestMonthStart;
+    private final int harvestingMonths;
+    private final FoodType fruit;
+    private final float growthTime;
+    /* Это открыто для замены, т.е. для динамических деревьев */
     private final ITreeGenerator generator;
+
 
     /**
      * Создает объект Wood с заданными характеристиками.
@@ -71,15 +90,19 @@ public class WoodType {
                     float minRain, float maxRain, float minDensity, float maxDensity,
                     float dominance, int maxGrowthRadius, int maxHeight, int maxDecayDistance,
                     boolean isConifer, @Nullable ITreeGenerator bushGenerator,
-                    boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks) {
+                    boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks,
+                    Month flowerMonthStart, int floweringMonths, Month harvestMonthStart, int harvestingMonths, FoodType fruit, float growthTime) {
         this.name = name;
         this.color = color;
+
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
         this.minRain = minRain;
         this.maxRain = maxRain;
+
         this.minDensity = minDensity;
         this.maxDensity = maxDensity;
+
         this.dominance = dominance;
         this.maxGrowthRadius = maxGrowthRadius;
         this.maxHeight = maxHeight;
@@ -91,6 +114,14 @@ public class WoodType {
         this.generator = generator;
         this.bushGenerator = bushGenerator;
         this.canMakeTannin = canMakeTannin;
+
+        this.flowerMonthStart = flowerMonthStart;
+        this.floweringMonths = floweringMonths;
+
+        this.harvestMonthStart = harvestMonthStart;
+        this.harvestingMonths = harvestingMonths;
+        this.growthTime = growthTime;
+        this.fruit = fruit;
 
         if (name.isEmpty()) {
             throw new RuntimeException(String.format("WoodType name must contain any character: [%s]", name));
@@ -130,24 +161,6 @@ public class WoodType {
     }
 
     /**
-     * Возвращает минимальную температуру, при которой дерево может расти.
-     *
-     * @return минимальная температура
-     */
-    public float getMinTemp() {
-        return minTemp;
-    }
-
-    /**
-     * Возвращает максимальную температуру, при которой дерево может расти.
-     *
-     * @return максимальная температура
-     */
-    public float getMaxTemp() {
-        return maxTemp;
-    }
-
-    /**
      * Возвращает минимальное количество осадков, необходимое для роста дерева.
      *
      * @return минимальное количество осадков
@@ -166,25 +179,7 @@ public class WoodType {
     }
 
     /**
-     * Возвращает минимальную плотность дерева.
-     *
-     * @return минимальная плотность
-     */
-    public float getMinDensity() {
-        return minDensity;
-    }
-
-    /**
-     * Возвращает максимальную плотность дерева.
-     *
-     * @return максимальная плотность
-     */
-    public float getMaxDensity() {
-        return maxDensity;
-    }
-
-    /**
-     * Возвращает насколько это дерево выбирается по сравнению с другими деревьями.
+     * Возвращает насколько это дерево доминирует по сравнению с другими деревьями.
      *
      * @return значение доминирования
      */
@@ -294,6 +289,14 @@ public class WoodType {
         return minTemp <= temp && maxTemp >= temp && minRain <= rain && maxRain >= rain && minDensity <= density && maxDensity >= density;
     }
 
+    public boolean isValidConditions(float temp, float rain) {
+        return minTemp - 5 < temp && temp < maxTemp + 5 && minRain - 50 < rain && rain < maxRain + 50;
+    }
+
+    public boolean isValidForGrowth(float temp, float rain) {
+        return minTemp < temp && temp < maxTemp && minRain < rain && rain < maxRain;
+    }
+
     /**
      * Проверяет, есть ли кусты в местоположении.
      *
@@ -321,15 +324,6 @@ public class WoodType {
         return false;
     }
 
-    /**
-     * Создает дерево в указанном мире на указанной позиции с использованием генератора случайных чисел и флага, указывающего, является ли это генерацией мира.
-     *
-     * @param world      мир, в котором будет создано дерево
-     * @param pos        позиция, где будет создано дерево
-     * @param rand       генератор случайных чисел
-     * @param isWorldGen флаг, указывающий, является ли это генерацией мира
-     * @return {@code true}, если дерево было успешно создано, иначе {@code false}
-     */
     public boolean makeTree(World world, BlockPos pos, Random rand, boolean isWorldGen) {
         if (!world.isRemote) {
             return makeTree(((WorldServer) world).getStructureTemplateManager(), world, pos, rand, isWorldGen);
@@ -337,14 +331,56 @@ public class WoodType {
         return false;
     }
 
+    public float getGrowthTime() {
+        return growthTime;
+    }
+
+    public boolean isFlowerMonth(Month month) {
+        Month testing = this.flowerMonthStart;
+        for (int i = 0; i < this.floweringMonths; i++) {
+            if (testing.equals(month)) return true;
+            testing = testing.next();
+        }
+        return false;
+    }
+
+    public boolean isHarvestMonth(Month month) {
+        Month testing = this.harvestMonthStart;
+        for (int i = 0; i < this.harvestingMonths; i++) {
+            if (testing.equals(month)) return true;
+            testing = testing.next();
+        }
+        return false;
+    }
+
+    public FoodType getFruit() {
+        return this.fruit;
+    }
+
+    public ItemStack getFoodDrop() {
+        return new ItemStack(TFCStorage.getFoodItem(this.getFruit()));
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void addInfo(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        if (GuiScreen.isShiftKeyDown()) {
+            tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
+            tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) minRain, (int) maxRain));
+            tooltip.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", minTemp), String.format("%.1f", maxTemp)));
+        } else {
+            tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
+        }
+    }
+
     public static class Builder {
         private final String name;
+        private float minGrowthTime;
         private int color;
         private float minTemp;
         private float maxTemp;
         private float minRain;
         private float maxRain;
-        private ITreeGenerator gen;
+        private ITreeGenerator generator;
         private float minDensity;
         private float maxDensity;
         private float dominance;
@@ -354,18 +390,23 @@ public class WoodType {
         private boolean isConifer;
         private ITreeGenerator bushGenerator;
         private boolean canMakeTannin;
-        private float minGrowthTime;
         private float burnTemp;
         private int burnTicks;
+        private Month flowerMonthStart;
+        private int floweringMonths;
+        private Month harvestMonthStart;
+        private int harvestingMonths;
+        private FoodType fruit;
+        private float growthTime;
 
         public Builder(@Nonnull String name) {
             this.name = name;
-            this.color = 0x000000;
+            this.color = 0xFFFFFF;
             this.minTemp = 0;
             this.maxTemp = 10;
             this.minRain = 0;
             this.maxRain = 100;
-            this.gen = GEN_NORMAL; // Заменить на ген DT по умолчанию, и удалить setGenerator(), так как для кустов вызывается setBushes()
+            this.generator = GEN_NORMAL; // Заменить на ген DT по умолчанию, и удалить setGenerator(), так как для кустов вызывается setBushes()
             this.maxGrowthRadius = 1;
             this.dominance = 0.001f * (maxTemp - minTemp) * (maxRain - minRain);
             this.maxHeight = 6;
@@ -378,6 +419,13 @@ public class WoodType {
             this.maxDensity = 2f;
             this.burnTemp = 675;
             this.burnTicks = 1500;
+
+            this.fruit = null;
+            this.flowerMonthStart = null;
+            this.floweringMonths = 0;
+            this.harvestMonthStart = null;
+            this.harvestingMonths = 0;
+            this.growthTime = 0;
         }
 
         public Builder setColor(int color) {
@@ -398,8 +446,8 @@ public class WoodType {
         }
 
         // Установить генератор деревьев
-        public Builder setGenerator(@Nonnull ITreeGenerator gen) {
-            this.gen = gen;
+        public Builder setGenerator(@Nonnull ITreeGenerator generator) {
+            this.generator = generator;
             return this;
         }
 
@@ -452,7 +500,7 @@ public class WoodType {
         }
 
         // Установить время роста
-        public Builder setGrowthTime(float minGrowthTime) {
+        public Builder setMinGrowthTime(float minGrowthTime) {
             this.minGrowthTime = minGrowthTime;
             return this;
         }
@@ -471,13 +519,32 @@ public class WoodType {
             return this;
         }
 
+        public Builder setFruitTree(FoodType fruit, float growthTime) {
+            this.fruit = fruit;
+            this.growthTime = growthTime * CalendarTFC.CALENDAR_TIME.getDaysInMonth() * ICalendar.HOURS_IN_DAY;
+            this.generator = GEN_FRUIT;
+            return this;
+        }
+
+        public Builder setFlowerMonth(Month flowerMonthStart, int floweringMonths) {
+            this.flowerMonthStart = flowerMonthStart;
+            this.floweringMonths = floweringMonths;
+            return this;
+        }
+
+        public Builder setHarvestMonth(Month harvestMonthStart, int harvestingMonths) {
+            this.harvestMonthStart = harvestMonthStart;
+            this.harvestingMonths = harvestingMonths;
+            return this;
+        }
+
         // Метод для построения объекта Wood
         public WoodType build() {
             return new WoodType(
-                    name, color, gen, minTemp, maxTemp, minRain,
-                    maxRain, minDensity, maxDensity, dominance,
-                    maxGrowthRadius, maxHeight, maxDecayDistance, isConifer,
-                    bushGenerator, canMakeTannin, minGrowthTime, burnTemp, burnTicks);
+                    name, color, generator, minTemp, maxTemp, minRain, maxRain,
+                    minDensity, maxDensity, dominance, maxGrowthRadius, maxHeight, maxDecayDistance,
+                    isConifer, bushGenerator, canMakeTannin, minGrowthTime, burnTemp, burnTicks,
+                    flowerMonthStart, floweringMonths, harvestMonthStart, harvestingMonths, fruit, growthTime);
         }
     }
 }

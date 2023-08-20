@@ -7,7 +7,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -65,13 +64,6 @@ public interface IFruitTree {
      */
     String getName();
 
-    /**
-     * Return the tree generator used to generate this fruit tree.
-     */
-    @Nonnull
-    default IFruitTreeGenerator getGenerator() {
-        return IFruitTreeGenerator.DEFAULT;
-    }
 
     /**
      * Add tooltip info

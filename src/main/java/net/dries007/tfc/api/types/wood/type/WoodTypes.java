@@ -23,4 +23,13 @@ public class WoodTypes {
     public static WoodType WHITE_CEDAR;
     public static WoodType WILLOW;
     public static WoodType KAPOK;
+    public static WoodType BANANA;
+    public static WoodType CHERRY;
+    public static WoodType GREEN_APPLE;
+    public static WoodType LEMON;
+    public static WoodType OLIVE;
+    public static WoodType ORANGE;
+    public static WoodType PEACH;
+    public static WoodType PLUM;
+    public static WoodType RED_APPLE;
 }

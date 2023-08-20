@@ -6,7 +6,6 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
-import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
@@ -18,6 +17,7 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -65,6 +65,9 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
 
         OreDictionaryHelper.register(this, "logWood");
         OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
+        if (type.canMakeTannin()) {
+            OreDictionaryHelper.register(this, variant.toString(), "wood", "tannin");
+        }
     }
 
     @Override
@@ -242,12 +245,31 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getRegistryLocation()).ignore(BlockWoodLog.PLACED).build());
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(getResourceLocation(), "type=" + type.toString());
+            }
+        });
 
-        for (var state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    getMetaFromState(state),
-                    new ModelResourceLocation(getRegistryLocation(), "normal"));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this),
+                getMetaFromState(getBlockState().getBaseState()),
+                new ModelResourceLocation(getResourceLocation(), "type=" + type.toString()));
     }
+
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public void onModelRegister() {
+//        ModelLoader.setCustomStateMapper(this,
+//                new CustomStateMap.Builder()
+//                        .customPath(getRegistryLocation())
+//                        .ignore(BlockWoodLog.PLACED).build());
+//
+//        for (var state : getBlockState().getValidStates()) {
+//            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
+//                    getMetaFromState(state),
+//                    new ModelResourceLocation(getRegistryLocation(), "normal"));
+//        }
+//    }
 }

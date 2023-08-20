@@ -59,6 +59,7 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
         setHardness(0.0F);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
+        OreDictionaryHelper.register(this, variant.toString());
         OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
@@ -131,7 +132,7 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
             TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
             if (te != null) {
                 long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
-                if (days > 7) { //woodType.getMinGrowthTime()
+                if (days > type.getMinGrowthTime()) {
                     grow(world, random, pos, state);
                 }
             }

@@ -1,7 +1,13 @@
-package net.dries007.tfc.common.objects.blocks.agriculture;
+package net.dries007.tfc.common.objects.blocks.wood.fruit;
 
-import net.dries007.tfc.api.types.fruit.IFruitTree;
+import net.dries007.tfc.api.registries.TFCStorage;
+import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
@@ -17,6 +23,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -24,15 +31,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
+import static net.dries007.tfc.api.types.wood.variant.WoodBlockVariants.FRUIT_SAPLING;
+import static net.dries007.tfc.api.types.wood.variant.WoodBlockVariants.FRUIT_TRUNK;
+
 @ParametersAreNonnullByDefault
-public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
+public class BlockFruitTreeBranch extends Block implements IGrowingPlant, IWoodBlock {
     /* Facing of this branch */
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
 
@@ -60,22 +70,47 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     private static final AxisAlignedBB CONNECTION_E_AABB = new AxisAlignedBB(0.6875D, 0.375D, 0.3125D, 1.0D, 0.625D, 0.6875D);
 
 
-    private static final Map<IFruitTree, BlockFruitTreeBranch> MAP = new HashMap<>();
-    private final IFruitTree tree;
+    private final WoodBlockVariant variant;
+    private final WoodType type;
 
-    public BlockFruitTreeBranch(IFruitTree tree) {
+    public BlockFruitTreeBranch(WoodBlockVariant variant, WoodType type) {
         super(Material.WOOD, Material.WOOD.getMaterialMapColor());
-        if (MAP.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
+
+        this.variant = variant;
+        this.type = type;
+
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
+        setCreativeTab(CreativeTabsTFC.WOOD);
+
         setHardness(2.0F);
         setHarvestLevel("axe", 0);
         setSoundType(SoundType.WOOD);
-        this.tree = tree;
+        setDefaultState(blockState.getBaseState()
+                .withProperty(FACING, EnumFacing.UP)
+                .withProperty(NORTH, 0)
+                .withProperty(EAST, 0)
+                .withProperty(SOUTH, 0)
+                .withProperty(WEST, 0)
+                .withProperty(UP, 0));
+
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(NORTH, 0).withProperty(EAST, 0).withProperty(SOUTH, 0).withProperty(WEST, 0).withProperty(UP, 0));
     }
 
-    public static BlockFruitTreeBranch get(IFruitTree tree) {
-        return MAP.get(tree);
+    @Override
+    public WoodBlockVariant getBlockVariant() {
+        return variant;
+    }
+
+    @Override
+    public WoodType getType() {
+        return type;
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     @SuppressWarnings("deprecation")
@@ -151,23 +186,13 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     @Nonnull
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         state = getActualState(state, source, pos);
-        AxisAlignedBB finalAABB;
-        switch (state.getValue(FACING)) {
-            case NORTH:
-                finalAABB = TRUNK_N_AABB;
-                break;
-            case EAST:
-                finalAABB = TRUNK_E_AABB;
-                break;
-            case SOUTH:
-                finalAABB = TRUNK_S_AABB;
-                break;
-            case WEST:
-                finalAABB = TRUNK_W_AABB;
-                break;
-            default:
-                finalAABB = TRUNK_U_AABB;
-        }
+        AxisAlignedBB finalAABB = switch (state.getValue(FACING)) {
+            case NORTH -> TRUNK_N_AABB;
+            case EAST -> TRUNK_E_AABB;
+            case SOUTH -> TRUNK_S_AABB;
+            case WEST -> TRUNK_W_AABB;
+            default -> TRUNK_U_AABB;
+        };
         if (state.getValue(NORTH) > 0) {
             finalAABB = finalAABB.union(CONNECTION_N_AABB);
         }
@@ -216,7 +241,7 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
         ItemStack stack = player.getHeldItemMainhand();
         if (stack.getItem().getToolClasses(stack).contains("axe") || stack.getItem().getToolClasses(stack).contains("saw")) {
             if (!worldIn.isRemote && RANDOM.nextBoolean()) {
-                ItemStack dropStack = new ItemStack(BlockFruitTreeSapling.get(tree));
+                ItemStack dropStack = new ItemStack(TFCStorage.getWoodBlock(FRUIT_SAPLING, type));
                 InventoryHelper.spawnItemStack(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, dropStack);
             }
         }
@@ -243,17 +268,13 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(BlockFruitTreeSapling.get(tree));
+        return new ItemStack(TFCStorage.getWoodBlock(FRUIT_SAPLING, type));
     }
 
-    @Nonnull
-    public IFruitTree getTree() {
-        return tree;
-    }
 
     private EnumFacing getFacing(IBlockAccess worldIn, BlockPos pos) {
         for (EnumFacing facing : EnumFacing.VALUES) {
-            if (worldIn.getBlockState(pos.offset(facing)).getBlock() == BlockFruitTreeTrunk.get(tree)) {
+            if (worldIn.getBlockState(pos.offset(facing)).getBlock() == TFCStorage.getWoodBlock(FRUIT_TRUNK, type)) {
                 return facing.getOpposite();
             }
         }
@@ -264,10 +285,15 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         float temp = ClimateTFC.getActualTemp(world, pos);
         float rainfall = ChunkDataTFC.getRainfall(world, pos);
-        boolean canGrow = tree.isValidForGrowth(temp, rainfall);
+        boolean canGrow = type.isValidForGrowth(temp, rainfall);
         if (canGrow) {
             return GrowthStatus.GROWING;
         }
         return GrowthStatus.NOT_GROWING;
+    }
+
+    @Override
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getRegistryLocation()).build());
     }
 }

@@ -9,7 +9,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 
 public interface IFruitTreeGenerator {
-    IFruitTreeGenerator DEFAULT = new TreeGenFruit();
 
     /**
      * Called to generate a tree. Each Tree must have one of these. Used for world gen and sapling growth
@@ -31,13 +30,13 @@ public interface IFruitTreeGenerator {
      * @return true if the tree can generate.
      */
     default boolean canGenerateTree(World world, BlockPos pos, IFruitTree treeType) {
-        // Check if there is room directly upwards
+        // Проверьте, есть ли место прямо наверху
         for (int y = 1; y <= 5; y++)
             if (!world.getBlockState(pos.up(y)).getMaterial().isReplaceable())
                 return false;
 
         // Check if there is a solid block beneath
-        if (!BlocksTFC_old.isSoil(world.getBlockState(pos.down())))
+        if (!BlocksTFC_old.isGrowableSoil(world.getBlockState(pos.down())))
             return false;
 
         // Check the position for liquids, etc.
@@ -45,7 +44,7 @@ public interface IFruitTreeGenerator {
             return false;
         }
 
-        // Check if there is sufficient light level
+        // Проверьте, достаточен ли уровень освещенности
         return world.getLightFromNeighbors(pos) >= 7;
     }
 }

@@ -61,6 +61,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         leavesFancy = true; // Fast / Fancy graphics works correctly
 
         Blocks.FIRE.setFireInfo(this, 30, 60);
+        OreDictionaryHelper.register(this, variant.toString());
         OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
@@ -80,11 +81,11 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         return new ItemBlockTFC(this);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     @Nonnull
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(DECAYABLE, (meta & 0b01) == 0b01);
+        return this.getDefaultState()
+                .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
     }
 
     @Override
@@ -92,7 +93,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         return (state.getValue(DECAYABLE) ? 1 : 0);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
         return NULL_AABB;
@@ -220,7 +220,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         IBlockState state1;
         paths.add(pos); // Center block
 
-        for (int i = 0; i < 4; i++) { //todo woodType.getMaxDecayDistance()
+        for (int i = 0; i < type.getMaxDecayDistance(); i++) {
             pathsToAdd = new ArrayList<>();
             for (BlockPos p1 : paths) {
                 for (EnumFacing face : EnumFacing.values()) {

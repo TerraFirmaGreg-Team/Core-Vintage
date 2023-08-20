@@ -298,14 +298,14 @@ public class ClientProxy extends CommonProxy {
         blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IWoodBlock) s.getBlock()).getType().getColor() : 0xFFFFFF,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(block -> block.getBlockVariant() != WoodBlockVariants.LEAVES && block.getBlockVariant() != WoodBlockVariants.SAPLING)
+                        .filter(block -> block.getBlockVariant() != WoodBlockVariants.LEAVES)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler(foliageColor,
                 TFCStorage.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES || x.getBlockVariant() == WoodBlockVariants.FRUIT_LEAVES)
+                        .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 

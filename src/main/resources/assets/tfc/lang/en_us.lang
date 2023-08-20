@@ -2820,6 +2820,7 @@ top.tfc.agriculture.harvesting_months=Harvesting Seasons:
 top.tfc.crop.dead_crop=Dead Crop
 top.tfc.crop.wild=Wild Crop
 top.tfc.crop.growing=Growing
+top.tfc.crop.growth=Growth: %s
 top.tfc.crop.not_growing=Not Growing
 
 # Animal stuff

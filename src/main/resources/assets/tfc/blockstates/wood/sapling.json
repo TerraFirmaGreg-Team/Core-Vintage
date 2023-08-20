@@ -1,0 +1,157 @@
+{
+  "forge_marker" : 1,
+  "defaults" : {
+    "model" : "tfc:wood/sapling"
+  },
+  "variants" : {
+    "stage": {
+      "0": {},
+      "1": {},
+      "2": {},
+      "3": {},
+      "4": {}
+    },
+    "type": {
+      "acacia": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/acacia"
+        }
+      },
+      "ash": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/ash"
+        }
+      },
+      "aspen": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/aspen"
+        }
+      },
+      "birch": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/birch"
+        }
+      },
+      "blackwood": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/blackwood"
+        }
+      },
+      "chestnut": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/chestnut"
+        }
+      },
+      "douglas_fir": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/douglas_fir"
+        }
+      },
+      "hickory": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/hickory"
+        }
+      },
+      "maple": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/maple"
+        }
+      },
+      "oak": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/oak"
+        }
+      },
+      "palm": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/palm"
+        }
+      },
+      "pine": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/pine"
+        }
+      },
+      "rosewood": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/rosewood"
+        }
+      },
+      "sequoia": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/sequoia"
+        }
+      },
+      "spruce": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/spruce"
+        }
+      },
+      "sycamore": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/sycamore"
+        }
+      },
+      "white_cedar": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/white_cedar"
+        }
+      },
+      "willow": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/willow"
+        }
+      },
+      "kapok": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/kapok"
+        }
+      },
+      "banana": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/banana"
+        }
+      },
+      "cherry": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/cherry"
+        }
+      },
+      "green_apple": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/green_apple"
+        }
+      },
+      "lemon": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/lemon"
+        }
+      },
+      "olive": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/olive"
+        }
+      },
+      "orange": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/orange"
+        }
+      },
+      "peach": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/peach"
+        }
+      },
+      "plum": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/plum"
+        }
+      },
+      "red_apple": {
+        "textures": {
+          "cross" : "tfc:blocks/wood/saplings/red_apple"
+        }
+      }
+    }
+  }
+}

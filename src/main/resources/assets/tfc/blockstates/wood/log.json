@@ -1,41 +1,227 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model": "item/generated",
-    "textures": {
-      "particle": "tfc:blocks/wood/log/side/$woodtype",
-      "side": "tfc:blocks/wood/log/side/$woodtype",
-      "end": "tfc:blocks/wood/log/top/$woodtype",
-      "layer0": "tfc:items/wood/log/$woodtype"
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:wood/log"
   },
-  "variants" : {
-    "normal": [{}],
+  "variants": {
     "axis": {
-      "y": {
-        "model": "cube_column"
-      },
+      "y": {},
       "z": {
-        "model": "cube_column",
         "x": 90
       },
       "x": {
-        "model": "cube_column",
         "x": 90,
         "y": 90
       },
-      "none": {
-        "model": "cube_column",
-        "textures": {
-          "end": "tfc:blocks/wood/log/side/$woodtype"
-        }
-      }
+      "none": {}
+    },
+    "placed": {
+      "true": {},
+      "false": {}
     },
     "small": {
       "true": {
-        "model": "tfc:small_log"
+        "model": "tfc:wood/small_log"
       },
       "false": {}
+    },
+    "type": {
+      "acacia": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/acacia",
+          "side": "tfc:blocks/wood/log/side/acacia",
+          "end": "tfc:blocks/wood/log/top/acacia"
+        }
+      },
+      "ash": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/ash",
+          "side": "tfc:blocks/wood/log/side/ash",
+          "end": "tfc:blocks/wood/log/top/ash"
+        }
+      },
+      "aspen": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/aspen",
+          "side": "tfc:blocks/wood/log/side/aspen",
+          "end": "tfc:blocks/wood/log/top/aspen"
+        }
+      },
+      "birch": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/birch",
+          "side": "tfc:blocks/wood/log/side/birch",
+          "end": "tfc:blocks/wood/log/top/birch"
+        }
+      },
+      "blackwood": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/blackwood",
+          "side": "tfc:blocks/wood/log/side/blackwood",
+          "end": "tfc:blocks/wood/log/top/blackwood"
+        }
+      },
+      "chestnut": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/chestnut",
+          "side": "tfc:blocks/wood/log/side/chestnut",
+          "end": "tfc:blocks/wood/log/top/chestnut"
+        }
+      },
+      "douglas_fir": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/douglas_fir",
+          "side": "tfc:blocks/wood/log/side/douglas_fir",
+          "end": "tfc:blocks/wood/log/top/douglas_fir"
+        }
+      },
+      "hickory": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/hickory",
+          "side": "tfc:blocks/wood/log/side/hickory",
+          "end": "tfc:blocks/wood/log/top/hickory"
+        }
+      },
+      "maple": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/maple",
+          "side": "tfc:blocks/wood/log/side/maple",
+          "end": "tfc:blocks/wood/log/top/maple"
+        }
+      },
+      "oak": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/oak",
+          "side": "tfc:blocks/wood/log/side/oak",
+          "end": "tfc:blocks/wood/log/top/oak"
+        }
+      },
+      "palm": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/palm",
+          "side": "tfc:blocks/wood/log/side/palm",
+          "end": "tfc:blocks/wood/log/top/palm"
+        }
+      },
+      "pine": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/pine",
+          "side": "tfc:blocks/wood/log/side/pine",
+          "end": "tfc:blocks/wood/log/top/pine"
+        }
+      },
+      "rosewood": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/rosewood",
+          "side": "tfc:blocks/wood/log/side/rosewood",
+          "end": "tfc:blocks/wood/log/top/rosewood"
+        }
+      },
+      "sequoia": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/sequoia",
+          "side": "tfc:blocks/wood/log/side/sequoia",
+          "end": "tfc:blocks/wood/log/top/sequoia"
+        }
+      },
+      "spruce": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/spruce",
+          "side": "tfc:blocks/wood/log/side/spruce",
+          "end": "tfc:blocks/wood/log/top/spruce"
+        }
+      },
+      "sycamore": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/sycamore",
+          "side": "tfc:blocks/wood/log/side/sycamore",
+          "end": "tfc:blocks/wood/log/top/sycamore"
+        }
+      },
+      "white_cedar": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/white_cedar",
+          "side": "tfc:blocks/wood/log/side/white_cedar",
+          "end": "tfc:blocks/wood/log/top/white_cedar"
+        }
+      },
+      "willow": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/willow",
+          "side": "tfc:blocks/wood/log/side/willow",
+          "end": "tfc:blocks/wood/log/top/willow"
+        }
+      },
+      "kapok": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/top/kapok",
+          "side": "tfc:blocks/wood/log/side/kapok",
+          "end": "tfc:blocks/wood/log/top/kapok"
+        }
+      },
+      "banana": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/side/banana",
+          "side": "tfc:blocks/wood/log/side/banana",
+          "end": "tfc:blocks/wood/log/side/banana"
+        }
+      },
+      "cherry": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/side/cherry",
+          "side": "tfc:blocks/wood/log/side/cherry",
+          "end": "tfc:blocks/wood/log/side/cherry"
+        }
+      },
+      "green_apple": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/side/green_apple",
+          "side": "tfc:blocks/wood/log/side/green_apple",
+          "end": "tfc:blocks/wood/log/side/green_apple"
+        }
+      },
+      "lemon": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/side/lemon",
+          "side": "tfc:blocks/wood/log/side/lemon",
+          "end": "tfc:blocks/wood/log/side/lemon"
+        }
+      },
+      "olive": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/side/olive",
+          "side": "tfc:blocks/wood/log/side/olive",
+          "end": "tfc:blocks/wood/log/side/olive"
+        }
+      },
+      "orange": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/side/orange",
+          "side": "tfc:blocks/wood/log/side/orange",
+          "end": "tfc:blocks/wood/log/side/orange"
+        }
+      },
+      "peach": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/side/peach",
+          "side": "tfc:blocks/wood/log/side/peach",
+          "end": "tfc:blocks/wood/log/side/peach"
+        }
+      },
+      "plum": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/side/plum",
+          "side": "tfc:blocks/wood/log/side/plum",
+          "end": "tfc:blocks/wood/log/side/plum"
+        }
+      },
+      "red_apple": {
+        "textures": {
+          "particle": "tfc:blocks/wood/log/side/red_apple",
+          "side": "tfc:blocks/wood/log/side/red_apple",
+          "end": "tfc:blocks/wood/log/side/red_apple"
+        }
+      }
     }
   }
 }

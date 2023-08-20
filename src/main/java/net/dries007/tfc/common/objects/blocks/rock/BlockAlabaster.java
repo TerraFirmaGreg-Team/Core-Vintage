@@ -34,43 +34,43 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @ParametersAreNonnullByDefault
 public class BlockAlabaster extends Block implements IItemSize, IItemProvider, IHasModel {
 
-    private final RockBlockVariant rockBlockVariant;
+    private final RockBlockVariant variant;
     private final EnumDyeColor dyeColor;
     private final ResourceLocation modelLocation;
 
-    public BlockAlabaster(RockBlockVariant rockBlockVariant, EnumDyeColor dyeColor) {
+    public BlockAlabaster(RockBlockVariant variant, EnumDyeColor dyeColor) {
         super(Material.ROCK, MapColor.getBlockColor(dyeColor));
 
-        this.rockBlockVariant = rockBlockVariant;
+        this.variant = variant;
         this.dyeColor = dyeColor;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/color/" + rockBlockVariant);
+        this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/color/" + variant);
 
         setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
         setHardness(1.0F);
 
-        var blockRegistryName = String.format("alabaster/%s/%s", rockBlockVariant, dyeColor.getName());
+        var blockRegistryName = String.format("alabaster/%s/%s", variant, dyeColor.getName());
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
         OreDictionaryHelper.register(this, "alabaster");
-        OreDictionaryHelper.register(this, "alabaster", rockBlockVariant.toString());
-        OreDictionaryHelper.register(this, "alabaster", rockBlockVariant.toString(), dyeColor.getName());
+        OreDictionaryHelper.register(this, "alabaster", variant.toString());
+        OreDictionaryHelper.register(this, "alabaster", variant.toString(), dyeColor.getName());
     }
 
-    public BlockAlabaster(RockBlockVariant rockBlockVariant) {
+    public BlockAlabaster(RockBlockVariant variant) {
         super(Material.ROCK, MapColor.SNOW);
 
-        this.rockBlockVariant = rockBlockVariant;
+        this.variant = variant;
         this.dyeColor = EnumDyeColor.WHITE;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/" + rockBlockVariant);
+        this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/" + variant);
 
-        var blockRegistryName = String.format("alabaster/%s/plain", rockBlockVariant);
+        var blockRegistryName = String.format("alabaster/%s/plain", variant);
         setRegistryName(MOD_ID, blockRegistryName);
         setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
         OreDictionaryHelper.register(this, "alabaster");
-        OreDictionaryHelper.register(this, "alabaster", rockBlockVariant.toString());
+        OreDictionaryHelper.register(this, "alabaster", variant.toString());
     }
 
     @Nonnull

@@ -248,28 +248,23 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), "type=" + type.toString());
+                return new ModelResourceLocation(getResourceLocation(),
+                        "axis=" + state.getValue(LOG_AXIS) + "," +
+                                "placed=" + state.getValue(PLACED) + "," +
+                                "small=" + state.getValue(SMALL) + "," +
+                                "type=" + type.toString());
             }
         });
 
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                getMetaFromState(getBlockState().getBaseState()),
-                new ModelResourceLocation(getResourceLocation(), "type=" + type.toString()));
+        for (var state : getBlockState().getValidStates()) {
+            ModelLoader.setCustomModelResourceLocation(
+                    Item.getItemFromBlock(this),
+                    getMetaFromState(state),
+                    new ModelResourceLocation(getResourceLocation(),
+                            "axis=none," +
+                                    "placed=false," +
+                                    "small=false," +
+                                    "type=" + type.toString()));
+        }
     }
-
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public void onModelRegister() {
-//        ModelLoader.setCustomStateMapper(this,
-//                new CustomStateMap.Builder()
-//                        .customPath(getRegistryLocation())
-//                        .ignore(BlockWoodLog.PLACED).build());
-//
-//        for (var state : getBlockState().getValidStates()) {
-//            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-//                    getMetaFromState(state),
-//                    new ModelResourceLocation(getRegistryLocation(), "normal"));
-//        }
-//    }
 }

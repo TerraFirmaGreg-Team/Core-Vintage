@@ -4,7 +4,6 @@ import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.wood.itemblocks.ItemBlockSaplingTFC;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
@@ -19,6 +18,7 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -172,17 +172,25 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
         return GrowthStatus.GROWING;
     }
 
-
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getRegistryLocation()).ignore(BlockWoodSapling.STAGE).build());
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(getResourceLocation(),
+                        "stage=" + state.getValue(STAGE) + "," +
+                                "type=" + type.toString());
+            }
+        });
 
         for (var state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
+            ModelLoader.setCustomModelResourceLocation(
+                    Item.getItemFromBlock(this),
                     getMetaFromState(state),
-                    new ModelResourceLocation(getRegistryLocation(), "inventory"));
+                    new ModelResourceLocation(getResourceLocation(),
+                            "stage=0," +
+                                    "type=" + type.toString()));
         }
     }
 }

@@ -7,30 +7,31 @@ public class WoodTypeHandler {
 
     public static void init() {
         ACACIA = new WoodType
-                .Builder("acacia", 0x8B3929, 19f, 31f, 30f, 210f)
+                .Builder("acacia")
+                .setColor(0x8B3929).setTemp(19f, 31f).setRain(30f, 210f)
                 .setGenerator(GEN_ACACIA)
-                .setHeight(12)
-                .setGrowthTime(11)
-                .setDensity(0.1f, 0.6f)
+                .setHeight(12).setGrowthTime(11).setDensity(0.1f, 0.6f)
                 .setBurnInfo(650f, 1000)
                 .build();
 
         ASH = new WoodType
-                .Builder("ash", 0xAE604E, -6f, 12f, 60f, 140f)
+                .Builder("ash")
+                .setColor(0xAE604E).setTemp(-6f, 12f).setRain(60f, 140f)
                 .setGenerator(GEN_NORMAL)
                 .setBurnInfo(696f, 1250)
                 .build();
 
         ASPEN = new WoodType
-                .Builder("aspen", 0x373727, -10f, 16f, 10f, 80f)
+                .Builder("aspen")
+                .setColor(0x373727).setTemp(-10f, 16f).setRain(10f, 80f)
                 .setGenerator(GEN_MEDIUM)
-                .setRadius(1)
-                .setGrowthTime(8)
+                .setRadius(1).setGrowthTime(8)
                 .setBurnInfo(611f, 1000)
                 .build();
 
         BIRCH = new WoodType
-                .Builder("birch", 0x897658, -15f, 7f, 20f, 180f)
+                .Builder("birch")
+                .setColor(0x897658).setTemp(-15f, 7f).setRain(20f, 180f)
                 .setGenerator(GEN_TALL)
                 .setRadius(1)
                 .setTannin()
@@ -38,141 +39,134 @@ public class WoodTypeHandler {
                 .build();
 
         BLACKWOOD = new WoodType
-                .Builder("blackwood", 0x1A1A1A, 4f, 33f, 0f, 120f)
+                .Builder("blackwood")
+                .setColor(0x1A1A1A).setTemp(4f, 33f).setRain(0f, 120f)
                 .setGenerator(GEN_MEDIUM)
-                .setHeight(12)
-                .setGrowthTime(8)
+                .setHeight(12).setGrowthTime(8)
                 .setBurnInfo(720f, 1750)
                 .build();
 
         CHESTNUT = new WoodType
-                .Builder("chestnut", 0x642C1E, 11f, 35f, 160f, 320f)
+                .Builder("chestnut")
+                .setColor(0x642C1E).setTemp(11f, 35f).setRain(160f, 320f)
                 .setGenerator(GEN_NORMAL)
                 .setTannin()
                 .setBurnInfo(651f, 1500)
                 .build();
 
         DOUGLAS_FIR = new WoodType
-                .Builder("douglas_fir", 0xD7BC8D, -2f, 14f, 280f, 480f)
+                .Builder("douglas_fir")
+                .setColor(0xD7BC8D).setTemp(-2f, 14f).setRain(280f, 480f)
+                .setDominance(5.2f).setHeight(16).setDensity(0.25f, 2f)
                 .setGenerator(GEN_TALL)
-                .setDominance(5.2f)
-                .setHeight(16)
-                .setBushes()
-                .setTannin()
-                .setDensity(0.25f, 2f)
+                .setBushes().setTannin()
                 .setBurnInfo(707f, 1500)
                 .build();
 
         HICKORY = new WoodType
-                .Builder("hickory", 0x4E3418, 7f, 29f, 80f, 250f)
-                .setGenerator(GEN_TALL)
+                .Builder("hickory")
+                .setColor(0x4E3418).setTemp(7f, 29f).setRain(80f, 250f)
                 .setGrowthTime(10)
+                .setGenerator(GEN_TALL)
                 .setTannin()
                 .setBurnInfo(762f, 2000)
                 .build();
 
         MAPLE = new WoodType
-                .Builder("maple", 0xC3782F, 3f, 20f, 140f, 360f)
-                .setGenerator(GEN_MEDIUM)
-                .setDominance(6.3f)
-                .setRadius(1)
-                .setTannin()
+                .Builder("maple")
+                .setColor(0xC3782F).setTemp(3f, 20f).setRain(140f, 360f)
+                .setDominance(6.3f).setRadius(1)
                 .setBurnInfo(745f, 2000)
+                .setGenerator(GEN_MEDIUM)
+                .setTannin()
                 .build();
 
         OAK = new WoodType
-                .Builder("oak", 0xC29D62, -8f, 12f, 180f, 430f)
-                .setGenerator(GEN_TALL)
-                .setHeight(16)
-                .setGrowthTime(10)
-                .setTannin()
+                .Builder("oak")
+                .setColor(0xC29D62).setTemp(-8f, 12f).setRain(180f, 430f)
                 .setBurnInfo(728f, 2250)
+                .setHeight(16).setGrowthTime(10)
+                .setGenerator(GEN_TALL)
+                .setTannin()
                 .build();
 
         PALM = new WoodType
-                .Builder("palm", 0xB56F38, 16f, 35f, 280f, 500f)
-                .setGenerator(GEN_TROPICAL)
-                .setDecayDist(6)
+                .Builder("palm")
+                .setColor(0xB56F38).setTemp(16f, 35f).setRain(280f, 500f)
                 .setBurnInfo(730f, 1250)
+                .setDecayDist(6)
+                .setGenerator(GEN_TROPICAL)
                 .build();
 
         PINE = new WoodType
-                .Builder("pine", 0xD1BD9A, -15f, 7f, 60f, 250f)
-                .setGenerator(GEN_CONIFER)
-                .setRadius(1)
-                .setConifer()
-                .setDensity(0.1f, 0.8f)
+                .Builder("pine")
+                .setColor(0xD1BD9A).setTemp(-15f, 7f).setRain(60f, 250f)
                 .setBurnInfo(627f, 1250)
+                .setRadius(1).setDensity(0.1f, 0.8f)
+                .setGenerator(GEN_CONIFER)
+                .setConifer()
                 .build();
 
         ROSEWOOD = new WoodType
-                .Builder("rosewood", 0x912222, 8f, 18f, 10f, 190f)
-                .setGenerator(GEN_MEDIUM)
-                .setHeight(12)
-                .setGrowthTime(8)
+                .Builder("rosewood")
+                .setColor(0x912222).setTemp(8f, 18f).setRain(10f, 190f)
                 .setBurnInfo(640f, 1500)
+                .setHeight(12).setGrowthTime(8)
+                .setGenerator(GEN_MEDIUM)
                 .build();
 
         SEQUOIA = new WoodType
-                .Builder("sequoia", 0x965B3B, -5f, 12f, 250f, 420f)
-                .setGenerator(GEN_SEQUOIA)
-                .setRadius(3)
-                .setHeight(24)
-                .setDecayDist(6)
-                .setGrowthTime(18)
-                .setConifer()
-                .setBushes()
-                .setTannin()
-                .setDensity(0.4f, 0.9f)
+                .Builder("sequoia")
+                .setColor(0x965B3B).setTemp(-5f, 12f).setRain(250f, 420f)
                 .setBurnInfo(612f, 1750)
+                .setRadius(3).setHeight(24).setDecayDist(6).setGrowthTime(18).setDensity(0.4f, 0.9f)
+                .setGenerator(GEN_SEQUOIA)
+                .setConifer().setBushes().setTannin()
                 .build();
 
         SPRUCE = new WoodType
-                .Builder("spruce", 0xBF806F, -11f, 6f, 120f, 380f)
-                .setGenerator(GEN_CONIFER)
-                .setRadius(1)
-                .setConifer()
-                .setDensity(0.1f, 0.8f)
+                .Builder("spruce")
+                .setColor(0xBF806F).setTemp(-11f, 6f).setRain(120f, 380f)
                 .setBurnInfo(608f, 1500)
+                .setRadius(1).setDensity(0.1f, 0.8f)
+                .setGenerator(GEN_CONIFER)
+                .setConifer()
                 .build();
 
         SYCAMORE = new WoodType
-                .Builder("sycamore", 0xDCA448, 17f, 33f, 120f, 290f)
-                .setGenerator(GEN_MEDIUM)
-                .setGrowthTime(8)
-                .setBushes()
-                .setDensity(0.25f, 2f)
+                .Builder("sycamore")
+                .setColor(0xDCA448).setTemp(17f, 33f).setRain(120f, 290f)
                 .setBurnInfo(653f, 1750)
+                .setGrowthTime(8).setDensity(0.25f, 2f)
+                .setGenerator(GEN_MEDIUM)
+                .setBushes()
                 .build();
 
         WHITE_CEDAR = new WoodType
-                .Builder("white_cedar", 0xD4D4D4, -8f, 17f, 10f, 240f)
-                .setGenerator(GEN_TALL)
-                .setHeight(16)
+                .Builder("white_cedar")
+                .setColor(0xD4D4D4).setTemp(-8f, 17f).setRain(10f, 240f)
                 .setBurnInfo(625f, 1500)
+                .setHeight(16)
+                .setGenerator(GEN_TALL)
                 .build();
 
         WILLOW = new WoodType
-                .Builder("willow", 0x3A430B, 15f, 32f, 230f, 400f)
-                .setGenerator(GEN_WILLOW)
-                .setRadius(1)
-                .setGrowthTime(11)
-                .setBushes()
-                .setDensity(0.7f, 2f)
+                .Builder("willow")
+                .setColor(0x3A430B).setTemp(15f, 32f).setRain(230f, 400f)
                 .setBurnInfo(603f, 1000)
+                .setRadius(1).setGrowthTime(11).setDensity(0.7f, 2f)
+                .setGenerator(GEN_WILLOW)
+                .setBushes()
                 .build();
 
         KAPOK = new WoodType
-                .Builder("kapok", 0xAD879F, 15f, 35f, 210f, 500f)
-                .setGenerator(GEN_ACACIA)
-                .setDominance(8.5f)
-                .setRadius(3)
-                .setHeight(24)
-                .setDecayDist(6)
-                .setGrowthTime(18)
-                .setBushes()
-                .setDensity(0.6f, 2f)
+                .Builder("kapok")
+                .setColor(0xAD879F).setTemp(15f, 35f).setRain(210f, 500f)
                 .setBurnInfo(645f, 1000)
+                .setGenerator(GEN_ACACIA)
+                .setDominance(8.5f).setRadius(3).setHeight(24).setDecayDist(6)
+                .setGrowthTime(18).setDensity(0.6f, 2f)
+                .setBushes()
                 .build();
     }
 }

@@ -339,11 +339,11 @@ public class WoodType {
 
     public static class Builder {
         private final String name;
-        private final int color;
-        private final float minTemp;
-        private final float maxTemp;
-        private final float minRain;
-        private final float maxRain;
+        private int color;
+        private float minTemp;
+        private float maxTemp;
+        private float minRain;
+        private float maxRain;
         private ITreeGenerator gen;
         private float minDensity;
         private float maxDensity;
@@ -358,13 +358,13 @@ public class WoodType {
         private float burnTemp;
         private int burnTicks;
 
-        public Builder(@Nonnull String name, int color, float minTemp, float maxTemp, float minRain, float maxRain) {
+        public Builder(@Nonnull String name) {
             this.name = name;
-            this.color = color;
-            this.minTemp = minTemp;
-            this.maxTemp = maxTemp;
-            this.minRain = minRain;
-            this.maxRain = maxRain;
+            this.color = 0x000000;
+            this.minTemp = 0;
+            this.maxTemp = 10;
+            this.minRain = 0;
+            this.maxRain = 100;
             this.gen = GEN_NORMAL; // Заменить на ген DT по умолчанию, и удалить setGenerator(), так как для кустов вызывается setBushes()
             this.maxGrowthRadius = 1;
             this.dominance = 0.001f * (maxTemp - minTemp) * (maxRain - minRain);
@@ -378,6 +378,23 @@ public class WoodType {
             this.maxDensity = 2f;
             this.burnTemp = 675;
             this.burnTicks = 1500;
+        }
+
+        public Builder setColor(int color) {
+            this.color = color;
+            return this;
+        }
+
+        public Builder setTemp(float minTemp, float maxTemp) {
+            this.minTemp = minTemp;
+            this.maxTemp = maxTemp;
+            return this;
+        }
+
+        public Builder setRain(float minRain, float maxRain) {
+            this.minRain = minRain;
+            this.maxRain = maxRain;
+            return this;
         }
 
         // Установить генератор деревьев

@@ -38,12 +38,12 @@ public class BlockRockLoose extends BlockRock {
     public static final PropertyDirection AXIS = PropertyDirection.create("axis", EnumFacing.Plane.HORIZONTAL);
     private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
 
-
     public BlockRockLoose(RockBlockVariant variant, RockType type) {
         super(variant, type);
 
         setHardness(0.1f);
-        setDefaultState(blockState.getBaseState().withProperty(AXIS, EnumFacing.NORTH));
+        setDefaultState(blockState.getBaseState()
+                .withProperty(AXIS, EnumFacing.NORTH));
     }
 
     @Override

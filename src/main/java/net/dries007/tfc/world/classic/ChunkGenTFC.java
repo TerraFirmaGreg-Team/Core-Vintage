@@ -837,7 +837,7 @@ public class ChunkGenTFC implements IChunkGenerator {
                      */
                     if (y < 1 + (s.flatBedrock ? 0 : rand.nextInt(3))) //  + (seaLevelOffsetMap[colIndex] / 3)
                     {
-                        outp.setBlockState(x, y, z, Blocks.MAGMA.getDefaultState());
+                        outp.setBlockState(x, y, z, TFCBlocks.getRockBlock(MAGMA, rock3).getDefaultState());
                     } else if (outp.isEmpty(x, y, z)) {
                         if (y <= ROCKLAYER3 + seaLevelOffsetMap[colIndex])
                             outp.setBlockState(x, y, z, TFCBlocks.getRockBlock(RAW, rock3).getDefaultState());

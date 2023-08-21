@@ -47,5 +47,7 @@ public class RockBlockVariantHandler {
         BUTTON = new RockBlockVariant("button", 6f, BlockRockButton::new);
         PRESSURE_PLATE = new RockBlockVariant("pressure_plate", 6f, BlockRockPressurePlate::new);
         ANVIL = new RockBlockVariant("anvil", 6f, BlockRockAnvil::new);
+        MAGMA = new RockBlockVariant("magma", 6f, BlockRockMagma::new);
+
     }
 }

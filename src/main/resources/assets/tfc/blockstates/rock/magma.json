@@ -1,7 +1,10 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfc:rock/anvil"
+    "model": "tfc:cube_overlay",
+    "textures": {
+      "overlay": "tfc:blocks/rock/overlay/magma"
+    }
   },
   "variants": {
     "rocktype": {

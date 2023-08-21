@@ -16,5 +16,6 @@ public class SoilBlockVariantHandler {
         CLAY_GRASS = new SoilBlockVariant("clay_grass", BlockSoilClayGrass::new, VERTICAL_ONLY_SOIL);
         FARMLAND = new SoilBlockVariant("farmland", BlockSoilFarmland::new, VERTICAL_ONLY_SOIL);
         ROOTED_DIRT = new SoilBlockVariant("rooted_dirt", BlockSoilRootedDirt::new, VERTICAL_AND_HORIZONTAL);
+        MUD = new SoilBlockVariant("mud", BlockSoilMud::new, VERTICAL_AND_HORIZONTAL);
     }
 }

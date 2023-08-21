@@ -18,6 +18,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
+import net.dries007.tfc.api.types.bush.type.BushTypeHandler;
 import net.dries007.tfc.api.types.crop.category.CropCategoryHandler;
 import net.dries007.tfc.api.types.crop.type.CropTypeHandler;
 import net.dries007.tfc.api.types.crop.variant.CropBlockVariantHandler;
@@ -120,6 +121,8 @@ public class CommonProxy {
         CropTypeHandler.init();
         CropBlockVariantHandler.init();
 
+        BushTypeHandler.init();
+
         //PlantCategoryHandler.init();
         PlantTypeHandler.init();
 
@@ -175,6 +178,12 @@ public class CommonProxy {
 
         for (var plantBlock : PLANT_BLOCKS.values()) {
             r.register((Block) plantBlock);
+        }
+
+        //=== BerryBush ==============================================================================================//
+
+        for (var bushBlock : BUSH_BLOCKS.values()) {
+            r.register((Block) bushBlock);
         }
 
         //=== Metal ==================================================================================================//
@@ -281,13 +290,20 @@ public class CommonProxy {
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
-        //=== Crop ==================================================================================================//
+        //=== BushBlock ==============================================================================================//
+
+        for (var bushBlock : BUSH_BLOCKS.values()) {
+            var itemBlock = bushBlock.getItemBlock();
+            if (itemBlock != null) registerItemBlock(r, itemBlock);
+        }
+
+        //=== Crop ===================================================================================================//
 
         for (var seed : SEED_ITEMS.values()) {
             r.register(seed);
         }
 
-        //=== Food ==================================================================================================//
+        //=== Food ===================================================================================================//
 
         for (var food : FOOD_ITEMS.values()) {
             r.register(food);
@@ -307,7 +323,7 @@ public class CommonProxy {
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
-        //=== Groundcover ==============================================================================================//
+        //=== Groundcover ============================================================================================//
 
         // for (var groundcoverBlock : GROUNDCOVER_BLOCK.values()) {
         // 	r.register(createItemBlock(groundcoverBlock, ItemBlock::new));

@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -19,33 +20,21 @@ public class FoodType {
     private final String name;
     private final FoodCategory category;
     private final FoodData foodData;
-
     private final boolean heatable;
     private final float heatCapacity;
     private final float cookingTemp;
+    private final Optional<String[]> oreDictNames;
 
-    private final String[] oreDictNames;
+    private FoodType(Builder builder) {
+        this.name = builder.name;
+        this.category = builder.category;
+        this.foodData = builder.foodData;
 
-    /**
-     * Конструктор класса FoodType.
-     *
-     * @param name         название варианта еды
-     * @param category     категория еды
-     * @param foodData     данные о пищевой ценности
-     * @param heatCapacity теплоемкость
-     * @param cookingTemp  температура приготовления
-     * @param oreNames     имена в словаре руд
-     */
-    FoodType(String name, @Nonnull FoodCategory category, FoodData foodData, float heatCapacity, float cookingTemp, String... oreNames) {
-        this.name = name;
-        this.category = category;
-        this.foodData = foodData;
+        this.heatable = builder.cookingTemp >= 0;
+        this.heatCapacity = builder.heatCapacity;
+        this.cookingTemp = builder.cookingTemp;
 
-        this.heatable = cookingTemp >= 0;
-        this.heatCapacity = heatCapacity;
-        this.cookingTemp = cookingTemp;
-
-        this.oreDictNames = oreNames == null || oreNames.length == 0 ? null : oreNames;
+        this.oreDictNames = Optional.ofNullable(builder.oreDictNames);
 
         if (name.isEmpty()) {
             throw new RuntimeException(String.format("FoodType name must contain any character: [%s]", name));
@@ -132,7 +121,7 @@ public class FoodType {
      * @return Имена в словаре руд для типа еды.
      */
     @Nullable
-    public String[] getOreDictNames() {
+    public Optional<String[]> getOreDictNames() {
         return oreDictNames;
     }
 
@@ -140,7 +129,6 @@ public class FoodType {
      * Внутренний класс Builder для создания экземпляров класса FoodType.
      */
     public static class Builder {
-
         private final String name;
         private FoodCategory category;
         private FoodData foodData;
@@ -157,6 +145,7 @@ public class FoodType {
             this.name = name;
             this.heatCapacity = 0;
             this.cookingTemp = -1;
+            this.oreDictNames = null;
         }
 
         /**
@@ -228,7 +217,7 @@ public class FoodType {
          * @return экземпляр класса FoodType
          */
         public FoodType build() {
-            return new FoodType(name, category, foodData, heatCapacity, cookingTemp, oreDictNames);
+            return new FoodType(this);
         }
     }
 }

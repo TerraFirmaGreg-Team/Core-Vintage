@@ -6,7 +6,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.items.ceramics.*;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.common.objects.items.metal.ItemMetalBucket;
@@ -128,9 +127,6 @@ public final class ItemsTFC_old {
         //=== Other ==================================================================================================//
 
         register(r, "wooden_bucket", new ItemWoodBucket(), CreativeTabsTFC.WOOD); //not a simple item, use a custom model
-
-        BlocksTFC_old.getAllNormalItemBlocks().forEach(x -> registerItemBlock(r, x));
-        BlocksTFC_old.getAllInventoryItemBlocks().forEach(x -> registerItemBlock(r, x));
 
         // POTTERY
         {

@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfc:berry_bush_medium",
+    "model": "tfc:berry_bush/medium",
     "textures": {
       "texture": "tfc:blocks/berry_bush/bush/cloud_berry",
       "particle": "tfc:blocks/berry_bush/bush/cloud_berry"
@@ -10,7 +10,7 @@
   "variants": {
     "normal": [{}],
     "inventory": {
-      "model": "tfc:berry_bush_large"
+      "model": "tfc:berry_bush/large"
     },
     "fruiting": {
       "true": {

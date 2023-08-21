@@ -29,7 +29,6 @@ import net.dries007.tfc.client.util.GrassColorHandler;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.common.objects.blocks.BlockThatchBed;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;
@@ -136,6 +135,7 @@ public class ClientProxy extends CommonProxy {
         TFCStorage.CROP_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.ALABASTER_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.GROUNDCOVER_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCStorage.BUSH_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCStorage.METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
 
@@ -229,14 +229,6 @@ public class ClientProxy extends CommonProxy {
                 });
             }
         }
-
-        // Item Blocks
-        for (ItemBlock item : BlocksTFC_old.getAllNormalItemBlocks())
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
-
-        for (ItemBlock item : BlocksTFC_old.getAllInventoryItemBlocks())
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-
 
         // Blocks with Ignored Properties
 

@@ -1,9 +1,12 @@
 package net.dries007.tfc.common.objects.blocks.berrybush;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.bush.IBerryBush;
+import net.dries007.tfc.api.types.bush.IBushBlock;
+import net.dries007.tfc.api.types.bush.type.BushType;
 import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.DamageSourcesTFC;
@@ -13,16 +16,20 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -31,6 +38,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -38,35 +46,43 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockBerryBush extends Block implements IGrowingPlant {
+public class BlockBerryBush extends BlockBush implements IGrowingPlant, IBushBlock {
     public static final PropertyBool FRUITING = PropertyBool.create("fruiting");
 
     private static final AxisAlignedBB SMALL_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.25D, 1D);
     private static final AxisAlignedBB MEDIUM_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.5D, 1D);
 
-    private static final Map<IBerryBush, BlockBerryBush> MAP = new HashMap<>();
-    private final IBerryBush bush;
+    private final BushType type;
 
-    public BlockBerryBush(IBerryBush bush) {
-        super(Material.PLANTS);
-        this.bush = bush;
-        if (MAP.put(bush, this) != null) throw new IllegalStateException("There can only be one.");
-        Blocks.FIRE.setFireInfo(this, 30, 60);
-        setHardness(1.0F);
-        setTickRandomly(true);
+    public BlockBerryBush(BushType type) {
+        super();
+        this.type = type;
+
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
+        setCreativeTab(CreativeTabsTFC.FLORA);
         setSoundType(SoundType.PLANT);
+        setHardness(1.0F);
         setDefaultState(blockState.getBaseState().withProperty(FRUITING, false));
+
+        Blocks.FIRE.setFireInfo(this, 30, 60);
     }
 
-    public static BlockBerryBush get(IBerryBush bush) {
-        return MAP.get(bush);
+    @Nonnull
+    public BushType getType() {
+        return type;
     }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
+    }
+
 
     @SuppressWarnings("deprecation")
     @Override
@@ -89,7 +105,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     @Override
     @SuppressWarnings("deprecation")
     public boolean isFullCube(IBlockState state) {
-        return bush.getSize() == IBerryBush.Size.LARGE;
+        return type.getSize() == Size.LARGE;
     }
 
     @Override
@@ -101,36 +117,21 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     @SuppressWarnings("deprecation")
     @Nonnull
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        switch (bush.getSize()) {
-            case SMALL:
-                return SMALL_SIZE_AABB;
-            case MEDIUM:
-                return MEDIUM_SIZE_AABB;
-            default:
-                return FULL_BLOCK_AABB;
-        }
+        return switch (type.getSize()) {
+            case SMALL -> SMALL_SIZE_AABB;
+            case MEDIUM -> MEDIUM_SIZE_AABB;
+            default -> FULL_BLOCK_AABB;
+        };
     }
 
     @Override
     @Nonnull
     @SuppressWarnings("deprecation")
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        if (bush.getSize() == IBerryBush.Size.LARGE && face == EnumFacing.UP)
+        if (type.getSize() == Size.LARGE && face == EnumFacing.UP)
             return BlockFaceShape.SOLID;
         else
             return BlockFaceShape.UNDEFINED;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
     }
 
     @Override
@@ -141,8 +142,8 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
                 float temp = ClimateTFC.getActualTemp(world, pos);
                 float rainfall = ChunkDataTFC.getRainfall(world, pos);
                 long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-                if (hours > (bush.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && bush.isValidForGrowth(temp, rainfall)) {
-                    if (bush.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+                if (hours > (type.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && type.isValidForGrowth(temp, rainfall)) {
+                    if (type.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
                         //Fruiting
                         world.setBlockState(pos, world.getBlockState(pos).withProperty(FRUITING, true));
                     }
@@ -188,7 +189,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (worldIn.getBlockState(pos).getValue(FRUITING)) {
             if (!worldIn.isRemote) {
-                ItemHandlerHelper.giveItemToPlayer(playerIn, bush.getFoodDrop());
+                ItemHandlerHelper.giveItemToPlayer(playerIn, type.getFoodDrop());
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUITING, false));
                 TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
                 if (te != null) {
@@ -209,7 +210,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
                 entityIn.motionY *= ConfigTFC.General.MISC.berryBushMovementModifier;
             }
             entityIn.motionZ *= ConfigTFC.General.MISC.berryBushMovementModifier;
-            if (bush.isSpiky() && entityIn instanceof EntityLivingBase) {
+            if (type.isSpiky() && entityIn instanceof EntityLivingBase) {
                 entityIn.attackEntityFrom(DamageSourcesTFC.BERRYBUSH, 1.0F);
             }
         }
@@ -232,14 +233,10 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
         return new TETickCounter();
     }
 
-    @Nonnull
-    public IBerryBush getBush() {
-        return bush;
-    }
 
     private boolean canStay(IBlockAccess world, BlockPos pos) {
         IBlockState below = world.getBlockState(pos.down());
-        if (bush.getSize() == IBerryBush.Size.LARGE && below.getBlock() instanceof BlockBerryBush && ((BlockBerryBush) below.getBlock()).bush == this.bush) {
+        if (type.getSize() == Size.LARGE && below.getBlock() instanceof BlockBerryBush && ((BlockBerryBush) below.getBlock()).type == this.type) {
             return BlocksTFC_old.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
         }
         return BlocksTFC_old.isGrowableSoil(below);
@@ -249,12 +246,31 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         float temp = ClimateTFC.getActualTemp(world, pos);
         float rainfall = ChunkDataTFC.getRainfall(world, pos);
-        boolean canGrow = bush.isValidForGrowth(temp, rainfall);
+        boolean canGrow = type.isValidForGrowth(temp, rainfall);
         if (state.getValue(FRUITING)) {
             return GrowthStatus.FULLY_GROWN;
-        } else if (canGrow && bush.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+        } else if (canGrow && type.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
             return GrowthStatus.GROWING;
         }
         return canGrow ? GrowthStatus.CAN_GROW : GrowthStatus.NOT_GROWING;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(
+                        getResourceLocation(),
+                        this.getPropertyString(state.getProperties()));
+            }
+        });
+
+        for (IBlockState state : this.getBlockState().getValidStates()) {
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
+                    this.getMetaFromState(state), new ModelResourceLocation(getResourceLocation(), "normal"));
+        }
     }
 }

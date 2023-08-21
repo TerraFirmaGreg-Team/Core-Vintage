@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.api.types.bush.IBerryBush;
-import net.dries007.tfc.common.objects.blocks.berrybush.BlockBerryBush;
+import net.dries007.tfc.api.registries.TFCStorage;
+import net.dries007.tfc.api.types.bush.type.BushType;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
@@ -18,15 +18,12 @@ import java.util.List;
 import java.util.Random;
 
 public class WorldGenBerryBushes implements IWorldGenerator {
-    private static final List<IBerryBush> BUSHES = new ArrayList<>();
+    private static final List<BushType> BUSHES = new ArrayList<>(BushType.getBushTypes());
 
-    public static void register(IBerryBush bush) {
-        BUSHES.add(bush);
-    }
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0 && BUSHES.size() > 0 && ConfigTFC.General.FOOD.berryBushRarity > 0) {
+        if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0 && !BUSHES.isEmpty() && ConfigTFC.General.FOOD.berryBushRarity > 0) {
             if (random.nextInt(ConfigTFC.General.FOOD.berryBushRarity) == 0) {
                 // Guarantees bush generation if possible (easier to balance by config file while also making it random)
                 Collections.shuffle(BUSHES);
@@ -34,7 +31,7 @@ public class WorldGenBerryBushes implements IWorldGenerator {
 
                 float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
                 float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
-                IBerryBush bush = BUSHES.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
+                var bush = BUSHES.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
 
                 if (bush != null) {
                     final int x = (chunkX << 4) + random.nextInt(16) + 8;
@@ -44,7 +41,7 @@ public class WorldGenBerryBushes implements IWorldGenerator {
                     if (world.getBlockState(pos).getMaterial().isLiquid() || !world.getBlockState(pos).getMaterial().isReplaceable()) {
                         return;
                     }
-                    BlockBerryBush block = BlockBerryBush.get(bush);
+                    var block = TFCStorage.getBushBlock(bush);
                     if (block.canPlaceBlockAt(world, pos)) {
                         world.setBlockState(pos, block.getDefaultState());
                     }

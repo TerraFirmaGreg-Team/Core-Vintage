@@ -41,28 +41,24 @@ public class CropType {
     private final float rainMinAlive;
     private final float rainMaxAlive;
 
-    public CropType(String name, CropCategory cropCategory,
-                    Supplier<ItemStack> foodDrop, Supplier<ItemStack> seedDrop,
-                    float growthTime,
-                    float tempMinAlive, float tempMinGrow, float tempMaxGrow, float tempMaxAlive,
-                    float rainMinAlive, float rainMinGrow, float rainMaxGrow, float rainMaxAlive) {
+    private CropType(Builder builder) {
 
-        this.name = name;
-        this.cropCategory = cropCategory;
-        this.foodDrop = foodDrop;
-        this.seedDrop = seedDrop;
+        this.name = builder.name;
+        this.cropCategory = builder.category;
+        this.foodDrop = builder.foodDrop;
+        this.seedDrop = builder.seedDrop;
 
-        this.growthTime = growthTime;
+        this.growthTime = builder.growthTime;
 
-        this.tempMinAlive = tempMinAlive;
-        this.tempMinGrow = tempMinGrow;
-        this.tempMaxGrow = tempMaxGrow;
-        this.tempMaxAlive = tempMaxAlive;
+        this.tempMinAlive = builder.tempMinAlive;
+        this.tempMinGrow = builder.tempMinGrow;
+        this.tempMaxGrow = builder.tempMaxGrow;
+        this.tempMaxAlive = builder.tempMaxAlive;
 
-        this.rainMinAlive = rainMinAlive;
-        this.rainMinGrow = rainMinGrow;
-        this.rainMaxGrow = rainMaxGrow;
-        this.rainMaxAlive = rainMaxAlive;
+        this.rainMinAlive = builder.rainMinAlive;
+        this.rainMinGrow = builder.rainMinGrow;
+        this.rainMaxGrow = builder.rainMaxGrow;
+        this.rainMaxAlive = builder.rainMaxAlive;
 
         if (name.isEmpty()) {
             throw new RuntimeException(String.format("CropType name must contain any character: [%s]", name));
@@ -154,18 +150,15 @@ public class CropType {
     }
 
     public static class Builder {
-
         private final String name;
         private CropCategory category;
         private Supplier<ItemStack> foodDrop;
         private Supplier<ItemStack> seedDrop;
         private float growthTime;
-
         private float tempMinAlive;
         private float tempMinGrow;
         private float tempMaxGrow;
         private float tempMaxAlive;
-
         private float rainMinAlive;
         private float rainMinGrow;
         private float rainMaxGrow;
@@ -220,10 +213,7 @@ public class CropType {
 
 
         public CropType build() {
-            return new CropType(
-                    name, category, foodDrop, seedDrop, growthTime,
-                    tempMinAlive, tempMinGrow, tempMaxGrow, tempMaxAlive,
-                    rainMinAlive, rainMinGrow, rainMaxGrow, rainMaxAlive);
+            return new CropType(this);
         }
     }
 }

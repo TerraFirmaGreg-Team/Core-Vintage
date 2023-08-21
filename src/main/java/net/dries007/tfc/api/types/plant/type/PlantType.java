@@ -17,86 +17,86 @@ import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
 public class PlantType {
 
+    // Список всех типов растений
     private static final Set<PlantType> PLANT_TYPES = new LinkedHashSet<>();
 
+    // Имя растения
     @Nonnull
     private final String name;
+
+    // Массив стадий роста растения
     private final int[] stages;
+
+    // Количество стадий роста растения
     private final int numStages;
+
+    // Минимальная и максимальная температура для роста растения
     private final float minGrowthTemp;
     private final float maxGrowthTemp;
+
+    // Минимальная и максимальная температура, при которой растение может существовать
     private final float minTemp;
     private final float maxTemp;
+
+    // Минимальное и максимальное количество осадков для роста растения
     private final float minRain;
     private final float maxRain;
+
+    // Минимальное и максимальное количество солнечного света для роста растения
     private final int minSun;
     private final int maxSun;
+
+    // Максимальная высота для двойных+ растений этого типа
     private final int maxHeight;
+
+    // Минимальная и максимальная глубина воды для роста растения
     private final int minWaterDepth;
     private final int maxWaterDepth;
+
+    // Модификатор перемещения игрока по растению по X/Z
     private final double movementMod;
 
+    // Вариант блока растения
     private final PlantBlockVariant plantBlockVariant;
+
+    // Материал, связанный с растением
     private final Material material;
+
+    // Помечает ли растение землю с глиной
     private final boolean isClayMarking;
+
+    // Может ли растение появиться только в болотах
     private final boolean isSwampPlant;
-    private final Optional<String> oreDictName;
+
+    // Имя записи в словаре растений для растения
+    private final Optional<String[]> oreDictName;
 
     /**
-     * Генерация растительного мира определяется динамически на основе действительных значений температуры и количества осадков.
-     * <p>
-     * Допустимыми средними температурами биомов являются те, которые попадают в диапазон
-     * плюс-минус четверть полного диапазона температур растений
-     * <p>
-     * Пример: Лотос
-     * Диапазон полной температуры: 10-50
-     * Средняя температура: 30 ((10+50)/2)
-     * Разница между максимальной и минимальной температурами: 40 (50-10)
-     * Четверть этого диапазона: 10 (40/4)
-     * Диапазон температуры при генерации мира: 20-40 (30 +- 10)
+     * Конструктор класса PlantType.
      *
-     * @param name              имя этого растения
-     * @param plantBlockVariant тип растения
-     * @param isClayMarking     если это растение помечает землю с глиной
-     * @param isSwampPlant      если это растение может появиться только в болотах
-     * @param minGrowthTemp     минимальная температура для роста
-     * @param maxGrowthTemp     максимальная температура для роста
-     * @param minTemp           минимальная температура
-     * @param maxTemp           максимальная температура
-     * @param minRain           минимальные осадки
-     * @param maxRain           максимальные осадки
-     * @param minSun            минимальный уровень освещенности при генерации мира
-     * @param maxSun            максимальный уровень освещенности при генерации мира
-     * @param maxHeight         максимальная высота для двойных+ растений
-     * @param minWaterDepth     минимальное глубина воды для водных растений при генерации мира
-     * @param maxWaterDepth     максимальное глубина воды для водных растений при генерации мира
-     * @param movementMod       модификатор для перемещения игрока по этому растению по X/Z
-     * @param oreDictName       если не пустая, то запись в словаре растений для этого растения
+     * @param builder объект Builder для создания экземпляра PlantType
      */
-    public PlantType(@Nonnull String name, PlantBlockVariant plantBlockVariant, int[] stages, boolean isClayMarking,
-                     boolean isSwampPlant, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp,
-                     float minRain, float maxRain, int minSun, int maxSun, int maxHeight, int minWaterDepth,
-                     int maxWaterDepth, double movementMod, String oreDictName) {
-        this.name = name;
-        this.stages = stages;
-        this.minGrowthTemp = minGrowthTemp;
-        this.maxGrowthTemp = maxGrowthTemp;
-        this.minTemp = minTemp;
-        this.maxTemp = maxTemp;
-        this.minRain = minRain;
-        this.maxRain = maxRain;
-        this.minSun = minSun;
-        this.maxSun = maxSun;
-        this.maxHeight = maxHeight;
-        this.minWaterDepth = minWaterDepth;
-        this.maxWaterDepth = maxWaterDepth;
-        this.movementMod = movementMod;
+    private PlantType(Builder builder) {
+        this.name = builder.name;
+        this.stages = builder.stages;
+        this.minGrowthTemp = builder.minGrowthTemp;
+        this.maxGrowthTemp = builder.maxGrowthTemp;
+        this.minTemp = builder.minTemp;
+        this.maxTemp = builder.maxTemp;
+        this.minRain = builder.minRain;
+        this.maxRain = builder.maxRain;
+        this.minSun = builder.minSun;
+        this.maxSun = builder.maxSun;
+        this.maxHeight = builder.maxHeight;
+        this.minWaterDepth = builder.minWaterDepth;
+        this.maxWaterDepth = builder.maxWaterDepth;
+        this.movementMod = builder.movementMod;
 
-        this.plantBlockVariant = plantBlockVariant;
-        this.isClayMarking = isClayMarking;
-        this.isSwampPlant = isSwampPlant;
+        this.plantBlockVariant = builder.plantBlockVariant;
+        this.isClayMarking = builder.isClayMarking;
+        this.isSwampPlant = builder.isSwampPlant;
         this.material = plantBlockVariant.getPlantMaterial();
-        this.oreDictName = Optional.ofNullable(oreDictName);
+        this.oreDictName = Optional.ofNullable(builder.oreDictName);
 
         HashSet<Integer> hashSet = new HashSet<>();
         for (int stage : stages) {
@@ -133,15 +133,6 @@ public class PlantType {
     }
 
     /**
-     * Получить массив стадий роста этого растения.
-     *
-     * @return массив стадий роста
-     */
-    public int[] getStages() {
-        return stages;
-    }
-
-    /**
      * Получить количество стадий роста этого растения.
      *
      * @return количество стадий роста
@@ -151,102 +142,12 @@ public class PlantType {
     }
 
     /**
-     * Получить минимальную температуру для роста этого растения.
-     *
-     * @return минимальная температура для роста
-     */
-    public float getMinGrowthTemp() {
-        return minGrowthTemp;
-    }
-
-    /**
-     * Получить максимальную температуру для роста этого растения.
-     *
-     * @return максимальная температура для роста
-     */
-    public float getMaxGrowthTemp() {
-        return maxGrowthTemp;
-    }
-
-    /**
-     * Получить минимальную температуру для этого растения.
-     *
-     * @return минимальная температура
-     */
-    public float getMinTemp() {
-        return minTemp;
-    }
-
-    /**
-     * Получить максимальную температуру для этого растения.
-     *
-     * @return максимальная температура
-     */
-    public float getMaxTemp() {
-        return maxTemp;
-    }
-
-    /**
-     * Получить минимальное количество осадков для этого растения.
-     *
-     * @return минимальное количество осадков
-     */
-    public float getMinRain() {
-        return minRain;
-    }
-
-    /**
-     * Получить максимальное количество осадков для этого растения.
-     *
-     * @return максимальное количество осадков
-     */
-    public float getMaxRain() {
-        return maxRain;
-    }
-
-    /**
-     * Получить минимальный уровень освещенности для этого растения.
-     *
-     * @return минимальный уровень освещенности
-     */
-    public int getMinSun() {
-        return minSun;
-    }
-
-    /**
-     * Получить максимальный уровень освещенности для этого растения.
-     *
-     * @return максимальный уровень освещенности
-     */
-    public int getMaxSun() {
-        return maxSun;
-    }
-
-    /**
      * Получить максимальную высоту для двойных+ растений этого типа.
      *
      * @return максимальная высота
      */
     public int getMaxHeight() {
         return maxHeight;
-    }
-
-    /**
-     * Получить минимальную глубину воды для этого растения.
-     *
-     * @return минимальная глубина воды
-     */
-    public int getMinWaterDepth() {
-        return minWaterDepth;
-    }
-
-    /**
-     * Получить максимальную глубину воды для этого растения.
-     *
-     * @return максимальная глубина воды
-     */
-    public int getMaxWaterDepth() {
-        return maxWaterDepth;
     }
 
     /**
@@ -299,31 +200,70 @@ public class PlantType {
      *
      * @return имя записи в словаре растений, если оно задано, иначе пустое значение
      */
-    public Optional<String> getOreDictName() {
+    public Optional<String[]> getOreDictName() {
         return oreDictName;
     }
 
-
+    /**
+     * Проверяет, является ли данное местоположение подходящим для роста растения.
+     *
+     * @param temp     температура
+     * @param rain     количество осадков
+     * @param sunlight количество солнечного света
+     * @return true, если местоположение подходит для роста растения, иначе false
+     */
     public boolean isValidLocation(float temp, float rain, int sunlight) {
         return isValidTemp(temp) && isValidRain(rain) && isValidSunlight(sunlight);
     }
 
+    /**
+     * Проверяет, является ли данная температура подходящей для роста растения.
+     *
+     * @param temp температура
+     * @return true, если температура подходит для роста растения, иначе false
+     */
     public boolean isValidTemp(float temp) {
         return getTempValidity(temp) == PlantValidity.VALID;
     }
 
+    /**
+     * Проверяет, является ли данная температура подходящей для генерации мира.
+     *
+     * @param temp температура
+     * @return true, если температура подходит для генерации мира, иначе false
+     */
     public boolean isValidTempForWorldGen(float temp) {
         return Math.abs(temp - getAvgTemp()) < Float.sum(maxTemp, -minTemp) / 4f;
     }
 
+    /**
+     * Проверяет, является ли данное количество осадков подходящим для роста растения.
+     *
+     * @param rain количество осадков
+     * @return true, если количество осадков подходит для роста растения, иначе false
+     */
     public boolean isValidRain(float rain) {
         return getRainValidity(rain) == PlantValidity.VALID;
     }
 
+    /**
+     * Проверяет, является ли данное количество солнечного света подходящим для роста растения.
+     *
+     * @param sunlight количество солнечного света
+     * @return true, если количество солнечного света подходит для роста растения, иначе false
+     */
     public boolean isValidSunlight(int sunlight) {
         return minSun <= sunlight && maxSun >= sunlight;
     }
 
+    /**
+     * Проверяет, является ли данная глубина плавающей воды подходящей для роста растения.
+     *
+     * @param world мир
+     * @param pos   позиция
+     * @param water блок воды
+     * @return true, если глубина плавающей воды подходит для роста растения, иначе false
+     */
     public boolean isValidFloatingWaterDepth(World world, BlockPos pos, IBlockState water) {
         int depthCounter = minWaterDepth;
         int maxDepth = maxWaterDepth;
@@ -339,6 +279,14 @@ public class PlantType {
         return (maxDepth > 0) && depthCounter <= maxDepth + 1;
     }
 
+    /**
+     * Возвращает подходящую глубину воды для роста растения.
+     *
+     * @param world мир
+     * @param pos   позиция
+     * @param water блок воды
+     * @return глубина воды для роста растения, -1 если не подходит
+     */
     public int getValidWaterDepth(World world, BlockPos pos, IBlockState water) {
         int depthCounter = minWaterDepth;
         int maxDepth = maxWaterDepth;
@@ -356,18 +304,40 @@ public class PlantType {
         return depthCounter;
     }
 
+    /**
+     * Возвращает стадию роста для указанного месяца.
+     *
+     * @param month месяц
+     * @return стадия роста для указанного месяца
+     */
     public int getStageForMonth(Month month) {
         return stages[month.ordinal()];
     }
 
+    /**
+     * Возвращает стадию роста для текущего месяца.
+     *
+     * @return стадия роста для текущего месяца
+     */
     public int getStageForMonth() {
         return getStageForMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear());
     }
 
+    /**
+     * Проверяет, является ли данная температура подходящей для роста растения.
+     *
+     * @param temp температура
+     * @return true, если температура подходит для роста растения, иначе false
+     */
     public boolean isValidGrowthTemp(float temp) {
         return minGrowthTemp <= temp && maxGrowthTemp >= temp;
     }
 
+    /**
+     * Возвращает тип воды для растения.
+     *
+     * @return тип воды для растения
+     */
     public IBlockState getWaterType() {
         if (plantBlockVariant == FLOATING_SEA || plantBlockVariant == WATER_SEA || plantBlockVariant == TALL_WATER_SEA || plantBlockVariant == EMERGENT_TALL_WATER_SEA) {
             return SALT_WATER;
@@ -376,10 +346,22 @@ public class PlantType {
         }
     }
 
+    /**
+     * Возвращает возраст для генерации мира.
+     *
+     * @param rand случайное число
+     * @param temp температура
+     * @return возраст для генерации мира
+     */
     public int getAgeForWorldgen(Random rand, float temp) {
         return rand.nextInt(Math.max(1, Math.min(Math.round(2.5f + ((temp - minGrowthTemp) / minGrowthTemp)), 4)));
     }
 
+    /**
+     * Проверяет, может ли растение быть посажено в горшок.
+     *
+     * @return true, если растение может быть посажено в горшок, иначе false
+     */
     public boolean canBePotted() {
         return plantBlockVariant == STANDARD ||
                 plantBlockVariant == CACTUS ||
@@ -390,6 +372,11 @@ public class PlantType {
                 plantBlockVariant == MUSHROOM;
     }
 
+    /**
+     * Возвращает тип растения в виде перечисления EnumPlantType.
+     *
+     * @return тип растения
+     */
     public final EnumPlantType getEnumPlantType() {
         switch (plantBlockVariant) {
             case DESERT, DESERT_TALL_PLANT -> {
@@ -419,6 +406,12 @@ public class PlantType {
         }
     }
 
+    /**
+     * Возвращает валидность температуры для растения.
+     *
+     * @param temp температура
+     * @return валидность температуры для растения
+     */
     public PlantValidity getTempValidity(float temp) {
         if (temp < minTemp) {
             return PlantValidity.COLD;
@@ -429,6 +422,12 @@ public class PlantType {
         return PlantValidity.VALID;
     }
 
+    /**
+     * Возвращает валидность осадков для растения.
+     *
+     * @param rain количество осадков
+     * @return валидность осадков для растения
+     */
     public PlantValidity getRainValidity(float rain) {
         if (rain < minRain)
             return PlantValidity.DRY;
@@ -437,10 +436,18 @@ public class PlantType {
         return PlantValidity.VALID;
     }
 
+    /**
+     * Возвращает среднюю температуру.
+     *
+     * @return средняя температура
+     */
     private float getAvgTemp() {
         return Float.sum(minTemp, maxTemp) / 2f;
     }
 
+    /**
+     * Перечисление типов растений.
+     */
     public enum EnumPlantType {
         CLAY,
         DESERT_CLAY,
@@ -453,6 +460,9 @@ public class PlantType {
         NONE
     }
 
+    /**
+     * Перечисление валидности растения.
+     */
     public enum PlantValidity {
         COLD,
         HOT,
@@ -479,9 +489,8 @@ public class PlantType {
         private double movementMod;
         private boolean isClayMarking;
         private boolean isSwampPlant;
-        private String oreDictName;
+        private String[] oreDictName;
 
-        // Конструктор
         public Builder(@Nonnull String name, PlantBlockVariant plantBlockVariant) {
             this.name = name;
             this.plantBlockVariant = plantBlockVariant;
@@ -571,16 +580,13 @@ public class PlantType {
         }
 
         // Установка имени записи в словаре растений для этого растения
-        public Builder setOreDictName(String oreDictName) {
+        public Builder setOreDictName(String... oreDictName) {
             this.oreDictName = oreDictName;
             return this;
         }
 
-        // Метод для создания объекта PlantType с использованием заданных значений
         public PlantType build() {
-            return new PlantType(name, plantBlockVariant, stages, isClayMarking, isSwampPlant, minGrowthTemp, maxGrowthTemp,
-                    minTemp, maxTemp, minRain, maxRain, minSun, maxSun, maxHeight, minWaterDepth, maxWaterDepth,
-                    movementMod, oreDictName);
+            return new PlantType(this);
         }
     }
 }

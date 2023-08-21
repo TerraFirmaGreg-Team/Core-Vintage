@@ -2,6 +2,7 @@ package net.dries007.tfc.common.objects.blocks;
 
 import gregtech.api.GregTechAPI;
 import net.dries007.tfc.api.types.GroundcoverType;
+import net.dries007.tfc.api.types.bush.type.BushType;
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.types.crop.variant.CropBlockVariant;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariant;
@@ -13,6 +14,7 @@ import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.common.objects.blocks.berrybush.BlockBerryBush;
 import net.dries007.tfc.common.objects.blocks.devices.*;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidHotWater;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidWater;
@@ -66,56 +68,62 @@ public class TFCBlocks {
 
         //=== Crop ===================================================================================================//
 
-        for (var cropBlockVariant : CropBlockVariant.getCropBlockVariants()) {
-            for (var cropType : CropType.getCropTypes()) {
-                var cropBlock = cropBlockVariant.create(cropType);
+        for (var variant : CropBlockVariant.getCropBlockVariants()) {
+            for (var type : CropType.getCropTypes()) {
+                var cropBlock = variant.create(type);
 
-                if (CROP_BLOCKS.put(new Pair<>(cropBlockVariant, cropType), cropBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", cropBlockVariant, cropType));
+                if (CROP_BLOCKS.put(new Pair<>(variant, type), cropBlock) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
             }
         }
 
         //=== Rock ===================================================================================================//
 
-        for (var rockBlockVariant : RockBlockVariant.getRockBlockVariants()) {
-            for (var rockType : RockType.getRockTypes()) {
-                var rockBlock = rockBlockVariant.create(rockType);
+        for (var variant : RockBlockVariant.getRockBlockVariants()) {
+            for (var type : RockType.getRockTypes()) {
+                var rockBlock = variant.create(type);
 
-                if (ROCK_BLOCKS.put(new Pair<>(rockBlockVariant, rockType), rockBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", rockBlockVariant, rockType));
+                if (ROCK_BLOCKS.put(new Pair<>(variant, type), rockBlock) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
             }
         }
 
         //=== Soil ===================================================================================================//
 
-        for (var soilBlockVariant : SoilBlockVariant.getSoilBlockVariants()) {
-            for (var soilType : SoilType.getSoilTypes()) {
-                var soilBlock = soilBlockVariant.create(soilType);
+        for (var variant : SoilBlockVariant.getSoilBlockVariants()) {
+            for (var type : SoilType.getSoilTypes()) {
+                var soilBlock = variant.create(type);
 
-                if (SOIL_BLOCKS.put(new Pair<>(soilBlockVariant, soilType), soilBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", soilBlockVariant, soilType));
+                if (SOIL_BLOCKS.put(new Pair<>(variant, type), soilBlock) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
             }
         }
 
         //=== Wood ===================================================================================================//
 
-        for (var woodBlockVariant : WoodBlockVariant.getWoodBlockVariants()) {
-            for (var woodType : WoodType.getWoodTypes()) {
-                var woodBlock = woodBlockVariant.create(woodType);
+        for (var variant : WoodBlockVariant.getWoodBlockVariants()) {
+            for (var type : WoodType.getWoodTypes()) {
+                var woodBlock = variant.create(type);
 
-                if (WOOD_BLOCKS.put(new Pair<>(woodBlockVariant, woodType), woodBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", woodBlockVariant, woodType));
+                if (WOOD_BLOCKS.put(new Pair<>(variant, type), woodBlock) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
             }
         }
 
-
         //=== Plant ==================================================================================================//
 
-        for (var plant : PlantType.getPlantTypes()) {
-            var plantTypeBlock = plant.getPlantVariant().create(plant);
+        for (var type : PlantType.getPlantTypes()) {
+            var plantBlock = type.getPlantVariant().create(type);
 
-            if (PLANT_BLOCKS.put(new Pair<>(plant.getPlantVariant(), plant), plantTypeBlock) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", plant.getPlantVariant(), plant));
+            if (PLANT_BLOCKS.put(new Pair<>(type.getPlantVariant(), type), plantBlock) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", type.getPlantVariant(), type));
+        }
+
+        //=== BlockBush ==============================================================================================//
+
+        for (var type : BushType.getBushTypes()) {
+            if (BUSH_BLOCKS.put(type, new BlockBerryBush(type)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
         }
 
         //=== Metal ==================================================================================================//
@@ -164,11 +172,8 @@ public class TFCBlocks {
 
         //=== Other ==================================================================================================//
 
-        PEAT = new BlockPeat();
-        PEAT_GRASS = new BlockPeatGrass();
-
-        ITEM_BLOCKS.add(PEAT.getItemBlock());
-        ITEM_BLOCKS.add(PEAT_GRASS.getItemBlock());
+        ITEM_BLOCKS.add(new ItemBlockTFC(PEAT = new BlockPeat()));
+        ITEM_BLOCKS.add(new ItemBlockTFC(PEAT_GRASS = new BlockPeatGrass()));
         ITEM_BLOCKS.add(new ItemBlockTFC(DEBUG = new BlockDebug()));
         ITEM_BLOCKS.add(new ItemBlockTFC(AGGREGATE = new BlockAggregate()));
         ITEM_BLOCKS.add(new ItemBlockTFC(FIRE_CLAY_BLOCK = new BlockFireClay()));

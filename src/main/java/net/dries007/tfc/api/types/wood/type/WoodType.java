@@ -62,66 +62,37 @@ public class WoodType {
     /* Это открыто для замены, т.е. для динамических деревьев */
     private final ITreeGenerator generator;
 
+    private WoodType(Builder builder) {
+        this.name = builder.name;
+        this.color = builder.color;
 
-    /**
-     * Создает объект Wood с заданными характеристиками.
-     *
-     * @param name             Название древесины.
-     * @param color            цвет дерева
-     * @param generator        генератор, который будет вызываться для создания этого дерева
-     * @param minTemp          минимальная температура
-     * @param maxTemp          максимальная температура
-     * @param minRain          минимальное количество осадков
-     * @param maxRain          максимальное количество осадков
-     * @param minDensity       минимальная плотность. Используйте -1, чтобы получить все значения плотности. 0.1 - значение по умолчанию, чтобы создать области с очень низкой плотностью без деревьев
-     * @param maxDensity       максимальная плотность. Используйте 2, чтобы получить все значения плотности
-     * @param dominance        насколько это дерево выбирается по сравнению с другими деревьями. Диапазон 0 <> 10, где 10 - наиболее распространенное значение
-     * @param maxGrowthRadius  используется для проверки условий роста
-     * @param maxHeight        используется для проверки условий роста
-     * @param maxDecayDistance максимальное расстояние распада для листьев
-     * @param isConifer        todo: сделать так, чтобы это что-то делало
-     * @param bushGenerator    генератор для создания маленьких кустов, null означает, что дерево не будет создавать кусты
-     * @param canMakeTannin    может ли дерево производить дубильные вещества
-     * @param minGrowthTime    количество времени (в игровых днях), необходимое для роста этого дерева
-     * @param burnTemp         температура, при которой дерево будет гореть в костре или подобном устройстве
-     * @param burnTicks        количество тиков, в течение которых дерево будет гореть в костре или подобном устройстве
-     */
-    public WoodType(@Nonnull String name, int color, @Nonnull ITreeGenerator generator, float minTemp, float maxTemp,
-                    float minRain, float maxRain, float minDensity, float maxDensity,
-                    float dominance, int maxGrowthRadius, int maxHeight, int maxDecayDistance,
-                    boolean isConifer, @Nullable ITreeGenerator bushGenerator,
-                    boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks,
-                    Month flowerMonthStart, int floweringMonths, Month harvestMonthStart, int harvestingMonths, FoodType fruit, float growthTime) {
-        this.name = name;
-        this.color = color;
+        this.minTemp = builder.minTemp;
+        this.maxTemp = builder.maxTemp;
+        this.minRain = builder.minRain;
+        this.maxRain = builder.maxRain;
 
-        this.minTemp = minTemp;
-        this.maxTemp = maxTemp;
-        this.minRain = minRain;
-        this.maxRain = maxRain;
+        this.minDensity = builder.minDensity;
+        this.maxDensity = builder.maxDensity;
 
-        this.minDensity = minDensity;
-        this.maxDensity = maxDensity;
+        this.dominance = builder.dominance;
+        this.maxGrowthRadius = builder.maxGrowthRadius;
+        this.maxHeight = builder.maxHeight;
+        this.maxDecayDistance = builder.maxDecayDistance;
+        this.isConifer = builder.isConifer;
+        this.minGrowthTime = builder.minGrowthTime;
+        this.burnTemp = builder.burnTemp;
+        this.burnTicks = builder.burnTicks;
+        this.generator = builder.generator;
+        this.bushGenerator = builder.bushGenerator;
+        this.canMakeTannin = builder.canMakeTannin;
 
-        this.dominance = dominance;
-        this.maxGrowthRadius = maxGrowthRadius;
-        this.maxHeight = maxHeight;
-        this.maxDecayDistance = maxDecayDistance;
-        this.isConifer = isConifer;
-        this.minGrowthTime = minGrowthTime;
-        this.burnTemp = burnTemp;
-        this.burnTicks = burnTicks;
-        this.generator = generator;
-        this.bushGenerator = bushGenerator;
-        this.canMakeTannin = canMakeTannin;
+        this.flowerMonthStart = builder.flowerMonthStart;
+        this.floweringMonths = builder.floweringMonths;
 
-        this.flowerMonthStart = flowerMonthStart;
-        this.floweringMonths = floweringMonths;
-
-        this.harvestMonthStart = harvestMonthStart;
-        this.harvestingMonths = harvestingMonths;
-        this.growthTime = growthTime;
-        this.fruit = fruit;
+        this.harvestMonthStart = builder.harvestMonthStart;
+        this.harvestingMonths = builder.harvestingMonths;
+        this.growthTime = builder.growthTime;
+        this.fruit = builder.fruit;
 
         if (name.isEmpty()) {
             throw new RuntimeException(String.format("WoodType name must contain any character: [%s]", name));
@@ -376,13 +347,10 @@ public class WoodType {
         private final String name;
         private float minGrowthTime;
         private int color;
-        private float minTemp;
-        private float maxTemp;
-        private float minRain;
-        private float maxRain;
+        private float minTemp, maxTemp;
+        private float minRain, maxRain;
         private ITreeGenerator generator;
-        private float minDensity;
-        private float maxDensity;
+        private float minDensity, maxDensity;
         private float dominance;
         private int maxHeight;
         private int maxGrowthRadius;
@@ -538,13 +506,9 @@ public class WoodType {
             return this;
         }
 
-        // Метод для построения объекта Wood
+        // Метод для построения объекта WoodType
         public WoodType build() {
-            return new WoodType(
-                    name, color, generator, minTemp, maxTemp, minRain, maxRain,
-                    minDensity, maxDensity, dominance, maxGrowthRadius, maxHeight, maxDecayDistance,
-                    isConifer, bushGenerator, canMakeTannin, minGrowthTime, burnTemp, burnTicks,
-                    flowerMonthStart, floweringMonths, harvestMonthStart, harvestingMonths, fruit, growthTime);
+            return new WoodType(this);
         }
     }
 }

@@ -31,16 +31,16 @@ public class BerryBushProvider implements IProbeInfoProvider {
         var state = world.getBlockState(blockPos);
 
         if (state.getBlock() instanceof BlockBerryBush block) {
-            if (block.getBush().isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
+            if (block.getType().isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
                 var temp = ClimateTFC.getActualTemp(world, blockPos);
                 var rainfall = ChunkDataTFC.getRainfall(world, blockPos);
 
                 var te = Helpers.getTE(world, blockPos, TETickCounter.class);
 
-                if (te != null && block.getBush().isValidForGrowth(temp, rainfall)) {
+                if (te != null && block.getType().isValidForGrowth(temp, rainfall)) {
                     long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                     // Don't show 100% since it still needs to check on randomTick to grow
-                    float perc = Math.min(0.99F, hours / (block.getBush().getGrowthTime() * (float) ConfigTFC.General.FOOD.berryBushGrowthTimeModifier)) * 100;
+                    float perc = Math.min(0.99F, hours / (block.getType().getGrowthTime() * (float) ConfigTFC.General.FOOD.berryBushGrowthTimeModifier)) * 100;
                     String growth = String.format("%d%%", Math.round(perc));
                     probeInfo.text(new TextComponentTranslation("top.tfc.crop.growth", growth).getFormattedText());
                 } else {
@@ -49,7 +49,7 @@ public class BerryBushProvider implements IProbeInfoProvider {
             } else {
                 probeInfo.text(new TextComponentTranslation("top.tfc.agriculture.harvesting_months").getFormattedText());
                 for (Month month : Month.values()) {
-                    if (block.getBush().isHarvestMonth(month)) {
+                    if (block.getType().isHarvestMonth(month)) {
                         probeInfo.text(TerraFirmaCraft.getProxy().getMonthName(month, true));
                     }
                 }

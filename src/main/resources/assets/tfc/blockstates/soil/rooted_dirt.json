@@ -1,49 +1,13 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfc:grass",
+    "model": "tfc:cube_overlay",
     "textures": {
-      "particle": "tfc:blocks/soil/overlay/grass/top",
-      "top": "tfc:blocks/soil/overlay/grass/top",
-      "north": "tfc:blocks/soil/overlay/grass/side",
-      "south": "tfc:blocks/soil/overlay/grass/side",
-      "east": "tfc:blocks/soil/overlay/grass/side",
-      "west": "tfc:blocks/soil/overlay/grass/side"
+      "particle": "tfc:blocks/soil/overlay/rooted_dirt",
+      "overlay": "tfc:blocks/soil/overlay/rooted_dirt"
     }
   },
   "variants": {
-    "north": {
-      "true": {
-        "textures": {
-          "north": "tfc:blocks/soil/overlay/grass/top"
-        }
-      },
-      "false": {}
-    },
-    "south": {
-      "true": {
-        "textures": {
-          "south": "tfc:blocks/soil/overlay/grass/top"
-        }
-      },
-      "false": {}
-    },
-    "east": {
-      "true": {
-        "textures": {
-          "east": "tfc:blocks/soil/overlay/grass/top"
-        }
-      },
-      "false": {}
-    },
-    "west": {
-      "true": {
-        "textures": {
-          "west": "tfc:blocks/soil/overlay/grass/top"
-        }
-      },
-      "false": {}
-    },
     "soiltype": {
       "silt": {
         "textures": {

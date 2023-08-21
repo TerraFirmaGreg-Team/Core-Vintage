@@ -30,13 +30,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
+public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
     private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 
     private final SoilBlockVariant variant;
     private final SoilType type;
 
-    public BlockSoilPath(SoilBlockVariant variant, SoilType type) {
+    public BlockSoilGrassPath(SoilBlockVariant variant, SoilType type) {
 
 
         this.variant = variant;

@@ -3,7 +3,6 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 import net.dries007.tfc.api.types.trees.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.minecraft.block.BlockLog;
@@ -47,7 +46,7 @@ public class TreeGenBushes implements ITreeGenerator {
     @Override
     public boolean canGenerateTree(World world, BlockPos pos, WoodType woodType) {
         // Check if there is soil beneath
-        if (!BlocksTFC_old.isSoil(world.getBlockState(pos.down())))
+        if (!TFCBlocks.isSoil(world.getBlockState(pos.down())))
             return false;
 
         // Check the position for liquids, etc.

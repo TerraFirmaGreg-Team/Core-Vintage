@@ -3,7 +3,7 @@ package net.dries007.tfc.common.objects.blocks.plants;
 import net.dries007.tfc.api.types.plant.IPlantBlock;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -55,7 +55,7 @@ public class BlockFloatingWaterTFC extends BlockPlantTFC implements IPlantBlock 
 
     @Override
     protected boolean canSustainBush(IBlockState state) {
-        return (BlocksTFC_old.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) || (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
+        return (TFCBlocks.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) || (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
     }
 
     @Override

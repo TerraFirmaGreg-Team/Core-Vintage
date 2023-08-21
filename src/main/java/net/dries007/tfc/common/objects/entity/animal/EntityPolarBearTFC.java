@@ -3,7 +3,7 @@ package net.dries007.tfc.common.objects.entity.animal;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.common.objects.entity.ai.EntityAIStandAttack;
 import net.dries007.tfc.common.objects.entity.ai.EntityAIWanderHuntArea;
@@ -295,7 +295,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, I
         return this.world.checkNoEntityCollision(getEntityBoundingBox())
                 && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
                 && !this.world.containsAnyLiquid(getEntityBoundingBox())
-                && BlocksTFC_old.isGround(this.world.getBlockState(this.getPosition().down()));
+                && TFCBlocks.isGround(this.world.getBlockState(this.getPosition().down()));
     }
 
     @Override

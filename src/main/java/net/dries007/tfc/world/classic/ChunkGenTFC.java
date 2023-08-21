@@ -5,7 +5,6 @@ import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.Month;
@@ -691,8 +690,8 @@ public class ChunkGenTFC implements IChunkGenerator {
                      */
                     if (outp.isEmpty(x, y + yOffset, z)) {
                         outp.setBlockState(x, y + yOffset, z, inp.getBlockState(x, y, z));
-                        if (y + 1 < yOffset && outp.getBlockState(x, y + yOffset, z) == AIR/* нет необходимости проверять снова && BlocksTFC_old.isSoilOrGravel(outp.getBlockState(x, y + yOffset + 1, z))*/) {
-                            for (int upCount = 1; BlocksTFC_old.isSoilOrGravel(outp.getBlockState(x, y + yOffset + upCount, z)); upCount++) {
+                        if (y + 1 < yOffset && outp.getBlockState(x, y + yOffset, z) == AIR/* нет необходимости проверять снова && TFCBlocks.isSoilOrGravel(outp.getBlockState(x, y + yOffset + 1, z))*/) {
+                            for (int upCount = 1; TFCBlocks.isSoilOrGravel(outp.getBlockState(x, y + yOffset + upCount, z)); upCount++) {
                                 outp.setBlockState(x, y + yOffset + upCount, z, AIR);
                             }
                         }
@@ -784,7 +783,7 @@ public class ChunkGenTFC implements IChunkGenerator {
                                 if (yOffset + y + c > 256) continue;
 
                                 IBlockState current = outp.getBlockState(x, yOffset + y + c, z);
-                                if (current != surfaceBlock && current != subSurfaceBlock && !BlocksTFC_old.isWater(current)) {
+                                if (current != surfaceBlock && current != subSurfaceBlock && !TFCBlocks.isWater(current)) {
                                     outp.setBlockState(x, yOffset + y + c, z, AIR);
                                     if (yOffset + y + c + 1 > 256) continue;
                                     if (outp.getBlockState(x, yOffset + y + c + 1, z) == SALT_WATER)

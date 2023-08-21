@@ -311,14 +311,14 @@ public class ClientProxy extends CommonProxy {
 
         // This is talking about tall grass vs actual grass blocks
 
-//		blockColors.registerBlockColorHandler(grassColor, BlocksTFC_old.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
+//		blockColors.registerBlockColorHandler(grassColor, TFCBlocks.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
 //
 //
-//				blockColors.registerBlockColorHandler(foliageColor, BlocksTFC_old.getAllLeafBlocks().toArray(new Block[0]));
-//		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC_old.getAllPlantBlocks().toArray(new BlockPlantTFC[0]));
+//				blockColors.registerBlockColorHandler(foliageColor, TFCBlocks.getAllLeafBlocks().toArray(new Block[0]));
+//		blockColors.registerBlockColorHandler(foliageColor, TFCBlocks.getAllPlantBlocks().toArray(new BlockPlantTFC[0]));
 //
 //
-//		blockColors.registerBlockColorHandler(foliageColor, BlocksTFC_old.getAllFlowerPots().toArray(new Block[0]));
+//		blockColors.registerBlockColorHandler(foliageColor, TFCBlocks.getAllFlowerPots().toArray(new Block[0]));
 
 
     }

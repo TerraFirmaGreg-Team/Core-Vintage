@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ILivestock;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -156,7 +156,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
         return this.world.checkNoEntityCollision(getEntityBoundingBox())
                 && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
                 && !this.world.containsAnyLiquid(getEntityBoundingBox())
-                && BlocksTFC_old.isGround(this.world.getBlockState(this.getPosition().down()));
+                && TFCBlocks.isGround(this.world.getBlockState(this.getPosition().down()));
     }
 
     @Override

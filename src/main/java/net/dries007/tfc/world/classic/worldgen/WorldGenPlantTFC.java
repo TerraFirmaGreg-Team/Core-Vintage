@@ -1,7 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.types.plant.type.PlantType;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.plants.*;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -94,7 +93,7 @@ public class WorldGenPlantTFC extends WorldGenerator {
                             plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos)) &&
                             worldIn.isAirBlock(blockpos) &&
                             plantBlock.canBlockStay(worldIn, blockpos, state) &&
-                            !BlocksTFC_old.isSand(worldIn.getBlockState(blockpos.down()))) {
+                            !TFCBlocks.isSand(worldIn.getBlockState(blockpos.down()))) {
                         int plantAge = plant.getAgeForWorldgen(rand, ClimateTFC.getActualTemp(worldIn, blockpos));
                         setBlockAndNotifyAdequately(worldIn, blockpos, state.withProperty(BlockCreepingPlantTFC.AGE, plantAge));
                     }

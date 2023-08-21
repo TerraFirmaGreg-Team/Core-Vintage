@@ -7,7 +7,7 @@ import net.dries007.tfc.api.types.plant.IPlantBlock;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -248,7 +248,7 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
 
     @Override
     protected boolean canSustainBush(IBlockState state) {
-        if (plant.isClayMarking()) return BlocksTFC_old.isClay(state) || isValidSoil(state);
+        if (plant.isClayMarking()) return TFCBlocks.isClay(state) || isValidSoil(state);
         else return isValidSoil(state);
     }
 
@@ -333,13 +333,13 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
 
     private boolean isValidSoil(IBlockState state) {
         return switch (plant.getPlantVariant()) {
-            case CACTUS, DESERT, DESERT_TALL_PLANT -> BlocksTFC_old.isSand(state);
-            case DRY, DRY_TALL_PLANT -> BlocksTFC_old.isSand(state) || BlocksTFC_old.isDryGrass(state);
-            case REED, REED_SEA, TALL_REED, TALL_REED_SEA -> BlocksTFC_old.isSand(state) || BlocksTFC_old.isSoil(state);
-            case WATER, TALL_WATER, EMERGENT_TALL_WATER -> BlocksTFC_old.isSoilOrGravel(state);
+            case CACTUS, DESERT, DESERT_TALL_PLANT -> TFCBlocks.isSand(state);
+            case DRY, DRY_TALL_PLANT -> TFCBlocks.isSand(state) || TFCBlocks.isDryGrass(state);
+            case REED, REED_SEA, TALL_REED, TALL_REED_SEA -> TFCBlocks.isSand(state) || TFCBlocks.isSoil(state);
+            case WATER, TALL_WATER, EMERGENT_TALL_WATER -> TFCBlocks.isSoilOrGravel(state);
             case WATER_SEA, TALL_WATER_SEA, EMERGENT_TALL_WATER_SEA ->
-                    BlocksTFC_old.isSand(state) || BlocksTFC_old.isSoilOrGravel(state);
-            default -> BlocksTFC_old.isSoil(state);
+                    TFCBlocks.isSand(state) || TFCBlocks.isSoilOrGravel(state);
+            default -> TFCBlocks.isSoil(state);
         };
     }
 

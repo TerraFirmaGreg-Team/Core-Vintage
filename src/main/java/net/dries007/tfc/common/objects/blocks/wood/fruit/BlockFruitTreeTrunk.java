@@ -6,7 +6,6 @@ import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
@@ -273,7 +272,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant, IWoodBl
     @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        if (!(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockFruitTreeTrunk) && !BlocksTFC_old.isGrowableSoil(worldIn.getBlockState(pos.down()))) {
+        if (!(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockFruitTreeTrunk) && !TFCBlocks.isGrowableSoil(worldIn.getBlockState(pos.down()))) {
             worldIn.destroyBlock(pos, true);
         }
     }

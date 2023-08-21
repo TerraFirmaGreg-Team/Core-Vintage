@@ -4,7 +4,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.trees.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
@@ -70,12 +69,12 @@ public class TreeGenKapok implements ITreeGenerator {
     @Override
     public boolean canGenerateTree(World world, BlockPos pos, WoodType woodType) {
         for (BlockPos p1 : trunkPos) {
-            if (BlocksTFC_old.isSoil(world.getBlockState(pos.add(p1))))
+            if (TFCBlocks.isSoil(world.getBlockState(pos.add(p1))))
                 continue;
             if (world.getBlockState(pos.add(p1)).getMaterial().isReplaceable()) {
-                if (BlocksTFC_old.isSoil(world.getBlockState(pos.add(p1).down(1))))
+                if (TFCBlocks.isSoil(world.getBlockState(pos.add(p1).down(1))))
                     continue;
-                if (BlocksTFC_old.isSoil(world.getBlockState(pos.add(p1).down(2))) && world.getBlockState(pos.add(p1.down(1))).getMaterial().isReplaceable())
+                if (TFCBlocks.isSoil(world.getBlockState(pos.add(p1).down(2))) && world.getBlockState(pos.add(p1.down(1))).getMaterial().isReplaceable())
                     continue;
             }
             return false;

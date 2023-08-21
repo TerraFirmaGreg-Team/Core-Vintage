@@ -5,7 +5,7 @@ import net.dries007.tfc.api.types.bush.IBushBlock;
 import net.dries007.tfc.api.types.bush.type.BushType;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.config.ConfigTFC;
@@ -237,9 +237,9 @@ public class BlockBerryBush extends BlockBush implements IGrowingPlant, IBushBlo
     private boolean canStay(IBlockAccess world, BlockPos pos) {
         IBlockState below = world.getBlockState(pos.down());
         if (type.getSize() == Size.LARGE && below.getBlock() instanceof BlockBerryBush && ((BlockBerryBush) below.getBlock()).type == this.type) {
-            return BlocksTFC_old.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
+            return TFCBlocks.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
         }
-        return BlocksTFC_old.isGrowableSoil(below);
+        return TFCBlocks.isGrowableSoil(below);
     }
 
     @Override

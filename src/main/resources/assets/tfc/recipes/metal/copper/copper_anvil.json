@@ -1,18 +1,18 @@
 {
-  "type" : "minecraft:crafting_shaped",
-  "pattern" : [
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
     "XXX",
     " X ",
     "XXX"
   ],
-  "key" : {
-    "X" : {
-      "type" : "forge:ore_dict",
-      "ore" : "ingotDoubleCopper"
+  "key": {
+    "X": {
+      "type": "forge:ore_dict",
+      "ore": "ingotDoubleCopper"
     }
   },
-  "result" : {
-    "item" : "tfc:metal/anvil/copper",
-    "count" : 1
+  "result": {
+    "item": "tfc:metal/anvil/copper",
+    "count": 1
   }
 }

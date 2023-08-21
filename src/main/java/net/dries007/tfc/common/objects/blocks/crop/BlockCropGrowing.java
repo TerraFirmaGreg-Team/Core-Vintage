@@ -52,14 +52,11 @@ import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.DEAD;
 
 public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlantable, ICropBlock {
 
+    // true, если культура появилась в дикой природе, это означает, что она игнорирует условия роста, например, пашня
+    public static final PropertyBool WILD = PropertyBool.create("wild");
     private static final int MATURE_AGE = 7;
     // Свойства стадии роста
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, MATURE_AGE);
-
-
-    // true, если культура появилась в дикой природе, это означает, что она игнорирует условия роста, например, пашня
-    public static final PropertyBool WILD = PropertyBool.create("wild");
-
     // Модельные коробки
     private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[]{
             new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.125D, 0.875D),
@@ -95,6 +92,11 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
                 .withProperty(getAgeProperty(), 0)
                 .withProperty(WILD, false));
     }
+
+    public static int getMatureAge() {
+        return MATURE_AGE;
+    }
+
     @Override
     public Item getSeed() {
         return type.getDropSeed().getItem();
@@ -224,7 +226,7 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        if(!isMature(state)) {
+        if (!isMature(state)) {
             return getSeed();
         } else {
             return getCrop();
@@ -416,10 +418,6 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
     @Override
     public int getMaxAge() {
         return getMatureAge();
-    }
-
-    public static int getMatureAge() {
-        return MATURE_AGE;
     }
 
     public boolean isMature(IBlockState state) {

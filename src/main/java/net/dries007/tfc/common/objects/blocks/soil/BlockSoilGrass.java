@@ -355,8 +355,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                             variant == DRY_GRASS || BlocksTFC_old.isSand(state)) && flag;
                 }
             }
-        }
-        else if (plantable instanceof BlockCropGrowing) {
+        } else if (plantable instanceof BlockCropGrowing) {
             IBlockState cropState = world.getBlockState(pos.up());
             if (cropState.getBlock() instanceof BlockCropGrowing) {
                 boolean isWild = cropState.getValue(WILD);

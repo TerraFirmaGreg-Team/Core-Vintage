@@ -1,6 +1,6 @@
 {
-  "parent" : "block/fence_gate_closed",
-  "textures" : {
-    "texture" : "tfc:blocks/wood/planks/aspen"
+  "parent": "block/fence_gate_closed",
+  "textures": {
+    "texture": "tfc:blocks/wood/planks/aspen"
   }
 }

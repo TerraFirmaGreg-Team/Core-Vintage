@@ -1,7 +1,7 @@
 {
-  "parent" : "item/handheld",
-  "textures" : {
-    "layer0" : "gregtech:items/tools/handle",
-    "layer1" : "gregtech:items/tools/propick"
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "gregtech:items/tools/handle",
+    "layer1": "gregtech:items/tools/propick"
   }
 }

@@ -18,8 +18,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @ParametersAreNonnullByDefault
 public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC, IFoodItem {
     protected final FoodType type;

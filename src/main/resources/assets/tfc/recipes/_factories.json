@@ -1,16 +1,16 @@
 {
-  "ingredients" : {
-    "fluid" : "net.dries007.tfc.api.recipes.ingredients.FluidIngredient$Factory"
+  "ingredients": {
+    "fluid": "net.dries007.tfc.api.recipes.ingredients.FluidIngredient$Factory"
   },
-  "recipes" : {
-    "damage_item_shapeless" : "net.dries007.tfc.api.recipes.workbench.ShapelessDamageRecipe$Factory",
-    "damage_item_shaped" : "net.dries007.tfc.api.recipes.workbench.ShapedDamageRecipe$Factory",
-    "food_stacking" : "net.dries007.tfc.api.recipes.FoodStackingRecipe$Factory",
-    "damage_item_food_recipe" : "net.dries007.tfc.api.recipes.workbench.ShapelessDamageFoodRecipe$Factory",
-    "fluid_food_recipe" : "net.dries007.tfc.api.recipes.workbench.ShapelessFluidFoodRecipe$Factory",
-    "shaped_skill" : "net.dries007.tfc.api.recipes.workbench.ShapedSkillRecipe$Factory",
-    "salting" : "net.dries007.tfc.api.recipes.workbench.SaltingRecipe$Factory",
-    "sandwich" : "net.dries007.tfc.api.recipes.workbench.SandwichRecipe$Factory",
-    "no_container_item_shaped" : "net.dries007.tfc.api.recipes.NoContainerItemShapedRecipe$Factory"
+  "recipes": {
+    "damage_item_shapeless": "net.dries007.tfc.api.recipes.workbench.ShapelessDamageRecipe$Factory",
+    "damage_item_shaped": "net.dries007.tfc.api.recipes.workbench.ShapedDamageRecipe$Factory",
+    "food_stacking": "net.dries007.tfc.api.recipes.FoodStackingRecipe$Factory",
+    "damage_item_food_recipe": "net.dries007.tfc.api.recipes.workbench.ShapelessDamageFoodRecipe$Factory",
+    "fluid_food_recipe": "net.dries007.tfc.api.recipes.workbench.ShapelessFluidFoodRecipe$Factory",
+    "shaped_skill": "net.dries007.tfc.api.recipes.workbench.ShapedSkillRecipe$Factory",
+    "salting": "net.dries007.tfc.api.recipes.workbench.SaltingRecipe$Factory",
+    "sandwich": "net.dries007.tfc.api.recipes.workbench.SandwichRecipe$Factory",
+    "no_container_item_shaped": "net.dries007.tfc.api.recipes.NoContainerItemShapedRecipe$Factory"
   }
 }

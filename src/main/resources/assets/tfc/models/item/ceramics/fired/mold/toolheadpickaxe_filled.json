@@ -1,7 +1,7 @@
 {
-  "parent" : "item/generated",
-  "textures" : {
-    "layer0" : "tfc:items/ceramics/fired/mold/toolheadpickaxe/empty",
-    "layer1" : "tfc:items/ceramics/fired/mold/toolheadpickaxe/pattern"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "tfc:items/ceramics/fired/mold/toolheadpickaxe/empty",
+    "layer1": "tfc:items/ceramics/fired/mold/toolheadpickaxe/pattern"
   }
 }

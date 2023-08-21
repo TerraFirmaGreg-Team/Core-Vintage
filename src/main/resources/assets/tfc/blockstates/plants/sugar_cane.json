@@ -1,32 +1,32 @@
 {
-  "multipart" : [
+  "multipart": [
     {
-      "when" : {
-        "part" : "lower"
+      "when": {
+        "part": "lower"
       },
-      "apply" : [
+      "apply": [
         {
-          "model" : "tfc:plants/sugar_cane_lower"
+          "model": "tfc:plants/sugar_cane_lower"
         }
       ]
     },
     {
-      "when" : {
-        "part" : "middle"
+      "when": {
+        "part": "middle"
       },
-      "apply" : [
+      "apply": [
         {
-          "model" : "tfc:plants/sugar_cane_middle"
+          "model": "tfc:plants/sugar_cane_middle"
         }
       ]
     },
     {
-      "when" : {
-        "part" : "single|upper"
+      "when": {
+        "part": "single|upper"
       },
-      "apply" : [
+      "apply": [
         {
-          "model" : "tfc:plants/sugar_cane_upper"
+          "model": "tfc:plants/sugar_cane_upper"
         }
       ]
     }

@@ -1,14 +1,12 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "tfc:flowerpot/flower_pot_cross",
-    "textures" : {
-      "plant" : "tfc:blocks/plants/sword_fern/item"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:flowerpot/flower_pot_cross",
+    "textures": {
+      "plant": "tfc:blocks/plants/sword_fern/item"
     }
   },
-  "variants" : {
-    "normal" : [
-      {}
-    ]
+  "variants": {
+    "normal": [{}]
   }
 }

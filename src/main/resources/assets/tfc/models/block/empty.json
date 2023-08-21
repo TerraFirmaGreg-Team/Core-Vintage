@@ -1,7 +1,7 @@
 {
-  "textures" : {
-    "texture" : "tfc:blocks/empty",
-    "particle" : "tfc:blocks/empty"
+  "textures": {
+    "texture": "tfc:blocks/empty",
+    "particle": "tfc:blocks/empty"
   },
-  "elements" : []
+  "elements": []
 }

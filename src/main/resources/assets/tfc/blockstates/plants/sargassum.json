@@ -1,21 +1,21 @@
 {
-  "multipart" : [
+  "multipart": [
     {
-      "apply" : [
+      "apply": [
         {
-          "model" : "tfc:plants/sargassum"
+          "model": "tfc:plants/sargassum"
         },
         {
-          "model" : "tfc:plants/sargassum",
-          "y" : 90
+          "model": "tfc:plants/sargassum",
+          "y": 90
         },
         {
-          "model" : "tfc:plants/sargassum",
-          "y" : 180
+          "model": "tfc:plants/sargassum",
+          "y": 180
         },
         {
-          "model" : "tfc:plants/sargassum",
-          "y" : 270
+          "model": "tfc:plants/sargassum",
+          "y": 270
         }
       ]
     }

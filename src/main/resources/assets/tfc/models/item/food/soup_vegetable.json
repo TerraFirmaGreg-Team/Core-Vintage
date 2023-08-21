@@ -1,6 +1,6 @@
 {
-  "parent" : "item/generated",
-  "textures" : {
-    "layer0" : "tfc:items/food/soup_vegetable"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "tfc:items/food/soup_vegetable"
   }
 }

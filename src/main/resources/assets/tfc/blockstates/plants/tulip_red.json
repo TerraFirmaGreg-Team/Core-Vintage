@@ -1,62 +1,62 @@
 {
-  "multipart" : [
+  "multipart": [
     {
-      "when" : {
-        "stage" : "0"
+      "when": {
+        "stage": "0"
       },
-      "apply" : [
+      "apply": [
         {
-          "model" : "tfc:plants/tulip_0"
+          "model": "tfc:plants/tulip_0"
         }
       ]
     },
     {
-      "when" : {
-        "stage" : "1"
+      "when": {
+        "stage": "1"
       },
-      "apply" : [
+      "apply": [
         {
-          "model" : "tfc:plants/tulip_red_1"
+          "model": "tfc:plants/tulip_red_1"
         }
       ]
     },
     {
-      "when" : {
-        "stage" : "2"
+      "when": {
+        "stage": "2"
       },
-      "apply" : [
+      "apply": [
         {
-          "model" : "tfc:plants/tulip_2"
+          "model": "tfc:plants/tulip_2"
         }
       ]
     },
     {
-      "when" : {
-        "stage" : "3"
+      "when": {
+        "stage": "3"
       },
-      "apply" : [
+      "apply": [
         {
-          "model" : "tfc:plants/tulip_3"
+          "model": "tfc:plants/tulip_3"
         }
       ]
     },
     {
-      "when" : {
-        "stage" : "4"
+      "when": {
+        "stage": "4"
       },
-      "apply" : [
+      "apply": [
         {
-          "model" : "tfc:plants/tulip_4"
+          "model": "tfc:plants/tulip_4"
         }
       ]
     },
     {
-      "when" : {
-        "stage" : "5"
+      "when": {
+        "stage": "5"
       },
-      "apply" : [
+      "apply": [
         {
-          "model" : "tfc:plants/tulip_5"
+          "model": "tfc:plants/tulip_5"
         }
       ]
     }

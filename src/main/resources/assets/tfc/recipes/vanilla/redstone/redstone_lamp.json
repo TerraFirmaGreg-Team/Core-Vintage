@@ -1,26 +1,26 @@
 {
-  "type" : "minecraft:crafting_shaped",
-  "pattern" : [
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
     "BRB",
     "RGR",
     "BRB"
   ],
-  "key" : {
-    "R" : {
-      "type" : "forge:ore_dict",
-      "ore" : "dustRedstone"
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
     },
-    "G" : {
-      "type" : "forge:ore_dict",
-      "ore" : "gemExquisite"
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gemExquisite"
     },
-    "B" : {
-      "type" : "forge:ore_dict",
-      "ore" : "sheetBrass"
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "sheetBrass"
     }
   },
-  "result" : {
-    "item" : "minecraft:redstone_lamp",
-    "count" : 2
+  "result": {
+    "item": "minecraft:redstone_lamp",
+    "count": 2
   }
 }

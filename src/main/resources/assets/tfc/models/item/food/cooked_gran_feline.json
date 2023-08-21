@@ -1,6 +1,6 @@
 {
-  "parent" : "item/generated",
-  "textures" : {
-    "layer0" : "tfc:items/food/cooked_gran_feline"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "tfc:items/food/cooked_gran_feline"
   }
 }

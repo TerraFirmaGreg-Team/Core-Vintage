@@ -249,7 +249,8 @@ public class BlockWoodBarrel extends BlockWood implements IItemSize {
      * Handle drops via {@link this#breakBlock(World, BlockPos, IBlockState)}
      */
     @Override
-    public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {}
+    public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
+    }
 
     @Override
     public void onBlockExploded(World world, @Nonnull BlockPos pos, @Nonnull Explosion explosion) {

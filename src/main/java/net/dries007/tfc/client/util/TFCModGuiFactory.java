@@ -16,7 +16,8 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
 @SuppressWarnings("unused")
 public class TFCModGuiFactory implements IModGuiFactory {
     @Override
-    public void initialize(Minecraft minecraftInstance) {}
+    public void initialize(Minecraft minecraftInstance) {
+    }
 
     @Override
     public boolean hasConfigGui() {

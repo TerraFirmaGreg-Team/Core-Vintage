@@ -1,14 +1,12 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "cube_all",
-    "textures" : {
-      "all" : "tfc:blocks/aggregate"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "tfc:blocks/aggregate"
     }
   },
-  "variants" : {
-    "normal" : [
-      {}
-    ]
+  "variants": {
+    "normal": [{}]
   }
 }

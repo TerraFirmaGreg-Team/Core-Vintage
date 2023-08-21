@@ -1,20 +1,20 @@
 {
-  "variants" : {
-    "normal" : [
+  "variants": {
+    "normal": [
       {
-        "model" : "tfc:groundcover/flint",
-        "y" : 90
+        "model": "tfc:groundcover/flint",
+        "y": 90
       },
       {
-        "model" : "tfc:groundcover/flint"
+        "model": "tfc:groundcover/flint"
       },
       {
-        "model" : "tfc:groundcover/flint",
-        "y" : 180
+        "model": "tfc:groundcover/flint",
+        "y": 180
       },
       {
-        "model" : "tfc:groundcover/flint",
-        "y" : 270
+        "model": "tfc:groundcover/flint",
+        "y": 270
       }
     ]
   }

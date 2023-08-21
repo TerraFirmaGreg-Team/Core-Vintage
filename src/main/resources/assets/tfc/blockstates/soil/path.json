@@ -1,40 +1,40 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "grass_path"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "grass_path"
   },
-  "variants" : {
-    "soiltype" : {
-      "silt" : {
-        "textures" : {
-          "bottom" : "tfc:blocks/soil/dirt/silt",
-          "particle" : "tfc:blocks/soil/dirt/silt",
-          "top" : "tfc:blocks/soil/path/top/silt",
-          "side" : "tfc:blocks/soil/path/side/silt"
+  "variants": {
+    "soiltype": {
+      "silt": {
+        "textures": {
+          "bottom": "tfc:blocks/soil/dirt/silt",
+          "particle": "tfc:blocks/soil/dirt/silt",
+          "top": "tfc:blocks/soil/path/top/silt",
+          "side": "tfc:blocks/soil/path/side/silt"
         }
       },
-      "loam" : {
-        "textures" : {
-          "bottom" : "tfc:blocks/soil/dirt/loam",
-          "particle" : "tfc:blocks/soil/dirt/loam",
-          "top" : "tfc:blocks/soil/path/top/loam",
-          "side" : "tfc:blocks/soil/path/side/loam"
+      "loam": {
+        "textures": {
+          "bottom": "tfc:blocks/soil/dirt/loam",
+          "particle": "tfc:blocks/soil/dirt/loam",
+          "top": "tfc:blocks/soil/path/top/loam",
+          "side": "tfc:blocks/soil/path/side/loam"
         }
       },
-      "sandy_loam" : {
-        "textures" : {
-          "bottom" : "tfc:blocks/soil/dirt/sandy_loam",
-          "particle" : "tfc:blocks/soil/dirt/sandy_loam",
-          "top" : "tfc:blocks/soil/path/top/sandy_loam",
-          "side" : "tfc:blocks/soil/path/side/sandy_loam"
+      "sandy_loam": {
+        "textures": {
+          "bottom": "tfc:blocks/soil/dirt/sandy_loam",
+          "particle": "tfc:blocks/soil/dirt/sandy_loam",
+          "top": "tfc:blocks/soil/path/top/sandy_loam",
+          "side": "tfc:blocks/soil/path/side/sandy_loam"
         }
       },
-      "silty_loam" : {
-        "textures" : {
-          "bottom" : "tfc:blocks/soil/dirt/silty_loam",
-          "particle" : "tfc:blocks/soil/dirt/silty_loam",
-          "top" : "tfc:blocks/soil/path/top/silty_loam",
-          "side" : "tfc:blocks/soil/path/side/silty_loam"
+      "silty_loam": {
+        "textures": {
+          "bottom": "tfc:blocks/soil/dirt/silty_loam",
+          "particle": "tfc:blocks/soil/dirt/silty_loam",
+          "top": "tfc:blocks/soil/path/top/silty_loam",
+          "side": "tfc:blocks/soil/path/side/silty_loam"
         }
       }
     }

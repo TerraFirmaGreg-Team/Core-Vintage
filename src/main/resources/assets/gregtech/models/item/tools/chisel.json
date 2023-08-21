@@ -1,7 +1,7 @@
 {
-  "parent" : "item/handheld",
-  "textures" : {
-    "layer0" : "gregtech:items/tools/stick_reversed",
-    "layer1" : "gregtech:items/tools/chisel"
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "gregtech:items/tools/stick_reversed",
+    "layer1": "gregtech:items/tools/chisel"
   }
 }

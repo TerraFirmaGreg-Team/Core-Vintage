@@ -1,9 +1,7 @@
 package net.dries007.tfc.common.objects.recipes.handlers;
 
 import gregtech.api.GregTechAPI;
-import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.common.items.MetaItem1;
 import gregtech.common.items.MetaItems;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;

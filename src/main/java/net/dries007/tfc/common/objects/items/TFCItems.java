@@ -41,7 +41,8 @@ public class TFCItems {
     public static ItemBloom UNREFINED_BLOOM;
     public static ItemBloom REFINED_BLOOM;
 
-    private TFCItems() {}
+    private TFCItems() {
+    }
 
 
     public static void preInit() {

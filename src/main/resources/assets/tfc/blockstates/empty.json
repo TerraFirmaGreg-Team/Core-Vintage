@@ -1,14 +1,10 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "tfc:empty"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:empty"
   },
-  "variants" : {
-    "normal" : [
-      {}
-    ],
-    "inventory" : [
-      {}
-    ]
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

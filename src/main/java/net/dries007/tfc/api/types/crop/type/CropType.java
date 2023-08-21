@@ -124,6 +124,7 @@ public class CropType {
     public ItemStack getDropSeed() {
         return seedDrop.get();
     }
+
     public ItemStack getDropFood() {
         return foodDrop.get();
     }
@@ -142,8 +143,7 @@ public class CropType {
     }
 
     @SideOnly(Side.CLIENT)
-    public void addInfo(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    {
+    public void addInfo(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (GuiScreen.isShiftKeyDown()) {
             tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
             tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) rainMinGrow, (int) rainMaxGrow));

@@ -1,28 +1,28 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "cube_all"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
   },
-  "variants" : {
-    "soiltype" : {
-      "silt" : {
-        "textures" : {
-          "all" : "tfc:blocks/soil/clay/silt"
+  "variants": {
+    "soiltype": {
+      "silt": {
+        "textures": {
+          "all": "tfc:blocks/soil/clay/silt"
         }
       },
-      "loam" : {
-        "textures" : {
-          "all" : "tfc:blocks/soil/clay/loam"
+      "loam": {
+        "textures": {
+          "all": "tfc:blocks/soil/clay/loam"
         }
       },
-      "sandy_loam" : {
-        "textures" : {
-          "all" : "tfc:blocks/soil/clay/sandy_loam"
+      "sandy_loam": {
+        "textures": {
+          "all": "tfc:blocks/soil/clay/sandy_loam"
         }
       },
-      "silty_loam" : {
-        "textures" : {
-          "all" : "tfc:blocks/soil/clay/silty_loam"
+      "silty_loam": {
+        "textures": {
+          "all": "tfc:blocks/soil/clay/silty_loam"
         }
       }
     }

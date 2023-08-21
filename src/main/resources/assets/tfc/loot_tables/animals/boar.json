@@ -1,28 +1,28 @@
 {
-  "pools" : [
+  "pools": [
     {
-      "name" : "roll1",
-      "rolls" : 1,
-      "entries" : [
+      "name": "roll1",
+      "rolls": 1,
+      "entries": [
         {
-          "type" : "item",
-          "weight" : 1,
-          "name" : "tfc:food/pork",
-          "functions" : [
+          "type": "item",
+          "weight": 1,
+          "name": "tfc:food/pork",
+          "functions": [
             {
-              "function" : "tfc:apply_skill",
-              "skill" : "butchering",
-              "add" : 0.06,
-              "count" : {
-                "min" : 6,
-                "max" : 14
+              "function": "tfc:apply_skill",
+              "skill": "butchering",
+              "add": 0.06,
+              "count": {
+                "min": 6,
+                "max": 14
               }
             },
             {
-              "function" : "looting_enchant",
-              "count" : {
-                "min" : 0,
-                "max" : 1
+              "function": "looting_enchant",
+              "count": {
+                "min": 0,
+                "max": 1
               }
             }
           ]
@@ -30,23 +30,23 @@
       ]
     },
     {
-      "name" : "roll2",
-      "rolls" : 1,
-      "entries" : [
+      "name": "roll2",
+      "rolls": 1,
+      "entries": [
         {
-          "type" : "item",
-          "weight" : 1,
-          "name" : "tfc:hide/raw/medium",
-          "functions" : [
+          "type": "item",
+          "weight": 1,
+          "name": "tfc:hide/raw/medium",
+          "functions": [
             {
-              "function" : "set_count",
-              "count" : 1
+              "function": "set_count",
+              "count": 1
             },
             {
-              "function" : "looting_enchant",
-              "count" : {
-                "min" : 0,
-                "max" : 1
+              "function": "looting_enchant",
+              "count": {
+                "min": 0,
+                "max": 1
               }
             }
           ]
@@ -54,26 +54,26 @@
       ]
     },
     {
-      "name" : "roll3",
-      "rolls" : 1,
-      "entries" : [
+      "name": "roll3",
+      "rolls": 1,
+      "entries": [
         {
-          "type" : "item",
-          "weight" : 1,
-          "name" : "minecraft:bone",
-          "functions" : [
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:bone",
+          "functions": [
             {
-              "function" : "set_count",
-              "count" : {
-                "min" : 0,
-                "max" : 3
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 3
               }
             },
             {
-              "function" : "looting_enchant",
-              "count" : {
-                "min" : 0,
-                "max" : 1
+              "function": "looting_enchant",
+              "count": {
+                "min": 0,
+                "max": 1
               }
             }
           ]

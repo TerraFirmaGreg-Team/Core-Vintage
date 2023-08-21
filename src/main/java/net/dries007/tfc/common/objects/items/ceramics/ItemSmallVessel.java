@@ -36,7 +36,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -245,8 +244,7 @@ public class ItemSmallVessel extends ItemPottery {
 
                 if (isMolten()) {
                     text.add(I18n.format("tfc.tooltip.state", I18n.format("tfc.tooltip.liquid")));
-                }
-                else {
+                } else {
                     text.add(I18n.format("tfc.tooltip.state", I18n.format("tfc.tooltip.solid")));
                 }
 

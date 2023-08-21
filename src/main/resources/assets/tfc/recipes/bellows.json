@@ -1,24 +1,24 @@
 {
-  "type" : "minecraft:crafting_shaped",
-  "pattern" : [
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
     "XXX",
     "SSS",
     "XXX"
   ],
-  "key" : {
-    "X" : [
+  "key": {
+    "X": [
       {
-        "type" : "forge:ore_dict",
-        "ore" : "lumber"
+        "type": "forge:ore_dict",
+        "ore": "lumber"
       }
     ],
-    "S" : {
-      "type" : "forge:ore_dict",
-      "ore" : "leather"
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "leather"
     }
   },
-  "result" : {
-    "item" : "tfc:bellows",
-    "count" : 1
+  "result": {
+    "item": "tfc:bellows",
+    "count": 1
   }
 }

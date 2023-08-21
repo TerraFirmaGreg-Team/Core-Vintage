@@ -1,6 +1,6 @@
 {
-  "parent" : "item/generated",
-  "textures" : {
-    "layer0" : "tfc:items/stonetypes/rock/chert"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "tfc:items/stonetypes/rock/chert"
   }
 }

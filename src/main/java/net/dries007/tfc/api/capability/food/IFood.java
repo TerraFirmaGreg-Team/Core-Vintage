@@ -1,14 +1,11 @@
 package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.common.CommonEventHandler;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
@@ -18,9 +15,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -160,10 +154,9 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
 
         if (foodTraits.isEmpty()) {
             text.add(I18n.format("tfc.food_traits.none"));
-        }
-        else {
+        } else {
             text.add(I18n.format("tfc.food_traits"));
-            for (var trait: foodTraits) {
+            for (var trait : foodTraits) {
                 trait.addTraitInfo(stack, text);
             }
         }

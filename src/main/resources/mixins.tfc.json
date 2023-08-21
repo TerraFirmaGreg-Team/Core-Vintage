@@ -1,10 +1,10 @@
 {
-  "package" : "net.dries007.tfc.mixins",
-  "refmap" : "mixins.tfc.refmap.json",
-  "target" : "@env(DEFAULT)",
-  "minVersion" : "0.8",
-  "compatibilityLevel" : "JAVA_8",
-  "mixins" : [
+  "package": "net.dries007.tfc.mixins",
+  "refmap": "mixins.tfc.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
     "gregtech.BlockOreMixin",
     "gregtech.BlockSurfaceRockMixin",
     "gregtech.MaterialRecipeHandlerMixin",

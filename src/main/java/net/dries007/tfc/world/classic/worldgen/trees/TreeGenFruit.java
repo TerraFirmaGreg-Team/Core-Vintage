@@ -20,7 +20,7 @@ public class TreeGenFruit implements ITreeGenerator {
 
     @Override
     public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
-        ResourceLocation base = new ResourceLocation(MOD_ID,"fruit_trees/" + woodType.toString());
+        ResourceLocation base = new ResourceLocation(MOD_ID, "fruit_trees/" + woodType.toString());
         Template structureBase = manager.get(world.getMinecraftServer(), base);
 
         if (structureBase == null) {

@@ -1,21 +1,21 @@
 {
-  "type" : "minecraft:crafting_shaped",
-  "pattern" : [
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
     "WWW",
     "WSW",
     "WWW"
   ],
-  "key" : {
-    "S" : {
-      "type" : "forge:ore_dict",
-      "ore" : "clothHighQuality"
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "clothHighQuality"
     },
-    "W" : {
-      "type" : "forge:ore_dict",
-      "ore" : "stickWood"
+    "W": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
     }
   },
-  "result" : {
-    "item" : "minecraft:painting"
+  "result": {
+    "item": "minecraft:painting"
   }
 }

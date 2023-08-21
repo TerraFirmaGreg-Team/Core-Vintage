@@ -1,10 +1,10 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "leaves"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "leaves"
   },
-  "variants" : {
-    "wood" : {
+  "variants": {
+    "wood": {
       "acacia": {
         "textures": {
           "all": "tfc:blocks/wood/leaves/acacia"

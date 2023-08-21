@@ -1,12 +1,10 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "tfc:flowerpot/moss",
-    "textures" : {}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:flowerpot/moss",
+    "textures": {}
   },
-  "variants" : {
-    "normal" : [
-      {}
-    ]
+  "variants": {
+    "normal": [{}]
   }
 }

@@ -1,7 +1,7 @@
 {
   "parent": "tfc:block/anvil",
-  "textures" : {
-    "all" : "tfc:blocks/metal/metal"
+  "textures": {
+    "all": "tfc:blocks/metal/metal"
   },
   "display": {
     "gui": {

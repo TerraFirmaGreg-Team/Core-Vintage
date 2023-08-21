@@ -1,30 +1,30 @@
 {
-  "type" : "minecraft:crafting_shaped",
-  "pattern" : [
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
     "SSS",
     "DWD",
     "RRR"
   ],
-  "key" : {
-    "S" : {
-      "type" : "forge:ore_dict",
-      "ore" : "blockGlassColorless"
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlassColorless"
     },
-    "W" : {
-      "type" : "forge:ore_dict",
-      "ore" : "gemExquisite"
+    "W": {
+      "type": "forge:ore_dict",
+      "ore": "gemExquisite"
     },
-    "D" : {
-      "type" : "forge:ore_dict",
-      "ore" : "dustRedstone"
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
     },
-    "R" : {
-      "type" : "forge:ore_dict",
-      "ore" : "lumber"
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "lumber"
     }
   },
-  "result" : {
-    "item" : "minecraft:daylight_detector",
-    "count" : 3
+  "result": {
+    "item": "minecraft:daylight_detector",
+    "count": 3
   }
 }

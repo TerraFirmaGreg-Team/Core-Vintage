@@ -1,30 +1,30 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "textures" : {
-      "particle" : "tfc:blocks/devices/charcoal_forge/unlit",
-      "all" : "tfc:blocks/devices/charcoal_forge/unlit"
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "tfc:blocks/devices/charcoal_forge/unlit",
+      "all": "tfc:blocks/devices/charcoal_forge/unlit"
     },
-    "model" : "tfc:charcoal_forge"
+    "model": "tfc:charcoal_forge"
   },
-  "variants" : {
-    "lit" : {
-      "true" : {
-        "textures" : {
-          "top" : "tfc:blocks/devices/charcoal_forge/lit"
+  "variants": {
+    "lit": {
+      "true": {
+        "textures": {
+          "top": "tfc:blocks/devices/charcoal_forge/lit"
         }
       },
-      "false" : {
-        "textures" : {
-          "top" : "tfc:blocks/devices/charcoal_forge/unlit"
+      "false": {
+        "textures": {
+          "top": "tfc:blocks/devices/charcoal_forge/unlit"
         }
       }
     },
-    "normal" : [
+    "normal": [
       {
-        "transform" : "forge:default-block",
-        "textures" : {
-          "top" : "tfc:blocks/devices/charcoal_forge/lit"
+        "transform": "forge:default-block",
+        "textures": {
+          "top": "tfc:blocks/devices/charcoal_forge/lit"
         }
       }
     ]

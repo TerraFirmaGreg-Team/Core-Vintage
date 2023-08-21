@@ -1,17 +1,17 @@
 {
-  "type" : "tfc:damage_item_shapeless",
-  "ingredients" : [
+  "type": "tfc:damage_item_shapeless",
+  "ingredients": [
     {
-      "item" : "tfc:hide/sheepskin/small"
+      "item": "tfc:hide/sheepskin/small"
     },
     {
-      "type" : "forge:ore_dict",
-      "ore" : "knife"
+      "type": "forge:ore_dict",
+      "ore": "knife"
     }
   ],
-  "result" : {
-    "item" : "tfc:animal/product/wool",
-    "count" : 1
+  "result": {
+    "item": "tfc:animal/product/wool",
+    "count": 1
   },
-  "damage" : 1
+  "damage": 1
 }

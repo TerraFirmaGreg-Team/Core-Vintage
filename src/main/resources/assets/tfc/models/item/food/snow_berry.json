@@ -1,6 +1,6 @@
 {
-  "parent" : "item/generated",
-  "textures" : {
-    "layer0" : "tfc:items/food/snow_berry"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "tfc:items/food/snow_berry"
   }
 }

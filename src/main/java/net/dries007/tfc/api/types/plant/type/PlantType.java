@@ -5,7 +5,6 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -451,7 +450,7 @@ public class PlantType {
         SALT_BEACH,
         FRESH_WATER,
         SALT_WATER,
-        NONE;
+        NONE
     }
 
     public enum PlantValidity {
@@ -459,7 +458,7 @@ public class PlantType {
         HOT,
         DRY,
         WET,
-        VALID;
+        VALID
     }
 
     public static class Builder {

@@ -1,29 +1,27 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "tfc:lamp/up",
-    "textures" : {
-      "sheet" : "tfc:blocks/metal/blue_steel",
-      "particle" : "tfc:blocks/metal/blue_steel",
-      "lamp" : "tfc:blocks/lamp_unlit"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:lamp/up",
+    "textures": {
+      "sheet": "tfc:blocks/metal/blue_steel",
+      "particle": "tfc:blocks/metal/blue_steel",
+      "lamp": "tfc:blocks/lamp_unlit"
     }
   },
-  "variants" : {
-    "normal" : [
-      {}
-    ],
-    "lit" : {
-      "true" : {
-        "textures" : {
-          "lamp" : "tfc:blocks/lamp_lit"
+  "variants": {
+    "normal": [{}],
+    "lit": {
+      "true": {
+        "textures": {
+          "lamp": "tfc:blocks/lamp_lit"
         }
       },
-      "false" : {}
+      "false": {}
     },
-    "facing" : {
-      "up" : {},
-      "down" : {
-        "model" : "tfc:lamp/down"
+    "facing": {
+      "up": {},
+      "down": {
+        "model": "tfc:lamp/down"
       }
     }
   }

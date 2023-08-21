@@ -16,10 +16,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
@@ -31,7 +27,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -45,7 +40,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.*;
-import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.DRY_GRASS;
 import static net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing.WILD;
 
 @ParametersAreNonnullByDefault
@@ -67,7 +61,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
             0xff979797,
             0xff8f8f8f,
             0xff878787,
-    };;
+    };
     private static final AxisAlignedBB FLIPPED_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);
 
     private final SoilBlockVariant variant;
@@ -193,8 +187,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
                             variant == DRY_GRASS || BlocksTFC_old.isSand(state)) && flag;
                 }
             }
-        }
-        else if (plantable instanceof BlockCropGrowing) {
+        } else if (plantable instanceof BlockCropGrowing) {
             IBlockState cropState = world.getBlockState(pos.up());
             if (cropState.getBlock() instanceof BlockCropGrowing) {
                 boolean isWild = cropState.getValue(WILD);

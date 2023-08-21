@@ -1,12 +1,10 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "tfc:flowerpot/toquilla_palm",
-    "textures" : {}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:flowerpot/toquilla_palm",
+    "textures": {}
   },
-  "variants" : {
-    "normal" : [
-      {}
-    ]
+  "variants": {
+    "normal": [{}]
   }
 }

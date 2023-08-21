@@ -1,20 +1,20 @@
 {
-  "type" : "minecraft:crafting_shaped",
-  "pattern" : [
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
     "XYX",
     "X X"
   ],
-  "key" : {
-    "X" : {
-      "type" : "forge:ore_dict",
-      "ore" : "leather"
+  "key": {
+    "X": {
+      "type": "forge:ore_dict",
+      "ore": "leather"
     },
-    "Y" : {
-      "item" : "minecraft:lead"
+    "Y": {
+      "item": "minecraft:lead"
     }
   },
-  "result" : {
-    "item" : "tfc:halter",
-    "count" : 1
+  "result": {
+    "item": "tfc:halter",
+    "count": 1
   }
 }

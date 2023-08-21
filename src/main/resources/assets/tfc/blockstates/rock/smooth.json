@@ -1,109 +1,109 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "cube_all",
-    "uvlock" : true
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "uvlock": true
   },
-  "variants" : {
-    "rocktype" : {
-      "granite" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/granite"
+  "variants": {
+    "rocktype": {
+      "granite": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/granite"
         }
       },
-      "diorite" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/diorite"
+      "diorite": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/diorite"
         }
       },
-      "gabbro" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/gabbro"
+      "gabbro": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/gabbro"
         }
       },
-      "shale" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/shale"
+      "shale": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/shale"
         }
       },
-      "claystone" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/claystone"
+      "claystone": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/claystone"
         }
       },
-      "limestone" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/limestone"
+      "limestone": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/limestone"
         }
       },
-      "conglomerate" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/conglomerate"
+      "conglomerate": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/conglomerate"
         }
       },
-      "dolomite" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/dolomite"
+      "dolomite": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/dolomite"
         }
       },
-      "chert" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/chert"
+      "chert": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/chert"
         }
       },
-      "chalk" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/chalk"
+      "chalk": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/chalk"
         }
       },
-      "rhyolite" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/rhyolite"
+      "rhyolite": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/rhyolite"
         }
       },
-      "basalt" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/basalt"
+      "basalt": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/basalt"
         }
       },
-      "andesite" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/andesite"
+      "andesite": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/andesite"
         }
       },
-      "dacite" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/dacite"
+      "dacite": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/dacite"
         }
       },
-      "quartzite" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/quartzite"
+      "quartzite": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/quartzite"
         }
       },
-      "slate" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/slate"
+      "slate": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/slate"
         }
       },
-      "phyllite" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/phyllite"
+      "phyllite": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/phyllite"
         }
       },
-      "schist" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/schist"
+      "schist": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/schist"
         }
       },
-      "gneiss" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/gneiss"
+      "gneiss": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/gneiss"
         }
       },
-      "marble" : {
-        "textures" : {
-          "all" : "tfc:blocks/rock/smooth/marble"
+      "marble": {
+        "textures": {
+          "all": "tfc:blocks/rock/smooth/marble"
         }
       }
     }

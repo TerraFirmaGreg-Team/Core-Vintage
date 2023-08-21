@@ -1,86 +1,86 @@
 {
-  "type" : "tfc:sandwich",
-  "pattern" : [
+  "type": "tfc:sandwich",
+  "pattern": [
     " BK",
     "FGH",
     " B "
   ],
-  "key" : {
-    "K" : [
+  "key": {
+    "K": [
       {
-        "type" : "forge:ore_dict",
-        "ore" : "knife"
+        "type": "forge:ore_dict",
+        "ore": "knife"
       }
     ],
-    "B" : {
-      "item" : "tfc:food/barley_bread"
+    "B": {
+      "item": "tfc:food/barley_bread"
     },
-    "F" : [
+    "F": [
       {
-        "type" : "minecraft:empty"
+        "type": "minecraft:empty"
       },
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryFruit"
+        "type": "forge:ore_dict",
+        "ore": "categoryFruit"
       },
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryCookedMeat"
+        "type": "forge:ore_dict",
+        "ore": "categoryCookedMeat"
       },
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryVegetable"
+        "type": "forge:ore_dict",
+        "ore": "categoryVegetable"
       },
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryDairy"
+        "type": "forge:ore_dict",
+        "ore": "categoryDairy"
       }
     ],
-    "G" : [
+    "G": [
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryVegetable"
+        "type": "forge:ore_dict",
+        "ore": "categoryVegetable"
       },
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryCookedMeat"
+        "type": "forge:ore_dict",
+        "ore": "categoryCookedMeat"
       },
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryDairy"
+        "type": "forge:ore_dict",
+        "ore": "categoryDairy"
       },
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryFruit"
+        "type": "forge:ore_dict",
+        "ore": "categoryFruit"
       },
       {
-        "type" : "minecraft:empty"
+        "type": "minecraft:empty"
       }
     ],
-    "H" : [
+    "H": [
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryDairy"
+        "type": "forge:ore_dict",
+        "ore": "categoryDairy"
       },
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryFruit"
+        "type": "forge:ore_dict",
+        "ore": "categoryFruit"
       },
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryVegetable"
+        "type": "forge:ore_dict",
+        "ore": "categoryVegetable"
       },
       {
-        "type" : "minecraft:empty"
+        "type": "minecraft:empty"
       },
       {
-        "type" : "forge:ore_dict",
-        "ore" : "categoryCookedMeat"
+        "type": "forge:ore_dict",
+        "ore": "categoryCookedMeat"
       }
     ]
   },
-  "result" : {
-    "item" : "tfc:food/barley_bread_sandwich",
-    "count" : 2
+  "result": {
+    "item": "tfc:food/barley_bread_sandwich",
+    "count": 2
   }
 }

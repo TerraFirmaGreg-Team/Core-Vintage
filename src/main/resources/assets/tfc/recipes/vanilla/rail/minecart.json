@@ -1,17 +1,17 @@
 {
-  "type" : "minecraft:crafting_shaped",
-  "pattern" : [
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
     "X X",
     "XXX"
   ],
-  "key" : {
-    "X" : {
-      "type" : "forge:ore_dict",
-      "ore" : "sheetWroughtIron"
+  "key": {
+    "X": {
+      "type": "forge:ore_dict",
+      "ore": "sheetWroughtIron"
     }
   },
-  "result" : {
-    "item" : "minecraft:minecart",
-    "count" : 1
+  "result": {
+    "item": "minecraft:minecart",
+    "count": 1
   }
 }

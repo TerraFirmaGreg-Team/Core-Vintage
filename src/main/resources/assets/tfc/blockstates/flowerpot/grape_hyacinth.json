@@ -1,14 +1,12 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "tfc:flowerpot/flower_pot_cross",
-    "textures" : {
-      "plant" : "tfc:blocks/plants/grape_hyacinth/grape_hyacinth_1"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:flowerpot/flower_pot_cross",
+    "textures": {
+      "plant": "tfc:blocks/plants/grape_hyacinth/grape_hyacinth_1"
     }
   },
-  "variants" : {
-    "normal" : [
-      {}
-    ]
+  "variants": {
+    "normal": [{}]
   }
 }

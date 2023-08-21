@@ -1,14 +1,12 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "tfc:flowerpot/flower_pot_cross",
-    "textures" : {
-      "plant" : "tfc:blocks/plants/poppy/poppy_2"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:flowerpot/flower_pot_cross",
+    "textures": {
+      "plant": "tfc:blocks/plants/poppy/poppy_2"
     }
   },
-  "variants" : {
-    "normal" : [
-      {}
-    ]
+  "variants": {
+    "normal": [{}]
   }
 }

@@ -1,14 +1,12 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "tfc:flowerpot/flower_pot_cross",
-    "textures" : {
-      "plant" : "tfc:blocks/plants/perovskia/perovskia_3"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:flowerpot/flower_pot_cross",
+    "textures": {
+      "plant": "tfc:blocks/plants/perovskia/perovskia_3"
     }
   },
-  "variants" : {
-    "normal" : [
-      {}
-    ]
+  "variants": {
+    "normal": [{}]
   }
 }

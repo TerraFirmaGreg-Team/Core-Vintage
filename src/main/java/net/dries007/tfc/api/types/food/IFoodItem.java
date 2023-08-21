@@ -1,6 +1,5 @@
 package net.dries007.tfc.api.types.food;
 
-import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.minecraft.util.ResourceLocation;
 

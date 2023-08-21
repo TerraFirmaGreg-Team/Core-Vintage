@@ -1,26 +1,26 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "tfc:cross"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
   },
-  "variants" : {
-    "stage" : {
-      "0" : {
-        "textures" : {
-          "cross" : "tfc:blocks/plants/primrose/0",
-          "particle" : "tfc:blocks/plants/primrose/0"
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plants/primrose/0",
+          "particle": "tfc:blocks/plants/primrose/0"
         }
       },
-      "1" : {
-        "textures" : {
-          "cross" : "tfc:blocks/plants/primrose/1",
-          "particle" : "tfc:blocks/plants/primrose/1"
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plants/primrose/1",
+          "particle": "tfc:blocks/plants/primrose/1"
         }
       },
-      "2" : {
-        "textures" : {
-          "cross" : "tfc:blocks/plants/primrose/2",
-          "particle" : "tfc:blocks/plants/primrose/2"
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plants/primrose/2",
+          "particle": "tfc:blocks/plants/primrose/2"
         }
       }
     }

@@ -1,6 +1,6 @@
 {
-  "parent" : "item/generated",
-  "textures" : {
-    "layer0" : "tfc:item/groundcover/dead_grass"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "tfc:item/groundcover/dead_grass"
   }
 }

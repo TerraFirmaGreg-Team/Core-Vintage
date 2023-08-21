@@ -1,32 +1,32 @@
 {
-  "forge_marker" : 1,
-  "defaults" : {
-    "model" : "tfc:cross"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
   },
-  "variants" : {
-    "stage" : {
-      "0" : {
-        "textures" : {
-          "cross" : "tfc:blocks/plants/canna/0",
-          "particle" : "tfc:blocks/plants/canna/0"
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plants/canna/0",
+          "particle": "tfc:blocks/plants/canna/0"
         }
       },
-      "1" : {
-        "textures" : {
-          "cross" : "tfc:blocks/plants/canna/1",
-          "particle" : "tfc:blocks/plants/canna/1"
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plants/canna/1",
+          "particle": "tfc:blocks/plants/canna/1"
         }
       },
-      "2" : {
-        "textures" : {
-          "cross" : "tfc:blocks/plants/canna/2",
-          "particle" : "tfc:blocks/plants/canna/2"
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plants/canna/2",
+          "particle": "tfc:blocks/plants/canna/2"
         }
       },
-      "3" : {
-        "textures" : {
-          "cross" : "tfc:blocks/plants/canna/3",
-          "particle" : "tfc:blocks/plants/canna/3"
+      "3": {
+        "textures": {
+          "cross": "tfc:blocks/plants/canna/3",
+          "particle": "tfc:blocks/plants/canna/3"
         }
       }
     }

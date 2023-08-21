@@ -1,39 +1,21 @@
 {
-  "ambientocclusion" : false,
-  "textures" : {
-    "layer0" : "tfc:blocks/plants/sargassum/sargassum",
-    "particle" : "tfc:blocks/plants/sargassum/sargassum"
+  "ambientocclusion": false,
+  "textures": {
+    "layer0": "tfc:blocks/plants/sargassum/sargassum",
+    "particle": "tfc:blocks/plants/sargassum/sargassum"
   },
-  "elements" : [
+  "elements": [
     {
-      "from" : [
-        0,
-        -1.5,
-        0
-      ],
-      "to" : [
-        16,
-        -1.5,
-        16
-      ],
-      "faces" : {
-        "up" : {
-          "uv" : [
-            16,
-            0,
-            0,
-            16
-          ],
-          "texture" : "#layer0"
+      "from": [0, -1.5, 0],
+      "to": [16, -1.5, 16],
+      "faces": {
+        "up": {
+          "uv": [16, 0, 0, 16],
+          "texture": "#layer0"
         },
-        "down" : {
-          "uv" : [
-            16,
-            16,
-            0,
-            0
-          ],
-          "texture" : "#layer0"
+        "down": {
+          "uv": [16, 16, 0, 0],
+          "texture": "#layer0"
         }
       }
     }

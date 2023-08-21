@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -54,7 +54,7 @@ public class WorldGenWildCrops implements IWorldGenerator {
 
                 var type = CROP.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
                 if (type != null) {
-                    BlockCropGrowing cropBlock = (BlockCropGrowing) TFCStorage.getCropBlock(GROWING, type);
+                    BlockCropGrowing cropBlock = (BlockCropGrowing) TFCBlocks.getCropBlock(GROWING, type);
                     int cropsInChunk = 3 + random.nextInt(5);
                     for (int i = 0; i < cropsInChunk; i++) {
                         final int x = (chunkX << 4) + random.nextInt(16) + 8;

@@ -1,11 +1,11 @@
 package net.dries007.tfc.common.objects.blocks.wood;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockStairs;
@@ -27,7 +27,7 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
     private final WoodType type;
 
     public BlockWoodStairs(WoodBlockVariant variant, WoodType type) {
-        super(TFCStorage.getWoodBlock(WoodBlockVariants.PLANKS, type).getDefaultState());
+        super(TFCBlocks.getWoodBlock(WoodBlockVariants.PLANKS, type).getDefaultState());
 
         this.variant = variant;
         this.type = type;

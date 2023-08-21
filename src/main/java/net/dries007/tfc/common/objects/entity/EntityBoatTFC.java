@@ -1,9 +1,9 @@
 package net.dries007.tfc.common.objects.entity;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,7 +36,7 @@ public class EntityBoatTFC extends EntityBoat {
     @Nullable
     public WoodType getWood() {
         //noinspection ConstantConditions
-        return TFCStorage.WOOD_BLOCKS.values().stream()
+        return TFCBlocks.WOOD_BLOCKS.values().stream()
                 .map(IWoodBlock::getType)
                 .filter(wood -> wood.toString().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
                 .findFirst().orElse(null);
@@ -61,7 +61,7 @@ public class EntityBoatTFC extends EntityBoat {
     public Item getItemBoat() {
         WoodType woodType = getWood();
         if (woodType != null) {
-            return TFCStorage.getBoatItem(woodType);
+            return TFCBlocks.getBoatItem(woodType);
         }
         return super.getItemBoat();
     }

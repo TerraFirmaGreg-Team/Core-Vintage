@@ -6,9 +6,9 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.category.FoodCategory;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
@@ -689,11 +689,11 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
 
     private Item getSoupItem() {
         return switch (soupNutrient) {
-            case GRAIN -> TFCStorage.getFoodItem(SOUP_GRAIN);
-            case VEGETABLES -> TFCStorage.getFoodItem(SOUP_VEGETABLE);
-            case FRUIT -> TFCStorage.getFoodItem(SOUP_FRUIT);
-            case PROTEIN -> TFCStorage.getFoodItem(SOUP_MEAT);
-            default -> TFCStorage.getFoodItem(SOUP_DAIRY);
+            case GRAIN -> TFCBlocks.getFoodItem(SOUP_GRAIN);
+            case VEGETABLES -> TFCBlocks.getFoodItem(SOUP_VEGETABLE);
+            case FRUIT -> TFCBlocks.getFoodItem(SOUP_FRUIT);
+            case PROTEIN -> TFCBlocks.getFoodItem(SOUP_MEAT);
+            default -> TFCBlocks.getFoodItem(SOUP_DAIRY);
         };
     }
 

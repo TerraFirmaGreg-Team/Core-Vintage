@@ -90,7 +90,7 @@ import javax.annotation.Nullable;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
-import static net.dries007.tfc.api.registries.TFCStorage.*;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TerraFirmaCraft.MOD_ID)

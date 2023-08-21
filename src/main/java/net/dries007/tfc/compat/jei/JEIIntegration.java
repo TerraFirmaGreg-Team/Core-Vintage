@@ -19,7 +19,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.recipes.workbench.SaltingRecipe;
 import net.dries007.tfc.api.recipes.workbench.UnmoldRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.client.gui.*;
@@ -188,7 +187,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(blastList, BLAST_FURNACE_UID);
 
         // Barrel Recipes
-        for (var barrel : TFCStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.BARREL).toArray()) {
+        for (var barrel : TFCBlocks.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.BARREL).toArray()) {
             registry.addRecipeCatalyst(new ItemStack((Block) barrel), BARREL_UID);
         }
 
@@ -200,7 +199,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(barrelRecipes, BARREL_UID);
 
         // Loom Recipes
-        for (var loom : TFCStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.LOOM).toArray()) {
+        for (var loom : TFCBlocks.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.LOOM).toArray()) {
             registry.addRecipeCatalyst(new ItemStack((Block) loom), LOOM_UID);
         }
 
@@ -310,7 +309,7 @@ public final class JEIIntegration implements IModPlugin {
 
         // Stone Knapping Recipes
         for (var rock : RockType.getRockTypes()) {
-            registry.addRecipeCatalyst(new ItemStack(TFCStorage.getRockItem(rock)), KNAP_STONE_UID);
+            registry.addRecipeCatalyst(new ItemStack(TFCBlocks.getRockItem(rock)), KNAP_STONE_UID);
         }
 
         var stoneknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()

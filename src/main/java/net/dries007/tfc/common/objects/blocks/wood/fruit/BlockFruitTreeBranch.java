@@ -1,12 +1,12 @@
 package net.dries007.tfc.common.objects.blocks.wood.fruit;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -241,7 +241,7 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant, IWoodB
         ItemStack stack = player.getHeldItemMainhand();
         if (stack.getItem().getToolClasses(stack).contains("axe") || stack.getItem().getToolClasses(stack).contains("saw")) {
             if (!worldIn.isRemote && RANDOM.nextBoolean()) {
-                ItemStack dropStack = new ItemStack(TFCStorage.getWoodBlock(FRUIT_SAPLING, type));
+                ItemStack dropStack = new ItemStack(TFCBlocks.getWoodBlock(FRUIT_SAPLING, type));
                 InventoryHelper.spawnItemStack(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, dropStack);
             }
         }
@@ -268,13 +268,13 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant, IWoodB
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.getWoodBlock(FRUIT_SAPLING, type));
+        return new ItemStack(TFCBlocks.getWoodBlock(FRUIT_SAPLING, type));
     }
 
 
     private EnumFacing getFacing(IBlockAccess worldIn, BlockPos pos) {
         for (EnumFacing facing : EnumFacing.VALUES) {
-            if (worldIn.getBlockState(pos.offset(facing)).getBlock() == TFCStorage.getWoodBlock(FRUIT_TRUNK, type)) {
+            if (worldIn.getBlockState(pos.offset(facing)).getBlock() == TFCBlocks.getWoodBlock(FRUIT_TRUNK, type)) {
                 return facing.getOpposite();
             }
         }

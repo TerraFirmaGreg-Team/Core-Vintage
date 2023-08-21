@@ -1,11 +1,11 @@
 package net.dries007.tfc.common.objects.blocks.rock;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariants;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.rock.ItemRockSlab;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -60,13 +60,13 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
     protected static Block getFullBlockFromSlab(RockBlockVariant rockBlockVariant, RockType rockType) {
         if (rockBlockVariant == RockBlockVariants.SLAB_RAW || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_RAW) {
-            return TFCStorage.getRockBlock(RockBlockVariants.RAW, rockType);
+            return TFCBlocks.getRockBlock(RockBlockVariants.RAW, rockType);
         } else if (rockBlockVariant == RockBlockVariants.SLAB_COBBLE || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_COBBLE) {
-            return TFCStorage.getRockBlock(RockBlockVariants.COBBLE, rockType);
+            return TFCBlocks.getRockBlock(RockBlockVariants.COBBLE, rockType);
         } else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_SMOOTH) {
-            return TFCStorage.getRockBlock(RockBlockVariants.SMOOTH, rockType);
+            return TFCBlocks.getRockBlock(RockBlockVariants.SMOOTH, rockType);
         } else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_BRICK) {
-            return TFCStorage.getRockBlock(RockBlockVariants.BRICK, rockType);
+            return TFCBlocks.getRockBlock(RockBlockVariants.BRICK, rockType);
         }
 
         throw new RuntimeException(String.format("Full block from slab not founded: %s, %s", rockBlockVariant, rockType));
@@ -74,13 +74,13 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
     protected static Block getDoubleSlabFromSlab(RockBlockVariant rockBlockVariant, RockType rockType) {
         if (rockBlockVariant == RockBlockVariants.SLAB_RAW) {
-            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_RAW, rockType);
+            return TFCBlocks.getRockBlock(RockBlockVariants.SLAB_DOUBLE_RAW, rockType);
         } else if (rockBlockVariant == RockBlockVariants.SLAB_COBBLE) {
-            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_COBBLE, rockType);
+            return TFCBlocks.getRockBlock(RockBlockVariants.SLAB_DOUBLE_COBBLE, rockType);
         } else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH) {
-            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_SMOOTH, rockType);
+            return TFCBlocks.getRockBlock(RockBlockVariants.SLAB_DOUBLE_SMOOTH, rockType);
         } else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK) {
-            return TFCStorage.getRockBlock(RockBlockVariants.SLAB_DOUBLE_BRICK, rockType);
+            return TFCBlocks.getRockBlock(RockBlockVariants.SLAB_DOUBLE_BRICK, rockType);
         }
 
         throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", rockBlockVariant, rockType));

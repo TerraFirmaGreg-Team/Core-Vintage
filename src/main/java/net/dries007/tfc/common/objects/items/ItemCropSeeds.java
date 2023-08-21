@@ -1,9 +1,9 @@
 package net.dries007.tfc.common.objects.items;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.crop.ICropItem;
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -55,7 +55,7 @@ public class ItemCropSeeds extends Item implements IPlantable, ICropItem {
                 state.getBlock().canSustainPlant(state, worldIn, pos, EnumFacing.UP, this) &&
                 worldIn.isAirBlock(pos.up()) && state.getBlock() instanceof BlockSoilFarmland) {
 
-            worldIn.setBlockState(pos.up(), TFCStorage.getCropBlock(GROWING, type).getDefaultState());
+            worldIn.setBlockState(pos.up(), TFCBlocks.getCropBlock(GROWING, type).getDefaultState());
 
             if (player instanceof EntityPlayerMP) {
                 CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, pos.up(), itemstack);
@@ -80,7 +80,7 @@ public class ItemCropSeeds extends Item implements IPlantable, ICropItem {
         if (state.getBlock() instanceof BlockCropGrowing && ((BlockCropGrowing) state.getBlock()).getType() == this.type) {
             return state;
         }
-        return TFCStorage.getCropBlock(GROWING, type).getDefaultState();
+        return TFCBlocks.getCropBlock(GROWING, type).getDefaultState();
     }
 
     @SideOnly(Side.CLIENT)

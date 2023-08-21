@@ -1,8 +1,8 @@
 package net.dries007.tfc.util.fuel;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 
@@ -35,7 +35,7 @@ public final class FuelManager {
 
     public static void postInit() {
         for (var woodType : WoodType.getWoodTypes()) {
-            var log = TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType);
+            var log = TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType);
             FUELS.add(new Fuel(IIngredient.of(new ItemStack(log)), woodType.getBurnTicks(), woodType.getBurnTemp()));
         }
 

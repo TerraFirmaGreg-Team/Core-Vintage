@@ -1,9 +1,9 @@
 package net.dries007.tfc.common.objects.blocks.wood.fruit;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.config.ConfigTFC;
@@ -69,10 +69,10 @@ public class BlockFruitTreeSapling extends BlockWoodSapling {
     @Override
     public void grow(World world, Random random, BlockPos blockPos, IBlockState blockState) {
         if (!world.isRemote) {
-            world.setBlockState(blockPos, TFCStorage.getWoodBlock(FRUIT_TRUNK, type).getDefaultState());
+            world.setBlockState(blockPos, TFCBlocks.getWoodBlock(FRUIT_TRUNK, type).getDefaultState());
             if (world.getBlockState(blockPos.up()).getMaterial().isReplaceable()) {
                 world.setBlockState(blockPos.up(),
-                        TFCStorage.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+                        TFCBlocks.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
                                 .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
             }
         }

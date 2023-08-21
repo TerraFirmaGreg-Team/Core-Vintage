@@ -1,7 +1,6 @@
 package net.dries007.tfc.world.classic;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.soil.type.SoilType;
@@ -661,8 +660,8 @@ public class ChunkGenTFC implements IChunkGenerator {
                 int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
                 int smooth = -1;
 
-                IBlockState surfaceBlock = TFCStorage.getSoilBlock(rainfall + 1.3 * rand.nextGaussian() >= 150f ? SoilBlockVariants.GRASS : SoilBlockVariants.DRY_GRASS, soil1).getDefaultState();
-                IBlockState subSurfaceBlock = TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soil1).getDefaultState();
+                IBlockState surfaceBlock = TFCBlocks.getSoilBlock(rainfall + 1.3 * rand.nextGaussian() >= 150f ? SoilBlockVariants.GRASS : SoilBlockVariants.DRY_GRASS, soil1).getDefaultState();
+                IBlockState subSurfaceBlock = TFCBlocks.getSoilBlock(SoilBlockVariants.DIRT, soil1).getDefaultState();
 
                 if (BiomesTFC.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x + 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z - 1))) {
                     if (!BiomesTFC.isBeachBiome(getBiomeOffset(x, z))) cliffMap[colIndex] = true;
@@ -739,26 +738,26 @@ public class ChunkGenTFC implements IChunkGenerator {
                             chunkHeightMap[colIndex] = y + yOffset;
 
                         if (y + yOffset <= ROCKLAYER3 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(RAW, rock3).getDefaultState());
+                            outp.setBlockState(x, y + yOffset, z, TFCBlocks.getRockBlock(RAW, rock3).getDefaultState());
                         else if (y + yOffset <= ROCKLAYER2 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(RAW, rock2).getDefaultState());
+                            outp.setBlockState(x, y + yOffset, z, TFCBlocks.getRockBlock(RAW, rock2).getDefaultState());
                         else
-                            outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(RAW, rock1).getDefaultState());
+                            outp.setBlockState(x, y + yOffset, z, TFCBlocks.getRockBlock(RAW, rock1).getDefaultState());
 
                         // Пустыни / сухие районы
                         if (rainfall < +1.3 * rand.nextGaussian() + 75f) {
                             // Устанавливаем блоки поверхности и подповерхности как песок
-                            subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(SAND, rock1).getDefaultState();
+                            subSurfaceBlock = surfaceBlock = TFCBlocks.getRockBlock(SAND, rock1).getDefaultState();
                         }
 
                         // Если биом пляж, океан или глубокий океан, устанавливаем блоки поверхности и подповерхности как песок
                         else if (biome == BiomesTFC.BEACH || biome == BiomesTFC.OCEAN || biome == BiomesTFC.DEEP_OCEAN) {
-                            subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(SAND, rock1).getDefaultState();
+                            subSurfaceBlock = surfaceBlock = TFCBlocks.getRockBlock(SAND, rock1).getDefaultState();
                         }
 
                         // Если биом гравелевый пляж, устанавливаем блоки поверхности и подповерхности как гравий
                         else if (biome == BiomesTFC.GRAVEL_BEACH) {
-                            subSurfaceBlock = surfaceBlock = TFCStorage.getRockBlock(GRAVEL, rock1).getDefaultState();
+                            subSurfaceBlock = surfaceBlock = TFCBlocks.getRockBlock(GRAVEL, rock1).getDefaultState();
                         }
 
                         // Если smooth равно -1, выполняем следующие действия для сглаживания поверхности
@@ -805,7 +804,7 @@ public class ChunkGenTFC implements IChunkGenerator {
                                     for (int c = 1; c < dirtH && !mountains && !cliffMap[colIndex]; c++) {
                                         outp.setBlockState(x, y - c + yOffset, z, subSurfaceBlock);
                                         if (c > 1 + (5 - drainage.valueInt))
-                                            outp.setBlockState(x, y - c + yOffset, z, TFCStorage.getRockBlock(GRAVEL, rock1).getDefaultState());
+                                            outp.setBlockState(x, y - c + yOffset, z, TFCBlocks.getRockBlock(GRAVEL, rock1).getDefaultState());
                                     }
                                 }
                             }
@@ -815,12 +814,12 @@ public class ChunkGenTFC implements IChunkGenerator {
                                 y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER) {
                             if (biome != BiomesTFC.SWAMPLAND) // Большинство областей имеют дно из гравия и песка
                             {
-                                if (outp.getBlockState(x, y + yOffset, z) != TFCStorage.getRockBlock(SAND, rock1).getDefaultState() && rand.nextInt(5) != 0)
-                                    outp.setBlockState(x, y + yOffset, z, TFCStorage.getRockBlock(GRAVEL, rock1).getDefaultState());
+                                if (outp.getBlockState(x, y + yOffset, z) != TFCBlocks.getRockBlock(SAND, rock1).getDefaultState() && rand.nextInt(5) != 0)
+                                    outp.setBlockState(x, y + yOffset, z, TFCBlocks.getRockBlock(GRAVEL, rock1).getDefaultState());
                             } else // Болотные биомы имеют дно, состоящее в основном из земли
                             {
-                                if (outp.getBlockState(x, y + yOffset, z) != TFCStorage.getRockBlock(SAND, rock1).getDefaultState())
-                                    outp.setBlockState(x, y + yOffset, z, TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soil1).getDefaultState());
+                                if (outp.getBlockState(x, y + yOffset, z) != TFCBlocks.getRockBlock(SAND, rock1).getDefaultState())
+                                    outp.setBlockState(x, y + yOffset, z, TFCBlocks.getSoilBlock(SoilBlockVariants.DIRT, soil1).getDefaultState());
                             }
                         }
                     }
@@ -842,16 +841,16 @@ public class ChunkGenTFC implements IChunkGenerator {
                         outp.setBlockState(x, y, z, Blocks.MAGMA.getDefaultState());
                     } else if (outp.isEmpty(x, y, z)) {
                         if (y <= ROCKLAYER3 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y, z, TFCStorage.getRockBlock(RAW, rock3).getDefaultState());
+                            outp.setBlockState(x, y, z, TFCBlocks.getRockBlock(RAW, rock3).getDefaultState());
                         else if (y <= ROCKLAYER2 + seaLevelOffsetMap[colIndex])
-                            outp.setBlockState(x, y, z, TFCStorage.getRockBlock(RAW, rock2).getDefaultState());
+                            outp.setBlockState(x, y, z, TFCBlocks.getRockBlock(RAW, rock2).getDefaultState());
                         else
-                            outp.setBlockState(x, y, z, TFCStorage.getRockBlock(RAW, rock1).getDefaultState());
+                            outp.setBlockState(x, y, z, TFCBlocks.getRockBlock(RAW, rock1).getDefaultState());
 
                         if (BiomesTFC.isBeachBiome(biome) || BiomesTFC.isOceanicBiome(biome)) {
                             if (outp.getBlockState(x, y + 1, z) == SALT_WATER) {
-                                outp.setBlockState(x, y, z, TFCStorage.getRockBlock(SAND, rock1).getDefaultState());
-                                outp.setBlockState(x, y - 1, z, TFCStorage.getRockBlock(SAND, rock1).getDefaultState());
+                                outp.setBlockState(x, y, z, TFCBlocks.getRockBlock(SAND, rock1).getDefaultState());
+                                outp.setBlockState(x, y - 1, z, TFCBlocks.getRockBlock(SAND, rock1).getDefaultState());
                             }
                         }
                     }

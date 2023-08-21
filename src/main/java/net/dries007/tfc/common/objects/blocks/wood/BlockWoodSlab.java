@@ -1,12 +1,12 @@
 package net.dries007.tfc.common.objects.blocks.wood;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.wood.itemblocks.ItemBlockWoodSlab;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -45,7 +45,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.modelBlock = TFCStorage.getWoodBlock(WoodBlockVariants.PLANKS, type);
+        this.modelBlock = TFCBlocks.getWoodBlock(WoodBlockVariants.PLANKS, type);
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -196,7 +196,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         public Half(WoodBlockVariant variant, WoodType type) {
             super(type);
 
-            doubleSlab = (Double) TFCStorage.getWoodBlock(WoodBlockVariants.SLAB_DOUBLE, type);
+            doubleSlab = (Double) TFCBlocks.getWoodBlock(WoodBlockVariants.SLAB_DOUBLE, type);
             doubleSlab.halfSlab = this;
             halfSlab = this;
 

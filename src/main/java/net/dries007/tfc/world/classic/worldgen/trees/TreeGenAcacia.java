@@ -1,10 +1,10 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.trees.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.dries007.tfc.world.classic.StructureHelper;
@@ -34,8 +34,8 @@ public class TreeGenAcacia implements ITreeGenerator {
 
     @Override
     public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
-        trunk = TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
-        bark = TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false).withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
+        trunk = TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
+        bark = TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false).withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
 
         final boolean smallBranch = rand.nextBoolean();
         final int branches = 2 + rand.nextInt(2);

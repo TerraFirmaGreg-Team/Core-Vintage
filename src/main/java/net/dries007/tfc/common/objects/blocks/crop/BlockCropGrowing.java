@@ -1,13 +1,13 @@
 package net.dries007.tfc.common.objects.blocks.crop;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.types.crop.variant.CropBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.common.objects.tileentities.TECropBase;
 import net.dries007.tfc.config.ConfigTFC;
@@ -372,7 +372,7 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
         // Проверяем, включена ли опция смерти культурных растений в конфигурации
         if (ConfigTFC.General.FOOD.enableCropDeath) {
             // Устанавливаем состояние блока на месте умирающего растения
-            worldIn.setBlockState(pos, TFCStorage.getCropBlock(DEAD, type).getDefaultState()
+            worldIn.setBlockState(pos, TFCBlocks.getCropBlock(DEAD, type).getDefaultState()
                     .withProperty(BlockCropDead.MATURE, state.getValue(getAgeProperty()) == MATURE_AGE));
         }
     }

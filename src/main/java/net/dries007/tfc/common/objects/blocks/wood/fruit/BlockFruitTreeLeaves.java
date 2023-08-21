@@ -1,11 +1,11 @@
 package net.dries007.tfc.common.objects.blocks.wood.fruit;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.config.ConfigTFC;
@@ -170,8 +170,8 @@ public class BlockFruitTreeLeaves extends BlockWoodLeaves implements IGrowingPla
                     if (evaluated.contains(pos1) || !world.isBlockLoaded(pos1))
                         continue;
                     state1 = world.getBlockState(pos1);
-                    if (state1.getBlock() == TFCStorage.getWoodBlock(WoodBlockVariants.FRUIT_TRUNK, type)
-                            || state1.getBlock() == TFCStorage.getWoodBlock(WoodBlockVariants.FRUIT_BRANCH, type))
+                    if (state1.getBlock() == TFCBlocks.getWoodBlock(WoodBlockVariants.FRUIT_TRUNK, type)
+                            || state1.getBlock() == TFCBlocks.getWoodBlock(WoodBlockVariants.FRUIT_BRANCH, type))
                         return;
                     if (state1.getBlock() == this)
                         pathsToAdd.add(pos1.toImmutable());

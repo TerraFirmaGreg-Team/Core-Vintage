@@ -1,6 +1,5 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
@@ -52,10 +51,10 @@ public class WorldGenSoilPits implements IWorldGenerator {
                     final BlockPos pos = posHorizontal.add(0, y, 0);
                     final IBlockState current = world.getBlockState(pos);
                     if (BlocksTFC_old.isDirt(current)) {
-                        world.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.CLAY, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
+                        world.setBlockState(pos, TFCBlocks.getSoilBlock(SoilBlockVariants.CLAY, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
                         flag = true;
                     } else if (BlocksTFC_old.isGrass(current)) {
-                        world.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.CLAY_GRASS, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
+                        world.setBlockState(pos, TFCBlocks.getSoilBlock(SoilBlockVariants.CLAY_GRASS, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
                         flag = true;
                     }
                 }
@@ -64,7 +63,7 @@ public class WorldGenSoilPits implements IWorldGenerator {
 
                     for (PlantType plant : PlantType.getPlantTypes()) {
                         if (plant.isClayMarking()) {
-                            var plantBlock = (BlockPlantTFC) TFCStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                            var plantBlock = (BlockPlantTFC) TFCBlocks.getPlantBlock(plant.getPlantVariant(), plant);
                             IBlockState state = plantBlock.getDefaultState();
                             int plantAge = plant.getAgeForWorldgen(rng, ClimateTFC.getActualTemp(world, pos));
 

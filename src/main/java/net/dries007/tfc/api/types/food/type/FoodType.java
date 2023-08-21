@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.types.food.type;
 
 import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.food.category.FoodCategory;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
@@ -85,7 +85,7 @@ public class FoodType {
     }
 
     public Item get() {
-        return TFCStorage.getFoodItem(this);
+        return TFCBlocks.getFoodItem(this);
     }
 
     /**

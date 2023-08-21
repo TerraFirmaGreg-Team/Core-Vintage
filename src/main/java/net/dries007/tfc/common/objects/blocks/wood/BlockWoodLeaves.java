@@ -1,13 +1,13 @@
 package net.dries007.tfc.common.objects.blocks.wood;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -133,7 +133,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @Override
     @Nonnull
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(TFCStorage.getWoodBlock(WoodBlockVariants.SAPLING, type)) : Items.AIR;
+        return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(TFCBlocks.getWoodBlock(WoodBlockVariants.SAPLING, type)) : Items.AIR;
     }
 
     @Override
@@ -228,7 +228,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
                     if (evaluated.contains(pos1) || !world.isBlockLoaded(pos1))
                         continue;
                     state1 = world.getBlockState(pos1);
-                    if (state1.getBlock() == TFCStorage.getWoodBlock(WoodBlockVariants.LOG, type))
+                    if (state1.getBlock() == TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, type))
                         return;
                     if (state1.getBlock() == this)
                         pathsToAdd.add(pos1.toImmutable());

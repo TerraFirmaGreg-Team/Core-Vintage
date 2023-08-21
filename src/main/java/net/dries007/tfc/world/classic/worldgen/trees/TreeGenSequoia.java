@@ -1,11 +1,11 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.trees.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.dries007.tfc.world.classic.StructureHelper;
@@ -36,7 +36,7 @@ public class TreeGenSequoia implements ITreeGenerator {
         final int layers = 4 + rand.nextInt(3);
         final int height = 3 + rand.nextInt(4);
 
-        trunk = TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
+        trunk = TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
 
         for (int i = -2; i < height; i++) {
             placeTrunk(world, pos.add(0, i, 0));

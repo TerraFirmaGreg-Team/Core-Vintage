@@ -1,12 +1,12 @@
 package net.dries007.tfc.common.objects.blocks.rock;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.util.TFCGuiHandler;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.tileentities.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
@@ -181,13 +181,13 @@ public class BlockRockAnvil extends BlockRock {
     @Override
     @Nonnull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCStorage.getRockItem(getType());
+        return TFCBlocks.getRockItem(getType());
     }
 
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.getRockBlock(RAW, getType()));
+        return new ItemStack(TFCBlocks.getRockBlock(RAW, getType()));
     }
 
     @Override

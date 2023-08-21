@@ -4,10 +4,10 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.food.Nutrient;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.category.FoodCategory;
 import net.dries007.tfc.api.types.food.type.FoodTypes;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
@@ -223,15 +223,15 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
     private Item getSaladItem(Nutrient nutrient) {
         switch (nutrient) {
             case GRAIN:
-                return TFCStorage.getFoodItem(SALAD_GRAIN);
+                return TFCBlocks.getFoodItem(SALAD_GRAIN);
             case VEGETABLES:
-                return TFCStorage.getFoodItem(SALAD_VEGETABLE);
+                return TFCBlocks.getFoodItem(SALAD_VEGETABLE);
             case FRUIT:
-                return TFCStorage.getFoodItem(SALAD_FRUIT);
+                return TFCBlocks.getFoodItem(SALAD_FRUIT);
             case PROTEIN:
-                return TFCStorage.getFoodItem(SALAD_MEAT);
+                return TFCBlocks.getFoodItem(SALAD_MEAT);
             default:
-                return TFCStorage.getFoodItem(SALAD_DAIRY);
+                return TFCBlocks.getFoodItem(SALAD_DAIRY);
         }
     }
 }

@@ -1,12 +1,12 @@
 package net.dries007.tfc.common.objects.blocks.soil;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -100,7 +100,7 @@ public class BlockSoilPath extends BlockGrassPath implements ISoilBlock {
     @Nonnull
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        return Item.getItemFromBlock(TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, type));
+        return Item.getItemFromBlock(TFCBlocks.getSoilBlock(SoilBlockVariants.DIRT, type));
     }
 
     @Override

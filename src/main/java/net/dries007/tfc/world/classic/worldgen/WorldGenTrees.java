@@ -1,9 +1,9 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.trees.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
@@ -37,7 +37,7 @@ public class WorldGenTrees implements IWorldGenerator {
                 // Also, only add on soil, since this is called by the world regen handler later
                 IBlockState stateDown = world.getBlockState(pos.down());
                 if (world.isAirBlock(pos) && stateDown.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC_old.isGround(stateDown)) {
-                    world.setBlockState(pos, TFCStorage.getGroundcoverBlock(STICK).getDefaultState());
+                    world.setBlockState(pos, TFCBlocks.getGroundcoverBlock(STICK).getDefaultState());
                 }
             }
         }

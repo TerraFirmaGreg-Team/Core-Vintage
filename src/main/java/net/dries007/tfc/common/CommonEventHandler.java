@@ -20,7 +20,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IPredator;
@@ -833,10 +832,10 @@ public final class CommonEventHandler {
         // Since cobble is a gravity block, placing it can lead to world crashes, so we avoid doing that and place rhyolite instead
         if (ConfigTFC.General.OVERRIDES.enableLavaWaterPlacesTFCBlocks) {
             if (event.getNewState().getBlock() == Blocks.STONE) {
-                event.setNewState(TFCStorage.getRockBlock(RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                event.setNewState(TFCBlocks.getRockBlock(RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
             }
             if (event.getNewState().getBlock() == Blocks.COBBLESTONE) {
-                event.setNewState(TFCStorage.getRockBlock(RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                event.setNewState(TFCBlocks.getRockBlock(RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
             }
         }
     }

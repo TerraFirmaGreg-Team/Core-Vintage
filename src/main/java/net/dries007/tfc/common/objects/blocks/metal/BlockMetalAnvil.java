@@ -7,7 +7,6 @@ import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.metal.IMetalBlock;
 import net.dries007.tfc.api.types.metal.variant.MetalBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -16,6 +15,7 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.tileentities.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -52,9 +52,9 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.registries.TFCStorage.METAL_BLOCKS;
 import static net.dries007.tfc.api.types.metal.variant.MetalBlockVariants.ANVIL;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_METAL;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.METAL_BLOCKS;
 import static net.dries007.tfc.util.Constants.RNG;
 
 @ParametersAreNonnullByDefault
@@ -133,7 +133,7 @@ public class BlockMetalAnvil extends Block implements IMetalBlock, IMaterialItem
             if (state.getBlock().isReplaceable(worldIn, placedPos) &&
                     stateSupport.isSideSolid(worldIn, supportPos, EnumFacing.UP)) {
                 if (!worldIn.isRemote) {
-                    worldIn.setBlockState(placedPos, TFCStorage.getMetalBlock(ANVIL, material).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
+                    worldIn.setBlockState(placedPos, TFCBlocks.getMetalBlock(ANVIL, material).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
                     worldIn.playSound(null, placedPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     stack.shrink(1);
                     player.setHeldItem(hand, stack);
@@ -315,7 +315,7 @@ public class BlockMetalAnvil extends Block implements IMetalBlock, IMaterialItem
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCStorage.getMetalBlock(ANVIL, material));
+        return new ItemStack(TFCBlocks.getMetalBlock(ANVIL, material));
     }
 
     public Material getMetal() {

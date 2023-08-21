@@ -1,10 +1,10 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.trees.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.dries007.tfc.world.classic.StructureHelper;
@@ -88,6 +88,6 @@ public class TreeGenWillow implements ITreeGenerator {
 
     private void tryPlaceLog(World world, BlockPos pos, WoodType woodType, BlockLog.EnumAxis axis) {
         if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos).getBlock() instanceof BlockWoodSapling || world.getBlockState(pos).getBlock() instanceof BlockWoodLeaves)
-            world.setBlockState(pos, TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(LOG_AXIS, axis).withProperty(PLACED, false));
+            world.setBlockState(pos, TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(LOG_AXIS, axis).withProperty(PLACED, false));
     }
 }

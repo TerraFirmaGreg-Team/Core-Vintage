@@ -1,6 +1,5 @@
 package net.dries007.tfc.common.objects.blocks.soil;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
@@ -8,6 +7,7 @@ import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
 import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
@@ -94,7 +94,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
         if (block instanceof ISoilBlock) {
             var soil = ((ISoilBlock) block).getType();
 
-            world.setBlockState(pos, TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
+            world.setBlockState(pos, TFCBlocks.getSoilBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
             AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
             for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb)) {
                 double d0 = Math.min(axisalignedbb.maxY - axisalignedbb.minY, axisalignedbb.maxY - entity.getEntityBoundingBox().minY);
@@ -248,7 +248,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
     @Nonnull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(TFCStorage.getSoilBlock(SoilBlockVariants.DIRT, type));
+        return Item.getItemFromBlock(TFCBlocks.getSoilBlock(SoilBlockVariants.DIRT, type));
     }
 
     @Override

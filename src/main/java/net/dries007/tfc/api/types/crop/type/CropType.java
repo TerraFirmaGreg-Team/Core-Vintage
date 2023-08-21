@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.types.crop.type;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.crop.category.CropCategory;
 import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.skills.Skill;
@@ -186,7 +186,7 @@ public class CropType {
         }
 
         public Builder setSeed() {
-            this.seedDrop = () -> new ItemStack(TFCStorage.getSeedItem(this.build()));
+            this.seedDrop = () -> new ItemStack(TFCBlocks.getSeedItem(this.build()));
             return this;
         }
 

@@ -17,8 +17,8 @@ import net.dries007.tfc.common.objects.items.wood.ItemWoodLumber;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.minecraft.item.Item;
 
-import static net.dries007.tfc.api.registries.TFCStorage.*;
 import static net.dries007.tfc.common.objects.CreativeTabsTFC.WOOD;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 
 public class TFCItems {
 

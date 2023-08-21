@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.rock.BlockRockSpeleothem;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.minecraft.block.Block;
@@ -107,7 +107,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
             if (block instanceof IRockBlock rockTypeBlock) {
                 BlockRockSpeleothem.EnumSize sizeType = BlockRockSpeleothem.EnumSize.values()[size - i - 1];
                 // Создаем блок сталактита с указанным размером и типом породы
-                IBlockState targetBlock = TFCStorage.getRockBlock(SPELEOTHEM, rockTypeBlock.getType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
+                IBlockState targetBlock = TFCBlocks.getRockBlock(SPELEOTHEM, rockTypeBlock.getType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
                 // Устанавливаем блок сталактита в мир
                 world.setBlockState(pos, targetBlock);
             }
@@ -118,8 +118,8 @@ public class WorldGenSpeleothem implements IWorldGenerator {
     private Block getSpeleothemType(IBlockState state) {
         var block = state.getBlock();
         for (var rock : RockType.getRockTypes()) {
-            if (TFCStorage.getRockBlock(RAW, rock) == block) {
-                return TFCStorage.getRockBlock(RAW, rock);
+            if (TFCBlocks.getRockBlock(RAW, rock) == block) {
+                return TFCBlocks.getRockBlock(RAW, rock);
             }
         }
 

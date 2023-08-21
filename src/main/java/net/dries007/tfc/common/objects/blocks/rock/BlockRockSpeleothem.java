@@ -1,9 +1,9 @@
 package net.dries007.tfc.common.objects.blocks.rock;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
@@ -69,7 +69,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCStorage.getRockItem(getType());
+        return TFCBlocks.getRockItem(getType());
     }
 
     @Override

@@ -12,7 +12,6 @@ import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.metal.IMetalBlock;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
@@ -128,48 +127,48 @@ public class ClientProxy extends CommonProxy {
 
         //=== BLOCKS =================================================================================================//
 
-        TFCStorage.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.CROP_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.ALABASTER_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.GROUNDCOVER_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.BUSH_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCStorage.METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCBlocks.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCBlocks.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCBlocks.WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCBlocks.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCBlocks.CROP_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCBlocks.ALABASTER_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCBlocks.GROUNDCOVER_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCBlocks.BUSH_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCBlocks.METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
 
-        for (var itemBlock : TFCStorage.ITEM_BLOCKS)
+        for (var itemBlock : TFCBlocks.ITEM_BLOCKS)
             ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName(), "normal"));
 
-        for (var block : TFCStorage.FLUID)
+        for (var block : TFCBlocks.FLUID)
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
 
 
         //=== ITEMS ==================================================================================================//
 
-        for (var item : TFCStorage.ROCK_ITEMS.values())
+        for (var item : TFCBlocks.ROCK_ITEMS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (var item : TFCStorage.BRICK_ITEMS.values())
+        for (var item : TFCBlocks.BRICK_ITEMS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (var item : TFCStorage.LUMBER_ITEMS.values())
+        for (var item : TFCBlocks.LUMBER_ITEMS.values())
             item.onModelRegister();
 
-        for (var item : TFCStorage.BOAT_ITEMS.values())
+        for (var item : TFCBlocks.BOAT_ITEMS.values())
             item.onModelRegister();
 
-        for (var item : TFCStorage.SEED_ITEMS.values())
+        for (var item : TFCBlocks.SEED_ITEMS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (var item : TFCStorage.FOOD_ITEMS.values())
+        for (var item : TFCBlocks.FOOD_ITEMS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (var item : TFCStorage.UNFIRED_MOLDS.values())
+        for (var item : TFCBlocks.UNFIRED_MOLDS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (var item : TFCStorage.ITEM)
+        for (var item : TFCBlocks.ITEM)
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
         //=== TESRs ==================================================================================================//
@@ -208,7 +207,7 @@ public class ClientProxy extends CommonProxy {
             var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
 
             if (extendedOrePrefix.getHasMold()) {
-                var clayMold = TFCStorage.FIRED_MOLDS.get(orePrefix);
+                var clayMold = TFCBlocks.FIRED_MOLDS.get(orePrefix);
 
                 ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_empty"));
                 ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_filled"));
@@ -263,14 +262,14 @@ public class ClientProxy extends CommonProxy {
 
         //=== Soil ===================================================================================================//
 
-        blockColors.registerBlockColorHandler(grassColor, TFCStorage.SOIL_BLOCKS.values()
+        blockColors.registerBlockColorHandler(grassColor, TFCBlocks.SOIL_BLOCKS.values()
                 .stream()
                 .filter(x -> x.getBlockVariant().isGrass())
                 .map(s -> (Block) s)
                 .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
-                BlockSoilFarmland.TINT[state.getValue(BlockSoilFarmland.MOISTURE)], TFCStorage.SOIL_BLOCKS.values()
+                BlockSoilFarmland.TINT[state.getValue(BlockSoilFarmland.MOISTURE)], TFCBlocks.SOIL_BLOCKS.values()
                 .stream()
                 .filter(x -> x.getBlockVariant() == SoilBlockVariants.FARMLAND)
                 .map(s -> (Block) s)
@@ -280,7 +279,7 @@ public class ClientProxy extends CommonProxy {
 
         //=== Plant ==================================================================================================//
 
-        blockColors.registerBlockColorHandler(grassColor, TFCStorage.PLANT_BLOCKS.values()
+        blockColors.registerBlockColorHandler(grassColor, TFCBlocks.PLANT_BLOCKS.values()
                 .stream()
                 .map(s -> (Block) s)
                 .toArray(Block[]::new));
@@ -288,14 +287,14 @@ public class ClientProxy extends CommonProxy {
         //=== Wood ===================================================================================================//
 
         blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IWoodBlock) s.getBlock()).getType().getColor() : 0xFFFFFF,
-                TFCStorage.WOOD_BLOCKS.values()
+                TFCBlocks.WOOD_BLOCKS.values()
                         .stream()
                         .filter(block -> block.getBlockVariant() != WoodBlockVariants.LEAVES)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler(foliageColor,
-                TFCStorage.WOOD_BLOCKS.values()
+                TFCBlocks.WOOD_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES)
                         .map(s -> (Block) s)
@@ -304,7 +303,7 @@ public class ClientProxy extends CommonProxy {
         //=== Metal ==================================================================================================//
 
         blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IMetalBlock) s.getBlock()).getMaterial().getMaterialRGB() : 0xFFFFFF,
-                TFCStorage.METAL_BLOCKS.values()
+                TFCBlocks.METAL_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
@@ -333,7 +332,7 @@ public class ClientProxy extends CommonProxy {
         //=== Soil ===================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
-                TFCStorage.SOIL_BLOCKS.values()
+                TFCBlocks.SOIL_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant().isGrass())
                         .map(s -> (Block) s)
@@ -345,7 +344,7 @@ public class ClientProxy extends CommonProxy {
         //=== Plant ==================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
-                TFCStorage.PLANT_BLOCKS.values()
+                TFCBlocks.PLANT_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant() == SHORT_GRASS || x.getBlockVariant() == TALL_GRASS)
                         .map(s -> (Block) s)
@@ -354,27 +353,27 @@ public class ClientProxy extends CommonProxy {
         //=== Wood ===================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor() : 0xFFFFFF,
-                TFCStorage.WOOD_BLOCKS.values()
+                TFCBlocks.WOOD_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant() != WoodBlockVariants.LEAVES && x.getBlockVariant() != WoodBlockVariants.SAPLING)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
-                TFCStorage.WOOD_BLOCKS.values()
+                TFCBlocks.WOOD_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES || x.getBlockVariant() == WoodBlockVariants.FRUIT_LEAVES)
                         .map(s -> (BlockWoodLeaves) s)
                         .toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
-                TFCStorage.LUMBER_ITEMS.values()
+                TFCBlocks.LUMBER_ITEMS.values()
                         .stream()
                         .map(s -> (Item) s)
                         .toArray(Item[]::new));
 
         itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
-                TFCStorage.BOAT_ITEMS.values()
+                TFCBlocks.BOAT_ITEMS.values()
                         .stream()
                         .map(s -> (Item) s)
                         .toArray(Item[]::new));
@@ -382,7 +381,7 @@ public class ClientProxy extends CommonProxy {
         //=== Metal ==================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IMetalBlock) ((ItemBlock) s.getItem()).getBlock()).getMaterial().getMaterialRGB() : 0xFFFFFF,
-                TFCStorage.METAL_BLOCKS.values()
+                TFCBlocks.METAL_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
@@ -402,7 +401,7 @@ public class ClientProxy extends CommonProxy {
         }, ForgeRegistries.ITEMS.getValuesCollection().stream().filter(x -> x instanceof ItemFood).toArray(Item[]::new));
 
         // Colorize clay molds
-        itemColors.registerItemColorHandler(moldItemColors, TFCStorage.FIRED_MOLDS.values().toArray(new Item[0]));
+        itemColors.registerItemColorHandler(moldItemColors, TFCBlocks.FIRED_MOLDS.values().toArray(new Item[0]));
     }
 
     @SideOnly(Side.CLIENT)

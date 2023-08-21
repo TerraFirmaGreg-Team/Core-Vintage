@@ -1,10 +1,10 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
-import net.dries007.tfc.api.registries.TFCStorage;
 import net.dries007.tfc.api.types.trees.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.common.objects.blocks.BlocksTFC_old;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
@@ -22,10 +22,10 @@ import static net.minecraft.block.BlockLog.LOG_AXIS;
 public class TreeGenBushes implements ITreeGenerator {
     @Override
     public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
-        IBlockState leaves = TFCStorage.getWoodBlock(WoodBlockVariants.LEAVES, woodType).getDefaultState().withProperty(DECAYABLE, true);
+        IBlockState leaves = TFCBlocks.getWoodBlock(WoodBlockVariants.LEAVES, woodType).getDefaultState().withProperty(DECAYABLE, true);
 
         // Has to fake being placed, otherwise the log will just poof out of existence. todo: better fix for this.
-        checkAndPlace(TFCStorage.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState()
+        checkAndPlace(TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState()
                 .withProperty(PLACED, true)
                 .withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE), world, pos);
         checkAndPlace(leaves, world, pos.add(0, 1, 0));

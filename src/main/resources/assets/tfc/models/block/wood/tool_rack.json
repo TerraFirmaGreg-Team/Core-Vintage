@@ -1,6 +1,10 @@
 ﻿{
   "credit": "Made with Blockbench",
   "parent": "block/block",
+  "textures": {
+      "texture": "tfc:blocks/wood/planks/pattern",
+      "particle": "tfc:blocks/wood/planks/pattern"
+    },
   "elements": [
     {
       "from": [0, 11, 0],

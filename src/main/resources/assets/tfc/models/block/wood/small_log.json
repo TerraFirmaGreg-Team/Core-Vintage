@@ -1,37 +1,30 @@
 {
-  "parent": "block/block",
-  "elements": [
-    {
-      "from": [4, 0, 4],
-      "to": [12, 16, 12],
-      "faces": {
-        "down": {
-          "texture": "#end",
-          "tintindex": 0,
-          "cullface": "down"
-        },
-        "up": {
-          "texture": "#end",
-          "tintindex": 0,
-          "cullface": "up"
-        },
-        "north": {
-          "texture": "#side",
-          "uv": [4, 0, 12, 16]
-        },
-        "south": {
-          "texture": "#side",
-          "uv": [4, 0, 12, 16]
-        },
-        "west": {
-          "texture": "#side",
-          "uv": [4, 0, 12, 16]
-        },
-        "east": {
-          "texture": "#side",
-          "uv": [4, 0, 12, 16]
-        }
-      }
-    }
-  ]
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"particle": "tfc:blocks/wood/log/top",
+		"end": "tfc:blocks/wood/log/top"
+	},
+	"elements": [
+		{
+			"from": [4, 0, 4],
+			"to": [12, 16, 12],
+			"faces": {
+				"north": {"uv": [4, 0, 12, 16], "texture": "#side", "tintindex": 1},
+				"east": {"uv": [4, 0, 12, 16], "texture": "#side", "tintindex": 1},
+				"south": {"uv": [4, 0, 12, 16], "texture": "#side", "tintindex": 1},
+				"west": {"uv": [4, 0, 12, 16], "texture": "#side", "tintindex": 1},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "up", "tintindex": 1},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "down", "tintindex": 1}
+			}
+		},
+		{
+			"from": [4, 0, 4],
+			"to": [12, 16, 12],
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#end", "cullface": "up", "tintindex": 0},
+				"down": {"uv": [4, 4, 12, 12], "texture": "#end", "cullface": "down", "tintindex": 0}
+			}
+		}
+	]
 }

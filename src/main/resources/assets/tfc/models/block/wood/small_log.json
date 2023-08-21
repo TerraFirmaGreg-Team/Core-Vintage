@@ -7,10 +7,12 @@
       "faces": {
         "down": {
           "texture": "#end",
+          "tintindex": 0,
           "cullface": "down"
         },
         "up": {
           "texture": "#end",
+          "tintindex": 0,
           "cullface": "up"
         },
         "north": {

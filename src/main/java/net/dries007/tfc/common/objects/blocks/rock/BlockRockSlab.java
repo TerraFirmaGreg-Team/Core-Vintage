@@ -48,8 +48,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
         IBlockState state = blockState.getBaseState();
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
-
-
+        
         useNeighborBrightness = true;
 
         setLightOpacity(255);

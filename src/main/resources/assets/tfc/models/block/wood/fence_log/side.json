@@ -1,6 +1,7 @@
 {
   "textures": {
-    "particle": "#texture"
+    "planks": "tfc:blocks/wood/planks/pattern",
+    "particle": "tfc:blocks/wood/planks/pattern"
   },
   "elements": [
     {
@@ -9,28 +10,28 @@
       "faces": {
         "down": {
           "uv": [7, 0, 9, 9],
-          "texture": "#texture",
+          "texture": "#planks",
           "tintindex": 0
         },
         "up": {
           "uv": [7, 0, 9, 9],
-          "texture": "#texture",
+          "texture": "#planks",
           "tintindex": 0
         },
         "north": {
           "uv": [7, 1, 9, 4],
-          "texture": "#texture",
+          "texture": "#planks",
           "tintindex": 0,
           "cullface": "north"
         },
         "west": {
           "uv": [0, 1, 9, 4],
-          "texture": "#texture",
+          "texture": "#planks",
           "tintindex": 0
         },
         "east": {
           "uv": [0, 1, 9, 4],
-          "texture": "#texture",
+          "texture": "#planks",
           "tintindex": 0
         }
       },
@@ -42,28 +43,28 @@
       "faces": {
         "down": {
           "uv": [7, 0, 9, 9],
-          "texture": "#texture",
+          "texture": "#planks",
           "tintindex": 0
         },
         "up": {
           "uv": [7, 0, 9, 9],
-          "texture": "#texture",
+          "texture": "#planks",
           "tintindex": 0
         },
         "north": {
           "uv": [7, 7, 9, 10],
-          "texture": "#texture",
+          "texture": "#planks",
           "tintindex": 0,
           "cullface": "north"
         },
         "west": {
           "uv": [0, 7, 9, 10],
-          "texture": "#texture",
+          "texture": "#planks",
           "tintindex": 0
         },
         "east": {
           "uv": [0, 7, 9, 10],
-          "texture": "#texture",
+          "texture": "#planks",
           "tintindex": 0
         }
       },

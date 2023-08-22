@@ -27,7 +27,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
  */
 public class CapabilityFood {
     /**
-     * Уникальный идентификатор возможности.
+     * Уникальный идентификатор Capability.
      */
     public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "food");
 
@@ -45,13 +45,13 @@ public class CapabilityFood {
     public static final int DEFAULT_ROT_TICKS = ICalendar.TICKS_IN_DAY * 22;
 
     /**
-     * Возможность IFood.
+     * Capability IFood.
      */
     @CapabilityInject(IFood.class)
     public static Capability<IFood> CAPABILITY;
 
     /**
-     * Регистрация возможности IFood.
+     * Регистрация Capability IFood.
      */
     public static void preInit() {
         CapabilityManager.INSTANCE.register(IFood.class, new DumbStorage<>(), FoodHandler::new);
@@ -213,13 +213,15 @@ public class CapabilityFood {
     }
 
     /**
-     * Этот метод предоставляет способ проверить, могут ли два стека быть объединены в один, игнорируя дату создания: копируйте оба стека, установите для них одинаковую дату создания, затем проверьте их совместимость.
+     * Этот метод предоставляет способ проверить, могут ли два стека быть объединены в один,
+     * игнорируя дату создания: копируйте оба стека, установите для них одинаковую дату создания, затем проверьте их совместимость.
      * Это также не позволит объединять стеки с разными характеристиками, что является преднамеренным.
      *
      * @return true, если стеки могут быть объединены, игнорируя их дату создания
      */
     public static boolean areStacksStackableExceptCreationDate(ItemStack stack1, ItemStack stack2) {
-        // Этот метод предоставляет способ проверить, могут ли два стека быть объединены в один, игнорируя дату создания: копируйте оба стека, установите для них одинаковую дату создания, затем проверьте их совместимость.
+        // Этот метод предоставляет способ проверить, могут ли два стека быть объединены в один,
+        // игнорируя дату создания: копируйте оба стека, установите для них одинаковую дату создания, затем проверьте их совместимость.
         // Это также не позволит объединять стеки с разными характеристиками, что является преднамеренным.
         ItemStack stack1Copy = stack1.copy();
         IFood food1 = stack1Copy.getCapability(CapabilityFood.CAPABILITY, null);

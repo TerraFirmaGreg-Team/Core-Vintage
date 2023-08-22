@@ -12,6 +12,7 @@
     "gregtech.PartsRecipeHandlerMixin",
     "gregtech.SurfaceGeneratorMixin",
     "gregtech.ToolItemsMixin",
-    "gregtech.ToolRecipeHandlerMixin"
+    "gregtech.ToolRecipeHandlerMixin",
+    "minecraft.RenderItemMixin"
   ]
 }

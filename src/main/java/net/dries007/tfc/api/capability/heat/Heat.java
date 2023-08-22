@@ -9,32 +9,46 @@ import net.minecraft.util.text.TextFormatting;
 import javax.annotation.Nullable;
 
 public enum Heat {
-    WARMING(1f, 80f, TextFormatting.GRAY, TextFormatting.DARK_GRAY),
-    HOT(80f, 210f, TextFormatting.GRAY, TextFormatting.DARK_GRAY),
-    VERY_HOT(210f, 480f, TextFormatting.GRAY, TextFormatting.DARK_GRAY),
-    FAINT_RED(480f, 580f, TextFormatting.DARK_RED),
-    DARK_RED(580f, 730f, TextFormatting.DARK_RED),
-    BRIGHT_RED(730f, 930f, TextFormatting.RED),
-    ORANGE(930f, 1100f, TextFormatting.GOLD),
-    YELLOW(1100f, 1300f, TextFormatting.YELLOW),
-    YELLOW_WHITE(1300f, 1400f, TextFormatting.YELLOW),
-    WHITE(1400f, 1500f, TextFormatting.WHITE),
-    BRILLIANT_WHITE(1500f, 1601f, TextFormatting.WHITE);
+    WARMING(1f, 80f, TextFormatting.GRAY, TextFormatting.DARK_GRAY, 5592405),
+    HOT(80f, 210f, TextFormatting.GRAY, TextFormatting.DARK_GRAY, 5592405),
+    VERY_HOT(210f, 480f, TextFormatting.GRAY, TextFormatting.DARK_GRAY, 5592405),
+    FAINT_RED(480f, 580f, TextFormatting.DARK_RED, 11141120),
+    DARK_RED(580f, 730f, TextFormatting.DARK_RED, 11141120),
+    BRIGHT_RED(730f, 930f, TextFormatting.RED, 16733525),
+    ORANGE(930f, 1100f, TextFormatting.GOLD, 16755200),
+    YELLOW(1100f, 1300f, TextFormatting.YELLOW, 16777045),
+    YELLOW_WHITE(1300f, 1400f, TextFormatting.YELLOW, 16777045),
+    WHITE(1400f, 1500f, TextFormatting.WHITE, 16777215),
+    BRILLIANT_WHITE(1500f, 1601f, TextFormatting.WHITE, 16777215);
 
     private static final Heat[] VALUES = values();
     final TextFormatting format, alternate;
     private final float min;
     private final float max;
+    private final int intColor;
 
-    Heat(float min, float max, TextFormatting format, TextFormatting alternate) {
+    Heat(float min, float max, TextFormatting format, TextFormatting alternate, int intColor) {
         this.min = min;
         this.max = max;
         this.format = format;
         this.alternate = alternate;
+        this.intColor = intColor;
     }
 
-    Heat(float min, float max, TextFormatting format) {
-        this(min, max, format, format);
+    Heat(float min, float max, TextFormatting format, int intColor) {
+        this(min, max, format, format, intColor);
+    }
+
+    public float getMin() {
+        return min;
+    }
+
+    public float getMax() {
+        return max;
+    }
+
+    public int getIntColor() {
+        return intColor;
     }
 
     public static float maxVisibleTemperature() {
@@ -53,6 +67,14 @@ public enum Heat {
             return BRILLIANT_WHITE;
         }
         return null;
+    }
+
+    public static int getColor(float temperature) {
+        var heat = getHeat(temperature);
+
+        if (heat == null) return 0;
+
+        return heat.getIntColor();
     }
 
     @Nullable
@@ -100,11 +122,5 @@ public enum Heat {
         return tooltip;
     }
 
-    public float getMin() {
-        return min;
-    }
 
-    public float getMax() {
-        return max;
-    }
 }

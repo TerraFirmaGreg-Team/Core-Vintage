@@ -22,25 +22,46 @@ import java.util.function.Supplier;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
+/**
+ * Класс CapabilityFood представляет возможность для работы с едой в игре.
+ */
 public class CapabilityFood {
-    public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "food");
-    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_FOODS = new HashMap<>(); //Used inside CT, set custom IFood for food items outside TFC
     /**
-     * Most TFC foods have decay modifiers in the range [1, 4] (high = faster decay)
-     * That puts decay times at 25% - 100% of this value
-     * So meat / fruit will decay in ~5 days, grains take ~20 days
-     * Other modifiers are applied on top of that
+     * Уникальный идентификатор возможности.
+     */
+    public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "food");
+
+    /**
+     * Список пользовательских еды.
+     */
+    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_FOODS = new HashMap<>();
+
+    /**
+     * Количество тиков по умолчанию для разложения еды.
+     * Большинство еды разлагается в диапазоне [1, 4] (большие значения - быстрее разложение).
+     * Это значение соответствует 25% - 100% от общего времени разложения.
+     * Например, мясо/фрукты разлагаются примерно за 5 дней, зерновые - за 20 дней.
      */
     public static final int DEFAULT_ROT_TICKS = ICalendar.TICKS_IN_DAY * 22;
+
+    /**
+     * Возможность IFood.
+     */
     @CapabilityInject(IFood.class)
     public static Capability<IFood> CAPABILITY;
 
+    /**
+     * Регистрация возможности IFood.
+     */
     public static void preInit() {
         CapabilityManager.INSTANCE.register(IFood.class, new DumbStorage<>(), FoodHandler::new);
     }
 
+    /**
+     * Инициализация пользовательской еды.
+     */
     public static void init() {
-        // Add custom vanilla food instances
+        // Добавление пользовательских экземпляров еды
         CUSTOM_FOODS.put(IIngredient.of(Items.ROTTEN_FLESH), () -> new FoodHandler(null, FoodData.ROTTEN_FLESH));
         CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_APPLE), () -> new FoodHandler(null, FoodData.GOLDEN_APPLE));
         CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_CARROT), () -> new FoodHandler(null, FoodData.GOLDEN_CARROT));
@@ -48,20 +69,22 @@ public class CapabilityFood {
     }
 
     /**
-     * Helper method to handle applying a trait to a food item.
-     * Do NOT just directly apply the trait, as that can lead to strange interactions with decay dates / creation dates
-     * This calculates a creation date that interpolates between no preservation (if the food is rotten), to full preservation (if the food is new)
+     * Метод для применения характеристики к предмету с едой.
+     * Расчет даты создания происходит между полным сохранением (если еда новая) и отсутствием сохранения (если еда испорчена).
      */
     public static void applyTrait(IFood instance, FoodTrait trait) {
         if (!instance.getTraits().contains(trait)) {
             if (!instance.isRotten()) {
-                // Applied decay DATE modifier = 1 / decay mod
+                // Применение модификатора даты разложения = 1 / модификатор разложения
                 instance.setCreationDate(calculateNewCreationDate(instance.getCreationDate(), 1f / trait.getDecayModifier()));
             }
             instance.getTraits().add(trait);
         }
     }
 
+    /**
+     * Метод для применения характеристики к предмету с едой.
+     */
     public static void applyTrait(ItemStack stack, FoodTrait trait) {
         IFood food = stack.getCapability(CAPABILITY, null);
         if (!stack.isEmpty() && food != null) {
@@ -70,19 +93,21 @@ public class CapabilityFood {
     }
 
     /**
-     * Helper method to handle removing a trait to a food item.
-     * Do NOT just directly remove the trait, as that can lead to strange interactions with decay dates / creation dates
+     * Метод для удаления характеристики из предмета с едой.
      */
     public static void removeTrait(IFood instance, FoodTrait trait) {
         if (instance.getTraits().contains(trait)) {
             if (!instance.isRotten()) {
-                // Removed trait = 1 / apply trait
+                // Удаление модификатора = 1 / примененный модификатор
                 instance.setCreationDate(calculateNewCreationDate(instance.getCreationDate(), trait.getDecayModifier()));
             }
             instance.getTraits().remove(trait);
         }
     }
 
+    /**
+     * Метод для удаления характеристики из предмета с едой.
+     */
     public static void removeTrait(ItemStack stack, FoodTrait trait) {
         IFood food = stack.getCapability(CAPABILITY, null);
         if (!stack.isEmpty() && food != null) {
@@ -91,21 +116,21 @@ public class CapabilityFood {
     }
 
     /**
-     * This is used to update a stack from an old stack, in the case where a food is created from another
-     * Any method that creates derivative food should call this, as it avoids extending the decay of the item
-     * If called with non food items, nothing happens
+     * Этот метод используется для обновления стека из старого стека в случае, когда еда создается из другой.
+     * Любой метод, который создает производную еду, должен вызывать этот метод, так как он позволяет избежать увеличения срока годности предмета.
+     * Если вызывается с непищевыми предметами, ничего не происходит.
      *
-     * @param oldStack the old stack
-     * @param newStack the new stack
-     * @return the modified stack, for chaining
+     * @param oldStack старый стек
+     * @param newStack новый стек
+     * @return измененный стек для цепочки вызовов
      */
     public static ItemStack updateFoodFromPrevious(ItemStack oldStack, ItemStack newStack) {
         IFood oldCap = oldStack.getCapability(CapabilityFood.CAPABILITY, null);
         IFood newCap = newStack.getCapability(CapabilityFood.CAPABILITY, null);
         if (oldCap != null && newCap != null) {
-            // Copy traits from old stack to new stack
+            // Копирование характеристик из старого стека в новый стек
             newCap.getTraits().addAll(oldCap.getTraits());
-            // Applied trait decay DATE modifier = new / old
+            // Применение модификатора срока годности DATE decay = new / old
             float decayDelta = newCap.getDecayDateModifier() / oldCap.getDecayDateModifier();
             newCap.setCreationDate(calculateNewCreationDate(oldCap.getCreationDate(), decayDelta));
         }
@@ -113,12 +138,12 @@ public class CapabilityFood {
     }
 
     /**
-     * Call this from any function that is meant to create a new item stack.
-     * In MOST cases, you should use {@link CapabilityFood#updateFoodFromPrevious(ItemStack, ItemStack)}, as the decay should transfer from input -> output
-     * This is only for where there is no input. (i.e. on a direct {@code stack.copy()} from non-food inputs
+     * Вызывайте этот метод из любой функции, которая должна создавать новый стек предметов.
+     * В большинстве случаев следует использовать {@link CapabilityFood#updateFoodFromPrevious(ItemStack, ItemStack)}, так как срок годности должен передаваться от ввода к выводу.
+     * Этот метод используется только там, где нет ввода (например, при прямом {@code stack.copy()} из непищевых входных данных).
      *
-     * @param stack the new stack
-     * @return the input stack, for chaining
+     * @param stack новый стек
+     * @return входной стек для цепочки вызовов
      */
     @SuppressWarnings("unused")
     public static ItemStack updateFoodDecayOnCreate(ItemStack stack) {
@@ -129,6 +154,11 @@ public class CapabilityFood {
         return stack;
     }
 
+    /**
+     * Устанавливает стек без учета срока годности.
+     *
+     * @param stack стек предметов
+     */
     public static void setStackNonDecaying(ItemStack stack) {
         IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (cap != null) {
@@ -136,6 +166,12 @@ public class CapabilityFood {
         }
     }
 
+    /**
+     * Возвращает пользовательский интерфейс возможностей для указанного предмета.
+     *
+     * @param stack Предмет, для которого нужно получить пользовательский интерфейс возможностей
+     * @return Пользовательский интерфейс возможностей или null, если не найдено соответствующего пользовательского интерфейса
+     */
     @Nullable
     public static ICapabilityProvider getCustomFood(ItemStack stack) {
         Set<IIngredient<ItemStack>> itemFoodSet = CUSTOM_FOODS.keySet();
@@ -148,9 +184,9 @@ public class CapabilityFood {
     }
 
     /**
-     * @param stackToMergeInto the stack that will grow.
-     * @param stackToMerge     the stack that will shrink. Will be modified.
-     * @return the result of stackToMergeInto.
+     * @param stackToMergeInto стек, который будет увеличиваться
+     * @param stackToMerge     стек, который будет уменьшаться. Будет изменен.
+     * @return результат stackToMergeInto
      */
     public static ItemStack mergeItemStacksIgnoreCreationDate(ItemStack stackToMergeInto, ItemStack stackToMerge) {
         if (!stackToMerge.isEmpty()) {
@@ -177,14 +213,14 @@ public class CapabilityFood {
     }
 
     /**
-     * This is a nice way of checking if two stacks are stackable, ignoring the creation date: copy both stacks, give them the same creation date, then check compatibility
-     * This will also not stack stacks which have different traits, which is intended
+     * Этот метод предоставляет способ проверить, могут ли два стека быть объединены в один, игнорируя дату создания: копируйте оба стека, установите для них одинаковую дату создания, затем проверьте их совместимость.
+     * Это также не позволит объединять стеки с разными характеристиками, что является преднамеренным.
      *
-     * @return true if the stacks are otherwise stackable ignoring their creation date
+     * @return true, если стеки могут быть объединены, игнорируя их дату создания
      */
     public static boolean areStacksStackableExceptCreationDate(ItemStack stack1, ItemStack stack2) {
-        // This is a nice way of checking if two stacks are stackable, ignoring the creation date: copy both stacks, give them the same creation date, then check compatibility
-        // This will also not stack stacks which have different traits, which is intended
+        // Этот метод предоставляет способ проверить, могут ли два стека быть объединены в один, игнорируя дату создания: копируйте оба стека, установите для них одинаковую дату создания, затем проверьте их совместимость.
+        // Это также не позволит объединять стеки с разными характеристиками, что является преднамеренным.
         ItemStack stack1Copy = stack1.copy();
         IFood food1 = stack1Copy.getCapability(CapabilityFood.CAPABILITY, null);
         if (food1 != null) {
@@ -199,33 +235,33 @@ public class CapabilityFood {
     }
 
     /**
-     * @return Gets the creation date to set a piece of food to, in order to stack items created nearby in time
+     * @return Получает дату создания для установки еды, чтобы объединить предметы, созданные близко по времени
      */
     public static long getRoundedCreationDate() {
         return (CalendarTFC.PLAYER_TIME.getTotalHours() / ConfigTFC.General.FOOD.decayStackTime) * ICalendar.TICKS_IN_HOUR * ConfigTFC.General.FOOD.decayStackTime;
     }
 
     /**
-     * T = current time, Ci / Cf = initial / final creation date, Ei / Ef = initial / final expiration date, d = decay time, p = preservation modifier
+     * T = текущее время, Ci / Cf = начальная / конечная дата создания, Ei / Ef = начальная / конечная дата истечения срока годности, d = время разложения, p = модификатор сохранности
      * <p>
-     * To apply preservation p at time T: want remaining decay fraction to be invariant under preservation
-     * Let Ri = (T - Ci) / (Ei - Ci) = (T - Ci) / d, Rf = (T - Cf) / (d * p)
-     * Then if Ri = Rf
+     * Чтобы применить сохранность p в момент времени T: хотим, чтобы оставшаяся доля разложения была неизменной при сохранности.
+     * Пусть Ri = (T - Ci) / (Ei - Ci) = (T - Ci) / d, Rf = (T - Cf) / (d * p)
+     * Тогда, если Ri = Rf
      * => d * p * (T - Ci) = d * (T - Cf)
-     * => Cf = (1 - p) * T + p * Ci (affine combination)
+     * => Cf = (1 - p) * T + p * Ci (аффинное сочетание)
      * <p>
-     * In order to show that E > T is invariant under preservation: (i.e. see TerraFirmaCraft#352)
-     * Let T, Ci, Ei, d, p > 0 such that Ei > T (1.), and Ei = Ci + d
+     * Чтобы показать, что E > T неизменно при сохранности: (см. TerraFirmaCraft#352)
+     * Пусть T, Ci, Ei, d, p > 0 такие, что Ei > T (1.), и Ei = Ci + d
      * Cf = (1 - p) * T + p * Ci
      * => Ef = Cf + p * d
      * = (1 - p) * T + p * Ci + p * d
      * = (1 - p) * T + p * (Ci + d)
-     * via 1. > (1 - p) * T + p * T = T
+     * через 1. > (1 - p) * T + p * T = T
      * QED
      *
-     * @param ci The initial creation date
-     * @param p  The decay date modifier (1 / standard decay modifier)
-     * @return cf the final creation date
+     * @param ci Начальная дата создания
+     * @param p  Модификатор даты разложения (1 / стандартный модификатор разложения)
+     * @return Конечная дата создания
      */
     private static long calculateNewCreationDate(long ci, float p) {
         // Cf = (1 - p) * T + p * Ci

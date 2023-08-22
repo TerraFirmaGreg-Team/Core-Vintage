@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfc:grass",
+    "model": "tfc:soil/grass",
     "textures": {
       "all": "tfc:blocks/soil/peat",
       "particle": "tfc:blocks/soil/peat",

@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "top": "#top",
+    "planks": "tfc:blocks/wood/planks/pattern",
     "log": "#log",
-    "particle": "#log"
+    "particle": "tfc:blocks/wood/planks/pattern"
   },
   "elements": [
     {
@@ -13,28 +13,34 @@
       "faces": {
         "north": {
           "uv": [0, 0, 4, 16],
-          "texture": "#log"
+          "texture": "#log",
+          "tintindex": 1
         },
         "east": {
           "uv": [12, 0, 16, 16],
-          "texture": "#log"
+          "texture": "#log",
+          "tintindex": 1
         },
         "south": {
           "uv": [4, 0, 8, 16],
-          "texture": "#log"
+          "texture": "#log",
+          "tintindex": 1
         },
         "west": {
           "uv": [8, 0, 12, 16],
-          "texture": "#log"
+          "texture": "#log",
+          "tintindex": 1
         },
         "up": {
           "uv": [4, 6, 8, 10],
           "texture": "#log",
+          "tintindex": 1,
           "cullface": "up"
         },
         "down": {
           "uv": [8, 6, 12, 10],
           "texture": "#log",
+          "tintindex": 1,
           "cullface": "down"
         }
       }
@@ -46,28 +52,34 @@
       "faces": {
         "north": {
           "uv": [1, 0, 3, 16],
-          "texture": "#log"
+          "texture": "#log",
+          "tintindex": 1
         },
         "east": {
           "uv": [13, 0, 15, 16],
-          "texture": "#log"
+          "texture": "#log",
+          "tintindex": 1
         },
         "south": {
           "uv": [5, 0, 7, 16],
-          "texture": "#log"
+          "texture": "#log",
+          "tintindex": 1
         },
         "west": {
           "uv": [9, 0, 11, 16],
-          "texture": "#log"
+          "texture": "#log",
+          "tintindex": 1
         },
         "up": {
           "uv": [7, 7, 9, 9],
-          "texture": "#top",
+          "texture": "#planks",
+          "tintindex": 0,
           "cullface": "up"
         },
         "down": {
           "uv": [7, 7, 9, 9],
-          "texture": "#top",
+          "texture": "#planks",
+          "tintindex": 0,
           "cullface": "down"
         }
       }

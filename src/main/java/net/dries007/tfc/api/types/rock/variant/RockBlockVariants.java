@@ -41,4 +41,5 @@ public class RockBlockVariants {
     public static RockBlockVariant BUTTON;
     public static RockBlockVariant PRESSURE_PLATE;
     public static RockBlockVariant ANVIL;
+    public static RockBlockVariant MAGMA;
 }

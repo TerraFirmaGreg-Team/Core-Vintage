@@ -18,7 +18,7 @@ public class WoodBlockVariants {
     public static WoodBlockVariant DOOR;
     public static WoodBlockVariant TRAPDOOR;
     public static WoodBlockVariant FENCE;
-    public static WoodBlockVariant LOG_FENCE;
+    public static WoodBlockVariant FENCE_LOG;
     public static WoodBlockVariant FENCE_GATE;
     public static WoodBlockVariant BUTTON;
     public static WoodBlockVariant PRESSURE_PLATE;

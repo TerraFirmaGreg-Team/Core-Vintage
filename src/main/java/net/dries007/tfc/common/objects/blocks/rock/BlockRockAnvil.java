@@ -7,6 +7,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
@@ -47,6 +48,7 @@ public class BlockRockAnvil extends BlockRock {
 
     @Override
     public ItemBlock getItemBlock() {
+        if (this.getCategory().hasAnvil()) return new ItemBlockTFC(this);
         return null;
     }
 

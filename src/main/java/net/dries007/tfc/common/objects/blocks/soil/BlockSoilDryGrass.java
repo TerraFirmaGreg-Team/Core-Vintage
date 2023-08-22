@@ -11,9 +11,9 @@ import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 
-public class BlockSoilDirtGrass extends BlockSoilGrass implements ISoilBlock {
+public class BlockSoilDryGrass extends BlockSoilGrass implements ISoilBlock {
 
-    public BlockSoilDirtGrass(SoilBlockVariant variant, SoilType type) {
+    public BlockSoilDryGrass(SoilBlockVariant variant, SoilType type) {
         super(variant, type);
     }
 }

@@ -7,22 +7,22 @@
     "soiltype": {
       "silt": {
         "textures": {
-          "all": "tfc:blocks/soil/mud/silt"
+          "all": "tfc:blocks/soil/mud_bricks/silt"
         }
       },
       "loam": {
         "textures": {
-          "all": "tfc:blocks/soil/mud/loam"
+          "all": "tfc:blocks/soil/mud_bricks/loam"
         }
       },
       "sandy_loam": {
         "textures": {
-          "all": "tfc:blocks/soil/mud/sandy_loam"
+          "all": "tfc:blocks/soil/mud_bricks/sandy_loam"
         }
       },
       "silty_loam": {
         "textures": {
-          "all": "tfc:blocks/soil/mud/silty_loam"
+          "all": "tfc:blocks/soil/mud_bricks/silty_loam"
         }
       }
     }

@@ -11,9 +11,9 @@ public class BlockRockGravel extends BlockRockFallable {
     public BlockRockGravel(RockBlockVariant variant, RockType type) {
         super(Material.SAND, variant, type);
 
-        FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL);
-
         setSoundType(SoundType.GROUND);
+
+        FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL);
     }
 
 }

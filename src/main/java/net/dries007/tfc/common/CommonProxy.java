@@ -456,8 +456,11 @@ public class CommonProxy {
     }
 
     public void onLoadComplete(FMLLoadCompleteEvent event) {
-        // This is the latest point that we can possibly stop creating non-decaying stacks on both server + client
-        // It should be safe to use as we're only using it internally
+        // Я сука несколько дней разбирался как эта хуйня работает, теперь рассказываю.
+        // У нас есть статическая переменная в капабилити еды, отвечающая за то, будет ли еда портиться.
+        // При создании еды и присваивании ей капабилити, создается еда, которая не умеет портиться,
+        // но чтобы в игре она пропадала, в самом конце загрузки мы включаем порчу еды и при получении еды, мы О ЧУДО,
+        // получаем еду которая портится, ведь переменная стоит на false.
         FoodHandler.setNonDecaying(false);
     }
 

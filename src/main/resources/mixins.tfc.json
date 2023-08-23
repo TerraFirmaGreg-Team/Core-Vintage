@@ -4,15 +4,5 @@
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-    "gregtech.BlockOreMixin",
-    "gregtech.BlockSurfaceRockMixin",
-    "gregtech.MaterialRecipeHandlerMixin",
-    "gregtech.OrePrefixMixin",
-    "gregtech.PartsRecipeHandlerMixin",
-    "gregtech.SurfaceGeneratorMixin",
-    "gregtech.ToolItemsMixin",
-    "gregtech.ToolRecipeHandlerMixin",
-    "minecraft.RenderItemMixin"
-  ]
+  "mixins": ["gregtech.BlockOreMixin","gregtech.BlockSurfaceRockMixin","gregtech.MaterialRecipeHandlerMixin","gregtech.OrePrefixMixin","gregtech.PartsRecipeHandlerMixin","gregtech.SurfaceGeneratorMixin","gregtech.ToolItemsMixin","gregtech.ToolRecipeHandlerMixin","minecraft.GuiCreateWorldMixin","minecraft.RenderItemMixin"]
 }

@@ -96,14 +96,15 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock, IItemSize 
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), "rocktype=" + type.toString());
+                return new ModelResourceLocation(getResourceLocation(),
+                        "rocktype=" + getType());
             }
         });
 
         ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                getMetaFromState(getBlockState().getBaseState()),
-                new ModelResourceLocation(getResourceLocation(), "rocktype=" + type.toString()));
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(),
+                        "rocktype=" + getType()));
     }
 
     @Override

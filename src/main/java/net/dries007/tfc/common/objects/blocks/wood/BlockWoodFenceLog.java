@@ -28,8 +28,8 @@ public class BlockWoodFenceLog extends BlockWoodFence {
                                 "normal=false" + "," +
                                 "north=" + state.getValue(NORTH) + "," +
                                 "south=" + state.getValue(SOUTH) + "," +
-                                "type=" + getType() + "," +
-                                "west=" + state.getValue(WEST));
+                                "west=" + state.getValue(WEST) + "," +
+                                "woodtype=" + getType());
             }
         });
 
@@ -40,7 +40,7 @@ public class BlockWoodFenceLog extends BlockWoodFence {
                                 "normal=true," +
                                 "north=false," +
                                 "south=false," +
-                                "type=" + getType() + "," +
-                                "west=false"));
+                                "west=false," +
+                                "woodtype=" + getType()));
     }
 }

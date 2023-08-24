@@ -55,7 +55,7 @@ public class CustomStateMap extends StateMapperBase {
         var variantIn = this.getPropertyString(map);
         if (!map.isEmpty()) {
             if (this.variant != null) {
-                return new ModelResourceLocation(resourceLocation, variantIn + variant);
+                variantIn = variantIn + variant;
             }
             return new ModelResourceLocation(resourceLocation, variantIn);
         }

@@ -31,7 +31,7 @@
         "model": "tfc:wood/fence_gate_log/open"
       }
     },
-    "type": {
+    "woodtype": {
       "acacia": {
         "textures": {
           "log": "tfc:blocks/wood/log/side/acacia"

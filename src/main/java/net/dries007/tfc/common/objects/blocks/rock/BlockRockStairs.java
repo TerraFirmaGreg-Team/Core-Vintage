@@ -74,21 +74,18 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
                 return new ModelResourceLocation(getResourceLocation(),
                         "facing=" + state.getValue(FACING) + "," +
                                 "half=" + state.getValue(HALF) + "," +
-                                "rocktype=" + type.toString() + "," +
+                                "rocktype=" + getType() + "," +
                                 "shape=" + state.getValue(SHAPE));
             }
         });
 
-        for (var state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(
-                    Item.getItemFromBlock(this),
-                    getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(),
-                            "facing=east," +
-                                    "half=bottom," +
-                                    "rocktype=" + type.toString() + "," +
-                                    "shape=straight"));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(),
+                        "facing=east," +
+                                "half=bottom," +
+                                "rocktype=" + getType() + "," +
+                                "shape=straight"));
     }
 
     @Override

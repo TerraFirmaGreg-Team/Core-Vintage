@@ -24,7 +24,7 @@ public class BlockWoodFenceGateLog extends BlockWoodFenceGate {
                         .customPath(getResourceLocation())
                         .ignore(BlockFenceGate.IN_WALL)
                         .ignore(BlockFenceGate.POWERED)
-                        .customVariant("type=" + getType())
+                        .customVariant("woodtype=" + getType())
                         .build());
 
         ModelLoader.setCustomModelResourceLocation(
@@ -32,6 +32,6 @@ public class BlockWoodFenceGateLog extends BlockWoodFenceGate {
                 new ModelResourceLocation(getResourceLocation(),
                         "facing=south," +
                                 "open=false," +
-                                "type=" + getType()));
+                                "woodtype=" + getType()));
     }
 }

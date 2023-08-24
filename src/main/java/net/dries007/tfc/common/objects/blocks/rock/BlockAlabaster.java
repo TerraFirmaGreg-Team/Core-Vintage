@@ -97,13 +97,14 @@ public class BlockAlabaster extends Block implements IItemSize, IItemProvider, I
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, "color=" + dyeColor.getName());
+                return new ModelResourceLocation(modelLocation,
+                        "color=" + dyeColor.getName());
             }
         });
 
         ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(modelLocation, "color=" + dyeColor.getName()));
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(modelLocation,
+                        "color=" + dyeColor.getName()));
     }
 }

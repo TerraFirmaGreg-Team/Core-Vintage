@@ -48,7 +48,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
         IBlockState state = blockState.getBaseState();
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
-        
+
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -280,18 +280,15 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
                 protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                     return new ModelResourceLocation(getResourceLocation(),
                             "half=" + state.getValue(HALF) + "," +
-                                    "rocktype=" + type.toString());
+                                    "rocktype=" + getType());
                 }
             });
 
-            for (IBlockState state : getBlockState().getValidStates()) {
-                ModelLoader.setCustomModelResourceLocation(
-                        Item.getItemFromBlock(this),
-                        getMetaFromState(state),
-                        new ModelResourceLocation(getResourceLocation(),
-                                "half=bottom," +
-                                        "rocktype=" + type.toString()));
-            }
+            ModelLoader.setCustomModelResourceLocation(
+                    Item.getItemFromBlock(this), 0,
+                    new ModelResourceLocation(getResourceLocation(),
+                            "half=bottom," +
+                                    "rocktype=" + getType()));
         }
 
         @Override

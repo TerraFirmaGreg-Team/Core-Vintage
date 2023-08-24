@@ -228,7 +228,7 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder()
                         .customPath(getResourceLocation())
-                        .customVariant("type=" + getType())
+                        .customVariant("woodtype=" + getType())
                         .build());
 
         ModelLoader.setCustomModelResourceLocation(
@@ -236,6 +236,6 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
                 new ModelResourceLocation(getResourceLocation(),
                         "axis=none," +
                                 "placed=false," +
-                                "type=" + getType()));
+                                "woodtype=" + getType()));
     }
 }

@@ -189,8 +189,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
 
         ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                getMetaFromState(getBlockState().getBaseState()),
+                Item.getItemFromBlock(this), 0,
                 new ModelResourceLocation(getResourceLocation(),
                         "rocktype=" + getType() + "," +
                                 "size=big"));

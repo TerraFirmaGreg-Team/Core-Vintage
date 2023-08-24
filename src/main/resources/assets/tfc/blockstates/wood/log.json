@@ -23,7 +23,7 @@
       "true": {},
       "false": {}
     },
-    "type": {
+    "woodtype": {
       "acacia": {
         "textures": {
           "side": "tfc:blocks/wood/log/side/acacia"

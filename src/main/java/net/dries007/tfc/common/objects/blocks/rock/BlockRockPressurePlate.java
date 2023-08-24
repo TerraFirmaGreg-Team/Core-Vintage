@@ -71,16 +71,14 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
                         "powered=" + state.getValue(POWERED) + "," +
-                                "rocktype=" + type.toString());
+                                "rocktype=" + getType());
             }
         });
 
-        for (IBlockState state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(
-                    Item.getItemFromBlock(this),
-                    getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(), "inventory=" + type.toString()));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(),
+                        "inventory=" + getType()));
     }
 
     @Override

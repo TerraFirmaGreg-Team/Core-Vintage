@@ -30,14 +30,14 @@ import java.util.List;
 
 public class BlockRockWall extends BlockWall implements IRockBlock {
 
-    private final RockBlockVariant rockBlockVariant;
-    private final RockType rockType;
+    private final RockBlockVariant variant;
+    private final RockType type;
 
     public BlockRockWall(RockBlockVariant variant, RockType type) {
         super(Blocks.COBBLESTONE);
 
-        this.rockBlockVariant = variant;
-        this.rockType = type;
+        this.variant = variant;
+        this.type = type;
 
 
         setRegistryName(getRegistryLocation());
@@ -54,13 +54,13 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
     @Nonnull
     @Override
     public RockBlockVariant getBlockVariant() {
-        return rockBlockVariant;
+        return variant;
     }
 
     @Nonnull
     @Override
     public RockType getType() {
-        return rockType;
+        return type;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
                         return new ModelResourceLocation(getResourceLocation(),
                                 "east=" + state.getValue(EAST) + "," +
                                         "north=" + state.getValue(NORTH) + "," +
-                                        "rocktype=" + rockType.toString() + "," +
+                                        "rocktype=" + getType() + "," +
                                         "south=" + state.getValue(SOUTH) + "," +
                                         "up=" + state.getValue(UP) + "," +
                                         "west=" + state.getValue(WEST));
@@ -91,13 +91,10 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
                 }
         );
 
-        for (IBlockState state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(
-                    Item.getItemFromBlock(this),
-                    getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(),
-                            "inventory=" + rockType.toString()));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(),
+                        "inventory=" + getType()));
     }
 
     @Override
@@ -105,6 +102,6 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockType.getCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + type.getCategory().getLocalizedName());
     }
 }

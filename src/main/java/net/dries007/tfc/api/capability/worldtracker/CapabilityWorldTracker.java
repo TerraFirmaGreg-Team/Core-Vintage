@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.capability.worldtracker;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.util.ResourceLocation;
@@ -7,10 +8,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class CapabilityWorldTracker {
-    public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "world_tracker");
+    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("world_tracker");
     @CapabilityInject(WorldTracker.class)
     public static Capability<WorldTracker> CAPABILITY = Helpers.getNull();
 

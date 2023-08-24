@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.entity.EntityBoatTFC;
 import net.minecraft.client.model.IMultipassModel;
@@ -15,8 +16,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
@@ -59,10 +58,10 @@ public class RenderBoatTFC extends Render<EntityBoatTFC> {
         final WoodType woodType = entity.getWood();
         if (woodType != null) {
             //noinspection ConstantConditions
-            return new ResourceLocation(MOD_ID, "textures/entity/boat/" + woodType + ".png");
+            return TerraFirmaCraft.identifier("textures/entity/boat/" + woodType + ".png");
         }
         // Fallback
-        return new ResourceLocation(MOD_ID, "textures/entity/boat/oak.png");
+        return TerraFirmaCraft.identifier("textures/entity/boat/oak.png");
     }
 
     @Override

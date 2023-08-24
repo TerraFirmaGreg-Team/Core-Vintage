@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render.animal;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.model.animal.ModelTurkeyTFC;
 import net.dries007.tfc.common.objects.entity.animal.EntityAnimalTFC;
 import net.dries007.tfc.common.objects.entity.animal.EntityTurkeyTFC;
@@ -13,13 +14,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderTurkeyTFC extends RenderLiving<EntityTurkeyTFC> {
-    private static final ResourceLocation MALE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/turkeym.png");
-    private static final ResourceLocation FEMALE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/turkeyf.png");
+    private static final ResourceLocation MALE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/turkeym.png");
+    private static final ResourceLocation FEMALE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/turkeyf.png");
 
     public RenderTurkeyTFC(RenderManager manager) {
         super(manager, new ModelTurkeyTFC(), 0.5F);

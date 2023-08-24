@@ -3,6 +3,7 @@ package net.dries007.tfc.common.objects.blocks.metal;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.tileentities.TEMetalSheet;
@@ -63,7 +64,7 @@ public class BlockMetalCladding extends Block implements IHasModel {
     public BlockMetalCladding() {
         super(net.minecraft.block.material.Material.IRON);
 
-        this.modelLocation = new ResourceLocation(MOD_ID, "metal/cladding");
+        this.modelLocation = TerraFirmaCraft.identifier("metal/cladding");
 
         var blockRegistryName = "metal/cladding";
         setRegistryName(MOD_ID, blockRegistryName);

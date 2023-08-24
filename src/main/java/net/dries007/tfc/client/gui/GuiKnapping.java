@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.gui;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.button.GuiButtonKnapping;
 import net.dries007.tfc.client.util.TFCGuiHandler;
@@ -15,10 +16,8 @@ import net.minecraftforge.common.MinecraftForge;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class GuiKnapping extends GuiContainerTFC {
-    private static final ResourceLocation BG_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/knapping.png");
+    private static final ResourceLocation BG_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping.png");
 
     private final ResourceLocation buttonTexture;
     private final KnappingType type;

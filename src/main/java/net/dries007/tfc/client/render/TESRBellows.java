@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.objects.tileentities.TEBellows;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,11 +11,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 public class TESRBellows extends TESRBase<TEBellows> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MOD_ID, "textures/blocks/devices/bellows_tesr.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.identifier("textures/blocks/devices/bellows_tesr.png");
 
     @Override
     public void render(TEBellows te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

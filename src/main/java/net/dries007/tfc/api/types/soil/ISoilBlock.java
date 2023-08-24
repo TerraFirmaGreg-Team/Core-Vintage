@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.types.soil;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 import net.dries007.tfc.api.util.IHasModel;
@@ -7,8 +8,6 @@ import net.dries007.tfc.api.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * Интерфейс, представляющий блок почвы.
@@ -37,7 +36,7 @@ public interface ISoilBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return new ResourceLocation(MOD_ID, String.format("soil/%s/%s", getBlockVariant(), getType()));
+        return TerraFirmaCraft.identifier(String.format("soil/%s/%s", getBlockVariant(), getType()));
     }
 
     /**
@@ -47,7 +46,7 @@ public interface ISoilBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return new ResourceLocation(MOD_ID, String.format("soil/%s", getBlockVariant()));
+        return TerraFirmaCraft.identifier(String.format("soil/%s", getBlockVariant()));
     }
 
     /**

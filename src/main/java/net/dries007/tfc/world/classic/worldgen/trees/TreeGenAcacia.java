@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.common.objects.blocks.wood.BlockWoodLog.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 
@@ -74,7 +73,7 @@ public class TreeGenAcacia implements ITreeGenerator {
     }
 
     private void placeBranch(TemplateManager manager, World world, BlockPos pos, String name) {
-        ResourceLocation base = new ResourceLocation(MOD_ID, name);
+        ResourceLocation base = TerraFirmaCraft.identifier(name);
         Template structureBase = manager.get(world.getMinecraftServer(), base);
 
         if (structureBase == null) {

@@ -16,7 +16,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.common.objects.blocks.wood.BlockWoodLog.PLACED;
 
 public class TreeGenNormal implements ITreeGenerator {
@@ -39,8 +38,8 @@ public class TreeGenNormal implements ITreeGenerator {
 
     @Override
     public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
-        ResourceLocation base = new ResourceLocation(MOD_ID, woodType + "/base");
-        ResourceLocation overlay = new ResourceLocation(MOD_ID, woodType + "/overlay");
+        ResourceLocation base = TerraFirmaCraft.identifier(woodType + "/base");
+        ResourceLocation overlay = TerraFirmaCraft.identifier(woodType + "/overlay");
 
         Template structureBase = manager.get(world.getMinecraftServer(), base);
         Template structureOverlay = manager.get(world.getMinecraftServer(), overlay);

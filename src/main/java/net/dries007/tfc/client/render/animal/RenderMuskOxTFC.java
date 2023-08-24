@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render.animal;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.model.animal.ModelMuskOxBodyTFC;
 import net.dries007.tfc.common.objects.entity.animal.EntityAnimalTFC;
 import net.dries007.tfc.common.objects.entity.animal.EntityMuskOxTFC;
@@ -11,13 +12,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderMuskOxTFC extends RenderAnimalTFC<EntityMuskOxTFC> {
-    private static final ResourceLocation TEXTURE_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/muskox_young.png");
-    private static final ResourceLocation TEXTURE_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/muskox_old.png");
+    private static final ResourceLocation TEXTURE_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/muskox_young.png");
+    private static final ResourceLocation TEXTURE_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/muskox_old.png");
 
     public RenderMuskOxTFC(RenderManager renderManager) {
         super(renderManager, new ModelMuskOxBodyTFC(), 0.8F, TEXTURE_YOUNG, TEXTURE_OLD);

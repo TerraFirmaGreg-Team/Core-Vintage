@@ -17,11 +17,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 public class GuiNutrition extends GuiContainerTFC {
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/player_nutrition.png");
+    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.identifier("textures/gui/player_nutrition.png");
 
     private final float[] cachedNutrients;
 

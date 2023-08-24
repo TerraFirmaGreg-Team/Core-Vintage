@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render.animal;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.client.model.animal.ModelQuailTFC;
 import net.dries007.tfc.common.objects.entity.animal.EntityAnimalTFC;
@@ -14,18 +15,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderQuailTFC extends RenderLiving<EntityQuailTFC> {
-    private static final ResourceLocation FEMALE_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/quailf_young.png");
-    private static final ResourceLocation FEMALE_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/quailf_old.png");
+    private static final ResourceLocation FEMALE_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/quailf_young.png");
+    private static final ResourceLocation FEMALE_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/quailf_old.png");
 
-    private static final ResourceLocation MALE_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/quailm_young.png");
-    private static final ResourceLocation MALE_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/quailm_old.png");
+    private static final ResourceLocation MALE_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/quailm_young.png");
+    private static final ResourceLocation MALE_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/quailm_old.png");
 
-    private static final ResourceLocation CHICK_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/quail_chick.png");
+    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/livestock/quail_chick.png");
 
     public RenderQuailTFC(RenderManager manager) {
         super(manager, new ModelQuailTFC(), 0.3F);

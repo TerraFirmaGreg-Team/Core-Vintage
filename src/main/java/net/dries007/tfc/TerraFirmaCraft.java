@@ -3,6 +3,7 @@ package net.dries007.tfc;
 
 import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -52,6 +53,10 @@ public final class TerraFirmaCraft {
 
     public static TerraFirmaCraft getInstance() {
         return INSTANCE;
+    }
+
+    public static ResourceLocation identifier(String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 
     /**

@@ -37,7 +37,7 @@ import java.util.List;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class GuiBarrel extends GuiContainerTE<TEBarrel> {
-    public static final ResourceLocation BARREL_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/barrel.png");
+    public static final ResourceLocation BARREL_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/barrel.png");
     private final String translationKey;
 
     public GuiBarrel(Container container, InventoryPlayer playerInv, TEBarrel tile, String translationKey) {

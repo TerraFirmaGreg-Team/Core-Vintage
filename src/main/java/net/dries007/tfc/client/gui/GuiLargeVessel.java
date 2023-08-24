@@ -16,10 +16,8 @@ import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class GuiLargeVessel extends GuiContainerTE<TELargeVessel> {
-    public static final ResourceLocation LARGE_VESSEL_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/large_vessel.png");
+    public static final ResourceLocation LARGE_VESSEL_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/large_vessel.png");
     private final String translationKey;
 
     public GuiLargeVessel(Container container, InventoryPlayer playerInv, TELargeVessel tile, String translationKey) {

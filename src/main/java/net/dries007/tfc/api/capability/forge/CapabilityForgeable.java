@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.capability.forge;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
@@ -15,10 +16,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public final class CapabilityForgeable {
-    public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "item_forge");
+    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("item_forge");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IForgeable for items outside TFC
     @CapabilityInject(IForgeable.class)
     public static Capability<IForgeable> FORGEABLE_CAPABILITY;

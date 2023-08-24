@@ -1,11 +1,10 @@
 package net.dries007.tfc.api.types.wood;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * Интерфейс IWoodItem представляет деревянный предмет.
@@ -28,7 +27,7 @@ public interface IWoodItem {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation(String subType) {
-        return new ResourceLocation(MOD_ID, String.format("wood/%s/%s", subType, getType()));
+        return TerraFirmaCraft.identifier(String.format("wood/%s/%s", subType, getType()));
     }
 
     /**
@@ -39,7 +38,7 @@ public interface IWoodItem {
      */
     @Nonnull
     default ResourceLocation getResourceLocation(String subType) {
-        return new ResourceLocation(MOD_ID, String.format("wood/%s", subType));
+        return TerraFirmaCraft.identifier(String.format("wood/%s", subType));
     }
 
     /**

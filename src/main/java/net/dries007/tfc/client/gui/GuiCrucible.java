@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.gui;
 
 import gregtech.api.unification.material.Material;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.util.FluidSpriteCache;
 import net.dries007.tfc.common.objects.tileentities.TECrucible;
@@ -29,7 +30,7 @@ import java.util.Map;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class GuiCrucible extends GuiContainerTE<TECrucible> {
-    private static final ResourceLocation CRUCIBLE_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/crucible.png");
+    private static final ResourceLocation CRUCIBLE_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/crucible.png");
     private static final int MAX_ELEMENTS = 3;
     private int scrollPos;
     private boolean scrollPress;

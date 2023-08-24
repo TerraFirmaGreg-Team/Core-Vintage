@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.tileentities.TELoom;
 import net.dries007.tfc.util.Helpers;
@@ -7,12 +8,9 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SideOnly(Side.CLIENT)
 public class TESRLoom extends TESRBase<TELoom> {
@@ -30,7 +28,7 @@ public class TESRLoom extends TESRBase<TELoom> {
             woodType = te.getWood();
             GlStateManager.pushMatrix();
             Helpers.setWoodColor(woodType.getColor());
-            this.bindTexture(new ResourceLocation(MOD_ID, "textures/blocks/wood/planks/pattern.png"));
+            this.bindTexture(TerraFirmaCraft.identifier("textures/blocks/wood/planks/pattern.png"));
 
             GlStateManager.disableLighting();
 

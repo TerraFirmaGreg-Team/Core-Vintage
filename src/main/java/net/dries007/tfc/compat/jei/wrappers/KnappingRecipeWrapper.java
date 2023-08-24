@@ -5,6 +5,7 @@ import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.types.rock.type.RockType;
@@ -17,15 +18,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @ParametersAreNonnullByDefault
 public class KnappingRecipeWrapper implements IRecipeWrapper {
-    private static final ResourceLocation CLAY_DISABLED_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/knapping/clay_button_disabled.png");
-    private static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/knapping/clay_button_fire_disabled.png");
-    private static final ResourceLocation CLAY_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/knapping/clay_button.png");
-    private static final ResourceLocation FIRE_CLAY_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/knapping/clay_button_fire.png");
-    private static final ResourceLocation LEATHER_TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/knapping/leather_button.png");
+    private static final ResourceLocation CLAY_DISABLED_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button_disabled.png");
+    private static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button_fire_disabled.png");
+    private static final ResourceLocation CLAY_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button.png");
+    private static final ResourceLocation FIRE_CLAY_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button_fire.png");
+    private static final ResourceLocation LEATHER_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/leather_button.png");
 
     private static final List<ResourceLocation> ROCK_TEXTURES = new ArrayList<>();
     protected final KnappingRecipe recipe;

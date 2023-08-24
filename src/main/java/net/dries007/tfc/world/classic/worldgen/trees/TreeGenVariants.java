@@ -14,8 +14,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class TreeGenVariants implements ITreeGenerator {
     private static final PlacementSettings settings = StructureHelper.getDefaultSettings();
     private final String[] variants;
@@ -46,7 +44,7 @@ public class TreeGenVariants implements ITreeGenerator {
     @Override
     public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
         String variant = variants[variants.length == 1 ? 0 : rand.nextInt(variants.length)];
-        ResourceLocation base = new ResourceLocation(MOD_ID, woodType.toString() + "/" + variant);
+        ResourceLocation base = TerraFirmaCraft.identifier(woodType.toString() + "/" + variant);
 
         Template structureBase = manager.get(world.getMinecraftServer(), base);
         if (structureBase == null) {

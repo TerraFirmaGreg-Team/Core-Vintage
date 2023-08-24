@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.types.crop;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.types.crop.variant.CropBlockVariant;
 import net.dries007.tfc.api.util.IHasModel;
@@ -7,8 +8,6 @@ import net.dries007.tfc.api.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public interface ICropBlock extends IHasModel, IItemProvider {
 
@@ -35,7 +34,7 @@ public interface ICropBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return new ResourceLocation(MOD_ID, String.format("crop/%s/%s", getBlockVariant(), getType()));
+        return TerraFirmaCraft.identifier(String.format("crop/%s/%s", getBlockVariant(), getType()));
     }
 
     /**
@@ -45,7 +44,7 @@ public interface ICropBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return new ResourceLocation(MOD_ID, String.format("crop/%s/%s", getBlockVariant(), getType()));
+        return TerraFirmaCraft.identifier(String.format("crop/%s/%s", getBlockVariant(), getType()));
     }
 
     /**

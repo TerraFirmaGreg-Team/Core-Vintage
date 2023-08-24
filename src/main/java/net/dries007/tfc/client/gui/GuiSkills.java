@@ -21,11 +21,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 public class GuiSkills extends GuiContainerTFC {
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/player_skills.png");
+    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.identifier("textures/gui/player_skills.png");
 
     private final String[] skillTooltips;
     private final int[] skillBarWidths;

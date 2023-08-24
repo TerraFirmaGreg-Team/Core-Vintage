@@ -8,7 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -104,11 +103,11 @@ public class EntitiesTFC {
     }
 
     private static void register(String name, Class<? extends Entity> cls) {
-        EntityRegistry.registerModEntity(new ResourceLocation(MOD_ID, name), cls, name, id++, TerraFirmaCraft.getInstance(), 160, 20, true);
+        EntityRegistry.registerModEntity(TerraFirmaCraft.identifier(name), cls, name, id++, TerraFirmaCraft.getInstance(), 160, 20, true);
     }
 
     private static void registerLiving(String name, Class<? extends Entity> cls, int eggPrimaryColor, int eggSecondaryColor) {
         //Register entity and create a spawn egg for creative
-        EntityRegistry.registerModEntity(new ResourceLocation(MOD_ID, name), cls, name, id++, TerraFirmaCraft.getInstance(), 80, 3, true, eggPrimaryColor, eggSecondaryColor);
+        EntityRegistry.registerModEntity(TerraFirmaCraft.identifier(name), cls, name, id++, TerraFirmaCraft.getInstance(), 80, 3, true, eggPrimaryColor, eggSecondaryColor);
     }
 }

@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.capability.food;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.config.ConfigTFC;
@@ -20,8 +21,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 /**
  * Класс CapabilityFood представляет возможность для работы с едой в игре.
  */
@@ -29,7 +28,7 @@ public class CapabilityFood {
     /**
      * Уникальный идентификатор Capability.
      */
-    public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "food");
+    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("food");
 
     /**
      * Список пользовательских еды.

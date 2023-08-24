@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodChest;
 import net.dries007.tfc.common.objects.tileentities.TEChestTFC;
@@ -10,11 +11,8 @@ import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SideOnly(Side.CLIENT)
 public class TESRChestTFC extends TileEntitySpecialRenderer<TEChestTFC> {
@@ -57,10 +55,10 @@ public class TESRChestTFC extends TileEntitySpecialRenderer<TEChestTFC> {
                 GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
                 GlStateManager.matrixMode(5888);
             } else if (te.getChestType() == BlockChest.Type.TRAP && woodType != null) {
-                bindTexture(new ResourceLocation(MOD_ID, "textures/entity/chests/chest_trap.png"));
+                bindTexture(TerraFirmaCraft.identifier("textures/entity/chests/chest_trap.png"));
                 Helpers.setWoodColor(woodType.getColor());
             } else if (woodType != null) {
-                bindTexture(new ResourceLocation(MOD_ID, "textures/entity/chests/chest.png"));
+                bindTexture(TerraFirmaCraft.identifier("textures/entity/chests/chest.png"));
                 Helpers.setWoodColor(woodType.getColor());
             }
         } else {
@@ -74,10 +72,10 @@ public class TESRChestTFC extends TileEntitySpecialRenderer<TEChestTFC> {
                 GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
                 GlStateManager.matrixMode(5888);
             } else if (te.getChestType() == BlockChest.Type.TRAP && woodType != null) {
-                bindTexture(new ResourceLocation(MOD_ID, "textures/entity/chests/chest_trap_double.png"));
+                bindTexture(TerraFirmaCraft.identifier("textures/entity/chests/chest_trap_double.png"));
                 Helpers.setWoodColor(woodType.getColor());
             } else if (woodType != null) {
-                bindTexture(new ResourceLocation(MOD_ID, "textures/entity/chests/chest_double.png"));
+                bindTexture(TerraFirmaCraft.identifier("textures/entity/chests/chest_double.png"));
                 Helpers.setWoodColor(woodType.getColor());
             }
         }

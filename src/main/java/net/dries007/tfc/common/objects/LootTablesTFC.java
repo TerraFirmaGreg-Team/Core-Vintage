@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.loot.ApplySimpleSkill;
 import net.minecraft.util.ResourceLocation;
@@ -100,7 +101,7 @@ public class LootTablesTFC {
         ANIMALS_ZEBU = register("animals/zebu");
 
         // Loot function for skill drop multiplier
-        LootFunctionManager.registerFunction(new ApplySimpleSkill.Serializer(new ResourceLocation(MOD_ID, "apply_skill")));
+        LootFunctionManager.registerFunction(new ApplySimpleSkill.Serializer(TerraFirmaCraft.identifier("apply_skill")));
     }
 
     @SubscribeEvent
@@ -119,7 +120,7 @@ public class LootTablesTFC {
     }
 
     private static ResourceLocation register(String id) {
-        return LootTableList.register(new ResourceLocation(MOD_ID, id));
+        return LootTableList.register(TerraFirmaCraft.identifier(id));
     }
 
     private static void remove(LootTableLoadEvent event, String tableName, String pool) {

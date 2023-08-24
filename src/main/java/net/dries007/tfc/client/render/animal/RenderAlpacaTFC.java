@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render.animal;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.model.animal.ModelAlpacaBodyTFC;
 import net.dries007.tfc.common.objects.entity.animal.EntityAlpacaTFC;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -9,14 +10,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAlpacaTFC extends RenderAnimalTFC<EntityAlpacaTFC> {
-    private static final ResourceLocation ALPACA_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/alpaca_old.png");
-    private static final ResourceLocation ALPACA_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/alpaca_young.png");
+    private static final ResourceLocation ALPACA_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/alpaca_old.png");
+    private static final ResourceLocation ALPACA_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/alpaca_young.png");
 
     public RenderAlpacaTFC(RenderManager renderManager) {
         super(renderManager, new ModelAlpacaBodyTFC(), 0.7F, ALPACA_YOUNG, ALPACA_OLD);

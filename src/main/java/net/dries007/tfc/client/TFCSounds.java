@@ -1,7 +1,7 @@
 package net.dries007.tfc.client;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.block.SoundType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -386,7 +386,7 @@ public class TFCSounds {
     }
 
     private static SoundEvent createSoundEvent(String name) {
-        final var soundID = new ResourceLocation(MOD_ID, name);
+        final var soundID = TerraFirmaCraft.identifier(name);
         return new SoundEvent(soundID).setRegistryName(soundID);
     }
 }

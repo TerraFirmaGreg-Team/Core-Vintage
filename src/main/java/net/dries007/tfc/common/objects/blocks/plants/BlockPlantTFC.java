@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.plants;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -76,7 +77,7 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
 
         this.plant = plant;
         this.plantBlockVariant = plantBlockVariant;
-        this.modelLocation = new ResourceLocation(MOD_ID, "plants/" + plant);
+        this.modelLocation = TerraFirmaCraft.identifier("plants/" + plant);
         var blockRegistryName = String.format("plants/%s/%s", plantBlockVariant, plant);
 
         setRegistryName(MOD_ID, blockRegistryName);

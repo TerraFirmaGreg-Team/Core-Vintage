@@ -1,15 +1,14 @@
 package net.dries007.tfc.api.capability.egg;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class CapabilityEgg {
-    public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "egg");
+    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("egg");
     @CapabilityInject(IEgg.class)
     public static Capability<IEgg> CAPABILITY;
 

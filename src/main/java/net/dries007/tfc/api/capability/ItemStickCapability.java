@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.capability;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -18,13 +19,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 /**
  * Custom heat + size capability for stick items.
  */
 public class ItemStickCapability extends ItemHeatHandler implements IItemSize {
-    public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "stick");
+    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("stick");
     private static final float MELTING_POINT = 40f;
     private static final float HEAT_CAPACITY = 1f;
 

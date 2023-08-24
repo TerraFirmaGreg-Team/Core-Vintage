@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.rock;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -43,7 +44,7 @@ public class BlockAlabaster extends Block implements IItemSize, IItemProvider, I
 
         this.variant = variant;
         this.dyeColor = dyeColor;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/color/" + variant);
+        this.modelLocation = TerraFirmaCraft.identifier("rock/alabaster/color/" + variant);
 
         setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
@@ -63,7 +64,7 @@ public class BlockAlabaster extends Block implements IItemSize, IItemProvider, I
 
         this.variant = variant;
         this.dyeColor = EnumDyeColor.WHITE;
-        this.modelLocation = new ResourceLocation(MOD_ID, "rock/alabaster/" + variant);
+        this.modelLocation = TerraFirmaCraft.identifier("rock/alabaster/" + variant);
 
         var blockRegistryName = String.format("alabaster/%s/plain", variant);
         setRegistryName(MOD_ID, blockRegistryName);

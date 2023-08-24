@@ -73,7 +73,7 @@ public class BlockMetalAnvil extends Block implements IMetalBlock, IMaterialItem
 
         this.metalBlockVariant = metalBlockVariant;
         this.material = material;
-        this.modelLocation = new ResourceLocation(MOD_ID, "metal/anvil");
+        this.modelLocation = TerraFirmaCraft.identifier("metal/anvil");
 
         var blockRegistryName = String.format("metal/anvil/%s", material);
         setRegistryName(MOD_ID, blockRegistryName);

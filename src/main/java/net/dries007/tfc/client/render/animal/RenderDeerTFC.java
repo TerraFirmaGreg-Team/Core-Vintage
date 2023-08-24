@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render.animal;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.model.animal.ModelDeerTFC;
 import net.dries007.tfc.common.objects.entity.animal.EntityDeerTFC;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,14 +12,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderDeerTFC extends RenderLiving<EntityDeerTFC> {
-    private static final ResourceLocation DEER_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/deer.png");
+    private static final ResourceLocation DEER_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/deer.png");
 
-    private static final ResourceLocation FAWN_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/deer_fawn.png");
+    private static final ResourceLocation FAWN_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/deer_fawn.png");
 
     public RenderDeerTFC(RenderManager manager) {
         super(manager, new ModelDeerTFC(), 0.7F);

@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render.animal;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.model.animal.ModelPheasantTFC;
 import net.dries007.tfc.common.objects.entity.animal.EntityAnimalTFC;
 import net.dries007.tfc.common.objects.entity.animal.EntityPheasantTFC;
@@ -13,14 +14,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderPheasantTFC extends RenderLiving<EntityPheasantTFC> {
-    private static final ResourceLocation CHICK_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/pheasant_chick.png");
-    private static final ResourceLocation MALE_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/pheasant_male.png");
-    private static final ResourceLocation FEMALE_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/pheasant_female.png");
+    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/pheasant_chick.png");
+    private static final ResourceLocation MALE_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/pheasant_male.png");
+    private static final ResourceLocation FEMALE_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/pheasant_female.png");
 
 
     public RenderPheasantTFC(RenderManager manager) {

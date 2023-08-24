@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.gui;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.common.objects.tileentities.TECharcoalForge;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -8,11 +9,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 public class GuiCharcoalForge extends GuiContainerTE<TECharcoalForge> {
-    private static final ResourceLocation CHARCOAL_FORGE_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/charcoal_forge.png");
+    private static final ResourceLocation CHARCOAL_FORGE_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/charcoal_forge.png");
 
     public GuiCharcoalForge(Container container, InventoryPlayer playerInv, TECharcoalForge tile) {
         super(container, playerInv, tile, CHARCOAL_FORGE_BACKGROUND);

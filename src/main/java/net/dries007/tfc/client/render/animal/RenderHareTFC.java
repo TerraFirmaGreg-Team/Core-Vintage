@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render.animal;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.model.animal.ModelHareTFC;
 import net.dries007.tfc.common.objects.entity.animal.EntityHareTFC;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -10,15 +11,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderHareTFC extends RenderLiving<EntityHareTFC> {
-    private static final ResourceLocation BROWN = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/hare/brown.png");
-    private static final ResourceLocation SPOTTED = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/hare/spotted.png");
-    private static final ResourceLocation BLACK = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/hare/black.png");
-    private static final ResourceLocation CREAM = new ResourceLocation(MOD_ID, "textures/entity/animal/huntable/hare/cream.png");
+    private static final ResourceLocation BROWN = TerraFirmaCraft.identifier("textures/entity/animal/huntable/hare/brown.png");
+    private static final ResourceLocation SPOTTED = TerraFirmaCraft.identifier("textures/entity/animal/huntable/hare/spotted.png");
+    private static final ResourceLocation BLACK = TerraFirmaCraft.identifier("textures/entity/animal/huntable/hare/black.png");
+    private static final ResourceLocation CREAM = TerraFirmaCraft.identifier("textures/entity/animal/huntable/hare/cream.png");
 
 
     public RenderHareTFC(RenderManager renderManager) {

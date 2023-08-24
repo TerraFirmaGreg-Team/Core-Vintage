@@ -18,7 +18,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.common.objects.blocks.wood.BlockWoodLog.PLACED;
 
 public class TreeGenSequoia implements ITreeGenerator {
@@ -71,7 +70,7 @@ public class TreeGenSequoia implements ITreeGenerator {
     }
 
     private int placeLayer(TemplateManager manager, World world, BlockPos pos, String name) {
-        ResourceLocation base = new ResourceLocation(MOD_ID, name);
+        ResourceLocation base = TerraFirmaCraft.identifier(name);
         Template structureBase = manager.get(world.getMinecraftServer(), base);
 
         if (structureBase == null) {

@@ -23,12 +23,11 @@ import net.minecraftforge.items.IItemHandler;
 import java.io.IOException;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.common.objects.tileentities.TEAnvilTFC.SLOT_INPUT_1;
 
 @SideOnly(Side.CLIENT)
 public class GuiAnvilPlan extends GuiContainerTE<TEAnvilTFC> {
-    public static final ResourceLocation PLAN_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/anvil_plan.png");
+    public static final ResourceLocation PLAN_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/anvil_plan.png");
 
     private final ItemStack inputStack;
     private int page;

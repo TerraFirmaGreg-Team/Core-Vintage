@@ -2,6 +2,7 @@ package net.dries007.tfc.api.types.rock.type;
 
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.minecraft.util.ResourceLocation;
 
@@ -10,8 +11,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * Основной класс для типов камней.
@@ -160,6 +159,6 @@ public class RockType {
      */
     @Nonnull
     public ResourceLocation getTexture() {
-        return new ResourceLocation(MOD_ID, "textures/blocks/rock/raw/" + this + ".png");
+        return TerraFirmaCraft.identifier("textures/blocks/rock/raw/" + this + ".png");
     }
 }

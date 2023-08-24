@@ -39,18 +39,6 @@ public enum Heat {
         this(min, max, format, format, intColor);
     }
 
-    public float getMin() {
-        return min;
-    }
-
-    public float getMax() {
-        return max;
-    }
-
-    public int getIntColor() {
-        return intColor;
-    }
-
     public static float maxVisibleTemperature() {
         return BRILLIANT_WHITE.getMax();
     }
@@ -120,6 +108,18 @@ public enum Heat {
             }
         }
         return tooltip;
+    }
+
+    public float getMin() {
+        return min;
+    }
+
+    public float getMax() {
+        return max;
+    }
+
+    public int getIntColor() {
+        return intColor;
     }
 
 

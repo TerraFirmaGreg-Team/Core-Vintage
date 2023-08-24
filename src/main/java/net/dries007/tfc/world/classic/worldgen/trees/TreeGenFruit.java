@@ -13,14 +13,12 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class TreeGenFruit implements ITreeGenerator {
     private static final PlacementSettings SETTINGS = StructureHelper.getDefaultSettings();
 
     @Override
     public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
-        ResourceLocation base = new ResourceLocation(MOD_ID, "fruit_trees/" + woodType.toString());
+        ResourceLocation base = TerraFirmaCraft.identifier("fruit_trees/" + woodType.toString());
         Template structureBase = manager.get(world.getMinecraftServer(), base);
 
         if (structureBase == null) {

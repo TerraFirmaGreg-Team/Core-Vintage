@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.button;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -7,10 +8,8 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class GuiButtonPlayerInventoryTab extends GuiButtonTFC {
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/icons.png");
+    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.identifier("textures/gui/icons.png");
 
     private final TFCGuiHandler.Type guiType;
     private final boolean isActive;

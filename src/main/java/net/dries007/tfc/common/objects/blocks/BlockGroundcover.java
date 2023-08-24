@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.util.CustomStateMap;
@@ -38,7 +39,7 @@ public class BlockGroundcover extends Block implements IHasModel {
         this.blockHardness = 0.1f;
         this.blockResistance = 0.1f;
         this.groundcoverType = groundcoverType;
-        this.modelLocation = new ResourceLocation(MOD_ID, "groundcover/" + groundcoverType);
+        this.modelLocation = TerraFirmaCraft.identifier("groundcover/" + groundcoverType);
 
         var blockRegistryName = String.format("groundcover/%s", groundcoverType);
         setRegistryName(MOD_ID, blockRegistryName);

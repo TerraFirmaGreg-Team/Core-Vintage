@@ -24,7 +24,7 @@
 //@ParametersAreNonnullByDefault
 //public class RockLayerCategory extends BaseRecipeCategory<RockLayerWrapper>
 //{
-//    private static final ResourceLocation BACKGROUND = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/jei_rocklayer.png");
+//    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.identifier("textures/gui/jei_rocklayer.png");
 //
 //    public RockLayerCategory(IGuiHelper helper, String Uid)
 //    {

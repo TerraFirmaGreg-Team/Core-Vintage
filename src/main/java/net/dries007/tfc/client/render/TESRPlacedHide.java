@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedHide;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,12 +12,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 public class TESRPlacedHide extends TileEntitySpecialRenderer<TEPlacedHide> {
-    private static final ResourceLocation BASE_TEXTURE = new ResourceLocation(MOD_ID, "textures/items/hide/large/soaked.png");
-    private static final ResourceLocation SCRAPED_TEXTURE = new ResourceLocation(MOD_ID, "textures/items/hide/large/scraped.png");
+    private static final ResourceLocation BASE_TEXTURE = TerraFirmaCraft.identifier("textures/items/hide/large/soaked.png");
+    private static final ResourceLocation SCRAPED_TEXTURE = TerraFirmaCraft.identifier("textures/items/hide/large/scraped.png");
 
     private static final double[][] VERTICES = new double[][]{
             // x, z, u, v

@@ -17,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class HeatCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
-    private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/icons/jei.png");
+    private static final ResourceLocation ICONS = TerraFirmaCraft.identifier("textures/gui/icons/jei.png");
 
     private final IDrawableStatic slot;
     private final IDrawableStatic fire;

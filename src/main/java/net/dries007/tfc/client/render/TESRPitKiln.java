@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.objects.tileentities.TEPitKiln;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -18,12 +19,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @SideOnly(Side.CLIENT)
 public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln> {
-    private static final ResourceLocation THATCH = new ResourceLocation(MOD_ID, "textures/blocks/thatch.png");
-    private static final ResourceLocation BARK = new ResourceLocation(MOD_ID, "textures/blocks/wood/log/oak.png");
+    private static final ResourceLocation THATCH = TerraFirmaCraft.identifier("textures/blocks/thatch.png");
+    private static final ResourceLocation BARK = TerraFirmaCraft.identifier("textures/blocks/wood/log/oak.png");
     private static final ModelStraw[] STRAW = new ModelStraw[TEPitKiln.STRAW_NEEDED];
     private static final int LOG_ROWS = 2;
     private static final int LOGS_PER_ROW = TEPitKiln.WOOD_NEEDED / LOG_ROWS;

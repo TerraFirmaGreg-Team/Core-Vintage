@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.gui;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.common.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.common.objects.tileentities.TEFirePit;
@@ -10,12 +11,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 public class GuiFirePit extends GuiContainerTE<TEFirePit> {
-    private static final ResourceLocation FIRE_PIT_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/fire_pit.png");
-    private static final ResourceLocation FIRE_PIT_COOKING_POT_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/fire_pit_cooking_pot.png");
-    private static final ResourceLocation FIRE_PIT_GRILL_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/fire_pit_grill.png");
+    private static final ResourceLocation FIRE_PIT_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/fire_pit.png");
+    private static final ResourceLocation FIRE_PIT_COOKING_POT_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/fire_pit_cooking_pot.png");
+    private static final ResourceLocation FIRE_PIT_GRILL_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/fire_pit_grill.png");
 
     private final BlockFirePit.FirePitAttachment attachment;
 

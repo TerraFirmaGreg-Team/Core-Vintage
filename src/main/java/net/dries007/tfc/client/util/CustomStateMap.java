@@ -11,25 +11,28 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
 
 public class CustomStateMap extends StateMapperBase {
 
     private final IProperty<?> name;
     private final String suffix;
     private final List<IProperty<?>> ignored;
-    private final ResourceLocation customModelPath;
+    private final ResourceLocation resourceLocation;
+    private final String variant;
 
-    private CustomStateMap(@Nullable IProperty<?> name, @Nullable String suffix, List<IProperty<?>> ignored, ResourceLocation customModelPath) {
-        this.name = name;
-        this.suffix = suffix;
-        this.ignored = ignored;
-        this.customModelPath = customModelPath;
+    private CustomStateMap(Builder builder) {
+        this.name = builder.name;
+        this.suffix = builder.suffix;
+        this.ignored = builder.ignored;
+        this.resourceLocation = builder.resourceLocation;
+        this.variant = builder.variant;
     }
 
+    @Override
     protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
         Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
         String s;
@@ -48,7 +51,18 @@ public class CustomStateMap extends StateMapperBase {
             map.remove(iproperty);
         }
 
-        return new ModelResourceLocation(customModelPath, this.getPropertyString(map));
+
+        var variantIn = this.getPropertyString(map);
+        if (!map.isEmpty()) {
+            if (this.variant != null) {
+                return new ModelResourceLocation(resourceLocation, variantIn + variant);
+            }
+            return new ModelResourceLocation(resourceLocation, variantIn);
+        }
+
+        return new ModelResourceLocation(resourceLocation, variantIn);
+
+
     }
 
     private <T extends Comparable<T>> String removeName(IProperty<T> property, Map<IProperty<?>, Comparable<?>> values) {
@@ -61,6 +75,7 @@ public class CustomStateMap extends StateMapperBase {
         private IProperty<?> name;
         private String suffix;
         private ResourceLocation resourceLocation;
+        private String variant;
 
         public Builder withName(IProperty<?> builderPropertyIn) {
             this.name = builderPropertyIn;
@@ -82,8 +97,13 @@ public class CustomStateMap extends StateMapperBase {
             return this;
         }
 
+        public Builder customVariant(String variant) {
+            this.variant = "," + variant;
+            return this;
+        }
+
         public CustomStateMap build() {
-            return new CustomStateMap(this.name, this.suffix, this.ignored, this.resourceLocation);
+            return new CustomStateMap(this);
         }
     }
 }

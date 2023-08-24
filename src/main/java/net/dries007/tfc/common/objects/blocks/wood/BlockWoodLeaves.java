@@ -263,17 +263,14 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
-                        "wood=" + type.toString());
+                        "type=" + getType());
             }
         });
 
 
-        for (IBlockState state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(
-                    Item.getItemFromBlock(this),
-                    getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(),
-                            "wood=" + type.toString()));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(),
+                        "type=" + getType()));
     }
 }

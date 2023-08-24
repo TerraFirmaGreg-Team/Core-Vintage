@@ -36,11 +36,6 @@
       "north": {
         "x": 90
       }
-    },
-    "inventory": [
-      {
-        "model": "tfc:wood/button_inventory"
-      }
-    ]
+    }
   }
 }

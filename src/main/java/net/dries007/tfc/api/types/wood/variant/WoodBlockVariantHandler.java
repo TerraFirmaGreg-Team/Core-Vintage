@@ -27,6 +27,7 @@ public class WoodBlockVariantHandler {
         FENCE = new WoodBlockVariant("fence", BlockWoodFence::new);
         FENCE_LOG = new WoodBlockVariant("fence_log", BlockWoodFenceLog::new);
         FENCE_GATE = new WoodBlockVariant("fence_gate", BlockWoodFenceGate::new);
+        FENCE_GATE_LOG = new WoodBlockVariant("fence_gate_log", BlockWoodFenceGateLog::new);
         BUTTON = new WoodBlockVariant("button", BlockWoodButton::new);
         PRESSURE_PLATE = new WoodBlockVariant("pressure_plate", BlockWoodPressurePlate::new);
         SLAB_DOUBLE = new WoodBlockVariant("slab_double", BlockWoodSlab.Double::new);

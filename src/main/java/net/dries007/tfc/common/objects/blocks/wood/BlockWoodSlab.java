@@ -232,13 +232,15 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         @Override
         @SideOnly(Side.CLIENT)
         public void onModelRegister() {
-            ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockWoodSlab.VARIANT).build());
+            ModelLoader.setCustomStateMapper(this,
+                    new CustomStateMap.Builder()
+                            .customPath(getResourceLocation())
+                            .ignore(BlockWoodSlab.VARIANT)
+                            .build());
 
-            for (IBlockState state : this.getBlockState().getValidStates()) {
-                ModelLoader.setCustomModelResourceLocation(
-                        Item.getItemFromBlock(this),
-                        this.getMetaFromState(state), new ModelResourceLocation(getResourceLocation(), "normal"));
-            }
+            ModelLoader.setCustomModelResourceLocation(
+                    Item.getItemFromBlock(this), 0,
+                    new ModelResourceLocation(getResourceLocation(), "normal"));
         }
     }
 }

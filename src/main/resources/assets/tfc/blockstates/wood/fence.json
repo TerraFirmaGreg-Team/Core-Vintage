@@ -8,10 +8,9 @@
     }
   },
   "variants": {
-    "normal": [{}],
-    "inventory": {
+    "normal": [{
       "model": "tfc:wood/fence/inventory"
-    },
+    }],
     "north": {
       "true": {
         "submodel": "tfc:wood/fence/side"

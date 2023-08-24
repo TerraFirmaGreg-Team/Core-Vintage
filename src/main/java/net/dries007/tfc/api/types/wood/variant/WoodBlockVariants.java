@@ -20,6 +20,7 @@ public class WoodBlockVariants {
     public static WoodBlockVariant FENCE;
     public static WoodBlockVariant FENCE_LOG;
     public static WoodBlockVariant FENCE_GATE;
+    public static WoodBlockVariant FENCE_GATE_LOG;
     public static WoodBlockVariant BUTTON;
     public static WoodBlockVariant PRESSURE_PLATE;
     public static WoodBlockVariant SLAB_DOUBLE;

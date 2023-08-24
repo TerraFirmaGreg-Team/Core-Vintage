@@ -6,6 +6,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
+import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
@@ -17,7 +18,6 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -41,10 +41,6 @@ import java.util.*;
 
 public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     public static final PropertyBool PLACED = PropertyBool.create("placed");
-    public static final PropertyBool SMALL = PropertyBool.create("small");
-    public static final AxisAlignedBB SMALL_AABB_Y = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 1, 0.75);
-    public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);
-    public static final AxisAlignedBB SMALL_AABB_Z = new AxisAlignedBB(0.25, 0.25, 0, 0.75, 0.75, 1);
     private final WoodBlockVariant variant;
     private final WoodType type;
 
@@ -56,7 +52,9 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
 
-        setDefaultState(blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y).withProperty(PLACED, true).withProperty(SMALL, false));
+        setDefaultState(blockState.getBaseState()
+                .withProperty(LOG_AXIS, BlockLog.EnumAxis.Y)
+                .withProperty(PLACED, true));
         setHarvestLevel("axe", 0);
         setHardness(2.0F);
         setResistance(5.0F);
@@ -87,24 +85,6 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         return new ItemBlockTFC(this);
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isFullBlock(IBlockState state) {
-        return !state.getValue(SMALL);
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public int getLightOpacity(IBlockState state) {
-        return state.getValue(SMALL) ? 0 : 255;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return !state.getValue(SMALL);
-    }
-
     @Override
     @SuppressWarnings("deprecation")
     public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
@@ -114,19 +94,7 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        if (!state.getValue(SMALL)) return FULL_BLOCK_AABB;
-        return switch (state.getValue(LOG_AXIS)) {
-            case X -> SMALL_AABB_X;
-            case Y -> SMALL_AABB_Y;
-            case Z -> SMALL_AABB_Z;
-            default -> FULL_BLOCK_AABB;
-        };
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return !state.getValue(SMALL);
+        return FULL_BLOCK_AABB;
     }
 
     @Override
@@ -150,22 +118,26 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
 
     @Override
     public boolean isToolEffective(String type, IBlockState state) {
-        return ("hammer".equals(type) && ConfigTFC.General.TREE.enableHammerSticks) || super.isToolEffective(type, state);
+        return ("hammer".equals(type) && ConfigTFC.General.TREE.enableHammerSticks) ||
+                super.isToolEffective(type, state);
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(LOG_AXIS, EnumAxis.values()[meta & 0b11]).withProperty(PLACED, (meta & 0b100) == 0b100).withProperty(SMALL, (meta & 0b1000) == 0b1000);
+        return getDefaultState()
+                .withProperty(LOG_AXIS, EnumAxis.values()[meta & 0b11])
+                .withProperty(PLACED, (meta & 0b100) == 0b100);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(LOG_AXIS).ordinal() | (state.getValue(PLACED) ? 0b100 : 0) | (state.getValue(SMALL) ? 0b1000 : 0);
+        return state.getValue(LOG_AXIS).ordinal() |
+                (state.getValue(PLACED) ? 0b100 : 0);
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, LOG_AXIS, PLACED, SMALL);
+        return new BlockStateContainer(this, LOG_AXIS, PLACED);
     }
 
     @Override
@@ -253,26 +225,17 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(),
-                        "axis=" + state.getValue(LOG_AXIS) + "," +
-                                "placed=" + state.getValue(PLACED) + "," +
-                                "small=" + state.getValue(SMALL) + "," +
-                                "type=" + type.toString());
-            }
-        });
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder()
+                        .customPath(getResourceLocation())
+                        .customVariant("type=" + getType())
+                        .build());
 
-        for (var state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(
-                    Item.getItemFromBlock(this),
-                    getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(),
-                            "axis=none," +
-                                    "placed=false," +
-                                    "small=false," +
-                                    "type=" + type.toString()));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(),
+                        "axis=none," +
+                                "placed=false," +
+                                "type=" + getType()));
     }
 }

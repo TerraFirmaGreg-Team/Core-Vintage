@@ -95,12 +95,13 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockDoor.POWERED).build());
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder()
+                        .customPath(getResourceLocation())
+                        .ignore(BlockDoor.POWERED).build());
 
-        for (IBlockState state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(), "normal"));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

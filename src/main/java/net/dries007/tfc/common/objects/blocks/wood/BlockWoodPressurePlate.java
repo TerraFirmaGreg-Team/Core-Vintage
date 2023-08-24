@@ -10,7 +10,6 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -60,10 +59,13 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder()
+                        .customPath(getResourceLocation())
+                        .build());
 
-        for (IBlockState state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), getMetaFromState(state), new ModelResourceLocation(getResourceLocation(), "normal"));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

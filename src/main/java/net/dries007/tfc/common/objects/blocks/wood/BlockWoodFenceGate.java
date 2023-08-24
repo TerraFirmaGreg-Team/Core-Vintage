@@ -9,7 +9,6 @@ import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -60,12 +59,15 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockFenceGate.POWERED).build());
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder()
+                        .customPath(getResourceLocation())
+                        .ignore(BlockFenceGate.IN_WALL)
+                        .ignore(BlockFenceGate.POWERED)
+                        .build());
 
-        for (IBlockState state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(), "inventory"));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

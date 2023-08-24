@@ -5,6 +5,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
+import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.tileentities.TEBarrel;
 import net.dries007.tfc.util.Helpers;
@@ -15,7 +16,6 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -288,20 +288,17 @@ public class BlockWoodBarrel extends BlockWood implements IItemSize {
         final ModelResourceLocation sealed = new ModelResourceLocation(getResourceLocation(), "sealed=true");
         final ModelResourceLocation unsealed = new ModelResourceLocation(getResourceLocation(), "sealed=false");
 
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), this.getPropertyString(state.getProperties()));
-            }
-        });
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder()
+                        .customPath(getResourceLocation())
+                        .build());
 
         ModelLoader.setCustomMeshDefinition(
                 Item.getItemFromBlock(this),
                 stack -> stack.getTagCompound() != null ? sealed : unsealed);
 
         ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                getMetaFromState(getBlockState().getBaseState()),
+                Item.getItemFromBlock(this), 0,
                 new ModelResourceLocation(getResourceLocation(), "normal"));
 
     }

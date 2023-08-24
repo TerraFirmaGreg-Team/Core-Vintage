@@ -33,16 +33,14 @@ public class BlockWoodFenceLog extends BlockWoodFence {
             }
         });
 
-        for (var state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(),
-                            "east=false," +
-                                    "normal=true," +
-                                    "north=false," +
-                                    "south=false," +
-                                    "type=" + getType() + "," +
-                                    "west=false"));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(),
+                        "east=false," +
+                                "normal=true," +
+                                "north=false," +
+                                "south=false," +
+                                "type=" + getType() + "," +
+                                "west=false"));
     }
 }

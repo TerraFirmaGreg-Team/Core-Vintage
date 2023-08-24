@@ -77,27 +77,33 @@
       "faces": {
         "north": {
           "uv": [0, 1, 2, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "east": {
           "uv": [13, 1, 15, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "south": {
           "uv": [0, 1, 2, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "west": {
           "uv": [13, 1, 15, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "up": {
           "uv": [0, 13, 2, 15],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "down": {
           "uv": [0, 13, 2, 15],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         }
       }
     },
@@ -108,27 +114,33 @@
       "faces": {
         "north": {
           "uv": [14, 1, 16, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "east": {
           "uv": [13, 1, 15, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "south": {
           "uv": [14, 1, 16, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "west": {
           "uv": [13, 1, 15, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "up": {
           "uv": [14, 13, 16, 15],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "down": {
           "uv": [14, 13, 16, 15],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         }
       }
     },
@@ -139,19 +151,23 @@
       "faces": {
         "east": {
           "uv": [13, 7, 15, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "west": {
           "uv": [13, 7, 15, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "up": {
           "uv": [0, 9, 2, 13],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "down": {
           "uv": [0, 9, 2, 13],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         }
       }
     },
@@ -162,19 +178,23 @@
       "faces": {
         "east": {
           "uv": [13, 1, 15, 4],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "west": {
           "uv": [13, 1, 15, 4],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "up": {
           "uv": [0, 9, 2, 13],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "down": {
           "uv": [0, 9, 2, 13],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         }
       }
     },
@@ -185,19 +205,23 @@
       "faces": {
         "east": {
           "uv": [13, 7, 15, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "west": {
           "uv": [13, 7, 15, 10],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "up": {
           "uv": [14, 9, 16, 13],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "down": {
           "uv": [14, 9, 16, 13],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         }
       }
     },
@@ -208,19 +232,23 @@
       "faces": {
         "east": {
           "uv": [13, 1, 15, 4],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "west": {
           "uv": [13, 1, 15, 4],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "up": {
           "uv": [14, 9, 16, 13],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         },
         "down": {
           "uv": [14, 9, 16, 13],
-          "texture": "#planks"
+          "texture": "#planks",
+          "tintindex": 0
         }
       }
     }

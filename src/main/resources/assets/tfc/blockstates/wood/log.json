@@ -23,12 +23,6 @@
       "true": {},
       "false": {}
     },
-    "small": {
-      "true": {
-        "model": "tfc:wood/small_log"
-      },
-      "false": {}
-    },
     "type": {
       "acacia": {
         "textures": {

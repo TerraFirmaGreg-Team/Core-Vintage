@@ -166,7 +166,14 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockChest.FACING).build());
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getResourceLocation(), "normal"));
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder()
+                        .customPath(getResourceLocation())
+                        .ignore(BlockChest.FACING)
+                        .build());
+
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

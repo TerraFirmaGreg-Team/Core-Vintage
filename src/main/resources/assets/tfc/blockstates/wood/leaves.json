@@ -4,7 +4,7 @@
     "model": "leaves"
   },
   "variants": {
-    "wood": {
+    "type": {
       "acacia": {
         "textures": {
           "all": "tfc:blocks/wood/leaves/acacia"

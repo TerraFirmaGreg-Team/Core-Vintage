@@ -16,16 +16,13 @@
     "facing": {
       "east": {},
       "west": {
-        "y": 180,
-        "uvlock": true
+        "y": 180
       },
       "south": {
-        "y": 90,
-        "uvlock": true
+        "y": 90
       },
       "north": {
-        "y": 270,
-        "uvlock": true
+        "y": 270
       }
     },
     "half": {

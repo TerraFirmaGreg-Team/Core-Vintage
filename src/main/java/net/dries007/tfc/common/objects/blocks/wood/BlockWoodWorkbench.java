@@ -4,6 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
+import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.container.ContainerWorkbenchTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
@@ -12,7 +13,6 @@ import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -91,18 +91,14 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Nonnull
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), getPropertyString(state.getProperties()));
-            }
-        });
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder()
+                        .customPath(getResourceLocation())
+                        .build());
 
-        for (IBlockState state : getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    getMetaFromState(state),
-                    new ModelResourceLocation(getResourceLocation(), "normal"));
-        }
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 
     @SuppressWarnings("WeakerAccess")

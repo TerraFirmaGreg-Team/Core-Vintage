@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "dynamictreestfc:log/blackwood"
+    },
+    "axis=z": {
+      "model": "dynamictreestfc:log/blackwood",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "dynamictreestfc:log/blackwood",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

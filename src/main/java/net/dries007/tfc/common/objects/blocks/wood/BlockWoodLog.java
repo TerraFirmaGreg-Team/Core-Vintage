@@ -85,11 +85,13 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         return new ItemBlockTFC(this);
     }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-        return (blockState.getValue(PLACED) ? 1.0f : 2.5f) * super.getBlockHardness(blockState, worldIn, pos);
-    }
+    //TODO в этом не вижу смысла после добавления dt, так как все бревна, что имели бы свойство PLACED,
+    // генерируются dt, а у них свой подсчет Hardness
+//    @Override
+//    @SuppressWarnings("deprecation")
+//    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+//        return (blockState.getValue(PLACED) ? 1.0f : 2.5f) * super.getBlockHardness(blockState, worldIn, pos);
+//    }
 
     @SuppressWarnings("deprecation")
     @Override

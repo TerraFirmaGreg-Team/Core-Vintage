@@ -33,4 +33,5 @@ public class WoodBlockVariants {
     public static WoodBlockVariant CHEST;
     public static WoodBlockVariant LOOM;
     public static WoodBlockVariant BARREL;
+    public static WoodBlockVariant LADDER;
 }

@@ -40,5 +40,6 @@ public class WoodBlockVariantHandler {
         CHEST = new WoodBlockVariant("chest", BlockWoodChest::new);
         LOOM = new WoodBlockVariant("loom", BlockWoodLoom::new);
         BARREL = new WoodBlockVariant("barrel", BlockWoodBarrel::new);
+        LADDER = new WoodBlockVariant("ladder", BlockWoodLadder::new);
     }
 }

@@ -8,6 +8,7 @@ import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockFence;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -32,6 +33,7 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock {
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
+        setSoundType(SoundType.WOOD);
         setHarvestLevel("axe", 0);
         setHardness(2.0F);
         setResistance(15.0F);

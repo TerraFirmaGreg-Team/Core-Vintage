@@ -43,7 +43,9 @@ import net.dries007.tfc.common.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.commands.*;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
+import net.dries007.tfc.common.objects.items.ItemGlassBottleTFC;
 import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.common.objects.recipes.RecipeHandler;
 import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
@@ -62,8 +64,11 @@ import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemSnow;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.dedicated.PropertyManager;
@@ -336,7 +341,7 @@ public class CommonProxy {
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void registerVanillaOverrides(RegistryEvent.Register<Block> event) {
+    public static void registerVanillaOverridesBlock(RegistryEvent.Register<Block> event) {
         // Ванильные переопределения. Используется для небольших настроек ванильных предметов, а не для их полной замены.
         if (ConfigTFC.General.OVERRIDES.enableFrozenOverrides) {
             TerraFirmaCraft.LOGGER.info("The below warnings about unintended overrides are normal. The override is intended. ;)");
@@ -348,6 +353,20 @@ public class CommonProxy {
 
         if (ConfigTFC.General.OVERRIDES.enableTorchOverride) {
             event.getRegistry().register(new BlockTorchTFC());
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void registerVanillaOverridesItem(RegistryEvent.Register<Item> event) {
+        // Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
+        TerraFirmaCraft.LOGGER.info("The below warnings about unintended overrides are normal. The override is intended. ;)");
+        event.getRegistry().registerAll(
+                new ItemSnow(Blocks.SNOW_LAYER).setRegistryName("minecraft", "snow_layer"),
+                new ItemGlassBottleTFC().setRegistryName(Items.GLASS_BOTTLE.getRegistryName()).setTranslationKey("glassBottle")
+        );
+
+        if (ConfigTFC.General.OVERRIDES.enableTorchOverride) {
+            event.getRegistry().register(new ItemBlockTorch(Blocks.TORCH).setRegistryName("minecraft", "torch"));
         }
     }
 

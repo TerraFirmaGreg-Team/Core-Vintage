@@ -2,25 +2,17 @@ package net.dries007.tfc.common.objects.items;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ceramics.*;
-import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.common.objects.items.metal.ItemMetalBucket;
 import net.dries007.tfc.common.objects.items.wood.ItemWoodBucket;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemSnow;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -203,21 +195,6 @@ public final class ItemsTFC_old {
         allSimpleItems = simpleItems.build();
     }
 
-    @SuppressWarnings("ConstantConditions")
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void registerVanillaOverrides(RegistryEvent.Register<Item> event) {
-        // Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
-        TerraFirmaCraft.LOGGER.info("The below warnings about unintended overrides are normal. The override is intended. ;)");
-        event.getRegistry().registerAll(
-                new ItemSnow(Blocks.SNOW_LAYER).setRegistryName("minecraft", "snow_layer"),
-                new ItemGlassBottleTFC().setRegistryName(Items.GLASS_BOTTLE.getRegistryName()).setTranslationKey("glassBottle")
-        );
-
-        if (ConfigTFC.General.OVERRIDES.enableTorchOverride) {
-            event.getRegistry().register(new ItemBlockTorch(Blocks.TORCH).setRegistryName("minecraft", "torch"));
-        }
-    }
-
     private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired) {
         registerPottery(items, r, nameUnfired, nameFired, new ItemPottery(), new ItemPottery());
     }
@@ -229,13 +206,6 @@ public final class ItemsTFC_old {
         if (items != null) {
             items.add(firedItem, unfiredItem);
         }
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item) {
-        item.setRegistryName(item.getBlock().getRegistryName());
-        item.setCreativeTab(item.getBlock().getCreativeTab());
-        r.register(item);
     }
 
     private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {

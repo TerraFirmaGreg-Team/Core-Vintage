@@ -1,14 +1,14 @@
 {
   "variants": {
     "axis=y": {
-      "model": "dynamictreestfc:log/blackwood"
+      "model": "tfc:log/blackwood"
     },
     "axis=z": {
-      "model": "dynamictreestfc:log/blackwood",
+      "model": "tfc:log/blackwood",
       "x": 90
     },
     "axis=x": {
-      "model": "dynamictreestfc:log/blackwood",
+      "model": "tfc:log/blackwood",
       "x": 90,
       "y": 90
     }

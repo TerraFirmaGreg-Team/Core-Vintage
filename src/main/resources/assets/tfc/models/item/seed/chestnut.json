@@ -1,6 +1,6 @@
 {
-  "parent":"item/generated",
+  "parent": "item/generated",
   "textures": {
-    "layer0":"dynamictreestfc:items/seed/chestnut"
+    "layer0": "tfc:items/seed/chestnut"
   }
 }

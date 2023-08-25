@@ -8,6 +8,7 @@ import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenConiferTopper;
 import com.ferreusveritas.dynamictrees.trees.Species;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
 import net.dries007.tfc.api.types.wood.type.WoodType;
@@ -15,7 +16,6 @@ import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.compat.dynamictrees.trees.TreeFamilyTFC;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -45,7 +45,7 @@ public class ModTrees {
 		for (var t1 : WoodType.getWoodTypes()) {
 			String treeName = t1.toString();
 
-			var resLoc = new ResourceLocation(MOD_ID, treeName);
+			var resLoc = TerraFirmaCraft.identifier(treeName);
 			var family = new TreeFamilyTFC(resLoc, t1);
 
 			tfcTrees.add(family);

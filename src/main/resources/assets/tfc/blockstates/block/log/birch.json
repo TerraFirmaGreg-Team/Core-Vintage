@@ -1,14 +1,14 @@
 {
   "variants": {
     "axis=y": {
-      "model": "dynamictreestfc:log/birch"
+      "model": "tfc:log/birch"
     },
     "axis=z": {
-      "model": "dynamictreestfc:log/birch",
+      "model": "tfc:log/birch",
       "x": 90
     },
     "axis=x": {
-      "model": "dynamictreestfc:log/birch",
+      "model": "tfc:log/birch",
       "x": 90,
       "y": 90
     }

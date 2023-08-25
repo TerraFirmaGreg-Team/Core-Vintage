@@ -1,5 +1,5 @@
 {
   "variants": {
-    "normal": { "model": "dynamictreestfc:branch/ash#dynamictree" }
+    "normal": { "model": "tfc:branch/ash#dynamictree" }
   }
 }

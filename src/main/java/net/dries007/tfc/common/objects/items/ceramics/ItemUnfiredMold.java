@@ -10,22 +10,22 @@ import javax.annotation.Nonnull;
 
 public class ItemUnfiredMold extends ItemPottery {
 
-    public final OrePrefix orePrefix;
+	public final OrePrefix orePrefix;
 
-    public ItemUnfiredMold(OrePrefix orePrefix) {
-        this.orePrefix = orePrefix;
+	public ItemUnfiredMold(OrePrefix orePrefix) {
+		this.orePrefix = orePrefix;
 
-        setCreativeTab(CreativeTabsTFC.POTTERY);
-        setRegistryName(TerraFirmaCraft.MOD_ID, "ceramics/unfired/mold/" + orePrefix.name.toLowerCase());
-    }
+		setCreativeTab(CreativeTabsTFC.POTTERY);
+		setRegistryName(TerraFirmaCraft.identifier("ceramics/unfired/mold/" + orePrefix.name.toLowerCase()));
+	}
 
-    @Nonnull
-    @Override
-    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return
-                new TextComponentTranslation(
-                        "item.tfc.ceramics.unfired.mold.name",
-                        new TextComponentTranslation("item.material.oreprefix." + orePrefix.name).getFormattedText().replaceFirst(" ", "")
-                ).getFormattedText();
-    }
+	@Nonnull
+	@Override
+	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+		return
+				new TextComponentTranslation(
+						"item.tfc.ceramics.unfired.mold.name",
+						new TextComponentTranslation("item.material.oreprefix." + orePrefix.name).getFormattedText().replaceFirst(" ", "")
+				).getFormattedText();
+	}
 }

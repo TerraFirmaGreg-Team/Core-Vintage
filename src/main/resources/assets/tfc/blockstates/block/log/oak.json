@@ -1,14 +1,14 @@
 {
   "variants": {
     "axis=y": {
-      "model": "dynamictreestfc:log/oak"
+      "model": "tfc:log/oak"
     },
     "axis=z": {
-      "model": "dynamictreestfc:log/oak",
+      "model": "tfc:log/oak",
       "x": 90
     },
     "axis=x": {
-      "model": "dynamictreestfc:log/oak",
+      "model": "tfc:log/oak",
       "x": 90,
       "y": 90
     }

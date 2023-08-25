@@ -1,7 +1,7 @@
 {
   "parent": "dynamictrees:item/branch",
   "textures": {
-    "bark": "tfc:blocks/wood/log/hickory",
-    "rings": "tfc:blocks/wood/top/hickory"
+    "bark": "tfc:blocks/wood/log/side/hickory",
+    "rings": "tfc:blocks/wood/log/top"
   }
 }

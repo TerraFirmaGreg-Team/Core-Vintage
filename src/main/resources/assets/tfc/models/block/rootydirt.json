@@ -4,6 +4,6 @@
     "particle": "tfc:blocks/stonetypes/dirt/andesite",
     "bottom": "tfc:blocks/stonetypes/dirt/andesite",
     "top": "tfc:blocks/stonetypes/dirt/andesite",
-    "side": "dynamictreestfc:blocks/rooty/andesite"
+    "side": "tfc:blocks/rooty/andesite"
   }
 }

@@ -1,5 +1,5 @@
 {
   "variants": {
-    "normal": { "model": "dynamictreestfc:branch/birch#dynamictree" }
+    "normal": { "model": "tfc:branch/birch#dynamictree" }
   }
 }

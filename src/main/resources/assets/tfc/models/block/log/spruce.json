@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_column",
   "textures": {
-    "end": "tfc:blocks/wood/top/spruce",
-    "side": "tfc:blocks/wood/log/spruce"
+    "end": "tfc:blocks/wood/log/top",
+    "side": "tfc:blocks/wood/log/side/spruce"
   }
 }

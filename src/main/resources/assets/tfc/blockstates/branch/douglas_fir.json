@@ -1,5 +1,5 @@
 {
   "variants": {
-    "normal": { "model": "dynamictreestfc:branch/douglas_fir#dynamictree" }
+    "normal": { "model": "tfc:branch/douglas_fir#dynamictree" }
   }
 }

@@ -1,14 +1,14 @@
 {
   "variants": {
     "axis=y": {
-      "model": "dynamictreestfc:log/sequoia"
+      "model": "tfc:log/sequoia"
     },
     "axis=z": {
-      "model": "dynamictreestfc:log/sequoia",
+      "model": "tfc:log/sequoia",
       "x": 90
     },
     "axis=x": {
-      "model": "dynamictreestfc:log/sequoia",
+      "model": "tfc:log/sequoia",
       "x": 90,
       "y": 90
     }

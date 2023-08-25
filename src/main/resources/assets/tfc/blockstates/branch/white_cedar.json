@@ -1,5 +1,5 @@
 {
   "variants": {
-    "normal": { "model": "dynamictreestfc:branch/white_cedar#dynamictree" }
+    "normal": { "model": "tfc:branch/white_cedar#dynamictree" }
   }
 }

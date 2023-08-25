@@ -1,5 +1,5 @@
 {
   "variants": {
-    "normal": { "model": "dynamictreestfc:branch/rosewood#dynamictree" }
+    "normal": { "model": "tfc:branch/rosewood#dynamictree" }
   }
 }

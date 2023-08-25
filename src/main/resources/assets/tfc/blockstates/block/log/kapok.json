@@ -1,14 +1,14 @@
 {
   "variants": {
     "axis=y": {
-      "model": "dynamictreestfc:log/kapok"
+      "model": "tfc:log/kapok"
     },
     "axis=z": {
-      "model": "dynamictreestfc:log/kapok",
+      "model": "tfc:log/kapok",
       "x": 90
     },
     "axis=x": {
-      "model": "dynamictreestfc:log/kapok",
+      "model": "tfc:log/kapok",
       "x": 90,
       "y": 90
     }

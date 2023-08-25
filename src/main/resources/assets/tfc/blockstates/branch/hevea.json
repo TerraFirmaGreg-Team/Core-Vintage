@@ -1,5 +1,5 @@
 {
   "variants": {
-    "normal": { "model": "dynamictreestfc:branch/hevea#dynamictree" }
+    "normal": { "model": "tfc:branch/hevea#dynamictree" }
   }
 }

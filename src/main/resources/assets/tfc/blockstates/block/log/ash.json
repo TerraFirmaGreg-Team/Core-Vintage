@@ -1,14 +1,14 @@
 {
   "variants": {
     "axis=y": {
-      "model": "dynamictreestfc:log/ash"
+      "model": "tfc:log/ash"
     },
     "axis=z": {
-      "model": "dynamictreestfc:log/ash",
+      "model": "tfc:log/ash",
       "x": 90
     },
     "axis=x": {
-      "model": "dynamictreestfc:log/ash",
+      "model": "tfc:log/ash",
       "x": 90,
       "y": 90
     }

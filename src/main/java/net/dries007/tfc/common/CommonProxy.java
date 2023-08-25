@@ -1,6 +1,7 @@
 package net.dries007.tfc.common;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import gregtech.api.unification.material.event.MaterialEvent;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -50,10 +51,7 @@ import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.common.objects.recipes.RecipeHandler;
 import net.dries007.tfc.common.objects.tileentities.*;
-import net.dries007.tfc.compat.dynamictrees.ModItems;
-import net.dries007.tfc.compat.dynamictrees.ModTrees;
-import net.dries007.tfc.compat.dynamictrees.TFCRootDecay;
-import net.dries007.tfc.compat.dynamictrees.TFCSeasonManager;
+import net.dries007.tfc.compat.dynamictrees.*;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
@@ -158,6 +156,11 @@ public class CommonProxy {
 	}
 
 	@SubscribeEvent
+	public static void biomeHandler(BiomeSuitabilityEvent event) {
+		event.setSuitability(1.0f); //doesn't change value, sets isHandled
+	}
+
+	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		IForgeRegistry<Block> r = event.getRegistry();
 
@@ -221,6 +224,9 @@ public class CommonProxy {
 		BLOCKS.forEach(r::register);
 		FLUID.forEach(r::register);
 
+		ModBlocks.register(event.getRegistry());
+		ModTrees.registerBlocks(event.getRegistry());
+
 		//=== TileEntity =============================================================================================//
 
 		// Если поместить регистрацию TE в конструктор класса блока,
@@ -255,8 +261,6 @@ public class CommonProxy {
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> r = event.getRegistry();
-		ModItems.register(event.getRegistry());
-		// ModTrees.registerItems(event.getRegistry());
 
 		//=== Molds ==================================================================================================//
 
@@ -346,6 +350,8 @@ public class CommonProxy {
 
 		ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
 		ITEM.forEach(r::register);
+		ModItems.register(event.getRegistry());
+		// ModTrees.registerItems(event.getRegistry());
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)

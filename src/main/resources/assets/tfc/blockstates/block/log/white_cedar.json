@@ -1,14 +1,14 @@
 {
   "variants": {
     "axis=y": {
-      "model": "dynamictreestfc:log/white_cedar"
+      "model": "tfc:log/white_cedar"
     },
     "axis=z": {
-      "model": "dynamictreestfc:log/white_cedar",
+      "model": "tfc:log/white_cedar",
       "x": 90
     },
     "axis=x": {
-      "model": "dynamictreestfc:log/white_cedar",
+      "model": "tfc:log/white_cedar",
       "x": 90,
       "y": 90
     }

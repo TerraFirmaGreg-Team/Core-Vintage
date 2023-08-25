@@ -1,5 +1,5 @@
 {
   "variants": {
-    "normal": { "model": "dynamictreestfc:branch/sycamore#dynamictree" }
+    "normal": { "model": "tfc:branch/sycamore#dynamictree" }
   }
 }

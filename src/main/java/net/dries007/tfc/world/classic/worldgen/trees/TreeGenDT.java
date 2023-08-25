@@ -7,7 +7,7 @@ import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.dries007.tfc.compat.dynamictrees.ModTrees;
-import net.dries007.tfc.compat.dynamictrees.trees.TreeFamilyTFC;
+import net.dries007.tfc.compat.dynamictrees.trees.TreeTFCSpecies;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -45,7 +45,7 @@ public class TreeGenDT implements ITreeGenerator {
 
 		var dTree = ModTrees.tfcSpecies.get(type.toString());
 		int lowestBranchHeight = dTree.getLowestBranchHeight();
-		int maxTreeHeight = (int) ((TreeFamilyTFC.TreeTFCSpecies) dTree).getSignalEnergy(); //signal energy access problem so need to cast
+		int maxTreeHeight = (int) ((TreeTFCSpecies) dTree).getSignalEnergy(); //signal energy access problem so need to cast
 
 		var bounds = new SafeChunkBounds(world, world.getChunk(pos).getPos());
 		for (int y = 0; y <= lowestBranchHeight; y++) {

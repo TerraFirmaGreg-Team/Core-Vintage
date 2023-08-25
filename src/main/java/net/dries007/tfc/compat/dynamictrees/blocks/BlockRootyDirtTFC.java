@@ -4,7 +4,6 @@ import com.ferreusveritas.dynamictrees.blocks.BlockRootyDirt;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -21,7 +20,13 @@ import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.DIRT;
 
 @ParametersAreNonnullByDefault
 public class BlockRootyDirtTFC extends BlockRootyDirt {
-	private static final EnumFacing[] NOT_UP = new EnumFacing[]{EnumFacing.DOWN, EnumFacing.EAST, EnumFacing.NORTH, EnumFacing.WEST, EnumFacing.SOUTH};
+	private static final EnumFacing[] NOT_UP = new EnumFacing[]{
+			EnumFacing.DOWN,
+			EnumFacing.EAST,
+			EnumFacing.NORTH,
+			EnumFacing.WEST,
+			EnumFacing.SOUTH
+	};
 
 	public BlockRootyDirtTFC() {
 		super(false);
@@ -81,7 +86,7 @@ public class BlockRootyDirtTFC extends BlockRootyDirt {
 	@Override
 	public IBlockState getDecayBlockState(IBlockAccess world, BlockPos pos) {
 		if (world instanceof World) {
-			ChunkDataTFC chunkData = ((World) world).getChunk(pos).getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
+			var chunkData = ((World) world).getChunk(pos).getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
 			if (chunkData != null) {
 				var soil = chunkData.getSoilHeight(pos);
 				return TFCBlocks.getSoilBlock(DIRT, soil).getDefaultState();

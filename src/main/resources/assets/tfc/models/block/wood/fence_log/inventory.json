@@ -3,10 +3,10 @@
   "parent": "block/block",
   "ambientocclusion": false,
   "textures": {
-    "top": "tfc:blocks/wood/log/side/top",
+    "top": "tfc:blocks/wood/log/top",
     "particle": "tfc:blocks/wood/planks/pattern",
     "planks": "tfc:blocks/wood/planks/pattern",
-    "log": "tfc:blocks/wood/log/side/side/acacia"
+    "log": "tfc:blocks/wood/log/side/acacia"
   },
   "elements": [
     {

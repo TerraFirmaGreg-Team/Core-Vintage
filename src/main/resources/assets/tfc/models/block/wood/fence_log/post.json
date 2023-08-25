@@ -1,8 +1,8 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "particle": "tfc:blocks/wood/log/side/top",
-    "top": "tfc:blocks/wood/log/side/top",
+    "particle": "tfc:blocks/wood/log/top",
+    "top": "tfc:blocks/wood/log/top",
     "log": "#log"
   },
   "elements": [

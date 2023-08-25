@@ -12,8 +12,8 @@ import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBranchBasic;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBranchThick;
-import net.dries007.tfc.compat.dynamictrees.FeatureGenMoundTFC;
 import net.dries007.tfc.compat.dynamictrees.ModBlocks;
+import net.dries007.tfc.world.classic.worldgen.WorldGenMound;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -76,7 +76,7 @@ public class TreeFamilyTFC extends TreeFamily {
 					addGenFeature(new FeatureGenVine().setQuantity(8).setMaxLength(32).setRayDistance(32));//Generate Vines
 					//intentional fall through to set thick parameters for kapok too
 				case "sequoia":
-					addGenFeature(new FeatureGenMoundTFC(2));//Place a 3x3 of dirt under thick trees
+					addGenFeature(new WorldGenMound(2));//Place a 3x3 of dirt under thick trees
 					setSoilLongevity(36);//Grows for a while so it can actually get tall
 					addGenFeature(new FeatureGenFlareBottom());//Flare the bottom
 

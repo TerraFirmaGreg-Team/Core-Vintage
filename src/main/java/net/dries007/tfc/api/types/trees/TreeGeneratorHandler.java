@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types.trees;
 
-import net.dries007.tfc.compat.dynamictrees.DTTFCGenerator;
+import net.dries007.tfc.world.classic.worldgen.trees.TreeGenDT;
 import net.dries007.tfc.world.classic.worldgen.trees.*;
 
 public class TreeGeneratorHandler {
@@ -18,7 +18,7 @@ public class TreeGeneratorHandler {
 		TreeGenerators.GEN_KAPOK_COMPOSITE = new TreeGenComposite().add(0.4f, TreeGenerators.GEN_TALL).add(0.6f, TreeGenerators.GEN_KAPOK);
 		TreeGenerators.GEN_BUSHES = new TreeGenBushes();
 		TreeGenerators.GEN_FRUIT = new TreeGenFruit();
-		TreeGenerators.GEN_DT = new DTTFCGenerator();
+		TreeGenerators.GEN_DT = new TreeGenDT();
 	}
 
 }

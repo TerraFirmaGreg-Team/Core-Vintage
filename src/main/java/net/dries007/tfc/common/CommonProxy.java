@@ -425,7 +425,7 @@ public class CommonProxy {
 	}
 
 	public void onPreInit(FMLPreInitializationEvent event) {
-		SeasonHelper.setSeasonManager(TFCSeasonManager.INSTANCE);
+		SeasonHelper.setSeasonManager(SeasonManager.INSTANCE);
 		TFCBlocks.preInit();
 		TFCItems.preInit();
 		TFGToolItems.preInit();

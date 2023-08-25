@@ -22,7 +22,8 @@ public class TFCRootDecay implements ICustomRootDecay {
 		if (chunkData != null) {
 			world.setBlockState(pos, TFCBlocks.getSoilBlock(DIRT, chunkData.getSoilHeight(pos)).getDefaultState(), 3);
 			return true;
-		} else if (world.getWorldType() == TerraFirmaCraft.WORLD_TYPE_TFC) { //failed to get chunkdata, but tfc worldtype still, apply a default rocktype
+		} else if (world.getWorldType() == TerraFirmaCraft.WORLD_TYPE_TFC) {
+			//не удалось получить данные фрагмента, но тип мира tfc все еще применяется, примените тип земли по умолчанию
 			world.setBlockState(pos, TFCBlocks.getSoilBlock(DIRT, LOAM).getDefaultState(), 3);
 			return true;
 		}

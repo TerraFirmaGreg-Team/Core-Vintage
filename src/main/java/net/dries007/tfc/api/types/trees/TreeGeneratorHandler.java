@@ -1,6 +1,5 @@
 package net.dries007.tfc.api.types.trees;
 
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenDT;
 import net.dries007.tfc.world.classic.worldgen.trees.*;
 
 public class TreeGeneratorHandler {

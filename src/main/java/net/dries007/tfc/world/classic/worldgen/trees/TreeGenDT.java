@@ -1,7 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
-import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 import net.dries007.tfc.api.types.trees.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
@@ -10,7 +9,6 @@ import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.dries007.tfc.compat.dynamictrees.ModTrees;
 import net.dries007.tfc.compat.dynamictrees.trees.TreeFamilyTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -28,8 +26,8 @@ public class TreeGenDT implements ITreeGenerator {
 
 	@Override
 	public void generateTree(TemplateManager templateManager, World world, BlockPos blockPos, WoodType type, Random random, boolean isWorldGen) {
-		Species dtSpecies = ModTrees.tfcSpecies.get(type.toString());
-		SafeChunkBounds bounds = new SafeChunkBounds(world, world.getChunk(blockPos).getPos());
+		var dtSpecies = ModTrees.tfcSpecies.get(type.toString());
+		var bounds = new SafeChunkBounds(world, world.getChunk(blockPos).getPos());
 		dtSpecies.generate(world, blockPos.down(), world.getBiome(blockPos), random, leavesRadius <= 0 ? dtSpecies.maxBranchRadius() / 3 : leavesRadius, bounds);
 		//dtSpecies.getJoCode("JP").setCareful(true).generate(world, dtSpecies, blockPos, world.getBiome(blockPos), EnumFacing.SOUTH, 8, SafeChunkBounds.ANY);
 	}
@@ -40,16 +38,16 @@ public class TreeGenDT implements ITreeGenerator {
 			return false;
 		}
 
-		IBlockState locState = world.getBlockState(pos);
+		var locState = world.getBlockState(pos);
 		if (locState.getMaterial().isLiquid() || (!locState.getMaterial().isReplaceable() && !(locState.getBlock() instanceof BlockWoodSapling))) {
 			return false;
 		}
 
-		Species dTree = ModTrees.tfcSpecies.get(type.toString());
+		var dTree = ModTrees.tfcSpecies.get(type.toString());
 		int lowestBranchHeight = dTree.getLowestBranchHeight();
 		int maxTreeHeight = (int) ((TreeFamilyTFC.TreeTFCSpecies) dTree).getSignalEnergy(); //signal energy access problem so need to cast
 
-		SafeChunkBounds bounds = new SafeChunkBounds(world, world.getChunk(pos).getPos());
+		var bounds = new SafeChunkBounds(world, world.getChunk(pos).getPos());
 		for (int y = 0; y <= lowestBranchHeight; y++) {
 			if (!isValidLocation(world, pos.up(y), 0, 0, bounds))
 				return false; // ensure proper column space for the trunk
@@ -81,12 +79,12 @@ public class TreeGenDT implements ITreeGenerator {
 	}
 
 	private boolean isDTBranch(IBlockState state) {
-		Block block = state.getBlock();
+		var block = state.getBlock();
 		return block instanceof BlockBranch;//|| block instanceof BlockDynamicLeaves;
 	}
 
 	private boolean isReplaceable(World world, BlockPos pos, int x, int y, int z) {
-		IBlockState state = world.getBlockState(pos.add(x, y, z));
+		var state = world.getBlockState(pos.add(x, y, z));
 		return state.getMaterial().isReplaceable() && !isDTBranch(state);
 	}
 }

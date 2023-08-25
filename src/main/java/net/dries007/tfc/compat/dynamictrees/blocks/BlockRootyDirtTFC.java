@@ -27,13 +27,19 @@ public class BlockRootyDirtTFC extends BlockRootyDirt {
 		super(false);
 	}
 
+	/**
+	 * Возвращает состояние блока-модели.
+	 *
+	 * @param access доступ к блокам
+	 * @param pos    позиция блока
+	 * @return состояние блока-модели
+	 */
 	@Override
-	public IBlockState getMimic(IBlockAccess access, BlockPos pos) // this IBlockAccess is actually a ChunkCache which has no World access (therefore no chunk data)
-	{
+	public IBlockState getMimic(IBlockAccess access, BlockPos pos) {
 		var mimicState = super.getMimic(access, pos);
 		if (mimicState.getBlock() == Blocks.DIRT) {
-			for (int i = 1; i < 4; i++) // so we will search manually
-			{
+			// Ищем вручную
+			for (int i = 1; i < 4; i++) {
 				for (EnumFacing d : NOT_UP) {
 					var state = access.getBlockState(pos.offset(d, i));
 					if (state.getBlock() instanceof ISoilBlock) {
@@ -42,23 +48,39 @@ public class BlockRootyDirtTFC extends BlockRootyDirt {
 					}
 				}
 			}
-			// this doesn't *really* matter because the decay BlockState has World access and will always be correct
-			// so in the 0.00001% of cases where the rooty block is somehow floating with nothing around, this will do.
+			// Если вокруг нет блоков почвы, возвращаем состояние блока почвы по умолчанию
 			return TFCBlocks.getSoilBlock(DIRT, LOAM).getDefaultState();
 		}
 		return mimicState;
 	}
 
+	/**
+	 * Получает список предметов, которые выпадают при разрушении блока.
+	 *
+	 * @param drops   список предметов
+	 * @param world   доступ к блокам
+	 * @param pos     позиция блока
+	 * @param state   состояние блока
+	 * @param fortune уровень фортуны
+	 */
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		// Очищаем список предметов
 		drops.clear();
+		// Добавляем предмет в список
 		drops.add(new ItemStack(getDecayBlockState(world, pos).getBlock()));
 	}
 
+	/**
+	 * Возвращает состояние блока распада.
+	 *
+	 * @param world доступ к блокам
+	 * @param pos   позиция блока
+	 * @return состояние блока распада
+	 */
 	@Override
 	public IBlockState getDecayBlockState(IBlockAccess world, BlockPos pos) {
-		if (world instanceof World) //lol
-		{
+		if (world instanceof World) {
 			ChunkDataTFC chunkData = ((World) world).getChunk(pos).getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
 			if (chunkData != null) {
 				var soil = chunkData.getSoilHeight(pos);

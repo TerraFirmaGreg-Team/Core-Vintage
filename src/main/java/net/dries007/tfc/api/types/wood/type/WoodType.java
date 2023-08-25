@@ -374,7 +374,7 @@ public class WoodType {
 			this.maxTemp = 10;
 			this.minRain = 0;
 			this.maxRain = 100;
-			this.generator = GEN_DT; // Заменить на ген DT по умолчанию, и удалить setGenerator(), так как для кустов вызывается setBushes()
+			this.generator = GEN_NORMAL; // Заменить на ген DT по умолчанию, и удалить setGenerator(), так как для кустов вызывается setBushes()
 			this.maxGrowthRadius = 1;
 			this.dominance = 0.001f * (maxTemp - minTemp) * (maxRain - minRain);
 			this.maxHeight = 6;
@@ -415,7 +415,7 @@ public class WoodType {
 
 		// Установить генератор деревьев
 		public Builder setGenerator(@Nonnull ITreeGenerator generator) {
-			this.generator = GEN_DT;
+			this.generator = generator;
 			return this;
 		}
 

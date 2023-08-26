@@ -18,75 +18,75 @@ import java.util.Random;
 
 
 public class TreeGenDT implements ITreeGenerator {
-	private int leavesRadius; //used to store useful radius between canGenerate and Generate
+    private int leavesRadius; //used to store useful radius between canGenerate and Generate
 
-	public TreeGenDT() {
-		leavesRadius = 0;
-	}
+    public TreeGenDT() {
+        leavesRadius = 0;
+    }
 
-	@Override
-	public void generateTree(TemplateManager templateManager, World world, BlockPos blockPos, WoodType type, Random random, boolean isWorldGen) {
-		var dtSpecies = ModTrees.tfcSpecies.get(type.toString());
-		var bounds = new SafeChunkBounds(world, world.getChunk(blockPos).getPos());
-		dtSpecies.generate(world, blockPos.down(), world.getBiome(blockPos), random, leavesRadius <= 0 ? dtSpecies.maxBranchRadius() / 3 : leavesRadius, bounds);
-		//dtSpecies.getJoCode("JP").setCareful(true).generate(world, dtSpecies, blockPos, world.getBiome(blockPos), EnumFacing.SOUTH, 8, SafeChunkBounds.ANY);
-	}
+    @Override
+    public void generateTree(TemplateManager templateManager, World world, BlockPos blockPos, WoodType type, Random random, boolean isWorldGen) {
+        var dtSpecies = ModTrees.tfcSpecies.get(type.toString());
+        var bounds = new SafeChunkBounds(world, world.getChunk(blockPos).getPos());
+        dtSpecies.generate(world, blockPos.down(), world.getBiome(blockPos), random, leavesRadius <= 0 ? dtSpecies.maxBranchRadius() / 3 : leavesRadius, bounds);
+        //dtSpecies.getJoCode("JP").setCareful(true).generate(world, dtSpecies, blockPos, world.getBiome(blockPos), EnumFacing.SOUTH, 8, SafeChunkBounds.ANY);
+    }
 
-	@Override
-	public boolean canGenerateTree(World world, BlockPos pos, WoodType type) {
-		if (!TFCBlocks.isGrowableSoil(world.getBlockState(pos.down()))) {
-			return false;
-		}
+    @Override
+    public boolean canGenerateTree(World world, BlockPos pos, WoodType type) {
+        if (!TFCBlocks.isGrowableSoil(world.getBlockState(pos.down()))) {
+            return false;
+        }
 
-		var locState = world.getBlockState(pos);
-		if (locState.getMaterial().isLiquid() || (!locState.getMaterial().isReplaceable() && !(locState.getBlock() instanceof BlockWoodSapling))) {
-			return false;
-		}
+        var locState = world.getBlockState(pos);
+        if (locState.getMaterial().isLiquid() || (!locState.getMaterial().isReplaceable() && !(locState.getBlock() instanceof BlockWoodSapling))) {
+            return false;
+        }
 
-		var dTree = ModTrees.tfcSpecies.get(type.toString());
-		int lowestBranchHeight = dTree.getLowestBranchHeight();
-		int maxTreeHeight = (int) ((TreeTFCSpecies) dTree).getSignalEnergy(); //signal energy access problem so need to cast
+        var dTree = ModTrees.tfcSpecies.get(type.toString());
+        int lowestBranchHeight = dTree.getLowestBranchHeight();
+        int maxTreeHeight = (int) ((TreeTFCSpecies) dTree).getSignalEnergy(); //signal energy access problem so need to cast
 
-		var bounds = new SafeChunkBounds(world, world.getChunk(pos).getPos());
-		for (int y = 0; y <= lowestBranchHeight; y++) {
-			if (!isValidLocation(world, pos.up(y), 0, 0, bounds))
-				return false; // ensure proper column space for the trunk
-		}
-		leavesRadius = (int) Math.ceil((1 - ChunkDataTFC.get(world, pos).getFloraDensity()) * 5) + 2; // what's a good proxy for a noise map? TFC gen data!
-		int radiusSquared = leavesRadius * leavesRadius;
-		int groundToCenter = (int) ((maxTreeHeight - lowestBranchHeight) / 2.0F) + lowestBranchHeight;
+        var bounds = new SafeChunkBounds(world, world.getChunk(pos).getPos());
+        for (int y = 0; y <= lowestBranchHeight; y++) {
+            if (!isValidLocation(world, pos.up(y), 0, 0, bounds))
+                return false; // ensure proper column space for the trunk
+        }
+        leavesRadius = (int) Math.ceil((1 - ChunkDataTFC.get(world, pos).getFloraDensity()) * 5) + 2; // what's a good proxy for a noise map? TFC gen data!
+        int radiusSquared = leavesRadius * leavesRadius;
+        int groundToCenter = (int) ((maxTreeHeight - lowestBranchHeight) / 2.0F) + lowestBranchHeight;
 
-		for (int x = -leavesRadius - 1; x <= leavesRadius + 1; ++x) // verifying there's space for the canopy
-		{
-			for (int z = -leavesRadius - 1; z <= leavesRadius + 1; ++z) {
-				for (int y = lowestBranchHeight - 1; y < maxTreeHeight; ++y) {
-					int yDistance = groundToCenter - y;
-					if (x * x + yDistance * yDistance + z * z <= radiusSquared) // only perform the check if the radius is within a sphere around the epicenter there
-					{
-						if (!isValidLocation(world, pos.up(y), x, z, bounds)) return false;
-					}
-				}
-			}
-		}
-		return true;
-	}
+        for (int x = -leavesRadius - 1; x <= leavesRadius + 1; ++x) // verifying there's space for the canopy
+        {
+            for (int z = -leavesRadius - 1; z <= leavesRadius + 1; ++z) {
+                for (int y = lowestBranchHeight - 1; y < maxTreeHeight; ++y) {
+                    int yDistance = groundToCenter - y;
+                    if (x * x + yDistance * yDistance + z * z <= radiusSquared) // only perform the check if the radius is within a sphere around the epicenter there
+                    {
+                        if (!isValidLocation(world, pos.up(y), x, z, bounds)) return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 
-	private boolean isValidLocation(World world, BlockPos pos, int x, int y, SafeChunkBounds bounds) {
-		boolean origin = x == 0 && y == 0;
-		return origin || !bounds.inBounds(pos.add(x, 0, y), false) || //either tree origin, or it's not generated,
-				isReplaceable(world, pos, x, 0, y) ||                    //or ground level block is replaceable,
-				((x > 1 || y > 1) && isReplaceable(world, pos, x, 1, y));//or block at y+1 is replaceable when >1 away from origin
-	}
+    private boolean isValidLocation(World world, BlockPos pos, int x, int y, SafeChunkBounds bounds) {
+        boolean origin = x == 0 && y == 0;
+        return origin || !bounds.inBounds(pos.add(x, 0, y), false) || //either tree origin, or it's not generated,
+                isReplaceable(world, pos, x, 0, y) ||                    //or ground level block is replaceable,
+                ((x > 1 || y > 1) && isReplaceable(world, pos, x, 1, y));//or block at y+1 is replaceable when >1 away from origin
+    }
 
-	private boolean isDTBranch(IBlockState state) {
-		var block = state.getBlock();
-		return block instanceof BlockBranch;//|| block instanceof BlockDynamicLeaves;
-	}
+    private boolean isDTBranch(IBlockState state) {
+        var block = state.getBlock();
+        return block instanceof BlockBranch;//|| block instanceof BlockDynamicLeaves;
+    }
 
-	private boolean isReplaceable(World world, BlockPos pos, int x, int y, int z) {
-		var state = world.getBlockState(pos.add(x, y, z));
-		return state.getMaterial().isReplaceable() && !isDTBranch(state);
-	}
+    private boolean isReplaceable(World world, BlockPos pos, int x, int y, int z) {
+        var state = world.getBlockState(pos.add(x, y, z));
+        return state.getMaterial().isReplaceable() && !isDTBranch(state);
+    }
 }
     /*
 

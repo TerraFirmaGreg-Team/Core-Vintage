@@ -11,145 +11,173 @@
       "3": {},
       "4": {}
     },
-    "type": {
+    "woodtype": {
       "acacia": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/acacia"
+          "log": "tfc:blocks/wood/log/side/acacia",
+          "leaves": "tfc:blocks/wood/leaves/acacia"
         }
       },
       "ash": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/ash"
+          "log": "tfc:blocks/wood/log/side/ash",
+          "leaves": "tfc:blocks/wood/leaves/ash"
         }
       },
       "aspen": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/aspen"
+          "log": "tfc:blocks/wood/log/side/aspen",
+          "leaves": "tfc:blocks/wood/leaves/aspen"
         }
       },
       "birch": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/birch"
+          "log": "tfc:blocks/wood/log/side/birch",
+          "leaves": "tfc:blocks/wood/leaves/birch"
         }
       },
       "blackwood": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/blackwood"
+          "log": "tfc:blocks/wood/log/side/blackwood",
+          "leaves": "tfc:blocks/wood/leaves/blackwood"
         }
       },
       "chestnut": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/chestnut"
+          "log": "tfc:blocks/wood/log/side/chestnut",
+          "leaves": "tfc:blocks/wood/leaves/chestnut"
         }
       },
       "douglas_fir": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/douglas_fir"
+          "log": "tfc:blocks/wood/log/side/douglas_fir",
+          "leaves": "tfc:blocks/wood/leaves/douglas_fir"
         }
       },
       "hickory": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/hickory"
+          "log": "tfc:blocks/wood/log/side/hickory",
+          "leaves": "tfc:blocks/wood/leaves/hickory"
         }
       },
       "maple": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/maple"
+          "log": "tfc:blocks/wood/log/side/maple",
+          "leaves": "tfc:blocks/wood/leaves/maple"
         }
       },
       "oak": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/oak"
+          "log": "tfc:blocks/wood/log/side/oak",
+          "leaves": "tfc:blocks/wood/leaves/oak"
         }
       },
       "palm": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/palm"
+          "log": "tfc:blocks/wood/log/side/palm",
+          "leaves": "tfc:blocks/wood/leaves/palm"
         }
       },
       "pine": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/pine"
+          "log": "tfc:blocks/wood/log/side/pine",
+          "leaves": "tfc:blocks/wood/leaves/pine"
         }
       },
       "rosewood": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/rosewood"
+          "log": "tfc:blocks/wood/log/side/rosewood",
+          "leaves": "tfc:blocks/wood/leaves/rosewood"
         }
       },
       "sequoia": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/sequoia"
+          "log": "tfc:blocks/wood/log/side/sequoia",
+          "leaves": "tfc:blocks/wood/leaves/sequoia"
         }
       },
       "spruce": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/spruce"
+          "log": "tfc:blocks/wood/log/side/spruce",
+          "leaves": "tfc:blocks/wood/leaves/spruce"
         }
       },
       "sycamore": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/sycamore"
+          "log": "tfc:blocks/wood/log/side/sycamore",
+          "leaves": "tfc:blocks/wood/leaves/sycamore"
         }
       },
       "white_cedar": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/white_cedar"
+          "log": "tfc:blocks/wood/log/side/white_cedar",
+          "leaves": "tfc:blocks/wood/leaves/white_cedar"
         }
       },
       "willow": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/willow"
+          "log": "tfc:blocks/wood/log/side/willow",
+          "leaves": "tfc:blocks/wood/leaves/willow"
         }
       },
       "kapok": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/kapok"
+          "log": "tfc:blocks/wood/log/side/kapok",
+          "leaves": "tfc:blocks/wood/leaves/kapok"
         }
       },
       "banana": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/banana"
+          "log": "tfc:blocks/wood/log/side/banana",
+          "leaves": "tfc:blocks/wood/leaves/banana"
         }
       },
       "cherry": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/cherry"
+          "log": "tfc:blocks/wood/log/side/cherry",
+          "leaves": "tfc:blocks/wood/leaves/cherry"
         }
       },
       "green_apple": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/green_apple"
+          "log": "tfc:blocks/wood/log/side/green_apple",
+          "leaves": "tfc:blocks/wood/leaves/green_apple"
         }
       },
       "lemon": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/lemon"
+          "log": "tfc:blocks/wood/log/side/lemon",
+          "leaves": "tfc:blocks/wood/leaves/lemon"
         }
       },
       "olive": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/olive"
+          "log": "tfc:blocks/wood/log/side/olive",
+          "leaves": "tfc:blocks/wood/leaves/olive"
         }
       },
       "orange": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/orange"
+          "log": "tfc:blocks/wood/log/side/orange",
+          "leaves": "tfc:blocks/wood/leaves/orange"
         }
       },
       "peach": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/peach"
+          "log": "tfc:blocks/wood/log/side/peach",
+          "leaves": "tfc:blocks/wood/leaves/peach"
         }
       },
       "plum": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/plum"
+          "log": "tfc:blocks/wood/log/side/plum",
+          "leaves": "tfc:blocks/wood/leaves/plum"
         }
       },
       "red_apple": {
         "textures": {
-          "cross": "tfc:blocks/wood/saplings/red_apple"
+          "log": "tfc:blocks/wood/log/side/red_apple",
+          "leaves": "tfc:blocks/wood/leaves/red_apple"
         }
       }
     }

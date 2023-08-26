@@ -178,13 +178,12 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder()
                         .customPath(getResourceLocation())
-                        .customVariant("type=" + getType())
+                        .customVariant("woodtype=" + getType())
                         .build());
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this), 0,
                 new ModelResourceLocation(getResourceLocation(),
-                        "stage=0," +
-                                "type=" + getType()));
+                        "stage=0,woodtype=" + getType()));
     }
 }

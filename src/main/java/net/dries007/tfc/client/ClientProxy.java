@@ -16,7 +16,6 @@ import net.dries007.tfc.api.types.metal.IMetalBlock;
 import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.IWoodItem;
-import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
@@ -30,7 +29,6 @@ import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.common.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
-import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;
 import net.dries007.tfc.common.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.common.objects.entity.animal.*;
@@ -57,10 +55,8 @@ import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.entity.RenderFallingBlock;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -98,6 +94,7 @@ import java.util.List;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.TALL_GRASS;
+import static net.dries007.tfc.api.types.wood.variant.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -251,7 +248,7 @@ public class ClientProxy extends CommonProxy {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
-        BlockColors blockColors = event.getBlockColors();
+        var blockColors = event.getBlockColors();
 
         // Grass Colors
         IBlockColor grassColor = GrassColorHandler::computeGrassColor;
@@ -289,14 +286,14 @@ public class ClientProxy extends CommonProxy {
         blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IWoodBlock) s.getBlock()).getType().getColor() : 0xFFFFFF,
                 TFCBlocks.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(block -> block.getBlockVariant() != WoodBlockVariants.LEAVES)
+                        .filter(block -> block.getBlockVariant() != LEAVES)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler(foliageColor,
                 TFCBlocks.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES)
+                        .filter(x -> x.getBlockVariant() == LEAVES)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
@@ -327,7 +324,7 @@ public class ClientProxy extends CommonProxy {
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("deprecation")
     public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
-        ItemColors itemColors = event.getItemColors();
+        var itemColors = event.getItemColors();
 
         //=== Soil ===================================================================================================//
 
@@ -352,18 +349,20 @@ public class ClientProxy extends CommonProxy {
 
         //=== Wood ===================================================================================================//
 
-        itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor() : 0xFFFFFF,
+        itemColors.registerItemColorHandler((s, i) -> {
+                    if (i == 0) {
+                        // цвет дерева
+                        return ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor();
+                    }
+                    if (i == 1) {
+                        // цвет листвы
+                        return event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i);
+                    }
+                    return 0xFFFFFF;
+                },
                 TFCBlocks.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getBlockVariant() != WoodBlockVariants.LEAVES && x.getBlockVariant() != WoodBlockVariants.SAPLING)
                         .map(s -> (Block) s)
-                        .toArray(Block[]::new));
-
-        itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
-                TFCBlocks.WOOD_BLOCKS.values()
-                        .stream()
-                        .filter(x -> x.getBlockVariant() == WoodBlockVariants.LEAVES || x.getBlockVariant() == WoodBlockVariants.FRUIT_LEAVES)
-                        .map(s -> (BlockWoodLeaves) s)
                         .toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),

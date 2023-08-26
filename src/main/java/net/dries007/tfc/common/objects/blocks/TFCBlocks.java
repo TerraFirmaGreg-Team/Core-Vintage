@@ -111,7 +111,7 @@ public class TFCBlocks {
 
     public static void preInit() {
 
-        //=== Crop ===================================================================================================//
+        //==== Crop ==================================================================================================//
 
         for (var variant : CropBlockVariant.getCropBlockVariants()) {
             for (var type : CropType.getCropTypes()) {
@@ -122,7 +122,7 @@ public class TFCBlocks {
             }
         }
 
-        //=== Rock ===================================================================================================//
+        //==== Rock ==================================================================================================//
 
         for (var variant : RockBlockVariant.getRockBlockVariants()) {
             for (var type : RockType.getRockTypes()) {
@@ -133,7 +133,7 @@ public class TFCBlocks {
             }
         }
 
-        //=== Soil ===================================================================================================//
+        //==== Soil ==================================================================================================//
 
         for (var variant : SoilBlockVariant.getSoilBlockVariants()) {
             for (var type : SoilType.getSoilTypes()) {
@@ -144,7 +144,7 @@ public class TFCBlocks {
             }
         }
 
-        //=== Wood ===================================================================================================//
+        //==== Wood ==================================================================================================//
 
         for (var variant : WoodBlockVariant.getWoodBlockVariants()) {
             for (var type : WoodType.getWoodTypes()) {
@@ -155,7 +155,7 @@ public class TFCBlocks {
             }
         }
 
-        //=== Plant ==================================================================================================//
+        //==== Plant =================================================================================================//
 
         for (var type : PlantType.getPlantTypes()) {
             var plantBlock = type.getPlantVariant().create(type);
@@ -164,14 +164,14 @@ public class TFCBlocks {
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", type.getPlantVariant(), type));
         }
 
-        //=== BlockBush ==============================================================================================//
+        //==== BlockBush =============================================================================================//
 
         for (var type : BushType.getBushTypes()) {
             if (BUSH_BLOCKS.put(type, new BlockBerryBush(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
         }
 
-        //=== Metal ==================================================================================================//
+        //==== Metal =================================================================================================//
 
         for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
             if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL)) {
@@ -184,7 +184,7 @@ public class TFCBlocks {
             }
         }
 
-        //=== Alabaster ==============================================================================================//
+        //==== Alabaster =============================================================================================//
 
         for (var variant : new RockBlockVariant[]{RAW, BRICK, SMOOTH}) {
             var alabasterBlock = new BlockAlabaster(variant);
@@ -199,8 +199,7 @@ public class TFCBlocks {
             }
         }
 
-
-        //=== Groundcover ============================================================================================//
+        //==== Groundcover ===========================================================================================//
 
         for (var type : GroundcoverType.values()) {
             var groundcoverBlock = new BlockGroundcover(type);
@@ -209,13 +208,13 @@ public class TFCBlocks {
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", type, groundcoverBlock));
         }
 
-        //=== Fluid ==================================================================================================//
+        //==== Fluid =================================================================================================//
 
         FLUID.add(new BlockFluidHotWater());
         FLUID.add(new BlockFluidWater(FluidRegistry.getFluid("fresh_water"), WATER, false));
         FLUID.add(new BlockFluidWater(FluidRegistry.getFluid("salt_water"), WATER, true));
 
-        //=== Other ==================================================================================================//
+        //==== Other =================================================================================================//
 
         ITEM_BLOCKS.add(new ItemBlockTFC(PEAT = new BlockPeat()));
         ITEM_BLOCKS.add(new ItemBlockTFC(PEAT_GRASS = new BlockPeatGrass()));

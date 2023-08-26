@@ -6,7 +6,7 @@ import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
 import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.items.rock.ItemRockSlab;
+import net.dries007.tfc.common.objects.items.rock.itemblock.ItemRockSlab;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;

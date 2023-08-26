@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.items.rock;
+package net.dries007.tfc.common.objects.items.rock.itemblock;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;

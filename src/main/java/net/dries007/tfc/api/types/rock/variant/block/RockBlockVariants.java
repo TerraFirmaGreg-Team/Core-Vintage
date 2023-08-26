@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.rock.variant;
+package net.dries007.tfc.api.types.rock.variant.block;
 
 public class RockBlockVariants {
     public static RockBlockVariant RAW;

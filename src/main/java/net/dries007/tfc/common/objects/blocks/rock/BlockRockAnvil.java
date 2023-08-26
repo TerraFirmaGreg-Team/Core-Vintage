@@ -2,11 +2,12 @@ package net.dries007.tfc.common.objects.blocks.rock;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
+import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
@@ -34,7 +35,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.RAW;
+import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.ROCK;
 
 @ParametersAreNonnullByDefault
 public class BlockRockAnvil extends BlockRock {
@@ -183,7 +185,7 @@ public class BlockRockAnvil extends BlockRock {
     @Override
     @Nonnull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCBlocks.getRockItem(getType());
+        return TFCItems.getRockItem(ROCK, getType());
     }
 
     @Override

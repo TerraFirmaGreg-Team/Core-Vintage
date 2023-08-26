@@ -8,7 +8,7 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.metal.IMetalBlock;
-import net.dries007.tfc.api.types.metal.variant.MetalBlockVariant;
+import net.dries007.tfc.api.types.metal.variant.block.MetalBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.TFCSounds;
@@ -52,7 +52,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.metal.variant.MetalBlockVariants.ANVIL;
+import static net.dries007.tfc.api.types.metal.variant.block.MetalBlockVariants.ANVIL;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_METAL;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.METAL_BLOCKS;
 import static net.dries007.tfc.util.Constants.RNG;

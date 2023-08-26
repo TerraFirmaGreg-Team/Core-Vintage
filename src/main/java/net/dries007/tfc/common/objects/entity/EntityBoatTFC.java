@@ -4,6 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.common.objects.items.TFCItems;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +20,8 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.BOAT;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -59,9 +62,9 @@ public class EntityBoatTFC extends EntityBoat {
 
     @Override
     public Item getItemBoat() {
-        WoodType woodType = getWood();
-        if (woodType != null) {
-            return TFCBlocks.getBoatItem(woodType);
+        var type = getWood();
+        if (type != null) {
+            return TFCItems.getWoodItem(BOAT, type);
         }
         return super.getItemBoat();
     }

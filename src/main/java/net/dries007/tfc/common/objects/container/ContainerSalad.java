@@ -7,10 +7,10 @@ import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.category.FoodCategory;
 import net.dries007.tfc.api.types.food.type.FoodTypes;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.items.food.ItemDynamicBowlFood;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -223,15 +223,15 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
     private Item getSaladItem(Nutrient nutrient) {
         switch (nutrient) {
             case GRAIN:
-                return TFCBlocks.getFoodItem(SALAD_GRAIN);
+                return TFCItems.getFoodItem(SALAD_GRAIN);
             case VEGETABLES:
-                return TFCBlocks.getFoodItem(SALAD_VEGETABLE);
+                return TFCItems.getFoodItem(SALAD_VEGETABLE);
             case FRUIT:
-                return TFCBlocks.getFoodItem(SALAD_FRUIT);
+                return TFCItems.getFoodItem(SALAD_FRUIT);
             case PROTEIN:
-                return TFCBlocks.getFoodItem(SALAD_MEAT);
+                return TFCItems.getFoodItem(SALAD_MEAT);
             default:
-                return TFCBlocks.getFoodItem(SALAD_DAIRY);
+                return TFCItems.getFoodItem(SALAD_DAIRY);
         }
     }
 }

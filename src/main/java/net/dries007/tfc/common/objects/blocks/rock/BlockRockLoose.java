@@ -1,8 +1,8 @@
 package net.dries007.tfc.common.objects.blocks.rock;
 
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
+import net.dries007.tfc.common.objects.items.TFCItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -31,6 +31,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.ROCK;
 
 @ParametersAreNonnullByDefault
 public class BlockRockLoose extends BlockRock {
@@ -69,7 +71,7 @@ public class BlockRockLoose extends BlockRock {
     @Override
     @SuppressWarnings("ConstantConditions")
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var itemStack = new ItemStack(TFCBlocks.ROCK_ITEMS.get(getType()));
+        var itemStack = new ItemStack(TFCItems.getRockItem(ROCK, getType()));
 
         if (playerIn.addItemStackToInventory(itemStack)) {
             worldIn.setBlockToAir(pos);
@@ -83,7 +85,7 @@ public class BlockRockLoose extends BlockRock {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(TFCBlocks.ROCK_ITEMS.get(getType())));
+        drops.add(new ItemStack(TFCItems.getRockItem(ROCK, getType())));
     }
 
     @Override
@@ -94,7 +96,7 @@ public class BlockRockLoose extends BlockRock {
     @Nonnull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCBlocks.ROCK_ITEMS.get(getType()));
+        return new ItemStack(TFCItems.getRockItem(ROCK, getType()));
     }
 
     @Nonnull

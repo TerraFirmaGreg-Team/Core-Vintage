@@ -2,8 +2,8 @@ package net.dries007.tfc.common.objects.blocks.rock;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.variant.RockBlockVariant;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
+import net.dries007.tfc.common.objects.items.TFCItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
@@ -28,6 +28,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
+
+import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.ROCK;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -69,7 +71,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCBlocks.getRockItem(getType());
+        return TFCItems.getRockItem(ROCK, getType());
     }
 
     @Override

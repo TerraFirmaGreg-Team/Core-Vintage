@@ -5,22 +5,42 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.rock.IRockItem;
 import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.item.RockItemVariant;
+import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariant;
+import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.common.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
-import net.dries007.tfc.common.objects.items.rock.ItemRock;
-import net.dries007.tfc.common.objects.items.rock.ItemRockBrick;
-import net.dries007.tfc.common.objects.items.wood.ItemWoodBoat;
-import net.dries007.tfc.common.objects.items.wood.ItemWoodLumber;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.minecraft.item.Item;
 
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import static net.dries007.tfc.common.objects.CreativeTabsTFC.WOOD;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 
 public class TFCItems {
+
+    //==== Item ======================================================================================================//
+
+    public static final Map<Pair<RockItemVariant, RockType>, IRockItem> ROCK_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<WoodItemVariant, WoodType>, IWoodItem> WOOD_ITEMS = new LinkedHashMap<>();
+
+    public static final Map<CropType, ItemCropSeeds> SEED_ITEMS = new ConcurrentHashMap<>();
+    public static final Map<FoodType, ItemFoodTFC> FOOD_ITEMS = new LinkedHashMap<>();
+    public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new ConcurrentHashMap<>();
+    public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new ConcurrentHashMap<>();
+
+    // Предметы
+    public static final List<Item> ITEM = new ArrayList<>();
 
     public static ItemMisc STRAW;
     public static Item HANDSTONE;
@@ -60,34 +80,36 @@ public class TFCItems {
             }
         }
 
-        //=== ItemRock ===============================================================================================//
+        //==== Rock ==================================================================================================//
 
-        for (var type : RockType.getRockTypes()) {
-            if (BRICK_ITEMS.put(type, new ItemRockBrick(type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
+        for (var variant : RockItemVariant.getRockItemVariants()) {
+            for (var type : RockType.getRockTypes()) {
+                var rockItem = variant.create(type);
 
-            if (ROCK_ITEMS.put(type, new ItemRock(type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
+                if (ROCK_ITEMS.put(new Pair<>(variant, type), rockItem) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
+            }
         }
 
-        //=== ItemWood ===============================================================================================//
+        //==== Wood ==================================================================================================//
 
-        for (var type : WoodType.getWoodTypes()) {
-            if (LUMBER_ITEMS.put(type, new ItemWoodLumber(type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
+        for (var variant : WoodItemVariant.getWoodItemVariants()) {
+            for (var type : WoodType.getWoodTypes()) {
+                var woodItem = variant.create(type);
 
-            if (BOAT_ITEMS.put(type, new ItemWoodBoat(type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
+                if (WOOD_ITEMS.put(new Pair<>(variant, type), woodItem) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
+            }
         }
 
-        //=== ItemSeed ===============================================================================================//
+        //==== ItemSeed ==============================================================================================//
 
         for (var type : CropType.getCropTypes()) {
             if (SEED_ITEMS.put(type, new ItemCropSeeds(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
         }
 
-        //=== ItemFood ===============================================================================================//
+        //==== ItemFood ==============================================================================================//
 
         for (var type : FoodType.getFoodType()) {
             if (FOOD_ITEMS.put(type, new ItemFoodTFC(type)) != null)
@@ -123,4 +145,34 @@ public class TFCItems {
         ITEM.add(UNREFINED_BLOOM = new ItemBloom(false));
         ITEM.add(REFINED_BLOOM = new ItemBloom(true));
     }
+
+
+    @Nonnull
+    public static Item getWoodItem(@Nonnull WoodItemVariant variant, @Nonnull WoodType type) {
+        var item = (Item) WOOD_ITEMS.get(new Pair<>(variant, type));
+        if (item != null) return item;
+        throw new RuntimeException(String.format("Item is null: %s", type));
+    }
+
+    @Nonnull
+    public static Item getRockItem(@Nonnull RockItemVariant variant, @Nonnull RockType type) {
+        var item = (Item) ROCK_ITEMS.get(new Pair<>(variant, type));
+        if (item != null) return item;
+        throw new RuntimeException(String.format("Item is null: %s", type));
+    }
+
+    @Nonnull
+    public static Item getSeedItem(@Nonnull CropType type) {
+        var item = (Item) SEED_ITEMS.get(type);
+        if (item != null) return item;
+        throw new RuntimeException(String.format("Item is null: %s", type));
+    }
+
+    @Nonnull
+    public static Item getFoodItem(@Nonnull FoodType type) {
+        var item = (Item) FOOD_ITEMS.get(type);
+        if (item != null) return item;
+        throw new RuntimeException(String.format("Item is null: %s", type));
+    }
+
 }

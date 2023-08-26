@@ -4,7 +4,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.common.objects.items.ItemTFC;
@@ -31,25 +31,33 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Objects;
 
-public class ItemWoodBoat extends ItemTFC implements IHasModel, IWoodItem {
+public class ItemWoodBoat extends ItemTFC implements IWoodItem {
 
-    private final WoodType woodType;
+    private final WoodType type;
+    private final WoodItemVariant variant;
 
-    public ItemWoodBoat(WoodType woodType) {
-        this.woodType = woodType;
+    public ItemWoodBoat(WoodItemVariant variant, WoodType type) {
+        this.type = type;
+        this.variant = variant;
 
-        setRegistryName(getRegistryLocation("boat"));
-        setTranslationKey(getTranslationName("boat"));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
 
-        OreDictionaryHelper.register(this, "boat");
-        OreDictionaryHelper.register(this, "boat", woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+    }
+
+    @Nonnull
+    @Override
+    public WoodItemVariant getItemVariant() {
+        return variant;
     }
 
     @Nonnull
     @Override
     public WoodType getType() {
-        return woodType;
+        return type;
     }
 
     @Nonnull
@@ -118,7 +126,7 @@ public class ItemWoodBoat extends ItemTFC implements IHasModel, IWoodItem {
                 boolean flag1 = block == Blocks.WATER || block == Blocks.FLOWING_WATER;
                 EntityBoatTFC entityboat = new EntityBoatTFC(worldIn, raytraceresult.hitVec.x, flag1 ? raytraceresult.hitVec.y - 0.12D : raytraceresult.hitVec.y, raytraceresult.hitVec.z);
                 entityboat.setBoatType(EntityBoat.Type.OAK); // not sure if required
-                entityboat.setWood(woodType);
+                entityboat.setWood(type);
                 entityboat.rotationYaw = playerIn.rotationYaw;
 
                 if (!worldIn.getCollisionBoxes(entityboat, entityboat.getEntityBoundingBox().grow(-0.1D)).isEmpty()) {
@@ -141,9 +149,7 @@ public class ItemWoodBoat extends ItemTFC implements IHasModel, IWoodItem {
 
     @Override
     public void onModelRegister() {
-        ModelLoader.setCustomModelResourceLocation(
-                this,
-                0,
-                new ModelResourceLocation(getResourceLocation("boat"), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(this, 0,
+                new ModelResourceLocation(getResourceLocation(), "inventory"));
     }
 }

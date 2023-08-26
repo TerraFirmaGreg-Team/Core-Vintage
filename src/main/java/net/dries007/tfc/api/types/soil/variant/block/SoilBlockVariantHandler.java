@@ -1,8 +1,8 @@
-package net.dries007.tfc.api.types.soil.variant;
+package net.dries007.tfc.api.types.soil.variant.block;
 
 import net.dries007.tfc.common.objects.blocks.soil.*;
 
-import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.*;
+import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.*;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_SOIL;
 

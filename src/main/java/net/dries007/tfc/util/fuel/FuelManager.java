@@ -1,7 +1,7 @@
 package net.dries007.tfc.util.fuel;
 
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
+import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;

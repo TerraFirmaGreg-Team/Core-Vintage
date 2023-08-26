@@ -3,7 +3,7 @@ package net.dries007.tfc.compat.gregtech.items.tools.behaviors;
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
-import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
+import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
 import net.minecraft.client.resources.I18n;

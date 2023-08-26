@@ -2,7 +2,7 @@ package net.dries007.tfc.common.objects.blocks.wood.fruit;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
+import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
@@ -18,8 +18,8 @@ import net.minecraft.world.World;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.wood.variant.WoodBlockVariants.FRUIT_LEAVES;
-import static net.dries007.tfc.api.types.wood.variant.WoodBlockVariants.FRUIT_TRUNK;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.FRUIT_LEAVES;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.FRUIT_TRUNK;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

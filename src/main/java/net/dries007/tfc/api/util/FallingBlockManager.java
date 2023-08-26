@@ -7,7 +7,7 @@ import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.CollapseData;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
-import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
+import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.objects.blocks.BlockCharcoalPile;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSupport;

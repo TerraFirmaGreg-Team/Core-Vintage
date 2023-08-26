@@ -2,8 +2,8 @@ package net.dries007.tfc.common.objects.blocks.wood.fruit;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
-import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
+import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
+import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;

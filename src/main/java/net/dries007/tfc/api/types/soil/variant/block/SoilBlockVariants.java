@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.soil.variant;
+package net.dries007.tfc.api.types.soil.variant.block;
 
 public class SoilBlockVariants {
 

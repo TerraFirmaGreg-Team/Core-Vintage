@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.plant.variant;
+package net.dries007.tfc.api.types.plant.variant.block;
 
 import net.dries007.tfc.api.types.plant.IPlantBlock;
 import net.dries007.tfc.api.types.plant.type.PlantType;

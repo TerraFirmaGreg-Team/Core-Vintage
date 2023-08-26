@@ -10,7 +10,7 @@ import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenConiferToppe
 import com.ferreusveritas.dynamictrees.trees.Species;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.soil.type.SoilType;
-import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
+import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.compat.dynamictrees.trees.TreeFamilyTFC;
@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.variant.WoodBlockVariants.SAPLING;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.SAPLING;
 
 
 public class ModTrees {

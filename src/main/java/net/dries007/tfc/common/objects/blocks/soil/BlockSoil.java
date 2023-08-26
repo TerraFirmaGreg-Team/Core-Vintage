@@ -2,7 +2,7 @@ package net.dries007.tfc.common.objects.blocks.soil;
 
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
-import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
+import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;

@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.wood.variant;
+package net.dries007.tfc.api.types.wood.variant.block;
 
 public class WoodBlockVariants {
 

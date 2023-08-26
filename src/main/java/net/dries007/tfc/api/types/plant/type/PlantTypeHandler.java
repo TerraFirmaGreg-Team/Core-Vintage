@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.types.plant.type;
 
 import static net.dries007.tfc.api.types.plant.type.PlantTypes.*;
-import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.*;
+import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.*;
 
 public class PlantTypeHandler {
 

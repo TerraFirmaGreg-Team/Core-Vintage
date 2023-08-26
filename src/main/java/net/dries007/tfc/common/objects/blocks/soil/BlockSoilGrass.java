@@ -9,7 +9,7 @@ package net.dries007.tfc.common.objects.blocks.soil;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
-import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
+import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
@@ -46,8 +46,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.SHORT_GRASS;
-import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.*;
+import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.SHORT_GRASS;
+import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.*;
 import static net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing.WILD;
 
 public class BlockSoilGrass extends BlockGrass implements ISoilBlock {

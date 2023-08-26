@@ -4,7 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.soil.type.SoilType;
-import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
+import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.Month;
@@ -48,7 +48,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.*;
+import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.*;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;

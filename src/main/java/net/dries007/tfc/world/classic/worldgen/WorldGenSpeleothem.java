@@ -17,8 +17,8 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.RAW;
-import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.SPELEOTHEM;
+import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.SPELEOTHEM;
 
 public class WorldGenSpeleothem implements IWorldGenerator {
 

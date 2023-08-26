@@ -20,7 +20,7 @@ import net.dries007.tfc.api.recipes.workbench.SaltingRecipe;
 import net.dries007.tfc.api.recipes.workbench.UnmoldRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
+import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalAnvil;
@@ -47,6 +47,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.ROCK;
 
 @ParametersAreNonnullByDefault
 @JEIPlugin
@@ -308,8 +310,8 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(leatherknapRecipes, KNAP_LEATHER_UID);
 
         // Stone Knapping Recipes
-        for (var rock : RockType.getRockTypes()) {
-            registry.addRecipeCatalyst(new ItemStack(TFCBlocks.getRockItem(rock)), KNAP_STONE_UID);
+        for (var type : RockType.getRockTypes()) {
+            registry.addRecipeCatalyst(new ItemStack(TFCItems.getRockItem(ROCK, type)), KNAP_STONE_UID);
         }
 
         var stoneknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()

@@ -4,7 +4,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -14,26 +14,34 @@ import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
 
-public class ItemWoodLumber extends ItemTFC implements IHasModel, IWoodItem {
+public class ItemWoodLumber extends ItemTFC implements IWoodItem {
 
-    private final WoodType woodType;
+    private final WoodType type;
+    private final WoodItemVariant variant;
 
-    public ItemWoodLumber(WoodType woodType) {
-        this.woodType = woodType;
+    public ItemWoodLumber(WoodItemVariant variant, WoodType type) {
+        this.type = type;
+        this.variant = variant;
 
-        setRegistryName(getRegistryLocation("lumber"));
-        setTranslationKey(getTranslationName("lumber"));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.WOOD);
 
-        OreDictionaryHelper.register(this, "lumber");
-        OreDictionaryHelper.register(this, "lumber", woodType.toString());
+        OreDictionaryHelper.register(this, variant.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
 
     @Nonnull
     @Override
+    public WoodItemVariant getItemVariant() {
+        return variant;
+    }
+
+    @Nonnull
+    @Override
     public WoodType getType() {
-        return woodType;
+        return type;
     }
 
     @Nonnull
@@ -50,9 +58,7 @@ public class ItemWoodLumber extends ItemTFC implements IHasModel, IWoodItem {
 
     @Override
     public void onModelRegister() {
-        ModelLoader.setCustomModelResourceLocation(
-                this,
-                0,
-                new ModelResourceLocation(getResourceLocation("lumber"), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(this, 0,
+                new ModelResourceLocation(getResourceLocation(), "inventory"));
     }
 }

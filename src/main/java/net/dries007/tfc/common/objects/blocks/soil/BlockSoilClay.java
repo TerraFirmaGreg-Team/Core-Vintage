@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.blocks.soil;
 
 import net.dries007.tfc.api.types.soil.type.SoilType;
-import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
+import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

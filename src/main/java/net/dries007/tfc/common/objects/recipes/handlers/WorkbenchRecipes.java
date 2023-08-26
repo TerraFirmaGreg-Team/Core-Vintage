@@ -5,10 +5,10 @@ import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.recipes.workbench.UnmoldRecipe;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.variant.RockBlockVariants;
+import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.WoodBlockVariants;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
@@ -20,6 +20,9 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
+import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.BOAT;
+import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.LUMBER;
 
 public class WorkbenchRecipes {
 
@@ -38,7 +41,7 @@ public class WorkbenchRecipes {
                 if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
                     if (material.hasFlag(TFGMaterialFlags.TOOL_MATERIAL_CAN_BE_UNMOLDED) || orePrefix == OrePrefix.ingot) {
                         registry.register(
-                                new UnmoldRecipe(new ItemStack(TFCBlocks.FIRED_MOLDS.get(orePrefix)), material, 1).setRegistryName(MOD_ID, "unmold_" + orePrefix.name + "_" + material.getName())
+                                new UnmoldRecipe(new ItemStack(TFCItems.FIRED_MOLDS.get(orePrefix)), material, 1).setRegistryName(MOD_ID, "unmold_" + orePrefix.name + "_" + material.getName())
                         );
                     }
 
@@ -48,52 +51,52 @@ public class WorkbenchRecipes {
     }
 
     private static void registerWoodRecipes() {
-        for (var woodType : WoodType.getWoodTypes()) {
+        for (var type : WoodType.getWoodTypes()) {
             // Barrel
             registerShaped(
-                    "wood/barrel/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.BARREL, woodType)),
+                    "wood/barrel/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(BARREL, type)),
                     "L L", "L L", "LLL",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type))
             );
 
             // Boat
             registerShaped(
-                    "wood/boat/" + woodType,
-                    new ItemStack(TFCBlocks.getBoatItem(woodType)),
+                    "wood/boat/" + type,
+                    new ItemStack(TFCItems.getWoodItem(BOAT, type)),
                     "   ", "L L", "LLL",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type))
             );
 
             // Bookshelf
             registerShaped(
-                    "wood/bookshelf/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.BOOKSHELF, woodType)),
+                    "wood/bookshelf/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(BOOKSHELF, type)),
                     "LLL", "BBB", "LLL",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType)),
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type)),
                     'B', new ItemStack(Items.BOOK)
             );
 
             // Button
             registerShapeless(
-                    "wood/button/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.BOOKSHELF, woodType)),
-                    new ItemStack(TFCBlocks.getLumberItem(woodType))
+                    "wood/button/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(BOOKSHELF, type)),
+                    new ItemStack(TFCItems.getWoodItem(LUMBER, type))
             );
 
             // Chest
             registerShaped(
-                    "wood/chest/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.CHEST, woodType)),
+                    "wood/chest/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(CHEST, type)),
                     "LLL", "L L", "LLL",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type))
             );
 
             // Trapped chest
             registerShapeless(
-                    "wood/trapped_chest/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.CHEST_TRAP, woodType)),
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.CHEST, woodType)),
+                    "wood/trapped_chest/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(CHEST_TRAP, type)),
+                    new ItemStack(TFCBlocks.getWoodBlock(CHEST, type)),
                     new ItemStack(Blocks.TRIPWIRE)
             );
 
@@ -101,119 +104,119 @@ public class WorkbenchRecipes {
 
             // Fence
             registerShaped(
-                    "wood/fence/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.FENCE, woodType), 8),
+                    "wood/fence/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(FENCE, type), 8),
                     "PLP", "PLP",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType)),
-                    'P', new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.PLANKS, woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type)),
+                    'P', new ItemStack(TFCBlocks.getWoodBlock(PLANKS, type))
             );
 
             // Fence Gate
             registerShaped(
-                    "wood/fence_gate/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.FENCE_GATE, woodType), 2),
+                    "wood/fence_gate/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(FENCE_GATE, type), 2),
                     "LPL", "LPL",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType)),
-                    'P', new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.PLANKS, woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type)),
+                    'P', new ItemStack(TFCBlocks.getWoodBlock(PLANKS, type))
             );
 
             // Fence Log
             /*
             registerShaped(
-                    "wood/fence_log_" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.LOG_FENCE, woodType), 8),
+                    "wood/fence_log_" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(WoodItemVariants.LOG_FENCE, type), 8),
                     "PLP", "PLP",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType)),
-                    'P', new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type)),
+                    'P', new ItemStack(TFCBlocks.getWoodBlock(WoodItemVariants.LOG, type))
             );*/
 
             // Loom
             registerShaped(
-                    "wood/loom/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.LOOM, woodType)),
+                    "wood/loom/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(LOOM, type)),
                     "LLL", "LSL", "L L",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType)),
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type)),
                     'S', new ItemStack(Items.STICK)
             );
 
             // Log -> Lumber
             registerShaped(
-                    "wood/lumber_log/" + woodType,
-                    new ItemStack(TFCBlocks.getLumberItem(woodType), 8),
+                    "wood/lumber_log/" + type,
+                    new ItemStack(TFCItems.getWoodItem(LUMBER, type), 8),
                     "s", "L",
-                    'L', new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType))
+                    'L', new ItemStack(TFCBlocks.getWoodBlock(LOG, type))
             );
 
             // Planks -> Lumber
             registerShaped(
-                    "wood/lumber_planks_" + woodType,
-                    new ItemStack(TFCBlocks.getLumberItem(woodType), 4),
+                    "wood/lumber_planks_" + type,
+                    new ItemStack(TFCItems.getWoodItem(LUMBER, type), 4),
                     "s", "P",
-                    'P', new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.PLANKS, woodType))
+                    'P', new ItemStack(TFCBlocks.getWoodBlock(PLANKS, type))
             );
 
             // Planks
             registerShaped(
-                    "wood/planks/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.PLANKS, woodType)),
+                    "wood/planks/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(PLANKS, type)),
                     "LL", "LL",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type))
             );
 
             // Pressure Plate
             registerShaped(
-                    "wood/pressure_plate/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.PRESSURE_PLATE, woodType)),
+                    "wood/pressure_plate/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(PRESSURE_PLATE, type)),
                     "LL",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type))
             );
 
             // Slab
             registerShaped(
-                    "wood/slabs/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.SLAB, woodType), 6),
+                    "wood/slabs/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(SLAB, type), 6),
                     "LLL",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type))
             );
 
             // Stairs
             registerShaped(
-                    "wood/stairs/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.STAIRS, woodType), 8),
+                    "wood/stairs/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(STAIRS, type), 8),
                     "L  ", "LL ", "LLL",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type))
             );
 
             // Support
             registerShaped(
-                    "wood/support/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.SUPPORT, woodType), 8),
+                    "wood/support/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(SUPPORT, type), 8),
                     "sL", " L",
-                    'L', new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType))
+                    'L', new ItemStack(TFCBlocks.getWoodBlock(LOG, type))
             );
 
             // Tool Rack
             registerShaped(
-                    "wood/tool_rack/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.TOOL_RACK, woodType)),
+                    "wood/tool_rack/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(TOOL_RACK, type)),
                     "LLL", "   ", "LLL",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type))
             );
 
             // Trapdoor
             registerShaped(
-                    "wood/trapdoor/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.TRAPDOOR, woodType), 3),
+                    "wood/trapdoor/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(TRAPDOOR, type), 3),
                     "LLL", "LLL",
-                    'L', new ItemStack(TFCBlocks.getLumberItem(woodType))
+                    'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type))
             );
 
             // Trapdoor
             registerShaped(
-                    "wood/workbench/" + woodType,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.WORKBENCH, woodType)),
+                    "wood/workbench/" + type,
+                    new ItemStack(TFCBlocks.getWoodBlock(WORKBENCH, type)),
                     "PP", "PP",
-                    'P', new ItemStack(TFCBlocks.getWoodBlock(WoodBlockVariants.PLANKS, woodType))
+                    'P', new ItemStack(TFCBlocks.getWoodBlock(PLANKS, type))
             );
         }
     }

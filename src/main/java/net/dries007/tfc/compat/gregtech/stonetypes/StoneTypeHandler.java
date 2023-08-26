@@ -3,7 +3,7 @@ package net.dries007.tfc.compat.gregtech.stonetypes;
 import gregtech.api.unification.ore.StoneType;
 import gregtech.integration.jei.basic.OreByProduct;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.variant.RockBlockVariants;
+import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.minecraft.block.SoundType;
 

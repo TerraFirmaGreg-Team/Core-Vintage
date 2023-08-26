@@ -3,7 +3,7 @@ package net.dries007.tfc.common.objects.blocks.crop;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.api.types.crop.type.CropType;
-import net.dries007.tfc.api.types.crop.variant.CropBlockVariant;
+import net.dries007.tfc.api.types.crop.variant.block.CropBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
@@ -47,7 +47,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 import static net.dries007.tfc.api.types.crop.category.CropCategories.PICKABLE;
-import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.DEAD;
+import static net.dries007.tfc.api.types.crop.variant.block.CropBlockVariants.DEAD;
 
 
 public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlantable, ICropBlock {

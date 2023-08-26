@@ -2,8 +2,8 @@ package net.dries007.tfc.common.objects.blocks.soil;
 
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
-import net.dries007.tfc.api.types.soil.variant.SoilBlockVariant;
-import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
+import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
+import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
@@ -38,7 +38,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.*;
+import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.*;
 import static net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing.WILD;
 
 @ParametersAreNonnullByDefault

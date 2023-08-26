@@ -6,8 +6,8 @@ import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.minecraft.item.EnumDyeColor;
 
-import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.RAW;
-import static net.dries007.tfc.api.types.rock.variant.RockBlockVariants.SMOOTH;
+import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.SMOOTH;
 
 
 public class ChiselRecipes {

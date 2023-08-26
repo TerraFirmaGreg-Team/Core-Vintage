@@ -13,7 +13,7 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.types.metal.IMetalBlock;
-import net.dries007.tfc.api.types.soil.variant.SoilBlockVariants;
+import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.util.IHasModel;
@@ -35,6 +35,7 @@ import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
+import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.config.ConfigTFC;
@@ -92,9 +93,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.SHORT_GRASS;
-import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.TALL_GRASS;
-import static net.dries007.tfc.api.types.wood.variant.WoodBlockVariants.LEAVES;
+import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.SHORT_GRASS;
+import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.TALL_GRASS;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -142,30 +143,22 @@ public class ClientProxy extends CommonProxy {
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
 
 
-        //=== ITEMS ==================================================================================================//
+        //==== ITEMS =================================================================================================//
 
-        for (var item : TFCBlocks.ROCK_ITEMS.values())
+        TFCItems.ROCK_ITEMS.values().forEach(IHasModel::onModelRegister);
+        TFCItems.WOOD_ITEMS.values().forEach(IHasModel::onModelRegister);
+
+
+        for (var item : TFCItems.SEED_ITEMS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (var item : TFCBlocks.BRICK_ITEMS.values())
+        for (var item : TFCItems.FOOD_ITEMS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (var item : TFCBlocks.LUMBER_ITEMS.values())
-            item.onModelRegister();
-
-        for (var item : TFCBlocks.BOAT_ITEMS.values())
-            item.onModelRegister();
-
-        for (var item : TFCBlocks.SEED_ITEMS.values())
+        for (var item : TFCItems.UNFIRED_MOLDS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (var item : TFCBlocks.FOOD_ITEMS.values())
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
-
-        for (var item : TFCBlocks.UNFIRED_MOLDS.values())
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
-
-        for (var item : TFCBlocks.ITEM)
+        for (var item : TFCItems.ITEM)
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
         //=== TESRs ==================================================================================================//
@@ -204,7 +197,7 @@ public class ClientProxy extends CommonProxy {
             var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
 
             if (extendedOrePrefix.getHasMold()) {
-                var clayMold = TFCBlocks.FIRED_MOLDS.get(orePrefix);
+                var clayMold = TFCItems.FIRED_MOLDS.get(orePrefix);
 
                 ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_empty"));
                 ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_filled"));
@@ -366,13 +359,7 @@ public class ClientProxy extends CommonProxy {
                         .toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
-                TFCBlocks.LUMBER_ITEMS.values()
-                        .stream()
-                        .map(s -> (Item) s)
-                        .toArray(Item[]::new));
-
-        itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
-                TFCBlocks.BOAT_ITEMS.values()
+                TFCItems.WOOD_ITEMS.values()
                         .stream()
                         .map(s -> (Item) s)
                         .toArray(Item[]::new));
@@ -400,7 +387,7 @@ public class ClientProxy extends CommonProxy {
         }, ForgeRegistries.ITEMS.getValuesCollection().stream().filter(x -> x instanceof ItemFood).toArray(Item[]::new));
 
         // Colorize clay molds
-        itemColors.registerItemColorHandler(moldItemColors, TFCBlocks.FIRED_MOLDS.values().toArray(new Item[0]));
+        itemColors.registerItemColorHandler(moldItemColors, TFCItems.FIRED_MOLDS.values().toArray(new Item[0]));
     }
 
     @SideOnly(Side.CLIENT)

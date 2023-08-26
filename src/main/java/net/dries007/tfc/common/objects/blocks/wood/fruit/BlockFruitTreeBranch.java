@@ -2,7 +2,7 @@ package net.dries007.tfc.common.objects.blocks.wood.fruit;
 
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.WoodBlockVariant;
+import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
@@ -38,8 +38,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.wood.variant.WoodBlockVariants.FRUIT_SAPLING;
-import static net.dries007.tfc.api.types.wood.variant.WoodBlockVariants.FRUIT_TRUNK;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.FRUIT_SAPLING;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.FRUIT_TRUNK;
 
 @ParametersAreNonnullByDefault
 public class BlockFruitTreeBranch extends Block implements IGrowingPlant, IWoodBlock {

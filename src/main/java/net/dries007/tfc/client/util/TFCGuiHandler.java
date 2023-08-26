@@ -146,9 +146,9 @@ public class TFCGuiHandler implements IGuiHandler {
                 var stackInOffHand = player.getHeldItemOffhand();
 
                 if (stackInMainHand.getItem() instanceof ItemRock itemRock) {
-                    return new GuiKnapping(container, player, KnappingType.STONE, itemRock.getRock().getTexture());
+                    return new GuiKnapping(container, player, KnappingType.STONE, itemRock.getType().getTexture());
                 } else if (stackInOffHand.getItem() instanceof ItemRock itemRock) {
-                    return new GuiKnapping(container, player, KnappingType.STONE, itemRock.getRock().getTexture());
+                    return new GuiKnapping(container, player, KnappingType.STONE, itemRock.getType().getTexture());
                 }
 
                 throw new RuntimeException("Bad itemstack on open knapping gui");

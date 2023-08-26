@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.metal.variant;
+package net.dries007.tfc.api.types.metal.variant.block;
 
 public class MetalBlockVariants {
 

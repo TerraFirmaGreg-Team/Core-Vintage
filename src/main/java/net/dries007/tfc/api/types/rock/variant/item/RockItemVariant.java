@@ -1,6 +1,6 @@
-package net.dries007.tfc.api.types.rock.variant;
+package net.dries007.tfc.api.types.rock.variant.item;
 
-import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.types.rock.IRockItem;
 import net.dries007.tfc.api.types.rock.type.RockType;
 
 import javax.annotation.Nonnull;
@@ -11,16 +11,15 @@ import java.util.function.BiFunction;
 /**
  * Класс, представляющий тип блока породы.
  */
-public class RockBlockVariant {
-    private static final Set<RockBlockVariant> ROCK_BLOCK_VARIANTS = new LinkedHashSet<>();
+public class RockItemVariant {
+    private static final Set<RockItemVariant> ROCK_ITEM_VARIANTS = new LinkedHashSet<>();
 
     @Nonnull
     private final String name;
 
-    private final float baseHardness;
 
     @Nonnull
-    private final BiFunction<RockBlockVariant, RockType, IRockBlock> factory;
+    private final BiFunction<RockItemVariant, RockType, IRockItem> factory;
 
     /**
      * Создает экземпляр класса RockType с указанными параметрами.
@@ -28,17 +27,16 @@ public class RockBlockVariant {
      * @param name    Название типа блока породы.
      * @param factory Функция-фабрика для создания блока породы по умолчанию.
      */
-    public RockBlockVariant(@Nonnull String name, float baseHardness, @Nonnull BiFunction<RockBlockVariant, RockType, IRockBlock> factory) {
+    public RockItemVariant(@Nonnull String name, @Nonnull BiFunction<RockItemVariant, RockType, IRockItem> factory) {
         this.name = name;
-        this.baseHardness = baseHardness;
         this.factory = factory;
 
         if (name.isEmpty()) {
-            throw new RuntimeException(String.format("RockType name must contain any character: [%s]", name));
+            throw new RuntimeException(String.format("RockItemVariant name must contain any character: [%s]", name));
         }
 
-        if (!ROCK_BLOCK_VARIANTS.add(this)) {
-            throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
+        if (!ROCK_ITEM_VARIANTS.add(this)) {
+            throw new RuntimeException(String.format("RockItemVariant: [%s] already exists!", name));
         }
     }
 
@@ -47,8 +45,8 @@ public class RockBlockVariant {
      *
      * @return Набор всех типов блоков породы.
      */
-    public static Set<RockBlockVariant> getRockBlockVariants() {
-        return ROCK_BLOCK_VARIANTS;
+    public static Set<RockItemVariant> getRockItemVariants() {
+        return ROCK_ITEM_VARIANTS;
     }
 
     /**
@@ -61,14 +59,6 @@ public class RockBlockVariant {
         return name;
     }
 
-    /**
-     * Возвращает базовую твердость блока породы.
-     *
-     * @return Базовая твердость блока породы.
-     */
-    public float getBaseHardness() {
-        return baseHardness;
-    }
 
     /**
      * Применяет функцию-фабрику к типу блока породы и возвращает созданный блок породы.
@@ -77,7 +67,7 @@ public class RockBlockVariant {
      * @return Созданный блок породы.
      */
     @Nonnull
-    public IRockBlock create(RockType rockType) {
+    public IRockItem create(RockType rockType) {
         return factory.apply(this, rockType);
     }
 }

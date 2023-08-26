@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.GROWING;
+import static net.dries007.tfc.api.types.crop.variant.block.CropBlockVariants.GROWING;
 
 /**
  * Генератор мира для дикорастущих культур.

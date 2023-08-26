@@ -2,6 +2,8 @@ package net.dries007.tfc.api.types.wood;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariant;
+import net.dries007.tfc.api.util.IHasModel;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -9,7 +11,15 @@ import javax.annotation.Nonnull;
 /**
  * Интерфейс IWoodItem представляет деревянный предмет.
  */
-public interface IWoodItem {
+public interface IWoodItem extends IHasModel {
+
+    /**
+     * Возвращает вариант блока породы.
+     *
+     * @return Вариант блока породы.
+     */
+    @Nonnull
+    WoodItemVariant getItemVariant();
 
     /**
      * Возвращает тип дерева предмета.
@@ -26,8 +36,8 @@ public interface IWoodItem {
      * @return расположение в реестре
      */
     @Nonnull
-    default ResourceLocation getRegistryLocation(String subType) {
-        return TerraFirmaCraft.identifier(String.format("wood/%s/%s", subType, getType()));
+    default ResourceLocation getRegistryLocation() {
+        return TerraFirmaCraft.identifier(String.format("wood/%s/%s", getItemVariant(), getType()));
     }
 
     /**
@@ -37,8 +47,8 @@ public interface IWoodItem {
      * @return расположение ресурса
      */
     @Nonnull
-    default ResourceLocation getResourceLocation(String subType) {
-        return TerraFirmaCraft.identifier(String.format("wood/%s", subType));
+    default ResourceLocation getResourceLocation() {
+        return TerraFirmaCraft.identifier(String.format("wood/%s", getItemVariant()));
     }
 
     /**
@@ -48,7 +58,7 @@ public interface IWoodItem {
      * @return локализованное имя
      */
     @Nonnull
-    default String getTranslationName(String subType) {
-        return getRegistryLocation(subType).toString().toLowerCase().replace(":", ".").replace("/", ".");
+    default String getTranslationName() {
+        return getRegistryLocation().toString().toLowerCase().replace(":", ".").replace("/", ".");
     }
 }

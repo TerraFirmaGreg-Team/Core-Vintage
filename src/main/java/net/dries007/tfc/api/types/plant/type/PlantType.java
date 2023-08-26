@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types.plant.type;
 
-import net.dries007.tfc.api.types.plant.variant.PlantBlockVariant;
+import net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.block.material.Material;
@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.*;
 
-import static net.dries007.tfc.api.types.plant.variant.PlantBlockVariant.*;
+import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.*;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 

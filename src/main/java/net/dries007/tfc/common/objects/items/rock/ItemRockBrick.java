@@ -4,30 +4,44 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.rock.IRockItem;
 import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.item.RockItemVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-
 @ParametersAreNonnullByDefault
 public class ItemRockBrick extends ItemTFC implements IRockItem {
-    private final RockType rockType;
+    private final RockItemVariant variant;
+    private final RockType type;
 
-    public ItemRockBrick(RockType rockType) {
-        this.rockType = rockType;
+    public ItemRockBrick(RockItemVariant variant, RockType type) {
+        this.variant = variant;
+        this.type = type;
 
-        var blockRegistryName = String.format("brick/%s", rockType);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.ROCK);
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
 
-        OreDictionaryHelper.register(this, "brick");
-        OreDictionaryHelper.register(this, "brick", rockType.getCategory().toString());
+        OreDictionaryHelper.register(this, variant.toString());
+        OreDictionaryHelper.register(this, variant.toString(), type.getCategory().toString());
+    }
+
+    @Nonnull
+    @Override
+    public RockItemVariant getItemVariant() {
+        return variant;
+    }
+
+    @Nonnull
+    @Override
+    public RockType getType() {
+        return type;
     }
 
     @Nonnull
@@ -42,9 +56,9 @@ public class ItemRockBrick extends ItemTFC implements IRockItem {
         return Weight.LIGHT; // Stacksize = 32
     }
 
-    @Nonnull
     @Override
-    public RockType getRock() {
-        return rockType;
+    public void onModelRegister() {
+        ModelLoader.setCustomModelResourceLocation(this, 0,
+                new ModelResourceLocation(getResourceLocation(), "rocktype=" + getType()));
     }
 }

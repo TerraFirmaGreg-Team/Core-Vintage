@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.soil.variant;
+package net.dries007.tfc.api.types.soil.variant.block;
 
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
@@ -10,7 +10,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.api.types.soil.variant.SoilBlockVariants.*;
+import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.*;
 
 /**
  * Класс, представляющий вариант блока почвы.

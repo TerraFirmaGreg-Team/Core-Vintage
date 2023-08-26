@@ -7,7 +7,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
@@ -48,7 +47,7 @@ public class KnappingRecipes {
             if (extendedOrePrefix.getClayKnappingPattern() != null) {
                 var amount = orePrefix == OrePrefix.ingot ? 2 : 1;
 
-                registry.register(new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(TFCBlocks.UNFIRED_MOLDS.get(orePrefix), amount), extendedOrePrefix.getClayKnappingPattern()).setRegistryName(orePrefix.name.toLowerCase() + "_mold"));
+                registry.register(new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(TFCItems.UNFIRED_MOLDS.get(orePrefix), amount), extendedOrePrefix.getClayKnappingPattern()).setRegistryName(orePrefix.name.toLowerCase() + "_mold"));
             }
         }
 

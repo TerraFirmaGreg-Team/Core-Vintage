@@ -28,7 +28,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static net.dries007.tfc.api.types.crop.variant.CropBlockVariants.GROWING;
+import static net.dries007.tfc.api.types.crop.variant.block.CropBlockVariants.GROWING;
 
 public class ItemCropSeeds extends Item implements IPlantable, ICropItem {
     private final CropType type;

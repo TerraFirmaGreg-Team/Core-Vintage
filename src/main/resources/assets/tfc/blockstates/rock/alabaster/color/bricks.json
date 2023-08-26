@@ -1,0 +1,95 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "color": {
+      "black": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/black"
+        }
+      },
+      "blue": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/blue"
+        }
+      },
+      "brown": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/brown"
+        }
+      },
+      "cyan": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/cyan"
+        }
+      },
+      "gray": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/gray"
+        }
+      },
+      "green": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/green"
+        }
+      },
+      "light_blue": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/light_blue"
+        }
+      },
+      "lime": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/lime"
+        }
+      },
+      "magenta": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/magenta"
+        }
+      },
+      "orange": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/orange"
+        }
+      },
+      "pink": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/pink"
+        }
+      },
+      "plain": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/plain"
+        }
+      },
+      "purple": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/purple"
+        }
+      },
+      "red": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/red"
+        }
+      },
+      "silver": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/silver"
+        }
+      },
+      "white": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/white"
+        }
+      },
+      "yellow": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/bricks/yellow"
+        }
+      }
+    }
+  }
+}

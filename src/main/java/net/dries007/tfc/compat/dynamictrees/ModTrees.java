@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.SAPLING;
 
 
 public class ModTrees {
@@ -60,15 +59,15 @@ public class ModTrees {
         }
 
         //Set up a map of species and their sapling types
-        Map<String, Block> saplingMap = new HashMap<>();
-        for (var type : WoodType.getWoodTypes()) {
-            saplingMap.put(type.toString(), TFCBlocks.getWoodBlock(SAPLING, type));
-        }
-
-
-        for (Map.Entry<String, Species> entry : tfcSpecies.entrySet()) {
-            TreeRegistry.registerSaplingReplacer(saplingMap.get(entry.getKey()).getDefaultState(), entry.getValue());
-        }
+//        Map<String, Block> saplingMap = new HashMap<>();
+//        for (var type : WoodType.getWoodTypes()) {
+//            saplingMap.put(type.toString(), TFCBlocks.getWoodBlock(SAPLING, type));
+//        }
+//
+//
+//        for (Map.Entry<String, Species> entry : tfcSpecies.entrySet()) {
+//            TreeRegistry.registerSaplingReplacer(saplingMap.get(entry.getKey()).getDefaultState(), entry.getValue());
+//        }
 
         tfcTrees.forEach(t -> {
             String treeName = t.getName().getPath();

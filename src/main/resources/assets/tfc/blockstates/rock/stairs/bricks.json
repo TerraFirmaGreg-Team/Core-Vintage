@@ -1,0 +1,189 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "stairs",
+    "uvlock": true
+  },
+  "variants": {
+    "facing": {
+      "east": {},
+      "west": {
+        "y": 180,
+        "uvlock": true
+      },
+      "south": {
+        "y": 90,
+        "uvlock": true
+      },
+      "north": {
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    "half": {
+      "bottom": {},
+      "top": {
+        "x": 180
+      }
+    },
+    "shape": {
+      "straight": {
+        "model": "stairs"
+      },
+      "inner_left": {
+        "model": "inner_stairs"
+      },
+      "inner_right": {
+        "model": "inner_stairs"
+      },
+      "outer_left": {
+        "model": "outer_stairs"
+      },
+      "outer_right": {
+        "model": "outer_stairs"
+      }
+    },
+    "rocktype": {
+      "granite": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/granite",
+          "top": "tfc:blocks/rock/bricks/granite",
+          "side": "tfc:blocks/rock/bricks/granite"
+        }
+      },
+      "diorite": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/diorite",
+          "top": "tfc:blocks/rock/bricks/diorite",
+          "side": "tfc:blocks/rock/bricks/diorite"
+        }
+      },
+      "gabbro": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/gabbro",
+          "top": "tfc:blocks/rock/bricks/gabbro",
+          "side": "tfc:blocks/rock/bricks/gabbro"
+        }
+      },
+      "shale": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/shale",
+          "top": "tfc:blocks/rock/bricks/shale",
+          "side": "tfc:blocks/rock/bricks/shale"
+        }
+      },
+      "claystone": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/claystone",
+          "top": "tfc:blocks/rock/bricks/claystone",
+          "side": "tfc:blocks/rock/bricks/claystone"
+        }
+      },
+      "limestone": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/limestone",
+          "top": "tfc:blocks/rock/bricks/limestone",
+          "side": "tfc:blocks/rock/bricks/limestone"
+        }
+      },
+      "conglomerate": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/conglomerate",
+          "top": "tfc:blocks/rock/bricks/conglomerate",
+          "side": "tfc:blocks/rock/bricks/conglomerate"
+        }
+      },
+      "dolomite": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/dolomite",
+          "top": "tfc:blocks/rock/bricks/dolomite",
+          "side": "tfc:blocks/rock/bricks/dolomite"
+        }
+      },
+      "chert": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/chert",
+          "top": "tfc:blocks/rock/bricks/chert",
+          "side": "tfc:blocks/rock/bricks/chert"
+        }
+      },
+      "chalk": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/chalk",
+          "top": "tfc:blocks/rock/bricks/chalk",
+          "side": "tfc:blocks/rock/bricks/chalk"
+        }
+      },
+      "rhyolite": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/rhyolite",
+          "top": "tfc:blocks/rock/bricks/rhyolite",
+          "side": "tfc:blocks/rock/bricks/rhyolite"
+        }
+      },
+      "basalt": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/basalt",
+          "top": "tfc:blocks/rock/bricks/basalt",
+          "side": "tfc:blocks/rock/bricks/basalt"
+        }
+      },
+      "andesite": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/andesite",
+          "top": "tfc:blocks/rock/bricks/andesite",
+          "side": "tfc:blocks/rock/bricks/andesite"
+        }
+      },
+      "dacite": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/dacite",
+          "top": "tfc:blocks/rock/bricks/dacite",
+          "side": "tfc:blocks/rock/bricks/dacite"
+        }
+      },
+      "quartzite": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/quartzite",
+          "top": "tfc:blocks/rock/bricks/quartzite",
+          "side": "tfc:blocks/rock/bricks/quartzite"
+        }
+      },
+      "slate": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/slate",
+          "top": "tfc:blocks/rock/bricks/slate",
+          "side": "tfc:blocks/rock/bricks/slate"
+        }
+      },
+      "phyllite": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/phyllite",
+          "top": "tfc:blocks/rock/bricks/phyllite",
+          "side": "tfc:blocks/rock/bricks/phyllite"
+        }
+      },
+      "schist": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/schist",
+          "top": "tfc:blocks/rock/bricks/schist",
+          "side": "tfc:blocks/rock/bricks/schist"
+        }
+      },
+      "gneiss": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/gneiss",
+          "top": "tfc:blocks/rock/bricks/gneiss",
+          "side": "tfc:blocks/rock/bricks/gneiss"
+        }
+      },
+      "marble": {
+        "textures": {
+          "bottom": "tfc:blocks/rock/bricks/marble",
+          "top": "tfc:blocks/rock/bricks/marble",
+          "side": "tfc:blocks/rock/bricks/marble"
+        }
+      }
+    }
+  }
+}

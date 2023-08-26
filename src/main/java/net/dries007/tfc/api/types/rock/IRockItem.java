@@ -59,7 +59,7 @@ public interface IRockItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.identifier(String.format("rock/%s", getItemVariant()));
+        return TerraFirmaCraft.identifier(String.format("rock/%s/%s", getItemVariant(), getType()));
     }
 
     /**

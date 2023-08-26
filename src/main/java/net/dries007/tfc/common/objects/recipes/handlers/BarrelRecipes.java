@@ -139,7 +139,7 @@ public class BarrelRecipes {
                 // Concrete
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("powderConcrete"), null, new ItemStack(TFCBlocks.AGGREGATE), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_undo"),
                 // Alabaster
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterBricks"), null, new ItemStack(TFCBlocks.getAlabasterBlock("plain", BRICK)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_undo"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterBricks"), null, new ItemStack(TFCBlocks.getAlabasterBlock("plain", BRICKS)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_undo"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterRaw"), null, new ItemStack(TFCBlocks.getAlabasterBlock("plain", RAW)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_undo"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterPolished"), null, new ItemStack(TFCBlocks.getAlabasterBlock("plain", SMOOTH)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_polished_undo")
         );

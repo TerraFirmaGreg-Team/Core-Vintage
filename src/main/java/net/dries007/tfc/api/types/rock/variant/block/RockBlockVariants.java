@@ -8,10 +8,10 @@ public class RockBlockVariants {
 
     public static RockBlockVariant SMOOTH;
 
-    public static RockBlockVariant BRICK;
-    public static RockBlockVariant BRICK_MOSSY;
-    public static RockBlockVariant BRICK_CRACKED;
-    public static RockBlockVariant BRICK_CHISELED;
+    public static RockBlockVariant BRICKS;
+    public static RockBlockVariant BRICKS_MOSSY;
+    public static RockBlockVariant BRICKS_CRACKED;
+    public static RockBlockVariant BRICKS_CHISELED;
 
     public static RockBlockVariant GRAVEL;
     public static RockBlockVariant SAND;
@@ -36,7 +36,7 @@ public class RockBlockVariants {
     public static RockBlockVariant WALL_SMOOTH;
     public static RockBlockVariant WALL_BRICK;
 
-    public static RockBlockVariant LOOSE;
+    public static RockBlockVariant LOOSE_ROCK;
     public static RockBlockVariant SPELEOTHEM;
     public static RockBlockVariant BUTTON;
     public static RockBlockVariant PRESSURE_PLATE;

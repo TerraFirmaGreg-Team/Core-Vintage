@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.ROCK;
+import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.LOOSE;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -71,7 +71,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return TFCItems.getRockItem(ROCK, getType());
+        return TFCItems.getRockItem(LOOSE, getType());
     }
 
     @Override

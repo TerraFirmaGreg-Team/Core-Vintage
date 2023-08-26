@@ -248,7 +248,7 @@ public class WorkbenchRecipes {
                     "rock/stairs_brick/" + rockType,
                     new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.STAIRS_BRICK, rockType)),
                     "B  ", "BB ", "BBB",
-                    'B', new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.BRICK, rockType))
+                    'B', new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.BRICKS, rockType))
             );
 
             registerShaped(
@@ -269,7 +269,7 @@ public class WorkbenchRecipes {
                     "rock/slabs_brick/" + rockType,
                     new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.SLAB_BRICK, rockType)),
                     "BBB",
-                    'B', new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.BRICK, rockType))
+                    'B', new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.BRICKS, rockType))
             );
         }
     }

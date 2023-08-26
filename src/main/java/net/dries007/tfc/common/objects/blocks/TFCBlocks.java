@@ -186,7 +186,7 @@ public class TFCBlocks {
 
         //==== Alabaster =============================================================================================//
 
-        for (var variant : new RockBlockVariant[]{RAW, BRICK, SMOOTH}) {
+        for (var variant : new RockBlockVariant[]{RAW, BRICKS, SMOOTH}) {
             var alabasterBlock = new BlockAlabaster(variant);
 
             ALABASTER_BLOCKS.put(new Pair<>("plain", variant), alabasterBlock);

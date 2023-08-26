@@ -48,7 +48,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.ROCK;
+import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.LOOSE;
 
 @ParametersAreNonnullByDefault
 @JEIPlugin
@@ -311,7 +311,7 @@ public final class JEIIntegration implements IModPlugin {
 
         // Stone Knapping Recipes
         for (var type : RockType.getRockTypes()) {
-            registry.addRecipeCatalyst(new ItemStack(TFCItems.getRockItem(ROCK, type)), KNAP_STONE_UID);
+            registry.addRecipeCatalyst(new ItemStack(TFCItems.getRockItem(LOOSE, type)), KNAP_STONE_UID);
         }
 
         var stoneknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()

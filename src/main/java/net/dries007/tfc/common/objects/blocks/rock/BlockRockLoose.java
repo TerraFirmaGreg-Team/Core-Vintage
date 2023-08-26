@@ -32,7 +32,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.ROCK;
+import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.LOOSE;
 
 @ParametersAreNonnullByDefault
 public class BlockRockLoose extends BlockRock {
@@ -71,7 +71,7 @@ public class BlockRockLoose extends BlockRock {
     @Override
     @SuppressWarnings("ConstantConditions")
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var itemStack = new ItemStack(TFCItems.getRockItem(ROCK, getType()));
+        var itemStack = new ItemStack(TFCItems.getRockItem(LOOSE, getType()));
 
         if (playerIn.addItemStackToInventory(itemStack)) {
             worldIn.setBlockToAir(pos);
@@ -85,7 +85,7 @@ public class BlockRockLoose extends BlockRock {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(TFCItems.getRockItem(ROCK, getType())));
+        drops.add(new ItemStack(TFCItems.getRockItem(LOOSE, getType())));
     }
 
     @Override
@@ -96,7 +96,7 @@ public class BlockRockLoose extends BlockRock {
     @Nonnull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(TFCItems.getRockItem(ROCK, getType()));
+        return new ItemStack(TFCItems.getRockItem(LOOSE, getType()));
     }
 
     @Nonnull

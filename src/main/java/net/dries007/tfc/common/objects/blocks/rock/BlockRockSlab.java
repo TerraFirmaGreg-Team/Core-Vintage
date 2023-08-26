@@ -65,7 +65,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
         } else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_SMOOTH) {
             return TFCBlocks.getRockBlock(RockBlockVariants.SMOOTH, rockType);
         } else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_BRICK) {
-            return TFCBlocks.getRockBlock(RockBlockVariants.BRICK, rockType);
+            return TFCBlocks.getRockBlock(RockBlockVariants.BRICKS, rockType);
         }
 
         throw new RuntimeException(String.format("Full block from slab not founded: %s, %s", rockBlockVariant, rockType));

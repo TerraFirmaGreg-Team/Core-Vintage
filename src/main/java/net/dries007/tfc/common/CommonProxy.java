@@ -33,6 +33,7 @@ import net.dries007.tfc.api.types.plant.type.PlantTypeHandler;
 import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
 import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
 import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariantHandler;
+import net.dries007.tfc.api.types.rock.variant.item.RockItemVariantHandler;
 import net.dries007.tfc.api.types.soil.type.SoilTypeHandler;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariantHandler;
 import net.dries007.tfc.api.types.trees.TreeGeneratorHandler;
@@ -117,6 +118,7 @@ public class CommonProxy {
         RockCategoryHandler.init();
         RockTypeHandler.init();
         RockBlockVariantHandler.init();
+        RockItemVariantHandler.init();
 
         SoilTypeHandler.init();
         SoilBlockVariantHandler.init();

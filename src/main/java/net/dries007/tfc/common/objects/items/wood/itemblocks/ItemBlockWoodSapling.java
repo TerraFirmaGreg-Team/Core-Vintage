@@ -18,11 +18,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemBlockSaplingTFC extends ItemBlockTFC {
+public class ItemBlockWoodSapling extends ItemBlockTFC {
 
     private final BlockWoodSapling blockWoodSapling;
 
-    public ItemBlockSaplingTFC(BlockWoodSapling blockWoodSapling) {
+    public ItemBlockWoodSapling(BlockWoodSapling blockWoodSapling) {
         super(blockWoodSapling);
 
         this.blockWoodSapling = blockWoodSapling;

@@ -49,8 +49,8 @@ import java.util.List;
  * Only has NBT data if the barrel is sealed and has contents
  */
 @ParametersAreNonnullByDefault
-public class ItemBlockBarrel extends ItemBlockTFC {
-    public ItemBlockBarrel(Block block) {
+public class ItemBlockWoodBarrel extends ItemBlockTFC {
+    public ItemBlockWoodBarrel(Block block) {
         super(block);
         OreDictionaryHelper.register(this, "barrel");
     }

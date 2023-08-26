@@ -6,7 +6,7 @@ import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.items.wood.itemblocks.ItemBlockSaplingTFC;
+import net.dries007.tfc.common.objects.items.wood.itemblocks.ItemBlockWoodSapling;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -76,7 +76,7 @@ public class BlockWoodSapling extends BlockBush implements IGrowable, IGrowingPl
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockSaplingTFC(this);
+        return new ItemBlockWoodSapling(this);
     }
 
 

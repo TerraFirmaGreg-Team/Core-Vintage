@@ -10,6 +10,7 @@ import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -34,8 +35,6 @@ public final class CapabilityMetalItem {
     public static void init() {
         CUSTOM_METAL_ITEMS.put(new ItemStack(Blocks.IRON_BARS), new MetalItemHandler(Materials.Iron, 25, true));
         CUSTOM_METAL_ITEMS.put(new ItemStack(Items.IRON_INGOT), new MetalItemHandler(Materials.Iron, 144, true));
-        CUSTOM_METAL_ITEMS.put(new ItemStack(TFCItems.UNREFINED_BLOOM), new MetalItemHandler(Materials.Iron, 144, true));
-        CUSTOM_METAL_ITEMS.put(new ItemStack(TFCItems.REFINED_BLOOM), new MetalItemHandler(Materials.Iron, 144, true));
     }
 
     /**
@@ -47,7 +46,16 @@ public final class CapabilityMetalItem {
     @Nullable
     public static IMaterialItem getMaterialItem(ItemStack stack) {
         if (!stack.isEmpty()) {
-            return stack.getCapability(METAL_OBJECT_CAPABILITY, null);
+            var metal = stack.getCapability(METAL_OBJECT_CAPABILITY, null);
+            if (metal != null) {
+                return metal;
+            }
+            else if (stack.getItem() instanceof IMaterialItem) {
+                return (IMaterialItem) stack.getItem();
+            }
+            else if (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof IMaterialItem) {
+                return (IMaterialItem) ((ItemBlock) stack.getItem()).getBlock();
+            }
         }
         return null;
     }

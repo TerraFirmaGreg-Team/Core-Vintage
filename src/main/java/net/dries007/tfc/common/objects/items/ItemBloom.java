@@ -11,6 +11,8 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
+import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,6 +24,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
@@ -96,6 +100,27 @@ public class ItemBloom extends ItemTFC implements IMaterialItem {
                 handler.setMetalAmount(144);
                 items.add(stack);
             }
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addMetalInfo(ItemStack stack, List<String> text) {
+        var forgeableCap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+
+        if (forgeableCap instanceof IForgeableMeasurableMetal measurableMetal) {
+
+            var material = measurableMetal.getMaterial();
+            var property = material.getProperty(TFGPropertyKey.HEAT);
+
+            if (property == null) throw new RuntimeException(String.format("No heat property for %s", material));
+
+            text.add("");
+            text.add(I18n.format("tfc.tooltip.containsmetal"));
+            text.add(I18n.format("tfc.tooltip.metalname", measurableMetal.getMaterial().getLocalizedName()));
+            text.add(I18n.format("tfc.tooltip.units", getSmeltAmount(stack) * stack.getCount()));
+            text.add(I18n.format("tfc.tooltip.melttemp", measurableMetal.getMeltTemp()));
+            text.add(I18n.format("tfc.tooltip.tier", property.getTier()));
         }
     }
 

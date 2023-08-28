@@ -11,7 +11,7 @@
 //import net.dries007.tfc.api.types.Rock;
 //import net.dries007.tfc.api.types.RockCategory;
 //import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-//import net.dries007.tfc.objects.items.rock.ItemRock;
+//import net.dries007.tfc.objects.items.rock.ItemRockLoose;
 //import net.minecraft.client.Minecraft;
 //import net.minecraft.client.resources.I18n;
 //import net.minecraft.item.ItemStack;
@@ -36,7 +36,7 @@
 //    {
 //        List<ItemStack> input = new ArrayList<>();
 //        input.add(new ItemStack(BlockRockVariant.get(rock, Rock.Type.RAW)));
-//        input.add(new ItemStack(ItemRock.get(rock)));
+//        input.add(new ItemStack(ItemRockLoose.get(rock)));
 //        recipeIngredients.setInputs(VanillaTypes.ITEM, input); // This will only show the raw block, but let use right click stones to open the "recipe"
 //    }
 //

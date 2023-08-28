@@ -27,12 +27,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemRock extends ItemTFC implements IRockItem {
+public class ItemRockLoose extends ItemTFC implements IRockItem {
 
     private final RockItemVariant variant;
     private final RockType type;
 
-    public ItemRock(RockItemVariant variant, RockType type) {
+    public ItemRockLoose(RockItemVariant variant, RockType type) {
 
         this.variant = variant;
         this.type = type;

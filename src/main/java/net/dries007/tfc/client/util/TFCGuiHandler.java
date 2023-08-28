@@ -8,7 +8,7 @@ import net.dries007.tfc.common.objects.container.*;
 import net.dries007.tfc.common.objects.items.ItemQuiver;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.common.objects.items.ceramics.ItemSmallVessel;
-import net.dries007.tfc.common.objects.items.rock.ItemRock;
+import net.dries007.tfc.common.objects.items.rock.ItemRockLoose;
 import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -76,7 +76,7 @@ public class TFCGuiHandler implements IGuiHandler {
             case ANVIL_PLAN:
                 return new ContainerAnvilPlan(player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
             case KNAPPING_STONE:
-                return new ContainerKnapping(KnappingType.STONE, player.inventory, stack.getItem() instanceof ItemRock ? stack : player.getHeldItemOffhand());
+                return new ContainerKnapping(KnappingType.STONE, player.inventory, stack.getItem() instanceof ItemRockLoose ? stack : player.getHeldItemOffhand());
             case KNAPPING_CLAY:
                 return new ContainerKnapping(KnappingType.CLAY, player.inventory, OreDictionaryHelper.doesStackMatchOre(stack, "clay") ? stack : player.getHeldItemOffhand());
             case KNAPPING_LEATHER:
@@ -145,10 +145,10 @@ public class TFCGuiHandler implements IGuiHandler {
                 var stackInMainHand = player.getHeldItemMainhand();
                 var stackInOffHand = player.getHeldItemOffhand();
 
-                if (stackInMainHand.getItem() instanceof ItemRock itemRock) {
-                    return new GuiKnapping(container, player, KnappingType.STONE, itemRock.getType().getTexture());
-                } else if (stackInOffHand.getItem() instanceof ItemRock itemRock) {
-                    return new GuiKnapping(container, player, KnappingType.STONE, itemRock.getType().getTexture());
+                if (stackInMainHand.getItem() instanceof ItemRockLoose itemRockLoose) {
+                    return new GuiKnapping(container, player, KnappingType.STONE, itemRockLoose.getType().getTexture());
+                } else if (stackInOffHand.getItem() instanceof ItemRockLoose itemRockLoose) {
+                    return new GuiKnapping(container, player, KnappingType.STONE, itemRockLoose.getType().getTexture());
                 }
 
                 throw new RuntimeException("Bad itemstack on open knapping gui");

@@ -53,9 +53,9 @@ dependencies {
     // Tinkers Construct dependencies
     if (project.use_tconstruct.toBoolean()) {
         implementation rfg.deobf("curse.maven:2.13.0.183-tinkers-construct-74072:2902483")
-        implementation rfg.deobf("curse.maven:1.3.3.55-mantle-74924:2713386")
         implementation rfg.deobf("curse.maven:1.2.5.10-constructs-armory-287683:3174535")
         implementation rfg.deobf("curse.maven:0.4.3-tinkers-complement-272671:2843439")
+        implementation rfg.deobf("curse.maven:1.3.3.55-mantle-74924:2713386")
         if (project.use_dramatic_trees.toBoolean())
             runtimeOnly("curse.maven:1.2.7-dynamic-trees-tinkers-construct-386747:3283263")
         if (project.use_util.toBoolean())
@@ -63,6 +63,10 @@ dependencies {
     }
 
     if (project.compatibility_check.toBoolean()) {
+        // forestry
         implementation rfg.deobf("curse.maven:5.8.2.422-forestry-59751:2918418")
+        implementation rfg.deobf("maven.modrinth:binnies-mods-patched:2.5.1.210")
+        // pams harvestcraf
+        implementation rfg.deobf("maven.modrinth:pams-harvestcraft:1.12.2zg")
     }
 }

@@ -127,7 +127,6 @@ minecraft {
         args << '-Dmixin.checks.interfaces=true'
         args << '-Dmixin.debug.export=true'
         args << '-Xmx10G'
-
     }
 
     extraRunJvmArguments.addAll(args)

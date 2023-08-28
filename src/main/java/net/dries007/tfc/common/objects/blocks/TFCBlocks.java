@@ -247,8 +247,6 @@ public class TFCBlocks {
 
         ModBlocks.preInit();
         ModTrees.preInit();
-
-
     }
 
     @Nonnull

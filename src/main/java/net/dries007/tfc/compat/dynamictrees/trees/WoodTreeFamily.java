@@ -2,18 +2,21 @@ package net.dries007.tfc.compat.dynamictrees.trees;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBranchBasic;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBranchThick;
 import net.dries007.tfc.compat.dynamictrees.ModBlocks;
-import net.minecraft.util.ResourceLocation;
 
-public class TreeFamilyTFC extends TreeFamily {
+public class WoodTreeFamily extends TreeFamily {
+    private final WoodType type;
     public boolean hasConiferVariants = false;
     private boolean thick = false;
 
-    public TreeFamilyTFC(ResourceLocation name, WoodType type) {
-        super(name);
+    public WoodTreeFamily(WoodType type) {
+        super(TerraFirmaCraft.identifier(type.toString()));
+
+        this.type = type;
 
         switch (getName().getPath()) {
             case "sequoia", "kapok" -> {
@@ -22,6 +25,10 @@ public class TreeFamilyTFC extends TreeFamily {
                 setDynamicBranch(createBranch());
             }
         }
+    }
+
+    public WoodType getType() {
+        return type;
     }
 
     @Override
@@ -36,13 +43,13 @@ public class TreeFamilyTFC extends TreeFamily {
 
     @Override
     public void createSpecies() {
-        setCommonSpecies(new TreeTFCSpecies(this, ModBlocks.leafMap.get(getName().toString())));
+        setCommonSpecies(new WoodTreeSpecies(this, ModBlocks.leafMap.get(type)));
         getCommonSpecies().generateSeed();
     }
 
     @Override
     public BlockBranch createBranch() {
-        String branchName = "branch/" + getName().getPath();
+        var branchName = "branch/" + getName().getPath();
         return isThick() ? new BlockWoodBranchThick(branchName) : new BlockWoodBranchBasic(branchName);
     }
 

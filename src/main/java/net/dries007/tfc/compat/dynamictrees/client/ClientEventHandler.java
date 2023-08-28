@@ -26,35 +26,35 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(modid = MOD_ID, value = {Side.CLIENT})
 public class ClientEventHandler {
-	public ClientEventHandler() {
-	}
+    public ClientEventHandler() {
+    }
 
-	@SubscribeEvent
-	public static void onModelBake(ModelBakeEvent event) {
-		Block block = ModBlocks.blockRootyDirt;
-		if (block.getRegistryName() != null) {
-			BakedModelBlockRooty rootyModel = new BakedModelBlockRootyTFC();
-			event.getModelRegistry().putObject(new ModelResourceLocation(block.getRegistryName(), "normal"), rootyModel);
-		}
-	}
+    @SubscribeEvent
+    public static void onModelBake(ModelBakeEvent event) {
+        Block block = ModBlocks.blockRootyDirt;
+        if (block.getRegistryName() != null) {
+            BakedModelBlockRooty rootyModel = new BakedModelBlockRootyTFC();
+            event.getModelRegistry().putObject(new ModelResourceLocation(block.getRegistryName(), "normal"), rootyModel);
+        }
+    }
 
-	@SubscribeEvent
-	public static void registerModels(ModelRegistryEvent event) {
-		//Register Meshers for Branches
-		for (TreeFamily tree : ModTrees.tfcTrees) {
-			ModelHelperTFC.regModel(tree.getDynamicBranch());//Register Branch itemBlock
-			ModelHelperTFC.regModel(tree);//Register custom state mapper for branch
-		}
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event) {
+        //Register Meshers for Branches
+        for (TreeFamily tree : ModTrees.TREES) {
+            ModelHelperTFC.regModel(tree.getDynamicBranch());//Register Branch itemBlock
+            ModelHelperTFC.regModel(tree);//Register custom state mapper for branch
+        }
 
-		ModelLoader.setCustomStateMapper(ModBlocks.blockRootyDirt, new StateMap.Builder().ignore(BlockRooty.LIFE).build());
+        ModelLoader.setCustomStateMapper(ModBlocks.blockRootyDirt, new StateMap.Builder().ignore(BlockRooty.LIFE).build());
 
-		ModTrees.tfcSpecies.values().stream().filter(s -> s.getSeed() != Seed.NULLSEED).forEach(s -> ModelHelperTFC.regModel(s.getSeed()));//Register Seed Item Models
-	}
+        ModTrees.SPECIES.values().stream().filter(s -> s.getSeed() != Seed.NULLSEED).forEach(s -> ModelHelperTFC.regModel(s.getSeed()));//Register Seed Item Models
+    }
 
-	@SubscribeEvent
-	public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
-		final BlockColors blockColors = event.getBlockColors();
-		blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, LeavesPaging.getLeavesMapForModId(MOD_ID).values().toArray(new Block[0]));
-		blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, ModBlocks.blockRootyDirt);
-	}
+    @SubscribeEvent
+    public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
+        final BlockColors blockColors = event.getBlockColors();
+        blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, LeavesPaging.getLeavesMapForModId(MOD_ID).values().toArray(new Block[0]));
+        blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, ModBlocks.blockRootyDirt);
+    }
 }

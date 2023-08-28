@@ -11,7 +11,7 @@ public class ModItems {
 
     public static void register(IForgeRegistry<Item> registry) {
         ArrayList<Item> treeItems = new ArrayList<>();
-        ModTrees.tfcTrees.forEach(tree -> tree.getRegisterableItems(treeItems));
+        ModTrees.TREES.forEach(tree -> tree.getRegisterableItems(treeItems));
         registry.registerAll(treeItems.toArray(new Item[treeItems.size()]));
     }
 

@@ -20,7 +20,7 @@ import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LE
 
 public class ModBlocks {
     public static LeavesProperties[] tfcLeavesProperties;
-    public static Map<String, LeavesProperties> leafMap;
+    public static Map<WoodType, LeavesProperties> leafMap;
     public static Map<String, ICellKit> kitMap;
     public static BlockRootyDirtTFC blockRootyDirt;
 
@@ -40,7 +40,7 @@ public class ModBlocks {
         for (var type : WoodType.getWoodTypes()) {
             var leaf = TFCBlocks.getWoodBlock(LEAVES, type);
             var prop = new LeavesProperties(leaf.getDefaultState(), kitMap.get(type.toString()));
-            leafMap.put(type.toString(), prop);
+            leafMap.put(type, prop);
             tfcLeavesProperties[i++] = prop;
         }
 

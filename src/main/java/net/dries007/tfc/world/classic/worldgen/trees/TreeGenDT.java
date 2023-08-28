@@ -7,7 +7,7 @@ import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.dries007.tfc.compat.dynamictrees.ModTrees;
-import net.dries007.tfc.compat.dynamictrees.trees.TreeTFCSpecies;
+import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +26,7 @@ public class TreeGenDT implements ITreeGenerator {
 
     @Override
     public void generateTree(TemplateManager templateManager, World world, BlockPos blockPos, WoodType type, Random random, boolean isWorldGen) {
-        var dtSpecies = ModTrees.tfcSpecies.get(type.toString());
+        var dtSpecies = ModTrees.SPECIES.get(type);
         var bounds = new SafeChunkBounds(world, world.getChunk(blockPos).getPos());
         dtSpecies.generate(world, blockPos.down(), world.getBiome(blockPos), random, leavesRadius <= 0 ? dtSpecies.maxBranchRadius() / 3 : leavesRadius, bounds);
         //dtSpecies.getJoCode("JP").setCareful(true).generate(world, dtSpecies, blockPos, world.getBiome(blockPos), EnumFacing.SOUTH, 8, SafeChunkBounds.ANY);
@@ -43,9 +43,9 @@ public class TreeGenDT implements ITreeGenerator {
             return false;
         }
 
-        var dTree = ModTrees.tfcSpecies.get(type.toString());
+        var dTree = ModTrees.SPECIES.get(type);
         int lowestBranchHeight = dTree.getLowestBranchHeight();
-        int maxTreeHeight = (int) ((TreeTFCSpecies) dTree).getSignalEnergy(); //signal energy access problem so need to cast
+        int maxTreeHeight = (int) ((WoodTreeSpecies) dTree).getSignalEnergy(); //signal energy access problem so need to cast
 
         var bounds = new SafeChunkBounds(world, world.getChunk(pos).getPos());
         for (int y = 0; y <= lowestBranchHeight; y++) {

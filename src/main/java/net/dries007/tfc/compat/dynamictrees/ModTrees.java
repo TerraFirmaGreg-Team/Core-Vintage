@@ -8,12 +8,11 @@ import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenConiferTopper;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.compat.dynamictrees.trees.TreeFamilyTFC;
+import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -27,8 +26,8 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 
 public class ModTrees {
-    public static ArrayList<TreeFamilyTFC> tfcTrees = new ArrayList<>();
-    public static Map<String, Species> tfcSpecies = new HashMap<>();
+    public static ArrayList<WoodTreeFamily> TREES = new ArrayList<>();
+    public static Map<WoodType, Species> SPECIES = new HashMap<>();
 
     public static void preInit() {
     }
@@ -41,20 +40,19 @@ public class ModTrees {
         Map<String, IGrowthLogicKit> logicMap = new HashMap<>();
         fillMaps(paramMap, logicMap);
 
-        for (var t1 : WoodType.getWoodTypes()) {
-            String treeName = t1.toString();
+        for (var type : WoodType.getWoodTypes()) {
+            String treeName = type.toString();
 
-            var resLoc = TerraFirmaCraft.identifier(treeName);
-            var family = new TreeFamilyTFC(resLoc, t1);
+            var family = new WoodTreeFamily(type);
 
-            tfcTrees.add(family);
+            TREES.add(family);
 
             float[] map = paramMap.get(treeName) == null ? new float[]{0.20f, 10f, 3, 3, 1.00f} : paramMap.get(treeName);
 
             Species species = family.getCommonSpecies().setGrowthLogicKit(logicMap.get(treeName) == null ? GrowthLogicKits.nullLogic : logicMap.get(treeName)).
                     setBasicGrowingParameters(map[0], map[1], (int) map[2], (int) map[3], map[4]);
 
-            tfcSpecies.put(treeName, species);
+            SPECIES.put(type, species);
             Species.REGISTRY.register(species);
         }
 
@@ -69,22 +67,22 @@ public class ModTrees {
 //            TreeRegistry.registerSaplingReplacer(saplingMap.get(entry.getKey()).getDefaultState(), entry.getValue());
 //        }
 
-        tfcTrees.forEach(t -> {
-            String treeName = t.getName().getPath();
-            ModBlocks.leafMap.get(treeName).setTree(t);
-            Species species = tfcSpecies.get(treeName);
-            species.setLeavesProperties(ModBlocks.leafMap.get(treeName));
+        TREES.forEach(tree -> {
+            String treeName = tree.getName().getPath();
+            ModBlocks.leafMap.get(tree.getType()).setTree(tree);
+            Species species = SPECIES.get(tree.getType());
+            species.setLeavesProperties(ModBlocks.leafMap.get(tree.getType()));
 
             switch (treeName) {
                 case "acacia" -> species.addAcceptableSoils(DirtHelper.HARDCLAYLIKE); //match base DT
                 case "douglas_fir", "spruce", "pine", "sequoia", "white_cedar" -> {
-                    species.addGenFeature(new FeatureGenConiferTopper(ModBlocks.leafMap.get(treeName)));
-                    t.hasConiferVariants = true;
+                    species.addGenFeature(new FeatureGenConiferTopper(ModBlocks.leafMap.get(tree.getType())));
+                    tree.hasConiferVariants = true;
                 }
             }
         });
 
-        tfcTrees.forEach(tree -> tree.getRegisterableBlocks(treeBlocks));
+        TREES.forEach(tree -> tree.getRegisterableBlocks(treeBlocks));
 
         treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
         registry.registerAll(treeBlocks.toArray(new Block[0]));
@@ -95,7 +93,7 @@ public class ModTrees {
     {
 //        WoodType.getWoodTypes().forEach(t -> {
 //            String treeName = t.toString();
-//            ((TreeFamilyTFC) tfcSpecies.get(treeName).getFamily()).setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, t).getDefaultState());
+//            ((WoodTreeFamily) tfcSpecies.get(treeName).getFamily()).setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, t).getDefaultState());
 //        });
     }
 

@@ -1,6 +1,5 @@
 package net.dries007.tfc.compat.dynamictrees;
 
-import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
@@ -15,13 +14,15 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types.wood.type.WoodTypes.*;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
 
 public class ModBlocks {
     public static LeavesProperties[] tfcLeavesProperties;
     public static Map<WoodType, LeavesProperties> leafMap;
-    public static Map<String, ICellKit> kitMap;
+    public static Map<WoodType, ICellKit> kitMap;
     public static BlockRootyDirtTFC blockRootyDirt;
 
     public static void preInit() {
@@ -39,7 +40,7 @@ public class ModBlocks {
         int i = 0; // DT wants an array of leafprops for some reason
         for (var type : WoodType.getWoodTypes()) {
             var leaf = TFCBlocks.getWoodBlock(LEAVES, type);
-            var prop = new LeavesProperties(leaf.getDefaultState(), kitMap.get(type.toString()));
+            var prop = new LeavesProperties(leaf.getDefaultState(), kitMap.get(type));
             leafMap.put(type, prop);
             tfcLeavesProperties[i++] = prop;
         }
@@ -50,27 +51,27 @@ public class ModBlocks {
         registry.register(blockRootyDirt);
     }
 
-    private static void fillMaps(Map<String, ICellKit> kitMap) {
-        kitMap.put("acacia", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "acacia")));
-        kitMap.put("ash", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
-        kitMap.put("aspen", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
-        kitMap.put("birch", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
-        kitMap.put("blackwood", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "darkoak")));
-        kitMap.put("chestnut", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
-        kitMap.put("douglas_fir", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "conifer")));
-        kitMap.put("hickory", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
-        kitMap.put("kapok", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
-        kitMap.put("maple", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
-        kitMap.put("oak", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
-        kitMap.put("palm", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "palm")));
-        kitMap.put("pine", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "conifer")));
-        kitMap.put("rosewood", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
-        kitMap.put("sequoia", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "conifer")));
-        kitMap.put("spruce", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "conifer")));
-        kitMap.put("sycamore", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
-        kitMap.put("white_cedar", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
-        kitMap.put("willow", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
+    private static void fillMaps(Map<WoodType, ICellKit> kitMap) {
+        kitMap.put(ACACIA, TreeRegistry.findCellKit(new ResourceLocation(MODID, "acacia")));
+        kitMap.put(ASH, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
+        kitMap.put(ASPEN, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
+        kitMap.put(BIRCH, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
+        kitMap.put(BLACKWOOD, TreeRegistry.findCellKit(new ResourceLocation(MODID, "darkoak")));
+        kitMap.put(CHESTNUT, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
+        kitMap.put(DOUGLAS_FIR, TreeRegistry.findCellKit(new ResourceLocation(MODID, "conifer")));
+        kitMap.put(HICKORY, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
+        kitMap.put(KAPOK, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
+        kitMap.put(MAPLE, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
+        kitMap.put(OAK, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
+        kitMap.put(PALM, TreeRegistry.findCellKit(new ResourceLocation(MODID, "palm")));
+        kitMap.put(PINE, TreeRegistry.findCellKit(new ResourceLocation(MODID, "conifer")));
+        kitMap.put(ROSEWOOD, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
+        kitMap.put(SEQUOIA, TreeRegistry.findCellKit(new ResourceLocation(MODID, "conifer")));
+        kitMap.put(SPRUCE, TreeRegistry.findCellKit(new ResourceLocation(MODID, "conifer")));
+        kitMap.put(SYCAMORE, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
+        kitMap.put(WHITE_CEDAR, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
+        kitMap.put(WILLOW, TreeRegistry.findCellKit(new ResourceLocation(MODID, "deciduous")));
         //TFCTech
-        kitMap.put("hevea", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
+        // kitMap.put("hevea", TreeRegistry.findCellKit(new ResourceLocation(ModConstants.MODID, "deciduous")));
     }
 }

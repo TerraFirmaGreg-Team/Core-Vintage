@@ -32,4 +32,5 @@ public class WoodTypes {
     public static WoodType PEACH;
     public static WoodType PLUM;
     public static WoodType RED_APPLE;
+    public static WoodType HEVEA;
 }

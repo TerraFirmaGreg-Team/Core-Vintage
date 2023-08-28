@@ -1,170 +1,186 @@
 package net.dries007.tfc.api.types.wood.type;
 
+import com.ferreusveritas.dynamictrees.ModTrees;
+
 import static net.dries007.tfc.api.types.trees.TreeGenerators.*;
 import static net.dries007.tfc.api.types.wood.type.WoodTypes.*;
 
 public class WoodTypeHandler {
 
     public static void init() {
-        ACACIA = new WoodType
-                .Builder("acacia")
+        ACACIA = new WoodType.Builder("acacia")
                 .setColor(0x8B3929).setTemp(19f, 31f).setRain(30f, 210f)
                 .setBurnInfo(650f, 1000)
                 .setHeight(12).setMinGrowthTime(11).setDensity(0.1f, 0.6f)
                 .setGenerator(GEN_ACACIA)
+                .setParamMap(new float[]{0.10f, 14f, 6, 6, 0.90f})
+                .setCellKit("acacia")
                 .build();
-
-        ASH = new WoodType
-                .Builder("ash")
+        ASH = new WoodType.Builder("ash")
                 .setColor(0xAE604E).setTemp(-6f, 12f).setRain(60f, 140f)
                 .setBurnInfo(696f, 1250)
                 .setGenerator(GEN_NORMAL)
+                .setParamMap(new float[]{0.25f, 12f, 4, 3, 1.00f})
+                .setCellKit("deciduous")
                 .build();
-
-        ASPEN = new WoodType
-                .Builder("aspen")
+        ASPEN = new WoodType.Builder("aspen")
                 .setColor(0x373727).setTemp(-10f, 16f).setRain(10f, 80f)
                 .setBurnInfo(611f, 1000)
                 .setMinGrowthTime(8)
                 .setGenerator(GEN_MEDIUM)
+                .setParamMap(new float[]{0.30f, 16f, 8, 2, 1.50f})
+                .setGrowthLogicKit(ModTrees.CONIFER)
+                .setCellKit("deciduous")
                 .build();
-
-        BIRCH = new WoodType
-                .Builder("birch")
+        BIRCH = new WoodType.Builder("birch")
                 .setColor(0x897658).setTemp(-15f, 7f).setRain(20f, 180f)
                 .setBurnInfo(652f, 1750)
                 .setGenerator(GEN_TALL)
                 .setTannin()
+                .setParamMap(new float[]{0.25f, 12f, 5, 5, 1.15f})
+                .setCellKit("deciduous")
                 .build();
-
-        BLACKWOOD = new WoodType
-                .Builder("blackwood")
+        BLACKWOOD = new WoodType.Builder("blackwood")
                 .setColor(0x1A1A1A).setTemp(4f, 33f).setRain(0f, 120f)
                 .setBurnInfo(720f, 1750)
                 .setHeight(12).setMinGrowthTime(8)
                 .setGenerator(GEN_MEDIUM)
+                .setParamMap(new float[]{0.20f, 13f, 3, 4, 0.90f})
+                .setGrowthLogicKit(ModTrees.DARKOAK)
+                .setCellKit("darkoak")
                 .build();
-
-        CHESTNUT = new WoodType
-                .Builder("chestnut")
+        CHESTNUT = new WoodType.Builder("chestnut")
                 .setColor(0x642C1E).setTemp(11f, 35f).setRain(160f, 320f)
                 .setBurnInfo(651f, 1500)
                 .setGenerator(GEN_NORMAL)
+                .setParamMap(new float[]{0.20f, 10f, 3, 3, 1.00f})
+                .setGrowthLogicKit(ModTrees.DARKOAK)
+                .setCellKit("deciduous")
                 .setTannin()
                 .build();
-
-        DOUGLAS_FIR = new WoodType
-                .Builder("douglas_fir")
+        DOUGLAS_FIR = new WoodType.Builder("douglas_fir")
                 .setColor(0xD7BC8D).setTemp(-2f, 14f).setRain(280f, 480f)
                 .setBurnInfo(707f, 1500)
                 .setDominance(5.2f).setHeight(16).setDensity(0.25f, 2f)
                 .setGenerator(GEN_TALL)
+                .setParamMap(new float[]{0.15f, 20f, 5, 3, 1.15f})
+                .setGrowthLogicKit(ModTrees.CONIFER)
+                .setCellKit("conifer")
                 .setBushes().setTannin()
                 .build();
-
-        HICKORY = new WoodType
-                .Builder("hickory")
+        HICKORY = new WoodType.Builder("hickory")
                 .setColor(0x4E3418).setTemp(7f, 29f).setRain(80f, 250f)
                 .setBurnInfo(762f, 2000)
                 .setMinGrowthTime(10)
                 .setGenerator(GEN_TALL)
+                .setParamMap(new float[]{0.20f, 14f, 5, 3, 0.80f})
+                .setGrowthLogicKit(ModTrees.DARKOAK)
+                .setCellKit("deciduous")
                 .setTannin()
                 .build();
-
-        MAPLE = new WoodType
-                .Builder("maple")
+        MAPLE = new WoodType.Builder("maple")
                 .setColor(0xC3782F).setTemp(3f, 20f).setRain(140f, 360f)
                 .setBurnInfo(745f, 2000)
                 .setDominance(6.3f)
                 .setGenerator(GEN_MEDIUM)
+                .setParamMap(new float[]{0.15f, 15f, 6, 3, 0.95f})
+                .setCellKit("deciduous")
                 .setTannin()
                 .build();
-
-        OAK = new WoodType
-                .Builder("oak")
+        OAK = new WoodType.Builder("oak")
                 .setColor(0xC29D62).setTemp(-8f, 12f).setRain(180f, 430f)
                 .setBurnInfo(728f, 2250)
                 .setHeight(16).setMinGrowthTime(10)
                 .setGenerator(GEN_TALL)
+                .setParamMap(new float[]{0.30f, 16f, 3, 3, 0.85f})
+                .setGrowthLogicKit(ModTrees.DARKOAK)
+                .setCellKit("deciduous")
                 .setTannin()
                 .build();
-
-        PALM = new WoodType
-                .Builder("palm")
+        PALM = new WoodType.Builder("palm")
                 .setColor(0xB56F38).setTemp(16f, 35f).setRain(280f, 500f)
                 .setBurnInfo(730f, 1250)
                 .setDecayDist(6)
                 .setGenerator(GEN_TROPICAL)
+                .setParamMap(new float[]{0.05f, 16f, 5, 4, 1.10f})
+                .setGrowthLogicKit(ModTrees.JUNGLE)
+                .setCellKit("palm")
                 .build();
-
-        PINE = new WoodType
-                .Builder("pine")
+        PINE = new WoodType.Builder("pine")
                 .setColor(0xD1BD9A).setTemp(-15f, 7f).setRain(60f, 250f)
                 .setBurnInfo(627f, 1250)
                 .setDensity(0.1f, 0.8f)
                 .setGenerator(GEN_CONIFER)
+                .setParamMap(new float[]{0.20f, 18f, 6, 2, 1.20f})
+                .setGrowthLogicKit(ModTrees.CONIFER)
+                .setCellKit("conifer")
                 .setConifer()
                 .build();
-
-        ROSEWOOD = new WoodType
-                .Builder("rosewood")
+        ROSEWOOD = new WoodType.Builder("rosewood")
                 .setColor(0x912222).setTemp(8f, 18f).setRain(10f, 190f)
                 .setBurnInfo(640f, 1500)
                 .setHeight(12).setMinGrowthTime(8)
                 .setGenerator(GEN_MEDIUM)
+                .setParamMap(new float[]{0.35f, 15f, 7, 3, 1.00f})
+                .setCellKit("deciduous")
                 .build();
-
-        SEQUOIA = new WoodType
-                .Builder("sequoia")
+        SEQUOIA = new WoodType.Builder("sequoia")
                 .setColor(0x965B3B).setTemp(-5f, 12f).setRain(250f, 420f)
                 .setBurnInfo(612f, 1750)
                 .setRadius(3).setHeight(24).setDecayDist(6).setMinGrowthTime(18).setDensity(0.4f, 0.9f)
                 .setGenerator(GEN_SEQUOIA)
+                .setParamMap(new float[]{0.20f, 36f, 9, 4, 0.70f})
+                .setGrowthLogicKit(ModTrees.CONIFER)
+                .setCellKit("conifer")
                 .setConifer().setBushes().setTannin()
                 .build();
-
-        SPRUCE = new WoodType
-                .Builder("spruce")
+        SPRUCE = new WoodType.Builder("spruce")
                 .setColor(0xBF806F).setTemp(-11f, 6f).setRain(120f, 380f)
                 .setBurnInfo(608f, 1500)
                 .setDensity(0.1f, 0.8f)
                 .setGenerator(GEN_CONIFER)
+                .setParamMap(new float[]{0.15f, 12f, 6, 3, 1.10f})
+                .setGrowthLogicKit(ModTrees.CONIFER)
+                .setCellKit("conifer")
                 .setConifer()
                 .build();
-
-        SYCAMORE = new WoodType
-                .Builder("sycamore")
+        SYCAMORE = new WoodType.Builder("sycamore")
                 .setColor(0xDCA448).setTemp(17f, 33f).setRain(120f, 290f)
                 .setBurnInfo(653f, 1750)
                 .setMinGrowthTime(8).setDensity(0.25f, 2f)
                 .setGenerator(GEN_MEDIUM)
+                .setParamMap(new float[]{0.20f, 10f, 4, 3, 0.90f})
+                .setCellKit("deciduous")
                 .setBushes()
                 .build();
-
-        WHITE_CEDAR = new WoodType
-                .Builder("white_cedar")
+        WHITE_CEDAR = new WoodType.Builder("white_cedar")
                 .setColor(0xD4D4D4).setTemp(-8f, 17f).setRain(10f, 240f)
                 .setBurnInfo(625f, 1500)
                 .setHeight(16)
                 .setGenerator(GEN_TALL)
+                .setParamMap(new float[]{0.15f, 20f, 6, 2, 1.10f})
+                .setGrowthLogicKit(ModTrees.CONIFER)
+                .setCellKit("deciduous")
                 .build();
-
-        WILLOW = new WoodType
-                .Builder("willow")
+        WILLOW = new WoodType.Builder("willow")
                 .setColor(0x3A430B).setTemp(15f, 32f).setRain(230f, 400f)
                 .setBurnInfo(603f, 1000)
                 .setMinGrowthTime(11).setDensity(0.7f, 2f)
                 .setGenerator(GEN_WILLOW)
+                .setParamMap(new float[]{0.55f, 15f, 2, 2, 1.40f})
+                .setGrowthLogicKit(ModTrees.DARKOAK)
+                .setCellKit("deciduous")
                 .setBushes()
                 .build();
-
-        KAPOK = new WoodType
-                .Builder("kapok")
+        KAPOK = new WoodType.Builder("kapok")
                 .setColor(0xAD879F).setTemp(15f, 35f).setRain(210f, 500f)
                 .setBurnInfo(645f, 1000)
                 .setDominance(8.5f).setRadius(3).setHeight(24).setDecayDist(6)
                 .setMinGrowthTime(18).setDensity(0.6f, 2f)
                 .setGenerator(GEN_ACACIA)
+                .setParamMap(new float[]{0.10f, 30f, 7, 4, 0.85f})
+                .setGrowthLogicKit(ModTrees.JUNGLE)
+                .setCellKit("deciduous")
                 .setBushes()
                 .build();
 
@@ -256,6 +272,17 @@ public class WoodTypeHandler {
 //                .setFruitTree(FoodTypes.RED_APPLE, 0.33f)
 //                .setFlowerMonth(Month.MAY, 2)
 //                .setHarvestMonth(Month.OCTOBER, 2)
+//                .build();
+        // TODO доделать
+//        HEVEA = new WoodType
+//                .Builder("hevea")
+//                .setColor(0x8B3929).setTemp(19f, 31f).setRain(30f, 210f)
+//                .setBurnInfo(650f, 1000)
+//                .setHeight(12).setMinGrowthTime(11).setDensity(0.1f, 0.6f)
+//                .setGenerator(GEN_ACACIA)
+//                .setParamMap(new float[]{0.20f, 13f, 3, 7, 1.25f})
+//                .setGrowthLogicKit("DarkOak"))
+//                .setCellKit("deciduous"))
 //                .build();
     }
 }

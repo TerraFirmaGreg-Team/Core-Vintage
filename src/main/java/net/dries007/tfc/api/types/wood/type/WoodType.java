@@ -1,5 +1,9 @@
 package net.dries007.tfc.api.types.wood.type;
 
+import com.ferreusveritas.dynamictrees.api.TreeRegistry;
+import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
+import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
+import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.trees.ITreeGenerator;
 import net.dries007.tfc.common.objects.items.TFCItems;
@@ -61,6 +65,9 @@ public class WoodType {
     private final float growthTime;
     /* Это открыто для замены, т.е. для динамических деревьев */
     private final ITreeGenerator generator;
+    private final float[] paramMap;
+    private final IGrowthLogicKit logicMap;
+    private final ICellKit cellKit;
 
     private WoodType(Builder builder) {
         this.name = builder.name;
@@ -93,6 +100,10 @@ public class WoodType {
         this.harvestingMonths = builder.harvestingMonths;
         this.growthTime = builder.growthTime;
         this.fruit = builder.fruit;
+
+        this.paramMap = builder.paramMap;
+        this.logicMap = builder.logicMap;
+        this.cellKit = builder.cellKit;
 
         if (name.isEmpty()) {
             throw new RuntimeException(String.format("WoodType name must contain any character: [%s]", name));
@@ -325,11 +336,23 @@ public class WoodType {
     }
 
     public FoodType getFruit() {
-        return this.fruit;
+        return fruit;
     }
 
     public ItemStack getFoodDrop() {
-        return new ItemStack(TFCItems.getFoodItem(this.getFruit()));
+        return new ItemStack(TFCItems.getFoodItem(fruit));
+    }
+
+    public float[] getParamMap() {
+        return paramMap;
+    }
+
+    public IGrowthLogicKit getGrowthLogicKit() {
+        return logicMap;
+    }
+
+    public ICellKit getCellKit() {
+        return cellKit;
     }
 
     @SideOnly(Side.CLIENT)
@@ -366,6 +389,9 @@ public class WoodType {
         private int harvestingMonths;
         private FoodType fruit;
         private float growthTime;
+        private float[] paramMap;
+        private IGrowthLogicKit logicMap;
+        private ICellKit cellKit;
 
         public Builder(@Nonnull String name) {
             this.name = name;
@@ -394,6 +420,9 @@ public class WoodType {
             this.harvestMonthStart = null;
             this.harvestingMonths = 0;
             this.growthTime = 0;
+            this.paramMap = new float[]{0.20f, 10f, 3, 3, 1.00f};
+            this.logicMap = GrowthLogicKits.nullLogic;
+            this.cellKit = null;
         }
 
         public Builder setColor(int color) {
@@ -503,6 +532,21 @@ public class WoodType {
         public Builder setHarvestMonth(Month harvestMonthStart, int harvestingMonths) {
             this.harvestMonthStart = harvestMonthStart;
             this.harvestingMonths = harvestingMonths;
+            return this;
+        }
+
+        public Builder setParamMap(float[] paramMap) {
+            this.paramMap = paramMap;
+            return this;
+        }
+
+        public Builder setGrowthLogicKit(String logicMap) {
+            this.logicMap = TreeRegistry.findGrowthLogicKit(logicMap);
+            return this;
+        }
+
+        public Builder setCellKit(String cellKit) {
+            this.cellKit = TreeRegistry.findCellKit(cellKit);
             return this;
         }
 

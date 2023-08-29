@@ -7,16 +7,23 @@ import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenFlareBottom;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenVine;
 import com.ferreusveritas.dynamictrees.trees.Species;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.world.classic.worldgen.WorldGenMound;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.blockRootyDirt;
 
 //Species need not be created as a nested class.  They can be created after the tree has already been constructed.
 public class WoodTreeSpecies extends Species {
+
+    public static Map<WoodType, Species> SPECIES = new HashMap<>();
+
     public WoodTreeSpecies(WoodTreeFamily treeFamily, LeavesProperties prop) {
         super(treeFamily.getName(), treeFamily, prop);
         setupStandardSeedDropping();

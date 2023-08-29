@@ -15,7 +15,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.SPECIES;
+import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies.SPECIES;
 
 
 public class TreeGenDT implements ITreeGenerator {

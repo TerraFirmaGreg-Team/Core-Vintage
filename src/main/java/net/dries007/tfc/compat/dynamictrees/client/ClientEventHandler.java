@@ -19,9 +19,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.SPECIES;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.blockRootyDirt;
 import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.TREES;
+import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies.SPECIES;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(modid = MOD_ID, value = {Side.CLIENT})

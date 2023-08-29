@@ -1,7 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
-import com.ferreusveritas.dynamictrees.trees.Species;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.Material;
 import net.dries007.tfc.api.types.GroundcoverType;
@@ -48,7 +47,10 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.*;
 import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.*;
@@ -81,7 +83,6 @@ public class TFCBlocks {
     public static LeavesProperties[] tfcLeavesProperties;
     public static Map<WoodType, LeavesProperties> leafMap;
     public static BlockRootyDirtTFC blockRootyDirt;
-    public static Map<WoodType, Species> SPECIES = new HashMap<>();
 
 
     public static BlockDebug DEBUG;

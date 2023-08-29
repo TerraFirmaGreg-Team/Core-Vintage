@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.rock;
 
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -14,6 +15,8 @@ public class BlockRockSand extends BlockRockFallable {
         FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL);
 
         setSoundType(SoundType.SAND);
+
+        DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.SANDLIKE);
     }
 
 }

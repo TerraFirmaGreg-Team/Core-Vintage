@@ -6,6 +6,7 @@
 
 package net.dries007.tfc.common.objects.blocks.soil;
 
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
@@ -85,6 +86,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
         OreDictionaryHelper.register(this, variant.toString());
         OreDictionaryHelper.register(this, variant.toString(), type.toString());
+
+        DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.DIRTLIKE);
     }
 
     public static void spreadGrass(World world, BlockPos pos, IBlockState us, Random rand) {

@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.soil;
 
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
 import net.minecraft.block.state.IBlockState;
@@ -13,6 +14,8 @@ public class BlockSoilClay extends BlockSoil {
 
     public BlockSoilClay(SoilBlockVariant variant, SoilType type) {
         super(variant, type);
+
+        DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.DIRTLIKE);
     }
 
     @Override

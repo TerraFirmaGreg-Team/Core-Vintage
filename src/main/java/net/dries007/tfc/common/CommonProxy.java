@@ -49,7 +49,6 @@ import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.common.objects.recipes.RecipeHandler;
 import net.dries007.tfc.common.objects.tileentities.*;
-import net.dries007.tfc.compat.dynamictrees.ModTrees;
 import net.dries007.tfc.compat.dynamictrees.SeasonManager;
 import net.dries007.tfc.compat.dynamictrees.TFCRootDecay;
 import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily;
@@ -547,7 +546,6 @@ public class CommonProxy {
         TreeHelper.setCustomRootBlockDecay(TFCRootDecay.INSTANCE);
         FuelManager.postInit();
         JsonConfigRegistry.INSTANCE.postInit();
-        ModTrees.postInit();
     }
 
     public void onLoadComplete(FMLLoadCompleteEvent event) {

@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.soil.peat;
 
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -22,5 +23,7 @@ public class BlockPeat extends Block {
 
         OreDictionaryHelper.register(this, "peat");
         Blocks.FIRE.setFireInfo(this, 5, 10);
+
+        DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.GRAVELLIKE);
     }
 }

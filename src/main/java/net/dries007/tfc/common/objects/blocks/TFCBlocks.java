@@ -372,7 +372,8 @@ public class TFCBlocks {
         if (current.getBlock() instanceof BlockPeat) return true;
         if (current.getBlock() instanceof ISoilBlock soilTypeBlock) {
             var soilBlockVariant = soilTypeBlock.getBlockVariant();
-            return soilBlockVariant == GRASS || soilBlockVariant == DRY_GRASS || soilBlockVariant == DIRT || soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS;
+            return soilBlockVariant == GRASS || soilBlockVariant == DRY_GRASS ||
+                    soilBlockVariant == DIRT || soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS;
         }
         return false;
     }
@@ -380,7 +381,8 @@ public class TFCBlocks {
     public static boolean isGrowableSoil(IBlockState current) {
         if (current.getBlock() instanceof ISoilBlock soilTypeBlock) {
             var soilBlockVariant = soilTypeBlock.getBlockVariant();
-            return soilBlockVariant == GRASS || soilBlockVariant == DRY_GRASS || soilBlockVariant == DIRT || soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS;
+            return soilBlockVariant == GRASS || soilBlockVariant == DRY_GRASS ||
+                    soilBlockVariant == DIRT || soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS;
         }
         return false;
     }

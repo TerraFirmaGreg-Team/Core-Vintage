@@ -150,7 +150,8 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
 
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-        world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod()).withProperty(growthStageProperty, plant.getStageForMonth()));
+        world.setBlockState(pos, state.withProperty(DAYPERIOD, getDayPeriod())
+                .withProperty(growthStageProperty, plant.getStageForMonth()));
         checkAndDropBlock(world, pos, state);
     }
 

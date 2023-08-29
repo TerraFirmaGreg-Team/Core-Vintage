@@ -6,7 +6,8 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBranchBasic;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBranchThick;
-import net.dries007.tfc.compat.dynamictrees.ModBlocks;
+
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.leafMap;
 
 public class WoodTreeFamily extends TreeFamily {
     private final WoodType type;
@@ -43,7 +44,7 @@ public class WoodTreeFamily extends TreeFamily {
 
     @Override
     public void createSpecies() {
-        setCommonSpecies(new WoodTreeSpecies(this, ModBlocks.leafMap.get(type)));
+        setCommonSpecies(new WoodTreeSpecies(this, leafMap.get(type)));
         getCommonSpecies().generateSeed();
     }
 

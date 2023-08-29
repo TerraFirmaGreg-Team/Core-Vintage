@@ -1,5 +1,7 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
+import com.ferreusveritas.dynamictrees.trees.Species;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.Material;
 import net.dries007.tfc.api.types.GroundcoverType;
@@ -35,8 +37,8 @@ import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockCrucible;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockPowderKeg;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
-import net.dries007.tfc.compat.dynamictrees.ModBlocks;
-import net.dries007.tfc.compat.dynamictrees.ModTrees;
+import net.dries007.tfc.compat.dynamictrees.blocks.BlockRootyDirtTFC;
+import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -47,10 +49,7 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.*;
 import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.*;
@@ -79,6 +78,13 @@ public class TFCBlocks {
 
     // Жидкости
     public static final List<BlockFluidBase> FLUID = new ArrayList<>();
+
+    public static LeavesProperties[] tfcLeavesProperties;
+    public static Map<WoodType, LeavesProperties> leafMap;
+    public static BlockRootyDirtTFC blockRootyDirt;
+
+    public static ArrayList<WoodTreeFamily> TREES = new ArrayList<>();
+    public static Map<WoodType, Species> SPECIES = new HashMap<>();
 
 
     public static BlockDebug DEBUG;
@@ -245,8 +251,7 @@ public class TFCBlocks {
         BLOCKS.add(THATCH_BED = new BlockThatchBed());
         BLOCKS.add(CLADDING = new BlockMetalCladding());
 
-        ModBlocks.preInit();
-        ModTrees.preInit();
+        blockRootyDirt = new BlockRootyDirtTFC();
     }
 
     @Nonnull

@@ -7,12 +7,13 @@ import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenFlareBottom;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenVine;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import net.dries007.tfc.compat.dynamictrees.ModBlocks;
 import net.dries007.tfc.world.classic.worldgen.WorldGenMound;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.blockRootyDirt;
 
 //Species need not be created as a nested class.  They can be created after the tree has already been constructed.
 public class WoodTreeSpecies extends Species {
@@ -37,7 +38,7 @@ public class WoodTreeSpecies extends Species {
     @Override
 
     public BlockRooty getRootyBlock(World world, BlockPos rootPos) {
-        return ModBlocks.blockRootyDirt;
+        return blockRootyDirt;
     }
 
     public float getSignalEnergy() {

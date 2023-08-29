@@ -14,6 +14,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
 import static net.dries007.tfc.api.types.trees.TreeGenerators.*;
 
 /**
@@ -422,7 +424,7 @@ public class WoodType {
             this.growthTime = 0;
             this.paramMap = new float[]{0.20f, 10f, 3, 3, 1.00f};
             this.logicMap = GrowthLogicKits.nullLogic;
-            this.cellKit = null;
+//            this.cellKit = null;
         }
 
         public Builder setColor(int color) {
@@ -546,7 +548,7 @@ public class WoodType {
         }
 
         public Builder setCellKit(String cellKit) {
-            this.cellKit = TreeRegistry.findCellKit(cellKit);
+            this.cellKit = TreeRegistry.findCellKit(new ResourceLocation(MODID, cellKit));
             return this;
         }
 

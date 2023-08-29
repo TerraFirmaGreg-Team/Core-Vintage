@@ -2,8 +2,12 @@ package net.dries007.tfc.api.types.rock.type;
 
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.ore.StoneType;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
+import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.minecraft.block.SoundType;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -18,7 +22,7 @@ import java.util.Set;
 public class RockType {
 
     private static final Set<RockType> ROCK_TYPES = new LinkedHashSet<>();
-
+    private static int counter = 16;
     @Nonnull
     private final String name;
     @Nonnull
@@ -52,6 +56,13 @@ public class RockType {
         if (!ROCK_TYPES.add(this)) {
             throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
         }
+
+        new StoneType(
+                counter++, "tfc_" + name, SoundType.STONE, orePrefix, material,
+                () -> TFCBlocks.getRockBlock(RockBlockVariants.RAW, this).getDefaultState(),
+                state -> state.getBlock() == TFCBlocks.getRockBlock(RockBlockVariants.RAW, this),
+                false
+        );
     }
 
     /**

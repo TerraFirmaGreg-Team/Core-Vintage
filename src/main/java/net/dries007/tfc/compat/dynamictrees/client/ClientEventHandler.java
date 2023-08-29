@@ -6,8 +6,6 @@ import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.models.bakedmodels.BakedModelBlockRooty;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.client.util.GrassColorHandler;
-import net.dries007.tfc.compat.dynamictrees.ModBlocks;
-import net.dries007.tfc.compat.dynamictrees.ModTrees;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -22,6 +20,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(modid = MOD_ID, value = {Side.CLIENT})
@@ -31,7 +30,7 @@ public class ClientEventHandler {
 
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent event) {
-        Block block = ModBlocks.blockRootyDirt;
+        Block block = blockRootyDirt;
         if (block.getRegistryName() != null) {
             BakedModelBlockRooty rootyModel = new BakedModelBlockRootyTFC();
             event.getModelRegistry().putObject(new ModelResourceLocation(block.getRegistryName(), "normal"), rootyModel);
@@ -41,20 +40,20 @@ public class ClientEventHandler {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         //Register Meshers for Branches
-        for (TreeFamily tree : ModTrees.TREES) {
+        for (TreeFamily tree : TREES) {
             ModelHelperTFC.regModel(tree.getDynamicBranch());//Register Branch itemBlock
             ModelHelperTFC.regModel(tree);//Register custom state mapper for branch
         }
 
-        ModelLoader.setCustomStateMapper(ModBlocks.blockRootyDirt, new StateMap.Builder().ignore(BlockRooty.LIFE).build());
+        ModelLoader.setCustomStateMapper(blockRootyDirt, new StateMap.Builder().ignore(BlockRooty.LIFE).build());
 
-        ModTrees.SPECIES.values().stream().filter(s -> s.getSeed() != Seed.NULLSEED).forEach(s -> ModelHelperTFC.regModel(s.getSeed()));//Register Seed Item Models
+        SPECIES.values().stream().filter(s -> s.getSeed() != Seed.NULLSEED).forEach(s -> ModelHelperTFC.regModel(s.getSeed()));//Register Seed Item Models
     }
 
     @SubscribeEvent
     public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
         final BlockColors blockColors = event.getBlockColors();
         blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, LeavesPaging.getLeavesMapForModId(MOD_ID).values().toArray(new Block[0]));
-        blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, ModBlocks.blockRootyDirt);
+        blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, blockRootyDirt);
     }
 }

@@ -1,8 +1,13 @@
 package net.dries007.tfc.common;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
+import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
+import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenConiferTopper;
+import com.ferreusveritas.dynamictrees.trees.Species;
 import gregtech.api.unification.material.event.MaterialEvent;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
@@ -21,25 +26,16 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.api.types.bush.type.BushTypeHandler;
-import net.dries007.tfc.api.types.crop.category.CropCategoryHandler;
-import net.dries007.tfc.api.types.crop.type.CropTypeHandler;
-import net.dries007.tfc.api.types.crop.variant.block.CropBlockVariantHandler;
+import net.dries007.tfc.api.types.bush.BushModule;
+import net.dries007.tfc.api.types.crop.CropModule;
 import net.dries007.tfc.api.types.drinkable.DrinkableHandler;
-import net.dries007.tfc.api.types.food.category.FoodCategoryHandler;
-import net.dries007.tfc.api.types.food.type.FoodTypeHandler;
-import net.dries007.tfc.api.types.metal.variant.block.MetalBlockVariantHandler;
-import net.dries007.tfc.api.types.plant.type.PlantTypeHandler;
-import net.dries007.tfc.api.types.rock.category.RockCategoryHandler;
-import net.dries007.tfc.api.types.rock.type.RockTypeHandler;
-import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariantHandler;
-import net.dries007.tfc.api.types.rock.variant.item.RockItemVariantHandler;
-import net.dries007.tfc.api.types.soil.type.SoilTypeHandler;
-import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariantHandler;
-import net.dries007.tfc.api.types.trees.TreeGeneratorHandler;
-import net.dries007.tfc.api.types.wood.type.WoodTypeHandler;
-import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariantHandler;
-import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariantHandler;
+import net.dries007.tfc.api.types.food.FoodModule;
+import net.dries007.tfc.api.types.metal.MetalModule;
+import net.dries007.tfc.api.types.plant.PlantModule;
+import net.dries007.tfc.api.types.rock.RockModule;
+import net.dries007.tfc.api.types.soil.SoilModule;
+import net.dries007.tfc.api.types.wood.WoodModule;
+import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.LootTablesTFC;
 import net.dries007.tfc.common.objects.blocks.BlockIceTFC;
@@ -53,11 +49,14 @@ import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.common.objects.recipes.RecipeHandler;
 import net.dries007.tfc.common.objects.tileentities.*;
-import net.dries007.tfc.compat.dynamictrees.*;
+import net.dries007.tfc.compat.dynamictrees.ModItems;
+import net.dries007.tfc.compat.dynamictrees.ModTrees;
+import net.dries007.tfc.compat.dynamictrees.SeasonManager;
+import net.dries007.tfc.compat.dynamictrees.TFCRootDecay;
+import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
-import net.dries007.tfc.compat.gregtech.stonetypes.StoneTypeHandler;
 import net.dries007.tfc.compat.top.TOPIntegration;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.network.*;
@@ -98,9 +97,12 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 import static net.dries007.tfc.common.objects.items.TFCItems.*;
 
@@ -112,37 +114,6 @@ public class CommonProxy {
     public static void onMaterialsInit(MaterialEvent event) {
         TFGMaterialHandler.init();
         TFGOrePrefixHandler.init();
-
-        DrinkableHandler.init();
-
-        RockCategoryHandler.init();
-        RockTypeHandler.init();
-        RockBlockVariantHandler.init();
-        RockItemVariantHandler.init();
-
-        SoilTypeHandler.init();
-        SoilBlockVariantHandler.init();
-
-        TreeGeneratorHandler.init();
-        WoodTypeHandler.init();
-        WoodBlockVariantHandler.init();
-        WoodItemVariantHandler.init();
-
-        FoodCategoryHandler.init();
-        FoodTypeHandler.init();
-
-        CropCategoryHandler.init();
-        CropTypeHandler.init();
-        CropBlockVariantHandler.init();
-
-        BushTypeHandler.init();
-
-        //PlantCategoryHandler.init();
-        PlantTypeHandler.init();
-
-        MetalBlockVariantHandler.init();
-
-        StoneTypeHandler.init();
     }
 
     @SubscribeEvent
@@ -229,9 +200,6 @@ public class CommonProxy {
         BLOCKS.forEach(r::register);
         FLUID.forEach(r::register);
 
-        ModBlocks.register(event.getRegistry());
-        ModTrees.registerBlocks(event.getRegistry());
-
         //=== TileEntity =============================================================================================//
 
         // Если поместить регистрацию TE в конструктор класса блока,
@@ -261,6 +229,74 @@ public class CommonProxy {
         registerTE(TEQuern.class, "quern");
         registerTE(TELargeVessel.class, "large_vessel");
         registerTE(TEPowderKeg.class, "powderkeg");
+
+
+        //For this mod it is vital that these are never reordered.  If a leaves properties is removed from the
+        //mod then there should be a LeavesProperties.NULLPROPERTIES used as a placeholder.
+        tfcLeavesProperties = new LeavesProperties[WoodType.getWoodTypes().size()];
+        leafMap = new HashMap<>();
+        int i = 0; // DT wants an array of leafprops for some reason
+        for (var type : WoodType.getWoodTypes()) {
+            var leaf = TFCBlocks.getWoodBlock(LEAVES, type);
+            var prop = new LeavesProperties(leaf.getDefaultState(), type.getCellKit());
+            leafMap.put(type, prop);
+            tfcLeavesProperties[i++] = prop;
+        }
+
+        for (LeavesProperties lp : tfcLeavesProperties) {
+            LeavesPaging.getNextLeavesBlock(MOD_ID, lp);
+        }
+        r.register(blockRootyDirt);
+
+        ArrayList<Block> treeBlocks = new ArrayList<>();
+
+
+        for (var type : WoodType.getWoodTypes()) {
+            String treeName = type.toString();
+
+            var family = new WoodTreeFamily(type);
+
+            TREES.add(family);
+
+            float[] map = type.getParamMap();
+
+            Species species = family.getCommonSpecies().setGrowthLogicKit(type.getGrowthLogicKit()).
+                    setBasicGrowingParameters(map[0], map[1], (int) map[2], (int) map[3], map[4]);
+
+            SPECIES.put(type, species);
+            Species.REGISTRY.register(species);
+        }
+
+        //Set up a map of species and their sapling types
+//        Map<String, Block> saplingMap = new HashMap<>();
+//        for (var type : WoodType.getWoodTypes()) {
+//            saplingMap.put(type.toString(), TFCBlocks.getWoodBlock(SAPLING, type));
+//        }
+//
+//
+//        for (Map.Entry<String, Species> entry : tfcSpecies.entrySet()) {
+//            TreeRegistry.registerSaplingReplacer(saplingMap.get(entry.getKey()).getDefaultState(), entry.getValue());
+//        }
+
+        TREES.forEach(tree -> {
+            String treeName = tree.getName().getPath();
+            leafMap.get(tree.getType()).setTree(tree);
+            Species species = SPECIES.get(tree.getType());
+            species.setLeavesProperties(leafMap.get(tree.getType()));
+
+            switch (treeName) {
+                case "acacia" -> species.addAcceptableSoils(DirtHelper.HARDCLAYLIKE); //match base DT
+                case "douglas_fir", "spruce", "pine", "sequoia", "white_cedar" -> {
+                    species.addGenFeature(new FeatureGenConiferTopper(leafMap.get(tree.getType())));
+                    tree.hasConiferVariants = true;
+                }
+            }
+        });
+
+        TREES.forEach(tree -> tree.getRegisterableBlocks(treeBlocks));
+
+        treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
+        r.registerAll(treeBlocks.toArray(new Block[0]));
     }
 
     @SubscribeEvent
@@ -428,7 +464,17 @@ public class CommonProxy {
     }
 
     public void onPreInit(FMLPreInitializationEvent event) {
-        SeasonHelper.setSeasonManager(SeasonManager.INSTANCE);
+        RockModule.preInit();
+        SoilModule.preInit();
+        WoodModule.preInit();
+        MetalModule.preInit();
+        FoodModule.preInit();
+        PlantModule.preInit();
+        CropModule.preInit();
+        BushModule.preInit();
+
+        DrinkableHandler.init();
+
         TFCBlocks.preInit();
         TFCItems.preInit();
         TFGToolItems.preInit();
@@ -471,6 +517,8 @@ public class CommonProxy {
         CapabilityWorldTracker.preInit();
 
         TOPIntegration.onPreInit();
+
+        SeasonHelper.setSeasonManager(SeasonManager.INSTANCE);
     }
 
     public void onInit(FMLInitializationEvent event) {
@@ -488,10 +536,11 @@ public class CommonProxy {
     }
 
     public void onPostInit(FMLPostInitializationEvent event) {
-        ModTrees.postInit();
+
         TreeHelper.setCustomRootBlockDecay(TFCRootDecay.INSTANCE);
         FuelManager.postInit();
         JsonConfigRegistry.INSTANCE.postInit();
+        ModTrees.postInit();
     }
 
     public void onLoadComplete(FMLLoadCompleteEvent event) {

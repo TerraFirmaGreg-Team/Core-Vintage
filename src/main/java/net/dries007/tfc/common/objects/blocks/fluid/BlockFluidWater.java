@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.fluid;
 
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
@@ -25,6 +26,8 @@ public class BlockFluidWater extends BlockFluidTFC implements ITemperatureBlock 
 
         setLightOpacity(3);
         disableStats();
+
+        DirtHelper.registerSoil(fluid.getBlock(), DirtHelper.WATERLIKE);
     }
 
     @Override

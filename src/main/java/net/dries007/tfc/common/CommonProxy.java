@@ -49,7 +49,6 @@ import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.common.objects.recipes.RecipeHandler;
 import net.dries007.tfc.common.objects.tileentities.*;
-import net.dries007.tfc.compat.dynamictrees.ModItems;
 import net.dries007.tfc.compat.dynamictrees.ModTrees;
 import net.dries007.tfc.compat.dynamictrees.SeasonManager;
 import net.dries007.tfc.compat.dynamictrees.TFCRootDecay;
@@ -389,8 +388,16 @@ public class CommonProxy {
 
         ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
         ITEM.forEach(r::register);
-        ModItems.register(event.getRegistry());
-        // ModTrees.registerItems(event.getRegistry());
+
+        ArrayList<Item> treeItems = new ArrayList<>();
+        TREES.forEach(tree -> tree.getRegisterableItems(treeItems));
+        r.registerAll(treeItems.toArray(new Item[treeItems.size()]));
+
+        //        WoodType.getWoodTypes().forEach(t -> {
+//            String treeName = t.toString();
+//            ((WoodTreeFamily) tfcSpecies.get(treeName).getFamily()).setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, t).getDefaultState());
+//        });
+
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

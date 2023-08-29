@@ -144,6 +144,8 @@ public class TFCItems {
         ITEM.add(WAND = new ItemDebug());
         ITEM.add(UNREFINED_BLOOM = new ItemBloom(false));
         ITEM.add(REFINED_BLOOM = new ItemBloom(true));
+
+
     }
 
 

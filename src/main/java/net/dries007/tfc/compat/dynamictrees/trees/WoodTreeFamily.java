@@ -7,9 +7,13 @@ import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBranchBasic;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBranchThick;
 
+import java.util.ArrayList;
+
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.leafMap;
 
 public class WoodTreeFamily extends TreeFamily {
+
+    public static ArrayList<WoodTreeFamily> TREES = new ArrayList<>();
     private final WoodType type;
     public boolean hasConiferVariants = false;
     private boolean thick = false;

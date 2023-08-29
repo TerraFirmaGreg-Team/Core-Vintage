@@ -4,7 +4,6 @@ import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.models.bakedmodels.BakedModelBlockRooty;
-import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.client.util.GrassColorHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -20,7 +19,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.SPECIES;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.blockRootyDirt;
+import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.TREES;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(modid = MOD_ID, value = {Side.CLIENT})
@@ -40,7 +41,7 @@ public class ClientEventHandler {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         //Register Meshers for Branches
-        for (TreeFamily tree : TREES) {
+        for (var tree : TREES) {
             ModelHelperTFC.regModel(tree.getDynamicBranch());//Register Branch itemBlock
             ModelHelperTFC.regModel(tree);//Register custom state mapper for branch
         }

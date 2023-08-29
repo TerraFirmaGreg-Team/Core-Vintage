@@ -103,6 +103,7 @@ import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 import static net.dries007.tfc.common.objects.items.TFCItems.*;
+import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.TREES;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TerraFirmaCraft.MOD_ID)

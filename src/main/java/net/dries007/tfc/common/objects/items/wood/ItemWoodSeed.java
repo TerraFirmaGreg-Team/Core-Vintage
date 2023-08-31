@@ -59,6 +59,6 @@ public class ItemWoodSeed extends ItemTFC implements IWoodItem {
     @Override
     public void onModelRegister() {
         ModelLoader.setCustomModelResourceLocation(this, 0,
-                new ModelResourceLocation(getResourceLocation(), "woodtype=" + getType()));
+                new ModelResourceLocation(getResourceLocation() + "/" + getType()));
     }
 }

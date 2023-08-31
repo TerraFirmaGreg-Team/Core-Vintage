@@ -32,7 +32,6 @@ public interface IWoodItem extends IHasModel {
     /**
      * Возвращает расположение в реестре для данного подтипа деревянного предмета.
      *
-     * @param subType подтип деревянного предмета
      * @return расположение в реестре
      */
     @Nonnull
@@ -43,7 +42,6 @@ public interface IWoodItem extends IHasModel {
     /**
      * Возвращает расположение ресурса для данного подтипа деревянного предмета.
      *
-     * @param subType подтип деревянного предмета
      * @return расположение ресурса
      */
     @Nonnull
@@ -54,7 +52,6 @@ public interface IWoodItem extends IHasModel {
     /**
      * Возвращает локализованное имя для данного подтипа деревянного предмета.
      *
-     * @param subType подтип деревянного предмета
      * @return локализованное имя
      */
     @Nonnull

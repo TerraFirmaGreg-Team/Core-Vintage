@@ -97,6 +97,6 @@ public class ItemRockLoose extends ItemTFC implements IRockItem {
     @Override
     public void onModelRegister() {
         ModelLoader.setCustomModelResourceLocation(this, 0,
-                new ModelResourceLocation(getResourceLocation(), "rocktype=" + getType()));
+                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

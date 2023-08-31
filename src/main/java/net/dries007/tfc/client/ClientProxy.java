@@ -7,7 +7,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
@@ -95,7 +94,8 @@ import java.util.List;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.TALL_GRASS;
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
+import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
+import static net.dries007.tfc.client.util.GrassColorHandler.computeGrassColor;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -250,66 +250,55 @@ public class ClientProxy extends CommonProxy {
         // todo: do something different for conifers - they should have a different color mapping through the seasons
         IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
 
-        //=== Soil ===================================================================================================//
+        //==== Soil ==================================================================================================//
 
-        blockColors.registerBlockColorHandler(grassColor, TFCBlocks.SOIL_BLOCKS.values()
-                .stream()
-                .filter(x -> x.getBlockVariant().isGrass())
-                .map(s -> (Block) s)
-                .toArray(Block[]::new));
+        blockColors.registerBlockColorHandler(grassColor,
+                TFCBlocks.SOIL_BLOCKS.values()
+                        .stream()
+                        .filter(x -> x.getBlockVariant().isGrass())
+                        .map(s -> (Block) s)
+                        .toArray(Block[]::new));
 
-        blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
-                BlockSoilFarmland.TINT[state.getValue(BlockSoilFarmland.MOISTURE)], TFCBlocks.SOIL_BLOCKS.values()
-                .stream()
-                .filter(x -> x.getBlockVariant() == SoilBlockVariants.FARMLAND)
-                .map(s -> (Block) s)
-                .toArray(Block[]::new));
+        blockColors.registerBlockColorHandler((s, w, p, i) ->
+                        BlockSoilFarmland.TINT[s.getValue(BlockSoilFarmland.MOISTURE)],
+                TFCBlocks.SOIL_BLOCKS.values()
+                        .stream()
+                        .filter(x -> x.getBlockVariant() == SoilBlockVariants.FARMLAND)
+                        .map(s -> (Block) s)
+                        .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler(grassColor, TFCBlocks.PEAT_GRASS);
 
-        //=== Plant ==================================================================================================//
+        //==== Plant =================================================================================================//
 
-        blockColors.registerBlockColorHandler(grassColor, TFCBlocks.PLANT_BLOCKS.values()
-                .stream()
-                .map(s -> (Block) s)
-                .toArray(Block[]::new));
-
-        //=== Wood ===================================================================================================//
-
-        blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IWoodBlock) s.getBlock()).getType().getColor() : 0xFFFFFF,
-                TFCBlocks.WOOD_BLOCKS.values()
+        blockColors.registerBlockColorHandler(grassColor,
+                TFCBlocks.PLANT_BLOCKS.values()
                         .stream()
-                        .filter(block -> block.getBlockVariant() != LEAVES)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
-        blockColors.registerBlockColorHandler(foliageColor,
+        //==== Wood ==================================================================================================//
+
+        blockColors.registerBlockColorHandler((s, w, p, i) -> {
+                    // цвет дерева
+                    if (i == 0) return ((IWoodBlock) s.getBlock()).getType().getColor();
+                    // цвет листвы
+                    if (i == 1) return computeGrassColor(s, w, p, i);
+                    // Если не указан индекс
+                    return 0xFFFFFF;
+                },
                 TFCBlocks.WOOD_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getBlockVariant() == LEAVES)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
-        //=== Metal ==================================================================================================//
+        //==== Metal =================================================================================================//
 
         blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IMetalBlock) s.getBlock()).getMaterial().getMaterialRGB() : 0xFFFFFF,
                 TFCBlocks.METAL_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
-
-
-        // This is talking about tall grass vs actual grass blocks
-
-//		blockColors.registerBlockColorHandler(grassColor, TFCBlocks.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
-//
-//
-//				blockColors.registerBlockColorHandler(foliageColor, TFCBlocks.getAllLeafBlocks().toArray(new Block[0]));
-//		blockColors.registerBlockColorHandler(foliageColor, TFCBlocks.getAllPlantBlocks().toArray(new BlockPlantTFC[0]));
-//
-//
-//		blockColors.registerBlockColorHandler(foliageColor, TFCBlocks.getAllFlowerPots().toArray(new Block[0]));
-
 
     }
 
@@ -319,7 +308,7 @@ public class ClientProxy extends CommonProxy {
     public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
         var itemColors = event.getItemColors();
 
-        //=== Soil ===================================================================================================//
+        //==== Soil ==================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCBlocks.SOIL_BLOCKS.values()
@@ -331,7 +320,7 @@ public class ClientProxy extends CommonProxy {
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCBlocks.PEAT_GRASS);
 
-        //=== Plant ==================================================================================================//
+        //==== Plant =================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCBlocks.PLANT_BLOCKS.values()
@@ -340,17 +329,17 @@ public class ClientProxy extends CommonProxy {
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
-        //=== Wood ===================================================================================================//
+        //==== Wood ==================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> {
-                    if (i == 0) {
-                        // цвет дерева
-                        return ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor();
-                    }
-                    if (i == 1) {
-                        // цвет листвы
+                    // цвет дерева
+                    if (i == 0) return ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor();
+
+                    // цвет листвы
+                    if (i == 1)
                         return event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i);
-                    }
+
+                    // Если не указан индекс
                     return 0xFFFFFF;
                 },
                 TFCBlocks.WOOD_BLOCKS.values()
@@ -361,10 +350,11 @@ public class ClientProxy extends CommonProxy {
         itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
                 TFCItems.WOOD_ITEMS.values()
                         .stream()
+                        .filter(x -> x.getItemVariant() != SEED)
                         .map(s -> (Item) s)
                         .toArray(Item[]::new));
 
-        //=== Metal ==================================================================================================//
+        //==== Metal =================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IMetalBlock) ((ItemBlock) s.getItem()).getBlock()).getMaterial().getMaterialRGB() : 0xFFFFFF,
                 TFCBlocks.METAL_BLOCKS.values()
@@ -372,14 +362,14 @@ public class ClientProxy extends CommonProxy {
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
-        //=== Other ==================================================================================================//
+        //==== Other =================================================================================================//
 
 
-        itemColors.registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? EnumDyeColor.byDyeDamage(stack.getItemDamage()).getColorValue() : 0xFFFFFF,
+        itemColors.registerItemColorHandler((s, i) -> i == 1 ? EnumDyeColor.byDyeDamage(s.getItemDamage()).getColorValue() : 0xFFFFFF,
                 ItemsTFC_old.UNFIRED_VESSEL_GLAZED, ItemsTFC_old.FIRED_VESSEL_GLAZED);
 
-        itemColors.registerItemColorHandler((stack, tintIndex) -> {
-            IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        itemColors.registerItemColorHandler((s, i) -> {
+            var food = s.getCapability(CapabilityFood.CAPABILITY, null);
             if (food != null) {
                 return food.isRotten() ? ConfigTFC.Client.DISPLAY.rottenFoodOverlayColor : 0xFFFFFF;
             }

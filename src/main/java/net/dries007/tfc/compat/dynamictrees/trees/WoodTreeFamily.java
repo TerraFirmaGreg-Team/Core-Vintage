@@ -4,7 +4,6 @@ import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
-import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -74,17 +73,19 @@ public class WoodTreeFamily extends TreeFamily {
         return isThick() ? new BlockWoodBranchThick(branchName) : new BlockWoodBranchBasic(branchName);
     }
 
+
     public static class WoodTreeSpecies extends Species {
 
         public static final Map<WoodType, Species> SPECIES = new HashMap<>();
 
         public WoodTreeSpecies(WoodTreeFamily treeFamily, LeavesProperties prop) {
             super(treeFamily.getName(), treeFamily, prop);
-            setupStandardSeedDropping();
+
             remDropCreator(new ResourceLocation(ModConstants.MODID, "logs"));
             addDropCreator(new DropCreatorWoodLog(treeFamily)); // need our own because stacksize
             setLeavesProperties(prop);
             setSeedStack(new ItemStack(TFCItems.getWoodItem(SEED, treeFamily.getType())));
+            setupStandardSeedDropping();
         }
 
         @Override
@@ -95,13 +96,6 @@ public class WoodTreeFamily extends TreeFamily {
 
         public float getSignalEnergy() {
             return signalEnergy;
-        }
-
-        @Override
-        public Species generateSeed() {
-            Seed seed = new Seed("seed/" + getRegistryName().getPath());
-            setSeedStack(new ItemStack(seed));
-            return this;
         }
 
         //TFC style.

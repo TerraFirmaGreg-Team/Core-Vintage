@@ -5,8 +5,6 @@ import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
-import com.ferreusveritas.dynamictrees.systems.DirtHelper;
-import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenConiferTopper;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import gregtech.api.unification.material.event.MaterialEvent;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -104,7 +102,7 @@ import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LE
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 import static net.dries007.tfc.common.objects.items.TFCItems.*;
 import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.TREES;
-import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies.SPECIES;
+import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.WoodTreeSpecies.SPECIES;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TerraFirmaCraft.MOD_ID)
@@ -278,20 +276,6 @@ public class CommonProxy {
 //            TreeRegistry.registerSaplingReplacer(saplingMap.get(entry.getKey()).getDefaultState(), entry.getValue());
 //        }
 
-        TREES.forEach(tree -> {
-            String treeName = tree.getName().getPath();
-            leafMap.get(tree.getType()).setTree(tree);
-            Species species = SPECIES.get(tree.getType());
-            species.setLeavesProperties(leafMap.get(tree.getType()));
-
-            switch (treeName) {
-                case "acacia" -> species.addAcceptableSoils(DirtHelper.HARDCLAYLIKE); //match base DT
-                case "douglas_fir", "spruce", "pine", "sequoia", "white_cedar" -> {
-                    species.addGenFeature(new FeatureGenConiferTopper(leafMap.get(tree.getType())));
-                    tree.hasConiferVariants = true;
-                }
-            }
-        });
 
         TREES.forEach(tree -> tree.getRegisterableBlocks(treeBlocks));
 

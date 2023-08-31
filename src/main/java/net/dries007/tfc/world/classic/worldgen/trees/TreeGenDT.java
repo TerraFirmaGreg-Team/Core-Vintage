@@ -6,7 +6,7 @@ import net.dries007.tfc.api.types.trees.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
-import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies;
+import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +15,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
-import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies.SPECIES;
+import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.WoodTreeSpecies.SPECIES;
 
 
 public class TreeGenDT implements ITreeGenerator {
@@ -46,7 +46,7 @@ public class TreeGenDT implements ITreeGenerator {
 
         var dTree = SPECIES.get(type);
         int lowestBranchHeight = dTree.getLowestBranchHeight();
-        int maxTreeHeight = (int) ((WoodTreeSpecies) dTree).getSignalEnergy(); //signal energy access problem so need to cast
+        int maxTreeHeight = (int) ((WoodTreeFamily.WoodTreeSpecies) dTree).getSignalEnergy(); //signal energy access problem so need to cast
 
         var bounds = new SafeChunkBounds(world, world.getChunk(pos).getPos());
         for (int y = 0; y <= lowestBranchHeight; y++) {

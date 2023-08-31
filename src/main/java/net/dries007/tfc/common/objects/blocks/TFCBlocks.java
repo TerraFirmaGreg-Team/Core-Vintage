@@ -36,7 +36,7 @@ import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockCrucible;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockPowderKeg;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
-import net.dries007.tfc.compat.dynamictrees.blocks.BlockRootyDirtTFC;
+import net.dries007.tfc.compat.dynamictrees.blocks.BlockSoilRootyDirt;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -82,7 +82,7 @@ public class TFCBlocks {
 
     public static LeavesProperties[] tfcLeavesProperties;
     public static Map<WoodType, LeavesProperties> leafMap;
-    public static BlockRootyDirtTFC blockRootyDirt;
+    public static BlockSoilRootyDirt blockRootyDirt;
 
 
     public static BlockDebug DEBUG;
@@ -249,7 +249,7 @@ public class TFCBlocks {
         BLOCKS.add(THATCH_BED = new BlockThatchBed());
         BLOCKS.add(CLADDING = new BlockMetalCladding());
 
-        blockRootyDirt = new BlockRootyDirtTFC();
+        blockRootyDirt = new BlockSoilRootyDirt();
     }
 
     @Nonnull

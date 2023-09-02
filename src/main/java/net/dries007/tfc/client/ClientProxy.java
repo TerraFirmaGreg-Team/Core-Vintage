@@ -1,5 +1,6 @@
 package net.dries007.tfc.client;
 
+import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.google.common.collect.ImmutableMap;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
@@ -95,7 +96,6 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.TALL_GRASS;
 import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
-import static net.dries007.tfc.client.util.GrassColorHandler.computeGrassColor;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -283,7 +283,8 @@ public class ClientProxy extends CommonProxy {
                     // цвет дерева
                     if (i == 0) return ((IWoodBlock) s.getBlock()).getType().getColor();
                     // цвет листвы
-                    if (i == 1) return computeGrassColor(s, w, p, i);
+                    if (i == 1) return foliageColor.colorMultiplier(s, w, p, i);
+
                     // Если не указан индекс
                     return 0xFFFFFF;
                 },
@@ -291,6 +292,10 @@ public class ClientProxy extends CommonProxy {
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
+
+        blockColors.registerBlockColorHandler(foliageColor,
+                LeavesPaging.getLeavesMapForModId(MOD_ID).values()
+                        .toArray(new Block[0]));
 
         //==== Metal =================================================================================================//
 
@@ -308,21 +313,23 @@ public class ClientProxy extends CommonProxy {
     public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
         var itemColors = event.getItemColors();
 
+        var blockColors = event.getBlockColors();
+
         //==== Soil ==================================================================================================//
 
-        itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
+        itemColors.registerItemColorHandler((s, i) -> blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCBlocks.SOIL_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant().isGrass())
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
-        itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
+        itemColors.registerItemColorHandler((s, i) -> blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCBlocks.PEAT_GRASS);
 
         //==== Plant =================================================================================================//
 
-        itemColors.registerItemColorHandler((s, i) -> event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
+        itemColors.registerItemColorHandler((s, i) -> blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
                 TFCBlocks.PLANT_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant() == SHORT_GRASS || x.getBlockVariant() == TALL_GRASS)
@@ -333,12 +340,11 @@ public class ClientProxy extends CommonProxy {
 
         itemColors.registerItemColorHandler((s, i) -> {
                     // цвет дерева
-                    if (i == 0) return ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor();
-
+                    if (i == 0)
+                        return ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor();
                     // цвет листвы
                     if (i == 1)
-                        return event.getBlockColors().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i);
-
+                        return blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i);
                     // Если не указан индекс
                     return 0xFFFFFF;
                 },

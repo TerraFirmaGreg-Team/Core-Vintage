@@ -80,8 +80,7 @@ public class WoodTreeFamily extends TreeFamily {
 
     @Override
     public BlockBranch createBranch() {
-//        var branchName = String.format("wood/branch/%s", type);
-        var branchName = "branch/" + getName().getPath();
+        var branchName = "wood/branch/" + getName().getPath();
         return isThick() ? new BlockWoodBranchThick(branchName) : new BlockWoodBranchBasic(branchName);
     }
 

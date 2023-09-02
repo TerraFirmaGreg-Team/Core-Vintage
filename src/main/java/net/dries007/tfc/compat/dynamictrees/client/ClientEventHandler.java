@@ -1,8 +1,6 @@
 package net.dries007.tfc.compat.dynamictrees.client;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
-import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
-import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.models.bakedmodels.BakedModelBlockRooty;
 import net.dries007.tfc.client.util.GrassColorHandler;
 import net.minecraft.block.Block;
@@ -21,7 +19,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.blockRootyDirt;
 import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.TREES;
-import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.WoodTreeSpecies.SPECIES;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(modid = MOD_ID, value = {Side.CLIENT})
@@ -47,14 +44,12 @@ public class ClientEventHandler {
         }
 
         ModelLoader.setCustomStateMapper(blockRootyDirt, new StateMap.Builder().ignore(BlockRooty.LIFE).build());
-
-        SPECIES.values().stream().filter(s -> s.getSeed() != Seed.NULLSEED).forEach(s -> ModelHelperTFC.regModel(s.getSeed()));//Register Seed Item Models
     }
 
     @SubscribeEvent
     public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
         final BlockColors blockColors = event.getBlockColors();
-        blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, LeavesPaging.getLeavesMapForModId(MOD_ID).values().toArray(new Block[0]));
+
         blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, blockRootyDirt);
     }
 }

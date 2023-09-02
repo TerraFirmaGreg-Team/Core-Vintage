@@ -5,7 +5,6 @@ import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
-import com.ferreusveritas.dynamictrees.trees.Species;
 import gregtech.api.unification.material.event.MaterialEvent;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
@@ -102,7 +101,6 @@ import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LE
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 import static net.dries007.tfc.common.objects.items.TFCItems.*;
 import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.TREES;
-import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.WoodTreeSpecies.SPECIES;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TerraFirmaCraft.MOD_ID)
@@ -253,15 +251,14 @@ public class CommonProxy {
 
             var family = new WoodTreeFamily(type);
 
-            TREES.add(family);
 
-            float[] map = type.getParamMap();
-
-            Species species = family.getCommonSpecies().setGrowthLogicKit(type.getGrowthLogicKit()).
-                    setBasicGrowingParameters(map[0], map[1], (int) map[2], (int) map[3], map[4]);
-
-            SPECIES.put(type, species);
-            Species.REGISTRY.register(species);
+//            float[] map = type.getParamMap();
+//
+//            Species species = family.getCommonSpecies().setGrowthLogicKit(type.getGrowthLogicKit()).
+//                    setBasicGrowingParameters(map[0], map[1], (int) map[2], (int) map[3], map[4]);
+//
+//            SPECIES.put(type, species);
+//            Species.REGISTRY.register(species);
         }
 
         //Set up a map of species and their sapling types

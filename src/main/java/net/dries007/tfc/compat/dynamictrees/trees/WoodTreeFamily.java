@@ -44,6 +44,8 @@ public class WoodTreeFamily extends TreeFamily {
         setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, type).getDefaultState());
 
         leafMap.get(type).setTree(this);
+
+        TREES.add(this);
     }
 
     public WoodType getType() {
@@ -76,7 +78,7 @@ public class WoodTreeFamily extends TreeFamily {
 
     @Override
     public BlockBranch createBranch() {
-        String branchName = "branch/" + getName().getPath();
+        var branchName = String.format("wood/branch/%s", type);
         return isThick() ? new BlockWoodBranchThick(branchName) : new BlockWoodBranchBasic(branchName);
     }
 
@@ -93,6 +95,13 @@ public class WoodTreeFamily extends TreeFamily {
             setSeedStack(new ItemStack(TFCItems.getWoodItem(SEED, type)));
             setLeavesProperties(leafMap.get(type));
             setupStandardSeedDropping();
+
+            float[] map = type.getParamMap();
+            setGrowthLogicKit(type.getGrowthLogicKit()).
+                    setBasicGrowingParameters(map[0], map[1], (int) map[2], (int) map[3], map[4]);
+
+            SPECIES.put(type, this);
+            Species.REGISTRY.register(this);
         }
 
         @Override

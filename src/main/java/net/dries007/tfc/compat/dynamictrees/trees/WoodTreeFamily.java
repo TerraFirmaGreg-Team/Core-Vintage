@@ -3,7 +3,6 @@ package net.dries007.tfc.compat.dynamictrees.trees;
 import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
-import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -18,6 +17,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,8 +40,7 @@ public class WoodTreeFamily extends TreeFamily {
         super(TerraFirmaCraft.identifier(type.toString()));
 
         this.type = type;
-
-        setCommonSpecies(new WoodTreeSpecies(this, leafMap.get(type)));
+        setCommonSpecies(new WoodTreeSpecies(this, type));
         setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, type).getDefaultState());
 
         leafMap.get(type).setTree(this);
@@ -48,6 +48,13 @@ public class WoodTreeFamily extends TreeFamily {
 
     public WoodType getType() {
         return type;
+    }
+
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getWoodColor() {
+        return type.getColor();
     }
 
     @Override
@@ -78,13 +85,13 @@ public class WoodTreeFamily extends TreeFamily {
 
         public static final Map<WoodType, Species> SPECIES = new HashMap<>();
 
-        public WoodTreeSpecies(WoodTreeFamily treeFamily, LeavesProperties prop) {
-            super(treeFamily.getName(), treeFamily, prop);
+        public WoodTreeSpecies(WoodTreeFamily treeFamily, WoodType type) {
+            super(treeFamily.getName(), treeFamily);
 
             remDropCreator(new ResourceLocation(ModConstants.MODID, "logs"));
             addDropCreator(new DropCreatorWoodLog(treeFamily)); // need our own because stacksize
-            setLeavesProperties(prop);
-            setSeedStack(new ItemStack(TFCItems.getWoodItem(SEED, treeFamily.getType())));
+            setSeedStack(new ItemStack(TFCItems.getWoodItem(SEED, type)));
+            setLeavesProperties(leafMap.get(type));
             setupStandardSeedDropping();
         }
 

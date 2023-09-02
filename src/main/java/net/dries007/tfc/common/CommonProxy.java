@@ -2,7 +2,6 @@ package net.dries007.tfc.common;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
-import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import gregtech.api.unification.material.event.MaterialEvent;
@@ -93,11 +92,9 @@ import net.minecraftforge.registries.RegistryBuilder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 import static net.dries007.tfc.common.objects.items.TFCItems.*;
 import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.TREES;
@@ -227,21 +224,6 @@ public class CommonProxy {
         registerTE(TEPowderKeg.class, "powderkeg");
 
 
-        //For this mod it is vital that these are never reordered.  If a leaves properties is removed from the
-        //mod then there should be a LeavesProperties.NULLPROPERTIES used as a placeholder.
-        tfcLeavesProperties = new LeavesProperties[WoodType.getWoodTypes().size()];
-        leafMap = new HashMap<>();
-        int i = 0; // DT wants an array of leafprops for some reason
-        for (var type : WoodType.getWoodTypes()) {
-            var leaf = TFCBlocks.getWoodBlock(LEAVES, type);
-            var prop = new LeavesProperties(leaf.getDefaultState(), type.getCellKit());
-            leafMap.put(type, prop);
-            tfcLeavesProperties[i++] = prop;
-        }
-
-        for (LeavesProperties lp : tfcLeavesProperties) {
-            LeavesPaging.getNextLeavesBlock(MOD_ID, lp);
-        }
         r.register(blockRootyDirt);
 
         ArrayList<Block> treeBlocks = new ArrayList<>();

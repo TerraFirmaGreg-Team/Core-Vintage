@@ -4,6 +4,8 @@ import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
+import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
+import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -25,10 +27,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
 import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.blockRootyDirt;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.leafMap;
 
 public class WoodTreeFamily extends TreeFamily {
 
@@ -41,10 +43,9 @@ public class WoodTreeFamily extends TreeFamily {
         super(TerraFirmaCraft.identifier(type.toString()));
 
         this.type = type;
+
         setCommonSpecies(new WoodTreeSpecies(this, type));
         setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, type).getDefaultState());
-
-        leafMap.get(type).setTree(this);
 
         TREES.add(this);
     }
@@ -94,12 +95,17 @@ public class WoodTreeFamily extends TreeFamily {
 
             var leaves = TFCBlocks.getWoodBlock(LEAVES, type);
             var sapling = TFCBlocks.getWoodBlock(SAPLING, type);
+            var seed = TFCItems.getWoodItem(SEED, type);
+
+            var leavesProperties = new LeavesProperties(leaves.getDefaultState(), type.getCellKit());
 
             remDropCreator(new ResourceLocation(ModConstants.MODID, "logs"));
             addDropCreator(new DropCreatorWoodLog(treeFamily)); // need our own because stacksize
-            setSeedStack(new ItemStack(TFCItems.getWoodItem(SEED, type)));
-            setLeavesProperties(leafMap.get(type));
+            setSeedStack(new ItemStack(seed));
             setupStandardSeedDropping();
+            setLeavesProperties(leavesProperties);
+            leavesProperties.setTree(treeFamily);
+            LeavesPaging.getNextLeavesBlock(MOD_ID, leavesProperties);
 
             float[] map = type.getParamMap();
             setGrowthLogicKit(type.getGrowthLogicKit()).

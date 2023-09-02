@@ -1,6 +1,5 @@
 package net.dries007.tfc.common.objects.blocks;
 
-import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.Material;
 import net.dries007.tfc.api.types.GroundcoverType;
@@ -80,8 +79,6 @@ public class TFCBlocks {
     // Жидкости
     public static final List<BlockFluidBase> FLUID = new ArrayList<>();
 
-    public static LeavesProperties[] tfcLeavesProperties;
-    public static Map<WoodType, LeavesProperties> leafMap;
     public static BlockSoilRootyDirt blockRootyDirt;
 
 

@@ -1,6 +1,7 @@
 package net.dries007.tfc.compat.dynamictrees.trees;
 
 import com.ferreusveritas.dynamictrees.ModConstants;
+import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.trees.Species;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LOG;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
 import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.blockRootyDirt;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.leafMap;
@@ -78,7 +79,8 @@ public class WoodTreeFamily extends TreeFamily {
 
     @Override
     public BlockBranch createBranch() {
-        var branchName = String.format("wood/branch/%s", type);
+//        var branchName = String.format("wood/branch/%s", type);
+        var branchName = "branch/" + getName().getPath();
         return isThick() ? new BlockWoodBranchThick(branchName) : new BlockWoodBranchBasic(branchName);
     }
 
@@ -89,6 +91,9 @@ public class WoodTreeFamily extends TreeFamily {
 
         public WoodTreeSpecies(WoodTreeFamily treeFamily, WoodType type) {
             super(treeFamily.getName(), treeFamily);
+
+            var leaves = TFCBlocks.getWoodBlock(LEAVES, type);
+            var sapling = TFCBlocks.getWoodBlock(SAPLING, type);
 
             remDropCreator(new ResourceLocation(ModConstants.MODID, "logs"));
             addDropCreator(new DropCreatorWoodLog(treeFamily)); // need our own because stacksize
@@ -102,6 +107,7 @@ public class WoodTreeFamily extends TreeFamily {
 
             SPECIES.put(type, this);
             Species.REGISTRY.register(this);
+            TreeRegistry.registerSaplingReplacer(sapling.getDefaultState(), this);
         }
 
         @Override

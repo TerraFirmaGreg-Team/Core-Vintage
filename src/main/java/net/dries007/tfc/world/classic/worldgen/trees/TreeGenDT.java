@@ -2,7 +2,7 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
-import net.dries007.tfc.api.types.trees.ITreeGenerator;
+import net.dries007.tfc.api.types.tree.ITreeGenerator;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;

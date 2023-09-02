@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.api.types.trees.TreeGenerators.GEN_FRUIT;
+import static net.dries007.tfc.api.types.tree.TreeGenerators.GEN_FRUIT;
 
 public class WorldGenFruitTrees implements IWorldGenerator {
     private static final List<WoodType> TREES = WoodType.getWoodTypes().stream()

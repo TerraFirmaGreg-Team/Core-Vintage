@@ -5,7 +5,7 @@ import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
 import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
 import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
 import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.api.types.trees.ITreeGenerator;
+import net.dries007.tfc.api.types.tree.ITreeGenerator;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -31,7 +31,7 @@ import java.util.Random;
 import java.util.Set;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
-import static net.dries007.tfc.api.types.trees.TreeGenerators.*;
+import static net.dries007.tfc.api.types.tree.TreeGenerators.*;
 
 /**
  * Класс Wood представляет тип дерева с определенными характеристиками.

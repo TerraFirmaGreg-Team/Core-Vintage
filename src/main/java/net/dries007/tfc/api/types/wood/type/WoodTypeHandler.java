@@ -2,7 +2,7 @@ package net.dries007.tfc.api.types.wood.type;
 
 import com.ferreusveritas.dynamictrees.ModTrees;
 
-import static net.dries007.tfc.api.types.trees.TreeGenerators.*;
+import static net.dries007.tfc.api.types.tree.TreeGenerators.*;
 import static net.dries007.tfc.api.types.wood.type.WoodTypes.*;
 
 public class WoodTypeHandler {

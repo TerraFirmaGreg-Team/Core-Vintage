@@ -236,7 +236,7 @@ public final class ConfigTFC {
 
             @Config.Comment("If false, leaves will not drop saplings.")
             @Config.LangKey("config." + MOD_ID + ".general.tree.enableSaplings")
-            public boolean enableSaplings = true;
+            public boolean enableSaplings = false;
 
             @Config.Comment("Chance per log for an item to drop when using a stone axe.")
             @Config.RangeDouble(min = 0, max = 1)

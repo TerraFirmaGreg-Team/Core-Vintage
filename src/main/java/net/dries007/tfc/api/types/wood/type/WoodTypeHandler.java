@@ -16,6 +16,7 @@ public class WoodTypeHandler {
                 .setParamMap(new float[]{0.10f, 14f, 6, 6, 0.90f})
                 .setCellKit("acacia")
                 .build();
+
         ASH = new WoodType.Builder("ash")
                 .setColor(0xAE604E).setTemp(-6f, 12f).setRain(60f, 140f)
                 .setBurnInfo(696f, 1250)
@@ -23,6 +24,7 @@ public class WoodTypeHandler {
                 .setParamMap(new float[]{0.25f, 12f, 4, 3, 1.00f})
                 .setCellKit("deciduous")
                 .build();
+
         ASPEN = new WoodType.Builder("aspen")
                 .setColor(0x373727).setTemp(-10f, 16f).setRain(10f, 80f)
                 .setBurnInfo(611f, 1000)
@@ -32,6 +34,7 @@ public class WoodTypeHandler {
                 .setGrowthLogicKit(ModTrees.CONIFER)
                 .setCellKit("deciduous")
                 .build();
+
         BIRCH = new WoodType.Builder("birch")
                 .setColor(0x897658).setTemp(-15f, 7f).setRain(20f, 180f)
                 .setBurnInfo(652f, 1750)
@@ -40,6 +43,7 @@ public class WoodTypeHandler {
                 .setParamMap(new float[]{0.25f, 12f, 5, 5, 1.15f})
                 .setCellKit("deciduous")
                 .build();
+
         BLACKWOOD = new WoodType.Builder("blackwood")
                 .setColor(0x1A1A1A).setTemp(4f, 33f).setRain(0f, 120f)
                 .setBurnInfo(720f, 1750)
@@ -49,6 +53,7 @@ public class WoodTypeHandler {
                 .setGrowthLogicKit(ModTrees.DARKOAK)
                 .setCellKit("darkoak")
                 .build();
+
         CHESTNUT = new WoodType.Builder("chestnut")
                 .setColor(0x642C1E).setTemp(11f, 35f).setRain(160f, 320f)
                 .setBurnInfo(651f, 1500)
@@ -58,6 +63,7 @@ public class WoodTypeHandler {
                 .setCellKit("deciduous")
                 .setTannin()
                 .build();
+        
         DOUGLAS_FIR = new WoodType.Builder("douglas_fir")
                 .setColor(0xD7BC8D).setTemp(-2f, 14f).setRain(280f, 480f)
                 .setBurnInfo(707f, 1500)
@@ -68,6 +74,7 @@ public class WoodTypeHandler {
                 .setCellKit("conifer")
                 .setBushes().setTannin()
                 .build();
+
         HICKORY = new WoodType.Builder("hickory")
                 .setColor(0x4E3418).setTemp(7f, 29f).setRain(80f, 250f)
                 .setBurnInfo(762f, 2000)
@@ -78,6 +85,7 @@ public class WoodTypeHandler {
                 .setCellKit("deciduous")
                 .setTannin()
                 .build();
+
         MAPLE = new WoodType.Builder("maple")
                 .setColor(0xC3782F).setTemp(3f, 20f).setRain(140f, 360f)
                 .setBurnInfo(745f, 2000)
@@ -87,6 +95,7 @@ public class WoodTypeHandler {
                 .setCellKit("deciduous")
                 .setTannin()
                 .build();
+
         OAK = new WoodType.Builder("oak")
                 .setColor(0xC29D62).setTemp(-8f, 12f).setRain(180f, 430f)
                 .setBurnInfo(728f, 2250)
@@ -97,6 +106,7 @@ public class WoodTypeHandler {
                 .setCellKit("deciduous")
                 .setTannin()
                 .build();
+
         PALM = new WoodType.Builder("palm")
                 .setColor(0xB56F38).setTemp(16f, 35f).setRain(280f, 500f)
                 .setBurnInfo(730f, 1250)
@@ -106,6 +116,7 @@ public class WoodTypeHandler {
                 .setGrowthLogicKit(ModTrees.JUNGLE)
                 .setCellKit("palm")
                 .build();
+
         PINE = new WoodType.Builder("pine")
                 .setColor(0xD1BD9A).setTemp(-15f, 7f).setRain(60f, 250f)
                 .setBurnInfo(627f, 1250)
@@ -116,6 +127,7 @@ public class WoodTypeHandler {
                 .setCellKit("conifer")
                 .setConifer()
                 .build();
+
         ROSEWOOD = new WoodType.Builder("rosewood")
                 .setColor(0x912222).setTemp(8f, 18f).setRain(10f, 190f)
                 .setBurnInfo(640f, 1500)
@@ -124,6 +136,7 @@ public class WoodTypeHandler {
                 .setParamMap(new float[]{0.35f, 15f, 7, 3, 1.00f})
                 .setCellKit("deciduous")
                 .build();
+
         SEQUOIA = new WoodType.Builder("sequoia")
                 .setColor(0x965B3B).setTemp(-5f, 12f).setRain(250f, 420f)
                 .setBurnInfo(612f, 1750)
@@ -134,6 +147,7 @@ public class WoodTypeHandler {
                 .setCellKit("conifer")
                 .setConifer().setBushes().setTannin()
                 .build();
+
         SPRUCE = new WoodType.Builder("spruce")
                 .setColor(0xBF806F).setTemp(-11f, 6f).setRain(120f, 380f)
                 .setBurnInfo(608f, 1500)
@@ -144,6 +158,7 @@ public class WoodTypeHandler {
                 .setCellKit("conifer")
                 .setConifer()
                 .build();
+
         SYCAMORE = new WoodType.Builder("sycamore")
                 .setColor(0xDCA448).setTemp(17f, 33f).setRain(120f, 290f)
                 .setBurnInfo(653f, 1750)
@@ -153,6 +168,7 @@ public class WoodTypeHandler {
                 .setCellKit("deciduous")
                 .setBushes()
                 .build();
+
         WHITE_CEDAR = new WoodType.Builder("white_cedar")
                 .setColor(0xD4D4D4).setTemp(-8f, 17f).setRain(10f, 240f)
                 .setBurnInfo(625f, 1500)
@@ -162,6 +178,7 @@ public class WoodTypeHandler {
                 .setGrowthLogicKit(ModTrees.CONIFER)
                 .setCellKit("deciduous")
                 .build();
+
         WILLOW = new WoodType.Builder("willow")
                 .setColor(0x3A430B).setTemp(15f, 32f).setRain(230f, 400f)
                 .setBurnInfo(603f, 1000)
@@ -172,6 +189,7 @@ public class WoodTypeHandler {
                 .setCellKit("deciduous")
                 .setBushes()
                 .build();
+
         KAPOK = new WoodType.Builder("kapok")
                 .setColor(0xAD879F).setTemp(15f, 35f).setRain(210f, 500f)
                 .setBurnInfo(645f, 1000)
@@ -184,6 +202,7 @@ public class WoodTypeHandler {
                 .setBushes()
                 .build();
 
+
 //        BANANA = new WoodType
 //                .Builder("banana")
 //                .setColor(0xBB9C7D).setTemp(23f, 35f).setRain(280f, 400f)
@@ -193,6 +212,7 @@ public class WoodTypeHandler {
 //                .setFlowerMonth(Month.APRIL, 2)
 //                .setHarvestMonth(Month.SEPTEMBER, 1)
 //                .build();
+
 //
 //        CHERRY = new WoodType
 //                .Builder("cherry")
@@ -203,6 +223,7 @@ public class WoodTypeHandler {
 //                .setFlowerMonth(Month.APRIL, 1)
 //                .setHarvestMonth(Month.JUNE, 1)
 //                .build();
+
 //
 //        GREEN_APPLE = new WoodType
 //                .Builder("green_apple")
@@ -213,6 +234,7 @@ public class WoodTypeHandler {
 //                .setFlowerMonth(Month.MAY, 2)
 //                .setHarvestMonth(Month.OCTOBER, 2)
 //                .build();
+
 //
 //        LEMON = new WoodType
 //                .Builder("lemon")
@@ -223,6 +245,7 @@ public class WoodTypeHandler {
 //                .setFlowerMonth(Month.MAY, 2)
 //                .setHarvestMonth(Month.AUGUST, 1)
 //                .build();
+
 //
 //        OLIVE = new WoodType
 //                .Builder("olive")
@@ -233,6 +256,7 @@ public class WoodTypeHandler {
 //                .setFlowerMonth(Month.JUNE, 1)
 //                .setHarvestMonth(Month.OCTOBER, 2)
 //                .build();
+
 //
 //        ORANGE = new WoodType
 //                .Builder("orange")
@@ -243,6 +267,7 @@ public class WoodTypeHandler {
 //                .setFlowerMonth(Month.FEBRUARY, 3)
 //                .setHarvestMonth(Month.NOVEMBER, 1)
 //                .build();
+
 //
 //        PEACH = new WoodType
 //                .Builder("peach")
@@ -253,6 +278,7 @@ public class WoodTypeHandler {
 //                .setFlowerMonth(Month.APRIL, 2)
 //                .setHarvestMonth(Month.SEPTEMBER, 1)
 //                .build();
+
 //
 //        PLUM = new WoodType
 //                .Builder("plum")
@@ -263,6 +289,7 @@ public class WoodTypeHandler {
 //                .setFlowerMonth(Month.MAY, 2)
 //                .setHarvestMonth(Month.JULY, 2)
 //                .build();
+
 //
 //        RED_APPLE = new WoodType
 //                .Builder("red_apple")
@@ -273,6 +300,7 @@ public class WoodTypeHandler {
 //                .setFlowerMonth(Month.MAY, 2)
 //                .setHarvestMonth(Month.OCTOBER, 2)
 //                .build();
+
         // TODO доделать
 //        HEVEA = new WoodType
 //                .Builder("hevea")
@@ -284,5 +312,6 @@ public class WoodTypeHandler {
 //                .setGrowthLogicKit("DarkOak"))
 //                .setCellKit("deciduous"))
 //                .build();
+
     }
 }

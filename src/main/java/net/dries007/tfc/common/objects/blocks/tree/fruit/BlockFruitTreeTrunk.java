@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.blocks.wood.fruit;
+package net.dries007.tfc.common.objects.blocks.tree.fruit;
 
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;

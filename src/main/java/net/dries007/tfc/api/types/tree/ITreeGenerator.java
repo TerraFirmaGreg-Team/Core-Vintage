@@ -2,7 +2,7 @@ package net.dries007.tfc.api.types.tree;
 
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
+import net.dries007.tfc.common.objects.blocks.tree.BlockWoodSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

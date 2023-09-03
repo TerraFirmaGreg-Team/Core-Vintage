@@ -1,6 +1,6 @@
-package net.dries007.tfc.common.objects.blocks.wood;
+package net.dries007.tfc.common.objects.blocks.tree;
 
-import com.ferreusveritas.dynamictrees.blocks.BlockBranchBasic;
+import com.ferreusveritas.dynamictrees.blocks.BlockBranchThick;
 import net.dries007.tfc.config.ConfigTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,10 +10,9 @@ import net.minecraft.world.World;
 
 import java.util.Set;
 
-public class BlockWoodBranchBasic extends BlockBranchBasic {
+public class BlockWoodBranchThick extends BlockBranchThick {
 
-
-    public BlockWoodBranchBasic(String name) {
+    public BlockWoodBranchThick(String name) {
         super(name);
 
         setTranslationKey(name.toLowerCase().replace(":", ".").replace("/", "."));
@@ -35,6 +34,6 @@ public class BlockWoodBranchBasic extends BlockBranchBasic {
 //            // Here, there was no valid tool used. Deny spawning any drops since logs require axes
 //            return false; //Also no wood for you!
 //        }
-        return super.removedByPlayer(state, world, cutPos, player, canHarvest); // any other conditions, we can handle normally
+        return super.removedByPlayer(state, world, cutPos, player, canHarvest);
     }
 }

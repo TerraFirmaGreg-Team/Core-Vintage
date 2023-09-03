@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.types.wood.variant.block;
 
+import net.dries007.tfc.common.objects.blocks.tree.BlockWoodLeaves;
+import net.dries007.tfc.common.objects.blocks.tree.BlockWoodSapling;
 import net.dries007.tfc.common.objects.blocks.wood.*;
 
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;

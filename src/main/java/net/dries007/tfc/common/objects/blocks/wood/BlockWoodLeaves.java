@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.blocks.tree;
+package net.dries007.tfc.common.objects.blocks.wood;
 
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.api.types.wood.IWoodBlock;

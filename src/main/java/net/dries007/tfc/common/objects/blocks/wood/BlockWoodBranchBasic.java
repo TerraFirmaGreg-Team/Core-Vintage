@@ -11,8 +11,12 @@ import net.minecraft.world.World;
 import java.util.Set;
 
 public class BlockWoodBranchBasic extends BlockBranchBasic {
+
+
     public BlockWoodBranchBasic(String name) {
         super(name);
+
+        setTranslationKey(name.toLowerCase().replace(":", ".").replace("/", "."));
     }
 
     @Override

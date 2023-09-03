@@ -99,17 +99,17 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         return FULL_BLOCK_AABB;
     }
 
-//    @Override
-//    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
-//        // For floating tree things, just make them gently disappear over time
-//        if (state.getValue(PLACED)) return;
-//        for (int x = -1; x <= 1; x++)
-//            for (int y = -1; y <= 1; y++)
-//                for (int z = -1; z <= 1; z++)
-//                    if (world.getBlockState(pos.add(x, y, z)).getBlock() == this && (z != 0 || y != 0 || x != 0))
-//                        return;
-//        world.setBlockToAir(pos);
-//    }
+    @Override
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        // For floating tree things, just make them gently disappear over time
+        if (state.getValue(PLACED)) return;
+        for (int x = -1; x <= 1; x++)
+            for (int y = -1; y <= 1; y++)
+                for (int z = -1; z <= 1; z++)
+                    if (world.getBlockState(pos.add(x, y, z)).getBlock() == this && (z != 0 || y != 0 || x != 0))
+                        return;
+        world.setBlockToAir(pos);
+    }
 
     @Override
     public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
@@ -165,6 +165,7 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         return Weight.MEDIUM; // Stacksize = 16
     }
 
+    // TODO это нужно?
     private boolean removeTree(World world, BlockPos pos, @Nullable EntityPlayer player, ItemStack stack, boolean stoneTool) {
         final boolean explosion = stack.isEmpty() || player == null;
         final int maxLogs = explosion ? Integer.MAX_VALUE : 1 + stack.getMaxDamage() - stack.getItemDamage();

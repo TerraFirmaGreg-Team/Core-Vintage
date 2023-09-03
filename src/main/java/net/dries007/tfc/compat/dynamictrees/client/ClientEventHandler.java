@@ -39,11 +39,13 @@ public class ClientEventHandler {
     public static void registerModels(ModelRegistryEvent event) {
         //Register Meshers for Branches
         for (var tree : TREES) {
-            ModelHelperTFC.regModel(tree.getDynamicBranch());//Register Branch itemBlock
+            //ModelHelperTFC.regModel(tree.getDynamicBranch());//Register Branch itemBlock
             ModelHelperTFC.regModel(tree);//Register custom state mapper for branch
         }
 
-        ModelLoader.setCustomStateMapper(blockRootyDirt, new StateMap.Builder().ignore(BlockRooty.LIFE).build());
+        ModelLoader.setCustomStateMapper(blockRootyDirt, new StateMap.Builder()
+                .ignore(BlockRooty.LIFE)
+                .build());
     }
 
     @SubscribeEvent

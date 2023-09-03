@@ -10,28 +10,28 @@
         "down": {
           "uv": [7, 0, 9, 9],
           "texture": "#planks",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [7, 0, 9, 9],
           "texture": "#planks",
-          "tintindex": 0
+          "tintindex": 1
         },
         "north": {
           "uv": [7, 1, 9, 4],
           "texture": "#planks",
-          "tintindex": 0,
+          "tintindex": 1,
           "cullface": "north"
         },
         "west": {
           "uv": [0, 1, 9, 4],
           "texture": "#planks",
-          "tintindex": 0
+          "tintindex": 1
         },
         "east": {
           "uv": [0, 1, 9, 4],
           "texture": "#planks",
-          "tintindex": 0
+          "tintindex": 1
         }
       },
       "__comment": "top bar"
@@ -43,28 +43,28 @@
         "down": {
           "uv": [7, 0, 9, 9],
           "texture": "#planks",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [7, 0, 9, 9],
           "texture": "#planks",
-          "tintindex": 0
+          "tintindex": 1
         },
         "north": {
           "uv": [7, 7, 9, 10],
           "texture": "#planks",
-          "tintindex": 0,
+          "tintindex": 1,
           "cullface": "north"
         },
         "west": {
           "uv": [0, 7, 9, 10],
           "texture": "#planks",
-          "tintindex": 0
+          "tintindex": 1
         },
         "east": {
           "uv": [0, 7, 9, 10],
           "texture": "#planks",
-          "tintindex": 0
+          "tintindex": 1
         }
       },
       "__comment": "lower bar"

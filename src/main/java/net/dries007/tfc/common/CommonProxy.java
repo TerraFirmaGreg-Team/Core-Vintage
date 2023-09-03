@@ -333,9 +333,9 @@ public class CommonProxy {
         ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
         ITEM.forEach(r::register);
 
-        ArrayList<Item> treeItems = new ArrayList<>();
-        TREES.forEach(tree -> tree.getRegisterableItems(treeItems));
-        r.registerAll(treeItems.toArray(new Item[treeItems.size()]));
+//        ArrayList<Item> treeItems = new ArrayList<>();
+//        TREES.forEach(tree -> tree.getRegisterableItems(treeItems));
+//        r.registerAll(treeItems.toArray(new Item[treeItems.size()]));
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

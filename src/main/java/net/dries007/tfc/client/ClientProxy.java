@@ -123,7 +123,7 @@ public class ClientProxy extends CommonProxy {
     @SuppressWarnings("ConstantConditions")
     public static void registerModels(ModelRegistryEvent event) {
 
-        //=== BLOCKS =================================================================================================//
+        //==== BLOCKS ================================================================================================//
 
         TFCBlocks.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCBlocks.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
@@ -161,7 +161,7 @@ public class ClientProxy extends CommonProxy {
         for (var item : TFCItems.ITEM)
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        //=== TESRs ==================================================================================================//
+        //==== TESRs =================================================================================================//
 
         ClientRegistry.bindTileEntitySpecialRenderer(TEChestTFC.class, new TESRChestTFC());
         ClientRegistry.bindTileEntitySpecialRenderer(TEToolRack.class, new TESRToolRack());
@@ -280,11 +280,10 @@ public class ClientProxy extends CommonProxy {
         //==== Wood ==================================================================================================//
 
         blockColors.registerBlockColorHandler((s, w, p, i) -> {
-                    // цвет дерева
-                    if (i == 0) return ((IWoodBlock) s.getBlock()).getType().getColor();
                     // цвет листвы
-                    if (i == 1) return foliageColor.colorMultiplier(s, w, p, i);
-
+                    if (i == 0) return foliageColor.colorMultiplier(s, w, p, i);
+                    // цвет дерева
+                    if (i == 1) return ((IWoodBlock) s.getBlock()).getType().getColor();
                     // Если не указан индекс
                     return 0xFFFFFF;
                 },
@@ -339,12 +338,12 @@ public class ClientProxy extends CommonProxy {
         //==== Wood ==================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> {
-                    // цвет дерева
-                    if (i == 0)
-                        return ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor();
                     // цвет листвы
-                    if (i == 1)
+                    if (i == 0)
                         return blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i);
+                    // цвет дерева
+                    if (i == 1)
+                        return ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor();
                     // Если не указан индекс
                     return 0xFFFFFF;
                 },

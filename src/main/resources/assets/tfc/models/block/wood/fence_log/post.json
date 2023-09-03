@@ -28,8 +28,8 @@
         "east": { "uv": [13, 0, 15, 16], "texture": "#log" },
         "south": { "uv": [5, 0, 7, 16], "texture": "#log" },
         "west": { "uv": [9, 0, 11, 16], "texture": "#log" },
-        "up": { "uv": [4, 4, 12, 12], "texture": "#top", "cullface": "up", "tintindex": 0 },
-        "down": { "uv": [4, 4, 12, 12], "texture": "#top", "cullface": "down", "tintindex": 0 }
+        "up": { "uv": [4, 4, 12, 12], "texture": "#top", "cullface": "up", "tintindex": 1 },
+        "down": { "uv": [4, 4, 12, 12], "texture": "#top", "cullface": "down", "tintindex": 1 }
       }
     }
   ]

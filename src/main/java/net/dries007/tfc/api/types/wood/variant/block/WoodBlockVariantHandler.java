@@ -8,19 +8,19 @@ public class WoodBlockVariantHandler {
     public static void init() {
 
         LOG = new WoodBlockVariant("log", BlockWoodLog::new);
-        // STRIPPED_LOG = new WoodItemVariant("stripped_log");
-        // WOOD = new WoodItemVariant("wood");
-        // STRIPPED_WOOD = new WoodItemVariant("stripped_wood");
+        // STRIPPED_LOG = new WoodBlockVariant("stripped_log");
+        // WOOD = new WoodBlockVariant("wood");
+        // STRIPPED_WOOD = new WoodBlockVariant("stripped_wood");
         LEAVES = new WoodBlockVariant("leaves", BlockWoodLeaves::new);
         PLANKS = new WoodBlockVariant("planks", BlockWoodPlanks::new);
         SAPLING = new WoodBlockVariant("sapling", BlockWoodSapling::new);
 
-//        FRUIT_LEAVES = new WoodItemVariant("fruit_leaves", BlockFruitTreeLeaves::new);
-//        FRUIT_SAPLING = new WoodItemVariant("fruit_sapling", BlockFruitTreeSapling::new);
-//        FRUIT_TRUNK = new WoodItemVariant("fruit_sapling", BlockFruitTreeTrunk::new);
-//        FRUIT_BRANCH = new WoodItemVariant("fruit_sapling", BlockFruitTreeBranch::new);
+//        FRUIT_LEAVES = new WoodBlockVariant("fruit_leaves", BlockFruitTreeLeaves::new);
+//        FRUIT_SAPLING = new WoodBlockVariant("fruit_sapling", BlockFruitTreeSapling::new);
+//        FRUIT_TRUNK = new WoodBlockVariant("fruit_sapling", BlockFruitTreeTrunk::new);
+//        FRUIT_BRANCH = new WoodBlockVariant("fruit_sapling", BlockFruitTreeBranch::new);
 
-        // POTTED_SAPLING = new WoodItemVariant("potted_sapling");
+        // POTTED_SAPLING = new WoodBlockVariant("potted_sapling");
         BOOKSHELF = new WoodBlockVariant("bookshelf", BlockWoodBookshelf::new);
         DOOR = new WoodBlockVariant("door", BlockWoodDoor::new);
         TRAPDOOR = new WoodBlockVariant("trapdoor", BlockWoodTrapDoor::new);

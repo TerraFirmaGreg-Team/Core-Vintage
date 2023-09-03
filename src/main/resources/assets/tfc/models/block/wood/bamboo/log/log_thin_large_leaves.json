@@ -54,12 +54,12 @@
         "east": {
           "uv": [0, 0, 16, 16],
           "texture": "#2",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [16, 0, 0, 16],
           "texture": "#2",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     },
@@ -75,12 +75,12 @@
         "north": {
           "uv": [0, 0, 16, 16],
           "texture": "#2",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [16, 0, 0, 16],
           "texture": "#2",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     }

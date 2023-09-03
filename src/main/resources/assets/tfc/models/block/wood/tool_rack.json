@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "parent": "block/block",
   "textures": {
-      "texture": "tfc:blocks/wood/planks/pattern",
-      "particle": "tfc:blocks/wood/planks/pattern"
-    },
+    "texture": "tfc:blocks/wood/planks/pattern",
+    "particle": "tfc:blocks/wood/planks/pattern"
+  },
   "elements": [
     {
       "from": [0, 11, 0],
@@ -18,32 +18,32 @@
         "north": {
           "uv": [0, 4, 16, 5],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "east": {
           "uv": [16, 5, 15, 4],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [0, 4, 16, 5],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [0, 4, 1, 5],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [0, 4, 16, 5],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "down": {
           "uv": [0, 4, 16, 5],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     },
@@ -54,32 +54,32 @@
         "north": {
           "uv": [0, 12, 16, 13],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "east": {
           "uv": [16, 13, 15, 12],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [0, 12, 16, 13],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [0, 12, 1, 13],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [0, 12, 16, 13],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "down": {
           "uv": [0, 12, 16, 13],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     },
@@ -90,27 +90,27 @@
         "east": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "down": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     },
@@ -121,27 +121,27 @@
         "east": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "down": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     },
@@ -152,27 +152,27 @@
         "east": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "down": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     },
@@ -183,27 +183,27 @@
         "east": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "down": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     },
@@ -214,27 +214,27 @@
         "east": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "down": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     },
@@ -245,27 +245,27 @@
         "east": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "down": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     },
@@ -276,27 +276,27 @@
         "east": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "down": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     },
@@ -307,27 +307,27 @@
         "east": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         },
         "down": {
           "uv": [0, 0, 1, 1],
           "texture": "#texture",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     }

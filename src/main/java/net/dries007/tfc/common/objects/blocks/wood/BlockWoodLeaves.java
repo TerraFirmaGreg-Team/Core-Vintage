@@ -125,6 +125,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         return new BlockStateContainer(this, DECAYABLE);
     }
 
+    // TODO нужно?
     @Override
     public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
         doLeafDecay(worldIn, pos, state);
@@ -214,11 +215,11 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
             return;
 
         Set<BlockPos> paths = new HashSet<>();
-        Set<BlockPos> evaluated = new HashSet<>(); // Leaves that everything was evaluated so no need to do it again
-        List<BlockPos> pathsToAdd; // New Leaves that needs evaluation
+        Set<BlockPos> evaluated = new HashSet<>(); // Выходит, что все было оценено, поэтому повторять это не нужно.
+        List<BlockPos> pathsToAdd; // Новые листья, нуждающиеся в оценке
         BlockPos.MutableBlockPos pos1 = new BlockPos.MutableBlockPos(pos);
         IBlockState state1;
-        paths.add(pos); // Center block
+        paths.add(pos); // Центральный блок
 
         for (int i = 0; i < type.getMaxDecayDistance(); i++) {
             pathsToAdd = new ArrayList<>();

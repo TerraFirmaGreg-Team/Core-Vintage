@@ -47,6 +47,8 @@ public class WoodTreeFamily extends TreeFamily {
         setCommonSpecies(new WoodTreeSpecies(this, type));
         setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, type).getDefaultState());
 
+        //setDynamicBranch(createBranch());
+
         TREES.add(this);
     }
 
@@ -80,7 +82,7 @@ public class WoodTreeFamily extends TreeFamily {
 
     @Override
     public BlockBranch createBranch() {
-        var branchName = "wood/branch/" + getName().getPath();
+        var branchName = String.format("wood/branch/%s", getName().getPath());
         return isThick() ? new BlockWoodBranchThick(branchName) : new BlockWoodBranchBasic(branchName);
     }
 

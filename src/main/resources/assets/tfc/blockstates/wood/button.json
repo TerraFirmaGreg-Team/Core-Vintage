@@ -9,7 +9,9 @@
     }
   },
   "variants": {
-    "normal": [{}],
+    "normal": [{
+      "model": "tfc:wood/button_inventory"
+    }],
     "powered": {
       "false": {},
       "true": {

@@ -91,7 +91,6 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
@@ -226,8 +225,6 @@ public class CommonProxy {
 
         r.register(blockRootyDirt);
 
-        ArrayList<Block> treeBlocks = new ArrayList<>();
-
 
         for (var type : WoodType.getWoodTypes()) {
 
@@ -236,10 +233,10 @@ public class CommonProxy {
         }
 
 
-        TREES.forEach(tree -> tree.getRegisterableBlocks(treeBlocks));
+        TREES.forEach(tree -> tree.getRegisterableBlocks(TREE_BLOCKS));
 
-        treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
-        r.registerAll(treeBlocks.toArray(new Block[0]));
+        TREE_BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
+        r.registerAll(TREE_BLOCKS.toArray(new Block[0]));
     }
 
     @SubscribeEvent

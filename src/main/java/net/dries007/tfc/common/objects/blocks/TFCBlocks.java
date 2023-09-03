@@ -69,6 +69,8 @@ public class TFCBlocks {
     public static final Map<BushType, IBushBlock> BUSH_BLOCKS = new LinkedHashMap<>();
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new LinkedHashMap<>();
 
+    public static final ArrayList<Block> TREE_BLOCKS = new ArrayList<>();
+
 
     // Блоки, имеющие предмет
     public static final List<ItemBlock> ITEM_BLOCKS = new ArrayList<>();

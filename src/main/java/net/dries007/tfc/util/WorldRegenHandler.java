@@ -6,7 +6,7 @@ import net.dries007.tfc.api.types.animal.IHuntable;
 import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
-import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.common.objects.blocks.crop.BlockCropDead;
 import net.dries007.tfc.common.objects.blocks.plants.BlockMushroomTFC;
 import net.dries007.tfc.common.objects.items.ItemCropSeeds;
@@ -98,9 +98,9 @@ public class WorldRegenHandler {
                             ROCKS_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
 
                             final float density = chunkDataTFC.getFloraDensity();
-                            List<WoodType> woodTypes = chunkDataTFC.getValidTrees();
-                            int stickDensity = 3 + (int) (4f * density + 1.5f * woodTypes.size() * rockModifier);
-                            if (woodTypes.isEmpty()) {
+                            List<TreeType> trees = chunkDataTFC.getValidTrees();
+                            int stickDensity = 3 + (int) (4f * density + 1.5f * trees.size() * rockModifier);
+                            if (trees.isEmpty()) {
                                 stickDensity = 1 + (int) (1.5f * density * rockModifier);
                             }
                             WorldGenTrees.generateLooseSticks(RANDOM, pos.x, pos.z, event.world, stickDensity);

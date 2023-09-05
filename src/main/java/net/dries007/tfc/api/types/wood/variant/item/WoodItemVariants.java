@@ -4,5 +4,4 @@ public class WoodItemVariants {
 
     public static WoodItemVariant BOAT;
     public static WoodItemVariant LUMBER;
-    public static WoodItemVariant SEED;
 }

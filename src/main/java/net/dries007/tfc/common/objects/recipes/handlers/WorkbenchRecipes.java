@@ -124,10 +124,10 @@ public class WorkbenchRecipes {
             /*
             registerShaped(
                     "wood/fence_log_" + type,
-                    new ItemStack(TFCBlocks.getWoodBlock(WoodItemVariants.LOG_FENCE, type), 8),
+                    new ItemStack(TFCBlocks.getWoodBlock(FENCE_LOG, type), 8),
                     "PLP", "PLP",
                     'L', new ItemStack(TFCItems.getWoodItem(LUMBER, type)),
-                    'P', new ItemStack(TFCBlocks.getWoodBlock(WoodItemVariants.LOG, type))
+                    'P', new ItemStack(TFCBlocks.getWoodBlock(LOG, type))
             );*/
 
             // Loom

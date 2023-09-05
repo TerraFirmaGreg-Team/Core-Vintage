@@ -8,6 +8,9 @@ import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.rock.IRockItem;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.item.RockItemVariant;
+import net.dries007.tfc.api.types.tree.ITreeItem;
+import net.dries007.tfc.api.types.tree.type.TreeType;
+import net.dries007.tfc.api.types.tree.variant.item.TreeItemVariant;
 import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariant;
@@ -33,6 +36,7 @@ public class TFCItems {
 
     public static final Map<Pair<RockItemVariant, RockType>, IRockItem> ROCK_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<WoodItemVariant, WoodType>, IWoodItem> WOOD_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<TreeItemVariant, TreeType>, ITreeItem> TREE_ITEMS = new LinkedHashMap<>();
 
     public static final Map<CropType, ItemCropSeeds> SEED_ITEMS = new ConcurrentHashMap<>();
     public static final Map<FoodType, ItemFoodTFC> FOOD_ITEMS = new LinkedHashMap<>();
@@ -67,7 +71,7 @@ public class TFCItems {
 
     public static void preInit() {
 
-        //=== Molds ==================================================================================================//
+        //==== Molds =================================================================================================//
 
         for (var orePrefix : OrePrefix.values()) {
             var orePrefixExtension = (IOrePrefixExtension) orePrefix;
@@ -102,6 +106,17 @@ public class TFCItems {
             }
         }
 
+        //==== Tree ==================================================================================================//
+
+        for (var variant : TreeItemVariant.getTreeItemVariants()) {
+            for (var type : TreeType.getTreeTypes()) {
+                var woodItem = variant.create(type);
+
+                if (TREE_ITEMS.put(new Pair<>(variant, type), woodItem) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
+            }
+        }
+
         //==== ItemSeed ==============================================================================================//
 
         for (var type : CropType.getCropTypes()) {
@@ -116,7 +131,7 @@ public class TFCItems {
                 throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
         }
 
-        //=== ItemMisc ===============================================================================================//
+        //==== ItemMisc ==============================================================================================//
 
         ITEM.add(STRAW = new ItemMisc("straw", Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"));
         ITEM.add(WROUGHT_IRON_GRILL = new ItemMisc("wrought_iron_grill", Size.LARGE, Weight.HEAVY, "grill"));
@@ -131,13 +146,13 @@ public class TFCItems {
         ITEM.add(ALABASTER_BRICK = new ItemMisc("alabaster_brick", Size.VERY_SMALL, Weight.LIGHT));
 
 
-        //=== ItemCraftingTool =======================================================================================//
+        //==== ItemCraftingTool ======================================================================================//
 
         ITEM.add(HANDSTONE = new ItemCraftingTool("handstone", 250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"));
         ITEM.add(SPINDLE = new ItemCraftingTool("spindle", 40, Size.NORMAL, Weight.MEDIUM, "spindle"));
 
 
-        //=== Other ==================================================================================================//
+        //==== Other =================================================================================================//
 
         ITEM.add(FIRESTARTER = new ItemFireStarter());
         ITEM.add(QUIVER = new ItemQuiver());
@@ -152,6 +167,13 @@ public class TFCItems {
     @Nonnull
     public static Item getWoodItem(@Nonnull WoodItemVariant variant, @Nonnull WoodType type) {
         var item = (Item) WOOD_ITEMS.get(new Pair<>(variant, type));
+        if (item != null) return item;
+        throw new RuntimeException(String.format("Item is null: %s", type));
+    }
+
+    @Nonnull
+    public static Item getTreeItem(@Nonnull TreeItemVariant variant, @Nonnull TreeType type) {
+        var item = (Item) TREE_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
         throw new RuntimeException(String.format("Item is null: %s", type));
     }

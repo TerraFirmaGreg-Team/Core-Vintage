@@ -1,0 +1,178 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:tree/sapling"
+  },
+  "variants": {
+    "type": {
+      "acacia": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/acacia",
+          "leaves": "tfc:blocks/tree/leaves/acacia"
+        }
+      },
+      "ash": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/ash",
+          "leaves": "tfc:blocks/tree/leaves/ash"
+        }
+      },
+      "aspen": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/aspen",
+          "leaves": "tfc:blocks/tree/leaves/aspen"
+        }
+      },
+      "birch": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/birch",
+          "leaves": "tfc:blocks/tree/leaves/birch"
+        }
+      },
+      "blackwood": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/blackwood",
+          "leaves": "tfc:blocks/tree/leaves/blackwood"
+        }
+      },
+      "chestnut": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/chestnut",
+          "leaves": "tfc:blocks/tree/leaves/chestnut"
+        }
+      },
+      "douglas_fir": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/douglas_fir",
+          "leaves": "tfc:blocks/tree/leaves/douglas_fir"
+        }
+      },
+      "hickory": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/hickory",
+          "leaves": "tfc:blocks/tree/leaves/hickory"
+        }
+      },
+      "maple": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/maple",
+          "leaves": "tfc:blocks/tree/leaves/maple"
+        }
+      },
+      "oak": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/oak",
+          "leaves": "tfc:blocks/tree/leaves/oak"
+        }
+      },
+      "palm": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/palm",
+          "leaves": "tfc:blocks/tree/leaves/palm"
+        }
+      },
+      "pine": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/pine",
+          "leaves": "tfc:blocks/tree/leaves/pine"
+        }
+      },
+      "rosewood": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/rosewood",
+          "leaves": "tfc:blocks/tree/leaves/rosewood"
+        }
+      },
+      "sequoia": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/sequoia",
+          "leaves": "tfc:blocks/tree/leaves/sequoia"
+        }
+      },
+      "spruce": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/spruce",
+          "leaves": "tfc:blocks/tree/leaves/spruce"
+        }
+      },
+      "sycamore": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/sycamore",
+          "leaves": "tfc:blocks/tree/leaves/sycamore"
+        }
+      },
+      "white_cedar": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/white_cedar",
+          "leaves": "tfc:blocks/tree/leaves/white_cedar"
+        }
+      },
+      "willow": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/willow",
+          "leaves": "tfc:blocks/tree/leaves/willow"
+        }
+      },
+      "kapok": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/kapok",
+          "leaves": "tfc:blocks/tree/leaves/kapok"
+        }
+      },
+      "banana": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/banana",
+          "leaves": "tfc:blocks/tree/leaves/banana"
+        }
+      },
+      "cherry": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/cherry",
+          "leaves": "tfc:blocks/tree/leaves/cherry"
+        }
+      },
+      "green_apple": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/green_apple",
+          "leaves": "tfc:blocks/tree/leaves/green_apple"
+        }
+      },
+      "lemon": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/lemon",
+          "leaves": "tfc:blocks/tree/leaves/lemon"
+        }
+      },
+      "olive": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/olive",
+          "leaves": "tfc:blocks/tree/leaves/olive"
+        }
+      },
+      "orange": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/orange",
+          "leaves": "tfc:blocks/tree/leaves/orange"
+        }
+      },
+      "peach": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/peach",
+          "leaves": "tfc:blocks/tree/leaves/peach"
+        }
+      },
+      "plum": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/plum",
+          "leaves": "tfc:blocks/tree/leaves/plum"
+        }
+      },
+      "red_apple": {
+        "textures": {
+          "log": "tfc:blocks/wood/log/side/red_apple",
+          "leaves": "tfc:blocks/tree/leaves/red_apple"
+        }
+      }
+    }
+  }
+}

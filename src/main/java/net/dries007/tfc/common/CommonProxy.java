@@ -1,6 +1,7 @@
 package net.dries007.tfc.common;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import gregtech.api.unification.material.event.MaterialEvent;
@@ -91,6 +92,7 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
@@ -238,8 +240,9 @@ public class CommonProxy {
 
 //        TREES.forEach(tree -> tree.getRegisterableBlocks(TREE_BLOCKS));
 //
-//        TREE_BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
-//        r.registerAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values()(new Block[0]));
+        ArrayList<Block> treeBlocks = new ArrayList<>();
+        treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
+        r.registerAll(treeBlocks.toArray(new Block[0]));
     }
 
     @SubscribeEvent

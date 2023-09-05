@@ -19,10 +19,6 @@
       },
       "none": {}
     },
-    "placed": {
-      "true": {},
-      "false": {}
-    },
     "woodtype": {
       "acacia": {
         "textures": {

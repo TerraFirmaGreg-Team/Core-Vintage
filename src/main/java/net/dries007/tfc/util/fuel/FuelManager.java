@@ -1,7 +1,6 @@
 package net.dries007.tfc.util.fuel;
 
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
@@ -9,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LOG;
 
 public final class FuelManager {
     private static final List<Fuel> FUELS = new ArrayList<>();
@@ -34,9 +35,9 @@ public final class FuelManager {
     }
 
     public static void postInit() {
-        for (var woodType : WoodType.getWoodTypes()) {
-            var log = TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType);
-            FUELS.add(new Fuel(IIngredient.of(new ItemStack(log)), woodType.getBurnTicks(), woodType.getBurnTemp()));
+        for (var type : WoodType.getWoodTypes()) {
+            var log = TFCBlocks.getWoodBlock(LOG, type);
+            FUELS.add(new Fuel(IIngredient.of(new ItemStack(log)), type.getBurnTicks(), type.getBurnTemp()));
         }
 
         // Coals

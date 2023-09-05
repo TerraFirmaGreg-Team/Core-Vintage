@@ -2,10 +2,9 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
-import net.dries007.tfc.api.types.tree.ITreeGenerator;
-import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.tree.BlockWoodSapling;
+import net.dries007.tfc.common.objects.blocks.tree.BlockTreeSapling;
 import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
@@ -26,7 +25,7 @@ public class TreeGenDT implements ITreeGenerator {
     }
 
     @Override
-    public void generateTree(TemplateManager templateManager, World world, BlockPos blockPos, WoodType type, Random random, boolean isWorldGen) {
+    public void generateTree(TemplateManager templateManager, World world, BlockPos blockPos, TreeType type, Random random, boolean isWorldGen) {
         var dtSpecies = SPECIES.get(type);
         var bounds = new SafeChunkBounds(world, world.getChunk(blockPos).getPos());
         dtSpecies.generate(world, blockPos.down(), world.getBiome(blockPos), random, leavesRadius <= 0 ? dtSpecies.maxBranchRadius() / 3 : leavesRadius, bounds);
@@ -34,13 +33,13 @@ public class TreeGenDT implements ITreeGenerator {
     }
 
     @Override
-    public boolean canGenerateTree(World world, BlockPos pos, WoodType type) {
+    public boolean canGenerateTree(World world, BlockPos pos, TreeType type) {
         if (!TFCBlocks.isGrowableSoil(world.getBlockState(pos.down()))) {
             return false;
         }
 
         var locState = world.getBlockState(pos);
-        if (locState.getMaterial().isLiquid() || (!locState.getMaterial().isReplaceable() && !(locState.getBlock() instanceof BlockWoodSapling))) {
+        if (locState.getMaterial().isLiquid() || (!locState.getMaterial().isReplaceable() && !(locState.getBlock() instanceof BlockTreeSapling))) {
             return false;
         }
 

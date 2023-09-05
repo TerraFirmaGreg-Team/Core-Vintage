@@ -19,6 +19,9 @@ import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
+import net.dries007.tfc.api.types.tree.ITreeBlock;
+import net.dries007.tfc.api.types.tree.type.TreeType;
+import net.dries007.tfc.api.types.tree.variant.block.TreeBlockVariant;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
@@ -62,14 +65,13 @@ public class TFCBlocks {
     public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<TreeBlockVariant, TreeType>, ITreeBlock> TREE_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantBlockVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<CropBlockVariant, CropType>, ICropBlock> CROP_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<MetalBlockVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
     public static final Map<BushType, IBushBlock> BUSH_BLOCKS = new LinkedHashMap<>();
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new LinkedHashMap<>();
-
-    public static final ArrayList<Block> TREE_BLOCKS = new ArrayList<>();
 
 
     // Блоки, имеющие предмет
@@ -154,6 +156,17 @@ public class TFCBlocks {
                 var woodBlock = variant.create(type);
 
                 if (WOOD_BLOCKS.put(new Pair<>(variant, type), woodBlock) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
+            }
+        }
+
+        //==== Tree ==================================================================================================//
+
+        for (var variant : TreeBlockVariant.getTreeBlockVariants()) {
+            for (var type : TreeType.getTreeTypes()) {
+                var treeBlock = variant.create(type);
+
+                if (TREE_BLOCKS.put(new Pair<>(variant, type), treeBlock) != null)
                     throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
             }
         }
@@ -268,6 +281,13 @@ public class TFCBlocks {
     @Nonnull
     public static Block getWoodBlock(@Nonnull WoodBlockVariant variant, @Nonnull WoodType type) {
         var block = (Block) WOOD_BLOCKS.get(new Pair<>(variant, type));
+        if (block != null) return block;
+        throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
+    }
+
+    @Nonnull
+    public static Block getTreeBlock(@Nonnull TreeBlockVariant variant, @Nonnull TreeType type) {
+        var block = (Block) TREE_BLOCKS.get(new Pair<>(variant, type));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
     }

@@ -1,7 +1,6 @@
 package net.dries007.tfc.common;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import gregtech.api.unification.material.event.MaterialEvent;
@@ -30,8 +29,9 @@ import net.dries007.tfc.api.types.metal.MetalModule;
 import net.dries007.tfc.api.types.plant.PlantModule;
 import net.dries007.tfc.api.types.rock.RockModule;
 import net.dries007.tfc.api.types.soil.SoilModule;
+import net.dries007.tfc.api.types.tree.TreeModule;
+import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.api.types.wood.WoodModule;
-import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.LootTablesTFC;
 import net.dries007.tfc.common.objects.blocks.BlockIceTFC;
@@ -96,7 +96,6 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 import static net.dries007.tfc.common.objects.items.TFCItems.*;
-import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.TREES;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TerraFirmaCraft.MOD_ID)
@@ -148,6 +147,12 @@ public class CommonProxy {
 
         for (var woodBlock : WOOD_BLOCKS.values()) {
             r.register((Block) woodBlock);
+        }
+
+        //==== Wood ==================================================================================================//
+
+        for (var treeBlock : TREE_BLOCKS.values()) {
+            r.register((Block) treeBlock);
         }
 
         //==== Crop ==================================================================================================//
@@ -226,17 +231,15 @@ public class CommonProxy {
         r.register(blockRootyDirt);
 
 
-        for (var type : WoodType.getWoodTypes()) {
-
-            var family = new WoodTreeFamily(type);
-
+        for (var tree : TreeType.getTreeTypes()) {
+            var family = new WoodTreeFamily(tree);
         }
 
 
-        TREES.forEach(tree -> tree.getRegisterableBlocks(TREE_BLOCKS));
-
-        TREE_BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
-        r.registerAll(TREE_BLOCKS.toArray(new Block[0]));
+//        TREES.forEach(tree -> tree.getRegisterableBlocks(TREE_BLOCKS));
+//
+//        TREE_BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
+//        r.registerAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values()(new Block[0]));
     }
 
     @SubscribeEvent
@@ -278,6 +281,14 @@ public class CommonProxy {
 
         for (var woodItem : WOOD_ITEMS.values()) r.register((Item) woodItem);
 
+        //==== Tree ==================================================================================================//
+
+        for (var treeBlock : TREE_BLOCKS.values()) {
+            var itemBlock = treeBlock.getItemBlock();
+            if (itemBlock != null) registerItemBlock(r, itemBlock);
+        }
+
+        for (var treeItem : TREE_ITEMS.values()) r.register((Item) treeItem);
 
         //==== Plant =================================================================================================//
 
@@ -329,7 +340,7 @@ public class CommonProxy {
 
         ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
         ITEM.forEach(r::register);
-
+//
 //        ArrayList<Item> treeItems = new ArrayList<>();
 //        TREES.forEach(tree -> tree.getRegisterableItems(treeItems));
 //        r.registerAll(treeItems.toArray(new Item[treeItems.size()]));
@@ -409,6 +420,7 @@ public class CommonProxy {
         RockModule.preInit();
         SoilModule.preInit();
         WoodModule.preInit();
+        TreeModule.preInit();
         MetalModule.preInit();
         FoodModule.preInit();
         PlantModule.preInit();

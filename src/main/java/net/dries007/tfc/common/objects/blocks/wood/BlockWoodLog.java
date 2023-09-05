@@ -58,7 +58,6 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         setHarvestLevel("axe", 0);
         setHardness(2.0F);
         setResistance(5.0F);
-        setTickRandomly(true);
 
         Blocks.FIRE.setFireInfo(this, 5, 5);
 
@@ -231,14 +230,13 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder()
                         .customPath(getResourceLocation())
+                        .ignore(BlockWoodLog.PLACED)
                         .customVariant("woodtype=" + getType())
                         .build());
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this), 0,
                 new ModelResourceLocation(getResourceLocation(),
-                        "axis=none," +
-                                "placed=false," +
-                                "woodtype=" + getType()));
+                        "axis=none,woodtype=" + getType()));
     }
 }

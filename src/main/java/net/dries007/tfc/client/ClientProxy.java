@@ -14,6 +14,8 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.types.metal.IMetalBlock;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
+import net.dries007.tfc.api.types.tree.ITreeBlock;
+import net.dries007.tfc.api.types.tree.ITreeItem;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.util.IHasModel;
@@ -95,7 +97,7 @@ import java.util.List;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.TALL_GRASS;
-import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
+import static net.dries007.tfc.api.types.tree.variant.item.TreeItemVariants.SEED;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -128,6 +130,7 @@ public class ClientProxy extends CommonProxy {
         TFCBlocks.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCBlocks.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCBlocks.WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        TFCBlocks.TREE_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCBlocks.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCBlocks.CROP_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCBlocks.ALABASTER_BLOCKS.values().forEach(IHasModel::onModelRegister);
@@ -147,6 +150,7 @@ public class ClientProxy extends CommonProxy {
 
         TFCItems.ROCK_ITEMS.values().forEach(IHasModel::onModelRegister);
         TFCItems.WOOD_ITEMS.values().forEach(IHasModel::onModelRegister);
+        TFCItems.TREE_ITEMS.values().forEach(IHasModel::onModelRegister);
 
 
         for (var item : TFCItems.SEED_ITEMS.values())
@@ -279,15 +283,23 @@ public class ClientProxy extends CommonProxy {
 
         //==== Wood ==================================================================================================//
 
+        blockColors.registerBlockColorHandler((s, w, p, i) -> i == 1 ? ((IWoodBlock) s.getBlock()).getType().getColor() : 0xFFFFFF,
+                TFCBlocks.WOOD_BLOCKS.values()
+                        .stream()
+                        .map(s -> (Block) s)
+                        .toArray(Block[]::new));
+
+        //==== Tree ==================================================================================================//
+
         blockColors.registerBlockColorHandler((s, w, p, i) -> {
                     // цвет листвы
                     if (i == 0) return foliageColor.colorMultiplier(s, w, p, i);
                     // цвет дерева
-                    if (i == 1) return ((IWoodBlock) s.getBlock()).getType().getColor();
+                    if (i == 1) return ((ITreeBlock) s.getBlock()).getType().getWood().getColor();
                     // Если не указан индекс
                     return 0xFFFFFF;
                 },
-                TFCBlocks.WOOD_BLOCKS.values()
+                TFCBlocks.TREE_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
@@ -337,16 +349,7 @@ public class ClientProxy extends CommonProxy {
 
         //==== Wood ==================================================================================================//
 
-        itemColors.registerItemColorHandler((s, i) -> {
-                    // цвет листвы
-                    if (i == 0)
-                        return blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i);
-                    // цвет дерева
-                    if (i == 1)
-                        return ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor();
-                    // Если не указан индекс
-                    return 0xFFFFFF;
-                },
+        itemColors.registerItemColorHandler((s, i) -> i == 1 ? ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor() : 0xFFFFFF,
                 TFCBlocks.WOOD_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
@@ -354,6 +357,29 @@ public class ClientProxy extends CommonProxy {
 
         itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
                 TFCItems.WOOD_ITEMS.values()
+                        .stream()
+                        .map(s -> (Item) s)
+                        .toArray(Item[]::new));
+
+        //==== Tree =================================================================================================//
+
+        itemColors.registerItemColorHandler((s, i) -> {
+                    // цвет листвы
+                    if (i == 0)
+                        return blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i);
+                    // цвет дерева
+                    if (i == 1)
+                        return ((ITreeBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getWood().getColor();
+                    // Если не указан индекс
+                    return 0xFFFFFF;
+                },
+                TFCBlocks.TREE_BLOCKS.values()
+                        .stream()
+                        .map(s -> (Block) s)
+                        .toArray(Block[]::new));
+
+        itemColors.registerItemColorHandler((s, i) -> ((ITreeItem) s.getItem()).getType().getWood().getColor(),
+                TFCItems.TREE_ITEMS.values()
                         .stream()
                         .filter(x -> x.getItemVariant() != SEED)
                         .map(s -> (Item) s)

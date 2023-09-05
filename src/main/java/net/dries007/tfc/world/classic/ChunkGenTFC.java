@@ -77,7 +77,7 @@ public class ChunkGenTFC implements IChunkGenerator {
     private static final IWorldGenerator LARGE_ROCKS_GEN = new WorldGenRarityBased(x -> x.largeRockRarity, new WorldGenLargeRocks());
     private static final IWorldGenerator TREE_GEN = new WorldGenTrees();
     private static final IWorldGenerator BERRY_BUSH_GEN = new WorldGenBerryBushes();
-    private static final IWorldGenerator FRUIT_TREE_GEN = new WorldGenFruitTrees();
+    //private static final IWorldGenerator FRUIT_TREE_GEN = new WorldGenFruitTrees();
     private static final IWorldGenerator WILD_CROPS_GEN = new WorldGenWildCrops();
     private static final IWorldGenerator LOOSE_ROCKS_GEN = new WorldGenLooseRocks();
     private static final IWorldGenerator SPELEOTHEM_GEN = new WorldGenSpeleothem();
@@ -345,7 +345,7 @@ public class ChunkGenTFC implements IChunkGenerator {
         // Далее, более крупные особенности типа растения
         TREE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
         BERRY_BUSH_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
-        FRUIT_TREE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
+        //FRUIT_TREE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider()); //todo фруктовые деревья
 
         // Вызовы через декоратор биома, который включает в себя все маленькие растения
         biome.decorate(world, rand, blockpos);

@@ -65,15 +65,6 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-//        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-//            @Nonnull
-//            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-//                return new ModelResourceLocation(getResourceLocation(),
-//                        "facing=" + state.getValue(FACING) + "," +
-//                                "powered=" + state.getValue(POWERED) + "," +
-//                                "rocktype=" + getType());
-//            }
-//        });
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder()
                         .customPath(getResourceLocation())

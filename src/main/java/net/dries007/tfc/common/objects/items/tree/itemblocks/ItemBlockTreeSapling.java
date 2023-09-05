@@ -1,6 +1,6 @@
-package net.dries007.tfc.common.objects.items.wood.itemblocks;
+package net.dries007.tfc.common.objects.items.tree.itemblocks;
 
-import net.dries007.tfc.common.objects.blocks.tree.BlockWoodSapling;
+import net.dries007.tfc.common.objects.blocks.tree.BlockTreeSapling;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -18,14 +18,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemBlockWoodSapling extends ItemBlockTFC {
+public class ItemBlockTreeSapling extends ItemBlockTFC {
 
-    private final BlockWoodSapling blockWoodSapling;
+    private final BlockTreeSapling blockTreeSapling;
 
-    public ItemBlockWoodSapling(BlockWoodSapling blockWoodSapling) {
-        super(blockWoodSapling);
+    public ItemBlockTreeSapling(BlockTreeSapling blockTreeSapling) {
+        super(blockTreeSapling);
 
-        this.blockWoodSapling = blockWoodSapling;
+        this.blockTreeSapling = blockTreeSapling;
     }
 
     @Override
@@ -60,12 +60,12 @@ public class ItemBlockWoodSapling extends ItemBlockTFC {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        var woodType = blockWoodSapling.getType();
+        var type = blockTreeSapling.getType();
 
         if (GuiScreen.isShiftKeyDown()) {
             tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
-            tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) woodType.getMinRain(), (int) woodType.getMaxRain()));
-            tooltip.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", woodType.getMinRain()), String.format("%.1f", woodType.getMaxRain())));
+            tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) type.getMinRain(), (int) type.getMaxRain()));
+            tooltip.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", type.getMinRain()), String.format("%.1f", type.getMaxRain())));
         } else {
             tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
         }

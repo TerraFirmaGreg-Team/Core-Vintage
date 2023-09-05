@@ -52,17 +52,49 @@ public class CustomStateMap extends StateMapperBase {
         }
 
 
-        var variantIn = this.getPropertyString(map);
-        if (!map.isEmpty()) {
-            if (this.variant != null) {
-                variantIn = variantIn + variant;
-            }
-            return new ModelResourceLocation(resourceLocation, variantIn);
-        }
+        var variantIn = this.getPropertyString(map, variant);
+//        if (!map.isEmpty()) {
+//            if (this.variant != null) {
+//                variantIn = variantIn + variant;
+//            }
+//            return new ModelResourceLocation(resourceLocation, variantIn);
+//        }
 
         return new ModelResourceLocation(resourceLocation, variantIn);
 
 
+    }
+
+    public String getPropertyString(Map<IProperty<?>, Comparable<?>> values, String variant) {
+        StringBuilder stringbuilder = new StringBuilder();
+
+        for (Map.Entry<IProperty<?>, Comparable<?>> entry : values.entrySet()) {
+            if (stringbuilder.length() != 0) {
+                stringbuilder.append(",");
+            }
+
+            IProperty<?> iproperty = entry.getKey();
+            stringbuilder.append(iproperty.getName());
+            stringbuilder.append("=");
+            stringbuilder.append(this.getPropertyName(iproperty, entry.getValue()));
+        }
+
+        if (variant != null) {
+            if (stringbuilder.length() != 0) {
+                stringbuilder.append(",");
+            }
+            stringbuilder.append(variant);
+        }
+
+        if (stringbuilder.length() == 0) {
+            stringbuilder.append("normal");
+        }
+
+        return stringbuilder.toString();
+    }
+
+    private <T extends Comparable<T>> String getPropertyName(IProperty<T> property, Comparable<?> value) {
+        return property.getName((T) value);
     }
 
     private <T extends Comparable<T>> String removeName(IProperty<T> property, Map<IProperty<?>, Comparable<?>> values) {
@@ -98,7 +130,7 @@ public class CustomStateMap extends StateMapperBase {
         }
 
         public Builder customVariant(String variant) {
-            this.variant = "," + variant;
+            this.variant = variant;
             return this;
         }
 

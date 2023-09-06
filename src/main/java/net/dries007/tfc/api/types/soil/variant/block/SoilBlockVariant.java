@@ -3,6 +3,7 @@ package net.dries007.tfc.api.types.soil.variant.block;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.api.util.Pair;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -11,6 +12,7 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.*;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.SOIL_BLOCKS;
 
 /**
  * Класс, представляющий вариант блока почвы.
@@ -44,6 +46,13 @@ public class SoilBlockVariant {
 
         if (!SOIL_BLOCK_VARIANTS.add(this)) {
             throw new RuntimeException(String.format("SoilBlockVariant: [%s] already exists!", name));
+        }
+
+        for (var type : SoilType.getSoilTypes()) {
+            var soilBlock = this.create(type);
+
+            if (SOIL_BLOCKS.put(new Pair<>(this, type), soilBlock) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
     }
 

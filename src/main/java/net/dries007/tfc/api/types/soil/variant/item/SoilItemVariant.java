@@ -2,11 +2,14 @@ package net.dries007.tfc.api.types.soil.variant.item;
 
 import net.dries007.tfc.api.types.soil.ISoilItem;
 import net.dries007.tfc.api.types.soil.type.SoilType;
+import net.dries007.tfc.api.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
+
+import static net.dries007.tfc.common.objects.items.TFCItems.SOIL_ITEMS;
 
 /**
  * Класс WoodItemVariant представляет вариант деревянного блока.
@@ -37,6 +40,13 @@ public class SoilItemVariant {
 
         if (!SOIL_ITEM_VARIANTS.add(this)) {
             throw new RuntimeException(String.format("WoodItemVariant: [%s] already exists!", name));
+        }
+
+        for (var type : SoilType.getSoilTypes()) {
+            var woodItem = this.create(type);
+
+            if (SOIL_ITEMS.put(new Pair<>(this, type), woodItem) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
     }
 

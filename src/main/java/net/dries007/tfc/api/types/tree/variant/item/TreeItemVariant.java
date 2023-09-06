@@ -2,11 +2,14 @@ package net.dries007.tfc.api.types.tree.variant.item;
 
 import net.dries007.tfc.api.types.tree.ITreeItem;
 import net.dries007.tfc.api.types.tree.type.TreeType;
+import net.dries007.tfc.api.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
+
+import static net.dries007.tfc.common.objects.items.TFCItems.TREE_ITEMS;
 
 /**
  * Класс WoodItemVariant представляет вариант деревянного блока.
@@ -37,6 +40,13 @@ public class TreeItemVariant {
 
         if (!TREE_ITEM_VARIANTS.add(this)) {
             throw new RuntimeException(String.format("TreeItemVariant: [%s] already exists!", name));
+        }
+
+        for (var type : TreeType.getTreeTypes()) {
+            var woodItem = this.create(type);
+
+            if (TREE_ITEMS.put(new Pair<>(this, type), woodItem) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
     }
 

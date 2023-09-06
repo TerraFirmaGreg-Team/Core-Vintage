@@ -138,39 +138,6 @@ public class TFCBlocks {
             }
         }
 
-        //==== Soil ==================================================================================================//
-
-        for (var variant : SoilBlockVariant.getSoilBlockVariants()) {
-            for (var type : SoilType.getSoilTypes()) {
-                var soilBlock = variant.create(type);
-
-                if (SOIL_BLOCKS.put(new Pair<>(variant, type), soilBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
-            }
-        }
-
-        //==== Wood ==================================================================================================//
-
-        for (var variant : WoodBlockVariant.getWoodBlockVariants()) {
-            for (var type : WoodType.getWoodTypes()) {
-                var woodBlock = variant.create(type);
-
-                if (WOOD_BLOCKS.put(new Pair<>(variant, type), woodBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
-            }
-        }
-
-        //==== Tree ==================================================================================================//
-
-        for (var variant : TreeBlockVariant.getTreeBlockVariants()) {
-            for (var type : TreeType.getTreeTypes()) {
-                var treeBlock = variant.create(type);
-
-                if (TREE_BLOCKS.put(new Pair<>(variant, type), treeBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
-            }
-        }
-
         //==== Plant =================================================================================================//
 
         for (var type : PlantType.getPlantTypes()) {

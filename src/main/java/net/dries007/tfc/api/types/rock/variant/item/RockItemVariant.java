@@ -2,11 +2,14 @@ package net.dries007.tfc.api.types.rock.variant.item;
 
 import net.dries007.tfc.api.types.rock.IRockItem;
 import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
+
+import static net.dries007.tfc.common.objects.items.TFCItems.ROCK_ITEMS;
 
 /**
  * Класс, представляющий тип блока породы.
@@ -37,6 +40,13 @@ public class RockItemVariant {
 
         if (!ROCK_ITEM_VARIANTS.add(this)) {
             throw new RuntimeException(String.format("RockItemVariant: [%s] already exists!", name));
+        }
+
+        for (var type : RockType.getRockTypes()) {
+            var rockItem = this.create(type);
+
+            if (ROCK_ITEMS.put(new Pair<>(this, type), rockItem) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
     }
 

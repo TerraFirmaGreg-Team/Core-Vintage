@@ -8,6 +8,9 @@ import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.rock.IRockItem;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.item.RockItemVariant;
+import net.dries007.tfc.api.types.soil.ISoilItem;
+import net.dries007.tfc.api.types.soil.type.SoilType;
+import net.dries007.tfc.api.types.soil.variant.item.SoilItemVariant;
 import net.dries007.tfc.api.types.tree.ITreeItem;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.api.types.tree.variant.item.TreeItemVariant;
@@ -35,6 +38,7 @@ public class TFCItems {
     //==== Item ======================================================================================================//
 
     public static final Map<Pair<RockItemVariant, RockType>, IRockItem> ROCK_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<SoilItemVariant, SoilType>, ISoilItem> SOIL_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<WoodItemVariant, WoodType>, IWoodItem> WOOD_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<TreeItemVariant, TreeType>, ITreeItem> TREE_ITEMS = new LinkedHashMap<>();
 
@@ -81,39 +85,6 @@ public class TFCItems {
 
                 if (FIRED_MOLDS.put(orePrefix, new ItemMold(orePrefix)) != null)
                     throw new RuntimeException(String.format("Duplicate registry detected: %s", orePrefix));
-            }
-        }
-
-        //==== Rock ==================================================================================================//
-
-        for (var variant : RockItemVariant.getRockItemVariants()) {
-            for (var type : RockType.getRockTypes()) {
-                var rockItem = variant.create(type);
-
-                if (ROCK_ITEMS.put(new Pair<>(variant, type), rockItem) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
-            }
-        }
-
-        //==== Wood ==================================================================================================//
-
-        for (var variant : WoodItemVariant.getWoodItemVariants()) {
-            for (var type : WoodType.getWoodTypes()) {
-                var woodItem = variant.create(type);
-
-                if (WOOD_ITEMS.put(new Pair<>(variant, type), woodItem) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
-            }
-        }
-
-        //==== Tree ==================================================================================================//
-
-        for (var variant : TreeItemVariant.getTreeItemVariants()) {
-            for (var type : TreeType.getTreeTypes()) {
-                var woodItem = variant.create(type);
-
-                if (TREE_ITEMS.put(new Pair<>(variant, type), woodItem) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
             }
         }
 

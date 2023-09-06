@@ -17,6 +17,6 @@ public class BlockSoilDryGrass extends BlockSoilGrass implements ISoilBlock {
     public BlockSoilDryGrass(SoilBlockVariant variant, SoilType type) {
         super(variant, type);
 
-        DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.DIRTLIKE);
+        DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }
 }

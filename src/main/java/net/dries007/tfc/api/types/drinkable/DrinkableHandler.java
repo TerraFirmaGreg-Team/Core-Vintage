@@ -29,7 +29,7 @@ public class DrinkableHandler {
         }
     };
 
-    public static void init() {
+    public static void preInit() {
         FRESH_WATER = new Drinkable(() -> TFGMaterials.FreshWater.getFluid(),
                 (player) -> {
                     if (player.getFoodStats() instanceof FoodStatsTFC) {

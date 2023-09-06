@@ -16,7 +16,7 @@ public class BlockRockGravel extends BlockRockFallable {
 
         FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL);
 
-        DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.GRAVELLIKE);
+        DirtHelper.registerSoil(this, DirtHelper.GRAVELLIKE);
     }
 
 }

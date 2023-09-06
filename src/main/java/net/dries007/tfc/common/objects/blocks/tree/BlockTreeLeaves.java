@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.tree;
 
-import com.google.common.collect.ImmutableList;
+import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import net.dries007.tfc.api.types.tree.ITreeBlock;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.api.types.tree.variant.block.TreeBlockVariant;
@@ -12,9 +12,7 @@ import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -44,7 +42,7 @@ import java.util.*;
 import static net.dries007.tfc.api.types.tree.variant.block.TreeBlockVariants.SAPLING;
 import static net.dries007.tfc.util.Constants.RNG;
 
-public class BlockTreeLeaves extends BlockLeaves implements ITreeBlock {
+public class BlockTreeLeaves extends BlockDynamicLeaves implements ITreeBlock {
     private final TreeBlockVariant variant;
     private final TreeType type;
 
@@ -120,11 +118,11 @@ public class BlockTreeLeaves extends BlockLeaves implements ITreeBlock {
         }
     }
 
-    @Override
-    @Nonnull
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, DECAYABLE);
-    }
+//    @Override
+//    @Nonnull
+//    protected BlockStateContainer createBlockState() {
+//        return new BlockStateContainer(this, DECAYABLE);
+//    }
 
     // TODO нужно?
     @Override
@@ -206,8 +204,10 @@ public class BlockTreeLeaves extends BlockLeaves implements ITreeBlock {
 
     @Override
     @Nonnull
-    public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return ImmutableList.of(new ItemStack(this));
+    public ArrayList<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+        ArrayList<ItemStack> list = new ArrayList<>();
+        list.add(new ItemStack(this));
+        return list;
     }
 
     private void doLeafDecay(World world, BlockPos pos, IBlockState state) {

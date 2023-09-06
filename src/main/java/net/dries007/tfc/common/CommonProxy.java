@@ -231,17 +231,11 @@ public class CommonProxy {
 
 
         r.register(blockRootyDirt);
-
-
         for (var tree : TreeType.getTreeTypes()) {
-            var family = new WoodTreeFamily(tree);
+            new WoodTreeFamily(tree);
         }
 
-
-//        TREES.forEach(tree -> tree.getRegisterableBlocks(TREE_BLOCKS));
-//
-        ArrayList<Block> treeBlocks = new ArrayList<>();
-        treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
+        ArrayList<Block> treeBlocks = new ArrayList<>(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
         r.registerAll(treeBlocks.toArray(new Block[0]));
     }
 
@@ -343,10 +337,6 @@ public class CommonProxy {
 
         ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
         ITEM.forEach(r::register);
-//
-//        ArrayList<Item> treeItems = new ArrayList<>();
-//        TREES.forEach(tree -> tree.getRegisterableItems(treeItems));
-//        r.registerAll(treeItems.toArray(new Item[treeItems.size()]));
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -430,7 +420,7 @@ public class CommonProxy {
         CropModule.preInit();
         BushModule.preInit();
 
-        DrinkableHandler.init();
+        DrinkableHandler.preInit();
 
         TFCBlocks.preInit();
         TFCItems.preInit();

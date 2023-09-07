@@ -83,7 +83,7 @@ public class TFCBlocks {
     // Жидкости
     public static final List<BlockFluidBase> FLUID = new ArrayList<>();
 
-    public static BlockSoilRootyDirt blockRootyDirt;
+    public static BlockSoilRootyDirt ROOTY_DIRT_MIMIC;
 
 
     public static BlockDebug DEBUG;
@@ -115,17 +115,6 @@ public class TFCBlocks {
     public static BlockMetalCladding CLADDING;
 
     public static void preInit() {
-
-        //==== Crop ==================================================================================================//
-
-        for (var variant : CropBlockVariant.getCropBlockVariants()) {
-            for (var type : CropType.getCropTypes()) {
-                var cropBlock = variant.create(type);
-
-                if (CROP_BLOCKS.put(new Pair<>(variant, type), cropBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
-            }
-        }
 
         //==== Rock ==================================================================================================//
 
@@ -227,8 +216,7 @@ public class TFCBlocks {
         BLOCKS.add(BLOOM = new BlockBloom());
         BLOCKS.add(THATCH_BED = new BlockThatchBed());
         BLOCKS.add(CLADDING = new BlockMetalCladding());
-
-        blockRootyDirt = new BlockSoilRootyDirt();
+        BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockSoilRootyDirt());
     }
 
     @Nonnull

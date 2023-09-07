@@ -29,7 +29,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.tree.variant.block.TreeBlockVariants.*;
 import static net.dries007.tfc.api.types.tree.variant.item.TreeItemVariants.SEED;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LOG;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.blockRootyDirt;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 
 public class WoodTreeFamily extends TreeFamily {
 
@@ -122,7 +122,7 @@ public class WoodTreeFamily extends TreeFamily {
         @Override
 
         public BlockRooty getRootyBlock(World world, BlockPos rootPos) {
-            return blockRootyDirt;
+            return ROOTY_DIRT_MIMIC;
         }
 
         public float getSignalEnergy() {

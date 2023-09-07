@@ -229,8 +229,6 @@ public class CommonProxy {
         registerTE(TELargeVessel.class, "large_vessel");
         registerTE(TEPowderKeg.class, "powderkeg");
 
-
-        r.register(blockRootyDirt);
         for (var tree : TreeType.getTreeTypes()) {
             new WoodTreeFamily(tree);
         }
@@ -326,12 +324,6 @@ public class CommonProxy {
             var itemBlock = alabasterBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
-
-        //==== Groundcover ===========================================================================================//
-
-        // for (var groundcoverBlock : GROUNDCOVER_BLOCK.values()) {
-        // 	r.register(createItemBlock(groundcoverBlock, ItemBlock::new));
-        // }
 
         //==== Other =================================================================================================//
 

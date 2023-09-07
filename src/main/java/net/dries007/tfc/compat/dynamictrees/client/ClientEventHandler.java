@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.blockRootyDirt;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.TREES;
 
 @SideOnly(Side.CLIENT)
@@ -28,7 +28,7 @@ public class ClientEventHandler {
 
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent event) {
-        Block block = blockRootyDirt;
+        Block block = ROOTY_DIRT_MIMIC;
         if (block.getRegistryName() != null) {
             BakedModelBlockRooty rootyModel = new BakedModelBlockRootyTFC();
             event.getModelRegistry().putObject(new ModelResourceLocation(block.getRegistryName(), "normal"), rootyModel);
@@ -43,7 +43,7 @@ public class ClientEventHandler {
             ModelHelperTFC.regModel(tree);//Register custom state mapper for branch
         }
 
-        ModelLoader.setCustomStateMapper(blockRootyDirt, new StateMap.Builder()
+        ModelLoader.setCustomStateMapper(ROOTY_DIRT_MIMIC, new StateMap.Builder()
                 .ignore(BlockRooty.LIFE)
                 .build());
     }
@@ -52,6 +52,6 @@ public class ClientEventHandler {
     public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
         final BlockColors blockColors = event.getBlockColors();
 
-        blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, blockRootyDirt);
+        blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, ROOTY_DIRT_MIMIC);
     }
 }

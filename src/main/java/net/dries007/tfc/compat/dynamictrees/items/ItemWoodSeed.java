@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.items.wood;
+package net.dries007.tfc.compat.dynamictrees.items;
 
 import com.ferreusveritas.dynamictrees.items.Seed;
 import net.dries007.tfc.api.capability.size.Size;
@@ -28,7 +28,7 @@ public class ItemWoodSeed extends Seed implements IWoodItem {
     private final WoodItemVariant variant;
 
     public ItemWoodSeed(WoodItemVariant variant, WoodType type) {
-        super(String.format("tree/%s/%s", variant, type));
+        super(String.format("wood/%s/%s", variant, type));
         this.type = type;
         this.variant = variant;
 

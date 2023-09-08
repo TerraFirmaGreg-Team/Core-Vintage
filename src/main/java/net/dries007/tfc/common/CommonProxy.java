@@ -1,7 +1,6 @@
 package net.dries007.tfc.common;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import gregtech.api.unification.material.event.MaterialEvent;
@@ -31,7 +30,6 @@ import net.dries007.tfc.api.types.plant.PlantModule;
 import net.dries007.tfc.api.types.rock.RockModule;
 import net.dries007.tfc.api.types.soil.SoilModule;
 import net.dries007.tfc.api.types.tree.TreeModule;
-import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.api.types.wood.WoodModule;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.LootTablesTFC;
@@ -48,7 +46,6 @@ import net.dries007.tfc.common.objects.recipes.RecipeHandler;
 import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.compat.dynamictrees.SeasonManager;
 import net.dries007.tfc.compat.dynamictrees.TFCRootDecay;
-import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
@@ -92,7 +89,6 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
@@ -306,7 +302,7 @@ public class CommonProxy {
         //==== Other =================================================================================================//
 
         ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
-        ITEM.forEach(r::register);
+        ITEMS.forEach(r::register);
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

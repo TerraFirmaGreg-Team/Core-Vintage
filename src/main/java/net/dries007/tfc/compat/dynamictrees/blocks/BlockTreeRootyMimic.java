@@ -19,7 +19,7 @@ import static net.dries007.tfc.api.types.soil.type.SoilTypes.LOAM;
 import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.DIRT;
 
 @ParametersAreNonnullByDefault
-public class BlockRootyMimic extends BlockRootyDirt {
+public class BlockTreeRootyMimic extends BlockRootyDirt {
     private static final EnumFacing[] NOT_UP = new EnumFacing[]{
             EnumFacing.DOWN,
             EnumFacing.EAST,
@@ -28,7 +28,7 @@ public class BlockRootyMimic extends BlockRootyDirt {
             EnumFacing.SOUTH
     };
 
-    public BlockRootyMimic() {
+    public BlockTreeRootyMimic() {
         super(false);
     }
 

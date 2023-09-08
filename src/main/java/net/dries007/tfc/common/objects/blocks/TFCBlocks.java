@@ -36,7 +36,7 @@ import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockCrucible;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockPowderKeg;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
-import net.dries007.tfc.compat.dynamictrees.blocks.BlockRootyMimic;
+import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeRootyMimic;
 import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.minecraft.block.Block;
@@ -81,7 +81,7 @@ public class TFCBlocks {
     // Жидкости
     public static final List<BlockFluidBase> FLUID = new ArrayList<>();
 
-    public static BlockRootyMimic ROOTY_DIRT_MIMIC;
+    public static BlockTreeRootyMimic ROOTY_DIRT_MIMIC;
 
 
     public static BlockDebug DEBUG;
@@ -214,7 +214,7 @@ public class TFCBlocks {
         BLOCKS.add(BLOOM = new BlockBloom());
         BLOCKS.add(THATCH_BED = new BlockThatchBed());
         BLOCKS.add(CLADDING = new BlockMetalCladding());
-        BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockRootyMimic());
+        BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
 
         for (var tree : TreeType.getTreeTypes()) {
             new WoodTreeFamily(tree);

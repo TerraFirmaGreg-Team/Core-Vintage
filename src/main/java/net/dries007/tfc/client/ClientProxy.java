@@ -158,7 +158,7 @@ public class ClientProxy extends CommonProxy {
         for (var item : TFCItems.UNFIRED_MOLDS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (var item : TFCItems.ITEM)
+        for (var item : TFCItems.ITEMS)
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
         //==== TESRs =================================================================================================//

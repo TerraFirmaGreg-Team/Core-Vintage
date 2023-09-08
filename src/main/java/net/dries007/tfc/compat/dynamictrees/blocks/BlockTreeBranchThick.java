@@ -1,32 +1,23 @@
 package net.dries007.tfc.compat.dynamictrees.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranchThick;
-import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
-import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.Set;
 
 public class BlockTreeBranchThick extends BlockBranchThick {
 
 
     public BlockTreeBranchThick(WoodType type) {
-        super(String.format("tree/branch/%s", type));
+        super(String.format("wood/branch/%s", type));
+
+        setTranslationKey(String.format("wood.branch.%s", type));
     }
 
 

@@ -44,7 +44,7 @@ public class TFCItems {
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new ConcurrentHashMap<>();
 
     // Предметы
-    public static final List<Item> ITEM = new ArrayList<>();
+    public static final List<Item> ITEMS = new ArrayList<>();
 
     public static ItemMisc STRAW;
     public static Item HANDSTONE;
@@ -100,32 +100,32 @@ public class TFCItems {
 
         //==== ItemMisc ==============================================================================================//
 
-        ITEM.add(STRAW = new ItemMisc("straw", Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"));
-        ITEM.add(WROUGHT_IRON_GRILL = new ItemMisc("wrought_iron_grill", Size.LARGE, Weight.HEAVY, "grill"));
-        ITEM.add(GLUE = new ItemMisc("glue", Size.TINY, Weight.LIGHT, "slimeball", "glue"));
-        ITEM.add(MORTAR = new ItemMisc("mortar", Size.TINY, Weight.VERY_LIGHT, "mortar"));
-        ITEM.add(HALTER = new ItemMisc("halter", Size.SMALL, Weight.LIGHT, "halter"));
-        ITEM.add(STICK_BUNCH = new ItemMisc("stick_bunch", Size.NORMAL, Weight.LIGHT, WOOD));
-        ITEM.add(STICK_BUNDLE = new ItemMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, WOOD, "log_wood", "stick_bundle"));
-        ITEM.add(FIRE_CLAY = new ItemMisc("ceramics/fire_clay", Size.VERY_SMALL, Weight.VERY_LIGHT, "fire_clay"));
-        ITEM.add(WOOD_ASH = new ItemMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT, WOOD, "slimeball", "glue"));
-        ITEM.add(GLASS_SHARD = new ItemMisc("glass_shard", Size.VERY_SMALL, Weight.VERY_LIGHT));
-        ITEM.add(ALABASTER_BRICK = new ItemMisc("alabaster_brick", Size.VERY_SMALL, Weight.LIGHT));
+        ITEMS.add(STRAW = new ItemMisc("straw", Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"));
+        ITEMS.add(WROUGHT_IRON_GRILL = new ItemMisc("wrought_iron_grill", Size.LARGE, Weight.HEAVY, "grill"));
+        ITEMS.add(GLUE = new ItemMisc("glue", Size.TINY, Weight.LIGHT, "slimeball", "glue"));
+        ITEMS.add(MORTAR = new ItemMisc("mortar", Size.TINY, Weight.VERY_LIGHT, "mortar"));
+        ITEMS.add(HALTER = new ItemMisc("halter", Size.SMALL, Weight.LIGHT, "halter"));
+        ITEMS.add(STICK_BUNCH = new ItemMisc("stick_bunch", Size.NORMAL, Weight.LIGHT, WOOD));
+        ITEMS.add(STICK_BUNDLE = new ItemMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, WOOD, "log_wood", "stick_bundle"));
+        ITEMS.add(FIRE_CLAY = new ItemMisc("ceramics/fire_clay", Size.VERY_SMALL, Weight.VERY_LIGHT, "fire_clay"));
+        ITEMS.add(WOOD_ASH = new ItemMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT, WOOD, "slimeball", "glue"));
+        ITEMS.add(GLASS_SHARD = new ItemMisc("glass_shard", Size.VERY_SMALL, Weight.VERY_LIGHT));
+        ITEMS.add(ALABASTER_BRICK = new ItemMisc("alabaster_brick", Size.VERY_SMALL, Weight.LIGHT));
 
 
         //==== ItemCraftingTool ======================================================================================//
 
-        ITEM.add(HANDSTONE = new ItemCraftingTool("handstone", 250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"));
-        ITEM.add(SPINDLE = new ItemCraftingTool("spindle", 40, Size.NORMAL, Weight.MEDIUM, "spindle"));
+        ITEMS.add(HANDSTONE = new ItemCraftingTool("handstone", 250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"));
+        ITEMS.add(SPINDLE = new ItemCraftingTool("spindle", 40, Size.NORMAL, Weight.MEDIUM, "spindle"));
 
 
         //==== Other =================================================================================================//
 
-        ITEM.add(FIRESTARTER = new ItemFireStarter());
-        ITEM.add(QUIVER = new ItemQuiver());
-        ITEM.add(WAND = new ItemDebug());
-        ITEM.add(UNREFINED_BLOOM = new ItemBloom(false));
-        ITEM.add(REFINED_BLOOM = new ItemBloom(true));
+        ITEMS.add(FIRESTARTER = new ItemFireStarter());
+        ITEMS.add(QUIVER = new ItemQuiver());
+        ITEMS.add(WAND = new ItemDebug());
+        ITEMS.add(UNREFINED_BLOOM = new ItemBloom(false));
+        ITEMS.add(REFINED_BLOOM = new ItemBloom(true));
 
 
     }

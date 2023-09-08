@@ -14,7 +14,6 @@ import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranch;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.dynamictrees.dropcreators.DropCreatorWoodLog;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -32,6 +31,7 @@ import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
 import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
+import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
 
 public class WoodTreeFamily extends TreeFamily {
 
@@ -52,6 +52,7 @@ public class WoodTreeFamily extends TreeFamily {
         TREES.add(this);
 
         this.getRegisterableBlocks(BLOCKS);
+        this.getRegisterableItems(ITEMS);
         BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
     }
 
@@ -114,7 +115,7 @@ public class WoodTreeFamily extends TreeFamily {
 
             SPECIES.put(tree, this);
             Species.REGISTRY.register(this);
-            TreeRegistry.registerSaplingReplacer(sapling.getDefaultState(), this);
+            //TreeRegistry.registerSaplingReplacer(sapling.getDefaultState(), this);
         }
 
         public TreeType getTree() {

@@ -34,6 +34,7 @@ dependencies {
         implementation rfg.deobf("maven.modrinth:the-one-probe:1.12-1.4.28")
         implementation rfg.deobf("curse.maven:had-enough-items-557549:4571247")
 
+        //runtimeOnly("curse.maven:fancy-spawn-eggs-302277:2612571")
         //runtimeOnly("maven.modrinth:better-biome-blend:1.12.2-1.1.7-forge")
         //runtimeOnly("curse.maven:spark-361579:3542217")
     }

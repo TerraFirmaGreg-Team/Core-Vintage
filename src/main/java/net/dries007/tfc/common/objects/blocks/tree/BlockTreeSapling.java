@@ -22,7 +22,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -44,8 +43,6 @@ public class BlockTreeSapling extends BlockBush implements ITreeBlock, IGrowable
     private final TreeType type;
 
     public BlockTreeSapling(TreeBlockVariant variant, TreeType type) {
-//        super(String.format("tree/%s/%s", variant, type));
-
         this.variant = variant;
         this.type = type;
 
@@ -167,13 +164,6 @@ public class BlockTreeSapling extends BlockBush implements ITreeBlock, IGrowable
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         return GrowthStatus.GROWING;
     }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
-
 
     @Override
     @SideOnly(Side.CLIENT)

@@ -125,10 +125,6 @@ public class WoodTreeFamily extends TreeFamily {
             return ROOTY_DIRT_MIMIC;
         }
 
-        public float getSignalEnergy() {
-            return signalEnergy;
-        }
-
         //TFC style.
         @Override
         public boolean canBoneMeal() {

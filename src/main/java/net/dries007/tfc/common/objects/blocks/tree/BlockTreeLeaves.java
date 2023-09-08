@@ -12,7 +12,9 @@ import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -42,7 +44,7 @@ import java.util.*;
 import static net.dries007.tfc.api.types.tree.variant.block.TreeBlockVariants.SAPLING;
 import static net.dries007.tfc.util.Constants.RNG;
 
-public class BlockTreeLeaves extends BlockDynamicLeaves implements ITreeBlock {
+public class BlockTreeLeaves extends BlockLeaves implements ITreeBlock {
     private final TreeBlockVariant variant;
     private final TreeType type;
 
@@ -83,8 +85,7 @@ public class BlockTreeLeaves extends BlockDynamicLeaves implements ITreeBlock {
     @Override
     @Nonnull
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState()
-                .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
+        return this.getDefaultState().withProperty(DECAYABLE, (meta & 0b01) == 0b01);
     }
 
     @Override
@@ -118,11 +119,11 @@ public class BlockTreeLeaves extends BlockDynamicLeaves implements ITreeBlock {
         }
     }
 
-//    @Override
-//    @Nonnull
-//    protected BlockStateContainer createBlockState() {
-//        return new BlockStateContainer(this, DECAYABLE);
-//    }
+    @Override
+    @Nonnull
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, DECAYABLE);
+    }
 
     // TODO нужно?
     @Override

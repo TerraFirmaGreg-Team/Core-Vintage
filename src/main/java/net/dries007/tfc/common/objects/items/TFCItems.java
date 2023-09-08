@@ -11,9 +11,6 @@ import net.dries007.tfc.api.types.rock.variant.item.RockItemVariant;
 import net.dries007.tfc.api.types.soil.ISoilItem;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.item.SoilItemVariant;
-import net.dries007.tfc.api.types.tree.ITreeItem;
-import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.api.types.tree.variant.item.TreeItemVariant;
 import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariant;
@@ -40,7 +37,6 @@ public class TFCItems {
     public static final Map<Pair<RockItemVariant, RockType>, IRockItem> ROCK_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<SoilItemVariant, SoilType>, ISoilItem> SOIL_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<WoodItemVariant, WoodType>, IWoodItem> WOOD_ITEMS = new LinkedHashMap<>();
-    public static final Map<Pair<TreeItemVariant, TreeType>, ITreeItem> TREE_ITEMS = new LinkedHashMap<>();
 
     public static final Map<CropType, ItemCropSeeds> SEED_ITEMS = new ConcurrentHashMap<>();
     public static final Map<FoodType, ItemFoodTFC> FOOD_ITEMS = new LinkedHashMap<>();
@@ -138,13 +134,6 @@ public class TFCItems {
     @Nonnull
     public static Item getWoodItem(@Nonnull WoodItemVariant variant, @Nonnull WoodType type) {
         var item = (Item) WOOD_ITEMS.get(new Pair<>(variant, type));
-        if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", type));
-    }
-
-    @Nonnull
-    public static Item getTreeItem(@Nonnull TreeItemVariant variant, @Nonnull TreeType type) {
-        var item = (Item) TREE_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
         throw new RuntimeException(String.format("Item is null: %s", type));
     }

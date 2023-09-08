@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:wood/fence_gate/closed",
     "textures": {
-      "planks": "tfc:blocks/wood/planks/pattern"
+      "planks": "tfc:blocks/wood/planks"
     },
     "uvlock": true
   },

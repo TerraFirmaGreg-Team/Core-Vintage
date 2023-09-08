@@ -1,9 +1,11 @@
 package net.dries007.tfc.api.types.wood.variant.block;
 
 public class WoodBlockVariants {
-
     public static WoodBlockVariant LOG;
     public static WoodBlockVariant STRIPPED_LOG;
+    public static WoodBlockVariant LEAVES;
+    public static WoodBlockVariant SAPLING;
+    public static WoodBlockVariant POTTED_SAPLING;
     public static WoodBlockVariant PLANKS;
     public static WoodBlockVariant BOOKSHELF;
     public static WoodBlockVariant DOOR;

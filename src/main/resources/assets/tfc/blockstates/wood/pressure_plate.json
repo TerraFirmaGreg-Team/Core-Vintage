@@ -4,8 +4,8 @@
   "defaults": {
     "model": "tfc:wood/pressure_plate_up",
     "textures": {
-      "texture": "tfc:blocks/wood/planks/pattern",
-      "particle": "tfc:blocks/wood/planks/pattern"
+      "texture": "tfc:blocks/wood/planks",
+      "particle": "tfc:blocks/wood/planks"
     }
   },
   "variants": {

@@ -1,30 +1,8 @@
 {
-  "credit": "Made with Blockbench",
-  "parent": "block/block",
-  "elements": [
-    {
-      "name": "side",
-      "from": [0, 0, 0],
-      "to": [16, 16, 16],
-      "faces": {
-        "north": { "uv": [0, 0, 16, 16], "texture": "#side", "cullface": "north" },
-        "east": { "uv": [0, 0, 16, 16], "texture": "#side", "cullface": "east" },
-        "south": { "uv": [0, 0, 16, 16], "texture": "#side", "cullface": "south" },
-        "west": { "uv": [0, 0, 16, 16], "texture": "#side", "cullface": "west" },
-        "up": { "uv": [0, 0, 16, 16], "texture": "#side", "cullface": "up" },
-        "down": { "uv": [0, 0, 16, 16], "texture": "#side", "cullface": "down" }
-      }
-    },
-    {
-      "name": "top",
-      "from": [0, 0, 0],
-      "to": [16, 16, 16],
-      "faces": {
-        "up": { "uv": [0, 0, 16, 16], "texture": "#end", "cullface": "up", "tintindex": 1 },
-        "down": { "uv": [0, 0, 16, 16], "texture": "#end", "cullface": "down", "tintindex": 1 }
-      }
-    }
-  ],
+  "parent": "block/cube_column",
+  "textures": {
+    "particle": "#side"
+  },
   "display": {
     "thirdperson_righthand": {
       "rotation": [35, 25, 0],

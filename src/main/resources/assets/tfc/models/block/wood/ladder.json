@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "particle": "tfc:blocks/wood/planks/pattern",
-    "planks": "tfc:blocks/wood/planks/pattern"
+    "particle": "tfc:blocks/wood/planks",
+    "planks": "tfc:blocks/wood/planks"
   },
   "elements": [
     {

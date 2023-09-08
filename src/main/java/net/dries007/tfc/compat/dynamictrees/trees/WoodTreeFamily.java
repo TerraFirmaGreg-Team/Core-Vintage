@@ -2,7 +2,6 @@ package net.dries007.tfc.compat.dynamictrees.trees;
 
 import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
-import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
@@ -11,8 +10,11 @@ import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranch;
+import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.dynamictrees.dropcreators.DropCreatorWoodLog;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -26,9 +28,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.api.types.tree.variant.block.TreeBlockVariants.*;
-import static net.dries007.tfc.api.types.tree.variant.item.TreeItemVariants.SEED;
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LOG;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
+import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 
 public class WoodTreeFamily extends TreeFamily {
@@ -45,12 +47,12 @@ public class WoodTreeFamily extends TreeFamily {
 
         setCommonSpecies(new WoodTreeSpecies(this, tree));
         setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, tree.getWood()).getDefaultState());
-
-        var branch = TFCBlocks.getTreeBlock(BRANCH, tree);
-        var branch_thick = TFCBlocks.getTreeBlock(BRANCH_THICK, tree);
-        setDynamicBranch((BlockBranch) (isThick() ? branch_thick : branch));
+        setDynamicBranch(isThick() ? new BlockTreeBranchThick(tree.getWood()) : new BlockTreeBranch(tree.getWood()));
 
         TREES.add(this);
+
+        this.getRegisterableBlocks(BLOCKS);
+        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
     }
 
     public TreeType getTree() {
@@ -92,9 +94,9 @@ public class WoodTreeFamily extends TreeFamily {
 
             this.tree = tree;
 
-            var leaves = TFCBlocks.getTreeBlock(LEAVES, tree);
-            var sapling = TFCBlocks.getTreeBlock(SAPLING, tree);
-            var seed = TFCItems.getTreeItem(SEED, tree);
+            var leaves = TFCBlocks.getWoodBlock(LEAVES, tree.getWood());
+            var sapling = TFCBlocks.getWoodBlock(SAPLING, tree.getWood());
+            var seed = TFCItems.getWoodItem(SEED, tree.getWood());
 
             var leavesProperties = new LeavesProperties(leaves.getDefaultState(), tree.getCellKit());
 

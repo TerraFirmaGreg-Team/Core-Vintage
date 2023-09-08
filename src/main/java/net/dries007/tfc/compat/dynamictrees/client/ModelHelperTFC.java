@@ -26,9 +26,9 @@ public class ModelHelperTFC extends ModelHelper {
      */
     public static void regModel(TreeFamily tree) {
 
-        BlockBranch blockBranch = tree.getDynamicBranch();
+        var blockBranch = tree.getDynamicBranch();
 
-        ModelResourceLocation modelLocation = getBranchModelResourceLocation(blockBranch);
+        var modelLocation = getBranchModelResourceLocation(blockBranch);
 
         setGenericStateMapper(blockBranch, modelLocation);
         if (blockBranch instanceof BlockBranchThick) {
@@ -42,8 +42,8 @@ public class ModelHelperTFC extends ModelHelper {
     }
 
     private static ModelResourceLocation getBranchModelResourceLocation(BlockBranch blockBranch) {
-        ResourceLocation family = blockBranch.getFamily().getName();
-        ResourceLocation resloc = new ResourceLocation(family.getNamespace(), "wood/branch/" + family.getPath());
+        var family = blockBranch.getFamily().getName();
+        var resloc = new ResourceLocation(family.getNamespace(), "wood/branch/" + family.getPath());
         return new ModelResourceLocation(resloc, null);
     }
 }

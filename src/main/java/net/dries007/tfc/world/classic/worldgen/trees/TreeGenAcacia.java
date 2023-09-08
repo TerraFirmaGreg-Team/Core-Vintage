@@ -5,8 +5,8 @@
 //import net.dries007.tfc.api.types.wood.type.WoodType;
 //import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants;
 //import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-//import net.dries007.tfc.common.objects.blocks.tree.BlockTreeSapling;
-//import net.dries007.tfc.common.objects.blocks.tree.BlockTreeLeaves;
+//import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
+//import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;
 //import net.dries007.tfc.world.classic.StructureHelper;
 //import net.minecraft.block.BlockLog;
 //import net.minecraft.block.state.IBlockState;
@@ -23,7 +23,7 @@
 //import java.util.Random;
 //import java.util.stream.Collectors;
 //
-//import static net.dries007.tfc.common.objects.blocks.tree.BlockWoodLog.PLACED;
+//import static net.dries007.tfc.common.objects.blocks.wood.BlockWoodLog.PLACED;
 //import static net.minecraft.block.BlockLog.LOG_AXIS;
 //
 //public class TreeGenAcacia implements ITreeGenerator {
@@ -88,8 +88,8 @@
 //
 //    private void placeLog(World world, BlockPos pos, boolean useBark) {
 //        if (world.getBlockState(pos).getMaterial().isReplaceable() ||
-//                world.getBlockState(pos).getBlock() instanceof BlockTreeSapling ||
-//                world.getBlockState(pos).getBlock() instanceof BlockTreeLeaves)
+//                world.getBlockState(pos).getBlock() instanceof BlockWoodSapling ||
+//                world.getBlockState(pos).getBlock() instanceof BlockWoodLeaves)
 //            world.setBlockState(pos, useBark ? bark : trunk);
 //    }
 //}

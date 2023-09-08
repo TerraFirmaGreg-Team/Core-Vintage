@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfc:wood/barrel",
     "textures": {
-      "particle": "tfc:blocks/wood/planks/pattern",
+      "particle": "tfc:blocks/wood/planks",
       "base": "tfc:blocks/wood/barrel/base",
       "hoop": "tfc:blocks/wood/barrel/hoop",
       "lid": "tfc:blocks/wood/barrel/lid"

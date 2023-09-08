@@ -3,9 +3,9 @@
   "parent": "block/block",
   "ambientocclusion": false,
   "textures": {
-    "top": "tfc:blocks/wood/log/top",
-    "particle": "tfc:blocks/wood/planks/pattern",
-    "planks": "tfc:blocks/wood/planks/pattern",
+    "top": "#top",
+    "particle": "tfc:blocks/wood/planks",
+    "planks": "tfc:blocks/wood/planks",
     "log": "#log"
   },
   "elements": [

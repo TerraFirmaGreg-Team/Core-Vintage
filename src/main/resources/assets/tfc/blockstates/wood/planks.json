@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfc:wood/planks",
     "textures": {
-      "all": "tfc:blocks/wood/planks/pattern"
+      "all": "tfc:blocks/wood/planks"
     }
   },
   "variants": {

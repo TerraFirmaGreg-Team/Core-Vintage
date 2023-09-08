@@ -4,9 +4,9 @@
   "defaults": {
     "model": "tfc:wood/half_slab",
     "textures": {
-      "top": "tfc:blocks/wood/planks/pattern",
-      "bottom": "tfc:blocks/wood/planks/pattern",
-      "side": "tfc:blocks/wood/planks/pattern"
+      "top": "tfc:blocks/wood/planks",
+      "bottom": "tfc:blocks/wood/planks",
+      "side": "tfc:blocks/wood/planks"
     }
   },
   "variants": {

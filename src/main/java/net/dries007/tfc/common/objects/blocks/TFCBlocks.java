@@ -19,9 +19,7 @@ import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
-import net.dries007.tfc.api.types.tree.ITreeBlock;
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.api.types.tree.variant.block.TreeBlockVariant;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
@@ -38,7 +36,8 @@ import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockCrucible;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockPowderKeg;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
-import net.dries007.tfc.compat.dynamictrees.blocks.BlockSoilRootyDirt;
+import net.dries007.tfc.compat.dynamictrees.blocks.BlockRootyMimic;
+import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -65,7 +64,6 @@ public class TFCBlocks {
     public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<TreeBlockVariant, TreeType>, ITreeBlock> TREE_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantBlockVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<CropBlockVariant, CropType>, ICropBlock> CROP_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<MetalBlockVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
@@ -83,7 +81,7 @@ public class TFCBlocks {
     // Жидкости
     public static final List<BlockFluidBase> FLUID = new ArrayList<>();
 
-    public static BlockSoilRootyDirt ROOTY_DIRT_MIMIC;
+    public static BlockRootyMimic ROOTY_DIRT_MIMIC;
 
 
     public static BlockDebug DEBUG;
@@ -216,7 +214,11 @@ public class TFCBlocks {
         BLOCKS.add(BLOOM = new BlockBloom());
         BLOCKS.add(THATCH_BED = new BlockThatchBed());
         BLOCKS.add(CLADDING = new BlockMetalCladding());
-        BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockSoilRootyDirt());
+        BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockRootyMimic());
+
+        for (var tree : TreeType.getTreeTypes()) {
+            new WoodTreeFamily(tree);
+        }
     }
 
     @Nonnull
@@ -236,13 +238,6 @@ public class TFCBlocks {
     @Nonnull
     public static Block getWoodBlock(@Nonnull WoodBlockVariant variant, @Nonnull WoodType type) {
         var block = (Block) WOOD_BLOCKS.get(new Pair<>(variant, type));
-        if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
-    }
-
-    @Nonnull
-    public static Block getTreeBlock(@Nonnull TreeBlockVariant variant, @Nonnull TreeType type) {
-        var block = (Block) TREE_BLOCKS.get(new Pair<>(variant, type));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
     }

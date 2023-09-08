@@ -5,7 +5,7 @@
     "side": "tfc:items/devices/quern/handstone_side",
     "handstone": "tfc:items/devices/quern/handstone_top",
     "particle": "tfc:items/devices/quern/handstone_top",
-    "handle": "tfc:blocks/wood/sheet/pattern"
+    "handle": "tfc:blocks/wood/sheet"
   },
   "elements": [
     {

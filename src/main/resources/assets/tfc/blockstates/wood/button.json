@@ -4,14 +4,16 @@
   "defaults": {
     "model": "tfc:wood/button",
     "textures": {
-      "texture": "tfc:blocks/wood/planks/pattern",
-      "particle": "tfc:blocks/wood/planks/pattern"
+      "texture": "tfc:blocks/wood/planks",
+      "particle": "tfc:blocks/wood/planks"
     }
   },
   "variants": {
-    "normal": [{
-      "model": "tfc:wood/button_inventory"
-    }],
+    "normal": [
+      {
+        "model": "tfc:wood/button_inventory"
+      }
+    ],
     "powered": {
       "false": {},
       "true": {

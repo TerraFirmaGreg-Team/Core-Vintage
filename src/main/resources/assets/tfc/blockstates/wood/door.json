@@ -5,7 +5,7 @@
     "textures": {
       "bottom": "tfc:blocks/wood/door/lower",
       "top": "tfc:blocks/wood/door/upper",
-      "particle": "tfc:blocks/wood/planks/pattern"
+      "particle": "tfc:blocks/wood/planks"
     }
   },
   "variants": {

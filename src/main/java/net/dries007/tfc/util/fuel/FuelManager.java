@@ -1,5 +1,6 @@
 package net.dries007.tfc.util.fuel;
 
+import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
@@ -35,9 +36,9 @@ public final class FuelManager {
     }
 
     public static void postInit() {
-        for (var type : WoodType.getWoodTypes()) {
-            var log = TFCBlocks.getWoodBlock(LOG, type);
-            FUELS.add(new Fuel(IIngredient.of(new ItemStack(log)), type.getBurnTicks(), type.getBurnTemp()));
+        for (var type : TreeType.getTreeTypes()) {
+            var log = TFCBlocks.getWoodBlock(LOG, type.getWood());
+            FUELS.add(new Fuel(IIngredient.of(new ItemStack(log)), type.getWood().getBurnTicks(), type.getWood().getBurnTemp()));
         }
 
         // Coals

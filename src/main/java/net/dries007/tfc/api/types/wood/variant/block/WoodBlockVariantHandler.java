@@ -1,13 +1,19 @@
 package net.dries007.tfc.api.types.wood.variant.block;
 
 import net.dries007.tfc.common.objects.blocks.wood.*;
+import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranch;
+import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
 
 public class WoodBlockVariantHandler {
     public static void init() {
+
         LOG = new WoodBlockVariant("log", BlockWoodLog::new);
         // STRIPPED_LOG = new WoodBlockVariant("stripped_log");
+        LEAVES = new WoodBlockVariant("leaves", BlockWoodLeaves::new);
+        SAPLING = new WoodBlockVariant("sapling", BlockWoodSapling::new);
+        // POTTED_SAPLING = new WoodBlockVariant("potted_sapling");
         PLANKS = new WoodBlockVariant("planks", BlockWoodPlanks::new);
         BOOKSHELF = new WoodBlockVariant("bookshelf", BlockWoodBookshelf::new);
         DOOR = new WoodBlockVariant("door", BlockWoodDoor::new);

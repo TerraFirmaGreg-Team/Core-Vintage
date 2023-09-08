@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.common.objects.blocks.tree.BlockTreeSapling;
-import net.dries007.tfc.common.objects.blocks.tree.BlockTreeLeaves;
+import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
+import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLeaves;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -46,7 +46,7 @@ public final class StructureHelper {
                     IBlockState stateToPlace = template$blockinfo1.blockState.withMirror(placementIn.getMirror()).withRotation(placementIn.getRotation());
                     IBlockState stateToReplace = worldIn.getBlockState(blockpos);
 
-                    if (stateToReplace.getMaterial().isReplaceable() || stateToReplace.getBlock() instanceof BlockTreeLeaves || stateToReplace.getBlock() instanceof BlockTreeSapling) {
+                    if (stateToReplace.getMaterial().isReplaceable() || stateToReplace.getBlock() instanceof BlockWoodLeaves || stateToReplace.getBlock() instanceof BlockWoodSapling) {
                         worldIn.setBlockState(blockpos, stateToPlace, 2);
                     }
                 }

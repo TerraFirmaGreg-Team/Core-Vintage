@@ -4,7 +4,7 @@
     "model": "tfc:wood/chest",
     "textures": {
       "texture": "tfc:entity/chests/chest",
-      "particle": "tfc:blocks/wood/planks/pattern"
+      "particle": "tfc:blocks/wood/planks"
     }
   },
   "variants": {

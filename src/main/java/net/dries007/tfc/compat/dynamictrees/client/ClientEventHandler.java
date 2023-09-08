@@ -37,10 +37,10 @@ public class ClientEventHandler {
 
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
-        //Register Meshers for Branches
+        // Register Meshers for Branches
         for (var tree : TREES) {
-            //ModelHelperTFC.regModel(tree.getDynamicBranch());//Register Branch itemBlock
-            ModelHelperTFC.regModel(tree);//Register custom state mapper for branch
+            ModelHelperTFC.regModel(tree.getDynamicBranch()); //Register Branch itemBlock
+            ModelHelperTFC.regModel(tree); //Register custom state mapper for branch
         }
 
         ModelLoader.setCustomStateMapper(ROOTY_DIRT_MIMIC, new StateMap.Builder()

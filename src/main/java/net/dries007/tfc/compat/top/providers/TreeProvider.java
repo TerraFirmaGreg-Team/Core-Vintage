@@ -5,7 +5,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.common.objects.blocks.tree.BlockTreeSapling;
+import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -25,7 +25,7 @@ public class TreeProvider implements IProbeInfoProvider {
         var blockPos = iProbeHitData.getPos();
         var state = world.getBlockState(blockPos);
 
-        if (state.getBlock() instanceof BlockTreeSapling block) {
+        if (state.getBlock() instanceof BlockWoodSapling block) {
             var wood = block.getType();
             var te = Helpers.getTE(world, blockPos, TETickCounter.class);
 

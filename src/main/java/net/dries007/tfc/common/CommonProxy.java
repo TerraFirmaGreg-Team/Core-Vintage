@@ -151,12 +151,6 @@ public class CommonProxy {
             r.register((Block) woodBlock);
         }
 
-        //==== Tree ==================================================================================================//
-
-        for (var treeBlock : TREE_BLOCKS.values()) {
-            r.register((Block) treeBlock);
-        }
-
         //==== Crop ==================================================================================================//
 
         for (var cropBlock : CROP_BLOCKS.values()) {
@@ -228,13 +222,6 @@ public class CommonProxy {
         registerTE(TEQuern.class, "quern");
         registerTE(TELargeVessel.class, "large_vessel");
         registerTE(TEPowderKeg.class, "powderkeg");
-
-        for (var tree : TreeType.getTreeTypes()) {
-            new WoodTreeFamily(tree);
-        }
-
-        ArrayList<Block> treeBlocks = new ArrayList<>(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
-        r.registerAll(treeBlocks.toArray(new Block[0]));
     }
 
     @SubscribeEvent
@@ -275,15 +262,6 @@ public class CommonProxy {
         }
 
         for (var woodItem : WOOD_ITEMS.values()) r.register((Item) woodItem);
-
-        //==== Tree ==================================================================================================//
-
-        for (var treeBlock : TREE_BLOCKS.values()) {
-            var itemBlock = treeBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
-
-        for (var treeItem : TREE_ITEMS.values()) r.register((Item) treeItem);
 
         //==== Plant =================================================================================================//
 

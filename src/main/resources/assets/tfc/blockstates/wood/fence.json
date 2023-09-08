@@ -4,13 +4,15 @@
   "defaults": {
     "model": "tfc:wood/fence/post",
     "textures": {
-      "planks": "tfc:blocks/wood/planks/pattern"
+      "planks": "tfc:blocks/wood/planks"
     }
   },
   "variants": {
-    "normal": [{
-      "model": "tfc:wood/fence/inventory"
-    }],
+    "normal": [
+      {
+        "model": "tfc:wood/fence/inventory"
+      }
+    ],
     "north": {
       "true": {
         "submodel": "tfc:wood/fence/side"

@@ -4,8 +4,8 @@
   "defaults": {
     "model": "tfc:wood/workbench",
     "textures": {
-      "all": "tfc:blocks/wood/planks/pattern",
-      "particle": "tfc:blocks/wood/planks/pattern",
+      "all": "tfc:blocks/wood/planks",
+      "particle": "tfc:blocks/wood/planks",
       "top": "tfc:blocks/wood/workbench/workbench_top",
       "north": "tfc:blocks/wood/workbench/workbench_front",
       "south": "tfc:blocks/wood/workbench/workbench_front",

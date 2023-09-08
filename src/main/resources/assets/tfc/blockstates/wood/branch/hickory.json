@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "normal": { "model": "tfc:wood/branch/hickory#dynamictree" }
+  }
+}

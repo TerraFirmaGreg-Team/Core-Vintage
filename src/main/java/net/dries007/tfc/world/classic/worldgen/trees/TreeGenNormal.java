@@ -16,7 +16,7 @@
 //
 //import java.util.Random;
 //
-//import static net.dries007.tfc.common.objects.blocks.tree.BlockWoodLog.PLACED;
+//import static net.dries007.tfc.common.objects.blocks.wood.BlockWoodLog.PLACED;
 //
 //public class TreeGenNormal implements ITreeGenerator {
 //    private static final PlacementSettings settingsFull = StructureHelper.getDefaultSettings();

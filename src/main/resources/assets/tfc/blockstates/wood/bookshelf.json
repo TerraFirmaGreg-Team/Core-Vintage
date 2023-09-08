@@ -4,8 +4,8 @@
   "defaults": {
     "model": "tfc:wood/bookshelf",
     "textures": {
-      "all": "tfc:blocks/wood/planks/pattern",
-      "particle": "tfc:blocks/wood/planks/pattern",
+      "all": "tfc:blocks/wood/planks",
+      "particle": "tfc:blocks/wood/planks",
       "north": "tfc:blocks/wood/bookshelf/bookshelf",
       "south": "tfc:blocks/wood/bookshelf/bookshelf",
       "east": "tfc:blocks/wood/bookshelf/bookshelf",

@@ -4,8 +4,8 @@
   "defaults": {
     "model": "tfc:wood/support/vertical",
     "textures": {
-      "texture": "tfc:blocks/wood/sheet/pattern",
-      "particle": "tfc:blocks/wood/sheet/pattern"
+      "texture": "tfc:blocks/wood/sheet",
+      "particle": "tfc:blocks/wood/sheet"
     }
   },
   "variants": {

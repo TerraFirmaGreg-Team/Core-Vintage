@@ -108,67 +108,67 @@ public class WoodTypeHandler {
                 .build();
 
 
-        BANANA = new WoodType
-                .Builder("banana")
-                .setColor(0xBB9C7D)
-                .setBurnInfo(720f, 1750)
-                .build();
-
-
-        CHERRY = new WoodType
-                .Builder("cherry")
-                .setColor(0xDC5E2C)
-                .setBurnInfo(720f, 1750)
-                .build();
-
-
-        GREEN_APPLE = new WoodType
-                .Builder("green_apple")
-                .setColor(0xCFC498)
-                .setBurnInfo(720f, 1750)
-                .build();
-
-
-        LEMON = new WoodType
-                .Builder("lemon")
-                .setColor(0xE8DD8C)
-                .setBurnInfo(720f, 1750)
-                .build();
-
-
-        OLIVE = new WoodType
-                .Builder("olive")
-                .setColor(0x97492B)
-                .setBurnInfo(720f, 1750)
-                .build();
-
-
-        ORANGE = new WoodType
-                .Builder("orange")
-                .setColor(0xC18C52)
-                .setBurnInfo(720f, 1750)
-                .build();
-
-
-        PEACH = new WoodType
-                .Builder("peach")
-                .setColor(0x9A5B37)
-                .setBurnInfo(720f, 1750)
-                .build();
-
-
-        PLUM = new WoodType
-                .Builder("plum")
-                .setColor(0x9F573B)
-                .setBurnInfo(720f, 1750)
-                .build();
-
-
-        RED_APPLE = new WoodType
-                .Builder("red_apple")
-                .setColor(0x6E150E)
-                .setBurnInfo(720f, 1750)
-                .build();
+//        BANANA = new WoodType
+//                .Builder("banana")
+//                .setColor(0xBB9C7D)
+//                .setBurnInfo(720f, 1750)
+//                .build();
+//
+//
+//        CHERRY = new WoodType
+//                .Builder("cherry")
+//                .setColor(0xDC5E2C)
+//                .setBurnInfo(720f, 1750)
+//                .build();
+//
+//
+//        GREEN_APPLE = new WoodType
+//                .Builder("green_apple")
+//                .setColor(0xCFC498)
+//                .setBurnInfo(720f, 1750)
+//                .build();
+//
+//
+//        LEMON = new WoodType
+//                .Builder("lemon")
+//                .setColor(0xE8DD8C)
+//                .setBurnInfo(720f, 1750)
+//                .build();
+//
+//
+//        OLIVE = new WoodType
+//                .Builder("olive")
+//                .setColor(0x97492B)
+//                .setBurnInfo(720f, 1750)
+//                .build();
+//
+//
+//        ORANGE = new WoodType
+//                .Builder("orange")
+//                .setColor(0xC18C52)
+//                .setBurnInfo(720f, 1750)
+//                .build();
+//
+//
+//        PEACH = new WoodType
+//                .Builder("peach")
+//                .setColor(0x9A5B37)
+//                .setBurnInfo(720f, 1750)
+//                .build();
+//
+//
+//        PLUM = new WoodType
+//                .Builder("plum")
+//                .setColor(0x9F573B)
+//                .setBurnInfo(720f, 1750)
+//                .build();
+//
+//
+//        RED_APPLE = new WoodType
+//                .Builder("red_apple")
+//                .setColor(0x6E150E)
+//                .setBurnInfo(720f, 1750)
+//                .build();
 
         // TODO доделать
 //        HEVEA = new WoodType

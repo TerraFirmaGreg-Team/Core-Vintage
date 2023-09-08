@@ -4,7 +4,7 @@
 //import net.dries007.tfc.api.types.wood.type.WoodType;
 //import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants;
 //import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-//import net.dries007.tfc.common.objects.blocks.tree.BlockTreeSapling;
+//import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 //import net.minecraft.block.BlockLog;
 //import net.minecraft.block.state.IBlockState;
 //import net.minecraft.util.EnumFacing;
@@ -14,7 +14,7 @@
 //
 //import java.util.Random;
 //
-//import static net.dries007.tfc.common.objects.blocks.tree.BlockWoodLog.PLACED;
+//import static net.dries007.tfc.common.objects.blocks.wood.BlockWoodLog.PLACED;
 //import static net.minecraft.block.BlockLeaves.DECAYABLE;
 //import static net.minecraft.block.BlockLog.LOG_AXIS;
 //
@@ -51,7 +51,7 @@
 //
 //        // Check the position for liquids, etc.
 //        if (world.getBlockState(pos).getMaterial().isLiquid() || !world.getBlockState(pos).getMaterial().isReplaceable())
-//            if (!(world.getBlockState(pos) instanceof BlockTreeSapling))
+//            if (!(world.getBlockState(pos) instanceof BlockWoodSapling))
 //                return false;
 //
 //        // Check if there is sufficient light level

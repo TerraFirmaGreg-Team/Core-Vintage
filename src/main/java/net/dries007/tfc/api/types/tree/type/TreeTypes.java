@@ -24,7 +24,7 @@ public class TreeTypes {
     public static TreeType WHITE_CEDAR_TREE;
     public static TreeType WILLOW_TREE;
     public static TreeType KAPOK_TREE;
-    public static TreeType BANANA_TREE;
+    public static TreeType BANANA_TREE; // Это же вроде тоже самое что и пальма?
     public static TreeType CHERRY_TREE;
     public static TreeType GREEN_APPLE_TREE;
     public static TreeType LEMON_TREE;
@@ -33,5 +33,5 @@ public class TreeTypes {
     public static TreeType PEACH_TREE;
     public static TreeType PLUM_TREE;
     public static TreeType RED_APPLE_TREE;
-    public static TreeType HEVEA_TREE;
+    public static TreeType HYVEA_TREE;
 }

@@ -2,7 +2,7 @@ package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.tree.BlockTreeSapling;
+import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -66,6 +66,6 @@ public interface ITreeGenerator {
 
         // Проверяем позицию на наличие жидкостей и т.д.
         var stateAt = world.getBlockState(pos);
-        return !stateAt.getMaterial().isLiquid() && (stateAt.getMaterial().isReplaceable() || stateAt.getBlock() instanceof BlockTreeSapling);
+        return !stateAt.getMaterial().isLiquid() && (stateAt.getMaterial().isReplaceable() || stateAt.getBlock() instanceof BlockWoodSapling);
     }
 }

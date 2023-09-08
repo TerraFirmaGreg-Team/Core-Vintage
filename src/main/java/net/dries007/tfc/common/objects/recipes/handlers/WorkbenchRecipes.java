@@ -20,10 +20,9 @@ import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.*;
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.PRESSURE_PLATE;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
-import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.BOAT;
-import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.LUMBER;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.PRESSURE_PLATE;
+import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.*;
 
 public class WorkbenchRecipes {
 
@@ -141,12 +140,12 @@ public class WorkbenchRecipes {
             );
 
             // Log -> Lumber
-            registerShaped(
-                    "wood/lumber_log/" + type,
-                    new ItemStack(TFCItems.getWoodItem(LUMBER, type), 8),
-                    "s", "L",
-                    'L', new ItemStack(TFCBlocks.getWoodBlock(LOG, type))
-            );
+//            registerShaped(
+//                    "wood/lumber_log/" + type,
+//                    new ItemStack(TFCItems.getWoodItem(LUMBER, type), 8),
+//                    "s", "L",
+//                    'L', new ItemStack(TFCBlocks.getTreeBlock(LOG, type))
+//            );
 
             // Planks -> Lumber
             registerShaped(
@@ -189,12 +188,12 @@ public class WorkbenchRecipes {
             );
 
             // Support
-            registerShaped(
-                    "wood/support/" + type,
-                    new ItemStack(TFCBlocks.getWoodBlock(SUPPORT, type), 8),
-                    "sL", " L",
-                    'L', new ItemStack(TFCBlocks.getWoodBlock(LOG, type))
-            );
+//            registerShaped(
+//                    "wood/support/" + type,
+//                    new ItemStack(TFCBlocks.getWoodBlock(SUPPORT, type), 8),
+//                    "sL", " L",
+//                    'L', new ItemStack(TFCBlocks.getTreeBlock(LOG, type))
+//            );
 
             // Tool Rack
             registerShaped(

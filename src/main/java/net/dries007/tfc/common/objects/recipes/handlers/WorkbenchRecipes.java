@@ -5,7 +5,6 @@ import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.recipes.workbench.UnmoldRecipe;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.TFCItems;
@@ -20,6 +19,8 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.*;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.PRESSURE_PLATE;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
 import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.BOAT;
 import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.LUMBER;
@@ -222,54 +223,54 @@ public class WorkbenchRecipes {
     }
 
     private static void registerRockRecipes() {
-        for (var rockType : RockType.getRockTypes()) {
+        for (var type : RockType.getRockTypes()) {
             registerShaped(
-                    "rock/smooth/" + rockType,
-                    new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.SMOOTH, rockType)),
+                    "rock/smooth/" + type,
+                    new ItemStack(TFCBlocks.getRockBlock(SMOOTH, type)),
                     "Re",
-                    'R', new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.RAW, rockType))
+                    'R', new ItemStack(TFCBlocks.getRockBlock(RAW, type))
             );
 
             registerShaped(
-                    "rock/stairs_raw/" + rockType,
-                    new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.STAIRS_RAW, rockType)),
+                    "rock/stairs_raw/" + type,
+                    new ItemStack(TFCBlocks.getRockBlock(STAIRS_RAW, type)),
                     "R  ", "RR ", "RRR",
-                    'R', new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.RAW, rockType))
+                    'R', new ItemStack(TFCBlocks.getRockBlock(RAW, type))
             );
 
             registerShaped(
-                    "rock/stairs_smooth/" + rockType,
-                    new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.STAIRS_SMOOTH, rockType)),
+                    "rock/stairs_smooth/" + type,
+                    new ItemStack(TFCBlocks.getRockBlock(STAIRS_SMOOTH, type)),
                     "S  ", "SS ", "SSS",
-                    'S', new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.SMOOTH, rockType))
+                    'S', new ItemStack(TFCBlocks.getRockBlock(SMOOTH, type))
             );
 
             registerShaped(
-                    "rock/stairs_brick/" + rockType,
-                    new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.STAIRS_BRICK, rockType)),
+                    "rock/stairs_brick/" + type,
+                    new ItemStack(TFCBlocks.getRockBlock(STAIRS_BRICK, type)),
                     "B  ", "BB ", "BBB",
-                    'B', new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.BRICKS, rockType))
+                    'B', new ItemStack(TFCBlocks.getRockBlock(BRICKS, type))
             );
 
             registerShaped(
-                    "rock/slabs_raw/" + rockType,
-                    new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.SLAB_RAW, rockType)),
+                    "rock/slabs_raw/" + type,
+                    new ItemStack(TFCBlocks.getRockBlock(SLAB_RAW, type)),
                     "RRR",
-                    'R', new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.RAW, rockType))
+                    'R', new ItemStack(TFCBlocks.getRockBlock(RAW, type))
             );
 
             registerShaped(
-                    "rock/slabs_smooth/" + rockType,
-                    new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.SLAB_SMOOTH, rockType)),
+                    "rock/slabs_smooth/" + type,
+                    new ItemStack(TFCBlocks.getRockBlock(SLAB_SMOOTH, type)),
                     "SSS",
-                    'S', new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.SMOOTH, rockType))
+                    'S', new ItemStack(TFCBlocks.getRockBlock(SMOOTH, type))
             );
 
             registerShaped(
-                    "rock/slabs_brick/" + rockType,
-                    new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.SLAB_BRICK, rockType)),
+                    "rock/slabs_brick/" + type,
+                    new ItemStack(TFCBlocks.getRockBlock(SLAB_BRICK, type)),
                     "BBB",
-                    'B', new ItemStack(TFCBlocks.getRockBlock(RockBlockVariants.BRICKS, rockType))
+                    'B', new ItemStack(TFCBlocks.getRockBlock(BRICKS, type))
             );
         }
     }

@@ -5,7 +5,6 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.ore.StoneType;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
-import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.ResourceLocation;
@@ -15,6 +14,8 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.RAW;
 
 /**
  * Основной класс для типов камней.
@@ -59,8 +60,8 @@ public class RockType {
 
         new StoneType(
                 counter++, "tfc_" + name, SoundType.STONE, orePrefix, material,
-                () -> TFCBlocks.getRockBlock(RockBlockVariants.RAW, this).getDefaultState(),
-                state -> state.getBlock() == TFCBlocks.getRockBlock(RockBlockVariants.RAW, this),
+                () -> TFCBlocks.getRockBlock(RAW, this).getDefaultState(),
+                state -> state.getBlock() == TFCBlocks.getRockBlock(RAW, this),
                 false
         );
     }
@@ -107,11 +108,11 @@ public class RockType {
     /**
      * Возвращает индекс породы в списке.
      *
-     * @param rockType Порода.
+     * @param type Порода.
      * @return Индекс породы.
      */
-    public static int indexOf(RockType rockType) {
-        return new ArrayList<>(ROCK_TYPES).indexOf(rockType);
+    public static int indexOf(RockType type) {
+        return new ArrayList<>(ROCK_TYPES).indexOf(type);
     }
 
     /**

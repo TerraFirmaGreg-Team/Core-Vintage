@@ -160,12 +160,12 @@ public class RockCategory {
         /**
          * Проверяет, принадлежит ли указанная порода к данному слою.
          *
-         * @param rockType Порода для проверки.
+         * @param type Порода для проверки.
          * @return true, если порода принадлежит к данному слою, в противном случае - false.
          */
         @Override
-        public boolean test(RockType rockType) {
-            return filter.test(rockType);
+        public boolean test(RockType type) {
+            return filter.test(type);
         }
     }
 }

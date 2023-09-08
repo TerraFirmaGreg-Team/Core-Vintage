@@ -40,9 +40,9 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
     }
 
     @Override
-    protected void generateRock(Random random, World world, BlockPos pos, RockType rockType) {
+    protected void generateRock(Random random, World world, BlockPos pos, RockType type) {
         if (isReplaceable(world, pos)) {
-            super.generateRock(random, world, pos, rockType);
+            super.generateRock(random, world, pos, type);
         }
     }
 }

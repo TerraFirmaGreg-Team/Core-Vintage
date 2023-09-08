@@ -16,14 +16,14 @@ public class ChiselRecipes {
         var registry = TFCRegistries.CHISEL;
 
         // Rock smoothing
-        for (RockType rockType : RockType.getRockTypes()) {
-            var rawRock = TFCBlocks.getRockBlock(RAW, rockType);
-            var smoothRock = TFCBlocks.getRockBlock(SMOOTH, rockType).getDefaultState();
-            registry.register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rockType));
+        for (var type : RockType.getRockTypes()) {
+            var rawRock = TFCBlocks.getRockBlock(RAW, type);
+            var smoothRock = TFCBlocks.getRockBlock(SMOOTH, type).getDefaultState();
+            registry.register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + type));
         }
 
         // Alabaster smoothing
-        for (EnumDyeColor color : EnumDyeColor.values()) {
+        for (var color : EnumDyeColor.values()) {
             var rawColoredAlabaster = TFCBlocks.getAlabasterBlock(color.getName(), RAW);
             var smoothColoredAlabaster = TFCBlocks.getAlabasterBlock(color.getName(), SMOOTH).getDefaultState();
             registry.register(new ChiselRecipe(rawColoredAlabaster, smoothColoredAlabaster).setRegistryName("smooth_" + color.getName() + "_alabaster"));

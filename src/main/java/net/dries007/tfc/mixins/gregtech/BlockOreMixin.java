@@ -6,7 +6,6 @@ import gregtech.api.unification.ore.StoneType;
 import gregtech.common.blocks.BlockOre;
 import gregtech.common.blocks.properties.PropertyStoneType;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
@@ -22,6 +21,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
+
+import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.COBBLE;
+import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.RAW;
 
 @SuppressWarnings("all")
 @Mixin(value = BlockOre.class, remap = false)
@@ -42,14 +44,14 @@ public abstract class BlockOreMixin extends Block {
     @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
     private void onConstructor(Material material, StoneType[] allowedValues, CallbackInfo ci) {
         var stoneType = (StoneType) getBlockState().getBaseState().getValue(STONE_TYPE);
-        var rockType = RockType.getByName(stoneType.name.replace("tfc_", ""));
+        var type = RockType.getByName(stoneType.name.replace("tfc_", ""));
 
-        if (rockType != null) {
+        if (type != null) {
             var spec = new FallingBlockManager.Specification(FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL_ROCK);
-            spec.setResultingState(TFCBlocks.getRockBlock(RockBlockVariants.COBBLE, rockType).getDefaultState());
+            spec.setResultingState(TFCBlocks.getRockBlock(COBBLE, type).getDefaultState());
             FallingBlockManager.registerFallable(this, spec);
 
-            var hardness = rockType.getCategory().getHardnessModifier() + RockBlockVariants.RAW.getBaseHardness();
+            var hardness = type.getCategory().getHardnessModifier() + RAW.getBaseHardness();
             setHardness(hardness * 2F);
         }
     }

@@ -45,7 +45,7 @@ public class WorldGenLooseRocks implements IWorldGenerator {
         }
     }
 
-    protected void generateRock(Random random, World world, BlockPos pos, RockType rockType) {
+    protected void generateRock(Random random, World world, BlockPos pos, RockType type) {
         // Используем воздух, чтобы не заменять другие генерируемые блоки
         // Это соответствует проверке в BlockPlacedItemFlat, если блок может оставаться
         // Также добавляем только на почву, так как это вызывается обработчиком регенерации мира позже
@@ -53,7 +53,7 @@ public class WorldGenLooseRocks implements IWorldGenerator {
         if (world.isAirBlock(pos) &&
                 world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) &&
                 TFCBlocks.isSoil(world.getBlockState(pos.down()))) {
-            world.setBlockState(pos, TFCBlocks.getRockBlock(LOOSE_ROCK, rockType).getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);
+            world.setBlockState(pos, TFCBlocks.getRockBlock(LOOSE_ROCK, type).getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(random.nextInt(4))), 2);
         }
     }
 }

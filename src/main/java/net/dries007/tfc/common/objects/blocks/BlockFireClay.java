@@ -21,37 +21,37 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockFireClay extends Block implements IItemSize {
-	public BlockFireClay() {
-		super(Material.CLAY);
+    public BlockFireClay() {
+        super(Material.CLAY);
 
-		setSoundType(SoundType.GROUND);
-		setHardness(1.0F);
+        setSoundType(SoundType.GROUND);
+        setHardness(1.0F);
 
-		setCreativeTab(CreativeTabsTFC.ROCK);
-		setRegistryName(TerraFirmaCraft.identifier("fire_clay_block"));
-		setTranslationKey(MOD_ID + ".fire_clay_block");
-	}
+        setCreativeTab(CreativeTabsTFC.ROCK);
+        setRegistryName(TerraFirmaCraft.identifier("fire_clay_block"));
+        setTranslationKey(MOD_ID + ".fire_clay_block");
+    }
 
-	@Override
-	public int quantityDropped(Random random) {
-		return 4;
-	}
+    @Override
+    public int quantityDropped(Random random) {
+        return 4;
+    }
 
-	@Nonnull
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return TFCItems.FIRE_CLAY;
-	}
+    @Nonnull
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return TFCItems.FIRE_CLAY;
+    }
 
-	@Nonnull
-	@Override
-	public Size getSize(ItemStack stack) {
-		return Size.VERY_SMALL;
-	}
+    @Nonnull
+    @Override
+    public Size getSize(ItemStack stack) {
+        return Size.VERY_SMALL;
+    }
 
-	@Nonnull
-	@Override
-	public Weight getWeight(ItemStack stack) {
-		return Weight.HEAVY;
-	}
+    @Nonnull
+    @Override
+    public Weight getWeight(ItemStack stack) {
+        return Weight.HEAVY;
+    }
 }

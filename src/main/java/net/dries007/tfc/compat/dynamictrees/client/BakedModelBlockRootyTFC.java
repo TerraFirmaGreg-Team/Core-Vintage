@@ -23,34 +23,34 @@ import java.util.List;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BakedModelBlockRootyTFC extends BakedModelBlockRooty {
-	private static final IModel rootyIModel = ModelLoaderRegistry.getModelOrMissing(new ResourceLocation(MOD_ID, "block/roots"));
-	private static final IBakedModel rootyIBakedModel = rootyIModel.bake(rootyIModel.getDefaultState(), DefaultVertexFormats.BLOCK, ModelLoader.defaultTextureGetter());
-	private TextureAtlasSprite particleSprite = Minecraft.getMinecraft().getTextureMapBlocks().getTextureExtry("minecraft:dirt");
+    private static final IModel rootyIModel = ModelLoaderRegistry.getModelOrMissing(new ResourceLocation(MOD_ID, "block/roots"));
+    private static final IBakedModel rootyIBakedModel = rootyIModel.bake(rootyIModel.getDefaultState(), DefaultVertexFormats.BLOCK, ModelLoader.defaultTextureGetter());
+    private TextureAtlasSprite particleSprite = Minecraft.getMinecraft().getTextureMapBlocks().getTextureExtry("minecraft:dirt");
 
-	public BakedModelBlockRootyTFC() {
-		super(null);
-	}
+    public BakedModelBlockRootyTFC() {
+        super(null);
+    }
 
-	@Override
-	@Nonnull
-	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
-		List<BakedQuad> quads = new ArrayList<>(16);
-		if (state != null && state.getBlock() instanceof MimicProperty.IMimic && state instanceof IExtendedBlockState extendedState) {
-			IBlockState mimicState = extendedState.getValue(MimicProperty.MIMIC);
+    @Override
+    @Nonnull
+    public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
+        List<BakedQuad> quads = new ArrayList<>(16);
+        if (state != null && state.getBlock() instanceof MimicProperty.IMimic && state instanceof IExtendedBlockState extendedState) {
+            IBlockState mimicState = extendedState.getValue(MimicProperty.MIMIC);
 
-			BlockModelShapes blockModelShapes = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes();
-			IBakedModel mimicModel = blockModelShapes.getModelForState(mimicState);
-			quads.addAll(mimicModel.getQuads(mimicState, side, rand));
-			quads.addAll(rootyIBakedModel.getQuads(state, side, rand));
-			if (!quads.isEmpty())
-				particleSprite = quads.get(0).getSprite();
-		}
-		return quads;
-	}
+            BlockModelShapes blockModelShapes = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes();
+            IBakedModel mimicModel = blockModelShapes.getModelForState(mimicState);
+            quads.addAll(mimicModel.getQuads(mimicState, side, rand));
+            quads.addAll(rootyIBakedModel.getQuads(state, side, rand));
+            if (!quads.isEmpty())
+                particleSprite = quads.get(0).getSprite();
+        }
+        return quads;
+    }
 
-	@Override
-	@Nonnull
-	public TextureAtlasSprite getParticleTexture() {
-		return particleSprite;
-	}
+    @Override
+    @Nonnull
+    public TextureAtlasSprite getParticleTexture() {
+        return particleSprite;
+    }
 }

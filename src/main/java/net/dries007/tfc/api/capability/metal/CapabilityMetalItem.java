@@ -4,7 +4,6 @@ import gregtech.api.items.materialitem.MetaPrefixItem;
 import gregtech.api.unification.material.Materials;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
-import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.util.Helpers;
@@ -49,11 +48,9 @@ public final class CapabilityMetalItem {
             var metal = stack.getCapability(METAL_OBJECT_CAPABILITY, null);
             if (metal != null) {
                 return metal;
-            }
-            else if (stack.getItem() instanceof IMaterialItem) {
+            } else if (stack.getItem() instanceof IMaterialItem) {
                 return (IMaterialItem) stack.getItem();
-            }
-            else if (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof IMaterialItem) {
+            } else if (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof IMaterialItem) {
                 return (IMaterialItem) ((ItemBlock) stack.getItem()).getBlock();
             }
         }

@@ -202,6 +202,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         list.add(new ItemStack(this));
         return list;
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {

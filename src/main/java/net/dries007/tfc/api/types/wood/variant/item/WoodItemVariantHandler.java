@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.types.wood.variant.item;
 
-import net.dries007.tfc.compat.dynamictrees.items.ItemWoodSeed;
 import net.dries007.tfc.common.objects.items.wood.ItemWoodBoat;
 import net.dries007.tfc.common.objects.items.wood.ItemWoodLumber;
+import net.dries007.tfc.compat.dynamictrees.items.ItemWoodSeed;
 
 import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.*;
 

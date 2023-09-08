@@ -1,8 +1,6 @@
 package net.dries007.tfc.api.types.wood.variant.block;
 
 import net.dries007.tfc.common.objects.blocks.wood.*;
-import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranch;
-import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
 

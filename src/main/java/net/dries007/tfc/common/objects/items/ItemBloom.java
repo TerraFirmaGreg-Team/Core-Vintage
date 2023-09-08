@@ -24,7 +24,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-
 import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;

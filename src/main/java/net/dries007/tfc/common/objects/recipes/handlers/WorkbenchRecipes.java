@@ -20,9 +20,10 @@ import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.*;
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.PRESSURE_PLATE;
-import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.*;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
+import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.BOAT;
+import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.LUMBER;
 
 public class WorkbenchRecipes {
 

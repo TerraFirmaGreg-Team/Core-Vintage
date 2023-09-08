@@ -33,6 +33,8 @@ dependencies {
         implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
         implementation rfg.deobf("maven.modrinth:the-one-probe:1.12-1.4.28")
         implementation rfg.deobf("curse.maven:had-enough-items-557549:4571247")
+
+        //runtimeOnly("maven.modrinth:better-biome-blend:1.12.2-1.1.7-forge")
         //runtimeOnly("curse.maven:spark-361579:3542217")
     }
 
@@ -56,17 +58,23 @@ dependencies {
         implementation rfg.deobf("curse.maven:1.2.5.10-constructs-armory-287683:3174535")
         implementation rfg.deobf("curse.maven:0.4.3-tinkers-complement-272671:2843439")
         implementation rfg.deobf("curse.maven:1.3.3.55-mantle-74924:2713386")
-        if (project.use_dramatic_trees.toBoolean())
-            runtimeOnly("curse.maven:1.2.7-dynamic-trees-tinkers-construct-386747:3283263")
         if (project.use_util.toBoolean())
             runtimeOnly("curse.maven:1.2-tinkers-jei-291786:2701203")
     }
 
-    if (project.compatibility_check.toBoolean()) {
-        // forestry
+    // Forestry dependencies
+    if (project.use_forestry.toBoolean()) {
         implementation rfg.deobf("curse.maven:5.8.2.422-forestry-59751:2918418")
         implementation rfg.deobf("maven.modrinth:binnies-mods-patched:2.5.1.210")
-        // pams harvestcraf
-        implementation rfg.deobf("maven.modrinth:pams-harvestcraft:1.12.2zg")
+        if (project.use_util.toBoolean())
+            runtimeOnly("curse.maven:jei-bees-248370:2490058")
     }
+
+    // Pams Harvestcraf dependencies
+    if (project.use_pams.toBoolean()) {
+        implementation rfg.deobf("maven.modrinth:pams-harvestcraft:1.12.2zg")
+        if (project.use_util.toBoolean())
+            runtimeOnly("curse.maven:just-enough-harvestcraft-267939:2997129")
+    }
+
 }

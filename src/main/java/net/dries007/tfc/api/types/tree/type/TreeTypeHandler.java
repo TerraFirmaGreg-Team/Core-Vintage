@@ -8,20 +8,23 @@ import static net.dries007.tfc.api.types.wood.type.WoodTypes.*;
 public class TreeTypeHandler {
 
     public static void init() {
-        ACACIA_TREE = new TreeType.Builder(ACACIA)
+        ACACIA_TREE = new TreeType.Builder("acacia")
+                .setWoodType(ACACIA)
                 .setTemp(19f, 31f).setRain(30f, 210f)
                 .setHeight(12).setMinGrowthTime(11).setDensity(0.1f, 0.6f)
                 .setParamMap(new float[]{0.10f, 14f, 6, 6, 0.90f})
                 .setCellKit("acacia")
                 .build();
 
-        ASH_TREE = new TreeType.Builder(ASH)
+        ASH_TREE = new TreeType.Builder("ash")
+                .setWoodType(ASH)
                 .setTemp(-6f, 12f).setRain(60f, 140f)
                 .setParamMap(new float[]{0.25f, 12f, 4, 3, 1.00f})
                 .setCellKit("deciduous")
                 .build();
 
-        ASPEN_TREE = new TreeType.Builder(ASPEN)
+        ASPEN_TREE = new TreeType.Builder("aspen")
+                .setWoodType(ASPEN)
                 .setTemp(-10f, 16f).setRain(10f, 80f)
                 .setMinGrowthTime(8)
                 .setParamMap(new float[]{0.30f, 16f, 8, 2, 1.50f})
@@ -29,13 +32,15 @@ public class TreeTypeHandler {
                 .setCellKit("deciduous")
                 .build();
 
-        BIRCH_TREE = new TreeType.Builder(BIRCH)
+        BIRCH_TREE = new TreeType.Builder("birch")
+                .setWoodType(BIRCH)
                 .setTemp(-15f, 7f).setRain(20f, 180f)
                 .setParamMap(new float[]{0.25f, 12f, 5, 5, 1.15f})
                 .setCellKit("deciduous")
                 .build();
 
-        BLACKWOOD_TREE = new TreeType.Builder(BLACKWOOD)
+        BLACKWOOD_TREE = new TreeType.Builder("blackwood")
+                .setWoodType(BLACKWOOD)
                 .setTemp(4f, 33f).setRain(0f, 120f)
                 .setHeight(12).setMinGrowthTime(8)
                 .setParamMap(new float[]{0.20f, 13f, 3, 4, 0.90f})
@@ -43,14 +48,16 @@ public class TreeTypeHandler {
                 .setCellKit("darkoak")
                 .build();
 
-        CHESTNUT_TREE = new TreeType.Builder(CHESTNUT)
+        CHESTNUT_TREE = new TreeType.Builder("chestnut")
+                .setWoodType(CHESTNUT)
                 .setTemp(11f, 35f).setRain(160f, 320f)
                 .setParamMap(new float[]{0.20f, 10f, 3, 3, 1.00f})
                 .setGrowthLogicKit(ModTrees.DARKOAK)
                 .setCellKit("deciduous")
                 .build();
 
-        DOUGLAS_FIR_TREE = new TreeType.Builder(DOUGLAS_FIR)
+        DOUGLAS_FIR_TREE = new TreeType.Builder("douglas_fir")
+                .setWoodType(DOUGLAS_FIR)
                 .setTemp(-2f, 14f).setRain(280f, 480f)
                 .setDominance(5.2f).setHeight(16).setDensity(0.25f, 2f)
                 .setParamMap(new float[]{0.15f, 20f, 5, 3, 1.15f})
@@ -59,7 +66,8 @@ public class TreeTypeHandler {
                 .setBushes()
                 .build();
 
-        HICKORY_TREE = new TreeType.Builder(HICKORY)
+        HICKORY_TREE = new TreeType.Builder("hickory")
+                .setWoodType(HICKORY)
                 .setTemp(7f, 29f).setRain(80f, 250f)
                 .setMinGrowthTime(10)
                 .setParamMap(new float[]{0.20f, 14f, 5, 3, 0.80f})
@@ -67,14 +75,16 @@ public class TreeTypeHandler {
                 .setCellKit("deciduous")
                 .build();
 
-        MAPLE_TREE = new TreeType.Builder(MAPLE)
+        MAPLE_TREE = new TreeType.Builder("maple")
+                .setWoodType(MAPLE)
                 .setTemp(3f, 20f).setRain(140f, 360f)
                 .setDominance(6.3f)
                 .setParamMap(new float[]{0.15f, 15f, 6, 3, 0.95f})
                 .setCellKit("deciduous")
                 .build();
 
-        OAK_TREE = new TreeType.Builder(OAK)
+        OAK_TREE = new TreeType.Builder("oak")
+                .setWoodType(OAK)
                 .setTemp(-8f, 12f).setRain(180f, 430f)
                 .setHeight(16).setMinGrowthTime(10)
                 .setParamMap(new float[]{0.30f, 16f, 3, 3, 0.85f})
@@ -82,7 +92,8 @@ public class TreeTypeHandler {
                 .setCellKit("deciduous")
                 .build();
 
-        PALM_TREE = new TreeType.Builder(PALM)
+        PALM_TREE = new TreeType.Builder("palm")
+                .setWoodType(PALM)
                 .setTemp(16f, 35f).setRain(280f, 500f)
                 .setDecayDist(6)
                 .setParamMap(new float[]{0.05f, 16f, 5, 4, 1.10f})
@@ -90,7 +101,8 @@ public class TreeTypeHandler {
                 .setCellKit("palm")
                 .build();
 
-        PINE_TREE = new TreeType.Builder(PINE)
+        PINE_TREE = new TreeType.Builder("pine")
+                .setWoodType(PINE)
                 .setTemp(-15f, 7f).setRain(60f, 250f)
                 .setDensity(0.1f, 0.8f)
                 .setParamMap(new float[]{0.20f, 18f, 6, 2, 1.20f})
@@ -99,14 +111,16 @@ public class TreeTypeHandler {
                 .setConifer()
                 .build();
 
-        ROSEWOOD_TREE = new TreeType.Builder(ROSEWOOD)
+        ROSEWOOD_TREE = new TreeType.Builder("rosewood")
+                .setWoodType(ROSEWOOD)
                 .setTemp(8f, 18f).setRain(10f, 190f)
                 .setHeight(12).setMinGrowthTime(8)
                 .setParamMap(new float[]{0.35f, 15f, 7, 3, 1.00f})
                 .setCellKit("deciduous")
                 .build();
 
-        SEQUOIA_TREE = new TreeType.Builder(SEQUOIA)
+        SEQUOIA_TREE = new TreeType.Builder("sequoia")
+                .setWoodType(SEQUOIA)
                 .setTemp(-5f, 12f).setRain(250f, 420f)
                 .setRadius(3).setHeight(24).setDecayDist(6).setMinGrowthTime(18).setDensity(0.4f, 0.9f)
                 .setParamMap(new float[]{0.20f, 36f, 9, 4, 0.70f})
@@ -115,7 +129,8 @@ public class TreeTypeHandler {
                 .setConifer().setBushes()
                 .build();
 
-        SPRUCE_TREE = new TreeType.Builder(SPRUCE)
+        SPRUCE_TREE = new TreeType.Builder("spruce")
+                .setWoodType(SPRUCE)
                 .setTemp(-11f, 6f).setRain(120f, 380f)
                 .setDensity(0.1f, 0.8f)
                 .setParamMap(new float[]{0.15f, 12f, 6, 3, 1.10f})
@@ -124,7 +139,8 @@ public class TreeTypeHandler {
                 .setConifer()
                 .build();
 
-        SYCAMORE_TREE = new TreeType.Builder(SYCAMORE)
+        SYCAMORE_TREE = new TreeType.Builder("sycamore")
+                .setWoodType(SYCAMORE)
                 .setTemp(17f, 33f).setRain(120f, 290f)
                 .setMinGrowthTime(8).setDensity(0.25f, 2f)
                 .setParamMap(new float[]{0.20f, 10f, 4, 3, 0.90f})
@@ -132,7 +148,8 @@ public class TreeTypeHandler {
                 .setBushes()
                 .build();
 
-        WHITE_CEDAR_TREE = new TreeType.Builder(WHITE_CEDAR)
+        WHITE_CEDAR_TREE = new TreeType.Builder("white_cedar")
+                .setWoodType(WHITE_CEDAR)
                 .setTemp(-8f, 17f).setRain(10f, 240f)
                 .setHeight(16)
                 .setParamMap(new float[]{0.15f, 20f, 6, 2, 1.10f})
@@ -140,7 +157,8 @@ public class TreeTypeHandler {
                 .setCellKit("deciduous")
                 .build();
 
-        WILLOW_TREE = new TreeType.Builder(WILLOW)
+        WILLOW_TREE = new TreeType.Builder("willow")
+                .setWoodType(WILLOW)
                 .setTemp(15f, 32f).setRain(230f, 400f)
                 .setMinGrowthTime(11).setDensity(0.7f, 2f)
                 .setParamMap(new float[]{0.55f, 15f, 2, 2, 1.40f})
@@ -149,7 +167,8 @@ public class TreeTypeHandler {
                 .setBushes()
                 .build();
 
-        KAPOK_TREE = new TreeType.Builder(KAPOK)
+        KAPOK_TREE = new TreeType.Builder("kapok")
+                .setWoodType(KAPOK)
                 .setTemp(15f, 35f).setRain(210f, 500f)
                 .setDominance(8.5f).setRadius(3).setHeight(24).setDecayDist(6)
                 .setMinGrowthTime(18).setDensity(0.6f, 2f)

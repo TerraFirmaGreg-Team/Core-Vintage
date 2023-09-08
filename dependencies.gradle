@@ -66,6 +66,8 @@ dependencies {
     if (project.use_forestry.toBoolean()) {
         implementation rfg.deobf("curse.maven:5.8.2.422-forestry-59751:2918418")
         implementation rfg.deobf("maven.modrinth:binnies-mods-patched:2.5.1.210")
+        if (project.use_dramatic_trees.toBoolean())
+            runtimeOnly("curse.maven:dynamic-trees-forestry-401558:3261440")
         if (project.use_util.toBoolean())
             runtimeOnly("curse.maven:jei-bees-248370:2490058")
     }

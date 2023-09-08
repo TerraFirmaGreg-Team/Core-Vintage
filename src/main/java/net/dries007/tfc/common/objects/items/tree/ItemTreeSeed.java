@@ -78,6 +78,6 @@ public class ItemTreeSeed extends Seed implements ITreeItem {
     @Override
     public void onModelRegister() {
         ModelLoader.setCustomModelResourceLocation(this, 0,
-                new ModelResourceLocation(getResourceLocation() + "/" + getType()));
+                new ModelResourceLocation(getRegistryLocation(), "normal"));
     }
 }

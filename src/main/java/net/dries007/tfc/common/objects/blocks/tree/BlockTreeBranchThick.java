@@ -5,9 +5,12 @@ import net.dries007.tfc.api.types.tree.ITreeBlock;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.api.types.tree.variant.block.TreeBlockVariant;
 import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -46,7 +49,7 @@ public class BlockTreeBranchThick extends BlockBranchThick implements ITreeBlock
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return null;//new ItemBlockTFC(this);
+        return new ItemBlockTFC(this);
     }
 
     @Override
@@ -77,9 +80,9 @@ public class BlockTreeBranchThick extends BlockBranchThick implements ITreeBlock
                         .ignore(BlockBranchThick.RADIUSNYBBLE)
                         .build());
 
-//        ModelLoader.setCustomModelResourceLocation(
-//                Item.getItemFromBlock(this), 0,
-//                new ModelResourceLocation(getRegistryLocation(),
-//                        "normal"));
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getRegistryLocation(),
+                        "normal"));
     }
 }

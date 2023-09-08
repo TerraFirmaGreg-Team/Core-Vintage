@@ -314,8 +314,8 @@ public class TFCBlocks {
 
     public static boolean isClay(IBlockState current) {
         if (current.getBlock() instanceof ISoilBlock soilTypeBlock) {
-            var soilBlockVariant = soilTypeBlock.getBlockVariant();
-            return soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS;
+            var variant = soilTypeBlock.getBlockVariant();
+            return variant == CLAY || variant == CLAY_GRASS;
         }
         return false;
     }
@@ -343,18 +343,18 @@ public class TFCBlocks {
     public static boolean isSoil(IBlockState current) {
         if (current.getBlock() instanceof BlockPeat) return true;
         if (current.getBlock() instanceof ISoilBlock soilTypeBlock) {
-            var soilBlockVariant = soilTypeBlock.getBlockVariant();
-            return soilBlockVariant == GRASS || soilBlockVariant == DRY_GRASS ||
-                    soilBlockVariant == DIRT || soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS;
+            var variant = soilTypeBlock.getBlockVariant();
+            return variant == GRASS || variant == DRY_GRASS ||
+                    variant == DIRT || variant == CLAY || variant == CLAY_GRASS;
         }
         return false;
     }
 
     public static boolean isGrowableSoil(IBlockState current) {
         if (current.getBlock() instanceof ISoilBlock soilTypeBlock) {
-            var soilBlockVariant = soilTypeBlock.getBlockVariant();
-            return soilBlockVariant == GRASS || soilBlockVariant == DRY_GRASS ||
-                    soilBlockVariant == DIRT || soilBlockVariant == CLAY || soilBlockVariant == CLAY_GRASS;
+            var variant = soilTypeBlock.getBlockVariant();
+            return variant == GRASS || variant == DRY_GRASS ||
+                    variant == DIRT || variant == CLAY || variant == CLAY_GRASS;
         }
         return false;
     }
@@ -362,8 +362,8 @@ public class TFCBlocks {
     public static boolean isSoilOrGravel(IBlockState current) {
         if (current.getBlock() instanceof BlockPeat) return true;
         if (current.getBlock() instanceof ISoilBlock soilTypeBlock) {
-            var soilBlockVariant = soilTypeBlock.getBlockVariant();
-            return soilBlockVariant == GRASS || soilBlockVariant == DRY_GRASS || soilBlockVariant == DIRT;
+            var variant = soilTypeBlock.getBlockVariant();
+            return variant == GRASS || variant == DRY_GRASS || variant == DIRT;
         }
         if (current.getBlock() instanceof IRockBlock rockTypeBlock)
             return rockTypeBlock.getBlockVariant() == GRAVEL;
@@ -373,8 +373,8 @@ public class TFCBlocks {
     public static boolean isGrass(IBlockState current) {
         if (current.getBlock() instanceof BlockPeatGrass) return true;
         if (current.getBlock() instanceof ISoilBlock soilTypeBlock) {
-            var soilBlockVariant = soilTypeBlock.getBlockVariant();
-            return soilBlockVariant == GRASS || soilBlockVariant == DRY_GRASS || soilBlockVariant == CLAY_GRASS;
+            var variant = soilTypeBlock.getBlockVariant();
+            return variant == GRASS || variant == DRY_GRASS || variant == CLAY_GRASS;
         }
         return false;
     }
@@ -387,12 +387,12 @@ public class TFCBlocks {
 
     public static boolean isGround(IBlockState current) {
         if (current.getBlock() instanceof IRockBlock rockTypeBlock) {
-            var rockBlockVariant = rockTypeBlock.getBlockVariant();
-            return rockBlockVariant == GRAVEL || rockBlockVariant == SAND || rockBlockVariant == RAW;
+            var variant = rockTypeBlock.getBlockVariant();
+            return variant == GRAVEL || variant == SAND || variant == RAW;
         }
         if (current.getBlock() instanceof ISoilBlock soilTypeBlock) {
-            var soilBlockVariant = soilTypeBlock.getBlockVariant();
-            return soilBlockVariant == GRASS || soilBlockVariant == DRY_GRASS || soilBlockVariant == DIRT;
+            var variant = soilTypeBlock.getBlockVariant();
+            return variant == GRASS || variant == DRY_GRASS || variant == DIRT;
         }
         return false;
     }

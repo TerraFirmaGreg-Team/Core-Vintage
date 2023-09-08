@@ -73,11 +73,11 @@ public class RockBlockVariant {
     /**
      * Применяет функцию-фабрику к типу блока породы и возвращает созданный блок породы.
      *
-     * @param rockType Тип породы.
+     * @param type Тип породы.
      * @return Созданный блок породы.
      */
     @Nonnull
-    public IRockBlock create(RockType rockType) {
-        return factory.apply(this, rockType);
+    public IRockBlock create(RockType type) {
+        return factory.apply(this, type);
     }
 }

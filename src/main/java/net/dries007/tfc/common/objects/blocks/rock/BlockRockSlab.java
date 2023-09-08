@@ -3,7 +3,6 @@ package net.dries007.tfc.common.objects.blocks.rock;
 import net.dries007.tfc.api.types.rock.IRockBlock;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
-import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.rock.itemblock.ItemRockSlab;
@@ -36,53 +35,78 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
+import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.*;
+
 public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
-
-    public Block modelBlock;
+    private final RockBlockVariant variant;
+    private final RockType type;
+    protected Block block;
     protected Half halfSlab;
+    protected Double doubleSlab;
 
     private BlockRockSlab(RockBlockVariant variant, RockType type) {
         super(Material.ROCK);
 
-        IBlockState state = blockState.getBaseState();
-
-        if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
-
+        this.variant = variant;
+        this.type = type;
+        this.block = getFullBlockFromSlab(variant, type);
         useNeighborBrightness = true;
 
-        setLightOpacity(255);
+        var state = blockState.getBaseState();
+        if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
         setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
+        setRegistryName(getRegistryLocation());
+        setTranslationKey(getTranslationName());
         setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
+        setHardness(getFinalHardness());
+        setHarvestLevel("pickaxe", 0);
     }
 
-    protected static Block getFullBlockFromSlab(RockBlockVariant rockBlockVariant, RockType rockType) {
-        if (rockBlockVariant == RockBlockVariants.SLAB_RAW || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_RAW) {
-            return TFCBlocks.getRockBlock(RockBlockVariants.RAW, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_COBBLE || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_COBBLE) {
-            return TFCBlocks.getRockBlock(RockBlockVariants.COBBLE, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_SMOOTH) {
-            return TFCBlocks.getRockBlock(RockBlockVariants.SMOOTH, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK || rockBlockVariant == RockBlockVariants.SLAB_DOUBLE_BRICK) {
-            return TFCBlocks.getRockBlock(RockBlockVariants.BRICKS, rockType);
+    protected static Block getFullBlockFromSlab(RockBlockVariant variant, RockType type) {
+        if (variant == SLAB_RAW || variant == SLAB_DOUBLE_RAW) {
+            return TFCBlocks.getRockBlock(RAW, type);
+        } else if (variant == SLAB_COBBLE || variant == SLAB_DOUBLE_COBBLE) {
+            return TFCBlocks.getRockBlock(COBBLE, type);
+        } else if (variant == SLAB_SMOOTH || variant == SLAB_DOUBLE_SMOOTH) {
+            return TFCBlocks.getRockBlock(SMOOTH, type);
+        } else if (variant == SLAB_BRICK || variant == SLAB_DOUBLE_BRICK) {
+            return TFCBlocks.getRockBlock(BRICKS, type);
         }
 
-        throw new RuntimeException(String.format("Full block from slab not founded: %s, %s", rockBlockVariant, rockType));
+        throw new RuntimeException(String.format("Full block from slab not founded: %s, %s", variant, type));
     }
 
-    protected static Block getDoubleSlabFromSlab(RockBlockVariant rockBlockVariant, RockType rockType) {
-        if (rockBlockVariant == RockBlockVariants.SLAB_RAW) {
-            return TFCBlocks.getRockBlock(RockBlockVariants.SLAB_DOUBLE_RAW, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_COBBLE) {
-            return TFCBlocks.getRockBlock(RockBlockVariants.SLAB_DOUBLE_COBBLE, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_SMOOTH) {
-            return TFCBlocks.getRockBlock(RockBlockVariants.SLAB_DOUBLE_SMOOTH, rockType);
-        } else if (rockBlockVariant == RockBlockVariants.SLAB_BRICK) {
-            return TFCBlocks.getRockBlock(RockBlockVariants.SLAB_DOUBLE_BRICK, rockType);
+    protected static Block getDoubleSlabFromSlab(RockBlockVariant variant, RockType type) {
+        if (variant == SLAB_RAW) {
+            return TFCBlocks.getRockBlock(SLAB_DOUBLE_RAW, type);
+        } else if (variant == SLAB_COBBLE) {
+            return TFCBlocks.getRockBlock(SLAB_DOUBLE_COBBLE, type);
+        } else if (variant == SLAB_SMOOTH) {
+            return TFCBlocks.getRockBlock(SLAB_DOUBLE_SMOOTH, type);
+        } else if (variant == SLAB_BRICK) {
+            return TFCBlocks.getRockBlock(SLAB_DOUBLE_BRICK, type);
         }
 
-        throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", rockBlockVariant, rockType));
+        throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", variant, type));
+    }
+
+    @Nonnull
+    @Override
+    public RockBlockVariant getBlockVariant() {
+        return variant;
+    }
+
+    @Nonnull
+    @Override
+    public RockType getType() {
+        return type;
+    }
+
+    @Override
+    public ItemBlock getItemBlock() {
+        return this.isDouble() ? null : new ItemRockSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
     }
 
     @Override
@@ -130,7 +154,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     @SuppressWarnings("deprecation")
     @Override
     public float getBlockHardness(@Nonnull IBlockState blockState, @Nonnull World worldIn, @Nonnull BlockPos pos) {
-        return modelBlock.getBlockHardness(blockState, worldIn, pos);
+        return block.getBlockHardness(blockState, worldIn, pos);
     }
 
     @Override
@@ -142,7 +166,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     @SuppressWarnings("deprecation")
     @Override
     public float getExplosionResistance(@Nonnull Entity exploder) {
-        return modelBlock.getExplosionResistance(exploder);
+        return block.getExplosionResistance(exploder);
     }
 
     @SuppressWarnings("deprecation")
@@ -162,7 +186,15 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     @Nonnull
     @Override
     public SoundType getSoundType() {
-        return modelBlock.getSoundType();
+        return block.getSoundType();
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
     }
 
     public enum Variant implements IStringSerializable {
@@ -176,40 +208,13 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     }
 
     public static class Double extends BlockRockSlab {
-        private final RockBlockVariant rockBlockVariant;
-        private final RockType rockType;
-
         public Double(RockBlockVariant variant, RockType type) {
             super(variant, type);
-
-            this.rockBlockVariant = variant;
-            this.rockType = type;
-            this.modelBlock = getFullBlockFromSlab(variant, type);
-
-            setRegistryName(getRegistryLocation());
-            setTranslationKey(getTranslationName());
         }
 
         @Override
         public boolean isDouble() {
             return true;
-        }
-
-        @Nonnull
-        @Override
-        public RockBlockVariant getBlockVariant() {
-            return rockBlockVariant;
-        }
-
-        @Nonnull
-        @Override
-        public RockType getType() {
-            return rockType;
-        }
-
-        @Override
-        public ItemBlock getItemBlock() {
-            return null;
         }
 
         @Override
@@ -219,56 +224,27 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
                 @Nonnull
                 protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                     return new ModelResourceLocation(getResourceLocation(),
-                            "rocktype=" + rockType.toString());
+                            "rocktype=" + getType());
                 }
             });
         }
     }
 
     public static class Half extends BlockRockSlab {
-        public final Double doubleSlab;
-        private final RockBlockVariant variant;
-        private final RockType type;
-
         public Half(RockBlockVariant variant, RockType type) {
             super(variant, type);
 
-            doubleSlab = (Double) getDoubleSlabFromSlab(variant, type);
-            doubleSlab.halfSlab = this;
-            halfSlab = this;
+            this.doubleSlab = (Double) getDoubleSlabFromSlab(variant, type);
+            this.doubleSlab.halfSlab = this;
+            this.halfSlab = this;
 
-            this.variant = variant;
-            this.type = type;
-
-            setRegistryName(getRegistryLocation());
-            setTranslationKey(getTranslationName());
-
-            setHardness(getFinalHardness());
-            setHarvestLevel("pickaxe", 0);
-
+            OreDictionaryHelper.register(this, variant.toString());
             OreDictionaryHelper.register(this, variant.toString(), type.toString());
         }
 
         @Override
         public boolean isDouble() {
             return false;
-        }
-
-        @Nonnull
-        @Override
-        public RockBlockVariant getBlockVariant() {
-            return variant;
-        }
-
-        @Nonnull
-        @Override
-        public RockType getType() {
-            return type;
-        }
-
-        @Override
-        public ItemBlock getItemBlock() {
-            return new ItemRockSlab(this, this, this.doubleSlab);
         }
 
 
@@ -289,14 +265,6 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
                     new ModelResourceLocation(getResourceLocation(),
                             "half=bottom," +
                                     "rocktype=" + getType()));
-        }
-
-        @Override
-        @SideOnly(Side.CLIENT)
-        public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-            super.addInformation(stack, worldIn, tooltip, flagIn);
-
-            tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + type.getCategory().getLocalizedName());
         }
     }
 }

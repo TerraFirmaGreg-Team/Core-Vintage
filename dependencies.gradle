@@ -31,7 +31,7 @@ dependencies {
     // Util dependencies
     if (project.use_util.toBoolean()) {
         implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
-        implementation rfg.deobf("maven.modrinth:the-one-probe:1.12-1.4.28")
+        implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:4746213")
         implementation rfg.deobf("curse.maven:had-enough-items-557549:4571247")
 
         //runtimeOnly("curse.maven:fancy-spawn-eggs-302277:2612571")
@@ -41,11 +41,11 @@ dependencies {
 
     // GregTech dependencies
     if (project.use_gregtech.toBoolean()) {
-        runtimeOnly("curse.maven:3.2.3.358-codechicken-lib-1-8-242818:2779848")
         implementation rfg.deobf("maven.modrinth:gregtech-ce-unofficial:2.7.3-beta")
         implementation rfg.deobf("maven.modrinth:gregicality-multiblocks:1.2.5")
 
-        compileOnly("curse.maven:ctm-267602:2915363")
+        runtimeOnly("curse.maven:3.2.3.358-codechicken-lib-1-8-242818:2779848")
+        runtimeOnly("curse.maven:ctm-267602:2915363")
     }
 
     // Dramatic Trees dependencies

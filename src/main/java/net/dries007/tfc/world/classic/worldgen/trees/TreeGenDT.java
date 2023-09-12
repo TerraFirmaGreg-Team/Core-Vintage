@@ -13,8 +13,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.tree.WoodTreeSpecies.SPECIES;
-
 
 public class TreeGenDT implements ITreeGenerator {
     private int leavesRadius; //used to store useful radius between canGenerate and Generate
@@ -25,7 +23,7 @@ public class TreeGenDT implements ITreeGenerator {
 
     @Override
     public void generateTree(TemplateManager templateManager, World world, BlockPos blockPos, TreeType type, Random random, boolean isWorldGen) {
-        var dtSpecies = SPECIES.get(type);
+        var dtSpecies = type.getCommonSpecies();
         var bounds = new SafeChunkBounds(world, world.getChunk(blockPos).getPos());
         dtSpecies.generate(world, blockPos.down(), world.getBiome(blockPos), random, leavesRadius <= 0 ? dtSpecies.maxBranchRadius() / 3 : leavesRadius, bounds);
         //dtSpecies.getJoCode("JP").setCareful(true).generate(world, dtSpecies, blockPos, world.getBiome(blockPos), EnumFacing.SOUTH, 8, SafeChunkBounds.ANY);
@@ -42,7 +40,7 @@ public class TreeGenDT implements ITreeGenerator {
             return false;
         }
 
-        var dTree = SPECIES.get(type);
+        var dTree = type.getCommonSpecies();
         int lowestBranchHeight = dTree.getLowestBranchHeight();
         int maxTreeHeight = (int) dTree.getEnergy(world, pos); //signal energy access problem so need to cast
 

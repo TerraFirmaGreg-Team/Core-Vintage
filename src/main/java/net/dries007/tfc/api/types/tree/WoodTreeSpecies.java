@@ -4,21 +4,16 @@ import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import net.dries007.tfc.api.types.tree.type_new.TreeType;
+import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.compat.dynamictrees.dropcreators.DropCreatorWoodLog;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 
 public class WoodTreeSpecies extends Species {
-
-    public static final Map<TreeType, Species> SPECIES = new HashMap<>();
 
     public WoodTreeSpecies(TreeType tree) {
         super(tree.getName(), tree);
@@ -39,8 +34,6 @@ public class WoodTreeSpecies extends Species {
         float[] map = tree.getParamMap();
         setGrowthLogicKit(tree.getGrowthLogicKit());
         setBasicGrowingParameters(map[0], map[1], (int) map[2], (int) map[3], map[4]);
-
-        SPECIES.put(tree, this);
         Species.REGISTRY.register(this);
         //TreeRegistry.registerSaplingReplacer(sapling.getDefaultState(), this);
     }

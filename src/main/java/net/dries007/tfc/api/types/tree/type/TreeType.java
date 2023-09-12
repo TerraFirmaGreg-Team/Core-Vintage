@@ -2,16 +2,25 @@ package net.dries007.tfc.api.types.tree.type;
 
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
+import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
+import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
 import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
+import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.tree.WoodTreeSpecies;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranch;
+import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.world.classic.worldgen.trees.ITreeGenerator;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenDT;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -25,15 +34,20 @@ import java.util.Random;
 import java.util.Set;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
+import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LOG;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
+import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
 
 /**
  * Класс Wood представляет тип дерева с определенными характеристиками.
  */
-public class TreeType {
+public class TreeType extends TreeFamily {
     private static final Set<TreeType> TREE_TYPES = new LinkedHashSet<>();
 
     @Nonnull
-    private final String name;
+    private final ResourceLocation name;
     @Nonnull
     private final WoodType wood;
     private final int maxGrowthRadius;
@@ -60,10 +74,14 @@ public class TreeType {
     private final ITreeGenerator generator;
     private final float[] paramMap;
     private final IGrowthLogicKit logicMap;
-    private final ICellKit cellKit;
+    private final LeavesProperties leavesProperties;
+
+    public boolean hasConiferVariants = false;
+    private boolean thick = false;
 
     private TreeType(Builder builder) {
-        this.name = builder.wood.toString();
+        super(builder.name);
+        this.name = builder.name;
         this.wood = builder.wood;
 
         this.minTemp = builder.minTemp;
@@ -93,9 +111,17 @@ public class TreeType {
 
         this.paramMap = builder.paramMap;
         this.logicMap = builder.logicMap;
-        this.cellKit = builder.cellKit;
+        this.leavesProperties = new LeavesProperties(builder.primitiveLeaves, builder.cellKit);
 
-        if (name.isEmpty()) {
+        setCommonSpecies(new WoodTreeSpecies(this));
+        setPrimitiveLog(builder.primitiveLog);
+        setDynamicBranch(isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
+
+        this.getRegisterableBlocks(BLOCKS);
+        this.getRegisterableItems(ITEMS);
+        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
+
+        if (name.getPath().isEmpty()) {
             throw new RuntimeException(String.format("TreeType name must contain any character: [%s]", name));
         }
 
@@ -120,12 +146,34 @@ public class TreeType {
      */
     @Override
     public String toString() {
-        return name;
+        return name.getPath();
     }
 
     @Nonnull
     public WoodType getWood() {
         return wood;
+    }
+
+    public float[] getParamMap() {
+        return paramMap;
+    }
+
+    public IGrowthLogicKit getGrowthLogicKit() {
+        return logicMap;
+    }
+
+    public LeavesProperties getLeavesProperties() {
+        return leavesProperties;
+    }
+
+
+    @Override
+    public boolean isThick() {
+        return thick;
+    }
+
+    public void setThick(boolean thick) {
+        this.thick = thick;
     }
 
     /**
@@ -304,21 +352,10 @@ public class TreeType {
         return new ItemStack(TFCItems.getFoodItem(fruit));
     }
 
-    public float[] getParamMap() {
-        return paramMap;
-    }
-
-    public IGrowthLogicKit getGrowthLogicKit() {
-        return logicMap;
-    }
-
-    public ICellKit getCellKit() {
-        return cellKit;
-    }
-
     public static class Builder {
-        private final WoodType wood;
+        private final ResourceLocation name;
         private final ITreeGenerator generator;
+        private WoodType wood;
         private float minGrowthTime;
         private float minTemp, maxTemp;
         private float minRain, maxRain;
@@ -338,33 +375,37 @@ public class TreeType {
         private float[] paramMap;
         private IGrowthLogicKit logicMap;
         private ICellKit cellKit;
+        private IBlockState primitiveLeaves;
+        private IBlockState primitiveLog;
+        private ItemStack stickItemStack;
 
-        public Builder(@Nonnull WoodType wood) {
-            this.wood = wood;
-            this.minTemp = 0;
-            this.maxTemp = 10;
-            this.minRain = 0;
-            this.maxRain = 100;
+        public Builder(@Nonnull String name) {
+            this.name = TerraFirmaCraft.identifier(name);
             this.generator = new TreeGenDT();
-            this.maxGrowthRadius = 1;
-            this.dominance = 0.001f * (maxTemp - minTemp) * (maxRain - minRain);
-            this.maxHeight = 6;
-            this.maxDecayDistance = 4;
-            this.isConifer = false;
-            this.bushGenerator = null;
-
-            this.minGrowthTime = 7;
-            this.minDensity = 0.1f;
-            this.maxDensity = 2f;
-            this.fruit = null;
-            this.flowerMonthStart = null;
-            this.floweringMonths = 0;
-            this.harvestMonthStart = null;
-            this.harvestingMonths = 0;
-            this.growthTime = 0;
-            this.paramMap = new float[]{0.20f, 10f, 3, 3, 1.00f};
             this.logicMap = GrowthLogicKits.nullLogic;
-            this.cellKit = null;
+
+        }
+
+        public Builder setWoodType(WoodType wood) {
+            this.wood = wood;
+            setPrimitiveLeaves(TFCBlocks.getWoodBlock(LEAVES, wood).getDefaultState());
+            setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, wood).getDefaultState());
+            return this;
+        }
+
+        public Builder setPrimitiveLeaves(IBlockState primLeaves) {
+            this.primitiveLeaves = primLeaves;
+            return this;
+        }
+
+        public Builder setPrimitiveLog(IBlockState primLog) {
+            this.primitiveLog = primLog;
+            return this;
+        }
+
+        public Builder setStick(ItemStack stick) {
+            this.stickItemStack = stick;
+            return this;
         }
 
 
@@ -448,8 +489,8 @@ public class TreeType {
             return this;
         }
 
-        public Builder setParamMap(float[] paramMap) {
-            this.paramMap = paramMap;
+        public Builder setParamMap(float tapering, float energy, int upProbability, int lowestBranchHeight, float growthRate) {
+            this.paramMap = new float[]{tapering, energy, upProbability, lowestBranchHeight, growthRate};
             return this;
         }
 
@@ -458,8 +499,18 @@ public class TreeType {
             return this;
         }
 
-        public Builder setCellKit(String cellKit) {
-            this.cellKit = TreeRegistry.findCellKit(new ResourceLocation(MODID, cellKit));
+        public Builder setCellKit(ResourceLocation kit) {
+            cellKit = TreeRegistry.findCellKit(kit);
+            return this;
+        }
+
+        public Builder setCellKit(String modid, String kit) {
+            setCellKit(new ResourceLocation(modid, kit));
+            return this;
+        }
+
+        public Builder setCellKit(String kit) {
+            setCellKit(new ResourceLocation(MODID, kit));
             return this;
         }
 

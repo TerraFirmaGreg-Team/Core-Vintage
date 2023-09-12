@@ -3,7 +3,7 @@ package net.dries007.tfc.compat.dynamictrees.dropcreators;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.tree.type_new.TreeType;
+import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLog;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;

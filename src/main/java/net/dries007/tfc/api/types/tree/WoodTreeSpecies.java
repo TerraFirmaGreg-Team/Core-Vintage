@@ -5,8 +5,7 @@ import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.api.types.tree.type_new.TreeType_new;
+import net.dries007.tfc.api.types.tree.type_new.TreeType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.dynamictrees.dropcreators.DropCreatorWoodLog;
@@ -26,9 +25,9 @@ import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 
 public class WoodTreeSpecies extends Species {
 
-    public static final Map<TreeType, Species> SPECIES = new HashMap<>();
+    public static final Map<net.dries007.tfc.api.types.tree.type.TreeType, Species> SPECIES = new HashMap<>();
 
-    public WoodTreeSpecies(TreeType_new tree) {
+    public WoodTreeSpecies(TreeType tree) {
         super(tree.getName(), tree);
 
 

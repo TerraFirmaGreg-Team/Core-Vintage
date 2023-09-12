@@ -2,10 +2,9 @@ package net.dries007.tfc.api.types.tree.type_new;
 
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
-import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
-import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
+import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
+import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
 import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
-import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.tree.WoodTreeSpecies;
@@ -21,57 +20,70 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LOG;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
-import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
 
 public class TreeType extends TreeFamily {
 
     public static final ArrayList<TreeType> TREES = new ArrayList<>();
     private final WoodType wood;
-    private final ICellKit cellKit;
     private final float[] paramMap;
     private final IGrowthLogicKit logicMap;
+    private final ResourceLocation name;
+
+    private final LeavesProperties leavesProperties;
     public boolean hasConiferVariants = false;
-    private ResourceLocation name;
     private boolean thick = false;
 
     private TreeType(Builder builder) {
         super(builder.name);
 
+        this.name = builder.name;
         this.wood = builder.wood;
-        this.cellKit = builder.cellKit;
         this.paramMap = builder.paramMap;
         this.logicMap = builder.logicMap;
+        this.leavesProperties = new LeavesProperties(builder.primitiveLeaves, builder.cellKit);
 
-//        setCommonSpecies(new WoodTreeSpecies(this));
+        setCommonSpecies(new WoodTreeSpecies(this));
         setPrimitiveLog(builder.primitiveLog);
-        setDynamicBranch(isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
+        setDynamicBranch(isThick() ? new BlockTreeBranchThick(builder.wood) : new BlockTreeBranch(builder.wood));
 
         TREES.add(this);
 
-        this.getRegisterableBlocks(BLOCKS);
-        this.getRegisterableItems(ITEMS);
-        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
+//        this.getRegisterableBlocks(BLOCKS);
+//        this.getRegisterableItems(ITEMS);
+//        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
 
     }
 
     @Override
     public void createSpecies() {
-        setCommonSpecies(new WoodTreeSpecies(name, this));
+        //setCommonSpecies(new WoodTreeSpecies(this));
         //setCommonSpecies(speciesCreator != null ? speciesCreator.create(this) : new Species(name, this, dynamicLeavesProperties));
     }
+
+//    @Override
+//    public BlockBranch createBranch() {
+//        return isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood);
+//    }
 
     @Nonnull
     public WoodType getWood() {
         return wood;
     }
 
-    public ICellKit getCellKit() {
-        return cellKit;
+    public float[] getParamMap() {
+        return paramMap;
     }
+
+    public IGrowthLogicKit getGrowthLogicKit() {
+        return logicMap;
+    }
+
+    public LeavesProperties getLeavesProperties() {
+        return leavesProperties;
+    }
+
 
     @Override
     public boolean isThick() {
@@ -82,36 +94,26 @@ public class TreeType extends TreeFamily {
         this.thick = thick;
     }
 
-    public interface ISpeciesCreator {
-        Species create(TreeType tree);
-
-    }
-
     public static class Builder {
 
         //Common Species
         private final boolean speciesCreateSeed = true;
-        private ResourceLocation name;
+        private final ResourceLocation name;
+        //Leaves
+        private final IGrowthLogicKit logicMap;
         private WoodType wood;
         private float minTemp, maxTemp;
         private float minRain, maxRain;
         private float[] paramMap;
-        private IGrowthLogicKit logicMap;
         //Drops
         private IBlockState primitiveLeaves;
         private IBlockState primitiveLog;
         private ItemStack stickItemStack;
-        //Leaves
-        private ILeavesProperties dynamicLeavesProperties;
         private ICellKit cellKit;
 
-        public Builder setName(ResourceLocation name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder setName(String path) {
-            return setName(TerraFirmaCraft.identifier(path));
+        public Builder(@Nonnull String name) {
+            this.name = TerraFirmaCraft.identifier(name);
+            this.logicMap = GrowthLogicKits.nullLogic;
         }
 
         public Builder setWoodType(WoodType wood) {
@@ -134,17 +136,17 @@ public class TreeType extends TreeFamily {
         }
 
         public Builder setParamMap(float tapering, float energy, int upProbability, int lowestBranchHeight, float growthRate) {
-            this.paramMap = new float[]{};
+            this.paramMap = new float[]{tapering, energy, upProbability, lowestBranchHeight, growthRate};
             return this;
         }
 
         public Builder setPrimitiveLeaves(IBlockState primLeaves) {
-            primitiveLeaves = primLeaves;
+            this.primitiveLeaves = primLeaves;
             return this;
         }
 
         public Builder setPrimitiveLog(IBlockState primLog) {
-            primitiveLog = primLog;
+            this.primitiveLog = primLog;
             return this;
         }
 

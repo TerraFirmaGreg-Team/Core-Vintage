@@ -13,7 +13,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
-import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.WoodTreeSpecies.SPECIES;
+import static net.dries007.tfc.api.types.tree.WoodTreeSpecies.SPECIES;
 
 
 public class TreeGenDT implements ITreeGenerator {

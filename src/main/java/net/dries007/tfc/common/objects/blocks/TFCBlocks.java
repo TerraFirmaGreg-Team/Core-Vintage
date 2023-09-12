@@ -19,7 +19,6 @@ import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
 import net.dries007.tfc.api.types.soil.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
-import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
@@ -37,7 +36,6 @@ import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockPowderKeg;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeRootyMimic;
-import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -215,10 +213,6 @@ public class TFCBlocks {
         BLOCKS.add(THATCH_BED = new BlockThatchBed());
         BLOCKS.add(CLADDING = new BlockMetalCladding());
         BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
-
-        for (var tree : TreeType.getTreeTypes()) {
-            new WoodTreeFamily(tree);
-        }
     }
 
     @Nonnull

@@ -1,17 +1,14 @@
 package net.dries007.tfc.api.types.tree.type;
 
-import static net.dries007.tfc.api.types.tree.type.TreeTypes.ACACIA_TREE;
-import static net.dries007.tfc.api.types.wood.type.WoodTypes.ACACIA;
-
 public class TreeTypeHandler {
 
     public static void init() {
-        ACACIA_TREE = new TreeType.Builder(ACACIA)
-                .setTemp(19f, 31f).setRain(30f, 210f)
-                .setHeight(12).setMinGrowthTime(11).setDensity(0.1f, 0.6f)
-                .setParamMap(new float[]{0.10f, 14f, 6, 6, 0.90f})
-                .setCellKit("acacia")
-                .build();
+//        ACACIA_TREE = new TreeType.Builder(ACACIA)
+//                .setTemp(19f, 31f).setRain(30f, 210f)
+//                .setHeight(12).setMinGrowthTime(11).setDensity(0.1f, 0.6f)
+//                .setParamMap(new float[]{0.10f, 14f, 6, 6, 0.90f})
+//                .setCellKit("acacia")
+//                .build();
 //
 //        ASH_TREE = new TreeType.Builder(ASH)
 //                .setTemp(-6f, 12f).setRain(60f, 140f)

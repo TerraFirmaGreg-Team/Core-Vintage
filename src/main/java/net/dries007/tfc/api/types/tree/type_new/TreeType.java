@@ -4,6 +4,8 @@ import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
+import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
+import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.tree.WoodTreeSpecies;
@@ -15,6 +17,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
@@ -28,16 +31,23 @@ public class TreeType extends TreeFamily {
 
     public static final ArrayList<TreeType> TREES = new ArrayList<>();
     private final WoodType wood;
+    private final ICellKit cellKit;
+    private final float[] paramMap;
+    private final IGrowthLogicKit logicMap;
     public boolean hasConiferVariants = false;
+    private ResourceLocation name;
     private boolean thick = false;
 
     private TreeType(Builder builder) {
         super(builder.name);
 
         this.wood = builder.wood;
+        this.cellKit = builder.cellKit;
+        this.paramMap = builder.paramMap;
+        this.logicMap = builder.logicMap;
 
-        setCommonSpecies(new WoodTreeSpecies(this));
-        setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, wood).getDefaultState());
+//        setCommonSpecies(new WoodTreeSpecies(this));
+        setPrimitiveLog(builder.primitiveLog);
         setDynamicBranch(isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
 
         TREES.add(this);
@@ -48,6 +58,20 @@ public class TreeType extends TreeFamily {
 
     }
 
+    @Override
+    public void createSpecies() {
+        setCommonSpecies(new WoodTreeSpecies(name, this));
+        //setCommonSpecies(speciesCreator != null ? speciesCreator.create(this) : new Species(name, this, dynamicLeavesProperties));
+    }
+
+    @Nonnull
+    public WoodType getWood() {
+        return wood;
+    }
+
+    public ICellKit getCellKit() {
+        return cellKit;
+    }
 
     @Override
     public boolean isThick() {
@@ -58,6 +82,10 @@ public class TreeType extends TreeFamily {
         this.thick = thick;
     }
 
+    public interface ISpeciesCreator {
+        Species create(TreeType tree);
+
+    }
 
     public static class Builder {
 
@@ -68,6 +96,7 @@ public class TreeType extends TreeFamily {
         private float minTemp, maxTemp;
         private float minRain, maxRain;
         private float[] paramMap;
+        private IGrowthLogicKit logicMap;
         //Drops
         private IBlockState primitiveLeaves;
         private IBlockState primitiveLog;

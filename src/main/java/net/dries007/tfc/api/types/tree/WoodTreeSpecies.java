@@ -23,12 +23,12 @@ import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.SA
 import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 
-public class WoodTreeSpecies extends Species {
+public class WoodTreeSpecies extends Species implements TreeType.ISpeciesCreator {
 
-    public static final Map<net.dries007.tfc.api.types.tree.type.TreeType, Species> SPECIES = new HashMap<>();
+    public static final Map<TreeType, Species> SPECIES = new HashMap<>();
 
-    public WoodTreeSpecies(TreeType tree) {
-        super(tree.getName(), tree);
+    public WoodTreeSpecies(ResourceLocation name, TreeType tree) {
+        super(name, tree);
 
 
         var leaves = TFCBlocks.getWoodBlock(LEAVES, tree.getWood());
@@ -65,5 +65,10 @@ public class WoodTreeSpecies extends Species {
     @Override
     public boolean canBoneMeal() {
         return false;
+    }
+
+    @Override
+    public Species create(TreeType tree) {
+        return new WoodTreeSpecies(tree);
     }
 }

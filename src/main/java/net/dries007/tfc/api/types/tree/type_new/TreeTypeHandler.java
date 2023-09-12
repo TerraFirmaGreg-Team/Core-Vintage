@@ -9,7 +9,9 @@ public class TreeTypeHandler {
         ACACIA_TREE = new TreeType.Builder()
                 .setWoodType(ACACIA)
                 .setTemp(19f, 31f).setRain(30f, 210f)
-                //.setHeight(12).setMinGrowthTime(11).setDensity(0.1f, 0.6f)
+                //.setHeight(12)
+                //.setMinGrowthTime(11)
+                //.setDensity(0.1f, 0.6f)
                 .setParamMap(0.10f, 14f, 6, 6, 0.90f)
                 .setCellKit("acacia")
                 .build();

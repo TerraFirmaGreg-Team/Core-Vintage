@@ -2,6 +2,7 @@ package net.dries007.tfc.api.types.tree.type_new;
 
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
+import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
 import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
@@ -20,8 +21,11 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LOG;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
+import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
 
 public class TreeType extends TreeFamily {
 
@@ -46,13 +50,13 @@ public class TreeType extends TreeFamily {
 
         setCommonSpecies(new WoodTreeSpecies(this));
         setPrimitiveLog(builder.primitiveLog);
-        setDynamicBranch(isThick() ? new BlockTreeBranchThick(builder.wood) : new BlockTreeBranch(builder.wood));
+        setDynamicBranch(isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
 
         TREES.add(this);
 
-//        this.getRegisterableBlocks(BLOCKS);
-//        this.getRegisterableItems(ITEMS);
-//        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
+        this.getRegisterableBlocks(BLOCKS);
+        this.getRegisterableItems(ITEMS);
+        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
 
     }
 

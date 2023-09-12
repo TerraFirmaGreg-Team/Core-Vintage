@@ -2,6 +2,7 @@ package net.dries007.tfc.compat.dynamictrees.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranchThick;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +19,7 @@ public class BlockTreeBranchThick extends BlockBranchThick {
         super(String.format("wood/branch/%s", type));
 
         setTranslationKey(String.format("wood.branch.%s", type));
+        setCreativeTab(CreativeTabsTFC.WOOD);
     }
 
 

@@ -14,9 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
-import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
 
 public class WoodTreeSpecies extends Species {
 
@@ -43,10 +41,7 @@ public class WoodTreeSpecies extends Species {
         setBasicGrowingParameters(map[0], map[1], (int) map[2], (int) map[3], map[4]);
 
         SPECIES.put(tree, this);
-        tree.getRegisterableBlocks(BLOCKS);
-        tree.getRegisterableItems(ITEMS);
         Species.REGISTRY.register(this);
-        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
         //TreeRegistry.registerSaplingReplacer(sapling.getDefaultState(), this);
     }
 

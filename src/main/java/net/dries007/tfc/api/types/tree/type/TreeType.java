@@ -353,8 +353,8 @@ public class TreeType extends TreeFamily {
     }
 
     public static class Builder {
-        private final ResourceLocation name;
-        private final ITreeGenerator generator;
+        private final ITreeGenerator generator = new TreeGenDT();
+        private ResourceLocation name;
         private WoodType wood;
         private float minGrowthTime;
         private float minTemp, maxTemp;
@@ -373,21 +373,24 @@ public class TreeType extends TreeFamily {
         private FoodType fruit;
         private float growthTime;
         private float[] paramMap;
-        private IGrowthLogicKit logicMap;
+        private IGrowthLogicKit logicMap = GrowthLogicKits.nullLogic;
         private ICellKit cellKit;
         private IBlockState primitiveLeaves;
         private IBlockState primitiveLog;
         private ItemStack stickItemStack;
 
-        public Builder(@Nonnull String name) {
-            this.name = TerraFirmaCraft.identifier(name);
-            this.generator = new TreeGenDT();
-            this.logicMap = GrowthLogicKits.nullLogic;
+        public Builder setName(ResourceLocation name) {
+            this.name = name;
+            return this;
+        }
 
+        public Builder setName(String path) {
+            return setName(TerraFirmaCraft.identifier(path));
         }
 
         public Builder setWoodType(WoodType wood) {
             this.wood = wood;
+            setName(wood.toString());
             setPrimitiveLeaves(TFCBlocks.getWoodBlock(LEAVES, wood).getDefaultState());
             setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, wood).getDefaultState());
             return this;

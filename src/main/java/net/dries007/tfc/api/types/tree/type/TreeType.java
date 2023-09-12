@@ -1,50 +1,39 @@
 package net.dries007.tfc.api.types.tree.type;
 
-import com.ferreusveritas.dynamictrees.ModConstants;
-import com.ferreusveritas.dynamictrees.api.TreeBuilder;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
-import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
-import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
-import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
 import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
-import com.ferreusveritas.dynamictrees.items.Seed;
-import com.ferreusveritas.dynamictrees.trees.Species;
-import com.ferreusveritas.dynamictrees.trees.TreeFamily;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.world.classic.worldgen.trees.ITreeGenerator;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenDT;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.TemplateManager;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Random;
+import java.util.Set;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LOG;
 
 /**
  * Класс Wood представляет тип дерева с определенными характеристиками.
  */
-public class TreeType extends TreeFamily {
+public class TreeType {
     private static final Set<TreeType> TREE_TYPES = new LinkedHashSet<>();
+
+    @Nonnull
+    private final String name;
     @Nonnull
     private final WoodType wood;
     private final int maxGrowthRadius;
@@ -73,32 +62,9 @@ public class TreeType extends TreeFamily {
     private final IGrowthLogicKit logicMap;
     private final ICellKit cellKit;
 
-    @Nonnull
-    private final ResourceLocation name;
-    private final int seqNum = -1;
-
-    //Drops
-    private final IBlockState primitiveLeavesBlockState;
-    private final ItemStack stickItemStack;
-
-    //Leaves
-    private final ILeavesProperties dynamicLeavesProperties;
-    private final int dynamicLeavesSmotherMax;
-    private final int dynamicLeavesLightRequirement;
-    private final ResourceLocation dynamicLeavesCellKit;
-
-    //Common Species
-    private final ISpeciesCreator speciesCreator;
-    private final boolean speciesCreateSeed;
-
-    //Extra Species
-    private final List<ISpeciesCreator> extraSpeciesCreators;
-    private final Map<String, Species> extraSpecies;
-
     private TreeType(Builder builder) {
-        super(builder.name);
-        this.name = builder.name;
-        this.wood = builder.type;
+        this.name = builder.wood.toString();
+        this.wood = builder.wood;
 
         this.minTemp = builder.minTemp;
         this.maxTemp = builder.maxTemp;
@@ -129,63 +95,13 @@ public class TreeType extends TreeFamily {
         this.logicMap = builder.logicMap;
         this.cellKit = builder.cellKit;
 
-
-
-        this.primitiveLeavesBlockState = builder.primitiveLeavesBlockState;
-        this.stickItemStack = builder.stickItemStack;
-        this.dynamicLeavesSmotherMax = builder.dynamicLeavesSmotherMax;
-        this.dynamicLeavesLightRequirement = builder.dynamicLeavesLightRequirement;
-        this.dynamicLeavesCellKit = builder.dynamicLeavesCellKit;
-        this.speciesCreator = builder.speciesCreator;
-        this.speciesCreateSeed = builder.speciesCreateSeed;
-        this.extraSpeciesCreators = builder.extraSpeciesCreators;
-        this.extraSpecies = builder.extraSpecies;
-
-        this.dynamicLeavesProperties = new LeavesProperties(primitiveLeavesBlockState) {
-            @Override
-            public int getLightRequirement() {
-                return dynamicLeavesLightRequirement;
-            }
-
-            public int getSmotherLeavesMax() {
-                return dynamicLeavesSmotherMax;
-            }
-
-            @Override
-            public ICellKit getCellKit() {
-                return TreeRegistry.findCellKit(dynamicLeavesCellKit);
-            }
-        };
-
-        LeavesPaging.getLeavesBlockForSequence(ModConstants.MODID, seqNum, dynamicLeavesProperties);
-
-        this.setPrimitiveLog(builder.primitiveLogBlockState);
-        dynamicLeavesProperties.setTree(this);
-        if (builder.stickItemStack != null) {
-            setStick(builder.stickItemStack);
-        }
-
-        setCommonSpecies(speciesCreator != null ? speciesCreator.create(this) : new Species(name, this, dynamicLeavesProperties));
-
-        if (speciesCreateSeed) {
-            getCommonSpecies().generateSeed();
-            getCommonSpecies().setupStandardSeedDropping();
-        }
-
-        for (ISpeciesCreator creator : extraSpeciesCreators) {
-            Species species = creator.create(this);
-            extraSpecies.put(species.getRegistryName().getPath(), species);
-        }
-
-        if (name.getPath().isEmpty()) {
+        if (name.isEmpty()) {
             throw new RuntimeException(String.format("TreeType name must contain any character: [%s]", name));
         }
 
         if (!TREE_TYPES.add(this)) {
             throw new RuntimeException(String.format("TreeType: [%s] already exists!", name));
         }
-
-
     }
 
     /**
@@ -204,30 +120,12 @@ public class TreeType extends TreeFamily {
      */
     @Override
     public String toString() {
-        return name.getPath();
+        return name;
     }
 
     @Nonnull
     public WoodType getWood() {
         return wood;
-    }
-
-
-    @Override
-    public void registerSpecies(IForgeRegistry<Species> speciesRegistry) {
-        super.registerSpecies(speciesRegistry);
-        extraSpecies.values().forEach(s -> speciesRegistry.register(s));
-    }
-
-    @Override
-    public List<Item> getRegisterableItems(List<Item> itemList) {
-        for (Species species : extraSpecies.values()) {
-            Seed seed = species.getSeed();//Since we generated the species internally we need to let the seed out to be registered.
-            if (seed != Seed.NULLSEED) {
-                itemList.add(seed);
-            }
-        }
-        return super.getRegisterableItems(itemList);
     }
 
     /**
@@ -419,17 +317,17 @@ public class TreeType extends TreeFamily {
     }
 
     public static class Builder {
-        private WoodType type;
-        private ITreeGenerator generator = new TreeGenDT();;
+        private final WoodType wood;
+        private final ITreeGenerator generator;
         private float minGrowthTime;
         private float minTemp, maxTemp;
         private float minRain, maxRain;
         private float minDensity, maxDensity;
-        private float dominance = 0.001f * (maxTemp - minTemp) * (maxRain - minRain);
+        private float dominance;
         private int maxHeight;
         private int maxGrowthRadius;
         private int maxDecayDistance;
-        private boolean isConifer = false;
+        private boolean isConifer;
         private ITreeGenerator bushGenerator;
         private Month flowerMonthStart;
         private int floweringMonths;
@@ -437,43 +335,36 @@ public class TreeType extends TreeFamily {
         private int harvestingMonths;
         private FoodType fruit;
         private float growthTime;
-        private float[] paramMap = new float[]{0.20f, 10f, 3, 3, 1.00f};;
-        private IGrowthLogicKit logicMap = GrowthLogicKits.nullLogic;
+        private float[] paramMap;
+        private IGrowthLogicKit logicMap;
         private ICellKit cellKit;
 
+        public Builder(@Nonnull WoodType wood) {
+            this.wood = wood;
+            this.minTemp = 0;
+            this.maxTemp = 10;
+            this.minRain = 0;
+            this.maxRain = 100;
+            this.generator = new TreeGenDT();
+            this.maxGrowthRadius = 1;
+            this.dominance = 0.001f * (maxTemp - minTemp) * (maxRain - minRain);
+            this.maxHeight = 6;
+            this.maxDecayDistance = 4;
+            this.isConifer = false;
+            this.bushGenerator = null;
 
-        // TreeBuilder DT
-        private ResourceLocation name;
-        private int seqNum = -1;
-
-        //Drops
-        private IBlockState primitiveLeavesBlockState = Blocks.LEAVES.getDefaultState();
-        private IBlockState primitiveLogBlockState = Blocks.LOG.getDefaultState();
-        private ItemStack stickItemStack;
-
-        //Leaves
-        private ILeavesProperties dynamicLeavesProperties;
-        private int dynamicLeavesSmotherMax = 4;
-        private int dynamicLeavesLightRequirement = 13;
-        private ResourceLocation dynamicLeavesCellKit;
-
-        //Common Species
-        private ISpeciesCreator speciesCreator;
-        private boolean speciesCreateSeed = true;
-
-        //Extra Species
-        private final List<ISpeciesCreator> extraSpeciesCreators = new ArrayList<>(0);
-        private final Map<String, Species> extraSpecies = new HashMap<>();
-
-        public Builder(@Nonnull String name) {
-            this.name = TerraFirmaCraft.identifier(name);
-        }
-
-        public Builder setWoodType(WoodType type) {
-            this.type = type;
-            setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, type).getDefaultState());
-            setPrimitiveLeaves(TFCBlocks.getWoodBlock(LEAVES, type).getDefaultState());
-            return this;
+            this.minGrowthTime = 7;
+            this.minDensity = 0.1f;
+            this.maxDensity = 2f;
+            this.fruit = null;
+            this.flowerMonthStart = null;
+            this.floweringMonths = 0;
+            this.harvestMonthStart = null;
+            this.harvestingMonths = 0;
+            this.growthTime = 0;
+            this.paramMap = new float[]{0.20f, 10f, 3, 3, 1.00f};
+            this.logicMap = GrowthLogicKits.nullLogic;
+            this.cellKit = null;
         }
 
 
@@ -572,82 +463,9 @@ public class TreeType extends TreeFamily {
             return this;
         }
 
-        public Builder setName(ResourceLocation name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder setName(String domain, String path) {
-            return setName(new ResourceLocation(domain, path));
-        }
-
-        public Builder setDynamicLeavesSequence(int seqNum) {
-            if (dynamicLeavesProperties == null) {
-                this.seqNum = seqNum;
-            }
-            return this;
-        }
-
-        public Builder setDynamicLeavesProperties(ILeavesProperties leavesProperties) {
-            this.seqNum = -1;
-            dynamicLeavesProperties = leavesProperties;
-            return this;
-        }
-
-        public Builder setPrimitiveLeaves(IBlockState primLeaves) {
-            primitiveLeavesBlockState = primLeaves;
-            return this;
-        }
-
-        public Builder setPrimitiveLog(IBlockState primLog) {
-            primitiveLogBlockState = primLog;
-            return this;
-        }
-
-        public Builder setStick(ItemStack stick) {
-            this.stickItemStack = stick;
-            return this;
-        }
-
-        public Builder setSmotherLeavesMax(int smotherMax) {
-            dynamicLeavesSmotherMax = smotherMax;
-            return this;
-        }
-
-        public Builder setLightRequirement(int light) {
-            dynamicLeavesLightRequirement = light;
-            return this;
-        }
-
-        public Builder setCellKit(ResourceLocation kit) {
-            dynamicLeavesCellKit = kit;
-            return this;
-        }
-
-        public Builder setCommonSpecies(ISpeciesCreator speciesCreator) {
-            this.speciesCreator = speciesCreator;
-            return this;
-        }
-
-        public Builder addExtraSpecies(ISpeciesCreator speciesCreator) {
-            extraSpeciesCreators.add(speciesCreator);
-            return this;
-        }
-
-        public Builder setCreateSeed(boolean isStandard) {
-            speciesCreateSeed = isStandard;
-            return this;
-        }
-
         // Метод для построения объекта WoodType
         public TreeType build() {
             return new TreeType(this);
         }
-    }
-
-    public interface ISpeciesCreator {
-
-        Species create(TreeFamily tree);
-
     }
 }

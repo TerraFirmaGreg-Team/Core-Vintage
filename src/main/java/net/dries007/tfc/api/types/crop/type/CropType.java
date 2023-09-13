@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 import static net.dries007.tfc.api.types.crop.variant.item.CropItemVariants.SEED;
+import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 
 public class CropType {
     private static final Set<CropType> CROP_TYPES = new LinkedHashSet<>();
@@ -177,8 +178,8 @@ public class CropType {
             return this;
         }
 
-        public Builder setFoodDrop(FoodType food) {
-            this.foodDrop = () -> new ItemStack(food.get());
+        public Builder setFoodDrop(FoodType type) {
+            this.foodDrop = () -> new ItemStack(TFCItems.getFoodItem(INGREDIENT, type));
             return this;
         }
 

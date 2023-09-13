@@ -4,27 +4,32 @@ import net.dries007.tfc.api.capability.food.*;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.food.IFoodItem;
 import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.food.variant.Item.FoodItemVariant;
+import net.dries007.tfc.api.types.food.variant.Item.IFoodItem;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC, IFoodItem {
+public class ItemFoodIngredient extends ItemFood implements IItemSize, IItemFoodTFC, IFoodItem {
     protected final FoodType type;
+    private final FoodItemVariant variant;
 
-    public ItemFoodTFC(@Nonnull FoodType type) {
+    public ItemFoodIngredient(FoodItemVariant variant, FoodType type) {
         super(0, 0, type.getFoodCategory() == FoodCategories.MEAT || type.getFoodCategory() == FoodCategories.COOKED_MEAT);
         this.type = type;
+        this.variant = variant;
 
         // Use "category" here as to not conflict with actual items, i.e. grain
         OreDictionaryHelper.register(this, "category", this.type.getFoodCategory().toString());
@@ -59,6 +64,12 @@ public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC, IF
         return type;
     }
 
+    @Nonnull
+    @Override
+    public FoodItemVariant getVariants() {
+        return variant;
+    }
+
     @Override
     public int getItemStackLimit(ItemStack stack) {
         return getStackSize(stack);
@@ -79,5 +90,11 @@ public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC, IF
     @Override
     public ICapabilityProvider getCustomFoodHandler() {
         return type.isHeatable() ? new FoodHeatHandler(null, type) : new FoodHandler(null, type);
+    }
+
+    @Override
+    public void onModelRegister() {
+        ModelLoader.setCustomModelResourceLocation(this, 0,
+                new ModelResourceLocation(getRegistryLocation(), "normal"));
     }
 }

@@ -13,10 +13,12 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.SANDWICH;
+
 @ParametersAreNonnullByDefault
-public class ItemSandwich extends ItemFoodTFC {
-    public ItemSandwich(@Nonnull FoodType foodOld) {
-        super(foodOld);
+public class ItemSandwich extends ItemFoodIngredient {
+    public ItemSandwich(@Nonnull FoodType type) {
+        super(SANDWICH, type);
     }
 
     @Nullable

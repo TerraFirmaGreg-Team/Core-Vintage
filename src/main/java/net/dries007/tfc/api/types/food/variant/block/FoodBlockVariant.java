@@ -1,28 +1,28 @@
-package net.dries007.tfc.api.types.food.variant;
+package net.dries007.tfc.api.types.food.variant.block;
 
-import net.dries007.tfc.api.types.food.IFoodItem;
 import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.food.variant.Item.IFoodItem;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-public class FoodVariant {
-    private static final Set<FoodVariant> FOOD_BLOCK_VARIANTS = new LinkedHashSet<>();
+public class FoodBlockVariant {
+    private static final Set<FoodBlockVariant> FOOD_BLOCK_VARIANTS = new LinkedHashSet<>();
 
     @Nonnull
     private final String name;
     @Nonnull
-    private final BiFunction<FoodVariant, FoodType, IFoodItem> factory;
+    private final BiFunction<FoodBlockVariant, FoodType, IFoodItem> factory;
 
     /**
-     * Создает экземпляр класса FoodVariant с указанными параметрами.
+     * Создает экземпляр класса FoodBlockVariant с указанными параметрами.
      *
      * @param name    Имя варианта еды.
      * @param factory Фабричная функция для создания металлического блока.
      */
-    public FoodVariant(@Nonnull String name, @Nonnull BiFunction<FoodVariant, FoodType, IFoodItem> factory) {
+    public FoodBlockVariant(@Nonnull String name, @Nonnull BiFunction<FoodBlockVariant, FoodType, IFoodItem> factory) {
         this.name = name;
         this.factory = factory;
 
@@ -40,7 +40,7 @@ public class FoodVariant {
      *
      * @return Набор всех вариантов металлического блока.
      */
-    public static Set<FoodVariant> getMetalBlockVariants() {
+    public static Set<FoodBlockVariant> getFoodBlockVariants() {
         return FOOD_BLOCK_VARIANTS;
     }
 

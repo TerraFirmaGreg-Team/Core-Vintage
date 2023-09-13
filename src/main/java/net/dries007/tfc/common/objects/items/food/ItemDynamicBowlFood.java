@@ -17,10 +17,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.SOUP;
+
 @ParametersAreNonnullByDefault
-public class ItemDynamicBowlFood extends ItemFoodTFC {
-    public ItemDynamicBowlFood(FoodType foodOld) {
-        super(foodOld);
+public class ItemDynamicBowlFood extends ItemFoodIngredient {
+    public ItemDynamicBowlFood(FoodType type) {
+        super(SOUP, type);
     }
 
     @Nullable

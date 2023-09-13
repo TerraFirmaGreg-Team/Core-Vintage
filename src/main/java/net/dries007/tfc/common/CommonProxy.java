@@ -250,6 +250,8 @@ public class CommonProxy {
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
 
+        for (var soilItem : SOIL_ITEMS.values()) r.register((Item) soilItem);
+
         //==== Wood ==================================================================================================//
 
         for (var woodBlock : WOOD_BLOCKS.values()) {
@@ -275,15 +277,11 @@ public class CommonProxy {
 
         //==== Crop ==================================================================================================//
 
-
         for (var cropItem : CROP_ITEMS.values()) r.register((Item) cropItem);
-
 
         //==== Food ==================================================================================================//
 
-        for (var food : FOOD_ITEMS.values()) {
-            r.register(food);
-        }
+        for (var foodItem : FOOD_ITEMS.values()) r.register((Item) foodItem);
 
         //==== Metal =================================================================================================//
 
@@ -291,6 +289,8 @@ public class CommonProxy {
             var itemBlock = metalBlock.getItemBlock();
             if (itemBlock != null) registerItemBlock(r, itemBlock);
         }
+
+        for (var metalItem : METAL_ITEMS.values()) r.register((Item) metalItem);
 
         //==== Alabaster =============================================================================================//
 

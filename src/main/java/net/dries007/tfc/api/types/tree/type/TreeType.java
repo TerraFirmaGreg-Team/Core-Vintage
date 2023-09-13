@@ -35,6 +35,7 @@ import java.util.Set;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LOG;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
@@ -349,7 +350,7 @@ public class TreeType extends TreeFamily {
     }
 
     public ItemStack getFoodDrop() {
-        return new ItemStack(TFCItems.getFoodItem(fruit));
+        return new ItemStack(TFCItems.getFoodItem(INGREDIENT, fruit));
     }
 
     public static class Builder {

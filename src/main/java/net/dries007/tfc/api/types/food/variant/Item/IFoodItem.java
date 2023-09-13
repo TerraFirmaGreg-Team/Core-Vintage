@@ -1,7 +1,8 @@
-package net.dries007.tfc.api.types.food;
+package net.dries007.tfc.api.types.food.variant.Item;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.util.IHasModel;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -9,7 +10,7 @@ import javax.annotation.Nonnull;
 /**
  * Интерфейс ICropItem представляет предмет урожая.
  */
-public interface IFoodItem {
+public interface IFoodItem extends IHasModel {
 
     /**
      * Возвращает тип предмета.
@@ -19,10 +20,12 @@ public interface IFoodItem {
     @Nonnull
     FoodType getType();
 
+    @Nonnull
+    FoodItemVariant getVariants();
+
     /**
      * Возвращает расположение в реестре для данного подтипа предмета.
      *
-     * @param subType подтип предмета
      * @return расположение в реестре
      */
     @Nonnull
@@ -33,7 +36,6 @@ public interface IFoodItem {
     /**
      * Возвращает расположение ресурса для данного подтипа предмета.
      *
-     * @param subType подтип предмета
      * @return расположение ресурса
      */
     @Nonnull
@@ -44,7 +46,6 @@ public interface IFoodItem {
     /**
      * Возвращает локализованное имя для данного подтипа предмета.
      *
-     * @param subType подтип предмета
      * @return локализованное имя
      */
     @Nonnull

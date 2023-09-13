@@ -47,6 +47,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import static net.dries007.tfc.api.types.food.type.FoodTypes.*;
+import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 import static net.dries007.tfc.common.objects.blocks.devices.BlockFirePit.ATTACHMENT;
 import static net.dries007.tfc.common.objects.blocks.devices.BlockFirePit.LIT;
 
@@ -689,11 +690,11 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
 
     private Item getSoupItem() {
         return switch (soupNutrient) {
-            case GRAIN -> TFCItems.getFoodItem(SOUP_GRAIN);
-            case VEGETABLES -> TFCItems.getFoodItem(SOUP_VEGETABLE);
-            case FRUIT -> TFCItems.getFoodItem(SOUP_FRUIT);
-            case PROTEIN -> TFCItems.getFoodItem(SOUP_MEAT);
-            default -> TFCItems.getFoodItem(SOUP_DAIRY);
+            case GRAIN -> TFCItems.getFoodItem(INGREDIENT, SOUP_GRAIN); //TODO
+            case VEGETABLES -> TFCItems.getFoodItem(INGREDIENT, SOUP_VEGETABLE);
+            case FRUIT -> TFCItems.getFoodItem(INGREDIENT, SOUP_FRUIT);
+            case PROTEIN -> TFCItems.getFoodItem(INGREDIENT, SOUP_MEAT);
+            default -> TFCItems.getFoodItem(INGREDIENT, SOUP_DAIRY);
         };
     }
 

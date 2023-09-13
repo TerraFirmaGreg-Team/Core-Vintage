@@ -153,7 +153,7 @@ public final class ItemsTFC_old {
         // All simple foods (not meals) just use ItemFood and are registered here
 //        for (FoodType foodOld : FoodType.getFoodType()) {
 //            if (foodOld.getFoodCategory() != FoodCategories.MEAL) {
-//                simpleItems.add(register(r, "food/" + foodOld.toString().toLowerCase(), new ItemFoodTFC(foodOld), CreativeTabsTFC.FOOD));
+//                simpleItems.add(register(r, "food/" + foodOld.toString().toLowerCase(), new ItemFoodIngredient(foodOld), CreativeTabsTFC.FOOD));
 //            }
 //        }
 //        // Complex foods that require special classes go here

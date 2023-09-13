@@ -12,6 +12,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 
 import static net.dries007.tfc.api.types.food.type.FoodTypes.*;
+import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 
 public class QuernRecipes {
 
@@ -20,14 +21,14 @@ public class QuernRecipes {
 
         registry.registerAll(
                 //Grain
-                new QuernRecipe(IIngredient.of("grainBarley"), new ItemStack(TFCItems.getFoodItem(BARLEY_FLOUR), 1)).setRegistryName("barley"),
-                new QuernRecipe(IIngredient.of("grainOat"), new ItemStack(TFCItems.getFoodItem(OAT_FLOUR), 1)).setRegistryName("oat"),
-                new QuernRecipe(IIngredient.of("grainRice"), new ItemStack(TFCItems.getFoodItem(RICE_FLOUR), 1)).setRegistryName("rice"),
-                new QuernRecipe(IIngredient.of("grainRye"), new ItemStack(TFCItems.getFoodItem(RYE_FLOUR), 1)).setRegistryName("rye"),
-                new QuernRecipe(IIngredient.of("grainWheat"), new ItemStack(TFCItems.getFoodItem(WHEAT_FLOUR), 1)).setRegistryName("wheat"),
-                new QuernRecipe(IIngredient.of("grainMaize"), new ItemStack(TFCItems.getFoodItem(CORNMEAL_FLOUR), 1)).setRegistryName("maize"),
+                new QuernRecipe(IIngredient.of("grainBarley"), new ItemStack(TFCItems.getFoodItem(INGREDIENT, BARLEY_FLOUR), 1)).setRegistryName("barley"),
+                new QuernRecipe(IIngredient.of("grainOat"), new ItemStack(TFCItems.getFoodItem(INGREDIENT, OAT_FLOUR), 1)).setRegistryName("oat"),
+                new QuernRecipe(IIngredient.of("grainRice"), new ItemStack(TFCItems.getFoodItem(INGREDIENT, RICE_FLOUR), 1)).setRegistryName("rice"),
+                new QuernRecipe(IIngredient.of("grainRye"), new ItemStack(TFCItems.getFoodItem(INGREDIENT, RYE_FLOUR), 1)).setRegistryName("rye"),
+                new QuernRecipe(IIngredient.of("grainWheat"), new ItemStack(TFCItems.getFoodItem(INGREDIENT, WHEAT_FLOUR), 1)).setRegistryName("wheat"),
+                new QuernRecipe(IIngredient.of("grainMaize"), new ItemStack(TFCItems.getFoodItem(INGREDIENT, CORNMEAL_FLOUR), 1)).setRegistryName("maize"),
 
-                new QuernRecipe(new IngredientItemFood(IIngredient.of(TFCItems.getFoodItem(OLIVE))), new ItemStack(ItemsTFC_old.OLIVE_PASTE, 1)).setRegistryName("olive"),
+                new QuernRecipe(new IngredientItemFood(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, OLIVE))), new ItemStack(ItemsTFC_old.OLIVE_PASTE, 1)).setRegistryName("olive"),
 
                 //Flux
 //                new QuernRecipe(IIngredient.of("gemBorax"), new ItemStack(ItemPowder.get(Powder.FLUX), 6)).setRegistryName("borax"),

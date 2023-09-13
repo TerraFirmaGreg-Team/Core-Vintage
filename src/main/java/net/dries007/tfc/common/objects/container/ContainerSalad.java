@@ -26,6 +26,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.api.types.food.type.FoodTypes.*;
+import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 
 /**
  * We don't extend the item stack container because it's not linked to the item stack
@@ -221,17 +222,12 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
 
     @Nonnull
     private Item getSaladItem(Nutrient nutrient) {
-        switch (nutrient) {
-            case GRAIN:
-                return TFCItems.getFoodItem(SALAD_GRAIN);
-            case VEGETABLES:
-                return TFCItems.getFoodItem(SALAD_VEGETABLE);
-            case FRUIT:
-                return TFCItems.getFoodItem(SALAD_FRUIT);
-            case PROTEIN:
-                return TFCItems.getFoodItem(SALAD_MEAT);
-            default:
-                return TFCItems.getFoodItem(SALAD_DAIRY);
-        }
+        return switch (nutrient) {
+            case GRAIN -> TFCItems.getFoodItem(INGREDIENT, SALAD_GRAIN);
+            case VEGETABLES -> TFCItems.getFoodItem(INGREDIENT, SALAD_VEGETABLE);
+            case FRUIT -> TFCItems.getFoodItem(INGREDIENT, SALAD_FRUIT);
+            case PROTEIN -> TFCItems.getFoodItem(INGREDIENT, SALAD_MEAT);
+            default -> TFCItems.getFoodItem(INGREDIENT, SALAD_DAIRY);
+        };
     }
 }

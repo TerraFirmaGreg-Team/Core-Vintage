@@ -12,6 +12,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static net.dries007.tfc.api.types.bush.IBushBlock.Size;
+import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 
 public class BushType {
 
@@ -136,7 +137,7 @@ public class BushType {
      * @return Предмет с плодом.
      */
     public ItemStack getFoodDrop() {
-        return new ItemStack(TFCItems.getFoodItem(getFruit()));
+        return new ItemStack(TFCItems.getFoodItem(INGREDIENT, getFruit()));
     }
 
     /**

@@ -149,10 +149,7 @@ public class ClientProxy extends CommonProxy {
         TFCItems.WOOD_ITEMS.values().forEach(IHasModel::onModelRegister);
         TFCItems.METAL_ITEMS.values().forEach(IHasModel::onModelRegister);
         TFCItems.CROP_ITEMS.values().forEach(IHasModel::onModelRegister);
-
-
-        for (var item : TFCItems.FOOD_ITEMS.values())
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
+        TFCItems.FOOD_ITEMS.values().forEach(IHasModel::onModelRegister);
 
         for (var item : TFCItems.UNFIRED_MOLDS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));

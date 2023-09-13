@@ -8,6 +8,8 @@ import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.types.crop.variant.item.CropItemVariant;
 import net.dries007.tfc.api.types.crop.variant.item.ICropItem;
 import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.api.types.food.variant.Item.FoodItemVariant;
+import net.dries007.tfc.api.types.food.variant.Item.IFoodItem;
 import net.dries007.tfc.api.types.metal.variant.Item.IMetalItem;
 import net.dries007.tfc.api.types.metal.variant.Item.MetalItemVariant;
 import net.dries007.tfc.api.types.rock.type.RockType;
@@ -22,7 +24,6 @@ import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariant;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.common.objects.items.ceramics.ItemUnfiredMold;
-import net.dries007.tfc.common.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.minecraft.item.Item;
 
@@ -44,8 +45,8 @@ public class TFCItems {
     public static final Map<Pair<WoodItemVariant, WoodType>, IWoodItem> WOOD_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<MetalItemVariant, Material>, IMetalItem> METAL_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<CropItemVariant, CropType>, ICropItem> CROP_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<FoodItemVariant, FoodType>, IFoodItem> FOOD_ITEMS = new LinkedHashMap<>();
 
-    public static final Map<FoodType, ItemFoodTFC> FOOD_ITEMS = new LinkedHashMap<>();
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new ConcurrentHashMap<>();
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new ConcurrentHashMap<>();
 
@@ -90,12 +91,6 @@ public class TFCItems {
             }
         }
 
-        //==== ItemFood ==============================================================================================//
-
-        for (var type : FoodType.getFoodType()) {
-            if (FOOD_ITEMS.put(type, new ItemFoodTFC(type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
-        }
 
         //==== ItemMisc ==============================================================================================//
 
@@ -145,6 +140,13 @@ public class TFCItems {
     }
 
     @Nonnull
+    public static Item getSoilItem(@Nonnull SoilItemVariant variant, @Nonnull SoilType type) {
+        var item = (Item) SOIL_ITEMS.get(new Pair<>(variant, type));
+        if (item != null) return item;
+        throw new RuntimeException(String.format("Item is null: %s", type));
+    }
+
+    @Nonnull
     public static Item getMetalItem(@Nonnull MetalItemVariant variant, @Nonnull Material type) {
         var item = (Item) METAL_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
@@ -159,8 +161,8 @@ public class TFCItems {
     }
 
     @Nonnull
-    public static Item getFoodItem(@Nonnull FoodType type) {
-        var item = (Item) FOOD_ITEMS.get(type);
+    public static Item getFoodItem(@Nonnull FoodItemVariant variant, @Nonnull FoodType type) {
+        var item = (Item) FOOD_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
         throw new RuntimeException(String.format("Item is null: %s", type));
     }

@@ -4,7 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.common.objects.items.ItemTFC;
+import net.dries007.tfc.common.objects.items.TFCItem;
 import net.dries007.tfc.config.ConfigTFC;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;
@@ -35,7 +35,7 @@ import static net.minecraftforge.fluids.BlockFluidBase.LEVEL;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemWoodBucket extends ItemTFC {
+public class ItemWoodBucket extends TFCItem {
     private static final int CAPACITY = Fluid.BUCKET_VOLUME;
 
     public ItemWoodBucket() {

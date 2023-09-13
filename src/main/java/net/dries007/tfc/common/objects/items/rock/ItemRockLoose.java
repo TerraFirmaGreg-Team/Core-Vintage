@@ -2,12 +2,12 @@ package net.dries007.tfc.common.objects.items.rock;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.rock.variant.item.IRockItem;
 import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.item.IRockItem;
 import net.dries007.tfc.api.types.rock.variant.item.RockItemVariant;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.items.ItemTFC;
+import net.dries007.tfc.common.objects.items.TFCItem;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemRockLoose extends ItemTFC implements IRockItem {
+public class ItemRockLoose extends TFCItem implements IRockItem {
 
     private final RockItemVariant variant;
     private final RockType type;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.blocks.soil;
 
-import net.dries007.tfc.api.types.soil.variant.block.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
+import net.dries007.tfc.api.types.soil.variant.block.ISoilBlock;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
@@ -43,7 +43,7 @@ public abstract class BlockSoil extends Block implements ISoilBlock {
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.EARTH);
+        setCreativeTab(CreativeTabsTFC.SOIL);
         setSoundType(SoundType.GROUND);
         setHardness(2.0F);
         setHarvestLevel("shovel", 0);

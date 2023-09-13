@@ -4,7 +4,7 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.ItemSizeHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.common.objects.items.ItemTFC;
+import net.dries007.tfc.common.objects.items.TFCItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -42,7 +42,7 @@ public class ItemBlockTFC extends ItemBlock implements IItemSize {
     }
 
     /**
-     * @see ItemTFC#getItemStackLimit(ItemStack)
+     * @see TFCItem#getItemStackLimit(ItemStack)
      */
     @Override
     public int getItemStackLimit(ItemStack stack) {

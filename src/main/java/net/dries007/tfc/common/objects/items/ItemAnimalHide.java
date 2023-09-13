@@ -22,7 +22,7 @@ import java.util.Map;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
 
 @ParametersAreNonnullByDefault
-public class ItemAnimalHide extends ItemTFC {
+public class ItemAnimalHide extends TFCItem {
     private static final Map<HideType, Map<HideSize, ItemAnimalHide>> TABLE = new HashMap<>();
     protected final HideSize size;
     private final HideType type;

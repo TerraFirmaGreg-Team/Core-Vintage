@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-public class ItemMisc extends ItemTFC implements IItemSize {
+public class ItemMisc extends TFCItem implements IItemSize {
     private final String name;
     private final Size size;
     private final Weight weight;

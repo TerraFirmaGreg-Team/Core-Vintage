@@ -29,7 +29,7 @@ import java.util.List;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
-public class ItemBloom extends ItemTFC implements IMaterialItem {
+public class ItemBloom extends TFCItem implements IMaterialItem {
     private final boolean meltable;
 
     public ItemBloom(boolean meltable) {

@@ -16,7 +16,7 @@ public class BlockPeat extends Block {
 
         setRegistryName(MOD_ID, "peat");
         setTranslationKey(MOD_ID + ".peat");
-        setCreativeTab(CreativeTabsTFC.EARTH);
+        setCreativeTab(CreativeTabsTFC.SOIL);
         setSoundType(SoundType.GROUND);
         setHardness(0.6F);
         setHarvestLevel("shovel", 0);

@@ -39,7 +39,7 @@ public class BlockPeatGrass extends Block {
 
         setRegistryName(MOD_ID, "peat_grass");
         setTranslationKey(MOD_ID + ".peat_grass");
-        setCreativeTab(CreativeTabsTFC.EARTH);
+        setCreativeTab(CreativeTabsTFC.SOIL);
         setSoundType(SoundType.PLANT);
         setTickRandomly(true);
 

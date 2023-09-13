@@ -41,7 +41,7 @@ import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemFireStarter extends ItemTFC {
+public class ItemFireStarter extends TFCItem {
     public ItemFireStarter() {
 
         setRegistryName(MOD_ID, "firestarter");

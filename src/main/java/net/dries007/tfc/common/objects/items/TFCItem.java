@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public abstract class ItemTFC extends Item implements IItemSize {
+public abstract class TFCItem extends Item implements IItemSize {
     /**
      * This should NOT be overridden except for VERY SPECIAL cases
      * If an item needs to not stack, i.e. small vessels, override {@link IItemSize#canStack(ItemStack)}

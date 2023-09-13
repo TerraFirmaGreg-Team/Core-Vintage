@@ -58,8 +58,8 @@ public class TFCItems {
     public static Item WROUGHT_IRON_GRILL;
     public static Item GLUE;
     public static Item SPINDLE;
-    public static ItemTFC MORTAR;
-    public static ItemTFC HALTER;
+    public static TFCItem MORTAR;
+    public static TFCItem HALTER;
     public static Item STICK_BUNCH;
     public static Item STICK_BUNDLE;
     public static Item FIRE_CLAY;

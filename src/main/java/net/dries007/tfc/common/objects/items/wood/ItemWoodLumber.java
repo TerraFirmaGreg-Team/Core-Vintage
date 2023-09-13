@@ -2,11 +2,11 @@ package net.dries007.tfc.common.objects.items.wood;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.wood.variant.item.IWoodItem;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.item.IWoodItem;
 import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.items.ItemTFC;
+import net.dries007.tfc.common.objects.items.TFCItem;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
@@ -14,7 +14,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
 
-public class ItemWoodLumber extends ItemTFC implements IWoodItem {
+public class ItemWoodLumber extends TFCItem implements IWoodItem {
 
     private final WoodType type;
     private final WoodItemVariant variant;

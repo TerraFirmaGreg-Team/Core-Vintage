@@ -2,12 +2,12 @@ package net.dries007.tfc.common.objects.items.wood;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.wood.variant.item.IWoodItem;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.item.IWoodItem;
 import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.entity.EntityBoatTFC;
-import net.dries007.tfc.common.objects.items.ItemTFC;
+import net.dries007.tfc.common.objects.items.TFCItem;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Objects;
 
-public class ItemWoodBoat extends ItemTFC implements IWoodItem {
+public class ItemWoodBoat extends TFCItem implements IWoodItem {
 
     private final WoodType type;
     private final WoodItemVariant variant;

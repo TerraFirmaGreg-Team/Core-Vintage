@@ -1,9 +1,9 @@
 package net.dries007.tfc.common.objects.blocks.crop;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.types.crop.variant.block.CropBlockVariant;
+import net.dries007.tfc.api.types.crop.variant.block.ICropBlock;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;

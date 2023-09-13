@@ -275,9 +275,9 @@ public class CommonProxy {
 
         //==== Crop ==================================================================================================//
 
-        for (var seed : SEED_ITEMS.values()) {
-            r.register(seed);
-        }
+
+        for (var cropItem : CROP_ITEMS.values()) r.register((Item) cropItem);
+
 
         //==== Food ==================================================================================================//
 

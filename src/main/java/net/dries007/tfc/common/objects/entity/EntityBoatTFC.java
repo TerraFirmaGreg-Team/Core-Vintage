@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.entity;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.variant.block.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.TFCItems;

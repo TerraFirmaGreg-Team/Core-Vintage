@@ -4,7 +4,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.plant.IPlantBlock;
+import net.dries007.tfc.api.types.plant.variant.block.IPlantBlock;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;

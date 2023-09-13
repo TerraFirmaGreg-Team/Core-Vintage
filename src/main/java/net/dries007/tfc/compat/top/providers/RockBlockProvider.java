@@ -5,7 +5,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.types.rock.variant.block.IRockBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;

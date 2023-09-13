@@ -24,6 +24,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Supplier;
 
+import static net.dries007.tfc.api.types.crop.variant.item.CropItemVariants.SEED;
+
 public class CropType {
     private static final Set<CropType> CROP_TYPES = new LinkedHashSet<>();
 
@@ -186,7 +188,7 @@ public class CropType {
         }
 
         public Builder setSeed() {
-            this.seedDrop = () -> new ItemStack(TFCItems.getSeedItem(this.build()));
+            this.seedDrop = () -> new ItemStack(TFCItems.getCropItem(SEED, this.build()));
             return this;
         }
 

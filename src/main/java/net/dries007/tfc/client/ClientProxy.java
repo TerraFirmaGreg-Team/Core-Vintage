@@ -12,10 +12,10 @@ import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.types.metal.IMetalBlock;
+import net.dries007.tfc.api.types.metal.variant.block.IMetalBlock;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
-import net.dries007.tfc.api.types.wood.IWoodBlock;
-import net.dries007.tfc.api.types.wood.IWoodItem;
+import net.dries007.tfc.api.types.wood.variant.block.IWoodBlock;
+import net.dries007.tfc.api.types.wood.variant.item.IWoodItem;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
@@ -147,10 +147,9 @@ public class ClientProxy extends CommonProxy {
 
         TFCItems.ROCK_ITEMS.values().forEach(IHasModel::onModelRegister);
         TFCItems.WOOD_ITEMS.values().forEach(IHasModel::onModelRegister);
+        TFCItems.METAL_ITEMS.values().forEach(IHasModel::onModelRegister);
+        TFCItems.CROP_ITEMS.values().forEach(IHasModel::onModelRegister);
 
-
-        for (var item : TFCItems.SEED_ITEMS.values())
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
         for (var item : TFCItems.FOOD_ITEMS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));

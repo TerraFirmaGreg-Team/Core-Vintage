@@ -1,7 +1,6 @@
 package net.dries007.tfc.api.types.metal.variant.block;
 
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.api.types.metal.IMetalBlock;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.blocks.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.wood.IWoodBlock;
+import net.dries007.tfc.api.types.wood.variant.block.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
 import net.dries007.tfc.client.util.CustomStateMap;

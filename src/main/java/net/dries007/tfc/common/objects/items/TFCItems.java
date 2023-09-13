@@ -1,18 +1,23 @@
 package net.dries007.tfc.common.objects.items;
 
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.crop.type.CropType;
+import net.dries007.tfc.api.types.crop.variant.item.CropItemVariant;
+import net.dries007.tfc.api.types.crop.variant.item.ICropItem;
 import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.api.types.rock.IRockItem;
+import net.dries007.tfc.api.types.metal.variant.Item.IMetalItem;
+import net.dries007.tfc.api.types.metal.variant.Item.MetalItemVariant;
 import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.item.IRockItem;
 import net.dries007.tfc.api.types.rock.variant.item.RockItemVariant;
-import net.dries007.tfc.api.types.soil.ISoilItem;
 import net.dries007.tfc.api.types.soil.type.SoilType;
+import net.dries007.tfc.api.types.soil.variant.item.ISoilItem;
 import net.dries007.tfc.api.types.soil.variant.item.SoilItemVariant;
-import net.dries007.tfc.api.types.wood.IWoodItem;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.types.wood.variant.item.IWoodItem;
 import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariant;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
@@ -37,8 +42,9 @@ public class TFCItems {
     public static final Map<Pair<RockItemVariant, RockType>, IRockItem> ROCK_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<SoilItemVariant, SoilType>, ISoilItem> SOIL_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<WoodItemVariant, WoodType>, IWoodItem> WOOD_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<MetalItemVariant, Material>, IMetalItem> METAL_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<CropItemVariant, CropType>, ICropItem> CROP_ITEMS = new LinkedHashMap<>();
 
-    public static final Map<CropType, ItemCropSeeds> SEED_ITEMS = new ConcurrentHashMap<>();
     public static final Map<FoodType, ItemFoodTFC> FOOD_ITEMS = new LinkedHashMap<>();
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new ConcurrentHashMap<>();
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new ConcurrentHashMap<>();
@@ -82,13 +88,6 @@ public class TFCItems {
                 if (FIRED_MOLDS.put(orePrefix, new ItemMold(orePrefix)) != null)
                     throw new RuntimeException(String.format("Duplicate registry detected: %s", orePrefix));
             }
-        }
-
-        //==== ItemSeed ==============================================================================================//
-
-        for (var type : CropType.getCropTypes()) {
-            if (SEED_ITEMS.put(type, new ItemCropSeeds(type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
         }
 
         //==== ItemFood ==============================================================================================//
@@ -146,8 +145,15 @@ public class TFCItems {
     }
 
     @Nonnull
-    public static Item getSeedItem(@Nonnull CropType type) {
-        var item = (Item) SEED_ITEMS.get(type);
+    public static Item getMetalItem(@Nonnull MetalItemVariant variant, @Nonnull Material type) {
+        var item = (Item) METAL_ITEMS.get(new Pair<>(variant, type));
+        if (item != null) return item;
+        throw new RuntimeException(String.format("Item is null: %s", type));
+    }
+
+    @Nonnull
+    public static Item getCropItem(@Nonnull CropItemVariant variant, @Nonnull CropType type) {
+        var item = (Item) CROP_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
         throw new RuntimeException(String.format("Item is null: %s", type));
     }

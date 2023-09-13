@@ -24,7 +24,7 @@ import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IPredator;
-import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.api.types.rock.variant.block.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.devices.BlockQuern;

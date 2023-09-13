@@ -4,12 +4,12 @@ import com.google.common.collect.Lists;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IHuntable;
 import net.dries007.tfc.api.types.animal.IPredator;
-import net.dries007.tfc.api.types.soil.ISoilBlock;
+import net.dries007.tfc.api.types.soil.variant.block.ISoilBlock;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.common.objects.blocks.crop.BlockCropDead;
 import net.dries007.tfc.common.objects.blocks.plants.BlockMushroomTFC;
-import net.dries007.tfc.common.objects.items.ItemCropSeeds;
+import net.dries007.tfc.common.objects.items.crop.ItemCropSeed;
 import net.dries007.tfc.common.objects.tileentities.TECropBase;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.config.ConfigTFC;
@@ -185,7 +185,7 @@ public class WorldRegenHandler {
         List<Entity> removals = new ArrayList<>();
         for (ClassInheritanceMultiMap<Entity> target : world.getChunk(pos.x, pos.z).getEntityLists()) {
             target.forEach(entity -> {
-                if (entity instanceof EntityItem && ((EntityItem) entity).getItem().getItem() instanceof ItemCropSeeds) {
+                if (entity instanceof EntityItem && ((EntityItem) entity).getItem().getItem() instanceof ItemCropSeed) {
                     removals.add(entity);
                 }
             });

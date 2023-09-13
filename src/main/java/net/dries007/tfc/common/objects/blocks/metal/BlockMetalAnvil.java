@@ -7,7 +7,7 @@ import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.metal.IMetalBlock;
+import net.dries007.tfc.api.types.metal.variant.block.IMetalBlock;
 import net.dries007.tfc.api.types.metal.variant.block.MetalBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IHasModel;

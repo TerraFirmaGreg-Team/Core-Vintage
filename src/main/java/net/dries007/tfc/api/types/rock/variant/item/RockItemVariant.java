@@ -1,6 +1,5 @@
 package net.dries007.tfc.api.types.rock.variant.item;
 
-import net.dries007.tfc.api.types.rock.IRockItem;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.util.Pair;
 
@@ -35,11 +34,11 @@ public class RockItemVariant {
         this.factory = factory;
 
         if (name.isEmpty()) {
-            throw new RuntimeException(String.format("RockItemVariant name must contain any character: [%s]", name));
+            throw new RuntimeException(String.format("MetalItemVariant name must contain any character: [%s]", name));
         }
 
         if (!ROCK_ITEM_VARIANTS.add(this)) {
-            throw new RuntimeException(String.format("RockItemVariant: [%s] already exists!", name));
+            throw new RuntimeException(String.format("MetalItemVariant: [%s] already exists!", name));
         }
 
         for (var type : RockType.getRockTypes()) {

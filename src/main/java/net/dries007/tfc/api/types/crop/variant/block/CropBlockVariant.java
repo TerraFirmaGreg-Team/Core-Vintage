@@ -1,6 +1,5 @@
 package net.dries007.tfc.api.types.crop.variant.block;
 
-import net.dries007.tfc.api.types.crop.ICropBlock;
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.util.Pair;
 

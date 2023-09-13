@@ -1,6 +1,5 @@
 package net.dries007.tfc.api.types.soil.variant.item;
 
-import net.dries007.tfc.api.types.soil.ISoilItem;
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.util.Pair;
 
@@ -12,7 +11,7 @@ import java.util.function.BiFunction;
 import static net.dries007.tfc.common.objects.items.TFCItems.SOIL_ITEMS;
 
 /**
- * Класс WoodItemVariant представляет вариант деревянного блока.
+ * Класс CropItemVariant представляет вариант деревянного блока.
  */
 public class SoilItemVariant {
 
@@ -35,11 +34,11 @@ public class SoilItemVariant {
         this.factory = factory;
 
         if (name.isEmpty()) {
-            throw new RuntimeException(String.format("WoodItemVariant name must contain any character: [%s]", name));
+            throw new RuntimeException(String.format("CropItemVariant name must contain any character: [%s]", name));
         }
 
         if (!SOIL_ITEM_VARIANTS.add(this)) {
-            throw new RuntimeException(String.format("WoodItemVariant: [%s] already exists!", name));
+            throw new RuntimeException(String.format("CropItemVariant: [%s] already exists!", name));
         }
 
         for (var type : SoilType.getSoilTypes()) {

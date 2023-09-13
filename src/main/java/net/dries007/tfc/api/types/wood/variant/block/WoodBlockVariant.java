@@ -1,6 +1,5 @@
 package net.dries007.tfc.api.types.wood.variant.block;
 
-import net.dries007.tfc.api.types.wood.IWoodBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.util.Pair;
 
@@ -12,7 +11,7 @@ import java.util.function.BiFunction;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.WOOD_BLOCKS;
 
 /**
- * Класс WoodItemVariant представляет вариант деревянного блока.
+ * Класс CropItemVariant представляет вариант деревянного блока.
  */
 public class WoodBlockVariant {
 
@@ -35,11 +34,11 @@ public class WoodBlockVariant {
         this.factory = factory;
 
         if (name.isEmpty()) {
-            throw new RuntimeException(String.format("WoodItemVariant name must contain any character: [%s]", name));
+            throw new RuntimeException(String.format("CropItemVariant name must contain any character: [%s]", name));
         }
 
         if (!WOOD_BLOCK_VARIANTS.add(this)) {
-            throw new RuntimeException(String.format("WoodItemVariant: [%s] already exists!", name));
+            throw new RuntimeException(String.format("CropItemVariant: [%s] already exists!", name));
         }
 
         for (var type : WoodType.getWoodTypes()) {

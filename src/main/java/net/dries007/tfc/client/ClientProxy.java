@@ -146,6 +146,7 @@ public class ClientProxy extends CommonProxy {
         //==== ITEMS =================================================================================================//
 
         TFCItems.ROCK_ITEMS.values().forEach(IHasModel::onModelRegister);
+        TFCItems.SOIL_ITEMS.values().forEach(IHasModel::onModelRegister);
         TFCItems.WOOD_ITEMS.values().forEach(IHasModel::onModelRegister);
         TFCItems.METAL_ITEMS.values().forEach(IHasModel::onModelRegister);
         TFCItems.CROP_ITEMS.values().forEach(IHasModel::onModelRegister);

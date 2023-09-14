@@ -3,8 +3,8 @@ package net.dries007.tfc.common.objects.blocks.rock;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.rock.variant.block.IRockBlock;
 import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.block.IRockBlock;
 import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
@@ -67,8 +67,7 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock, IItemSize 
 
     @Override
     public ItemBlock getItemBlock() {
-        if (this.getCategory().hasAnvil()) return new ItemBlockTFC(this);
-        return null;
+        return this.getCategory().hasAnvil() ? new ItemBlockTFC(this) : null;
     }
 
     @Nonnull

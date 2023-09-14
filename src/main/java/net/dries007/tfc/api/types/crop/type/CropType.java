@@ -24,7 +24,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.api.types.crop.variant.item.CropItemVariants.SEED;
 import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 
 public class CropType {
@@ -188,8 +187,8 @@ public class CropType {
             return this;
         }
 
-        public Builder setSeed() {
-            this.seedDrop = () -> new ItemStack(TFCItems.getCropItem(SEED, this.build()));
+        public Builder setSeed(Item item) {
+            this.seedDrop = () -> new ItemStack(item);
             return this;
         }
 

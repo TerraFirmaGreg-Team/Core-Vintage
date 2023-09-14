@@ -2,7 +2,6 @@ package net.dries007.tfc.api.types.tree.type;
 
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
-import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
 import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
@@ -34,7 +33,6 @@ import java.util.Random;
 import java.util.Set;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LOG;
@@ -120,7 +118,6 @@ public class TreeType extends TreeFamily {
 
         this.getRegisterableBlocks(BLOCKS);
         this.getRegisterableItems(ITEMS);
-        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
 
         if (name.getPath().isEmpty()) {
             throw new RuntimeException(String.format("TreeType name must contain any character: [%s]", name));

@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.Material;
 import net.dries007.tfc.api.types.GroundcoverType;
@@ -48,9 +49,9 @@ import net.minecraftforge.fluids.FluidRegistry;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.*;
 import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.*;
 import static net.minecraft.block.material.Material.WATER;
@@ -71,13 +72,13 @@ public class TFCBlocks {
 
 
     // Блоки, имеющие предмет
-    public static final List<ItemBlock> ITEM_BLOCKS = new ArrayList<>();
+    public static final ArrayList<ItemBlock> ITEM_BLOCKS = new ArrayList<>();
 
     // Блоки, не имеющие предмета
-    public static final List<Block> BLOCKS = new ArrayList<>();
+    public static final ArrayList<Block> BLOCKS = new ArrayList<>();
 
     // Жидкости
-    public static final List<BlockFluidBase> FLUID = new ArrayList<>();
+    public static final ArrayList<BlockFluidBase> FLUID = new ArrayList<>();
 
     public static BlockTreeRootyMimic ROOTY_DIRT_MIMIC;
 
@@ -202,6 +203,7 @@ public class TFCBlocks {
         BLOCKS.add(THATCH_BED = new BlockThatchBed());
         BLOCKS.add(CLADDING = new BlockMetalCladding());
         BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
+        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
     }
 
     @Nonnull

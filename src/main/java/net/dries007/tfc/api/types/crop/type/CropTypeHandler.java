@@ -13,7 +13,6 @@ public class CropTypeHandler {
         BARLEY = new CropType.Builder("barley")
                 .setCategory(CropCategories.SIMPLE)
                 .setFoodDrop(FoodTypes.BARLEY)
-                .setSeed()
                 .setGrowthTime(0.4f)
                 .setTemp(0f, 1f, 26f, 33f)
                 .setRain(50f, 70f, 310f, 330f)

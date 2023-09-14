@@ -20,7 +20,6 @@ public class RockBlockVariantHandler {
         ANVIL = new RockBlockVariant("anvil", 6f, BlockRockAnvil::new);
         MAGMA = new RockBlockVariant("magma", 6f, BlockRockMagma::new);
 
-
         COBBLE_MOSSY = new RockBlockVariant("cobble/mossy", 6f, BlockRockMossy::new);
         BRICKS_MOSSY = new RockBlockVariant("bricks/mossy", 6f, BlockRockMossy::new);
 

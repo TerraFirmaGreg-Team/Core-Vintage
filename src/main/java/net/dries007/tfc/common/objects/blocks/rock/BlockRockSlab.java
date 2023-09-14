@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.blocks.rock;
 
-import net.dries007.tfc.api.types.rock.variant.block.IRockBlock;
 import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.api.types.rock.variant.block.IRockBlock;
 import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
@@ -65,31 +65,25 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     }
 
     protected static Block getFullBlockFromSlab(RockBlockVariant variant, RockType type) {
-        if (variant == SLAB_RAW || variant == SLAB_DOUBLE_RAW) {
-            return TFCBlocks.getRockBlock(RAW, type);
-        } else if (variant == SLAB_COBBLE || variant == SLAB_DOUBLE_COBBLE) {
-            return TFCBlocks.getRockBlock(COBBLE, type);
-        } else if (variant == SLAB_SMOOTH || variant == SLAB_DOUBLE_SMOOTH) {
-            return TFCBlocks.getRockBlock(SMOOTH, type);
-        } else if (variant == SLAB_BRICK || variant == SLAB_DOUBLE_BRICK) {
-            return TFCBlocks.getRockBlock(BRICKS, type);
-        }
-
-        throw new RuntimeException(String.format("Full block from slab not founded: %s, %s", variant, type));
+        return switch (variant.toString()) {
+            case "slab/raw", "slab_double/raw" -> TFCBlocks.getRockBlock(RAW, type);
+            case "slab/cobble", "slab_double/cobble" -> TFCBlocks.getRockBlock(COBBLE, type);
+            case "slab/smooth", "slab_double/smooth" -> TFCBlocks.getRockBlock(SMOOTH, type);
+            case "slab/bricks", "slab_double/bricks" -> TFCBlocks.getRockBlock(BRICKS, type);
+            default ->
+                    throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", variant, type));
+        };
     }
 
     protected static Block getDoubleSlabFromSlab(RockBlockVariant variant, RockType type) {
-        if (variant == SLAB_RAW) {
-            return TFCBlocks.getRockBlock(SLAB_DOUBLE_RAW, type);
-        } else if (variant == SLAB_COBBLE) {
-            return TFCBlocks.getRockBlock(SLAB_DOUBLE_COBBLE, type);
-        } else if (variant == SLAB_SMOOTH) {
-            return TFCBlocks.getRockBlock(SLAB_DOUBLE_SMOOTH, type);
-        } else if (variant == SLAB_BRICK) {
-            return TFCBlocks.getRockBlock(SLAB_DOUBLE_BRICK, type);
-        }
-
-        throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", variant, type));
+        return switch (variant.toString()) {
+            case "slab/raw" -> TFCBlocks.getRockBlock(SLAB_DOUBLE_RAW, type);
+            case "slab/cobble" -> TFCBlocks.getRockBlock(SLAB_DOUBLE_COBBLE, type);
+            case "slab/smooth" -> TFCBlocks.getRockBlock(SLAB_DOUBLE_SMOOTH, type);
+            case "slab/bricks" -> TFCBlocks.getRockBlock(SLAB_DOUBLE_BRICK, type);
+            default ->
+                    throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", variant, type));
+        };
     }
 
     @Nonnull

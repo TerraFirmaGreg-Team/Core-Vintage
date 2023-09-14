@@ -112,17 +112,6 @@ public class TFCBlocks {
 
     public static void preInit() {
 
-        //==== Rock ==================================================================================================//
-
-        for (var variant : RockBlockVariant.getRockBlockVariants()) {
-            for (var type : RockType.getRockTypes()) {
-                var rockBlock = variant.create(type);
-
-                if (ROCK_BLOCKS.put(new Pair<>(variant, type), rockBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", variant, type));
-            }
-        }
-
         //==== Plant =================================================================================================//
 
         for (var type : PlantType.getPlantTypes()) {

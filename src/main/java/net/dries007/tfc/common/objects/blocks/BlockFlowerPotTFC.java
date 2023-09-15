@@ -1,6 +1,7 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.plant.type.PlantType;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
@@ -22,7 +23,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -42,7 +42,7 @@ public class BlockFlowerPotTFC extends Block {
 
         setCreativeTab(CreativeTabsTFC.FLORA);
         setRegistryName(TerraFirmaCraft.identifier(blockRegistryName));
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
     }
 
     public static BlockFlowerPotTFC get(PlantType plant) {

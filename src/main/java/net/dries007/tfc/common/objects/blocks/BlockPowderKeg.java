@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -38,7 +39,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * Powderkeg is an inventory that preserves the contents when sealed
@@ -61,8 +61,8 @@ public class BlockPowderKeg extends Block implements IItemSize, ILightableBlock 
         setDefaultState(blockState.getBaseState().withProperty(LIT, false).withProperty(SEALED, false));
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "powderkeg");
-        setTranslationKey(MOD_ID + ".powderkeg");
+        setRegistryName(Tags.MOD_ID, "powderkeg");
+        setTranslationKey(Tags.MOD_ID + ".powderkeg");
     }
 
     /**

@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.gui;
 
 import gregtech.api.unification.material.Material;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.util.FluidSpriteCache;
@@ -27,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class GuiCrucible extends GuiContainerTE<TECrucible> {
     private static final ResourceLocation CRUCIBLE_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/crucible.png");
@@ -55,7 +55,7 @@ public class GuiCrucible extends GuiContainerTE<TECrucible> {
                 tooltip.add(I18n.format(tile.getAlloy().getResult().getLocalizedName()));
                 int amount = tile.getAlloy().getAmount();
                 int maxAmount = tile.getAlloy().getMaxAmount();
-                tooltip.add(I18n.format(MOD_ID + ".tooltip.crucible_units", amount, maxAmount));
+                tooltip.add(I18n.format(Tags.MOD_ID + ".tooltip.crucible_units", amount, maxAmount));
                 drawHoveringText(tooltip, mouseX, mouseY);
             }
         }

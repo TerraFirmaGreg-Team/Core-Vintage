@@ -3,6 +3,7 @@ package net.dries007.tfc.common.objects.recipes.handlers;
 import gregtech.api.GregTechAPI;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.workbench.UnmoldRecipe;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.wood.type.WoodType;
@@ -18,7 +19,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.*;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.PRESSURE_PLATE;
 import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.*;
@@ -42,7 +42,7 @@ public class WorkbenchRecipes {
                 if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
                     if (material.hasFlag(TFGMaterialFlags.TOOL_MATERIAL_CAN_BE_UNMOLDED) || orePrefix == OrePrefix.ingot) {
                         registry.register(
-                                new UnmoldRecipe(new ItemStack(TFCItems.FIRED_MOLDS.get(orePrefix)), material, 1).setRegistryName(MOD_ID, "unmold_" + orePrefix.name + "_" + material.getName())
+                                new UnmoldRecipe(new ItemStack(TFCItems.FIRED_MOLDS.get(orePrefix)), material, 1).setRegistryName(Tags.MOD_ID, "unmold_" + orePrefix.name + "_" + material.getName())
                         );
                     }
 

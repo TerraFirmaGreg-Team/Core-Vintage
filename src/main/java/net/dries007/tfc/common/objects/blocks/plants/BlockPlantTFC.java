@@ -1,11 +1,12 @@
 package net.dries007.tfc.common.objects.blocks.plants;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.plant.variant.block.IPlantBlock;
 import net.dries007.tfc.api.types.plant.type.PlantType;
+import net.dries007.tfc.api.types.plant.variant.block.IPlantBlock;
 import net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
@@ -51,7 +52,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
@@ -80,8 +80,8 @@ public class BlockPlantTFC extends BlockBush implements IPlantBlock, IItemSize {
         this.modelLocation = TerraFirmaCraft.identifier("plants/" + plant);
         var blockRegistryName = String.format("plants/%s/%s", plantBlockVariant, plant);
 
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(Tags.MOD_ID, blockRegistryName);
+        setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.FLORA);
         setTickRandomly(true);
         setSoundType(SoundType.PLANT);

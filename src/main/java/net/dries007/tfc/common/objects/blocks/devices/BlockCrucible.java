@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.devices;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -34,7 +35,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockCrucible extends Block implements IHeatConsumerBlock, IItemSize {
@@ -53,8 +53,8 @@ public class BlockCrucible extends Block implements IHeatConsumerBlock, IItemSiz
         setSoundType(SoundType.METAL);
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "crucible");
-        setTranslationKey(MOD_ID + ".crucible");
+        setRegistryName(Tags.MOD_ID, "crucible");
+        setTranslationKey(Tags.MOD_ID + ".crucible");
     }
 
     @Override

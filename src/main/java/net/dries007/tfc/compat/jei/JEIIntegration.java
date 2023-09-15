@@ -11,7 +11,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
@@ -53,25 +53,25 @@ import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.LOOS
 @ParametersAreNonnullByDefault
 @JEIPlugin
 public final class JEIIntegration implements IModPlugin {
-    public static final String ALLOY_UID = TerraFirmaCraft.MOD_ID + ".alloy";
-    public static final String ANVIL_UID = TerraFirmaCraft.MOD_ID + ".anvil";
-    public static final String BARREL_UID = TerraFirmaCraft.MOD_ID + ".barrel";
-    public static final String BLAST_FURNACE_UID = TerraFirmaCraft.MOD_ID + ".blast_furnace";
-    public static final String CASTING_UID = TerraFirmaCraft.MOD_ID + ".casting";
-    public static final String BLOOMERY_UID = TerraFirmaCraft.MOD_ID + ".bloomery";
-    public static final String CHISEL_UID = TerraFirmaCraft.MOD_ID + ".chisel";
-    public static final String HEAT_UID = TerraFirmaCraft.MOD_ID + ".heat";
-    public static final String KNAP_CLAY_UID = TerraFirmaCraft.MOD_ID + ".knap.clay";
-    public static final String KNAP_FIRECLAY_UID = TerraFirmaCraft.MOD_ID + ".knap.fireclay";
-    public static final String KNAP_LEATHER_UID = TerraFirmaCraft.MOD_ID + ".knap.leather";
-    public static final String KNAP_STONE_UID = TerraFirmaCraft.MOD_ID + ".knap.stone";
-    public static final String METAL_HEAT_UID = TerraFirmaCraft.MOD_ID + ".metal_heat";
-    public static final String LOOM_UID = TerraFirmaCraft.MOD_ID + ".loom";
-    public static final String QUERN_UID = TerraFirmaCraft.MOD_ID + ".quern";
-    public static final String ROCK_LAYER_UID = TerraFirmaCraft.MOD_ID + ".rock_layer";
-    public static final String WELDING_UID = TerraFirmaCraft.MOD_ID + ".welding";
-    public static final String SCRAPING_UID = TerraFirmaCraft.MOD_ID + ".scraping";
-    public static final String UNMOLD_UID = TerraFirmaCraft.MOD_ID + ".unmold";
+    public static final String ALLOY_UID = Tags.MOD_ID + ".alloy";
+    public static final String ANVIL_UID = Tags.MOD_ID + ".anvil";
+    public static final String BARREL_UID = Tags.MOD_ID + ".barrel";
+    public static final String BLAST_FURNACE_UID = Tags.MOD_ID + ".blast_furnace";
+    public static final String CASTING_UID = Tags.MOD_ID + ".casting";
+    public static final String BLOOMERY_UID = Tags.MOD_ID + ".bloomery";
+    public static final String CHISEL_UID = Tags.MOD_ID + ".chisel";
+    public static final String HEAT_UID = Tags.MOD_ID + ".heat";
+    public static final String KNAP_CLAY_UID = Tags.MOD_ID + ".knap.clay";
+    public static final String KNAP_FIRECLAY_UID = Tags.MOD_ID + ".knap.fireclay";
+    public static final String KNAP_LEATHER_UID = Tags.MOD_ID + ".knap.leather";
+    public static final String KNAP_STONE_UID = Tags.MOD_ID + ".knap.stone";
+    public static final String METAL_HEAT_UID = Tags.MOD_ID + ".metal_heat";
+    public static final String LOOM_UID = Tags.MOD_ID + ".loom";
+    public static final String QUERN_UID = Tags.MOD_ID + ".quern";
+    public static final String ROCK_LAYER_UID = Tags.MOD_ID + ".rock_layer";
+    public static final String WELDING_UID = Tags.MOD_ID + ".welding";
+    public static final String SCRAPING_UID = Tags.MOD_ID + ".scraping";
+    public static final String UNMOLD_UID = Tags.MOD_ID + ".unmold";
 
     private static IModRegistry REGISTRY;
 

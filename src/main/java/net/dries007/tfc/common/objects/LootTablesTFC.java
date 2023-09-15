@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.loot.ApplySimpleSkill;
@@ -11,9 +12,8 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class LootTablesTFC {
     public static ResourceLocation ANIMALS_BLACK_BEAR;
     public static ResourceLocation ANIMALS_GRIZZLY_BEAR;

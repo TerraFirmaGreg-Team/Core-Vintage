@@ -4,7 +4,7 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.tileentities.TELogPile;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
@@ -15,7 +15,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 public class LogPileProvider implements IProbeInfoProvider {
     @Override
     public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":log_pile";
+        return Tags.MOD_ID + ":log_pile";
     }
 
     @Override

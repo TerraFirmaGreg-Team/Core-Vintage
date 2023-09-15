@@ -1,6 +1,7 @@
 package net.dries007.tfc.common.objects.tileentities;
 
 import gregtech.common.items.ToolItems;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
@@ -42,7 +43,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class TEAnvilTFC extends TEInventory {
@@ -284,7 +284,7 @@ public class TEAnvilTFC extends TEInventory {
             ItemStack fluxStack = inventory.getStackInSlot(SLOT_FLUX);
             if (fluxStack.isEmpty()) {
                 // No flux
-                TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MOD_ID + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
+                TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
                 return false;
             }
 
@@ -293,9 +293,9 @@ public class TEAnvilTFC extends TEInventory {
             IForgeable cap2 = input2.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
             if (cap1 == null || cap2 == null || !cap1.isWeldable() || !cap2.isWeldable()) {
                 if (cap1 instanceof IItemHeat && cap2 instanceof IItemHeat) {
-                    TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MOD_ID + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
+                    TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
                 } else {
-                    TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+                    TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
                 }
                 return false;
             }
@@ -323,7 +323,7 @@ public class TEAnvilTFC extends TEInventory {
         }
 
         // For when there is both inputs but no recipe that matches
-        TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+        TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
         return false;
     }
 

@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.tileentities.TENestBox;
@@ -25,7 +26,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockNestBox extends Block {
@@ -36,8 +36,8 @@ public class BlockNestBox extends Block {
         setHardness(0.5F);
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "nest_box");
-        setTranslationKey(MOD_ID + ".nest_box");
+        setRegistryName(Tags.MOD_ID, "nest_box");
+        setTranslationKey(Tags.MOD_ID + ".nest_box");
 
         Blocks.FIRE.setFireInfo(this, 60, 20);
     }

@@ -2,6 +2,7 @@ package net.dries007.tfc.compat.dynamictrees.client;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.models.bakedmodels.BakedModelBlockRooty;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.client.util.GrassColorHandler;
 import net.minecraft.block.Block;
@@ -17,11 +18,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 
 @SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(modid = MOD_ID, value = {Side.CLIENT})
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID, value = {Side.CLIENT})
 public class ClientEventHandler {
     public ClientEventHandler() {
     }

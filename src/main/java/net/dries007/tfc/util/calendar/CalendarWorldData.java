@@ -1,5 +1,6 @@
 package net.dries007.tfc.util.calendar;
 
+import net.dries007.tfc.Tags;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
@@ -10,12 +11,11 @@ import org.apache.logging.log4j.Logger;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class CalendarWorldData extends WorldSavedData {
-    private static final String NAME = MOD_ID + "_calendar";
-    private static final String NAME_PRE_V1_5_0_X = MOD_ID + ":calendar";
+    private static final String NAME = Tags.MOD_ID + "_calendar";
+    private static final String NAME_PRE_V1_5_0_X = Tags.MOD_ID + ":calendar";
 
     private static final Logger LOGGER = LogManager.getLogger();
     private final CalendarTFC calendar;

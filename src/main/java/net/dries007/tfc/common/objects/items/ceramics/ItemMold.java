@@ -3,6 +3,7 @@ package net.dries007.tfc.common.objects.items.ceramics;
 import gregtech.api.fluids.MetaFluids;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
@@ -31,7 +32,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
 @ParametersAreNonnullByDefault
@@ -43,7 +43,7 @@ public class ItemMold extends ItemPottery {
         this.orePrefix = type;
 
         setCreativeTab(CreativeTabsTFC.POTTERY);
-        setRegistryName(MOD_ID, "ceramics/fired/mold/" + orePrefix.name.toLowerCase());
+        setRegistryName(Tags.MOD_ID, "ceramics/fired/mold/" + orePrefix.name.toLowerCase());
     }
 
     @Nonnull

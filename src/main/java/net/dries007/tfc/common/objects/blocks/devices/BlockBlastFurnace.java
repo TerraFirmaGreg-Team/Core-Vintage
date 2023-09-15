@@ -2,6 +2,7 @@ package net.dries007.tfc.common.objects.blocks.devices;
 
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.TFCGuiHandler;
@@ -32,7 +33,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Predicate;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, ILightableBlock {
@@ -72,8 +72,8 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
         setHarvestLevel("pickaxe", 0);
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "blast_furnace");
-        setTranslationKey(MOD_ID + ".blast_furnace");
+        setRegistryName(Tags.MOD_ID, "blast_furnace");
+        setTranslationKey(Tags.MOD_ID + ".blast_furnace");
     }
 
     /**

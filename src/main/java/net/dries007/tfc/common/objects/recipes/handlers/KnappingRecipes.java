@@ -3,6 +3,7 @@ package net.dries007.tfc.common.objects.recipes.handlers;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
@@ -14,7 +15,6 @@ import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class KnappingRecipes {
 
@@ -55,7 +55,7 @@ public class KnappingRecipes {
                 new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_VESSEL), " XXX ", "XXXXX", "XXXXX", "XXXXX", " XXX ").setRegistryName("clay_small_vessel"),
                 new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_JUG), " X   ", "XXXX ", "XXX X", "XXXX ", "XXX  ").setRegistryName("clay_jug"),
                 new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_POT), "X   X", "X   X", "X   X", "XXXXX", " XXX ").setRegistryName("clay_pot"),
-                new KnappingRecipeSimple(KnappingType.CLAY, false, new ItemStack(ItemsTFC_old.UNFIRED_BOWL, 2), "X   X", " XXX ").setRegistryName(MOD_ID, "clay_bowl"),
+                new KnappingRecipeSimple(KnappingType.CLAY, false, new ItemStack(ItemsTFC_old.UNFIRED_BOWL, 2), "X   X", " XXX ").setRegistryName(Tags.MOD_ID, "clay_bowl"),
                 new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_BOWL, 4), "X   X", " XXX ", "     ", "X   X", " XXX ").setRegistryName("clay_bowl_2"),
                 new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_LARGE_VESSEL), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("clay_large_vessel"),
                 new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("clay_brick"),

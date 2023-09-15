@@ -2,6 +2,7 @@ package net.dries007.tfc.common.objects.items;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
@@ -17,11 +18,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.util.Helpers.getNull;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
-@GameRegistry.ObjectHolder(MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
+@GameRegistry.ObjectHolder(Tags.MOD_ID)
 public final class ItemsTFC_old {
 
     @GameRegistry.ObjectHolder("crop/product/jute")
@@ -209,8 +209,8 @@ public final class ItemsTFC_old {
     }
 
     private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
-        item.setRegistryName(MOD_ID, name);
-        item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+        item.setRegistryName(Tags.MOD_ID, name);
+        item.setTranslationKey(Tags.MOD_ID + "." + name.replace('/', '.'));
         item.setCreativeTab(ct);
         r.register(item);
         return item;

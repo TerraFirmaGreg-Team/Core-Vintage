@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedHide;
@@ -31,7 +32,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * Due to implementation, this will only ever be a soaked hide -> scraped hide
@@ -48,8 +48,8 @@ public class BlockPlacedHide extends Block {
         setDefaultState(getBlockState().getBaseState().withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM));
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "placed_hide");
-        setTranslationKey(MOD_ID + ".placed_hide");
+        setRegistryName(Tags.MOD_ID, "placed_hide");
+        setTranslationKey(Tags.MOD_ID + ".placed_hide");
     }
 
     private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {

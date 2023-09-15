@@ -4,7 +4,7 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.util.Helpers;
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class TreeProvider implements IProbeInfoProvider {
     @Override
     public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":tree";
+        return Tags.MOD_ID + ":tree";
     }
 
     @Override

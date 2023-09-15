@@ -4,6 +4,7 @@ import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import gregtech.api.unification.material.event.MaterialEvent;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
@@ -90,13 +91,12 @@ import net.minecraftforge.registries.RegistryBuilder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 import static net.dries007.tfc.common.objects.items.TFCItems.*;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = TerraFirmaCraft.MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class CommonProxy {
 
     @SubscribeEvent
@@ -340,8 +340,8 @@ public class CommonProxy {
      * Ведь в нашем TFC все прописывается в конструкторе класса. Но если приспичит то можно.
      */
     private static <T extends Item> T registerItem(String name, T item, CreativeTabs ct) {
-        item.setRegistryName(MOD_ID, name);
-        item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+        item.setRegistryName(Tags.MOD_ID, name);
+        item.setTranslationKey(Tags.MOD_ID + "." + name.replace('/', '.'));
         item.setCreativeTab(ct);
         return item;
     }
@@ -351,8 +351,8 @@ public class CommonProxy {
      * Ведь в нашем TFC все прописывается в конструкторе класса. Но если приспичит то можно.
      */
     private static <T extends Block> T registerBlock(String name, T block, CreativeTabs ct) {
-        block.setRegistryName(MOD_ID, name);
-        block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+        block.setRegistryName(Tags.MOD_ID, name);
+        block.setTranslationKey(Tags.MOD_ID + "." + name.replace('/', '.'));
         block.setCreativeTab(ct);
         return block;
     }
@@ -368,7 +368,7 @@ public class CommonProxy {
      * Регистрирует TE.
      */
     private static <T extends TileEntity> void registerTE(Class<T> te, String name) {
-        TileEntity.register(MOD_ID + ":" + name, te);
+        TileEntity.register(Tags.MOD_ID + ":" + name, te);
     }
 
     private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass) {

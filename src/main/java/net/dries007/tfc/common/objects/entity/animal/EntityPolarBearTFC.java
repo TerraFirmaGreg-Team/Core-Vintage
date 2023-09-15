@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.common.objects.LootTablesTFC;
@@ -35,7 +36,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, IPredator, EntityAIStandAttack.IEntityStandAttack {
     private static final int DAYS_TO_ADULTHOOD = 180;
@@ -214,7 +214,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, I
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(MOD_ID + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
+        return new TextComponentTranslation(Tags.MOD_ID + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
     }
 
     @Override

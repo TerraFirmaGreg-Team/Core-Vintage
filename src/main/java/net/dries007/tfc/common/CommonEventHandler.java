@@ -1,6 +1,7 @@
 package net.dries007.tfc.common;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
@@ -119,13 +120,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.rock.type.RockTypes.BASALT;
 import static net.dries007.tfc.api.types.rock.type.RockTypes.RHYOLITE;
 import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.RAW;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public final class CommonEventHandler {
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 

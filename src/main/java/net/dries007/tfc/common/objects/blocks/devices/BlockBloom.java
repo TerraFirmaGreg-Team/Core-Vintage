@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.devices;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.tileentities.TEBloom;
@@ -22,7 +23,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockBloom extends Block {
@@ -33,8 +33,8 @@ public class BlockBloom extends Block {
         setSoundType(SoundType.STONE);
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "bloom");
-        setTranslationKey(MOD_ID + ".bloom");
+        setRegistryName(Tags.MOD_ID, "bloom");
+        setTranslationKey(Tags.MOD_ID + ".bloom");
     }
 
     @Override

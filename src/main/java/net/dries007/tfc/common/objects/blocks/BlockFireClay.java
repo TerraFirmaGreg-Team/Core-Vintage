@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
@@ -17,7 +18,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockFireClay extends Block implements IItemSize {
@@ -29,7 +29,7 @@ public class BlockFireClay extends Block implements IItemSize {
 
         setCreativeTab(CreativeTabsTFC.ROCK);
         setRegistryName(TerraFirmaCraft.identifier("fire_clay_block"));
-        setTranslationKey(MOD_ID + ".fire_clay_block");
+        setTranslationKey(Tags.MOD_ID + ".fire_clay_block");
     }
 
     @Override

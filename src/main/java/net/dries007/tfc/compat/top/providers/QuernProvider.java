@@ -4,7 +4,7 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.tileentities.TEQuern;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
@@ -20,7 +20,7 @@ import static net.dries007.tfc.common.objects.tileentities.TEQuern.SLOT_HANDSTON
 public class QuernProvider implements IProbeInfoProvider {
     @Override
     public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":quern";
+        return Tags.MOD_ID + ":quern";
     }
 
     @Override

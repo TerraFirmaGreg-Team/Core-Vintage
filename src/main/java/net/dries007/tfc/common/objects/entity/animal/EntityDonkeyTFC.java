@@ -1,6 +1,7 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -54,7 +55,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -185,7 +185,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(MOD_ID + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
+        return new TextComponentTranslation(Tags.MOD_ID + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
     }
 
     public boolean isHalter() {
@@ -366,7 +366,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
                     if (!this.world.isRemote) {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                            player.sendMessage(new TextComponentTranslation(MOD_ID + ".tooltip.animal.mating.pregnant", getName()));
+                            player.sendMessage(new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getName()));
                         }
                     }
                 }

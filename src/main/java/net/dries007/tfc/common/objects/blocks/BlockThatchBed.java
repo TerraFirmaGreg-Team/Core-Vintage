@@ -1,6 +1,7 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.minecraft.block.Block;
@@ -25,7 +26,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -36,8 +36,8 @@ public class BlockThatchBed extends BlockBed {
         Blocks.FIRE.setFireInfo(this, 60, 20);
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "thatch_bed");
-        setTranslationKey(MOD_ID + ".thatch_bed");
+        setRegistryName(Tags.MOD_ID, "thatch_bed");
+        setTranslationKey(Tags.MOD_ID + ".thatch_bed");
     }
 
     @Override

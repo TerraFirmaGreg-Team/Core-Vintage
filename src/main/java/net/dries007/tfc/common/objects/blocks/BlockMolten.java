@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
@@ -26,7 +27,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockMolten extends Block implements ILightableBlock {
@@ -45,8 +45,8 @@ public class BlockMolten extends Block implements ILightableBlock {
         setDefaultState(this.getBlockState().getBaseState().withProperty(LIT, false).withProperty(LAYERS, 1));
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "molten");
-        setTranslationKey(MOD_ID + ".molten");
+        setRegistryName(Tags.MOD_ID, "molten");
+        setTranslationKey(Tags.MOD_ID + ".molten");
     }
 
     @SuppressWarnings("deprecation")

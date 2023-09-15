@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.gui;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.client.button.GuiButtonBarrelSeal;
@@ -34,7 +35,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class GuiBarrel extends GuiContainerTE<TEBarrel> {
     public static final ResourceLocation BARREL_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/barrel.png");
@@ -67,10 +67,10 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
                 List<String> tooltip = new ArrayList<>();
 
                 if (fluid == null || fluid.amount == 0) {
-                    tooltip.add(I18n.format(MOD_ID + ".tooltip.barrel_empty"));
+                    tooltip.add(I18n.format(Tags.MOD_ID + ".tooltip.barrel_empty"));
                 } else {
                     tooltip.add(fluid.getLocalizedName());
-                    tooltip.add(TextFormatting.GRAY + I18n.format(MOD_ID + ".tooltip.barrel_fluid_amount", fluid.amount));
+                    tooltip.add(TextFormatting.GRAY + I18n.format(Tags.MOD_ID + ".tooltip.barrel_fluid_amount", fluid.amount));
                 }
 
                 this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);

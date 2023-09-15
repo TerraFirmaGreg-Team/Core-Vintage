@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.items;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.TFCGuiHandler;
@@ -32,15 +33,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class ItemQuiver extends ItemArmorTFC {
     public ItemQuiver() {
         super(ArmorMaterialTFC.QUIVER, 1 /* chest*/, EntityEquipmentSlot.CHEST);
 
-        setRegistryName(MOD_ID, "quiver");
-        setTranslationKey(MOD_ID + ".quiver");
+        setRegistryName(Tags.MOD_ID, "quiver");
+        setTranslationKey(Tags.MOD_ID + ".quiver");
         setCreativeTab(CreativeTabsTFC.MISC);
     }
 

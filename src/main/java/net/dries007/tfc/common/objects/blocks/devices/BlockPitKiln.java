@@ -1,6 +1,7 @@
 package net.dries007.tfc.common.objects.blocks.devices;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.BlockPlacedItem;
@@ -40,7 +41,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -67,8 +67,8 @@ public class BlockPitKiln extends Block implements ILightableBlock {
         setDefaultState(blockState.getBaseState().withProperty(FULL, false).withProperty(LIT, false));
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "pit_kiln");
-        setTranslationKey(MOD_ID + ".pit_kiln");
+        setRegistryName(Tags.MOD_ID, "pit_kiln");
+        setTranslationKey(Tags.MOD_ID + ".pit_kiln");
     }
 
     @Override

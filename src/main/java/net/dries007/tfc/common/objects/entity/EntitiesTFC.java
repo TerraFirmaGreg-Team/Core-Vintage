@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.entity;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
@@ -17,9 +18,8 @@ import net.minecraftforge.registries.DataSerializerEntry;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class EntitiesTFC {
     @GameRegistry.ObjectHolder("tfc:long")
     public static final DataSerializerEntry LONG_DATA_SERIALIZER_ENTRY = Helpers.getNull();

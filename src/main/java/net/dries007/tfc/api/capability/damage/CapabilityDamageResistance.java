@@ -2,6 +2,7 @@ package net.dries007.tfc.api.capability.damage;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
@@ -23,7 +24,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.util.Constants.GSON;
 
 public final class CapabilityDamageResistance {
@@ -76,7 +76,7 @@ public final class CapabilityDamageResistance {
         return null;
     }
 
-    @Mod.EventBusSubscriber(modid = MOD_ID)
+    @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
     public static final class EventHandler {
         @SubscribeEvent
         public static void attachEntityCapabilityEvent(AttachCapabilitiesEvent<Entity> event) {

@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,7 +13,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public final class CreativeTabsTFC {
 
@@ -29,7 +29,7 @@ public final class CreativeTabsTFC {
         private final ResourceLocation iconResourceLocation;
 
         private TFCCreativeTab(String label, String icon) {
-            super(MOD_ID + "." + label);
+            super(Tags.MOD_ID + "." + label);
             iconResourceLocation = new ResourceLocation(icon);
         }
 

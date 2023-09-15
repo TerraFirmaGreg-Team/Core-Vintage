@@ -1,6 +1,7 @@
 package net.dries007.tfc.common.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCSounds;
@@ -36,7 +37,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
 
 @MethodsReturnNonnullByDefault
@@ -44,8 +44,8 @@ import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
 public class ItemFireStarter extends TFCItem {
     public ItemFireStarter() {
 
-        setRegistryName(MOD_ID, "firestarter");
-        setTranslationKey(MOD_ID + ".firestarter");
+        setRegistryName(Tags.MOD_ID, "firestarter");
+        setTranslationKey(Tags.MOD_ID + ".firestarter");
         setCreativeTab(CreativeTabsTFC.MISC);
         setMaxDamage(8);
         setMaxStackSize(1);

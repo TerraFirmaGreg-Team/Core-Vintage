@@ -1,10 +1,10 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.minecraft.block.BlockGravel;
 import net.minecraft.block.SoundType;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BlockAggregate extends BlockGravel {
     public BlockAggregate() {
@@ -14,7 +14,7 @@ public class BlockAggregate extends BlockGravel {
         setHardness(0.4f);
 
         setCreativeTab(CreativeTabsTFC.ROCK);
-        setRegistryName(MOD_ID, "aggregate");
-        setTranslationKey(MOD_ID + ".aggregate");
+        setRegistryName(Tags.MOD_ID, "aggregate");
+        setTranslationKey(Tags.MOD_ID + ".aggregate");
     }
 }

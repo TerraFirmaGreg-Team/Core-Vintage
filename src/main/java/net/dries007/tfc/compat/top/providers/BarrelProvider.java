@@ -4,7 +4,7 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.common.objects.tileentities.TEBarrel;
 import net.dries007.tfc.util.Helpers;
@@ -19,7 +19,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 public class BarrelProvider implements IProbeInfoProvider {
     @Override
     public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":barrel";
+        return Tags.MOD_ID + ":barrel";
     }
 
     @Override

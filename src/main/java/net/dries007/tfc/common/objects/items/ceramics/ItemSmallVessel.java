@@ -4,6 +4,7 @@ import gregtech.api.fluids.MetaFluids;
 import gregtech.api.unification.material.Material;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -58,7 +59,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Map.Entry;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class ItemSmallVessel extends ItemPottery {
@@ -85,7 +85,7 @@ public class ItemSmallVessel extends ItemPottery {
                         TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.SMALL_VESSEL_LIQUID);
                         break;
                     case LIQUID_SOLID:
-                        TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, MOD_ID + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
+                        TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, Tags.MOD_ID + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
                         break;
                 }
             }
@@ -262,7 +262,7 @@ public class ItemSmallVessel extends ItemPottery {
                         } else {
                             onlySmeltables = false;
                         }
-                        text.add(I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.small_vessel_item", slot.getCount(), slot.getItem().getItemStackDisplayName(slot)));
+                        text.add(I18n.format(Tags.MOD_ID + ".tooltip.small_vessel_item", slot.getCount(), slot.getItem().getItemStackDisplayName(slot)));
                         hasContent = true;
                     }
                 }
@@ -275,13 +275,13 @@ public class ItemSmallVessel extends ItemPottery {
                             var key = entry.getKey();
                             if (key != null) {
                                 int metalAmount = entry.getValue();
-                                text.add(textPosition, I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.small_vessel_unit_total", key.getLocalizedName(), metalAmount, Math.round((float) metalAmount / totalAmount * 1000) / 10f));
+                                text.add(textPosition, I18n.format(Tags.MOD_ID + ".tooltip.small_vessel_unit_total", key.getLocalizedName(), metalAmount, Math.round((float) metalAmount / totalAmount * 1000) / 10f));
                             }
                         }
                         text.add(textPosition, ""); // Separator between the contents of the vessel and the above units text, not needed but I feel that it helps visually
                     }
                 } else {
-                    text.add(1, I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.small_vessel_empty"));
+                    text.add(1, I18n.format(Tags.MOD_ID + ".tooltip.small_vessel_empty"));
                 }
             }
 

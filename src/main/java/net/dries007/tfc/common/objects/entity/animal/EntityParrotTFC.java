@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
@@ -36,7 +37,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivestock {
     private static final int DAYS_TO_ADULTHOOD = 96;
@@ -289,7 +289,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(MOD_ID + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
+        return new TextComponentTranslation(Tags.MOD_ID + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
     }
 
     @Override

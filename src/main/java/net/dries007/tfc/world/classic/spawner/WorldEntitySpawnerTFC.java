@@ -1,5 +1,6 @@
 package net.dries007.tfc.world.classic.spawner;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.config.ConfigTFC;
@@ -25,14 +26,13 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import java.util.*;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /*
  * TFC entity spawning mechanics
  * Only works in tfc type worlds
  */
 @SuppressWarnings("WeakerAccess")
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public final class WorldEntitySpawnerTFC {
     /**
      * Handles livestock cooldown time

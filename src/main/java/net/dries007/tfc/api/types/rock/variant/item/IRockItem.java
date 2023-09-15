@@ -3,7 +3,6 @@ package net.dries007.tfc.api.types.rock.variant.item;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.variant.item.RockItemVariant;
 import net.dries007.tfc.api.util.IHasModel;
 import net.minecraft.util.ResourceLocation;
 

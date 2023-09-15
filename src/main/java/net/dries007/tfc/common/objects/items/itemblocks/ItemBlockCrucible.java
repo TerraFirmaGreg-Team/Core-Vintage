@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.items.itemblocks;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Alloy;
 import net.minecraft.block.Block;
@@ -30,7 +30,7 @@ public class ItemBlockCrucible extends ItemBlockTFC {
             var alloy = new Alloy(ConfigTFC.Devices.CRUCIBLE.tank);
 
             alloy.deserializeNBT(nbt.getCompoundTag("alloy"));
-            tooltip.add(I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.crucible_alloy", alloy.getAmount(), alloy.getResult().getLocalizedName()));
+            tooltip.add(I18n.format(Tags.MOD_ID + ".tooltip.crucible_alloy", alloy.getAmount(), alloy.getResult().getLocalizedName()));
         }
     }
 }

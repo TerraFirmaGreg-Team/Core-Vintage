@@ -1,6 +1,7 @@
 package net.dries007.tfc.common.objects.container;
 
 import gregtech.common.items.ToolItems;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
@@ -24,7 +25,6 @@ import net.minecraftforge.items.IItemHandler;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.*;
 
 @ParametersAreNonnullByDefault
@@ -92,12 +92,12 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
         }
         if (!Helpers.isAtLeast(tile.getTier(), recipe.getTier())) {
             TerraFirmaCraft.LOGGER.info("Anvil Tier: {} + Recipe Tier: {}", tile.getTier(), recipe.getTier());
-            player.sendMessage(new TextComponentTranslation(MOD_ID + ".tooltip.anvil_tier_too_low"));
+            player.sendMessage(new TextComponentTranslation(Tags.MOD_ID + ".tooltip.anvil_tier_too_low"));
             return false;
         }
 
         if (!cap.isWorkable()) {
-            player.sendMessage(new TextComponentTranslation(MOD_ID + ".tooltip.anvil_too_cold"));
+            player.sendMessage(new TextComponentTranslation(Tags.MOD_ID + ".tooltip.anvil_too_cold"));
             return false;
         }
 
@@ -121,7 +121,7 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
                 stack.damageItem(1, player);
                 return true;
             } else {
-                player.sendMessage(new TextComponentString("" + TextFormatting.RED).appendSibling(new TextComponentTranslation(MOD_ID + ".tooltip.anvil_no_hammer")));
+                player.sendMessage(new TextComponentString("" + TextFormatting.RED).appendSibling(new TextComponentTranslation(Tags.MOD_ID + ".tooltip.anvil_no_hammer")));
                 return false;
             }
         }

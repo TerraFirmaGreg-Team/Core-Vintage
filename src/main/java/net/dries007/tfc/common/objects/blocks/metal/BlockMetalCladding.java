@@ -3,6 +3,7 @@ package net.dries007.tfc.common.objects.blocks.metal;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
@@ -39,7 +40,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockMetalCladding extends Block implements IHasModel {
@@ -67,8 +67,8 @@ public class BlockMetalCladding extends Block implements IHasModel {
         this.modelLocation = TerraFirmaCraft.identifier("metal/cladding");
 
         var blockRegistryName = "metal/cladding";
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(Tags.MOD_ID, blockRegistryName);
+        setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.METAL); //GregTechAPI.TAB_GREGTECH_MATERIALS
         setHardness(40F);
         setResistance(25F);

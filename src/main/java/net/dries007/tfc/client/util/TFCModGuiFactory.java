@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.util;
 
+import net.dries007.tfc.Tags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
@@ -9,8 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Set;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
+import static net.dries007.tfc.Tags.MOD_NAME;
 
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("unused")
@@ -36,7 +36,7 @@ public class TFCModGuiFactory implements IModGuiFactory {
 
     public final class TFCModGui extends GuiConfig {
         public TFCModGui(GuiScreen parentScreen) {
-            super(parentScreen, MOD_ID, MOD_NAME);
+            super(parentScreen, Tags.MOD_ID, MOD_NAME);
         }
     }
 }

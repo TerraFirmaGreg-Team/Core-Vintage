@@ -4,6 +4,7 @@ import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.google.common.collect.ImmutableMap;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
@@ -92,7 +93,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.TALL_GRASS;
 import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
@@ -221,9 +221,9 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomStateMapper(TFCBlocks.THATCH_BED, new StateMap.Builder().ignore(BlockThatchBed.OCCUPIED).build());
 
         // Empty Models
-        final ModelResourceLocation empty = new ModelResourceLocation(MOD_ID + ":empty");
+        final ModelResourceLocation empty = new ModelResourceLocation(Tags.MOD_ID + ":empty");
         // todo: switch to hide rack (involves changing mechanics, etc)
-        final ModelResourceLocation hideRack = new ModelResourceLocation(MOD_ID + ":hide_rack");
+        final ModelResourceLocation hideRack = new ModelResourceLocation(Tags.MOD_ID + ":hide_rack");
 
         ModelLoader.setCustomStateMapper(TFCBlocks.PIT_KILN, blockIn -> ImmutableMap.of(TFCBlocks.PIT_KILN.getDefaultState(), empty));
         ModelLoader.setCustomStateMapper(TFCBlocks.PLACED_ITEM_FLAT, blockIn -> ImmutableMap.of(TFCBlocks.PLACED_ITEM_FLAT.getDefaultState(), empty));
@@ -290,7 +290,7 @@ public class ClientProxy extends CommonProxy {
                         .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler(foliageColor,
-                LeavesPaging.getLeavesMapForModId(MOD_ID).values()
+                LeavesPaging.getLeavesMapForModId(Tags.MOD_ID).values()
                         .toArray(new Block[0]));
 
         //==== Metal =================================================================================================//

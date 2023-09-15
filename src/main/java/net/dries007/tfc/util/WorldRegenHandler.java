@@ -1,6 +1,7 @@
 package net.dries007.tfc.util;
 
 import com.google.common.collect.Lists;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IHuntable;
 import net.dries007.tfc.api.types.animal.IPredator;
@@ -46,7 +47,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.*;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.plant.type.PlantTypes.PORCINI;
 import static net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing.WILD;
 
@@ -55,7 +55,7 @@ import static net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing.WILD;
  */
 
 //@SuppressWarnings({"unused", "WeakerAccess"})
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class WorldRegenHandler {
 
     public static final WorldGenPlant PLANT_GEN = new WorldGenPlant();

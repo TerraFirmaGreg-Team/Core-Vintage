@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.rock;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
@@ -30,7 +31,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockAlabaster extends Block implements IItemSize, IItemProvider, IHasModel {
@@ -51,8 +51,8 @@ public class BlockAlabaster extends Block implements IItemSize, IItemProvider, I
         setHardness(1.0F);
 
         var blockRegistryName = String.format("alabaster/%s/%s", variant, dyeColor.getName());
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(Tags.MOD_ID, blockRegistryName);
+        setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
         OreDictionaryHelper.register(this, "alabaster");
         OreDictionaryHelper.register(this, "alabaster", variant.toString());
@@ -67,8 +67,8 @@ public class BlockAlabaster extends Block implements IItemSize, IItemProvider, I
         this.modelLocation = TerraFirmaCraft.identifier("rock/alabaster/" + variant);
 
         var blockRegistryName = String.format("alabaster/%s/plain", variant);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(Tags.MOD_ID, blockRegistryName);
+        setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
         OreDictionaryHelper.register(this, "alabaster");
         OreDictionaryHelper.register(this, "alabaster", variant.toString());

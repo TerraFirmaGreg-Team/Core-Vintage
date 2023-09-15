@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.devices;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -34,7 +35,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Predicate;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.minecraft.block.BlockTrapDoor.OPEN;
 
 @ParametersAreNonnullByDefault
@@ -170,8 +170,8 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
                 .withProperty(OPEN, false));
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "bloomery");
-        setTranslationKey(MOD_ID + ".bloomery");
+        setRegistryName(Tags.MOD_ID, "bloomery");
+        setTranslationKey(Tags.MOD_ID + ".bloomery");
     }
 
     public static boolean isValidSideBlock(IBlockState state) {

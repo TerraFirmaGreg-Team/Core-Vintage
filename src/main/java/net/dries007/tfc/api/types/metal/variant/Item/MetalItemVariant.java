@@ -1,17 +1,11 @@
 package net.dries007.tfc.api.types.metal.variant.Item;
 
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.variant.item.IRockItem;
-import net.dries007.tfc.api.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
-
-import static net.dries007.tfc.common.objects.items.TFCItems.METAL_ITEMS;
-import static net.dries007.tfc.common.objects.items.TFCItems.ROCK_ITEMS;
 
 /**
  * Класс, представляющий тип блока породы.

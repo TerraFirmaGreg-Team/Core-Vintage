@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.capability.forge;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.minecraft.client.resources.I18n;
@@ -11,7 +12,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * This is an advanced IForgeable capability that also needs heat
@@ -70,15 +70,15 @@ public interface IForgeableHeatable extends IForgeable, IItemHeat {
 
             tooltip += TextFormatting.WHITE;
             if (temperature > getMeltTemp()) {
-                tooltip += " - " + I18n.format(MOD_ID + ".tooltip.liquid");
+                tooltip += " - " + I18n.format(Tags.MOD_ID + ".tooltip.liquid");
             } else if (temperature > getWeldTemp()) {
-                tooltip += " - " + I18n.format(MOD_ID + ".tooltip.weldable");
+                tooltip += " - " + I18n.format(Tags.MOD_ID + ".tooltip.weldable");
             } else if (temperature > getWorkTemp()) {
-                tooltip += " - " + I18n.format(MOD_ID + ".tooltip.workable");
+                tooltip += " - " + I18n.format(Tags.MOD_ID + ".tooltip.workable");
             }
 
             if (temperature > 0.9 * getMeltTemp()) {
-                tooltip += " (" + I18n.format(MOD_ID + ".tooltip.danger") + ")";
+                tooltip += " (" + I18n.format(Tags.MOD_ID + ".tooltip.danger") + ")";
             }
             text.add(tooltip);
         }

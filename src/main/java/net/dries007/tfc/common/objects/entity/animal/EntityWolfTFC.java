@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -47,7 +48,6 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 // Changes in config allow placing this animal in livestock and still respawn
@@ -208,7 +208,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimalTFC, ILivestock 
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(MOD_ID + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
+        return new TextComponentTranslation(Tags.MOD_ID + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
     }
 
     @Override
@@ -416,7 +416,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimalTFC, ILivestock 
                         if (!this.world.isRemote) {
                             //Show tooltips
                             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                                TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                                TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
                             }
                         }
                     }

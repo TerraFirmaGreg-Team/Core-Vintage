@@ -4,7 +4,7 @@ import mcjty.theoneprobe.api.IProbeHitEntityData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoEntityProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.common.objects.entity.animal.EntityAnimalMammal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -19,7 +19,7 @@ import net.minecraftforge.common.IShearable;
 public class AnimalProvider implements IProbeInfoEntityProvider {
     @Override
     public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":animal";
+        return Tags.MOD_ID + ":animal";
     }
 
     @Override

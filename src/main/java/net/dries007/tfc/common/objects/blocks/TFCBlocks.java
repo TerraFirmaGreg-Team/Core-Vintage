@@ -3,6 +3,7 @@ package net.dries007.tfc.common.objects.blocks;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.Material;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.bush.IBushBlock;
 import net.dries007.tfc.api.types.bush.type.BushType;
@@ -51,7 +52,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.*;
 import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.*;
 import static net.minecraft.block.material.Material.WATER;
@@ -203,7 +203,7 @@ public class TFCBlocks {
         BLOCKS.add(THATCH_BED = new BlockThatchBed());
         BLOCKS.add(CLADDING = new BlockMetalCladding());
         BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
-        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values());
+        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(Tags.MOD_ID).values());
     }
 
     @Nonnull

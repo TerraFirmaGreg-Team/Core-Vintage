@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
@@ -31,7 +32,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockCharcoalPile extends Block implements ILightableBlock {
@@ -59,8 +59,8 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
         this.setDefaultState(this.blockState.getBaseState().withProperty(LAYERS, 1));
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "charcoal_pile");
-        setTranslationKey(MOD_ID + ".charcoal_pile");
+        setRegistryName(Tags.MOD_ID, "charcoal_pile");
+        setTranslationKey(Tags.MOD_ID + ".charcoal_pile");
     }
 
     @Override

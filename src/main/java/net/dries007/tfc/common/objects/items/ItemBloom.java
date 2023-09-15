@@ -2,6 +2,7 @@ package net.dries007.tfc.common.objects.items;
 
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableMeasurableMetalHandler;
 import net.dries007.tfc.api.capability.forge.IForgeable;
@@ -26,7 +27,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class ItemBloom extends TFCItem implements IMaterialItem {
@@ -35,11 +35,11 @@ public class ItemBloom extends TFCItem implements IMaterialItem {
     public ItemBloom(boolean meltable) {
         this.meltable = meltable;
         if (meltable) {
-            setRegistryName(MOD_ID, "bloom/refined");
-            setTranslationKey(MOD_ID + ".bloom.refined");
+            setRegistryName(Tags.MOD_ID, "bloom/refined");
+            setTranslationKey(Tags.MOD_ID + ".bloom.refined");
         } else {
-            setRegistryName(MOD_ID, "bloom/unrefined");
-            setTranslationKey(MOD_ID + ".bloom.unrefined");
+            setRegistryName(Tags.MOD_ID, "bloom/unrefined");
+            setTranslationKey(Tags.MOD_ID + ".bloom.unrefined");
         }
         setCreativeTab(CreativeTabsTFC.MISC);
     }

@@ -1,5 +1,6 @@
 package net.dries007.tfc.client;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.SoundEvent;
@@ -8,252 +9,251 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.util.Helpers.getNull;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class TFCSounds {
-    @GameRegistry.ObjectHolder(MOD_ID + ":rock.slide.long")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":rock.slide.long")
     public static final SoundEvent ROCK_SLIDE_LONG = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":rock.slide.short")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":rock.slide.short")
     public static final SoundEvent ROCK_SLIDE_SHORT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":dirt.slide.short")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":dirt.slide.short")
     public static final SoundEvent DIRT_SLIDE_SHORT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":bellows.blow.air")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":bellows.blow.air")
     public static final SoundEvent BELLOWS_BLOW_AIR = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":quern.stonedrag")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":quern.stonedrag")
     public static final SoundEvent QUERN_USE = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":item.ceramicbreak")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":item.ceramicbreak")
     public static final SoundEvent CERAMIC_BREAK = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":anvil.metalimpact")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":anvil.metalimpact")
     public static final SoundEvent ANVIL_IMPACT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":item.throw")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":item.throw")
     public static final SoundEvent ITEM_THROW = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":item.jug.blow")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":item.jug.blow")
     public static final SoundEvent JUG_BLOW = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":item.jug.fill")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":item.jug.fill")
     public static final SoundEvent JUG_FILL = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":item.firestarter")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":item.firestarter")
     public static final SoundEvent FIRE_STARTER = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.bear.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.bear.say")
     public static final SoundEvent ANIMAL_BEAR_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.bear.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.bear.cry")
     public static final SoundEvent ANIMAL_BEAR_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.bear.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.bear.hurt")
     public static final SoundEvent ANIMAL_BEAR_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.bear.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.bear.death")
     public static final SoundEvent ANIMAL_BEAR_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.deer.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.deer.say")
     public static final SoundEvent ANIMAL_DEER_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.deer.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.deer.cry")
     public static final SoundEvent ANIMAL_DEER_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.deer.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.deer.hurt")
     public static final SoundEvent ANIMAL_DEER_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.deer.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.deer.death")
     public static final SoundEvent ANIMAL_DEER_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.pheasant.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.pheasant.say")
     public static final SoundEvent ANIMAL_PHEASANT_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.pheasant.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.pheasant.hurt")
     public static final SoundEvent ANIMAL_PHEASANT_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.pheasant.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.pheasant.death")
     public static final SoundEvent ANIMAL_PHEASANT_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.rooster.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.rooster.cry")
     public static final SoundEvent ANIMAL_ROOSTER_CRY = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.alpaca.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.alpaca.say")
     public static final SoundEvent ANIMAL_ALPACA_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.alpaca.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.alpaca.cry")
     public static final SoundEvent ANIMAL_ALPACA_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.alpaca.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.alpaca.hurt")
     public static final SoundEvent ANIMAL_ALPACA_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.alpaca.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.alpaca.death")
     public static final SoundEvent ANIMAL_ALPACA_DEATH = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.alpaca.step")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.alpaca.step")
     public static final SoundEvent ANIMAL_ALPACA_STEP = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.duck.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.duck.say")
     public static final SoundEvent ANIMAL_DUCK_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.duck.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.duck.cry")
     public static final SoundEvent ANIMAL_DUCK_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.duck.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.duck.hurt")
     public static final SoundEvent ANIMAL_DUCK_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.duck.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.duck.death")
     public static final SoundEvent ANIMAL_DUCK_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.goat.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.goat.say")
     public static final SoundEvent ANIMAL_GOAT_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.goat.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.goat.cry")
     public static final SoundEvent ANIMAL_GOAT_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.goat.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.goat.hurt")
     public static final SoundEvent ANIMAL_GOAT_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.goat.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.goat.death")
     public static final SoundEvent ANIMAL_GOAT_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.camel.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.camel.say")
     public static final SoundEvent ANIMAL_CAMEL_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.camel.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.camel.cry")
     public static final SoundEvent ANIMAL_CAMEL_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.camel.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.camel.hurt")
     public static final SoundEvent ANIMAL_CAMEL_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.camel.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.camel.death")
     public static final SoundEvent ANIMAL_CAMEL_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.panther.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.panther.say")
     public static final SoundEvent ANIMAL_PANTHER_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.panther.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.panther.cry")
     public static final SoundEvent ANIMAL_PANTHER_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.panther.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.panther.hurt")
     public static final SoundEvent ANIMAL_PANTHER_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.panther.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.panther.death")
     public static final SoundEvent ANIMAL_PANTHER_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.sabertooth.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.sabertooth.say")
     public static final SoundEvent ANIMAL_SABERTOOTH_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.sabertooth.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.sabertooth.cry")
     public static final SoundEvent ANIMAL_SABERTOOTH_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.sabertooth.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.sabertooth.hurt")
     public static final SoundEvent ANIMAL_SABERTOOTH_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.sabertooth.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.sabertooth.death")
     public static final SoundEvent ANIMAL_SABERTOOTH_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.lion.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.lion.death")
     public static final SoundEvent ANIMAL_LION_DEATH = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.lion.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.lion.hurt")
     public static final SoundEvent ANIMAL_LION_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.lion.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.lion.cry")
     public static final SoundEvent ANIMAL_LION_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.lion.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.lion.say")
     public static final SoundEvent ANIMAL_LION_SAY = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.hyena.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.hyena.say")
     public static final SoundEvent ANIMAL_HYENA_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.hyena.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.hyena.cry")
     public static final SoundEvent ANIMAL_HYENA_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.hyena.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.hyena.hurt")
     public static final SoundEvent ANIMAL_HYENA_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.hyena.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.hyena.death")
     public static final SoundEvent ANIMAL_HYENA_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.zebu.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.zebu.say")
     public static final SoundEvent ANIMAL_ZEBU_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.zebu.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.zebu.hurt")
     public static final SoundEvent ANIMAL_ZEBU_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.zebu.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.zebu.death")
     public static final SoundEvent ANIMAL_ZEBU_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.muskox.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.muskox.say")
     public static final SoundEvent ANIMAL_MUSKOX_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.muskox.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.muskox.hurt")
     public static final SoundEvent ANIMAL_MUSKOX_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.muskox.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.muskox.death")
     public static final SoundEvent ANIMAL_MUSKOX_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.turkey.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.turkey.say")
     public static final SoundEvent ANIMAL_TURKEY_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.turkey.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.turkey.hurt")
     public static final SoundEvent ANIMAL_TURKEY_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.turkey.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.turkey.death")
     public static final SoundEvent ANIMAL_TURKEY_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.boar.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.boar.say")
     public static final SoundEvent ANIMAL_BOAR_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.boar.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.boar.hurt")
     public static final SoundEvent ANIMAL_BOAR_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.boar.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.boar.death")
     public static final SoundEvent ANIMAL_BOAR_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.wildebeest.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.wildebeest.say")
     public static final SoundEvent ANIMAL_WILDEBEEST_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.wildebeest.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.wildebeest.hurt")
     public static final SoundEvent ANIMAL_WILDEBEEST_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.wildebeest.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.wildebeest.death")
     public static final SoundEvent ANIMAL_WILDEBEEST_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.grouse.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.grouse.say")
     public static final SoundEvent ANIMAL_GROUSE_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.grouse.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.grouse.hurt")
     public static final SoundEvent ANIMAL_GROUSE_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.grouse.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.grouse.death")
     public static final SoundEvent ANIMAL_GROUSE_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.quail.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.quail.say")
     public static final SoundEvent ANIMAL_QUAIL_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.quail.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.quail.hurt")
     public static final SoundEvent ANIMAL_QUAIL_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.quail.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.quail.death")
     public static final SoundEvent ANIMAL_QUAIL_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.coyote.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.coyote.say")
     public static final SoundEvent ANIMAL_COYOTE_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.coyote.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.coyote.cry")
     public static final SoundEvent ANIMAL_COYOTE_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.coyote.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.coyote.hurt")
     public static final SoundEvent ANIMAL_COYOTE_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.coyote.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.coyote.death")
     public static final SoundEvent ANIMAL_COYOTE_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.cougar.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.cougar.say")
     public static final SoundEvent ANIMAL_COUGAR_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.cougar.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.cougar.cry")
     public static final SoundEvent ANIMAL_COUGAR_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.cougar.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.cougar.hurt")
     public static final SoundEvent ANIMAL_COUGAR_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.cougar.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.cougar.death")
     public static final SoundEvent ANIMAL_COUGAR_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.gazelle.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.gazelle.say")
     public static final SoundEvent ANIMAL_GAZELLE_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.gazelle.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.gazelle.hurt")
     public static final SoundEvent ANIMAL_GAZELLE_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.gazelle.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.gazelle.death")
     public static final SoundEvent ANIMAL_GAZELLE_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.direwolf.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.direwolf.say")
     public static final SoundEvent ANIMAL_DIREWOLF_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.direwolf.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.direwolf.cry")
     public static final SoundEvent ANIMAL_DIREWOLF_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.direwolf.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.direwolf.hurt")
     public static final SoundEvent ANIMAL_DIREWOLF_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.direwolf.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.direwolf.death")
     public static final SoundEvent ANIMAL_DIREWOLF_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.yak.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.yak.say")
     public static final SoundEvent ANIMAL_YAK_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.yak.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.yak.hurt")
     public static final SoundEvent ANIMAL_YAK_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.yak.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.yak.death")
     public static final SoundEvent ANIMAL_YAK_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.jackal.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.jackal.say")
     public static final SoundEvent ANIMAL_JACKAL_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.jackal.cry")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.jackal.cry")
     public static final SoundEvent ANIMAL_JACKAL_CRY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.jackal.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.jackal.hurt")
     public static final SoundEvent ANIMAL_JACKAL_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.jackal.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.jackal.death")
     public static final SoundEvent ANIMAL_JACKAL_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.mongoose.say")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.mongoose.say")
     public static final SoundEvent ANIMAL_MONGOOSE_SAY = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.mongoose.hurt")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.mongoose.hurt")
     public static final SoundEvent ANIMAL_MONGOOSE_HURT = getNull();
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.mongoose.death")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.mongoose.death")
     public static final SoundEvent ANIMAL_MONGOOSE_DEATH = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":animal.feline.step")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":animal.feline.step")
     public static final SoundEvent ANIMAL_FELINE_STEP = getNull();
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":knapping.rock")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":knapping.rock")
     public static final SoundEvent KNAPPING_ROCK = null;
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":knapping.clay")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":knapping.clay")
     public static final SoundEvent KNAPPING_CLAY = null;
 
-    @GameRegistry.ObjectHolder(MOD_ID + ":knapping.leather")
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":knapping.leather")
     public static final SoundEvent KNAPPING_LEATHER = null;
 
     // These are static initialized because we need a custom sound type which uses the sounds before initialization

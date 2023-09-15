@@ -2,6 +2,7 @@ package net.dries007.tfc.common.objects.blocks.metal;
 
 import gregtech.api.unification.material.Material;
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -51,7 +52,6 @@ import java.util.Collection;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.types.metal.variant.block.MetalBlockVariants.ANVIL;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_METAL;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.METAL_BLOCKS;
@@ -76,8 +76,8 @@ public class BlockMetalAnvil extends Block implements IMetalBlock, IMaterialItem
         this.modelLocation = TerraFirmaCraft.identifier("metal/anvil");
 
         var blockRegistryName = String.format("metal/anvil/%s", material);
-        setRegistryName(MOD_ID, blockRegistryName);
-        setTranslationKey(MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+        setRegistryName(Tags.MOD_ID, blockRegistryName);
+        setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.METAL); //GregTechAPI.TAB_GREGTECH_MATERIALS
         setSoundType(SoundType.ANVIL);
         setHardness(4.0F);

@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.devices;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.particle.TFCParticles;
@@ -49,7 +50,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.util.Constants.RNG;
 
 @ParametersAreNonnullByDefault
@@ -69,8 +69,8 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
         setHardness(0.3F);
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "firepit");
-        setTranslationKey(MOD_ID + ".firepit");
+        setRegistryName(Tags.MOD_ID, "firepit");
+        setTranslationKey(Tags.MOD_ID + ".firepit");
     }
 
     @Override

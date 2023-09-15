@@ -1,5 +1,6 @@
 package net.dries007.tfc.world.classic.biomes;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntitySquid;
@@ -14,11 +15,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
+import static net.dries007.tfc.Tags.MOD_NAME;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
-@GameRegistry.ObjectHolder(MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
+@GameRegistry.ObjectHolder(Tags.MOD_ID)
 public final class BiomesTFC {
     public static final BiomeTFC OCEAN = Helpers.getNull();
     public static final BiomeTFC RIVER = Helpers.getNull();
@@ -91,7 +91,7 @@ public final class BiomesTFC {
     }
 
     private static void register(IForgeRegistry<Biome> r, Biome biome, boolean isSpawn, boolean isWorldGen, BiomeDictionary.Type... types) {
-        r.register(biome.setRegistryName(MOD_ID, biome.biomeName.replace(MOD_NAME + " ", "").replace(' ', '_').toLowerCase()));
+        r.register(biome.setRegistryName(Tags.MOD_ID, biome.biomeName.replace(MOD_NAME + " ", "").replace(' ', '_').toLowerCase()));
 
         // Other biome registration stuff
         BiomeDictionary.addTypes(biome, types);

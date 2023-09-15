@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.devices;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -35,7 +36,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockQuern extends Block implements IItemSize, IHighlightHandler {
@@ -54,8 +54,8 @@ public class BlockQuern extends Block implements IItemSize, IHighlightHandler {
         setSoundType(SoundType.STONE);
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "quern");
-        setTranslationKey(MOD_ID + ".quern");
+        setRegistryName(Tags.MOD_ID, "quern");
+        setTranslationKey(Tags.MOD_ID + ".quern");
     }
 
     /**

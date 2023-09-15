@@ -1,12 +1,12 @@
 package net.dries007.tfc.client.button;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.tileentities.TEPowderKeg;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.client.gui.GuiPowderkeg.POWDERKEG_BACKGROUND;
 
 
@@ -20,7 +20,7 @@ public class GuiButtonPowderkegSeal extends GuiButtonTFC implements IButtonToolt
 
     @Override
     public String getTooltip() {
-        return MOD_ID + ".tooltip." + (tile.isSealed() ? "powderkeg_unseal" : "powderkeg_seal");
+        return Tags.MOD_ID + ".tooltip." + (tile.isSealed() ? "powderkeg_unseal" : "powderkeg_seal");
     }
 
     @Override

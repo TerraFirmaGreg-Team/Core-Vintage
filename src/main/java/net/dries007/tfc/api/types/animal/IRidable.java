@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.types.animal;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.animal.IAnimalTFC.Age;
 import net.dries007.tfc.network.PacketSimpleMessage;
@@ -11,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public interface IRidable {
     default <A extends EntityAnimal & IAnimalTFC> boolean attemptApplyHalter(A animal, World world, EntityPlayer player, ItemStack stack) {
@@ -28,9 +28,9 @@ public interface IRidable {
             // Show tooltips
             if (!world.isRemote) {
                 if (animal.getAge() == Age.CHILD) {
-                    TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MOD_ID + ".tooltip.animal.product.young", animal.getAnimalName()), (EntityPlayerMP) player);
+                    TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.product.young", animal.getAnimalName()), (EntityPlayerMP) player);
                 } else {
-                    TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MOD_ID + ".tooltip.animal.product.low_familiarity", animal.getAnimalName()), (EntityPlayerMP) player);
+                    TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.product.low_familiarity", animal.getAnimalName()), (EntityPlayerMP) player);
                 }
             }
             return false;

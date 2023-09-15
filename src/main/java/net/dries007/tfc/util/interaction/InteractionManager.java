@@ -1,6 +1,7 @@
 package net.dries007.tfc.util.interaction;
 
 import gregtech.common.items.ToolItems;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.util.TFCGuiHandler;
@@ -28,10 +29,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.common.objects.blocks.BlockCharcoalPile.LAYERS;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public final class InteractionManager {
     private static final Map<Predicate<ItemStack>, IRightClickBlockAction> USE_ACTIONS = new HashMap<>();
     private static final Map<Predicate<ItemStack>, IRightClickItemAction> RIGHT_CLICK_ACTIONS = new HashMap<>();

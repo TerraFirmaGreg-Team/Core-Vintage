@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.particle;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketSpawnTFCParticle;
 import net.minecraft.client.Minecraft;
@@ -18,12 +19,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * TFC Particles, wrapped up in a nice enum
  */
-@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = Tags.MOD_ID)
 public enum TFCParticles {
     STEAM(TerraFirmaCraft.identifier("particle/steam"), () -> ParticleSteam::new),
     FIRE_PIT_SMOKE1(TerraFirmaCraft.identifier("particle/fire_pit_smoke1"), () -> ParticleFirePitSmoke::new),

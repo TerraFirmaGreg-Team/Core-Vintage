@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -50,7 +51,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, ILivestock {
@@ -221,11 +221,11 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
     @Override
     public TextComponentTranslation getTooltip() {
         if (getAge() == Age.CHILD) {
-            return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.young", getAnimalName());
+            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.young", getAnimalName());
         } else if (getFamiliarity() <= 0.15f) {
-            return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.low_familiarity", getAnimalName());
+            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.low_familiarity", getAnimalName());
         } else if (!hasWool()) {
-            return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.no_wool", getAnimalName());
+            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.no_wool", getAnimalName());
         }
         return null;
     }

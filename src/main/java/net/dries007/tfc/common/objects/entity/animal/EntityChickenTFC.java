@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.entity.animal;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.api.types.animal.ILivestock;
@@ -39,7 +40,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class EntityChickenTFC extends EntityAnimalTFC implements ILivestock {
@@ -141,15 +141,15 @@ public class EntityChickenTFC extends EntityAnimalTFC implements ILivestock {
     @Override
     public TextComponentTranslation getTooltip() {
         if (this.getGender() == Gender.MALE) {
-            return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.male_egg");
+            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.male_egg");
         } else if (this.getAge() == Age.OLD) {
-            return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.old", getAnimalName());
+            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.old", getAnimalName());
         } else if (this.getAge() == Age.CHILD) {
-            return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.young", getAnimalName());
+            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.young", getAnimalName());
         } else if (getFamiliarity() <= 0.15f) {
-            return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.low_familiarity", getAnimalName());
+            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.low_familiarity", getAnimalName());
         } else if (!hasEggs()) {
-            return new TextComponentTranslation(MOD_ID + ".tooltip.animal.product.no_egg", getAnimalName());
+            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.no_egg", getAnimalName());
         }
         return null;
     }

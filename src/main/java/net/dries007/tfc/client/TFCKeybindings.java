@@ -7,7 +7,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
+import static net.dries007.tfc.Tags.MOD_NAME;
 
 @SideOnly(Side.CLIENT)
 public class TFCKeybindings {

@@ -38,7 +38,7 @@
 //
 //    @Override
 //    public String getID() {
-//        return TerraFirmaCraft.MOD_ID + ":fruit_tree";
+//        return Tags.MOD_ID + ":fruit_tree";
 //    }
 //
 //    @Override

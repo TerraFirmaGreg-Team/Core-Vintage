@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.gui.overlay;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.items.tools.behaviors.ChiselBehavior;
 import net.minecraft.block.BlockSlab;
@@ -19,7 +20,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * Interfacing to pass on DrawHighlightEvent's custom implementations
@@ -78,7 +78,7 @@ public interface IHighlightHandler {
     boolean drawHighlight(World world, BlockPos pos, EntityPlayer player, RayTraceResult rayTrace, double partialTicks);
 
     @SideOnly(Side.CLIENT)
-    @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
+    @Mod.EventBusSubscriber(value = Side.CLIENT, modid = Tags.MOD_ID)
     final class EventHandler {
         /**
          * Handles custom bounding boxes drawing

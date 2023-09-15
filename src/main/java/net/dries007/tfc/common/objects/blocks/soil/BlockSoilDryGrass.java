@@ -8,8 +8,8 @@ package net.dries007.tfc.common.objects.blocks.soil;
 
 
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
-import net.dries007.tfc.api.types.soil.variant.block.ISoilBlock;
 import net.dries007.tfc.api.types.soil.type.SoilType;
+import net.dries007.tfc.api.types.soil.variant.block.ISoilBlock;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
 
 public class BlockSoilDryGrass extends BlockSoilGrass implements ISoilBlock {

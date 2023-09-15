@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.devices;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.TFCGuiHandler;
@@ -46,7 +47,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 import java.util.function.BiPredicate;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockCharcoalForge extends Block implements IBellowsConsumerBlock, ILightableBlock {
@@ -89,8 +89,8 @@ public class BlockCharcoalForge extends Block implements IBellowsConsumerBlock, 
         this.setDefaultState(this.blockState.getBaseState().withProperty(LIT, false));
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "charcoal_forge");
-        setTranslationKey(MOD_ID + ".charcoal_forge");
+        setRegistryName(Tags.MOD_ID, "charcoal_forge");
+        setTranslationKey(Tags.MOD_ID + ".charcoal_forge");
     }
 
     public static boolean isValid(World world, BlockPos pos) {

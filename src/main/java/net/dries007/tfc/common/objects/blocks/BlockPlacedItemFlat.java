@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
@@ -34,7 +35,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockPlacedItemFlat extends Block {
@@ -45,8 +45,8 @@ public class BlockPlacedItemFlat extends Block {
         setHardness(0.1F);
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "placed_item_flat");
-        setTranslationKey(MOD_ID + ".placed_item_flat");
+        setRegistryName(Tags.MOD_ID, "placed_item_flat");
+        setTranslationKey(Tags.MOD_ID + ".placed_item_flat");
     }
 
     @Override

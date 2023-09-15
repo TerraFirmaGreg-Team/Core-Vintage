@@ -1,12 +1,12 @@
 package net.dries007.tfc.client.button;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.tileentities.TEBarrel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.client.gui.GuiBarrel.BARREL_BACKGROUND;
 
 
@@ -20,7 +20,7 @@ public class GuiButtonBarrelSeal extends GuiButtonTFC implements IButtonTooltip 
 
     @Override
     public String getTooltip() {
-        return MOD_ID + ".tooltip." + (tile.isSealed() ? "barrel_unseal" : "barrel_seal");
+        return Tags.MOD_ID + ".tooltip." + (tile.isSealed() ? "barrel_unseal" : "barrel_seal");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.devices;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.tileentities.TEBellows;
 import net.dries007.tfc.util.Helpers;
@@ -23,7 +24,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.minecraft.block.BlockHorizontal.FACING;
 
 @ParametersAreNonnullByDefault
@@ -37,8 +37,8 @@ public class BlockBellows extends Block {
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "bellows");
-        setTranslationKey(MOD_ID + ".bellows");
+        setRegistryName(Tags.MOD_ID, "bellows");
+        setTranslationKey(Tags.MOD_ID + ".bellows");
     }
 
     @Override

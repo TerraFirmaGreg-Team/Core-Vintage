@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -21,7 +22,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockThatch extends Block {
@@ -38,8 +38,8 @@ public class BlockThatch extends Block {
         setLightOpacity(255); //Blocks light
 
         setCreativeTab(CreativeTabsTFC.MISC);
-        setRegistryName(MOD_ID, "thatch");
-        setTranslationKey(MOD_ID + ".thatch");
+        setRegistryName(Tags.MOD_ID, "thatch");
+        setTranslationKey(Tags.MOD_ID + ".thatch");
 
         OreDictionaryHelper.register(this, "thatch");
         OreDictionaryHelper.register(this, "block", "straw");

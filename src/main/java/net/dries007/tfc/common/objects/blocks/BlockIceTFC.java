@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
@@ -25,7 +26,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
@@ -40,8 +40,8 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
             setRegistryName("minecraft", "ice");
             setTranslationKey("ice");
         } else {
-            setRegistryName(MOD_ID, "sea_ice");
-            setTranslationKey(MOD_ID + ".sea_ice.");
+            setRegistryName(Tags.MOD_ID, "sea_ice");
+            setTranslationKey(Tags.MOD_ID + ".sea_ice.");
             setCreativeTab(CreativeTabsTFC.MISC);
         }
 

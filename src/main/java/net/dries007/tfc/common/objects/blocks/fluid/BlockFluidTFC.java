@@ -1,6 +1,7 @@
 package net.dries007.tfc.common.objects.blocks.fluid;
 
 import com.google.common.primitives.Ints;
+import net.dries007.tfc.Tags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -23,15 +24,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockFluidTFC extends BlockFluidClassic {
     public BlockFluidTFC(Fluid fluid, Material material) {
         super(fluid, material);
 
-        setRegistryName(MOD_ID, "fluid/" + fluid.getName());
-        setTranslationKey(MOD_ID + ".fluid." + fluid.getName());
+        setRegistryName(Tags.MOD_ID, "fluid/" + fluid.getName());
+        setTranslationKey(Tags.MOD_ID + ".fluid." + fluid.getName());
     }
 
     public BlockFluidTFC(Fluid fluid, Material material, boolean canCreateSources) {

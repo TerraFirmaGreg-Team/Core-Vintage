@@ -4,7 +4,7 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.common.objects.tileentities.TECrucible;
 import net.dries007.tfc.util.Helpers;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class CrucibleProvider implements IProbeInfoProvider {
     @Override
     public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":crucible";
+        return Tags.MOD_ID + ":crucible";
     }
 
     @Override

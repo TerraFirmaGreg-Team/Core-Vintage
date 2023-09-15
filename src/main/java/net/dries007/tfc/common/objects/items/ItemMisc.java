@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.items;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -10,7 +11,6 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class ItemMisc extends TFCItem implements IItemSize {
     private final String name;
@@ -45,8 +45,8 @@ public class ItemMisc extends TFCItem implements IItemSize {
         this.size = size;
         this.weight = weight;
 
-        setRegistryName(MOD_ID, name);
-        setTranslationKey(MOD_ID + "." + name.toLowerCase().replace("/", "."));
+        setRegistryName(Tags.MOD_ID, name);
+        setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase().replace("/", "."));
         setCreativeTab(CreativeTabsTFC.MISC);
     }
 

@@ -2,6 +2,7 @@ package net.dries007.tfc.common.objects.recipes;
 
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.loaders.recipe.handlers.OreRecipeHandler;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -11,10 +12,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class RecipeEventHandler {
 
     @SubscribeEvent

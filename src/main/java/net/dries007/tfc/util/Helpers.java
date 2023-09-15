@@ -3,7 +3,7 @@ package net.dries007.tfc.util;
 import com.google.common.base.Joiner;
 import gregtech.api.unification.ore.OrePrefix;
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.entity.EntitySeatOn;
 import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
@@ -204,12 +204,12 @@ public final class Helpers {
     }
 
     public static String getEnumName(Enum<?> anEnum) {
-        return JOINER_DOT.join(TerraFirmaCraft.MOD_ID, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
+        return JOINER_DOT.join(Tags.MOD_ID, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
     }
 
     public static String getTypeName(IForgeRegistryEntry<?> type) {
         //noinspection ConstantConditions
-        return JOINER_DOT.join(TerraFirmaCraft.MOD_ID, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
+        return JOINER_DOT.join(Tags.MOD_ID, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
     }
 
     public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {

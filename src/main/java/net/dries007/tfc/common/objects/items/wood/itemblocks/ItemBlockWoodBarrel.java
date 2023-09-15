@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.items.wood.itemblocks;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBarrel;
@@ -111,15 +111,15 @@ public class ItemBlockWoodBarrel extends ItemBlockTFC {
 
             if (fluidStack == null || fluidStack.amount == 0) {
                 if (inventory.isEmpty()) {
-                    tooltip.add(TextFormatting.BLUE + I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.barrel_empty"));
+                    tooltip.add(TextFormatting.BLUE + I18n.format(Tags.MOD_ID + ".tooltip.barrel_empty"));
                 } else {
-                    tooltip.add(TextFormatting.BLUE + I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.barrel_item", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
+                    tooltip.add(TextFormatting.BLUE + I18n.format(Tags.MOD_ID + ".tooltip.barrel_item", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
                 }
             } else {
-                tooltip.add(TextFormatting.BLUE + I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.barrel_fluid", fluidStack.amount, fluidStack.getLocalizedName()));
+                tooltip.add(TextFormatting.BLUE + I18n.format(Tags.MOD_ID + ".tooltip.barrel_fluid", fluidStack.amount, fluidStack.getLocalizedName()));
 
                 if (!inventory.isEmpty()) {
-                    tooltip.add(TextFormatting.BLUE + I18n.format(TerraFirmaCraft.MOD_ID + ".tooltip.barrel_item_in_fluid", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
+                    tooltip.add(TextFormatting.BLUE + I18n.format(Tags.MOD_ID + ".tooltip.barrel_item_in_fluid", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
                 }
             }
 

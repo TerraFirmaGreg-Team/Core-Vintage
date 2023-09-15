@@ -5,7 +5,7 @@ import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.util.Translator;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 
 @MethodsReturnNonnullByDefault
 public abstract class BaseRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
@@ -31,7 +31,7 @@ public abstract class BaseRecipeCategory<T extends IRecipeWrapper> implements IR
 
     @Override
     public String getModName() {
-        return TerraFirmaCraft.MOD_NAME;
+        return Tags.MOD_NAME;
     }
 
     @Override

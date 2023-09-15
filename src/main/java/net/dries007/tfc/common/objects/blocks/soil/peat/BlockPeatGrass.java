@@ -1,5 +1,6 @@
 package net.dries007.tfc.common.objects.blocks.soil.peat;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilGrass;
@@ -24,7 +25,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @ParametersAreNonnullByDefault
 public class BlockPeatGrass extends Block {
@@ -37,8 +37,8 @@ public class BlockPeatGrass extends Block {
     public BlockPeatGrass() {
         super(Material.GRASS);
 
-        setRegistryName(MOD_ID, "peat_grass");
-        setTranslationKey(MOD_ID + ".peat_grass");
+        setRegistryName(Tags.MOD_ID, "peat_grass");
+        setTranslationKey(Tags.MOD_ID + ".peat_grass");
         setCreativeTab(CreativeTabsTFC.SOIL);
         setSoundType(SoundType.PLANT);
         setTickRandomly(true);

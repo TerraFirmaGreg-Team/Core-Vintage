@@ -14,8 +14,8 @@ import java.util.Random;
 
 
 public class DropCreatorWoodLog extends DropCreator {
-    public DropCreatorWoodLog(TreeType woodTreeFamily) {
-        super(TerraFirmaCraft.identifier(woodTreeFamily.getName().getPath() + "logs"));
+    public DropCreatorWoodLog(TreeType treeType) {
+        super(TerraFirmaCraft.identifier(treeType.getName().getPath() + "logs"));
     }
 
     @Override

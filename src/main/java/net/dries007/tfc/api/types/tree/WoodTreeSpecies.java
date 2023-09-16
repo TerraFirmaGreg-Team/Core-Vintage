@@ -22,20 +22,17 @@ import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 public class WoodTreeSpecies extends Species {
 
     public WoodTreeSpecies(TreeType tree) {
-        super(tree.getName(), tree);
+        super(tree.getName(), tree, tree.getLeavesProperties());
 
         var sapling = TFCBlocks.getWoodBlock(SAPLING, tree.getWood());
         var seed = TFCItems.getWoodItem(SEED, tree.getWood());
-
-        var leavesProperties = tree.getLeavesProperties();
 
         remDropCreator(new ResourceLocation(ModConstants.MODID, "logs"));
         addDropCreator(new DropCreatorWoodLog(tree)); // need our own because stacksize
         setSeedStack(new ItemStack(seed));
         setupStandardSeedDropping();
-        setLeavesProperties(leavesProperties);
-        leavesProperties.setTree(tree);
-        LeavesPaging.getNextLeavesBlock(Tags.MOD_ID, leavesProperties);
+        tree.getLeavesProperties().setTree(tree);
+        LeavesPaging.getNextLeavesBlock(Tags.MOD_ID, tree.getLeavesProperties());
 
         float[] map = tree.getParamMap();
         setGrowthLogicKit(tree.getGrowthLogicKit());

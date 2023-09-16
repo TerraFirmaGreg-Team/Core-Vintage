@@ -76,7 +76,7 @@ public class TreeType extends TreeFamily {
     private final LeavesProperties leavesProperties;
 
     public boolean hasConiferVariants = false;
-    private boolean thick = false;
+    private boolean thick;
 
     private TreeType(Builder builder) {
         super(builder.name);
@@ -112,9 +112,19 @@ public class TreeType extends TreeFamily {
         this.logicMap = builder.logicMap;
         this.leavesProperties = new LeavesProperties(builder.primitiveLeaves, builder.cellKit);
 
-        setCommonSpecies(new WoodTreeSpecies(this));
+
         setPrimitiveLog(builder.primitiveLog);
-        setDynamicBranch(isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
+        setDynamicBranch(isThick() ? new BlockTreeBranchThick(builder.wood) : new BlockTreeBranch(builder.wood));
+        switch (getName().getPath())
+        {
+            case "sequoia":
+            case "kapok":
+                setThick(true);
+                //redo this after setting Thick, so get the right branch
+                setDynamicBranch(isThick() ? new BlockTreeBranchThick(builder.wood) : new BlockTreeBranch(builder.wood));
+        }
+
+        setCommonSpecies(new WoodTreeSpecies(this));
 
         this.getRegisterableBlocks(BLOCKS);
         this.getRegisterableItems(ITEMS);
@@ -387,20 +397,11 @@ public class TreeType extends TreeFamily {
         }
 
         public Builder setWoodType(WoodType wood) {
-            this.wood = wood;
             setName(wood.toString());
-            setPrimitiveLeaves(TFCBlocks.getWoodBlock(LEAVES, wood).getDefaultState());
-            setPrimitiveLog(TFCBlocks.getWoodBlock(LOG, wood).getDefaultState());
-            return this;
-        }
 
-        public Builder setPrimitiveLeaves(IBlockState primLeaves) {
-            this.primitiveLeaves = primLeaves;
-            return this;
-        }
-
-        public Builder setPrimitiveLog(IBlockState primLog) {
-            this.primitiveLog = primLog;
+            this.wood = wood;
+            this.primitiveLeaves = TFCBlocks.getWoodBlock(LEAVES, wood).getDefaultState();
+            this.primitiveLog = TFCBlocks.getWoodBlock(LOG, wood).getDefaultState();
             return this;
         }
 

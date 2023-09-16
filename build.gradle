@@ -56,7 +56,7 @@ tasks.decompressDecompiledSources.enabled !propertyBool('change_minecraft_source
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(propertyBool('use_modern_java_syntax') ? 16 : 8))
+        languageVersion.set(JavaLanguageVersion.of(propertyBool('use_modern_java_syntax') ? 17 : 8))
         // Azul covers the most platforms for Java 8 toolchains, crucially including MacOS arm64
         vendor.set(JvmVendorSpec.AZUL)
     }
@@ -314,7 +314,7 @@ tasks.withType(JavaCompile).configureEach {
         sourceCompatibility = 17
         options.release.set(8)
         javaCompiler.set(javaToolchains.compilerFor {
-            languageVersion.set(JavaLanguageVersion.of(16))
+            languageVersion.set(JavaLanguageVersion.of(17))
             vendor.set(JvmVendorSpec.AZUL)
         })
     }

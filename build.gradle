@@ -210,6 +210,13 @@ jar {
     from(provider { configurations.embed.collect { it.isDirectory() ? it : zipTree(it) } })
 }
 
+runClient {
+    workingDir = file('run/client')
+}
+runServer {
+    workingDir = file('run/server')
+}
+
 idea {
     module {
         inheritOutputDirs = true

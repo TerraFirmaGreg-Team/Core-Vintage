@@ -2,6 +2,7 @@ package net.dries007.tfc.compat.dynamictrees.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranchThick;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class BlockTreeBranchThick extends BlockBranchThick implements IItemProvider {
+public class BlockTreeBranchThick extends BlockBranchThick implements IItemProvider, IHasModel {
 
 
     public BlockTreeBranchThick(WoodType type) {
@@ -29,7 +30,7 @@ public class BlockTreeBranchThick extends BlockBranchThick implements IItemProvi
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return null;
     }
 
 
@@ -50,5 +51,10 @@ public class BlockTreeBranchThick extends BlockBranchThick implements IItemProvi
 //            return false; //Also no wood for you!
 //        }
         return super.removedByPlayer(state, world, cutPos, player, canHarvest);
+    }
+
+    @Override
+    public void onModelRegister() {
+
     }
 }

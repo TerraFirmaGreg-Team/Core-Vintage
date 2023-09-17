@@ -11,6 +11,5 @@ public class WoodItemVariantHandler {
 
         BOAT = new WoodItemVariant("boat", ItemWoodBoat::new);
         LUMBER = new WoodItemVariant("lumber", ItemWoodLumber::new);
-        SEED = new WoodItemVariant("seed", ItemWoodSeed::new);
     }
 }

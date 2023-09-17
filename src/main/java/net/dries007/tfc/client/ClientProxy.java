@@ -16,6 +16,7 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.types.metal.variant.block.IMetalBlock;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
+import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.api.types.wood.variant.block.IWoodBlock;
 import net.dries007.tfc.api.types.wood.variant.item.IWoodItem;
 import net.dries007.tfc.api.util.IHasModel;
@@ -40,6 +41,7 @@ import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.compat.dynamictrees.client.BakedModelBlockRootyTFC;
+import net.dries007.tfc.compat.dynamictrees.client.ModelHelperTFC;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.network.*;
@@ -97,7 +99,6 @@ import java.util.List;
 
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.TALL_GRASS;
-import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 import static net.minecraft.block.Block.getBlockFromItem;
@@ -137,6 +138,12 @@ public class ClientProxy extends CommonProxy {
             } else {
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
             }
+        }
+
+        // Register Meshers for Branches
+        for (var tree : TreeType.getTreeTypes()) {
+            ModelHelperTFC.regModel(tree.getDynamicBranch()); //Register Branch itemBlock
+            ModelHelperTFC.regModel(tree); //Register custom state mapper for branch
         }
 
         for (var block : TFCBlocks.FLUID)
@@ -353,7 +360,6 @@ public class ClientProxy extends CommonProxy {
         itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
                 TFCItems.WOOD_ITEMS.values()
                         .stream()
-                        .filter(x -> x.getItemVariant() != SEED)
                         .map(s -> (Item) s)
                         .toArray(Item[]::new));
 

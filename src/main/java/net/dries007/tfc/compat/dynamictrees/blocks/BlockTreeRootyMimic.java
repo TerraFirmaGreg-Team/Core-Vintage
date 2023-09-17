@@ -1,11 +1,14 @@
 package net.dries007.tfc.compat.dynamictrees.blocks;
 
+import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.blocks.BlockRootyDirt;
 import net.dries007.tfc.api.types.soil.variant.block.ISoilBlock;
+import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -14,15 +17,17 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.api.types.soil.type.SoilTypes.LOAM;
 import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.DIRT;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 
 @ParametersAreNonnullByDefault
-public class BlockTreeRootyMimic extends BlockRootyDirt implements IItemProvider {
+public class BlockTreeRootyMimic extends BlockRootyDirt implements IItemProvider, IHasModel {
     private static final EnumFacing[] NOT_UP = new EnumFacing[]{
             EnumFacing.DOWN,
             EnumFacing.EAST,
@@ -102,5 +107,12 @@ public class BlockTreeRootyMimic extends BlockRootyDirt implements IItemProvider
             }
         }
         return super.getDecayBlockState(world, pos);
+    }
+
+    @Override
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new StateMap.Builder()
+                .ignore(BlockRooty.LIFE)
+                .build());
     }
 }

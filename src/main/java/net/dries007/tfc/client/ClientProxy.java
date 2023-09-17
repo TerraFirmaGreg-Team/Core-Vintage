@@ -1,6 +1,7 @@
 package net.dries007.tfc.client;
 
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
+import com.ferreusveritas.dynamictrees.models.bakedmodels.BakedModelBlockRooty;
 import com.google.common.collect.ImmutableMap;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
@@ -38,6 +39,7 @@ import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.tileentities.*;
+import net.dries007.tfc.compat.dynamictrees.client.BakedModelBlockRootyTFC;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.network.*;
@@ -97,6 +99,7 @@ import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.S
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.TALL_GRASS;
 import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 import static net.minecraft.block.Block.getBlockFromItem;
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -263,6 +266,7 @@ public class ClientProxy extends CommonProxy {
                         .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler(grassColor, TFCBlocks.PEAT_GRASS);
+        blockColors.registerBlockColorHandler(grassColor, ROOTY_DIRT_MIMIC);
 
         //==== Plant =================================================================================================//
 
@@ -378,6 +382,15 @@ public class ClientProxy extends CommonProxy {
 
         // Colorize clay molds
         itemColors.registerItemColorHandler(moldItemColors, TFCItems.FIRED_MOLDS.values().toArray(new Item[0]));
+    }
+
+    @SubscribeEvent
+    public static void onModelBake(ModelBakeEvent event) {
+        Block block = ROOTY_DIRT_MIMIC;
+        if (block.getRegistryName() != null) {
+            BakedModelBlockRooty rootyModel = new BakedModelBlockRootyTFC();
+            event.getModelRegistry().putObject(new ModelResourceLocation(block.getRegistryName(), "normal"), rootyModel);
+        }
     }
 
     @SideOnly(Side.CLIENT)

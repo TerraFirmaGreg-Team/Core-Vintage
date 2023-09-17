@@ -5,6 +5,7 @@ import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranchThick;
 import com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -46,8 +47,8 @@ public class ModelHelperTFC extends ModelHelper {
 
 
     private static ModelResourceLocation getBranchModelResourceLocation(BlockBranch blockBranch) {
-        var family = blockBranch.getFamily().getName();
-        var resloc = new ResourceLocation(family.getNamespace(), "wood/branch/" + family.getPath());
+        var family = blockBranch.getFamily().getName().getPath();
+        var resloc = TerraFirmaCraft.identifier("wood/branch/" + family);
         return new ModelResourceLocation(resloc, null);
     }
 

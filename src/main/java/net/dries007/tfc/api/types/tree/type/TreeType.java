@@ -117,7 +117,6 @@ public class TreeType extends TreeFamily {
         setDynamicBranch(isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
         setCommonSpecies(new WoodTreeSpecies(name, this, new LeavesProperties(builder.primitiveLeaves, builder.cellKit)));
         getRegisterableBlocks(BLOCKS);
-        getRegisterableItems(ITEMS);
 
         if (name.getPath().isEmpty()) {
             throw new RuntimeException(String.format("TreeType name must contain any character: [%s]", name));

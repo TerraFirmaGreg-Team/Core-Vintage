@@ -27,31 +27,11 @@ public class ClientEventHandler {
     }
 
     @SubscribeEvent
-    public static void onModelBake(ModelBakeEvent event) {
-        Block block = ROOTY_DIRT_MIMIC;
-        if (block.getRegistryName() != null) {
-            BakedModelBlockRooty rootyModel = new BakedModelBlockRootyTFC();
-            event.getModelRegistry().putObject(new ModelResourceLocation(block.getRegistryName(), "normal"), rootyModel);
-        }
-    }
-
-    @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         // Register Meshers for Branches
         for (var tree : TreeType.getTreeTypes()) {
             ModelHelperTFC.regModel(tree.getDynamicBranch()); //Register Branch itemBlock
             ModelHelperTFC.regModel(tree); //Register custom state mapper for branch
         }
-
-        ModelLoader.setCustomStateMapper(ROOTY_DIRT_MIMIC, new StateMap.Builder()
-                .ignore(BlockRooty.LIFE)
-                .build());
-    }
-
-    @SubscribeEvent
-    public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
-        final BlockColors blockColors = event.getBlockColors();
-
-        blockColors.registerBlockColorHandler(GrassColorHandler::computeGrassColor, ROOTY_DIRT_MIMIC);
     }
 }

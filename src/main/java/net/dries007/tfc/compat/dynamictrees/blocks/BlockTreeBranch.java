@@ -2,17 +2,21 @@ package net.dries007.tfc.compat.dynamictrees.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranchBasic;
 import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.Set;
 
-public class BlockTreeBranch extends BlockBranchBasic {
+public class BlockTreeBranch extends BlockBranchBasic implements IItemProvider {
     public BlockTreeBranch(WoodType type) {
         super(String.format("wood/branch/%s", type));
 
@@ -37,5 +41,11 @@ public class BlockTreeBranch extends BlockBranchBasic {
 //            return false; //Also no wood for you!
 //        }
         return super.removedByPlayer(state, world, cutPos, player, canHarvest); // any other conditions, we can handle normally
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 }

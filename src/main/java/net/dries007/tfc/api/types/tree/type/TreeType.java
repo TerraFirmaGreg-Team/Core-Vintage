@@ -24,6 +24,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.TemplateManager;
@@ -74,10 +75,9 @@ public class TreeType extends TreeFamily {
     private final ITreeGenerator generator;
     private final float[] paramMap;
     private final IGrowthLogicKit logicMap;
-    private final LeavesProperties leavesProperties;
 
     public boolean hasConiferVariants = false;
-    private boolean thick;
+    private final boolean thick;
 
     private TreeType(Builder builder) {
         super(builder.name);
@@ -112,15 +112,12 @@ public class TreeType extends TreeFamily {
         this.paramMap = builder.paramMap;
         this.logicMap = builder.logicMap;
         this.thick = builder.thick;
-        this.leavesProperties = new LeavesProperties(builder.primitiveLeaves, builder.cellKit);
 
-        this.setPrimitiveLog(builder.primitiveLog);
-        this.setDynamicBranch(isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
-
-        this.setCommonSpecies(new WoodTreeSpecies(name, this, leavesProperties));
-
-        this.getRegisterableBlocks(BLOCKS);
-        this.getRegisterableItems(ITEMS);
+        setPrimitiveLog(builder.primitiveLog);
+        setDynamicBranch(isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
+        setCommonSpecies(new WoodTreeSpecies(name, this, new LeavesProperties(builder.primitiveLeaves, builder.cellKit)));
+        getRegisterableBlocks(BLOCKS);
+        getRegisterableItems(ITEMS);
 
         if (name.getPath().isEmpty()) {
             throw new RuntimeException(String.format("TreeType name must contain any character: [%s]", name));
@@ -161,6 +158,13 @@ public class TreeType extends TreeFamily {
 
     public IGrowthLogicKit getGrowthLogicKit() {
         return logicMap;
+    }
+
+    @Override
+    public ItemStack getPrimitiveLogItemStack(int qty) {
+        var stack = new ItemStack(TFCBlocks.getWoodBlock(LOG, wood), qty);
+        stack.setCount(MathHelper.clamp(qty, 0, 64));
+        return stack;
     }
 
 

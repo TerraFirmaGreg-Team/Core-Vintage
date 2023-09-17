@@ -5,10 +5,11 @@ import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
 import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
+import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.api.types.tree.WoodTreeSpecies;
+import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.TFCItems;
@@ -110,21 +111,13 @@ public class TreeType extends TreeFamily {
 
         this.paramMap = builder.paramMap;
         this.logicMap = builder.logicMap;
+        this.thick = builder.thick;
         this.leavesProperties = new LeavesProperties(builder.primitiveLeaves, builder.cellKit);
 
+        this.setPrimitiveLog(builder.primitiveLog);
+        this.setDynamicBranch(isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
 
-        setPrimitiveLog(builder.primitiveLog);
-        setDynamicBranch(isThick() ? new BlockTreeBranchThick(builder.wood) : new BlockTreeBranch(builder.wood));
-        switch (getName().getPath())
-        {
-            case "sequoia":
-            case "kapok":
-                setThick(true);
-                //redo this after setting Thick, so get the right branch
-                setDynamicBranch(isThick() ? new BlockTreeBranchThick(builder.wood) : new BlockTreeBranch(builder.wood));
-        }
-
-        setCommonSpecies(new WoodTreeSpecies(this));
+        this.setCommonSpecies(new WoodTreeSpecies(name, this, leavesProperties));
 
         this.getRegisterableBlocks(BLOCKS);
         this.getRegisterableItems(ITEMS);
@@ -170,18 +163,10 @@ public class TreeType extends TreeFamily {
         return logicMap;
     }
 
-    public LeavesProperties getLeavesProperties() {
-        return leavesProperties;
-    }
-
 
     @Override
     public boolean isThick() {
         return thick;
-    }
-
-    public void setThick(boolean thick) {
-        this.thick = thick;
     }
 
     /**
@@ -386,6 +371,7 @@ public class TreeType extends TreeFamily {
         private IBlockState primitiveLeaves;
         private IBlockState primitiveLog;
         private ItemStack stickItemStack;
+        private boolean thick = false;
 
         public Builder setName(ResourceLocation name) {
             this.name = name;
@@ -513,6 +499,11 @@ public class TreeType extends TreeFamily {
 
         public Builder setCellKit(String kit) {
             setCellKit(new ResourceLocation(MODID, kit));
+            return this;
+        }
+
+        public Builder setThick(boolean thick) {
+            this.thick = thick;
             return this;
         }
 

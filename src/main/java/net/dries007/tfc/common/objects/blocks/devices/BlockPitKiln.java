@@ -2,10 +2,12 @@ package net.dries007.tfc.common.objects.blocks.devices;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.BlockPlacedItem;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -22,6 +24,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -44,7 +47,7 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockPitKiln extends Block implements ILightableBlock {
+public class BlockPitKiln extends Block implements ILightableBlock, IItemProvider {
     public static final PropertyBool FULL = PropertyBool.create("full");
 
     private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[]{
@@ -69,6 +72,12 @@ public class BlockPitKiln extends Block implements ILightableBlock {
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "pit_kiln");
         setTranslationKey(Tags.MOD_ID + ".pit_kiln");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     @Override

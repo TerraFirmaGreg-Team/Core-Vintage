@@ -4,9 +4,12 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockLargeVessel;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockPowderKeg;
 import net.dries007.tfc.common.objects.tileentities.TEPowderKeg;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -21,6 +24,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -46,7 +50,7 @@ import java.util.Random;
  * Sealed state is stored in a block state property, and cached in the TE (for gui purposes)
  */
 @ParametersAreNonnullByDefault
-public class BlockPowderKeg extends Block implements IItemSize, ILightableBlock {
+public class BlockPowderKeg extends Block implements IItemSize, ILightableBlock, IItemProvider {
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
@@ -63,6 +67,12 @@ public class BlockPowderKeg extends Block implements IItemSize, ILightableBlock 
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "powderkeg");
         setTranslationKey(Tags.MOD_ID + ".powderkeg");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockPowderKeg(this);
     }
 
     /**

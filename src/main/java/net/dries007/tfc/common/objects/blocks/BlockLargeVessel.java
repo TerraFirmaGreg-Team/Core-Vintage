@@ -4,8 +4,11 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockCrucible;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.common.objects.tileentities.TELargeVessel;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -18,6 +21,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -41,7 +45,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * Sealed state is stored in a block state property, and cached in the TE (for gui purposes)
  */
 @ParametersAreNonnullByDefault
-public class BlockLargeVessel extends Block implements IItemSize {
+public class BlockLargeVessel extends Block implements IItemSize, IItemProvider {
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.625D, 0.8125D);
     private static final AxisAlignedBB BOUNDING_BOX_SEALED = new AxisAlignedBB(0.15625D, 0.0D, 0.15625D, 0.84375D, 0.6875D, 0.84375D);
@@ -57,6 +61,12 @@ public class BlockLargeVessel extends Block implements IItemSize {
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, blockRegistryName);
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockLargeVessel(this);
     }
 
     /**

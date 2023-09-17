@@ -2,13 +2,15 @@ package net.dries007.tfc.api.types.wood.variant.block;
 
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.util.Pair;
+import net.minecraft.block.Block;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.WOOD_BLOCKS;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
+import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
 
 /**
  * Класс CropItemVariant представляет вариант деревянного блока.
@@ -46,7 +48,9 @@ public class WoodBlockVariant {
 
             if (WOOD_BLOCKS.put(new Pair<>(this, type), woodBlock) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
+            ITEM_BLOCKS.add((Block) woodBlock);
         }
+
     }
 
     /**

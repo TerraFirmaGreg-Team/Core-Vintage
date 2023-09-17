@@ -1,7 +1,9 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEPitKiln;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItem;
 import net.dries007.tfc.util.Helpers;
@@ -16,6 +18,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -37,7 +40,7 @@ import java.util.Random;
 
 
 @ParametersAreNonnullByDefault
-public class BlockPlacedItem extends Block {
+public class BlockPlacedItem extends Block implements IItemProvider {
     public static final AxisAlignedBB PLACED_ITEM_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1);
 
     public BlockPlacedItem() {
@@ -47,6 +50,12 @@ public class BlockPlacedItem extends Block {
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "placed_item");
         setTranslationKey(Tags.MOD_ID + ".placed_item");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     @Override

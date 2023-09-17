@@ -72,7 +72,7 @@ public class TFCBlocks {
 
 
     // Блоки, имеющие предмет
-    public static final ArrayList<ItemBlock> ITEM_BLOCKS = new ArrayList<>();
+    public static final ArrayList<Block> ITEM_BLOCKS = new ArrayList<>();
 
     // Блоки, не имеющие предмета
     public static final ArrayList<Block> BLOCKS = new ArrayList<>();
@@ -174,25 +174,25 @@ public class TFCBlocks {
 
         //==== Other =================================================================================================//
 
-        ITEM_BLOCKS.add(new ItemBlockTFC(PEAT = new BlockPeat()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(PEAT_GRASS = new BlockPeatGrass()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(DEBUG = new BlockDebug()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(AGGREGATE = new BlockAggregate()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(FIRE_CLAY_BLOCK = new BlockFireClay()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(THATCH = new BlockThatch()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(QUERN = new BlockQuern()));
-        ITEM_BLOCKS.add(new ItemBlockCrucible(CRUCIBLE = new BlockCrucible()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(BLAST_FURNACE = new BlockBlastFurnace()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(BELLOWS = new BlockBellows()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(BLOOMERY = new BlockBloomery()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(NEST_BOX = new BlockNestBox()));
-        ITEM_BLOCKS.add(new ItemBlockLargeVessel(FIRED_LARGE_VESSEL = new BlockLargeVessel()));
-        ITEM_BLOCKS.add(new ItemBlock(FIREPIT = new BlockFirePit()));
-        ITEM_BLOCKS.add(new ItemBlock(PIT_KILN = new BlockPitKiln()));
-        ITEM_BLOCKS.add(new ItemBlock(PLACED_ITEM = new BlockPlacedItem()));
-        ITEM_BLOCKS.add(new ItemBlock(CHARCOAL_FORGE = new BlockCharcoalForge()));
-        ITEM_BLOCKS.add(new ItemBlockTFC(SEA_ICE = new BlockIceTFC(FluidRegistry.getFluid("salt_water"))));
-        ITEM_BLOCKS.add(new ItemBlockPowderKeg(POWDERKEG = new BlockPowderKeg()));
+        ITEM_BLOCKS.add(PEAT = new BlockPeat());
+        ITEM_BLOCKS.add(PEAT_GRASS = new BlockPeatGrass());
+        ITEM_BLOCKS.add(DEBUG = new BlockDebug());
+        ITEM_BLOCKS.add(AGGREGATE = new BlockAggregate());
+        ITEM_BLOCKS.add(FIRE_CLAY_BLOCK = new BlockFireClay());
+        ITEM_BLOCKS.add(THATCH = new BlockThatch());
+        ITEM_BLOCKS.add(QUERN = new BlockQuern());
+        ITEM_BLOCKS.add(CRUCIBLE = new BlockCrucible());
+        ITEM_BLOCKS.add(BLAST_FURNACE = new BlockBlastFurnace());
+        ITEM_BLOCKS.add(BELLOWS = new BlockBellows());
+        ITEM_BLOCKS.add(BLOOMERY = new BlockBloomery());
+        ITEM_BLOCKS.add(NEST_BOX = new BlockNestBox());
+        ITEM_BLOCKS.add(FIRED_LARGE_VESSEL = new BlockLargeVessel());
+        ITEM_BLOCKS.add(FIREPIT = new BlockFirePit());
+        ITEM_BLOCKS.add(PIT_KILN = new BlockPitKiln());
+        ITEM_BLOCKS.add(PLACED_ITEM = new BlockPlacedItem());
+        ITEM_BLOCKS.add(CHARCOAL_FORGE = new BlockCharcoalForge());
+        ITEM_BLOCKS.add(SEA_ICE = new BlockIceTFC(FluidRegistry.getFluid("salt_water")));
+        ITEM_BLOCKS.add(POWDERKEG = new BlockPowderKeg());
 
         BLOCKS.add(PLACED_ITEM_FLAT = new BlockPlacedItemFlat());
         BLOCKS.add(PLACED_HIDE = new BlockPlacedHide());

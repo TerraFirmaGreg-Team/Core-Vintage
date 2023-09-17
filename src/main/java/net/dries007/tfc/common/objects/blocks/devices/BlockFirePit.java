@@ -2,12 +2,14 @@ package net.dries007.tfc.common.objects.blocks.devices;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEBellows;
 import net.dries007.tfc.common.objects.tileentities.TEFirePit;
 import net.dries007.tfc.util.DamageSourcesTFC;
@@ -26,6 +28,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tileentity.TileEntity;
@@ -53,7 +56,7 @@ import java.util.Random;
 import static net.dries007.tfc.util.Constants.RNG;
 
 @ParametersAreNonnullByDefault
-public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILightableBlock {
+public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILightableBlock, IItemProvider {
     public static final PropertyEnum<FirePitAttachment> ATTACHMENT = PropertyEnum.create("attachment", FirePitAttachment.class);
 
     private static final AxisAlignedBB FIREPIT_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.125, 1);
@@ -71,6 +74,12 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "firepit");
         setTranslationKey(Tags.MOD_ID + ".firepit");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     @Override

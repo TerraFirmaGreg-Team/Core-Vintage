@@ -4,9 +4,11 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEQuern;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -16,6 +18,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -38,7 +41,7 @@ import java.util.List;
 
 
 @ParametersAreNonnullByDefault
-public class BlockQuern extends Block implements IItemSize, IHighlightHandler {
+public class BlockQuern extends Block implements IItemSize, IHighlightHandler, IItemProvider {
     private static final AxisAlignedBB BASE_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.625D, 1D);
     private static final AxisAlignedBB QUERN_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.875D, 1D);
 
@@ -56,6 +59,12 @@ public class BlockQuern extends Block implements IItemSize, IHighlightHandler {
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "quern");
         setTranslationKey(Tags.MOD_ID + ".quern");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     /**

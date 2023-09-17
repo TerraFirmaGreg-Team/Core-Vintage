@@ -4,10 +4,12 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEBloomery;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.block.Multiblock;
@@ -21,6 +23,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -38,7 +41,7 @@ import java.util.function.Predicate;
 import static net.minecraft.block.BlockTrapDoor.OPEN;
 
 @ParametersAreNonnullByDefault
-public class BlockBloomery extends BlockHorizontal implements IItemSize, ILightableBlock {
+public class BlockBloomery extends BlockHorizontal implements IItemSize, ILightableBlock, IItemProvider {
     //[horizontal index][basic shape / door1 / door2]
     private static final AxisAlignedBB[][] AABB =
             {
@@ -172,6 +175,12 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "bloomery");
         setTranslationKey(Tags.MOD_ID + ".bloomery");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     public static boolean isValidSideBlock(IBlockState state) {

@@ -1,7 +1,9 @@
 package net.dries007.tfc.common.objects.blocks.devices;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEBellows;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -13,6 +15,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -27,7 +30,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import static net.minecraft.block.BlockHorizontal.FACING;
 
 @ParametersAreNonnullByDefault
-public class BlockBellows extends Block {
+public class BlockBellows extends Block implements IItemProvider {
     public BlockBellows() {
         super(Material.CIRCUITS, MapColor.GRAY);
         setSoundType(SoundType.WOOD);
@@ -39,6 +42,12 @@ public class BlockBellows extends Block {
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "bellows");
         setTranslationKey(Tags.MOD_ID + ".bellows");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     @Override

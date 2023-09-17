@@ -1,7 +1,9 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -10,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -20,11 +23,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockThatch extends Block {
+public class BlockThatch extends Block implements IItemProvider {
     public BlockThatch() {
         super(new Material(MapColor.FOLIAGE) {
             @Override
@@ -44,6 +48,12 @@ public class BlockThatch extends Block {
         OreDictionaryHelper.register(this, "thatch");
         OreDictionaryHelper.register(this, "block", "straw");
         Blocks.FIRE.setFireInfo(this, 60, 20);
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     @SuppressWarnings("deprecation")

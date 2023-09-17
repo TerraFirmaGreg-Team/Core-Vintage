@@ -1,8 +1,10 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TENestBox;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -11,6 +13,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -28,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockNestBox extends Block {
+public class BlockNestBox extends Block implements IItemProvider {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
 
     public BlockNestBox() {
@@ -40,6 +43,12 @@ public class BlockNestBox extends Block {
         setTranslationKey(Tags.MOD_ID + ".nest_box");
 
         Blocks.FIRE.setFireInfo(this, 60, 20);
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     @SuppressWarnings("deprecation")

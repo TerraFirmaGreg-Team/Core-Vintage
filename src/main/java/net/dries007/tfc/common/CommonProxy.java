@@ -32,6 +32,7 @@ import net.dries007.tfc.api.types.rock.RockModule;
 import net.dries007.tfc.api.types.soil.SoilModule;
 import net.dries007.tfc.api.types.tree.TreeModule;
 import net.dries007.tfc.api.types.wood.WoodModule;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.LootTablesTFC;
 import net.dries007.tfc.common.objects.blocks.BlockIceTFC;
@@ -143,9 +144,9 @@ public class CommonProxy {
 
         //==== Wood ==================================================================================================//
 
-        for (var woodBlock : WOOD_BLOCKS.values()) {
-            r.register((Block) woodBlock);
-        }
+//        for (var woodBlock : WOOD_BLOCKS.values()) {
+//            r.register((Block) woodBlock);
+//        }
 
         //==== Crop ==================================================================================================//
 
@@ -185,7 +186,7 @@ public class CommonProxy {
 
         //==== Other =================================================================================================//
 
-        ITEM_BLOCKS.forEach(x -> r.register(x.getBlock()));
+        ITEM_BLOCKS.forEach(r::register);
         BLOCKS.forEach(r::register);
         FLUID.forEach(r::register);
 
@@ -254,10 +255,10 @@ public class CommonProxy {
 
         //==== Wood ==================================================================================================//
 
-        for (var woodBlock : WOOD_BLOCKS.values()) {
-            var itemBlock = woodBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
+//        for (var woodBlock : WOOD_BLOCKS.values()) {
+//            var itemBlock = woodBlock.getItemBlock();
+//            if (itemBlock != null) registerItemBlock(r, itemBlock);
+//        }
 
         for (var woodItem : WOOD_ITEMS.values()) r.register((Item) woodItem);
 
@@ -301,7 +302,7 @@ public class CommonProxy {
 
         //==== Other =================================================================================================//
 
-        ITEM_BLOCKS.forEach(x -> registerItemBlock(r, x));
+        ITEM_BLOCKS.forEach(x -> registerItemBlock(r, ((IItemProvider)x).getItemBlock()));
         ITEMS.forEach(r::register);
     }
 
@@ -359,9 +360,11 @@ public class CommonProxy {
 
     @SuppressWarnings("ConstantConditions")
     private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item) {
-        item.setRegistryName(item.getBlock().getRegistryName());
-        item.setCreativeTab(item.getBlock().getCreativeTab());
-        r.register(item);
+        if (item != null) {
+            item.setRegistryName(item.getBlock().getRegistryName());
+            item.setCreativeTab(item.getBlock().getCreativeTab());
+            r.register(item);
+        }
     }
 
     /**

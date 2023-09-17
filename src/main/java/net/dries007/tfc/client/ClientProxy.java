@@ -136,8 +136,11 @@ public class ClientProxy extends CommonProxy {
         TFCBlocks.METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
 
-        for (var itemBlock : TFCBlocks.ITEM_BLOCKS)
-            ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName(), "normal"));
+        for (var block : TFCBlocks.ITEM_BLOCKS) {
+            if (!(block instanceof IHasModel)) {
+                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
+            }
+        }
 
         for (var block : TFCBlocks.FLUID)
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());

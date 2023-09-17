@@ -4,12 +4,14 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEBellows;
 import net.dries007.tfc.common.objects.tileentities.TEBlastFurnace;
 import net.dries007.tfc.common.objects.tileentities.TEMetalSheet;
@@ -20,6 +22,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -35,7 +38,7 @@ import java.util.function.Predicate;
 
 
 @ParametersAreNonnullByDefault
-public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, ILightableBlock {
+public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, ILightableBlock, IItemProvider {
     private static final Multiblock BLAST_FURNACE_CHIMNEY;
 
     static {
@@ -74,6 +77,12 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "blast_furnace");
         setTranslationKey(Tags.MOD_ID + ".blast_furnace");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     /**

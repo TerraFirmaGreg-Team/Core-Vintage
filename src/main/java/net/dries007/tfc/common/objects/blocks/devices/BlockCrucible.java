@@ -5,8 +5,11 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockCrucible;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TECrucible;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -17,6 +20,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -37,7 +41,7 @@ import java.util.List;
 
 
 @ParametersAreNonnullByDefault
-public class BlockCrucible extends Block implements IHeatConsumerBlock, IItemSize {
+public class BlockCrucible extends Block implements IHeatConsumerBlock, IItemSize, IItemProvider {
     private static final AxisAlignedBB CRUCIBLE_AABB = new AxisAlignedBB(0.0625, 0.0625, 0.0625, 0.9375, 0.9375, 0.9375);
     private static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.9375D, 0.125D, 0.9375D);
     private static final AxisAlignedBB AABB_WALL_NORTH = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.9375D, 0.1875D);
@@ -55,6 +59,12 @@ public class BlockCrucible extends Block implements IHeatConsumerBlock, IItemSiz
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "crucible");
         setTranslationKey(Tags.MOD_ID + ".crucible");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockCrucible(this);
     }
 
     @Override

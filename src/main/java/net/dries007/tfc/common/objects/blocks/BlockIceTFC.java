@@ -1,7 +1,9 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.dries007.tfc.util.climate.IceMeltHandler;
@@ -12,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
@@ -28,7 +31,7 @@ import java.util.ArrayList;
 
 
 @ParametersAreNonnullByDefault
-public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
+public class BlockIceTFC extends BlockIce implements ITemperatureBlock, IItemProvider {
     private final Fluid waterFluid;
     private final float meltThreshold;
 
@@ -49,6 +52,12 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
         setLightOpacity(3);
         setSoundType(SoundType.GLASS);
         setTickRandomly(true);
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     /**

@@ -129,9 +129,7 @@ public class ClientProxy extends CommonProxy {
 
         //==== BLOCKS ================================================================================================//
 
-        TFCBlocks.GROUNDCOVER_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCBlocks.METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
-
 
         for (var block : TFCBlocks.BLOCKS) {
             if (block instanceof IHasModel blockModel) {
@@ -140,6 +138,7 @@ public class ClientProxy extends CommonProxy {
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
             }
         }
+
         for (var block : TFCBlocks.FLUID)
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
 

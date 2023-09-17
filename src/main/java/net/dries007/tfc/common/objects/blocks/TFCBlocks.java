@@ -1,9 +1,7 @@
 package net.dries007.tfc.common.objects.blocks;
 
-import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.bush.IBushBlock;
 import net.dries007.tfc.api.types.bush.type.BushType;
@@ -18,21 +16,18 @@ import net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant;
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.block.IRockBlock;
 import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
-import net.dries007.tfc.api.types.soil.type.SoilType;
-import net.dries007.tfc.api.types.soil.variant.block.ISoilBlock;
-import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
+import net.dries007.tfc.module.core.submodule.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.block.IWoodBlock;
 import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.common.objects.blocks.berrybush.BlockBerryBush;
 import net.dries007.tfc.common.objects.blocks.devices.*;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidHotWater;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidWater;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.common.objects.blocks.rock.BlockAlabaster;
-import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeat;
-import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeatGrass;
+import net.dries007.tfc.module.core.submodule.soil.common.blocks.peat.BlockPeat;
+import net.dries007.tfc.module.core.submodule.soil.common.blocks.peat.BlockPeatGrass;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeRootyMimic;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.minecraft.block.Block;
@@ -48,7 +43,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.*;
-import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.*;
 import static net.minecraft.block.material.Material.WATER;
 
 public class TFCBlocks {
@@ -56,7 +50,6 @@ public class TFCBlocks {
     //==== Block =====================================================================================================//
 
     public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<PlantBlockVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<CropBlockVariant, CropType>, ICropBlock> CROP_BLOCKS = new LinkedHashMap<>();
@@ -185,13 +178,6 @@ public class TFCBlocks {
     @Nonnull
     public static Block getRockBlock(@Nonnull RockBlockVariant variant, @Nonnull RockType type) {
         var block = (Block) ROCK_BLOCKS.get(new Pair<>(variant, type));
-        if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
-    }
-
-    @Nonnull
-    public static Block getSoilBlock(@Nonnull SoilBlockVariant variant, @Nonnull SoilType type) {
-        var block = (Block) SOIL_BLOCKS.get(new Pair<>(variant, type));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
     }

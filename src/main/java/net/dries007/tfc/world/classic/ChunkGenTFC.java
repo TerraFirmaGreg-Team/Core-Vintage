@@ -3,10 +3,10 @@ package net.dries007.tfc.world.classic;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.rock.category.RockCategory;
 import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.soil.type.SoilType;
-import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
+import net.dries007.tfc.module.core.submodule.soil.api.type.SoilType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.submodule.soil.common.SoilStorage;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -659,8 +659,8 @@ public class ChunkGenTFC implements IChunkGenerator {
                 int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
                 int smooth = -1;
 
-                IBlockState surfaceBlock = TFCBlocks.getSoilBlock(rainfall + 1.3 * rand.nextGaussian() >= 150f ? SoilBlockVariants.GRASS : SoilBlockVariants.DRY_GRASS, soil1).getDefaultState();
-                IBlockState subSurfaceBlock = TFCBlocks.getSoilBlock(SoilBlockVariants.DIRT, soil1).getDefaultState();
+                IBlockState surfaceBlock = SoilStorage.getSoilBlock(rainfall + 1.3 * rand.nextGaussian() >= 150f ? GRASS : DRY_GRASS, soil1).getDefaultState();
+                IBlockState subSurfaceBlock = SoilStorage.getSoilBlock(DIRT, soil1).getDefaultState();
 
                 if (BiomesTFC.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x + 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z - 1))) {
                     if (!BiomesTFC.isBeachBiome(getBiomeOffset(x, z))) cliffMap[colIndex] = true;
@@ -818,7 +818,7 @@ public class ChunkGenTFC implements IChunkGenerator {
                             } else // Болотные биомы имеют дно, состоящее в основном из земли
                             {
                                 if (outp.getBlockState(x, y + yOffset, z) != TFCBlocks.getRockBlock(SAND, rock1).getDefaultState())
-                                    outp.setBlockState(x, y + yOffset, z, TFCBlocks.getSoilBlock(SoilBlockVariants.DIRT, soil1).getDefaultState());
+                                    outp.setBlockState(x, y + yOffset, z, SoilStorage.getSoilBlock(DIRT, soil1).getDefaultState());
                             }
                         }
                     }

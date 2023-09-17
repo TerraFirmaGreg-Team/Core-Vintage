@@ -2,10 +2,10 @@ package net.dries007.tfc.compat.dynamictrees.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.blocks.BlockRootyDirt;
-import net.dries007.tfc.api.types.soil.variant.block.ISoilBlock;
+import net.dries007.tfc.module.core.submodule.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.submodule.soil.common.SoilStorage;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -22,9 +22,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.api.types.soil.type.SoilTypes.LOAM;
-import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.DIRT;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
+import static net.dries007.tfc.module.core.submodule.soil.api.type.SoilTypes.LOAM;
+import static net.dries007.tfc.module.core.submodule.soil.api.variant.block.SoilBlockVariants.DIRT;
 
 @ParametersAreNonnullByDefault
 public class BlockTreeRootyMimic extends BlockRootyDirt implements IItemProvider, IHasModel {
@@ -63,12 +62,12 @@ public class BlockTreeRootyMimic extends BlockRootyDirt implements IItemProvider
                     var state = access.getBlockState(pos.offset(d, i));
                     if (state.getBlock() instanceof ISoilBlock) {
                         var soil = ((ISoilBlock) state.getBlock()).getType();
-                        return TFCBlocks.getSoilBlock(DIRT, soil).getDefaultState();
+                        return SoilStorage.getSoilBlock(DIRT, soil).getDefaultState();
                     }
                 }
             }
             // Если вокруг нет блоков почвы, возвращаем состояние блока почвы по умолчанию
-            return TFCBlocks.getSoilBlock(DIRT, LOAM).getDefaultState();
+            return SoilStorage.getSoilBlock(DIRT, LOAM).getDefaultState();
         }
         return mimicState;
     }
@@ -103,7 +102,7 @@ public class BlockTreeRootyMimic extends BlockRootyDirt implements IItemProvider
             var chunkData = ((World) world).getChunk(pos).getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
             if (chunkData != null) {
                 var soil = chunkData.getSoilHeight(pos);
-                return TFCBlocks.getSoilBlock(DIRT, soil).getDefaultState();
+                return SoilStorage.getSoilBlock(DIRT, soil).getDefaultState();
             }
         }
         return super.getDecayBlockState(world, pos);

@@ -30,7 +30,7 @@ import net.dries007.tfc.api.types.food.FoodModule;
 import net.dries007.tfc.api.types.metal.MetalModule;
 import net.dries007.tfc.api.types.plant.PlantModule;
 import net.dries007.tfc.api.types.rock.RockModule;
-import net.dries007.tfc.api.types.soil.SoilModule;
+import net.dries007.tfc.module.core.submodule.soil.ModuleSoil;
 import net.dries007.tfc.api.types.tree.TreeModule;
 import net.dries007.tfc.api.types.wood.WoodModule;
 import net.dries007.tfc.api.util.IItemProvider;
@@ -67,7 +67,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSnow;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -282,7 +281,7 @@ public class CommonProxy {
 
     public void onPreInit(FMLPreInitializationEvent event) {
         RockModule.preInit();
-        SoilModule.preInit();
+        ModuleSoil.preInit();
         WoodModule.preInit();
         TreeModule.preInit();
         MetalModule.preInit();
@@ -340,6 +339,11 @@ public class CommonProxy {
     }
 
     public void onInit(FMLInitializationEvent event) {
+        ModuleSoil.init();
+
+
+
+
         LootTablesTFC.init();
         CapabilityFood.init();
 
@@ -354,6 +358,8 @@ public class CommonProxy {
     }
 
     public void onPostInit(FMLPostInitializationEvent event) {
+
+        ModuleSoil.postInit();
 
         TreeHelper.setCustomRootBlockDecay(TFCRootDecay.INSTANCE);
         FuelManager.postInit();

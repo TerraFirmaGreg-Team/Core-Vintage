@@ -5,14 +5,14 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 import com.ferreusveritas.dynamictrees.util.SimpleVoxmap;
 import com.ferreusveritas.dynamictrees.worldgen.JoCode;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.submodule.soil.common.SoilStorage;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.DIRT;
+import static net.dries007.tfc.module.core.submodule.soil.api.variant.block.SoilBlockVariants.DIRT;
 
 /**
  * Класс WorldGenMound расширяет класс FeatureGenMound и используется для генерации холмов в мире.
@@ -62,7 +62,7 @@ public class WorldGenMound extends FeatureGenMound {
 
             if (initialUnderState.getMaterial() == Material.AIR || (initialUnderState.getMaterial() != Material.GROUND && initialUnderState.getMaterial() != Material.ROCK)) {
                 var chunkData = world.getChunk(rootPos).getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
-                initialUnderState = TFCBlocks.getSoilBlock(DIRT, chunkData.getSoilHeight(rootPos)).getDefaultState();
+                initialUnderState = SoilStorage.getSoilBlock(DIRT, chunkData.getSoilHeight(rootPos)).getDefaultState();
             }
 
             rootPos = rootPos.up();

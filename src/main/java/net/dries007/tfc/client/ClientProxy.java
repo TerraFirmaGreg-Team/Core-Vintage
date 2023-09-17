@@ -15,7 +15,6 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.types.metal.variant.block.IMetalBlock;
-import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.api.types.wood.variant.block.IWoodBlock;
 import net.dries007.tfc.api.types.wood.variant.item.IWoodItem;
@@ -31,7 +30,6 @@ import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.common.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
 import net.dries007.tfc.common.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.common.objects.entity.animal.*;
@@ -44,6 +42,7 @@ import net.dries007.tfc.compat.dynamictrees.client.BakedModelBlockRootyTFC;
 import net.dries007.tfc.compat.dynamictrees.client.ModelHelperTFC;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.submodule.soil.common.blocks.BlockSoilFarmland;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -101,6 +100,8 @@ import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.S
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.TALL_GRASS;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
+import static net.dries007.tfc.module.core.submodule.soil.api.variant.block.SoilBlockVariants.FARMLAND;
+import static net.dries007.tfc.module.core.submodule.soil.common.SoilStorage.SOIL_BLOCKS;
 import static net.minecraft.block.Block.getBlockFromItem;
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -257,7 +258,7 @@ public class ClientProxy extends CommonProxy {
         //==== Soil ==================================================================================================//
 
         blockColors.registerBlockColorHandler(grassColor,
-                TFCBlocks.SOIL_BLOCKS.values()
+                SOIL_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant().isGrass())
                         .map(s -> (Block) s)
@@ -265,9 +266,9 @@ public class ClientProxy extends CommonProxy {
 
         blockColors.registerBlockColorHandler((s, w, p, i) ->
                         BlockSoilFarmland.TINT[s.getValue(BlockSoilFarmland.MOISTURE)],
-                TFCBlocks.SOIL_BLOCKS.values()
+                SOIL_BLOCKS.values()
                         .stream()
-                        .filter(x -> x.getBlockVariant() == SoilBlockVariants.FARMLAND)
+                        .filter(x -> x.getBlockVariant() == FARMLAND)
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
@@ -322,7 +323,7 @@ public class ClientProxy extends CommonProxy {
         //==== Soil ==================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
-                TFCBlocks.SOIL_BLOCKS.values()
+                SOIL_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant().isGrass())
                         .map(s -> (Block) s)

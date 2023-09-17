@@ -6,7 +6,7 @@ import net.dries007.tfc.api.types.crop.variant.item.ICropItem;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
-import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
+import net.dries007.tfc.module.core.submodule.soil.common.blocks.BlockSoilFarmland;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

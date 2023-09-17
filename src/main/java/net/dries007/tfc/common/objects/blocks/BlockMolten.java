@@ -1,16 +1,20 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.property.ILightableBlock;
+import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
@@ -20,6 +24,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -29,7 +35,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockMolten extends Block implements ILightableBlock {
+public class BlockMolten extends TFCBlock implements ILightableBlock, IHasModel {
     public static final PropertyInteger LAYERS = PropertyInteger.create("layers", 1, 4);
 
     private static final AxisAlignedBB[] MOLTEN_AABB = new AxisAlignedBB[]{
@@ -42,11 +48,19 @@ public class BlockMolten extends Block implements ILightableBlock {
     public BlockMolten() {
         super(Material.ROCK);
         setHardness(-1);
-        setDefaultState(this.getBlockState().getBaseState().withProperty(LIT, false).withProperty(LAYERS, 1));
+        setDefaultState(this.getBlockState().getBaseState()
+                .withProperty(LIT, false)
+                .withProperty(LAYERS, 1));
 
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "molten");
         setTranslationKey(Tags.MOD_ID + ".molten");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return null;
     }
 
     @SuppressWarnings("deprecation")
@@ -159,5 +173,10 @@ public class BlockMolten extends Block implements ILightableBlock {
     @Override
     public PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EntityLiving entity) {
         return state.getValue(LIT) && (entity == null || !entity.isImmuneToFire()) ? net.minecraft.pathfinding.PathNodeType.DAMAGE_FIRE : null;
+    }
+
+    @Override
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().build());
     }
 }

@@ -14,6 +14,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -38,7 +39,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * Placement is restricted to the TFC item.
  */
 @ParametersAreNonnullByDefault
-public class BlockPlacedHide extends Block {
+public class BlockPlacedHide extends TFCBlock {
     public static final PropertyEnum<ItemAnimalHide.HideSize> SIZE = PropertyEnum.create("size", ItemAnimalHide.HideSize.class);
 
     public BlockPlacedHide() {
@@ -50,6 +51,12 @@ public class BlockPlacedHide extends Block {
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "placed_hide");
         setTranslationKey(Tags.MOD_ID + ".placed_hide");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return null;
     }
 
     private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {

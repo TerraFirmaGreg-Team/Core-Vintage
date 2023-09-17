@@ -31,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockNestBox extends Block implements IItemProvider {
+public class BlockNestBox extends TFCBlock {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
 
     public BlockNestBox() {
@@ -43,12 +43,6 @@ public class BlockNestBox extends Block implements IItemProvider {
         setTranslationKey(Tags.MOD_ID + ".nest_box");
 
         Blocks.FIRE.setFireInfo(this, 60, 20);
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     @SuppressWarnings("deprecation")

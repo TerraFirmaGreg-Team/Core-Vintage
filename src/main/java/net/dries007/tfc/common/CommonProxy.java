@@ -1,6 +1,7 @@
 package net.dries007.tfc.common;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import gregtech.api.unification.material.event.MaterialEvent;
@@ -130,64 +131,28 @@ public class CommonProxy {
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         IForgeRegistry<Block> r = event.getRegistry();
 
-        //==== Rock ==================================================================================================//
-
-        for (var rockBlock : ROCK_BLOCKS.values()) {
-            r.register((Block) rockBlock);
-        }
-
-        //==== Soil ==================================================================================================//
-
-        for (var soilBlock : SOIL_BLOCKS.values()) {
-            r.register((Block) soilBlock);
-        }
-
-        //==== Wood ==================================================================================================//
-
-//        for (var woodBlock : WOOD_BLOCKS.values()) {
-//            r.register((Block) woodBlock);
-//        }
-
-        //==== Crop ==================================================================================================//
-
-        for (var cropBlock : CROP_BLOCKS.values()) {
-            r.register((Block) cropBlock);
-        }
-
-        //==== Plant =================================================================================================//
-
-        for (var plantBlock : PLANT_BLOCKS.values()) {
-            r.register((Block) plantBlock);
-        }
-
-        //==== BerryBush =============================================================================================//
-
-        for (var bushBlock : BUSH_BLOCKS.values()) {
-            r.register((Block) bushBlock);
-        }
-
         //==== Metal =================================================================================================//
 
         for (var metalBlock : METAL_BLOCKS.values()) {
-            r.register((Block) metalBlock);
+            registerItemBlock(r, (Block) metalBlock);
         }
 
         //==== Alabaster =============================================================================================//
 
         for (var alabasterBlock : ALABASTER_BLOCKS.values()) {
-            r.register(alabasterBlock);
+            registerItemBlock(r, alabasterBlock);
         }
 
         //==== Groundcover ===========================================================================================//
 
         for (var groundcoverBlock : GROUNDCOVER_BLOCKS.values()) {
-            r.register(groundcoverBlock);
+            registerItemBlock(r, groundcoverBlock);
         }
 
         //==== Other =================================================================================================//
 
-        ITEM_BLOCKS.forEach(r::register);
-        BLOCKS.forEach(r::register);
+        r.registerAll(LeavesPaging.getLeavesMapForModId(Tags.MOD_ID).values().toArray(new Block[0]));
+        BLOCKS.forEach(b -> registerItemBlock(r, b));
         FLUID.forEach(r::register);
 
         //==== TileEntity ============================================================================================//
@@ -235,74 +200,12 @@ public class CommonProxy {
             r.register(mold);
         }
 
-        //==== Rock ==================================================================================================//
-
-        for (var rockBlock : ROCK_BLOCKS.values()) {
-            var itemBlock = rockBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
-
-        for (var rockItem : ROCK_ITEMS.values()) r.register((Item) rockItem);
-
-        //==== Soil ==================================================================================================//
-
-        for (var soilBlock : SOIL_BLOCKS.values()) {
-            var itemBlock = soilBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
-
-        for (var soilItem : SOIL_ITEMS.values()) r.register((Item) soilItem);
-
-        //==== Wood ==================================================================================================//
-
-//        for (var woodBlock : WOOD_BLOCKS.values()) {
-//            var itemBlock = woodBlock.getItemBlock();
-//            if (itemBlock != null) registerItemBlock(r, itemBlock);
-//        }
-
-        for (var woodItem : WOOD_ITEMS.values()) r.register((Item) woodItem);
-
-        //==== Plant =================================================================================================//
-
-        for (var plantBlock : PLANT_BLOCKS.values()) {
-            var itemBlock = plantBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
-
-        //==== BushBlock =============================================================================================//
-
-        for (var bushBlock : BUSH_BLOCKS.values()) {
-            var itemBlock = bushBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
-
-        //==== Crop ==================================================================================================//
-
-        for (var cropItem : CROP_ITEMS.values()) r.register((Item) cropItem);
-
-        //==== Food ==================================================================================================//
-
-        for (var foodItem : FOOD_ITEMS.values()) r.register((Item) foodItem);
-
         //==== Metal =================================================================================================//
-
-        for (var metalBlock : METAL_BLOCKS.values()) {
-            var itemBlock = metalBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
 
         for (var metalItem : METAL_ITEMS.values()) r.register((Item) metalItem);
 
-        //==== Alabaster =============================================================================================//
-
-        for (var alabasterBlock : ALABASTER_BLOCKS.values()) {
-            var itemBlock = alabasterBlock.getItemBlock();
-            if (itemBlock != null) registerItemBlock(r, itemBlock);
-        }
-
         //==== Other =================================================================================================//
 
-        ITEM_BLOCKS.forEach(x -> registerItemBlock(r, ((IItemProvider)x).getItemBlock()));
         ITEMS.forEach(r::register);
     }
 
@@ -359,12 +262,17 @@ public class CommonProxy {
     }
 
     @SuppressWarnings("ConstantConditions")
-    private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item) {
-        if (item != null) {
-            item.setRegistryName(item.getBlock().getRegistryName());
-            item.setCreativeTab(item.getBlock().getCreativeTab());
-            r.register(item);
+    private static void registerItemBlock(IForgeRegistry<Block> r, Block block) {
+        r.register(block);
+        if (block instanceof IItemProvider itemBlock) {
+            var item = itemBlock.getItemBlock();
+            if (item != null) {
+                item.setRegistryName(block.getRegistryName());
+                item.setCreativeTab(block.getCreativeTab());
+                ITEMS.add(item);
+            }
         }
+
     }
 
     /**

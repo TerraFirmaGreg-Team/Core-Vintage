@@ -6,6 +6,7 @@ import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.BlockPlacedItem;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEPitKiln;
@@ -47,7 +48,7 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockPitKiln extends Block implements ILightableBlock, IItemProvider {
+public class BlockPitKiln extends TFCBlock implements ILightableBlock {
     public static final PropertyBool FULL = PropertyBool.create("full");
 
     private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[]{
@@ -72,12 +73,6 @@ public class BlockPitKiln extends Block implements ILightableBlock, IItemProvide
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "pit_kiln");
         setTranslationKey(Tags.MOD_ID + ".pit_kiln");
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     @Override

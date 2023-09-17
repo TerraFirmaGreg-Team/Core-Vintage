@@ -7,6 +7,7 @@ import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
@@ -56,7 +57,7 @@ import java.util.Random;
 import static net.dries007.tfc.util.Constants.RNG;
 
 @ParametersAreNonnullByDefault
-public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILightableBlock, IItemProvider {
+public class BlockFirePit extends TFCBlock implements IBellowsConsumerBlock, ILightableBlock {
     public static final PropertyEnum<FirePitAttachment> ATTACHMENT = PropertyEnum.create("attachment", FirePitAttachment.class);
 
     private static final AxisAlignedBB FIREPIT_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.125, 1);
@@ -74,12 +75,6 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "firepit");
         setTranslationKey(Tags.MOD_ID + ".firepit");
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     @Override

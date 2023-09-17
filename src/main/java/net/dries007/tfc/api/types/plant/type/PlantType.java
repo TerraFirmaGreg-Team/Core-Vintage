@@ -1,8 +1,10 @@
 package net.dries007.tfc.api.types.plant.type;
 
 import net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant;
+import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -12,6 +14,8 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.*;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.PLANT_BLOCKS;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
@@ -111,6 +115,12 @@ public class PlantType {
         if (!PLANT_TYPES.add(this)) {
             throw new RuntimeException(String.format("Plant: [%s] already exists!", name));
         }
+
+        var plantBlock = this.getPlantVariant().create(this);
+
+        if (PLANT_BLOCKS.put(new Pair<>(this.getPlantVariant(), this), plantBlock) != null)
+            throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this.getPlantVariant(), this));
+        BLOCKS.add((Block) plantBlock);
     }
 
     /**

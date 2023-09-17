@@ -8,6 +8,7 @@ import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEQuern;
 import net.dries007.tfc.util.Helpers;
@@ -41,7 +42,7 @@ import java.util.List;
 
 
 @ParametersAreNonnullByDefault
-public class BlockQuern extends Block implements IItemSize, IHighlightHandler, IItemProvider {
+public class BlockQuern extends TFCBlock implements IItemSize, IHighlightHandler {
     private static final AxisAlignedBB BASE_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.625D, 1D);
     private static final AxisAlignedBB QUERN_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.875D, 1D);
 
@@ -59,12 +60,6 @@ public class BlockQuern extends Block implements IItemSize, IHighlightHandler, I
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "quern");
         setTranslationKey(Tags.MOD_ID + ".quern");
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     /**

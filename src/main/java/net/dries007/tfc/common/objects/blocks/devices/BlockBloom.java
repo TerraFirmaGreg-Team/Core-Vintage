@@ -2,6 +2,7 @@ package net.dries007.tfc.common.objects.blocks.devices;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.tileentities.TEBloom;
 import net.dries007.tfc.util.Helpers;
@@ -10,6 +11,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -25,7 +27,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockBloom extends Block {
+public class BlockBloom extends TFCBlock {
     public BlockBloom() {
         super(Material.IRON);
         setHardness(3.0f);
@@ -35,6 +37,12 @@ public class BlockBloom extends Block {
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "bloom");
         setTranslationKey(Tags.MOD_ID + ".bloom");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return null;
     }
 
     @Override

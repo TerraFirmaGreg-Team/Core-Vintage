@@ -3,6 +3,7 @@ package net.dries007.tfc.common.objects.blocks.soil.peat;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilGrass;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
@@ -31,7 +32,7 @@ import java.util.Random;
 
 
 @ParametersAreNonnullByDefault
-public class BlockPeatGrass extends Block implements IItemProvider {
+public class BlockPeatGrass extends TFCBlock {
     // Used for connected textures only.
     public static final PropertyBool NORTH = PropertyBool.create("north");
     public static final PropertyBool EAST = PropertyBool.create("east");
@@ -50,12 +51,6 @@ public class BlockPeatGrass extends Block implements IItemProvider {
         OreDictionaryHelper.register(this, "peat");
         OreDictionaryHelper.register(this, "peat", "grass");
         Blocks.FIRE.setFireInfo(this, 5, 5);
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     @Override

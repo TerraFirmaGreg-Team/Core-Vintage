@@ -33,17 +33,12 @@ import net.dries007.tfc.common.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.common.objects.blocks.rock.BlockAlabaster;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeat;
 import net.dries007.tfc.common.objects.blocks.soil.peat.BlockPeatGrass;
-import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockCrucible;
-import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockLargeVessel;
-import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockPowderKeg;
-import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeRootyMimic;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -71,10 +66,7 @@ public class TFCBlocks {
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new LinkedHashMap<>();
 
 
-    // Блоки, имеющие предмет
-    public static final ArrayList<Block> ITEM_BLOCKS = new ArrayList<>();
-
-    // Блоки, не имеющие предмета
+    // Блоки
     public static final ArrayList<Block> BLOCKS = new ArrayList<>();
 
     // Жидкости
@@ -112,22 +104,6 @@ public class TFCBlocks {
     public static BlockMetalCladding CLADDING;
 
     public static void preInit() {
-
-        //==== Plant =================================================================================================//
-
-        for (var type : PlantType.getPlantTypes()) {
-            var plantBlock = type.getPlantVariant().create(type);
-
-            if (PLANT_BLOCKS.put(new Pair<>(type.getPlantVariant(), type), plantBlock) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", type.getPlantVariant(), type));
-        }
-
-        //==== BlockBush =============================================================================================//
-
-        for (var type : BushType.getBushTypes()) {
-            if (BUSH_BLOCKS.put(type, new BlockBerryBush(type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s", type));
-        }
 
         //==== Metal =================================================================================================//
 
@@ -174,25 +150,26 @@ public class TFCBlocks {
 
         //==== Other =================================================================================================//
 
-        ITEM_BLOCKS.add(PEAT = new BlockPeat());
-        ITEM_BLOCKS.add(PEAT_GRASS = new BlockPeatGrass());
-        ITEM_BLOCKS.add(DEBUG = new BlockDebug());
-        ITEM_BLOCKS.add(AGGREGATE = new BlockAggregate());
-        ITEM_BLOCKS.add(FIRE_CLAY_BLOCK = new BlockFireClay());
-        ITEM_BLOCKS.add(THATCH = new BlockThatch());
-        ITEM_BLOCKS.add(QUERN = new BlockQuern());
-        ITEM_BLOCKS.add(CRUCIBLE = new BlockCrucible());
-        ITEM_BLOCKS.add(BLAST_FURNACE = new BlockBlastFurnace());
-        ITEM_BLOCKS.add(BELLOWS = new BlockBellows());
-        ITEM_BLOCKS.add(BLOOMERY = new BlockBloomery());
-        ITEM_BLOCKS.add(NEST_BOX = new BlockNestBox());
-        ITEM_BLOCKS.add(FIRED_LARGE_VESSEL = new BlockLargeVessel());
-        ITEM_BLOCKS.add(FIREPIT = new BlockFirePit());
-        ITEM_BLOCKS.add(PIT_KILN = new BlockPitKiln());
-        ITEM_BLOCKS.add(PLACED_ITEM = new BlockPlacedItem());
-        ITEM_BLOCKS.add(CHARCOAL_FORGE = new BlockCharcoalForge());
-        ITEM_BLOCKS.add(SEA_ICE = new BlockIceTFC(FluidRegistry.getFluid("salt_water")));
-        ITEM_BLOCKS.add(POWDERKEG = new BlockPowderKeg());
+        BLOCKS.add(PEAT = new BlockPeat());
+        BLOCKS.add(PEAT_GRASS = new BlockPeatGrass());
+        BLOCKS.add(DEBUG = new BlockDebug());
+        BLOCKS.add(AGGREGATE = new BlockAggregate());
+        BLOCKS.add(FIRE_CLAY_BLOCK = new BlockFireClay());
+        BLOCKS.add(THATCH = new BlockThatch());
+        BLOCKS.add(QUERN = new BlockQuern());
+        BLOCKS.add(CRUCIBLE = new BlockCrucible());
+        BLOCKS.add(BLAST_FURNACE = new BlockBlastFurnace());
+        BLOCKS.add(BELLOWS = new BlockBellows());
+        BLOCKS.add(BLOOMERY = new BlockBloomery());
+        BLOCKS.add(NEST_BOX = new BlockNestBox());
+        BLOCKS.add(FIRED_LARGE_VESSEL = new BlockLargeVessel());
+        BLOCKS.add(FIREPIT = new BlockFirePit());
+        BLOCKS.add(PIT_KILN = new BlockPitKiln());
+        BLOCKS.add(PLACED_ITEM = new BlockPlacedItem());
+        BLOCKS.add(CHARCOAL_FORGE = new BlockCharcoalForge());
+        BLOCKS.add(SEA_ICE = new BlockIceTFC(FluidRegistry.getFluid("salt_water")));
+        BLOCKS.add(POWDERKEG = new BlockPowderKeg());
+        BLOCKS.add(CLADDING = new BlockMetalCladding());
 
         BLOCKS.add(PLACED_ITEM_FLAT = new BlockPlacedItemFlat());
         BLOCKS.add(PLACED_HIDE = new BlockPlacedHide());
@@ -201,9 +178,7 @@ public class TFCBlocks {
         BLOCKS.add(MOLTEN = new BlockMolten());
         BLOCKS.add(BLOOM = new BlockBloom());
         BLOCKS.add(THATCH_BED = new BlockThatchBed());
-        BLOCKS.add(CLADDING = new BlockMetalCladding());
         BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
-        BLOCKS.addAll(LeavesPaging.getLeavesMapForModId(Tags.MOD_ID).values());
     }
 
     @Nonnull

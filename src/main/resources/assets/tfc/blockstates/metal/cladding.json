@@ -3,8 +3,8 @@
   "defaults": {
     "model": "tfc:empty",
     "textures": {
-      "all": "tfc:blocks/metal/wrought_iron",
-      "particle": "tfc:blocks/metal/wrought_iron"
+      "all": "tfc:blocks/metal/metal",
+      "particle": "tfc:blocks/metal/metal"
     }
   },
   "variants": {

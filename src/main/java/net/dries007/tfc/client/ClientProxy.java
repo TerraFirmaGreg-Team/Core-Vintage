@@ -97,6 +97,7 @@ import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.S
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.TALL_GRASS;
 import static net.dries007.tfc.api.types.wood.variant.item.WoodItemVariants.SEED;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
+import static net.minecraft.block.Block.getBlockFromItem;
 import static net.minecraft.util.text.TextFormatting.*;
 
 @SuppressWarnings("unused")
@@ -125,41 +126,35 @@ public class ClientProxy extends CommonProxy {
 
         //==== BLOCKS ================================================================================================//
 
-        TFCBlocks.ROCK_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCBlocks.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCBlocks.WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCBlocks.PLANT_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCBlocks.CROP_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCBlocks.ALABASTER_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCBlocks.GROUNDCOVER_BLOCKS.values().forEach(IHasModel::onModelRegister);
-        TFCBlocks.BUSH_BLOCKS.values().forEach(IHasModel::onModelRegister);
         TFCBlocks.METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
 
-        for (var block : TFCBlocks.ITEM_BLOCKS) {
-            if (!(block instanceof IHasModel)) {
+        for (var block : TFCBlocks.BLOCKS) {
+            if (block instanceof IHasModel blockModel) {
+                blockModel.onModelRegister();
+            } else {
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
             }
         }
-
         for (var block : TFCBlocks.FLUID)
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
 
 
         //==== ITEMS =================================================================================================//
 
-        TFCItems.ROCK_ITEMS.values().forEach(IHasModel::onModelRegister);
-        TFCItems.SOIL_ITEMS.values().forEach(IHasModel::onModelRegister);
-        TFCItems.WOOD_ITEMS.values().forEach(IHasModel::onModelRegister);
-        TFCItems.METAL_ITEMS.values().forEach(IHasModel::onModelRegister);
-        TFCItems.CROP_ITEMS.values().forEach(IHasModel::onModelRegister);
-        TFCItems.FOOD_ITEMS.values().forEach(IHasModel::onModelRegister);
-
         for (var item : TFCItems.UNFIRED_MOLDS.values())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
-        for (var item : TFCItems.ITEMS)
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
+        for (var item : TFCItems.ITEMS) {
+            if (getBlockFromItem(item) instanceof IHasModel itemBlockModel) {
+                itemBlockModel.onModelRegister();
+            } else if (item instanceof IHasModel itemModel) {
+                itemModel.onModelRegister();
+            } else {
+                ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
+            }
+        }
 
         //==== TESRs =================================================================================================//
 

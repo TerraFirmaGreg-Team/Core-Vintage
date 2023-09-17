@@ -28,7 +28,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockThatch extends Block implements IItemProvider {
+public class BlockThatch extends TFCBlock {
     public BlockThatch() {
         super(new Material(MapColor.FOLIAGE) {
             @Override
@@ -48,12 +48,6 @@ public class BlockThatch extends Block implements IItemProvider {
         OreDictionaryHelper.register(this, "thatch");
         OreDictionaryHelper.register(this, "block", "straw");
         Blocks.FIRE.setFireInfo(this, 60, 20);
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     @SuppressWarnings("deprecation")

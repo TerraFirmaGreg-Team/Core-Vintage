@@ -5,6 +5,7 @@ import net.dries007.tfc.api.types.wood.variant.block.IWoodBlock;
 import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -19,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public abstract class BlockWood extends Block implements IWoodBlock {
+public abstract class BlockWood extends TFCBlock implements IWoodBlock {
 
     private final WoodBlockVariant variant;
     private final WoodType type;
@@ -46,12 +47,6 @@ public abstract class BlockWood extends Block implements IWoodBlock {
     @Override
     public WoodType getType() {
         return type;
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     @Override

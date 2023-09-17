@@ -2,6 +2,7 @@ package net.dries007.tfc.api.types.crop.variant.block;
 
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.util.Pair;
+import net.minecraft.block.Block;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
@@ -9,6 +10,7 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.CROP_BLOCKS;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
 
 public class CropBlockVariant {
     private static final Set<CropBlockVariant> CROP_BLOCK_VARIANTS = new LinkedHashSet<>();
@@ -38,6 +40,7 @@ public class CropBlockVariant {
 
             if (CROP_BLOCKS.put(new Pair<>(this, type), cropBlock) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
+            BLOCKS.add((Block) cropBlock);
         }
     }
 

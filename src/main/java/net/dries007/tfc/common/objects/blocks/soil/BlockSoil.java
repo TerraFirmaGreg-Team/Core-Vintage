@@ -5,6 +5,7 @@ import net.dries007.tfc.api.types.soil.variant.block.ISoilBlock;
 import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -26,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public abstract class BlockSoil extends Block implements ISoilBlock {
+public abstract class BlockSoil extends TFCBlock implements ISoilBlock {
 
     private final SoilBlockVariant variant;
     private final SoilType type;
@@ -61,11 +62,6 @@ public abstract class BlockSoil extends Block implements ISoilBlock {
     @Override
     public SoilType getType() {
         return type;
-    }
-
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.types.rock.variant.block.IRockBlock;
 import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -29,7 +30,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockRock extends Block implements IRockBlock, IItemSize {
+public class BlockRock extends TFCBlock implements IRockBlock, IItemSize {
 
     private final RockBlockVariant variant;
     private final RockType type;
@@ -68,11 +69,6 @@ public class BlockRock extends Block implements IRockBlock, IItemSize {
     @Override
     public RockType getType() {
         return type;
-    }
-
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     @Nonnull

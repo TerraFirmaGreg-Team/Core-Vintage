@@ -2,6 +2,7 @@ package net.dries007.tfc.api.types.crop.variant.item;
 
 import net.dries007.tfc.api.types.crop.type.CropType;
 import net.dries007.tfc.api.util.Pair;
+import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
@@ -9,6 +10,7 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 import static net.dries007.tfc.common.objects.items.TFCItems.CROP_ITEMS;
+import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
 
 /**
  * Класс CropItemVariant представляет вариант деревянного блока.
@@ -42,10 +44,11 @@ public class CropItemVariant {
         }
 
         for (var type : CropType.getCropTypes()) {
-            var woodItem = this.create(type);
+            var cropItem = this.create(type);
 
-            if (CROP_ITEMS.put(new Pair<>(this, type), woodItem) != null)
+            if (CROP_ITEMS.put(new Pair<>(this, type), cropItem) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
+            ITEMS.add((Item) cropItem);
         }
     }
 

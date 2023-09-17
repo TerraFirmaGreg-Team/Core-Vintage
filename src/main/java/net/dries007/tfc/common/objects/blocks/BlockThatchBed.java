@@ -2,6 +2,7 @@ package net.dries007.tfc.common.objects.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.minecraft.block.Block;
@@ -12,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -29,7 +31,7 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockThatchBed extends BlockBed {
+public class BlockThatchBed extends BlockBed implements IItemProvider {
     public BlockThatchBed() {
         setSoundType(SoundType.PLANT);
         setHardness(0.6F);
@@ -38,6 +40,12 @@ public class BlockThatchBed extends BlockBed {
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "thatch_bed");
         setTranslationKey(Tags.MOD_ID + ".thatch_bed");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return null;
     }
 
     @Override

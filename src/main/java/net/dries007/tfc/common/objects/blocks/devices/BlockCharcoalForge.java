@@ -7,6 +7,7 @@ import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.BlockCharcoalPile;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
@@ -52,7 +53,7 @@ import java.util.function.BiPredicate;
 
 
 @ParametersAreNonnullByDefault
-public class BlockCharcoalForge extends Block implements IBellowsConsumerBlock, ILightableBlock, IItemProvider {
+public class BlockCharcoalForge extends TFCBlock implements IBellowsConsumerBlock, ILightableBlock {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
     private static final Multiblock CHARCOAL_FORGE_MULTIBLOCK;
 
@@ -94,12 +95,6 @@ public class BlockCharcoalForge extends Block implements IBellowsConsumerBlock, 
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "charcoal_forge");
         setTranslationKey(Tags.MOD_ID + ".charcoal_forge");
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     public static boolean isValid(World world, BlockPos pos) {

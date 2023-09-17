@@ -2,10 +2,12 @@ package net.dries007.tfc.compat.dynamictrees.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockRootyDirt;
 import net.dries007.tfc.api.types.soil.variant.block.ISoilBlock;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
@@ -13,13 +15,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.api.types.soil.type.SoilTypes.LOAM;
 import static net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants.DIRT;
 
 @ParametersAreNonnullByDefault
-public class BlockTreeRootyMimic extends BlockRootyDirt {
+public class BlockTreeRootyMimic extends BlockRootyDirt implements IItemProvider {
     private static final EnumFacing[] NOT_UP = new EnumFacing[]{
             EnumFacing.DOWN,
             EnumFacing.EAST,
@@ -30,6 +33,12 @@ public class BlockTreeRootyMimic extends BlockRootyDirt {
 
     public BlockTreeRootyMimic() {
         super(false);
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return null;
     }
 
     /**

@@ -50,7 +50,7 @@ import java.util.Random;
  * Sealed state is stored in a block state property, and cached in the TE (for gui purposes)
  */
 @ParametersAreNonnullByDefault
-public class BlockPowderKeg extends Block implements IItemSize, ILightableBlock, IItemProvider {
+public class BlockPowderKeg extends TFCBlock implements IItemSize, ILightableBlock {
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);

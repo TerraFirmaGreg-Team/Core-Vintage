@@ -24,7 +24,7 @@ import java.util.Random;
 
 
 @ParametersAreNonnullByDefault
-public class BlockFireClay extends Block implements IItemSize, IItemProvider {
+public class BlockFireClay extends TFCBlock implements IItemSize {
     public BlockFireClay() {
         super(Material.CLAY);
 
@@ -34,12 +34,6 @@ public class BlockFireClay extends Block implements IItemSize, IItemProvider {
         setCreativeTab(CreativeTabsTFC.ROCK);
         setRegistryName(TerraFirmaCraft.identifier("fire_clay_block"));
         setTranslationKey(Tags.MOD_ID + ".fire_clay_block");
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     @Override

@@ -7,6 +7,8 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEMetalSheet;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -42,7 +44,7 @@ import java.util.List;
 
 
 @ParametersAreNonnullByDefault
-public class BlockMetalCladding extends Block implements IHasModel {
+public class BlockMetalCladding extends TFCBlock implements IHasModel {
     public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{
             PropertyBool.create("down"),
             PropertyBool.create("up"),
@@ -69,18 +71,24 @@ public class BlockMetalCladding extends Block implements IHasModel {
         var blockRegistryName = "metal/cladding";
         setRegistryName(Tags.MOD_ID, blockRegistryName);
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        setCreativeTab(CreativeTabsTFC.METAL); //GregTechAPI.TAB_GREGTECH_MATERIALS
+        setCreativeTab(CreativeTabsTFC.METAL);
         setHardness(40F);
         setResistance(25F);
         setHarvestLevel("pickaxe", 0);
 
-        setDefaultState(this.blockState.getBaseState().withProperty(FACE_PROPERTIES[0], false).withProperty(FACE_PROPERTIES[1], false).withProperty(FACE_PROPERTIES[2], false).withProperty(FACE_PROPERTIES[3], false).withProperty(FACE_PROPERTIES[4], false).withProperty(FACE_PROPERTIES[5], false));
+        setDefaultState(this.blockState.getBaseState()
+                .withProperty(FACE_PROPERTIES[0], false)
+                .withProperty(FACE_PROPERTIES[1], false)
+                .withProperty(FACE_PROPERTIES[2], false)
+                .withProperty(FACE_PROPERTIES[3], false)
+                .withProperty(FACE_PROPERTIES[4], false)
+                .withProperty(FACE_PROPERTIES[5], false));
     }
 
-
     @Nullable
+    @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlock(this);
+        return null;
     }
 
 

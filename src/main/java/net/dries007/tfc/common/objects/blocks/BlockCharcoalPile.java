@@ -18,6 +18,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -34,7 +35,7 @@ import java.util.Random;
 
 
 @ParametersAreNonnullByDefault
-public class BlockCharcoalPile extends Block implements ILightableBlock {
+public class BlockCharcoalPile extends TFCBlock implements ILightableBlock {
     public static final Material CHARCOAL_MATERIAL = new Material(MapColor.BROWN);
 
     public static final PropertyInteger LAYERS = PropertyInteger.create("type", 1, 8);
@@ -61,6 +62,12 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "charcoal_pile");
         setTranslationKey(Tags.MOD_ID + ".charcoal_pile");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return null;
     }
 
     @Override

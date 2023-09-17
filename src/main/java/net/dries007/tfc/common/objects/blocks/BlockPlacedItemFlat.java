@@ -1,8 +1,10 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.soil.BlockSoilFarmland;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -15,6 +17,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -37,7 +40,7 @@ import java.util.Random;
 
 
 @ParametersAreNonnullByDefault
-public class BlockPlacedItemFlat extends Block {
+public class BlockPlacedItemFlat extends TFCBlock {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.0625D, 0.75D);
 
     public BlockPlacedItemFlat() {
@@ -47,6 +50,12 @@ public class BlockPlacedItemFlat extends Block {
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "placed_item_flat");
         setTranslationKey(Tags.MOD_ID + ".placed_item_flat");
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return null;
     }
 
     @Override

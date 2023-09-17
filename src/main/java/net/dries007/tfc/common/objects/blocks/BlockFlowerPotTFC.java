@@ -26,7 +26,7 @@ import java.util.Map;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockFlowerPotTFC extends Block {
+public class BlockFlowerPotTFC extends TFCBlock {
     protected static final AxisAlignedBB FLOWER_POT_AABB = new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 0.375D, 0.6875D);
 
     private static final Map<PlantType, BlockFlowerPotTFC> MAP = new HashMap<>();

@@ -8,6 +8,7 @@ import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalCladding;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
@@ -38,7 +39,7 @@ import java.util.function.Predicate;
 
 
 @ParametersAreNonnullByDefault
-public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, ILightableBlock, IItemProvider {
+public class BlockBlastFurnace extends TFCBlock implements IBellowsConsumerBlock, ILightableBlock {
     private static final Multiblock BLAST_FURNACE_CHIMNEY;
 
     static {
@@ -77,12 +78,6 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "blast_furnace");
         setTranslationKey(Tags.MOD_ID + ".blast_furnace");
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     /**

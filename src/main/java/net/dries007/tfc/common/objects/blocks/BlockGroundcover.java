@@ -5,6 +5,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -13,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -29,7 +31,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 
-public class BlockGroundcover extends Block implements IHasModel {
+public class BlockGroundcover extends TFCBlock implements IHasModel {
     private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
     protected final ResourceLocation modelLocation;
     private final GroundcoverType groundcoverType;
@@ -45,6 +47,12 @@ public class BlockGroundcover extends Block implements IHasModel {
         setRegistryName(Tags.MOD_ID, blockRegistryName);
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
         setSoundType(SoundType.GROUND);
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return null;
     }
 
     @Nonnull

@@ -3,6 +3,7 @@ package net.dries007.tfc.common.objects.blocks.devices;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.common.objects.tileentities.TEBellows;
 import net.dries007.tfc.util.Helpers;
@@ -30,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import static net.minecraft.block.BlockHorizontal.FACING;
 
 @ParametersAreNonnullByDefault
-public class BlockBellows extends Block implements IItemProvider {
+public class BlockBellows extends TFCBlock {
     public BlockBellows() {
         super(Material.CIRCUITS, MapColor.GRAY);
         setSoundType(SoundType.WOOD);
@@ -42,12 +43,6 @@ public class BlockBellows extends Block implements IItemProvider {
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "bellows");
         setTranslationKey(Tags.MOD_ID + ".bellows");
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     @Override

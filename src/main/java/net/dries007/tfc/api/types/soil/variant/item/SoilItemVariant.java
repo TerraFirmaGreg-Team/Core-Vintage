@@ -2,12 +2,14 @@ package net.dries007.tfc.api.types.soil.variant.item;
 
 import net.dries007.tfc.api.types.soil.type.SoilType;
 import net.dries007.tfc.api.util.Pair;
+import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
+import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
 import static net.dries007.tfc.common.objects.items.TFCItems.SOIL_ITEMS;
 
 /**
@@ -42,10 +44,11 @@ public class SoilItemVariant {
         }
 
         for (var type : SoilType.getSoilTypes()) {
-            var woodItem = this.create(type);
+            var soilItem = this.create(type);
 
-            if (SOIL_ITEMS.put(new Pair<>(this, type), woodItem) != null)
+            if (SOIL_ITEMS.put(new Pair<>(this, type), soilItem) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
+            ITEMS.add((Item) soilItem);
         }
     }
 

@@ -4,6 +4,7 @@ import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -15,7 +16,7 @@ import net.minecraft.item.ItemBlock;
 import javax.annotation.Nullable;
 
 
-public class BlockPeat extends Block implements IItemProvider {
+public class BlockPeat extends TFCBlock {
     public BlockPeat() {
         super(Material.GROUND);
 
@@ -30,11 +31,5 @@ public class BlockPeat extends Block implements IItemProvider {
         Blocks.FIRE.setFireInfo(this, 5, 10);
 
         DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.GRAVELLIKE);
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 }

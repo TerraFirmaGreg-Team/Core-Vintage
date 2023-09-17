@@ -76,7 +76,7 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant, ICropBloc
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return null;
     }
 
     @Override

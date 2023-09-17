@@ -11,18 +11,12 @@ import net.minecraft.item.ItemBlock;
 import javax.annotation.Nullable;
 
 
-public class BlockDebug extends Block implements IItemProvider {
+public class BlockDebug extends TFCBlock {
     public BlockDebug() {
         super(Material.SPONGE);
 
         setCreativeTab(CreativeTabsTFC.MISC);
         setRegistryName(Tags.MOD_ID, "debug");
         setTranslationKey(Tags.MOD_ID + "." + "debug");
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 }

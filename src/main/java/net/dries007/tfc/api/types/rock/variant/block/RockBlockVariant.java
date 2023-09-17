@@ -2,12 +2,14 @@ package net.dries007.tfc.api.types.rock.variant.block;
 
 import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.util.Pair;
+import net.minecraft.block.Block;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROCK_BLOCKS;
 
 /**
@@ -48,6 +50,7 @@ public class RockBlockVariant {
 
             if (ROCK_BLOCKS.put(new Pair<>(this, type), rockBlock) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
+            BLOCKS.add((Block) rockBlock);
         }
     }
 

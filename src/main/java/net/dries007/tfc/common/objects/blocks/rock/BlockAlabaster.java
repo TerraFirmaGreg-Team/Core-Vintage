@@ -9,6 +9,7 @@ import net.dries007.tfc.api.types.rock.variant.block.RockBlockVariant;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -33,7 +34,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockAlabaster extends Block implements IItemSize, IItemProvider, IHasModel {
+public class BlockAlabaster extends TFCBlock implements IItemSize, IHasModel {
 
     private final RockBlockVariant variant;
     private final EnumDyeColor dyeColor;
@@ -84,12 +85,6 @@ public class BlockAlabaster extends Block implements IItemSize, IItemProvider, I
     @Override
     public Weight getWeight(ItemStack stack) {
         return Weight.LIGHT;
-    }
-
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
     }
 
     @Override

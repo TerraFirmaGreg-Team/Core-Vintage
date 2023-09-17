@@ -129,42 +129,42 @@ public class TFCItems {
     public static Item getWoodItem(@Nonnull WoodItemVariant variant, @Nonnull WoodType type) {
         var item = (Item) WOOD_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", type));
+        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static Item getRockItem(@Nonnull RockItemVariant variant, @Nonnull RockType type) {
         var item = (Item) ROCK_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", type));
+        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static Item getSoilItem(@Nonnull SoilItemVariant variant, @Nonnull SoilType type) {
         var item = (Item) SOIL_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", type));
+        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static Item getMetalItem(@Nonnull MetalItemVariant variant, @Nonnull Material type) {
         var item = (Item) METAL_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", type));
+        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static Item getCropItem(@Nonnull CropItemVariant variant, @Nonnull CropType type) {
         var item = (Item) CROP_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", type));
+        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static Item getFoodItem(@Nonnull FoodItemVariant variant, @Nonnull FoodType type) {
         var item = (Item) FOOD_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s", type));
+        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
     }
 
 }

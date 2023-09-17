@@ -1,6 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
+import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
@@ -42,7 +43,7 @@ public class TreeGenDT implements ITreeGenerator {
 
         var dTree = type.getCommonSpecies();
         int lowestBranchHeight = dTree.getLowestBranchHeight();
-        int maxTreeHeight = (int) dTree.getEnergy(world, pos); //signal energy access problem so need to cast
+        int maxTreeHeight = (int) dTree.getEnergy(world, pos);
 
         var bounds = new SafeChunkBounds(world, world.getChunk(pos).getPos());
         for (int y = 0; y <= lowestBranchHeight; y++) {
@@ -53,13 +54,13 @@ public class TreeGenDT implements ITreeGenerator {
         int radiusSquared = leavesRadius * leavesRadius;
         int groundToCenter = (int) ((maxTreeHeight - lowestBranchHeight) / 2.0F) + lowestBranchHeight;
 
-        for (int x = -leavesRadius - 1; x <= leavesRadius + 1; ++x) // verifying there's space for the canopy
-        {
+        // verifying there's space for the canopy
+        for (int x = -leavesRadius - 1; x <= leavesRadius + 1; ++x) {
             for (int z = -leavesRadius - 1; z <= leavesRadius + 1; ++z) {
                 for (int y = lowestBranchHeight - 1; y < maxTreeHeight; ++y) {
                     int yDistance = groundToCenter - y;
-                    if (x * x + yDistance * yDistance + z * z <= radiusSquared) // only perform the check if the radius is within a sphere around the epicenter there
-                    {
+                    // only perform the check if the radius is within a sphere around the epicenter there
+                    if (x * x + yDistance * yDistance + z * z <= radiusSquared) {
                         if (!isValidLocation(world, pos.up(y), x, z, bounds)) return false;
                     }
                 }
@@ -77,7 +78,7 @@ public class TreeGenDT implements ITreeGenerator {
 
     private boolean isDTBranch(IBlockState state) {
         var block = state.getBlock();
-        return block instanceof BlockBranch;//|| block instanceof BlockDynamicLeaves;
+        return block instanceof BlockBranch || block instanceof BlockDynamicLeaves;
     }
 
     private boolean isReplaceable(World world, BlockPos pos, int x, int y, int z) {

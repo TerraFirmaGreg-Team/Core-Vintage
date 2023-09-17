@@ -48,6 +48,7 @@ public interface ITreeGenerator {
                 return false;
             }
         }
+
         // Проверяем, есть ли пространство прямо вверх
         final int height = treeType.getMaxHeight();
         for (int y = 1; y <= height; y++) {

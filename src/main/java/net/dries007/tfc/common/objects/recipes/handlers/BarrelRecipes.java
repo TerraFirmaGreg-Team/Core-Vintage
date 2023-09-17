@@ -84,7 +84,7 @@ public class BarrelRecipes {
                 // this ratio works for 9b + 1b = 10b (full barrel) of brine/milk_vinegar, but leaves odd ninths of fluid around for other mixtures.
                 new BarrelRecipeFluidMixing(IIngredient.of(FluidRegistry.getFluid("milk"), 9), new IngredientFluidItem(FluidRegistry.getFluid("vinegar"), 1), new FluidStack(FluidRegistry.getFluid("milk_vinegar"), 10), 0).setRegistryName("milk_vinegar"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("fresh_water"), 500), IIngredient.of("dustFlux"), new FluidStack(FluidRegistry.getFluid("limewater"), 500), ItemStack.EMPTY, 0).setRegistryName("limewater"),
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("limewater"), 100), IIngredient.of("gemGypsum"), null, new ItemStack(TFCBlocks.getAlabasterBlock("plain", RAW)), ICalendar.TICKS_IN_HOUR).setRegistryName("plain_alabaster"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("limewater"), 100), IIngredient.of("gemGypsum"), null, new ItemStack(TFCBlocks.getAlabasterBlock(RAW, "plain")), ICalendar.TICKS_IN_HOUR).setRegistryName("plain_alabaster"),
 
                 //olive oil production
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("hot_water"), 125), IIngredient.of(ItemsTFC_old.OLIVE_PASTE), new FluidStack(FluidRegistry.getFluid("olive_oil_water"), 125), ItemStack.EMPTY, 2 * ICalendar.TICKS_IN_HOUR).setRegistryName("olive_water"),
@@ -139,9 +139,9 @@ public class BarrelRecipes {
                 // Concrete
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("powderConcrete"), null, new ItemStack(TFCBlocks.AGGREGATE), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_undo"),
                 // Alabaster
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterBricks"), null, new ItemStack(TFCBlocks.getAlabasterBlock("plain", BRICKS)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_undo"),
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterRaw"), null, new ItemStack(TFCBlocks.getAlabasterBlock("plain", RAW)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_undo"),
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterPolished"), null, new ItemStack(TFCBlocks.getAlabasterBlock("plain", SMOOTH)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_polished_undo")
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterBricks"), null, new ItemStack(TFCBlocks.getAlabasterBlock(BRICKS, "plain")), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_undo"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterRaw"), null, new ItemStack(TFCBlocks.getAlabasterBlock(RAW, "plain")), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_undo"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterPolished"), null, new ItemStack(TFCBlocks.getAlabasterBlock(SMOOTH, "plain")), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_polished_undo")
         );
         // Dye combinations.
 //        registry.registerAll(

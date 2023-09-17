@@ -24,13 +24,13 @@ public class ChiselRecipes {
 
         // Alabaster smoothing
         for (var color : EnumDyeColor.values()) {
-            var rawColoredAlabaster = TFCBlocks.getAlabasterBlock(color.getName(), RAW);
-            var smoothColoredAlabaster = TFCBlocks.getAlabasterBlock(color.getName(), SMOOTH).getDefaultState();
+            var rawColoredAlabaster = TFCBlocks.getAlabasterBlock(RAW, color.getName());
+            var smoothColoredAlabaster = TFCBlocks.getAlabasterBlock(SMOOTH, color.getName()).getDefaultState();
             registry.register(new ChiselRecipe(rawColoredAlabaster, smoothColoredAlabaster).setRegistryName("smooth_" + color.getName() + "_alabaster"));
         }
         // And plain
-        var rawAlabaster = TFCBlocks.getAlabasterBlock("plain", RAW);
-        var smoothAlabaster = TFCBlocks.getAlabasterBlock("plain", SMOOTH).getDefaultState();
+        var rawAlabaster = TFCBlocks.getAlabasterBlock(RAW, "plain");
+        var smoothAlabaster = TFCBlocks.getAlabasterBlock(SMOOTH, "plain").getDefaultState();
         registry.register(new ChiselRecipe(rawAlabaster, smoothAlabaster).setRegistryName("smooth_alabaster"));
     }
 }

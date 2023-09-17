@@ -143,12 +143,6 @@ public class CommonProxy {
             registerItemBlock(r, alabasterBlock);
         }
 
-        //==== Groundcover ===========================================================================================//
-
-        for (var groundcoverBlock : GROUNDCOVER_BLOCKS.values()) {
-            registerItemBlock(r, groundcoverBlock);
-        }
-
         //==== Other =================================================================================================//
 
         r.registerAll(LeavesPaging.getLeavesMapForModId(Tags.MOD_ID).values().toArray(new Block[0]));

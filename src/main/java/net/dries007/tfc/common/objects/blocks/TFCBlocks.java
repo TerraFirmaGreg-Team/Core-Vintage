@@ -61,7 +61,7 @@ public class TFCBlocks {
     public static final Map<Pair<PlantBlockVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<CropBlockVariant, CropType>, ICropBlock> CROP_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<MetalBlockVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<String, RockBlockVariant>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<RockBlockVariant, String>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
     public static final Map<BushType, IBushBlock> BUSH_BLOCKS = new LinkedHashMap<>();
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new LinkedHashMap<>();
 
@@ -123,12 +123,12 @@ public class TFCBlocks {
         for (var variant : new RockBlockVariant[]{RAW, BRICKS, SMOOTH}) {
             var alabasterBlock = new BlockAlabaster(variant);
 
-            ALABASTER_BLOCKS.put(new Pair<>("plain", variant), alabasterBlock);
+            ALABASTER_BLOCKS.put(new Pair<>(variant, "plain"), alabasterBlock);
 
             for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
                 var alabasterColorBlock = new BlockAlabaster(variant, dyeColor);
 
-                if (ALABASTER_BLOCKS.put(new Pair<>(dyeColor.getName(), variant), alabasterColorBlock) != null)
+                if (ALABASTER_BLOCKS.put(new Pair<>(variant, dyeColor.getName()), alabasterColorBlock) != null)
                     throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", dyeColor, variant));
             }
         }
@@ -140,6 +140,7 @@ public class TFCBlocks {
 
             if (GROUNDCOVER_BLOCKS.put(type, groundcoverBlock) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", type, groundcoverBlock));
+            BLOCKS.add(groundcoverBlock);
         }
 
         //==== Fluid =================================================================================================//
@@ -217,8 +218,8 @@ public class TFCBlocks {
     }
 
     @Nonnull
-    public static Block getAlabasterBlock(@Nonnull String string, @Nonnull RockBlockVariant variant) {
-        var block = (Block) ALABASTER_BLOCKS.get(new Pair<>(string, variant));
+    public static Block getAlabasterBlock(@Nonnull RockBlockVariant variant, @Nonnull String string) {
+        var block = (Block) ALABASTER_BLOCKS.get(new Pair<>(variant, string));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block is null: %s, %s", string, variant));
     }

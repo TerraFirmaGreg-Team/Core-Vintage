@@ -1,10 +1,13 @@
 package net.dries007.tfc.api.types.tree.type;
 
+import com.ferreusveritas.dynamictrees.api.IGenFeature;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
+import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
 import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
+import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenConiferTopper;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -30,9 +33,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
 import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
@@ -55,7 +56,6 @@ public class TreeType extends TreeFamily {
     private final float dominance;
     private final int maxHeight;
     private final int maxDecayDistance;
-    private final boolean isConifer;
     private final ITreeGenerator bushGenerator;
     private final float minGrowthTime;
     private final float minTemp;
@@ -75,9 +75,10 @@ public class TreeType extends TreeFamily {
     private final ITreeGenerator generator;
     private final float[] paramMap;
     private final IGrowthLogicKit logicMap;
-
-    public boolean hasConiferVariants = false;
-    private final boolean thick;
+    public boolean hasConiferVariants;
+    private boolean thick;
+    private final int soilLongevity;
+    private final List<IGenFeature> modules;
 
     private TreeType(Builder builder) {
         super(builder.name);
@@ -96,7 +97,7 @@ public class TreeType extends TreeFamily {
         this.maxGrowthRadius = builder.maxGrowthRadius;
         this.maxHeight = builder.maxHeight;
         this.maxDecayDistance = builder.maxDecayDistance;
-        this.isConifer = builder.isConifer;
+        this.hasConiferVariants = builder.hasConiferVariants;
         this.minGrowthTime = builder.minGrowthTime;
         this.generator = builder.generator;
         this.bushGenerator = builder.bushGenerator;
@@ -111,10 +112,12 @@ public class TreeType extends TreeFamily {
 
         this.paramMap = builder.paramMap;
         this.logicMap = builder.logicMap;
+        this.modules = builder.modules;
+        this.soilLongevity = builder.soilLongevity;
         this.thick = builder.thick;
 
         setPrimitiveLog(builder.primitiveLog);
-        setDynamicBranch(isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
+        setDynamicBranch(builder.thick ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
         setCommonSpecies(new WoodTreeSpecies(name, this, new LeavesProperties(builder.primitiveLeaves, builder.cellKit)));
         getRegisterableBlocks(BLOCKS);
 
@@ -151,6 +154,11 @@ public class TreeType extends TreeFamily {
         return wood;
     }
 
+    @Override
+    public BlockBranch createBranch() {
+        return isThick() ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood);
+    }
+
     public float[] getParamMap() {
         return paramMap;
     }
@@ -164,12 +172,6 @@ public class TreeType extends TreeFamily {
         var stack = new ItemStack(TFCBlocks.getWoodBlock(LOG, wood), qty);
         stack.setCount(MathHelper.clamp(qty, 0, 64));
         return stack;
-    }
-
-
-    @Override
-    public boolean isThick() {
-        return thick;
     }
 
     /**
@@ -232,7 +234,7 @@ public class TreeType extends TreeFamily {
      * @return true, если дерево хвойное, иначе false
      */
     public boolean isConifer() {
-        return isConifer;
+        return hasConiferVariants;
     }
 
     /**
@@ -348,6 +350,20 @@ public class TreeType extends TreeFamily {
         return new ItemStack(TFCItems.getFoodItem(INGREDIENT, fruit));
     }
 
+    public List<IGenFeature> getModule() {
+        return modules;
+    }
+
+    public int getSoilLongevity() {
+        return soilLongevity;
+    }
+
+    @Override
+    public boolean isThick() {
+        return thick;
+    }
+
+
     public static class Builder {
         private final ITreeGenerator generator = new TreeGenDT();
         private ResourceLocation name;
@@ -360,7 +376,7 @@ public class TreeType extends TreeFamily {
         private int maxHeight;
         private int maxGrowthRadius;
         private int maxDecayDistance;
-        private boolean isConifer;
+        private boolean hasConiferVariants = false;
         private ITreeGenerator bushGenerator;
         private Month flowerMonthStart;
         private int floweringMonths;
@@ -375,6 +391,8 @@ public class TreeType extends TreeFamily {
         private IBlockState primitiveLog;
         private ItemStack stickItemStack;
         private boolean thick = false;
+        private List<IGenFeature> modules = new ArrayList<>();
+        private int soilLongevity = 8;
 
         public Builder setName(ResourceLocation name) {
             this.name = name;
@@ -398,7 +416,6 @@ public class TreeType extends TreeFamily {
             this.stickItemStack = stick;
             return this;
         }
-
 
         public Builder setTemp(float minTemp, float maxTemp) {
             this.minTemp = minTemp;
@@ -438,7 +455,7 @@ public class TreeType extends TreeFamily {
 
         // Установить хвойное дерево
         public Builder setConifer() {
-            isConifer = true;
+            hasConiferVariants = true;
             return this;
         }
 
@@ -491,7 +508,7 @@ public class TreeType extends TreeFamily {
         }
 
         public Builder setCellKit(ResourceLocation kit) {
-            cellKit = TreeRegistry.findCellKit(kit);
+            this.cellKit = TreeRegistry.findCellKit(kit);
             return this;
         }
 
@@ -505,8 +522,18 @@ public class TreeType extends TreeFamily {
             return this;
         }
 
-        public Builder setThick(boolean thick) {
-            this.thick = thick;
+        public Builder setThick() {
+            this.thick = true;
+            return this;
+        }
+
+        public Builder setGenFeature(IGenFeature module) {
+            modules.add(module);
+            return this;
+        }
+
+        public Builder setSoilLongevity(int longevity) {
+            this.soilLongevity = longevity;
             return this;
         }
 

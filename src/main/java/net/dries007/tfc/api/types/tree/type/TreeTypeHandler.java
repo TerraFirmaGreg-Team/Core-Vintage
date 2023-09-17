@@ -1,6 +1,9 @@
 package net.dries007.tfc.api.types.tree.type;
 
 import com.ferreusveritas.dynamictrees.ModTrees;
+import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenConiferTopper;
+import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenVine;
+import net.dries007.tfc.world.classic.worldgen.WorldGenMound;
 
 import static net.dries007.tfc.api.types.tree.type.TreeTypes.*;
 import static net.dries007.tfc.api.types.wood.type.WoodTypes.*;
@@ -66,6 +69,7 @@ public class TreeTypeHandler {
                 .setGrowthLogicKit(ModTrees.CONIFER)
                 .setCellKit("conifer")
                 .setBushes()
+                .setConifer()
                 .build();
 
         HICKORY_TREE = new TreeType.Builder()
@@ -129,6 +133,9 @@ public class TreeTypeHandler {
                 .setGrowthLogicKit(ModTrees.CONIFER)
                 .setCellKit("conifer")
                 .setConifer().setBushes()
+                .setThick()
+                .setGenFeature(new FeatureGenVine().setQuantity(8).setMaxLength(32).setRayDistance(32))
+                .setGenFeature(new WorldGenMound(2))
                 .build();
 
         SPRUCE_TREE = new TreeType.Builder()
@@ -157,6 +164,7 @@ public class TreeTypeHandler {
                 .setParamMap(0.15f, 20f, 6, 2, 1.10f)
                 .setGrowthLogicKit(ModTrees.CONIFER)
                 .setCellKit("deciduous")
+                .setConifer()
                 .build();
 
         WILLOW_TREE = new TreeType.Builder()
@@ -178,6 +186,8 @@ public class TreeTypeHandler {
                 .setGrowthLogicKit(ModTrees.JUNGLE)
                 .setCellKit("deciduous")
                 .setBushes()
+                .setThick()
+                .setGenFeature(new FeatureGenVine().setQuantity(8).setMaxLength(32).setRayDistance(32))
                 .build();
 
 

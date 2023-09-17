@@ -35,8 +35,8 @@ public class ModelHelperTFC extends ModelHelper {
         var modelLocation = getBranchModelResourceLocation(blockBranch);
 
         setGenericStateMapper(blockBranch, modelLocation);
-        if (blockBranch instanceof BlockBranchThick) {
-            setGenericStateMapper(((BlockBranchThick) blockBranch).otherBlock, modelLocation);
+        if (blockBranch instanceof BlockTreeBranchThick) {
+            setGenericStateMapper(((BlockTreeBranchThick) blockBranch).otherBlock, modelLocation);
         }
 
         BlockSurfaceRoot surfaceRoot = tree.getSurfaceRoots();

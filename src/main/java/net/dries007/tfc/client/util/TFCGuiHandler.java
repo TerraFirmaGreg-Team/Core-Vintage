@@ -8,7 +8,7 @@ import net.dries007.tfc.common.objects.container.*;
 import net.dries007.tfc.common.objects.items.ItemQuiver;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.common.objects.items.ceramics.ItemSmallVessel;
-import net.dries007.tfc.common.objects.items.rock.ItemRockLoose;
+import net.dries007.tfc.module.core.submodule.rock.common.items.ItemRockLoose;
 import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;

@@ -1,6 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.submodule.rock.common.RockStorage;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -10,7 +11,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.module.core.submodule.rock.api.variant.block.RockBlockVariants.RAW;
 
 public class WorldGenLargeRocks implements IWorldGenerator {
     @Override
@@ -48,7 +49,7 @@ public class WorldGenLargeRocks implements IWorldGenerator {
             for (int z = -size; z <= size; z++) {
                 for (int y = -2; y <= 2; y++) {
                     if (x * x + z * z + y * y > size * size) continue;
-                    world.setBlockState(start.add(x, y, z), TFCBlocks.getRockBlock(RAW, rock).getDefaultState());
+                    world.setBlockState(start.add(x, y, z), RockStorage.getRockBlock(RAW, rock).getDefaultState());
                 }
             }
         }

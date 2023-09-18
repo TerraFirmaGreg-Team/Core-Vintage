@@ -13,7 +13,7 @@ import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalAnvil;
-import net.dries007.tfc.common.objects.blocks.rock.BlockRockAnvil;
+import net.dries007.tfc.module.core.submodule.rock.common.blocks.BlockRockAnvil;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;

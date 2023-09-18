@@ -19,7 +19,7 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.recipes.workbench.SaltingRecipe;
 import net.dries007.tfc.api.recipes.workbench.UnmoldRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.module.core.submodule.rock.api.type.RockType;
 import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
@@ -34,6 +34,7 @@ import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.jei.categories.*;
 import net.dries007.tfc.compat.jei.util.TFCInventoryGuiHandler;
 import net.dries007.tfc.compat.jei.wrappers.*;
+import net.dries007.tfc.module.core.submodule.rock.common.RockStorage;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
@@ -48,7 +49,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.api.types.rock.variant.item.RockItemVariants.LOOSE;
+import static net.dries007.tfc.module.core.submodule.rock.api.variant.item.RockItemVariants.LOOSE;
 
 @ParametersAreNonnullByDefault
 @JEIPlugin
@@ -311,7 +312,7 @@ public final class JEIIntegration implements IModPlugin {
 
         // Stone Knapping Recipes
         for (var type : RockType.getRockTypes()) {
-            registry.addRecipeCatalyst(new ItemStack(TFCItems.getRockItem(LOOSE, type)), KNAP_STONE_UID);
+            registry.addRecipeCatalyst(new ItemStack(RockStorage.getRockItem(LOOSE, type)), KNAP_STONE_UID);
         }
 
         var stoneknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()

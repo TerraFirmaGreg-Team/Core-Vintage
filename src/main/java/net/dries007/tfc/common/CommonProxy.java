@@ -29,7 +29,7 @@ import net.dries007.tfc.api.types.drinkable.DrinkableHandler;
 import net.dries007.tfc.api.types.food.FoodModule;
 import net.dries007.tfc.api.types.metal.MetalModule;
 import net.dries007.tfc.api.types.plant.PlantModule;
-import net.dries007.tfc.api.types.rock.RockModule;
+import net.dries007.tfc.module.core.submodule.rock.RockModule;
 import net.dries007.tfc.module.core.submodule.soil.ModuleSoil;
 import net.dries007.tfc.api.types.tree.TreeModule;
 import net.dries007.tfc.api.types.wood.WoodModule;

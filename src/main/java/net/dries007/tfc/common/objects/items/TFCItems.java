@@ -12,9 +12,6 @@ import net.dries007.tfc.api.types.food.variant.Item.FoodItemVariant;
 import net.dries007.tfc.api.types.food.variant.Item.IFoodItem;
 import net.dries007.tfc.api.types.metal.variant.Item.IMetalItem;
 import net.dries007.tfc.api.types.metal.variant.Item.MetalItemVariant;
-import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.api.types.rock.variant.item.IRockItem;
-import net.dries007.tfc.api.types.rock.variant.item.RockItemVariant;
 import net.dries007.tfc.api.types.wood.type.WoodType;
 import net.dries007.tfc.api.types.wood.variant.item.IWoodItem;
 import net.dries007.tfc.api.types.wood.variant.item.WoodItemVariant;
@@ -37,7 +34,7 @@ public class TFCItems {
 
     //==== Item ======================================================================================================//
 
-    public static final Map<Pair<RockItemVariant, RockType>, IRockItem> ROCK_ITEMS = new LinkedHashMap<>();
+
     public static final Map<Pair<WoodItemVariant, WoodType>, IWoodItem> WOOD_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<MetalItemVariant, Material>, IMetalItem> METAL_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<CropItemVariant, CropType>, ICropItem> CROP_ITEMS = new LinkedHashMap<>();
@@ -128,12 +125,6 @@ public class TFCItems {
         throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
     }
 
-    @Nonnull
-    public static Item getRockItem(@Nonnull RockItemVariant variant, @Nonnull RockType type) {
-        var item = (Item) ROCK_ITEMS.get(new Pair<>(variant, type));
-        if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
-    }
 
     @Nonnull
     public static Item getMetalItem(@Nonnull MetalItemVariant variant, @Nonnull Material type) {

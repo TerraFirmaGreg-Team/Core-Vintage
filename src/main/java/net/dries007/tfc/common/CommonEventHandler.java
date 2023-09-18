@@ -25,14 +25,15 @@ import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IPredator;
-import net.dries007.tfc.api.types.rock.variant.block.IRockBlock;
+import net.dries007.tfc.module.core.submodule.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.devices.BlockQuern;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidTFC;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalAnvil;
-import net.dries007.tfc.common.objects.blocks.rock.BlockRockAnvil;
-import net.dries007.tfc.common.objects.blocks.rock.BlockRockRaw;
+import net.dries007.tfc.module.core.submodule.rock.common.RockStorage;
+import net.dries007.tfc.module.core.submodule.rock.common.blocks.BlockRockAnvil;
+import net.dries007.tfc.module.core.submodule.rock.common.blocks.BlockRockRaw;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodLog;
 import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSupport;
 import net.dries007.tfc.common.objects.container.CapabilityContainerListener;
@@ -120,9 +121,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import static net.dries007.tfc.api.types.rock.type.RockTypes.BASALT;
-import static net.dries007.tfc.api.types.rock.type.RockTypes.RHYOLITE;
-import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.module.core.submodule.rock.api.type.RockTypes.BASALT;
+import static net.dries007.tfc.module.core.submodule.rock.api.type.RockTypes.RHYOLITE;
+import static net.dries007.tfc.module.core.submodule.rock.api.variant.block.RockBlockVariants.RAW;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
@@ -843,10 +844,10 @@ public final class CommonEventHandler {
         // Since cobble is a gravity block, placing it can lead to world crashes, so we avoid doing that and place rhyolite instead
         if (ConfigTFC.General.OVERRIDES.enableLavaWaterPlacesTFCBlocks) {
             if (event.getNewState().getBlock() == Blocks.STONE) {
-                event.setNewState(TFCBlocks.getRockBlock(RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                event.setNewState(RockStorage.getRockBlock(RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
             }
             if (event.getNewState().getBlock() == Blocks.COBBLESTONE) {
-                event.setNewState(TFCBlocks.getRockBlock(RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                event.setNewState(RockStorage.getRockBlock(RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
             }
         }
     }

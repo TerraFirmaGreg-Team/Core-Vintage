@@ -11,11 +11,12 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class SoilStorage {
-    public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new Object2ObjectOpenHashMap<>();
-    public static final Map<Pair<SoilItemVariant, SoilType>, ISoilItem> SOIL_ITEMS = new Object2ObjectOpenHashMap<>();
+    public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<SoilItemVariant, SoilType>, ISoilItem> SOIL_ITEMS = new LinkedHashMap<>();
 
     @Nonnull
     public static Block getSoilBlock(@Nonnull SoilBlockVariant variant, @Nonnull SoilType type) {

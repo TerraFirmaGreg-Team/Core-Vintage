@@ -31,9 +31,6 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.WOOD);
         setSoundType(SoundType.WOOD);
         setHardness(2.0F);
         setResistance(5.0F);

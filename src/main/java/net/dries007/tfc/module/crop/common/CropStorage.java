@@ -11,12 +11,13 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CropStorage {
 
-    public static final Map<Pair<CropBlockVariant, CropType>, ICropBlock> CROP_BLOCKS = new Object2ObjectOpenHashMap<>();
-    public static final Map<Pair<CropItemVariant, CropType>, ICropItem> CROP_ITEMS = new Object2ObjectOpenHashMap<>();
+    public static final Map<Pair<CropBlockVariant, CropType>, ICropBlock> CROP_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<CropItemVariant, CropType>, ICropItem> CROP_ITEMS = new LinkedHashMap<>();
 
     @Nonnull
     public static Block getCropBlock(@Nonnull CropBlockVariant variant, @Nonnull CropType type) {

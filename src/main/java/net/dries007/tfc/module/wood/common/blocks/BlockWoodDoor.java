@@ -39,9 +39,6 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.WOOD);
         setSoundType(SoundType.WOOD);
         setHardness(3.0F);
         disableStats();

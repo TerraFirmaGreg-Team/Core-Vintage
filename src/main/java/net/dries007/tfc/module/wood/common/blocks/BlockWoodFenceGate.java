@@ -30,9 +30,6 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.WOOD);
         setSoundType(SoundType.WOOD);
         setHarvestLevel("axe", 0);
         setHardness(2.0F);

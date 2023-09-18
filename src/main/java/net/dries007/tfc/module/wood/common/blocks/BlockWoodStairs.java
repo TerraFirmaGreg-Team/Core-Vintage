@@ -30,11 +30,7 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-
         useNeighborBrightness = true;
-        setCreativeTab(CreativeTabsTFC.WOOD);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
         OreDictionaryHelper.register(this, variant.toString(), type.toString());

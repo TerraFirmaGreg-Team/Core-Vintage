@@ -27,9 +27,6 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.WOOD);
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
 

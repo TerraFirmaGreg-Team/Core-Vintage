@@ -19,6 +19,7 @@ public class RecipeEventHandler {
 
     @SubscribeEvent
     public static void onRecipeRegister(RegistryEvent.Register<IRecipe> event) {
+
         OreDictionaryHelper.init();
 
         // Register orePrefix proccessing

@@ -11,12 +11,13 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WoodStorage {
 
-    public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new Object2ObjectOpenHashMap<>();
-    public static final Map<Pair<WoodItemVariant, WoodType>, IWoodItem> WOOD_ITEMS = new Object2ObjectOpenHashMap<>();
+    public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<WoodItemVariant, WoodType>, IWoodItem> WOOD_ITEMS = new LinkedHashMap<>();
 
     @Nonnull
     public static Block getWoodBlock(@Nonnull WoodBlockVariant variant, @Nonnull WoodType type) {

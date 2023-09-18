@@ -11,12 +11,13 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class RockStorage {
 
-    public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new Object2ObjectOpenHashMap<>();
-    public static final Map<Pair<RockItemVariant, RockType>, IRockItem> ROCK_ITEMS = new Object2ObjectOpenHashMap<>();
+    public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<RockItemVariant, RockType>, IRockItem> ROCK_ITEMS = new LinkedHashMap<>();
 
 
     @Nonnull

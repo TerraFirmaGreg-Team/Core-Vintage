@@ -41,9 +41,6 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock {
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.WOOD);
         setHardness(0.0F);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);

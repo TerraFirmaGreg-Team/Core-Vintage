@@ -292,24 +292,6 @@ public class ClientProxy extends CommonProxy {
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
-        //==== Wood ==================================================================================================//
-
-        blockColors.registerBlockColorHandler((s, w, p, i) -> {
-                    // цвет листвы
-                    if (i == 0) return foliageColor.colorMultiplier(s, w, p, i);
-                    // цвет дерева
-                    if (i == 1) return ((IWoodBlock) s.getBlock()).getType().getColor();
-                    // Если не указан индекс
-                    return 0xFFFFFF;
-                },
-                WOOD_BLOCKS.values()
-                        .stream()
-                        .map(s -> (Block) s)
-                        .toArray(Block[]::new));
-
-        blockColors.registerBlockColorHandler(foliageColor,
-                LeavesPaging.getLeavesMapForModId(Tags.MOD_ID).values()
-                        .toArray(new Block[0]));
 
         //==== Metal =================================================================================================//
 

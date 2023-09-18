@@ -47,10 +47,6 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.WOOD);
-
         setDefaultState(blockState.getBaseState()
                 .withProperty(LOG_AXIS, BlockLog.EnumAxis.Y)
                 .withProperty(PLACED, true));

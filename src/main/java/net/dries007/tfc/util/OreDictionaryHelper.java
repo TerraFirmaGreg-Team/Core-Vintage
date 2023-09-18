@@ -16,21 +16,14 @@ import javax.annotation.Nonnull;
 
 public class OreDictionaryHelper {
 
-    private static final Multimap<Block, String> MAP_BLOCK_ORE = HashMultimap.create();
-    private static final Multimap<Item, String> MAP_ITEM_ORE = HashMultimap.create();
-    private static final Multimap<ItemStack, String> MAP_ITEMSTACK_ORE = HashMultimap.create();
+    private static final Multimap<String, ItemStack> MAP_ORE = HashMultimap.create();
 
     /**
      * Вызови это в событии регистрации предметов, один раз, в самом конце!
      */
     public static void init() {
-        MAP_BLOCK_ORE.forEach((block, oreDict) -> OreDictionary.registerOre(oreDict, block));
-        MAP_ITEM_ORE.forEach((item, oreDict) -> OreDictionary.registerOre(oreDict, item));
-        MAP_ITEMSTACK_ORE.forEach((item, oreDict) -> OreDictionary.registerOre(oreDict, item));
-
-        MAP_BLOCK_ORE.clear();
-        MAP_ITEM_ORE.clear();
-        MAP_ITEMSTACK_ORE.clear();
+        MAP_ORE.forEach(OreDictionary::registerOre);
+        MAP_ORE.clear();
 
         // Vanilla ore dict values
         OreDictionary.registerOre("clay", Items.CLAY_BALL);
@@ -53,32 +46,30 @@ public class OreDictionaryHelper {
     }
 
     /**
+     * Вызови это если хочешь зарегистрировать предмету его oreDict,
+     * используется для регистрации предметов с meta, где при ее изменении oreDict пропадает.
+     */
+    public static void register(ItemStack itemStack, String... parts) {
+        var oreDict = upperCaseToCamelCase(parts);
+        MAP_ORE.put(oreDict, itemStack);
+    }
+
+    /**
      * Вызови это если хочешь зарегистрировать блоку его oreDict.
      */
     public static void register(Block block, String... parts) {
         if (block instanceof IItemProvider itemBlock && itemBlock.getItemBlock() != null) {
-            var oreDict = upperCaseToCamelCase(parts);
-            MAP_BLOCK_ORE.put(block, oreDict);
+            register(new ItemStack(block), parts);
         } else {
             TerraFirmaCraft.LOGGER.warn(String.format("Trying to register [%s] oredict, but itemblock is null. Skipping!", parts[0]));
         }
     }
 
     /**
-     * Вызови это если хочешь зарегистрировать предмету его oreDict,
-     * используется для регистрации предметов с meta, где при ее изменении oreDict пропадает.
-     */
-    public static void register(ItemStack itemStack, String... parts) {
-        var oreDict = upperCaseToCamelCase(parts);
-        MAP_ITEMSTACK_ORE.put(itemStack, oreDict);
-    }
-
-    /**
      * Вызови это если хочешь зарегистрировать предмету его oreDict.
      */
     public static void register(Item item, String... parts) {
-        var oreDict = upperCaseToCamelCase(parts);
-        MAP_ITEM_ORE.put(item, oreDict);
+        register(new ItemStack(item), parts);
     }
 
     /**

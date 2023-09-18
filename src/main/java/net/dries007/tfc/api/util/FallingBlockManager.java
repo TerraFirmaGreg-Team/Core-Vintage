@@ -39,7 +39,7 @@ public class FallingBlockManager {
     private static final Set<Material> SOFT_MATERIALS = new ObjectOpenHashSet<>(new Material[]{Material.GROUND, Material.SAND, Material.GRASS, Material.CLAY});
     private static final Set<Material> HARD_MATERIALS = new ObjectOpenHashSet<>(new Material[]{Material.IRON, BlockCharcoalPile.CHARCOAL_MATERIAL});
 
-    private static final Map<IBlockState, Specification> FALLABLES = new Object2ObjectOpenHashMap<>();
+    private static final Map<IBlockState, Specification> FALLABLES = new LinkedHashMap<>();
 
     private static final Set<IBlockState> SIDE_SUPPORTS = new ObjectOpenHashSet<>(0);
 

@@ -45,9 +45,9 @@ public class TFCBlocks {
 
 
 
-    public static final Map<Pair<RockBlockVariant, EnumColor>, BlockAlabaster> ALABASTER_BLOCKS = new Object2ObjectOpenHashMap<>();
-    public static final Map<BushType, IBushBlock> BUSH_BLOCKS = new Object2ObjectOpenHashMap<>();
-    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new Object2ObjectOpenHashMap<>();
+    public static final Map<Pair<RockBlockVariant, EnumColor>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
+    public static final Map<BushType, IBushBlock> BUSH_BLOCKS = new LinkedHashMap<>();
+    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new LinkedHashMap<>();
 
 
     // Блоки

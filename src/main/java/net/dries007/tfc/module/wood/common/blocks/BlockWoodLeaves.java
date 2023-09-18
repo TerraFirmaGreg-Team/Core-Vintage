@@ -49,9 +49,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.WOOD);
         setTickRandomly(true);
         setDefaultState(blockState.getBaseState()
                 .withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it

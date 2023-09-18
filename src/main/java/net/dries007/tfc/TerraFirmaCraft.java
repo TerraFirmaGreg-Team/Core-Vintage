@@ -4,6 +4,7 @@ package net.dries007.tfc;
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.module.ModuleManager;
 import net.dries007.tfc.common.CommonProxy;
+import net.dries007.tfc.module.core.ModuleCorePost;
 import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.minecraft.util.ResourceLocation;
@@ -48,8 +49,6 @@ public final class TerraFirmaCraft {
 
     public TerraFirmaCraft() {
         this.moduleManager = new ModuleManager(MOD_ID);
-
-        LOGGER.info("oleg ayyyyy0" + this);
     }
 
     public static CommonProxy getProxy() {
@@ -75,7 +74,11 @@ public final class TerraFirmaCraft {
     @Mod.EventHandler
     public void onConstructionEvent(FMLConstructionEvent event) {
 
-        this.moduleManager.registerModules(ModuleWood.class);
+        this.moduleManager.registerModules(
+                ModuleWood.class
+        );
+
+        this.registerModule(ModuleCorePost.class);
 
         this.moduleManager.onConstructionEvent();
         this.moduleManager.routeFMLStateEvent(event);

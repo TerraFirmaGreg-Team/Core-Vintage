@@ -6,8 +6,13 @@ import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.wood.api.type.WoodTypeHandler;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariantHandler;
 import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariantHandler;
+import net.dries007.tfc.module.wood.init.BlockInitializer;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +47,20 @@ public class ModuleWood extends ModuleBase {
     @Override
     public void onRegister(Registry registry) {
         WoodTypeHandler.init();
-        WoodBlockVariantHandler.init();
+        BlockInitializer.onRegister(registry);
         WoodItemVariantHandler.init();
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void onClientRegister(Registry registry) {
+        BlockInitializer.onClientRegister(registry);
+    }
+
+    @Override
+    public void onClientInitializationEvent(FMLInitializationEvent event) {
+        super.onClientInitializationEvent(event);
+
+        BlockInitializer.onClientInitialization();
     }
 }

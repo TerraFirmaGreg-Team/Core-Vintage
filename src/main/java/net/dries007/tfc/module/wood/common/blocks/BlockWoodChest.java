@@ -49,9 +49,6 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.WOOD);
         setHardness(2.5F);
         setSoundType(SoundType.WOOD);
 

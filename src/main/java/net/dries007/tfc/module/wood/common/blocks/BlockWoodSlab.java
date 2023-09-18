@@ -155,9 +155,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
             this.variant = variant;
             this.type = type;
-
-            setRegistryName(getRegistryLocation());
-            setTranslationKey(getTranslationName());
         }
 
         @Override
@@ -202,9 +199,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
             this.variant = variant;
             this.type = type;
-
-            setRegistryName(getRegistryLocation());
-            setTranslationKey(getTranslationName());
 
             OreDictionaryHelper.register(this, variant.toString(), type.toString());
         }

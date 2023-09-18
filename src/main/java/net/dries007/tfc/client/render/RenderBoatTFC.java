@@ -1,8 +1,8 @@
 package net.dries007.tfc.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.common.objects.entity.EntityBoatTFC;
+import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
+import net.dries007.tfc.module.core.submodule.wood.common.entity.EntityWoodBoat;
 import net.minecraft.client.model.IMultipassModel;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
@@ -19,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class RenderBoatTFC extends Render<EntityBoatTFC> {
+public class RenderBoatTFC extends Render<EntityWoodBoat> {
     private final ModelBase modelBoat = new ModelBoat();
 
     public RenderBoatTFC(RenderManager renderManagerIn) {
@@ -28,7 +28,7 @@ public class RenderBoatTFC extends Render<EntityBoatTFC> {
     }
 
     @Override
-    public void doRender(EntityBoatTFC entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    public void doRender(EntityWoodBoat entity, double x, double y, double z, float entityYaw, float partialTicks) {
         GlStateManager.pushMatrix();
         this.setupTranslation(x, y, z);
         this.setupRotation(entity, entityYaw, partialTicks);
@@ -54,7 +54,7 @@ public class RenderBoatTFC extends Render<EntityBoatTFC> {
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
     @Override
-    protected ResourceLocation getEntityTexture(EntityBoatTFC entity) {
+    protected ResourceLocation getEntityTexture(EntityWoodBoat entity) {
         final WoodType woodType = entity.getWood();
         if (woodType != null) {
             //noinspection ConstantConditions
@@ -70,7 +70,7 @@ public class RenderBoatTFC extends Render<EntityBoatTFC> {
     }
 
     @Override
-    public void renderMultipass(EntityBoatTFC entityIn, double x, double y, double z, float entityYaw, float partialTicks) {
+    public void renderMultipass(EntityWoodBoat entityIn, double x, double y, double z, float entityYaw, float partialTicks) {
         GlStateManager.pushMatrix();
         this.setupTranslation(x, y, z);
         this.setupRotation(entityIn, entityYaw, partialTicks);

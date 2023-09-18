@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.button;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.common.objects.tileentities.TEBarrel;
+import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodBarrel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
@@ -11,9 +11,9 @@ import static net.dries007.tfc.client.gui.GuiBarrel.BARREL_BACKGROUND;
 
 
 public class GuiButtonBarrelSeal extends GuiButtonTFC implements IButtonTooltip {
-    private final TEBarrel tile;
+    private final TEWoodBarrel tile;
 
-    public GuiButtonBarrelSeal(TEBarrel tile, int buttonId, int guiTop, int guiLeft) {
+    public GuiButtonBarrelSeal(TEWoodBarrel tile, int buttonId, int guiTop, int guiLeft) {
         super(buttonId, guiLeft + 123, guiTop + 35, 20, 20, "");
         this.tile = tile;
     }

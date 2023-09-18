@@ -20,7 +20,7 @@ import net.dries007.tfc.api.recipes.workbench.SaltingRecipe;
 import net.dries007.tfc.api.recipes.workbench.UnmoldRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.module.core.submodule.rock.api.type.RockType;
-import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants;
+import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.metal.BlockMetalAnvil;
@@ -35,6 +35,7 @@ import net.dries007.tfc.compat.jei.categories.*;
 import net.dries007.tfc.compat.jei.util.TFCInventoryGuiHandler;
 import net.dries007.tfc.compat.jei.wrappers.*;
 import net.dries007.tfc.module.core.submodule.rock.common.RockStorage;
+import net.dries007.tfc.module.core.submodule.wood.common.WoodStorage;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
@@ -190,7 +191,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(blastList, BLAST_FURNACE_UID);
 
         // Barrel Recipes
-        for (var barrel : TFCBlocks.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.BARREL).toArray()) {
+        for (var barrel : WoodStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.BARREL).toArray()) {
             registry.addRecipeCatalyst(new ItemStack((Block) barrel), BARREL_UID);
         }
 
@@ -202,7 +203,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(barrelRecipes, BARREL_UID);
 
         // Loom Recipes
-        for (var loom : TFCBlocks.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.LOOM).toArray()) {
+        for (var loom : WoodStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.LOOM).toArray()) {
             registry.addRecipeCatalyst(new ItemStack((Block) loom), LOOM_UID);
         }
 

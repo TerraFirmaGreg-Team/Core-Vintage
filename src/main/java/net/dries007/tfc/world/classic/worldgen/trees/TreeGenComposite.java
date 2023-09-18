@@ -2,7 +2,7 @@
 //
 //import com.google.common.collect.LinkedListMultimap;
 //import net.dries007.tfc.world.classic.worldgen.trees.ITreeGenerator;
-//import net.dries007.tfc.api.types.wood.type.WoodType;
+//import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 //import net.minecraft.util.math.BlockPos;
 //import net.minecraft.world.World;
 //import net.minecraft.world.gen.structure.template.TemplateManager;

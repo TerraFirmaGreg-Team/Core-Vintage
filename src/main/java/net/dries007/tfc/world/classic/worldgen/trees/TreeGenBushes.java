@@ -1,10 +1,10 @@
 //package net.dries007.tfc.world.classic.worldgen.trees;
 //
 //import net.dries007.tfc.world.classic.worldgen.trees.ITreeGenerator;
-//import net.dries007.tfc.api.types.wood.type.WoodType;
-//import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants;
+//import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
+//import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants;
 //import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-//import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
+//import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodSapling;
 //import net.minecraft.block.BlockLog;
 //import net.minecraft.block.state.IBlockState;
 //import net.minecraft.util.EnumFacing;
@@ -14,7 +14,7 @@
 //
 //import java.util.Random;
 //
-//import static net.dries007.tfc.common.objects.blocks.wood.BlockWoodLog.PLACED;
+//import static net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodLog.PLACED;
 //import static net.minecraft.block.BlockLeaves.DECAYABLE;
 //import static net.minecraft.block.BlockLog.LOG_AXIS;
 //

@@ -3,13 +3,15 @@ package net.dries007.tfc.client.util;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.gui.*;
-import net.dries007.tfc.common.objects.blocks.wood.BlockWoodChest;
+import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodChest;
 import net.dries007.tfc.common.objects.container.*;
 import net.dries007.tfc.common.objects.items.ItemQuiver;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.common.objects.items.ceramics.ItemSmallVessel;
 import net.dries007.tfc.module.core.submodule.rock.common.items.ItemRockLoose;
 import net.dries007.tfc.common.objects.tileentities.*;
+import net.dries007.tfc.module.core.submodule.wood.common.container.ContainerWoodBarrel;
+import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodBarrel;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -66,7 +68,7 @@ public class TFCGuiHandler implements IGuiHandler {
                 //noinspection ConstantConditions
                 return new ContainerFirePit(player.inventory, Helpers.getTE(world, pos, TEFirePit.class));
             case BARREL:
-                return new ContainerBarrel(player.inventory, Helpers.getTE(world, pos, TEBarrel.class));
+                return new ContainerWoodBarrel(player.inventory, Helpers.getTE(world, pos, TEWoodBarrel.class));
             case CHARCOAL_FORGE:
                 //noinspection ConstantConditions
                 return new ContainerCharcoalForge(player.inventory, Helpers.getTE(world, pos, TECharcoalForge.class));
@@ -134,7 +136,7 @@ public class TFCGuiHandler implements IGuiHandler {
             case FIRE_PIT:
                 return new GuiFirePit(container, player.inventory, Helpers.getTE(world, pos, TEFirePit.class));
             case BARREL:
-                return new GuiBarrel(container, player.inventory, Helpers.getTE(world, pos, TEBarrel.class), world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
+                return new GuiBarrel(container, player.inventory, Helpers.getTE(world, pos, TEWoodBarrel.class), world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
             case CHARCOAL_FORGE:
                 return new GuiCharcoalForge(container, player.inventory, Helpers.getTE(world, pos, TECharcoalForge.class));
             case ANVIL:

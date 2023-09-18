@@ -6,7 +6,7 @@ import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.common.objects.tileentities.TEBarrel;
+import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodBarrel;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +24,7 @@ public class BarrelProvider implements IProbeInfoProvider {
 
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
-        var te = Helpers.getTE(world, iProbeHitData.getPos(), TEBarrel.class);
+        var te = Helpers.getTE(world, iProbeHitData.getPos(), TEWoodBarrel.class);
 
         if (te != null) {
             IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);

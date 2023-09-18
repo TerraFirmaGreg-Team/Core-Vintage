@@ -6,8 +6,8 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.client.button.GuiButtonBarrelSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.util.FluidSpriteCache;
-import net.dries007.tfc.common.objects.container.ContainerBarrel;
-import net.dries007.tfc.common.objects.tileentities.TEBarrel;
+import net.dries007.tfc.module.core.submodule.wood.common.container.ContainerWoodBarrel;
+import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodBarrel;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.Minecraft;
@@ -36,11 +36,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GuiBarrel extends GuiContainerTE<TEBarrel> {
+public class GuiBarrel extends GuiContainerTE<TEWoodBarrel> {
     public static final ResourceLocation BARREL_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/barrel.png");
     private final String translationKey;
 
-    public GuiBarrel(Container container, InventoryPlayer playerInv, TEBarrel tile, String translationKey) {
+    public GuiBarrel(Container container, InventoryPlayer playerInv, TEWoodBarrel tile, String translationKey) {
         super(container, playerInv, tile, BARREL_BACKGROUND);
 
         this.translationKey = translationKey;
@@ -60,7 +60,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
         int relY = mouseY - guiTop;
 
         if (relX >= 7 && relY >= 19 && relX < 25 && relY < 71) {
-            IFluidHandler tank = ((ContainerBarrel) inventorySlots).getBarrelTank();
+            IFluidHandler tank = ((ContainerWoodBarrel) inventorySlots).getBarrelTank();
 
             if (tank != null) {
                 FluidStack fluid = tank.getTankProperties()[0].getContents();
@@ -124,7 +124,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
             drawTexturedModalRect(guiLeft + 92, guiTop + 21, 227, 0, 9, 14);
         }
 
-        ContainerBarrel container = (ContainerBarrel) inventorySlots;
+        ContainerWoodBarrel container = (ContainerWoodBarrel) inventorySlots;
         IFluidHandler tank = container.getBarrelTank();
 
         if (tank != null) {

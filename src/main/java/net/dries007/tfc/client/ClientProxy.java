@@ -16,8 +16,8 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.types.metal.variant.block.IMetalBlock;
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.api.types.wood.variant.block.IWoodBlock;
-import net.dries007.tfc.api.types.wood.variant.item.IWoodItem;
+import net.dries007.tfc.module.core.submodule.wood.api.variant.block.IWoodBlock;
+import net.dries007.tfc.module.core.submodule.wood.api.variant.item.IWoodItem;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
@@ -30,7 +30,7 @@ import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.common.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.entity.EntityBoatTFC;
+import net.dries007.tfc.module.core.submodule.wood.common.entity.EntityWoodBoat;
 import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
@@ -43,6 +43,10 @@ import net.dries007.tfc.compat.dynamictrees.client.ModelHelperTFC;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.submodule.soil.common.blocks.BlockSoilFarmland;
+import net.dries007.tfc.module.core.submodule.wood.common.WoodStorage;
+import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodBarrel;
+import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodChest;
+import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodLoom;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -168,7 +172,7 @@ public class ClientProxy extends CommonProxy {
 
         //==== TESRs =================================================================================================//
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TEChestTFC.class, new TESRChestTFC());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodChest.class, new TESRChestTFC());
         ClientRegistry.bindTileEntitySpecialRenderer(TEToolRack.class, new TESRToolRack());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPitKiln.class, new TESRPitKiln());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
@@ -176,9 +180,9 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());
         ClientRegistry.bindTileEntitySpecialRenderer(TEQuern.class, new TESRQuern());
         ClientRegistry.bindTileEntitySpecialRenderer(TEBellows.class, new TESRBellows());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEBarrel.class, new TESRBarrel());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodBarrel.class, new TESRBarrel());
         ClientRegistry.bindTileEntitySpecialRenderer(TEAnvilTFC.class, new TESRAnvil());
-        ClientRegistry.bindTileEntitySpecialRenderer(TELoom.class, new TESRLoom());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodLoom.class, new TESRLoom());
         ClientRegistry.bindTileEntitySpecialRenderer(TECrucible.class, new TESRCrucible());
         ClientRegistry.bindTileEntitySpecialRenderer(TEFirePit.class, new TESRFirePit());
 
@@ -293,7 +297,7 @@ public class ClientProxy extends CommonProxy {
                     // Если не указан индекс
                     return 0xFFFFFF;
                 },
-                TFCBlocks.WOOD_BLOCKS.values()
+                WoodStorage.WOOD_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
@@ -353,13 +357,13 @@ public class ClientProxy extends CommonProxy {
                     // Если не указан индекс
                     return 0xFFFFFF;
                 },
-                TFCBlocks.WOOD_BLOCKS.values()
+                WoodStorage.WOOD_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
-                TFCItems.WOOD_ITEMS.values()
+                WoodStorage.WOOD_ITEMS.values()
                         .stream()
                         .map(s -> (Item) s)
                         .toArray(Item[]::new));
@@ -607,7 +611,7 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityHorseTFC.class, RenderHorseTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityDonkeyTFC.class, RenderAbstractHorseTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMuleTFC.class, RenderAbstractHorseTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityBoatTFC.class, RenderBoatTFC::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityWoodBoat.class, RenderBoatTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityPolarBearTFC.class, RenderPolarBearTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityParrotTFC.class, RenderParrotTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityLlamaTFC.class, RenderLlamaTFC::new);

@@ -14,13 +14,14 @@ import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.compat.dynamictrees.dropcreators.DropCreatorWoodLog;
 import net.dries007.tfc.compat.dynamictrees.items.ItemWoodSeed;
+import net.dries007.tfc.module.core.submodule.wood.common.WoodStorage;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import static net.dries007.tfc.api.types.tree.type.TreeTypes.ACACIA_TREE;
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.SAPLING;
+import static net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants.SAPLING;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 
 public class WoodTreeSpecies extends Species {
@@ -30,7 +31,7 @@ public class WoodTreeSpecies extends Species {
         super(name, tree, properties);
         this.tree = tree;
 
-        var sapling = TFCBlocks.getWoodBlock(SAPLING, tree.getWood());
+        var sapling = WoodStorage.getWoodBlock(SAPLING, tree.getWood());
         var map = tree.getParamMap();
 
         remDropCreator(new ResourceLocation(ModConstants.MODID, "logs"));

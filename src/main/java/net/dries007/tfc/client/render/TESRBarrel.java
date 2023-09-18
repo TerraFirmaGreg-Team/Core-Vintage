@@ -1,8 +1,8 @@
 package net.dries007.tfc.client.render;
 
 import net.dries007.tfc.client.util.FluidSpriteCache;
-import net.dries007.tfc.common.objects.blocks.wood.BlockWoodBarrel;
-import net.dries007.tfc.common.objects.tileentities.TEBarrel;
+import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodBarrel;
+import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodBarrel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -23,9 +23,9 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.lwjgl.opengl.GL11;
 
-public class TESRBarrel extends TileEntitySpecialRenderer<TEBarrel> {
+public class TESRBarrel extends TileEntitySpecialRenderer<TEWoodBarrel> {
     @Override
-    public void render(TEBarrel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TEWoodBarrel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         IBlockState state = te.getWorld().getBlockState(te.getPos());
         if (!(state.getBlock() instanceof BlockWoodBarrel) || state.getValue(BlockWoodBarrel.SEALED)) {
             return;
@@ -40,7 +40,7 @@ public class TESRBarrel extends TileEntitySpecialRenderer<TEBarrel> {
 
         IFluidTankProperties properties = fluidHandler.getTankProperties()[0];
         FluidStack fluidStack = properties.getContents();
-        ItemStack stack = itemHandler.getStackInSlot(TEBarrel.SLOT_ITEM);
+        ItemStack stack = itemHandler.getStackInSlot(TEWoodBarrel.SLOT_ITEM);
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);

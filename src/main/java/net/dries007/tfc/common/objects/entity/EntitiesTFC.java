@@ -4,6 +4,7 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
+import net.dries007.tfc.module.core.submodule.wood.common.entity.EntityWoodBoat;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
@@ -59,7 +60,7 @@ public class EntitiesTFC {
         register("sitblock", EntitySeatOn.class);
         register("falling_block", EntityFallingBlockTFC.class);
         register("thrown_javelin", EntityThrownJavelin.class);
-        register("boat", EntityBoatTFC.class);
+        register("boat", EntityWoodBoat.class);
         registerLiving("sheeptfc", EntitySheepTFC.class, 0xFFFFFF, 0xFF6347);
         registerLiving("cowtfc", EntityCowTFC.class, 0xA52A2A, 0xFFFFFF);
         registerLiving("grizzlybeartfc", EntityGrizzlyBearTFC.class, 0xB22222, 0xDEB887);

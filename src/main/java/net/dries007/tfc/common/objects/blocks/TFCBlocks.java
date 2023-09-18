@@ -16,9 +16,9 @@ import net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant;
 import net.dries007.tfc.module.core.submodule.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.module.core.submodule.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.module.core.submodule.soil.api.variant.block.ISoilBlock;
-import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.api.types.wood.variant.block.IWoodBlock;
-import net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariant;
+import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
+import net.dries007.tfc.module.core.submodule.wood.api.variant.block.IWoodBlock;
+import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariant;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.common.objects.blocks.devices.*;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidHotWater;
@@ -49,7 +49,7 @@ public class TFCBlocks {
 
     //==== Block =====================================================================================================//
 
-    public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
+
     public static final Map<Pair<PlantBlockVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<CropBlockVariant, CropType>, ICropBlock> CROP_BLOCKS = new LinkedHashMap<>();
     public static final Map<Pair<MetalBlockVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
@@ -174,12 +174,7 @@ public class TFCBlocks {
         BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
     }
 
-    @Nonnull
-    public static Block getWoodBlock(@Nonnull WoodBlockVariant variant, @Nonnull WoodType type) {
-        var block = (Block) WOOD_BLOCKS.get(new Pair<>(variant, type));
-        if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
-    }
+
 
     @Nonnull
     public static Block getPlantBlock(@Nonnull PlantBlockVariant variant, @Nonnull PlantType type) {

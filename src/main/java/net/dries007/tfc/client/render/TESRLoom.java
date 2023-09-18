@@ -1,8 +1,8 @@
 package net.dries007.tfc.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.common.objects.tileentities.TELoom;
+import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
+import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodLoom;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,9 +13,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class TESRLoom extends TESRBase<TELoom> {
+public class TESRLoom extends TESRBase<TEWoodLoom> {
     @Override
-    public void render(TELoom te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TEWoodLoom te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
         GlStateManager.rotate((te.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
@@ -83,7 +83,7 @@ public class TESRLoom extends TESRBase<TELoom> {
     }
 
     @Override
-    public boolean isGlobalRenderer(TELoom te) {
+    public boolean isGlobalRenderer(TEWoodLoom te) {
         return false;
     }
 

@@ -1,9 +1,9 @@
 package net.dries007.tfc.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.common.objects.blocks.wood.BlockWoodChest;
-import net.dries007.tfc.common.objects.tileentities.TEChestTFC;
+import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
+import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodChest;
+import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodChest;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -15,13 +15,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TESRChestTFC extends TileEntitySpecialRenderer<TEChestTFC> {
+public class TESRChestTFC extends TileEntitySpecialRenderer<TEWoodChest> {
 
     private final ModelChest simpleChest = new ModelChest();
     private final ModelChest largeChest = new ModelLargeChest();
 
     @Override
-    public void render(TEChestTFC te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TEWoodChest te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.enableDepth();
         GlStateManager.depthFunc(515);
         GlStateManager.depthMask(true);

@@ -10,12 +10,13 @@ import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.api.types.wood.type.WoodType;
+import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranch;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies;
+import net.dries007.tfc.module.core.submodule.wood.common.WoodStorage;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
@@ -35,8 +36,8 @@ import java.util.*;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
 import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LEAVES;
-import static net.dries007.tfc.api.types.wood.variant.block.WoodBlockVariants.LOG;
+import static net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants.LEAVES;
+import static net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants.LOG;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
 import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
 
@@ -168,7 +169,7 @@ public class TreeType extends TreeFamily {
 
     @Override
     public ItemStack getPrimitiveLogItemStack(int qty) {
-        var stack = new ItemStack(TFCBlocks.getWoodBlock(LOG, wood), qty);
+        var stack = new ItemStack(WoodStorage.getWoodBlock(LOG, wood), qty);
         stack.setCount(MathHelper.clamp(qty, 0, 64));
         return stack;
     }
@@ -407,8 +408,8 @@ public class TreeType extends TreeFamily {
             setName(wood.toString());
 
             this.wood = wood;
-            this.primitiveLeaves = TFCBlocks.getWoodBlock(LEAVES, wood).getDefaultState();
-            this.primitiveLog = TFCBlocks.getWoodBlock(LOG, wood).getDefaultState();
+            this.primitiveLeaves = WoodStorage.getWoodBlock(LEAVES, wood).getDefaultState();
+            this.primitiveLog = WoodStorage.getWoodBlock(LOG, wood).getDefaultState();
             return this;
         }
 

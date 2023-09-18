@@ -8,7 +8,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ceramics.*;
 import net.dries007.tfc.common.objects.items.metal.ItemMetalBucket;
-import net.dries007.tfc.common.objects.items.wood.ItemWoodBucket;
+import net.dries007.tfc.module.core.submodule.wood.common.items.ItemWoodBucket;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

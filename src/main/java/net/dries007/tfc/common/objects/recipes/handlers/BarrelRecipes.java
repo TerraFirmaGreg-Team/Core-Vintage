@@ -21,6 +21,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import static net.dries007.tfc.api.types.food.type.FoodTypes.*;
 import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
+import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.*;
 
 public class BarrelRecipes {
 

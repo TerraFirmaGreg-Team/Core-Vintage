@@ -8,10 +8,10 @@ import net.dries007.tfc.api.types.animal.IPredator;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.common.objects.blocks.crop.BlockCropDead;
+import net.dries007.tfc.module.crop.common.blocks.BlockCropDead;
 import net.dries007.tfc.common.objects.blocks.plants.BlockMushroomTFC;
-import net.dries007.tfc.common.objects.items.crop.ItemCropSeed;
-import net.dries007.tfc.common.objects.tileentities.TECropBase;
+import net.dries007.tfc.module.crop.common.items.ItemCropSeed;
+import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -48,7 +48,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import java.util.*;
 
 import static net.dries007.tfc.api.types.plant.type.PlantTypes.PORCINI;
-import static net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing.WILD;
+import static net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing.WILD;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.

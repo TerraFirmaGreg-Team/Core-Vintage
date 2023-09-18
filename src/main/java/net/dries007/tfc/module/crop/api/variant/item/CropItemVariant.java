@@ -1,6 +1,6 @@
-package net.dries007.tfc.api.types.crop.variant.item;
+package net.dries007.tfc.module.crop.api.variant.item;
 
-import net.dries007.tfc.api.types.crop.type.CropType;
+import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.api.util.Pair;
 import net.minecraft.item.Item;
 
@@ -9,8 +9,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.common.objects.items.TFCItems.CROP_ITEMS;
 import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
+import static net.dries007.tfc.module.crop.common.CropStorage.CROP_ITEMS;
 
 /**
  * Класс CropItemVariant представляет вариант деревянного блока.

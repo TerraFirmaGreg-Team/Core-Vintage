@@ -5,6 +5,7 @@ import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenVine;
 import net.dries007.tfc.world.classic.worldgen.WorldGenMound;
 
 import static net.dries007.tfc.api.types.tree.type.TreeTypes.*;
+import static net.dries007.tfc.module.wood.api.type.WoodTypes.*;
 
 public class TreeTypeHandler {
 

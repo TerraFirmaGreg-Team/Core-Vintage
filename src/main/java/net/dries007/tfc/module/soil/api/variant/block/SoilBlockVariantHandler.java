@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.soil.api.variant.block;
 
-import net.dries007.tfc.module.core.submodule.soil.common.blocks.*;
 import net.dries007.tfc.module.soil.common.blocks.*;
 
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;

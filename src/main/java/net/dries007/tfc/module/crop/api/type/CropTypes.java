@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.crop.type;
+package net.dries007.tfc.module.crop.api.type;
 
 public class CropTypes {
 

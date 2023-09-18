@@ -49,6 +49,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.*;
+import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;

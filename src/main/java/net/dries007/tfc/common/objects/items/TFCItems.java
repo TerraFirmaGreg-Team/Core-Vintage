@@ -3,9 +3,9 @@ package net.dries007.tfc.common.objects.items;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.crop.type.CropType;
-import net.dries007.tfc.api.types.crop.variant.item.CropItemVariant;
-import net.dries007.tfc.api.types.crop.variant.item.ICropItem;
+import net.dries007.tfc.module.crop.api.type.CropType;
+import net.dries007.tfc.module.crop.api.variant.item.CropItemVariant;
+import net.dries007.tfc.module.crop.api.variant.item.ICropItem;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.food.variant.Item.FoodItemVariant;
 import net.dries007.tfc.api.types.food.variant.Item.IFoodItem;
@@ -28,10 +28,6 @@ public class TFCItems {
 
     //==== Item ======================================================================================================//
 
-
-
-
-    public static final Map<Pair<CropItemVariant, CropType>, ICropItem> CROP_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<FoodItemVariant, FoodType>, IFoodItem> FOOD_ITEMS = new LinkedHashMap<>();
 
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new ConcurrentHashMap<>();
@@ -111,12 +107,6 @@ public class TFCItems {
 
     }
 
-    @Nonnull
-    public static Item getCropItem(@Nonnull CropItemVariant variant, @Nonnull CropType type) {
-        var item = (Item) CROP_ITEMS.get(new Pair<>(variant, type));
-        if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
-    }
 
     @Nonnull
     public static Item getFoodItem(@Nonnull FoodItemVariant variant, @Nonnull FoodType type) {

@@ -8,7 +8,7 @@ import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
+import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
 import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -39,7 +39,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing.WILD;
+import static net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing.WILD;
 import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*;
 
 @ParametersAreNonnullByDefault

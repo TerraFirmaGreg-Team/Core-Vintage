@@ -1,6 +1,7 @@
-package net.dries007.tfc.common.objects.tileentities;
+package net.dries007.tfc.module.crop.common.tileentities;
 
-import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
+import net.dries007.tfc.common.objects.tileentities.TETickCounter;
+import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.minecraft.nbt.NBTTagCompound;

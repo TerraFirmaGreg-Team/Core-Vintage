@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.crop.variant.item;
+package net.dries007.tfc.module.crop.api.variant.item;
 
 public class CropItemVariants {
 

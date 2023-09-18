@@ -1,8 +1,9 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.api.types.crop.type.CropType;
+import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
+import net.dries007.tfc.module.crop.common.CropStorage;
+import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -20,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.crop.variant.block.CropBlockVariants.GROWING;
+import static net.dries007.tfc.module.crop.api.variant.block.CropBlockVariants.GROWING;
 
 /**
  * Генератор мира для дикорастущих культур.
@@ -53,7 +54,7 @@ public class WorldGenWildCrops implements IWorldGenerator {
 
                 var type = CROP.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
                 if (type != null) {
-                    BlockCropGrowing cropBlock = (BlockCropGrowing) TFCBlocks.getCropBlock(GROWING, type);
+                    var cropBlock = (BlockCropGrowing) CropStorage.getCropBlock(GROWING, type);
                     int cropsInChunk = 3 + random.nextInt(5);
                     for (int i = 0; i < cropsInChunk; i++) {
                         final int x = (chunkX << 4) + random.nextInt(16) + 8;

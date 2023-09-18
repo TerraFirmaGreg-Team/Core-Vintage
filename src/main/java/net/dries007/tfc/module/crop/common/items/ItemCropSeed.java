@@ -1,11 +1,12 @@
-package net.dries007.tfc.common.objects.items.crop;
+package net.dries007.tfc.module.crop.common.items;
 
-import net.dries007.tfc.api.types.crop.type.CropType;
-import net.dries007.tfc.api.types.crop.variant.item.CropItemVariant;
-import net.dries007.tfc.api.types.crop.variant.item.ICropItem;
+import net.dries007.tfc.module.crop.api.type.CropType;
+import net.dries007.tfc.module.crop.api.variant.item.CropItemVariant;
+import net.dries007.tfc.module.crop.api.variant.item.ICropItem;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.crop.BlockCropGrowing;
+import net.dries007.tfc.module.crop.common.CropStorage;
+import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;
@@ -31,7 +32,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static net.dries007.tfc.api.types.crop.variant.block.CropBlockVariants.GROWING;
+import static net.dries007.tfc.module.crop.api.variant.block.CropBlockVariants.GROWING;
 
 public class ItemCropSeed extends Item implements IPlantable, ICropItem {
     private final CropType type;
@@ -66,7 +67,7 @@ public class ItemCropSeed extends Item implements IPlantable, ICropItem {
                 state.getBlock().canSustainPlant(state, worldIn, pos, EnumFacing.UP, this) &&
                 worldIn.isAirBlock(pos.up()) && state.getBlock() instanceof BlockSoilFarmland) {
 
-            worldIn.setBlockState(pos.up(), TFCBlocks.getCropBlock(GROWING, type).getDefaultState());
+            worldIn.setBlockState(pos.up(), CropStorage.getCropBlock(GROWING, type).getDefaultState());
 
             if (player instanceof EntityPlayerMP) {
                 CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, pos.up(), itemstack);
@@ -91,7 +92,7 @@ public class ItemCropSeed extends Item implements IPlantable, ICropItem {
         if (state.getBlock() instanceof BlockCropGrowing && ((BlockCropGrowing) state.getBlock()).getType() == this.type) {
             return state;
         }
-        return TFCBlocks.getCropBlock(GROWING, type).getDefaultState();
+        return CropStorage.getCropBlock(GROWING, type).getDefaultState();
     }
 
     @SideOnly(Side.CLIENT)

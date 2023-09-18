@@ -1,12 +1,11 @@
-package net.dries007.tfc.common.objects.blocks.crop;
+package net.dries007.tfc.module.crop.common.blocks;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.crop.type.CropType;
-import net.dries007.tfc.api.types.crop.variant.block.CropBlockVariant;
-import net.dries007.tfc.api.types.crop.variant.block.ICropBlock;
+import net.dries007.tfc.module.crop.api.type.CropType;
+import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;
+import net.dries007.tfc.module.crop.api.variant.block.ICropBlock;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.block.BlockBush;

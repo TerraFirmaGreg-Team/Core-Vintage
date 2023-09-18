@@ -1,15 +1,16 @@
-package net.dries007.tfc.common.objects.blocks.crop;
+package net.dries007.tfc.module.crop.common.blocks;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.crop.type.CropType;
-import net.dries007.tfc.api.types.crop.variant.block.CropBlockVariant;
-import net.dries007.tfc.api.types.crop.variant.block.ICropBlock;
+import net.dries007.tfc.module.crop.api.type.CropType;
+import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;
+import net.dries007.tfc.module.crop.api.variant.block.ICropBlock;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.crop.common.CropStorage;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
-import net.dries007.tfc.common.objects.tileentities.TECropBase;
+import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -46,8 +47,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.crop.category.CropCategories.PICKABLE;
-import static net.dries007.tfc.api.types.crop.variant.block.CropBlockVariants.DEAD;
+import static net.dries007.tfc.module.crop.api.category.CropCategories.PICKABLE;
+import static net.dries007.tfc.module.crop.api.variant.block.CropBlockVariants.DEAD;
 
 
 public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlantable, ICropBlock {
@@ -372,7 +373,7 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
         // Проверяем, включена ли опция смерти культурных растений в конфигурации
         if (ConfigTFC.General.FOOD.enableCropDeath) {
             // Устанавливаем состояние блока на месте умирающего растения
-            worldIn.setBlockState(pos, TFCBlocks.getCropBlock(DEAD, type).getDefaultState()
+            worldIn.setBlockState(pos, CropStorage.getCropBlock(DEAD, type).getDefaultState()
                     .withProperty(BlockCropDead.MATURE, state.getValue(getAgeProperty()) == MATURE_AGE));
         }
     }

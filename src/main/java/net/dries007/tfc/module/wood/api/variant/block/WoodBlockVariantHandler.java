@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.wood.api.variant.block;
 
-import net.dries007.tfc.module.core.submodule.wood.common.blocks.*;
 import net.dries007.tfc.module.wood.common.blocks.*;
 
 import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.*;

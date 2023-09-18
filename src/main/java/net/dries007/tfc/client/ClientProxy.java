@@ -101,12 +101,12 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.SHORT_GRASS;
-import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.TALL_GRASS;
+import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.SHORT_GRASS;
+import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.TALL_GRASS;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.PLANT_BLOCKS;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_BLOCKS;
+import static net.dries007.tfc.module.plant.common.PlantStorage.PLANT_BLOCKS;
 import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.FARMLAND;
 import static net.dries007.tfc.module.soil.common.SoilStorage.SOIL_BLOCKS;
 import static net.dries007.tfc.module.wood.common.WoodStorage.WOOD_BLOCKS;

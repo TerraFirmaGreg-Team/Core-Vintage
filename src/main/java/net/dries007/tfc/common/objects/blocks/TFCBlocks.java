@@ -4,13 +4,7 @@ import gregtech.api.GregTechAPI;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.bush.IBushBlock;
 import net.dries007.tfc.api.types.bush.type.BushType;
-import net.dries007.tfc.module.crop.api.type.CropType;
-import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;
-import net.dries007.tfc.module.crop.api.variant.block.ICropBlock;
 import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariant;
-import net.dries007.tfc.api.types.plant.type.PlantType;
-import net.dries007.tfc.api.types.plant.variant.block.IPlantBlock;
-import net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant;
 import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
@@ -46,7 +40,7 @@ public class TFCBlocks {
     //==== Block =====================================================================================================//
 
 
-    public static final Map<Pair<PlantBlockVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new LinkedHashMap<>();
+
 
 
     public static final Map<Pair<RockBlockVariant, String>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
@@ -170,14 +164,6 @@ public class TFCBlocks {
         BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
     }
 
-
-
-    @Nonnull
-    public static Block getPlantBlock(@Nonnull PlantBlockVariant variant, @Nonnull PlantType type) {
-        var block = (Block) PLANT_BLOCKS.get(new Pair<>(variant, type));
-        if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
-    }
 
     @Nonnull
     public static Block getAlabasterBlock(@Nonnull RockBlockVariant variant, @Nonnull String string) {

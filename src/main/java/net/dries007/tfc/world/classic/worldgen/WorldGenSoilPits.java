@@ -1,9 +1,10 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.api.types.plant.type.PlantType;
+import net.dries007.tfc.module.plant.api.type.PlantType;
+import net.dries007.tfc.module.plant.common.PlantStorage;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.module.plant.common.blocks.BlockPlant;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -63,7 +64,7 @@ public class WorldGenSoilPits implements IWorldGenerator {
 
                     for (PlantType plant : PlantType.getPlantTypes()) {
                         if (plant.isClayMarking()) {
-                            var plantBlock = (BlockPlantTFC) TFCBlocks.getPlantBlock(plant.getPlantVariant(), plant);
+                            var plantBlock = (BlockPlant) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
                             IBlockState state = plantBlock.getDefaultState();
                             int plantAge = plant.getAgeForWorldgen(rng, ClimateTFC.getActualTemp(world, pos));
 
@@ -71,7 +72,7 @@ public class WorldGenSoilPits implements IWorldGenerator {
                                     plant.isValidLocation(ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), world.getLightFor(EnumSkyBlock.SKY, pos)) &&
                                     world.isAirBlock(pos) &&
                                     plantBlock.canBlockStay(world, pos, state)) {
-                                world.setBlockState(pos, state.withProperty(BlockPlantTFC.AGE, plantAge), 2);
+                                world.setBlockState(pos, state.withProperty(BlockPlant.AGE, plantAge), 2);
                             }
                         }
                     }

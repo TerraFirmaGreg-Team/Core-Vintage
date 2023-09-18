@@ -7,7 +7,9 @@
 package net.dries007.tfc.module.soil.common.blocks;
 
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
-import net.dries007.tfc.api.types.plant.type.PlantType;
+import net.dries007.tfc.module.plant.api.type.PlantType;
+import net.dries007.tfc.module.plant.common.PlantStorage;
+import net.dries007.tfc.module.plant.common.blocks.BlockPlantShortGrass;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeat;
@@ -17,8 +19,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
-import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.common.objects.blocks.plants.BlockShortGrassTFC;
+import net.dries007.tfc.module.plant.common.blocks.BlockPlant;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -48,7 +49,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.SHORT_GRASS;
+import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.SHORT_GRASS;
 import static net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing.WILD;
 import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*;
 import static net.dries007.tfc.module.soil.api.variant.item.SoilItemVariants.PILE;
@@ -159,7 +160,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
             for (PlantType plant : PlantType.getPlantTypes()) {
                 if (plant.getPlantVariant() == SHORT_GRASS && rand.nextFloat() < 0.5f) {
                     float temp = ClimateTFC.getActualTemp(world, upPos);
-                    var plantBlock = (BlockShortGrassTFC) TFCBlocks.getPlantBlock(plant.getPlantVariant(), plant);
+                    var plantBlock = (BlockPlantShortGrass) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
 
                     // Проверяем условия для генерации короткой травы
                     if (world.isAirBlock(upPos) &&
@@ -309,8 +310,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
     public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing direction, @Nonnull IPlantable plantable) {
         int beachDistance = 2;
 
-        if (plantable instanceof BlockPlantTFC) {
-            switch (((BlockPlantTFC) plantable).getEnumType()) {
+        if (plantable instanceof BlockPlant) {
+            switch (((BlockPlant) plantable).getEnumType()) {
                 case CLAY -> {
                     return variant == DIRT || variant == GRASS ||
                             variant == DRY_GRASS || variant == CLAY || variant == CLAY_GRASS;

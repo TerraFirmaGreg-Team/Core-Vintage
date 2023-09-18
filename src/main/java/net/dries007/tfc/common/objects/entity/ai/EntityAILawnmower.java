@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.entity.ai;
 
-import net.dries007.tfc.common.objects.blocks.plants.BlockShortGrassTFC;
+import net.dries007.tfc.module.plant.common.blocks.BlockPlantShortGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -53,7 +53,7 @@ public class EntityAILawnmower extends EntityAIBase {
     private boolean isAtShortGrass() {
         BlockPos pos = grassEater.getPosition();
         IBlockState state = entityWorld.getBlockState(pos);
-        return state.getBlock() instanceof BlockShortGrassTFC;
+        return state.getBlock() instanceof BlockPlantShortGrass;
     }
 
     public int getTimer() {

@@ -9,7 +9,7 @@ import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropDead;
-import net.dries007.tfc.common.objects.blocks.plants.BlockMushroomTFC;
+import net.dries007.tfc.module.plant.common.blocks.BlockPlantMushroom;
 import net.dries007.tfc.module.crop.common.items.ItemCropSeed;
 import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
@@ -47,7 +47,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.*;
 
-import static net.dries007.tfc.api.types.plant.type.PlantTypes.PORCINI;
+import static net.dries007.tfc.module.plant.api.type.PlantTypes.PORCINI;
 import static net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing.WILD;
 
 /**
@@ -153,7 +153,7 @@ public class WorldRegenHandler {
                 //If I'm not completely missing the point, then we have the top block for each in a chunk. Which is apparently not the top solid block ffs.
                 IBlockState topState = world.getBlockState(topPos);
                 Block topBlock = topState.getBlock();
-                if (!topState.getMaterial().isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockMushroomTFC)) {
+                if (!topState.getMaterial().isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockPlantMushroom)) {
                     IBlockState soil = world.getBlockState(topPos.down());
                     if (soil.getBlock() instanceof ISoilBlock soilRock) {
                         //Stop removing dead crops from farmland please!

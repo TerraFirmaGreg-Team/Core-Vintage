@@ -1,8 +1,8 @@
 package net.dries007.tfc.util;
 
 
+import net.dries007.tfc.module.plant.common.blocks.BlockPlantShortGrass;
 import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.common.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -18,7 +18,7 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
     private static Boolean isReplaceable(World world, BlockPos pos) {
         // Modified to allow replacement of grass during spring regen
         var test = world.getBlockState(pos).getBlock();
-        return test instanceof BlockShortGrassTFC || test.isAir(world.getBlockState(pos), world, pos);
+        return test instanceof BlockPlantShortGrass || test.isAir(world.getBlockState(pos), world, pos);
     }
 
     @Override

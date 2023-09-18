@@ -9,7 +9,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
-import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.module.plant.common.blocks.BlockPlant;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -138,8 +138,8 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
     public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
         int beachDistance = 2;
 
-        if (plantable instanceof BlockPlantTFC) {
-            switch (((BlockPlantTFC) plantable).getEnumType()) {
+        if (plantable instanceof BlockPlant) {
+            switch (((BlockPlant) plantable).getEnumType()) {
                 case CLAY -> {
                     return variant == DIRT || variant == GRASS ||
                             variant == DRY_GRASS || variant == CLAY || variant == CLAY_GRASS;

@@ -346,11 +346,6 @@ public class CommonProxy {
     }
 
     public void onInit(FMLInitializationEvent event) {
-        ModuleSoil.init();
-
-
-
-
         LootTablesTFC.init();
         CapabilityFood.init();
 

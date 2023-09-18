@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
+import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
@@ -36,8 +37,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.SAPLING;
 
@@ -116,6 +116,9 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         }
     }
 
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    }
     @Override
     @Nonnull
     protected BlockStateContainer createBlockState() {

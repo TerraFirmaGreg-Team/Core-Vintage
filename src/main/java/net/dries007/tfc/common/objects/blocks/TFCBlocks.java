@@ -2,6 +2,7 @@ package net.dries007.tfc.common.objects.blocks;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.MarkerMaterials;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.bush.IBushBlock;
 import net.dries007.tfc.api.types.bush.type.BushType;
@@ -29,9 +30,7 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_BLOCKS;
 import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.*;
@@ -46,16 +45,16 @@ public class TFCBlocks {
 
 
 
-    public static final Map<Pair<RockBlockVariant, EnumColor>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
-    public static final Map<BushType, IBushBlock> BUSH_BLOCKS = new LinkedHashMap<>();
-    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<RockBlockVariant, EnumColor>, BlockAlabaster> ALABASTER_BLOCKS = new Object2ObjectOpenHashMap<>();
+    public static final Map<BushType, IBushBlock> BUSH_BLOCKS = new Object2ObjectOpenHashMap<>();
+    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new Object2ObjectOpenHashMap<>();
 
 
     // Блоки
-    public static final ArrayList<Block> BLOCKS = new ArrayList<>();
+    public static final LinkedList<Block> BLOCKS = new LinkedList<>();
 
     // Жидкости
-    public static final ArrayList<BlockFluidBase> FLUID = new ArrayList<>();
+    public static final LinkedList<BlockFluidBase> FLUID = new LinkedList<>();
 
     public static BlockTreeRootyMimic ROOTY_DIRT_MIMIC;
 

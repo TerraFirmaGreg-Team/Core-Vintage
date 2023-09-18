@@ -1,21 +1,21 @@
 package net.dries007.tfc.module.soil.common;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
-import net.dries007.tfc.module.soil.api.variant.item.ISoilItem;
 import net.dries007.tfc.module.soil.api.type.SoilType;
+import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariant;
+import net.dries007.tfc.module.soil.api.variant.item.ISoilItem;
 import net.dries007.tfc.module.soil.api.variant.item.SoilItemVariant;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class SoilStorage {
-    public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<SoilItemVariant, SoilType>, ISoilItem> SOIL_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new Object2ObjectOpenHashMap<>();
+    public static final Map<Pair<SoilItemVariant, SoilType>, ISoilItem> SOIL_ITEMS = new Object2ObjectOpenHashMap<>();
 
     @Nonnull
     public static Block getSoilBlock(@Nonnull SoilBlockVariant variant, @Nonnull SoilType type) {

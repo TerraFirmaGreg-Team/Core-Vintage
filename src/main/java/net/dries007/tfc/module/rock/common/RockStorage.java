@@ -1,22 +1,22 @@
 package net.dries007.tfc.module.rock.common;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.module.rock.api.variant.item.IRockItem;
 import net.dries007.tfc.module.rock.api.variant.item.RockItemVariant;
-import net.dries007.tfc.api.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class RockStorage {
 
-    public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<RockItemVariant, RockType>, IRockItem> ROCK_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new Object2ObjectOpenHashMap<>();
+    public static final Map<Pair<RockItemVariant, RockType>, IRockItem> ROCK_ITEMS = new Object2ObjectOpenHashMap<>();
 
 
     @Nonnull

@@ -1,6 +1,7 @@
 package net.dries007.tfc.common.objects.items;
 
 import gregtech.api.unification.ore.OrePrefix;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.crop.api.type.CropType;
@@ -16,10 +17,7 @@ import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static net.dries007.tfc.common.objects.CreativeTabsTFC.WOOD;
@@ -28,13 +26,13 @@ public class TFCItems {
 
     //==== Item ======================================================================================================//
 
-    public static final Map<Pair<FoodItemVariant, FoodType>, IFoodItem> FOOD_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<FoodItemVariant, FoodType>, IFoodItem> FOOD_ITEMS = new Object2ObjectOpenHashMap<>();
 
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new ConcurrentHashMap<>();
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new ConcurrentHashMap<>();
 
     // Предметы
-    public static final List<Item> ITEMS = new ArrayList<>();
+    public static final LinkedList<Item> ITEMS = new LinkedList<>();
 
     public static ItemMisc STRAW;
     public static Item HANDSTONE;

@@ -1,22 +1,22 @@
 package net.dries007.tfc.module.metal.common;
 
 import gregtech.api.unification.material.Material;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.metal.api.variant.Item.IMetalItem;
 import net.dries007.tfc.module.metal.api.variant.Item.MetalItemVariant;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
 import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariant;
-import net.dries007.tfc.api.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MetalStorage {
 
-    public static final Map<Pair<MetalBlockVariant, Material>, IMetalBlock> METAL_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<MetalItemVariant, Material>, IMetalItem> METAL_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<MetalBlockVariant, Material>, IMetalBlock> METAL_BLOCKS = new Object2ObjectOpenHashMap<>();
+    public static final Map<Pair<MetalItemVariant, Material>, IMetalItem> METAL_ITEMS = new Object2ObjectOpenHashMap<>();
 
     @Nonnull
     public static Block getMetalBlock(@Nonnull MetalBlockVariant variant, @Nonnull Material material) {

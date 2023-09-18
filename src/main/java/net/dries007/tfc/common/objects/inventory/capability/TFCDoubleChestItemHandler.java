@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.inventory.capability;
 
-import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodChest;
+import net.dries007.tfc.module.wood.common.tileentities.TEWoodChest;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

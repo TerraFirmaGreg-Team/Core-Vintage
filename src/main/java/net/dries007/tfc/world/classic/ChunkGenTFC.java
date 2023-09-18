@@ -1,13 +1,13 @@
 package net.dries007.tfc.world.classic;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.module.core.submodule.rock.api.category.RockCategory;
-import net.dries007.tfc.module.core.submodule.rock.api.type.RockType;
-import net.dries007.tfc.module.core.submodule.rock.common.RockStorage;
-import net.dries007.tfc.module.core.submodule.soil.api.type.SoilType;
+import net.dries007.tfc.module.rock.api.category.RockCategory;
+import net.dries007.tfc.module.rock.api.type.RockType;
+import net.dries007.tfc.module.rock.common.RockStorage;
+import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.core.submodule.soil.common.SoilStorage;
+import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -49,8 +49,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.module.core.submodule.rock.api.variant.block.RockBlockVariants.*;
-import static net.dries007.tfc.module.core.submodule.soil.api.variant.block.SoilBlockVariants.*;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;

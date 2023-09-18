@@ -4,7 +4,7 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
-import net.dries007.tfc.module.core.submodule.wood.common.entity.EntityWoodBoat;
+import net.dries007.tfc.module.wood.common.entity.EntityWoodBoat;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;

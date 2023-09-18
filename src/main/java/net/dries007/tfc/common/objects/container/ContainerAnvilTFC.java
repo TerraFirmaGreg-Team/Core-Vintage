@@ -9,7 +9,7 @@ import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.common.objects.tileentities.TEAnvilTFC;
+import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -28,8 +28,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.*;
 
 @ParametersAreNonnullByDefault
-public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButtonHandler {
-    public ContainerAnvilTFC(InventoryPlayer playerInv, TEAnvilTFC te) {
+public class ContainerAnvilTFC extends ContainerTE<TEMetalAnvil> implements IButtonHandler {
+    public ContainerAnvilTFC(InventoryPlayer playerInv, TEMetalAnvil te) {
         super(playerInv, te, 26);
     }
 
@@ -42,7 +42,7 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
             }
         } else if (buttonID == BUTTON_ID_PLAN) {
             // Switch to anvil plan gui
-            Slot slotInput = inventorySlots.get(TEAnvilTFC.SLOT_INPUT_1);
+            Slot slotInput = inventorySlots.get(TEMetalAnvil.SLOT_INPUT_1);
             if (slotInput != null) {
                 ItemStack stack = slotInput.getStack();
                 if (!stack.isEmpty() && !AnvilRecipe.getAllFor(stack).isEmpty()) {
@@ -56,25 +56,25 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
     protected void addContainerSlots() {
         IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (inventory != null) {
-            addSlotToContainer(new SlotCallback(inventory, TEAnvilTFC.SLOT_INPUT_1, 31, 68, tile));
-            addSlotToContainer(new SlotCallback(inventory, TEAnvilTFC.SLOT_INPUT_2, 13, 68, tile));
-            addSlotToContainer(new SlotCallback(inventory, TEAnvilTFC.SLOT_HAMMER, 129, 68, tile));
-            addSlotToContainer(new SlotCallback(inventory, TEAnvilTFC.SLOT_FLUX, 147, 68, tile));
+            addSlotToContainer(new SlotCallback(inventory, TEMetalAnvil.SLOT_INPUT_1, 31, 68, tile));
+            addSlotToContainer(new SlotCallback(inventory, TEMetalAnvil.SLOT_INPUT_2, 13, 68, tile));
+            addSlotToContainer(new SlotCallback(inventory, TEMetalAnvil.SLOT_HAMMER, 129, 68, tile));
+            addSlotToContainer(new SlotCallback(inventory, TEMetalAnvil.SLOT_FLUX, 147, 68, tile));
         }
     }
 
     @Override
     protected boolean transferStackIntoContainer(ItemStack stack, int containerSlots) {
-        return !mergeItemStack(stack, TEAnvilTFC.SLOT_FLUX, TEAnvilTFC.SLOT_FLUX + 1, false) &&
-                !mergeItemStack(stack, TEAnvilTFC.SLOT_HAMMER, TEAnvilTFC.SLOT_HAMMER + 1, false) &&
-                !mergeItemStack(stack, TEAnvilTFC.SLOT_INPUT_1, TEAnvilTFC.SLOT_INPUT_2 + 1, false);
+        return !mergeItemStack(stack, TEMetalAnvil.SLOT_FLUX, TEMetalAnvil.SLOT_FLUX + 1, false) &&
+                !mergeItemStack(stack, TEMetalAnvil.SLOT_HAMMER, TEMetalAnvil.SLOT_HAMMER + 1, false) &&
+                !mergeItemStack(stack, TEMetalAnvil.SLOT_INPUT_1, TEMetalAnvil.SLOT_INPUT_2 + 1, false);
     }
 
     private boolean attemptWork() {
         // This only runs on server
 
         // Get the slot for input
-        Slot slotInput = inventorySlots.get(TEAnvilTFC.SLOT_INPUT_1);
+        Slot slotInput = inventorySlots.get(TEMetalAnvil.SLOT_INPUT_1);
         if (slotInput == null)
             return false;
 
@@ -101,7 +101,7 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
             return false;
         }
 
-        Slot slot = inventorySlots.get(TEAnvilTFC.SLOT_HAMMER);
+        Slot slot = inventorySlots.get(TEMetalAnvil.SLOT_HAMMER);
         if (slot == null)
             return false;
 

@@ -5,14 +5,14 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 import com.ferreusveritas.dynamictrees.util.SimpleVoxmap;
 import com.ferreusveritas.dynamictrees.worldgen.JoCode;
-import net.dries007.tfc.module.core.submodule.soil.common.SoilStorage;
+import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import static net.dries007.tfc.module.core.submodule.soil.api.variant.block.SoilBlockVariants.DIRT;
+import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.DIRT;
 
 /**
  * Класс WorldGenMound расширяет класс FeatureGenMound и используется для генерации холмов в мире.

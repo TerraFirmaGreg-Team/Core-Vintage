@@ -1,11 +1,11 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.types.plant.type.PlantType;
-import net.dries007.tfc.module.core.submodule.soil.api.variant.block.SoilBlockVariants;
+import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.core.submodule.soil.common.SoilStorage;
+import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;

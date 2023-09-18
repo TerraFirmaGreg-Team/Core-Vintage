@@ -25,17 +25,17 @@ import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.animal.IAnimalTFC;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IPredator;
-import net.dries007.tfc.module.core.submodule.rock.api.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.devices.BlockQuern;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidTFC;
-import net.dries007.tfc.common.objects.blocks.metal.BlockMetalAnvil;
-import net.dries007.tfc.module.core.submodule.rock.common.RockStorage;
-import net.dries007.tfc.module.core.submodule.rock.common.blocks.BlockRockAnvil;
-import net.dries007.tfc.module.core.submodule.rock.common.blocks.BlockRockRaw;
-import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodLog;
-import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodSupport;
+import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;
+import net.dries007.tfc.module.rock.common.RockStorage;
+import net.dries007.tfc.module.rock.common.blocks.BlockRockAnvil;
+import net.dries007.tfc.module.rock.common.blocks.BlockRockRaw;
+import net.dries007.tfc.module.wood.common.blocks.BlockWoodLog;
+import net.dries007.tfc.module.wood.common.blocks.BlockWoodSupport;
 import net.dries007.tfc.common.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.common.objects.effects.PotionEffectsTFC;
 import net.dries007.tfc.common.objects.items.ItemQuiver;
@@ -121,9 +121,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import static net.dries007.tfc.module.core.submodule.rock.api.type.RockTypes.BASALT;
-import static net.dries007.tfc.module.core.submodule.rock.api.type.RockTypes.RHYOLITE;
-import static net.dries007.tfc.module.core.submodule.rock.api.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.module.rock.api.type.RockTypes.BASALT;
+import static net.dries007.tfc.module.rock.api.type.RockTypes.RHYOLITE;
+import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.RAW;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)

@@ -3,15 +3,15 @@ package net.dries007.tfc.compat.dynamictrees;
 import com.ferreusveritas.dynamictrees.api.ICustomRootDecay;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.core.submodule.soil.common.SoilStorage;
+import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import static net.dries007.tfc.module.core.submodule.soil.api.type.SoilTypes.LOAM;
-import static net.dries007.tfc.module.core.submodule.soil.api.variant.block.SoilBlockVariants.DIRT;
+import static net.dries007.tfc.module.soil.api.type.SoilTypes.LOAM;
+import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.DIRT;
 
 /**
  * Класс TFCRootDecay реализует интерфейс ICustomRootDecay и используется для определения процесса разложения корней.

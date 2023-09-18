@@ -8,7 +8,7 @@ import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.core.submodule.soil.common.blocks.BlockSoilFarmland;
+import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.dries007.tfc.common.objects.tileentities.TECropBase;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;

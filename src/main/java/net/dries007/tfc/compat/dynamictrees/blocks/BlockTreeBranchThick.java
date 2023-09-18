@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.dynamictrees.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranchThick;
-import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
+import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;

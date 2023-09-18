@@ -11,17 +11,16 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.compat.dynamictrees.dropcreators.DropCreatorWoodLog;
 import net.dries007.tfc.compat.dynamictrees.items.ItemWoodSeed;
-import net.dries007.tfc.module.core.submodule.wood.common.WoodStorage;
+import net.dries007.tfc.module.wood.common.WoodStorage;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import static net.dries007.tfc.api.types.tree.type.TreeTypes.ACACIA_TREE;
-import static net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants.SAPLING;
+import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.SAPLING;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 
 public class WoodTreeSpecies extends Species {

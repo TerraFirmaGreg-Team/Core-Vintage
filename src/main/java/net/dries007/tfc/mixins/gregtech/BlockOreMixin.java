@@ -5,10 +5,10 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.StoneType;
 import gregtech.common.blocks.BlockOre;
 import gregtech.common.blocks.properties.PropertyStoneType;
-import net.dries007.tfc.module.core.submodule.rock.api.type.RockType;
+import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
-import net.dries007.tfc.module.core.submodule.rock.common.RockStorage;
+import net.dries007.tfc.module.rock.common.RockStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -22,8 +22,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
 
-import static net.dries007.tfc.module.core.submodule.rock.api.variant.block.RockBlockVariants.COBBLE;
-import static net.dries007.tfc.module.core.submodule.rock.api.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.COBBLE;
+import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.RAW;
 
 @SuppressWarnings("all")
 @Mixin(value = BlockOre.class, remap = false)

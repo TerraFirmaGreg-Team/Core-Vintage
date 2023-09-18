@@ -1,8 +1,8 @@
 package net.dries007.tfc.client.render;
 
 import net.dries007.tfc.client.util.FluidSpriteCache;
-import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodBarrel;
-import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodBarrel;
+import net.dries007.tfc.module.wood.common.blocks.BlockWoodBarrel;
+import net.dries007.tfc.module.wood.common.tileentities.TEWoodBarrel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;

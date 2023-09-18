@@ -15,13 +15,11 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class WorkbenchRecipes {
 
 
-    public static void register() {}
-
-//    public void register() {
-//        registerUnmoldRecipes();
-//        //registerWoodRecipes();
-//        //registerRockRecipes();
-//    }
+    public static void register() {
+        registerUnmoldRecipes();
+        //registerWoodRecipes();
+        //registerRockRecipes();
+    }
 
     private static void registerUnmoldRecipes() {
         var registry = ForgeRegistries.RECIPES;

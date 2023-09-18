@@ -2,13 +2,13 @@ package net.dries007.tfc.common.objects.recipes.handlers;
 
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.module.core.submodule.rock.api.type.RockType;
+import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.core.submodule.rock.common.RockStorage;
+import net.dries007.tfc.module.rock.common.RockStorage;
 import net.minecraft.item.EnumDyeColor;
 
-import static net.dries007.tfc.module.core.submodule.rock.api.variant.block.RockBlockVariants.RAW;
-import static net.dries007.tfc.module.core.submodule.rock.api.variant.block.RockBlockVariants.SMOOTH;
+import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.SMOOTH;
 
 
 public class ChiselRecipes {

@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodLeaves;
-import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodSapling;
+import net.dries007.tfc.module.wood.common.blocks.BlockWoodLeaves;
+import net.dries007.tfc.module.wood.common.blocks.BlockWoodSapling;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;

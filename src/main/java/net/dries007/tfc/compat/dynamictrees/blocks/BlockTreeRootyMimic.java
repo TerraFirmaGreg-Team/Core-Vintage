@@ -2,10 +2,10 @@ package net.dries007.tfc.compat.dynamictrees.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.blocks.BlockRootyDirt;
-import net.dries007.tfc.module.core.submodule.soil.api.variant.block.ISoilBlock;
+import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
-import net.dries007.tfc.module.core.submodule.soil.common.SoilStorage;
+import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -22,8 +22,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.module.core.submodule.soil.api.type.SoilTypes.LOAM;
-import static net.dries007.tfc.module.core.submodule.soil.api.variant.block.SoilBlockVariants.DIRT;
+import static net.dries007.tfc.module.soil.api.type.SoilTypes.LOAM;
+import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.DIRT;
 
 @ParametersAreNonnullByDefault
 public class BlockTreeRootyMimic extends BlockRootyDirt implements IItemProvider, IHasModel {

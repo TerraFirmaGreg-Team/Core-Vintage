@@ -14,10 +14,12 @@ import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.types.metal.variant.block.IMetalBlock;
+import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.module.core.submodule.wood.api.variant.block.IWoodBlock;
-import net.dries007.tfc.module.core.submodule.wood.api.variant.item.IWoodItem;
+import net.dries007.tfc.module.metal.common.MetalStorage;
+import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
+import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
+import net.dries007.tfc.module.wood.api.variant.item.IWoodItem;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
@@ -30,7 +32,7 @@ import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.common.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.core.submodule.wood.common.entity.EntityWoodBoat;
+import net.dries007.tfc.module.wood.common.entity.EntityWoodBoat;
 import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
@@ -42,11 +44,10 @@ import net.dries007.tfc.compat.dynamictrees.client.BakedModelBlockRootyTFC;
 import net.dries007.tfc.compat.dynamictrees.client.ModelHelperTFC;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.core.submodule.soil.common.blocks.BlockSoilFarmland;
-import net.dries007.tfc.module.core.submodule.wood.common.WoodStorage;
-import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodBarrel;
-import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodChest;
-import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodLoom;
+import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
+import net.dries007.tfc.module.wood.common.tileentities.TEWoodBarrel;
+import net.dries007.tfc.module.wood.common.tileentities.TEWoodChest;
+import net.dries007.tfc.module.wood.common.tileentities.TEWoodLoom;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -103,9 +104,13 @@ import java.util.List;
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.SHORT_GRASS;
 import static net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant.TALL_GRASS;
 import static net.dries007.tfc.common.objects.blocks.BlockPlacedHide.SIZE;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.PLANT_BLOCKS;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
-import static net.dries007.tfc.module.core.submodule.soil.api.variant.block.SoilBlockVariants.FARMLAND;
-import static net.dries007.tfc.module.core.submodule.soil.common.SoilStorage.SOIL_BLOCKS;
+import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_BLOCKS;
+import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.FARMLAND;
+import static net.dries007.tfc.module.soil.common.SoilStorage.SOIL_BLOCKS;
+import static net.dries007.tfc.module.wood.common.WoodStorage.WOOD_BLOCKS;
+import static net.dries007.tfc.module.wood.common.WoodStorage.WOOD_ITEMS;
 import static net.minecraft.block.Block.getBlockFromItem;
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -135,7 +140,7 @@ public class ClientProxy extends CommonProxy {
 
         //==== BLOCKS ================================================================================================//
 
-        TFCBlocks.METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
+        METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
         for (var block : TFCBlocks.BLOCKS) {
             if (block instanceof IHasModel blockModel) {
@@ -181,7 +186,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TEQuern.class, new TESRQuern());
         ClientRegistry.bindTileEntitySpecialRenderer(TEBellows.class, new TESRBellows());
         ClientRegistry.bindTileEntitySpecialRenderer(TEWoodBarrel.class, new TESRBarrel());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEAnvilTFC.class, new TESRAnvil());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEMetalAnvil.class, new TESRAnvil());
         ClientRegistry.bindTileEntitySpecialRenderer(TEWoodLoom.class, new TESRLoom());
         ClientRegistry.bindTileEntitySpecialRenderer(TECrucible.class, new TESRCrucible());
         ClientRegistry.bindTileEntitySpecialRenderer(TEFirePit.class, new TESRFirePit());
@@ -282,7 +287,7 @@ public class ClientProxy extends CommonProxy {
         //==== Plant =================================================================================================//
 
         blockColors.registerBlockColorHandler(grassColor,
-                TFCBlocks.PLANT_BLOCKS.values()
+                PLANT_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
@@ -297,7 +302,7 @@ public class ClientProxy extends CommonProxy {
                     // Если не указан индекс
                     return 0xFFFFFF;
                 },
-                WoodStorage.WOOD_BLOCKS.values()
+                WOOD_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
@@ -309,7 +314,7 @@ public class ClientProxy extends CommonProxy {
         //==== Metal =================================================================================================//
 
         blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IMetalBlock) s.getBlock()).getMaterial().getMaterialRGB() : 0xFFFFFF,
-                TFCBlocks.METAL_BLOCKS.values()
+                MetalStorage.METAL_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
@@ -339,7 +344,7 @@ public class ClientProxy extends CommonProxy {
         //==== Plant =================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
-                TFCBlocks.PLANT_BLOCKS.values()
+                PLANT_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant() == SHORT_GRASS || x.getBlockVariant() == TALL_GRASS)
                         .map(s -> (Block) s)
@@ -357,13 +362,13 @@ public class ClientProxy extends CommonProxy {
                     // Если не указан индекс
                     return 0xFFFFFF;
                 },
-                WoodStorage.WOOD_BLOCKS.values()
+                WOOD_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
 
         itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
-                WoodStorage.WOOD_ITEMS.values()
+                WOOD_ITEMS.values()
                         .stream()
                         .map(s -> (Item) s)
                         .toArray(Item[]::new));
@@ -371,7 +376,7 @@ public class ClientProxy extends CommonProxy {
         //==== Metal =================================================================================================//
 
         itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IMetalBlock) ((ItemBlock) s.getItem()).getBlock()).getMaterial().getMaterialRGB() : 0xFFFFFF,
-                TFCBlocks.METAL_BLOCKS.values()
+                METAL_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));

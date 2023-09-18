@@ -2,10 +2,10 @@ package net.dries007.tfc.compat.gregtech.items.tools.behaviors;
 
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
-import net.dries007.tfc.module.core.submodule.soil.api.variant.block.ISoilBlock;
-import net.dries007.tfc.module.core.submodule.soil.api.variant.block.SoilBlockVariants;
+import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
+import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
-import net.dries007.tfc.module.core.submodule.soil.common.SoilStorage;
+import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;

@@ -3,15 +3,15 @@ package net.dries007.tfc.common.objects.container;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.tileentities.TEAnvilTFC;
+import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 
-public class ContainerAnvilPlan extends ContainerTE<TEAnvilTFC> implements IButtonHandler {
-    public ContainerAnvilPlan(InventoryPlayer playerInv, TEAnvilTFC tile) {
+public class ContainerAnvilPlan extends ContainerTE<TEMetalAnvil> implements IButtonHandler {
+    public ContainerAnvilPlan(InventoryPlayer playerInv, TEMetalAnvil tile) {
         super(playerInv, tile);
     }
 

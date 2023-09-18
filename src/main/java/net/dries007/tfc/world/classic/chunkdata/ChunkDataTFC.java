@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.chunkdata;
 
-import net.dries007.tfc.module.core.submodule.rock.api.type.RockType;
-import net.dries007.tfc.module.core.submodule.soil.api.type.SoilType;
+import net.dries007.tfc.module.rock.api.type.RockType;
+import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.util.NBTBuilder;
 import net.dries007.tfc.util.calendar.CalendarTFC;

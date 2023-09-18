@@ -1,9 +1,9 @@
 package net.dries007.tfc.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
-import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodChest;
-import net.dries007.tfc.module.core.submodule.wood.common.tileentities.TEWoodChest;
+import net.dries007.tfc.module.wood.api.type.WoodType;
+import net.dries007.tfc.module.wood.common.blocks.BlockWoodChest;
+import net.dries007.tfc.module.wood.common.tileentities.TEWoodChest;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;

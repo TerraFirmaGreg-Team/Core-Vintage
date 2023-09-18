@@ -1,6 +1,5 @@
 package net.dries007.tfc.common.objects.items;
 
-import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -10,11 +9,6 @@ import net.dries007.tfc.api.types.crop.variant.item.ICropItem;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.food.variant.Item.FoodItemVariant;
 import net.dries007.tfc.api.types.food.variant.Item.IFoodItem;
-import net.dries007.tfc.api.types.metal.variant.Item.IMetalItem;
-import net.dries007.tfc.api.types.metal.variant.Item.MetalItemVariant;
-import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
-import net.dries007.tfc.module.core.submodule.wood.api.variant.item.IWoodItem;
-import net.dries007.tfc.module.core.submodule.wood.api.variant.item.WoodItemVariant;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.common.objects.items.ceramics.ItemUnfiredMold;
@@ -36,7 +30,7 @@ public class TFCItems {
 
 
 
-    public static final Map<Pair<MetalItemVariant, Material>, IMetalItem> METAL_ITEMS = new LinkedHashMap<>();
+
     public static final Map<Pair<CropItemVariant, CropType>, ICropItem> CROP_ITEMS = new LinkedHashMap<>();
     public static final Map<Pair<FoodItemVariant, FoodType>, IFoodItem> FOOD_ITEMS = new LinkedHashMap<>();
 
@@ -115,17 +109,6 @@ public class TFCItems {
         ITEMS.add(REFINED_BLOOM = new ItemBloom(true));
 
 
-    }
-
-
-
-
-
-    @Nonnull
-    public static Item getMetalItem(@Nonnull MetalItemVariant variant, @Nonnull Material type) {
-        var item = (Item) METAL_ITEMS.get(new Pair<>(variant, type));
-        if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
     }
 
     @Nonnull

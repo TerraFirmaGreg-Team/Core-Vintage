@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.genlayers.datalayers.rock;
 
-import net.dries007.tfc.module.core.submodule.rock.api.category.RockCategory;
-import net.dries007.tfc.module.core.submodule.rock.api.type.RockType;
+import net.dries007.tfc.module.rock.api.category.RockCategory;
+import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
 import net.minecraft.world.gen.layer.IntCache;
 

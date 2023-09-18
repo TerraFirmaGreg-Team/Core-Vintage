@@ -2,7 +2,7 @@ package net.dries007.tfc.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.module.core.submodule.soil.common.blocks.BlockSoilFarmland;
+import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;

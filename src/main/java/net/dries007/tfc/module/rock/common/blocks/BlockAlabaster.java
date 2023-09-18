@@ -1,10 +1,13 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
+import gregtech.api.unification.material.MarkerMaterial;
+import gregtech.api.unification.material.MarkerMaterials;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.util.EnumColor;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
@@ -32,42 +35,27 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class BlockAlabaster extends TFCBlock implements IItemSize, IHasModel {
 
     private final RockBlockVariant variant;
-    private final EnumDyeColor dyeColor;
+    private final EnumColor color;
     private final ResourceLocation modelLocation;
 
-    public BlockAlabaster(RockBlockVariant variant, EnumDyeColor dyeColor) {
-        super(Material.ROCK, MapColor.getBlockColor(dyeColor));
+    public BlockAlabaster(RockBlockVariant variant, EnumColor color) {
+        super(Material.ROCK);
 
         this.variant = variant;
-        this.dyeColor = dyeColor;
+        this.color = color;
         this.modelLocation = TerraFirmaCraft.identifier("rock/alabaster/color/" + variant);
 
         setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
         setHardness(1.0F);
 
-        var blockRegistryName = String.format("alabaster/%s/%s", variant, dyeColor.getName());
+        var blockRegistryName = String.format("alabaster/%s/%s", variant, color.getName());
         setRegistryName(Tags.MOD_ID, blockRegistryName);
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
 
         OreDictionaryHelper.register(this, "alabaster");
         OreDictionaryHelper.register(this, "alabaster", variant.toString());
-        OreDictionaryHelper.register(this, "alabaster", variant.toString(), dyeColor.getName());
-    }
-
-    public BlockAlabaster(RockBlockVariant variant) {
-        super(Material.ROCK, MapColor.SNOW);
-
-        this.variant = variant;
-        this.dyeColor = EnumDyeColor.WHITE;
-        this.modelLocation = TerraFirmaCraft.identifier("rock/alabaster/" + variant);
-
-        var blockRegistryName = String.format("alabaster/%s/plain", variant);
-        setRegistryName(Tags.MOD_ID, blockRegistryName);
-        setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-
-        OreDictionaryHelper.register(this, "alabaster");
-        OreDictionaryHelper.register(this, "alabaster", variant.toString());
+        OreDictionaryHelper.register(this, "alabaster", variant.toString(), color.getName());
     }
 
     @Nonnull
@@ -89,13 +77,13 @@ public class BlockAlabaster extends TFCBlock implements IItemSize, IHasModel {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(modelLocation,
-                        "color=" + dyeColor.getName());
+                        "color=" + color.getName());
             }
         });
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this), 0,
                 new ModelResourceLocation(modelLocation,
-                        "color=" + dyeColor.getName()));
+                        "color=" + color.getName()));
     }
 }

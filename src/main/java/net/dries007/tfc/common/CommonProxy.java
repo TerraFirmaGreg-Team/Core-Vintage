@@ -143,12 +143,6 @@ public class CommonProxy {
             registerItemBlock(r, (Block) metalBlock);
         }
 
-        //==== Alabaster =============================================================================================//
-
-        for (var alabasterBlock : ALABASTER_BLOCKS.values()) {
-            registerItemBlock(r, alabasterBlock);
-        }
-
         //==== Other =================================================================================================//
 
         r.registerAll(LeavesPaging.getLeavesMapForModId(Tags.MOD_ID).values().toArray(new Block[0]));

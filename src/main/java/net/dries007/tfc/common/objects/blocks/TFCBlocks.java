@@ -1,9 +1,11 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import gregtech.api.GregTechAPI;
+import gregtech.api.unification.material.MarkerMaterials;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.bush.IBushBlock;
 import net.dries007.tfc.api.types.bush.type.BushType;
+import net.dries007.tfc.api.util.EnumColor;
 import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariant;
 import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
@@ -22,6 +24,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.world.BossInfo;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -43,7 +46,7 @@ public class TFCBlocks {
 
 
 
-    public static final Map<Pair<RockBlockVariant, String>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<RockBlockVariant, EnumColor>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
     public static final Map<BushType, IBushBlock> BUSH_BLOCKS = new LinkedHashMap<>();
     public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new LinkedHashMap<>();
 
@@ -103,15 +106,12 @@ public class TFCBlocks {
         //==== Alabaster =============================================================================================//
 
         for (var variant : new RockBlockVariant[]{RAW, BRICKS, SMOOTH}) {
-            var alabasterBlock = new BlockAlabaster(variant);
+            for (var color : EnumColor.values()) {
+                var alabasterBlock = new BlockAlabaster(variant, color);
 
-            ALABASTER_BLOCKS.put(new Pair<>(variant, "plain"), alabasterBlock);
-
-            for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-                var alabasterColorBlock = new BlockAlabaster(variant, dyeColor);
-
-                if (ALABASTER_BLOCKS.put(new Pair<>(variant, dyeColor.getName()), alabasterColorBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", dyeColor, variant));
+                if (ALABASTER_BLOCKS.put(new Pair<>(variant, color), alabasterBlock) != null)
+                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", color, variant));
+                BLOCKS.add(alabasterBlock);
             }
         }
 
@@ -166,10 +166,10 @@ public class TFCBlocks {
 
 
     @Nonnull
-    public static Block getAlabasterBlock(@Nonnull RockBlockVariant variant, @Nonnull String string) {
-        var block = (Block) ALABASTER_BLOCKS.get(new Pair<>(variant, string));
+    public static Block getAlabasterBlock(@Nonnull RockBlockVariant variant, @Nonnull EnumColor color) {
+        var block = (Block) ALABASTER_BLOCKS.get(new Pair<>(variant, color));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", string, variant));
+        throw new RuntimeException(String.format("Block is null: %s, %s", color, variant));
     }
 
     @Nonnull

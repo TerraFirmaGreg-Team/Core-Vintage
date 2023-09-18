@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.wood.api.variant.block;
 
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.wood.common.WoodStorage;
@@ -36,11 +37,11 @@ public class WoodBlockVariant {
         this.factory = factory;
 
         if (name.isEmpty()) {
-            throw new RuntimeException(String.format("CropItemVariant name must contain any character: [%s]", name));
+            throw new RuntimeException(String.format("WoodBlockVariant name must contain any character: [%s]", name));
         }
 
         if (!WOOD_BLOCK_VARIANTS.add(this)) {
-            throw new RuntimeException(String.format("CropItemVariant: [%s] already exists!", name));
+            throw new RuntimeException(String.format("WoodBlockVariant: [%s] already exists!", name));
         }
 
         for (var type : WoodType.getWoodTypes()) {
@@ -48,7 +49,6 @@ public class WoodBlockVariant {
 
             if (WoodStorage.WOOD_BLOCKS.put(new Pair<>(this, type), woodBlock) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-            BLOCKS.add((Block) woodBlock);
         }
 
     }

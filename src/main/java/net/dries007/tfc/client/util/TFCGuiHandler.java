@@ -12,7 +12,7 @@ import net.dries007.tfc.common.objects.items.ceramics.ItemSmallVessel;
 import net.dries007.tfc.module.rock.common.items.ItemRockLoose;
 import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.module.wood.common.container.ContainerWoodBarrel;
-import net.dries007.tfc.module.wood.common.tileentities.TEWoodBarrel;
+import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;

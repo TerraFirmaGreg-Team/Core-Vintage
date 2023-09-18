@@ -28,6 +28,8 @@ public interface IWoodBlock extends IHasModel, IItemProvider {
      */
     WoodType getType();
 
+
+
     /**
      * Возвращает расположение в реестре для данного деревянного блока.
      *
@@ -46,6 +48,11 @@ public interface IWoodBlock extends IHasModel, IItemProvider {
     @Nonnull
     default ResourceLocation getResourceLocation() {
         return TerraFirmaCraft.identifier(String.format("wood/%s", getBlockVariant()));
+    }
+
+    @Nonnull
+    default String getName() {
+        return String.format("wood/%s/%s", getBlockVariant(), getType());
     }
 
     /**

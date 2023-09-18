@@ -48,7 +48,6 @@ public class WoodItemVariant {
 
             if (WoodStorage.WOOD_ITEMS.put(new Pair<>(this, type), woodItem) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-            ITEMS.add((Item) woodItem);
         }
     }
 

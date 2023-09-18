@@ -10,7 +10,7 @@ import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
-import net.dries007.tfc.module.wood.common.tileentities.TEWoodLoom;
+import net.dries007.tfc.module.wood.common.tile.TEWoodLoom;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockContainer;

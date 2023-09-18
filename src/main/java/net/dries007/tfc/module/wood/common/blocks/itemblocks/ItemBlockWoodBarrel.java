@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodBarrel;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
-import net.dries007.tfc.module.wood.common.tileentities.TEWoodBarrel;
+import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;

@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.wood.common.tileentities;
+package net.dries007.tfc.module.wood.common.tile;
 
 import net.dries007.tfc.api.capability.fluid.FluidHandlerSided;
 import net.dries007.tfc.api.capability.fluid.FluidTankCallback;

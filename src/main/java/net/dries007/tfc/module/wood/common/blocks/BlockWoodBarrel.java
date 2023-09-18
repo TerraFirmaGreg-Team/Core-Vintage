@@ -7,7 +7,7 @@ import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.wood.common.tileentities.TEWoodBarrel;
+import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneComparator;

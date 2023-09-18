@@ -11,7 +11,7 @@ import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.inventory.capability.TFCInventoryLargeChest;
 import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
-import net.dries007.tfc.module.wood.common.tileentities.TEWoodChest;
+import net.dries007.tfc.module.wood.common.tile.TEWoodChest;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;

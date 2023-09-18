@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.button;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.wood.common.tileentities.TEWoodBarrel;
+import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 

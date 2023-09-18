@@ -1,11 +1,12 @@
 package net.dries007.tfc.common;
 
+import com.codetaylor.mc.athenaeum.module.ModuleBase;
+import com.codetaylor.mc.athenaeum.module.ModuleManager;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import gregtech.api.unification.material.event.MaterialEvent;
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
@@ -34,7 +35,6 @@ import net.dries007.tfc.commands.*;
 import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.dries007.tfc.module.rock.ModuleRock;
 import net.dries007.tfc.module.soil.ModuleSoil;
-import net.dries007.tfc.api.types.tree.TreeModule;
 import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.client.util.TFCGuiHandler;
@@ -56,9 +56,9 @@ import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
 import net.dries007.tfc.compat.top.TOPIntegration;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.wood.common.tileentities.TEWoodBarrel;
-import net.dries007.tfc.module.wood.common.tileentities.TEWoodChest;
-import net.dries007.tfc.module.wood.common.tileentities.TEWoodLoom;
+import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
+import net.dries007.tfc.module.wood.common.tile.TEWoodChest;
+import net.dries007.tfc.module.wood.common.tile.TEWoodLoom;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -97,6 +97,10 @@ import net.minecraftforge.registries.RegistryBuilder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.*;
 import static net.dries007.tfc.common.objects.items.TFCItems.*;
@@ -104,7 +108,7 @@ import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_BLOCKS;
 import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_ITEMS;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
+@Mod.EventBusSubscriber(modid = MOD_ID)
 public class CommonProxy {
 
     @SubscribeEvent
@@ -145,7 +149,7 @@ public class CommonProxy {
 
         //==== Other =================================================================================================//
 
-        r.registerAll(LeavesPaging.getLeavesMapForModId(Tags.MOD_ID).values().toArray(new Block[0]));
+        r.registerAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values().toArray(new Block[0]));
         BLOCKS.forEach(b -> registerItemBlock(r, b));
         FLUID.forEach(r::register);
 
@@ -238,8 +242,8 @@ public class CommonProxy {
      * Ведь в нашем TFC все прописывается в конструкторе класса. Но если приспичит то можно.
      */
     private static <T extends Item> T registerItem(String name, T item, CreativeTabs ct) {
-        item.setRegistryName(Tags.MOD_ID, name);
-        item.setTranslationKey(Tags.MOD_ID + "." + name.replace('/', '.'));
+        item.setRegistryName(MOD_ID, name);
+        item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
         item.setCreativeTab(ct);
         return item;
     }
@@ -249,8 +253,8 @@ public class CommonProxy {
      * Ведь в нашем TFC все прописывается в конструкторе класса. Но если приспичит то можно.
      */
     private static <T extends Block> T registerBlock(String name, T block, CreativeTabs ct) {
-        block.setRegistryName(Tags.MOD_ID, name);
-        block.setTranslationKey(Tags.MOD_ID + "." + name.replace('/', '.'));
+        block.setRegistryName(MOD_ID, name);
+        block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
         block.setCreativeTab(ct);
         return block;
     }
@@ -273,7 +277,7 @@ public class CommonProxy {
      * Регистрирует TE.
      */
     private static <T extends TileEntity> void registerTE(Class<T> te, String name) {
-        TileEntity.register(Tags.MOD_ID + ":" + name, te);
+        TileEntity.register(MOD_ID + ":" + name, te);
     }
 
     private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass) {
@@ -283,8 +287,7 @@ public class CommonProxy {
     public void onPreInit(FMLPreInitializationEvent event) {
         ModuleRock.preInit();
         ModuleSoil.preInit();
-        ModuleWood.preInit();
-        TreeModule.preInit();
+        //TreeModule.preInit();
         MetalModule.preInit();
         FoodModule.preInit();
         PlantModule.preInit();
@@ -354,8 +357,6 @@ public class CommonProxy {
     }
 
     public void onPostInit(FMLPostInitializationEvent event) {
-
-        ModuleSoil.postInit();
 
         TreeHelper.setCustomRootBlockDecay(TFCRootDecay.INSTANCE);
         FuelManager.postInit();

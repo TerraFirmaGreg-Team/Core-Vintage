@@ -26,6 +26,9 @@ repositories {
         }
     }
     mavenLocal() // Must be last for caching to work
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -35,6 +38,11 @@ dependencies {
         implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
         implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:4746213")
         implementation rfg.deobf("curse.maven:had-enough-items-557549:4571247")
+        implementation rfg.deobf("curse.maven:athenaeum-284350:4633750")
+        implementation rfg.deobf("curse.maven:dropt-284973:3758733")
+
+//        implementation("curse.maven:future-mc-310059:3924863")
+//        implementation("curse.maven:forgelin-continuous-456403:4635770")
 
         //runtimeOnly("curse.maven:fancy-spawn-eggs-302277:2612571")
         //runtimeOnly("maven.modrinth:better-biome-blend:1.12.2-1.1.7-forge")

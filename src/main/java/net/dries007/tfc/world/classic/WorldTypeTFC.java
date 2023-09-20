@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.client.gui.GuiCustomizeWorld;
+import net.dries007.tfc.module.core.client.gui.GuiCustomizeWorld;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.server.MinecraftServer;

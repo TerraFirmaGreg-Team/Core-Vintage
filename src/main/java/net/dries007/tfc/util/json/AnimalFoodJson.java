@@ -1,7 +1,8 @@
 package net.dries007.tfc.util.json;
 
 import com.google.gson.*;
-import net.dries007.tfc.common.objects.entity.animal.AnimalFood;
+import net.dries007.tfc.Tags;
+import net.dries007.tfc.module.core.common.objects.entity.animal.AnimalFood;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -9,7 +10,6 @@ import net.minecraftforge.common.crafting.JsonContext;
 
 import java.lang.reflect.Type;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class AnimalFoodJson implements JsonDeserializer<AnimalFood> {
     @Override
@@ -19,7 +19,7 @@ public class AnimalFoodJson implements JsonDeserializer<AnimalFood> {
         JsonObject food = JsonUtils.getJsonObject(jsonObject, "foods");
         food.entrySet().forEach(entry ->
         {
-            Ingredient ingredient = CraftingHelper.getIngredient(entry.getValue(), new JsonContext(MOD_ID));
+            Ingredient ingredient = CraftingHelper.getIngredient(entry.getValue(), new JsonContext(Tags.MOD_ID));
             animalFood.addFood(ingredient);
         });
         return animalFood;

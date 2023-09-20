@@ -3,8 +3,8 @@ package net.dries007.tfc.compat.jei.wrappers;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.compat.jei.util.IJEISimpleRecipe;
+import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 

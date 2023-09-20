@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
+import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.wood.common.blocks.BlockWoodSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -48,6 +48,7 @@ public interface ITreeGenerator {
                 return false;
             }
         }
+
         // Проверяем, есть ли пространство прямо вверх
         final int height = treeType.getMaxHeight();
         for (int y = 1; y <= height; y++) {

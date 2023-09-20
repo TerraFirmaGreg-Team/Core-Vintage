@@ -2,6 +2,7 @@ package net.dries007.tfc.compat.dynamictrees.client;
 
 import com.ferreusveritas.dynamictrees.blocks.MimicProperty;
 import com.ferreusveritas.dynamictrees.models.bakedmodels.BakedModelBlockRooty;
+import net.dries007.tfc.Tags;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockModelShapes;
@@ -20,10 +21,9 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public class BakedModelBlockRootyTFC extends BakedModelBlockRooty {
-    private static final IModel rootyIModel = ModelLoaderRegistry.getModelOrMissing(new ResourceLocation(MOD_ID, "block/roots"));
+    private static final IModel rootyIModel = ModelLoaderRegistry.getModelOrMissing(new ResourceLocation(Tags.MOD_ID, "block/roots"));
     private static final IBakedModel rootyIBakedModel = rootyIModel.bake(rootyIModel.getDefaultState(), DefaultVertexFormats.BLOCK, ModelLoader.defaultTextureGetter());
     private TextureAtlasSprite particleSprite = Minecraft.getMinecraft().getTextureMapBlocks().getTextureExtry("minecraft:dirt");
 

@@ -4,9 +4,9 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.common.objects.tileentities.TEPitKiln;
-import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.Tags;
+import net.dries007.tfc.module.core.common.objects.tileentities.TEPitKiln;
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class PitKilnProvider implements IProbeInfoProvider {
     @Override
     public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":pit_klin";
+        return Tags.MOD_ID + ":pit_klin";
     }
 
     @Override

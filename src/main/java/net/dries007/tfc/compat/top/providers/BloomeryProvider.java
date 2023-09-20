@@ -4,16 +4,16 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.api.util.property.ILightableBlock;
-import net.dries007.tfc.common.objects.blocks.devices.BlockBloomery;
-import net.dries007.tfc.common.objects.tileentities.TEBloom;
-import net.dries007.tfc.common.objects.tileentities.TEBloomery;
-import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.common.objects.blocks.devices.BlockBloomery;
+import net.dries007.tfc.module.core.common.objects.tileentities.TEBloom;
+import net.dries007.tfc.module.core.common.objects.tileentities.TEBloomery;
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +29,7 @@ import java.util.List;
 public class BloomeryProvider implements IProbeInfoProvider {
     @Override
     public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":bloomery";
+        return Tags.MOD_ID + ":bloomery";
     }
 
     @Override

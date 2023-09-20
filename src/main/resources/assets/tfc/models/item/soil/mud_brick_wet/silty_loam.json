@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "tfc:items/soil/mud_brick_wet/silty_loam"
+  }
+}

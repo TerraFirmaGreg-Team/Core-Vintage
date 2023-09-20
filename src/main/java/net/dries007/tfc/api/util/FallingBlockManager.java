@@ -1,18 +1,17 @@
 package net.dries007.tfc.api.util;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.CollapseData;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
-import net.dries007.tfc.api.types.soil.ISoilBlock;
-import net.dries007.tfc.api.types.soil.variant.block.SoilBlockVariants;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.common.objects.blocks.BlockCharcoalPile;
-import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSupport;
-import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
-import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.client.TFCSounds;
+import net.dries007.tfc.module.core.common.objects.blocks.BlockCharcoalPile;
+import net.dries007.tfc.module.core.common.objects.entity.EntityFallingBlockTFC;
+import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
+import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
+import net.dries007.tfc.module.wood.common.blocks.BlockWoodSupport;
 import net.dries007.tfc.util.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -39,7 +38,7 @@ public class FallingBlockManager {
     private static final Set<Material> SOFT_MATERIALS = new ObjectOpenHashSet<>(new Material[]{Material.GROUND, Material.SAND, Material.GRASS, Material.CLAY});
     private static final Set<Material> HARD_MATERIALS = new ObjectOpenHashSet<>(new Material[]{Material.IRON, BlockCharcoalPile.CHARCOAL_MATERIAL});
 
-    private static final Map<IBlockState, Specification> FALLABLES = new Object2ObjectOpenHashMap<>();
+    private static final Map<IBlockState, Specification> FALLABLES = new LinkedHashMap<>();
 
     private static final Set<IBlockState> SIDE_SUPPORTS = new ObjectOpenHashSet<>(0);
 

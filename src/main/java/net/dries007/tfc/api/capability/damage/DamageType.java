@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.damage;
 
-import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

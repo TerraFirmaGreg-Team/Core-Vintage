@@ -1,5 +1,6 @@
 package net.dries007.tfc.world.classic.chunkdata;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketChunkData;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -12,12 +13,11 @@ import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * Класс CapabilityChunkData содержит методы для работы с возможностью (capability) хранения данных чанка.
  */
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public final class CapabilityChunkData {
     /**
      * Ресурсное имя для возможности (capability) хранения данных чанка.

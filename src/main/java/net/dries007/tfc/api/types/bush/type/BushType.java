@@ -1,7 +1,8 @@
 package net.dries007.tfc.api.types.bush.type;
 
 import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.module.core.common.objects.blocks.berrybush.BlockBerryBush;
+import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
@@ -12,6 +13,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static net.dries007.tfc.api.types.bush.IBushBlock.Size;
+import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
+import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.BLOCKS;
+import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.BUSH_BLOCKS;
 
 public class BushType {
 
@@ -53,6 +57,12 @@ public class BushType {
         if (!BUSH_TYPES.add(this)) {
             throw new RuntimeException(String.format("BushType: [%s] already exists!", name));
         }
+
+        var bushBlock = new BlockBerryBush(this);
+
+        if (BUSH_BLOCKS.put(this, bushBlock) != null)
+            throw new RuntimeException(String.format("Duplicate registry detected: %s", this));
+        BLOCKS.add(bushBlock);
     }
 
     /**
@@ -136,7 +146,7 @@ public class BushType {
      * @return Предмет с плодом.
      */
     public ItemStack getFoodDrop() {
-        return new ItemStack(TFCItems.getFoodItem(getFruit()));
+        return new ItemStack(TFCItems.getFoodItem(INGREDIENT, getFruit()));
     }
 
     /**

@@ -4,10 +4,11 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.common.objects.blocks.berrybush.BlockBerryBush;
-import net.dries007.tfc.common.objects.tileentities.TETickCounter;
-import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.common.objects.blocks.berrybush.BlockBerryBush;
+import net.dries007.tfc.module.core.common.objects.tileentities.TETickCounter;
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -22,7 +23,7 @@ import net.minecraft.world.World;
 public class BerryBushProvider implements IProbeInfoProvider {
     @Override
     public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":berry_bush";
+        return Tags.MOD_ID + ":berry_bush";
     }
 
     @Override

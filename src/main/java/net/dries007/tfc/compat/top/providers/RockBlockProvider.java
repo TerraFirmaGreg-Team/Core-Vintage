@@ -4,8 +4,8 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.Tags;
+import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class RockBlockProvider implements IProbeInfoProvider {
     @Override
     public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":rock_block";
+        return Tags.MOD_ID + ":rock_block";
     }
 
     @Override

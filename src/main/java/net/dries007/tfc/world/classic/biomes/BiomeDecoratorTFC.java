@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.biomes;
 
-import net.dries007.tfc.api.types.plant.type.PlantType;
-import net.dries007.tfc.api.types.plant.variant.block.PlantBlockVariant;
+import net.dries007.tfc.module.plant.api.type.PlantType;
+import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenPlant;
@@ -103,7 +103,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
 
         if (TerrainGen.decorate(world, rng, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.SHROOM)) {
             for (PlantType plant : PlantType.getPlantTypes()) {
-                if (plant.getPlantVariant() == PlantBlockVariant.MUSHROOM && plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
+                if (plant.getPlantVariant() == PlantEnumVariant.MUSHROOM && plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
                     plantGen.setGeneratedPlant(plant);
 
                     for (float i = rng.nextInt(Math.round(mushroomCount / floraDiversity)); i < (1 + floraDensity) * 5; i++) {
@@ -116,7 +116,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
 
         if (TerrainGen.decorate(world, rng, forgeChunkPos, DecorateBiomeEvent.Decorate.EventType.CACTUS)) {
             for (PlantType plant : PlantType.getPlantTypes()) {
-                if (plant.getPlantVariant() == PlantBlockVariant.CACTUS && plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
+                if (plant.getPlantVariant() == PlantEnumVariant.CACTUS && plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
                     plantGen.setGeneratedPlant(plant);
 
                     for (int i = rng.nextInt(Math.round((cactusCount + 32) / floraDiversity)); i < (1 + floraDensity) * 3; i++) {

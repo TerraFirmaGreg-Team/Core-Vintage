@@ -3,9 +3,10 @@ package net.dries007.tfc.util.json;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
-import net.dries007.tfc.common.objects.entity.animal.AnimalFood;
+import net.dries007.tfc.module.core.common.objects.entity.animal.AnimalFood;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -15,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 public enum JsonConfigRegistry {
     INSTANCE;
@@ -32,7 +32,7 @@ public enum JsonConfigRegistry {
     public void preInit(File dir) {
         // Init base config dir
         TerraFirmaCraft.LOGGER.info("Loading or creating TFC config directory");
-        tfcConfigDir = new File(dir, MOD_ID);
+        tfcConfigDir = new File(dir, Tags.MOD_ID);
         if (!tfcConfigDir.exists() && !tfcConfigDir.mkdir()) {
             throw new Error("Problem creating TFC extra config directory.");
         }

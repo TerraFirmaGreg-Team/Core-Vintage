@@ -1,5 +1,6 @@
 package net.dries007.tfc.world.classic.spawner;
 
+import net.dries007.tfc.Tags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,13 +16,12 @@ import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * Saves animal respawning data to world save
  */
 public class AnimalRespawnWorldData extends WorldSavedData {
-    private static final String NAME = MOD_ID + "_respawn";
+    private static final String NAME = Tags.MOD_ID + "_respawn";
     private static final int REGION_SIZE = 16; // Number of chunks (sqr) per grid, ie: 16x16
     private final Map<ResourceLocation, Map<ChunkPos, Long>> respawnMap;
 

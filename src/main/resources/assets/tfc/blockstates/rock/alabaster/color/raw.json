@@ -89,6 +89,11 @@
         "textures": {
           "all": "tfc:blocks/rock/alabaster/raw/yellow"
         }
+      },
+      "colorless": {
+        "textures": {
+          "all": "tfc:blocks/rock/alabaster/raw/colorless"
+        }
       }
     }
   }

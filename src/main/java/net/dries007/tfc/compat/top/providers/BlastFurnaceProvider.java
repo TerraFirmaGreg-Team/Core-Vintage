@@ -4,10 +4,10 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.common.objects.blocks.devices.BlockBlastFurnace;
-import net.dries007.tfc.common.objects.tileentities.TEBlastFurnace;
+import net.dries007.tfc.module.core.common.objects.blocks.devices.BlockBlastFurnace;
+import net.dries007.tfc.module.core.common.objects.tileentities.TEBlastFurnace;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class BlastFurnaceProvider implements IProbeInfoProvider {
     @Override
     public String getID() {
-        return TerraFirmaCraft.MOD_ID + ":blast_furnace";
+        return Tags.MOD_ID + ":blast_furnace";
     }
 
     @Override

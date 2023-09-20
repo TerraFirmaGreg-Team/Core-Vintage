@@ -1,8 +1,22 @@
 {
   "package": "net.dries007.tfc.mixins",
   "refmap": "mixins.tfc.refmap.json",
+  "required": true,
   "target": "@env(DEFAULT)",
-  "minVersion": "0.8",
+  "minVersion": "0.8.5",
   "compatibilityLevel": "JAVA_8",
-  "mixins": ["gregtech.BlockOreMixin","gregtech.BlockSurfaceRockMixin","gregtech.MaterialRecipeHandlerMixin","gregtech.OrePrefixMixin","gregtech.PartsRecipeHandlerMixin","gregtech.SurfaceGeneratorMixin","gregtech.ToolItemsMixin","gregtech.ToolRecipeHandlerMixin","minecraft.GuiCreateWorldMixin","minecraft.RenderItemMixin"]
+  "mixins": [
+    "gregtech.BlockOreMixin",
+    "gregtech.BlockSurfaceRockMixin",
+    "gregtech.MaterialRecipeHandlerMixin",
+    "gregtech.OrePrefixMixin",
+    "gregtech.PartsRecipeHandlerMixin",
+    "gregtech.SurfaceGeneratorMixin",
+    "gregtech.ToolItemsMixin",
+    "gregtech.ToolRecipeHandlerMixin",
+    "minecraft.GuiCreateWorldMixin",
+    "minecraft.RenderItemMixin"
+  ],
+  "server": [],
+  "client": []
 }

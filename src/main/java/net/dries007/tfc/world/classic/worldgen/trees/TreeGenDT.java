@@ -1,10 +1,11 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
+import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.wood.BlockWoodSapling;
+import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.wood.common.blocks.BlockWoodSapling;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -12,8 +13,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
-
-import static net.dries007.tfc.compat.dynamictrees.trees.WoodTreeFamily.WoodTreeSpecies.SPECIES;
 
 
 public class TreeGenDT implements ITreeGenerator {
@@ -25,7 +24,7 @@ public class TreeGenDT implements ITreeGenerator {
 
     @Override
     public void generateTree(TemplateManager templateManager, World world, BlockPos blockPos, TreeType type, Random random, boolean isWorldGen) {
-        var dtSpecies = SPECIES.get(type);
+        var dtSpecies = type.getCommonSpecies();
         var bounds = new SafeChunkBounds(world, world.getChunk(blockPos).getPos());
         dtSpecies.generate(world, blockPos.down(), world.getBiome(blockPos), random, leavesRadius <= 0 ? dtSpecies.maxBranchRadius() / 3 : leavesRadius, bounds);
         //dtSpecies.getJoCode("JP").setCareful(true).generate(world, dtSpecies, blockPos, world.getBiome(blockPos), EnumFacing.SOUTH, 8, SafeChunkBounds.ANY);
@@ -42,9 +41,9 @@ public class TreeGenDT implements ITreeGenerator {
             return false;
         }
 
-        var dTree = SPECIES.get(type);
+        var dTree = type.getCommonSpecies();
         int lowestBranchHeight = dTree.getLowestBranchHeight();
-        int maxTreeHeight = (int) dTree.getEnergy(world, pos); //signal energy access problem so need to cast
+        int maxTreeHeight = (int) dTree.getEnergy(world, pos);
 
         var bounds = new SafeChunkBounds(world, world.getChunk(pos).getPos());
         for (int y = 0; y <= lowestBranchHeight; y++) {
@@ -55,13 +54,13 @@ public class TreeGenDT implements ITreeGenerator {
         int radiusSquared = leavesRadius * leavesRadius;
         int groundToCenter = (int) ((maxTreeHeight - lowestBranchHeight) / 2.0F) + lowestBranchHeight;
 
-        for (int x = -leavesRadius - 1; x <= leavesRadius + 1; ++x) // verifying there's space for the canopy
-        {
+        // verifying there's space for the canopy
+        for (int x = -leavesRadius - 1; x <= leavesRadius + 1; ++x) {
             for (int z = -leavesRadius - 1; z <= leavesRadius + 1; ++z) {
                 for (int y = lowestBranchHeight - 1; y < maxTreeHeight; ++y) {
                     int yDistance = groundToCenter - y;
-                    if (x * x + yDistance * yDistance + z * z <= radiusSquared) // only perform the check if the radius is within a sphere around the epicenter there
-                    {
+                    // only perform the check if the radius is within a sphere around the epicenter there
+                    if (x * x + yDistance * yDistance + z * z <= radiusSquared) {
                         if (!isValidLocation(world, pos.up(y), x, z, bounds)) return false;
                     }
                 }
@@ -79,7 +78,7 @@ public class TreeGenDT implements ITreeGenerator {
 
     private boolean isDTBranch(IBlockState state) {
         var block = state.getBlock();
-        return block instanceof BlockBranch;//|| block instanceof BlockDynamicLeaves;
+        return block instanceof BlockBranch || block instanceof BlockDynamicLeaves;
     }
 
     private boolean isReplaceable(World world, BlockPos pos, int x, int y, int z) {

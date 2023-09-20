@@ -1,23 +1,35 @@
 package net.dries007.tfc.compat.dynamictrees.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranchThick;
-import net.dries007.tfc.api.types.wood.type.WoodType;
-import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.Set;
 
-public class BlockTreeBranchThick extends BlockBranchThick {
+public class BlockTreeBranchThick extends BlockBranchThick implements IItemProvider, IHasModel {
 
 
     public BlockTreeBranchThick(WoodType type) {
         super(String.format("wood/branch/%s", type));
 
         setTranslationKey(String.format("wood.branch.%s", type));
+        setCreativeTab(CreativeTabsTFC.WOOD);
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return null;
     }
 
 
@@ -38,5 +50,10 @@ public class BlockTreeBranchThick extends BlockBranchThick {
 //            return false; //Also no wood for you!
 //        }
         return super.removedByPlayer(state, world, cutPos, player, canHarvest);
+    }
+
+    @Override
+    public void onModelRegister() {
+
     }
 }

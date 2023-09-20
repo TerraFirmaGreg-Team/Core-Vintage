@@ -1,7 +1,7 @@
 package net.dries007.tfc.util;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.common.objects.recipes.RecipeHandler;
+import net.dries007.tfc.module.core.common.objects.recipes.RecipeHandler;
 
 import java.util.Arrays;
 

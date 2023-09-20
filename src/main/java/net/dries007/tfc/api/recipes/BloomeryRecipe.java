@@ -7,8 +7,8 @@ import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 

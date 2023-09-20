@@ -2,9 +2,9 @@ package net.dries007.tfc.api.recipes.anvil;
 
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.common.objects.tileentities.TEAnvilTFC;
 import net.dries007.tfc.compat.jei.util.IJEISimpleRecipe;
+import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeSteps;
 import net.dries007.tfc.util.skills.SmithingSkill;
@@ -94,7 +94,7 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
 
     public int getTarget(long worldSeed) {
         RNG.setSeed(worldSeed + workingSeed);
-        return 40 + RNG.nextInt(TEAnvilTFC.WORK_MAX + -2 * 40);
+        return 40 + RNG.nextInt(TEMetalAnvil.WORK_MAX + -2 * 40);
     }
 
     @Override

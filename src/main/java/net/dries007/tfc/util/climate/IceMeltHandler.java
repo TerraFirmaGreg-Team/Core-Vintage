@@ -1,5 +1,6 @@
 package net.dries007.tfc.util.climate;
 
+import net.dries007.tfc.Tags;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
@@ -12,12 +13,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.Iterator;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 /**
  * Vanilla ice melting is hardcoded to the world. However, we can replicate most of the behavior by watching world ticks, and performing the same simple logic checks
  */
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class IceMeltHandler {
     public static final float ICE_MELT_THRESHOLD = 0f;
     public static final float WATER_FREEZE_THRESHOLD = -4f;

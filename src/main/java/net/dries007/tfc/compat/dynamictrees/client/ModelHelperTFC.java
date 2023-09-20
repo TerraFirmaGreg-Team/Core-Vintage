@@ -2,12 +2,15 @@ package net.dries007.tfc.compat.dynamictrees.client;
 
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
-import com.ferreusveritas.dynamictrees.blocks.BlockBranchThick;
 import com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,12 +30,11 @@ public class ModelHelperTFC extends ModelHelper {
     public static void regModel(TreeFamily tree) {
 
         var blockBranch = tree.getDynamicBranch();
-
         var modelLocation = getBranchModelResourceLocation(blockBranch);
 
         setGenericStateMapper(blockBranch, modelLocation);
-        if (blockBranch instanceof BlockBranchThick) {
-            setGenericStateMapper(((BlockBranchThick) blockBranch).otherBlock, modelLocation);
+        if (blockBranch instanceof BlockTreeBranchThick) {
+            setGenericStateMapper(((BlockTreeBranchThick) blockBranch).otherBlock, modelLocation);
         }
 
         BlockSurfaceRoot surfaceRoot = tree.getSurfaceRoots();
@@ -41,9 +43,20 @@ public class ModelHelperTFC extends ModelHelper {
         }
     }
 
+
     private static ModelResourceLocation getBranchModelResourceLocation(BlockBranch blockBranch) {
-        var family = blockBranch.getFamily().getName();
-        var resloc = new ResourceLocation(family.getNamespace(), "wood/branch/" + family.getPath());
+        var family = blockBranch.getFamily().getName().getPath();
+        var resloc = TerraFirmaCraft.identifier("wood/branch/" + family);
         return new ModelResourceLocation(resloc, null);
+    }
+
+    public static void regModel(Block block) {
+        if (block != Blocks.AIR) {
+            regModel(Item.getItemFromBlock(block));
+        }
+        if (block instanceof BlockTreeBranchThick) {
+            Item item = Item.getItemFromBlock(((BlockTreeBranchThick) block).otherBlock);
+            regModel(item, 0, block.getRegistryName());
+        }
     }
 }

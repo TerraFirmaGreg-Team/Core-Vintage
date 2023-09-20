@@ -8,7 +8,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.api.types.rock.type.RockType;
+import net.dries007.tfc.module.rock.api.type.RockType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

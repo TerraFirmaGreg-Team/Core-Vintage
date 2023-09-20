@@ -1,7 +1,7 @@
 package net.dries007.tfc.util.climate;
 
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.config.TemperatureMode;
+import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.module.core.config.TemperatureMode;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;

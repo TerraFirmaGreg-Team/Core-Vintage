@@ -1,0 +1,15 @@
+package net.dries007.tfc.module.core.client.render.animal;
+
+import net.dries007.tfc.module.core.client.model.animal.ModelLlamaTFC;
+import net.minecraft.client.renderer.entity.RenderLlama;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
+public class RenderLlamaTFC extends RenderLlama {
+    public RenderLlamaTFC(RenderManager renderManager) {
+        super(renderManager);
+        this.mainModel = new ModelLlamaTFC(0);
+    }
+}

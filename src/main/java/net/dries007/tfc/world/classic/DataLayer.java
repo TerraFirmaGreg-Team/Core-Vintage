@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic;
 
-import net.dries007.tfc.api.types.rock.IRockBlock;
+import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 
 /**
  * Класс DataLayer представляет слой данных и содержит информацию о различных аспектах геологических данных.

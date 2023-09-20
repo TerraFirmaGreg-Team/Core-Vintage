@@ -5,10 +5,10 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.StoneType;
 import gregtech.common.blocks.BlockOre;
 import gregtech.common.blocks.properties.PropertyStoneType;
-import net.dries007.tfc.api.types.rock.type.RockType;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
+import net.dries007.tfc.module.rock.api.type.RockType;
+import net.dries007.tfc.module.rock.common.RockStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -22,8 +22,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.COBBLE;
-import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.COBBLE;
+import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.RAW;
 
 @SuppressWarnings("all")
 @Mixin(value = BlockOre.class, remap = false)
@@ -48,7 +48,7 @@ public abstract class BlockOreMixin extends Block {
 
         if (type != null) {
             var spec = new FallingBlockManager.Specification(FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL_ROCK);
-            spec.setResultingState(TFCBlocks.getRockBlock(COBBLE, type).getDefaultState());
+            spec.setResultingState(RockStorage.getRockBlock(COBBLE, type).getDefaultState());
             FallingBlockManager.registerFallable(this, spec);
 
             var hardness = type.getCategory().getHardnessModifier() + RAW.getBaseHardness();

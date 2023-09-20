@@ -1,9 +1,9 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.api.types.rock.IRockBlock;
-import net.dries007.tfc.api.types.rock.type.RockType;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.rock.BlockRockSpeleothem;
+import net.dries007.tfc.module.rock.api.type.RockType;
+import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.common.RockStorage;
+import net.dries007.tfc.module.rock.common.blocks.BlockRockSpeleothem;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -17,8 +17,8 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.RAW;
-import static net.dries007.tfc.api.types.rock.variant.block.RockBlockVariants.SPELEOTHEM;
+import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.SPELEOTHEM;
 
 public class WorldGenSpeleothem implements IWorldGenerator {
 
@@ -107,7 +107,7 @@ public class WorldGenSpeleothem implements IWorldGenerator {
             if (block instanceof IRockBlock rockTypeBlock) {
                 BlockRockSpeleothem.EnumSize sizeType = BlockRockSpeleothem.EnumSize.values()[size - i - 1];
                 // Создаем блок сталактита с указанным размером и типом породы
-                IBlockState targetBlock = TFCBlocks.getRockBlock(SPELEOTHEM, rockTypeBlock.getType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
+                IBlockState targetBlock = RockStorage.getRockBlock(SPELEOTHEM, rockTypeBlock.getType()).getDefaultState().withProperty(BlockRockSpeleothem.SIZE, sizeType);
                 // Устанавливаем блок сталактита в мир
                 world.setBlockState(pos, targetBlock);
             }
@@ -118,8 +118,8 @@ public class WorldGenSpeleothem implements IWorldGenerator {
     private Block getSpeleothemType(IBlockState state) {
         var block = state.getBlock();
         for (var rock : RockType.getRockTypes()) {
-            if (TFCBlocks.getRockBlock(RAW, rock) == block) {
-                return TFCBlocks.getRockBlock(RAW, rock);
+            if (RockStorage.getRockBlock(RAW, rock) == block) {
+                return RockStorage.getRockBlock(RAW, rock);
             }
         }
 

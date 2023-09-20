@@ -1,8 +1,9 @@
 package net.dries007.tfc.util.calendar;
 
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
-import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -19,11 +20,10 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.List;
 import java.util.Objects;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import static net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class CalendarEventHandler {
     /**
      * Called from LOGICAL SERVER
@@ -55,7 +55,7 @@ public class CalendarEventHandler {
     public static void onCommandFire(CommandEvent event) {
         if ("time".equals(event.getCommand().getName())) {
             event.setCanceled(true);
-            event.getSender().sendMessage(new TextComponentTranslation(MOD_ID + ".command.time.disabled"));
+            event.getSender().sendMessage(new TextComponentTranslation(Tags.MOD_ID + ".command.time.disabled"));
         }
     }
 

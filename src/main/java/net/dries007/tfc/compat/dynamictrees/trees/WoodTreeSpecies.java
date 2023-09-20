@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 import static net.dries007.tfc.api.types.tree.type.TreeTypes.ACACIA_TREE;
 import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.SAPLING;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
+import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 
 public class WoodTreeSpecies extends Species {
 

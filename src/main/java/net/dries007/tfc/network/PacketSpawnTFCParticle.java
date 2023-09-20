@@ -2,7 +2,7 @@ package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.module.core.client.particle.TFCParticles;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;

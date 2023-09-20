@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.*;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
+import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.BLOCKS;
 import static net.dries007.tfc.module.plant.common.PlantStorage.PLANT_BLOCKS;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;

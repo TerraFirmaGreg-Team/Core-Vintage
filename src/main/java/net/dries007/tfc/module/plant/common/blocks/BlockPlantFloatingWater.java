@@ -3,7 +3,7 @@ package net.dries007.tfc.module.plant.common.blocks;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.api.variant.block.IPlantBlock;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;

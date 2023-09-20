@@ -3,16 +3,14 @@ package net.dries007.tfc.module.wood.common.blocks;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.client.util.CustomStateMap;
+import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.common.objects.inventory.capability.TFCInventoryLargeChest;
+import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.inventory.capability.TFCInventoryLargeChest;
-import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.wood.common.tile.TEWoodChest;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
@@ -53,7 +51,7 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
         setSoundType(SoundType.WOOD);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+        //OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override

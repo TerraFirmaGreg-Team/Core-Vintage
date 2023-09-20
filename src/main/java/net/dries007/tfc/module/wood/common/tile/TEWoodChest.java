@@ -4,11 +4,11 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.module.core.common.objects.inventory.capability.ISlotCallback;
+import net.dries007.tfc.module.core.common.objects.inventory.capability.TFCDoubleChestItemHandler;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodChest;
-import net.dries007.tfc.common.objects.container.ContainerChestTFC;
-import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
-import net.dries007.tfc.common.objects.inventory.capability.TFCDoubleChestItemHandler;
+import net.dries007.tfc.module.wood.common.container.ContainerWoodChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
@@ -76,8 +76,8 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback {
             numPlayersUsing = 0;
 
             for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-5, -5, -5), pos.add(6, 6, 6)))) {
-                if (player.openContainer instanceof ContainerChestTFC) {
-                    IInventory iinventory = ((ContainerChestTFC) player.openContainer).getLowerChestInventory();
+                if (player.openContainer instanceof ContainerWoodChest) {
+                    IInventory iinventory = ((ContainerWoodChest) player.openContainer).getLowerChestInventory();
                     if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest) iinventory).isPartOfLargeChest(this)) {
                         ++numPlayersUsing;
                     }

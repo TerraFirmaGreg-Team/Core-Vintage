@@ -4,7 +4,6 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodDoor;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
@@ -26,8 +25,8 @@ public class ItemBlockWoodDoor extends ItemBlock implements IItemSize {
     public ItemBlockWoodDoor(BlockWoodDoor blockWoodDoor) {
         super(blockWoodDoor);
 
-        OreDictionaryHelper.register(this, "door", "wood");
-        OreDictionaryHelper.register(this, "door", "wood", blockWoodDoor.getType().toString());
+        //OreDictionaryHelper.register(this, "door", "wood");
+        //OreDictionaryHelper.register(this, "door", "wood", blockWoodDoor.getType().toString());
     }
 
     /**

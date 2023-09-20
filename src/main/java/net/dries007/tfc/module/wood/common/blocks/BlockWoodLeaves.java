@@ -1,14 +1,11 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
-import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.wood.common.WoodStorage;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -37,7 +34,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.SAPLING;
 
@@ -56,8 +54,8 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         leavesFancy = true; // Fast / Fancy graphics works correctly
 
         Blocks.FIRE.setFireInfo(this, 30, 60);
-        OreDictionaryHelper.register(this, variant.toString());
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+        //OreDictionaryHelper.register(this, variant.toString());
+        //OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override
@@ -116,6 +114,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     }
+
     @Override
     @Nonnull
     protected BlockStateContainer createBlockState() {

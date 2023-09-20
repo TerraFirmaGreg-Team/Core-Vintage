@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.wood.common.recipes;
 
-import net.dries007.tfc.common.objects.recipes.IWorkbenchRecipes;
+import net.dries007.tfc.module.core.common.objects.recipes.IWorkbenchRecipes;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.common.WoodStorage;
 import net.minecraft.init.Blocks;

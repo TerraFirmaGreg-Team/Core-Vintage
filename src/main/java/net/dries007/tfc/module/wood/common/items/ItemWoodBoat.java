@@ -2,13 +2,11 @@ package net.dries007.tfc.module.wood.common.items;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.common.objects.items.TFCItem;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.item.IWoodItem;
 import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariant;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.wood.common.entity.EntityWoodBoat;
-import net.dries007.tfc.common.objects.items.TFCItem;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
@@ -40,12 +38,8 @@ public class ItemWoodBoat extends TFCItem implements IWoodItem {
         this.type = type;
         this.variant = variant;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.WOOD);
-
-        OreDictionaryHelper.register(this, variant.toString());
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+//        OreDictionaryHelper.register(this, variant.toString());
+//        OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Nonnull

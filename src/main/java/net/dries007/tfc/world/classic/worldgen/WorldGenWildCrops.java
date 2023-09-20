@@ -1,10 +1,10 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.module.crop.api.type.CropType;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.crop.common.CropStorage;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
-import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;

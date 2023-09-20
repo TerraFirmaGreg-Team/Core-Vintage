@@ -3,11 +3,11 @@ package net.dries007.tfc.util.interaction;
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.tileentities.TELogPile;
-import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.client.TFCSounds;
+import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.common.objects.tileentities.TELogPile;
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static net.dries007.tfc.common.objects.blocks.BlockCharcoalPile.LAYERS;
+import static net.dries007.tfc.module.core.common.objects.blocks.BlockCharcoalPile.LAYERS;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public final class InteractionManager {

@@ -1,14 +1,12 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
+import net.dries007.tfc.module.core.client.util.CustomStateMap;
+import net.dries007.tfc.module.core.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.wood.common.blocks.itemblocks.ItemBlockWoodSapling;
-import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.state.BlockStateContainer;
@@ -44,8 +42,8 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock {
         setHardness(0.0F);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, variant.toString());
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+        //OreDictionaryHelper.register(this, variant.toString());
+        //OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
 

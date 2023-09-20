@@ -1,9 +1,8 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
@@ -59,7 +58,7 @@ public class BlockWoodSupport extends BlockWood {
                 .withProperty(WEST, false));
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+        //OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     /**

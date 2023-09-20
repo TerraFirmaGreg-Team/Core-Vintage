@@ -1,7 +1,7 @@
 package net.dries007.tfc.util.fuel;
 
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.module.wood.common.WoodStorage;
 import net.minecraft.item.ItemStack;
 

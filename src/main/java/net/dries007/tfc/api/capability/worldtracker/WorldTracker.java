@@ -2,8 +2,8 @@ package net.dries007.tfc.api.capability.worldtracker;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.client.TFCSounds;
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;

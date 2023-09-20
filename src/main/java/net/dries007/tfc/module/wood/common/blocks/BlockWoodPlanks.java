@@ -2,7 +2,6 @@ package net.dries007.tfc.module.wood.common.blocks;
 
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.init.Blocks;
 
 public class BlockWoodPlanks extends BlockWood {
@@ -15,6 +14,6 @@ public class BlockWoodPlanks extends BlockWood {
         setHarvestLevel("axe", 0);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+        //OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 }

@@ -3,7 +3,7 @@ package net.dries007.tfc.api.capability.size;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.api.capability.ItemStickCapability;
-import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.block.BlockLadder;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

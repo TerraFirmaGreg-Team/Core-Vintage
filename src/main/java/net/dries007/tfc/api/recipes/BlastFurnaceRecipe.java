@@ -6,7 +6,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;

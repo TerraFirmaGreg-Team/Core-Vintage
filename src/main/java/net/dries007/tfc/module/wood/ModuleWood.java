@@ -2,12 +2,11 @@ package net.dries007.tfc.module.wood;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.wood.api.type.WoodTypeHandler;
-import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariantHandler;
-import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariantHandler;
 import net.dries007.tfc.module.wood.init.BlockInitializer;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.module.wood.init.EntityInitializer;
+import net.dries007.tfc.module.wood.init.ItemInitializer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -48,13 +47,16 @@ public class ModuleWood extends ModuleBase {
     public void onRegister(Registry registry) {
         WoodTypeHandler.init();
         BlockInitializer.onRegister(registry);
-        WoodItemVariantHandler.init();
+        ItemInitializer.onRegister(registry);
+        EntityInitializer.onRegister(registry);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void onClientRegister(Registry registry) {
         BlockInitializer.onClientRegister(registry);
+        ItemInitializer.onClientRegister(registry);
+        EntityInitializer.onClientRegister();
     }
 
     @Override
@@ -62,5 +64,6 @@ public class ModuleWood extends ModuleBase {
         super.onClientInitializationEvent(event);
 
         BlockInitializer.onClientInitialization();
+        ItemInitializer.onClientInitialization();
     }
 }

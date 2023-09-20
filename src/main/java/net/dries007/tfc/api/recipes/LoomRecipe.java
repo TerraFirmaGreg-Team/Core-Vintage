@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.recipes;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.compat.jei.util.IJEISimpleRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

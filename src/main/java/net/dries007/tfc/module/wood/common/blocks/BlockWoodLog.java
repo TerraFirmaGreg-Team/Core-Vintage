@@ -3,16 +3,14 @@ package net.dries007.tfc.module.wood.common.blocks;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.client.util.CustomStateMap;
+import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -56,11 +54,11 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
 
         Blocks.FIRE.setFireInfo(this, 5, 5);
 
-        OreDictionaryHelper.register(this, "logWood");
-        OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
-        if (type.canMakeTannin()) {
-            OreDictionaryHelper.register(this, variant.toString(), "wood", "tannin");
-        }
+//        OreDictionaryHelper.register(this, "logWood");
+//        OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
+//        if (type.canMakeTannin()) {
+//            OreDictionaryHelper.register(this, variant.toString(), "wood", "tannin");
+//        }
     }
 
     @Override

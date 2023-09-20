@@ -10,7 +10,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
+import static net.dries007.tfc.module.core.common.objects.items.TFCItems.ITEMS;
 
 /**
  * Класс CropItemVariant представляет вариант деревянного блока.

@@ -2,10 +2,10 @@ package net.dries007.tfc.module.wood.common.tile;
 
 import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.common.objects.tileentities.TEInventory;
+import net.dries007.tfc.module.core.common.objects.tileentities.TEInventory;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodLoom;
-import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

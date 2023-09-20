@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
+import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.BLOCKS;
 
 /**
  * Класс, представляющий вариант блока почвы.

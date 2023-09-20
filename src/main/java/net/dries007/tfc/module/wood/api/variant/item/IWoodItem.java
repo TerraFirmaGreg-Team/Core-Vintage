@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.wood.api.variant.item;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -35,7 +35,7 @@ public interface IWoodItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.identifier(String.format("wood/%s/%s", getItemVariant(), getType()));
+        return TerraFirmaCraft.identifier(String.format("wood.%s.%s", getItemVariant(), getType()));
     }
 
     /**

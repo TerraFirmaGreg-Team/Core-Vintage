@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.client.gui.GuiAnvilTFC;
+import net.dries007.tfc.module.core.client.gui.GuiAnvilTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeStep;

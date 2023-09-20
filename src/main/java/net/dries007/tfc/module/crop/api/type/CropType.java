@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.crop.api.type;
 
-import net.dries007.tfc.module.crop.api.category.CropCategory;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.module.core.common.objects.items.TFCItems;
+import net.dries007.tfc.module.crop.api.category.CropCategory;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.skills.Skill;

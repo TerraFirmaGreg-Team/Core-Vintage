@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.soil;
 
-import net.dries007.tfc.module.soil.api.variant.item.SoilItemVariantHandler;
 import net.dries007.tfc.module.soil.api.type.SoilTypeHandler;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariantHandler;
+import net.dries007.tfc.module.soil.api.variant.item.SoilItemVariantHandler;
 
 public class ModuleSoil {
     public static void preInit() {

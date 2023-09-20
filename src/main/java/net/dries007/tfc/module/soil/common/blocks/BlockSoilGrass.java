@@ -7,20 +7,20 @@
 package net.dries007.tfc.module.soil.common.blocks;
 
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
-import net.dries007.tfc.module.plant.api.type.PlantType;
-import net.dries007.tfc.module.plant.common.PlantStorage;
-import net.dries007.tfc.module.plant.common.blocks.BlockPlantShortGrass;
-import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
-import net.dries007.tfc.module.soil.common.SoilStorage;
-import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeat;
-import net.dries007.tfc.module.soil.api.type.SoilType;
-import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
-import net.dries007.tfc.module.plant.common.blocks.BlockPlant;
 import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
+import net.dries007.tfc.module.plant.api.type.PlantType;
+import net.dries007.tfc.module.plant.common.PlantStorage;
+import net.dries007.tfc.module.plant.common.blocks.BlockPlant;
+import net.dries007.tfc.module.plant.common.blocks.BlockPlantShortGrass;
+import net.dries007.tfc.module.soil.api.type.SoilType;
+import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
+import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariant;
+import net.dries007.tfc.module.soil.common.SoilStorage;
+import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeat;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -49,8 +49,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.SHORT_GRASS;
 import static net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing.WILD;
+import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.SHORT_GRASS;
 import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*;
 import static net.dries007.tfc.module.soil.api.variant.item.SoilItemVariants.PILE;
 

@@ -2,8 +2,8 @@ package net.dries007.tfc.module.wood.common.container;
 
 import net.dries007.tfc.module.core.common.objects.container.ContainerTE;
 import net.dries007.tfc.module.core.common.objects.container.IButtonHandler;
-import net.dries007.tfc.module.wood.common.blocks.BlockWoodBarrel;
 import net.dries007.tfc.module.core.common.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.module.wood.common.blocks.BlockWoodBarrel;
 import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;

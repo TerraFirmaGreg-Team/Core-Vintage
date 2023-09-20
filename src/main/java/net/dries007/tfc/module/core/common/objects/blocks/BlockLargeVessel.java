@@ -61,12 +61,6 @@ public class BlockLargeVessel extends TFCBlock implements IItemSize {
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
     }
 
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockLargeVessel(this);
-    }
-
     /**
      * Used to update the vessel seal state and the TE, in the correct order
      */
@@ -82,6 +76,12 @@ public class BlockLargeVessel extends TFCBlock implements IItemSize {
                 tile.onSealed();
             }
         }
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockLargeVessel(this);
     }
 
     @Override

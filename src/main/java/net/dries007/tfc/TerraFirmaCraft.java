@@ -3,8 +3,8 @@ package net.dries007.tfc;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.module.ModuleManager;
-import net.dries007.tfc.module.core.common.CommonProxy;
 import net.dries007.tfc.module.core.ModuleCorePost;
+import net.dries007.tfc.module.core.common.CommonProxy;
 import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.minecraft.util.ResourceLocation;
@@ -35,7 +35,7 @@ public final class TerraFirmaCraft {
     @SuppressWarnings("unused")
     @Mod.Instance
     private static TerraFirmaCraft INSTANCE;
-    @SidedProxy(modId = MOD_ID, clientSide = "net.dries007.tfc.client.ClientProxy", serverSide = "net.dries007.tfc.common.CommonProxy")
+    @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_SIDE)
     private static CommonProxy PROXY;
     private static int networkIdCounter = 0;
     private final ModuleManager moduleManager;

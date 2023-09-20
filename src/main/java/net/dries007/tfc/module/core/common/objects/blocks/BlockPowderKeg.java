@@ -67,12 +67,6 @@ public class BlockPowderKeg extends TFCBlock implements IItemSize, ILightableBlo
         setTranslationKey(Tags.MOD_ID + ".powderkeg");
     }
 
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockPowderKeg(this);
-    }
-
     /**
      * Used to update the keg seal state and the TE, in the correct order
      */
@@ -84,6 +78,12 @@ public class BlockPowderKeg extends TFCBlock implements IItemSize, ILightableBlo
             world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
             tile.setSealed(!previousSealed);
         }
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockPowderKeg(this);
     }
 
     public void trigger(World worldIn, BlockPos pos, IBlockState state, @Nullable EntityLivingBase igniter) {

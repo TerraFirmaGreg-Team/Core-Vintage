@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

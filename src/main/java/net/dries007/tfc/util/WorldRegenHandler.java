@@ -5,15 +5,15 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.animal.ICreatureTFC;
 import net.dries007.tfc.api.types.animal.IHuntable;
 import net.dries007.tfc.api.types.animal.IPredator;
-import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
-import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.module.crop.common.blocks.BlockCropDead;
-import net.dries007.tfc.module.plant.common.blocks.BlockPlantMushroom;
-import net.dries007.tfc.module.crop.common.items.ItemCropSeed;
-import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.module.crop.common.blocks.BlockCropDead;
+import net.dries007.tfc.module.crop.common.items.ItemCropSeed;
+import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
+import net.dries007.tfc.module.plant.common.blocks.BlockPlantMushroom;
+import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
+import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -47,8 +47,8 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.*;
 
-import static net.dries007.tfc.module.plant.api.type.PlantTypes.PORCINI;
 import static net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing.WILD;
+import static net.dries007.tfc.module.plant.api.type.PlantTypes.PORCINI;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.

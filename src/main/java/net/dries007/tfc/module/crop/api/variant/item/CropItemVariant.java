@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.crop.api.variant.item;
 
-import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.module.crop.api.type.CropType;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;

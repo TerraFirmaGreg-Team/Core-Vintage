@@ -1,16 +1,16 @@
 package net.dries007.tfc.module.crop.common.blocks;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.module.crop.api.type.CropType;
-import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;
-import net.dries007.tfc.module.crop.api.variant.block.ICropBlock;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.module.core.client.util.CustomStateMap;
 import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.module.crop.common.CropStorage;
-import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
-import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
 import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.module.crop.api.type.CropType;
+import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;
+import net.dries007.tfc.module.crop.api.variant.block.ICropBlock;
+import net.dries007.tfc.module.crop.common.CropStorage;
+import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
+import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SkillType;

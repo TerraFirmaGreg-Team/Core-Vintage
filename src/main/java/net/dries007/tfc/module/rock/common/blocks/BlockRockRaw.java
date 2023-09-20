@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
 import gregtech.common.items.ToolItems;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.module.rock.api.type.RockType;
+import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.module.rock.common.RockStorage;
 import net.dries007.tfc.util.GemsFromRawRocks;
 import net.dries007.tfc.util.Helpers;

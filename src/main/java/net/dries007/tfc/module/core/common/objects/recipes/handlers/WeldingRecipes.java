@@ -7,11 +7,11 @@ import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
+import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
 
 public class WeldingRecipes {
 

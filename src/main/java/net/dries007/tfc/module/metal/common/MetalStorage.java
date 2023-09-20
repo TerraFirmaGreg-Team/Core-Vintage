@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.metal.common;
 
 import gregtech.api.unification.material.Material;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.metal.api.variant.Item.IMetalItem;
 import net.dries007.tfc.module.metal.api.variant.Item.MetalItemVariant;

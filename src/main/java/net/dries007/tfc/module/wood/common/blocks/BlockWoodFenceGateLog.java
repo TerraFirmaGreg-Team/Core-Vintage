@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
+import net.dries007.tfc.module.core.client.util.CustomStateMap;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.module.core.client.util.CustomStateMap;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;

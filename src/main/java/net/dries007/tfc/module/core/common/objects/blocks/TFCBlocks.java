@@ -5,21 +5,20 @@ import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.bush.IBushBlock;
 import net.dries007.tfc.api.types.bush.type.BushType;
 import net.dries007.tfc.api.util.EnumColor;
-import net.dries007.tfc.module.core.common.objects.blocks.devices.*;
-import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariant;
-import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
-import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.common.objects.blocks.devices.*;
-import net.dries007.tfc.module.core.common.objects.blocks.fluid.BlockFluidHotWater;
-import net.dries007.tfc.module.core.common.objects.blocks.fluid.BlockFluidWater;
-import net.dries007.tfc.module.metal.common.blocks.BlockMetalCladding;
-import net.dries007.tfc.module.rock.common.blocks.BlockAlabaster;
-import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeat;
-import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeatGrass;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeRootyMimic;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
+import net.dries007.tfc.module.core.common.objects.blocks.devices.*;
+import net.dries007.tfc.module.core.common.objects.blocks.fluid.BlockFluidHotWater;
+import net.dries007.tfc.module.core.common.objects.blocks.fluid.BlockFluidWater;
+import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariant;
+import net.dries007.tfc.module.metal.common.blocks.BlockMetalCladding;
+import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
+import net.dries007.tfc.module.rock.common.blocks.BlockAlabaster;
+import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
+import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeat;
+import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeatGrass;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -27,7 +26,9 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_BLOCKS;
 import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.*;
@@ -37,9 +38,6 @@ import static net.minecraft.block.material.Material.WATER;
 public class TFCBlocks {
 
     //==== Block =====================================================================================================//
-
-
-
 
 
     public static final Map<Pair<RockBlockVariant, EnumColor>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
@@ -181,8 +179,6 @@ public class TFCBlocks {
         if (block != null) return block;
         throw new RuntimeException(String.format("Block is null: %s", type));
     }
-
-
 
 
     public static boolean isWater(IBlockState current) {

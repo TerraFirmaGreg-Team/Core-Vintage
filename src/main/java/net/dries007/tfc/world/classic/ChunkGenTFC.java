@@ -1,12 +1,12 @@
 package net.dries007.tfc.world.classic;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.rock.api.category.RockCategory;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.common.RockStorage;
 import net.dries007.tfc.module.soil.api.type.SoilType;
-import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;

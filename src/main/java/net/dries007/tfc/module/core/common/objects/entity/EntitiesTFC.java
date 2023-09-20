@@ -2,8 +2,8 @@ package net.dries007.tfc.module.core.common.objects.entity;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.core.common.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.module.core.common.objects.entity.animal.*;
+import net.dries007.tfc.module.core.common.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.module.wood.common.entity.EntityWoodBoat;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.Entity;

@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.plant.common;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.api.variant.block.IPlantBlock;

@@ -2,11 +2,11 @@ package net.dries007.tfc.module.soil.common.items;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.soil.api.variant.item.ISoilItem;
-import net.dries007.tfc.module.soil.api.variant.item.SoilItemVariant;
-import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.items.TFCItem;
+import net.dries007.tfc.module.soil.api.type.SoilType;
+import net.dries007.tfc.module.soil.api.variant.item.ISoilItem;
+import net.dries007.tfc.module.soil.api.variant.item.SoilItemVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.core.common.objects.recipes;
 
-import net.dries007.tfc.common.objects.recipes.handlers.*;
 import net.dries007.tfc.module.core.common.objects.recipes.handlers.*;
 
 public final class RecipeHandler {

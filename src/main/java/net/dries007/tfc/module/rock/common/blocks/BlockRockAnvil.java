@@ -1,15 +1,15 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.module.core.client.TFCSounds;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
-import net.dries007.tfc.module.rock.common.RockStorage;
+import net.dries007.tfc.module.rock.api.type.RockType;
+import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.module.rock.api.variant.item.RockItemVariants;
+import net.dries007.tfc.module.rock.common.RockStorage;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

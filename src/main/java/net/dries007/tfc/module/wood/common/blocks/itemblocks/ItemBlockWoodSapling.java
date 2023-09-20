@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.wood.common.blocks.itemblocks;
 
-import net.dries007.tfc.module.wood.common.blocks.BlockWoodSapling;
 import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.module.wood.common.blocks.BlockWoodSapling;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;

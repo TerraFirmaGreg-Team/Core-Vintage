@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.plant.common.blocks;
 
-import net.dries007.tfc.module.plant.api.type.PlantType;
-import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
 import net.dries007.tfc.api.util.property.ITallPlant;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.plant.api.type.PlantType;
+import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;

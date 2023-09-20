@@ -177,12 +177,6 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
         setTranslationKey(Tags.MOD_ID + ".bloomery");
     }
 
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
-    }
-
     public static boolean isValidSideBlock(IBlockState state) {
         return state.getMaterial() == Material.ROCK && state.isNormalCube();
     }
@@ -196,6 +190,12 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
         }
         // Maximum levels
         return 3;
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockTFC(this);
     }
 
     public boolean canGateStayInPlace(World world, BlockPos pos, EnumFacing.Axis axis) {

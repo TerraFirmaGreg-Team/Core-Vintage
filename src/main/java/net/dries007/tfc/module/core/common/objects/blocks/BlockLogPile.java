@@ -59,12 +59,6 @@ public class BlockLogPile extends TFCBlock implements ILightableBlock {
         setTranslationKey(Tags.MOD_ID + ".log_pile");
     }
 
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return null;
-    }
-
     // A simplified check for display (Patchouli) purposes
     public static boolean isValidCoverBlock(IBlockState state) {
         if (state.getBlock() == TFCBlocks.LOG_PILE || state.getBlock() == TFCBlocks.CHARCOAL_PILE) {
@@ -82,6 +76,12 @@ public class BlockLogPile extends TFCBlock implements ILightableBlock {
             return offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID || offsetState.isSideSolid(world, pos, side);
         }
         return !offsetState.getMaterial().getCanBurn() && (offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID) || offsetState.isSideSolid(world, pos, side);
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return null;
     }
 
     @Override

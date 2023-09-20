@@ -3,17 +3,19 @@ package net.dries007.tfc.module.core.common.objects.items;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.core.common.objects.items.ceramics.ItemMold;
-import net.dries007.tfc.module.core.common.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.food.variant.Item.FoodItemVariant;
 import net.dries007.tfc.api.types.food.variant.Item.IFoodItem;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.module.core.common.objects.items.ceramics.ItemMold;
+import net.dries007.tfc.module.core.common.objects.items.ceramics.ItemUnfiredMold;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static net.dries007.tfc.module.core.common.objects.CreativeTabsTFC.WOOD;

@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.soil.common;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;

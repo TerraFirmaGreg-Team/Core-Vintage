@@ -2,12 +2,12 @@ package net.dries007.tfc.module.rock.common.items;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.item.IRockItem;
-import net.dries007.tfc.module.rock.api.variant.item.RockItemVariant;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.items.TFCItem;
+import net.dries007.tfc.module.rock.api.type.RockType;
+import net.dries007.tfc.module.rock.api.variant.item.IRockItem;
+import net.dries007.tfc.module.rock.api.variant.item.RockItemVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;

@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.rock.common;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;

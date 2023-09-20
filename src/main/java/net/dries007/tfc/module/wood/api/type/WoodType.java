@@ -1,7 +1,5 @@
 package net.dries007.tfc.module.wood.api.type;
 
-import net.dries007.tfc.module.wood.ModuleWood;
-
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;

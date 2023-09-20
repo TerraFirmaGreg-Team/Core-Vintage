@@ -8,10 +8,10 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.module.core.common.objects.items.ItemsTFC_old;
-import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
+import net.dries007.tfc.module.core.common.objects.items.ItemsTFC_old;
+import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 

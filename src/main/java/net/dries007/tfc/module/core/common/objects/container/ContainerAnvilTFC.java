@@ -25,6 +25,8 @@ import net.minecraftforge.items.IItemHandler;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import static net.dries007.tfc.module.core.client.gui.GuiAnvilTFC.*;
+
 @ParametersAreNonnullByDefault
 public class ContainerAnvilTFC extends ContainerTE<TEMetalAnvil> implements IButtonHandler {
     public ContainerAnvilTFC(InventoryPlayer playerInv, TEMetalAnvil te) {

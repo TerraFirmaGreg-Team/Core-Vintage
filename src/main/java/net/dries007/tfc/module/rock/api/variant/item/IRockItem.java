@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.rock.api.variant.item;
 
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.module.rock.api.category.RockCategory;
 import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.api.util.IHasModel;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;

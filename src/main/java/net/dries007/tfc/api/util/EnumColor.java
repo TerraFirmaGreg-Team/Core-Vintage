@@ -5,8 +5,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public enum EnumColor implements IStringSerializable
-{
+public enum EnumColor implements IStringSerializable {
     WHITE(0, 15, "white", "white", 16383998, TextFormatting.WHITE),
     ORANGE(1, 14, "orange", "orange", 16351261, TextFormatting.GOLD),
     MAGENTA(2, 13, "magenta", "magenta", 13061821, TextFormatting.AQUA),
@@ -27,12 +26,22 @@ public enum EnumColor implements IStringSerializable
 
     private static final EnumColor[] META_LOOKUP = new EnumColor[values().length];
     private static final EnumColor[] DYE_DMG_LOOKUP = new EnumColor[values().length];
+
+    static {
+        for (EnumColor enumdyecolor : values()) {
+            META_LOOKUP[enumdyecolor.getMetadata()] = enumdyecolor;
+            DYE_DMG_LOOKUP[enumdyecolor.getDyeDamage()] = enumdyecolor;
+        }
+    }
+
+    /**
+     * An int containing the corresponding RGB color for this dye color.
+     */
+    public final int colorValue;
     private final int meta;
     private final int dyeDamage;
     private final String name;
     private final String translationKey;
-    /** An int containing the corresponding RGB color for this dye color. */
-    public final int colorValue;
     /**
      * An array containing 3 floats ranging from 0.0 to 1.0: the red, green, and blue components of the corresponding
      * color.
@@ -40,8 +49,7 @@ public enum EnumColor implements IStringSerializable
     private final float[] colorComponentValues;
     private final TextFormatting chatColor;
 
-    private EnumColor(int metaIn, int dyeDamageIn, String nameIn, String unlocalizedNameIn, int colorValueIn, TextFormatting chatColorIn)
-    {
+    private EnumColor(int metaIn, int dyeDamageIn, String nameIn, String unlocalizedNameIn, int colorValueIn, TextFormatting chatColorIn) {
         this.meta = metaIn;
         this.dyeDamage = dyeDamageIn;
         this.name = nameIn;
@@ -51,27 +59,39 @@ public enum EnumColor implements IStringSerializable
         int i = (colorValueIn & 16711680) >> 16;
         int j = (colorValueIn & 65280) >> 8;
         int k = (colorValueIn & 255) >> 0;
-        this.colorComponentValues = new float[] {(float)i / 255.0F, (float)j / 255.0F, (float)k / 255.0F};
+        this.colorComponentValues = new float[]{(float) i / 255.0F, (float) j / 255.0F, (float) k / 255.0F};
     }
 
-    public int getMetadata()
-    {
+    public static EnumColor byDyeDamage(int damage) {
+        if (damage < 0 || damage >= DYE_DMG_LOOKUP.length) {
+            damage = 0;
+        }
+
+        return DYE_DMG_LOOKUP[damage];
+    }
+
+    public static EnumColor byMetadata(int meta) {
+        if (meta < 0 || meta >= META_LOOKUP.length) {
+            meta = 0;
+        }
+
+        return META_LOOKUP[meta];
+    }
+
+    public int getMetadata() {
         return this.meta;
     }
 
-    public int getDyeDamage()
-    {
+    public int getDyeDamage() {
         return this.dyeDamage;
     }
 
     @SideOnly(Side.CLIENT)
-    public String getDyeColorName()
-    {
+    public String getDyeColorName() {
         return this.name;
     }
 
-    public String getTranslationKey()
-    {
+    public String getTranslationKey() {
         return this.translationKey;
     }
 
@@ -79,8 +99,7 @@ public enum EnumColor implements IStringSerializable
      * Gets the RGB color corresponding to this dye color.
      */
     @SideOnly(Side.CLIENT)
-    public int getColorValue()
-    {
+    public int getColorValue() {
         return this.colorValue;
     }
 
@@ -88,47 +107,15 @@ public enum EnumColor implements IStringSerializable
      * Gets an array containing 3 floats ranging from 0.0 to 1.0: the red, green, and blue components of the
      * corresponding color.
      */
-    public float[] getColorComponentValues()
-    {
+    public float[] getColorComponentValues() {
         return this.colorComponentValues;
     }
 
-    public static EnumColor byDyeDamage(int damage)
-    {
-        if (damage < 0 || damage >= DYE_DMG_LOOKUP.length)
-        {
-            damage = 0;
-        }
-
-        return DYE_DMG_LOOKUP[damage];
-    }
-
-    public static EnumColor byMetadata(int meta)
-    {
-        if (meta < 0 || meta >= META_LOOKUP.length)
-        {
-            meta = 0;
-        }
-
-        return META_LOOKUP[meta];
-    }
-
-    public String toString()
-    {
+    public String toString() {
         return this.translationKey;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
-    }
-
-    static
-    {
-        for (EnumColor enumdyecolor : values())
-        {
-            META_LOOKUP[enumdyecolor.getMetadata()] = enumdyecolor;
-            DYE_DMG_LOOKUP[enumdyecolor.getDyeDamage()] = enumdyecolor;
-        }
     }
 }

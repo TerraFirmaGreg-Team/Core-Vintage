@@ -4,10 +4,10 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.workbench.UnmoldRecipe;
-import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -38,8 +38,6 @@ public class WorkbenchRecipes {
             }
         }
     }
-
-
 
 
 //    private static void registerRockRecipes() {

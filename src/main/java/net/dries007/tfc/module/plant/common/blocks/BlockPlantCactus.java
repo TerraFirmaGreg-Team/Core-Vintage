@@ -2,9 +2,9 @@ package net.dries007.tfc.module.plant.common.blocks;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.util.property.ITallPlant;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
-import net.dries007.tfc.api.util.property.ITallPlant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;

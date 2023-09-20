@@ -10,11 +10,11 @@ import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.module.wood.api.type.WoodType;
-import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranch;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies;
+import net.dries007.tfc.module.core.common.objects.items.TFCItems;
+import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.common.WoodStorage;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -35,10 +35,10 @@ import java.util.*;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
 import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
-import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LEAVES;
-import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LOG;
 import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.BLOCKS;
 import static net.dries007.tfc.module.core.common.objects.items.TFCItems.ITEMS;
+import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LEAVES;
+import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LOG;
 
 /**
  * Класс Wood представляет тип дерева с определенными характеристиками.
@@ -73,10 +73,10 @@ public class TreeType extends TreeFamily {
     private final ITreeGenerator generator;
     private final float[] paramMap;
     private final IGrowthLogicKit logicMap;
-    public boolean hasConiferVariants;
-    private boolean thick;
     private final int soilLongevity;
     private final List<IGenFeature> modules;
+    public boolean hasConiferVariants;
+    private boolean thick;
 
     private TreeType(Builder builder) {
         super(builder.name);

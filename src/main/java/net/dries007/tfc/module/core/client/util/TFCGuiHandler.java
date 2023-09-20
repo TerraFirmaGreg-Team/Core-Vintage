@@ -2,7 +2,6 @@ package net.dries007.tfc.module.core.client.util;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.module.core.client.gui.*;
 import net.dries007.tfc.module.core.common.objects.container.*;
 import net.dries007.tfc.module.core.common.objects.items.ItemQuiver;

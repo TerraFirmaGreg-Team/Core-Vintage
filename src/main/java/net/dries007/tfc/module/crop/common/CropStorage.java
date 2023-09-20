@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.crop.common;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;

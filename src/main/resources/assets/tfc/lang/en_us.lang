@@ -3140,16 +3140,14 @@ tfc.enum.growstatus.fully_grown=This plant is fully grown
 
 # Creative tabs
 
-itemGroup.tfc.rock=tfc: Rock
-itemGroup.tfc.earth=tfc: Earth
-itemGroup.tfc.wood=tfc: Wood
-itemGroup.tfc.decorations=tfc: Decorations
-itemGroup.tfc.metal=tfc: Metal
-itemGroup.tfc.pottery=tfc: Pottery
-itemGroup.tfc.food=tfc: Foodstuffs
-itemGroup.tfc.plants=tfc: Plants
-itemGroup.tfc.flora=tfc: Flora
-itemGroup.tfc.misc=tfc: Misc
+itemGroup.tfc.rock=Rock (TFG)
+itemGroup.tfc.soil=Soil (TFG)
+itemGroup.tfc.wood=Wood (TFG)
+itemGroup.tfc.metal=Metal (TFG)
+itemGroup.tfc.pottery=Pottery (TFG)
+itemGroup.tfc.food=Food (TFG)
+itemGroup.tfc.flora=Flora (TFG)
+itemGroup.tfc.misc=Misc (TFG)
 
 # tfc death messages
 

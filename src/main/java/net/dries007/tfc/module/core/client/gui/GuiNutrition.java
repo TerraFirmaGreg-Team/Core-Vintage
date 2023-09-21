@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiNutrition extends GuiContainerTFC {
-    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.identifier("textures/gui/player_nutrition.png");
+    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.getID("textures/gui/player_nutrition.png");
 
     private final float[] cachedNutrients;
 

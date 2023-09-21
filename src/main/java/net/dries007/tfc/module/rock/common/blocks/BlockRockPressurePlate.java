@@ -37,11 +37,8 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
         this.variant = variant;
         this.type = type;
 
-        setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
         setHardness(0.5f);
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
 
         OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }

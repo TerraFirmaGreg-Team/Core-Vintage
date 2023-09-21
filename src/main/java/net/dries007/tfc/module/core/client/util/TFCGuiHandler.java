@@ -31,13 +31,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TFCGuiHandler implements IGuiHandler {
-    public static final ResourceLocation SMALL_INVENTORY_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/small_inventory.png");
-    public static final ResourceLocation CLAY_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button.png");
-    public static final ResourceLocation FIRE_CLAY_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button_fire.png");
-    public static final ResourceLocation LEATHER_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/leather_button.png");
-    public static final ResourceLocation QUIVER_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/quiver_inventory.png");
-    public static final ResourceLocation CLAY_DISABLED_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button_disabled.png");
-    public static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button_fire_disabled.png");
+    public static final ResourceLocation SMALL_INVENTORY_BACKGROUND = TerraFirmaCraft.getID("textures/gui/small_inventory.png");
+    public static final ResourceLocation CLAY_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button.png");
+    public static final ResourceLocation FIRE_CLAY_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_fire.png");
+    public static final ResourceLocation LEATHER_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/leather_button.png");
+    public static final ResourceLocation QUIVER_BACKGROUND = TerraFirmaCraft.getID("textures/gui/quiver_inventory.png");
+    public static final ResourceLocation CLAY_DISABLED_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_disabled.png");
+    public static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_fire_disabled.png");
 
     // use this instead of player.openGui() -> avoids magic numbers
     public static void openGui(World world, BlockPos pos, EntityPlayer player, Type type) {

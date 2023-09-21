@@ -46,7 +46,7 @@ public class ModelHelperTFC extends ModelHelper {
 
     private static ModelResourceLocation getBranchModelResourceLocation(BlockBranch blockBranch) {
         var family = blockBranch.getFamily().getName().getPath();
-        var resloc = TerraFirmaCraft.identifier("wood/branch/" + family);
+        var resloc = TerraFirmaCraft.getID("wood/branch/" + family);
         return new ModelResourceLocation(resloc, null);
     }
 

@@ -42,7 +42,7 @@ public class BlockPlantPot extends TFCBlock {
         var blockRegistryName = String.format("flowerpot/%s", plant);
 
         setCreativeTab(CreativeTabsTFC.FLORA);
-        setRegistryName(TerraFirmaCraft.identifier(blockRegistryName));
+        setRegistryName(TerraFirmaCraft.getID(blockRegistryName));
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
     }
 

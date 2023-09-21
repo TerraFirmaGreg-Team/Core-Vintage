@@ -38,7 +38,7 @@ import java.util.List;
 
 
 public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
-    public static final ResourceLocation BARREL_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/barrel.png");
+    public static final ResourceLocation BARREL_BACKGROUND = TerraFirmaCraft.getID("textures/gui/barrel.png");
     private final String translationKey;
 
     public GuiWoodBarrel(Container container, InventoryPlayer playerInv, TEWoodBarrel tile, String translationKey) {

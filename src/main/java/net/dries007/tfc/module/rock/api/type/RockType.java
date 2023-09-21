@@ -171,6 +171,6 @@ public class RockType {
      */
     @Nonnull
     public ResourceLocation getTexture() {
-        return TerraFirmaCraft.identifier("textures/blocks/rock/raw/" + this + ".png");
+        return TerraFirmaCraft.getID("textures/blocks/rock/raw/" + this + ".png");
     }
 }

@@ -17,7 +17,7 @@ import net.minecraftforge.common.MinecraftForge;
 import javax.annotation.Nonnull;
 
 public class GuiKnapping extends GuiContainerTFC {
-    private static final ResourceLocation BG_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping.png");
+    private static final ResourceLocation BG_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping.png");
 
     private final ResourceLocation buttonTexture;
     private final KnappingType type;

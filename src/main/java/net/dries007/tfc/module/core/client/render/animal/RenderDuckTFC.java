@@ -18,13 +18,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderDuckTFC extends RenderLiving<EntityDuckTFC> {
-    private static final ResourceLocation DUCK_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/duck_old.png");
-    private static final ResourceLocation DUCK_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/duck_young.png");
+    private static final ResourceLocation DUCK_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/duck_old.png");
+    private static final ResourceLocation DUCK_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/duck_young.png");
 
-    private static final ResourceLocation DRAKE_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/drake_old.png");
-    private static final ResourceLocation DRAKE_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/drake_young.png");
+    private static final ResourceLocation DRAKE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/drake_old.png");
+    private static final ResourceLocation DRAKE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/drake_young.png");
 
-    private static final ResourceLocation DUCKLING_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/livestock/duckling.png");
+    private static final ResourceLocation DUCKLING_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/livestock/duckling.png");
 
     public RenderDuckTFC(RenderManager manager) {
         super(manager, new ModelDuckTFC(), 0.3F);

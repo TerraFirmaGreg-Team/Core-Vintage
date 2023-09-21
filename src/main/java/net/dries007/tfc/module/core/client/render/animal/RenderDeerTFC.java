@@ -15,9 +15,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderDeerTFC extends RenderLiving<EntityDeerTFC> {
-    private static final ResourceLocation DEER_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/deer.png");
+    private static final ResourceLocation DEER_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/deer.png");
 
-    private static final ResourceLocation FAWN_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/deer_fawn.png");
+    private static final ResourceLocation FAWN_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/deer_fawn.png");
 
     public RenderDeerTFC(RenderManager manager) {
         super(manager, new ModelDeerTFC(), 0.7F);

@@ -33,7 +33,7 @@ public interface ICropBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.identifier(String.format("crop/%s/%s", getBlockVariant(), getType()));
+        return TerraFirmaCraft.getID(String.format("crop/%s/%s", getBlockVariant(), getType()));
     }
 
     /**
@@ -43,7 +43,7 @@ public interface ICropBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.identifier(String.format("crop/%s/%s", getBlockVariant(), getType()));
+        return TerraFirmaCraft.getID(String.format("crop/%s/%s", getBlockVariant(), getType()));
     }
 
     /**

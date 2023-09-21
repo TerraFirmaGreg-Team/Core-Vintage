@@ -18,13 +18,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderQuailTFC extends RenderLiving<EntityQuailTFC> {
-    private static final ResourceLocation FEMALE_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/quailf_young.png");
-    private static final ResourceLocation FEMALE_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/quailf_old.png");
+    private static final ResourceLocation FEMALE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/quailf_young.png");
+    private static final ResourceLocation FEMALE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/quailf_old.png");
 
-    private static final ResourceLocation MALE_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/quailm_young.png");
-    private static final ResourceLocation MALE_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/quailm_old.png");
+    private static final ResourceLocation MALE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/quailm_young.png");
+    private static final ResourceLocation MALE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/quailm_old.png");
 
-    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/livestock/quail_chick.png");
+    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/livestock/quail_chick.png");
 
     public RenderQuailTFC(RenderManager manager) {
         super(manager, new ModelQuailTFC(), 0.3F);

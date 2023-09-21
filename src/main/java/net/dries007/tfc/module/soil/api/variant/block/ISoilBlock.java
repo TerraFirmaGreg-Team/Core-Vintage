@@ -34,8 +34,8 @@ public interface ISoilBlock extends IItemProvider, IHasModel {
      * @return Местоположение регистрации блока почвы.
      */
     @Nonnull
-    default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.identifier(String.format("soil/%s/%s", getBlockVariant(), getType()));
+    default String getName() {
+        return String.format("soil.%s.%s", getBlockVariant(), getType());
     }
 
     /**
@@ -45,16 +45,6 @@ public interface ISoilBlock extends IItemProvider, IHasModel {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.identifier(String.format("soil/%s", getBlockVariant()));
-    }
-
-    /**
-     * Возвращает имя перевода блока почвы.
-     *
-     * @return Имя перевода блока почвы.
-     */
-    @Nonnull
-    default String getTranslationName() {
-        return getRegistryLocation().toString().toLowerCase().replace(":", ".").replace("/", ".");
+        return TerraFirmaCraft.getID(String.format("soil/%s", getBlockVariant()));
     }
 }

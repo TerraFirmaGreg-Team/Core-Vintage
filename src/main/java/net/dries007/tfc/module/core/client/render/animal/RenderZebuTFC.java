@@ -14,8 +14,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderZebuTFC extends RenderAnimalTFC<EntityZebuTFC> {
-    private static final ResourceLocation ZEBU_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/zebu_young.png");
-    private static final ResourceLocation ZEBU_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/zebu_old.png");
+    private static final ResourceLocation ZEBU_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/zebu_young.png");
+    private static final ResourceLocation ZEBU_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/zebu_old.png");
 
     public RenderZebuTFC(RenderManager renderManager) {
         super(renderManager, new ModelZebuTFC(), 0.7F, ZEBU_YOUNG, ZEBU_OLD);

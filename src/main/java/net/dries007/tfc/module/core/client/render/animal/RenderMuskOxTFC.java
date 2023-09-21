@@ -15,8 +15,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderMuskOxTFC extends RenderAnimalTFC<EntityMuskOxTFC> {
-    private static final ResourceLocation TEXTURE_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/muskox_young.png");
-    private static final ResourceLocation TEXTURE_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/muskox_old.png");
+    private static final ResourceLocation TEXTURE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/muskox_young.png");
+    private static final ResourceLocation TEXTURE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/muskox_old.png");
 
     public RenderMuskOxTFC(RenderManager renderManager) {
         super(renderManager, new ModelMuskOxBodyTFC(), 0.8F, TEXTURE_YOUNG, TEXTURE_OLD);

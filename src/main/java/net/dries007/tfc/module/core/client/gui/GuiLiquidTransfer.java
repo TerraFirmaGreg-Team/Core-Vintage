@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiLiquidTransfer extends GuiContainerTFC {
-    private static final ResourceLocation BG_TEXTURE = TerraFirmaCraft.identifier("textures/gui/single_inventory.png");
+    private static final ResourceLocation BG_TEXTURE = TerraFirmaCraft.getID("textures/gui/single_inventory.png");
     private final int slotIdx;
 
     public GuiLiquidTransfer(Container container, EntityPlayer player, boolean mainhand) {

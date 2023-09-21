@@ -14,8 +14,8 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class TESRPlacedHide extends TileEntitySpecialRenderer<TEPlacedHide> {
-    private static final ResourceLocation BASE_TEXTURE = TerraFirmaCraft.identifier("textures/items/hide/large/soaked.png");
-    private static final ResourceLocation SCRAPED_TEXTURE = TerraFirmaCraft.identifier("textures/items/hide/large/scraped.png");
+    private static final ResourceLocation BASE_TEXTURE = TerraFirmaCraft.getID("textures/items/hide/large/soaked.png");
+    private static final ResourceLocation SCRAPED_TEXTURE = TerraFirmaCraft.getID("textures/items/hide/large/scraped.png");
 
     private static final double[][] VERTICES = new double[][]{
             // x, z, u, v

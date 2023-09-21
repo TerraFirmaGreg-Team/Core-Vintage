@@ -19,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ChiselCategory extends BaseRecipeCategory<ChiselRecipeWrapper> {
-    private static final ResourceLocation ICONS = TerraFirmaCraft.identifier("textures/gui/icons/jei.png");
+    private static final ResourceLocation ICONS = TerraFirmaCraft.getID("textures/gui/icons/jei.png");
 
     private final IDrawableStatic slot;
     private final IDrawableStatic arrow;

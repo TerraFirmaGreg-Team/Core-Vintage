@@ -101,7 +101,7 @@ public class LootTablesTFC {
         ANIMALS_ZEBU = register("animals/zebu");
 
         // Loot function for skill drop multiplier
-        LootFunctionManager.registerFunction(new ApplySimpleSkill.Serializer(TerraFirmaCraft.identifier("apply_skill")));
+        LootFunctionManager.registerFunction(new ApplySimpleSkill.Serializer(TerraFirmaCraft.getID("apply_skill")));
     }
 
     @SubscribeEvent
@@ -120,7 +120,7 @@ public class LootTablesTFC {
     }
 
     private static ResourceLocation register(String id) {
-        return LootTableList.register(TerraFirmaCraft.identifier(id));
+        return LootTableList.register(TerraFirmaCraft.getID(id));
     }
 
     private static void remove(LootTableLoadEvent event, String tableName, String pool) {

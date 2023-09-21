@@ -19,8 +19,6 @@ import static net.dries007.tfc.module.wood.common.WoodStorage.WOOD_BLOCKS;
 public class BlockInitializer {
 
     public static void onRegister(Registry registry) {
-        WoodBlockVariantHandler.init();
-
         for (var wood : WOOD_BLOCKS.values()) {
             var itemBlock = wood.getItemBlock();
             if (itemBlock != null) registry.registerBlock((Block) wood, wood.getItemBlock(), wood.getName());

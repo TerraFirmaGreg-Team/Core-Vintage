@@ -24,7 +24,6 @@ public abstract class BlockWood extends TFCBlock implements IWoodBlock {
         this.variant = variant;
         this.type = type;
 
-        setTranslationKey(getTranslationName());
         setSoundType(SoundType.WOOD);
 
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());

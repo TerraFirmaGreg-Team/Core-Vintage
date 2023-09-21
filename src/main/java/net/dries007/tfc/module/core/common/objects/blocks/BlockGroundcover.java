@@ -40,7 +40,7 @@ public class BlockGroundcover extends TFCBlock implements IHasModel {
         this.blockHardness = 0.1f;
         this.blockResistance = 0.1f;
         this.groundcoverType = groundcoverType;
-        this.modelLocation = TerraFirmaCraft.identifier("groundcover/" + groundcoverType);
+        this.modelLocation = TerraFirmaCraft.getID("groundcover/" + groundcoverType);
 
         var blockRegistryName = String.format("groundcover/%s", groundcoverType);
         setRegistryName(Tags.MOD_ID, blockRegistryName);

@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.BLOCKS;
+import static net.dries007.tfc.module.rock.common.RockStorage.*;
 
 /**
  * Класс, представляющий тип блока породы.
@@ -46,11 +47,8 @@ public class RockBlockVariant {
         }
 
         for (var type : RockType.getRockTypes()) {
-            var rockBlock = this.create(type);
-
-            if (RockStorage.ROCK_BLOCKS.put(new Pair<>(this, type), rockBlock) != null)
+            if (ROCK_BLOCKS.put(new Pair<>(this, type), this.create(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-            BLOCKS.add((Block) rockBlock);
         }
     }
 

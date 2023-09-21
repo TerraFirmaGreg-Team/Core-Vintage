@@ -28,7 +28,7 @@ public class CapabilityFood {
     /**
      * Уникальный идентификатор Capability.
      */
-    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("food");
+    public static final ResourceLocation KEY = TerraFirmaCraft.getID("food");
 
     /**
      * Список пользовательских еды.

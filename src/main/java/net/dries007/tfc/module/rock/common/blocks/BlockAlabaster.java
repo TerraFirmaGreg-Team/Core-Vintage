@@ -39,7 +39,7 @@ public class BlockAlabaster extends TFCBlock implements IItemSize, IHasModel {
 
         this.variant = variant;
         this.color = color;
-        this.modelLocation = TerraFirmaCraft.identifier("rock/alabaster/color/" + variant);
+        this.modelLocation = TerraFirmaCraft.getID("rock/alabaster/color/" + variant);
 
         setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);

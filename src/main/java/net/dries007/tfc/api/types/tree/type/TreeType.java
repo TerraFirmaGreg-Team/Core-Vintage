@@ -400,7 +400,7 @@ public class TreeType extends TreeFamily {
         }
 
         public Builder setName(String path) {
-            return setName(TerraFirmaCraft.identifier(path));
+            return setName(TerraFirmaCraft.getID(path));
         }
 
         public Builder setWoodType(WoodType wood) {

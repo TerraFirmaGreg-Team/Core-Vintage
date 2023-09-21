@@ -8,7 +8,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class CapabilityEgg {
-    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("egg");
+    public static final ResourceLocation KEY = TerraFirmaCraft.getID("egg");
     @CapabilityInject(IEgg.class)
     public static Capability<IEgg> CAPABILITY;
 

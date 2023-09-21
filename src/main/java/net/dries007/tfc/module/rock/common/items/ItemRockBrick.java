@@ -24,10 +24,6 @@ public class ItemRockBrick extends TFCItem implements IRockItem {
         this.variant = variant;
         this.type = type;
 
-        setCreativeTab(CreativeTabsTFC.ROCK);
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-
         OreDictionaryHelper.register(this, variant.toString());
         OreDictionaryHelper.register(this, variant.toString(), type.toString());
         OreDictionaryHelper.register(this, variant.toString(), type.getCategory().toString());

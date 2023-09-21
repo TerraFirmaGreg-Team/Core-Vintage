@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.client.util.CustomStateMap;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
@@ -72,7 +73,7 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
         if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER) {
             return Items.AIR;
         } else {
-            return ForgeRegistries.ITEMS.getValue(getRegistryLocation());
+            return ForgeRegistries.ITEMS.getValue(TerraFirmaCraft.getID(getName()));
         }
     }
 
@@ -85,7 +86,7 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
     @Override
     public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player) {
 
-        return new ItemStack(ForgeRegistries.ITEMS.getValue(getRegistryLocation()));
+        return new ItemStack(ForgeRegistries.ITEMS.getValue(TerraFirmaCraft.getID(getName())));
     }
 
     @Override

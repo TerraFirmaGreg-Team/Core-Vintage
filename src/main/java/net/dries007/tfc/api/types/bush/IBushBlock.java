@@ -26,7 +26,7 @@ public interface IBushBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.identifier(String.format("berry_bush/%s", getType()));
+        return TerraFirmaCraft.getID(String.format("berry_bush/%s", getType()));
     }
 
     /**
@@ -36,7 +36,7 @@ public interface IBushBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.identifier(String.format("berry_bush/%s", getType()));
+        return TerraFirmaCraft.getID(String.format("berry_bush/%s", getType()));
     }
 
     /**

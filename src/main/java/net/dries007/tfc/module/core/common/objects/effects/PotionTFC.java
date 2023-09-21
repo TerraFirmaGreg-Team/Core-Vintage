@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("WeakerAccess")
 public abstract class PotionTFC extends Potion {
-    private static final ResourceLocation POTION_ICONS = TerraFirmaCraft.identifier("textures/gui/icons/potion.png");
+    private static final ResourceLocation POTION_ICONS = TerraFirmaCraft.getID("textures/gui/icons/potion.png");
 
     protected PotionTFC(boolean isBadEffectIn, int liquidColorIn) {
         super(isBadEffectIn, liquidColorIn);

@@ -17,9 +17,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderPheasantTFC extends RenderLiving<EntityPheasantTFC> {
-    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/pheasant_chick.png");
-    private static final ResourceLocation MALE_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/pheasant_male.png");
-    private static final ResourceLocation FEMALE_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/pheasant_female.png");
+    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/pheasant_chick.png");
+    private static final ResourceLocation MALE_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/pheasant_male.png");
+    private static final ResourceLocation FEMALE_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/pheasant_female.png");
 
 
     public RenderPheasantTFC(RenderManager manager) {

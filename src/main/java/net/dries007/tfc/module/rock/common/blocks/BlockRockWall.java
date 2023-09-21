@@ -39,11 +39,6 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
         this.variant = variant;
         this.type = type;
 
-
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.ROCK);
-
         setSoundType(SoundType.STONE);
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);

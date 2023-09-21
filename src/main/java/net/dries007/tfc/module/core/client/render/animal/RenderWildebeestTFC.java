@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderWildebeestTFC extends RenderLiving<EntityWildebeestTFC> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/wildebeest.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/wildebeest.png");
 
     public RenderWildebeestTFC(RenderManager manager) {
         super(manager, new ModelWildebeestTFC(), 0.7F);

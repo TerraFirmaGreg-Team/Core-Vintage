@@ -78,7 +78,7 @@ public class BlockPlant extends BlockBush implements IPlantBlock, IItemSize, IIt
 
         this.plant = plant;
         this.plantBlockVariant = plantBlockVariant;
-        this.modelLocation = TerraFirmaCraft.identifier("plants/" + plant);
+        this.modelLocation = TerraFirmaCraft.getID("plants/" + plant);
         var blockRegistryName = String.format("plants/%s/%s", plantBlockVariant, plant);
 
         setRegistryName(Tags.MOD_ID, blockRegistryName);

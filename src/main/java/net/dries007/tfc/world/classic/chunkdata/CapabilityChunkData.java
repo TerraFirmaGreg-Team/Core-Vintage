@@ -22,7 +22,7 @@ public final class CapabilityChunkData {
     /**
      * Ресурсное имя для возможности (capability) хранения данных чанка.
      */
-    public static final ResourceLocation CHUNK_DATA = TerraFirmaCraft.identifier("chunkdata");
+    public static final ResourceLocation CHUNK_DATA = TerraFirmaCraft.getID("chunkdata");
 
     /**
      * Метод preInit() выполняет регистрацию возможности (capability) для хранения данных чанка.

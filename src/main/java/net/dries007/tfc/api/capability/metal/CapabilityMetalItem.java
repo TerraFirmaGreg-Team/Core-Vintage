@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class CapabilityMetalItem {
-    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("metal_object");
+    public static final ResourceLocation KEY = TerraFirmaCraft.getID("metal_object");
     public static final Map<ItemStack, ICapabilityProvider> CUSTOM_METAL_ITEMS = new HashMap<>();
     @CapabilityInject(IMaterialItem.class)
     public static Capability<IMaterialItem> METAL_OBJECT_CAPABILITY;

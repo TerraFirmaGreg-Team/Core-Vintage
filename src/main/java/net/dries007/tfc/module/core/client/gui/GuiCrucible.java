@@ -30,7 +30,7 @@ import java.util.Map;
 
 
 public class GuiCrucible extends GuiContainerTE<TECrucible> {
-    private static final ResourceLocation CRUCIBLE_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/crucible.png");
+    private static final ResourceLocation CRUCIBLE_BACKGROUND = TerraFirmaCraft.getID("textures/gui/crucible.png");
     private static final int MAX_ELEMENTS = 3;
     private int scrollPos;
     private boolean scrollPress;

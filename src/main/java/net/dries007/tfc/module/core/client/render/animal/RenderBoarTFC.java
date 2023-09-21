@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderBoarTFC extends RenderLiving<EntityBoarTFC> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/boar.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/boar.png");
 
     public RenderBoarTFC(RenderManager renderManager) {
         super(renderManager, new ModelBoarTFC(), 0.7F);

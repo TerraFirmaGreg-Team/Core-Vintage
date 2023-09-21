@@ -16,7 +16,7 @@ public class ItemUnfiredMold extends ItemPottery {
         this.orePrefix = orePrefix;
 
         setCreativeTab(CreativeTabsTFC.POTTERY);
-        setRegistryName(TerraFirmaCraft.identifier("ceramics/unfired/mold/" + orePrefix.name.toLowerCase()));
+        setRegistryName(TerraFirmaCraft.getID("ceramics/unfired/mold/" + orePrefix.name.toLowerCase()));
     }
 
     @Nonnull

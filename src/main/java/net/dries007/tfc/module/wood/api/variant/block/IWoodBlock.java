@@ -35,8 +35,8 @@ public interface IWoodBlock extends IHasModel, IItemProvider {
      * @return расположение в реестре
      */
     @Nonnull
-    default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.identifier(String.format("wood.%s.%s", getBlockVariant(), getType()));
+    default String getName() {
+        return String.format("wood.%s.%s", getBlockVariant(), getType());
     }
 
     /**
@@ -46,21 +46,6 @@ public interface IWoodBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.identifier(String.format("wood/%s", getBlockVariant()));
-    }
-
-    @Nonnull
-    default String getName() {
-        return String.format("wood.%s.%s", getBlockVariant(), getType());
-    }
-
-    /**
-     * Возвращает локализованное имя для данного деревянного блока.
-     *
-     * @return локализованное имя
-     */
-    @Nonnull
-    default String getTranslationName() {
-        return getRegistryLocation().toString().toLowerCase().replace(":", ".").replace("/", ".");
+        return TerraFirmaCraft.getID(String.format("wood/%s", getBlockVariant()));
     }
 }

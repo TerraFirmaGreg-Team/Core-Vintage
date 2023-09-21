@@ -17,8 +17,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderTurkeyTFC extends RenderLiving<EntityTurkeyTFC> {
-    private static final ResourceLocation MALE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/turkeym.png");
-    private static final ResourceLocation FEMALE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/turkeyf.png");
+    private static final ResourceLocation MALE = TerraFirmaCraft.getID("textures/entity/animal/huntable/turkeym.png");
+    private static final ResourceLocation FEMALE = TerraFirmaCraft.getID("textures/entity/animal/huntable/turkeyf.png");
 
     public RenderTurkeyTFC(RenderManager manager) {
         super(manager, new ModelTurkeyTFC(), 0.5F);

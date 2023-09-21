@@ -58,10 +58,10 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
         final WoodType woodType = entity.getWood();
         if (woodType != null) {
             //noinspection ConstantConditions
-            return TerraFirmaCraft.identifier("textures/entity/boat/" + woodType + ".png");
+            return TerraFirmaCraft.getID("textures/entity/boat/" + woodType + ".png");
         }
         // Fallback
-        return TerraFirmaCraft.identifier("textures/entity/boat/oak.png");
+        return TerraFirmaCraft.getID("textures/entity/boat/oak.png");
     }
 
     @Override

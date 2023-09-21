@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public final class CapabilityItemHeat {
-    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("item_heat");
+    public static final ResourceLocation KEY = TerraFirmaCraft.getID("item_heat");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IItemHeat for items outside TFC
     @CapabilityInject(IItemHeat.class)
     public static Capability<IItemHeat> ITEM_HEAT_CAPABILITY;

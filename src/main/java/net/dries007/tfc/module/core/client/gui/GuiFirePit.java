@@ -12,9 +12,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class GuiFirePit extends GuiContainerTE<TEFirePit> {
-    private static final ResourceLocation FIRE_PIT_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/fire_pit.png");
-    private static final ResourceLocation FIRE_PIT_COOKING_POT_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/fire_pit_cooking_pot.png");
-    private static final ResourceLocation FIRE_PIT_GRILL_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/fire_pit_grill.png");
+    private static final ResourceLocation FIRE_PIT_BACKGROUND = TerraFirmaCraft.getID("textures/gui/fire_pit.png");
+    private static final ResourceLocation FIRE_PIT_COOKING_POT_BACKGROUND = TerraFirmaCraft.getID("textures/gui/fire_pit_cooking_pot.png");
+    private static final ResourceLocation FIRE_PIT_GRILL_BACKGROUND = TerraFirmaCraft.getID("textures/gui/fire_pit_grill.png");
 
     private final BlockFirePit.FirePitAttachment attachment;
 

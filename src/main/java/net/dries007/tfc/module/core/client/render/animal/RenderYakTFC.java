@@ -15,8 +15,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderYakTFC extends RenderAnimalTFC<EntityYakTFC> {
-    private static final ResourceLocation TEXTURE_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/yak_young.png");
-    private static final ResourceLocation TEXTURE_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/yak_young.png");
+    private static final ResourceLocation TEXTURE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/yak_young.png");
+    private static final ResourceLocation TEXTURE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/yak_young.png");
 
     public RenderYakTFC(RenderManager renderManager) {
         super(renderManager, new ModelYakTFC(), 0.7F, TEXTURE_YOUNG, TEXTURE_OLD);

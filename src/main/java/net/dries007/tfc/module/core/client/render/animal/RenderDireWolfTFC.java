@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderDireWolfTFC extends RenderLiving<EntityDireWolfTFC> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/predators/direwolf.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/direwolf.png");
 
     public RenderDireWolfTFC(RenderManager renderManager) {
         super(renderManager, new ModelDireWolfTFC(), 0.7F);

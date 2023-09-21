@@ -36,14 +36,11 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
 
         this.variant = variant;
         this.type = type;
+        this.useNeighborBrightness = true;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);
-        useNeighborBrightness = true;
 
         OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }

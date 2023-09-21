@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public final class CapabilityPlayerData {
-    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("player_skills");
+    public static final ResourceLocation KEY = TerraFirmaCraft.getID("player_skills");
     @CapabilityInject(IPlayerData.class)
     public static Capability<IPlayerData> CAPABILITY;
 

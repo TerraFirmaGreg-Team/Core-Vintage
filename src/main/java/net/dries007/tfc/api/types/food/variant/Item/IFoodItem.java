@@ -30,7 +30,7 @@ public interface IFoodItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.identifier(String.format("food/%s", getType()));
+        return TerraFirmaCraft.getID(String.format("food/%s", getType()));
     }
 
     /**
@@ -40,7 +40,7 @@ public interface IFoodItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.identifier(String.format("food/%s", getType()));
+        return TerraFirmaCraft.getID(String.format("food/%s", getType()));
     }
 
     /**

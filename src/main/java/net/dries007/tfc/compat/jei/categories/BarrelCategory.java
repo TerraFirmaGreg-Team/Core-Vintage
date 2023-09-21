@@ -16,8 +16,8 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class BarrelCategory extends BaseRecipeCategory<BarrelRecipeWrapper> {
-    private static final ResourceLocation ICONS = TerraFirmaCraft.identifier("textures/gui/icons/jei.png");
-    private static final ResourceLocation BARREL_TEXTURES = TerraFirmaCraft.identifier("textures/gui/barrel.png");
+    private static final ResourceLocation ICONS = TerraFirmaCraft.getID("textures/gui/icons/jei.png");
+    private static final ResourceLocation BARREL_TEXTURES = TerraFirmaCraft.getID("textures/gui/barrel.png");
 
     private final IDrawableStatic fluidSlotBackgroound, fluidSlot;
     private final IDrawableStatic slot;

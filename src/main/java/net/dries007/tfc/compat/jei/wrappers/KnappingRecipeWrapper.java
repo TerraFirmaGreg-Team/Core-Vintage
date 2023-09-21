@@ -20,11 +20,11 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class KnappingRecipeWrapper implements IRecipeWrapper {
-    private static final ResourceLocation CLAY_DISABLED_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button_disabled.png");
-    private static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button_fire_disabled.png");
-    private static final ResourceLocation CLAY_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button.png");
-    private static final ResourceLocation FIRE_CLAY_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/clay_button_fire.png");
-    private static final ResourceLocation LEATHER_TEXTURE = TerraFirmaCraft.identifier("textures/gui/knapping/leather_button.png");
+    private static final ResourceLocation CLAY_DISABLED_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_disabled.png");
+    private static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_fire_disabled.png");
+    private static final ResourceLocation CLAY_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button.png");
+    private static final ResourceLocation FIRE_CLAY_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_fire.png");
+    private static final ResourceLocation LEATHER_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/leather_button.png");
 
     private static final List<ResourceLocation> ROCK_TEXTURES = new ArrayList<>();
     protected final KnappingRecipe recipe;

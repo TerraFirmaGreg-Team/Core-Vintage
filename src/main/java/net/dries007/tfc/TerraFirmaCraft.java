@@ -5,6 +5,8 @@ import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.module.ModuleManager;
 import net.dries007.tfc.module.core.ModuleCorePost;
 import net.dries007.tfc.module.core.common.CommonProxy;
+import net.dries007.tfc.module.rock.ModuleRock;
+import net.dries007.tfc.module.soil.ModuleSoil;
 import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.minecraft.util.ResourceLocation;
@@ -55,7 +57,7 @@ public final class TerraFirmaCraft {
         return INSTANCE;
     }
 
-    public static ResourceLocation identifier(String path) {
+    public static ResourceLocation getID(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
 
@@ -71,6 +73,8 @@ public final class TerraFirmaCraft {
     public void onConstructionEvent(FMLConstructionEvent event) {
 
         this.moduleManager.registerModules(
+                ModuleRock.class,
+                ModuleSoil.class,
                 ModuleWood.class
         );
 

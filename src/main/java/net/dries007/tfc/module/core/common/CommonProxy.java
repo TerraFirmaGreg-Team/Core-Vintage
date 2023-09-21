@@ -52,7 +52,6 @@ import net.dries007.tfc.module.metal.MetalModule;
 import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.dries007.tfc.module.plant.PlantModule;
 import net.dries007.tfc.module.rock.ModuleRock;
-import net.dries007.tfc.module.soil.ModuleSoil;
 import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
 import net.dries007.tfc.module.wood.common.tile.TEWoodChest;
 import net.dries007.tfc.module.wood.common.tile.TEWoodLoom;
@@ -159,7 +158,7 @@ public class CommonProxy {
         registerTE(TENestBox.class, "nest_box");
         registerTE(TELogPile.class, "log_pile");
         registerTE(TEFirePit.class, "fire_pit");
-        registerTE(TEToolRack.class, "tool_rack");
+        registerTE(TEWoodToolRack.class, "tool_rack");
         registerTE(TEWoodLoom.class, "loom");
         registerTE(TEBellows.class, "bellows");
         registerTE(TEWoodBarrel.class, "barrel");
@@ -277,8 +276,6 @@ public class CommonProxy {
     }
 
     public void onPreInit(FMLPreInitializationEvent event) {
-        ModuleRock.preInit();
-        ModuleSoil.preInit();
         //TreeModule.preInit();
         MetalModule.preInit();
         FoodModule.preInit();

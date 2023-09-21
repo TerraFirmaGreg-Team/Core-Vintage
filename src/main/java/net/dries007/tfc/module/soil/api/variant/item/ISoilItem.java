@@ -34,8 +34,8 @@ public interface ISoilItem extends IHasModel {
      * @return расположение в реестре
      */
     @Nonnull
-    default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.identifier(String.format("soil/%s/%s", getItemVariant(), getType()));
+    default String getName() {
+        return String.format("soil.%s.%s", getItemVariant(), getType());
     }
 
     /**
@@ -45,16 +45,6 @@ public interface ISoilItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.identifier(String.format("soil/%s", getItemVariant()));
-    }
-
-    /**
-     * Возвращает локализованное имя для данного подтипа деревянного предмета.
-     *
-     * @return локализованное имя
-     */
-    @Nonnull
-    default String getTranslationName() {
-        return getRegistryLocation().toString().toLowerCase().replace(":", ".").replace("/", ".");
+        return TerraFirmaCraft.getID(String.format("soil/%s/%s", getItemVariant(), getType()));
     }
 }

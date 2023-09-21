@@ -41,43 +41,41 @@ public interface IRockBlock extends IHasModel, IItemProvider {
     }
 
     /**
-     * Возвращает местоположение регистрации блока породы.
-     *
-     * @return Местоположение регистрации блока породы.
-     */
-    @Nonnull
-    default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.identifier(String.format("rock/%s/%s", getBlockVariant(), getType()));
-    }
-
-    /**
-     * Возвращает местоположение ресурса блока породы.
-     *
-     * @return Местоположение ресурса блока породы.
-     */
-    @Nonnull
-    default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.identifier(String.format("rock/%s", getBlockVariant()));
-    }
-
-    /**
-     * Возвращает имя перевода блока породы.
-     *
-     * @return Имя перевода блока породы.
-     */
-    @Nonnull
-    default String getTranslationName() {
-        return getRegistryLocation().toString().toLowerCase()
-                .replace(":", ".")
-                .replace("/", ".");
-    }
-
-    /**
      * Возвращает окончательную твердость блока породы.
      *
      * @return Окончательная твердость блока породы.
      */
     default float getFinalHardness() {
         return getBlockVariant().getBaseHardness() + getCategory().getHardnessModifier();
+    }
+
+    /**
+     * Возвращает имя объекта.
+     *
+     * @return Имя объекта.
+     */
+    @Nonnull
+    default String getName() {
+        return String.format("rock.%s.%s", getBlockVariant(), getType());
+    }
+
+    /**
+     * Возвращает расположение в реестре для данного подтипа блока.
+     *
+     * @return Расположение в реестре.
+     */
+    @Nonnull
+    default ResourceLocation getRegistryLocation() {
+        return TerraFirmaCraft.getID(String.format("rock.%s.%s", getBlockVariant(), getType()));
+    }
+
+    /**
+     * Возвращает местоположение ресурса блока породы.
+     *
+     * @return Расположение ресурса.
+     */
+    @Nonnull
+    default ResourceLocation getResourceLocation() {
+        return TerraFirmaCraft.getID(String.format("rock/%s", getBlockVariant()));
     }
 }

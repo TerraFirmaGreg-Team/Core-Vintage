@@ -24,10 +24,6 @@ public class ItemSoilPile extends TFCItem implements ISoilItem {
         this.variant = variant;
         this.type = type;
 
-        setCreativeTab(CreativeTabsTFC.SOIL);
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-
         OreDictionaryHelper.register(this, variant.toString());
         OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
@@ -60,6 +56,6 @@ public class ItemSoilPile extends TFCItem implements ISoilItem {
     @Override
     public void onModelRegister() {
         ModelLoader.setCustomModelResourceLocation(this, 0,
-                new ModelResourceLocation(getRegistryLocation(), "normal"));
+                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

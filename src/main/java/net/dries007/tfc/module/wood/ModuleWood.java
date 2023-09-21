@@ -4,6 +4,8 @@ import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.wood.api.type.WoodTypeHandler;
+import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariantHandler;
+import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariantHandler;
 import net.dries007.tfc.module.wood.init.BlockInitializer;
 import net.dries007.tfc.module.wood.init.EntityInitializer;
 import net.dries007.tfc.module.wood.init.ItemInitializer;
@@ -46,6 +48,9 @@ public class ModuleWood extends ModuleBase {
     @Override
     public void onRegister(Registry registry) {
         WoodTypeHandler.init();
+        WoodBlockVariantHandler.init();
+        WoodItemVariantHandler.init();
+
         BlockInitializer.onRegister(registry);
         ItemInitializer.onRegister(registry);
         EntityInitializer.onRegister(registry);

@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderGrizzlyBearTFC extends RenderLiving<EntityGrizzlyBearTFC> {
-    private static final ResourceLocation BEAR_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/predators/grizzlybear.png");
+    private static final ResourceLocation BEAR_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/grizzlybear.png");
 
     public RenderGrizzlyBearTFC(RenderManager renderManager) {
         super(renderManager, new ModelGrizzlyBearTFC(), 0.7F);

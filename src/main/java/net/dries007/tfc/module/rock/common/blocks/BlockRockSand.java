@@ -12,10 +12,9 @@ public class BlockRockSand extends BlockRockFallable {
     public BlockRockSand(RockBlockVariant variant, RockType type) {
         super(Material.SAND, variant, type);
 
-        FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL);
-
         setSoundType(SoundType.SAND);
 
+        FallingBlockManager.registerFallable(this, FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL);
         DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.SANDLIKE);
     }
 

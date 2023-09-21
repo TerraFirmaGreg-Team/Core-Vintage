@@ -9,7 +9,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class CapabilityWorldTracker {
-    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("world_tracker");
+    public static final ResourceLocation KEY = TerraFirmaCraft.getID("world_tracker");
     @CapabilityInject(WorldTracker.class)
     public static Capability<WorldTracker> CAPABILITY = Helpers.getNull();
 

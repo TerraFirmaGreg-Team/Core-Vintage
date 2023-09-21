@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class KnappingCategory extends BaseRecipeCategory<KnappingRecipeWrapper> {
-    private static final ResourceLocation KNAP_TEXTURES = TerraFirmaCraft.identifier("textures/gui/knapping.png");
+    private static final ResourceLocation KNAP_TEXTURES = TerraFirmaCraft.getID("textures/gui/knapping.png");
 
     private final IDrawableStatic arrow, outputSlot;
 

@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 
 public class GuiButtonPlayerInventoryTab extends GuiButtonTFC {
-    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.identifier("textures/gui/icons.png");
+    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.getID("textures/gui/icons.png");
 
     private final TFCGuiHandler.Type guiType;
     private final boolean isActive;

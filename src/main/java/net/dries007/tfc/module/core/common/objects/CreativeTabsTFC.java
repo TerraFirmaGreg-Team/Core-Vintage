@@ -16,9 +16,9 @@ import javax.annotation.Nonnull;
 
 public final class CreativeTabsTFC {
 
-    public static final CreativeTabs ROCK = new TFCCreativeTab("rock", "tfc:rock/raw/shale");
-    public static final CreativeTabs SOIL = new TFCCreativeTab("soil", "tfc:soil/grass/silt");
-    public static final CreativeTabs WOOD = new TFCCreativeTab("wood", "tfc:wood/log/pine");
+    public static final CreativeTabs ROCK = new TFCCreativeTab("rock", "tfc:rock.raw.shale");
+    public static final CreativeTabs SOIL = new TFCCreativeTab("soil", "tfc:soil.grass.silt");
+    public static final CreativeTabs WOOD = new TFCCreativeTab("wood", "tfc:wood.planks.pine");
     public static final CreativeTabs METAL = new TFCCreativeTab("metal", "tfc:metal/anvil/red_steel");
     public static final CreativeTabs POTTERY = new TFCCreativeTab("pottery", "tfc:ceramics/fired/mold/ingot");
     public static final CreativeTabs FOOD = new TFCCreativeTab("food", "tfc:food/green_apple");

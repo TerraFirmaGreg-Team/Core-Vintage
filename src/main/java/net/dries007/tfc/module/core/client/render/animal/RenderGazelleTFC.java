@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderGazelleTFC extends RenderLiving<EntityGazelleTFC> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/gazelle.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/gazelle.png");
 
     public RenderGazelleTFC(RenderManager manager) {
         super(manager, new ModelGazelleTFC(), 0.7F);

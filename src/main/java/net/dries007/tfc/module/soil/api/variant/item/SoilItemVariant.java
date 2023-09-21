@@ -44,11 +44,8 @@ public class SoilItemVariant {
         }
 
         for (var type : SoilType.getSoilTypes()) {
-            var soilItem = this.create(type);
-
-            if (SoilStorage.SOIL_ITEMS.put(new Pair<>(this, type), soilItem) != null)
+            if (SoilStorage.SOIL_ITEMS.put(new Pair<>(this, type), this.create(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-            ITEMS.add((Item) soilItem);
         }
     }
 

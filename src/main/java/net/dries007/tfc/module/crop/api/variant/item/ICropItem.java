@@ -35,7 +35,7 @@ public interface ICropItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.identifier(String.format("crop/%s/%s", getItemVariant(), getType()));
+        return TerraFirmaCraft.getID(String.format("crop/%s/%s", getItemVariant(), getType()));
     }
 
     /**
@@ -45,7 +45,7 @@ public interface ICropItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.identifier(String.format("crop/%s", getItemVariant()));
+        return TerraFirmaCraft.getID(String.format("crop/%s", getItemVariant()));
     }
 
     /**

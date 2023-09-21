@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderHyenaTFC extends RenderLiving<EntityHyenaTFC> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/predators/hyena.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/hyena.png");
 
     public RenderHyenaTFC(RenderManager renderManager) {
         super(renderManager, new ModelHyenaTFC(), 0.7F);

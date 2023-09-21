@@ -40,9 +40,6 @@ public abstract class BlockSoil extends TFCBlock implements ISoilBlock {
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.SOIL);
         setSoundType(SoundType.GROUND);
         setHardness(2.0F);
         setHarvestLevel("shovel", 0);

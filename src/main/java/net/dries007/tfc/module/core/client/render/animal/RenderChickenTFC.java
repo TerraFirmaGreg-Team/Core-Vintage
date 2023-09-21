@@ -18,13 +18,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderChickenTFC extends RenderLiving<EntityChickenTFC> {
-    private static final ResourceLocation CHICKEN_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/chicken_young.png");
-    private static final ResourceLocation CHICKEN_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/chicken_old.png");
+    private static final ResourceLocation CHICKEN_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/chicken_young.png");
+    private static final ResourceLocation CHICKEN_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/chicken_old.png");
 
-    private static final ResourceLocation ROOSTER_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/rooster_young.png");
-    private static final ResourceLocation ROOSTER_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/rooster_old.png");
+    private static final ResourceLocation ROOSTER_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/rooster_young.png");
+    private static final ResourceLocation ROOSTER_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/rooster_old.png");
 
-    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/livestock/chick.png");
+    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/livestock/chick.png");
 
     public RenderChickenTFC(RenderManager manager) {
         super(manager, new ModelChickenTFC(), 0.3F);

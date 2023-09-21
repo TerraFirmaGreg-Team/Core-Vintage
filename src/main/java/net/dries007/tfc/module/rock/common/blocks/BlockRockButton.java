@@ -37,10 +37,7 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
         this.type = type;
 
         setSoundType(SoundType.STONE);
-        setCreativeTab(CreativeTabsTFC.ROCK);
         setHardness(0.5f);
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
 
         OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }

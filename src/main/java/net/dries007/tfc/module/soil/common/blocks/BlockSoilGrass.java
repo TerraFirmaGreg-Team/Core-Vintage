@@ -73,10 +73,6 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
         this.variant = variant;
         this.type = type;
 
-
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.SOIL);
         setSoundType(SoundType.PLANT);
         setHardness(2.1F);
         setHarvestLevel("shovel", 0);

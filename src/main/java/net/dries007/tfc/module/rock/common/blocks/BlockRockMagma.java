@@ -39,12 +39,9 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock, IItemSize 
         this.variant = variant;
         this.type = type;
 
-        setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
 
         if (getItemBlock() != null) {
             OreDictionaryHelper.register(this, variant.toString());

@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class CastingCategory extends BaseRecipeCategory<CastingRecipeWrapper> {
-    private static final ResourceLocation ICONS = TerraFirmaCraft.identifier("textures/gui/icons/jei.png");
+    private static final ResourceLocation ICONS = TerraFirmaCraft.getID("textures/gui/icons/jei.png");
 
     private final IDrawableStatic slot;
     private final IDrawableStatic arrow;

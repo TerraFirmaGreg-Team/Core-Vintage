@@ -44,11 +44,8 @@ public class RockItemVariant {
         }
 
         for (var type : RockType.getRockTypes()) {
-            var rockItem = this.create(type);
-
-            if (ROCK_ITEMS.put(new Pair<>(this, type), rockItem) != null)
+            if (ROCK_ITEMS.put(new Pair<>(this, type), this.create(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-            ITEMS.add((Item) rockItem);
         }
     }
 

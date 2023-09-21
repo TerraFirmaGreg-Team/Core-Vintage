@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderSaberToothTFC extends RenderLiving<EntitySaberToothTFC> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/predators/sabertooth.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/sabertooth.png");
 
     public RenderSaberToothTFC(RenderManager renderManager) {
         super(renderManager, new ModelSaberToothTFC(), 0.7F);

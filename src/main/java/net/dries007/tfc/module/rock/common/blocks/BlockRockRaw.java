@@ -35,13 +35,14 @@ public class BlockRockRaw extends BlockRock {
     public BlockRockRaw(RockBlockVariant variant, RockType type) {
         super(variant, type);
 
-        setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
+        setDefaultState(getBlockState().getBaseState()
+                .withProperty(CAN_FALL, true));
 
         // Copy as each raw stone has an unique resultingState
         var spec = new FallingBlockManager.Specification(FallingBlockManager.Specification.COLLAPSABLE_ROCK);
         spec.setResultingState(RockStorage.getRockBlock(COBBLE, type).getDefaultState());
-        FallingBlockManager.registerFallable(this, spec);
 
+        FallingBlockManager.registerFallable(this, spec);
         OreDictionaryHelper.register(this, "stone");
     }
 

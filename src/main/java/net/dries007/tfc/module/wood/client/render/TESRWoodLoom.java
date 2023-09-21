@@ -29,7 +29,7 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
             woodType = te.getWood();
             GlStateManager.pushMatrix();
             Helpers.setWoodColor(woodType.getColor());
-            this.bindTexture(TerraFirmaCraft.identifier("textures/blocks/wood/planks/pattern.png"));
+            this.bindTexture(TerraFirmaCraft.getID("textures/blocks/wood/planks/pattern.png"));
 
             GlStateManager.disableLighting();
 

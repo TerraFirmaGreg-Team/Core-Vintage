@@ -27,7 +27,7 @@ import static net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil.SLO
 
 @SideOnly(Side.CLIENT)
 public class GuiAnvilPlan extends GuiContainerTE<TEMetalAnvil> {
-    public static final ResourceLocation PLAN_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/anvil_plan.png");
+    public static final ResourceLocation PLAN_BACKGROUND = TerraFirmaCraft.getID("textures/gui/anvil_plan.png");
 
     private final ItemStack inputStack;
     private int page;

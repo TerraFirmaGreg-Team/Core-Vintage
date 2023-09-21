@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderMongooseTFC extends RenderLiving<EntityMongooseTFC> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/huntable/mongoose.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/mongoose.png");
 
     public RenderMongooseTFC(RenderManager renderManager) {
         super(renderManager, new ModelMongooseTFC(), 0.7F);

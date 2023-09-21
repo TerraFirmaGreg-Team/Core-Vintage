@@ -23,7 +23,7 @@ import java.util.List;
  * Custom heat + size capability for stick items.
  */
 public class ItemStickCapability extends ItemHeatHandler implements IItemSize {
-    public static final ResourceLocation KEY = TerraFirmaCraft.identifier("stick");
+    public static final ResourceLocation KEY = TerraFirmaCraft.getID("stick");
     private static final float MELTING_POINT = 40f;
     private static final float HEAT_CAPACITY = 1f;
 

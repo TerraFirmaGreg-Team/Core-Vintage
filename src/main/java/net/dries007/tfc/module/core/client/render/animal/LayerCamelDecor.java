@@ -16,7 +16,7 @@ import java.util.stream.IntStream;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class LayerCamelDecor implements LayerRenderer<EntityCamelTFC> {
-    private static final ResourceLocation[] CAMEL_DECOR_TEXTURES = IntStream.range(0, 16).mapToObj(i -> TerraFirmaCraft.identifier("textures/entity/animal/livestock/decor/" + EnumDyeColor.byMetadata(i).getName() + ".png")).toArray(ResourceLocation[]::new);
+    private static final ResourceLocation[] CAMEL_DECOR_TEXTURES = IntStream.range(0, 16).mapToObj(i -> TerraFirmaCraft.getID("textures/entity/animal/livestock/decor/" + EnumDyeColor.byMetadata(i).getName() + ".png")).toArray(ResourceLocation[]::new);
     private final RenderCamelTFC renderer;
     private final ModelCamelTFC model = new ModelCamelTFC(0.51F);
 

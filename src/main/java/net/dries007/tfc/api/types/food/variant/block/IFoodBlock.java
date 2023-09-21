@@ -35,7 +35,7 @@ public interface IFoodBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.identifier(String.format("food/%s/%s", getBlockVariant(), getType()));
+        return TerraFirmaCraft.getID(String.format("food/%s/%s", getBlockVariant(), getType()));
     }
 
     /**
@@ -45,7 +45,7 @@ public interface IFoodBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.identifier(String.format("food/%s", getBlockVariant()));
+        return TerraFirmaCraft.getID(String.format("food/%s", getBlockVariant()));
     }
 
     /**

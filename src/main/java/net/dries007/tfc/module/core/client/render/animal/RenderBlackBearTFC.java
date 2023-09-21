@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderBlackBearTFC extends RenderLiving<EntityBlackBearTFC> {
-    private static final ResourceLocation BLACKBEAR_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/predators/blackbear.png");
+    private static final ResourceLocation BLACKBEAR_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/blackbear.png");
 
     public RenderBlackBearTFC(RenderManager renderManager) {
         super(renderManager, new ModelBlackBearTFC(), 0.7F);

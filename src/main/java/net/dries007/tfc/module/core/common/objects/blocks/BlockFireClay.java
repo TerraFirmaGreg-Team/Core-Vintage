@@ -27,7 +27,7 @@ public class BlockFireClay extends TFCBlock implements IItemSize {
         setHardness(1.0F);
 
         setCreativeTab(CreativeTabsTFC.ROCK);
-        setRegistryName(TerraFirmaCraft.identifier("fire_clay_block"));
+        setRegistryName(TerraFirmaCraft.getID("fire_clay_block"));
         setTranslationKey(Tags.MOD_ID + ".fire_clay_block");
     }
 

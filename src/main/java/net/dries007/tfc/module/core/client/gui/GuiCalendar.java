@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiCalendar extends GuiContainerTFC {
-    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.identifier("textures/gui/player_calendar.png");
+    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.getID("textures/gui/player_calendar.png");
 
     public GuiCalendar(Container container, InventoryPlayer playerInv) {
         super(container, playerInv, BACKGROUND);

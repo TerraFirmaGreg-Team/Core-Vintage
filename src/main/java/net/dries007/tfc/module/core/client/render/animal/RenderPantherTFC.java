@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderPantherTFC extends RenderLiving<EntityPantherTFC> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/predators/panther.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/panther.png");
 
     public RenderPantherTFC(RenderManager renderManager) {
         super(renderManager, new ModelPantherTFC(), 0.7F);

@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderCoyoteTFC extends RenderLiving<EntityCoyoteTFC> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/predators/coyote.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/coyote.png");
 
     public RenderCoyoteTFC(RenderManager renderManager) {
         super(renderManager, new ModelCoyoteTFC(), 0.7F);

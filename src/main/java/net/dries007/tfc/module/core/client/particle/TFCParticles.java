@@ -25,15 +25,15 @@ import java.util.function.Supplier;
  */
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = Tags.MOD_ID)
 public enum TFCParticles {
-    STEAM(TerraFirmaCraft.identifier("particle/steam"), () -> ParticleSteam::new),
-    FIRE_PIT_SMOKE1(TerraFirmaCraft.identifier("particle/fire_pit_smoke1"), () -> ParticleFirePitSmoke::new),
-    FIRE_PIT_SMOKE2(TerraFirmaCraft.identifier("particle/fire_pit_smoke2"), () -> ParticleFirePitSmoke::new),
-    FIRE_PIT_SMOKE3(TerraFirmaCraft.identifier("particle/fire_pit_smoke3"), () -> ParticleFirePitSmoke::new),
-    LEAF1(TerraFirmaCraft.identifier("particle/leaf1"), () -> ParticleLeaf::new),
-    LEAF2(TerraFirmaCraft.identifier("particle/leaf2"), () -> ParticleLeaf::new),
-    LEAF3(TerraFirmaCraft.identifier("particle/leaf3"), () -> ParticleLeaf::new),
-    SPARK(TerraFirmaCraft.identifier("particle/spark"), () -> ParticleSpark::new),
-    BUBBLE(TerraFirmaCraft.identifier("particle/bubble"), () -> ParticleBubbleTFC::new);
+    STEAM(TerraFirmaCraft.getID("particle/steam"), () -> ParticleSteam::new),
+    FIRE_PIT_SMOKE1(TerraFirmaCraft.getID("particle/fire_pit_smoke1"), () -> ParticleFirePitSmoke::new),
+    FIRE_PIT_SMOKE2(TerraFirmaCraft.getID("particle/fire_pit_smoke2"), () -> ParticleFirePitSmoke::new),
+    FIRE_PIT_SMOKE3(TerraFirmaCraft.getID("particle/fire_pit_smoke3"), () -> ParticleFirePitSmoke::new),
+    LEAF1(TerraFirmaCraft.getID("particle/leaf1"), () -> ParticleLeaf::new),
+    LEAF2(TerraFirmaCraft.getID("particle/leaf2"), () -> ParticleLeaf::new),
+    LEAF3(TerraFirmaCraft.getID("particle/leaf3"), () -> ParticleLeaf::new),
+    SPARK(TerraFirmaCraft.getID("particle/spark"), () -> ParticleSpark::new),
+    BUBBLE(TerraFirmaCraft.getID("particle/bubble"), () -> ParticleBubbleTFC::new);
 
     private final ResourceLocation location;
     private final Supplier<IParticleFactoryTFC> factorySupplier;

@@ -386,7 +386,7 @@ public class TFCSounds {
     }
 
     private static SoundEvent createSoundEvent(String name) {
-        final var soundID = TerraFirmaCraft.identifier(name);
+        final var soundID = TerraFirmaCraft.getID(name);
         return new SoundEvent(soundID).setRegistryName(soundID);
     }
 }

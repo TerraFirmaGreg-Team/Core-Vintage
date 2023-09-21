@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderCougarTFC extends RenderLiving<EntityCougarTFC> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/predators/cougar.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/cougar.png");
 
     public RenderCougarTFC(RenderManager renderManager) {
         super(renderManager, new ModelCougarTFC(), 0.7F);

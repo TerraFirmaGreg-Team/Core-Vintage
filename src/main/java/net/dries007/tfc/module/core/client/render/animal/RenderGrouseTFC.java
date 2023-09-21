@@ -18,13 +18,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderGrouseTFC extends RenderLiving<EntityGrouseTFC> {
-    private static final ResourceLocation FEMALE_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/grousef_young.png");
-    private static final ResourceLocation FEMALE_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/grousef_old.png");
+    private static final ResourceLocation FEMALE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/grousef_young.png");
+    private static final ResourceLocation FEMALE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/grousef_old.png");
 
-    private static final ResourceLocation MALE_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/grousem_young.png");
-    private static final ResourceLocation MALE_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/grousem_old.png");
+    private static final ResourceLocation MALE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/grousem_young.png");
+    private static final ResourceLocation MALE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/grousem_old.png");
 
-    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/livestock/grouse_chick.png");
+    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/livestock/grouse_chick.png");
 
     public RenderGrouseTFC(RenderManager manager) {
         super(manager, new ModelGrouseTFC(), 0.3F);

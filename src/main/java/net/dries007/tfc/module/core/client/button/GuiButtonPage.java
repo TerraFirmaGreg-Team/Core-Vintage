@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 
 public class GuiButtonPage extends GuiButton implements IButtonTooltip {
-    private static final ResourceLocation ICONS = TerraFirmaCraft.identifier("textures/gui/icons.png");
+    private static final ResourceLocation ICONS = TerraFirmaCraft.getID("textures/gui/icons.png");
     private final Type type;
     private final String tooltip; // Lang key
 

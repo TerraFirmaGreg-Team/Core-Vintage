@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.wood.client.render;
 
-import net.dries007.tfc.module.core.common.objects.tileentities.TEToolRack;
+import net.dries007.tfc.module.core.common.objects.tileentities.TEWoodToolRack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TESRWoodToolRack extends TileEntitySpecialRenderer<TEToolRack> {
+public class TESRWoodToolRack extends TileEntitySpecialRenderer<TEWoodToolRack> {
     //direction, slot, axis, that's the order.
     private static final float[][][] ITEM_LOCATION = new float[4][4][3];
     private static final float[] META_TO_ANGLE = new float[]{180f, 90f, 0f, 270f};
@@ -60,7 +60,7 @@ public class TESRWoodToolRack extends TileEntitySpecialRenderer<TEToolRack> {
     }
 
     @Override
-    public void render(TEToolRack te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TEWoodToolRack te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         {
             int dir = te.getBlockMetadata();
             float blockScale = .5f;

@@ -37,7 +37,7 @@ public class AnvilRecipes {
                 if (material.hasFlag(MaterialFlags.GENERATE_PLATE)) {
                     // Ingot -> Plate
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("ingot_to_plate_" + material.getName()),
+                            TerraFirmaCraft.getID("ingot_to_plate_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotDouble, material)),
                             OreDictUnifier.get(OrePrefix.plate, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -48,7 +48,7 @@ public class AnvilRecipes {
                 if (material.hasFlag(MaterialFlags.GENERATE_ROD)) {
                     // Ingot -> Stick
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("ingot_to_stick_" + material.getName()),
+                            TerraFirmaCraft.getID("ingot_to_stick_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
                             OreDictUnifier.get(OrePrefix.stick, material, 2),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -59,7 +59,7 @@ public class AnvilRecipes {
                 if (material.hasProperty(PropertyKey.TOOL)) {
                     // Ingot x2 -> Sword Head
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("double_ingot_to_sword_" + material.getName()),
+                            TerraFirmaCraft.getID("double_ingot_to_sword_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotDouble, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadSword, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -68,7 +68,7 @@ public class AnvilRecipes {
 
                     // Ingot x3 -> Pickaxe Head
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("triple_ingot_to_pickaxe_" + material.getName()),
+                            TerraFirmaCraft.getID("triple_ingot_to_pickaxe_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadPickaxe, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -77,7 +77,7 @@ public class AnvilRecipes {
 
                     // Ingot x3 -> Axe Head
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("ingot_to_axe_" + material.getName()),
+                            TerraFirmaCraft.getID("ingot_to_axe_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadAxe, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -86,7 +86,7 @@ public class AnvilRecipes {
 
                     // Ingot x1 -> Shovel Head
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("ingot_to_shovel_" + material.getName()),
+                            TerraFirmaCraft.getID("ingot_to_shovel_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadShovel, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -95,7 +95,7 @@ public class AnvilRecipes {
 
                     // Ingot x2 -> Saw Head
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("ingot_to_saw_" + material.getName()),
+                            TerraFirmaCraft.getID("ingot_to_saw_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotDouble, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadSaw, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -104,7 +104,7 @@ public class AnvilRecipes {
 
                     // Ingot x6 -> Hammer Head
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("ingot_to_hammer_" + material.getName()),
+                            TerraFirmaCraft.getID("ingot_to_hammer_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotHex, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadHammer, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -113,7 +113,7 @@ public class AnvilRecipes {
 
                     // Ingot x3 -> Sense Head
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("ingot_to_sense_" + material.getName()),
+                            TerraFirmaCraft.getID("ingot_to_sense_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadSense, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -122,7 +122,7 @@ public class AnvilRecipes {
 
                     // Ingot x1 -> Knife Head
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("ingot_to_knife_" + material.getName()),
+                            TerraFirmaCraft.getID("ingot_to_knife_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -131,7 +131,7 @@ public class AnvilRecipes {
 
                     // Ingot 3x -> Propick
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("ingot_to_propick_" + material.getName()),
+                            TerraFirmaCraft.getID("ingot_to_propick_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadPropick, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -140,7 +140,7 @@ public class AnvilRecipes {
 
                     // Ingot 2x -> Chisel Head
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("ingot_to_chisel_" + material.getName()),
+                            TerraFirmaCraft.getID("ingot_to_chisel_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotDouble, material)),
                             OreDictUnifier.get(TFGOrePrefix.toolHeadChisel, material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -159,7 +159,7 @@ public class AnvilRecipes {
 
                     // Ingot 6x -> TUYERE
                     registry.register(new AnvilRecipe(
-                            TerraFirmaCraft.identifier("ingot_to_tuyere_" + material.getName()),
+                            TerraFirmaCraft.getID("ingot_to_tuyere_" + material.getName()),
                             IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotHex, material)),
                             TFGToolItems.TUYERE.get(material),
                             material.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -170,7 +170,7 @@ public class AnvilRecipes {
         }
 
         registry.register(new AnvilRecipe(
-                TerraFirmaCraft.identifier("high_carbon_steel"),
+                TerraFirmaCraft.getID("high_carbon_steel"),
                 IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.PigIron)),
                 OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.HighCarbonSteel),
                 TFGMaterials.HighCarbonSteel.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -178,7 +178,7 @@ public class AnvilRecipes {
                 HIT_ANY, HIT_ANY, HIT_ANY));
 
         registry.register(new AnvilRecipe(
-                TerraFirmaCraft.identifier("steel"),
+                TerraFirmaCraft.getID("steel"),
                 IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.HighCarbonSteel)),
                 OreDictUnifier.get(OrePrefix.ingot, Materials.Steel),
                 Materials.Steel.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -186,7 +186,7 @@ public class AnvilRecipes {
                 HIT_ANY, HIT_ANY, HIT_ANY));
 
         registry.register(new AnvilRecipe(
-                TerraFirmaCraft.identifier("black_steel"),
+                TerraFirmaCraft.getID("black_steel"),
                 IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.HighCarbonBlackSteel)),
                 OreDictUnifier.get(OrePrefix.ingot, Materials.BlackSteel),
                 Materials.BlackSteel.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -194,7 +194,7 @@ public class AnvilRecipes {
                 HIT_ANY, HIT_ANY, HIT_ANY));
 
         registry.register(new AnvilRecipe(
-                TerraFirmaCraft.identifier("blue_steel"),
+                TerraFirmaCraft.getID("blue_steel"),
                 IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.HighCarbonBlueSteel)),
                 OreDictUnifier.get(OrePrefix.ingot, Materials.BlueSteel),
                 Materials.BlueSteel.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -202,7 +202,7 @@ public class AnvilRecipes {
                 HIT_ANY, HIT_ANY, HIT_ANY));
 
         registry.register(new AnvilRecipe(
-                TerraFirmaCraft.identifier("red_steel"),
+                TerraFirmaCraft.getID("red_steel"),
                 IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.HighCarbonRedSteel)),
                 OreDictUnifier.get(OrePrefix.ingot, Materials.RedSteel),
                 Materials.RedSteel.getProperty(TFGPropertyKey.HEAT).getTier(),
@@ -210,9 +210,9 @@ public class AnvilRecipes {
                 HIT_ANY, HIT_ANY, HIT_ANY));
 
         // Blooms
-        registry.register(new AnvilRecipeMeasurable(TerraFirmaCraft.identifier("refining_bloom"), IIngredient.of(TFCItems.UNREFINED_BLOOM), new ItemStack(TFCItems.REFINED_BLOOM), 2, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
-        registry.register(new AnvilRecipeSplitting(TerraFirmaCraft.identifier("splitting_bloom"), IIngredient.of(TFCItems.REFINED_BLOOM), new ItemStack(TFCItems.REFINED_BLOOM), 144, 2, PUNCH_LAST));
-        registry.register(new AnvilRecipe(TerraFirmaCraft.identifier("iron_bloom"), x -> {
+        registry.register(new AnvilRecipeMeasurable(TerraFirmaCraft.getID("refining_bloom"), IIngredient.of(TFCItems.UNREFINED_BLOOM), new ItemStack(TFCItems.REFINED_BLOOM), 2, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
+        registry.register(new AnvilRecipeSplitting(TerraFirmaCraft.getID("splitting_bloom"), IIngredient.of(TFCItems.REFINED_BLOOM), new ItemStack(TFCItems.REFINED_BLOOM), 144, 2, PUNCH_LAST));
+        registry.register(new AnvilRecipe(TerraFirmaCraft.getID("iron_bloom"), x -> {
             if (x.getItem() == TFCItems.REFINED_BLOOM) {
                 IForgeable cap = x.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
                 if (cap instanceof IForgeableMeasurableMetal) {

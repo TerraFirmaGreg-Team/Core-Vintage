@@ -65,7 +65,7 @@ public class BlockMetalCladding extends TFCBlock implements IHasModel {
     public BlockMetalCladding() {
         super(net.minecraft.block.material.Material.IRON);
 
-        this.modelLocation = TerraFirmaCraft.identifier("metal/cladding");
+        this.modelLocation = TerraFirmaCraft.getID("metal/cladding");
 
         var blockRegistryName = "metal/cladding";
         setRegistryName(Tags.MOD_ID, blockRegistryName);

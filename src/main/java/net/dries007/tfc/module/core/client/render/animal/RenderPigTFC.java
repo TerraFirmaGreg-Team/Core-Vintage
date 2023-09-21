@@ -13,8 +13,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderPigTFC extends RenderAnimalTFC<EntityPigTFC> {
-    private static final ResourceLocation PIG_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/pig_young.png");
-    private static final ResourceLocation PIG_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/pig_old.png");
+    private static final ResourceLocation PIG_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/pig_young.png");
+    private static final ResourceLocation PIG_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/pig_old.png");
 
     public RenderPigTFC(RenderManager renderManager) {
         super(renderManager, new ModelPigTFC(), 0.7F, PIG_YOUNG, PIG_OLD);

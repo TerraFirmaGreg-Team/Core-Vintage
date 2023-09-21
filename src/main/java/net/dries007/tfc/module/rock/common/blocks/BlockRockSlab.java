@@ -51,14 +51,11 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
         this.variant = variant;
         this.type = type;
         this.block = getFullBlockFromSlab(variant, type);
-        useNeighborBrightness = true;
+        this.useNeighborBrightness = true;
 
         var state = blockState.getBaseState();
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
         setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.ROCK);
         setSoundType(SoundType.STONE);
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);

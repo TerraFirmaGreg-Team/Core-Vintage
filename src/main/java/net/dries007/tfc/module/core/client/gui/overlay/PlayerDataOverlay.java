@@ -35,7 +35,7 @@ import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public final class PlayerDataOverlay {
-    private static final ResourceLocation ICONS = TerraFirmaCraft.identifier("textures/gui/icons/overlay.png");
+    private static final ResourceLocation ICONS = TerraFirmaCraft.getID("textures/gui/icons/overlay.png");
     private static final ResourceLocation MC_ICONS = new ResourceLocation("minecraft:textures/gui/icons.png");
     private static final PlayerDataOverlay INSTANCE = new PlayerDataOverlay();
 

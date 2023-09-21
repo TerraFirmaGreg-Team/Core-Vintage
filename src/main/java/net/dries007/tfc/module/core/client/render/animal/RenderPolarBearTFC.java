@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderPolarBearTFC extends RenderLiving<EntityPolarBearTFC> {
-    private static final ResourceLocation POLARBEAR_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/predators/polarbear.png");
+    private static final ResourceLocation POLARBEAR_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/polarbear.png");
 
     public RenderPolarBearTFC(RenderManager renderManager) {
         super(renderManager, new ModelPolarBearTFC(), 0.7F);

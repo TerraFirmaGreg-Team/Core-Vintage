@@ -14,10 +14,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderHareTFC extends RenderLiving<EntityHareTFC> {
-    private static final ResourceLocation BROWN = TerraFirmaCraft.identifier("textures/entity/animal/huntable/hare/brown.png");
-    private static final ResourceLocation SPOTTED = TerraFirmaCraft.identifier("textures/entity/animal/huntable/hare/spotted.png");
-    private static final ResourceLocation BLACK = TerraFirmaCraft.identifier("textures/entity/animal/huntable/hare/black.png");
-    private static final ResourceLocation CREAM = TerraFirmaCraft.identifier("textures/entity/animal/huntable/hare/cream.png");
+    private static final ResourceLocation BROWN = TerraFirmaCraft.getID("textures/entity/animal/huntable/hare/brown.png");
+    private static final ResourceLocation SPOTTED = TerraFirmaCraft.getID("textures/entity/animal/huntable/hare/spotted.png");
+    private static final ResourceLocation BLACK = TerraFirmaCraft.getID("textures/entity/animal/huntable/hare/black.png");
+    private static final ResourceLocation CREAM = TerraFirmaCraft.getID("textures/entity/animal/huntable/hare/cream.png");
 
 
     public RenderHareTFC(RenderManager renderManager) {

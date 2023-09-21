@@ -14,8 +14,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAlpacaTFC extends RenderAnimalTFC<EntityAlpacaTFC> {
-    private static final ResourceLocation ALPACA_OLD = TerraFirmaCraft.identifier("textures/entity/animal/livestock/alpaca_old.png");
-    private static final ResourceLocation ALPACA_YOUNG = TerraFirmaCraft.identifier("textures/entity/animal/livestock/alpaca_young.png");
+    private static final ResourceLocation ALPACA_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/alpaca_old.png");
+    private static final ResourceLocation ALPACA_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/alpaca_young.png");
 
     public RenderAlpacaTFC(RenderManager renderManager) {
         super(renderManager, new ModelAlpacaBodyTFC(), 0.7F, ALPACA_YOUNG, ALPACA_OLD);

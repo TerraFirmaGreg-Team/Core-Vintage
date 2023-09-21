@@ -28,7 +28,6 @@ import net.dries007.tfc.module.core.client.util.GrassColorHandler;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.common.CommonProxy;
 import net.dries007.tfc.module.core.common.objects.blocks.BlockThatchBed;
-import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.core.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.module.core.common.objects.entity.animal.*;
 import net.dries007.tfc.module.core.common.objects.entity.projectile.EntityThrownJavelin;
@@ -40,7 +39,6 @@ import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
 import net.dries007.tfc.module.metal.common.MetalStorage;
 import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
-import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.dries007.tfc.module.wood.client.render.*;
 import net.dries007.tfc.module.wood.common.entity.EntityWoodBoat;
 import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
@@ -100,13 +98,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.dries007.tfc.module.core.common.objects.blocks.BlockPlacedHide.SIZE;
+import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.*;
 import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_BLOCKS;
 import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.SHORT_GRASS;
 import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.TALL_GRASS;
 import static net.dries007.tfc.module.plant.common.PlantStorage.PLANT_BLOCKS;
-import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.FARMLAND;
-import static net.dries007.tfc.module.soil.common.SoilStorage.SOIL_BLOCKS;
 import static net.minecraft.block.Block.getBlockFromItem;
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -138,7 +135,7 @@ public class ClientProxy extends CommonProxy {
 
         METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
-        for (var block : TFCBlocks.BLOCKS) {
+        for (var block : BLOCKS) {
             if (block instanceof IHasModel blockModel) {
                 blockModel.onModelRegister();
             } else {
@@ -152,7 +149,7 @@ public class ClientProxy extends CommonProxy {
             ModelHelperTFC.regModel(tree); //Register custom state mapper for branch
         }
 
-        for (var block : TFCBlocks.FLUID)
+        for (var block : FLUID)
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
 
 
@@ -174,7 +171,7 @@ public class ClientProxy extends CommonProxy {
         //==== TESRs =================================================================================================//
 
         ClientRegistry.bindTileEntitySpecialRenderer(TEWoodChest.class, new TESRWoodChest());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEToolRack.class, new TESRWoodToolRack());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodToolRack.class, new TESRWoodToolRack());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPitKiln.class, new TESRPitKiln());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItem.class, new TESRPlacedItem());
@@ -231,19 +228,19 @@ public class ClientProxy extends CommonProxy {
 
         // Blocks with Ignored Properties
 
-        ModelLoader.setCustomStateMapper(TFCBlocks.THATCH_BED, new StateMap.Builder().ignore(BlockThatchBed.OCCUPIED).build());
+        ModelLoader.setCustomStateMapper(THATCH_BED, new StateMap.Builder().ignore(BlockThatchBed.OCCUPIED).build());
 
         // Empty Models
         final ModelResourceLocation empty = new ModelResourceLocation(Tags.MOD_ID + ":empty");
         // todo: switch to hide rack (involves changing mechanics, etc)
         final ModelResourceLocation hideRack = new ModelResourceLocation(Tags.MOD_ID + ":hide_rack");
 
-        ModelLoader.setCustomStateMapper(TFCBlocks.PIT_KILN, blockIn -> ImmutableMap.of(TFCBlocks.PIT_KILN.getDefaultState(), empty));
-        ModelLoader.setCustomStateMapper(TFCBlocks.PLACED_ITEM_FLAT, blockIn -> ImmutableMap.of(TFCBlocks.PLACED_ITEM_FLAT.getDefaultState(), empty));
-        ModelLoader.setCustomStateMapper(TFCBlocks.PLACED_ITEM, blockIn -> ImmutableMap.of(TFCBlocks.PLACED_ITEM.getDefaultState(), empty));
-        ModelLoader.setCustomStateMapper(TFCBlocks.PLACED_HIDE, blockIn -> ImmutableMap.of(TFCBlocks.PLACED_HIDE.getDefaultState()
-                .withProperty(SIZE, ItemAnimalHide.HideSize.SMALL), empty, TFCBlocks.PLACED_HIDE.getDefaultState()
-                .withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM), empty, TFCBlocks.PLACED_HIDE.getDefaultState()
+        ModelLoader.setCustomStateMapper(PIT_KILN, blockIn -> ImmutableMap.of(PIT_KILN.getDefaultState(), empty));
+        ModelLoader.setCustomStateMapper(PLACED_ITEM_FLAT, blockIn -> ImmutableMap.of(PLACED_ITEM_FLAT.getDefaultState(), empty));
+        ModelLoader.setCustomStateMapper(PLACED_ITEM, blockIn -> ImmutableMap.of(PLACED_ITEM.getDefaultState(), empty));
+        ModelLoader.setCustomStateMapper(PLACED_HIDE, blockIn -> ImmutableMap.of(PLACED_HIDE.getDefaultState()
+                .withProperty(SIZE, ItemAnimalHide.HideSize.SMALL), empty, PLACED_HIDE.getDefaultState()
+                .withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM), empty, PLACED_HIDE.getDefaultState()
                 .withProperty(SIZE, ItemAnimalHide.HideSize.LARGE), empty));
 
     }
@@ -260,25 +257,6 @@ public class ClientProxy extends CommonProxy {
         // todo: do something different for conifers - they should have a different color mapping through the seasons
         IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
 
-        //==== Soil ==================================================================================================//
-
-        blockColors.registerBlockColorHandler(grassColor,
-                SOIL_BLOCKS.values()
-                        .stream()
-                        .filter(x -> x.getBlockVariant().isGrass())
-                        .map(s -> (Block) s)
-                        .toArray(Block[]::new));
-
-        blockColors.registerBlockColorHandler((s, w, p, i) ->
-                        BlockSoilFarmland.TINT[s.getValue(BlockSoilFarmland.MOISTURE)],
-                SOIL_BLOCKS.values()
-                        .stream()
-                        .filter(x -> x.getBlockVariant() == FARMLAND)
-                        .map(s -> (Block) s)
-                        .toArray(Block[]::new));
-
-        blockColors.registerBlockColorHandler(grassColor, TFCBlocks.PEAT_GRASS);
-        blockColors.registerBlockColorHandler(grassColor, ROOTY_DIRT_MIMIC);
 
         //==== Plant =================================================================================================//
 
@@ -307,17 +285,6 @@ public class ClientProxy extends CommonProxy {
 
         var blockColors = event.getBlockColors();
 
-        //==== Soil ==================================================================================================//
-
-        itemColors.registerItemColorHandler((s, i) -> blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
-                SOIL_BLOCKS.values()
-                        .stream()
-                        .filter(x -> x.getBlockVariant().isGrass())
-                        .map(s -> (Block) s)
-                        .toArray(Block[]::new));
-
-        itemColors.registerItemColorHandler((s, i) -> blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
-                TFCBlocks.PEAT_GRASS);
 
         //==== Plant =================================================================================================//
 

@@ -50,11 +50,8 @@ public class SoilBlockVariant {
         }
 
         for (var type : SoilType.getSoilTypes()) {
-            var soilBlock = this.create(type);
-
-            if (SoilStorage.SOIL_BLOCKS.put(new Pair<>(this, type), soilBlock) != null)
+            if (SoilStorage.SOIL_BLOCKS.put(new Pair<>(this, type), this.create(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-            BLOCKS.add((Block) soilBlock);
         }
     }
 

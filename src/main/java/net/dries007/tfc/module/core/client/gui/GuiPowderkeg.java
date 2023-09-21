@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 import java.io.IOException;
 
 public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
-    public static final ResourceLocation POWDERKEG_BACKGROUND = TerraFirmaCraft.identifier("textures/gui/powderkeg.png");
+    public static final ResourceLocation POWDERKEG_BACKGROUND = TerraFirmaCraft.getID("textures/gui/powderkeg.png");
     private final String translationKey;
 
     public GuiPowderkeg(Container container, InventoryPlayer playerInv, TEPowderKeg tile, String translationKey) {

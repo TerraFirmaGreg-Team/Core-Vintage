@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderLionTFC extends RenderLiving<EntityLionTFC> {
-    private static final ResourceLocation LIONS_TEXTURE = TerraFirmaCraft.identifier("textures/entity/animal/predators/lions.png");
+    private static final ResourceLocation LIONS_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/lions.png");
 
     public RenderLionTFC(RenderManager manager) {
         super(manager, new ModelLionTFC(), 0.3F);

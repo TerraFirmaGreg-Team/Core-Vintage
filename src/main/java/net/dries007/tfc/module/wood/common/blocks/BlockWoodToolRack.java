@@ -3,7 +3,7 @@ package net.dries007.tfc.module.wood.common.blocks;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.core.common.objects.tileentities.TEToolRack;
+import net.dries007.tfc.module.core.common.objects.tileentities.TEWoodToolRack;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
 import net.dries007.tfc.util.Helpers;
@@ -119,7 +119,7 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         if (!Helpers.canHangAt(worldIn, pos, state.getValue(FACING))) {
             dropBlockAsItem(worldIn, pos, state, 0);
-            TEToolRack te = Helpers.getTE(worldIn, pos, TEToolRack.class);
+            TEWoodToolRack te = Helpers.getTE(worldIn, pos, TEWoodToolRack.class);
             if (te != null) {
                 te.onBreakBlock();
             }
@@ -129,7 +129,7 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
 
     @Override
     public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-        TEToolRack te = Helpers.getTE(worldIn, pos, TEToolRack.class);
+        TEWoodToolRack te = Helpers.getTE(worldIn, pos, TEWoodToolRack.class);
         if (te != null) {
             te.onBreakBlock();
         }
@@ -143,7 +143,7 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
 
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            TEToolRack te = Helpers.getTE(worldIn, pos, TEToolRack.class);
+            TEWoodToolRack te = Helpers.getTE(worldIn, pos, TEWoodToolRack.class);
             if (te != null) {
                 return te.onRightClick(playerIn, hand, getSlotFromPos(state, hitX, hitY, hitZ));
             }
@@ -175,7 +175,7 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEToolRack();
+        return new TEWoodToolRack();
     }
 
     @Override
@@ -184,7 +184,7 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
     public ItemStack getPickBlock(IBlockState state, @Nullable RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         if (target != null) {
             Vec3d vec = target.hitVec.subtract(pos.getX(), pos.getY(), pos.getZ());
-            TEToolRack te = Helpers.getTE(world, pos, TEToolRack.class);
+            TEWoodToolRack te = Helpers.getTE(world, pos, TEWoodToolRack.class);
             if (te != null) {
                 ItemStack item = te.getItems().get(getSlotFromPos(state, (float) vec.x, (float) vec.y, (float) vec.z));
                 if (!item.isEmpty()) {

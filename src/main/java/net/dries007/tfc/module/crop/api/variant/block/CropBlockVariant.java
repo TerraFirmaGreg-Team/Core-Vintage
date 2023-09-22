@@ -36,11 +36,8 @@ public class CropBlockVariant {
         }
 
         for (var type : CropType.getCropTypes()) {
-            var cropBlock = this.create(type);
-
-            if (CROP_BLOCKS.put(new Pair<>(this, type), cropBlock) != null)
+            if (CROP_BLOCKS.put(new Pair<>(this, type), this.create(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-            BLOCKS.add((Block) cropBlock);
         }
     }
 

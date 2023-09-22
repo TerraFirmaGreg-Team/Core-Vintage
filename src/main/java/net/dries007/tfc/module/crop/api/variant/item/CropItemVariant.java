@@ -44,11 +44,8 @@ public class CropItemVariant {
         }
 
         for (var type : CropType.getCropTypes()) {
-            var cropItem = this.create(type);
-
-            if (CROP_ITEMS.put(new Pair<>(this, type), cropItem) != null)
+            if (CROP_ITEMS.put(new Pair<>(this, type), this.create(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-            ITEMS.add((Item) cropItem);
         }
     }
 

@@ -1,11 +1,15 @@
 package net.dries007.tfc.module.rock.api.variant.block;
 
+import gregtech.api.util.LocalizationUtils;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.module.rock.api.category.RockCategory;
 import net.dries007.tfc.module.rock.api.type.RockType;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 
 import javax.annotation.Nonnull;
 
@@ -77,5 +81,10 @@ public interface IRockBlock extends IHasModel, IItemProvider {
     @Nonnull
     default ResourceLocation getResourceLocation() {
         return TerraFirmaCraft.getID(String.format("rock/%s", getBlockVariant()));
+    }
+
+    @Nonnull
+    default String getTranslationName() {
+        return String.format(getBlockVariant().getLocalizedName(), getType().getLocalizedName());
     }
 }

@@ -72,7 +72,7 @@ public class GuiNutrition extends GuiContainerTFC {
                 if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
                     this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
                 }
-                TerraFirmaCraft.NETWORK.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
+                TerraFirmaCraft.network.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
             }
         }
     }

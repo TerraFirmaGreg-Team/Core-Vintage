@@ -16,8 +16,8 @@ public class ItemInitializer {
 
     public static void onRegister(Registry registry) {
 
-        for (var wood : ROCK_ITEMS.values()) {
-            registry.registerItem((Item) wood, wood.getName());
+        for (var item : ROCK_ITEMS.values()) {
+            registry.registerItem((Item) item, item.getName());
         }
     }
 

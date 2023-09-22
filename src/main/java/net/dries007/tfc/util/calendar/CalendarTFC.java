@@ -110,7 +110,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
             world.setWorldTime(currentWorldTime + timeJump);
         }
 
-        TerraFirmaCraft.NETWORK.sendToAll(new PacketCalendarUpdate(this));
+        TerraFirmaCraft.network.sendToAll(new PacketCalendarUpdate(this));
     }
 
     /**
@@ -129,7 +129,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
         calendarTime += worldTimeJump;
         playerTime += worldTimeJump;
 
-        TerraFirmaCraft.NETWORK.sendToAll(new PacketCalendarUpdate(this));
+        TerraFirmaCraft.network.sendToAll(new PacketCalendarUpdate(this));
         return worldTimeJump;
     }
 
@@ -208,7 +208,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
         server.getEntityWorld().getGameRules().setOrCreateGameRule("doDaylightCycle", "false");
 
         resetTo(CalendarWorldData.get(server.getEntityWorld()).getCalendar());
-        TerraFirmaCraft.NETWORK.sendToAll(new PacketCalendarUpdate(this));
+        TerraFirmaCraft.network.sendToAll(new PacketCalendarUpdate(this));
     }
 
     /**
@@ -219,7 +219,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
             playerTime++;
         }
         if (server.getTickCounter() % 10 == 0) {
-            TerraFirmaCraft.NETWORK.sendToAll(new PacketCalendarUpdate(this));
+            TerraFirmaCraft.network.sendToAll(new PacketCalendarUpdate(this));
         }
     }
 
@@ -251,7 +251,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
                 calendarTime += deltaWorldTime;
                 TerraFirmaCraft.LOGGER.debug("Calendar is behind by {} ticks, jumping calendar time to catch up", deltaWorldTime);
             }
-            TerraFirmaCraft.NETWORK.sendToAll(new PacketCalendarUpdate(this));
+            TerraFirmaCraft.network.sendToAll(new PacketCalendarUpdate(this));
         }
     }
 
@@ -267,7 +267,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
         this.daysInMonth = newMonthLength;
         this.calendarTime = (baseMonths * daysInMonth + newDayOfMonth) * ICalendar.TICKS_IN_DAY + baseDayTime;
 
-        TerraFirmaCraft.NETWORK.sendToAll(new PacketCalendarUpdate(this));
+        TerraFirmaCraft.network.sendToAll(new PacketCalendarUpdate(this));
     }
 
     public void setPlayersLoggedOn(boolean arePlayersLoggedOn) {
@@ -281,7 +281,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
             TerraFirmaCraft.LOGGER.info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.", doDaylightCycle);
         }
 
-        TerraFirmaCraft.NETWORK.sendToAll(new PacketCalendarUpdate(this));
+        TerraFirmaCraft.network.sendToAll(new PacketCalendarUpdate(this));
     }
 
     public void setDoDaylightCycle() {
@@ -292,6 +292,6 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
             TerraFirmaCraft.LOGGER.info("Forced doDaylightCycle to false as no players are logged in. Will revert to {} as soon as a player logs in.", doDaylightCycle);
         }
 
-        TerraFirmaCraft.NETWORK.sendToAll(new PacketCalendarUpdate(this));
+        TerraFirmaCraft.network.sendToAll(new PacketCalendarUpdate(this));
     }
 }

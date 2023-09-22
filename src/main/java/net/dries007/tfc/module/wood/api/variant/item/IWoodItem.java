@@ -29,9 +29,9 @@ public interface IWoodItem extends IHasModel {
     WoodType getType();
 
     /**
-     * Возвращает расположение в реестре для данного подтипа деревянного предмета.
+     * Возвращает расположение в реестре для данного подтипа предмета.
      *
-     * @return расположение в реестре
+     * @return Расположение в реестре
      */
     @Nonnull
     default String getName() {
@@ -39,9 +39,9 @@ public interface IWoodItem extends IHasModel {
     }
 
     /**
-     * Возвращает расположение ресурса для данного подтипа деревянного предмета.
+     * Возвращает расположение ресурса для данного подтипа предмета.
      *
-     * @return расположение ресурса
+     * @return Расположение ресурса
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {

@@ -19,6 +19,7 @@ public final class CreativeTabsTFC {
     public static final CreativeTabs ROCK = new TFCCreativeTab("rock", "tfc:rock.raw.shale");
     public static final CreativeTabs SOIL = new TFCCreativeTab("soil", "tfc:soil.grass.silt");
     public static final CreativeTabs WOOD = new TFCCreativeTab("wood", "tfc:wood.planks.pine");
+    public static final CreativeTabs CROP = new TFCCreativeTab("crop", "tfc:crop.seed.rice");
     public static final CreativeTabs METAL = new TFCCreativeTab("metal", "tfc:metal/anvil/red_steel");
     public static final CreativeTabs POTTERY = new TFCCreativeTab("pottery", "tfc:ceramics/fired/mold/ingot");
     public static final CreativeTabs FOOD = new TFCCreativeTab("food", "tfc:food/green_apple");
@@ -38,7 +39,7 @@ public final class CreativeTabsTFC {
         @Nonnull
         public ItemStack createIcon() {
             //noinspection ConstantConditions
-            ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(iconResourceLocation));
+            var stack = new ItemStack(ForgeRegistries.ITEMS.getValue(iconResourceLocation));
             if (!stack.isEmpty()) {
                 // Food stacks shouldn't rot in creative tabs, and these are created on demand instead of beforehand and cached
                 CapabilityFood.setStackNonDecaying(stack);

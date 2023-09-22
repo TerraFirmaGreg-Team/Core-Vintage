@@ -22,3 +22,5 @@ build
 eclipse
 run
 
+src/main/java/com/*
+src/main/java/java/com/codetaylor/mc/athenaeum/ConfigChangedEventHandler.java

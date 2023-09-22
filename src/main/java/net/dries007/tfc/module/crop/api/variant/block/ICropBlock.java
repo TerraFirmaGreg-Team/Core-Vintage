@@ -27,34 +27,32 @@ public interface ICropBlock extends IHasModel, IItemProvider {
     CropBlockVariant getBlockVariant();
 
     /**
-     * Возвращает местоположение регистрации блока культуры.
+     * Возвращает имя объекта.
      *
-     * @return Местоположение регистрации блока культуры.
+     * @return Имя объекта.
      */
     @Nonnull
-    default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.getID(String.format("crop/%s/%s", getBlockVariant(), getType()));
+    default String getName() {
+        return String.format("crop.%s.%s", getBlockVariant(), getType());
     }
 
     /**
-     * Возвращает местоположение ресурса блока культуры.
+     * Возвращает расположение в реестре для данного подтипа блока.
      *
-     * @return Местоположение ресурса блока культуры.
+     * @return Расположение в реестре.
+     */
+    @Nonnull
+    default ResourceLocation getRegistryLocation() {
+        return TerraFirmaCraft.getID(String.format("crop.%s.%s", getBlockVariant(), getType()));
+    }
+
+    /**
+     * Возвращает местоположение ресурса блока породы.
+     *
+     * @return Расположение ресурса.
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
         return TerraFirmaCraft.getID(String.format("crop/%s/%s", getBlockVariant(), getType()));
-    }
-
-    /**
-     * Возвращает имя перевода блока культуры.
-     *
-     * @return Имя перевода блока культуры.
-     */
-    @Nonnull
-    default String getTranslationName() {
-        return getRegistryLocation().toString().toLowerCase()
-                .replace(":", ".")
-                .replace("/", ".");
     }
 }

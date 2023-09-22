@@ -479,7 +479,7 @@ public final class CommonEventHandler {
             IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
             if (playerData != null) {
                 // Sync
-                TerraFirmaCraft.NETWORK.sendTo(new PacketPlayerDataUpdate(playerData.serializeNBT()), player);
+                TerraFirmaCraft.network.sendTo(new PacketPlayerDataUpdate(playerData.serializeNBT()), player);
             }
         }
     }
@@ -514,7 +514,7 @@ public final class CommonEventHandler {
             // Skills / Player data
             IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
             if (cap != null) {
-                TerraFirmaCraft.NETWORK.sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
+                TerraFirmaCraft.network.sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
             }
         }
     }
@@ -554,7 +554,7 @@ public final class CommonEventHandler {
             // Skills
             IPlayerData skills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
             if (skills != null) {
-                TerraFirmaCraft.NETWORK.sendTo(new PacketPlayerDataUpdate(skills.serializeNBT()), player);
+                TerraFirmaCraft.network.sendTo(new PacketPlayerDataUpdate(skills.serializeNBT()), player);
             }
         }
     }
@@ -818,7 +818,7 @@ public final class CommonEventHandler {
             // Calendar Sync / Initialization
             CalendarWorldData data = CalendarWorldData.get(world);
             CalendarTFC.INSTANCE.resetTo(data.getCalendar());
-            TerraFirmaCraft.NETWORK.sendToAll(new PacketCalendarUpdate(CalendarTFC.INSTANCE));
+            TerraFirmaCraft.network.sendToAll(new PacketCalendarUpdate(CalendarTFC.INSTANCE));
         }
 
         if (ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {

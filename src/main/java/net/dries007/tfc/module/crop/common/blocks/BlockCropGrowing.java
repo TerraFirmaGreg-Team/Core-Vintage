@@ -4,6 +4,7 @@ import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.module.core.client.util.CustomStateMap;
 import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;
@@ -46,8 +47,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 import static net.dries007.tfc.module.crop.api.category.CropCategories.PICKABLE;
 import static net.dries007.tfc.module.crop.api.variant.block.CropBlockVariants.DEAD;
+import static net.dries007.tfc.module.crop.api.variant.item.CropItemVariants.SEED;
 
 
 public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlantable, ICropBlock {
@@ -82,9 +85,6 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.FLORA);
         setSoundType(SoundType.PLANT);
         setHardness(0.6f);
 
@@ -97,11 +97,13 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
         return MATURE_AGE;
     }
 
+    @Nonnull
     @Override
     public Item getSeed() {
-        return type.getDropSeed().getItem();
+        return CropStorage.getCropItem(SEED, type);
     }
 
+    @Nonnull
     @Override
     public Item getCrop() {
         return type.getDropFood().getItem();
@@ -224,6 +226,7 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
         return new TECropBase();
     }
 
+    @Nonnull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         if (!isMature(state)) {
@@ -461,8 +464,8 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
         if (getType().getCropCategory() == PICKABLE) {
 
             if (isMature(state)) {
-                var seedDrop = this.getType().getDropSeed();
-                var foodDrop = this.getType().getDropFood();
+                var seedDrop = new ItemStack(this.getSeed());
+                var foodDrop = new ItemStack(this.getCrop());
                 var skill = CapabilityPlayerData.getSkill(playerIn, SkillType.AGRICULTURE);
 
                 if (skill != null) {

@@ -99,9 +99,7 @@ public class CommandPlayerTFC extends CommandBase {
             nutritionStats.reset();
             sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.reset_nutrients"));
         } else {
-            sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_nutrients",
-                    String.format("%.2f", nutritionStats.getAverageNutrition())
-            ));
+            sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_nutrients", String.format("%.2f", nutritionStats.getAverageNutrition())));
             for (Nutrient nutrient : Nutrient.values()) {
                 sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_nutrients_nutrient",
                         new TextComponentTranslation(Helpers.getEnumName(nutrient)),

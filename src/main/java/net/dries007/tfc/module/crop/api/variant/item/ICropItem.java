@@ -29,32 +29,32 @@ public interface ICropItem extends IHasModel {
     CropType getType();
 
     /**
+     * Возвращает имя объекта.
+     *
+     * @return Имя объекта.
+     */
+    @Nonnull
+    default String getName() {
+        return String.format("crop.%s.%s", getItemVariant(), getType());
+    }
+
+    /**
      * Возвращает расположение в реестре для данного подтипа предмета.
      *
-     * @return расположение в реестре
+     * @return Расположение в реестре
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.getID(String.format("crop/%s/%s", getItemVariant(), getType()));
+        return TerraFirmaCraft.getID(String.format("crop.%s.%s", getItemVariant(), getType()));
     }
 
     /**
      * Возвращает расположение ресурса для данного подтипа предмета.
      *
-     * @return расположение ресурса
+     * @return Расположение ресурса.
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.getID(String.format("crop/%s", getItemVariant()));
-    }
-
-    /**
-     * Возвращает локализованное имя для данного подтипа предмета.
-     *
-     * @return локализованное имя
-     */
-    @Nonnull
-    default String getTranslationName() {
-        return getRegistryLocation().toString().toLowerCase().replace(":", ".").replace("/", ".");
+        return TerraFirmaCraft.getID(String.format("crop/%s/%s", getItemVariant(), getType()));
     }
 }

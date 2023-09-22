@@ -279,8 +279,6 @@ public class CommonProxy {
         //TreeModule.preInit();
         MetalModule.preInit();
         FoodModule.preInit();
-        PlantModule.preInit();
-        CropModule.preInit();
         BushModule.preInit();
 
         DrinkableHandler.preInit();

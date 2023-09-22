@@ -49,7 +49,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
         }
         // Send the update regardless so the client can perform the same logic
         if (player instanceof EntityPlayerMP) {
-            TerraFirmaCraft.NETWORK.sendTo(new PacketFoodStatsReplace(), (EntityPlayerMP) player);
+            TerraFirmaCraft.network.sendTo(new PacketFoodStatsReplace(), (EntityPlayerMP) player);
         }
     }
 
@@ -169,7 +169,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 
         // Since this is only called server side, and vanilla has a custom packet for this stuff, we need our own
         if (player instanceof EntityPlayerMP) {
-            TerraFirmaCraft.NETWORK.sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
+            TerraFirmaCraft.network.sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
         }
     }
 

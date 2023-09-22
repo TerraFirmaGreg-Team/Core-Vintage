@@ -26,6 +26,7 @@ repositories {
         }
     }
     mavenLocal() // Must be last for caching to work
+
     flatDir {
         dirs 'libs'
     }
@@ -41,6 +42,8 @@ dependencies {
         
         implementation rfg.deobf("curse.maven:athenaeum-284350:4633750")
         implementation rfg.deobf("curse.maven:dropt-284973:3758733")
+//        compileOnly("curse.maven:crafttweaker-239197:4731280")
+//        compileOnly("curse.maven:game-stages-268655:2951840")
 
 //        implementation("curse.maven:future-mc-310059:3924863")
 //        implementation("curse.maven:forgelin-continuous-456403:4635770")

@@ -6,6 +6,7 @@ import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;
 import net.dries007.tfc.module.crop.api.variant.block.ICropBlock;
+import net.dries007.tfc.module.crop.common.CropStorage;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.block.BlockBush;
@@ -36,6 +37,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static net.dries007.tfc.module.crop.api.variant.item.CropItemVariants.SEED;
+
 @ParametersAreNonnullByDefault
 public class BlockCropDead extends BlockBush implements IGrowingPlant, ICropBlock {
     /* true if the crop spawned in the wild, means it ignores growth conditions i.e. farmland */
@@ -53,9 +56,6 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant, ICropBloc
         this.variant = variant;
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.FLORA);
         setSoundType(SoundType.PLANT);
         setHardness(0.6f);
     }
@@ -93,7 +93,7 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant, ICropBloc
     @Nonnull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return type.getDropSeed().getItem();
+        return CropStorage.getCropItem(SEED, type);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant, ICropBloc
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(type.getDropSeed().getItem());
+        return new ItemStack(CropStorage.getCropItem(SEED, type));
     }
 
     @Override

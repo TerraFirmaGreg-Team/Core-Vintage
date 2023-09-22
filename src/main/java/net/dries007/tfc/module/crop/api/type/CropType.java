@@ -32,7 +32,6 @@ public class CropType {
     private final String name;
     private final CropCategory cropCategory;
     private final Supplier<ItemStack> foodDrop;
-    private final Supplier<ItemStack> seedDrop;
     private final float growthTime;
     private final float tempMinGrow;
     private final float tempMaxGrow;
@@ -48,7 +47,6 @@ public class CropType {
         this.name = builder.name;
         this.cropCategory = builder.category;
         this.foodDrop = builder.foodDrop;
-        this.seedDrop = builder.seedDrop;
 
         this.growthTime = builder.growthTime;
 
@@ -119,10 +117,6 @@ public class CropType {
         return cropCategory;
     }
 
-    public ItemStack getDropSeed() {
-        return seedDrop.get();
-    }
-
     public ItemStack getDropFood() {
         return foodDrop.get();
     }
@@ -155,7 +149,6 @@ public class CropType {
         private final String name;
         private CropCategory category;
         private Supplier<ItemStack> foodDrop;
-        private Supplier<ItemStack> seedDrop;
         private float growthTime;
         private float tempMinAlive;
         private float tempMinGrow;
@@ -169,7 +162,6 @@ public class CropType {
         public Builder(String name) {
             this.name = name;
             this.foodDrop = () -> ItemStack.EMPTY;
-            this.seedDrop = () -> ItemStack.EMPTY;
         }
 
         public Builder setCategory(CropCategory category) {
@@ -184,11 +176,6 @@ public class CropType {
 
         public Builder setFoodDrop(Item item) {
             this.foodDrop = () -> new ItemStack(item);
-            return this;
-        }
-
-        public Builder setSeed(Item item) {
-            this.seedDrop = () -> new ItemStack(item);
             return this;
         }
 

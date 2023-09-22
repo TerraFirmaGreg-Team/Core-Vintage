@@ -10,8 +10,6 @@ import net.dries007.tfc.module.rock.api.variant.item.RockItemVariantHandler;
 import net.dries007.tfc.module.rock.init.BlockInitializer;
 import net.dries007.tfc.module.rock.init.ItemInitializer;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
@@ -33,12 +31,6 @@ public class ModuleRock extends ModuleBase {
         //PACKET_SERVICE = this.enableNetwork();
 
         MinecraftForge.EVENT_BUS.register(this);
-    }
-
-    @Override
-    public void onPreInitializationEvent(FMLPreInitializationEvent event) {
-        super.onPreInitializationEvent(event);
-
     }
 
     @Override

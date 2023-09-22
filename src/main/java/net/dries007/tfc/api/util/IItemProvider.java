@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.util;
 
+import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
 import net.minecraft.item.ItemBlock;
 
 import javax.annotation.Nullable;

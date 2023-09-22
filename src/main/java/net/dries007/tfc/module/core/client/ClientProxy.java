@@ -250,23 +250,6 @@ public class ClientProxy extends CommonProxy {
     public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
         var blockColors = event.getBlockColors();
 
-        // Grass Colors
-        IBlockColor grassColor = GrassColorHandler::computeGrassColor;
-
-        // Foliage Color
-        // todo: do something different for conifers - they should have a different color mapping through the seasons
-        IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
-
-
-        //==== Plant =================================================================================================//
-
-        blockColors.registerBlockColorHandler(grassColor,
-                PLANT_BLOCKS.values()
-                        .stream()
-                        .map(s -> (Block) s)
-                        .toArray(Block[]::new));
-
-
         //==== Metal =================================================================================================//
 
         blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IMetalBlock) s.getBlock()).getMaterial().getMaterialRGB() : 0xFFFFFF,
@@ -284,16 +267,6 @@ public class ClientProxy extends CommonProxy {
         var itemColors = event.getItemColors();
 
         var blockColors = event.getBlockColors();
-
-
-        //==== Plant =================================================================================================//
-
-        itemColors.registerItemColorHandler((s, i) -> blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()), null, null, i),
-                PLANT_BLOCKS.values()
-                        .stream()
-                        .filter(x -> x.getBlockVariant() == SHORT_GRASS || x.getBlockVariant() == TALL_GRASS)
-                        .map(s -> (Block) s)
-                        .toArray(Block[]::new));
 
         //==== Metal =================================================================================================//
 
@@ -335,13 +308,13 @@ public class ClientProxy extends CommonProxy {
     public static void onKeyEvent(InputEvent event) {
         // todo: move this to a button on the inventory GUI
         if (TFCKeybindings.OPEN_CRAFTING_TABLE.isPressed()) {
-            TerraFirmaCraft.NETWORK.sendToServer(new PacketOpenCraftingGui());
+            TerraFirmaCraft.network.sendToServer(new PacketOpenCraftingGui());
         }
         if (TFCKeybindings.PLACE_BLOCK.isPressed()) {
-            TerraFirmaCraft.NETWORK.sendToServer(new PacketPlaceBlockSpecial());
+            TerraFirmaCraft.network.sendToServer(new PacketPlaceBlockSpecial());
         }
         if (TFCKeybindings.CHANGE_ITEM_MODE.isPressed()) {
-            TerraFirmaCraft.NETWORK.sendToServer(new PacketCycleItemMode());
+            TerraFirmaCraft.network.sendToServer(new PacketCycleItemMode());
         }
     }
 
@@ -353,7 +326,7 @@ public class ClientProxy extends CommonProxy {
             if (event.getGui() instanceof GuiContainer) {
                 Slot slotUnderMouse = ((GuiContainer) event.getGui()).getSlotUnderMouse();
                 if (slotUnderMouse != null) {
-                    TerraFirmaCraft.NETWORK.sendToServer(new PacketStackFood(slotUnderMouse.slotNumber));
+                    TerraFirmaCraft.network.sendToServer(new PacketStackFood(slotUnderMouse.slotNumber));
                 }
             }
         }
@@ -381,7 +354,7 @@ public class ClientProxy extends CommonProxy {
             if (event.getButton() instanceof GuiButtonPlayerInventoryTab button) {
                 // This is to prevent the button from immediately firing after moving (enabled is set to false then)
                 if (button.isActive() && button.enabled) {
-                    TerraFirmaCraft.NETWORK.sendToServer(new PacketSwitchPlayerInventoryTab(button.getGuiType()));
+                    TerraFirmaCraft.network.sendToServer(new PacketSwitchPlayerInventoryTab(button.getGuiType()));
                 }
             }
         }

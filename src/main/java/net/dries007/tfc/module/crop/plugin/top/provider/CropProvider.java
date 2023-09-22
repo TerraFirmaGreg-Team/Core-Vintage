@@ -1,4 +1,4 @@
-package net.dries007.tfc.compat.top.providers;
+package net.dries007.tfc.module.crop.plugin.top.provider;
 
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;

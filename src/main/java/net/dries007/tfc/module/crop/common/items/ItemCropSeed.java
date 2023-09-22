@@ -40,10 +40,6 @@ public class ItemCropSeed extends Item implements IPlantable, ICropItem {
     public ItemCropSeed(CropItemVariant variant, CropType type) {
         this.type = type;
         this.variant = variant;
-
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.FLORA);
     }
 
     @Nonnull
@@ -104,6 +100,6 @@ public class ItemCropSeed extends Item implements IPlantable, ICropItem {
     @Override
     public void onModelRegister() {
         ModelLoader.setCustomModelResourceLocation(this, 0,
-                new ModelResourceLocation(getRegistryLocation(), "normal"));
+                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

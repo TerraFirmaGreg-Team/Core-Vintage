@@ -19,10 +19,10 @@ import static net.dries007.tfc.module.soil.common.SoilStorage.SOIL_BLOCKS;
 public class BlockInitializer {
 
     public static void onRegister(Registry registry) {
-        for (var wood : SOIL_BLOCKS.values()) {
-            var itemBlock = wood.getItemBlock();
-            if (itemBlock != null) registry.registerBlock((Block) wood, wood.getItemBlock(), wood.getName());
-            else registry.registerBlock((Block) wood, wood.getName());
+        for (var block : SOIL_BLOCKS.values()) {
+            var itemBlock = block.getItemBlock();
+            if (itemBlock != null) registry.registerBlock((Block) block, block.getItemBlock(), block.getName());
+            else registry.registerBlock((Block) block, block.getName());
         }
     }
 

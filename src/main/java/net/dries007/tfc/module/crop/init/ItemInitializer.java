@@ -1,37 +1,28 @@
-package net.dries007.tfc.module.soil.init;
+package net.dries007.tfc.module.crop.init;
 
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import net.dries007.tfc.api.util.IHasModel;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.module.soil.common.SoilStorage.SOIL_ITEMS;
+import static net.dries007.tfc.module.crop.common.CropStorage.CROP_ITEMS;
+import static net.dries007.tfc.module.rock.common.RockStorage.ROCK_ITEMS;
 
 public class ItemInitializer {
 
     public static void onRegister(Registry registry) {
-        for (var item : SOIL_ITEMS.values()) {
+
+        for (var item : CROP_ITEMS.values()) {
             registry.registerItem((Item) item, item.getName());
         }
     }
 
     @SideOnly(Side.CLIENT)
     public static void onClientRegister(Registry registry) {
+
         registry.registerClientModelRegistrationStrategy(() -> {
-            SOIL_ITEMS.values().forEach(IHasModel::onModelRegister);
+            CROP_ITEMS.values().forEach(IHasModel::onModelRegister);
         });
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void onClientInitialization() {
-        var minecraft = Minecraft.getMinecraft();
-        var itemColors = minecraft.getItemColors();
-
-
-
-
-
     }
 }

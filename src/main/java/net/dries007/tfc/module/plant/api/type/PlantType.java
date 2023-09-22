@@ -103,9 +103,7 @@ public class PlantType {
         this.oreDictName = Optional.ofNullable(builder.oreDictName);
 
         HashSet<Integer> hashSet = new HashSet<>();
-        for (int stage : stages) {
-            hashSet.add(stage);
-        }
+        for (int stage : stages) hashSet.add(stage);
         this.numStages = hashSet.size() <= 1 ? 1 : hashSet.size() - 1;
 
         if (name.isEmpty()) {
@@ -116,11 +114,8 @@ public class PlantType {
             throw new RuntimeException(String.format("Plant: [%s] already exists!", name));
         }
 
-        var plantBlock = this.getPlantVariant().create(this);
-
-        if (PLANT_BLOCKS.put(new Pair<>(this.getPlantVariant(), this), plantBlock) != null)
+        if (PLANT_BLOCKS.put(new Pair<>(this.getPlantVariant(), this), this.getPlantVariant().create(this)) != null)
             throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this.getPlantVariant(), this));
-        BLOCKS.add((Block) plantBlock);
     }
 
     /**

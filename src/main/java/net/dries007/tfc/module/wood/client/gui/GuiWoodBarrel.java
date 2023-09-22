@@ -192,7 +192,7 @@ public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
-        TerraFirmaCraft.NETWORK.sendToServer(new PacketGuiButton(button.id));
+        TerraFirmaCraft.network.sendToServer(new PacketGuiButton(button.id));
         super.actionPerformed(button);
     }
 }

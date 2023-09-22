@@ -28,7 +28,7 @@ public class GuiButtonKnapping extends GuiButton {
     public void onClick() {
         if (this.enabled) {
             this.visible = false;
-            TerraFirmaCraft.NETWORK.sendToServer(new PacketGuiButton(this.id));
+            TerraFirmaCraft.network.sendToServer(new PacketGuiButton(this.id));
         }
     }
 

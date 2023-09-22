@@ -18,7 +18,7 @@ public class CropTypeHandler {
                 .setRain(50f, 70f, 310f, 330f)
                 .build();
 
-        MAIZE = new CropType.Builder("maize")
+        MAIZE = new CropType.Builder("maize") //TODO
                 .setCategory(CropCategories.SIMPLE)
                 .setFoodDrop(FoodTypes.MAIZE)
                 .setGrowthTime(0.6f)
@@ -50,7 +50,7 @@ public class CropTypeHandler {
                 .setRain(50f, 100f, 400f, 450f)
                 .build();
 
-        WHEAT = new CropType.Builder("wheat")
+        WHEAT = new CropType.Builder("wheat") //TODO ?
                 .setCategory(CropCategories.SIMPLE)
                 .setFoodDrop(FoodTypes.WHEAT)
                 .setGrowthTime(0.5f)
@@ -90,7 +90,7 @@ public class CropTypeHandler {
                 .setRain(50f, 60f, 310f, 340f)
                 .build();
 
-        GREEN_BEAN = new CropType.Builder("green_bean")
+        GREEN_BEAN = new CropType.Builder("green_bean") //TODO ?
                 .setCategory(CropCategories.PICKABLE)
                 .setFoodDrop(FoodTypes.GREEN_BEAN)
                 .setGrowthTime(0.45f)
@@ -130,7 +130,7 @@ public class CropTypeHandler {
                 .setRain(45f, 90f, 390f, 440f)
                 .build();
 
-        SUGARCANE = new CropType.Builder("sugarcane")
+        SUGARCANE = new CropType.Builder("sugarcane") //TODO ?
                 .setCategory(CropCategories.SIMPLE)
                 .setFoodDrop(FoodTypes.SUGARCANE)
                 .setGrowthTime(0.5f)
@@ -146,7 +146,7 @@ public class CropTypeHandler {
                 .setRain(50f, 120f, 390f, 430f)
                 .build();
 
-        RED_BELL_PEPPER = new CropType.Builder("red_bell_pepper")
+        RED_BELL_PEPPER = new CropType.Builder("red_bell_pepper") //TODO ?
                 .setCategory(CropCategories.PICKABLE)
                 .setFoodDrop(FoodTypes.RED_BELL_PEPPER)
                 .setGrowthTime(0.55f)
@@ -154,7 +154,7 @@ public class CropTypeHandler {
                 .setRain(50f, 100f, 400f, 450f)
                 .build();
 
-        YELLOW_BELL_PEPPER = new CropType.Builder("yellow_bell_pepper")
+        YELLOW_BELL_PEPPER = new CropType.Builder("yellow_bell_pepper")//TODO ?
                 .setCategory(CropCategories.PICKABLE)
                 .setFoodDrop(FoodTypes.YELLOW_BELL_PEPPER)
                 .setGrowthTime(0.55f)

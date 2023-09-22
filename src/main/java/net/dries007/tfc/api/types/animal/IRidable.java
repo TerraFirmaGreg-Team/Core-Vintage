@@ -28,9 +28,9 @@ public interface IRidable {
             // Show tooltips
             if (!world.isRemote) {
                 if (animal.getAge() == Age.CHILD) {
-                    TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.product.young", animal.getAnimalName()), (EntityPlayerMP) player);
+                    TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.product.young", animal.getAnimalName()), (EntityPlayerMP) player);
                 } else {
-                    TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.product.low_familiarity", animal.getAnimalName()), (EntityPlayerMP) player);
+                    TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.product.low_familiarity", animal.getAnimalName()), (EntityPlayerMP) player);
                 }
             }
             return false;

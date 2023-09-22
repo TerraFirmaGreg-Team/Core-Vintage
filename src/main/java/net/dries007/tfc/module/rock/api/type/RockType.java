@@ -8,6 +8,7 @@ import net.dries007.tfc.module.rock.api.category.RockCategory;
 import net.dries007.tfc.module.rock.common.RockStorage;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -162,6 +163,15 @@ public class RockType {
      */
     public boolean isFlux() {
         return isFlux;
+    }
+
+    /**
+     * Возвращает локализованное имя типа породы.
+     *
+     * @return Локализованное имя типа породы.
+     */
+    public String getLocalizedName() {
+        return new TextComponentTranslation(String.format("rock.type.%s.name", this)).getFormattedText();
     }
 
     /**

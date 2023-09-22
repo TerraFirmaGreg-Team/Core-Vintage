@@ -377,7 +377,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimalTFC, ILivest
                     if (!this.world.isRemote) {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                            TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                            TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
                         }
                     }
                 }

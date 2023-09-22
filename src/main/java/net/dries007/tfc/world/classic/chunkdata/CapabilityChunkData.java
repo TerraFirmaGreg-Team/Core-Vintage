@@ -60,7 +60,7 @@ public final class CapabilityChunkData {
 
                 // Обновляем данные на стороне клиента
                 NBTTagCompound nbt = (NBTTagCompound) ChunkDataProvider.CHUNK_DATA_CAPABILITY.writeNBT(data, null);
-                TerraFirmaCraft.NETWORK.sendTo(new PacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(), data.getRainfall()), event.getPlayer());
+                TerraFirmaCraft.network.sendTo(new PacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(), data.getRainfall()), event.getPlayer());
             }
         }
     }

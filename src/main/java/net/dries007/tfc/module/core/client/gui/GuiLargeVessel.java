@@ -75,7 +75,7 @@ public class GuiLargeVessel extends GuiContainerTE<TELargeVessel> {
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button instanceof GuiButtonLargeVesselSeal) {
-            TerraFirmaCraft.NETWORK.sendToServer(new PacketGuiButton(button.id));
+            TerraFirmaCraft.network.sendToServer(new PacketGuiButton(button.id));
         }
         super.actionPerformed(button);
     }

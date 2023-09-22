@@ -5,6 +5,7 @@ import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.module.ModuleManager;
 import net.dries007.tfc.module.core.ModuleCorePost;
 import net.dries007.tfc.module.core.common.CommonProxy;
+import net.dries007.tfc.module.crop.CropModule;
 import net.dries007.tfc.module.rock.ModuleRock;
 import net.dries007.tfc.module.soil.ModuleSoil;
 import net.dries007.tfc.module.wood.ModuleWood;
@@ -30,31 +31,34 @@ import static net.dries007.tfc.Tags.*;
 @Mod.EventBusSubscriber
 @Mod(modid = MOD_ID, name = MOD_NAME, version = VERSION, useMetadata = true, guiFactory = GUI_FACTORY, dependencies = DEPENDENCIES)
 public final class TerraFirmaCraft {
+
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     public static final WorldTypeTFC WORLD_TYPE_TFC = new WorldTypeTFC();
-    public static SimpleNetworkWrapper NETWORK = new SimpleNetworkWrapper(MOD_ID);
+
 
     @SuppressWarnings("unused")
     @Mod.Instance
-    private static TerraFirmaCraft INSTANCE;
+    private static TerraFirmaCraft instance;
+    public static SimpleNetworkWrapper network;
     @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_SIDE)
-    private static CommonProxy PROXY;
+    private static CommonProxy proxy;
     private static int networkIdCounter = 0;
     private final ModuleManager moduleManager;
     private Set<Class<? extends ModuleBase>> registeredModules = new HashSet<>();
 
     public TerraFirmaCraft() {
-        INSTANCE = this;
+        instance = this;
+        network = new SimpleNetworkWrapper(MOD_ID);
         FluidRegistry.enableUniversalBucket();
         this.moduleManager = new ModuleManager(MOD_ID);
     }
 
     public static CommonProxy getProxy() {
-        return PROXY;
+        return proxy;
     }
 
     public static TerraFirmaCraft getInstance() {
-        return INSTANCE;
+        return instance;
     }
 
     public static ResourceLocation getID(String path) {
@@ -65,7 +69,7 @@ public final class TerraFirmaCraft {
      * Используй это только на preInit фазе.
      */
     public static <T extends IMessage> void registerNetwork(IMessageHandler<T, IMessage> handler, Class<T> packetLatexUpdateClass, Side side) {
-        NETWORK.registerMessage(handler, packetLatexUpdateClass, networkIdCounter++, side);
+        network.registerMessage(handler, packetLatexUpdateClass, networkIdCounter++, side);
     }
 
 
@@ -75,7 +79,8 @@ public final class TerraFirmaCraft {
         this.moduleManager.registerModules(
                 ModuleRock.class,
                 ModuleSoil.class,
-                ModuleWood.class
+                ModuleWood.class,
+                CropModule.class
         );
 
         this.registerModule(ModuleCorePost.class);
@@ -100,7 +105,7 @@ public final class TerraFirmaCraft {
         this.moduleManager.routeFMLStateEvent(event);
 
         LOGGER.info("Started PreInitialization Phase!");
-        PROXY.onPreInit(event);
+        proxy.onPreInit(event);
         LOGGER.info("Finished PreInitialization Phase!");
     }
 
@@ -109,7 +114,7 @@ public final class TerraFirmaCraft {
         this.moduleManager.routeFMLStateEvent(event);
 
         LOGGER.info("Started Initialization Phase!");
-        PROXY.onInit(event);
+        proxy.onInit(event);
         LOGGER.info("Finished Initialization Phase!");
     }
 
@@ -118,7 +123,7 @@ public final class TerraFirmaCraft {
         this.moduleManager.routeFMLStateEvent(event);
 
         LOGGER.info("Started PostInitialization Phase!");
-        PROXY.onPostInit(event);
+        proxy.onPostInit(event);
         LOGGER.info("Finished PostInitialization Phase!");
     }
 
@@ -127,7 +132,7 @@ public final class TerraFirmaCraft {
         this.moduleManager.routeFMLStateEvent(event);
 
         LOGGER.info("Started LoadComplete Phase!");
-        PROXY.onLoadComplete(event);
+        proxy.onLoadComplete(event);
         LOGGER.info("Finished LoadComplete Phase!");
     }
 
@@ -142,7 +147,7 @@ public final class TerraFirmaCraft {
         this.moduleManager.routeFMLStateEvent(event);
 
         LOGGER.info("Started ServerStarting Phase!");
-        PROXY.onServerStarting(event);
+        proxy.onServerStarting(event);
         LOGGER.info("Finished ServerStarting Phase!");
     }
 

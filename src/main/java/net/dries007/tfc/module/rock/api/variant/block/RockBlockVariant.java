@@ -2,16 +2,14 @@ package net.dries007.tfc.module.rock.api.variant.block;
 
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.common.RockStorage;
-import net.minecraft.block.Block;
+import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.BLOCKS;
-import static net.dries007.tfc.module.rock.common.RockStorage.*;
+import static net.dries007.tfc.module.rock.common.RockStorage.ROCK_BLOCKS;
 
 /**
  * Класс, представляющий тип блока породы.
@@ -78,6 +76,15 @@ public class RockBlockVariant {
      */
     public float getBaseHardness() {
         return baseHardness;
+    }
+
+    /**
+     * Возвращает локализованное имя варианта породы.
+     *
+     * @return Локализованное имя варианта породы.
+     */
+    public String getLocalizedName() {
+        return new TextComponentTranslation(String.format("rock.variant.%s.name", this)).getFormattedText();
     }
 
     /**

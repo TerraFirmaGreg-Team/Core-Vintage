@@ -85,7 +85,7 @@ public class ItemSmallVessel extends ItemPottery {
                         TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.SMALL_VESSEL_LIQUID);
                         break;
                     case LIQUID_SOLID:
-                        TerraFirmaCraft.NETWORK.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, Tags.MOD_ID + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
+                        TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, Tags.MOD_ID + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
                         break;
                 }
             }

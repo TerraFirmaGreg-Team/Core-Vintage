@@ -34,14 +34,14 @@ public class PlantStorage {
     }
 
     @Nonnull
-    public static Item getRockItem(@Nonnull PlantItemVariant variant, @Nonnull PlantType type) {
+    public static Item getPlantItem(@Nonnull PlantItemVariant variant, @Nonnull PlantType type) {
         var item = (Item) PLANT_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
         throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
     }
 
     @Nonnull
-    public static IPlantItem getIRockItem(@Nonnull PlantItemVariant variant, @Nonnull PlantType type) {
+    public static IPlantItem getIPlantItem(@Nonnull PlantItemVariant variant, @Nonnull PlantType type) {
         var item = PLANT_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
         throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));

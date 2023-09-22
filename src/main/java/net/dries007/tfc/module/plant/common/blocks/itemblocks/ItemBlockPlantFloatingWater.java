@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.plant.common.blocks.itemblocks;
 
-import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlantFloatingWater;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockLiquid;
@@ -23,10 +23,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemBlockFloatingWaterTFC extends ItemBlockTFC {
+public class ItemBlockPlantFloatingWater extends ItemBlockTFC {
     protected final BlockPlantFloatingWater block;
 
-    public ItemBlockFloatingWaterTFC(BlockPlantFloatingWater block) {
+    public ItemBlockPlantFloatingWater(BlockPlantFloatingWater block) {
         super(block);
         this.block = block;
     }

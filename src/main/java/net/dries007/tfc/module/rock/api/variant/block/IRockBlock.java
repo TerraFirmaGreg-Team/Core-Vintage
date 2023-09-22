@@ -19,9 +19,9 @@ import javax.annotation.Nonnull;
 public interface IRockBlock extends IHasModel, IItemProvider {
 
     /**
-     * Возвращает вариант блока породы.
+     * Возвращает вариант блока.
      *
-     * @return Вариант блока породы.
+     * @return Вариант блока.
      */
     @Nonnull
     RockBlockVariant getBlockVariant();
@@ -60,7 +60,7 @@ public interface IRockBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default String getName() {
-        return String.format("rock.%s.%s", getBlockVariant(), getType());
+        return String.format("rock.%s.%s", getBlockVariant(), getType()).replaceAll("/", ".");
     }
 
     /**

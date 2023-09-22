@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.soil.common;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
@@ -14,8 +15,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class SoilStorage {
-    public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<SoilItemVariant, SoilType>, ISoilItem> SOIL_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
+    public static final Map<Pair<SoilItemVariant, SoilType>, ISoilItem> SOIL_ITEMS = new Object2ObjectLinkedOpenHashMap<>();
 
     @Nonnull
     public static Block getSoilBlock(@Nonnull SoilBlockVariant variant, @Nonnull SoilType type) {

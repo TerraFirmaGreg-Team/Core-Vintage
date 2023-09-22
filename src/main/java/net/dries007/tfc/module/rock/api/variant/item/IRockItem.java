@@ -35,7 +35,7 @@ public interface IRockItem extends IHasModel {
      * @return Категория породы.
      */
     @Nonnull
-    default RockCategory getRockCategory() {
+    default RockCategory getCategory() {
         return getType().getCategory();
     }
 

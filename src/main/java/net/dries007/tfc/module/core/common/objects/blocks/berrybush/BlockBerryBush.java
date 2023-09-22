@@ -6,7 +6,7 @@ import net.dries007.tfc.api.types.bush.type.BushType;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.core.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.util.DamageSourcesTFC;

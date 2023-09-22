@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.wood.common;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
@@ -15,8 +16,8 @@ import java.util.Map;
 
 public class WoodStorage {
 
-    public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new LinkedHashMap<>();
-    public static final Map<Pair<WoodItemVariant, WoodType>, IWoodItem> WOOD_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<WoodBlockVariant, WoodType>, IWoodBlock> WOOD_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
+    public static final Map<Pair<WoodItemVariant, WoodType>, IWoodItem> WOOD_ITEMS = new Object2ObjectLinkedOpenHashMap<>();
 
     @Nonnull
     public static Block getWoodBlock(@Nonnull WoodBlockVariant variant, @Nonnull WoodType type) {

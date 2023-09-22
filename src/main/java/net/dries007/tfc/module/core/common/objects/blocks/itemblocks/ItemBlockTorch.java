@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.core.common.objects.items.itemblocks;
+package net.dries007.tfc.module.core.common.objects.blocks.itemblocks;
 
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.core.common.objects.tileentities.TELogPile;

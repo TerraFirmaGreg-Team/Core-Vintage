@@ -147,6 +147,7 @@ dependencies {
             transitive = false
         }
     }
+    implementation 'it.unimi.dsi:fastutil:8.5.+'
 }
 
 apply from: 'gradle/scripts/dependencies.gradle'
@@ -165,7 +166,7 @@ if (propertyBool('use_access_transformer')) {
 }
 
 processResources {
-    filesMatching(['mcmod.info', 'pack.mcmeta', 'mixins.*.json']) {
+    filesMatching(['mcmod.info', 'pack.mcmeta', 'mixins.*(?!refmap).*\\.json']) {
         def authors = propertyString('mod_authors').split(',').collect { """\"${it.trim()}\"""" }.join(', ')
         expand(
                 'mod_id': propertyString('mod_id'),
@@ -302,9 +303,10 @@ if (propertyBool('spotless')) {
 tasks.register('generateMixinJson') {
     group 'cleanroom helpers'
     onlyIf {
-        if (propertyBool('use_mixins') || propertyBool('generate_mixins_json')) {
+        if (propertyBool('use_mixins') && propertyBool('generate_mixins_json')) {
             return !file("src/main/resources/mixins.${propertyString('mod_id')}.json").exists()
         }
+        return false
     }
     doLast {
         def file = file("src/main/resources/mixins.${propertyString('mod_id')}.json")

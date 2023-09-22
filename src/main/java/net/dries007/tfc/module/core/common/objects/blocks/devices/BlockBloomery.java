@@ -9,7 +9,7 @@ import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.core.common.objects.items.ItemFireStarter;
-import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEBloomery;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.block.Multiblock;

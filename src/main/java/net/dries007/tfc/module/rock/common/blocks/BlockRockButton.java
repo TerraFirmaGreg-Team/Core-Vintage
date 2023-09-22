@@ -1,8 +1,7 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
 import net.dries007.tfc.module.core.client.util.CustomStateMap;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
@@ -87,6 +86,6 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getCategory().getLocalizedName());
     }
 }

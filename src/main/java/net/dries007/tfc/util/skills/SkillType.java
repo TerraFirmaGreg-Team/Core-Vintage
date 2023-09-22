@@ -1,5 +1,6 @@
 package net.dries007.tfc.util.skills;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 
@@ -25,7 +26,7 @@ public final class SkillType<S extends Skill> {
     public static final SkillType<SimpleSkill> AGRICULTURE;
     public static final SkillType<SimpleSkill> BUTCHERING;
 
-    private static final Map<String, SkillType<? extends Skill>> SKILL_TYPES = new LinkedHashMap<>(4);
+    private static final Map<String, SkillType<? extends Skill>> SKILL_TYPES = new Object2ObjectLinkedOpenHashMap<>(4);
     private static final List<SkillType<? extends Skill>> SKILL_ORDER = new ArrayList<>(4);
 
     static {

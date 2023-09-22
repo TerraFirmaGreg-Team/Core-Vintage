@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.util;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
@@ -38,7 +39,7 @@ public class FallingBlockManager {
     private static final Set<Material> SOFT_MATERIALS = new ObjectOpenHashSet<>(new Material[]{Material.GROUND, Material.SAND, Material.GRASS, Material.CLAY});
     private static final Set<Material> HARD_MATERIALS = new ObjectOpenHashSet<>(new Material[]{Material.IRON, BlockCharcoalPile.CHARCOAL_MATERIAL});
 
-    private static final Map<IBlockState, Specification> FALLABLES = new LinkedHashMap<>();
+    private static final Map<IBlockState, Specification> FALLABLES = new Object2ObjectLinkedOpenHashMap<>();
 
     private static final Set<IBlockState> SIDE_SUPPORTS = new ObjectOpenHashSet<>(0);
 

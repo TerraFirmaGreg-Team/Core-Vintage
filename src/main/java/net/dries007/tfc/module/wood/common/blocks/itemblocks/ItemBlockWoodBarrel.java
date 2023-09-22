@@ -3,7 +3,7 @@ package net.dries007.tfc.module.wood.common.blocks.itemblocks;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodBarrel;
 import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;

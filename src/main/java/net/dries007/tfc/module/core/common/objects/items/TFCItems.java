@@ -1,6 +1,7 @@
 package net.dries007.tfc.module.core.common.objects.items;
 
 import gregtech.api.unification.ore.OrePrefix;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.food.type.FoodType;
@@ -24,10 +25,10 @@ public class TFCItems {
 
     //==== Item ======================================================================================================//
 
-    public static final Map<Pair<FoodItemVariant, FoodType>, IFoodItem> FOOD_ITEMS = new LinkedHashMap<>();
+    public static final Map<Pair<FoodItemVariant, FoodType>, IFoodItem> FOOD_ITEMS = new Object2ObjectLinkedOpenHashMap<>();
 
-    public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new ConcurrentHashMap<>();
-    public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new ConcurrentHashMap<>();
+    public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new Object2ObjectLinkedOpenHashMap<>();
+    public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new Object2ObjectLinkedOpenHashMap<>();
 
     // Предметы
     public static final LinkedList<Item> ITEMS = new LinkedList<>();

@@ -3,8 +3,7 @@ package net.dries007.tfc.module.rock.common.blocks;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
@@ -108,6 +107,6 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock, IItemSize 
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getCategory().getLocalizedName());
     }
 }

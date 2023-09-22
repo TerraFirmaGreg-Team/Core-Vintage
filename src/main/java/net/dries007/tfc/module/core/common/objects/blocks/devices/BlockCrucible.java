@@ -8,7 +8,7 @@ import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
-import net.dries007.tfc.module.core.common.objects.items.itemblocks.ItemBlockCrucible;
+import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockCrucible;
 import net.dries007.tfc.module.core.common.objects.tileentities.TECrucible;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.SoundType;

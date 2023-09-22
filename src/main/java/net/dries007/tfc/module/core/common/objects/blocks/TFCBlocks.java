@@ -1,6 +1,7 @@
 package net.dries007.tfc.module.core.common.objects.blocks;
 
 import gregtech.api.GregTechAPI;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.bush.IBushBlock;
 import net.dries007.tfc.api.types.bush.type.BushType;
@@ -40,9 +41,9 @@ public class TFCBlocks {
     //==== Block =====================================================================================================//
 
 
-    public static final Map<Pair<RockBlockVariant, EnumColor>, BlockAlabaster> ALABASTER_BLOCKS = new LinkedHashMap<>();
-    public static final Map<BushType, IBushBlock> BUSH_BLOCKS = new LinkedHashMap<>();
-    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Pair<RockBlockVariant, EnumColor>, BlockAlabaster> ALABASTER_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
+    public static final Map<BushType, IBushBlock> BUSH_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
+    public static final Map<GroundcoverType, BlockGroundcover> GROUNDCOVER_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
 
 
     // Блоки

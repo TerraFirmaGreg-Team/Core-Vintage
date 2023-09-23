@@ -4,9 +4,13 @@ import com.codetaylor.mc.athenaeum.registry.Registry;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.api.util.RegistryHelper;
 import net.dries007.tfc.module.core.client.util.GrassColorHandler;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
-import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariantHandler;
+import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
+import net.dries007.tfc.module.wood.common.tile.TEWoodChest;
+import net.dries007.tfc.module.wood.common.tile.TEWoodLoom;
+import net.dries007.tfc.module.wood.common.tile.TEWoodToolRack;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -24,6 +28,14 @@ public class BlockInitializer {
             if (itemBlock != null) registry.registerBlock((Block) wood, wood.getItemBlock(), wood.getName());
             else registry.registerBlock((Block) wood, wood.getName());
         }
+
+        RegistryHelper.registerTileEntities(
+                registry,
+                TEWoodLoom.class,
+                TEWoodToolRack.class,
+                TEWoodChest.class,
+                TEWoodBarrel.class
+        );
     }
 
     @SideOnly(Side.CLIENT)

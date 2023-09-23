@@ -13,6 +13,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nonnull;
+
 @SideOnly(Side.CLIENT)
 public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
     @Override
@@ -29,7 +31,7 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
             woodType = te.getWood();
             GlStateManager.pushMatrix();
             Helpers.setWoodColor(woodType.getColor());
-            this.bindTexture(TerraFirmaCraft.getID("textures/blocks/wood/planks/pattern.png"));
+            this.bindTexture(TerraFirmaCraft.getID("textures/blocks/wood/planks.png"));
 
             GlStateManager.disableLighting();
 
@@ -84,7 +86,7 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
     }
 
     @Override
-    public boolean isGlobalRenderer(TEWoodLoom te) {
+    public boolean isGlobalRenderer(@Nonnull TEWoodLoom te) {
         return false;
     }
 

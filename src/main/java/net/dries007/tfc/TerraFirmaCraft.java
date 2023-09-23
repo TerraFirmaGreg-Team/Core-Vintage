@@ -5,7 +5,7 @@ import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.module.ModuleManager;
 import net.dries007.tfc.module.core.ModuleCorePost;
 import net.dries007.tfc.module.core.common.CommonProxy;
-import net.dries007.tfc.module.crop.CropModule;
+import net.dries007.tfc.module.crop.ModuleCrop;
 import net.dries007.tfc.module.rock.ModuleRock;
 import net.dries007.tfc.module.soil.ModuleSoil;
 import net.dries007.tfc.module.wood.ModuleWood;
@@ -34,12 +34,10 @@ public final class TerraFirmaCraft {
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     public static final WorldTypeTFC WORLD_TYPE_TFC = new WorldTypeTFC();
-
-
+    public static SimpleNetworkWrapper network;
     @SuppressWarnings("unused")
     @Mod.Instance
     private static TerraFirmaCraft instance;
-    public static SimpleNetworkWrapper network;
     @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_SIDE)
     private static CommonProxy proxy;
     private static int networkIdCounter = 0;
@@ -80,7 +78,7 @@ public final class TerraFirmaCraft {
                 ModuleRock.class,
                 ModuleSoil.class,
                 ModuleWood.class,
-                CropModule.class
+                ModuleCrop.class
         );
 
         this.registerModule(ModuleCorePost.class);
@@ -102,70 +100,69 @@ public final class TerraFirmaCraft {
 
     @Mod.EventHandler
     public void onPreInitializationEvent(FMLPreInitializationEvent event) {
-        this.moduleManager.routeFMLStateEvent(event);
-
         LOGGER.info("Started PreInitialization Phase!");
+        this.moduleManager.routeFMLStateEvent(event);
         proxy.onPreInit(event);
         LOGGER.info("Finished PreInitialization Phase!");
     }
 
     @Mod.EventHandler
     public void onInitializationEvent(FMLInitializationEvent event) {
-        this.moduleManager.routeFMLStateEvent(event);
-
         LOGGER.info("Started Initialization Phase!");
+        this.moduleManager.routeFMLStateEvent(event);
         proxy.onInit(event);
         LOGGER.info("Finished Initialization Phase!");
     }
 
     @Mod.EventHandler
     public void onPostInitializationEvent(FMLPostInitializationEvent event) {
-        this.moduleManager.routeFMLStateEvent(event);
-
         LOGGER.info("Started PostInitialization Phase!");
+        this.moduleManager.routeFMLStateEvent(event);
         proxy.onPostInit(event);
         LOGGER.info("Finished PostInitialization Phase!");
     }
 
     @Mod.EventHandler
     public void onLoadCompleteEvent(FMLLoadCompleteEvent event) {
-        this.moduleManager.routeFMLStateEvent(event);
-
         LOGGER.info("Started LoadComplete Phase!");
+        this.moduleManager.routeFMLStateEvent(event);
         proxy.onLoadComplete(event);
         LOGGER.info("Finished LoadComplete Phase!");
     }
 
     @Mod.EventHandler
     public void onServerAboutToStartEvent(FMLServerAboutToStartEvent event) {
+        LOGGER.info("Started ServerAboutToStart Phase!");
         this.moduleManager.routeFMLStateEvent(event);
-
+        LOGGER.info("Finished ServerAboutToStart Phase!");
     }
 
     @Mod.EventHandler
     public void onServerStartingEvent(FMLServerStartingEvent event) {
-        this.moduleManager.routeFMLStateEvent(event);
-
         LOGGER.info("Started ServerStarting Phase!");
         proxy.onServerStarting(event);
+        this.moduleManager.routeFMLStateEvent(event);
         LOGGER.info("Finished ServerStarting Phase!");
     }
 
     @Mod.EventHandler
     public void onServerStartedEvent(FMLServerStartedEvent event) {
+        LOGGER.info("Started ServerStarted Phase!");
         this.moduleManager.routeFMLStateEvent(event);
-
+        LOGGER.info("Finished ServerStarted Phase!");
     }
 
     @Mod.EventHandler
     public void onServerStoppingEvent(FMLServerStoppingEvent event) {
+        LOGGER.info("Started ServerStopping Phase!");
         this.moduleManager.routeFMLStateEvent(event);
-
+        LOGGER.info("Finished ServerStopping Phase!");
     }
 
     @Mod.EventHandler
     public void onServerStoppedEvent(FMLServerStoppedEvent event) {
-
+        LOGGER.info("Started ServerStopped Phase!");
         this.moduleManager.routeFMLStateEvent(event);
+        LOGGER.info("Finished ServerStopped Phase!");
     }
 }

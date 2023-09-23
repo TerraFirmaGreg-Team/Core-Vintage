@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.wood.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.common.entity.EntityWoodBoat;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.model.IMultipassModel;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
@@ -29,6 +29,7 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
 
     @Override
     public void doRender(EntityWoodBoat entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        var woodType = entity.getWood();
         GlStateManager.pushMatrix();
         this.setupTranslation(x, y, z);
         this.setupRotation(entity, entityYaw, partialTicks);
@@ -38,6 +39,8 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
             GlStateManager.enableColorMaterial();
             GlStateManager.enableOutlineMode(this.getTeamColor(entity));
         }
+
+        Helpers.setWoodColor(woodType.getColor());
 
         this.modelBoat.render(entity, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
@@ -55,13 +58,8 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
      */
     @Override
     protected ResourceLocation getEntityTexture(EntityWoodBoat entity) {
-        final WoodType woodType = entity.getWood();
-        if (woodType != null) {
-            //noinspection ConstantConditions
-            return TerraFirmaCraft.getID("textures/entity/boat/" + woodType + ".png");
-        }
         // Fallback
-        return TerraFirmaCraft.getID("textures/entity/boat/oak.png");
+        return TerraFirmaCraft.getID("textures/entity/boat/boat.png");
     }
 
     @Override

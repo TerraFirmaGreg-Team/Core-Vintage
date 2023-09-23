@@ -7,7 +7,8 @@ import net.dries007.tfc.module.crop.api.category.CropCategoryHandler;
 import net.dries007.tfc.module.crop.api.type.CropTypeHandler;
 import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariantHandler;
 import net.dries007.tfc.module.crop.api.variant.item.CropItemVariantHandler;
-import net.dries007.tfc.module.crop.init.*;
+import net.dries007.tfc.module.crop.init.BlockInitializer;
+import net.dries007.tfc.module.crop.init.ItemInitializer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -17,11 +18,11 @@ import org.apache.logging.log4j.Logger;
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.Tags.MOD_NAME;
 
-public class CropModule extends ModuleBase {
+public class ModuleCrop extends ModuleBase {
 
-    public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + CropModule.class.getSimpleName());
+    public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleCrop.class.getSimpleName());
 
-    public CropModule() {
+    public ModuleCrop() {
         super(0, MOD_ID);
 
         this.setRegistry(new Registry(MOD_ID, CreativeTabsTFC.CROP));

@@ -4,6 +4,7 @@ package net.dries007.tfc;
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.module.ModuleManager;
 import net.dries007.tfc.common.CommonProxy;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.ModuleCorePost;
 import net.dries007.tfc.module.crop.ModuleCrop;
 import net.dries007.tfc.module.rock.ModuleRock;
@@ -75,6 +76,7 @@ public final class TerraFirmaCraft {
     public void onConstructionEvent(FMLConstructionEvent event) {
 
         this.moduleManager.registerModules(
+                ModuleCore.class,
                 ModuleRock.class,
                 ModuleSoil.class,
                 ModuleWood.class,

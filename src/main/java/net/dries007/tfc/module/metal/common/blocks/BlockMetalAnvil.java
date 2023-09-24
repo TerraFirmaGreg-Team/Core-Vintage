@@ -2,7 +2,6 @@ package net.dries007.tfc.module.metal.common.blocks;
 
 import gregtech.api.unification.material.Material;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -12,9 +11,9 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.metal.StorageMetal;
+import net.dries007.tfc.module.metal.api.type.MetalType;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
 import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariant;
 import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
@@ -33,7 +32,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -64,21 +66,15 @@ public class BlockMetalAnvil extends TFCBlock implements IMetalBlock, IMaterialI
     private static final AxisAlignedBB AABB_Z = new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.6875, 1);
     private static final AxisAlignedBB AABB_X = new AxisAlignedBB(0, 0, 0.1875, 1, 0.6875, 0.8125);
 
-    private final MetalBlockVariant metalBlockVariant;
-    private final Material material;
-    private final ResourceLocation modelLocation;
+    private final MetalBlockVariant variant;
+    private final MetalType type;
 
-    public BlockMetalAnvil(MetalBlockVariant metalBlockVariant, Material material) {
+    public BlockMetalAnvil(MetalBlockVariant variant, MetalType type) {
         super(net.minecraft.block.material.Material.IRON);
 
-        this.metalBlockVariant = metalBlockVariant;
-        this.material = material;
-        this.modelLocation = TerraFirmaCraft.getID("metal/anvil");
+        this.variant = variant;
+        this.type = type;
 
-        var blockRegistryName = String.format("metal/anvil/%s", material);
-        setRegistryName(Tags.MOD_ID, blockRegistryName);
-        setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        setCreativeTab(CreativeTabsTFC.METAL_TAB); //GregTechAPI.TAB_GREGTECH_MATERIALS
         setSoundType(SoundType.ANVIL);
         setHardness(4.0F);
         setResistance(10F);
@@ -99,7 +95,7 @@ public class BlockMetalAnvil extends TFCBlock implements IMetalBlock, IMaterialI
 
     @Override
     public MetalBlockVariant getBlockVariant() {
-        return metalBlockVariant;
+        return variant;
     }
 
     @Override
@@ -109,14 +105,14 @@ public class BlockMetalAnvil extends TFCBlock implements IMetalBlock, IMaterialI
 
     @Nonnull
     @Override
-    public Material getMaterial() {
-        return material;
+    public MetalType getType() {
+        return type;
     }
 
     @Nullable
     @Override
     public Material getMaterial(ItemStack stack) {
-        return material;
+        return type.getMaterial();
     }
 
     @Override
@@ -133,7 +129,7 @@ public class BlockMetalAnvil extends TFCBlock implements IMetalBlock, IMaterialI
             if (state.getBlock().isReplaceable(worldIn, placedPos) &&
                     stateSupport.isSideSolid(worldIn, supportPos, EnumFacing.UP)) {
                 if (!worldIn.isRemote) {
-                    worldIn.setBlockState(placedPos, StorageMetal.getMetalBlock(ANVIL, material).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
+                    worldIn.setBlockState(placedPos, StorageMetal.getMetalBlock(ANVIL, type).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
                     worldIn.playSound(null, placedPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     stack.shrink(1);
                     player.setHeldItem(hand, stack);
@@ -315,11 +311,7 @@ public class BlockMetalAnvil extends TFCBlock implements IMetalBlock, IMaterialI
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(StorageMetal.getMetalBlock(ANVIL, material));
-    }
-
-    public Material getMetal() {
-        return material;
+        return new ItemStack(StorageMetal.getMetalBlock(ANVIL, type));
     }
 
     @Override
@@ -345,14 +337,13 @@ public class BlockMetalAnvil extends TFCBlock implements IMetalBlock, IMaterialI
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+                return new ModelResourceLocation(getResourceLocation(), this.getPropertyString(state.getProperties()));
             }
         });
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation, "normal"));
-        }
+
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(), "normal"));
+
     }
 }

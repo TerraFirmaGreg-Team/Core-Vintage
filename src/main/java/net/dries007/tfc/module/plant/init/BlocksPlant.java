@@ -17,10 +17,10 @@ import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.T
 public class BlocksPlant {
 
     public static void onRegister(Registry registry) {
-        for (var wood : PLANT_BLOCKS.values()) {
-            var itemBlock = wood.getItemBlock();
-            if (itemBlock != null) registry.registerBlock((Block) wood, wood.getItemBlock(), wood.getName());
-            else registry.registerBlock((Block) wood, wood.getName());
+        for (var block : PLANT_BLOCKS.values()) {
+            var itemBlock = block.getItemBlock();
+            if (itemBlock != null) registry.registerBlock((Block) block, block.getItemBlock(), block.getName());
+            else registry.registerBlock((Block) block, block.getName());
         }
     }
 

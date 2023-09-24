@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfc:farmland"
+    "model": "tfc:soil/farmland"
   },
   "variants": {
     "soiltype": {

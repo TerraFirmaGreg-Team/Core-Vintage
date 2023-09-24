@@ -47,8 +47,6 @@ import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
 import net.dries007.tfc.compat.top.TOPIntegration;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
-import net.dries007.tfc.module.metal.ModuleMetal;
-import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -89,8 +87,6 @@ import javax.annotation.Nullable;
 
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
-import static net.dries007.tfc.module.metal.StorageMetal.METAL_BLOCKS;
-import static net.dries007.tfc.module.metal.StorageMetal.METAL_ITEMS;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -126,11 +122,6 @@ public class CommonProxy {
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         IForgeRegistry<Block> r = event.getRegistry();
 
-        //==== Metal =================================================================================================//
-
-        for (var metalBlock : METAL_BLOCKS.values()) {
-            registerItemBlock(r, (Block) metalBlock);
-        }
 
         //==== Other =================================================================================================//
 
@@ -148,18 +139,15 @@ public class CommonProxy {
         registerTE(TEPlacedItemFlat.class, "placed_item_flat");
         registerTE(TEPlacedHide.class, "placed_hide");
         registerTE(TEPitKiln.class, "pit_kiln");
-        registerTE(TENestBox.class, "nest_box");
         registerTE(TELogPile.class, "log_pile");
         registerTE(TEFirePit.class, "fire_pit");
         registerTE(TEBellows.class, "bellows");
         registerTE(TECharcoalForge.class, "charcoal_forge");
-        registerTE(TEMetalAnvil.class, "anvil");
         registerTE(TECrucible.class, "crucible");
         registerTE(TECropBase.class, "crop_base");
         registerTE(TEBlastFurnace.class, "blast_furnace");
         registerTE(TEBloomery.class, "bloomery");
         registerTE(TEBloom.class, "bloom");
-        registerTE(TEMetalSheet.class, "metal_sheet");
         registerTE(TEQuern.class, "quern");
         registerTE(TELargeVessel.class, "large_vessel");
         registerTE(TEPowderKeg.class, "powderkeg");
@@ -178,10 +166,6 @@ public class CommonProxy {
         for (var mold : TFCItems.FIRED_MOLDS.values()) {
             r.register(mold);
         }
-
-        //==== Metal =================================================================================================//
-
-        for (var metalItem : METAL_ITEMS.values()) r.register((Item) metalItem);
 
         //==== Other =================================================================================================//
 
@@ -267,7 +251,6 @@ public class CommonProxy {
 
     public void onPreInit(FMLPreInitializationEvent event) {
         //TreeModule.preInit();
-        ModuleMetal.preInit();
         FoodModule.preInit();
         BushModule.preInit();
 

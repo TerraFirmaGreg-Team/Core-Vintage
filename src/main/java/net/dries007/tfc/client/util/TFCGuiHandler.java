@@ -8,6 +8,8 @@ import net.dries007.tfc.common.objects.items.ItemQuiver;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.common.objects.items.ceramics.ItemSmallVessel;
 import net.dries007.tfc.common.objects.tileentities.*;
+import net.dries007.tfc.module.animal.common.container.ContainerNestBox;
+import net.dries007.tfc.module.animal.common.tile.TENestBox;
 import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.dries007.tfc.module.rock.common.items.ItemRockLoose;
 import net.dries007.tfc.module.wood.client.gui.GuiWoodBarrel;
@@ -55,71 +57,65 @@ public class TFCGuiHandler implements IGuiHandler {
         BlockPos pos = new BlockPos(x, y, z);
         ItemStack stack = player.getHeldItemMainhand();
         Type type = Type.valueOf(ID);
-        switch (type) {
-            case NEST_BOX:
+        // This is null if the chest is blocked
+        return switch (type) {
+            case NEST_BOX -> {
                 TENestBox teNestBox = Helpers.getTE(world, pos, TENestBox.class);
-                return teNestBox == null ? null : new ContainerNestBox(player.inventory, teNestBox);
-            case LOG_PILE:
+                yield teNestBox == null ? null : new ContainerNestBox(player.inventory, teNestBox);
+            }
+            case LOG_PILE -> {
                 TELogPile teLogPile = Helpers.getTE(world, pos, TELogPile.class);
-                return teLogPile == null ? null : new ContainerLogPile(player.inventory, teLogPile);
-            case SMALL_VESSEL:
-                return new ContainerSmallVessel(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
-            case SMALL_VESSEL_LIQUID:
-                return new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
-            case MOLD:
-                return new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemMold ? stack : player.getHeldItemOffhand());
-            case FIRE_PIT:
+                yield teLogPile == null ? null : new ContainerLogPile(player.inventory, teLogPile);
+            }
+            case SMALL_VESSEL ->
+                    new ContainerSmallVessel(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
+            case SMALL_VESSEL_LIQUID ->
+                    new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
+            case MOLD ->
+                    new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemMold ? stack : player.getHeldItemOffhand());
+            case FIRE_PIT ->
                 //noinspection ConstantConditions
-                return new ContainerFirePit(player.inventory, Helpers.getTE(world, pos, TEFirePit.class));
-            case BARREL:
-                return new ContainerWoodBarrel(player.inventory, Helpers.getTE(world, pos, TEWoodBarrel.class));
-            case CHARCOAL_FORGE:
+                    new ContainerFirePit(player.inventory, Helpers.getTE(world, pos, TEFirePit.class));
+            case BARREL -> new ContainerWoodBarrel(player.inventory, Helpers.getTE(world, pos, TEWoodBarrel.class));
+            case CHARCOAL_FORGE ->
                 //noinspection ConstantConditions
-                return new ContainerCharcoalForge(player.inventory, Helpers.getTE(world, pos, TECharcoalForge.class));
-            case ANVIL:
+                    new ContainerCharcoalForge(player.inventory, Helpers.getTE(world, pos, TECharcoalForge.class));
+            case ANVIL ->
                 //noinspection ConstantConditions
-                return new ContainerAnvilTFC(player.inventory, Helpers.getTE(world, pos, TEMetalAnvil.class));
-            case ANVIL_PLAN:
-                return new ContainerAnvilPlan(player.inventory, Helpers.getTE(world, pos, TEMetalAnvil.class));
-            case KNAPPING_STONE:
-                return new ContainerKnapping(KnappingType.STONE, player.inventory, stack.getItem() instanceof ItemRockLoose ? stack : player.getHeldItemOffhand());
-            case KNAPPING_CLAY:
-                return new ContainerKnapping(KnappingType.CLAY, player.inventory, OreDictionaryHelper.doesStackMatchOre(stack, "clay") ? stack : player.getHeldItemOffhand());
-            case KNAPPING_LEATHER:
-                return new ContainerKnapping(KnappingType.LEATHER, player.inventory, OreDictionaryHelper.doesStackMatchOre(stack, "leather") ? stack : player.getHeldItemOffhand());
-            case KNAPPING_FIRE_CLAY:
-                return new ContainerKnapping(KnappingType.FIRE_CLAY, player.inventory, OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
-            case CRUCIBLE:
-                return new ContainerCrucible(player.inventory, Helpers.getTE(world, pos, TECrucible.class));
-            case LARGE_VESSEL:
-                return new ContainerLargeVessel(player.inventory, Helpers.getTE(world, pos, TELargeVessel.class));
-            case POWDERKEG:
-                return new ContainerPowderKeg(player.inventory, Helpers.getTE(world, pos, TEPowderKeg.class));
-            case CALENDAR:
-            case SKILLS:
-            case NUTRITION:
-                return new ContainerSimple(player.inventory);
-            case BLAST_FURNACE:
-                return new ContainerBlastFurnace(player.inventory, Helpers.getTE(world, pos, TEBlastFurnace.class));
-            case CRAFTING:
-                return new ContainerInventoryCrafting(player.inventory, player.world);
-            case QUIVER:
-                return new ContainerQuiver(player.inventory, stack.getItem() instanceof ItemQuiver ? stack : player.getHeldItemOffhand());
-            case CHEST:
+                    new ContainerAnvilTFC(player.inventory, Helpers.getTE(world, pos, TEMetalAnvil.class));
+            case ANVIL_PLAN -> new ContainerAnvilPlan(player.inventory, Helpers.getTE(world, pos, TEMetalAnvil.class));
+            case KNAPPING_STONE ->
+                    new ContainerKnapping(KnappingType.STONE, player.inventory, stack.getItem() instanceof ItemRockLoose ? stack : player.getHeldItemOffhand());
+            case KNAPPING_CLAY ->
+                    new ContainerKnapping(KnappingType.CLAY, player.inventory, OreDictionaryHelper.doesStackMatchOre(stack, "clay") ? stack : player.getHeldItemOffhand());
+            case KNAPPING_LEATHER ->
+                    new ContainerKnapping(KnappingType.LEATHER, player.inventory, OreDictionaryHelper.doesStackMatchOre(stack, "leather") ? stack : player.getHeldItemOffhand());
+            case KNAPPING_FIRE_CLAY ->
+                    new ContainerKnapping(KnappingType.FIRE_CLAY, player.inventory, OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
+            case CRUCIBLE -> new ContainerCrucible(player.inventory, Helpers.getTE(world, pos, TECrucible.class));
+            case LARGE_VESSEL ->
+                    new ContainerLargeVessel(player.inventory, Helpers.getTE(world, pos, TELargeVessel.class));
+            case POWDERKEG -> new ContainerPowderKeg(player.inventory, Helpers.getTE(world, pos, TEPowderKeg.class));
+            case CALENDAR, SKILLS, NUTRITION -> new ContainerSimple(player.inventory);
+            case BLAST_FURNACE ->
+                    new ContainerBlastFurnace(player.inventory, Helpers.getTE(world, pos, TEBlastFurnace.class));
+            case CRAFTING -> new ContainerInventoryCrafting(player.inventory, player.world);
+            case QUIVER ->
+                    new ContainerQuiver(player.inventory, stack.getItem() instanceof ItemQuiver ? stack : player.getHeldItemOffhand());
+            case CHEST -> {
                 if (world.getBlockState(pos).getBlock() instanceof BlockWoodChest) {
                     ILockableContainer chestContainer = ((BlockWoodChest) world.getBlockState(pos).getBlock()).getLockableContainer(world, pos);
                     if (chestContainer == null) // This is null if the chest is blocked
                     {
-                        return null;
+                        yield null;
                     }
-                    return new ContainerWoodChest(player.inventory, chestContainer, player);
+                    yield new ContainerWoodChest(player.inventory, chestContainer, player);
                 }
-                return null;
-            case SALAD:
-                return new ContainerSalad(player.inventory);
-            default:
-                return null;
-        }
+                yield null;
+            }
+            case SALAD -> new ContainerSalad(player.inventory);
+            default -> null;
+        };
     }
 
     @Override

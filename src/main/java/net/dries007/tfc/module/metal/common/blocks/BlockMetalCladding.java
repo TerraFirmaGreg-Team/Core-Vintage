@@ -3,12 +3,11 @@ package net.dries007.tfc.module.metal.common.blocks;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.util.IHasModel;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.common.objects.tileentities.TEMetalSheet;
+import net.dries007.tfc.module.metal.api.type.MetalType;
+import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
+import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariant;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
@@ -25,7 +24,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -43,7 +41,7 @@ import java.util.List;
 
 
 @ParametersAreNonnullByDefault
-public class BlockMetalCladding extends TFCBlock implements IHasModel {
+public class BlockMetalCladding extends TFCBlock implements IMetalBlock {
     public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{
             PropertyBool.create("down"),
             PropertyBool.create("up"),
@@ -60,17 +58,16 @@ public class BlockMetalCladding extends TFCBlock implements IHasModel {
             new AxisAlignedBB(0.9375d, 0d, 0d, 1d, 1d, 1d),
             new AxisAlignedBB(0d, 0d, 0d, 0.0625d, 1d, 1d)
     };
-    private final ResourceLocation modelLocation;
 
-    public BlockMetalCladding() {
+    private final MetalBlockVariant variant;
+    private final MetalType type;
+
+    public BlockMetalCladding(MetalBlockVariant variant, MetalType type) {
         super(net.minecraft.block.material.Material.IRON);
 
-        this.modelLocation = TerraFirmaCraft.getID("metal/cladding");
+        this.variant = variant;
+        this.type = type;
 
-        var blockRegistryName = "metal/cladding";
-        setRegistryName(Tags.MOD_ID, blockRegistryName);
-        setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        setCreativeTab(CreativeTabsTFC.METAL_TAB);
         setHardness(40F);
         setResistance(25F);
         setHarvestLevel("pickaxe", 0);
@@ -84,12 +81,22 @@ public class BlockMetalCladding extends TFCBlock implements IHasModel {
                 .withProperty(FACE_PROPERTIES[5], false));
     }
 
+    @Override
+    public MetalBlockVariant getBlockVariant() {
+        return variant;
+    }
+
+    @Nullable
+    @Override
+    public MetalType getType() {
+        return type;
+    }
+
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
         return null;
     }
-
 
     @Override
     @SuppressWarnings("deprecation")
@@ -282,14 +289,11 @@ public class BlockMetalCladding extends TFCBlock implements IHasModel {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, this.getPropertyString(state.getProperties()));
+                return new ModelResourceLocation(getResourceLocation(), this.getPropertyString(state.getProperties()));
             }
         });
 
-        for (IBlockState state : this.getBlockState().getValidStates()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                    this.getMetaFromState(state),
-                    new ModelResourceLocation(modelLocation, "normal"));
-        }
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

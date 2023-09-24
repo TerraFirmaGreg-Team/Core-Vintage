@@ -2,9 +2,9 @@ package net.dries007.tfc.util;
 
 import com.google.common.collect.Lists;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.types.animal.ICreatureTFC;
-import net.dries007.tfc.api.types.animal.IHuntable;
-import net.dries007.tfc.api.types.animal.IPredator;
+import net.dries007.tfc.module.animal.api.type.ICreature;
+import net.dries007.tfc.module.animal.api.type.IHuntable;
+import net.dries007.tfc.module.animal.api.type.IPredator;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.config.ConfigTFC;
@@ -215,10 +215,10 @@ public class WorldRegenHandler {
         final float floraDensity = ChunkDataTFC.getFloraDensity(worldIn, chunkBlockPos);
         final float floraDiversity = ChunkDataTFC.getFloraDiversity(worldIn, chunkBlockPos);
         ForgeRegistries.ENTITIES.getValuesCollection().stream().filter((x) -> {
-            if (ICreatureTFC.class.isAssignableFrom(x.getEntityClass())) {
+            if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
                 Entity ent = x.newInstance(worldIn);
                 if (ent instanceof IPredator || ent instanceof IHuntable) {
-                    int weight = ((ICreatureTFC) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
+                    int weight = ((ICreature) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
                     return weight > 0 && randomIn.nextInt(weight) == 0;
                 }
             }
@@ -229,7 +229,7 @@ public class WorldRegenHandler {
     private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random rand) {
         List<EntityLiving> group = Lists.newArrayList();
         EntityLiving creature = (EntityLiving) entityEntry.newInstance(worldIn);
-        if (creature instanceof ICreatureTFC creatureTFC) {
+        if (creature instanceof ICreature creatureTFC) {
             int fallback = 5;
             int individuals = Math.max(1, creatureTFC.getMinGroupSize()) + rand.nextInt(creatureTFC.getMaxGroupSize() - Math.max(0, creatureTFC.getMinGroupSize() - 1));
 
@@ -253,7 +253,7 @@ public class WorldRegenHandler {
                         --individuals;
                         if (individuals > 0) {
                             creature = (EntityLiving) entityEntry.newInstance(worldIn);
-                            creatureTFC = (ICreatureTFC) creature;
+                            creatureTFC = (ICreature) creature;
                         }
                     }
                 } else {

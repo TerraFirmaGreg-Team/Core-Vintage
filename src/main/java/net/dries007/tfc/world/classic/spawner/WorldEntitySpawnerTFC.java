@@ -1,9 +1,9 @@
 package net.dries007.tfc.world.classic.spawner;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.types.animal.ICreatureTFC;
-import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.animal.api.type.ICreature;
+import net.dries007.tfc.module.animal.common.entity.livestock.*;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -42,24 +42,24 @@ public final class WorldEntitySpawnerTFC {
 
     static {
         LIVESTOCK = new HashMap<>();
-        LIVESTOCK.put(EntityAlpacaTFC.class, () -> ConfigTFC.Animals.ALPACA.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityCamelTFC.class, () -> ConfigTFC.Animals.CAMEL.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityChickenTFC.class, () -> ConfigTFC.Animals.CHICKEN.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityCowTFC.class, () -> ConfigTFC.Animals.COW.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityDonkeyTFC.class, () -> ConfigTFC.Animals.DONKEY.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityDuckTFC.class, () -> ConfigTFC.Animals.DUCK.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityGoatTFC.class, () -> ConfigTFC.Animals.GOAT.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityGrouseTFC.class, () -> ConfigTFC.Animals.GROUSE.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityHorseTFC.class, () -> ConfigTFC.Animals.HORSE.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityLlamaTFC.class, () -> ConfigTFC.Animals.LLAMA.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityMuskOxTFC.class, () -> ConfigTFC.Animals.MUSKOX.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityOcelotTFC.class, () -> ConfigTFC.Animals.OCELOT.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityPigTFC.class, () -> ConfigTFC.Animals.PIG.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityQuailTFC.class, () -> ConfigTFC.Animals.QUAIL.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntitySheepTFC.class, () -> ConfigTFC.Animals.SHEEP.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityWolfTFC.class, () -> ConfigTFC.Animals.WOLF.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityYakTFC.class, () -> ConfigTFC.Animals.YAK.elder * ICalendar.TICKS_IN_DAY);
-        LIVESTOCK.put(EntityZebuTFC.class, () -> ConfigTFC.Animals.ZEBU.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalAlpaca.class, () -> ConfigTFC.Animals.ALPACA.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalCamel.class, () -> ConfigTFC.Animals.CAMEL.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalChicken.class, () -> ConfigTFC.Animals.CHICKEN.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalCow.class, () -> ConfigTFC.Animals.COW.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalDonkey.class, () -> ConfigTFC.Animals.DONKEY.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalDuck.class, () -> ConfigTFC.Animals.DUCK.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalGoat.class, () -> ConfigTFC.Animals.GOAT.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalGrouse.class, () -> ConfigTFC.Animals.GROUSE.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalHorse.class, () -> ConfigTFC.Animals.HORSE.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalLlama.class, () -> ConfigTFC.Animals.LLAMA.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalMuskOx.class, () -> ConfigTFC.Animals.MUSKOX.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalOcelot.class, () -> ConfigTFC.Animals.OCELOT.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalPig.class, () -> ConfigTFC.Animals.PIG.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalQuail.class, () -> ConfigTFC.Animals.QUAIL.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalSheep.class, () -> ConfigTFC.Animals.SHEEP.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalWolf.class, () -> ConfigTFC.Animals.WOLF.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalYak.class, () -> ConfigTFC.Animals.YAK.elder * ICalendar.TICKS_IN_DAY);
+        LIVESTOCK.put(EntityAnimalZebu.class, () -> ConfigTFC.Animals.ZEBU.elder * ICalendar.TICKS_IN_DAY);
     }
 
     public static void init() {
@@ -121,10 +121,10 @@ public final class WorldEntitySpawnerTFC {
         // Spawns only one group
         ForgeRegistries.ENTITIES.getValuesCollection().stream()
                 .filter(x -> {
-                    if (ICreatureTFC.class.isAssignableFrom(x.getEntityClass())) {
+                    if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
                         Entity ent = x.newInstance(worldIn);
-                        if (ent instanceof ICreatureTFC) {
-                            int weight = ((ICreatureTFC) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
+                        if (ent instanceof ICreature) {
+                            int weight = ((ICreature) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
                             return weight > 0 && randomIn.nextInt(weight) == 0;
                         }
                     }
@@ -136,7 +136,7 @@ public final class WorldEntitySpawnerTFC {
     private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random randomIn) {
         List<EntityLiving> group = new ArrayList<>();
         EntityLiving creature = (EntityLiving) entityEntry.newInstance(worldIn);
-        if (!(creature instanceof ICreatureTFC creatureTFC)) {
+        if (!(creature instanceof ICreature creatureTFC)) {
             return; // Make sure to not crash
         }
         int fallback = 5; // Fallback measure if some mod completely deny this entity spawn
@@ -163,7 +163,7 @@ public final class WorldEntitySpawnerTFC {
                 if (--individuals > 0) {
                     //We still need to spawn more
                     creature = (EntityLiving) entityEntry.newInstance(worldIn);
-                    creatureTFC = (ICreatureTFC) creature;
+                    creatureTFC = (ICreature) creature;
                 }
             } else {
                 if (--fallback <= 0) //Trying to spawn in water or inside walls too many times, let's break

@@ -4,7 +4,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.types.animal.IAnimalTFC;
+import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.items.tools.behaviors.ChiselBehavior;
 import net.dries007.tfc.config.ConfigTFC;
@@ -237,7 +237,7 @@ public final class PlayerDataOverlay {
 
         if (player.isSneaking()) {
             EntityLivingBase entity = event.getEntity();
-            if (entity instanceof IAnimalTFC && ((IAnimalTFC) entity).getAdultFamiliarityCap() > 0 && entity == mc.pointedEntity) {
+            if (entity instanceof IAnimal && ((IAnimal) entity).getAdultFamiliarityCap() > 0 && entity == mc.pointedEntity) {
                 double x, y, z;
                 x = event.getX();
                 y = event.getY();
@@ -249,7 +249,7 @@ public final class PlayerDataOverlay {
                 float f2 = 5.0F;
 
                 if (d3 < f2) {
-                    IAnimalTFC animal = (IAnimalTFC) entity;
+                    IAnimal animal = (IAnimal) entity;
                     RenderManager rendermanager = mc.getRenderManager();
 
                     GL11.glPushMatrix();
@@ -264,7 +264,7 @@ public final class PlayerDataOverlay {
                     GL11.glScalef(0.33F, 0.33F, 0.33F);
 
                     float familiarity = Math.max(0.0F, Math.min(1.0F, animal.getFamiliarity()));
-                    if (familiarity >= animal.getAdultFamiliarityCap() && animal.getAge() != IAnimalTFC.Age.CHILD) {
+                    if (familiarity >= animal.getAdultFamiliarityCap() && animal.getAge() != IAnimal.Age.CHILD) {
                         // Render a red-ish outline for adults that cannot be familiarized more
                         drawTexturedModalRect(-8, 0, 132, 40, 16, 16);
                     } else if (familiarity >= 0.3F) {

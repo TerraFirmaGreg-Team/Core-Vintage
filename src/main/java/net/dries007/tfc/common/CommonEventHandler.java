@@ -22,9 +22,9 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
-import net.dries007.tfc.api.types.animal.IAnimalTFC;
-import net.dries007.tfc.api.types.animal.ICreatureTFC;
-import net.dries007.tfc.api.types.animal.IPredator;
+import net.dries007.tfc.module.animal.api.type.IAnimal;
+import net.dries007.tfc.module.animal.api.type.ICreature;
+import net.dries007.tfc.module.animal.api.type.IPredator;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.devices.BlockQuern;
@@ -604,7 +604,7 @@ public final class CommonEventHandler {
             }
 
             // Check creature spawning - Prevents vanilla's respawning mechanic to spawn creatures outside their allowed conditions
-            if (event.getEntity() instanceof ICreatureTFC creature) {
+            if (event.getEntity() instanceof ICreature creature) {
                 float rainfall = ChunkDataTFC.getRainfall(world, pos);
                 float temperature = ClimateTFC.getAvgTemp(world, pos);
                 float floraDensity = ChunkDataTFC.getFloraDensity(world, pos);
@@ -928,7 +928,7 @@ public final class CommonEventHandler {
                 if (pluckable.equals(entityTypeName)) {
                     target.dropItem(Items.FEATHER, 1);
                     target.attackEntityFrom(DamageSourcesTFC.PLUCKING, (float) ConfigTFC.General.MISC.damagePerFeather);
-                    if (target instanceof IAnimalTFC animalTarget) {
+                    if (target instanceof IAnimal animalTarget) {
                         animalTarget.setFamiliarity(animalTarget.getFamiliarity() - 0.04f);
                     }
                     return;

@@ -61,7 +61,7 @@ dependencies {
 
         runtimeOnly("curse.maven:3.2.3.358-codechicken-lib-1-8-242818:2779848")
         runtimeOnly("curse.maven:ctm-267602:2915363")
-        runtimeOnly("curse.maven:chisel-235279:2915375")
+        //runtimeOnly("curse.maven:chisel-235279:2915375")
     }
 
     // Dramatic Trees dependencies

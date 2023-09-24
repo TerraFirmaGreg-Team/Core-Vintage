@@ -14,7 +14,7 @@ public class EntitiesWood {
 
         registry.createEntityEntry("boat", EntityEntryBuilder.create()
                 .entity(EntityWoodBoat.class)
-                .tracker(80, 1, true)
+                .tracker(160, 20, true)
         );
     }
 

@@ -18,7 +18,7 @@ public final class CreativeTabsTFC {
 
 
     public static final CreativeTabs CROP_TAB = new TFCCreativeTab("crop", "tfc:crop.seed.rice");
-    public static final CreativeTabs METAL_TAB = new TFCCreativeTab("metal", "tfc:metal/anvil/red_steel");
+
     public static final CreativeTabs POTTERY_TAB = new TFCCreativeTab("pottery", "tfc:ceramics/fired/mold/ingot");
     public static final CreativeTabs FOOD_TAB = new TFCCreativeTab("food", "tfc:food/green_apple");
     public static final CreativeTabs MISC_TAB = new TFCCreativeTab("misc", "tfc:wand");

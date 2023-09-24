@@ -31,6 +31,7 @@ public class BlockPeatGrass extends TFCBlock {
     public static final PropertyBool EAST = PropertyBool.create("east");
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
+
     public static final String NAME = "peat_grass";
 
     public BlockPeatGrass() {

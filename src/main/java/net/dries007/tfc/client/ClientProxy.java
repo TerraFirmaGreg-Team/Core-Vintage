@@ -18,7 +18,6 @@ import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
 import net.dries007.tfc.client.render.*;
-import net.dries007.tfc.client.render.animal.*;
 import net.dries007.tfc.client.render.projectile.RenderThrownJavelin;
 import net.dries007.tfc.client.util.FluidSpriteCache;
 import net.dries007.tfc.client.util.GrassColorHandler;
@@ -28,7 +27,6 @@ import net.dries007.tfc.common.objects.blocks.BlockPlacedHide;
 import net.dries007.tfc.common.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
-import net.dries007.tfc.common.objects.entity.animal.*;
 import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
@@ -38,9 +36,6 @@ import net.dries007.tfc.compat.dynamictrees.client.BakedModelBlockRootyTFC;
 import net.dries007.tfc.compat.dynamictrees.client.ModelHelperTFC;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.metal.StorageMetal;
-import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
-import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -64,7 +59,10 @@ import net.minecraft.client.renderer.entity.RenderFallingBlock;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.*;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -94,7 +92,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.module.metal.StorageMetal.METAL_BLOCKS;
 import static net.minecraft.block.Block.getBlockFromItem;
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -123,8 +120,6 @@ public class ClientProxy extends CommonProxy {
     public static void registerModels(ModelRegistryEvent event) {
 
         //==== BLOCKS ================================================================================================//
-
-        METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
         for (var block : TFCBlocks.BLOCKS) {
             if (block instanceof IHasModel blockModel) {
@@ -167,7 +162,6 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());
         ClientRegistry.bindTileEntitySpecialRenderer(TEQuern.class, new TESRQuern());
         ClientRegistry.bindTileEntitySpecialRenderer(TEBellows.class, new TESRBellows());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEMetalAnvil.class, new TESRAnvil());
         ClientRegistry.bindTileEntitySpecialRenderer(TECrucible.class, new TESRCrucible());
         ClientRegistry.bindTileEntitySpecialRenderer(TEFirePit.class, new TESRFirePit());
 
@@ -238,15 +232,6 @@ public class ClientProxy extends CommonProxy {
         var blockColors = event.getBlockColors();
         IBlockColor grassColor = GrassColorHandler::computeGrassColor;
 
-        //==== Metal =================================================================================================//
-
-        blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IMetalBlock) s.getBlock()).getMaterial().getMaterialRGB() : 0xFFFFFF,
-                StorageMetal.METAL_BLOCKS.values()
-                        .stream()
-                        .map(s -> (Block) s)
-                        .toArray(Block[]::new));
-
-
         blockColors.registerBlockColorHandler(grassColor, TFCBlocks.ROOTY_DIRT_MIMIC);
 
     }
@@ -258,14 +243,6 @@ public class ClientProxy extends CommonProxy {
         var itemColors = event.getItemColors();
 
         var blockColors = event.getBlockColors();
-
-        //==== Metal =================================================================================================//
-
-        itemColors.registerItemColorHandler((s, i) -> i == 0 ? ((IMetalBlock) ((ItemBlock) s.getItem()).getBlock()).getMaterial().getMaterialRGB() : 0xFFFFFF,
-                METAL_BLOCKS.values()
-                        .stream()
-                        .map(s -> (Block) s)
-                        .toArray(Block[]::new));
 
         //==== Other =================================================================================================//
 
@@ -486,57 +463,14 @@ public class ClientProxy extends CommonProxy {
     public static void textureStitched(TextureStitchEvent.Post event) {
         FluidSpriteCache.clear();
     }
-
-    public static void registerEntityRenderer() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockTFC.class, RenderFallingBlock::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityThrownJavelin.class, RenderThrownJavelin::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntitySheepTFC.class, RenderSheepTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityCowTFC.class, RenderCowTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityGrizzlyBearTFC.class, RenderGrizzlyBearTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityChickenTFC.class, RenderChickenTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityPheasantTFC.class, RenderPheasantTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityDeerTFC.class, RenderDeerTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityPigTFC.class, RenderPigTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityWolfTFC.class, RenderWolfTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityRabbitTFC.class, RenderRabbitTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityHorseTFC.class, RenderHorseTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityDonkeyTFC.class, RenderAbstractHorseTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityMuleTFC.class, RenderAbstractHorseTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityPolarBearTFC.class, RenderPolarBearTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityParrotTFC.class, RenderParrotTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityLlamaTFC.class, RenderLlamaTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityOcelotTFC.class, RenderOcelotTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityPantherTFC.class, RenderPantherTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityDuckTFC.class, RenderDuckTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityAlpacaTFC.class, RenderAlpacaTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityGoatTFC.class, RenderGoatTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntitySaberToothTFC.class, RenderSaberToothTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityCamelTFC.class, RenderCamelTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityLionTFC.class, RenderLionTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityHyenaTFC.class, RenderHyenaTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityDireWolfTFC.class, RenderDireWolfTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityHareTFC.class, RenderHareTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityBoarTFC.class, RenderBoarTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityZebuTFC.class, RenderZebuTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityGazelleTFC.class, RenderGazelleTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityWildebeestTFC.class, RenderWildebeestTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityQuailTFC.class, RenderQuailTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityGrouseTFC.class, RenderGrouseTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityMongooseTFC.class, RenderMongooseTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTurkeyTFC.class, RenderTurkeyTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityJackalTFC.class, RenderJackalTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityMuskOxTFC.class, RenderMuskOxTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityYakTFC.class, RenderYakTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityBlackBearTFC.class, RenderBlackBearTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityCougarTFC.class, RenderCougarTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityCoyoteTFC.class, RenderCoyoteTFC::new);
-    }
+    
 
     @Override
     public void onPreInit(FMLPreInitializationEvent event) {
         super.onPreInit(event);
 
-        registerEntityRenderer();
+        RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockTFC.class, RenderFallingBlock::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityThrownJavelin.class, RenderThrownJavelin::new);
     }
 
     @Override

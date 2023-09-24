@@ -1,9 +1,12 @@
 package net.dries007.tfc.module.metal.api.variant.block;
 
-import gregtech.api.unification.material.Material;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.module.metal.api.type.MetalType;
+import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -24,5 +27,26 @@ public interface IMetalBlock extends IHasModel, IItemProvider {
      * @return Материал металлического блока или null, если материал не определен.
      */
     @Nullable
-    Material getMaterial();
+    MetalType getType();
+
+
+    /**
+     * Возвращает местоположение регистрации блока почвы.
+     *
+     * @return Местоположение регистрации блока почвы.
+     */
+    @Nonnull
+    default String getName() {
+        return String.format("metal.%s.%s", getBlockVariant(), getType());
+    }
+
+    /**
+     * Возвращает местоположение ресурса блока почвы.
+     *
+     * @return Местоположение ресурса блока почвы.
+     */
+    @Nonnull
+    default ResourceLocation getResourceLocation() {
+        return TerraFirmaCraft.getID(String.format("metal/%s", getBlockVariant()));
+    }
 }

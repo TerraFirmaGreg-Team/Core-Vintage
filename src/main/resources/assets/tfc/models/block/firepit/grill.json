@@ -1,8 +1,8 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "grill": "tfc:blocks/metal/wrought_iron",
-    "particle": "tfc:blocks/metal/wrought_iron"
+    "grill": "tfc:blocks/metal/metal",
+    "particle": "tfc:blocks/metal/metal"
   },
   "elements": [
     {

@@ -1,6 +1,5 @@
 package net.dries007.tfc.common.objects.blocks;
 
-import gregtech.api.GregTechAPI;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.types.bush.IBushBlock;
@@ -11,9 +10,6 @@ import net.dries007.tfc.common.objects.blocks.devices.*;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidHotWater;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidWater;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeRootyMimic;
-import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
-import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariant;
-import net.dries007.tfc.module.metal.common.blocks.BlockMetalCladding;
 import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.module.rock.common.blocks.BlockAlabaster;
@@ -30,7 +26,6 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.Map;
 
-import static net.dries007.tfc.module.metal.StorageMetal.METAL_BLOCKS;
 import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.*;
 import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*;
 import static net.minecraft.block.material.Material.WATER;
@@ -65,7 +60,7 @@ public class TFCBlocks {
     public static BlockBlastFurnace BLAST_FURNACE;
     public static BlockBellows BELLOWS;
     public static BlockBloomery BLOOMERY;
-    public static BlockNestBox NEST_BOX;
+
     public static BlockLargeVessel FIRED_LARGE_VESSEL;
     public static BlockFirePit FIREPIT;
     public static BlockThatchBed THATCH_BED;
@@ -80,22 +75,9 @@ public class TFCBlocks {
     public static BlockBloom BLOOM;
     public static BlockIceTFC SEA_ICE;
     public static BlockPowderKeg POWDERKEG;
-    public static BlockMetalCladding CLADDING;
+
 
     public static void preInit() {
-
-        //==== Metal =================================================================================================//
-
-        for (var material : GregTechAPI.materialManager.getRegistry("gregtech")) {
-            if (material.hasFlag(TFGMaterialFlags.GENERATE_ANVIL)) {
-                for (var variant : MetalBlockVariant.getMetalBlockVariants()) {
-                    var metalBlock = variant.create(material);
-
-                    if (METAL_BLOCKS.put(new Pair<>(variant, material), metalBlock) != null)
-                        throw new RuntimeException(String.format("Duplicate registry detected: %s, %s, %s", variant, material, metalBlock));
-                }
-            }
-        }
 
         //==== Alabaster =============================================================================================//
 
@@ -136,7 +118,6 @@ public class TFCBlocks {
         BLOCKS.add(BLAST_FURNACE = new BlockBlastFurnace());
         BLOCKS.add(BELLOWS = new BlockBellows());
         BLOCKS.add(BLOOMERY = new BlockBloomery());
-        BLOCKS.add(NEST_BOX = new BlockNestBox());
         BLOCKS.add(FIRED_LARGE_VESSEL = new BlockLargeVessel());
         BLOCKS.add(FIREPIT = new BlockFirePit());
         BLOCKS.add(PIT_KILN = new BlockPitKiln());
@@ -144,7 +125,6 @@ public class TFCBlocks {
         BLOCKS.add(CHARCOAL_FORGE = new BlockCharcoalForge());
         BLOCKS.add(SEA_ICE = new BlockIceTFC(FluidRegistry.getFluid("salt_water")));
         BLOCKS.add(POWDERKEG = new BlockPowderKeg());
-        BLOCKS.add(CLADDING = new BlockMetalCladding());
 
         BLOCKS.add(PLACED_ITEM_FLAT = new BlockPlacedItemFlat());
         BLOCKS.add(PLACED_HIDE = new BlockPlacedHide());

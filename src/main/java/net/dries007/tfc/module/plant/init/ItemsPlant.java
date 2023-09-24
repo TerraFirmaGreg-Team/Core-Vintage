@@ -12,8 +12,8 @@ import static net.dries007.tfc.module.plant.StoragePlant.PLANT_ITEMS;
 public class ItemsPlant {
 
     public static void onRegister(Registry registry) {
-        for (var wood : PLANT_ITEMS.values()) {
-            registry.registerItem((Item) wood, wood.getName());
+        for (var item : PLANT_ITEMS.values()) {
+            registry.registerItem((Item) item, item.getName());
         }
     }
 

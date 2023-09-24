@@ -13,8 +13,8 @@ import static net.dries007.tfc.module.wood.StorageWood.WOOD_ITEMS;
 public class ItemsWood {
 
     public static void onRegister(Registry registry) {
-        for (var wood : WOOD_ITEMS.values()) {
-            registry.registerItem((Item) wood, wood.getName());
+        for (var item : WOOD_ITEMS.values()) {
+            registry.registerItem((Item) item, item.getName());
         }
     }
 

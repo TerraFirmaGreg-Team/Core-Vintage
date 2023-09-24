@@ -73,7 +73,7 @@ public class TEMetalAnvil extends TEInventory {
     public int getTier() {
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof BlockMetalAnvil) {
-            return ((BlockMetalAnvil) state.getBlock()).getMetal().getProperty(TFGPropertyKey.HEAT).getTier();
+            return ((BlockMetalAnvil) state.getBlock()).getType().getMaterial().getProperty(TFGPropertyKey.HEAT).getTier();
         }
         return 0;
     }

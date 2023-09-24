@@ -3,7 +3,7 @@ package net.dries007.tfc.module.wood.common.entity;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
-import net.dries007.tfc.module.wood.common.WoodStorage;
+import net.dries007.tfc.module.wood.StorageWood;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,7 +38,7 @@ public class EntityWoodBoat extends EntityBoat {
     @Nullable
     public WoodType getWood() {
         //noinspection ConstantConditions
-        return WoodStorage.WOOD_BLOCKS.values().stream()
+        return StorageWood.WOOD_BLOCKS.values().stream()
                 .map(IWoodBlock::getType)
                 .filter(wood -> wood.toString().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
                 .findFirst().orElse(null);
@@ -63,7 +63,7 @@ public class EntityWoodBoat extends EntityBoat {
     public Item getItemBoat() {
         var type = getWood();
         if (type != null) {
-            return WoodStorage.getWoodItem(BOAT, type);
+            return StorageWood.getWoodItem(BOAT, type);
         }
         return super.getItemBoat();
     }

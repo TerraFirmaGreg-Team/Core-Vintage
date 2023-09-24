@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.rock.common;
+package net.dries007.tfc.module.rock;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 import javax.annotation.Nonnull;
 import java.util.Map;
 
-public class RockStorage {
+public class StorageRock {
 
     public static final Map<Pair<RockBlockVariant, RockType>, IRockBlock> ROCK_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
     public static final Map<Pair<RockItemVariant, RockType>, IRockItem> ROCK_ITEMS = new Object2ObjectLinkedOpenHashMap<>();

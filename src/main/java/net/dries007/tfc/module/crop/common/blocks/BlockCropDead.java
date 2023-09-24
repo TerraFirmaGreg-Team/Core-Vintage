@@ -2,11 +2,10 @@ package net.dries007.tfc.module.crop.common.blocks;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.crop.StorageCrop;
 import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;
 import net.dries007.tfc.module.crop.api.variant.block.ICropBlock;
-import net.dries007.tfc.module.crop.common.CropStorage;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.block.BlockBush;
@@ -93,7 +92,7 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant, ICropBloc
     @Nonnull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return CropStorage.getCropItem(SEED, type);
+        return StorageCrop.getCropItem(SEED, type);
     }
 
     @Override
@@ -132,7 +131,7 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant, ICropBloc
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(CropStorage.getCropItem(SEED, type));
+        return new ItemStack(StorageCrop.getCropItem(SEED, type));
     }
 
     @Override

@@ -1,8 +1,6 @@
 package net.dries007.tfc.module.soil.common.blocks.peat;
 
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
-import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
@@ -11,17 +9,17 @@ import net.minecraft.init.Blocks;
 
 
 public class BlockPeat extends TFCBlock {
+
+    public static final String NAME = "peat";
+
     public BlockPeat() {
         super(Material.GROUND);
 
-        setRegistryName(Tags.MOD_ID, "peat");
-        setTranslationKey(Tags.MOD_ID + ".peat");
-        setCreativeTab(CreativeTabsTFC.SOIL_TAB);
         setSoundType(SoundType.GROUND);
         setHardness(0.6F);
         setHarvestLevel("shovel", 0);
 
-        OreDictionaryHelper.register(this, "peat");
+        OreDictionaryHelper.register(this, NAME);
         Blocks.FIRE.setFireInfo(this, 5, 10);
 
         DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.GRAVELLIKE);

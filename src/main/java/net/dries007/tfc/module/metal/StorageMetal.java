@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.metal.common;
+package net.dries007.tfc.module.metal;
 
 import gregtech.api.unification.material.Material;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 import javax.annotation.Nonnull;
 import java.util.Map;
 
-public class MetalStorage {
+public class StorageMetal {
 
     public static final Map<Pair<MetalBlockVariant, Material>, IMetalBlock> METAL_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
     public static final Map<Pair<MetalItemVariant, Material>, IMetalItem> METAL_ITEMS = new Object2ObjectLinkedOpenHashMap<>();

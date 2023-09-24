@@ -4,8 +4,8 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.ore.StoneType;
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.category.RockCategory;
-import net.dries007.tfc.module.rock.common.RockStorage;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -61,8 +61,8 @@ public class RockType {
 
         new StoneType(
                 counter++, "tfc_" + name, SoundType.STONE, orePrefix, material,
-                () -> RockStorage.getRockBlock(RAW, this).getDefaultState(),
-                state -> state.getBlock() == RockStorage.getRockBlock(RAW, this),
+                () -> StorageRock.getRockBlock(RAW, this).getDefaultState(),
+                state -> state.getBlock() == StorageRock.getRockBlock(RAW, this),
                 false
         );
     }

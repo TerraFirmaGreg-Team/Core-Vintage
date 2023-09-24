@@ -3,7 +3,7 @@ package net.dries007.tfc.compat.dynamictrees;
 import com.ferreusveritas.dynamictrees.api.ICustomRootDecay;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.soil.common.SoilStorage;
+import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
@@ -33,11 +33,11 @@ public class TFCRootDecay implements ICustomRootDecay {
         ChunkDataTFC chunkData = world.getChunk(pos).getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
         if (chunkData != null) {
             // Установить состояние блока земли на основе типа почвы и высоты почвы в данной позиции
-            world.setBlockState(pos, SoilStorage.getSoilBlock(DIRT, chunkData.getSoilHeight(pos)).getDefaultState(), 3);
+            world.setBlockState(pos, StorageSoil.getSoilBlock(DIRT, chunkData.getSoilHeight(pos)).getDefaultState(), 3);
             return true;
         } else if (world.getWorldType() == TerraFirmaCraft.WORLD_TYPE_TFC) {
             // Не удалось получить данные чанка, но тип мира tfc все еще применяется, примените тип земли по умолчанию
-            world.setBlockState(pos, SoilStorage.getSoilBlock(DIRT, LOAM).getDefaultState(), 3);
+            world.setBlockState(pos, StorageSoil.getSoilBlock(DIRT, LOAM).getDefaultState(), 3);
             return true;
         }
         return false;

@@ -4,7 +4,7 @@ import com.ferreusveritas.dynamictrees.items.Seed;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -28,7 +28,7 @@ public class ItemWoodSeed extends Seed {
         this.type = type;
 
         setTranslationKey(String.format("wood.seed.%s", type));
-        setCreativeTab(CreativeTabsTFC.WOOD_TAB);
+        setCreativeTab(ModuleWood.WOOD_TAB);
 
         OreDictionaryHelper.register(this, "seed");
         OreDictionaryHelper.register(this, "seed", type.toString());

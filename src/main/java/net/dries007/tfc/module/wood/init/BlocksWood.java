@@ -23,9 +23,9 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.module.wood.common.WoodStorage.WOOD_BLOCKS;
+import static net.dries007.tfc.module.wood.StorageWood.WOOD_BLOCKS;
 
-public class BlockInitializer {
+public class BlocksWood {
 
     public static void onRegister(Registry registry) {
         for (var wood : WOOD_BLOCKS.values()) {

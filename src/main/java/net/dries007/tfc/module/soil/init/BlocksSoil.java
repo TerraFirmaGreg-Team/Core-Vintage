@@ -1,9 +1,12 @@
 package net.dries007.tfc.module.soil.init;
 
 import com.codetaylor.mc.athenaeum.registry.Registry;
+import com.codetaylor.mc.athenaeum.util.ModelRegistrationHelper;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.module.core.client.util.GrassColorHandler;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
+import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeat;
+import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeatGrass;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -11,12 +14,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.PEAT_GRASS;
-import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.FARMLAND;
-import static net.dries007.tfc.module.soil.common.SoilStorage.SOIL_BLOCKS;
+import static net.dries007.tfc.module.soil.StorageSoil.SOIL_BLOCKS;
 
-public class BlockInitializer {
+public class BlocksSoil {
+
+    public static BlockPeatGrass PEAT_GRASS;
+    public static BlockPeat PEAT;
 
     public static void onRegister(Registry registry) {
         for (var block : SOIL_BLOCKS.values()) {
@@ -24,20 +28,29 @@ public class BlockInitializer {
             if (itemBlock != null) registry.registerBlock((Block) block, block.getItemBlock(), block.getName());
             else registry.registerBlock((Block) block, block.getName());
         }
+
+        registry.registerBlock(PEAT_GRASS = new BlockPeatGrass(), PEAT_GRASS.getItemBlock(), BlockPeatGrass.NAME);
+        registry.registerBlock(PEAT = new BlockPeat(), PEAT.getItemBlock(), BlockPeat.NAME);
+
     }
 
     @SideOnly(Side.CLIENT)
     public static void onClientRegister(Registry registry) {
         registry.registerClientModelRegistrationStrategy(() -> {
+
             SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
+
+            ModelRegistrationHelper.registerBlockItemModels(
+                    PEAT_GRASS,
+                    PEAT
+            );
         });
     }
 
     @SideOnly(Side.CLIENT)
     public static void onClientInitialization() {
-        var minecraft = Minecraft.getMinecraft();
-        var itemColors = minecraft.getItemColors();
-        var blockColors = minecraft.getBlockColors();
+        var itemColors = Minecraft.getMinecraft().getItemColors();
+        var blockColors = Minecraft.getMinecraft().getBlockColors();
 
         IBlockColor grassColor = GrassColorHandler::computeGrassColor;
 
@@ -58,7 +71,6 @@ public class BlockInitializer {
                         .toArray(Block[]::new));
 
         blockColors.registerBlockColorHandler(grassColor, PEAT_GRASS);
-        blockColors.registerBlockColorHandler(grassColor, ROOTY_DIRT_MIMIC);
 
         itemColors.registerItemColorHandler((s, i) ->
                         blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getDefaultState(), null, null, i),

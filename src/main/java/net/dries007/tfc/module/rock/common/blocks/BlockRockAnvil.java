@@ -9,7 +9,7 @@ import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.module.rock.api.variant.item.RockItemVariants;
-import net.dries007.tfc.module.rock.common.RockStorage;
+import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -183,13 +183,13 @@ public class BlockRockAnvil extends BlockRock {
     @Override
     @Nonnull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return RockStorage.getRockItem(RockItemVariants.LOOSE, getType());
+        return StorageRock.getRockItem(RockItemVariants.LOOSE, getType());
     }
 
     @Override
     @Nonnull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(RockStorage.getRockBlock(RAW, getType()));
+        return new ItemStack(StorageRock.getRockBlock(RAW, getType()));
     }
 
     @Override

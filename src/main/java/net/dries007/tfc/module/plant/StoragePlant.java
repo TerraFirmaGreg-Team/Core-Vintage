@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.plant.common;
+package net.dries007.tfc.module.plant;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 import javax.annotation.Nonnull;
 import java.util.Map;
 
-public class PlantStorage {
+public class StoragePlant {
 
     public static final Map<Pair<PlantEnumVariant, PlantType>, IPlantBlock> PLANT_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
     public static final Map<Pair<PlantItemVariant, PlantType>, IPlantItem> PLANT_ITEMS = new Object2ObjectLinkedOpenHashMap<>();

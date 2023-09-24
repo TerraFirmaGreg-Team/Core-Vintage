@@ -9,7 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.module.rock.common.RockStorage.ROCK_BLOCKS;
+import static net.dries007.tfc.module.rock.StorageRock.ROCK_BLOCKS;
 
 /**
  * Класс, представляющий тип блока породы.

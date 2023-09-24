@@ -5,7 +5,7 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 import com.ferreusveritas.dynamictrees.util.SimpleVoxmap;
 import com.ferreusveritas.dynamictrees.worldgen.JoCode;
-import net.dries007.tfc.module.soil.common.SoilStorage;
+import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.EnumFacing;
@@ -62,7 +62,7 @@ public class WorldGenMound extends FeatureGenMound {
 
             if (initialUnderState.getMaterial() == Material.AIR || (initialUnderState.getMaterial() != Material.GROUND && initialUnderState.getMaterial() != Material.ROCK)) {
                 var chunkData = world.getChunk(rootPos).getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
-                initialUnderState = SoilStorage.getSoilBlock(DIRT, chunkData.getSoilHeight(rootPos)).getDefaultState();
+                initialUnderState = StorageSoil.getSoilBlock(DIRT, chunkData.getSoilHeight(rootPos)).getDefaultState();
             }
 
             rootPos = rootPos.up();

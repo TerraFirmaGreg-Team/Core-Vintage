@@ -1,16 +1,13 @@
 package net.dries007.tfc.module.soil.api.variant.item;
 
 import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.api.type.SoilType;
-import net.dries007.tfc.module.soil.common.SoilStorage;
-import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
-
-import static net.dries007.tfc.module.core.common.objects.items.TFCItems.ITEMS;
 
 /**
  * Класс CropItemVariant представляет вариант деревянного блока.
@@ -44,7 +41,7 @@ public class SoilItemVariant {
         }
 
         for (var type : SoilType.getSoilTypes()) {
-            if (SoilStorage.SOIL_ITEMS.put(new Pair<>(this, type), this.create(type)) != null)
+            if (StorageSoil.SOIL_ITEMS.put(new Pair<>(this, type), this.create(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
     }

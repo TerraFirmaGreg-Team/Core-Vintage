@@ -8,7 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.module.wood.common.WoodStorage.WOOD_ITEMS;
+import static net.dries007.tfc.module.wood.StorageWood.WOOD_ITEMS;
 
 /**
  * Класс CropItemVariant представляет вариант деревянного блока.

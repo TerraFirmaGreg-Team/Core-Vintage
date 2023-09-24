@@ -11,15 +11,16 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
+import net.dries007.tfc.module.plant.StoragePlant;
 import net.dries007.tfc.module.plant.api.type.PlantType;
-import net.dries007.tfc.module.plant.common.PlantStorage;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlant;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlantShortGrass;
+import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariant;
-import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeat;
+import net.dries007.tfc.module.soil.init.BlocksSoil;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -102,9 +103,9 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
         if (up.getMaterial().isLiquid() || (neighborLight < 4 && up.getLightOpacity(world, upPos) > 2)) {
             // Генерируем торф в зависимости от типа блока
             if (usBlock instanceof BlockPeat) {
-                world.setBlockState(pos, TFCBlocks.PEAT.getDefaultState());
+                world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
             } else if (usBlock instanceof ISoilBlock soil) {
-                world.setBlockState(pos, SoilStorage.getSoilBlock(soil.getBlockVariant().getNonGrassVersion(), soil.getType()).getDefaultState());
+                world.setBlockState(pos, StorageSoil.getSoilBlock(soil.getBlockVariant().getNonGrassVersion(), soil.getType()).getDefaultState());
             }
         } else if (neighborLight >= 9) {
             for (int i = 0; i < 4; ++i) {
@@ -139,7 +140,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
                 // Генерируем траву в зависимости от типа текущего блока
                 if (currentBlock instanceof BlockPeat) {
-                    world.setBlockState(target, TFCBlocks.PEAT_GRASS.getDefaultState());
+                    world.setBlockState(target, BlocksSoil.PEAT_GRASS.getDefaultState());
                 } else if (currentBlock instanceof ISoilBlock block) {
                     SoilBlockVariant spreader = GRASS;
 
@@ -148,14 +149,14 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                         spreader = DRY_GRASS;
                     }
 
-                    world.setBlockState(pos, SoilStorage.getSoilBlock(block.getBlockVariant().getGrassVersion(spreader), block.getType()).getDefaultState());
+                    world.setBlockState(pos, StorageSoil.getSoilBlock(block.getBlockVariant().getGrassVersion(spreader), block.getType()).getDefaultState());
                 }
             }
             // Генерируем короткую траву на верхнем блоке с определенной вероятностью
             for (PlantType plant : PlantType.getPlantTypes()) {
                 if (plant.getPlantVariant() == SHORT_GRASS && rand.nextFloat() < 0.5f) {
                     float temp = ClimateTFC.getActualTemp(world, upPos);
-                    var plantBlock = (BlockPlantShortGrass) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                    var plantBlock = (BlockPlantShortGrass) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
 
                     // Проверяем условия для генерации короткой травы
                     if (world.isAirBlock(upPos) &&
@@ -196,7 +197,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 var soil = ((ISoilBlock) block).getType();
 
                 if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
-                    worldIn.setBlockState(pos, SoilStorage.getSoilBlock(DIRT, soil).getDefaultState());
+                    worldIn.setBlockState(pos, StorageSoil.getSoilBlock(DIRT, soil).getDefaultState());
                 } else {
                     if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
                         for (int i = 0; i < 4; ++i) {
@@ -209,8 +210,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                             IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
                             IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                            if (iblockstate1.getBlock() == SoilStorage.getSoilBlock(DIRT, soil) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
-                                worldIn.setBlockState(blockpos, SoilStorage.getSoilBlock(GRASS, soil).getDefaultState());
+                            if (iblockstate1.getBlock() == StorageSoil.getSoilBlock(DIRT, soil) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
+                                worldIn.setBlockState(blockpos, StorageSoil.getSoilBlock(GRASS, soil).getDefaultState());
                             }
                         }
                     }
@@ -242,7 +243,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
     @Nonnull
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        return SoilStorage.getSoilItem(PILE, type);
+        return StorageSoil.getSoilItem(PILE, type);
     }
 
     @Override

@@ -5,11 +5,11 @@ import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlant;
+import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariant;
 import net.dries007.tfc.module.soil.api.variant.item.SoilItemVariants;
-import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
@@ -89,7 +89,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
         if (block instanceof ISoilBlock) {
             var soil = ((ISoilBlock) block).getType();
 
-            world.setBlockState(pos, SoilStorage.getSoilBlock(DIRT, soil).getDefaultState());
+            world.setBlockState(pos, StorageSoil.getSoilBlock(DIRT, soil).getDefaultState());
             AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
             for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb)) {
                 double d0 = Math.min(axisalignedbb.maxY - axisalignedbb.minY, axisalignedbb.maxY - entity.getEntityBoundingBox().minY);
@@ -243,7 +243,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
     @Nonnull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return SoilStorage.getSoilItem(SoilItemVariants.PILE, type);
+        return StorageSoil.getSoilItem(SoilItemVariants.PILE, type);
     }
 
     @Override

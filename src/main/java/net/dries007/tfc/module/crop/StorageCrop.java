@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.crop.common;
+package net.dries007.tfc.module.crop;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 import javax.annotation.Nonnull;
 import java.util.Map;
 
-public class CropStorage {
+public class StorageCrop {
 
     public static final Map<Pair<CropBlockVariant, CropType>, ICropBlock> CROP_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
     public static final Map<Pair<CropItemVariant, CropType>, ICropItem> CROP_ITEMS = new Object2ObjectLinkedOpenHashMap<>();

@@ -8,7 +8,7 @@ import gregtech.common.blocks.properties.PropertyStoneType;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.common.RockStorage;
+import net.dries007.tfc.module.rock.StorageRock;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -48,7 +48,7 @@ public abstract class BlockOreMixin extends Block {
 
         if (type != null) {
             var spec = new FallingBlockManager.Specification(FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL_ROCK);
-            spec.setResultingState(RockStorage.getRockBlock(COBBLE, type).getDefaultState());
+            spec.setResultingState(StorageRock.getRockBlock(COBBLE, type).getDefaultState());
             FallingBlockManager.registerFallable(this, spec);
 
             var hardness = type.getCategory().getHardnessModifier() + RAW.getBaseHardness();

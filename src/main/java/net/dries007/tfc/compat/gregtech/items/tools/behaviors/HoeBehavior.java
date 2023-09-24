@@ -5,7 +5,7 @@ import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
-import net.dries007.tfc.module.soil.common.SoilStorage;
+import net.dries007.tfc.module.soil.StorageSoil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,7 +34,7 @@ public class HoeBehavior implements IToolBehavior {
 
         if (hitBlock.getBlock() instanceof ISoilBlock soilTypeBlock) {
             if (soilTypeBlock.getBlockVariant() == SoilBlockVariants.DIRT || soilTypeBlock.getBlockVariant() == SoilBlockVariants.GRASS) {
-                worldIn.setBlockState(pos, SoilStorage.getSoilBlock(SoilBlockVariants.FARMLAND, soilTypeBlock.getType()).getDefaultState());
+                worldIn.setBlockState(pos, StorageSoil.getSoilBlock(SoilBlockVariants.FARMLAND, soilTypeBlock.getType()).getDefaultState());
                 ToolHelper.onActionDone(player, worldIn, hand);
                 return EnumActionResult.SUCCESS;
             }

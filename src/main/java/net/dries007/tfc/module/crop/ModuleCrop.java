@@ -7,8 +7,8 @@ import net.dries007.tfc.module.crop.api.category.CropCategoryHandler;
 import net.dries007.tfc.module.crop.api.type.CropTypeHandler;
 import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariantHandler;
 import net.dries007.tfc.module.crop.api.variant.item.CropItemVariantHandler;
-import net.dries007.tfc.module.crop.init.BlockInitializer;
-import net.dries007.tfc.module.crop.init.ItemInitializer;
+import net.dries007.tfc.module.crop.init.BlocksCrop;
+import net.dries007.tfc.module.crop.init.ItemsCrop;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -40,14 +40,14 @@ public class ModuleCrop extends ModuleBase {
         CropBlockVariantHandler.init();
         CropItemVariantHandler.init();
 
-        BlockInitializer.onRegister(registry);
-        ItemInitializer.onRegister(registry);
+        BlocksCrop.onRegister(registry);
+        ItemsCrop.onRegister(registry);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void onClientRegister(Registry registry) {
-        BlockInitializer.onClientRegister(registry);
-        ItemInitializer.onClientRegister(registry);
+        BlocksCrop.onClientRegister(registry);
+        ItemsCrop.onClientRegister(registry);
     }
 }

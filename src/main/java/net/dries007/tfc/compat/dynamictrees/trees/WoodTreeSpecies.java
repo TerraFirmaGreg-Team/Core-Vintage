@@ -13,14 +13,14 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.compat.dynamictrees.dropcreators.DropCreatorWoodLog;
 import net.dries007.tfc.compat.dynamictrees.items.ItemWoodSeed;
-import net.dries007.tfc.module.wood.common.WoodStorage;
+import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.wood.StorageWood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import static net.dries007.tfc.api.types.tree.type.TreeTypes.ACACIA_TREE;
-import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.ROOTY_DIRT_MIMIC;
 import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.SAPLING;
 
 public class WoodTreeSpecies extends Species {
@@ -31,7 +31,7 @@ public class WoodTreeSpecies extends Species {
         super(name, tree, properties);
         this.tree = tree;
 
-        var sapling = WoodStorage.getWoodBlock(SAPLING, tree.getWood());
+        var sapling = StorageWood.getWoodBlock(SAPLING, tree.getWood());
         var map = tree.getParamMap();
 
         remDropCreator(new ResourceLocation(ModConstants.MODID, "logs"));
@@ -71,7 +71,7 @@ public class WoodTreeSpecies extends Species {
 
     @Override
     public BlockRooty getRootyBlock(World world, BlockPos rootPos) {
-        return ROOTY_DIRT_MIMIC;
+        return TFCBlocks.ROOTY_DIRT_MIMIC;
     }
 
     @Override

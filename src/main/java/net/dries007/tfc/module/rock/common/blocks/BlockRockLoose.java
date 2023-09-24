@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
+import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.module.rock.api.variant.item.RockItemVariants;
-import net.dries007.tfc.module.rock.common.RockStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -70,7 +70,7 @@ public class BlockRockLoose extends BlockRock {
     @Override
     @SuppressWarnings("ConstantConditions")
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var itemStack = new ItemStack(RockStorage.getRockItem(RockItemVariants.LOOSE, getType()));
+        var itemStack = new ItemStack(StorageRock.getRockItem(RockItemVariants.LOOSE, getType()));
 
         if (playerIn.addItemStackToInventory(itemStack)) {
             worldIn.setBlockToAir(pos);
@@ -84,7 +84,7 @@ public class BlockRockLoose extends BlockRock {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(RockStorage.getRockItem(RockItemVariants.LOOSE, getType())));
+        drops.add(new ItemStack(StorageRock.getRockItem(RockItemVariants.LOOSE, getType())));
     }
 
     @Override
@@ -95,7 +95,7 @@ public class BlockRockLoose extends BlockRock {
     @Nonnull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(RockStorage.getRockItem(RockItemVariants.LOOSE, getType()));
+        return new ItemStack(StorageRock.getRockItem(RockItemVariants.LOOSE, getType()));
     }
 
     @Nonnull

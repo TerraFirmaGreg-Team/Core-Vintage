@@ -5,7 +5,7 @@ import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.module.wood.common.WoodStorage;
+import net.dries007.tfc.module.wood.StorageWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -125,7 +125,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @Override
     @Nonnull
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(WoodStorage.getWoodBlock(SAPLING, type)) : Items.AIR;
+        return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(StorageWood.getWoodBlock(SAPLING, type)) : Items.AIR;
     }
 
     @Override

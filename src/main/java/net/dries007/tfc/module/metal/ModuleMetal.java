@@ -3,7 +3,7 @@ package net.dries007.tfc.module.metal;
 import net.dries007.tfc.module.metal.api.variant.Item.MetalItemVariantHandler;
 import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariantHandler;
 
-public class MetalModule {
+public class ModuleMetal {
 
     public static void preInit() {
         MetalBlockVariantHandler.init();

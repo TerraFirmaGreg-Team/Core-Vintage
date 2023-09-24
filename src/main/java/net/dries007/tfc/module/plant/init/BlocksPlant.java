@@ -1,11 +1,8 @@
 package net.dries007.tfc.module.plant.init;
 
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.module.core.client.util.GrassColorHandler;
-import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -13,12 +10,11 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import static net.dries007.tfc.module.plant.StoragePlant.PLANT_BLOCKS;
 import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.SHORT_GRASS;
 import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.TALL_GRASS;
-import static net.dries007.tfc.module.plant.common.PlantStorage.PLANT_BLOCKS;
-import static net.dries007.tfc.module.wood.common.WoodStorage.WOOD_BLOCKS;
 
-public class BlockInitializer {
+public class BlocksPlant {
 
     public static void onRegister(Registry registry) {
         for (var wood : PLANT_BLOCKS.values()) {

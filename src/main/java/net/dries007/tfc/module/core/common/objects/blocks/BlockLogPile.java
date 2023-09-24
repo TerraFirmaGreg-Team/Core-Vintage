@@ -52,7 +52,7 @@ public class BlockLogPile extends TFCBlock implements ILightableBlock {
         setSoundType(SoundType.WOOD);
         setTickRandomly(true);
         setHarvestLevel("axe", 0);
-        this.setDefaultState(this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(LIT, false));
+        setDefaultState(this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(LIT, false));
 
         setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "log_pile");

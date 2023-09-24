@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.rock.common.RockStorage;
+import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -49,7 +49,7 @@ public class WorldGenFissure implements IWorldGenerator {
             return;
         }
 
-        final IBlockState rock = RockStorage.getRockBlock(RAW, getRock3(world, start)).getDefaultState();
+        final IBlockState rock = StorageRock.getRockBlock(RAW, getRock3(world, start)).getDefaultState();
 
         int depth = 2 + random.nextInt(3);
         int radius = 1 + random.nextInt(2);

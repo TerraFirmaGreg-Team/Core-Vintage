@@ -3,9 +3,9 @@ package net.dries007.tfc.module.rock.common.blocks;
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
-import net.dries007.tfc.module.rock.common.RockStorage;
 import net.dries007.tfc.util.GemsFromRawRocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -40,7 +40,7 @@ public class BlockRockRaw extends BlockRock {
 
         // Copy as each raw stone has an unique resultingState
         var spec = new FallingBlockManager.Specification(FallingBlockManager.Specification.COLLAPSABLE_ROCK);
-        spec.setResultingState(RockStorage.getRockBlock(COBBLE, type).getDefaultState());
+        spec.setResultingState(StorageRock.getRockBlock(COBBLE, type).getDefaultState());
 
         FallingBlockManager.registerFallable(this, spec);
         OreDictionaryHelper.register(this, "stone");
@@ -88,7 +88,7 @@ public class BlockRockRaw extends BlockRock {
         if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
             if (!worldIn.isRemote) {
                 // Create a stone anvil
-                var anvil = RockStorage.getRockBlock(ANVIL, getType());
+                var anvil = StorageRock.getRockBlock(ANVIL, getType());
                 if (anvil instanceof BlockRockAnvil) {
                     worldIn.setBlockState(pos, anvil.getDefaultState());
                 }

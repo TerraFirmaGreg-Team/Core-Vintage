@@ -6,10 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.module.crop.common.CropStorage.CROP_BLOCKS;
-import static net.dries007.tfc.module.rock.common.RockStorage.ROCK_BLOCKS;
+import static net.dries007.tfc.module.crop.StorageCrop.CROP_BLOCKS;
 
-public class BlockInitializer {
+public class BlocksCrop {
 
     public static void onRegister(Registry registry) {
 

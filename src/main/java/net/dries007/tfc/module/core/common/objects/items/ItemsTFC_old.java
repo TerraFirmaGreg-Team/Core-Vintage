@@ -118,7 +118,7 @@ public final class ItemsTFC_old {
 
         //=== Other ==================================================================================================//
 
-        register(r, "wooden_bucket", new ItemWoodBucket(), CreativeTabsTFC.WOOD_TAB); //not a simple item, use a custom model
+        register(r, "wooden_bucket", new ItemWoodBucket(), CreativeTabsTFC.MISC_TAB); //not a simple item, use a custom model
 
         // POTTERY
         {

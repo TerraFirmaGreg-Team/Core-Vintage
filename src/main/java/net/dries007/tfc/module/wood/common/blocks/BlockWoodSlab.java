@@ -5,7 +5,7 @@ import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants;
-import net.dries007.tfc.module.wood.common.WoodStorage;
+import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.common.blocks.itemblocks.ItemBlockWoodSlab;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -44,7 +44,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
         if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
-        this.block = WoodStorage.getWoodBlock(WoodBlockVariants.PLANKS, type);
+        this.block = StorageWood.getWoodBlock(WoodBlockVariants.PLANKS, type);
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -191,7 +191,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         public Half(WoodBlockVariant variant, WoodType type) {
             super(type);
 
-            doubleSlab = (Double) WoodStorage.getWoodBlock(WoodBlockVariants.SLAB_DOUBLE, type);
+            doubleSlab = (Double) StorageWood.getWoodBlock(WoodBlockVariants.SLAB_DOUBLE, type);
             doubleSlab.halfSlab = this;
             halfSlab = this;
 

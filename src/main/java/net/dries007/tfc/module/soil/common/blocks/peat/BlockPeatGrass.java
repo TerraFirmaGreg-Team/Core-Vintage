@@ -1,7 +1,5 @@
 package net.dries007.tfc.module.soil.common.blocks.peat;
 
-import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilGrass;
@@ -33,15 +31,18 @@ public class BlockPeatGrass extends TFCBlock {
     public static final PropertyBool EAST = PropertyBool.create("east");
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
+    public static final String NAME = "peat_grass";
 
     public BlockPeatGrass() {
         super(Material.GRASS);
 
-        setRegistryName(Tags.MOD_ID, "peat_grass");
-        setTranslationKey(Tags.MOD_ID + ".peat_grass");
-        setCreativeTab(CreativeTabsTFC.SOIL_TAB);
         setSoundType(SoundType.PLANT);
         setTickRandomly(true);
+        setDefaultState(this.getDefaultState()
+                .withProperty(NORTH, false)
+                .withProperty(EAST, false)
+                .withProperty(SOUTH, false)
+                .withProperty(WEST, false));
 
         OreDictionaryHelper.register(this, "peat");
         OreDictionaryHelper.register(this, "peat", "grass");
@@ -73,7 +74,7 @@ public class BlockPeatGrass extends TFCBlock {
     @Override
     @Nonnull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(TFCBlocks.PEAT);
+        return Item.getItemFromBlock(this);
     }
 
     @Override
@@ -88,5 +89,4 @@ public class BlockPeatGrass extends TFCBlock {
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
     }
-
 }

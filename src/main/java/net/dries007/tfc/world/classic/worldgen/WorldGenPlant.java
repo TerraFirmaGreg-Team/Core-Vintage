@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.plant.StoragePlant;
 import net.dries007.tfc.module.plant.api.type.PlantType;
-import net.dries007.tfc.module.plant.common.PlantStorage;
 import net.dries007.tfc.module.plant.common.blocks.*;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -32,7 +32,7 @@ public class WorldGenPlant extends WorldGenerator {
 
         switch (plant.getPlantVariant()) {
             case MUSHROOM -> {
-                var plantBlock = (BlockPlantMushroom) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantMushroom) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position) / 16; ++i) {
@@ -48,7 +48,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case SHORT_GRASS -> {
-                var plantBlock = (BlockPlantShortGrass) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantShortGrass) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position) / 4; ++i) {
@@ -64,7 +64,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case TALL_GRASS -> {
-                var plantBlock = (BlockPlantTallGrass) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantTallGrass) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position) / 16; ++i) {
@@ -84,7 +84,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case CREEPING -> {
-                var plantBlock = (BlockPlantCreeping) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantCreeping) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position) / 16; ++i) {
@@ -101,7 +101,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case HANGING -> {
-                var plantBlock = (BlockPlantHanging) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantHanging) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position) / 4; ++i) {
@@ -117,7 +117,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case REED, REED_SEA -> {
-                var plantBlock = (BlockPlant) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlant) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position) / 16; ++i) {
@@ -133,7 +133,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case TALL_REED, TALL_REED_SEA, TALL_PLANT -> {
-                var plantBlock = (BlockPlantTall) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantTall) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position) / 16; ++i) {
@@ -153,7 +153,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case DESERT, DRY -> {
-                var plantBlock = (BlockPlant) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlant) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position); ++i) {
@@ -170,7 +170,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case DESERT_TALL_PLANT, DRY_TALL_PLANT -> {
-                var plantBlock = (BlockPlantTall) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantTall) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position); ++i) {
@@ -190,7 +190,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case WATER, WATER_SEA -> {
-                var plantBlock = (BlockPlantWater) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantWater) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
                 IBlockState water = plant.getWaterType();
 
@@ -207,7 +207,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case EMERGENT_TALL_WATER, EMERGENT_TALL_WATER_SEA -> {
-                var plantBlock = (BlockPlantEmergentTallWater) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantEmergentTallWater) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
                 IBlockState water = plant.getWaterType();
 
@@ -225,7 +225,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case TALL_WATER, TALL_WATER_SEA -> {
-                var plantBlock = (BlockPlantTallWater) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantTallWater) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
                 IBlockState water = plant.getWaterType();
 
@@ -243,7 +243,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case FLOATING -> {
-                var plantBlock = (BlockPlantFloatingWater) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantFloatingWater) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
                 IBlockState water = plant.getWaterType();
 
@@ -261,7 +261,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case FLOATING_SEA -> {
-                var plantBlock = (BlockPlantFloatingWater) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantFloatingWater) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
                 IBlockState water = plant.getWaterType();
 
@@ -279,7 +279,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case CACTUS -> {
-                var plantBlock = (BlockPlantCactus) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantCactus) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 var state = plantBlock.getDefaultState();
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position) / 8; ++i) {
@@ -299,7 +299,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             case EPIPHYTE -> {
-                var plantBlock = (BlockPlantEpiphyte) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlantEpiphyte) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position) / 4; ++i) {
                     BlockPos blockpos = position.add(rand.nextInt(7) - rand.nextInt(7), rand.nextInt(16), rand.nextInt(7) - rand.nextInt(7));
@@ -314,7 +314,7 @@ public class WorldGenPlant extends WorldGenerator {
                 }
             }
             default -> {
-                var plantBlock = (BlockPlant) PlantStorage.getPlantBlock(plant.getPlantVariant(), plant);
+                var plantBlock = (BlockPlant) StoragePlant.getPlantBlock(plant.getPlantVariant(), plant);
                 IBlockState state = plantBlock.getDefaultState();
 
                 for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position) / 16; ++i) {

@@ -36,8 +36,8 @@ import net.dries007.tfc.module.core.common.objects.items.ItemQuiver;
 import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;
+import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
-import net.dries007.tfc.module.rock.common.RockStorage;
 import net.dries007.tfc.module.rock.common.blocks.BlockRockAnvil;
 import net.dries007.tfc.module.rock.common.blocks.BlockRockRaw;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodLog;
@@ -844,10 +844,10 @@ public final class CommonEventHandler {
         // Since cobble is a gravity block, placing it can lead to world crashes, so we avoid doing that and place rhyolite instead
         if (ConfigTFC.General.OVERRIDES.enableLavaWaterPlacesTFCBlocks) {
             if (event.getNewState().getBlock() == Blocks.STONE) {
-                event.setNewState(RockStorage.getRockBlock(RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                event.setNewState(StorageRock.getRockBlock(RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
             }
             if (event.getNewState().getBlock() == Blocks.COBBLESTONE) {
-                event.setNewState(RockStorage.getRockBlock(RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                event.setNewState(StorageRock.getRockBlock(RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
             }
         }
     }

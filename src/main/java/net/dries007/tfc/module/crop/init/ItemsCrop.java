@@ -6,10 +6,9 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.module.crop.common.CropStorage.CROP_ITEMS;
-import static net.dries007.tfc.module.rock.common.RockStorage.ROCK_ITEMS;
+import static net.dries007.tfc.module.crop.StorageCrop.CROP_ITEMS;
 
-public class ItemInitializer {
+public class ItemsCrop {
 
     public static void onRegister(Registry registry) {
 

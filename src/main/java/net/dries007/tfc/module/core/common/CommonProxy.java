@@ -47,7 +47,7 @@ import net.dries007.tfc.module.core.common.objects.recipes.RecipeHandler;
 import net.dries007.tfc.module.core.common.objects.tileentities.*;
 import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
-import net.dries007.tfc.module.metal.MetalModule;
+import net.dries007.tfc.module.metal.ModuleMetal;
 import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.WrongSideException;
@@ -89,8 +89,8 @@ import javax.annotation.Nullable;
 
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
-import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_BLOCKS;
-import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_ITEMS;
+import static net.dries007.tfc.module.metal.StorageMetal.METAL_BLOCKS;
+import static net.dries007.tfc.module.metal.StorageMetal.METAL_ITEMS;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -267,7 +267,7 @@ public class CommonProxy {
 
     public void onPreInit(FMLPreInitializationEvent event) {
         //TreeModule.preInit();
-        MetalModule.preInit();
+        ModuleMetal.preInit();
         FoodModule.preInit();
         BushModule.preInit();
 

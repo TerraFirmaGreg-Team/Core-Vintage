@@ -1,10 +1,9 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
-import net.dries007.tfc.module.rock.common.RockStorage;
 import net.dries007.tfc.module.rock.common.blocks.itemblock.ItemRockSlab;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -63,10 +62,10 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
     protected static Block getFullBlockFromSlab(RockBlockVariant variant, RockType type) {
         return switch (variant.toString()) {
-            case "slab/raw", "slab_double/raw" -> RockStorage.getRockBlock(RAW, type);
-            case "slab/cobble", "slab_double/cobble" -> RockStorage.getRockBlock(COBBLE, type);
-            case "slab/smooth", "slab_double/smooth" -> RockStorage.getRockBlock(SMOOTH, type);
-            case "slab/bricks", "slab_double/bricks" -> RockStorage.getRockBlock(BRICKS, type);
+            case "slab/raw", "slab_double/raw" -> StorageRock.getRockBlock(RAW, type);
+            case "slab/cobble", "slab_double/cobble" -> StorageRock.getRockBlock(COBBLE, type);
+            case "slab/smooth", "slab_double/smooth" -> StorageRock.getRockBlock(SMOOTH, type);
+            case "slab/bricks", "slab_double/bricks" -> StorageRock.getRockBlock(BRICKS, type);
             default ->
                     throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", variant, type));
         };
@@ -74,10 +73,10 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
     protected static Block getDoubleSlabFromSlab(RockBlockVariant variant, RockType type) {
         return switch (variant.toString()) {
-            case "slab/raw" -> RockStorage.getRockBlock(SLAB_DOUBLE_RAW, type);
-            case "slab/cobble" -> RockStorage.getRockBlock(SLAB_DOUBLE_COBBLE, type);
-            case "slab/smooth" -> RockStorage.getRockBlock(SLAB_DOUBLE_SMOOTH, type);
-            case "slab/bricks" -> RockStorage.getRockBlock(SLAB_DOUBLE_BRICK, type);
+            case "slab/raw" -> StorageRock.getRockBlock(SLAB_DOUBLE_RAW, type);
+            case "slab/cobble" -> StorageRock.getRockBlock(SLAB_DOUBLE_COBBLE, type);
+            case "slab/smooth" -> StorageRock.getRockBlock(SLAB_DOUBLE_SMOOTH, type);
+            case "slab/bricks" -> StorageRock.getRockBlock(SLAB_DOUBLE_BRICK, type);
             default ->
                     throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", variant, type));
         };

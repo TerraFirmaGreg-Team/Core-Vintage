@@ -6,9 +6,10 @@ import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.wood.api.type.WoodTypeHandler;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariantHandler;
 import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariantHandler;
-import net.dries007.tfc.module.wood.init.BlockInitializer;
-import net.dries007.tfc.module.wood.init.EntityInitializer;
-import net.dries007.tfc.module.wood.init.ItemInitializer;
+import net.dries007.tfc.module.wood.init.BlocksWood;
+import net.dries007.tfc.module.wood.init.EntitiesWood;
+import net.dries007.tfc.module.wood.init.ItemsWood;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -22,7 +23,7 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 
 public class ModuleWood extends ModuleBase {
 
-    public static final String MODULE_ID = "module.wood";
+    public static final CreativeTabs WOOD_TAB = new CreativeTabsTFC.TFCCreativeTab("wood", "tfc:wood.planks.pine");
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleWood.class.getSimpleName());
 
@@ -31,7 +32,7 @@ public class ModuleWood extends ModuleBase {
     public ModuleWood() {
         super(0, MOD_ID);
 
-        this.setRegistry(new Registry(MOD_ID, CreativeTabsTFC.WOOD_TAB));
+        this.setRegistry(new Registry(MOD_ID, WOOD_TAB));
         this.enableAutoRegistry();
 
         //PACKET_SERVICE = this.enableNetwork();
@@ -51,24 +52,24 @@ public class ModuleWood extends ModuleBase {
         WoodBlockVariantHandler.init();
         WoodItemVariantHandler.init();
 
-        BlockInitializer.onRegister(registry);
-        ItemInitializer.onRegister(registry);
-        EntityInitializer.onRegister(registry);
+        BlocksWood.onRegister(registry);
+        ItemsWood.onRegister(registry);
+        EntitiesWood.onRegister(registry);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void onClientRegister(Registry registry) {
-        BlockInitializer.onClientRegister(registry);
-        ItemInitializer.onClientRegister(registry);
-        EntityInitializer.onClientRegister();
+        BlocksWood.onClientRegister(registry);
+        ItemsWood.onClientRegister(registry);
+        EntitiesWood.onClientRegister();
     }
 
     @Override
     public void onClientInitializationEvent(FMLInitializationEvent event) {
         super.onClientInitializationEvent(event);
 
-        BlockInitializer.onClientInitialization();
-        ItemInitializer.onClientInitialization();
+        BlocksWood.onClientInitialization();
+        ItemsWood.onClientInitialization();
     }
 }

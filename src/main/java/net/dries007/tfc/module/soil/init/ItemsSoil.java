@@ -7,9 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.module.soil.common.SoilStorage.SOIL_ITEMS;
+import static net.dries007.tfc.module.soil.StorageSoil.SOIL_ITEMS;
 
-public class ItemInitializer {
+public class ItemsSoil {
 
     public static void onRegister(Registry registry) {
         for (var item : SOIL_ITEMS.values()) {
@@ -28,9 +28,6 @@ public class ItemInitializer {
     public static void onClientInitialization() {
         var minecraft = Minecraft.getMinecraft();
         var itemColors = minecraft.getItemColors();
-
-
-
 
 
     }

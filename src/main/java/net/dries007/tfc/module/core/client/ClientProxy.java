@@ -24,9 +24,11 @@ import net.dries007.tfc.module.core.client.render.*;
 import net.dries007.tfc.module.core.client.render.animal.*;
 import net.dries007.tfc.module.core.client.render.projectile.RenderThrownJavelin;
 import net.dries007.tfc.module.core.client.util.FluidSpriteCache;
+import net.dries007.tfc.module.core.client.util.GrassColorHandler;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.common.CommonProxy;
 import net.dries007.tfc.module.core.common.objects.blocks.BlockThatchBed;
+import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.core.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.module.core.common.objects.entity.animal.*;
 import net.dries007.tfc.module.core.common.objects.entity.projectile.EntityThrownJavelin;
@@ -35,8 +37,8 @@ import net.dries007.tfc.module.core.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.module.core.common.objects.tileentities.*;
 import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.module.metal.StorageMetal;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
-import net.dries007.tfc.module.metal.common.MetalStorage;
 import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.Helpers;
@@ -55,6 +57,7 @@ import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.entity.RenderFallingBlock;
 import net.minecraft.client.resources.I18n;
@@ -92,7 +95,7 @@ import java.util.List;
 
 import static net.dries007.tfc.module.core.common.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.*;
-import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_BLOCKS;
+import static net.dries007.tfc.module.metal.StorageMetal.METAL_BLOCKS;
 import static net.minecraft.block.Block.getBlockFromItem;
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -234,14 +237,18 @@ public class ClientProxy extends CommonProxy {
     @SideOnly(Side.CLIENT)
     public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
         var blockColors = event.getBlockColors();
+        IBlockColor grassColor = GrassColorHandler::computeGrassColor;
 
         //==== Metal =================================================================================================//
 
         blockColors.registerBlockColorHandler((s, w, p, i) -> i == 0 ? ((IMetalBlock) s.getBlock()).getMaterial().getMaterialRGB() : 0xFFFFFF,
-                MetalStorage.METAL_BLOCKS.values()
+                StorageMetal.METAL_BLOCKS.values()
                         .stream()
                         .map(s -> (Block) s)
                         .toArray(Block[]::new));
+
+
+        blockColors.registerBlockColorHandler(grassColor, ROOTY_DIRT_MIMIC);
 
     }
 
@@ -281,7 +288,7 @@ public class ClientProxy extends CommonProxy {
 
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent event) {
-        Block block = ROOTY_DIRT_MIMIC;
+        Block block = TFCBlocks.ROOTY_DIRT_MIMIC;
         if (block.getRegistryName() != null) {
             BakedModelBlockRooty rootyModel = new BakedModelBlockRootyTFC();
             event.getModelRegistry().putObject(new ModelResourceLocation(block.getRegistryName(), "normal"), rootyModel);

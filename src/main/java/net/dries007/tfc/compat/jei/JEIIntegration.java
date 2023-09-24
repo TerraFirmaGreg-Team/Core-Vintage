@@ -32,11 +32,11 @@ import net.dries007.tfc.module.core.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.module.core.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;
+import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.common.RockStorage;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants;
 import net.dries007.tfc.module.wood.client.gui.GuiWoodBarrel;
-import net.dries007.tfc.module.wood.common.WoodStorage;
+import net.dries007.tfc.module.wood.StorageWood;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
@@ -192,7 +192,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(blastList, BLAST_FURNACE_UID);
 
         // Barrel Recipes
-        for (var barrel : WoodStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.BARREL).toArray()) {
+        for (var barrel : StorageWood.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.BARREL).toArray()) {
             registry.addRecipeCatalyst(new ItemStack((Block) barrel), BARREL_UID);
         }
 
@@ -204,7 +204,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(barrelRecipes, BARREL_UID);
 
         // Loom Recipes
-        for (var loom : WoodStorage.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.LOOM).toArray()) {
+        for (var loom : StorageWood.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.LOOM).toArray()) {
             registry.addRecipeCatalyst(new ItemStack((Block) loom), LOOM_UID);
         }
 
@@ -314,7 +314,7 @@ public final class JEIIntegration implements IModPlugin {
 
         // Stone Knapping Recipes
         for (var type : RockType.getRockTypes()) {
-            registry.addRecipeCatalyst(new ItemStack(RockStorage.getRockItem(LOOSE, type)), KNAP_STONE_UID);
+            registry.addRecipeCatalyst(new ItemStack(StorageRock.getRockItem(LOOSE, type)), KNAP_STONE_UID);
         }
 
         var stoneknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()

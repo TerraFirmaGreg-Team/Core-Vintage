@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.soil.common;
+package net.dries007.tfc.module.soil;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 import javax.annotation.Nonnull;
 import java.util.Map;
 
-public class SoilStorage {
+public class StorageSoil {
     public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlock> SOIL_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
     public static final Map<Pair<SoilItemVariant, SoilType>, ISoilItem> SOIL_ITEMS = new Object2ObjectLinkedOpenHashMap<>();
 

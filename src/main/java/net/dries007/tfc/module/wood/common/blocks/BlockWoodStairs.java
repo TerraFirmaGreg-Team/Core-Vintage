@@ -6,7 +6,7 @@ import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants;
-import net.dries007.tfc.module.wood.common.WoodStorage;
+import net.dries007.tfc.module.wood.StorageWood;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -23,7 +23,7 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
     private final WoodType type;
 
     public BlockWoodStairs(WoodBlockVariant variant, WoodType type) {
-        super(WoodStorage.getWoodBlock(WoodBlockVariants.PLANKS, type).getDefaultState());
+        super(StorageWood.getWoodBlock(WoodBlockVariants.PLANKS, type).getDefaultState());
 
         this.variant = variant;
         this.type = type;

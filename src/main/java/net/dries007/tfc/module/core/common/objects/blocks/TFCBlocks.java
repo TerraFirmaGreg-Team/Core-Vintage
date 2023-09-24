@@ -27,11 +27,10 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_BLOCKS;
+import static net.dries007.tfc.module.metal.StorageMetal.METAL_BLOCKS;
 import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.*;
 import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*;
 import static net.minecraft.block.material.Material.WATER;
@@ -56,8 +55,8 @@ public class TFCBlocks {
 
 
     public static BlockDebug DEBUG;
-    public static BlockPeat PEAT;
-    public static BlockPeatGrass PEAT_GRASS;
+
+
     public static BlockAggregate AGGREGATE;
     public static BlockFireClay FIRE_CLAY_BLOCK;
     public static BlockThatch THATCH;
@@ -128,8 +127,6 @@ public class TFCBlocks {
 
         //==== Other =================================================================================================//
 
-        BLOCKS.add(PEAT = new BlockPeat());
-        BLOCKS.add(PEAT_GRASS = new BlockPeatGrass());
         BLOCKS.add(DEBUG = new BlockDebug());
         BLOCKS.add(AGGREGATE = new BlockAggregate());
         BLOCKS.add(FIRE_CLAY_BLOCK = new BlockFireClay());

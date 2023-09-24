@@ -3,13 +3,11 @@ package net.dries007.tfc.module.crop.common.blocks;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.module.core.client.util.CustomStateMap;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.module.crop.StorageCrop;
 import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;
 import net.dries007.tfc.module.crop.api.variant.block.ICropBlock;
-import net.dries007.tfc.module.crop.common.CropStorage;
 import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.dries007.tfc.util.Helpers;
@@ -47,7 +45,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 import static net.dries007.tfc.module.crop.api.category.CropCategories.PICKABLE;
 import static net.dries007.tfc.module.crop.api.variant.block.CropBlockVariants.DEAD;
 import static net.dries007.tfc.module.crop.api.variant.item.CropItemVariants.SEED;
@@ -100,7 +97,7 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
     @Nonnull
     @Override
     public Item getSeed() {
-        return CropStorage.getCropItem(SEED, type);
+        return StorageCrop.getCropItem(SEED, type);
     }
 
     @Nonnull
@@ -375,7 +372,7 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
         // Проверяем, включена ли опция смерти культурных растений в конфигурации
         if (ConfigTFC.General.FOOD.enableCropDeath) {
             // Устанавливаем состояние блока на месте умирающего растения
-            worldIn.setBlockState(pos, CropStorage.getCropBlock(DEAD, type).getDefaultState()
+            worldIn.setBlockState(pos, StorageCrop.getCropBlock(DEAD, type).getDefaultState()
                     .withProperty(BlockCropDead.MATURE, state.getValue(getAgeProperty()) == MATURE_AGE));
         }
     }

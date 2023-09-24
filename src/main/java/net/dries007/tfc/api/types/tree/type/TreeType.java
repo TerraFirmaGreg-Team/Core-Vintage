@@ -15,7 +15,7 @@ import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies;
 import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.module.wood.api.type.WoodType;
-import net.dries007.tfc.module.wood.common.WoodStorage;
+import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
@@ -168,7 +168,7 @@ public class TreeType extends TreeFamily {
 
     @Override
     public ItemStack getPrimitiveLogItemStack(int qty) {
-        var stack = new ItemStack(WoodStorage.getWoodBlock(LOG, wood), qty);
+        var stack = new ItemStack(StorageWood.getWoodBlock(LOG, wood), qty);
         stack.setCount(MathHelper.clamp(qty, 0, 64));
         return stack;
     }
@@ -407,8 +407,8 @@ public class TreeType extends TreeFamily {
             setName(wood.toString());
 
             this.wood = wood;
-            this.primitiveLeaves = WoodStorage.getWoodBlock(LEAVES, wood).getDefaultState();
-            this.primitiveLog = WoodStorage.getWoodBlock(LOG, wood).getDefaultState();
+            this.primitiveLeaves = StorageWood.getWoodBlock(LEAVES, wood).getDefaultState();
+            this.primitiveLog = StorageWood.getWoodBlock(LOG, wood).getDefaultState();
             return this;
         }
 

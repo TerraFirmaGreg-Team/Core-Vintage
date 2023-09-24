@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityInitializer {
+public class EntitiesWood {
 
     public static void onRegister(Registry registry) {
 

@@ -14,9 +14,9 @@ import net.dries007.tfc.module.core.client.particle.TFCParticles;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.metal.StorageMetal;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
 import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariant;
-import net.dries007.tfc.module.metal.common.MetalStorage;
 import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -53,8 +53,8 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_METAL;
+import static net.dries007.tfc.module.metal.StorageMetal.METAL_BLOCKS;
 import static net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariants.ANVIL;
-import static net.dries007.tfc.module.metal.common.MetalStorage.METAL_BLOCKS;
 import static net.dries007.tfc.util.Constants.RNG;
 
 @ParametersAreNonnullByDefault
@@ -133,7 +133,7 @@ public class BlockMetalAnvil extends TFCBlock implements IMetalBlock, IMaterialI
             if (state.getBlock().isReplaceable(worldIn, placedPos) &&
                     stateSupport.isSideSolid(worldIn, supportPos, EnumFacing.UP)) {
                 if (!worldIn.isRemote) {
-                    worldIn.setBlockState(placedPos, MetalStorage.getMetalBlock(ANVIL, material).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
+                    worldIn.setBlockState(placedPos, StorageMetal.getMetalBlock(ANVIL, material).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
                     worldIn.playSound(null, placedPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     stack.shrink(1);
                     player.setHeldItem(hand, stack);
@@ -315,7 +315,7 @@ public class BlockMetalAnvil extends TFCBlock implements IMetalBlock, IMaterialI
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(MetalStorage.getMetalBlock(ANVIL, material));
+        return new ItemStack(StorageMetal.getMetalBlock(ANVIL, material));
     }
 
     public Material getMetal() {

@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.soil.common.blocks.peat;
 
-import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
-import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilGrass;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;

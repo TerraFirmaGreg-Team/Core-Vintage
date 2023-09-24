@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.mapgen;
 
-import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;

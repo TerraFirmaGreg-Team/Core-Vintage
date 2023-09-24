@@ -2,7 +2,7 @@ package net.dries007.tfc.module.wood.common.items;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.core.common.objects.items.TFCItem;
+import net.dries007.tfc.common.objects.items.TFCItem;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.item.IWoodItem;
 import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariant;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.plant.common.blocks;
 
-import net.dries007.tfc.module.core.common.objects.items.TFCItems;
+import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.Constants;

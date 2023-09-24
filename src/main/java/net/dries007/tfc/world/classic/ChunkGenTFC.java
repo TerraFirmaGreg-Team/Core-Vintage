@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.category.RockCategory;
 import net.dries007.tfc.module.rock.api.type.RockType;

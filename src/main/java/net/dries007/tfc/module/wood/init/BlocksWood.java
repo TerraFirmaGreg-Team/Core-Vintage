@@ -5,7 +5,7 @@ import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.RegistryHelper;
-import net.dries007.tfc.module.core.client.util.GrassColorHandler;
+import net.dries007.tfc.client.util.GrassColorHandler;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.client.render.TESRWoodBarrel;
 import net.dries007.tfc.module.wood.client.render.TESRWoodChest;

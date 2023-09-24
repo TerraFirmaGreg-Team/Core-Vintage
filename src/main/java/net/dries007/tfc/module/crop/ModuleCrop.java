@@ -2,7 +2,7 @@ package net.dries007.tfc.module.crop;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.crop.api.category.CropCategoryHandler;
 import net.dries007.tfc.module.crop.api.type.CropTypeHandler;
 import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariantHandler;

@@ -2,8 +2,8 @@ package net.dries007.tfc.module.crop.common.blocks;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.module.core.client.util.CustomStateMap;
-import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.crop.StorageCrop;
 import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;

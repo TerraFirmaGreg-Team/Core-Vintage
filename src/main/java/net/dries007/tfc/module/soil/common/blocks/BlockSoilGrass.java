@@ -8,8 +8,8 @@ package net.dries007.tfc.module.soil.common.blocks;
 
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
 import net.dries007.tfc.module.plant.StoragePlant;
 import net.dries007.tfc.module.plant.api.type.PlantType;

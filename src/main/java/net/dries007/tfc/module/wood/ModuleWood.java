@@ -2,7 +2,7 @@ package net.dries007.tfc.module.wood;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.wood.api.type.WoodTypeHandler;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariantHandler;
 import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariantHandler;

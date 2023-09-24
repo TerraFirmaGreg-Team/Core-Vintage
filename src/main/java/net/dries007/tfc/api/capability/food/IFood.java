@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.capability.food;
 
-import net.dries007.tfc.module.core.client.ClientProxy;
-import net.dries007.tfc.module.core.common.CommonEventHandler;
+import net.dries007.tfc.client.ClientProxy;
+import net.dries007.tfc.common.CommonEventHandler;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;

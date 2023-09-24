@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.biomes;
 
-import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
 import net.minecraft.entity.Entity;

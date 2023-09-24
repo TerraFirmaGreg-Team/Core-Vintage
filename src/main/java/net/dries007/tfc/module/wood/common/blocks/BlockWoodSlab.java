@@ -1,11 +1,11 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
-import net.dries007.tfc.module.core.client.util.CustomStateMap;
+import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants;
-import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.common.blocks.itemblocks.ItemBlockWoodSlab;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;

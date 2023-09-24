@@ -2,8 +2,8 @@ package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
-import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.init.Items;

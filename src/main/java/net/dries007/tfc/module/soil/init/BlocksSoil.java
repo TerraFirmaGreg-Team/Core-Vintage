@@ -3,7 +3,7 @@ package net.dries007.tfc.module.soil.init;
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import com.codetaylor.mc.athenaeum.util.ModelRegistrationHelper;
 import net.dries007.tfc.api.util.IHasModel;
-import net.dries007.tfc.module.core.client.util.GrassColorHandler;
+import net.dries007.tfc.client.util.GrassColorHandler;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeat;
 import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeatGrass;
@@ -14,8 +14,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.FARMLAND;
 import static net.dries007.tfc.module.soil.StorageSoil.SOIL_BLOCKS;
+import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.FARMLAND;
 
 public class BlocksSoil {
 

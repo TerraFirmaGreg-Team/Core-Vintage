@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.types.bush.type;
 
 import net.dries007.tfc.api.types.food.type.FoodType;
-import net.dries007.tfc.module.core.common.objects.blocks.berrybush.BlockBerryBush;
-import net.dries007.tfc.module.core.common.objects.items.TFCItems;
+import net.dries007.tfc.common.objects.blocks.berrybush.BlockBerryBush;
+import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
@@ -14,8 +14,8 @@ import java.util.Set;
 
 import static net.dries007.tfc.api.types.bush.IBushBlock.Size;
 import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
-import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.BLOCKS;
-import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.BUSH_BLOCKS;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
+import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BUSH_BLOCKS;
 
 public class BushType {
 

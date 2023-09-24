@@ -1,11 +1,11 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
-import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
-import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.module.wood.StorageWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;

@@ -3,7 +3,7 @@ package net.dries007.tfc.compat.dynamictrees.blocks;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranchBasic;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
-import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.minecraft.block.state.IBlockState;

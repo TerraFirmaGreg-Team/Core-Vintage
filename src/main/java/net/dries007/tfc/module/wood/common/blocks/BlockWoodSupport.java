@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
-import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
 import net.minecraft.block.Block;

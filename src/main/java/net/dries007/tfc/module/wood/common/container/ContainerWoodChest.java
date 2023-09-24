@@ -3,7 +3,7 @@ package net.dries007.tfc.module.wood.common.container;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.module.core.common.objects.container.ContainerTE;
+import net.dries007.tfc.common.objects.container.ContainerTE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;

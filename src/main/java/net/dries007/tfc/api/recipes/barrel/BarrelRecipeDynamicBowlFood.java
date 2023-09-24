@@ -2,8 +2,8 @@ package net.dries007.tfc.api.recipes.barrel;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.module.core.common.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.module.core.common.objects.items.food.ItemDynamicBowlFood;
+import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.common.objects.items.food.ItemDynamicBowlFood;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;

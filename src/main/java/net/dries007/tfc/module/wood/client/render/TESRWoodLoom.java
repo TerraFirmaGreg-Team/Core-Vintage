@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.wood.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.core.client.render.TESRBase;
+import net.dries007.tfc.client.render.TESRBase;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.common.tile.TEWoodLoom;
 import net.dries007.tfc.util.Helpers;

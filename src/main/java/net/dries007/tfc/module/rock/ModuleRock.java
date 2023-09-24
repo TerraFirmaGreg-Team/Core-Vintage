@@ -2,7 +2,7 @@ package net.dries007.tfc.module.rock;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.rock.api.category.RockCategoryHandler;
 import net.dries007.tfc.module.rock.api.type.RockTypeHandler;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariantHandler;

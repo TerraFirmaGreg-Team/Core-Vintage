@@ -5,7 +5,7 @@ import gregtech.common.items.ToolItems;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.dries007.tfc.module.core.common.objects.items.ItemAnimalHide;
+import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;

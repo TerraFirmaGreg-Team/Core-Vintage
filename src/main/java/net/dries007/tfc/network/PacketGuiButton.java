@@ -2,9 +2,9 @@ package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.core.client.gui.GuiAnvilTFC;
-import net.dries007.tfc.module.core.common.objects.container.ContainerAnvilTFC;
-import net.dries007.tfc.module.core.common.objects.container.IButtonHandler;
+import net.dries007.tfc.client.gui.GuiAnvilTFC;
+import net.dries007.tfc.common.objects.container.ContainerAnvilTFC;
+import net.dries007.tfc.common.objects.container.IButtonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.recipes.ingredients;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.module.core.common.objects.items.ItemsTFC_old;
+import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;

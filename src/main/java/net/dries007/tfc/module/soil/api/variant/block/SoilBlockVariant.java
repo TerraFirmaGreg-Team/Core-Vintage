@@ -2,8 +2,8 @@ package net.dries007.tfc.module.soil.api.variant.block;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.module.soil.StorageSoil;
+import net.dries007.tfc.module.soil.api.type.SoilType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

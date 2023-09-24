@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.core.common.objects.effects.PotionEffectsTFC;
-import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.common.objects.effects.PotionEffectsTFC;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.network.PacketFoodStatsReplace;
 import net.dries007.tfc.network.PacketFoodStatsUpdate;
 import net.dries007.tfc.util.Constants;

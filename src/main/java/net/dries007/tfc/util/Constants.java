@@ -3,7 +3,7 @@ package net.dries007.tfc.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.dries007.tfc.api.capability.damage.DamageResistance;
-import net.dries007.tfc.module.core.common.objects.entity.animal.AnimalFood;
+import net.dries007.tfc.common.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.util.json.AnimalFoodJson;
 import net.dries007.tfc.util.json.DamageResistanceJson;
 import net.dries007.tfc.util.json.LowercaseEnumTypeAdapterFactory;

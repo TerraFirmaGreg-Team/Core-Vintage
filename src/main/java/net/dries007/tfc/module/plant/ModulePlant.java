@@ -2,7 +2,7 @@ package net.dries007.tfc.module.plant;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.plant.api.category.PlantCategoryHandler;
 import net.dries007.tfc.module.plant.api.type.PlantTypeHandler;
 import net.dries007.tfc.module.plant.api.variant.block.PlantBlockVariantHandler;

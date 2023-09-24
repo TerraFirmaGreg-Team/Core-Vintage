@@ -11,17 +11,9 @@ public class CommonProxy {
         return false;
     }
 
-    public void playSound(SoundEvent soundEvent, SoundCategory soundCategory) {
+    public void playSound(SoundEvent soundEvent, SoundCategory soundCategory) {}
 
-        //
-    }
+    public void playSound(SoundEvent soundEvent, SoundCategory soundCategory, float volume, float pitch, boolean distanceDelay) {}
 
-    public void playSound(SoundEvent soundEvent, SoundCategory soundCategory, float volume, float pitch, boolean distanceDelay) {
-        //
-    }
-
-    public void playSound(BlockPos pos, SoundEvent soundEvent, SoundCategory soundCategory, float volume, float pitch, boolean distanceDelay) {
-
-        //
-    }
+    public void playSound(BlockPos pos, SoundEvent soundEvent, SoundCategory soundCategory, float volume, float pitch, boolean distanceDelay) {}
 }

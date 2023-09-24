@@ -23,27 +23,27 @@ public class PlantStorage {
     public static Block getPlantBlock(@Nonnull PlantEnumVariant variant, @Nonnull PlantType type) {
         var block = (Block) PLANT_BLOCKS.get(new Pair<>(variant, type));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Block plant is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static IPlantBlock getIPlantBlock(@Nonnull PlantEnumVariant variant, @Nonnull PlantType type) {
         var block = PLANT_BLOCKS.get(new Pair<>(variant, type));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Block plant is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static Item getPlantItem(@Nonnull PlantItemVariant variant, @Nonnull PlantType type) {
         var item = (Item) PLANT_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Item plant is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static IPlantItem getIPlantItem(@Nonnull PlantItemVariant variant, @Nonnull PlantType type) {
         var item = PLANT_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Item plant is null: %s, %s", variant, type));
     }
 }

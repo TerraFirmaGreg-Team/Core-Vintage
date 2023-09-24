@@ -2,11 +2,10 @@ package net.dries007.tfc.module.soil;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.module.core.common.objects.TFCCreativeTab;
+import net.dries007.tfc.api.util.TFCCreativeTab;
 import net.dries007.tfc.module.soil.api.type.SoilTypeHandler;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariantHandler;
 import net.dries007.tfc.module.soil.api.variant.item.SoilItemVariantHandler;
-import net.dries007.tfc.module.soil.common.SoilStorage;
 import net.dries007.tfc.module.soil.init.BlockInitializer;
 import net.dries007.tfc.module.soil.init.ItemInitializer;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,12 +19,10 @@ import org.apache.logging.log4j.Logger;
 
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.Tags.MOD_NAME;
-import static net.dries007.tfc.module.soil.api.type.SoilTypes.SILT;
-import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.GRASS;
 
 public class ModuleSoil extends ModuleBase {
 
-    public static final CreativeTabs SOIL_TAB = new TFCCreativeTab("soil", SoilStorage.getSoilBlock(GRASS, SILT));
+    public static final CreativeTabs SOIL_TAB = new TFCCreativeTab("soil", "tfc:soil.grass.silt");
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleSoil.class.getSimpleName());
 
     public ModuleSoil() {

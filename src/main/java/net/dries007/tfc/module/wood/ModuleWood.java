@@ -2,11 +2,10 @@ package net.dries007.tfc.module.wood;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.module.core.common.objects.TFCCreativeTab;
+import net.dries007.tfc.api.util.TFCCreativeTab;
 import net.dries007.tfc.module.wood.api.type.WoodTypeHandler;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariantHandler;
 import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariantHandler;
-import net.dries007.tfc.module.wood.common.WoodStorage;
 import net.dries007.tfc.module.wood.init.BlockInitializer;
 import net.dries007.tfc.module.wood.init.EntityInitializer;
 import net.dries007.tfc.module.wood.init.ItemInitializer;
@@ -21,12 +20,10 @@ import org.apache.logging.log4j.Logger;
 
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.Tags.MOD_NAME;
-import static net.dries007.tfc.module.wood.api.type.WoodTypes.PINE;
-import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.PLANKS;
 
 public class ModuleWood extends ModuleBase {
 
-    public static final CreativeTabs WOOD_TAB = new TFCCreativeTab("wood", WoodStorage.getWoodBlock(PLANKS, PINE));
+    public static final CreativeTabs WOOD_TAB = new TFCCreativeTab("wood", "tfc:wood.planks.pine");
 
 
     public static final CreativeTabs POTTERY_TAB = new TFCCreativeTab("pottery", "tfc:ceramics/fired/mold/ingot");

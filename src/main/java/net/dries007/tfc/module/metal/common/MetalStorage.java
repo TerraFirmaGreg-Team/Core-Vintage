@@ -22,27 +22,27 @@ public class MetalStorage {
     public static Block getMetalBlock(@Nonnull MetalBlockVariant variant, @Nonnull Material material) {
         var block = (Block) METAL_BLOCKS.get(new Pair<>(variant, material));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, material));
+        throw new RuntimeException(String.format("Block metal is null: %s, %s", variant, material));
     }
 
     @Nonnull
     public static IMetalBlock getIMetalBlock(@Nonnull MetalBlockVariant variant, @Nonnull Material material) {
         var block = METAL_BLOCKS.get(new Pair<>(variant, material));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, material));
+        throw new RuntimeException(String.format("Block metal is null: %s, %s", variant, material));
     }
 
     @Nonnull
     public static Item getMetalItem(@Nonnull MetalItemVariant variant, @Nonnull Material type) {
         var item = (Item) METAL_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Item metal is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static IMetalItem getIMetalItem(@Nonnull MetalItemVariant variant, @Nonnull Material type) {
         var item = METAL_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Item metal is null: %s, %s", variant, type));
     }
 }

@@ -22,14 +22,14 @@ public class WoodStorage {
     public static Block getWoodBlock(@Nonnull WoodBlockVariant variant, @Nonnull WoodType type) {
         var block = (Block) WOOD_BLOCKS.get(new Pair<>(variant, type));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Block wood is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static IWoodBlock getIWoodBlock(@Nonnull WoodBlockVariant variant, @Nonnull WoodType type) {
         var block = WOOD_BLOCKS.get(new Pair<>(variant, type));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Block wood is null: %s, %s", variant, type));
     }
 
 
@@ -37,13 +37,13 @@ public class WoodStorage {
     public static Item getWoodItem(@Nonnull WoodItemVariant variant, @Nonnull WoodType type) {
         var item = (Item) WOOD_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Item wood is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static IWoodItem getIWoodItem(@Nonnull WoodItemVariant variant, @Nonnull WoodType type) {
         var item = WOOD_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Item wood is null: %s, %s", variant, type));
     }
 }

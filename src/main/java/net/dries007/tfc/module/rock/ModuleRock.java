@@ -2,12 +2,11 @@ package net.dries007.tfc.module.rock;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.module.core.common.objects.TFCCreativeTab;
+import net.dries007.tfc.api.util.TFCCreativeTab;
 import net.dries007.tfc.module.rock.api.category.RockCategoryHandler;
 import net.dries007.tfc.module.rock.api.type.RockTypeHandler;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariantHandler;
 import net.dries007.tfc.module.rock.api.variant.item.RockItemVariantHandler;
-import net.dries007.tfc.module.rock.common.RockStorage;
 import net.dries007.tfc.module.rock.init.BlockInitializer;
 import net.dries007.tfc.module.rock.init.ItemInitializer;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,12 +18,10 @@ import org.apache.logging.log4j.Logger;
 
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.Tags.MOD_NAME;
-import static net.dries007.tfc.module.rock.api.type.RockTypes.SHALE;
-import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.RAW;
 
 public class ModuleRock extends ModuleBase {
 
-    public static final CreativeTabs ROCK_TAB = new TFCCreativeTab("rock", RockStorage.getRockBlock(RAW, SHALE));
+    public static final CreativeTabs ROCK_TAB = new TFCCreativeTab("rock", "tfc:rock.raw.shale");
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleRock.class.getSimpleName());
 
     public ModuleRock() {

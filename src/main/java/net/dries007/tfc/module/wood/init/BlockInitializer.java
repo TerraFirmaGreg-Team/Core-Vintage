@@ -58,9 +58,8 @@ public class BlockInitializer {
 
     @SideOnly(Side.CLIENT)
     public static void onClientInitialization() {
-        var minecraft = Minecraft.getMinecraft();
-        var itemColors = minecraft.getItemColors();
-        var blockColors = minecraft.getBlockColors();
+        var itemColors = Minecraft.getMinecraft().getItemColors();
+        var blockColors = Minecraft.getMinecraft().getBlockColors();
 
         IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
 

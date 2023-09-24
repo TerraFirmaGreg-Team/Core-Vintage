@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.core.common.objects;
+package net.dries007.tfc.api.util;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -34,7 +34,6 @@ public class TFCCreativeTab extends CreativeTabs {
         super(Tags.MOD_ID + "." + label);
         this.item = item;
     }
-
 
     @SideOnly(Side.CLIENT)
     @Override

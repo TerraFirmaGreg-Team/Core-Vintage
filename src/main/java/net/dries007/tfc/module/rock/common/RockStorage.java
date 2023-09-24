@@ -23,27 +23,27 @@ public class RockStorage {
     public static Block getRockBlock(@Nonnull RockBlockVariant variant, @Nonnull RockType type) {
         var block = (Block) ROCK_BLOCKS.get(new Pair<>(variant, type));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Block rock is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static IRockBlock getIRockBlock(@Nonnull RockBlockVariant variant, @Nonnull RockType type) {
         var block = ROCK_BLOCKS.get(new Pair<>(variant, type));
         if (block != null) return block;
-        throw new RuntimeException(String.format("Block is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Block rock is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static Item getRockItem(@Nonnull RockItemVariant variant, @Nonnull RockType type) {
         var item = (Item) ROCK_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Item rock is null: %s, %s", variant, type));
     }
 
     @Nonnull
     public static IRockItem getIRockItem(@Nonnull RockItemVariant variant, @Nonnull RockType type) {
         var item = ROCK_ITEMS.get(new Pair<>(variant, type));
         if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
+        throw new RuntimeException(String.format("Item rock is null: %s, %s", variant, type));
     }
 }

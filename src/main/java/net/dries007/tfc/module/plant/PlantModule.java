@@ -2,12 +2,11 @@ package net.dries007.tfc.module.plant;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.module.core.common.objects.TFCCreativeTab;
+import net.dries007.tfc.api.util.TFCCreativeTab;
 import net.dries007.tfc.module.plant.api.category.PlantCategoryHandler;
 import net.dries007.tfc.module.plant.api.type.PlantTypeHandler;
 import net.dries007.tfc.module.plant.api.variant.block.PlantBlockVariantHandler;
 import net.dries007.tfc.module.plant.api.variant.item.PlantItemVariantHandler;
-import net.dries007.tfc.module.plant.common.PlantStorage;
 import net.dries007.tfc.module.plant.init.BlockInitializer;
 import net.dries007.tfc.module.plant.init.ItemInitializer;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,12 +20,10 @@ import org.apache.logging.log4j.Logger;
 
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.Tags.MOD_NAME;
-import static net.dries007.tfc.module.plant.api.type.PlantTypes.BARREL_CACTUS;
-import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.CACTUS;
 
 public class PlantModule extends ModuleBase {
 
-    public static final CreativeTabs FLORA_TAB = new TFCCreativeTab("flora", PlantStorage.getPlantBlock(CACTUS, BARREL_CACTUS));
+    public static final CreativeTabs FLORA_TAB = new TFCCreativeTab("flora", "tfc:plants/cactus/barrel_cactus");
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + PlantModule.class.getSimpleName());
 
 //    public static IPacketService PACKET_SERVICE;

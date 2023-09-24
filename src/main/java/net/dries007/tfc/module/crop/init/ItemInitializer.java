@@ -7,7 +7,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static net.dries007.tfc.module.crop.common.CropStorage.CROP_ITEMS;
-import static net.dries007.tfc.module.rock.common.RockStorage.ROCK_ITEMS;
 
 public class ItemInitializer {
 

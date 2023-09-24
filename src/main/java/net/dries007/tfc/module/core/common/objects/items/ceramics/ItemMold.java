@@ -9,7 +9,6 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.resources.I18n;
@@ -32,6 +31,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+import static net.dries007.tfc.module.wood.ModuleWood.POTTERY_TAB;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
 @ParametersAreNonnullByDefault
@@ -42,7 +42,7 @@ public class ItemMold extends ItemPottery {
     public ItemMold(OrePrefix type) {
         this.orePrefix = type;
 
-        setCreativeTab(CreativeTabsTFC.POTTERY);
+        setCreativeTab(POTTERY_TAB);
         setRegistryName(Tags.MOD_ID, "ceramics/fired/mold/" + orePrefix.name.toLowerCase());
     }
 

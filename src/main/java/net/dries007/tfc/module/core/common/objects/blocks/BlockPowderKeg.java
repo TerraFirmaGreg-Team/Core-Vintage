@@ -6,9 +6,9 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockPowderKeg;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEPowderKeg;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -62,7 +62,7 @@ public class BlockPowderKeg extends TFCBlock implements IItemSize, ILightableBlo
 
         setDefaultState(blockState.getBaseState().withProperty(LIT, false).withProperty(SEALED, false));
 
-        setCreativeTab(CreativeTabsTFC.MISC);
+        setCreativeTab(ModuleWood.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "powderkeg");
         setTranslationKey(Tags.MOD_ID + ".powderkeg");
     }

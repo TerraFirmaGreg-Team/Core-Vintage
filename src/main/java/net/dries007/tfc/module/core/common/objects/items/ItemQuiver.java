@@ -5,9 +5,9 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.common.objects.ArmorMaterialTFC;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.module.core.config.ConfigTFC;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -41,7 +41,7 @@ public class ItemQuiver extends ItemArmorTFC {
 
         setRegistryName(Tags.MOD_ID, "quiver");
         setTranslationKey(Tags.MOD_ID + ".quiver");
-        setCreativeTab(CreativeTabsTFC.MISC);
+        setCreativeTab(ModuleWood.MISC_TAB);
     }
 
     public static void replenishJavelin(InventoryPlayer playerInv) {

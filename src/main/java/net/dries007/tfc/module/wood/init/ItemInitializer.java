@@ -3,7 +3,6 @@ package net.dries007.tfc.module.wood.init;
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.module.wood.api.variant.item.IWoodItem;
-import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariantHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;

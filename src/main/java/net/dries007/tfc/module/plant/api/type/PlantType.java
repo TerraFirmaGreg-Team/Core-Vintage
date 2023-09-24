@@ -4,7 +4,6 @@ import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +12,6 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.*;
 
-import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.BLOCKS;
 import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.*;
 import static net.dries007.tfc.module.plant.common.PlantStorage.PLANT_BLOCKS;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;

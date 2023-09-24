@@ -38,12 +38,6 @@ import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
 import net.dries007.tfc.module.metal.common.MetalStorage;
 import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
-import net.dries007.tfc.module.wood.client.render.*;
-import net.dries007.tfc.module.wood.common.entity.EntityWoodBoat;
-import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
-import net.dries007.tfc.module.wood.common.tile.TEWoodChest;
-import net.dries007.tfc.module.wood.common.tile.TEWoodLoom;
-import net.dries007.tfc.module.wood.common.tile.TEWoodToolRack;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -165,17 +159,13 @@ public class ClientProxy extends CommonProxy {
 
         //==== TESRs =================================================================================================//
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodChest.class, new TESRWoodChest());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodToolRack.class, new TESRWoodToolRack());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPitKiln.class, new TESRPitKiln());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItem.class, new TESRPlacedItem());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());
         ClientRegistry.bindTileEntitySpecialRenderer(TEQuern.class, new TESRQuern());
         ClientRegistry.bindTileEntitySpecialRenderer(TEBellows.class, new TESRBellows());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodBarrel.class, new TESRWoodBarrel());
         ClientRegistry.bindTileEntitySpecialRenderer(TEMetalAnvil.class, new TESRAnvil());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodLoom.class, new TESRWoodLoom());
         ClientRegistry.bindTileEntitySpecialRenderer(TECrucible.class, new TESRCrucible());
         ClientRegistry.bindTileEntitySpecialRenderer(TEFirePit.class, new TESRFirePit());
 
@@ -506,7 +496,6 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityHorseTFC.class, RenderHorseTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityDonkeyTFC.class, RenderAbstractHorseTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMuleTFC.class, RenderAbstractHorseTFC::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityWoodBoat.class, RenderWoodBoat::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityPolarBearTFC.class, RenderPolarBearTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityParrotTFC.class, RenderParrotTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityLlamaTFC.class, RenderLlamaTFC::new);

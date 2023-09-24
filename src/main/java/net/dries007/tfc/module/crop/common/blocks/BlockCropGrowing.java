@@ -3,8 +3,6 @@ package net.dries007.tfc.module.crop.common.blocks;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.module.core.client.util.CustomStateMap;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;
@@ -47,7 +45,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 import static net.dries007.tfc.module.crop.api.category.CropCategories.PICKABLE;
 import static net.dries007.tfc.module.crop.api.variant.block.CropBlockVariants.DEAD;
 import static net.dries007.tfc.module.crop.api.variant.item.CropItemVariants.SEED;

@@ -7,6 +7,10 @@ import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.RegistryHelper;
 import net.dries007.tfc.module.core.client.util.GrassColorHandler;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
+import net.dries007.tfc.module.wood.client.render.TESRWoodBarrel;
+import net.dries007.tfc.module.wood.client.render.TESRWoodChest;
+import net.dries007.tfc.module.wood.client.render.TESRWoodLoom;
+import net.dries007.tfc.module.wood.client.render.TESRWoodToolRack;
 import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
 import net.dries007.tfc.module.wood.common.tile.TEWoodChest;
 import net.dries007.tfc.module.wood.common.tile.TEWoodLoom;
@@ -15,6 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,6 +48,12 @@ public class BlockInitializer {
         registry.registerClientModelRegistrationStrategy(() -> {
             WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
         });
+
+        // TESRs
+        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodBarrel.class, new TESRWoodBarrel());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodLoom.class, new TESRWoodLoom());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodChest.class, new TESRWoodChest());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodToolRack.class, new TESRWoodToolRack());
     }
 
     @SideOnly(Side.CLIENT)

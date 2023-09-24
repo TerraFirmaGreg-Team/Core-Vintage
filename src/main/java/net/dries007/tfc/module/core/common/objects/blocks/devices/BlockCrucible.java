@@ -6,10 +6,10 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockCrucible;
 import net.dries007.tfc.module.core.common.objects.tileentities.TECrucible;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -54,7 +54,7 @@ public class BlockCrucible extends TFCBlock implements IHeatConsumerBlock, IItem
         setHarvestLevel("pickaxe", 0);
         setSoundType(SoundType.METAL);
 
-        setCreativeTab(CreativeTabsTFC.MISC);
+        setCreativeTab(ModuleWood.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "crucible");
         setTranslationKey(Tags.MOD_ID + ".crucible");
     }

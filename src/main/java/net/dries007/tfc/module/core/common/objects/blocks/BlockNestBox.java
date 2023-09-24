@@ -2,8 +2,8 @@ package net.dries007.tfc.module.core.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.tileentities.TENestBox;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -35,7 +35,7 @@ public class BlockNestBox extends TFCBlock {
         super(Material.GRASS);
         setHardness(0.5F);
 
-        setCreativeTab(CreativeTabsTFC.MISC);
+        setCreativeTab(ModuleWood.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "nest_box");
         setTranslationKey(Tags.MOD_ID + ".nest_box");
 

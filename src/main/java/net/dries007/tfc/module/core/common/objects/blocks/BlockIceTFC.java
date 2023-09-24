@@ -2,8 +2,8 @@ package net.dries007.tfc.module.core.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IItemProvider;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.dries007.tfc.util.climate.IceMeltHandler;
@@ -45,7 +45,7 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock, IItemPro
         } else {
             setRegistryName(Tags.MOD_ID, "sea_ice");
             setTranslationKey(Tags.MOD_ID + ".sea_ice.");
-            setCreativeTab(CreativeTabsTFC.MISC);
+            setCreativeTab(ModuleWood.MISC_TAB);
         }
 
         setHardness(0.5F);

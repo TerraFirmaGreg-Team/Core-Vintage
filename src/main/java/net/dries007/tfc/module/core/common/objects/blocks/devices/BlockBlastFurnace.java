@@ -6,7 +6,6 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.core.common.objects.items.ItemFireStarter;
@@ -14,6 +13,7 @@ import net.dries007.tfc.module.core.common.objects.tileentities.TEBellows;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEBlastFurnace;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEMetalSheet;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalCladding;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.block.Multiblock;
 import net.minecraft.block.material.Material;
@@ -71,7 +71,7 @@ public class BlockBlastFurnace extends TFCBlock implements IBellowsConsumerBlock
         setResistance(2.0F);
         setHarvestLevel("pickaxe", 0);
 
-        setCreativeTab(CreativeTabsTFC.MISC);
+        setCreativeTab(ModuleWood.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "blast_furnace");
         setTranslationKey(Tags.MOD_ID + ".blast_furnace");
     }

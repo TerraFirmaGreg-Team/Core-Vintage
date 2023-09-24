@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
 import net.dries007.tfc.module.core.client.util.CustomStateMap;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
@@ -50,7 +49,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
         setLightOpacity(255);
         setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
-        setCreativeTab(CreativeTabsTFC.WOOD);
         setSoundType(SoundType.STONE);
 
         Blocks.FIRE.setFireInfo(this, 5, 20);

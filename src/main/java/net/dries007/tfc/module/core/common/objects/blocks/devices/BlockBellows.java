@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.core.common.objects.blocks.devices;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEBellows;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -36,7 +36,7 @@ public class BlockBellows extends TFCBlock {
         setHarvestLevel("axe", 0);
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 
-        setCreativeTab(CreativeTabsTFC.MISC);
+        setCreativeTab(ModuleWood.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "bellows");
         setTranslationKey(Tags.MOD_ID + ".bellows");
     }

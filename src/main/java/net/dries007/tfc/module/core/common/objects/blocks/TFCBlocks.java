@@ -27,7 +27,6 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 

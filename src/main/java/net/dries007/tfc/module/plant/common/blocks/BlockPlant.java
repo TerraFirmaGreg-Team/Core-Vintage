@@ -6,7 +6,6 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.IItemProvider;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.core.config.ConfigTFC;
 import net.dries007.tfc.module.plant.api.type.PlantType;
@@ -53,6 +52,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static net.dries007.tfc.module.plant.PlantModule.FLORA_TAB;
+
 
 @ParametersAreNonnullByDefault
 public class BlockPlant extends BlockBush implements IPlantBlock, IItemSize, IItemProvider {
@@ -83,7 +84,7 @@ public class BlockPlant extends BlockBush implements IPlantBlock, IItemSize, IIt
 
         setRegistryName(Tags.MOD_ID, blockRegistryName);
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        setCreativeTab(CreativeTabsTFC.FLORA);
+        setCreativeTab(FLORA_TAB);
         setTickRandomly(true);
         setSoundType(SoundType.PLANT);
         setHardness(0.0F);

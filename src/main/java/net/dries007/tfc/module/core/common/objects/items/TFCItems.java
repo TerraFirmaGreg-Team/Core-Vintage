@@ -14,12 +14,10 @@ import net.dries007.tfc.module.core.common.objects.items.ceramics.ItemUnfiredMol
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
-import static net.dries007.tfc.module.core.common.objects.CreativeTabsTFC.WOOD;
+import static net.dries007.tfc.module.wood.ModuleWood.MISC_TAB;
 
 public class TFCItems {
 
@@ -79,10 +77,10 @@ public class TFCItems {
         ITEMS.add(GLUE = new ItemMisc("glue", Size.TINY, Weight.LIGHT, "slimeball", "glue"));
         ITEMS.add(MORTAR = new ItemMisc("mortar", Size.TINY, Weight.VERY_LIGHT, "mortar"));
         ITEMS.add(HALTER = new ItemMisc("halter", Size.SMALL, Weight.LIGHT, "halter"));
-        ITEMS.add(STICK_BUNCH = new ItemMisc("stick_bunch", Size.NORMAL, Weight.LIGHT, WOOD));
-        ITEMS.add(STICK_BUNDLE = new ItemMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, WOOD, "log_wood", "stick_bundle"));
+        ITEMS.add(STICK_BUNCH = new ItemMisc("stick_bunch", Size.NORMAL, Weight.LIGHT, MISC_TAB));
+        ITEMS.add(STICK_BUNDLE = new ItemMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, MISC_TAB, "log_wood", "stick_bundle"));
         ITEMS.add(FIRE_CLAY = new ItemMisc("ceramics/fire_clay", Size.VERY_SMALL, Weight.VERY_LIGHT, "fire_clay"));
-        ITEMS.add(WOOD_ASH = new ItemMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT, WOOD, "slimeball", "glue"));
+        ITEMS.add(WOOD_ASH = new ItemMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT, MISC_TAB, "slimeball", "glue"));
         ITEMS.add(GLASS_SHARD = new ItemMisc("glass_shard", Size.VERY_SMALL, Weight.VERY_LIGHT));
         ITEMS.add(ALABASTER_BRICK = new ItemMisc("alabaster_brick", Size.VERY_SMALL, Weight.LIGHT));
 

@@ -8,7 +8,6 @@ import net.dries007.tfc.api.types.food.category.FoodCategories;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.food.variant.Item.FoodItemVariant;
 import net.dries007.tfc.api.types.food.variant.Item.IFoodItem;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,6 +19,8 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.dries007.tfc.module.wood.ModuleWood.FOOD_TAB;
 
 @ParametersAreNonnullByDefault
 public class ItemFoodIngredient extends ItemFood implements IItemSize, IItemFoodTFC, IFoodItem {
@@ -41,7 +42,7 @@ public class ItemFoodIngredient extends ItemFood implements IItemSize, IItemFood
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.FOOD);
+        setCreativeTab(FOOD_TAB);
     }
 
 

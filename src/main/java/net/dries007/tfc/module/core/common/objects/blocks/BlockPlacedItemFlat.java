@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.core.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -45,7 +45,7 @@ public class BlockPlacedItemFlat extends TFCBlock {
         super(Material.CIRCUITS);
         setHardness(0.1F);
 
-        setCreativeTab(CreativeTabsTFC.MISC);
+        setCreativeTab(ModuleWood.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "placed_item_flat");
         setTranslationKey(Tags.MOD_ID + ".placed_item_flat");
     }

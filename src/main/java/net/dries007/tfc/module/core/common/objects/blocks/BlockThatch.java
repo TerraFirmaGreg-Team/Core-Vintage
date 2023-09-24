@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -36,7 +36,7 @@ public class BlockThatch extends TFCBlock {
         setHardness(0.6F);
         setLightOpacity(255); //Blocks light
 
-        setCreativeTab(CreativeTabsTFC.MISC);
+        setCreativeTab(ModuleWood.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "thatch");
         setTranslationKey(Tags.MOD_ID + ".thatch");
 

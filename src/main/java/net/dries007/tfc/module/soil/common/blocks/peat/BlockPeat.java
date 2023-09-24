@@ -2,8 +2,8 @@ package net.dries007.tfc.module.soil.common.blocks.peat;
 
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,7 +16,7 @@ public class BlockPeat extends TFCBlock {
 
         setRegistryName(Tags.MOD_ID, "peat");
         setTranslationKey(Tags.MOD_ID + ".peat");
-        setCreativeTab(CreativeTabsTFC.SOIL);
+        setCreativeTab(ModuleWood.MISC_TAB);
         setSoundType(SoundType.GROUND);
         setHardness(0.6F);
         setHarvestLevel("shovel", 0);

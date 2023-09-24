@@ -3,7 +3,7 @@ package net.dries007.tfc.module.core.common.objects.blocks;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.property.ILightableBlock;
-import net.dries007.tfc.module.wood.ModuleWood;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -49,7 +49,7 @@ public class BlockMolten extends TFCBlock implements ILightableBlock, IHasModel 
                 .withProperty(LIT, false)
                 .withProperty(LAYERS, 1));
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "molten");
         setTranslationKey(Tags.MOD_ID + ".molten");
     }

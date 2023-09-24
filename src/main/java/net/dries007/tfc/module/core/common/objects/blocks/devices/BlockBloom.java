@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.core.common.objects.blocks.devices;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEBloom;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -33,7 +33,7 @@ public class BlockBloom extends TFCBlock {
         setHarvestLevel("pickaxe", 0);
         setSoundType(SoundType.STONE);
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "bloom");
         setTranslationKey(Tags.MOD_ID + ".bloom");
     }

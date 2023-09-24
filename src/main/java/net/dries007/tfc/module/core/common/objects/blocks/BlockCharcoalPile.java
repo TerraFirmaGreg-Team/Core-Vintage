@@ -3,10 +3,10 @@ package net.dries007.tfc.module.core.common.objects.blocks;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.module.core.client.TFCSounds;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.devices.BlockCharcoalForge;
 import net.dries007.tfc.module.core.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.core.common.objects.tileentities.TECharcoalForge;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -59,7 +59,7 @@ public class BlockCharcoalPile extends TFCBlock implements ILightableBlock {
         setHardness(1.0F);
         this.setDefaultState(this.blockState.getBaseState().withProperty(LAYERS, 1));
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "charcoal_pile");
         setTranslationKey(Tags.MOD_ID + ".charcoal_pile");
     }

@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.core.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.items.ItemAnimalHide;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEPlacedHide;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.material.Material;
@@ -47,7 +47,7 @@ public class BlockPlacedHide extends TFCBlock {
 
         setDefaultState(getBlockState().getBaseState().withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM));
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "placed_hide");
         setTranslationKey(Tags.MOD_ID + ".placed_hide");
     }

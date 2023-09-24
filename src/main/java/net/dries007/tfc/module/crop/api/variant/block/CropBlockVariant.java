@@ -2,12 +2,14 @@ package net.dries007.tfc.module.crop.api.variant.block;
 
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.crop.api.type.CropType;
+import net.minecraft.block.Block;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
+import static net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks.BLOCKS;
 import static net.dries007.tfc.module.crop.common.CropStorage.CROP_BLOCKS;
 
 public class CropBlockVariant {

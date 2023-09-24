@@ -3,8 +3,8 @@ package net.dries007.tfc.module.core.common.objects.blocks;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.items.ItemAnimalHide;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
@@ -37,7 +37,7 @@ public class BlockThatchBed extends BlockBed implements IItemProvider {
         setHardness(0.6F);
         Blocks.FIRE.setFireInfo(this, 60, 20);
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "thatch_bed");
         setTranslationKey(Tags.MOD_ID + ".thatch_bed");
     }

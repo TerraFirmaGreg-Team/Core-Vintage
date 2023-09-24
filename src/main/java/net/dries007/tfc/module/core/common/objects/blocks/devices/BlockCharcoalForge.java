@@ -4,13 +4,13 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.BlockCharcoalPile;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.core.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEBellows;
 import net.dries007.tfc.module.core.common.objects.tileentities.TECharcoalForge;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.block.Multiblock;
 import net.minecraft.block.Block;
@@ -89,7 +89,7 @@ public class BlockCharcoalForge extends TFCBlock implements IBellowsConsumerBloc
         setTickRandomly(true); // Used for chimney checks -> extinguish
         this.setDefaultState(this.blockState.getBaseState().withProperty(LIT, false));
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "charcoal_forge");
         setTranslationKey(Tags.MOD_ID + ".charcoal_forge");
     }

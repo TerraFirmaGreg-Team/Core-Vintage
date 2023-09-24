@@ -5,11 +5,11 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEInventory;
 import net.dries007.tfc.module.core.common.objects.tileentities.TELogPile;
 import net.dries007.tfc.module.core.config.ConfigTFC;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -54,7 +54,7 @@ public class BlockLogPile extends TFCBlock implements ILightableBlock {
         setHarvestLevel("axe", 0);
         this.setDefaultState(this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(LIT, false));
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "log_pile");
         setTranslationKey(Tags.MOD_ID + ".log_pile");
     }

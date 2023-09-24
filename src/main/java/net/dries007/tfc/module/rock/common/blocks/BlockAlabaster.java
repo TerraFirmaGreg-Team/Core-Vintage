@@ -7,9 +7,9 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.EnumColor;
 import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -41,7 +41,7 @@ public class BlockAlabaster extends TFCBlock implements IItemSize, IHasModel {
         this.color = color;
         this.modelLocation = TerraFirmaCraft.getID("rock/alabaster/color/" + variant);
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setSoundType(SoundType.STONE);
         setHardness(1.0F);
 

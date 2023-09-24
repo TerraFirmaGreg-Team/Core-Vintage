@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;

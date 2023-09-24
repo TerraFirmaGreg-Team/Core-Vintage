@@ -6,11 +6,11 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.api.util.property.ILightableBlock;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.core.common.objects.items.ItemFireStarter;
+import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEBloomery;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.block.Multiblock;
 import net.minecraft.block.BlockHorizontal;
@@ -172,7 +172,7 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
                 .withProperty(LIT, false)
                 .withProperty(OPEN, false));
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "bloomery");
         setTranslationKey(Tags.MOD_ID + ".bloomery");
     }

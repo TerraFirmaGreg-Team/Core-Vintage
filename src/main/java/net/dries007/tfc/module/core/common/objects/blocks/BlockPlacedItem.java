@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.core.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEPitKiln;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEPlacedItem;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -44,7 +44,7 @@ public class BlockPlacedItem extends TFCBlock {
         super(Material.CIRCUITS);
         setHardness(0.5f);
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "placed_item");
         setTranslationKey(Tags.MOD_ID + ".placed_item");
     }

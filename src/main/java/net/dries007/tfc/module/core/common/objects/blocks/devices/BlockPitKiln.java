@@ -3,11 +3,11 @@ package net.dries007.tfc.module.core.common.objects.blocks.devices;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.property.ILightableBlock;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.BlockPlacedItem;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.core.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEPitKiln;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -67,7 +67,7 @@ public class BlockPitKiln extends TFCBlock implements ILightableBlock {
         setHardness(0.5f);
         setDefaultState(blockState.getBaseState().withProperty(FULL, false).withProperty(LIT, false));
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "pit_kiln");
         setTranslationKey(Tags.MOD_ID + ".pit_kiln");
     }

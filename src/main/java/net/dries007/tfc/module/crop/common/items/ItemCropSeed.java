@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.crop.common.items;
 
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.module.crop.api.variant.item.CropItemVariant;
 import net.dries007.tfc.module.crop.api.variant.item.ICropItem;

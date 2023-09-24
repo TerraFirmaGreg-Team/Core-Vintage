@@ -1,5 +1,7 @@
 package net.dries007.tfc.module.core.common.objects.blocks.itemblocks;
 
+import gregtech.api.unification.material.Material;
+import gregtech.api.util.LocalizationUtils;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.ItemSizeHandler;
 import net.dries007.tfc.api.capability.size.Size;
@@ -8,6 +10,8 @@ import net.dries007.tfc.module.core.common.objects.items.TFCItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 
 import javax.annotation.Nonnull;
 

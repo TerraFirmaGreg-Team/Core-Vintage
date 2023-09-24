@@ -5,12 +5,12 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.core.client.TFCSounds;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEFirePit;
 import net.dries007.tfc.module.core.common.objects.tileentities.TELogPile;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEPitKiln;
 import net.dries007.tfc.module.core.config.ConfigTFC;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.state.IBlockState;
@@ -46,7 +46,7 @@ public class ItemFireStarter extends TFCItem {
 
         setRegistryName(Tags.MOD_ID, "firestarter");
         setTranslationKey(Tags.MOD_ID + ".firestarter");
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setMaxDamage(8);
         setMaxStackSize(1);
         setNoRepair();

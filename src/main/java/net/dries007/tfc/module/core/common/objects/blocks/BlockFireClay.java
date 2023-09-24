@@ -6,7 +6,6 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.core.common.objects.items.TFCItems;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,6 +16,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static net.dries007.tfc.module.core.common.objects.CreativeTabsTFC.MISC_TAB;
+
 
 @ParametersAreNonnullByDefault
 public class BlockFireClay extends TFCBlock implements IItemSize {
@@ -26,7 +27,7 @@ public class BlockFireClay extends TFCBlock implements IItemSize {
         setSoundType(SoundType.GROUND);
         setHardness(1.0F);
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(MISC_TAB);
         setRegistryName(TerraFirmaCraft.getID("fire_clay_block"));
         setTranslationKey(Tags.MOD_ID + ".fire_clay_block");
     }

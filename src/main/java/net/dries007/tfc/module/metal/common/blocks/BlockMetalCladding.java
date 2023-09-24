@@ -6,6 +6,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEMetalSheet;
 import net.dries007.tfc.util.Helpers;
@@ -40,8 +41,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-import static net.dries007.tfc.module.metal.MetalModule.METAL_TAB;
-
 
 @ParametersAreNonnullByDefault
 public class BlockMetalCladding extends TFCBlock implements IHasModel {
@@ -71,7 +70,7 @@ public class BlockMetalCladding extends TFCBlock implements IHasModel {
         var blockRegistryName = "metal/cladding";
         setRegistryName(Tags.MOD_ID, blockRegistryName);
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        setCreativeTab(METAL_TAB);
+        setCreativeTab(CreativeTabsTFC.METAL_TAB);
         setHardness(40F);
         setResistance(25F);
         setHarvestLevel("pickaxe", 0);

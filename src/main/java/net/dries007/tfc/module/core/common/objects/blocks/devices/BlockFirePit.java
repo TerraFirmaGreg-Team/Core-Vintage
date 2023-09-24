@@ -5,12 +5,12 @@ import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.module.core.client.particle.TFCParticles;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.core.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.core.common.objects.items.TFCItems;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEBellows;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEFirePit;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -69,7 +69,7 @@ public class BlockFirePit extends TFCBlock implements IBellowsConsumerBlock, ILi
         setLightLevel(1F);
         setHardness(0.3F);
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "firepit");
         setTranslationKey(Tags.MOD_ID + ".firepit");
     }

@@ -2,14 +2,13 @@ package net.dries007.tfc.module.plant;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.api.util.TFCCreativeTab;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.plant.api.category.PlantCategoryHandler;
 import net.dries007.tfc.module.plant.api.type.PlantTypeHandler;
 import net.dries007.tfc.module.plant.api.variant.block.PlantBlockVariantHandler;
 import net.dries007.tfc.module.plant.api.variant.item.PlantItemVariantHandler;
 import net.dries007.tfc.module.plant.init.BlockInitializer;
 import net.dries007.tfc.module.plant.init.ItemInitializer;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -23,7 +22,7 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 
 public class PlantModule extends ModuleBase {
 
-    public static final CreativeTabs FLORA_TAB = new TFCCreativeTab("flora", "tfc:plants/cactus/barrel_cactus");
+
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + PlantModule.class.getSimpleName());
 
 //    public static IPacketService PACKET_SERVICE;
@@ -31,7 +30,7 @@ public class PlantModule extends ModuleBase {
     public PlantModule() {
         super(0, MOD_ID);
 
-        this.setRegistry(new Registry(MOD_ID, FLORA_TAB));
+        this.setRegistry(new Registry(MOD_ID, CreativeTabsTFC.FLORA_TAB));
         this.enableAutoRegistry();
 
         //PACKET_SERVICE = this.enableNetwork();

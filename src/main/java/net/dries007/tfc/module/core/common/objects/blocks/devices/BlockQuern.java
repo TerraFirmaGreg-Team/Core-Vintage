@@ -6,9 +6,9 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.core.client.TFCSounds;
 import net.dries007.tfc.module.core.client.gui.overlay.IHighlightHandler;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.core.common.objects.tileentities.TEQuern;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -53,7 +53,7 @@ public class BlockQuern extends TFCBlock implements IItemSize, IHighlightHandler
         setHardness(3.0f);
         setSoundType(SoundType.STONE);
 
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, "quern");
         setTranslationKey(Tags.MOD_ID + ".quern");
     }

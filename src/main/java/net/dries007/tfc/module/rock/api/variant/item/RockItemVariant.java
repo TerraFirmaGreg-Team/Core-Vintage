@@ -2,12 +2,14 @@ package net.dries007.tfc.module.rock.api.variant.item;
 
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.rock.api.type.RockType;
+import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
+import static net.dries007.tfc.module.core.common.objects.items.TFCItems.ITEMS;
 import static net.dries007.tfc.module.rock.common.RockStorage.ROCK_ITEMS;
 
 /**

@@ -12,7 +12,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
-import net.dries007.tfc.module.wood.ModuleWood;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -41,7 +41,7 @@ public class ItemBloom extends TFCItem implements IMaterialItem {
             setRegistryName(Tags.MOD_ID, "bloom/unrefined");
             setTranslationKey(Tags.MOD_ID + ".bloom.unrefined");
         }
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
     }
 
     @Nonnull

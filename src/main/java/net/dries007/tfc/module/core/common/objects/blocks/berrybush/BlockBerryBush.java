@@ -4,6 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.bush.IBushBlock;
 import net.dries007.tfc.api.types.bush.type.BushType;
 import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockTFC;
 import net.dries007.tfc.module.core.common.objects.tileentities.TETickCounter;
@@ -47,8 +48,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.module.crop.ModuleCrop.CROP_TAB;
-
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockBerryBush extends BlockBush implements IGrowingPlant, IBushBlock {
@@ -65,7 +64,7 @@ public class BlockBerryBush extends BlockBush implements IGrowingPlant, IBushBlo
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
-        setCreativeTab(CROP_TAB);
+        setCreativeTab(CreativeTabsTFC.FLORA_TAB);
         setSoundType(SoundType.PLANT);
         setHardness(1.0F);
         setDefaultState(blockState.getBaseState().withProperty(FRUITING, false));

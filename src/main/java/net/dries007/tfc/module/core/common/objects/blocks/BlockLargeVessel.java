@@ -5,9 +5,9 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.core.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.blocks.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.module.core.common.objects.tileentities.TELargeVessel;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -56,7 +56,7 @@ public class BlockLargeVessel extends TFCBlock implements IItemSize {
         setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
 
         var blockRegistryName = "ceramics/fired/large_vessel";
-        setCreativeTab(ModuleWood.MISC_TAB);
+        setCreativeTab(CreativeTabsTFC.MISC_TAB);
         setRegistryName(Tags.MOD_ID, blockRegistryName);
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
     }

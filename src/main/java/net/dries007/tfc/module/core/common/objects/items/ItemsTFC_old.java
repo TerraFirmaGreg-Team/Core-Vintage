@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.core.common.objects.items.ceramics.*;
 import net.dries007.tfc.module.metal.common.items.ItemMetalBucket;
 import net.dries007.tfc.module.wood.common.items.ItemWoodBucket;
@@ -17,8 +18,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import static net.dries007.tfc.module.wood.ModuleWood.MISC_TAB;
-import static net.dries007.tfc.module.wood.ModuleWood.POTTERY_TAB;
 import static net.dries007.tfc.util.Helpers.getNull;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
@@ -119,12 +118,12 @@ public final class ItemsTFC_old {
 
         //=== Other ==================================================================================================//
 
-        register(r, "wooden_bucket", new ItemWoodBucket(), MISC_TAB); //not a simple item, use a custom model
+        register(r, "wooden_bucket", new ItemWoodBucket(), CreativeTabsTFC.WOOD_TAB); //not a simple item, use a custom model
 
         // POTTERY
         {
-            simpleItems.add(register(r, "ceramics/unfired/large_vessel", new ItemUnfiredLargeVessel(), POTTERY_TAB));
-            simpleItems.add(register(r, "ceramics/unfired/crucible", new ItemPottery(Size.LARGE, Weight.VERY_HEAVY), POTTERY_TAB));
+            simpleItems.add(register(r, "ceramics/unfired/large_vessel", new ItemUnfiredLargeVessel(), CreativeTabsTFC.POTTERY_TAB));
+            simpleItems.add(register(r, "ceramics/unfired/crucible", new ItemPottery(Size.LARGE, Weight.VERY_HEAVY), CreativeTabsTFC.POTTERY_TAB));
 
             registerPottery(simpleItems, r, "ceramics/unfired/vessel", "ceramics/fired/vessel", new ItemUnfiredSmallVessel(false), new ItemSmallVessel(false));
             registerPottery(null, r, "ceramics/unfired/vessel_glazed", "ceramics/fired/vessel_glazed", new ItemUnfiredSmallVessel(true), new ItemSmallVessel(true));
@@ -139,10 +138,10 @@ public final class ItemsTFC_old {
 
             registerPottery(simpleItems, r, "ceramics/unfired/spindle", "ceramics/fired/spindle");
 
-            simpleItems.add(register(r, "ceramics/unfired/jug", new ItemPottery(), POTTERY_TAB));
-            register(r, "ceramics/fired/jug", new ItemJug(), POTTERY_TAB);
-            simpleItems.add(register(r, "ceramics/unfired/clay_brick", new ItemPottery(), POTTERY_TAB));
-            simpleItems.add(register(r, "ceramics/unfired/clay_flower_pot", new ItemPottery(), POTTERY_TAB));
+            simpleItems.add(register(r, "ceramics/unfired/jug", new ItemPottery(), CreativeTabsTFC.POTTERY_TAB));
+            register(r, "ceramics/fired/jug", new ItemJug(), CreativeTabsTFC.POTTERY_TAB);
+            simpleItems.add(register(r, "ceramics/unfired/clay_brick", new ItemPottery(), CreativeTabsTFC.POTTERY_TAB));
+            simpleItems.add(register(r, "ceramics/unfired/clay_flower_pot", new ItemPottery(), CreativeTabsTFC.POTTERY_TAB));
 
         }
 
@@ -179,7 +178,7 @@ public final class ItemsTFC_old {
         // Animal Hides
         for (ItemAnimalHide.HideSize size : ItemAnimalHide.HideSize.values()) {
             for (ItemAnimalHide.HideType type : ItemAnimalHide.HideType.values()) {
-                simpleItems.add(register(r, ("hide/" + type.name() + "/" + size.name()).toLowerCase(), new ItemAnimalHide(type, size), MISC_TAB));
+                simpleItems.add(register(r, ("hide/" + type.name() + "/" + size.name()).toLowerCase(), new ItemAnimalHide(type, size), CreativeTabsTFC.MISC_TAB));
             }
         }
 
@@ -201,8 +200,8 @@ public final class ItemsTFC_old {
     }
 
     private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired, ItemPottery unfiredItem, ItemPottery firedItem) {
-        register(r, nameFired, firedItem, POTTERY_TAB);
-        register(r, nameUnfired, unfiredItem, POTTERY_TAB);
+        register(r, nameFired, firedItem, CreativeTabsTFC.POTTERY_TAB);
+        register(r, nameUnfired, unfiredItem, CreativeTabsTFC.POTTERY_TAB);
 
         if (items != null) {
             items.add(firedItem, unfiredItem);

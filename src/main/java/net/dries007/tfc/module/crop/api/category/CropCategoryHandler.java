@@ -2,8 +2,7 @@ package net.dries007.tfc.module.crop.api.category;
 
 import net.minecraft.util.text.TextFormatting;
 
-import static net.dries007.tfc.module.crop.api.category.CropCategories.PICKABLE;
-import static net.dries007.tfc.module.crop.api.category.CropCategories.SIMPLE;
+import static net.dries007.tfc.module.crop.api.category.CropCategories.*;
 
 public class CropCategoryHandler {
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
@@ -56,7 +56,7 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
 
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockBase(this);
     }
 
     @Override

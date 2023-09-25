@@ -4,8 +4,8 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
-import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.metal.common.tile.TEMetalAnvil;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
@@ -49,7 +49,7 @@ public class BlockRockAnvil extends BlockRock {
 
     @Override
     public ItemBlock getItemBlock() {
-        return this.getCategory().hasAnvil() ? new ItemBlockTFC(this) : null;
+        return this.getCategory().hasAnvil() ? new ItemBlockBase(this) : null;
     }
 
     @Override

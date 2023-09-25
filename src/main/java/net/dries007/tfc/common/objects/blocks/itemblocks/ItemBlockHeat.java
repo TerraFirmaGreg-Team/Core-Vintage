@@ -8,7 +8,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nullable;
 
-public class ItemBlockHeat extends ItemBlockTFC {
+public class ItemBlockHeat extends ItemBlockBase {
     private final float heatCapacity;
     private final float meltingPoint;
 

@@ -1,11 +1,12 @@
-package net.dries007.tfc.client.gui;
+package net.dries007.tfc.module.metal.client.gui;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilPlan;
 import net.dries007.tfc.client.button.GuiButtonAnvilStep;
 import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
+import net.dries007.tfc.client.gui.GuiContainerTE;
+import net.dries007.tfc.module.metal.common.tile.TEMetalAnvil;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeRule;
@@ -20,13 +21,13 @@ import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
 
-public class GuiAnvilTFC extends GuiContainerTE<TEMetalAnvil> {
+public class GuiMetalAnvil extends GuiContainerTE<TEMetalAnvil> {
     public static final ResourceLocation ANVIL_BACKGROUND = TerraFirmaCraft.getID("textures/gui/anvil.png");
     public static final int BUTTON_ID_STEP_MIN = 0;
     public static final int BUTTON_ID_STEP_MAX = 7;
     public static final int BUTTON_ID_PLAN = 8;
 
-    public GuiAnvilTFC(Container container, InventoryPlayer playerInv, TEMetalAnvil tile) {
+    public GuiMetalAnvil(Container container, InventoryPlayer playerInv, TEMetalAnvil tile) {
         super(container, playerInv, tile, ANVIL_BACKGROUND);
         ySize = 192;
     }

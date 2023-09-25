@@ -4,7 +4,7 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
@@ -74,7 +74,7 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockBase(this);
     }
 
     //TODO в этом не вижу смысла после добавления dt, так как все бревна, что имели бы свойство PLACED,

@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.soil.common.blocks;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
@@ -64,7 +64,7 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
 
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockBase(this);
     }
 
     @Nonnull

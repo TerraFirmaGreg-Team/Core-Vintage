@@ -8,7 +8,7 @@ import net.dries007.tfc.module.crop.StorageCrop;
 import net.dries007.tfc.module.crop.api.type.CropType;
 import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariant;
 import net.dries007.tfc.module.crop.api.variant.block.ICropBlock;
-import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
+import net.dries007.tfc.module.crop.common.tile.TECropBase;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.climate.ClimateTFC;

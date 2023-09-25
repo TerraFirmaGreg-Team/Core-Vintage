@@ -3,7 +3,7 @@ package net.dries007.tfc.common.objects.blocks;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.dries007.tfc.util.climate.IceMeltHandler;
@@ -57,7 +57,7 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock, IItemPro
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockBase(this);
     }
 
     /**

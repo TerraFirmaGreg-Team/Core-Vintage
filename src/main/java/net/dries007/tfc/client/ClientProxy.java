@@ -463,7 +463,7 @@ public class ClientProxy extends CommonProxy {
     public static void textureStitched(TextureStitchEvent.Post event) {
         FluidSpriteCache.clear();
     }
-    
+
 
     @Override
     public void onPreInit(FMLPreInitializationEvent event) {

@@ -3,7 +3,7 @@ package net.dries007.tfc.module.wood.common.blocks.itemblocks;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodBarrel;
 import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
@@ -48,7 +48,7 @@ import java.util.List;
  * Only has NBT data if the barrel is sealed and has contents
  */
 @ParametersAreNonnullByDefault
-public class ItemBlockWoodBarrel extends ItemBlockTFC {
+public class ItemBlockWoodBarrel extends ItemBlockBase {
     public ItemBlockWoodBarrel(Block block) {
         super(block);
         //OreDictionaryHelper.register(this, "barrel");

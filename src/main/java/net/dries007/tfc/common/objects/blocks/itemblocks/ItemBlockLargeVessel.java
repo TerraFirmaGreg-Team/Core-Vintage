@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemBlockLargeVessel extends ItemBlockTFC implements IItemSize {
+public class ItemBlockLargeVessel extends ItemBlockBase implements IItemSize {
     public ItemBlockLargeVessel(BlockLargeVessel block) {
         super(block);
     }

@@ -5,16 +5,16 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import net.dries007.tfc.client.gui.GuiAnvilTFC;
 import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
+import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class AnvilCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
     public AnvilCategory(IGuiHelper helper, String Uid) {
-        super(helper.createDrawable(GuiAnvilTFC.ANVIL_BACKGROUND, 11, 7, 154, 80), Uid);
+        super(helper.createDrawable(GuiMetalAnvil.ANVIL_BACKGROUND, 11, 7, 154, 80), Uid);
     }
 
     @Override

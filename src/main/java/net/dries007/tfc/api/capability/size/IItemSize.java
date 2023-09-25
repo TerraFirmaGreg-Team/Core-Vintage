@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.size;
 
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.common.objects.items.TFCItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -18,7 +18,7 @@ import java.util.List;
  * Otherwise, your item will be assigned a default capability on creation
  *
  * @see TFCItem
- * @see ItemBlockTFC
+ * @see ItemBlockBase
  */
 public interface IItemSize {
     @Nonnull

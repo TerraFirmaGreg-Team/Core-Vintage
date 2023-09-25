@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.crop.common.tileentities;
+package net.dries007.tfc.module.crop.common.tile;
 
 import net.dries007.tfc.common.objects.tileentities.TETickCounter;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;

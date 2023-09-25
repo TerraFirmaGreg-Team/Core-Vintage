@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.metal.common.tileentities;
+package net.dries007.tfc.module.metal.common.tile;
 
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.Tags;

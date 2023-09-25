@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.entity.animal;
+package net.dries007.tfc.module.animal.common.entity;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;

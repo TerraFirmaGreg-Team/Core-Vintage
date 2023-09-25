@@ -7,7 +7,7 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.common.objects.LootTablesTFC;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
-import net.dries007.tfc.common.objects.entity.animal.AnimalGroupingRules;
+import net.dries007.tfc.module.animal.common.entity.AnimalGroupingRules;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.common.entity.EntityAnimalMammal;
 import net.dries007.tfc.network.PacketSimpleMessage;

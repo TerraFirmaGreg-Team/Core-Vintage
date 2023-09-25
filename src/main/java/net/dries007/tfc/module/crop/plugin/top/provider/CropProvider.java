@@ -7,7 +7,7 @@ import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropDead;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
-import net.dries007.tfc.module.crop.common.tileentities.TECropBase;
+import net.dries007.tfc.module.crop.common.tile.TECropBase;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;

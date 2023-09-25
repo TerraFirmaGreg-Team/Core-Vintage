@@ -10,7 +10,11 @@ import net.dries007.tfc.common.objects.items.ceramics.ItemSmallVessel;
 import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.module.animal.common.container.ContainerNestBox;
 import net.dries007.tfc.module.animal.common.tile.TENestBox;
-import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
+import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
+import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvilPlan;
+import net.dries007.tfc.module.metal.common.container.ContainerAnvilPlan;
+import net.dries007.tfc.module.metal.common.container.ContainerAnvilTFC;
+import net.dries007.tfc.module.metal.common.tile.TEMetalAnvil;
 import net.dries007.tfc.module.rock.common.items.ItemRockLoose;
 import net.dries007.tfc.module.wood.client.gui.GuiWoodBarrel;
 import net.dries007.tfc.module.wood.client.gui.GuiWoodChest;
@@ -140,9 +144,9 @@ public class TFCGuiHandler implements IGuiHandler {
             case CHARCOAL_FORGE:
                 return new GuiCharcoalForge(container, player.inventory, Helpers.getTE(world, pos, TECharcoalForge.class));
             case ANVIL:
-                return new GuiAnvilTFC(container, player.inventory, Helpers.getTE(world, pos, TEMetalAnvil.class));
+                return new GuiMetalAnvil(container, player.inventory, Helpers.getTE(world, pos, TEMetalAnvil.class));
             case ANVIL_PLAN:
-                return new GuiAnvilPlan(container, player.inventory, Helpers.getTE(world, pos, TEMetalAnvil.class));
+                return new GuiMetalAnvilPlan(container, player.inventory, Helpers.getTE(world, pos, TEMetalAnvil.class));
             case KNAPPING_STONE:
                 var stackInMainHand = player.getHeldItemMainhand();
                 var stackInOffHand = player.getHeldItemOffhand();

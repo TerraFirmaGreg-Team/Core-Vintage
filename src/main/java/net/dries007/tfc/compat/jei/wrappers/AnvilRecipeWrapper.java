@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.client.gui.GuiAnvilTFC;
+import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeStep;
@@ -23,7 +23,7 @@ public class AnvilRecipeWrapper extends SimpleRecipeWrapper {
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        minecraft.renderEngine.bindTexture(GuiAnvilTFC.ANVIL_BACKGROUND);
+        minecraft.renderEngine.bindTexture(GuiMetalAnvil.ANVIL_BACKGROUND);
         for (int i = 0; i < recipe.getRules().length; i++) {
             ForgeRule rule = recipe.getRules()[i];
             if (rule != null) {

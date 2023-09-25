@@ -8,7 +8,7 @@ import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.tileentities.TEBloomery;
 import net.dries007.tfc.util.Helpers;
@@ -195,7 +195,7 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockBase(this);
     }
 
     public boolean canGateStayInPlace(World world, BlockPos pos, EnumFacing.Axis axis) {

@@ -4,7 +4,7 @@ import com.google.common.base.Joiner;
 import gregtech.api.unification.ore.OrePrefix;
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.common.objects.entity.EntitySeatOn;
+import net.dries007.tfc.module.animal.common.entity.EntitySeatOn;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.module.animal.common.entity.huntable.EntityAnimalRabbit;
 import net.dries007.tfc.module.animal.common.entity.livestock.*;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects.blocks;
 
 import net.dries007.tfc.api.util.IItemProvider;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -21,6 +21,6 @@ public class TFCBlock extends Block implements IItemProvider {
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockBase(this);
     }
 }

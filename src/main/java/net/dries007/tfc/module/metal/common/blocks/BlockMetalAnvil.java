@@ -16,7 +16,7 @@ import net.dries007.tfc.module.metal.StorageMetal;
 import net.dries007.tfc.module.metal.api.type.MetalType;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
 import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariant;
-import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
+import net.dries007.tfc.module.metal.common.tile.TEMetalAnvil;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

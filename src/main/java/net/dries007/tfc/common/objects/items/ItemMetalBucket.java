@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.metal.common.items;
+package net.dries007.tfc.common.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;

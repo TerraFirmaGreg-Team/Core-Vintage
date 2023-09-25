@@ -2,7 +2,7 @@ package net.dries007.tfc.module.wood.common.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
@@ -64,7 +64,7 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockBase(this);
     }
 
     @SideOnly(Side.CLIENT)

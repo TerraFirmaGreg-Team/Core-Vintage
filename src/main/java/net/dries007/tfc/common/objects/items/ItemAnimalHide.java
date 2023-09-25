@@ -129,6 +129,7 @@ public class ItemAnimalHide extends TFCItem {
             return index < 0 || index > VALUES.length ? MEDIUM : VALUES[index];
         }
 
+        @Nonnull
         @Override
         public String getName() {
             return this.name().toLowerCase();

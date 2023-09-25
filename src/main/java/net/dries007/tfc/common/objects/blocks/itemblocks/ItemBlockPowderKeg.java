@@ -17,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
-public class ItemBlockPowderKeg extends ItemBlockTFC implements IItemSize {
+public class ItemBlockPowderKeg extends ItemBlockBase implements IItemSize {
     public ItemBlockPowderKeg(BlockPowderKeg block) {
         super(block);
     }

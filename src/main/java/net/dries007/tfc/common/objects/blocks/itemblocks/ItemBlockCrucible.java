@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
-public class ItemBlockCrucible extends ItemBlockTFC {
+public class ItemBlockCrucible extends ItemBlockBase {
     public ItemBlockCrucible(Block block) {
         super(block);
     }

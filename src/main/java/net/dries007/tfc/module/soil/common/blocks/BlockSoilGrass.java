@@ -9,7 +9,7 @@ package net.dries007.tfc.module.soil.common.blocks;
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing;
 import net.dries007.tfc.module.plant.StoragePlant;
 import net.dries007.tfc.module.plant.api.type.PlantType;
@@ -184,7 +184,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockBase(this);
     }
 
     @Override

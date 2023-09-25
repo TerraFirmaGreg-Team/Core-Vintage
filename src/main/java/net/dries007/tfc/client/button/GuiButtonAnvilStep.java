@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.client.gui.GuiAnvilTFC;
+import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -28,7 +28,7 @@ public class GuiButtonAnvilStep extends GuiButtonTFC implements IButtonTooltip {
     public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
         if (this.visible) {
             GlStateManager.color(1, 1, 1, 1);
-            mc.getTextureManager().bindTexture(GuiAnvilTFC.ANVIL_BACKGROUND);
+            mc.getTextureManager().bindTexture(GuiMetalAnvil.ANVIL_BACKGROUND);
             hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
             //drawModalRectWithCustomSizedTexture(x, y, textureU, textureV, 32, 32, 256, 256);
             drawScaledCustomSizeModalRect(x, y, textureU, textureV, 32, 32, 16, 16, 256, 256);

@@ -11,14 +11,14 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class ItemBlockTFC extends ItemBlock implements IItemSize {
+public class ItemBlockBase extends ItemBlock implements IItemSize {
     private final IItemSize size;
 
-    public ItemBlockTFC(Block block) {
+    public ItemBlockBase(Block block) {
         this(block, block instanceof IItemSize ? (IItemSize) block : ItemSizeHandler.getDefault());
     }
 
-    public ItemBlockTFC(Block block, IItemSize size) {
+    public ItemBlockBase(Block block, IItemSize size) {
         super(block);
 
         this.size = size;

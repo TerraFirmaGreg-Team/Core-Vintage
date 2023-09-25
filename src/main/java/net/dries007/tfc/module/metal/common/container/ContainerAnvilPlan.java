@@ -1,9 +1,11 @@
-package net.dries007.tfc.common.objects.container;
+package net.dries007.tfc.module.metal.common.container;
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
+import net.dries007.tfc.common.objects.container.ContainerTE;
+import net.dries007.tfc.common.objects.container.IButtonHandler;
+import net.dries007.tfc.module.metal.common.tile.TEMetalAnvil;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;

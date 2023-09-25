@@ -2,7 +2,7 @@ package net.dries007.tfc.module.animal.common.entity.predator;
 
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.entity.animal.AnimalGroupingRules;
+import net.dries007.tfc.module.animal.common.entity.AnimalGroupingRules;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.IPredator;
 import net.dries007.tfc.module.animal.common.entity.EntityAnimalMammal;

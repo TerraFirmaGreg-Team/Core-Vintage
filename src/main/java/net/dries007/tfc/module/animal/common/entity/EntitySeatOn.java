@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.entity;
+package net.dries007.tfc.module.animal.common.entity;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.Entity;

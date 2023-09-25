@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.button;
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.client.gui.GuiAnvilPlan;
+import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvilPlan;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
@@ -29,7 +29,7 @@ public class GuiButtonAnvilPlanIcon extends GuiButtonTFC implements IButtonToolt
     public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
         if (this.visible) {
             GlStateManager.color(1, 1, 1, 1);
-            mc.getTextureManager().bindTexture(GuiAnvilPlan.PLAN_BACKGROUND);
+            mc.getTextureManager().bindTexture(GuiMetalAnvilPlan.PLAN_BACKGROUND);
             hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
             drawModalRectWithCustomSizedTexture(x, y, 176, 0, 18, 18, 256, 256);
             drawItemStack(displayItem, x + 1, y + 1);

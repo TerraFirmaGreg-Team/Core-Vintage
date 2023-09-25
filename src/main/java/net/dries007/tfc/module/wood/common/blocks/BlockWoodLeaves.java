@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.api.type.WoodType;
@@ -71,7 +71,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return new ItemBlockTFC(this);
+        return new ItemBlockBase(this);
     }
 
     @Override

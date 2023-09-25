@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.plant.common.blocks.itemblocks;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTFC;
+import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlantPot;
 import net.dries007.tfc.util.Helpers;
@@ -22,7 +22,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemBlockPlant extends ItemBlockTFC {
+public class ItemBlockPlant extends ItemBlockBase {
     private final PlantType plant;
 
     public ItemBlockPlant(Block block, PlantType plant) {

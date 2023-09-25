@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.entity.animal;
+package net.dries007.tfc.module.animal.common.entity;
 
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;

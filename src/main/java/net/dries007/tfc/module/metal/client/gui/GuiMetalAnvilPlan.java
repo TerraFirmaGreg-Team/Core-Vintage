@@ -1,11 +1,12 @@
-package net.dries007.tfc.client.gui;
+package net.dries007.tfc.module.metal.client.gui;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilPlanIcon;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
+import net.dries007.tfc.client.gui.GuiContainerTE;
+import net.dries007.tfc.module.metal.common.tile.TEMetalAnvil;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.util.NBTBuilder;
 import net.minecraft.client.gui.GuiButton;
@@ -23,17 +24,17 @@ import net.minecraftforge.items.IItemHandler;
 import java.io.IOException;
 import java.util.List;
 
-import static net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil.SLOT_INPUT_1;
+import static net.dries007.tfc.module.metal.common.tile.TEMetalAnvil.SLOT_INPUT_1;
 
 @SideOnly(Side.CLIENT)
-public class GuiAnvilPlan extends GuiContainerTE<TEMetalAnvil> {
+public class GuiMetalAnvilPlan extends GuiContainerTE<TEMetalAnvil> {
     public static final ResourceLocation PLAN_BACKGROUND = TerraFirmaCraft.getID("textures/gui/anvil_plan.png");
 
     private final ItemStack inputStack;
     private int page;
     private GuiButton buttonLeft, buttonRight;
 
-    public GuiAnvilPlan(Container container, InventoryPlayer playerInv, TEMetalAnvil tile) {
+    public GuiMetalAnvilPlan(Container container, InventoryPlayer playerInv, TEMetalAnvil tile) {
         super(container, playerInv, tile, PLAN_BACKGROUND);
 
         IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);

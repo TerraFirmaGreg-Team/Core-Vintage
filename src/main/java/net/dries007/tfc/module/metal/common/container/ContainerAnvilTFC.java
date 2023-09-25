@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.container;
+package net.dries007.tfc.module.metal.common.container;
 
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.Tags;
@@ -8,8 +8,10 @@ import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.util.TFCGuiHandler;
+import net.dries007.tfc.common.objects.container.ContainerTE;
+import net.dries007.tfc.common.objects.container.IButtonHandler;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.module.metal.common.tileentities.TEMetalAnvil;
+import net.dries007.tfc.module.metal.common.tile.TEMetalAnvil;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -25,7 +27,7 @@ import net.minecraftforge.items.IItemHandler;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.client.gui.GuiAnvilTFC.*;
+import static net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil.*;
 
 @ParametersAreNonnullByDefault
 public class ContainerAnvilTFC extends ContainerTE<TEMetalAnvil> implements IButtonHandler {

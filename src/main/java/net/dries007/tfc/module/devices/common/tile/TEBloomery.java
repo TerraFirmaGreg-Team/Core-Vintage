@@ -2,12 +2,11 @@ package net.dries007.tfc.module.devices.common.tile;
 
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
-import net.dries007.tfc.common.objects.blocks.BlockMolten;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.tileentities.TETickableInventory;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.devices.common.blocks.BlockBloomery;
 import net.dries007.tfc.module.devices.common.blocks.BlockCharcoalPile;
+import net.dries007.tfc.module.devices.common.blocks.BlockMolten;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -238,7 +237,7 @@ public class TEBloomery extends TETickableInventory implements ITickable {
     protected void dumpItems() {
         //Dump everything in world
         for (int i = 1; i < 4; i++) {
-            if (world.getBlockState(getInternalBlock().up(i)).getBlock() == TFCBlocks.MOLTEN) {
+            if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN) {
                 world.setBlockToAir(getInternalBlock().up(i));
             }
         }
@@ -299,14 +298,14 @@ public class TEBloomery extends TETickableInventory implements ITickable {
             if (slagLayers > 0) {
                 if (slagLayers >= 4) {
                     slagLayers -= 4;
-                    world.setBlockState(getInternalBlock().up(i), TFCBlocks.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, 4));
+                    world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, 4));
                 } else {
-                    world.setBlockState(getInternalBlock().up(i), TFCBlocks.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, slagLayers));
+                    world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, slagLayers));
                     slagLayers = 0;
                 }
             } else {
                 //Remove any surplus slag(ie: after cooking/structure became compromised)
-                if (world.getBlockState(getInternalBlock().up(i)).getBlock() == TFCBlocks.MOLTEN) {
+                if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN) {
                     world.setBlockToAir(getInternalBlock().up(i));
                 }
             }

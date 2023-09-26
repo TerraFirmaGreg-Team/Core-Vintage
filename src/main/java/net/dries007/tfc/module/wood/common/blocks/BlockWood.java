@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
 import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
@@ -13,7 +13,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BlockWood extends TFCBlock implements IWoodBlock {
+public abstract class BlockWood extends BlockBase implements IWoodBlock {
 
     private final WoodBlockVariant variant;
     private final WoodType type;

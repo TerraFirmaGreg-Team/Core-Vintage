@@ -1,18 +1,19 @@
-package net.dries007.tfc.common.objects.blocks;
+package net.dries007.tfc.module.devices.common.blocks;
 
-import net.dries007.tfc.Tags;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.property.ILightableBlock;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
@@ -32,9 +33,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockMolten extends TFCBlock implements ILightableBlock, IHasModel {
+public class BlockMolten extends BlockBase implements ILightableBlock, IHasModel {
     public static final PropertyInteger LAYERS = PropertyInteger.create("layers", 1, 4);
-
+    public static final String NAME = "device.molten";
     private static final AxisAlignedBB[] MOLTEN_AABB = new AxisAlignedBB[]{
             new AxisAlignedBB(0, 0, 0, 1, 0.25, 1),
             new AxisAlignedBB(0, 0, 0, 1, 0.5, 1),
@@ -48,17 +49,13 @@ public class BlockMolten extends TFCBlock implements ILightableBlock, IHasModel 
         setDefaultState(this.getBlockState().getBaseState()
                 .withProperty(LIT, false)
                 .withProperty(LAYERS, 1));
-
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
-        setRegistryName(Tags.MOD_ID, "molten");
-        setTranslationKey(Tags.MOD_ID + ".molten");
     }
 
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return null;
-    }
+//    @Nullable
+//    @Override
+//    public ItemBlock getItemBlock() {
+//        return null;
+//    }
 
     @SuppressWarnings("deprecation")
     @Override
@@ -173,7 +170,15 @@ public class BlockMolten extends TFCBlock implements ILightableBlock, IHasModel 
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().build());
+
+        var resourceLocation = TerraFirmaCraft.getID(NAME.replaceAll("\\.", "/"));
+
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder().customPath(resourceLocation).build());
+
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(resourceLocation, "normal"));
     }
 }

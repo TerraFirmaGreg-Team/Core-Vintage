@@ -63,6 +63,11 @@ public enum PlantEnumVariant implements IStringSerializable {
     @Nonnull
     @Override
     public String getName() {
+        return name();
+    }
+
+    @Override
+    public String toString() {
         return name().toLowerCase();
     }
 }

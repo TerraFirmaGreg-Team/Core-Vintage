@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.soil.common.blocks.peat;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilGrass;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -25,7 +25,7 @@ import java.util.Random;
 
 
 @ParametersAreNonnullByDefault
-public class BlockPeatGrass extends TFCBlock {
+public class BlockPeatGrass extends BlockBase {
     // Used for connected textures only.
     public static final PropertyBool NORTH = PropertyBool.create("north");
     public static final PropertyBool EAST = PropertyBool.create("east");

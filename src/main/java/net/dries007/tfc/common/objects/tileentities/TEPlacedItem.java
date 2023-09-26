@@ -3,7 +3,7 @@ package net.dries007.tfc.common.objects.tileentities;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +46,7 @@ public class TEPlacedItem extends TEInventory {
                 }
             }
             // Replace the block
-            world.setBlockState(pos, TFCBlocks.PLACED_ITEM.getDefaultState());
+            world.setBlockState(pos, BlocksCore.PLACED_ITEM.getDefaultState());
 
             // Replace inventory items
             TEPlacedItem teNew = Helpers.getTE(world, pos, TEPlacedItem.class);

@@ -34,6 +34,7 @@ import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.api.type.ICreature;
 import net.dries007.tfc.module.animal.api.type.IPredator;
+import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.devices.common.blocks.BlockQuern;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;
 import net.dries007.tfc.module.rock.StorageRock;
@@ -630,7 +631,7 @@ public final class CommonEventHandler {
 
         // Stop mob spawning in thatch - the list of non-spawnable light-blocking, non-collidable blocks is hardcoded in WorldEntitySpawner#canEntitySpawnBody
         // This is intentionally outside the previous world type check as this is a fix for the thatch block, not a generic spawning check.
-        if (event.getWorld().getBlockState(pos).getBlock() == TFCBlocks.THATCH || event.getWorld().getBlockState(pos.up()).getBlock() == TFCBlocks.THATCH) {
+        if (event.getWorld().getBlockState(pos).getBlock() == BlocksCore.THATCH || event.getWorld().getBlockState(pos.up()).getBlock() == BlocksCore.THATCH) {
             event.setResult(Event.Result.DENY);
         }
     }

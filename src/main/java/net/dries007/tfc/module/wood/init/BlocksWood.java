@@ -50,7 +50,7 @@ public class BlocksWood {
             WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
         });
 
-        // TESRs
+        //==== TESRs =================================================================================================//
         ClientRegistry.bindTileEntitySpecialRenderer(TEWoodBarrel.class, new TESRWoodBarrel());
         ClientRegistry.bindTileEntitySpecialRenderer(TEWoodLoom.class, new TESRWoodLoom());
         ClientRegistry.bindTileEntitySpecialRenderer(TEWoodChest.class, new TESRWoodChest());

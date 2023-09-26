@@ -10,7 +10,6 @@ import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.TFCItem;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
@@ -28,6 +27,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
+
 
 @ParametersAreNonnullByDefault
 public class ItemBloom extends TFCItem implements IMaterialItem {
@@ -42,7 +43,7 @@ public class ItemBloom extends TFCItem implements IMaterialItem {
             setRegistryName(Tags.MOD_ID, "bloom/unrefined");
             setTranslationKey(Tags.MOD_ID + ".bloom.unrefined");
         }
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
+        setCreativeTab(MISC_TAB);
     }
 
     @Nonnull

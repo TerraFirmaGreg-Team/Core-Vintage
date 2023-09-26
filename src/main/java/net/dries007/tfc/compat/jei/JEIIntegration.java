@@ -23,7 +23,6 @@ import net.dries007.tfc.client.gui.GuiCalendar;
 import net.dries007.tfc.client.gui.GuiKnapping;
 import net.dries007.tfc.client.gui.GuiNutrition;
 import net.dries007.tfc.client.gui.GuiSkills;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide.HideType;
@@ -34,6 +33,7 @@ import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.jei.categories.*;
 import net.dries007.tfc.compat.jei.util.TFCInventoryGuiHandler;
 import net.dries007.tfc.compat.jei.wrappers.*;
+import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.devices.client.gui.GuiCrucible;
 import net.dries007.tfc.module.devices.client.gui.GuiFirePit;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
@@ -355,8 +355,8 @@ public final class JEIIntegration implements IModPlugin {
 
         // Add JEI descriptions for basic mechanics
 
-        registry.addIngredientInfo(new ItemStack(TFCBlocks.PIT_KILN, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.pit_kiln").getFormattedText());
-        registry.addIngredientInfo(new ItemStack(TFCBlocks.PLACED_ITEM, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.placed_item").getFormattedText());
+        registry.addIngredientInfo(new ItemStack(BlocksDevice.PIT_KILN, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.pit_kiln").getFormattedText());
+        registry.addIngredientInfo(new ItemStack(BlocksCore.PLACED_ITEM, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.placed_item").getFormattedText());
         registry.addIngredientInfo(new ItemStack(Items.COAL, 1, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.charcoal_pit").getFormattedText());
 
 

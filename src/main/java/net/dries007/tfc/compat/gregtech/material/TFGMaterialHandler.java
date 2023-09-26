@@ -4,6 +4,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.ToolProperty;
 
 import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.material.info.MaterialFlags.FORCE_GENERATE_BLOCK;
 import static gregtech.api.unification.material.info.MaterialFlags.NO_UNIFICATION;
 import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
 import static gregtech.api.unification.material.properties.PropertyKey.TOOL;
@@ -249,6 +250,8 @@ public class TFGMaterialHandler {
 
         // Some custom properties for materials
         SaltWater.setMaterialRGB(0xFF1F5099);
+
+        Fireclay.addFlags(FORCE_GENERATE_BLOCK);
 
         Stone.setProperty(TOOL, new ToolProperty(1.0f, 1f, 30, 1));
         Copper.setProperty(TOOL, new ToolProperty(1.5f, 2f, 88, 2));

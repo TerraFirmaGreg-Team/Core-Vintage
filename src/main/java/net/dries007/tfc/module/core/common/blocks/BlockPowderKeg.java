@@ -1,12 +1,11 @@
-package net.dries007.tfc.common.objects.blocks;
+package net.dries007.tfc.module.core.common.blocks;
 
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.common.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockPowderKeg;
 import net.dries007.tfc.common.objects.tileentities.TEPowderKeg;
 import net.dries007.tfc.util.Helpers;
@@ -48,23 +47,21 @@ import java.util.Random;
  * Sealed state is stored in a block state property, and cached in the TE (for gui purposes)
  */
 @ParametersAreNonnullByDefault
-public class BlockPowderKeg extends TFCBlock implements IItemSize, ILightableBlock {
+public class BlockPowderKeg extends BlockBase implements IItemSize, ILightableBlock {
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
-
+    public static final String NAME = "powderkeg";
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
     @SuppressWarnings("WeakerAccess")
     public BlockPowderKeg() {
         super(Material.WOOD);
+
         setSoundType(SoundType.WOOD);
         setHardness(2F);
         setTickRandomly(true);
-
-        setDefaultState(blockState.getBaseState().withProperty(LIT, false).withProperty(SEALED, false));
-
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
-        setRegistryName(Tags.MOD_ID, "powderkeg");
-        setTranslationKey(Tags.MOD_ID + ".powderkeg");
+        setDefaultState(blockState.getBaseState()
+                .withProperty(LIT, false)
+                .withProperty(SEALED, false));
     }
 
     /**

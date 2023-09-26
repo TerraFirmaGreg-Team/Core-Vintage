@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.soil.common.blocks;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariant;
@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public abstract class BlockSoil extends TFCBlock implements ISoilBlock {
+public abstract class BlockSoil extends BlockBase implements ISoilBlock {
 
     private final SoilBlockVariant variant;
     private final SoilType type;

@@ -1,7 +1,5 @@
-package net.dries007.tfc.common.objects.blocks;
+package net.dries007.tfc.module.core.common.blocks;
 
-import net.dries007.tfc.Tags;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItem;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
@@ -37,16 +35,14 @@ import java.util.Random;
 
 
 @ParametersAreNonnullByDefault
-public class BlockPlacedItem extends TFCBlock {
+public class BlockPlacedItem extends BlockBase {
     public static final AxisAlignedBB PLACED_ITEM_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1);
+    public static final String NAME = "placed_item";
 
     public BlockPlacedItem() {
         super(Material.CIRCUITS);
-        setHardness(0.5f);
 
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
-        setRegistryName(Tags.MOD_ID, "placed_item");
-        setTranslationKey(Tags.MOD_ID + ".placed_item");
+        setHardness(0.5f);
     }
 
     @Override

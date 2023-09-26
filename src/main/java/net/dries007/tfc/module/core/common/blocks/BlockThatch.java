@@ -1,7 +1,5 @@
-package net.dries007.tfc.common.objects.blocks;
+package net.dries007.tfc.module.core.common.blocks;
 
-import net.dries007.tfc.Tags;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -23,7 +21,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockThatch extends TFCBlock {
+public class BlockThatch extends BlockBase {
+
+    public static final String NAME = "thatch";
+
     public BlockThatch() {
         super(new Material(MapColor.FOLIAGE) {
             @Override
@@ -36,11 +37,7 @@ public class BlockThatch extends TFCBlock {
         setHardness(0.6F);
         setLightOpacity(255); //Blocks light
 
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
-        setRegistryName(Tags.MOD_ID, "thatch");
-        setTranslationKey(Tags.MOD_ID + ".thatch");
-
-        OreDictionaryHelper.register(this, "thatch");
+        OreDictionaryHelper.register(this, NAME);
         OreDictionaryHelper.register(this, "block", "straw");
         Blocks.FIRE.setFireInfo(this, 60, 20);
     }

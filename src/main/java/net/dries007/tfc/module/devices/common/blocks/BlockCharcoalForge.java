@@ -6,7 +6,7 @@ import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.devices.common.tile.TEBellows;
 import net.dries007.tfc.module.devices.common.tile.TECharcoalForge;
@@ -52,7 +52,7 @@ import java.util.function.BiPredicate;
 
 
 @ParametersAreNonnullByDefault
-public class BlockCharcoalForge extends TFCBlock implements IBellowsConsumerBlock, ILightableBlock, IHasModel {
+public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlock, ILightableBlock, IHasModel {
     public static final String NAME = "device.charcoal_forge";
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
     private static final Multiblock CHARCOAL_FORGE_MULTIBLOCK;

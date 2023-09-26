@@ -1,14 +1,14 @@
 package net.dries007.tfc.module.soil.common.blocks.peat;
 
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 
 
-public class BlockPeat extends TFCBlock {
+public class BlockPeat extends BlockBase {
 
     public static final String NAME = "peat";
 

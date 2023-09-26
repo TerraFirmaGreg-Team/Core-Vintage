@@ -4,12 +4,13 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
+
+import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 
 
 public class ItemMisc extends TFCItem implements IItemSize {
@@ -47,7 +48,7 @@ public class ItemMisc extends TFCItem implements IItemSize {
 
         setRegistryName(Tags.MOD_ID, name);
         setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase().replace("/", "."));
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
+        setCreativeTab(MISC_TAB);
     }
 
 

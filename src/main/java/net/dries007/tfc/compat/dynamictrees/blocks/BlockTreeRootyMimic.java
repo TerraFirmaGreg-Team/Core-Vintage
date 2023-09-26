@@ -28,7 +28,6 @@ import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.D
 @ParametersAreNonnullByDefault
 public class BlockTreeRootyMimic extends BlockRootyDirt implements IItemProvider, IHasModel {
 
-    public static final String NAME = "rooty_mimic";
     private static final EnumFacing[] NOT_UP = new EnumFacing[]{
             EnumFacing.DOWN,
             EnumFacing.EAST,

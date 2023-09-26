@@ -5,6 +5,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -30,7 +31,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 
-public class BlockGroundcover extends TFCBlock implements IHasModel {
+public class BlockGroundcover extends BlockBase implements IHasModel {
     private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
     protected final ResourceLocation modelLocation;
     private final GroundcoverType groundcoverType;

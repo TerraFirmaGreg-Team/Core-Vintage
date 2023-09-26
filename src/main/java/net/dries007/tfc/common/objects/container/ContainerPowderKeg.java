@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.container;
 
-import net.dries007.tfc.common.objects.blocks.BlockPowderKeg;
+import net.dries007.tfc.module.core.common.blocks.BlockPowderKeg;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.common.objects.tileentities.TEPowderKeg;
 import net.minecraft.entity.player.InventoryPlayer;

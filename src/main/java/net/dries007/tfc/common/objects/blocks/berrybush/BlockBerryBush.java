@@ -47,7 +47,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.module.plant.ModulePlant.FLORA_TAB;
+import static net.dries007.tfc.module.crop.ModuleCrop.AGRICULTURE_TAB;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -65,7 +65,7 @@ public class BlockBerryBush extends BlockBush implements IGrowingPlant, IBushBlo
 
         setRegistryName(getRegistryLocation());
         setTranslationKey(getTranslationName());
-        setCreativeTab(FLORA_TAB);
+        setCreativeTab(AGRICULTURE_TAB);
         setSoundType(SoundType.PLANT);
         setHardness(1.0F);
         setDefaultState(blockState.getBaseState().withProperty(FRUITING, false));

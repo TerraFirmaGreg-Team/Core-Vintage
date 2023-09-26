@@ -8,7 +8,6 @@ import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.devices.common.tile.TEBloomery;
@@ -82,7 +81,7 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
 
     static {
         Predicate<IBlockState> stoneMatcher = BlockBloomery::isValidSideBlock;
-        Predicate<IBlockState> insideChimney = state -> state.getBlock() == TFCBlocks.MOLTEN || state.getMaterial().isReplaceable();
+        Predicate<IBlockState> insideChimney = state -> state.getBlock() == BlocksDevice.MOLTEN || state.getMaterial().isReplaceable();
         Predicate<IBlockState> center = state ->
                 state.getBlock() == BlocksDevice.CHARCOAL_PILE ||
                         state.getBlock() == BlocksDevice.BLOOM ||

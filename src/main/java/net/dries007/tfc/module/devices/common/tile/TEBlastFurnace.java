@@ -8,13 +8,13 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
-import net.dries007.tfc.common.objects.blocks.BlockMolten;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.tileentities.ITileFields;
 import net.dries007.tfc.common.objects.tileentities.TETickableInventory;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.devices.common.blocks.BlockBlastFurnace;
+import net.dries007.tfc.module.devices.common.blocks.BlockMolten;
+import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.fuel.Fuel;
@@ -128,7 +128,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
     public void onBreakBlock(World worldIn, BlockPos pos, IBlockState state) {
         // Dump everything in world
         for (int i = 1; i < 6; i++) {
-            if (world.getBlockState(pos.up(i)).getBlock() == TFCBlocks.MOLTEN) {
+            if (world.getBlockState(pos.up(i)).getBlock() == BlocksDevice.MOLTEN) {
                 world.setBlockToAir(pos.up(i));
             }
         }
@@ -434,14 +434,18 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
             if (slagLayers > 0) {
                 if (slagLayers >= 4) {
                     slagLayers -= 4;
-                    world.setBlockState(pos.up(i), TFCBlocks.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, 4));
+                    world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.getDefaultState()
+                            .withProperty(LIT, cooking)
+                            .withProperty(BlockMolten.LAYERS, 4));
                 } else {
-                    world.setBlockState(pos.up(i), TFCBlocks.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, slagLayers));
+                    world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.getDefaultState()
+                            .withProperty(LIT, cooking)
+                            .withProperty(BlockMolten.LAYERS, slagLayers));
                     slagLayers = 0;
                 }
             } else {
                 //Remove any surplus slag(ie: after cooking/structure became compromised)
-                if (world.getBlockState(pos.up(i)).getBlock() == TFCBlocks.MOLTEN) {
+                if (world.getBlockState(pos.up(i)).getBlock() == BlocksDevice.MOLTEN) {
                     world.setBlockToAir(pos.up(i));
                 }
             }

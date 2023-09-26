@@ -1,10 +1,9 @@
-package net.dries007.tfc.common.objects.blocks;
+package net.dries007.tfc.module.core.common.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IItemProvider;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
+import net.dries007.tfc.module.core.init.BlocksCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
@@ -32,14 +31,14 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class BlockThatchBed extends BlockBed implements IItemProvider {
+
+    public static final String NAME = "thatch_bed";
+
     public BlockThatchBed() {
         setSoundType(SoundType.PLANT);
         setHardness(0.6F);
-        Blocks.FIRE.setFireInfo(this, 60, 20);
 
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
-        setRegistryName(Tags.MOD_ID, "thatch_bed");
-        setTranslationKey(Tags.MOD_ID + ".thatch_bed");
+        Blocks.FIRE.setFireInfo(this, 60, 20);
     }
 
     @Nullable
@@ -79,14 +78,14 @@ public class BlockThatchBed extends BlockBed implements IItemProvider {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(TFCBlocks.THATCH);
+        return Item.getItemFromBlock(BlocksCore.THATCH);
     }
 
     @Override
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {
         if (state.getValue(PART) == BlockBed.EnumPartType.HEAD) {
             spawnAsEntity(worldIn, pos, new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.RAW, ItemAnimalHide.HideSize.LARGE)));
-            spawnAsEntity(worldIn, pos, new ItemStack(TFCBlocks.THATCH, 2));
+            spawnAsEntity(worldIn, pos, new ItemStack(BlocksCore.THATCH, 2));
         }
     }
 
@@ -98,7 +97,7 @@ public class BlockThatchBed extends BlockBed implements IItemProvider {
 
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(TFCBlocks.THATCH);
+        return new ItemStack(BlocksCore.THATCH);
     }
 
     @Override

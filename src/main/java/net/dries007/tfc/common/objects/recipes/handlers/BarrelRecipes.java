@@ -11,6 +11,7 @@ import net.dries007.tfc.common.objects.inventory.ingredient.IngredientItemFood;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -138,7 +139,7 @@ public class BarrelRecipes {
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("blockGlass"), null, new ItemStack(Blocks.GLASS), ICalendar.TICKS_IN_HOUR).setRegistryName("glass_undo"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("paneGlass"), null, new ItemStack(Blocks.GLASS_PANE), ICalendar.TICKS_IN_HOUR).setRegistryName("glass_pane_undo"),
                 // Concrete
-                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("powderConcrete"), null, new ItemStack(TFCBlocks.AGGREGATE), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_undo"),
+                new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("powderConcrete"), null, new ItemStack(BlocksCore.AGGREGATE), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_undo"),
                 // Alabaster
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterBricks"), null, new ItemStack(TFCBlocks.getAlabasterBlock(BRICKS, COLORLESS)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_undo"),
                 new BarrelRecipe(IIngredient.of(FluidRegistry.getFluid("lye"), 125), IIngredient.of("alabasterRaw"), null, new ItemStack(TFCBlocks.getAlabasterBlock(RAW, COLORLESS)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_undo"),

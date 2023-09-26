@@ -3,7 +3,7 @@ package net.dries007.tfc.module.devices.common.blocks;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.module.devices.common.tile.TEBellows;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.SoundType;
@@ -33,7 +33,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import static net.minecraft.block.BlockHorizontal.FACING;
 
 @ParametersAreNonnullByDefault
-public class BlockBellows extends TFCBlock implements IHasModel {
+public class BlockBellows extends BlockBase implements IHasModel {
 
 
     public static final String NAME = "device.bellows";

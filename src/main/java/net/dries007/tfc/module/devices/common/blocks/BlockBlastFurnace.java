@@ -8,12 +8,12 @@ import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.tileentities.TEMetalSheet;
 import net.dries007.tfc.module.devices.common.tile.TEBellows;
 import net.dries007.tfc.module.devices.common.tile.TEBlastFurnace;
+import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalCladding;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.block.Multiblock;
@@ -41,7 +41,7 @@ import java.util.function.Predicate;
 
 
 @ParametersAreNonnullByDefault
-public class BlockBlastFurnace extends TFCBlock implements IBellowsConsumerBlock, ILightableBlock, IHasModel {
+public class BlockBlastFurnace extends BlockBase implements IBellowsConsumerBlock, ILightableBlock, IHasModel {
     public static final String NAME = "device.blast_furnace";
     private static final Multiblock BLAST_FURNACE_CHIMNEY;
 
@@ -49,7 +49,7 @@ public class BlockBlastFurnace extends TFCBlock implements IBellowsConsumerBlock
         Predicate<IBlockState> stoneMatcher = state -> state.getBlock() == MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.COKE_BRICKS).getBlock();
         Predicate<IBlockState> claddingMatcher = state -> state.getBlock() instanceof BlockMetalCladding;
         BLAST_FURNACE_CHIMNEY = new Multiblock()
-                .match(new BlockPos(0, 0, 0), state -> state.getBlock() == TFCBlocks.MOLTEN || state.getMaterial().isReplaceable())
+                .match(new BlockPos(0, 0, 0), state -> state.getBlock() == BlocksDevice.MOLTEN || state.getMaterial().isReplaceable())
                 .match(new BlockPos(0, 0, 1), stoneMatcher)
                 .match(new BlockPos(0, 0, -1), stoneMatcher)
                 .match(new BlockPos(1, 0, 0), stoneMatcher)

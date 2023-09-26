@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 import static net.dries007.tfc.util.Helpers.getNull;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
@@ -115,9 +116,9 @@ public final class ItemsTFC_old {
         IForgeRegistry<Item> r = event.getRegistry();
         Builder<Item> simpleItems = ImmutableList.builder();
 
-        //=== Other ==================================================================================================//
+        //==== Other ==================================================================================================//
 
-        register(r, "wooden_bucket", new ItemWoodBucket(), CreativeTabsTFC.MISC_TAB); //not a simple item, use a custom model
+        register(r, "wooden_bucket", new ItemWoodBucket(), MISC_TAB); //not a simple item, use a custom model
 
         // POTTERY
         {
@@ -177,7 +178,7 @@ public final class ItemsTFC_old {
         // Animal Hides
         for (ItemAnimalHide.HideSize size : ItemAnimalHide.HideSize.values()) {
             for (ItemAnimalHide.HideType type : ItemAnimalHide.HideType.values()) {
-                simpleItems.add(register(r, ("hide/" + type.name() + "/" + size.name()).toLowerCase(), new ItemAnimalHide(type, size), CreativeTabsTFC.MISC_TAB));
+                simpleItems.add(register(r, ("hide/" + type.name() + "/" + size.name()).toLowerCase(), new ItemAnimalHide(type, size), MISC_TAB));
             }
         }
 

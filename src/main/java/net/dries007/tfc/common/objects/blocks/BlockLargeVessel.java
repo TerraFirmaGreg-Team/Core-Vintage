@@ -5,9 +5,9 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.common.objects.tileentities.TELargeVessel;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -36,6 +36,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import static net.dries007.tfc.common.objects.CreativeTabsTFC.POTTERY_TAB;
+
 
 /**
  * Large vessel is an inventory that preserves the contents when sealed
@@ -43,20 +45,23 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * Sealed state is stored in a block state property, and cached in the TE (for gui purposes)
  */
 @ParametersAreNonnullByDefault
-public class BlockLargeVessel extends TFCBlock implements IItemSize {
+public class BlockLargeVessel extends BlockBase implements IItemSize {
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
+    public static final String NAME = "ceramics.fired.large_vessel";
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.625D, 0.8125D);
     private static final AxisAlignedBB BOUNDING_BOX_SEALED = new AxisAlignedBB(0.15625D, 0.0D, 0.15625D, 0.84375D, 0.6875D, 0.84375D);
 
     @SuppressWarnings("WeakerAccess")
     public BlockLargeVessel() {
         super(Material.CIRCUITS);
+
         setSoundType(SoundType.STONE);
         setHardness(2F);
-        setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+        setDefaultState(blockState.getBaseState()
+                .withProperty(SEALED, false));
 
         var blockRegistryName = "ceramics/fired/large_vessel";
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
+        setCreativeTab(POTTERY_TAB);
         setRegistryName(Tags.MOD_ID, blockRegistryName);
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
     }

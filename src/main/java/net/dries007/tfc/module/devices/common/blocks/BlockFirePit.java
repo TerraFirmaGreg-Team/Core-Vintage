@@ -7,7 +7,7 @@ import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.module.devices.common.tile.TEBellows;
@@ -57,7 +57,7 @@ import java.util.Random;
 import static net.dries007.tfc.util.Constants.RNG;
 
 @ParametersAreNonnullByDefault
-public class BlockFirePit extends TFCBlock implements IBellowsConsumerBlock, ILightableBlock, IHasModel {
+public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, ILightableBlock, IHasModel {
     public static final String NAME = "device.firepit";
     public static final PropertyEnum<FirePitAttachment> ATTACHMENT = PropertyEnum.create("attachment", FirePitAttachment.class);
 

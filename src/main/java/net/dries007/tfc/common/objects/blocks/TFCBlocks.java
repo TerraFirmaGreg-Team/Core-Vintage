@@ -46,21 +46,9 @@ public class TFCBlocks {
     public static final LinkedList<BlockFluidBase> FLUID = new LinkedList<>();
 
 
-    public static BlockTreeRootyMimic ROOTY_DIRT_MIMIC;
-    public static BlockDebug DEBUG;
-    public static BlockAggregate AGGREGATE;
-    public static BlockFireClay FIRE_CLAY_BLOCK;
-    public static BlockThatch THATCH;
-    public static BlockLargeVessel FIRED_LARGE_VESSEL;
-    public static BlockThatchBed THATCH_BED;
-    public static BlockPitKiln PIT_KILN;
-
-    public static BlockPlacedItemFlat PLACED_ITEM_FLAT;
-    public static BlockPlacedItem PLACED_ITEM;
-    public static BlockPlacedHide PLACED_HIDE;
-    public static BlockMolten MOLTEN;
     public static BlockIceTFC SEA_ICE;
-    public static BlockPowderKeg POWDERKEG;
+    public static BlockTreeRootyMimic ROOTY_DIRT_MIMIC;
+    public static BlockLargeVessel FIRED_LARGE_VESSEL;
 
 
     public static void preInit() {
@@ -93,23 +81,10 @@ public class TFCBlocks {
         FLUID.add(new BlockFluidWater(FluidRegistry.getFluid("fresh_water"), WATER, false));
         FLUID.add(new BlockFluidWater(FluidRegistry.getFluid("salt_water"), WATER, true));
 
-        //==== Other =================================================================================================//
-
-        BLOCKS.add(DEBUG = new BlockDebug());
-        BLOCKS.add(AGGREGATE = new BlockAggregate());
-        BLOCKS.add(FIRE_CLAY_BLOCK = new BlockFireClay());
-        BLOCKS.add(THATCH = new BlockThatch());
-        BLOCKS.add(FIRED_LARGE_VESSEL = new BlockLargeVessel());
-        BLOCKS.add(PLACED_ITEM = new BlockPlacedItem());
         BLOCKS.add(SEA_ICE = new BlockIceTFC(FluidRegistry.getFluid("salt_water")));
-        BLOCKS.add(POWDERKEG = new BlockPowderKeg());
-        BLOCKS.add(PIT_KILN = new BlockPitKiln());
-
-        BLOCKS.add(PLACED_ITEM_FLAT = new BlockPlacedItemFlat());
-        BLOCKS.add(PLACED_HIDE = new BlockPlacedHide());
-        BLOCKS.add(MOLTEN = new BlockMolten());
-        BLOCKS.add(THATCH_BED = new BlockThatchBed());
         BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
+        BLOCKS.add(FIRED_LARGE_VESSEL = new BlockLargeVessel());
+
     }
 
 

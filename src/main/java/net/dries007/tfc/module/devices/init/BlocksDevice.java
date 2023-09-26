@@ -1,13 +1,14 @@
 package net.dries007.tfc.module.devices.init;
 
 import com.codetaylor.mc.athenaeum.registry.Registry;
+import com.google.common.collect.ImmutableMap;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.RegistryHelper;
-import net.dries007.tfc.module.devices.client.render.TESRBellows;
-import net.dries007.tfc.module.devices.client.render.TESRCrucible;
-import net.dries007.tfc.module.devices.client.render.TESRFirePit;
-import net.dries007.tfc.module.devices.client.render.TESRQuern;
+import net.dries007.tfc.module.devices.client.render.*;
 import net.dries007.tfc.module.devices.common.blocks.*;
 import net.dries007.tfc.module.devices.common.tile.*;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -18,12 +19,14 @@ public class BlocksDevice {
     public static BlockBlastFurnace BLAST_FURNACE;
     public static BlockBloom BLOOM;
     public static BlockBloomery BLOOMERY;
+    public static BlockPitKiln PIT_KILN;
     public static BlockCharcoalForge CHARCOAL_FORGE;
     public static BlockCharcoalPile CHARCOAL_PILE;
     public static BlockCrucible CRUCIBLE;
     public static BlockFirePit FIREPIT;
     public static BlockLogPile LOG_PILE;
     public static BlockQuern QUERN;
+    public static BlockMolten MOLTEN;
 
     public static void onRegister(Registry registry) {
 
@@ -34,11 +37,13 @@ public class BlocksDevice {
         registry.registerBlock(CRUCIBLE = new BlockCrucible(), CRUCIBLE.getItemBlock(), BlockCrucible.NAME);
         registry.registerBlock(FIREPIT = new BlockFirePit(), FIREPIT.getItemBlock(), BlockFirePit.NAME);
         registry.registerBlock(QUERN = new BlockQuern(), QUERN.getItemBlock(), BlockQuern.NAME);
+        registry.registerBlock(PIT_KILN = new BlockPitKiln(), PIT_KILN.getItemBlock(), BlockPitKiln.NAME);
 
         //TODO отключить потом им ItemBlock
         registry.registerBlock(BLOOM = new BlockBloom(), BLOOM.getItemBlock(), BlockBloom.NAME);
         registry.registerBlock(LOG_PILE = new BlockLogPile(), LOG_PILE.getItemBlock(), BlockLogPile.NAME);
         registry.registerBlock(CHARCOAL_PILE = new BlockCharcoalPile(), CHARCOAL_PILE.getItemBlock(), BlockCharcoalPile.NAME);
+        registry.registerBlock(MOLTEN = new BlockMolten(), MOLTEN.getItemBlock(), BlockMolten.NAME);
 
         RegistryHelper.registerTileEntities(registry,
                 TEBellows.class,
@@ -69,10 +74,16 @@ public class BlocksDevice {
             FIREPIT.onModelRegister();
             LOG_PILE.onModelRegister();
             QUERN.onModelRegister();
+            MOLTEN.onModelRegister();
+            PIT_KILN.onModelRegister();
+
+            //TODO
+            ModelLoader.setCustomStateMapper(BlocksDevice.PIT_KILN, blockIn -> ImmutableMap.of(BlocksDevice.PIT_KILN.getDefaultState(), new ModelResourceLocation(Tags.MOD_ID + ":empty")));
 
         });
 
-        // TESRs
+        //==== TESRs =================================================================================================//
+        ClientRegistry.bindTileEntitySpecialRenderer(TEPitKiln.class, new TESRPitKiln());
         ClientRegistry.bindTileEntitySpecialRenderer(TEQuern.class, new TESRQuern());
         ClientRegistry.bindTileEntitySpecialRenderer(TEBellows.class, new TESRBellows());
         ClientRegistry.bindTileEntitySpecialRenderer(TECrucible.class, new TESRCrucible());

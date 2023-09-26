@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.Tags.MOD_NAME;
-import static net.dries007.tfc.common.objects.CreativeTabsTFC.MISC_TAB;
+import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 
 public class ModuleAnimal extends ModuleBase {
 

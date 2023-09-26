@@ -3,7 +3,6 @@ package net.dries007.tfc.common.objects.items;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,6 +24,8 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
+
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -33,7 +34,7 @@ public class ItemDebug extends Item {
 
         setRegistryName(Tags.MOD_ID, "wand");
         setTranslationKey(Tags.MOD_ID + ".wand");
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
+        setCreativeTab(MISC_TAB);
 
         setNoRepair();
         setMaxStackSize(1);

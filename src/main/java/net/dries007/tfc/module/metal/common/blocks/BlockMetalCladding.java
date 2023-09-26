@@ -3,7 +3,7 @@ package net.dries007.tfc.module.metal.common.blocks;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.common.objects.tileentities.TEMetalSheet;
 import net.dries007.tfc.module.metal.api.type.MetalType;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
@@ -41,7 +41,7 @@ import java.util.List;
 
 
 @ParametersAreNonnullByDefault
-public class BlockMetalCladding extends TFCBlock implements IMetalBlock {
+public class BlockMetalCladding extends BlockBase implements IMetalBlock {
     public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{
             PropertyBool.create("down"),
             PropertyBool.create("up"),

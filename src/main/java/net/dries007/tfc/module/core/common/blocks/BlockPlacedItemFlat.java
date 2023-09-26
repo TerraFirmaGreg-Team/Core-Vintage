@@ -1,7 +1,5 @@
-package net.dries007.tfc.common.objects.blocks;
+package net.dries007.tfc.module.core.common.blocks;
 
-import net.dries007.tfc.Tags;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.dries007.tfc.util.Helpers;
@@ -38,16 +36,13 @@ import java.util.Random;
 
 
 @ParametersAreNonnullByDefault
-public class BlockPlacedItemFlat extends TFCBlock {
+public class BlockPlacedItemFlat extends BlockBase {
+    public static final String NAME = "placed_item_flat";
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.0625D, 0.75D);
 
     public BlockPlacedItemFlat() {
         super(Material.CIRCUITS);
         setHardness(0.1F);
-
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
-        setRegistryName(Tags.MOD_ID, "placed_item_flat");
-        setTranslationKey(Tags.MOD_ID + ".placed_item_flat");
     }
 
     @Nullable

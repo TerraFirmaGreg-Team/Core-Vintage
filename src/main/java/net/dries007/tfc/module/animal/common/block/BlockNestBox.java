@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.common.block;
 
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.module.animal.common.tile.TENestBox;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -27,7 +27,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockNestBox extends TFCBlock {
+public class BlockNestBox extends BlockBase {
     public static final String NAME = "nest_box";
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
 

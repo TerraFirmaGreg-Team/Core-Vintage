@@ -8,7 +8,7 @@ import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.module.devices.common.blocks.itemblocks.ItemBlockCrucible;
 import net.dries007.tfc.module.devices.common.tile.TECrucible;
 import net.dries007.tfc.util.Helpers;
@@ -43,7 +43,7 @@ import java.util.List;
 
 
 @ParametersAreNonnullByDefault
-public class BlockCrucible extends TFCBlock implements IHeatConsumerBlock, IItemSize, IHasModel {
+public class BlockCrucible extends BlockBase implements IHeatConsumerBlock, IItemSize, IHasModel {
     public static final String NAME = "device.crucible";
     private static final AxisAlignedBB CRUCIBLE_AABB = new AxisAlignedBB(0.0625, 0.0625, 0.0625, 0.9375, 0.9375, 0.9375);
     private static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.9375D, 0.125D, 0.9375D);

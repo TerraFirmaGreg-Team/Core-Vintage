@@ -1,6 +1,5 @@
 package net.dries007.tfc.common.objects.blocks.itemblocks;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.devices.common.tile.TELogPile;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
@@ -26,7 +25,7 @@ public class ItemBlockTorch extends ItemBlockBase {
         World world = entityItem.getEntityWorld();
         IBlockState state = entityItem.getEntityWorld().getBlockState(pos);
 
-        if (state.getBlock() == BlocksDevice.LOG_PILE || state.getBlock() == TFCBlocks.PIT_KILN) {
+        if (state.getBlock() == BlocksDevice.LOG_PILE || state.getBlock() == BlocksDevice.PIT_KILN) {
             int count = entityItem.getEntityData().getInteger("torchCount");
             if (count > 160) {
                 if (state.getBlock() == BlocksDevice.LOG_PILE) {
@@ -38,7 +37,7 @@ public class ItemBlockTorch extends ItemBlockBase {
                     if (Blocks.FIRE.canPlaceBlockAt(world, pos.up())) {
                         world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
                     }
-                } else if (state.getBlock() == TFCBlocks.PIT_KILN) {
+                } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
                     TEPitKiln te = Helpers.getTE(world, pos, TEPitKiln.class);
                     if (te != null) {
                         te.tryLight();

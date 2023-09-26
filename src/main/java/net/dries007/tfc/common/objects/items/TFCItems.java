@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.Map;
 
-import static net.dries007.tfc.common.objects.CreativeTabsTFC.MISC_TAB;
+import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 
 public class TFCItems {
 

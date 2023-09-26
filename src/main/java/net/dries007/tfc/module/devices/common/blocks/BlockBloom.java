@@ -3,7 +3,7 @@ package net.dries007.tfc.module.devices.common.blocks;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.module.devices.common.tile.TEBloom;
 import net.dries007.tfc.util.Helpers;
@@ -31,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockBloom extends TFCBlock implements IHasModel {
+public class BlockBloom extends BlockBase implements IHasModel {
 
     public static final String NAME = "device.bloom";
 

@@ -1,8 +1,6 @@
-package net.dries007.tfc.common.objects.blocks;
+package net.dries007.tfc.module.core.common.blocks;
 
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IItemProvider;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.minecraft.block.BlockGravel;
 import net.minecraft.block.SoundType;
@@ -12,15 +10,13 @@ import javax.annotation.Nullable;
 
 
 public class BlockAggregate extends BlockGravel implements IItemProvider {
-    public BlockAggregate() {
 
+    public static final String NAME = "aggregate";
+
+    public BlockAggregate() {
 
         setSoundType(SoundType.SAND);
         setHardness(0.4f);
-
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
-        setRegistryName(Tags.MOD_ID, "aggregate");
-        setTranslationKey(Tags.MOD_ID + ".aggregate");
     }
 
     @Nullable

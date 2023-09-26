@@ -4,11 +4,12 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.common.objects.blocks.BlockPitKiln;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItem;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.init.BlocksCore;
+import net.dries007.tfc.module.devices.common.blocks.BlockPitKiln;
+import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -61,7 +62,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
             }
 
             // Replace the block
-            world.setBlockState(pos, TFCBlocks.PIT_KILN.getDefaultState());
+            world.setBlockState(pos, BlocksDevice.PIT_KILN.getDefaultState());
             // Play placement sound
             world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);
             // Copy TE data
@@ -187,7 +188,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
             }
 
             // Straw via thatch block (special exception)
-            if (stack.getItem() == Item.getItemFromBlock(TFCBlocks.THATCH) && strawCount <= STRAW_NEEDED - 4) {
+            if (stack.getItem() == Item.getItemFromBlock(BlocksCore.THATCH) && strawCount <= STRAW_NEEDED - 4) {
                 stack.shrink(1);
                 addStrawBlock();
                 world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);

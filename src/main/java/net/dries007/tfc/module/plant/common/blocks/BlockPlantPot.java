@@ -3,7 +3,7 @@ package net.dries007.tfc.module.plant.common.blocks;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -28,7 +28,7 @@ import static net.dries007.tfc.module.plant.ModulePlant.FLORA_TAB;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockPlantPot extends TFCBlock {
+public class BlockPlantPot extends BlockBase {
     protected static final AxisAlignedBB FLOWER_POT_AABB = new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 0.375D, 0.6875D);
 
     private static final Map<PlantType, BlockPlantPot> MAP = new HashMap<>();

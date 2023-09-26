@@ -2,7 +2,6 @@ package net.dries007.tfc.common.objects.blocks;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IItemProvider;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
@@ -29,9 +28,12 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 
+import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
+
 
 @ParametersAreNonnullByDefault
 public class BlockIceTFC extends BlockIce implements ITemperatureBlock, IItemProvider {
+    public static final String NAME = "placed_item";
     private final Fluid waterFluid;
     private final float meltThreshold;
 
@@ -45,7 +47,7 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock, IItemPro
         } else {
             setRegistryName(Tags.MOD_ID, "sea_ice");
             setTranslationKey(Tags.MOD_ID + ".sea_ice.");
-            setCreativeTab(CreativeTabsTFC.MISC_TAB);
+            setCreativeTab(MISC_TAB);
         }
 
         setHardness(0.5F);

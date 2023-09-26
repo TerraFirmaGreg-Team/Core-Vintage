@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.tileentities;
 
-import net.dries007.tfc.common.objects.blocks.BlockPowderKeg;
+import net.dries007.tfc.module.core.common.blocks.BlockPowderKeg;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.util.Constants;

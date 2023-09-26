@@ -7,8 +7,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.EnumColor;
 import net.dries007.tfc.api.util.IHasModel;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.blocks.TFCBlock;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
 import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
@@ -26,9 +25,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
+
 
 @ParametersAreNonnullByDefault
-public class BlockAlabaster extends TFCBlock implements IItemSize, IHasModel {
+public class BlockAlabaster extends BlockBase implements IItemSize, IHasModel {
 
     private final RockBlockVariant variant;
     private final EnumColor color;
@@ -41,7 +42,7 @@ public class BlockAlabaster extends TFCBlock implements IItemSize, IHasModel {
         this.color = color;
         this.modelLocation = TerraFirmaCraft.getID("rock/alabaster/color/" + variant);
 
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
+        setCreativeTab(MISC_TAB);
         setSoundType(SoundType.STONE);
         setHardness(1.0F);
 

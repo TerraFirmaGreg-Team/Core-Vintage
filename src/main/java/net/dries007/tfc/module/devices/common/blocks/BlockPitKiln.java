@@ -1,10 +1,13 @@
-package net.dries007.tfc.common.objects.blocks;
+package net.dries007.tfc.module.devices.common.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Tags;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.property.ILightableBlock;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.items.ItemFireStarter;
+import net.dries007.tfc.module.core.common.blocks.BlockBase;
+import net.dries007.tfc.module.core.common.blocks.BlockPlacedItem;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -14,6 +17,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -32,6 +36,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,7 +48,7 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockPitKiln extends TFCBlock implements ILightableBlock {
+public class BlockPitKiln extends BlockBase implements ILightableBlock, IHasModel {
     public static final PropertyBool FULL = PropertyBool.create("full");
     public static final String NAME = "pit_kiln";
     private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[]{
@@ -65,9 +70,6 @@ public class BlockPitKiln extends TFCBlock implements ILightableBlock {
         setHardness(0.5f);
         setDefaultState(blockState.getBaseState().withProperty(FULL, false).withProperty(LIT, false));
 
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
-        setRegistryName(Tags.MOD_ID, "pit_kiln");
-        setTranslationKey(Tags.MOD_ID + ".pit_kiln");
     }
 
     @Override
@@ -241,5 +243,18 @@ public class BlockPitKiln extends TFCBlock implements ILightableBlock {
     @Override
     public PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EntityLiving entity) {
         return state.getValue(LIT) && (entity == null || !entity.isImmuneToFire()) ? net.minecraft.pathfinding.PathNodeType.DAMAGE_FIRE : null;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+
+        var resourceLocation = TerraFirmaCraft.getID(NAME.replaceAll("\\.", "/"));
+
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder().customPath(resourceLocation).build());
+
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(resourceLocation, "normal"));
     }
 }

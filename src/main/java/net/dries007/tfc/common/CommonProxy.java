@@ -38,7 +38,6 @@ import net.dries007.tfc.common.objects.entity.EntitiesTFC;
 import net.dries007.tfc.common.objects.items.ItemGlassBottleTFC;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.recipes.RecipeHandler;
-import net.dries007.tfc.common.objects.tileentities.*;
 import net.dries007.tfc.compat.dynamictrees.SeasonManager;
 import net.dries007.tfc.compat.dynamictrees.TFCRootDecay;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
@@ -54,7 +53,6 @@ import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -127,18 +125,6 @@ public class CommonProxy {
         r.registerAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values().toArray(new Block[0]));
         TFCBlocks.BLOCKS.forEach(b -> registerItemBlock(r, b));
         TFCBlocks.FLUID.forEach(r::register);
-
-        //==== TileEntity ============================================================================================//
-
-        // Если поместить регистрацию TE в конструктор класса блока,
-        // то она может вызваться несколько раз, поэтому помещаем ее сюда.
-
-        registerTE(TETickCounter.class, "tick_counter");
-        registerTE(TEPlacedItem.class, "placed_item");
-        registerTE(TEPlacedItemFlat.class, "placed_item_flat");
-        registerTE(TEPlacedHide.class, "placed_hide");
-        registerTE(TELargeVessel.class, "large_vessel");
-        registerTE(TEPowderKeg.class, "powderkeg");
     }
 
     @SubscribeEvent
@@ -188,28 +174,6 @@ public class CommonProxy {
         if (ConfigTFC.General.OVERRIDES.enableTorchOverride) {
             event.getRegistry().register(new ItemBlockTorch(Blocks.TORCH).setRegistryName("minecraft", "torch"));
         }
-    }
-
-    /**
-     * Для регистрации отдельных предметов. В идеале не использовать этот метод.
-     * Ведь в нашем TFC все прописывается в конструкторе класса. Но если приспичит то можно.
-     */
-    private static <T extends Item> T registerItem(String name, T item, CreativeTabs ct) {
-        item.setRegistryName(MOD_ID, name);
-        item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
-        item.setCreativeTab(ct);
-        return item;
-    }
-
-    /**
-     * Для регистрации отдельных блоков. В идеале не использовать этот метод.
-     * Ведь в нашем TFC все прописывается в конструкторе класса. Но если приспичит то можно.
-     */
-    private static <T extends Block> T registerBlock(String name, T block, CreativeTabs ct) {
-        block.setRegistryName(MOD_ID, name);
-        block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
-        block.setCreativeTab(ct);
-        return block;
     }
 
     @SuppressWarnings("ConstantConditions")

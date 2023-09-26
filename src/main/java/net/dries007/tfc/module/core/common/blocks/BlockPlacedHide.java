@@ -1,7 +1,5 @@
-package net.dries007.tfc.common.objects.blocks;
+package net.dries007.tfc.module.core.common.blocks;
 
-import net.dries007.tfc.Tags;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedHide;
 import net.dries007.tfc.util.Helpers;
@@ -38,18 +36,17 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * Placement is restricted to the TFC item.
  */
 @ParametersAreNonnullByDefault
-public class BlockPlacedHide extends TFCBlock {
+public class BlockPlacedHide extends BlockBase {
     public static final PropertyEnum<ItemAnimalHide.HideSize> SIZE = PropertyEnum.create("size", ItemAnimalHide.HideSize.class);
+
+    public static final String NAME = "placed_hide";
 
     public BlockPlacedHide() {
         super(Material.CIRCUITS);
         setHardness(0.2f);
 
-        setDefaultState(getBlockState().getBaseState().withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM));
-
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
-        setRegistryName(Tags.MOD_ID, "placed_hide");
-        setTranslationKey(Tags.MOD_ID + ".placed_hide");
+        setDefaultState(getBlockState().getBaseState()
+                .withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM));
     }
 
     private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {

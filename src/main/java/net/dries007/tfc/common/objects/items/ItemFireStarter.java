@@ -5,8 +5,6 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.devices.common.tile.TEFirePit;
 import net.dries007.tfc.module.devices.common.tile.TELogPile;
@@ -39,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
+import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -47,7 +46,7 @@ public class ItemFireStarter extends TFCItem {
 
         setRegistryName(Tags.MOD_ID, "firestarter");
         setTranslationKey(Tags.MOD_ID + ".firestarter");
-        setCreativeTab(CreativeTabsTFC.MISC_TAB);
+        setCreativeTab(MISC_TAB);
         setMaxDamage(8);
         setMaxStackSize(1);
         setNoRepair();
@@ -159,7 +158,7 @@ public class ItemFireStarter extends TFCItem {
                         world.setBlockState(pos, Blocks.FIRE.getDefaultState());
                     }
                 }
-            } else if (state.getBlock() == TFCBlocks.PIT_KILN) {
+            } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
                 // Pit Kiln
                 if (itemRand.nextFloat() < chance) {
                     TEPitKiln te = Helpers.getTE(world, pos.down(), TEPitKiln.class);

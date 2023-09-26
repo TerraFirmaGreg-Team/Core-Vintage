@@ -39,7 +39,8 @@ public class BlocksMetal {
             METAL_BLOCKS.values().forEach(IHasModel::onModelRegister);
         });
 
-        // TESRs
+        //==== TESRs =================================================================================================//
+
         ClientRegistry.bindTileEntitySpecialRenderer(TEMetalAnvil.class, new TESRMetalAnvil());
     }
 

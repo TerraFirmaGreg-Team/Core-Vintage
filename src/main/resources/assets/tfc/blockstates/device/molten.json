@@ -1,0 +1,36 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:device/molten/1",
+    "textures": {
+      "all": "tfc:blocks/device/molten/molten",
+      "particle": "tfc:blocks/device/molten/molten"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "layers": {
+      "1": {
+        "model": "tfc:device/molten/1"
+      },
+      "2": {
+        "model": "tfc:device/molten/2"
+      },
+      "3": {
+        "model": "tfc:device/molten/3"
+      },
+      "4": {
+        "model": "cube_all"
+      }
+    },
+    "lit": {
+      "true": {
+        "textures": {
+          "all": "tfc:blocks/device/molten/lit",
+          "particle": "tfc:blocks/device/molten/lit"
+        }
+      },
+      "false": {}
+    }
+  }
+}

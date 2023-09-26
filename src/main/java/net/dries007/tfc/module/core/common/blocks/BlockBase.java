@@ -1,4 +1,4 @@
-package net.dries007.tfc.common.objects.blocks;
+package net.dries007.tfc.module.core.common.blocks;
 
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
@@ -9,12 +9,12 @@ import net.minecraft.item.ItemBlock;
 
 import javax.annotation.Nullable;
 
-public class TFCBlock extends Block implements IItemProvider {
-    public TFCBlock(Material materialIn) {
+public class BlockBase extends Block implements IItemProvider {
+    public BlockBase(Material materialIn) {
         super(materialIn);
     }
 
-    public TFCBlock(Material blockMaterialIn, MapColor blockMapColorIn) {
+    public BlockBase(Material blockMaterialIn, MapColor blockMapColorIn) {
         super(blockMaterialIn, blockMapColorIn);
     }
 

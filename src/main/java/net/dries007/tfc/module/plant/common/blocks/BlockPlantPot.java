@@ -3,7 +3,6 @@ package net.dries007.tfc.module.plant.common.blocks;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlock;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.minecraft.block.Block;
@@ -24,6 +23,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.dries007.tfc.module.plant.ModulePlant.FLORA_TAB;
+
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -41,7 +42,7 @@ public class BlockPlantPot extends TFCBlock {
 
         var blockRegistryName = String.format("flowerpot/%s", plant);
 
-        setCreativeTab(CreativeTabsTFC.FLORA_TAB);
+        setCreativeTab(FLORA_TAB);
         setRegistryName(TerraFirmaCraft.getID(blockRegistryName));
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
     }

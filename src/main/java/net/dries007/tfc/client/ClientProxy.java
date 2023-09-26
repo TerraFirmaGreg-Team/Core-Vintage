@@ -17,8 +17,9 @@ import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
-import net.dries007.tfc.client.render.*;
-import net.dries007.tfc.client.render.projectile.RenderThrownJavelin;
+import net.dries007.tfc.client.render.TESRPlacedHide;
+import net.dries007.tfc.client.render.TESRPlacedItem;
+import net.dries007.tfc.client.render.TESRPlacedItemFlat;
 import net.dries007.tfc.client.util.FluidSpriteCache;
 import net.dries007.tfc.client.util.GrassColorHandler;
 import net.dries007.tfc.client.util.TFCGuiHandler;
@@ -27,15 +28,18 @@ import net.dries007.tfc.common.objects.blocks.BlockPlacedHide;
 import net.dries007.tfc.common.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
-import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.common.objects.items.ItemAnimalHide;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.common.objects.items.TFCItems;
-import net.dries007.tfc.common.objects.tileentities.*;
+import net.dries007.tfc.common.objects.tileentities.TEPlacedHide;
+import net.dries007.tfc.common.objects.tileentities.TEPlacedItem;
+import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.compat.dynamictrees.client.BakedModelBlockRootyTFC;
 import net.dries007.tfc.compat.dynamictrees.client.ModelHelperTFC;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.devices.client.render.TESRPitKiln;
+import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -156,14 +160,11 @@ public class ClientProxy extends CommonProxy {
 
         //==== TESRs =================================================================================================//
 
+
         ClientRegistry.bindTileEntitySpecialRenderer(TEPitKiln.class, new TESRPitKiln());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItem.class, new TESRPlacedItem());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEQuern.class, new TESRQuern());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEBellows.class, new TESRBellows());
-        ClientRegistry.bindTileEntitySpecialRenderer(TECrucible.class, new TESRCrucible());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEFirePit.class, new TESRFirePit());
 
 
         // Registering fluid containers
@@ -470,7 +471,7 @@ public class ClientProxy extends CommonProxy {
         super.onPreInit(event);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockTFC.class, RenderFallingBlock::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityThrownJavelin.class, RenderThrownJavelin::new);
+        //RenderingRegistry.registerEntityRenderingHandler(EntityThrownJavelin.class, RenderThrownJavelin::new);
     }
 
     @Override

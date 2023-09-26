@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/allium/allium_0"
+      "plant": "tfc:blocks/plant/allium/allium_0"
     }
   },
   "variants": {

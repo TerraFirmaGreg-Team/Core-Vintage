@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/field_horsetail/item"
+      "plant": "tfc:blocks/plant/field_horsetail/item"
     }
   },
   "variants": {

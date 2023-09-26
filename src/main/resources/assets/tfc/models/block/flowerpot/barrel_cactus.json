@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "3": "tfc:blocks/plants/barrel_cactus/side",
-    "4": "tfc:blocks/plants/barrel_cactus/top",
-    "5": "tfc:blocks/plants/barrel_cactus/spikes_single",
+    "3": "tfc:blocks/plant/barrel_cactus/side",
+    "4": "tfc:blocks/plant/barrel_cactus/top",
+    "5": "tfc:blocks/plant/barrel_cactus/spikes_single",
     "particle": "blocks/flower_pot",
     "flowerpot": "blocks/flower_pot",
     "dirt": "tfc:blocks/soil/dirt/loam",

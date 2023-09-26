@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/meads_milkweed/meads_milkweed_3"
+      "plant": "tfc:blocks/plant/meads_milkweed/meads_milkweed_3"
     }
   },
   "variants": {

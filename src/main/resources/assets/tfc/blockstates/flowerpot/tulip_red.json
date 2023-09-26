@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/tulip/tulip_red_1"
+      "plant": "tfc:blocks/plant/tulip/tulip_red_1"
     }
   },
   "variants": {

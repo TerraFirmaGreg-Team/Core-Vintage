@@ -1,0 +1,52 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plant/meads_milkweed/0",
+          "particle": "tfc:blocks/plant/meads_milkweed/0"
+        }
+      },
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plant/meads_milkweed/1",
+          "particle": "tfc:blocks/plant/meads_milkweed/1"
+        }
+      },
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plant/meads_milkweed/2",
+          "particle": "tfc:blocks/plant/meads_milkweed/2"
+        }
+      },
+      "3": {
+        "textures": {
+          "cross": "tfc:blocks/plant/meads_milkweed/3",
+          "particle": "tfc:blocks/plant/meads_milkweed/3"
+        }
+      },
+      "4": {
+        "textures": {
+          "cross": "tfc:blocks/plant/meads_milkweed/4",
+          "particle": "tfc:blocks/plant/meads_milkweed/4"
+        }
+      },
+      "5": {
+        "textures": {
+          "cross": "tfc:blocks/plant/meads_milkweed/5",
+          "particle": "tfc:blocks/plant/meads_milkweed/5"
+        }
+      },
+      "6": {
+        "textures": {
+          "cross": "tfc:blocks/plant/meads_milkweed/6",
+          "particle": "tfc:blocks/plant/meads_milkweed/6"
+        }
+      }
+    }
+  }
+}

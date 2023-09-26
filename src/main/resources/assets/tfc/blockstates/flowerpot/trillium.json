@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/trillium/item"
+      "plant": "tfc:blocks/plant/trillium/item"
     }
   },
   "variants": {

@@ -7,7 +7,7 @@ import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.CollapseData;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.common.objects.blocks.BlockCharcoalPile;
+import net.dries007.tfc.module.devices.common.blocks.BlockCharcoalPile;
 import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;

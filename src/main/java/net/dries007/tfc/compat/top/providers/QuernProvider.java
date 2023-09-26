@@ -5,7 +5,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.common.objects.tileentities.TEQuern;
+import net.dries007.tfc.module.devices.common.tile.TEQuern;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import static net.dries007.tfc.common.objects.tileentities.TEQuern.SLOT_HANDSTONE;
+import static net.dries007.tfc.module.devices.common.tile.TEQuern.SLOT_HANDSTONE;
 
 public class QuernProvider implements IProbeInfoProvider {
     @Override

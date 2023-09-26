@@ -1,12 +1,8 @@
 package net.dries007.tfc.module.plant.common.blocks;
 
-import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.util.IItemProvider;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.plant.api.type.PlantType;
@@ -36,7 +32,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -55,7 +50,7 @@ import java.util.Random;
 
 
 @ParametersAreNonnullByDefault
-public class BlockPlant extends BlockBush implements IPlantBlock, IItemSize, IItemProvider {
+public class BlockPlant extends BlockBush implements IPlantBlock, IItemSize {
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
     /*
      * Time of day, used for rendering plants that bloom at different times
@@ -70,35 +65,23 @@ public class BlockPlant extends BlockBush implements IPlantBlock, IItemSize, IIt
     public final PropertyInteger growthStageProperty;
     protected final BlockStateContainer blockState;
     private final PlantType plant;
-    private final PlantEnumVariant plantBlockVariant;
-    private final ResourceLocation modelLocation;
+    private final PlantEnumVariant variant;
 
-    public BlockPlant(PlantEnumVariant plantBlockVariant, PlantType plant) {
+    public BlockPlant(PlantEnumVariant variant, PlantType plant) {
         super(plant.getMaterial());
 
         this.plant = plant;
-        this.plantBlockVariant = plantBlockVariant;
-        this.modelLocation = TerraFirmaCraft.getID("plants/" + plant);
-        var blockRegistryName = String.format("plants/%s/%s", plantBlockVariant, plant);
+        this.variant = variant;
+        this.growthStageProperty = PropertyInteger.create("stage", 0, plant.getNumStages());
+        this.blockState = this.createPlantBlockState();
 
-        setRegistryName(Tags.MOD_ID, blockRegistryName);
-        setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
-        setCreativeTab(CreativeTabsTFC.FLORA_TAB);
         setTickRandomly(true);
         setSoundType(SoundType.PLANT);
         setHardness(0.0F);
-        growthStageProperty = PropertyInteger.create("stage", 0, plant.getNumStages());
-        blockState = this.createPlantBlockState();
         setDefaultState(this.blockState.getBaseState());
 
         plant.getOreDictName().ifPresent(name -> OreDictionaryHelper.register(this, name));
         Blocks.FIRE.setFireInfo(this, 5, 20);
-    }
-
-    @Nonnull
-    @Override
-    public String getTranslationKey() {
-        return "tile.tfc.plants." + plant.toString();
     }
 
     @SuppressWarnings("deprecation")
@@ -348,7 +331,7 @@ public class BlockPlant extends BlockBush implements IPlantBlock, IItemSize, IIt
 
     @Override
     public PlantEnumVariant getBlockVariant() {
-        return plantBlockVariant;
+        return variant;
     }
 
     @Override
@@ -367,13 +350,13 @@ public class BlockPlant extends BlockBush implements IPlantBlock, IItemSize, IIt
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                return new ModelResourceLocation(modelLocation, "stage=" + plant.getNumStages());
+                return new ModelResourceLocation(getResourceLocation(), "stage=" + plant.getNumStages());
             }
         });
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this),
                 this.getMetaFromState(this.getBlockState().getBaseState()),
-                new ModelResourceLocation(modelLocation.toString()));
+                new ModelResourceLocation(getResourceLocation(), "inventory"));
     }
 }

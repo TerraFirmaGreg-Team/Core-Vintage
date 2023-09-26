@@ -5,9 +5,9 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.tileentities.TELogPile;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.devices.common.tile.TELogPile;
+import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static net.dries007.tfc.common.objects.blocks.BlockCharcoalPile.LAYERS;
+import static net.dries007.tfc.module.devices.common.blocks.BlockCharcoalPile.LAYERS;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public final class InteractionManager {
@@ -80,7 +80,7 @@ public final class InteractionManager {
         USE_ACTIONS.put(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "logWood"), (stack, player, worldIn, pos, hand, direction, hitX, hitY, hitZ) -> {
             if (direction != null) {
                 IBlockState stateAt = worldIn.getBlockState(pos);
-                if (stateAt.getBlock() == TFCBlocks.LOG_PILE) {
+                if (stateAt.getBlock() == BlocksDevice.LOG_PILE) {
                     // Clicked on a log pile, so try to insert into the original
                     // This is called first when player is sneaking, otherwise the call chain is passed to the BlockLogPile#onBlockActivated
                     TELogPile te = Helpers.getTE(worldIn, pos, TELogPile.class);
@@ -113,10 +113,10 @@ public final class InteractionManager {
                     if (!stateAt.getBlock().isReplaceable(worldIn, pos)) {
                         posAt = posAt.offset(direction);
                     }
-                    if (worldIn.getBlockState(posAt.down()).isNormalCube() && worldIn.mayPlace(TFCBlocks.LOG_PILE, posAt, false, direction, null)) {
+                    if (worldIn.getBlockState(posAt.down()).isNormalCube() && worldIn.mayPlace(BlocksDevice.LOG_PILE, posAt, false, direction, null)) {
                         // Place log pile
                         if (!worldIn.isRemote) {
-                            worldIn.setBlockState(posAt, TFCBlocks.LOG_PILE.getStateForPlacement(worldIn, posAt, direction, 0, 0, 0, 0, player));
+                            worldIn.setBlockState(posAt, BlocksDevice.LOG_PILE.getStateForPlacement(worldIn, posAt, direction, 0, 0, 0, 0, player));
 
                             TELogPile te = Helpers.getTE(worldIn, posAt, TELogPile.class);
                             if (te != null) {
@@ -141,7 +141,7 @@ public final class InteractionManager {
         USE_ACTIONS.put(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "charcoal"), (stack, player, worldIn, pos, hand, direction, hitX, hitY, hitZ) -> {
             if (direction != null) {
                 IBlockState state = worldIn.getBlockState(pos);
-                if (state.getBlock() == TFCBlocks.CHARCOAL_PILE && state.getValue(LAYERS) < 8) {
+                if (state.getBlock() == BlocksDevice.CHARCOAL_PILE && state.getValue(LAYERS) < 8) {
                     // Check the player isn't standing inside the placement area for the next layer
                     IBlockState stateToPlace = state.withProperty(LAYERS, state.getValue(LAYERS) + 1);
                     if (worldIn.checkNoEntityCollision(stateToPlace.getBoundingBox(worldIn, pos).offset(pos))) {
@@ -159,7 +159,7 @@ public final class InteractionManager {
                     posAt = posAt.offset(direction);
                 }
                 if (worldIn.getBlockState(posAt.down()).isSideSolid(worldIn, posAt.down(), EnumFacing.UP) && worldIn.getBlockState(posAt).getBlock().isReplaceable(worldIn, pos)) {
-                    IBlockState stateToPlace = TFCBlocks.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, 1);
+                    IBlockState stateToPlace = BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, 1);
                     if (worldIn.checkNoEntityCollision(stateToPlace.getBoundingBox(worldIn, posAt).offset(posAt))) {
                         // Create a new charcoal pile
                         if (!worldIn.isRemote) {

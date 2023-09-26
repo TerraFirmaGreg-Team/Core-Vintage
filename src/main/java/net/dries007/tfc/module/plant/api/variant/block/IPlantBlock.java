@@ -30,6 +30,6 @@ public interface IPlantBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.getID(String.format("plant/%s", getBlockVariant()));
+        return TerraFirmaCraft.getID(String.format("plant/%s", getType()));
     }
 }

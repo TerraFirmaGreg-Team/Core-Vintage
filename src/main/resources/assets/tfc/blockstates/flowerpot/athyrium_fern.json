@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/athyrium_fern/single"
+      "plant": "tfc:blocks/plant/athyrium_fern/single"
     }
   },
   "variants": {

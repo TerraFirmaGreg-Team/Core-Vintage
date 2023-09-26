@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/houstonia/houstonia_1"
+      "plant": "tfc:blocks/plant/houstonia/houstonia_1"
     }
   },
   "variants": {

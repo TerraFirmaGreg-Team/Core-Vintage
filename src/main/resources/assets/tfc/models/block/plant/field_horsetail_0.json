@@ -1,0 +1,7 @@
+{
+  "parent": "tfc:block/cross",
+  "textures": {
+    "cross": "tfc:blocks/plant/field_horsetail/horsetail_0",
+    "particle": "tfc:blocks/plant/field_horsetail/horsetail_0"
+  }
+}

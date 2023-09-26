@@ -8,7 +8,9 @@ import net.dries007.tfc.module.animal.ModuleAnimal;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.ModuleCorePost;
 import net.dries007.tfc.module.crop.ModuleCrop;
+import net.dries007.tfc.module.devices.ModuleDevice;
 import net.dries007.tfc.module.metal.ModuleMetal;
+import net.dries007.tfc.module.plant.ModulePlant;
 import net.dries007.tfc.module.rock.ModuleRock;
 import net.dries007.tfc.module.soil.ModuleSoil;
 import net.dries007.tfc.module.wood.ModuleWood;
@@ -84,7 +86,9 @@ public final class TerraFirmaCraft {
                 ModuleWood.class,
                 ModuleMetal.class,
                 ModuleCrop.class,
-                ModuleAnimal.class
+                ModuleAnimal.class,
+                ModuleDevice.class,
+                ModulePlant.class
         );
 
         this.registerModule(ModuleCorePost.class);

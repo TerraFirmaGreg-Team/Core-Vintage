@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "5": "tfc:blocks/plants/tree_fern/tree_fern_trunk",
-    "6": "tfc:blocks/plants/tree_fern/tree_fern_0",
+    "5": "tfc:blocks/plant/tree_fern/tree_fern_trunk",
+    "6": "tfc:blocks/plant/tree_fern/tree_fern_0",
     "particle": "blocks/flower_pot",
     "flowerpot": "blocks/flower_pot",
     "dirt": "tfc:blocks/soil/dirt/loam",

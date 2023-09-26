@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/nasturtium/nasturtium_2"
+      "plant": "tfc:blocks/plant/nasturtium/nasturtium_2"
     }
   },
   "variants": {

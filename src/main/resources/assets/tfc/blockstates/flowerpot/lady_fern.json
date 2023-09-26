@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/lady_fern/item"
+      "plant": "tfc:blocks/plant/lady_fern/item"
     }
   },
   "variants": {

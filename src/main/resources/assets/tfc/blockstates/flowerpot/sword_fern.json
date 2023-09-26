@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/sword_fern/item"
+      "plant": "tfc:blocks/plant/sword_fern/item"
     }
   },
   "variants": {

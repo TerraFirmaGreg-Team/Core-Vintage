@@ -27,7 +27,7 @@ import net.dries007.tfc.module.animal.api.type.ICreature;
 import net.dries007.tfc.module.animal.api.type.IPredator;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.devices.BlockQuern;
+import net.dries007.tfc.module.devices.common.blocks.BlockQuern;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidTFC;
 import net.dries007.tfc.common.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.common.objects.effects.PotionEffectsTFC;

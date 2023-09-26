@@ -46,7 +46,6 @@ import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
 import net.dries007.tfc.compat.top.TOPIntegration;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.crop.common.tile.TECropBase;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -138,17 +137,6 @@ public class CommonProxy {
         registerTE(TEPlacedItem.class, "placed_item");
         registerTE(TEPlacedItemFlat.class, "placed_item_flat");
         registerTE(TEPlacedHide.class, "placed_hide");
-        registerTE(TEPitKiln.class, "pit_kiln");
-        registerTE(TELogPile.class, "log_pile");
-        registerTE(TEFirePit.class, "fire_pit");
-        registerTE(TEBellows.class, "bellows");
-        registerTE(TECharcoalForge.class, "charcoal_forge");
-        registerTE(TECrucible.class, "crucible");
-        registerTE(TECropBase.class, "crop_base");
-        registerTE(TEBlastFurnace.class, "blast_furnace");
-        registerTE(TEBloomery.class, "bloomery");
-        registerTE(TEBloom.class, "bloom");
-        registerTE(TEQuern.class, "quern");
         registerTE(TELargeVessel.class, "large_vessel");
         registerTE(TEPowderKeg.class, "powderkeg");
     }

@@ -2,6 +2,8 @@ package net.dries007.tfc.module.crop.init;
 
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.api.util.RegistryHelper;
+import net.dries007.tfc.module.crop.common.tile.TECropBase;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -17,6 +19,11 @@ public class BlocksCrop {
             if (itemBlock != null) registry.registerBlock((Block) block, block.getItemBlock(), block.getName());
             else registry.registerBlock((Block) block, block.getName());
         }
+
+        RegistryHelper.registerTileEntities(
+                registry,
+                TECropBase.class
+        );
     }
 
     @SideOnly(Side.CLIENT)

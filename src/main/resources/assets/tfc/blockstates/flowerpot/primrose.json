@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/primrose/primrose"
+      "plant": "tfc:blocks/plant/primrose/primrose"
     }
   },
   "variants": {

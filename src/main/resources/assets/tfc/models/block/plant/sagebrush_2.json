@@ -1,0 +1,7 @@
+{
+  "parent": "tfc:block/cross",
+  "textures": {
+    "particle": "tfc:blocks/plant/sagebrush/sagebrush_2",
+    "cross": "tfc:blocks/plant/sagebrush/sagebrush_2"
+  }
+}

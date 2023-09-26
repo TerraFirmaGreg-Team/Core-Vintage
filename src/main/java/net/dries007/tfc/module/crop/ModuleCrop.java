@@ -9,6 +9,7 @@ import net.dries007.tfc.module.crop.api.variant.block.CropBlockVariantHandler;
 import net.dries007.tfc.module.crop.api.variant.item.CropItemVariantHandler;
 import net.dries007.tfc.module.crop.init.BlocksCrop;
 import net.dries007.tfc.module.crop.init.ItemsCrop;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -20,12 +21,14 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 
 public class ModuleCrop extends ModuleBase {
 
+    public static final CreativeTabs CROP_TAB = new CreativeTabsTFC.TFCCreativeTab("crop", "tfc:crop.seed.rice");
+
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleCrop.class.getSimpleName());
 
     public ModuleCrop() {
         super(0, MOD_ID);
 
-        this.setRegistry(new Registry(MOD_ID, CreativeTabsTFC.CROP_TAB));
+        this.setRegistry(new Registry(MOD_ID, CROP_TAB));
         this.enableAutoRegistry();
 
         //PACKET_SERVICE = this.enableNetwork();

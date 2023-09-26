@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/oxeye_daisy/oxeye_daisy_3"
+      "plant": "tfc:blocks/plant/oxeye_daisy/oxeye_daisy_3"
     }
   },
   "variants": {

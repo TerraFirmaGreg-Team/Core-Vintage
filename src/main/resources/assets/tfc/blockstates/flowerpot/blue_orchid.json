@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/blue_orchid/blue_orchid_1"
+      "plant": "tfc:blocks/plant/blue_orchid/blue_orchid_1"
     }
   },
   "variants": {

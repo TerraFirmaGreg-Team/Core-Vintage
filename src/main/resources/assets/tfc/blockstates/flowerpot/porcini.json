@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/porcini/porcini"
+      "plant": "tfc:blocks/plant/porcini/porcini"
     }
   },
   "variants": {

@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/canna/canna_3"
+      "plant": "tfc:blocks/plant/canna/canna_3"
     }
   },
   "variants": {

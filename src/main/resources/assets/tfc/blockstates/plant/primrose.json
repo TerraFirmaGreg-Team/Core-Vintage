@@ -1,0 +1,28 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plant/primrose/0",
+          "particle": "tfc:blocks/plant/primrose/0"
+        }
+      },
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plant/primrose/1",
+          "particle": "tfc:blocks/plant/primrose/1"
+        }
+      },
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plant/primrose/2",
+          "particle": "tfc:blocks/plant/primrose/2"
+        }
+      }
+    }
+  }
+}

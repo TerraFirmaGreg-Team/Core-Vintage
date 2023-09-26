@@ -279,8 +279,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
 
 
         ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                this.getMetaFromState(this.getBlockState().getBaseState()),
+                Item.getItemFromBlock(this), 0,
                 new ModelResourceLocation(getResourceLocation(), "soiltype=" + type.toString()));
     }
 

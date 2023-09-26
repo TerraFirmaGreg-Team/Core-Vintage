@@ -7,10 +7,11 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.tileentities.TEFirePit;
-import net.dries007.tfc.common.objects.tileentities.TELogPile;
-import net.dries007.tfc.common.objects.tileentities.TEPitKiln;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.devices.common.tile.TEFirePit;
+import net.dries007.tfc.module.devices.common.tile.TELogPile;
+import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
+import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.state.IBlockState;
@@ -146,7 +147,7 @@ public class ItemFireStarter extends TFCItem {
         {
             stack.damageItem(1, player);
             final IBlockState state = world.getBlockState(pos.down());
-            if (state.getBlock() == TFCBlocks.LOG_PILE) {
+            if (state.getBlock() == BlocksDevice.LOG_PILE) {
                 // Log pile
                 if (itemRand.nextFloat() < chance) {
                     world.setBlockState(pos.down(), state.withProperty(LIT, true));
@@ -190,7 +191,7 @@ public class ItemFireStarter extends TFCItem {
                 if (sticks >= 3 && log != null) {
                     final float kindlingModifier = Math.min(0.1f * (float) kindling, 0.5f);
                     if (itemRand.nextFloat() < chance + kindlingModifier) {
-                        world.setBlockState(pos, TFCBlocks.FIREPIT.getDefaultState().withProperty(LIT, true));
+                        world.setBlockState(pos, BlocksDevice.FIREPIT.getDefaultState().withProperty(LIT, true));
                         TEFirePit te = Helpers.getTE(world, pos, TEFirePit.class);
                         if (te != null) {
                             te.onCreate(log.getItem());

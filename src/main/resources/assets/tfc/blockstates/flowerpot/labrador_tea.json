@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/labrador_tea/labrador_tea_4"
+      "plant": "tfc:blocks/plant/labrador_tea/labrador_tea_4"
     }
   },
   "variants": {

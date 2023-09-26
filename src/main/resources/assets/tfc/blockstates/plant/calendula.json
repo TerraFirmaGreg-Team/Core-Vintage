@@ -1,0 +1,52 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plant/calendula/0",
+          "particle": "tfc:blocks/plant/calendula/0"
+        }
+      },
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plant/calendula/1",
+          "particle": "tfc:blocks/plant/calendula/1"
+        }
+      },
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plant/calendula/2",
+          "particle": "tfc:blocks/plant/calendula/2"
+        }
+      },
+      "3": {
+        "textures": {
+          "cross": "tfc:blocks/plant/calendula/3",
+          "particle": "tfc:blocks/plant/calendula/3"
+        }
+      },
+      "4": {
+        "textures": {
+          "cross": "tfc:blocks/plant/calendula/3",
+          "particle": "tfc:blocks/plant/calendula/3"
+        }
+      },
+      "5": {
+        "textures": {
+          "cross": "tfc:blocks/plant/calendula/4",
+          "particle": "tfc:blocks/plant/calendula/4"
+        }
+      },
+      "6": {
+        "textures": {
+          "cross": "tfc:blocks/plant/calendula/5",
+          "particle": "tfc:blocks/plant/calendula/5"
+        }
+      }
+    }
+  }
+}

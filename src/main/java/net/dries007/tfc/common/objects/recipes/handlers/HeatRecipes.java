@@ -14,6 +14,7 @@ import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -62,7 +63,7 @@ public class HeatRecipes {
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_BOWL), new ItemStack(ItemsTFC_old.FIRED_BOWL), 1599f, 1).setRegistryName("unfired_bowl"),
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_SPINDLE), new ItemStack(ItemsTFC_old.FIRED_SPINDLE), 1599f, 1).setRegistryName("unfired_spindle"),
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_LARGE_VESSEL), new ItemStack(TFCBlocks.FIRED_LARGE_VESSEL), 1599f, 1).setRegistryName("unfired_large_vessel"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_CRUCIBLE), new ItemStack(TFCBlocks.CRUCIBLE), 1599f, 1).setRegistryName("unfired_crucible"),
+                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_CRUCIBLE), new ItemStack(BlocksDevice.CRUCIBLE), 1599f, 1).setRegistryName("unfired_crucible"),
 
                 // Fired Pottery - doesn't burn up
                 new HeatRecipeSimple(IIngredient.of(MetaItems.FIRECLAY_BRICK.getStackForm().getItem()), MetaItems.FIRECLAY_BRICK.getStackForm(), 1599f, 1).setRegistryName("fired_fire_brick"),
@@ -73,7 +74,7 @@ public class HeatRecipes {
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.FIRED_BOWL), new ItemStack(ItemsTFC_old.FIRED_BOWL), 1599f, 1).setRegistryName("fired_bowl"),
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.FIRED_SPINDLE), new ItemStack(ItemsTFC_old.FIRED_SPINDLE), 1599f, 1).setRegistryName("fired_spindle"),
                 new HeatRecipeSimple(IIngredient.of(TFCBlocks.FIRED_LARGE_VESSEL), new ItemStack(TFCBlocks.FIRED_LARGE_VESSEL), 1599f, 1).setRegistryName("fired_large_vessel"),
-                new HeatRecipeSimple(IIngredient.of(TFCBlocks.CRUCIBLE), new ItemStack(TFCBlocks.CRUCIBLE), 1599f, 1).setRegistryName("fired_crucible"),
+                new HeatRecipeSimple(IIngredient.of(BlocksDevice.CRUCIBLE), new ItemStack(BlocksDevice.CRUCIBLE), 1599f, 1).setRegistryName("fired_crucible"),
 
                 // Misc
                 new HeatRecipeSimple(IIngredient.of("stickWood"), new ItemStack(Blocks.TORCH, 2), 40).setRegistryName("torch"),

@@ -6,7 +6,6 @@ import net.dries007.tfc.api.types.bush.IBushBlock;
 import net.dries007.tfc.api.types.bush.type.BushType;
 import net.dries007.tfc.api.util.EnumColor;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.common.objects.blocks.devices.*;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidHotWater;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidWater;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeRootyMimic;
@@ -46,33 +45,20 @@ public class TFCBlocks {
     // Жидкости
     public static final LinkedList<BlockFluidBase> FLUID = new LinkedList<>();
 
+
     public static BlockTreeRootyMimic ROOTY_DIRT_MIMIC;
-
-
     public static BlockDebug DEBUG;
-
-
     public static BlockAggregate AGGREGATE;
     public static BlockFireClay FIRE_CLAY_BLOCK;
     public static BlockThatch THATCH;
-    public static BlockQuern QUERN;
-    public static BlockCrucible CRUCIBLE;
-    public static BlockBlastFurnace BLAST_FURNACE;
-    public static BlockBellows BELLOWS;
-    public static BlockBloomery BLOOMERY;
-
     public static BlockLargeVessel FIRED_LARGE_VESSEL;
-    public static BlockFirePit FIREPIT;
     public static BlockThatchBed THATCH_BED;
     public static BlockPitKiln PIT_KILN;
+
     public static BlockPlacedItemFlat PLACED_ITEM_FLAT;
     public static BlockPlacedItem PLACED_ITEM;
     public static BlockPlacedHide PLACED_HIDE;
-    public static BlockCharcoalPile CHARCOAL_PILE;
-    public static BlockLogPile LOG_PILE;
-    public static BlockCharcoalForge CHARCOAL_FORGE;
     public static BlockMolten MOLTEN;
-    public static BlockBloom BLOOM;
     public static BlockIceTFC SEA_ICE;
     public static BlockPowderKeg POWDERKEG;
 
@@ -113,25 +99,15 @@ public class TFCBlocks {
         BLOCKS.add(AGGREGATE = new BlockAggregate());
         BLOCKS.add(FIRE_CLAY_BLOCK = new BlockFireClay());
         BLOCKS.add(THATCH = new BlockThatch());
-        BLOCKS.add(QUERN = new BlockQuern());
-        BLOCKS.add(CRUCIBLE = new BlockCrucible());
-        BLOCKS.add(BLAST_FURNACE = new BlockBlastFurnace());
-        BLOCKS.add(BELLOWS = new BlockBellows());
-        BLOCKS.add(BLOOMERY = new BlockBloomery());
         BLOCKS.add(FIRED_LARGE_VESSEL = new BlockLargeVessel());
-        BLOCKS.add(FIREPIT = new BlockFirePit());
-        BLOCKS.add(PIT_KILN = new BlockPitKiln());
         BLOCKS.add(PLACED_ITEM = new BlockPlacedItem());
-        BLOCKS.add(CHARCOAL_FORGE = new BlockCharcoalForge());
         BLOCKS.add(SEA_ICE = new BlockIceTFC(FluidRegistry.getFluid("salt_water")));
         BLOCKS.add(POWDERKEG = new BlockPowderKeg());
+        BLOCKS.add(PIT_KILN = new BlockPitKiln());
 
         BLOCKS.add(PLACED_ITEM_FLAT = new BlockPlacedItemFlat());
         BLOCKS.add(PLACED_HIDE = new BlockPlacedHide());
-        BLOCKS.add(CHARCOAL_PILE = new BlockCharcoalPile());
-        BLOCKS.add(LOG_PILE = new BlockLogPile());
         BLOCKS.add(MOLTEN = new BlockMolten());
-        BLOCKS.add(BLOOM = new BlockBloom());
         BLOCKS.add(THATCH_BED = new BlockThatchBed());
         BLOCKS.add(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
     }

@@ -5,7 +5,7 @@
     "particle": "blocks/flower_pot",
     "flowerpot": "blocks/flower_pot",
     "dirt": "tfc:blocks/soil/dirt/loam",
-    "plant": "tfc:blocks/plants/foxglove/foxglove_3"
+    "plant": "tfc:blocks/plant/foxglove/foxglove_3"
   },
   "elements": [
     {

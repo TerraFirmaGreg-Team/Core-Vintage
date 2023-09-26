@@ -42,6 +42,6 @@ public interface IPlantItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.getID(String.format("plant/%s", getItemVariant()));
+        return TerraFirmaCraft.getID(String.format("plant/%s", getType()));
     }
 }

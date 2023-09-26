@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "3": "tfc:blocks/plants/morning_glory/morning_glory_layer0",
-    "4": "tfc:blocks/plants/morning_glory/morning_glory_top_1",
+    "3": "tfc:blocks/plant/morning_glory/morning_glory_layer0",
+    "4": "tfc:blocks/plant/morning_glory/morning_glory_top_1",
     "particle": "blocks/flower_pot",
     "flowerpot": "blocks/flower_pot",
     "dirt": "tfc:blocks/soil/dirt/loam",

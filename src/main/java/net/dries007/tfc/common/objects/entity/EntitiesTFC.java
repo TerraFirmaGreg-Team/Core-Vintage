@@ -2,7 +2,6 @@ package net.dries007.tfc.common.objects.entity;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.common.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
@@ -56,7 +55,7 @@ public class EntitiesTFC {
 
     public static void preInit() {
         register("falling_block", EntityFallingBlockTFC.class);
-        register("thrown_javelin", EntityThrownJavelin.class);
+        //register("thrown_javelin", EntityThrownJavelin.class);
     }
 
     private static void register(String name, Class<? extends Entity> cls) {

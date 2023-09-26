@@ -9,6 +9,7 @@ import net.dries007.tfc.module.plant.api.variant.block.PlantBlockVariantHandler;
 import net.dries007.tfc.module.plant.api.variant.item.PlantItemVariantHandler;
 import net.dries007.tfc.module.plant.init.BlocksPlant;
 import net.dries007.tfc.module.plant.init.ItemsPlant;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -22,6 +23,7 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 
 public class ModulePlant extends ModuleBase {
 
+    public static final CreativeTabs FLORA_TAB = new CreativeTabsTFC.TFCCreativeTab("flora", "tfc:plant.cactus.barrel_cactus");
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModulePlant.class.getSimpleName());
 
@@ -30,7 +32,7 @@ public class ModulePlant extends ModuleBase {
     public ModulePlant() {
         super(0, MOD_ID);
 
-        this.setRegistry(new Registry(MOD_ID, CreativeTabsTFC.FLORA_TAB));
+        this.setRegistry(new Registry(MOD_ID, FLORA_TAB));
         this.enableAutoRegistry();
 
         //PACKET_SERVICE = this.enableNetwork();

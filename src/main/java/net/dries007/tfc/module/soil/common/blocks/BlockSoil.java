@@ -92,10 +92,7 @@ public abstract class BlockSoil extends TFCBlock implements ISoilBlock {
             }
         });
 
-
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                getMetaFromState(this.getBlockState().getBaseState()),
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0,
                 new ModelResourceLocation(getResourceLocation(),
                         "soiltype=" + type.toString()));
     }

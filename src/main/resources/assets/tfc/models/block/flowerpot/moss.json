@@ -2,7 +2,7 @@
   "credit": "Made with Blockbench",
   "ambientocclusion": false,
   "textures": {
-    "3": "tfc:blocks/plants/moss/moss_layer0",
+    "3": "tfc:blocks/plant/moss/moss_layer0",
     "particle": "blocks/flower_pot",
     "flowerpot": "blocks/flower_pot",
     "dirt": "tfc:blocks/soil/dirt/loam",

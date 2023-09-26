@@ -5,7 +5,7 @@
     "particle": "blocks/flower_pot",
     "flowerpot": "blocks/flower_pot",
     "dirt": "tfc:blocks/soil/dirt/loam",
-    "plant": "tfc:blocks/plants/sapphire_tower/sapphire_tower_0"
+    "plant": "tfc:blocks/plant/sapphire_tower/sapphire_tower_0"
   },
   "elements": [
     {

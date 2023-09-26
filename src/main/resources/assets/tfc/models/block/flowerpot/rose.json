@@ -5,7 +5,7 @@
     "particle": "blocks/flower_pot",
     "flowerpot": "blocks/flower_pot",
     "dirt": "tfc:blocks/soil/dirt/loam",
-    "plant": "tfc:blocks/plants/rose/item"
+    "plant": "tfc:blocks/plant/rose/item"
   },
   "elements": [
     {

@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:device/crucible",
+    "textures": {
+      "side": "tfc:blocks/device/crucible/side",
+      "top": "tfc:blocks/device/crucible/top",
+      "particle": "tfc:blocks/device/crucible/side"
+    }
+  },
+  "variants": {
+    "normal": {
+      "transform": "forge:default-block"
+    }
+  }
+}

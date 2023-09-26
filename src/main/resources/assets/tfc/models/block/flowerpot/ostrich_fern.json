@@ -5,7 +5,7 @@
     "particle": "blocks/flower_pot",
     "flowerpot": "blocks/flower_pot",
     "dirt": "tfc:blocks/soil/dirt/loam",
-    "plant": "tfc:blocks/plants/ostrich_fern/ostrich_fern_0"
+    "plant": "tfc:blocks/plant/ostrich_fern/ostrich_fern_0"
   },
   "elements": [
     {

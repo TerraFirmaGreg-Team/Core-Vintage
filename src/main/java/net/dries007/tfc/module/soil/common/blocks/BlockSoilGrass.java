@@ -287,8 +287,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
         });
 
         ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this),
-                getMetaFromState(getBlockState().getBaseState()),
+                Item.getItemFromBlock(this), 0,
                 new ModelResourceLocation(getResourceLocation(),
                         "east=false,north=false," +
                                 "soiltype=" + type.toString() + "," +

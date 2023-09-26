@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/strelitzia/strelitzia_0"
+      "plant": "tfc:blocks/plant/strelitzia/strelitzia_0"
     }
   },
   "variants": {

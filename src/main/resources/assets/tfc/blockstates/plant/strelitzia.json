@@ -1,0 +1,34 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "cross": "tfc:blocks/plant/strelitzia/0",
+          "particle": "tfc:blocks/plant/strelitzia/0"
+        }
+      },
+      "1": {
+        "textures": {
+          "cross": "tfc:blocks/plant/strelitzia/1",
+          "particle": "tfc:blocks/plant/strelitzia/1"
+        }
+      },
+      "2": {
+        "textures": {
+          "cross": "tfc:blocks/plant/strelitzia/2",
+          "particle": "tfc:blocks/plant/strelitzia/2"
+        }
+      },
+      "3": {
+        "textures": {
+          "cross": "tfc:blocks/plant/strelitzia/3",
+          "particle": "tfc:blocks/plant/strelitzia/3"
+        }
+      }
+    }
+  }
+}

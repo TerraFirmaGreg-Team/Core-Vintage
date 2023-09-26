@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfc:flowerpot/flower_pot_cross",
     "textures": {
-      "plant": "tfc:blocks/plants/sacred_datura/sacred_datura_2b"
+      "plant": "tfc:blocks/plant/sacred_datura/sacred_datura_2b"
     }
   },
   "variants": {

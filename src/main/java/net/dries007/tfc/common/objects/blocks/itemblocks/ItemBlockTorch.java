@@ -1,8 +1,9 @@
 package net.dries007.tfc.common.objects.blocks.itemblocks;
 
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.tileentities.TELogPile;
-import net.dries007.tfc.common.objects.tileentities.TEPitKiln;
+import net.dries007.tfc.module.devices.common.tile.TELogPile;
+import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
+import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -25,10 +26,10 @@ public class ItemBlockTorch extends ItemBlockBase {
         World world = entityItem.getEntityWorld();
         IBlockState state = entityItem.getEntityWorld().getBlockState(pos);
 
-        if (state.getBlock() == TFCBlocks.LOG_PILE || state.getBlock() == TFCBlocks.PIT_KILN) {
+        if (state.getBlock() == BlocksDevice.LOG_PILE || state.getBlock() == TFCBlocks.PIT_KILN) {
             int count = entityItem.getEntityData().getInteger("torchCount");
             if (count > 160) {
-                if (state.getBlock() == TFCBlocks.LOG_PILE) {
+                if (state.getBlock() == BlocksDevice.LOG_PILE) {
                     world.setBlockState(pos, state.withProperty(LIT, true));
                     TELogPile te = Helpers.getTE(world, pos, TELogPile.class);
                     if (te != null) {

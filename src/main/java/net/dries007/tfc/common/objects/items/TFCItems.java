@@ -11,6 +11,7 @@ import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.common.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.module.devices.common.items.ItemBloom;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;

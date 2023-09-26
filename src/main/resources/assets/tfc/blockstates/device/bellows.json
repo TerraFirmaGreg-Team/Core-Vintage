@@ -1,0 +1,29 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfc:device/bellows",
+    "textures": {
+      "back": "tfc:blocks/device/bellows/back",
+      "front": "tfc:blocks/device/bellows/front",
+      "side": "tfc:blocks/device/bellows/side",
+      "particle": "tfc:blocks/device/bellows/back"
+    }
+  },
+  "variants": {
+    "normal": {
+      "model": "tfc:device/bellows_inventory"
+    },
+    "facing": {
+      "south": {},
+      "west": {
+        "y": 90
+      },
+      "north": {
+        "y": 180
+      },
+      "east": {
+        "y": 270
+      }
+    }
+  }
+}

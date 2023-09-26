@@ -7,7 +7,6 @@ import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.module.devices.init.ItemsDevice;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
@@ -42,11 +41,6 @@ public class ModuleDevice extends ModuleBase {
     @Override
     public void onClientRegister(Registry registry) {
         BlocksDevice.onClientRegister(registry);
-    }
-
-    @Override
-    public void onClientInitializationEvent(FMLInitializationEvent event) {
-        super.onClientInitializationEvent(event);
-
+        ItemsDevice.onClientRegister(registry);
     }
 }

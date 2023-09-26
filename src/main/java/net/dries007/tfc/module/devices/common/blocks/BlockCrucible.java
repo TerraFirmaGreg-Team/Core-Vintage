@@ -9,7 +9,7 @@ import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.blocks.TFCBlock;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockCrucible;
+import net.dries007.tfc.module.devices.common.blocks.itemblocks.ItemBlockCrucible;
 import net.dries007.tfc.module.devices.common.tile.TECrucible;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.SoundType;

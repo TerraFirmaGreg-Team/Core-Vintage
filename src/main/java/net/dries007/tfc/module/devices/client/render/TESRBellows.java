@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
 public class TESRBellows extends TESRBase<TEBellows> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/blocks/devices/bellows/tesr.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/blocks/device/bellows/tesr.png");
 
     @Override
     public void render(TEBellows te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

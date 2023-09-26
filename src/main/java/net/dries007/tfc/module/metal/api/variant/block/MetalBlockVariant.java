@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.metal.api.variant.block;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.metal.api.type.MetalType;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -14,7 +14,7 @@ import static net.dries007.tfc.module.metal.StorageMetal.METAL_BLOCKS;
  * Класс, представляющий вариант блока металла.
  */
 public class MetalBlockVariant {
-    private static final Set<MetalBlockVariant> METAL_BLOCK_VARIANTS = new LinkedHashSet<>();
+    private static final Set<MetalBlockVariant> METAL_BLOCK_VARIANTS = new ObjectLinkedOpenHashSet<>();
 
     @Nonnull
     private final String name;

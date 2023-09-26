@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.soil.api.variant.block;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.soil.StorageSoil;
@@ -7,7 +8,6 @@ import net.dries007.tfc.module.soil.api.type.SoilType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -18,7 +18,7 @@ import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*
  */
 public class SoilBlockVariant {
 
-    private static final Set<SoilBlockVariant> SOIL_BLOCK_VARIANTS = new LinkedHashSet<>();
+    private static final Set<SoilBlockVariant> SOIL_BLOCK_VARIANTS = new ObjectLinkedOpenHashSet<>();
 
     @Nonnull
     private final String name;

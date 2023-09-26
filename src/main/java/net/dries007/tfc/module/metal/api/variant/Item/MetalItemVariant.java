@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.metal.api.variant.Item;
 
 import gregtech.api.unification.material.Material;
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -11,7 +11,7 @@ import java.util.function.BiFunction;
  * Класс, представляющий тип блока породы.
  */
 public class MetalItemVariant {
-    private static final Set<MetalItemVariant> METAL_ITEM_VARIANTS = new LinkedHashSet<>();
+    private static final Set<MetalItemVariant> METAL_ITEM_VARIANTS = new ObjectLinkedOpenHashSet<>();
 
     @Nonnull
     private final String name;

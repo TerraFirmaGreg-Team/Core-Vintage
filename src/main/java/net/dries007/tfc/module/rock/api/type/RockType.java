@@ -3,6 +3,7 @@ package net.dries007.tfc.module.rock.api.type;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.ore.StoneType;
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.category.RockCategory;
@@ -13,7 +14,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.RAW;
@@ -23,7 +23,7 @@ import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.R
  */
 public class RockType {
 
-    private static final Set<RockType> ROCK_TYPES = new LinkedHashSet<>();
+    private static final Set<RockType> ROCK_TYPES = new ObjectLinkedOpenHashSet<>();
     private static int counter = 16;
     @Nonnull
     private final String name;

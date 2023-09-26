@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.crop.api.type;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.module.crop.api.category.CropCategory;
@@ -18,7 +19,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -27,7 +27,7 @@ import java.util.function.Supplier;
 import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 
 public class CropType {
-    private static final Set<CropType> CROP_TYPES = new LinkedHashSet<>();
+    private static final Set<CropType> CROP_TYPES = new ObjectLinkedOpenHashSet<>();
 
     private final String name;
     private final CropCategory cropCategory;

@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.plant.api.type;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -10,7 +11,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
 
 import static net.dries007.tfc.module.plant.StoragePlant.PLANT_BLOCKS;
 import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.*;
@@ -20,7 +24,7 @@ import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 public class PlantType {
 
     // Список всех типов растений
-    private static final Set<PlantType> PLANT_TYPES = new LinkedHashSet<>();
+    private static final Set<PlantType> PLANT_TYPES = new ObjectLinkedOpenHashSet<>();
 
     // Имя растения
     @Nonnull

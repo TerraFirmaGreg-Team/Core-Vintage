@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.rock.api.variant.item;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.rock.api.type.RockType;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -14,7 +14,7 @@ import static net.dries007.tfc.module.rock.StorageRock.ROCK_ITEMS;
  * Класс, представляющий тип блока породы.
  */
 public class RockItemVariant {
-    private static final Set<RockItemVariant> ROCK_ITEM_VARIANTS = new LinkedHashSet<>();
+    private static final Set<RockItemVariant> ROCK_ITEM_VARIANTS = new ObjectLinkedOpenHashSet<>();
 
     @Nonnull
     private final String name;

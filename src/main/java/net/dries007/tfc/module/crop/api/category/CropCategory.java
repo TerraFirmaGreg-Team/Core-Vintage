@@ -1,14 +1,14 @@
 package net.dries007.tfc.module.crop.api.category;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class CropCategory {
 
-    private static final Set<CropCategory> CROP_CATEGORIES = new LinkedHashSet<>();
+    private static final Set<CropCategory> CROP_CATEGORIES = new ObjectLinkedOpenHashSet<>();
 
     private final String name;
     @Nonnull

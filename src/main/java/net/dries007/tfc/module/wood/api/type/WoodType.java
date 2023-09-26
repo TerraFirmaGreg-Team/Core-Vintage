@@ -1,14 +1,15 @@
 package net.dries007.tfc.module.wood.api.type;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+
 import javax.annotation.Nonnull;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
  * Класс Wood представляет тип дерева с определенными характеристиками.
  */
 public class WoodType {
-    private static final Set<WoodType> WOOD_TYPES = new LinkedHashSet<>();
+    private static final Set<WoodType> WOOD_TYPES = new ObjectLinkedOpenHashSet<>();
 
     @Nonnull
     private final String name;

@@ -1,11 +1,11 @@
 package net.dries007.tfc.module.rock.api.category;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.module.rock.api.type.RockType;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -13,7 +13,7 @@ import java.util.function.Predicate;
  * Класс, представляющий категорию породы.
  */
 public class RockCategory {
-    private static final Set<RockCategory> ROCK_CATEGORIES = new LinkedHashSet<>();
+    private static final Set<RockCategory> ROCK_CATEGORIES = new ObjectLinkedOpenHashSet<>();
 
     private final String name;
     private final boolean layer1;

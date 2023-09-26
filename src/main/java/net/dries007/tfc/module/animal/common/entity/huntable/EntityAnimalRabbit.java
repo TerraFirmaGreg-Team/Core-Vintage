@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.animal.common.entity.huntable;
 
-import net.dries007.tfc.module.animal.api.type.IHuntable;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.module.animal.common.entity.AnimalGroupingRules;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.animal.api.type.IHuntable;
+import net.dries007.tfc.module.animal.common.entity.AnimalGroupingRules;
 import net.dries007.tfc.module.animal.common.entity.EntityAnimalMammal;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;

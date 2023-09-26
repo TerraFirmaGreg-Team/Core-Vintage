@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.metal.api.type;
 
 import gregtech.api.unification.material.Material;
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class MetalType {
 
-    private static final Set<MetalType> METAL_TYPES = new LinkedHashSet<>();
+    private static final Set<MetalType> METAL_TYPES = new ObjectLinkedOpenHashSet<>();
 
     @Nonnull
     private final String name;

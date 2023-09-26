@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.crop.api.variant.item;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.crop.api.type.CropType;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -15,7 +15,7 @@ import static net.dries007.tfc.module.crop.StorageCrop.CROP_ITEMS;
  */
 public class CropItemVariant {
 
-    private static final Set<CropItemVariant> CROP_ITEM_VARIANTS = new LinkedHashSet<>();
+    private static final Set<CropItemVariant> CROP_ITEM_VARIANTS = new ObjectLinkedOpenHashSet<>();
 
     @Nonnull
     private final String name;

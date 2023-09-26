@@ -1,11 +1,11 @@
 package net.dries007.tfc.module.soil.api.variant.item;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.api.type.SoilType;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -14,7 +14,7 @@ import java.util.function.BiFunction;
  */
 public class SoilItemVariant {
 
-    private static final Set<SoilItemVariant> SOIL_ITEM_VARIANTS = new LinkedHashSet<>();
+    private static final Set<SoilItemVariant> SOIL_ITEM_VARIANTS = new ObjectLinkedOpenHashSet<>();
 
     @Nonnull
     private final String name;

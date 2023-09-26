@@ -2,12 +2,12 @@ package net.dries007.tfc.util;
 
 import com.google.common.collect.Lists;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.animal.api.type.ICreature;
-import net.dries007.tfc.module.animal.api.type.IHuntable;
-import net.dries007.tfc.module.animal.api.type.IPredator;
 import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.common.objects.tileentities.TEPlacedItemFlat;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.animal.api.type.ICreature;
+import net.dries007.tfc.module.animal.api.type.IHuntable;
+import net.dries007.tfc.module.animal.api.type.IPredator;
 import net.dries007.tfc.module.crop.common.blocks.BlockCropDead;
 import net.dries007.tfc.module.crop.common.items.ItemCropSeed;
 import net.dries007.tfc.module.crop.common.tile.TECropBase;

@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.animal.init;
 
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.module.animal.common.entity.EntitySeatOn;
 import net.dries007.tfc.module.animal.client.render.*;
+import net.dries007.tfc.module.animal.common.entity.EntitySeatOn;
 import net.dries007.tfc.module.animal.common.entity.huntable.*;
 import net.dries007.tfc.module.animal.common.entity.livestock.*;
 import net.dries007.tfc.module.animal.common.entity.predator.*;

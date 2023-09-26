@@ -2,11 +2,11 @@ package net.dries007.tfc.module.animal.common.entity.livestock;
 
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.module.animal.common.entity.AnimalGroupingRules;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.animal.api.type.IRidable;
+import net.dries007.tfc.module.animal.common.entity.AnimalGroupingRules;
 import net.dries007.tfc.module.animal.common.entity.TFCEntityAnimal;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;

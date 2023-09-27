@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.common.blocks;
 
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.common.blocks.BlockBase;
+import net.dries007.tfc.module.api.common.block.BlockBase;
 import net.dries007.tfc.module.animal.common.tiles.TENestBox;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;

@@ -2,7 +2,7 @@ package net.dries007.tfc.client.button;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;

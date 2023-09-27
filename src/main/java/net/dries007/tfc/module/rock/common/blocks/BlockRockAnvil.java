@@ -2,9 +2,9 @@ package net.dries007.tfc.module.rock.common.blocks;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.api.common.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.types.type.RockType;

@@ -3,7 +3,7 @@ package net.dries007.tfc.client.gui;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonPowderkegSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.common.objects.tileentities.TEPowderKeg;
+import net.dries007.tfc.module.core.common.tiles.TEPowderKeg;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;

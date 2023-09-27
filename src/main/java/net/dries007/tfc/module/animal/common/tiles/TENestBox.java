@@ -4,7 +4,7 @@ import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
-import net.dries007.tfc.common.objects.tileentities.TEInventory;
+import net.dries007.tfc.module.api.common.tile.TEInventory;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;

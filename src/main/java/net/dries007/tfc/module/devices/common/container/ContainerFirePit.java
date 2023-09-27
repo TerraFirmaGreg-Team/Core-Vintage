@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.devices.common.container;
 
-import net.dries007.tfc.common.objects.container.ContainerTE;
+import net.dries007.tfc.module.api.common.container.ContainerTE;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.module.devices.common.blocks.BlockFirePit;
 import net.dries007.tfc.module.devices.common.tile.TEFirePit;

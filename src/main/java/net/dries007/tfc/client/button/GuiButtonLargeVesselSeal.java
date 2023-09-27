@@ -1,8 +1,8 @@
 package net.dries007.tfc.client.button;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.client.gui.GuiLargeVessel;
-import net.dries007.tfc.common.objects.tileentities.TELargeVessel;
+import net.dries007.tfc.module.ceramic.client.gui.GuiLargeVessel;
+import net.dries007.tfc.module.ceramic.common.tiles.TELargeVessel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 

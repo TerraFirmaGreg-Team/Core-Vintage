@@ -7,7 +7,7 @@ import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientItemFood;
-import net.dries007.tfc.common.objects.items.ItemAnimalHide;
+import net.dries007.tfc.module.animal.common.items.ItemAnimalHide;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.module.core.init.BlocksCore;

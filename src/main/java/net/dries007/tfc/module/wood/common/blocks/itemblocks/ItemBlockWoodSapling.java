@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.wood.common.blocks.itemblocks;
 
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.api.common.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodSapling;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.EnumFacing;

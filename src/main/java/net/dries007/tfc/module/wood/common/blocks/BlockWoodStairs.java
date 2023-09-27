@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
 import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.api.common.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;

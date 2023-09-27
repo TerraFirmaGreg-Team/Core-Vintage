@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.common.objects.items.TFCItems;
-import net.dries007.tfc.common.objects.tileentities.TEPlacedItem;
+import net.dries007.tfc.module.core.common.tiles.TEPlacedItem;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.devices.common.blocks.BlockPitKiln;

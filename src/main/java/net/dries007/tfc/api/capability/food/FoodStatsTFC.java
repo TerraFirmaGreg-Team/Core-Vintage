@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.common.objects.effects.PotionEffectsTFC;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.init.PotionEffectsCore;
 import net.dries007.tfc.network.PacketFoodStatsReplace;
 import net.dries007.tfc.network.PacketFoodStatsUpdate;
 import net.dries007.tfc.util.Constants;
@@ -85,7 +85,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
             if (Constants.RNG.nextFloat() < 0.6) {
                 sourcePlayer.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 1800, 1));
                 if (Constants.RNG.nextFloat() < 0.15) {
-                    sourcePlayer.addPotionEffect(new PotionEffect(PotionEffectsTFC.FOOD_POISON, 1800, 0));
+                    sourcePlayer.addPotionEffect(new PotionEffect(PotionEffectsCore.FOOD_POISON, 1800, 0));
                 }
             }
         }
@@ -275,7 +275,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
                 addThirst(value);
                 // Salty drink effect
                 if (value < 0 && Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
-                    sourcePlayer.addPotionEffect(new PotionEffect(PotionEffectsTFC.THIRST, 600, 0));
+                    sourcePlayer.addPotionEffect(new PotionEffect(PotionEffectsCore.THIRST, 600, 0));
                 }
             }
             return true;

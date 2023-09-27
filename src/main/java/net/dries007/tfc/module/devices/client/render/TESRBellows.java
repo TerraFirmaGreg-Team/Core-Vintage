@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.devices.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.render.TESRBase;
+import net.dries007.tfc.module.api.client.render.TESRBase;
 import net.dries007.tfc.module.devices.common.tile.TEBellows;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

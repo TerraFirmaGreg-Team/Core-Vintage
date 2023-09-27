@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.common.entities.livestock;
 
-import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.common.objects.LootTablesTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.IAnimal;

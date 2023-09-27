@@ -2,8 +2,8 @@ package net.dries007.tfc.module.devices.common.tile;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.common.objects.tileentities.TEBase;
+import net.dries007.tfc.module.core.sound.TFCSounds;
+import net.dries007.tfc.module.api.common.tile.TEBase;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.devices.common.blocks.BlockCharcoalForge;
 import net.dries007.tfc.module.devices.common.blocks.BlockFirePit;

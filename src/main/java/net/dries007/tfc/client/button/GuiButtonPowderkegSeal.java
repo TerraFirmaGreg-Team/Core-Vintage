@@ -2,7 +2,7 @@ package net.dries007.tfc.client.button;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.client.gui.GuiPowderkeg;
-import net.dries007.tfc.common.objects.tileentities.TEPowderKeg;
+import net.dries007.tfc.module.core.common.tiles.TEPowderKeg;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types.food.variant.Item;
 
-import net.dries007.tfc.common.objects.items.food.ItemFoodIngredient;
+import net.dries007.tfc.module.food.common.items.ItemFoodIngredient;
 
 import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
 

@@ -6,9 +6,9 @@ import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.common.objects.effects.PotionEffectsTFC;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.init.PotionEffectsCore;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.init.MobEffects;
@@ -42,7 +42,7 @@ public class DrinkableHandler {
                     if (player.getFoodStats() instanceof FoodStatsTFC) {
                         ((FoodStatsTFC) player.getFoodStats()).addThirst(-10);
                         if (Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
-                            player.addPotionEffect(new PotionEffect(PotionEffectsTFC.THIRST, 600, 0));
+                            player.addPotionEffect(new PotionEffect(PotionEffectsCore.THIRST, 600, 0));
                         }
                     }
                 });

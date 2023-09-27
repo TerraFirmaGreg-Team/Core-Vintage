@@ -1,6 +1,7 @@
 package net.dries007.tfc.module.core.common.blocks;
 
-import net.dries007.tfc.common.objects.tileentities.TEPlacedItem;
+import net.dries007.tfc.module.api.common.block.BlockBase;
+import net.dries007.tfc.module.core.common.tiles.TEPlacedItem;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;

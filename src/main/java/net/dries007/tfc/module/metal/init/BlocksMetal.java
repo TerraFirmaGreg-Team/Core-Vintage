@@ -3,7 +3,7 @@ package net.dries007.tfc.module.metal.init;
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.RegistryHelper;
-import net.dries007.tfc.common.objects.tileentities.TEMetalSheet;
+import net.dries007.tfc.module.metal.common.tiles.TEMetalSheet;
 import net.dries007.tfc.module.metal.StorageMetal;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
 import net.dries007.tfc.module.metal.client.render.TESRMetalAnvil;

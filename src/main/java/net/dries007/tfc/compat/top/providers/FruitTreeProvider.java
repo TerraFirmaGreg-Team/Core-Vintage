@@ -7,7 +7,7 @@
 //import net.dries007.tfc.TerraFirmaCraft;
 //import net.dries007.tfc.api.types.tree.type.TreeType;
 //import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
-//import net.dries007.tfc.common.objects.tileentities.TETickCounter;
+//import net.dries007.tfc.module.core.common.tiles.TETickCounter;
 //import net.dries007.tfc.config.ConfigTFC;
 //import net.dries007.tfc.util.Helpers;
 //import net.dries007.tfc.util.calendar.CalendarTFC;

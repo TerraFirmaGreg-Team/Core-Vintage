@@ -9,7 +9,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.LootTablesTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.effects.PotionEffectsTFC;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
@@ -17,6 +16,7 @@ import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.animal.api.type.IRidable;
 import net.dries007.tfc.module.animal.common.entities.AnimalGroupingRules;
 import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
+import net.dries007.tfc.module.core.init.PotionEffectsCore;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -425,7 +425,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
                 }
                 if (hugeHeavyCount >= 2) {
                     // Does not work when ridden, mojang bug: https://bugs.mojang.com/browse/MC-121788
-                    this.addPotionEffect(new PotionEffect(PotionEffectsTFC.OVERBURDENED, 25, 125, false, false));
+                    this.addPotionEffect(new PotionEffect(PotionEffectsCore.OVERBURDENED, 25, 125, false, false));
                 }
             }
             if (this.isFertilized() && CalendarTFC.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {

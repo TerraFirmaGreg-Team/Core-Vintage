@@ -8,9 +8,11 @@ import net.dries007.tfc.api.types.food.type.FoodType;
 import net.dries007.tfc.api.types.food.variant.Item.FoodItemVariant;
 import net.dries007.tfc.api.types.food.variant.Item.IFoodItem;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.common.objects.items.ceramics.ItemMold;
-import net.dries007.tfc.common.objects.items.ceramics.ItemUnfiredMold;
+import net.dries007.tfc.module.ceramic.common.items.ItemMold;
+import net.dries007.tfc.module.ceramic.common.items.ItemUnfiredMold;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.module.api.common.item.ItemBase;
+import net.dries007.tfc.module.core.common.items.*;
 import net.dries007.tfc.module.devices.common.items.ItemBloom;
 import net.minecraft.item.Item;
 

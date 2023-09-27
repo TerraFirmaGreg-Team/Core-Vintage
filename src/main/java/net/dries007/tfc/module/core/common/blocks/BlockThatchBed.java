@@ -2,7 +2,7 @@ package net.dries007.tfc.module.core.common.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.util.IItemProvider;
-import net.dries007.tfc.common.objects.items.ItemAnimalHide;
+import net.dries007.tfc.module.animal.common.items.ItemAnimalHide;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;

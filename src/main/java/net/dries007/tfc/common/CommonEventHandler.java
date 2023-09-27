@@ -24,16 +24,16 @@ import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidTFC;
-import net.dries007.tfc.common.objects.container.CapabilityContainerListener;
-import net.dries007.tfc.common.objects.effects.PotionEffectsTFC;
-import net.dries007.tfc.common.objects.items.ItemQuiver;
+import net.dries007.tfc.module.core.common.container.CapabilityContainerListener;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.api.type.ICreature;
 import net.dries007.tfc.module.animal.api.type.IPredator;
+import net.dries007.tfc.module.core.common.blocks.fluid.BlockFluidBase;
+import net.dries007.tfc.module.core.init.PotionEffectsCore;
+import net.dries007.tfc.module.core.common.items.ItemQuiver;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.devices.common.blocks.BlockQuern;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;
@@ -112,7 +112,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -596,9 +595,9 @@ public final class CommonEventHandler {
                 }
             }
 
-            if (event.getEntity() instanceof EntitySquid && world.getBlockState(pos).getBlock() instanceof BlockFluidTFC) {
+            if (event.getEntity() instanceof EntitySquid && world.getBlockState(pos).getBlock() instanceof BlockFluidBase) {
                 // Prevents squids spawning outside of salt water (eg: oceans)
-                Fluid fluid = ((BlockFluidTFC) world.getBlockState(pos).getBlock()).getFluid();
+                Fluid fluid = ((BlockFluidBase) world.getBlockState(pos).getBlock()).getFluid();
                 if (FluidRegistry.getFluid("salt_water") != fluid) {
                     event.setResult(Event.Result.DENY);
                 }
@@ -734,8 +733,8 @@ public final class CommonEventHandler {
                 float rand = Constants.RNG.nextFloat();
                 BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos((int) entityItem.posX, (int) entityItem.posY, (int) entityItem.posZ);
                 IBlockState state;
-                if ((state = entityItem.world.getBlockState(pos)).getBlock() instanceof BlockFluidBase) {
-                    int fluidTemp = ((BlockFluidBase) state.getBlock()).getFluid().getTemperature();
+                if ((state = entityItem.world.getBlockState(pos)).getBlock() instanceof net.minecraftforge.fluids.BlockFluidBase) {
+                    int fluidTemp = ((net.minecraftforge.fluids.BlockFluidBase) state.getBlock()).getFluid().getTemperature();
                     if (fluidTemp <= 300) {
                         heatCap.setTemperature(Math.max(0, Math.min(itemTemp, itemTemp - 350 + fluidTemp)));
                         entityItem.world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 0.8f + rand * 0.4f);
@@ -880,7 +879,7 @@ public final class CommonEventHandler {
             }
             if (hugeHeavyCount >= 2) {
                 // Player is barely able to move
-                event.player.addPotionEffect(new PotionEffect(PotionEffectsTFC.OVERBURDENED, 25, 125, false, false));
+                event.player.addPotionEffect(new PotionEffect(PotionEffectsCore.OVERBURDENED, 25, 125, false, false));
             }
         }
 

@@ -3,7 +3,7 @@ package net.dries007.tfc.common.objects.items.ceramics;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.common.objects.items.TFCItem;
+import net.dries007.tfc.common.objects.items.ItemBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemPottery extends TFCItem {
+public class ItemPottery extends ItemBase {
     private final Size size;
     private final Weight weight;
 

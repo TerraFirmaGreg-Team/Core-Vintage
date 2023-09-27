@@ -2,7 +2,7 @@ package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalWildebeest;
-import net.dries007.tfc.module.animal.common.entity.huntable.EntityAnimalWildebeest;
+import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalWildebeest;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

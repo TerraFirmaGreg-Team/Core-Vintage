@@ -2,11 +2,11 @@ package net.dries007.tfc.module.rock;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
-import net.dries007.tfc.module.rock.api.variant.item.IRockItem;
-import net.dries007.tfc.module.rock.api.variant.item.RockItemVariant;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
+import net.dries007.tfc.module.rock.api.types.variant.item.IRockItem;
+import net.dries007.tfc.module.rock.api.types.variant.item.RockItemVariant;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 

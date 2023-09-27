@@ -2,9 +2,9 @@ package net.dries007.tfc.module.rock.common.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.module.rock.StorageRock;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
-import net.dries007.tfc.module.rock.api.variant.item.RockItemVariants;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
+import net.dries007.tfc.module.rock.api.types.variant.item.RockItemVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;

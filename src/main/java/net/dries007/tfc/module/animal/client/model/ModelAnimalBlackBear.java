@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.client.model;
 
 import net.dries007.tfc.module.animal.api.type.IAnimal;
-import net.dries007.tfc.module.animal.common.entity.predator.EntityAnimalBlackBear;
+import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalBlackBear;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

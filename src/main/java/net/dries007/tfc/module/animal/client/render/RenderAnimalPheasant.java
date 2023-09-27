@@ -2,8 +2,8 @@ package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalPheasant;
-import net.dries007.tfc.module.animal.common.entity.TFCEntityAnimal;
-import net.dries007.tfc.module.animal.common.entity.huntable.EntityAnimalPheasant;
+import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
+import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalPheasant;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

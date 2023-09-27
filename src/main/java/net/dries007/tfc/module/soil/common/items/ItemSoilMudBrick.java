@@ -2,7 +2,7 @@ package net.dries007.tfc.module.soil.common.items;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.common.objects.items.TFCItem;
+import net.dries007.tfc.common.objects.items.ItemBase;
 import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.module.soil.api.variant.item.ISoilItem;
 import net.dries007.tfc.module.soil.api.variant.item.SoilItemVariant;
@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemSoilMudBrick extends TFCItem implements ISoilItem {
+public class ItemSoilMudBrick extends ItemBase implements ISoilItem {
     private final SoilItemVariant variant;
     private final SoilType type;
 

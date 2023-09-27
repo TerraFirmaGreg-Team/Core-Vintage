@@ -38,7 +38,7 @@ import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.devices.common.blocks.BlockQuern;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;
 import net.dries007.tfc.module.rock.StorageRock;
-import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.common.blocks.BlockRockAnvil;
 import net.dries007.tfc.module.rock.common.blocks.BlockRockRaw;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodLog;
@@ -122,9 +122,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import static net.dries007.tfc.module.rock.api.type.RockTypes.BASALT;
-import static net.dries007.tfc.module.rock.api.type.RockTypes.RHYOLITE;
-import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.module.rock.api.types.type.RockTypes.BASALT;
+import static net.dries007.tfc.module.rock.api.types.type.RockTypes.RHYOLITE;
+import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.RAW;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)

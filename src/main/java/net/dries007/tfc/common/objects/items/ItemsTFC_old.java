@@ -78,15 +78,6 @@ public final class ItemsTFC_old {
     @GameRegistry.ObjectHolder("metal/bucket/red_steel")
     public static final ItemMetalBucket RED_STEEL_BUCKET = getNull();
 
-    @GameRegistry.ObjectHolder("dye/black")
-    public static final ItemMisc DYE_BLACK = getNull();
-    @GameRegistry.ObjectHolder("dye/blue")
-    public static final ItemMisc DYE_BLUE = getNull();
-    @GameRegistry.ObjectHolder("dye/brown")
-    public static final ItemMisc DYE_BROWN = getNull();
-    @GameRegistry.ObjectHolder("dye/white")
-    public static final ItemMisc DYE_WHITE = getNull();
-
     @GameRegistry.ObjectHolder("ceramics/unfired/clay_brick")
     public static final ItemPottery UNFIRED_BRICK = getNull();
 

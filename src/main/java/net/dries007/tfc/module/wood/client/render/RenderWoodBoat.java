@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.wood.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.wood.common.entity.EntityWoodBoat;
+import net.dries007.tfc.module.wood.common.entities.EntityWoodBoat;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.model.IMultipassModel;
 import net.minecraft.client.model.ModelBase;

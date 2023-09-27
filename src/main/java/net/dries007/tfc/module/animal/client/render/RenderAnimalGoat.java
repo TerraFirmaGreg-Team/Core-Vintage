@@ -2,7 +2,7 @@ package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalGoat;
-import net.dries007.tfc.module.animal.common.entity.livestock.EntityAnimalGoat;
+import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalGoat;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;

@@ -2,8 +2,8 @@ package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalYak;
-import net.dries007.tfc.module.animal.common.entity.TFCEntityAnimal;
-import net.dries007.tfc.module.animal.common.entity.livestock.EntityAnimalYak;
+import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
+import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalYak;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

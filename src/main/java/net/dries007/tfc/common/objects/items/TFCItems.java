@@ -33,23 +33,23 @@ public class TFCItems {
     public static final LinkedList<Item> ITEMS = new LinkedList<>();
 
     public static ItemMisc STRAW;
-    public static Item HANDSTONE;
-    public static Item WROUGHT_IRON_GRILL;
-    public static Item GLUE;
-    public static Item SPINDLE;
-    public static TFCItem MORTAR;
-    public static TFCItem HALTER;
-    public static Item STICK_BUNCH;
-    public static Item STICK_BUNDLE;
-    public static Item FIRE_CLAY;
-    public static Item WOOD_ASH;
-    public static Item FIRESTARTER;
-    public static Item GLASS_SHARD;
-    public static Item ALABASTER_BRICK;
+    public static ItemMisc HANDSTONE;
+    public static ItemMisc WROUGHT_IRON_GRILL;
+    public static ItemMisc GLUE;
+    public static ItemMisc SPINDLE;
+    public static ItemBase MORTAR;
+    public static ItemBase HALTER;
+    public static ItemMisc STICK_BUNCH;
+    public static ItemMisc STICK_BUNDLE;
+    public static ItemMisc WOOD_ASH;
+    public static ItemFireStarter FIRESTARTER;
+    public static ItemMisc GLASS_SHARD;
+    public static ItemMisc ALABASTER_BRICK;
     public static ItemQuiver QUIVER;
     public static ItemDebug WAND;
     public static ItemBloom UNREFINED_BLOOM;
     public static ItemBloom REFINED_BLOOM;
+    public static ItemMisc FIRE_CLAY;
 
     private TFCItems() {
     }
@@ -80,10 +80,10 @@ public class TFCItems {
         ITEMS.add(HALTER = new ItemMisc("halter", Size.SMALL, Weight.LIGHT, "halter"));
         ITEMS.add(STICK_BUNCH = new ItemMisc("stick_bunch", Size.NORMAL, Weight.LIGHT, MISC_TAB));
         ITEMS.add(STICK_BUNDLE = new ItemMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, MISC_TAB, "log_wood", "stick_bundle"));
-        ITEMS.add(FIRE_CLAY = new ItemMisc("ceramics/fire_clay", Size.VERY_SMALL, Weight.VERY_LIGHT, "fire_clay"));
         ITEMS.add(WOOD_ASH = new ItemMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT, MISC_TAB, "slimeball", "glue"));
         ITEMS.add(GLASS_SHARD = new ItemMisc("glass_shard", Size.VERY_SMALL, Weight.VERY_LIGHT));
         ITEMS.add(ALABASTER_BRICK = new ItemMisc("alabaster_brick", Size.VERY_SMALL, Weight.LIGHT));
+        ITEMS.add(FIRE_CLAY = new ItemMisc("ceramics/fire_clay", Size.VERY_SMALL, Weight.VERY_LIGHT, "fire_clay", "ingotFireClay"));
 
 
         //==== ItemCraftingTool ======================================================================================//

@@ -3,10 +3,10 @@ package net.dries007.tfc.module.rock.common.items;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.items.TFCItem;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.item.IRockItem;
-import net.dries007.tfc.module.rock.api.variant.item.RockItemVariant;
+import net.dries007.tfc.common.objects.items.ItemBase;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.rock.api.types.variant.item.IRockItem;
+import net.dries007.tfc.module.rock.api.types.variant.item.RockItemVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemRockLoose extends TFCItem implements IRockItem {
+public class ItemRockLoose extends ItemBase implements IRockItem {
 
     private final RockItemVariant variant;
     private final RockType type;

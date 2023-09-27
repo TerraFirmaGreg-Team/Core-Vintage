@@ -16,12 +16,6 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
-import net.dries007.tfc.api.recipes.*;
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
-import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.types.bush.BushModule;
 import net.dries007.tfc.api.types.drinkable.DrinkableHandler;
 import net.dries007.tfc.api.types.food.FoodModule;
@@ -37,7 +31,6 @@ import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
 import net.dries007.tfc.common.objects.items.ItemGlassBottleTFC;
 import net.dries007.tfc.common.objects.items.TFCItems;
-import net.dries007.tfc.common.objects.recipes.RecipeHandler;
 import net.dries007.tfc.compat.dynamictrees.SeasonManager;
 import net.dries007.tfc.compat.dynamictrees.TFCRootDecay;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
@@ -45,6 +38,7 @@ import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
 import net.dries007.tfc.compat.top.TOPIntegration;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -61,9 +55,7 @@ import net.minecraft.item.ItemSnow;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.dedicated.PropertyManager;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IThreadListener;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -76,14 +68,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-import net.minecraftforge.registries.RegistryBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import static net.dries007.tfc.Tags.MOD_ID;
-import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -97,18 +86,10 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
-        newRegistry(ALLOY_RECIPE, AlloyRecipe.class);
-        newRegistry(KNAPPING_RECIPE, KnappingRecipe.class);
-        newRegistry(ANVIL_RECIPE, AnvilRecipe.class);
-        newRegistry(WELDING_RECIPE, WeldingRecipe.class);
-        newRegistry(HEAT_RECIPE, HeatRecipe.class);
-        newRegistry(BARREL_RECIPE, BarrelRecipe.class);
-        newRegistry(LOOM_RECIPE, LoomRecipe.class);
-        newRegistry(QUERN_RECIPE, QuernRecipe.class);
-        newRegistry(CHISEL_RECIPE, ChiselRecipe.class);
-        newRegistry(BLOOMERY_RECIPE, BloomeryRecipe.class);
-        newRegistry(BLAST_FURNACE_RECIPE, BlastFurnaceRecipe.class);
+        RegistryCore.createRegistries(event);
+
     }
+
 
     @SubscribeEvent
     public static void biomeHandler(BiomeSuitabilityEvent event) {
@@ -190,16 +171,6 @@ public class CommonProxy {
 
     }
 
-    /**
-     * Регистрирует TE.
-     */
-    private static <T extends TileEntity> void registerTE(Class<T> te, String name) {
-        TileEntity.register(MOD_ID + ":" + name, te);
-    }
-
-    private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass) {
-        IForgeRegistry<T> reg = new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
-    }
 
     public void onPreInit(FMLPreInitializationEvent event) {
         //TreeModule.preInit();
@@ -265,7 +236,7 @@ public class CommonProxy {
         CapabilityMetalItem.init();
         CapabilityForgeable.init();
 
-        RecipeHandler.init();
+        //RecipeHandler.init();
     }
 
     public void onPostInit(FMLPostInitializationEvent event) {

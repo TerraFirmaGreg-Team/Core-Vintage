@@ -5,7 +5,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;

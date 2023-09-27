@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.client.model;
 
-import net.dries007.tfc.module.animal.common.entity.TFCEntityAnimal;
-import net.dries007.tfc.module.animal.common.entity.livestock.EntityAnimalZebu;
+import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
+import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalZebu;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.metal.client.render;
 
-import net.dries007.tfc.module.metal.common.tile.TEMetalAnvil;
+import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -11,7 +11,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.module.metal.common.tile.TEMetalAnvil.*;
+import static net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil.*;
 
 public class TESRMetalAnvil extends TileEntitySpecialRenderer<TEMetalAnvil> {
     @Override

@@ -8,7 +8,7 @@ import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.client.util.FluidSpriteCache;
 import net.dries007.tfc.module.wood.client.button.GuiButtonBarrelSeal;
 import net.dries007.tfc.module.wood.common.container.ContainerWoodBarrel;
-import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
+import net.dries007.tfc.module.wood.common.tiles.TEWoodBarrel;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.Minecraft;

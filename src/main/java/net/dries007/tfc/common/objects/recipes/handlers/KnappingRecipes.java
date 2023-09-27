@@ -1,17 +1,13 @@
 package net.dries007.tfc.common.objects.recipes.handlers;
 
-import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
-import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
-import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -22,23 +18,7 @@ public class KnappingRecipes {
         var registry = TFCRegistries.KNAPPING;
 
         /* ROCK ITEMS */
-        registry.registerAll(
-                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("toolheadknife_head_1"),
-                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("toolheadknife_head_2"),
-                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("toolheadknife_head_3"),
-                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName("toolheadhoe_head_1"),
-                new KnappingRecipeStone(OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName("toolheadhoe_head_2")
-        );
 
-        for (var orePrefix : OrePrefix.values()) {
-            var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
-
-            if (extendedOrePrefix.getRockKnappingPattern() != null) {
-                var amount = orePrefix == OrePrefix.ingot ? 2 : 1;
-
-                registry.register(new KnappingRecipeStone(OreDictUnifier.get(orePrefix, Materials.Stone, amount), extendedOrePrefix.getRockKnappingPattern()).setRegistryName(orePrefix.name.toLowerCase() + "_head"));
-            }
-        }
 
         /* CLAY ITEMS */
         for (var orePrefix : OrePrefix.values()) {

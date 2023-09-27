@@ -5,11 +5,11 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
-import net.dries007.tfc.module.metal.common.tile.TEMetalAnvil;
+import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
 import net.dries007.tfc.module.rock.StorageRock;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
-import net.dries007.tfc.module.rock.api.variant.item.RockItemVariants;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
+import net.dries007.tfc.module.rock.api.types.variant.item.RockItemVariants;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +35,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.RAW;
 
 @ParametersAreNonnullByDefault
 public class BlockRockAnvil extends BlockRock {

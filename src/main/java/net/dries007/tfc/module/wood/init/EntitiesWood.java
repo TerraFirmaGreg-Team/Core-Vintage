@@ -2,7 +2,7 @@ package net.dries007.tfc.module.wood.init;
 
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import net.dries007.tfc.module.wood.client.render.RenderWoodBoat;
-import net.dries007.tfc.module.wood.common.entity.EntityWoodBoat;
+import net.dries007.tfc.module.wood.common.entities.EntityWoodBoat;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;

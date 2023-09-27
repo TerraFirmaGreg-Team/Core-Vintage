@@ -2,10 +2,10 @@ package net.dries007.tfc.module.animal.init;
 
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import net.dries007.tfc.module.animal.client.render.*;
-import net.dries007.tfc.module.animal.common.entity.EntitySeatOn;
-import net.dries007.tfc.module.animal.common.entity.huntable.*;
-import net.dries007.tfc.module.animal.common.entity.livestock.*;
-import net.dries007.tfc.module.animal.common.entity.predator.*;
+import net.dries007.tfc.module.animal.common.entities.EntitySeatOn;
+import net.dries007.tfc.module.animal.common.entities.huntable.*;
+import net.dries007.tfc.module.animal.common.entities.livestock.*;
+import net.dries007.tfc.module.animal.common.entities.predator.*;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;

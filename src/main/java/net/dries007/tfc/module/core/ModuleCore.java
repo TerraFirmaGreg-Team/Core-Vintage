@@ -31,6 +31,12 @@ public class ModuleCore extends ModuleBase {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+//    @SubscribeEvent
+//    public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
+//        RegistryCore.createRegistries(event);
+//
+//    }
+
     @Override
     public void onRegister(Registry registry) {
 

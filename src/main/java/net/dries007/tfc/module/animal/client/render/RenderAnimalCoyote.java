@@ -2,7 +2,7 @@ package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalCoyote;
-import net.dries007.tfc.module.animal.common.entity.predator.EntityAnimalCoyote;
+import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalCoyote;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

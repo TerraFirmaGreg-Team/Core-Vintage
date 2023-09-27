@@ -1,7 +1,7 @@
 package net.dries007.tfc.commands;
 
 import net.dries007.tfc.module.plant.common.blocks.BlockPlant;
-import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.BlockStaticLiquid;

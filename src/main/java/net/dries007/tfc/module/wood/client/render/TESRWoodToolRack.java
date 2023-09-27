@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.wood.client.render;
 
-import net.dries007.tfc.module.wood.common.tile.TEWoodToolRack;
+import net.dries007.tfc.module.wood.common.tiles.TEWoodToolRack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;

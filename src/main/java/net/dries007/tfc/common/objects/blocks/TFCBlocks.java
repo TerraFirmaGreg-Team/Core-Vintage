@@ -9,8 +9,8 @@ import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidHotWater;
 import net.dries007.tfc.common.objects.blocks.fluid.BlockFluidWater;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeRootyMimic;
-import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
+import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
 import net.dries007.tfc.module.rock.common.blocks.BlockAlabaster;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeat;
@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.Map;
 
-import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.*;
+import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.*;
 import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*;
 import static net.minecraft.block.material.Material.WATER;
 
@@ -55,15 +55,15 @@ public class TFCBlocks {
 
         //==== Alabaster =============================================================================================//
 
-        for (var variant : new RockBlockVariant[]{RAW, BRICKS, SMOOTH}) {
-            for (var color : EnumColor.values()) {
-                var alabasterBlock = new BlockAlabaster(variant, color);
-
-                if (ALABASTER_BLOCKS.put(new Pair<>(variant, color), alabasterBlock) != null)
-                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", color, variant));
-                BLOCKS.add(alabasterBlock);
-            }
-        }
+//        for (var variant : new RockBlockVariant[]{RAW, BRICKS, SMOOTH}) {
+//            for (var color : EnumColor.values()) {
+//                var alabasterBlock = new BlockAlabaster(variant, color);
+//
+//                if (ALABASTER_BLOCKS.put(new Pair<>(variant, color), alabasterBlock) != null)
+//                    throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", color, variant));
+//                BLOCKS.add(alabasterBlock);
+//            }
+//        }
 
         //==== Groundcover ===========================================================================================//
 

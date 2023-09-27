@@ -5,11 +5,11 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.util.EnumColor;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.module.rock.StorageRock;
-import net.dries007.tfc.module.rock.api.type.RockType;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
 
 import static net.dries007.tfc.api.util.EnumColor.COLORLESS;
-import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.RAW;
-import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.SMOOTH;
+import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.SMOOTH;
 
 
 public class ChiselRecipes {

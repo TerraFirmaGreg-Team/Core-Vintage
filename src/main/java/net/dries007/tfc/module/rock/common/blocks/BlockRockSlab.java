@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
 import net.dries007.tfc.module.rock.StorageRock;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
 import net.dries007.tfc.module.rock.common.blocks.itemblock.ItemRockSlab;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.*;
+import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.*;
 
 public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);

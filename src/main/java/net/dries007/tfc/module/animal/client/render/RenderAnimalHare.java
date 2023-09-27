@@ -2,7 +2,7 @@ package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalHare;
-import net.dries007.tfc.module.animal.common.entity.huntable.EntityAnimalHare;
+import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalHare;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

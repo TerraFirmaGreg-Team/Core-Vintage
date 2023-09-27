@@ -2,7 +2,7 @@ package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalLion;
-import net.dries007.tfc.module.animal.common.entity.predator.EntityAnimalLion;
+import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalLion;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

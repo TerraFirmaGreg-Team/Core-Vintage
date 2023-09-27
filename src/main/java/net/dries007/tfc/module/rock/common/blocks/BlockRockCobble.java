@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 public class BlockRockCobble extends BlockRockFallable {

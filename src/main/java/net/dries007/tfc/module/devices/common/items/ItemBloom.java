@@ -10,7 +10,7 @@ import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.common.objects.items.TFCItem;
+import net.dries007.tfc.common.objects.items.ItemBase;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.minecraft.client.resources.I18n;
@@ -31,7 +31,7 @@ import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 
 
 @ParametersAreNonnullByDefault
-public class ItemBloom extends TFCItem implements IMaterialItem {
+public class ItemBloom extends ItemBase implements IMaterialItem {
     private final boolean meltable;
 
     public ItemBloom(boolean meltable) {

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.model;
 
-import net.dries007.tfc.module.animal.common.entity.livestock.EntityAnimalSheep;
+import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalSheep;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

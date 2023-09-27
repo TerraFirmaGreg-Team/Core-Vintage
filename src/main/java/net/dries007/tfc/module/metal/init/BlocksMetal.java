@@ -7,7 +7,7 @@ import net.dries007.tfc.common.objects.tileentities.TEMetalSheet;
 import net.dries007.tfc.module.metal.StorageMetal;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
 import net.dries007.tfc.module.metal.client.render.TESRMetalAnvil;
-import net.dries007.tfc.module.metal.common.tile.TEMetalAnvil;
+import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemBlock;

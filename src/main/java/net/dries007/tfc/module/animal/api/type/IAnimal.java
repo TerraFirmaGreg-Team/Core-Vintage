@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.api.type;
 
-import net.dries007.tfc.module.animal.common.entity.AnimalFood;
+import net.dries007.tfc.module.animal.common.entities.AnimalFood;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;

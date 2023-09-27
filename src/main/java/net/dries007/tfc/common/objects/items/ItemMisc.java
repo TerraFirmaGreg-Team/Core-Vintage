@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 
 
-public class ItemMisc extends TFCItem implements IItemSize {
+public class ItemMisc extends ItemBase implements IItemSize {
     private final String name;
     private final Size size;
     private final Weight weight;

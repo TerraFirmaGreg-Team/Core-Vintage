@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.model;
 
-import net.dries007.tfc.module.animal.common.entity.livestock.EntityAnimalQuail;
+import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalQuail;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

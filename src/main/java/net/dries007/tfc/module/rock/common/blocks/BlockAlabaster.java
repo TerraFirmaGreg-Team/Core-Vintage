@@ -8,7 +8,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.EnumColor;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.module.core.common.blocks.BlockBase;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
+import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

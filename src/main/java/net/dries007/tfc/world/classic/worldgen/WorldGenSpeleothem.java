@@ -1,8 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.module.rock.StorageRock;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.common.blocks.BlockRockSpeleothem;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.minecraft.block.Block;
@@ -17,8 +17,8 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.RAW;
-import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.SPELEOTHEM;
+import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.RAW;
+import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.SPELEOTHEM;
 
 public class WorldGenSpeleothem implements IWorldGenerator {
 

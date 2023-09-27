@@ -2,8 +2,8 @@ package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalMuskOxBody;
-import net.dries007.tfc.module.animal.common.entity.TFCEntityAnimal;
-import net.dries007.tfc.module.animal.common.entity.livestock.EntityAnimalMuskOx;
+import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
+import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalMuskOx;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

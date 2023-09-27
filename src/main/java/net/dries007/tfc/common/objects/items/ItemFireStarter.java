@@ -41,7 +41,7 @@ import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemFireStarter extends TFCItem {
+public class ItemFireStarter extends ItemBase {
     public ItemFireStarter() {
 
         setRegistryName(Tags.MOD_ID, "firestarter");

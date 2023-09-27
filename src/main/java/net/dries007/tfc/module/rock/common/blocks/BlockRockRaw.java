@@ -4,8 +4,8 @@ import gregtech.common.items.ToolItems;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.rock.StorageRock;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
 import net.dries007.tfc.util.GemsFromRawRocks;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -25,8 +25,8 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.ANVIL;
-import static net.dries007.tfc.module.rock.api.variant.block.RockBlockVariants.COBBLE;
+import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.ANVIL;
+import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.COBBLE;
 
 public class BlockRockRaw extends BlockRock {
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */

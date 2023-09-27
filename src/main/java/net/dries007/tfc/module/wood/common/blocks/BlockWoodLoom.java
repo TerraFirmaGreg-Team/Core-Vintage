@@ -9,7 +9,7 @@ import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.module.wood.common.tile.TEWoodLoom;
+import net.dries007.tfc.module.wood.common.tiles.TEWoodLoom;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;

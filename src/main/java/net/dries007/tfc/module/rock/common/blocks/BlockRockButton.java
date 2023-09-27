@@ -2,9 +2,9 @@ package net.dries007.tfc.module.rock.common.blocks;
 
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
-import net.dries007.tfc.module.rock.api.type.RockType;
-import net.dries007.tfc.module.rock.api.variant.block.IRockBlock;
-import net.dries007.tfc.module.rock.api.variant.block.RockBlockVariant;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.SoundType;

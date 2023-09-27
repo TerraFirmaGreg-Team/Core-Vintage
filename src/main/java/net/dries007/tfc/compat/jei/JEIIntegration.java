@@ -40,7 +40,7 @@ import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;
 import net.dries007.tfc.module.rock.StorageRock;
-import net.dries007.tfc.module.rock.api.type.RockType;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
 import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants;
 import net.dries007.tfc.module.wood.client.gui.GuiWoodBarrel;
@@ -58,7 +58,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.module.rock.api.variant.item.RockItemVariants.LOOSE;
+import static net.dries007.tfc.module.rock.api.types.variant.item.RockItemVariants.LOOSE;
 
 @ParametersAreNonnullByDefault
 @JEIPlugin
@@ -299,7 +299,7 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(clayknapRecipes, KNAP_CLAY_UID);
 
         // Fire Clay Knapping
-        registry.addRecipeCatalyst(new ItemStack(TFCItems.FIRE_CLAY), KNAP_FIRECLAY_UID);
+        registry.addRecipeCatalyst(TFCItems.FIRE_CLAY, KNAP_FIRECLAY_UID);
 
         var fireclayknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
                 .filter(recipe -> recipe.getType() == KnappingType.FIRE_CLAY)

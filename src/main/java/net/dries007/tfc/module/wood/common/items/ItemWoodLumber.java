@@ -2,7 +2,7 @@ package net.dries007.tfc.module.wood.common.items;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.common.objects.items.TFCItem;
+import net.dries007.tfc.common.objects.items.ItemBase;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.item.IWoodItem;
 import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariant;
@@ -12,7 +12,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
 
-public class ItemWoodLumber extends TFCItem implements IWoodItem {
+public class ItemWoodLumber extends ItemBase implements IWoodItem {
 
     private final WoodType type;
     private final WoodItemVariant variant;

@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.module.wood.common.tile.TEWoodToolRack;
+import net.dries007.tfc.module.wood.common.tiles.TEWoodToolRack;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;

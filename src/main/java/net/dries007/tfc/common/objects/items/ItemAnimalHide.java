@@ -2,8 +2,8 @@ package net.dries007.tfc.common.objects.items;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.core.common.blocks.BlockPlacedHide;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.common.blocks.BlockPlacedHide;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockBed;
@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class ItemAnimalHide extends TFCItem {
+public class ItemAnimalHide extends ItemBase {
     private static final Map<HideType, Map<HideSize, ItemAnimalHide>> TABLE = new HashMap<>();
     protected final HideSize size;
     private final HideType type;

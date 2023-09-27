@@ -6,7 +6,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.common.objects.blocks.itemblocks.ItemBlockBase;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodBarrel;
-import net.dries007.tfc.module.wood.common.tile.TEWoodBarrel;
+import net.dries007.tfc.module.wood.common.tiles.TEWoodBarrel;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import net.minecraft.block.Block;

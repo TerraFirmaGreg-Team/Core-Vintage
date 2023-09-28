@@ -22,6 +22,7 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 
 public class ModuleSoil extends ModuleBase {
 
+    public static final String MODULE_ID = "module.soil";
     public static final CreativeTabs SOIL_TAB = new CreativeTabsTFC.TFCCreativeTab("soil", "tfc:soil.grass.silt");
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleSoil.class.getSimpleName());
 

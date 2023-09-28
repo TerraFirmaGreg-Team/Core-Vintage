@@ -23,7 +23,7 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 
 public class ModuleRock extends ModuleBase {
 
-
+    public static final String MODULE_ID = "module.rock";
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleRock.class.getSimpleName());
     public static final CreativeTabs ROCK_TAB = new CreativeTabsTFC.TFCCreativeTab("rock", "tfc:rock.raw.shale");
 

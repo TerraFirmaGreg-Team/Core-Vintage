@@ -17,6 +17,7 @@ import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 
 public class ModuleAnimal extends ModuleBase {
 
+    public static final String MODULE_ID = "module.animal";
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleAnimal.class.getSimpleName());
 
     public ModuleAnimal() {

@@ -22,8 +22,8 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 
 public class ModuleAgriculture extends ModuleBase {
 
+    public static final String MODULE_ID = "module.agriculture";
     public static final CreativeTabs AGRICULTURE_TAB = new CreativeTabsTFC.TFCCreativeTab("agriculture", "tfc:crop.seed.rice");
-
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleAgriculture.class.getSimpleName());
 
     public ModuleAgriculture() {

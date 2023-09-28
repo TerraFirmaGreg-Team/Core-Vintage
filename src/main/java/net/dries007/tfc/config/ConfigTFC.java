@@ -10,6 +10,8 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import static net.dries007.tfc.Tags.MOD_NAME;
+
 
 /**
  * Top level items must be static, the subclasses' fields must not be static.
@@ -25,7 +27,7 @@ public final class ConfigTFC {
         }
     }
 
-    @Config(modid = Tags.MOD_ID, category = "general", name = "TerraFirmaCraft/General")
+    @Config(modid = Tags.MOD_ID, category = "general", name = MOD_NAME + "/General")
     @Config.LangKey("config." + Tags.MOD_ID + ".general")
     public static final class General {
         @Config.Comment("Debug settings")
@@ -581,7 +583,7 @@ public final class ConfigTFC {
     }
 
 
-    @Config(modid = Tags.MOD_ID, category = "devices", name = "TerraFirmaCraft/Devices")
+    @Config(modid = Tags.MOD_ID, category = "devices", name = MOD_NAME + "/Devices")
     @Config.LangKey("config." + Tags.MOD_ID + ".devices")
     public static final class Devices {
         @Config.Comment("Temperature Settings")
@@ -794,7 +796,7 @@ public final class ConfigTFC {
 
     }
 
-    @Config(modid = Tags.MOD_ID, category = "client", name = "TerraFirmaCraft/Client")
+    @Config(modid = Tags.MOD_ID, category = "client", name = MOD_NAME + "/Client")
     @Config.LangKey("config." + Tags.MOD_ID + ".client")
     public static class Client {
         @Config.Comment("Tooltip settings")
@@ -915,7 +917,7 @@ public final class ConfigTFC {
         }
     }
 
-    @Config(modid = Tags.MOD_ID, category = "animals", name = "TerraFirmaCraft/Animals")
+    @Config(modid = Tags.MOD_ID, category = "animals", name = MOD_NAME + "/Animals")
     @Config.LangKey("config." + Tags.MOD_ID + ".animals")
     public static final class Animals {
         @Config.Comment("Alpaca")

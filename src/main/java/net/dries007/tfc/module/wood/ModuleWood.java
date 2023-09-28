@@ -22,6 +22,7 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 
 public class ModuleWood extends ModuleBase {
 
+    public static final String MODULE_ID = "module.wood";
     public static final CreativeTabs WOOD_TAB = new CreativeTabsTFC.TFCCreativeTab("wood", "tfc:wood.planks.pine");
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleWood.class.getSimpleName());

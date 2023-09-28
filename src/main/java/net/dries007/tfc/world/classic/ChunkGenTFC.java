@@ -196,7 +196,7 @@ public class ChunkGenTFC implements IChunkGenerator {
         world.setSeaLevel(WorldTypeTFC.SEALEVEL);
 
         // Инициализация спавнера сущностей мира
-        WorldEntitySpawnerTFC.init();
+        //WorldEntitySpawnerTFC.init(); //TODO спавн живности не забыть переместить в модуль
     }
 
     /**

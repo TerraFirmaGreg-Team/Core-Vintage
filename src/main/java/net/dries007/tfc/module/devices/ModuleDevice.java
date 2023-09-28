@@ -17,8 +17,8 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 
 public class ModuleDevice extends ModuleBase {
 
+    public static final String MODULE_ID = "module.devices";
     public static final CreativeTabs DEVICES_TAB = new CreativeTabsTFC.TFCCreativeTab("device", "tfc:device.bellows");
-
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleDevice.class.getSimpleName());
 
 

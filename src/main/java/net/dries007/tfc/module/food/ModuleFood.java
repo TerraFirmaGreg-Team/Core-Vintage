@@ -7,6 +7,8 @@ import net.dries007.tfc.module.food.api.variant.block.FoodBlockVariantHandler;
 
 public class ModuleFood {
 
+    public static final String MODULE_ID = "module.food";
+
     public static void preInit() {
         FoodCategoryHandler.init();
         FoodTypeHandler.init();

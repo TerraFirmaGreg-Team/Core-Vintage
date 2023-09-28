@@ -8,7 +8,7 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.common.tiles.TETickCounter;
-import net.dries007.tfc.module.crop.common.blocks.BlockBerryBush;
+import net.dries007.tfc.module.agriculture.common.blocks.BlockBerryBush;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;

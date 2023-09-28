@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.plant.common.blocks.itemblocks;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.module.api.common.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlantPot;
 import net.dries007.tfc.util.Helpers;

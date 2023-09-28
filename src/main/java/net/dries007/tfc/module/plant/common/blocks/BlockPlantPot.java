@@ -3,7 +3,7 @@ package net.dries007.tfc.module.plant.common.blocks;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.api.common.block.BlockBase;
+import net.dries007.tfc.module.core.api.block.BlockBase;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

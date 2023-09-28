@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
-import net.dries007.tfc.module.api.common.container.ContainerItemStack;
+import net.dries007.tfc.module.core.api.container.ContainerItemStack;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

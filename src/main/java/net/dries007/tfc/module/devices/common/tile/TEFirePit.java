@@ -6,14 +6,14 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.api.types.food.category.FoodCategories;
-import net.dries007.tfc.api.types.food.category.FoodCategory;
+import net.dries007.tfc.module.food.api.category.FoodCategories;
+import net.dries007.tfc.module.food.api.category.FoodCategory;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.module.food.common.items.ItemDynamicBowlFood;
-import net.dries007.tfc.module.api.common.tile.ITileFields;
+import net.dries007.tfc.module.core.api.tile.ITileFields;
 import net.dries007.tfc.module.core.common.tiles.TETickableInventory;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.devices.common.blocks.BlockFirePit;
@@ -49,8 +49,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import static net.dries007.tfc.api.types.food.type.FoodTypes.*;
-import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
+import static net.dries007.tfc.module.food.api.type.FoodTypes.*;
+import static net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants.INGREDIENT;
 
 @ParametersAreNonnullByDefault
 public class TEFirePit extends TETickableInventory implements ICalendarTickable, ITileFields, IItemHandlerSidedCallback {

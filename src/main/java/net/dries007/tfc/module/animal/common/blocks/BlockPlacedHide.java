@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.common.blocks;
 
 import net.dries007.tfc.module.animal.common.items.ItemAnimalHide;
-import net.dries007.tfc.module.api.common.block.BlockBase;
+import net.dries007.tfc.module.core.api.block.BlockBase;
 import net.dries007.tfc.module.animal.common.tiles.TEPlacedHide;
 import net.dries007.tfc.module.core.common.blocks.BlockPlacedItem;
 import net.dries007.tfc.util.Helpers;

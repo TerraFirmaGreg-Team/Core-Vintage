@@ -4,7 +4,7 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.api.common.item.ItemBase;
+import net.dries007.tfc.module.core.api.item.ItemBase;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;

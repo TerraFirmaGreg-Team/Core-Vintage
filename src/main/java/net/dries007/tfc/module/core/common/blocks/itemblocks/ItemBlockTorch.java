@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.common.blocks.itemblocks;
 
-import net.dries007.tfc.module.api.common.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.devices.common.tile.TELogPile;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
 import net.dries007.tfc.module.devices.init.BlocksDevice;

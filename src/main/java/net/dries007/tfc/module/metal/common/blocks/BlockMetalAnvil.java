@@ -11,7 +11,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.api.common.block.BlockBase;
+import net.dries007.tfc.module.core.api.block.BlockBase;
 import net.dries007.tfc.module.metal.StorageMetal;
 import net.dries007.tfc.module.metal.api.type.MetalType;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;

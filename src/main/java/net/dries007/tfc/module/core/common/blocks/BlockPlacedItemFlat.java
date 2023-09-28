@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.common.blocks;
 
-import net.dries007.tfc.module.api.common.block.BlockBase;
+import net.dries007.tfc.module.core.api.block.BlockBase;
 import net.dries007.tfc.module.core.common.tiles.TEPlacedItemFlat;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.dries007.tfc.util.Helpers;

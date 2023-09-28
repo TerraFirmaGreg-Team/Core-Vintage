@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.soil.common.blocks;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.module.api.common.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;

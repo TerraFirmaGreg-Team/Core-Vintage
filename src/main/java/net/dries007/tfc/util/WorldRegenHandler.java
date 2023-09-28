@@ -8,9 +8,9 @@ import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.ICreature;
 import net.dries007.tfc.module.animal.api.type.IHuntable;
 import net.dries007.tfc.module.animal.api.type.IPredator;
-import net.dries007.tfc.module.crop.common.blocks.BlockCropDead;
-import net.dries007.tfc.module.crop.common.items.ItemCropSeed;
-import net.dries007.tfc.module.crop.common.tile.TECropBase;
+import net.dries007.tfc.module.agriculture.common.blocks.BlockCropDead;
+import net.dries007.tfc.module.agriculture.common.items.ItemCropSeed;
+import net.dries007.tfc.module.agriculture.common.tile.TECropBase;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlantMushroom;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
@@ -47,7 +47,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.*;
 
-import static net.dries007.tfc.module.crop.common.blocks.BlockCropGrowing.WILD;
+import static net.dries007.tfc.module.agriculture.common.blocks.BlockCropGrowing.WILD;
 import static net.dries007.tfc.module.plant.api.type.PlantTypes.PORCINI;
 
 /**

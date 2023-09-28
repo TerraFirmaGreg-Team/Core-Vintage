@@ -3,7 +3,7 @@ package net.dries007.tfc.module.core.common.tiles;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.module.api.common.tile.TEInventory;
+import net.dries007.tfc.module.core.api.tile.TEInventory;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
 import net.dries007.tfc.util.Helpers;

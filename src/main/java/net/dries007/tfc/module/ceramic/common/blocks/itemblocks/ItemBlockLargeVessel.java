@@ -3,7 +3,7 @@ package net.dries007.tfc.module.ceramic.common.blocks.itemblocks;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.module.ceramic.common.blocks.BlockLargeVessel;
-import net.dries007.tfc.module.api.common.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

@@ -3,7 +3,7 @@ package net.dries007.tfc.common.objects.recipes.handlers;
 
 import net.dries007.tfc.api.recipes.barrel.*;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.food.type.FoodType;
+import net.dries007.tfc.module.food.api.type.FoodType;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientItemFood;
@@ -19,8 +19,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import static net.dries007.tfc.api.types.food.type.FoodTypes.*;
-import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
+import static net.dries007.tfc.module.food.api.type.FoodTypes.*;
+import static net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants.INGREDIENT;
 
 public class BarrelRecipes {
 

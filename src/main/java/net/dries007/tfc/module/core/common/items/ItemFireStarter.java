@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.api.common.item.ItemBase;
+import net.dries007.tfc.module.core.api.item.ItemBase;
 import net.dries007.tfc.module.devices.common.tile.TEFirePit;
 import net.dries007.tfc.module.devices.common.tile.TELogPile;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;

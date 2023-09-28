@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.common.effects;
 
-import net.dries007.tfc.module.api.common.effects.PotionBase;
+import net.dries007.tfc.module.core.api.effects.PotionBase;
 import net.minecraft.entity.EntityLivingBase;
 
 import javax.annotation.ParametersAreNonnullByDefault;

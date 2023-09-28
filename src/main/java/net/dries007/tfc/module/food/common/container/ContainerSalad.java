@@ -4,9 +4,9 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.food.Nutrient;
-import net.dries007.tfc.api.types.food.category.FoodCategories;
-import net.dries007.tfc.api.types.food.category.FoodCategory;
-import net.dries007.tfc.api.types.food.type.FoodTypes;
+import net.dries007.tfc.module.food.api.category.FoodCategories;
+import net.dries007.tfc.module.food.api.category.FoodCategory;
+import net.dries007.tfc.module.food.api.type.FoodTypes;
 import net.dries007.tfc.module.core.common.container.ContainerSimple;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
@@ -26,8 +26,8 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.api.types.food.type.FoodTypes.*;
-import static net.dries007.tfc.api.types.food.variant.Item.FoodItemVariants.INGREDIENT;
+import static net.dries007.tfc.module.food.api.type.FoodTypes.*;
+import static net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants.INGREDIENT;
 
 /**
  * We don't extend the item stack container because it's not linked to the item stack

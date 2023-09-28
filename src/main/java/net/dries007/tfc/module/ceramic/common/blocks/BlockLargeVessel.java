@@ -7,7 +7,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.ceramic.common.blocks.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.module.ceramic.common.tiles.TELargeVessel;
-import net.dries007.tfc.module.api.common.block.BlockBase;
+import net.dries007.tfc.module.core.api.block.BlockBase;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

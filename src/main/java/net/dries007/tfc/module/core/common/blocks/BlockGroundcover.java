@@ -5,7 +5,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.GroundcoverType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.module.api.common.block.BlockBase;
+import net.dries007.tfc.module.core.api.block.BlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

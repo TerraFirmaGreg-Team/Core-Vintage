@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.common.tiles;
 
-import net.dries007.tfc.module.api.common.tile.TEBase;
+import net.dries007.tfc.module.core.api.tile.TEBase;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.nbt.NBTTagCompound;
 

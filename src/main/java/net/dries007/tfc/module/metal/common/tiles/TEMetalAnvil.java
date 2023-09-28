@@ -14,7 +14,7 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
-import net.dries007.tfc.module.api.common.tile.TEInventory;
+import net.dries007.tfc.module.core.api.tile.TEInventory;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;

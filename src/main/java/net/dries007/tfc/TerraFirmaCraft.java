@@ -7,7 +7,7 @@ import net.dries007.tfc.common.CommonProxy;
 import net.dries007.tfc.module.animal.ModuleAnimal;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.ModuleCorePost;
-import net.dries007.tfc.module.crop.ModuleCrop;
+import net.dries007.tfc.module.agriculture.ModuleAgriculture;
 import net.dries007.tfc.module.devices.ModuleDevice;
 import net.dries007.tfc.module.metal.ModuleMetal;
 import net.dries007.tfc.module.plant.ModulePlant;
@@ -85,7 +85,7 @@ public final class TerraFirmaCraft {
                 ModuleSoil.class,
                 ModuleWood.class,
                 ModuleMetal.class,
-                ModuleCrop.class,
+                ModuleAgriculture.class,
                 ModuleAnimal.class,
                 ModuleDevice.class,
                 ModulePlant.class

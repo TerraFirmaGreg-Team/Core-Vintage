@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.common.tiles;
 
-import net.dries007.tfc.module.api.common.tile.TEBase;
+import net.dries007.tfc.module.core.api.tile.TEBase;
 import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nonnull;

@@ -3,7 +3,7 @@ package net.dries007.tfc.module.metal.common.blocks;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.module.api.common.block.BlockBase;
+import net.dries007.tfc.module.core.api.block.BlockBase;
 import net.dries007.tfc.module.metal.common.tiles.TEMetalSheet;
 import net.dries007.tfc.module.metal.api.type.MetalType;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;

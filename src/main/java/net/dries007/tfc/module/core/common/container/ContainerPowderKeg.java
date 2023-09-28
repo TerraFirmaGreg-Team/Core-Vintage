@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.common.container;
 
-import net.dries007.tfc.module.api.common.container.ContainerTE;
-import net.dries007.tfc.module.api.common.container.IButtonHandler;
+import net.dries007.tfc.module.core.api.container.ContainerTE;
+import net.dries007.tfc.module.core.api.container.IButtonHandler;
 import net.dries007.tfc.module.core.common.blocks.BlockPowderKeg;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.module.core.common.tiles.TEPowderKeg;

@@ -10,7 +10,7 @@ import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.api.common.item.ItemBase;
+import net.dries007.tfc.module.core.api.item.ItemBase;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.minecraft.client.resources.I18n;

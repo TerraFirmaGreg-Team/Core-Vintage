@@ -11,7 +11,7 @@ import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
-import net.dries007.tfc.module.api.common.tile.ITileFields;
+import net.dries007.tfc.module.core.api.tile.ITileFields;
 import net.dries007.tfc.module.core.common.tiles.TETickableInventory;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.config.ConfigTFC;

@@ -16,20 +16,13 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
-import net.dries007.tfc.api.types.bush.BushModule;
 import net.dries007.tfc.api.types.drinkable.DrinkableHandler;
-import net.dries007.tfc.api.types.food.FoodModule;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.commands.*;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.module.core.common.blocks.BlockIceTFC;
-import net.dries007.tfc.module.core.common.blocks.BlockSnowTFC;
-import net.dries007.tfc.module.core.common.blocks.BlockTorchTFC;
 import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.core.common.blocks.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
-import net.dries007.tfc.module.core.common.items.ItemGlassBottleTFC;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.dynamictrees.SeasonManager;
 import net.dries007.tfc.compat.dynamictrees.TFCRootDecay;
@@ -38,7 +31,13 @@ import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
 import net.dries007.tfc.compat.top.TOPIntegration;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.common.blocks.BlockIceTFC;
+import net.dries007.tfc.module.core.common.blocks.BlockSnowTFC;
+import net.dries007.tfc.module.core.common.blocks.BlockTorchTFC;
+import net.dries007.tfc.module.core.common.blocks.itemblocks.ItemBlockTorch;
+import net.dries007.tfc.module.core.common.items.ItemGlassBottleTFC;
 import net.dries007.tfc.module.core.init.RegistryCore;
+import net.dries007.tfc.module.food.ModuleFood;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -174,8 +173,7 @@ public class CommonProxy {
 
     public void onPreInit(FMLPreInitializationEvent event) {
         //TreeModule.preInit();
-        FoodModule.preInit();
-        BushModule.preInit();
+        ModuleFood.preInit();
 
         DrinkableHandler.preInit();
 

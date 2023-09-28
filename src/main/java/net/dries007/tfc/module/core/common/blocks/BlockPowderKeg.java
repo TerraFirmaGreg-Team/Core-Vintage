@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.common.blocks.itemblocks.ItemBlockPowderKeg;
-import net.dries007.tfc.module.api.common.block.BlockBase;
+import net.dries007.tfc.module.core.api.block.BlockBase;
 import net.dries007.tfc.module.core.common.tiles.TEPowderKeg;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;

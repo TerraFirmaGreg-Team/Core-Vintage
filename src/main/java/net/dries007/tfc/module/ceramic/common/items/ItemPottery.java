@@ -3,7 +3,7 @@ package net.dries007.tfc.module.ceramic.common.items;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.api.common.item.ItemBase;
+import net.dries007.tfc.module.core.api.item.ItemBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

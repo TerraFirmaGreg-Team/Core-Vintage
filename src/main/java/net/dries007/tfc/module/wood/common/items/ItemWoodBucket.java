@@ -4,7 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.api.common.item.ItemBase;
+import net.dries007.tfc.module.core.api.item.ItemBase;
 import net.dries007.tfc.config.ConfigTFC;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;

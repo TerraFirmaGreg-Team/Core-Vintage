@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.module.api.common.container.ContainerItemStack;
+import net.dries007.tfc.module.core.api.container.ContainerItemStack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;

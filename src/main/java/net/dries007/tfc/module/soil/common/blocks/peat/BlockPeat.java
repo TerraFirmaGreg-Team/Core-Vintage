@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.soil.common.blocks.peat;
 
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
-import net.dries007.tfc.module.api.common.block.BlockBase;
+import net.dries007.tfc.module.core.api.block.BlockBase;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

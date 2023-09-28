@@ -1,4 +1,4 @@
-package su.terrafirmagreg.proxy;
+package net.dries007.tfc.proxy;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;

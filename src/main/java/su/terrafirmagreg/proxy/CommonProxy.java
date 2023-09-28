@@ -1,4 +1,4 @@
-package net.dries007.tfc.proxy;
+package su.terrafirmagreg.proxy;
 
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;

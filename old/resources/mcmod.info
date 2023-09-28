@@ -1,0 +1,19 @@
+[
+  {
+    "modid": "${mod_id}",
+    "name": "${mod_name}",
+    "description": "${mod_description}",
+    "version": "${mod_version}",
+    "mcversion": "1.12.2",
+    "logoFile": "${mod_logo_path}",
+    "url": "${mod_url}",
+    "updateJson": "${mod_update_json}",
+    "authorList": [
+      "Dries007",
+      "AlcatrazEscapee",
+      "Bunsan",
+      "et. al."
+    ],
+    "credits": "${mod_credits}"
+  }
+]

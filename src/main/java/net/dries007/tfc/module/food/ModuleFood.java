@@ -7,6 +7,7 @@ import net.dries007.tfc.module.food.api.category.FoodCategoryHandler;
 import net.dries007.tfc.module.food.api.type.FoodTypeHandler;
 import net.dries007.tfc.module.food.api.variant.Item.FoodItemVariantHandler;
 import net.dries007.tfc.module.food.api.variant.block.FoodBlockVariantHandler;
+import net.dries007.tfc.module.food.init.BlocksFood;
 import net.dries007.tfc.module.food.init.ItemsFood;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
@@ -44,6 +45,7 @@ public class ModuleFood extends ModuleBase {
         FoodBlockVariantHandler.init();
         FoodItemVariantHandler.init();
 
+        BlocksFood.onRegister(registry);
         ItemsFood.onRegister(registry);
     }
 
@@ -51,6 +53,7 @@ public class ModuleFood extends ModuleBase {
     @Override
     public void onClientRegister(Registry registry) {
 
+        BlocksFood.onClientRegister(registry);
         ItemsFood.onClientRegister(registry);
     }
 
@@ -58,6 +61,7 @@ public class ModuleFood extends ModuleBase {
     public void onClientInitializationEvent(FMLInitializationEvent event) {
         super.onClientInitializationEvent(event);
 
+        BlocksFood.onClientInitialization();
         ItemsFood.onClientInitialization();
     }
 }

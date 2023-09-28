@@ -29,7 +29,6 @@ import net.dries007.tfc.compat.dynamictrees.TFCRootDecay;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefixHandler;
-import net.dries007.tfc.compat.top.TOPIntegration;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.common.blocks.BlockIceTFC;
 import net.dries007.tfc.module.core.common.blocks.BlockSnowTFC;
@@ -217,8 +216,6 @@ public class CommonProxy {
         CapabilityDamageResistance.preInit();
         CapabilityMetalItem.preInit();
         CapabilityWorldTracker.preInit();
-
-        TOPIntegration.onPreInit();
 
         SeasonHelper.setSeasonManager(SeasonManager.INSTANCE);
     }

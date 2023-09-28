@@ -1,4 +1,4 @@
-package net.dries007.tfc.compat.top.providers;
+package net.dries007.tfc.module.animal.plugin.top.provider;
 
 import mcjty.theoneprobe.api.IProbeHitEntityData;
 import mcjty.theoneprobe.api.IProbeInfo;

@@ -1,13 +1,13 @@
-package net.dries007.tfc.compat.top.providers;
+package net.dries007.tfc.module.core.plugin.top.provider;
 
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.common.blocks.BlockTorchTFC;
 import net.dries007.tfc.module.core.common.tiles.TETickCounter;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

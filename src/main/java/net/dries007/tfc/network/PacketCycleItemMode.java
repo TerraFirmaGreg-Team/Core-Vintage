@@ -1,6 +1,6 @@
 package net.dries007.tfc.network;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
@@ -13,8 +13,8 @@ public class PacketCycleItemMode implements IMessageEmpty {
     public static final class Handler implements IMessageHandler<PacketCycleItemMode, IMessage> {
         @Override
         public IMessage onMessage(PacketCycleItemMode message, MessageContext ctx) {
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                var player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+            TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                var player = TerraFirmaGreg.getProxy().getPlayer(ctx);
                 if (player != null) {
                     if (player.getHeldItemMainhand().getItem() == TFGToolItems.CHISEL.get()) {
                         IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);

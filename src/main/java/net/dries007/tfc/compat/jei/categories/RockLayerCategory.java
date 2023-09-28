@@ -16,7 +16,7 @@
 //import mezz.jei.api.gui.IRecipeLayout;
 //import mezz.jei.api.ingredients.IIngredients;
 //import mezz.jei.api.ingredients.VanillaTypes;
-//import net.dries007.tfc.TerraFirmaCraft;
+//import net.dries007.tfc.TerraFirmaGreg;
 //import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 //import net.dries007.tfc.compat.jei.util.BackgroundDrawable;
 //import net.dries007.tfc.compat.jei.wrappers.RockLayerWrapper;
@@ -24,7 +24,7 @@
 //@ParametersAreNonnullByDefault
 //public class RockLayerCategory extends BaseRecipeCategory<RockLayerWrapper>
 //{
-//    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.identifier("textures/gui/jei_rocklayer.png");
+//    private static final ResourceLocation BACKGROUND = TerraFirmaGreg.identifier("textures/gui/jei_rocklayer.png");
 //
 //    public RockLayerCategory(IGuiHelper helper, String Uid)
 //    {

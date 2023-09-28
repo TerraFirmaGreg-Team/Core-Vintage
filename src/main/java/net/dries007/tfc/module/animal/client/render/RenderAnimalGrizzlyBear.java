@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalGrizzlyBear;
 import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalGrizzlyBear;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalGrizzlyBear extends RenderLiving<EntityAnimalGrizzlyBear> {
-    private static final ResourceLocation BEAR_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/grizzlybear.png");
+    private static final ResourceLocation BEAR_TEXTURE = TerraFirmaGreg.getID("textures/entity/animal/predators/grizzlybear.png");
 
     public RenderAnimalGrizzlyBear(RenderManager renderManager) {
         super(renderManager, new ModelAnimalGrizzlyBear(), 0.7F);

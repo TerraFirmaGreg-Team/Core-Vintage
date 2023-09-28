@@ -5,7 +5,7 @@ import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import gregtech.api.unification.material.event.MaterialEvent;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -129,7 +129,7 @@ public class CommonProxy {
     public static void registerVanillaOverridesBlock(RegistryEvent.Register<Block> event) {
         // Ванильные переопределения. Используется для небольших настроек ванильных предметов, а не для их полной замены.
         if (ConfigTFC.General.OVERRIDES.enableFrozenOverrides) {
-            TerraFirmaCraft.LOGGER.info("The below warnings about unintended overrides are normal. The override is intended. ;)");
+            TerraFirmaGreg.LOGGER.info("The below warnings about unintended overrides are normal. The override is intended. ;)");
             event.getRegistry().registerAll(
                     new BlockIceTFC(FluidRegistry.WATER),
                     new BlockSnowTFC()
@@ -144,7 +144,7 @@ public class CommonProxy {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void registerVanillaOverridesItem(RegistryEvent.Register<Item> event) {
         // Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
-        TerraFirmaCraft.LOGGER.info("The below warnings about unintended overrides are normal. The override is intended. ;)");
+        TerraFirmaGreg.LOGGER.info("The below warnings about unintended overrides are normal. The override is intended. ;)");
         event.getRegistry().registerAll(
                 new ItemSnow(Blocks.SNOW_LAYER).setRegistryName("minecraft", "snow_layer"),
                 new ItemGlassBottleTFC().setRegistryName(Items.GLASS_BOTTLE.getRegistryName()).setTranslationKey("glassBottle")
@@ -183,26 +183,26 @@ public class CommonProxy {
         JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
 
         // No need to sync config here, forge magic
-        NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.getInstance(), new TFCGuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new TFCGuiHandler());
 
         // Received on server
-        TerraFirmaCraft.registerNetwork(new PacketGuiButton.Handler(), PacketGuiButton.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketPlaceBlockSpecial.Handler(), PacketPlaceBlockSpecial.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketSwitchPlayerInventoryTab.Handler(), PacketSwitchPlayerInventoryTab.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketOpenCraftingGui.Handler(), PacketOpenCraftingGui.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketCycleItemMode.Handler(), PacketCycleItemMode.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketStackFood.Handler(), PacketStackFood.class, Side.SERVER);
+        TerraFirmaGreg.registerNetwork(new PacketGuiButton.Handler(), PacketGuiButton.class, Side.SERVER);
+        TerraFirmaGreg.registerNetwork(new PacketPlaceBlockSpecial.Handler(), PacketPlaceBlockSpecial.class, Side.SERVER);
+        TerraFirmaGreg.registerNetwork(new PacketSwitchPlayerInventoryTab.Handler(), PacketSwitchPlayerInventoryTab.class, Side.SERVER);
+        TerraFirmaGreg.registerNetwork(new PacketOpenCraftingGui.Handler(), PacketOpenCraftingGui.class, Side.SERVER);
+        TerraFirmaGreg.registerNetwork(new PacketCycleItemMode.Handler(), PacketCycleItemMode.class, Side.SERVER);
+        TerraFirmaGreg.registerNetwork(new PacketStackFood.Handler(), PacketStackFood.class, Side.SERVER);
 
         // Received on client
-        TerraFirmaCraft.registerNetwork(new PacketChunkData.Handler(), PacketChunkData.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketCapabilityContainerUpdate.Handler(), PacketCapabilityContainerUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketCalendarUpdate.Handler(), PacketCalendarUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketFoodStatsUpdate.Handler(), PacketFoodStatsUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketFoodStatsReplace.Handler(), PacketFoodStatsReplace.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketPlayerDataUpdate.Handler(), PacketPlayerDataUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketSpawnTFCParticle.Handler(), PacketSpawnTFCParticle.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketSimpleMessage.Handler(), PacketSimpleMessage.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketProspectResult.Handler(), PacketProspectResult.class, Side.CLIENT);
+        TerraFirmaGreg.registerNetwork(new PacketChunkData.Handler(), PacketChunkData.class, Side.CLIENT);
+        TerraFirmaGreg.registerNetwork(new PacketCapabilityContainerUpdate.Handler(), PacketCapabilityContainerUpdate.class, Side.CLIENT);
+        TerraFirmaGreg.registerNetwork(new PacketCalendarUpdate.Handler(), PacketCalendarUpdate.class, Side.CLIENT);
+        TerraFirmaGreg.registerNetwork(new PacketFoodStatsUpdate.Handler(), PacketFoodStatsUpdate.class, Side.CLIENT);
+        TerraFirmaGreg.registerNetwork(new PacketFoodStatsReplace.Handler(), PacketFoodStatsReplace.class, Side.CLIENT);
+        TerraFirmaGreg.registerNetwork(new PacketPlayerDataUpdate.Handler(), PacketPlayerDataUpdate.class, Side.CLIENT);
+        TerraFirmaGreg.registerNetwork(new PacketSpawnTFCParticle.Handler(), PacketSpawnTFCParticle.class, Side.CLIENT);
+        TerraFirmaGreg.registerNetwork(new PacketSimpleMessage.Handler(), PacketSimpleMessage.class, Side.CLIENT);
+        TerraFirmaGreg.registerNetwork(new PacketProspectResult.Handler(), PacketProspectResult.class, Side.CLIENT);
 
         EntitiesTFC.preInit();
 
@@ -275,7 +275,7 @@ public class CommonProxy {
                 if (ConfigTFC.General.OVERRIDES.forceTFCWorldType) {
                     // This is called before vanilla defaults it, meaning we intercept it's default with ours
                     // However, we can't actually set this due to fears of overriding the existing world
-                    TerraFirmaCraft.LOGGER.info("Setting default level-type to `tfc_classic`");
+                    TerraFirmaGreg.LOGGER.info("Setting default level-type to `tfc_classic`");
                     settings.getStringProperty("level-type", "tfc_classic");
                 }
             }

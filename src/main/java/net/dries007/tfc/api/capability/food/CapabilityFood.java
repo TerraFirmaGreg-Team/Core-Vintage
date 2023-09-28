@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.food;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.config.ConfigTFC;
@@ -28,7 +28,7 @@ public class CapabilityFood {
     /**
      * Уникальный идентификатор Capability.
      */
-    public static final ResourceLocation KEY = TerraFirmaCraft.getID("food");
+    public static final ResourceLocation KEY = TerraFirmaGreg.getID("food");
 
     /**
      * Список пользовательских еды.
@@ -251,7 +251,7 @@ public class CapabilityFood {
      * => d * p * (T - Ci) = d * (T - Cf)
      * => Cf = (1 - p) * T + p * Ci (аффинное сочетание)
      * <p>
-     * Чтобы показать, что E > T неизменно при сохранности: (см. TerraFirmaCraft#352)
+     * Чтобы показать, что E > T неизменно при сохранности: (см. TerraFirmaGreg#352)
      * Пусть T, Ci, Ei, d, p > 0 такие, что Ei > T (1.), и Ei = Ci + d
      * Cf = (1 - p) * T + p * Ci
      * => Ef = Cf + p * d

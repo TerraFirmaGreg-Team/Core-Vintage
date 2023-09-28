@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.heat;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.items.TFCItems;
@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public final class CapabilityItemHeat {
-    public static final ResourceLocation KEY = TerraFirmaCraft.getID("item_heat");
+    public static final ResourceLocation KEY = TerraFirmaGreg.getID("item_heat");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IItemHeat for items outside TFC
     @CapabilityInject(IItemHeat.class)
     public static Capability<IItemHeat> ITEM_HEAT_CAPABILITY;

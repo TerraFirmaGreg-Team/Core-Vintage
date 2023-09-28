@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalTurkey;
 import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
 import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalTurkey;
@@ -17,8 +17,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalTurkey extends RenderLiving<EntityAnimalTurkey> {
-    private static final ResourceLocation MALE = TerraFirmaCraft.getID("textures/entity/animal/huntable/turkeym.png");
-    private static final ResourceLocation FEMALE = TerraFirmaCraft.getID("textures/entity/animal/huntable/turkeyf.png");
+    private static final ResourceLocation MALE = TerraFirmaGreg.getID("textures/entity/animal/huntable/turkeym.png");
+    private static final ResourceLocation FEMALE = TerraFirmaGreg.getID("textures/entity/animal/huntable/turkeyf.png");
 
     public RenderAnimalTurkey(RenderManager manager) {
         super(manager, new ModelAnimalTurkey(), 0.5F);

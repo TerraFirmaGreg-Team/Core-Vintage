@@ -1,7 +1,7 @@
 package net.dries007.tfc.common.objects;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -40,7 +40,7 @@ public final class CreativeTabsTFC {
                 CapabilityFood.setStackNonDecaying(stack);
                 return stack;
             }
-            TerraFirmaCraft.LOGGER.error("[Please inform developers] No icon stack for creative tab {}", getTabLabel());
+            TerraFirmaGreg.LOGGER.error("[Please inform developers] No icon stack for creative tab {}", getTabLabel());
             return new ItemStack(Items.STICK);
         }
     }

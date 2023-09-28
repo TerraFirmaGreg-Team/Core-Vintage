@@ -8,7 +8,7 @@ import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
 import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.module.food.api.type.FoodType;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranch;
@@ -400,7 +400,7 @@ public class TreeType extends TreeFamily {
         }
 
         public Builder setName(String path) {
-            return setName(TerraFirmaCraft.getID(path));
+            return setName(TerraFirmaGreg.getID(path));
         }
 
         public Builder setWoodType(WoodType wood) {

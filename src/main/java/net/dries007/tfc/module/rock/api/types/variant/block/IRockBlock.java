@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.rock.api.types.variant.block;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.module.rock.api.types.category.RockCategory;
@@ -66,7 +66,7 @@ public interface IRockBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.getID(String.format("rock.%s.%s", getBlockVariant(), getType()));
+        return TerraFirmaGreg.getID(String.format("rock.%s.%s", getBlockVariant(), getType()));
     }
 
     /**
@@ -76,7 +76,7 @@ public interface IRockBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.getID(String.format("rock/%s", getBlockVariant()));
+        return TerraFirmaGreg.getID(String.format("rock/%s", getBlockVariant()));
     }
 
     @Nonnull

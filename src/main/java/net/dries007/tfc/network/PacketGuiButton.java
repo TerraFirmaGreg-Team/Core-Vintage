@@ -1,7 +1,7 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.module.core.api.container.IButtonHandler;
 import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
 import net.dries007.tfc.module.metal.common.container.ContainerAnvilTFC;
@@ -58,9 +58,9 @@ public class PacketGuiButton implements IMessage {
     public static class Handler implements IMessageHandler<PacketGuiButton, IMessage> {
         @Override
         public IMessage onMessage(PacketGuiButton message, MessageContext ctx) {
-            EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+            EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
             if (player != null) {
-                TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                     if (player.openContainer instanceof IButtonHandler) {
                         ((IButtonHandler) player.openContainer).onButtonPress(message.buttonID, message.extraNBT);
                     }

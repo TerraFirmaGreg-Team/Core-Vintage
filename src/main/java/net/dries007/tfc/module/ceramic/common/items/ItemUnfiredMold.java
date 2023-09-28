@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.ceramic.common.items;
 
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -16,7 +16,7 @@ public class ItemUnfiredMold extends ItemPottery {
         this.orePrefix = orePrefix;
 
         setCreativeTab(CreativeTabsTFC.POTTERY_TAB);
-        setRegistryName(TerraFirmaCraft.getID("ceramics/unfired/mold/" + orePrefix.name.toLowerCase()));
+        setRegistryName(TerraFirmaGreg.getID("ceramics/unfired/mold/" + orePrefix.name.toLowerCase()));
     }
 
     @Nonnull

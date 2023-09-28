@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalJackal;
 import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalJackal;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalJackal extends RenderLiving<EntityAnimalJackal> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/jackal.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaGreg.getID("textures/entity/animal/predators/jackal.png");
 
     public RenderAnimalJackal(RenderManager renderManager) {
         super(renderManager, new ModelAnimalJackal(), 0.7F);

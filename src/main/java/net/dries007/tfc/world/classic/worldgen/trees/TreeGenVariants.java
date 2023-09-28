@@ -1,6 +1,6 @@
 //package net.dries007.tfc.world.classic.worldgen.trees;
 //
-//import net.dries007.tfc.TerraFirmaCraft;
+//import net.dries007.tfc.TerraFirmaGreg;
 //import net.dries007.tfc.world.classic.worldgen.trees.ITreeGenerator;
 //import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 //import net.dries007.tfc.world.classic.StructureHelper;
@@ -44,11 +44,11 @@
 //    @Override
 //    public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
 //        String variant = variants[variants.length == 1 ? 0 : rand.nextInt(variants.length)];
-//        ResourceLocation base = TerraFirmaCraft.identifier(woodType.toString() + "/" + variant);
+//        ResourceLocation base = TerraFirmaGreg.identifier(woodType.toString() + "/" + variant);
 //
 //        Template structureBase = manager.get(world.getMinecraftServer(), base);
 //        if (structureBase == null) {
-//            TerraFirmaCraft.LOGGER.warn("Unable to find a template for " + base);
+//            TerraFirmaGreg.LOGGER.warn("Unable to find a template for " + base);
 //            return;
 //        }
 //

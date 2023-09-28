@@ -1,7 +1,7 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,8 +36,8 @@ public class PacketPlayerDataUpdate implements IMessage {
     public static final class Handler implements IMessageHandler<PacketPlayerDataUpdate, IMessage> {
         @Override
         public IMessage onMessage(PacketPlayerDataUpdate message, MessageContext ctx) {
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+            TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
                 if (player != null) {
                     IPlayerData skills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
                     if (skills != null) {

@@ -36,21 +36,21 @@ import static net.dries007.tfc.Tags.*;
 @SuppressWarnings({"unused", "FieldMayBeFinal"})
 @Mod.EventBusSubscriber
 @Mod(modid = MOD_ID, name = MOD_NAME, version = VERSION, useMetadata = true, guiFactory = GUI_FACTORY, dependencies = DEPENDENCIES)
-public final class TerraFirmaCraft {
+public final class TerraFirmaGreg {
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     public static final WorldTypeTFC WORLD_TYPE_TFC = new WorldTypeTFC();
     public static SimpleNetworkWrapper network;
     @SuppressWarnings("unused")
     @Mod.Instance
-    private static TerraFirmaCraft instance;
+    private static TerraFirmaGreg instance;
     @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_SIDE)
     private static CommonProxy proxy;
     private static int networkIdCounter = 0;
     private final ModuleManager moduleManager;
     private Set<Class<? extends ModuleBase>> registeredModules = new HashSet<>();
 
-    public TerraFirmaCraft() {
+    public TerraFirmaGreg() {
         instance = this;
         network = new SimpleNetworkWrapper(MOD_ID);
         FluidRegistry.enableUniversalBucket();
@@ -61,7 +61,7 @@ public final class TerraFirmaCraft {
         return proxy;
     }
 
-    public static TerraFirmaCraft getInstance() {
+    public static TerraFirmaGreg getInstance() {
         return instance;
     }
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.devices.common.tile;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.food.*;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
@@ -525,7 +525,7 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
                 this.soupServings = value;
                 break;
             default:
-                TerraFirmaCraft.LOGGER.warn("Invalid Field ID {} in TEFirePit#setField", index);
+                TerraFirmaGreg.LOGGER.warn("Invalid Field ID {} in TEFirePit#setField", index);
         }
     }
 
@@ -539,7 +539,7 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
             case FIELD_COOKING_POT_SERVINGS:
                 return soupServings;
             default:
-                TerraFirmaCraft.LOGGER.warn("Invalid Field ID {} in TEFirePit#getField", index);
+                TerraFirmaGreg.LOGGER.warn("Invalid Field ID {} in TEFirePit#getField", index);
                 return 0;
         }
     }

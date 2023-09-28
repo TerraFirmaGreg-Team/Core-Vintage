@@ -1,7 +1,7 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -57,8 +57,8 @@ public class PacketSpawnTFCParticle implements IMessage {
     public static class Handler implements IMessageHandler<PacketSpawnTFCParticle, IMessage> {
         @Override
         public IMessage onMessage(PacketSpawnTFCParticle message, MessageContext ctx) {
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+            TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
                 if (player != null) {
                     TFCParticles particle = TFCParticles.values()[message.particleID];
                     particle.spawn(player.getEntityWorld(), message.x, message.y, message.z, message.speedX, message.speedY, message.speedZ, message.duration);

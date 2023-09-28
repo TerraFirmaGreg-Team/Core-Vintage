@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -40,7 +40,7 @@ public class BlockAlabaster extends BlockBase implements IItemSize, IHasModel {
 
         this.variant = variant;
         this.color = color;
-        this.modelLocation = TerraFirmaCraft.getID("rock/alabaster/color/" + variant);
+        this.modelLocation = TerraFirmaGreg.getID("rock/alabaster/color/" + variant);
 
         setCreativeTab(MISC_TAB);
         setSoundType(SoundType.STONE);

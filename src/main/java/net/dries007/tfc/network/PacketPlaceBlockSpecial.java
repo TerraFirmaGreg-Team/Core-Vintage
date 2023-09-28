@@ -1,6 +1,6 @@
 package net.dries007.tfc.network;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.module.core.common.tiles.TEPlacedItem;
 import net.dries007.tfc.module.core.common.tiles.TEPlacedItemFlat;
 import net.dries007.tfc.module.core.init.BlocksCore;
@@ -23,9 +23,9 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
     public static final class Handler implements IMessageHandler<PacketPlaceBlockSpecial, IMessage> {
         @Override
         public IMessage onMessage(PacketPlaceBlockSpecial message, MessageContext ctx) {
-            final EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+            final EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
             if (player != null) {
-                TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
 
                     final World world = player.getEntityWorld();
                     final RayTraceResult rayTrace = Helpers.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), 1);

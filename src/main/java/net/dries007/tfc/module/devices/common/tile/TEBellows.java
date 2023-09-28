@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.devices.common.tile;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.module.core.api.tile.TEBase;
@@ -97,9 +97,9 @@ public class TEBellows extends TEBase {
     }
 
     public void debug() {
-        TerraFirmaCraft.LOGGER.debug("Debugging Bellows");
-        TerraFirmaCraft.LOGGER.debug("Now: {} | Then: {} | Difference: {}", world.getTotalWorldTime(), lastPushed, (world.getTotalWorldTime() - lastPushed));
-        TerraFirmaCraft.LOGGER.debug("Total Height: {}", getHeight());
+        TerraFirmaGreg.LOGGER.debug("Debugging Bellows");
+        TerraFirmaGreg.LOGGER.debug("Now: {} | Then: {} | Difference: {}", world.getTotalWorldTime(), lastPushed, (world.getTotalWorldTime() - lastPushed));
+        TerraFirmaGreg.LOGGER.debug("Total Height: {}", getHeight());
     }
 
     @Override

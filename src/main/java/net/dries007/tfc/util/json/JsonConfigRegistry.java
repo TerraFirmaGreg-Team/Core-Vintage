@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.module.animal.common.entities.AnimalFood;
 import org.apache.commons.io.FileUtils;
@@ -31,7 +31,7 @@ public enum JsonConfigRegistry {
      */
     public void preInit(File dir) {
         // Init base config dir
-        TerraFirmaCraft.LOGGER.info("Loading or creating TFC config directory");
+        TerraFirmaGreg.LOGGER.info("Loading or creating TFC config directory");
         tfcConfigDir = new File(dir, Tags.MOD_ID);
         if (!tfcConfigDir.exists() && !tfcConfigDir.mkdir()) {
             throw new Error("Problem creating TFC extra config directory.");
@@ -60,8 +60,8 @@ public enum JsonConfigRegistry {
         try {
             recursivePathList = Files.walk(tfcConfigDir.toPath()).filter(f -> Files.isRegularFile(f) && f.toString().endsWith(".json")).toArray(Path[]::new);
         } catch (IOException e) {
-            TerraFirmaCraft.LOGGER.error("Unable to read files in the config directory! TFC will not generate any ore veins or load any damage resitances!");
-            TerraFirmaCraft.LOGGER.error("Error: ", e);
+            TerraFirmaGreg.LOGGER.error("Unable to read files in the config directory! TFC will not generate any ore veins or load any damage resitances!");
+            TerraFirmaGreg.LOGGER.error("Error: ", e);
             return;
         }
         for (Path path : recursivePathList) {
@@ -78,8 +78,8 @@ public enum JsonConfigRegistry {
 
             } catch (IOException e) {
                 // Don't crash the game if one of the files error-ed, just show it in log
-                TerraFirmaCraft.LOGGER.error("There was an error reading a json file at: " + path);
-                TerraFirmaCraft.LOGGER.error("Error: ", e);
+                TerraFirmaGreg.LOGGER.error("There was an error reading a json file at: " + path);
+                TerraFirmaGreg.LOGGER.error("Error: ", e);
             }
         }
         CapabilityDamageResistance.postInit();

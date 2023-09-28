@@ -3,7 +3,7 @@ package net.dries007.tfc.network;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.module.core.common.container.CapabilityContainerListener;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -88,8 +88,8 @@ public class PacketCapabilityContainerUpdate implements IMessage {
         public IMessage onMessage(final PacketCapabilityContainerUpdate message, final MessageContext ctx) {
             if (!message.hasData()) return null; // Don't do anything if no data was sent
 
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                final EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+            TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                final EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
                 final Container container;
 
                 if (player != null) {

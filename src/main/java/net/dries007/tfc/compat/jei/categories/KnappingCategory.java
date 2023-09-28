@@ -6,7 +6,7 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 import net.minecraft.client.Minecraft;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class KnappingCategory extends BaseRecipeCategory<KnappingRecipeWrapper> {
-    private static final ResourceLocation KNAP_TEXTURES = TerraFirmaCraft.getID("textures/gui/knapping.png");
+    private static final ResourceLocation KNAP_TEXTURES = TerraFirmaGreg.getID("textures/gui/knapping.png");
 
     private final IDrawableStatic arrow, outputSlot;
 

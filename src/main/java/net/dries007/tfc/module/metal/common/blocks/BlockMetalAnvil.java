@@ -2,7 +2,7 @@ package net.dries007.tfc.module.metal.common.blocks;
 
 import gregtech.api.unification.material.Material;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
@@ -267,7 +267,7 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock, IMaterial
                     if (te.isItemValid(i, heldItem) && te.getSlotLimit(i) > cap.getStackInSlot(i).getCount()) {
                         ItemStack result = cap.insertItem(i, heldItem, false);
                         playerIn.setHeldItem(hand, result);
-                        TerraFirmaCraft.LOGGER.info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
+                        TerraFirmaGreg.LOGGER.info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
                         return true;
                     }
                 }

@@ -1,7 +1,7 @@
 package net.dries007.tfc.config;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.client.util.GrassColorHandler;
 import net.dries007.tfc.util.Alloy;
 import net.minecraftforge.common.config.Config;
@@ -21,7 +21,7 @@ public final class ConfigTFC {
     @SubscribeEvent
     public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(Tags.MOD_ID)) {
-            TerraFirmaCraft.LOGGER.warn("Config changed");
+            TerraFirmaGreg.LOGGER.warn("Config changed");
             ConfigManager.sync(Tags.MOD_ID, Config.Type.INSTANCE);
             GrassColorHandler.resetColors();
         }

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.soil.api.variant.item;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.minecraft.util.ResourceLocation;
@@ -45,6 +45,6 @@ public interface ISoilItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.getID(String.format("soil/%s/%s", getItemVariant(), getType()));
+        return TerraFirmaGreg.getID(String.format("soil/%s/%s", getItemVariant(), getType()));
     }
 }

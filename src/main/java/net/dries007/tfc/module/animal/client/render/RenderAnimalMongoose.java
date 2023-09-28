@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalMongoose;
 import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalMongoose;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalMongoose extends RenderLiving<EntityAnimalMongoose> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/mongoose.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaGreg.getID("textures/entity/animal/huntable/mongoose.png");
 
     public RenderAnimalMongoose(RenderManager renderManager) {
         super(renderManager, new ModelAnimalMongoose(), 0.7F);

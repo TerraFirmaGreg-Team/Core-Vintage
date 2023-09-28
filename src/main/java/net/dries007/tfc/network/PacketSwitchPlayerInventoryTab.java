@@ -1,7 +1,7 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -33,9 +33,9 @@ public class PacketSwitchPlayerInventoryTab implements IMessage {
     public static final class Handler implements IMessageHandler<PacketSwitchPlayerInventoryTab, IMessage> {
         @Override
         public IMessage onMessage(PacketSwitchPlayerInventoryTab message, MessageContext ctx) {
-            EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+            EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
             if (player != null) {
-                TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                     player.openContainer.onContainerClosed(player);
                     if (message.typeToSwitchTo == TFCGuiHandler.Type.INVENTORY) {
                         player.openContainer = player.inventoryContainer;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -53,9 +53,9 @@ public class PacketChunkData implements IMessage {
     public static class Handler implements IMessageHandler<PacketChunkData, IMessage> {
         @Override
         public IMessage onMessage(PacketChunkData message, MessageContext ctx) {
-            final World world = TerraFirmaCraft.getProxy().getWorld(ctx);
+            final World world = TerraFirmaGreg.getProxy().getWorld(ctx);
             if (world != null) {
-                TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                     // Update client-side chunk data capability
                     Chunk chunk = world.getChunk(message.x, message.z);
                     ChunkDataTFC data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);

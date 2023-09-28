@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.agriculture.api.bush;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.module.agriculture.api.bush.type.BushType;
@@ -26,7 +26,7 @@ public interface IBushBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.getID(String.format("berry_bush/%s", getType()));
+        return TerraFirmaGreg.getID(String.format("berry_bush/%s", getType()));
     }
 
     /**
@@ -36,7 +36,7 @@ public interface IBushBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.getID(String.format("berry_bush/%s", getType()));
+        return TerraFirmaGreg.getID(String.format("berry_bush/%s", getType()));
     }
 
     /**

@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.devices.common.tile;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
@@ -183,7 +183,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
                 chimney = value;
                 return;
         }
-        TerraFirmaCraft.LOGGER.warn("Illegal field id {} in TEBlastFurnace#setField", index);
+        TerraFirmaGreg.LOGGER.warn("Illegal field id {} in TEBlastFurnace#setField", index);
     }
 
     @Override
@@ -202,7 +202,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
             case CHIMNEY_LEVELS:
                 return chimney;
         }
-        TerraFirmaCraft.LOGGER.warn("Illegal field id {} in TEBlastFurnace#getField", index);
+        TerraFirmaGreg.LOGGER.warn("Illegal field id {} in TEBlastFurnace#getField", index);
         return 0;
     }
 
@@ -328,12 +328,12 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
 
 
     public void debug() {
-        TerraFirmaCraft.LOGGER.debug("Debugging Blast Furnace:");
-        TerraFirmaCraft.LOGGER.debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature, burnTicksLeft);
-        TerraFirmaCraft.LOGGER.debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
+        TerraFirmaGreg.LOGGER.debug("Debugging Blast Furnace:");
+        TerraFirmaGreg.LOGGER.debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature, burnTicksLeft);
+        TerraFirmaGreg.LOGGER.debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
         int i = 0;
         for (ItemStack item : oreStacks) {
-            TerraFirmaCraft.LOGGER.debug("Slot: {} - NBT: {}", i, item.serializeNBT().toString());
+            TerraFirmaGreg.LOGGER.debug("Slot: {} - NBT: {}", i, item.serializeNBT().toString());
         }
     }
 

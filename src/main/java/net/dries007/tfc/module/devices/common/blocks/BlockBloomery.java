@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.devices.common.blocks;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -392,7 +392,7 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
 
-        var resourceLocation = TerraFirmaCraft.getID(NAME.replaceAll("\\.", "/"));
+        var resourceLocation = TerraFirmaGreg.getID(NAME.replaceAll("\\.", "/"));
 
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder().customPath(resourceLocation).build());

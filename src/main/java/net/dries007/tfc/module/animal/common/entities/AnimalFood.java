@@ -2,7 +2,7 @@ package net.dries007.tfc.module.animal.common.entities;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.minecraft.entity.Entity;
@@ -52,10 +52,10 @@ public class AnimalFood {
                 AnimalFood animalFood = GSON.fromJson(entry.getValue(), AnimalFood.class);
 
                 ANIMAL_FOOD_MAP.put(entityEntry.getEntityClass(), animalFood);
-                TerraFirmaCraft.LOGGER.info("Registered animal food data for " + entityName);
+                TerraFirmaGreg.LOGGER.info("Registered animal food data for " + entityName);
             } catch (JsonParseException e) {
-                TerraFirmaCraft.LOGGER.error("Error while reading an entry! Skipping.");
-                TerraFirmaCraft.LOGGER.error("Error: ", e);
+                TerraFirmaGreg.LOGGER.error("Error while reading an entry! Skipping.");
+                TerraFirmaGreg.LOGGER.error("Error: ", e);
             }
         }
     }

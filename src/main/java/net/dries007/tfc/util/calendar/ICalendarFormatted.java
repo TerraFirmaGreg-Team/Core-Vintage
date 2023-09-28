@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.calendar;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -37,8 +37,8 @@ public interface ICalendarFormatted extends ICalendar {
     }
 
     static String getTimeAndDate(int hour, int minute, Month month, int day, long years) {
-        String monthName = TerraFirmaCraft.getProxy().getMonthName(month, false);
-        return TerraFirmaCraft.getProxy().getDate(hour, minute, monthName, day, years);
+        String monthName = TerraFirmaGreg.getProxy().getMonthName(month, false);
+        return TerraFirmaGreg.getProxy().getDate(hour, minute, monthName, day, years);
     }
 
     @Nonnull
@@ -66,11 +66,11 @@ public interface ICalendarFormatted extends ICalendar {
     }
 
     default String getSeasonDisplayName() {
-        return TerraFirmaCraft.getProxy().getMonthName(getMonthOfYear(), true);
+        return TerraFirmaGreg.getProxy().getMonthName(getMonthOfYear(), true);
     }
 
     default String getDisplayDayName() {
-        return TerraFirmaCraft.getProxy().getDayName(getDayOfMonth(), getTotalDays());
+        return TerraFirmaGreg.getProxy().getDayName(getDayOfMonth(), getTotalDays());
     }
 
     /**

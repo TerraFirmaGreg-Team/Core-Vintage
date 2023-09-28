@@ -2,7 +2,7 @@ package net.dries007.tfc.module.plant.common.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.module.core.api.block.BlockBase;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.minecraft.block.Block;
@@ -43,7 +43,7 @@ public class BlockPlantPot extends BlockBase {
         var blockRegistryName = String.format("flowerpot/%s", plant);
 
         setCreativeTab(FLORA_TAB);
-        setRegistryName(TerraFirmaCraft.getID(blockRegistryName));
+        setRegistryName(TerraFirmaGreg.getID(blockRegistryName));
         setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
     }
 

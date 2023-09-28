@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalSaberTooth;
 import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalSaberTooth;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalSaberTooth extends RenderLiving<EntityAnimalSaberTooth> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/sabertooth.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaGreg.getID("textures/entity/animal/predators/sabertooth.png");
 
     public RenderAnimalSaberTooth(RenderManager renderManager) {
         super(renderManager, new ModelAnimalSaberTooth(), 0.7F);

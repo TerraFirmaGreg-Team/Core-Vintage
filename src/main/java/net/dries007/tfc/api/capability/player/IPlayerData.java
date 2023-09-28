@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.capability.player;
 
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.util.skills.Skill;
@@ -76,7 +76,7 @@ public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
     default void updateAndSync() {
         EntityPlayer player = getPlayer();
         if (player instanceof EntityPlayerMP) {
-            TerraFirmaCraft.network.sendTo(new PacketPlayerDataUpdate(serializeNBT()), (EntityPlayerMP) player);
+            TerraFirmaGreg.network.sendTo(new PacketPlayerDataUpdate(serializeNBT()), (EntityPlayerMP) player);
         }
     }
 }

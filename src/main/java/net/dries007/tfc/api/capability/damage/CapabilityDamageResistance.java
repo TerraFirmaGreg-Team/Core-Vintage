@@ -3,7 +3,7 @@ package net.dries007.tfc.api.capability.damage;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.entity.Entity;
@@ -27,7 +27,7 @@ import java.util.function.Supplier;
 import static net.dries007.tfc.util.Constants.GSON;
 
 public final class CapabilityDamageResistance {
-    public static final ResourceLocation KEY = TerraFirmaCraft.getID("damage_resistance");
+    public static final ResourceLocation KEY = TerraFirmaGreg.getID("damage_resistance");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ARMOR = new HashMap<>(); //Used inside CT, set custom IDamageResistance for armor items outside TFC
     public static final Map<String, Supplier<ICapabilityProvider>> ENTITY_RESISTANCE = new HashMap<>(); // Map entities -> Capability to damage resistance
     @CapabilityInject(IDamageResistance.class)
@@ -42,7 +42,7 @@ public final class CapabilityDamageResistance {
      * Output to log
      */
     public static void postInit() {
-        TerraFirmaCraft.LOGGER.info("Entity resistance data initialized, loaded a total of {} resistance configurations", ENTITY_RESISTANCE.size());
+        TerraFirmaGreg.LOGGER.info("Entity resistance data initialized, loaded a total of {} resistance configurations", ENTITY_RESISTANCE.size());
     }
 
     /**
@@ -59,8 +59,8 @@ public final class CapabilityDamageResistance {
 
                 ENTITY_RESISTANCE.put(entityName, () -> resistance);
             } catch (JsonParseException e) {
-                TerraFirmaCraft.LOGGER.error("An entity resistance is specified incorrectly! Skipping.");
-                TerraFirmaCraft.LOGGER.error("Error: ", e);
+                TerraFirmaGreg.LOGGER.error("An entity resistance is specified incorrectly! Skipping.");
+                TerraFirmaGreg.LOGGER.error("Error: ", e);
             }
         }
     }

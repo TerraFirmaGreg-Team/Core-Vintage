@@ -2,7 +2,7 @@ package net.dries007.tfc.client.gui;
 
 import com.google.common.base.Strings;
 import com.google.gson.JsonParseException;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.world.classic.WorldGenSettings;
 import net.dries007.tfc.world.classic.WorldGenSettings.WorldGenSettingsBuilder;
 import net.minecraft.client.gui.*;
@@ -203,8 +203,8 @@ public class GuiCustomizeWorld extends GuiScreen implements GuiSlider.FormatHelp
             try {
                 return WorldGenSettings.fromString(str);
             } catch (JsonParseException e) {
-                TerraFirmaCraft.LOGGER.error("Error parsing s: {}", str);
-                TerraFirmaCraft.LOGGER.catching(e);
+                TerraFirmaGreg.LOGGER.error("Error parsing s: {}", str);
+                TerraFirmaGreg.LOGGER.catching(e);
             }
         }
         return new WorldGenSettingsBuilder();

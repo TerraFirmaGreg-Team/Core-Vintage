@@ -3,7 +3,7 @@ package net.dries007.tfc.util;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -61,7 +61,7 @@ public class OreDictionaryHelper {
         if (block instanceof IItemProvider itemBlock && itemBlock.getItemBlock() != null) {
             register(new ItemStack(block), parts);
         } else {
-            TerraFirmaCraft.LOGGER.warn(String.format("Trying to register [%s] oredict, but itemblock is null. Skipping!", parts[0]));
+            TerraFirmaGreg.LOGGER.warn(String.format("Trying to register [%s] oredict, but itemblock is null. Skipping!", parts[0]));
         }
     }
 
@@ -88,7 +88,7 @@ public class OreDictionaryHelper {
      */
     public static boolean doesStackMatchOre(@Nonnull ItemStack stack, String name) {
         if (!OreDictionary.doesOreNameExist(name)) {
-            // TerraFirmaCraft.getLog().warn("doesStackMatchOre called with non-existing name. stack: {} name: {}", stack, name);
+            // TerraFirmaGreg.getLog().warn("doesStackMatchOre called with non-existing name. stack: {} name: {}", stack, name);
             return false;
         }
         if (stack.isEmpty()) return false;

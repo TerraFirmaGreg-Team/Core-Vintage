@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.wood.client.gui;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
@@ -38,7 +38,7 @@ import java.util.List;
 
 
 public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
-    public static final ResourceLocation BARREL_BACKGROUND = TerraFirmaCraft.getID("textures/gui/barrel.png");
+    public static final ResourceLocation BARREL_BACKGROUND = TerraFirmaGreg.getID("textures/gui/barrel.png");
     private final String translationKey;
 
     public GuiWoodBarrel(Container container, InventoryPlayer playerInv, TEWoodBarrel tile, String translationKey) {
@@ -192,7 +192,7 @@ public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
-        TerraFirmaCraft.network.sendToServer(new PacketGuiButton(button.id));
+        TerraFirmaGreg.network.sendToServer(new PacketGuiButton(button.id));
         super.actionPerformed(button);
     }
 }

@@ -4,7 +4,7 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
@@ -22,7 +22,7 @@ public class WeldingRecipes {
             if (material.hasProperty(TFGPropertyKey.HEAT) && !material.hasFlag(TFGMaterialFlags.UNUSABLE)) {
 
                 registry.register(new WeldingRecipe(
-                        TerraFirmaCraft.getID("plate_" + material.getName()),
+                        TerraFirmaGreg.getID("plate_" + material.getName()),
                         IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
                         IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
                         OreDictUnifier.get(TFGOrePrefix.ingotDouble, material),
@@ -30,7 +30,7 @@ public class WeldingRecipes {
                 ));
 
                 registry.register(new WeldingRecipe(
-                        TerraFirmaCraft.getID("double_plate_" + material.getName()),
+                        TerraFirmaGreg.getID("double_plate_" + material.getName()),
                         IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotDouble, material)),
                         IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, material)),
                         OreDictUnifier.get(TFGOrePrefix.ingotTriple, material),
@@ -38,7 +38,7 @@ public class WeldingRecipes {
                 ));
 
                 registry.register(new WeldingRecipe(
-                        TerraFirmaCraft.getID("triple_plate_" + material.getName()),
+                        TerraFirmaGreg.getID("triple_plate_" + material.getName()),
                         IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
                         IIngredient.of(OreDictUnifier.get(TFGOrePrefix.ingotTriple, material)),
                         OreDictUnifier.get(TFGOrePrefix.ingotHex, material),
@@ -48,7 +48,7 @@ public class WeldingRecipes {
         }
 
         registry.register(new WeldingRecipe(
-                TerraFirmaCraft.getID("high_carbon_black_steel"),
+                TerraFirmaGreg.getID("high_carbon_black_steel"),
                 IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.WeakSteel)),
                 IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.PigIron)),
                 OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.HighCarbonBlackSteel),
@@ -56,7 +56,7 @@ public class WeldingRecipes {
         ));
 
         registry.register(new WeldingRecipe(
-                TerraFirmaCraft.getID("high_carbon_blue_steel"),
+                TerraFirmaGreg.getID("high_carbon_blue_steel"),
                 IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.WeakBlueSteel)),
                 IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, Materials.BlackSteel)),
                 OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.HighCarbonBlueSteel),
@@ -64,7 +64,7 @@ public class WeldingRecipes {
         ));
 
         registry.register(new WeldingRecipe(
-                TerraFirmaCraft.getID("high_carbon_red_steel"),
+                TerraFirmaGreg.getID("high_carbon_red_steel"),
                 IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.WeakRedSteel)),
                 IIngredient.of(OreDictUnifier.get(OrePrefix.ingot, Materials.BlackSteel)),
                 OreDictUnifier.get(OrePrefix.ingot, TFGMaterials.HighCarbonRedSteel),

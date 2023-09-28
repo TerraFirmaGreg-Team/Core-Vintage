@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiNutrition extends GuiContainerTFC {
-    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.getID("textures/gui/player_nutrition.png");
+    private static final ResourceLocation BACKGROUND = TerraFirmaGreg.getID("textures/gui/player_nutrition.png");
 
     private final float[] cachedNutrients;
 
@@ -72,7 +72,7 @@ public class GuiNutrition extends GuiContainerTFC {
                 if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
                     this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
                 }
-                TerraFirmaCraft.network.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
+                TerraFirmaGreg.network.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
             }
         }
     }

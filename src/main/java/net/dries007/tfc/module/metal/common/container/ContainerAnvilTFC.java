@@ -2,7 +2,7 @@ package net.dries007.tfc.module.metal.common.container;
 
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
@@ -93,7 +93,7 @@ public class ContainerAnvilTFC extends ContainerTE<TEMetalAnvil> implements IBut
             return false;
         }
         if (!Helpers.isAtLeast(tile.getTier(), recipe.getTier())) {
-            TerraFirmaCraft.LOGGER.info("Anvil Tier: {} + Recipe Tier: {}", tile.getTier(), recipe.getTier());
+            TerraFirmaGreg.LOGGER.info("Anvil Tier: {} + Recipe Tier: {}", tile.getTier(), recipe.getTier());
             player.sendMessage(new TextComponentTranslation(Tags.MOD_ID + ".tooltip.anvil_tier_too_low"));
             return false;
         }

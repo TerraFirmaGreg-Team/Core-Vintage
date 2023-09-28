@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * This is part of an effort to find the cause of TerraFirmaCraft#355 and TerraFirmaCraft#361
+ * This is part of an effort to find the cause of TerraFirmaGreg#355 and TerraFirmaGreg#361
  */
 @ParametersAreNonnullByDefault
 public class CommandDebugInfo extends CommandBase {

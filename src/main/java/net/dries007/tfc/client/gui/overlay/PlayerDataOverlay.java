@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui.overlay;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
@@ -35,7 +35,7 @@ import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public final class PlayerDataOverlay {
-    private static final ResourceLocation ICONS = TerraFirmaCraft.getID("textures/gui/icons/overlay.png");
+    private static final ResourceLocation ICONS = TerraFirmaGreg.getID("textures/gui/icons/overlay.png");
     private static final ResourceLocation MC_ICONS = new ResourceLocation("minecraft:textures/gui/icons.png");
     private static final PlayerDataOverlay INSTANCE = new PlayerDataOverlay();
 

@@ -1,7 +1,7 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,8 +43,8 @@ public class PacketStackFood implements IMessage {
     public static final class Handler implements IMessageHandler<PacketStackFood, IMessage> {
         @Override
         public IMessage onMessage(PacketStackFood message, MessageContext ctx) {
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+            TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
                 if (player != null) {
                     if (!(player.openContainer instanceof ContainerPlayer) || message.slotNumber < 0 || message.slotNumber >= player.openContainer.inventorySlots.size()) {
                         return;

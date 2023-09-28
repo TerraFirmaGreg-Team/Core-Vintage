@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.devices.common.tile;
 
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -306,7 +306,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
             this.temperature = value;
             return;
         }
-        TerraFirmaCraft.LOGGER.warn("Illegal field id {} in TECrucible#setField", index);
+        TerraFirmaGreg.LOGGER.warn("Illegal field id {} in TECrucible#setField", index);
     }
 
     @Override
@@ -314,7 +314,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
         if (index == FIELD_TEMPERATURE) {
             return (int) temperature;
         }
-        TerraFirmaCraft.LOGGER.warn("Illegal field id {} in TECrucible#getField", index);
+        TerraFirmaGreg.LOGGER.warn("Illegal field id {} in TECrucible#getField", index);
         return 0;
     }
 

@@ -3,7 +3,7 @@ package net.dries007.tfc.client;
 import com.ferreusveritas.dynamictrees.models.bakedmodels.BakedModelBlockRooty;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -241,13 +241,13 @@ public class ClientProxy extends CommonProxy {
     public static void onKeyEvent(InputEvent event) {
         // todo: move this to a button on the inventory GUI
         if (TFCKeybindings.OPEN_CRAFTING_TABLE.isPressed()) {
-            TerraFirmaCraft.network.sendToServer(new PacketOpenCraftingGui());
+            TerraFirmaGreg.network.sendToServer(new PacketOpenCraftingGui());
         }
         if (TFCKeybindings.PLACE_BLOCK.isPressed()) {
-            TerraFirmaCraft.network.sendToServer(new PacketPlaceBlockSpecial());
+            TerraFirmaGreg.network.sendToServer(new PacketPlaceBlockSpecial());
         }
         if (TFCKeybindings.CHANGE_ITEM_MODE.isPressed()) {
-            TerraFirmaCraft.network.sendToServer(new PacketCycleItemMode());
+            TerraFirmaGreg.network.sendToServer(new PacketCycleItemMode());
         }
     }
 
@@ -259,7 +259,7 @@ public class ClientProxy extends CommonProxy {
             if (event.getGui() instanceof GuiContainer) {
                 Slot slotUnderMouse = ((GuiContainer) event.getGui()).getSlotUnderMouse();
                 if (slotUnderMouse != null) {
-                    TerraFirmaCraft.network.sendToServer(new PacketStackFood(slotUnderMouse.slotNumber));
+                    TerraFirmaGreg.network.sendToServer(new PacketStackFood(slotUnderMouse.slotNumber));
                 }
             }
         }
@@ -287,7 +287,7 @@ public class ClientProxy extends CommonProxy {
             if (event.getButton() instanceof GuiButtonPlayerInventoryTab button) {
                 // This is to prevent the button from immediately firing after moving (enabled is set to false then)
                 if (button.isActive() && button.enabled) {
-                    TerraFirmaCraft.network.sendToServer(new PacketSwitchPlayerInventoryTab(button.getGuiType()));
+                    TerraFirmaGreg.network.sendToServer(new PacketSwitchPlayerInventoryTab(button.getGuiType()));
                 }
             }
         }
@@ -320,7 +320,7 @@ public class ClientProxy extends CommonProxy {
                 ChunkDataTFC data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
 
                 list.add("");
-                list.add(AQUA + "TerraFirmaCraft");
+                list.add(AQUA + "TerraFirmaGreg");
                 boolean chunkDataValid = data != null && data.isInitialized();
 
                 if (chunkDataValid) {

@@ -1,7 +1,7 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.config.ConfigTFC;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
@@ -70,8 +70,8 @@ public class PacketSimpleMessage implements IMessage {
 
         @Override
         public IMessage onMessage(PacketSimpleMessage message, MessageContext ctx) {
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+            TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
                 if (player != null) {
                     player.sendStatusMessage(message.text, message.category.displayToToolbar.getAsBoolean());
                 }

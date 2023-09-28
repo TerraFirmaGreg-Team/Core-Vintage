@@ -2,7 +2,7 @@ package net.dries007.tfc.module.core.common.items;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -56,19 +56,19 @@ public class ItemDebug extends Item {
                 try {
                     tile.getClass().getMethod("debug").invoke(tile);
                 } catch (Exception t) {
-                    TerraFirmaCraft.LOGGER.info("No debug method found to invoke on {}", tile);
+                    TerraFirmaGreg.LOGGER.info("No debug method found to invoke on {}", tile);
                 }
 
-                TerraFirmaCraft.LOGGER.info("Tile Data: {}", tile.serializeNBT());
+                TerraFirmaGreg.LOGGER.info("Tile Data: {}", tile.serializeNBT());
 
                 IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (inventory != null) {
-                    TerraFirmaCraft.LOGGER.info("Found item handler: {}", inventory);
+                    TerraFirmaGreg.LOGGER.info("Found item handler: {}", inventory);
                 }
 
                 IFluidHandler fluids = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
                 if (fluids != null) {
-                    TerraFirmaCraft.LOGGER.info("Found fluid handler: {}", fluids);
+                    TerraFirmaGreg.LOGGER.info("Found fluid handler: {}", fluids);
                 }
             }
         } catch (Exception t) { /* Nothing Burger */ }

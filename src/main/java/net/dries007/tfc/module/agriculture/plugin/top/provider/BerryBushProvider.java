@@ -5,7 +5,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.common.tiles.TETickCounter;
 import net.dries007.tfc.module.agriculture.common.blocks.BlockBerryBush;
@@ -51,7 +51,7 @@ public class BerryBushProvider implements IProbeInfoProvider {
                 probeInfo.text(new TextComponentTranslation("top.tfc.agriculture.harvesting_months").getFormattedText());
                 for (Month month : Month.values()) {
                     if (block.getType().isHarvestMonth(month)) {
-                        probeInfo.text(TerraFirmaCraft.getProxy().getMonthName(month, true));
+                        probeInfo.text(TerraFirmaGreg.getProxy().getMonthName(month, true));
                     }
                 }
             }

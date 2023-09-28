@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.init;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.recipes.*;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
@@ -18,67 +18,67 @@ public class RegistryCore {
     public static void createRegistries(RegistryEvent.NewRegistry event) {
 
         new RegistryBuilder<AlloyRecipe>()
-                .setName(TerraFirmaCraft.getID("alloy_recipe"))
+                .setName(TerraFirmaGreg.getID("alloy_recipe"))
                 .setType(AlloyRecipe.class)
                 .allowModification()
                 .create();
 
         new RegistryBuilder<KnappingRecipe>()
-                .setName(TerraFirmaCraft.getID("knapping_recipe"))
+                .setName(TerraFirmaGreg.getID("knapping_recipe"))
                 .setType(KnappingRecipe.class)
                 .allowModification()
                 .create();
 
         new RegistryBuilder<AnvilRecipe>()
-                .setName(TerraFirmaCraft.getID("anvil_recipe"))
+                .setName(TerraFirmaGreg.getID("anvil_recipe"))
                 .setType(AnvilRecipe.class)
                 .allowModification()
                 .create();
 
         new RegistryBuilder<WeldingRecipe>()
-                .setName(TerraFirmaCraft.getID("welding_recipe"))
+                .setName(TerraFirmaGreg.getID("welding_recipe"))
                 .setType(WeldingRecipe.class)
                 .allowModification()
                 .create();
 
         new RegistryBuilder<HeatRecipe>()
-                .setName(TerraFirmaCraft.getID("heat_recipe"))
+                .setName(TerraFirmaGreg.getID("heat_recipe"))
                 .setType(HeatRecipe.class)
                 .allowModification()
                 .create();
 
         new RegistryBuilder<BarrelRecipe>()
-                .setName(TerraFirmaCraft.getID("barrel_recipe"))
+                .setName(TerraFirmaGreg.getID("barrel_recipe"))
                 .setType(BarrelRecipe.class)
                 .allowModification()
                 .create();
 
         new RegistryBuilder<LoomRecipe>()
-                .setName(TerraFirmaCraft.getID("loom_recipe"))
+                .setName(TerraFirmaGreg.getID("loom_recipe"))
                 .setType(LoomRecipe.class)
                 .allowModification()
                 .create();
 
         new RegistryBuilder<QuernRecipe>()
-                .setName(TerraFirmaCraft.getID("quern_recipe"))
+                .setName(TerraFirmaGreg.getID("quern_recipe"))
                 .setType(QuernRecipe.class)
                 .allowModification()
                 .create();
 
         new RegistryBuilder<ChiselRecipe>()
-                .setName(TerraFirmaCraft.getID("chisel_recipe"))
+                .setName(TerraFirmaGreg.getID("chisel_recipe"))
                 .setType(ChiselRecipe.class)
                 .allowModification()
                 .create();
 
         new RegistryBuilder<BloomeryRecipe>()
-                .setName(TerraFirmaCraft.getID("bloomery_recipe"))
+                .setName(TerraFirmaGreg.getID("bloomery_recipe"))
                 .setType(BloomeryRecipe.class)
                 .allowModification()
                 .create();
 
         new RegistryBuilder<BlastFurnaceRecipe>()
-                .setName(TerraFirmaCraft.getID("blast_furnace_recipe"))
+                .setName(TerraFirmaGreg.getID("blast_furnace_recipe"))
                 .setType(BlastFurnaceRecipe.class)
                 .allowModification()
                 .create();

@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 
 public class GuiButtonPage extends GuiButton implements IButtonTooltip {
-    private static final ResourceLocation ICONS = TerraFirmaCraft.getID("textures/gui/icons.png");
+    private static final ResourceLocation ICONS = TerraFirmaGreg.getID("textures/gui/icons.png");
     private final Type type;
     private final String tooltip; // Lang key
 

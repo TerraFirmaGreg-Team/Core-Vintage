@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.metal.client.gui;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilPlanIcon;
 import net.dries007.tfc.client.button.GuiButtonPage;
@@ -28,7 +28,7 @@ import static net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil.SLOT_INPUT
 
 @SideOnly(Side.CLIENT)
 public class GuiMetalAnvilPlan extends GuiContainerTE<TEMetalAnvil> {
-    public static final ResourceLocation PLAN_BACKGROUND = TerraFirmaCraft.getID("textures/gui/anvil_plan.png");
+    public static final ResourceLocation PLAN_BACKGROUND = TerraFirmaGreg.getID("textures/gui/anvil_plan.png");
 
     private final ItemStack inputStack;
     private int page;
@@ -74,7 +74,7 @@ public class GuiMetalAnvilPlan extends GuiContainerTE<TEMetalAnvil> {
         if (button instanceof GuiButtonAnvilPlanIcon) {
             // This fires when you select a plan in the Plan GUI
             ResourceLocation recipeName = ((GuiButtonAnvilPlanIcon) button).getRecipeName();
-            TerraFirmaCraft.network.sendToServer(new PacketGuiButton(button.id, new NBTBuilder().setString("recipe", recipeName.toString()).build()));
+            TerraFirmaGreg.network.sendToServer(new PacketGuiButton(button.id, new NBTBuilder().setString("recipe", recipeName.toString()).build()));
         } else if (button == buttonLeft) {
             page--;
             updatePage();

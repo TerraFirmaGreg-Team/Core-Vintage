@@ -1,6 +1,6 @@
 //package net.dries007.tfc.world.classic.worldgen.trees;
 //
-//import net.dries007.tfc.TerraFirmaCraft;
+//import net.dries007.tfc.TerraFirmaGreg;
 //import net.dries007.tfc.world.classic.worldgen.trees.ITreeGenerator;
 //import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 //import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants;
@@ -73,11 +73,11 @@
 //    }
 //
 //    private void placeBranch(TemplateManager manager, World world, BlockPos pos, String name) {
-//        ResourceLocation base = TerraFirmaCraft.identifier(name);
+//        ResourceLocation base = TerraFirmaGreg.identifier(name);
 //        Template structureBase = manager.get(world.getMinecraftServer(), base);
 //
 //        if (structureBase == null) {
-//            TerraFirmaCraft.LOGGER.warn("Unable to find a template for " + base);
+//            TerraFirmaGreg.LOGGER.warn("Unable to find a template for " + base);
 //            return;
 //        }
 //        BlockPos size = structureBase.getSize();

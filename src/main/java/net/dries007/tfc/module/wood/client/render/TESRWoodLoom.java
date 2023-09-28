@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.wood.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.module.core.api.render.TESRBase;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.common.tiles.TEWoodLoom;
@@ -31,7 +31,7 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
             woodType = te.getWood();
             GlStateManager.pushMatrix();
             Helpers.setWoodColor(woodType.getColor());
-            this.bindTexture(TerraFirmaCraft.getID("textures/blocks/wood/planks.png"));
+            this.bindTexture(TerraFirmaGreg.getID("textures/blocks/wood/planks.png"));
 
             GlStateManager.disableLighting();
 

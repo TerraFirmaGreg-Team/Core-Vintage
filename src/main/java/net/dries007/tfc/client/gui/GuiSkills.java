@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.client.button.GuiButtonPage;
@@ -23,7 +23,7 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiSkills extends GuiContainerTFC {
-    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.getID("textures/gui/player_skills.png");
+    private static final ResourceLocation BACKGROUND = TerraFirmaGreg.getID("textures/gui/player_skills.png");
 
     private final String[] skillTooltips;
     private final int[] skillBarWidths;
@@ -89,7 +89,7 @@ public class GuiSkills extends GuiContainerTFC {
                 if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
                     this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
                 }
-                TerraFirmaCraft.network.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
+                TerraFirmaGreg.network.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
             }
         } else if (button == buttonLeft) {
             currentPage--;
@@ -111,7 +111,7 @@ public class GuiSkills extends GuiContainerTFC {
             int totalSkills = skillOrder.size();
             int startSkill = currentPage * 4;
             if (startSkill >= totalSkills || startSkill < 0) {
-                TerraFirmaCraft.LOGGER.warn("Invalid skill page! Page: {}, Start at: {}, Skill Order is: {}", currentPage, startSkill, skillOrder);
+                TerraFirmaGreg.LOGGER.warn("Invalid skill page! Page: {}, Start at: {}, Skill Order is: {}", currentPage, startSkill, skillOrder);
                 return;
             }
             buttonRight.enabled = startSkill + 4 < totalSkills;

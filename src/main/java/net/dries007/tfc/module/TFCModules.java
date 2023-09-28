@@ -31,14 +31,14 @@ public class TFCModules {
     public static Map<String, Boolean> MODULES = new TreeMap<>();
 
     static {
-        MODULES.put(ModuleWood.MODULE_ID, true);
         MODULES.put(ModuleRock.MODULE_ID, true);
         MODULES.put(ModuleSoil.MODULE_ID, true);
+        MODULES.put(ModuleWood.MODULE_ID, true);
         MODULES.put(ModuleMetal.MODULE_ID, true);
-        MODULES.put(ModulePlant.MODULE_ID, true);
         MODULES.put(ModuleFood.MODULE_ID, true);
-        MODULES.put(ModuleDevice.MODULE_ID, true);
+        MODULES.put(ModulePlant.MODULE_ID, true);
         MODULES.put(ModuleAnimal.MODULE_ID, true);
+        MODULES.put(ModuleDevice.MODULE_ID, true);
         MODULES.put(ModuleAgriculture.MODULE_ID, true);
 
     }

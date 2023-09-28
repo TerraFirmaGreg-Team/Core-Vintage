@@ -1,16 +1,14 @@
 package net.dries007.tfc.module.food.api.variant.Item;
 
-import net.dries007.tfc.module.food.api.type.FoodType;
 import net.dries007.tfc.api.util.Pair;
-import net.minecraft.item.Item;
+import net.dries007.tfc.module.food.api.type.FoodType;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.common.objects.items.TFCItems.FOOD_ITEMS;
-import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
+import static net.dries007.tfc.module.food.StorageFood.FOOD_ITEMS;
 
 /**
  * Класс, представляющий тип блока породы.
@@ -44,11 +42,8 @@ public class FoodItemVariant {
         }
 
         for (var type : FoodType.getFoodType()) {
-            var foodItem = this.create(type);
-
-            if (FOOD_ITEMS.put(new Pair<>(this, type), foodItem) != null)
+            if (FOOD_ITEMS.put(new Pair<>(this, type), this.create(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-            ITEMS.add((Item) foodItem);
         }
     }
 

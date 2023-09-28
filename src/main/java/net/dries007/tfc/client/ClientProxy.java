@@ -52,7 +52,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.math.BlockPos;
@@ -71,7 +70,6 @@ import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -211,17 +209,8 @@ public class ClientProxy extends CommonProxy {
 
         //==== Other =================================================================================================//
 
-
         itemColors.registerItemColorHandler((s, i) -> i == 1 ? EnumDyeColor.byDyeDamage(s.getItemDamage()).getColorValue() : 0xFFFFFF,
                 ItemsTFC_old.UNFIRED_VESSEL_GLAZED, ItemsTFC_old.FIRED_VESSEL_GLAZED);
-
-        itemColors.registerItemColorHandler((s, i) -> {
-            var food = s.getCapability(CapabilityFood.CAPABILITY, null);
-            if (food != null) {
-                return food.isRotten() ? ConfigTFC.Client.DISPLAY.rottenFoodOverlayColor : 0xFFFFFF;
-            }
-            return 0xFFFFFF;
-        }, ForgeRegistries.ITEMS.getValuesCollection().stream().filter(x -> x instanceof ItemFood).toArray(Item[]::new));
 
         // Colorize clay molds
         itemColors.registerItemColorHandler(moldItemColors, TFCItems.FIRED_MOLDS.values().toArray(new Item[0]));

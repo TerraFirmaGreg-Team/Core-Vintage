@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.food.api.variant.Item;
 
 import net.dries007.tfc.TerraFirmaGreg;
-import net.dries007.tfc.module.food.api.type.FoodType;
 import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.module.food.api.type.FoodType;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -21,35 +21,26 @@ public interface IFoodItem extends IHasModel {
     FoodType getType();
 
     @Nonnull
-    FoodItemVariant getVariants();
+    FoodItemVariant getItemVariant();
 
     /**
      * Возвращает расположение в реестре для данного подтипа предмета.
      *
-     * @return расположение в реестре
+     * @return Расположение в реестре
      */
     @Nonnull
-    default ResourceLocation getRegistryLocation() {
-        return TerraFirmaGreg.getID(String.format("food/%s", getType()));
+    default String getName() {
+        return String.format("food.%s.%s", getItemVariant(), getType());
     }
 
     /**
      * Возвращает расположение ресурса для данного подтипа предмета.
      *
-     * @return расположение ресурса
+     * @return Расположение ресурса
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
         return TerraFirmaGreg.getID(String.format("food/%s", getType()));
     }
 
-    /**
-     * Возвращает локализованное имя для данного подтипа предмета.
-     *
-     * @return локализованное имя
-     */
-    @Nonnull
-    default String getTranslationName() {
-        return getRegistryLocation().toString().toLowerCase().replace(":", ".").replace("/", ".");
-    }
 }

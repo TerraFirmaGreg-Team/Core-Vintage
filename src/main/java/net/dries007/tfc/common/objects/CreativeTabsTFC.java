@@ -18,7 +18,6 @@ public final class CreativeTabsTFC {
 
 
     public static final CreativeTabs POTTERY_TAB = new TFCCreativeTab("pottery", "tfc:ceramics/fired/mold/ingot");
-    public static final CreativeTabs FOOD_TAB = new TFCCreativeTab("food", "tfc:food/green_apple");
 
 
     public static class TFCCreativeTab extends CreativeTabs {

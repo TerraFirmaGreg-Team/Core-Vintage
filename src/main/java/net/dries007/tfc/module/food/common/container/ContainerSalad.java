@@ -4,14 +4,14 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.food.Nutrient;
-import net.dries007.tfc.module.food.api.category.FoodCategories;
-import net.dries007.tfc.module.food.api.category.FoodCategory;
-import net.dries007.tfc.module.food.api.type.FoodTypes;
-import net.dries007.tfc.module.core.common.container.ContainerSimple;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.module.core.common.container.ContainerSimple;
+import net.dries007.tfc.module.food.StorageFood;
+import net.dries007.tfc.module.food.api.category.FoodCategories;
+import net.dries007.tfc.module.food.api.category.FoodCategory;
+import net.dries007.tfc.module.food.api.type.FoodTypes;
 import net.dries007.tfc.module.food.common.items.ItemDynamicBowlFood;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -224,11 +224,11 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
     @Nonnull
     private Item getSaladItem(Nutrient nutrient) {
         return switch (nutrient) {
-            case GRAIN -> TFCItems.getFoodItem(INGREDIENT, SALAD_GRAIN);
-            case VEGETABLES -> TFCItems.getFoodItem(INGREDIENT, SALAD_VEGETABLE);
-            case FRUIT -> TFCItems.getFoodItem(INGREDIENT, SALAD_FRUIT);
-            case PROTEIN -> TFCItems.getFoodItem(INGREDIENT, SALAD_MEAT);
-            default -> TFCItems.getFoodItem(INGREDIENT, SALAD_DAIRY);
+            case GRAIN -> StorageFood.getFoodItem(INGREDIENT, SALAD_GRAIN);
+            case VEGETABLES -> StorageFood.getFoodItem(INGREDIENT, SALAD_VEGETABLE);
+            case FRUIT -> StorageFood.getFoodItem(INGREDIENT, SALAD_FRUIT);
+            case PROTEIN -> StorageFood.getFoodItem(INGREDIENT, SALAD_MEAT);
+            default -> StorageFood.getFoodItem(INGREDIENT, SALAD_DAIRY);
         };
     }
 }

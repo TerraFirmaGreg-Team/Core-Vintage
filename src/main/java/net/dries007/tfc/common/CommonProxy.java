@@ -36,7 +36,6 @@ import net.dries007.tfc.module.core.common.blocks.BlockTorchTFC;
 import net.dries007.tfc.module.core.common.blocks.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.module.core.common.items.ItemGlassBottleTFC;
 import net.dries007.tfc.module.core.init.RegistryCore;
-import net.dries007.tfc.module.food.ModuleFood;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.WrongSideException;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -171,8 +170,6 @@ public class CommonProxy {
 
 
     public void onPreInit(FMLPreInitializationEvent event) {
-        //TreeModule.preInit();
-        ModuleFood.preInit();
 
         DrinkableHandler.preInit();
 

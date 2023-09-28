@@ -8,7 +8,6 @@ import net.dries007.tfc.module.food.api.category.FoodCategories;
 import net.dries007.tfc.module.food.api.type.FoodType;
 import net.dries007.tfc.module.food.api.variant.Item.FoodItemVariant;
 import net.dries007.tfc.module.food.api.variant.Item.IFoodItem;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -38,10 +37,6 @@ public class ItemFoodIngredient extends ItemFood implements IItemSize, IItemFood
                 OreDictionaryHelper.register(this, name);
             }
         }
-
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(CreativeTabsTFC.FOOD_TAB);
     }
 
 
@@ -66,7 +61,7 @@ public class ItemFoodIngredient extends ItemFood implements IItemSize, IItemFood
 
     @Nonnull
     @Override
-    public FoodItemVariant getVariants() {
+    public FoodItemVariant getItemVariant() {
         return variant;
     }
 
@@ -95,6 +90,6 @@ public class ItemFoodIngredient extends ItemFood implements IItemSize, IItemFood
     @Override
     public void onModelRegister() {
         ModelLoader.setCustomModelResourceLocation(this, 0,
-                new ModelResourceLocation(getRegistryLocation(), "normal"));
+                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

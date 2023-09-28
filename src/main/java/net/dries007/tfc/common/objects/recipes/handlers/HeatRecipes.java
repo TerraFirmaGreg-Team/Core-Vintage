@@ -15,6 +15,7 @@ import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
+import net.dries007.tfc.module.food.StorageFood;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -86,59 +87,59 @@ public class HeatRecipes {
                 new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_FLOWER_POT), new ItemStack(Items.FLOWER_POT), 1500).setRegistryName("unfired_flower_pot"),
 
                 // Bread
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, BARLEY_DOUGH)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, BARLEY_BREAD)), 200, 480).setRegistryName("barley_bread"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, CORNMEAL_DOUGH)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, CORNBREAD)), 200, 480).setRegistryName("cornbread"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, OAT_DOUGH)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, OAT_BREAD)), 200, 480).setRegistryName("oat_bread"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, RICE_DOUGH)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, RICE_BREAD)), 200, 480).setRegistryName("rice_bread"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, RYE_DOUGH)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, RYE_BREAD)), 200, 480).setRegistryName("rye_bread"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, WHEAT_DOUGH)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, WHEAT_BREAD)), 200, 480).setRegistryName("wheat_bread"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, BARLEY_DOUGH)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, BARLEY_BREAD)), 200, 480).setRegistryName("barley_bread"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, CORNMEAL_DOUGH)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, CORNBREAD)), 200, 480).setRegistryName("cornbread"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, OAT_DOUGH)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, OAT_BREAD)), 200, 480).setRegistryName("oat_bread"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, RICE_DOUGH)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, RICE_BREAD)), 200, 480).setRegistryName("rice_bread"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, RYE_DOUGH)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, RYE_BREAD)), 200, 480).setRegistryName("rye_bread"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, WHEAT_DOUGH)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, WHEAT_BREAD)), 200, 480).setRegistryName("wheat_bread"),
 
                 // Meat
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, BEEF)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_BEEF)), 200, 480).setRegistryName("cooked_beef"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, PORK)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_PORK)), 200, 480).setRegistryName("cooked_pork"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, CHICKEN)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_CHICKEN)), 200, 480).setRegistryName("cooked_chicken"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, MUTTON)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_MUTTON)), 200, 480).setRegistryName("cooked_mutton"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, FISH)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_FISH)), 200, 480).setRegistryName("cooked_fish"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, BEAR)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_BEAR)), 200, 480).setRegistryName("cooked_bear"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, CALAMARI)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_CALAMARI)), 200, 480).setRegistryName("cooked_calamari"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, HORSE_MEAT)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_HORSE_MEAT)), 200, 480).setRegistryName("cooked_horse_meat"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, PHEASANT)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_PHEASANT)), 200, 480).setRegistryName("cooked_pheasant"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, VENISON)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_VENISON)), 200, 480).setRegistryName("cooked_venison"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, RABBIT)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_RABBIT)), 200, 480).setRegistryName("cooked_rabbit"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, WOLF)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_WOLF)), 200, 480).setRegistryName("cooked_wolf"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, CAMELIDAE)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_CAMELIDAE)), 200, 480).setRegistryName("cooked_camelidae"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, MONGOOSE)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_MONGOOSE)), 200, 480).setRegistryName("cooked_mongoose"),
-                new HeatRecipeSimple(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, GRAN_FELINE)), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_GRAN_FELINE)), 200, 480).setRegistryName("cooked_gran_feline"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, BEEF)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_BEEF)), 200, 480).setRegistryName("cooked_beef"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, PORK)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_PORK)), 200, 480).setRegistryName("cooked_pork"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, CHICKEN)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_CHICKEN)), 200, 480).setRegistryName("cooked_chicken"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, MUTTON)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_MUTTON)), 200, 480).setRegistryName("cooked_mutton"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, FISH)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_FISH)), 200, 480).setRegistryName("cooked_fish"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, BEAR)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_BEAR)), 200, 480).setRegistryName("cooked_bear"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, CALAMARI)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_CALAMARI)), 200, 480).setRegistryName("cooked_calamari"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, HORSE_MEAT)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_HORSE_MEAT)), 200, 480).setRegistryName("cooked_horse_meat"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, PHEASANT)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_PHEASANT)), 200, 480).setRegistryName("cooked_pheasant"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, VENISON)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_VENISON)), 200, 480).setRegistryName("cooked_venison"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, RABBIT)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_RABBIT)), 200, 480).setRegistryName("cooked_rabbit"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, WOLF)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_WOLF)), 200, 480).setRegistryName("cooked_wolf"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, CAMELIDAE)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_CAMELIDAE)), 200, 480).setRegistryName("cooked_camelidae"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, MONGOOSE)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_MONGOOSE)), 200, 480).setRegistryName("cooked_mongoose"),
+                new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, GRAN_FELINE)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_GRAN_FELINE)), 200, 480).setRegistryName("cooked_gran_feline"),
 
                 // Egg
-                new HeatRecipeSimple(IIngredient.of(Items.EGG), new ItemStack(TFCItems.getFoodItem(INGREDIENT, COOKED_EGG)), 200, 480).setRegistryName("cooked_egg"),
+                new HeatRecipeSimple(IIngredient.of(Items.EGG), new ItemStack(StorageFood.getFoodItem(INGREDIENT, COOKED_EGG)), 200, 480).setRegistryName("cooked_egg"),
 
                 // Bread
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, BARLEY_BREAD)), 480).setRegistryName("burned_barley_bread"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, CORNBREAD)), 480).setRegistryName("burned_cornbread"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, OAT_BREAD)), 480).setRegistryName("burned_oat_bread"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, RICE_BREAD)), 480).setRegistryName("burned_rice_bread"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, RYE_BREAD)), 480).setRegistryName("burned_rye_bread"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, WHEAT_BREAD)), 480).setRegistryName("burned_wheat_bread"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, BARLEY_BREAD)), 480).setRegistryName("burned_barley_bread"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, CORNBREAD)), 480).setRegistryName("burned_cornbread"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, OAT_BREAD)), 480).setRegistryName("burned_oat_bread"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, RICE_BREAD)), 480).setRegistryName("burned_rice_bread"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, RYE_BREAD)), 480).setRegistryName("burned_rye_bread"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, WHEAT_BREAD)), 480).setRegistryName("burned_wheat_bread"),
 
                 // Meat
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_BEEF)), 480).setRegistryName("burned_beef"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_PORK)), 480).setRegistryName("burned_pork"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_CHICKEN)), 480).setRegistryName("burned_chicken"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_MUTTON)), 480).setRegistryName("burned_mutton"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_FISH)), 480).setRegistryName("burned_fish"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_BEAR)), 480).setRegistryName("burned_bear"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_CALAMARI)), 480).setRegistryName("burned_calamari"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_HORSE_MEAT)), 480).setRegistryName("burned_horse_meat"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_PHEASANT)), 480).setRegistryName("burned_pheasant"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_RABBIT)), 480).setRegistryName("burned_rabbit"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_WOLF)), 480).setRegistryName("burned_wolf"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_VENISON)), 480).setRegistryName("burned_venison"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_CAMELIDAE)), 480).setRegistryName("burned_camelidae"),
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_MONGOOSE)), 480).setRegistryName("burned_mongoose"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_BEEF)), 480).setRegistryName("burned_beef"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_PORK)), 480).setRegistryName("burned_pork"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_CHICKEN)), 480).setRegistryName("burned_chicken"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_MUTTON)), 480).setRegistryName("burned_mutton"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_FISH)), 480).setRegistryName("burned_fish"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_BEAR)), 480).setRegistryName("burned_bear"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_CALAMARI)), 480).setRegistryName("burned_calamari"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_HORSE_MEAT)), 480).setRegistryName("burned_horse_meat"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_PHEASANT)), 480).setRegistryName("burned_pheasant"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_RABBIT)), 480).setRegistryName("burned_rabbit"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_WOLF)), 480).setRegistryName("burned_wolf"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_VENISON)), 480).setRegistryName("burned_venison"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_CAMELIDAE)), 480).setRegistryName("burned_camelidae"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_MONGOOSE)), 480).setRegistryName("burned_mongoose"),
 
                 // Egg
-                HeatRecipe.destroy(IIngredient.of(TFCItems.getFoodItem(INGREDIENT, COOKED_EGG)), 480).setRegistryName("burned_egg"),
+                HeatRecipe.destroy(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, COOKED_EGG)), 480).setRegistryName("burned_egg"),
 
                 // Glazed terracotta, because minecraft decided *this* one should not use metadata.
                 new HeatRecipeSimple(IIngredient.of(new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, EnumDyeColor.WHITE.getMetadata())), new ItemStack(Blocks.WHITE_GLAZED_TERRACOTTA), 1200).setRegistryName("white_glazed_terracotta"),

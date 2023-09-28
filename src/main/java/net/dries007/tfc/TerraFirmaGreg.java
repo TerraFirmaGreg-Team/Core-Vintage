@@ -4,12 +4,12 @@ package net.dries007.tfc;
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.module.ModuleManager;
 import net.dries007.tfc.common.CommonProxy;
-import net.dries007.tfc.module.TFCModules;
 import net.dries007.tfc.module.agriculture.ModuleAgriculture;
 import net.dries007.tfc.module.animal.ModuleAnimal;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.ModuleCorePost;
 import net.dries007.tfc.module.devices.ModuleDevice;
+import net.dries007.tfc.module.food.ModuleFood;
 import net.dries007.tfc.module.metal.ModuleMetal;
 import net.dries007.tfc.module.plant.ModulePlant;
 import net.dries007.tfc.module.rock.ModuleRock;
@@ -32,6 +32,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static net.dries007.tfc.Tags.*;
+import static net.dries007.tfc.module.TFCModules.MODULES;
 
 @SuppressWarnings({"unused", "FieldMayBeFinal"})
 @Mod.EventBusSubscriber
@@ -86,41 +87,23 @@ public final class TerraFirmaGreg {
 
         // --- MODULES ---
 
-        if (TFCModules.MODULES.get(ModuleRock.MODULE_ID)) {
-            this.registerModule(ModuleRock.class);
-        }
+        if (MODULES.get(ModuleRock.MODULE_ID)) this.registerModule(ModuleRock.class);
 
-        if (TFCModules.MODULES.get(ModuleSoil.MODULE_ID)) {
-            this.registerModule(ModuleSoil.class);
-        }
+        if (MODULES.get(ModuleSoil.MODULE_ID)) this.registerModule(ModuleSoil.class);
 
-        if (TFCModules.MODULES.get(ModuleWood.MODULE_ID)) {
-            this.registerModule(ModuleWood.class);
-        }
+        if (MODULES.get(ModuleWood.MODULE_ID)) this.registerModule(ModuleWood.class);
 
-        if (TFCModules.MODULES.get(ModuleMetal.MODULE_ID)) {
-            this.registerModule(ModuleMetal.class);
-        }
+        if (MODULES.get(ModuleMetal.MODULE_ID)) this.registerModule(ModuleMetal.class);
 
-//        if (TFCModules.MODULES.get(ModuleFood.MODULE_ID)) {
-//            this.registerModule(ModuleFood.class);
-//        }
+        if (MODULES.get(ModuleFood.MODULE_ID)) this.registerModule(ModuleFood.class);
 
-        if (TFCModules.MODULES.get(ModulePlant.MODULE_ID)) {
-            this.registerModule(ModulePlant.class);
-        }
+        if (MODULES.get(ModulePlant.MODULE_ID)) this.registerModule(ModulePlant.class);
 
-        if (TFCModules.MODULES.get(ModuleDevice.MODULE_ID)) {
-            this.registerModule(ModuleDevice.class);
-        }
+        if (MODULES.get(ModuleDevice.MODULE_ID)) this.registerModule(ModuleDevice.class);
 
-        if (TFCModules.MODULES.get(ModuleAnimal.MODULE_ID)) {
-            this.registerModule(ModuleAnimal.class);
-        }
+        if (MODULES.get(ModuleAnimal.MODULE_ID)) this.registerModule(ModuleAnimal.class);
 
-        if (TFCModules.MODULES.get(ModuleAgriculture.MODULE_ID)) {
-            this.registerModule(ModuleAgriculture.class);
-        }
+        if (MODULES.get(ModuleAgriculture.MODULE_ID)) this.registerModule(ModuleAgriculture.class);
 
         this.registerModule(ModuleCorePost.class);
 

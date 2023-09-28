@@ -6,17 +6,17 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.module.food.api.category.FoodCategories;
-import net.dries007.tfc.module.food.api.category.FoodCategory;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
-import net.dries007.tfc.common.objects.items.TFCItems;
-import net.dries007.tfc.module.food.common.items.ItemDynamicBowlFood;
+import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.tile.ITileFields;
 import net.dries007.tfc.module.core.common.tiles.TETickableInventory;
-import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.devices.common.blocks.BlockFirePit;
+import net.dries007.tfc.module.food.StorageFood;
+import net.dries007.tfc.module.food.api.category.FoodCategories;
+import net.dries007.tfc.module.food.api.category.FoodCategory;
+import net.dries007.tfc.module.food.common.items.ItemDynamicBowlFood;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.dries007.tfc.util.fuel.Fuel;
@@ -691,11 +691,11 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
 
     private Item getSoupItem() {
         return switch (soupNutrient) {
-            case GRAIN -> TFCItems.getFoodItem(INGREDIENT, SOUP_GRAIN); //TODO
-            case VEGETABLES -> TFCItems.getFoodItem(INGREDIENT, SOUP_VEGETABLE);
-            case FRUIT -> TFCItems.getFoodItem(INGREDIENT, SOUP_FRUIT);
-            case PROTEIN -> TFCItems.getFoodItem(INGREDIENT, SOUP_MEAT);
-            default -> TFCItems.getFoodItem(INGREDIENT, SOUP_DAIRY);
+            case GRAIN -> StorageFood.getFoodItem(INGREDIENT, SOUP_GRAIN); //TODO
+            case VEGETABLES -> StorageFood.getFoodItem(INGREDIENT, SOUP_VEGETABLE);
+            case FRUIT -> StorageFood.getFoodItem(INGREDIENT, SOUP_FRUIT);
+            case PROTEIN -> StorageFood.getFoodItem(INGREDIENT, SOUP_MEAT);
+            default -> StorageFood.getFoodItem(INGREDIENT, SOUP_DAIRY);
         };
     }
 

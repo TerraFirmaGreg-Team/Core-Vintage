@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.food.api.variant.block;
 
 import net.dries007.tfc.TerraFirmaGreg;
-import net.dries007.tfc.module.food.api.type.FoodType;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.module.food.api.type.FoodType;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -29,32 +29,23 @@ public interface IFoodBlock extends IHasModel, IItemProvider {
     FoodType getType();
 
     /**
-     * Возвращает расположение в реестре для данного деревянного блока.
+     * Возвращает местоположение регистрации блока почвы.
      *
-     * @return расположение в реестре
+     * @return Местоположение регистрации блока почвы.
      */
     @Nonnull
-    default ResourceLocation getRegistryLocation() {
-        return TerraFirmaGreg.getID(String.format("food/%s/%s", getBlockVariant(), getType()));
+    default String getName() {
+        return String.format("food.%s.%s", getBlockVariant(), getType());
     }
 
     /**
-     * Возвращает расположение ресурса для данного деревянного блока.
+     * Возвращает местоположение ресурса блока почвы.
      *
-     * @return расположение ресурса
+     * @return Местоположение ресурса блока почвы.
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaGreg.getID(String.format("food/%s", getBlockVariant()));
+        return TerraFirmaGreg.getID(String.format("food/%s", getType()));
     }
 
-    /**
-     * Возвращает локализованное имя для данного деревянного блока.
-     *
-     * @return локализованное имя
-     */
-    @Nonnull
-    default String getTranslationName() {
-        return getRegistryLocation().toString().toLowerCase().replace(":", ".").replace("/", ".");
-    }
 }

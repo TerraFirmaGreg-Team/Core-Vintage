@@ -4,19 +4,14 @@ import gregtech.api.unification.ore.OrePrefix;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.food.api.type.FoodType;
-import net.dries007.tfc.module.food.api.variant.Item.FoodItemVariant;
-import net.dries007.tfc.module.food.api.variant.Item.IFoodItem;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.module.ceramic.common.items.ItemMold;
 import net.dries007.tfc.module.ceramic.common.items.ItemUnfiredMold;
-import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.module.core.api.item.ItemBase;
 import net.dries007.tfc.module.core.common.items.*;
 import net.dries007.tfc.module.devices.common.items.ItemBloom;
 import net.minecraft.item.Item;
 
-import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -26,7 +21,6 @@ public class TFCItems {
 
     //==== Item ======================================================================================================//
 
-    public static final Map<Pair<FoodItemVariant, FoodType>, IFoodItem> FOOD_ITEMS = new Object2ObjectLinkedOpenHashMap<>();
 
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new Object2ObjectLinkedOpenHashMap<>();
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new Object2ObjectLinkedOpenHashMap<>();
@@ -103,14 +97,6 @@ public class TFCItems {
         ITEMS.add(REFINED_BLOOM = new ItemBloom(true));
 
 
-    }
-
-
-    @Nonnull
-    public static Item getFoodItem(@Nonnull FoodItemVariant variant, @Nonnull FoodType type) {
-        var item = (Item) FOOD_ITEMS.get(new Pair<>(variant, type));
-        if (item != null) return item;
-        throw new RuntimeException(String.format("Item is null: %s, %s", variant, type));
     }
 
 }

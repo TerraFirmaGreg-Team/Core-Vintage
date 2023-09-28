@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.agriculture.api.bush.type;
 
-import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.module.agriculture.common.blocks.BlockBerryBush;
+import net.dries007.tfc.module.food.StorageFood;
 import net.dries007.tfc.module.food.api.type.FoodType;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -146,7 +146,7 @@ public class BushType {
      * @return Предмет с плодом.
      */
     public ItemStack getFoodDrop() {
-        return new ItemStack(TFCItems.getFoodItem(INGREDIENT, getFruit()));
+        return new ItemStack(StorageFood.getFoodItem(INGREDIENT, getFruit()));
     }
 
     /**

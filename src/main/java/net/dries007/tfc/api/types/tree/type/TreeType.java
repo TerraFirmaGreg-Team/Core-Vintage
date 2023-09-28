@@ -9,11 +9,11 @@ import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
 import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.TerraFirmaGreg;
-import net.dries007.tfc.module.food.api.type.FoodType;
-import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranch;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies;
+import net.dries007.tfc.module.food.StorageFood;
+import net.dries007.tfc.module.food.api.type.FoodType;
 import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -34,9 +34,9 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
-import static net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants.INGREDIENT;
 import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
 import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
+import static net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants.INGREDIENT;
 import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LOG;
 
@@ -347,7 +347,7 @@ public class TreeType extends TreeFamily {
     }
 
     public ItemStack getFoodDrop() {
-        return new ItemStack(TFCItems.getFoodItem(INGREDIENT, fruit));
+        return new ItemStack(StorageFood.getFoodItem(INGREDIENT, fruit));
     }
 
     public List<IGenFeature> getModule() {

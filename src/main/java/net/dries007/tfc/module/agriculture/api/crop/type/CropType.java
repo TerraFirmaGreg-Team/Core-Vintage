@@ -2,8 +2,8 @@ package net.dries007.tfc.module.agriculture.api.crop.type;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.module.agriculture.api.crop.category.CropCategory;
+import net.dries007.tfc.module.food.StorageFood;
 import net.dries007.tfc.module.food.api.type.FoodType;
-import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.skills.Skill;
@@ -170,7 +170,7 @@ public class CropType {
         }
 
         public Builder setFoodDrop(FoodType type) {
-            this.foodDrop = () -> new ItemStack(TFCItems.getFoodItem(INGREDIENT, type));
+            this.foodDrop = () -> new ItemStack(StorageFood.getFoodItem(INGREDIENT, type));
             return this;
         }
 

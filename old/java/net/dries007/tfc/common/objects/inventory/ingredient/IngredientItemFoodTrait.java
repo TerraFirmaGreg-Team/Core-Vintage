@@ -1,10 +1,10 @@
-package su.terrafirmagreg.tfg.modules.core.api.inventory.ingredient;
+package net.dries007.tfc.common.objects.inventory.ingredient;
 
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.FoodTrait;
+import net.dries007.tfc.api.capability.food.IFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import su.terrafirmagreg.tfg.modules.core.api.capability.food.CapabilityFood;
-import su.terrafirmagreg.tfg.modules.core.api.capability.food.FoodTrait;
-import su.terrafirmagreg.tfg.modules.core.api.capability.food.IFood;
 
 public class IngredientItemFoodTrait implements IIngredient<ItemStack> {
     private final IIngredient<ItemStack> innerIngredient;

@@ -1,4 +1,4 @@
-package su.terrafirmagreg.tfg.modules.core.api.capability.food;
+package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.DumbStorage;

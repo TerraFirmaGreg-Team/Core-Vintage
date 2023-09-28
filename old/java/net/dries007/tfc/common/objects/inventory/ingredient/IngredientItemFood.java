@@ -1,4 +1,4 @@
-package su.terrafirmagreg.tfg.modules.core.api.inventory.ingredient;
+package net.dries007.tfc.common.objects.inventory.ingredient;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;

@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.food;
+package su.terrafirmagreg.tfg.modules.core.api.capability.food;
 
 import net.dries007.tfc.module.food.api.type.FoodType;
 import net.dries007.tfc.config.ConfigTFC;

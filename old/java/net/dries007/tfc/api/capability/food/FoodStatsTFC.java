@@ -1,6 +1,5 @@
-package net.dries007.tfc.api.capability.food;
+package su.terrafirmagreg.tfg.modules.core.api.capability.food;
 
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.init.PotionEffectsCore;
 import net.dries007.tfc.network.PacketFoodStatsReplace;
@@ -19,6 +18,7 @@ import net.minecraft.util.FoodStats;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.tfg.modules.core.ModuleCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -65,7 +65,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
         if (foodCap != null) {
             addStats(foodCap);
         } else {
-            TerraFirmaGreg.LOGGER.info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
+            ModuleCore.LOGGER.info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
         }
     }
 

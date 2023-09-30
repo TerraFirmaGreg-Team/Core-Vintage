@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.common.objects.recipes.RecipeUtils;
-import net.dries007.tfc.module.food.common.items.ItemSandwich;
+import net.dries007.tfc.module.food.objects.items.ItemSandwich;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.inventory.InventoryCrafting;

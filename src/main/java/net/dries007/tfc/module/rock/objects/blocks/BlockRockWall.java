@@ -1,0 +1,101 @@
+package net.dries007.tfc.module.rock.objects.blocks;
+
+import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.block.BlockWall;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+
+public class BlockRockWall extends BlockWall implements IRockBlock {
+
+    private final RockBlockVariant variant;
+    private final RockType type;
+
+    public BlockRockWall(RockBlockVariant variant, RockType type) {
+        super(Blocks.COBBLESTONE);
+
+        this.variant = variant;
+        this.type = type;
+
+        setSoundType(SoundType.STONE);
+        setHardness(getFinalHardness());
+        setHarvestLevel("pickaxe", 0);
+
+        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+    }
+
+    @Nonnull
+    @Override
+    public RockBlockVariant getBlockVariant() {
+        return variant;
+    }
+
+    @Nonnull
+    @Override
+    public RockType getType() {
+        return type;
+    }
+
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockBase(this);
+    }
+
+    @Override
+    public void getSubBlocks(@Nonnull CreativeTabs itemIn, @Nonnull NonNullList<ItemStack> items) {
+        items.add(new ItemStack(this));
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+                    @Nonnull
+                    protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                        return new ModelResourceLocation(getResourceLocation(),
+                                "east=" + state.getValue(BlockWall.EAST) + "," +
+                                        "north=" + state.getValue(BlockWall.NORTH) + "," +
+                                        "rocktype=" + getType() + "," +
+                                        "south=" + state.getValue(BlockWall.SOUTH) + "," +
+                                        "up=" + state.getValue(BlockWall.UP) + "," +
+                                        "west=" + state.getValue(BlockWall.WEST));
+                    }
+                }
+        );
+
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(),
+                        "inventory=" + getType()));
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + type.getCategory().getLocalizedName());
+    }
+}

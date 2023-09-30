@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.ceramic.init;
 
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.module.ceramic.common.blocks.BlockLargeVessel;
+import net.dries007.tfc.module.ceramic.objects.blocks.BlockLargeVessel;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

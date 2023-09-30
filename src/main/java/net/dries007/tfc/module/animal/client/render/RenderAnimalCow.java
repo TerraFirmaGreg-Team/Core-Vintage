@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.module.animal.client.model.ModelAnimalCow;
-import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalCow;
+import net.dries007.tfc.module.animal.objects.entities.livestock.EntityAnimalCow;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

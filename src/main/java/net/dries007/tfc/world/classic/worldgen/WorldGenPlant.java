@@ -3,7 +3,7 @@ package net.dries007.tfc.world.classic.worldgen;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.plant.StoragePlant;
 import net.dries007.tfc.module.plant.api.types.type.PlantType;
-import net.dries007.tfc.module.plant.common.blocks.*;
+import net.dries007.tfc.module.plant.objects.blocks.*;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;

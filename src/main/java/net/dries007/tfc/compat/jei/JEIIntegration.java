@@ -21,13 +21,12 @@ import net.dries007.tfc.client.gui.GuiKnapping;
 import net.dries007.tfc.client.gui.GuiNutrition;
 import net.dries007.tfc.client.gui.GuiSkills;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
-import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.compat.jei.categories.*;
 import net.dries007.tfc.compat.jei.util.TFCInventoryGuiHandler;
 import net.dries007.tfc.compat.jei.wrappers.*;
-import net.dries007.tfc.module.animal.common.items.ItemAnimalHide;
-import net.dries007.tfc.module.animal.common.items.ItemAnimalHide.HideType;
-import net.dries007.tfc.module.ceramic.common.items.ItemMold;
+import net.dries007.tfc.module.animal.objects.items.ItemAnimalHide;
+import net.dries007.tfc.module.animal.objects.items.ItemAnimalHide.HideType;
+import net.dries007.tfc.module.ceramic.objects.items.ItemMold;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.module.core.init.RegistryCore;
@@ -36,9 +35,8 @@ import net.dries007.tfc.module.devices.client.gui.GuiCrucible;
 import net.dries007.tfc.module.devices.client.gui.GuiFirePit;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
-import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;
-import net.dries007.tfc.module.rock.StorageRock;
-import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.metal.objects.blocks.BlockMetalAnvil;
+import net.dries007.tfc.module.rock.plugin.jei.wrappers.JEIRecipeWrapperKnapping;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -52,26 +50,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.module.rock.api.types.variant.item.RockItemVariants.LOOSE;
-
 @ParametersAreNonnullByDefault
 @JEIPlugin
 public final class JEIIntegration implements IModPlugin {
     public static final String ALLOY_UID = Tags.MOD_ID + ".alloy";
     public static final String ANVIL_UID = Tags.MOD_ID + ".anvil";
-    public static final String BARREL_UID = Tags.MOD_ID + ".barrel";
     public static final String BLAST_FURNACE_UID = Tags.MOD_ID + ".blast_furnace";
     public static final String CASTING_UID = Tags.MOD_ID + ".casting";
     public static final String BLOOMERY_UID = Tags.MOD_ID + ".bloomery";
-    public static final String CHISEL_UID = Tags.MOD_ID + ".chisel";
+
     public static final String HEAT_UID = Tags.MOD_ID + ".heat";
     public static final String KNAP_CLAY_UID = Tags.MOD_ID + ".knap.clay";
     public static final String KNAP_FIRECLAY_UID = Tags.MOD_ID + ".knap.fireclay";
     public static final String KNAP_LEATHER_UID = Tags.MOD_ID + ".knap.leather";
-    public static final String KNAP_STONE_UID = Tags.MOD_ID + ".knap.stone";
+
     public static final String METAL_HEAT_UID = Tags.MOD_ID + ".metal_heat";
     public static final String QUERN_UID = Tags.MOD_ID + ".quern";
-    public static final String ROCK_LAYER_UID = Tags.MOD_ID + ".rock_layer";
+
     public static final String WELDING_UID = Tags.MOD_ID + ".welding";
     public static final String SCRAPING_UID = Tags.MOD_ID + ".scraping";
     public static final String UNMOLD_UID = Tags.MOD_ID + ".unmold";
@@ -98,15 +93,9 @@ public final class JEIIntegration implements IModPlugin {
                 new BlastFurnaceCategory(gui, BLAST_FURNACE_UID),
                 new BloomeryCategory(gui, BLOOMERY_UID),
                 new CastingCategory(gui, CASTING_UID),
-                new ChiselCategory(gui, CHISEL_UID),
                 new HeatCategory(gui, HEAT_UID),
-                new KnappingCategory(gui, KNAP_CLAY_UID),
-                new KnappingCategory(gui, KNAP_FIRECLAY_UID),
-                new KnappingCategory(gui, KNAP_LEATHER_UID),
-                new KnappingCategory(gui, KNAP_STONE_UID),
                 new MetalHeatingCategory(gui, METAL_HEAT_UID),
                 new QuernCategory(gui, QUERN_UID),
-                // new RockLayerCategory(gui, ROCK_LAYER_UID),
                 new WeldingCategory(gui, WELDING_UID),
                 new ScrapingCategory(gui, SCRAPING_UID),
                 new UnmoldCategory(gui, UNMOLD_UID)
@@ -236,16 +225,6 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipes(unmoldList, UNMOLD_UID);
         registry.addRecipes(castingList, CASTING_UID);
 
-        // Chisel Recipes
-        registry.addRecipeCatalyst(TFGToolItems.CHISEL.get(Materials.Iron), CHISEL_UID);
-
-        var chiselList = RegistryCore.CHISEL.getValuesCollection()
-                .stream()
-                .map(ChiselRecipeWrapper::new)
-                .collect(Collectors.toList());
-
-        registry.addRecipes(chiselList, CHISEL_UID);
-
         // Scrapping Recipes
         registry.addRecipeCatalyst(ToolItems.KNIFE.get(Materials.Iron), SCRAPING_UID);
 
@@ -260,7 +239,7 @@ public final class JEIIntegration implements IModPlugin {
 
         var clayknapRecipes = RegistryCore.KNAPPING.getValuesCollection().stream()
                 .filter(recipe -> recipe.getType() == KnappingType.CLAY)
-                .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
+                .map(recipe -> new JEIRecipeWrapperKnapping(recipe, registry.getJeiHelpers().getGuiHelper()))
                 .collect(Collectors.toList());
 
 
@@ -271,7 +250,7 @@ public final class JEIIntegration implements IModPlugin {
 
         var fireclayknapRecipes = RegistryCore.KNAPPING.getValuesCollection().stream()
                 .filter(recipe -> recipe.getType() == KnappingType.FIRE_CLAY)
-                .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
+                .map(recipe -> new JEIRecipeWrapperKnapping(recipe, registry.getJeiHelpers().getGuiHelper()))
                 .collect(Collectors.toList());
 
 
@@ -282,33 +261,14 @@ public final class JEIIntegration implements IModPlugin {
 
         var leatherknapRecipes = RegistryCore.KNAPPING.getValuesCollection().stream()
                 .filter(recipe -> recipe.getType() == KnappingType.LEATHER)
-                .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
+                .map(recipe -> new JEIRecipeWrapperKnapping(recipe, registry.getJeiHelpers().getGuiHelper()))
                 .collect(Collectors.toList());
 
         registry.addRecipes(leatherknapRecipes, KNAP_LEATHER_UID);
 
-        // Stone Knapping Recipes
-        for (var type : RockType.getRockTypes()) {
-            registry.addRecipeCatalyst(new ItemStack(StorageRock.getRockItem(LOOSE, type)), KNAP_STONE_UID);
-        }
-
-        var stoneknapRecipes = RegistryCore.KNAPPING.getValuesCollection().stream()
-                .filter(recipe -> recipe.getType() == KnappingType.STONE)
-                .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers().getGuiHelper()))
-                .collect(Collectors.toList());
-
-        registry.addRecipes(stoneknapRecipes, KNAP_STONE_UID);
-
-        // Wraps all rock layers
-        //List<RockLayerWrapper> rockLayerList = TFCRegistries.ROCKS.getValuesCollection()
-        //    .stream()
-        //    .map(RockLayerWrapper::new)
-        //    .collect(Collectors.toList());
-
-        //registry.addRecipes(rockLayerList, ROCK_LAYER_UID);
 
         // Click areas
-        registry.addRecipeClickArea(GuiKnapping.class, 97, 44, 22, 15, KNAP_CLAY_UID, KNAP_FIRECLAY_UID, KNAP_LEATHER_UID, KNAP_STONE_UID);
+        registry.addRecipeClickArea(GuiKnapping.class, 97, 44, 22, 15, KNAP_CLAY_UID, KNAP_FIRECLAY_UID, KNAP_LEATHER_UID);
         registry.addRecipeClickArea(GuiMetalAnvil.class, 26, 24, 9, 14, ANVIL_UID, WELDING_UID);
         registry.addRecipeClickArea(GuiCrucible.class, 139, 100, 10, 15, ALLOY_UID);
         registry.addRecipeClickArea(GuiCrucible.class, 82, 100, 10, 15, METAL_HEAT_UID);

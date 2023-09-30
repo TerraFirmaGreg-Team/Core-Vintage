@@ -2,8 +2,8 @@ package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.agriculture.StorageAgriculture;
-import net.dries007.tfc.module.agriculture.api.crop.type.CropType;
-import net.dries007.tfc.module.agriculture.common.blocks.BlockCropGrowing;
+import net.dries007.tfc.module.agriculture.api.types.crop.type.CropType;
+import net.dries007.tfc.module.agriculture.objects.blocks.BlockCropGrowing;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.module.agriculture.api.crop.variant.block.CropBlockVariants.GROWING;
+import static net.dries007.tfc.module.agriculture.api.types.crop.variant.block.CropBlockVariants.GROWING;
 
 /**
  * Генератор мира для дикорастущих культур.

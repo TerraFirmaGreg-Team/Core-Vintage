@@ -2,7 +2,7 @@ package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.agriculture.StorageAgriculture;
-import net.dries007.tfc.module.agriculture.api.bush.type.BushType;
+import net.dries007.tfc.module.agriculture.api.types.bush.type.BushType;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;

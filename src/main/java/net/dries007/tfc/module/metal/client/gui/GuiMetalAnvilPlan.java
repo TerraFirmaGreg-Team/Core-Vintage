@@ -7,7 +7,7 @@ import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
+import net.dries007.tfc.module.metal.objects.tiles.TEMetalAnvil;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.util.NBTBuilder;
 import net.minecraft.client.gui.GuiButton;
@@ -25,7 +25,7 @@ import net.minecraftforge.items.IItemHandler;
 import java.io.IOException;
 import java.util.List;
 
-import static net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil.SLOT_INPUT_1;
+import static net.dries007.tfc.module.metal.objects.tiles.TEMetalAnvil.SLOT_INPUT_1;
 
 @SideOnly(Side.CLIENT)
 public class GuiMetalAnvilPlan extends GuiContainerTE<TEMetalAnvil> {

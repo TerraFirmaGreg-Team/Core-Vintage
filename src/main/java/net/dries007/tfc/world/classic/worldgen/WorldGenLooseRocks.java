@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.Random;
 
 import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.LOOSE_ROCK;
-import static net.dries007.tfc.module.rock.common.blocks.BlockRockLoose.AXIS;
+import static net.dries007.tfc.module.rock.objects.blocks.BlockRockLoose.AXIS;
 
 public class WorldGenLooseRocks implements IWorldGenerator {
 

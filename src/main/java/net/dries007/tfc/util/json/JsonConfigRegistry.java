@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
-import net.dries007.tfc.module.animal.common.entities.AnimalFood;
+import net.dries007.tfc.module.animal.objects.entities.AnimalFood;
 import net.dries007.tfc.module.core.ModuleCore;
 import org.apache.commons.io.FileUtils;
 

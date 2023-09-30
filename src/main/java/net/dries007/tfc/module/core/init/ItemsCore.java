@@ -12,7 +12,7 @@ import net.dries007.tfc.module.core.api.util.fuel.Fuel;
 import net.dries007.tfc.module.core.api.util.fuel.FuelManager;
 import net.dries007.tfc.module.core.objects.blocks.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.module.core.objects.items.*;
-import net.dries007.tfc.module.devices.common.items.ItemBloom;
+import net.dries007.tfc.module.devices.objects.items.ItemBloom;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

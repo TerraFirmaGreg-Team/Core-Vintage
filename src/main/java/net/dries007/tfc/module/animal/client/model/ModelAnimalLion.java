@@ -3,8 +3,8 @@ package net.dries007.tfc.module.animal.client.model;
 //Made with Blockbench
 //Paste this code into your mod.
 
-import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
-import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalLion;
+import net.dries007.tfc.module.animal.objects.entities.TFCEntityAnimal;
+import net.dries007.tfc.module.animal.objects.entities.predator.EntityAnimalLion;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

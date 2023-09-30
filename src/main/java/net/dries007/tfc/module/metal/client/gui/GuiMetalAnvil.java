@@ -7,7 +7,7 @@ import net.dries007.tfc.client.button.GuiButtonAnvilStep;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
+import net.dries007.tfc.module.metal.objects.tiles.TEMetalAnvil;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeStep;

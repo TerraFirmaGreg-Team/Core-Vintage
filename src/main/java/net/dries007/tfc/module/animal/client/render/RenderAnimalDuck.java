@@ -2,8 +2,8 @@ package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalDuck;
-import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
-import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalDuck;
+import net.dries007.tfc.module.animal.objects.entities.TFCEntityAnimal;
+import net.dries007.tfc.module.animal.objects.entities.livestock.EntityAnimalDuck;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

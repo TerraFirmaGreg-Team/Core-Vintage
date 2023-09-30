@@ -4,7 +4,7 @@ import gregtech.common.items.ToolItems;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.compat.jei.util.IJEISimpleRecipe;
 import net.dries007.tfc.module.core.init.RegistryCore;
-import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
+import net.dries007.tfc.module.metal.objects.tiles.TEMetalAnvil;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeSteps;
 import net.dries007.tfc.util.skills.SmithingSkill;

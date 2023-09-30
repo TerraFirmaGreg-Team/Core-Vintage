@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.rock.api.types.variant.block;
 
-import net.dries007.tfc.module.rock.common.blocks.*;
+import net.dries007.tfc.module.rock.objects.blocks.*;
 
 public class RockBlockVariantHandler {
 

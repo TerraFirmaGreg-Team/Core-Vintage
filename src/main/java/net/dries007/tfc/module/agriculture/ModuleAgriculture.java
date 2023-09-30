@@ -2,11 +2,11 @@ package net.dries007.tfc.module.agriculture;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.module.agriculture.api.bush.type.BushTypeHandler;
-import net.dries007.tfc.module.agriculture.api.crop.category.CropCategoryHandler;
-import net.dries007.tfc.module.agriculture.api.crop.type.CropTypeHandler;
-import net.dries007.tfc.module.agriculture.api.crop.variant.block.CropBlockVariantHandler;
-import net.dries007.tfc.module.agriculture.api.crop.variant.item.CropItemVariantHandler;
+import net.dries007.tfc.module.agriculture.api.types.bush.type.BushTypeHandler;
+import net.dries007.tfc.module.agriculture.api.types.crop.category.CropCategoryHandler;
+import net.dries007.tfc.module.agriculture.api.types.crop.type.CropTypeHandler;
+import net.dries007.tfc.module.agriculture.api.types.crop.variant.block.CropBlockVariantHandler;
+import net.dries007.tfc.module.agriculture.api.types.crop.variant.item.CropItemVariantHandler;
 import net.dries007.tfc.module.agriculture.init.BlocksCrop;
 import net.dries007.tfc.module.agriculture.init.ItemsCrop;
 import net.dries007.tfc.module.core.api.util.CreativeTabBase;

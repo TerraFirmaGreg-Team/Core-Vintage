@@ -6,7 +6,7 @@ import net.dries007.tfc.api.util.EnumColor;
 import net.dries007.tfc.api.util.Pair;
 import net.dries007.tfc.module.core.objects.blocks.BlockGroundcover;
 import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
-import net.dries007.tfc.module.rock.common.blocks.BlockAlabaster;
+import net.dries007.tfc.module.rock.objects.blocks.BlockAlabaster;
 import net.minecraft.block.Block;
 
 import javax.annotation.Nonnull;

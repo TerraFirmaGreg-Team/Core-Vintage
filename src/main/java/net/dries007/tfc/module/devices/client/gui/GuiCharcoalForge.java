@@ -3,7 +3,7 @@ package net.dries007.tfc.module.devices.client.gui;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.devices.common.tile.TECharcoalForge;
+import net.dries007.tfc.module.devices.objects.tile.TECharcoalForge;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;

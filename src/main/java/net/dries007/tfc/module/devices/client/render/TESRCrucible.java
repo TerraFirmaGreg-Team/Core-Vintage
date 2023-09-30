@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.devices.client.render;
 
 import net.dries007.tfc.client.util.FluidSpriteCache;
-import net.dries007.tfc.module.devices.common.tile.TECrucible;
+import net.dries007.tfc.module.devices.objects.tile.TECrucible;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

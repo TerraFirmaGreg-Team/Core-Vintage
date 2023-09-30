@@ -2,8 +2,8 @@ package net.dries007.tfc.module.ceramic;
 
 import gregtech.api.unification.ore.OrePrefix;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.dries007.tfc.module.ceramic.common.items.ItemMold;
-import net.dries007.tfc.module.ceramic.common.items.ItemUnfiredMold;
+import net.dries007.tfc.module.ceramic.objects.items.ItemMold;
+import net.dries007.tfc.module.ceramic.objects.items.ItemUnfiredMold;
 
 import java.util.Map;
 

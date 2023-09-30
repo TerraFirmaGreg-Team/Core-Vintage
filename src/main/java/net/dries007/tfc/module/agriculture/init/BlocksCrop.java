@@ -3,7 +3,7 @@ package net.dries007.tfc.module.agriculture.init;
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.RegistryHelper;
-import net.dries007.tfc.module.agriculture.common.tile.TECropBase;
+import net.dries007.tfc.module.agriculture.objects.tile.TECropBase;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

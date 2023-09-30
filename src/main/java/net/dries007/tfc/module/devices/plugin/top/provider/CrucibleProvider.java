@@ -7,7 +7,7 @@ import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.devices.common.tile.TECrucible;
+import net.dries007.tfc.module.devices.objects.tile.TECrucible;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;

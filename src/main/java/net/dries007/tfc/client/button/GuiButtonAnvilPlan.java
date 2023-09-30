@@ -2,7 +2,7 @@ package net.dries007.tfc.client.button;
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
-import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
+import net.dries007.tfc.module.metal.objects.tiles.TEMetalAnvil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;

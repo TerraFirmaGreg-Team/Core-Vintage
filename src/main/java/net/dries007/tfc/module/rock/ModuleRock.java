@@ -2,6 +2,7 @@ package net.dries007.tfc.module.rock;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
+import net.dries007.tfc.Tags;
 import net.dries007.tfc.module.core.api.util.CreativeTabBase;
 import net.dries007.tfc.module.rock.api.types.category.RockCategoryHandler;
 import net.dries007.tfc.module.rock.api.types.type.RockTypeHandler;
@@ -18,19 +19,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static net.dries007.tfc.Tags.MOD_ID;
-import static net.dries007.tfc.Tags.MOD_NAME;
-
 public class ModuleRock extends ModuleBase {
 
     public static final String MODULE_ID = "module.rock";
-    public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleRock.class.getSimpleName());
+    public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME + "." + ModuleRock.class.getSimpleName());
     public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "tfc:rock.raw.shale");
 
     public ModuleRock() {
-        super(0, MOD_ID);
+        super(0, Tags.MOD_ID);
 
-        this.setRegistry(new Registry(MOD_ID, ROCK_TAB));
+        this.setRegistry(new Registry(Tags.MOD_ID, ROCK_TAB));
         this.enableAutoRegistry();
 
         //PACKET_SERVICE = this.enableNetwork();

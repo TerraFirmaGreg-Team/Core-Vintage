@@ -3,8 +3,8 @@ package net.dries007.tfc.module.ceramic.init;
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
-import net.dries007.tfc.module.ceramic.common.items.ItemMold;
-import net.dries007.tfc.module.ceramic.common.items.ItemUnfiredMold;
+import net.dries007.tfc.module.ceramic.objects.items.ItemMold;
+import net.dries007.tfc.module.ceramic.objects.items.ItemUnfiredMold;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

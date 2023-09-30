@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.rock.api.types.variant.item;
 
-import net.dries007.tfc.module.rock.common.items.ItemRockBrick;
-import net.dries007.tfc.module.rock.common.items.ItemRockLoose;
+import net.dries007.tfc.module.rock.objects.items.ItemRockBrick;
+import net.dries007.tfc.module.rock.objects.items.ItemRockLoose;
 
 public class RockItemVariantHandler {
 

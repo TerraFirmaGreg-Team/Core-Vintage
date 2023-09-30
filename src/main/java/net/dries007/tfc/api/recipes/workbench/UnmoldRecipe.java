@@ -3,7 +3,7 @@ package net.dries007.tfc.api.recipes.workbench;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.module.ceramic.common.items.ItemMold;
+import net.dries007.tfc.module.ceramic.objects.items.ItemMold;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.util.Constants;

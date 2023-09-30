@@ -4,7 +4,7 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.devices.common.tile.TEBlastFurnace;
+import net.dries007.tfc.module.devices.objects.tile.TEBlastFurnace;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

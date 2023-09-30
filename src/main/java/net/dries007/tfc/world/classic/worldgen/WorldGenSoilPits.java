@@ -4,7 +4,7 @@ import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.plant.StoragePlant;
 import net.dries007.tfc.module.plant.api.types.type.PlantType;
-import net.dries007.tfc.module.plant.common.blocks.BlockPlant;
+import net.dries007.tfc.module.plant.objects.blocks.BlockPlant;
 import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.api.types.variant.block.SoilBlockVariants;
 import net.dries007.tfc.module.soil.init.BlocksSoil;

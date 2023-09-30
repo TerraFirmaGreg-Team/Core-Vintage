@@ -22,8 +22,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 
-import static net.dries007.tfc.module.food.api.type.FoodTypes.*;
-import static net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants.INGREDIENT;
+import static net.dries007.tfc.module.food.api.types.type.FoodTypes.*;
+import static net.dries007.tfc.module.food.api.types.variant.Item.FoodItemVariants.INGREDIENT;
 
 public class HeatRecipes {
 

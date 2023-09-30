@@ -7,7 +7,7 @@ import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.sound.TFCSounds;
-import net.dries007.tfc.module.devices.common.tile.TELogPile;
+import net.dries007.tfc.module.devices.objects.tile.TELogPile;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static net.dries007.tfc.module.devices.common.blocks.BlockCharcoalPile.LAYERS;
+import static net.dries007.tfc.module.devices.objects.blocks.BlockCharcoalPile.LAYERS;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public final class InteractionManager {

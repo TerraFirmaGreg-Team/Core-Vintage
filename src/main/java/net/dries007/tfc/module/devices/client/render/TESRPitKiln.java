@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.devices.client.render;
 
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
+import net.dries007.tfc.module.devices.objects.tile.TEPitKiln;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.model;
 
-import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalHare;
+import net.dries007.tfc.module.animal.objects.entities.huntable.EntityAnimalHare;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

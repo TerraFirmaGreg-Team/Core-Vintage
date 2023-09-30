@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.devices.client.render;
 
 import net.dries007.tfc.client.util.FluidSpriteCache;
-import net.dries007.tfc.module.devices.common.blocks.BlockFirePit;
-import net.dries007.tfc.module.devices.common.tile.TEFirePit;
+import net.dries007.tfc.module.devices.objects.blocks.BlockFirePit;
+import net.dries007.tfc.module.devices.objects.tile.TEFirePit;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;

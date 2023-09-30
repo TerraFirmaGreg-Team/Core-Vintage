@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.client.util.FluidSpriteCache;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.devices.common.tile.TECrucible;
+import net.dries007.tfc.module.devices.objects.tile.TECrucible;
 import net.dries007.tfc.util.Alloy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;

@@ -2,13 +2,13 @@ package net.dries007.tfc.module.agriculture;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.module.agriculture.api.bush.IBushBlock;
-import net.dries007.tfc.module.agriculture.api.bush.type.BushType;
-import net.dries007.tfc.module.agriculture.api.crop.type.CropType;
-import net.dries007.tfc.module.agriculture.api.crop.variant.block.CropBlockVariant;
-import net.dries007.tfc.module.agriculture.api.crop.variant.block.ICropBlock;
-import net.dries007.tfc.module.agriculture.api.crop.variant.item.CropItemVariant;
-import net.dries007.tfc.module.agriculture.api.crop.variant.item.ICropItem;
+import net.dries007.tfc.module.agriculture.api.types.bush.IBushBlock;
+import net.dries007.tfc.module.agriculture.api.types.bush.type.BushType;
+import net.dries007.tfc.module.agriculture.api.types.crop.type.CropType;
+import net.dries007.tfc.module.agriculture.api.types.crop.variant.block.CropBlockVariant;
+import net.dries007.tfc.module.agriculture.api.types.crop.variant.block.ICropBlock;
+import net.dries007.tfc.module.agriculture.api.types.crop.variant.item.CropItemVariant;
+import net.dries007.tfc.module.agriculture.api.types.crop.variant.item.ICropItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 

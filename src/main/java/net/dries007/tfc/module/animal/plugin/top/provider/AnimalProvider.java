@@ -6,7 +6,7 @@ import mcjty.theoneprobe.api.IProbeInfoEntityProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
-import net.dries007.tfc.module.animal.common.entities.EntityAnimalMammal;
+import net.dries007.tfc.module.animal.objects.entities.EntityAnimalMammal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;

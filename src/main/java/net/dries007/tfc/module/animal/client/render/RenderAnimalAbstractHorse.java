@@ -2,8 +2,8 @@ package net.dries007.tfc.module.animal.client.render;
 
 import com.google.common.collect.Maps;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalHorse;
-import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalDonkey;
-import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalMule;
+import net.dries007.tfc.module.animal.objects.entities.livestock.EntityAnimalDonkey;
+import net.dries007.tfc.module.animal.objects.entities.livestock.EntityAnimalMule;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

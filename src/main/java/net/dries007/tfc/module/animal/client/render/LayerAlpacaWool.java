@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.module.animal.client.model.ModelAnimalAlpacaWool;
-import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalAlpaca;
+import net.dries007.tfc.module.animal.objects.entities.livestock.EntityAnimalAlpaca;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.passive.EntitySheep;

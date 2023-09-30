@@ -2,7 +2,7 @@ package net.dries007.tfc.util;
 
 
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.plant.common.blocks.BlockPlantShortGrass;
+import net.dries007.tfc.module.plant.objects.blocks.BlockPlantShortGrass;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;

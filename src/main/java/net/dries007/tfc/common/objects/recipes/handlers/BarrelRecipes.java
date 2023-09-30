@@ -6,12 +6,12 @@ import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientItemFood;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
-import net.dries007.tfc.module.animal.common.items.ItemAnimalHide;
+import net.dries007.tfc.module.animal.objects.items.ItemAnimalHide;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.module.food.StorageFood;
-import net.dries007.tfc.module.food.api.type.FoodType;
+import net.dries007.tfc.module.food.api.types.type.FoodType;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -20,8 +20,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import static net.dries007.tfc.module.food.api.type.FoodTypes.*;
-import static net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants.INGREDIENT;
+import static net.dries007.tfc.module.food.api.types.type.FoodTypes.*;
+import static net.dries007.tfc.module.food.api.types.variant.Item.FoodItemVariants.INGREDIENT;
 
 public class BarrelRecipes {
 

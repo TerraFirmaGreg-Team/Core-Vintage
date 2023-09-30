@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.module.animal.client.model.ModelAnimalBoar;
-import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalBoar;
+import net.dries007.tfc.module.animal.objects.entities.huntable.EntityAnimalBoar;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

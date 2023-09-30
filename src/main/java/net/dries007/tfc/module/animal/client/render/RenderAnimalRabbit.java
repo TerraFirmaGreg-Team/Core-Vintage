@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.client.render;
 
 import net.dries007.tfc.module.animal.client.model.ModelAnimalRabbit;
-import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalRabbit;
+import net.dries007.tfc.module.animal.objects.entities.huntable.EntityAnimalRabbit;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

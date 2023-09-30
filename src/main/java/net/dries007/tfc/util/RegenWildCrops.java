@@ -2,7 +2,7 @@ package net.dries007.tfc.util;
 
 
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.plant.common.blocks.BlockPlantShortGrass;
+import net.dries007.tfc.module.plant.objects.blocks.BlockPlantShortGrass;
 import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;

@@ -2,7 +2,7 @@ package net.dries007.tfc.module.devices.client.render;
 
 import net.dries007.tfc.module.core.api.client.render.TESRBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.devices.common.tile.TEBellows;
+import net.dries007.tfc.module.devices.objects.tile.TEBellows;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

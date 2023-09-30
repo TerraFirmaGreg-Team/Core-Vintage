@@ -4,7 +4,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonLargeVesselSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
-import net.dries007.tfc.module.ceramic.common.tiles.TELargeVessel;
+import net.dries007.tfc.module.ceramic.objects.tiles.TELargeVessel;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.client.gui.GuiButton;

@@ -1,0 +1,112 @@
+package net.dries007.tfc.module.rock.objects.blocks;
+
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.rock.api.types.type.RockType;
+import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
+import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.block.BlockMagma;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+
+public class BlockRockMagma extends BlockMagma implements IRockBlock, IItemSize {
+
+    private final RockBlockVariant variant;
+    private final RockType type;
+
+    public BlockRockMagma(RockBlockVariant variant, RockType type) {
+
+        this.variant = variant;
+        this.type = type;
+
+        setSoundType(SoundType.STONE);
+        setHardness(getFinalHardness());
+        setHarvestLevel("pickaxe", 0);
+
+        if (getItemBlock() != null) {
+            OreDictionaryHelper.register(this, variant.toString());
+            OreDictionaryHelper.register(this, variant.toString(), type.toString());
+        }
+
+    }
+
+    @Nonnull
+    @Override
+    public RockBlockVariant getBlockVariant() {
+        return variant;
+    }
+
+    @Nonnull
+    @Override
+    public RockType getType() {
+        return type;
+    }
+
+    @Override
+    public ItemBlock getItemBlock() {
+        return this.getCategory().hasAnvil() ? new ItemBlockBase(this) : null;
+    }
+
+    @Nonnull
+    @Override
+    public Size getSize(@Nonnull ItemStack stack) {
+        return Size.SMALL;
+    }
+
+    @Nonnull
+    @Override
+    public Weight getWeight(@Nonnull ItemStack stack) {
+        return Weight.LIGHT;
+    }
+
+    @Nonnull
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Nonnull
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(getResourceLocation(),
+                        "rocktype=" + getType());
+            }
+        });
+
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(getResourceLocation(),
+                        "rocktype=" + getType()));
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getCategory().getLocalizedName());
+    }
+}

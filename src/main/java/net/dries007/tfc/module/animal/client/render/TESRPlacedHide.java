@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.module.animal.common.tiles.TEPlacedHide;
+import net.dries007.tfc.module.animal.objects.tiles.TEPlacedHide;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

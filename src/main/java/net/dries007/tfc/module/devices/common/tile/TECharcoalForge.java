@@ -8,7 +8,7 @@ import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.module.core.api.tile.ITileFields;
-import net.dries007.tfc.module.core.common.tiles.TETickableInventory;
+import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;

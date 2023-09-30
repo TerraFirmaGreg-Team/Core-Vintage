@@ -1,8 +1,8 @@
 package net.dries007.tfc.network;
 
 import net.dries007.tfc.TerraFirmaGreg;
-import net.dries007.tfc.module.core.common.tiles.TEPlacedItem;
-import net.dries007.tfc.module.core.common.tiles.TEPlacedItemFlat;
+import net.dries007.tfc.module.core.objects.tiles.TEPlacedItem;
+import net.dries007.tfc.module.core.objects.tiles.TEPlacedItemFlat;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;

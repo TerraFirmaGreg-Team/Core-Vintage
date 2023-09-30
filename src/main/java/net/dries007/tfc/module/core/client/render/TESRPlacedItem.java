@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.client.render;
 
-import net.dries007.tfc.module.core.common.tiles.TEPlacedItem;
+import net.dries007.tfc.module.core.objects.tiles.TEPlacedItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;

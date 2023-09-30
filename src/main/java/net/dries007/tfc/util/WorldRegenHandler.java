@@ -3,7 +3,7 @@ package net.dries007.tfc.util;
 import com.google.common.collect.Lists;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.module.core.common.tiles.TEPlacedItemFlat;
+import net.dries007.tfc.module.core.objects.tiles.TEPlacedItemFlat;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.ICreature;
 import net.dries007.tfc.module.animal.api.type.IHuntable;

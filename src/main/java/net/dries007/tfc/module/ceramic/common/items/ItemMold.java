@@ -9,7 +9,7 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.module.core.common.container.CapabilityContainerListener;
+import net.dries007.tfc.module.core.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.resources.I18n;

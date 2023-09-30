@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.api.container;
 
 import net.dries007.tfc.module.core.api.tile.TEInventory;
-import net.dries007.tfc.module.core.common.container.ContainerSimple;
+import net.dries007.tfc.module.core.objects.container.ContainerSimple;
 import net.dries007.tfc.module.core.api.tile.ITileFields;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

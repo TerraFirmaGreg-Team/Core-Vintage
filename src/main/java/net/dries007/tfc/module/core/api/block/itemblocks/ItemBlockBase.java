@@ -45,7 +45,7 @@ public class ItemBlockBase extends ItemBlock implements IItemSize {
      * @see ItemBase#getItemStackLimit(ItemStack)
      */
     @Override
-    public int getItemStackLimit(ItemStack stack) {
+    public int getItemStackLimit(@Nonnull ItemStack stack) {
         return getWeight(stack).getStackSize();
     }
 }

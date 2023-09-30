@@ -9,7 +9,7 @@ import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.module.core.api.tile.ITileFields;
-import net.dries007.tfc.module.core.common.tiles.TETickableInventory;
+import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.devices.common.blocks.BlockBlastFurnace;

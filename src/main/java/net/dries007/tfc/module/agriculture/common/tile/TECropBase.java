@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.agriculture.common.tile;
 
 import net.dries007.tfc.module.agriculture.common.blocks.BlockCropGrowing;
-import net.dries007.tfc.module.core.common.tiles.TETickCounter;
+import net.dries007.tfc.module.core.objects.tiles.TETickCounter;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.minecraft.nbt.NBTTagCompound;

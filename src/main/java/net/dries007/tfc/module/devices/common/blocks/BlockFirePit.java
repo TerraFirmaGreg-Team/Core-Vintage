@@ -8,7 +8,7 @@ import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.api.block.BlockBase;
-import net.dries007.tfc.module.core.common.items.ItemFireStarter;
+import net.dries007.tfc.module.core.objects.items.ItemFireStarter;
 import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.module.devices.common.tile.TEBellows;
 import net.dries007.tfc.module.devices.common.tile.TEFirePit;

@@ -4,7 +4,7 @@ import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.button.GuiButtonKnapping;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.common.container.ContainerKnapping;
+import net.dries007.tfc.module.core.objects.container.ContainerKnapping;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;

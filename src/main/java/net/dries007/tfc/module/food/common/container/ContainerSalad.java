@@ -7,7 +7,7 @@ import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.module.core.common.container.ContainerSimple;
+import net.dries007.tfc.module.core.objects.container.ContainerSimple;
 import net.dries007.tfc.module.food.StorageFood;
 import net.dries007.tfc.module.food.api.category.FoodCategories;
 import net.dries007.tfc.module.food.api.category.FoodCategory;

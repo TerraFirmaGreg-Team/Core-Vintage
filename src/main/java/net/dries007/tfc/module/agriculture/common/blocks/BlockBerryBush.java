@@ -7,7 +7,7 @@ import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.agriculture.api.bush.IBushBlock;
 import net.dries007.tfc.module.agriculture.api.bush.type.BushType;
 import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
-import net.dries007.tfc.module.core.common.tiles.TETickCounter;
+import net.dries007.tfc.module.core.objects.tiles.TETickCounter;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;

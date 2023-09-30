@@ -23,7 +23,7 @@ import net.dries007.tfc.client.gui.GuiCalendar;
 import net.dries007.tfc.client.gui.GuiKnapping;
 import net.dries007.tfc.client.gui.GuiNutrition;
 import net.dries007.tfc.client.gui.GuiSkills;
-import net.dries007.tfc.module.core.common.container.ContainerInventoryCrafting;
+import net.dries007.tfc.module.core.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.module.animal.common.items.ItemAnimalHide;
 import net.dries007.tfc.module.animal.common.items.ItemAnimalHide.HideType;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;

@@ -11,7 +11,7 @@ import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCal
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.tile.ITileFields;
-import net.dries007.tfc.module.core.common.tiles.TETickableInventory;
+import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.module.devices.common.blocks.BlockFirePit;
 import net.dries007.tfc.module.food.StorageFood;
 import net.dries007.tfc.module.food.api.category.FoodCategories;

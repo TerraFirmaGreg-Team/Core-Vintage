@@ -9,7 +9,7 @@ import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
-import net.dries007.tfc.module.core.common.items.ItemFireStarter;
+import net.dries007.tfc.module.core.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.devices.common.tile.TEBloomery;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Helpers;

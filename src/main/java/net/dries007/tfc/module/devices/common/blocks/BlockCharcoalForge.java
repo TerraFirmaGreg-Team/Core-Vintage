@@ -7,7 +7,7 @@ import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.api.block.BlockBase;
-import net.dries007.tfc.module.core.common.items.ItemFireStarter;
+import net.dries007.tfc.module.core.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.devices.common.tile.TEBellows;
 import net.dries007.tfc.module.devices.common.tile.TECharcoalForge;
 import net.dries007.tfc.module.devices.init.BlocksDevice;

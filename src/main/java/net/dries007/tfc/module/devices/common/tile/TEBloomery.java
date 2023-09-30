@@ -2,7 +2,7 @@ package net.dries007.tfc.module.devices.common.tile;
 
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
-import net.dries007.tfc.module.core.common.tiles.TETickableInventory;
+import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.devices.common.blocks.BlockBloomery;
 import net.dries007.tfc.module.devices.common.blocks.BlockCharcoalPile;

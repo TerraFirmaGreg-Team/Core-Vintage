@@ -2,9 +2,9 @@ package net.dries007.tfc.module.core.init;
 
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.common.effects.PotionFoodPoison;
-import net.dries007.tfc.module.core.common.effects.PotionOverburdened;
-import net.dries007.tfc.module.core.common.effects.PotionThirst;
+import net.dries007.tfc.module.core.objects.effects.PotionFoodPoison;
+import net.dries007.tfc.module.core.objects.effects.PotionOverburdened;
+import net.dries007.tfc.module.core.objects.effects.PotionThirst;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;

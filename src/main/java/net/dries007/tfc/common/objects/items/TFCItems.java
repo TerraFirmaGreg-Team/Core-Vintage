@@ -8,7 +8,7 @@ import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.module.ceramic.common.items.ItemMold;
 import net.dries007.tfc.module.ceramic.common.items.ItemUnfiredMold;
 import net.dries007.tfc.module.core.api.item.ItemBase;
-import net.dries007.tfc.module.core.common.items.*;
+import net.dries007.tfc.module.core.objects.items.*;
 import net.dries007.tfc.module.devices.common.items.ItemBloom;
 import net.minecraft.item.Item;
 

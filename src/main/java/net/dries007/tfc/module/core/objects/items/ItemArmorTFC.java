@@ -12,27 +12,27 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 public class ItemArmorTFC extends ItemArmor implements IItemSize, IDamageResistance {
-    private final IArmorMaterialTFC materialTFC;
+    private final IArmorMaterialTFC armorMaterial;
 
-    public ItemArmorTFC(IArmorMaterialTFC materialTFC, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
-        super(materialTFC.getMaterial(), renderIndexIn, equipmentSlotIn);
-        this.materialTFC = materialTFC;
+    public ItemArmorTFC(IArmorMaterialTFC armorMaterial, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+        super(armorMaterial.getMaterial(), renderIndexIn, equipmentSlotIn);
+        this.armorMaterial = armorMaterial;
         setNoRepair();
     }
 
     @Override
     public float getCrushingModifier() {
-        return materialTFC.getCrushingModifier();
+        return armorMaterial.getCrushingModifier();
     }
 
     @Override
     public float getPiercingModifier() {
-        return materialTFC.getPiercingModifier();
+        return armorMaterial.getPiercingModifier();
     }
 
     @Override
     public float getSlashingModifier() {
-        return materialTFC.getSlashingModifier();
+        return armorMaterial.getSlashingModifier();
     }
 
     @Nonnull

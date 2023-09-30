@@ -1,6 +1,6 @@
 package net.dries007.tfc.commands;
 
-import net.dries007.tfc.api.types.tree.type.TreeType;
+import net.dries007.tfc.module.wood.tree.type.TreeType;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;

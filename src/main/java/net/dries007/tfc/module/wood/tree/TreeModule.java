@@ -1,6 +1,6 @@
-package net.dries007.tfc.api.types.tree;
+package net.dries007.tfc.module.wood.tree;
 
-import net.dries007.tfc.api.types.tree.type.TreeTypeHandler;
+import net.dries007.tfc.module.wood.tree.type.TreeTypeHandler;
 
 public class TreeModule {
 

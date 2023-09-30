@@ -2,7 +2,6 @@ package net.dries007.tfc.util;
 
 import com.google.common.collect.Lists;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.agriculture.common.blocks.BlockCropDead;
 import net.dries007.tfc.module.agriculture.common.items.ItemCropSeed;
@@ -15,6 +14,7 @@ import net.dries007.tfc.module.core.objects.tiles.TEPlacedItemFlat;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlantMushroom;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
+import net.dries007.tfc.module.wood.tree.type.TreeType;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;

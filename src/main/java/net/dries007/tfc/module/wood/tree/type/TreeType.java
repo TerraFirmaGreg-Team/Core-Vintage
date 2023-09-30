@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.tree.type;
+package net.dries007.tfc.module.wood.tree.type;
 
 import com.ferreusveritas.dynamictrees.api.IGenFeature;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;

@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.types.tree.category;
+package net.dries007.tfc.module.wood.tree.category;
 
 public class TreeCategories {
 

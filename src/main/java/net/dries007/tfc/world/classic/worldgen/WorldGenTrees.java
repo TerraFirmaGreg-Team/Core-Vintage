@@ -1,9 +1,9 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.api.types.tree.type.TreeType;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.StorageCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.wood.tree.type.TreeType;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;

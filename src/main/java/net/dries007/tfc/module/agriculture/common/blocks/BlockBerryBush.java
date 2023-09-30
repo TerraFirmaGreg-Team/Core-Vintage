@@ -2,14 +2,13 @@ package net.dries007.tfc.module.agriculture.common.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.agriculture.api.bush.IBushBlock;
 import net.dries007.tfc.module.agriculture.api.bush.type.BushType;
-import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.core.objects.tiles.TETickCounter;
 import net.dries007.tfc.util.DamageSourcesTFC;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -47,8 +46,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.tfc.module.agriculture.ModuleAgriculture.AGRICULTURE_TAB;
-
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockBerryBush extends BlockBush implements IGrowingPlant, IBushBlock {
@@ -60,12 +57,8 @@ public class BlockBerryBush extends BlockBush implements IGrowingPlant, IBushBlo
     private final BushType type;
 
     public BlockBerryBush(BushType type) {
-        super();
         this.type = type;
 
-        setRegistryName(getRegistryLocation());
-        setTranslationKey(getTranslationName());
-        setCreativeTab(AGRICULTURE_TAB);
         setSoundType(SoundType.PLANT);
         setHardness(1.0F);
         setDefaultState(blockState.getBaseState().withProperty(FRUITING, false));
@@ -238,9 +231,9 @@ public class BlockBerryBush extends BlockBush implements IGrowingPlant, IBushBlo
     private boolean canStay(IBlockAccess world, BlockPos pos) {
         IBlockState below = world.getBlockState(pos.down());
         if (type.getSize() == Size.LARGE && below.getBlock() instanceof BlockBerryBush && ((BlockBerryBush) below.getBlock()).type == this.type) {
-            return TFCBlocks.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
+            return Helpers.isGrowableSoil(world.getBlockState(pos.down(2))); // Only stack once
         }
-        return TFCBlocks.isGrowableSoil(below);
+        return Helpers.isGrowableSoil(below);
     }
 
     @Override

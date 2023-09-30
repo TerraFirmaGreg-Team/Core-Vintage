@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalBoar;
 import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalBoar;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalBoar extends RenderLiving<EntityAnimalBoar> {
-    private static final ResourceLocation TEXTURE = TerraFirmaGreg.getID("textures/entity/animal/huntable/boar.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/boar.png");
 
     public RenderAnimalBoar(RenderManager renderManager) {
         super(renderManager, new ModelAnimalBoar(), 0.7F);

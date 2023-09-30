@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.soil.api.variant.block;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.module.soil.api.type.SoilType;
@@ -45,6 +45,6 @@ public interface ISoilBlock extends IItemProvider, IHasModel {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaGreg.getID(String.format("soil/%s", getBlockVariant()));
+        return TerraFirmaCraft.getID(String.format("soil/%s", getBlockVariant()));
     }
 }

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalPig;
 import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalPig;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -13,8 +13,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalPig extends RenderAnimal<EntityAnimalPig> {
-    private static final ResourceLocation PIG_YOUNG = TerraFirmaGreg.getID("textures/entity/animal/livestock/pig_young.png");
-    private static final ResourceLocation PIG_OLD = TerraFirmaGreg.getID("textures/entity/animal/livestock/pig_old.png");
+    private static final ResourceLocation PIG_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/pig_young.png");
+    private static final ResourceLocation PIG_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/pig_old.png");
 
     public RenderAnimalPig(RenderManager renderManager) {
         super(renderManager, new ModelAnimalPig(), 0.7F, PIG_YOUNG, PIG_OLD);

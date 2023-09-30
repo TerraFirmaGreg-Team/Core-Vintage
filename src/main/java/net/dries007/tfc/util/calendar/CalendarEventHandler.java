@@ -1,9 +1,9 @@
 package net.dries007.tfc.util.calendar;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -89,7 +89,7 @@ public class CalendarEventHandler {
             // Check total players and reset player / calendar time ticking
             MinecraftServer server = event.player.getServer();
             if (server != null) {
-                TerraFirmaGreg.LOGGER.info("Player Logged Out - Checking for Calendar Updates.");
+                ModuleCore.LOGGER.info("Player Logged Out - Checking for Calendar Updates.");
                 List<EntityPlayerMP> players = server.getPlayerList().getPlayers();
                 int playerCount = players.size();
                 // The player logging out doesn't count
@@ -112,7 +112,7 @@ public class CalendarEventHandler {
             // Check total players and reset player / calendar time ticking
             MinecraftServer server = event.player.getServer();
             if (server != null) {
-                TerraFirmaGreg.LOGGER.info("Player Logged In - Checking for Calendar Updates.");
+                ModuleCore.LOGGER.info("Player Logged In - Checking for Calendar Updates.");
                 int players = server.getPlayerList().getPlayers().size();
                 CalendarTFC.INSTANCE.setPlayersLoggedOn(players > 0);
             }

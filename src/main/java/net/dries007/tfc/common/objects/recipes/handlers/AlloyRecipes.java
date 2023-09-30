@@ -2,12 +2,12 @@ package net.dries007.tfc.common.objects.recipes.handlers;
 
 import gregtech.api.unification.material.Materials;
 import net.dries007.tfc.api.recipes.AlloyRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
+import net.dries007.tfc.module.core.init.RegistryCore;
 
 public class AlloyRecipes {
     public static void register() {
-        var registry = TFCRegistries.ALLOYS;
+        var registry = RegistryCore.ALLOYS;
 
         registry.registerAll(
                 new AlloyRecipe

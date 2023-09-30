@@ -2,7 +2,7 @@ package net.dries007.tfc.module.metal.common.tiles;
 
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
@@ -10,18 +10,18 @@ import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
-import net.dries007.tfc.module.core.api.tile.TEInventory;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
+import net.dries007.tfc.module.core.init.RegistryCore;
+import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;
 import net.dries007.tfc.module.rock.common.blocks.BlockRockAnvil;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
@@ -146,7 +146,7 @@ public class TEMetalAnvil extends TEInventory {
         if (StringUtils.isNullOrEmpty(recipe)) {
             this.recipe = null;
         } else {
-            this.recipe = TFCRegistries.ANVIL.getValue(new ResourceLocation(recipe));
+            this.recipe = RegistryCore.ANVIL.getValue(new ResourceLocation(recipe));
         }
         this.steps.deserializeNBT(nbt.getCompoundTag("steps"));
         this.workingProgress = nbt.getInteger("work");
@@ -286,7 +286,7 @@ public class TEMetalAnvil extends TEInventory {
             ItemStack fluxStack = inventory.getStackInSlot(SLOT_FLUX);
             if (fluxStack.isEmpty()) {
                 // No flux
-                TerraFirmaGreg.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
+                TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
                 return false;
             }
 
@@ -295,9 +295,9 @@ public class TEMetalAnvil extends TEInventory {
             IForgeable cap2 = input2.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
             if (cap1 == null || cap2 == null || !cap1.isWeldable() || !cap2.isWeldable()) {
                 if (cap1 instanceof IItemHeat && cap2 instanceof IItemHeat) {
-                    TerraFirmaGreg.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
+                    TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
                 } else {
-                    TerraFirmaGreg.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+                    TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
                 }
                 return false;
             }
@@ -325,7 +325,7 @@ public class TEMetalAnvil extends TEInventory {
         }
 
         // For when there is both inputs but no recipe that matches
-        TerraFirmaGreg.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+        TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
         return false;
     }
 
@@ -345,7 +345,7 @@ public class TEMetalAnvil extends TEInventory {
             setRecipe(null);
         } else if (cap != null) {
             // Check for mismatched recipe
-            AnvilRecipe capRecipe = TFCRegistries.ANVIL.getValue(cap.getRecipeName());
+            AnvilRecipe capRecipe = RegistryCore.ANVIL.getValue(cap.getRecipeName());
             if (capRecipe != recipe) {
                 setRecipe(capRecipe);
             } else if (AnvilRecipe.getAllFor(stack).size() == 1) {

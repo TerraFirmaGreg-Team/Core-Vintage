@@ -2,7 +2,6 @@ package net.dries007.tfc.module.devices.common.items;
 
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableMeasurableMetalHandler;
 import net.dries007.tfc.api.capability.forge.IForgeable;
@@ -10,9 +9,9 @@ import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.core.api.item.ItemBase;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
+import net.dries007.tfc.module.core.api.objects.item.ItemBase;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -27,8 +26,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
-
 
 @ParametersAreNonnullByDefault
 public class ItemBloom extends ItemBase implements IMaterialItem {
@@ -36,14 +33,6 @@ public class ItemBloom extends ItemBase implements IMaterialItem {
 
     public ItemBloom(boolean meltable) {
         this.meltable = meltable;
-        if (meltable) {
-            setRegistryName(Tags.MOD_ID, "bloom/refined");
-            setTranslationKey(Tags.MOD_ID + ".bloom.refined");
-        } else {
-            setRegistryName(Tags.MOD_ID, "bloom/unrefined");
-            setTranslationKey(Tags.MOD_ID + ".bloom.unrefined");
-        }
-        setCreativeTab(MISC_TAB);
     }
 
     @Nonnull

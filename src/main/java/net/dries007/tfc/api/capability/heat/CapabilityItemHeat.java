@@ -1,10 +1,10 @@
 package net.dries007.tfc.api.capability.heat;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.init.ItemsCore;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public final class CapabilityItemHeat {
-    public static final ResourceLocation KEY = TerraFirmaGreg.getID("item_heat");
+    public static final ResourceLocation KEY = TerraFirmaCraft.getID("item_heat");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IItemHeat for items outside TFC
     @CapabilityInject(IItemHeat.class)
     public static Capability<IItemHeat> ITEM_HEAT_CAPABILITY;
@@ -34,8 +34,8 @@ public final class CapabilityItemHeat {
     public static void init() {
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(Items.EGG), () -> new ItemHeatHandler(null, 1, 480));
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of("blockClay"), () -> new ItemHeatHandler(null, 1, 600));
-        CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(TFCItems.GLASS_SHARD), () -> new ItemHeatHandler(null, 1, 1000));
-        CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(TFCItems.STICK_BUNCH), () -> new ItemHeatHandler(null, 1, 200));
+        CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.GLASS_SHARD), () -> new ItemHeatHandler(null, 1, 1000));
+        CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.STICK_BUNCH), () -> new ItemHeatHandler(null, 1, 200));
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of("terracotta"), () -> new ItemHeatHandler(null, 1, 1200));
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(Blocks.IRON_BARS), () -> new ItemHeatHandler(null, 1, 1535));
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(Items.IRON_INGOT), () -> new ItemHeatHandler(null, 0.35F, 1535));

@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.plant.common.blocks.itemblocks;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlantPot;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowerPot;
 import net.minecraft.entity.player.EntityPlayer;

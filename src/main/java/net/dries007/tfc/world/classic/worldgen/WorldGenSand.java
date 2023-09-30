@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
@@ -24,7 +24,7 @@ public class WorldGenSand extends WorldGenerator {
 
     @Override
     public boolean generate(World world, Random rng, BlockPos pos) {
-        if (TFCBlocks.isWater(world.getBlockState(pos))) return false;
+        if (Helpers.isWater(world.getBlockState(pos))) return false;
 
         final Block sand = StorageRock.getRockBlock(SAND, ChunkDataTFC.getRock1(world, pos));
         final int rnd = rng.nextInt(this.radius - 2) + 2;
@@ -34,7 +34,7 @@ public class WorldGenSand extends WorldGenerator {
                 if (x * x + z * z > rnd * rnd) continue;
                 for (int y = -2; y <= 2; y++) {
                     final IBlockState s = world.getBlockState(pos.add(x, y, z));
-                    if (TFCBlocks.isSoil(s) || TFCBlocks.isSand(s))
+                    if (Helpers.isSoil(s) || Helpers.isSand(s))
                         world.setBlockState(pos.add(x, y, z), sand.getDefaultState(), 2);
                 }
             }

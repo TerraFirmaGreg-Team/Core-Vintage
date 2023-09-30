@@ -10,8 +10,8 @@ import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.recipes.AlloyRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
+import net.dries007.tfc.module.core.init.RegistryCore;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -190,7 +190,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
         if (metalMap.size() == 1) {
             return metalMap.keySet().iterator().next(); // Easy way to get the only metal in the alloy
         }
-        for (AlloyRecipe r : TFCRegistries.ALLOYS.getValuesCollection()) {
+        for (AlloyRecipe r : RegistryCore.ALLOYS.getValuesCollection()) {
             if (matchesRecipe(r)) {
                 return r.getResult();
             }

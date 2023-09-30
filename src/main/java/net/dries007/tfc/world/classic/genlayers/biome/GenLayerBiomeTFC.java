@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.genlayers.biome;
 
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
 import net.minecraft.world.biome.Biome;
@@ -18,8 +18,8 @@ public class GenLayerBiomeTFC extends GenLayerTFC {
         super(seed);
         this.parent = parent;
         if (ConfigTFC.General.DEBUG.debugWorldGenSafe) {
-            TerraFirmaGreg.LOGGER.info("Worldgen biome list (ints): {}", biomes);
-            TerraFirmaGreg.LOGGER.info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes).mapToObj(Biome::getBiomeForId).map(Objects::toString).toArray());
+            ModuleCore.LOGGER.info("Worldgen biome list (ints): {}", biomes);
+            ModuleCore.LOGGER.info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes).mapToObj(Biome::getBiomeForId).map(Objects::toString).toArray());
         }
     }
 

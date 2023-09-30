@@ -2,21 +2,21 @@ package net.dries007.tfc.module.animal.common.entities.livestock;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.animal.api.type.IRidable;
 import net.dries007.tfc.module.animal.common.entities.AnimalGroupingRules;
 import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
-import net.dries007.tfc.module.core.init.PotionEffectsCore;
+import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.init.EffectsCore;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.Constants;
@@ -172,7 +172,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
         return this.world.checkNoEntityCollision(getEntityBoundingBox())
                 && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
                 && !this.world.containsAnyLiquid(getEntityBoundingBox())
-                && TFCBlocks.isGround(this.world.getBlockState(this.getPosition().down()));
+                && Helpers.isGround(this.world.getBlockState(this.getPosition().down()));
     }
 
     @Override
@@ -262,7 +262,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
                 }
                 if (hugeHeavyCount >= 2) {
                     // Does not work when ridden, mojang bug: https://bugs.mojang.com/browse/MC-121788
-                    this.addPotionEffect(new PotionEffect(PotionEffectsCore.OVERBURDENED, 25, 125, false, false));
+                    this.addPotionEffect(new PotionEffect(EffectsCore.OVERBURDENED, 25, 125, false, false));
                 }
             }
             // Is it time to decay familiarity?
@@ -398,7 +398,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
                     if (!this.world.isRemote) {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                            TerraFirmaGreg.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                            TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
                         }
                     }
                 }

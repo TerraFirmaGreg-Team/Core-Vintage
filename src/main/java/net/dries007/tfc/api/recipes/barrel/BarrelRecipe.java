@@ -1,9 +1,9 @@
 package net.dries007.tfc.api.recipes.barrel;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.init.RegistryCore;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -43,12 +43,12 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
 
     @Nullable
     public static BarrelRecipe get(ItemStack stack, FluidStack fluidStack) {
-        return TFCRegistries.BARREL.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() != 0).findFirst().orElse(null);
+        return RegistryCore.BARREL.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() != 0).findFirst().orElse(null);
     }
 
     @Nullable
     public static BarrelRecipe getInstant(ItemStack stack, FluidStack fluidStack) {
-        return TFCRegistries.BARREL.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() == 0).findFirst().orElse(null);
+        return RegistryCore.BARREL.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack, stack) && x.getDuration() == 0).findFirst().orElse(null);
     }
 
     /**
@@ -56,7 +56,7 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
      * Used as a complement to barrel's whitelist
      */
     public static boolean isBarrelFluid(FluidStack fluidStack) {
-        return TFCRegistries.BARREL.getValuesCollection().stream().filter(x -> x.inputFluid.testIgnoreCount(fluidStack)).findFirst().orElse(null) != null;
+        return RegistryCore.BARREL.getValuesCollection().stream().filter(x -> x.inputFluid.testIgnoreCount(fluidStack)).findFirst().orElse(null) != null;
     }
 
     public boolean isValidInput(@Nullable FluidStack inputFluid, ItemStack inputStack) {

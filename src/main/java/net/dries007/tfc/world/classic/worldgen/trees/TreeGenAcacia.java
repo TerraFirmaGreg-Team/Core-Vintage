@@ -1,6 +1,6 @@
 //package net.dries007.tfc.world.classic.worldgen.trees;
 //
-//import net.dries007.tfc.TerraFirmaGreg;
+//import net.dries007.tfc.TerraFirmaCraft;
 //import net.dries007.tfc.world.classic.worldgen.trees.ITreeGenerator;
 //import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 //import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants;
@@ -33,8 +33,8 @@
 //
 //    @Override
 //    public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
-//        trunk = TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
-//        bark = TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false).withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
+//        trunk = BlocksCore.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
+//        bark = BlocksCore.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false).withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
 //
 //        final boolean smallBranch = rand.nextBoolean();
 //        final int branches = 2 + rand.nextInt(2);
@@ -73,11 +73,11 @@
 //    }
 //
 //    private void placeBranch(TemplateManager manager, World world, BlockPos pos, String name) {
-//        ResourceLocation base = TerraFirmaGreg.identifier(name);
+//        ResourceLocation base = TerraFirmaCraft.identifier(name);
 //        Template structureBase = manager.get(world.getMinecraftServer(), base);
 //
 //        if (structureBase == null) {
-//            TerraFirmaGreg.LOGGER.warn("Unable to find a template for " + base);
+//            TerraFirmaCraft.LOGGER.warn("Unable to find a template for " + base);
 //            return;
 //        }
 //        BlockPos size = structureBase.getSize();

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.agriculture.api.crop.variant.block;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.module.agriculture.api.crop.type.CropType;
@@ -43,7 +43,7 @@ public interface ICropBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return TerraFirmaGreg.getID(String.format("crop.%s.%s", getBlockVariant(), getType()));
+        return TerraFirmaCraft.getID(String.format("crop.%s.%s", getBlockVariant(), getType()));
     }
 
     /**
@@ -53,6 +53,6 @@ public interface ICropBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaGreg.getID(String.format("crop/%s/%s", getBlockVariant(), getType()));
+        return TerraFirmaCraft.getID(String.format("crop/%s/%s", getBlockVariant(), getType()));
     }
 }

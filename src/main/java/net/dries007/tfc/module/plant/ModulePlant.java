@@ -2,7 +2,7 @@ package net.dries007.tfc.module.plant;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.core.api.util.CreativeTabBase;
 import net.dries007.tfc.module.plant.api.category.PlantCategoryHandler;
 import net.dries007.tfc.module.plant.api.type.PlantTypeHandler;
 import net.dries007.tfc.module.plant.api.variant.block.PlantBlockVariantHandler;
@@ -24,7 +24,7 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 public class ModulePlant extends ModuleBase {
 
     public static final String MODULE_ID = "module.plant";
-    public static final CreativeTabs FLORA_TAB = new CreativeTabsTFC.TFCCreativeTab("flora", "tfc:plant.cactus.barrel_cactus");
+    public static final CreativeTabs FLORA_TAB = new CreativeTabBase("flora", "tfc:plant.cactus.barrel_cactus");
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModulePlant.class.getSimpleName());
 
 //    public static IPacketService PACKET_SERVICE;

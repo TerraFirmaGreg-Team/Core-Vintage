@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalYak;
 import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
 import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalYak;
@@ -15,8 +15,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalYak extends RenderAnimal<EntityAnimalYak> {
-    private static final ResourceLocation TEXTURE_YOUNG = TerraFirmaGreg.getID("textures/entity/animal/livestock/yak_young.png");
-    private static final ResourceLocation TEXTURE_OLD = TerraFirmaGreg.getID("textures/entity/animal/livestock/yak_young.png");
+    private static final ResourceLocation TEXTURE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/yak_young.png");
+    private static final ResourceLocation TEXTURE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/yak_young.png");
 
     public RenderAnimalYak(RenderManager renderManager) {
         super(renderManager, new ModelAnimalYak(), 0.7F, TEXTURE_YOUNG, TEXTURE_OLD);

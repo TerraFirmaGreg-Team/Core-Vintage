@@ -2,7 +2,6 @@ package net.dries007.tfc.module.agriculture;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
 import net.dries007.tfc.module.agriculture.api.bush.type.BushTypeHandler;
 import net.dries007.tfc.module.agriculture.api.crop.category.CropCategoryHandler;
 import net.dries007.tfc.module.agriculture.api.crop.type.CropTypeHandler;
@@ -10,6 +9,7 @@ import net.dries007.tfc.module.agriculture.api.crop.variant.block.CropBlockVaria
 import net.dries007.tfc.module.agriculture.api.crop.variant.item.CropItemVariantHandler;
 import net.dries007.tfc.module.agriculture.init.BlocksCrop;
 import net.dries007.tfc.module.agriculture.init.ItemsCrop;
+import net.dries007.tfc.module.core.api.util.CreativeTabBase;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
@@ -23,7 +23,7 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 public class ModuleAgriculture extends ModuleBase {
 
     public static final String MODULE_ID = "module.agriculture";
-    public static final CreativeTabs AGRICULTURE_TAB = new CreativeTabsTFC.TFCCreativeTab("agriculture", "tfc:crop.seed.rice");
+    public static final CreativeTabs AGRICULTURE_TAB = new CreativeTabBase("agriculture", "tfc:crop.seed.rice");
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleAgriculture.class.getSimpleName());
 
     public ModuleAgriculture() {

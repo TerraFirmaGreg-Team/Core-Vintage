@@ -1,10 +1,10 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.agriculture.StorageAgriculture;
 import net.dries007.tfc.module.agriculture.api.crop.type.CropType;
 import net.dries007.tfc.module.agriculture.common.blocks.BlockCropGrowing;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
@@ -83,6 +83,6 @@ public class WorldGenWildCrops implements IWorldGenerator {
      * @return {@code true}, если позиция допустима, иначе {@code false}
      */
     protected boolean isValidPosition(World world, BlockPos pos) {
-        return world.isAirBlock(pos) && TFCBlocks.isSoil(world.getBlockState(pos.down()));
+        return world.isAirBlock(pos) && Helpers.isSoil(world.getBlockState(pos.down()));
     }
 }

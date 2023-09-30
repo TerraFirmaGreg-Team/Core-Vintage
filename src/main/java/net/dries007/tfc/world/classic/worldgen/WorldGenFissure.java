@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -59,7 +59,7 @@ public class WorldGenFissure implements IWorldGenerator {
         for (int y = 1; y < 4; y++) {
             for (BlockPos pos : clearing) {
                 IBlockState block = world.getBlockState(pos.up(y));
-                if (TFCBlocks.isWater(block) && !TFCBlocks.isGround(block)) return;
+                if (Helpers.isWater(block) && !Helpers.isGround(block)) return;
             }
         }
 

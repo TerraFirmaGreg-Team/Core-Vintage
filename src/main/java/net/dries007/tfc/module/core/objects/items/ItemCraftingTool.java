@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 public class ItemCraftingTool extends ItemMisc {
-    public ItemCraftingTool(String string, int durability, Size size, Weight weight, String... oreNameParts) {
-        super(string, size, weight, oreNameParts);
+    public ItemCraftingTool(int durability, Size size, Weight weight, String... oreNameParts) {
+        super(size, weight, oreNameParts);
         setMaxDamage(durability);
         setMaxStackSize(1);
         setNoRepair();

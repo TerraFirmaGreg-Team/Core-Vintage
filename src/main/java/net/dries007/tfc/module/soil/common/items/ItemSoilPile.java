@@ -2,7 +2,7 @@ package net.dries007.tfc.module.soil.common.items;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.core.api.item.ItemBase;
+import net.dries007.tfc.module.core.api.objects.item.ItemBase;
 import net.dries007.tfc.module.soil.api.type.SoilType;
 import net.dries007.tfc.module.soil.api.variant.item.ISoilItem;
 import net.dries007.tfc.module.soil.api.variant.item.SoilItemVariant;

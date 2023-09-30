@@ -4,10 +4,10 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.workbench.UnmoldRecipe;
-import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.module.ceramic.StorageCeramic;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -30,7 +30,7 @@ public class WorkbenchRecipes {
                 if (material.hasProperty(TFGPropertyKey.HEAT) && extendedOrePrefix.getHasMold()) {
                     if (material.hasFlag(TFGMaterialFlags.TOOL_MATERIAL_CAN_BE_UNMOLDED) || orePrefix == OrePrefix.ingot) {
                         registry.register(
-                                new UnmoldRecipe(new ItemStack(TFCItems.FIRED_MOLDS.get(orePrefix)), material, 1).setRegistryName(Tags.MOD_ID, "unmold_" + orePrefix.name + "_" + material.getName())
+                                new UnmoldRecipe(new ItemStack(StorageCeramic.FIRED_MOLDS.get(orePrefix)), material, 1).setRegistryName(Tags.MOD_ID, "unmold_" + orePrefix.name + "_" + material.getName())
                         );
                     }
 

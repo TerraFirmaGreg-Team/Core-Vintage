@@ -7,10 +7,10 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import net.dries007.tfc.TerraFirmaGreg;
-import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
+import net.dries007.tfc.module.core.init.ItemsCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -19,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class QuernCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
-    private static final ResourceLocation ICONS = TerraFirmaGreg.getID("textures/gui/icons/jei.png");
+    private static final ResourceLocation ICONS = TerraFirmaCraft.getID("textures/gui/icons/jei.png");
 
     private final IDrawableStatic slot;
     private final IDrawableStatic arrow;
@@ -50,7 +50,7 @@ public class QuernCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
         itemStackGroup.init(2, false, 84, 16);
 
         itemStackGroup.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
-        itemStackGroup.set(1, new ItemStack(TFCItems.HANDSTONE)); // todo: use all ore dict entries with "handstone"
+        itemStackGroup.set(1, new ItemStack(ItemsCore.HANDSTONE)); // todo: use all ore dict entries with "handstone"
         itemStackGroup.set(2, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
     }
 }

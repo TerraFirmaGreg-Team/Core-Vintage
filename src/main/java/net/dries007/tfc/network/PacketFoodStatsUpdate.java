@@ -1,7 +1,7 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,8 +44,8 @@ public class PacketFoodStatsUpdate implements IMessage {
     public static final class Handler implements IMessageHandler<PacketFoodStatsUpdate, IMessage> {
         @Override
         public IMessage onMessage(PacketFoodStatsUpdate message, MessageContext ctx) {
-            TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                final EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
+            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                final EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
                 if (player != null) {
                     FoodStats foodStats = player.getFoodStats();
                     if (foodStats instanceof FoodStatsTFC) {

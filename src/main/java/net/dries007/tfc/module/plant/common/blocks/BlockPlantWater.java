@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.plant.common.blocks;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
 import net.minecraft.block.state.IBlockState;
@@ -28,8 +28,8 @@ public class BlockPlantWater extends BlockPlant {
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         IBlockState soil = worldIn.getBlockState(pos.down());
         if (plant.getWaterType() == SALT_WATER)
-            return TFCBlocks.isSaltWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
-        return TFCBlocks.isFreshWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
+            return Helpers.isSaltWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
+        return Helpers.isFreshWater(worldIn.getBlockState(pos)) && this.canSustainBush(soil);
     }
 
     @Override

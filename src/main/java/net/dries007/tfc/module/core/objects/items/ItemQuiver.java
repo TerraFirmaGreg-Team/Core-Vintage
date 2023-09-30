@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.core.objects.items;
 
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.TFCGuiHandler;
@@ -32,17 +31,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
-
 
 @ParametersAreNonnullByDefault
 public class ItemQuiver extends ItemArmorTFC {
+
+    public static final String NAME = "quiver";
+
     public ItemQuiver() {
         super(ArmorMaterialTFC.QUIVER, 1 /* chest*/, EntityEquipmentSlot.CHEST);
-
-        setRegistryName(Tags.MOD_ID, "quiver");
-        setTranslationKey(Tags.MOD_ID + ".quiver");
-        setCreativeTab(MISC_TAB);
     }
 
     public static void replenishJavelin(InventoryPlayer playerInv) {

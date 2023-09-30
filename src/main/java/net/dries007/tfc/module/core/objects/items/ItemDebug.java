@@ -1,8 +1,7 @@
 package net.dries007.tfc.module.core.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,17 +23,14 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
-
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemDebug extends Item {
-    public ItemDebug() {
 
-        setRegistryName(Tags.MOD_ID, "wand");
-        setTranslationKey(Tags.MOD_ID + ".wand");
-        setCreativeTab(MISC_TAB);
+    public static final String NAME = "wand";
+
+    public ItemDebug() {
 
         setNoRepair();
         setMaxStackSize(1);
@@ -56,19 +52,19 @@ public class ItemDebug extends Item {
                 try {
                     tile.getClass().getMethod("debug").invoke(tile);
                 } catch (Exception t) {
-                    TerraFirmaGreg.LOGGER.info("No debug method found to invoke on {}", tile);
+                    ModuleCore.LOGGER.info("No debug method found to invoke on {}", tile);
                 }
 
-                TerraFirmaGreg.LOGGER.info("Tile Data: {}", tile.serializeNBT());
+                ModuleCore.LOGGER.info("Tile Data: {}", tile.serializeNBT());
 
                 IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (inventory != null) {
-                    TerraFirmaGreg.LOGGER.info("Found item handler: {}", inventory);
+                    ModuleCore.LOGGER.info("Found item handler: {}", inventory);
                 }
 
                 IFluidHandler fluids = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
                 if (fluids != null) {
-                    TerraFirmaGreg.LOGGER.info("Found fluid handler: {}", fluids);
+                    ModuleCore.LOGGER.info("Found fluid handler: {}", fluids);
                 }
             }
         } catch (Exception t) { /* Nothing Burger */ }

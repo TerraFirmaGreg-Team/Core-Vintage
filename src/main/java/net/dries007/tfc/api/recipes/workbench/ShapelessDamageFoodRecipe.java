@@ -3,8 +3,8 @@ package net.dries007.tfc.api.recipes.workbench;
 import com.google.gson.JsonObject;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.common.objects.recipes.RecipeUtils;
+import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
@@ -57,7 +57,7 @@ public class ShapelessDamageFoodRecipe extends ShapelessDamageRecipe {
         EntityPlayer player = ForgeHooks.getCraftingPlayer();
         if (player != null && !player.world.isRemote && OreDictionaryHelper.doesStackMatchOre(output, "grain"))// only give straw if output is grain
         {
-            ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(TFCItems.STRAW)); // gives one at a time
+            ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(ItemsCore.STRAW)); // gives one at a time
         }
 
         return super.getRemainingItems(inventoryCrafting);

@@ -2,6 +2,8 @@ package net.dries007.tfc.module.agriculture;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.module.agriculture.api.bush.IBushBlock;
+import net.dries007.tfc.module.agriculture.api.bush.type.BushType;
 import net.dries007.tfc.module.agriculture.api.crop.type.CropType;
 import net.dries007.tfc.module.agriculture.api.crop.variant.block.CropBlockVariant;
 import net.dries007.tfc.module.agriculture.api.crop.variant.block.ICropBlock;
@@ -16,6 +18,8 @@ import java.util.Map;
 public class StorageAgriculture {
 
     public static final Map<Pair<CropBlockVariant, CropType>, ICropBlock> CROP_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
+    public static final Map<BushType, IBushBlock> BUSH_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
+
     public static final Map<Pair<CropItemVariant, CropType>, ICropItem> CROP_ITEMS = new Object2ObjectLinkedOpenHashMap<>();
 
     @Nonnull
@@ -31,6 +35,14 @@ public class StorageAgriculture {
         if (block != null) return block;
         throw new RuntimeException(String.format("Block crop is null: %s, %s", variant, type));
     }
+
+    @Nonnull
+    public static Block getBushBlock(@Nonnull BushType type) {
+        var block = (Block) BUSH_BLOCKS.get(type);
+        if (block != null) return block;
+        throw new RuntimeException(String.format("Block is null: %s", type));
+    }
+
 
     @Nonnull
     public static Item getCropItem(@Nonnull CropItemVariant variant, @Nonnull CropType type) {

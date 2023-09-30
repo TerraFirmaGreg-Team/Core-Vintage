@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.objects.tiles;
 
-import net.dries007.tfc.module.core.api.tile.TEInventory;
+import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.items.ItemStackHandler;
 

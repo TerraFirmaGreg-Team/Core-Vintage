@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.plant.StoragePlant;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlant;
@@ -52,10 +52,10 @@ public class WorldGenSoilPits implements IWorldGenerator {
                 for (int y = -depth; y <= +depth; y++) {
                     final BlockPos pos = posHorizontal.add(0, y, 0);
                     final IBlockState current = world.getBlockState(pos);
-                    if (TFCBlocks.isDirt(current)) {
+                    if (Helpers.isDirt(current)) {
                         world.setBlockState(pos, StorageSoil.getSoilBlock(SoilBlockVariants.CLAY, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
                         flag = true;
-                    } else if (TFCBlocks.isGrass(current)) {
+                    } else if (Helpers.isGrass(current)) {
                         world.setBlockState(pos, StorageSoil.getSoilBlock(SoilBlockVariants.CLAY_GRASS, ChunkDataTFC.getSoilHeight(world, pos)).getDefaultState(), 2);
                         flag = true;
                     }
@@ -101,9 +101,9 @@ public class WorldGenSoilPits implements IWorldGenerator {
                     final BlockPos pos = start.add(x, y, z);
                     final IBlockState current = world.getBlockState(pos);
 
-                    if (TFCBlocks.isGrass(current)) {
+                    if (Helpers.isGrass(current)) {
                         world.setBlockState(pos, BlocksSoil.PEAT_GRASS.getDefaultState(), 2);
-                    } else if (TFCBlocks.isDirt(current) || TFCBlocks.isClay(current)) {
+                    } else if (Helpers.isDirt(current) || Helpers.isClay(current)) {
                         world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState(), 2);
                     }
                 }

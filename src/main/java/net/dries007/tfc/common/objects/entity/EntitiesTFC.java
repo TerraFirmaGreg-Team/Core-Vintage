@@ -1,8 +1,8 @@
 package net.dries007.tfc.common.objects.entity;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
@@ -59,11 +59,11 @@ public class EntitiesTFC {
     }
 
     private static void register(String name, Class<? extends Entity> cls) {
-        EntityRegistry.registerModEntity(TerraFirmaGreg.getID(name), cls, name, id++, TerraFirmaGreg.getInstance(), 160, 20, true);
+        EntityRegistry.registerModEntity(TerraFirmaCraft.getID(name), cls, name, id++, TerraFirmaCraft.getInstance(), 160, 20, true);
     }
 
     private static void registerLiving(String name, Class<? extends Entity> cls, int eggPrimaryColor, int eggSecondaryColor) {
         //Register entity and create a spawn egg for creative
-        EntityRegistry.registerModEntity(TerraFirmaGreg.getID(name), cls, name, id++, TerraFirmaGreg.getInstance(), 80, 3, true, eggPrimaryColor, eggSecondaryColor);
+        EntityRegistry.registerModEntity(TerraFirmaCraft.getID(name), cls, name, id++, TerraFirmaCraft.getInstance(), 80, 3, true, eggPrimaryColor, eggSecondaryColor);
     }
 }

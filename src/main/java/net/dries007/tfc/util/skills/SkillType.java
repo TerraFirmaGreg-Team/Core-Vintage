@@ -1,8 +1,8 @@
 package net.dries007.tfc.util.skills;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.player.IPlayerData;
+import net.dries007.tfc.module.core.ModuleCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -68,7 +68,7 @@ public final class SkillType<S extends Skill> {
         try {
             return ((SkillType<S>) skill);
         } catch (ClassCastException e) {
-            TerraFirmaGreg.LOGGER.warn("Tried to cast skill '" + skill + "' to an incorrect instance type: " + name + " / " + returnClass);
+            ModuleCore.LOGGER.warn("Tried to cast skill '" + skill + "' to an incorrect instance type: " + name + " / " + returnClass);
             return null;
         }
     }

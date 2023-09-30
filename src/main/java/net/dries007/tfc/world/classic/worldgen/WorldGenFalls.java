@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -48,14 +48,14 @@ public class WorldGenFalls implements IWorldGenerator {
             int z = random.nextInt(16) + 8;
             int y = random.nextInt(WorldTypeTFC.SEALEVEL - 50) + 30;
             BlockPos pos = new BlockPos(chunkX << 4, y, chunkZ << 4).add(x, 0, z);
-            if (!TFCBlocks.isRawStone(world.getBlockState(pos.down())) && !TFCBlocks.isRawStone(world.getBlockState(pos.up())) && (!TFCBlocks.isRawStone(world.getBlockState(pos)) || !world.isAirBlock(pos))) {
+            if (!Helpers.isRawStone(world.getBlockState(pos.down())) && !Helpers.isRawStone(world.getBlockState(pos.up())) && (!Helpers.isRawStone(world.getBlockState(pos)) || !world.isAirBlock(pos))) {
                 continue;
             }
             int rawHorizontal = 0, airHorizontal = 0;
             for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                 if (world.isAirBlock(pos.offset(facing))) {
                     airHorizontal++;
-                } else if (TFCBlocks.isRawStone(world.getBlockState(pos.offset(facing)))) {
+                } else if (Helpers.isRawStone(world.getBlockState(pos.offset(facing)))) {
                     rawHorizontal++;
                 }
                 if (airHorizontal > 1) break;

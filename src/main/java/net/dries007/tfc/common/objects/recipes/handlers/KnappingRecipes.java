@@ -4,10 +4,11 @@ import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
-import net.dries007.tfc.common.objects.items.TFCItems;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
+import net.dries007.tfc.module.ceramic.StorageCeramic;
+import net.dries007.tfc.module.core.init.ItemsCore;
+import net.dries007.tfc.module.core.init.RegistryCore;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -15,7 +16,7 @@ import net.minecraft.item.ItemStack;
 public class KnappingRecipes {
 
     public static void register() {
-        var registry = TFCRegistries.KNAPPING;
+        var registry = RegistryCore.KNAPPING;
 
         /* ROCK ITEMS */
 
@@ -27,7 +28,7 @@ public class KnappingRecipes {
             if (extendedOrePrefix.getClayKnappingPattern() != null) {
                 var amount = orePrefix == OrePrefix.ingot ? 2 : 1;
 
-                registry.register(new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(TFCItems.UNFIRED_MOLDS.get(orePrefix), amount), extendedOrePrefix.getClayKnappingPattern()).setRegistryName(orePrefix.name.toLowerCase() + "_mold"));
+                registry.register(new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(StorageCeramic.UNFIRED_MOLDS.get(orePrefix), amount), extendedOrePrefix.getClayKnappingPattern()).setRegistryName(orePrefix.name.toLowerCase() + "_mold"));
             }
         }
 
@@ -49,7 +50,7 @@ public class KnappingRecipes {
                 new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.LEATHER_LEGGINGS), "XXXXX", "XXXXX", "XX XX", "XX XX", "XX XX").setRegistryName("leather_leggings"),
                 new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.LEATHER_BOOTS), "XX   ", "XX   ", "XX   ", "XXXX ", "XXXXX").setRegistryName("leather_boots"),
                 new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(Items.SADDLE), "  X  ", "XXXXX", "XXXXX", "XXXXX", "  X  ").setRegistryName("leather_saddle"),
-                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(TFCItems.QUIVER), " XXXX", "X XXX", "X XXX", "X XXX", " XXXX").setRegistryName("leather_quiver")
+                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsCore.QUIVER), " XXXX", "X XXX", "X XXX", "X XXX", " XXXX").setRegistryName("leather_quiver")
         );
 
         /* FIRE CLAY ITEMS */

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.plant.common.blocks;
 
-import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.Constants;
@@ -48,7 +48,7 @@ public class BlockPlantShortGrass extends BlockPlant implements IShearable {
         } else if (!worldIn.isRemote && stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1) {
             if (Constants.RNG.nextDouble() <= (state.getValue(AGE) + 1) / 4.0D) //+25% change for each age
             {
-                spawnAsEntity(worldIn, pos, new ItemStack(TFCItems.STRAW, 1));
+                spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
             }
         }
         super.harvestBlock(worldIn, player, pos, state, te, stack);

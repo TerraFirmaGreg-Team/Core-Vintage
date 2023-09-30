@@ -6,7 +6,7 @@ import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
 import net.dries007.tfc.module.wood.common.blocks.itemblocks.ItemBlockWoodSapling;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.state.BlockStateContainer;

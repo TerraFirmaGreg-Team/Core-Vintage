@@ -3,7 +3,7 @@ package net.dries007.tfc.module.metal.common.tiles;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.module.core.api.tile.TEBase;
+import net.dries007.tfc.module.core.api.objects.tile.TEBase;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

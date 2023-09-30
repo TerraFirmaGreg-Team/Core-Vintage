@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.wood.common.blocks;
 
-import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.api.type.WoodType;

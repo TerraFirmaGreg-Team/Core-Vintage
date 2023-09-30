@@ -11,7 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -21,8 +21,8 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class BlockFluidHotWater extends BlockFluidBase {
 
-    public BlockFluidHotWater() {
-        super(FluidRegistry.getFluid("hot_water"), Material.WATER, false);
+    public BlockFluidHotWater(Fluid fluid) {
+        super(fluid, Material.WATER, false);
 
         setLightOpacity(3);
         disableStats();

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.objects.blocks;
 
-import net.dries007.tfc.module.core.api.block.BlockBase;
+import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;

@@ -2,18 +2,18 @@ package net.dries007.tfc.module.devices.common.blocks;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.api.block.BlockBase;
+import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.core.objects.items.ItemFireStarter;
-import net.dries007.tfc.module.core.api.tile.TEInventory;
+import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.devices.common.tile.TELogPile;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
@@ -254,7 +254,7 @@ public class BlockLogPile extends BlockBase implements ILightableBlock, IHasMode
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
 
-        var resourceLocation = TerraFirmaGreg.getID(NAME.replaceAll("\\.", "/"));
+        var resourceLocation = TerraFirmaCraft.getID(NAME.replaceAll("\\.", "/"));
 
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder().customPath(resourceLocation).build());

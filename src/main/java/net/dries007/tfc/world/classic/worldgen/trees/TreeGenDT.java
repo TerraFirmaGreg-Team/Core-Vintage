@@ -4,7 +4,7 @@ import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodSapling;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
@@ -32,7 +32,7 @@ public class TreeGenDT implements ITreeGenerator {
 
     @Override
     public boolean canGenerateTree(World world, BlockPos pos, TreeType type) {
-        if (!TFCBlocks.isGrowableSoil(world.getBlockState(pos.down()))) {
+        if (!Helpers.isGrowableSoil(world.getBlockState(pos.down()))) {
             return false;
         }
 

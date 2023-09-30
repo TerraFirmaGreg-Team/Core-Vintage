@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.objects.blocks;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.minecraft.block.Block;
@@ -65,7 +65,7 @@ public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock {
         IBlockState stateDown = worldIn.getBlockState(pos.down());
         Block block = stateDown.getBlock();
 
-        if (block != Blocks.ICE && block != Blocks.PACKED_ICE && block != Blocks.BARRIER && block != TFCBlocks.SEA_ICE) {
+        if (block != Blocks.ICE && block != Blocks.PACKED_ICE && block != Blocks.BARRIER && block != BlocksCore.SEA_ICE) {
             return stateDown.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID || stateDown.getBlock().isLeaves(stateDown, worldIn, pos.down()) || block == this && stateDown.getValue(LAYERS) == 8;
         } else {
             return false;

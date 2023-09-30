@@ -2,22 +2,22 @@ package net.dries007.tfc.module.metal.common.blocks;
 
 import gregtech.api.unification.material.Material;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.api.block.BlockBase;
+import net.dries007.tfc.module.core.api.objects.block.BlockBase;
+import net.dries007.tfc.module.core.sound.TFCSounds;
+import net.dries007.tfc.module.metal.ModuleMetal;
 import net.dries007.tfc.module.metal.StorageMetal;
 import net.dries007.tfc.module.metal.api.type.MetalType;
 import net.dries007.tfc.module.metal.api.variant.block.IMetalBlock;
 import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariant;
 import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyDirection;
@@ -267,7 +267,7 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock, IMaterial
                     if (te.isItemValid(i, heldItem) && te.getSlotLimit(i) > cap.getStackInSlot(i).getCount()) {
                         ItemStack result = cap.insertItem(i, heldItem, false);
                         playerIn.setHeldItem(hand, result);
-                        TerraFirmaGreg.LOGGER.info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
+                        ModuleMetal.LOGGER.info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
                         return true;
                     }
                 }

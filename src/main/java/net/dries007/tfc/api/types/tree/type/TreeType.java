@@ -8,7 +8,7 @@ import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKits;
 import com.ferreusveritas.dynamictrees.growthlogic.IGrowthLogicKit;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranch;
 import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 import net.dries007.tfc.compat.dynamictrees.trees.WoodTreeSpecies;
@@ -34,8 +34,6 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
-import static net.dries007.tfc.common.objects.items.TFCItems.ITEMS;
 import static net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants.INGREDIENT;
 import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LOG;
@@ -117,8 +115,8 @@ public class TreeType extends TreeFamily {
         setPrimitiveLog(builder.primitiveLog);
         setDynamicBranch(builder.thick ? new BlockTreeBranchThick(wood) : new BlockTreeBranch(wood));
         setCommonSpecies(new WoodTreeSpecies(name, this, new LeavesProperties(builder.primitiveLeaves, builder.cellKit)));
-        getRegisterableBlocks(BLOCKS);
-        getRegisterableItems(ITEMS);
+//        getRegisterableBlocks(BLOCKS);
+//        getRegisterableItems(ITEMS);
 
         if (name.getPath().isEmpty()) {
             throw new RuntimeException(String.format("TreeType name must contain any character: [%s]", name));
@@ -400,7 +398,7 @@ public class TreeType extends TreeFamily {
         }
 
         public Builder setName(String path) {
-            return setName(TerraFirmaGreg.getID(path));
+            return setName(TerraFirmaCraft.getID(path));
         }
 
         public Builder setWoodType(WoodType wood) {

@@ -1,11 +1,11 @@
 package net.dries007.tfc.module.devices.common.blocks;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.util.CustomStateMap;
-import net.dries007.tfc.module.core.api.block.BlockBase;
+import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.devices.common.tile.TEBellows;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -122,7 +122,7 @@ public class BlockBellows extends BlockBase implements IHasModel {
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
 
-        var resourceLocation = TerraFirmaGreg.getID(NAME.replaceAll("\\.", "/"));
+        var resourceLocation = TerraFirmaCraft.getID(NAME.replaceAll("\\.", "/"));
 
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder().customPath(resourceLocation).build());

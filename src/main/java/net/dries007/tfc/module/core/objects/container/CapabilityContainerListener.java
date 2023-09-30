@@ -1,11 +1,11 @@
 package net.dries007.tfc.module.core.objects.container;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.common.CommonEventHandler;
+import net.dries007.tfc.module.core.events.CommonEventHandler;
 import net.dries007.tfc.network.PacketCapabilityContainerUpdate;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -192,7 +192,7 @@ public class CapabilityContainerListener implements IContainerListener {
 
         final PacketCapabilityContainerUpdate message = new PacketCapabilityContainerUpdate(container.windowId, filteredItems);
         if (message.hasData()) {
-            TerraFirmaGreg.network.sendTo(message, player);
+            TerraFirmaCraft.network.sendTo(message, player);
         }
     }
 
@@ -206,7 +206,7 @@ public class CapabilityContainerListener implements IContainerListener {
             final PacketCapabilityContainerUpdate message = new PacketCapabilityContainerUpdate(container.windowId, slotIndex, stack);
             if (message.hasData()) {
                 // Don't send the message if there's nothing to update
-                TerraFirmaGreg.network.sendTo(message, player);
+                TerraFirmaCraft.network.sendTo(message, player);
             }
         }
     }

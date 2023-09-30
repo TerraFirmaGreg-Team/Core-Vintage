@@ -1,15 +1,15 @@
 package net.dries007.tfc.module.devices.common.tile;
 
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
-import net.dries007.tfc.module.core.api.tile.ITileFields;
-import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.objects.tile.ITileFields;
+import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
+import net.dries007.tfc.module.devices.ModuleDevice;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
@@ -279,7 +279,7 @@ public class TECharcoalForge extends TETickableInventory implements ICalendarTic
         if (index == FIELD_TEMPERATURE) {
             this.temperature = (float) value;
         } else {
-            TerraFirmaGreg.LOGGER.warn("Invalid field ID {} in TECharcoalForge#setField", index);
+            ModuleDevice.LOGGER.warn("Invalid field ID {} in TECharcoalForge#setField", index);
         }
     }
 
@@ -288,7 +288,7 @@ public class TECharcoalForge extends TETickableInventory implements ICalendarTic
         if (index == FIELD_TEMPERATURE) {
             return (int) temperature;
         }
-        TerraFirmaGreg.LOGGER.warn("Invalid field ID {} in TECharcoalForge#getField", index);
+        ModuleDevice.LOGGER.warn("Invalid field ID {} in TECharcoalForge#getField", index);
         return 0;
     }
 

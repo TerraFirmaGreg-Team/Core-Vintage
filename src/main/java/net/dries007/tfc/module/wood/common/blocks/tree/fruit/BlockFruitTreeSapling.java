@@ -7,7 +7,7 @@
 //import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodSapling;
 //import net.dries007.tfc.module.core.common.tiles.TETickCounter;
 //import net.dries007.tfc.config.ConfigTFC;
-//import net.dries007.tfc.util.Helpers;
+//import net.dries007.tfc.module.core.api.util.Helpers;
 //import net.dries007.tfc.util.calendar.ICalendar;
 //import net.dries007.tfc.util.climate.ClimateTFC;
 //import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -69,10 +69,10 @@
 //    @Override
 //    public void grow(World world, Random random, BlockPos blockPos, IBlockState blockState) {
 //        if (!world.isRemote) {
-//            world.setBlockState(blockPos, TFCBlocks.getWoodBlock(FRUIT_TRUNK, type).getDefaultState());
+//            world.setBlockState(blockPos, BlocksCore.getWoodBlock(FRUIT_TRUNK, type).getDefaultState());
 //            if (world.getBlockState(blockPos.up()).getMaterial().isReplaceable()) {
 //                world.setBlockState(blockPos.up(),
-//                        TFCBlocks.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+//                        BlocksCore.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
 //                                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
 //            }
 //        }

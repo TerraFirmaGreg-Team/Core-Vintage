@@ -2,10 +2,10 @@ package net.dries007.tfc.api.recipes;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.compat.jei.util.IJEISimpleRecipe;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.init.RegistryCore;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.skills.SkillType;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,7 +41,7 @@ public class WeldingRecipe extends IForgeRegistryEntry.Impl<WeldingRecipe> imple
     }
 
     public static WeldingRecipe get(ItemStack stack1, ItemStack stack2, int tier) {
-        return TFCRegistries.WELDING.getValuesCollection().stream().filter(x -> x.matches(stack1, stack2, tier)).findFirst().orElse(null);
+        return RegistryCore.WELDING.getValuesCollection().stream().filter(x -> x.matches(stack1, stack2, tier)).findFirst().orElse(null);
     }
 
     public int getTier() {

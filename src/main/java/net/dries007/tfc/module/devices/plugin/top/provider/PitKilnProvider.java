@@ -7,7 +7,7 @@ import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.block.state.IBlockState;

@@ -21,10 +21,10 @@
 //public class TreeGenBushes implements ITreeGenerator {
 //    @Override
 //    public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
-//        IBlockState leaves = TFCBlocks.getWoodBlock(WoodBlockVariants.LEAVES, woodType).getDefaultState().withProperty(DECAYABLE, true);
+//        IBlockState leaves = BlocksCore.getWoodBlock(WoodBlockVariants.LEAVES, woodType).getDefaultState().withProperty(DECAYABLE, true);
 //
 //        // Has to fake being placed, otherwise the log will just poof out of existence. todo: better fix for this.
-//        checkAndPlace(TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState()
+//        checkAndPlace(BlocksCore.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState()
 //                .withProperty(PLACED, true)
 //                .withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE), world, pos);
 //        checkAndPlace(leaves, world, pos.add(0, 1, 0));
@@ -46,7 +46,7 @@
 //    @Override
 //    public boolean canGenerateTree(World world, BlockPos pos, WoodType woodType) {
 //        // Check if there is soil beneath
-//        if (!TFCBlocks.isSoil(world.getBlockState(pos.down())))
+//        if (!BlocksCore.isSoil(world.getBlockState(pos.down())))
 //            return false;
 //
 //        // Check the position for liquids, etc.

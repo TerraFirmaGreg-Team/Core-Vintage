@@ -2,7 +2,7 @@ package net.dries007.tfc.module.metal;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.core.api.util.CreativeTabBase;
 import net.dries007.tfc.module.metal.api.type.MetalTypeHandler;
 import net.dries007.tfc.module.metal.api.variant.Item.MetalItemVariantHandler;
 import net.dries007.tfc.module.metal.api.variant.block.MetalBlockVariantHandler;
@@ -22,7 +22,7 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 public class ModuleMetal extends ModuleBase {
 
     public static final String MODULE_ID = "module.metal";
-    public static final CreativeTabs METAL_TAB = new CreativeTabsTFC.TFCCreativeTab("metal", "tfc:metal.anvil.red_steel");
+    public static final CreativeTabs METAL_TAB = new CreativeTabBase("metal", "tfc:metal.anvil.red_steel");
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleMetal.class.getSimpleName());
 
     public ModuleMetal() {

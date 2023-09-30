@@ -1,92 +1,41 @@
 package net.dries007.tfc.client;
 
-import com.ferreusveritas.dynamictrees.models.bakedmodels.BakedModelBlockRooty;
-import gregtech.api.unification.material.Material;
-import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
-import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
-import net.dries007.tfc.client.util.FluidSpriteCache;
-import net.dries007.tfc.client.util.GrassColorHandler;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.CommonProxy;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
-import net.dries007.tfc.common.objects.items.ItemsTFC_old;
-import net.dries007.tfc.common.objects.items.TFCItems;
-import net.dries007.tfc.compat.dynamictrees.client.BakedModelBlockRootyTFC;
-import net.dries007.tfc.compat.dynamictrees.client.ModelHelperTFC;
-import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.network.*;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.entity.RenderFallingBlock;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IThreadListener;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
-import org.lwjgl.input.Keyboard;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 
-import static net.minecraft.block.Block.getBlockFromItem;
 import static net.minecraft.util.text.TextFormatting.*;
 
 @SuppressWarnings("unused")
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(Side.CLIENT)
-public class ClientProxy extends CommonProxy {
+public class ClientProxy {
 
     public static final IItemColor moldItemColors = (stack, tintIndex) -> {
         if (tintIndex != 1) return 0xFFFFFF;
@@ -103,156 +52,128 @@ public class ClientProxy extends CommonProxy {
         return 0xFFFFFF;
     };
 
-    @SubscribeEvent
-    @SuppressWarnings("ConstantConditions")
-    public static void registerModels(ModelRegistryEvent event) {
+//    @SubscribeEvent
+//    @SuppressWarnings("ConstantConditions")
+//    public static void registerModels(ModelRegistryEvent event) {
+//
+//        //==== BLOCKS ================================================================================================//
+//
+//        for (var block : BlocksCore.BLOCKS) {
+//            if (block instanceof IHasModel blockModel) {
+//                blockModel.onModelRegister();
+//            } else {
+//                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
+//            }
+//        }
+//
+//        // Register Meshers for Branches
+//        for (var tree : TreeType.getTreeTypes()) {
+//            ModelHelperTFC.regModel(tree.getDynamicBranch()); //Register Branch itemBlock
+//            ModelHelperTFC.regModel(tree); //Register custom state mapper for branch
+//        }
+//
+//        for (var block : BlocksCore.FLUID)
+//            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
+//
+//
+//        //==== ITEMS =================================================================================================//
+//
+//        for (var item : StorageCeramic.UNFIRED_MOLDS.values())
+//            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
+//
+////        for (var item : TFCItems.ITEMS) {
+////            if (getBlockFromItem(item) instanceof IHasModel itemBlockModel) {
+////                itemBlockModel.onModelRegister();
+////            } else if (item instanceof IHasModel itemModel) {
+////                itemModel.onModelRegister();
+////            } else {
+////                ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
+////            }
+////        }
+//
+//        //==== TESRs =================================================================================================//
+//
+//
+//        // Registering fluid containers
+//        ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.WOODEN_BUCKET, 0, new ModelResourceLocation(ItemsTFC_old.WOODEN_BUCKET.getRegistryName(), "inventory"));
+//        ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.FIRED_JUG, 0, new ModelResourceLocation(ItemsTFC_old.FIRED_JUG.getRegistryName(), "inventory"));
+//
+//        // Simple Items
+//        for (Item item : ItemsTFC_old.getAllSimpleItems())
+//            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
+//
+//        // Dye color Items
+//        for (EnumDyeColor color : EnumDyeColor.values()) {
+//            ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.UNFIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC_old.UNFIRED_VESSEL_GLAZED.getRegistryName().toString()));
+//            ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.FIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC_old.FIRED_VESSEL_GLAZED.getRegistryName().toString()));
+//        }
+//
+//        // Ceramic Molds
+//        for (var orePrefix : OrePrefix.values()) {
+//            var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
+//
+//            if (extendedOrePrefix.getHasMold()) {
+//                var clayMold = StorageCeramic.FIRED_MOLDS.get(orePrefix);
+//
+//                ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_empty"));
+//                ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_filled"));
+//
+//                ModelLoader.setCustomMeshDefinition(clayMold, new ItemMeshDefinition() {
+//                    @Override
+//                    @Nonnull
+//                    public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+//                        IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+//                        if (cap instanceof IMoldHandler) {
+//                            Material material = ((IMoldHandler) cap).getMaterial();
+//                            if (material != null) {
+//                                return new ModelResourceLocation(clayMold.getRegistryName().toString() + "_filled");
+//                            }
+//                        }
+//                        return new ModelResourceLocation(clayMold.getRegistryName().toString() + "_empty");
+//                    }
+//                });
+//            }
+//        }
+//
+//
+//    }
+//
+//    @SubscribeEvent
+//    @SideOnly(Side.CLIENT)
+//    public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
+//        var blockColors = event.getBlockColors();
+//        IBlockColor grassColor = GrassColorHandler::computeGrassColor;
+//
+//        blockColors.registerBlockColorHandler(grassColor, BlocksCore.ROOTY_DIRT_MIMIC);
+//
+//    }
+//
+//    @SubscribeEvent
+//    @SideOnly(Side.CLIENT)
+//    @SuppressWarnings("deprecation")
+//    public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
+//        var itemColors = event.getItemColors();
+//
+//        var blockColors = event.getBlockColors();
+//
+//        //==== Other =================================================================================================//
+//
+//        itemColors.registerItemColorHandler((s, i) -> i == 1 ? EnumDyeColor.byDyeDamage(s.getItemDamage()).getColorValue() : 0xFFFFFF,
+//                ItemsTFC_old.UNFIRED_VESSEL_GLAZED, ItemsTFC_old.FIRED_VESSEL_GLAZED);
+//
+//        // Colorize clay molds
+//        itemColors.registerItemColorHandler(moldItemColors, StorageCeramic.FIRED_MOLDS.values().toArray(new Item[0]));
+//    }
 
-        //==== BLOCKS ================================================================================================//
+//    @SubscribeEvent
+//    public static void onModelBake(ModelBakeEvent event) {
+//        Block block = BlocksCore.ROOTY_DIRT_MIMIC;
+//        if (block.getRegistryName() != null) {
+//            BakedModelBlockRooty rootyModel = new BakedModelBlockRootyTFC();
+//            event.getModelRegistry().putObject(new ModelResourceLocation(block.getRegistryName(), "normal"), rootyModel);
+//        }
+//    }
 
-        for (var block : TFCBlocks.BLOCKS) {
-            if (block instanceof IHasModel blockModel) {
-                blockModel.onModelRegister();
-            } else {
-                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
-            }
-        }
-
-        // Register Meshers for Branches
-        for (var tree : TreeType.getTreeTypes()) {
-            ModelHelperTFC.regModel(tree.getDynamicBranch()); //Register Branch itemBlock
-            ModelHelperTFC.regModel(tree); //Register custom state mapper for branch
-        }
-
-        for (var block : TFCBlocks.FLUID)
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
-
-
-        //==== ITEMS =================================================================================================//
-
-        for (var item : TFCItems.UNFIRED_MOLDS.values())
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
-
-        for (var item : TFCItems.ITEMS) {
-            if (getBlockFromItem(item) instanceof IHasModel itemBlockModel) {
-                itemBlockModel.onModelRegister();
-            } else if (item instanceof IHasModel itemModel) {
-                itemModel.onModelRegister();
-            } else {
-                ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
-            }
-        }
-
-        //==== TESRs =================================================================================================//
-
-
-        // Registering fluid containers
-        ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.WOODEN_BUCKET, 0, new ModelResourceLocation(ItemsTFC_old.WOODEN_BUCKET.getRegistryName(), "inventory"));
-        ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.FIRED_JUG, 0, new ModelResourceLocation(ItemsTFC_old.FIRED_JUG.getRegistryName(), "inventory"));
-
-        // Simple Items
-        for (Item item : ItemsTFC_old.getAllSimpleItems())
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
-
-        // Dye color Items
-        for (EnumDyeColor color : EnumDyeColor.values()) {
-            ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.UNFIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC_old.UNFIRED_VESSEL_GLAZED.getRegistryName().toString()));
-            ModelLoader.setCustomModelResourceLocation(ItemsTFC_old.FIRED_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFC_old.FIRED_VESSEL_GLAZED.getRegistryName().toString()));
-        }
-
-        // Ceramic Molds
-        for (var orePrefix : OrePrefix.values()) {
-            var extendedOrePrefix = (IOrePrefixExtension) orePrefix;
-
-            if (extendedOrePrefix.getHasMold()) {
-                var clayMold = TFCItems.FIRED_MOLDS.get(orePrefix);
-
-                ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_empty"));
-                ModelBakery.registerItemVariants(clayMold, new ModelResourceLocation(clayMold.getRegistryName().toString() + "_filled"));
-
-                ModelLoader.setCustomMeshDefinition(clayMold, new ItemMeshDefinition() {
-                    @Override
-                    @Nonnull
-                    public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
-                        IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                        if (cap instanceof IMoldHandler) {
-                            Material material = ((IMoldHandler) cap).getMaterial();
-                            if (material != null) {
-                                return new ModelResourceLocation(clayMold.getRegistryName().toString() + "_filled");
-                            }
-                        }
-                        return new ModelResourceLocation(clayMold.getRegistryName().toString() + "_empty");
-                    }
-                });
-            }
-        }
-
-
-    }
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
-        var blockColors = event.getBlockColors();
-        IBlockColor grassColor = GrassColorHandler::computeGrassColor;
-
-        blockColors.registerBlockColorHandler(grassColor, TFCBlocks.ROOTY_DIRT_MIMIC);
-
-    }
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    @SuppressWarnings("deprecation")
-    public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
-        var itemColors = event.getItemColors();
-
-        var blockColors = event.getBlockColors();
-
-        //==== Other =================================================================================================//
-
-        itemColors.registerItemColorHandler((s, i) -> i == 1 ? EnumDyeColor.byDyeDamage(s.getItemDamage()).getColorValue() : 0xFFFFFF,
-                ItemsTFC_old.UNFIRED_VESSEL_GLAZED, ItemsTFC_old.FIRED_VESSEL_GLAZED);
-
-        // Colorize clay molds
-        itemColors.registerItemColorHandler(moldItemColors, TFCItems.FIRED_MOLDS.values().toArray(new Item[0]));
-    }
-
-    @SubscribeEvent
-    public static void onModelBake(ModelBakeEvent event) {
-        Block block = TFCBlocks.ROOTY_DIRT_MIMIC;
-        if (block.getRegistryName() != null) {
-            BakedModelBlockRooty rootyModel = new BakedModelBlockRootyTFC();
-            event.getModelRegistry().putObject(new ModelResourceLocation(block.getRegistryName(), "normal"), rootyModel);
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public static void onKeyEvent(InputEvent event) {
-        // todo: move this to a button on the inventory GUI
-        if (TFCKeybindings.OPEN_CRAFTING_TABLE.isPressed()) {
-            TerraFirmaGreg.network.sendToServer(new PacketOpenCraftingGui());
-        }
-        if (TFCKeybindings.PLACE_BLOCK.isPressed()) {
-            TerraFirmaGreg.network.sendToServer(new PacketPlaceBlockSpecial());
-        }
-        if (TFCKeybindings.CHANGE_ITEM_MODE.isPressed()) {
-            TerraFirmaGreg.network.sendToServer(new PacketCycleItemMode());
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public static void onKeyEvent(GuiScreenEvent.KeyboardInputEvent.Pre event) {
-        //Only handle when key was pressed, ignore release and hold
-        if (!Keyboard.isRepeatEvent() && Keyboard.getEventKeyState() && Keyboard.getEventKey() == TFCKeybindings.STACK_FOOD.getKeyCode()) {
-            if (event.getGui() instanceof GuiContainer) {
-                Slot slotUnderMouse = ((GuiContainer) event.getGui()).getSlotUnderMouse();
-                if (slotUnderMouse != null) {
-                    TerraFirmaGreg.network.sendToServer(new PacketStackFood(slotUnderMouse.slotNumber));
-                }
-            }
-        }
-    }
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
@@ -276,7 +197,7 @@ public class ClientProxy extends CommonProxy {
             if (event.getButton() instanceof GuiButtonPlayerInventoryTab button) {
                 // This is to prevent the button from immediately firing after moving (enabled is set to false then)
                 if (button.isActive() && button.enabled) {
-                    TerraFirmaGreg.network.sendToServer(new PacketSwitchPlayerInventoryTab(button.getGuiType()));
+                    TerraFirmaCraft.network.sendToServer(new PacketSwitchPlayerInventoryTab(button.getGuiType()));
                 }
             }
         }
@@ -309,7 +230,7 @@ public class ClientProxy extends CommonProxy {
                 ChunkDataTFC data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
 
                 list.add("");
-                list.add(AQUA + "TerraFirmaGreg");
+                list.add(AQUA + "TerraFirmaCraft");
                 boolean chunkDataValid = data != null && data.isInitialized();
 
                 if (chunkDataValid) {
@@ -348,159 +269,69 @@ public class ClientProxy extends CommonProxy {
         }
     }
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public static void onItemTooltip(ItemTooltipEvent event) {
-        var stack = event.getItemStack();
-        var toolTip = event.getToolTip();
-
-        // GuiScreen.isShiftKeyDown()
-
-        if (!stack.isEmpty()) {
-            // Size
-            var size = CapabilityItemSize.getIItemSize(stack);
-            if (size != null) {
-                size.addSizeInfo(stack, toolTip);
-            }
-
-            // Temperature
-            var heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-            if (heat != null) {
-                heat.addHeatInfo(stack, toolTip);
-            }
-
-            // Forging steps
-            var forging = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-            if (forging != null && forging.getWork() > 0) {
-                toolTip.add(I18n.format("tfc.tooltip.forging_in_progress"));
-            }
-
-            // Nutriens
-            var nutrients = stack.getCapability(CapabilityFood.CAPABILITY, null);
-            if (nutrients != null) {
-                nutrients.addTooltipInfo(stack, toolTip);
-            }
-
-            // Egg
-            var eggInfo = stack.getCapability(CapabilityEgg.CAPABILITY, null);
-            if (eggInfo != null) {
-                eggInfo.addEggInfo(stack, toolTip);
-            }
-
-            // Metal
-            var metalObject = CapabilityMetalItem.getMaterialItem(stack);
-            if (metalObject != null) {
-                metalObject.addMetalInfo(stack, toolTip);
-            }
-
-            if (event.getFlags().isAdvanced()) {
-                if (ConfigTFC.Client.TOOLTIP.showOreDictionaryTooltip) {
-                    int[] ids = OreDictionary.getOreIDs(stack);
-                    if (ids.length == 1) {
-                        toolTip.add(I18n.format("tfc.tooltip.oredictionaryentry", OreDictionary.getOreName(ids[0])));
-                    } else if (ids.length > 1) {
-                        toolTip.add(I18n.format("tfc.tooltip.oredictionaryentries"));
-                        ArrayList<String> names = new ArrayList<>(ids.length);
-                        for (int id : ids) {
-                            names.add("+ " + OreDictionary.getOreName(id));
-                        }
-                        names.sort(null); // Natural order (String.compare)
-                        toolTip.addAll(names);
-                    }
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public static void textureStitched(TextureStitchEvent.Post event) {
-        FluidSpriteCache.clear();
-    }
+//    @SubscribeEvent
+//    @SideOnly(Side.CLIENT)
+//    public static void onItemTooltip(ItemTooltipEvent event) {
+//        var stack = event.getItemStack();
+//        var toolTip = event.getToolTip();
+//
+//        // GuiScreen.isShiftKeyDown()
+//
+//        if (!stack.isEmpty()) {
+//            // Size
+//            var size = CapabilityItemSize.getIItemSize(stack);
+//            if (size != null) {
+//                size.addSizeInfo(stack, toolTip);
+//            }
+//
+//            // Temperature
+//            var heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+//            if (heat != null) {
+//                heat.addHeatInfo(stack, toolTip);
+//            }
+//
+//            // Forging steps
+//            var forging = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+//            if (forging != null && forging.getWork() > 0) {
+//                toolTip.add(I18n.format("tfc.tooltip.forging_in_progress"));
+//            }
+//
+//            // Nutriens
+//            var nutrients = stack.getCapability(CapabilityFood.CAPABILITY, null);
+//            if (nutrients != null) {
+//                nutrients.addTooltipInfo(stack, toolTip);
+//            }
+//
+//            // Egg
+//            var eggInfo = stack.getCapability(CapabilityEgg.CAPABILITY, null);
+//            if (eggInfo != null) {
+//                eggInfo.addEggInfo(stack, toolTip);
+//            }
+//
+//            // Metal
+//            var metalObject = CapabilityMetalItem.getMaterialItem(stack);
+//            if (metalObject != null) {
+//                metalObject.addMetalInfo(stack, toolTip);
+//            }
+//
+//            if (event.getFlags().isAdvanced()) {
+//                if (ConfigTFC.Client.TOOLTIP.showOreDictionaryTooltip) {
+//                    int[] ids = OreDictionary.getOreIDs(stack);
+//                    if (ids.length == 1) {
+//                        toolTip.add(I18n.format("tfc.tooltip.oredictionaryentry", OreDictionary.getOreName(ids[0])));
+//                    } else if (ids.length > 1) {
+//                        toolTip.add(I18n.format("tfc.tooltip.oredictionaryentries"));
+//                        ArrayList<String> names = new ArrayList<>(ids.length);
+//                        for (int id : ids) {
+//                            names.add("+ " + OreDictionary.getOreName(id));
+//                        }
+//                        names.sort(null); // Natural order (String.compare)
+//                        toolTip.addAll(names);
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 
-    @Override
-    public void onPreInit(FMLPreInitializationEvent event) {
-        super.onPreInit(event);
-
-        RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockTFC.class, RenderFallingBlock::new);
-        //RenderingRegistry.registerEntityRenderingHandler(EntityThrownJavelin.class, RenderThrownJavelin::new);
-    }
-
-    @Override
-    public void onInit(FMLInitializationEvent event) {
-        super.onInit(event);
-
-        TFCKeybindings.onInit();
-        // Enable overlay to render health, thirst and hunger bars, TFC style.
-        // Also renders animal familiarity
-        MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
-    }
-
-    @Override
-    public void onPostInit(FMLPostInitializationEvent event) {
-        super.onPostInit(event);
-    }
-
-    public void onLoadComplete(FMLLoadCompleteEvent event) {
-        super.onLoadComplete(event);
-    }
-
-    public void onServerStarting(FMLServerStartingEvent event) {
-        super.onServerStarting(event);
-    }
-
-    @Nonnull
-    @Override
-    public IThreadListener getThreadListener(MessageContext context) {
-        if (context.side.isClient()) {
-            return Minecraft.getMinecraft();
-        } else {
-            return context.getServerHandler().player.server;
-        }
-    }
-
-    @Override
-    @Nullable
-    public EntityPlayer getPlayer(MessageContext context) {
-        if (context.side.isClient()) {
-            return Minecraft.getMinecraft().player;
-        } else {
-            return context.getServerHandler().player;
-        }
-    }
-
-    @Override
-    @Nullable
-    public World getWorld(MessageContext context) {
-        if (context.side.isClient()) {
-            return Minecraft.getMinecraft().world;
-        } else {
-            return context.getServerHandler().player.getEntityWorld();
-        }
-    }
-
-    @Nonnull
-    @Override
-    public String getMonthName(Month month, boolean useSeasons) {
-        return I18n.format(useSeasons ? "tfc.enum.season." + month.name().toLowerCase() : Helpers.getEnumName(month));
-    }
-
-    @Nonnull
-    @Override
-    public String getDayName(int dayOfMonth, long totalDays) {
-        String date = CalendarTFC.CALENDAR_TIME.getMonthOfYear().name() + dayOfMonth;
-        String birthday = CalendarTFC.BIRTHDAYS.get(date);
-        if (birthday != null) {
-            return birthday;
-        }
-        return I18n.format("tfc.enum.day." + CalendarTFC.DAY_NAMES[(int) (totalDays % 7)]);
-    }
-
-    @Nonnull
-    @Override
-    public String getDate(int hour, int minute, String monthName, int day, long years) {
-        // We call an additional String.format for the time, because vanilla doesn't support %02d format specifiers
-        return I18n.format("tfc.tooltip.calendar_full_date", String.format("%02d:%02d", hour, minute), monthName, day, years);
-    }
 }

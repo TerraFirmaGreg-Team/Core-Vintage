@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.soil.common.blocks.peat;
 
-import net.dries007.tfc.module.core.api.block.BlockBase;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.api.objects.block.BlockBase;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.soil.common.blocks.BlockSoilGrass;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
@@ -60,10 +60,10 @@ public class BlockPeatGrass extends BlockBase {
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         pos = pos.add(0, -1, 0);
-        return state.withProperty(NORTH, TFCBlocks.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-                .withProperty(EAST, TFCBlocks.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-                .withProperty(SOUTH, TFCBlocks.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-                .withProperty(WEST, TFCBlocks.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+        return state.withProperty(NORTH, Helpers.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+                .withProperty(EAST, Helpers.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+                .withProperty(SOUTH, Helpers.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+                .withProperty(WEST, Helpers.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
     }
 
     @Override

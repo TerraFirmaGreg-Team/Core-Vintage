@@ -1,22 +1,22 @@
 package net.dries007.tfc.module.devices.common.tile;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
-import net.dries007.tfc.module.core.api.tile.ITileFields;
-import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.objects.tile.ITileFields;
+import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
+import net.dries007.tfc.module.devices.ModuleDevice;
 import net.dries007.tfc.module.devices.common.blocks.BlockBlastFurnace;
 import net.dries007.tfc.module.devices.common.blocks.BlockMolten;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
 import net.minecraft.block.Block;
@@ -183,7 +183,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
                 chimney = value;
                 return;
         }
-        TerraFirmaGreg.LOGGER.warn("Illegal field id {} in TEBlastFurnace#setField", index);
+        ModuleDevice.LOGGER.warn("Illegal field id {} in TEBlastFurnace#setField", index);
     }
 
     @Override
@@ -202,7 +202,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
             case CHIMNEY_LEVELS:
                 return chimney;
         }
-        TerraFirmaGreg.LOGGER.warn("Illegal field id {} in TEBlastFurnace#getField", index);
+        ModuleDevice.LOGGER.warn("Illegal field id {} in TEBlastFurnace#getField", index);
         return 0;
     }
 
@@ -328,12 +328,12 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
 
 
     public void debug() {
-        TerraFirmaGreg.LOGGER.debug("Debugging Blast Furnace:");
-        TerraFirmaGreg.LOGGER.debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature, burnTicksLeft);
-        TerraFirmaGreg.LOGGER.debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
+        ModuleDevice.LOGGER.debug("Debugging Blast Furnace:");
+        ModuleDevice.LOGGER.debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature, burnTicksLeft);
+        ModuleDevice.LOGGER.debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
         int i = 0;
         for (ItemStack item : oreStacks) {
-            TerraFirmaGreg.LOGGER.debug("Slot: {} - NBT: {}", i, item.serializeNBT().toString());
+            ModuleDevice.LOGGER.debug("Slot: {} - NBT: {}", i, item.serializeNBT().toString());
         }
     }
 

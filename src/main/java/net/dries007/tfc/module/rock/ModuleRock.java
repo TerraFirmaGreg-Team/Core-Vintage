@@ -2,7 +2,7 @@ package net.dries007.tfc.module.rock;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.core.api.util.CreativeTabBase;
 import net.dries007.tfc.module.rock.api.types.category.RockCategoryHandler;
 import net.dries007.tfc.module.rock.api.types.type.RockTypeHandler;
 import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariantHandler;
@@ -25,7 +25,7 @@ public class ModuleRock extends ModuleBase {
 
     public static final String MODULE_ID = "module.rock";
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleRock.class.getSimpleName());
-    public static final CreativeTabs ROCK_TAB = new CreativeTabsTFC.TFCCreativeTab("rock", "tfc:rock.raw.shale");
+    public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "tfc:rock.raw.shale");
 
     public ModuleRock() {
         super(0, MOD_ID);

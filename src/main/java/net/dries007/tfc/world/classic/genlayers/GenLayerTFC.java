@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.genlayers;
 
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.rock.api.types.category.RockCategory;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -184,10 +184,10 @@ public abstract class GenLayerTFC extends GenLayer {
                 }
             }
             name = "_" + name + ".png";
-            TerraFirmaGreg.LOGGER.info("Worldgen debug image {}", name);
+            ModuleCore.LOGGER.info("Worldgen debug image {}", name);
             ImageIO.write(outBitmap, "PNG", new File(name));
         } catch (Exception e) {
-            TerraFirmaGreg.LOGGER.catching(e);
+            ModuleCore.LOGGER.catching(e);
         }
     }
 

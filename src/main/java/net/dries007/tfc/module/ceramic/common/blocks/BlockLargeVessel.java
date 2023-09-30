@@ -1,14 +1,13 @@
 package net.dries007.tfc.module.ceramic.common.blocks;
 
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.ceramic.common.blocks.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.module.ceramic.common.tiles.TELargeVessel;
-import net.dries007.tfc.module.core.api.block.BlockBase;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.objects.block.BlockBase;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -36,8 +35,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.common.objects.CreativeTabsTFC.POTTERY_TAB;
-
 
 /**
  * Large vessel is an inventory that preserves the contents when sealed
@@ -59,11 +56,6 @@ public class BlockLargeVessel extends BlockBase implements IItemSize {
         setHardness(2F);
         setDefaultState(blockState.getBaseState()
                 .withProperty(SEALED, false));
-
-        var blockRegistryName = "ceramics/fired/large_vessel";
-        setCreativeTab(POTTERY_TAB);
-        setRegistryName(Tags.MOD_ID, blockRegistryName);
-        setTranslationKey(Tags.MOD_ID + "." + blockRegistryName.toLowerCase().replace("/", "."));
     }
 
     /**

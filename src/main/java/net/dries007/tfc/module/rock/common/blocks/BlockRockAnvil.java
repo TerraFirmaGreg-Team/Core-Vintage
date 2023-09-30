@@ -1,16 +1,16 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.ModuleCore;
+import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
 import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
 import net.dries007.tfc.module.rock.api.types.variant.item.RockItemVariants;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -151,7 +151,7 @@ public class BlockRockAnvil extends BlockRock {
                     if (te.isItemValid(i, heldItem) && te.getSlotLimit(i) > cap.getStackInSlot(i).getCount()) {
                         ItemStack result = cap.insertItem(i, heldItem, false);
                         playerIn.setHeldItem(hand, result);
-                        TerraFirmaGreg.LOGGER.info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
+                        ModuleCore.LOGGER.info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
                         return true;
                     }
                 }

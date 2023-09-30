@@ -1,10 +1,10 @@
 package net.dries007.tfc.common.objects.recipes.handlers;
 
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientItemFood;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
+import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.module.food.StorageFood;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,7 +17,7 @@ import static net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants.ING
 public class QuernRecipes {
 
     public static void register() {
-        var registry = TFCRegistries.QUERN;
+        var registry = RegistryCore.QUERN;
 
         registry.registerAll(
                 //Grain

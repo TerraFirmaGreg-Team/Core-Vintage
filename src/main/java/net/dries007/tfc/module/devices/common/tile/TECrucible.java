@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.devices.common.tile;
 
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -11,13 +10,14 @@ import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
-import net.dries007.tfc.module.core.api.tile.ITileFields;
-import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.objects.tile.ITileFields;
+import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
+import net.dries007.tfc.module.devices.ModuleDevice;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -306,7 +306,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
             this.temperature = value;
             return;
         }
-        TerraFirmaGreg.LOGGER.warn("Illegal field id {} in TECrucible#setField", index);
+        ModuleDevice.LOGGER.warn("Illegal field id {} in TECrucible#setField", index);
     }
 
     @Override
@@ -314,7 +314,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
         if (index == FIELD_TEMPERATURE) {
             return (int) temperature;
         }
-        TerraFirmaGreg.LOGGER.warn("Illegal field id {} in TECrucible#getField", index);
+        ModuleDevice.LOGGER.warn("Illegal field id {} in TECrucible#getField", index);
         return 0;
     }
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalPolarBear;
 import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalPolarBear;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalPolarBear extends RenderLiving<EntityAnimalPolarBear> {
-    private static final ResourceLocation POLARBEAR_TEXTURE = TerraFirmaGreg.getID("textures/entity/animal/predators/polarbear.png");
+    private static final ResourceLocation POLARBEAR_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/polarbear.png");
 
     public RenderAnimalPolarBear(RenderManager renderManager) {
         super(renderManager, new ModelAnimalPolarBear(), 0.7F);

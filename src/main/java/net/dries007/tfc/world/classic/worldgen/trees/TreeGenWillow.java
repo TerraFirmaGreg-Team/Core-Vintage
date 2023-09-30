@@ -1,6 +1,6 @@
 //package net.dries007.tfc.world.classic.worldgen.trees;
 //
-//import net.dries007.tfc.TerraFirmaGreg;
+//import net.dries007.tfc.TerraFirmaCraft;
 //import net.dries007.tfc.world.classic.worldgen.trees.ITreeGenerator;
 //import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 //import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants;
@@ -34,14 +34,14 @@
 //
 //    @Override
 //    public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
-//        ResourceLocation base = TerraFirmaGreg.identifier(woodType + "/base");
-//        ResourceLocation overlay = TerraFirmaGreg.identifier(woodType + "/overlay");
+//        ResourceLocation base = TerraFirmaCraft.identifier(woodType + "/base");
+//        ResourceLocation overlay = TerraFirmaCraft.identifier(woodType + "/overlay");
 //
 //        structureBase = manager.get(world.getMinecraftServer(), base);
 //        structureOverlay = manager.get(world.getMinecraftServer(), overlay);
 //
 //        if (structureBase == null || structureOverlay == null) {
-//            TerraFirmaGreg.LOGGER.warn("Unable to find a template for " + base + " or " + overlay);
+//            TerraFirmaCraft.LOGGER.warn("Unable to find a template for " + base + " or " + overlay);
 //            return;
 //        }
 //
@@ -87,6 +87,6 @@
 //
 //    private void tryPlaceLog(World world, BlockPos pos, WoodType woodType, BlockLog.EnumAxis axis) {
 //        if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos).getBlock() instanceof BlockWoodSapling || world.getBlockState(pos).getBlock() instanceof BlockWoodLeaves)
-//            world.setBlockState(pos, TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(LOG_AXIS, axis).withProperty(PLACED, false));
+//            world.setBlockState(pos, BlocksCore.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(LOG_AXIS, axis).withProperty(PLACED, false));
 //    }
 //}

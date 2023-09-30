@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.wood.common.tiles;
 
 import net.dries007.tfc.api.recipes.LoomRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.module.core.api.tile.TEInventory;
+import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
+import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodLoom;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,7 +48,7 @@ public class TEWoodLoom extends TEInventory implements ITickable {
         super.readFromNBT(nbt);
         progress = nbt.getInteger("progress");
         lastPushed = nbt.getLong("lastPushed");
-        recipe = nbt.hasKey("recipe") ? TFCRegistries.LOOM.getValue(new ResourceLocation(nbt.getString("recipe"))) : null;
+        recipe = nbt.hasKey("recipe") ? RegistryCore.LOOM.getValue(new ResourceLocation(nbt.getString("recipe"))) : null;
     }
 
     @Override

@@ -1,8 +1,9 @@
 package net.dries007.tfc.api.capability.food;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.core.init.PotionEffectsCore;
+import net.dries007.tfc.module.core.ModuleCore;
+import net.dries007.tfc.module.core.init.EffectsCore;
 import net.dries007.tfc.network.PacketFoodStatsReplace;
 import net.dries007.tfc.network.PacketFoodStatsUpdate;
 import net.dries007.tfc.util.Constants;
@@ -49,7 +50,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
         }
         // Send the update regardless so the client can perform the same logic
         if (player instanceof EntityPlayerMP) {
-            TerraFirmaGreg.network.sendTo(new PacketFoodStatsReplace(), (EntityPlayerMP) player);
+            TerraFirmaCraft.network.sendTo(new PacketFoodStatsReplace(), (EntityPlayerMP) player);
         }
     }
 
@@ -65,7 +66,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
         if (foodCap != null) {
             addStats(foodCap);
         } else {
-            TerraFirmaGreg.LOGGER.info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
+            ModuleCore.LOGGER.info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
         }
     }
 
@@ -85,7 +86,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
             if (Constants.RNG.nextFloat() < 0.6) {
                 sourcePlayer.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 1800, 1));
                 if (Constants.RNG.nextFloat() < 0.15) {
-                    sourcePlayer.addPotionEffect(new PotionEffect(PotionEffectsCore.FOOD_POISON, 1800, 0));
+                    sourcePlayer.addPotionEffect(new PotionEffect(EffectsCore.FOOD_POISON, 1800, 0));
                 }
             }
         }
@@ -169,7 +170,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 
         // Since this is only called server side, and vanilla has a custom packet for this stuff, we need our own
         if (player instanceof EntityPlayerMP) {
-            TerraFirmaGreg.network.sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
+            TerraFirmaCraft.network.sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
         }
     }
 
@@ -275,7 +276,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
                 addThirst(value);
                 // Salty drink effect
                 if (value < 0 && Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
-                    sourcePlayer.addPotionEffect(new PotionEffect(PotionEffectsCore.THIRST, 600, 0));
+                    sourcePlayer.addPotionEffect(new PotionEffect(EffectsCore.THIRST, 600, 0));
                 }
             }
             return true;

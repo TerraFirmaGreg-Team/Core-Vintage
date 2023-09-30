@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiCalendar extends GuiContainerTFC {
-    private static final ResourceLocation BACKGROUND = TerraFirmaGreg.getID("textures/gui/player_calendar.png");
+    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.getID("textures/gui/player_calendar.png");
 
     public GuiCalendar(Container container, InventoryPlayer playerInv) {
         super(container, playerInv, BACKGROUND);
@@ -81,7 +81,7 @@ public class GuiCalendar extends GuiContainerTFC {
                 if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
                     this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
                 }
-                TerraFirmaGreg.network.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
+                TerraFirmaCraft.network.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
             }
         }
     }

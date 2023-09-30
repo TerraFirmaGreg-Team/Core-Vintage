@@ -1,7 +1,7 @@
 package net.dries007.tfc.util;
 
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.common.objects.recipes.RecipeHandler;
+import net.dries007.tfc.module.core.ModuleCore;
 
 import java.util.Arrays;
 
@@ -70,7 +70,7 @@ public class SimpleCraftMatrix {
     private static void logMatrix(boolean[] matrix) {
         StringBuilder b = new StringBuilder();
         for (boolean m : matrix) b.append(m ? "X" : " ");
-        TerraFirmaGreg.LOGGER.debug("Matrix: {" + b + "}");
+        ModuleCore.LOGGER.debug("Matrix: {" + b + "}");
     }
 
     public void setAll(boolean value) {

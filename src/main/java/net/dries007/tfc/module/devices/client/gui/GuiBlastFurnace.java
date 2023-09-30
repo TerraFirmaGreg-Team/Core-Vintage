@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.devices.client.gui;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.module.devices.common.tile.TEBlastFurnace;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiBlastFurnace extends GuiContainerTE<TEBlastFurnace> {
-    private static final ResourceLocation BLAST_FURNACE_BACKGROUND = TerraFirmaGreg.getID("textures/gui/blast_furnace.png");
+    private static final ResourceLocation BLAST_FURNACE_BACKGROUND = TerraFirmaCraft.getID("textures/gui/blast_furnace.png");
 
     public GuiBlastFurnace(Container container, InventoryPlayer playerInv, TEBlastFurnace tile) {
         super(container, playerInv, tile, BLAST_FURNACE_BACKGROUND);

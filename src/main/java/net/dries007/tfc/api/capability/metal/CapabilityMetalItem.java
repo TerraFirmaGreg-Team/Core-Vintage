@@ -2,11 +2,11 @@ package net.dries007.tfc.api.capability.metal;
 
 import gregtech.api.items.materialitem.MetaPrefixItem;
 import gregtech.api.unification.material.Materials;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class CapabilityMetalItem {
-    public static final ResourceLocation KEY = TerraFirmaGreg.getID("metal_object");
+    public static final ResourceLocation KEY = TerraFirmaCraft.getID("metal_object");
     public static final Map<ItemStack, ICapabilityProvider> CUSTOM_METAL_ITEMS = new HashMap<>();
     @CapabilityInject(IMaterialItem.class)
     public static Capability<IMaterialItem> METAL_OBJECT_CAPABILITY;

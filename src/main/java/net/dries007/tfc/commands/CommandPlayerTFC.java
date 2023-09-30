@@ -2,7 +2,7 @@ package net.dries007.tfc.commands;
 
 import net.dries007.tfc.api.capability.food.*;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.command.CommandBase;

@@ -1,13 +1,13 @@
 package net.dries007.tfc.module.devices.common.tile;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.module.core.api.tile.TEInventory;
+import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.devices.common.blocks.BlockCharcoalPile;
 import net.dries007.tfc.module.devices.common.blocks.BlockLogPile;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Constants;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.block.Block;

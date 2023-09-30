@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.metal.api.variant.block;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.module.metal.api.type.MetalType;
@@ -47,6 +47,6 @@ public interface IMetalBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaGreg.getID(String.format("metal/%s", getBlockVariant()));
+        return TerraFirmaCraft.getID(String.format("metal/%s", getBlockVariant()));
     }
 }

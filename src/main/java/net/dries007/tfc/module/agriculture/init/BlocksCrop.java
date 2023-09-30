@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import static net.dries007.tfc.module.agriculture.StorageAgriculture.BUSH_BLOCKS;
 import static net.dries007.tfc.module.agriculture.StorageAgriculture.CROP_BLOCKS;
 
 public class BlocksCrop {
@@ -15,6 +16,12 @@ public class BlocksCrop {
     public static void onRegister(Registry registry) {
 
         for (var block : CROP_BLOCKS.values()) {
+            var itemBlock = block.getItemBlock();
+            if (itemBlock != null) registry.registerBlock((Block) block, block.getItemBlock(), block.getName());
+            else registry.registerBlock((Block) block, block.getName());
+        }
+
+        for (var block : BUSH_BLOCKS.values()) {
             var itemBlock = block.getItemBlock();
             if (itemBlock != null) registry.registerBlock((Block) block, block.getItemBlock(), block.getName());
             else registry.registerBlock((Block) block, block.getName());
@@ -31,6 +38,7 @@ public class BlocksCrop {
 
         registry.registerClientModelRegistrationStrategy(() -> {
             CROP_BLOCKS.values().forEach(IHasModel::onModelRegister);
+            BUSH_BLOCKS.values().forEach(IHasModel::onModelRegister);
         });
     }
 }

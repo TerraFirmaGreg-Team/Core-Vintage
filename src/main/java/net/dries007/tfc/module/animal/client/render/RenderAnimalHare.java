@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalHare;
 import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalHare;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -14,10 +14,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalHare extends RenderLiving<EntityAnimalHare> {
-    private static final ResourceLocation BROWN = TerraFirmaGreg.getID("textures/entity/animal/huntable/hare/brown.png");
-    private static final ResourceLocation SPOTTED = TerraFirmaGreg.getID("textures/entity/animal/huntable/hare/spotted.png");
-    private static final ResourceLocation BLACK = TerraFirmaGreg.getID("textures/entity/animal/huntable/hare/black.png");
-    private static final ResourceLocation CREAM = TerraFirmaGreg.getID("textures/entity/animal/huntable/hare/cream.png");
+    private static final ResourceLocation BROWN = TerraFirmaCraft.getID("textures/entity/animal/huntable/hare/brown.png");
+    private static final ResourceLocation SPOTTED = TerraFirmaCraft.getID("textures/entity/animal/huntable/hare/spotted.png");
+    private static final ResourceLocation BLACK = TerraFirmaCraft.getID("textures/entity/animal/huntable/hare/black.png");
+    private static final ResourceLocation CREAM = TerraFirmaCraft.getID("textures/entity/animal/huntable/hare/cream.png");
 
 
     public RenderAnimalHare(RenderManager renderManager) {

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalMuskOxBody;
 import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
 import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalMuskOx;
@@ -15,8 +15,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalMuskOx extends RenderAnimal<EntityAnimalMuskOx> {
-    private static final ResourceLocation TEXTURE_YOUNG = TerraFirmaGreg.getID("textures/entity/animal/livestock/muskox_young.png");
-    private static final ResourceLocation TEXTURE_OLD = TerraFirmaGreg.getID("textures/entity/animal/livestock/muskox_old.png");
+    private static final ResourceLocation TEXTURE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/muskox_young.png");
+    private static final ResourceLocation TEXTURE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/muskox_old.png");
 
     public RenderAnimalMuskOx(RenderManager renderManager) {
         super(renderManager, new ModelAnimalMuskOxBody(), 0.8F, TEXTURE_YOUNG, TEXTURE_OLD);

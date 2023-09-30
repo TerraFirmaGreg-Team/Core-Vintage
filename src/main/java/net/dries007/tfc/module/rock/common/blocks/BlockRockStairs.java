@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
-import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
 import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;

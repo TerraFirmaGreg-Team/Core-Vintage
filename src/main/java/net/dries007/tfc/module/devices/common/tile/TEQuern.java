@@ -2,8 +2,8 @@ package net.dries007.tfc.module.devices.common.tile;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.common.objects.items.TFCItems;
-import net.dries007.tfc.module.core.api.tile.TEInventory;
+import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
+import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -122,7 +122,7 @@ public class TEQuern extends TEInventory implements ITickable {
                                 pos.getZ() + 0.5D,
                                 (world.rand.nextDouble() - world.rand.nextDouble()) / 4,
                                 world.rand.nextDouble() / 4,
-                                (world.rand.nextDouble() - world.rand.nextDouble()) / 4, Item.getIdFromItem(TFCItems.HANDSTONE));
+                                (world.rand.nextDouble() - world.rand.nextDouble()) / 4, Item.getIdFromItem(ItemsCore.HANDSTONE));
                     }
                     world.playSound(null, pos, BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
                     world.playSound(null, pos, ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.6f);

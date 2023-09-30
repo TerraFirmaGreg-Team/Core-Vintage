@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.food.api.variant.block;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.module.food.api.type.FoodType;
@@ -45,7 +45,7 @@ public interface IFoodBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaGreg.getID(String.format("food/%s", getType()));
+        return TerraFirmaCraft.getID(String.format("food/%s", getType()));
     }
 
 }

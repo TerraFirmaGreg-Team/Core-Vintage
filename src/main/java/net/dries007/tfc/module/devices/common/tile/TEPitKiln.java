@@ -4,13 +4,13 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.common.objects.items.TFCItems;
-import net.dries007.tfc.module.core.objects.tiles.TEPlacedItem;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.init.BlocksCore;
+import net.dries007.tfc.module.core.init.ItemsCore;
+import net.dries007.tfc.module.core.objects.tiles.TEPlacedItem;
 import net.dries007.tfc.module.devices.common.blocks.BlockPitKiln;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.block.material.Material;
@@ -309,7 +309,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
 
     private void addStrawBlock() {
         for (int i = 0; i < 4; i++) {
-            addStraw(new ItemStack(TFCItems.STRAW));
+            addStraw(new ItemStack(ItemsCore.STRAW));
         }
     }
 

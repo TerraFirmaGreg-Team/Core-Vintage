@@ -8,7 +8,7 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.module.agriculture.common.blocks.BlockCropDead;
 import net.dries007.tfc.module.agriculture.common.blocks.BlockCropGrowing;
 import net.dries007.tfc.module.agriculture.common.tile.TECropBase;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;

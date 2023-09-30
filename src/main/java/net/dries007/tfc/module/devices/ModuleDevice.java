@@ -2,7 +2,7 @@ package net.dries007.tfc.module.devices;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.core.api.util.CreativeTabBase;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.module.devices.init.ItemsDevice;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,7 +18,7 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 public class ModuleDevice extends ModuleBase {
 
     public static final String MODULE_ID = "module.devices";
-    public static final CreativeTabs DEVICES_TAB = new CreativeTabsTFC.TFCCreativeTab("device", "tfc:device.bellows");
+    public static final CreativeTabs DEVICES_TAB = new CreativeTabBase("device", "tfc:device.bellows");
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleDevice.class.getSimpleName());
 
 

@@ -1,13 +1,14 @@
 package net.dries007.tfc.client.gui;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.client.gui.GuiButton;
@@ -23,7 +24,7 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiSkills extends GuiContainerTFC {
-    private static final ResourceLocation BACKGROUND = TerraFirmaGreg.getID("textures/gui/player_skills.png");
+    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.getID("textures/gui/player_skills.png");
 
     private final String[] skillTooltips;
     private final int[] skillBarWidths;
@@ -89,7 +90,7 @@ public class GuiSkills extends GuiContainerTFC {
                 if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
                     this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
                 }
-                TerraFirmaGreg.network.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
+                TerraFirmaCraft.network.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
             }
         } else if (button == buttonLeft) {
             currentPage--;
@@ -111,7 +112,7 @@ public class GuiSkills extends GuiContainerTFC {
             int totalSkills = skillOrder.size();
             int startSkill = currentPage * 4;
             if (startSkill >= totalSkills || startSkill < 0) {
-                TerraFirmaGreg.LOGGER.warn("Invalid skill page! Page: {}, Start at: {}, Skill Order is: {}", currentPage, startSkill, skillOrder);
+                ModuleCore.LOGGER.warn("Invalid skill page! Page: {}, Start at: {}, Skill Order is: {}", currentPage, startSkill, skillOrder);
                 return;
             }
             buttonRight.enabled = startSkill + 4 < totalSkills;

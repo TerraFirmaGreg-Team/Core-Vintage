@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.chunkdata;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketChunkData;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,7 +22,7 @@ public final class CapabilityChunkData {
     /**
      * Ресурсное имя для возможности (capability) хранения данных чанка.
      */
-    public static final ResourceLocation CHUNK_DATA = TerraFirmaGreg.getID("chunkdata");
+    public static final ResourceLocation CHUNK_DATA = TerraFirmaCraft.getID("chunkdata");
 
     /**
      * Метод preInit() выполняет регистрацию возможности (capability) для хранения данных чанка.
@@ -37,10 +37,10 @@ public final class CapabilityChunkData {
      */
     @SubscribeEvent
     public static void onAttachCapabilitiesChunk(AttachCapabilitiesEvent<Chunk> event) {
-        // Проверяем, что мир существует и его тип соответствует TerraFirmaGreg
+        // Проверяем, что мир существует и его тип соответствует TerraFirmaCraft
         // В противном случае, что-то нарушает наши предположения и мы просто завершаемся
         //noinspection ConstantConditions
-        if (event.getObject().getWorld() != null && event.getObject().getWorld().getWorldType() == TerraFirmaGreg.WORLD_TYPE_TFC) {
+        if (event.getObject().getWorld() != null && event.getObject().getWorld().getWorldType() == TerraFirmaCraft.WORLD_TYPE_TFC) {
             // Добавляем возможность (capability) для хранения данных чанка
             event.addCapability(CHUNK_DATA, new ChunkDataProvider());
         }
@@ -60,7 +60,7 @@ public final class CapabilityChunkData {
 
                 // Обновляем данные на стороне клиента
                 NBTTagCompound nbt = (NBTTagCompound) ChunkDataProvider.CHUNK_DATA_CAPABILITY.writeNBT(data, null);
-                TerraFirmaGreg.network.sendTo(new PacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(), data.getRainfall()), event.getPlayer());
+                TerraFirmaCraft.network.sendTo(new PacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(), data.getRainfall()), event.getPlayer());
             }
         }
     }

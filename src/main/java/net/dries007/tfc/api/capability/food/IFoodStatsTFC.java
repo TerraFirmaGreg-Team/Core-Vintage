@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.food;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
@@ -21,7 +21,7 @@ public interface IFoodStatsTFC {
         if (foodCap != null) {
             addStats(foodCap);
         } else {
-            TerraFirmaGreg.LOGGER.info("Player ate a weird food: {} / {} that was missing a food capability! This is likely the error of an addon!", stack.getItem(), stack);
+            ModuleCore.LOGGER.info("Player ate a weird food: {} / {} that was missing a food capability! This is likely the error of an addon!", stack.getItem(), stack);
         }
     }
 

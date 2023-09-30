@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalZebu;
 import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalZebu;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,8 +14,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalZebu extends RenderAnimal<EntityAnimalZebu> {
-    private static final ResourceLocation ZEBU_YOUNG = TerraFirmaGreg.getID("textures/entity/animal/livestock/zebu_young.png");
-    private static final ResourceLocation ZEBU_OLD = TerraFirmaGreg.getID("textures/entity/animal/livestock/zebu_old.png");
+    private static final ResourceLocation ZEBU_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/zebu_young.png");
+    private static final ResourceLocation ZEBU_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/zebu_old.png");
 
     public RenderAnimalZebu(RenderManager renderManager) {
         super(renderManager, new ModelAnimalZebu(), 0.7F, ZEBU_YOUNG, ZEBU_OLD);

@@ -2,7 +2,7 @@ package net.dries007.tfc.compat.jei.wrappers;
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.minecraft.client.Minecraft;

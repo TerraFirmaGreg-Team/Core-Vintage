@@ -2,17 +2,17 @@ package net.dries007.tfc.module.metal.common.container;
 
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.api.container.ContainerTE;
-import net.dries007.tfc.module.core.api.container.IButtonHandler;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.module.core.api.objects.container.ContainerTE;
+import net.dries007.tfc.module.core.api.objects.container.IButtonHandler;
+import net.dries007.tfc.module.core.init.RegistryCore;
+import net.dries007.tfc.module.metal.ModuleMetal;
 import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
@@ -88,12 +88,12 @@ public class ContainerAnvilTFC extends ContainerTE<TEMetalAnvil> implements IBut
             return false;
 
         // A recipe must exist
-        var recipe = TFCRegistries.ANVIL.getValue(cap.getRecipeName());
+        var recipe = RegistryCore.ANVIL.getValue(cap.getRecipeName());
         if (recipe == null) {
             return false;
         }
         if (!Helpers.isAtLeast(tile.getTier(), recipe.getTier())) {
-            TerraFirmaGreg.LOGGER.info("Anvil Tier: {} + Recipe Tier: {}", tile.getTier(), recipe.getTier());
+            ModuleMetal.LOGGER.info("Anvil Tier: {} + Recipe Tier: {}", tile.getTier(), recipe.getTier());
             player.sendMessage(new TextComponentTranslation(Tags.MOD_ID + ".tooltip.anvil_tier_too_low"));
             return false;
         }

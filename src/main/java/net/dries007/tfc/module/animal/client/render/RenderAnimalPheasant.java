@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalPheasant;
 import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
 import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalPheasant;
@@ -17,9 +17,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalPheasant extends RenderLiving<EntityAnimalPheasant> {
-    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaGreg.getID("textures/entity/animal/huntable/pheasant_chick.png");
-    private static final ResourceLocation MALE_TEXTURE = TerraFirmaGreg.getID("textures/entity/animal/huntable/pheasant_male.png");
-    private static final ResourceLocation FEMALE_TEXTURE = TerraFirmaGreg.getID("textures/entity/animal/huntable/pheasant_female.png");
+    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/pheasant_chick.png");
+    private static final ResourceLocation MALE_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/pheasant_male.png");
+    private static final ResourceLocation FEMALE_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/pheasant_female.png");
 
 
     public RenderAnimalPheasant(RenderManager manager) {

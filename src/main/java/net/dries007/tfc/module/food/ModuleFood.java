@@ -2,7 +2,7 @@ package net.dries007.tfc.module.food;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
+import net.dries007.tfc.module.core.api.util.CreativeTabBase;
 import net.dries007.tfc.module.food.api.category.FoodCategoryHandler;
 import net.dries007.tfc.module.food.api.type.FoodTypeHandler;
 import net.dries007.tfc.module.food.api.variant.Item.FoodItemVariantHandler;
@@ -23,7 +23,7 @@ import static net.dries007.tfc.Tags.MOD_NAME;
 public class ModuleFood extends ModuleBase {
 
     public static final String MODULE_ID = "module.food";
-    public static final CreativeTabs FOOD_TAB = new CreativeTabsTFC.TFCCreativeTab("food", "tfc:food.ingredient.wheat_bread_sandwich");
+    public static final CreativeTabs FOOD_TAB = new CreativeTabBase("food", "tfc:food.ingredient.wheat_bread_sandwich");
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleFood.class.getSimpleName());
 

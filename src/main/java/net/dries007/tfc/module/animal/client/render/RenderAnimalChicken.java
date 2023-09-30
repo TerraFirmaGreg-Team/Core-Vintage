@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalChicken;
 import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
@@ -18,13 +18,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalChicken extends RenderLiving<EntityAnimalChicken> {
-    private static final ResourceLocation CHICKEN_YOUNG = TerraFirmaGreg.getID("textures/entity/animal/livestock/chicken_young.png");
-    private static final ResourceLocation CHICKEN_OLD = TerraFirmaGreg.getID("textures/entity/animal/livestock/chicken_old.png");
+    private static final ResourceLocation CHICKEN_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/chicken_young.png");
+    private static final ResourceLocation CHICKEN_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/chicken_old.png");
 
-    private static final ResourceLocation ROOSTER_YOUNG = TerraFirmaGreg.getID("textures/entity/animal/livestock/rooster_young.png");
-    private static final ResourceLocation ROOSTER_OLD = TerraFirmaGreg.getID("textures/entity/animal/livestock/rooster_old.png");
+    private static final ResourceLocation ROOSTER_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/rooster_young.png");
+    private static final ResourceLocation ROOSTER_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/rooster_old.png");
 
-    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaGreg.getID("textures/entity/animal/livestock/chick.png");
+    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/livestock/chick.png");
 
     public RenderAnimalChicken(RenderManager manager) {
         super(manager, new ModelAnimalChicken(), 0.3F);

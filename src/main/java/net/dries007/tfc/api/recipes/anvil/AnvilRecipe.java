@@ -1,9 +1,9 @@
 package net.dries007.tfc.api.recipes.anvil;
 
 import gregtech.common.items.ToolItems;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.compat.jei.util.IJEISimpleRecipe;
+import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeSteps;
@@ -53,7 +53,7 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
 
     @Nonnull
     public static List<AnvilRecipe> getAllFor(ItemStack stack) {
-        return TFCRegistries.ANVIL.getValuesCollection().stream().filter(x -> x.matches(stack)).collect(Collectors.toList());
+        return RegistryCore.ANVIL.getValuesCollection().stream().filter(x -> x.matches(stack)).collect(Collectors.toList());
     }
 
     public boolean matches(ItemStack input) {

@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
@@ -58,7 +58,7 @@ public interface ITreeGenerator {
         }
 
         // Проверяем, есть ли твердый блок снизу
-        if (!TFCBlocks.isGrowableSoil(world.getBlockState(pos.down())))
+        if (!Helpers.isGrowableSoil(world.getBlockState(pos.down())))
             return false;
 
 

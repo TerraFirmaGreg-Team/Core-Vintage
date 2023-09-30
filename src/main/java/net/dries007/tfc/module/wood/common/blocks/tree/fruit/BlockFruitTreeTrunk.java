@@ -5,12 +5,12 @@
 //import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariant;
 //import net.dries007.tfc.api.util.IGrowingPlant;
 //import net.dries007.tfc.client.util.CustomStateMap;
-//import net.dries007.tfc.common.objects.CreativeTabsTFC;
+//import net.dries007.tfc.module.core.api.util.CreativeTabsTFC;
 //import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 //import net.dries007.tfc.common.objects.items.itemblocks.ItemBlockTFC;
 //import net.dries007.tfc.module.core.common.tiles.TETickCounter;
 //import net.dries007.tfc.config.ConfigTFC;
-//import net.dries007.tfc.util.Helpers;
+//import net.dries007.tfc.module.core.api.util.Helpers;
 //import net.dries007.tfc.util.calendar.ICalendar;
 //import net.dries007.tfc.util.climate.ClimateTFC;
 //import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -109,7 +109,7 @@
 //    @Nonnull
 //    public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 //        for (EnumFacing face : EnumFacing.HORIZONTALS) {
-//            if (worldIn.getBlockState(pos.offset(face)).getBlock() == TFCBlocks.getWoodBlock(FRUIT_BRANCH, type)) {
+//            if (worldIn.getBlockState(pos.offset(face)).getBlock() == BlocksCore.getWoodBlock(FRUIT_BRANCH, type)) {
 //                if (face == EnumFacing.NORTH) {
 //                    state = state.withProperty(NORTH, true);
 //                } else if (face == EnumFacing.SOUTH) {
@@ -189,7 +189,7 @@
 //                            if (missingLeaf != null) {
 //                                //Missing leaf, spawn that first
 //                                if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-//                                    worldIn.setBlockState(missingLeaf, TFCBlocks.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+//                                    worldIn.setBlockState(missingLeaf, BlocksCore.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
 //                                            .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
 //                                }
 //                            } else {
@@ -200,17 +200,17 @@
 //                            }
 //                        } else {
 //                            //Starting with top
-//                            if (worldIn.getBlockState(pos.up()).getBlock() != TFCBlocks.getWoodBlock(FRUIT_BRANCH, type)) {
+//                            if (worldIn.getBlockState(pos.up()).getBlock() != BlocksCore.getWoodBlock(FRUIT_BRANCH, type)) {
 //                                BlockPos missingLeaf = getMissingLeaf(worldIn, pos);
 //                                if (missingLeaf != null) {
 //                                    //There is a missing leaf
 //                                    if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-//                                        worldIn.setBlockState(missingLeaf, TFCBlocks.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+//                                        worldIn.setBlockState(missingLeaf, BlocksCore.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
 //                                                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
 //                                    }
 //                                    return; //Done what we needed to do on this stage
 //                                } else {
-//                                    worldIn.setBlockState(pos.up(), TFCBlocks.getWoodBlock(FRUIT_BRANCH, type).getDefaultState());
+//                                    worldIn.setBlockState(pos.up(), BlocksCore.getWoodBlock(FRUIT_BRANCH, type).getDefaultState());
 //                                    levelUpLeaves(worldIn, pos, true);
 //                                    return; //Done what we needed to do on this stage
 //                                }
@@ -219,7 +219,7 @@
 //                                if (missingLeaf != null) {
 //                                    //There is a missing leaf
 //                                    if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-//                                        worldIn.setBlockState(missingLeaf, TFCBlocks.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+//                                        worldIn.setBlockState(missingLeaf, BlocksCore.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
 //                                                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
 //                                    }
 //                                    return; //Done what we needed to do on this stage
@@ -228,7 +228,7 @@
 //                                missingLeaf = getMissingLeaf(worldIn, pos.up(), EnumFacing.NORTH);
 //                                if (missingLeaf != null) {
 //                                    if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-//                                        worldIn.setBlockState(missingLeaf, TFCBlocks.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+//                                        worldIn.setBlockState(missingLeaf, BlocksCore.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
 //                                                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
 //                                    }
 //                                    return; //Done what we needed to do on this stage
@@ -236,7 +236,7 @@
 //                                missingLeaf = getMissingLeaf(worldIn, pos.up(), EnumFacing.SOUTH);
 //                                if (missingLeaf != null) {
 //                                    if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-//                                        worldIn.setBlockState(missingLeaf, TFCBlocks.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+//                                        worldIn.setBlockState(missingLeaf, BlocksCore.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
 //                                                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
 //                                    }
 //                                    return; //Done what we needed to do on this stage
@@ -246,16 +246,16 @@
 //                            Collections.shuffle(shuffledList, new Random(pos.toLong()));
 //                            for (EnumFacing branchFacing : shuffledList) {
 //                                BlockPos branchPos = pos.offset(branchFacing);
-//                                if (worldIn.getBlockState(branchPos).getBlock() != TFCBlocks.getWoodBlock(FRUIT_BRANCH, type)) {
+//                                if (worldIn.getBlockState(branchPos).getBlock() != BlocksCore.getWoodBlock(FRUIT_BRANCH, type)) {
 //                                    if (worldIn.getBlockState(branchPos).getMaterial().isReplaceable()) {
-//                                        worldIn.setBlockState(branchPos, TFCBlocks.getWoodBlock(FRUIT_BRANCH, type).getDefaultState());
+//                                        worldIn.setBlockState(branchPos, BlocksCore.getWoodBlock(FRUIT_BRANCH, type).getDefaultState());
 //                                    }
 //                                    return; //Done what we needed to do on this stage
 //                                }
 //                                BlockPos missingLeaf = getMissingLeaf(worldIn, branchPos, branchFacing);
 //                                if (missingLeaf != null) {
 //                                    if (worldIn.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-//                                        worldIn.setBlockState(missingLeaf, TFCBlocks.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+//                                        worldIn.setBlockState(missingLeaf, BlocksCore.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
 //                                                .withProperty(BlockFruitTreeLeaves.HARVESTABLE, true));
 //                                        return; //Done what we needed to do on this stage
 //                                    }
@@ -272,7 +272,7 @@
 //    @SuppressWarnings("deprecation")
 //    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 //        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-//        if (!(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockFruitTreeTrunk) && !TFCBlocks.isGrowableSoil(worldIn.getBlockState(pos.down()))) {
+//        if (!(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockFruitTreeTrunk) && !BlocksCore.isGrowableSoil(worldIn.getBlockState(pos.down()))) {
 //            worldIn.destroyBlock(pos, true);
 //        }
 //    }
@@ -291,7 +291,7 @@
 //        if (!worldIn.isRemote) {
 //            //Destroy this tree upwards starting from this block
 //            //Not needed to destroy leaves, they will decay by itself
-//            Block branch = TFCBlocks.getWoodBlock(FRUIT_BRANCH, type);
+//            Block branch = BlocksCore.getWoodBlock(FRUIT_BRANCH, type);
 //            if (worldIn.getBlockState(pos.up()).getBlock() == this || worldIn.getBlockState(pos.up()).getBlock() == branch) {
 //                worldIn.destroyBlock(pos.up(), true);
 //            }
@@ -330,14 +330,14 @@
 //    @Override
 //    @Nonnull
 //    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-//        return new ItemStack(TFCBlocks.getWoodBlock(FRUIT_SAPLING, type));
+//        return new ItemStack(BlocksCore.getWoodBlock(FRUIT_SAPLING, type));
 //    }
 //
 //    private BlockPos getMissingLeaf(World world, BlockPos branchPos, EnumFacing branchFacing) {
 //        //Helper method, gets a missing leaf block position that connects to this branch
 //
 //        //the same facing has priority
-//        if (world.getBlockState(branchPos.offset(branchFacing)).getBlock() != TFCBlocks.getWoodBlock(FRUIT_LEAVES, type)) {
+//        if (world.getBlockState(branchPos.offset(branchFacing)).getBlock() != BlocksCore.getWoodBlock(FRUIT_LEAVES, type)) {
 //            return branchPos.offset(branchFacing);
 //        }
 //
@@ -349,7 +349,7 @@
 //        );
 //        Collections.shuffle(positions);
 //        for (BlockPos pos : positions) {
-//            if (world.getBlockState(pos).getBlock() != TFCBlocks.getWoodBlock(FRUIT_LEAVES, type)) {
+//            if (world.getBlockState(pos).getBlock() != BlocksCore.getWoodBlock(FRUIT_LEAVES, type)) {
 //                return pos;
 //            }
 //        }
@@ -361,13 +361,13 @@
 //        //Helper method, checks if all 5 leafs blocks(horizontals + above) has a missing block leaf
 //
 //        //Above first
-//        if (world.getBlockState(pos.offset(EnumFacing.UP)).getBlock() != TFCBlocks.getWoodBlock(FRUIT_LEAVES, type)) {
+//        if (world.getBlockState(pos.offset(EnumFacing.UP)).getBlock() != BlocksCore.getWoodBlock(FRUIT_LEAVES, type)) {
 //            return pos.offset(EnumFacing.UP);
 //        }
 //        List<EnumFacing> shuffledList = Arrays.asList(EnumFacing.HORIZONTALS.clone()); //if i don't clone, the original array shuffes!
 //        Collections.shuffle(shuffledList);
 //        for (EnumFacing facing : shuffledList) {
-//            if (world.getBlockState(pos.offset(facing)).getBlock() != TFCBlocks.getWoodBlock(FRUIT_LEAVES, type)) {
+//            if (world.getBlockState(pos.offset(facing)).getBlock() != BlocksCore.getWoodBlock(FRUIT_LEAVES, type)) {
 //                return pos.offset(facing);
 //            }
 //        }
@@ -377,7 +377,7 @@
 //    private void levelUpLeaves(World world, BlockPos oldCenter, boolean hasvestable) {
 //        //Remove the old ones
 //        for (EnumFacing facing : EnumFacing.HORIZONTALS) {
-//            if (world.getBlockState(oldCenter.offset(facing)).getBlock() == TFCBlocks.getWoodBlock(FRUIT_LEAVES, type)) {
+//            if (world.getBlockState(oldCenter.offset(facing)).getBlock() == BlocksCore.getWoodBlock(FRUIT_LEAVES, type)) {
 //                world.setBlockToAir(oldCenter.offset(facing));
 //            }
 //        }
@@ -387,7 +387,7 @@
 //            //Respawn leafs in the new height
 //            missingLeaf = getMissingLeaf(world, oldCenter.up());
 //            if (missingLeaf != null && world.getBlockState(missingLeaf).getMaterial().isReplaceable()) {
-//                world.setBlockState(missingLeaf, TFCBlocks.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
+//                world.setBlockState(missingLeaf, BlocksCore.getWoodBlock(FRUIT_LEAVES, type).getDefaultState()
 //                        .withProperty(BlockFruitTreeLeaves.HARVESTABLE, hasvestable));
 //            } else {
 //                //Found a block(ceiling?) that prevents this tree to grow leafs, aborting

@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.network.PacketGuiButton;
@@ -28,7 +28,7 @@ public class GuiButtonKnapping extends GuiButton {
     public void onClick() {
         if (this.enabled) {
             this.visible = false;
-            TerraFirmaGreg.network.sendToServer(new PacketGuiButton(this.id));
+            TerraFirmaCraft.network.sendToServer(new PacketGuiButton(this.id));
         }
     }
 

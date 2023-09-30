@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.agriculture.StorageAgriculture;
 import net.dries007.tfc.module.agriculture.api.bush.type.BushType;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
@@ -41,7 +41,7 @@ public class WorldGenBerryBushes implements IWorldGenerator {
                     if (world.getBlockState(pos).getMaterial().isLiquid() || !world.getBlockState(pos).getMaterial().isReplaceable()) {
                         return;
                     }
-                    var block = TFCBlocks.getBushBlock(bush);
+                    var block = StorageAgriculture.getBushBlock(bush);
                     if (block.canPlaceBlockAt(world, pos)) {
                         world.setBlockState(pos, block.getDefaultState());
                     }

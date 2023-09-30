@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.client.ClientProxy;
-import net.dries007.tfc.common.CommonEventHandler;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.events.CommonEventHandler;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
@@ -77,7 +77,7 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
      * Called from {@link CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)}
      * If the item is a food capability item, and it was created before the post init, we assume that it is a technical stack, and will not appear in the world without a copy. As such, we set it to non-decaying.
      * This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()},
-     * See TerraFirmaGreg#458
+     * See TerraFirmaCraft#458
      */
     void setNonDecaying();
 

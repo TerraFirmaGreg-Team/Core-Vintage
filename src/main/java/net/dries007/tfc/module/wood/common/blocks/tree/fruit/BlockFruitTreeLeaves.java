@@ -9,7 +9,7 @@
 //import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodLeaves;
 //import net.dries007.tfc.module.core.common.tiles.TETickCounter;
 //import net.dries007.tfc.config.ConfigTFC;
-//import net.dries007.tfc.util.Helpers;
+//import net.dries007.tfc.module.core.api.util.Helpers;
 //import net.dries007.tfc.util.calendar.CalendarTFC;
 //import net.dries007.tfc.util.calendar.ICalendar;
 //import net.minecraft.block.Block;
@@ -170,8 +170,8 @@
 //                    if (evaluated.contains(pos1) || !world.isBlockLoaded(pos1))
 //                        continue;
 //                    state1 = world.getBlockState(pos1);
-//                    if (state1.getBlock() == TFCBlocks.getWoodBlock(WoodBlockVariants.FRUIT_TRUNK, type)
-//                            || state1.getBlock() == TFCBlocks.getWoodBlock(WoodBlockVariants.FRUIT_BRANCH, type))
+//                    if (state1.getBlock() == BlocksCore.getWoodBlock(WoodBlockVariants.FRUIT_TRUNK, type)
+//                            || state1.getBlock() == BlocksCore.getWoodBlock(WoodBlockVariants.FRUIT_BRANCH, type))
 //                        return;
 //                    if (state1.getBlock() == this)
 //                        pathsToAdd.add(pos1.toImmutable());

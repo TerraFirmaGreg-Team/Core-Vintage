@@ -1,6 +1,6 @@
 //package net.dries007.tfc.world.classic.worldgen.trees;
 //
-//import net.dries007.tfc.TerraFirmaGreg;
+//import net.dries007.tfc.TerraFirmaCraft;
 //import net.dries007.tfc.world.classic.worldgen.trees.ITreeGenerator;
 //import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 //import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants;
@@ -38,14 +38,14 @@
 //
 //    @Override
 //    public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
-//        ResourceLocation base = TerraFirmaGreg.identifier(woodType + "/base");
-//        ResourceLocation overlay = TerraFirmaGreg.identifier(woodType + "/overlay");
+//        ResourceLocation base = TerraFirmaCraft.identifier(woodType + "/base");
+//        ResourceLocation overlay = TerraFirmaCraft.identifier(woodType + "/overlay");
 //
 //        Template structureBase = manager.get(world.getMinecraftServer(), base);
 //        Template structureOverlay = manager.get(world.getMinecraftServer(), overlay);
 //
 //        if (structureBase == null) {
-//            TerraFirmaGreg.LOGGER.warn("Unable to find a template for " + base);
+//            TerraFirmaCraft.LOGGER.warn("Unable to find a template for " + base);
 //            return;
 //        }
 //
@@ -59,7 +59,7 @@
 //            StructureHelper.addStructureToWorld(world, pos, structureOverlay, settingsWeak);
 //        }
 //
-//        final IBlockState log = TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
+//        final IBlockState log = BlocksCore.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
 //        for (int i = 0; i < height; i++)
 //            world.setBlockState(pos.add(size.getX() / 2, i - height, size.getZ() / 2), log);
 //    }

@@ -1,8 +1,9 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.api.types.tree.type.TreeType;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.StorageCore;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -34,8 +35,8 @@ public class WorldGenTrees implements IWorldGenerator {
                 // This matches the check in BlockPlacedItemFlat for if the block can stay
                 // Also, only add on soil, since this is called by the world regen handler later
                 IBlockState stateDown = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && stateDown.isSideSolid(world, pos.down(), EnumFacing.UP) && TFCBlocks.isGround(stateDown)) {
-                    world.setBlockState(pos, TFCBlocks.getGroundcoverBlock(STICK).getDefaultState());
+                if (world.isAirBlock(pos) && stateDown.isSideSolid(world, pos.down(), EnumFacing.UP) && Helpers.isGround(stateDown)) {
+                    world.setBlockState(pos, StorageCore.getGroundcoverBlock(STICK).getDefaultState());
                 }
             }
         }

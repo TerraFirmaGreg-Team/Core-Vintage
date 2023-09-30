@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.biomes;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.world.biome.Biome;

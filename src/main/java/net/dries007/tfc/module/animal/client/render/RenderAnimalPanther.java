@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalPanther;
 import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalPanther;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalPanther extends RenderLiving<EntityAnimalPanther> {
-    private static final ResourceLocation TEXTURE = TerraFirmaGreg.getID("textures/entity/animal/predators/panther.png");
+    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/panther.png");
 
     public RenderAnimalPanther(RenderManager renderManager) {
         super(renderManager, new ModelAnimalPanther(), 0.7F);

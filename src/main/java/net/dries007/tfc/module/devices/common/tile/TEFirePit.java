@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.devices.common.tile;
 
-import net.dries007.tfc.TerraFirmaGreg;
 import net.dries007.tfc.api.capability.food.*;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
@@ -10,8 +9,9 @@ import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.core.api.tile.ITileFields;
+import net.dries007.tfc.module.core.api.objects.tile.ITileFields;
 import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
+import net.dries007.tfc.module.devices.ModuleDevice;
 import net.dries007.tfc.module.devices.common.blocks.BlockFirePit;
 import net.dries007.tfc.module.food.StorageFood;
 import net.dries007.tfc.module.food.api.category.FoodCategories;
@@ -525,23 +525,21 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
                 this.soupServings = value;
                 break;
             default:
-                TerraFirmaGreg.LOGGER.warn("Invalid Field ID {} in TEFirePit#setField", index);
+                ModuleDevice.LOGGER.warn("Invalid Field ID {} in TEFirePit#setField", index);
         }
     }
 
     @Override
     public int getField(int index) {
-        switch (index) {
-            case FIELD_TEMPERATURE:
-                return (int) temperature;
-            case FIELD_COOKING_POT_STAGE:
-                return cookingPotStage.ordinal();
-            case FIELD_COOKING_POT_SERVINGS:
-                return soupServings;
-            default:
-                TerraFirmaGreg.LOGGER.warn("Invalid Field ID {} in TEFirePit#getField", index);
-                return 0;
-        }
+        return switch (index) {
+            case FIELD_TEMPERATURE -> (int) temperature;
+            case FIELD_COOKING_POT_STAGE -> cookingPotStage.ordinal();
+            case FIELD_COOKING_POT_SERVINGS -> soupServings;
+            default -> {
+                ModuleDevice.LOGGER.warn("Invalid Field ID {} in TEFirePit#getField", index);
+                yield 0;
+            }
+        };
     }
 
     public void onAirIntake(int amount) {

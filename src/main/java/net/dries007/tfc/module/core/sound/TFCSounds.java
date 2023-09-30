@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.sound;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import static net.dries007.tfc.util.Helpers.getNull;
+import static net.dries007.tfc.module.core.api.util.Helpers.getNull;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class TFCSounds {
@@ -386,7 +386,7 @@ public class TFCSounds {
     }
 
     private static SoundEvent createSoundEvent(String name) {
-        final var soundID = TerraFirmaGreg.getID(name);
+        final var soundID = TerraFirmaCraft.getID(name);
         return new SoundEvent(soundID).setRegistryName(soundID);
     }
 }

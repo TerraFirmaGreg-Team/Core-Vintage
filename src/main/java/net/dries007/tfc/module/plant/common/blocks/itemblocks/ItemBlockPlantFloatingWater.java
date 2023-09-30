@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.plant.common.blocks.itemblocks;
 
-import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlantFloatingWater;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockLiquid;

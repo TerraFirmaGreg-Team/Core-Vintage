@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalCamel;
 import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalCamel;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -16,7 +16,7 @@ import java.util.stream.IntStream;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class LayerCamelDecor implements LayerRenderer<EntityAnimalCamel> {
-    private static final ResourceLocation[] CAMEL_DECOR_TEXTURES = IntStream.range(0, 16).mapToObj(i -> TerraFirmaGreg.getID("textures/entity/animal/livestock/decor/" + EnumDyeColor.byMetadata(i).getName() + ".png")).toArray(ResourceLocation[]::new);
+    private static final ResourceLocation[] CAMEL_DECOR_TEXTURES = IntStream.range(0, 16).mapToObj(i -> TerraFirmaCraft.getID("textures/entity/animal/livestock/decor/" + EnumDyeColor.byMetadata(i).getName() + ".png")).toArray(ResourceLocation[]::new);
     private final RenderAnimalCamel renderer;
     private final ModelAnimalCamel model = new ModelAnimalCamel(0.51F);
 

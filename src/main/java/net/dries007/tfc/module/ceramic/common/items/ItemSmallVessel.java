@@ -5,7 +5,7 @@ import gregtech.api.unification.material.Material;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
@@ -85,7 +85,7 @@ public class ItemSmallVessel extends ItemPottery {
                         TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.SMALL_VESSEL_LIQUID);
                         break;
                     case LIQUID_SOLID:
-                        TerraFirmaGreg.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, Tags.MOD_ID + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
+                        TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, Tags.MOD_ID + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
                         break;
                 }
             }

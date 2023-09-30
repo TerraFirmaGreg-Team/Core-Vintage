@@ -8,7 +8,7 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.module.core.objects.tiles.TETickCounter;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;

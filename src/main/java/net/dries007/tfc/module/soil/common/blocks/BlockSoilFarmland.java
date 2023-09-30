@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.soil.common.blocks;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
-import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.agriculture.common.blocks.BlockCropGrowing;
+import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlant;
 import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.api.type.SoilType;
@@ -140,46 +140,46 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
                             variant == DRY_GRASS || variant == CLAY || variant == CLAY_GRASS;
                 }
                 case DESERT_CLAY -> {
-                    return variant == CLAY || variant == CLAY_GRASS || TFCBlocks.isSand(state);
+                    return variant == CLAY || variant == CLAY_GRASS || Helpers.isSand(state);
                 }
                 case DRY_CLAY -> {
                     return variant == DIRT || variant == DRY_GRASS ||
-                            variant == CLAY || variant == CLAY_GRASS || TFCBlocks.isSand(state);
+                            variant == CLAY || variant == CLAY_GRASS || Helpers.isSand(state);
                 }
                 case DRY -> {
-                    return variant == DIRT || variant == DRY_GRASS || TFCBlocks.isSand(state);
+                    return variant == DIRT || variant == DRY_GRASS || Helpers.isSand(state);
                 }
                 case FRESH_WATER -> {
                     return variant == DIRT || variant == GRASS ||
-                            variant == DRY_GRASS || TFCBlocks.isGravel(state);
+                            variant == DRY_GRASS || Helpers.isGravel(state);
                 }
                 case SALT_WATER -> {
                     return variant == DIRT || variant == GRASS ||
-                            variant == DRY_GRASS || TFCBlocks.isSand(state) || TFCBlocks.isGravel(state);
+                            variant == DRY_GRASS || Helpers.isSand(state) || Helpers.isGravel(state);
                 }
                 case FRESH_BEACH -> {
                     boolean flag = false;
                     for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                         for (int i = 1; i <= beachDistance; i++) {
-                            if (TFCBlocks.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
+                            if (Helpers.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
                                 flag = true;
                                 break;
                             }
                         }
                     }
                     return (variant == DIRT || variant == GRASS ||
-                            variant == DRY_GRASS || TFCBlocks.isSand(state)) && flag;
+                            variant == DRY_GRASS || Helpers.isSand(state)) && flag;
                 }
                 case SALT_BEACH -> {
                     boolean flag = false;
                     for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                         for (int i = 1; i <= beachDistance; i++)
-                            if (TFCBlocks.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
+                            if (Helpers.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
                                 flag = true;
                             }
                     }
                     return (variant == DIRT || variant == GRASS ||
-                            variant == DRY_GRASS || TFCBlocks.isSand(state)) && flag;
+                            variant == DRY_GRASS || Helpers.isSand(state)) && flag;
                 }
             }
         } else if (plantable instanceof BlockCropGrowing) {
@@ -206,7 +206,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
                 return variant == FARMLAND;
             }
             case Desert -> {
-                return TFCBlocks.isSand(state);
+                return Helpers.isSand(state);
             }
             case Cave -> {
                 return true;
@@ -218,12 +218,12 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
                 boolean flag = false;
                 for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                     for (int i = 1; i <= beachDistance; i++)
-                        if (TFCBlocks.isWater(world.getBlockState(pos.offset(facing, i)))) {
+                        if (Helpers.isWater(world.getBlockState(pos.offset(facing, i)))) {
                             flag = true;
                         }
                 }
                 return (variant == DIRT || variant == GRASS ||
-                        variant == DRY_GRASS || TFCBlocks.isSand(state)) && flag;
+                        variant == DRY_GRASS || Helpers.isSand(state)) && flag;
             }
         }
 

@@ -1,6 +1,6 @@
 //package net.dries007.tfc.world.classic.worldgen.trees;
 //
-//import net.dries007.tfc.TerraFirmaGreg;
+//import net.dries007.tfc.TerraFirmaCraft;
 //import net.dries007.tfc.world.classic.worldgen.trees.ITreeGenerator;
 //import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 //import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants;
@@ -35,8 +35,8 @@
 //
 //    @Override
 //    public void generateTree(TemplateManager manager, World world, BlockPos pos, WoodType woodType, Random rand, boolean isWorldGen) {
-//        trunk = TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
-//        bark = TFCBlocks.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false).withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
+//        trunk = BlocksCore.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false);
+//        bark = BlocksCore.getWoodBlock(WoodBlockVariants.LOG, woodType).getDefaultState().withProperty(PLACED, false).withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
 //
 //        int height = 12 + rand.nextInt(8);
 //        int branches = 2 + rand.nextInt(3);
@@ -68,12 +68,12 @@
 //    @Override
 //    public boolean canGenerateTree(World world, BlockPos pos, WoodType woodType) {
 //        for (BlockPos p1 : trunkPos) {
-//            if (TFCBlocks.isSoil(world.getBlockState(pos.add(p1))))
+//            if (BlocksCore.isSoil(world.getBlockState(pos.add(p1))))
 //                continue;
 //            if (world.getBlockState(pos.add(p1)).getMaterial().isReplaceable()) {
-//                if (TFCBlocks.isSoil(world.getBlockState(pos.add(p1).down(1))))
+//                if (BlocksCore.isSoil(world.getBlockState(pos.add(p1).down(1))))
 //                    continue;
-//                if (TFCBlocks.isSoil(world.getBlockState(pos.add(p1).down(2))) && world.getBlockState(pos.add(p1.down(1))).getMaterial().isReplaceable())
+//                if (BlocksCore.isSoil(world.getBlockState(pos.add(p1).down(2))) && world.getBlockState(pos.add(p1.down(1))).getMaterial().isReplaceable())
 //                    continue;
 //            }
 //            return false;
@@ -83,11 +83,11 @@
 //    }
 //
 //    private void placeBranch(TemplateManager manager, World world, BlockPos pos, String name) {
-//        ResourceLocation base = TerraFirmaGreg.identifier(name);
+//        ResourceLocation base = TerraFirmaCraft.identifier(name);
 //        Template structureBase = manager.get(world.getMinecraftServer(), base);
 //
 //        if (structureBase == null) {
-//            TerraFirmaGreg.LOGGER.warn("Unable to find a template for " + base);
+//            TerraFirmaCraft.LOGGER.warn("Unable to find a template for " + base);
 //            return;
 //        }
 //        BlockPos size = structureBase.getSize();

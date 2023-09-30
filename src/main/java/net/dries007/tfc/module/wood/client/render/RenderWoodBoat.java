@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.wood.client.render;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.wood.common.entities.EntityWoodBoat;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.model.IMultipassModel;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
@@ -59,7 +59,7 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
     @Override
     protected ResourceLocation getEntityTexture(EntityWoodBoat entity) {
         // Fallback
-        return TerraFirmaGreg.getID("textures/entity/boat/boat.png");
+        return TerraFirmaCraft.getID("textures/entity/boat/boat.png");
     }
 
     @Override

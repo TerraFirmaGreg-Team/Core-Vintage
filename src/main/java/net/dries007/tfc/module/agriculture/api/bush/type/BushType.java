@@ -12,8 +12,7 @@ import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BLOCKS;
-import static net.dries007.tfc.common.objects.blocks.TFCBlocks.BUSH_BLOCKS;
+import static net.dries007.tfc.module.agriculture.StorageAgriculture.BUSH_BLOCKS;
 import static net.dries007.tfc.module.agriculture.api.bush.IBushBlock.Size;
 import static net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants.INGREDIENT;
 
@@ -62,7 +61,6 @@ public class BushType {
 
         if (BUSH_BLOCKS.put(this, bushBlock) != null)
             throw new RuntimeException(String.format("Duplicate registry detected: %s", this));
-        BLOCKS.add(bushBlock);
     }
 
     /**

@@ -2,13 +2,9 @@ package net.dries007.tfc.module.rock.api.types.type;
 
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.ore.StoneType;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import net.dries007.tfc.TerraFirmaGreg;
-import net.dries007.tfc.module.rock.StorageRock;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.rock.api.types.category.RockCategory;
-import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants;
-import net.minecraft.block.SoundType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -58,12 +54,12 @@ public class RockType {
             throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
         }
 
-        new StoneType(
-                counter++, "tfc_" + name, SoundType.STONE, orePrefix, material,
-                () -> StorageRock.getRockBlock(RockBlockVariants.RAW, this).getDefaultState(),
-                state -> state.getBlock() == StorageRock.getRockBlock(RockBlockVariants.RAW, this),
-                false
-        );
+//        new StoneType(
+//                counter++, "tfc_" + name, SoundType.STONE, orePrefix, material,
+//                () -> StorageRock.getRockBlock(RockBlockVariants.RAW, this).getDefaultState(),
+//                state -> state.getBlock() == StorageRock.getRockBlock(RockBlockVariants.RAW, this),
+//                false
+//        );
     }
 
     /**
@@ -180,6 +176,6 @@ public class RockType {
      */
     @Nonnull
     public ResourceLocation getTexture() {
-        return TerraFirmaGreg.getID("textures/blocks/rock/raw/" + this + ".png");
+        return TerraFirmaCraft.getID("textures/blocks/rock/raw/" + this + ".png");
     }
 }

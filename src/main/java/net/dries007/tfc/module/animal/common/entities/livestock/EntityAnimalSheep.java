@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.common.entities.livestock;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.common.objects.LootTablesTFC;
@@ -14,7 +14,7 @@ import net.dries007.tfc.module.animal.common.entities.EntityAnimalMammal;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.Constants;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -147,7 +147,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
                 } else {
                     TextComponentTranslation tooltip = getTooltip();
                     if (tooltip != null) {
-                        TerraFirmaGreg.network.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+                        TerraFirmaCraft.network.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
                     }
                 }
             }
@@ -157,7 +157,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
                 if (!isReadyForAnimalProduct()) {
                     TextComponentTranslation tooltip = getTooltip();
                     if (tooltip != null) {
-                        TerraFirmaGreg.network.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+                        TerraFirmaCraft.network.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
                     }
                 }
             }

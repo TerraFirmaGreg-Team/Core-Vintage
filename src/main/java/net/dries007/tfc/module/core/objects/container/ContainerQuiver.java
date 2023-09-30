@@ -2,7 +2,7 @@ package net.dries007.tfc.module.core.objects.container;
 
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.module.core.api.container.ContainerItemStack;
+import net.dries007.tfc.module.core.api.objects.container.ContainerItemStack;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;

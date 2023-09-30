@@ -13,8 +13,6 @@
     "gregtech.PartsRecipeHandlerMixin",
     "gregtech.SurfaceGeneratorMixin",
     "gregtech.ToolItemsMixin",
-    "gregtech.ToolRecipeHandlerMixin",
-    "minecraft.GuiCreateWorldMixin",
     "minecraft.RenderItemMixin"
   ],
   "server": [],

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.ceramic.client.gui;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonLargeVesselSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 import java.io.IOException;
 
 public class GuiLargeVessel extends GuiContainerTE<TELargeVessel> {
-    public static final ResourceLocation LARGE_VESSEL_BACKGROUND = TerraFirmaGreg.getID("textures/gui/large_vessel.png");
+    public static final ResourceLocation LARGE_VESSEL_BACKGROUND = TerraFirmaCraft.getID("textures/gui/large_vessel.png");
     private final String translationKey;
 
     public GuiLargeVessel(Container container, InventoryPlayer playerInv, TELargeVessel tile, String translationKey) {
@@ -76,7 +76,7 @@ public class GuiLargeVessel extends GuiContainerTE<TELargeVessel> {
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button instanceof GuiButtonLargeVesselSeal) {
-            TerraFirmaGreg.network.sendToServer(new PacketGuiButton(button.id));
+            TerraFirmaCraft.network.sendToServer(new PacketGuiButton(button.id));
         }
         super.actionPerformed(button);
     }

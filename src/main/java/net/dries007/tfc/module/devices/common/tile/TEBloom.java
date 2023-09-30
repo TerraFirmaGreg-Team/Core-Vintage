@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.devices.common.tile;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.module.core.api.tile.TEInventory;
+import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;

@@ -1,17 +1,16 @@
 package net.dries007.tfc.module.core.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.core.api.item.ItemBase;
+import net.dries007.tfc.module.core.api.objects.item.ItemBase;
+import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.module.devices.common.tile.TEFirePit;
 import net.dries007.tfc.module.devices.common.tile.TELogPile;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -38,16 +37,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
-import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemFireStarter extends ItemBase {
-    public ItemFireStarter() {
 
-        setRegistryName(Tags.MOD_ID, "firestarter");
-        setTranslationKey(Tags.MOD_ID + ".firestarter");
-        setCreativeTab(MISC_TAB);
+    public static final String NAME = "firestarter";
+
+    public ItemFireStarter() {
         setMaxDamage(8);
         setMaxStackSize(1);
         setNoRepair();

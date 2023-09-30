@@ -2,11 +2,11 @@ package net.dries007.tfc.module.core.objects.container;
 
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.common.objects.inventory.slot.SlotKnappingOutput;
-import net.dries007.tfc.module.core.api.container.ContainerItemStack;
-import net.dries007.tfc.module.core.api.container.IButtonHandler;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.objects.container.ContainerItemStack;
+import net.dries007.tfc.module.core.api.objects.container.IButtonHandler;
+import net.dries007.tfc.module.core.init.RegistryCore;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.SimpleCraftMatrix;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -130,7 +130,11 @@ public class ContainerKnapping extends ContainerItemStack implements IButtonHand
     }
 
     private KnappingRecipe getMatchingRecipe() {
-        return TFCRegistries.KNAPPING.getValuesCollection().stream().filter(x -> x.getType() == type && matrix.matches(x.getMatrix())).findFirst().orElse(null);
+        return RegistryCore.KNAPPING.getValuesCollection()
+                .stream()
+                .filter(x -> x.getType() == type && matrix.matches(x.getMatrix()))
+                .findFirst()
+                .orElse(null);
     }
 
     private void consumeIngredientStackAfterComplete() {

@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.core.objects.tiles;
 
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.core.api.tile.TEBase;
+import net.dries007.tfc.module.core.api.objects.tile.TEBase;
 import net.dries007.tfc.util.Constants;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.AxisAlignedBB;

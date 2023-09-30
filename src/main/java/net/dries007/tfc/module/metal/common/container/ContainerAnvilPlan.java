@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.metal.common.container;
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.api.container.ContainerTE;
-import net.dries007.tfc.module.core.api.container.IButtonHandler;
+import net.dries007.tfc.module.core.api.objects.container.ContainerTE;
+import net.dries007.tfc.module.core.api.objects.container.IButtonHandler;
+import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,7 +22,7 @@ public class ContainerAnvilPlan extends ContainerTE<TEMetalAnvil> implements IBu
         if (extraNBT != null) {
             // Set the tile recipe
             String recipeName = extraNBT.getString("recipe");
-            AnvilRecipe recipe = TFCRegistries.ANVIL.getValue(new ResourceLocation(recipeName));
+            AnvilRecipe recipe = RegistryCore.ANVIL.getValue(new ResourceLocation(recipeName));
             if (tile.setRecipe(recipe)) {
                 tile.markForSync();
             }

@@ -1,14 +1,27 @@
 package net.dries007.tfc.client;
 
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.network.PacketCycleItemMode;
+import net.dries007.tfc.network.PacketOpenCraftingGui;
+import net.dries007.tfc.network.PacketPlaceBlockSpecial;
+import net.dries007.tfc.network.PacketStackFood;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.inventory.Slot;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
+import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.Tags.MOD_NAME;
 
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
 @SideOnly(Side.CLIENT)
 public class TFCKeybindings {
     public static final KeyBinding OPEN_CRAFTING_TABLE = new KeyBinding("tfc.key.craft", KeyConflictContext.IN_GAME, Keyboard.KEY_C, MOD_NAME);
@@ -21,5 +34,34 @@ public class TFCKeybindings {
         ClientRegistry.registerKeyBinding(PLACE_BLOCK);
         ClientRegistry.registerKeyBinding(CHANGE_ITEM_MODE);
         ClientRegistry.registerKeyBinding(STACK_FOOD);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public static void onKeyEvent(InputEvent event) {
+        // todo: move this to a button on the inventory GUI
+        if (TFCKeybindings.OPEN_CRAFTING_TABLE.isPressed()) {
+            TerraFirmaCraft.network.sendToServer(new PacketOpenCraftingGui());
+        }
+        if (TFCKeybindings.PLACE_BLOCK.isPressed()) {
+            TerraFirmaCraft.network.sendToServer(new PacketPlaceBlockSpecial());
+        }
+        if (TFCKeybindings.CHANGE_ITEM_MODE.isPressed()) {
+            TerraFirmaCraft.network.sendToServer(new PacketCycleItemMode());
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public static void onKeyEvent(GuiScreenEvent.KeyboardInputEvent.Pre event) {
+        //Only handle when key was pressed, ignore release and hold
+        if (!Keyboard.isRepeatEvent() && Keyboard.getEventKeyState() && Keyboard.getEventKey() == TFCKeybindings.STACK_FOOD.getKeyCode()) {
+            if (event.getGui() instanceof GuiContainer) {
+                Slot slotUnderMouse = ((GuiContainer) event.getGui()).getSlotUnderMouse();
+                if (slotUnderMouse != null) {
+                    TerraFirmaCraft.network.sendToServer(new PacketStackFood(slotUnderMouse.slotNumber));
+                }
+            }
+        }
     }
 }

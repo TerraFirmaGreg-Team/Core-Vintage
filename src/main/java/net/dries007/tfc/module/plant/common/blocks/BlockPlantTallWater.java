@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.plant.common.blocks;
 
 import net.dries007.tfc.api.util.property.ITallPlant;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -45,9 +45,9 @@ public class BlockPlantTallWater extends BlockPlantWater implements IGrowable, I
         //noinspection StatementWithEmptyBody
         for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) ;
         if (water == SALT_WATER)
-            return i < plant.getMaxHeight() && TFCBlocks.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
+            return i < plant.getMaxHeight() && Helpers.isSaltWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
         else
-            return i < plant.getMaxHeight() && TFCBlocks.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
+            return i < plant.getMaxHeight() && Helpers.isFreshWater(worldIn.getBlockState(pos.up())) && canBlockStay(worldIn, pos.up(), state);
     }
 
     @Override

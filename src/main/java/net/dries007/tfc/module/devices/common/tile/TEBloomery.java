@@ -8,7 +8,7 @@ import net.dries007.tfc.module.devices.common.blocks.BlockBloomery;
 import net.dries007.tfc.module.devices.common.blocks.BlockCharcoalPile;
 import net.dries007.tfc.module.devices.common.blocks.BlockMolten;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;

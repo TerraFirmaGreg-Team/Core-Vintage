@@ -3,7 +3,7 @@ package net.dries007.tfc.compat.gregtech.items.tools.behaviors;
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import gregtech.common.blocks.BlockOre;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
 import net.dries007.tfc.module.core.events.ProspectEvent;
@@ -106,7 +106,7 @@ public class PropickBehavior implements IToolBehavior {
 
                 MinecraftForge.EVENT_BUS.post(event);
                 PacketProspectResult packet = new PacketProspectResult(event.getBlockPos(), event.getResultType(), event.getMaterialName());
-                TerraFirmaGreg.network.sendTo(packet, (EntityPlayerMP) player);
+                TerraFirmaCraft.network.sendTo(packet, (EntityPlayerMP) player);
             } else {
                 //client side, add hit particles
                 addHitBlockParticle(worldIn, pos, facing, state);

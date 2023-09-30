@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.module.ceramic.common.items.ItemMold;
 import net.dries007.tfc.util.Constants;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;

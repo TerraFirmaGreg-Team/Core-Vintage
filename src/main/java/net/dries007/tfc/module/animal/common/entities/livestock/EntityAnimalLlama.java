@@ -1,11 +1,10 @@
 package net.dries007.tfc.module.animal.common.entities.livestock;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
@@ -13,6 +12,7 @@ import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.animal.common.entities.AnimalGroupingRules;
 import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
 import net.dries007.tfc.module.animal.common.entities.ai.EntityAnimalAIPanic;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.Constants;
@@ -145,7 +145,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
                     if (!this.world.isRemote) {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                            TerraFirmaGreg.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                            TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
                         }
                     }
                 }
@@ -264,7 +264,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
         return this.world.checkNoEntityCollision(getEntityBoundingBox())
                 && this.world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty()
                 && !this.world.containsAnyLiquid(getEntityBoundingBox())
-                && TFCBlocks.isGround(this.world.getBlockState(this.getPosition().down()));
+                && Helpers.isGround(this.world.getBlockState(this.getPosition().down()));
     }
 
     @Override

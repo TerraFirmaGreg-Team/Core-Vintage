@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.plant.common.blocks;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.api.variant.block.IPlantBlock;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
@@ -55,7 +55,7 @@ public class BlockPlantFloatingWater extends BlockPlant implements IPlantBlock {
 
     @Override
     protected boolean canSustainBush(IBlockState state) {
-        return (TFCBlocks.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) || (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater));
+        return (Helpers.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) || (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockPlantEmergentTallWater));
     }
 
     @Override

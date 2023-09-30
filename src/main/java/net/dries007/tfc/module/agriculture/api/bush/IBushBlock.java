@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.agriculture.api.bush;
 
-import net.dries007.tfc.TerraFirmaGreg;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.module.agriculture.api.bush.type.BushType;
@@ -18,38 +18,27 @@ public interface IBushBlock extends IHasModel, IItemProvider {
     @Nonnull
     BushType getType();
 
-
     /**
-     * Возвращает местоположение регистрации блока.
+     * Возвращает имя объекта.
      *
-     * @return Местоположение регистрации блока.
+     * @return Имя объекта.
      */
     @Nonnull
-    default ResourceLocation getRegistryLocation() {
-        return TerraFirmaGreg.getID(String.format("berry_bush/%s", getType()));
+    default String getName() {
+        return String.format("berry_bush.%s", getType());
     }
 
+
     /**
-     * Возвращает местоположение ресурса блока.
+     * Возвращает местоположение ресурса блока породы.
      *
-     * @return Местоположение ресурса блока.
+     * @return Расположение ресурса.
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaGreg.getID(String.format("berry_bush/%s", getType()));
+        return TerraFirmaCraft.getID(String.format("berry_bush/%s", getType()));
     }
 
-    /**
-     * Возвращает ключ перевода блока.
-     *
-     * @return Ключ перевода блока.
-     */
-    @Nonnull
-    default String getTranslationName() {
-        return getRegistryLocation().toString().toLowerCase()
-                .replace(":", ".")
-                .replace("/", ".");
-    }
 
     /**
      * Размеры куста.

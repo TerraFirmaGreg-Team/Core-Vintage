@@ -1,8 +1,9 @@
 package net.dries007.tfc.world.classic;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.types.category.RockCategory;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
@@ -68,7 +69,7 @@ public class ChunkGenTFC implements IChunkGenerator {
     public static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
     /* Layers must be one here - otherwise snow becomes non-replaceable and wrecks the rest of world gen */
     public static final IBlockState SNOW = Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1);
-    public static final IBlockState SALT_WATER_ICE = TFCBlocks.SEA_ICE.getDefaultState();
+    public static final IBlockState SALT_WATER_ICE = BlocksCore.SEA_ICE.getDefaultState();
     public static final IBlockState FRESH_WATER_ICE = Blocks.ICE.getDefaultState();
     private static final float[] parabolicField = new float[25];
 
@@ -692,8 +693,8 @@ public class ChunkGenTFC implements IChunkGenerator {
                      */
                     if (outp.isEmpty(x, y + yOffset, z)) {
                         outp.setBlockState(x, y + yOffset, z, inp.getBlockState(x, y, z));
-                        if (y + 1 < yOffset && outp.getBlockState(x, y + yOffset, z) == AIR/* нет необходимости проверять снова && TFCBlocks.isSoilOrGravel(outp.getBlockState(x, y + yOffset + 1, z))*/) {
-                            for (int upCount = 1; TFCBlocks.isSoilOrGravel(outp.getBlockState(x, y + yOffset + upCount, z)); upCount++) {
+                        if (y + 1 < yOffset && outp.getBlockState(x, y + yOffset, z) == AIR/* нет необходимости проверять снова && BlocksCore.isSoilOrGravel(outp.getBlockState(x, y + yOffset + 1, z))*/) {
+                            for (int upCount = 1; Helpers.isSoilOrGravel(outp.getBlockState(x, y + yOffset + upCount, z)); upCount++) {
                                 outp.setBlockState(x, y + yOffset + upCount, z, AIR);
                             }
                         }
@@ -785,7 +786,7 @@ public class ChunkGenTFC implements IChunkGenerator {
                                 if (yOffset + y + c > 256) continue;
 
                                 IBlockState current = outp.getBlockState(x, yOffset + y + c, z);
-                                if (current != surfaceBlock && current != subSurfaceBlock && !TFCBlocks.isWater(current)) {
+                                if (current != surfaceBlock && current != subSurfaceBlock && !Helpers.isWater(current)) {
                                     outp.setBlockState(x, yOffset + y + c, z, AIR);
                                     if (yOffset + y + c + 1 > 256) continue;
                                     if (outp.getBlockState(x, yOffset + y + c + 1, z) == SALT_WATER)

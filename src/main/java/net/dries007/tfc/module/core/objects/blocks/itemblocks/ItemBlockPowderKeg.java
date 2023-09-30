@@ -2,7 +2,7 @@ package net.dries007.tfc.module.core.objects.blocks.itemblocks;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.module.core.api.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.core.objects.blocks.BlockPowderKeg;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

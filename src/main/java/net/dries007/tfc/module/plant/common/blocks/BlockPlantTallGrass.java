@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.plant.common.blocks;
 
 import net.dries007.tfc.api.util.property.ITallPlant;
-import net.dries007.tfc.common.objects.items.TFCItems;
+import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.Constants;
@@ -116,7 +116,7 @@ public class BlockPlantTallGrass extends BlockPlantShortGrass implements IGrowab
                 for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
                     if (Constants.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i)).getValue(AGE) + 1) / 4.0D) //+25% change for each age
                     {
-                        spawnAsEntity(worldIn, pos, new ItemStack(TFCItems.STRAW, 1));
+                        spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
                     }
                 }
             }

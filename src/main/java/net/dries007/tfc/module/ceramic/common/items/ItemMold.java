@@ -3,15 +3,13 @@ package net.dries007.tfc.module.ceramic.common.items;
 import gregtech.api.fluids.MetaFluids;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.common.objects.CreativeTabsTFC;
-import net.dries007.tfc.module.core.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.module.core.objects.container.CapabilityContainerListener;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,13 +35,10 @@ import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_
 @ParametersAreNonnullByDefault
 public class ItemMold extends ItemPottery {
 
-    private final OrePrefix orePrefix;
+    public final OrePrefix orePrefix;
 
     public ItemMold(OrePrefix type) {
         this.orePrefix = type;
-
-        setCreativeTab(CreativeTabsTFC.POTTERY_TAB);
-        setRegistryName(Tags.MOD_ID, "ceramics/fired/mold/" + orePrefix.name.toLowerCase());
     }
 
     @Nonnull

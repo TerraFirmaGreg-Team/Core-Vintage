@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.mapgen;
 
-import net.dries007.tfc.common.objects.blocks.TFCBlocks;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
 import net.dries007.tfc.world.classic.DataLayer;
 import net.minecraft.block.state.IBlockState;
@@ -150,7 +150,7 @@ public class MapGenCavesTFC extends MapGenBase {
                 for (int xCoord = Math.max(initialX - 1, 0); xCoord < Math.min(maxX + 1, 16); ++xCoord) {
                     for (int zCoord = Math.max(initialZ - 1, 0); zCoord < Math.min(maxZ + 1, 16); ++zCoord) {
                         for (int yCoord = Math.min(initialY + 1, 250); yCoord > Math.max(minY - 1, 0); --yCoord) {
-                            if (TFCBlocks.isWater(primer.getBlockState(xCoord, yCoord, zCoord)))
+                            if (Helpers.isWater(primer.getBlockState(xCoord, yCoord, zCoord)))
                                 continue outer;
                         }
                     }
@@ -174,11 +174,11 @@ public class MapGenCavesTFC extends MapGenBase {
 
                             final IBlockState current = primer.getBlockState(xCoord, y, zCoord);
 
-                            if (!TFCBlocks.isSoil(current) && !TFCBlocks.isRawStone(current)) continue;
+                            if (!Helpers.isSoil(current) && !Helpers.isRawStone(current)) continue;
 
-                            if (TFCBlocks.isGrass(current)) grass = primer.getBlockState(xCoord, y, zCoord);
+                            if (Helpers.isGrass(current)) grass = primer.getBlockState(xCoord, y, zCoord);
 
-                            for (int upCount = 1; TFCBlocks.isSoilOrGravel(primer.getBlockState(xCoord, y + upCount, zCoord)); upCount++)
+                            for (int upCount = 1; Helpers.isSoilOrGravel(primer.getBlockState(xCoord, y + upCount, zCoord)); upCount++)
                                 primer.setBlockState(xCoord, y + upCount, zCoord, AIR);
 
 
@@ -186,7 +186,7 @@ public class MapGenCavesTFC extends MapGenBase {
                                 primer.setBlockState(xCoord, y, zCoord, LAVA);
                             } else {
                                 primer.setBlockState(xCoord, y, zCoord, AIR);
-                                if (grass != null && TFCBlocks.isDirt(primer.getBlockState(xCoord, y - 1, zCoord))) {
+                                if (grass != null && Helpers.isDirt(primer.getBlockState(xCoord, y - 1, zCoord))) {
                                     primer.setBlockState(xCoord, y - 1, zCoord, grass);
                                 }
                             }

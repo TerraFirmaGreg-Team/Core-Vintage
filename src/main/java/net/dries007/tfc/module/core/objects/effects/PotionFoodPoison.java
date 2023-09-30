@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.objects.effects;
 
-import net.dries007.tfc.module.core.api.effects.PotionBase;
+import net.dries007.tfc.module.core.api.objects.effects.PotionBase;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.minecraft.entity.EntityLivingBase;
 

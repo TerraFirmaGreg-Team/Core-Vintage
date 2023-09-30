@@ -2,7 +2,7 @@ package net.dries007.tfc.module.rock.plugin.jei.wrappers;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import net.dries007.tfc.api.recipes.ChiselRecipe;
+import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
 import net.dries007.tfc.compat.jei.JEIIntegration;
 import net.dries007.tfc.module.core.api.plugin.jei.IRecipeWrapperBase;
 import net.dries007.tfc.module.core.init.BlocksCore;
@@ -18,11 +18,11 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class JEIRecipeWrapperChisel implements IRecipeWrapperBase {
-    private final ChiselRecipe recipe;
+    private final RecipeRockChisel recipe;
     private final List<ItemStack> ingredients;
     private final ItemStack output;
 
-    public JEIRecipeWrapperChisel(ChiselRecipe recipe) {
+    public JEIRecipeWrapperChisel(RecipeRockChisel recipe) {
         this.recipe = recipe;
         ingredients = new ArrayList<>();
         // Although this looks resource-intensive, it's done one time only

@@ -5,7 +5,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.StoneType;
 import gregtech.common.blocks.BlockOre;
 import gregtech.common.blocks.properties.PropertyStoneType;
-import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.module.core.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.types.type.RockType;

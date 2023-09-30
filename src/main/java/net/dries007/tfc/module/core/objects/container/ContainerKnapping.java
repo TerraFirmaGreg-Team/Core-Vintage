@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.objects.container;
 
-import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.module.core.api.recipes.knapping.KnappingRecipe;
+import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.common.objects.inventory.slot.SlotKnappingOutput;
 import net.dries007.tfc.module.core.api.objects.container.ContainerItemStack;
 import net.dries007.tfc.module.core.api.objects.container.IButtonHandler;

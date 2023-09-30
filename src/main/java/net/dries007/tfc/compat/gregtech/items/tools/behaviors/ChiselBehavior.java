@@ -5,8 +5,8 @@ import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.recipes.ChiselRecipe;
-import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
+import net.dries007.tfc.module.core.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.objects.container.ContainerEmpty;
@@ -99,16 +99,16 @@ public class ChiselBehavior implements IToolBehavior {
 
     @Nullable
     @SuppressWarnings("deprecation")
-    private static IBlockState getRecipeResult(EntityPlayer player, World worldIn, BlockPos pos, EnumFacing facing, ChiselRecipe.Mode chiselMode, IBlockState targetState, float hitX, float hitY, float hitZ) {
-        if (chiselMode == ChiselRecipe.Mode.SMOOTH) {
-            ChiselRecipe recipe = ChiselRecipe.get(targetState);
+    private static IBlockState getRecipeResult(EntityPlayer player, World worldIn, BlockPos pos, EnumFacing facing, RecipeRockChisel.Mode chiselMode, IBlockState targetState, float hitX, float hitY, float hitZ) {
+        if (chiselMode == RecipeRockChisel.Mode.SMOOTH) {
+            RecipeRockChisel recipe = RecipeRockChisel.get(targetState);
             if (recipe != null) {
                 return recipe.getOutputState();
             }
-        } else if (chiselMode == ChiselRecipe.Mode.SLAB || chiselMode == ChiselRecipe.Mode.STAIR) {
+        } else if (chiselMode == RecipeRockChisel.Mode.SLAB || chiselMode == RecipeRockChisel.Mode.STAIR) {
             //noinspection ConstantConditions
             ItemStack targetStack = targetState.getBlock().getPickBlock(targetState, null, worldIn, pos, player);
-            ItemStack resultItemStack = findCraftingResult(worldIn, targetStack, (chiselMode == ChiselRecipe.Mode.SLAB ? SLAB_PATTERN_INDICES : STAIR_PATTERN_INDICES));
+            ItemStack resultItemStack = findCraftingResult(worldIn, targetStack, (chiselMode == RecipeRockChisel.Mode.SLAB ? SLAB_PATTERN_INDICES : STAIR_PATTERN_INDICES));
 
             if (resultItemStack != null) {
                 Item resultItem = resultItemStack.getItem();
@@ -116,7 +116,7 @@ public class ChiselBehavior implements IToolBehavior {
                 if (resultItem instanceof ItemBlock) {
                     block = ((ItemBlock) resultItem).getBlock();
 
-                    if ((chiselMode == ChiselRecipe.Mode.SLAB && block instanceof BlockSlab) || (chiselMode == ChiselRecipe.Mode.STAIR && block instanceof BlockStairs)) {
+                    if ((chiselMode == RecipeRockChisel.Mode.SLAB && block instanceof BlockSlab) || (chiselMode == RecipeRockChisel.Mode.STAIR && block instanceof BlockStairs)) {
                         if (facing.getAxis().getPlane() != EnumFacing.Plane.VERTICAL)
                             hitY = 1 - hitY;
 
@@ -183,7 +183,7 @@ public class ChiselBehavior implements IToolBehavior {
                 // spawn a slab if necessary
                 IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
                 if (capability != null) {
-                    if (capability.getChiselMode() == ChiselRecipe.Mode.SLAB) {
+                    if (capability.getChiselMode() == RecipeRockChisel.Mode.SLAB) {
                         InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(newState.getBlock(), 1));
                     }
                 }

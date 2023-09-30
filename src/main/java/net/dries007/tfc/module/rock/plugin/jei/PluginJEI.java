@@ -6,7 +6,7 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.gui.GuiKnapping;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.module.core.init.RegistryCore;

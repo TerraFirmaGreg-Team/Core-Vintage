@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.food.api.types.variant.Item;
 
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.food.api.types.type.FoodType;
 
 import javax.annotation.Nonnull;

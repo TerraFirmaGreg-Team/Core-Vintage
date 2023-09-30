@@ -1,6 +1,6 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
-import net.dries007.tfc.api.recipes.WeldingRecipe;
+import net.dries007.tfc.module.core.api.recipes.WeldingRecipe;
 import net.minecraft.client.Minecraft;
 
 public class WeldingRecipeWrapper extends SimpleRecipeWrapper {

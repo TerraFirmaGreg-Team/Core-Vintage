@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.plant.api.types.type;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.plant.api.types.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;

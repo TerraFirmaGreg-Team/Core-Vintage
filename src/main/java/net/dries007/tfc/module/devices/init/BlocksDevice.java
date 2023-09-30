@@ -3,7 +3,7 @@ package net.dries007.tfc.module.devices.init;
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.util.RegistryHelper;
+import net.dries007.tfc.module.core.api.util.RegistryHelper;
 import net.dries007.tfc.module.devices.client.render.*;
 import net.dries007.tfc.module.devices.objects.blocks.*;
 import net.dries007.tfc.module.devices.objects.tile.*;

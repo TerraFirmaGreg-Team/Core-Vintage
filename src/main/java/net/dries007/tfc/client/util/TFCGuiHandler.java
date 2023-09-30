@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.util;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.module.animal.objects.container.ContainerNestBox;
 import net.dries007.tfc.module.animal.objects.tiles.TENestBox;

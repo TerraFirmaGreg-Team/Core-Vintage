@@ -7,7 +7,7 @@ import net.dries007.tfc.api.capability.fluid.IFluidTankCallback;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.config.ConfigTFC;

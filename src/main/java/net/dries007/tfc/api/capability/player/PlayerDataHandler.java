@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.player;
 
-import net.dries007.tfc.api.recipes.ChiselRecipe;
+import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.skills.Skill;
@@ -28,7 +28,7 @@ public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound
     private long intoxicatedTime;
     private boolean hasBook;
 
-    private ChiselRecipe.Mode chiselMode = ChiselRecipe.Mode.SMOOTH;
+    private RecipeRockChisel.Mode chiselMode = RecipeRockChisel.Mode.SMOOTH;
 
     public PlayerDataHandler(EntityPlayer player) {
         this.skills = SkillType.createSkillMap(this);
@@ -53,7 +53,7 @@ public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound
     public void deserializeNBT(@Nullable NBTTagCompound nbt) {
         if (nbt != null) {
             skills.forEach((k, v) -> v.deserializeNBT(nbt.getCompoundTag(k)));
-            chiselMode = ChiselRecipe.Mode.valueOf(nbt.getByte("chiselMode"));
+            chiselMode = RecipeRockChisel.Mode.valueOf(nbt.getByte("chiselMode"));
             harvestingTool = new ItemStack(nbt.getCompoundTag("harvestingTool"));
             hasBook = nbt.getBoolean("hasBook");
             intoxicatedTime = nbt.getLong("intoxicatedTime");
@@ -86,12 +86,12 @@ public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound
 
     @Override
     @Nonnull
-    public ChiselRecipe.Mode getChiselMode() {
+    public RecipeRockChisel.Mode getChiselMode() {
         return chiselMode;
     }
 
     @Override
-    public void setChiselMode(ChiselRecipe.Mode chiselMode) {
+    public void setChiselMode(RecipeRockChisel.Mode chiselMode) {
         this.chiselMode = chiselMode;
     }
 

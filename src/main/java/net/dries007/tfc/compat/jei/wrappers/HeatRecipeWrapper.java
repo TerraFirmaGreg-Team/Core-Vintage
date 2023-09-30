@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
 import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.recipes.heat.HeatRecipe;
+import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipe;
 import net.minecraft.client.Minecraft;
 
 public class HeatRecipeWrapper extends SimpleRecipeWrapper {

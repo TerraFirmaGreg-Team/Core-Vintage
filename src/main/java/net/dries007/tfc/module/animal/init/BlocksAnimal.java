@@ -2,7 +2,7 @@ package net.dries007.tfc.module.animal.init;
 
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import com.codetaylor.mc.athenaeum.util.ModelRegistrationHelper;
-import net.dries007.tfc.api.util.RegistryHelper;
+import net.dries007.tfc.module.core.api.util.RegistryHelper;
 import net.dries007.tfc.module.animal.objects.blocks.BlockNestBox;
 import net.dries007.tfc.module.animal.objects.tiles.TENestBox;
 import net.minecraftforge.fml.relauncher.Side;

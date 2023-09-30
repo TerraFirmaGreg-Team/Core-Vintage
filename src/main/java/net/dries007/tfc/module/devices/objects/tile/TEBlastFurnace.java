@@ -5,8 +5,7 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
-import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
-import net.dries007.tfc.api.util.IHeatConsumerBlock;
+import net.dries007.tfc.module.core.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.objects.tile.ITileFields;
@@ -15,9 +14,10 @@ import net.dries007.tfc.module.core.api.util.fuel.Fuel;
 import net.dries007.tfc.module.core.api.util.fuel.FuelManager;
 import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.module.devices.ModuleDevice;
+import net.dries007.tfc.module.devices.api.util.IHeatConsumerBlock;
+import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.module.devices.objects.blocks.BlockBlastFurnace;
 import net.dries007.tfc.module.devices.objects.blocks.BlockMolten;
-import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Alloy;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -39,7 +39,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
+import static net.dries007.tfc.module.devices.api.util.property.ILightableBlock.LIT;
 
 @ParametersAreNonnullByDefault
 public class TEBlastFurnace extends TETickableInventory implements ITickable, ITileFields {

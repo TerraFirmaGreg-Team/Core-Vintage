@@ -4,7 +4,7 @@
 //import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 //import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariant;
 //import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants;
-//import net.dries007.tfc.api.util.IGrowingPlant;
+//import net.dries007.tfc.module.agriculture.api.util.IGrowingPlant;
 //import net.dries007.tfc.common.objects.blocks.TFCBlocks;
 //import net.dries007.tfc.module.core.submodule.wood.common.blocks.BlockWoodLeaves;
 //import net.dries007.tfc.module.core.common.tiles.TETickCounter;

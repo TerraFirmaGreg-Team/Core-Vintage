@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.devices.objects.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.util.IHasModel;
-import net.dries007.tfc.api.util.property.ILightableBlock;
+import net.dries007.tfc.module.core.api.util.IHasModel;
+import net.dries007.tfc.module.devices.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.core.api.util.Helpers;

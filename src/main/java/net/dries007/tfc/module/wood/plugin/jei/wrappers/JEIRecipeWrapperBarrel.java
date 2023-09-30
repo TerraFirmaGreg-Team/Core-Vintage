@@ -2,10 +2,10 @@ package net.dries007.tfc.module.wood.plugin.jei.wrappers;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
+import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipeFluidMixing;
+import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipeFoodPreservation;
+import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipeFoodTraits;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.plugin.jei.IRecipeWrapperBase;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.metal.api.types.variant.block;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.metal.api.types.type.MetalType;
 
 import javax.annotation.Nonnull;

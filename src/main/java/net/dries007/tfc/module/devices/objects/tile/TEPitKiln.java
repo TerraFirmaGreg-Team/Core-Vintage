@@ -3,7 +3,7 @@ package net.dries007.tfc.module.devices.objects.tile;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.recipes.heat.HeatRecipe;
+import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.init.BlocksCore;

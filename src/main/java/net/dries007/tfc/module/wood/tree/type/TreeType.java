@@ -14,7 +14,7 @@ import net.dries007.tfc.module.food.StorageFood;
 import net.dries007.tfc.module.food.api.types.type.FoodType;
 import net.dries007.tfc.module.food.api.types.variant.Item.FoodItemVariants;
 import net.dries007.tfc.module.wood.StorageWood;
-import net.dries007.tfc.module.wood.api.type.WoodType;
+import net.dries007.tfc.module.wood.api.types.type.WoodType;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.blocks.BlockTreeBranch;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.blocks.BlockTreeBranchThick;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.trees.WoodTreeSpecies;
@@ -35,8 +35,8 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import javax.annotation.Nonnull;
 import java.util.*;
 
-import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LEAVES;
-import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LOG;
+import static net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariants.LEAVES;
+import static net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariants.LOG;
 
 /**
  * Класс Wood представляет тип дерева с определенными характеристиками.

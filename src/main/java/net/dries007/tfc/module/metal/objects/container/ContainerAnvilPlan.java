@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.metal.objects.container;
 
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.module.core.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.api.objects.container.ContainerTE;
 import net.dries007.tfc.module.core.api.objects.container.IButtonHandler;

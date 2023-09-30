@@ -11,7 +11,7 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.module.wood.StorageWood;
-import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants;
+import net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariants;
 import net.dries007.tfc.module.wood.init.BlocksWood;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.dropcreators.DropCreatorWoodLog;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.items.ItemWoodSeed;

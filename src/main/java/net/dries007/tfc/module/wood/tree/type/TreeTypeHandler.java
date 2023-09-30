@@ -2,7 +2,7 @@ package net.dries007.tfc.module.wood.tree.type;
 
 import com.ferreusveritas.dynamictrees.ModTrees;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenVine;
-import net.dries007.tfc.module.wood.api.type.WoodTypes;
+import net.dries007.tfc.module.wood.api.types.type.WoodTypes;
 import net.dries007.tfc.world.classic.worldgen.WorldGenMound;
 
 public class TreeTypeHandler {

@@ -1,17 +1,18 @@
 package net.dries007.tfc.common.objects.recipes.handlers;
 
 
-import net.dries007.tfc.api.recipes.barrel.*;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientItemFood;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.module.animal.objects.items.ItemAnimalHide;
+import net.dries007.tfc.module.core.api.recipes.barrel.*;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.module.food.StorageFood;
 import net.dries007.tfc.module.food.api.types.type.FoodType;
+import net.dries007.tfc.module.wood.api.recipes.barrel.*;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.module.core.api.util.FallingBlockManager;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
@@ -54,7 +54,7 @@ import java.util.Collection;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_METAL;
+import static net.dries007.tfc.module.core.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_METAL;
 import static net.dries007.tfc.module.metal.StorageMetal.METAL_BLOCKS;
 import static net.dries007.tfc.module.metal.api.types.variant.block.MetalBlockVariants.ANVIL;
 import static net.dries007.tfc.util.Constants.RNG;

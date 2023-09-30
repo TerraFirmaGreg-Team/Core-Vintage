@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.soil.init;
 
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.module.soil.StorageSoil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;

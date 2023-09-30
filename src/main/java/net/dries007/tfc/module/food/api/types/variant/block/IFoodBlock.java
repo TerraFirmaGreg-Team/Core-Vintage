@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.food.api.types.variant.block;
 
-import net.dries007.tfc.api.util.IHasModel;
-import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.module.core.api.util.IHasModel;
+import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.food.api.types.type.FoodType;
 import net.minecraft.util.ResourceLocation;

@@ -4,14 +4,14 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.api.util.IHeatConsumerBlock;
+import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.objects.tile.ITileFields;
 import net.dries007.tfc.module.core.api.util.fuel.Fuel;
 import net.dries007.tfc.module.core.api.util.fuel.FuelManager;
 import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.module.devices.ModuleDevice;
+import net.dries007.tfc.module.devices.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
 
-import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
+import static net.dries007.tfc.module.devices.api.util.property.ILightableBlock.LIT;
 
 @ParametersAreNonnullByDefault
 public class TECharcoalForge extends TETickableInventory implements ICalendarTickable, ITileFields {

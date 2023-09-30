@@ -2,8 +2,8 @@ package net.dries007.tfc.common.objects.recipes.handlers;
 
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.module.core.api.recipes.knapping.KnappingRecipeSimple;
+import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.module.ceramic.StorageCeramic;

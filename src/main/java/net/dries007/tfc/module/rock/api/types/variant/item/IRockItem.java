@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.rock.api.types.variant.item;
 
-import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.rock.api.types.category.RockCategory;
 import net.dries007.tfc.module.rock.api.types.type.RockType;

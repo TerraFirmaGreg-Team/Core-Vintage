@@ -3,15 +3,15 @@ package net.dries007.tfc.module.wood.init;
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.util.IHasModel;
-import net.dries007.tfc.api.util.RegistryHelper;
+import net.dries007.tfc.module.core.api.util.IHasModel;
+import net.dries007.tfc.module.core.api.util.RegistryHelper;
 import net.dries007.tfc.client.util.GrassColorHandler;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.module.core.api.util.fuel.Fuel;
 import net.dries007.tfc.module.core.api.util.fuel.FuelManager;
 import net.dries007.tfc.module.wood.StorageWood;
-import net.dries007.tfc.module.wood.api.type.WoodType;
-import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
+import net.dries007.tfc.module.wood.api.types.type.WoodType;
+import net.dries007.tfc.module.wood.api.types.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.client.render.TESRWoodBarrel;
 import net.dries007.tfc.module.wood.client.render.TESRWoodChest;
 import net.dries007.tfc.module.wood.client.render.TESRWoodLoom;
@@ -31,7 +31,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static net.dries007.tfc.module.wood.StorageWood.WOOD_BLOCKS;
-import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LOG;
+import static net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariants.LOG;
 
 public class BlocksWood {
 

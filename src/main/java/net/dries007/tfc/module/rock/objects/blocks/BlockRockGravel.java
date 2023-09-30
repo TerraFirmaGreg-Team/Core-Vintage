@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.rock.objects.blocks;
 
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
-import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.module.core.api.util.FallingBlockManager;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
 import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
 import net.minecraft.block.SoundType;

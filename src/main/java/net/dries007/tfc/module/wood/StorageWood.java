@@ -1,12 +1,12 @@
 package net.dries007.tfc.module.wood;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.module.wood.api.type.WoodType;
-import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
-import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
-import net.dries007.tfc.module.wood.api.variant.item.IWoodItem;
-import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariant;
+import net.dries007.tfc.module.core.api.util.Pair;
+import net.dries007.tfc.module.wood.api.types.type.WoodType;
+import net.dries007.tfc.module.wood.api.types.variant.block.IWoodBlock;
+import net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariant;
+import net.dries007.tfc.module.wood.api.types.variant.item.IWoodItem;
+import net.dries007.tfc.module.wood.api.types.variant.item.WoodItemVariant;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 

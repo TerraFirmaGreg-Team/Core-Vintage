@@ -13,7 +13,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
+import static net.dries007.tfc.module.devices.api.util.property.ILightableBlock.LIT;
 
 public class ItemBlockTorch extends ItemBlockBase {
     public ItemBlockTorch(Block block) {

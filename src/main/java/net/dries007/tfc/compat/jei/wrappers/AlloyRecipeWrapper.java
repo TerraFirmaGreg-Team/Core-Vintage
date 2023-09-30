@@ -6,7 +6,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.dries007.tfc.api.recipes.AlloyRecipe;
+import net.dries007.tfc.module.core.api.recipes.AlloyRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fluids.FluidStack;
 

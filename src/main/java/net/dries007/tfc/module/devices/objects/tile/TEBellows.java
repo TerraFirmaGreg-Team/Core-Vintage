@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.devices.objects.tile;
 
-import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.objects.tile.TEBase;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.module.devices.ModuleDevice;
+import net.dries007.tfc.module.devices.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.module.devices.objects.blocks.BlockCharcoalForge;
 import net.dries007.tfc.module.devices.objects.blocks.BlockFirePit;
 import net.minecraft.block.Block;

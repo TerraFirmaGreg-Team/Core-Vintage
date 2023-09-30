@@ -2,9 +2,9 @@ package net.dries007.tfc.module.wood.objects.entities;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.module.wood.StorageWood;
-import net.dries007.tfc.module.wood.api.type.WoodType;
-import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
-import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariants;
+import net.dries007.tfc.module.wood.api.types.type.WoodType;
+import net.dries007.tfc.module.wood.api.types.variant.block.IWoodBlock;
+import net.dries007.tfc.module.wood.api.types.variant.item.WoodItemVariants;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;

@@ -3,9 +3,9 @@ package net.dries007.tfc.module.wood.objects.blocks;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.wood.StorageWood;
-import net.dries007.tfc.module.wood.api.type.WoodType;
-import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
-import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
+import net.dries007.tfc.module.wood.api.types.type.WoodType;
+import net.dries007.tfc.module.wood.api.types.variant.block.IWoodBlock;
+import net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -37,7 +37,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.SAPLING;
+import static net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariants.SAPLING;
 
 public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     private final WoodBlockVariant variant;

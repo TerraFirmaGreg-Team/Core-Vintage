@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.module.core.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvilPlan;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

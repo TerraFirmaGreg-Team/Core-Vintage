@@ -3,7 +3,7 @@ package net.dries007.tfc.util;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

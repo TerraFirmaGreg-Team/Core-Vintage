@@ -5,7 +5,7 @@ import com.codetaylor.mc.athenaeum.util.ModelRegistrationHelper;
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.GroundcoverType;
-import net.dries007.tfc.api.util.RegistryHelper;
+import net.dries007.tfc.module.core.api.util.RegistryHelper;
 import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.client.render.TESRPlacedHide;

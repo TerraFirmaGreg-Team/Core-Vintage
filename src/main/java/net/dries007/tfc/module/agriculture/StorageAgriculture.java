@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.agriculture;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.agriculture.api.types.bush.IBushBlock;
 import net.dries007.tfc.module.agriculture.api.types.bush.type.BushType;
 import net.dries007.tfc.module.agriculture.api.types.crop.type.CropType;

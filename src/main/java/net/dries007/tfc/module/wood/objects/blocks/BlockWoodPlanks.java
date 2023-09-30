@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.wood.objects.blocks;
 
-import net.dries007.tfc.module.wood.api.type.WoodType;
-import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
+import net.dries007.tfc.module.wood.api.types.type.WoodType;
+import net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariant;
 import net.minecraft.init.Blocks;
 
 public class BlockWoodPlanks extends BlockWood {

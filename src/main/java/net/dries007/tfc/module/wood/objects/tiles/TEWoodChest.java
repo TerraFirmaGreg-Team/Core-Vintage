@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
-import net.dries007.tfc.module.wood.api.type.WoodType;
+import net.dries007.tfc.module.wood.api.types.type.WoodType;
 import net.dries007.tfc.module.wood.objects.blocks.BlockWoodChest;
 import net.dries007.tfc.module.wood.objects.container.ContainerWoodChest;
 import net.dries007.tfc.module.wood.objects.inventory.capability.WoodDoubleChestItemHandler;

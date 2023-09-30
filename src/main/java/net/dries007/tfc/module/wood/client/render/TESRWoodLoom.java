@@ -2,7 +2,7 @@ package net.dries007.tfc.module.wood.client.render;
 
 import net.dries007.tfc.module.core.api.client.render.TESRBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.wood.api.type.WoodType;
+import net.dries007.tfc.module.wood.api.types.type.WoodType;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodLoom;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.common.objects.recipes.handlers;
 
-import net.dries007.tfc.api.recipes.quern.QuernRecipe;
+import net.dries007.tfc.module.core.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientItemFood;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;

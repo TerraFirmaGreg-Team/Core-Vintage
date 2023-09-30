@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.objects.blocks;
 
-import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.minecraft.block.BlockGravel;
 import net.minecraft.block.SoundType;

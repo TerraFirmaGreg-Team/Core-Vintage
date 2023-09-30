@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.agriculture.objects.blocks;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.module.agriculture.api.util.IGrowingPlant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.agriculture.StorageAgriculture;

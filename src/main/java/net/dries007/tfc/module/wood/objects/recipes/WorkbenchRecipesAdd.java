@@ -2,9 +2,9 @@ package net.dries007.tfc.module.wood.objects.recipes;
 
 import net.dries007.tfc.common.objects.recipes.IWorkbenchRecipes;
 import net.dries007.tfc.module.wood.StorageWood;
-import net.dries007.tfc.module.wood.api.type.WoodType;
-import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants;
-import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariants;
+import net.dries007.tfc.module.wood.api.types.type.WoodType;
+import net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariants;
+import net.dries007.tfc.module.wood.api.types.variant.item.WoodItemVariants;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

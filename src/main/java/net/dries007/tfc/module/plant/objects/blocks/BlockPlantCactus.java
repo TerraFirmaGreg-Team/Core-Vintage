@@ -2,7 +2,7 @@ package net.dries007.tfc.module.plant.objects.blocks;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.util.property.ITallPlant;
+import net.dries007.tfc.module.plant.api.util.property.ITallPlant;
 import net.dries007.tfc.module.plant.api.types.type.PlantType;
 import net.dries007.tfc.module.plant.api.types.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.climate.ClimateTFC;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.devices.objects.tile;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.api.recipes.BloomeryRecipe;
+import net.dries007.tfc.module.core.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
@@ -30,7 +30,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.api.util.property.ILightableBlock.LIT;
+import static net.dries007.tfc.module.devices.api.util.property.ILightableBlock.LIT;
 import static net.minecraft.block.BlockHorizontal.FACING;
 
 @SuppressWarnings("WeakerAccess")

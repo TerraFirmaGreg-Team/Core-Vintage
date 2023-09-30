@@ -2,8 +2,8 @@ package net.dries007.tfc.module.wood.plugin.dynamictrees.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.blocks.BlockRootyDirt;
-import net.dries007.tfc.api.util.IHasModel;
-import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.module.core.api.util.IHasModel;
+import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.api.types.type.SoilTypes;
 import net.dries007.tfc.module.soil.api.types.variant.block.ISoilBlock;

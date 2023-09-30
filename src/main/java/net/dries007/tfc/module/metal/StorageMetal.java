@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.metal;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.metal.api.types.type.MetalType;
 import net.dries007.tfc.module.metal.api.types.variant.Item.IMetalItem;
 import net.dries007.tfc.module.metal.api.types.variant.Item.MetalItemVariant;

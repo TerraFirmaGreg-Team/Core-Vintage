@@ -3,7 +3,7 @@ package net.dries007.tfc.network;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.recipes.ChiselRecipe;
+import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -20,7 +20,7 @@ public class PacketCycleItemMode implements IMessageEmpty {
                         IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
 
                         if (capability != null) {
-                            ChiselRecipe.Mode mode = capability.getChiselMode();
+                            RecipeRockChisel.Mode mode = capability.getChiselMode();
                             capability.setChiselMode(mode.next());
                             capability.updateAndSync();
                         }

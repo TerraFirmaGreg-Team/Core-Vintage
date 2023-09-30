@@ -3,7 +3,7 @@
 //import net.dries007.tfc.module.core.submodule.wood.api.variant.block.IWoodBlock;
 //import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 //import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariant;
-//import net.dries007.tfc.api.util.IGrowingPlant;
+//import net.dries007.tfc.module.agriculture.api.util.IGrowingPlant;
 //import net.dries007.tfc.client.util.CustomStateMap;
 //import net.dries007.tfc.module.core.api.util.CreativeTabsTFC;
 //import net.dries007.tfc.common.objects.blocks.TFCBlocks;

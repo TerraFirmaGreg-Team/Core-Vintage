@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.objects.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.util.IItemProvider;
+import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.dries007.tfc.module.animal.objects.items.ItemAnimalHide;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.minecraft.block.Block;

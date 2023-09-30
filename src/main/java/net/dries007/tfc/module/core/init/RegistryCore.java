@@ -1,12 +1,15 @@
 package net.dries007.tfc.module.core.init;
 
 import net.dries007.tfc.api.recipes.*;
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
-import net.dries007.tfc.api.recipes.quern.QuernRecipe;
+import net.dries007.tfc.module.core.api.recipes.*;
+import net.dries007.tfc.module.core.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
+import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipe;
+import net.dries007.tfc.module.core.api.recipes.knapping.KnappingRecipe;
+import net.dries007.tfc.module.core.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.wood.api.recipes.LoomRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -24,7 +27,7 @@ public class RegistryCore {
     public static final IForgeRegistry<BarrelRecipe> BARREL = GameRegistry.findRegistry(BarrelRecipe.class);
     public static final IForgeRegistry<LoomRecipe> LOOM = GameRegistry.findRegistry(LoomRecipe.class);
     public static final IForgeRegistry<QuernRecipe> QUERN = GameRegistry.findRegistry(QuernRecipe.class);
-    public static final IForgeRegistry<ChiselRecipe> CHISEL = GameRegistry.findRegistry(ChiselRecipe.class);
+    public static final IForgeRegistry<RecipeRockChisel> CHISEL = GameRegistry.findRegistry(RecipeRockChisel.class);
     public static final IForgeRegistry<BloomeryRecipe> BLOOMERY = GameRegistry.findRegistry(BloomeryRecipe.class);
     public static final IForgeRegistry<BlastFurnaceRecipe> BLAST_FURNACE = GameRegistry.findRegistry(BlastFurnaceRecipe.class);
 
@@ -78,9 +81,9 @@ public class RegistryCore {
                 .allowModification()
                 .create();
 
-        new RegistryBuilder<ChiselRecipe>()
+        new RegistryBuilder<RecipeRockChisel>()
                 .setName(Helpers.getID("chisel_recipe"))
-                .setType(ChiselRecipe.class)
+                .setType(RecipeRockChisel.class)
                 .allowModification()
                 .create();
 

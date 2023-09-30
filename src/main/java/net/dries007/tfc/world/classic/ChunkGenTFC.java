@@ -8,7 +8,7 @@ import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.types.category.RockCategory;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
 import net.dries007.tfc.module.soil.StorageSoil;
-import net.dries007.tfc.module.soil.api.type.SoilType;
+import net.dries007.tfc.module.soil.api.types.type.SoilType;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.*;
-import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*;
+import static net.dries007.tfc.module.soil.api.types.variant.block.SoilBlockVariants.*;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;

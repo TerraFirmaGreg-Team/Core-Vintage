@@ -12,7 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.DIRT;
+import static net.dries007.tfc.module.soil.api.types.variant.block.SoilBlockVariants.DIRT;
 
 /**
  * Класс WorldGenMound расширяет класс FeatureGenMound и используется для генерации холмов в мире.

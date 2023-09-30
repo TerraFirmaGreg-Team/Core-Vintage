@@ -10,9 +10,9 @@ import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalRabbi
 import net.dries007.tfc.module.animal.common.entities.livestock.*;
 import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalPolarBear;
 import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
-import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
-import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeat;
-import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeatGrass;
+import net.dries007.tfc.module.soil.api.types.variant.block.ISoilBlock;
+import net.dries007.tfc.module.soil.objects.blocks.peat.BlockPeat;
+import net.dries007.tfc.module.soil.objects.blocks.peat.BlockPeatGrass;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -55,7 +55,7 @@ import java.util.stream.Collectors;
 import static com.google.common.math.DoubleMath.mean;
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.*;
-import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*;
+import static net.dries007.tfc.module.soil.api.types.variant.block.SoilBlockVariants.*;
 import static net.minecraft.block.material.Material.WATER;
 
 public final class Helpers {

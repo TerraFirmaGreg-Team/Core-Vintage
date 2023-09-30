@@ -2,11 +2,11 @@ package net.dries007.tfc.module.plant;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.util.Pair;
-import net.dries007.tfc.module.plant.api.type.PlantType;
-import net.dries007.tfc.module.plant.api.variant.block.IPlantBlock;
-import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
-import net.dries007.tfc.module.plant.api.variant.item.IPlantItem;
-import net.dries007.tfc.module.plant.api.variant.item.PlantItemVariant;
+import net.dries007.tfc.module.plant.api.types.type.PlantType;
+import net.dries007.tfc.module.plant.api.types.variant.block.IPlantBlock;
+import net.dries007.tfc.module.plant.api.types.variant.block.PlantEnumVariant;
+import net.dries007.tfc.module.plant.api.types.variant.item.IPlantItem;
+import net.dries007.tfc.module.plant.api.types.variant.item.PlantItemVariant;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 

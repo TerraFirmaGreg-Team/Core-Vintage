@@ -5,9 +5,9 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.plant.api.type.PlantType;
-import net.dries007.tfc.module.plant.api.variant.block.IPlantBlock;
-import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
+import net.dries007.tfc.module.plant.api.types.type.PlantType;
+import net.dries007.tfc.module.plant.api.types.variant.block.IPlantBlock;
+import net.dries007.tfc.module.plant.api.types.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -304,7 +304,7 @@ public class BlockPlant extends BlockBush implements IPlantBlock, IItemSize {
     }
 
     @Nonnull
-    public PlantType.EnumPlantType getEnumType() {
+    public PlantType.EnumType getEnumType() {
         return plant.getEnumPlantType();
     }
 

@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.plant.common.blocks;
 
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.plant.api.type.PlantType;
-import net.dries007.tfc.module.plant.api.variant.block.IPlantBlock;
-import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
+import net.dries007.tfc.module.plant.api.types.type.PlantType;
+import net.dries007.tfc.module.plant.api.types.variant.block.IPlantBlock;
+import net.dries007.tfc.module.plant.api.types.variant.block.PlantEnumVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;

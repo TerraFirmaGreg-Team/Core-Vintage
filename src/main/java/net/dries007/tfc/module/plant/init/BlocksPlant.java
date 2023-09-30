@@ -11,8 +11,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static net.dries007.tfc.module.plant.StoragePlant.PLANT_BLOCKS;
-import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.SHORT_GRASS;
-import static net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant.TALL_GRASS;
+import static net.dries007.tfc.module.plant.api.types.variant.block.PlantEnumVariant.SHORT_GRASS;
+import static net.dries007.tfc.module.plant.api.types.variant.block.PlantEnumVariant.TALL_GRASS;
 
 public class BlocksPlant {
 

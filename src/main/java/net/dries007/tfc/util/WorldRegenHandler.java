@@ -12,8 +12,8 @@ import net.dries007.tfc.module.animal.api.type.IPredator;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.objects.tiles.TEPlacedItemFlat;
 import net.dries007.tfc.module.plant.common.blocks.BlockPlantMushroom;
-import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
-import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
+import net.dries007.tfc.module.soil.api.types.variant.block.ISoilBlock;
+import net.dries007.tfc.module.soil.api.types.variant.block.SoilBlockVariants;
 import net.dries007.tfc.module.wood.tree.type.TreeType;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
@@ -49,7 +49,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import java.util.*;
 
 import static net.dries007.tfc.module.agriculture.common.blocks.BlockCropGrowing.WILD;
-import static net.dries007.tfc.module.plant.api.type.PlantTypes.PORCINI;
+import static net.dries007.tfc.module.plant.api.types.type.PlantTypes.PORCINI;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.

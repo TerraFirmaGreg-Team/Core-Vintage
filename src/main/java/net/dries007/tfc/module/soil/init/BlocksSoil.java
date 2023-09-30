@@ -4,9 +4,10 @@ import com.codetaylor.mc.athenaeum.registry.Registry;
 import com.codetaylor.mc.athenaeum.util.ModelRegistrationHelper;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.client.util.GrassColorHandler;
-import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
-import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeat;
-import net.dries007.tfc.module.soil.common.blocks.peat.BlockPeatGrass;
+import net.dries007.tfc.module.soil.StorageSoil;
+import net.dries007.tfc.module.soil.objects.blocks.BlockSoilFarmland;
+import net.dries007.tfc.module.soil.objects.blocks.peat.BlockPeat;
+import net.dries007.tfc.module.soil.objects.blocks.peat.BlockPeatGrass;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -14,8 +15,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.module.soil.StorageSoil.SOIL_BLOCKS;
-import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.FARMLAND;
+import static net.dries007.tfc.module.soil.api.types.variant.block.SoilBlockVariants.FARMLAND;
 
 public class BlocksSoil {
 
@@ -23,7 +23,7 @@ public class BlocksSoil {
     public static BlockPeat PEAT;
 
     public static void onRegister(Registry registry) {
-        for (var block : SOIL_BLOCKS.values()) {
+        for (var block : StorageSoil.SOIL_BLOCKS.values()) {
             var itemBlock = block.getItemBlock();
             if (itemBlock != null) registry.registerBlock((Block) block, block.getItemBlock(), block.getName());
             else registry.registerBlock((Block) block, block.getName());
@@ -38,7 +38,7 @@ public class BlocksSoil {
     public static void onClientRegister(Registry registry) {
         registry.registerClientModelRegistrationStrategy(() -> {
 
-            SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
+            StorageSoil.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
 
             ModelRegistrationHelper.registerBlockItemModels(
                     PEAT_GRASS,
@@ -56,7 +56,7 @@ public class BlocksSoil {
 
 
         blockColors.registerBlockColorHandler(grassColor,
-                SOIL_BLOCKS.values()
+                StorageSoil.SOIL_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant().isGrass())
                         .map(s -> (Block) s)
@@ -64,7 +64,7 @@ public class BlocksSoil {
 
         blockColors.registerBlockColorHandler((s, w, p, i) ->
                         BlockSoilFarmland.TINT[s.getValue(BlockSoilFarmland.MOISTURE)],
-                SOIL_BLOCKS.values()
+                StorageSoil.SOIL_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant() == FARMLAND)
                         .map(s -> (Block) s)
@@ -74,7 +74,7 @@ public class BlocksSoil {
 
         itemColors.registerItemColorHandler((s, i) ->
                         blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock().getDefaultState(), null, null, i),
-                SOIL_BLOCKS.values()
+                StorageSoil.SOIL_BLOCKS.values()
                         .stream()
                         .filter(x -> x.getBlockVariant().isGrass())
                         .map(s -> (Block) s)

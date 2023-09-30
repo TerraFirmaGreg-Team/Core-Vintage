@@ -12,11 +12,11 @@ import net.dries007.tfc.module.agriculture.api.crop.variant.block.CropBlockVaria
 import net.dries007.tfc.module.agriculture.api.crop.variant.block.ICropBlock;
 import net.dries007.tfc.module.agriculture.common.tile.TECropBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SkillType;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
@@ -301,8 +301,8 @@ public class BlockCropGrowing extends BlockCrops implements IGrowingPlant, IPlan
                 // Если нельзя видеть небо или почва не увлажнена, сбрасываем счетчик роста
                 IBlockState stateFarmland = worldIn.getBlockState(pos.down());
                 if (!state.getValue(WILD)) {
-                    if (!worldIn.canSeeSky(pos) || (stateFarmland.getBlock() instanceof BlockSoilFarmland &&
-                            stateFarmland.getValue(BlockSoilFarmland.MOISTURE) < 3)) {
+                    if (!worldIn.canSeeSky(pos) || (stateFarmland.getBlock() instanceof BlockFarmland &&
+                            stateFarmland.getValue(BlockFarmland.MOISTURE) < 3)) {
                         te.resetCounter();
                         return;
                     }

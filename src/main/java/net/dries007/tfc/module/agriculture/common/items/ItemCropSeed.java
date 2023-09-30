@@ -5,8 +5,8 @@ import net.dries007.tfc.module.agriculture.api.crop.type.CropType;
 import net.dries007.tfc.module.agriculture.api.crop.variant.item.CropItemVariant;
 import net.dries007.tfc.module.agriculture.api.crop.variant.item.ICropItem;
 import net.dries007.tfc.module.agriculture.common.blocks.BlockCropGrowing;
-import net.dries007.tfc.module.soil.common.blocks.BlockSoilFarmland;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
@@ -59,7 +59,7 @@ public class ItemCropSeed extends Item implements IPlantable, ICropItem {
         IBlockState state = worldIn.getBlockState(pos);
         if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) &&
                 state.getBlock().canSustainPlant(state, worldIn, pos, EnumFacing.UP, this) &&
-                worldIn.isAirBlock(pos.up()) && state.getBlock() instanceof BlockSoilFarmland) {
+                worldIn.isAirBlock(pos.up()) && state.getBlock() instanceof BlockFarmland) {
 
             worldIn.setBlockState(pos.up(), StorageAgriculture.getCropBlock(GROWING, type).getDefaultState());
 

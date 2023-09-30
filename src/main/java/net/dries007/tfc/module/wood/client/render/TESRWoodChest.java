@@ -2,8 +2,8 @@ package net.dries007.tfc.module.wood.client.render;
 
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.wood.api.type.WoodType;
-import net.dries007.tfc.module.wood.common.blocks.BlockWoodChest;
-import net.dries007.tfc.module.wood.common.tiles.TEWoodChest;
+import net.dries007.tfc.module.wood.objects.blocks.BlockWoodChest;
+import net.dries007.tfc.module.wood.objects.tiles.TEWoodChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;

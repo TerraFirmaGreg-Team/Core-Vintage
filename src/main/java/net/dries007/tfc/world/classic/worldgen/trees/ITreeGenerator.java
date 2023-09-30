@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.wood.common.blocks.BlockWoodSapling;
+import net.dries007.tfc.module.wood.objects.blocks.BlockWoodSapling;
 import net.dries007.tfc.module.wood.tree.type.TreeType;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;

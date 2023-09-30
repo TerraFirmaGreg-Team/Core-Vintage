@@ -10,7 +10,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.objects.container.ContainerEmpty;
-import net.dries007.tfc.module.wood.common.blocks.BlockWoodSupport;
+import net.dries007.tfc.module.wood.objects.blocks.BlockWoodSupport;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;

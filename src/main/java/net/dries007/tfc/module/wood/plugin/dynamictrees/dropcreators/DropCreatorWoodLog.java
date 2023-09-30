@@ -3,7 +3,7 @@ package net.dries007.tfc.module.wood.plugin.dynamictrees.dropcreators;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.module.wood.common.blocks.BlockWoodLog;
+import net.dries007.tfc.module.wood.objects.blocks.BlockWoodLog;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

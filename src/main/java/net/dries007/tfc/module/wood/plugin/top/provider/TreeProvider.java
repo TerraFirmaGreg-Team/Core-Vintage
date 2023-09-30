@@ -7,7 +7,7 @@ import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.objects.tiles.TETickCounter;
-import net.dries007.tfc.module.wood.common.blocks.BlockWoodSapling;
+import net.dries007.tfc.module.wood.objects.blocks.BlockWoodSapling;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

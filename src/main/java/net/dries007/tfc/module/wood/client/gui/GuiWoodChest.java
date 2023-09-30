@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.wood.client.gui;
 
 import net.dries007.tfc.client.gui.GuiContainerTFC;
-import net.dries007.tfc.module.wood.common.container.ContainerWoodChest;
+import net.dries007.tfc.module.wood.objects.container.ContainerWoodChest;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;

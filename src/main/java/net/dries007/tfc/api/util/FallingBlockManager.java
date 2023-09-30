@@ -12,7 +12,7 @@ import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.module.devices.common.blocks.BlockCharcoalPile;
 import net.dries007.tfc.module.soil.api.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants;
-import net.dries007.tfc.module.wood.common.blocks.BlockWoodSupport;
+import net.dries007.tfc.module.wood.objects.blocks.BlockWoodSupport;
 import net.dries007.tfc.util.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;

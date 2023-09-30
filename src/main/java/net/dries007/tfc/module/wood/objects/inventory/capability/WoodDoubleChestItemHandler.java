@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.core.objects.inventory.capability;
+package net.dries007.tfc.module.wood.objects.inventory.capability;
 
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodChest;
@@ -49,7 +49,7 @@ public class WoodDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
                 }
             }
         }
-        return NO_ADJACENT_CHESTS_INSTANCE; //All alone
+        return VanillaDoubleChestItemHandler.NO_ADJACENT_CHESTS_INSTANCE; //All alone
     }
 
     @Override

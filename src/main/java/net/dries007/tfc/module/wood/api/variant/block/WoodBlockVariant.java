@@ -2,13 +2,12 @@ package net.dries007.tfc.module.wood.api.variant.block;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.api.util.Pair;
+import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
 import java.util.function.BiFunction;
-
-import static net.dries007.tfc.module.wood.StorageWood.WOOD_BLOCKS;
 
 /**
  * Класс CropItemVariant представляет вариант деревянного блока.
@@ -42,7 +41,7 @@ public class WoodBlockVariant {
         }
 
         for (var type : WoodType.getWoodTypes()) {
-            if (WOOD_BLOCKS.put(new Pair<>(this, type), this.create(type)) != null)
+            if (StorageWood.WOOD_BLOCKS.put(new Pair<>(this, type), this.create(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
 

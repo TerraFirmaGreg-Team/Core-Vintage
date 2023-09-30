@@ -49,7 +49,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
 
         setTickRandomly(true);
         setDefaultState(blockState.getBaseState()
-                .withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
+                .withProperty(BlockLeaves.DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
 
         leavesFancy = true; // Fast / Fancy graphics works correctly
 
@@ -77,17 +77,17 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @Override
     @Nonnull
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(DECAYABLE, (meta & 0b01) == 0b01);
+        return this.getDefaultState().withProperty(BlockLeaves.DECAYABLE, (meta & 0b01) == 0b01);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return (state.getValue(DECAYABLE) ? 1 : 0);
+        return (state.getValue(BlockLeaves.DECAYABLE) ? 1 : 0);
     }
 
     @Override
     public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
-        return NULL_AABB;
+        return Block.NULL_AABB;
     }
 
     @Override
@@ -118,7 +118,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @Override
     @Nonnull
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, DECAYABLE);
+        return new BlockStateContainer(this, BlockLeaves.DECAYABLE);
     }
 
 
@@ -174,8 +174,8 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
                 if (chance < 10) chance = 10;
             }
 
-            if (RANDOM.nextInt(chance) == 0) {
-                ItemStack drop = new ItemStack(getItemDropped(state, RANDOM, fortune), 1, damageDropped(state));
+            if (Block.RANDOM.nextInt(chance) == 0) {
+                ItemStack drop = new ItemStack(getItemDropped(state, Block.RANDOM, fortune), 1, damageDropped(state));
                 if (!drop.isEmpty()) {
                     drops.add(drop);
                 }

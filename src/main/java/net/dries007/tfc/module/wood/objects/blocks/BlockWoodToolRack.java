@@ -8,6 +8,7 @@ import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodToolRack;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -29,8 +30,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-
 @ParametersAreNonnullByDefault
 public class BlockWoodToolRack extends BlockWood implements IItemSize {
     protected static final AxisAlignedBB RACK_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
@@ -46,7 +45,7 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
         setHardness(0.5f);
         setResistance(3f);
         setDefaultState(this.blockState.getBaseState()
-                .withProperty(FACING, EnumFacing.NORTH));
+                .withProperty(BlockHorizontal.FACING, EnumFacing.NORTH));
 
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
@@ -67,12 +66,12 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
     @SuppressWarnings("deprecation")
     @Nonnull
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
+        return this.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex();
+        return state.getValue(BlockHorizontal.FACING).getHorizontalIndex();
     }
 
     @Override
@@ -92,7 +91,7 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
     @SuppressWarnings("deprecation")
     @Nonnull
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return switch (state.getValue(FACING)) {
+        return switch (state.getValue(BlockHorizontal.FACING)) {
             default -> RACK_NORTH_AABB;
             case SOUTH -> RACK_SOUTH_AABB;
             case WEST -> RACK_WEST_AABB;
@@ -117,7 +116,7 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
     @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        if (!Helpers.canHangAt(worldIn, pos, state.getValue(FACING))) {
+        if (!Helpers.canHangAt(worldIn, pos, state.getValue(BlockHorizontal.FACING))) {
             dropBlockAsItem(worldIn, pos, state, 0);
             TEWoodToolRack te = Helpers.getTE(worldIn, pos, TEWoodToolRack.class);
             if (te != null) {
@@ -158,13 +157,13 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             facing = placer.getHorizontalFacing().getOpposite();
         }
-        return this.getDefaultState().withProperty(FACING, Helpers.getASolidFacing(worldIn, pos, facing, EnumFacing.HORIZONTALS));
+        return this.getDefaultState().withProperty(BlockHorizontal.FACING, Helpers.getASolidFacing(worldIn, pos, facing, EnumFacing.HORIZONTALS));
     }
 
     @Override
     @Nonnull
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
+        return new BlockStateContainer(this, BlockHorizontal.FACING);
     }
 
     @Override
@@ -197,7 +196,7 @@ public class BlockWoodToolRack extends BlockWood implements IItemSize {
 
     public int getSlotFromPos(IBlockState state, float x, float y, float z) {
         int slot = 0;
-        if ((state.getValue(FACING).getAxis().equals(EnumFacing.Axis.Z) ? x : z) > .5f) {
+        if ((state.getValue(BlockHorizontal.FACING).getAxis().equals(EnumFacing.Axis.Z) ? x : z) > .5f) {
             slot += 1;
         }
         if (y < 0.5f) {

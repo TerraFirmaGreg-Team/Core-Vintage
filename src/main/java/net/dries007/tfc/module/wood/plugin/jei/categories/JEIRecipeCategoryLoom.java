@@ -1,4 +1,4 @@
-package net.dries007.tfc.compat.jei.categories;
+package net.dries007.tfc.module.wood.plugin.jei.categories;
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -7,24 +7,27 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
-import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
+import net.dries007.tfc.Tags;
+import net.dries007.tfc.module.core.api.plugin.jei.RecipeCategoryBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.wood.plugin.jei.wrappers.JEIRecipeWrapperLoam;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class LoomCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
+public class JEIRecipeCategoryLoom extends RecipeCategoryBase<JEIRecipeWrapperLoam> {
+
+    public static final String UID = Tags.MOD_ID + ".loom";
     private static final ResourceLocation ICONS = Helpers.getID("textures/gui/icons/jei.png");
 
     private final IDrawableStatic slot;
     private final IDrawableStatic arrow;
     private final IDrawableAnimated arrowAnimated;
 
-    public LoomCategory(IGuiHelper helper, String Uid) {
-        super(helper.createBlankDrawable(120, 38), Uid);
+    public JEIRecipeCategoryLoom(IGuiHelper helper) {
+        super(helper.createBlankDrawable(120, 38), UID);
         arrow = helper.createDrawable(ICONS, 0, 14, 22, 16);
         IDrawableStatic arrowAnimated = helper.createDrawable(ICONS, 22, 14, 22, 16);
         this.arrowAnimated = helper.createAnimatedDrawable(arrowAnimated, 80, IDrawableAnimated.StartDirection.LEFT, false);
@@ -39,13 +42,20 @@ public class LoomCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
         slot.draw(minecraft, 84, 16);
     }
 
+    @ParametersAreNonnullByDefault
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, SimpleRecipeWrapper recipeWrapper, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, JEIRecipeWrapperLoam recipeWrapper, IIngredients ingredients) {
+        super.setRecipe(recipeLayout, recipeWrapper, ingredients);
         IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
         itemStackGroup.init(0, true, 20, 16);
         itemStackGroup.init(1, false, 84, 16);
 
         itemStackGroup.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
         itemStackGroup.set(1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
+    }
+
+    @Override
+    protected int getOutputSlotIndex() {
+        return 1;
     }
 }

@@ -42,7 +42,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
         IBlockState state = blockState.getBaseState();
 
-        if (!isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
+        if (!isDouble()) state = state.withProperty(BlockSlab.HALF, EnumBlockHalf.BOTTOM);
 
         this.block = StorageWood.getWoodBlock(WoodBlockVariants.PLANKS, type);
         useNeighborBrightness = true;
@@ -79,7 +79,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
 
         if (!this.isDouble()) {
-            iblockstate = iblockstate.withProperty(HALF, (meta & 8) == 0 ? BlockSlab.EnumBlockHalf.BOTTOM : BlockSlab.EnumBlockHalf.TOP);
+            iblockstate = iblockstate.withProperty(BlockSlab.HALF, (meta & 8) == 0 ? BlockSlab.EnumBlockHalf.BOTTOM : BlockSlab.EnumBlockHalf.TOP);
         }
 
         return iblockstate;
@@ -89,7 +89,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     public int getMetaFromState(@Nonnull IBlockState state) {
         int i = 0;
 
-        if (!this.isDouble() && state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) {
+        if (!this.isDouble() && state.getValue(BlockSlab.HALF) == BlockSlab.EnumBlockHalf.TOP) {
             i |= 8;
         }
 
@@ -124,7 +124,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     @Nonnull
     @Override
     protected BlockStateContainer createBlockState() {
-        return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
+        return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, BlockSlab.HALF, VARIANT);
     }
 
     @Nonnull

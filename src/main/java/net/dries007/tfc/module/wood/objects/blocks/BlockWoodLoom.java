@@ -12,8 +12,10 @@ import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodLoom;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -39,9 +41,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-import static net.minecraft.block.material.Material.WOOD;
-
 @ParametersAreNonnullByDefault
 public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlock {
     protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
@@ -53,7 +52,7 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
     private final WoodType type;
 
     public BlockWoodLoom(WoodBlockVariant variant, WoodType type) {
-        super(WOOD, MapColor.AIR);
+        super(Material.WOOD, MapColor.AIR);
 
         this.variant = variant;
         this.type = type;
@@ -62,7 +61,7 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
         setHarvestLevel("axe", 0);
         setHardness(0.5f);
         setResistance(3f);
-        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        setDefaultState(this.blockState.getBaseState().withProperty(BlockHorizontal.FACING, EnumFacing.NORTH));
 
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
@@ -105,12 +104,12 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
     @SuppressWarnings("deprecation")
     @Nonnull
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
+        return this.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex();
+        return state.getValue(BlockHorizontal.FACING).getHorizontalIndex();
     }
 
     @Override
@@ -123,7 +122,7 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
     @SuppressWarnings("deprecation")
     @Nonnull
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return switch (state.getValue(FACING)) {
+        return switch (state.getValue(BlockHorizontal.FACING)) {
             default -> LOOM_NORTH_AABB;
             case SOUTH -> LOOM_SOUTH_AABB;
             case WEST -> LOOM_WEST_AABB;
@@ -160,13 +159,13 @@ public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlo
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             facing = placer.getHorizontalFacing().getOpposite();
         }
-        return getDefaultState().withProperty(FACING, facing);
+        return getDefaultState().withProperty(BlockHorizontal.FACING, facing);
     }
 
     @Override
     @Nonnull
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
+        return new BlockStateContainer(this, BlockHorizontal.FACING);
     }
 
     @Override

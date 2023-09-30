@@ -47,7 +47,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
             modelchest = simpleChest;
 
             if (destroyStage >= 0) {
-                bindTexture(DESTROY_STAGES[destroyStage]);
+                bindTexture(TileEntitySpecialRenderer.DESTROY_STAGES[destroyStage]);
                 GlStateManager.matrixMode(5890);
                 GlStateManager.pushMatrix();
                 GlStateManager.scale(4.0F, 4.0F, 1.0F);
@@ -64,7 +64,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
             modelchest = largeChest;
 
             if (destroyStage >= 0) {
-                bindTexture(DESTROY_STAGES[destroyStage]);
+                bindTexture(TileEntitySpecialRenderer.DESTROY_STAGES[destroyStage]);
                 GlStateManager.matrixMode(5890);
                 GlStateManager.pushMatrix();
                 GlStateManager.scale(8.0F, 4.0F, 1.0F);

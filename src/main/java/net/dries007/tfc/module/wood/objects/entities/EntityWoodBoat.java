@@ -4,6 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
+import net.dries007.tfc.module.wood.api.variant.item.WoodItemVariants;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,8 +20,6 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import static net.dries007.tfc.module.wood.api.variant.item.WoodItemVariants.BOAT;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -63,7 +62,7 @@ public class EntityWoodBoat extends EntityBoat {
     public Item getItemBoat() {
         var type = getWood();
         if (type != null) {
-            return StorageWood.getWoodItem(BOAT, type);
+            return StorageWood.getWoodItem(WoodItemVariants.BOAT, type);
         }
         return super.getItemBoat();
     }

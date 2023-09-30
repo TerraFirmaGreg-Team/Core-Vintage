@@ -2,10 +2,8 @@ package net.dries007.tfc.module.core;
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
-import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
-import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
@@ -30,8 +28,6 @@ import net.dries007.tfc.module.core.api.util.CreativeTabBase;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.module.core.init.RegistryCore;
-import net.dries007.tfc.module.wood.plugin.dynamictrees.SeasonManager;
-import net.dries007.tfc.module.wood.plugin.dynamictrees.TFCRootDecay;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
@@ -165,7 +161,6 @@ public class ModuleCore extends ModuleBase {
         CapabilityMetalItem.preInit();
         CapabilityWorldTracker.preInit();
 
-        SeasonHelper.setSeasonManager(SeasonManager.INSTANCE);
 
     }
 
@@ -192,7 +187,6 @@ public class ModuleCore extends ModuleBase {
 
         ItemsCore.onPostInitialization();
 
-        TreeHelper.setCustomRootBlockDecay(TFCRootDecay.INSTANCE);
         JsonConfigRegistry.INSTANCE.postInit();
     }
 
@@ -252,7 +246,6 @@ public class ModuleCore extends ModuleBase {
         event.registerServerCommand(new CommandTimeTFC());
         event.registerServerCommand(new CommandDebugInfo());
         event.registerServerCommand(new CommandWorkChunk());
-        event.registerServerCommand(new CommandGenTree());
 
         // Initialize calendar for the current server
         CalendarTFC.INSTANCE.init(event.getServer());

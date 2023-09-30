@@ -10,18 +10,17 @@ import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenConiferToppe
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.wood.StorageWood;
+import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants;
+import net.dries007.tfc.module.wood.init.BlocksWood;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.dropcreators.DropCreatorWoodLog;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.items.ItemWoodSeed;
 import net.dries007.tfc.module.wood.tree.type.TreeType;
+import net.dries007.tfc.module.wood.tree.type.TreeTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.SAPLING;
-import static net.dries007.tfc.module.wood.tree.type.TreeTypes.ACACIA_TREE;
 
 public class WoodTreeSpecies extends Species {
 
@@ -31,7 +30,7 @@ public class WoodTreeSpecies extends Species {
         super(name, tree, properties);
         this.tree = tree;
 
-        var sapling = StorageWood.getWoodBlock(SAPLING, tree.getWood());
+        var sapling = StorageWood.getWoodBlock(WoodBlockVariants.SAPLING, tree.getWood());
         var map = tree.getParamMap();
 
         remDropCreator(new ResourceLocation(ModConstants.MODID, "logs"));
@@ -50,7 +49,7 @@ public class WoodTreeSpecies extends Species {
             tree.hasConiferVariants = tree.isConifer();
         }
 
-        if (tree == ACACIA_TREE) addAcceptableSoils(DirtHelper.HARDCLAYLIKE); // match base DT
+        if (tree == TreeTypes.ACACIA_TREE) addAcceptableSoils(DirtHelper.HARDCLAYLIKE); // match base DT
 
 
         properties.setTree(tree);
@@ -71,7 +70,7 @@ public class WoodTreeSpecies extends Species {
 
     @Override
     public BlockRooty getRootyBlock(World world, BlockPos rootPos) {
-        return BlocksCore.ROOTY_DIRT_MIMIC;
+        return BlocksWood.ROOTY_DIRT_MIMIC;
     }
 
     @Override

@@ -12,8 +12,6 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.recipes.workbench.SaltingRecipe;
@@ -41,10 +39,6 @@ import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
-import net.dries007.tfc.module.wood.StorageWood;
-import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants;
-import net.dries007.tfc.module.wood.client.gui.GuiWoodBarrel;
-import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -76,7 +70,6 @@ public final class JEIIntegration implements IModPlugin {
     public static final String KNAP_LEATHER_UID = Tags.MOD_ID + ".knap.leather";
     public static final String KNAP_STONE_UID = Tags.MOD_ID + ".knap.stone";
     public static final String METAL_HEAT_UID = Tags.MOD_ID + ".metal_heat";
-    public static final String LOOM_UID = Tags.MOD_ID + ".loom";
     public static final String QUERN_UID = Tags.MOD_ID + ".quern";
     public static final String ROCK_LAYER_UID = Tags.MOD_ID + ".rock_layer";
     public static final String WELDING_UID = Tags.MOD_ID + ".welding";
@@ -102,7 +95,6 @@ public final class JEIIntegration implements IModPlugin {
         registry.addRecipeCategories(
                 new AlloyCategory(gui, ALLOY_UID),
                 new AnvilCategory(gui, ANVIL_UID),
-                new BarrelCategory(gui, BARREL_UID),
                 new BlastFurnaceCategory(gui, BLAST_FURNACE_UID),
                 new BloomeryCategory(gui, BLOOMERY_UID),
                 new CastingCategory(gui, CASTING_UID),
@@ -112,7 +104,6 @@ public final class JEIIntegration implements IModPlugin {
                 new KnappingCategory(gui, KNAP_FIRECLAY_UID),
                 new KnappingCategory(gui, KNAP_LEATHER_UID),
                 new KnappingCategory(gui, KNAP_STONE_UID),
-                new LoomCategory(gui, LOOM_UID),
                 new MetalHeatingCategory(gui, METAL_HEAT_UID),
                 new QuernCategory(gui, QUERN_UID),
                 // new RockLayerCategory(gui, ROCK_LAYER_UID),
@@ -198,29 +189,6 @@ public final class JEIIntegration implements IModPlugin {
 
         registry.addRecipes(blastList, BLAST_FURNACE_UID);
 
-        // Barrel Recipes
-        for (var barrel : StorageWood.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.BARREL).toArray()) {
-            registry.addRecipeCatalyst(new ItemStack((Block) barrel), BARREL_UID);
-        }
-
-        var barrelRecipes = RegistryCore.BARREL.getValuesCollection()
-                .stream().filter(recipe -> recipe instanceof BarrelRecipeFoodTraits || recipe instanceof BarrelRecipeFoodPreservation || recipe.getOutputStack() != ItemStack.EMPTY || recipe.getOutputFluid() != null)
-                .map(BarrelRecipeWrapper::new)
-                .collect(Collectors.toList());
-
-        registry.addRecipes(barrelRecipes, BARREL_UID);
-
-        // Loom Recipes
-        for (var loom : StorageWood.WOOD_BLOCKS.values().stream().filter(s -> s.getBlockVariant() == WoodBlockVariants.LOOM).toArray()) {
-            registry.addRecipeCatalyst(new ItemStack((Block) loom), LOOM_UID);
-        }
-
-        var loomRecipes = RegistryCore.LOOM.getValuesCollection()
-                .stream()
-                .map(SimpleRecipeWrapper::new)
-                .collect(Collectors.toList());
-
-        registry.addRecipes(loomRecipes, LOOM_UID);
 
         // Metal Melting Recipes
         registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE), METAL_HEAT_UID);
@@ -342,7 +310,6 @@ public final class JEIIntegration implements IModPlugin {
         // Click areas
         registry.addRecipeClickArea(GuiKnapping.class, 97, 44, 22, 15, KNAP_CLAY_UID, KNAP_FIRECLAY_UID, KNAP_LEATHER_UID, KNAP_STONE_UID);
         registry.addRecipeClickArea(GuiMetalAnvil.class, 26, 24, 9, 14, ANVIL_UID, WELDING_UID);
-        registry.addRecipeClickArea(GuiWoodBarrel.class, 92, 21, 9, 14, BARREL_UID);
         registry.addRecipeClickArea(GuiCrucible.class, 139, 100, 10, 15, ALLOY_UID);
         registry.addRecipeClickArea(GuiCrucible.class, 82, 100, 10, 15, METAL_HEAT_UID);
         registry.addRecipeClickArea(GuiFirePit.class, 79, 37, 18, 10, HEAT_UID);

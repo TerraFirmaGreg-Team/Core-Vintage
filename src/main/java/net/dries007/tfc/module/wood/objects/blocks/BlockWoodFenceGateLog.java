@@ -3,6 +3,7 @@ package net.dries007.tfc.module.wood.objects.blocks;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
+import net.minecraft.block.BlockFenceGate;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
@@ -21,8 +22,8 @@ public class BlockWoodFenceGateLog extends BlockWoodFenceGate {
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder()
                         .customPath(getResourceLocation())
-                        .ignore(IN_WALL)
-                        .ignore(POWERED)
+                        .ignore(BlockFenceGate.IN_WALL)
+                        .ignore(BlockFenceGate.POWERED)
                         .customVariant("woodtype=" + getType())
                         .build());
 

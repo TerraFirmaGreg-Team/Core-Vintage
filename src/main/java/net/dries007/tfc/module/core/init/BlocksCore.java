@@ -24,7 +24,6 @@ import net.dries007.tfc.module.core.objects.tiles.TEPlacedItem;
 import net.dries007.tfc.module.core.objects.tiles.TEPlacedItemFlat;
 import net.dries007.tfc.module.core.objects.tiles.TEPowderKeg;
 import net.dries007.tfc.module.core.objects.tiles.TETickCounter;
-import net.dries007.tfc.module.wood.plugin.dynamictrees.blocks.BlockTreeRootyMimic;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -55,7 +54,7 @@ public class BlocksCore {
     public static BlockPowderKeg POWDERKEG;
 
     public static BlockSeaIce SEA_ICE;
-    public static BlockTreeRootyMimic ROOTY_DIRT_MIMIC;
+
     public static BlockFluidBase HOT_WATER;
     public static BlockFluidBase FRESH_WATER;
     public static BlockFluidBase SALT_WATER;
@@ -101,7 +100,6 @@ public class BlocksCore {
 
         registry.registerBlock(SEA_ICE = new BlockSeaIce(FluidRegistry.getFluid("salt_water")), "sea_ice");
         registry.registerBlockRegistrationStrategy((forgeRegistry) -> {
-            forgeRegistry.register(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
             forgeRegistry.register(HOT_WATER = new BlockFluidHotWater(FluidRegistry.getFluid("hot_water")));
             forgeRegistry.register(FRESH_WATER = new BlockFluidWater(FluidRegistry.getFluid("fresh_water"), WATER, false));
             forgeRegistry.register(SALT_WATER = new BlockFluidWater(FluidRegistry.getFluid("salt_water"), WATER, true));

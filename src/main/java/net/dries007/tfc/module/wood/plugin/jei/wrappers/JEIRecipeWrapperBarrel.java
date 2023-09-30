@@ -1,18 +1,19 @@
-package net.dries007.tfc.compat.jei.wrappers;
+package net.dries007.tfc.module.wood.plugin.jei.wrappers;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
 import net.dries007.tfc.common.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.plugin.jei.IRecipeWrapperBase;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -22,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
-public class BarrelRecipeWrapper implements IRecipeWrapper {
+public class JEIRecipeWrapperBarrel implements IRecipeWrapperBase {
     private final BarrelRecipe recipe;
     private final List<ItemStack> itemIngredients;
     private final List<FluidStack> fluidIngredients;
@@ -31,7 +32,7 @@ public class BarrelRecipeWrapper implements IRecipeWrapper {
 
     private final FluidStack inputFluid; // Special case, used in BarrelRecipeFluidMixing cases
 
-    public BarrelRecipeWrapper(BarrelRecipe recipe) {
+    public JEIRecipeWrapperBarrel(BarrelRecipe recipe) {
         this.recipe = recipe;
         itemIngredients = recipe.getItemIngredient().getValidIngredients();
         fluidIngredients = recipe.getFluidIngredient().getValidIngredients();
@@ -39,14 +40,14 @@ public class BarrelRecipeWrapper implements IRecipeWrapper {
         outputFluid = recipe.getOutputFluid();
         if (recipe instanceof BarrelRecipeFoodTraits recipeFoodTraits) {
             // Special cased to show output food with applied trait
-            FluidStack fluid = fluidIngredients.size() > 0 ? fluidIngredients.get(0) : null;
+            FluidStack fluid = !fluidIngredients.isEmpty() ? fluidIngredients.get(0) : null;
             for (ItemStack ingredient : itemIngredients) {
                 outputItems.addAll(recipeFoodTraits.getOutputItem(fluid, ingredient));
             }
             inputFluid = null;
         } else if (recipe instanceof BarrelRecipeFoodPreservation recipePreservation) {
             // Special cased to show output food with applied trait
-            FluidStack fluid = fluidIngredients.size() > 0 ? fluidIngredients.get(0) : null;
+            FluidStack fluid = !fluidIngredients.isEmpty() ? fluidIngredients.get(0) : null;
             for (ItemStack ingredient : itemIngredients) {
                 recipePreservation.onBarrelSealed(fluid, ingredient);
                 outputItems.add(ingredient);
@@ -64,10 +65,10 @@ public class BarrelRecipeWrapper implements IRecipeWrapper {
             }
             double maximumMultiplier = (double) ConfigTFC.Devices.BARREL.tank / highestFluid; // Fix the multiplier to the maximum allowed value into a barrel
             double multiplier = Math.min((double) Fluid.BUCKET_VOLUME / inputFluid.amount, maximumMultiplier);
-            inputFluid.amount *= multiplier;
-            fluidIngredients.forEach(x -> x.amount *= multiplier);
+            inputFluid.amount *= (int) multiplier;
+            fluidIngredients.forEach(x -> x.amount *= (int) multiplier);
             if (outputFluid != null) {
-                outputFluid.amount *= multiplier;
+                outputFluid.amount *= (int) multiplier;
             }
         } else {
             outputItems.add(recipe.getOutputStack());
@@ -86,7 +87,7 @@ public class BarrelRecipeWrapper implements IRecipeWrapper {
             ingredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(itemIngredients));
             ingredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(fluidIngredients));
         }
-        if (outputItems.size() > 0) {
+        if (!outputItems.isEmpty()) {
             ingredients.setOutputLists(VanillaTypes.ITEM, Collections.singletonList(outputItems));
         }
         if (outputFluid != null) {
@@ -113,5 +114,10 @@ public class BarrelRecipeWrapper implements IRecipeWrapper {
 
     public boolean isFluidMixing() {
         return this.inputFluid != null;
+    }
+
+    @Override
+    public ResourceLocation getRegistryName() {
+        return this.recipe.getRegistryName();
     }
 }

@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.core.objects.inventory.capability;
+package net.dries007.tfc.module.wood.objects.inventory.capability;
 
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;

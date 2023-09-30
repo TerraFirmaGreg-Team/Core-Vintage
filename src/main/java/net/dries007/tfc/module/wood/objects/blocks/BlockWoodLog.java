@@ -11,6 +11,7 @@ import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
 import net.dries007.tfc.util.Constants;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -46,7 +47,7 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
         this.type = type;
 
         setDefaultState(blockState.getBaseState()
-                .withProperty(LOG_AXIS, BlockLog.EnumAxis.Y)
+                .withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y)
                 .withProperty(PLACED, true));
         setHarvestLevel("axe", 0);
         setHardness(2.0F);
@@ -88,7 +89,7 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return FULL_BLOCK_AABB;
+        return Block.FULL_BLOCK_AABB;
     }
 
     @Override
@@ -119,19 +120,19 @@ public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState()
-                .withProperty(LOG_AXIS, EnumAxis.values()[meta & 0b11])
+                .withProperty(BlockLog.LOG_AXIS, EnumAxis.values()[meta & 0b11])
                 .withProperty(PLACED, (meta & 0b100) == 0b100);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(LOG_AXIS).ordinal() |
+        return state.getValue(BlockLog.LOG_AXIS).ordinal() |
                 (state.getValue(PLACED) ? 0b100 : 0);
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, LOG_AXIS, PLACED);
+        return new BlockStateContainer(this, BlockLog.LOG_AXIS, PLACED);
     }
 
     @Override

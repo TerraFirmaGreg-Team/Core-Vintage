@@ -70,7 +70,7 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
     @Nonnull
     @Override
     public Item getItemDropped(IBlockState state, @Nonnull Random rand, int fortune) {
-        if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER) {
+        if (state.getValue(BlockDoor.HALF) == BlockDoor.EnumDoorHalf.UPPER) {
             return Items.AIR;
         } else {
             return ForgeRegistries.ITEMS.getValue(Helpers.getID(getName()));

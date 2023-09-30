@@ -3,13 +3,13 @@ package net.dries007.tfc.module.wood.client.button;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.client.button.GuiButtonTFC;
 import net.dries007.tfc.client.button.IButtonTooltip;
+import net.dries007.tfc.module.wood.client.gui.GuiWoodBarrel;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodBarrel;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 
 import javax.annotation.Nonnull;
-
-import static net.dries007.tfc.module.wood.client.gui.GuiWoodBarrel.BARREL_BACKGROUND;
 
 
 public class GuiButtonBarrelSeal extends GuiButtonTFC implements IButtonTooltip {
@@ -34,12 +34,12 @@ public class GuiButtonBarrelSeal extends GuiButtonTFC implements IButtonTooltip 
     public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
         if (this.visible) {
             GlStateManager.color(1, 1, 1, 1);
-            mc.getTextureManager().bindTexture(BARREL_BACKGROUND);
+            mc.getTextureManager().bindTexture(GuiWoodBarrel.BARREL_BACKGROUND);
             hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
             if (tile.isSealed()) {
-                drawModalRectWithCustomSizedTexture(x, y, 236, 0, 20, 20, 256, 256);
+                Gui.drawModalRectWithCustomSizedTexture(x, y, 236, 0, 20, 20, 256, 256);
             } else {
-                drawModalRectWithCustomSizedTexture(x, y, 236, 20, 20, 20, 256, 256);
+                Gui.drawModalRectWithCustomSizedTexture(x, y, 236, 20, 20, 20, 256, 256);
             }
             mouseDragged(mc, mouseX, mouseY);
         }

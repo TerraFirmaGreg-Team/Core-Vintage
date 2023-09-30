@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.wood.tree.type;
 
+import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.IGenFeature;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
@@ -11,6 +12,7 @@ import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.food.StorageFood;
 import net.dries007.tfc.module.food.api.type.FoodType;
+import net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants;
 import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.blocks.BlockTreeBranch;
@@ -33,8 +35,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import javax.annotation.Nonnull;
 import java.util.*;
 
-import static com.ferreusveritas.dynamictrees.ModConstants.MODID;
-import static net.dries007.tfc.module.food.api.variant.Item.FoodItemVariants.INGREDIENT;
 import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LEAVES;
 import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LOG;
 
@@ -345,7 +345,7 @@ public class TreeType extends TreeFamily {
     }
 
     public ItemStack getFoodDrop() {
-        return new ItemStack(StorageFood.getFoodItem(INGREDIENT, fruit));
+        return new ItemStack(StorageFood.getFoodItem(FoodItemVariants.INGREDIENT, fruit));
     }
 
     public List<IGenFeature> getModule() {
@@ -516,7 +516,7 @@ public class TreeType extends TreeFamily {
         }
 
         public Builder setCellKit(String kit) {
-            setCellKit(new ResourceLocation(MODID, kit));
+            setCellKit(new ResourceLocation(ModConstants.MODID, kit));
             return this;
         }
 

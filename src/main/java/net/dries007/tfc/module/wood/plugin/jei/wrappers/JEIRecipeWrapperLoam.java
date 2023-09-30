@@ -1,40 +1,46 @@
-package net.dries007.tfc.compat.jei.wrappers;
+package net.dries007.tfc.module.wood.plugin.jei.wrappers;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeWrapper;
+import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.compat.jei.util.IJEISimpleRecipe;
+import net.dries007.tfc.module.core.api.plugin.jei.IRecipeWrapperBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
-public class SimpleRecipeWrapper implements IRecipeWrapper {
-    private final IJEISimpleRecipe recipeWrapper;
+public class JEIRecipeWrapperLoam implements IRecipeWrapperBase {
+    private final LoomRecipe recipe;
 
-    public SimpleRecipeWrapper(IJEISimpleRecipe recipeWrapper) {
-        this.recipeWrapper = recipeWrapper;
+    public JEIRecipeWrapperLoam(LoomRecipe recipe) {
+        this.recipe = recipe;
 
     }
 
     @Override
     public void getIngredients(IIngredients ingredients) {
         List<List<ItemStack>> allInputs = new ArrayList<>();
-        List<IIngredient<ItemStack>> listInputs = recipeWrapper.getIngredients();
+        List<IIngredient<ItemStack>> listInputs = recipe.getIngredients();
         for (IIngredient<ItemStack> input : listInputs) {
             allInputs.add(input.getValidIngredients());
         }
         ingredients.setInputLists(VanillaTypes.ITEM, allInputs);
 
         List<List<ItemStack>> allOutputs = new ArrayList<>();
-        List<ItemStack> listOutputs = recipeWrapper.getOutputs();
+        List<ItemStack> listOutputs = recipe.getOutputs();
         for (ItemStack stack : listOutputs) {
             allOutputs.add(NonNullList.withSize(1, stack));
         }
         ingredients.setOutputLists(VanillaTypes.ITEM, allOutputs);
+    }
+
+    @Override
+    public ResourceLocation getRegistryName() {
+        return this.recipe.getRegistryName();
     }
 }

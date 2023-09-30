@@ -20,6 +20,7 @@ import net.dries007.tfc.module.wood.objects.tiles.TEWoodBarrel;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodChest;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodLoom;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodToolRack;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.blocks.BlockTreeRootyMimic;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -34,6 +35,8 @@ import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.L
 
 public class BlocksWood {
 
+    public static BlockTreeRootyMimic ROOTY_DIRT_MIMIC;
+
     public static void onRegister(Registry registry) {
 
         for (var block : WOOD_BLOCKS.values()) {
@@ -41,6 +44,10 @@ public class BlocksWood {
             if (itemBlock != null) registry.registerBlock((Block) block, block.getItemBlock(), block.getName());
             else registry.registerBlock((Block) block, block.getName());
         }
+
+        registry.registerBlockRegistrationStrategy((forgeRegistry) -> {
+            forgeRegistry.register(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
+        });
 
         RegistryHelper.registerTileEntities(
                 registry,

@@ -2,6 +2,7 @@ package net.dries007.tfc.module.wood.objects.blocks;
 
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
+import net.minecraft.block.BlockFence;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
@@ -24,11 +25,11 @@ public class BlockWoodFenceLog extends BlockWoodFence {
             @Nonnull
             protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(getResourceLocation(),
-                        "east=" + state.getValue(EAST) + "," +
+                        "east=" + state.getValue(BlockFence.EAST) + "," +
                                 "normal=false" + "," +
-                                "north=" + state.getValue(NORTH) + "," +
-                                "south=" + state.getValue(SOUTH) + "," +
-                                "west=" + state.getValue(WEST) + "," +
+                                "north=" + state.getValue(BlockFence.NORTH) + "," +
+                                "south=" + state.getValue(BlockFence.SOUTH) + "," +
+                                "west=" + state.getValue(BlockFence.WEST) + "," +
                                 "woodtype=" + getType());
             }
         });

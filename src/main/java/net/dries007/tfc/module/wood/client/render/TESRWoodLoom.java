@@ -159,19 +159,19 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
     }
 
     private void drawUpper(BufferBuilder b, double z) {
-        double[][] sidesX = getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "x");
+        double[][] sidesX = TESRBase.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "x");
 
         for (double[] v : sidesX) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.0625).endVertex();
         }
 
-        double[][] sidesY = getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "y");
+        double[][] sidesY = TESRBase.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "y");
 
         for (double[] v : sidesY) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.875).endVertex();
         }
 
-        double[][] sidesZ = getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "z");
+        double[][] sidesZ = TESRBase.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "z");
 
         for (double[] v : sidesZ) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.875, v[4] * 0.0625).endVertex();
@@ -179,19 +179,19 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
     }
 
     private void drawLower(BufferBuilder b, double z) {
-        double[][] sidesX = getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "x");
+        double[][] sidesX = TESRBase.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "x");
 
         for (double[] v : sidesX) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.0625).endVertex();
         }
 
-        double[][] sidesY = getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "y");
+        double[][] sidesY = TESRBase.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "y");
 
         for (double[] v : sidesY) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.875).endVertex();
         }
 
-        double[][] sidesZ = getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "z");
+        double[][] sidesZ = TESRBase.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "z");
 
         for (double[] v : sidesZ) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.875, v[4] * 0.0625).endVertex();

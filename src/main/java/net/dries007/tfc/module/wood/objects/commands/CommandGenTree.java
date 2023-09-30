@@ -1,4 +1,4 @@
-package net.dries007.tfc.commands;
+package net.dries007.tfc.module.wood.objects.commands;
 
 import net.dries007.tfc.module.wood.tree.type.TreeType;
 import net.minecraft.command.CommandBase;

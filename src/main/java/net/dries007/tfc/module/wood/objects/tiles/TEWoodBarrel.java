@@ -12,6 +12,7 @@ import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCal
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
+import net.dries007.tfc.module.wood.objects.blocks.BlockWoodBarrel;
 import net.dries007.tfc.module.wood.objects.blocks.itemblocks.ItemBlockWoodBarrel;
 import net.dries007.tfc.util.FluidTransferHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -39,8 +40,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static net.dries007.tfc.module.wood.objects.blocks.BlockWoodBarrel.SEALED;
 
 @ParametersAreNonnullByDefault
 public class TEWoodBarrel extends TETickableInventory implements ITickable, ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback, IFluidTankCallback {
@@ -128,7 +127,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
     @Override
     public void onLoad() {
         if (!world.isRemote) {
-            sealed = world.getBlockState(pos).getValue(SEALED);
+            sealed = world.getBlockState(pos).getValue(BlockWoodBarrel.SEALED);
             recipe = BarrelRecipe.get(inventory.getStackInSlot(SLOT_ITEM), tank.getFluid());
         }
     }
@@ -358,7 +357,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
     public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
         ItemStack barrelStack = new ItemStack(state.getBlock());
 
-        if (state.getValue(SEALED)) {
+        if (state.getValue(BlockWoodBarrel.SEALED)) {
             saveToItemStack(barrelStack);
             InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), barrelStack);
         } else {

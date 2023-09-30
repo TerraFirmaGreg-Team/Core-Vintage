@@ -32,9 +32,9 @@ public class ModelHelperTFC extends ModelHelper {
         var blockBranch = tree.getDynamicBranch();
         var modelLocation = getBranchModelResourceLocation(blockBranch);
 
-        setGenericStateMapper(blockBranch, modelLocation);
+        ModelHelper.setGenericStateMapper(blockBranch, modelLocation);
         if (blockBranch instanceof BlockTreeBranchThick) {
-            setGenericStateMapper(((BlockTreeBranchThick) blockBranch).otherBlock, modelLocation);
+            ModelHelper.setGenericStateMapper(((BlockTreeBranchThick) blockBranch).otherBlock, modelLocation);
         }
 
         BlockSurfaceRoot surfaceRoot = tree.getSurfaceRoots();
@@ -52,11 +52,11 @@ public class ModelHelperTFC extends ModelHelper {
 
     public static void regModel(Block block) {
         if (block != Blocks.AIR) {
-            regModel(Item.getItemFromBlock(block));
+            ModelHelper.regModel(Item.getItemFromBlock(block));
         }
         if (block instanceof BlockTreeBranchThick) {
             Item item = Item.getItemFromBlock(((BlockTreeBranchThick) block).otherBlock);
-            regModel(item, 0, block.getRegistryName());
+            ModelHelper.regModel(item, 0, block.getRegistryName());
         }
     }
 }

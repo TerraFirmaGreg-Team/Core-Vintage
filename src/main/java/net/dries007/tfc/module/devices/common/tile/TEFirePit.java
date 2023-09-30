@@ -10,6 +10,8 @@ import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCal
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.objects.tile.ITileFields;
+import net.dries007.tfc.module.core.api.util.fuel.Fuel;
+import net.dries007.tfc.module.core.api.util.fuel.FuelManager;
 import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.module.devices.ModuleDevice;
 import net.dries007.tfc.module.devices.common.blocks.BlockFirePit;
@@ -19,8 +21,6 @@ import net.dries007.tfc.module.food.api.category.FoodCategory;
 import net.dries007.tfc.module.food.common.items.ItemDynamicBowlFood;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
-import net.dries007.tfc.util.fuel.Fuel;
-import net.dries007.tfc.util.fuel.FuelManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

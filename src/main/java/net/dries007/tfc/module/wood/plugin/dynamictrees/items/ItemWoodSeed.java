@@ -1,4 +1,4 @@
-package net.dries007.tfc.compat.dynamictrees.items;
+package net.dries007.tfc.module.wood.plugin.dynamictrees.items;
 
 import com.ferreusveritas.dynamictrees.items.Seed;
 import net.dries007.tfc.api.capability.size.Size;

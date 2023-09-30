@@ -1,11 +1,11 @@
-package net.dries007.tfc.compat.dynamictrees.client;
+package net.dries007.tfc.module.wood.plugin.dynamictrees.client;
 
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
-import net.dries007.tfc.compat.dynamictrees.blocks.BlockTreeBranchThick;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.blocks.BlockTreeBranchThick;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;

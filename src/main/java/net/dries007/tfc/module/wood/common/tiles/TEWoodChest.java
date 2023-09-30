@@ -5,7 +5,7 @@ import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
-import net.dries007.tfc.common.objects.inventory.capability.TFCDoubleChestItemHandler;
+import net.dries007.tfc.module.core.objects.inventory.capability.WoodDoubleChestItemHandler;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodChest;
 import net.dries007.tfc.module.wood.common.container.ContainerWoodChest;
@@ -141,9 +141,9 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback {
     public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable net.minecraft.util.EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (doubleChestHandler == null || doubleChestHandler.needsRefresh()) {
-                doubleChestHandler = TFCDoubleChestItemHandler.get(this);
+                doubleChestHandler = WoodDoubleChestItemHandler.get(this);
             }
-            if (doubleChestHandler != null && doubleChestHandler != TFCDoubleChestItemHandler.NO_ADJACENT_CHESTS_INSTANCE) {
+            if (doubleChestHandler != null && doubleChestHandler != WoodDoubleChestItemHandler.NO_ADJACENT_CHESTS_INSTANCE) {
                 return (T) doubleChestHandler;
             }
         }

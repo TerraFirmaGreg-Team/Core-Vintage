@@ -24,17 +24,16 @@ import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.commands.*;
 import net.dries007.tfc.common.objects.LootTablesTFC;
 import net.dries007.tfc.common.objects.entity.EntitiesTFC;
-import net.dries007.tfc.compat.dynamictrees.SeasonManager;
-import net.dries007.tfc.compat.dynamictrees.TFCRootDecay;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.util.CreativeTabBase;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.module.core.init.RegistryCore;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.SeasonManager;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.TFCRootDecay;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 import net.minecraft.block.Block;
@@ -191,8 +190,9 @@ public class ModuleCore extends ModuleBase {
     public void onPostInitializationEvent(FMLPostInitializationEvent event) {
         super.onPostInitializationEvent(event);
 
+        ItemsCore.onPostInitialization();
+
         TreeHelper.setCustomRootBlockDecay(TFCRootDecay.INSTANCE);
-        FuelManager.postInit();
         JsonConfigRegistry.INSTANCE.postInit();
     }
 

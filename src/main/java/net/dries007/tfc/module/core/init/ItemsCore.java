@@ -4,9 +4,12 @@ import com.codetaylor.mc.athenaeum.registry.Registry;
 import com.codetaylor.mc.athenaeum.util.ModelRegistrationHelper;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.objects.item.ItemBase;
+import net.dries007.tfc.module.core.api.util.fuel.Fuel;
+import net.dries007.tfc.module.core.api.util.fuel.FuelManager;
 import net.dries007.tfc.module.core.objects.blocks.itemblocks.ItemBlockTorch;
 import net.dries007.tfc.module.core.objects.items.*;
 import net.dries007.tfc.module.devices.common.items.ItemBloom;
@@ -116,5 +119,20 @@ public class ItemsCore {
                     FIRE_CLAY
             );
         });
+    }
+
+    public static void onPostInitialization() {
+        // Coals
+        FuelManager.addFuel(new Fuel(IIngredient.of("gemCoal"), 2200, 1415f, true, false));
+        FuelManager.addFuel(new Fuel(IIngredient.of("gemLignite"), 2000, 1350f, true, false));
+
+        // Charcoal
+        FuelManager.addFuel(new Fuel(IIngredient.of("charcoal"), 1800, 1350f, true, true));
+
+        // Peat
+        FuelManager.addFuel(new Fuel(IIngredient.of("peat"), 2500, 680));
+
+        // Stick Bundle
+        FuelManager.addFuel(new Fuel(IIngredient.of("stickBundle"), 600, 900));
     }
 }

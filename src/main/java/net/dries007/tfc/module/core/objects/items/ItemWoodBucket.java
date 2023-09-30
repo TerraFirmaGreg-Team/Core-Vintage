@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.wood.common.items;
+package net.dries007.tfc.module.core.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;

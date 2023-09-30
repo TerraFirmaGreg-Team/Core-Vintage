@@ -1,4 +1,4 @@
-package net.dries007.tfc.compat.dynamictrees;
+package net.dries007.tfc.module.wood.plugin.dynamictrees;
 
 import com.ferreusveritas.dynamictrees.api.ICustomRootDecay;
 import com.ferreusveritas.dynamictrees.trees.Species;

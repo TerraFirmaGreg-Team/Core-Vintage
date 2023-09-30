@@ -1,4 +1,4 @@
-package net.dries007.tfc.compat.dynamictrees.client;
+package net.dries007.tfc.module.wood.plugin.dynamictrees.client;
 
 import com.ferreusveritas.dynamictrees.blocks.MimicProperty;
 import com.ferreusveritas.dynamictrees.models.bakedmodels.BakedModelBlockRooty;

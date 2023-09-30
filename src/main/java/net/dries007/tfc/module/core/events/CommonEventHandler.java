@@ -45,7 +45,7 @@ import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.common.blocks.BlockRockAnvil;
 import net.dries007.tfc.module.rock.common.blocks.BlockRockRaw;
-import net.dries007.tfc.module.wood.common.blocks.BlockWoodLog;
+import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodSupport;
 import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
@@ -291,7 +291,7 @@ public final class CommonEventHandler {
         if (event.getState().getBlock() instanceof IRockBlock) {
             event.setNewSpeed((float) (event.getNewSpeed() / ConfigTFC.General.MISC.rockMiningTimeModifier));
         }
-        if (event.getState().getBlock() instanceof BlockWoodLog) {
+        if (event.getState().getBlock() instanceof IWoodBlock) {
             event.setNewSpeed((float) (event.getNewSpeed() / ConfigTFC.General.MISC.logMiningTimeModifier));
         }
     }

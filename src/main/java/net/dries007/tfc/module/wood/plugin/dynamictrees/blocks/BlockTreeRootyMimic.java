@@ -1,4 +1,4 @@
-package net.dries007.tfc.compat.dynamictrees.blocks;
+package net.dries007.tfc.module.wood.plugin.dynamictrees.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
 import com.ferreusveritas.dynamictrees.blocks.BlockRootyDirt;

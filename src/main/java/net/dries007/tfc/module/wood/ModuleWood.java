@@ -11,7 +11,7 @@ import net.dries007.tfc.module.wood.init.EntitiesWood;
 import net.dries007.tfc.module.wood.init.ItemsWood;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
@@ -59,11 +59,88 @@ public class ModuleWood extends ModuleBase {
         EntitiesWood.onClientRegister();
     }
 
+
+    // --------------------------------------------------------------------------
+    // - FML Lifecycle
+    // --------------------------------------------------------------------------
+
+    @Override
+    public void onConstructionEvent(FMLConstructionEvent event) {
+        super.onConstructionEvent(event);
+    }
+
+    @Override
+    public void onPreInitializationEvent(FMLPreInitializationEvent event) {
+        super.onPreInitializationEvent(event);
+    }
+
+    @Override
+    public void onInitializationEvent(FMLInitializationEvent event) {
+        super.onInitializationEvent(event);
+    }
+
+    @Override
+    public void onPostInitializationEvent(FMLPostInitializationEvent event) {
+        super.onPostInitializationEvent(event);
+
+        BlocksWood.onPostInitialization();
+    }
+
+    @Override
+    public void onLoadCompleteEvent(FMLLoadCompleteEvent event) {
+        super.onLoadCompleteEvent(event);
+    }
+
+    // --------------------------------------------------------------------------
+    // - FML Lifecycle: Client
+    // --------------------------------------------------------------------------
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void onClientPreInitializationEvent(FMLPreInitializationEvent event) {
+        super.onClientPreInitializationEvent(event);
+    }
+
     @Override
     public void onClientInitializationEvent(FMLInitializationEvent event) {
         super.onClientInitializationEvent(event);
 
         BlocksWood.onClientInitialization();
         ItemsWood.onClientInitialization();
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void onClientPostInitializationEvent(FMLPostInitializationEvent event) {
+        super.onClientPostInitializationEvent(event);
+    }
+
+    // --------------------------------------------------------------------------
+    // - Server
+    // --------------------------------------------------------------------------
+
+    @Override
+    public void onServerAboutToStartEvent(FMLServerAboutToStartEvent event) {
+        super.onServerAboutToStartEvent(event);
+    }
+
+    @Override
+    public void onServerStartingEvent(FMLServerStartingEvent event) {
+        super.onServerStartingEvent(event);
+    }
+
+    @Override
+    public void onServerStartedEvent(FMLServerStartedEvent event) {
+        super.onServerStartedEvent(event);
+    }
+
+    @Override
+    public void onServerStoppingEvent(FMLServerStoppingEvent event) {
+        super.onServerStoppingEvent(event);
+    }
+
+    @Override
+    public void onServerStoppedEvent(FMLServerStoppedEvent event) {
+        super.onServerStoppedEvent(event);
     }
 }

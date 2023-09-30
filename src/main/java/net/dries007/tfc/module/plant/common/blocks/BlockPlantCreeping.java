@@ -2,11 +2,11 @@ package net.dries007.tfc.module.plant.common.blocks;
 
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
-import net.dries007.tfc.module.wood.common.blocks.BlockWoodLeaves;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -78,7 +78,7 @@ public class BlockPlantCreeping extends BlockPlant {
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         for (EnumFacing face : EnumFacing.values()) {
             IBlockState blockState = worldIn.getBlockState(pos.offset(face));
-            if (!(blockState.getBlock() instanceof BlockWoodLeaves) && (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID || blockState.getBlock() instanceof BlockFence)) {
+            if (!(blockState.getBlock() instanceof BlockLeaves) && (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID || blockState.getBlock() instanceof BlockFence)) {
                 return plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
             }
         }

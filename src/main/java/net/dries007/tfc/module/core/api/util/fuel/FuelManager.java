@@ -1,15 +1,11 @@
-package net.dries007.tfc.util.fuel;
+package net.dries007.tfc.module.core.api.util.fuel;
 
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.module.wood.StorageWood;
-import net.dries007.tfc.module.wood.tree.type.TreeType;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LOG;
 
 public final class FuelManager {
     private static final List<Fuel> FUELS = new ArrayList<>();
@@ -32,26 +28,6 @@ public final class FuelManager {
     public static boolean isItemBloomeryFuel(ItemStack stack) {
         Fuel fuel = getFuel(stack);
         return fuel != EMPTY && fuel.isBloomeryFuel();
-    }
-
-    public static void postInit() {
-        for (var type : TreeType.getTreeTypes()) {
-            var log = StorageWood.getWoodBlock(LOG, type.getWood());
-            FUELS.add(new Fuel(IIngredient.of(new ItemStack(log)), type.getWood().getBurnTicks(), type.getWood().getBurnTemp()));
-        }
-
-        // Coals
-        FUELS.add(new Fuel(IIngredient.of("gemCoal"), 2200, 1415f, true, false));
-        FUELS.add(new Fuel(IIngredient.of("gemLignite"), 2000, 1350f, true, false));
-
-        // Charcoal
-        FUELS.add(new Fuel(IIngredient.of("charcoal"), 1800, 1350f, true, true));
-
-        // Peat
-        FUELS.add(new Fuel(IIngredient.of("peat"), 2500, 680));
-
-        // Stick Bundle
-        FUELS.add(new Fuel(IIngredient.of("stickBundle"), 600, 900));
     }
 
     /**

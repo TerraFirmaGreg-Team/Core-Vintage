@@ -10,7 +10,7 @@ import net.dries007.tfc.module.ceramic.ModuleCeramic;
 import net.dries007.tfc.module.ceramic.common.items.*;
 import net.dries007.tfc.module.core.objects.items.ItemMetalBucket;
 import net.dries007.tfc.module.core.objects.items.ItemMisc;
-import net.dries007.tfc.module.wood.common.items.ItemWoodBucket;
+import net.dries007.tfc.module.core.objects.items.ItemWoodBucket;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

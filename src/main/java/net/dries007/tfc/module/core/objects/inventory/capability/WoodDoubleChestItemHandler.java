@@ -1,5 +1,6 @@
-package net.dries007.tfc.common.objects.inventory.capability;
+package net.dries007.tfc.module.core.objects.inventory.capability;
 
+import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.module.wood.common.tiles.TEWoodChest;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -16,8 +17,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("WeakerAccess")
-public class TFCDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
-    public TFCDoubleChestItemHandler(@Nullable TileEntityChest mainChest, @Nullable TileEntityChest other, boolean mainChestIsUpper) {
+public class WoodDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
+    public WoodDoubleChestItemHandler(@Nullable TileEntityChest mainChest, @Nullable TileEntityChest other, boolean mainChestIsUpper) {
         super(mainChest, other, mainChestIsUpper);
     }
 
@@ -42,7 +43,7 @@ public class TFCDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
                 TileEntity otherTE = world.getTileEntity(blockpos);
 
                 if (otherTE instanceof TileEntityChest otherChest) {
-                    return new TFCDoubleChestItemHandler(chest, otherChest,
+                    return new WoodDoubleChestItemHandler(chest, otherChest,
                             enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH);
 
                 }

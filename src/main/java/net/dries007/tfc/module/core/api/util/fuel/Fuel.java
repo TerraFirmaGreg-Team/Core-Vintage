@@ -1,4 +1,4 @@
-package net.dries007.tfc.util.fuel;
+package net.dries007.tfc.module.core.api.util.fuel;
 
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;

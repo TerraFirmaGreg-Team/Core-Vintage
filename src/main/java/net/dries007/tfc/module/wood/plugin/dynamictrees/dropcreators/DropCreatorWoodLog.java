@@ -1,4 +1,4 @@
-package net.dries007.tfc.compat.dynamictrees.dropcreators;
+package net.dries007.tfc.module.wood.plugin.dynamictrees.dropcreators;
 
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.trees.Species;

@@ -6,6 +6,11 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.RegistryHelper;
 import net.dries007.tfc.client.util.GrassColorHandler;
+import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.module.core.api.util.fuel.Fuel;
+import net.dries007.tfc.module.core.api.util.fuel.FuelManager;
+import net.dries007.tfc.module.wood.StorageWood;
+import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.client.render.TESRWoodBarrel;
 import net.dries007.tfc.module.wood.client.render.TESRWoodChest;
@@ -19,11 +24,13 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static net.dries007.tfc.module.wood.StorageWood.WOOD_BLOCKS;
+import static net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariants.LOG;
 
 public class BlocksWood {
 
@@ -55,6 +62,12 @@ public class BlocksWood {
         ClientRegistry.bindTileEntitySpecialRenderer(TEWoodLoom.class, new TESRWoodLoom());
         ClientRegistry.bindTileEntitySpecialRenderer(TEWoodChest.class, new TESRWoodChest());
         ClientRegistry.bindTileEntitySpecialRenderer(TEWoodToolRack.class, new TESRWoodToolRack());
+    }
+
+    public static void onPostInitialization() {
+        for (var type : WoodType.getWoodTypes()) {
+            FuelManager.addFuel(new Fuel(IIngredient.of(new ItemStack(StorageWood.getWoodBlock(LOG, type))), type.getBurnTicks(), type.getBurnTemp()));
+        }
     }
 
     @SideOnly(Side.CLIENT)

@@ -5,8 +5,8 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.common.objects.inventory.capability.TFCInventoryLargeChest;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.objects.inventory.capability.InventoryWoodLargeChest;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.api.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.api.variant.block.WoodBlockVariant;
@@ -109,9 +109,9 @@ public class BlockWoodChest extends BlockChest implements IItemSize, IWoodBlock 
 
                         if (tileentity1 instanceof TileEntityChest) {
                             if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
-                                ilockablecontainer = new TFCInventoryLargeChest("container.chestDouble", ilockablecontainer, (TileEntityChest) tileentity1);
+                                ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer, (TileEntityChest) tileentity1);
                             } else {
-                                ilockablecontainer = new TFCInventoryLargeChest("container.chestDouble", (TileEntityChest) tileentity1, ilockablecontainer);
+                                ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", (TileEntityChest) tileentity1, ilockablecontainer);
                             }
                         }
                     }

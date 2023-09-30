@@ -1,4 +1,4 @@
-package net.dries007.tfc.compat.dynamictrees.trees;
+package net.dries007.tfc.module.wood.plugin.dynamictrees.trees;
 
 import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.IGenFeature;
@@ -10,10 +10,10 @@ import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenConiferToppe
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.compat.dynamictrees.dropcreators.DropCreatorWoodLog;
-import net.dries007.tfc.compat.dynamictrees.items.ItemWoodSeed;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.wood.StorageWood;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.dropcreators.DropCreatorWoodLog;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.items.ItemWoodSeed;
 import net.dries007.tfc.module.wood.tree.type.TreeType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

@@ -2,10 +2,10 @@ package net.dries007.tfc.module.plant.common.blocks;
 
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.dries007.tfc.module.plant.api.variant.block.PlantEnumVariant;
-import net.dries007.tfc.module.wood.common.blocks.BlockWoodLog;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -192,7 +192,7 @@ public class BlockPlantEpiphyte extends BlockPlant {
 
     private boolean canPlaceOn(World worldIn, BlockPos pos) {
         IBlockState state = worldIn.getBlockState(pos);
-        return state.getBlock() instanceof BlockWoodLog;
+        return state.getBlock() instanceof BlockLog;
     }
 
     private boolean canPlaceAt(World worldIn, BlockPos pos, EnumFacing facing) {

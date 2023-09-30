@@ -1,14 +1,14 @@
-package net.dries007.tfc.common.objects.inventory.capability;
+package net.dries007.tfc.module.core.objects.inventory.capability;
 
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.ILockableContainer;
 
-public class TFCInventoryLargeChest extends InventoryLargeChest {
+public class InventoryWoodLargeChest extends InventoryLargeChest {
     private final ILockableContainer upperChest;
     private final ILockableContainer lowerChest;
 
-    public TFCInventoryLargeChest(String nameIn, ILockableContainer upperChestIn, ILockableContainer lowerChestIn) {
+    public InventoryWoodLargeChest(String nameIn, ILockableContainer upperChestIn, ILockableContainer lowerChestIn) {
         super(nameIn, upperChestIn, lowerChestIn);
         this.upperChest = upperChestIn;
         this.lowerChest = lowerChestIn;

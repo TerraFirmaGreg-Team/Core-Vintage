@@ -7,8 +7,8 @@ import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.ModuleCore;
-import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.client.gui.GuiButton;
@@ -24,7 +24,7 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiSkills extends GuiContainerTFC {
-    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.getID("textures/gui/player_skills.png");
+    private static final ResourceLocation BACKGROUND = Helpers.getID("textures/gui/player_skills.png");
 
     private final String[] skillTooltips;
     private final int[] skillBarWidths;

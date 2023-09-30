@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.devices.common.blocks;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -9,9 +8,9 @@ import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.devices.common.blocks.itemblocks.ItemBlockCrucible;
 import net.dries007.tfc.module.devices.common.tile.TECrucible;
-import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -225,7 +224,7 @@ public class BlockCrucible extends BlockBase implements IHeatConsumerBlock, IIte
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
 
-        var resourceLocation = TerraFirmaCraft.getID(NAME.replaceAll("\\.", "/"));
+        var resourceLocation = Helpers.getID(NAME.replaceAll("\\.", "/"));
 
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder().customPath(resourceLocation).build());

@@ -1,10 +1,9 @@
 package net.dries007.tfc.module.wood.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.wood.api.type.WoodType;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodChest;
 import net.dries007.tfc.module.wood.common.tiles.TEWoodChest;
-import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;
@@ -55,10 +54,10 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
                 GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
                 GlStateManager.matrixMode(5888);
             } else if (te.getChestType() == BlockChest.Type.TRAP && woodType != null) {
-                bindTexture(TerraFirmaCraft.getID("textures/entity/chests/chest_trap.png"));
+                bindTexture(Helpers.getID("textures/entity/chests/chest_trap.png"));
                 Helpers.setWoodColor(woodType.getColor());
             } else if (woodType != null) {
-                bindTexture(TerraFirmaCraft.getID("textures/entity/chests/chest.png"));
+                bindTexture(Helpers.getID("textures/entity/chests/chest.png"));
                 Helpers.setWoodColor(woodType.getColor());
             }
         } else {
@@ -72,10 +71,10 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
                 GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
                 GlStateManager.matrixMode(5888);
             } else if (te.getChestType() == BlockChest.Type.TRAP && woodType != null) {
-                bindTexture(TerraFirmaCraft.getID("textures/entity/chests/chest_trap_double.png"));
+                bindTexture(Helpers.getID("textures/entity/chests/chest_trap_double.png"));
                 Helpers.setWoodColor(woodType.getColor());
             } else if (woodType != null) {
-                bindTexture(TerraFirmaCraft.getID("textures/entity/chests/chest_double.png"));
+                bindTexture(Helpers.getID("textures/entity/chests/chest_double.png"));
                 Helpers.setWoodColor(woodType.getColor());
             }
         }

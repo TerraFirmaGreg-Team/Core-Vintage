@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalBlackBear;
 import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalBlackBear;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalBlackBear extends RenderLiving<EntityAnimalBlackBear> {
-    private static final ResourceLocation BLACKBEAR_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/blackbear.png");
+    private static final ResourceLocation BLACKBEAR_TEXTURE = Helpers.getID("textures/entity/animal/predators/blackbear.png");
 
     public RenderAnimalBlackBear(RenderManager renderManager) {
         super(renderManager, new ModelAnimalBlackBear(), 0.7F);

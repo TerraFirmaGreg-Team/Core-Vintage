@@ -2,6 +2,7 @@ package net.dries007.tfc.world.classic.chunkdata;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.network.PacketChunkData;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,7 +23,7 @@ public final class CapabilityChunkData {
     /**
      * Ресурсное имя для возможности (capability) хранения данных чанка.
      */
-    public static final ResourceLocation CHUNK_DATA = TerraFirmaCraft.getID("chunkdata");
+    public static final ResourceLocation CHUNK_DATA = Helpers.getID("chunkdata");
 
     /**
      * Метод preInit() выполняет регистрацию возможности (capability) для хранения данных чанка.

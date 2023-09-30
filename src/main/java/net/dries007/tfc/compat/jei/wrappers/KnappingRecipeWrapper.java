@@ -5,9 +5,9 @@ import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -20,11 +20,11 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class KnappingRecipeWrapper implements IRecipeWrapper {
-    private static final ResourceLocation CLAY_DISABLED_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_disabled.png");
-    private static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_fire_disabled.png");
-    private static final ResourceLocation CLAY_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button.png");
-    private static final ResourceLocation FIRE_CLAY_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_fire.png");
-    private static final ResourceLocation LEATHER_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/leather_button.png");
+    private static final ResourceLocation CLAY_DISABLED_TEXTURE = Helpers.getID("textures/gui/knapping/clay_button_disabled.png");
+    private static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = Helpers.getID("textures/gui/knapping/clay_button_fire_disabled.png");
+    private static final ResourceLocation CLAY_TEXTURE = Helpers.getID("textures/gui/knapping/clay_button.png");
+    private static final ResourceLocation FIRE_CLAY_TEXTURE = Helpers.getID("textures/gui/knapping/clay_button_fire.png");
+    private static final ResourceLocation LEATHER_TEXTURE = Helpers.getID("textures/gui/knapping/leather_button.png");
 
     private static final List<ResourceLocation> ROCK_TEXTURES = new ArrayList<>();
     protected final KnappingRecipe recipe;

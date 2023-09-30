@@ -1,16 +1,15 @@
 package net.dries007.tfc.module.devices.common.blocks;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.IHasModel;
-import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
-import net.dries007.tfc.module.devices.common.tile.TEQuern;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.sound.TFCSounds;
+import net.dries007.tfc.module.devices.common.tile.TEQuern;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -258,7 +257,7 @@ public class BlockQuern extends BlockBase implements IItemSize, IHighlightHandle
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
 
-        var resourceLocation = TerraFirmaCraft.getID(NAME.replaceAll("\\.", "/"));
+        var resourceLocation = Helpers.getID(NAME.replaceAll("\\.", "/"));
 
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder().customPath(resourceLocation).build());

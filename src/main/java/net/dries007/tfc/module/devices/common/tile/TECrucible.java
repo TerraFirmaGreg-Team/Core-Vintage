@@ -13,11 +13,11 @@ import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrap
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.objects.tile.ITileFields;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.module.devices.ModuleDevice;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

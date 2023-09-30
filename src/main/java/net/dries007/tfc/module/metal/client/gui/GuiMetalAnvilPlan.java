@@ -6,6 +6,7 @@ import net.dries007.tfc.client.button.GuiButtonAnvilPlanIcon;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.util.NBTBuilder;
@@ -28,7 +29,7 @@ import static net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil.SLOT_INPUT
 
 @SideOnly(Side.CLIENT)
 public class GuiMetalAnvilPlan extends GuiContainerTE<TEMetalAnvil> {
-    public static final ResourceLocation PLAN_BACKGROUND = TerraFirmaCraft.getID("textures/gui/anvil_plan.png");
+    public static final ResourceLocation PLAN_BACKGROUND = Helpers.getID("textures/gui/anvil_plan.png");
 
     private final ItemStack inputStack;
     private int page;

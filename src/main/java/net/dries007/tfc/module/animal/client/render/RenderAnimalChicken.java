@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalChicken;
 import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
 import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalChicken;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -18,13 +18,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalChicken extends RenderLiving<EntityAnimalChicken> {
-    private static final ResourceLocation CHICKEN_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/chicken_young.png");
-    private static final ResourceLocation CHICKEN_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/chicken_old.png");
+    private static final ResourceLocation CHICKEN_YOUNG = Helpers.getID("textures/entity/animal/livestock/chicken_young.png");
+    private static final ResourceLocation CHICKEN_OLD = Helpers.getID("textures/entity/animal/livestock/chicken_old.png");
 
-    private static final ResourceLocation ROOSTER_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/rooster_young.png");
-    private static final ResourceLocation ROOSTER_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/rooster_old.png");
+    private static final ResourceLocation ROOSTER_YOUNG = Helpers.getID("textures/entity/animal/livestock/rooster_young.png");
+    private static final ResourceLocation ROOSTER_OLD = Helpers.getID("textures/entity/animal/livestock/rooster_old.png");
 
-    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/livestock/chick.png");
+    private static final ResourceLocation CHICK_TEXTURE = Helpers.getID("textures/entity/animal/livestock/chick.png");
 
     public RenderAnimalChicken(RenderManager manager) {
         super(manager, new ModelAnimalChicken(), 0.3F);

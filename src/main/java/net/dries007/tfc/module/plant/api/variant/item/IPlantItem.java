@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.plant.api.variant.item;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.plant.api.type.PlantType;
 import net.minecraft.util.ResourceLocation;
 
@@ -42,6 +42,6 @@ public interface IPlantItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.getID(String.format("plant/%s", getType()));
+        return Helpers.getID(String.format("plant/%s", getType()));
     }
 }

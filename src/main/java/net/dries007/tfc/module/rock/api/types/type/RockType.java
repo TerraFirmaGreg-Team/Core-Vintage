@@ -3,7 +3,7 @@ package net.dries007.tfc.module.rock.api.types.type;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.rock.api.types.category.RockCategory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -176,6 +176,6 @@ public class RockType {
      */
     @Nonnull
     public ResourceLocation getTexture() {
-        return TerraFirmaCraft.getID("textures/blocks/rock/raw/" + this + ".png");
+        return Helpers.getID("textures/blocks/rock/raw/" + this + ".png");
     }
 }

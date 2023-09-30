@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.core.objects.container;
 
+import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.module.core.api.objects.container.ContainerTE;
 import net.dries007.tfc.module.core.api.objects.container.IButtonHandler;
 import net.dries007.tfc.module.core.objects.blocks.BlockPowderKeg;
-import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.module.core.objects.tiles.TEPowderKeg;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;

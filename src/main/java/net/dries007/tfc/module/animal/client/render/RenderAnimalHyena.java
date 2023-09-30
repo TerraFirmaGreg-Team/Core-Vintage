@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalHyena;
 import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalHyena;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalHyena extends RenderLiving<EntityAnimalHyena> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/hyena.png");
+    private static final ResourceLocation TEXTURE = Helpers.getID("textures/entity/animal/predators/hyena.png");
 
     public RenderAnimalHyena(RenderManager renderManager) {
         super(renderManager, new ModelAnimalHyena(), 0.7F);

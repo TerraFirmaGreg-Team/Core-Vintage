@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.agriculture.api.crop.variant.item;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.module.agriculture.api.crop.type.CropType;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -45,7 +45,7 @@ public interface ICropItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getRegistryLocation() {
-        return TerraFirmaCraft.getID(String.format("crop.%s.%s", getItemVariant(), getType()));
+        return Helpers.getID(String.format("crop.%s.%s", getItemVariant(), getType()));
     }
 
     /**
@@ -55,6 +55,6 @@ public interface ICropItem extends IHasModel {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.getID(String.format("crop/%s/%s", getItemVariant(), getType()));
+        return Helpers.getID(String.format("crop/%s/%s", getItemVariant(), getType()));
     }
 }

@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.devices.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.api.client.render.TESRBase;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.devices.common.tile.TEBellows;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
 public class TESRBellows extends TESRBase<TEBellows> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/blocks/device/bellows/tesr.png");
+    private static final ResourceLocation TEXTURE = Helpers.getID("textures/blocks/device/bellows/tesr.png");
 
     @Override
     public void render(TEBellows te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

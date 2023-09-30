@@ -2,7 +2,7 @@ package net.dries007.tfc.compat.dynamictrees.dropcreators;
 
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.wood.common.blocks.BlockWoodLog;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class DropCreatorWoodLog extends DropCreator {
     public DropCreatorWoodLog() {
-        super(TerraFirmaCraft.getID("logs"));
+        super(Helpers.getID("logs"));
     }
 
     @Override

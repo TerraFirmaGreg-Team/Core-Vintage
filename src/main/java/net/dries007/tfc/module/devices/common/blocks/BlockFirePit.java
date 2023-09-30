@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.devices.common.blocks;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.property.ILightableBlock;
@@ -8,12 +7,12 @@ import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.module.core.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.devices.common.tile.TEBellows;
 import net.dries007.tfc.module.devices.common.tile.TEFirePit;
 import net.dries007.tfc.util.DamageSourcesTFC;
-import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -380,7 +379,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IL
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
 
-        var resourceLocation = TerraFirmaCraft.getID(NAME.replaceAll("\\.", "/"));
+        var resourceLocation = Helpers.getID(NAME.replaceAll("\\.", "/"));
 
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder().customPath(resourceLocation).build());

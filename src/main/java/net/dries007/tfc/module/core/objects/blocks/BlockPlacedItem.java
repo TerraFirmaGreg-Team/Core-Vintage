@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.core.objects.blocks;
 
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.objects.tiles.TEPlacedItem;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
-import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

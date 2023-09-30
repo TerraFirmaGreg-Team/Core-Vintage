@@ -6,9 +6,9 @@ import net.dries007.tfc.client.button.GuiButtonAnvilPlan;
 import net.dries007.tfc.client.button.GuiButtonAnvilStep;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.metal.common.tiles.TEMetalAnvil;
 import net.dries007.tfc.network.PacketGuiButton;
-import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
@@ -22,7 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import java.io.IOException;
 
 public class GuiMetalAnvil extends GuiContainerTE<TEMetalAnvil> {
-    public static final ResourceLocation ANVIL_BACKGROUND = TerraFirmaCraft.getID("textures/gui/anvil.png");
+    public static final ResourceLocation ANVIL_BACKGROUND = Helpers.getID("textures/gui/anvil.png");
     public static final int BUTTON_ID_STEP_MIN = 0;
     public static final int BUTTON_ID_STEP_MAX = 7;
     public static final int BUTTON_ID_PLAN = 8;

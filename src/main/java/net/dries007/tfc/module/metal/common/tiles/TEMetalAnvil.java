@@ -15,13 +15,13 @@ import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCall
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalAnvil;
 import net.dries007.tfc.module.rock.common.blocks.BlockRockAnvil;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;

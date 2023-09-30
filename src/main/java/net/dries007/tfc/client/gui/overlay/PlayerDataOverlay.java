@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.gui.overlay;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
@@ -9,6 +8,7 @@ import net.dries007.tfc.compat.gregtech.items.tools.behaviors.ChiselBehavior;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.config.HealthDisplayFormat;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -35,7 +35,7 @@ import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public final class PlayerDataOverlay {
-    private static final ResourceLocation ICONS = TerraFirmaCraft.getID("textures/gui/icons/overlay.png");
+    private static final ResourceLocation ICONS = Helpers.getID("textures/gui/icons/overlay.png");
     private static final ResourceLocation MC_ICONS = new ResourceLocation("minecraft:textures/gui/icons.png");
     private static final PlayerDataOverlay INSTANCE = new PlayerDataOverlay();
 

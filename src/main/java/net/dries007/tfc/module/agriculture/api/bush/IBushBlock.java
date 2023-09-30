@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.agriculture.api.bush;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.IItemProvider;
 import net.dries007.tfc.module.agriculture.api.bush.type.BushType;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -36,7 +36,7 @@ public interface IBushBlock extends IHasModel, IItemProvider {
      */
     @Nonnull
     default ResourceLocation getResourceLocation() {
-        return TerraFirmaCraft.getID(String.format("berry_bush/%s", getType()));
+        return Helpers.getID(String.format("berry_bush/%s", getType()));
     }
 
 

@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalGrouse;
 import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
 import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalGrouse;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -18,13 +18,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalGrouse extends RenderLiving<EntityAnimalGrouse> {
-    private static final ResourceLocation FEMALE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/grousef_young.png");
-    private static final ResourceLocation FEMALE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/grousef_old.png");
+    private static final ResourceLocation FEMALE_YOUNG = Helpers.getID("textures/entity/animal/livestock/grousef_young.png");
+    private static final ResourceLocation FEMALE_OLD = Helpers.getID("textures/entity/animal/livestock/grousef_old.png");
 
-    private static final ResourceLocation MALE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/grousem_young.png");
-    private static final ResourceLocation MALE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/grousem_old.png");
+    private static final ResourceLocation MALE_YOUNG = Helpers.getID("textures/entity/animal/livestock/grousem_young.png");
+    private static final ResourceLocation MALE_OLD = Helpers.getID("textures/entity/animal/livestock/grousem_old.png");
 
-    private static final ResourceLocation CHICK_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/livestock/grouse_chick.png");
+    private static final ResourceLocation CHICK_TEXTURE = Helpers.getID("textures/entity/animal/livestock/grouse_chick.png");
 
     public RenderAnimalGrouse(RenderManager manager) {
         super(manager, new ModelAnimalGrouse(), 0.3F);

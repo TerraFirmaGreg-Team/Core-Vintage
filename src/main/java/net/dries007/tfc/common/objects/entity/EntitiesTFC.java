@@ -59,11 +59,11 @@ public class EntitiesTFC {
     }
 
     private static void register(String name, Class<? extends Entity> cls) {
-        EntityRegistry.registerModEntity(TerraFirmaCraft.getID(name), cls, name, id++, TerraFirmaCraft.getInstance(), 160, 20, true);
+        EntityRegistry.registerModEntity(Helpers.getID(name), cls, name, id++, TerraFirmaCraft.getInstance(), 160, 20, true);
     }
 
     private static void registerLiving(String name, Class<? extends Entity> cls, int eggPrimaryColor, int eggSecondaryColor) {
         //Register entity and create a spawn egg for creative
-        EntityRegistry.registerModEntity(TerraFirmaCraft.getID(name), cls, name, id++, TerraFirmaCraft.getInstance(), 80, 3, true, eggPrimaryColor, eggSecondaryColor);
+        EntityRegistry.registerModEntity(Helpers.getID(name), cls, name, id++, TerraFirmaCraft.getInstance(), 80, 3, true, eggPrimaryColor, eggSecondaryColor);
     }
 }

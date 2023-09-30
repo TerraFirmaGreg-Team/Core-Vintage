@@ -2,8 +2,8 @@ package net.dries007.tfc.api.recipes.heat;
 
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.compat.jei.util.IJEISimpleRecipe;
-import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.init.RegistryCore;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;

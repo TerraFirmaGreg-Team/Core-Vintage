@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.capability.player;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public final class CapabilityPlayerData {
-    public static final ResourceLocation KEY = TerraFirmaCraft.getID("player_skills");
+    public static final ResourceLocation KEY = Helpers.getID("player_skills");
     @CapabilityInject(IPlayerData.class)
     public static Capability<IPlayerData> CAPABILITY;
 

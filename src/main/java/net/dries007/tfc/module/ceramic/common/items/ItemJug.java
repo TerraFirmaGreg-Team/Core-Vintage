@@ -2,8 +2,8 @@ package net.dries007.tfc.module.ceramic.common.items;
 
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
 import net.dries007.tfc.api.types.drinkable.Drinkable;
-import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.FluidTransferHelper;
 import net.minecraft.creativetab.CreativeTabs;

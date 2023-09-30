@@ -3,6 +3,7 @@ package net.dries007.tfc.client.gui;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonPowderkegSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.objects.tiles.TEPowderKeg;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.client.gui.GuiButton;
@@ -18,7 +19,7 @@ import javax.annotation.Nonnull;
 import java.io.IOException;
 
 public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
-    public static final ResourceLocation POWDERKEG_BACKGROUND = TerraFirmaCraft.getID("textures/gui/powderkeg.png");
+    public static final ResourceLocation POWDERKEG_BACKGROUND = Helpers.getID("textures/gui/powderkeg.png");
     private final String translationKey;
 
     public GuiPowderkeg(Container container, InventoryPlayer playerInv, TEPowderKeg tile, String translationKey) {

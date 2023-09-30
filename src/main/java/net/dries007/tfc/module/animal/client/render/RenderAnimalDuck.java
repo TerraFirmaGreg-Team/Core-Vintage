@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalDuck;
 import net.dries007.tfc.module.animal.common.entities.TFCEntityAnimal;
 import net.dries007.tfc.module.animal.common.entities.livestock.EntityAnimalDuck;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -18,13 +18,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalDuck extends RenderLiving<EntityAnimalDuck> {
-    private static final ResourceLocation DUCK_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/duck_old.png");
-    private static final ResourceLocation DUCK_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/duck_young.png");
+    private static final ResourceLocation DUCK_OLD = Helpers.getID("textures/entity/animal/livestock/duck_old.png");
+    private static final ResourceLocation DUCK_YOUNG = Helpers.getID("textures/entity/animal/livestock/duck_young.png");
 
-    private static final ResourceLocation DRAKE_OLD = TerraFirmaCraft.getID("textures/entity/animal/livestock/drake_old.png");
-    private static final ResourceLocation DRAKE_YOUNG = TerraFirmaCraft.getID("textures/entity/animal/livestock/drake_young.png");
+    private static final ResourceLocation DRAKE_OLD = Helpers.getID("textures/entity/animal/livestock/drake_old.png");
+    private static final ResourceLocation DRAKE_YOUNG = Helpers.getID("textures/entity/animal/livestock/drake_young.png");
 
-    private static final ResourceLocation DUCKLING_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/livestock/duckling.png");
+    private static final ResourceLocation DUCKLING_TEXTURE = Helpers.getID("textures/entity/animal/livestock/duckling.png");
 
     public RenderAnimalDuck(RenderManager manager) {
         super(manager, new ModelAnimalDuck(), 0.3F);

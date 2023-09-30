@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.animal.common.blocks;
 
 import net.dries007.tfc.module.animal.common.items.ItemAnimalHide;
-import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.animal.common.tiles.TEPlacedHide;
-import net.dries007.tfc.module.core.objects.blocks.BlockPlacedItem;
+import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.objects.blocks.BlockPlacedItem;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;

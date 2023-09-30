@@ -16,7 +16,6 @@ import net.dries007.tfc.module.soil.ModuleSoil;
 import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.proxy.IProxy;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -64,9 +63,6 @@ public final class TerraFirmaCraft {
         return instance;
     }
 
-    public static ResourceLocation getID(String path) {
-        return new ResourceLocation(MOD_ID, path);
-    }
 
     /**
      * Используй это только на preInit фазе.

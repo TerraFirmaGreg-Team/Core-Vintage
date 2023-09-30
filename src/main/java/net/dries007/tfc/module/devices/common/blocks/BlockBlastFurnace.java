@@ -2,20 +2,19 @@ package net.dries007.tfc.module.devices.common.blocks;
 
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.api.util.property.ILightableBlock;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.objects.items.ItemFireStarter;
-import net.dries007.tfc.module.metal.common.tiles.TEMetalSheet;
 import net.dries007.tfc.module.devices.common.tile.TEBellows;
 import net.dries007.tfc.module.devices.common.tile.TEBlastFurnace;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.module.metal.common.blocks.BlockMetalCladding;
-import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.metal.common.tiles.TEMetalSheet;
 import net.dries007.tfc.util.block.Multiblock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -174,7 +173,7 @@ public class BlockBlastFurnace extends BlockBase implements IBellowsConsumerBloc
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
 
-        var resourceLocation = TerraFirmaCraft.getID(NAME.replaceAll("\\.", "/"));
+        var resourceLocation = Helpers.getID(NAME.replaceAll("\\.", "/"));
 
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder().customPath(resourceLocation).build());

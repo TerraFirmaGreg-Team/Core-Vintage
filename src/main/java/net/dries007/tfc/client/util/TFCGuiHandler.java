@@ -11,6 +11,7 @@ import net.dries007.tfc.module.ceramic.common.container.ContainerSmallVessel;
 import net.dries007.tfc.module.ceramic.common.items.ItemMold;
 import net.dries007.tfc.module.ceramic.common.items.ItemSmallVessel;
 import net.dries007.tfc.module.ceramic.common.tiles.TELargeVessel;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.objects.container.*;
 import net.dries007.tfc.module.core.objects.items.ItemQuiver;
 import net.dries007.tfc.module.core.objects.tiles.TEPowderKeg;
@@ -33,7 +34,6 @@ import net.dries007.tfc.module.wood.common.blocks.BlockWoodChest;
 import net.dries007.tfc.module.wood.common.container.ContainerWoodBarrel;
 import net.dries007.tfc.module.wood.common.container.ContainerWoodChest;
 import net.dries007.tfc.module.wood.common.tiles.TEWoodBarrel;
-import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -48,13 +48,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TFCGuiHandler implements IGuiHandler {
-    public static final ResourceLocation SMALL_INVENTORY_BACKGROUND = TerraFirmaCraft.getID("textures/gui/small_inventory.png");
-    public static final ResourceLocation CLAY_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button.png");
-    public static final ResourceLocation FIRE_CLAY_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_fire.png");
-    public static final ResourceLocation LEATHER_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/leather_button.png");
-    public static final ResourceLocation QUIVER_BACKGROUND = TerraFirmaCraft.getID("textures/gui/quiver_inventory.png");
-    public static final ResourceLocation CLAY_DISABLED_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_disabled.png");
-    public static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = TerraFirmaCraft.getID("textures/gui/knapping/clay_button_fire_disabled.png");
+    public static final ResourceLocation SMALL_INVENTORY_BACKGROUND = Helpers.getID("textures/gui/small_inventory.png");
+    public static final ResourceLocation CLAY_TEXTURE = Helpers.getID("textures/gui/knapping/clay_button.png");
+    public static final ResourceLocation FIRE_CLAY_TEXTURE = Helpers.getID("textures/gui/knapping/clay_button_fire.png");
+    public static final ResourceLocation LEATHER_TEXTURE = Helpers.getID("textures/gui/knapping/leather_button.png");
+    public static final ResourceLocation QUIVER_BACKGROUND = Helpers.getID("textures/gui/quiver_inventory.png");
+    public static final ResourceLocation CLAY_DISABLED_TEXTURE = Helpers.getID("textures/gui/knapping/clay_button_disabled.png");
+    public static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = Helpers.getID("textures/gui/knapping/clay_button_fire_disabled.png");
 
     // use this instead of player.openGui() -> avoids magic numbers
     public static void openGui(World world, BlockPos pos, EntityPlayer player, Type type) {

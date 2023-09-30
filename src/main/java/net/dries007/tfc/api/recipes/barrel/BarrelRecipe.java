@@ -2,8 +2,8 @@ package net.dries007.tfc.api.recipes.barrel;
 
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.init.RegistryCore;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

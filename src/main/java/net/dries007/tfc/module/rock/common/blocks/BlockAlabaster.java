@@ -1,13 +1,13 @@
 package net.dries007.tfc.module.rock.common.blocks;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.EnumColor;
 import net.dries007.tfc.api.util.IHasModel;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariant;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
@@ -40,7 +40,7 @@ public class BlockAlabaster extends BlockBase implements IItemSize, IHasModel {
 
         this.variant = variant;
         this.color = color;
-        this.modelLocation = TerraFirmaCraft.getID("rock/alabaster/color/" + variant);
+        this.modelLocation = Helpers.getID("rock/alabaster/color/" + variant);
 
         setCreativeTab(MISC_TAB);
         setSoundType(SoundType.STONE);

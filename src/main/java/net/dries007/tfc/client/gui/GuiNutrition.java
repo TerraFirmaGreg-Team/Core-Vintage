@@ -5,8 +5,8 @@ import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiNutrition extends GuiContainerTFC {
-    private static final ResourceLocation BACKGROUND = TerraFirmaCraft.getID("textures/gui/player_nutrition.png");
+    private static final ResourceLocation BACKGROUND = Helpers.getID("textures/gui/player_nutrition.png");
 
     private final float[] cachedNutrients;
 

@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalDeer;
 import net.dries007.tfc.module.animal.common.entities.huntable.EntityAnimalDeer;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -15,9 +15,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalDeer extends RenderLiving<EntityAnimalDeer> {
-    private static final ResourceLocation DEER_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/deer.png");
+    private static final ResourceLocation DEER_TEXTURE = Helpers.getID("textures/entity/animal/huntable/deer.png");
 
-    private static final ResourceLocation FAWN_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/huntable/deer_fawn.png");
+    private static final ResourceLocation FAWN_TEXTURE = Helpers.getID("textures/entity/animal/huntable/deer_fawn.png");
 
     public RenderAnimalDeer(RenderManager manager) {
         super(manager, new ModelAnimalDeer(), 0.7F);

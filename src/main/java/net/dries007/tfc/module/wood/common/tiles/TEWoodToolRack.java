@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.wood.common.tiles;
 
 import gregtech.api.items.toolitem.IGTTool;
-import net.dries007.tfc.module.core.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.core.api.objects.tile.TEBase;
+import net.dries007.tfc.module.core.objects.items.ItemFireStarter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;

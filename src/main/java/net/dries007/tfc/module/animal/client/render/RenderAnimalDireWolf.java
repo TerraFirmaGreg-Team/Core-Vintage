@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalDireWolf;
 import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalDireWolf;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalDireWolf extends RenderLiving<EntityAnimalDireWolf> {
-    private static final ResourceLocation TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/direwolf.png");
+    private static final ResourceLocation TEXTURE = Helpers.getID("textures/entity/animal/predators/direwolf.png");
 
     public RenderAnimalDireWolf(RenderManager renderManager) {
         super(renderManager, new ModelAnimalDireWolf(), 0.7F);

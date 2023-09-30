@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.sound;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -386,7 +386,7 @@ public class TFCSounds {
     }
 
     private static SoundEvent createSoundEvent(String name) {
-        final var soundID = TerraFirmaCraft.getID(name);
+        final var soundID = Helpers.getID(name);
         return new SoundEvent(soundID).setRegistryName(soundID);
     }
 }

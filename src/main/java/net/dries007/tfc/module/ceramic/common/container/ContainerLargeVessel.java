@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.ceramic.common.container;
 
-import net.dries007.tfc.module.ceramic.common.blocks.BlockLargeVessel;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.module.ceramic.common.blocks.BlockLargeVessel;
 import net.dries007.tfc.module.ceramic.common.tiles.TELargeVessel;
 import net.dries007.tfc.module.core.api.objects.container.ContainerTE;
 import net.dries007.tfc.module.core.api.objects.container.IButtonHandler;

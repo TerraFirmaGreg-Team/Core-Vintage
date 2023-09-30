@@ -4,9 +4,9 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.jei.util.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.MetalHeatingRecipeWrapper;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class MetalHeatingCategory extends BaseRecipeCategory<MetalHeatingRecipeWrapper> {
-    private static final ResourceLocation ICONS = TerraFirmaCraft.getID("textures/gui/icons/jei.png");
+    private static final ResourceLocation ICONS = Helpers.getID("textures/gui/icons/jei.png");
 
     private final IDrawableStatic slot;
     private final IDrawableStatic fire;

@@ -53,6 +53,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static com.google.common.math.DoubleMath.mean;
+import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.module.rock.api.types.variant.block.RockBlockVariants.*;
 import static net.dries007.tfc.module.soil.api.variant.block.SoilBlockVariants.*;
 import static net.minecraft.block.material.Material.WATER;
@@ -580,5 +581,9 @@ public final class Helpers {
             return variant == GRASS || variant == DRY_GRASS || variant == DIRT;
         }
         return false;
+    }
+
+    public static ResourceLocation getID(String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 }

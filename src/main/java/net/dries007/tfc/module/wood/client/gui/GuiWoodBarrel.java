@@ -6,11 +6,11 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.client.util.FluidSpriteCache;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.wood.client.button.GuiButtonBarrelSeal;
 import net.dries007.tfc.module.wood.common.container.ContainerWoodBarrel;
 import net.dries007.tfc.module.wood.common.tiles.TEWoodBarrel;
 import net.dries007.tfc.network.PacketGuiButton;
-import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -38,7 +38,7 @@ import java.util.List;
 
 
 public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
-    public static final ResourceLocation BARREL_BACKGROUND = TerraFirmaCraft.getID("textures/gui/barrel.png");
+    public static final ResourceLocation BARREL_BACKGROUND = Helpers.getID("textures/gui/barrel.png");
     private final String translationKey;
 
     public GuiWoodBarrel(Container container, InventoryPlayer playerInv, TEWoodBarrel tile, String translationKey) {

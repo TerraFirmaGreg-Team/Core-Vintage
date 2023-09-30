@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.animal.client.render;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.client.model.ModelAnimalLion;
 import net.dries007.tfc.module.animal.common.entities.predator.EntityAnimalLion;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderAnimalLion extends RenderLiving<EntityAnimalLion> {
-    private static final ResourceLocation LIONS_TEXTURE = TerraFirmaCraft.getID("textures/entity/animal/predators/lions.png");
+    private static final ResourceLocation LIONS_TEXTURE = Helpers.getID("textures/entity/animal/predators/lions.png");
 
     public RenderAnimalLion(RenderManager manager) {
         super(manager, new ModelAnimalLion(), 0.3F);

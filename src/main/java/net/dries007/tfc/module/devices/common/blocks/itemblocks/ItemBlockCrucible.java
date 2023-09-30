@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.devices.common.blocks.itemblocks;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.util.Alloy;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;

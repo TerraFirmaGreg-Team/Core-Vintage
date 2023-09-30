@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.core.objects.blocks.itemblocks;
 
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.devices.common.tile.TELogPile;
 import net.dries007.tfc.module.devices.common.tile.TEPitKiln;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
-import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;

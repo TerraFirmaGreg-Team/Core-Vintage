@@ -1,10 +1,10 @@
 package net.dries007.tfc.api.capability.size;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.api.capability.ItemStickCapability;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.BlockLadder;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public final class CapabilityItemSize {
-    public static final ResourceLocation KEY = TerraFirmaCraft.getID("item_size");
+    public static final ResourceLocation KEY = Helpers.getID("item_size");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new Object2ObjectLinkedOpenHashMap<>(); //Used inside CT, set custom IItemSize for items outside TFC
     @CapabilityInject(IItemSize.class)
     public static Capability<IItemSize> ITEM_SIZE_CAPABILITY;

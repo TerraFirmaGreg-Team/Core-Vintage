@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.capability.food;
 
-import net.dries007.tfc.module.food.api.type.FoodType;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.food.api.type.FoodType;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;

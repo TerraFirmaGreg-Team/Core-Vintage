@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.devices.common.container;
 
-import net.dries007.tfc.module.core.api.objects.container.ContainerTE;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.module.core.api.objects.container.ContainerTE;
 import net.dries007.tfc.module.devices.common.tile.TECrucible;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;

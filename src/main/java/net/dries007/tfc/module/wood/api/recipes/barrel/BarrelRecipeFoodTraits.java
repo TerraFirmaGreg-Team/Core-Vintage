@@ -22,18 +22,18 @@ public class BarrelRecipeFoodTraits extends BarrelRecipe {
     private final FoodTrait trait;
     private final String tooltipName;
 
-    private BarrelRecipeFoodTraits(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, FoodTrait trait, int duration, String tooltipName) {
-        super(inputFluid, inputStack, null, ItemStack.EMPTY, duration);
+    private BarrelRecipeFoodTraits(String name, @Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, FoodTrait trait, int duration, String tooltipName) {
+        super(name, inputFluid, inputStack, null, ItemStack.EMPTY, duration);
         this.trait = trait;
         this.tooltipName = tooltipName;
     }
 
-    public static BarrelRecipe pickling(@Nonnull IIngredient<ItemStack> inputStack) {
-        return new BarrelRecipeFoodTraits(IIngredient.of(FluidRegistry.getFluid("vinegar"), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.BRINED), FoodTrait.PICKLED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_pickling");
+    public static BarrelRecipe pickling(String name, @Nonnull IIngredient<ItemStack> inputStack) {
+        return new BarrelRecipeFoodTraits(name, IIngredient.of(FluidRegistry.getFluid("vinegar"), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.BRINED), FoodTrait.PICKLED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_pickling");
     }
 
-    public static BarrelRecipe brining(@Nonnull IIngredient<ItemStack> inputStack) {
-        return new BarrelRecipeFoodTraits(IIngredient.of(FluidRegistry.getFluid("brine"), 125), inputStack, FoodTrait.BRINED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_brining");
+    public static BarrelRecipe brining(String name, @Nonnull IIngredient<ItemStack> inputStack) {
+        return new BarrelRecipeFoodTraits(name, IIngredient.of(FluidRegistry.getFluid("brine"), 125), inputStack, FoodTrait.BRINED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_brining");
     }
 
     @Override

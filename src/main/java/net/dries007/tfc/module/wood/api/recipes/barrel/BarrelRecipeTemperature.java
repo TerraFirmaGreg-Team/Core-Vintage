@@ -22,8 +22,8 @@ import java.util.List;
 public class BarrelRecipeTemperature extends BarrelRecipe {
     private final int coolAmount;
 
-    public BarrelRecipeTemperature(IIngredient<FluidStack> fluidInput, int coolAmount) {
-        super(fluidInput, IIngredient.empty(), null, ItemStack.EMPTY, 0);
+    public BarrelRecipeTemperature(String name, IIngredient<FluidStack> fluidInput, int coolAmount) {
+        super(name, fluidInput, IIngredient.empty(), null, ItemStack.EMPTY, 0);
         this.coolAmount = coolAmount;
     }
 

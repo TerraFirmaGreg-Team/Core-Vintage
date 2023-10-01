@@ -16,8 +16,8 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class BarrelRecipeDynamicBowlFood extends BarrelRecipe {
-    public BarrelRecipeDynamicBowlFood(IIngredient<FluidStack> inputFluid, IIngredient<ItemStack> inputStack, int duration) {
-        super(inputFluid, inputStack, null, new ItemStack(Items.BOWL), duration);
+    public BarrelRecipeDynamicBowlFood(String name, IIngredient<FluidStack> inputFluid, IIngredient<ItemStack> inputStack, int duration) {
+        super(name, inputFluid, inputStack, null, new ItemStack(Items.BOWL), duration);
     }
 
     @Override

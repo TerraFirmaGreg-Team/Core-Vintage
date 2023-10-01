@@ -1,8 +1,8 @@
-package net.dries007.tfc.common.objects.recipes.handlers;
+package net.dries007.tfc.module.wood.objects.recipes;
 
 import net.dries007.tfc.module.core.init.RegistryCore;
 
-public class LoomRecipes {
+public class LoomRecipesAdd {
 
     public static void register() {
         var registry = RegistryCore.LOOM;

@@ -1,5 +1,6 @@
 package net.dries007.tfc.module.wood.api.recipes.barrel;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.util.Helpers;
@@ -16,8 +17,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
+    private static final Set<BarrelRecipe> BARREL_RECIPE = new ObjectLinkedOpenHashSet<>();
+
     protected final IIngredient<ItemStack> inputStack;
     protected final IIngredient<FluidStack> inputFluid;
     private final FluidStack outputFluid;
@@ -33,12 +37,21 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
      * @param outputStack the output stack, when this recipe is completed
      * @param duration    the duration, in ticks, for this recipe to complete. 0 = Instant while negative means this recipe is infinite (for custom recipes that wait for unseal)
      */
-    public BarrelRecipe(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, @Nullable FluidStack outputFluid, @Nonnull ItemStack outputStack, int duration) {
+    public BarrelRecipe(String name, @Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, @Nullable FluidStack outputFluid, @Nonnull ItemStack outputStack, int duration) {
+        setRegistryName(name);
         this.inputStack = inputStack;
         this.inputFluid = inputFluid;
         this.outputFluid = outputFluid;
         this.outputStack = outputStack;
         this.duration = duration;
+
+        if (name.isEmpty()) {
+            throw new RuntimeException(String.format("BarrelRecipe name must contain any character: [%s]", name));
+        }
+
+        if (!BARREL_RECIPE.add(this)) {
+            throw new RuntimeException(String.format("BarrelRecipe: [%s] already exists!", name));
+        }
     }
 
     @Nullable
@@ -226,5 +239,47 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
             }
         }
         return 0;
+    }
+
+    public static class Builder {
+        private final String name;
+        private IIngredient<ItemStack> inputStack;
+        private IIngredient<FluidStack> inputFluid;
+        private FluidStack outputFluid;
+        private ItemStack outputStack;
+        private int duration;
+
+        public Builder(String name) {
+            this.name = name;
+        }
+
+        public Builder setInputStack(IIngredient<ItemStack> inputStack) {
+            this.inputStack = inputStack;
+            return this;
+        }
+
+        public Builder setInputFluid(IIngredient<FluidStack> inputFluid) {
+            this.inputFluid = inputFluid;
+            return this;
+        }
+
+        public Builder setOutputFluid(FluidStack outputFluid) {
+            this.outputFluid = outputFluid;
+            return this;
+        }
+
+        public Builder setOutputStack(ItemStack outputStack) {
+            this.outputStack = outputStack;
+            return this;
+        }
+
+        public Builder setDuration(int duration) {
+            this.duration = duration;
+            return this;
+        }
+
+        public BarrelRecipe build() {
+            return new BarrelRecipe(name, inputFluid, inputStack, outputFluid, outputStack, duration);
+        }
     }
 }

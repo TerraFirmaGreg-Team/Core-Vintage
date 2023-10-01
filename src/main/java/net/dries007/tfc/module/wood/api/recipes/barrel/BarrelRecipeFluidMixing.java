@@ -12,8 +12,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class BarrelRecipeFluidMixing extends BarrelRecipe {
-    public BarrelRecipeFluidMixing(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IngredientFluidItem inputStack, @Nullable FluidStack outputFluid, int duration) {
-        super(inputFluid, inputStack, outputFluid, ItemStack.EMPTY, duration);
+    public BarrelRecipeFluidMixing(String name, @Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IngredientFluidItem inputStack, @Nullable FluidStack outputFluid, int duration) {
+        super(name, inputFluid, inputStack, outputFluid, ItemStack.EMPTY, duration);
     }
 
     @Override

@@ -1,15 +1,17 @@
 package net.dries007.tfc.module.core.init;
 
-import net.dries007.tfc.api.recipes.*;
-import net.dries007.tfc.module.core.api.recipes.*;
+import net.dries007.tfc.module.core.api.recipes.AlloyRecipe;
+import net.dries007.tfc.module.core.api.recipes.BlastFurnaceRecipe;
+import net.dries007.tfc.module.core.api.recipes.BloomeryRecipe;
+import net.dries007.tfc.module.core.api.recipes.WeldingRecipe;
 import net.dries007.tfc.module.core.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
-import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.module.core.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.module.core.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
 import net.dries007.tfc.module.wood.api.recipes.LoomRecipe;
+import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;

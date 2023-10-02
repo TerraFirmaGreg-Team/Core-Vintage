@@ -7,6 +7,6 @@ import com.codetaylor.mc.athenaeum.inventory.IObservableFluidTank;
  * {@link IObservableFluidTank} interface.
  */
 public interface ITileDataFluidTank
-    extends IObservableFluidTank {
+        extends IObservableFluidTank {
 
 }

@@ -11,22 +11,22 @@ import net.minecraft.world.World;
 
 public interface IInteractionRenderer<I extends IInteraction> {
 
-  void renderSolidPass(I interaction, World world, RenderItem renderItem, BlockPos pos, IBlockState blockState, float partialTicks);
+    void renderSolidPass(I interaction, World world, RenderItem renderItem, BlockPos pos, IBlockState blockState, float partialTicks);
 
-  void renderSolidPassText(I interaction, World world, FontRenderer fontRenderer, int yaw, Vec3d offset, BlockPos pos, IBlockState blockState, float partialTicks);
+    void renderSolidPassText(I interaction, World world, FontRenderer fontRenderer, int yaw, Vec3d offset, BlockPos pos, IBlockState blockState, float partialTicks);
 
-  /**
-   * @param interaction
-   * @param world
-   * @param renderItem
-   * @param hitSide
-   * @param hitVec
-   * @param hitPos
-   * @param blockState
-   * @param heldItemMainHand
-   * @param partialTicks
-   * @return true if any rendering was done
-   */
-  boolean renderAdditivePass(I interaction, World world, RenderItem renderItem, EnumFacing hitSide, Vec3d hitVec, BlockPos hitPos, IBlockState blockState, ItemStack heldItemMainHand, float partialTicks);
+    /**
+     * @param interaction
+     * @param world
+     * @param renderItem
+     * @param hitSide
+     * @param hitVec
+     * @param hitPos
+     * @param blockState
+     * @param heldItemMainHand
+     * @param partialTicks
+     * @return true if any rendering was done
+     */
+    boolean renderAdditivePass(I interaction, World world, RenderItem renderItem, EnumFacing hitSide, Vec3d hitVec, BlockPos hitPos, IBlockState blockState, ItemStack heldItemMainHand, float partialTicks);
 
 }

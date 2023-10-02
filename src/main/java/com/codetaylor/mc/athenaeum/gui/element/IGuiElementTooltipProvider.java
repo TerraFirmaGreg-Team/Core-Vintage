@@ -3,8 +3,8 @@ package com.codetaylor.mc.athenaeum.gui.element;
 import java.util.List;
 
 public interface IGuiElementTooltipProvider extends
-    IGuiElement {
+        IGuiElement {
 
-  List<String> tooltipTextGet(List<String> tooltip);
+    List<String> tooltipTextGet(List<String> tooltip);
 
 }

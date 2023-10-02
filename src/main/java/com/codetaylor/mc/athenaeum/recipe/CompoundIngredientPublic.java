@@ -6,10 +6,10 @@ import net.minecraftforge.common.crafting.CompoundIngredient;
 import java.util.Collection;
 
 public class CompoundIngredientPublic
-    extends CompoundIngredient {
+        extends CompoundIngredient {
 
-  public CompoundIngredientPublic(Collection<Ingredient> children) {
+    public CompoundIngredientPublic(Collection<Ingredient> children) {
 
-    super(children);
-  }
+        super(children);
+    }
 }

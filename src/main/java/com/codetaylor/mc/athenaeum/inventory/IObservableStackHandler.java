@@ -4,10 +4,10 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public interface IObservableStackHandler {
 
-  void addObserver(IContentsChangedEventHandler handler);
+    void addObserver(IContentsChangedEventHandler handler);
 
-  interface IContentsChangedEventHandler {
+    interface IContentsChangedEventHandler {
 
-    void onContentsChanged(ItemStackHandler stackHandler, int slotIndex);
-  }
+        void onContentsChanged(ItemStackHandler stackHandler, int slotIndex);
+    }
 }

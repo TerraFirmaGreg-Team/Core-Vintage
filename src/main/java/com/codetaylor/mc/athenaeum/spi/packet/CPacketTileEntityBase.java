@@ -9,37 +9,37 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public abstract class CPacketTileEntityBase<REQ extends CPacketTileEntityBase>
-    extends PacketBlockPosBase<REQ> {
+        extends PacketBlockPosBase<REQ> {
 
-  public CPacketTileEntityBase() {
-    // serialization
-  }
-
-  public CPacketTileEntityBase(BlockPos blockPos) {
-
-    super(blockPos);
-  }
-
-  @Override
-  public IMessage onMessage(
-      REQ message,
-      MessageContext ctx
-  ) {
-
-    EntityPlayerSP player = Minecraft.getMinecraft().player;
-    World world = player.getEntityWorld();
-
-    if (world.isBlockLoaded(message.blockPos)) {
-      TileEntity tileEntity = world.getTileEntity(message.blockPos);
-      return this.onMessage(message, ctx, tileEntity);
+    public CPacketTileEntityBase() {
+        // serialization
     }
 
-    return null;
-  }
+    public CPacketTileEntityBase(BlockPos blockPos) {
 
-  protected abstract IMessage onMessage(
-      REQ message,
-      MessageContext ctx,
-      TileEntity tileEntity
-  );
+        super(blockPos);
+    }
+
+    @Override
+    public IMessage onMessage(
+            REQ message,
+            MessageContext ctx
+    ) {
+
+        EntityPlayerSP player = Minecraft.getMinecraft().player;
+        World world = player.getEntityWorld();
+
+        if (world.isBlockLoaded(message.blockPos)) {
+            TileEntity tileEntity = world.getTileEntity(message.blockPos);
+            return this.onMessage(message, ctx, tileEntity);
+        }
+
+        return null;
+    }
+
+    protected abstract IMessage onMessage(
+            REQ message,
+            MessageContext ctx,
+            TileEntity tileEntity
+    );
 }

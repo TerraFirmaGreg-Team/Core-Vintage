@@ -6,9 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 public final class TileDataServiceLogger {
 
-  public static final Logger LOGGER = LogManager.getLogger(ModAthenaeum.MOD_ID + "." + TileDataService.class.getSimpleName());
+    public static final Logger LOGGER = LogManager.getLogger(ModAthenaeum.MOD_ID + "." + TileDataService.class.getSimpleName());
 
-  private TileDataServiceLogger() {
-    //
-  }
+    private TileDataServiceLogger() {
+        //
+    }
 }

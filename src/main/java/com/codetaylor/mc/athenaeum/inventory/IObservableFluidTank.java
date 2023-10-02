@@ -4,10 +4,10 @@ import net.minecraftforge.fluids.FluidTank;
 
 public interface IObservableFluidTank {
 
-  void addObserver(IContentsChangedEventHandler handler);
+    void addObserver(IContentsChangedEventHandler handler);
 
-  interface IContentsChangedEventHandler {
+    interface IContentsChangedEventHandler {
 
-    void onContentsChanged(FluidTank fluidTank, int amount);
-  }
+        void onContentsChanged(FluidTank fluidTank, int amount);
+    }
 }

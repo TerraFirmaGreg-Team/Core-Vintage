@@ -3,43 +3,43 @@ package com.codetaylor.mc.athenaeum.property;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
 public class PropertyObject<V>
-    implements IUnlistedProperty<V> {
+        implements IUnlistedProperty<V> {
 
-  public static <T> PropertyObject<T> create(String name, Class<T> type) {
+    private final String name;
+    private final Class<V> type;
 
-    return new PropertyObject<>(name, type);
-  }
+    public PropertyObject(String name, Class<V> type) {
 
-  private final String name;
-  private final Class<V> type;
+        this.name = name;
+        this.type = type;
+    }
 
-  public PropertyObject(String name, Class<V> type) {
+    public static <T> PropertyObject<T> create(String name, Class<T> type) {
 
-    this.name = name;
-    this.type = type;
-  }
+        return new PropertyObject<>(name, type);
+    }
 
-  @Override
-  public String getName() {
+    @Override
+    public String getName() {
 
-    return this.name;
-  }
+        return this.name;
+    }
 
-  @Override
-  public boolean isValid(V value) {
+    @Override
+    public boolean isValid(V value) {
 
-    return true;
-  }
+        return true;
+    }
 
-  @Override
-  public Class<V> getType() {
+    @Override
+    public Class<V> getType() {
 
-    return this.type;
-  }
+        return this.type;
+    }
 
-  @Override
-  public String valueToString(V value) {
+    @Override
+    public String valueToString(V value) {
 
-    return value.toString();
-  }
+        return value.toString();
+    }
 }

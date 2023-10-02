@@ -4,12 +4,12 @@ import com.codetaylor.mc.athenaeum.integration.IIntegrationPluginHandler;
 import mezz.jei.api.IModPlugin;
 
 public class IntegrationPluginHandler
-    implements IIntegrationPluginHandler {
+        implements IIntegrationPluginHandler {
 
-  @Override
-  public void execute(String pluginClass) throws Exception {
+    @Override
+    public void execute(String pluginClass) throws Exception {
 
-    IModPlugin plugin = (IModPlugin) Class.forName(pluginClass).newInstance();
-    PluginDelegate.registerPlugin(plugin);
-  }
+        IModPlugin plugin = (IModPlugin) Class.forName(pluginClass).newInstance();
+        PluginDelegate.registerPlugin(plugin);
+    }
 }

@@ -1,9 +1,10 @@
 ### pack.json
 
-  * atlas_definitions: define atlas id -> size
-  * paths:output: define the output path relative to the current folder
-  * paths:resource_path: define the output path relative to your mod's resource root
-  * paths:input: define input paths, relative to the current folder, and which atlas the images collected from that path should use
+* atlas_definitions: define atlas id -> size
+* paths:output: define the output path relative to the current folder
+* paths:resource_path: define the output path relative to your mod's resource root
+* paths:input: define input paths, relative to the current folder, and which atlas the images collected from that path
+  should use
 
 ```json
 {
@@ -33,8 +34,8 @@ image.png
 image.png.json
 ```
 
-  * id: will override the default id made from image path
-  * sub_images: splits this image into sub images using path#sub_image for image id
+* id: will override the default id made from image path
+* sub_images: splits this image into sub images using path#sub_image for image id
 
 ```json
 {

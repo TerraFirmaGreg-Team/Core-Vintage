@@ -19,159 +19,159 @@ import net.minecraftforge.fml.relauncher.Side;
  */
 public class ThreadedNetworkWrapper {
 
-  private final SimpleNetworkWrapper parent;
+    private final SimpleNetworkWrapper parent;
 
-  public ThreadedNetworkWrapper(String channelName) {
+    public ThreadedNetworkWrapper(String channelName) {
 
-    this.parent = new SimpleNetworkWrapper(channelName);
-  }
-
-  private final class Wrapper<Q extends IMessage, A extends IMessage>
-      implements IMessageHandler<Q, A> {
-
-    private final IMessageHandler<Q, A> wrapped;
-
-    public Wrapper(IMessageHandler<Q, A> wrapped) {
-
-      this.wrapped = wrapped;
+        this.parent = new SimpleNetworkWrapper(channelName);
     }
 
-    @Override
-    public A onMessage(final Q message, final MessageContext ctx) {
+    public <Q extends IMessage, A extends IMessage> void registerMessage(
+            Class<? extends IMessageHandler<Q, A>> messageHandler,
+            Class<Q> requestMessageType,
+            int discriminator,
+            Side side
+    ) {
 
-      final IThreadListener target = ctx.side == Side.CLIENT ? Minecraft.getMinecraft() : FMLCommonHandler.instance()
-          .getMinecraftServerInstance();
-
-      if (target != null) {
-        target.addScheduledTask(new Runner(message, ctx));
-      }
-      return null;
+        this.registerMessage(this.instantiate(messageHandler), requestMessageType, discriminator, side);
     }
 
-    @Override
-    public String toString() {
+    private <Q extends IMessage, A extends IMessage> IMessageHandler<? super Q, ? extends A> instantiate(
+            Class<? extends IMessageHandler<? super Q, ? extends A>> handler
+    ) {
 
-      return this.wrapped.toString();
-    }
+        try {
+            return handler.newInstance();
 
-    @Override
-    public int hashCode() {
-
-      return this.wrapped.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-
-      if (obj instanceof Wrapper) {
-        return this.wrapped.equals(((Wrapper<?, ?>) obj).wrapped);
-
-      } else {
-        return this.wrapped.equals(obj);
-      }
-    }
-
-    private final class Runner
-        implements Runnable {
-
-      private final Q message;
-      private final MessageContext ctx;
-
-      public Runner(final Q message, final MessageContext ctx) {
-
-        this.message = message;
-        this.ctx = ctx;
-      }
-
-      @Override
-      public void run() {
-
-        final A reply = Wrapper.this.wrapped.onMessage(this.message, this.ctx);
-
-        if (reply != null) {
-
-          if (this.ctx.side == Side.CLIENT) {
-            ThreadedNetworkWrapper.this.sendToServer(reply);
-
-          } else {
-            final EntityPlayerMP player = this.ctx.getServerHandler().player;
-
-            if (player != null) {
-              ThreadedNetworkWrapper.this.sendTo(reply, player);
-            }
-          }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-      }
-
     }
 
-  }
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public <Q extends IMessage, A extends IMessage> void registerMessage(
+            IMessageHandler<? super Q, ? extends A> messageHandler,
+            Class<Q> requestMessageType,
+            int discriminator,
+            Side side
+    ) {
 
-  public <Q extends IMessage, A extends IMessage> void registerMessage(
-      Class<? extends IMessageHandler<Q, A>> messageHandler,
-      Class<Q> requestMessageType,
-      int discriminator,
-      Side side
-  ) {
-
-    this.registerMessage(this.instantiate(messageHandler), requestMessageType, discriminator, side);
-  }
-
-  private <Q extends IMessage, A extends IMessage> IMessageHandler<? super Q, ? extends A> instantiate(
-      Class<? extends IMessageHandler<? super Q, ? extends A>> handler
-  ) {
-
-    try {
-      return handler.newInstance();
-
-    } catch (Exception e) {
-      throw new RuntimeException(e);
+        this.parent.registerMessage(
+                (Wrapper<Q, A>) new Wrapper(messageHandler),
+                requestMessageType,
+                discriminator,
+                side
+        );
     }
-  }
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
-  public <Q extends IMessage, A extends IMessage> void registerMessage(
-      IMessageHandler<? super Q, ? extends A> messageHandler,
-      Class<Q> requestMessageType,
-      int discriminator,
-      Side side
-  ) {
+    public Packet<?> getPacketFrom(IMessage message) {
 
-    this.parent.registerMessage(
-        (Wrapper<Q, A>) new Wrapper(messageHandler),
-        requestMessageType,
-        discriminator,
-        side
-    );
-  }
+        return this.parent.getPacketFrom(message);
+    }
 
-  public Packet<?> getPacketFrom(IMessage message) {
+    public void sendToAll(IMessage message) {
 
-    return this.parent.getPacketFrom(message);
-  }
+        this.parent.sendToAll(message);
+    }
 
-  public void sendToAll(IMessage message) {
+    public void sendTo(IMessage message, EntityPlayerMP player) {
 
-    this.parent.sendToAll(message);
-  }
+        this.parent.sendTo(message, player);
+    }
 
-  public void sendTo(IMessage message, EntityPlayerMP player) {
+    public void sendToAllAround(IMessage message, NetworkRegistry.TargetPoint point) {
 
-    this.parent.sendTo(message, player);
-  }
+        this.parent.sendToAllAround(message, point);
+    }
 
-  public void sendToAllAround(IMessage message, NetworkRegistry.TargetPoint point) {
+    public void sendToDimension(IMessage message, int dimensionId) {
 
-    this.parent.sendToAllAround(message, point);
-  }
+        this.parent.sendToDimension(message, dimensionId);
+    }
 
-  public void sendToDimension(IMessage message, int dimensionId) {
+    public void sendToServer(IMessage message) {
 
-    this.parent.sendToDimension(message, dimensionId);
-  }
+        this.parent.sendToServer(message);
+    }
 
-  public void sendToServer(IMessage message) {
+    private final class Wrapper<Q extends IMessage, A extends IMessage>
+            implements IMessageHandler<Q, A> {
 
-    this.parent.sendToServer(message);
-  }
+        private final IMessageHandler<Q, A> wrapped;
+
+        public Wrapper(IMessageHandler<Q, A> wrapped) {
+
+            this.wrapped = wrapped;
+        }
+
+        @Override
+        public A onMessage(final Q message, final MessageContext ctx) {
+
+            final IThreadListener target = ctx.side == Side.CLIENT ? Minecraft.getMinecraft() : FMLCommonHandler.instance()
+                    .getMinecraftServerInstance();
+
+            if (target != null) {
+                target.addScheduledTask(new Runner(message, ctx));
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+
+            return this.wrapped.toString();
+        }
+
+        @Override
+        public int hashCode() {
+
+            return this.wrapped.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+
+            if (obj instanceof Wrapper) {
+                return this.wrapped.equals(((Wrapper<?, ?>) obj).wrapped);
+
+            } else {
+                return this.wrapped.equals(obj);
+            }
+        }
+
+        private final class Runner
+                implements Runnable {
+
+            private final Q message;
+            private final MessageContext ctx;
+
+            public Runner(final Q message, final MessageContext ctx) {
+
+                this.message = message;
+                this.ctx = ctx;
+            }
+
+            @Override
+            public void run() {
+
+                final A reply = Wrapper.this.wrapped.onMessage(this.message, this.ctx);
+
+                if (reply != null) {
+
+                    if (this.ctx.side == Side.CLIENT) {
+                        ThreadedNetworkWrapper.this.sendToServer(reply);
+
+                    } else {
+                        final EntityPlayerMP player = this.ctx.getServerHandler().player;
+
+                        if (player != null) {
+                            ThreadedNetworkWrapper.this.sendTo(reply, player);
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
 }

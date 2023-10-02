@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 
 public interface IContainerProvider<C extends Container, G extends GuiContainer> {
 
-  C getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos);
+    C getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos);
 
-  G getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos);
+    G getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos);
 
 }

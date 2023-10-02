@@ -14,146 +14,146 @@ import java.util.Random;
  * backing array.
  */
 public class DynamicStackHandler
-    extends ObservableStackHandler
-    implements ITileDataItemStackHandler {
+        extends ObservableStackHandler
+        implements ITileDataItemStackHandler {
 
-  public DynamicStackHandler(int initialSize) {
+    public DynamicStackHandler(int initialSize) {
 
-    super(1);
-    this.stacks = new ItemStackList(initialSize);
-  }
-
-  @Override
-  public void setSize(int size) {
-
-    this.stacks = new ItemStackList(size);
-  }
-
-  public int getTotalItemCount() {
-
-    int result = 0;
-
-    for (int i = 0; i < this.getSlots(); i++) {
-      ItemStack stackInSlot = this.getStackInSlot(i);
-
-      if (!stackInSlot.isEmpty()) {
-        result += stackInSlot.getCount();
-      }
+        super(1);
+        this.stacks = new ItemStackList(initialSize);
     }
 
-    return result;
-  }
+    @Override
+    public void setSize(int size) {
 
-  public ItemStack getFirstNonEmptyItemStack() {
-
-    for (int i = 0; i < this.getSlots(); i++) {
-      ItemStack stackInSlot = this.getStackInSlot(i);
-
-      if (!stackInSlot.isEmpty()) {
-        return stackInSlot;
-      }
-    }
-    return ItemStack.EMPTY;
-  }
-
-  @Nonnull
-  @Override
-  public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-
-    while (this.getSlots() - 1 < slot) {
-      this.stacks.add(ItemStack.EMPTY);
+        this.stacks = new ItemStackList(size);
     }
 
-    return super.insertItem(slot, stack, simulate);
-  }
+    public int getTotalItemCount() {
 
-  @Nonnull
-  @Override
-  public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        int result = 0;
 
-    if (slot > this.getSlots() - 1) {
-      return ItemStack.EMPTY;
+        for (int i = 0; i < this.getSlots(); i++) {
+            ItemStack stackInSlot = this.getStackInSlot(i);
+
+            if (!stackInSlot.isEmpty()) {
+                result += stackInSlot.getCount();
+            }
+        }
+
+        return result;
     }
 
-    return super.extractItem(slot, amount, simulate);
-  }
+    public ItemStack getFirstNonEmptyItemStack() {
 
-  public ItemStack extractRandomItem(boolean simulate, Random random) {
+        for (int i = 0; i < this.getSlots(); i++) {
+            ItemStack stackInSlot = this.getStackInSlot(i);
 
-    IntArrayList slots = new IntArrayList(this.getSlots());
-
-    for (int i = 0; i < this.getSlots(); i++) {
-
-      if (!this.getStackInSlot(i).isEmpty()) {
-        slots.add(i);
-      }
+            if (!stackInSlot.isEmpty()) {
+                return stackInSlot;
+            }
+        }
+        return ItemStack.EMPTY;
     }
 
-    if (slots.size() == 0) {
-      return ItemStack.EMPTY;
+    @Nonnull
+    @Override
+    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+
+        while (this.getSlots() - 1 < slot) {
+            this.stacks.add(ItemStack.EMPTY);
+        }
+
+        return super.insertItem(slot, stack, simulate);
     }
 
-    int slot = slots.getInt(random.nextInt(slots.size()));
-    return this.extractItem(slot, 1, simulate);
-  }
+    @Nonnull
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
 
-  public ItemStack extractItem(boolean simulate) {
+        if (slot > this.getSlots() - 1) {
+            return ItemStack.EMPTY;
+        }
 
-    for (int i = this.getSlots() - 1; i >= 0; i--) {
-
-      if (!this.getStackInSlot(i).isEmpty()) {
-        return this.extractItem(i, 1, simulate);
-      }
+        return super.extractItem(slot, amount, simulate);
     }
 
-    return ItemStack.EMPTY;
-  }
+    public ItemStack extractRandomItem(boolean simulate, Random random) {
 
-  @Override
-  public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
+        IntArrayList slots = new IntArrayList(this.getSlots());
 
-    while (this.getSlots() - 1 < slot) {
-      this.stacks.add(ItemStack.EMPTY);
+        for (int i = 0; i < this.getSlots(); i++) {
+
+            if (!this.getStackInSlot(i).isEmpty()) {
+                slots.add(i);
+            }
+        }
+
+        if (slots.size() == 0) {
+            return ItemStack.EMPTY;
+        }
+
+        int slot = slots.getInt(random.nextInt(slots.size()));
+        return this.extractItem(slot, 1, simulate);
     }
 
-    super.setStackInSlot(slot, stack);
-  }
+    public ItemStack extractItem(boolean simulate) {
 
-  public ItemStack insertItem(ItemStack itemStack, boolean simulate) {
+        for (int i = this.getSlots() - 1; i >= 0; i--) {
 
-    ItemStack remaining = itemStack;
-    int i = 0;
+            if (!this.getStackInSlot(i).isEmpty()) {
+                return this.extractItem(i, 1, simulate);
+            }
+        }
 
-    while (!remaining.isEmpty()) {
-
-      while (this.getSlots() - 1 < i) {
-        this.stacks.add(ItemStack.EMPTY);
-      }
-
-      remaining = super.insertItem(i, remaining, simulate);
-      i += 1;
+        return ItemStack.EMPTY;
     }
 
-    return ItemStack.EMPTY;
-  }
+    @Override
+    public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
 
-  public void clearStacks() {
+        while (this.getSlots() - 1 < slot) {
+            this.stacks.add(ItemStack.EMPTY);
+        }
 
-    for (int i = 0; i < this.getSlots(); i++) {
-      this.extractItem(i, this.getSlotLimit(i), false);
+        super.setStackInSlot(slot, stack);
     }
-  }
 
-  private class ItemStackList
-      extends NonNullList<ItemStack> {
+    public ItemStack insertItem(ItemStack itemStack, boolean simulate) {
 
-    public ItemStackList(int size) {
+        ItemStack remaining = itemStack;
+        int i = 0;
 
-      super(new ArrayList<>(size), ItemStack.EMPTY);
+        while (!remaining.isEmpty()) {
 
-      for (int i = 0; i < size; i++) {
-        this.add(ItemStack.EMPTY);
-      }
+            while (this.getSlots() - 1 < i) {
+                this.stacks.add(ItemStack.EMPTY);
+            }
+
+            remaining = super.insertItem(i, remaining, simulate);
+            i += 1;
+        }
+
+        return ItemStack.EMPTY;
     }
-  }
+
+    public void clearStacks() {
+
+        for (int i = 0; i < this.getSlots(); i++) {
+            this.extractItem(i, this.getSlotLimit(i), false);
+        }
+    }
+
+    private class ItemStackList
+            extends NonNullList<ItemStack> {
+
+        public ItemStackList(int size) {
+
+            super(new ArrayList<>(size), ItemStack.EMPTY);
+
+            for (int i = 0; i < size; i++) {
+                this.add(ItemStack.EMPTY);
+            }
+        }
+    }
 }

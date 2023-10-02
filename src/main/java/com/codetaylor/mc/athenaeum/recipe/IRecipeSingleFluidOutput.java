@@ -4,6 +4,6 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface IRecipeSingleFluidOutput {
 
-  FluidStack getOutput();
+    FluidStack getOutput();
 
 }

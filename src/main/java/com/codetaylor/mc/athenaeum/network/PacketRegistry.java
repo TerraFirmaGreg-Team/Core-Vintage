@@ -8,42 +8,42 @@ import net.minecraftforge.fml.relauncher.Side;
  * Created by codetaylor on 12/3/2016.
  */
 public class PacketRegistry
-    implements IPacketRegistry {
+        implements IPacketRegistry {
 
-  private ThreadedNetworkWrapper threadedNetworkWrapper;
+    private final ThreadedNetworkWrapper threadedNetworkWrapper;
 
-  private int id = 0;
+    private int id = 0;
 
-  public PacketRegistry(ThreadedNetworkWrapper threadedNetworkWrapper) {
+    public PacketRegistry(ThreadedNetworkWrapper threadedNetworkWrapper) {
 
-    this.threadedNetworkWrapper = threadedNetworkWrapper;
-  }
+        this.threadedNetworkWrapper = threadedNetworkWrapper;
+    }
 
-  @Override
-  public <Q extends IMessage, A extends IMessage> IPacketRegistry register(
-      Class<? extends IMessageHandler<Q, A>> messageHandler,
-      Class<Q> requestMessageType,
-      Side side
-  ) {
+    @Override
+    public <Q extends IMessage, A extends IMessage> IPacketRegistry register(
+            Class<? extends IMessageHandler<Q, A>> messageHandler,
+            Class<Q> requestMessageType,
+            Side side
+    ) {
 
-    this.threadedNetworkWrapper.registerMessage(messageHandler, requestMessageType, this.nextId(), side);
-    return this;
-  }
+        this.threadedNetworkWrapper.registerMessage(messageHandler, requestMessageType, this.nextId(), side);
+        return this;
+    }
 
-  @Override
-  public <Q extends IMessage, A extends IMessage> IPacketRegistry register(
-      IMessageHandler<Q, A> messageHandler,
-      Class<Q> requestMessageType,
-      Side side
-  ) {
+    @Override
+    public <Q extends IMessage, A extends IMessage> IPacketRegistry register(
+            IMessageHandler<Q, A> messageHandler,
+            Class<Q> requestMessageType,
+            Side side
+    ) {
 
-    this.threadedNetworkWrapper.registerMessage(messageHandler, requestMessageType, this.nextId(), side);
-    return this;
-  }
+        this.threadedNetworkWrapper.registerMessage(messageHandler, requestMessageType, this.nextId(), side);
+        return this;
+    }
 
-  private int nextId() {
+    private int nextId() {
 
-    return this.id++;
-  }
+        return this.id++;
+    }
 
 }

@@ -12,25 +12,25 @@ import java.util.function.Predicate;
  * is used to determine if an item can go into the slot.
  */
 public class PredicateSlotItemHandler
-    extends SlotItemHandler {
+        extends SlotItemHandler {
 
-  private final Predicate<ItemStack> predicate;
+    private final Predicate<ItemStack> predicate;
 
-  public PredicateSlotItemHandler(
-      Predicate<ItemStack> predicate,
-      IItemHandler itemHandler,
-      int index,
-      int xPosition,
-      int yPosition
-  ) {
+    public PredicateSlotItemHandler(
+            Predicate<ItemStack> predicate,
+            IItemHandler itemHandler,
+            int index,
+            int xPosition,
+            int yPosition
+    ) {
 
-    super(itemHandler, index, xPosition, yPosition);
-    this.predicate = predicate;
-  }
+        super(itemHandler, index, xPosition, yPosition);
+        this.predicate = predicate;
+    }
 
-  @Override
-  public boolean isItemValid(@Nonnull ItemStack stack) {
+    @Override
+    public boolean isItemValid(@Nonnull ItemStack stack) {
 
-    return this.predicate.test(stack);
-  }
+        return this.predicate.test(stack);
+    }
 }

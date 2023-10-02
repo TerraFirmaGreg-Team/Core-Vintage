@@ -12,46 +12,46 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("WeakerAccess")
 public abstract class InteractionBase<T extends TileEntity & ITileInteractable>
-    implements IInteraction<T> {
+        implements IInteraction<T> {
 
-  protected final int sides;
-  protected final AxisAlignedBB bounds;
+    protected final int sides;
+    protected final AxisAlignedBB bounds;
 
-  public InteractionBase(EnumFacing[] sides, AxisAlignedBB bounds) {
+    public InteractionBase(EnumFacing[] sides, AxisAlignedBB bounds) {
 
-    this.bounds = bounds;
+        this.bounds = bounds;
 
-    int sidesEncoded = 0;
+        int sidesEncoded = 0;
 
-    for (EnumFacing side : sides) {
-      sidesEncoded |= (1 << side.getIndex());
+        for (EnumFacing side : sides) {
+            sidesEncoded |= (1 << side.getIndex());
+        }
+
+        this.sides = sidesEncoded;
     }
 
-    this.sides = sidesEncoded;
-  }
+    @Override
+    public AxisAlignedBB getInteractionBounds(World world, BlockPos pos, IBlockState blockState) {
 
-  @Override
-  public AxisAlignedBB getInteractionBounds(World world, BlockPos pos, IBlockState blockState) {
+        return this.bounds;
+    }
 
-    return this.bounds;
-  }
+    @Override
+    public boolean allowInteractionWithSide(EnumFacing facing) {
 
-  @Override
-  public boolean allowInteractionWithSide(EnumFacing facing) {
+        return ((this.sides & (1 << facing.getIndex())) == (1 << facing.getIndex()));
+    }
 
-    return ((this.sides & (1 << facing.getIndex())) == (1 << facing.getIndex()));
-  }
+    /**
+     * Override for more control over the additive render pass.
+     *
+     * @param sneaking         is the player sneaking
+     * @param heldItemMainHand the player's main hand item
+     * @return true if the interaction's item should be rendered in the interaction
+     */
+    @SideOnly(Side.CLIENT)
+    public boolean shouldRenderAdditivePassForStackInSlot(boolean sneaking, ItemStack heldItemMainHand) {
 
-  /**
-   * Override for more control over the additive render pass.
-   *
-   * @param sneaking         is the player sneaking
-   * @param heldItemMainHand the player's main hand item
-   * @return true if the interaction's item should be rendered in the interaction
-   */
-  @SideOnly(Side.CLIENT)
-  public boolean shouldRenderAdditivePassForStackInSlot(boolean sneaking, ItemStack heldItemMainHand) {
-
-    return heldItemMainHand.isEmpty();
-  }
+        return heldItemMainHand.isEmpty();
+    }
 }

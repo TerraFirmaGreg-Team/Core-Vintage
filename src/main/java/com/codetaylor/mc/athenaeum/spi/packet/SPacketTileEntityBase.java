@@ -8,33 +8,33 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public abstract class SPacketTileEntityBase<REQ extends SPacketTileEntityBase>
-    extends PacketBlockPosBase<REQ> {
+        extends PacketBlockPosBase<REQ> {
 
-  public SPacketTileEntityBase() {
-    // serialization
-  }
+    public SPacketTileEntityBase() {
+        // serialization
+    }
 
-  public SPacketTileEntityBase(BlockPos blockPos) {
+    public SPacketTileEntityBase(BlockPos blockPos) {
 
-    super(blockPos);
-  }
+        super(blockPos);
+    }
 
-  @Override
-  public IMessage onMessage(
-      REQ message,
-      MessageContext ctx
-  ) {
+    @Override
+    public IMessage onMessage(
+            REQ message,
+            MessageContext ctx
+    ) {
 
-    NetHandlerPlayServer serverHandler = ctx.getServerHandler();
-    EntityPlayerMP player = serverHandler.player;
-    TileEntity tileEntity = player.getEntityWorld().getTileEntity(message.blockPos);
+        NetHandlerPlayServer serverHandler = ctx.getServerHandler();
+        EntityPlayerMP player = serverHandler.player;
+        TileEntity tileEntity = player.getEntityWorld().getTileEntity(message.blockPos);
 
-    return this.onMessage(message, ctx, tileEntity);
-  }
+        return this.onMessage(message, ctx, tileEntity);
+    }
 
-  protected abstract IMessage onMessage(
-      REQ message,
-      MessageContext ctx,
-      TileEntity tileEntity
-  );
+    protected abstract IMessage onMessage(
+            REQ message,
+            MessageContext ctx,
+            TileEntity tileEntity
+    );
 }

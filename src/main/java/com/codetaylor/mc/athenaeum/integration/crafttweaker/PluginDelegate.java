@@ -19,65 +19,68 @@ import java.util.Map;
  */
 public class PluginDelegate {
 
-  private static final Map<String, PluginModDelegate> DELEGATE_MAP;
+    private static final Map<String, PluginModDelegate> DELEGATE_MAP;
 
-  static {
-    DELEGATE_MAP = new HashMap<>();
-  }
-
-  /* package */ static void registerZenClass(Class<?> zenClass) {
-
-    PluginDelegate.getPluginModDelegate(PluginDelegate.getModId()).registerZenClass(zenClass);
-  }
-
-  public static void addAddition(String modId, IAction action) {
-
-    // The mod id has to be supplied externally here because when this is called,
-    // the active mod container belongs to "crafttweaker".
-
-    PluginDelegate.getPluginModDelegate(modId).addAddition(action);
-  }
-
-  public static void addRemoval(String modId, IAction action) {
-
-    // The mod id has to be supplied externally here because when this is called,
-    // the active mod container belongs to "crafttweaker".
-
-    PluginDelegate.getPluginModDelegate(modId).addRemoval(action);
-  }
-
-  /* package */ static void init() {
-
-    PluginModDelegate delegate = DELEGATE_MAP.get(PluginDelegate.getModId());
-
-    if (delegate != null) {
-      delegate.init();
-    }
-  }
-
-  /* package */ static void apply() {
-
-    PluginModDelegate delegate = DELEGATE_MAP.get(PluginDelegate.getModId());
-
-    if (delegate != null) {
-      delegate.apply();
-    }
-  }
-
-  private static PluginModDelegate getPluginModDelegate(String modId) {
-
-    return DELEGATE_MAP.computeIfAbsent(modId, s -> new PluginModDelegate());
-  }
-
-  private static String getModId() {
-
-    ModContainer modContainer = Loader.instance().activeModContainer();
-
-    if (modContainer == null) {
-      throw new RuntimeException("Active mod container is null");
+    static {
+        DELEGATE_MAP = new HashMap<>();
     }
 
-    return modContainer.getModId();
-  }
+    /* package */
+    static void registerZenClass(Class<?> zenClass) {
+
+        PluginDelegate.getPluginModDelegate(PluginDelegate.getModId()).registerZenClass(zenClass);
+    }
+
+    public static void addAddition(String modId, IAction action) {
+
+        // The mod id has to be supplied externally here because when this is called,
+        // the active mod container belongs to "crafttweaker".
+
+        PluginDelegate.getPluginModDelegate(modId).addAddition(action);
+    }
+
+    public static void addRemoval(String modId, IAction action) {
+
+        // The mod id has to be supplied externally here because when this is called,
+        // the active mod container belongs to "crafttweaker".
+
+        PluginDelegate.getPluginModDelegate(modId).addRemoval(action);
+    }
+
+    /* package */
+    static void init() {
+
+        PluginModDelegate delegate = DELEGATE_MAP.get(PluginDelegate.getModId());
+
+        if (delegate != null) {
+            delegate.init();
+        }
+    }
+
+    /* package */
+    static void apply() {
+
+        PluginModDelegate delegate = DELEGATE_MAP.get(PluginDelegate.getModId());
+
+        if (delegate != null) {
+            delegate.apply();
+        }
+    }
+
+    private static PluginModDelegate getPluginModDelegate(String modId) {
+
+        return DELEGATE_MAP.computeIfAbsent(modId, s -> new PluginModDelegate());
+    }
+
+    private static String getModId() {
+
+        ModContainer modContainer = Loader.instance().activeModContainer();
+
+        if (modContainer == null) {
+            throw new RuntimeException("Active mod container is null");
+        }
+
+        return modContainer.getModId();
+    }
 
 }

@@ -5,35 +5,35 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public final class OreDictHelper {
 
-  public static void register(String oreDict, ItemStack... itemStacks) {
-
-    for (ItemStack itemStack : itemStacks) {
-      OreDictionary.registerOre(oreDict, itemStack);
-    }
-  }
-
-  public static boolean contains(String oreDict, ItemStack itemStack) {
-
-    if (itemStack.isEmpty()) {
-      return false;
+    private OreDictHelper() {
+        //
     }
 
-    int logWood = OreDictionary.getOreID(oreDict);
-    int[] oreIDs = OreDictionary.getOreIDs(itemStack);
+    public static void register(String oreDict, ItemStack... itemStacks) {
 
-    //noinspection ForLoopReplaceableByForEach
-    for (int i = 0; i < oreIDs.length; i++) {
-
-      if (oreIDs[i] == logWood) {
-        return true;
-      }
+        for (ItemStack itemStack : itemStacks) {
+            OreDictionary.registerOre(oreDict, itemStack);
+        }
     }
 
-    return false;
-  }
+    public static boolean contains(String oreDict, ItemStack itemStack) {
 
-  private OreDictHelper() {
-    //
-  }
+        if (itemStack.isEmpty()) {
+            return false;
+        }
+
+        int logWood = OreDictionary.getOreID(oreDict);
+        int[] oreIDs = OreDictionary.getOreIDs(itemStack);
+
+        //noinspection ForLoopReplaceableByForEach
+        for (int i = 0; i < oreIDs.length; i++) {
+
+            if (oreIDs[i] == logWood) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }

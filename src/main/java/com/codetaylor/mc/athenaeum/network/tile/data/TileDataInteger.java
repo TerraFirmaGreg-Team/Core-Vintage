@@ -4,50 +4,50 @@ import com.codetaylor.mc.athenaeum.network.tile.spi.TileDataBase;
 import net.minecraft.network.PacketBuffer;
 
 public class TileDataInteger
-    extends TileDataBase {
+        extends TileDataBase {
 
-  private int value;
+    private int value;
 
-  public TileDataInteger(int initialValue) {
+    public TileDataInteger(int initialValue) {
 
-    this(initialValue, 1);
-  }
-
-  public TileDataInteger(int initialValue, int updateInterval) {
-
-    super(updateInterval);
-    this.set(initialValue);
-  }
-
-  public void set(int value) {
-
-    if (value != this.value) {
-      this.value = value;
-      this.setDirty(true);
+        this(initialValue, 1);
     }
-  }
 
-  public int get() {
+    public TileDataInteger(int initialValue, int updateInterval) {
 
-    return this.value;
-  }
+        super(updateInterval);
+        this.set(initialValue);
+    }
 
-  public int add(int value) {
+    public void set(int value) {
 
-    this.set(this.value + value);
-    return this.value;
-  }
+        if (value != this.value) {
+            this.value = value;
+            this.setDirty(true);
+        }
+    }
 
-  @Override
-  public void read(PacketBuffer buffer) {
+    public int get() {
 
-    this.value = buffer.readInt();
-  }
+        return this.value;
+    }
 
-  @Override
-  public void write(PacketBuffer buffer) {
+    public int add(int value) {
 
-    buffer.writeInt(this.value);
-  }
+        this.set(this.value + value);
+        return this.value;
+    }
+
+    @Override
+    public void read(PacketBuffer buffer) {
+
+        this.value = buffer.readInt();
+    }
+
+    @Override
+    public void write(PacketBuffer buffer) {
+
+        buffer.writeInt(this.value);
+    }
 
 }

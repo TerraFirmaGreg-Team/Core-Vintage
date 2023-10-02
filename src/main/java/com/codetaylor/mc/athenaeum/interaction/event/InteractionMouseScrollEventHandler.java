@@ -18,50 +18,50 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class InteractionMouseScrollEventHandler {
 
-  private final IPacketService packetService;
+    private final IPacketService packetService;
 
-  public InteractionMouseScrollEventHandler(IPacketService packetService) {
+    public InteractionMouseScrollEventHandler(IPacketService packetService) {
 
-    this.packetService = packetService;
-  }
-
-  @SideOnly(Side.CLIENT)
-  @SubscribeEvent
-  public void on(MouseEvent event) {
-
-    int wheelDelta = event.getDwheel();
-
-    if (wheelDelta == 0) {
-      return;
+        this.packetService = packetService;
     }
 
-    Minecraft minecraft = Minecraft.getMinecraft();
-    EntityPlayerSP player = minecraft.player;
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void on(MouseEvent event) {
 
-    if (!player.isSneaking()) {
-      return;
+        int wheelDelta = event.getDwheel();
+
+        if (wheelDelta == 0) {
+            return;
+        }
+
+        Minecraft minecraft = Minecraft.getMinecraft();
+        EntityPlayerSP player = minecraft.player;
+
+        if (!player.isSneaking()) {
+            return;
+        }
+
+        RayTraceResult rayTraceResult = minecraft.objectMouseOver;
+
+        if (rayTraceResult == null) {
+            return;
+        }
+
+        if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) {
+            return;
+        }
+
+        if (rayTraceResult.hitInfo instanceof InteractionRayTraceData.List) {
+
+            CSPacketInteractionMouseWheel packet = new CSPacketInteractionMouseWheel(
+                    rayTraceResult.getBlockPos(),
+                    wheelDelta,
+                    rayTraceResult.sideHit,
+                    rayTraceResult.hitVec
+            );
+            this.packetService.sendToServer(packet);
+            event.setCanceled(true);
+        }
     }
-
-    RayTraceResult rayTraceResult = minecraft.objectMouseOver;
-
-    if (rayTraceResult == null) {
-      return;
-    }
-
-    if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) {
-      return;
-    }
-
-    if (rayTraceResult.hitInfo instanceof InteractionRayTraceData.List) {
-
-      CSPacketInteractionMouseWheel packet = new CSPacketInteractionMouseWheel(
-          rayTraceResult.getBlockPos(),
-          wheelDelta,
-          rayTraceResult.sideHit,
-          rayTraceResult.hitVec
-      );
-      this.packetService.sendToServer(packet);
-      event.setCanceled(true);
-    }
-  }
 }

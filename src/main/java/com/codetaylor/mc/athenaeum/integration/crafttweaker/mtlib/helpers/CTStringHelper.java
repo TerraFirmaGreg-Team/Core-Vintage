@@ -32,75 +32,75 @@ import java.util.ListIterator;
  */
 public class CTStringHelper {
 
-  public static List<String> toLowerCase(List<String> stringList) {
+    public static List<String> toLowerCase(List<String> stringList) {
 
-    ListIterator<String> iterator = stringList.listIterator();
+        ListIterator<String> iterator = stringList.listIterator();
 
-    while (iterator.hasNext()) {
-      iterator.set(iterator.next().toLowerCase());
+        while (iterator.hasNext()) {
+            iterator.set(iterator.next().toLowerCase());
+        }
+
+        return stringList;
     }
 
-    return stringList;
-  }
+    public static String join(Collection<String> list, String conjunction) {
 
-  public static String join(Collection<String> list, String conjunction) {
+        StringBuilder sb = new StringBuilder();
+        if (conjunction == null) {
+            conjunction = ", ";
+        }
 
-    StringBuilder sb = new StringBuilder();
-    if (conjunction == null) {
-      conjunction = ", ";
+        if (list != null && !list.isEmpty()) {
+            for (String string : list) {
+                sb.append(string).append(conjunction);
+            }
+
+            sb.setLength(sb.length() - conjunction.length());
+        }
+
+        return sb.toString();
     }
 
-    if (list != null && !list.isEmpty()) {
-      for (String string : list) {
-        sb.append(string).append(conjunction);
-      }
+    public static String wildcardToRegex(String expression) {
 
-      sb.setLength(sb.length() - conjunction.length());
+        if (expression == null) {
+            return null;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append('^');
+
+        for (int i = 0; i < expression.length(); i++) {
+            char c = expression.charAt(i);
+
+            switch (c) {
+                case '*':
+                    sb.append(".*");
+                    break;
+                case '?':
+                    sb.append('.');
+                    break;
+
+                case '(':
+                case ')':
+                case '[':
+                case ']':
+                case '$':
+                case '^':
+                case '.':
+                case '{':
+                case '}':
+                case '|':
+                case '\\':
+                    sb.append('\\').append(c);
+                    break;
+                default:
+                    sb.append(c);
+                    break;
+            }
+        }
+
+        sb.append('$');
+        return sb.toString();
     }
-
-    return sb.toString();
-  }
-
-  public static String wildcardToRegex(String expression) {
-
-    if (expression == null) {
-      return null;
-    }
-
-    StringBuilder sb = new StringBuilder();
-    sb.append('^');
-
-    for (int i = 0; i < expression.length(); i++) {
-      char c = expression.charAt(i);
-
-      switch (c) {
-        case '*':
-          sb.append(".*");
-          break;
-        case '?':
-          sb.append('.');
-          break;
-
-        case '(':
-        case ')':
-        case '[':
-        case ']':
-        case '$':
-        case '^':
-        case '.':
-        case '{':
-        case '}':
-        case '|':
-        case '\\':
-          sb.append('\\').append(c);
-          break;
-        default:
-          sb.append(c);
-          break;
-      }
-    }
-
-    sb.append('$');
-    return sb.toString();
-  }
 }

@@ -7,12 +7,12 @@ import javax.annotation.Nullable;
 
 public interface ITileDataService {
 
-  int getServiceId();
+    int getServiceId();
 
-  @Nullable
-  TileDataTracker getTracker(TileEntityDataContainerBase tile);
+    @Nullable
+    TileDataTracker getTracker(TileEntityDataContainerBase tile);
 
-  void register(TileEntityDataContainerBase tile, ITileData[] data);
+    void register(TileEntityDataContainerBase tile, ITileData[] data);
 
-  void update();
+    void update();
 }

@@ -6,18 +6,18 @@ import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import javax.annotation.Nullable;
 
 public class IntegrationPluginHandler
-    implements IIntegrationPluginHandler {
+        implements IIntegrationPluginHandler {
 
-  @Override
-  public void execute(String plugin) throws Exception {
+    @Override
+    public void execute(String plugin) throws Exception {
 
-    PluginDelegate.registerZenClass(Class.forName(plugin));
-  }
+        PluginDelegate.registerZenClass(Class.forName(plugin));
+    }
 
-  @Nullable
-  @Override
-  public Class<? extends ModuleBase> getModuleClass() {
+    @Nullable
+    @Override
+    public Class<? extends ModuleBase> getModuleClass() {
 
-    return ModuleIntegration.class;
-  }
+        return ModuleIntegration.class;
+    }
 }

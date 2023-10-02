@@ -10,44 +10,44 @@ import net.minecraftforge.energy.IEnergyStorage;
 import java.io.IOException;
 
 public class TileDataEnergyStorage<T extends IEnergyStorage & ITileDataEnergyStorage>
-    extends TileDataBase {
+        extends TileDataBase {
 
-  private T energyStorage;
+    private final T energyStorage;
 
-  public TileDataEnergyStorage(T energyStorage) {
+    public TileDataEnergyStorage(T energyStorage) {
 
-    this(energyStorage, 1);
-  }
+        this(energyStorage, 1);
+    }
 
-  public TileDataEnergyStorage(T energyStorage, int updateInterval) {
+    public TileDataEnergyStorage(T energyStorage, int updateInterval) {
 
-    super(updateInterval);
-    this.energyStorage = energyStorage;
-    this.energyStorage.addObserver((handler, slot) -> this.setDirty(true));
-    this.setDirty(true);
-  }
+        super(updateInterval);
+        this.energyStorage = energyStorage;
+        this.energyStorage.addObserver((handler, slot) -> this.setDirty(true));
+        this.setDirty(true);
+    }
 
-  public IEnergyStorage getEnergyStorage() {
+    public IEnergyStorage getEnergyStorage() {
 
-    return this.energyStorage;
-  }
+        return this.energyStorage;
+    }
 
-  @Override
-  public void setDirty(boolean dirty) {
+    @Override
+    public void setDirty(boolean dirty) {
 
-    super.setDirty(dirty);
-  }
+        super.setDirty(dirty);
+    }
 
-  @Override
-  public void read(PacketBuffer buffer) throws IOException {
+    @Override
+    public void read(PacketBuffer buffer) throws IOException {
 
-    NBTTagCompound compound = Preconditions.checkNotNull(buffer.readCompoundTag());
-    this.energyStorage.deserializeNBT(compound);
-  }
+        NBTTagCompound compound = Preconditions.checkNotNull(buffer.readCompoundTag());
+        this.energyStorage.deserializeNBT(compound);
+    }
 
-  @Override
-  public void write(PacketBuffer buffer) {
+    @Override
+    public void write(PacketBuffer buffer) {
 
-    buffer.writeCompoundTag(this.energyStorage.serializeNBT());
-  }
+        buffer.writeCompoundTag(this.energyStorage.serializeNBT());
+    }
 }

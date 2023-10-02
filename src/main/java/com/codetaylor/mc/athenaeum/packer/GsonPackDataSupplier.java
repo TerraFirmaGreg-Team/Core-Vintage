@@ -6,20 +6,20 @@ import java.io.Reader;
 import java.util.function.Supplier;
 
 public class GsonPackDataSupplier
-    implements Supplier<PackData> {
+        implements Supplier<PackData> {
 
-  private final Gson gson;
-  private final Reader reader;
+    private final Gson gson;
+    private final Reader reader;
 
-  public GsonPackDataSupplier(Gson gson, Reader reader) {
+    public GsonPackDataSupplier(Gson gson, Reader reader) {
 
-    this.gson = gson;
-    this.reader = reader;
-  }
+        this.gson = gson;
+        this.reader = reader;
+    }
 
-  @Override
-  public PackData get() {
+    @Override
+    public PackData get() {
 
-    return this.gson.fromJson(this.reader, PackData.class);
-  }
+        return this.gson.fromJson(this.reader, PackData.class);
+    }
 }

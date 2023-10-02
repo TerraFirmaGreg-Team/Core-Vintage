@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.INBTSerializable;
  * {@link IObservableEnergyStorage} interface.
  */
 public interface ITileDataEnergyStorage
-    extends IObservableEnergyStorage,
-    INBTSerializable<NBTTagCompound> {
+        extends IObservableEnergyStorage,
+        INBTSerializable<NBTTagCompound> {
 
 }

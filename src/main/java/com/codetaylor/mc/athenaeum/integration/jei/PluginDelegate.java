@@ -9,51 +9,51 @@ import java.util.List;
 
 @JEIPlugin
 public class PluginDelegate
-    implements IModPlugin {
+        implements IModPlugin {
 
-  private static final List<IModPlugin> PLUGIN_LIST;
+    private static final List<IModPlugin> PLUGIN_LIST;
 
-  static {
-    PLUGIN_LIST = new ArrayList<>();
-  }
-
-  public static void registerPlugin(IModPlugin plugin) {
-
-    PLUGIN_LIST.add(plugin);
-  }
-
-  public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
-
-    for (IModPlugin plugin : PLUGIN_LIST) {
-      plugin.registerItemSubtypes(subtypeRegistry);
+    static {
+        PLUGIN_LIST = new ArrayList<>();
     }
-  }
 
-  public void registerIngredients(IModIngredientRegistration registry) {
+    public static void registerPlugin(IModPlugin plugin) {
 
-    for (IModPlugin plugin : PLUGIN_LIST) {
-      plugin.registerIngredients(registry);
+        PLUGIN_LIST.add(plugin);
     }
-  }
 
-  public void registerCategories(IRecipeCategoryRegistration registry) {
+    public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
 
-    for (IModPlugin plugin : PLUGIN_LIST) {
-      plugin.registerCategories(registry);
+        for (IModPlugin plugin : PLUGIN_LIST) {
+            plugin.registerItemSubtypes(subtypeRegistry);
+        }
     }
-  }
 
-  public void register(IModRegistry registry) {
+    public void registerIngredients(IModIngredientRegistration registry) {
 
-    for (IModPlugin plugin : PLUGIN_LIST) {
-      plugin.register(registry);
+        for (IModPlugin plugin : PLUGIN_LIST) {
+            plugin.registerIngredients(registry);
+        }
     }
-  }
 
-  public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+    public void registerCategories(IRecipeCategoryRegistration registry) {
 
-    for (IModPlugin plugin : PLUGIN_LIST) {
-      plugin.onRuntimeAvailable(jeiRuntime);
+        for (IModPlugin plugin : PLUGIN_LIST) {
+            plugin.registerCategories(registry);
+        }
     }
-  }
+
+    public void register(IModRegistry registry) {
+
+        for (IModPlugin plugin : PLUGIN_LIST) {
+            plugin.register(registry);
+        }
+    }
+
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+
+        for (IModPlugin plugin : PLUGIN_LIST) {
+            plugin.onRuntimeAvailable(jeiRuntime);
+        }
+    }
 }

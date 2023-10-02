@@ -14,63 +14,63 @@ import javax.annotation.Nonnull;
  * This is a partial block, ie. not a full cube.
  */
 public abstract class BlockPartialBase
-    extends Block {
+        extends Block {
 
-  public BlockPartialBase(Material material) {
+    public BlockPartialBase(Material material) {
 
-    super(material);
-  }
+        super(material);
+    }
 
-  // ---------------------------------------------------------------------------
-  // - Rendering
-  // ---------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------
+    // - Rendering
+    // ---------------------------------------------------------------------------
 
-  @Override
-  public boolean isSideSolid(IBlockState base_state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, EnumFacing side) {
+    @Override
+    public boolean isSideSolid(IBlockState base_state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, EnumFacing side) {
 
-    return false;
-  }
+        return false;
+    }
 
-  @Override
-  public boolean isFullBlock(IBlockState state) {
+    @Override
+    public boolean isFullBlock(IBlockState state) {
 
-    return false;
-  }
+        return false;
+    }
 
-  @Override
-  public boolean isFullCube(IBlockState state) {
+    @Override
+    public boolean isFullCube(IBlockState state) {
 
-    return this.isFullBlock(state);
-  }
+        return this.isFullBlock(state);
+    }
 
-  @Override
-  public boolean isOpaqueCube(IBlockState state) {
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
 
-    return this.isFullBlock(state);
-  }
+        return this.isFullBlock(state);
+    }
 
-  @Override
-  public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+    @Override
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
 
-    return this.isFullBlock(state);
-  }
+        return this.isFullBlock(state);
+    }
 
-  @Nonnull
-  @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    @Nonnull
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 
-    return BlockFaceShape.UNDEFINED;
-  }
+        return BlockFaceShape.UNDEFINED;
+    }
 
-  @Override
-  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    @Override
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 
-    return true;
-  }
+        return true;
+    }
 
-  @Override
-  public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+    @Override
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
 
-    return false;
-  }
+        return false;
+    }
 }

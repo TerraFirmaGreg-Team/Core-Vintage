@@ -6,22 +6,22 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ModuleIntegration
-    extends ModuleBase {
+        extends ModuleBase {
 
-  public ModuleIntegration() {
+    public ModuleIntegration() {
 
-    super(Integer.MAX_VALUE, ModAthenaeum.MOD_ID);
-  }
+        super(Integer.MAX_VALUE, ModAthenaeum.MOD_ID);
+    }
 
-  @Override
-  public void onPreInitializationEvent(FMLPreInitializationEvent event) {
+    @Override
+    public void onPreInitializationEvent(FMLPreInitializationEvent event) {
 
-    PluginDelegate.init();
-  }
+        PluginDelegate.init();
+    }
 
-  @Override
-  public void onPostInitializationEvent(FMLPostInitializationEvent event) {
+    @Override
+    public void onPostInitializationEvent(FMLPostInitializationEvent event) {
 
-    PluginDelegate.apply();
-  }
+        PluginDelegate.apply();
+    }
 }

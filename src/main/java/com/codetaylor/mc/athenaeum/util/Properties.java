@@ -10,20 +10,20 @@ import net.minecraft.util.EnumFacing;
 @SuppressWarnings("WeakerAccess")
 public class Properties {
 
-  public static final PropertyEnum<EnumFacing.Axis> PORTAL_AXIS = PropertyEnum.create(
-      "axis",
-      EnumFacing.Axis.class,
-      EnumFacing.Axis.X,
-      EnumFacing.Axis.Z
-  );
+    public static final PropertyEnum<EnumFacing.Axis> PORTAL_AXIS = PropertyEnum.create(
+            "axis",
+            EnumFacing.Axis.class,
+            EnumFacing.Axis.X,
+            EnumFacing.Axis.Z
+    );
 
-  public static final PropertyDirection FACING_HORIZONTAL = PropertyDirection.create(
-      "facing",
-      EnumFacing.Plane.HORIZONTAL
-  );
+    public static final PropertyDirection FACING_HORIZONTAL = PropertyDirection.create(
+            "facing",
+            EnumFacing.Plane.HORIZONTAL
+    );
 
-  private Properties() {
-    //
-  }
+    private Properties() {
+        //
+    }
 
 }

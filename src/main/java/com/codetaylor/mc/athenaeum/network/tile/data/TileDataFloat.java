@@ -6,50 +6,50 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.MathHelper;
 
 public class TileDataFloat
-    extends TileDataBase {
+        extends TileDataBase {
 
-  private float value;
+    private float value;
 
-  public TileDataFloat(float initialValue) {
+    public TileDataFloat(float initialValue) {
 
-    this(initialValue, 1);
-  }
-
-  public TileDataFloat(float initialValue, int updateInterval) {
-
-    super(updateInterval);
-    this.set(initialValue);
-  }
-
-  public void set(float value) {
-
-    if (MathHelper.abs(value - this.value) > MathConstants.FLT_EPSILON) {
-      this.value = value;
-      this.setDirty(true);
+        this(initialValue, 1);
     }
-  }
 
-  public float get() {
+    public TileDataFloat(float initialValue, int updateInterval) {
 
-    return this.value;
-  }
+        super(updateInterval);
+        this.set(initialValue);
+    }
 
-  public float add(float value) {
+    public void set(float value) {
 
-    this.set(this.value + value);
-    return this.value;
-  }
+        if (MathHelper.abs(value - this.value) > MathConstants.FLT_EPSILON) {
+            this.value = value;
+            this.setDirty(true);
+        }
+    }
 
-  @Override
-  public void read(PacketBuffer buffer) {
+    public float get() {
 
-    this.value = buffer.readFloat();
-  }
+        return this.value;
+    }
 
-  @Override
-  public void write(PacketBuffer buffer) {
+    public float add(float value) {
 
-    buffer.writeFloat(this.value);
-  }
+        this.set(this.value + value);
+        return this.value;
+    }
+
+    @Override
+    public void read(PacketBuffer buffer) {
+
+        this.value = buffer.readFloat();
+    }
+
+    @Override
+    public void write(PacketBuffer buffer) {
+
+        buffer.writeFloat(this.value);
+    }
 
 }

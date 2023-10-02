@@ -12,91 +12,91 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class InteractionUseItemBase<T extends TileEntity & ITileInteractable>
-    extends InteractionBase<T> {
+        extends InteractionBase<T> {
 
-  public InteractionUseItemBase(EnumFacing[] sides, AxisAlignedBB bounds) {
+    public InteractionUseItemBase(EnumFacing[] sides, AxisAlignedBB bounds) {
 
-    super(sides, bounds);
-  }
-
-  @Override
-  public boolean allowInteractionWithType(EnumType type) {
-
-    return (type == EnumType.MouseClick);
-  }
-
-  @Override
-  public boolean interact(EnumType type, T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
-
-    if (this.allowInteractionWithHand(hand)
-        && this.allowInteractionWithType(type)
-        && this.allowInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ)) {
-
-      boolean complete = this.doInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ);
-
-      if (complete) {
-        this.postInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ);
-      }
-
-      return complete;
+        super(sides, bounds);
     }
 
-    return false;
-  }
+    @Override
+    public boolean allowInteractionWithType(EnumType type) {
 
-  protected void postInteraction(T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
-
-    if (!world.isRemote
-        && !player.isCreative()) {
-      this.applyItemDamage(player.getHeldItem(hand), player);
-    }
-  }
-
-  protected void applyItemDamage(ItemStack itemStack, EntityPlayer player) {
-
-    if (itemStack.getItem() instanceof IInteractionItem) {
-      ((IInteractionItem) itemStack.getItem()).applyItemDamage(itemStack, player);
-
-    } else {
-      itemStack.damageItem(this.getItemDamage(itemStack), player);
-    }
-  }
-
-  /**
-   * The damage returned will be applied to the item used.
-   * <p>
-   * NOTE: Don't damage the item in this method, it will be damaged by the
-   * calling code.
-   *
-   * @param itemStack the itemStack that will be damaged
-   * @return the damage to be applied to the item used
-   */
-  protected int getItemDamage(ItemStack itemStack) {
-
-    return 1;
-  }
-
-  protected boolean allowInteraction(T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
-
-    ItemStack heldItem = player.getHeldItemMainhand();
-    Item item = heldItem.getItem();
-
-    if (item instanceof IInteractionItem) {
-      return ((IInteractionItem) item).allowInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ);
+        return (type == EnumType.MouseClick);
     }
 
-    return false;
-  }
+    @Override
+    public boolean interact(EnumType type, T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
 
-  protected boolean doInteraction(T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
+        if (this.allowInteractionWithHand(hand)
+                && this.allowInteractionWithType(type)
+                && this.allowInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ)) {
 
-    ItemStack heldItem = player.getHeldItemMainhand();
-    Item item = heldItem.getItem();
+            boolean complete = this.doInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ);
 
-    if (item instanceof IInteractionItem) {
-      return ((IInteractionItem) item).doInteraction(tile, world, heldItem, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ);
+            if (complete) {
+                this.postInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ);
+            }
+
+            return complete;
+        }
+
+        return false;
     }
 
-    return false;
-  }
+    protected void postInteraction(T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
+
+        if (!world.isRemote
+                && !player.isCreative()) {
+            this.applyItemDamage(player.getHeldItem(hand), player);
+        }
+    }
+
+    protected void applyItemDamage(ItemStack itemStack, EntityPlayer player) {
+
+        if (itemStack.getItem() instanceof IInteractionItem) {
+            ((IInteractionItem) itemStack.getItem()).applyItemDamage(itemStack, player);
+
+        } else {
+            itemStack.damageItem(this.getItemDamage(itemStack), player);
+        }
+    }
+
+    /**
+     * The damage returned will be applied to the item used.
+     * <p>
+     * NOTE: Don't damage the item in this method, it will be damaged by the
+     * calling code.
+     *
+     * @param itemStack the itemStack that will be damaged
+     * @return the damage to be applied to the item used
+     */
+    protected int getItemDamage(ItemStack itemStack) {
+
+        return 1;
+    }
+
+    protected boolean allowInteraction(T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
+
+        ItemStack heldItem = player.getHeldItemMainhand();
+        Item item = heldItem.getItem();
+
+        if (item instanceof IInteractionItem) {
+            return ((IInteractionItem) item).allowInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ);
+        }
+
+        return false;
+    }
+
+    protected boolean doInteraction(T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
+
+        ItemStack heldItem = player.getHeldItemMainhand();
+        Item item = heldItem.getItem();
+
+        if (item instanceof IInteractionItem) {
+            return ((IInteractionItem) item).doInteraction(tile, world, heldItem, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ);
+        }
+
+        return false;
+    }
 }

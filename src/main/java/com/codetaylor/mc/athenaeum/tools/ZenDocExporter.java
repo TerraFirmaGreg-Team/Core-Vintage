@@ -18,292 +18,289 @@ import java.util.stream.Collectors;
 
 public class ZenDocExporter {
 
-  public void export(Path path, Class[] classes) {
+    public void export(Path path, Class[] classes) {
 
-    for (int i = 0; i < classes.length; i++) {
-      StringBuilder out = new StringBuilder();
+        for (int i = 0; i < classes.length; i++) {
+            StringBuilder out = new StringBuilder();
 
-      ZenDocClass zenClass = (ZenDocClass) classes[i].getDeclaredAnnotation(ZenDocClass.class);
-      ZenDocAppend zenDocAppend = (ZenDocAppend) classes[i].getDeclaredAnnotation(ZenDocAppend.class);
-      ZenDocPrepend zenDocPrepend = (ZenDocPrepend) classes[i].getDeclaredAnnotation(ZenDocPrepend.class);
+            ZenDocClass zenClass = (ZenDocClass) classes[i].getDeclaredAnnotation(ZenDocClass.class);
+            ZenDocAppend zenDocAppend = (ZenDocAppend) classes[i].getDeclaredAnnotation(ZenDocAppend.class);
+            ZenDocPrepend zenDocPrepend = (ZenDocPrepend) classes[i].getDeclaredAnnotation(ZenDocPrepend.class);
 
-      if (zenClass == null) {
-        continue;
-      }
-
-      // --- Prepend
-
-      if (zenDocPrepend != null) {
-        String[] toPrepend = zenDocPrepend.value();
-
-        for (String s : toPrepend) {
-          Path p = Paths.get(s);
-
-          try {
-            List<String> lines = Files.readAllLines(p);
-
-            for (String line : lines) {
-              out.append(line).append("\n");
+            if (zenClass == null) {
+                continue;
             }
 
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
+            // --- Prepend
+
+            if (zenDocPrepend != null) {
+                String[] toPrepend = zenDocPrepend.value();
+
+                for (String s : toPrepend) {
+                    Path p = Paths.get(s);
+
+                    try {
+                        List<String> lines = Files.readAllLines(p);
+
+                        for (String line : lines) {
+                            out.append(line).append("\n");
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                out.append("\n");
+            }
+
+            // --- Header
+
+            String[] h3 = zenClass.value().split("\\.");
+            String zenClassName = h3[h3.length - 1];
+            out.append("### Class\n");
+            out.append("\n");
+
+            // --- Import
+
+            out.append("```java").append("\n");
+            out.append("import ").append(zenClass.value()).append(";").append("\n");
+            out.append("```").append("\n");
+            out.append("\n");
+
+            // --- Class Description
+
+            String[] description = zenClass.description();
+
+            if (description.length > 0) {
+
+                for (String line : description) {
+                    out.append(this.parse(line)).append("\n");
+                }
+                out.append("\n");
+            }
+
+            // --- Methods
+
+            out.append("#### Methods\n");
+            out.append("\n");
+
+            Method[] methods = classes[i].getDeclaredMethods();
+            List<MethodAnnotationPair> methodList = this.getSortedMethodList(methods);
+
+            // Add static methods to new list.
+            List<MethodAnnotationPair> staticMethodList = methodList.stream()
+                    .filter(pair -> Modifier.isStatic(pair.method.getModifiers()))
+                    .collect(Collectors.toList());
+
+            // Remove static methods from main list.
+            methodList = methodList.stream()
+                    .filter(pair -> !Modifier.isStatic(pair.method.getModifiers()))
+                    .collect(Collectors.toList());
+
+            // --- Static Methods
+
+            if (!staticMethodList.isEmpty()) {
+                this.writeMethodList(out, staticMethodList);
+            }
+
+            // --- Methods
+
+            if (!methodList.isEmpty()) {
+                this.writeMethodList(out, methodList);
+            }
+
+            // --- Append
+
+            if (zenDocAppend != null) {
+                String[] toAppend = zenDocAppend.value();
+
+                out.append("\n");
+
+                for (String s : toAppend) {
+                    Path p = Paths.get(s);
+
+                    try {
+                        List<String> lines = Files.readAllLines(p);
+
+                        for (String line : lines) {
+                            out.append(line).append("\n");
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            // --- Output
+
+            try {
+                Files.write(path.resolve(zenClassName.toLowerCase() + ".md"), out.toString().getBytes());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-        out.append("\n");
-      }
+    }
 
-      // --- Header
+    private void writeMethodList(StringBuilder out, List<MethodAnnotationPair> staticMethodList) {
 
-      String[] h3 = zenClass.value().split("\\.");
-      String zenClassName = h3[h3.length - 1];
-      out.append("### Class\n");
-      out.append("\n");
+        for (int j = 0; j < staticMethodList.size(); j++) {
 
-      // --- Import
+            if (j > 0) {
+                out.append("\n");
+            }
 
-      out.append("```java").append("\n");
-      out.append("import ").append(zenClass.value()).append(";").append("\n");
-      out.append("```").append("\n");
-      out.append("\n");
+            this.writeMethod(out, staticMethodList.get(j).method, staticMethodList.get(j).annotation);
+        }
+    }
 
-      // --- Class Description
+    private void writeMethod(StringBuilder out, Method method, ZenDocMethod annotation) {
 
-      String[] description = zenClass.description();
+        String methodName = method.getName();
+        Class<?> returnType = method.getReturnType();
+        String returnTypeString = this.getSimpleTypeString(returnType);
 
-      if (description.length > 0) {
+        out.append("```java").append("\n");
+
+        if (Modifier.isStatic(method.getModifiers())) {
+            out.append("static ");
+        }
+
+        // Method return type and name
+        out.append(returnTypeString).append(" ").append(methodName).append("(");
+
+        Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+        Class[] types = method.getParameterTypes();
+        ZenDocArg[] args = annotation.args();
+
+        if (types.length != args.length) {
+            throw new IllegalStateException("Wrong number of parameter names found for method: " + methodName);
+        }
+
+        if (args.length > 0) {
+            out.append("\n");
+        }
+
+        int largest = 0;
+        String[] parameterStrings = new String[types.length];
+
+        // find the largest string
+        for (int k = 0; k < types.length; k++) {
+
+            boolean optional = false;
+            boolean nullable = false;
+
+            for (Annotation parameterAnnotation : parameterAnnotations[k]) {
+
+                if (parameterAnnotation instanceof Optional) {
+                    optional = true;
+                }
+
+                if (parameterAnnotation instanceof ZenDocNullable) {
+                    nullable = true;
+                }
+            }
+
+            String optionalString = optional ? "@Optional " : "";
+            String nullableString = nullable ? "@Nullable " : "";
+            String typeString = this.getSimpleTypeString(types[k]);
+            String nameString = args[k].arg();
+
+            if (k < types.length - 1) {
+                parameterStrings[k] = "  " + optionalString + nullableString + typeString + " " + nameString + ",";
+
+            } else {
+                parameterStrings[k] = "  " + optionalString + typeString + " " + nameString;
+            }
+
+            if (parameterStrings[k].length() > largest) {
+                largest = parameterStrings[k].length();
+            }
+        }
+
+        for (int k = 0; k < parameterStrings.length; k++) {
+            parameterStrings[k] = StringUtils.rightPad(parameterStrings[k], largest);
+            out.append(parameterStrings[k]);
+
+            if (!args[k].info().isEmpty()) {
+                out.append(" // ").append(args[k].info());
+            }
+
+            out.append("\n");
+        }
+
+        out.append(");\n");
+
+        out.append("```").append("\n\n");
+
+        String[] description = annotation.description();
 
         for (String line : description) {
-          out.append(this.parse(line)).append("\n");
+            out.append(this.parse(line));
         }
-        out.append("\n");
-      }
 
-      // --- Methods
+        out.append("\n---\n\n");
+    }
 
-      out.append("#### Methods\n");
-      out.append("\n");
+    private String parse(String line) {
 
-      Method[] methods = classes[i].getDeclaredMethods();
-      List<MethodAnnotationPair> methodList = this.getSortedMethodList(methods);
+        if (line.startsWith("@see")) {
+            String[] links = line.substring(4).trim().split(" ");
 
-      // Add static methods to new list.
-      List<MethodAnnotationPair> staticMethodList = methodList.stream()
-          .filter(pair -> Modifier.isStatic(pair.method.getModifiers()))
-          .collect(Collectors.toList());
+            StringBuilder sb = new StringBuilder("For more information, see:\n");
 
-      // Remove static methods from main list.
-      methodList = methodList.stream()
-          .filter(pair -> !Modifier.isStatic(pair.method.getModifiers()))
-          .collect(Collectors.toList());
-
-      // --- Static Methods
-
-      if (!staticMethodList.isEmpty()) {
-        this.writeMethodList(out, staticMethodList);
-      }
-
-      // --- Methods
-
-      if (!methodList.isEmpty()) {
-        this.writeMethodList(out, methodList);
-      }
-
-      // --- Append
-
-      if (zenDocAppend != null) {
-        String[] toAppend = zenDocAppend.value();
-
-        out.append("\n");
-
-        for (String s : toAppend) {
-          Path p = Paths.get(s);
-
-          try {
-            List<String> lines = Files.readAllLines(p);
-
-            for (String line : lines) {
-              out.append(line).append("\n");
+            for (String link : links) {
+                sb.append("  * [").append(link).append("](").append(link).append(")\n");
             }
 
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-        }
-      }
-
-      // --- Output
-
-      try {
-        Files.write(path.resolve(zenClassName.toLowerCase() + ".md"), out.toString().getBytes());
-
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-
-  }
-
-  private void writeMethodList(StringBuilder out, List<MethodAnnotationPair> staticMethodList) {
-
-    for (int j = 0; j < staticMethodList.size(); j++) {
-
-      if (j > 0) {
-        out.append("\n");
-      }
-
-      this.writeMethod(out, staticMethodList.get(j).method, staticMethodList.get(j).annotation);
-    }
-  }
-
-  private void writeMethod(StringBuilder out, Method method, ZenDocMethod annotation) {
-
-    String methodName = method.getName();
-    Class<?> returnType = method.getReturnType();
-    String returnTypeString = this.getSimpleTypeString(returnType);
-
-    out.append("```java").append("\n");
-
-    if (Modifier.isStatic(method.getModifiers())) {
-      out.append("static ");
-    }
-
-    // Method return type and name
-    out.append(returnTypeString).append(" ").append(methodName).append("(");
-
-    Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-    Class[] types = method.getParameterTypes();
-    ZenDocArg[] args = annotation.args();
-
-    if (types.length != args.length) {
-      throw new IllegalStateException("Wrong number of parameter names found for method: " + methodName);
-    }
-
-    if (args.length > 0) {
-      out.append("\n");
-    }
-
-    int largest = 0;
-    String[] parameterStrings = new String[types.length];
-
-    // find the largest string
-    for (int k = 0; k < types.length; k++) {
-
-      boolean optional = false;
-      boolean nullable = false;
-
-      for (Annotation parameterAnnotation : parameterAnnotations[k]) {
-
-        if (parameterAnnotation instanceof Optional) {
-          optional = true;
+            return sb.toString();
         }
 
-        if (parameterAnnotation instanceof ZenDocNullable) {
-          nullable = true;
+        return line + "\n";
+    }
+
+    private List<MethodAnnotationPair> getSortedMethodList(Method[] methods) {
+
+        List<MethodAnnotationPair> methodList = new ArrayList<>();
+
+        for (int j = 0; j < methods.length; j++) {
+            ZenDocMethod annotation = methods[j].getDeclaredAnnotation(ZenDocMethod.class);
+
+            if (annotation != null) {
+                methodList.add(new MethodAnnotationPair(methods[j], annotation));
+            }
         }
-      }
 
-      String optionalString = optional ? "@Optional " : "";
-      String nullableString = nullable ? "@Nullable " : "";
-      String typeString = this.getSimpleTypeString(types[k]);
-      String nameString = args[k].arg();
-
-      if (k < types.length - 1) {
-        parameterStrings[k] = "  " + optionalString + nullableString + typeString + " " + nameString + ",";
-
-      } else {
-        parameterStrings[k] = "  " + optionalString + typeString + " " + nameString;
-      }
-
-      if (parameterStrings[k].length() > largest) {
-        largest = parameterStrings[k].length();
-      }
+        methodList.sort(Comparator.comparingInt(o -> o.annotation.order()));
+        return methodList;
     }
 
-    for (int k = 0; k < parameterStrings.length; k++) {
-      parameterStrings[k] = StringUtils.rightPad(parameterStrings[k], largest);
-      out.append(parameterStrings[k]);
+    private String getSimpleTypeString(Class type) {
 
-      if (!args[k].info().isEmpty()) {
-        out.append(" // ").append(args[k].info());
-      }
+        String result = type.getSimpleName();
 
-      out.append("\n");
+        if (result.startsWith("Zen")) {
+            result = result.substring(3);
+
+        } else if (result.startsWith("String")) {
+            result = StringHelper.lowercaseFirstLetter(result);
+        }
+        return result;
     }
 
-    out.append(");\n");
+    private static class MethodAnnotationPair {
 
-    out.append("```").append("\n\n");
+        public final Method method;
+        public final ZenDocMethod annotation;
 
-    String[] description = annotation.description();
+        private MethodAnnotationPair(Method method, ZenDocMethod annotation) {
 
-    if (description.length > 0) {
-
-      for (String line : description) {
-        out.append(this.parse(line));
-      }
+            this.method = method;
+            this.annotation = annotation;
+        }
     }
-
-    out.append("\n---\n\n");
-  }
-
-  private String parse(String line) {
-
-    if (line.startsWith("@see")) {
-      String[] links = line.substring(4).trim().split(" ");
-
-      StringBuilder sb = new StringBuilder("For more information, see:\n");
-
-      for (String link : links) {
-        sb.append("  * [").append(link).append("](").append(link).append(")\n");
-      }
-
-      return sb.toString();
-    }
-
-    return line + "\n";
-  }
-
-  private List<MethodAnnotationPair> getSortedMethodList(Method[] methods) {
-
-    List<MethodAnnotationPair> methodList = new ArrayList<>();
-
-    for (int j = 0; j < methods.length; j++) {
-      ZenDocMethod annotation = methods[j].getDeclaredAnnotation(ZenDocMethod.class);
-
-      if (annotation != null) {
-        methodList.add(new MethodAnnotationPair(methods[j], annotation));
-      }
-    }
-
-    methodList.sort(Comparator.comparingInt(o -> o.annotation.order()));
-    return methodList;
-  }
-
-  private String getSimpleTypeString(Class type) {
-
-    String result = type.getSimpleName();
-
-    if (result.startsWith("Zen")) {
-      result = result.substring(3);
-
-    } else if (result.startsWith("String")) {
-      result = StringHelper.lowercaseFirstLetter(result);
-    }
-    return result;
-  }
-
-  private static class MethodAnnotationPair {
-
-    public final Method method;
-    public final ZenDocMethod annotation;
-
-    private MethodAnnotationPair(Method method, ZenDocMethod annotation) {
-
-      this.method = method;
-      this.annotation = annotation;
-    }
-  }
 
 }

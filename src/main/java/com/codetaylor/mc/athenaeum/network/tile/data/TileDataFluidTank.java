@@ -10,43 +10,43 @@ import net.minecraftforge.fluids.FluidTank;
 import java.io.IOException;
 
 public class TileDataFluidTank<T extends FluidTank & ITileDataFluidTank>
-    extends TileDataBase {
+        extends TileDataBase {
 
-  private T fluidTank;
+    private final T fluidTank;
 
-  public TileDataFluidTank(T fluidTank) {
+    public TileDataFluidTank(T fluidTank) {
 
-    this(fluidTank, 1);
-  }
+        this(fluidTank, 1);
+    }
 
-  public TileDataFluidTank(T fluidTank, int updateInterval) {
+    public TileDataFluidTank(T fluidTank, int updateInterval) {
 
-    super(updateInterval);
-    this.fluidTank = fluidTank;
-    this.fluidTank.addObserver((handler, slot) -> this.setDirty(true));
-    this.setDirty(true);
-  }
+        super(updateInterval);
+        this.fluidTank = fluidTank;
+        this.fluidTank.addObserver((handler, slot) -> this.setDirty(true));
+        this.setDirty(true);
+    }
 
-  public FluidTank getFluidTank() {
+    public FluidTank getFluidTank() {
 
-    return this.fluidTank;
-  }
+        return this.fluidTank;
+    }
 
-  @Override
-  public void setDirty(boolean dirty) {
+    @Override
+    public void setDirty(boolean dirty) {
 
-    super.setDirty(dirty);
-  }
+        super.setDirty(dirty);
+    }
 
-  @Override
-  public void read(PacketBuffer buffer) throws IOException {
+    @Override
+    public void read(PacketBuffer buffer) throws IOException {
 
-    this.fluidTank.readFromNBT(Preconditions.checkNotNull(buffer.readCompoundTag()));
-  }
+        this.fluidTank.readFromNBT(Preconditions.checkNotNull(buffer.readCompoundTag()));
+    }
 
-  @Override
-  public void write(PacketBuffer buffer) {
+    @Override
+    public void write(PacketBuffer buffer) {
 
-    buffer.writeCompoundTag(this.fluidTank.writeToNBT(new NBTTagCompound()));
-  }
+        buffer.writeCompoundTag(this.fluidTank.writeToNBT(new NBTTagCompound()));
+    }
 }

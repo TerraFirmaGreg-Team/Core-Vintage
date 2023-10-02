@@ -8,31 +8,31 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 public class TileEntityBase
-    extends TileEntity {
+        extends TileEntity {
 
-  public void notifyBlockUpdate() {
+    public void notifyBlockUpdate() {
 
-    this.markDirty();
+        this.markDirty();
 
-    if (this.world != null && !this.world.isRemote) {
-      IBlockState blockState = this.world.getBlockState(this.getPos());
-      this.world.notifyBlockUpdate(this.getPos(), blockState, blockState, 3);
-    }
-  }
-
-  @Override
-  public boolean shouldRefresh(
-      World world,
-      BlockPos pos,
-      @Nonnull IBlockState oldState,
-      @Nonnull IBlockState newState
-  ) {
-
-    if (oldState.getBlock() == newState.getBlock()) {
-      return false;
+        if (this.world != null && !this.world.isRemote) {
+            IBlockState blockState = this.world.getBlockState(this.getPos());
+            this.world.notifyBlockUpdate(this.getPos(), blockState, blockState, 3);
+        }
     }
 
-    return super.shouldRefresh(world, pos, oldState, newState);
-  }
+    @Override
+    public boolean shouldRefresh(
+            World world,
+            BlockPos pos,
+            @Nonnull IBlockState oldState,
+            @Nonnull IBlockState newState
+    ) {
+
+        if (oldState.getBlock() == newState.getBlock()) {
+            return false;
+        }
+
+        return super.shouldRefresh(world, pos, oldState, newState);
+    }
 
 }

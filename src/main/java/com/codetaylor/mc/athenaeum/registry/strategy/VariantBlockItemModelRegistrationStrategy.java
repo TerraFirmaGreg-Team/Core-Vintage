@@ -11,44 +11,44 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 
 public class VariantBlockItemModelRegistrationStrategy<T extends IVariant & Comparable<T>>
-    implements IClientModelRegistrationStrategy {
+        implements IClientModelRegistrationStrategy {
 
-  /**
-   * A {@link StateMapperBase} used to create property strings.
-   */
-  private static final StateMapperBase PROPERTY_STRING_MAPPER = new StateMapperBase() {
+    /**
+     * A {@link StateMapperBase} used to create property strings.
+     */
+    private static final StateMapperBase PROPERTY_STRING_MAPPER = new StateMapperBase() {
+
+        @Override
+        protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+
+            return new ModelResourceLocation("minecraft:air");
+        }
+    };
+
+    private final IBlockState blockState;
+    private final IProperty<T> property;
+
+    public VariantBlockItemModelRegistrationStrategy(IBlockState blockState, IProperty<T> property) {
+
+        this.blockState = blockState;
+        this.property = property;
+    }
 
     @Override
-    protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+    public void register() {
 
-      return new ModelResourceLocation("minecraft:air");
+        this.property.getAllowedValues().forEach(value -> {
+            IBlockState state = this.blockState.withProperty(this.property, value);
+            Block block = state.getBlock();
+            Item item = Item.getItemFromBlock(block);
+            ModelLoader.setCustomModelResourceLocation(
+                    item,
+                    value.getMeta(),
+                    new ModelResourceLocation(
+                            Preconditions.checkNotNull(item.getRegistryName(), "Item %s has null registry name", item),
+                            PROPERTY_STRING_MAPPER.getPropertyString(state.getProperties())
+                    )
+            );
+        });
     }
-  };
-
-  private final IBlockState blockState;
-  private final IProperty<T> property;
-
-  public VariantBlockItemModelRegistrationStrategy(IBlockState blockState, IProperty<T> property) {
-
-    this.blockState = blockState;
-    this.property = property;
-  }
-
-  @Override
-  public void register() {
-
-    this.property.getAllowedValues().forEach(value -> {
-      IBlockState state = this.blockState.withProperty(this.property, value);
-      Block block = state.getBlock();
-      Item item = Item.getItemFromBlock(block);
-      ModelLoader.setCustomModelResourceLocation(
-          item,
-          value.getMeta(),
-          new ModelResourceLocation(
-              Preconditions.checkNotNull(item.getRegistryName(), "Item %s has null registry name", item),
-              PROPERTY_STRING_MAPPER.getPropertyString(state.getProperties())
-          )
-      );
-    });
-  }
 }

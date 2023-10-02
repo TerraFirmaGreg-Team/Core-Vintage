@@ -12,33 +12,33 @@ import java.util.TreeMap;
 
 public class ImageCollector {
 
-  private final Gson gson;
+    private final Gson gson;
 
-  public ImageCollector(Gson gson) {
+    public ImageCollector(Gson gson) {
 
-    this.gson = gson;
-  }
-
-  public Map<String, Map<String, ImageData>> collect(PackData.PathData[] input) throws IOException {
-
-    Map<String, Map<String, ImageData>> map = new HashMap<>();
-
-    for (PackData.PathData pathData : input) {
-
-      Path path = pathData.path;
-      String atlas = pathData.atlas;
-
-      Map<String, ImageData> imageMap = map.computeIfAbsent(atlas, k -> new TreeMap<>());
-      Files.walkFileTree(path, new ImageVisitor(this.gson, path, imageMap));
+        this.gson = gson;
     }
 
-    return map;
-  }
+    public Map<String, Map<String, ImageData>> collect(PackData.PathData[] input) throws IOException {
 
-  public static class ImageData {
+        Map<String, Map<String, ImageData>> map = new HashMap<>();
 
-    public BufferedImage image;
-    public ImageMetaData metaData;
-  }
+        for (PackData.PathData pathData : input) {
+
+            Path path = pathData.path;
+            String atlas = pathData.atlas;
+
+            Map<String, ImageData> imageMap = map.computeIfAbsent(atlas, k -> new TreeMap<>());
+            Files.walkFileTree(path, new ImageVisitor(this.gson, path, imageMap));
+        }
+
+        return map;
+    }
+
+    public static class ImageData {
+
+        public BufferedImage image;
+        public ImageMetaData metaData;
+    }
 
 }

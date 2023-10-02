@@ -13,37 +13,37 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 public abstract class InteractionBucketBase<T extends TileEntity & ITileInteractable>
-    extends InteractionBase<T> {
+        extends InteractionBase<T> {
 
-  private final IFluidHandler fluidHandler;
+    private final IFluidHandler fluidHandler;
 
-  public InteractionBucketBase(IFluidHandler fluidHandler, EnumFacing[] sides, AxisAlignedBB bounds) {
+    public InteractionBucketBase(IFluidHandler fluidHandler, EnumFacing[] sides, AxisAlignedBB bounds) {
 
-    super(sides, bounds);
-    this.fluidHandler = fluidHandler;
-  }
-
-  @Override
-  public boolean interact(EnumType type, T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
-
-    if (this.allowInteractionWithHand(hand)
-        && this.allowInteractionWithType(type)
-        && this.allowInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ)) {
-
-      return this.doInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ);
+        super(sides, bounds);
+        this.fluidHandler = fluidHandler;
     }
 
-    return false;
-  }
+    @Override
+    public boolean interact(EnumType type, T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
 
-  protected boolean allowInteraction(T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
+        if (this.allowInteractionWithHand(hand)
+                && this.allowInteractionWithType(type)
+                && this.allowInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ)) {
 
-    return (FluidUtil.getFluidHandler(player.getHeldItemMainhand()) != null);
-  }
+            return this.doInteraction(tile, world, hitPos, state, player, hand, hitSide, hitX, hitY, hitZ);
+        }
 
-  protected boolean doInteraction(T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
+        return false;
+    }
 
-    return FluidUtilFix.interactWithFluidHandler(player, hand, this.fluidHandler);
-  }
+    protected boolean allowInteraction(T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
+
+        return (FluidUtil.getFluidHandler(player.getHeldItemMainhand()) != null);
+    }
+
+    protected boolean doInteraction(T tile, World world, BlockPos hitPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing hitSide, float hitX, float hitY, float hitZ) {
+
+        return FluidUtilFix.interactWithFluidHandler(player, hand, this.fluidHandler);
+    }
 
 }

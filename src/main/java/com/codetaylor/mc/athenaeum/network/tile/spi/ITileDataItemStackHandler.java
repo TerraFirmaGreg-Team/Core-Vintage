@@ -7,6 +7,6 @@ import com.codetaylor.mc.athenaeum.inventory.IObservableStackHandler;
  * {@link IObservableStackHandler} interface.
  */
 public interface ITileDataItemStackHandler
-    extends IObservableStackHandler {
+        extends IObservableStackHandler {
 
 }

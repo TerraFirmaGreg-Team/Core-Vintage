@@ -9,11 +9,11 @@ package com.codetaylor.mc.athenaeum.integration;
  * This is currently used by the GameStages and Dropt plugin.
  */
 public class SimplePluginHandler
-    implements IIntegrationPluginHandler {
+        implements IIntegrationPluginHandler {
 
-  @Override
-  public void execute(String plugin) throws Exception {
+    @Override
+    public void execute(String plugin) throws Exception {
 
-    Class.forName(plugin).newInstance();
-  }
+        Class.forName(plugin).newInstance();
+    }
 }

@@ -19,71 +19,71 @@ import javax.annotation.Nullable;
  * https://github.com/BluSunrize/ImmersiveEngineering/blob/master/src/main/java/blusunrize/immersiveengineering/common/crafting/IngredientFluidStack.java
  */
 public class IngredientFluidStack
-    extends Ingredient {
+        extends Ingredient {
 
-  private final FluidStack fluid;
-  private ItemStack[] cachedStacks;
+    private final FluidStack fluid;
+    private ItemStack[] cachedStacks;
 
-  public IngredientFluidStack(FluidStack fluid) {
+    public IngredientFluidStack(FluidStack fluid) {
 
-    super(0);
-    this.fluid = fluid;
-  }
-
-  public IngredientFluidStack(Fluid fluid, int amount) {
-
-    this(new FluidStack(fluid, amount));
-  }
-
-  public FluidStack getFluid() {
-
-    return fluid;
-  }
-
-  @Nonnull
-  @Override
-  public ItemStack[] getMatchingStacks() {
-
-    if (this.cachedStacks == null) {
-      this.cachedStacks = new ItemStack[]{FluidUtil.getFilledBucket(this.fluid)};
+        super(0);
+        this.fluid = fluid;
     }
-    return this.cachedStacks;
-  }
 
-  @Override
-  public boolean apply(@Nullable ItemStack stack) {
+    public IngredientFluidStack(Fluid fluid, int amount) {
 
-    if (stack == null) {
-      return false;
-
-    } else {
-      FluidStack fs = FluidUtil.getFluidContained(stack);
-      return fs == null
-          && this.fluid == null
-          || fs != null
-          && fs.containsFluid(fluid);
+        this(new FluidStack(fluid, amount));
     }
-  }
 
-  /**
-   * https://github.com/BluSunrize/ImmersiveEngineering/blob/master/src/main/java/blusunrize/immersiveengineering/common/crafting/IngredientFactoryFluidStack.java#L38
-   */
-  public static class Factory
-      implements IIngredientFactory {
+    public FluidStack getFluid() {
+
+        return fluid;
+    }
 
     @Nonnull
     @Override
-    public Ingredient parse(JsonContext context, JsonObject json) {
+    public ItemStack[] getMatchingStacks() {
 
-      String name = JsonUtils.getString(json, "fluid");
-      int amount = JsonUtils.getInt(json, "amount", 1000);
-      Fluid fluid = FluidRegistry.getFluid(name);
-
-      if (fluid == null) {
-        throw new JsonSyntaxException("Fluid with name " + name + " could not be found");
-      }
-
-      return new IngredientFluidStack(fluid, amount);
+        if (this.cachedStacks == null) {
+            this.cachedStacks = new ItemStack[]{FluidUtil.getFilledBucket(this.fluid)};
+        }
+        return this.cachedStacks;
     }
-  }
+
+    @Override
+    public boolean apply(@Nullable ItemStack stack) {
+
+        if (stack == null) {
+            return false;
+
+        } else {
+            FluidStack fs = FluidUtil.getFluidContained(stack);
+            return fs == null
+                    && this.fluid == null
+                    || fs != null
+                    && fs.containsFluid(fluid);
+        }
+    }
+
+    /**
+     * https://github.com/BluSunrize/ImmersiveEngineering/blob/master/src/main/java/blusunrize/immersiveengineering/common/crafting/IngredientFactoryFluidStack.java#L38
+     */
+    public static class Factory
+            implements IIngredientFactory {
+
+        @Nonnull
+        @Override
+        public Ingredient parse(JsonContext context, JsonObject json) {
+
+            String name = JsonUtils.getString(json, "fluid");
+            int amount = JsonUtils.getInt(json, "amount", 1000);
+            Fluid fluid = FluidRegistry.getFluid(name);
+
+            if (fluid == null) {
+                throw new JsonSyntaxException("Fluid with name " + name + " could not be found");
+            }
+
+            return new IngredientFluidStack(fluid, amount);
+        }
+    }
 }

@@ -19,98 +19,98 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RegistryEventHandler
-    implements IRegistryEventHandler {
+        implements IRegistryEventHandler {
 
-  private final Registry registry;
+    private final Registry registry;
 
-  public RegistryEventHandler(Registry registry) {
+    public RegistryEventHandler(Registry registry) {
 
-    this.registry = registry;
-  }
-
-  @Override
-  public void onRegisterBlockEvent(RegistryEvent.Register<Block> event) {
-
-    for (IForgeRegistryEventRegistrationStrategy<Block> strategy : this.registry.getBlockRegistrationStrategyList()) {
-      strategy.register(event.getRegistry());
+        this.registry = registry;
     }
-  }
 
-  @Override
-  public void onRegisterItemEvent(RegistryEvent.Register<Item> event) {
+    @Override
+    public void onRegisterBlockEvent(RegistryEvent.Register<Block> event) {
 
-    for (IForgeRegistryEventRegistrationStrategy<Item> strategy : this.registry.getItemRegistrationStrategyList()) {
-      strategy.register(event.getRegistry());
+        for (IForgeRegistryEventRegistrationStrategy<Block> strategy : this.registry.getBlockRegistrationStrategyList()) {
+            strategy.register(event.getRegistry());
+        }
     }
-  }
 
-  @Override
-  public void onRegisterPotionEvent(RegistryEvent.Register<Potion> event) {
+    @Override
+    public void onRegisterItemEvent(RegistryEvent.Register<Item> event) {
 
-    for (IForgeRegistryEventRegistrationStrategy<Potion> strategy : this.registry.getPotionRegistrationStrategyList()) {
-      strategy.register(event.getRegistry());
+        for (IForgeRegistryEventRegistrationStrategy<Item> strategy : this.registry.getItemRegistrationStrategyList()) {
+            strategy.register(event.getRegistry());
+        }
     }
-  }
 
-  @Override
-  public void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event) {
+    @Override
+    public void onRegisterPotionEvent(RegistryEvent.Register<Potion> event) {
 
-    for (IForgeRegistryEventRegistrationStrategy<Biome> strategy : this.registry.getBiomeRegistrationStrategyList()) {
-      strategy.register(event.getRegistry());
+        for (IForgeRegistryEventRegistrationStrategy<Potion> strategy : this.registry.getPotionRegistrationStrategyList()) {
+            strategy.register(event.getRegistry());
+        }
     }
-  }
 
-  @Override
-  public void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
-    // TODO: register sound event
-  }
+    @Override
+    public void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event) {
 
-  @Override
-  public void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event) {
-
-    for (IForgeRegistryEventRegistrationStrategy<PotionType> strategy : this.registry.getPotionTypeRegistrationStrategyList()) {
-      strategy.register(event.getRegistry());
+        for (IForgeRegistryEventRegistrationStrategy<Biome> strategy : this.registry.getBiomeRegistrationStrategyList()) {
+            strategy.register(event.getRegistry());
+        }
     }
-  }
 
-  @Override
-  public void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event) {
-    // TODO: register enchantment event
-  }
-
-  @Override
-  public void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
-    // TODO: register villager profession event
-  }
-
-  @Override
-  public void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event) {
-
-    for (IForgeRegistryEventRegistrationStrategy<EntityEntry> strategy : this.registry.getEntityEntryRegistrationStrategyList()) {
-      strategy.register(event.getRegistry());
+    @Override
+    public void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
+        // TODO: register sound event
     }
-  }
 
-  @Override
-  public void onRegisterRecipesEvent(RegistryEvent.Register<IRecipe> event) {
-    // TODO: register recipes
-  }
+    @Override
+    public void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event) {
 
-  @Override
-  public void onRegisterTileEntitiesEvent() {
-
-    for (ITileEntityRegistrationStrategy strategy : this.registry.getTileEntityRegistrationStrategyList()) {
-      strategy.register();
+        for (IForgeRegistryEventRegistrationStrategy<PotionType> strategy : this.registry.getPotionTypeRegistrationStrategyList()) {
+            strategy.register(event.getRegistry());
+        }
     }
-  }
 
-  @Override
-  @SideOnly(Side.CLIENT)
-  public void onClientRegisterModelsEvent(ModelRegistryEvent event) {
-
-    for (IClientModelRegistrationStrategy strategy : this.registry.getClientModelRegistrationStrategyList()) {
-      strategy.register();
+    @Override
+    public void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event) {
+        // TODO: register enchantment event
     }
-  }
+
+    @Override
+    public void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
+        // TODO: register villager profession event
+    }
+
+    @Override
+    public void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event) {
+
+        for (IForgeRegistryEventRegistrationStrategy<EntityEntry> strategy : this.registry.getEntityEntryRegistrationStrategyList()) {
+            strategy.register(event.getRegistry());
+        }
+    }
+
+    @Override
+    public void onRegisterRecipesEvent(RegistryEvent.Register<IRecipe> event) {
+        // TODO: register recipes
+    }
+
+    @Override
+    public void onRegisterTileEntitiesEvent() {
+
+        for (ITileEntityRegistrationStrategy strategy : this.registry.getTileEntityRegistrationStrategyList()) {
+            strategy.register();
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onClientRegisterModelsEvent(ModelRegistryEvent event) {
+
+        for (IClientModelRegistrationStrategy strategy : this.registry.getClientModelRegistrationStrategyList()) {
+            strategy.register();
+        }
+    }
 
 }

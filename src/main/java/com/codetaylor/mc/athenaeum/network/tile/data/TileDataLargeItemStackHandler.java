@@ -19,27 +19,27 @@ import java.io.IOException;
  * @param <H>
  */
 public class TileDataLargeItemStackHandler<H extends ItemStackHandler & ITileDataItemStackHandler>
-    extends TileDataItemStackHandler<H> {
+        extends TileDataItemStackHandler<H> {
 
-  public TileDataLargeItemStackHandler(H stackHandler) {
+    public TileDataLargeItemStackHandler(H stackHandler) {
 
-    super(stackHandler);
-  }
+        super(stackHandler);
+    }
 
-  public TileDataLargeItemStackHandler(H stackHandler, int updateInterval) {
+    public TileDataLargeItemStackHandler(H stackHandler, int updateInterval) {
 
-    super(stackHandler, updateInterval);
-  }
+        super(stackHandler, updateInterval);
+    }
 
-  @Override
-  protected ItemStack readItemStack(PacketBuffer buffer) throws IOException {
+    @Override
+    protected ItemStack readItemStack(PacketBuffer buffer) throws IOException {
 
-    return StackHelper.readLargeItemStack(buffer.readCompoundTag());
-  }
+        return StackHelper.readLargeItemStack(buffer.readCompoundTag());
+    }
 
-  @Override
-  protected void writeItemStack(PacketBuffer buffer, ItemStack itemStack) {
+    @Override
+    protected void writeItemStack(PacketBuffer buffer, ItemStack itemStack) {
 
-    buffer.writeCompoundTag(StackHelper.writeLargeItemStack(itemStack, new NBTTagCompound()));
-  }
+        buffer.writeCompoundTag(StackHelper.writeLargeItemStack(itemStack, new NBTTagCompound()));
+    }
 }

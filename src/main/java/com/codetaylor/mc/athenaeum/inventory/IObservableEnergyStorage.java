@@ -4,10 +4,10 @@ import net.minecraftforge.energy.IEnergyStorage;
 
 public interface IObservableEnergyStorage {
 
-  void addObserver(IContentsChangedEventHandler handler);
+    void addObserver(IContentsChangedEventHandler handler);
 
-  interface IContentsChangedEventHandler {
+    interface IContentsChangedEventHandler {
 
-    void onContentsChanged(IEnergyStorage energyStorage, int amount);
-  }
+        void onContentsChanged(IEnergyStorage energyStorage, int amount);
+    }
 }

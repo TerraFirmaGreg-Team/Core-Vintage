@@ -6,46 +6,46 @@ import net.minecraft.network.PacketBuffer;
 import javax.annotation.Nonnull;
 
 public class TileDataString
-    extends TileDataBase {
+        extends TileDataBase {
 
-  private String value = "";
+    private String value = "";
 
-  public TileDataString(@Nonnull String initialValue) {
+    public TileDataString(@Nonnull String initialValue) {
 
-    this(initialValue, 1);
-  }
-
-  public TileDataString(@Nonnull String initialValue, int updateInterval) {
-
-    super(updateInterval);
-    this.set(initialValue);
-  }
-
-  public void set(@Nonnull String value) {
-
-    if (!this.value.equals(value)) {
-      this.value = value;
-      this.setDirty(true);
+        this(initialValue, 1);
     }
-  }
 
-  public String get() {
+    public TileDataString(@Nonnull String initialValue, int updateInterval) {
 
-    return this.value;
-  }
+        super(updateInterval);
+        this.set(initialValue);
+    }
 
-  @Override
-  public void read(PacketBuffer buffer) {
+    public void set(@Nonnull String value) {
 
-    int length = buffer.readInt();
-    this.value = buffer.readString(length);
-  }
+        if (!this.value.equals(value)) {
+            this.value = value;
+            this.setDirty(true);
+        }
+    }
 
-  @Override
-  public void write(PacketBuffer buffer) {
+    public String get() {
 
-    buffer.writeInt(this.value.length());
-    buffer.writeString(this.value);
-  }
+        return this.value;
+    }
+
+    @Override
+    public void read(PacketBuffer buffer) {
+
+        int length = buffer.readInt();
+        this.value = buffer.readString(length);
+    }
+
+    @Override
+    public void write(PacketBuffer buffer) {
+
+        buffer.writeInt(this.value.length());
+        buffer.writeString(this.value);
+    }
 
 }

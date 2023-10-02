@@ -7,42 +7,42 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
 public class InteractionRayTraceData
-    implements Comparable<InteractionRayTraceData> {
+        implements Comparable<InteractionRayTraceData> {
 
-  private final double distanceSq;
-  private final RayTraceResult rayTraceResult;
-  private final IInteraction interaction;
+    private final double distanceSq;
+    private final RayTraceResult rayTraceResult;
+    private final IInteraction interaction;
 
-  InteractionRayTraceData(double distanceSq, RayTraceResult rayTraceResult, IInteraction interaction) {
+    InteractionRayTraceData(double distanceSq, RayTraceResult rayTraceResult, IInteraction interaction) {
 
-    this.distanceSq = distanceSq;
-    this.rayTraceResult = rayTraceResult;
-    this.interaction = interaction;
-  }
+        this.distanceSq = distanceSq;
+        this.rayTraceResult = rayTraceResult;
+        this.interaction = interaction;
+    }
 
-  @Override
-  public int compareTo(@Nonnull InteractionRayTraceData o) {
+    @Override
+    public int compareTo(@Nonnull InteractionRayTraceData o) {
 
-    return Double.compare(this.distanceSq, o.distanceSq);
-  }
+        return Double.compare(this.distanceSq, o.distanceSq);
+    }
 
-  public double getDistanceSq() {
+    public double getDistanceSq() {
 
-    return this.distanceSq;
-  }
+        return this.distanceSq;
+    }
 
-  public RayTraceResult getRayTraceResult() {
+    public RayTraceResult getRayTraceResult() {
 
-    return this.rayTraceResult;
-  }
+        return this.rayTraceResult;
+    }
 
-  public IInteraction getInteraction() {
+    public IInteraction getInteraction() {
 
-    return this.interaction;
-  }
+        return this.interaction;
+    }
 
-  public static class List
-      extends ArrayList<InteractionRayTraceData> {
-    //
-  }
+    public static class List
+            extends ArrayList<InteractionRayTraceData> {
+        //
+    }
 }

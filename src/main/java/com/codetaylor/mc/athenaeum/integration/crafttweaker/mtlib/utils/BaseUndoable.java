@@ -29,50 +29,48 @@ import crafttweaker.IAction;
  * https://github.com/jaredlll08/MTLib
  */
 public abstract class BaseUndoable
-    implements IAction {
+        implements IAction {
 
-  // Holds the name of the mod / machine this action manipulates
-  protected final String name;
+    // Holds the name of the mod / machine this action manipulates
+    protected final String name;
 
-  // Basic indicator, if the action was successful and can be reverted
-  protected boolean success = false;
+    // Basic indicator, if the action was successful and can be reverted
+    protected boolean success = false;
 
-  protected BaseUndoable(String name) {
+    protected BaseUndoable(String name) {
 
-    this.name = name;
-  }
-
-  protected String getRecipeInfo() {
-
-    return "Unknown item";
-  }
-
-  @Override
-  public String describe() {
-
-    return String.format("Altering %s Recipe(s) for %s", this.name, this.getRecipeInfo());
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-
-    if (obj == null) {
-      return false;
+        this.name = name;
     }
 
-    if (!(obj instanceof BaseUndoable)) {
-      return false;
+    protected String getRecipeInfo() {
+
+        return "Unknown item";
     }
 
-    BaseUndoable u = (BaseUndoable) obj;
+    @Override
+    public String describe() {
 
-    return name.equals(u.name);
-  }
+        return String.format("Altering %s Recipe(s) for %s", this.name, this.getRecipeInfo());
+    }
 
-  @Override
-  public int hashCode() {
+    @Override
+    public boolean equals(Object obj) {
 
-    return name.hashCode();
-  }
+        if (obj == null) {
+            return false;
+        }
+
+        if (!(obj instanceof BaseUndoable u)) {
+            return false;
+        }
+
+        return name.equals(u.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return name.hashCode();
+    }
 
 }

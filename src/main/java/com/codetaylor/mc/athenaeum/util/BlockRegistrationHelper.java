@@ -12,61 +12,61 @@ import net.minecraft.util.ResourceLocation;
 @SuppressWarnings("WeakerAccess")
 public class BlockRegistrationHelper {
 
-  /**
-   * Calls {@link BlockRegistrationHelper#createItemBlock(Block)} for each block given.
-   *
-   * @param blocks the blocks
-   * @return an array of {@link ItemBlock}
-   */
-  public static ItemBlock[] createItemBlocks(Block... blocks) {
+    /**
+     * Calls {@link BlockRegistrationHelper#createItemBlock(Block)} for each block given.
+     *
+     * @param blocks the blocks
+     * @return an array of {@link ItemBlock}
+     */
+    public static ItemBlock[] createItemBlocks(Block... blocks) {
 
-    ItemBlock[] result = new ItemBlock[blocks.length];
+        ItemBlock[] result = new ItemBlock[blocks.length];
 
-    for (int i = 0; i < blocks.length; i++) {
-      ItemBlock itemBlock = BlockRegistrationHelper.createItemBlock(blocks[i]);
-      result[i] = itemBlock;
+        for (int i = 0; i < blocks.length; i++) {
+            ItemBlock itemBlock = BlockRegistrationHelper.createItemBlock(blocks[i]);
+            result[i] = itemBlock;
+        }
+
+        return result;
     }
 
-    return result;
-  }
+    /**
+     * Creates and returns an {@link ItemBlock}, {@link ItemMultiTexture}, or {@link ItemColored}.
+     *
+     * @param block the block
+     * @return a new {@link ItemBlock}
+     */
+    public static ItemBlock createItemBlock(Block block) {
 
-  /**
-   * Creates and returns an {@link ItemBlock}, {@link ItemMultiTexture}, or {@link ItemColored}.
-   *
-   * @param block the block
-   * @return a new {@link ItemBlock}
-   */
-  public static ItemBlock createItemBlock(Block block) {
+        ItemBlock itemBlock;
 
-    ItemBlock itemBlock;
+        if (block instanceof IBlockColored) {
+            itemBlock = new ItemColored(block, ((IBlockColored) block).hasBlockColoredSubtypes());
 
-    if (block instanceof IBlockColored) {
-      itemBlock = new ItemColored(block, ((IBlockColored) block).hasBlockColoredSubtypes());
+        } else if (block instanceof IBlockVariant) {
+            itemBlock = new ItemMultiTexture(block, block, ((IBlockVariant) block)::getModelName);
 
-    } else if (block instanceof IBlockVariant) {
-      itemBlock = new ItemMultiTexture(block, block, ((IBlockVariant) block)::getModelName);
+        } else {
+            itemBlock = new ItemBlock(block);
+        }
 
-    } else {
-      itemBlock = new ItemBlock(block);
+        BlockRegistrationHelper.setItemBlockRegistryName(block, itemBlock);
+        return itemBlock;
     }
 
-    BlockRegistrationHelper.setItemBlockRegistryName(block, itemBlock);
-    return itemBlock;
-  }
+    /**
+     * Set the given {@link ItemBlock} registry name to the given {@link Block} registry name.
+     * <p>
+     * Throws a NPE if the block doesn't have a registry name.
+     *
+     * @param block     the {@link Block}
+     * @param itemBlock the {@link ItemBlock}
+     */
+    public static void setItemBlockRegistryName(Block block, ItemBlock itemBlock) {
 
-  /**
-   * Set the given {@link ItemBlock} registry name to the given {@link Block} registry name.
-   * <p>
-   * Throws a NPE if the block doesn't have a registry name.
-   *
-   * @param block     the {@link Block}
-   * @param itemBlock the {@link ItemBlock}
-   */
-  public static void setItemBlockRegistryName(Block block, ItemBlock itemBlock) {
-
-    ResourceLocation registryName = block.getRegistryName();
-    Preconditions.checkNotNull(registryName, "Block %s has null registry name", block);
-    itemBlock.setRegistryName(registryName);
-  }
+        ResourceLocation registryName = block.getRegistryName();
+        Preconditions.checkNotNull(registryName, "Block %s has null registry name", block);
+        itemBlock.setRegistryName(registryName);
+    }
 
 }

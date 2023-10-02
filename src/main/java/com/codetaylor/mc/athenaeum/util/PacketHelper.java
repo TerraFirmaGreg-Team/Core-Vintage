@@ -6,22 +6,22 @@ import java.nio.charset.StandardCharsets;
 
 public final class PacketHelper {
 
-  public static void writeString(String string, ByteBuf buffer) {
+    private PacketHelper() {
+        //
+    }
 
-    byte[] bytes = string.getBytes(StandardCharsets.UTF_8);
-    buffer.writeInt(bytes.length);
-    buffer.writeBytes(bytes);
-  }
+    public static void writeString(String string, ByteBuf buffer) {
 
-  public static String readString(ByteBuf buffer) {
+        byte[] bytes = string.getBytes(StandardCharsets.UTF_8);
+        buffer.writeInt(bytes.length);
+        buffer.writeBytes(bytes);
+    }
 
-    int length = buffer.readInt();
-    ByteBuf byteBuf = buffer.readBytes(length);
-    return new String(byteBuf.array(), StandardCharsets.UTF_8);
-  }
+    public static String readString(ByteBuf buffer) {
 
-  private PacketHelper() {
-    //
-  }
+        int length = buffer.readInt();
+        ByteBuf byteBuf = buffer.readBytes(length);
+        return new String(byteBuf.array(), StandardCharsets.UTF_8);
+    }
 
 }

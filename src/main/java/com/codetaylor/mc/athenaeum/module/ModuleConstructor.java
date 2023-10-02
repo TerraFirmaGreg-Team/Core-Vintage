@@ -6,19 +6,19 @@ import javax.annotation.Nullable;
 
 /* package */ class ModuleConstructor {
 
-  @Nullable
-  /* package */ ModuleBase constructModule(String modId, Class<? extends ModuleBase> moduleClass) {
+    @Nullable
+        /* package */ ModuleBase constructModule(String modId, Class<? extends ModuleBase> moduleClass) {
 
-    try {
-      ModuleBase module = moduleClass.newInstance();
-      FMLLog.log.info("[" + modId + "] Loaded module: " + moduleClass.getName());
-      return module;
+        try {
+            ModuleBase module = moduleClass.newInstance();
+            FMLLog.log.info("[" + modId + "] Loaded module: " + moduleClass.getName());
+            return module;
 
-    } catch (Exception e) {
-      FMLLog.log.error("[" + modId + "] Error loading module: " + moduleClass.getName(), e);
+        } catch (Exception e) {
+            FMLLog.log.error("[" + modId + "] Error loading module: " + moduleClass.getName(), e);
+        }
+
+        return null;
     }
-
-    return null;
-  }
 
 }

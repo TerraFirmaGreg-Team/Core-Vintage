@@ -5,5 +5,5 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public interface IForgeRegistryEventRegistrationStrategy<T extends IForgeRegistryEntry<T>> {
 
-  void register(IForgeRegistry<T> forgeRegistry);
+    void register(IForgeRegistry<T> forgeRegistry);
 }

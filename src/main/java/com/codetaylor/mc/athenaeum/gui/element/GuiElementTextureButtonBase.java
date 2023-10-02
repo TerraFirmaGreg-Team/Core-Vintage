@@ -7,32 +7,32 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.init.SoundEvents;
 
 public abstract class GuiElementTextureButtonBase
-    extends GuiElementTextureRectangle
-    implements IGuiElementClickable {
+        extends GuiElementTextureRectangle
+        implements IGuiElementClickable {
 
-  private static final int TEXTURE_BASE_INDEX = 0;
-  private static final int TEXTURE_HOVERED_INDEX = 1;
+    private static final int TEXTURE_BASE_INDEX = 0;
+    private static final int TEXTURE_HOVERED_INDEX = 1;
 
-  public GuiElementTextureButtonBase(GuiContainerBase guiBase, Texture[] textures, int elementX, int elementY, int elementWidth, int elementHeight) {
+    public GuiElementTextureButtonBase(GuiContainerBase guiBase, Texture[] textures, int elementX, int elementY, int elementWidth, int elementHeight) {
 
-    super(guiBase, textures, elementX, elementY, elementWidth, elementHeight);
-  }
-
-  @Override
-  protected int textureIndexGet(int mouseX, int mouseY) {
-
-    if (this.elementIsMouseInside(mouseX, mouseY)) {
-      return TEXTURE_HOVERED_INDEX;
+        super(guiBase, textures, elementX, elementY, elementWidth, elementHeight);
     }
 
-    return TEXTURE_BASE_INDEX;
-  }
+    @Override
+    protected int textureIndexGet(int mouseX, int mouseY) {
 
-  @Override
-  public void elementClicked(int mouseX, int mouseY, int mouseButton) {
+        if (this.elementIsMouseInside(mouseX, mouseY)) {
+            return TEXTURE_HOVERED_INDEX;
+        }
 
-    Minecraft.getMinecraft()
-        .getSoundHandler()
-        .playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1));
-  }
+        return TEXTURE_BASE_INDEX;
+    }
+
+    @Override
+    public void elementClicked(int mouseX, int mouseY, int mouseButton) {
+
+        Minecraft.getMinecraft()
+                .getSoundHandler()
+                .playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1));
+    }
 }

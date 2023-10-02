@@ -19,48 +19,48 @@ import javax.annotation.Nullable;
  * in the subclass' constructor to register tile data.
  */
 public abstract class TileEntityDataBase
-    extends TileEntityDataContainerBase {
+        extends TileEntityDataContainerBase {
 
-  protected final ITileDataService tileDataService;
+    protected final ITileDataService tileDataService;
 
-  protected TileEntityDataBase(ITileDataService tileDataService) {
+    protected TileEntityDataBase(ITileDataService tileDataService) {
 
-    this.tileDataService = tileDataService;
-  }
+        this.tileDataService = tileDataService;
+    }
 
-  // ---------------------------------------------------------------------------
-  // - Network
-  // ---------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------
+    // - Network
+    // ---------------------------------------------------------------------------
 
-  protected void registerTileDataForNetwork(ITileData[] data) {
+    protected void registerTileDataForNetwork(ITileData[] data) {
 
-    this.tileDataService.register(this, data);
-  }
+        this.tileDataService.register(this, data);
+    }
 
-  @SideOnly(Side.CLIENT)
-  @Override
-  public void onTileDataUpdate() {
-    //
-  }
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void onTileDataUpdate() {
+        //
+    }
 
-  @Nonnull
-  @Override
-  public NBTTagCompound getUpdateTag() {
+    @Nonnull
+    @Override
+    public NBTTagCompound getUpdateTag() {
 
-    return this.writeToNBT(new NBTTagCompound());
-  }
+        return this.writeToNBT(new NBTTagCompound());
+    }
 
-  @Nullable
-  @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
+    @Nullable
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
 
-    return new SPacketUpdateTileEntity(this.pos, -1, this.getUpdateTag());
-  }
+        return new SPacketUpdateTileEntity(this.pos, -1, this.getUpdateTag());
+    }
 
-  @Override
-  public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet) {
+    @Override
+    public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet) {
 
-    this.readFromNBT(packet.getNbtCompound());
-    BlockHelper.notifyBlockUpdate(this.world, this.pos);
-  }
+        this.readFromNBT(packet.getNbtCompound());
+        BlockHelper.notifyBlockUpdate(this.world, this.pos);
+    }
 }

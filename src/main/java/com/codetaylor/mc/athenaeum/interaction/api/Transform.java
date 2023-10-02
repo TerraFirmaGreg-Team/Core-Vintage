@@ -6,68 +6,66 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Transform {
 
-  public static final Transform IDENTITY = new Transform(
-      new Vec3d(0, 0, 0),
-      new Quaternion(),
-      new Vec3d(1, 1, 1)
-  );
+    public static final Transform IDENTITY = new Transform(
+            new Vec3d(0, 0, 0),
+            new Quaternion(),
+            new Vec3d(1, 1, 1)
+    );
 
-  public static final Quaternion NO_ROTATION = new Quaternion();
-  public static final Vec3d NO_TRANSLATION = new Vec3d(0, 0, 0);
-  public static final Vec3d NO_SCALE = new Vec3d(1, 1, 1);
+    public static final Quaternion NO_ROTATION = new Quaternion();
+    public static final Vec3d NO_TRANSLATION = new Vec3d(0, 0, 0);
+    public static final Vec3d NO_SCALE = new Vec3d(1, 1, 1);
+    public final Vec3d translation;
+    public final Quaternion rotation;
+    public final Vec3d scale;
+    @SideOnly(Side.CLIENT)
+    public org.lwjgl.util.vector.Quaternion lwjglRotation;
 
-  public static Vec3d translate() {
+    public Transform(Vec3d translation, Quaternion rotation, Vec3d scale) {
 
-    return NO_TRANSLATION;
-  }
-
-  public static Vec3d translate(double x, double y, double z) {
-
-    return new Vec3d(x, y, z);
-  }
-
-  public static Quaternion rotate() {
-
-    return NO_ROTATION;
-  }
-
-  public static Quaternion rotate(Quaternion[] rotations) {
-
-    Quaternion result = new Quaternion(rotations[0]);
-
-    for (int i = 1; i < rotations.length; i++) {
-      result.multLocal(rotations[i]);
+        this.translation = translation;
+        this.rotation = rotation;
+        this.scale = scale;
     }
 
-    return result;
-  }
+    public static Vec3d translate() {
 
-  public static Quaternion rotate(double x, double y, double z, double angle) {
+        return NO_TRANSLATION;
+    }
 
-    return new Quaternion().setFromAxisAngle((float) x, (float) y, (float) z, (float) Math.toRadians(angle));
-  }
+    public static Vec3d translate(double x, double y, double z) {
 
-  public static Vec3d scale() {
+        return new Vec3d(x, y, z);
+    }
 
-    return NO_SCALE;
-  }
+    public static Quaternion rotate() {
 
-  public static Vec3d scale(double x, double y, double z) {
+        return NO_ROTATION;
+    }
 
-    return new Vec3d(x, y, z);
-  }
+    public static Quaternion rotate(Quaternion[] rotations) {
 
-  public final Vec3d translation;
-  public final Quaternion rotation;
-  public final Vec3d scale;
+        Quaternion result = new Quaternion(rotations[0]);
 
-  @SideOnly(Side.CLIENT)
-  public org.lwjgl.util.vector.Quaternion lwjglRotation;
+        for (int i = 1; i < rotations.length; i++) {
+            result.multLocal(rotations[i]);
+        }
 
-  public Transform(Vec3d translation, Quaternion rotation, Vec3d scale) {
+        return result;
+    }
 
-    this.translation = translation;
-    this.rotation = rotation;
-    this.scale = scale;
-  }
+    public static Quaternion rotate(double x, double y, double z, double angle) {
+
+        return new Quaternion().setFromAxisAngle((float) x, (float) y, (float) z, (float) Math.toRadians(angle));
+    }
+
+    public static Vec3d scale() {
+
+        return NO_SCALE;
+    }
+
+    public static Vec3d scale(double x, double y, double z) {
+
+        return new Vec3d(x, y, z);
+    }
 }

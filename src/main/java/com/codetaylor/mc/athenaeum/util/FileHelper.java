@@ -5,20 +5,20 @@ import java.io.IOException;
 
 public class FileHelper {
 
-  public static void closeSilently(Closeable closeable) {
+    private FileHelper() {
 
-    if (closeable != null) {
-
-      try {
-        closeable.close();
-      } catch (IOException e) {
-        //
-      }
     }
-  }
 
-  private FileHelper() {
+    public static void closeSilently(Closeable closeable) {
 
-  }
+        if (closeable != null) {
+
+            try {
+                closeable.close();
+            } catch (IOException e) {
+                //
+            }
+        }
+    }
 
 }

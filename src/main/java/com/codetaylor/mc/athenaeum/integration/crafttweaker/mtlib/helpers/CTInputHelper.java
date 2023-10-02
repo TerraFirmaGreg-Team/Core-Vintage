@@ -25,7 +25,6 @@ package com.codetaylor.mc.athenaeum.integration.crafttweaker.mtlib.helpers;
 
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
-import crafttweaker.api.item.IngredientOr;
 import crafttweaker.api.item.IngredientStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.oredict.IOreDictEntry;
@@ -56,398 +55,397 @@ import java.util.List;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CTInputHelper {
 
-  public static boolean isABlock(IItemStack block) {
+    public static boolean isABlock(IItemStack block) {
 
-    return CTInputHelper.isABlock(CTInputHelper.toStack(block));
-  }
-
-  public static <T> T[][] getMultiDimensionalArray(Class<T> clazz, T[] array, int height, int width) {
-
-    T[][] multiDim = (T[][]) Array.newInstance(clazz, height, width);
-
-    for (int y = 0; y < height; y++) {
-      System.arraycopy(array, (y * width), multiDim[y], 0, width);
+        return CTInputHelper.isABlock(CTInputHelper.toStack(block));
     }
 
-    return multiDim;
-  }
+    public static <T> T[][] getMultiDimensionalArray(Class<T> clazz, T[] array, int height, int width) {
 
-  public static IItemStack[] toStacks(IIngredient[] ingredients) {
+        T[][] multiDim = (T[][]) Array.newInstance(clazz, height, width);
 
-    ArrayList<IItemStack> stacks = new ArrayList<>();
+        for (int y = 0; y < height; y++) {
+            System.arraycopy(array, (y * width), multiDim[y], 0, width);
+        }
 
-    for (IIngredient ingredient : ingredients) {
-      stacks.addAll(ingredient.getItems());
+        return multiDim;
     }
 
-    return stacks.toArray(new IItemStack[stacks.size()]);
-  }
+    public static IItemStack[] toStacks(IIngredient[] ingredients) {
 
-  public static boolean isABlock(ItemStack block) {
+        ArrayList<IItemStack> stacks = new ArrayList<>();
 
-    return block.getItem() instanceof ItemBlock;
-  }
+        for (IIngredient ingredient : ingredients) {
+            stacks.addAll(ingredient.getItems());
+        }
 
-  public static ItemStack toStack(IItemStack iStack) {
-
-    if (iStack == null) {
-      return ItemStack.EMPTY;
-
-    } else {
-      Object internal = iStack.getInternal();
-
-      if (!(internal instanceof ItemStack)) {
-        CTLogHelper.logError("Not a valid item stack: " + iStack);
-      }
-
-      return (ItemStack) internal;
-    }
-  }
-
-  public static IIngredient toIngredient(ItemStack stack) {
-
-    return toIItemStack(stack);
-  }
-
-  public static IIngredient toIngredient(FluidStack stack) {
-
-    if (stack == null) {
-      return null;
+        return stacks.toArray(new IItemStack[stacks.size()]);
     }
 
-    return new MCLiquidStack(stack);
-  }
+    public static boolean isABlock(ItemStack block) {
 
-  public static IItemStack toIItemStack(ItemStack stack) {
-
-    if (stack.isEmpty()) {
-      return null;
+        return block.getItem() instanceof ItemBlock;
     }
 
-    return new MCItemStack(stack);
-  }
+    public static ItemStack toStack(IItemStack iStack) {
 
-  public static ILiquidStack toILiquidStack(FluidStack stack) {
-
-    if (stack == null) {
-      return null;
-    }
-
-    return new MCLiquidStack(stack);
-  }
-
-  public static ItemStack[] toStacks(IItemStack[] iStack) {
-
-    if (iStack == null) {
-      return null;
-
-    } else {
-      ItemStack[] output = new ItemStack[iStack.length];
-
-      for (int i = 0; i < iStack.length; i++) {
-        output[i] = toStack(iStack[i]);
-      }
-
-      return output;
-    }
-  }
-
-  public static Object toObject(IIngredient iStack) {
-
-    if (iStack == null) {
-      return null;
-
-    } else {
-
-      if (iStack instanceof IOreDictEntry) {
-        return toString((IOreDictEntry) iStack);
-
-      } else if (iStack instanceof IItemStack) {
-        return toStack((IItemStack) iStack);
-
-      } else if (iStack instanceof IngredientStack) {
-        return iStack.getItems();
-
-      } else {
-        return null;
-      }
-    }
-  }
-
-  public static Object[] toObjects(IIngredient[] ingredient) {
-
-    if (ingredient == null) {
-      return null;
-
-    } else {
-      Object[] output = new Object[ingredient.length];
-
-      for (int i = 0; i < ingredient.length; i++) {
-
-        if (ingredient[i] != null) {
-          output[i] = toObject(ingredient[i]);
+        if (iStack == null) {
+            return ItemStack.EMPTY;
 
         } else {
-          output[i] = "";
-        }
-      }
+            Object internal = iStack.getInternal();
 
-      return output;
-    }
-  }
-
-  public static String toString(IOreDictEntry entry) {
-
-    return entry.getName();
-  }
-
-  public static FluidStack toFluid(ILiquidStack iStack) {
-
-    if (iStack == null) {
-      return null;
-
-    } else {
-      return FluidRegistry.getFluidStack(iStack.getName(), iStack.getAmount());
-    }
-  }
-
-  public static Fluid getFluid(ILiquidStack iStack) {
-
-    if (iStack == null) {
-      return null;
-
-    } else {
-      return FluidRegistry.getFluid(iStack.getName());
-    }
-
-  }
-
-  public static FluidStack[] toFluids(ILiquidStack[] iStack) {
-
-    FluidStack[] stack = new FluidStack[iStack.length];
-
-    for (int i = 0; i < stack.length; i++) {
-      stack[i] = toFluid(iStack[i]);
-    }
-    return stack;
-  }
-
-  public static Object[] toShapedObjects(IIngredient[][] ingredients) {
-
-    if (ingredients == null) {
-      return null;
-
-    } else {
-      ArrayList<Object> prep = new ArrayList<>();
-      TCharSet usedCharSet = new TCharHashSet();
-
-      prep.add("abc");
-      prep.add("def");
-      prep.add("ghi");
-      char[][] map = new char[][]{{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}};
-
-      for (int x = 0; x < ingredients.length; x++) {
-
-        if (ingredients[x] != null) {
-
-          for (int y = 0; y < ingredients[x].length; y++) {
-
-            if (ingredients[x][y] != null && x < map.length && y < map[x].length) {
-              prep.add(map[x][y]);
-              usedCharSet.add(map[x][y]);
-              prep.add(CTInputHelper.toObject(ingredients[x][y]));
+            if (!(internal instanceof ItemStack)) {
+                CTLogHelper.logError("Not a valid item stack: " + iStack);
             }
-          }
+
+            return (ItemStack) internal;
         }
-      }
+    }
 
-      for (int i = 0; i < 3; i++) {
-        StringBuilder sb = new StringBuilder();
+    public static IIngredient toIngredient(ItemStack stack) {
 
-        if (prep.get(i) instanceof String) {
-          String s = (String) prep.get(i);
+        return toIItemStack(stack);
+    }
 
-          for (int j = 0; j < 3; j++) {
-            char c = s.charAt(j);
+    public static IIngredient toIngredient(FluidStack stack) {
 
-            if (usedCharSet.contains(c)) {
-              sb.append(c);
+        if (stack == null) {
+            return null;
+        }
+
+        return new MCLiquidStack(stack);
+    }
+
+    public static IItemStack toIItemStack(ItemStack stack) {
+
+        if (stack.isEmpty()) {
+            return null;
+        }
+
+        return new MCItemStack(stack);
+    }
+
+    public static ILiquidStack toILiquidStack(FluidStack stack) {
+
+        if (stack == null) {
+            return null;
+        }
+
+        return new MCLiquidStack(stack);
+    }
+
+    public static ItemStack[] toStacks(IItemStack[] iStack) {
+
+        if (iStack == null) {
+            return null;
+
+        } else {
+            ItemStack[] output = new ItemStack[iStack.length];
+
+            for (int i = 0; i < iStack.length; i++) {
+                output[i] = toStack(iStack[i]);
+            }
+
+            return output;
+        }
+    }
+
+    public static Object toObject(IIngredient iStack) {
+
+        if (iStack == null) {
+            return null;
+
+        } else {
+
+            if (iStack instanceof IOreDictEntry) {
+                return toString((IOreDictEntry) iStack);
+
+            } else if (iStack instanceof IItemStack) {
+                return toStack((IItemStack) iStack);
+
+            } else if (iStack instanceof IngredientStack) {
+                return iStack.getItems();
 
             } else {
-              sb.append(" ");
+                return null;
             }
-          }
-
-          prep.set(i, sb.toString());
         }
-      }
-
-      return prep.toArray();
-    }
-  }
-
-  public static <R> NonNullList<R> toNonNullList(R[] items) {
-
-    NonNullList<R> nonNullList = NonNullList.create();
-    Collections.addAll(nonNullList, items);
-
-    return nonNullList;
-  }
-
-  /**
-   * Converts an {@link IIngredient} to an {@link Ingredient}.
-   *
-   * @param ingredient {@link IIngredient} to convert
-   * @return {@link Ingredient}
-   * @author codetaylor
-   */
-  public static Ingredient toIngredient(@Nullable IIngredient ingredient) {
-
-    if (ingredient == null) {
-      return Ingredient.EMPTY;
     }
 
-    return new IngredientWrapper(ingredient);
-  }
+    public static Object[] toObjects(IIngredient[] ingredient) {
 
-  /**
-   * Converts a two-dimensional {@link IIngredient} array into a two-dimensional {@link Ingredient} array.
-   *
-   * @param ingredients two-dimensional {@link IIngredient} array to convert
-   * @return two-dimensional {@link Ingredient} array
-   * @author codetaylor
-   */
-  public static Ingredient[][] toIngredientMatrix(IIngredient[][] ingredients) {
+        if (ingredient == null) {
+            return null;
 
-    Ingredient[][] result = new Ingredient[ingredients.length][];
+        } else {
+            Object[] output = new Object[ingredient.length];
 
-    for (int row = 0; row < ingredients.length; row++) {
-      result[row] = new Ingredient[ingredients[row].length];
+            for (int i = 0; i < ingredient.length; i++) {
 
-      for (int col = 0; col < ingredients[row].length; col++) {
-        result[row][col] = CTInputHelper.toIngredient(ingredients[row][col]);
-      }
+                if (ingredient[i] != null) {
+                    output[i] = toObject(ingredient[i]);
+
+                } else {
+                    output[i] = "";
+                }
+            }
+
+            return output;
+        }
     }
 
-    return result;
-  }
+    public static String toString(IOreDictEntry entry) {
 
-  /**
-   * Converts an {@link IIngredient} array into an {@link Ingredient} array.
-   *
-   * @param ingredients {@link IIngredient} array to convert
-   * @return {@link Ingredient} array
-   * @author codetaylor
-   */
-  public static Ingredient[] toIngredientArray(IIngredient[] ingredients) {
-
-    Ingredient[] result = new Ingredient[ingredients.length];
-
-    for (int i = 0; i < ingredients.length; i++) {
-      result[i] = CTInputHelper.toIngredient(ingredients[i]);
+        return entry.getName();
     }
 
-    return result;
-  }
+    public static FluidStack toFluid(ILiquidStack iStack) {
 
-  public static List<ItemStack> getMatchingStacks(List<ItemStack> itemStackList, int amount, List<ItemStack> result) {
+        if (iStack == null) {
+            return null;
 
-    NonNullList<ItemStack> internalList = NonNullList.create();
-
-    for (ItemStack itemStack : itemStackList) {
-
-      if (itemStack.isEmpty()) {
-        continue;
-      }
-
-      if (itemStack.getMetadata() == OreDictionary.WILDCARD_VALUE) {
-
-        itemStack.getItem().getSubItems(CreativeTabs.SEARCH, internalList);
-
-      } else {
-        internalList.add(itemStack);
-      }
+        } else {
+            return FluidRegistry.getFluidStack(iStack.getName(), iStack.getAmount());
+        }
     }
 
-    for (ItemStack itemStack : internalList) {
-      itemStack.setCount(amount);
+    public static Fluid getFluid(ILiquidStack iStack) {
+
+        if (iStack == null) {
+            return null;
+
+        } else {
+            return FluidRegistry.getFluid(iStack.getName());
+        }
+
     }
 
-    result.addAll(internalList);
-    return result;
-  }
+    public static FluidStack[] toFluids(ILiquidStack[] iStack) {
 
-  public static List<ItemStack> getMatchingStacks(IIngredient ingredient, List<ItemStack> result) {
+        FluidStack[] stack = new FluidStack[iStack.length];
 
-    if (ingredient == null) {
-      return result;
+        for (int i = 0; i < stack.length; i++) {
+            stack[i] = toFluid(iStack[i]);
+        }
+        return stack;
     }
 
-    if (ingredient instanceof IOreDictEntry) {
-      NonNullList<ItemStack> ores = OreDictionary.getOres(((IOreDictEntry) ingredient).getName());
-      CTInputHelper.getMatchingStacks(ores, ingredient.getAmount(), result);
+    public static Object[] toShapedObjects(IIngredient[][] ingredients) {
 
-    } else if (ingredient instanceof IItemStack) {
-      ItemStack itemStack = CTInputHelper.toStack((IItemStack) ingredient);
-      itemStack.setCount(ingredient.getAmount());
-      result.add(itemStack);
+        if (ingredients == null) {
+            return null;
 
-    } else {
-      List<IItemStack> items = ingredient.getItems();
+        } else {
+            ArrayList<Object> prep = new ArrayList<>();
+            TCharSet usedCharSet = new TCharHashSet();
 
-      for (IItemStack item : items) {
-        ItemStack itemStack = CTInputHelper.toStack(item);
-        CTInputHelper.getMatchingStacks(Collections.singletonList(itemStack), ingredient.getAmount(), result);
-      }
+            prep.add("abc");
+            prep.add("def");
+            prep.add("ghi");
+            char[][] map = new char[][]{{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}};
+
+            for (int x = 0; x < ingredients.length; x++) {
+
+                if (ingredients[x] != null) {
+
+                    for (int y = 0; y < ingredients[x].length; y++) {
+
+                        if (ingredients[x][y] != null && x < map.length && y < map[x].length) {
+                            prep.add(map[x][y]);
+                            usedCharSet.add(map[x][y]);
+                            prep.add(CTInputHelper.toObject(ingredients[x][y]));
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < 3; i++) {
+                StringBuilder sb = new StringBuilder();
+
+                if (prep.get(i) instanceof String s) {
+
+                    for (int j = 0; j < 3; j++) {
+                        char c = s.charAt(j);
+
+                        if (usedCharSet.contains(c)) {
+                            sb.append(c);
+
+                        } else {
+                            sb.append(" ");
+                        }
+                    }
+
+                    prep.set(i, sb.toString());
+                }
+            }
+
+            return prep.toArray();
+        }
     }
 
-    return result;
-  }
+    public static <R> NonNullList<R> toNonNullList(R[] items) {
 
-  /**
-   * Wraps an {@link IIngredient} as an {@link Ingredient}.
-   */
-  public static class IngredientWrapper
-      extends Ingredient {
+        NonNullList<R> nonNullList = NonNullList.create();
+        Collections.addAll(nonNullList, items);
 
-    private IIngredient ingredient;
-
-    public IngredientWrapper(@Nullable IIngredient ingredient) {
-
-      this.ingredient = ingredient;
+        return nonNullList;
     }
 
-    public int getAmount() {
+    /**
+     * Converts an {@link IIngredient} to an {@link Ingredient}.
+     *
+     * @param ingredient {@link IIngredient} to convert
+     * @return {@link Ingredient}
+     * @author codetaylor
+     */
+    public static Ingredient toIngredient(@Nullable IIngredient ingredient) {
 
-      if (this.ingredient == null) {
-        return 0;
-      }
+        if (ingredient == null) {
+            return Ingredient.EMPTY;
+        }
 
-      return this.ingredient.getAmount();
+        return new IngredientWrapper(ingredient);
     }
 
-    @Nonnull
-    @Override
-    public ItemStack[] getMatchingStacks() {
+    /**
+     * Converts a two-dimensional {@link IIngredient} array into a two-dimensional {@link Ingredient} array.
+     *
+     * @param ingredients two-dimensional {@link IIngredient} array to convert
+     * @return two-dimensional {@link Ingredient} array
+     * @author codetaylor
+     */
+    public static Ingredient[][] toIngredientMatrix(IIngredient[][] ingredients) {
 
-      List<ItemStack> matchingStacks = CTInputHelper.getMatchingStacks(this.ingredient, new ArrayList<>());
-      return matchingStacks.toArray(new ItemStack[matchingStacks.size()]);
+        Ingredient[][] result = new Ingredient[ingredients.length][];
+
+        for (int row = 0; row < ingredients.length; row++) {
+            result[row] = new Ingredient[ingredients[row].length];
+
+            for (int col = 0; col < ingredients[row].length; col++) {
+                result[row][col] = CTInputHelper.toIngredient(ingredients[row][col]);
+            }
+        }
+
+        return result;
     }
 
-    @Override
-    public boolean apply(@Nullable ItemStack itemStack) {
+    /**
+     * Converts an {@link IIngredient} array into an {@link Ingredient} array.
+     *
+     * @param ingredients {@link IIngredient} array to convert
+     * @return {@link Ingredient} array
+     * @author codetaylor
+     */
+    public static Ingredient[] toIngredientArray(IIngredient[] ingredients) {
 
-      if (this.ingredient == null) {
-        return itemStack == null || itemStack.isEmpty();
-      }
+        Ingredient[] result = new Ingredient[ingredients.length];
 
-      if (itemStack == null || itemStack.isEmpty()) {
-        return this.ingredient == null;
-      }
+        for (int i = 0; i < ingredients.length; i++) {
+            result[i] = CTInputHelper.toIngredient(ingredients[i]);
+        }
 
-      return this.ingredient.matches(CTInputHelper.toIItemStack(itemStack));
+        return result;
     }
 
-  }
+    public static List<ItemStack> getMatchingStacks(List<ItemStack> itemStackList, int amount, List<ItemStack> result) {
+
+        NonNullList<ItemStack> internalList = NonNullList.create();
+
+        for (ItemStack itemStack : itemStackList) {
+
+            if (itemStack.isEmpty()) {
+                continue;
+            }
+
+            if (itemStack.getMetadata() == OreDictionary.WILDCARD_VALUE) {
+
+                itemStack.getItem().getSubItems(CreativeTabs.SEARCH, internalList);
+
+            } else {
+                internalList.add(itemStack);
+            }
+        }
+
+        for (ItemStack itemStack : internalList) {
+            itemStack.setCount(amount);
+        }
+
+        result.addAll(internalList);
+        return result;
+    }
+
+    public static List<ItemStack> getMatchingStacks(IIngredient ingredient, List<ItemStack> result) {
+
+        if (ingredient == null) {
+            return result;
+        }
+
+        if (ingredient instanceof IOreDictEntry) {
+            NonNullList<ItemStack> ores = OreDictionary.getOres(((IOreDictEntry) ingredient).getName());
+            CTInputHelper.getMatchingStacks(ores, ingredient.getAmount(), result);
+
+        } else if (ingredient instanceof IItemStack) {
+            ItemStack itemStack = CTInputHelper.toStack((IItemStack) ingredient);
+            itemStack.setCount(ingredient.getAmount());
+            result.add(itemStack);
+
+        } else {
+            List<IItemStack> items = ingredient.getItems();
+
+            for (IItemStack item : items) {
+                ItemStack itemStack = CTInputHelper.toStack(item);
+                CTInputHelper.getMatchingStacks(Collections.singletonList(itemStack), ingredient.getAmount(), result);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Wraps an {@link IIngredient} as an {@link Ingredient}.
+     */
+    public static class IngredientWrapper
+            extends Ingredient {
+
+        private final IIngredient ingredient;
+
+        public IngredientWrapper(@Nullable IIngredient ingredient) {
+
+            this.ingredient = ingredient;
+        }
+
+        public int getAmount() {
+
+            if (this.ingredient == null) {
+                return 0;
+            }
+
+            return this.ingredient.getAmount();
+        }
+
+        @Nonnull
+        @Override
+        public ItemStack[] getMatchingStacks() {
+
+            List<ItemStack> matchingStacks = CTInputHelper.getMatchingStacks(this.ingredient, new ArrayList<>());
+            return matchingStacks.toArray(new ItemStack[matchingStacks.size()]);
+        }
+
+        @Override
+        public boolean apply(@Nullable ItemStack itemStack) {
+
+            if (this.ingredient == null) {
+                return itemStack == null || itemStack.isEmpty();
+            }
+
+            if (itemStack == null || itemStack.isEmpty()) {
+                return this.ingredient == null;
+            }
+
+            return this.ingredient.matches(CTInputHelper.toIItemStack(itemStack));
+        }
+
+    }
 
 }

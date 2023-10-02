@@ -5,25 +5,25 @@ import java.util.TreeMap;
 
 public class PackedData {
 
-  public Map<String, AtlasData> atlas;
-  public Map<String, ImageData> image;
+    public Map<String, AtlasData> atlas;
+    public Map<String, ImageData> image;
 
-  public PackedData() {
+    public PackedData() {
 
-    this.atlas = new TreeMap<>();
-    this.image = new TreeMap<>();
-  }
+        this.atlas = new TreeMap<>();
+        this.image = new TreeMap<>();
+    }
 
-  public static class ImageData {
+    public static class ImageData {
 
-    public String atlas;
-    public int u, v;
-    public int width, height;
-  }
+        public String atlas;
+        public int u, v;
+        public int width, height;
+    }
 
-  public static class AtlasData {
+    public static class AtlasData {
 
-    public int width, height;
-  }
+        public int width, height;
+    }
 
 }

@@ -8,43 +8,43 @@ import net.minecraft.network.PacketBuffer;
 import java.io.IOException;
 
 public class TileDataItemStack
-    extends TileDataBase {
+        extends TileDataBase {
 
-  private ItemStack itemStack;
+    private ItemStack itemStack;
 
-  public TileDataItemStack(ItemStack itemStack) {
+    public TileDataItemStack(ItemStack itemStack) {
 
-    this(itemStack, 1);
-  }
-
-  public TileDataItemStack(ItemStack itemStack, int updateInterval) {
-
-    super(updateInterval);
-    this.itemStack = Preconditions.checkNotNull(itemStack);
-  }
-
-  public void set(ItemStack itemStack) {
-
-    if (this.itemStack != itemStack) {
-      this.itemStack = itemStack;
-      this.setDirty(true);
+        this(itemStack, 1);
     }
-  }
 
-  public ItemStack get() {
+    public TileDataItemStack(ItemStack itemStack, int updateInterval) {
 
-    return this.itemStack;
-  }
+        super(updateInterval);
+        this.itemStack = Preconditions.checkNotNull(itemStack);
+    }
 
-  @Override
-  public void read(PacketBuffer buffer) throws IOException {
+    public void set(ItemStack itemStack) {
 
-    this.itemStack = new ItemStack(Preconditions.checkNotNull(buffer.readCompoundTag()));
-  }
+        if (this.itemStack != itemStack) {
+            this.itemStack = itemStack;
+            this.setDirty(true);
+        }
+    }
 
-  @Override
-  public void write(PacketBuffer buffer) {
+    public ItemStack get() {
 
-    buffer.writeCompoundTag(this.itemStack.serializeNBT());
-  }
+        return this.itemStack;
+    }
+
+    @Override
+    public void read(PacketBuffer buffer) throws IOException {
+
+        this.itemStack = new ItemStack(Preconditions.checkNotNull(buffer.readCompoundTag()));
+    }
+
+    @Override
+    public void write(PacketBuffer buffer) {
+
+        buffer.writeCompoundTag(this.itemStack.serializeNBT());
+    }
 }

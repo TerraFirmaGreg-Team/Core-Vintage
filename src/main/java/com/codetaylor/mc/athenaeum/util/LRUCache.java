@@ -4,29 +4,29 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LRUCache<K, V>
-    extends LinkedHashMap<K, V> {
+        extends LinkedHashMap<K, V> {
 
-  public static <K, V> LRUCache<K, V> create(int capacity) {
+    private int maxSize;
 
-    return new LRUCache<>(capacity);
-  }
+    public LRUCache(int capacity) {
 
-  private int maxSize;
+        super(capacity, 0.75f, true);
+        this.maxSize = capacity;
+    }
 
-  public LRUCache(int capacity) {
+    private LRUCache() {
+        //
+    }
 
-    super(capacity, 0.75f, true);
-    this.maxSize = capacity;
-  }
+    public static <K, V> LRUCache<K, V> create(int capacity) {
 
-  @Override
-  protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+        return new LRUCache<>(capacity);
+    }
 
-    return this.size() > this.maxSize;
-  }
+    @Override
+    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
 
-  private LRUCache() {
-    //
-  }
+        return this.size() > this.maxSize;
+    }
 
 }

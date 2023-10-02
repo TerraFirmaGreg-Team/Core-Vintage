@@ -17,29 +17,29 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface IRegistryEventHandler {
 
-  void onRegisterBlockEvent(RegistryEvent.Register<Block> event);
+    void onRegisterBlockEvent(RegistryEvent.Register<Block> event);
 
-  void onRegisterItemEvent(RegistryEvent.Register<Item> event);
+    void onRegisterItemEvent(RegistryEvent.Register<Item> event);
 
-  void onRegisterPotionEvent(RegistryEvent.Register<Potion> event);
+    void onRegisterPotionEvent(RegistryEvent.Register<Potion> event);
 
-  void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event);
+    void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event);
 
-  void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event);
+    void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event);
 
-  void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event);
+    void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event);
 
-  void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event);
+    void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event);
 
-  void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event);
+    void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event);
 
-  void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event);
+    void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event);
 
-  void onRegisterRecipesEvent(RegistryEvent.Register<IRecipe> event);
+    void onRegisterRecipesEvent(RegistryEvent.Register<IRecipe> event);
 
-  void onRegisterTileEntitiesEvent();
+    void onRegisterTileEntitiesEvent();
 
-  @SideOnly(Side.CLIENT)
-  void onClientRegisterModelsEvent(ModelRegistryEvent event);
+    @SideOnly(Side.CLIENT)
+    void onClientRegisterModelsEvent(ModelRegistryEvent event);
 
 }

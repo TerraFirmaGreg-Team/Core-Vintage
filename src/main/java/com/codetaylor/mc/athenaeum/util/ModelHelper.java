@@ -22,92 +22,92 @@ import java.util.List;
 
 public final class ModelHelper {
 
-  /**
-   * Transforms a quad.
-   * <p>
-   * https://github.com/Vazkii/Botania/blob/master/src/main/java/vazkii/botania/client/model/GunModel.java
-   *
-   * @param quad      the quad
-   * @param transform the transform
-   * @return the transformed quad
-   */
-  public static BakedQuad transform(BakedQuad quad, final TRSRTransformation transform) {
+    private ModelHelper() {
+        //
+    }
 
-    UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(DefaultVertexFormats.ITEM);
+    /**
+     * Transforms a quad.
+     * <p>
+     * https://github.com/Vazkii/Botania/blob/master/src/main/java/vazkii/botania/client/model/GunModel.java
+     *
+     * @param quad      the quad
+     * @param transform the transform
+     * @return the transformed quad
+     */
+    public static BakedQuad transform(BakedQuad quad, final TRSRTransformation transform) {
 
-    final IVertexConsumer consumer = new VertexTransformer(builder) {
+        UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(DefaultVertexFormats.ITEM);
 
-      @Override
-      public void put(int element, float... data) {
+        final IVertexConsumer consumer = new VertexTransformer(builder) {
 
-        VertexFormatElement formatElement = DefaultVertexFormats.ITEM.getElement(element);
+            @Override
+            public void put(int element, float... data) {
 
-        switch (formatElement.getUsage()) {
+                VertexFormatElement formatElement = DefaultVertexFormats.ITEM.getElement(element);
 
-          case POSITION: {
-            float[] newData = new float[4];
-            Vector4f vec = new Vector4f(data);
-            transform.getMatrix().transform(vec);
-            vec.get(newData);
-            this.parent.put(element, newData);
-            break;
-          }
+                switch (formatElement.getUsage()) {
 
-          default: {
-            this.parent.put(element, data);
-            break;
-          }
+                    case POSITION: {
+                        float[] newData = new float[4];
+                        Vector4f vec = new Vector4f(data);
+                        transform.getMatrix().transform(vec);
+                        vec.get(newData);
+                        this.parent.put(element, newData);
+                        break;
+                    }
+
+                    default: {
+                        this.parent.put(element, data);
+                        break;
+                    }
+                }
+            }
+        };
+
+        quad.pipe(consumer);
+
+        return builder.build();
+    }
+
+    public static IBakedModel getBakedModel(ItemStack stack) {
+
+        Item item = stack.getItem();
+
+        if (item instanceof ItemBlock) {
+            Block block = ((ItemBlock) item).getBlock();
+            IBlockState blockState = block.getStateFromMeta(stack.getMetadata());
+            return ModelHelper.getBakedModel(blockState);
+
+        } else {
+            return Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
         }
-      }
-    };
-
-    quad.pipe(consumer);
-
-    return builder.build();
-  }
-
-  public static IBakedModel getBakedModel(ItemStack stack) {
-
-    Item item = stack.getItem();
-
-    if (item instanceof ItemBlock) {
-      Block block = ((ItemBlock) item).getBlock();
-      IBlockState blockState = block.getStateFromMeta(stack.getMetadata());
-      return ModelHelper.getBakedModel(blockState);
-
-    } else {
-      return Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
     }
-  }
 
-  public static IBakedModel getBakedModel(IBlockState blockState) {
+    public static IBakedModel getBakedModel(IBlockState blockState) {
 
-    return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(blockState);
-  }
-
-  public static List<BakedQuad> getQuads(ItemStack stack, long rand) {
-
-    Item item = stack.getItem();
-
-    if (item instanceof ItemBlock) {
-      Block block = ((ItemBlock) item).getBlock();
-      IBlockState blockState = block.getStateFromMeta(stack.getMetadata());
-      IBakedModel bakedModel = ModelHelper.getBakedModel(blockState);
-      List<BakedQuad> result = new ArrayList<>();
-
-      for (EnumFacing facing : EnumFacing.values()) {
-        result.addAll(bakedModel.getQuads(blockState, facing, rand));
-      }
-
-      return result;
-
-    } else {
-      IBakedModel bakedModel = ModelHelper.getBakedModel(stack);
-      return bakedModel.getQuads(null, null, rand);
+        return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(blockState);
     }
-  }
 
-  private ModelHelper() {
-    //
-  }
+    public static List<BakedQuad> getQuads(ItemStack stack, long rand) {
+
+        Item item = stack.getItem();
+
+        if (item instanceof ItemBlock) {
+            Block block = ((ItemBlock) item).getBlock();
+            IBlockState blockState = block.getStateFromMeta(stack.getMetadata());
+            IBakedModel bakedModel = ModelHelper.getBakedModel(blockState);
+            List<BakedQuad> result = new ArrayList<>();
+
+            for (EnumFacing facing : EnumFacing.values()) {
+                result.addAll(bakedModel.getQuads(blockState, facing, rand));
+            }
+
+            return result;
+
+        } else {
+            IBakedModel bakedModel = ModelHelper.getBakedModel(stack);
+            return bakedModel.getQuads(null, null, rand);
+        }
+    }
 }

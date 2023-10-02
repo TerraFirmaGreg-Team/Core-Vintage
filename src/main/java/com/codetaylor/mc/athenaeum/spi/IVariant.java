@@ -3,8 +3,8 @@ package com.codetaylor.mc.athenaeum.spi;
 import net.minecraft.util.IStringSerializable;
 
 public interface IVariant
-    extends IStringSerializable {
+        extends IStringSerializable {
 
-  int getMeta();
+    int getMeta();
 
 }

@@ -1,11 +1,11 @@
 package com.codetaylor.mc.athenaeum.packer.atlas;
 
 public class AtlasOutOfRoomException
-    extends RuntimeException {
+        extends RuntimeException {
 
-  /* package */ AtlasOutOfRoomException(String message) {
+    /* package */ AtlasOutOfRoomException(String message) {
 
-    super(message);
-  }
+        super(message);
+    }
 
 }

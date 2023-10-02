@@ -9,64 +9,64 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 public abstract class GuiElementFluidTankBase
-    extends GuiElementTiledTextureAtlasSpriteBase {
+        extends GuiElementTiledTextureAtlasSpriteBase {
 
-  protected final FluidTank fluidTank;
-  private TextureAtlasSprite fluidSprite;
+    protected final FluidTank fluidTank;
+    private TextureAtlasSprite fluidSprite;
 
-  public GuiElementFluidTankBase(GuiContainerBase guiBase, int elementX, int elementY, int elementWidth, int elementHeight, FluidTank fluidTank) {
+    public GuiElementFluidTankBase(GuiContainerBase guiBase, int elementX, int elementY, int elementWidth, int elementHeight, FluidTank fluidTank) {
 
-    super(guiBase, elementX, elementY, elementWidth, elementHeight);
-    this.fluidTank = fluidTank;
-  }
-
-  protected float scalarPercentageGet() {
-
-    int fluidAmount = this.fluidTank.getFluidAmount();
-
-    if (fluidAmount > 0) {
-      int capacity = this.fluidTank.getCapacity();
-      return Math.max((float) fluidAmount / (float) capacity, 1 / (float) this.elementHeight);
+        super(guiBase, elementX, elementY, elementWidth, elementHeight);
+        this.fluidTank = fluidTank;
     }
 
-    return 0;
-  }
+    protected float scalarPercentageGet() {
 
-  @Override
-  protected TextureAtlasSprite textureAtlasSpriteGet() {
+        int fluidAmount = this.fluidTank.getFluidAmount();
 
-    FluidStack fluidStack = this.fluidTank.getFluid();
+        if (fluidAmount > 0) {
+            int capacity = this.fluidTank.getCapacity();
+            return Math.max((float) fluidAmount / (float) capacity, 1 / (float) this.elementHeight);
+        }
 
-    if (fluidStack == null) {
-      this.fluidSprite = null;
-
-    } else if (this.fluidSprite == null) {
-      ResourceLocation resourceLocation = fluidStack.getFluid().getStill();
-      this.fluidSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(resourceLocation.toString());
+        return 0;
     }
 
-    return this.fluidSprite;
-  }
+    @Override
+    protected TextureAtlasSprite textureAtlasSpriteGet() {
 
-  @Override
-  public void drawBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+        FluidStack fluidStack = this.fluidTank.getFluid();
 
-    FluidStack fluid = this.fluidTank.getFluid();
+        if (fluidStack == null) {
+            this.fluidSprite = null;
 
-    if (fluid != null) {
-      int color = fluid.getFluid().getColor();
-      GlStateManager.color(
-          ((color >> 16) & 0xFF) / 255f,
-          ((color >> 8) & 0xFF) / 255f,
-          (color & 0xFF) / 255f,
-          ((color >> 24) & 0xFF) / 255f
-      );
+        } else if (this.fluidSprite == null) {
+            ResourceLocation resourceLocation = fluidStack.getFluid().getStill();
+            this.fluidSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(resourceLocation.toString());
+        }
+
+        return this.fluidSprite;
     }
 
-    super.drawBackgroundLayer(partialTicks, mouseX, mouseY);
+    @Override
+    public void drawBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 
-    if (fluid != null) {
-      GlStateManager.color(1, 1, 1, 1);
+        FluidStack fluid = this.fluidTank.getFluid();
+
+        if (fluid != null) {
+            int color = fluid.getFluid().getColor();
+            GlStateManager.color(
+                    ((color >> 16) & 0xFF) / 255f,
+                    ((color >> 8) & 0xFF) / 255f,
+                    (color & 0xFF) / 255f,
+                    ((color >> 24) & 0xFF) / 255f
+            );
+        }
+
+        super.drawBackgroundLayer(partialTicks, mouseX, mouseY);
+
+        if (fluid != null) {
+            GlStateManager.color(1, 1, 1, 1);
+        }
     }
-  }
 }

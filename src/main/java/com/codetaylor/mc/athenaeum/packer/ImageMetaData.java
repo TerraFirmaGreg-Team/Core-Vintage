@@ -6,14 +6,14 @@ import java.util.Map;
 
 public class ImageMetaData {
 
-  public String id;
+    public String id;
 
-  @SerializedName("sub_images")
-  public Map<String, ImageData> subImages;
+    @SerializedName("sub_images")
+    public Map<String, ImageData> subImages;
 
-  public static class ImageData {
+    public static class ImageData {
 
-    public int x, y;
-    public int width, height;
-  }
+        public int x, y;
+        public int width, height;
+    }
 }

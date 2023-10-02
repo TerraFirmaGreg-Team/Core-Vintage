@@ -8,124 +8,124 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LIFOStackHandler
-    extends ObservableStackHandler {
-
-  // TODO: remove
-  @Deprecated
-  public interface IContentsClearedEventHandler {
-
-    void onContentsCleared(ItemStackHandler stackHandler);
-  }
-
-  // TODO: remove
-  @Deprecated
-  private final List<IContentsClearedEventHandler> contentsClearedEventHandlerList;
-
-  public LIFOStackHandler(int size) {
-
-    super(size);
+        extends ObservableStackHandler {
 
     // TODO: remove
-    this.contentsClearedEventHandlerList = new ArrayList<>(1);
-  }
+    @Deprecated
+    private final List<IContentsClearedEventHandler> contentsClearedEventHandlerList;
 
-  // TODO: remove
-  @Deprecated
-  public void addObserverContentsCleared(IContentsClearedEventHandler handler) {
+    public LIFOStackHandler(int size) {
 
-    this.contentsClearedEventHandlerList.add(handler);
-  }
+        super(size);
 
-  /**
-   * Set all slots to an empty ItemStack.
-   */
-  public void clear() {
-
-    for (int i = 0; i < this.stacks.size(); i++) {
-      this.stacks.set(i, ItemStack.EMPTY);
+        // TODO: remove
+        this.contentsClearedEventHandlerList = new ArrayList<>(1);
     }
 
-    // 2018-11-30: Using the new tile data service, this becomes a non-issue.
-    //
-    // If we trigger the slot changed method, a block update packet will be sent
-    // for all 16 slots. Doing it this way sends the update packet only once.
-    // TODO: remove clear observer
-    for (IContentsClearedEventHandler handler : this.contentsClearedEventHandlerList) {
-      handler.onContentsCleared(this);
-    }
-  }
+    // TODO: remove
+    @Deprecated
+    public void addObserverContentsCleared(IContentsClearedEventHandler handler) {
 
-  @Nonnull
-  @Override
-  public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-
-    // Always insert into the first empty slot regardless of the slot attempted.
-
-    int index = this.getFirstEmptyIndex();
-
-    if (index < 0) {
-      return stack;
+        this.contentsClearedEventHandlerList.add(handler);
     }
 
-    return super.insertItem(index, stack, simulate);
-  }
+    /**
+     * Set all slots to an empty ItemStack.
+     */
+    public void clear() {
 
-  @Nonnull
-  @Override
-  public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        for (int i = 0; i < this.stacks.size(); i++) {
+            this.stacks.set(i, ItemStack.EMPTY);
+        }
 
-    // Always extract the last item regardless of the slot attempted.
-
-    int index = this.getLastNonEmptyIndex();
-
-    if (index < 0) {
-      return ItemStack.EMPTY;
+        // 2018-11-30: Using the new tile data service, this becomes a non-issue.
+        //
+        // If we trigger the slot changed method, a block update packet will be sent
+        // for all 16 slots. Doing it this way sends the update packet only once.
+        // TODO: remove clear observer
+        for (IContentsClearedEventHandler handler : this.contentsClearedEventHandlerList) {
+            handler.onContentsCleared(this);
+        }
     }
 
-    return super.extractItem(index, amount, simulate);
-  }
+    @Nonnull
+    @Override
+    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
 
-  /**
-   * @return the last non-empty stack in the handler, or ItemStack.EMPTY
-   */
-  public ItemStack getLastNonEmptyStack() {
+        // Always insert into the first empty slot regardless of the slot attempted.
 
-    int index = this.getLastNonEmptyIndex();
+        int index = this.getFirstEmptyIndex();
 
-    if (index < 0) {
-      return ItemStack.EMPTY;
+        if (index < 0) {
+            return stack;
+        }
+
+        return super.insertItem(index, stack, simulate);
     }
 
-    return this.getStackInSlot(index);
-  }
+    @Nonnull
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
 
-  /**
-   * @return the last index to have a non-empty stack, or -1
-   */
-  public int getLastNonEmptyIndex() {
+        // Always extract the last item regardless of the slot attempted.
 
-    for (int i = this.stacks.size() - 1; i >= 0; i--) {
+        int index = this.getLastNonEmptyIndex();
 
-      if (!this.stacks.get(i).isEmpty()) {
-        return i;
-      }
+        if (index < 0) {
+            return ItemStack.EMPTY;
+        }
+
+        return super.extractItem(index, amount, simulate);
     }
 
-    return -1;
-  }
+    /**
+     * @return the last non-empty stack in the handler, or ItemStack.EMPTY
+     */
+    public ItemStack getLastNonEmptyStack() {
 
-  /**
-   * @return the first index to have an empty stack, or -1
-   */
-  public int getFirstEmptyIndex() {
+        int index = this.getLastNonEmptyIndex();
 
-    for (int i = 0; i < this.stacks.size(); i++) {
+        if (index < 0) {
+            return ItemStack.EMPTY;
+        }
 
-      if (this.stacks.get(i).isEmpty()) {
-        return i;
-      }
+        return this.getStackInSlot(index);
     }
 
-    return -1;
-  }
+    /**
+     * @return the last index to have a non-empty stack, or -1
+     */
+    public int getLastNonEmptyIndex() {
+
+        for (int i = this.stacks.size() - 1; i >= 0; i--) {
+
+            if (!this.stacks.get(i).isEmpty()) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * @return the first index to have an empty stack, or -1
+     */
+    public int getFirstEmptyIndex() {
+
+        for (int i = 0; i < this.stacks.size(); i++) {
+
+            if (this.stacks.get(i).isEmpty()) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    // TODO: remove
+    @Deprecated
+    public interface IContentsClearedEventHandler {
+
+        void onContentsCleared(ItemStackHandler stackHandler);
+    }
 }

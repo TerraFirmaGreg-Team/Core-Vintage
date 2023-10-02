@@ -4,44 +4,44 @@ import com.codetaylor.mc.athenaeum.network.tile.spi.TileDataBase;
 import net.minecraft.network.PacketBuffer;
 
 public class TileDataBoolean
-    extends TileDataBase {
+        extends TileDataBase {
 
-  private boolean value;
+    private boolean value;
 
-  public TileDataBoolean(boolean initialValue) {
+    public TileDataBoolean(boolean initialValue) {
 
-    this(initialValue, 1);
-  }
-
-  public TileDataBoolean(boolean initialValue, int updateInterval) {
-
-    super(updateInterval);
-    this.set(initialValue);
-  }
-
-  public void set(boolean value) {
-
-    if (value != this.value) {
-      this.value = value;
-      this.setDirty(true);
+        this(initialValue, 1);
     }
-  }
 
-  public boolean get() {
+    public TileDataBoolean(boolean initialValue, int updateInterval) {
 
-    return this.value;
-  }
+        super(updateInterval);
+        this.set(initialValue);
+    }
 
-  @Override
-  public void read(PacketBuffer buffer) {
+    public void set(boolean value) {
 
-    this.value = buffer.readBoolean();
-  }
+        if (value != this.value) {
+            this.value = value;
+            this.setDirty(true);
+        }
+    }
 
-  @Override
-  public void write(PacketBuffer buffer) {
+    public boolean get() {
 
-    buffer.writeBoolean(this.value);
-  }
+        return this.value;
+    }
+
+    @Override
+    public void read(PacketBuffer buffer) {
+
+        this.value = buffer.readBoolean();
+    }
+
+    @Override
+    public void write(PacketBuffer buffer) {
+
+        buffer.writeBoolean(this.value);
+    }
 
 }

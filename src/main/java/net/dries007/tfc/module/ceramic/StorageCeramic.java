@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class StorageCeramic {
 
+
     public static final Map<OrePrefix, ItemMold> FIRED_MOLDS = new Object2ObjectLinkedOpenHashMap<>();
     public static final Map<OrePrefix, ItemUnfiredMold> UNFIRED_MOLDS = new Object2ObjectLinkedOpenHashMap<>();
 

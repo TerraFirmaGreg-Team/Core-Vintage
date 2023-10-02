@@ -6,12 +6,10 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.animal.objects.items.ItemAnimalHide;
-import net.dries007.tfc.module.ceramic.ModuleCeramic;
 import net.dries007.tfc.module.ceramic.objects.items.*;
 import net.dries007.tfc.module.core.objects.items.ItemMetalBucket;
 import net.dries007.tfc.module.core.objects.items.ItemMisc;
 import net.dries007.tfc.module.core.objects.items.ItemWoodBucket;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -20,6 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import static net.dries007.tfc.module.ceramic.ModuleCeramic.POTTERY_TAB;
 import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 import static net.dries007.tfc.module.core.api.util.Helpers.getNull;
 
@@ -42,37 +41,6 @@ public final class ItemsTFC_old {
     @GameRegistry.ObjectHolder("animal/product/silk_cloth")
     public static final ItemMisc SILK_CLOTH = getNull();
 
-    @GameRegistry.ObjectHolder("ceramics/unfired/fire_brick")
-    public static final ItemPottery UNFIRED_FIRE_BRICK = getNull();
-    @GameRegistry.ObjectHolder("ceramics/unfired/vessel")
-    public static final ItemPottery UNFIRED_VESSEL = getNull();
-    @GameRegistry.ObjectHolder("ceramics/fired/vessel")
-    public static final ItemPottery FIRED_VESSEL = getNull();
-    @GameRegistry.ObjectHolder("ceramics/unfired/vessel_glazed")
-    public static final ItemPottery UNFIRED_VESSEL_GLAZED = getNull();
-    @GameRegistry.ObjectHolder("ceramics/fired/vessel_glazed")
-    public static final ItemPottery FIRED_VESSEL_GLAZED = getNull();
-    @GameRegistry.ObjectHolder("ceramics/unfired/jug")
-    public static final ItemPottery UNFIRED_JUG = getNull();
-    @GameRegistry.ObjectHolder("ceramics/fired/jug")
-    public static final ItemPottery FIRED_JUG = getNull();
-    @GameRegistry.ObjectHolder("ceramics/unfired/pot")
-    public static final ItemPottery UNFIRED_POT = getNull();
-    @GameRegistry.ObjectHolder("ceramics/fired/pot")
-    public static final ItemPottery FIRED_POT = getNull();
-    @GameRegistry.ObjectHolder("ceramics/unfired/bowl")
-    public static final ItemPottery UNFIRED_BOWL = getNull();
-    @GameRegistry.ObjectHolder("ceramics/fired/bowl")
-    public static final ItemPottery FIRED_BOWL = getNull();
-    @GameRegistry.ObjectHolder("ceramics/unfired/spindle")
-    public static final ItemPottery UNFIRED_SPINDLE = getNull();
-    @GameRegistry.ObjectHolder("ceramics/fired/spindle")
-    public static final ItemPottery FIRED_SPINDLE = getNull();
-    @GameRegistry.ObjectHolder("ceramics/unfired/large_vessel")
-    public static final ItemPottery UNFIRED_LARGE_VESSEL = getNull();
-    @GameRegistry.ObjectHolder("ceramics/unfired/crucible")
-    public static final ItemPottery UNFIRED_CRUCIBLE = getNull();
-
 
     public static final ItemWoodBucket WOODEN_BUCKET = getNull();
 
@@ -80,13 +48,6 @@ public final class ItemsTFC_old {
     public static final ItemMetalBucket BLUE_STEEL_BUCKET = getNull();
     @GameRegistry.ObjectHolder("metal/bucket/red_steel")
     public static final ItemMetalBucket RED_STEEL_BUCKET = getNull();
-
-    @GameRegistry.ObjectHolder("ceramics/unfired/clay_brick")
-    public static final ItemPottery UNFIRED_BRICK = getNull();
-
-    @GameRegistry.ObjectHolder("ceramics/unfired/clay_flower_pot")
-    public static final ItemPottery UNFIRED_FLOWER_POT = getNull();
-
     @GameRegistry.ObjectHolder("crop/product/jute_disc")
     public static final Item JUTE_DISC = getNull();
     @GameRegistry.ObjectHolder("crop/product/jute_net")
@@ -116,26 +77,19 @@ public final class ItemsTFC_old {
 
         // POTTERY
         {
-            simpleItems.add(register(r, "ceramics/unfired/large_vessel", new ItemUnfiredLargeVessel(), ModuleCeramic.POTTERY_TAB));
-            simpleItems.add(register(r, "ceramics/unfired/crucible", new ItemPottery(Size.LARGE, Weight.VERY_HEAVY), ModuleCeramic.POTTERY_TAB));
+            simpleItems.add(register(r, "ceramics/unfired/large_vessel", new ItemUnfiredLargeVessel(), POTTERY_TAB));
+            simpleItems.add(register(r, "ceramics/unfired/crucible", new ItemPottery(Size.LARGE, Weight.VERY_HEAVY), POTTERY_TAB));
+            simpleItems.add(register(r, "ceramics/unfired/clay_brick", new ItemPottery(), POTTERY_TAB));
+            simpleItems.add(register(r, "ceramics/unfired/clay_flower_pot", new ItemPottery(), POTTERY_TAB));
+            simpleItems.add(register(r, "ceramics/unfired/jug", new ItemPottery(), POTTERY_TAB));
+            register(r, "ceramics/fired/jug", new ItemJug(), POTTERY_TAB);
 
             registerPottery(simpleItems, r, "ceramics/unfired/vessel", "ceramics/fired/vessel", new ItemUnfiredSmallVessel(false), new ItemSmallVessel(false));
             registerPottery(null, r, "ceramics/unfired/vessel_glazed", "ceramics/fired/vessel_glazed", new ItemUnfiredSmallVessel(true), new ItemSmallVessel(true));
-
-            ItemPottery firedPot = new ItemPottery(Size.LARGE, Weight.LIGHT);
-            registerPottery(simpleItems, r, "ceramics/unfired/pot", "ceramics/fired/pot", new ItemPottery(Size.LARGE, Weight.LIGHT), firedPot);
-            OreDictionaryHelper.register(firedPot, "cooking_pot");
-
-            ItemPottery firedBowl = new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT);
-            registerPottery(simpleItems, r, "ceramics/unfired/bowl", "ceramics/fired/bowl", new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT), firedBowl);
-            OreDictionaryHelper.register(firedBowl, "bowl");
-
+            registerPottery(simpleItems, r, "ceramics/unfired/pot", "ceramics/fired/pot", new ItemPottery(Size.LARGE, Weight.LIGHT), new ItemPottery(Size.LARGE, Weight.LIGHT));
+            registerPottery(simpleItems, r, "ceramics/unfired/bowl", "ceramics/fired/bowl", new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT), new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT));
             registerPottery(simpleItems, r, "ceramics/unfired/spindle", "ceramics/fired/spindle");
 
-            simpleItems.add(register(r, "ceramics/unfired/jug", new ItemPottery(), ModuleCeramic.POTTERY_TAB));
-            register(r, "ceramics/fired/jug", new ItemJug(), ModuleCeramic.POTTERY_TAB);
-            simpleItems.add(register(r, "ceramics/unfired/clay_brick", new ItemPottery(), ModuleCeramic.POTTERY_TAB));
-            simpleItems.add(register(r, "ceramics/unfired/clay_flower_pot", new ItemPottery(), ModuleCeramic.POTTERY_TAB));
 
         }
 
@@ -194,8 +148,8 @@ public final class ItemsTFC_old {
     }
 
     private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired, ItemPottery unfiredItem, ItemPottery firedItem) {
-        register(r, nameFired, firedItem, ModuleCeramic.POTTERY_TAB);
-        register(r, nameUnfired, unfiredItem, ModuleCeramic.POTTERY_TAB);
+        register(r, nameFired, firedItem, POTTERY_TAB);
+        register(r, nameUnfired, unfiredItem, POTTERY_TAB);
 
         if (items != null) {
             items.add(firedItem, unfiredItem);

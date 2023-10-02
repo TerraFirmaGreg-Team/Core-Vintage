@@ -3,16 +3,16 @@ package net.dries007.tfc.common.objects.recipes.handlers;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
-import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipeMetalMelting;
-import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipeSimple;
-import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipeVessel;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.module.ceramic.StorageCeramic;
 import net.dries007.tfc.module.ceramic.init.BlocksCeramic;
+import net.dries007.tfc.module.ceramic.init.ItemsCeramic;
+import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipe;
+import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipeMetalMelting;
+import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipeSimple;
+import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipeVessel;
 import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
@@ -38,7 +38,7 @@ public class HeatRecipes {
         // Pottery Items with metadata
         for (EnumDyeColor dye : EnumDyeColor.values()) {
             registry.register(
-                    new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsTFC_old.UNFIRED_VESSEL_GLAZED, 1, dye.getMetadata())), new ItemStack(ItemsTFC_old.FIRED_VESSEL_GLAZED, 1, dye.getMetadata()), 1599f, 1).setRegistryName("unfired_vessel_glazed_" + dye.getName())
+                    new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsCeramic.UNFIRED_VESSEL_GLAZED, 1, dye.getMetadata())), new ItemStack(ItemsCeramic.FIRED_VESSEL_GLAZED, 1, dye.getMetadata()), 1599f, 1).setRegistryName("unfired_vessel_glazed_" + dye.getName())
             );
         }
 
@@ -58,23 +58,23 @@ public class HeatRecipes {
         // Standard / Simple recipes
         registry.registerAll(
                 // Pottery
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_FIRE_BRICK), MetaItems.FIRECLAY_BRICK.getStackForm(), 1599f, 1).setRegistryName("unfired_fire_brick"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_VESSEL), new ItemStack(ItemsTFC_old.FIRED_VESSEL), 1599f, 1).setRegistryName("unfired_vessel"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_JUG), new ItemStack(ItemsTFC_old.FIRED_JUG), 1599f, 1).setRegistryName("unfired_jug"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_POT), new ItemStack(ItemsTFC_old.FIRED_POT), 1599f, 1).setRegistryName("unfired_pot"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_BOWL), new ItemStack(ItemsTFC_old.FIRED_BOWL), 1599f, 1).setRegistryName("unfired_bowl"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_SPINDLE), new ItemStack(ItemsTFC_old.FIRED_SPINDLE), 1599f, 1).setRegistryName("unfired_spindle"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_LARGE_VESSEL), new ItemStack(BlocksCeramic.FIRED_LARGE_VESSEL), 1599f, 1).setRegistryName("unfired_large_vessel"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_CRUCIBLE), new ItemStack(BlocksDevice.CRUCIBLE), 1599f, 1).setRegistryName("unfired_crucible"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.UNFIRED_FIRE_BRICK), MetaItems.FIRECLAY_BRICK.getStackForm(), 1599f, 1).setRegistryName("unfired_fire_brick"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.UNFIRED_VESSEL), new ItemStack(ItemsCeramic.FIRED_VESSEL), 1599f, 1).setRegistryName("unfired_vessel"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.UNFIRED_JUG), new ItemStack(ItemsCeramic.FIRED_JUG), 1599f, 1).setRegistryName("unfired_jug"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.UNFIRED_POT), new ItemStack(ItemsCeramic.FIRED_POT), 1599f, 1).setRegistryName("unfired_pot"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.UNFIRED_BOWL), new ItemStack(ItemsCeramic.FIRED_BOWL), 1599f, 1).setRegistryName("unfired_bowl"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.UNFIRED_SPINDLE), new ItemStack(ItemsCeramic.FIRED_SPINDLE), 1599f, 1).setRegistryName("unfired_spindle"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.UNFIRED_LARGE_VESSEL), new ItemStack(BlocksCeramic.FIRED_LARGE_VESSEL), 1599f, 1).setRegistryName("unfired_large_vessel"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.UNFIRED_CRUCIBLE), new ItemStack(BlocksDevice.CRUCIBLE), 1599f, 1).setRegistryName("unfired_crucible"),
 
                 // Fired Pottery - doesn't burn up
                 new HeatRecipeSimple(IIngredient.of(MetaItems.FIRECLAY_BRICK.getStackForm().getItem()), MetaItems.FIRECLAY_BRICK.getStackForm(), 1599f, 1).setRegistryName("fired_fire_brick"),
-                new HeatRecipeVessel(IIngredient.of(ItemsTFC_old.FIRED_VESSEL), 1599f, 1).setRegistryName("fired_vessel"),
-                new HeatRecipeVessel(IIngredient.of(ItemsTFC_old.FIRED_VESSEL_GLAZED), 1599f, 1).setRegistryName("fired_vessel_glazed_all"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.FIRED_JUG), new ItemStack(ItemsTFC_old.FIRED_JUG), 1599f, 1).setRegistryName("fired_jug"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.FIRED_POT), new ItemStack(ItemsTFC_old.FIRED_POT), 1599f, 1).setRegistryName("fired_pot"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.FIRED_BOWL), new ItemStack(ItemsTFC_old.FIRED_BOWL), 1599f, 1).setRegistryName("fired_bowl"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.FIRED_SPINDLE), new ItemStack(ItemsTFC_old.FIRED_SPINDLE), 1599f, 1).setRegistryName("fired_spindle"),
+                new HeatRecipeVessel(IIngredient.of(ItemsCeramic.FIRED_VESSEL), 1599f, 1).setRegistryName("fired_vessel"),
+                new HeatRecipeVessel(IIngredient.of(ItemsCeramic.FIRED_VESSEL_GLAZED), 1599f, 1).setRegistryName("fired_vessel_glazed_all"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.FIRED_JUG), new ItemStack(ItemsCeramic.FIRED_JUG), 1599f, 1).setRegistryName("fired_jug"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.FIRED_POT), new ItemStack(ItemsCeramic.FIRED_POT), 1599f, 1).setRegistryName("fired_pot"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.FIRED_BOWL), new ItemStack(ItemsCeramic.FIRED_BOWL), 1599f, 1).setRegistryName("fired_bowl"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.FIRED_SPINDLE), new ItemStack(ItemsCeramic.FIRED_SPINDLE), 1599f, 1).setRegistryName("fired_spindle"),
                 new HeatRecipeSimple(IIngredient.of(BlocksCeramic.FIRED_LARGE_VESSEL), new ItemStack(BlocksCeramic.FIRED_LARGE_VESSEL), 1599f, 1).setRegistryName("fired_large_vessel"),
                 new HeatRecipeSimple(IIngredient.of(BlocksDevice.CRUCIBLE), new ItemStack(BlocksDevice.CRUCIBLE), 1599f, 1).setRegistryName("fired_crucible"),
 
@@ -84,8 +84,8 @@ public class HeatRecipes {
                 new HeatRecipeSimple(IIngredient.of("sand"), new ItemStack(Blocks.GLASS), 600).setRegistryName("glass"),
                 new HeatRecipeSimple(IIngredient.of(ItemsCore.GLASS_SHARD), new ItemStack(Blocks.GLASS), 600).setRegistryName("glass_shard"),
                 new HeatRecipeSimple(IIngredient.of("blockClay"), new ItemStack(Blocks.HARDENED_CLAY), 600).setRegistryName("terracotta"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_BRICK), new ItemStack(Items.BRICK), 1500).setRegistryName("unfired_brick"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFC_old.UNFIRED_FLOWER_POT), new ItemStack(Items.FLOWER_POT), 1500).setRegistryName("unfired_flower_pot"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.UNFIRED_BRICK), new ItemStack(Items.BRICK), 1500).setRegistryName("unfired_brick"),
+                new HeatRecipeSimple(IIngredient.of(ItemsCeramic.UNFIRED_FLOWER_POT), new ItemStack(Items.FLOWER_POT), 1500).setRegistryName("unfired_flower_pot"),
 
                 // Bread
                 new HeatRecipeSimple(IIngredient.of(StorageFood.getFoodItem(INGREDIENT, BARLEY_DOUGH)), new ItemStack(StorageFood.getFoodItem(INGREDIENT, BARLEY_BREAD)), 200, 480).setRegistryName("barley_bread"),

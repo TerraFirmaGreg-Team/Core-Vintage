@@ -12,21 +12,21 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipeMetalMelting;
-import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.module.core.api.recipes.workbench.SaltingRecipe;
-import net.dries007.tfc.module.core.api.recipes.workbench.UnmoldRecipe;
 import net.dries007.tfc.client.gui.GuiCalendar;
 import net.dries007.tfc.client.gui.GuiKnapping;
 import net.dries007.tfc.client.gui.GuiNutrition;
 import net.dries007.tfc.client.gui.GuiSkills;
-import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.compat.jei.categories.*;
 import net.dries007.tfc.compat.jei.util.TFCInventoryGuiHandler;
 import net.dries007.tfc.compat.jei.wrappers.*;
 import net.dries007.tfc.module.animal.objects.items.ItemAnimalHide;
 import net.dries007.tfc.module.animal.objects.items.ItemAnimalHide.HideType;
+import net.dries007.tfc.module.ceramic.init.ItemsCeramic;
 import net.dries007.tfc.module.ceramic.objects.items.ItemMold;
+import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipeMetalMelting;
+import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.module.core.api.recipes.workbench.SaltingRecipe;
+import net.dries007.tfc.module.core.api.recipes.workbench.UnmoldRecipe;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.module.core.init.RegistryCore;
@@ -108,7 +108,7 @@ public final class JEIIntegration implements IModPlugin {
 
         // Alloy Recipes
         registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE), ALLOY_UID);
-        registry.addRecipeCatalyst(new ItemStack(ItemsTFC_old.FIRED_VESSEL), ALLOY_UID);
+        registry.addRecipeCatalyst(new ItemStack(ItemsCeramic.FIRED_VESSEL), ALLOY_UID);
 
         var alloyRecipes = RegistryCore.ALLOYS.getValuesCollection().stream()
                 .map(AlloyRecipeWrapper::new)
@@ -181,7 +181,7 @@ public final class JEIIntegration implements IModPlugin {
 
         // Metal Melting Recipes
         registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE), METAL_HEAT_UID);
-        registry.addRecipeCatalyst(new ItemStack(ItemsTFC_old.FIRED_VESSEL), METAL_HEAT_UID);
+        registry.addRecipeCatalyst(new ItemStack(ItemsCeramic.FIRED_VESSEL), METAL_HEAT_UID);
 
         var heatMetalList = new ArrayList<>();
         getAllIngredients().forEach(stack -> {
@@ -207,7 +207,7 @@ public final class JEIIntegration implements IModPlugin {
         }
 
         registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE), CASTING_UID);
-        registry.addRecipeCatalyst(new ItemStack(ItemsTFC_old.FIRED_VESSEL), CASTING_UID);
+        registry.addRecipeCatalyst(new ItemStack(ItemsCeramic.FIRED_VESSEL), CASTING_UID);
 
         var unmoldList = new ArrayList<UnmoldRecipeWrapper>();
         var castingList = new ArrayList<CastingRecipeWrapper>();

@@ -12,8 +12,6 @@ import net.dries007.tfc.module.food.ModuleFood;
 import net.dries007.tfc.module.metal.ModuleMetal;
 import net.dries007.tfc.module.plant.ModulePlant;
 import net.dries007.tfc.module.rock.ModuleRock;
-import net.dries007.tfc.module.soil.ModuleSoil;
-import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.proxy.IProxy;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -83,9 +81,9 @@ public final class TerraFirmaCraft {
 
         if (MODULES.get(ModuleRock.MODULE_ID)) this.registerModule(ModuleRock.class);
 
-        if (MODULES.get(ModuleSoil.MODULE_ID)) this.registerModule(ModuleSoil.class);
+        //if (MODULES.get(ModuleSoil.MODULE_ID)) this.registerModule(ModuleSoil.class);
 
-        if (MODULES.get(ModuleWood.MODULE_ID)) this.registerModule(ModuleWood.class);
+        //if (MODULES.get(ModuleWood.MODULE_ID)) this.registerModule(ModuleWood.class);
 
         if (MODULES.get(ModuleMetal.MODULE_ID)) this.registerModule(ModuleMetal.class);
 

@@ -2,9 +2,9 @@ package net.dries007.tfc.common.objects.recipes.handlers;
 
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.module.ceramic.StorageCeramic;
+import net.dries007.tfc.module.ceramic.init.ItemsCeramic;
 import net.dries007.tfc.module.core.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.module.core.init.ItemsCore;
@@ -31,14 +31,14 @@ public class KnappingRecipes {
         }
 
         registry.registerAll(
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_VESSEL), " XXX ", "XXXXX", "XXXXX", "XXXXX", " XXX ").setRegistryName("clay_small_vessel"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_JUG), " X   ", "XXXX ", "XXX X", "XXXX ", "XXX  ").setRegistryName("clay_jug"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_POT), "X   X", "X   X", "X   X", "XXXXX", " XXX ").setRegistryName("clay_pot"),
-                new KnappingRecipeSimple(KnappingType.CLAY, false, new ItemStack(ItemsTFC_old.UNFIRED_BOWL, 2), "X   X", " XXX ").setRegistryName(Tags.MOD_ID, "clay_bowl"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_BOWL, 4), "X   X", " XXX ", "     ", "X   X", " XXX ").setRegistryName("clay_bowl_2"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_LARGE_VESSEL), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("clay_large_vessel"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("clay_brick"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_FLOWER_POT, 2), " X X ", " XXX ", "     ", " X X ", " XXX ").setRegistryName("clay_flower_pot")
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsCeramic.UNFIRED_VESSEL), " XXX ", "XXXXX", "XXXXX", "XXXXX", " XXX ").setRegistryName("clay_small_vessel"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsCeramic.UNFIRED_JUG), " X   ", "XXXX ", "XXX X", "XXXX ", "XXX  ").setRegistryName("clay_jug"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsCeramic.UNFIRED_POT), "X   X", "X   X", "X   X", "XXXXX", " XXX ").setRegistryName("clay_pot"),
+                new KnappingRecipeSimple(KnappingType.CLAY, false, new ItemStack(ItemsCeramic.UNFIRED_BOWL, 2), "X   X", " XXX ").setRegistryName(Tags.MOD_ID, "clay_bowl"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsCeramic.UNFIRED_BOWL, 4), "X   X", " XXX ", "     ", "X   X", " XXX ").setRegistryName("clay_bowl_2"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsCeramic.UNFIRED_LARGE_VESSEL), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("clay_large_vessel"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsCeramic.UNFIRED_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("clay_brick"),
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsCeramic.UNFIRED_FLOWER_POT, 2), " X X ", " XXX ", "     ", " X X ", " XXX ").setRegistryName("clay_flower_pot")
         );
 
         /* LEATHER ITEMS */
@@ -53,8 +53,8 @@ public class KnappingRecipes {
 
         /* FIRE CLAY ITEMS */
         registry.registerAll(
-                new KnappingRecipeSimple(KnappingType.FIRE_CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_CRUCIBLE), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("fire_clay_crucible"),
-                new KnappingRecipeSimple(KnappingType.FIRE_CLAY, true, new ItemStack(ItemsTFC_old.UNFIRED_FIRE_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("fire_clay_brick")
+                new KnappingRecipeSimple(KnappingType.FIRE_CLAY, true, new ItemStack(ItemsCeramic.UNFIRED_CRUCIBLE), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("fire_clay_crucible"),
+                new KnappingRecipeSimple(KnappingType.FIRE_CLAY, true, new ItemStack(ItemsCeramic.UNFIRED_FIRE_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("fire_clay_brick")
         );
 
     }

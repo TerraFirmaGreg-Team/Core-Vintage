@@ -44,11 +44,9 @@ public class ItemMold extends ItemPottery {
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return
-                new TextComponentTranslation(
-                        "item.tfc.ceramics.fired.mold.name",
-                        new TextComponentTranslation("item.material.oreprefix." + orePrefix.name).getFormattedText().replaceFirst(" ", "")
-                ).getFormattedText();
+        return new TextComponentTranslation("item.tfc.ceramics.fired.mold.name",
+                new TextComponentTranslation("item.material.oreprefix." + orePrefix.name).getFormattedText().replaceFirst(" ", "")
+        ).getFormattedText();
     }
 
     @Nullable

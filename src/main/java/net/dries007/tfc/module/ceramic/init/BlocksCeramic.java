@@ -12,6 +12,7 @@ public class BlocksCeramic {
     public static void onRegister(Registry registry) {
 
         registry.registerBlock(FIRED_LARGE_VESSEL = new BlockLargeVessel(), BlockLargeVessel.NAME);
+        registry.registerTileEntity();
     }
 
     @SideOnly(Side.CLIENT)

@@ -41,8 +41,8 @@ dependencies {
         implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:4746213")
         implementation rfg.deobf("curse.maven:had-enough-items-557549:4571247")
 
-        implementation rfg.deobf("curse.maven:athenaeum-284350:4633750")
-        implementation rfg.deobf("curse.maven:dropt-284973:3758733")
+//        implementation rfg.deobf("curse.maven:athenaeum-284350:4633750")
+//        implementation rfg.deobf("curse.maven:dropt-284973:3758733")
 //        compileOnly("curse.maven:crafttweaker-239197:4731280")
 //        compileOnly("curse.maven:game-stages-268655:2951840")
 

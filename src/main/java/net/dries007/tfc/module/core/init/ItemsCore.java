@@ -43,6 +43,7 @@ public class ItemsCore {
     public static ItemBloom UNREFINED_BLOOM;
     public static ItemBloom REFINED_BLOOM;
     public static ItemMisc FIRE_CLAY;
+    public static ItemWoodBucket WOODEN_BUCKET;
 
 
     public static void onRegister(Registry registry) {
@@ -74,6 +75,7 @@ public class ItemsCore {
         registry.registerItem(FIRESTARTER = new ItemFireStarter(), ItemFireStarter.NAME);
         registry.registerItem(QUIVER = new ItemQuiver(), ItemQuiver.NAME);
         registry.registerItem(WAND = new ItemDebug(), ItemDebug.NAME);
+        registry.registerItem(WOODEN_BUCKET = new ItemWoodBucket(), "wooden_bucket");
         registry.registerItem(UNREFINED_BLOOM = new ItemBloom(false), "bloom/refined");
         registry.registerItem(REFINED_BLOOM = new ItemBloom(true), "bloom/unrefined");
 
@@ -116,7 +118,8 @@ public class ItemsCore {
                     WAND,
                     UNREFINED_BLOOM,
                     REFINED_BLOOM,
-                    FIRE_CLAY
+                    FIRE_CLAY,
+                    WOODEN_BUCKET
             );
         });
     }

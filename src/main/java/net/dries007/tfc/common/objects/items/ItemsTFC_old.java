@@ -3,13 +3,10 @@ package net.dries007.tfc.common.objects.items;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.animal.objects.items.ItemAnimalHide;
-import net.dries007.tfc.module.ceramic.objects.items.*;
+import net.dries007.tfc.module.ceramic.objects.items.ItemPottery;
 import net.dries007.tfc.module.core.objects.items.ItemMetalBucket;
 import net.dries007.tfc.module.core.objects.items.ItemMisc;
-import net.dries007.tfc.module.core.objects.items.ItemWoodBucket;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -41,9 +38,6 @@ public final class ItemsTFC_old {
     @GameRegistry.ObjectHolder("animal/product/silk_cloth")
     public static final ItemMisc SILK_CLOTH = getNull();
 
-
-    public static final ItemWoodBucket WOODEN_BUCKET = getNull();
-
     @GameRegistry.ObjectHolder("metal/bucket/blue_steel")
     public static final ItemMetalBucket BLUE_STEEL_BUCKET = getNull();
     @GameRegistry.ObjectHolder("metal/bucket/red_steel")
@@ -73,25 +67,23 @@ public final class ItemsTFC_old {
 
         //==== Other ==================================================================================================//
 
-        register(r, "wooden_bucket", new ItemWoodBucket(), MISC_TAB); //not a simple item, use a custom model
-
-        // POTTERY
-        {
-            simpleItems.add(register(r, "ceramics/unfired/large_vessel", new ItemUnfiredLargeVessel(), POTTERY_TAB));
-            simpleItems.add(register(r, "ceramics/unfired/crucible", new ItemPottery(Size.LARGE, Weight.VERY_HEAVY), POTTERY_TAB));
-            simpleItems.add(register(r, "ceramics/unfired/clay_brick", new ItemPottery(), POTTERY_TAB));
-            simpleItems.add(register(r, "ceramics/unfired/clay_flower_pot", new ItemPottery(), POTTERY_TAB));
-            simpleItems.add(register(r, "ceramics/unfired/jug", new ItemPottery(), POTTERY_TAB));
-            register(r, "ceramics/fired/jug", new ItemJug(), POTTERY_TAB);
-
-            registerPottery(simpleItems, r, "ceramics/unfired/vessel", "ceramics/fired/vessel", new ItemUnfiredSmallVessel(false), new ItemSmallVessel(false));
-            registerPottery(null, r, "ceramics/unfired/vessel_glazed", "ceramics/fired/vessel_glazed", new ItemUnfiredSmallVessel(true), new ItemSmallVessel(true));
-            registerPottery(simpleItems, r, "ceramics/unfired/pot", "ceramics/fired/pot", new ItemPottery(Size.LARGE, Weight.LIGHT), new ItemPottery(Size.LARGE, Weight.LIGHT));
-            registerPottery(simpleItems, r, "ceramics/unfired/bowl", "ceramics/fired/bowl", new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT), new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT));
-            registerPottery(simpleItems, r, "ceramics/unfired/spindle", "ceramics/fired/spindle");
-
-
-        }
+//        // POTTERY
+//        {
+//            simpleItems.add(register(r, "ceramics/unfired/large_vessel", new ItemUnfiredLargeVessel(), POTTERY_TAB));
+//            simpleItems.add(register(r, "ceramics/unfired/crucible", new ItemPottery(Size.LARGE, Weight.VERY_HEAVY), POTTERY_TAB));
+//            simpleItems.add(register(r, "ceramics/unfired/clay_brick", new ItemPottery(), POTTERY_TAB));
+//            simpleItems.add(register(r, "ceramics/unfired/clay_flower_pot", new ItemPottery(), POTTERY_TAB));
+//            simpleItems.add(register(r, "ceramics/unfired/jug", new ItemPottery(), POTTERY_TAB));
+//            register(r, "ceramics/fired/jug", new ItemJug(), POTTERY_TAB);
+//
+//            registerPottery(simpleItems, r, "ceramics/unfired/vessel", "ceramics/fired/vessel", new ItemUnfiredSmallVessel(false), new ItemSmallVessel(false));
+//            registerPottery(null, r, "ceramics/unfired/vessel_glazed", "ceramics/fired/vessel_glazed", new ItemUnfiredSmallVessel(true), new ItemSmallVessel(true));
+//            registerPottery(simpleItems, r, "ceramics/unfired/pot", "ceramics/fired/pot", new ItemPottery(Size.LARGE, Weight.LIGHT), new ItemPottery(Size.LARGE, Weight.LIGHT));
+//            registerPottery(simpleItems, r, "ceramics/unfired/bowl", "ceramics/fired/bowl", new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT), new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT));
+//            registerPottery(simpleItems, r, "ceramics/unfired/spindle", "ceramics/fired/spindle");
+//
+//
+//        }
 
 
 //        simpleItems.add(register(r, "crop/product/jute", new ItemMisc(Size.SMALL, Weight.VERY_LIGHT), MISC));

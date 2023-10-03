@@ -31,8 +31,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class ModuleBase
-        implements Comparable<ModuleBase> {
+public abstract class ModuleBase implements Comparable<ModuleBase> {
 
     /**
      * Stores a network wrapper for each mod id.

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.devices.init;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.registry.Registry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

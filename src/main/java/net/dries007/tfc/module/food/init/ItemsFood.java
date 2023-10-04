@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.food.init;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.config.ConfigTFC;

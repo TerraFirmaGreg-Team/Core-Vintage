@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.wood.init;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.wood.client.render.RenderWoodBoat;
 import net.dries007.tfc.module.wood.objects.entities.EntityWoodBoat;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;

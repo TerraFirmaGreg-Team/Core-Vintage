@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.init;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
-import com.codetaylor.mc.athenaeum.util.ModelRegistrationHelper;
+import su.terrafirmagreg.util.registry.Registry;
+import su.terrafirmagreg.util.util.ModelRegistrationHelper;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;

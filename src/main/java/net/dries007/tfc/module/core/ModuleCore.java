@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core;
 
-import com.codetaylor.mc.athenaeum.module.ModuleBase;
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.module.ModuleBase;
+import su.terrafirmagreg.util.registry.Registry;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import su.terrafirmagreg.tfc.TerraFirmaCraft;

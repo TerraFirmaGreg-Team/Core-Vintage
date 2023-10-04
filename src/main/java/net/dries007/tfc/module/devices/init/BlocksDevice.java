@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.devices.init;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.registry.Registry;
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.module.core.api.util.RegistryHelper;

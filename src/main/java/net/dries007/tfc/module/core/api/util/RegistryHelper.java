@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.api.util;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.registry.Registry;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;

@@ -1,0 +1,16 @@
+package su.terrafirmagreg.util.spi;
+
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+
+public interface IBlockVariant<T extends IVariant & Comparable<T>> {
+
+    @Nonnull
+    String getModelName(ItemStack itemStack);
+
+    @Nonnull
+    IProperty<T> getVariant();
+
+}

@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.init;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
-import com.codetaylor.mc.athenaeum.util.ModelRegistrationHelper;
+import su.terrafirmagreg.util.registry.Registry;
+import su.terrafirmagreg.util.util.ModelRegistrationHelper;
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.GroundcoverType;

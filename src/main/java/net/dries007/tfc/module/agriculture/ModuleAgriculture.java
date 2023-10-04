@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.agriculture;
 
-import com.codetaylor.mc.athenaeum.module.ModuleBase;
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.module.ModuleBase;
+import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.agriculture.api.types.bush.type.BushTypeHandler;
 import net.dries007.tfc.module.agriculture.api.types.crop.category.CropCategoryHandler;
 import net.dries007.tfc.module.agriculture.api.types.crop.type.CropTypeHandler;

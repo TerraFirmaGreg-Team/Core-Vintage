@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.food.init;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

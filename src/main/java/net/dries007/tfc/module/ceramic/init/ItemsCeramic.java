@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.ceramic.init;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.registry.Registry;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.module.ceramic.objects.items.ItemMold;

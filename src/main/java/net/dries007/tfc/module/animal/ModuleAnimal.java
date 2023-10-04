@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal;
 
-import com.codetaylor.mc.athenaeum.module.ModuleBase;
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.module.ModuleBase;
+import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.animal.init.BlocksAnimal;
 import net.dries007.tfc.module.animal.init.EntitiesAnimal;
 import net.minecraftforge.common.MinecraftForge;

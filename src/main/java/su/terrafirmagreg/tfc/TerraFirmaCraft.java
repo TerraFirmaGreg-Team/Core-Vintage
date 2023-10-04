@@ -1,8 +1,8 @@
 package su.terrafirmagreg.tfc;
 
 
-import com.codetaylor.mc.athenaeum.module.ModuleBase;
-import com.codetaylor.mc.athenaeum.module.ModuleManager;
+import su.terrafirmagreg.util.module.ModuleBase;
+import su.terrafirmagreg.util.module.ModuleManager;
 import net.dries007.tfc.module.agriculture.ModuleAgriculture;
 import net.dries007.tfc.module.animal.ModuleAnimal;
 import net.dries007.tfc.module.core.ModuleCore;

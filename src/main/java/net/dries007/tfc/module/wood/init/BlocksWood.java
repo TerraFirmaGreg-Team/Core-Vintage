@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.wood.init;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.registry.Registry;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.module.core.api.util.IHasModel;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.soil.init;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
-import com.codetaylor.mc.athenaeum.util.ModelRegistrationHelper;
+import su.terrafirmagreg.util.registry.Registry;
+import su.terrafirmagreg.util.util.ModelRegistrationHelper;
 import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.client.util.GrassColorHandler;
 import net.dries007.tfc.module.soil.StorageSoil;

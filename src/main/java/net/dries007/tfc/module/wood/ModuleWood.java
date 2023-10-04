@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.wood;
 
-import com.codetaylor.mc.athenaeum.module.ModuleBase;
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.module.ModuleBase;
+import su.terrafirmagreg.util.registry.Registry;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import net.dries007.tfc.Tags;

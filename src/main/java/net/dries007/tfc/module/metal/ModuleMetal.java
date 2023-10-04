@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.metal;
 
-import com.codetaylor.mc.athenaeum.module.ModuleBase;
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.module.ModuleBase;
+import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.core.api.util.CreativeTabBase;
 import net.dries007.tfc.module.metal.api.types.type.MetalTypeHandler;
 import net.dries007.tfc.module.metal.api.types.variant.Item.MetalItemVariantHandler;

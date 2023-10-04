@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.init;
 
-import com.codetaylor.mc.athenaeum.registry.Registry;
+import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.animal.client.render.*;
 import net.dries007.tfc.module.animal.objects.entities.EntitySeatOn;
 import net.dries007.tfc.module.animal.objects.entities.huntable.*;

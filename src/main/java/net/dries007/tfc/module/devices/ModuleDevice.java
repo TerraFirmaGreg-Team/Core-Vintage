@@ -1,7 +1,5 @@
 package net.dries007.tfc.module.devices;
 
-import su.terrafirmagreg.util.module.ModuleBase;
-import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.core.api.util.CreativeTabBase;
 import net.dries007.tfc.module.devices.init.BlocksDevice;
 import net.dries007.tfc.module.devices.init.ItemsDevice;
@@ -11,6 +9,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import su.terrafirmagreg.util.module.ModuleBase;
+import su.terrafirmagreg.util.registry.Registry;
 
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.Tags.MOD_NAME;

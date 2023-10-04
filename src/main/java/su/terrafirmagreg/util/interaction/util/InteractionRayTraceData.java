@@ -1,7 +1,7 @@
 package su.terrafirmagreg.util.interaction.util;
 
-import su.terrafirmagreg.util.interaction.spi.IInteraction;
 import net.minecraft.util.math.RayTraceResult;
+import su.terrafirmagreg.util.interaction.spi.IInteraction;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

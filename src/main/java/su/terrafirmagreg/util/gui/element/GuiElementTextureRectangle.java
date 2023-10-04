@@ -1,8 +1,8 @@
 package su.terrafirmagreg.util.gui.element;
 
+import net.minecraft.client.gui.Gui;
 import su.terrafirmagreg.util.gui.GuiContainerBase;
 import su.terrafirmagreg.util.gui.Texture;
-import net.minecraft.client.gui.Gui;
 
 /**
  * Created by codetaylor on 5/25/2017.

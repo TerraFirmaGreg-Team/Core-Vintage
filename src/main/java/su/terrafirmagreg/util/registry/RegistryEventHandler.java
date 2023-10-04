@@ -1,8 +1,5 @@
 package su.terrafirmagreg.util.registry;
 
-import su.terrafirmagreg.util.registry.strategy.IClientModelRegistrationStrategy;
-import su.terrafirmagreg.util.registry.strategy.IForgeRegistryEventRegistrationStrategy;
-import su.terrafirmagreg.util.registry.strategy.ITileEntityRegistrationStrategy;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
@@ -17,6 +14,9 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.strategy.IClientModelRegistrationStrategy;
+import su.terrafirmagreg.util.registry.strategy.IForgeRegistryEventRegistrationStrategy;
+import su.terrafirmagreg.util.registry.strategy.ITileEntityRegistrationStrategy;
 
 public class RegistryEventHandler
         implements IRegistryEventHandler {

@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.agriculture.api.types.crop.variant.block;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.agriculture.api.types.crop.type.CropType;
+import su.terrafirmagreg.util.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.Set;

@@ -15,8 +15,7 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RegistryEventHandlerNoOp
-        implements IRegistryEventHandler {
+public class RegistryEventHandlerNoOp implements IRegistryEventHandler {
 
     public static final IRegistryEventHandler INSTANCE = new RegistryEventHandlerNoOp();
 

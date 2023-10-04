@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.gui;
 
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.client.button.GuiButtonPage;
@@ -19,6 +18,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.animal.api.type;
 
 import net.dries007.tfc.Tags;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.api.type.IAnimal.Age;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
@@ -11,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 
 public interface IRidable {

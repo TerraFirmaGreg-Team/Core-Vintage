@@ -2,10 +2,10 @@ package net.dries007.tfc.module.rock.plugin.jei.wrappers;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
 import net.dries007.tfc.compat.jei.JEIIntegration;
 import net.dries007.tfc.module.core.api.plugin.jei.IRecipeWrapperBase;
 import net.dries007.tfc.module.core.init.BlocksCore;
+import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

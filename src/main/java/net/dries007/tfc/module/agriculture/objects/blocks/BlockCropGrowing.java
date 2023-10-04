@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.agriculture.objects.blocks;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.module.agriculture.api.util.IGrowingPlant;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.agriculture.StorageAgriculture;
@@ -10,6 +9,7 @@ import net.dries007.tfc.module.agriculture.api.types.crop.type.CropType;
 import net.dries007.tfc.module.agriculture.api.types.crop.variant.block.CropBlockVariant;
 import net.dries007.tfc.module.agriculture.api.types.crop.variant.block.CropBlockVariants;
 import net.dries007.tfc.module.agriculture.api.types.crop.variant.block.ICropBlock;
+import net.dries007.tfc.module.agriculture.api.util.IGrowingPlant;
 import net.dries007.tfc.module.agriculture.objects.tile.TECropBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.util.climate.ClimateTFC;

@@ -1,11 +1,11 @@
 package su.terrafirmagreg.util.network.tile.data;
 
-import su.terrafirmagreg.util.util.StackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.items.ItemStackHandler;
 import su.terrafirmagreg.util.network.tile.spi.ITileDataItemStackHandler;
+import su.terrafirmagreg.util.util.StackHelper;
 
 import java.io.IOException;
 

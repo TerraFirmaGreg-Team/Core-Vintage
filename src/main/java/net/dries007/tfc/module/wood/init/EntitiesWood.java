@@ -1,12 +1,12 @@
 package net.dries007.tfc.module.wood.init;
 
-import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.wood.client.render.RenderWoodBoat;
 import net.dries007.tfc.module.wood.objects.entities.EntityWoodBoat;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
 
 public class EntitiesWood {
 

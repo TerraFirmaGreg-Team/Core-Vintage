@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.button;
 
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.network.PacketGuiButton;
@@ -13,6 +12,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 

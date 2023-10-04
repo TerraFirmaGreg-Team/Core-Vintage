@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.util.UtilModConfig;
+import su.terrafirmagreg.util.UtilTFGConfig;
 import su.terrafirmagreg.util.network.tile.TileDataServiceLogger;
 import su.terrafirmagreg.util.network.tile.TileDataTracker;
 import su.terrafirmagreg.util.network.tile.spi.ITileData;
@@ -41,7 +41,7 @@ public class TileDataServiceClientMonitor {
 
         public TileDataServiceClientMonitor load(@Nonnull BlockPos pos) {
 
-            return new TileDataServiceClientMonitor(() -> UtilModConfig.TILE_DATA_SERVICE.UPDATE_INTERVAL_TICKS, TOTAL_INTERVAL_COUNT);
+            return new TileDataServiceClientMonitor(() -> UtilTFGConfig.TILE_DATA_SERVICE.UPDATE_INTERVAL_TICKS, TOTAL_INTERVAL_COUNT);
         }
     };
 
@@ -50,7 +50,7 @@ public class TileDataServiceClientMonitor {
     static {
         TRACKER_UPDATE_MONITOR = new TileDataTrackerUpdateMonitor();
 
-        TOTAL = new TileDataServiceClientMonitor(() -> UtilModConfig.TILE_DATA_SERVICE.UPDATE_INTERVAL_TICKS, TOTAL_INTERVAL_COUNT);
+        TOTAL = new TileDataServiceClientMonitor(() -> UtilTFGConfig.TILE_DATA_SERVICE.UPDATE_INTERVAL_TICKS, TOTAL_INTERVAL_COUNT);
 
         PER_POS_TOTAL = CacheBuilder.newBuilder()
                 .maximumSize(1000)
@@ -92,7 +92,7 @@ public class TileDataServiceClientMonitor {
         if (event.phase == TickEvent.Phase.START) {
 
             if (!Minecraft.getMinecraft().isGamePaused()
-                    && UtilModConfig.TILE_DATA_SERVICE.ENABLED) {
+                    && UtilTFGConfig.TILE_DATA_SERVICE.ENABLED) {
                 TOTAL.update();
 
                 for (TileDataServiceClientMonitor value : PER_POS_TOTAL.asMap().values()) {
@@ -121,7 +121,7 @@ public class TileDataServiceClientMonitor {
      */
     public static void onClientPacketReceived(TileDataTracker tracker, BlockPos pos, int size) {
 
-        if (UtilModConfig.TILE_DATA_SERVICE.ENABLED) {
+        if (UtilTFGConfig.TILE_DATA_SERVICE.ENABLED) {
 
             // --- Total ---
 
@@ -146,7 +146,7 @@ public class TileDataServiceClientMonitor {
 
     public static void onClientTrackerUpdateReceived(BlockPos pos, Class<? extends ITileData> tileDataClass) {
 
-        if (UtilModConfig.TILE_DATA_SERVICE.ENABLED) {
+        if (UtilTFGConfig.TILE_DATA_SERVICE.ENABLED) {
             TRACKER_UPDATE_MONITOR.onClientTrackerUpdateReceived(pos, tileDataClass);
         }
     }

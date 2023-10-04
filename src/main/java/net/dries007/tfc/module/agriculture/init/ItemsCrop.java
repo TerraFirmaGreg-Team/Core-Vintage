@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.agriculture.init;
 
-import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
 
 import static net.dries007.tfc.module.agriculture.StorageAgriculture.CROP_ITEMS;
 

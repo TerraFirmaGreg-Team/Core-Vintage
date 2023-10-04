@@ -1,9 +1,9 @@
 package su.terrafirmagreg.util.gui.element;
 
-import su.terrafirmagreg.util.gui.GuiContainerBase;
-import su.terrafirmagreg.util.gui.Texture;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
+import su.terrafirmagreg.util.gui.GuiContainerBase;
+import su.terrafirmagreg.util.gui.Texture;
 
 public abstract class GuiElementBase
         implements IGuiElement {

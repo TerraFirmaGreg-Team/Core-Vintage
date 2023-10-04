@@ -1,4 +1,4 @@
-package net.dries007.tfc.module.core.api.util;
+package su.terrafirmagreg.util.util;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;

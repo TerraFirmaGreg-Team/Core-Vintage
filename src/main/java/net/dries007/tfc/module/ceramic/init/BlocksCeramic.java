@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.ceramic.init;
 
-import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.ceramic.objects.blocks.BlockLargeVessel;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
 
 public class BlocksCeramic {
 

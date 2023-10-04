@@ -8,9 +8,9 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
+import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.module.core.api.recipes.AlloyRecipe;
 import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.module.core.init.RegistryCore;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -173,7 +173,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
                     return this;
                 }
             }
-            metalMap.merge(material, (double) amount, Double::sum);
+            metalMap.merge(material, amount, Double::sum);
             totalUnits += amount;
             updateSanitizedMap();
         }

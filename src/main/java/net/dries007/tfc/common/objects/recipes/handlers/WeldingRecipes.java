@@ -4,12 +4,12 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.module.core.api.recipes.WeldingRecipe;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialFlags;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterials;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
+import net.dries007.tfc.module.core.api.recipes.WeldingRecipe;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.init.RegistryCore;
 

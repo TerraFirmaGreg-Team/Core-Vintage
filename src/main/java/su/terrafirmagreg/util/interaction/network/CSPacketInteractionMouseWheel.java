@@ -1,7 +1,5 @@
 package su.terrafirmagreg.util.interaction.network;
 
-import su.terrafirmagreg.util.interaction.spi.IBlockInteractable;
-import su.terrafirmagreg.util.interaction.spi.IInteraction;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -17,6 +15,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import su.terrafirmagreg.util.interaction.event.InteractionMouseScrollEventHandler;
+import su.terrafirmagreg.util.interaction.spi.IBlockInteractable;
+import su.terrafirmagreg.util.interaction.spi.IInteraction;
 
 /**
  * Sent from the mouse scroll event handler.

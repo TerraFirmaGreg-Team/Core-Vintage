@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.rock.objects.blocks;
 
 import gregtech.common.items.ToolItems;
-import net.dries007.tfc.module.core.api.util.FallingBlockManager;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.util.FallingBlockManager;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.types.type.RockType;

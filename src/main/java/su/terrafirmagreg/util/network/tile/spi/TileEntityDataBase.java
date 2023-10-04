@@ -1,12 +1,12 @@
 package su.terrafirmagreg.util.network.tile.spi;
 
-import su.terrafirmagreg.util.util.BlockHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.util.network.tile.ITileDataService;
+import su.terrafirmagreg.util.util.BlockHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

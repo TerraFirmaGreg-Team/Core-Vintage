@@ -1,7 +1,6 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.gregtech.items.tools.behaviors.PropickBehavior.ProspectResult.Type;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.events.ProspectEvent;
@@ -14,6 +13,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 public class PacketProspectResult implements IMessage {
     private BlockPos pos;

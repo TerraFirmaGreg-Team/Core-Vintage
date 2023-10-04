@@ -17,7 +17,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import org.lwjgl.opengl.GL11;
-import su.terrafirmagreg.util.UtilModConfig;
+import su.terrafirmagreg.util.UtilTFGConfig;
 import su.terrafirmagreg.util.interaction.util.InteractionRayTraceData;
 
 @SuppressWarnings("WeakerAccess")
@@ -80,7 +80,7 @@ public class TESRInteractable<T extends TileEntity & ITileInteractable>
                 Minecraft minecraft = Minecraft.getMinecraft();
 
                 if (minecraft.player.isSneaking()
-                        || UtilModConfig.INTERACTION_CLIENT.ALWAYS_SHOW_QUANTITIES) {
+                        || UtilTFGConfig.INTERACTION_CLIENT.ALWAYS_SHOW_QUANTITIES) {
                     FontRenderer fontrenderer = Minecraft.getMinecraft().fontRenderer;
                     IInteraction[] interactions = te.getInteractions();
                     EnumFacing horizontalFacing = minecraft.player.getHorizontalFacing();
@@ -151,7 +151,7 @@ public class TESRInteractable<T extends TileEntity & ITileInteractable>
             }
 
             if (!results.isEmpty()
-                    && UtilModConfig.INTERACTION_CLIENT.SHOW_INTERACTION_BOUNDS) {
+                    && UtilTFGConfig.INTERACTION_CLIENT.SHOW_INTERACTION_BOUNDS) {
 
                 // setup additive gl state
                 {

@@ -1,6 +1,5 @@
 package su.terrafirmagreg.util.interaction.spi;
 
-import su.terrafirmagreg.util.util.FluidUtilFix;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -11,6 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import su.terrafirmagreg.util.util.FluidUtilFix;
 
 public abstract class InteractionBucketBase<T extends TileEntity & ITileInteractable>
         extends InteractionBase<T> {

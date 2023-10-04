@@ -1,9 +1,9 @@
 package su.terrafirmagreg.util.inventory;
 
-import su.terrafirmagreg.util.util.StackHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
+import su.terrafirmagreg.util.util.StackHelper;
 
 public class LargeDynamicStackHandler
         extends DynamicStackHandler {

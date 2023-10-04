@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.animal.objects.entities.livestock;
 
 import net.dries007.tfc.Tags;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.common.objects.LootTablesTFC;
@@ -40,6 +39,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.devices.objects.tile;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.module.core.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
+import net.dries007.tfc.module.core.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.passive.EntityCow;

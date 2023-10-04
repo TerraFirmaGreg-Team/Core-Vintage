@@ -19,7 +19,7 @@ import java.util.Set;
 public class RockType {
 
     private static final Set<RockType> ROCK_TYPES = new ObjectLinkedOpenHashSet<>();
-    private static int counter = 16;
+    private static final int counter = 16;
     @Nonnull
     private final String name;
     @Nonnull

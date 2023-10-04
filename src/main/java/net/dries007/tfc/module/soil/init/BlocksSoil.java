@@ -1,9 +1,7 @@
 package net.dries007.tfc.module.soil.init;
 
-import su.terrafirmagreg.util.registry.Registry;
-import su.terrafirmagreg.util.util.ModelRegistrationHelper;
-import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.client.util.GrassColorHandler;
+import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.objects.blocks.BlockSoilFarmland;
 import net.dries007.tfc.module.soil.objects.blocks.peat.BlockPeat;
@@ -14,6 +12,8 @@ import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
+import su.terrafirmagreg.util.util.ModelRegistrationHelper;
 
 import static net.dries007.tfc.module.soil.api.types.variant.block.SoilBlockVariants.FARMLAND;
 

@@ -1,9 +1,5 @@
 package su.terrafirmagreg.util.interaction.spi;
 
-import su.terrafirmagreg.util.interaction.api.InteractionRenderers;
-import su.terrafirmagreg.util.interaction.api.Transform;
-import su.terrafirmagreg.util.util.RandomHelper;
-import su.terrafirmagreg.util.util.StackHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.RenderItem;
@@ -21,6 +17,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
+import su.terrafirmagreg.util.interaction.api.InteractionRenderers;
+import su.terrafirmagreg.util.interaction.api.Transform;
+import su.terrafirmagreg.util.util.RandomHelper;
+import su.terrafirmagreg.util.util.StackHelper;
 
 public class InteractionItemStack<T extends TileEntity & ITileInteractable>
         extends InteractionBase<T>

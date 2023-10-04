@@ -1,10 +1,7 @@
 package net.dries007.tfc.module.core;
 
-import su.terrafirmagreg.util.module.ModuleBase;
-import su.terrafirmagreg.util.registry.Registry;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -49,6 +46,9 @@ import net.minecraftforge.fml.server.FMLServerHandler;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.util.module.ModuleBase;
+import su.terrafirmagreg.util.registry.Registry;
 
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.Tags.MOD_NAME;

@@ -1,8 +1,6 @@
 package net.dries007.tfc.module.metal.init;
 
-import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.core.api.util.IHasModel;
-import net.dries007.tfc.module.core.api.util.RegistryHelper;
 import net.dries007.tfc.module.metal.StorageMetal;
 import net.dries007.tfc.module.metal.api.types.variant.block.IMetalBlock;
 import net.dries007.tfc.module.metal.client.render.TESRMetalAnvil;
@@ -14,6 +12,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
 
 import static net.dries007.tfc.module.metal.StorageMetal.METAL_BLOCKS;
 
@@ -26,8 +25,7 @@ public class BlocksMetal {
             else registry.registerBlock((Block) block, block.getName());
         }
 
-        RegistryHelper.registerTileEntities(
-                registry,
+        registry.registerTileEntities(
                 TEMetalAnvil.class,
                 TEMetalSheet.class//todo
         );

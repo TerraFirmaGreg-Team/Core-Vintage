@@ -1,6 +1,5 @@
 package net.dries007.tfc.api.capability.food;
 
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.init.EffectsCore;
@@ -20,6 +19,7 @@ import net.minecraft.util.FoodStats;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

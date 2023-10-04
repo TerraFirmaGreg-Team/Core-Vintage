@@ -1,13 +1,13 @@
 package su.terrafirmagreg.util.util;
 
-import su.terrafirmagreg.util.spi.IBlockColored;
-import su.terrafirmagreg.util.spi.IBlockVariant;
 import com.google.common.base.Preconditions;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemColored;
 import net.minecraft.item.ItemMultiTexture;
 import net.minecraft.util.ResourceLocation;
+import su.terrafirmagreg.util.spi.IBlockColored;
+import su.terrafirmagreg.util.spi.IBlockVariant;
 
 @SuppressWarnings("WeakerAccess")
 public class BlockRegistrationHelper {

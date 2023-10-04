@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.agriculture;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.agriculture.api.types.bush.IBushBlock;
 import net.dries007.tfc.module.agriculture.api.types.bush.type.BushType;
 import net.dries007.tfc.module.agriculture.api.types.crop.type.CropType;
@@ -11,6 +10,7 @@ import net.dries007.tfc.module.agriculture.api.types.crop.variant.item.CropItemV
 import net.dries007.tfc.module.agriculture.api.types.crop.variant.item.ICropItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import su.terrafirmagreg.util.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.Map;

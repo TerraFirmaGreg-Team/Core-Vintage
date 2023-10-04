@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.api.objects.block;
 
-import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;

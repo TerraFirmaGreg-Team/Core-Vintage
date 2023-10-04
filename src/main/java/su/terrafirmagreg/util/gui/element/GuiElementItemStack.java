@@ -1,12 +1,12 @@
 package su.terrafirmagreg.util.gui.element;
 
-import su.terrafirmagreg.util.gui.GuiContainerBase;
-import su.terrafirmagreg.util.util.RenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
+import su.terrafirmagreg.util.gui.GuiContainerBase;
+import su.terrafirmagreg.util.util.RenderHelper;
 
 import java.util.List;
 import java.util.function.Supplier;

@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.rock.api.types.variant.block;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
 import net.minecraft.util.text.TextComponentTranslation;
+import su.terrafirmagreg.util.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.Set;

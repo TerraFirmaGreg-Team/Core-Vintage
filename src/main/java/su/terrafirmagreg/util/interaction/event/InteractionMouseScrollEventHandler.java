@@ -1,7 +1,5 @@
 package su.terrafirmagreg.util.interaction.event;
 
-import su.terrafirmagreg.util.interaction.network.CSPacketInteractionMouseWheel;
-import su.terrafirmagreg.util.interaction.util.InteractionRayTraceData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.math.RayTraceResult;
@@ -9,6 +7,8 @@ import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.interaction.network.CSPacketInteractionMouseWheel;
+import su.terrafirmagreg.util.interaction.util.InteractionRayTraceData;
 import su.terrafirmagreg.util.network.IPacketService;
 
 /**

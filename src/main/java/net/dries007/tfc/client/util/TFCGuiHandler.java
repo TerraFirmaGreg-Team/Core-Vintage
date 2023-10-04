@@ -1,7 +1,5 @@
 package net.dries007.tfc.client.util;
 
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
-import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.module.animal.objects.container.ContainerNestBox;
 import net.dries007.tfc.module.animal.objects.tiles.TENestBox;
@@ -11,6 +9,7 @@ import net.dries007.tfc.module.ceramic.objects.container.ContainerSmallVessel;
 import net.dries007.tfc.module.ceramic.objects.items.ItemMold;
 import net.dries007.tfc.module.ceramic.objects.items.ItemSmallVessel;
 import net.dries007.tfc.module.ceramic.objects.tiles.TELargeVessel;
+import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.objects.container.*;
 import net.dries007.tfc.module.core.objects.items.ItemQuiver;
@@ -43,6 +42,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

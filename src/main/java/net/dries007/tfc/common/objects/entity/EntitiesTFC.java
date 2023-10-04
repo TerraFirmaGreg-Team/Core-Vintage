@@ -1,7 +1,6 @@
 package net.dries007.tfc.common.objects.entity;
 
 import net.dries007.tfc.Tags;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
@@ -13,6 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DataSerializerEntry;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 

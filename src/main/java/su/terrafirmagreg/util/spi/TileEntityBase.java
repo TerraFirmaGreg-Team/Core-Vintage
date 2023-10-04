@@ -7,8 +7,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityBase
-        extends TileEntity {
+public class TileEntityBase extends TileEntity {
 
     public void notifyBlockUpdate() {
 

@@ -1,7 +1,6 @@
 package net.dries007.tfc.util.calendar;
 
 import io.netty.buffer.ByteBuf;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.network.PacketCalendarUpdate;
@@ -10,6 +9,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

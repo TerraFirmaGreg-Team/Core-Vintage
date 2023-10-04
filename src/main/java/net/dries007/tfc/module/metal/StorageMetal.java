@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.metal;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.metal.api.types.type.MetalType;
 import net.dries007.tfc.module.metal.api.types.variant.Item.IMetalItem;
 import net.dries007.tfc.module.metal.api.types.variant.Item.MetalItemVariant;
@@ -9,6 +8,7 @@ import net.dries007.tfc.module.metal.api.types.variant.block.IMetalBlock;
 import net.dries007.tfc.module.metal.api.types.variant.block.MetalBlockVariant;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import su.terrafirmagreg.util.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.Map;

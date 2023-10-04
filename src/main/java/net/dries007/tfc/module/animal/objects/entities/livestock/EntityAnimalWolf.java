@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.animal.objects.entities.livestock;
 
 import net.dries007.tfc.Tags;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.common.objects.LootTablesTFC;
@@ -41,6 +40,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

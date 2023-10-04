@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.food;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.food.api.types.type.FoodType;
 import net.dries007.tfc.module.food.api.types.variant.Item.FoodItemVariant;
 import net.dries007.tfc.module.food.api.types.variant.Item.IFoodItem;
@@ -9,6 +8,7 @@ import net.dries007.tfc.module.food.api.types.variant.block.FoodBlockVariant;
 import net.dries007.tfc.module.food.api.types.variant.block.IFoodBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import su.terrafirmagreg.util.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.Map;

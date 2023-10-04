@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import org.lwjgl.opengl.GL11;
-import su.terrafirmagreg.util.UtilModConfig;
+import su.terrafirmagreg.util.UtilTFGConfig;
 
 import java.awt.*;
 
@@ -30,7 +30,7 @@ public class TileDataServiceOverlayRenderer {
     @SubscribeEvent
     public static void onRenderGameOverlayPostEvent(RenderGameOverlayEvent.Post event) {
 
-        if (!UtilModConfig.TILE_DATA_SERVICE.ENABLED ||
+        if (!UtilTFGConfig.TILE_DATA_SERVICE.ENABLED ||
                 Minecraft.getMinecraft().isGamePaused()) {
             return;
         }
@@ -98,7 +98,7 @@ public class TileDataServiceOverlayRenderer {
 
     public void renderMonitor(TileDataServiceClientMonitor monitor, int x, int y, String title) {
 
-        int trackedIndex = UtilModConfig.TILE_DATA_SERVICE.TRACKING_INDEX;
+        int trackedIndex = UtilTFGConfig.TILE_DATA_SERVICE.TRACKING_INDEX;
         int totalWidth = 64; // TODO: const
 
         int size = monitor.size();

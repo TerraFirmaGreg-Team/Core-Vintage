@@ -1,6 +1,5 @@
 package su.terrafirmagreg.util.network.tile;
 
-import su.terrafirmagreg.util.spi.packet.CPacketTileEntityBase;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.PacketBuffer;
@@ -12,6 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.util.network.tile.client.TileDataServiceClientMonitor;
 import su.terrafirmagreg.util.network.tile.spi.TileEntityDataContainerBase;
+import su.terrafirmagreg.util.spi.packet.CPacketTileEntityBase;
 
 public class SCPacketTileData
         extends CPacketTileEntityBase<SCPacketTileData> {

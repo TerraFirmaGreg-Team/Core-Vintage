@@ -1,6 +1,5 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketCycleItemMode;
 import net.dries007.tfc.network.PacketOpenCraftingGui;
 import net.dries007.tfc.network.PacketPlaceBlockSpecial;
@@ -17,6 +16,7 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.Tags.MOD_NAME;

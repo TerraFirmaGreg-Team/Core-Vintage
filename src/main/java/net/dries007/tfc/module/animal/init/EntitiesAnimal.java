@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.animal.init;
 
-import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.animal.client.render.*;
 import net.dries007.tfc.module.animal.objects.entities.EntitySeatOn;
 import net.dries007.tfc.module.animal.objects.entities.huntable.*;
@@ -10,6 +9,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
 
 import java.awt.*;
 

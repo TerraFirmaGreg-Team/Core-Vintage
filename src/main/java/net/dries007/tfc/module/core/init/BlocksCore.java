@@ -1,11 +1,8 @@
 package net.dries007.tfc.module.core.init;
 
-import su.terrafirmagreg.util.registry.Registry;
-import su.terrafirmagreg.util.util.ModelRegistrationHelper;
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.GroundcoverType;
-import net.dries007.tfc.module.core.api.util.RegistryHelper;
 import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.client.render.TESRPlacedHide;
@@ -37,6 +34,8 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
+import su.terrafirmagreg.util.util.ModelRegistrationHelper;
 
 import static net.dries007.tfc.module.core.StorageCore.GROUNDCOVER_BLOCKS;
 import static net.minecraft.block.material.Material.WATER;
@@ -106,8 +105,7 @@ public class BlocksCore {
 
         //==== TileEntity ============================================================================================//
 
-        RegistryHelper.registerTileEntities(
-                registry,
+        registry.registerTileEntities(
                 TETickCounter.class,
                 TEPlacedItem.class,
                 TEPlacedItemFlat.class,

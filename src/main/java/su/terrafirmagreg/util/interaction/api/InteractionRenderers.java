@@ -1,8 +1,5 @@
 package su.terrafirmagreg.util.interaction.api;
 
-import su.terrafirmagreg.util.interaction.spi.IInteractionItemStack;
-import su.terrafirmagreg.util.interaction.spi.IInteractionRenderer;
-import su.terrafirmagreg.util.util.RenderHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -21,6 +18,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Quaternion;
+import su.terrafirmagreg.util.interaction.spi.IInteractionItemStack;
+import su.terrafirmagreg.util.interaction.spi.IInteractionRenderer;
+import su.terrafirmagreg.util.util.RenderHelper;
 
 import java.awt.*;
 

@@ -2,9 +2,9 @@ package net.dries007.tfc.module.wood.objects.blocks.itemblocks;
 
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
-import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.module.wood.objects.blocks.BlockWoodBarrel;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodBarrel;
 import net.dries007.tfc.util.calendar.CalendarTFC;

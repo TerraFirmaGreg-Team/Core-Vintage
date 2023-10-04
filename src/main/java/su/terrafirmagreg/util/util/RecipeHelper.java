@@ -1,7 +1,5 @@
 package su.terrafirmagreg.util.util;
 
-import su.terrafirmagreg.util.recipe.IRecipeSingleFluidOutput;
-import su.terrafirmagreg.util.recipe.IRecipeSingleOutput;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -10,6 +8,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
+import su.terrafirmagreg.util.recipe.IRecipeSingleFluidOutput;
+import su.terrafirmagreg.util.recipe.IRecipeSingleOutput;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

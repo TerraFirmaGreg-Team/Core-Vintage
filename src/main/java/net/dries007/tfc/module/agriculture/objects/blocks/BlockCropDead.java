@@ -1,11 +1,11 @@
 package net.dries007.tfc.module.agriculture.objects.blocks;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.module.agriculture.api.util.IGrowingPlant;
 import net.dries007.tfc.module.agriculture.StorageAgriculture;
 import net.dries007.tfc.module.agriculture.api.types.crop.type.CropType;
 import net.dries007.tfc.module.agriculture.api.types.crop.variant.block.CropBlockVariant;
 import net.dries007.tfc.module.agriculture.api.types.crop.variant.block.ICropBlock;
+import net.dries007.tfc.module.agriculture.api.util.IGrowingPlant;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.block.BlockBush;

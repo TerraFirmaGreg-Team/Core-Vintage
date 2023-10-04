@@ -1,12 +1,12 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 public class PacketSpawnTFCParticle implements IMessage {
     private int particleID;

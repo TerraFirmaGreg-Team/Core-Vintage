@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.gui;
 
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonPowderkegSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.module.core.api.util.Helpers;
@@ -14,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;

@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.gui;
 
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.api.util.Helpers;
@@ -18,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 @SideOnly(Side.CLIENT)
 public class GuiCalendar extends GuiContainerTFC {

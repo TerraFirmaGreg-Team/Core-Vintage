@@ -1,12 +1,12 @@
 package su.terrafirmagreg.util.gui.element;
 
-import su.terrafirmagreg.util.gui.GuiContainerBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import su.terrafirmagreg.util.gui.GuiContainerBase;
 
 public abstract class GuiElementFluidTankBase
         extends GuiElementTiledTextureAtlasSpriteBase {

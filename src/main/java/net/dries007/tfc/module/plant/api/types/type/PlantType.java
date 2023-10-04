@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.plant.api.types.type;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.plant.api.types.variant.block.PlantEnumVariant;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
@@ -9,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import su.terrafirmagreg.util.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;

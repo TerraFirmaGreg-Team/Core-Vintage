@@ -2,8 +2,8 @@ package su.terrafirmagreg.util;
 
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = UtilMod.MOD_ID, name = UtilMod.MOD_ID + "/" + UtilMod.MOD_ID)
-public class UtilModConfig {
+@Config(modid = UtilTFG.MOD_ID, name = UtilTFG.MOD_ID + "/" + UtilTFG.MOD_ID)
+public class UtilTFGConfig {
 
     public static TileDataService TILE_DATA_SERVICE = new TileDataService();
     public static InteractionClient INTERACTION_CLIENT = new InteractionClient();

@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.devices.init;
 
-import su.terrafirmagreg.util.registry.Registry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
 
 public class ItemsDevice {
 

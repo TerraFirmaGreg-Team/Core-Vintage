@@ -2,7 +2,6 @@ package net.dries007.tfc.module.animal.objects.entities;
 
 import com.google.common.base.Predicates;
 import net.dries007.tfc.Tags;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.animal.api.type.IPredator;
@@ -35,6 +34,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

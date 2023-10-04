@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.wood.objects.tiles;
 
-import net.dries007.tfc.module.wood.api.recipes.LoomRecipe;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
 import net.dries007.tfc.module.core.init.RegistryCore;
+import net.dries007.tfc.module.wood.api.recipes.LoomRecipe;
 import net.dries007.tfc.module.wood.api.types.type.WoodType;
 import net.dries007.tfc.module.wood.objects.blocks.BlockWoodLoom;
 import net.minecraft.entity.player.EntityPlayer;

@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.dries007.tfc.module.core.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.compat.jei.JEIIntegration;
+import net.dries007.tfc.module.core.api.recipes.BloomeryRecipe;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;

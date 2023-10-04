@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.plant;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.plant.api.types.type.PlantType;
 import net.dries007.tfc.module.plant.api.types.variant.block.IPlantBlock;
 import net.dries007.tfc.module.plant.api.types.variant.block.PlantEnumVariant;
@@ -9,6 +8,7 @@ import net.dries007.tfc.module.plant.api.types.variant.item.IPlantItem;
 import net.dries007.tfc.module.plant.api.types.variant.item.PlantItemVariant;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import su.terrafirmagreg.util.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.Map;

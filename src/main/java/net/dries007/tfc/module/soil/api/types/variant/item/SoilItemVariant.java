@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.soil.api.types.variant.item;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.api.types.type.SoilType;
+import su.terrafirmagreg.util.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.Set;

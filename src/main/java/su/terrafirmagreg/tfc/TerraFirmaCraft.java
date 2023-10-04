@@ -1,8 +1,6 @@
 package su.terrafirmagreg.tfc;
 
 
-import su.terrafirmagreg.util.module.ModuleBase;
-import su.terrafirmagreg.util.module.ModuleManager;
 import net.dries007.tfc.module.agriculture.ModuleAgriculture;
 import net.dries007.tfc.module.animal.ModuleAnimal;
 import net.dries007.tfc.module.core.ModuleCore;
@@ -22,6 +20,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
+import su.terrafirmagreg.util.module.ModuleBase;
+import su.terrafirmagreg.util.module.ModuleManager;
 
 import java.util.HashSet;
 import java.util.Set;

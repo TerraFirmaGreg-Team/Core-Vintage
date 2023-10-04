@@ -1,15 +1,15 @@
 package net.dries007.tfc.module.food.init;
 
-import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
 
 import static net.dries007.tfc.module.food.StorageFood.FOOD_ITEMS;
 

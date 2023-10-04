@@ -1,7 +1,6 @@
 package net.dries007.tfc.module.soil;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.dries007.tfc.module.core.api.util.Pair;
 import net.dries007.tfc.module.soil.api.types.type.SoilType;
 import net.dries007.tfc.module.soil.api.types.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.types.variant.block.SoilBlockVariant;
@@ -9,6 +8,7 @@ import net.dries007.tfc.module.soil.api.types.variant.item.ISoilItem;
 import net.dries007.tfc.module.soil.api.types.variant.item.SoilItemVariant;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import su.terrafirmagreg.util.util.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.Map;

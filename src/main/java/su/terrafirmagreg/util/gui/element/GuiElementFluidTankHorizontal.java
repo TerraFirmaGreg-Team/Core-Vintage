@@ -1,7 +1,7 @@
 package su.terrafirmagreg.util.gui.element;
 
-import su.terrafirmagreg.util.gui.GuiContainerBase;
 import net.minecraftforge.fluids.FluidTank;
+import su.terrafirmagreg.util.gui.GuiContainerBase;
 
 public class GuiElementFluidTankHorizontal
         extends GuiElementFluidTankBase {

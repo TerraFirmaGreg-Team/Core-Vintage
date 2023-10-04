@@ -1,6 +1,5 @@
 package su.terrafirmagreg.util.interaction.spi;
 
-import su.terrafirmagreg.util.interaction.util.InteractionRayTraceData;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import su.terrafirmagreg.util.integration.gamestages.GameStages;
 import su.terrafirmagreg.util.integration.gamestages.Stages;
+import su.terrafirmagreg.util.interaction.util.InteractionRayTraceData;
 
 import javax.annotation.Nullable;
 

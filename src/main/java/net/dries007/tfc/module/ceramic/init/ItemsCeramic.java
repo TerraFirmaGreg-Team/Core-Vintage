@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.ceramic.init;
 
-import su.terrafirmagreg.util.registry.Registry;
 import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.module.ceramic.objects.items.ItemMold;
@@ -8,6 +7,7 @@ import net.dries007.tfc.module.ceramic.objects.items.ItemPottery;
 import net.dries007.tfc.module.ceramic.objects.items.ItemUnfiredMold;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
 
 import static net.dries007.tfc.module.ceramic.StorageCeramic.FIRED_MOLDS;
 import static net.dries007.tfc.module.ceramic.StorageCeramic.UNFIRED_MOLDS;

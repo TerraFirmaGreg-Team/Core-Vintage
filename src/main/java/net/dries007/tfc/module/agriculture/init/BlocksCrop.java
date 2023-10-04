@@ -1,12 +1,11 @@
 package net.dries007.tfc.module.agriculture.init;
 
-import su.terrafirmagreg.util.registry.Registry;
-import net.dries007.tfc.module.core.api.util.IHasModel;
-import net.dries007.tfc.module.core.api.util.RegistryHelper;
 import net.dries007.tfc.module.agriculture.objects.tile.TECropBase;
+import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
 
 import static net.dries007.tfc.module.agriculture.StorageAgriculture.BUSH_BLOCKS;
 import static net.dries007.tfc.module.agriculture.StorageAgriculture.CROP_BLOCKS;
@@ -27,8 +26,7 @@ public class BlocksCrop {
             else registry.registerBlock((Block) block, block.getName());
         }
 
-        RegistryHelper.registerTileEntities(
-                registry,
+        registry.registerTileEntities(
                 TECropBase.class
         );
     }

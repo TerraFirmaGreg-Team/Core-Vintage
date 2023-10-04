@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.plant.objects.blocks;
 
-import net.dries007.tfc.module.plant.api.util.property.ITallPlant;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.plant.api.types.type.PlantType;
 import net.dries007.tfc.module.plant.api.types.variant.block.PlantEnumVariant;
+import net.dries007.tfc.module.plant.api.util.property.ITallPlant;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;

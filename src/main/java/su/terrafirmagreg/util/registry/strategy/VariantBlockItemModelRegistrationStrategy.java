@@ -1,6 +1,5 @@
 package su.terrafirmagreg.util.registry.strategy;
 
-import su.terrafirmagreg.util.spi.IVariant;
 import com.google.common.base.Preconditions;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -9,6 +8,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
+import su.terrafirmagreg.util.spi.IVariant;
 
 public class VariantBlockItemModelRegistrationStrategy<T extends IVariant & Comparable<T>>
         implements IClientModelRegistrationStrategy {

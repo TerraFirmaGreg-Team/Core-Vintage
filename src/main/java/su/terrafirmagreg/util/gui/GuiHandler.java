@@ -1,12 +1,12 @@
 package su.terrafirmagreg.util.gui;
 
-import su.terrafirmagreg.util.tile.IContainerProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import su.terrafirmagreg.util.tile.IContainerProvider;
 
 import javax.annotation.Nullable;
 

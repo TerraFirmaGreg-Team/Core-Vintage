@@ -1,10 +1,10 @@
 package net.dries007.tfc.common.objects.recipes.handlers;
 
-import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
-import net.dries007.tfc.module.core.api.util.EnumColor;
 import net.dries007.tfc.module.core.StorageCore;
+import net.dries007.tfc.module.core.api.util.EnumColor;
 import net.dries007.tfc.module.core.init.RegistryCore;
 import net.dries007.tfc.module.rock.StorageRock;
+import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
 
 import static net.dries007.tfc.module.core.api.util.EnumColor.COLORLESS;

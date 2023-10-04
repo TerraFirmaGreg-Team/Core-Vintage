@@ -1,11 +1,11 @@
 package net.dries007.tfc.module.food.init;
 
-import su.terrafirmagreg.util.registry.Registry;
 import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
 
 import static net.dries007.tfc.module.food.StorageFood.FOOD_BLOCKS;
 

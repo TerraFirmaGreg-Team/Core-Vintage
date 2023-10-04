@@ -1,12 +1,12 @@
 package su.terrafirmagreg.util.inventory;
 
-import su.terrafirmagreg.util.util.StackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.items.ItemStackHandler;
+import su.terrafirmagreg.util.util.StackHelper;
 
 /**
  * Serializes the stack count with an extra int in order to exceed the default

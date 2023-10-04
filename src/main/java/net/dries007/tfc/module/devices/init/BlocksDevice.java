@@ -1,9 +1,7 @@
 package net.dries007.tfc.module.devices.init;
 
-import su.terrafirmagreg.util.registry.Registry;
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.api.util.RegistryHelper;
 import net.dries007.tfc.module.devices.client.render.*;
 import net.dries007.tfc.module.devices.objects.blocks.*;
 import net.dries007.tfc.module.devices.objects.tile.*;
@@ -12,6 +10,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
 
 public class BlocksDevice {
 
@@ -45,7 +44,7 @@ public class BlocksDevice {
         registry.registerBlock(CHARCOAL_PILE = new BlockCharcoalPile(), CHARCOAL_PILE.getItemBlock(), BlockCharcoalPile.NAME);
         registry.registerBlock(MOLTEN = new BlockMolten(), MOLTEN.getItemBlock(), BlockMolten.NAME);
 
-        RegistryHelper.registerTileEntities(registry,
+        registry.registerTileEntities(
                 TEBellows.class,
                 TEBlastFurnace.class,
                 TEBloom.class,

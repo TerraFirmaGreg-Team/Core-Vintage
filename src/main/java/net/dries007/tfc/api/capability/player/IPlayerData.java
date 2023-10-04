@@ -1,7 +1,6 @@
 package net.dries007.tfc.api.capability.player;
 
 
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.util.skills.Skill;
@@ -11,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

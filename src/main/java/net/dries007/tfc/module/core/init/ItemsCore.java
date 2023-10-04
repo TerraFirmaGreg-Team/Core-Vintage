@@ -1,7 +1,5 @@
 package net.dries007.tfc.module.core.init;
 
-import su.terrafirmagreg.util.registry.Registry;
-import su.terrafirmagreg.util.util.ModelRegistrationHelper;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
@@ -22,6 +20,8 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.util.registry.Registry;
+import su.terrafirmagreg.util.util.ModelRegistrationHelper;
 
 public class ItemsCore {
 

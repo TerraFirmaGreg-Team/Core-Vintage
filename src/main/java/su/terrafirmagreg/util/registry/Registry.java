@@ -1,7 +1,5 @@
 package su.terrafirmagreg.util.registry;
 
-import su.terrafirmagreg.util.spi.IBlockColored;
-import su.terrafirmagreg.util.spi.IBlockVariant;
 import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,6 +23,8 @@ import su.terrafirmagreg.util.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.util.registry.strategy.IClientModelRegistrationStrategy;
 import su.terrafirmagreg.util.registry.strategy.IForgeRegistryEventRegistrationStrategy;
 import su.terrafirmagreg.util.registry.strategy.ITileEntityRegistrationStrategy;
+import su.terrafirmagreg.util.spi.IBlockColored;
+import su.terrafirmagreg.util.spi.IBlockVariant;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -135,8 +135,6 @@ public class Registry {
         } else {
             return this.registerBlock(block, name);
         }
-
-
     }
 
     public <B extends Block, I extends ItemBlock> B registerBlock(B block, I itemBlock, String name) {
@@ -174,14 +172,13 @@ public class Registry {
     }
 
     public Item registerItem(Item item, ResourceLocation registryName) {
-
         return this.registerItem(item, registryName, false);
     }
 
     public Item registerItem(Item item, ResourceLocation registryName, boolean noCreativeTab) {
 
         String resourceDomain = registryName.getNamespace().replaceAll("_", ".");
-        String resourcePath = registryName.getPath().toLowerCase().replace("_", ".");
+        String resourcePath = registryName.getPath().toLowerCase().replace("_", ".").replace("/", ".");
         item.setRegistryName(registryName);
         item.setTranslationKey(resourceDomain + "." + resourcePath);
 
@@ -191,6 +188,22 @@ public class Registry {
 
         this.registerItemRegistrationStrategy(forgeRegistry -> forgeRegistry.register(item));
 
+        return item;
+    }
+
+    public Item registerItem(Item item, boolean noCreativeTab) {
+
+        if (this.creativeTabs != null && !noCreativeTab) {
+            item.setCreativeTab(this.creativeTabs);
+        }
+
+        this.registerItemRegistrationStrategy(forgeRegistry -> forgeRegistry.register(item));
+
+        return item;
+    }
+
+    public Item registerItem(Item item) {
+        this.registerItemRegistrationStrategy(forgeRegistry -> forgeRegistry.register(item));
         return item;
     }
 
@@ -219,10 +232,7 @@ public class Registry {
     public void registerTileEntity(Class<? extends TileEntity> tileEntityClass) {
 
         this.registerTileEntityRegistrationStrategy(() -> GameRegistry.registerTileEntity(
-                tileEntityClass,
-                this.getModId() + ".tile." + tileEntityClass.getSimpleName()
-                // TODO: fixing this will break all existing TEs registered with this
-                // new ResourceLocation(this.getModId(), "tile." + tileEntityClass.getSimpleName())
+                tileEntityClass, new ResourceLocation(this.getModId(), "tile." + tileEntityClass.getSimpleName())
         ));
     }
 

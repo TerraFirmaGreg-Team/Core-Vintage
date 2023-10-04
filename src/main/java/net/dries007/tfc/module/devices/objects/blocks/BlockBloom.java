@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.devices.objects.blocks;
 
-import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.module.core.init.ItemsCore;
 import net.dries007.tfc.module.devices.objects.tile.TEBloom;
 import net.minecraft.block.SoundType;

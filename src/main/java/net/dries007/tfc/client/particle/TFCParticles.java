@@ -1,7 +1,6 @@
 package net.dries007.tfc.client.particle;
 
 import net.dries007.tfc.Tags;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.network.PacketSpawnTFCParticle;
 import net.minecraft.client.Minecraft;
@@ -16,6 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;

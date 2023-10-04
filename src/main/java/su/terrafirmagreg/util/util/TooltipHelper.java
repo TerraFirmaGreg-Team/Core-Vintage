@@ -2,13 +2,13 @@ package su.terrafirmagreg.util.util;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
-import su.terrafirmagreg.util.UtilMod;
+import su.terrafirmagreg.util.UtilTFG;
 
 import java.util.List;
 
 public class TooltipHelper {
 
-    public static final String TOOLTIP_COMMON_HOLD_SHIFT = "gui." + UtilMod.MOD_ID + ".tooltip.common.hold_shift";
+    public static final String TOOLTIP_COMMON_HOLD_SHIFT = "gui." + UtilTFG.MOD_ID + ".tooltip.common.hold_shift";
 
     public static String tooltipHoldShiftStringGet() {
 

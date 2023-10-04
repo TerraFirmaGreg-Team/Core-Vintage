@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.agriculture.api.types.bush;
 
-import net.dries007.tfc.module.core.api.util.IHasModel;
-import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.dries007.tfc.module.agriculture.api.types.bush.type.BushType;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.api.util.IHasModel;
+import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;

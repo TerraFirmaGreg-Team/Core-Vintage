@@ -1,10 +1,5 @@
 package su.terrafirmagreg.util.gui;
 
-import su.terrafirmagreg.util.gui.element.GuiElementBase;
-import su.terrafirmagreg.util.gui.element.IGuiElementClickable;
-import su.terrafirmagreg.util.gui.element.IGuiElementTooltipExtendedProvider;
-import su.terrafirmagreg.util.gui.element.IGuiElementTooltipProvider;
-import su.terrafirmagreg.util.util.TooltipHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -14,6 +9,11 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.util.gui.element.GuiElementBase;
+import su.terrafirmagreg.util.gui.element.IGuiElementClickable;
+import su.terrafirmagreg.util.gui.element.IGuiElementTooltipExtendedProvider;
+import su.terrafirmagreg.util.gui.element.IGuiElementTooltipProvider;
+import su.terrafirmagreg.util.util.TooltipHelper;
 
 import java.awt.*;
 import java.io.IOException;

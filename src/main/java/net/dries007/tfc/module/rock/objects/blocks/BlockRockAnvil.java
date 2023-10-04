@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.rock.objects.blocks;
 
-import net.dries007.tfc.module.core.api.util.FallingBlockManager;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.util.FallingBlockManager;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.module.metal.objects.tiles.TEMetalAnvil;

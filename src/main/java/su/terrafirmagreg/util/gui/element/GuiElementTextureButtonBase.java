@@ -1,10 +1,10 @@
 package su.terrafirmagreg.util.gui.element;
 
-import su.terrafirmagreg.util.gui.GuiContainerBase;
-import su.terrafirmagreg.util.gui.Texture;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.init.SoundEvents;
+import su.terrafirmagreg.util.gui.GuiContainerBase;
+import su.terrafirmagreg.util.gui.Texture;
 
 public abstract class GuiElementTextureButtonBase
         extends GuiElementTextureRectangle

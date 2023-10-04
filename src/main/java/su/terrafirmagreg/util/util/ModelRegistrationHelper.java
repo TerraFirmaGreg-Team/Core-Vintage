@@ -1,7 +1,5 @@
 package su.terrafirmagreg.util.util;
 
-import su.terrafirmagreg.util.spi.IBlockVariant;
-import su.terrafirmagreg.util.spi.IVariant;
 import com.google.common.base.Preconditions;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -13,6 +11,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import su.terrafirmagreg.util.spi.IBlockVariant;
+import su.terrafirmagreg.util.spi.IVariant;
 
 import javax.annotation.Nonnull;
 import java.util.function.ToIntFunction;

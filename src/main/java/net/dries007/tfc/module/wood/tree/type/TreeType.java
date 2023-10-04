@@ -74,7 +74,7 @@ public class TreeType extends TreeFamily {
     private final int soilLongevity;
     private final List<IGenFeature> modules;
     public boolean hasConiferVariants;
-    private boolean thick;
+    private final boolean thick;
 
     private TreeType(Builder builder) {
         super(builder.name);
@@ -389,7 +389,7 @@ public class TreeType extends TreeFamily {
         private IBlockState primitiveLog;
         private ItemStack stickItemStack;
         private boolean thick = false;
-        private List<IGenFeature> modules = new ArrayList<>();
+        private final List<IGenFeature> modules = new ArrayList<>();
         private int soilLongevity = 8;
 
         public Builder setName(ResourceLocation name) {

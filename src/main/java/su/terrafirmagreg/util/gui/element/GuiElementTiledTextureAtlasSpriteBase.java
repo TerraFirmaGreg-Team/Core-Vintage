@@ -1,8 +1,8 @@
 package su.terrafirmagreg.util.gui.element;
 
-import su.terrafirmagreg.util.gui.GuiContainerBase;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
+import su.terrafirmagreg.util.gui.GuiContainerBase;
 
 /**
  * Created by codetaylor on 5/27/2017.

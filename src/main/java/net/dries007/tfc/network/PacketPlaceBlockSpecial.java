@@ -1,6 +1,5 @@
 package net.dries007.tfc.network;
 
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.core.objects.tiles.TEPlacedItem;
@@ -15,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 /**
  * This packet is send when the client player presses the "Place Block Special" keybind. It has no special information

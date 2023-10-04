@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.ceramic.client.gui;
 
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonLargeVesselSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
@@ -15,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import java.io.IOException;
 

@@ -3,9 +3,9 @@ package net.dries007.tfc.module.rock.objects.recipes;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.module.core.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.compat.gregtech.oreprefix.IOrePrefixExtension;
 import net.dries007.tfc.compat.gregtech.oreprefix.TFGOrePrefix;
+import net.dries007.tfc.module.core.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.module.rock.api.recipes.RecipeRockKnapping;
 import net.minecraftforge.registries.IForgeRegistry;
 

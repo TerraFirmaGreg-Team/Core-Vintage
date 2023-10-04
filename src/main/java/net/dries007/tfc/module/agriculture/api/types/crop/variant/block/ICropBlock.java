@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.agriculture.api.types.crop.variant.block;
 
-import net.dries007.tfc.module.core.api.util.IHasModel;
-import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.dries007.tfc.module.agriculture.api.types.crop.type.CropType;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.api.util.IHasModel;
+import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;

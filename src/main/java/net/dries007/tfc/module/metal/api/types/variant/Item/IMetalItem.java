@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.metal.api.types.variant.Item;
 
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;

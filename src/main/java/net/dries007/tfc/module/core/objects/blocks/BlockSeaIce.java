@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.objects.blocks;
 
-import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
+import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.dries007.tfc.util.climate.IceMeltHandler;

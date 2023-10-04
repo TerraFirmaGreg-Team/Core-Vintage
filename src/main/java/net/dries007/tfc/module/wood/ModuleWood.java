@@ -1,7 +1,5 @@
 package net.dries007.tfc.module.wood;
 
-import su.terrafirmagreg.util.module.ModuleBase;
-import su.terrafirmagreg.util.registry.Registry;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import net.dries007.tfc.Tags;
@@ -22,6 +20,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import su.terrafirmagreg.util.module.ModuleBase;
+import su.terrafirmagreg.util.registry.Registry;
 
 public class ModuleWood extends ModuleBase {
 

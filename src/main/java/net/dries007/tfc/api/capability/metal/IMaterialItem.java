@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.capability.metal;
 
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
+import net.dries007.tfc.module.core.api.recipes.heat.HeatRecipeMetalMelting;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;

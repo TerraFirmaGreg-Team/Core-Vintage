@@ -1,7 +1,6 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.api.objects.container.IButtonHandler;
 import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
 import net.dries007.tfc.module.metal.objects.container.ContainerAnvilTFC;
@@ -11,6 +10,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nullable;
 

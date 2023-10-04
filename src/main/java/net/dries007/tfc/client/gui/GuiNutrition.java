@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.gui;
 
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
@@ -16,6 +15,7 @@ import net.minecraft.util.FoodStats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 @SideOnly(Side.CLIENT)
 public class GuiNutrition extends GuiContainerTFC {

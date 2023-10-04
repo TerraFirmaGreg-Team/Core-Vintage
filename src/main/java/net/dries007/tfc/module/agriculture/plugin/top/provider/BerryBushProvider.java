@@ -5,7 +5,6 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.Tags;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.agriculture.objects.blocks.BlockBerryBush;
 import net.dries007.tfc.module.core.api.util.Helpers;
@@ -19,6 +18,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 public class BerryBushProvider implements IProbeInfoProvider {
     @Override

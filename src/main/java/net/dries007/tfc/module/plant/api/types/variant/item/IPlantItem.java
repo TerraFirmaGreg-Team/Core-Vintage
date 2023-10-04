@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.plant.api.types.variant.item;
 
-import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.dries007.tfc.module.plant.api.types.type.PlantType;
 import net.minecraft.util.ResourceLocation;
 

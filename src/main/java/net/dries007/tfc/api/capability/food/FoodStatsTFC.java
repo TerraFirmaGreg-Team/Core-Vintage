@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.food;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.init.EffectsCore;

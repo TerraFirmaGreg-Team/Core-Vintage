@@ -1,4 +1,4 @@
-package net.dries007.tfc;
+package su.terrafirmagreg.tfc;
 
 
 import com.codetaylor.mc.athenaeum.module.ModuleBase;

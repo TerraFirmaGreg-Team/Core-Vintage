@@ -2,7 +2,7 @@ package net.dries007.tfc.module.metal.objects.tiles;
 
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;

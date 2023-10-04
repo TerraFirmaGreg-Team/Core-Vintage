@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.objects.container;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;

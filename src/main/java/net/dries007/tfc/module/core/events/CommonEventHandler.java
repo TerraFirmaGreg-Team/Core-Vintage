@@ -3,7 +3,7 @@ package net.dries007.tfc.module.core.events;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import gregtech.api.unification.material.event.MaterialEvent;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.EggHandler;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.api.type;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.api.type.IAnimal.Age;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;

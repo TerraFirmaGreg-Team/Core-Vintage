@@ -3,7 +3,7 @@ package net.dries007.tfc.compat.gregtech.items.tools.behaviors;
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import gregtech.common.blocks.BlockOre;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
 import net.dries007.tfc.module.core.events.ProspectEvent;

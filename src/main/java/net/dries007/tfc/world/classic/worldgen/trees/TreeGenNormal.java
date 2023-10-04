@@ -1,6 +1,6 @@
 //package net.dries007.tfc.world.classic.worldgen.trees;
 //
-//import net.dries007.tfc.TerraFirmaCraft;
+//import su.terrafirmagreg.tfc.TerraFirmaCraft;
 //import net.dries007.tfc.world.classic.worldgen.trees.ITreeGenerator;
 //import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 //import net.dries007.tfc.module.core.submodule.wood.api.variant.block.WoodBlockVariants;

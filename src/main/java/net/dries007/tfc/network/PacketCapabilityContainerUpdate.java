@@ -3,7 +3,7 @@ package net.dries007.tfc.network;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.objects.container.CapabilityContainerListener;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

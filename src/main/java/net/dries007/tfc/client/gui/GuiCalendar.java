@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.api.util.Helpers;

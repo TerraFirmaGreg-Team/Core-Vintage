@@ -2,7 +2,7 @@ package net.dries007.tfc.module.wood.plugin.dynamictrees;
 
 import com.ferreusveritas.dynamictrees.api.ICustomRootDecay;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.soil.StorageSoil;
 import net.dries007.tfc.module.soil.api.types.type.SoilTypes;
 import net.dries007.tfc.module.soil.api.types.variant.block.SoilBlockVariants;

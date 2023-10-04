@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.ceramic.client.gui;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonLargeVesselSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;

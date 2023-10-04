@@ -4,7 +4,7 @@
 //import mcjty.theoneprobe.api.IProbeInfo;
 //import mcjty.theoneprobe.api.IProbeInfoProvider;
 //import mcjty.theoneprobe.api.ProbeMode;
-//import net.dries007.tfc.TerraFirmaCraft;
+//import su.terrafirmagreg.tfc.TerraFirmaCraft;
 //import net.dries007.tfc.api.types.tree.type.TreeType;
 //import net.dries007.tfc.module.core.submodule.wood.api.type.WoodType;
 //import net.dries007.tfc.module.core.common.tiles.TETickCounter;

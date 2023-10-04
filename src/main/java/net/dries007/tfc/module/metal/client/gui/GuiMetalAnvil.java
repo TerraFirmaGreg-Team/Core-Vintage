@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.metal.client.gui;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilPlan;
 import net.dries007.tfc.client.button.GuiButtonAnvilStep;

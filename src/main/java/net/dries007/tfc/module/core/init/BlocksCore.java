@@ -45,9 +45,7 @@ public class BlocksCore {
     public static BlockDebug DEBUG;
     public static BlockAggregate AGGREGATE;
     public static BlockThatch THATCH;
-
     public static BlockThatchBed THATCH_BED;
-
     public static BlockPlacedItemFlat PLACED_ITEM_FLAT;
     public static BlockPlacedItem PLACED_ITEM;
     public static BlockPlacedHide PLACED_HIDE;

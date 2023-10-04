@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.capability.player;
 
 
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.util.skills.Skill;

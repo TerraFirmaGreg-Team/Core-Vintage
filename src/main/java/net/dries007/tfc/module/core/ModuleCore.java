@@ -4,7 +4,7 @@ import com.codetaylor.mc.athenaeum.module.ModuleBase;
 import com.codetaylor.mc.athenaeum.registry.Registry;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;

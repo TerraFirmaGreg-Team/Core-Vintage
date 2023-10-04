@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.calendar;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.chunkdata;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.network.PacketChunkData;
 import net.dries007.tfc.util.climate.ClimateTFC;

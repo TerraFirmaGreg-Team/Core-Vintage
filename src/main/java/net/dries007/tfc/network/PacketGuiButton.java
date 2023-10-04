@@ -1,7 +1,7 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.api.objects.container.IButtonHandler;
 import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvil;
 import net.dries007.tfc.module.metal.objects.container.ContainerAnvilTFC;

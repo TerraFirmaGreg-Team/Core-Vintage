@@ -2,7 +2,7 @@ package net.dries007.tfc.module.animal.objects.entities;
 
 import com.google.common.base.Predicates;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.animal.api.type.IPredator;

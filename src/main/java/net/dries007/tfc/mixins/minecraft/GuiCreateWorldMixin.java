@@ -1,6 +1,6 @@
 package net.dries007.tfc.mixins.minecraft;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.world.WorldType;
 import org.spongepowered.asm.mixin.Mixin;

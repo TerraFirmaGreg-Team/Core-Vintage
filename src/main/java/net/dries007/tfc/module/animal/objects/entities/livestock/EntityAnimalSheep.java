@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.animal.objects.entities.livestock;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.common.objects.LootTablesTFC;

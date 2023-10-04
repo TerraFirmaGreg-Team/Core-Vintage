@@ -1,7 +1,7 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.network.PacketGuiButton;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;

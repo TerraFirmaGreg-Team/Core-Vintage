@@ -1,7 +1,7 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.wood.objects.blocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.wood.api.types.type.WoodType;
 import net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariant;
@@ -39,7 +39,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockWoodBarrel extends BlockWood implements IItemSize {
+public class BlockWoodBarrel extends BlockWood implements IItemSizeAndWeight {
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 

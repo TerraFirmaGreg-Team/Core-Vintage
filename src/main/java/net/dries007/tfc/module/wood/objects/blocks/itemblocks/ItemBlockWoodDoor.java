@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.wood.objects.blocks.itemblocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.wood.objects.blocks.BlockWoodDoor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class ItemBlockWoodDoor extends ItemBlock implements IItemSize {
+public class ItemBlockWoodDoor extends ItemBlock implements IItemSizeAndWeight {
 
     public ItemBlockWoodDoor(BlockWoodDoor blockWoodDoor) {
         super(blockWoodDoor);

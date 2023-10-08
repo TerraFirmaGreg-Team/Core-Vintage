@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.wood.objects.blocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.wood.api.types.type.WoodType;
@@ -37,7 +37,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class BlockWoodLog extends BlockLog implements IItemSize, IWoodBlock {
+public class BlockWoodLog extends BlockLog implements IItemSizeAndWeight, IWoodBlock {
     public static final PropertyBool PLACED = PropertyBool.create("placed");
     private final WoodBlockVariant variant;
     private final WoodType type;

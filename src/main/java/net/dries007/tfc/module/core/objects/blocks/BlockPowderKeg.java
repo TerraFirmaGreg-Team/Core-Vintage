@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.core.objects.blocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.objects.blocks.itemblocks.ItemBlockPowderKeg;
@@ -47,7 +47,7 @@ import java.util.Random;
  * Sealed state is stored in a block state property, and cached in the TE (for gui purposes)
  */
 @ParametersAreNonnullByDefault
-public class BlockPowderKeg extends BlockBase implements IItemSize, ILightableBlock {
+public class BlockPowderKeg extends BlockBase implements IItemSizeAndWeight, ILightableBlock {
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
     public static final String NAME = "powderkeg";
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);

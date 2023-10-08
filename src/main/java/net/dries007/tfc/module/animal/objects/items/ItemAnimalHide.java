@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.animal.objects.items;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.objects.blocks.BlockPlacedHide;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.item.ItemBase;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.util.OreDictionaryHelper;

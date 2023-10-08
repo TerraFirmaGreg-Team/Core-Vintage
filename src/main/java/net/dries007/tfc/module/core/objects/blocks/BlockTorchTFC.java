@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.core.objects.blocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.objects.items.ItemFireStarter;
 import net.dries007.tfc.module.core.objects.tiles.TETickCounter;
@@ -35,7 +35,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
-public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBlock {
+public class BlockTorchTFC extends BlockTorch implements IItemSizeAndWeight, ILightableBlock {
     public BlockTorchTFC() {
 
 

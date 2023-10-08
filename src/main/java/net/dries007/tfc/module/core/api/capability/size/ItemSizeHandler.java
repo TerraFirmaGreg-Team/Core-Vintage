@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.size;
+package net.dries007.tfc.module.core.api.capability.size;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.EnumMap;
 
-public class ItemSizeHandler implements ICapabilityProvider, IItemSize {
+public class ItemSizeHandler implements ICapabilityProvider, IItemSizeAndWeight {
 
     private static final EnumMap<Size, EnumMap<Weight, ItemSizeHandler[]>> CACHE = new EnumMap<>(Size.class);
     private final Size size;
@@ -27,10 +27,7 @@ public class ItemSizeHandler implements ICapabilityProvider, IItemSize {
         if (nested == null) {
             CACHE.put(size, nested = new EnumMap<>(Weight.class));
         }
-        ItemSizeHandler[] handlers = nested.get(weight);
-        if (handlers == null) {
-            nested.put(weight, handlers = new ItemSizeHandler[2]);
-        }
+        ItemSizeHandler[] handlers = nested.computeIfAbsent(weight, k -> new ItemSizeHandler[2]);
         if (handlers[canStack ? 1 : 0] == null) {
             handlers[canStack ? 1 : 0] = new ItemSizeHandler(size, weight, canStack);
         }

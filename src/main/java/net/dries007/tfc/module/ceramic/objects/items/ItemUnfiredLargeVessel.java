@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.ceramic.objects.items;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;

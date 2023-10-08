@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.wood.objects.blocks;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.wood.api.types.type.WoodType;
@@ -42,7 +42,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class BlockWoodLoom extends BlockContainer implements IItemSize, IWoodBlock {
+public class BlockWoodLoom extends BlockContainer implements IItemSizeAndWeight, IWoodBlock {
     protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
     protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.875D, 1.0D, 0.9375D);
     protected static final AxisAlignedBB LOOM_SOUTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.125D, 0.9375D, 1.0D, 0.5625D);

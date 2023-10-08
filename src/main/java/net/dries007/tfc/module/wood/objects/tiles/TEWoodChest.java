@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.wood.objects.tiles;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
 import net.dries007.tfc.module.wood.api.types.type.WoodType;
 import net.dries007.tfc.module.wood.objects.blocks.BlockWoodChest;
 import net.dries007.tfc.module.wood.objects.container.ContainerWoodChest;
@@ -165,7 +165,7 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback {
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
         // Blocks input from hopper
-        IItemSize cap = CapabilityItemSize.getIItemSize(stack);
+        IItemSizeAndWeight cap = CapabilityItemSize.getIItemSize(stack);
         if (cap != null) {
             return cap.getSize(stack).isSmallerThan(Size.VERY_LARGE);
         }

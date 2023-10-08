@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.rock.objects.items;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.item.ItemBase;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
 import net.dries007.tfc.module.rock.api.types.variant.item.IRockItem;

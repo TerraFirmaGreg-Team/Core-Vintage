@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.core.objects.tiles;
 
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.CapabilityItemSize;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
 import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.init.BlocksCore;
@@ -117,7 +117,7 @@ public class TEPlacedItem extends TEInventory {
     public boolean insertItem(EntityPlayer player, ItemStack stack, int slot) {
         // Try and insert an item
         // Check the size of item to determine if insertion is possible, or if it requires the large slot
-        IItemSize sizeCap = CapabilityItemSize.getIItemSize(stack);
+        IItemSizeAndWeight sizeCap = CapabilityItemSize.getIItemSize(stack);
         Size size = Size.NORMAL;
         if (sizeCap != null) {
             size = sizeCap.getSize(stack);

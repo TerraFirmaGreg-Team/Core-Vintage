@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.wood.objects.container;
 
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.CapabilityItemSize;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
 import net.dries007.tfc.module.core.api.objects.container.ContainerTE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -107,7 +107,7 @@ public class ContainerWoodChest extends Container {
 
         @Override
         public boolean isItemValid(ItemStack stack) {
-            IItemSize cap = CapabilityItemSize.getIItemSize(stack);
+            IItemSizeAndWeight cap = CapabilityItemSize.getIItemSize(stack);
             if (cap != null) {
                 return cap.getSize(stack).isSmallerThan(Size.VERY_LARGE);
             }

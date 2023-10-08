@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.core.init;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.ModuleCore;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.item.ItemBase;
 import net.dries007.tfc.module.core.api.util.fuel.Fuel;
 import net.dries007.tfc.module.core.api.util.fuel.FuelManager;

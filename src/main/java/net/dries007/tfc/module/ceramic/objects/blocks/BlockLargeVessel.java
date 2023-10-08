@@ -1,11 +1,11 @@
 package net.dries007.tfc.module.ceramic.objects.blocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.ceramic.objects.blocks.itemblocks.ItemBlockLargeVessel;
 import net.dries007.tfc.module.ceramic.objects.tiles.TELargeVessel;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.minecraft.block.Block;
@@ -42,7 +42,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * Sealed state is stored in a block state property, and cached in the TE (for gui purposes)
  */
 @ParametersAreNonnullByDefault
-public class BlockLargeVessel extends BlockBase implements IItemSize {
+public class BlockLargeVessel extends BlockBase implements IItemSizeAndWeight {
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
     public static final String NAME = "ceramics.fired.large_vessel";
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.625D, 0.8125D);

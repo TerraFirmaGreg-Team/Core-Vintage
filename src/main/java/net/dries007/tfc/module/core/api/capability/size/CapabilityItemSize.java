@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.size;
+package net.dries007.tfc.module.core.api.capability.size;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.dries007.tfc.api.capability.DumbStorage;
@@ -22,13 +22,13 @@ import java.util.function.Supplier;
 
 public final class CapabilityItemSize {
     public static final ResourceLocation KEY = Helpers.getID("item_size");
-    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new Object2ObjectLinkedOpenHashMap<>(); //Used inside CT, set custom IItemSize for items outside TFC
-    @CapabilityInject(IItemSize.class)
-    public static Capability<IItemSize> ITEM_SIZE_CAPABILITY;
+    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new Object2ObjectLinkedOpenHashMap<>(); //Used inside CT, set custom IItemSizeAndWeight for items outside TFC
+    @CapabilityInject(IItemSizeAndWeight.class)
+    public static Capability<IItemSizeAndWeight> ITEM_SIZE_CAPABILITY;
 
     public static void preInit() {
         // Register the capability
-        CapabilityManager.INSTANCE.register(IItemSize.class, new DumbStorage<>(), ItemSizeHandler::getDefault);
+        CapabilityManager.INSTANCE.register(IItemSizeAndWeight.class, new DumbStorage<>(), ItemSizeHandler::getDefault);
     }
 
     public static void init() {
@@ -47,7 +47,7 @@ public final class CapabilityItemSize {
      * Checks if an item is of a given size and weight
      */
     public static boolean checkItemSize(ItemStack stack, Size size, Weight weight) {
-        IItemSize cap = getIItemSize(stack);
+        IItemSizeAndWeight cap = getIItemSize(stack);
         if (cap != null) {
             return cap.getWeight(stack) == weight && cap.getSize(stack) == size;
         }
@@ -55,21 +55,21 @@ public final class CapabilityItemSize {
     }
 
     /**
-     * Gets the IItemSize instance from an itemstack, either via capability or via interface
+     * Gets the IItemSizeAndWeight instance from an itemstack, either via capability or via interface
      *
      * @param stack The stack
-     * @return The IItemSize if it exists, or null if it doesn't
+     * @return The IItemSizeAndWeight if it exists, or null if it doesn't
      */
     @Nullable
-    public static IItemSize getIItemSize(ItemStack stack) {
+    public static IItemSizeAndWeight getIItemSize(ItemStack stack) {
         if (!stack.isEmpty()) {
-            IItemSize size = stack.getCapability(ITEM_SIZE_CAPABILITY, null);
+            IItemSizeAndWeight size = stack.getCapability(ITEM_SIZE_CAPABILITY, null);
             if (size != null) {
                 return size;
-            } else if (stack.getItem() instanceof IItemSize) {
-                return (IItemSize) stack.getItem();
-            } else if (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof IItemSize) {
-                return (IItemSize) ((ItemBlock) stack.getItem()).getBlock();
+            } else if (stack.getItem() instanceof IItemSizeAndWeight) {
+                return (IItemSizeAndWeight) stack.getItem();
+            } else if (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof IItemSizeAndWeight) {
+                return (IItemSizeAndWeight) ((ItemBlock) stack.getItem()).getBlock();
             }
         }
         return null;

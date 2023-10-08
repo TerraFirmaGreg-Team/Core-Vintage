@@ -16,10 +16,7 @@ import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.capability.player.PlayerDataHandler;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.compat.gregtech.material.TFGMaterialHandler;
@@ -30,6 +27,9 @@ import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.api.type.ICreature;
 import net.dries007.tfc.module.animal.api.type.IPredator;
 import net.dries007.tfc.module.core.ModuleCore;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.util.FallingBlockManager;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.init.BlocksCore;
@@ -381,12 +381,12 @@ public final class CommonEventHandler {
             if (CapabilityItemSize.getIItemSize(stack) == null) {
                 ICapabilityProvider sizeHandler = CapabilityItemSize.getCustomSize(stack);
                 event.addCapability(CapabilityItemSize.KEY, sizeHandler);
-                if (sizeHandler instanceof IItemSize) {
+                if (sizeHandler instanceof IItemSizeAndWeight) {
                     // Only modify the stack size if the item was stackable in the first place
                     // Note: this is called in many cases BEFORE all custom capabilities are added.
                     int prevStackSize = stack.getMaxStackSize();
                     if (prevStackSize != 1) {
-                        item.setMaxStackSize(((IItemSize) sizeHandler).getStackSize(stack));
+                        item.setMaxStackSize(((IItemSizeAndWeight) sizeHandler).getStackSize(stack));
                     }
                 }
             }

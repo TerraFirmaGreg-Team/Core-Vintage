@@ -1,15 +1,15 @@
 package net.dries007.tfc.module.wood.objects.blocks.itemblocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.wood.objects.blocks.BlockWoodSlab;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class ItemBlockWoodSlab extends ItemSlab implements IItemSize {
+public class ItemBlockWoodSlab extends ItemSlab implements IItemSizeAndWeight {
 
     public ItemBlockWoodSlab(BlockWoodSlab.Half slab, BlockWoodSlab.Half slab1, BlockWoodSlab.Double doubleSlab) {
         super(slab, slab1, doubleSlab);

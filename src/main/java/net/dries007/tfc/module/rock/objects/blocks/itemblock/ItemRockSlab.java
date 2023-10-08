@@ -1,15 +1,15 @@
 package net.dries007.tfc.module.rock.objects.blocks.itemblock;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.rock.objects.blocks.BlockRockSlab;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class ItemRockSlab extends ItemSlab implements IItemSize {
+public class ItemRockSlab extends ItemSlab implements IItemSizeAndWeight {
 
     public ItemRockSlab(BlockRockSlab.Half slab, BlockRockSlab.Half slab1, BlockRockSlab.Double doubleSlab) {
         super(slab, slab1, doubleSlab);

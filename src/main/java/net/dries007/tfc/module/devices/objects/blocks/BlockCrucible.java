@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.devices.objects.blocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.CustomStateMap;
 import net.dries007.tfc.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.api.util.IHasModel;
@@ -42,7 +42,7 @@ import java.util.List;
 
 
 @ParametersAreNonnullByDefault
-public class BlockCrucible extends BlockBase implements IHeatConsumerBlock, IItemSize, IHasModel {
+public class BlockCrucible extends BlockBase implements IHeatConsumerBlock, IItemSizeAndWeight, IHasModel {
     public static final String NAME = "device.crucible";
     private static final AxisAlignedBB CRUCIBLE_AABB = new AxisAlignedBB(0.0625, 0.0625, 0.0625, 0.9375, 0.9375, 0.9375);
     private static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.9375D, 0.125D, 0.9375D);

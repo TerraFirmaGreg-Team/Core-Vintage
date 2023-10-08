@@ -4,12 +4,12 @@ import net.dries007.tfc.api.capability.fluid.FluidHandlerSided;
 import net.dries007.tfc.api.capability.fluid.FluidTankCallback;
 import net.dries007.tfc.api.capability.fluid.IFluidHandlerSidedCallback;
 import net.dries007.tfc.api.capability.fluid.IFluidTankCallback;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
 import net.dries007.tfc.module.core.objects.tiles.TETickableInventory;
 import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.module.wood.objects.blocks.BlockWoodBarrel;
@@ -383,7 +383,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
                 return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
             }
             case SLOT_ITEM -> {
-                IItemSize size = CapabilityItemSize.getIItemSize(stack);
+                IItemSizeAndWeight size = CapabilityItemSize.getIItemSize(stack);
                 if (size != null) {
                     return size.getSize(stack).isSmallerThan(Size.HUGE);
                 }

@@ -12,16 +12,16 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.ModuleCore;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.network.SCPacketSimpleMessage;
 import net.dries007.tfc.module.core.network.SCPacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.module.core.objects.container.CapabilityContainerListener;
@@ -380,7 +380,7 @@ public class ItemSmallVessel extends ItemPottery {
 
         @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-            IItemSize size = CapabilityItemSize.getIItemSize(stack);
+            IItemSizeAndWeight size = CapabilityItemSize.getIItemSize(stack);
             if (size != null) {
                 return size.getSize(stack).isSmallerThan(Size.NORMAL);
             }

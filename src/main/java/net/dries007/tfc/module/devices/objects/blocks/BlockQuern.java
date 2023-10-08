@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.devices.objects.blocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.api.util.IHasModel;
@@ -43,7 +43,7 @@ import java.util.List;
 
 
 @ParametersAreNonnullByDefault
-public class BlockQuern extends BlockBase implements IItemSize, IHighlightHandler, IHasModel {
+public class BlockQuern extends BlockBase implements IItemSizeAndWeight, IHighlightHandler, IHasModel {
     public static final String NAME = "device.quern";
     private static final AxisAlignedBB BASE_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.625D, 1D);
     private static final AxisAlignedBB QUERN_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.875D, 1D);

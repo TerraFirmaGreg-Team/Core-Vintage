@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.rock.objects.blocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.rock.api.types.type.RockType;
 import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockRock extends BlockBase implements IRockBlock, IItemSize {
+public class BlockRock extends BlockBase implements IRockBlock, IItemSizeAndWeight {
 
     private final RockBlockVariant variant;
     private final RockType type;

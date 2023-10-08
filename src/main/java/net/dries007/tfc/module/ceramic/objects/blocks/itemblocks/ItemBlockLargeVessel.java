@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.ceramic.objects.blocks.itemblocks;
 
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.module.ceramic.objects.blocks.BlockLargeVessel;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemBlockLargeVessel extends ItemBlockBase implements IItemSize {
+public class ItemBlockLargeVessel extends ItemBlockBase implements IItemSizeAndWeight {
     public ItemBlockLargeVessel(BlockLargeVessel block) {
         super(block);
     }

@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.devices.objects.blocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.api.util.IHasModel;
@@ -46,7 +46,7 @@ import java.util.function.Predicate;
 import static net.minecraft.block.BlockTrapDoor.OPEN;
 
 @ParametersAreNonnullByDefault
-public class BlockBloomery extends BlockHorizontal implements IItemSize, ILightableBlock, IItemProvider, IHasModel {
+public class BlockBloomery extends BlockHorizontal implements IItemSizeAndWeight, ILightableBlock, IItemProvider, IHasModel {
 
     public static final String NAME = "device.bloomery";
     //[horizontal index][basic shape / door1 / door2]

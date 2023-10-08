@@ -1,10 +1,10 @@
 package net.dries007.tfc.module.rock.objects.blocks;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.module.core.ModuleCore;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.core.api.util.EnumColor;
 import net.dries007.tfc.module.core.api.util.Helpers;
@@ -28,7 +28,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class BlockAlabaster extends BlockBase implements IItemSize, IHasModel {
+public class BlockAlabaster extends BlockBase implements IItemSizeAndWeight, IHasModel {
 
     private final RockBlockVariant variant;
     private final EnumColor color;

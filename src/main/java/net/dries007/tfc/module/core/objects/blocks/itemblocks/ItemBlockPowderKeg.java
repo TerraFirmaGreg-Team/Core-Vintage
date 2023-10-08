@@ -1,7 +1,7 @@
 package net.dries007.tfc.module.core.objects.blocks.itemblocks;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.dries007.tfc.module.core.objects.blocks.BlockPowderKeg;
 import net.minecraft.client.resources.I18n;
@@ -18,7 +18,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
-public class ItemBlockPowderKeg extends ItemBlockBase implements IItemSize {
+public class ItemBlockPowderKeg extends ItemBlockBase implements IItemSizeAndWeight {
     public ItemBlockPowderKeg(BlockPowderKeg block) {
         super(block);
     }

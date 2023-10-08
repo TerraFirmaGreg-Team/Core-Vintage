@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.core.api.objects.block.itemblocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.ItemSizeHandler;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.ItemSizeHandler;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.item.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
@@ -11,14 +11,14 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class ItemBlockBase extends ItemBlock implements IItemSize {
-    private final IItemSize size;
+public class ItemBlockBase extends ItemBlock implements IItemSizeAndWeight {
+    private final IItemSizeAndWeight size;
 
     public ItemBlockBase(Block block) {
-        this(block, block instanceof IItemSize ? (IItemSize) block : ItemSizeHandler.getDefault());
+        this(block, block instanceof IItemSizeAndWeight ? (IItemSizeAndWeight) block : ItemSizeHandler.getDefault());
     }
 
-    public ItemBlockBase(Block block, IItemSize size) {
+    public ItemBlockBase(Block block, IItemSizeAndWeight size) {
         super(block);
 
         this.size = size;

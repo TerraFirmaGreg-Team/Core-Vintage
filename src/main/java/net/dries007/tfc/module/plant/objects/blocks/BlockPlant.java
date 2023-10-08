@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.plant.objects.blocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.plant.api.types.type.PlantType;
 import net.dries007.tfc.module.plant.api.types.variant.block.IPlantBlock;
@@ -50,7 +50,7 @@ import java.util.Random;
 
 
 @ParametersAreNonnullByDefault
-public class BlockPlant extends BlockBush implements IPlantBlock, IItemSize {
+public class BlockPlant extends BlockBush implements IPlantBlock, IItemSizeAndWeight {
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
     /*
      * Time of day, used for rendering plants that bloom at different times

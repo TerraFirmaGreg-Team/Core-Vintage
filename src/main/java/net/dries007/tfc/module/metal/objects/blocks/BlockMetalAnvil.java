@@ -3,11 +3,11 @@ package net.dries007.tfc.module.metal.objects.blocks;
 import gregtech.api.unification.material.Material;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.block.BlockBase;
 import net.dries007.tfc.module.core.api.util.FallingBlockManager;
 import net.dries007.tfc.module.core.api.util.Helpers;
@@ -61,7 +61,7 @@ import static net.dries007.tfc.util.Constants.RNG;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockMetalAnvil extends BlockBase implements IMetalBlock, IMaterialItem, IItemSize {
+public class BlockMetalAnvil extends BlockBase implements IMetalBlock, IMaterialItem, IItemSizeAndWeight {
     public static final PropertyDirection AXIS = PropertyDirection.create("axis", EnumFacing.Plane.HORIZONTAL);
     private static final AxisAlignedBB AABB_Z = new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.6875, 1);
     private static final AxisAlignedBB AABB_X = new AxisAlignedBB(0, 0, 0.1875, 1, 0.6875, 0.8125);

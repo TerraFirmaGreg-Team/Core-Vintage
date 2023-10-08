@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.size;
+package net.dries007.tfc.module.core.api.capability.size;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IStringSerializable;
@@ -6,7 +6,7 @@ import net.minecraft.util.IStringSerializable;
 import javax.annotation.Nonnull;
 
 /**
- * Перечисление Weight реализует интерфейс IStringSerializable.
+ * Перечисление для определения веса.
  */
 public enum Weight implements IStringSerializable {
     VERY_LIGHT(64),
@@ -20,23 +20,23 @@ public enum Weight implements IStringSerializable {
     /**
      * Конструктор с параметром.
      *
-     * @param stackSize размер стопки предметов
+     * @param stackSize размер стека предметов
      */
     Weight(int stackSize) {
         this.stackSize = stackSize;
     }
 
     /**
-     * Метод для получения размера стопки предметов.
+     * Возвращает размер стека предметов.
      *
-     * @return размер стопки предметов
+     * @return размер стека предметов
      */
     public int getStackSize() {
         return stackSize;
     }
 
     /**
-     * Метод для получения локализованного имени.
+     * Возвращает локализованное имя.
      *
      * @return локализованное имя
      */
@@ -45,7 +45,7 @@ public enum Weight implements IStringSerializable {
     }
 
     /**
-     * Метод для получения имени.
+     * Возвращает имя.
      *
      * @return имя
      */

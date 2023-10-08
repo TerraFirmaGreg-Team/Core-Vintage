@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.core.objects.items;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.item.ItemBase;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 
-public class ItemMisc extends ItemBase implements IItemSize {
+public class ItemMisc extends ItemBase implements IItemSizeAndWeight {
     private final Size size;
     private final Weight weight;
 

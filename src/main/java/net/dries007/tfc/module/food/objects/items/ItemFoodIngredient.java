@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.food.objects.items;
 
 import net.dries007.tfc.api.capability.food.*;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.food.api.types.category.FoodCategories;
 import net.dries007.tfc.module.food.api.types.type.FoodType;
 import net.dries007.tfc.module.food.api.types.variant.Item.FoodItemVariant;
@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemFoodIngredient extends ItemFood implements IItemSize, IItemFoodTFC, IFoodItem {
+public class ItemFoodIngredient extends ItemFood implements IItemSizeAndWeight, IItemFoodTFC, IFoodItem {
     protected final FoodType type;
     private final FoodItemVariant variant;
 

@@ -1,9 +1,8 @@
 package net.dries007.tfc.module.wood.plugin.dynamictrees.items;
 
 import com.ferreusveritas.dynamictrees.items.Seed;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.module.wood.ModuleWood;
+import net.dries007.tfc.module.core.api.capability.size.Size;
+import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.type.TreeType;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.gui.GuiScreen;

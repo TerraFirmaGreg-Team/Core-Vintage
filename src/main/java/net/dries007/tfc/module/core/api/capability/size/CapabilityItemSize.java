@@ -22,43 +22,51 @@ import java.util.function.Supplier;
 
 public final class CapabilityItemSize {
     public static final ResourceLocation KEY = Helpers.getID("item_size");
-    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new Object2ObjectLinkedOpenHashMap<>(); //Used inside CT, set custom IItemSizeAndWeight for items outside TFC
+    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new Object2ObjectLinkedOpenHashMap<>(); // Используется в CT, устанавливает пользовательский IItemSizeAndWeight для предметов вне TFC
     @CapabilityInject(IItemSizeAndWeight.class)
     public static Capability<IItemSizeAndWeight> ITEM_SIZE_CAPABILITY;
 
+    /**
+     * Производит предварительную инициализацию капабилити
+     */
     public static void preInit() {
-        // Register the capability
+        // Регистрация капабилити
         CapabilityManager.INSTANCE.register(IItemSizeAndWeight.class, new DumbStorage<>(), ItemSizeHandler::getDefault);
     }
 
+    /**
+     * Добавляет захардкоженные значения размеров для ванильных предметов
+     */
     public static void init() {
-        // Add hardcoded size values for vanilla items
-        CUSTOM_ITEMS.put(IIngredient.of(Items.COAL), () -> ItemSizeHandler.get(Size.SMALL, Weight.LIGHT, true)); // Store anywhere stacksize = 32
-        CUSTOM_ITEMS.put(IIngredient.of(Items.STICK), ItemStickCapability::new); // Store anywhere stacksize = 64
-        CUSTOM_ITEMS.put(IIngredient.of(Items.CLAY_BALL), () -> ItemSizeHandler.get(Size.SMALL, Weight.VERY_LIGHT, true)); // Store anywhere stacksize = 64
-        CUSTOM_ITEMS.put(IIngredient.of(Items.BED), () -> ItemSizeHandler.get(Size.LARGE, Weight.VERY_HEAVY, false)); // Store only in chests stacksize = 1
-        CUSTOM_ITEMS.put(IIngredient.of(Items.MINECART), () -> ItemSizeHandler.get(Size.LARGE, Weight.VERY_HEAVY, false)); // Store only in chests stacksize = 1
-        CUSTOM_ITEMS.put(IIngredient.of(Items.ARMOR_STAND), () -> ItemSizeHandler.get(Size.LARGE, Weight.HEAVY, true)); // Store only in chests stacksize = 4
-        CUSTOM_ITEMS.put(IIngredient.of(Items.CAULDRON), () -> ItemSizeHandler.get(Size.LARGE, Weight.LIGHT, true)); // Store only in chests stacksize = 32
-        CUSTOM_ITEMS.put(IIngredient.of(Blocks.TRIPWIRE_HOOK), () -> ItemSizeHandler.get(Size.SMALL, Weight.VERY_LIGHT, true)); // Store anywhere stacksize = 64
+        CUSTOM_ITEMS.put(IIngredient.of(Items.COAL), () -> ItemSizeHandler.get(Size.SMALL, Weight.LIGHT, true)); // Хранится в любом месте, размер стопки = 32
+        CUSTOM_ITEMS.put(IIngredient.of(Items.STICK), ItemStickCapability::new); // Хранится в любом месте, размер стопки = 64
+        CUSTOM_ITEMS.put(IIngredient.of(Items.CLAY_BALL), () -> ItemSizeHandler.get(Size.SMALL, Weight.VERY_LIGHT, true)); // Хранится в любом месте, размер стопки = 64
+        CUSTOM_ITEMS.put(IIngredient.of(Items.BED), () -> ItemSizeHandler.get(Size.LARGE, Weight.VERY_HEAVY, false)); // Хранится только в сундуках, размер стопки = 1
+        CUSTOM_ITEMS.put(IIngredient.of(Items.MINECART), () -> ItemSizeHandler.get(Size.LARGE, Weight.VERY_HEAVY, false)); // Хранится только в сундуках, размер стопки = 1
+        CUSTOM_ITEMS.put(IIngredient.of(Items.ARMOR_STAND), () -> ItemSizeHandler.get(Size.LARGE, Weight.HEAVY, true)); // Хранится только в сундуках, размер стопки = 4
+        CUSTOM_ITEMS.put(IIngredient.of(Items.CAULDRON), () -> ItemSizeHandler.get(Size.LARGE, Weight.LIGHT, true)); // Хранится только в сундуках, размер стопки = 32
+        CUSTOM_ITEMS.put(IIngredient.of(Blocks.TRIPWIRE_HOOK), () -> ItemSizeHandler.get(Size.SMALL, Weight.VERY_LIGHT, true)); // Хранится в любом месте, размер стопки = 64
     }
 
     /**
-     * Checks if an item is of a given size and weight
+     * Проверяет, имеет ли предмет заданный размер и вес
+     *
+     * @param stack  Предмет
+     * @param size   Размер
+     * @param weight Вес
+     * @return true, если предмет имеет заданный размер и вес, иначе false
      */
     public static boolean checkItemSize(ItemStack stack, Size size, Weight weight) {
         IItemSizeAndWeight cap = getIItemSize(stack);
-        if (cap != null) {
-            return cap.getWeight(stack) == weight && cap.getSize(stack) == size;
-        }
+        if (cap != null) return cap.getWeight(stack) == weight && cap.getSize(stack) == size;
         return false;
     }
 
     /**
-     * Gets the IItemSizeAndWeight instance from an itemstack, either via capability or via interface
+     * Получает экземпляр IItemSizeAndWeight из предмета, либо через капабилити, либо через интерфейс
      *
-     * @param stack The stack
-     * @return The IItemSizeAndWeight if it exists, or null if it doesn't
+     * @param stack Предмет
+     * @return IItemSizeAndWeight, если он существует, или null, если его нет
      */
     @Nullable
     public static IItemSizeAndWeight getIItemSize(ItemStack stack) {
@@ -75,6 +83,12 @@ public final class CapabilityItemSize {
         return null;
     }
 
+    /**
+     * Получает пользовательский размер для предмета
+     *
+     * @param stack Предмет
+     * @return ICapabilityProvider с пользовательским размером предмета, если он существует, иначе используется общий размер предмета
+     */
     @Nonnull
     public static ICapabilityProvider getCustomSize(ItemStack stack) {
         for (Map.Entry<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> entry : CUSTOM_ITEMS.entrySet()) {
@@ -82,18 +96,18 @@ public final class CapabilityItemSize {
                 return entry.getValue().get();
             }
         }
-        // Check for generic item types
+        // Проверяем общие типы предметов
         Item item = stack.getItem();
         if (item instanceof ItemTool || item instanceof ItemSword) {
-            return ItemSizeHandler.get(Size.LARGE, Weight.MEDIUM, true); // Stored only in chests, stacksize should be limited to 1 since it is a tool
+            return ItemSizeHandler.get(Size.LARGE, Weight.MEDIUM, true); // Хранится только в сундуках, размер стопки должен быть ограничен 1, так как это инструмент
         } else if (item instanceof ItemArmor) {
-            return ItemSizeHandler.get(Size.LARGE, Weight.VERY_HEAVY, true); // Stored only in chests and stacksize = 1
+            return ItemSizeHandler.get(Size.LARGE, Weight.VERY_HEAVY, true); // Хранится только в сундуках, размер стопки = 1
         } else if (item instanceof ItemBlock && ((ItemBlock) item).getBlock() instanceof BlockLadder) {
-            return ItemSizeHandler.get(Size.SMALL, Weight.VERY_LIGHT, true); // Fits small vessels and stacksize = 64
+            return ItemSizeHandler.get(Size.SMALL, Weight.VERY_LIGHT, true); // Подходит для маленьких сосудов, размер стопки = 64
         } else if (item instanceof ItemBlock) {
-            return ItemSizeHandler.get(Size.SMALL, Weight.LIGHT, true); // Fits small vessels and stacksize = 32
+            return ItemSizeHandler.get(Size.SMALL, Weight.LIGHT, true); // Подходит для маленьких сосудов, размер стопки = 32
         } else {
-            return ItemSizeHandler.get(Size.VERY_SMALL, Weight.VERY_LIGHT, true); // Stored anywhere and stacksize = 64
+            return ItemSizeHandler.get(Size.VERY_SMALL, Weight.VERY_LIGHT, true); // Хранится в любом месте, размер стопки = 64
         }
     }
 }

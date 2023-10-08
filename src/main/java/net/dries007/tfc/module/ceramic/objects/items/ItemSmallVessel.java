@@ -21,9 +21,10 @@ import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.ModuleCore;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.module.core.objects.container.CapabilityContainerListener;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.client.resources.I18n;
@@ -51,7 +52,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -85,7 +85,7 @@ public class ItemSmallVessel extends ItemPottery {
                         TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.SMALL_VESSEL_LIQUID);
                         break;
                     case LIQUID_SOLID:
-                        TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, Tags.MOD_ID + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
+                        ModuleCore.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(MessageCategory.VESSEL, Tags.MOD_ID + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
                         break;
                 }
             }

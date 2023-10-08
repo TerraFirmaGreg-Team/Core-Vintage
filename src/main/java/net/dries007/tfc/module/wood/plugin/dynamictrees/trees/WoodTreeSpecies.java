@@ -2,7 +2,7 @@ package net.dries007.tfc.module.wood.plugin.dynamictrees.trees;
 
 import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.IGenFeature;
-import com.ferreusveritas.dynamictrees.blocks.BlockRooty;
+import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.systems.DirtHelper;
@@ -12,11 +12,10 @@ import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.module.wood.StorageWood;
 import net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariants;
-import net.dries007.tfc.module.wood.init.BlocksWood;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.dropcreators.DropCreatorWoodLog;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.items.ItemWoodSeed;
-import net.dries007.tfc.module.wood.tree.type.TreeType;
-import net.dries007.tfc.module.wood.tree.type.TreeTypes;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.type.TreeType;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.type.TreeTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -55,7 +54,7 @@ public class WoodTreeSpecies extends Species {
         properties.setTree(tree);
 
         Species.REGISTRY.register(this);
-        //TreeRegistry.registerSaplingReplacer(sapling.getDefaultState(), this);
+        TreeRegistry.registerSaplingReplacer(sapling.getDefaultState(), this);
         LeavesPaging.getNextLeavesBlock(Tags.MOD_ID, properties);
     }
 
@@ -68,10 +67,12 @@ public class WoodTreeSpecies extends Species {
     }
 
 
-    @Override
-    public BlockRooty getRootyBlock(World world, BlockPos rootPos) {
-        return BlocksWood.ROOTY_DIRT_MIMIC;
-    }
+//    @Override
+//    public BlockRooty getRootyBlock(World world, BlockPos pos) {
+//        var chunkData = world.getChunk(pos).getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
+//        var soil = chunkData.getSoilHeight(pos);
+//        return StorageSoil.getSoilBlock(SoilBlockVariants.ROOTED_DIRT, soil).getDefaultState();
+//    }
 
     @Override
     public boolean isThick() {

@@ -4,10 +4,11 @@ import net.dries007.tfc.client.button.GuiButtonAnvilPlanIcon;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.network.SCPacketGuiButton;
 import net.dries007.tfc.module.metal.objects.tiles.TEMetalAnvil;
-import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.util.NBTBuilder;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -20,7 +21,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import java.io.IOException;
 import java.util.List;
@@ -75,7 +75,7 @@ public class GuiMetalAnvilPlan extends GuiContainerTE<TEMetalAnvil> {
         if (button instanceof GuiButtonAnvilPlanIcon) {
             // This fires when you select a plan in the Plan GUI
             ResourceLocation recipeName = ((GuiButtonAnvilPlanIcon) button).getRecipeName();
-            TerraFirmaCraft.network.sendToServer(new PacketGuiButton(button.id, new NBTBuilder().setString("recipe", recipeName.toString()).build()));
+            ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(button.id, new NBTBuilder().setString("recipe", recipeName.toString()).build()));
         } else if (button == buttonLeft) {
             page--;
             updatePage();

@@ -154,10 +154,10 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     // - Integration
     // --------------------------------------------------------------------------
 
-    protected void registerIntegrationPlugin(String modId, String plugin) {
+    protected void registerIntegrationPlugin(String modId, Object plugin) {
 
         Set<String> list = this.integrationPluginMap.computeIfAbsent(modId, k -> new HashSet<>());
-        list.add(plugin);
+        list.add(plugin.getClass().getName());
     }
 
     /* package */ Map<String, Set<String>> getIntegrationPluginMap() {

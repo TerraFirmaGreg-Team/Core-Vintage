@@ -7,7 +7,7 @@ import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
+import net.dries007.tfc.module.core.network.SCPacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.client.gui.GuiButton;
@@ -18,7 +18,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import java.util.List;
 
@@ -90,7 +89,7 @@ public class GuiSkills extends GuiContainerTFC {
                 if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
                     this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
                 }
-                TerraFirmaCraft.network.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
+                ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
             }
         } else if (button == buttonLeft) {
             currentPage--;

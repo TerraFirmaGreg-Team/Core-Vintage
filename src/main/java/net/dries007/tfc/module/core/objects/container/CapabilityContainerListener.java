@@ -4,8 +4,9 @@ import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.events.CommonEventHandler;
-import net.dries007.tfc.network.PacketCapabilityContainerUpdate;
+import net.dries007.tfc.module.core.network.SCPacketCapabilityContainerUpdate;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -16,7 +17,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -190,9 +190,9 @@ public class CapabilityContainerListener implements IContainerListener {
             }
         }
 
-        final PacketCapabilityContainerUpdate message = new PacketCapabilityContainerUpdate(container.windowId, filteredItems);
+        final SCPacketCapabilityContainerUpdate message = new SCPacketCapabilityContainerUpdate(container.windowId, filteredItems);
         if (message.hasData()) {
-            TerraFirmaCraft.network.sendTo(message, player);
+            ModuleCore.PACKET_SERVICE.sendTo(message, player);
         }
     }
 
@@ -203,10 +203,10 @@ public class CapabilityContainerListener implements IContainerListener {
     @Override
     public void sendSlotContents(Container container, int slotIndex, ItemStack stack) {
         if (shouldSyncItem(stack)) {
-            final PacketCapabilityContainerUpdate message = new PacketCapabilityContainerUpdate(container.windowId, slotIndex, stack);
+            final SCPacketCapabilityContainerUpdate message = new SCPacketCapabilityContainerUpdate(container.windowId, slotIndex, stack);
             if (message.hasData()) {
                 // Don't send the message if there's nothing to update
-                TerraFirmaCraft.network.sendTo(message, player);
+                ModuleCore.PACKET_SERVICE.sendTo(message, player);
             }
         }
     }

@@ -10,8 +10,7 @@ import su.terrafirmagreg.util.network.tile.spi.TileDataBase;
 import java.io.IOException;
 import java.util.BitSet;
 
-public class TileDataItemStackHandler<H extends ItemStackHandler & ITileDataItemStackHandler>
-        extends TileDataBase {
+public class TileDataItemStackHandler<H extends ItemStackHandler & ITileDataItemStackHandler> extends TileDataBase {
 
     private final H stackHandler;
     private BitSet dirtySlots;

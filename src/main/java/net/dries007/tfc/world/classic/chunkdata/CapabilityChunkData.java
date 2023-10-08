@@ -1,8 +1,9 @@
 package net.dries007.tfc.world.classic.chunkdata;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.network.PacketChunkData;
+import net.dries007.tfc.module.core.network.SCPacketChunkData;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -61,7 +62,7 @@ public final class CapabilityChunkData {
 
                 // Обновляем данные на стороне клиента
                 NBTTagCompound nbt = (NBTTagCompound) ChunkDataProvider.CHUNK_DATA_CAPABILITY.writeNBT(data, null);
-                TerraFirmaCraft.network.sendTo(new PacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(), data.getRainfall()), event.getPlayer());
+                ModuleCore.PACKET_SERVICE.sendTo(new SCPacketChunkData(chunk.getPos(), nbt, data.getRegionalTemp(), data.getRainfall()), event.getPlayer());
             }
         }
     }

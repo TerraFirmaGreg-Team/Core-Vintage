@@ -2,11 +2,13 @@ package net.dries007.tfc.module.core.objects.blocks.fluid;
 
 import com.google.common.primitives.Ints;
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.module.core.api.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
@@ -14,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
@@ -25,7 +28,7 @@ import java.util.Random;
 
 
 @ParametersAreNonnullByDefault
-public class BlockFluidBase extends BlockFluidClassic {
+public class BlockFluidBase extends BlockFluidClassic implements IHasModel {
     public BlockFluidBase(Fluid fluid, Material material) {
         super(fluid, material);
 
@@ -303,5 +306,10 @@ public class BlockFluidBase extends BlockFluidClassic {
     protected boolean isBlockingSourceBlock(IBlockAccess world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
         return isMergeableFluid(state) && state.getValue(LEVEL) == 0;
+    }
+
+    @Override
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
     }
 }

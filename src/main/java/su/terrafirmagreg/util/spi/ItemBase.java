@@ -4,8 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class ItemBase
-        extends Item {
+public abstract class ItemBase extends Item {
 
     public ItemBase(String modId, CreativeTabs creativeTab, String name) {
 

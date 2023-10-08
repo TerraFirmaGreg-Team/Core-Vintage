@@ -3,7 +3,6 @@ package net.dries007.tfc.module.core.init;
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.types.GroundcoverType;
-import net.dries007.tfc.common.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.client.render.TESRPlacedHide;
 import net.dries007.tfc.module.animal.objects.blocks.BlockPlacedHide;
@@ -17,6 +16,7 @@ import net.dries007.tfc.module.core.objects.blocks.*;
 import net.dries007.tfc.module.core.objects.blocks.fluid.BlockFluidBase;
 import net.dries007.tfc.module.core.objects.blocks.fluid.BlockFluidHotWater;
 import net.dries007.tfc.module.core.objects.blocks.fluid.BlockFluidWater;
+import net.dries007.tfc.module.core.objects.entities.EntityFallingBlockTFC;
 import net.dries007.tfc.module.core.objects.tiles.TEPlacedItem;
 import net.dries007.tfc.module.core.objects.tiles.TEPlacedItemFlat;
 import net.dries007.tfc.module.core.objects.tiles.TEPowderKeg;
@@ -96,11 +96,9 @@ public class BlocksCore {
 
 
         registry.registerBlock(SEA_ICE = new BlockSeaIce(FluidRegistry.getFluid("salt_water")), "sea_ice");
-        registry.registerBlockRegistrationStrategy((forgeRegistry) -> {
-            forgeRegistry.register(HOT_WATER = new BlockFluidHotWater(FluidRegistry.getFluid("hot_water")));
-            forgeRegistry.register(FRESH_WATER = new BlockFluidWater(FluidRegistry.getFluid("fresh_water"), WATER, false));
-            forgeRegistry.register(SALT_WATER = new BlockFluidWater(FluidRegistry.getFluid("salt_water"), WATER, true));
-        });
+        registry.registerBlock(HOT_WATER = new BlockFluidHotWater(FluidRegistry.getFluid("hot_water")));
+        registry.registerBlock(FRESH_WATER = new BlockFluidWater(FluidRegistry.getFluid("fresh_water"), WATER, false));
+        registry.registerBlock(SALT_WATER = new BlockFluidWater(FluidRegistry.getFluid("salt_water"), WATER, true));
 
 
         //==== TileEntity ============================================================================================//
@@ -147,18 +145,22 @@ public class BlocksCore {
                     POWDERKEG
             );
 
+            HOT_WATER.onModelRegister();
+            FRESH_WATER.onModelRegister();
+            SALT_WATER.onModelRegister();
+
 
             // Empty Models
             final ModelResourceLocation empty = new ModelResourceLocation(Tags.MOD_ID + ":empty");
             // todo: switch to hide rack (involves changing mechanics, etc)
             final ModelResourceLocation hideRack = new ModelResourceLocation(Tags.MOD_ID + ":hide_rack");
 
-            ModelLoader.setCustomStateMapper(BlocksCore.THATCH_BED, new StateMap.Builder().ignore(BlockThatchBed.OCCUPIED).build());
-            ModelLoader.setCustomStateMapper(BlocksCore.PLACED_ITEM_FLAT, blockIn -> ImmutableMap.of(BlocksCore.PLACED_ITEM_FLAT.getDefaultState(), empty));
-            ModelLoader.setCustomStateMapper(BlocksCore.PLACED_ITEM, blockIn -> ImmutableMap.of(BlocksCore.PLACED_ITEM.getDefaultState(), empty));
-            ModelLoader.setCustomStateMapper(BlocksCore.PLACED_HIDE, blockIn -> ImmutableMap.of(BlocksCore.PLACED_HIDE.getDefaultState()
-                    .withProperty(BlockPlacedHide.SIZE, ItemAnimalHide.HideSize.SMALL), empty, BlocksCore.PLACED_HIDE.getDefaultState()
-                    .withProperty(BlockPlacedHide.SIZE, ItemAnimalHide.HideSize.MEDIUM), empty, BlocksCore.PLACED_HIDE.getDefaultState()
+            ModelLoader.setCustomStateMapper(THATCH_BED, new StateMap.Builder().ignore(BlockThatchBed.OCCUPIED).build());
+            ModelLoader.setCustomStateMapper(PLACED_ITEM_FLAT, blockIn -> ImmutableMap.of(PLACED_ITEM_FLAT.getDefaultState(), empty));
+            ModelLoader.setCustomStateMapper(PLACED_ITEM, blockIn -> ImmutableMap.of(PLACED_ITEM.getDefaultState(), empty));
+            ModelLoader.setCustomStateMapper(PLACED_HIDE, blockIn -> ImmutableMap.of(PLACED_HIDE.getDefaultState()
+                    .withProperty(BlockPlacedHide.SIZE, ItemAnimalHide.HideSize.SMALL), empty, PLACED_HIDE.getDefaultState()
+                    .withProperty(BlockPlacedHide.SIZE, ItemAnimalHide.HideSize.MEDIUM), empty, PLACED_HIDE.getDefaultState()
                     .withProperty(BlockPlacedHide.SIZE, ItemAnimalHide.HideSize.LARGE), empty));
         });
 

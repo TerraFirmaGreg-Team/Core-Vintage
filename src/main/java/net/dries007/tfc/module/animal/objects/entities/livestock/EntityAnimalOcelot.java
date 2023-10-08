@@ -3,15 +3,16 @@ package net.dries007.tfc.module.animal.objects.entities.livestock;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.common.objects.LootTablesTFC;
+import net.dries007.tfc.module.animal.objects.LootTablesTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.animal.objects.entities.AnimalGroupingRules;
 import net.dries007.tfc.module.animal.objects.entities.TFCEntityAnimal;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -38,7 +39,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -379,7 +379,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
                     if (!this.world.isRemote) {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                            TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                            ModuleCore.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
                         }
                     }
                 }

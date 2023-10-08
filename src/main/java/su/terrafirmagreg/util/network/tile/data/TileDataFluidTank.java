@@ -9,8 +9,7 @@ import su.terrafirmagreg.util.network.tile.spi.TileDataBase;
 
 import java.io.IOException;
 
-public class TileDataFluidTank<T extends FluidTank & ITileDataFluidTank>
-        extends TileDataBase {
+public class TileDataFluidTank<T extends FluidTank & ITileDataFluidTank> extends TileDataBase {
 
     private final T fluidTank;
 

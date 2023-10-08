@@ -8,14 +8,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.util.registry.Registry;
 
+import static net.dries007.tfc.module.wood.StorageWood.TREE_ITEMS;
 import static net.dries007.tfc.module.wood.StorageWood.WOOD_ITEMS;
 
 public class ItemsWood {
 
     public static void onRegister(Registry registry) {
-        for (var item : WOOD_ITEMS.values()) {
-            registry.registerItem((Item) item, item.getName());
-        }
+        for (var item : WOOD_ITEMS.values()) registry.registerItem((Item) item, item.getName());
+        for (var item : TREE_ITEMS) registry.registerItem(item);
     }
 
     @SideOnly(Side.CLIENT)

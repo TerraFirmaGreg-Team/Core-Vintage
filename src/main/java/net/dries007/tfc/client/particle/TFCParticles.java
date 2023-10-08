@@ -1,8 +1,9 @@
 package net.dries007.tfc.client.particle;
 
 import net.dries007.tfc.Tags;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.network.PacketSpawnTFCParticle;
+import net.dries007.tfc.module.core.network.SCPacketSpawnTFCParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -91,9 +92,8 @@ public enum TFCParticles {
      */
     public void sendToAllNear(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration) {
         final int range = 80;
-        PacketSpawnTFCParticle packet = new PacketSpawnTFCParticle(this, x, y, z, speedX, speedY, speedZ, duration);
-        NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldIn.provider.getDimension(), x, y, z, range);
-        TerraFirmaCraft.network.sendToAllAround(packet, point);
+        SCPacketSpawnTFCParticle packet = new SCPacketSpawnTFCParticle(this, x, y, z, speedX, speedY, speedZ, duration);
+        ModuleCore.PACKET_SERVICE.sendToAllAround(packet, worldIn.provider.getDimension(), x, y, z, range);
     }
 
     /**

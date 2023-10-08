@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.core;
 
-import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.event.BiomeSuitabilityEvent;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
@@ -17,19 +16,13 @@ import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
 import net.dries007.tfc.client.util.FluidSpriteCache;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.commands.*;
-import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.entity.EntitiesTFC;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.api.util.CreativeTabBase;
-import net.dries007.tfc.module.core.init.BlocksCore;
-import net.dries007.tfc.module.core.init.ItemsCore;
-import net.dries007.tfc.module.core.init.RegistryCore;
-import net.dries007.tfc.network.*;
+import net.dries007.tfc.module.core.init.*;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -43,11 +36,13 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.server.FMLServerHandler;
-import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import su.terrafirmagreg.tfc.TerraFirmaCraft;
 import su.terrafirmagreg.util.module.ModuleBase;
+import su.terrafirmagreg.util.network.IPacketRegistry;
+import su.terrafirmagreg.util.network.IPacketService;
+import su.terrafirmagreg.util.network.tile.ITileDataService;
 import su.terrafirmagreg.util.registry.Registry;
 
 import static net.dries007.tfc.Tags.MOD_ID;
@@ -58,13 +53,17 @@ public class ModuleCore extends ModuleBase {
     public static final CreativeTabs MISC_TAB = new CreativeTabBase("misc", "tfc:wand");
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME + "." + ModuleCore.class.getSimpleName());
 
+    public static IPacketService PACKET_SERVICE;
+    public static ITileDataService TILE_DATA_SERVICE;
+
     public ModuleCore() {
         super(0, MOD_ID);
 
         this.setRegistry(new Registry(MOD_ID, MISC_TAB));
         this.enableAutoRegistry();
 
-        //PACKET_SERVICE = this.enableNetwork();
+        PACKET_SERVICE = this.enableNetwork();
+        TILE_DATA_SERVICE = this.enableNetworkTileDataService(PACKET_SERVICE);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -78,7 +77,6 @@ public class ModuleCore extends ModuleBase {
     @SubscribeEvent
     public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
         RegistryCore.createRegistries(event);
-
     }
 
     @SubscribeEvent
@@ -96,6 +94,7 @@ public class ModuleCore extends ModuleBase {
     public void onRegister(Registry registry) {
         BlocksCore.onRegister(registry);
         ItemsCore.onRegister(registry);
+        EntitiesCore.onRegister(registry);
     }
 
     @SideOnly(Side.CLIENT)
@@ -105,16 +104,15 @@ public class ModuleCore extends ModuleBase {
         ItemsCore.onClientRegister(registry);
     }
 
-    @SubscribeEvent
-    @Override
-    public void onRegisterBlockEvent(RegistryEvent.Register<Block> event) {
-        IForgeRegistry<Block> r = event.getRegistry();
-        r.registerAll(LeavesPaging.getLeavesMapForModId(MOD_ID).values().toArray(new Block[0]));
-    }
-
     // --------------------------------------------------------------------------
     // - FML Lifecycle
     // --------------------------------------------------------------------------
+
+    @Override
+    public void onNetworkRegister(IPacketRegistry registry) {
+        PacketCore.register(registry);
+
+    }
 
     @Override
     public void onPreInitializationEvent(FMLPreInitializationEvent event) {
@@ -128,27 +126,6 @@ public class ModuleCore extends ModuleBase {
 
         // No need to sync config here, forge magic
         NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.getInstance(), new TFCGuiHandler());
-
-        // Received on server
-        TerraFirmaCraft.registerNetwork(new PacketGuiButton.Handler(), PacketGuiButton.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketPlaceBlockSpecial.Handler(), PacketPlaceBlockSpecial.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketSwitchPlayerInventoryTab.Handler(), PacketSwitchPlayerInventoryTab.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketOpenCraftingGui.Handler(), PacketOpenCraftingGui.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketCycleItemMode.Handler(), PacketCycleItemMode.class, Side.SERVER);
-        TerraFirmaCraft.registerNetwork(new PacketStackFood.Handler(), PacketStackFood.class, Side.SERVER);
-
-        // Received on client
-        TerraFirmaCraft.registerNetwork(new PacketChunkData.Handler(), PacketChunkData.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketCapabilityContainerUpdate.Handler(), PacketCapabilityContainerUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketCalendarUpdate.Handler(), PacketCalendarUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketFoodStatsUpdate.Handler(), PacketFoodStatsUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketFoodStatsReplace.Handler(), PacketFoodStatsReplace.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketPlayerDataUpdate.Handler(), PacketPlayerDataUpdate.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketSpawnTFCParticle.Handler(), PacketSpawnTFCParticle.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketSimpleMessage.Handler(), PacketSimpleMessage.class, Side.CLIENT);
-        TerraFirmaCraft.registerNetwork(new PacketProspectResult.Handler(), PacketProspectResult.class, Side.CLIENT);
-
-        EntitiesTFC.preInit();
 
         CapabilityChunkData.preInit();
         CapabilityItemSize.preInit();
@@ -164,11 +141,15 @@ public class ModuleCore extends ModuleBase {
 
     }
 
+    // --------------------------------------------------------------------------
+    // - FML Lifecycle: Client
+    // --------------------------------------------------------------------------
+
     @Override
     public void onInitializationEvent(FMLInitializationEvent event) {
         super.onInitializationEvent(event);
 
-        LootTablesTFC.init();
+        //LootTablesTFC.init();
         CapabilityFood.init();
 
         setTFCWorldTypeAsDefault(event);
@@ -187,12 +168,8 @@ public class ModuleCore extends ModuleBase {
 
         ItemsCore.onPostInitialization();
 
-        JsonConfigRegistry.INSTANCE.postInit();
+        //JsonConfigRegistry.INSTANCE.postInit();
     }
-
-    // --------------------------------------------------------------------------
-    // - FML Lifecycle: Client
-    // --------------------------------------------------------------------------
 
     @Override
     public void onLoadCompleteEvent(FMLLoadCompleteEvent event) {
@@ -215,6 +192,11 @@ public class ModuleCore extends ModuleBase {
 
     }
 
+
+    // --------------------------------------------------------------------------
+    // - Server
+    // --------------------------------------------------------------------------
+
     @SideOnly(Side.CLIENT)
     public void onClientInitializationEvent(FMLInitializationEvent event) {
         super.onClientInitializationEvent(event);
@@ -229,11 +211,6 @@ public class ModuleCore extends ModuleBase {
     public void onClientPostInitializationEvent(FMLPostInitializationEvent event) {
         super.onClientPostInitializationEvent(event);
     }
-
-
-    // --------------------------------------------------------------------------
-    // - Server
-    // --------------------------------------------------------------------------
 
     @Override
     public void onServerStartingEvent(FMLServerStartingEvent event) {

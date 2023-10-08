@@ -1,9 +1,10 @@
 package net.dries007.tfc.client;
 
-import net.dries007.tfc.network.PacketCycleItemMode;
-import net.dries007.tfc.network.PacketOpenCraftingGui;
-import net.dries007.tfc.network.PacketPlaceBlockSpecial;
-import net.dries007.tfc.network.PacketStackFood;
+import net.dries007.tfc.module.core.ModuleCore;
+import net.dries007.tfc.module.core.network.SCPacketCycleItemMode;
+import net.dries007.tfc.module.core.network.SCPacketOpenCraftingGui;
+import net.dries007.tfc.module.core.network.SCPacketPlaceBlockSpecial;
+import net.dries007.tfc.module.core.network.SCPacketStackFood;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.inventory.Slot;
@@ -16,7 +17,6 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import static net.dries007.tfc.Tags.MOD_ID;
 import static net.dries007.tfc.Tags.MOD_NAME;
@@ -41,13 +41,13 @@ public class TFCKeybindings {
     public static void onKeyEvent(InputEvent event) {
         // todo: move this to a button on the inventory GUI
         if (TFCKeybindings.OPEN_CRAFTING_TABLE.isPressed()) {
-            TerraFirmaCraft.network.sendToServer(new PacketOpenCraftingGui());
+            ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketOpenCraftingGui());
         }
         if (TFCKeybindings.PLACE_BLOCK.isPressed()) {
-            TerraFirmaCraft.network.sendToServer(new PacketPlaceBlockSpecial());
+            ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketPlaceBlockSpecial());
         }
         if (TFCKeybindings.CHANGE_ITEM_MODE.isPressed()) {
-            TerraFirmaCraft.network.sendToServer(new PacketCycleItemMode());
+            ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketCycleItemMode());
         }
     }
 
@@ -59,7 +59,7 @@ public class TFCKeybindings {
             if (event.getGui() instanceof GuiContainer) {
                 Slot slotUnderMouse = ((GuiContainer) event.getGui()).getSlotUnderMouse();
                 if (slotUnderMouse != null) {
-                    TerraFirmaCraft.network.sendToServer(new PacketStackFood(slotUnderMouse.slotNumber));
+                    ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketStackFood(slotUnderMouse.slotNumber));
                 }
             }
         }

@@ -6,7 +6,6 @@ import com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.blocks.BlockTreeBranchThick;
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.init.Blocks;
@@ -35,12 +34,20 @@ public class ModelHelperTFC extends ModelHelper {
         ModelHelper.setGenericStateMapper(blockBranch, modelLocation);
         if (blockBranch instanceof BlockTreeBranchThick) {
             ModelHelper.setGenericStateMapper(((BlockTreeBranchThick) blockBranch).otherBlock, modelLocation);
+            Item item = Item.getItemFromBlock(((BlockTreeBranchThick) blockBranch).otherBlock);
+            ModelHelper.regModel(item, 0, blockBranch.getRegistryName());
         }
 
         BlockSurfaceRoot surfaceRoot = tree.getSurfaceRoots();
         if (surfaceRoot != null) {
             ModelLoader.setCustomStateMapper(surfaceRoot, new StateMap.Builder().ignore(surfaceRoot.getIgnorableProperties()).build());
         }
+
+        if (blockBranch != Blocks.AIR) {
+            ModelHelper.regModel(Item.getItemFromBlock(blockBranch));
+        }
+
+        ModelHelper.regModel(tree.getCommonSpecies().getSeed());
     }
 
 
@@ -50,13 +57,4 @@ public class ModelHelperTFC extends ModelHelper {
         return new ModelResourceLocation(resloc, null);
     }
 
-    public static void regModel(Block block) {
-        if (block != Blocks.AIR) {
-            ModelHelper.regModel(Item.getItemFromBlock(block));
-        }
-        if (block instanceof BlockTreeBranchThick) {
-            Item item = Item.getItemFromBlock(((BlockTreeBranchThick) block).otherBlock);
-            ModelHelper.regModel(item, 0, block.getRegistryName());
-        }
-    }
 }

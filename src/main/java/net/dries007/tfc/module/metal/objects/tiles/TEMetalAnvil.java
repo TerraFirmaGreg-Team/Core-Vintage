@@ -11,16 +11,17 @@ import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.compat.gregtech.material.TFGPropertyKey;
 import net.dries007.tfc.config.ConfigTFC;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.objects.tile.TEInventory;
 import net.dries007.tfc.module.core.api.recipes.WeldingRecipe;
 import net.dries007.tfc.module.core.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.init.RegistryCore;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.module.core.sound.TFCSounds;
 import net.dries007.tfc.module.metal.objects.blocks.BlockMetalAnvil;
 import net.dries007.tfc.module.rock.objects.blocks.BlockRockAnvil;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
@@ -37,7 +38,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.TextComponentTranslation;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -286,7 +286,7 @@ public class TEMetalAnvil extends TEInventory {
             ItemStack fluxStack = inventory.getStackInSlot(SLOT_FLUX);
             if (fluxStack.isEmpty()) {
                 // No flux
-                TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
+                ModuleCore.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
                 return false;
             }
 
@@ -295,9 +295,9 @@ public class TEMetalAnvil extends TEInventory {
             IForgeable cap2 = input2.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
             if (cap1 == null || cap2 == null || !cap1.isWeldable() || !cap2.isWeldable()) {
                 if (cap1 instanceof IItemHeat && cap2 instanceof IItemHeat) {
-                    TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
+                    ModuleCore.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
                 } else {
-                    TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+                    ModuleCore.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
                 }
                 return false;
             }
@@ -325,7 +325,7 @@ public class TEMetalAnvil extends TEInventory {
         }
 
         // For when there is both inputs but no recipe that matches
-        TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+        ModuleCore.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
         return false;
     }
 

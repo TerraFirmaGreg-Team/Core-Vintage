@@ -3,17 +3,18 @@ package net.dries007.tfc.module.animal.objects.entities.livestock;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.entity.EntitiesTFC;
+import net.dries007.tfc.module.animal.objects.LootTablesTFC;
+import net.dries007.tfc.module.animal.objects.entities.TFCEntities;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.animal.objects.entities.AnimalGroupingRules;
 import net.dries007.tfc.module.animal.objects.entities.TFCEntityAnimal;
 import net.dries007.tfc.module.animal.objects.entities.ai.EntityAnimalAIPanic;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -42,7 +43,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -61,7 +61,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
     //Is this female fertilized?
     private static final DataParameter<Boolean> FERTILIZED = EntityDataManager.createKey(EntityAnimalLlama.class, DataSerializers.BOOLEAN);
     // The time(in days) this entity became pregnant
-    private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalLlama.class, EntitiesTFC.getLongDataSerializer());
+    private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalLlama.class, TFCEntities.getLongDataSerializer());
     protected long lastFed; //Last time(in days) this entity was fed
     protected long lastFDecay; //Last time(in days) this entity's familiarity had decayed
     protected long matingTime; //The last time(in ticks) this male tried fertilizing females
@@ -145,7 +145,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
                     if (!this.world.isRemote) {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                            TerraFirmaCraft.network.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                            ModuleCore.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
                         }
                     }
                 }

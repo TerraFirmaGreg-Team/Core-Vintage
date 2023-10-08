@@ -3,16 +3,17 @@ package net.dries007.tfc.module.animal.objects.entities.livestock;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.entity.EntitiesTFC;
+import net.dries007.tfc.module.animal.objects.LootTablesTFC;
+import net.dries007.tfc.module.animal.objects.entities.TFCEntities;
 import net.dries007.tfc.common.objects.items.ItemsTFC_old;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.animal.objects.entities.AnimalGroupingRules;
 import net.dries007.tfc.module.animal.objects.entities.EntityAnimalMammal;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -42,7 +43,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.IShearable;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -57,7 +57,7 @@ import java.util.function.BiConsumer;
 @ParametersAreNonnullByDefault
 public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable, ILivestock {
     private static final DataParameter<Integer> DYE_COLOR = EntityDataManager.createKey(EntityAnimalSheep.class, DataSerializers.VARINT);
-    private static final DataParameter<Long> SHEARED = EntityDataManager.createKey(EntityAnimalSheep.class, EntitiesTFC.getLongDataSerializer());
+    private static final DataParameter<Long> SHEARED = EntityDataManager.createKey(EntityAnimalSheep.class, TFCEntities.getLongDataSerializer());
 
     @SuppressWarnings("unused")
     public EntityAnimalSheep(World worldIn) {
@@ -147,7 +147,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
                 } else {
                     TextComponentTranslation tooltip = getTooltip();
                     if (tooltip != null) {
-                        TerraFirmaCraft.network.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+                        ModuleCore.PACKET_SERVICE.sendTo(new SCPacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
                     }
                 }
             }
@@ -157,7 +157,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
                 if (!isReadyForAnimalProduct()) {
                     TextComponentTranslation tooltip = getTooltip();
                     if (tooltip != null) {
-                        TerraFirmaCraft.network.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+                        ModuleCore.PACKET_SERVICE.sendTo(new SCPacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
                     }
                 }
             }

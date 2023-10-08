@@ -3,8 +3,7 @@ package su.terrafirmagreg.util.network.tile.data;
 import net.minecraft.network.PacketBuffer;
 import su.terrafirmagreg.util.network.tile.spi.TileDataBase;
 
-public class TileDataBoolean
-        extends TileDataBase {
+public class TileDataBoolean extends TileDataBase {
 
     private boolean value;
 

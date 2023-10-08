@@ -13,6 +13,7 @@ import net.dries007.tfc.module.wood.init.ItemsWood;
 import net.dries007.tfc.module.wood.objects.commands.CommandGenTree;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.SeasonManager;
 import net.dries007.tfc.module.wood.plugin.dynamictrees.TFCRootDecay;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.type.TreeTypeHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.*;
@@ -48,6 +49,7 @@ public class ModuleWood extends ModuleBase {
         WoodTypeHandler.init();
         WoodBlockVariantHandler.init();
         WoodItemVariantHandler.init();
+        TreeTypeHandler.init();
 
         BlocksWood.onRegister(registry);
         ItemsWood.onRegister(registry);
@@ -77,7 +79,7 @@ public class ModuleWood extends ModuleBase {
     public void onPreInitializationEvent(FMLPreInitializationEvent event) {
         super.onPreInitializationEvent(event);
 
-        SeasonHelper.setSeasonManager(SeasonManager.INSTANCE);
+        SeasonHelper.setSeasonManager(new SeasonManager());
     }
 
     @Override

@@ -3,8 +3,8 @@ package net.dries007.tfc.module.animal.objects.entities.livestock;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
-import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.entity.EntitiesTFC;
+import net.dries007.tfc.module.animal.objects.LootTablesTFC;
+import net.dries007.tfc.module.animal.objects.entities.TFCEntities;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.animal.objects.entities.AnimalGroupingRules;
@@ -46,7 +46,7 @@ import java.util.function.BiConsumer;
 @ParametersAreNonnullByDefault
 public class EntityAnimalChicken extends TFCEntityAnimal implements ILivestock {
     //The last time(in ticks) this chicken has laid eggs
-    private static final DataParameter<Long> LAID = EntityDataManager.createKey(EntityAnimalChicken.class, EntitiesTFC.getLongDataSerializer());
+    private static final DataParameter<Long> LAID = EntityDataManager.createKey(EntityAnimalChicken.class, TFCEntities.getLongDataSerializer());
     //Copy from vanilla's EntityChicken, used by renderer to properly handle wing flap
     public float wingRotation;
     public float destPos;

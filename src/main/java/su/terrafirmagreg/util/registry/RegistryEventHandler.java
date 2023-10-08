@@ -18,8 +18,7 @@ import su.terrafirmagreg.util.registry.strategy.IClientModelRegistrationStrategy
 import su.terrafirmagreg.util.registry.strategy.IForgeRegistryEventRegistrationStrategy;
 import su.terrafirmagreg.util.registry.strategy.ITileEntityRegistrationStrategy;
 
-public class RegistryEventHandler
-        implements IRegistryEventHandler {
+public class RegistryEventHandler implements IRegistryEventHandler {
 
     private final Registry registry;
 

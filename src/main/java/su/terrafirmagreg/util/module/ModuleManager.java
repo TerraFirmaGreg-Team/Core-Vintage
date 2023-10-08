@@ -25,25 +25,13 @@ public class ModuleManager {
 
         MinecraftForge.EVENT_BUS.register(this.moduleEventRouter);
 
-        this.registerIntegrationHandler(
-                "jei",
-                "su.terrafirmagreg.util.integration.jei.IntegrationPluginHandler"
-        );
+        this.registerIntegrationHandler("jei", "su.terrafirmagreg.util.integration.jei.IntegrationPluginHandler");
 
-        this.registerIntegrationHandler(
-                "crafttweaker",
-                "su.terrafirmagreg.util.integration.crafttweaker.IntegrationPluginHandler"
-        );
+        this.registerIntegrationHandler("crafttweaker", "su.terrafirmagreg.util.integration.crafttweaker.IntegrationPluginHandler");
 
-        this.registerIntegrationHandler(
-                "gamestages",
-                "su.terrafirmagreg.util.integration.SimplePluginHandler"
-        );
+        this.registerIntegrationHandler("gamestages", "su.terrafirmagreg.util.integration.SimplePluginHandler");
 
-        this.registerIntegrationHandler(
-                "dropt",
-                "su.terrafirmagreg.util.integration.SimplePluginHandler"
-        );
+        this.registerIntegrationHandler("dropt", "su.terrafirmagreg.util.integration.SimplePluginHandler");
     }
 
     @SafeVarargs

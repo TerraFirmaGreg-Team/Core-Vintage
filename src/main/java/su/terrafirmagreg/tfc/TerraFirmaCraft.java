@@ -10,16 +10,14 @@ import net.dries007.tfc.module.food.ModuleFood;
 import net.dries007.tfc.module.metal.ModuleMetal;
 import net.dries007.tfc.module.plant.ModulePlant;
 import net.dries007.tfc.module.rock.ModuleRock;
+import net.dries007.tfc.module.soil.ModuleSoil;
+import net.dries007.tfc.module.wood.ModuleWood;
 import net.dries007.tfc.proxy.IProxy;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
 import su.terrafirmagreg.util.module.ModuleBase;
 import su.terrafirmagreg.util.module.ModuleManager;
 
@@ -34,20 +32,17 @@ import static net.dries007.tfc.module.TFCModules.MODULES;
 @Mod(modid = MOD_ID, name = MOD_NAME, version = VERSION, useMetadata = true, guiFactory = GUI_FACTORY, dependencies = DEPENDENCIES)
 public final class TerraFirmaCraft {
     public static WorldTypeTFC WORLD_TYPE_TFC;
-    public static SimpleNetworkWrapper network;
     @SuppressWarnings("unused")
     @Mod.Instance
-    private static TerraFirmaCraft instance;
+    private static TerraFirmaCraft INSTANCE;
+
     @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
     private static IProxy PROXY;
-    private static int networkIdCounter = 0;
     private final ModuleManager moduleManager;
     private Set<Class<? extends ModuleBase>> registeredModules = new HashSet<>();
 
     public TerraFirmaCraft() {
-        instance = this;
-        network = new SimpleNetworkWrapper(MOD_ID);
-//        WORLD_TYPE_TFC = new WorldTypeTFC();
+        WORLD_TYPE_TFC = new WorldTypeTFC();
         FluidRegistry.enableUniversalBucket();
         this.moduleManager = new ModuleManager(MOD_ID);
     }
@@ -55,18 +50,8 @@ public final class TerraFirmaCraft {
     public static IProxy getProxy() {
         return PROXY;
     }
-
-
     public static TerraFirmaCraft getInstance() {
-        return instance;
-    }
-
-
-    /**
-     * Используй это только на preInit фазе.
-     */
-    public static <T extends IMessage> void registerNetwork(IMessageHandler<T, IMessage> handler, Class<T> packetLatexUpdateClass, Side side) {
-        network.registerMessage(handler, packetLatexUpdateClass, networkIdCounter++, side);
+        return INSTANCE;
     }
 
 
@@ -81,9 +66,9 @@ public final class TerraFirmaCraft {
 
         if (MODULES.get(ModuleRock.MODULE_ID)) this.registerModule(ModuleRock.class);
 
-        //if (MODULES.get(ModuleSoil.MODULE_ID)) this.registerModule(ModuleSoil.class);
+        if (MODULES.get(ModuleSoil.MODULE_ID)) this.registerModule(ModuleSoil.class);
 
-        //if (MODULES.get(ModuleWood.MODULE_ID)) this.registerModule(ModuleWood.class);
+        if (MODULES.get(ModuleWood.MODULE_ID)) this.registerModule(ModuleWood.class);
 
         if (MODULES.get(ModuleMetal.MODULE_ID)) this.registerModule(ModuleMetal.class);
 

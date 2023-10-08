@@ -4,12 +4,13 @@ import net.dries007.tfc.Tags;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.client.util.FluidSpriteCache;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.network.SCPacketGuiButton;
 import net.dries007.tfc.module.wood.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.module.wood.client.button.GuiButtonBarrelSeal;
 import net.dries007.tfc.module.wood.objects.container.ContainerWoodBarrel;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodBarrel;
-import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -30,7 +31,6 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.lwjgl.opengl.GL11;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -192,7 +192,7 @@ public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
-        TerraFirmaCraft.network.sendToServer(new PacketGuiButton(button.id));
+        ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(button.id));
         super.actionPerformed(button);
     }
 }

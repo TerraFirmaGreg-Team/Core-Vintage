@@ -15,10 +15,7 @@ public class IntegrationPluginHandlerRegistry {
     private final Map<String, String> integrationHandlerPluginMap;
     private final Map<String, IIntegrationPluginHandler> integrationPluginHandlerRegistryMap;
 
-    public IntegrationPluginHandlerRegistry(
-            String modId,
-            ModuleRegistry moduleRegistry
-    ) {
+    public IntegrationPluginHandlerRegistry(String modId, ModuleRegistry moduleRegistry) {
 
         this.modId = modId;
         this.moduleRegistry = moduleRegistry;

@@ -2,8 +2,9 @@ package net.dries007.tfc.client.gui;
 
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.util.TFCGuiHandler;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
+import net.dries007.tfc.module.core.network.SCPacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
@@ -17,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 @SideOnly(Side.CLIENT)
 public class GuiCalendar extends GuiContainerTFC {
@@ -82,7 +82,7 @@ public class GuiCalendar extends GuiContainerTFC {
                 if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
                     this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
                 }
-                TerraFirmaCraft.network.sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
+                ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
             }
         }
     }

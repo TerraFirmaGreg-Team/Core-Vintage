@@ -18,7 +18,8 @@ import net.dries007.tfc.module.wood.objects.tiles.TEWoodBarrel;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodChest;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodLoom;
 import net.dries007.tfc.module.wood.objects.tiles.TEWoodToolRack;
-import net.dries007.tfc.module.wood.plugin.dynamictrees.blocks.BlockTreeRootyMimic;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.client.ModelHelperTFC;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.type.TreeType;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -29,22 +30,21 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.util.registry.Registry;
 
+import static net.dries007.tfc.Tags.MOD_ID;
+import static net.dries007.tfc.module.wood.StorageWood.TREE_BLOCKS;
 import static net.dries007.tfc.module.wood.StorageWood.WOOD_BLOCKS;
 import static net.dries007.tfc.module.wood.api.types.variant.block.WoodBlockVariants.LOG;
 
 public class BlocksWood {
 
-    public static BlockTreeRootyMimic ROOTY_DIRT_MIMIC;
 
     public static void onRegister(Registry registry) {
 
-        for (var block : WOOD_BLOCKS.values()) {
-            var itemBlock = block.getItemBlock();
-            if (itemBlock != null) registry.registerBlock((Block) block, block.getItemBlock(), block.getName());
-            else registry.registerBlock((Block) block, block.getName());
-        }
+        for (var block : WOOD_BLOCKS.values()) registry.registerBlockWithItem((Block) block, block.getName());
+        for (var block : TREE_BLOCKS) registry.registerBlock(block);
 
-        registry.registerBlock(ROOTY_DIRT_MIMIC = new BlockTreeRootyMimic());
+        registry.registerBlocks(LeavesPaging.getLeavesMapForModId(MOD_ID).values().toArray(new Block[0]));
+
 
         registry.registerTileEntities(
                 TEWoodLoom.class,
@@ -58,6 +58,7 @@ public class BlocksWood {
     public static void onClientRegister(Registry registry) {
         registry.registerClientModelRegistrationStrategy(() -> {
             WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
+            for (var tree : TreeType.getTreeTypes()) ModelHelperTFC.regModel(tree);
         });
 
         //==== TESRs =================================================================================================//
@@ -79,6 +80,7 @@ public class BlocksWood {
         var blockColors = Minecraft.getMinecraft().getBlockColors();
 
         IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
+        IBlockColor grassColor = GrassColorHandler::computeGrassColor;
 
 
         blockColors.registerBlockColorHandler((s, w, p, i) -> {

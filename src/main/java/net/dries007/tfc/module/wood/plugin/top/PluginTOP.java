@@ -7,18 +7,16 @@ import net.dries007.tfc.module.wood.plugin.top.provider.TreeProvider;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-public class PluginTOP {
+public class PluginTOP implements Function<ITheOneProbe, Void> {
 
-    public static class Callback implements Function<ITheOneProbe, Void> {
+    @Override
+    public Void apply(ITheOneProbe top) {
 
-        @Override
-        public Void apply(ITheOneProbe top) {
-
-            top.registerProvider(new BarrelProvider());
-            top.registerProvider(new TreeProvider());
-            //top.registerProvider(new FruitTreeProvider());
-            return null;
-        }
+        top.registerProvider(new BarrelProvider());
+        top.registerProvider(new TreeProvider());
+        //top.registerProvider(new FruitTreeProvider());
+        return null;
     }
+
 
 }

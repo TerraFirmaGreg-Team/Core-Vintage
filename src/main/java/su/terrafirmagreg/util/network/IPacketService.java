@@ -5,9 +5,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-/**
- * Created by codetaylor on 12/3/2016.
- */
 public interface IPacketService {
 
     void sendToAllAround(IMessage message, int dimension, double x, double y, double z, double range);

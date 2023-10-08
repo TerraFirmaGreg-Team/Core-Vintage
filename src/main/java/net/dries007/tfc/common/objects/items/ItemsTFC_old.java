@@ -3,7 +3,6 @@ package net.dries007.tfc.common.objects.items;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.animal.objects.items.ItemAnimalHide;
 import net.dries007.tfc.module.ceramic.objects.items.ItemPottery;
 import net.dries007.tfc.module.core.objects.items.ItemMetalBucket;
 import net.dries007.tfc.module.core.objects.items.ItemMisc;
@@ -16,7 +15,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import static net.dries007.tfc.module.ceramic.ModuleCeramic.POTTERY_TAB;
-import static net.dries007.tfc.module.core.ModuleCore.MISC_TAB;
 import static net.dries007.tfc.module.core.api.util.Helpers.getNull;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
@@ -116,11 +114,11 @@ public final class ItemsTFC_old {
 
 
         // Animal Hides
-        for (ItemAnimalHide.HideSize size : ItemAnimalHide.HideSize.values()) {
-            for (ItemAnimalHide.HideType type : ItemAnimalHide.HideType.values()) {
-                simpleItems.add(register(r, ("hide/" + type.name() + "/" + size.name()).toLowerCase(), new ItemAnimalHide(type, size), MISC_TAB));
-            }
-        }
+//        for (ItemAnimalHide.HideSize size : ItemAnimalHide.HideSize.values()) {
+//            for (ItemAnimalHide.HideType type : ItemAnimalHide.HideType.values()) {
+//                simpleItems.add(register(r, ("hide/" + type.name() + "/" + size.name()).toLowerCase(), new ItemAnimalHide(type, size), MISC_TAB));
+//            }
+//        }
 
 //        simpleItems.add(register(r, "animal/product/wool", new ItemMisc(Size.SMALL, Weight.LIGHT), MISC));
 //        simpleItems.add(register(r, "animal/product/wool_yarn", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT, "string"), MISC));

@@ -8,8 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.Set;
 
-public abstract class ItemToolBase
-        extends ItemTool {
+public abstract class ItemToolBase extends ItemTool {
 
     public ItemToolBase(
             String modId,

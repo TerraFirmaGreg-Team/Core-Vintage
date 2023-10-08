@@ -7,23 +7,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public abstract class SPacketTileEntityBase<REQ extends SPacketTileEntityBase>
-        extends PacketBlockPosBase<REQ> {
+public abstract class SPacketTileEntityBase<REQ extends SPacketTileEntityBase> extends PacketBlockPosBase<REQ> {
 
     public SPacketTileEntityBase() {
         // serialization
     }
 
     public SPacketTileEntityBase(BlockPos blockPos) {
-
         super(blockPos);
     }
 
     @Override
-    public IMessage onMessage(
-            REQ message,
-            MessageContext ctx
-    ) {
+    public IMessage onMessage(REQ message, MessageContext ctx) {
 
         NetHandlerPlayServer serverHandler = ctx.getServerHandler();
         EntityPlayerMP player = serverHandler.player;
@@ -32,9 +27,5 @@ public abstract class SPacketTileEntityBase<REQ extends SPacketTileEntityBase>
         return this.onMessage(message, ctx, tileEntity);
     }
 
-    protected abstract IMessage onMessage(
-            REQ message,
-            MessageContext ctx,
-            TileEntity tileEntity
-    );
+    protected abstract IMessage onMessage(REQ message, MessageContext ctx, TileEntity tileEntity);
 }

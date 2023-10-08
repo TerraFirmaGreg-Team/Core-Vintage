@@ -12,6 +12,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
@@ -36,6 +37,10 @@ public class ModuleRock extends ModuleBase {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    // --------------------------------------------------------------------------
+    // - Registration
+    // --------------------------------------------------------------------------
+
 
     @Override
     public void onRegister(Registry registry) {
@@ -53,6 +58,15 @@ public class ModuleRock extends ModuleBase {
     public void onClientRegister(Registry registry) {
         BlocksRock.onClientRegister(registry);
         ItemsRock.onClientRegister(registry);
+    }
+
+    // --------------------------------------------------------------------------
+    // - FML Lifecycle
+    // --------------------------------------------------------------------------
+
+    @Override
+    public void onPreInitializationEvent(FMLPreInitializationEvent event) {
+        super.onPreInitializationEvent(event);
     }
 
     @Override

@@ -20,12 +20,7 @@ public class TileEntityBase extends TileEntity {
     }
 
     @Override
-    public boolean shouldRefresh(
-            World world,
-            BlockPos pos,
-            @Nonnull IBlockState oldState,
-            @Nonnull IBlockState newState
-    ) {
+    public boolean shouldRefresh(World world, BlockPos pos, @Nonnull IBlockState oldState, @Nonnull IBlockState newState) {
 
         if (oldState.getBlock() == newState.getBlock()) {
             return false;

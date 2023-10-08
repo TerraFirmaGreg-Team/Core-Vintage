@@ -9,8 +9,7 @@ import su.terrafirmagreg.util.network.tile.spi.TileDataBase;
 
 import java.io.IOException;
 
-public class TileDataEnergyStorage<T extends IEnergyStorage & ITileDataEnergyStorage>
-        extends TileDataBase {
+public class TileDataEnergyStorage<T extends IEnergyStorage & ITileDataEnergyStorage> extends TileDataBase {
 
     private final T energyStorage;
 

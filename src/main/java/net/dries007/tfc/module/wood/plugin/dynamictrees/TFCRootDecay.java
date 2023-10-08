@@ -34,7 +34,8 @@ public class TFCRootDecay implements ICustomRootDecay {
             // Установить состояние блока земли на основе типа почвы и высоты почвы в данной позиции
             world.setBlockState(pos, StorageSoil.getSoilBlock(SoilBlockVariants.DIRT, chunkData.getSoilHeight(pos)).getDefaultState(), 3);
             return true;
-        } else if (world.getWorldType() == TerraFirmaCraft.WORLD_TYPE_TFC) {
+        }
+        else if (world.getWorldType() == TerraFirmaCraft.WORLD_TYPE_TFC) {
             // Не удалось получить данные чанка, но тип мира tfc все еще применяется, примените тип земли по умолчанию
             world.setBlockState(pos, StorageSoil.getSoilBlock(SoilBlockVariants.DIRT, SoilTypes.LOAM).getDefaultState(), 3);
             return true;

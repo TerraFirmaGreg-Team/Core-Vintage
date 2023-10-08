@@ -19,13 +19,12 @@ public class BlockTreeBranch extends BlockBranchBasic implements IItemProvider, 
         super(String.format("wood/branch/%s", type));
 
         setTranslationKey(String.format("wood.branch.%s", type));
-        setCreativeTab(ModuleWood.WOOD_TAB);
     }
 
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
-        return null;
+        return new ItemBlock(this);
     }
 
     @Override

@@ -1,8 +1,9 @@
 package net.dries007.tfc.api.capability.player;
 
 
+import net.dries007.tfc.module.core.ModuleCore;
+import net.dries007.tfc.module.core.network.SCPacketPlayerDataUpdate;
 import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
-import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -76,7 +76,7 @@ public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
     default void updateAndSync() {
         EntityPlayer player = getPlayer();
         if (player instanceof EntityPlayerMP) {
-            TerraFirmaCraft.network.sendTo(new PacketPlayerDataUpdate(serializeNBT()), (EntityPlayerMP) player);
+            ModuleCore.PACKET_SERVICE.sendTo(new SCPacketPlayerDataUpdate(serializeNBT()), (EntityPlayerMP) player);
         }
     }
 }

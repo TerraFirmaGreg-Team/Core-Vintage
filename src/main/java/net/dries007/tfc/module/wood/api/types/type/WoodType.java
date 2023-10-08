@@ -26,13 +26,9 @@ public class WoodType {
         this.burnTicks = builder.burnTicks;
         this.canMakeTannin = builder.canMakeTannin;
 
-        if (name.isEmpty()) {
-            throw new RuntimeException(String.format("WoodType name must contain any character: [%s]", name));
-        }
+        if (name.isEmpty()) throw new RuntimeException(String.format("WoodType name must contain any character: [%s]", name));
 
-        if (!WOOD_TYPES.add(this)) {
-            throw new RuntimeException(String.format("WoodType: [%s] already exists!", name));
-        }
+        if (!WOOD_TYPES.add(this)) throw new RuntimeException(String.format("WoodType: [%s] already exists!", name));
     }
 
     /**

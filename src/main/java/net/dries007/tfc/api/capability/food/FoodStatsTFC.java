@@ -3,8 +3,8 @@ package net.dries007.tfc.api.capability.food;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.init.EffectsCore;
-import net.dries007.tfc.network.PacketFoodStatsReplace;
-import net.dries007.tfc.network.PacketFoodStatsUpdate;
+import net.dries007.tfc.module.core.network.SCPacketFoodStatsReplace;
+import net.dries007.tfc.module.core.network.SCPacketFoodStatsUpdate;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -19,7 +19,6 @@ import net.minecraft.util.FoodStats;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -50,7 +49,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
         }
         // Send the update regardless so the client can perform the same logic
         if (player instanceof EntityPlayerMP) {
-            TerraFirmaCraft.network.sendTo(new PacketFoodStatsReplace(), (EntityPlayerMP) player);
+            ModuleCore.PACKET_SERVICE.sendTo(new SCPacketFoodStatsReplace(), (EntityPlayerMP) player);
         }
     }
 
@@ -170,7 +169,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 
         // Since this is only called server side, and vanilla has a custom packet for this stuff, we need our own
         if (player instanceof EntityPlayerMP) {
-            TerraFirmaCraft.network.sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
+            ModuleCore.PACKET_SERVICE.sendTo(new SCPacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
         }
     }
 

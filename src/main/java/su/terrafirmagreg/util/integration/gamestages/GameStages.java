@@ -9,9 +9,7 @@ import java.util.Collection;
 
 public final class GameStages {
 
-    private GameStages() {
-        //
-    }
+    private GameStages() {}
 
     /**
      * Returns true if the stages object is null or the player satisfies

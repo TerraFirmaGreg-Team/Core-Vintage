@@ -5,8 +5,9 @@ import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import gregtech.common.blocks.BlockOre;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolHelper;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.events.ProspectEvent;
-import net.dries007.tfc.network.PacketProspectResult;
+import net.dries007.tfc.module.core.network.SCPacketProspectResult;
 import net.dries007.tfc.util.skills.ProspectingSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.block.Block;
@@ -23,7 +24,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -105,8 +105,8 @@ public class PropickBehavior implements IToolBehavior {
                 }
 
                 MinecraftForge.EVENT_BUS.post(event);
-                PacketProspectResult packet = new PacketProspectResult(event.getBlockPos(), event.getResultType(), event.getMaterialName());
-                TerraFirmaCraft.network.sendTo(packet, (EntityPlayerMP) player);
+                SCPacketProspectResult packet = new SCPacketProspectResult(event.getBlockPos(), event.getResultType(), event.getMaterialName());
+                ModuleCore.PACKET_SERVICE.sendTo(packet, (EntityPlayerMP) player);
             } else {
                 //client side, add hit particles
                 addHitBlockParticle(worldIn, pos, facing, state);

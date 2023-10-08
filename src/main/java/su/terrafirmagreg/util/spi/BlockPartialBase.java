@@ -13,8 +13,7 @@ import javax.annotation.Nonnull;
 /**
  * This is a partial block, ie. not a full cube.
  */
-public abstract class BlockPartialBase
-        extends Block {
+public abstract class BlockPartialBase extends Block {
 
     public BlockPartialBase(Material material) {
 

@@ -2,9 +2,10 @@ package net.dries007.tfc.client.gui;
 
 import net.dries007.tfc.client.button.GuiButtonPowderkegSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.network.SCPacketGuiButton;
 import net.dries007.tfc.module.core.objects.tiles.TEPowderKeg;
-import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,7 +14,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.lwjgl.opengl.GL11;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -74,7 +74,7 @@ public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
     @Override
     protected void actionPerformed(@Nonnull GuiButton button) throws IOException {
         if (button instanceof GuiButtonPowderkegSeal) {
-            TerraFirmaCraft.network.sendToServer(new PacketGuiButton(button.id));
+            ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(button.id));
         }
         super.actionPerformed(button);
     }

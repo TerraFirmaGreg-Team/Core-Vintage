@@ -1,8 +1,9 @@
 package net.dries007.tfc.client.button;
 
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.module.core.network.SCPacketGuiButton;
 import net.dries007.tfc.module.core.sound.TFCSounds;
-import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
@@ -12,7 +13,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 
@@ -28,7 +28,7 @@ public class GuiButtonKnapping extends GuiButton {
     public void onClick() {
         if (this.enabled) {
             this.visible = false;
-            TerraFirmaCraft.network.sendToServer(new PacketGuiButton(this.id));
+            ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(this.id));
         }
     }
 

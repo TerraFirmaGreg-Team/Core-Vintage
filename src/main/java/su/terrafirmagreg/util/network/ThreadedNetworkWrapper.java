@@ -14,8 +14,6 @@ import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * https://github.com/SleepyTrousers/EnderCore/blob/1.10/src/main/java/com/enderio/core/common/network/ThreadedNetworkWrapper.java
- * <p>
- * Created by codetaylor on 12/3/2016.
  */
 public class ThreadedNetworkWrapper {
 

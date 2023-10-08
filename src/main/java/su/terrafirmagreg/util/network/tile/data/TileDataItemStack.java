@@ -7,8 +7,7 @@ import su.terrafirmagreg.util.network.tile.spi.TileDataBase;
 
 import java.io.IOException;
 
-public class TileDataItemStack
-        extends TileDataBase {
+public class TileDataItemStack extends TileDataBase {
 
     private ItemStack itemStack;
 

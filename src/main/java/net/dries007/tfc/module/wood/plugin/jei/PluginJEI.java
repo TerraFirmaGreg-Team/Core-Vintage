@@ -17,6 +17,7 @@ import net.dries007.tfc.module.wood.plugin.jei.categories.JEIRecipeCategoryLoom;
 import net.dries007.tfc.module.wood.plugin.jei.wrappers.JEIRecipeWrapperBarrel;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import su.terrafirmagreg.util.integration.jei.IntegrationPluginHandler;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Collection;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
 @JEIPlugin
-public final class PluginJEI implements IModPlugin {
+public final class PluginJEI extends IntegrationPluginHandler implements IModPlugin {
 
 
     private static IModRegistry REGISTRY;

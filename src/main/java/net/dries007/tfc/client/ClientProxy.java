@@ -4,7 +4,8 @@ import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.util.TFCGuiHandler;
 import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
+import net.dries007.tfc.module.core.ModuleCore;
+import net.dries007.tfc.module.core.network.SCPacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;
@@ -26,7 +27,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import java.util.List;
 
@@ -65,15 +65,6 @@ public class ClientProxy {
 //                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
 //            }
 //        }
-//
-//        // Register Meshers for Branches
-//        for (var tree : TreeType.getTreeTypes()) {
-//            ModelHelperTFC.regModel(tree.getDynamicBranch()); //Register Branch itemBlock
-//            ModelHelperTFC.regModel(tree); //Register custom state mapper for branch
-//        }
-//
-//        for (var block : BlocksCore.FLUID)
-//            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
 //
 //
 //        //==== ITEMS =================================================================================================//
@@ -138,15 +129,6 @@ public class ClientProxy {
 //
 //    }
 //
-//    @SubscribeEvent
-//    @SideOnly(Side.CLIENT)
-//    public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
-//        var blockColors = event.getBlockColors();
-//        IBlockColor grassColor = GrassColorHandler::computeGrassColor;
-//
-//        blockColors.registerBlockColorHandler(grassColor, BlocksCore.ROOTY_DIRT_MIMIC);
-//
-//    }
 //
 //    @SubscribeEvent
 //    @SideOnly(Side.CLIENT)
@@ -163,15 +145,6 @@ public class ClientProxy {
 //
 //        // Colorize clay molds
 //        itemColors.registerItemColorHandler(moldItemColors, StorageCeramic.FIRED_MOLDS.values().toArray(new Item[0]));
-//    }
-
-//    @SubscribeEvent
-//    public static void onModelBake(ModelBakeEvent event) {
-//        Block block = BlocksCore.ROOTY_DIRT_MIMIC;
-//        if (block.getRegistryName() != null) {
-//            BakedModelBlockRooty rootyModel = new BakedModelBlockRootyTFC();
-//            event.getModelRegistry().putObject(new ModelResourceLocation(block.getRegistryName(), "normal"), rootyModel);
-//        }
 //    }
 
 
@@ -197,7 +170,7 @@ public class ClientProxy {
             if (event.getButton() instanceof GuiButtonPlayerInventoryTab button) {
                 // This is to prevent the button from immediately firing after moving (enabled is set to false then)
                 if (button.isActive() && button.enabled) {
-                    TerraFirmaCraft.network.sendToServer(new PacketSwitchPlayerInventoryTab(button.getGuiType()));
+                    ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketSwitchPlayerInventoryTab(button.getGuiType()));
                 }
             }
         }

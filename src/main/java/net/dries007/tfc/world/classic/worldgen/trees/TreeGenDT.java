@@ -5,7 +5,7 @@ import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.wood.objects.blocks.BlockWoodSapling;
-import net.dries007.tfc.module.wood.tree.type.TreeType;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.type.TreeType;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;

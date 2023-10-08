@@ -4,11 +4,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
-/**
- * Created by codetaylor on 12/3/2016.
- */
-public class PacketRegistry
-        implements IPacketRegistry {
+public class PacketRegistry implements IPacketRegistry {
 
     private final ThreadedNetworkWrapper threadedNetworkWrapper;
 

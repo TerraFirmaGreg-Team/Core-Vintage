@@ -35,19 +35,20 @@ import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.core.init.BlocksCore;
 import net.dries007.tfc.module.core.init.EffectsCore;
 import net.dries007.tfc.module.core.init.ItemsCore;
+import net.dries007.tfc.module.core.network.SCPacketCalendarUpdate;
+import net.dries007.tfc.module.core.network.SCPacketPlayerDataUpdate;
 import net.dries007.tfc.module.core.objects.blocks.fluid.BlockFluidBase;
 import net.dries007.tfc.module.core.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.module.core.objects.items.ItemQuiver;
 import net.dries007.tfc.module.devices.objects.blocks.BlockQuern;
 import net.dries007.tfc.module.metal.objects.blocks.BlockMetalAnvil;
+import net.dries007.tfc.module.rock.ModuleRock;
 import net.dries007.tfc.module.rock.StorageRock;
 import net.dries007.tfc.module.rock.api.types.variant.block.IRockBlock;
 import net.dries007.tfc.module.rock.objects.blocks.BlockRockAnvil;
 import net.dries007.tfc.module.rock.objects.blocks.BlockRockRaw;
 import net.dries007.tfc.module.wood.api.types.variant.block.IWoodBlock;
 import net.dries007.tfc.module.wood.objects.blocks.BlockWoodSupport;
-import net.dries007.tfc.network.PacketCalendarUpdate;
-import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -488,7 +489,7 @@ public final class CommonEventHandler {
             IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
             if (playerData != null) {
                 // Sync
-                TerraFirmaCraft.network.sendTo(new PacketPlayerDataUpdate(playerData.serializeNBT()), player);
+                ModuleCore.PACKET_SERVICE.sendTo(new SCPacketPlayerDataUpdate(playerData.serializeNBT()), player);
             }
         }
     }
@@ -523,7 +524,7 @@ public final class CommonEventHandler {
             // Skills / Player data
             IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
             if (cap != null) {
-                TerraFirmaCraft.network.sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
+                ModuleCore.PACKET_SERVICE.sendTo(new SCPacketPlayerDataUpdate(cap.serializeNBT()), player);
             }
         }
     }
@@ -563,7 +564,7 @@ public final class CommonEventHandler {
             // Skills
             IPlayerData skills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
             if (skills != null) {
-                TerraFirmaCraft.network.sendTo(new PacketPlayerDataUpdate(skills.serializeNBT()), player);
+                ModuleCore.PACKET_SERVICE.sendTo(new SCPacketPlayerDataUpdate(skills.serializeNBT()), player);
             }
         }
     }
@@ -827,7 +828,7 @@ public final class CommonEventHandler {
             // Calendar Sync / Initialization
             CalendarWorldData data = CalendarWorldData.get(world);
             CalendarTFC.INSTANCE.resetTo(data.getCalendar());
-            TerraFirmaCraft.network.sendToAll(new PacketCalendarUpdate(CalendarTFC.INSTANCE));
+            ModuleCore.PACKET_SERVICE.sendToAll(new SCPacketCalendarUpdate(CalendarTFC.INSTANCE));
         }
 
         if (ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {
@@ -850,13 +851,15 @@ public final class CommonEventHandler {
 
     @SubscribeEvent
     public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
-        // Since cobble is a gravity block, placing it can lead to world crashes, so we avoid doing that and place rhyolite instead
-        if (ConfigTFC.General.OVERRIDES.enableLavaWaterPlacesTFCBlocks) {
-            if (event.getNewState().getBlock() == Blocks.STONE) {
-                event.setNewState(StorageRock.getRockBlock(RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
-            }
-            if (event.getNewState().getBlock() == Blocks.COBBLESTONE) {
-                event.setNewState(StorageRock.getRockBlock(RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+        if (TerraFirmaCraft.getInstance().isModuleEnabled(ModuleRock.class)) {
+            // Поскольку булыжник является гравитационным блоком, его размещение может привести к краху мира, поэтому мы избегаем этого и помещаем вместо него риолит.
+            if (ConfigTFC.General.OVERRIDES.enableLavaWaterPlacesTFCBlocks) {
+                if (event.getNewState().getBlock() == Blocks.STONE) {
+                    event.setNewState(StorageRock.getRockBlock(RAW, BASALT).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                }
+                if (event.getNewState().getBlock() == Blocks.COBBLESTONE) {
+                    event.setNewState(StorageRock.getRockBlock(RAW, RHYOLITE).getDefaultState().withProperty(BlockRockRaw.CAN_FALL, false));
+                }
             }
         }
     }

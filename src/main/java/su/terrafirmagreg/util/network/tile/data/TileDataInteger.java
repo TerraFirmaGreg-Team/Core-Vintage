@@ -3,8 +3,7 @@ package su.terrafirmagreg.util.network.tile.data;
 import net.minecraft.network.PacketBuffer;
 import su.terrafirmagreg.util.network.tile.spi.TileDataBase;
 
-public class TileDataInteger
-        extends TileDataBase {
+public class TileDataInteger extends TileDataBase {
 
     private int value;
 

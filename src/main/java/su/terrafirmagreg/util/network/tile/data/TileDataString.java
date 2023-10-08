@@ -5,8 +5,7 @@ import su.terrafirmagreg.util.network.tile.spi.TileDataBase;
 
 import javax.annotation.Nonnull;
 
-public class TileDataString
-        extends TileDataBase {
+public class TileDataString extends TileDataBase {
 
     private String value = "";
 

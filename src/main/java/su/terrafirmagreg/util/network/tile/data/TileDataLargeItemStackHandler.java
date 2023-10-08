@@ -18,8 +18,7 @@ import java.io.IOException;
  *
  * @param <H>
  */
-public class TileDataLargeItemStackHandler<H extends ItemStackHandler & ITileDataItemStackHandler>
-        extends TileDataItemStackHandler<H> {
+public class TileDataLargeItemStackHandler<H extends ItemStackHandler & ITileDataItemStackHandler> extends TileDataItemStackHandler<H> {
 
     public TileDataLargeItemStackHandler(H stackHandler) {
 

@@ -8,7 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class SeasonManager implements ISeasonManager {
-    public static final SeasonManager INSTANCE = new SeasonManager();
+
+    public SeasonManager () {}
 
     /**
      * Обновляет состояние сезона.

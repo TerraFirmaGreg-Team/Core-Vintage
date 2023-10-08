@@ -32,13 +32,9 @@ public class WoodBlockVariant {
         this.name = name;
         this.factory = factory;
 
-        if (name.isEmpty()) {
-            throw new RuntimeException(String.format("WoodBlockVariant name must contain any character: [%s]", name));
-        }
+        if (name.isEmpty()) throw new RuntimeException(String.format("WoodBlockVariant name must contain any character: [%s]", name));
 
-        if (!WOOD_BLOCK_VARIANTS.add(this)) {
-            throw new RuntimeException(String.format("WoodBlockVariant: [%s] already exists!", name));
-        }
+        if (!WOOD_BLOCK_VARIANTS.add(this)) throw new RuntimeException(String.format("WoodBlockVariant: [%s] already exists!", name));
 
         for (var type : WoodType.getWoodTypes()) {
             if (StorageWood.WOOD_BLOCKS.put(new Pair<>(this, type), this.create(type)) != null)

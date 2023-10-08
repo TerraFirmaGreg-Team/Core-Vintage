@@ -88,30 +88,25 @@ public class Registry {
     }
 
     public <B extends Block> B registerBlock(B block, String name) {
-
-        ResourceLocation resourceLocation = new ResourceLocation(this.modId, name);
-        block.setRegistryName(resourceLocation);
+        block.setRegistryName(new ResourceLocation(this.modId, name));
         block.setTranslationKey(this.modId + "." + name);
 
-        if (this.creativeTabs != null) {
-            block.setCreativeTab(this.creativeTabs);
-        }
-
-        this.registerBlockRegistrationStrategy(forgeRegistry -> forgeRegistry.register(block));
-
+        registerBlock(block);
         return block;
+    }
+
+    public <B extends Block> B[] registerBlocks(B... blocks) {
+        for (Block block : blocks) registerBlock(block);
+        return blocks;
     }
 
     public <B extends Block> B registerBlock(B block) {
-
-        if (this.creativeTabs != null) {
-            block.setCreativeTab(this.creativeTabs);
-        }
-
+        if (this.creativeTabs != null) block.setCreativeTab(this.creativeTabs);
         this.registerBlockRegistrationStrategy(forgeRegistry -> forgeRegistry.register(block));
 
         return block;
     }
+
 
     public <B extends Block> B registerBlockWithItem(B block, String name) {
 
@@ -137,12 +132,40 @@ public class Registry {
         }
     }
 
+    public <B extends Block> B registerBlockWithItem(B block) {
+
+        ItemBlock itemBlock;
+
+        if (block instanceof IBlockColored) {
+            itemBlock = new ItemColored(block, ((IBlockColored) block).hasBlockColoredSubtypes());
+
+        } else if (block instanceof IBlockVariant) {
+            itemBlock = new ItemMultiTexture(block, block, ((IBlockVariant) block)::getModelName);
+
+        } else if (block instanceof IItemProvider itemProvider) {
+            itemBlock = itemProvider.getItemBlock();
+
+        } else {
+            itemBlock = new ItemBlock(block);
+        }
+
+        if (itemBlock != null) {
+            return this.registerBlock(block, itemBlock);
+        } else {
+            return this.registerBlock(block);
+        }
+    }
+
     public <B extends Block, I extends ItemBlock> B registerBlock(B block, I itemBlock, String name) {
-
         this.registerBlock(block, name);
+        this.registerItem(itemBlock, new ResourceLocation(this.modId, name));
 
-        ResourceLocation resourceLocation = new ResourceLocation(this.modId, name);
-        this.registerItem(itemBlock, resourceLocation);
+        return block;
+    }
+
+    public <B extends Block, I extends ItemBlock> B registerBlock(B block, I itemBlock) {
+        this.registerBlock(block);
+        this.registerItem(itemBlock);
 
         return block;
     }

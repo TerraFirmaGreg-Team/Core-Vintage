@@ -8,8 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public abstract class CPacketTileEntityBase<REQ extends CPacketTileEntityBase>
-        extends PacketBlockPosBase<REQ> {
+public abstract class CPacketTileEntityBase<REQ extends CPacketTileEntityBase> extends PacketBlockPosBase<REQ> {
 
     public CPacketTileEntityBase() {
         // serialization
@@ -21,10 +20,7 @@ public abstract class CPacketTileEntityBase<REQ extends CPacketTileEntityBase>
     }
 
     @Override
-    public IMessage onMessage(
-            REQ message,
-            MessageContext ctx
-    ) {
+    public IMessage onMessage(REQ message, MessageContext ctx) {
 
         EntityPlayerSP player = Minecraft.getMinecraft().player;
         World world = player.getEntityWorld();
@@ -37,9 +33,5 @@ public abstract class CPacketTileEntityBase<REQ extends CPacketTileEntityBase>
         return null;
     }
 
-    protected abstract IMessage onMessage(
-            REQ message,
-            MessageContext ctx,
-            TileEntity tileEntity
-    );
+    protected abstract IMessage onMessage(REQ message, MessageContext ctx, TileEntity tileEntity);
 }

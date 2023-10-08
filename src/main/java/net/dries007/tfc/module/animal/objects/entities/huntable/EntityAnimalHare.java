@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.animal.objects.entities.huntable;
 
-import net.dries007.tfc.common.objects.LootTablesTFC;
+import net.dries007.tfc.module.animal.objects.LootTablesTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.module.animal.api.type.IHuntable;

@@ -14,7 +14,7 @@ import net.dries007.tfc.module.core.objects.tiles.TEPlacedItemFlat;
 import net.dries007.tfc.module.plant.objects.blocks.BlockPlantMushroom;
 import net.dries007.tfc.module.soil.api.types.variant.block.ISoilBlock;
 import net.dries007.tfc.module.soil.api.types.variant.block.SoilBlockVariants;
-import net.dries007.tfc.module.wood.tree.type.TreeType;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.type.TreeType;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;

@@ -3,14 +3,15 @@ package net.dries007.tfc.module.animal.objects.entities.livestock;
 import net.dries007.tfc.Tags;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.common.objects.LootTablesTFC;
-import net.dries007.tfc.common.objects.entity.EntitiesTFC;
+import net.dries007.tfc.module.animal.objects.LootTablesTFC;
+import net.dries007.tfc.module.animal.objects.entities.TFCEntities;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.animal.objects.entities.AnimalGroupingRules;
 import net.dries007.tfc.module.animal.objects.entities.EntityAnimalMammal;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.module.core.ModuleCore;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage;
+import net.dries007.tfc.module.core.network.SCPacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.util.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -39,7 +40,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -51,7 +51,7 @@ import java.util.function.BiConsumer;
 
 @ParametersAreNonnullByDefault
 public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
-    private static final DataParameter<Long> MILKED = EntityDataManager.createKey(EntityAnimalCow.class, EntitiesTFC.getLongDataSerializer());
+    private static final DataParameter<Long> MILKED = EntityDataManager.createKey(EntityAnimalCow.class, TFCEntities.getLongDataSerializer());
 
     @SuppressWarnings("unused")
     public EntityAnimalCow(World worldIn) {
@@ -140,7 +140,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
                 //Return chat message indicating why this entity isn't giving milk
                 TextComponentTranslation tooltip = getTooltip();
                 if (tooltip != null) {
-                    TerraFirmaCraft.network.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+                    ModuleCore.PACKET_SERVICE.sendTo(new SCPacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
                 }
             }
             return true;

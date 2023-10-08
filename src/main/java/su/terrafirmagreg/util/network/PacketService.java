@@ -9,11 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import static net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
-/**
- * Created by codetaylor on 12/3/2016.
- */
-public class PacketService
-        implements IPacketService {
+public class PacketService implements IPacketService {
 
     private static final int DEFAULT_RANGE = 64;
 

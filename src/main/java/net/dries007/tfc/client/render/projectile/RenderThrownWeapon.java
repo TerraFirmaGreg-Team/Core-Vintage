@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.render.projectile;
 
-import net.dries007.tfc.common.objects.entity.projectile.EntityThrownWeapon;
+import net.dries007.tfc.module.core.objects.entities.EntityThrownWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;

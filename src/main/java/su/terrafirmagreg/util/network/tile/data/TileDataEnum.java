@@ -3,8 +3,7 @@ package su.terrafirmagreg.util.network.tile.data;
 import net.minecraft.network.PacketBuffer;
 import su.terrafirmagreg.util.network.tile.spi.TileDataBase;
 
-public class TileDataEnum<E extends Enum>
-        extends TileDataBase {
+public class TileDataEnum<E extends Enum> extends TileDataBase {
 
     private final EnumReader<E> reader;
     private final EnumWriter<E> writer;

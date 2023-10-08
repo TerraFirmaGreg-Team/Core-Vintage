@@ -6,9 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 
-public abstract class PacketBlockPosBase<REQ extends IMessage>
-        implements IMessage,
-        IMessageHandler<REQ, IMessage> {
+public abstract class PacketBlockPosBase<REQ extends IMessage> implements IMessage, IMessageHandler<REQ, IMessage> {
 
     protected BlockPos blockPos;
 

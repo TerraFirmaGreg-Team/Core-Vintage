@@ -3,8 +3,7 @@ package su.terrafirmagreg.util.integration.jei;
 import mezz.jei.api.IModPlugin;
 import su.terrafirmagreg.util.integration.IIntegrationPluginHandler;
 
-public class IntegrationPluginHandler
-        implements IIntegrationPluginHandler {
+public class IntegrationPluginHandler implements IIntegrationPluginHandler {
 
     @Override
     public void execute(String pluginClass) throws Exception {

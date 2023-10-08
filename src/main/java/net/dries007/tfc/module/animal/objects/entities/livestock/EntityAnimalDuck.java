@@ -2,7 +2,7 @@ package net.dries007.tfc.module.animal.objects.entities.livestock;
 
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
-import net.dries007.tfc.common.objects.LootTablesTFC;
+import net.dries007.tfc.module.animal.objects.LootTablesTFC;
 import net.dries007.tfc.config.ConfigTFC;
 import net.dries007.tfc.module.animal.api.type.ILivestock;
 import net.dries007.tfc.module.core.sound.TFCSounds;

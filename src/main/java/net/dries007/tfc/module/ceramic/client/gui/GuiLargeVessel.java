@@ -4,8 +4,9 @@ import net.dries007.tfc.client.button.GuiButtonLargeVesselSeal;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.module.ceramic.objects.tiles.TELargeVessel;
+import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.api.util.Helpers;
-import net.dries007.tfc.network.PacketGuiButton;
+import net.dries007.tfc.module.core.network.SCPacketGuiButton;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,7 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.lwjgl.opengl.GL11;
-import su.terrafirmagreg.tfc.TerraFirmaCraft;
 
 import java.io.IOException;
 
@@ -77,7 +77,7 @@ public class GuiLargeVessel extends GuiContainerTE<TELargeVessel> {
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button instanceof GuiButtonLargeVesselSeal) {
-            TerraFirmaCraft.network.sendToServer(new PacketGuiButton(button.id));
+            ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(button.id));
         }
         super.actionPerformed(button);
     }

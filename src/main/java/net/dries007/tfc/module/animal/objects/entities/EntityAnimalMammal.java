@@ -1,6 +1,5 @@
 package net.dries007.tfc.module.animal.objects.entities;
 
-import net.dries007.tfc.common.objects.entity.EntitiesTFC;
 import net.dries007.tfc.module.animal.api.type.IAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public abstract class EntityAnimalMammal extends TFCEntityAnimal {
     // The time(in days) this entity became pregnant
-    private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalMammal.class, EntitiesTFC.getLongDataSerializer());
+    private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalMammal.class, TFCEntities.getLongDataSerializer());
 
     @SuppressWarnings("unused")
     public EntityAnimalMammal(World worldIn) {

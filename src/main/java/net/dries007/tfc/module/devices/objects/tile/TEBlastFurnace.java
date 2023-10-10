@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.devices.objects.tile;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMaterialItem;
 import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;

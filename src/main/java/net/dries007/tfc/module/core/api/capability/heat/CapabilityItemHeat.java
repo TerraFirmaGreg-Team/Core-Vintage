@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.heat;
+package net.dries007.tfc.module.core.api.capability.heat;
 
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
@@ -21,16 +21,36 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
+/**
+ * Класс CapabilityItemHeat представляет возможность работы с тепловыми свойствами предметов.
+ */
 public final class CapabilityItemHeat {
+    /**
+     * Ключ для определения возможности работы с тепловыми свойствами предметов.
+     */
     public static final ResourceLocation KEY = Helpers.getID("item_heat");
-    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IItemHeat for items outside TFC
+
+    /**
+     * Карты, содержащие пользовательские предметы и их тепловые свойства.
+     */
+    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>();
+
+    /**
+     * Переменная для работы с возможностью работы с тепловыми свойствами предметов.
+     */
     @CapabilityInject(IItemHeat.class)
     public static Capability<IItemHeat> ITEM_HEAT_CAPABILITY;
 
+    /**
+     * Метод для регистрации возможности работы с тепловыми свойствами предметов.
+     */
     public static void preInit() {
         CapabilityManager.INSTANCE.register(IItemHeat.class, new DumbStorage<>(), ItemHeatHandler::new);
     }
 
+    /**
+     * Метод для инициализации пользовательских предметов и их тепловых свойств.
+     */
     public static void init() {
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(Items.EGG), () -> new ItemHeatHandler(null, 1, 480));
         CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of("blockClay"), () -> new ItemHeatHandler(null, 1, 600));
@@ -42,12 +62,26 @@ public final class CapabilityItemHeat {
     }
 
     /**
-     * Helper method to adjust temperature towards a value, without overshooting or stuttering
+     * Вспомогательный метод для изменения температуры к определенному значению без перегрева и дрожания.
+     *
+     * @param temp   текущая температура
+     * @param target целевая температура
+     * @param delta  положительное изменение температуры
+     * @return новая температура
      */
     public static float adjustTempTowards(float temp, float target, float delta) {
         return adjustTempTowards(temp, target, delta, delta);
     }
 
+    /**
+     * Вспомогательный метод для изменения температуры к определенному значению без перегрева и дрожания.
+     *
+     * @param temp          текущая температура
+     * @param target        целевая температура
+     * @param deltaPositive положительное изменение температуры
+     * @param deltaNegative отрицательное изменение температуры
+     * @return новая температура
+     */
     public static float adjustTempTowards(float temp, float target, float deltaPositive, float deltaNegative) {
         if (temp < target) {
             return Math.min(temp + deltaPositive, target);
@@ -59,7 +93,12 @@ public final class CapabilityItemHeat {
     }
 
     /**
-     * Call this from within {@link IItemHeat#getTemperature()}
+     * Метод для изменения температуры на основе теплоемкости и времени обновления.
+     *
+     * @param temp             текущая температура
+     * @param heatCapacity     теплоемкость
+     * @param ticksSinceUpdate время с последнего обновления
+     * @return новая температура
      */
     public static float adjustTemp(float temp, float heatCapacity, long ticksSinceUpdate) {
         if (ticksSinceUpdate <= 0) return temp;
@@ -67,21 +106,36 @@ public final class CapabilityItemHeat {
         return newTemp < 0 ? 0 : newTemp;
     }
 
+    /**
+     * Метод для увеличения температуры предмета.
+     *
+     * @param instance экземпляр предмета
+     */
     public static void addTemp(IItemHeat instance) {
         // Default modifier = 3 (2x normal cooling)
         addTemp(instance, 3);
     }
 
     /**
-     * Use this to increase the heat on an IItemHeat instance.
+     * Метод для увеличения температуры предмета с заданным модификатором.
      *
-     * @param modifier the modifier for how much this will heat up: 0 - 1 slows down cooling, 1 = no heating or cooling, > 1 heats, 2 heats at the same rate of normal cooling, 2+ heats faster
+     * @param instance экземпляр предмета
+     * @param modifier модификатор увеличения температуры
      */
     public static void addTemp(IItemHeat instance, float modifier) {
         final float temp = instance.getTemperature() + modifier * instance.getHeatCapacity() * (float) ConfigTFC.Devices.TEMPERATURE.globalModifier;
         instance.setTemperature(temp);
     }
 
+    /**
+     * Метод для приближения температуры предмета к целевой температуре.
+     *
+     * @param temp         текущая температура
+     * @param burnTemp     температура горения
+     * @param airTicks     количество тиков нахождения предмета на воздухе
+     * @param maxTempBonus максимальное дополнительное значение температуры
+     * @return новая температура
+     */
     public static float adjustToTargetTemperature(float temp, float burnTemp, int airTicks, int maxTempBonus) {
         boolean hasAir = airTicks > 0;
         float targetTemperature = burnTemp + (hasAir ? MathHelper.clamp(burnTemp, 0, maxTempBonus) : 0);
@@ -96,6 +150,12 @@ public final class CapabilityItemHeat {
         return temp;
     }
 
+    /**
+     * Метод для получения пользовательских тепловых свойств предмета.
+     *
+     * @param stack предмет
+     * @return тепловые свойства предмета
+     */
     @Nullable
     public static ICapabilityProvider getCustomHeat(ItemStack stack) {
         Set<IIngredient<ItemStack>> itemItemSet = CUSTOM_ITEMS.keySet();
@@ -104,6 +164,7 @@ public final class CapabilityItemHeat {
                 return CUSTOM_ITEMS.get(ingredient).get();
             }
         }
+
         return null;
     }
 }

@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.capability;
 
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.IItemHeat;
 import net.dries007.tfc.module.ceramic.objects.items.ItemMold;
 import net.dries007.tfc.module.ceramic.objects.items.ItemSmallVessel;
 import net.minecraft.nbt.NBTTagCompound;

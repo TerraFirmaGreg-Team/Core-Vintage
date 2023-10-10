@@ -1,9 +1,9 @@
 package net.dries007.tfc.module.devices.objects.tile;
 
 import net.dries007.tfc.api.capability.food.*;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.Heat;
+import net.dries007.tfc.module.core.api.capability.heat.IItemHeat;
 import net.dries007.tfc.common.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.config.ConfigTFC;

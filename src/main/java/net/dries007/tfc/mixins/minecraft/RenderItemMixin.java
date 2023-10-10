@@ -1,7 +1,7 @@
 package net.dries007.tfc.mixins.minecraft;
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.module.core.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.Heat;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.ceramic.objects.items;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.module.core.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.module.core.api.capability.size.Size;
 import net.dries007.tfc.module.core.api.capability.size.Weight;
 import net.dries007.tfc.module.core.api.objects.item.ItemBase;

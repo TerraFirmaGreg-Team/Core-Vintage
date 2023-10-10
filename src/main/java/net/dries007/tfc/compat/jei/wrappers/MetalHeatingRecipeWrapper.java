@@ -4,7 +4,7 @@ import gregtech.api.unification.material.Material;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.module.core.api.capability.heat.Heat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;

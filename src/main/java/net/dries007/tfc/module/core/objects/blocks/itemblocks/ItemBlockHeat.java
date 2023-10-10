@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.core.objects.blocks.itemblocks;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.module.core.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.module.core.api.objects.block.itemblocks.ItemBlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;

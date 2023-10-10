@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.module.core.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.module.core.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.module.core.api.capability.size.IItemSizeAndWeight;
 import net.dries007.tfc.module.core.api.capability.size.Size;

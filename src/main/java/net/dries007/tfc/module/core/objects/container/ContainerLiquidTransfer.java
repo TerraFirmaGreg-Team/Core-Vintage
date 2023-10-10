@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.core.objects.container;
 
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.IItemHeat;
 import net.dries007.tfc.common.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.common.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.module.core.api.objects.container.ContainerItemStack;

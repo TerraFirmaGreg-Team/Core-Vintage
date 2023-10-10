@@ -35,7 +35,7 @@ public final class CapabilityChunkData {
     }
 
     /**
-     * Метод onAttachCapabilitiesChunk() добавляет возможность (capability) для хранения данных чанка при присоединении возможностей к объекту Chunk.
+     * Метод onAttachCapabilitiesChunk() добавляет возможность (capability) для хранения данных чанка при присоединении Capability к объекту Chunk.
      */
     @SubscribeEvent
     public static void onAttachCapabilitiesChunk(AttachCapabilitiesEvent<Chunk> event) {

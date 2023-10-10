@@ -1,8 +1,8 @@
 package net.dries007.tfc.module.core.api.recipes.heat;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.IItemHeat;
 import net.dries007.tfc.common.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

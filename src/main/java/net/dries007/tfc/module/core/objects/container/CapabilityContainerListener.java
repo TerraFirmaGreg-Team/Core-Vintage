@@ -3,7 +3,7 @@ package net.dries007.tfc.module.core.objects.container;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.module.core.ModuleCore;
 import net.dries007.tfc.module.core.events.CommonEventHandler;
 import net.dries007.tfc.module.core.network.SCPacketCapabilityContainerUpdate;

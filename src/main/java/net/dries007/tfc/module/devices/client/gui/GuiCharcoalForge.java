@@ -1,6 +1,6 @@
 package net.dries007.tfc.module.devices.client.gui;
 
-import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.module.core.api.capability.heat.Heat;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.module.core.api.util.Helpers;
 import net.dries007.tfc.module.devices.objects.tile.TECharcoalForge;

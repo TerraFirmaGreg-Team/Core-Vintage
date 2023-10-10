@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.capability.food;
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.module.core.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.module.food.api.types.type.FoodType;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

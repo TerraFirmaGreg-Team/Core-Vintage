@@ -1,8 +1,9 @@
 package net.dries007.tfc.api.capability.forge;
 
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.Heat;
+import net.dries007.tfc.module.core.api.capability.heat.IItemHeat;
+import net.dries007.tfc.module.core.api.capability.heat.CapabilityItemHeat;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -15,7 +16,7 @@ import java.util.List;
 
 /**
  * This is an advanced IForgeable capability that also needs heat
- * If you implement this capability, you MUST implement {@link net.dries007.tfc.api.capability.heat.CapabilityItemHeat} as well
+ * If you implement this capability, you MUST implement {@link CapabilityItemHeat} as well
  * You should return the same instance from the getCapability calls
  */
 public interface IForgeableHeatable extends IForgeable, IItemHeat {

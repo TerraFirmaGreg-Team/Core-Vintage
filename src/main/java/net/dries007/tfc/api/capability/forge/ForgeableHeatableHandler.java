@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.forge;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.module.core.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
 import net.minecraft.nbt.NBTTagCompound;

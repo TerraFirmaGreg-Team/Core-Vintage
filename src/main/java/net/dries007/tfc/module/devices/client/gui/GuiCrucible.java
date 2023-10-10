@@ -2,7 +2,7 @@ package net.dries007.tfc.module.devices.client.gui;
 
 import gregtech.api.unification.material.Material;
 import net.dries007.tfc.Tags;
-import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.module.core.api.capability.heat.Heat;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.client.util.FluidSpriteCache;
 import net.dries007.tfc.module.core.api.util.Helpers;

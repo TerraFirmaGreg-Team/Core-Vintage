@@ -103,6 +103,16 @@ public enum Heat {
         this(min, max, format, format, intColor);
     }
 
+
+    /**
+     * Возвращает максимально видимую температуру
+     *
+     * @return Максимально видимая температура
+     */
+    public static float maxVisibleTemperature() {
+        return BRILLIANT_WHITE.getMax();
+    }
+
     /**
      * Получить диапазон температуры на основе значения
      *

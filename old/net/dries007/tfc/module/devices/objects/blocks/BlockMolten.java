@@ -1,0 +1,184 @@
+package net.dries007.tfc.module.devices.objects.blocks;
+
+import net.dries007.tfc.client.util.CustomStateMap;
+import net.dries007.tfc.module.core.api.objects.block.BlockBase;
+import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.core.api.util.IHasModel;
+import net.dries007.tfc.module.devices.api.util.property.ILightableBlock;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+
+@ParametersAreNonnullByDefault
+public class BlockMolten extends BlockBase implements ILightableBlock, IHasModel {
+    public static final PropertyInteger LAYERS = PropertyInteger.create("layers", 1, 4);
+    public static final String NAME = "device.molten";
+    private static final AxisAlignedBB[] MOLTEN_AABB = new AxisAlignedBB[]{
+            new AxisAlignedBB(0, 0, 0, 1, 0.25, 1),
+            new AxisAlignedBB(0, 0, 0, 1, 0.5, 1),
+            new AxisAlignedBB(0, 0, 0, 1, 0.75, 1),
+            Block.FULL_BLOCK_AABB
+    };
+
+    public BlockMolten() {
+        super(Material.ROCK);
+        setHardness(-1);
+        setDefaultState(this.getBlockState().getBaseState()
+                .withProperty(ILightableBlock.LIT, false)
+                .withProperty(LAYERS, 1));
+    }
+
+//    @Nullable
+//    @Override
+//    public ItemBlock getItemBlock() {
+//        return null;
+//    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isTopSolid(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    @Nonnull
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(LAYERS, (meta & 0b11) + 1).withProperty(ILightableBlock.LIT, meta > 3);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(LAYERS) + (state.getValue(ILightableBlock.LIT) ? 4 : 0) - 1;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isBlockNormalCube(IBlockState state) {
+        return false;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isNormalCube(IBlockState state) {
+        return false;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    @Nonnull
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return MOLTEN_AABB[state.getValue(LAYERS) - 1];
+    }
+
+    @SuppressWarnings("deprecation")
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return MOLTEN_AABB[blockState.getValue(LAYERS) - 1];
+    }
+
+    @SuppressWarnings("deprecation")
+    @SideOnly(Side.CLIENT)
+    @Override
+    @Nonnull
+    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+        return MOLTEN_AABB[state.getValue(LAYERS) - 1];
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+        IBlockState state = worldIn.getBlockState(pos);
+        if (state.getValue(ILightableBlock.LIT) && !entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase && state.getValue(ILightableBlock.LIT)) {
+            entityIn.attackEntityFrom(DamageSource.IN_FIRE, 4.0f);
+        }
+        super.onEntityWalk(worldIn, pos, entityIn);
+    }
+
+    @Override
+    @Nonnull
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, ILightableBlock.LIT, LAYERS);
+    }
+
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return state.getValue(ILightableBlock.LIT) ? 15 : 0;
+    }
+
+    @Override
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return false;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return false;
+    }
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        // Drops are handled by the relevant TE (blast furnace or bloomery)
+    }
+
+    @Nullable
+    @Override
+    public PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EntityLiving entity) {
+        return state.getValue(ILightableBlock.LIT) && (entity == null || !entity.isImmuneToFire()) ? net.minecraft.pathfinding.PathNodeType.DAMAGE_FIRE : null;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+
+        var resourceLocation = Helpers.getID(NAME.replaceAll("\\.", "/"));
+
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder().customPath(resourceLocation).build());
+
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(resourceLocation, "normal"));
+    }
+}

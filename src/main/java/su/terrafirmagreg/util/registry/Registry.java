@@ -1,6 +1,5 @@
 package su.terrafirmagreg.util.registry;
 
-import net.dries007.tfc.module.core.api.util.IItemProvider;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -19,6 +18,7 @@ import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.api.util.IItemProvider;
 import su.terrafirmagreg.util.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.util.registry.strategy.IClientModelRegistrationStrategy;
 import su.terrafirmagreg.util.registry.strategy.IForgeRegistryEventRegistrationStrategy;
@@ -118,8 +118,8 @@ public class Registry {
         } else if (block instanceof IBlockVariant) {
             itemBlock = new ItemMultiTexture(block, block, ((IBlockVariant) block)::getModelName);
 
-        } else if (block instanceof IItemProvider itemProvider) {
-            itemBlock = itemProvider.getItemBlock();
+//        } else if (block instanceof IItemProvider itemProvider) {
+//            itemBlock = itemProvider.getItemBlock();
 
         } else {
             itemBlock = new ItemBlock(block);

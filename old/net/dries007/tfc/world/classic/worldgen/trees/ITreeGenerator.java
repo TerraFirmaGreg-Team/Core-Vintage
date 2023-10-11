@@ -1,0 +1,72 @@
+package net.dries007.tfc.world.classic.worldgen.trees;
+
+import net.dries007.tfc.module.core.api.util.Helpers;
+import net.dries007.tfc.module.wood.objects.blocks.BlockWoodSapling;
+import net.dries007.tfc.module.wood.plugin.dynamictrees.type.TreeType;
+import net.minecraft.block.material.Material;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.template.TemplateManager;
+
+import java.util.Random;
+
+/**
+ * Интерфейс ITreeGenerator представляет генератор деревьев.
+ */
+public interface ITreeGenerator {
+
+    /**
+     * Вызывается для генерации дерева. Каждое дерево должно иметь этот метод.
+     * Используется для генерации деревьев в мире и роста саженцев.
+     *
+     * @param manager    экземпляр менеджера шаблонов мира. Используется для получения структур.
+     * @param world      мир
+     * @param pos        позиция, где находился или должен был находиться саженец
+     * @param treeType   тип дерева для генерации
+     * @param rand       случайное число для использования в генерации
+     * @param isWorldGen флаг, указывающий, является ли генерация частью генерации мира
+     */
+    void generateTree(TemplateManager manager, World world, BlockPos pos, TreeType treeType, Random rand, boolean isWorldGen);
+
+    /**
+     * Проверяет, может ли быть сгенерировано дерево. Эта реализация проверяет высоту, радиус и уровень освещения.
+     *
+     * @param world    мир
+     * @param pos      позиция дерева
+     * @param treeType тип дерева (для проверки Capability генерации)
+     * @return true, если дерево может быть сгенерировано
+     */
+    default boolean canGenerateTree(World world, BlockPos pos, TreeType treeType) {
+        // Проверяем, достаточно ли ровный грунт
+        final int radius = treeType.getMaxGrowthRadius();
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                if ((x == 0 && z == 0) ||
+                        world.getBlockState(pos.add(x, 0, z)).getMaterial().isReplaceable() ||
+                        ((x > 1 || z > 1) && world.getBlockState(pos.add(x, 1, z)).getMaterial().isReplaceable()))
+                    continue;
+                return false;
+            }
+        }
+
+        // Проверяем, есть ли пространство прямо вверх
+        final int height = treeType.getMaxHeight();
+        for (int y = 1; y <= height; y++) {
+            var state = world.getBlockState(pos.up(y));
+            if (!state.getMaterial().isReplaceable() && state.getMaterial() != Material.LEAVES)
+                return false;
+        }
+
+        // Проверяем, есть ли твердый блок снизу
+        if (!Helpers.isGrowableSoil(world.getBlockState(pos.down())))
+            return false;
+
+
+        // Проверьте, достаточен ли уровень освещенности
+        // world.getLightFromNeighbors(pos) >= 7;
+
+        // Проверяем позицию на наличие жидкостей и т.д.
+        var stateAt = world.getBlockState(pos);
+        return !stateAt.getMaterial().isLiquid() && (stateAt.getMaterial().isReplaceable() || stateAt.getBlock() instanceof BlockWoodSapling);
+    }
+}

@@ -11,10 +11,7 @@ public class ModuleRegistry {
     private final ModuleConstructor moduleConstructor;
     private List<Class<? extends ModuleBase>> moduleClassList;
 
-    /* package */ ModuleRegistry(
-            List<ModuleBase> moduleList,
-            ModuleConstructor moduleConstructor
-    ) {
+    public ModuleRegistry(List<ModuleBase> moduleList, ModuleConstructor moduleConstructor) {
 
         this.moduleConstructor = moduleConstructor;
 
@@ -28,7 +25,7 @@ public class ModuleRegistry {
         this.moduleClassList.addAll(Arrays.asList(moduleClassArray));
     }
 
-    /* package */ void initializeModules(String modId) {
+    public void initializeModules(String modId) {
 
         for (Class<? extends ModuleBase> moduleClass : this.moduleClassList) {
             ModuleBase module = this.moduleConstructor.constructModule(modId, moduleClass);

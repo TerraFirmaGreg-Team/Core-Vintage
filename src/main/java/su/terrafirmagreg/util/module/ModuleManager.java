@@ -7,6 +7,9 @@ import su.terrafirmagreg.util.integration.IntegrationPluginHandlerRegistry;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс ModuleManager управляет модулями и их обработчиками интеграции для конкретного мода.
+ */
 public class ModuleManager {
 
     private final String modId;
@@ -15,6 +18,11 @@ public class ModuleManager {
     private final ModuleEventRouter moduleEventRouter;
     private final IntegrationPluginHandlerRegistry integrationPluginHandlerRegistry;
 
+    /**
+     * Конструктор для создания нового экземпляра ModuleManager с указанным идентификатором мода.
+     *
+     * @param modId идентификатор мода
+     */
     public ModuleManager(String modId) {
 
         this.modId = modId;
@@ -25,15 +33,20 @@ public class ModuleManager {
 
         MinecraftForge.EVENT_BUS.register(this.moduleEventRouter);
 
-        this.registerIntegrationHandler("jei", "su.terrafirmagreg.util.integration.jei.IntegrationPluginHandler");
-
-        this.registerIntegrationHandler("crafttweaker", "su.terrafirmagreg.util.integration.crafttweaker.IntegrationPluginHandler");
-
-        this.registerIntegrationHandler("gamestages", "su.terrafirmagreg.util.integration.SimplePluginHandler");
-
-        this.registerIntegrationHandler("dropt", "su.terrafirmagreg.util.integration.SimplePluginHandler");
+//        this.registerIntegrationHandler("jei", "su.terrafirmagreg.util.integration.jei.IntegrationPluginHandler");
+//
+//        this.registerIntegrationHandler("crafttweaker", "su.terrafirmagreg.util.integration.crafttweaker.IntegrationPluginHandler");
+//
+//        this.registerIntegrationHandler("gamestages", "su.terrafirmagreg.util.integration.SimplePluginHandler");
+//
+//        this.registerIntegrationHandler("dropt", "su.terrafirmagreg.util.integration.SimplePluginHandler");
     }
 
+    /**
+     * Регистрирует указанные классы модулей.
+     *
+     * @param moduleClassArray массив классов модулей для регистрации
+     */
     @SafeVarargs
     public final void registerModules(Class<? extends ModuleBase>... moduleClassArray) {
 
@@ -45,20 +58,32 @@ public class ModuleManager {
         this.integrationPluginHandlerRegistry.registerIntegrationHandler(modId, handler);
     }
 
+    /**
+     * Метод для обработки события конструирования.
+     * <p>
+     * Инициализирует обработчики интеграции.
+     * Инициализирует модули.
+     * Регистрирует плагины интеграции с использованием загруженных обработчиков.
+     */
     public void onConstructionEvent() {
 
-        // Initialize integration handlers.
+        // Инициализируйте обработчики интеграции.
         this.integrationPluginHandlerRegistry.initializeIntegrationHandlers();
 
-        // Initialize modules.
+        // Инициализируйте модули.
         this.moduleRegistry.initializeModules(this.modId);
 
-        // Register integration plugins using loaded handlers.
+        // Зарегистрируйте плагины интеграции, используя загруженные обработчики.
         for (ModuleBase module : this.moduleList) {
             this.integrationPluginHandlerRegistry.registerIntegrationPlugins(module.getIntegrationPluginMap());
         }
     }
 
+    /**
+     * Маршрутизирует указанное событие FML State Event в модульный роутер событий.
+     *
+     * @param event событие FML State Event для маршрутизации
+     */
     public void routeFMLStateEvent(FMLStateEvent event) {
 
         this.moduleEventRouter.routeFMLStateEvent(event);

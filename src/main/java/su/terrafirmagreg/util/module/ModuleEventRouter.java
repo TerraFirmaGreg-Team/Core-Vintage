@@ -99,7 +99,7 @@ public class ModuleEventRouter {
         );
     }
 
-    /* package */ <E extends FMLStateEvent> void routeFMLStateEvent(E event) {
+    public <E extends FMLStateEvent> void routeFMLStateEvent(E event) {
 
         //noinspection unchecked
         IFMLStateEventRoute<E> route = this.routes.get(event.getClass());

@@ -35,8 +35,7 @@ public class IntegrationPluginHandlerRegistry {
             if (Loader.isModLoaded(entry.getKey())) {
 
                 try {
-                    IIntegrationPluginHandler instance = (IIntegrationPluginHandler) Class.forName(entry.getValue())
-                            .newInstance();
+                    IIntegrationPluginHandler instance = (IIntegrationPluginHandler) Class.forName(entry.getValue()).newInstance();
 
                     this.integrationPluginHandlerRegistryMap.put(
                             entry.getKey(),
@@ -47,10 +46,10 @@ public class IntegrationPluginHandlerRegistry {
                         this.moduleRegistry.registerModules(instance.getModuleClass());
                     }
 
-                    FMLLog.log.info("[" + this.modId + "] Loaded integration plugin handler: " + entry.getValue());
+                    FMLLog.log.info("[{}] Loaded integration plugin handler: {}", modId, entry.getValue());
 
                 } catch (Exception e) {
-                    FMLLog.log.error("[" + this.modId + "] Error loading integration plugin handler: " + entry.getValue(), e);
+                    FMLLog.log.error("[{}] Error loading integration plugin handler: {}", modId, entry.getValue(), e);
                 }
             }
         }

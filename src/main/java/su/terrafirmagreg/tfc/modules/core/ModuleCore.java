@@ -1,7 +1,6 @@
 package su.terrafirmagreg.tfc.modules.core;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import su.terrafirmagreg.api.modules.ModuleTFG;
@@ -10,7 +9,6 @@ import su.terrafirmagreg.tfc.TFCModules;
 import su.terrafirmagreg.util.module.ModuleBase;
 import su.terrafirmagreg.util.network.IPacketService;
 import su.terrafirmagreg.util.network.tile.ITileDataService;
-import su.terrafirmagreg.util.registry.Registry;
 
 import javax.annotation.Nonnull;
 
@@ -36,13 +34,13 @@ public class ModuleCore extends ModuleBase {
     public ModuleCore() {
         super(0, MOD_ID);
 
-        this.setRegistry(new Registry(MOD_ID, MISC_TAB));
-        this.enableAutoRegistry();
+        //this.setRegistry(new Registry(MOD_ID, MISC_TAB));
+        //this.enableAutoRegistry();
 
-        PACKET_SERVICE = this.enableNetwork();
-        TILE_DATA_SERVICE = this.enableNetworkTileDataService(PACKET_SERVICE);
+        //PACKET_SERVICE = this.enableNetwork();
+        //TILE_DATA_SERVICE = this.enableNetworkTileDataService(PACKET_SERVICE);
 
-        MinecraftForge.EVENT_BUS.register(this);
+        //MinecraftForge.EVENT_BUS.register(this);
     }
 
     @Nonnull

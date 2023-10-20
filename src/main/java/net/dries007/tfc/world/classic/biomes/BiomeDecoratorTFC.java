@@ -226,25 +226,25 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
             for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
                 if (plant.isValidTempForWorldGen(avgTemperature) && plant.isValidRain(rainfall)) {
                     plantGen.setGeneratedPlant(plant);
-                    switch (plant.getPlantType()) {
-                        case WATER:
-                        case TALL_WATER:
-                        case EMERGENT_TALL_WATER: {
-                            for (int i = rng.nextInt(Math.round(waterCount / floraDiversity)); i < floraDensity * waterPlantsPerChunk; i++) {
-                                BlockPos blockPos = world.getPrecipitationHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
-                                plantGen.generate(world, rng, blockPos);
-                            }
-                            break;
-                        }
-                        case WATER_SEA:
-                        case TALL_WATER_SEA:
-                        case EMERGENT_TALL_WATER_SEA: {
-                            for (int i = rng.nextInt(Math.round(waterSeaCount / floraDiversity)); i < floraDensity * waterPlantsPerChunk; i++) {
-                                BlockPos blockPos = world.getPrecipitationHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
-                                plantGen.generate(world, rng, blockPos);
-                            }
-                            break;
-                        }
+                    switch (plant.getPlantType()) {//TODO
+//                        case WATER:
+//                        case TALL_WATER:
+//                        case EMERGENT_TALL_WATER: {
+//                            for (int i = rng.nextInt(Math.round(waterCount / floraDiversity)); i < floraDensity * waterPlantsPerChunk; i++) {
+//                                BlockPos blockPos = world.getPrecipitationHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
+//                                plantGen.generate(world, rng, blockPos);
+//                            }
+//                            break;
+//                        }
+//                        case WATER_SEA:
+//                        case TALL_WATER_SEA:
+//                        case EMERGENT_TALL_WATER_SEA: {
+//                            for (int i = rng.nextInt(Math.round(waterSeaCount / floraDiversity)); i < floraDensity * waterPlantsPerChunk; i++) {
+//                                BlockPos blockPos = world.getPrecipitationHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
+//                                plantGen.generate(world, rng, blockPos);
+//                            }
+//                            break;
+//                        }
                         case EPIPHYTE: {
                             for (float i = rng.nextInt(Math.round(epiphyteCount / floraDiversity)); i < (1 + floraDensity) * 5; i++) {
                                 BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));

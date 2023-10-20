@@ -46,6 +46,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import tfcflorae.util.RegenWildCropsTFCF;
 
 import java.util.*;
 
@@ -63,6 +64,7 @@ public class WorldRegenHandler {
     public static final WorldGenPlantTFC PLANT_GEN = new WorldGenPlantTFC();
     private static final RegenRocksSticks ROCKS_GEN = new RegenRocksSticks(true);
     private static final RegenWildCrops CROPS_GEN = new RegenWildCrops();
+    private static final RegenWildCropsTFCF CROPSTFCF_GEN = new RegenWildCropsTFCF();
     private static final WorldGenBerryBushes BUSH_GEN = new WorldGenBerryBushes();
     private static final Random RANDOM = new Random();
     private static final List<ChunkPos> POSITIONS = new LinkedList<>();
@@ -121,6 +123,8 @@ public class WorldRegenHandler {
                             PLANT_GEN.generate(event.world, RANDOM, blockMushroomPos);
                         }
                         CROPS_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+                        CROPSTFCF_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+                        BUSH_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
                         int worldX = pos.x << 4;
                         int worldZ = pos.z << 4;
                         BlockPos blockpos = new BlockPos(worldX, 0, worldZ);
@@ -157,8 +161,7 @@ public class WorldRegenHandler {
                 Block topBlock = topState.getBlock();
                 if (!topState.getMaterial().isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockMushroomTFC)) {
                     IBlockState soil = world.getBlockState(topPos.down());
-                    if (soil.getBlock() instanceof BlockRockVariant) {
-                        BlockRockVariant soilRock = (BlockRockVariant) soil.getBlock();
+                    if (soil.getBlock() instanceof BlockRockVariant soilRock) {
                         //Stop removing dead crops from farmland please!
                         if (soilRock.getType() != Rock.Type.FARMLAND) {
                             world.removeTileEntity(topPos);
@@ -232,8 +235,7 @@ public class WorldRegenHandler {
     private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random rand) {
         List<EntityLiving> group = Lists.newArrayList();
         EntityLiving creature = (EntityLiving) entityEntry.newInstance(worldIn);
-        if (creature instanceof ICreatureTFC) {
-            ICreatureTFC creatureTFC = (ICreatureTFC) creature;
+        if (creature instanceof ICreatureTFC creatureTFC) {
             int fallback = 5;
             int individuals = Math.max(1, creatureTFC.getMinGroupSize()) + rand.nextInt(creatureTFC.getMaxGroupSize() - Math.max(0, creatureTFC.getMinGroupSize() - 1));
 

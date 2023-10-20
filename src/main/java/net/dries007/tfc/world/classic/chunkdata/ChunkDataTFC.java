@@ -257,7 +257,7 @@ public final class ChunkDataTFC {
         if (protectedTicks < CalendarTFC.PLAYER_TIME.getTicks()) {
             protectedTicks = CalendarTFC.PLAYER_TIME.getTicks();
         }
-        protectedTicks += multiplier * 600;
+        protectedTicks += multiplier * 600L;
     }
 
     public long getSpawnProtection() {
@@ -265,7 +265,7 @@ public final class ChunkDataTFC {
     }
 
     public boolean isSpawnProtected() {
-        return getSpawnProtection() > 0;
+        return getSpawnProtection() > 0L;
     }
 
     public long getLastUpdateTick() {

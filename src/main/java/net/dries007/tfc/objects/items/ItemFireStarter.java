@@ -112,8 +112,7 @@ public class ItemFireStarter extends ItemTFC {
 
     @Override
     public void onUsingTick(ItemStack stack, EntityLivingBase entityLivingBase, int countLeft) {
-        if (!(entityLivingBase instanceof EntityPlayer)) return;
-        final EntityPlayer player = (EntityPlayer) entityLivingBase;
+        if (!(entityLivingBase instanceof EntityPlayer player)) return;
         final RayTraceResult result = canStartFire(player.world, player);
         if (result == null) {
             player.resetActiveHand();
@@ -127,7 +126,7 @@ public class ItemFireStarter extends ItemTFC {
         float chance = (float) ConfigTFC.General.MISC.fireStarterChance;
         // Raining reduces chance by half
         if (world.isRainingAt(pos)) {
-            chance *= 0.5;
+            chance *= 0.5F;
         }
 
         if (world.isRemote) // Client
@@ -184,7 +183,7 @@ public class ItemFireStarter extends ItemTFC {
                     } else if (OreDictionaryHelper.doesStackMatchOre(entity.getItem(), "kindling")) {
                         kindling += entity.getItem().getCount();
                         stuffToUse.add(entity);
-                    } else if (log == null && OreDictionaryHelper.doesStackMatchOre(entity.getItem(), "logWood")) {
+                    } else if (log == null && (OreDictionaryHelper.doesStackMatchOre(entity.getItem(), "logWood") || OreDictionaryHelper.doesStackMatchOre(entity.getItem(), "driftwood") || OreDictionaryHelper.doesStackMatchOre(entity.getItem(), "twig"))) {
                         log = entity;
                     }
                 }

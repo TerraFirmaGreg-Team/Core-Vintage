@@ -9,6 +9,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
@@ -45,7 +46,7 @@ public class WorldGenWildCrops implements IWorldGenerator {
                 float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
 
                 ICrop crop = CROPS.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
-                if (crop != null) {
+                if (crop != null && crop != Crop.RICE) {
                     BlockCropTFC cropBlock = BlockCropTFC.get(crop);
                     int cropsInChunk = 3 + random.nextInt(5);
                     for (int i = 0; i < cropsInChunk; i++) {

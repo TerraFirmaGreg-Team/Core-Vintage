@@ -13,22 +13,19 @@ import tfcflorae.client.GuiHandler;
 import tfcflorae.objects.blocks.entity.EntitiesTFCF;
 import tfcflorae.proxy.CommonProxy;
 import tfcflorae.util.CapabilityHeatHandler;
-import tfcflorae.util.ClassAdder;
 import tfcflorae.util.HelpersTFCF;
 import tfcflorae.util.fuel.FuelsTFCF;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-@Mod(modid = TFCFlorae.MODID, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES, certificateFingerprint = TFCFlorae.SIGNING_KEY)
+@Mod(modid = TFCFlorae.MODID, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES)
 public class TFCFlorae {
     public static final String MODID = "tfcflorae";
     public static final String NAME = "TFC Florae";
     public static final String VERSION = "@VERSION@";
-    public static final String SIGNING_KEY = "@FINGERPRINT@";
     public static final String DEPENDENCIES = "required-after:tfc@[1.7,);"
             + "after:firmalife;"
             + "after:tfcelementia;"
-            + "after:tfc_ph_compat;"
-            + "required-after:loliasm;";
+            + "after:tfc_ph_compat;";
 
     @Mod.Instance
     public static TFCFlorae instance;
@@ -60,11 +57,7 @@ public class TFCFlorae {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        ClassAdder.addClasses(event.getModConfigurationDirectory());
         logger = event.getModLog();
-        if (!signedBuild) {
-            logger.error("INVALID FINGERPRINT DETECTED!");
-        }
 
         for (ModContainer Mod : Loader.instance().getActiveModList()) {
             if (Mod.getModId().equals("firmalife"))

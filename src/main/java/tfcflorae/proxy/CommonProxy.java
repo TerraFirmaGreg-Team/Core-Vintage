@@ -20,7 +20,7 @@ import tfcflorae.world.worldgen.soil.WorldGenSoilTypes;
 import tfcflorae.world.worldgen.structures.WorldGenStructures;
 import tfcflorae.world.worldgen.structures.WorldGenStructuresCorals;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = TFCFlorae.MODID)
 public class CommonProxy {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {

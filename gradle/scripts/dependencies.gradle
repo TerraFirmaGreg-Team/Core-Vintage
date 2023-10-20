@@ -55,14 +55,14 @@ dependencies {
 
 
         implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:4746213")
-        implementation rfg.deobf("curse.maven:nyx-rotn-edition-437663:3840824")
         implementation rfg.deobf("curse.maven:reid-629017:4505486")
         compileOnly rfg.deobf("curse.maven:hwyla-253449:2568751")
         compileOnly rfg.deobf("curse.maven:patchouli-306770:3162874")
+        compileOnly rfg.deobf("curse.maven:nyx-rotn-edition-437663:3840824")
 
         //compileOnly files("libs/TerraFirmaCraft-MC1.12.2-1.7.23.181-deobf.jar")
-        compileOnly files("libs/TerraFirmaCraft-MC1.12.2-1.7.21.179-deobf.jar")
-        compileOnly files("libs/TerraFirmaCraft-MC1.12.2-1.7.21.179")
+        //compileOnly files("libs/TerraFirmaCraft-MC1.12.2-1.7.21.179-deobf.jar")
+        //compileOnly files("libs/TerraFirmaCraft-MC1.12.2-1.7.21.179")
 
         // CT
         compileOnly("curse.maven:crafttweaker-239197:4731280")

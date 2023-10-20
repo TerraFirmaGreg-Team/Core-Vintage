@@ -1,7 +1,13 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.world.classic.biomes;
 
-import net.dries007.tfc.Tags;
-import net.dries007.tfc.module.core.api.util.Helpers;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.world.biome.Biome;
@@ -12,14 +18,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.ArrayList;
-import java.util.List;
+import net.dries007.tfc.util.Helpers;
 
-import static net.dries007.tfc.Tags.MOD_NAME;
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
 
-@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
-@GameRegistry.ObjectHolder(Tags.MOD_ID)
-public final class BiomesTFC {
+@Mod.EventBusSubscriber(modid = MOD_ID)
+@GameRegistry.ObjectHolder(MOD_ID)
+public final class BiomesTFC
+{
     public static final BiomeTFC OCEAN = Helpers.getNull();
     public static final BiomeTFC RIVER = Helpers.getNull();
     public static final BiomeTFC BEACH = Helpers.getNull();
@@ -39,11 +46,9 @@ public final class BiomesTFC {
     private static final List<Biome> SPAWN_BIOMES = new ArrayList<>();
     private static final List<Biome> WORLD_GEN_BIOMES = new ArrayList<>();
 
-    private BiomesTFC() {
-    }
-
     @SubscribeEvent
-    public static void registerBiomes(RegistryEvent.Register<Biome> event) {
+    public static void registerBiomes(RegistryEvent.Register<Biome> event)
+    {
         IForgeRegistry<Biome> r = event.getRegistry();
 
         register(r, new BiomeTFC(0x3232C8, new Biome.BiomeProperties(MOD_NAME + " Ocean").setBaseHeight(-2.6f).setHeightVariation(-2.69999f)), false, true, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
@@ -62,52 +67,66 @@ public final class BiomesTFC {
         register(r, new BiomeTFC(0x5D8C8D, new Biome.BiomeProperties(MOD_NAME + " Lake").setBaseHeight(-2.4f).setHeightVariation(-2.5990001f).setBaseBiome("tfc:ocean"), 4, 5), false, false, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
     }
 
-    public static boolean isOceanicBiome(Biome b) {
+    public static boolean isOceanicBiome(Biome b)
+    {
         return OCEAN == b || DEEP_OCEAN == b;
     }
 
-    public static boolean isRiverBiome(Biome b) {
+    public static boolean isRiverBiome(Biome b)
+    {
         return RIVER == b;
     }
 
-    public static boolean isLakeBiome(Biome b) {
+    public static boolean isLakeBiome(Biome b)
+    {
         return LAKE == b;
     }
 
-    public static boolean isMountainBiome(Biome b) {
+    public static boolean isMountainBiome(Biome b)
+    {
         return MOUNTAINS == b || MOUNTAINS_EDGE == b;
     }
 
-    public static boolean isBeachBiome(Biome b) {
+
+    public static boolean isBeachBiome(Biome b)
+    {
         return BEACH == b || GRAVEL_BEACH == b;
     }
 
-    public static List<Biome> getSpawnBiomes() {
+    public static List<Biome> getSpawnBiomes()
+    {
         return SPAWN_BIOMES;
     }
 
-    public static List<Biome> getWorldGenBiomes() {
+    public static List<Biome> getWorldGenBiomes()
+    {
         return WORLD_GEN_BIOMES;
     }
 
-    private static void register(IForgeRegistry<Biome> r, Biome biome, boolean isSpawn, boolean isWorldGen, BiomeDictionary.Type... types) {
-        r.register(biome.setRegistryName(Tags.MOD_ID, biome.biomeName.replace(MOD_NAME + " ", "").replace(' ', '_').toLowerCase()));
+    private static void register(IForgeRegistry<Biome> r, Biome biome, boolean isSpawn, boolean isWorldGen, BiomeDictionary.Type... types)
+    {
+        r.register(biome.setRegistryName(MOD_ID, biome.biomeName.replace(MOD_NAME + " ", "").replace(' ', '_').toLowerCase()));
 
         // Other biome registration stuff
         BiomeDictionary.addTypes(biome, types);
 
         // These need to happen after the biomes are constructed, otherwise they will be null
-        if (isSpawn) {
+        if (isSpawn)
+        {
             SPAWN_BIOMES.add(biome);
         }
-        if (isWorldGen) {
+        if (isWorldGen)
+        {
             WORLD_GEN_BIOMES.add(biome);
         }
 
-        if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.WATER)) {
+        if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.WATER))
+        {
             // Register aquatic creatures
             biome.getSpawnableList(EnumCreatureType.WATER_CREATURE).add(new Biome.SpawnListEntry(EntitySquid.class, 20, 3, 7));
             // todo add fish (either in 1.15+ or if someone makes fish entities)
         }
     }
+
+    private BiomesTFC() {}
 }

@@ -1,14 +1,22 @@
-package net.dries007.tfc.util.json;
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
 
-import com.google.gson.*;
-import net.dries007.tfc.api.capability.damage.DamageResistance;
-import net.minecraft.util.JsonUtils;
+package net.dries007.tfc.util.json;
 
 import java.lang.reflect.Type;
 
-public class DamageResistanceJson implements JsonDeserializer<DamageResistance> {
+import com.google.gson.*;
+import net.minecraft.util.JsonUtils;
+
+import net.dries007.tfc.api.capability.damage.DamageResistance;
+
+public class DamageResistanceJson implements JsonDeserializer<DamageResistance>
+{
     @Override
-    public DamageResistance deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public DamageResistance deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+    {
         JsonObject jsonObject = JsonUtils.getJsonObject(json, "entity");
 
         final float crushingModifier = JsonUtils.getFloat(jsonObject, "crushing_resistance");

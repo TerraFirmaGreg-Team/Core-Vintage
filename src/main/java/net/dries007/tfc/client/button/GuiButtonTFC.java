@@ -1,3 +1,8 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.client.button;
 
 import net.minecraft.client.Minecraft;
@@ -8,16 +13,20 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiButtonTFC extends GuiButton {
-    public GuiButtonTFC(int buttonId, int x, int y, String buttonText) {
+public class GuiButtonTFC extends GuiButton
+{
+    public GuiButtonTFC(int buttonId, int x, int y, String buttonText)
+    {
         super(buttonId, x, y, buttonText);
     }
 
-    public GuiButtonTFC(int buttonId, int x, int y, int w, int h, String buttonText) {
+    public GuiButtonTFC(int buttonId, int x, int y, int w, int h, String buttonText)
+    {
         super(buttonId, x, y, w, h, buttonText);
     }
 
-    protected void drawItemStack(ItemStack stack, int x, int y) {
+    protected void drawItemStack(ItemStack stack, int x, int y)
+    {
         RenderItem itemRender = Minecraft.getMinecraft().getRenderItem();
         this.zLevel = 200.0F;
         itemRender.zLevel = 200.0F;

@@ -1,20 +1,27 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.api.capability.forge;
 
-import net.dries007.tfc.module.core.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.util.forge.ForgeStep;
-import net.dries007.tfc.util.forge.ForgeSteps;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.util.forge.ForgeStep;
+import net.dries007.tfc.util.forge.ForgeSteps;
 
 /**
  * Capability for forgeable items (not to be confused with forgeable items that needs heat)
  * Allows items to be forged in the anvil.
  */
-public interface IForgeable extends INBTSerializable<NBTTagCompound> {
+public interface IForgeable extends INBTSerializable<NBTTagCompound>
+{
     /**
      * Gets the current amount of work on the object
      */
@@ -35,7 +42,8 @@ public interface IForgeable extends INBTSerializable<NBTTagCompound> {
     /**
      * Sets the recipe name from an {@link AnvilRecipe}. If null, sets the recipe name to null
      */
-    default void setRecipe(@Nullable AnvilRecipe recipe) {
+    default void setRecipe(@Nullable AnvilRecipe recipe)
+    {
         setRecipe(recipe != null ? recipe.getRegistryName() : null);
     }
 
@@ -69,14 +77,16 @@ public interface IForgeable extends INBTSerializable<NBTTagCompound> {
     /**
      * @return true if the item is workable
      */
-    default boolean isWorkable() {
+    default boolean isWorkable()
+    {
         return true;
     }
 
     /**
      * @return true if the item is weldable
      */
-    default boolean isWeldable() {
+    default boolean isWeldable()
+    {
         return true;
     }
 }

@@ -1,9 +1,15 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.util.calendar;
 
 /**
  * The base interface for an object that tracks time
  */
-public interface ICalendar {
+public interface ICalendar
+{
     /* Constants */
     int TICKS_IN_HOUR = 1000;
     int HOURS_IN_DAY = 24;
@@ -13,11 +19,13 @@ public interface ICalendar {
 
     /* Total Calculation Methods */
 
-    static long getTotalHours(long time) {
+    static long getTotalHours(long time)
+    {
         return time / TICKS_IN_HOUR;
     }
 
-    static long getTotalDays(long time) {
+    static long getTotalDays(long time)
+    {
         return time / TICKS_IN_DAY;
     }
 
@@ -28,11 +36,13 @@ public interface ICalendar {
      */
     long getTicks();
 
-    default long getTotalHours() {
+    default long getTotalHours()
+    {
         return getTotalHours(getTicks());
     }
 
-    default long getTotalDays() {
+    default long getTotalDays()
+    {
         return getTotalDays(getTicks());
     }
 }

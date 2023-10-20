@@ -1,3 +1,8 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.client.particle;
 
 import net.minecraft.client.particle.Particle;
@@ -5,11 +10,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.util.Constants.RNG;
+import static net.dries007.tfc.Constants.RNG;
 
 @SideOnly(Side.CLIENT)
-public class ParticleSpark extends Particle {
-    public ParticleSpark(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration) {
+public class ParticleSpark extends Particle
+{
+    public ParticleSpark(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration)
+    {
         super(worldIn, x, y, z, speedX, speedY, speedZ);
         this.motionX *= 0.5D;
         this.motionY *= 0.5D;
@@ -27,14 +34,13 @@ public class ParticleSpark extends Particle {
     }
 
     @Override
-    public void onUpdate() {
+    public void onUpdate()
+    {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
 
-        if (this.particleAge++ >= this.particleMaxAge) {
-            this.setExpired();
-        }
+        if (this.particleAge++ >= this.particleMaxAge) { this.setExpired(); }
 
         this.move(this.motionX, this.motionY, this.motionZ);
 
@@ -48,14 +54,13 @@ public class ParticleSpark extends Particle {
         this.motionZ *= 0.9D;
         this.motionY -= 0.03D;
 
-        if (this.onGround) {
+        if (this.onGround)
+        {
             this.motionX = 0D;
             this.motionZ = 0D;
         }
     }
 
     @Override
-    public int getFXLayer() {
-        return 1;
-    }
+    public int getFXLayer() { return 1; }
 }

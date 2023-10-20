@@ -8,7 +8,9 @@
     }
   },
   "variants": {
-    "normal": [{}],
+    "normal": [
+      {}
+    ],
     "part": {
       "head": {
         "model": "tfc:thatch_bed_part",

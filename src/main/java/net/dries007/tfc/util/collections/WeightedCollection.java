@@ -1,26 +1,34 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.util.collections;
 
-import javax.annotation.Nonnull;
 import java.util.*;
+import javax.annotation.Nonnull;
 
 /**
  * Modified from https://stackoverflow.com/questions/6409652/random-weighted-selection-in-java
  *
  * @param <E> the type of the collection
  */
-public class WeightedCollection<E> {
+public class WeightedCollection<E>
+{
     private final NavigableMap<Double, E> backingMap = new TreeMap<>();
     private double totalWeight = 0;
 
-    public WeightedCollection() {
-    }
+    public WeightedCollection() {}
 
-    public WeightedCollection(Map<? extends E, Double> values) {
+    public WeightedCollection(Map<? extends E, Double> values)
+    {
         values.forEach((k, v) -> add(v, k));
     }
 
-    public WeightedCollection<E> add(double weight, @Nonnull E result) {
-        if (weight > 0) {
+    public WeightedCollection<E> add(double weight, @Nonnull E result)
+    {
+        if (weight > 0)
+        {
             totalWeight += weight;
             backingMap.put(totalWeight, result);
         }
@@ -28,20 +36,24 @@ public class WeightedCollection<E> {
     }
 
     @Nonnull
-    public E getRandomEntry(Random random) {
+    public E getRandomEntry(Random random)
+    {
         double value = random.nextDouble() * totalWeight;
         return backingMap.higherEntry(value).getValue();
     }
 
-    public Collection<E> values() {
+    public Collection<E> values()
+    {
         return backingMap.values();
     }
 
-    public double getTotalWeight() {
+    public double getTotalWeight()
+    {
         return totalWeight;
     }
 
-    public void clear() {
+    public void clear()
+    {
         backingMap.clear();
     }
 }

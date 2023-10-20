@@ -1,40 +1,47 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.module.core.ModuleCore;
-import net.dries007.tfc.module.core.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.module.core.network.SCPacketGuiButton;
-import net.dries007.tfc.module.core.sound.TFCSounds;
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.network.PacketGuiButton;
 
 @SideOnly(Side.CLIENT)
-public class GuiButtonKnapping extends GuiButton {
+public class GuiButtonKnapping extends GuiButton
+{
     private final ResourceLocation texture;
 
-    public GuiButtonKnapping(int id, int x, int y, int width, int height, ResourceLocation texture) {
+    public GuiButtonKnapping(int id, int x, int y, int width, int height, ResourceLocation texture)
+    {
         super(id, x, y, width, height, "");
         this.texture = texture;
     }
 
-    public void onClick() {
-        if (this.enabled) {
+    public void onClick()
+    {
+        if (this.enabled)
+        {
             this.visible = false;
-            ModuleCore.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(this.id));
+            TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(this.id));
         }
     }
 
     @Override
-    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
-        if (this.visible) {
+    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks)
+    {
+        if (this.visible)
+        {
             GlStateManager.color(1, 1, 1, 1);
             mc.getTextureManager().bindTexture(texture);
 
@@ -43,21 +50,5 @@ public class GuiButtonKnapping extends GuiButton {
             drawModalRectWithCustomSizedTexture(x, y, 0, 0, 16, 16, 16, 16);
             mouseDragged(mc, mouseX, mouseY);
         }
-    }
-
-    public void playPressSoundBasedOnKnappingType(SoundHandler soundHandler, KnappingType knappingType) {
-        var soundEvent = SoundEvents.UI_BUTTON_CLICK;
-
-        switch (knappingType) {
-            case STONE -> soundEvent = TFCSounds.KNAPPING_ROCK;
-            case CLAY, FIRE_CLAY -> soundEvent = TFCSounds.KNAPPING_CLAY;
-            case LEATHER -> soundEvent = TFCSounds.KNAPPING_LEATHER;
-        }
-
-        soundHandler.playSound(PositionedSoundRecord.getMasterRecord(soundEvent, 1.0F));
-    }
-
-    @Override
-    public void playPressSound(@Nonnull SoundHandler soundHandlerIn) {
     }
 }

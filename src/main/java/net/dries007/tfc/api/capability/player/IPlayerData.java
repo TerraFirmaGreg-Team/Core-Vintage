@@ -1,19 +1,25 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.api.capability.player;
 
 
-import net.dries007.tfc.module.core.ModuleCore;
-import net.dries007.tfc.module.core.network.SCPacketPlayerDataUpdate;
-import net.dries007.tfc.module.rock.api.recipes.RecipeRockChisel;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillType;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.recipes.ChiselRecipe;
+import net.dries007.tfc.network.PacketPlayerDataUpdate;
+import net.dries007.tfc.util.skills.Skill;
+import net.dries007.tfc.util.skills.SkillType;
 
 /**
  * Interface for the capability attached to a player
@@ -21,7 +27,8 @@ import javax.annotation.Nullable;
  *
  * @see SkillType
  */
-public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
+public interface IPlayerData extends INBTSerializable<NBTTagCompound>
+{
     @Nullable
     <S extends Skill> S getSkill(SkillType<S> skillType);
 
@@ -42,14 +49,14 @@ public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
      * @return enum value of the chiseling mode
      */
     @Nonnull
-    RecipeRockChisel.Mode getChiselMode();
+    ChiselRecipe.Mode getChiselMode();
 
     /**
      * Sets the current chiseling mode.
      *
      * @param chiselMode enum value for the new chiseling mode
      */
-    void setChiselMode(@Nonnull RecipeRockChisel.Mode chiselMode);
+    void setChiselMode(@Nonnull ChiselRecipe.Mode chiselMode);
 
     /**
      * Makes the player intoxicated
@@ -73,10 +80,12 @@ public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
      */
     void setHasBook(boolean value);
 
-    default void updateAndSync() {
+    default void updateAndSync()
+    {
         EntityPlayer player = getPlayer();
-        if (player instanceof EntityPlayerMP) {
-            ModuleCore.PACKET_SERVICE.sendTo(new SCPacketPlayerDataUpdate(serializeNBT()), (EntityPlayerMP) player);
+        if (player instanceof EntityPlayerMP)
+        {
+            TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(serializeNBT()), (EntityPlayerMP) player);
         }
     }
 }

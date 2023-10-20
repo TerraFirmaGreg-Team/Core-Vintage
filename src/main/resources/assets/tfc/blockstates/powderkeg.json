@@ -11,14 +11,18 @@
     }
   },
   "variants": {
-    "normal": [{}],
+    "normal": [
+      {}
+    ],
     "sealed": {
       "true": {
         "model": "tfc:powderkeg_sealed"
       },
       "false": {}
     },
-    "inventory": [{}],
+    "inventory": [
+      {}
+    ],
     "lit": {
       "true": {
         "textures": {

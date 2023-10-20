@@ -1,22 +1,22 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfc:soil/grass",
+    "model": "tfc:grass",
     "textures": {
-      "all": "tfc:blocks/soil/peat",
-      "particle": "tfc:blocks/soil/peat",
-      "top": "tfc:blocks/soil/overlay/grass/top",
-      "north": "tfc:blocks/soil/overlay/grass/side",
-      "south": "tfc:blocks/soil/overlay/grass/side",
-      "east": "tfc:blocks/soil/overlay/grass/side",
-      "west": "tfc:blocks/soil/overlay/grass/side"
+      "all": "tfc:blocks/peat",
+      "particle": "tfc:blocks/peat",
+      "top": "tfc:blocks/grass_top",
+      "north": "tfc:blocks/grass_side",
+      "south": "tfc:blocks/grass_side",
+      "east": "tfc:blocks/grass_side",
+      "west": "tfc:blocks/grass_side"
     }
   },
   "variants": {
     "north": {
       "true": {
         "textures": {
-          "north": "tfc:blocks/soil/overlay/grass/top"
+          "north": "tfc:blocks/grass_top"
         }
       },
       "false": {}
@@ -24,7 +24,7 @@
     "south": {
       "true": {
         "textures": {
-          "south": "tfc:blocks/soil/overlay/grass/top"
+          "south": "tfc:blocks/grass_top"
         }
       },
       "false": {}
@@ -32,7 +32,7 @@
     "east": {
       "true": {
         "textures": {
-          "east": "tfc:blocks/soil/overlay/grass/top"
+          "east": "tfc:blocks/grass_top"
         }
       },
       "false": {}
@@ -40,11 +40,13 @@
     "west": {
       "true": {
         "textures": {
-          "west": "tfc:blocks/soil/overlay/grass/top"
+          "west": "tfc:blocks/grass_top"
         }
       },
       "false": {}
     },
-    "normal": [{}]
+    "normal": [
+      {}
+    ]
   }
 }

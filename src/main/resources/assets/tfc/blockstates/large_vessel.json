@@ -4,7 +4,9 @@
     "model": "tfc:large_vessel_sealed"
   },
   "variants": {
-    "normal": [{}],
+    "normal": [
+      {}
+    ],
     "sealed": {
       "true": {
         "model": "tfc:large_vessel_sealed"

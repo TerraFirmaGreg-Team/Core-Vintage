@@ -1,14 +1,20 @@
-package net.dries007.tfc.util.forge;
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+package net.dries007.tfc.util.forge;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import static net.dries007.tfc.util.forge.ForgeStep.*;
 
-public enum ForgeRule {
+public enum ForgeRule
+{
     HIT_ANY(Order.ANY, HIT_LIGHT),
     HIT_NOT_LAST(Order.NOT_LAST, HIT_LIGHT),
     HIT_LAST(Order.LAST, HIT_LIGHT),
@@ -41,10 +47,23 @@ public enum ForgeRule {
     SHRINK_THIRD_LAST(Order.THIRD_LAST, SHRINK);
 
     private static final ForgeRule[] VALUES = values();
+
+    public static int getID(@Nullable ForgeRule rule)
+    {
+        return rule == null ? -1 : rule.ordinal();
+    }
+
+    @Nullable
+    public static ForgeRule valueOf(int id)
+    {
+        return id >= 0 && id < VALUES.length ? VALUES[id] : null;
+    }
+
     private final Order order;
     private final ForgeStep type;
 
-    ForgeRule(@Nonnull Order order, @Nonnull ForgeStep type) {
+    ForgeRule(@Nonnull Order order, @Nonnull ForgeStep type)
+    {
         this.order = order;
         if (type == HIT_MEDIUM || type == HIT_HARD)
             this.type = HIT_LIGHT;
@@ -52,32 +71,28 @@ public enum ForgeRule {
             this.type = type;
     }
 
-    public static int getID(@Nullable ForgeRule rule) {
-        return rule == null ? -1 : rule.ordinal();
-    }
-
-    @Nullable
-    public static ForgeRule valueOf(int id) {
-        return id >= 0 && id < VALUES.length ? VALUES[id] : null;
-    }
-
     @SideOnly(Side.CLIENT)
-    public int getU() {
+    public int getU()
+    {
         return this.type == HIT_LIGHT ? 218 : this.type.getU();
     }
 
     @SideOnly(Side.CLIENT)
-    public int getV() {
+    public int getV()
+    {
         return this.type == HIT_LIGHT ? 18 : this.type.getV();
     }
 
     @SideOnly(Side.CLIENT)
-    public int getW() {
+    public int getW()
+    {
         return order.v;
     }
 
-    public boolean matches(@Nonnull ForgeSteps steps) {
-        switch (this.order) {
+    public boolean matches(@Nonnull ForgeSteps steps)
+    {
+        switch (this.order)
+        {
             case ANY:
                 return matchesStep(steps.getStep(2)) || matchesStep(steps.getStep(1)) || matchesStep(steps.getStep(0));
             case NOT_LAST:
@@ -93,8 +108,10 @@ public enum ForgeRule {
         }
     }
 
-    private boolean matchesStep(@Nullable ForgeStep step) {
-        switch (this.type) {
+    private boolean matchesStep(@Nullable ForgeStep step)
+    {
+        switch (this.type)
+        {
             case HIT_LIGHT:
                 return step == HIT_LIGHT || step == ForgeStep.HIT_MEDIUM || step == ForgeStep.HIT_HARD;
             default:
@@ -102,7 +119,8 @@ public enum ForgeRule {
         }
     }
 
-    private enum Order {
+    private enum Order
+    {
         ANY(88),
         LAST(0),
         NOT_LAST(66),
@@ -111,7 +129,8 @@ public enum ForgeRule {
 
         private final int v;
 
-        Order(int v) {
+        Order(int v)
+        {
             this.v = v;
         }
     }

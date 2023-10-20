@@ -1,14 +1,13 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.client.gui.overlay;
 
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.compat.gregtech.items.tools.TFGToolItems;
-import net.dries007.tfc.compat.gregtech.items.tools.behaviors.ChiselBehavior;
-import net.dries007.tfc.config.ConfigTFC;
-import net.dries007.tfc.config.HealthDisplayFormat;
-import net.dries007.tfc.module.animal.api.type.IAnimal;
-import net.dries007.tfc.module.core.api.util.Helpers;
+import java.awt.*;
+
+import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -29,21 +28,28 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
-import java.awt.*;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
+import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
+import net.dries007.tfc.api.capability.player.IPlayerData;
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
+import net.dries007.tfc.util.config.HealthDisplayFormat;
+
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SideOnly(Side.CLIENT)
-public final class PlayerDataOverlay {
-    private static final ResourceLocation ICONS = Helpers.getID("textures/gui/icons/overlay.png");
+public final class PlayerDataOverlay
+{
+    private static final ResourceLocation ICONS = new ResourceLocation(MOD_ID, "textures/gui/icons/overlay.png");
     private static final ResourceLocation MC_ICONS = new ResourceLocation("minecraft:textures/gui/icons.png");
     private static final PlayerDataOverlay INSTANCE = new PlayerDataOverlay();
 
-    public static PlayerDataOverlay getInstance() {
-        return INSTANCE;
-    }
+    public static PlayerDataOverlay getInstance() { return INSTANCE; }
 
-    private static void drawTexturedModalRect(float xCoord, float yCoord, int minU, int minV, int maxU, int maxV) {
+    private static void drawTexturedModalRect(float xCoord, float yCoord, int minU, int minV, int maxU, int maxV)
+    {
         float textureScaleU = 0.00390625F;
         float textureScaleV = 0.00390625F;
         Tessellator tessellator = Tessellator.getInstance();
@@ -57,7 +63,8 @@ public final class PlayerDataOverlay {
     }
 
     @SubscribeEvent
-    public void render(RenderGameOverlayEvent.Pre event) {
+    public void render(RenderGameOverlayEvent.Pre event)
+    {
         Minecraft mc = Minecraft.getMinecraft();
         EntityPlayer player = mc.player.inventory.player;
         GuiIngameForge.renderFood = ConfigTFC.Client.DISPLAY.useVanillaHunger;
@@ -66,23 +73,28 @@ public final class PlayerDataOverlay {
         GuiIngameForge.renderExperiance = ConfigTFC.Client.DISPLAY.useVanillaHealth && ConfigTFC.Client.DISPLAY.hideThirstBar; // Since it's below both, makes sense needing both enabled
 
         // We check for crosshairs just because it's always drawn and is before air bar
-        if (event.getType() != ElementType.CROSSHAIRS) {
+        if (event.getType() != ElementType.CROSSHAIRS)
+        {
             return;
         }
 
         FoodStats foodStats = player.getFoodStats();
         float displayModifier = 1;
-        if (ConfigTFC.Client.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC || ConfigTFC.Client.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC_CURRENT_HEALTH) {
+        if (ConfigTFC.Client.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC || ConfigTFC.Client.DISPLAY.healthDisplayFormat == HealthDisplayFormat.TFC_CURRENT_HEALTH)
+        {
             displayModifier = 50;
         }
         float baseMaxHealth = 20 * displayModifier;
         float currentThirst = 100;
-        if (foodStats instanceof IFoodStatsTFC foodStatsTFC) {
+        if (foodStats instanceof IFoodStatsTFC)
+        {
+            IFoodStatsTFC foodStatsTFC = (IFoodStatsTFC) foodStats;
             baseMaxHealth = 20 * foodStatsTFC.getHealthModifier() * displayModifier;
             currentThirst = foodStatsTFC.getThirst();
         }
         // This is for air to be drawn above our bars
-        if (!ConfigTFC.Client.DISPLAY.hideThirstBar || !ConfigTFC.Client.DISPLAY.useVanillaHunger) {
+        if (!ConfigTFC.Client.DISPLAY.hideThirstBar || !ConfigTFC.Client.DISPLAY.useVanillaHunger)
+        {
             GuiIngameForge.right_height += ConfigTFC.Client.DISPLAY.useVanillaHunger ? 6 : 10;
         }
 
@@ -97,7 +109,8 @@ public final class PlayerDataOverlay {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(ICONS);
 
-        if (mc.playerController.gameIsSurvivalOrAdventure()) {
+        if (mc.playerController.gameIsSurvivalOrAdventure())
+        {
             GL11.glEnable(GL11.GL_BLEND);
 
             //Draw Food and Water
@@ -109,18 +122,21 @@ public final class PlayerDataOverlay {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
             // Food
-            if (!ConfigTFC.Client.DISPLAY.useVanillaHunger) {
+            if (!ConfigTFC.Client.DISPLAY.useVanillaHunger)
+            {
                 drawTexturedModalRect(mid + 1, healthRowHeight, 0, 20, 90, 5);
                 drawTexturedModalRect(mid + 1, healthRowHeight, 0, 25, (int) (90 * percentFood), 5);
             }
 
             // Water
-            if (!ConfigTFC.Client.DISPLAY.hideThirstBar) {
+            if (!ConfigTFC.Client.DISPLAY.hideThirstBar)
+            {
                 drawTexturedModalRect(mid + 1, healthRowHeight + 5, 90, 20, 90, 5);
                 drawTexturedModalRect(mid + 1, healthRowHeight + 5, 90, 25, (int) (90 * percentThirst), 5);
             }
 
-            if (!ConfigTFC.Client.DISPLAY.useVanillaHealth) {
+            if (!ConfigTFC.Client.DISPLAY.useVanillaHealth)
+            {
                 //Draw Health
                 drawTexturedModalRect(mid - 91, healthRowHeight, 0, 0, 90, 10);
                 float curHealth = player.getHealth() * baseMaxHealth / (float) 20;
@@ -130,7 +146,8 @@ public final class PlayerDataOverlay {
                 if (percentHealth > 1) percentHealth = 1;
 
                 drawTexturedModalRect(mid - 91, healthRowHeight, 0, 10, (int) (90 * percentHealth), 10);
-                while (surplusPercent > 0) {
+                while (surplusPercent > 0)
+                {
                     //Draw beyond max health bar(if other mods adds more health)
                     float percent = Math.min(surplusPercent, 1);
                     drawTexturedModalRect(mid - 91, healthRowHeight, uSurplus, 10, (int) (90 * percent), 10);
@@ -148,11 +165,13 @@ public final class PlayerDataOverlay {
             mc.renderEngine.bindTexture(MC_ICONS);
 
             //Draw experience bar when not riding anything, riding a non-living entity such as a boat/minecart, or riding a pig.
-            if (!(player.getRidingEntity() instanceof EntityLiving) && !GuiIngameForge.renderExperiance) {
+            if (!(player.getRidingEntity() instanceof EntityLiving) && !GuiIngameForge.renderExperiance)
+            {
                 int cap = player.xpBarCap();
                 int left = mid - 91;
 
-                if (cap > 0) {
+                if (cap > 0)
+                {
                     short barWidth = 182;
                     int filled = (int) (player.experience * (barWidth + 1));
                     int top = sr.getScaledHeight() - 29;
@@ -161,7 +180,8 @@ public final class PlayerDataOverlay {
                         drawTexturedModalRect(left, top, 0, 69, filled, 5);
                 }
 
-                if (player.experienceLevel > 0) {
+                if (player.experienceLevel > 0)
+                {
                     int color = 8453920;
                     String text = Integer.toString(player.experienceLevel);
                     int x = (sr.getScaledWidth() - fontrenderer.getStringWidth(text)) / 2;
@@ -178,9 +198,11 @@ public final class PlayerDataOverlay {
             }
 
             // Draw mount's health bar
-            if (player.getRidingEntity() instanceof EntityLivingBase mount && !ConfigTFC.Client.DISPLAY.useVanillaHealth) {
+            if (player.getRidingEntity() instanceof EntityLivingBase && !ConfigTFC.Client.DISPLAY.useVanillaHealth)
+            {
                 GuiIngameForge.renderHealthMount = false;
                 mc.renderEngine.bindTexture(ICONS);
+                EntityLivingBase mount = ((EntityLivingBase) player.getRidingEntity());
                 drawTexturedModalRect(mid + 1, armorRowHeight, 90, 0, 90, 10);
                 double mountMaxHealth = mount.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getBaseValue();
                 double mountCurrentHealth = mount.getHealth();
@@ -198,14 +220,17 @@ public final class PlayerDataOverlay {
         int itemModeX = mid + 100;
 
         // draw chisel mode if main hand item is tfc chisel
-
-        if (player.getHeldItemMainhand().getItem() == TFGToolItems.CHISEL.get()) {
+        if (player.getHeldItemMainhand().getItem() instanceof ItemMetalChisel)
+        {
             int iconU = 0;
 
-            if (ChiselBehavior.hasHammerForChisel(player)) {
+            if (ItemMetalChisel.hasHammerForChisel(player))
+            {
                 IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-                if (capability != null) {
-                    switch (capability.getChiselMode()) {
+                if (capability != null)
+                {
+                    switch (capability.getChiselMode())
+                    {
                         case SMOOTH:
                             iconU = 0;
                             break;
@@ -217,7 +242,9 @@ public final class PlayerDataOverlay {
                             break;
                     }
                 }
-            } else {
+            }
+            else
+            {
                 // todo: display missing hammer art
                 iconU = 60;
             }
@@ -231,13 +258,16 @@ public final class PlayerDataOverlay {
     }
 
     @SubscribeEvent
-    public void renderAnimalFamiliarity(RenderLivingEvent.Post<EntityLiving> event) {
+    public void renderAnimalFamiliarity(RenderLivingEvent.Post<EntityLiving> event)
+    {
         Minecraft mc = Minecraft.getMinecraft();
         EntityPlayer player = mc.player.inventory.player;
 
-        if (player.isSneaking()) {
+        if (player.isSneaking())
+        {
             EntityLivingBase entity = event.getEntity();
-            if (entity instanceof IAnimal && ((IAnimal) entity).getAdultFamiliarityCap() > 0 && entity == mc.pointedEntity) {
+            if (entity instanceof IAnimalTFC && ((IAnimalTFC) entity).getAdultFamiliarityCap() > 0 && entity == mc.pointedEntity)
+            {
                 double x, y, z;
                 x = event.getX();
                 y = event.getY();
@@ -248,8 +278,9 @@ public final class PlayerDataOverlay {
                 double d3 = entity.getDistance(player);
                 float f2 = 5.0F;
 
-                if (d3 < f2) {
-                    IAnimal animal = (IAnimal) entity;
+                if (d3 < f2)
+                {
+                    IAnimalTFC animal = (IAnimalTFC) entity;
                     RenderManager rendermanager = mc.getRenderManager();
 
                     GL11.glPushMatrix();
@@ -264,21 +295,29 @@ public final class PlayerDataOverlay {
                     GL11.glScalef(0.33F, 0.33F, 0.33F);
 
                     float familiarity = Math.max(0.0F, Math.min(1.0F, animal.getFamiliarity()));
-                    if (familiarity >= animal.getAdultFamiliarityCap() && animal.getAge() != IAnimal.Age.CHILD) {
+                    if (familiarity >= animal.getAdultFamiliarityCap() && animal.getAge() != IAnimalTFC.Age.CHILD)
+                    {
                         // Render a red-ish outline for adults that cannot be familiarized more
                         drawTexturedModalRect(-8, 0, 132, 40, 16, 16);
-                    } else if (familiarity >= 0.3F) {
+                    }
+                    else if (familiarity >= 0.3F)
+                    {
                         // Render a white outline for the when the familiarity stopped decaying
                         drawTexturedModalRect(-8, 0, 112, 40, 16, 16);
-                    } else {
+                    }
+                    else
+                    {
                         drawTexturedModalRect(-8, 0, 92, 40, 16, 16);
                     }
 
                     GL11.glTranslatef(0, 0, -0.001F);
 
-                    if (familiarity == 1.0F) {
+                    if (familiarity == 1.0F)
+                    {
                         drawTexturedModalRect(-6, 14 - (int) (12 * familiarity), 114, 74 - (int) (12 * familiarity), 12, (int) (12 * familiarity));
-                    } else {
+                    }
+                    else
+                    {
                         drawTexturedModalRect(-6, 14 - (int) (12 * familiarity), 94, 74 - (int) (12 * familiarity), 12, (int) (12 * familiarity));
                     }
 

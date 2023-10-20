@@ -1,3 +1,8 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.world.classic.genlayers.datalayers.ph;
 
 import net.dries007.tfc.world.classic.DataLayer;
@@ -6,15 +11,13 @@ import net.dries007.tfc.world.classic.genlayers.GenLayerSmoothTFC;
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
 import net.dries007.tfc.world.classic.genlayers.GenLayerZoomTFC;
 
-public abstract class GenPHLayer extends GenLayerTFC {
+public abstract class GenPHLayer extends GenLayerTFC
+{
     public static final int MIN = DataLayer.PH_ACID_HIGH.layerID;
     public static final int MAX = DataLayer.PH_ALKALINE_HIGH.layerID;
 
-    public GenPHLayer(long par1) {
-        super(par1);
-    }
-
-    public static GenLayerTFC initializePH(long seed) {
+    public static GenLayerTFC initializePH(long seed)
+    {
         GenLayerTFC continent = new GenLayerPHInit(1L);
         continent = new GenLayerAddPH(1L, continent);
         continent = new GenLayerFuzzyZoomTFC(2000L, continent);
@@ -34,5 +37,10 @@ public abstract class GenPHLayer extends GenLayerTFC {
         continent = new GenLayerSmoothTFC(1000L, continent);
         continent.initWorldGenSeed(seed);
         return continent;
+    }
+
+    public GenPHLayer(long par1)
+    {
+        super(par1);
     }
 }

@@ -1,7 +1,12 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.module.core.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.module.metal.client.gui.GuiMetalAnvilPlan;
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
@@ -9,15 +14,19 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+
+import static net.dries007.tfc.client.gui.GuiAnvilPlan.PLAN_BACKGROUND;
 
 @SideOnly(Side.CLIENT)
-public class GuiButtonAnvilPlanIcon extends GuiButtonTFC implements IButtonTooltip {
+public class GuiButtonAnvilPlanIcon extends GuiButtonTFC implements IButtonTooltip
+{
     private final ItemStack displayItem;
     private final ResourceLocation recipeName;
     private final String tooltip;
 
-    public GuiButtonAnvilPlanIcon(AnvilRecipe recipe, int id, int x, int y) {
+    public GuiButtonAnvilPlanIcon(AnvilRecipe recipe, int id, int x, int y)
+    {
         super(id, x, y, 18, 18, "");
 
         this.displayItem = recipe.getPlanIcon();
@@ -26,10 +35,12 @@ public class GuiButtonAnvilPlanIcon extends GuiButtonTFC implements IButtonToolt
     }
 
     @Override
-    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
-        if (this.visible) {
+    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks)
+    {
+        if (this.visible)
+        {
             GlStateManager.color(1, 1, 1, 1);
-            mc.getTextureManager().bindTexture(GuiMetalAnvilPlan.PLAN_BACKGROUND);
+            mc.getTextureManager().bindTexture(PLAN_BACKGROUND);
             hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
             drawModalRectWithCustomSizedTexture(x, y, 176, 0, 18, 18, 256, 256);
             drawItemStack(displayItem, x + 1, y + 1);
@@ -37,17 +48,20 @@ public class GuiButtonAnvilPlanIcon extends GuiButtonTFC implements IButtonToolt
         }
     }
 
-    public ResourceLocation getRecipeName() {
+    public ResourceLocation getRecipeName()
+    {
         return recipeName;
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip()
+    {
         return tooltip;
     }
 
     @Override
-    public boolean hasTooltip() {
+    public boolean hasTooltip()
+    {
         return tooltip != null;
     }
 }

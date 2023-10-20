@@ -1,15 +1,23 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.client.util.TFCGuiHandler;
-import net.dries007.tfc.module.core.api.util.Helpers;
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.Nonnull;
+import net.dries007.tfc.client.TFCGuiHandler;
 
-public class GuiButtonPlayerInventoryTab extends GuiButtonTFC {
-    private static final ResourceLocation BACKGROUND = Helpers.getID("textures/gui/icons.png");
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+
+public class GuiButtonPlayerInventoryTab extends GuiButtonTFC
+{
+    private static final ResourceLocation BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/icons.png");
 
     private final TFCGuiHandler.Type guiType;
     private final boolean isActive;
@@ -22,13 +30,15 @@ public class GuiButtonPlayerInventoryTab extends GuiButtonTFC {
     private int iconX;
     private int guiLeft;
 
-    public GuiButtonPlayerInventoryTab(TFCGuiHandler.Type guiType, int guiLeft, int guiTop, int buttonId, boolean isActive) {
+    public GuiButtonPlayerInventoryTab(TFCGuiHandler.Type guiType, int guiLeft, int guiTop, int buttonId, boolean isActive)
+    {
         super(buttonId, guiLeft + 176, guiTop, 20, 22, "");
         this.guiType = guiType;
         this.isActive = isActive;
         this.guiLeft = guiLeft;
 
-        switch (guiType) {
+        switch (guiType)
+        {
             case INVENTORY:
                 this.y += 4;
                 this.iconU = 0;
@@ -54,16 +64,20 @@ public class GuiButtonPlayerInventoryTab extends GuiButtonTFC {
         this.textureV = 0;
         this.iconX = x + 1;
         this.iconY = y + 3;
-        if (isActive) {
+        if (isActive)
+        {
             this.textureU = 128;
-        } else {
+        }
+        else
+        {
             this.x -= 3;
             this.renderWidth += 3;
             this.textureU = 148;
         }
     }
 
-    public void updateGuiLeft(int newGuiLeft) {
+    public void updateGuiLeft(int newGuiLeft)
+    {
         // Update variables that use guiLeft as input
         x += newGuiLeft - guiLeft;
         iconX += newGuiLeft - guiLeft;
@@ -71,17 +85,21 @@ public class GuiButtonPlayerInventoryTab extends GuiButtonTFC {
         enabled = false;
     }
 
-    public boolean isActive() {
+    public boolean isActive()
+    {
         return isActive;
     }
 
-    public TFCGuiHandler.Type getGuiType() {
+    public TFCGuiHandler.Type getGuiType()
+    {
         return guiType;
     }
 
     @Override
-    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
-        if (this.visible) {
+    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks)
+    {
+        if (this.visible)
+        {
             GlStateManager.color(1, 1, 1, 1);
             mc.getTextureManager().bindTexture(BACKGROUND);
             hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;

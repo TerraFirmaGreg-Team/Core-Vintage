@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "SXS",
+    "SBS"
+  ],
+  "key": {
+    "X": {
+      "type": "forge:ore_dict",
+      "ore": "rodWroughtIron"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "cobblestone"
+    },
+    "W": {
+      "type": "forge:ore_dict",
+      "ore": "lumber"
+    },
+    "B": {
+      "item": "tfc:brass_mechanisms"
+    }
+  },
+  "result": {
+    "item": "minecraft:piston",
+    "count": 1
+  }
+}

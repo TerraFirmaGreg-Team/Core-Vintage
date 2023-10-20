@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BMB",
+    "MBM",
+    "BMB"
+  ],
+  "key": {
+    "M": {
+      "type": "forge:ore_dict",
+      "ore": "mortar"
+    },
+    "B": {
+      "item": "minecraft:brick"
+    }
+  },
+  "result": {
+    "item": "minecraft:brick_block",
+    "count": 2
+  }
+}

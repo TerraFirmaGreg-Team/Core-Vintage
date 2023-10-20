@@ -1,31 +1,42 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.module.core.api.util.Helpers;
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.Nonnull;
+import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-public class GuiButtonPage extends GuiButton implements IButtonTooltip {
-    private static final ResourceLocation ICONS = Helpers.getID("textures/gui/icons.png");
+public class GuiButtonPage extends GuiButton implements IButtonTooltip
+{
+    private static final ResourceLocation ICONS = new ResourceLocation(MOD_ID, "textures/gui/icons.png");
     private final Type type;
     private final String tooltip; // Lang key
 
-    public GuiButtonPage(int buttonId, int x, int y, Type type, String tooltip) {
+    public GuiButtonPage(int buttonId, int x, int y, Type type, String tooltip)
+    {
         super(buttonId, x, y, 14, 14, "");
         this.type = type;
         this.tooltip = tooltip;
     }
 
-    public GuiButtonPage(int buttonId, int x, int y, Type type) {
+    public GuiButtonPage(int buttonId, int x, int y, Type type)
+    {
         this(buttonId, x, y, type, null);
     }
 
     @Override
-    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
-        if (this.visible) {
+    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks)
+    {
+        if (this.visible)
+        {
             mc.getTextureManager().bindTexture(ICONS);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
@@ -39,31 +50,37 @@ public class GuiButtonPage extends GuiButton implements IButtonTooltip {
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip()
+    {
         return tooltip;
     }
 
     @Override
-    public boolean hasTooltip() {
+    public boolean hasTooltip()
+    {
         return tooltip != null;
     }
 
-    public enum Type {
+    public enum Type
+    {
         LEFT(0, 32),
         RIGHT(14, 32);
 
         private final int x, y;
 
-        Type(int x, int y) {
+        Type(int x, int y)
+        {
             this.x = x;
             this.y = y;
         }
 
-        public int getX() {
+        public int getX()
+        {
             return x;
         }
 
-        public int getY() {
+        public int getY()
+        {
             return y;
         }
     }

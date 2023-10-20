@@ -1,3 +1,8 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package net.dries007.tfc.util.interaction;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +19,7 @@ import net.minecraft.world.World;
  * @see InteractionManager
  */
 @FunctionalInterface
-public interface IRightClickBlockAction {
+public interface IRightClickBlockAction
+{
     EnumActionResult onRightClickBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing direction, float hitX, float hitY, float hitZ);
 }

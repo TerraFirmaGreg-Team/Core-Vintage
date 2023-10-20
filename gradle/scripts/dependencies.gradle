@@ -58,6 +58,9 @@ dependencies {
         compileOnly rfg.deobf("curse.maven:hwyla-253449:2568751")
         compileOnly rfg.deobf("curse.maven:patchouli-306770:3162874")
 
+        compileOnly files("libs/TerraFirmaCraft-MC1.12.2-1.7.23.181")
+        compileOnly files("libs/TerraFirmaCraft-MC1.12.2-1.7.23.181-deobf.jar")
+
         // CT
         compileOnly("curse.maven:crafttweaker-239197:4731280")
         compileOnly("curse.maven:mtlib-253211:3308160")

@@ -33,7 +33,7 @@ public class CTDrying {
 
             @Override
             public String describe() {
-                return "Adding Drying recipe " +recipe.getRegistryName().toString();
+                return "Adding Drying recipe " + recipe.getRegistryName().toString();
             }
         });
     }
@@ -43,7 +43,7 @@ public class CTDrying {
 
         DryingRecipe recipe = RegistriesFL.DRYING.getValue(new ResourceLocation(recipe_name));
 
-        if(recipe != null) {
+        if (recipe != null) {
             CraftTweakerAPI.apply(new IAction() {
                 @Override
                 public void apply() {
@@ -69,7 +69,7 @@ public class CTDrying {
                 .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
                 .forEach(removeList::add);
 
-        for(DryingRecipe recipe : removeList) {
+        for (DryingRecipe recipe : removeList) {
             CraftTweakerAPI.apply(new IAction() {
                 @Override
                 public void apply() {

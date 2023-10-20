@@ -1,7 +1,7 @@
 package com.eerussianguy.firmalife.render;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import com.eerussianguy.firmalife.registry.ItemsFL;
+import com.eerussianguy.firmalife.te.TETurntable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -15,36 +15,30 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import com.eerussianguy.firmalife.registry.ItemsFL;
-import com.eerussianguy.firmalife.te.TETurntable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @SideOnly(Side.CLIENT)
-public class TESRTurntable extends TileEntitySpecialRenderer<TETurntable>
-{
+public class TESRTurntable extends TileEntitySpecialRenderer<TETurntable> {
     public static final ItemStack[] ITEMS = {
-        new ItemStack(ItemsFL.getUnused(0)),
-        new ItemStack(ItemsFL.getUnused(1)),
-        new ItemStack(ItemsFL.getUnused(2)),
-        new ItemStack(ItemsFL.getUnused(3)),
-        new ItemStack(ItemsFL.getUnused(4))
+            new ItemStack(ItemsFL.getUnused(0)),
+            new ItemStack(ItemsFL.getUnused(1)),
+            new ItemStack(ItemsFL.getUnused(2)),
+            new ItemStack(ItemsFL.getUnused(3)),
+            new ItemStack(ItemsFL.getUnused(4))
     };
 
     @Override
-    public void render(TETurntable te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TETurntable te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
-        if (te.hasWorld())
-        {
+        if (te.hasWorld()) {
             IBlockState state = te.getWorld().getBlockState(te.getPos());
             IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
-            if (cap != null)
-            {
+            if (cap != null) {
                 ItemStack stack = cap.getStackInSlot(0);
-                if (!stack.isEmpty())
-                {
+                if (!stack.isEmpty()) {
                     GlStateManager.pushMatrix();
                     RenderHelper.enableStandardItemLighting();
 

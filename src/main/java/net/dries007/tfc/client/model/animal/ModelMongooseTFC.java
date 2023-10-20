@@ -5,9 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityMongooseTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +14,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityMongooseTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelMongooseTFC
@@ -25,8 +24,7 @@ import net.dries007.tfc.objects.entity.animal.EntityMongooseTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelMongooseTFC extends ModelBase
-{
+public class ModelMongooseTFC extends ModelBase {
     public ModelRenderer head;
     public ModelRenderer body;
     public ModelRenderer neck;
@@ -49,8 +47,7 @@ public class ModelMongooseTFC extends ModelBase
     public ModelRenderer legLFrontLower;
     public ModelRenderer legLFrontPaw;
 
-    public ModelMongooseTFC()
-    {
+    public ModelMongooseTFC() {
         textureWidth = 64;
         textureHeight = 32;
 
@@ -143,8 +140,7 @@ public class ModelMongooseTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         EntityMongooseTFC mongoose = ((EntityMongooseTFC) entity);
 
         float percent = (float) mongoose.getPercentToAdulthood();
@@ -168,8 +164,7 @@ public class ModelMongooseTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
         this.head.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
         this.legRFront.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
@@ -178,8 +173,7 @@ public class ModelMongooseTFC extends ModelBase
         this.legLBack.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
     }
 
-    private void setRotateAngle(ModelRenderer renderer, float x, float y, float z)
-    {
+    private void setRotateAngle(ModelRenderer renderer, float x, float y, float z) {
         renderer.rotateAngleX = x;
         renderer.rotateAngleY = y;
         renderer.rotateAngleZ = z;

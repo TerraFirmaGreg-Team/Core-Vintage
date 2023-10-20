@@ -1,10 +1,10 @@
 package com.eerussianguy.firmalife.compat.waila;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
+import com.eerussianguy.firmalife.recipe.DryingRecipe;
+import com.eerussianguy.firmalife.te.TELeafMat;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
+import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -13,30 +13,24 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import com.eerussianguy.firmalife.recipe.DryingRecipe;
-import com.eerussianguy.firmalife.te.TELeafMat;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.util.calendar.ICalendar;
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class LeafMatProvider implements IWailaBlock
-{
+public class LeafMatProvider implements IWailaBlock {
     @Nonnull
     @Override
-    public List<String> getTooltip(World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
+    public List<String> getTooltip(World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
         TileEntity te = world.getTileEntity(pos);
-        if (te instanceof TELeafMat)
-        {
+        if (te instanceof TELeafMat) {
             TELeafMat leafMat = (TELeafMat) te;
             ItemStack mainSlot = leafMat.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(0);
             DryingRecipe recipe = DryingRecipe.get(mainSlot);
-            if (!mainSlot.isEmpty() && recipe != null)
-            {
+            if (!mainSlot.isEmpty() && recipe != null) {
                 long remainingTicks = leafMat.getTicksRemaining();
-                switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode)
-                {
+                switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
                     case NONE:
                         break;
                     case TICKS:
@@ -58,8 +52,7 @@ public class LeafMatProvider implements IWailaBlock
 
     @Nonnull
     @Override
-    public List<Class<?>> getLookupClass()
-    {
+    public List<Class<?>> getLookupClass() {
         return Collections.singletonList(TELeafMat.class);
     }
 }

@@ -9,27 +9,21 @@ import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.ILockableContainer;
 
-public class TFCInventoryLargeChest extends InventoryLargeChest
-{
+public class TFCInventoryLargeChest extends InventoryLargeChest {
     private final ILockableContainer upperChest;
     private final ILockableContainer lowerChest;
 
-    public TFCInventoryLargeChest(String nameIn, ILockableContainer upperChestIn, ILockableContainer lowerChestIn)
-    {
+    public TFCInventoryLargeChest(String nameIn, ILockableContainer upperChestIn, ILockableContainer lowerChestIn) {
         super(nameIn, upperChestIn, lowerChestIn);
         this.upperChest = upperChestIn;
         this.lowerChest = lowerChestIn;
     }
 
     @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack)
-    {
-        if (index >= upperChest.getSizeInventory())
-        {
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        if (index >= upperChest.getSizeInventory()) {
             return lowerChest.isItemValidForSlot(index, stack);
-        }
-        else
-        {
+        } else {
             return upperChest.isItemValidForSlot(index, stack);
         }
     }

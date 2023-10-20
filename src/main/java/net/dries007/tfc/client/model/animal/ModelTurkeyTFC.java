@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityTurkeyTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,8 +15,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityTurkeyTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelTurkeyTFC
@@ -26,8 +25,7 @@ import net.dries007.tfc.objects.entity.animal.EntityTurkeyTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelTurkeyTFC extends ModelBase
-{
+public class ModelTurkeyTFC extends ModelBase {
     public ModelRenderer wingRMain;
     public ModelRenderer body;
     public ModelRenderer head;
@@ -76,8 +74,7 @@ public class ModelTurkeyTFC extends ModelBase
     public ModelRenderer tailsf10;
     public ModelRenderer tailsf11;
 
-    public ModelTurkeyTFC()
-    {
+    public ModelTurkeyTFC() {
         textureWidth = 64;
         textureHeight = 64;
 
@@ -282,8 +279,7 @@ public class ModelTurkeyTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
         EntityTurkeyTFC turkey = ((EntityTurkeyTFC) entity);
@@ -291,10 +287,8 @@ public class ModelTurkeyTFC extends ModelBase
         float percent = (float) turkey.getPercentToAdulthood();
         float ageScale = 2.0F - percent;
 
-        if (turkey.getGender() == EntityAnimalTFC.Gender.MALE)
-        {
-            if (percent < 0.5)
-            {
+        if (turkey.getGender() == EntityAnimalTFC.Gender.MALE) {
+            if (percent < 0.5) {
                 tails1.isHidden = true;
                 tails2.isHidden = true;
                 tails3.isHidden = true;
@@ -317,10 +311,7 @@ public class ModelTurkeyTFC extends ModelBase
                 tailsf9.isHidden = false;
                 tailsf10.isHidden = false;
                 tailsf11.isHidden = false;
-            }
-
-            else
-            {
+            } else {
                 tailFMain.isHidden = true;
                 tailsf1.isHidden = true;
                 tailsf2.isHidden = true;
@@ -334,9 +325,7 @@ public class ModelTurkeyTFC extends ModelBase
                 tailsf10.isHidden = true;
                 tailsf11.isHidden = true;
             }
-        }
-        else
-        {
+        } else {
             tails1.isHidden = true;
             tails2.isHidden = true;
             tails3.isHidden = true;
@@ -401,8 +390,7 @@ public class ModelTurkeyTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
         this.head.rotateAngleX = -(par5 / (180F / (float) Math.PI));
         this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
 
@@ -434,8 +422,7 @@ public class ModelTurkeyTFC extends ModelBase
         tails11.isHidden = false;
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

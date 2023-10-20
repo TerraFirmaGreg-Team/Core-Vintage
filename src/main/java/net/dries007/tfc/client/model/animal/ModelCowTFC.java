@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityCowTFC;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,21 +15,19 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityCowTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelCowTFC extends ModelQuadruped
-{
+public class ModelCowTFC extends ModelQuadruped {
     private final ModelRenderer udders;
     private final ModelRenderer horn1;
     private final ModelRenderer horn2;
     private final ModelRenderer horn1b;
     private final ModelRenderer horn2b;
 
-    public ModelCowTFC()
-    {
+    public ModelCowTFC() {
         super(12, 0.0F);
         this.head = new ModelRenderer(this, 0, 0);
         this.head.addBox(-4.0F, -4.0F, -6.0F, 8, 8, 6, 0.0F);
@@ -71,31 +68,25 @@ public class ModelCowTFC extends ModelQuadruped
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
         EntityCowTFC cow = ((EntityCowTFC) entity);
 
         float percent = (float) cow.getPercentToAdulthood();
         float ageScale = 2.0F - percent;
 
-        if (percent < 0.5)
-        {
+        if (percent < 0.5) {
             horn1.isHidden = true;
             horn2.isHidden = true;
-            if (percent < 0.75)
-            {
+            if (percent < 0.75) {
                 horn1b.isHidden = true;
                 horn2b.isHidden = true;
             }
         }
 
-        if (cow.getGender() == EntityAnimalTFC.Gender.MALE)
-        {
+        if (cow.getGender() == EntityAnimalTFC.Gender.MALE) {
             udders.isHidden = true;
-        }
-        else
-        {
+        } else {
             horn1b.isHidden = true;
             horn2b.isHidden = true;
         }
@@ -115,8 +106,7 @@ public class ModelCowTFC extends ModelQuadruped
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
         this.head.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
         this.body.rotateAngleX = (float) Math.PI / 2F;

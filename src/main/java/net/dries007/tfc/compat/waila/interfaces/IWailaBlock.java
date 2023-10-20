@@ -5,20 +5,19 @@
 
 package net.dries007.tfc.compat.waila.interfaces;
 
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Interfaces waila behavior to TOP and Hwyla
  */
-public interface IWailaBlock
-{
+public interface IWailaBlock {
     /**
      * Returns a list of tooltips to write on the Hwyla or TOP panel's body.
      *
@@ -28,8 +27,7 @@ public interface IWailaBlock
      * @return a List containing tooltips to write on the panel's body
      */
     @Nonnull
-    default List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
+    default List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
         return Collections.emptyList();
     }
 
@@ -42,8 +40,7 @@ public interface IWailaBlock
      * @return a List containing tooltips to write on the panel's head
      */
     @Nonnull
-    default String getTitle(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
+    default String getTitle(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
         return "";
     }
 
@@ -56,8 +53,7 @@ public interface IWailaBlock
      * @return a ItemStack to be shown at the side of the panel.
      */
     @Nonnull
-    default ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
+    default ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
         return ItemStack.EMPTY;
     }
 
@@ -74,8 +70,7 @@ public interface IWailaBlock
      *
      * @return true if you wish to override the name of the block you're looking at
      */
-    default boolean overrideTitle()
-    {
+    default boolean overrideTitle() {
         return false;
     }
 
@@ -84,8 +79,7 @@ public interface IWailaBlock
      *
      * @return true if you wish to append to the Hwyla tooltip
      */
-    default boolean appendBody()
-    {
+    default boolean appendBody() {
         return true;
     }
 
@@ -94,8 +88,7 @@ public interface IWailaBlock
      *
      * @return true if you wish to override the stack icon of the block you're looking at
      */
-    default boolean overrideIcon()
-    {
+    default boolean overrideIcon() {
         return false;
     }
 }

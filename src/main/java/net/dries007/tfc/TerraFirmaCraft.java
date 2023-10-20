@@ -5,22 +5,6 @@
 
 package net.dries007.tfc;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.dedicated.DedicatedServer;
-import net.minecraft.server.dedicated.PropertyManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.server.FMLServerHandler;
-
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -48,14 +32,28 @@ import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.DedicatedServer;
+import net.minecraft.server.dedicated.PropertyManager;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.server.FMLServerHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber
 @Mod(modid = MOD_ID, name = TerraFirmaCraft.MOD_NAME, useMetadata = true, guiFactory = Constants.GUI_FACTORY, dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
-public final class TerraFirmaCraft
-{
+public final class TerraFirmaCraft {
     public static final String MOD_ID = "tfc";
     public static final String MOD_NAME = "TerraFirmaCraft";
 
@@ -65,34 +63,8 @@ public final class TerraFirmaCraft
     @SidedProxy(modId = MOD_ID, clientSide = "net.dries007.tfc.proxy.ClientProxy", serverSide = "net.dries007.tfc.proxy.ServerProxy")
     private static IProxy PROXY = null;
 
-    static
-    {
+    static {
         FluidRegistry.enableUniversalBucket();
-    }
-
-    public static Logger getLog()
-    {
-        return INSTANCE.log;
-    }
-
-    public static IProxy getProxy()
-    {
-        return PROXY;
-    }
-
-    public static WorldTypeTFC getWorldType()
-    {
-        return INSTANCE.worldTypeTFC;
-    }
-
-    public static SimpleNetworkWrapper getNetwork()
-    {
-        return INSTANCE.network;
-    }
-
-    public static TerraFirmaCraft getInstance()
-    {
-        return INSTANCE;
     }
 
     private final Logger log = LogManager.getLogger(MOD_ID);
@@ -100,12 +72,30 @@ public final class TerraFirmaCraft
     private WorldTypeTFC worldTypeTFC;
     private SimpleNetworkWrapper network;
 
+    public static Logger getLog() {
+        return INSTANCE.log;
+    }
+
+    public static IProxy getProxy() {
+        return PROXY;
+    }
+
+    public static WorldTypeTFC getWorldType() {
+        return INSTANCE.worldTypeTFC;
+    }
+
+    public static SimpleNetworkWrapper getNetwork() {
+        return INSTANCE.network;
+    }
+
+    public static TerraFirmaCraft getInstance() {
+        return INSTANCE;
+    }
+
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         log.debug("If you can see this, debug logging is working :)");
-        if (!isSignedBuild)
-        {
+        if (!isSignedBuild) {
             log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
         }
 
@@ -147,17 +137,14 @@ public final class TerraFirmaCraft
         CapabilityMetalItem.preInit();
         CapabilityWorldTracker.preInit();
 
-        if (event.getSide().isClient())
-        {
+        if (event.getSide().isClient()) {
             ClientEvents.preInit();
         }
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-        if (!isSignedBuild)
-        {
+    public void init(FMLInitializationEvent event) {
+        if (!isSignedBuild) {
             log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
         }
 
@@ -166,21 +153,16 @@ public final class TerraFirmaCraft
         CapabilityFood.init();
         TFCTriggers.init();
 
-        if (event.getSide().isClient())
-        {
+        if (event.getSide().isClient()) {
             TFCKeybindings.init();
             // Enable overlay to render health, thirst and hunger bars, TFC style.
             // Also renders animal familiarity
             MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
-        }
-        else
-        {
+        } else {
             MinecraftServer server = FMLServerHandler.instance().getServer();
-            if (server instanceof DedicatedServer)
-            {
+            if (server instanceof DedicatedServer) {
                 PropertyManager settings = ((DedicatedServer) server).settings;
-                if (ConfigTFC.General.OVERRIDES.forceTFCWorldType)
-                {
+                if (ConfigTFC.General.OVERRIDES.forceTFCWorldType) {
                     // This is called before vanilla defaults it, meaning we intercept it's default with ours
                     // However, we can't actually set this due to fears of overriding the existing world
                     TerraFirmaCraft.getLog().info("Setting default level-type to `tfc_classic`");
@@ -196,17 +178,14 @@ public final class TerraFirmaCraft
         CapabilityMetalItem.init();
 
         FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "net.dries007.tfc.compat.waila.TOPPlugin");
-        if (Loader.isModLoaded("patchouli"))
-        {
+        if (Loader.isModLoaded("patchouli")) {
             TFCPatchouliPlugin.init();
         }
     }
 
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        if (!isSignedBuild)
-        {
+    public void postInit(FMLPostInitializationEvent event) {
+        if (!isSignedBuild) {
             log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
         }
         FuelManager.postInit();
@@ -214,18 +193,15 @@ public final class TerraFirmaCraft
     }
 
     @Mod.EventHandler
-    public void onLoadComplete(FMLLoadCompleteEvent event)
-    {
+    public void onLoadComplete(FMLLoadCompleteEvent event) {
         // This is the latest point that we can possibly stop creating non-decaying stacks on both server + client
         // It should be safe to use as we're only using it internally
         FoodHandler.setNonDecaying(false);
     }
 
     @Mod.EventHandler
-    public void onServerStarting(FMLServerStartingEvent event)
-    {
-        if (!isSignedBuild)
-        {
+    public void onServerStarting(FMLServerStartingEvent event) {
+        if (!isSignedBuild) {
             log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
         }
 

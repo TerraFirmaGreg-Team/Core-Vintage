@@ -5,9 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityDireWolfTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +14,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityDireWolfTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelDireWolfTFC
@@ -25,8 +24,7 @@ import net.dries007.tfc.objects.entity.animal.EntityDireWolfTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelDireWolfTFC extends ModelBase
-{
+public class ModelDireWolfTFC extends ModelBase {
     public ModelRenderer frontRLegTop;
     public ModelRenderer backBody;
     public ModelRenderer head;
@@ -62,8 +60,7 @@ public class ModelDireWolfTFC extends ModelBase
     public ModelRenderer neckManeLower2;
 
 
-    public ModelDireWolfTFC()
-    {
+    public ModelDireWolfTFC() {
         textureWidth = 88;
         textureHeight = 88;
 
@@ -213,8 +210,7 @@ public class ModelDireWolfTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
         EntityDireWolfTFC direwolf = ((EntityDireWolfTFC) entity);
@@ -242,8 +238,7 @@ public class ModelDireWolfTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         setRotateAngle(head, f4 / (180F / (float) Math.PI), f3 / (180F / (float) Math.PI), 0F);
         //setRotateAngle(neckMane1, f4 / (1.5F * (180F / (float) Math.PI)) + -0.47123889803846897F, f3 / (1.5F * (180F / (float) Math.PI)), 0F);
         //setRotateAngle(neckManeLower1, f4 / (1.5F * (180F / (float) Math.PI)) + 0.3141592653589793F, f3 / (1.5F * (180F / (float) Math.PI)), 0F);
@@ -254,8 +249,7 @@ public class ModelDireWolfTFC extends ModelBase
         backLLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

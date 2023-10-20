@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.render;
 
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.objects.te.TEQuern;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -17,27 +17,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.lwjgl.opengl.GL11;
 
-import net.dries007.tfc.objects.te.TEQuern;
-
-public class TESRQuern extends TileEntitySpecialRenderer<TEQuern>
-{
+public class TESRQuern extends TileEntitySpecialRenderer<TEQuern> {
     @Override
-    public void render(TEQuern te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TEQuern te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
         IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (cap != null)
-        {
+        if (cap != null) {
             ItemStack input = cap.getStackInSlot(TEQuern.SLOT_INPUT);
             ItemStack output = cap.getStackInSlot(TEQuern.SLOT_OUTPUT);
             ItemStack handstone = cap.getStackInSlot(TEQuern.SLOT_HANDSTONE);
 
-            if (!output.isEmpty())
-            {
-                for (int i = 0; i < output.getCount(); i++)
-                {
+            if (!output.isEmpty()) {
+                for (int i = 0; i < output.getCount(); i++) {
                     double yPos = y + 0.625;
                     GlStateManager.enableRescaleNormal();
                     GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
@@ -46,37 +40,31 @@ public class TESRQuern extends TileEntitySpecialRenderer<TEQuern>
                     GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
                     GlStateManager.pushMatrix();
 
-                    switch (Math.floorDiv(i, 16))
-                    {
-                        case 0:
-                        {
+                    switch (Math.floorDiv(i, 16)) {
+                        case 0: {
                             GlStateManager.translate(x + 0.125, yPos, z + 0.125 + (0.046875 * i));
                             GlStateManager.rotate(75, 1, 0, 0);
                             break;
                         }
-                        case 1:
-                        {
+                        case 1: {
                             GlStateManager.translate(x + 0.125 + (0.046875 * (i - 16)), yPos, z + 0.875);
                             GlStateManager.rotate(90, 0, 1, 0);
                             GlStateManager.rotate(75, 1, 0, 0);
                             break;
                         }
-                        case 2:
-                        {
+                        case 2: {
                             GlStateManager.translate(x + 0.875, yPos, z + 0.875 - (0.046875 * (i - 32)));
                             GlStateManager.rotate(180, 0, 1, 0);
                             GlStateManager.rotate(75, 1, 0, 0);
                             break;
                         }
-                        case 3:
-                        {
+                        case 3: {
                             GlStateManager.translate(x + 0.875 - (0.046875 * (i - 48)), yPos, z + 0.125);
                             GlStateManager.rotate(270, 0, 1, 0);
                             GlStateManager.rotate(75, 1, 0, 0);
                             break;
                         }
-                        default:
-                        {
+                        default: {
                             GlStateManager.translate(x + 0.5, y + 1.0, z + 0.5);
                             GlStateManager.rotate((te.getWorld().getTotalWorldTime() + partialTicks) * 4, 0, 1, 0);
                         }
@@ -96,8 +84,7 @@ public class TESRQuern extends TileEntitySpecialRenderer<TEQuern>
                 }
             }
 
-            if (!handstone.isEmpty())
-            {
+            if (!handstone.isEmpty()) {
                 int rotationTicks = te.getRotationTimer();
                 double center = (rotationTicks > 0) ? 0.497 + (te.getWorld().rand.nextDouble() * 0.006) : 0.5;
 
@@ -109,8 +96,7 @@ public class TESRQuern extends TileEntitySpecialRenderer<TEQuern>
                 GlStateManager.pushMatrix();
                 GlStateManager.translate(x + center, y + 0.75, z + center);
 
-                if (rotationTicks > 0)
-                {
+                if (rotationTicks > 0) {
                     GlStateManager.rotate((rotationTicks - partialTicks) * 4, 0, 1, 0);
                 }
 
@@ -126,8 +112,7 @@ public class TESRQuern extends TileEntitySpecialRenderer<TEQuern>
                 GlStateManager.disableBlend();
             }
 
-            if (!input.isEmpty())
-            {
+            if (!input.isEmpty()) {
                 double height = (handstone.isEmpty()) ? 0.75 : 0.875;
                 GlStateManager.enableRescaleNormal();
                 GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);

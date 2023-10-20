@@ -5,10 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,22 +17,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
 
-public class BlockBookshelfTFC extends Block
-{
+public class BlockBookshelfTFC extends Block {
     private static final Map<Tree, BlockBookshelfTFC> MAP = new HashMap<>();
-
-    public static BlockBookshelfTFC get(Tree wood)
-    {
-        return MAP.get(wood);
-    }
-
     public final Tree wood;
 
-    public BlockBookshelfTFC(Tree wood)
-    {
+    public BlockBookshelfTFC(Tree wood) {
         super(Material.WOOD);
         if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
         this.wood = wood;
@@ -47,17 +38,19 @@ public class BlockBookshelfTFC extends Block
         Blocks.FIRE.setFireInfo(this, 30, 20);
     }
 
+    public static BlockBookshelfTFC get(Tree wood) {
+        return MAP.get(wood);
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public BlockRenderLayer getRenderLayer()
-    {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override
-    public float getEnchantPowerBonus(World world, BlockPos pos)
-    {
+    public float getEnchantPowerBonus(World world, BlockPos pos) {
         return 1.0F; // Same as vanilla
     }
 }

@@ -5,9 +5,10 @@
 
 package net.dries007.tfc.client.render;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.objects.te.TEFirePit;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -24,11 +25,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.lwjgl.opengl.GL11;
 
-import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.te.TEFirePit;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.objects.te.TEFirePit.SLOT_EXTRA_INPUT_END;
 import static net.dries007.tfc.objects.te.TEFirePit.SLOT_EXTRA_INPUT_START;
@@ -38,16 +37,13 @@ import static net.dries007.tfc.objects.te.TEFirePit.SLOT_EXTRA_INPUT_START;
  */
 @ParametersAreNonnullByDefault
 @SideOnly(Side.CLIENT)
-public class TESRFirePit extends TileEntitySpecialRenderer<TEFirePit>
-{
+public class TESRFirePit extends TileEntitySpecialRenderer<TEFirePit> {
     @Override
-    public void render(TEFirePit te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TEFirePit te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
         // Rendering liquid in the soup pot
-        if (te.getCookingPotStage() != TEFirePit.CookingPotStage.EMPTY)
-        {
+        if (te.getCookingPotStage() != TEFirePit.CookingPotStage.EMPTY) {
             Fluid water = FluidsTFC.FRESH_WATER.get();
 
             GlStateManager.pushMatrix();
@@ -66,8 +62,7 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TEFirePit>
             float b = (color & 0xFF) / 255F;
             float a = ((color >> 24) & 0xFF) / 255F;
 
-            if (te.getCookingPotStage() == TEFirePit.CookingPotStage.FINISHED)
-            {
+            if (te.getCookingPotStage() == TEFirePit.CookingPotStage.FINISHED) {
                 b = 0;
                 g /= 4;
                 r *= 3;
@@ -92,14 +87,11 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TEFirePit>
             GlStateManager.popMatrix();
         }
         // Render food on the grill
-        if (te.hasWorld())
-        {
+        if (te.hasWorld()) {
             IBlockState state = te.getWorld().getBlockState(te.getPos());
-            if (state.getBlock() instanceof BlockFirePit && state.getValue(BlockFirePit.ATTACHMENT) == BlockFirePit.FirePitAttachment.GRILL)
-            {
+            if (state.getBlock() instanceof BlockFirePit && state.getValue(BlockFirePit.ATTACHMENT) == BlockFirePit.FirePitAttachment.GRILL) {
                 IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (cap != null)
-                {
+                if (cap != null) {
                     int rotation = te.getBlockMetadata();
                     if (state.getValue(BlockFirePit.LIT))
                         rotation -= 1;
@@ -112,11 +104,9 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TEFirePit>
                     GlStateManager.rotate(90f * rotation, 0f, 0f, 1f);
                     float leftTranslate = 1.1F;
 
-                    for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++)
-                    {
+                    for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++) {
                         ItemStack item = cap.getStackInSlot(i);
-                        if (!item.isEmpty())
-                        {
+                        if (!item.isEmpty()) {
                             Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
                         }
 

@@ -5,9 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityBoarTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +14,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityBoarTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 
 /**
@@ -26,8 +25,7 @@ import net.dries007.tfc.objects.entity.animal.EntityBoarTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelBoarTFC extends ModelBase
-{
+public class ModelBoarTFC extends ModelBase {
     public ModelRenderer legLBackTop;
     public ModelRenderer legLFrontTop;
     public ModelRenderer body;
@@ -76,8 +74,7 @@ public class ModelBoarTFC extends ModelBase
     public ModelRenderer legRBackBottom;
     public ModelRenderer legRBackHoof;
 
-    public ModelBoarTFC()
-    {
+    public ModelBoarTFC() {
         textureWidth = 86;
         textureHeight = 64;
 
@@ -319,16 +316,14 @@ public class ModelBoarTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         EntityBoarTFC hog = ((EntityBoarTFC) entity);
 
         float percent = (float) hog.getPercentToAdulthood();
         float ageScale = 2.0F - percent;
 
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
-        if (!hog.isChild())
-        {
+        if (!hog.isChild()) {
             tuskL1.isHidden = true;
             tuskR1.isHidden = true;
         }
@@ -348,8 +343,7 @@ public class ModelBoarTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
         tuskR1.isHidden = true;
         tuskL1.isHidden = true;
 
@@ -361,8 +355,7 @@ public class ModelBoarTFC extends ModelBase
         this.legLBackTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

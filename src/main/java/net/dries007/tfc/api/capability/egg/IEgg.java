@@ -5,10 +5,7 @@
 
 package net.dries007.tfc.api.capability.egg;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -19,14 +16,15 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Capability for egg item
  * Allows egg to be fertilized, how long till hatching and also which entity will be born
  */
-public interface IEgg extends INBTSerializable<NBTTagCompound>
-{
+public interface IEgg extends INBTSerializable<NBTTagCompound> {
     /**
      * returns the day which this egg will hatch into the entity
      *
@@ -65,18 +63,13 @@ public interface IEgg extends INBTSerializable<NBTTagCompound>
      * @param text  the tooltip
      */
     @SideOnly(Side.CLIENT)
-    default void addEggInfo(@Nonnull ItemStack stack, @Nonnull List<String> text)
-    {
-        if (isFertilized())
-        {
+    default void addEggInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+        if (isFertilized()) {
             long remainingDays = this.getHatchDay() - CalendarTFC.PLAYER_TIME.getTotalDays();
             text.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.fertilized"));
-            if (remainingDays > 0)
-            {
+            if (remainingDays > 0) {
                 text.add(I18n.format("tfc.tooltip.egg_hatch", remainingDays));
-            }
-            else
-            {
+            } else {
                 text.add(I18n.format("tfc.tooltip.egg_hatch_today"));
             }
         }

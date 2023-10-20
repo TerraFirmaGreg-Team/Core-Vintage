@@ -5,9 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityCoyoteTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +14,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityCoyoteTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelCoyoteTFC
@@ -25,8 +24,7 @@ import net.dries007.tfc.objects.entity.animal.EntityCoyoteTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelCoyoteTFC extends ModelBase
-{
+public class ModelCoyoteTFC extends ModelBase {
     public ModelRenderer frontRLegTop;
     public ModelRenderer backBody;
     public ModelRenderer head;
@@ -61,8 +59,7 @@ public class ModelCoyoteTFC extends ModelBase
     public ModelRenderer frontLLegBottom;
     public ModelRenderer frontLLegPaw;
 
-    public ModelCoyoteTFC()
-    {
+    public ModelCoyoteTFC() {
         textureWidth = 64;
         textureHeight = 64;
 
@@ -225,8 +222,7 @@ public class ModelCoyoteTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
         EntityCoyoteTFC coyote = ((EntityCoyoteTFC) entity);
@@ -254,8 +250,7 @@ public class ModelCoyoteTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         setRotateAngle(head, f4 / (180F / (float) Math.PI), f3 / (180F / (float) Math.PI), 0F);
         setRotateAngle(neck, f4 / (1.5F * (180F / (float) Math.PI)) + -0.7853981633974483F, f3 / (1.5F * (180F / (float) Math.PI)), 0F);
 
@@ -265,8 +260,7 @@ public class ModelCoyoteTFC extends ModelBase
         backLLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

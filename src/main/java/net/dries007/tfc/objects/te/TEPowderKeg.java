@@ -5,10 +5,12 @@
 
 package net.dries007.tfc.objects.te;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.objects.blocks.BlockPowderKeg;
+import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
+import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.util.PowderKegExplosion;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -25,12 +27,9 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.blocks.BlockPowderKeg;
-import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
-import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.PowderKegExplosion;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.objects.blocks.BlockPowderKeg.SEALED;
 
@@ -38,16 +37,14 @@ import static net.dries007.tfc.objects.blocks.BlockPowderKeg.SEALED;
  * @see BlockPowderKeg
  */
 @ParametersAreNonnullByDefault
-public class TEPowderKeg extends TETickableInventory implements IItemHandlerSidedCallback
-{
+public class TEPowderKeg extends TETickableInventory implements IItemHandlerSidedCallback {
     private boolean sealed;
     private int fuse = -1;
 
     private boolean isLit = false;
     private EntityLivingBase igniter;
 
-    public TEPowderKeg()
-    {
+    public TEPowderKeg() {
         super(new ItemStackHandler(12));
     }
 
@@ -57,8 +54,7 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
      *
      * @param nbt The NBTTagCompound to load from.
      */
-    public void readFromItemTag(NBTTagCompound nbt)
-    {
+    public void readFromItemTag(NBTTagCompound nbt) {
         inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
         sealed = nbt.getBoolean("sealed");
         markForSync();
@@ -69,79 +65,64 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
      * On servers, this is the earliest point in time to safely access the TE's World object.
      */
     @Override
-    public void onLoad()
-    {
-        if (!world.isRemote)
-        {
+    public void onLoad() {
+        if (!world.isRemote) {
             sealed = world.getBlockState(pos).getValue(SEALED);
         }
     }
 
     @Override
-    public boolean canInsert(int slot, ItemStack stack, EnumFacing side)
-    {
+    public boolean canInsert(int slot, ItemStack stack, EnumFacing side) {
         return !world.getBlockState(pos).getValue(SEALED) && isItemValid(slot, stack);
     }
 
     @Override
-    public boolean canExtract(int slot, EnumFacing side)
-    {
+    public boolean canExtract(int slot, EnumFacing side) {
         return !sealed;
     }
 
-    public boolean isSealed()
-    {
+    public boolean isSealed() {
         return sealed;
     }
 
-    public void setSealed(boolean sealed)
-    {
+    public void setSealed(boolean sealed) {
         this.sealed = sealed;
         markForSync();
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
+    public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         sealed = nbt.getBoolean("sealed");
     }
 
     @Override
     @Nonnull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-    {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setBoolean("sealed", sealed);
         return super.writeToNBT(nbt);
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
-    {
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
-    {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-        {
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return (T) new ItemHandlerSidedWrapper(this, inventory, facing);
         }
         return super.getCapability(capability, facing);
     }
 
     @Override
-    public void onBreakBlock(World world, BlockPos pos, IBlockState state)
-    {
-        if (!state.getValue(SEALED))
-        {
+    public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
+        if (!state.getValue(SEALED)) {
             // Not sealed, so empty contents normally
             super.onBreakBlock(world, pos, state);
-        }
-        else
-        {
+        } else {
             // Need to create the full keg and drop it now
             ItemStack stack = getItemStack(state);
             InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
@@ -149,46 +130,36 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
     }
 
     @Override
-    public boolean isItemValid(int slot, ItemStack stack)
-    {
+    public boolean isItemValid(int slot, ItemStack stack) {
         return OreDictionaryHelper.doesStackMatchOre(stack, "gunpowder");
     }
 
-    public void setIgniter(@Nullable EntityLivingBase igniterIn)
-    {
+    public void setIgniter(@Nullable EntityLivingBase igniterIn) {
         igniter = igniterIn;
     }
 
-    public int getStrength()
-    {
+    public int getStrength() {
         int count = 0;
-        for (int i = 0; i < inventory.getSlots(); i++)
-        {
+        for (int i = 0; i < inventory.getSlots(); i++) {
             count += inventory.getStackInSlot(i).getCount();
         }
         return count / 12;
     }
 
-    public int getFuse()
-    {
+    public int getFuse() {
         return fuse;
     }
 
-    public boolean isLit()
-    {
+    public boolean isLit() {
         return isLit;
     }
 
-    public void setLit(boolean lit)
-    {
+    public void setLit(boolean lit) {
         isLit = lit;
-        if (lit)
-        {
+        if (lit) {
             world.playSound(null, pos.getX(), pos.getY() + 0.5D, pos.getZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.33F);
             fuse = 80;
-        }
-        else
-        {
+        } else {
             world.playSound(null, pos.getX(), pos.getY() + 0.5D, pos.getZ(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.6f + Constants.RNG.nextFloat() * 0.4f);
             fuse = -1;
         }
@@ -196,17 +167,13 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
     }
 
     @Override
-    public void update()
-    {
-        if (isLit)
-        {
+    public void update() {
+        if (isLit) {
             --fuse;
 
-            if (fuse <= 0)
-            {
+            if (fuse <= 0) {
                 world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
-                if (!this.world.isRemote)
-                {
+                if (!this.world.isRemote) {
                     explode();
                 }
             }
@@ -214,8 +181,7 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
         super.update();
     }
 
-    public ItemStack getItemStack(IBlockState state)
-    {
+    public ItemStack getItemStack(IBlockState state) {
         ItemStack stack = new ItemStack(state.getBlock());
         stack.setTagCompound(getItemTag());
         return stack;
@@ -227,20 +193,17 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
      *
      * @return An NBTTagCompound containing inventory and tank data.
      */
-    private NBTTagCompound getItemTag()
-    {
+    private NBTTagCompound getItemTag() {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setTag("inventory", inventory.serializeNBT());
         nbt.setBoolean("sealed", sealed);
         return nbt;
     }
 
-    private void explode()
-    {
+    private void explode() {
         // world.createExplosion(igniter, pos.getX(), pos.getY(), pos.getZ(), getStrength(), true);
         PowderKegExplosion explosion = new PowderKegExplosion(world, igniter, pos.getX(), pos.getY(), pos.getZ(), getStrength());
-        if (ForgeEventFactory.onExplosionStart(world, explosion))
-        {
+        if (ForgeEventFactory.onExplosionStart(world, explosion)) {
             return;
         }
         explosion.doExplosionA();

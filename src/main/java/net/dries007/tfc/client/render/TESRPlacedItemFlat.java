@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -13,14 +14,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-
 @SideOnly(Side.CLIENT)
-public class TESRPlacedItemFlat extends TileEntitySpecialRenderer<TEPlacedItemFlat>
-{
+public class TESRPlacedItemFlat extends TileEntitySpecialRenderer<TEPlacedItemFlat> {
     @Override
-    public void render(TEPlacedItemFlat te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TEPlacedItemFlat te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         ItemStack stack = te.getStack();
         byte rotation = te.getRotation();
         GlStateManager.pushMatrix();

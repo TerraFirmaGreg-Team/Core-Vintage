@@ -5,8 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -17,8 +17,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Need this for not insta-growing
@@ -26,8 +25,7 @@ import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
  */
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelWolfTFC extends ModelBase
-{
+public class ModelWolfTFC extends ModelBase {
     /**
      * main box for the wolf head
      */
@@ -61,8 +59,7 @@ public class ModelWolfTFC extends ModelBase
      */
     ModelRenderer wolfMane;
 
-    public ModelWolfTFC()
-    {
+    public ModelWolfTFC() {
         this.wolfHeadMain = new ModelRenderer(this, 0, 0);
         this.wolfHeadMain.addBox(-2.0F, -3.0F, -2.0F, 6, 6, 4, 0.0F);
         this.wolfHeadMain.setRotationPoint(-1.0F, 13.5F, -7.0F);
@@ -96,17 +93,14 @@ public class ModelWolfTFC extends ModelBase
      * Sets the models various rotation angles then renders the model.
      */
     @Override
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
 
-        if (((EntityAnimal) entityIn).isChild())
-        {
+        if (((EntityAnimal) entityIn).isChild()) {
             double ageScale = 1;
             double percent = 1;
-            if (entityIn instanceof IAnimalTFC)
-            {
+            if (entityIn instanceof IAnimalTFC) {
                 percent = ((IAnimalTFC) entityIn).getPercentToAdulthood();
                 ageScale = 1 / (2.0D - percent);
             }
@@ -130,8 +124,7 @@ public class ModelWolfTFC extends ModelBase
      * "far" arms and legs can swing at most.
      */
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
-    {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
         this.wolfHeadMain.rotateAngleX = headPitch * 0.017453292F;
         this.wolfHeadMain.rotateAngleY = netHeadYaw * 0.017453292F;
@@ -143,21 +136,16 @@ public class ModelWolfTFC extends ModelBase
      * and third as in the setRotationAngles method.
      */
     @Override
-    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
-    {
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         EntityWolfTFC entitywolf = (EntityWolfTFC) entitylivingbaseIn;
 
-        if (entitywolf.isAngry())
-        {
+        if (entitywolf.isAngry()) {
             this.wolfTail.rotateAngleY = 0.0F;
-        }
-        else
-        {
+        } else {
             this.wolfTail.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         }
 
-        if (entitywolf.isSitting())
-        {
+        if (entitywolf.isSitting()) {
             this.wolfMane.setRotationPoint(-1.0F, 16.0F, -3.0F);
             this.wolfMane.rotateAngleX = ((float) Math.PI * 2F / 5F);
             this.wolfMane.rotateAngleY = 0.0F;
@@ -172,9 +160,7 @@ public class ModelWolfTFC extends ModelBase
             this.wolfLeg3.setRotationPoint(-2.49F, 17.0F, -4.0F);
             this.wolfLeg4.rotateAngleX = 5.811947F;
             this.wolfLeg4.setRotationPoint(0.51F, 17.0F, -4.0F);
-        }
-        else
-        {
+        } else {
             this.wolfBody.setRotationPoint(0.0F, 14.0F, 2.0F);
             this.wolfBody.rotateAngleX = ((float) Math.PI / 2F);
             this.wolfMane.setRotationPoint(-1.0F, 14.0F, -3.0F);

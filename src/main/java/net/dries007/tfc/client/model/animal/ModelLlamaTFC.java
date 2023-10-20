@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +15,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelLlamaTFC
@@ -25,13 +24,11 @@ import net.dries007.tfc.api.types.IAnimalTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelLlamaTFC extends ModelQuadruped
-{
+public class ModelLlamaTFC extends ModelQuadruped {
     private final ModelRenderer chest1;
     private final ModelRenderer chest2;
 
-    public ModelLlamaTFC(float scale)
-    {
+    public ModelLlamaTFC(float scale) {
         super(15, scale);
         this.textureWidth = 128;
         this.textureHeight = 64;
@@ -78,18 +75,15 @@ public class ModelLlamaTFC extends ModelQuadruped
     }
 
     @Override
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         AbstractChestHorse abstractchesthorse = (AbstractChestHorse) entityIn;
         boolean flag = !abstractchesthorse.isChild() && abstractchesthorse.hasChest();
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
 
-        if (((EntityAnimal) entityIn).isChild())
-        {
+        if (((EntityAnimal) entityIn).isChild()) {
             double ageScale = 1;
             double percent = 1;
-            if (entityIn instanceof IAnimalTFC)
-            {
+            if (entityIn instanceof IAnimalTFC) {
                 percent = ((IAnimalTFC) entityIn).getPercentToAdulthood();
                 ageScale = 1 / (2.0D - percent);
             }
@@ -108,8 +102,7 @@ public class ModelLlamaTFC extends ModelQuadruped
         this.leg4.render(scale);
         GlStateManager.popMatrix();
 
-        if (flag)
-        {
+        if (flag) {
             this.chest1.render(scale);
             this.chest2.render(scale);
         }

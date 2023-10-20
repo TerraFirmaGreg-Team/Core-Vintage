@@ -1,8 +1,8 @@
 package tfcflorae.client.render;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.util.agriculture.FruitTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;
@@ -12,26 +12,18 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
-import net.dries007.tfc.objects.te.TEChestTFC;
-import net.dries007.tfc.util.agriculture.FruitTree;
-
-import tfcflorae.api.registries.TFCFRegistries;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitChestTFCF;
 import tfcflorae.objects.te.TEFruitChest;
 import tfcflorae.types.TreesTFCF;
-import tfcflorae.util.agriculture.SeasonalTrees;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static tfcflorae.TFCFlorae.MODID;
 
 @SideOnly(Side.CLIENT)
-public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest>
-{
+public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest> {
     private static final Map<IFruitTree, ResourceLocation> SINGLE_TEXTURES = new HashMap<>();
     private static final Map<IFruitTree, ResourceLocation> DOUBLE_TEXTURES = new HashMap<>();
     private static final Map<IFruitTree, ResourceLocation> TRAP_SINGLE_TEXTURES = new HashMap<>();
@@ -42,8 +34,7 @@ public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest>
     private static final Map<Tree, ResourceLocation> TRAP_SINGLE_TEXTURES_TREE = new HashMap<>();
     private static final Map<Tree, ResourceLocation> TRAP_DOUBLE_TEXTURES_TREE = new HashMap<>();
 
-    static
-    {
+    static {
         /*for (SeasonalTrees fruitTree : SeasonalTrees.values())
         {
             String name = fruitTree.getName().toLowerCase();
@@ -55,8 +46,7 @@ public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest>
             TRAP_DOUBLE_TEXTURES.put(fruitTree, new ResourceLocation(MODID, "textures/entity/wood/fruit_tree/chests/chest_trap_double/" + name + ".png"));
         }*/
 
-        for (IFruitTree fruitTree : FruitTree.values())
-        {
+        for (IFruitTree fruitTree : FruitTree.values()) {
             String name = fruitTree.getName().toLowerCase();
 
             //noinspection ConstantConditions
@@ -66,8 +56,7 @@ public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest>
             TRAP_DOUBLE_TEXTURES.put(fruitTree, new ResourceLocation(MODID, "textures/entity/wood/fruit_tree/chests/chest_trap_double/" + name + ".png"));
         }
 
-        for (int i = 0; i < BlocksTFCF.bamboo.length; i++)
-        {
+        for (int i = 0; i < BlocksTFCF.bamboo.length; i++) {
             SINGLE_TEXTURES_TREE.put(BlocksTFCF.bambooTrees[i], new ResourceLocation(MODID, "textures/entity/chests/chest/" + BlocksTFCF.bamboo[i] + ".png"));
             DOUBLE_TEXTURES_TREE.put(BlocksTFCF.bambooTrees[i], new ResourceLocation(MODID, "textures/entity/chests/chest_double/" + BlocksTFCF.bamboo[i] + ".png"));
             TRAP_SINGLE_TEXTURES_TREE.put(BlocksTFCF.bambooTrees[i], new ResourceLocation(MODID, "textures/entity/chests/chest_trap/" + BlocksTFCF.bamboo[i] + ".png"));
@@ -89,8 +78,7 @@ public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest>
     private final ModelChest largeChest = new ModelLargeChest();
 
     @Override
-    public void render(TEFruitChest te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TEFruitChest te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.enableDepth();
         GlStateManager.depthFunc(515);
         GlStateManager.depthMask(true);
@@ -98,15 +86,13 @@ public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest>
         IFruitTree wood = null;
         Tree tree = null;
 
-        if (te.hasWorld())
-        {
+        if (te.hasWorld()) {
             Block block = te.getBlockType();
             meta = te.getBlockMetadata();
             wood = te.getWood();
             tree = te.getTree();
 
-            if (block instanceof BlockFruitChestTFCF && meta == 0)
-            {
+            if (block instanceof BlockFruitChestTFCF && meta == 0) {
                 ((BlockFruitChestTFCF) block).checkForSurroundingChests(te.getWorld(), te.getPos(), te.getWorld().getBlockState(te.getPos()));
                 meta = te.getBlockMetadata();
             }
@@ -117,63 +103,42 @@ public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest>
         if (te.adjacentChestZNeg != null || te.adjacentChestXNeg != null) return;
 
         ModelChest modelchest;
-        if (te.adjacentChestXPos == null && te.adjacentChestZPos == null)
-        {
+        if (te.adjacentChestXPos == null && te.adjacentChestZPos == null) {
             modelchest = simpleChest;
 
-            if (destroyStage >= 0)
-            {
+            if (destroyStage >= 0) {
                 bindTexture(DESTROY_STAGES[destroyStage]);
                 GlStateManager.matrixMode(5890);
                 GlStateManager.pushMatrix();
                 GlStateManager.scale(4.0F, 4.0F, 1.0F);
                 GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
                 GlStateManager.matrixMode(5888);
-            }
-            else if (te.getChestType() == BlockChest.Type.TRAP && wood != null)
-            {
+            } else if (te.getChestType() == BlockChest.Type.TRAP && wood != null) {
                 bindTexture(TRAP_SINGLE_TEXTURES.get(wood));
-            }
-            else if (wood != null)
-            {
+            } else if (wood != null) {
                 bindTexture(SINGLE_TEXTURES.get(wood));
-            }
-            else if (te.getChestType() == BlockChest.Type.TRAP && tree != null)
-            {
+            } else if (te.getChestType() == BlockChest.Type.TRAP && tree != null) {
                 bindTexture(TRAP_SINGLE_TEXTURES_TREE.get(tree));
-            }
-            else if (tree != null)
-            {
+            } else if (tree != null) {
                 bindTexture(SINGLE_TEXTURES_TREE.get(tree));
             }
-        }
-        else
-        {
+        } else {
             modelchest = largeChest;
 
-            if (destroyStage >= 0)
-            {
+            if (destroyStage >= 0) {
                 bindTexture(DESTROY_STAGES[destroyStage]);
                 GlStateManager.matrixMode(5890);
                 GlStateManager.pushMatrix();
                 GlStateManager.scale(8.0F, 4.0F, 1.0F);
                 GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
                 GlStateManager.matrixMode(5888);
-            }
-            else if (te.getChestType() == BlockChest.Type.TRAP && wood != null)
-            {
+            } else if (te.getChestType() == BlockChest.Type.TRAP && wood != null) {
                 bindTexture(TRAP_DOUBLE_TEXTURES.get(wood));
-            }
-            else if (wood != null)
-            {
+            } else if (wood != null) {
                 bindTexture(DOUBLE_TEXTURES.get(wood));
-            }
-            else if (te.getChestType() == BlockChest.Type.TRAP && tree != null)
-            {
+            } else if (te.getChestType() == BlockChest.Type.TRAP && tree != null) {
                 bindTexture(TRAP_DOUBLE_TEXTURES_TREE.get(tree));
-            }
-            else if (tree != null)
-            {
+            } else if (tree != null) {
                 bindTexture(DOUBLE_TEXTURES_TREE.get(tree));
             }
         }
@@ -188,8 +153,7 @@ public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest>
         GlStateManager.translate(0.5F, 0.5F, 0.5F);
         int rotation = 0;
 
-        switch (meta)
-        {
+        switch (meta) {
             case 2:
                 rotation = 180;
                 if (te.adjacentChestXPos != null) GlStateManager.translate(1.0F, 0.0F, 0.0F);
@@ -210,14 +174,12 @@ public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest>
         GlStateManager.translate(-0.5F, -0.5F, -0.5F);
         float lidAngle = te.prevLidAngle + (te.lidAngle - te.prevLidAngle) * partialTicks;
 
-        if (te.adjacentChestZNeg != null)
-        {
+        if (te.adjacentChestZNeg != null) {
             float f1 = te.adjacentChestZNeg.prevLidAngle + (te.adjacentChestZNeg.lidAngle - te.adjacentChestZNeg.prevLidAngle) * partialTicks;
             if (f1 > lidAngle) lidAngle = f1;
         }
 
-        if (te.adjacentChestXNeg != null)
-        {
+        if (te.adjacentChestXNeg != null) {
             float f2 = te.adjacentChestXNeg.prevLidAngle + (te.adjacentChestXNeg.lidAngle - te.adjacentChestXNeg.prevLidAngle) * partialTicks;
             if (f2 > lidAngle) lidAngle = f2;
         }
@@ -230,8 +192,7 @@ public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest>
         GlStateManager.popMatrix();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        if (destroyStage >= 0)
-        {
+        if (destroyStage >= 0) {
             GlStateManager.matrixMode(5890);
             GlStateManager.popMatrix();
             GlStateManager.matrixMode(5888);

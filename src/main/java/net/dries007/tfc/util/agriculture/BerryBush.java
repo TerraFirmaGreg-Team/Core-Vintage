@@ -5,19 +5,17 @@
 
 package net.dries007.tfc.util.agriculture;
 
-import net.minecraft.item.ItemStack;
-
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
+import net.minecraft.item.ItemStack;
 
 import static net.dries007.tfc.api.types.IBerryBush.Size.*;
 
-public enum BerryBush implements IBerryBush
-{
+public enum BerryBush implements IBerryBush {
     BLACKBERRY(Food.BLACKBERRY, Month.MAY, 4, 7f, 20f, 100f, 400f, 0.8f, LARGE, true),
     BLUEBERRY(Food.BLUEBERRY, Month.JUNE, 3, 7f, 25f, 100f, 400f, 0.8f, LARGE, false),
     BUNCH_BERRY(Food.BUNCH_BERRY, Month.JUNE, 3, 15f, 30f, 100f, 400f, 0.8f, SMALL, false),
@@ -30,10 +28,8 @@ public enum BerryBush implements IBerryBush
     STRAWBERRY(Food.STRAWBERRY, Month.MARCH, 3, 5f, 28f, 100f, 400f, 0.8f, SMALL, false),
     WINTERGREEN_BERRY(Food.WINTERGREEN_BERRY, Month.AUGUST, 2, -5f, 17f, 100f, 400f, 0.8f, SMALL, false);
 
-    static
-    {
-        for (IBerryBush bush : values())
-        {
+    static {
+        for (IBerryBush bush : values()) {
             WorldGenBerryBushes.register(bush);
         }
     }
@@ -49,8 +45,7 @@ public enum BerryBush implements IBerryBush
     private final Size size;
     private final boolean hasSpikes;
 
-    BerryBush(Food fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, Size size, boolean spiky)
-    {
+    BerryBush(Food fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, Size size, boolean spiky) {
         this.fruit = fruit;
         this.harvestMonthStart = harvestMonthStart;
         this.harvestingMonths = harvestingMonths;
@@ -65,23 +60,19 @@ public enum BerryBush implements IBerryBush
         this.hasSpikes = spiky;
     }
 
-    public Food getFruit()
-    {
+    public Food getFruit() {
         return this.fruit;
     }
 
     @Override
-    public float getGrowthTime()
-    {
+    public float getGrowthTime() {
         return this.growthTime;
     }
 
     @Override
-    public boolean isHarvestMonth(Month month)
-    {
+    public boolean isHarvestMonth(Month month) {
         Month testing = this.harvestMonthStart;
-        for (int i = 0; i < this.harvestingMonths; i++)
-        {
+        for (int i = 0; i < this.harvestingMonths; i++) {
             if (testing.equals(month)) return true;
             testing = testing.next();
         }
@@ -89,28 +80,24 @@ public enum BerryBush implements IBerryBush
     }
 
     @Override
-    public boolean isValidConditions(float temperature, float rainfall)
-    {
+    public boolean isValidConditions(float temperature, float rainfall) {
         return minTemp - 5 < temperature && temperature < maxTemp + 5 && minRain - 50 < rainfall && rainfall < maxRain + 50;
     }
 
     @Override
-    public boolean isValidForGrowth(float temperature, float rainfall)
-    {
+    public boolean isValidForGrowth(float temperature, float rainfall) {
         return minTemp < temperature && temperature < maxTemp && minRain < rainfall && rainfall < maxRain;
     }
 
     @Override
-    public ItemStack getFoodDrop()
-    {
+    public ItemStack getFoodDrop() {
         return new ItemStack(ItemFoodTFC.get(getFruit()));
     }
 
-    public Size getSize() { return this.size; }
+    public Size getSize() {return this.size;}
 
     @Override
-    public boolean isSpiky()
-    {
+    public boolean isSpiky() {
         return hasSpikes;
     }
 }

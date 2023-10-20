@@ -2,7 +2,6 @@ package com.eerussianguy.firmalife.compat.crafttweaker;
 
 import com.blamejared.mtlib.helpers.InputHelper;
 import com.eerussianguy.firmalife.init.RegistriesFL;
-import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import com.eerussianguy.firmalife.recipe.NutRecipe;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
@@ -26,12 +25,13 @@ public class CTNut {
     @ZenMethod
     public static void addRecipe(String recipe_name, IItemStack log, IItemStack leave, IItemStack output) {
 
-        if (!(InputHelper.isABlock(log) && InputHelper.isABlock(leave))) throw new IllegalArgumentException("Input is not a block!");
+        if (!(InputHelper.isABlock(log) && InputHelper.isABlock(leave)))
+            throw new IllegalArgumentException("Input is not a block!");
 
         ItemStack log_stack = InputHelper.toStack(log);
         ItemStack leave_stack = InputHelper.toStack(leave);
 
-        if(log_stack.getItem() instanceof ItemBlock && leave_stack.getItem() instanceof ItemBlock) {
+        if (log_stack.getItem() instanceof ItemBlock && leave_stack.getItem() instanceof ItemBlock) {
             Block log_block = ((ItemBlock) log_stack.getItem()).getBlock();
             Block leave_block = ((ItemBlock) leave_stack.getItem()).getBlock();
 
@@ -44,7 +44,7 @@ public class CTNut {
 
                 @Override
                 public String describe() {
-                    return "Adding Nut recipe " +recipe.getRegistryName().toString();
+                    return "Adding Nut recipe " + recipe.getRegistryName().toString();
                 }
             });
         }
@@ -55,7 +55,7 @@ public class CTNut {
 
         NutRecipe recipe = RegistriesFL.NUT_TREES.getValue(new ResourceLocation(recipe_name));
 
-        if(recipe != null) {
+        if (recipe != null) {
             CraftTweakerAPI.apply(new IAction() {
                 @Override
                 public void apply() {
@@ -81,7 +81,7 @@ public class CTNut {
                 .filter(x -> x.getNut().isItemEqual(InputHelper.toStack(output)))
                 .forEach(removeList::add);
 
-        for(NutRecipe recipe : removeList) {
+        for (NutRecipe recipe : removeList) {
             CraftTweakerAPI.apply(new IAction() {
                 @Override
                 public void apply() {

@@ -5,12 +5,12 @@
 
 package net.dries007.tfc.util.block;
 
-import java.util.Arrays;
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
+
+import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 /**
  * Not Axis Aligned Bounding Box
@@ -18,8 +18,7 @@ import net.minecraft.util.math.Vec3d;
  * **No more AABBs for each direction** (only NSWE)
  * For performance purposes, this class will create AABBs on demand, and supply the same AABB object if asked again
  */
-public class BoundingBox
-{
+public class BoundingBox {
     protected final EnumFacing direction;
     protected final double x, y, z;
     protected final double radiusX;
@@ -39,8 +38,7 @@ public class BoundingBox
      * @param radiusZ     the Z direction radius
      * @param direction   the direction this bounding box is being created, or, if this was an AABB, which facing you are creating here
      */
-    public BoundingBox(Vec3d centerPoint, double radiusX, double radiusY, double radiusZ, @Nonnull EnumFacing direction)
-    {
+    public BoundingBox(Vec3d centerPoint, double radiusX, double radiusY, double radiusZ, @Nonnull EnumFacing direction) {
         this(centerPoint.x, centerPoint.y, centerPoint.z, radiusX, radiusY, radiusZ, direction);
     }
 
@@ -57,8 +55,7 @@ public class BoundingBox
      * @param radiusZ   the Z direction radius
      * @param direction the direction this bounding box is being created, or, if this was an AABB, which facing you are creating here
      */
-    public BoundingBox(double x, double y, double z, double radiusX, double radiusY, double radiusZ, @Nonnull EnumFacing direction)
-    {
+    public BoundingBox(double x, double y, double z, double radiusX, double radiusY, double radiusZ, @Nonnull EnumFacing direction) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -76,20 +73,14 @@ public class BoundingBox
      * @return an AABB obj, which is computed only once and saved for performance purposes
      */
     @Nonnull
-    public AxisAlignedBB getAABB(EnumFacing facing)
-    {
-        if (values[facing.getHorizontalIndex()] == null)
-        {
-            if (facing == this.direction)
-            {
+    public AxisAlignedBB getAABB(EnumFacing facing) {
+        if (values[facing.getHorizontalIndex()] == null) {
+            if (facing == this.direction) {
                 // If facing is equal this object's direction, we don't need to compute anything
                 values[facing.getHorizontalIndex()] = new AxisAlignedBB(x - radiusX, y - radiusY, z - radiusZ, x + radiusX, y + radiusY, z + radiusZ);
-            }
-            else
-            {
+            } else {
                 int rotation = facing.getHorizontalIndex() - direction.getHorizontalIndex();
-                if (rotation < 0)
-                {
+                if (rotation < 0) {
                     rotation += 4;
                 }
 

@@ -4,13 +4,10 @@ import net.minecraft.block.BlockFence;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-
 import tfcflorae.util.OreDictionaryHelper;
 
-public class BlockFruitLogFence extends BlockFence 
-{
-    public BlockFruitLogFence()
-    {
+public class BlockFruitLogFence extends BlockFence {
+    public BlockFruitLogFence() {
         super(Material.WOOD, Material.WOOD.getMaterialMapColor());
         setHarvestLevel("axe", 0);
         setHardness(2.0F);

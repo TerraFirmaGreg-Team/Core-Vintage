@@ -5,15 +5,14 @@
 
 package net.dries007.tfc.api.capability.size;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * Interface for item size.
@@ -26,30 +25,26 @@ import net.dries007.tfc.util.Helpers;
  * @see net.dries007.tfc.objects.items.ItemTFC
  * @see net.dries007.tfc.objects.items.itemblock.ItemBlockTFC
  */
-public interface IItemSize
-{
+public interface IItemSize {
     @Nonnull
     Size getSize(@Nonnull ItemStack stack);
 
     @Nonnull
     Weight getWeight(@Nonnull ItemStack stack);
 
-    default boolean canStack(@Nonnull ItemStack stack)
-    {
+    default boolean canStack(@Nonnull ItemStack stack) {
         return true;
     }
 
     @SideOnly(Side.CLIENT)
-    default void addSizeInfo(@Nonnull ItemStack stack, @Nonnull List<String> text)
-    {
+    default void addSizeInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
         text.add("\u2696 " + I18n.format(Helpers.getEnumName(getWeight(stack))) + " \u21F2 " + I18n.format(Helpers.getEnumName(getSize(stack))));
     }
 
     /**
      * Should be called from {@link net.minecraft.item.Item#getItemStackLimit(ItemStack)}
      */
-    default int getStackSize(@Nonnull ItemStack stack)
-    {
+    default int getStackSize(@Nonnull ItemStack stack) {
         return canStack(stack) ? getWeight(stack).stackSize : 1;
     }
 }

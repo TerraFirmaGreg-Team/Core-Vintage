@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,8 +15,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelYakTFC
@@ -26,8 +25,7 @@ import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelYakTFC extends ModelBase
-{
+public class ModelYakTFC extends ModelBase {
     public ModelRenderer bodyCenter;
     public ModelRenderer legBackLeft;
     public ModelRenderer legBackRight;
@@ -76,8 +74,7 @@ public class ModelYakTFC extends ModelBase
     public ModelRenderer hornLeftF2;
 
 
-    public ModelYakTFC()
-    {
+    public ModelYakTFC() {
         textureWidth = 96;
         textureHeight = 96;
 
@@ -289,18 +286,15 @@ public class ModelYakTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
         EntityYakTFC yak = ((EntityYakTFC) entity);
 
         float percent = (float) yak.getPercentToAdulthood();
         float ageScale = 2.0F - percent;
 
-        if (yak.getGender() == EntityAnimalTFC.Gender.MALE)
-        {
-            if (percent < 0.5)
-            {
+        if (yak.getGender() == EntityAnimalTFC.Gender.MALE) {
+            if (percent < 0.5) {
                 udder.isHidden = true;
                 hornRightF1A.isHidden = true;
                 hornRightF1B.isHidden = true;
@@ -325,8 +319,7 @@ public class ModelYakTFC extends ModelBase
                 hornL2.isHidden = true;
                 hornL3.isHidden = true;
             }
-            if (percent < 0.75)
-            {
+            if (percent < 0.75) {
                 udder.isHidden = true;
                 hornRightF1A.isHidden = true;
                 hornRightF1B.isHidden = true;
@@ -342,9 +335,7 @@ public class ModelYakTFC extends ModelBase
                 hornR3.isHidden = true;
                 hornL2.isHidden = true;
                 hornL3.isHidden = true;
-            }
-            else
-            {
+            } else {
                 udder.isHidden = true;
                 hornRightF1A.isHidden = true;
                 hornRightF1B.isHidden = true;
@@ -357,12 +348,8 @@ public class ModelYakTFC extends ModelBase
                 hornLeftF1D.isHidden = true;
                 hornLeftF2.isHidden = true;
             }
-        }
-
-        else
-        {
-            if (percent < 0.5)
-            {
+        } else {
+            if (percent < 0.5) {
                 udder.isHidden = true;
                 hornRightF1A.isHidden = true;
                 hornRightF1B.isHidden = true;
@@ -387,8 +374,7 @@ public class ModelYakTFC extends ModelBase
                 hornL2.isHidden = true;
                 hornL3.isHidden = true;
             }
-            if (percent < 0.75)
-            {
+            if (percent < 0.75) {
                 hornRightF2.isHidden = true;
                 hornLeftF2.isHidden = true;
                 hornR1a.isHidden = true;
@@ -403,9 +389,7 @@ public class ModelYakTFC extends ModelBase
                 hornL1d.isHidden = true;
                 hornL2.isHidden = true;
                 hornL3.isHidden = true;
-            }
-            else
-            {
+            } else {
                 hornR1a.isHidden = true;
                 hornR1b.isHidden = true;
                 hornR1c.isHidden = true;
@@ -444,8 +428,7 @@ public class ModelYakTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
         this.head.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
 
@@ -479,8 +462,7 @@ public class ModelYakTFC extends ModelBase
         hornLeftF2.isHidden = false;
     }
 
-    private void setRotateAngle(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotateAngle(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

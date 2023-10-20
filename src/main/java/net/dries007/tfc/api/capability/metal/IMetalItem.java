@@ -5,24 +5,22 @@
 
 package net.dries007.tfc.api.capability.metal;
 
-import java.util.List;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nullable;
+import java.util.List;
 
 /*
  * Must be on Item or Block (with ItemBlock, i.e. do not implement on blocks that have a separate item block)
  * Also, has a capability interface
  */
-public interface IMetalItem
-{
+public interface IMetalItem {
     /**
      * @param stack the item stack. This can assume that it is of the right item type and do casts without checking
      * @return the metal of the stack
@@ -43,15 +41,14 @@ public interface IMetalItem
      * @param stack The item stack
      * @return true if the metal can be melted
      */
-    default boolean canMelt(ItemStack stack)
-    {
+    default boolean canMelt(ItemStack stack) {
         return true;
     }
 
-    default float getMeltTemp(ItemStack stack)
-    {
+    default float getMeltTemp(ItemStack stack) {
         return 0f;
     }
+
     /**
      * Adds metal info to the item stack
      * This is only shown when advanced item tooltips is enabled
@@ -60,11 +57,9 @@ public interface IMetalItem
      * @param text  The text to be added
      */
     @SideOnly(Side.CLIENT)
-    default void addMetalInfo(ItemStack stack, List<String> text)
-    {
+    default void addMetalInfo(ItemStack stack, List<String> text) {
         Metal metal = getMetal(stack);
-        if (metal != null)
-        {
+        if (metal != null) {
             int melttemp = (int) metal.getMeltTemp();
             text.add("");
             text.add(I18n.format("tfc.tooltip.metal", I18n.format(Helpers.getTypeName(metal))));

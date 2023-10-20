@@ -7,8 +7,7 @@ package net.dries007.tfc.util;
 
 import net.minecraft.util.DamageSource;
 
-public class DamageSourcesTFC
-{
+public class DamageSourcesTFC {
     public static final DamageSource BERRYBUSH = new DamageSource("berrybush");
     public static final DamageSource PLUCKING = new DamageSource("plucking").setDamageBypassesArmor();
     public static final DamageSource FOOD_POISON = new DamageSource("food_poison").setDamageBypassesArmor().setDamageIsAbsolute();

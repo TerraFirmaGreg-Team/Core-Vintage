@@ -5,12 +5,16 @@
 
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import java.util.*;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.ImmutableList;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.objects.te.TETickCounter;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -33,33 +37,20 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.*;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant
-{
+public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
     public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", BlockFruitTreeLeaves.EnumLeafState.class);
     public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
     private static final Map<IFruitTree, BlockFruitTreeLeaves> MAP = new HashMap<>();
-
-    public static BlockFruitTreeLeaves get(IFruitTree tree)
-    {
-        return MAP.get(tree);
-    }
-
     private final IFruitTree tree;
 
-    public BlockFruitTreeLeaves(IFruitTree tree)
-    {
+    public BlockFruitTreeLeaves(IFruitTree tree) {
         this.tree = tree;
         if (MAP.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
         setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(LEAF_STATE, EnumLeafState.NORMAL).withProperty(HARVESTABLE, false));
@@ -70,56 +61,46 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant
         setTickRandomly(true);
     }
 
+    public static BlockFruitTreeLeaves get(IFruitTree tree) {
+        return MAP.get(tree);
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     @Nonnull
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(HARVESTABLE, meta > 3).withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11));
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return state.getValue(LEAF_STATE).ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-    {
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return NULL_AABB;
     }
 
     @Override
-    public void randomTick(World world, BlockPos pos, IBlockState state, Random random)
-    {
-        if (!world.isRemote)
-        {
-            if (state.getValue(HARVESTABLE) && tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()))
-            {
+    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+        if (!world.isRemote) {
+            if (state.getValue(HARVESTABLE) && tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
                 TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
-                if (te != null)
-                {
+                if (te != null) {
                     long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-                    if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier))
-                    {
+                    if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
                         world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumLeafState.FRUIT));
                         te.resetCounter();
                     }
                 }
-            }
-            else if (tree.isFlowerMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()))
-            {
-                if (state.getValue(LEAF_STATE) != EnumLeafState.FLOWERING)
-                {
+            } else if (tree.isFlowerMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+                if (state.getValue(LEAF_STATE) != EnumLeafState.FLOWERING) {
                     world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumLeafState.FLOWERING));
                 }
-            }
-            else
-            {
-                if (state.getValue(LEAF_STATE) != EnumLeafState.NORMAL)
-                {
+            } else {
+                if (state.getValue(LEAF_STATE) != EnumLeafState.NORMAL) {
                     world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumLeafState.NORMAL));
                 }
             }
@@ -129,33 +110,26 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant
 
     @Override
     @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, @Nullable Block blockIn, @Nullable BlockPos fromPos)
-    {
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, @Nullable Block blockIn, @Nullable BlockPos fromPos) {
         doLeafDecay(world, pos, state);
     }
 
     @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
         TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
-        if (tile != null)
-        {
+        if (tile != null) {
             tile.resetCounter();
         }
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT)
-        {
-            if (!worldIn.isRemote)
-            {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT) {
+            if (!worldIn.isRemote) {
                 ItemHandlerHelper.giveItemToPlayer(playerIn, tree.getFoodDrop());
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, EnumLeafState.NORMAL));
                 TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
-                if (te != null)
-                {
+                if (te != null) {
                     te.resetCounter();
                 }
             }
@@ -165,18 +139,15 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant
     }
 
     @Override
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
-    {
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         // Duplicated from BlockLeavesTFC#onEntityCollision
-        if ((!(entityIn instanceof EntityPlayer) || !((EntityPlayer) entityIn).isCreative()))
-        {
+        if ((!(entityIn instanceof EntityPlayer) || !((EntityPlayer) entityIn).isCreative())) {
             // Player will take damage when falling through leaves if fall is over 9 blocks, fall damage is then set to 0.
             entityIn.fall((entityIn.fallDistance - 6), 1.0F);
             entityIn.fallDistance = 0;
             // Entity motion is reduced by leaves.
             entityIn.motionX *= ConfigTFC.General.MISC.leafMovementModifier;
-            if (entityIn.motionY < 0)
-            {
+            if (entityIn.motionY < 0) {
                 entityIn.motionY *= ConfigTFC.General.MISC.leafMovementModifier;
             }
             entityIn.motionZ *= ConfigTFC.General.MISC.leafMovementModifier;
@@ -185,34 +156,29 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant
 
     @Override
     @Nonnull
-    public BlockStateContainer createBlockState()
-    {
+    public BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, DECAYABLE, LEAF_STATE, HARVESTABLE);
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state)
-    {
+    public boolean hasTileEntity(IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
-    {
+    public TileEntity createTileEntity(World world, IBlockState state) {
         return new TETickCounter();
     }
 
     @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         doLeafDecay(worldIn, pos, state);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getRenderLayer()
-    {
+    public BlockRenderLayer getRenderLayer() {
         /*
          * This is a way to make sure the leave settings are updated.
          * The result of this call is cached somewhere, so it's not that important, but:
@@ -224,20 +190,17 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant
     }
 
     @Override
-    public BlockPlanks.EnumType getWoodType(int meta)
-    {
+    public BlockPlanks.EnumType getWoodType(int meta) {
         return BlockPlanks.EnumType.OAK;
     }
 
     @Override
-    public void beginLeavesDecay(IBlockState state, World world, BlockPos pos)
-    {
+    public void beginLeavesDecay(IBlockState state, World world, BlockPos pos) {
         // Don't do vanilla decay
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         // Stops dropping oak saplings inherited from BlockLeaves
         drops.clear();
     }
@@ -245,8 +208,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant
     @SuppressWarnings("deprecation")
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-    {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         /*
          * See comment on getRenderLayer()
          */
@@ -255,19 +217,16 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant
     }
 
     @Nonnull
-    public IFruitTree getTree()
-    {
+    public IFruitTree getTree() {
         return tree;
     }
 
     @Override
-    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
-    {
+    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
         return ImmutableList.of(new ItemStack(this));
     }
 
-    private void doLeafDecay(World world, BlockPos pos, IBlockState state)
-    {
+    private void doLeafDecay(World world, BlockPos pos, IBlockState state) {
         // TFC Leaf Decay, modified for fruit trees
         if (world.isRemote)
             return;
@@ -280,13 +239,10 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant
         IBlockState state1;
         paths.add(pos); // Center block
 
-        for (int i = 0; i < 2; i++)
-        {
+        for (int i = 0; i < 2; i++) {
             pathsToAdd = new ArrayList<>();
-            for (BlockPos p1 : paths)
-            {
-                for (EnumFacing face : EnumFacing.values())
-                {
+            for (BlockPos p1 : paths) {
+                for (EnumFacing face : EnumFacing.values()) {
                     pos1.setPos(p1).move(face);
                     if (evaluated.contains(pos1) || !world.isBlockLoaded(pos1))
                         continue;
@@ -305,39 +261,33 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant
         world.setBlockToAir(pos);
     }
 
+    @Override
+    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
+        if (world.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT) {
+            return GrowthStatus.FULLY_GROWN;
+        } else if (!state.getValue(HARVESTABLE) && tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+            return GrowthStatus.GROWING;
+        }
+        return GrowthStatus.NOT_GROWING;
+    }
+
     /**
      * Enum state for blockstate
      * Used to render the correct texture of this leaf block
      */
-    public enum EnumLeafState implements IStringSerializable
-    {
+    public enum EnumLeafState implements IStringSerializable {
         NORMAL, FLOWERING, FRUIT;
 
         private static final EnumLeafState[] VALUES = values();
 
         @Nonnull
-        public static EnumLeafState valueOf(int index)
-        {
+        public static EnumLeafState valueOf(int index) {
             return index < 0 || index > VALUES.length ? NORMAL : VALUES[index];
         }
 
         @Override
-        public String getName()
-        {
+        public String getName() {
             return this.name().toLowerCase();
         }
-    }
-    @Override
-    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos)
-    {
-        if (world.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT)
-        {
-            return GrowthStatus.FULLY_GROWN;
-        }
-        else if (!state.getValue(HARVESTABLE) && tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()))
-        {
-            return GrowthStatus.GROWING;
-        }
-        return GrowthStatus.NOT_GROWING;
     }
 }

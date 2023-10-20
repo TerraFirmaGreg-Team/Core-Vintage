@@ -1,38 +1,32 @@
 package com.eerussianguy.firmalife;
 
+import com.eerussianguy.firmalife.util.HelpersFL;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import com.eerussianguy.firmalife.util.HelpersFL;
-import net.dries007.tfc.TerraFirmaCraft;
-
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public class ConfigFL
-{
+public class ConfigFL {
     @SubscribeEvent
-    public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
-    {
-        if (event.getModID().equals(MOD_ID))
-        {
+    public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.getModID().equals(MOD_ID)) {
             if (ConfigFL.General.COMPAT.logging)
                 FirmaLife.logger.warn("Config changed.");
             ConfigManager.sync(TerraFirmaCraft.MOD_ID, Config.Type.INSTANCE);
         }
-        if (event.getModID().equals(TerraFirmaCraft.MOD_ID))
-        {
+        if (event.getModID().equals(TerraFirmaCraft.MOD_ID)) {
             HelpersFL.insertWhitelist();
         }
     }
 
     @Config(modid = MOD_ID, category = "general", name = "Firmalife -- General")
     @Config.LangKey("config." + MOD_ID + ".general")
-    public static final class General
-    {
+    public static final class General {
         @Config.Comment("Worldgen Settings")
         @Config.LangKey("config." + MOD_ID + ".general.worldgen")
         public static final WorldgenCFG WORLDGEN = new WorldgenCFG();
@@ -43,8 +37,7 @@ public class ConfigFL
         @Config.LangKey("config." + MOD_ID + ".general.balance")
         public static final BalanceCFG BALANCE = new BalanceCFG();
 
-        public static final class WorldgenCFG
-        {
+        public static final class WorldgenCFG {
             @Config.Comment("Rarity of the Cinnamon trees in worldgen. Defined by 1/N chunks. Set to zero to disable")
             @Config.RangeInt(min = 0)
             @Config.LangKey("config." + MOD_ID + ".general.worldgen.cinnamonRarity")
@@ -56,8 +49,7 @@ public class ConfigFL
             public int beeRarity = 40;
         }
 
-        public static final class CompatCFG
-        {
+        public static final class CompatCFG {
             @Config.Comment("Enable adding Firmalife fluids to TFC's wooden bucket whitelist?")
             @Config.LangKey("config." + MOD_ID + "general.compat.woodenWhitelist")
             public boolean addToWoodenBucket = true;
@@ -80,11 +72,10 @@ public class ConfigFL
 
             @Config.Comment("List of fluids allowed to be picked up by a cheesecloth")
             @Config.LangKey("config." + MOD_ID + "general.compat.cheeseclothWhitelist")
-            public String[] cheeseclothWhitelist = new String[] {"milk_curdled", "curdled_goat_milk", "curdled_yak_milk"};
+            public String[] cheeseclothWhitelist = new String[]{"milk_curdled", "curdled_goat_milk", "curdled_yak_milk"};
         }
 
-        public static final class BalanceCFG
-        {
+        public static final class BalanceCFG {
             @Config.Comment("Require peel to take stuff out of the oven?")
             @Config.LangKey("config." + MOD_ID + "general.balance.peelNeeded")
             public boolean peelNeeded = true;
@@ -99,7 +90,7 @@ public class ConfigFL
 
             @Config.Comment("List of animals that drop rennet")
             @Config.LangKey("config." + MOD_ID + "general.balance.rennetLootTable")
-            public String[] rennetLootTable = new String[] {"animals/sheep", "animals/cow", "animals/deer", "animals/goat", "animals/zebu", "animals/gazelle", "animals/wildebeest", "animals/muskox", "animals/yak"};
+            public String[] rennetLootTable = new String[]{"animals/sheep", "animals/cow", "animals/deer", "animals/goat", "animals/zebu", "animals/gazelle", "animals/wildebeest", "animals/muskox", "animals/yak"};
 
             @Config.Comment("Ticks required for a cheese to become aged")
             @Config.LangKey("config." + MOD_ID + "general.balance.cheeseTimeToAged")

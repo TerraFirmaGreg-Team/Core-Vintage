@@ -1,35 +1,30 @@
 package tfcflorae.objects.container;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.inventory.Slot;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.container.ContainerItemStack;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerSack extends ContainerItemStack implements ISlotCallback
-{
-    public ContainerSack(InventoryPlayer playerInv, ItemStack stack)
-    {
+public class ContainerSack extends ContainerItemStack implements ISlotCallback {
+    public ContainerSack(InventoryPlayer playerInv, ItemStack stack) {
         super(playerInv, stack);
         this.itemIndex += 4;
     }
 
     @Override
-    protected void addContainerSlots()
-    {
+    protected void addContainerSlots() {
         IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (inventory instanceof ISlotCallback)
-        {
+        if (inventory instanceof ISlotCallback) {
             ISlotCallback callback = (ISlotCallback) inventory;
             addSlotToContainer(new SlotCallback(inventory, 0, 71, 23, callback));
             addSlotToContainer(new SlotCallback(inventory, 1, 89, 23, callback));
@@ -43,8 +38,7 @@ public class ContainerSack extends ContainerItemStack implements ISlotCallback
      */
     @Override
     @Nonnull
-    public ItemStack transferStackInSlot(EntityPlayer player, int index)
-    {
+    public ItemStack transferStackInSlot(EntityPlayer player, int index) {
         // Slot that was clicked
         Slot slot = inventorySlots.get(index);
 
@@ -61,8 +55,7 @@ public class ContainerSack extends ContainerItemStack implements ISlotCallback
 
         // Begin custom transfer code here
         int containerSlots = inventorySlots.size() - player.inventory.mainInventory.size(); // number of slots in the container
-        if (index < containerSlots)
-        {
+        if (index < containerSlots) {
             // Transfer out of the container
 
             // Player shift-clicked item out of vessel. Shift-clicks ignore the
@@ -70,17 +63,14 @@ public class ContainerSack extends ContainerItemStack implements ISlotCallback
             // trait of food items need to be updated here. Unset the preserved
             // trait of this stack
             IFood cap = itemstack1.getCapability(CapabilityFood.CAPABILITY, null);
-            if (cap != null)
-            {
+            if (cap != null) {
                 CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
             }
 
-            if (!this.mergeItemStack(itemstack1, containerSlots, inventorySlots.size(), true))
-            {
+            if (!this.mergeItemStack(itemstack1, containerSlots, inventorySlots.size(), true)) {
                 // Set the preserved trait again; items failed to transfer
                 IFood capFail = itemstack1.getCapability(CapabilityFood.CAPABILITY, null);
-                if (capFail != null)
-                {
+                if (capFail != null) {
                     CapabilityFood.applyTrait(capFail, FoodTrait.PRESERVED);
                 }
 
@@ -89,24 +79,18 @@ public class ContainerSack extends ContainerItemStack implements ISlotCallback
             }
         }
         // Transfer into the container
-        else
-        {
-            if (!this.mergeItemStack(itemstack1, 0, containerSlots, false))
-            {
+        else {
+            if (!this.mergeItemStack(itemstack1, 0, containerSlots, false)) {
                 return ItemStack.EMPTY;
             }
         }
 
-        if (itemstack1.getCount() == 0)
-        {
+        if (itemstack1.getCount() == 0) {
             slot.putStack(ItemStack.EMPTY);
-        }
-        else
-        {
+        } else {
             slot.onSlotChanged();
         }
-        if (itemstack1.getCount() == itemstack.getCount())
-        {
+        if (itemstack1.getCount() == itemstack.getCount()) {
             return ItemStack.EMPTY;
         }
         slot.onTake(player, itemstack1);

@@ -12,8 +12,7 @@ import net.minecraft.world.World;
  * Implement this on blocks that accept heat from outside sources
  * Various blocks (i.e. fire pits, forges) will try and heat blocks in specific locations if they implement this interface
  */
-public interface IHeatConsumerBlock
-{
+public interface IHeatConsumerBlock {
     /**
      * Gets the current temperature of the block
      *

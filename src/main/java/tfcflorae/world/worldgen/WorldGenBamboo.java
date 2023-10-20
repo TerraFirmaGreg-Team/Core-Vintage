@@ -1,28 +1,24 @@
 package tfcflorae.world.worldgen;
 
-import java.util.Random;
-
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.world.classic.WorldTypeTFC;
+import net.dries007.tfc.world.classic.biomes.BiomeTFC;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-
 import tfcflorae.ConfigTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
-public class WorldGenBamboo extends WorldGenerator
-{
+import java.util.Random;
+
+public class WorldGenBamboo extends WorldGenerator {
     @Override
-    public boolean generate(World world, Random rand, BlockPos pos)
-    {
+    public boolean generate(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return false;
 
@@ -41,76 +37,46 @@ public class WorldGenBamboo extends WorldGenerator
 
         int gen = rand.nextInt(13);
 
-        if (gen == 0)
-        {
+        if (gen == 0) {
             generateArrowBamboo(world, rand, genPos);
-        }
-        else if (gen == 1)
-        {
+        } else if (gen == 1) {
             generateBlackBamboo(world, rand, genPos);
-        }
-        else if (gen == 2)
-        {
+        } else if (gen == 2) {
             generateBlueBamboo(world, rand, genPos);
-        }
-        else if (gen == 3)
-        {
+        } else if (gen == 3) {
             generateDragonBamboo(world, rand, genPos);
-        }
-        else if (gen == 4)
-        {
+        } else if (gen == 4) {
             generateGoldenBamboo(world, rand, genPos);
-        }
-        else if (gen == 5)
-        {
+        } else if (gen == 5) {
             generateNarrowLeafBamboo(world, rand, genPos);
-        }
-        else if (gen == 6)
-        {
+        } else if (gen == 6) {
             generateRedBamboo(world, rand, genPos);
-        }
-        else if (gen == 7)
-        {
+        } else if (gen == 7) {
             generateTempleBamboo(world, rand, genPos);
-        }
-        else if (gen == 8)
-        {
+        } else if (gen == 8) {
             generateThornyBamboo(world, rand, genPos);
-        }
-        else if (gen == 9)
-        {
+        } else if (gen == 9) {
             generateTimberBamboo(world, rand, genPos);
-        }
-        else if (gen == 10)
-        {
+        } else if (gen == 10) {
             generateTinwaBamboo(world, rand, genPos);
-        }
-        else
-        {
+        } else {
             generateWeaversBamboo(world, rand, genPos);
         }
 
         return false;
     }
 
-    private void generateBambooLeaves(World world, Random rand, BlockPos pos, int height, IBlockState leaves)
-    {
-        for (int trunk = height + 1; trunk > 3; trunk--)
-        {
+    private void generateBambooLeaves(World world, Random rand, BlockPos pos, int height, IBlockState leaves) {
+        for (int trunk = height + 1; trunk > 3; trunk--) {
             BlockPos centerPos = pos.offset(EnumFacing.UP, trunk);
 
-            if(trunk == height + 1)
-            {
+            if (trunk == height + 1) {
                 world.setBlockState(centerPos, leaves);
-                for (EnumFacing d : EnumFacing.HORIZONTALS)
-                {
+                for (EnumFacing d : EnumFacing.HORIZONTALS) {
                     world.setBlockState(centerPos.offset(d, 1), leaves);
                 }
-            }
-            else if (trunk == height)
-            {
-                for (EnumFacing d : EnumFacing.HORIZONTALS)
-                {
+            } else if (trunk == height) {
+                for (EnumFacing d : EnumFacing.HORIZONTALS) {
                     world.setBlockState(centerPos.offset(d, 1), leaves);
                 }
                 if (rand.nextFloat() < 0.2f)
@@ -121,11 +87,8 @@ public class WorldGenBamboo extends WorldGenerator
                     world.setBlockState(centerPos.add(-1, 0, 1), leaves);
                 if (rand.nextFloat() < 0.2f)
                     world.setBlockState(centerPos.add(-1, 0, -1), leaves);
-            }
-            else if (trunk == height - 1)
-            {
-                for (EnumFacing d : EnumFacing.HORIZONTALS)
-                {
+            } else if (trunk == height - 1) {
+                for (EnumFacing d : EnumFacing.HORIZONTALS) {
                     world.setBlockState(centerPos.offset(d, 1), leaves);
                     world.setBlockState(centerPos.offset(d, 2), leaves);
                 }
@@ -133,33 +96,27 @@ public class WorldGenBamboo extends WorldGenerator
                 world.setBlockState(centerPos.add(1, 0, 1), leaves);
                 world.setBlockState(centerPos.add(1, 0, 2), leaves);
                 world.setBlockState(centerPos.add(2, 0, 1), leaves);
-                
+
                 //North-West
                 world.setBlockState(centerPos.add(-1, 0, 1), leaves);
                 world.setBlockState(centerPos.add(-1, 0, 2), leaves);
                 world.setBlockState(centerPos.add(-2, 0, 1), leaves);
-                
+
                 //South-East
                 world.setBlockState(centerPos.add(1, 0, -1), leaves);
                 world.setBlockState(centerPos.add(1, 0, -2), leaves);
                 world.setBlockState(centerPos.add(2, 0, -1), leaves);
-                
+
                 //South-West
                 world.setBlockState(centerPos.add(-1, 0, -1), leaves);
                 world.setBlockState(centerPos.add(-1, 0, -2), leaves);
                 world.setBlockState(centerPos.add(-2, 0, -1), leaves);
-            }
-            else if (trunk % 2 == 0)
-            {
-                for (EnumFacing d : EnumFacing.HORIZONTALS)
-                {
+            } else if (trunk % 2 == 0) {
+                for (EnumFacing d : EnumFacing.HORIZONTALS) {
                     world.setBlockState(centerPos.offset(d, 1), leaves);
                 }
-            }
-            else
-            {
-                for (EnumFacing d : EnumFacing.HORIZONTALS)
-                {
+            } else {
+                for (EnumFacing d : EnumFacing.HORIZONTALS) {
                     world.setBlockState(centerPos.offset(d, 1), leaves);
                 }
                 if (rand.nextFloat() < 0.8f)
@@ -174,8 +131,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateArrowBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateArrowBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -183,22 +139,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.ARROW_BAMBOO_LOG.getDefaultState());
                         /*if (trunk < 3)
@@ -222,8 +173,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateBlackBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateBlackBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -231,22 +181,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.BLACK_BAMBOO_LOG.getDefaultState());
                     }
@@ -256,8 +201,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateBlueBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateBlueBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -265,22 +209,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.BLUE_BAMBOO_LOG.getDefaultState());
 
@@ -291,8 +230,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateDragonBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateDragonBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -300,22 +238,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.DRAGON_BAMBOO_LOG.getDefaultState());
                     }
@@ -325,8 +258,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateGoldenBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateGoldenBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -334,22 +266,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.GOLDEN_BAMBOO_LOG.getDefaultState());
                     }
@@ -359,8 +286,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateNarrowLeafBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateNarrowLeafBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -368,22 +294,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.NARROW_LEAF_BAMBOO_LOG.getDefaultState());
                     }
@@ -393,8 +314,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateRedBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateRedBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -402,22 +322,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.RED_BAMBOO_LOG.getDefaultState());
                     }
@@ -427,8 +342,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateTempleBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateTempleBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -436,22 +350,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.TEMPLE_BAMBOO_LOG.getDefaultState());
                     }
@@ -461,8 +370,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateThornyBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateThornyBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -470,22 +378,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.THORNY_BAMBOO_LOG.getDefaultState());
                     }
@@ -495,8 +398,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateTimberBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateTimberBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -504,22 +406,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.TIMBER_BAMBOO_LOG.getDefaultState());
                     }
@@ -529,8 +426,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateTinwaBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateTinwaBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -538,22 +434,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.TINWA_BAMBOO_LOG.getDefaultState());
                     }
@@ -563,8 +454,7 @@ public class WorldGenBamboo extends WorldGenerator
         }
     }
 
-    private void generateWeaversBamboo(World world, Random rand, BlockPos pos)
-    {
+    private void generateWeaversBamboo(World world, Random rand, BlockPos pos) {
         ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
@@ -572,22 +462,17 @@ public class WorldGenBamboo extends WorldGenerator
         final float temp = chunkData.getAverageTemp();
         final float rain = chunkData.getRainfall();
 
-        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down()))))
-        {
-            if (rain > 290f && temp > 20f && density > 0.2f)
-            {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.bambooRarity) == 0 || pos.getY() > WorldTypeTFC.SEALEVEL && world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())))) {
+            if (rain > 290f && temp > 20f && density > 0.2f) {
                 IBlockState state = world.getBlockState(pos.down());
-                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state))
-                {
-                    for (int air = 1; air < 15; air++)
-                    {
+                if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isGrowableSoil(state)) {
+                    for (int air = 1; air < 15; air++) {
                         if (!world.isAirBlock(pos.offset(EnumFacing.UP, air)))
                             return;
                     }
                     int height = 7 + rand.nextInt(5);
 
-                    for (int trunk = 0; trunk < height; trunk++)
-                    {
+                    for (int trunk = 0; trunk < height; trunk++) {
                         BlockPos trunkPos = pos.offset(EnumFacing.UP, trunk);
                         world.setBlockState(trunkPos, BlocksTFCF.WEAVERS_BAMBOO_LOG.getDefaultState());
                     }

@@ -5,8 +5,14 @@
 
 package net.dries007.tfc.world.classic.worldgen.trees;
 
-import java.util.Random;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+import net.dries007.tfc.world.classic.StructureHelper;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
@@ -18,31 +24,22 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.world.classic.StructureHelper;
+import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 import static net.minecraft.block.BlockVine.*;
 
-public class TreeGenKapok implements ITreeGenerator
-{
+public class TreeGenKapok implements ITreeGenerator {
     private static final PlacementSettings settings = StructureHelper.getDefaultSettings();
-    private static final BlockPos[] trunkPos = new BlockPos[] {
-        new BlockPos(0, 0, 0), new BlockPos(-1, 0, 0), new BlockPos(0, 0, -1), new BlockPos(-1, 0, -1)
+    private static final BlockPos[] trunkPos = new BlockPos[]{
+            new BlockPos(0, 0, 0), new BlockPos(-1, 0, 0), new BlockPos(0, 0, -1), new BlockPos(-1, 0, -1)
     };
     private IBlockState trunk;
     private IBlockState bark;
 
     @Override
-    public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen)
-    {
+    public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen) {
         trunk = BlockLogTFC.get(tree).getDefaultState().withProperty(PLACED, false);
         bark = BlockLogTFC.get(tree).getDefaultState().withProperty(PLACED, false).withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
 
@@ -50,8 +47,7 @@ public class TreeGenKapok implements ITreeGenerator
         int branches = 2 + rand.nextInt(3);
 
         int x1, y1, z1, type;
-        for (int i = 0; i < branches; i++)
-        {
+        for (int i = 0; i < branches; i++) {
             y1 = 6 + rand.nextInt(height - 8);
             x1 = rand.nextInt(3);
             z1 = rand.nextInt(3);
@@ -75,14 +71,11 @@ public class TreeGenKapok implements ITreeGenerator
     }
 
     @Override
-    public boolean canGenerateTree(World world, BlockPos pos, Tree treeType)
-    {
-        for (BlockPos p1 : trunkPos)
-        {
+    public boolean canGenerateTree(World world, BlockPos pos, Tree treeType) {
+        for (BlockPos p1 : trunkPos) {
             if (BlocksTFC.isSoil(world.getBlockState(pos.add(p1))))
                 continue;
-            if (world.getBlockState(pos.add(p1)).getMaterial().isReplaceable())
-            {
+            if (world.getBlockState(pos.add(p1)).getMaterial().isReplaceable()) {
                 if (BlocksTFC.isSoil(world.getBlockState(pos.add(p1).down(1))))
                     continue;
                 if (BlocksTFC.isSoil(world.getBlockState(pos.add(p1).down(2))) && world.getBlockState(pos.add(p1.down(1))).getMaterial().isReplaceable())
@@ -94,13 +87,11 @@ public class TreeGenKapok implements ITreeGenerator
         return ITreeGenerator.super.canGenerateTree(world, pos, treeType);
     }
 
-    private void placeBranch(TemplateManager manager, World world, BlockPos pos, String name)
-    {
+    private void placeBranch(TemplateManager manager, World world, BlockPos pos, String name) {
         ResourceLocation base = new ResourceLocation(name);
         Template structureBase = manager.get(world.getMinecraftServer(), base);
 
-        if (structureBase == null)
-        {
+        if (structureBase == null) {
             TerraFirmaCraft.getLog().warn("Unable to find a template for " + base.toString());
             return;
         }
@@ -110,8 +101,7 @@ public class TreeGenKapok implements ITreeGenerator
         StructureHelper.addStructureToWorld(world, pos, structureBase, settings);
     }
 
-    private void placeTrunk(World world, BlockPos pos)
-    {
+    private void placeTrunk(World world, BlockPos pos) {
         for (BlockPos p1 : trunkPos)
             checkAndPlace(world, pos.add(p1), false);
 
@@ -125,14 +115,12 @@ public class TreeGenKapok implements ITreeGenerator
         placeVine(world, pos.add(0, 0, -2), SOUTH);
     }
 
-    private void checkAndPlace(World world, BlockPos pos, boolean useBark)
-    {
+    private void checkAndPlace(World world, BlockPos pos, boolean useBark) {
         if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos).getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos).getBlock() instanceof BlockLeavesTFC)
             world.setBlockState(pos, useBark ? bark : trunk);
     }
 
-    private void placeVine(World world, BlockPos pos, PropertyBool prop)
-    {
+    private void placeVine(World world, BlockPos pos, PropertyBool prop) {
         if (Math.random() < 0.8f && world.getBlockState(pos).getBlock() == Blocks.AIR)
             world.setBlockState(pos, Blocks.VINE.getDefaultState().withProperty(prop, true));
 

@@ -5,9 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -19,12 +17,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelParrotTFC extends ModelBase
-{
+public class ModelParrotTFC extends ModelBase {
     private final ModelRenderer body;
     private final ModelRenderer tail;
     private final ModelRenderer wingLeft;
@@ -35,8 +33,7 @@ public class ModelParrotTFC extends ModelBase
     private final ModelRenderer legRight;
     private State state;
 
-    public ModelParrotTFC()
-    {
+    public ModelParrotTFC() {
         this.state = State.STANDING;
         this.textureWidth = 32;
         this.textureHeight = 32;
@@ -80,16 +77,13 @@ public class ModelParrotTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
+    public void render(@Nonnull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
-        if (((EntityAnimal) entity).isChild())
-        {
+        if (((EntityAnimal) entity).isChild()) {
             double ageScale = 1;
             double percent = 1;
-            if (entity instanceof IAnimalTFC)
-            {
+            if (entity instanceof IAnimalTFC) {
                 percent = ((IAnimalTFC) entity).getPercentToAdulthood();
                 ageScale = 1 / (2.0D - percent);
             }
@@ -111,8 +105,7 @@ public class ModelParrotTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
-    {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
         float f = ageInTicks * 0.3F;
         this.head.rotateAngleX = headPitch * 0.017453292F;
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
@@ -122,15 +115,12 @@ public class ModelParrotTFC extends ModelBase
         this.tail.rotationPointX = 0.0F;
         this.wingRight.rotationPointX = -1.5F;
         this.wingLeft.rotationPointX = 1.5F;
-        if (this.state != State.FLYING)
-        {
-            if (this.state == State.SITTING)
-            {
+        if (this.state != State.FLYING) {
+            if (this.state == State.SITTING) {
                 return;
             }
 
-            if (this.state == State.PARTY)
-            {
+            if (this.state == State.PARTY) {
                 float f1 = MathHelper.cos((float) entityIn.ticksExisted);
                 float f2 = MathHelper.sin((float) entityIn.ticksExisted);
                 this.head.rotationPointX = f1;
@@ -170,8 +160,7 @@ public class ModelParrotTFC extends ModelBase
     }
 
     @Override
-    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
-    {
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         this.feather.rotateAngleX = -0.2214F;
         this.body.rotateAngleX = 0.4937F;
         this.wingLeft.rotateAngleX = -0.69813174F;
@@ -182,19 +171,16 @@ public class ModelParrotTFC extends ModelBase
         this.legRight.rotateAngleX = -0.0299F;
         this.legLeft.rotationPointY = 22.0F;
         this.legRight.rotationPointY = 22.0F;
-        if (entitylivingbaseIn instanceof EntityParrot)
-        {
+        if (entitylivingbaseIn instanceof EntityParrot) {
             EntityParrot entityparrot = (EntityParrot) entitylivingbaseIn;
-            if (entityparrot.isPartying())
-            {
+            if (entityparrot.isPartying()) {
                 this.legLeft.rotateAngleZ = -0.34906584F;
                 this.legRight.rotateAngleZ = 0.34906584F;
                 this.state = State.PARTY;
                 return;
             }
 
-            if (entityparrot.isSitting())
-            {
+            if (entityparrot.isSitting()) {
                 this.head.rotationPointY = 17.59F;
                 this.tail.rotateAngleX = 1.5388988F;
                 this.tail.rotationPointY = 22.97F;
@@ -208,17 +194,13 @@ public class ModelParrotTFC extends ModelBase
                 ++this.legLeft.rotateAngleX;
                 ++this.legRight.rotateAngleX;
                 this.state = State.SITTING;
-            }
-            else if (entityparrot.isFlying())
-            {
+            } else if (entityparrot.isFlying()) {
                 ModelRenderer var10000 = this.legLeft;
                 var10000.rotateAngleX += 0.69813174F;
                 var10000 = this.legRight;
                 var10000.rotateAngleX += 0.69813174F;
                 this.state = State.FLYING;
-            }
-            else
-            {
+            } else {
                 this.state = State.STANDING;
             }
 
@@ -229,8 +211,7 @@ public class ModelParrotTFC extends ModelBase
     }
 
     @SideOnly(Side.CLIENT)
-    enum State
-    {
+    enum State {
         FLYING,
         STANDING,
         SITTING,

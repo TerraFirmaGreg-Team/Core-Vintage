@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityBlackBearTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -17,8 +16,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityBlackBearTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelBlackBearTFC
@@ -27,8 +26,7 @@ import net.dries007.tfc.objects.entity.animal.EntityBlackBearTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelBlackBearTFC extends ModelBase
-{
+public class ModelBlackBearTFC extends ModelBase {
     private final ModelRenderer bearHead;
     private final ModelRenderer rearBody;
     private final ModelRenderer frontBody;
@@ -46,8 +44,7 @@ public class ModelBlackBearTFC extends ModelBase
     private final ModelRenderer paw4;
 
 
-    public ModelBlackBearTFC()
-    {
+    public ModelBlackBearTFC() {
         textureWidth = 80;
         textureHeight = 64;
 
@@ -127,16 +124,13 @@ public class ModelBlackBearTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
+    public void render(@Nonnull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
-        if (((EntityAnimal) entity).isChild())
-        {
+        if (((EntityAnimal) entity).isChild()) {
             double ageScale = 1;
             double percent = 1;
-            if (entity instanceof IAnimalTFC)
-            {
+            if (entity instanceof IAnimalTFC) {
                 percent = ((IAnimalTFC) entity).getPercentToAdulthood();
                 ageScale = 1 / (2.0D - percent);
             }
@@ -159,8 +153,7 @@ public class ModelBlackBearTFC extends ModelBase
 
 
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
-    {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
         bearHead.rotateAngleX = headPitch / (180F / (float) Math.PI);
         bearHead.rotateAngleY = netHeadYaw / (180F / (float) Math.PI);
 
@@ -185,8 +178,7 @@ public class ModelBlackBearTFC extends ModelBase
         this.leg1.rotateAngleX += f1 * 3.1415927F * 0.15F;
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

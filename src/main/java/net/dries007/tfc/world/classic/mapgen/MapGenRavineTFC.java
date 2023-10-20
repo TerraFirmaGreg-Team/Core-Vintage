@@ -5,14 +5,13 @@
 
 package net.dries007.tfc.world.classic.mapgen;
 
-import java.util.Random;
-
+import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
+import java.util.Random;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.AIR;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.LAVA;
@@ -20,25 +19,21 @@ import static net.dries007.tfc.world.classic.ChunkGenTFC.LAVA;
 /**
  * todo: clean up. This needs to be simplified a lot, or split up in functions with sensible variable names.
  */
-public class MapGenRavineTFC extends MapGenBase
-{
+public class MapGenRavineTFC extends MapGenBase {
     private final float[] multipliers = new float[256];
     private final int height;
     private final int variability;
     private final int ravineRarity;
 
-    public MapGenRavineTFC(int rarity, int h, int v)
-    {
+    public MapGenRavineTFC(int rarity, int h, int v) {
         height = h;
         variability = v;
         ravineRarity = rarity;
     }
 
     @Override
-    protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int originalX, int originalZ, ChunkPrimer primer)
-    {
-        if (ravineRarity > 0 && rand.nextInt(ravineRarity) == 0)
-        {
+    protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int originalX, int originalZ, ChunkPrimer primer) {
+        if (ravineRarity > 0 && rand.nextInt(ravineRarity) == 0) {
             double startX = chunkX * 16 + rand.nextInt(16);
             double startY = rand.nextInt(variability) + height;
             double startZ = chunkZ * 16 + rand.nextInt(16);
@@ -50,8 +45,7 @@ public class MapGenRavineTFC extends MapGenBase
         }
     }
 
-    private void generateRavine(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double xCoord, double yCoord, double zCoord, float angleX, float angleY, float angleZ, double yScale)
-    {
+    private void generateRavine(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double xCoord, double yCoord, double zCoord, float angleX, float angleY, float angleZ, double yScale) {
         final Random rng = new Random(seed);
         final double chunkMidX = chunkX * 16 + 8;
         final double chunkMidZ = chunkZ * 16 + 8;
@@ -63,16 +57,14 @@ public class MapGenRavineTFC extends MapGenBase
         {
             float f = 1.0F + rng.nextFloat() * rng.nextFloat() * 1.0F;
             multipliers[0] = f * f;
-            for (int i = 1; i < 256; i++)
-            {
+            for (int i = 1; i < 256; i++) {
                 if (rng.nextInt(3) == 0) f = 1.0F + rng.nextFloat() * rng.nextFloat() * 1.0F;
                 multipliers[i] = f * f;
             }
         }
 
         outer:
-        for (int round = 0; round < rounds; ++round)
-        {
+        for (int round = 0; round < rounds; ++round) {
             final double min = (1.5D + MathHelper.sin(round * (float) Math.PI / rounds) * angleX * 1.0F) * rng.nextFloat() * 0.25D + 0.75D;
             final double max = (min * yScale) * rng.nextFloat() * 0.25D + 0.75D;
             final float cosZ = MathHelper.cos(angleZ);
@@ -100,9 +92,9 @@ public class MapGenRavineTFC extends MapGenBase
             }
 
             if (!(xCoord >= chunkMidX - 16.0D - min * 2.0D &&
-                zCoord >= chunkMidZ - 16.0D - min * 2.0D &&
-                xCoord <= chunkMidX + 16.0D + min * 2.0D &&
-                zCoord <= chunkMidZ + 16.0D + min * 2.0D))
+                    zCoord >= chunkMidZ - 16.0D - min * 2.0D &&
+                    xCoord <= chunkMidX + 16.0D + min * 2.0D &&
+                    zCoord <= chunkMidZ + 16.0D + min * 2.0D))
                 continue;
 
             int xMin = MathHelper.floor(xCoord - min) - chunkX * 16 - 1;
@@ -119,30 +111,24 @@ public class MapGenRavineTFC extends MapGenBase
             if (zMin < 0) zMin = 0;
             if (zMax > 16) zMax = 16;
 
-            for (int x = Math.max(xMin - 1, 0); x < Math.min(xMax + 1, 16); ++x)
-            {
-                for (int z = Math.max(zMin - 1, 0); z < Math.min(zMax + 1, 16); ++z)
-                {
-                    for (int y = Math.min(yMax + 1, 250); y >= Math.max(yMin - 2, 1); --y)
-                    {
+            for (int x = Math.max(xMin - 1, 0); x < Math.min(xMax + 1, 16); ++x) {
+                for (int z = Math.max(zMin - 1, 0); z < Math.min(zMax + 1, 16); ++z) {
+                    for (int y = Math.min(yMax + 1, 250); y >= Math.max(yMin - 2, 1); --y) {
                         if (BlocksTFC.isWater(primer.getBlockState(x, y, z)))
                             continue outer;
                     }
                 }
             }
 
-            for (int x = xMin; x < xMax; ++x)
-            {
+            for (int x = xMin; x < xMax; ++x) {
                 final double xNormalized = (x + chunkX * 16 + 0.5D - xCoord) / min;
 
-                for (int z = zMin; z < zMax; ++z)
-                {
+                for (int z = zMin; z < zMax; ++z) {
                     final double zNormalized = (z + chunkZ * 16 + 0.5D - zCoord) / min;
 
                     if (xNormalized * xNormalized + zNormalized * zNormalized >= 1.0D) continue;
 
-                    for (int y = yMax - 1; y >= yMin; --y)
-                    {
+                    for (int y = yMax - 1; y >= yMin; --y) {
                         final double yNormalized = (y + 0.5D - yCoord) / max;
 
                         if (!((xNormalized * xNormalized + zNormalized * zNormalized) * multipliers[y] + yNormalized * yNormalized / 6.0D < 1.0D))

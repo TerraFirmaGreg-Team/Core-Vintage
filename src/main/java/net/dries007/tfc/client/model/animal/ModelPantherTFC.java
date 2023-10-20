@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +15,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelPantherTFC
@@ -25,8 +24,7 @@ import net.dries007.tfc.api.types.IAnimalTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelPantherTFC extends ModelBase
-{
+public class ModelPantherTFC extends ModelBase {
     public ModelRenderer backBody;
     public ModelRenderer backLeftLegTop;
     public ModelRenderer head;
@@ -57,8 +55,7 @@ public class ModelPantherTFC extends ModelBase
     public ModelRenderer frontLeftLegBottom;
     public ModelRenderer frontLeftLegPaw;
 
-    public ModelPantherTFC()
-    {
+    public ModelPantherTFC() {
         textureWidth = 64;
         textureHeight = 64;
 
@@ -202,17 +199,14 @@ public class ModelPantherTFC extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-        if (((EntityAnimal) entity).isChild())
-        {
+        if (((EntityAnimal) entity).isChild()) {
             double ageScale = 1;
             double percent = 1;
-            if (entity instanceof IAnimalTFC)
-            {
+            if (entity instanceof IAnimalTFC) {
                 percent = ((IAnimalTFC) entity).getPercentToAdulthood();
                 ageScale = 1 / (2.0D - percent);
             }
@@ -237,8 +231,7 @@ public class ModelPantherTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         //super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         setRotateAngle(head, f4 / (180F / (float) Math.PI), f3 / (180F / (float) Math.PI), 0F);
         setRotateAngle(neck, f4 / (1.5F * (180F / (float) Math.PI)) + -0.18203784098300857F, f3 / (1.5F * (180F / (float) Math.PI)), 0F);
@@ -249,8 +242,7 @@ public class ModelPantherTFC extends ModelBase
         backLeftLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
     }
 
-    private void setRotateAngle(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotateAngle(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

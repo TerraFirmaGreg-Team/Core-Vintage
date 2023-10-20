@@ -5,19 +5,17 @@
 
 package net.dries007.tfc.api.util;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.types.RockCategory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
-public interface IRockObject
-{
+public interface IRockObject {
     /**
      * This is nullable because some objects don't have a rock type, just a category (like tool heads)
      *
@@ -38,8 +36,7 @@ public interface IRockObject
      * @param text  The text to be added
      */
     @SideOnly(Side.CLIENT)
-    default void addRockInfo(ItemStack stack, List<String> text)
-    {
+    default void addRockInfo(ItemStack stack, List<String> text) {
         text.add("");
         Rock rock = getRock(stack);
         if (rock != null) text.add("Rock: " + rock.toString());

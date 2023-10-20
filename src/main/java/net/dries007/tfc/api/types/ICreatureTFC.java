@@ -5,21 +5,19 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiConsumer;
-
+import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.biome.Biome;
 
-import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
+import java.util.List;
+import java.util.Random;
+import java.util.function.BiConsumer;
 
 /**
  * Interface for creature spawning mechanics
  * See {@link WorldEntitySpawnerTFC}
  */
-public interface ICreatureTFC
-{
+public interface ICreatureTFC {
     /**
      * Gets the random weight (1 in N chunks) to spawn this creature
      *
@@ -39,8 +37,7 @@ public interface ICreatureTFC
      *
      * @return Consumer method to apply rules to all individuals at once
      */
-    default BiConsumer<List<EntityLiving>, Random> getGroupingRules()
-    {
+    default BiConsumer<List<EntityLiving>, Random> getGroupingRules() {
         return (creatures, random) -> {}; // Default, no special rules
     }
 
@@ -49,8 +46,7 @@ public interface ICreatureTFC
      *
      * @return minimum number of individuals in one group spawn
      */
-    default int getMinGroupSize()
-    {
+    default int getMinGroupSize() {
         return 1;
     }
 
@@ -59,8 +55,7 @@ public interface ICreatureTFC
      *
      * @return maximum number of individuals in one group spawn
      */
-    default int getMaxGroupSize()
-    {
+    default int getMaxGroupSize() {
         return 1;
     }
 
@@ -71,8 +66,7 @@ public interface ICreatureTFC
      */
     CreatureType getCreatureType();
 
-    enum CreatureType
-    {
+    enum CreatureType {
         PREDATOR, HUNTABLE, LIVESTOCK
     }
 }

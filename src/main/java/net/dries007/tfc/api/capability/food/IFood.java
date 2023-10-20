@@ -5,10 +5,11 @@
 
 package net.dries007.tfc.api.capability.food;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,18 +21,15 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.ICalendarFormatted;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Capability for any food item
  * Allows foods to have nutrients, and also to decay / rot
  */
-public interface IFood extends INBTSerializable<NBTTagCompound>
-{
+public interface IFood extends INBTSerializable<NBTTagCompound> {
     /**
      * The timestamp that this food was created
      * Used to calculate expiration date
@@ -58,8 +56,7 @@ public interface IFood extends INBTSerializable<NBTTagCompound>
     /**
      * @return true if the food is rotten / decayed.
      */
-    default boolean isRotten()
-    {
+    default boolean isRotten() {
         return getRottenDate() < CalendarTFC.PLAYER_TIME.getTicks();
     }
 
@@ -107,28 +104,20 @@ public interface IFood extends INBTSerializable<NBTTagCompound>
      * @param text  the tooltip
      */
     @SideOnly(Side.CLIENT)
-    default void addTooltipInfo(@Nonnull ItemStack stack, @Nonnull List<String> text, @Nullable EntityPlayer player)
-    {
+    default void addTooltipInfo(@Nonnull ItemStack stack, @Nonnull List<String> text, @Nullable EntityPlayer player) {
         // Expiration dates
-        if (isRotten())
-        {
+        if (isRotten()) {
             text.add(TextFormatting.RED + I18n.format("tfc.tooltip.food_rotten"));
-        }
-        else
-        {
+        } else {
             long rottenDate = getRottenDate();
-            if (rottenDate == Long.MAX_VALUE)
-            {
+            if (rottenDate == Long.MAX_VALUE) {
                 text.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.food_infinite_expiry"));
-            }
-            else
-            {
+            } else {
                 // Date food rots on.
                 long rottenCalendarTime = rottenDate - CalendarTFC.PLAYER_TIME.getTicks() + CalendarTFC.CALENDAR_TIME.getTicks();
                 // Days till food rots.
                 long daysToRotInTicks = rottenCalendarTime - CalendarTFC.CALENDAR_TIME.getTicks();
-                switch (ConfigTFC.Client.TOOLTIP.decayTooltipMode)
-                {
+                switch (ConfigTFC.Client.TOOLTIP.decayTooltipMode) {
                     case HIDE:
                         break;
                     case EXPIRATION_ONLY:
@@ -144,45 +133,36 @@ public interface IFood extends INBTSerializable<NBTTagCompound>
                 }
             }
         }
-        if (ConfigTFC.General.DEBUG.enable)
-        {
+        if (ConfigTFC.General.DEBUG.enable) {
             text.add("Created at " + getCreationDate());
         }
 
         // Nutrition / Hunger / Saturation / Water Values
         // Hide this based on the shift key (because it's a lot of into)
-        if (GuiScreen.isShiftKeyDown())
-        {
+        if (GuiScreen.isShiftKeyDown()) {
             text.add(TextFormatting.DARK_GREEN + I18n.format("tfc.tooltip.nutrition"));
 
             float saturation = getData().getSaturation();
-            if (saturation > 0)
-            {
+            if (saturation > 0) {
                 // This display makes it so 100% saturation means a full hunger bar worth of saturation.
                 text.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.nutrition_saturation", String.format("%d", (int) (saturation * 5))));
             }
             float water = getData().getWater();
-            if (water > 0)
-            {
+            if (water > 0) {
                 text.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.nutrition_water", String.format("%d", (int) water)));
             }
-            for (Nutrient nutrient : Nutrient.values())
-            {
+            for (Nutrient nutrient : Nutrient.values()) {
                 float value = getData().getNutrients()[nutrient.ordinal()];
-                if (value > 0)
-                {
+                if (value > 0) {
                     text.add(nutrient.getColor() + I18n.format("tfc.tooltip.nutrition_nutrient", I18n.format(Helpers.getEnumName(nutrient)), String.format("%.1f", value)));
                 }
             }
-        }
-        else
-        {
+        } else {
             text.add(TextFormatting.ITALIC + I18n.format("tfc.tooltip.hold_shift_for_nutrition_info"));
         }
 
         // Add info for each trait
-        for (FoodTrait trait : getTraits())
-        {
+        for (FoodTrait trait : getTraits()) {
             trait.addTraitInfo(stack, text);
         }
     }

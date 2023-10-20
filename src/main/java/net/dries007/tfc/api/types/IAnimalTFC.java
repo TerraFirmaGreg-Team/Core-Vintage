@@ -5,22 +5,20 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.objects.entity.animal.AnimalFood;
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 
-import net.dries007.tfc.objects.entity.animal.AnimalFood;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Interface for animals with gender, familiarity and aging
  */
-public interface IAnimalTFC extends ICreatureTFC
-{
+public interface IAnimalTFC extends ICreatureTFC {
     /**
      * Get this animal gender, female or male
      *
@@ -54,8 +52,7 @@ public interface IAnimalTFC extends ICreatureTFC
      *
      * @return 0 if not familiarizable at all, [0, 1] for a cap
      */
-    default float getAdultFamiliarityCap()
-    {
+    default float getAdultFamiliarityCap() {
         return 0;
     }
 
@@ -90,8 +87,7 @@ public interface IAnimalTFC extends ICreatureTFC
     /**
      * Event: Do things on fertilization of females (ie: save the male genes for some sort of genetic selection)
      */
-    default void onFertilized(@Nonnull IAnimalTFC male)
-    {
+    default void onFertilized(@Nonnull IAnimalTFC male) {
         setFertilized(true);
     }
 
@@ -100,8 +96,7 @@ public interface IAnimalTFC extends ICreatureTFC
      *
      * @return double value between 0(birthday) to 1(full grown adult)
      */
-    default double getPercentToAdulthood()
-    {
+    default double getPercentToAdulthood() {
         long deltaDays = CalendarTFC.PLAYER_TIME.getTotalDays() - this.getBirthDay();
         long adulthoodDay = this.getDaysToAdulthood();
         return Math.max(0, Math.min(1, (double) deltaDays / adulthoodDay));
@@ -112,21 +107,15 @@ public interface IAnimalTFC extends ICreatureTFC
      *
      * @return the Age enum of this entity
      */
-    default Age getAge()
-    {
+    default Age getAge() {
         long deltaDays = CalendarTFC.PLAYER_TIME.getTotalDays() - this.getBirthDay();
         long adulthoodDay = this.getDaysToAdulthood();
         long elderlyDay = this.getDaysToElderly() + this.getDaysToAdulthood();
-        if (getCreatureType() == CreatureType.LIVESTOCK && this.getDaysToElderly() > 0 && deltaDays > elderlyDay)
-        {
+        if (getCreatureType() == CreatureType.LIVESTOCK && this.getDaysToElderly() > 0 && deltaDays > elderlyDay) {
             return Age.OLD; // if enabled, only for familiarizable animals
-        }
-        else if (deltaDays > adulthoodDay)
-        {
+        } else if (deltaDays > adulthoodDay) {
             return Age.ADULT;
-        }
-        else
-        {
+        } else {
             return Age.CHILD;
         }
     }
@@ -150,8 +139,7 @@ public interface IAnimalTFC extends ICreatureTFC
      *
      * @return true if ready
      */
-    default boolean isReadyToMate()
-    {
+    default boolean isReadyToMate() {
         return this.getAge() == Age.ADULT && !(this.getFamiliarity() < 0.3f) && !this.isFertilized() && !this.isHungry();
     }
 
@@ -161,12 +149,10 @@ public interface IAnimalTFC extends ICreatureTFC
      * @param stack the itemstack to check
      * @return true if item is used to feed this animal (entice and increase familiarity)
      */
-    default boolean isFood(@Nonnull ItemStack stack)
-    {
+    default boolean isFood(@Nonnull ItemStack stack) {
         //noinspection unchecked
         AnimalFood food = AnimalFood.get((Class<? extends Entity>) this.getClass());
-        if (food != null)
-        {
+        if (food != null) {
             return food.isFood(stack);
         }
         return false;
@@ -190,15 +176,14 @@ public interface IAnimalTFC extends ICreatureTFC
      * Some animals can give products (eg: Milk, Wool and Eggs)
      * This function returns if said animal is ready to be worked upon
      * (or if it is ready to lay eggs on it's own)
-     *
+     * <p>
      * ** Check for everything **
      * this function should return only true if the animal will give it's products upon work
      * (so TOP integration could show this animal is ready)
      *
      * @return true if it is ready for product production
      */
-    default boolean isReadyForAnimalProduct()
-    {
+    default boolean isReadyForAnimalProduct() {
         return false;
     }
 
@@ -207,14 +192,13 @@ public interface IAnimalTFC extends ICreatureTFC
      * Can return more than one item itemstack
      * fortune and other behaviour should not be handled here
      * Suggestion: EntityLiving#processInteract() for right clicking handling
-     *
+     * <p>
      * (This function should be implemented with TOP integration in mind ie: what would
      * you like for the tooltip to show when #isReadyForAnimalProduct returns true?)
      *
      * @return a list of itemstack
      */
-    default List<ItemStack> getProducts()
-    {
+    default List<ItemStack> getProducts() {
         return Collections.emptyList();
     }
 
@@ -222,8 +206,7 @@ public interface IAnimalTFC extends ICreatureTFC
      * Set this animal on produce cooldown
      * This means that you just sheared a sheep, your chicken just laiyed eggs or you just milked your cow
      */
-    default void setProductsCooldown()
-    {
+    default void setProductsCooldown() {
     }
 
     /**
@@ -231,8 +214,7 @@ public interface IAnimalTFC extends ICreatureTFC
      *
      * @return ticks remaining to finish cooldown
      */
-    default long getProductsCooldown()
-    {
+    default long getProductsCooldown() {
         return 0;
     }
 
@@ -242,7 +224,7 @@ public interface IAnimalTFC extends ICreatureTFC
      *
      * @return null if you don't want for a tooltip to be shown, any TextComponentTranslation object if you want it to.
      */
-    default TextComponentTranslation getTooltip() { return null; }
+    default TextComponentTranslation getTooltip() {return null;}
 
     /**
      * Get the animal name, which can be determined by male / female
@@ -252,28 +234,23 @@ public interface IAnimalTFC extends ICreatureTFC
      */
     TextComponentTranslation getAnimalName();
 
-    enum Age
-    {
+    enum Age {
         CHILD, ADULT, OLD
     }
 
-    enum Gender
-    {
+    enum Gender {
         MALE, FEMALE;
 
-        public static Gender valueOf(boolean value)
-        {
+        public static Gender valueOf(boolean value) {
             return value ? MALE : FEMALE;
         }
 
-        public boolean toBool()
-        {
+        public boolean toBool() {
             return this == MALE;
         }
     }
 
-    enum Type
-    {
+    enum Type {
         MAMMAL, OVIPAROUS
     }
 }

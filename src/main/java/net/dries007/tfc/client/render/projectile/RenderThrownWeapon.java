@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.client.render.projectile;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
@@ -19,21 +18,18 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
+import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
-public class RenderThrownWeapon<T extends EntityThrownWeapon> extends Render<T>
-{
+public class RenderThrownWeapon<T extends EntityThrownWeapon> extends Render<T> {
     private final RenderItem itemRenderer;
 
-    public RenderThrownWeapon(RenderManager renderManagerIn)
-    {
+    public RenderThrownWeapon(RenderManager renderManagerIn) {
         super(renderManagerIn);
         this.itemRenderer = Minecraft.getMinecraft().getRenderItem();
     }
 
-    public void doRender(@Nonnull T entity, double x, double y, double z, float entityYaw, float partialTicks)
-    {
+    public void doRender(@Nonnull T entity, double x, double y, double z, float entityYaw, float partialTicks) {
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) x, (float) y, (float) z);
         GlStateManager.enableRescaleNormal();
@@ -42,20 +38,17 @@ public class RenderThrownWeapon<T extends EntityThrownWeapon> extends Render<T>
 
         bindTexture(getEntityTexture(entity));
 
-        if (this.renderOutlines)
-        {
+        if (this.renderOutlines) {
             GlStateManager.enableColorMaterial();
             GlStateManager.enableOutlineMode(getTeamColor(entity));
         }
 
         ItemStack weapon = entity.getWeapon();
-        if (!weapon.isEmpty())
-        {
+        if (!weapon.isEmpty()) {
             this.itemRenderer.renderItem(weapon, ItemCameraTransforms.TransformType.GROUND);
         }
 
-        if (this.renderOutlines)
-        {
+        if (this.renderOutlines) {
             GlStateManager.disableOutlineMode();
             GlStateManager.disableColorMaterial();
         }
@@ -67,10 +60,9 @@ public class RenderThrownWeapon<T extends EntityThrownWeapon> extends Render<T>
 
     @Override
     @Nonnull
-    protected ResourceLocation getEntityTexture(@Nonnull T entity) { return TextureMap.LOCATION_BLOCKS_TEXTURE; }
+    protected ResourceLocation getEntityTexture(@Nonnull T entity) {return TextureMap.LOCATION_BLOCKS_TEXTURE;}
 
-    protected void doRenderTransformations(T entity, float partialTicks)
-    {
+    protected void doRenderTransformations(T entity, float partialTicks) {
         GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks - 135.0F, 0.0F, 0.0F, 1.0F);
 

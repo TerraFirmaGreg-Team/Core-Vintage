@@ -5,26 +5,22 @@
 
 package net.dries007.tfc.compat.patchouli;
 
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.client.TFCGuiHandler;
 import net.minecraft.util.ResourceLocation;
 
-import net.dries007.tfc.client.TFCGuiHandler;
+import javax.annotation.Nullable;
 
 @SuppressWarnings("unused")
-public class ClayKnappingComponent extends KnappingComponent
-{
+public class ClayKnappingComponent extends KnappingComponent {
     @Nullable
     @Override
-    protected ResourceLocation getSquareLow(int ticks)
-    {
+    protected ResourceLocation getSquareLow(int ticks) {
         return TFCGuiHandler.CLAY_DISABLED_TEXTURE;
     }
 
     @Nullable
     @Override
-    protected ResourceLocation getSquareHigh(int ticks)
-    {
+    protected ResourceLocation getSquareHigh(int ticks) {
         return TFCGuiHandler.CLAY_TEXTURE;
     }
 }

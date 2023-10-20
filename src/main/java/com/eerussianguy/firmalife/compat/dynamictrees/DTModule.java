@@ -1,16 +1,13 @@
 package com.eerussianguy.firmalife.compat.dynamictrees;
 
+import com.eerussianguy.firmalife.compat.ModuleCore;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import com.eerussianguy.firmalife.compat.ModuleCore;
-
-public class DTModule extends ModuleCore
-{
-    public DTModule()
-    {
+public class DTModule extends ModuleCore {
+    public DTModule() {
         super("dynamictreestfc");
     }
 
@@ -20,19 +17,16 @@ public class DTModule extends ModuleCore
     }
 
     @Override
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         addRegistry(new DTRegistry());
     }
 
     @Override
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event) {
     }
 
     @Override
-    public void postInit(FMLPostInitializationEvent event)
-    {
+    public void postInit(FMLPostInitializationEvent event) {
 
     }
 }

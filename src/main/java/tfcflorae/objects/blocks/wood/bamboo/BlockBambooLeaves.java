@@ -1,16 +1,8 @@
 package tfcflorae.objects.blocks.wood.bamboo;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableList;
-
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockStateContainer;
@@ -21,19 +13,16 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-
-import tfcflorae.types.TreesTFCF;
 import tfcflorae.util.OreDictionaryHelper;
-import tfcflorae.objects.blocks.BlocksTFCF;
 
-public class BlockBambooLeaves extends BlockLeavesTFC
-{
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
+
+public class BlockBambooLeaves extends BlockLeavesTFC {
     private BlockBambooSapling sapling;
 
-    public BlockBambooLeaves(Tree tree)
-    {
+    public BlockBambooLeaves(Tree tree) {
         super(tree);
         setSoundType(SoundType.PLANT);
         setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, true));
@@ -41,42 +30,34 @@ public class BlockBambooLeaves extends BlockLeavesTFC
         OreDictionaryHelper.register(this, "tree", "leaves", wood.getRegistryName().getPath());
     }
 
-    public void setBambooSapling(BlockBambooSapling sapling)
-    {
+    public void setBambooSapling(BlockBambooSapling sapling) {
         this.sapling = sapling;
     }
 
     @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         //worldIn.scheduleUpdate(pos, state.getBlock(), 1);
         doLeafDecay(worldIn, pos, state);
     }
 
     @Override
-    public void beginLeavesDecay(IBlockState state, World world, BlockPos pos)
-    {
+    public void beginLeavesDecay(IBlockState state, World world, BlockPos pos) {
         // Don't do vanilla decay
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         int chance = 10;
-        if (RANDOM.nextInt(101) < chance)
-        {
+        if (RANDOM.nextInt(101) < chance) {
             drops.add(new ItemStack(sapling));
         }
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, @Nullable Block blockIn, @Nullable BlockPos fromPos)
-    {
-        for (EnumFacing d : EnumFacing.VALUES)
-        {
-            for (int i = 0; i < 6; i++)
-            {
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, @Nullable Block blockIn, @Nullable BlockPos fromPos) {
+        for (EnumFacing d : EnumFacing.VALUES) {
+            for (int i = 0; i < 6; i++) {
                 Block offsetBlock = world.getBlockState(pos.offset(d, i)).getBlock();
                 if (offsetBlock instanceof BlockBambooLog)
                     return;
@@ -89,20 +70,17 @@ public class BlockBambooLeaves extends BlockLeavesTFC
 
     @Override
     @Nonnull
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, DECAYABLE);
     }
 
     @Override
     @Nonnull
-    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
-    {
+    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
         return ImmutableList.of(new ItemStack(this));
     }
 
-    private void doLeafDecay(World world, BlockPos pos, IBlockState state)
-    {
+    private void doLeafDecay(World world, BlockPos pos, IBlockState state) {
         if (world.isRemote)
             return;
 
@@ -113,13 +91,10 @@ public class BlockBambooLeaves extends BlockLeavesTFC
         IBlockState state1;
         paths.add(pos); // Center block
 
-        for (int i = 0; i < 6; i++)
-        {
+        for (int i = 0; i < 6; i++) {
             pathsToAdd = new ArrayList<>();
-            for (BlockPos p1 : paths)
-            {
-                for (EnumFacing face : EnumFacing.values())
-                {
+            for (BlockPos p1 : paths) {
+                for (EnumFacing face : EnumFacing.values()) {
                     pos1.setPos(p1).move(face);
                     if (evaluated.contains(pos1) || !world.isBlockLoaded(pos1))
                         continue;

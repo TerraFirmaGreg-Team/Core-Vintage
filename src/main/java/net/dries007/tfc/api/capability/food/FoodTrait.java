@@ -5,22 +5,21 @@
 
 package net.dries007.tfc.api.capability.food;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * This is a trait that can be applied to a food to modify it's decay date.
  * To add new traits, simply create new instances of this class, and assign a unique name
  */
-public class FoodTrait
-{
+public class FoodTrait {
     public static final FoodTrait SALTED;
     public static final FoodTrait BRINED; // No decay modifier, required to pickle foods
     public static final FoodTrait PICKLED;
@@ -32,8 +31,7 @@ public class FoodTrait
 
     private static final Map<String, FoodTrait> TRAITS = new HashMap<>();
 
-    static
-    {
+    static {
         // These must be initialized after TRAITS is, to avoid NPE
 
         BRINED = new FoodTrait("brined", 1.0f);
@@ -46,42 +44,35 @@ public class FoodTrait
         BURNT_TO_A_CRISP = new FoodTrait("burnt_to_a_crisp", 2.5f); // This one is so high as it is meant to be > the existing gain from cooking meat.
     }
 
-    public static Map<String, FoodTrait> getTraits()
-    {
-        return TRAITS;
-    }
-
     private final String name;
     private final float decayModifier;
     private final boolean hasTooltip;
-
-    public FoodTrait(@Nonnull String name, float decayModifier)
-    {
+    public FoodTrait(@Nonnull String name, float decayModifier) {
         this(name, decayModifier, true);
     }
 
-    public FoodTrait(@Nonnull String name, float decayModifier, boolean hasTooltip)
-    {
+    public FoodTrait(@Nonnull String name, float decayModifier, boolean hasTooltip) {
         this.name = name;
         this.decayModifier = decayModifier;
         this.hasTooltip = hasTooltip;
 
         // Require a unique trait
-        if (TRAITS.containsKey(name))
-        {
+        if (TRAITS.containsKey(name)) {
             throw new IllegalStateException("There is already a trait with the name '" + name + "'");
         }
         TRAITS.put(name, this);
     }
 
-    public float getDecayModifier()
-    {
+    public static Map<String, FoodTrait> getTraits() {
+        return TRAITS;
+    }
+
+    public float getDecayModifier() {
         return decayModifier;
     }
 
     @Nonnull
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -92,10 +83,8 @@ public class FoodTrait
      * @param text  The tooltip strings
      */
     @SideOnly(Side.CLIENT)
-    public void addTraitInfo(@Nonnull ItemStack stack, @Nonnull List<String> text)
-    {
-        if (hasTooltip)
-        {
+    public void addTraitInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+        if (hasTooltip) {
             text.add(I18n.format("tfc.food_traits." + getName()));
         }
     }

@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityChickenTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,13 +15,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityChickenTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelChickenTFC extends ModelBase
-{
+public class ModelChickenTFC extends ModelBase {
     private final ModelRenderer head;
     private final ModelRenderer body;
     private final ModelRenderer rightLeg;
@@ -34,8 +32,7 @@ public class ModelChickenTFC extends ModelBase
     private final ModelRenderer[] tails;
     private final ModelRenderer crown;
 
-    public ModelChickenTFC()
-    {
+    public ModelChickenTFC() {
         byte var1 = 16;
         this.head = new ModelRenderer(this, 0, 0);
         this.head.addBox(-2.0F, -6.0F, -2.0F, 4, 6, 3, 0.0F);
@@ -68,8 +65,7 @@ public class ModelChickenTFC extends ModelBase
 
 
         tails = new ModelRenderer[32];
-        for (int i = 0; i < 32; i++)
-        {
+        for (int i = 0; i < 32; i++) {
             tails[i] = new ModelRenderer(this, 45, 0);
             tails[i].addBox(0, 16, 0, 3, 21, 0, 0);
             tails[i].setRotationPoint(0, 32, 2);
@@ -77,8 +73,7 @@ public class ModelChickenTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
         EntityChickenTFC chicken = ((EntityChickenTFC) entity);
@@ -91,8 +86,7 @@ public class ModelChickenTFC extends ModelBase
         GlStateManager.scale(1 / ageScale, 1 / ageScale, 1 / ageScale);
         GlStateManager.translate(0.0F, 1.5f - (1.5f * percent), 0f);
 
-        if (percent >= 0.75 && chicken.getGender() == EntityAnimalTFC.Gender.MALE)
-        {
+        if (percent >= 0.75 && chicken.getGender() == EntityAnimalTFC.Gender.MALE) {
             crown.isHidden = false;
             this.body.rotateAngleX = (float) Math.PI / 4F;
             this.rightWing.rotateAngleX = (float) Math.PI / 4F;
@@ -124,16 +118,14 @@ public class ModelChickenTFC extends ModelBase
         GlStateManager.popMatrix();
         GlStateManager.pushMatrix();
         GlStateManager.scale(0.25F / percent, 0.5F / percent, 0.25F / percent);
-        for (int i = 0; i < 32; i++)
-        {
+        for (int i = 0; i < 32; i++) {
             tails[i].render(par7);
         }
         GlStateManager.popMatrix();
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
         this.head.rotateAngleX = -(par5 / (180F / (float) Math.PI));
         this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
         this.crown.rotateAngleX = -(par5 / (180F / (float) Math.PI));
@@ -145,8 +137,7 @@ public class ModelChickenTFC extends ModelBase
         this.body.rotateAngleX = (float) Math.PI / 2F;
         crown.isHidden = true;
 
-        for (int i = 0; i < 32; i++)
-        {
+        for (int i = 0; i < 32; i++) {
             tails[i].rotateAngleX = (float) Math.PI * 3 / 5F + (float) ((i % 3) * Math.PI / 32) * (i % 2 != 0 ? 1 : -1);
             tails[i].rotateAngleZ = (float) Math.PI / -2 + (float) Math.PI * i / 31;
         }

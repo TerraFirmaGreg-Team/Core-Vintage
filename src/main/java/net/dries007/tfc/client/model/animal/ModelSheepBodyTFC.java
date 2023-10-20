@@ -5,8 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,20 +14,17 @@ import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelSheepBodyTFC extends ModelQuadruped
-{
+public class ModelSheepBodyTFC extends ModelQuadruped {
     private final ModelRenderer horn1;
     private final ModelRenderer horn2;
     private final ModelRenderer horn1b;
     private final ModelRenderer horn2b;
 
-    public ModelSheepBodyTFC()
-    {
+    public ModelSheepBodyTFC() {
         super(12, 0.0F);
         this.head = new ModelRenderer(this, 0, 0);
         this.head.addBox(-3.0F, -4.0F, -6.0F, 6, 6, 8, 0.0F);
@@ -70,27 +67,23 @@ public class ModelSheepBodyTFC extends ModelQuadruped
     }
 
     @Override
-    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
         EntitySheepTFC sheep = ((EntitySheepTFC) entity);
 
         float percent = (float) sheep.getPercentToAdulthood();
         float ageScale = 2.0F - percent;
 
-        if (percent < 0.5)
-        {
+        if (percent < 0.5) {
             horn1.isHidden = true;
             horn2.isHidden = true;
-            if (percent < 0.75)
-            {
+            if (percent < 0.75) {
                 horn1b.isHidden = true;
                 horn2b.isHidden = true;
             }
         }
 
-        if (sheep.getGender() == EntityAnimalTFC.Gender.FEMALE)
-        {
+        if (sheep.getGender() == EntityAnimalTFC.Gender.FEMALE) {
             horn1.isHidden = true;
             horn2.isHidden = true;
         }

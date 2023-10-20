@@ -5,11 +5,13 @@
 
 package net.dries007.tfc.objects.recipes;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-
 import com.google.gson.JsonObject;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.objects.items.food.ItemSandwich;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -20,36 +22,28 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.items.food.ItemSandwich;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("unused")
-public class SandwichRecipe extends ShapedDamageRecipe
-{
-    public SandwichRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @Nonnull ItemStack result, int damage)
-    {
+public class SandwichRecipe extends ShapedDamageRecipe {
+    public SandwichRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @Nonnull ItemStack result, int damage) {
         super(group, input, result, damage);
     }
 
     @Nonnull
     @Override
-    public ItemStack getCraftingResult(@Nonnull InventoryCrafting inv)
-    {
+    public ItemStack getCraftingResult(@Nonnull InventoryCrafting inv) {
         ItemStack output = super.getCraftingResult(inv);
         IFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
-        if (food instanceof ItemSandwich.SandwichHandler)
-        {
+        if (food instanceof ItemSandwich.SandwichHandler) {
             ItemSandwich.SandwichHandler sandwich = (ItemSandwich.SandwichHandler) food;
             List<FoodData> breads = new ArrayList<>();
             List<FoodData> ingredients = new ArrayList<>();
             getBreadsAndIngredients(inv, breads, ingredients);
 
-            if (breads.size() != 2 || ingredients.size() < 1)
-            {
+            if (breads.size() != 2 || ingredients.size() < 1) {
                 // Something weird happened
                 return ItemStack.EMPTY;
             }
@@ -61,10 +55,8 @@ public class SandwichRecipe extends ShapedDamageRecipe
     }
 
     @Override
-    public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world)
-    {
-        if (super.matches(inv, world))
-        {
+    public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
+        if (super.matches(inv, world)) {
             List<FoodData> breads = new ArrayList<>();
             List<FoodData> ingredients = new ArrayList<>();
             getBreadsAndIngredients(inv, breads, ingredients);
@@ -73,28 +65,21 @@ public class SandwichRecipe extends ShapedDamageRecipe
         return false;
     }
 
-    private void getBreadsAndIngredients(InventoryCrafting inv, List<FoodData> breads, List<FoodData> ingredients)
-    {
-        for (int i = 0; i < inv.getSizeInventory(); i++)
-        {
+    private void getBreadsAndIngredients(InventoryCrafting inv, List<FoodData> breads, List<FoodData> ingredients) {
+        for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack ingredientStack = inv.getStackInSlot(i);
             IFood ingredientCap = ingredientStack.getCapability(CapabilityFood.CAPABILITY, null);
-            if (ingredientCap != null)
-            {
-                if (ingredientCap.isRotten())
-                {
+            if (ingredientCap != null) {
+                if (ingredientCap.isRotten()) {
                     // Found a rotten ingredient, aborting
                     breads.clear();
                     ingredients.clear();
                     return;
                 }
-                if (OreDictionaryHelper.doesStackMatchOre(ingredientStack, "categoryBread"))
-                {
+                if (OreDictionaryHelper.doesStackMatchOre(ingredientStack, "categoryBread")) {
                     // Found a bread item
                     breads.add(ingredientCap.getData());
-                }
-                else
-                {
+                } else {
                     ingredients.add(ingredientCap.getData());
                 }
             }
@@ -102,11 +87,9 @@ public class SandwichRecipe extends ShapedDamageRecipe
     }
 
     @SuppressWarnings("unused")
-    public static class Factory implements IRecipeFactory
-    {
+    public static class Factory implements IRecipeFactory {
         @Override
-        public IRecipe parse(final JsonContext context, final JsonObject json)
-        {
+        public IRecipe parse(final JsonContext context, final JsonObject json) {
             String group = JsonUtils.getString(json, "group", "");
 
             CraftingHelper.ShapedPrimer primer = RecipeUtils.parsePhaped(context, json);

@@ -5,17 +5,15 @@
 
 package net.dries007.tfc.api.capability.heat;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.client.resources.I18n;
-import net.minecraft.util.text.TextFormatting;
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.config.OreTooltipMode;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextFormatting;
 
-public enum Heat
-{
+import javax.annotation.Nullable;
+
+public enum Heat {
     WARMING(1f, 80f, TextFormatting.GRAY, TextFormatting.DARK_GRAY),
     HOT(80f, 210f, TextFormatting.GRAY, TextFormatting.DARK_GRAY),
     VERY_HOT(210f, 480f, TextFormatting.GRAY, TextFormatting.DARK_GRAY),
@@ -29,24 +27,33 @@ public enum Heat
     BRILLIANT_WHITE(1500f, 1601f, TextFormatting.WHITE);
 
     private static final Heat[] VALUES = values();
+    final TextFormatting format, alternate;
+    private final float min;
+    private final float max;
 
-    public static float maxVisibleTemperature()
-    {
+    Heat(float min, float max, TextFormatting format, TextFormatting alternate) {
+        this.min = min;
+        this.max = max;
+        this.format = format;
+        this.alternate = alternate;
+    }
+
+    Heat(float min, float max, TextFormatting format) {
+        this(min, max, format, format);
+    }
+
+    public static float maxVisibleTemperature() {
         return BRILLIANT_WHITE.getMax();
     }
 
     @Nullable
-    public static Heat getHeat(float temperature)
-    {
-        for (Heat heat : VALUES)
-        {
-            if (heat.min <= temperature && temperature < heat.max)
-            {
+    public static Heat getHeat(float temperature) {
+        for (Heat heat : VALUES) {
+            if (heat.min <= temperature && temperature < heat.max) {
                 return heat;
             }
         }
-        if (temperature > BRILLIANT_WHITE.max)
-        {
+        if (temperature > BRILLIANT_WHITE.max) {
             // Default to "hotter than brilliant white" for max
             return BRILLIANT_WHITE;
         }
@@ -54,17 +61,13 @@ public enum Heat
     }
 
     @Nullable
-    public static String getTooltipColorless(float temperature)
-    {
+    public static String getTooltipColorless(float temperature) {
         Heat heat = Heat.getHeat(temperature);
-        if (heat != null)
-        {
+        if (heat != null) {
             StringBuilder b = new StringBuilder();
             b.append(I18n.format(Helpers.getEnumName(heat)));
-            if (heat != Heat.BRILLIANT_WHITE)
-            {
-                for (int i = 1; i <= 4; i++)
-                {
+            if (heat != Heat.BRILLIANT_WHITE) {
+                for (int i = 1; i <= 4; i++) {
                     if (temperature <= heat.getMin() + ((float) i * 0.2f) * (heat.getMax() - heat.getMin()))
                         continue;
                     b.append("\u2605");
@@ -76,15 +79,12 @@ public enum Heat
     }
 
     @Nullable
-    public static String getTooltip(float temperature)
-    {
+    public static String getTooltip(float temperature) {
         Heat heat = Heat.getHeat(temperature);
         String tooltip = getTooltipColorless(temperature);
-        if (tooltip != null && heat != null)
-        {
+        if (tooltip != null && heat != null) {
             tooltip = heat.format + tooltip;
-            if (ConfigTFC.Client.TOOLTIP.oreTooltipMode == OreTooltipMode.ADVANCED)
-            {
+            if (ConfigTFC.Client.TOOLTIP.oreTooltipMode == OreTooltipMode.ADVANCED) {
                 tooltip = tooltip + " : " + I18n.format("tfc.tooltip.melttemp", Math.round(temperature));
             }
 
@@ -93,45 +93,23 @@ public enum Heat
     }
 
     @Nullable
-    public static String getTooltipAlternate(float temperature)
-    {
+    public static String getTooltipAlternate(float temperature) {
         Heat heat = Heat.getHeat(temperature);
         String tooltip = getTooltipColorless(temperature);
-        if (tooltip != null && heat != null)
-        {
+        if (tooltip != null && heat != null) {
             tooltip = heat.alternate + tooltip;
-            if (ConfigTFC.Client.TOOLTIP.oreTooltipMode == OreTooltipMode.ADVANCED)
-            {
+            if (ConfigTFC.Client.TOOLTIP.oreTooltipMode == OreTooltipMode.ADVANCED) {
                 tooltip = tooltip + " : " + I18n.format("tfc.tooltip.melttemp", Math.round(temperature));
             }
         }
         return tooltip;
     }
 
-    final TextFormatting format, alternate;
-    private final float min;
-    private final float max;
-
-    Heat(float min, float max, TextFormatting format, TextFormatting alternate)
-    {
-        this.min = min;
-        this.max = max;
-        this.format = format;
-        this.alternate = alternate;
-    }
-
-    Heat(float min, float max, TextFormatting format)
-    {
-        this(min, max, format, format);
-    }
-
-    public float getMin()
-    {
+    public float getMin() {
         return min;
     }
 
-    public float getMax()
-    {
+    public float getMax() {
         return max;
     }
 }

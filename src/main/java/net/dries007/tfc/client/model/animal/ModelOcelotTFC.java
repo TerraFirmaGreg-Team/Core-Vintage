@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,10 +15,9 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.util.math.MathHelper;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import javax.annotation.Nonnull;
 
-public class ModelOcelotTFC extends ModelBase
-{
+public class ModelOcelotTFC extends ModelBase {
     private final ModelRenderer ocelotBackLeftLeg;
     private final ModelRenderer ocelotBackRightLeg;
     private final ModelRenderer ocelotFrontLeftLeg;
@@ -30,8 +28,7 @@ public class ModelOcelotTFC extends ModelBase
     private final ModelRenderer ocelotBody;
     private int state = 1;
 
-    public ModelOcelotTFC()
-    {
+    public ModelOcelotTFC() {
         this.setTextureOffset("head.main", 0, 0);
         this.setTextureOffset("head.nose", 0, 24);
         this.setTextureOffset("head.ear1", 0, 10);
@@ -67,16 +64,13 @@ public class ModelOcelotTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
+    public void render(@Nonnull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
-        if (((EntityAnimal) entity).isChild())
-        {
+        if (((EntityAnimal) entity).isChild()) {
             double ageScale = 1;
             double percent = 1;
-            if (entity instanceof IAnimalTFC)
-            {
+            if (entity instanceof IAnimalTFC) {
                 percent = ((IAnimalTFC) entity).getPercentToAdulthood();
                 ageScale = 1 / (2.0D - percent);
             }
@@ -98,33 +92,25 @@ public class ModelOcelotTFC extends ModelBase
         GlStateManager.popMatrix();
     }
 
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
-    {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
         this.ocelotHead.rotateAngleX = headPitch * 0.017453292F;
         this.ocelotHead.rotateAngleY = netHeadYaw * 0.017453292F;
-        if (this.state != 3)
-        {
+        if (this.state != 3) {
             this.ocelotBody.rotateAngleX = 1.5707964F;
-            if (this.state == 2)
-            {
+            if (this.state == 2) {
                 this.ocelotBackLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
                 this.ocelotBackRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 0.3F) * limbSwingAmount;
                 this.ocelotFrontLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 3.1415927F + 0.3F) * limbSwingAmount;
                 this.ocelotFrontRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * limbSwingAmount;
                 this.ocelotTail2.rotateAngleX = 1.7278761F + 0.31415927F * MathHelper.cos(limbSwing) * limbSwingAmount;
-            }
-            else
-            {
+            } else {
                 this.ocelotBackLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
                 this.ocelotBackRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * limbSwingAmount;
                 this.ocelotFrontLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * limbSwingAmount;
                 this.ocelotFrontRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
-                if (this.state == 1)
-                {
+                if (this.state == 1) {
                     this.ocelotTail2.rotateAngleX = 1.7278761F + 0.7853982F * MathHelper.cos(limbSwing) * limbSwingAmount;
-                }
-                else
-                {
+                } else {
                     this.ocelotTail2.rotateAngleX = 1.7278761F + 0.47123894F * MathHelper.cos(limbSwing) * limbSwingAmount;
                 }
             }
@@ -132,8 +118,7 @@ public class ModelOcelotTFC extends ModelBase
 
     }
 
-    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
-    {
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         EntityOcelot entityocelot = (EntityOcelot) entitylivingbaseIn;
         this.ocelotBody.rotationPointY = 12.0F;
         this.ocelotBody.rotationPointZ = -10.0F;
@@ -153,8 +138,7 @@ public class ModelOcelotTFC extends ModelBase
         this.ocelotBackRightLeg.rotationPointZ = 5.0F;
         this.ocelotTail.rotateAngleX = 0.9F;
         ModelRenderer var10000;
-        if (entityocelot.isSneaking())
-        {
+        if (entityocelot.isSneaking()) {
             ++this.ocelotBody.rotationPointY;
             var10000 = this.ocelotHead;
             var10000.rotationPointY += 2.0F;
@@ -166,18 +150,14 @@ public class ModelOcelotTFC extends ModelBase
             this.ocelotTail.rotateAngleX = 1.5707964F;
             this.ocelotTail2.rotateAngleX = 1.5707964F;
             this.state = 0;
-        }
-        else if (entityocelot.isSprinting())
-        {
+        } else if (entityocelot.isSprinting()) {
             this.ocelotTail2.rotationPointY = this.ocelotTail.rotationPointY;
             var10000 = this.ocelotTail2;
             var10000.rotationPointZ += 2.0F;
             this.ocelotTail.rotateAngleX = 1.5707964F;
             this.ocelotTail2.rotateAngleX = 1.5707964F;
             this.state = 2;
-        }
-        else if (entityocelot.isSitting())
-        {
+        } else if (entityocelot.isSitting()) {
             this.ocelotBody.rotateAngleX = 0.7853982F;
             var10000 = this.ocelotBody;
             var10000.rotationPointY += -4.0F;
@@ -209,9 +189,7 @@ public class ModelOcelotTFC extends ModelBase
             this.ocelotBackRightLeg.rotationPointY = 21.0F;
             this.ocelotBackRightLeg.rotationPointZ = 1.0F;
             this.state = 3;
-        }
-        else
-        {
+        } else {
             this.state = 1;
         }
 

@@ -5,41 +5,36 @@
 
 package net.dries007.tfc.world.classic.mapgen;
 
-import java.util.Random;
-
+import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
+import java.util.Random;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.*;
 
 /**
  * todo: this is even more of a mess than the other two mapgen classes, cause the generate method is weird.
  */
-public class MapGenRiverRavine extends MapGenBase
-{
+public class MapGenRiverRavine extends MapGenBase {
     private final float[] multipliers = new float[256];
 
     private final int riverRavineRarity;
 
-    public MapGenRiverRavine(int rarity)
-    {
+    public MapGenRiverRavine(int rarity) {
         riverRavineRarity = rarity;
         range = 32;
     }
 
     @Override
-    public void generate(World worldIn, int x, int z, ChunkPrimer primer)
-    {
+    public void generate(World worldIn, int x, int z, ChunkPrimer primer) {
         recursiveGenerate(worldIn, x, z, x, z, primer); // todo: wtf?
     }
 
     @Override
-    protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int originalX, int originalZ, ChunkPrimer chunkPrimerIn)
-    {
+    protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int originalX, int originalZ, ChunkPrimer chunkPrimerIn) {
         if (rand.nextInt(riverRavineRarity) != 0) return;
         double x = chunkX * 16 + rand.nextInt(16);
         double y = 80;
@@ -51,8 +46,7 @@ public class MapGenRiverRavine extends MapGenBase
         generateRavine(rand.nextLong(), chunkX, chunkZ, chunkPrimerIn, x, y, z, angleX, angleY, angleZ, y);
     }
 
-    protected void generateRavine(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double startX, double startY, double startZ, float angleX, float angleY, float angleZ, double waterHeight)
-    {
+    protected void generateRavine(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double startX, double startY, double startZ, float angleX, float angleY, float angleZ, double waterHeight) {
         final Random rand = new Random(seed);
         final double worldX = chunkX * 16 + 8;
         final double worldZ = chunkZ * 16 + 8;
@@ -64,16 +58,14 @@ public class MapGenRiverRavine extends MapGenBase
         {
             float f = 1.0F + rand.nextFloat() * rand.nextFloat() * 1.0F;
             multipliers[0] = f * f;
-            for (int i = 1; i < 256; ++i)
-            {
+            for (int i = 1; i < 256; ++i) {
                 if (rand.nextInt(3) == 0) f = 1.0F + rand.nextFloat() * rand.nextFloat() * 1.0F;
                 this.multipliers[i] = f * f;
             }
         }
 
         outer:
-        for (int round = 0; round < rounds; round++)
-        {
+        for (int round = 0; round < rounds; round++) {
             double min = 3.5D + MathHelper.sin(round * (float) Math.PI / rounds) * angleX * 1.0F;
             double max = min * 0.8;
             min *= rand.nextFloat() * 0.25D + 0.75D;
@@ -120,28 +112,22 @@ public class MapGenRiverRavine extends MapGenBase
             if (zMin < 0) zMin = 0;
             if (zMax > 16) zMax = 16;
 
-            for (int x = Math.max(xMin - 1, 0); x < Math.min(xMax + 1, 16); ++x)
-            {
-                for (int z = Math.max(zMin - 1, 0); z < Math.min(zMax + 1, 16); ++z)
-                {
-                    for (int y = Math.min(yMax + 1, 250); y >= Math.max(yMin - 2, 1); --y)
-                    {
+            for (int x = Math.max(xMin - 1, 0); x < Math.min(xMax + 1, 16); ++x) {
+                for (int z = Math.max(zMin - 1, 0); z < Math.min(zMax + 1, 16); ++z) {
+                    for (int y = Math.min(yMax + 1, 250); y >= Math.max(yMin - 2, 1); --y) {
                         if (BlocksTFC.isWater(primer.getBlockState(x, y, z)))
                             continue outer;
                     }
                 }
             }
 
-            for (int x = xMin; x < xMax; x++)
-            {
+            for (int x = xMin; x < xMax; x++) {
                 final double xNormalized = (x + chunkX * 16 + 0.5D - startX) / min;
-                for (int z = zMin; z < zMax; z++)
-                {
+                for (int z = zMin; z < zMax; z++) {
                     final double zNormalized = (z + chunkZ * 16 + 0.5D - startZ) / min;
                     if (xNormalized * xNormalized + zNormalized * zNormalized >= 1.0D) continue;
 
-                    for (int y = yMax - 1; y >= yMin; y--)
-                    {
+                    for (int y = yMax - 1; y >= yMin; y--) {
                         final double yNormalized = (y + 0.5D - startY) / max;
                         if ((xNormalized * xNormalized + zNormalized * zNormalized) * multipliers[y] + yNormalized * yNormalized / 6.0D >= 1.0D)
                             continue;

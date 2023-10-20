@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.objects;
 
-public enum Powder
-{
+public enum Powder {
     FLUX,
     COKE,
     KAOLINITE,

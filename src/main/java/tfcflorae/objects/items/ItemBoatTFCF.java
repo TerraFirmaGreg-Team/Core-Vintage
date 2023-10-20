@@ -1,12 +1,10 @@
 package tfcflorae.objects.items;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.api.types.Tree;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
@@ -23,74 +21,63 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import tfcflorae.objects.entity.EntityBoatTFCF;
-import mcp.MethodsReturnNonnullByDefault;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.Tree;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemBoatTFCF extends ItemTFCF
-{
+public class ItemBoatTFCF extends ItemTFCF {
     private static final Map<IFruitTree, ItemBoatTFCF> MAP = new HashMap<>();
     private static final Map<Tree, ItemBoatTFCF> MAP_TREE = new HashMap<>();
-
-    public static ItemBoatTFCF get(IFruitTree wood)
-    {
-        return MAP.get(wood);
-    }
-    
-    public static ItemBoatTFCF get(Tree tree)
-    {
-        return MAP_TREE.get(tree);
-    }
-
     private final IFruitTree wood;
     private final Tree tree;
 
-    public ItemBoatTFCF(IFruitTree wood)
-    {
+    public ItemBoatTFCF(IFruitTree wood) {
         this.wood = wood;
         this.tree = null;
         if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
     }
-    
-    public ItemBoatTFCF(Tree tree)
-    {
+    public ItemBoatTFCF(Tree tree) {
         this.tree = tree;
         this.wood = null;
         if (MAP_TREE.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
     }
 
-    public IFruitTree getWood()
-    {
+    public static ItemBoatTFCF get(IFruitTree wood) {
+        return MAP.get(wood);
+    }
+
+    public static ItemBoatTFCF get(Tree tree) {
+        return MAP_TREE.get(tree);
+    }
+
+    public IFruitTree getWood() {
         return wood;
     }
 
-    public Tree getTree()
-    {
+    public Tree getTree() {
         return tree;
     }
 
     @Nonnull
     @Override
-    public Size getSize(@Nonnull ItemStack stack)
-    {
+    public Size getSize(@Nonnull ItemStack stack) {
         return Size.LARGE; // Stored in chests
     }
 
     @Nonnull
     @Override
-    public Weight getWeight(@Nonnull ItemStack stack)
-    {
+    public Weight getWeight(@Nonnull ItemStack stack) {
         return Weight.MEDIUM; // Stacksize = 16
     }
 
     @Override
-    public boolean canStack(@Nonnull ItemStack stack)
-    {
+    public boolean canStack(@Nonnull ItemStack stack) {
         return false;
     }
 
@@ -98,8 +85,7 @@ public class ItemBoatTFCF extends ItemTFCF
      * Copy from vanilla ItemBoat, but setting EntityBoatTFC's wood type
      */
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
-    {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         float f = 1.0F;
         float f1 = playerIn.prevRotationPitch + (playerIn.rotationPitch - playerIn.prevRotationPitch) * 1.0F;
@@ -117,39 +103,28 @@ public class ItemBoatTFCF extends ItemTFCF
         Vec3d vec3d1 = vec3d.add((double) f7 * 5.0D, (double) f6 * 5.0D, (double) f8 * 5.0D);
         RayTraceResult raytraceresult = worldIn.rayTraceBlocks(vec3d, vec3d1, true);
 
-        if (raytraceresult == null)
-        {
+        if (raytraceresult == null) {
             return new ActionResult<>(EnumActionResult.PASS, itemstack);
-        }
-        else
-        {
+        } else {
             Vec3d vec3d2 = playerIn.getLook(1.0F);
             boolean flag = false;
             List<Entity> list = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, playerIn.getEntityBoundingBox().expand(vec3d2.x * 5.0D, vec3d2.y * 5.0D, vec3d2.z * 5.0D).grow(1.0D));
 
-            for (Entity entity : list)
-            {
-                if (entity.canBeCollidedWith())
-                {
+            for (Entity entity : list) {
+                if (entity.canBeCollidedWith()) {
                     AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(entity.getCollisionBorderSize());
 
-                    if (axisalignedbb.contains(vec3d))
-                    {
+                    if (axisalignedbb.contains(vec3d)) {
                         flag = true;
                     }
                 }
             }
 
-            if (flag)
-            {
+            if (flag) {
                 return new ActionResult<>(EnumActionResult.PASS, itemstack);
-            }
-            else if (raytraceresult.typeOfHit != RayTraceResult.Type.BLOCK)
-            {
+            } else if (raytraceresult.typeOfHit != RayTraceResult.Type.BLOCK) {
                 return new ActionResult<>(EnumActionResult.PASS, itemstack);
-            }
-            else
-            {
+            } else {
                 Block block = worldIn.getBlockState(raytraceresult.getBlockPos()).getBlock();
                 boolean flag1 = block == Blocks.WATER || block == Blocks.FLOWING_WATER;
                 EntityBoatTFCF entityboat = new EntityBoatTFCF(worldIn, raytraceresult.hitVec.x, flag1 ? raytraceresult.hitVec.y - 0.12D : raytraceresult.hitVec.y, raytraceresult.hitVec.z);
@@ -161,19 +136,14 @@ public class ItemBoatTFCF extends ItemTFCF
 
                 entityboat.rotationYaw = playerIn.rotationYaw;
 
-                if (!worldIn.getCollisionBoxes(entityboat, entityboat.getEntityBoundingBox().grow(-0.1D)).isEmpty())
-                {
+                if (!worldIn.getCollisionBoxes(entityboat, entityboat.getEntityBoundingBox().grow(-0.1D)).isEmpty()) {
                     return new ActionResult<>(EnumActionResult.FAIL, itemstack);
-                }
-                else
-                {
-                    if (!worldIn.isRemote)
-                    {
+                } else {
+                    if (!worldIn.isRemote) {
                         worldIn.spawnEntity(entityboat);
                     }
 
-                    if (!playerIn.capabilities.isCreativeMode)
-                    {
+                    if (!playerIn.capabilities.isCreativeMode) {
                         itemstack.shrink(1);
                     }
 

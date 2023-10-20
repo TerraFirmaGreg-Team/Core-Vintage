@@ -1,51 +1,34 @@
 package tfcflorae.client;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.client.gui.GuiChestTFC;
+import net.dries007.tfc.objects.container.ContainerChestTFC;
+import net.dries007.tfc.objects.container.ContainerKnapping;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-
-import net.dries007.tfc.client.gui.*;
-import net.dries007.tfc.objects.container.*;
-import net.dries007.tfc.util.Helpers;
-
 import tfcflorae.TFCFlorae;
 import tfcflorae.api.knapping.KnappingTypes;
-import tfcflorae.client.gui.GuiBag;
-import tfcflorae.client.gui.GuiCondenser;
-import tfcflorae.client.gui.GuiCrate;
-import tfcflorae.client.gui.GuiSack;
-import tfcflorae.client.gui.GuiUrn;
+import tfcflorae.client.gui.*;
 import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitChestTFCF;
-import tfcflorae.objects.container.ContainerBag;
-import tfcflorae.objects.container.ContainerCondenser;
-import tfcflorae.objects.container.ContainerCrate;
-import tfcflorae.objects.container.ContainerSack;
-import tfcflorae.objects.container.ContainerUrn;
+import tfcflorae.objects.container.*;
 import tfcflorae.objects.items.ItemBag;
 import tfcflorae.objects.items.ItemSack;
-import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.objects.items.ceramics.ItemClayKaolinite;
 import tfcflorae.objects.items.rock.ItemMud;
 import tfcflorae.objects.te.TECondenser;
 import tfcflorae.objects.te.TECrate;
 import tfcflorae.objects.te.TEUrn;
 import tfcflorae.util.OreDictionaryHelper;
 
-import static tfcflorae.TFCFlorae.MODID;
-public class GuiHandler implements IGuiHandler
-{
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+public class GuiHandler implements IGuiHandler {
     public static final ResourceLocation SACK_INVENTORY_BACKGROUND = new ResourceLocation(TFCFlorae.MODID, "textures/gui/sack_inventory.png");
     public static final ResourceLocation BAG_INVENTORY_BACKGROUND = new ResourceLocation(TFCFlorae.MODID, "textures/gui/bag_inventory.png");
     public static final ResourceLocation PINEAPPLE_LEATHER_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/pineapple_leather_button.png");
@@ -68,25 +51,21 @@ public class GuiHandler implements IGuiHandler
     public static final ResourceLocation FLINT_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/flint_button.png");
     public static final ResourceLocation FLINT_DISABLED_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/flint_button_disabled.png");
 
-    public static void openGui(World world, BlockPos pos, EntityPlayer player, Type type)
-    {
+    public static void openGui(World world, BlockPos pos, EntityPlayer player, Type type) {
         player.openGui(TFCFlorae.instance, type.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
     }
 
-    public static void openGui(World world, EntityPlayer player, Type type)
-    {
+    public static void openGui(World world, EntityPlayer player, Type type) {
         player.openGui(TFCFlorae.instance, type.ordinal(), world, 0, 0, 0);
     }
 
     @Override
     @Nullable
-    public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-    {
+    public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
         ItemStack stack = player.getHeldItemMainhand();
         Type type = Type.valueOf(ID);
-        switch (type)
-        {
+        switch (type) {
             case SACK:
                 return new ContainerSack(player.inventory, stack.getItem() instanceof ItemSack ? stack : player.getHeldItemOffhand());
             case BAG:
@@ -118,14 +97,13 @@ public class GuiHandler implements IGuiHandler
             case STONEWARE_CLAY:
                 return new ContainerKnapping(KnappingTypes.STONEWARE_CLAY, player.inventory, OreDictionaryHelper.doesStackMatchOre(stack, "clayStoneware") ? stack : player.getHeldItemOffhand());
             case FLINT:
-                return new ContainerKnapping(KnappingTypes.FLINT, player.inventory,  OreDictionaryHelper.doesStackMatchOre(stack, "flint") ? stack : player.getHeldItemOffhand());
+                return new ContainerKnapping(KnappingTypes.FLINT, player.inventory, OreDictionaryHelper.doesStackMatchOre(stack, "flint") ? stack : player.getHeldItemOffhand());
             case URN:
                 return new ContainerUrn(player.inventory, Helpers.getTE(world, pos, TEUrn.class));
             case CRATE:
                 return new ContainerCrate(player.inventory, Helpers.getTE(world, pos, TECrate.class));
             case CHEST:
-                if (world.getBlockState(pos).getBlock() instanceof BlockFruitChestTFCF)
-                {
+                if (world.getBlockState(pos).getBlock() instanceof BlockFruitChestTFCF) {
                     ILockableContainer chestContainer = ((BlockFruitChestTFCF) world.getBlockState(pos).getBlock()).getLockableContainer(world, pos);
                     //noinspection ConstantConditions
                     return new ContainerChestTFC(player.inventory, chestContainer, player);
@@ -140,13 +118,11 @@ public class GuiHandler implements IGuiHandler
 
     @Override
     @Nullable
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-    {
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         Container container = getServerGuiElement(ID, player, world, x, y, z);
         Type type = Type.valueOf(ID);
         BlockPos pos = new BlockPos(x, y, z);
-        switch (type)
-        {
+        switch (type) {
             case SACK:
                 return new GuiSack(container, player.inventory, SACK_INVENTORY_BACKGROUND);
             case BAG:
@@ -172,7 +148,7 @@ public class GuiHandler implements IGuiHandler
             case MUD:
                 ItemStack stackMud = player.getHeldItemMainhand();
                 stackMud = OreDictionaryHelper.doesStackMatchOre(stackMud, "mud") ? stackMud : player.getHeldItemOffhand();
-                ItemMud mud = (ItemMud)(stackMud.getItem());
+                ItemMud mud = (ItemMud) (stackMud.getItem());
                 return new GuiKnappingTFCF(container, player, KnappingTypes.MUD, mud.getForegroundTexture(), mud.getBackgroundTexture());
             case EARTHENWARE_CLAY:
                 return new GuiKnappingTFCF(container, player, KnappingTypes.EARTHENWARE_CLAY, EARTHENWARE_CLAY_TEXTURE);
@@ -187,8 +163,7 @@ public class GuiHandler implements IGuiHandler
             case CRATE:
                 return new GuiCrate(container, player.inventory, Helpers.getTE(world, pos, TECrate.class), world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
             case CHEST:
-                if (container instanceof ContainerChestTFC)
-                {
+                if (container instanceof ContainerChestTFC) {
                     return new GuiChestTFC((ContainerChestTFC) container, player.inventory);
                 }
                 return null;
@@ -199,8 +174,7 @@ public class GuiHandler implements IGuiHandler
         }
     }
 
-    public enum Type
-    {
+    public enum Type {
         SACK,
         BAG,
         PINEAPPLE_LEATHER,
@@ -226,8 +200,7 @@ public class GuiHandler implements IGuiHandler
         private static final Type[] values = values();
 
         @Nonnull
-        public static Type valueOf(int id)
-        {
+        public static Type valueOf(int id) {
             while (id >= values.length) id -= values.length;
             while (id < 0) id += values.length;
             return values[id];

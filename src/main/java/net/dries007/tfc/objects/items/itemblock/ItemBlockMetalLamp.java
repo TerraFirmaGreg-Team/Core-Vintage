@@ -5,10 +5,15 @@
 
 package net.dries007.tfc.objects.items.itemblock;
 
-import java.util.*;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.api.capability.metal.IMetalItem;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalLamp;
+import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -27,39 +32,15 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.blocks.metal.BlockMetalLamp;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 
-public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
-{
+public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem {
     private static final Map<Metal, ItemBlockMetalLamp> TABLE = new HashMap<>();
     public static int CAPACITY;
 
-    public static Set<Fluid> getValidFluids()
-    {
-        String[] fluidNames = ConfigTFC.Devices.LAMP.fuels;
-        Set<Fluid> validFluids = new HashSet<>();
-        for (String fluidName : fluidNames)
-        {
-            validFluids.add(FluidRegistry.getFluid(fluidName));
-        }
-        return validFluids;
-    }
-
-    public static Item get(Metal metal)
-    {
-        return TABLE.get(metal);
-    }
-
-    public ItemBlockMetalLamp(Metal metal)
-    {
+    public ItemBlockMetalLamp(Metal metal) {
         super(BlockMetalLamp.get(metal));
         CAPACITY = ConfigTFC.Devices.LAMP.tank;
         if (!TABLE.containsKey(metal))
@@ -70,12 +51,23 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
         OreDictionaryHelper.register(this, "lamp");
     }
 
+    public static Set<Fluid> getValidFluids() {
+        String[] fluidNames = ConfigTFC.Devices.LAMP.fuels;
+        Set<Fluid> validFluids = new HashSet<>();
+        for (String fluidName : fluidNames) {
+            validFluids.add(FluidRegistry.getFluid(fluidName));
+        }
+        return validFluids;
+    }
+
+    public static Item get(Metal metal) {
+        return TABLE.get(metal);
+    }
+
     @Override
-    public boolean canStack(@Nonnull ItemStack stack)
-    {
+    public boolean canStack(@Nonnull ItemStack stack) {
         IFluidHandler lampCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (lampCap != null)
-        {
+        if (lampCap != null) {
             return lampCap.drain(CAPACITY, false) == null;
         }
         return true;
@@ -83,14 +75,11 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
 
     @Override
     @Nonnull
-    public String getItemStackDisplayName(@Nonnull ItemStack stack)
-    {
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         IFluidHandler fluidCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (fluidCap != null)
-        {
+        if (fluidCap != null) {
             FluidStack fluidStack = fluidCap.drain(CAPACITY, false);
-            if (fluidStack != null)
-            {
+            if (fluidStack != null) {
                 String fluidName = fluidStack.getLocalizedName();
                 return new TextComponentTranslation(getTranslationKey() + ".filled.name", fluidName).getFormattedText();
             }
@@ -99,23 +88,18 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt)
-    {
+    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
         return new FluidWhitelistHandlerComplex(stack, CAPACITY, getValidFluids());
     }
 
     @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items)
-    {
-        if (isInCreativeTab(tab))
-        {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+        if (isInCreativeTab(tab)) {
             items.add(new ItemStack(this));
-            for (Fluid fluid : getValidFluids())
-            {
+            for (Fluid fluid : getValidFluids()) {
                 ItemStack stack = new ItemStack(this);
                 IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-                if (cap != null)
-                {
+                if (cap != null) {
                     cap.fill(new FluidStack(fluid, CAPACITY), true);
                 }
                 items.add(stack);
@@ -131,8 +115,7 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
      */
     @Nullable
     @Override
-    public Metal getMetal(ItemStack stack)
-    {
+    public Metal getMetal(ItemStack stack) {
         return ((BlockMetalLamp) (super.block)).getMetal();
     }
 
@@ -141,8 +124,7 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
      * @return the amount of liquid metal that this item will create (in TFC units or mB: 1 unit = 1 mB)
      */
     @Override
-    public int getSmeltAmount(ItemStack stack)
-    {
+    public int getSmeltAmount(ItemStack stack) {
         return 100;
     }
 
@@ -152,11 +134,9 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
     {
         IFluidHandler fluidCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         boolean spacer = false;
-        if (fluidCap != null)
-        {
+        if (fluidCap != null) {
             FluidStack fluidStack = fluidCap.drain(CAPACITY, false);
-            if (fluidStack != null)
-            {
+            if (fluidStack != null) {
                 spacer = true;
                 text.add("");
                 String fluidName = fluidStack.getLocalizedName();
@@ -164,10 +144,8 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem
             }
         }
         Metal metal = getMetal(stack);
-        if (metal != null)
-        {
-            if (!spacer)
-            {
+        if (metal != null) {
+            if (!spacer) {
                 text.add("");
             }
             text.add(I18n.format("tfc.tooltip.metal", I18n.format(Helpers.getTypeName(metal))));

@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.util.config;
 
-public enum QuiverSearch
-{
+public enum QuiverSearch {
     DISABLED("Disabled"),
     ARMOR("Armor"),
     HOTBAR("Hotbar"),
@@ -14,8 +13,7 @@ public enum QuiverSearch
 
     private final String name;
 
-    QuiverSearch(String name)
-    {
+    QuiverSearch(String name) {
         this.name = name;
     }
 
@@ -23,8 +21,7 @@ public enum QuiverSearch
      * Shows this text in config instead of the enum name
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return name;
     }
 }

@@ -5,12 +5,16 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiConsumer;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.types.IPredator;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.LootTablesTFC;
+import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
+import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.climate.BiomeHelper;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -31,73 +35,60 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.IPredator;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
-import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
+import java.util.Random;
+import java.util.function.BiConsumer;
 
 @ParametersAreNonnullByDefault
-public class EntityLionTFC extends EntityAnimalMammal implements IPredator
-{
+public class EntityLionTFC extends EntityAnimalMammal implements IPredator {
     private static final int DAYS_TO_ADULTHOOD = 192;
 
     //Values that has a visual effect on client
     private static final DataParameter<Integer> MOUTH_TICKS = EntityDataManager.createKey(EntityLionTFC.class, DataSerializers.VARINT);
 
     @SuppressWarnings("unused")
-    public EntityLionTFC(World worldIn)
-    {
+    public EntityLionTFC(World worldIn) {
         this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
-    public EntityLionTFC(World worldIn, Gender gender, int birthDay)
-    {
+    public EntityLionTFC(World worldIn, Gender gender, int birthDay) {
         super(worldIn, gender, birthDay);
         this.setSize(1.3F, 1.2F);
     }
 
     @Override
-    public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity)
-    {
+    public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-            (biomeType == BiomeHelper.BiomeType.SAVANNA))
-        {
+                (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
             return ConfigTFC.Animals.LION.rarity;
         }
         return 0;
     }
 
     @Override
-    public BiConsumer<List<EntityLiving>, Random> getGroupingRules()
-    {
+    public BiConsumer<List<EntityLiving>, Random> getGroupingRules() {
         return AnimalGroupingRules.ELDER_AND_POPULATION;
     }
 
     @Override
-    public int getMinGroupSize() { return 1; }
+    public int getMinGroupSize() {return 1;}
 
     @Override
-    public int getMaxGroupSize() { return 5; }
+    public int getMaxGroupSize() {return 5;}
 
     @Override
-    public int getDaysToAdulthood() { return DAYS_TO_ADULTHOOD; }
+    public int getDaysToAdulthood() {return DAYS_TO_ADULTHOOD;}
 
     @Override
-    public int getDaysToElderly() { return 0; }
+    public int getDaysToElderly() {return 0;}
 
     @Override
-    public void birthChildren()
-    {
+    public void birthChildren() {
         int numberOfChildren = 1; //one always
-        for (int i = 0; i < numberOfChildren; i++)
-        {
+        for (int i = 0; i < numberOfChildren; i++) {
             EntityLionTFC baby = new EntityLionTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             this.world.spawnEntity(baby);
@@ -105,56 +96,49 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator
     }
 
     @Override
-    public long gestationDays() { return 0; }
+    public long gestationDays() {return 0;}
 
     @Override
-    protected void entityInit()
-    {
+    protected void entityInit() {
         super.entityInit();
         getDataManager().register(MOUTH_TICKS, 0);
     }
 
     @Override
-    public boolean canMateWith(EntityAnimal otherAnimal) { return false; }
+    public boolean canMateWith(EntityAnimal otherAnimal) {return false;}
 
     @Override
-    public double getOldDeathChance() { return 0; }
+    public double getOldDeathChance() {return 0;}
 
-    public int getMouthTicks()
-    {
+    public int getMouthTicks() {
         return this.dataManager.get(MOUTH_TICKS);
     }
 
-    public void setMouthTicks(int value)
-    {
+    public void setMouthTicks(int value) {
         this.dataManager.set(MOUTH_TICKS, value);
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) { return TFCSounds.ANIMAL_LION_HURT; }
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return TFCSounds.ANIMAL_LION_HURT;}
 
     @Override
-    protected SoundEvent getDeathSound() { return TFCSounds.ANIMAL_LION_DEATH; }
+    protected SoundEvent getDeathSound() {return TFCSounds.ANIMAL_LION_DEATH;}
 
     @Override
-    public boolean attackEntityAsMob(Entity entityIn)
-    {
+    public boolean attackEntityAsMob(Entity entityIn) {
         double attackDamage = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
-        if (this.isChild())
-        {
+        if (this.isChild()) {
             attackDamage /= 2;
         }
         boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float) attackDamage);
-        if (flag)
-        {
+        if (flag) {
             this.applyEnchantments(this, entityIn);
         }
         return flag;
     }
 
     @Override
-    protected void initEntityAI()
-    {
+    protected void initEntityAI() {
         EntityAIWander wander = new EntityAIWanderHuntArea(this, 1.0D);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAILionAttack().setWanderAI(wander));
@@ -167,15 +151,12 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
         int priority = 2;
-        for (String input : ConfigTFC.Animals.LION.huntCreatures)
-        {
+        for (String input : ConfigTFC.Animals.LION.huntCreatures) {
             ResourceLocation key = new ResourceLocation(input);
             EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
-            if (entityEntry != null)
-            {
+            if (entityEntry != null) {
                 Class<? extends Entity> entityClass = entityEntry.getEntityClass();
-                if (EntityLivingBase.class.isAssignableFrom(entityClass))
-                {
+                if (EntityLivingBase.class.isAssignableFrom(entityClass)) {
                     //noinspection unchecked
                     this.targetTasks.addTask(priority++, new EntityAINearestAttackableTarget<>(this, (Class<EntityLivingBase>) entityClass, false));
                 }
@@ -184,8 +165,7 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator
     }
 
     @Override
-    protected void applyEntityAttributes()
-    {
+    protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
@@ -195,51 +175,44 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator
     }
 
     @Override
-    protected SoundEvent getAmbientSound() { return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_LION_CRY : TFCSounds.ANIMAL_LION_SAY; }
+    protected SoundEvent getAmbientSound() {return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_LION_CRY : TFCSounds.ANIMAL_LION_SAY;}
 
     @Nullable
-    protected ResourceLocation getLootTable() { return LootTablesTFC.ANIMALS_LION; }
+    protected ResourceLocation getLootTable() {return LootTablesTFC.ANIMALS_LION;}
 
     @Override
-    protected void updateAITasks()
-    {
+    protected void updateAITasks() {
         super.updateAITasks();
-        if (!this.hasHome())
-        {
+        if (!this.hasHome()) {
             this.setHomePosAndDistance(this.getPosition(), 80);
         }
     }
 
     @Override
-    protected void playStepSound(BlockPos pos, Block blockIn)
-    {
+    protected void playStepSound(BlockPos pos, Block blockIn) {
         playSound(TFCSounds.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
     }
 
     /**
      * Adds a bit of animation to the attack
      */
-    protected class EntityAILionAttack extends EntityAIAttackMeleeTFC<EntityLionTFC>
-    {
+    protected class EntityAILionAttack extends EntityAIAttackMeleeTFC<EntityLionTFC> {
         protected int attackTicks;
 
-        public EntityAILionAttack()
-        {
+        public EntityAILionAttack() {
             super(EntityLionTFC.this, 1.3D, 1.5D, AttackBehavior.NIGHTTIME_ONLY);
             this.attackTicks = 0;
         }
 
         @Override
-        public void resetTask()
-        {
+        public void resetTask() {
             super.resetTask();
             this.attackTicks = 0;
             EntityLionTFC.this.setMouthTicks(0);
         }
 
         @Override
-        public void updateTask()
-        {
+        public void updateTask() {
             super.updateTask();
             ++this.attackTicks;
             EntityLionTFC.this.setMouthTicks(attackTicks);

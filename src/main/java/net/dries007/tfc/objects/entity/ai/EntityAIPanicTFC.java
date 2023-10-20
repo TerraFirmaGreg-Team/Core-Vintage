@@ -11,20 +11,16 @@ import net.minecraft.entity.ai.EntityAIPanic;
 /**
  * Improves Panic AI by making this entity runs whenever it receives damage
  */
-public class EntityAIPanicTFC extends EntityAIPanic
-{
+public class EntityAIPanicTFC extends EntityAIPanic {
     protected int timer;
 
-    public EntityAIPanicTFC(EntityCreature creature, double speedIn)
-    {
+    public EntityAIPanicTFC(EntityCreature creature, double speedIn) {
         super(creature, speedIn);
     }
 
     @Override
-    public boolean shouldExecute()
-    {
-        if (this.creature.hurtTime > 0)
-        {
+    public boolean shouldExecute() {
+        if (this.creature.hurtTime > 0) {
             timer = 80;
             return this.findRandomPosition();
         }
@@ -32,8 +28,7 @@ public class EntityAIPanicTFC extends EntityAIPanic
     }
 
     @Override
-    public boolean shouldContinueExecuting()
-    {
+    public boolean shouldContinueExecuting() {
         return super.shouldContinueExecuting() && timer > 0;
     }
 }

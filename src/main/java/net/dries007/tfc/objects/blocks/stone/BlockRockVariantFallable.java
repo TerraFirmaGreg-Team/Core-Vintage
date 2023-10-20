@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.objects.blocks.stone;
 
-import java.util.Random;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -18,30 +18,24 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockRockVariantFallable extends BlockRockVariant
-{
+public class BlockRockVariantFallable extends BlockRockVariant {
 
-    public BlockRockVariantFallable(Rock.Type type, Rock rock)
-    {
+    public BlockRockVariantFallable(Rock.Type type, Rock rock) {
         super(type, rock);
-        if (type.canFall())
-        {
+        if (type.canFall()) {
             FallingBlockManager.registerFallable(this, type.getFallingSpecification());
         }
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
-    {
-        if (this.type.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false))
-        {
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+        if (this.type.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
             double d0 = (float) pos.getX() + rand.nextFloat();
             double d1 = (double) pos.getY() - 0.05D;
             double d2 = (float) pos.getZ() + rand.nextFloat();
@@ -50,17 +44,13 @@ public class BlockRockVariantFallable extends BlockRockVariant
     }
 
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        if (type == Rock.Type.GRAVEL)
-        {
-            if (fortune > 3)
-            {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        if (type == Rock.Type.GRAVEL) {
+            if (fortune > 3) {
                 fortune = 3;
             }
 
-            if (rand.nextInt(10 - fortune * 3) == 0)
-            {
+            if (rand.nextInt(10 - fortune * 3) == 0) {
                 return Items.FLINT;
             }
         }

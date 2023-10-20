@@ -11,16 +11,13 @@ import net.minecraft.item.ItemStack;
 
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.api.types.IBerryBush.Size.*;
+import static net.dries007.tfc.api.types.IBerryBush.Size.LARGE;
 
-public enum BushFL implements IBerryBush
-{
+public enum BushFL implements IBerryBush {
     PINEAPPLE(() -> ItemsFL.getFood(FoodFL.PINEAPPLE), Month.JANUARY, 12, -5f, 17f, 100f, 400f, 0.8f, LARGE, true);
 
-    static
-    {
-        for (IBerryBush bush : values())
-        {
+    static {
+        for (IBerryBush bush : values()) {
             WorldGenBerryBushes.register(bush);
         }
     }
@@ -36,8 +33,7 @@ public enum BushFL implements IBerryBush
     private final Size size;
     private final boolean hasSpikes;
 
-    BushFL(Supplier<Item> fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, Size size, boolean spiky)
-    {
+    BushFL(Supplier<Item> fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, Size size, boolean spiky) {
         this.fruit = fruit;
         this.harvestMonthStart = harvestMonthStart;
         this.harvestingMonths = harvestingMonths;
@@ -53,17 +49,14 @@ public enum BushFL implements IBerryBush
     }
 
     @Override
-    public float getGrowthTime()
-    {
+    public float getGrowthTime() {
         return this.growthTime;
     }
 
     @Override
-    public boolean isHarvestMonth(Month month)
-    {
+    public boolean isHarvestMonth(Month month) {
         Month testing = this.harvestMonthStart;
-        for (int i = 0; i < this.harvestingMonths; i++)
-        {
+        for (int i = 0; i < this.harvestingMonths; i++) {
             if (testing.equals(month)) return true;
             testing = testing.next();
         }
@@ -71,28 +64,24 @@ public enum BushFL implements IBerryBush
     }
 
     @Override
-    public boolean isValidConditions(float temperature, float rainfall)
-    {
+    public boolean isValidConditions(float temperature, float rainfall) {
         return minTemp - 5 < temperature && temperature < maxTemp + 5 && minRain - 50 < rainfall && rainfall < maxRain + 50;
     }
 
     @Override
-    public boolean isValidForGrowth(float temperature, float rainfall)
-    {
+    public boolean isValidForGrowth(float temperature, float rainfall) {
         return minTemp < temperature && temperature < maxTemp && minRain < rainfall && rainfall < maxRain;
     }
 
-    public Size getSize() { return this.size; }
+    public Size getSize() {return this.size;}
 
     @Override
-    public boolean isSpiky()
-    {
+    public boolean isSpiky() {
         return hasSpikes;
     }
 
     @Override
-    public ItemStack getFoodDrop()
-    {
+    public ItemStack getFoodDrop() {
         return new ItemStack(this.fruit.get());
     }
 }

@@ -5,9 +5,9 @@
 
 package net.dries007.tfc.world.classic.biomes;
 
-import java.awt.*;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
@@ -18,24 +18,20 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
+import javax.annotation.Nonnull;
+import java.awt.*;
 
-public class BiomeTFC extends Biome
-{
+public class BiomeTFC extends Biome {
     public final Color debugColor;
     private final int waterPlantsPerChunk;
     private final int lilyPadPerChunk;
     private boolean spawnBiome;
 
-    public BiomeTFC(int debugColor, BiomeProperties properties)
-    {
+    public BiomeTFC(int debugColor, BiomeProperties properties) {
         this(debugColor, properties, 0, 0);
     }
 
-    public BiomeTFC(int debugColor, BiomeProperties properties, int lilyPadPerChunk, int waterPlantsPerChunk)
-    {
+    public BiomeTFC(int debugColor, BiomeProperties properties, int lilyPadPerChunk, int waterPlantsPerChunk) {
         super(properties);
         this.debugColor = new Color(debugColor);
         this.lilyPadPerChunk = lilyPadPerChunk;
@@ -47,31 +43,24 @@ public class BiomeTFC extends Biome
         spawnBiome = false;
 
         // Add creatures to respawn list
-        for (String input : ConfigTFC.General.WORLD.respawnableCreatures)
-        {
+        for (String input : ConfigTFC.General.WORLD.respawnableCreatures) {
             String[] split = input.split(" ");
-            if (split.length == 4)
-            {
+            if (split.length == 4) {
                 ResourceLocation key = new ResourceLocation(split[0]);
                 int rarity;
                 int min;
                 int max;
-                try
-                {
+                try {
                     rarity = Integer.parseInt(split[1]);
                     min = Integer.parseInt(split[2]);
                     max = Integer.parseInt(split[3]);
-                }
-                catch (NumberFormatException e)
-                {
+                } catch (NumberFormatException e) {
                     continue;
                 }
                 EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
-                if (entityEntry != null)
-                {
+                if (entityEntry != null) {
                     Class<? extends Entity> entityClass = entityEntry.getEntityClass();
-                    if (EntityLiving.class.isAssignableFrom(entityClass))
-                    {
+                    if (EntityLiving.class.isAssignableFrom(entityClass)) {
                         //noinspection unchecked
                         spawnableCreatureList.add(new Biome.SpawnListEntry((Class<? extends EntityLiving>) entityClass, rarity, min, max));
                     }
@@ -79,40 +68,34 @@ public class BiomeTFC extends Biome
             }
         }
         // todo: Experimental Livestock respawning
-        for (Class<? extends EntityLiving> entityClass : WorldEntitySpawnerTFC.LIVESTOCK.keySet())
-        {
+        for (Class<? extends EntityLiving> entityClass : WorldEntitySpawnerTFC.LIVESTOCK.keySet()) {
             spawnableCreatureList.add(new Biome.SpawnListEntry(entityClass, 300, 1, 1));
         }
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.biomeName;
     }
 
     @Override
     @Nonnull
-    public BiomeDecorator createBiomeDecorator()
-    {
+    public BiomeDecorator createBiomeDecorator() {
         return new BiomeDecoratorTFC(lilyPadPerChunk, waterPlantsPerChunk);
     }
 
     @Override
-    public float getTemperature(@Nonnull BlockPos pos)
-    {
+    public float getTemperature(@Nonnull BlockPos pos) {
         // Vanilla spec: 0.15 = snow threshold, range = [-1, 1] for overworld temps.
         return MathHelper.clamp(0.15f + ClimateTFC.getDailyTemp(pos) / 35, -1, 1);
     }
 
     @Override
-    public boolean ignorePlayerSpawnSuitability()
-    {
+    public boolean ignorePlayerSpawnSuitability() {
         return spawnBiome;
     }
 
-    public Biome setSpawnBiome()
-    {
+    public Biome setSpawnBiome() {
         spawnBiome = true;
         return this;
     }

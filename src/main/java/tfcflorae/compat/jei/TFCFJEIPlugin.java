@@ -1,20 +1,5 @@
 package tfcflorae.compat.jei;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
-
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
@@ -22,47 +7,34 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
-
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
-import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.client.gui.*;
-import net.dries007.tfc.compat.jei.categories.*;
-import net.dries007.tfc.compat.jei.wrappers.*;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLoom;
+import net.dries007.tfc.compat.jei.categories.CastingCategory;
+import net.dries007.tfc.compat.jei.categories.KnappingCategory;
+import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.items.metal.ItemAnvil;
-import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
-import net.dries007.tfc.objects.items.metal.ItemMetalTool;
-import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.objects.recipes.SaltingRecipe;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
-
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.oredict.OreDictionary;
 import tfcflorae.TFCFlorae;
 import tfcflorae.api.knapping.KnappingTypes;
 import tfcflorae.api.registries.TFCFRegistries;
 import tfcflorae.client.GuiKnappingTFCF;
-import tfcflorae.compat.jei.category.*;
+import tfcflorae.compat.jei.category.DryingRecipeCategory;
+import tfcflorae.compat.jei.category.StickBundleRecipeCategory;
 import tfcflorae.compat.jei.wrappers.*;
 import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.objects.items.rock.ItemMud;
 
-import static tfcflorae.TFCFlorae.MODID;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @JEIPlugin
-public final class TFCFJEIPlugin implements IModPlugin
-{
-    private static IModRegistry REGISTRY;
+public final class TFCFJEIPlugin implements IModPlugin {
     public static final String KNAP_PINEAPPLE_LEATHER_UID = TFCFlorae.MODID + ".knap.pineapple_leather";
     public static final String KNAP_BURLAP_CLOTH_UID = TFCFlorae.MODID + ".knap.burlap_cloth";
     public static final String KNAP_WOOL_CLOTH_UID = TFCFlorae.MODID + ".knap.wool_cloth";
@@ -80,10 +52,19 @@ public final class TFCFJEIPlugin implements IModPlugin
     public static final String CASTING_UID = TFCFlorae.MODID + ".casting";
     public static final String DRY_UID = TFCFlorae.MODID + ".drying";
     public static final String STICK_BUNDLE_UID = TFCFlorae.MODID + ".stick_bundle";
+    private static IModRegistry REGISTRY;
+
+    /**
+     * Helper method to return a collection containing all possible itemstacks registered in JEI
+     *
+     * @return Collection of ItemStacks
+     */
+    public static Collection<ItemStack> getAllIngredients() {
+        return REGISTRY.getIngredientRegistry().getAllIngredients(VanillaTypes.ITEM);
+    }
 
     @Override
-    public void registerCategories(IRecipeCategoryRegistration registry)
-    {
+    public void registerCategories(IRecipeCategoryRegistration registry) {
         registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_PINEAPPLE_LEATHER_UID));
         registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_BURLAP_CLOTH_UID));
         registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_WOOL_CLOTH_UID));
@@ -103,19 +84,8 @@ public final class TFCFJEIPlugin implements IModPlugin
         registry.addRecipeCategories(new StickBundleRecipeCategory(registry.getJeiHelpers().getGuiHelper(), STICK_BUNDLE_UID));
     }
 
-    /**
-     * Helper method to return a collection containing all possible itemstacks registered in JEI
-     *
-     * @return Collection of ItemStacks
-     */
-    public static Collection<ItemStack> getAllIngredients()
-    {
-        return REGISTRY.getIngredientRegistry().getAllIngredients(VanillaTypes.ITEM);
-    }
-
     @Override
-    public void register(IModRegistry registry)
-    {
+    public void register(IModRegistry registry) {
         REGISTRY = registry;
 
         List<SimpleRecipeWrapper> dryList = TFCFRegistries.DRYING.getValuesCollection().stream().map(DryingRecipeWrapper::new).collect(Collectors.toList());
@@ -133,8 +103,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(leatherPineappleRecipes, KNAP_PINEAPPLE_LEATHER_UID);
         NonNullList<ItemStack> leatherPineapple = OreDictionary.getOres("leatherPineapple");
-        for(ItemStack itemStack : leatherPineapple)
-        {
+        for (ItemStack itemStack : leatherPineapple) {
             registry.addRecipeCatalyst(itemStack, KNAP_PINEAPPLE_LEATHER_UID);
         }
 
@@ -145,8 +114,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(clothBurlapRecipes, KNAP_BURLAP_CLOTH_UID);
         NonNullList<ItemStack> clothBurlap = OreDictionary.getOres("clothBurlap");
-        for(ItemStack itemStack : clothBurlap)
-        {
+        for (ItemStack itemStack : clothBurlap) {
             registry.addRecipeCatalyst(itemStack, KNAP_BURLAP_CLOTH_UID);
         }
 
@@ -157,8 +125,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(clothWoolRecipes, KNAP_WOOL_CLOTH_UID);
         NonNullList<ItemStack> clothWool = OreDictionary.getOres("clothWool");
-        for(ItemStack itemStack : clothWool)
-        {
+        for (ItemStack itemStack : clothWool) {
             registry.addRecipeCatalyst(itemStack, KNAP_WOOL_CLOTH_UID);
         }
 
@@ -169,8 +136,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(clothSilkRecipes, KNAP_SILK_CLOTH_UID);
         NonNullList<ItemStack> clothSilk = OreDictionary.getOres("clothSilk");
-        for(ItemStack itemStack : clothSilk)
-        {
+        for (ItemStack itemStack : clothSilk) {
             registry.addRecipeCatalyst(itemStack, KNAP_SILK_CLOTH_UID);
         }
 
@@ -181,8 +147,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(clothSisalRecipes, KNAP_SISAL_CLOTH_UID);
         NonNullList<ItemStack> clothSisal = OreDictionary.getOres("clothSisal");
-        for(ItemStack itemStack : clothSisal)
-        {
+        for (ItemStack itemStack : clothSisal) {
             registry.addRecipeCatalyst(itemStack, KNAP_SISAL_CLOTH_UID);
         }
 
@@ -193,8 +158,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(clothCottonRecipes, KNAP_COTTON_CLOTH_UID);
         NonNullList<ItemStack> clothCotton = OreDictionary.getOres("clothCotton");
-        for(ItemStack itemStack : clothCotton)
-        {
+        for (ItemStack itemStack : clothCotton) {
             registry.addRecipeCatalyst(itemStack, KNAP_COTTON_CLOTH_UID);
         }
 
@@ -205,8 +169,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(clothLinenRecipes, KNAP_LINEN_CLOTH_UID);
         NonNullList<ItemStack> oresLinen = OreDictionary.getOres("clothLinen");
-        for(ItemStack itemStack : oresLinen)
-        {
+        for (ItemStack itemStack : oresLinen) {
             registry.addRecipeCatalyst(itemStack, KNAP_LINEN_CLOTH_UID);
         }
 
@@ -217,8 +180,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(clothHempRecipes, KNAP_HEMP_CLOTH_UID);
         NonNullList<ItemStack> oresHemp = OreDictionary.getOres("clothHemp");
-        for(ItemStack itemStack : oresHemp)
-        {
+        for (ItemStack itemStack : oresHemp) {
             registry.addRecipeCatalyst(itemStack, KNAP_HEMP_CLOTH_UID);
         }
 
@@ -229,8 +191,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(canvasYuccaRecipes, KNAP_YUCCA_CANVAS_UID);
         NonNullList<ItemStack> oresYucca = OreDictionary.getOres("canvasYucca");
-        for(ItemStack itemStack : oresYucca)
-        {
+        for (ItemStack itemStack : oresYucca) {
             registry.addRecipeCatalyst(itemStack, KNAP_YUCCA_CANVAS_UID);
         }
 
@@ -242,8 +203,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(mudKnapRecipes, KNAP_MUD_UID);
         NonNullList<ItemStack> oresMud = OreDictionary.getOres("mud");
-        for(Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-        {
+        for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
             registry.addRecipeCatalyst(new ItemStack(ItemMud.get(rock)), KNAP_MUD_UID);
         }
 
@@ -254,8 +214,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(clayEarthenwareKnapRecipes, KNAP_EARTHENWARE_CLAY_UID);
         NonNullList<ItemStack> oresEarthenware = OreDictionary.getOres("clayEarthenware");
-        for(ItemStack itemStack : oresEarthenware)
-        {
+        for (ItemStack itemStack : oresEarthenware) {
             registry.addRecipeCatalyst(itemStack, KNAP_EARTHENWARE_CLAY_UID);
         }
 
@@ -266,8 +225,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(clayKaoliniteKnapRecipes, KNAP_KAOLINITE_CLAY_UID);
         NonNullList<ItemStack> oresKaolinite = OreDictionary.getOres("clayKaolinite");
-        for(ItemStack itemStack : oresKaolinite)
-        {
+        for (ItemStack itemStack : oresKaolinite) {
             registry.addRecipeCatalyst(itemStack, KNAP_KAOLINITE_CLAY_UID);
         }
 
@@ -278,8 +236,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(clayStonewareKnapRecipes, KNAP_STONEWARE_CLAY_UID);
         NonNullList<ItemStack> oresStoneware = OreDictionary.getOres("clayStoneware");
-        for(ItemStack itemStack : oresStoneware)
-        {
+        for (ItemStack itemStack : oresStoneware) {
             registry.addRecipeCatalyst(itemStack, KNAP_STONEWARE_CLAY_UID);
         }
 
@@ -290,8 +247,7 @@ public final class TFCFJEIPlugin implements IModPlugin
                 .collect(Collectors.toList());
         registry.addRecipes(flintKnapRecipes, KNAP_FLINT_UID);
         NonNullList<ItemStack> oresFlint = OreDictionary.getOres("flint");
-        for(ItemStack itemStack : oresFlint)
-        {
+        for (ItemStack itemStack : oresFlint) {
             registry.addRecipeCatalyst(itemStack, KNAP_FLINT_UID);
         }
         registry.addRecipeClickArea(GuiKnappingTFCF.class, 97, 44, 22, 15, KNAP_MUD_UID, KNAP_EARTHENWARE_CLAY_UID, KNAP_KAOLINITE_CLAY_UID, KNAP_STONEWARE_CLAY_UID, KNAP_FLINT_UID);
@@ -304,15 +260,12 @@ public final class TFCFJEIPlugin implements IModPlugin
         List<UnmoldRecipeWrapperStonewareTFCF> unmoldListStoneware = new ArrayList<>();
         List<CastingRecipeWrapperStonewareTFCF> castingListStoneware = new ArrayList<>();
         List<Metal> tierOrdered = TFCRegistries.METALS.getValuesCollection()
-            .stream()
-            .sorted(Comparator.comparingInt(metal -> metal.getTier().ordinal()))
-            .collect(Collectors.toList());
-        for (Metal metal : tierOrdered)
-        {
-            for (Metal.ItemType type : Metal.ItemType.values())
-            {
-                if (type.hasMold(metal))
-                {
+                .stream()
+                .sorted(Comparator.comparingInt(metal -> metal.getTier().ordinal()))
+                .collect(Collectors.toList());
+        for (Metal metal : tierOrdered) {
+            for (Metal.ItemType type : Metal.ItemType.values()) {
+                if (type.hasMold(metal)) {
                     unmoldListEarthenware.add(new UnmoldRecipeWrapperEarthenwareTFCF(metal, type));
                     castingListEarthenware.add(new CastingRecipeWrapperEarthenwareTFCF(metal, type));
                     unmoldListKaolinite.add(new UnmoldRecipeWrapperKaoliniteTFCF(metal, type));

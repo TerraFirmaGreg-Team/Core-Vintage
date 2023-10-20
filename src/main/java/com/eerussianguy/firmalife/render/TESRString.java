@@ -1,7 +1,7 @@
 package com.eerussianguy.firmalife.render;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import com.eerussianguy.firmalife.blocks.BlockString;
+import com.eerussianguy.firmalife.te.TEString;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,29 +9,23 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import com.eerussianguy.firmalife.blocks.BlockString;
-import com.eerussianguy.firmalife.te.TEString;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @SideOnly(Side.CLIENT)
-public class TESRString extends TileEntitySpecialRenderer<TEString>
-{
+public class TESRString extends TileEntitySpecialRenderer<TEString> {
     @Override
-    public void render(TEString te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TEString te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
-        if (te.hasWorld())
-        {
+        if (te.hasWorld()) {
             IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (cap != null)
-            {
+            if (cap != null) {
                 IBlockState state = te.getWorld().getBlockState(te.getPos());
                 if (!(state.getBlock() instanceof BlockString)) return;
                 GlStateManager.pushMatrix();

@@ -5,8 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityCamelTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,8 +18,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityCamelTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelCamelTFC
@@ -28,8 +27,7 @@ import net.dries007.tfc.objects.entity.animal.EntityCamelTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelCamelTFC extends ModelBase
-{
+public class ModelCamelTFC extends ModelBase {
     public ModelRenderer saddle;
     public ModelRenderer frontLegLeftTop;
     public ModelRenderer humpBottom;
@@ -93,8 +91,7 @@ public class ModelCamelTFC extends ModelBase
     public ModelRenderer strapBellyRightAngle;
     public ModelRenderer headNode;
 
-    public ModelCamelTFC(float scale)
-    {
+    public ModelCamelTFC(float scale) {
         textureWidth = 128;
         textureHeight = 80;
 
@@ -374,20 +371,17 @@ public class ModelCamelTFC extends ModelBase
     }
 
     @Override
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         AbstractChestHorse abstractchesthorse = (AbstractChestHorse) entityIn;
         boolean flag1 = !abstractchesthorse.isChild() && abstractchesthorse.hasChest();
         boolean flag2 = !abstractchesthorse.isChild() && abstractchesthorse.isHorseSaddled();
         boolean flag3 = !abstractchesthorse.isChild() && abstractchesthorse.isBeingRidden();
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
 
-        if (((EntityAnimal) entityIn).isChild())
-        {
+        if (((EntityAnimal) entityIn).isChild()) {
             double ageScale = 1;
             double percent = 1;
-            if (entityIn instanceof IAnimalTFC)
-            {
+            if (entityIn instanceof IAnimalTFC) {
                 percent = ((IAnimalTFC) entityIn).getPercentToAdulthood();
                 ageScale = 1 / (2.0D - percent);
             }
@@ -428,14 +422,12 @@ public class ModelCamelTFC extends ModelBase
         reinsLeft.isHidden = true;
         reinsRight.isHidden = true;
 
-        if (flag1)
-        {
+        if (flag1) {
             chestLeft.render(scale);
             chestRight.render(scale);
         }
 
-        if (flag2)
-        {
+        if (flag2) {
             saddle.render(scale);
             bridleFront1.isHidden = false;
             bridleFront2.isHidden = false;
@@ -460,8 +452,7 @@ public class ModelCamelTFC extends ModelBase
             reinsLeft.isHidden = true;
             reinsRight.isHidden = true;
 
-            if (flag3)
-            {
+            if (flag3) {
                 reinsLeft.isHidden = false;
                 reinsRight.isHidden = false;
             }
@@ -473,9 +464,7 @@ public class ModelCamelTFC extends ModelBase
                 strapBellyRightAngle.isHidden = true;
                 strapBellyLeftAngle.isHidden = true;
             }
-        }
-        else if (abstractchesthorse instanceof EntityCamelTFC && ((EntityCamelTFC) abstractchesthorse).isHalter())
-        {
+        } else if (abstractchesthorse instanceof EntityCamelTFC && ((EntityCamelTFC) abstractchesthorse).isHalter()) {
             bridleFront1.isHidden = false;
             bridleFront2.isHidden = false;
             bridleBack1.isHidden = false;
@@ -496,8 +485,7 @@ public class ModelCamelTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         head.rotateAngleX = f4 / (180F / (float) Math.PI);
         head.rotateAngleY = f3 / (180F / (float) Math.PI);
 
@@ -509,8 +497,7 @@ public class ModelCamelTFC extends ModelBase
 
 
     @Override
-    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
-    {
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
         float f = this.updateHorseRotation(entitylivingbaseIn.prevRenderYawOffset, entitylivingbaseIn.renderYawOffset, partialTickTime);
         float f1 = this.updateHorseRotation(entitylivingbaseIn.prevRotationYawHead, entitylivingbaseIn.rotationYawHead, partialTickTime);
@@ -518,11 +505,10 @@ public class ModelCamelTFC extends ModelBase
         float f3 = f1 - f;
         float f4 = f2 * 0.017453292F;
 
-        if (f3 > 20.0F) { f3 = 20.0F; }
-        if (f3 < -20.0F) { f3 = -20.0F; }
+        if (f3 > 20.0F) {f3 = 20.0F;}
+        if (f3 < -20.0F) {f3 = -20.0F;}
 
-        if (limbSwingAmount > 0.2F)
-        {
+        if (limbSwingAmount > 0.2F) {
             f4 += MathHelper.cos(limbSwing * 0.4F) * 0.15F * limbSwingAmount;
         }
 
@@ -537,19 +523,17 @@ public class ModelCamelTFC extends ModelBase
     }
 
 
-    private float updateHorseRotation(float f1, float f2, float f3)
-    {
+    private float updateHorseRotation(float f1, float f2, float f3) {
         float f = f2 - f1;
 
-        while (f < -180.0F) { f += 360.0F; }
-        while (f >= 180.0F) { f -= 360.0F; }
+        while (f < -180.0F) {f += 360.0F;}
+        while (f >= 180.0F) {f -= 360.0F;}
 
         return f1 + f3 * f;
     }
 
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

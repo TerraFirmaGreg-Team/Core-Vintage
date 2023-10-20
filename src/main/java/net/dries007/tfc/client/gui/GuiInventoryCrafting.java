@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.client.gui;
 
-import java.io.IOException;
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiButtonImage;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -22,18 +19,19 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
+import java.io.IOException;
+
 /**
  * This is copied from {@link GuiCrafting} since it needs to use a different container implementation
  */
-public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownListener
-{
+public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownListener {
     private static final ResourceLocation CRAFTING_TABLE_GUI_TEXTURES = new ResourceLocation("textures/gui/container/crafting_table.png");
     private final GuiRecipeBook recipeBookGui;
     private GuiButtonImage recipeButton;
     private boolean widthTooNarrow;
 
-    public GuiInventoryCrafting(Container container)
-    {
+    public GuiInventoryCrafting(Container container) {
         super(container);
         this.recipeBookGui = new GuiRecipeBook();
     }
@@ -42,8 +40,7 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
      * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
      * window resizes, the buttonList is cleared beforehand.
      */
-    public void initGui()
-    {
+    public void initGui() {
         super.initGui();
         this.widthTooNarrow = this.width < 379;
         this.recipeBookGui.func_194303_a(this.width, this.height, this.mc, this.widthTooNarrow, ((ContainerWorkbench) this.inventorySlots).craftMatrix);
@@ -55,17 +52,13 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
 
-        if (this.recipeBookGui.isVisible() && this.widthTooNarrow)
-        {
+        if (this.recipeBookGui.isVisible() && this.widthTooNarrow) {
             this.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
             this.recipeBookGui.render(mouseX, mouseY, partialTicks);
-        }
-        else
-        {
+        } else {
             this.recipeBookGui.render(mouseX, mouseY, partialTicks);
             super.drawScreen(mouseX, mouseY, partialTicks);
             this.recipeBookGui.renderGhostRecipe(this.guiLeft, this.guiTop, true, partialTicks);
@@ -78,8 +71,7 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
-    {
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         this.fontRenderer.drawString(I18n.format("container.crafting"), 28, 6, 4210752);
         this.fontRenderer.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
@@ -87,8 +79,7 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
     /**
      * Draws the background layer of this container (behind the items).
      */
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-    {
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(CRAFTING_TABLE_GUI_TEXTURES);
         int i = this.guiLeft;
@@ -99,19 +90,15 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
     /**
      * Called when the mouse is clicked. Args : mouseX, mouseY, clickedButton
      */
-    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
-    {
-        if (!this.recipeBookGui.mouseClicked(mouseX, mouseY, mouseButton))
-        {
-            if (!this.widthTooNarrow || !this.recipeBookGui.isVisible())
-            {
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        if (!this.recipeBookGui.mouseClicked(mouseX, mouseY, mouseButton)) {
+            if (!this.widthTooNarrow || !this.recipeBookGui.isVisible()) {
                 super.mouseClicked(mouseX, mouseY, mouseButton);
             }
         }
     }
 
-    protected boolean hasClickedOutside(int p_193983_1_, int p_193983_2_, int p_193983_3_, int p_193983_4_)
-    {
+    protected boolean hasClickedOutside(int p_193983_1_, int p_193983_2_, int p_193983_3_, int p_193983_4_) {
         boolean flag = p_193983_1_ < p_193983_3_ || p_193983_2_ < p_193983_4_ || p_193983_1_ >= p_193983_3_ + this.xSize || p_193983_2_ >= p_193983_4_ + this.ySize;
         return this.recipeBookGui.hasClickedOutside(p_193983_1_, p_193983_2_, this.guiLeft, this.guiTop, this.xSize, this.ySize) && flag;
     }
@@ -120,16 +107,14 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
      * Test if the 2D point is in a rectangle (relative to the GUI). Args : rectX, rectY, rectWidth, rectHeight, pointX,
      * pointY
      */
-    protected boolean isPointInRegion(int rectX, int rectY, int rectWidth, int rectHeight, int pointX, int pointY)
-    {
+    protected boolean isPointInRegion(int rectX, int rectY, int rectWidth, int rectHeight, int pointX, int pointY) {
         return (!this.widthTooNarrow || !this.recipeBookGui.isVisible()) && super.isPointInRegion(rectX, rectY, rectWidth, rectHeight, pointX, pointY);
     }
 
     /**
      * Called when the mouse is clicked over a slot or outside the gui.
      */
-    protected void handleMouseClick(Slot slotIn, int slotId, int mouseButton, @Nonnull ClickType type)
-    {
+    protected void handleMouseClick(Slot slotIn, int slotId, int mouseButton, @Nonnull ClickType type) {
         super.handleMouseClick(slotIn, slotId, mouseButton, type);
         this.recipeBookGui.slotClicked(slotIn);
     }
@@ -138,10 +123,8 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
      * Fired when a key is typed (except F11 which toggles full screen). This is the equivalent of
      * KeyListener.keyTyped(KeyEvent e). Args : character (character on the key), keyCode (lwjgl Keyboard key code)
      */
-    protected void keyTyped(char typedChar, int keyCode) throws IOException
-    {
-        if (!this.recipeBookGui.keyPressed(typedChar, keyCode))
-        {
+    protected void keyTyped(char typedChar, int keyCode) throws IOException {
+        if (!this.recipeBookGui.keyPressed(typedChar, keyCode)) {
             super.keyTyped(typedChar, keyCode);
         }
     }
@@ -149,8 +132,7 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
     /**
      * Called when the screen is unloaded. Used to disable keyboard repeat events
      */
-    public void onGuiClosed()
-    {
+    public void onGuiClosed() {
         this.recipeBookGui.removed();
         super.onGuiClosed();
     }
@@ -158,30 +140,25 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen()
-    {
+    public void updateScreen() {
         super.updateScreen();
         this.recipeBookGui.tick();
     }
 
-    public void recipesUpdated()
-    {
+    public void recipesUpdated() {
         this.recipeBookGui.recipesUpdated();
     }
 
     @Nonnull
-    public GuiRecipeBook func_194310_f()
-    {
+    public GuiRecipeBook func_194310_f() {
         return this.recipeBookGui;
     }
 
     /**
      * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
      */
-    protected void actionPerformed(GuiButton button)
-    {
-        if (button.id == 10)
-        {
+    protected void actionPerformed(GuiButton button) {
+        if (button.id == 10) {
             this.recipeBookGui.initVisuals(this.widthTooNarrow, ((ContainerWorkbench) this.inventorySlots).craftMatrix);
             this.recipeBookGui.toggleVisibility();
             this.guiLeft = this.recipeBookGui.updateScreenPosition(this.widthTooNarrow, this.width, this.xSize);

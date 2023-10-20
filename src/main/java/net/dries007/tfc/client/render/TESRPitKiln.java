@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.objects.te.TEPitKiln;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -22,13 +23,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.te.TEPitKiln;
-
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SideOnly(Side.CLIENT)
-public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln>
-{
+public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln> {
     private static final ResourceLocation THATCH = new ResourceLocation(MOD_ID, "textures/blocks/thatch.png");
     private static final ResourceLocation BARK = new ResourceLocation(MOD_ID, "textures/blocks/wood/log/oak.png");
     private static final ModelStraw[] STRAW = new ModelStraw[TEPitKiln.STRAW_NEEDED];
@@ -37,17 +35,14 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln>
     private static final ModelLog LOG = new ModelLog();
     private static final float SCALE = 1f / 16f;
 
-    static
-    {
-        for (int i = 0; i < TEPitKiln.STRAW_NEEDED; i++)
-        {
+    static {
+        for (int i = 0; i < TEPitKiln.STRAW_NEEDED; i++) {
             STRAW[i] = new ModelStraw(i);
         }
     }
 
     @Override
-    public void render(TEPitKiln te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TEPitKiln te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
         World world = te.getWorld();
         //noinspection ConstantConditions
@@ -60,31 +55,25 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln>
 
         GlStateManager.pushMatrix();
         IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (cap != null)
-        {
+        if (cap != null) {
             float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
             GlStateManager.translate(0.25, 0.25, 0.25);
             RenderHelper.enableStandardItemLighting();
             GlStateManager.pushAttrib();
 
-            if (te.holdingLargeItem())
-            {
+            if (te.holdingLargeItem()) {
                 GlStateManager.scale(1.0F, 1.0F, 1.0F);
                 ItemStack stack = cap.getStackInSlot(0);
-                if (!stack.isEmpty())
-                {
+                if (!stack.isEmpty()) {
                     GlStateManager.pushMatrix();
                     GlStateManager.translate(0.25, -0.001, 0.25);
                     GlStateManager.rotate(timeD, 0, 1, 0);
                     renderItem.renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
                     GlStateManager.popMatrix();
                 }
-            }
-            else
-            {
+            } else {
                 GlStateManager.scale(0.5F, 0.5F, 0.5F);
-                for (int i = 0; i < cap.getSlots(); i++)
-                {
+                for (int i = 0; i < cap.getSlots(); i++) {
                     ItemStack stack = cap.getStackInSlot(i);
                     if (stack.isEmpty()) continue;
                     GlStateManager.pushMatrix();
@@ -100,8 +89,7 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln>
             GlStateManager.popMatrix();
 
             int straw = te.getStrawCount();
-            if (straw != 0)
-            {
+            if (straw != 0) {
                 GlStateManager.pushMatrix();
                 GlStateManager.pushAttrib();
                 GlStateManager.enableLighting();
@@ -115,8 +103,7 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln>
             }
 
             int logs = te.getLogCount();
-            if (logs != 0)
-            {
+            if (logs != 0) {
                 GlStateManager.pushMatrix();
                 GlStateManager.pushAttrib();
                 GlStateManager.enableLighting();
@@ -125,12 +112,10 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln>
 
                 bindTexture(BARK);
 
-                for (int row = 0; row < LOG_ROWS && logs > 0; row++)
-                {
+                for (int row = 0; row < LOG_ROWS && logs > 0; row++) {
                     GlStateManager.pushMatrix();
                     GlStateManager.translate(0, row * 0.5d / (double) LOG_ROWS, 0);
-                    for (int i = 0; i < LOGS_PER_ROW && logs > 0; i++, logs--)
-                    {
+                    for (int i = 0; i < LOGS_PER_ROW && logs > 0; i++, logs--) {
                         GlStateManager.pushMatrix();
                         GlStateManager.translate(0, 0, i / (double) LOGS_PER_ROW);
                         LOG.render(null, 0, 0, 0, 0, 0, SCALE);
@@ -147,12 +132,10 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln>
         }
     }
 
-    private static class ModelStraw extends ModelBase
-    {
+    private static class ModelStraw extends ModelBase {
         private final ModelRenderer strawRenderer;
 
-        public ModelStraw(int height)
-        {
+        public ModelStraw(int height) {
             textureHeight = 16;
             textureWidth = 16;
             strawRenderer = new ModelRenderer(this, 0, 0);
@@ -160,18 +143,15 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln>
         }
 
         @Override
-        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-        {
+        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
             strawRenderer.render(scale);
         }
     }
 
-    private static class ModelLog extends ModelBase
-    {
+    private static class ModelLog extends ModelBase {
         private final ModelRenderer logRenderer;
 
-        public ModelLog()
-        {
+        public ModelLog() {
             textureHeight = 16;
             textureWidth = 16;
             logRenderer = new ModelRenderer(this, 0, 0);
@@ -179,8 +159,7 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln>
         }
 
         @Override
-        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-        {
+        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
             logRenderer.render(scale);
         }
     }

@@ -5,11 +5,9 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.types.DefaultTrees;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -25,14 +23,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.types.DefaultTrees;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-public class Tree extends IForgeRegistryEntry.Impl<Tree>
-{
+public class Tree extends IForgeRegistryEntry.Impl<Tree> {
     @GameRegistry.ObjectHolder(MOD_ID + ":sequoia")
     public static final Tree SEQUOIA = Helpers.getNull();
 
@@ -60,10 +58,10 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree>
      * This is a registry object that will create a number of things:
      * 1. Wood logs, planks, and leaf blocks, and all the respective variants
      * 2. A Tree object to be used in TFC world gen
-     *
+     * <p>
      * Addon mods that want to add trees should subscribe to the registry event for this class
      * They also must put (in their mod) the required resources in /assets/tfc/...
-     *
+     * <p>
      * When using this class, use the provided Builder to create your trees. This will require all the default values, as well as
      * provide optional values that you can change
      *
@@ -85,8 +83,7 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree>
      * @param burnTemp         the temperature at which this will burn in a fire pit or similar
      * @param burnTicks        the number of ticks that this will burn in a fire pit or similar
      */
-    public Tree(@Nonnull ResourceLocation name, @Nonnull ITreeGenerator generator, float minTemp, float maxTemp, float minRain, float maxRain, float minDensity, float maxDensity, float dominance, int maxGrowthRadius, int maxHeight, int maxDecayDistance, boolean isConifer, @Nullable ITreeGenerator bushGenerator, boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks)
-    {
+    public Tree(@Nonnull ResourceLocation name, @Nonnull ITreeGenerator generator, float minTemp, float maxTemp, float minRain, float maxRain, float minDensity, float maxDensity, float dominance, int maxGrowthRadius, int maxHeight, int maxDecayDistance, boolean isConifer, @Nullable ITreeGenerator bushGenerator, boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks) {
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
         this.minRain = minRain;
@@ -108,116 +105,93 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree>
         setRegistryName(name);
     }
 
-    public boolean makeTree(TemplateManager manager, World world, BlockPos pos, Random rand, boolean isWorldGen)
-    {
-        if (generator.canGenerateTree(world, pos, this))
-        {
+    public boolean makeTree(TemplateManager manager, World world, BlockPos pos, Random rand, boolean isWorldGen) {
+        if (generator.canGenerateTree(world, pos, this)) {
             generator.generateTree(manager, world, pos, this, rand, isWorldGen);
             return true;
         }
         return false;
     }
 
-    public boolean makeTree(World world, BlockPos pos, Random rand, boolean isWorldGen)
-    {
-        if (!world.isRemote)
-        {
+    public boolean makeTree(World world, BlockPos pos, Random rand, boolean isWorldGen) {
+        if (!world.isRemote) {
             return makeTree(((WorldServer) world).getStructureTemplateManager(), world, pos, rand, isWorldGen);
         }
         return false;
     }
 
-    public boolean isValidLocation(float temp, float rain, float density)
-    {
+    public boolean isValidLocation(float temp, float rain, float density) {
         return minTemp <= temp && maxTemp >= temp && minRain <= rain && maxRain >= rain && minDensity <= density && maxDensity >= density;
     }
 
     @SuppressWarnings("unused")
-    public void setTreeGenerator(ITreeGenerator generator)
-    {
+    public void setTreeGenerator(ITreeGenerator generator) {
         this.generator = generator;
     }
 
-    public int getMaxGrowthRadius()
-    {
+    public int getMaxGrowthRadius() {
         return maxGrowthRadius;
     }
 
-    public float getDominance()
-    {
+    public float getDominance() {
         return dominance;
     }
 
-    public int getMaxHeight()
-    {
+    public int getMaxHeight() {
         return maxHeight;
     }
 
-    public int getMaxDecayDistance()
-    {
+    public int getMaxDecayDistance() {
         return maxDecayDistance;
     }
 
-    public boolean isConifer()
-    {
+    public boolean isConifer() {
         return isConifer;
     }
 
-    public boolean canMakeTannin()
-    {
+    public boolean canMakeTannin() {
         return canMakeTannin;
     }
 
-    public boolean hasBushes()
-    {
+    public boolean hasBushes() {
         return bushGenerator != null;
     }
 
     @Nullable
-    public ITreeGenerator getBushGen()
-    {
+    public ITreeGenerator getBushGen() {
         return bushGenerator;
     }
 
-    public float getMinGrowthTime()
-    {
+    public float getMinGrowthTime() {
         return minGrowthTime;
     }
 
-    public float getBurnTemp()
-    {
+    public float getBurnTemp() {
         return burnTemp;
     }
 
-    public int getBurnTicks()
-    {
+    public int getBurnTicks() {
         return burnTicks;
     }
 
     @SideOnly(Side.CLIENT)
-    public void addInfo(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    {
-        if (GuiScreen.isShiftKeyDown())
-        {
+    public void addInfo(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        if (GuiScreen.isShiftKeyDown()) {
             tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
             tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) minRain, (int) maxRain));
             tooltip.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", minTemp), String.format("%.1f", maxTemp)));
-        }
-        else
-        {
+        } else {
             tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
         }
     }
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public String toString()
-    {
+    public String toString() {
         return getRegistryName().getPath();
     }
 
-    public static class Builder
-    {
+    public static class Builder {
         private final float minTemp;
         private final float maxTemp;
         private final float minRain;
@@ -237,8 +211,7 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree>
         private float burnTemp;
         private int burnTicks;
 
-        public Builder(@Nonnull ResourceLocation name, float minRain, float maxRain, float minTemp, float maxTemp, @Nonnull ITreeGenerator gen)
-        {
+        public Builder(@Nonnull ResourceLocation name, float minRain, float maxRain, float minTemp, float maxTemp, @Nonnull ITreeGenerator gen) {
             this.minTemp = minTemp; // required values
             this.maxTemp = maxTemp;
             this.minRain = minRain;
@@ -259,76 +232,64 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree>
             this.burnTicks = 1500;
         }
 
-        public Builder setRadius(int maxGrowthRadius)
-        {
+        public Builder setRadius(int maxGrowthRadius) {
             this.maxGrowthRadius = maxGrowthRadius;
             return this;
         }
 
-        public Builder setDecayDist(int maxDecayDistance)
-        {
+        public Builder setDecayDist(int maxDecayDistance) {
             this.maxDecayDistance = maxDecayDistance;
             return this;
         }
 
-        public Builder setConifer()
-        {
+        public Builder setConifer() {
             isConifer = true;
             return this;
         }
 
-        public Builder setBushes()
-        {
+        public Builder setBushes() {
             bushGenerator = DefaultTrees.GEN_BUSHES;
             return this;
         }
 
-        public Builder setBushes(ITreeGenerator bushGenerator)
-        {
+        public Builder setBushes(ITreeGenerator bushGenerator) {
             this.bushGenerator = bushGenerator;
             return this;
         }
 
-        public Builder setTannin()
-        {
+        public Builder setTannin() {
             canMakeTannin = true;
             return this;
         }
 
-        public Builder setHeight(int maxHeight)
-        {
+        public Builder setHeight(int maxHeight) {
             this.maxHeight = maxHeight;
             return this;
         }
 
-        public Builder setGrowthTime(float growthTime)
-        {
+        public Builder setGrowthTime(float growthTime) {
             this.minGrowthTime = growthTime;
             return this;
         }
 
-        public Builder setDensity(float min, float max)
-        {
+        public Builder setDensity(float min, float max) {
             this.minDensity = min;
             this.maxDensity = max;
             return this;
         }
 
-        public Builder setDominance(float dom)
-        {
+        public Builder setDominance(float dom) {
             this.dominance = dom;
             return this;
         }
 
-        public Builder setBurnInfo(float burnTemp, int burnTicks)
-        {
+        public Builder setBurnInfo(float burnTemp, int burnTicks) {
             this.burnTemp = burnTemp;
             this.burnTicks = burnTicks;
             return this;
         }
 
-        public Tree build()
-        {
+        public Tree build() {
             return new Tree(name, gen, minTemp, maxTemp, minRain, maxRain, minDensity, maxDensity, dominance, maxGrowthRadius, maxHeight, maxDecayDistance, isConifer, bushGenerator, canMakeTannin, minGrowthTime, burnTemp, burnTicks);
         }
     }

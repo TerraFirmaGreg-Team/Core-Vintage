@@ -5,7 +5,9 @@
 
 package net.dries007.tfc.client.render;
 
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
+import net.dries007.tfc.objects.te.TEBarrel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -24,27 +26,20 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.lwjgl.opengl.GL11;
 
-import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.te.TEBarrel;
-
-public class TESRBarrel extends TileEntitySpecialRenderer<TEBarrel>
-{
+public class TESRBarrel extends TileEntitySpecialRenderer<TEBarrel> {
     @Override
-    public void render(TEBarrel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TEBarrel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         IBlockState state = te.getWorld().getBlockState(te.getPos());
-        if (!(state.getBlock() instanceof BlockBarrel) || state.getValue(BlockBarrel.SEALED))
-        {
+        if (!(state.getBlock() instanceof BlockBarrel) || state.getValue(BlockBarrel.SEALED)) {
             return;
         }
 
         IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
         IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        if (fluidHandler == null || itemHandler == null)
-        {
+        if (fluidHandler == null || itemHandler == null) {
             return;
         }
 
@@ -55,8 +50,7 @@ public class TESRBarrel extends TileEntitySpecialRenderer<TEBarrel>
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);
 
-        if (!stack.isEmpty())
-        {
+        if (!stack.isEmpty()) {
             GlStateManager.pushMatrix();
             GlStateManager.translate(0.5D, 0.15625D, 0.5D);
             GlStateManager.scale(0.5F, 0.5F, 0.5F);
@@ -65,8 +59,7 @@ public class TESRBarrel extends TileEntitySpecialRenderer<TEBarrel>
             GlStateManager.popMatrix();
         }
 
-        if (fluidStack != null)
-        {
+        if (fluidStack != null) {
             Fluid fluid = fluidStack.getFluid();
 
             TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(fluid);
@@ -91,8 +84,7 @@ public class TESRBarrel extends TileEntitySpecialRenderer<TEBarrel>
 
             FluidStack content = properties.getContents();
 
-            if (content == null)
-            {
+            if (content == null) {
                 return;
             }
 

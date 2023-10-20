@@ -1,11 +1,7 @@
 package tfcflorae.objects.blocks.blocktype;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Rock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -19,24 +15,23 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import mcp.MethodsReturnNonnullByDefault;
-
-import net.dries007.tfc.api.types.Rock;
-
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public abstract class BlockSlabTFCF extends BlockSlab
-{
+public abstract class BlockSlabTFCF extends BlockSlab {
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockSlabTFCF(Rock rock, RockTFCF rockTFCF)
-    {
+    private BlockSlabTFCF(Rock rock, RockTFCF rockTFCF) {
         this(BlockRockVariantTFCF.get(rock, rockTFCF));
         Block c = BlockRockVariantTFCF.get(rock, rockTFCF);
         //noinspection ConstantConditions
@@ -44,8 +39,7 @@ public abstract class BlockSlabTFCF extends BlockSlab
         useNeighborBrightness = true;
     }
 
-    private BlockSlabTFCF(Block block)
-    {
+    private BlockSlabTFCF(Block block) {
         super(block.getDefaultState().getMaterial());
         IBlockState state = blockState.getBaseState();
         if (!isDouble()) state = state.withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM);
@@ -55,31 +49,26 @@ public abstract class BlockSlabTFCF extends BlockSlab
     }
 
     @Override
-    public String getTranslationKey(int meta)
-    {
+    public String getTranslationKey(int meta) {
         return super.getTranslationKey();
     }
 
     @Override
-    public IProperty<?> getVariantProperty()
-    {
+    public IProperty<?> getVariantProperty() {
         return VARIANT; // why is this not null-tolerable ...
     }
 
     @Override
-    public Comparable<?> getTypeForItem(ItemStack stack)
-    {
+    public Comparable<?> getTypeForItem(ItemStack stack) {
         return Variant.DEFAULT;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
 
-        if (!this.isDouble())
-        {
+        if (!this.isDouble()) {
             iblockstate = iblockstate.withProperty(HALF, (meta & 8) == 0 ? BlockSlab.EnumBlockHalf.BOTTOM : BlockSlab.EnumBlockHalf.TOP);
         }
 
@@ -87,12 +76,10 @@ public abstract class BlockSlabTFCF extends BlockSlab
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         int i = 0;
 
-        if (!this.isDouble() && state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP)
-        {
+        if (!this.isDouble() && state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) {
             i |= 8;
         }
 
@@ -101,66 +88,51 @@ public abstract class BlockSlabTFCF extends BlockSlab
 
     @SuppressWarnings("deprecation")
     @Override
-    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
-    {
+    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
         return modelBlock.getBlockHardness(blockState, worldIn, pos);
     }
 
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(halfSlab);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public float getExplosionResistance(Entity exploder)
-    {
+    public float getExplosionResistance(Entity exploder) {
         return modelBlock.getExplosionResistance(exploder);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
         return new ItemStack(halfSlab);
     }
 
     @Override
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public SoundType getSoundType()
-    {
+    public SoundType getSoundType() {
         return modelBlock.getSoundType();
     }
 
-    public enum Variant implements IStringSerializable
-    {
+    public enum Variant implements IStringSerializable {
         DEFAULT;
 
         @Override
-        public String getName()
-        {
+        public String getName() {
             return "default";
         }
     }
 
-    public static class Double extends BlockSlabTFCF
-    {
+    public static class Double extends BlockSlabTFCF {
         private static final Map<Rock, EnumMap<RockTFCF, Double>> ROCK_TABLE = new HashMap<>();
 
-        public static Double get(Rock rock, RockTFCF rockTFCF)
-        {
-            return ROCK_TABLE.get(rock).get(rockTFCF);
-        }
-
-        public Double(Rock rock, RockTFCF rockTFCF)
-        {
+        public Double(Rock rock, RockTFCF rockTFCF) {
             super(rock, rockTFCF);
 
             if (!ROCK_TABLE.containsKey(rock))
@@ -170,26 +142,21 @@ public abstract class BlockSlabTFCF extends BlockSlab
             // No oredict, because no item.
         }
 
+        public static Double get(Rock rock, RockTFCF rockTFCF) {
+            return ROCK_TABLE.get(rock).get(rockTFCF);
+        }
+
         @Override
-        public boolean isDouble()
-        {
+        public boolean isDouble() {
             return true;
         }
     }
 
-    public static class Half extends BlockSlabTFCF
-    {
+    public static class Half extends BlockSlabTFCF {
         private static final Map<Rock, EnumMap<RockTFCF, Half>> ROCK_TABLE = new HashMap<>();
-
-        public static Half get(Rock rock, RockTFCF rockTFCF)
-        {
-            return ROCK_TABLE.get(rock).get(rockTFCF);
-        }
-
         public final Double doubleSlab;
 
-        public Half(Rock rock, RockTFCF rockTFCF)
-        {
+        public Half(Rock rock, RockTFCF rockTFCF) {
             super(rock, rockTFCF);
 
             if (!ROCK_TABLE.containsKey(rock))
@@ -203,9 +170,12 @@ public abstract class BlockSlabTFCF extends BlockSlab
             OreDictionaryHelper.registerRockType(this, rockTFCF, "slab");
         }
 
+        public static Half get(Rock rock, RockTFCF rockTFCF) {
+            return ROCK_TABLE.get(rock).get(rockTFCF);
+        }
+
         @Override
-        public boolean isDouble()
-        {
+        public boolean isDouble() {
             return false;
         }
     }

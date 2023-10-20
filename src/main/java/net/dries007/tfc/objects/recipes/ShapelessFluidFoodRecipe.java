@@ -5,10 +5,9 @@
 
 package net.dries007.tfc.objects.recipes;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.gson.JsonObject;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.IFood;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -25,26 +24,22 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SuppressWarnings("unused")
 @ParametersAreNonnullByDefault
-public class ShapelessFluidFoodRecipe extends ShapelessOreRecipe
-{
-    public ShapelessFluidFoodRecipe(ResourceLocation group, NonNullList<Ingredient> input, @Nonnull ItemStack result)
-    {
+public class ShapelessFluidFoodRecipe extends ShapelessOreRecipe {
+    public ShapelessFluidFoodRecipe(ResourceLocation group, NonNullList<Ingredient> input, @Nonnull ItemStack result) {
         super(group, input, result);
     }
 
     @Override
     @Nonnull
-    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
-    {
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
         NonNullList<ItemStack> ret = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 
-        for (int i = 0; i < ret.size(); i++)
-        {
+        for (int i = 0; i < ret.size(); i++) {
             ItemStack itemStack = inv.getStackInSlot(i);
 
             ItemStack stack = itemStack.copy();
@@ -52,12 +47,9 @@ public class ShapelessFluidFoodRecipe extends ShapelessOreRecipe
 
             IFluidHandlerItem handler = itemStack.getCount() > 1 ? FluidUtil.getFluidHandler(stack) : FluidUtil.getFluidHandler(itemStack);
 
-            if (handler == null)
-            {
+            if (handler == null) {
                 ret.set(i, ForgeHooks.getContainerItem(itemStack));
-            }
-            else
-            {
+            } else {
                 handler.drain(Fluid.BUCKET_VOLUME, true);
                 ItemStack updatedItem = handler.getContainer().copy();
                 ret.set(i, updatedItem);
@@ -67,27 +59,22 @@ public class ShapelessFluidFoodRecipe extends ShapelessOreRecipe
     }
 
     @Override
-    public boolean isDynamic()
-    {
+    public boolean isDynamic() {
         return true;
     }
 
     @Override
     @Nonnull
-    public ItemStack getCraftingResult(InventoryCrafting inv)
-    {
+    public ItemStack getCraftingResult(InventoryCrafting inv) {
         ItemStack out = output.copy();
 
         long smallestRottenDate = -1;
         ItemStack foodStack = null;
-        for (int slot = 0; slot < inv.getSizeInventory(); slot++)
-        {
+        for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
             ItemStack stack = inv.getStackInSlot(slot);
-            if (!stack.isEmpty())
-            {
+            if (!stack.isEmpty()) {
                 IFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-                if (foodCap != null && (smallestRottenDate == -1 || smallestRottenDate > foodCap.getRottenDate()))
-                {
+                if (foodCap != null && (smallestRottenDate == -1 || smallestRottenDate > foodCap.getRottenDate())) {
                     smallestRottenDate = foodCap.getRottenDate();
                     foodStack = stack;
                 }
@@ -96,11 +83,9 @@ public class ShapelessFluidFoodRecipe extends ShapelessOreRecipe
         return foodStack != null ? CapabilityFood.updateFoodFromPrevious(foodStack, out) : ItemStack.EMPTY;
     }
 
-    public static class Factory implements IRecipeFactory
-    {
+    public static class Factory implements IRecipeFactory {
         @Override
-        public IRecipe parse(final JsonContext context, final JsonObject json)
-        {
+        public IRecipe parse(final JsonContext context, final JsonObject json) {
             final String group = JsonUtils.getString(json, "group", "");
             final NonNullList<Ingredient> ingredients = RecipeUtils.parseShapeless(context, json);
             final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);

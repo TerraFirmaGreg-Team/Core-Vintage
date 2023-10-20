@@ -10,8 +10,7 @@ import net.dries007.tfc.api.types.Metal;
 /**
  * Interface for the forgeable heatable capability for items that store a metal amount, i.e. blooms
  */
-public interface IForgeableMeasurableMetal extends IForgeableHeatable
-{
+public interface IForgeableMeasurableMetal extends IForgeableHeatable {
     /**
      * Gets the metal content in this item
      *

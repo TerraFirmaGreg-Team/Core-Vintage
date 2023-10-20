@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.api.capability.egg;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,75 +13,66 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-public class EggHandler implements IEgg, ICapabilitySerializable<NBTTagCompound>
-{
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+public class EggHandler implements IEgg, ICapabilitySerializable<NBTTagCompound> {
     private boolean fertilized;
     private long hatchDay;
     private NBTTagCompound entitytag;
 
-    public EggHandler()
-    {
+    public EggHandler() {
         this(null);
     }
 
-    public EggHandler(@Nullable NBTTagCompound nbt)
-    {
+    public EggHandler(@Nullable NBTTagCompound nbt) {
         deserializeNBT(nbt);
     }
 
-    public EggHandler(boolean fertilized, long hatchDay, Entity entity)
-    {
+    public EggHandler(boolean fertilized, long hatchDay, Entity entity) {
         this.fertilized = fertilized;
         this.hatchDay = hatchDay;
         this.entitytag = entity.serializeNBT();
     }
 
     @Override
-    public long getHatchDay()
-    {
+    public long getHatchDay() {
         return hatchDay;
     }
 
     @Nullable
     @Override
-    public Entity getEntity(World world)
-    {
+    public Entity getEntity(World world) {
         return entitytag != null ? EntityList.createEntityFromNBT(entitytag, world) : null;
     }
 
     @Override
-    public boolean isFertilized()
-    {
+    public boolean isFertilized() {
         return fertilized;
     }
 
-    public void setFertilized(@Nonnull Entity entity, long hatchDay)
-    {
+    public void setFertilized(@Nonnull Entity entity, long hatchDay) {
         this.fertilized = true;
         this.entitytag = entity.serializeNBT();
         this.hatchDay = hatchDay;
     }
 
     @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
-    {
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityEgg.CAPABILITY;
     }
 
     @Nullable
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
-    {
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityEgg.CAPABILITY ? (T) this : null;
     }
 
     @Override
-    public NBTTagCompound serializeNBT()
-    {
+    public NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        if (entitytag != null)
-        {
+        if (entitytag != null) {
             nbt.setBoolean("fertilized", fertilized);
             nbt.setLong("hatchDay", hatchDay);
             nbt.setTag("entity", entitytag);
@@ -93,16 +81,12 @@ public class EggHandler implements IEgg, ICapabilitySerializable<NBTTagCompound>
     }
 
     @Override
-    public void deserializeNBT(NBTTagCompound nbt)
-    {
-        if (nbt != null && nbt.hasKey("entity"))
-        {
+    public void deserializeNBT(NBTTagCompound nbt) {
+        if (nbt != null && nbt.hasKey("entity")) {
             fertilized = nbt.getBoolean("fertilized");
             hatchDay = nbt.getLong("hatchDay");
             entitytag = nbt.getCompoundTag("entity");
-        }
-        else
-        {
+        } else {
             fertilized = false;
             entitytag = null;
             hatchDay = 0;

@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.particle;
 
-import java.util.function.Supplier;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.network.PacketSpawnTFCParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -21,8 +20,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.network.PacketSpawnTFCParticle;
+import javax.annotation.Nonnull;
+import java.util.function.Supplier;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
@@ -30,8 +29,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
  * TFC Particles, wrapped up in a nice enum
  */
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
-public enum TFCParticles
-{
+public enum TFCParticles {
     STEAM(new ResourceLocation(MOD_ID, "particle/steam"), () -> ParticleSteam::new),
     FIRE_PIT_SMOKE1(new ResourceLocation(MOD_ID, "particle/fire_pit_smoke1"), () -> ParticleFirePitSmoke::new),
     FIRE_PIT_SMOKE2(new ResourceLocation(MOD_ID, "particle/fire_pit_smoke2"), () -> ParticleFirePitSmoke::new),
@@ -42,29 +40,25 @@ public enum TFCParticles
     SPARK(new ResourceLocation(MOD_ID, "particle/spark"), () -> ParticleSpark::new),
     BUBBLE(new ResourceLocation(MOD_ID, "particle/bubble"), () -> ParticleBubbleTFC::new);
 
-    @SubscribeEvent
-    public static void onTextureStitchEvent(TextureStitchEvent.Pre event)
-    {
-        for (TFCParticles particle : TFCParticles.values())
-        {
-            particle.registerSprite(event.getMap());
-        }
-    }
-
     private final ResourceLocation location;
     private final Supplier<IParticleFactoryTFC> factorySupplier;
     private TextureAtlasSprite sprite;
-
     /**
      * Register a new particle to have it's texture atlas initialized and be ready to be used by TFC
      *
      * @param location        the resource (textures) location
      * @param factorySupplier the supplier (so we can instantiate this class server side) for method on how to create new instances of this particle
      */
-    TFCParticles(ResourceLocation location, Supplier<IParticleFactoryTFC> factorySupplier)
-    {
+    TFCParticles(ResourceLocation location, Supplier<IParticleFactoryTFC> factorySupplier) {
         this.location = location;
         this.factorySupplier = factorySupplier;
+    }
+
+    @SubscribeEvent
+    public static void onTextureStitchEvent(TextureStitchEvent.Pre event) {
+        for (TFCParticles particle : TFCParticles.values()) {
+            particle.registerSprite(event.getMap());
+        }
     }
 
     /**
@@ -80,8 +74,7 @@ public enum TFCParticles
      * @param duration the duration in ticks this particle will live in client's world
      */
     @SideOnly(Side.CLIENT)
-    public void spawn(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration)
-    {
+    public void spawn(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration) {
         Particle particle = factorySupplier.get().createParticle(worldIn, x, y, z, speedX, speedY, speedZ, duration);
         particle.setParticleTexture(sprite);
         Minecraft.getMinecraft().effectRenderer.addEffect(particle);
@@ -99,8 +92,7 @@ public enum TFCParticles
      * @param speedZ   speed at z coord which this particle will move
      * @param duration the duration in ticks this particle will live in client's world
      */
-    public void sendToAllNear(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration)
-    {
+    public void sendToAllNear(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration) {
         final int range = 80;
         PacketSpawnTFCParticle packet = new PacketSpawnTFCParticle(this, x, y, z, speedX, speedY, speedZ, duration);
         NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldIn.provider.getDimension(), x, y, z, range);
@@ -113,16 +105,14 @@ public enum TFCParticles
      * @param map the TextureMap, got from {@link TextureStitchEvent.Pre} event
      */
     @SideOnly(Side.CLIENT)
-    private void registerSprite(@Nonnull TextureMap map)
-    {
+    private void registerSprite(@Nonnull TextureMap map) {
         this.sprite = map.registerSprite(location);
     }
 
     /**
      * A factory interface to be used to create new instances of particles
      */
-    public interface IParticleFactoryTFC
-    {
+    public interface IParticleFactoryTFC {
         @SideOnly(Side.CLIENT)
         @Nonnull
         Particle createParticle(World world, double x, double y, double z, double speedX, double speedY, double speedZ, int duration);

@@ -23,23 +23,19 @@ import java.util.ArrayList;
 public class CTPumpkinCarving {
 
     @ZenMethod
-    public static void addRecipe(String recipe_name, IItemStack output, String... pattern)
-    {
+    public static void addRecipe(String recipe_name, IItemStack output, String... pattern) {
         if (output == null || pattern.length < 1 || pattern.length > 5)
             throw new IllegalArgumentException("Output item must be non-null and pattern must be a closed interval [1, 5]");
         ItemStack outputStack = InputHelper.toStack(output);
         KnappingRecipe recipe = new KnappingRecipeFood(KnappingFL.PUMPKIN, true, outputStack, pattern).setRegistryName(recipe_name);
-        CraftTweakerAPI.apply(new IAction()
-        {
+        CraftTweakerAPI.apply(new IAction() {
             @Override
-            public void apply()
-            {
+            public void apply() {
                 TFCRegistries.KNAPPING.register(recipe);
             }
 
             @Override
-            public String describe()
-            {
+            public String describe() {
                 //noinspection ConstantConditions
                 return "Adding Pumpkin Carving recipe " + recipe.getRegistryName().toString();
             }
@@ -47,8 +43,7 @@ public class CTPumpkinCarving {
     }
 
     @ZenMethod
-    public static void removeRecipe(IItemStack output)
-    {
+    public static void removeRecipe(IItemStack output) {
         if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
         ItemStack item = (ItemStack) output.getInternal();
         ArrayList<KnappingRecipe> removeList = new ArrayList<>();
@@ -56,20 +51,16 @@ public class CTPumpkinCarving {
                 .stream()
                 .filter(x -> x.getType() == KnappingFL.PUMPKIN && x.getOutput(ItemStack.EMPTY).isItemEqual(item))
                 .forEach(removeList::add);
-        for (KnappingRecipe rem : removeList)
-        {
-            CraftTweakerAPI.apply(new IAction()
-            {
+        for (KnappingRecipe rem : removeList) {
+            CraftTweakerAPI.apply(new IAction() {
                 @Override
-                public void apply()
-                {
+                public void apply() {
                     IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.KNAPPING;
                     modRegistry.remove(rem.getRegistryName());
                 }
 
                 @Override
-                public String describe()
-                {
+                public String describe() {
                     //noinspection ConstantConditions
                     return "Removing Pumpking Carving recipe " + rem.getRegistryName().toString();
                 }
@@ -78,23 +69,18 @@ public class CTPumpkinCarving {
     }
 
     @ZenMethod
-    public static void removeRecipe(String registryName)
-    {
+    public static void removeRecipe(String registryName) {
         KnappingRecipe recipe = TFCRegistries.KNAPPING.getValue(new ResourceLocation(registryName));
-        if (recipe != null)
-        {
-            CraftTweakerAPI.apply(new IAction()
-            {
+        if (recipe != null) {
+            CraftTweakerAPI.apply(new IAction() {
                 @Override
-                public void apply()
-                {
+                public void apply() {
                     IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.KNAPPING;
                     modRegistry.remove(recipe.getRegistryName());
                 }
 
                 @Override
-                public String describe()
-                {
+                public String describe() {
                     //noinspection ConstantConditions
                     return "Removing Pumpking Carving recipe " + recipe.getRegistryName().toString();
                 }

@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects;
 
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.util.loot.ApplySimpleSkill;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.LootTableList;
@@ -13,14 +15,10 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.loot.ApplySimpleSkill;
-
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public class LootTablesTFC
-{
+public class LootTablesTFC {
     public static ResourceLocation ANIMALS_BLACK_BEAR;
     public static ResourceLocation ANIMALS_GRIZZLY_BEAR;
     public static ResourceLocation ANIMALS_POLAR_BEAR;
@@ -63,8 +61,7 @@ public class LootTablesTFC
     public static ResourceLocation ANIMALS_YAK;
     public static ResourceLocation ANIMALS_ZEBU;
 
-    public static void init()
-    {
+    public static void init() {
         ANIMALS_BLACK_BEAR = register("animals/black_bear");
         ANIMALS_GRIZZLY_BEAR = register("animals/grizzly_bear");
         ANIMALS_POLAR_BEAR = register("animals/polar_bear");
@@ -112,10 +109,8 @@ public class LootTablesTFC
     }
 
     @SubscribeEvent
-    public static void onLootTableLoad(LootTableLoadEvent event)
-    {
-        if (ConfigTFC.General.OVERRIDES.removeVanillaLoots)
-        {
+    public static void onLootTableLoad(LootTableLoadEvent event) {
+        if (ConfigTFC.General.OVERRIDES.removeVanillaLoots) {
             // The pool with carrots, potatoes, and iron ingots
             remove(event, "minecraft:entities/zombie_villager", "pool1");
             remove(event, "minecraft:entities/zombie", "pool1");
@@ -123,33 +118,26 @@ public class LootTablesTFC
         }
 
         // Add calamari to squid's loot table
-        if ("minecraft:entities/squid".equals(event.getName().toString()))
-        {
+        if ("minecraft:entities/squid".equals(event.getName().toString())) {
             event.getTable().addPool(event.getLootTableManager().getLootTableFromLocation(ANIMALS_SQUID).getPool("roll1"));
         }
     }
 
-    private static ResourceLocation register(String id)
-    {
+    private static ResourceLocation register(String id) {
         return LootTableList.register(new ResourceLocation(MOD_ID, id));
     }
 
-    private static void remove(LootTableLoadEvent event, String tableName, String pool)
-    {
-        if (tableName.equals(event.getName().toString()))
-        {
+    private static void remove(LootTableLoadEvent event, String tableName, String pool) {
+        if (tableName.equals(event.getName().toString())) {
             event.getTable().removePool(pool);
         }
     }
 
-    private static void remove(LootTableLoadEvent event, String tableName, String poolName, String entry)
-    {
-        if (tableName.equals(event.getName().toString()))
-        {
+    private static void remove(LootTableLoadEvent event, String tableName, String poolName, String entry) {
+        if (tableName.equals(event.getName().toString())) {
             LootPool pool = event.getTable().getPool(poolName);
             //noinspection ConstantConditions
-            if (pool != null)
-            {
+            if (pool != null) {
                 pool.removeEntry(entry);
             }
         }

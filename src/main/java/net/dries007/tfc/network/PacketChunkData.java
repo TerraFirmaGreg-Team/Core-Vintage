@@ -5,6 +5,11 @@
 
 package net.dries007.tfc.network;
 
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -14,14 +19,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-
-public class PacketChunkData implements IMessage
-{
+public class PacketChunkData implements IMessage {
     private NBTTagCompound nbt;
     private int x, z;
     private float regionalTemp, rainfall;
@@ -30,8 +28,7 @@ public class PacketChunkData implements IMessage
     @Deprecated
     public PacketChunkData() {}
 
-    public PacketChunkData(ChunkPos chunkPos, NBTTagCompound nbt, float regionalTemp, float rainfall)
-    {
+    public PacketChunkData(ChunkPos chunkPos, NBTTagCompound nbt, float regionalTemp, float rainfall) {
         this.x = chunkPos.x;
         this.z = chunkPos.z;
         this.nbt = nbt;
@@ -40,8 +37,7 @@ public class PacketChunkData implements IMessage
     }
 
     @Override
-    public void fromBytes(ByteBuf buf)
-    {
+    public void fromBytes(ByteBuf buf) {
         x = buf.readInt();
         z = buf.readInt();
         nbt = ByteBufUtils.readTag(buf);
@@ -50,8 +46,7 @@ public class PacketChunkData implements IMessage
     }
 
     @Override
-    public void toBytes(ByteBuf buf)
-    {
+    public void toBytes(ByteBuf buf) {
         buf.writeInt(x);
         buf.writeInt(z);
         ByteBufUtils.writeTag(buf, nbt);
@@ -59,20 +54,16 @@ public class PacketChunkData implements IMessage
         buf.writeFloat(rainfall);
     }
 
-    public static class Handler implements IMessageHandler<PacketChunkData, IMessage>
-    {
+    public static class Handler implements IMessageHandler<PacketChunkData, IMessage> {
         @Override
-        public IMessage onMessage(PacketChunkData message, MessageContext ctx)
-        {
+        public IMessage onMessage(PacketChunkData message, MessageContext ctx) {
             final World world = TerraFirmaCraft.getProxy().getWorld(ctx);
-            if (world != null)
-            {
+            if (world != null) {
                 TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                     // Update client-side chunk data capability
                     Chunk chunk = world.getChunk(message.x, message.z);
                     ChunkDataTFC data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
-                    if (data != null)
-                    {
+                    if (data != null) {
                         ChunkDataProvider.CHUNK_DATA_CAPABILITY.readNBT(data, null, message.nbt);
                     }
 

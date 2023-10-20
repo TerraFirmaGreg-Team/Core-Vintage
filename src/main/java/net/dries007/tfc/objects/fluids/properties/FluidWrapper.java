@@ -5,11 +5,11 @@
 
 package net.dries007.tfc.objects.fluids.properties;
 
+import net.minecraftforge.fluids.Fluid;
+
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Nonnull;
-
-import net.minecraftforge.fluids.Fluid;
 
 /**
  * This is a separate class from {@link Fluid} to avoid subclassing.
@@ -19,27 +19,23 @@ import net.minecraftforge.fluids.Fluid;
  * > IF you do NOT want to work well with others and you have to  be a special special snowflake, namespace your shit.
  * So in order to keep TFC working well with other mods, we shall use whatever fluids are registered, but we still need to map them to properties
  */
-public class FluidWrapper
-{
+public class FluidWrapper {
     private final Fluid fluid;
     private final boolean isDefault;
     private final Map<FluidProperty<?>, Object> properties;
 
-    public FluidWrapper(@Nonnull Fluid fluid, boolean isDefault)
-    {
+    public FluidWrapper(@Nonnull Fluid fluid, boolean isDefault) {
         this.fluid = fluid;
         this.isDefault = isDefault;
         this.properties = new HashMap<>();
     }
 
     @Nonnull
-    public Fluid get()
-    {
+    public Fluid get() {
         return fluid;
     }
 
-    public boolean isDefault()
-    {
+    public boolean isDefault() {
         return isDefault;
     }
 
@@ -47,13 +43,11 @@ public class FluidWrapper
      * Used to add properties to TFC fluids, such as making them drinkable, or giving them a metal.
      */
     @SuppressWarnings("unchecked")
-    public <T> T get(FluidProperty<T> propertyType)
-    {
+    public <T> T get(FluidProperty<T> propertyType) {
         return (T) properties.get(propertyType);
     }
 
-    public <T> FluidWrapper with(FluidProperty<T> propertyType, T propertyValue)
-    {
+    public <T> FluidWrapper with(FluidProperty<T> propertyType, T propertyValue) {
         properties.put(propertyType, propertyValue);
         return this;
     }
@@ -62,8 +56,7 @@ public class FluidWrapper
      * Used externally to remove a specific property from a fluid.
      */
     @SuppressWarnings({"unchecked", "unused"})
-    public <T> T remove(FluidProperty<T> propertyType)
-    {
+    public <T> T remove(FluidProperty<T> propertyType) {
         return (T) properties.remove(propertyType);
     }
 }

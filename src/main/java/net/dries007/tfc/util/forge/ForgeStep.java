@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.util.forge;
 
-import javax.annotation.Nullable;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public enum ForgeStep
-{
+import javax.annotation.Nullable;
+
+public enum ForgeStep {
     HIT_LIGHT(-3, 53, 50, 128, 192),
     HIT_MEDIUM(-6, 71, 50, 160, 192),
     HIT_HARD(-9, 53, 68, 192, 192),
@@ -22,18 +21,9 @@ public enum ForgeStep
     SHRINK(16, 107, 68, 224, 224);
 
     private static final ForgeStep[] VALUES = values();
-
-    @Nullable
-    public static ForgeStep valueOf(int id)
-    {
-        return id >= 0 && id < VALUES.length ? VALUES[id] : null;
-    }
-
     private final int stepAmount;
     private final int x, y, u, v;
-
-    ForgeStep(int stepAmount, int x, int y, int u, int v)
-    {
+    ForgeStep(int stepAmount, int x, int y, int u, int v) {
         this.stepAmount = stepAmount;
         this.x = x;
         this.y = y;
@@ -41,32 +31,32 @@ public enum ForgeStep
         this.v = v;
     }
 
-    public int getStepAmount()
-    {
+    @Nullable
+    public static ForgeStep valueOf(int id) {
+        return id >= 0 && id < VALUES.length ? VALUES[id] : null;
+    }
+
+    public int getStepAmount() {
         return stepAmount;
     }
 
     @SideOnly(Side.CLIENT)
-    public int getX()
-    {
+    public int getX() {
         return x;
     }
 
     @SideOnly(Side.CLIENT)
-    public int getY()
-    {
+    public int getY() {
         return y;
     }
 
     @SideOnly(Side.CLIENT)
-    public int getU()
-    {
+    public int getU() {
         return u;
     }
 
     @SideOnly(Side.CLIENT)
-    public int getV()
-    {
+    public int getV() {
         return v;
     }
 }

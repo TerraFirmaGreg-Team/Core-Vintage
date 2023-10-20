@@ -5,9 +5,7 @@
 
 package net.dries007.tfc.objects.items.itemblock;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -25,65 +23,54 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemBlockFloatingWaterTFC extends ItemBlockTFC
-{
+public class ItemBlockFloatingWaterTFC extends ItemBlockTFC {
     protected final BlockFloatingWaterTFC block;
 
-    public ItemBlockFloatingWaterTFC(BlockFloatingWaterTFC block)
-    {
+    public ItemBlockFloatingWaterTFC(BlockFloatingWaterTFC block) {
         super(block);
         this.block = block;
     }
 
     @Override
     @Nonnull
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
-    {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, true);
 
         //noinspection ConstantConditions
-        if (raytraceresult == null)
-        {
+        if (raytraceresult == null) {
             return new ActionResult<>(EnumActionResult.PASS, itemstack);
-        }
-        else
-        {
-            if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK)
-            {
+        } else {
+            if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
                 BlockPos blockpos = raytraceresult.getBlockPos();
 
-                if (!worldIn.isBlockModifiable(playerIn, blockpos) || !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack))
-                {
+                if (!worldIn.isBlockModifiable(playerIn, blockpos) || !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) {
                     return new ActionResult<>(EnumActionResult.FAIL, itemstack);
                 }
 
                 BlockPos blockpos1 = blockpos.up();
                 IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
-                if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 && worldIn.isAirBlock(blockpos1) && iblockstate == block.getPlant().getWaterType())
-                {
+                if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 && worldIn.isAirBlock(blockpos1) && iblockstate == block.getPlant().getWaterType()) {
                     // special case for handling block placement with water lilies
                     net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
                     worldIn.setBlockState(blockpos1, block.getDefaultState());
-                    if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, net.minecraft.util.EnumFacing.UP, handIn).isCanceled())
-                    {
+                    if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, net.minecraft.util.EnumFacing.UP, handIn).isCanceled()) {
                         blocksnapshot.restore(true, false);
                         return new ActionResult<>(EnumActionResult.FAIL, itemstack);
                     }
 
                     worldIn.setBlockState(blockpos1, block.getDefaultState(), 11);
 
-                    if (playerIn instanceof EntityPlayerMP)
-                    {
+                    if (playerIn instanceof EntityPlayerMP) {
                         CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) playerIn, blockpos1, itemstack);
                     }
 
-                    if (!playerIn.capabilities.isCreativeMode)
-                    {
+                    if (!playerIn.capabilities.isCreativeMode) {
                         itemstack.shrink(1);
                     }
 

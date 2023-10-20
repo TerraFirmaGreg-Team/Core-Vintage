@@ -5,30 +5,24 @@
 
 package net.dries007.tfc.objects.container;
 
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.objects.te.TECrucible;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.objects.te.TECrucible;
-
 import static net.dries007.tfc.objects.te.TECrucible.*;
 
-public class ContainerCrucible extends ContainerTE<TECrucible>
-{
-    public ContainerCrucible(InventoryPlayer playerInv, TECrucible tile)
-    {
+public class ContainerCrucible extends ContainerTE<TECrucible> {
+    public ContainerCrucible(InventoryPlayer playerInv, TECrucible tile) {
         super(playerInv, tile, 55);
     }
 
     @Override
-    protected void addContainerSlots()
-    {
+    protected void addContainerSlots() {
         IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (inventory != null)
-        {
-            for (int i = SLOT_INPUT_START; i <= SLOT_INPUT_END; i++)
-            {
+        if (inventory != null) {
+            for (int i = SLOT_INPUT_START; i <= SLOT_INPUT_END; i++) {
                 int line = i / 3;
                 int column = i % 3;
                 int x = 26 + column * 18;

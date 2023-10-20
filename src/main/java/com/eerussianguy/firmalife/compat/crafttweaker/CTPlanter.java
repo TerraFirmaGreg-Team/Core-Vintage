@@ -23,12 +23,12 @@ import java.util.ArrayList;
 public class CTPlanter {
 
     @ZenMethod
-    public static void addRecipe(String recipe_name,IIngredient input, IItemStack output, int stage, boolean large) {
+    public static void addRecipe(String recipe_name, IIngredient input, IItemStack output, int stage, boolean large) {
         addRecipe(recipe_name, input, output, stage, large, 0);
     }
 
     @ZenMethod
-    public static void addRecipe(String recipe_name,IIngredient input, IItemStack output, int stage, boolean large, int tier) {
+    public static void addRecipe(String recipe_name, IIngredient input, IItemStack output, int stage, boolean large, int tier) {
         PlanterRecipe recipe = new PlanterRecipe(CTHelper.getInternalIngredient(input), InputHelper.toStack(output), stage, large, tier).setRegistryName(recipe_name);
         CraftTweakerAPI.apply(new IAction() {
             @Override
@@ -48,7 +48,7 @@ public class CTPlanter {
 
         PlanterRecipe recipe = RegistriesFL.PLANTER_QUAD.getValue(new ResourceLocation(recipe_name));
 
-        if(recipe != null) {
+        if (recipe != null) {
             CraftTweakerAPI.apply(new IAction() {
                 @Override
                 public void apply() {
@@ -74,7 +74,7 @@ public class CTPlanter {
                 .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
                 .forEach(removeList::add);
 
-        for(PlanterRecipe recipe : removeList) {
+        for (PlanterRecipe recipe : removeList) {
             CraftTweakerAPI.apply(new IAction() {
                 @Override
                 public void apply() {

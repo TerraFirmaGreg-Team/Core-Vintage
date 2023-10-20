@@ -5,13 +5,16 @@
 
 package net.dries007.tfc.objects.blocks.stone;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.items.rock.ItemRock;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
@@ -22,7 +25,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -30,77 +32,26 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockRockVariant extends Block implements IItemSize
-{
+public class BlockRockVariant extends Block implements IItemSize {
     private static final Map<Rock, EnumMap<Rock.Type, BlockRockVariant>> TABLE = new HashMap<>();
-
-    public static BlockRockVariant get(Rock rock, Rock.Type type)
-    {
-        //noinspection ConstantConditions
-        if (rock == null)
-        {
-            return TABLE.get(Rock.GRANITE).get(type);
-        }
-        return TABLE.get(rock).get(type);
-    }
-
-    public static BlockRockVariant create(Rock rock, Rock.Type type)
-    {
-        switch (type)
-        {
-            case RAW:
-                return new BlockRockRaw(type, rock);
-            case SMOOTH:
-                return new BlockRockSmooth(type, rock);
-            case ANVIL:
-                return new BlockStoneAnvil(type, rock);
-            case SPIKE:
-                return new BlockRockSpike(type, rock);
-            case FARMLAND:
-                return new BlockFarmlandTFC(type, rock);
-            case PATH:
-                return new BlockPathTFC(type, rock);
-            case GRASS:
-            case DRY_GRASS:
-            case CLAY_GRASS:
-                return new BlockRockVariantConnected(type, rock);
-            case SAND:
-            case DIRT:
-            case CLAY:
-            case GRAVEL:
-            case COBBLE:
-                return new BlockRockVariantFallable(type, rock);
-            default:
-                return new BlockRockVariant(type, rock);
-        }
-    }
-
     protected final Rock.Type type;
     protected final Rock rock;
 
-    public BlockRockVariant(Rock.Type type, Rock rock)
-    {
+    public BlockRockVariant(Rock.Type type, Rock rock) {
         super(type.material);
 
-        if (!TABLE.containsKey(rock))
-        {
+        if (!TABLE.containsKey(rock)) {
             TABLE.put(rock, new EnumMap<>(Rock.Type.class));
         }
         TABLE.get(rock).put(type, this);
@@ -108,8 +59,7 @@ public class BlockRockVariant extends Block implements IItemSize
         this.type = type;
         this.rock = rock;
         if (type.isGrass) setTickRandomly(true);
-        switch (type)
-        {
+        switch (type) {
             case BRICKS:
             case RAW:
             case ANVIL:
@@ -156,22 +106,55 @@ public class BlockRockVariant extends Block implements IItemSize
         }
     }
 
-    public BlockRockVariant getVariant(Rock.Type t)
-    {
+    public static BlockRockVariant get(Rock rock, Rock.Type type) {
+        //noinspection ConstantConditions
+        if (rock == null) {
+            return TABLE.get(Rock.GRANITE).get(type);
+        }
+        return TABLE.get(rock).get(type);
+    }
+
+    public static BlockRockVariant create(Rock rock, Rock.Type type) {
+        switch (type) {
+            case RAW:
+                return new BlockRockRaw(type, rock);
+            case SMOOTH:
+                return new BlockRockSmooth(type, rock);
+            case ANVIL:
+                return new BlockStoneAnvil(type, rock);
+            case SPIKE:
+                return new BlockRockSpike(type, rock);
+            case FARMLAND:
+                return new BlockFarmlandTFC(type, rock);
+            case PATH:
+                return new BlockPathTFC(type, rock);
+            case GRASS:
+            case DRY_GRASS:
+            case CLAY_GRASS:
+                return new BlockRockVariantConnected(type, rock);
+            case SAND:
+            case DIRT:
+            case CLAY:
+            case GRAVEL:
+            case COBBLE:
+                return new BlockRockVariantFallable(type, rock);
+            default:
+                return new BlockRockVariant(type, rock);
+        }
+    }
+
+    public BlockRockVariant getVariant(Rock.Type t) {
         return TABLE.get(rock).get(t);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("deprecation")
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side)
-    {
-        switch (this.type)
-        {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        switch (this.type) {
             case PATH:
             case FARMLAND:
-                switch (side)
-                {
+                switch (side) {
                     case UP:
                         return true;
                     case NORTH:
@@ -182,10 +165,8 @@ public class BlockRockVariant extends Block implements IItemSize
                         Block block = state.getBlock();
                         if (state.isOpaqueCube()) return false;
                         if (block instanceof BlockFarmland || block instanceof BlockGrassPath) return false;
-                        if (block instanceof BlockRockVariant)
-                        {
-                            switch (((BlockRockVariant) block).type)
-                            {
+                        if (block instanceof BlockRockVariant) {
+                            switch (((BlockRockVariant) block).type) {
                                 case FARMLAND:
                                 case PATH:
                                     return false;
@@ -203,18 +184,15 @@ public class BlockRockVariant extends Block implements IItemSize
     }
 
     @Override
-    public void randomTick(World world, BlockPos pos, IBlockState state, Random rand)
-    {
+    public void randomTick(World world, BlockPos pos, IBlockState state, Random rand) {
         if (world.isRemote) return;
         if (type.isGrass) BlockRockVariantConnected.spreadGrass(world, pos, state, rand);
         super.randomTick(world, pos, state, rand);
     }
 
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        switch (type)
-        {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        switch (type) {
             case RAW:
             case SPIKE:
                 return ItemRock.get(rock);
@@ -231,23 +209,19 @@ public class BlockRockVariant extends Block implements IItemSize
     }
 
     @Override
-    public int damageDropped(IBlockState state)
-    {
+    public int damageDropped(IBlockState state) {
         return getMetaFromState(state);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer()
-    {
+    public BlockRenderLayer getRenderLayer() {
         return type.isGrass ? BlockRenderLayer.CUTOUT : BlockRenderLayer.SOLID;
     }
 
     @Override
-    public int quantityDropped(IBlockState state, int fortune, Random random)
-    {
-        switch (type)
-        {
+    public int quantityDropped(IBlockState state, int fortune, Random random) {
+        switch (type) {
             case CLAY:
             case CLAY_GRASS:
                 return 4;
@@ -260,14 +234,11 @@ public class BlockRockVariant extends Block implements IItemSize
     }
 
     @Override
-    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
-    {
+    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
         int beachDistance = 2;
 
-        if (plantable instanceof BlockPlantTFC)
-        {
-            switch (((BlockPlantTFC) plantable).getPlantTypeTFC())
-            {
+        if (plantable instanceof BlockPlantTFC) {
+            switch (((BlockPlantTFC) plantable).getPlantTypeTFC()) {
                 case CLAY:
                     return type == Rock.Type.DIRT || type == Rock.Type.GRASS || type == Rock.Type.DRY_GRASS || type == Rock.Type.CLAY || type == Rock.Type.CLAY_GRASS;
                 case DESERT_CLAY:
@@ -280,15 +251,11 @@ public class BlockRockVariant extends Block implements IItemSize
                     return type == Rock.Type.DIRT || type == Rock.Type.GRASS || type == Rock.Type.DRY_GRASS || type == Rock.Type.GRAVEL;
                 case SALT_WATER:
                     return type == Rock.Type.DIRT || type == Rock.Type.GRASS || type == Rock.Type.DRY_GRASS || type == Rock.Type.SAND || type == Rock.Type.GRAVEL;
-                case FRESH_BEACH:
-                {
+                case FRESH_BEACH: {
                     boolean flag = false;
-                    for (EnumFacing facing : EnumFacing.HORIZONTALS)
-                    {
-                        for (int i = 1; i <= beachDistance; i++)
-                        {
-                            if (BlocksTFC.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i))))
-                            {
+                    for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+                        for (int i = 1; i <= beachDistance; i++) {
+                            if (BlocksTFC.isFreshWaterOrIce(world.getBlockState(pos.offset(facing, i)))) {
                                 flag = true;
                                 break;
                             }
@@ -296,31 +263,23 @@ public class BlockRockVariant extends Block implements IItemSize
                     }
                     return (type == Rock.Type.DIRT || type == Rock.Type.GRASS || type == Rock.Type.SAND || type == Rock.Type.DRY_GRASS) && flag;
                 }
-                case SALT_BEACH:
-                {
+                case SALT_BEACH: {
                     boolean flag = false;
-                    for (EnumFacing facing : EnumFacing.HORIZONTALS)
-                    {
+                    for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                         for (int i = 1; i <= beachDistance; i++)
-                            if (BlocksTFC.isSaltWater(world.getBlockState(pos.offset(facing, i))))
-                            {
+                            if (BlocksTFC.isSaltWater(world.getBlockState(pos.offset(facing, i)))) {
                                 flag = true;
                             }
                     }
                     return (type == Rock.Type.DIRT || type == Rock.Type.GRASS || type == Rock.Type.SAND || type == Rock.Type.DRY_GRASS) && flag;
                 }
             }
-        }
-        else if (plantable instanceof BlockCropTFC)
-        {
+        } else if (plantable instanceof BlockCropTFC) {
             IBlockState cropState = world.getBlockState(pos.up());
-            if (cropState.getBlock() instanceof BlockCropTFC)
-            {
+            if (cropState.getBlock() instanceof BlockCropTFC) {
                 boolean isWild = cropState.getValue(WILD);
-                if (isWild)
-                {
-                    if (type == Rock.Type.DIRT || type == Rock.Type.GRASS || type == Rock.Type.DRY_GRASS || type == Rock.Type.CLAY_GRASS)
-                    {
+                if (isWild) {
+                    if (type == Rock.Type.DIRT || type == Rock.Type.GRASS || type == Rock.Type.DRY_GRASS || type == Rock.Type.CLAY_GRASS) {
                         return true;
                     }
                 }
@@ -328,8 +287,7 @@ public class BlockRockVariant extends Block implements IItemSize
             }
         }
 
-        switch (plantable.getPlantType(world, pos.offset(direction)))
-        {
+        switch (plantable.getPlantType(world, pos.offset(direction))) {
             case Plains:
                 return type == Rock.Type.DIRT || type == Rock.Type.GRASS || type == Rock.Type.FARMLAND || type == Rock.Type.DRY_GRASS || type == Rock.Type.CLAY || type == Rock.Type.CLAY_GRASS;
             case Crop:
@@ -340,14 +298,11 @@ public class BlockRockVariant extends Block implements IItemSize
                 return true;
             case Water:
                 return false;
-            case Beach:
-            {
+            case Beach: {
                 boolean flag = false;
-                for (EnumFacing facing : EnumFacing.HORIZONTALS)
-                {
+                for (EnumFacing facing : EnumFacing.HORIZONTALS) {
                     for (int i = 1; i <= beachDistance; i++)
-                        if (BlocksTFC.isWater(world.getBlockState(pos.offset(facing, i))))
-                        {
+                        if (BlocksTFC.isWater(world.getBlockState(pos.offset(facing, i)))) {
                             flag = true;
                         }
                 }
@@ -360,27 +315,23 @@ public class BlockRockVariant extends Block implements IItemSize
         return false;
     }
 
-    public Rock.Type getType()
-    {
+    public Rock.Type getType() {
         return type;
     }
 
-    public Rock getRock()
-    {
+    public Rock getRock() {
         return rock;
     }
 
     @Nonnull
     @Override
-    public Size getSize(@Nonnull ItemStack stack)
-    {
+    public Size getSize(@Nonnull ItemStack stack) {
         return Size.SMALL; // Store anywhere
     }
 
     @Nonnull
     @Override
-    public Weight getWeight(@Nonnull ItemStack stack)
-    {
+    public Weight getWeight(@Nonnull ItemStack stack) {
         return Weight.LIGHT; // Stacksize = 32
     }
 

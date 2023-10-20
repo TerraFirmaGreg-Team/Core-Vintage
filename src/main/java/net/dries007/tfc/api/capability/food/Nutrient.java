@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.api.capability.food;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.text.TextFormatting;
 
-public enum Nutrient
-{
+import javax.annotation.Nonnull;
+
+public enum Nutrient {
     GRAIN(TextFormatting.GOLD),
     FRUIT(TextFormatting.GREEN),
     VEGETABLES(TextFormatting.DARK_GREEN),
@@ -19,23 +18,19 @@ public enum Nutrient
 
     public static final int TOTAL = values().length;
     private static final Nutrient[] VALUES = values();
-
-    @Nonnull
-    public static Nutrient valueOf(int i)
-    {
-        return i >= 0 && i < VALUES.length ? VALUES[i] : GRAIN;
-    }
-
     private final TextFormatting color;
 
-    Nutrient(TextFormatting color)
-    {
+    Nutrient(TextFormatting color) {
         this.color = color;
     }
 
     @Nonnull
-    public TextFormatting getColor()
-    {
+    public static Nutrient valueOf(int i) {
+        return i >= 0 && i < VALUES.length ? VALUES[i] : GRAIN;
+    }
+
+    @Nonnull
+    public TextFormatting getColor() {
         return color;
     }
 }

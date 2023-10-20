@@ -1,27 +1,18 @@
 package tfcflorae.client.particle;
 
-import java.awt.*;
-
 import net.minecraft.client.particle.Particle;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.Constants.RNG;
-
-public class ParticleBlossom extends Particle
-{
+public class ParticleBlossom extends Particle {
     private final int xSignModifier = rand.nextInt(2) - 1;
     private final int zSignModifier = rand.nextInt(2) - 1;
     private final double xMod = (rand.nextFloat() - 0.5) / 7;
     private final double zMod = (rand.nextFloat() - 0.5) / 7;
 
-    public ParticleBlossom(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration)
-    {
+    public ParticleBlossom(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration) {
         super(worldIn, x, y, z, speedX, speedY, speedZ);
-        this.particleMaxAge = duration + (int)(16.0D / (Math.random() * 0.8D + 0.2D));
+        this.particleMaxAge = duration + (int) (16.0D / (Math.random() * 0.8D + 0.2D));
         this.motionX *= 0.1D;
         this.motionY *= 0.01D;
         this.motionZ *= 0.1D;
@@ -32,13 +23,12 @@ public class ParticleBlossom extends Particle
     }
 
     @Override
-    public void onUpdate()
-    {
+    public void onUpdate() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
 
-        if (this.particleAge++ >= this.particleMaxAge) { this.setExpired(); }
+        if (this.particleAge++ >= this.particleMaxAge) {this.setExpired();}
 
         double swayWave = 0.03 * MathHelper.sin((float) (this.particleAge / 12.5));
         double angleWave = 0.1 * MathHelper.sin((float) (this.particleAge / 12.5));
@@ -48,8 +38,7 @@ public class ParticleBlossom extends Particle
         this.motionY -= 0.001D;
         this.move(this.motionX, this.motionY, this.motionZ);
 
-        if (this.posY == this.prevPosY)
-        {
+        if (this.posY == this.prevPosY) {
             this.motionX = 0;
             this.motionZ = 0;
         }
@@ -58,8 +47,7 @@ public class ParticleBlossom extends Particle
         this.motionY *= 0.96D;
         this.motionZ = swayWave * zSignModifier + zMod;
 
-        if (this.onGround)
-        {
+        if (this.onGround) {
             this.particleAlpha += 0.1;
             this.motionY = 0;
             if (this.particleAge >= this.particleMaxAge - rand.nextInt(6))
@@ -68,8 +56,7 @@ public class ParticleBlossom extends Particle
     }
 
     @Override
-    public int getFXLayer()
-    {
+    public int getFXLayer() {
         return 1;
     }
 }

@@ -8,8 +8,7 @@ package net.dries007.tfc.objects;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.util.EnumHelper;
 
-public final class ToolMaterialsTFC
-{
+public final class ToolMaterialsTFC {
     // Damage here is for the sword.
     // Stone weapons have 75% the damage of a vanilla's wood sword while red/blue steel is like a diamond sword with sharpess V (3+ dmg)
     // All in-between weapons have an exponential growth (not much steep but still making it worth to upgrade)

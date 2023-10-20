@@ -5,24 +5,20 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
+import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 
-import net.dries007.tfc.api.recipes.WeldingRecipe;
-
-public class WeldingRecipeWrapper extends SimpleRecipeWrapper
-{
+public class WeldingRecipeWrapper extends SimpleRecipeWrapper {
     private final WeldingRecipe recipe;
 
-    public WeldingRecipeWrapper(WeldingRecipe recipeWrapper)
-    {
+    public WeldingRecipeWrapper(WeldingRecipe recipeWrapper) {
         super(recipeWrapper);
         recipe = recipeWrapper;
     }
 
     @Override
-    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
-    {
+    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         //Draw tier requirement info
         String text = I18n.format("tfc.enum.tier." + recipe.getTier().name().toLowerCase());
         float xPos = 88f - minecraft.fontRenderer.getStringWidth(text) / 2.0f;

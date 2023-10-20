@@ -5,11 +5,11 @@
 
 package net.dries007.tfc.objects.blocks.devices;
 
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.objects.blocks.property.ILightableBlock;
+import net.dries007.tfc.objects.items.ItemFireStarter;
+import net.dries007.tfc.objects.te.TEPitKiln;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -38,36 +38,33 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.items.ItemFireStarter;
-import net.dries007.tfc.objects.te.TEPitKiln;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.BlockPlacedItem.PLACED_ITEM_AABB;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockPitKiln extends Block implements ILightableBlock
-{
+public class BlockPitKiln extends Block implements ILightableBlock {
     public static final PropertyBool FULL = PropertyBool.create("full");
 
-    private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[] {
-        PLACED_ITEM_AABB,
-        new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1),
-        new AxisAlignedBB(0, 0, 0, 1, 0.125, 1),
-        new AxisAlignedBB(0, 0, 0, 1, 0.1875, 1),
-        new AxisAlignedBB(0, 0, 0, 1, 0.25, 1),
-        new AxisAlignedBB(0, 0, 0, 1, 0.3125, 1),
-        new AxisAlignedBB(0, 0, 0, 1, 0.375, 1),
-        new AxisAlignedBB(0, 0, 0, 1, 0.4375, 1),
-        new AxisAlignedBB(0, 0, 0, 1, 0.5, 1),
-        new AxisAlignedBB(0, 0, 0, 1, 0.75, 1),
-        FULL_BLOCK_AABB
+    private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[]{
+            PLACED_ITEM_AABB,
+            new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1),
+            new AxisAlignedBB(0, 0, 0, 1, 0.125, 1),
+            new AxisAlignedBB(0, 0, 0, 1, 0.1875, 1),
+            new AxisAlignedBB(0, 0, 0, 1, 0.25, 1),
+            new AxisAlignedBB(0, 0, 0, 1, 0.3125, 1),
+            new AxisAlignedBB(0, 0, 0, 1, 0.375, 1),
+            new AxisAlignedBB(0, 0, 0, 1, 0.4375, 1),
+            new AxisAlignedBB(0, 0, 0, 1, 0.5, 1),
+            new AxisAlignedBB(0, 0, 0, 1, 0.75, 1),
+            FULL_BLOCK_AABB
     };
 
-    public BlockPitKiln()
-    {
+    public BlockPitKiln() {
         super(Material.CIRCUITS);
         setHardness(0.5f);
         setDefaultState(blockState.getBaseState().withProperty(FULL, false).withProperty(LIT, false));
@@ -75,52 +72,42 @@ public class BlockPitKiln extends Block implements ILightableBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isTopSolid(IBlockState state)
-    {
+    public boolean isTopSolid(IBlockState state) {
         return state.getValue(FULL);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(LIT, (meta & 1) > 0).withProperty(FULL, (meta & 2) > 0);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return (state.getValue(LIT) ? 1 : 0) + (state.getValue(FULL) ? 2 : 0);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state)
-    {
+    public boolean isFullCube(IBlockState state) {
         return true;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public EnumBlockRenderType getRenderType(IBlockState state)
-    {
+    public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         TEPitKiln tile = Helpers.getTE(source, pos, TEPitKiln.class);
-        if (tile != null)
-        {
+        if (tile != null) {
             int height = tile.getStrawCount();
-            if (tile.getLogCount() > 4)
-            {
+            if (tile.getLogCount() > 4) {
                 height = 10; // Full block
-            }
-            else if (tile.getLogCount() > 0)
-            {
+            } else if (tile.getLogCount() > 0) {
                 height = 9; // 75% of block
             }
             return AABB_LEVELS[height];
@@ -130,33 +117,26 @@ public class BlockPitKiln extends Block implements ILightableBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         TEPitKiln te = Helpers.getTE(worldIn, pos, TEPitKiln.class);
-        if (te != null)
-        {
-            if (blockIn == Blocks.FIRE)
-            {
+        if (te != null) {
+            if (blockIn == Blocks.FIRE) {
                 te.tryLight();
             }
-            if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP))
-            {
-                if (te.isLit())
-                {
+            if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
+                if (te.isLit()) {
                     te.emptyFuelContents();
                 }
                 worldIn.destroyBlock(pos, true);
@@ -166,11 +146,9 @@ public class BlockPitKiln extends Block implements ILightableBlock
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TEPitKiln te = Helpers.getTE(worldIn, pos, TEPitKiln.class);
-        if (te != null)
-        {
+        if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
@@ -178,20 +156,16 @@ public class BlockPitKiln extends Block implements ILightableBlock
 
     @Nonnull
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.AIR;
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TEPitKiln te = Helpers.getTE(worldIn, pos, TEPitKiln.class);
-        if (te != null)
-        {
+        if (te != null) {
             // Skip interacting if using a fire starter (wait for fire in #neighborChanged)
-            if (ItemFireStarter.canIgnite(playerIn.getHeldItem(hand)))
-            {
+            if (ItemFireStarter.canIgnite(playerIn.getHeldItem(hand))) {
                 return false;
             }
             return te.onRightClick(playerIn, playerIn.getHeldItem(hand), hitX < 0.5, hitZ < 0.5);
@@ -200,85 +174,72 @@ public class BlockPitKiln extends Block implements ILightableBlock
     }
 
     @Override
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FULL, LIT);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
-    {
+    public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return state.getActualState(world, pos).getValue(FULL);
     }
 
     @Override
-    public boolean isBurning(IBlockAccess world, BlockPos pos)
-    {
+    public boolean isBurning(IBlockAccess world, BlockPos pos) {
         return world.getBlockState(pos).getActualState(world, pos).getValue(LIT);
     }
 
     @Override
-    public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face)
-    {
+    public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
         return 0;
     }
 
     @Override
-    public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face)
-    {
+    public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face) {
         return world.getBlockState(pos).getActualState(world, pos).getValue(LIT) ? 120 : 0; // Twice as much as the highest vanilla level (60)
     }
 
     @Override
-    public boolean isFireSource(World world, BlockPos pos, EnumFacing side)
-    {
+    public boolean isFireSource(World world, BlockPos pos, EnumFacing side) {
         return world.getBlockState(pos).getActualState(world, pos).getValue(LIT);
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state)
-    {
+    public boolean hasTileEntity(IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
-    {
+    public TileEntity createTileEntity(World world, IBlockState state) {
         return new TEPitKiln();
     }
 
     @Override
-    public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles)
-    {
+    public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
         return true;
     }
 
     @Override
-    public boolean addRunningEffects(IBlockState state, World world, BlockPos pos, Entity entity)
-    {
-        return true;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager)
-    {
+    public boolean addRunningEffects(IBlockState state, World world, BlockPos pos, Entity entity) {
         return true;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager)
-    {
+    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager) {
+        return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager) {
         return true;
     }
 
     @Nullable
     @Override
-    public PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EntityLiving entity)
-    {
+    public PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EntityLiving entity) {
         return state.getValue(LIT) && (entity == null || !entity.isImmuneToFire()) ? net.minecraft.pathfinding.PathNodeType.DAMAGE_FIRE : null;
     }
 }

@@ -2,8 +2,7 @@ package tfcflorae.util.agriculture;
 
 import net.dries007.tfc.api.capability.food.FoodData;
 
-public class FoodDataTFCF
-{
+public class FoodDataTFCF {
     /*
 	// Fruits
     public static final FoodData ABIU = new FoodData(4, 0.2f, 0f, 0f, 0f, 1f, 0f, 0f, 2f);
@@ -228,7 +227,7 @@ public class FoodDataTFCF
     public static final FoodData BUCKWHEAT_BREAD = new FoodData(4, 0f, 1f, 1.5f, 0f, 0f, 0f, 0f, 1f);
     public static final FoodData FONIO = new FoodData(4, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 2f);
     public static final FoodData FONIO_GRAIN = new FoodData(4, 0.5f, 0f, 0f, 0f, 0f, 0f, 0f, 0.4f);
-    public static final FoodData FONIO_FLOUR = new FoodData(4, 0f, 0f, 0f, 0f, 0f, 0f, 0f,0.5f);
+    public static final FoodData FONIO_FLOUR = new FoodData(4, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0.5f);
     public static final FoodData FONIO_DOUGH = new FoodData(4, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 3f);
     public static final FoodData FONIO_BREAD = new FoodData(4, 0f, 1f, 1.5f, 0f, 0f, 0f, 0f, 1f);
     public static final FoodData MILLET = new FoodData(4, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 2f);

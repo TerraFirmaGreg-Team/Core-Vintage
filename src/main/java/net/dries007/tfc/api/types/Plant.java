@@ -5,12 +5,9 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Random;
-import java.util.function.Function;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.objects.blocks.plants.*;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
@@ -18,16 +15,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.objects.blocks.plants.*;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.Month;
+import javax.annotation.Nonnull;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Random;
+import java.util.function.Function;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-public class Plant extends IForgeRegistryEntry.Impl<Plant>
-{
+public class Plant extends IForgeRegistryEntry.Impl<Plant> {
     private final int[] stages;
     private final int numStages;
     private final float minGrowthTemp;
@@ -52,12 +50,12 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant>
     /**
      * Addon mods that want to add plants should subscribe to the registry event for this class
      * They also must put (in their mod) the required resources in /assets/tfc/...
-     *
+     * <p>
      * Plant world generation is determined dynamically based on valid temperature and rainfall values
-     *
+     * <p>
      * Valid average biome temperatures are those that fall within the range
      * plus or minus one quarter of the plants full temperature range
-     *
+     * <p>
      * Example: Lotus
      * Full temperature range: 10-50
      * Average temp: 30 ( (10+50)/2 )
@@ -83,8 +81,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant>
      * @param movementMod   modifier for player X/Z movement through this plant
      * @param oreDictName   if not empty, the Ore Dictionary entry for this plant
      */
-    public Plant(@Nonnull ResourceLocation name, PlantType plantType, int[] stages, boolean isClayMarking, boolean isSwampPlant, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight, int minWaterDepth, int maxWaterDepth, double movementMod, String oreDictName)
-    {
+    public Plant(@Nonnull ResourceLocation name, PlantType plantType, int[] stages, boolean isClayMarking, boolean isSwampPlant, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight, int minWaterDepth, int maxWaterDepth, double movementMod, String oreDictName) {
         this.stages = stages;
         this.minGrowthTemp = minGrowthTemp;
         this.maxGrowthTemp = maxGrowthTemp;
@@ -106,8 +103,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant>
         this.oreDictName = Optional.ofNullable(oreDictName);
 
         HashSet<Integer> hashSet = new HashSet<>();
-        for (int stage : stages)
-        {
+        for (int stage : stages) {
             hashSet.add(stage);
         }
         this.numStages = hashSet.size() <= 1 ? 1 : hashSet.size() - 1;
@@ -115,83 +111,68 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant>
         setRegistryName(name);
     }
 
-    public Plant(@Nonnull ResourceLocation name, PlantType plantType, int[] stages, boolean isClayMarking, boolean isSwampPlant, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight, double movementMod, String oreDictName)
-    {
+    public Plant(@Nonnull ResourceLocation name, PlantType plantType, int[] stages, boolean isClayMarking, boolean isSwampPlant, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight, double movementMod, String oreDictName) {
         this(name, plantType, stages, isClayMarking, isSwampPlant, minGrowthTemp, maxGrowthTemp, minTemp, maxTemp, minRain, maxRain, minSun, maxSun, maxHeight, 0, 0, movementMod, oreDictName);
     }
 
-    public double getMovementMod()
-    {
+    public double getMovementMod() {
         return movementMod;
     }
 
-    public boolean getIsClayMarking()
-    {
+    public boolean getIsClayMarking() {
         return isClayMarking;
     }
 
-    public boolean getIsSwampPlant()
-    {
+    public boolean getIsSwampPlant() {
         return isSwampPlant;
     }
 
-    public boolean isValidLocation(float temp, float rain, int sunlight)
-    {
+    public boolean isValidLocation(float temp, float rain, int sunlight) {
         return isValidTemp(temp) && isValidRain(rain) && isValidSunlight(sunlight);
     }
 
-    public boolean isValidTemp(float temp)
-    {
+    public boolean isValidTemp(float temp) {
         return getTempValidity(temp) == PlantValidity.VALID;
     }
 
-    public boolean isValidTempForWorldGen(float temp)
-    {
+    public boolean isValidTempForWorldGen(float temp) {
         return Math.abs(temp - getAvgTemp()) < Float.sum(maxTemp, -minTemp) / 4f;
     }
 
-    public boolean isValidRain(float rain)
-    {
+    public boolean isValidRain(float rain) {
         return getRainValidity(rain) == PlantValidity.VALID;
     }
 
-    public boolean isValidSunlight(int sunlight)
-    {
+    public boolean isValidSunlight(int sunlight) {
         return minSun <= sunlight && maxSun >= sunlight;
     }
 
-    public boolean isValidFloatingWaterDepth(World world, BlockPos pos, IBlockState water)
-    {
+    public boolean isValidFloatingWaterDepth(World world, BlockPos pos, IBlockState water) {
         int depthCounter = minWaterDepth;
         int maxDepth = maxWaterDepth;
 
-        for (int i = 1; i <= depthCounter; ++i)
-        {
+        for (int i = 1; i <= depthCounter; ++i) {
             if (world.getBlockState(pos.down(i)) != water && world.getBlockState(pos.down(i)).getMaterial() != Material.CORAL)
                 return false;
         }
 
-        while (world.getBlockState(pos.down(depthCounter)) == water || world.getBlockState(pos.down(depthCounter)).getMaterial() == Material.CORAL)
-        {
+        while (world.getBlockState(pos.down(depthCounter)) == water || world.getBlockState(pos.down(depthCounter)).getMaterial() == Material.CORAL) {
             depthCounter++;
         }
         return (maxDepth > 0) && depthCounter <= maxDepth + 1;
     }
 
-    public int getValidWaterDepth(World world, BlockPos pos, IBlockState water)
-    {
+    public int getValidWaterDepth(World world, BlockPos pos, IBlockState water) {
         int depthCounter = minWaterDepth;
         int maxDepth = maxWaterDepth;
 
         if (depthCounter == 0 || maxDepth == 0) return -1;
 
-        for (int i = 1; i <= depthCounter; ++i)
-        {
+        for (int i = 1; i <= depthCounter; ++i) {
             if (world.getBlockState(pos.down(i)) != water) return -1;
         }
 
-        while (world.getBlockState(pos.down(depthCounter)) == water)
-        {
+        while (world.getBlockState(pos.down(depthCounter)) == water) {
             depthCounter++;
             if (depthCounter > maxDepth + 1) return -1;
         }
@@ -199,92 +180,73 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant>
     }
 
     @SuppressWarnings("unused")
-    public float getMinGrowthTemp()
-    {
+    public float getMinGrowthTemp() {
         return minGrowthTemp;
     }
 
     @SuppressWarnings("unused")
-    public float getMaxGrowthTemp()
-    {
+    public float getMaxGrowthTemp() {
         return maxGrowthTemp;
     }
 
-    public int getStageForMonth(Month month)
-    {
+    public int getStageForMonth(Month month) {
         return stages[month.ordinal()];
     }
 
-    public int getStageForMonth()
-    {
+    public int getStageForMonth() {
         return getStageForMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear());
     }
 
-    public int getNumStages()
-    {
+    public int getNumStages() {
         return numStages;
     }
 
-    public boolean isValidGrowthTemp(float temp)
-    {
+    public boolean isValidGrowthTemp(float temp) {
         return minGrowthTemp <= temp && maxGrowthTemp >= temp;
     }
 
-    public int getMaxHeight()
-    {
+    public int getMaxHeight() {
         return maxHeight;
     }
 
-    public Optional<String> getOreDictName()
-    {
+    public Optional<String> getOreDictName() {
         return oreDictName;
     }
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public String toString()
-    {
+    public String toString() {
         return getRegistryName().getPath();
     }
 
     @Nonnull
-    public PlantType getPlantType()
-    {
+    public PlantType getPlantType() {
         return plantType;
     }
 
     @Nonnull
-    public Material getMaterial()
-    {
+    public Material getMaterial() {
         return material;
     }
 
-    public IBlockState getWaterType()
-    {
-        if (plantType == PlantType.FLOATING_SEA || plantType == PlantType.WATER_SEA || plantType == PlantType.TALL_WATER_SEA || plantType == PlantType.EMERGENT_TALL_WATER_SEA)
-        {
+    public IBlockState getWaterType() {
+        if (plantType == PlantType.FLOATING_SEA || plantType == PlantType.WATER_SEA || plantType == PlantType.TALL_WATER_SEA || plantType == PlantType.EMERGENT_TALL_WATER_SEA) {
             return SALT_WATER;
-        }
-        else
-        {
+        } else {
             return FRESH_WATER;
         }
     }
 
-    public int getAgeForWorldgen(Random rand, float temp)
-    {
+    public int getAgeForWorldgen(Random rand, float temp) {
         return rand.nextInt(Math.max(1, Math.min(Math.round(2.5f + ((temp - minGrowthTemp) / minGrowthTemp)), 4)));
     }
 
-    public boolean canBePotted()
-    {
+    public boolean canBePotted() {
         return plantType == PlantType.STANDARD || plantType == PlantType.CACTUS || plantType == PlantType.CREEPING || plantType == PlantType.TALL_PLANT || plantType == PlantType.DRY || plantType == PlantType.DESERT || plantType == PlantType.MUSHROOM;
     }
 
-    public final EnumPlantTypeTFC getEnumPlantTypeTFC()
-    {
-        switch (plantType)
-        {
+    public final EnumPlantTypeTFC getEnumPlantTypeTFC() {
+        switch (plantType) {
             case DESERT:
             case DESERT_TALL_PLANT:
                 if (isClayMarking) return EnumPlantTypeTFC.DESERT_CLAY;
@@ -313,39 +275,31 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant>
         }
     }
 
-    public PlantValidity getTempValidity(float temp)
-    {
-        if (temp < minTemp)
-        {
+    public PlantValidity getTempValidity(float temp) {
+        if (temp < minTemp) {
             return PlantValidity.COLD;
         }
-        if (temp > maxTemp)
-        {
+        if (temp > maxTemp) {
             return PlantValidity.HOT;
         }
         return PlantValidity.VALID;
     }
 
-    public PlantValidity getRainValidity(float rain)
-    {
-        if (rain < minRain)
-        {
+    public PlantValidity getRainValidity(float rain) {
+        if (rain < minRain) {
             return PlantValidity.DRY;
         }
-        if (rain > maxRain)
-        {
+        if (rain > maxRain) {
             return PlantValidity.WET;
         }
         return PlantValidity.VALID;
     }
 
-    private float getAvgTemp()
-    {
+    private float getAvgTemp() {
         return Float.sum(minTemp, maxTemp) / 2f;
     }
 
-    public enum PlantValidity
-    {
+    public enum PlantValidity {
         COLD,
         HOT,
         DRY,
@@ -354,8 +308,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant>
     }
 
     // todo: switch usages to interface from enum, it will make custom plants by addons easier down the line. It's also a better design
-    public enum PlantType implements IPlantType
-    {
+    public enum PlantType implements IPlantType {
         STANDARD(BlockPlantTFC::new),
         TALL_PLANT(BlockTallPlantTFC::new),
         CREEPING(BlockCreepingPlantTFC::new),
@@ -384,22 +337,18 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant>
 
         private final Function<Plant, BlockPlantTFC> supplier;
 
-        PlantType(@Nonnull Function<Plant, BlockPlantTFC> supplier)
-        {
+        PlantType(@Nonnull Function<Plant, BlockPlantTFC> supplier) {
             this.supplier = supplier;
         }
 
         @Override
-        public BlockPlantTFC create(Plant plant)
-        {
+        public BlockPlantTFC create(Plant plant) {
             return supplier.apply(plant);
         }
 
         @Override
-        public Material getPlantMaterial()
-        {
-            switch (this)
-            {
+        public Material getPlantMaterial() {
+            switch (this) {
                 case CACTUS:
                     return Material.CACTUS;
                 case HANGING:
@@ -419,8 +368,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant>
         }
     }
 
-    public enum EnumPlantTypeTFC
-    {
+    public enum EnumPlantTypeTFC {
         CLAY,
         DESERT_CLAY,
         DRY_CLAY,
@@ -431,8 +379,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant>
         SALT_WATER,
         NONE;
 
-        public String toString()
-        {
+        public String toString() {
             return name();
         }
     }

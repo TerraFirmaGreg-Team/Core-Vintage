@@ -5,28 +5,19 @@
 
 package net.dries007.tfc.util;
 
-import java.util.Arrays;
-
 import net.dries007.tfc.TerraFirmaCraft;
+
+import java.util.Arrays;
 
 /**
  * A simple craft matrix for knapping / leather or clay working
  *
  * @author AlcatrazEscapee
  */
-public class SimpleCraftMatrix
-{
+public class SimpleCraftMatrix {
     private static final int MAX_WIDTH = 5;
     private static final int MAX_HEIGHT = 5;
     private static final int MAX_AREA = MAX_WIDTH * MAX_HEIGHT;
-
-    private static void logMatrix(boolean[] matrix)
-    {
-        StringBuilder b = new StringBuilder();
-        for (boolean m : matrix) b.append(m ? "X" : " ");
-        TerraFirmaCraft.getLog().debug("Matrix: {" + b.toString() + "}");
-    }
-
     /**
      * This is the actual craft matrix
      * true = full
@@ -37,12 +28,10 @@ public class SimpleCraftMatrix
     private final int width;
     private final int height;
     private final int area;
-
     /**
      * Create a empty max size craft matrix
      */
-    public SimpleCraftMatrix()
-    {
+    public SimpleCraftMatrix() {
         this.width = MAX_WIDTH;
         this.height = MAX_HEIGHT;
         this.area = MAX_AREA;
@@ -60,8 +49,7 @@ public class SimpleCraftMatrix
      *                            false = outside slots need to be empty
      * @param pattern             A list of strings. Each string is a row, each character is an element. ' ' represents empty, anything else is full
      */
-    public SimpleCraftMatrix(boolean outsideSlotRequired, String... pattern)
-    {
+    public SimpleCraftMatrix(boolean outsideSlotRequired, String... pattern) {
         if (pattern.length == 0 || pattern.length > MAX_HEIGHT)
             throw new IllegalArgumentException("Pattern height is invalid");
 
@@ -73,8 +61,7 @@ public class SimpleCraftMatrix
         if (width > MAX_WIDTH)
             throw new IllegalArgumentException("Pattern width is invalid");
 
-        for (int i = 0; i < height; i++)
-        {
+        for (int i = 0; i < height; i++) {
             String line = pattern[i];
             if (line.length() != width)
                 throw new IllegalArgumentException("Line " + i + " in the pattern has the incorrect length");
@@ -83,39 +70,38 @@ public class SimpleCraftMatrix
         }
     }
 
-    public void setAll(boolean value)
-    {
+    private static void logMatrix(boolean[] matrix) {
+        StringBuilder b = new StringBuilder();
+        for (boolean m : matrix) b.append(m ? "X" : " ");
+        TerraFirmaCraft.getLog().debug("Matrix: {" + b.toString() + "}");
+    }
+
+    public void setAll(boolean value) {
         for (int i = 0; i < width * height; i++)
             set(i, value);
     }
 
-    public void set(int xPos, int yPos, boolean value)
-    {
+    public void set(int xPos, int yPos, boolean value) {
         set(xPos + yPos * width, value);
     }
 
-    public void set(int index, boolean value)
-    {
+    public void set(int index, boolean value) {
         if (index >= 0 && index < area) matrix[index] = value;
     }
 
-    public boolean get(int xPos, int yPos)
-    {
+    public boolean get(int xPos, int yPos) {
         return get(xPos + yPos * width);
     }
 
-    public boolean get(int index)
-    {
+    public boolean get(int index) {
         return index >= 0 && index < area && matrix[index];
     }
 
-    public int getHeight()
-    {
+    public int getHeight() {
         return height;
     }
 
-    public int getWidth()
-    {
+    public int getWidth() {
         return width;
     }
 
@@ -123,12 +109,10 @@ public class SimpleCraftMatrix
      * @param other Another craft matrix
      * @return if the matrices are identical. Not used for checking if recipe matches
      */
-    public boolean isEqual(SimpleCraftMatrix other)
-    {
+    public boolean isEqual(SimpleCraftMatrix other) {
         if (other.width != this.width || other.height != this.height)
             return false;
-        for (int i = 0; i < width * height; i++)
-        {
+        for (int i = 0; i < width * height; i++) {
             if (other.matrix[i] != this.matrix[i])
                 return false;
         }
@@ -141,19 +125,13 @@ public class SimpleCraftMatrix
      * @param other Another craft matrix
      * @return if 'other' is a subset of the current craft matrix (i.e. other is found somewhere within the current matrix)
      */
-    public boolean matches(SimpleCraftMatrix other)
-    {
+    public boolean matches(SimpleCraftMatrix other) {
         // Check all possible shifted positions
-        for (int xShift = 0; xShift <= this.width - other.width; xShift++)
-        {
-            for (int yShift = 0; yShift <= this.height - other.height; yShift++)
-            {
-                if (matches(other, xShift, yShift, false))
-                {
+        for (int xShift = 0; xShift <= this.width - other.width; xShift++) {
+            for (int yShift = 0; yShift <= this.height - other.height; yShift++) {
+                if (matches(other, xShift, yShift, false)) {
                     return true;
-                }
-                else if (matches(other, xShift, yShift, true))
-                {
+                } else if (matches(other, xShift, yShift, true)) {
                     return true;
                 }
             }
@@ -161,21 +139,15 @@ public class SimpleCraftMatrix
         return false;
     }
 
-    private boolean matches(SimpleCraftMatrix other, int startX, int startY, boolean isMirrored)
-    {
-        for (int x = 0; x < this.width; x++)
-        {
-            for (int y = 0; y < this.height; y++)
-            {
+    private boolean matches(SimpleCraftMatrix other, int startX, int startY, boolean isMirrored) {
+        for (int x = 0; x < this.width; x++) {
+            for (int y = 0; y < this.height; y++) {
                 int patternIdx = y * width + x;
-                if (x < startX || y < startY || x - startX >= other.width || y - startY >= other.height)
-                {
+                if (x < startX || y < startY || x - startX >= other.width || y - startY >= other.height) {
                     // If the current position in the matrix is outside the pattern, the value should be set by other.outsideSlot
                     if (matrix[patternIdx] != other.outsideSlot)
                         return false;
-                }
-                else
-                {
+                } else {
                     // Otherwise, the value must equal the value in the pattern
                     int otherIdx;
                     if (isMirrored)

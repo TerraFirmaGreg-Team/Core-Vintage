@@ -5,8 +5,6 @@
 
 package net.dries007.tfc.objects.inventory.ingredient;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -14,41 +12,36 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-public class IngredientFluidItem implements IIngredient<ItemStack>
-{
+import javax.annotation.Nonnull;
+
+public class IngredientFluidItem implements IIngredient<ItemStack> {
     private final FluidStack stack;
 
-    public IngredientFluidItem(@Nonnull Fluid fluid, int amount)
-    {
+    public IngredientFluidItem(@Nonnull Fluid fluid, int amount) {
         this(new FluidStack(fluid, amount));
     }
 
-    public IngredientFluidItem(@Nonnull FluidStack stack)
-    {
+    public IngredientFluidItem(@Nonnull FluidStack stack) {
         this.stack = stack;
     }
 
     @Override
-    public boolean test(ItemStack input)
-    {
+    public boolean test(ItemStack input) {
         FluidStack result = FluidUtil.getFluidContained(input);
         return result != null && result.amount >= stack.amount && result.getFluid() == stack.getFluid();
     }
 
     @Override
-    public ItemStack consume(ItemStack input)
-    {
+    public ItemStack consume(ItemStack input) {
         IFluidHandler cap = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap != null)
-        {
+        if (cap != null) {
             cap.drain(stack.copy(), true);
         }
         return input;
     }
 
     @Override
-    public int getAmount()
-    {
+    public int getAmount() {
         return stack.amount;
     }
 
@@ -67,8 +60,7 @@ public class IngredientFluidItem implements IIngredient<ItemStack>
      *
      * Currently, only used in Barrel JEI wrapper
      */
-    public FluidStack getFluid()
-    {
+    public FluidStack getFluid() {
         return stack.copy();
     }
 }

@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.api.capability.size;
 
-public enum Size
-{
+public enum Size {
     TINY("tiny"), // Fits in anything
     VERY_SMALL("very_small"), // Fits in anything
     SMALL("small"), // Fits in small vessels
@@ -17,13 +16,11 @@ public enum Size
 
     public final String name;
 
-    Size(String name)
-    {
+    Size(String name) {
         this.name = name;
     }
 
-    public boolean isSmallerThan(Size other)
-    {
+    public boolean isSmallerThan(Size other) {
         return this.ordinal() < other.ordinal();
     }
 }

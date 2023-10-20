@@ -1,7 +1,13 @@
 package com.eerussianguy.firmalife.items;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import com.eerussianguy.firmalife.util.IWaterable;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
+import net.dries007.tfc.objects.items.ItemMisc;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,49 +22,35 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import com.eerussianguy.firmalife.util.IWaterable;
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
-import net.dries007.tfc.objects.items.ItemMisc;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.WET;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemWateringCan extends ItemMisc
-{
-    public ItemWateringCan()
-    {
+public class ItemWateringCan extends ItemMisc {
+    public ItemWateringCan() {
         super(Size.SMALL, Weight.VERY_HEAVY);
         setMaxDamage(48);
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack)
-    {
+    public int getMaxItemUseDuration(ItemStack stack) {
         return 72000;
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack stack)
-    {
+    public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.BOW;
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn)
-    {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
         ItemStack itemstack = player.getHeldItem(handIn);
-        if (!worldIn.isRemote && player.isWet())
-        {
+        if (!worldIn.isRemote && player.isWet()) {
             int dmg = itemstack.getItemDamage();
             int maxDmg = itemstack.getMaxDamage();
-            if (dmg < maxDmg)
-            {
+            if (dmg < maxDmg) {
                 itemstack.damageItem(-1 * (maxDmg - dmg), player);
             }
             return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
@@ -69,30 +61,22 @@ public class ItemWateringCan extends ItemMisc
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entity, int countLeft)
-    {
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entity, int countLeft) {
         World world = entity.getEntityWorld();
         BlockPos pos = entity.getPosition();
         if (world.isRemote) return;
-        for (int x = -2; x <= 2; x++)
-        {
-            for (int y = -2; y <= 2; y++)
-            {
-                for (int z = -2; z <= 2; z++)
-                {
+        for (int x = -2; x <= 2; x++) {
+            for (int y = -2; y <= 2; y++) {
+                for (int z = -2; z <= 2; z++) {
                     BlockPos addPos = pos.add(x, y, z);
                     TileEntity te = Helpers.getTE(world, addPos, TileEntity.class);
-                    if (te instanceof IWaterable)
-                    {
+                    if (te instanceof IWaterable) {
                         ((IWaterable) te).setWater(2);
                         IBlockState state = world.getBlockState(addPos);
                         world.setBlockState(addPos, state.withProperty(WET, true));
-                    }
-                    else
-                    {
+                    } else {
                         IBlockState farmland = world.getBlockState(addPos);
-                        if (farmland.getBlock() instanceof BlockFarmlandTFC)
-                        {
+                        if (farmland.getBlock() instanceof BlockFarmlandTFC) {
                             int current = farmland.getValue(BlockFarmlandTFC.MOISTURE);
                             if (current < BlockFarmlandTFC.MAX_MOISTURE)
                                 world.setBlockState(addPos, farmland.withProperty(BlockFarmlandTFC.MOISTURE, current + 1));
@@ -105,11 +89,9 @@ public class ItemWateringCan extends ItemMisc
     }
 
     @Override
-    public void onUsingTick(ItemStack stack, EntityLivingBase entity, int countLeft)
-    {
+    public void onUsingTick(ItemStack stack, EntityLivingBase entity, int countLeft) {
         World world = entity.getEntityWorld();
-        if (world.isRemote && entity instanceof EntityPlayer && countLeft % 2 == 0)
-        {
+        if (world.isRemote && entity instanceof EntityPlayer && countLeft % 2 == 0) {
             RayTraceResult result = Helpers.rayTrace(world, (EntityPlayer) entity, false);
             if (result == null || result.typeOfHit != RayTraceResult.Type.BLOCK) return;
             BlockPos pos = result.getBlockPos();

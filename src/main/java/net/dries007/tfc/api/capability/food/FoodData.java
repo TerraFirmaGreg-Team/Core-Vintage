@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.api.capability.food;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
-public class FoodData implements INBTSerializable<NBTTagCompound>
-{
+import javax.annotation.Nullable;
+
+public class FoodData implements INBTSerializable<NBTTagCompound> {
     // Instances for special vanilla foods (with relation to decay)
     public static final FoodData ROTTEN_FLESH = new FoodData(0, 0, 0, 0, 0, 0, 0, 0, Float.POSITIVE_INFINITY);
     public static final FoodData GOLDEN_APPLE = new FoodData(1, 0, 0, 0, 2.5f, 0, 0, 0, 0);
@@ -26,18 +25,15 @@ public class FoodData implements INBTSerializable<NBTTagCompound>
     private float decayModifier; // Decay modifier - higher = shorter decay
     private boolean buffed; // if this data instance has been buffed externally.
 
-    public FoodData()
-    {
+    public FoodData() {
         this(4, 0, 0, 0, 0, 0, 0, 0, 1);
     }
 
-    public FoodData(int hunger, float water, float saturation, float grain, float fruit, float veg, float protein, float dairy, float decayModifier)
-    {
-        this(hunger, water, saturation, new float[] {grain, fruit, veg, protein, dairy}, decayModifier);
+    public FoodData(int hunger, float water, float saturation, float grain, float fruit, float veg, float protein, float dairy, float decayModifier) {
+        this(hunger, water, saturation, new float[]{grain, fruit, veg, protein, dairy}, decayModifier);
     }
 
-    public FoodData(int hunger, float water, float saturation, float[] nutrients, float decayModifier)
-    {
+    public FoodData(int hunger, float water, float saturation, float[] nutrients, float decayModifier) {
         this.hunger = hunger;
         this.water = water;
         this.saturation = saturation;
@@ -45,40 +41,33 @@ public class FoodData implements INBTSerializable<NBTTagCompound>
         this.decayModifier = decayModifier;
     }
 
-    public FoodData(@Nullable NBTTagCompound nbt)
-    {
+    public FoodData(@Nullable NBTTagCompound nbt) {
         this.nutrients = new float[5];
         deserializeNBT(nbt);
     }
 
-    public float[] getNutrients()
-    {
+    public float[] getNutrients() {
         return nutrients;
     }
 
-    public int getHunger()
-    {
+    public int getHunger() {
         return hunger;
     }
 
-    public float getSaturation()
-    {
+    public float getSaturation() {
         return saturation;
     }
 
-    public float getWater()
-    {
+    public float getWater() {
         return water;
     }
 
-    public float getDecayModifier()
-    {
+    public float getDecayModifier() {
         return decayModifier;
     }
 
     @Override
-    public NBTTagCompound serializeNBT()
-    {
+    public NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setInteger("food", hunger);
         nbt.setFloat("sat", saturation);
@@ -94,10 +83,8 @@ public class FoodData implements INBTSerializable<NBTTagCompound>
     }
 
     @Override
-    public void deserializeNBT(NBTTagCompound nbt)
-    {
-        if (nbt != null)
-        {
+    public void deserializeNBT(NBTTagCompound nbt) {
+        if (nbt != null) {
             hunger = nbt.getInteger("food");
             saturation = nbt.getFloat("sat");
             water = nbt.getFloat("water");
@@ -111,18 +98,14 @@ public class FoodData implements INBTSerializable<NBTTagCompound>
         }
     }
 
-    public FoodData copy()
-    {
+    public FoodData copy() {
         return new FoodData(hunger, water, saturation, nutrients, decayModifier);
     }
 
-    public void applyBuff(FoodData buff)
-    {
-        if (!buffed)
-        {
+    public void applyBuff(FoodData buff) {
+        if (!buffed) {
             buffed = true;
-            for (Nutrient nutrient : Nutrient.values())
-            {
+            for (Nutrient nutrient : Nutrient.values()) {
                 nutrients[nutrient.ordinal()] += buff.nutrients[nutrient.ordinal()];
             }
         }

@@ -1,7 +1,6 @@
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,7 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelSabertoothTFC
@@ -20,8 +19,7 @@ import net.dries007.tfc.api.types.IAnimalTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelSaberToothTFC extends ModelBase
-{
+public class ModelSaberToothTFC extends ModelBase {
     private final ModelRenderer frontBody;
     private final ModelRenderer neckBase;
     private final ModelRenderer neck;
@@ -55,8 +53,7 @@ public class ModelSaberToothTFC extends ModelBase
     public ModelRenderer backLeftPaw;
 
 
-    public ModelSaberToothTFC()
-    {
+    public ModelSaberToothTFC() {
         textureWidth = 80;
         textureHeight = 64;
 
@@ -210,18 +207,15 @@ public class ModelSaberToothTFC extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-        if (((EntityAnimal) entity).isChild())
-        {
+        if (((EntityAnimal) entity).isChild()) {
             double ageScale = 1;
             double percent = 1;
 
-            if (entity instanceof IAnimalTFC)
-            {
+            if (entity instanceof IAnimalTFC) {
                 percent = ((IAnimalTFC) entity).getPercentToAdulthood();
                 ageScale = 1 / (2.0D - percent);
             }
@@ -249,8 +243,7 @@ public class ModelSaberToothTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         head.rotateAngleX = f4 / (180F / (float) Math.PI);
         head.rotateAngleY = f3 / (180F / (float) Math.PI);
 
@@ -260,8 +253,7 @@ public class ModelSaberToothTFC extends ModelBase
         backLeftLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

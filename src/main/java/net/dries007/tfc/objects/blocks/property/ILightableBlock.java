@@ -12,7 +12,6 @@ import net.minecraft.block.properties.PropertyBool;
  * Marker interface for blocks that have a lit/unlit state. Removes property duplication / confusion errors
  * Includes the obnoxious static field.
  */
-public interface ILightableBlock
-{
+public interface ILightableBlock {
     PropertyBool LIT = PropertyBool.create("lit");
 }

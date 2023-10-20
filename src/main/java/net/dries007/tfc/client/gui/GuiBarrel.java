@@ -5,11 +5,15 @@
 
 package net.dries007.tfc.client.gui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.client.button.GuiButtonBarrelSeal;
+import net.dries007.tfc.client.button.IButtonTooltip;
+import net.dries007.tfc.network.PacketGuiButton;
+import net.dries007.tfc.objects.container.ContainerBarrel;
+import net.dries007.tfc.objects.te.TEBarrel;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -29,61 +33,47 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.lwjgl.opengl.GL11;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.client.button.GuiButtonBarrelSeal;
-import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.network.PacketGuiButton;
-import net.dries007.tfc.objects.container.ContainerBarrel;
-import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.util.Helpers;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-public class GuiBarrel extends GuiContainerTE<TEBarrel>
-{
+public class GuiBarrel extends GuiContainerTE<TEBarrel> {
     public static final ResourceLocation BARREL_BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/barrel.png");
     private final String translationKey;
 
-    public GuiBarrel(Container container, InventoryPlayer playerInv, TEBarrel tile, String translationKey)
-    {
+    public GuiBarrel(Container container, InventoryPlayer playerInv, TEBarrel tile, String translationKey) {
         super(container, playerInv, tile, BARREL_BACKGROUND);
 
         this.translationKey = translationKey;
     }
 
     @Override
-    public void initGui()
-    {
+    public void initGui() {
         super.initGui();
         addButton(new GuiButtonBarrelSeal(tile, 0, guiTop, guiLeft));
     }
 
     @Override
-    protected void renderHoveredToolTip(int mouseX, int mouseY)
-    {
+    protected void renderHoveredToolTip(int mouseX, int mouseY) {
         super.renderHoveredToolTip(mouseX, mouseY);
 
         int relX = mouseX - guiLeft;
         int relY = mouseY - guiTop;
 
-        if (relX >= 7 && relY >= 19 && relX < 25 && relY < 71)
-        {
+        if (relX >= 7 && relY >= 19 && relX < 25 && relY < 71) {
             IFluidHandler tank = ((ContainerBarrel) inventorySlots).getBarrelTank();
 
-            if (tank != null)
-            {
+            if (tank != null) {
                 FluidStack fluid = tank.getTankProperties()[0].getContents();
                 List<String> tooltip = new ArrayList<>();
 
-                if (fluid == null || fluid.amount == 0)
-                {
+                if (fluid == null || fluid.amount == 0) {
                     tooltip.add(I18n.format(MOD_ID + ".tooltip.barrel_empty"));
-                }
-                else
-                {
+                } else {
                     tooltip.add(fluid.getLocalizedName());
                     tooltip.add(TextFormatting.GRAY.toString() + I18n.format(MOD_ID + ".tooltip.barrel_fluid_amount", fluid.amount));
                 }
@@ -93,13 +83,10 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel>
         }
 
         // Button Tooltips
-        for (GuiButton button : buttonList)
-        {
-            if (button instanceof IButtonTooltip && button.isMouseOver())
-            {
+        for (GuiButton button : buttonList) {
+            if (button instanceof IButtonTooltip && button.isMouseOver()) {
                 IButtonTooltip tooltip = (IButtonTooltip) button;
-                if (tooltip.hasTooltip())
-                {
+                if (tooltip.hasTooltip()) {
                     drawHoveringText(I18n.format(tooltip.getTooltip()), mouseX, mouseY);
                 }
             }
@@ -107,20 +94,16 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel>
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
-    {
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String name = I18n.format(translationKey + ".name");
         fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
 
-        if (tile.isSealed())
-        {
+        if (tile.isSealed()) {
             // Draw over the input items, making them look unavailable
             IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (handler != null)
-            {
+            if (handler != null) {
                 GL11.glDisable(GL11.GL_DEPTH_TEST);
-                for (int slotId = 0; slotId < handler.getSlots(); slotId++)
-                {
+                for (int slotId = 0; slotId < handler.getSlots(); slotId++) {
                     drawSlotOverlay(inventorySlots.getSlot(slotId));
                 }
                 GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -129,8 +112,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel>
             // Draw the text displaying both the seal date, and the recipe name
             boolean isLong = false;
             BarrelRecipe recipe = tile.getRecipe();
-            if (recipe != null)
-            {
+            if (recipe != null) {
                 String resultName = recipe.getResultName();
                 int recipeWidth = fontRenderer.getStringWidth(resultName);
                 if (recipeWidth > 80)
@@ -142,28 +124,23 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel>
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-    {
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-        if (Helpers.isJEIEnabled())
-        {
+        if (Helpers.isJEIEnabled()) {
             drawTexturedModalRect(guiLeft + 92, guiTop + 21, 227, 0, 9, 14);
         }
 
         ContainerBarrel container = (ContainerBarrel) inventorySlots;
         IFluidHandler tank = container.getBarrelTank();
 
-        if (tank != null)
-        {
+        if (tank != null) {
             IFluidTankProperties t = tank.getTankProperties()[0];
             FluidStack fs = t.getContents();
 
-            if (fs != null)
-            {
+            if (fs != null) {
                 int fillHeightPixels = (int) (50 * fs.amount / (float) t.getCapacity());
 
-                if (fillHeightPixels > 0)
-                {
+                if (fillHeightPixels > 0) {
                     Fluid fluid = fs.getFluid();
                     TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(fluid);
 
@@ -188,8 +165,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel>
 
                     buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
-                    while (fillHeightPixels > 15)
-                    {
+                    while (fillHeightPixels > 15) {
                         buffer.pos(positionX, positionY, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
                         buffer.pos(positionX, positionY + 16, 0).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
                         buffer.pos(positionX + 16, positionY + 16, 0).tex(sprite.getMaxU(), sprite.getMaxV()).endVertex();
@@ -199,8 +175,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel>
                         positionY -= 16;
                     }
 
-                    if (fillHeightPixels > 0)
-                    {
+                    if (fillHeightPixels > 0) {
                         int blank = 16 - fillHeightPixels;
                         positionY += blank;
                         buffer.pos(positionX, positionY, 0).tex(sprite.getMinU(), sprite.getInterpolatedV(blank)).endVertex();
@@ -221,8 +196,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel>
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException
-    {
+    protected void actionPerformed(GuiButton button) throws IOException {
         TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(button.id));
         super.actionPerformed(button);
     }

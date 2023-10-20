@@ -2,8 +2,6 @@ package com.eerussianguy.firmalife.compat.crafttweaker;
 
 import com.blamejared.mtlib.helpers.InputHelper;
 import com.eerussianguy.firmalife.init.RegistriesFL;
-import com.eerussianguy.firmalife.recipe.CrackingRecipe;
-import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
@@ -25,7 +23,7 @@ import java.util.ArrayList;
 public class CTOven {
 
     @ZenMethod
-    public static void addRecipe(String recipe_name,IIngredient input, IItemStack output, int duration) {
+    public static void addRecipe(String recipe_name, IIngredient input, IItemStack output, int duration) {
         OvenRecipe recipe = new OvenRecipe(CTHelper.getInternalIngredient(input), InputHelper.toStack(output), duration).setRegistryName(recipe_name);
         CraftTweakerAPI.apply(new IAction() {
             @Override
@@ -45,7 +43,7 @@ public class CTOven {
 
         OvenRecipe recipe = RegistriesFL.OVEN.getValue(new ResourceLocation(recipe_name));
 
-        if(recipe != null) {
+        if (recipe != null) {
             CraftTweakerAPI.apply(new IAction() {
                 @Override
                 public void apply() {
@@ -71,7 +69,7 @@ public class CTOven {
                 .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
                 .forEach(removeList::add);
 
-        for(OvenRecipe recipe : removeList) {
+        for (OvenRecipe recipe : removeList) {
             CraftTweakerAPI.apply(new IAction() {
                 @Override
                 public void apply() {

@@ -5,15 +5,13 @@
 
 package net.dries007.tfc.network;
 
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-
 import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 /**
  * Packets that don't need to send any data and just exist as signaling points
  */
-public interface IMessageEmpty extends IMessage
-{
+public interface IMessageEmpty extends IMessage {
     @Override
     default void fromBytes(ByteBuf buf) {}
 

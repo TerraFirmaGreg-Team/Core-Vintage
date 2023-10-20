@@ -5,20 +5,18 @@
 
 package net.dries007.tfc.api.util;
 
-import java.util.Random;
-
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+import java.util.Random;
 
-public interface ITreeGenerator
-{
+public interface ITreeGenerator {
 
     /**
      * Called to generate a tree. Each Tree must have one of these. Used for world gen and sapling growth
@@ -39,35 +37,29 @@ public interface ITreeGenerator
      * @param treeType The tree type (for checking if the tree can generate)
      * @return true if the tree can generate.
      */
-    default boolean canGenerateTree(World world, BlockPos pos, Tree treeType)
-    {
+    default boolean canGenerateTree(World world, BlockPos pos, Tree treeType) {
         // Check if ground is flat enough
         final int radius = treeType.getMaxGrowthRadius();
-        for (int x = -radius; x <= radius; x++)
-        {
-            for (int z = -radius; z <= radius; z++)
-            {
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
                 if ((x == 0 && z == 0) ||
-                    world.getBlockState(pos.add(x, 0, z)).getMaterial().isReplaceable() ||
-                    ((x > 1 || z > 1) && world.getBlockState(pos.add(x, 1, z)).getMaterial().isReplaceable()))
+                        world.getBlockState(pos.add(x, 0, z)).getMaterial().isReplaceable() ||
+                        ((x > 1 || z > 1) && world.getBlockState(pos.add(x, 1, z)).getMaterial().isReplaceable()))
                     continue;
                 return false;
             }
         }
         // Check if there is room directly upwards
         final int height = treeType.getMaxHeight();
-        for (int y = 1; y <= height; y++)
-        {
+        for (int y = 1; y <= height; y++) {
             IBlockState state = world.getBlockState(pos.up(y));
-            if (!state.getMaterial().isReplaceable() && state.getMaterial() != Material.LEAVES)
-            {
+            if (!state.getMaterial().isReplaceable() && state.getMaterial() != Material.LEAVES) {
                 return false;
             }
         }
 
         // Check if there is a solid block beneath
-        if (!BlocksTFC.isGrowableSoil(world.getBlockState(pos.down())))
-        {
+        if (!BlocksTFC.isGrowableSoil(world.getBlockState(pos.down()))) {
             return false;
         }
 

@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityDeerTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,13 +15,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityDeerTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelDeerTFC extends ModelBase
-{
+public class ModelDeerTFC extends ModelBase {
     //fields
     private final ModelRenderer antler24;
     private final ModelRenderer antler23;
@@ -64,8 +62,7 @@ public class ModelDeerTFC extends ModelBase
     private final ModelRenderer hoof4;
     private boolean running;
 
-    public ModelDeerTFC()
-    {
+    public ModelDeerTFC() {
         textureWidth = 128;
         textureHeight = 64;
 
@@ -328,8 +325,7 @@ public class ModelDeerTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
@@ -345,22 +341,17 @@ public class ModelDeerTFC extends ModelBase
         float ab = (float) Math.sqrt(1.0F / aa);
         GlStateManager.scale(ab, ab, ab);
         GlStateManager.translate(0.0F, 22F * f5 * age / (float) Math.pow(aa, 0.4), 2F * f5 * age / ab);
-        if (deer.getGender() == EntityAnimalTFC.Gender.MALE)
-        {
-            if (aa <= 1.75)
-            {
+        if (deer.getGender() == EntityAnimalTFC.Gender.MALE) {
+            if (aa <= 1.75) {
                 antler11.isHidden = false;
                 antler21.isHidden = false;
-                if (aa <= 1.5)
-                {
+                if (aa <= 1.5) {
                     antler12.isHidden = false;
                     antler22.isHidden = false;
-                    if (aa <= 1.3)
-                    {
+                    if (aa <= 1.3) {
                         antler13.isHidden = false;
                         antler23.isHidden = false;
-                        if (aa <= 1.1)
-                        {
+                        if (aa <= 1.1) {
                             antler14.isHidden = false;
                             antler24.isHidden = false;
                         }
@@ -393,8 +384,7 @@ public class ModelDeerTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
         f1 = Math.min(f1 * 7.5f, 0.75f);
@@ -436,58 +426,47 @@ public class ModelDeerTFC extends ModelBase
         setRotation(thigh1, -0.1745329F, 0F, 0.1745329F);
         setRotation(thigh2, -0.1745329F, 0F, -0.1745329F);
 
-        if (!running)
-        {
+        if (!running) {
             setRotation(upperLeg4, MathHelper.cos(f / 1.5F + 3F * (float) Math.PI / 2F) * 0.7F * f1 + 0.3490659F, 0F, 0.0349066F);
             setRotation(upperLeg3, MathHelper.cos(f / 1.5F + (float) Math.PI / 2F) * 0.7F * f1 + 0.3490659F, 0F, -0.0349066F);
             setRotation(thigh1, MathHelper.cos(f / 1.5F + (float) Math.PI * 7F / 4F) * 0.7F * f1 - 0.1745329F, 0F, 0.1745329F);
             setRotation(thigh2, MathHelper.cos(f / 1.5F + 3f * (float) Math.PI / 4F) * 0.7F * f1 - 0.1745329F, 0F, -0.1745329F);
-            if (MathHelper.sin(f / 1.5F + (float) Math.PI / 2F) * 0.7F * f1 > 0)
-            {
+            if (MathHelper.sin(f / 1.5F + (float) Math.PI / 2F) * 0.7F * f1 > 0) {
                 setRotation(lowerleg3, MathHelper.sin(f / 1.5F + (float) Math.PI / 2F) * 1.4F * f1, 0F, 0F);
                 setRotation(leg3, -MathHelper.sin(f / 1.5F + (float) Math.PI / 2F) * 0.7F * f1 - 0.3490659F, 0F, 0.0349066F);
                 setRotation(toes3, MathHelper.sin(f / 1.5F + (float) Math.PI / 2F) * 2.1F * f1 + 1.134464F, 0, 0);
             }
-            if (MathHelper.sin(f / 1.5F + 1F * (float) Math.PI / 2F) * 0.7F * f1 < 0)
-            {
+            if (MathHelper.sin(f / 1.5F + 1F * (float) Math.PI / 2F) * 0.7F * f1 < 0) {
                 setRotation(lowerleg4, MathHelper.sin(f / 1.5F + 3F * (float) Math.PI / 2F) * 1.4F * f1, 0F, 0F);
                 setRotation(leg4, -MathHelper.sin(f / 1.5F + 3F * (float) Math.PI / 2F) * 0.7F * f1 - 0.3490659F, 0F, -0.0349066F);
                 setRotation(toes4, MathHelper.sin(f / 1.5F + 3F * (float) Math.PI / 2F) * 2.1F * f1 + 1.134464F, 0, 0);
             }
-            if (MathHelper.sin(f / 1.5F + (float) Math.PI * 7F / 4F) * 0.7F * f1 > 0)
-            {
+            if (MathHelper.sin(f / 1.5F + (float) Math.PI * 7F / 4F) * 0.7F * f1 > 0) {
                 setRotation(calf1, MathHelper.sin(f / 1.5F + (float) Math.PI * 7F / 4F) * 1.4F * f1 + 0.5585054F, 0F, -0.1745329F);
                 setRotation(leg1, -MathHelper.sin(f / 1.5F + (float) Math.PI * 7F / 4F) * 1.4F * f1 - 22F / 180F * (float) Math.PI, 0F, 0F);
                 setRotation(toes1, MathHelper.sin(f / 1.5F + (float) Math.PI * 7F / 4F) * 2.1F * f1 + 1.134464F, 0F, 0F);
             }
-            if (MathHelper.sin(f / 1.5F + 3f * (float) Math.PI / 4F) * 0.7F * f1 > 0)
-            {
+            if (MathHelper.sin(f / 1.5F + 3f * (float) Math.PI / 4F) * 0.7F * f1 > 0) {
                 setRotation(calf2, MathHelper.sin(f / 1.5F + 3f * (float) Math.PI / 4F) * 1.4F * f1 + 0.5585054F, 0F, 0.1745329F);
                 setRotation(leg2, -MathHelper.sin(f / 1.5F + 3f * (float) Math.PI / 4F) * 1.4F * f1 - 22F / 180F * (float) Math.PI, 0F, 0F);
                 setRotation(toes2, MathHelper.sin(f / 1.5F + 3f * (float) Math.PI / 4F) * 2.1F * f1 + 1.134464F, 0F, 0F);
             }
 
-        }
-        else
-        {
-            if (MathHelper.cos(f / 1.5F + 5 * (float) Math.PI / 4F) > -Math.sqrt(0.5) && MathHelper.cos(f / 1.5F + 5 * (float) Math.PI / 4F) < Math.sqrt(0.5))
-            {
+        } else {
+            if (MathHelper.cos(f / 1.5F + 5 * (float) Math.PI / 4F) > -Math.sqrt(0.5) && MathHelper.cos(f / 1.5F + 5 * (float) Math.PI / 4F) < Math.sqrt(0.5)) {
                 setRotation(upperLeg4, MathHelper.cos(f / 1.5F + 5F * (float) Math.PI / 4F) * 2.8F * f1 + 0.3490659F, 0F, 0.0349066F);
             }
-            if (MathHelper.sin(f / 1.5F + 5F * (float) Math.PI / 4F - 3F * (float) Math.PI / 8) > 0)
-            {
+            if (MathHelper.sin(f / 1.5F + 5F * (float) Math.PI / 4F - 3F * (float) Math.PI / 8) > 0) {
                 setRotation(lowerleg4, MathHelper.sin(f / 1.5F + 5F * (float) Math.PI / 4F - 3F * (float) Math.PI / 8) * 3.5F * f1, 0F, 0F);
                 setRotation(leg4, -MathHelper.sin(f / 1.5F + 5F * (float) Math.PI / 4F - 3F * (float) Math.PI / 8) * 3.5F * f1 - 0.3490659F, 0F, -0.0349066F);
                 setRotation(toes4, MathHelper.sin(f / 1.5F + 5F * (float) Math.PI / 4F - 3F * (float) Math.PI / 8) * 2.1F * f1 + 1.134464F, 0, 0);
             }
 
 
-            if (MathHelper.cos(f / 1.5F + (float) Math.PI / 2F) > -Math.sqrt(0.5) && MathHelper.cos(f / 1.5F + (float) Math.PI / 2F) < Math.sqrt(0.5))
-            {
+            if (MathHelper.cos(f / 1.5F + (float) Math.PI / 2F) > -Math.sqrt(0.5) && MathHelper.cos(f / 1.5F + (float) Math.PI / 2F) < Math.sqrt(0.5)) {
                 setRotation(upperLeg3, MathHelper.cos(f / 1.5F + (float) Math.PI / 2F) * 2.8F * f1 + 0.3490659F, 0F, -0.0349066F);
             }
-            if (MathHelper.sin(f / 1.5F + (float) Math.PI / 2F - 3F * (float) Math.PI / 8) > 0)
-            {
+            if (MathHelper.sin(f / 1.5F + (float) Math.PI / 2F - 3F * (float) Math.PI / 8) > 0) {
                 setRotation(lowerleg3, MathHelper.sin(f / 1.5F + (float) Math.PI / 2F - 3F * (float) Math.PI / 8) * 3.5F * f1, 0F, 0F);
                 setRotation(leg3, -MathHelper.sin(f / 1.5F + (float) Math.PI / 2F - 3F * (float) Math.PI / 8) * 3.5F * f1 - 0.3490659F, 0F, 0.0349066F);
                 setRotation(toes3, MathHelper.sin(f / 1.5F + (float) Math.PI / 2F - 3F * (float) Math.PI / 8) * 2.1F * f1 + 1.134464F, 0, 0);
@@ -498,8 +477,7 @@ public class ModelDeerTFC extends ModelBase
         }
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

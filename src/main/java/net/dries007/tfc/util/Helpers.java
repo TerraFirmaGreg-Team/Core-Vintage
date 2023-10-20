@@ -5,13 +5,12 @@
 
 package net.dries007.tfc.util;
 
-import java.util.*;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.google.common.base.Joiner;
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.objects.entity.EntitySeatOn;
+import net.dries007.tfc.objects.entity.animal.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCommandBlock;
 import net.minecraft.block.BlockStructure;
@@ -39,16 +38,15 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.objects.entity.EntitySeatOn;
-import net.dries007.tfc.objects.entity.animal.*;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static com.google.common.math.DoubleMath.mean;
 
-public final class Helpers
-{
+public final class Helpers {
     private static final Joiner JOINER_DOT = Joiner.on('.');
     private static final boolean JEI = Loader.isModLoaded("jei");
     /**
@@ -61,8 +59,7 @@ public final class Helpers
      */
     private static final Set<Class<? extends Entity>> PREVENT_ON_SURFACE;
 
-    static
-    {
+    static {
         PREVENT_ON_SURFACE = new HashSet<>();
         PREVENT_ON_SURFACE.add(EntityZombieHorse.class);
         PREVENT_ON_SURFACE.add(EntitySkeletonHorse.class);
@@ -82,8 +79,7 @@ public final class Helpers
         VANILLA_REPLACEMENTS.put(EntityLlama.class, EntityLlamaTFC.class);
     }
 
-    public static boolean isJEIEnabled()
-    {
+    public static boolean isJEIEnabled() {
         return JEI;
     }
 
@@ -93,30 +89,23 @@ public final class Helpers
      * @param entity the entity to check
      * @return true if it has a TFC counterpart, false otherwise
      */
-    public static boolean isVanillaAnimal(Entity entity)
-    {
+    public static boolean isVanillaAnimal(Entity entity) {
         return VANILLA_REPLACEMENTS.get(entity.getClass()) != null;
     }
 
     @Nullable
-    public static Entity getTFCReplacement(Entity entity)
-    {
+    public static Entity getTFCReplacement(Entity entity) {
         Class<? extends Entity> animalClass = VANILLA_REPLACEMENTS.get(entity.getClass());
-        if (animalClass != null)
-        {
-            try
-            {
+        if (animalClass != null) {
+            try {
                 return animalClass.getConstructor(World.class).newInstance(entity.world);
-            }
-            catch (Exception ignored)
-            {
+            } catch (Exception ignored) {
             }
         }
         return null;
     }
 
-    public static boolean shouldPreventOnSurface(Entity entity)
-    {
+    public static boolean shouldPreventOnSurface(Entity entity) {
         return PREVENT_ON_SURFACE.contains(entity.getClass()) || entity.isCreatureType(EnumCreatureType.MONSTER, false);
     }
 
@@ -128,10 +117,8 @@ public final class Helpers
      * @param creature the entityLiving that will sit on this block
      * @param yOffset  the y offset of the top facing
      */
-    public static void sitOnBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityLiving creature, double yOffset)
-    {
-        if (!world.isRemote && !world.getBlockState(pos).getMaterial().isReplaceable())
-        {
+    public static void sitOnBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityLiving creature, double yOffset) {
+        if (!world.isRemote && !world.getBlockState(pos).getMaterial().isReplaceable()) {
             EntitySeatOn seat = new EntitySeatOn(world, pos, yOffset);
             world.spawnEntity(seat);
             creature.startRiding(seat);
@@ -146,15 +133,11 @@ public final class Helpers
      * @return the entity which is sitting on this block, or null if none
      */
     @Nullable
-    public static Entity getSittingEntity(@Nonnull World world, @Nonnull BlockPos pos)
-    {
-        if (!world.isRemote)
-        {
+    public static Entity getSittingEntity(@Nonnull World world, @Nonnull BlockPos pos) {
+        if (!world.isRemote) {
             List<EntitySeatOn> seats = world.getEntitiesWithinAABB(EntitySeatOn.class, new AxisAlignedBB(pos).grow(1D));
-            for (EntitySeatOn seat : seats)
-            {
-                if (pos.equals(seat.getPos()))
-                {
+            for (EntitySeatOn seat : seats) {
+                if (pos.equals(seat.getPos())) {
                     return seat.getSittingEntity();
                 }
             }
@@ -171,8 +154,7 @@ public final class Helpers
      * @param useLiquids do fluids counts as block?
      */
     @Nullable
-    public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids)
-    {
+    public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
         Vec3d playerVec = new Vec3d(playerIn.posX, playerIn.posY + playerIn.getEyeHeight(), playerIn.posZ);
         float cosYaw = MathHelper.cos(-playerIn.rotationYaw * 0.017453292F - (float) Math.PI);
         float sinYaw = MathHelper.sin(-playerIn.rotationYaw * 0.017453292F - (float) Math.PI);
@@ -191,59 +173,47 @@ public final class Helpers
      * @return the ray trace result
      */
     @Nullable
-    public static RayTraceResult rayTrace(Entity entity, double blockReachDistance, float partialTicks)
-    {
+    public static RayTraceResult rayTrace(Entity entity, double blockReachDistance, float partialTicks) {
         Vec3d eyePosition = entity.getPositionEyes(partialTicks);
         Vec3d lookVector = entity.getLook(partialTicks);
         Vec3d rayTraceVector = eyePosition.add(lookVector.x * blockReachDistance, lookVector.y * blockReachDistance, lookVector.z * blockReachDistance);
         return entity.world.rayTraceBlocks(eyePosition, rayTraceVector, false, false, true);
     }
 
-    public static boolean containsAnyOfCaseInsensitive(Collection<String> input, String... items)
-    {
+    public static boolean containsAnyOfCaseInsensitive(Collection<String> input, String... items) {
         Set<String> itemsSet = Arrays.stream(items).map(String::toLowerCase).collect(Collectors.toSet());
         return input.stream().map(String::toLowerCase).anyMatch(itemsSet::contains);
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends TileEntity> T getTE(IBlockAccess world, BlockPos pos, Class<T> aClass)
-    {
+    public static <T extends TileEntity> T getTE(IBlockAccess world, BlockPos pos, Class<T> aClass) {
         TileEntity te = world.getTileEntity(pos);
         if (!aClass.isInstance(te)) return null;
         return (T) te;
     }
 
-    public static String getEnumName(Enum<?> anEnum)
-    {
+    public static String getEnumName(Enum<?> anEnum) {
         return JOINER_DOT.join(TerraFirmaCraft.MOD_ID, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
     }
 
-    public static String getTypeName(IForgeRegistryEntry<?> type)
-    {
+    public static String getTypeName(IForgeRegistryEntry<?> type) {
         //noinspection ConstantConditions
         return JOINER_DOT.join(TerraFirmaCraft.MOD_ID, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
     }
 
-    public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore)
-    {
-        for (ItemStack stack : playerInv.mainInventory)
-        {
-            if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore))
-            {
+    public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {
+        for (ItemStack stack : playerInv.mainInventory) {
+            if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore)) {
                 return true;
             }
         }
-        for (ItemStack stack : playerInv.armorInventory)
-        {
-            if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore))
-            {
+        for (ItemStack stack : playerInv.armorInventory) {
+            if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore)) {
                 return true;
             }
         }
-        for (ItemStack stack : playerInv.offHandInventory)
-        {
-            if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore))
-            {
+        for (ItemStack stack : playerInv.offHandInventory) {
+            if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore)) {
                 return true;
             }
         }
@@ -251,10 +221,8 @@ public final class Helpers
     }
 
     @Nonnull
-    public static ItemStack consumeItem(ItemStack stack, int amount)
-    {
-        if (stack.getCount() <= amount)
-        {
+    public static ItemStack consumeItem(ItemStack stack, int amount) {
+        if (stack.getCount() <= amount) {
             return ItemStack.EMPTY;
         }
         stack.shrink(amount);
@@ -262,13 +230,11 @@ public final class Helpers
     }
 
     @Nonnull
-    public static ItemStack consumeItem(ItemStack stack, EntityPlayer player, int amount)
-    {
+    public static ItemStack consumeItem(ItemStack stack, EntityPlayer player, int amount) {
         return player.isCreative() ? stack : consumeItem(stack, amount);
     }
 
-    public static void damageItem(ItemStack stack)
-    {
+    public static void damageItem(ItemStack stack) {
         damageItem(stack, 1);
     }
 
@@ -277,10 +243,8 @@ public final class Helpers
      *
      * @param stack the stack to be damaged
      */
-    public static void damageItem(ItemStack stack, int amount)
-    {
-        if (stack.attemptDamageItem(amount, Constants.RNG, null))
-        {
+    public static void damageItem(ItemStack stack, int amount) {
+        if (stack.attemptDamageItem(amount, Constants.RNG, null)) {
             stack.shrink(1);
             stack.setItemDamage(0);
         }
@@ -289,8 +253,7 @@ public final class Helpers
     /**
      * Simple method to spawn items in the world at a precise location, rather than using InventoryHelper
      */
-    public static void spawnItemStack(World world, BlockPos pos, ItemStack stack)
-    {
+    public static void spawnItemStack(World world, BlockPos pos, ItemStack stack) {
         if (stack.isEmpty())
             return;
         EntityItem entityitem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack);
@@ -306,8 +269,7 @@ public final class Helpers
      *               e.g: a sign facing north also hangs on the north side of the support block
      * @return true if the side is solid, false otherwise.
      */
-    public static boolean canHangAt(World worldIn, BlockPos pos, EnumFacing facing)
-    {
+    public static boolean canHangAt(World worldIn, BlockPos pos, EnumFacing facing) {
         return worldIn.isSideSolid(pos.offset(facing.getOpposite()), facing);
     }
 
@@ -319,21 +281,16 @@ public final class Helpers
      * @param preferredFacing this facing is checked first. It can be invalid or null.
      * @return Found facing or null is none is found. This is the direction the block should be pointing and the side it stick TO, not the side it sticks WITH.
      */
-    public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, EnumFacing... possibleSides)
-    {
+    public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, EnumFacing... possibleSides) {
         return getASolidFacing(worldIn, pos, preferredFacing, Arrays.asList(possibleSides));
     }
 
-    public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, Collection<EnumFacing> possibleSides)
-    {
-        if (preferredFacing != null && possibleSides.contains(preferredFacing) && canHangAt(worldIn, pos, preferredFacing))
-        {
+    public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, Collection<EnumFacing> possibleSides) {
+        if (preferredFacing != null && possibleSides.contains(preferredFacing) && canHangAt(worldIn, pos, preferredFacing)) {
             return preferredFacing;
         }
-        for (EnumFacing side : possibleSides)
-        {
-            if (side != null && canHangAt(worldIn, pos, side))
-            {
+        for (EnumFacing side : possibleSides) {
+            if (side != null && canHangAt(worldIn, pos, side)) {
                 return side;
             }
         }
@@ -343,8 +300,7 @@ public final class Helpers
     /**
      *
      */
-    public static void handleRightClickBlockPostEventWithCallbacks(PlayerInteractEvent.RightClickBlock event, @Nullable Supplier<EnumActionResult> onItemUseCallback)
-    {
+    public static void handleRightClickBlockPostEventWithCallbacks(PlayerInteractEvent.RightClickBlock event, @Nullable Supplier<EnumActionResult> onItemUseCallback) {
         event.setCanceled(true);
         EnumActionResult result = EnumActionResult.PASS;
         // todo: verify stack is correct
@@ -352,11 +308,9 @@ public final class Helpers
         // todo: find hit pos from ray trace
         int hitX = 0, hitY = 0, hitZ = 0;
         EnumFacing face = event.getFace() == null ? EnumFacing.UP : event.getFace();
-        if (event.getUseItem() != Event.Result.DENY)
-        {
+        if (event.getUseItem() != Event.Result.DENY) {
             result = stack.onItemUseFirst(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getHand(), face, hitX, hitY, hitZ);
-            if (result != EnumActionResult.PASS)
-            {
+            if (result != EnumActionResult.PASS) {
                 event.setCancellationResult(result);
                 return;
             }
@@ -364,67 +318,48 @@ public final class Helpers
 
         boolean bypass = event.getEntityPlayer().getHeldItemMainhand().doesSneakBypassUse(event.getWorld(), event.getPos(), event.getEntityPlayer()) && event.getEntityPlayer().getHeldItemOffhand().doesSneakBypassUse(event.getWorld(), event.getPos(), event.getEntityPlayer());
 
-        if (!event.getEntityPlayer().isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW)
-        {
+        if (!event.getEntityPlayer().isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW) {
             IBlockState iblockstate = event.getWorld().getBlockState(event.getPos());
             if (event.getUseBlock() != Event.Result.DENY)
-                if (iblockstate.getBlock().onBlockActivated(event.getWorld(), event.getPos(), iblockstate, event.getEntityPlayer(), event.getHand(), face, hitX, hitY, hitZ))
-                {
+                if (iblockstate.getBlock().onBlockActivated(event.getWorld(), event.getPos(), iblockstate, event.getEntityPlayer(), event.getHand(), face, hitX, hitY, hitZ)) {
                     result = EnumActionResult.SUCCESS;
                 }
         }
 
-        if (stack.isEmpty())
-        {
+        if (stack.isEmpty()) {
             event.setCancellationResult(EnumActionResult.PASS);
-        }
-        else if (event.getEntityPlayer().getCooldownTracker().hasCooldown(stack.getItem()))
-        {
+        } else if (event.getEntityPlayer().getCooldownTracker().hasCooldown(stack.getItem())) {
             event.setCancellationResult(EnumActionResult.PASS);
-        }
-        else
-        {
-            if (stack.getItem() instanceof ItemBlock && !event.getEntityPlayer().canUseCommandBlock())
-            {
+        } else {
+            if (stack.getItem() instanceof ItemBlock && !event.getEntityPlayer().canUseCommandBlock()) {
                 Block block = ((ItemBlock) stack.getItem()).getBlock();
 
-                if (block instanceof BlockCommandBlock || block instanceof BlockStructure)
-                {
+                if (block instanceof BlockCommandBlock || block instanceof BlockStructure) {
                     event.setCancellationResult(EnumActionResult.FAIL);
                     return;
                 }
             }
 
-            if (event.getEntityPlayer().isCreative())
-            {
+            if (event.getEntityPlayer().isCreative()) {
                 int j = stack.getMetadata();
                 int i = stack.getCount();
                 if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
-                    || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW)
-                {
+                        || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
                     EnumActionResult enumactionresult;
-                    if (onItemUseCallback != null)
-                    {
+                    if (onItemUseCallback != null) {
                         enumactionresult = onItemUseCallback.get();
-                    }
-                    else
-                    {
+                    } else {
                         enumactionresult = stack.onItemUse(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getHand(), face, hitX, hitY, hitZ);
                     }
                     stack.setItemDamage(j);
                     stack.setCount(i);
                     event.setCancellationResult(enumactionresult);
-                }
-                else
-                {
+                } else {
                     event.setCancellationResult(result);
                 }
-            }
-            else
-            {
+            } else {
                 if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
-                    || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW)
-                {
+                        || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
                     ItemStack copyBeforeUse = stack.copy();
                     result = stack.onItemUse(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getHand(), event.getFace(), hitX, hitY, hitZ);
                     if (stack.isEmpty())
@@ -435,21 +370,17 @@ public final class Helpers
         }
     }
 
-    public static void writeResourceLocation(ByteBuf buf, @Nullable ResourceLocation loc)
-    {
+    public static void writeResourceLocation(ByteBuf buf, @Nullable ResourceLocation loc) {
         buf.writeBoolean(loc != null);
-        if (loc != null)
-        {
+        if (loc != null) {
             ByteBufUtils.writeUTF8String(buf, loc.toString());
         }
     }
 
 
     @Nullable
-    public static ResourceLocation readResourceLocation(ByteBuf buf)
-    {
-        if (buf.readBoolean())
-        {
+    public static ResourceLocation readResourceLocation(ByteBuf buf) {
+        if (buf.readBoolean()) {
             return new ResourceLocation(ByteBufUtils.readUTF8String(buf));
         }
         return null;
@@ -458,8 +389,7 @@ public final class Helpers
     /**
      * Used because {@link Collections#singletonList(Object)} is immutable
      */
-    public static <T> List<T> listOf(T element)
-    {
+    public static <T> List<T> listOf(T element) {
         List<T> list = new ArrayList<>(1);
         list.add(element);
         return list;
@@ -469,8 +399,7 @@ public final class Helpers
      * Used because {@link Arrays#asList(Object[])} is immutable
      */
     @SafeVarargs
-    public static <T> List<T> listOf(T... elements)
-    {
+    public static <T> List<T> listOf(T... elements) {
         List<T> list = new ArrayList<>(elements.length);
         Collections.addAll(list, elements);
         return list;
@@ -486,13 +415,11 @@ public final class Helpers
      */
     @Nonnull
     @SuppressWarnings("ConstantConditions")
-    public static <T> T getNull()
-    {
+    public static <T> T getNull() {
         return null;
     }
 
-    public static double getTPS(World world, int dimId)
-    {
+    public static double getTPS(World world, int dimId) {
         if (world == null || world.getMinecraftServer() == null) return -1D;
         double worldTickTime = mean(world.getMinecraftServer().worldTickTimes.get(dimId)) * 1.0E-6D;
         return Math.min(1000.0D / worldTickTime, 20.0D);

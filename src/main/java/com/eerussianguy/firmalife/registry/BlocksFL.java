@@ -1,28 +1,13 @@
 package com.eerussianguy.firmalife.registry;
 
-import java.util.Optional;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.registries.IForgeRegistry;
-
 import com.eerussianguy.firmalife.blocks.*;
 import com.eerussianguy.firmalife.init.BushFL;
 import com.eerussianguy.firmalife.init.FruitTreeFL;
 import com.eerussianguy.firmalife.init.StemCrop;
 import com.eerussianguy.firmalife.items.ItemBlockRot;
 import com.eerussianguy.firmalife.te.*;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
@@ -38,14 +23,27 @@ import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.agriculture.FruitTree;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.Optional;
 
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 @GameRegistry.ObjectHolder(MOD_ID)
-public class BlocksFL
-{
+public class BlocksFL {
     @GameRegistry.ObjectHolder("oven")
     public static final BlockOven OVEN = Helpers.getNull();
     @GameRegistry.ObjectHolder("oven_wall")
@@ -111,58 +109,60 @@ public class BlocksFL
     private static ImmutableList<Block> allInventoryIBs = Helpers.getNull();
     private static ImmutableList<BlockBonsai> allBonsai = Helpers.getNull();
 
-    public static ImmutableList<ItemBlock> getAllIBs()
-    {
+    public static ImmutableList<ItemBlock> getAllIBs() {
         return allIBs;
     }
-    public static ImmutableList<Block> getAllNormalIBs()
-    {
+
+    public static ImmutableList<Block> getAllNormalIBs() {
         return allNormalIBs;
     }
-    public static ImmutableList<Block> getAllFoodIBs()
-    {
+
+    public static ImmutableList<Block> getAllFoodIBs() {
         return allFoodIBs;
     }
-    public static ImmutableList<BlockFruitTreeLeaves> getAllFruitLeaves()
-    {
+
+    public static ImmutableList<BlockFruitTreeLeaves> getAllFruitLeaves() {
         return allFruitLeaves;
     }
-    public static ImmutableList<BlockBonsai> getAllBonsai()
-    {
+
+    public static ImmutableList<BlockBonsai> getAllBonsai() {
         return allBonsai;
     }
-    public static ImmutableList<BlockFruitTreeSapling> getAllFruitSaps()
-    {
+
+    public static ImmutableList<BlockFruitTreeSapling> getAllFruitSaps() {
         return allFruitSaps;
     }
-    public static ImmutableList<BlockFruitFence> getAllFruitFences() { return allFruitFences; }
-    public static ImmutableList<BlockFruitFenceGate> getAllFruitFenceGates() { return allFruitFenceGates; }
-    public static ImmutableList<BlockFruitDoor> getAllFruitDoors() { return allFruitDoors; }
-    public static ImmutableList<BlockFruitTrapDoor> getAllFruitTrapdoors() { return allFruitTrapDoors; }
-    public static ImmutableList<BlockCropDead> getAllDeadCrops()
-    {
+
+    public static ImmutableList<BlockFruitFence> getAllFruitFences() {return allFruitFences;}
+
+    public static ImmutableList<BlockFruitFenceGate> getAllFruitFenceGates() {return allFruitFenceGates;}
+
+    public static ImmutableList<BlockFruitDoor> getAllFruitDoors() {return allFruitDoors;}
+
+    public static ImmutableList<BlockFruitTrapDoor> getAllFruitTrapdoors() {return allFruitTrapDoors;}
+
+    public static ImmutableList<BlockCropDead> getAllDeadCrops() {
         return allDeadCrops;
     }
-    public static ImmutableList<BlockStemCrop> getAllCropBlocks()
-    {
+
+    public static ImmutableList<BlockStemCrop> getAllCropBlocks() {
         return allCropBlocks;
     }
-    public static ImmutableList<BlockFluidBase> getAllFluidBlocks()
-    {
+
+    public static ImmutableList<BlockFluidBase> getAllFluidBlocks() {
         return allFluidBlocks;
     }
-    public static ImmutableList<BlockJackOLantern> getAllJackOLanterns()
-    {
+
+    public static ImmutableList<BlockJackOLantern> getAllJackOLanterns() {
         return allJackOLanterns;
     }
-    public static ImmutableList<Block> getAllInventoryIBs()
-    {
+
+    public static ImmutableList<Block> getAllInventoryIBs() {
         return allInventoryIBs;
     }
 
     @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<Block> event)
-    {
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
         FluidsFL.registerFluids();//this has to come first
         IForgeRegistry<Block> r = event.getRegistry();
 
@@ -181,8 +181,7 @@ public class BlocksFL
         Builder<Block> invIBs = ImmutableList.builder();
         Builder<BlockBonsai> bonsais = ImmutableList.builder();
 
-        for (FruitTreeFL fruitTree : FruitTreeFL.values())
-        {
+        for (FruitTreeFL fruitTree : FruitTreeFL.values()) {
             String name = fruitTree.getName().toLowerCase();
             register(r, name + "_branch", new BlockFruitTreeBranch(fruitTree));
             fruitLeaves.add(register(r, name + "_leaves", new BlockFruitTreeLeaves(fruitTree), CT_WOOD));
@@ -191,8 +190,7 @@ public class BlocksFL
             doFruitAdditions(r, name, fruitFences, fruitFenceGates, fruitDoors, fruitTrapdoors, bonsais, Optional.of(fruitTree));
         }
         doFruitAdditions(r, "cinnamon", fruitFences, fruitFenceGates, fruitDoors, fruitTrapdoors, bonsais, Optional.empty());
-        for (IFruitTree fruitTree : FruitTree.values())
-        {
+        for (IFruitTree fruitTree : FruitTree.values()) {
             String name = fruitTree.getName().toLowerCase();
             doFruitAdditions(r, name, fruitFences, fruitFenceGates, fruitDoors, fruitTrapdoors, bonsais, Optional.of(fruitTree));
         }
@@ -233,34 +231,29 @@ public class BlocksFL
         normalIBs.add(register(r, "feta_wheel", new BlockCheesewheel(() -> ItemsFL.FETA), CT_FOOD));
         normalIBs.add(register(r, "shosha_wheel", new BlockCheesewheel(() -> ItemsFL.SHOSHA), CT_FOOD));
 
-        for (BerryBush bush : BerryBush.values())
-        {
+        for (BerryBush bush : BerryBush.values()) {
             normalIBs.add(register(r, bush.name().toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
         }
 
-        for (BushFL bush : BushFL.values())
-        {
+        for (BushFL bush : BushFL.values()) {
             normalIBs.add(register(r, bush.name().toLowerCase() + "_bush", new BlockBerryBush(bush), CT_FLORA));
             normalIBs.add(register(r, bush.name().toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
         }
 
-        for (BlockJackOLantern.Carving carving : BlockJackOLantern.Carving.values())
-        {
+        for (BlockJackOLantern.Carving carving : BlockJackOLantern.Carving.values()) {
             jackOLanterns.add(register(r, "lit_pumpkin_" + carving.getName(), new BlockJackOLantern(carving), CT_DECORATIONS));
         }
 
         foodIBs.add(register(r, "pumpkin_fruit", new BlockStemFruit(), CT_FLORA));
         foodIBs.add(register(r, "melon_fruit", new BlockStemFruit(), CT_FLORA));
 
-        for (StemCrop crop : StemCrop.values())
-        {
+        for (StemCrop crop : StemCrop.values()) {
             deadCrops.add(register(r, "dead_crop/" + crop.name().toLowerCase(), new BlockCropDead(crop)));
             cropBlocks.add(register(r, "crop/" + crop.name().toLowerCase(), BlockStemCrop.create(crop)));
         }
 
         Builder<BlockFluidBase> fluids = ImmutableList.builder();
-        for (FluidWrapper wrapper : FluidsFL.getAllFiniteFluids())
-        {
+        for (FluidWrapper wrapper : FluidsFL.getAllFiniteFluids()) {
             fluids.add(register(r, wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));
         }
         allFluidBlocks = fluids.build();
@@ -323,8 +316,7 @@ public class BlocksFL
         FluidsTFC.getWrapper(FluidsFL.ZEBU_MILK.get());
     }
 
-    private static void doFruitAdditions(IForgeRegistry<Block> r, String name, Builder<BlockFruitFence> fruitFences, Builder<BlockFruitFenceGate> fruitFenceGates, Builder<BlockFruitDoor> fruitDoors, Builder<BlockFruitTrapDoor> fruitTrapdoors, Builder<BlockBonsai> bonsais, Optional<IFruitTree> optionalTree)
-    {
+    private static void doFruitAdditions(IForgeRegistry<Block> r, String name, Builder<BlockFruitFence> fruitFences, Builder<BlockFruitFenceGate> fruitFenceGates, Builder<BlockFruitDoor> fruitDoors, Builder<BlockFruitTrapDoor> fruitTrapdoors, Builder<BlockBonsai> bonsais, Optional<IFruitTree> optionalTree) {
         fruitFences.add(register(r, name + "_fence", new BlockFruitFence(), CT_DECORATIONS));
         fruitFenceGates.add(register(r, name + "_fence_gate", new BlockFruitFenceGate(), CT_DECORATIONS));
         fruitDoors.add(register(r, name + "_door", new BlockFruitDoor(), CT_DECORATIONS));
@@ -333,22 +325,19 @@ public class BlocksFL
         );
     }
 
-    private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block, CreativeTabs ct)
-    {
+    private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block, CreativeTabs ct) {
         block.setCreativeTab(ct);
         return register(r, name, block);
     }
 
-    private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block)
-    {
+    private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block) {
         block.setRegistryName(MOD_ID, name);
         block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
         r.register(block);
         return block;
     }
 
-    private static <T extends TileEntity> void register(Class<T> te, String name)
-    {
+    private static <T extends TileEntity> void register(Class<T> te, String name) {
         TileEntity.register(MOD_ID + ":" + name, te);
     }
 }

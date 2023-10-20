@@ -13,24 +13,20 @@ import net.minecraft.tileentity.TileEntity;
  *
  * @see CalendarTFC#runTransaction(long, long, Runnable)
  */
-public interface ICalendarTickable
-{
-    default TileEntity getTileEntity()
-    {
+public interface ICalendarTickable {
+    default TileEntity getTileEntity() {
         return (TileEntity) this;
     }
 
     /**
      * Here we check every tick for a calendar discrepancy. This only checks for differences in player time, and calls {@link ICalendarTickable#onCalendarUpdate(long playerTickDelta)} as necessary
-     *
+     * <p>
      * Implementations MUST call {@code ICalendarTickable.super.update()} in their implementation
      */
     @SuppressWarnings("ConstantConditions")
-    default void checkForCalendarUpdate()
-    {
+    default void checkForCalendarUpdate() {
         TileEntity te = getTileEntity();
-        if (te.getWorld() != null && !te.getWorld().isRemote)
-        {
+        if (te.getWorld() != null && !te.getWorld().isRemote) {
             long playerTick = CalendarTFC.PLAYER_TIME.getTicks();
             long tickDelta = playerTick - getLastUpdateTick();
             if (tickDelta != 1) // Expect 1 tick

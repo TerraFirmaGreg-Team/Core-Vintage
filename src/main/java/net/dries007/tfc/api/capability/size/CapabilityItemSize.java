@@ -5,12 +5,10 @@
 
 package net.dries007.tfc.api.capability.size;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.DumbStorage;
+import net.dries007.tfc.api.capability.ItemStickCapability;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.block.BlockLadder;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -21,26 +19,24 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.DumbStorage;
-import net.dries007.tfc.api.capability.ItemStickCapability;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
-public final class CapabilityItemSize
-{
+public final class CapabilityItemSize {
     public static final ResourceLocation KEY = new ResourceLocation(TerraFirmaCraft.MOD_ID, "item_size");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new LinkedHashMap<>(); //Used inside CT, set custom IItemSize for items outside TFC
     @CapabilityInject(IItemSize.class)
     public static Capability<IItemSize> ITEM_SIZE_CAPABILITY;
 
-    public static void preInit()
-    {
+    public static void preInit() {
         // Register the capability
         CapabilityManager.INSTANCE.register(IItemSize.class, new DumbStorage<>(), ItemSizeHandler::getDefault);
     }
 
-    public static void init()
-    {
+    public static void init() {
         // Add hardcoded size values for vanilla items
         CUSTOM_ITEMS.put(IIngredient.of(Items.COAL), () -> ItemSizeHandler.get(Size.SMALL, Weight.LIGHT, true)); // Store anywhere stacksize = 32
         CUSTOM_ITEMS.put(IIngredient.of(Items.STICK), ItemStickCapability::new); // Store anywhere stacksize = 64
@@ -55,11 +51,9 @@ public final class CapabilityItemSize
     /**
      * Checks if an item is of a given size and weight
      */
-    public static boolean checkItemSize(ItemStack stack, Size size, Weight weight)
-    {
+    public static boolean checkItemSize(ItemStack stack, Size size, Weight weight) {
         IItemSize cap = getIItemSize(stack);
-        if (cap != null)
-        {
+        if (cap != null) {
             return cap.getWeight(stack) == weight && cap.getSize(stack) == size;
         }
         return false;
@@ -72,21 +66,14 @@ public final class CapabilityItemSize
      * @return The IItemSize if it exists, or null if it doesn't
      */
     @Nullable
-    public static IItemSize getIItemSize(ItemStack stack)
-    {
-        if (!stack.isEmpty())
-        {
+    public static IItemSize getIItemSize(ItemStack stack) {
+        if (!stack.isEmpty()) {
             IItemSize size = stack.getCapability(ITEM_SIZE_CAPABILITY, null);
-            if (size != null)
-            {
+            if (size != null) {
                 return size;
-            }
-            else if (stack.getItem() instanceof IItemSize)
-            {
+            } else if (stack.getItem() instanceof IItemSize) {
                 return (IItemSize) stack.getItem();
-            }
-            else if (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof IItemSize)
-            {
+            } else if (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof IItemSize) {
                 return (IItemSize) ((ItemBlock) stack.getItem()).getBlock();
             }
         }
@@ -94,35 +81,23 @@ public final class CapabilityItemSize
     }
 
     @Nonnull
-    public static ICapabilityProvider getCustomSize(ItemStack stack)
-    {
-        for (Map.Entry<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> entry : CUSTOM_ITEMS.entrySet())
-        {
-            if (entry.getKey().testIgnoreCount(stack))
-            {
+    public static ICapabilityProvider getCustomSize(ItemStack stack) {
+        for (Map.Entry<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> entry : CUSTOM_ITEMS.entrySet()) {
+            if (entry.getKey().testIgnoreCount(stack)) {
                 return entry.getValue().get();
             }
         }
         // Check for generic item types
         Item item = stack.getItem();
-        if (item instanceof ItemTool || item instanceof ItemSword)
-        {
+        if (item instanceof ItemTool || item instanceof ItemSword) {
             return ItemSizeHandler.get(Size.LARGE, Weight.MEDIUM, true); // Stored only in chests, stacksize should be limited to 1 since it is a tool
-        }
-        else if (item instanceof ItemArmor)
-        {
+        } else if (item instanceof ItemArmor) {
             return ItemSizeHandler.get(Size.LARGE, Weight.VERY_HEAVY, true); // Stored only in chests and stacksize = 1
-        }
-        else if (item instanceof ItemBlock && ((ItemBlock) item).getBlock() instanceof BlockLadder)
-        {
+        } else if (item instanceof ItemBlock && ((ItemBlock) item).getBlock() instanceof BlockLadder) {
             return ItemSizeHandler.get(Size.SMALL, Weight.VERY_LIGHT, true); // Fits small vessels and stacksize = 64
-        }
-        else if (item instanceof ItemBlock)
-        {
+        } else if (item instanceof ItemBlock) {
             return ItemSizeHandler.get(Size.SMALL, Weight.LIGHT, true); // Fits small vessels and stacksize = 32
-        }
-        else
-        {
+        } else {
             return ItemSizeHandler.get(Size.VERY_SMALL, Weight.VERY_LIGHT, true); // Stored anywhere and stacksize = 64
         }
     }

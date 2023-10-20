@@ -5,6 +5,11 @@
 
 package net.dries007.tfc.client.gui;
 
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
+import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
@@ -15,27 +20,18 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
-import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @SideOnly(Side.CLIENT)
-public class GuiCalendar extends GuiContainerTFC
-{
+public class GuiCalendar extends GuiContainerTFC {
     private static final ResourceLocation BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/player_calendar.png");
 
-    public GuiCalendar(Container container, InventoryPlayer playerInv)
-    {
+    public GuiCalendar(Container container, InventoryPlayer playerInv) {
         super(container, playerInv, BACKGROUND);
     }
 
     @Override
-    public void initGui()
-    {
+    public void initGui() {
         super.initGui();
 
         int buttonId = 0;
@@ -46,8 +42,7 @@ public class GuiCalendar extends GuiContainerTFC
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
-    {
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
         String tooltip = TextFormatting.WHITE + "" + TextFormatting.UNDERLINE + I18n.format("tfc.tooltip.calendar") + ":";
@@ -65,15 +60,11 @@ public class GuiCalendar extends GuiContainerTFC
     }
 
     @Override
-    protected void actionPerformed(GuiButton button)
-    {
-        if (button instanceof GuiButtonPlayerInventoryTab && ((GuiButtonPlayerInventoryTab) button).isActive())
-        {
+    protected void actionPerformed(GuiButton button) {
+        if (button instanceof GuiButtonPlayerInventoryTab && ((GuiButtonPlayerInventoryTab) button).isActive()) {
             GuiButtonPlayerInventoryTab tabButton = (GuiButtonPlayerInventoryTab) button;
-            if (tabButton.isActive())
-            {
-                if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY)
-                {
+            if (tabButton.isActive()) {
+                if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
                     this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
                 }
                 TerraFirmaCraft.getNetwork().sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));

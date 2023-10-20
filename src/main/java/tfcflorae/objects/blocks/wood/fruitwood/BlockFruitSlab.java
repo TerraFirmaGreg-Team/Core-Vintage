@@ -1,10 +1,7 @@
 package tfcflorae.objects.blocks.wood.fruitwood;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.IFruitTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -19,23 +16,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.IFruitTree;
-
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public abstract class BlockFruitSlab extends BlockSlab
-{
+public abstract class BlockFruitSlab extends BlockSlab {
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
     public final Block modelBlock;
     protected Half halfSlab;
 
-    private BlockFruitSlab(SeasonalTrees tree)
-    {
+    private BlockFruitSlab(SeasonalTrees tree) {
         this(BlockFruitPlanks.getTFCF(tree));
         Block c = BlockFruitPlanks.getTFCF(tree);
         //noinspection ConstantConditions
@@ -45,8 +41,7 @@ public abstract class BlockFruitSlab extends BlockSlab
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
-    private BlockFruitSlab(IFruitTree tree)
-    {
+    private BlockFruitSlab(IFruitTree tree) {
         this(BlockFruitPlanks.getTFC(tree));
         Block c = BlockFruitPlanks.getTFC(tree);
         //noinspection ConstantConditions
@@ -56,8 +51,7 @@ public abstract class BlockFruitSlab extends BlockSlab
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
-    private BlockFruitSlab(Block block)
-    {
+    private BlockFruitSlab(Block block) {
         super(block.getDefaultState().getMaterial());
         IBlockState state = blockState.getBaseState();
         if (!isDouble()) state = state.withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM);
@@ -67,31 +61,26 @@ public abstract class BlockFruitSlab extends BlockSlab
     }
 
     @Override
-    public String getTranslationKey(int meta)
-    {
+    public String getTranslationKey(int meta) {
         return super.getTranslationKey();
     }
 
     @Override
-    public IProperty<?> getVariantProperty()
-    {
+    public IProperty<?> getVariantProperty() {
         return VARIANT; // why is this not null-tolerable ...
     }
 
     @Override
-    public Comparable<?> getTypeForItem(ItemStack stack)
-    {
+    public Comparable<?> getTypeForItem(ItemStack stack) {
         return Variant.DEFAULT;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
 
-        if (!this.isDouble())
-        {
+        if (!this.isDouble()) {
             iblockstate = iblockstate.withProperty(HALF, (meta & 8) == 0 ? BlockSlab.EnumBlockHalf.BOTTOM : BlockSlab.EnumBlockHalf.TOP);
         }
 
@@ -99,12 +88,10 @@ public abstract class BlockFruitSlab extends BlockSlab
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         int i = 0;
 
-        if (!this.isDouble() && state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP)
-        {
+        if (!this.isDouble() && state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) {
             i |= 8;
         }
 
@@ -113,110 +100,83 @@ public abstract class BlockFruitSlab extends BlockSlab
 
     @SuppressWarnings("deprecation")
     @Override
-    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
-    {
+    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
         return modelBlock.getBlockHardness(blockState, worldIn, pos);
     }
 
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(halfSlab);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public float getExplosionResistance(Entity exploder)
-    {
+    public float getExplosionResistance(Entity exploder) {
         return modelBlock.getExplosionResistance(exploder);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
         return new ItemStack(halfSlab);
     }
 
     @Override
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public SoundType getSoundType()
-    {
+    public SoundType getSoundType() {
         return modelBlock.getSoundType();
     }
 
-    public enum Variant implements IStringSerializable
-    {
+    public enum Variant implements IStringSerializable {
         DEFAULT;
 
         @Override
-        public String getName()
-        {
+        public String getName() {
             return "default";
         }
     }
 
-    public static class Double extends BlockFruitSlab
-    {
+    public static class Double extends BlockFruitSlab {
         private static final Map<SeasonalTrees, Double> TREE_MAP_TFCF = new HashMap<>();
         private static final Map<IFruitTree, Double> TREE_MAP_TFC = new HashMap<>();
 
-        public static Double getTFCF(SeasonalTrees tree)
-        {
-            return TREE_MAP_TFCF.get(tree);
-        }
-
-        public static Double getTFC(IFruitTree tree)
-        {
-            return TREE_MAP_TFC.get(tree);
-        }
-
-        public Double(SeasonalTrees tree)
-        {
+        public Double(SeasonalTrees tree) {
             super(tree);
             if (TREE_MAP_TFCF.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
             // No oredict, because no item.
         }
 
-        public Double(IFruitTree tree)
-        {
+        public Double(IFruitTree tree) {
             super(tree);
             if (TREE_MAP_TFC.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
             // No oredict, because no item.
         }
 
+        public static Double getTFCF(SeasonalTrees tree) {
+            return TREE_MAP_TFCF.get(tree);
+        }
+
+        public static Double getTFC(IFruitTree tree) {
+            return TREE_MAP_TFC.get(tree);
+        }
+
         @Override
-        public boolean isDouble()
-        {
+        public boolean isDouble() {
             return true;
         }
     }
 
-    public static class Half extends BlockFruitSlab
-    {
+    public static class Half extends BlockFruitSlab {
         private static final Map<SeasonalTrees, Half> TREE_MAP_TFCF = new HashMap<>();
         private static final Map<IFruitTree, Half> TREE_MAP_TFC = new HashMap<>();
-
-        public static Half getTFCF(SeasonalTrees tree)
-        {
-            return TREE_MAP_TFCF.get(tree);
-        }
-
-        public static Half getTFC(IFruitTree tree)
-        {
-            return TREE_MAP_TFC.get(tree);
-        }
-
         public final Double doubleSlab;
 
-        public Half(SeasonalTrees tree)
-        {
+        public Half(SeasonalTrees tree) {
             super(tree);
             if (TREE_MAP_TFCF.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
             doubleSlab = Double.getTFCF(tree);
@@ -227,8 +187,7 @@ public abstract class BlockFruitSlab extends BlockSlab
             OreDictionaryHelper.register(this, "slab", "wood", tree);
         }
 
-        public Half(IFruitTree tree)
-        {
+        public Half(IFruitTree tree) {
             super(tree);
             if (TREE_MAP_TFC.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
             doubleSlab = Double.getTFC(tree);
@@ -239,9 +198,16 @@ public abstract class BlockFruitSlab extends BlockSlab
             OreDictionaryHelper.register(this, "slab", "wood", tree);
         }
 
+        public static Half getTFCF(SeasonalTrees tree) {
+            return TREE_MAP_TFCF.get(tree);
+        }
+
+        public static Half getTFC(IFruitTree tree) {
+            return TREE_MAP_TFC.get(tree);
+        }
+
         @Override
-        public boolean isDouble()
-        {
+        public boolean isDouble() {
             return false;
         }
     }

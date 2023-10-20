@@ -5,11 +5,15 @@
 
 package net.dries007.tfc.objects.items.metal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.damage.DamageType;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -31,18 +35,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemMetalTool extends ItemMetal
-{
+public class ItemMetalTool extends ItemMetal {
     public final ToolMaterial material;
     private final double attackDamage;
     private final int areaOfEffect;
@@ -50,8 +48,7 @@ public class ItemMetalTool extends ItemMetal
     private float efficiency;
     private boolean canDisableShield;
 
-    public ItemMetalTool(Metal metal, Metal.ItemType type)
-    {
+    public ItemMetalTool(Metal metal, Metal.ItemType type) {
         super(metal, type);
         if (metal.getToolMetal() == null)
             throw new IllegalArgumentException("You can't make tools out of non tool metals.");
@@ -63,8 +60,7 @@ public class ItemMetalTool extends ItemMetal
         efficiency = material.getEfficiency();
 
         float typeDamage;
-        switch (type)
-        {
+        switch (type) {
             case PICK:
                 // Non-Weapon (50% efficient for damaging, tweaks in attack speed / damage)
                 setHarvestLevel("pickaxe", harvestLevel);
@@ -207,30 +203,23 @@ public class ItemMetalTool extends ItemMetal
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack itemstack = player.getHeldItem(hand);
 
-        if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack))
-        {
+        if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
             return EnumActionResult.FAIL;
-        }
-        else if (type == Metal.ItemType.SHOVEL)
-        {
+        } else if (type == Metal.ItemType.SHOVEL) {
             IBlockState iblockstate = worldIn.getBlockState(pos);
             Block block = iblockstate.getBlock();
-            if (!(block instanceof BlockRockVariant))
-            {
+            if (!(block instanceof BlockRockVariant)) {
                 return EnumActionResult.PASS;
             }
             BlockRockVariant rockVariant = (BlockRockVariant) block;
-            if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR && rockVariant.getType() == Rock.Type.GRASS || rockVariant.getType() == Rock.Type.DRY_GRASS || rockVariant.getType() == Rock.Type.DIRT)
-            {
+            if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR && rockVariant.getType() == Rock.Type.GRASS || rockVariant.getType() == Rock.Type.DRY_GRASS || rockVariant.getType() == Rock.Type.DIRT) {
                 IBlockState iblockstate1 = BlockRockVariant.get(rockVariant.getRock(), Rock.Type.PATH).getDefaultState();
                 worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-                if (!worldIn.isRemote)
-                {
+                if (!worldIn.isRemote) {
                     worldIn.setBlockState(pos, iblockstate1, 11);
                     itemstack.damageItem(1, player);
                 }
@@ -242,16 +231,13 @@ public class ItemMetalTool extends ItemMetal
     }
 
     @Override
-    public float getDestroySpeed(ItemStack stack, IBlockState state)
-    {
+    public float getDestroySpeed(ItemStack stack, IBlockState state) {
         return canHarvestBlock(state, stack) ? efficiency : 1.0f;
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
-    {
-        switch (type)
-        {
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        switch (type) {
             case PROPICK:
             case SAW:
             case SHEARS:
@@ -279,30 +265,23 @@ public class ItemMetalTool extends ItemMetal
     }
 
     @Override
-    public boolean canDisableShield(ItemStack stack, ItemStack shield, EntityLivingBase entity, EntityLivingBase attacker)
-    {
+    public boolean canDisableShield(ItemStack stack, ItemStack shield, EntityLivingBase entity, EntityLivingBase attacker) {
         return this.canDisableShield;
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
-    {
-        if (state.getBlockHardness(worldIn, pos) > 0 || type == Metal.ItemType.KNIFE || type == Metal.ItemType.SCYTHE)
-        {
-            if (!worldIn.isRemote)
-            {
+    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+        if (state.getBlockHardness(worldIn, pos) > 0 || type == Metal.ItemType.KNIFE || type == Metal.ItemType.SCYTHE) {
+            if (!worldIn.isRemote) {
                 stack.damageItem(1, entityLiving);
             }
         }
-        if (areaOfEffect > 1 && entityLiving instanceof EntityPlayer && !worldIn.isRemote)
-        {
+        if (areaOfEffect > 1 && entityLiving instanceof EntityPlayer && !worldIn.isRemote) {
             EntityPlayer player = (EntityPlayer) entityLiving;
             int areaPlus = areaOfEffect - 1; //First block already added
-            for (BlockPos.MutableBlockPos extraPos : BlockPos.getAllInBoxMutable(pos.add(-areaPlus, -areaPlus, -areaPlus), pos.add(areaPlus, areaPlus, areaPlus)))
-            {
+            for (BlockPos.MutableBlockPos extraPos : BlockPos.getAllInBoxMutable(pos.add(-areaPlus, -areaPlus, -areaPlus), pos.add(areaPlus, areaPlus, areaPlus))) {
                 IBlockState st = worldIn.getBlockState(extraPos);
-                if (!extraPos.equals(pos) && !worldIn.isAirBlock(extraPos) && canHarvestBlock(st))
-                {
+                if (!extraPos.equals(pos) && !worldIn.isAirBlock(extraPos) && canHarvestBlock(st)) {
                     st.getBlock().onPlayerDestroy(worldIn, extraPos, st);
                     st.getBlock().harvestBlock(worldIn, player, extraPos, st, worldIn.getTileEntity(extraPos), stack);
                     worldIn.setBlockToAir(extraPos);
@@ -314,11 +293,9 @@ public class ItemMetalTool extends ItemMetal
     }
 
     @Override
-    public boolean canHarvestBlock(IBlockState state)
-    {
+    public boolean canHarvestBlock(IBlockState state) {
         Material material = state.getMaterial();
-        switch (type)
-        {
+        switch (type) {
             case AXE:
                 return material == Material.WOOD || material == Material.PLANTS || material == Material.VINE;
             case PICK:
@@ -337,23 +314,19 @@ public class ItemMetalTool extends ItemMetal
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean isFull3D()
-    {
+    public boolean isFull3D() {
         return true;
     }
 
     @Override
-    public int getItemEnchantability()
-    {
+    public int getItemEnchantability() {
         return material.getEnchantability();
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack)
-    {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
         Multimap<String, AttributeModifier> multimap = HashMultimap.create();
-        if (slot == EntityEquipmentSlot.MAINHAND)
-        {
+        if (slot == EntityEquipmentSlot.MAINHAND) {
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", attackDamage, 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", attackSpeed, 0));
         }
@@ -361,11 +334,9 @@ public class ItemMetalTool extends ItemMetal
     }
 
     @Override
-    public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player)
-    {
+    public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
         //This stops swords and other weapons breaking blocks in creative
-        switch (type)
-        {
+        switch (type) {
             case SWORD:
             case JAVELIN:
             case MACE:
@@ -376,12 +347,9 @@ public class ItemMetalTool extends ItemMetal
     }
 
     @Override
-    public boolean canHarvestBlock(IBlockState state, ItemStack stack)
-    {
-        for (String type : getToolClasses(stack))
-        {
-            if (state.getBlock().isToolEffective(type, state))
-            {
+    public boolean canHarvestBlock(IBlockState state, ItemStack stack) {
+        for (String type : getToolClasses(stack)) {
+            if (state.getBlock().isToolEffective(type, state)) {
                 return true;
             }
         }
@@ -389,31 +357,24 @@ public class ItemMetalTool extends ItemMetal
     }
 
     @Override
-    public boolean canApplyAtEnchantingTable(@Nonnull ItemStack stack, @Nonnull Enchantment enchantment)
-    {
-        if (enchantment.type == EnumEnchantmentType.WEAPON)
-        {
+    public boolean canApplyAtEnchantingTable(@Nonnull ItemStack stack, @Nonnull Enchantment enchantment) {
+        if (enchantment.type == EnumEnchantmentType.WEAPON) {
             return isWeapon();
-        }
-        else if (enchantment.type == EnumEnchantmentType.DIGGER)
-        {
+        } else if (enchantment.type == EnumEnchantmentType.DIGGER) {
             return isTool();
         }
         return super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
     @Override
-    public boolean canStack(ItemStack stack)
-    {
+    public boolean canStack(ItemStack stack) {
         return false;
     }
 
-    public double getAttackDamage() { return this.attackDamage; }
+    public double getAttackDamage() {return this.attackDamage;}
 
-    private boolean isWeapon()
-    {
-        switch (type)
-        {
+    private boolean isWeapon() {
+        switch (type) {
             case AXE:
             case SWORD:
             case MACE:
@@ -426,10 +387,8 @@ public class ItemMetalTool extends ItemMetal
         }
     }
 
-    private boolean isTool()
-    {
-        switch (type)
-        {
+    private boolean isTool() {
+        switch (type) {
             case PICK:
             case HAMMER:
             case KNIFE:

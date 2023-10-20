@@ -1,49 +1,18 @@
 package tfcflorae.world.worldgen.soil;
 
-import java.util.Arrays;
-import java.util.Random;
-
-import net.minecraft.block.BlockColored;
+import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.fml.common.IWorldGenerator;
-import net.minecraftforge.registries.ForgeRegistry;
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.types.DefaultRocks;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
-import net.dries007.tfc.world.classic.genlayers.datalayers.ph.GenPHLayer;
-
 import tfcflorae.ConfigTFCF;
-import tfcflorae.TFCFlorae;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
-import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
-public class WorldGenSoil implements IWorldGenerator
-{
+import java.util.Random;
+
+public class WorldGenSoil implements IWorldGenerator {
     public static final float RAINFALL_SAND = 75;
     public static final float RAINFALL_SAND_SANDY_MIX = 125;
     public static final float RAINFALL_SANDY = 200; // Upper thresholds
@@ -56,14 +25,12 @@ public class WorldGenSoil implements IWorldGenerator
     public final int yOffset = 112;
     public final int[] seaLevelOffsetMap = new int[256];
 
-	@Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
-    {
+    @Override
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         if (!(chunkGenerator instanceof ChunkGenTFC)) return;
         final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-        if (ConfigTFCF.General.WORLD.enableAllBlockTypes)
-        {
+        if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
             /*if (ConfigTFCF.General.WORLD.enablePodzolGen)
             {
                 BlockPos pos = world.getTopSolidOrLiquidBlock(chunkBlockPos);

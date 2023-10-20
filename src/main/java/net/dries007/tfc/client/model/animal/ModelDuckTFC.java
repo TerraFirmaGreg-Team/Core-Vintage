@@ -5,9 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityDuckTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +14,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityDuckTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelDuckTFC
@@ -25,8 +24,7 @@ import net.dries007.tfc.objects.entity.animal.EntityDuckTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelDuckTFC extends ModelBase
-{
+public class ModelDuckTFC extends ModelBase {
     public ModelRenderer bill;
     public ModelRenderer head;
     public ModelRenderer neck;
@@ -50,8 +48,7 @@ public class ModelDuckTFC extends ModelBase
     public ModelRenderer feetR;
     public ModelRenderer feetL;
 
-    public ModelDuckTFC()
-    {
+    public ModelDuckTFC() {
         textureWidth = 64;
         textureHeight = 32;
 
@@ -177,8 +174,7 @@ public class ModelDuckTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
         EntityDuckTFC duck = ((EntityDuckTFC) entity);
@@ -206,8 +202,7 @@ public class ModelDuckTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
         this.neck.rotateAngleX = -(par5 / (180F / (float) Math.PI));
         this.neck.rotateAngleY = par4 / (180F / (float) Math.PI);
         this.legR1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
@@ -226,8 +221,7 @@ public class ModelDuckTFC extends ModelBase
 
     }
 
-    private void setRotateAngle(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotateAngle(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

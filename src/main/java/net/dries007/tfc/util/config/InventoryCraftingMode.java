@@ -5,16 +5,14 @@
 
 package net.dries007.tfc.util.config;
 
-public enum InventoryCraftingMode
-{
+public enum InventoryCraftingMode {
     DISABLED("Disabled"),
     ENABLED("Enabled - Needs Workbench"),
     ALWAYS("Always");
 
     private final String name;
 
-    InventoryCraftingMode(String name)
-    {
+    InventoryCraftingMode(String name) {
         this.name = name;
     }
 
@@ -22,8 +20,7 @@ public enum InventoryCraftingMode
      * Shows this text in config instead of the enum name
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return name;
     }
 }

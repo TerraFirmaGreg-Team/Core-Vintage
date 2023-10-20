@@ -1,7 +1,6 @@
 package tfcflorae.objects;
 
-public enum PowderTFCF
-{
+public enum PowderTFCF {
     PEARL,
     BLACK_PEARL,
 }

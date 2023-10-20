@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityPigTFC;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,19 +15,17 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityPigTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelPigTFC extends ModelQuadruped
-{
+public class ModelPigTFC extends ModelQuadruped {
     private final ModelRenderer tusk1;
     private final ModelRenderer tusk2;
     private final ModelRenderer snout;
 
-    public ModelPigTFC()
-    {
+    public ModelPigTFC() {
         super(6, 0);
         this.head.setTextureOffset(16, 16).addBox(-2.0F, 0.0F, -9.0F, 4, 3, 1, 0);
         this.childYOffset = 4.0F;
@@ -50,18 +47,15 @@ public class ModelPigTFC extends ModelQuadruped
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         EntityPigTFC pig = ((EntityPigTFC) entity);
 
         float percent = (float) pig.getPercentToAdulthood();
         float ageScale = 2.0F - percent;
 
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
-        if (pig.getGender() == EntityAnimalTFC.Gender.MALE)
-        {
-            if (!pig.isChild())
-            {
+        if (pig.getGender() == EntityAnimalTFC.Gender.MALE) {
+            if (!pig.isChild()) {
                 tusk1.isHidden = false;
                 tusk2.isHidden = false;
             }
@@ -81,8 +75,7 @@ public class ModelPigTFC extends ModelQuadruped
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
         tusk1.isHidden = true;
         tusk2.isHidden = true;
         this.head.rotateAngleX = par5 / (180F / (float) Math.PI);

@@ -8,9 +8,8 @@ package net.dries007.tfc.client.model.animal;
 //Made with Blockbench
 //Paste this code into your mod.
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityLionTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -19,8 +18,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityLionTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelLionTFC
@@ -29,8 +28,7 @@ import net.dries007.tfc.objects.entity.animal.EntityLionTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelLionTFC extends ModelBase
-{
+public class ModelLionTFC extends ModelBase {
     public ModelRenderer frontBodyM;
     public ModelRenderer backBodyM;
     public ModelRenderer mane2;
@@ -69,8 +67,7 @@ public class ModelLionTFC extends ModelBase
     public ModelRenderer neck;
 
 
-    public ModelLionTFC()
-    {
+    public ModelLionTFC() {
         textureWidth = 88;
         textureHeight = 88;
 
@@ -240,8 +237,7 @@ public class ModelLionTFC extends ModelBase
 
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
         EntityLionTFC lion = ((EntityLionTFC) entity);
@@ -249,8 +245,7 @@ public class ModelLionTFC extends ModelBase
         float percent = (float) lion.getPercentToAdulthood();
         float ageScale = 2.0F - percent;
 
-        if (lion.getGender() == EntityAnimalTFC.Gender.MALE)
-        {
+        if (lion.getGender() == EntityAnimalTFC.Gender.MALE) {
             earFL.isHidden = true;
             earFR.isHidden = true;
             earML.isHidden = false;
@@ -262,21 +257,16 @@ public class ModelLionTFC extends ModelBase
             mane2.isHidden = false;
             mane3.isHidden = false;
 
-            if (percent < 0.6)
-            {
+            if (percent < 0.6) {
                 mane1.isHidden = true;
                 mane2.isHidden = true;
                 mane3.isHidden = true;
-            }
-            else if (percent < 0.8)
-            {
+            } else if (percent < 0.8) {
                 mane1.isHidden = false;
                 mane2.isHidden = true;
                 mane3.isHidden = true;
             }
-        }
-        else
-        {
+        } else {
             earFL.isHidden = false;
             earFR.isHidden = false;
             earML.isHidden = true;
@@ -311,22 +301,16 @@ public class ModelLionTFC extends ModelBase
 
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
         EntityLionTFC lion = ((EntityLionTFC) ent);
         int mouthTicks = lion.getMouthTicks();
         float mouthAngle;
 
-        if (mouthTicks >= 1 && mouthTicks < 15)
-        {
+        if (mouthTicks >= 1 && mouthTicks < 15) {
             mouthAngle = ((float) Math.PI / 3f) * ((float) mouthTicks / 20f);
-        }
-        else if (mouthTicks >= 15 && mouthTicks < 30)
-        {
+        } else if (mouthTicks >= 15 && mouthTicks < 30) {
             mouthAngle = ((float) Math.PI / 3f) * (1f - ((float) mouthTicks / 20f));
-        }
-        else
-        {
+        } else {
             mouthAngle = 0;
         }
 
@@ -343,8 +327,7 @@ public class ModelLionTFC extends ModelBase
         mane3.isHidden = false;
     }
 
-    public void setRotation(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotation(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

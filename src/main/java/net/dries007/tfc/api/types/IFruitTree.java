@@ -5,21 +5,19 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.util.IFruitTreeGenerator;
+import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.util.IFruitTreeGenerator;
-import net.dries007.tfc.util.calendar.Month;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
-public interface IFruitTree
-{
+public interface IFruitTree {
     /**
      * @return the minimum time the tree will take to grow one trunk/fruit ripe (in hours)
      */
@@ -77,8 +75,7 @@ public interface IFruitTree
      * Return the tree generator used to generate this fruit tree.
      */
     @Nonnull
-    default IFruitTreeGenerator getGenerator()
-    {
+    default IFruitTreeGenerator getGenerator() {
         return IFruitTreeGenerator.DEFAULT;
     }
 

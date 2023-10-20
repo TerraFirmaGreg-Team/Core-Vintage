@@ -5,40 +5,34 @@
 
 package net.dries007.tfc.compat.waila.providers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.te.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 
-public class PitKilnProvider implements IWailaBlock
-{
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class PitKilnProvider implements IWailaBlock {
     @Nonnull
     @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
+    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
         TEPitKiln te = Helpers.getTE(world, pos, TEPitKiln.class);
-        if (te != null)
-        {
+        if (te != null) {
             boolean isLit = te.isLit();
 
-            if (isLit)
-            {
+            if (isLit) {
                 long remainingTicks = ConfigTFC.Devices.PIT_KILN.ticks - (CalendarTFC.PLAYER_TIME.getTicks() - te.getLitTick());
-                switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode)
-                {
+                switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
                     case NONE:
                         break;
                     case TICKS:
@@ -53,23 +47,16 @@ public class PitKilnProvider implements IWailaBlock
                         currentTooltip.add(new TextComponentTranslation("waila.tfc.devices.minutes_remaining", remainingMinutes).getFormattedText());
                         break;
                 }
-            }
-            else
-            {
+            } else {
                 int straw = te.getStrawCount();
                 int logs = te.getLogCount();
-                if (straw == 8 && logs == 8)
-                {
+                if (straw == 8 && logs == 8) {
                     currentTooltip.add(new TextComponentTranslation("waila.tfc.pitkiln.unlit").getFormattedText());
-                }
-                else
-                {
-                    if (straw < 8)
-                    {
+                } else {
+                    if (straw < 8) {
                         currentTooltip.add(new TextComponentTranslation("waila.tfc.pitkiln.straw", 8 - straw).getFormattedText());
                     }
-                    if (logs < 8)
-                    {
+                    if (logs < 8) {
                         currentTooltip.add(new TextComponentTranslation("waila.tfc.pitkiln.logs", 8 - logs).getFormattedText());
                     }
                 }
@@ -80,8 +67,7 @@ public class PitKilnProvider implements IWailaBlock
 
     @Nonnull
     @Override
-    public List<Class<?>> getLookupClass()
-    {
+    public List<Class<?>> getLookupClass() {
         return Collections.singletonList(TEPitKiln.class);
     }
 }

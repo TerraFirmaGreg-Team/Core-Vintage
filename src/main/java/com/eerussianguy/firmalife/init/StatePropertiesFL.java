@@ -5,8 +5,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.util.EnumFacing;
 
-public class StatePropertiesFL
-{
+public class StatePropertiesFL {
     public static final PropertyBool CURED = PropertyBool.create("cured");
     public static final PropertyBool GROWN = PropertyBool.create("grown");
     public static final PropertyBool CAN_GROW = PropertyBool.create("can_grow");

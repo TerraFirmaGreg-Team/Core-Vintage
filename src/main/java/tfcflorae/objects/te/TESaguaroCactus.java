@@ -1,29 +1,20 @@
 package tfcflorae.objects.te;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.dries007.tfc.objects.te.TEBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 
-import net.dries007.tfc.objects.te.TEBase;
+import javax.annotation.Nonnull;
 
-public class TESaguaroCactus extends TEBase
-{
+public class TESaguaroCactus extends TEBase {
+    private final boolean[] faces;
     private boolean horizontal;
     private EnumFacing facing;
-    private final boolean[] faces;
     private boolean isCorrect = false;
 
-    public TESaguaroCactus()
-    {
+    public TESaguaroCactus() {
         this.faces = new boolean[6];
         this.horizontal = false;
         this.facing = EnumFacing.NORTH;
@@ -35,62 +26,50 @@ public class TESaguaroCactus extends TEBase
      * @param face The face to check
      * @return true if present
      */
-    public boolean getFace(EnumFacing face)
-    {
+    public boolean getFace(EnumFacing face) {
         return faces[face.getIndex()];
     }
 
-    public boolean getHorizontal()
-    {
+    public boolean getHorizontal() {
         return horizontal;
     }
 
-    public EnumFacing getFacing()
-    {
+    public void setHorizontal(boolean value) {
+        if (!world.isRemote) this.horizontal = value;
+    }
+
+    public EnumFacing getFacing() {
         return facing;
     }
 
-    public boolean isSet()
-    {
+    public void setFacing(EnumFacing facing) {
+        if (!world.isRemote) this.facing = facing;
+    }
+
+    public boolean isSet() {
         return isCorrect;
     }
 
-    public void setFace(EnumFacing facing, boolean value)
-    {
-        if (!world.isRemote)
-        {
+    public void setFace(EnumFacing facing, boolean value) {
+        if (!world.isRemote) {
             faces[facing.getIndex()] = value;
             markForBlockUpdate();
         }
     }
 
-    public void set()
-    {
+    public void set() {
         isCorrect = true;
     }
 
-    public void setHorizontal(boolean value)
-    {
-        if (!world.isRemote) this.horizontal = value;
-    }
-
-    public void setFacing(EnumFacing facing)
-    {
-        if (!world.isRemote) this.facing = facing;
-    }
-
     @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
-    {
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
         markForBlockUpdate();
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
-        for (EnumFacing face : EnumFacing.values())
-        {
+    public void readFromNBT(NBTTagCompound nbt) {
+        for (EnumFacing face : EnumFacing.values()) {
             faces[face.getIndex()] = nbt.getBoolean(face.getName());
         }
         horizontal = nbt.getBoolean("HORIZONTAL");
@@ -102,10 +81,8 @@ public class TESaguaroCactus extends TEBase
 
     @Override
     @Nonnull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-    {
-        for (EnumFacing face : EnumFacing.values())
-        {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        for (EnumFacing face : EnumFacing.values()) {
             nbt.setBoolean(face.getName(), faces[face.getIndex()]);
         }
         nbt.setBoolean("HORIZONTAL", horizontal);

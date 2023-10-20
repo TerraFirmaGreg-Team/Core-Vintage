@@ -5,12 +5,10 @@
 
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -32,14 +30,14 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
-public class BlockFruitTreeBranch extends Block implements IGrowingPlant
-{
+public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     /* Facing of this branch */
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
 
@@ -68,16 +66,9 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant
 
 
     private static final Map<IFruitTree, BlockFruitTreeBranch> MAP = new HashMap<>();
-
-    public static BlockFruitTreeBranch get(IFruitTree tree)
-    {
-        return MAP.get(tree);
-    }
-
     private final IFruitTree tree;
 
-    public BlockFruitTreeBranch(IFruitTree tree)
-    {
+    public BlockFruitTreeBranch(IFruitTree tree) {
         super(Material.WOOD, Material.WOOD.getMaterialMapColor());
         if (MAP.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
         setHardness(2.0F);
@@ -88,67 +79,53 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(NORTH, 0).withProperty(EAST, 0).withProperty(SOUTH, 0).withProperty(WEST, 0).withProperty(UP, 0));
     }
 
+    public static BlockFruitTreeBranch get(IFruitTree tree) {
+        return MAP.get(tree);
+    }
+
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isTopSolid(IBlockState state)
-    {
+    public boolean isTopSolid(IBlockState state) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isFullBlock(IBlockState state)
-    {
+    public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return 0;
     }
 
     @SuppressWarnings("deprecation")
     @Override
     @Nonnull
-    public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
+    public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         int connectedValue;
         EnumFacing face = getFacing(worldIn, pos);
-        if (face == null || face == EnumFacing.UP || face == EnumFacing.DOWN)
-        {
+        if (face == null || face == EnumFacing.UP || face == EnumFacing.DOWN) {
             // Vertical branch
             state = state.withProperty(FACING, EnumFacing.UP);
             connectedValue = 1;
-        }
-        else
-        {
+        } else {
             // Horizontal branch
             state = state.withProperty(FACING, face);
             connectedValue = 2;
         }
-        for (EnumFacing facing : EnumFacing.VALUES)
-        {
-            if (worldIn.getBlockState(pos.offset(facing)).getBlock() instanceof BlockFruitTreeLeaves)
-            {
-                if (facing == EnumFacing.NORTH)
-                {
+        for (EnumFacing facing : EnumFacing.VALUES) {
+            if (worldIn.getBlockState(pos.offset(facing)).getBlock() instanceof BlockFruitTreeLeaves) {
+                if (facing == EnumFacing.NORTH) {
                     state = state.withProperty(NORTH, connectedValue);
-                }
-                else if (facing == EnumFacing.SOUTH)
-                {
+                } else if (facing == EnumFacing.SOUTH) {
                     state = state.withProperty(SOUTH, connectedValue);
-                }
-                else if (facing == EnumFacing.EAST)
-                {
+                } else if (facing == EnumFacing.EAST) {
                     state = state.withProperty(EAST, connectedValue);
-                }
-                else if (facing == EnumFacing.WEST)
-                {
+                } else if (facing == EnumFacing.WEST) {
                     state = state.withProperty(WEST, connectedValue);
-                }
-                else if (facing == EnumFacing.UP)
-                {
+                } else if (facing == EnumFacing.UP) {
                     state = state.withProperty(UP, connectedValue);
                 }
             }
@@ -158,34 +135,29 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isBlockNormalCube(IBlockState state)
-    {
+    public boolean isBlockNormalCube(IBlockState state) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isNormalCube(IBlockState state)
-    {
+    public boolean isNormalCube(IBlockState state) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isFullCube(IBlockState state)
-    {
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
     @Nonnull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         state = getActualState(state, source, pos);
         AxisAlignedBB finalAABB;
-        switch (state.getValue(FACING))
-        {
+        switch (state.getValue(FACING)) {
             case NORTH:
                 finalAABB = TRUNK_N_AABB;
                 break;
@@ -201,20 +173,16 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant
             default:
                 finalAABB = TRUNK_U_AABB;
         }
-        if (state.getValue(NORTH) > 0)
-        {
+        if (state.getValue(NORTH) > 0) {
             finalAABB = finalAABB.union(CONNECTION_N_AABB);
         }
-        if (state.getValue(EAST) > 0)
-        {
+        if (state.getValue(EAST) > 0) {
             finalAABB = finalAABB.union(CONNECTION_E_AABB);
         }
-        if (state.getValue(SOUTH) > 0)
-        {
+        if (state.getValue(SOUTH) > 0) {
             finalAABB = finalAABB.union(CONNECTION_S_AABB);
         }
-        if (state.getValue(WEST) > 0)
-        {
+        if (state.getValue(WEST) > 0) {
             finalAABB = finalAABB.union(CONNECTION_W_AABB);
         }
         return finalAABB;
@@ -223,44 +191,36 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant
     @Override
     @Nonnull
     @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        if (getFacing(worldIn, pos) == null)
-        {
+        if (getFacing(worldIn, pos) == null) {
             worldIn.setBlockToAir(pos);
         }
     }
 
     @Override
     @Nonnull
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.AIR;
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
-    {
+    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         ItemStack stack = player.getHeldItemMainhand();
-        if (stack.getItem().getToolClasses(stack).contains("axe") || stack.getItem().getToolClasses(stack).contains("saw"))
-        {
-            if (!worldIn.isRemote && RANDOM.nextBoolean())
-            {
+        if (stack.getItem().getToolClasses(stack).contains("axe") || stack.getItem().getToolClasses(stack).contains("saw")) {
+            if (!worldIn.isRemote && RANDOM.nextBoolean()) {
                 ItemStack dropStack = new ItemStack(BlockFruitTreeSapling.get(tree));
                 InventoryHelper.spawnItemStack(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, dropStack);
             }
@@ -270,43 +230,35 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant
 
     @Override
     @Nonnull
-    public BlockStateContainer createBlockState()
-    {
+    public BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING, NORTH, EAST, SOUTH, WEST, UP);
     }
 
     @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos)
-    {
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
-    {
+    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return false;
     }
 
     @Override
     @Nonnull
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(BlockFruitTreeSapling.get(tree));
     }
 
     @Nonnull
-    public IFruitTree getTree()
-    {
+    public IFruitTree getTree() {
         return tree;
     }
 
-    private EnumFacing getFacing(IBlockAccess worldIn, BlockPos pos)
-    {
-        for (EnumFacing facing : EnumFacing.VALUES)
-        {
-            if (worldIn.getBlockState(pos.offset(facing)).getBlock() == BlockFruitTreeTrunk.get(tree))
-            {
+    private EnumFacing getFacing(IBlockAccess worldIn, BlockPos pos) {
+        for (EnumFacing facing : EnumFacing.VALUES) {
+            if (worldIn.getBlockState(pos.offset(facing)).getBlock() == BlockFruitTreeTrunk.get(tree)) {
                 return facing.getOpposite();
             }
         }
@@ -314,13 +266,11 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant
     }
 
     @Override
-    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos)
-    {
+    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         float temp = ClimateTFC.getActualTemp(world, pos);
         float rainfall = ChunkDataTFC.getRainfall(world, pos);
         boolean canGrow = tree.isValidForGrowth(temp, rainfall);
-        if (canGrow)
-        {
+        if (canGrow) {
             return GrowthStatus.GROWING;
         }
         return GrowthStatus.NOT_GROWING;

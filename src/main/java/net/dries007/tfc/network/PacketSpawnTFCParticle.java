@@ -5,17 +5,15 @@
 
 package net.dries007.tfc.network;
 
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.client.particle.TFCParticles;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.particle.TFCParticles;
-
-public class PacketSpawnTFCParticle implements IMessage
-{
+public class PacketSpawnTFCParticle implements IMessage {
     private int particleID;
     private double x, y, z;
     private double speedX, speedY, speedZ;
@@ -23,12 +21,10 @@ public class PacketSpawnTFCParticle implements IMessage
 
     @SuppressWarnings("unused")
     @Deprecated
-    public PacketSpawnTFCParticle()
-    {
+    public PacketSpawnTFCParticle() {
     }
 
-    public PacketSpawnTFCParticle(TFCParticles particle, double x, double y, double z, double speedX, double speedY, double speedZ, int duration)
-    {
+    public PacketSpawnTFCParticle(TFCParticles particle, double x, double y, double z, double speedX, double speedY, double speedZ, int duration) {
         this.particleID = particle.ordinal();
         this.x = x;
         this.y = y;
@@ -40,8 +36,7 @@ public class PacketSpawnTFCParticle implements IMessage
     }
 
     @Override
-    public void fromBytes(ByteBuf buffer)
-    {
+    public void fromBytes(ByteBuf buffer) {
         this.particleID = buffer.readInt();
         this.x = buffer.readDouble();
         this.y = buffer.readDouble();
@@ -53,8 +48,7 @@ public class PacketSpawnTFCParticle implements IMessage
     }
 
     @Override
-    public void toBytes(ByteBuf byteBuf)
-    {
+    public void toBytes(ByteBuf byteBuf) {
         byteBuf.writeInt(particleID);
         byteBuf.writeDouble(x);
         byteBuf.writeDouble(y);
@@ -65,15 +59,12 @@ public class PacketSpawnTFCParticle implements IMessage
         byteBuf.writeInt(duration);
     }
 
-    public static class Handler implements IMessageHandler<PacketSpawnTFCParticle, IMessage>
-    {
+    public static class Handler implements IMessageHandler<PacketSpawnTFCParticle, IMessage> {
         @Override
-        public IMessage onMessage(PacketSpawnTFCParticle message, MessageContext ctx)
-        {
+        public IMessage onMessage(PacketSpawnTFCParticle message, MessageContext ctx) {
             TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                 EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-                if (player != null)
-                {
+                if (player != null) {
                     TFCParticles particle = TFCParticles.values()[message.particleID];
                     particle.spawn(player.getEntityWorld(), message.x, message.y, message.z, message.speedX, message.speedY, message.speedZ, message.duration);
                 }

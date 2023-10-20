@@ -19,13 +19,11 @@ import net.minecraft.world.World;
  * @see InteractionManager
  */
 @FunctionalInterface
-public interface IRightClickItemAction extends IRightClickBlockAction
-{
+public interface IRightClickItemAction extends IRightClickBlockAction {
     EnumActionResult onRightClickItem(World worldIn, EntityPlayer playerIn, EnumHand handIn);
 
     @Override
-    default EnumActionResult onRightClickBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing direction, float hitX, float hitY, float hitZ)
-    {
+    default EnumActionResult onRightClickBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing direction, float hitX, float hitY, float hitZ) {
         return onRightClickItem(worldIn, player, hand);
     }
 }

@@ -1,18 +1,16 @@
 package com.eerussianguy.firmalife.init;
 
-import net.minecraft.item.Item;
-
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
+import net.minecraft.item.Item;
 
 import static com.eerussianguy.firmalife.init.FoodDataFL.*;
 
 /**
  * This is an easy way to wrap all the TFC fruits with our data
  */
-public enum Fruit
-{
+public enum Fruit {
     BANANA(ItemFoodTFC.get(Food.BANANA), true, DRIED_FRUIT_DECAY),
     BLACKBERRY(ItemFoodTFC.get(Food.BLACKBERRY), true, DRIED_FRUIT_CATEGORY),
     BLUEBERRY(ItemFoodTFC.get(Food.BLUEBERRY), true, DRIED_FRUIT_CATEGORY),
@@ -39,26 +37,22 @@ public enum Fruit
     private final boolean dry;
     private final FoodData driedData;
 
-    Fruit(Item fruit, boolean dry, FoodData driedData)
-    {
+    Fruit(Item fruit, boolean dry, FoodData driedData) {
         this.fruit = fruit;
         this.dry = dry;
         this.driedData = driedData;
     }
 
-    public Item getFruit()
-    {
+    public Item getFruit() {
         return this.fruit;
     }
 
-    public boolean canDry()
-    {
+    public boolean canDry() {
         return this.dry;
     }
 
 
-    public FoodData getDriedData()
-    {
+    public FoodData getDriedData() {
         return this.driedData;
     }
 

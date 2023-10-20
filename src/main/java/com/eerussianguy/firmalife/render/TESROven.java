@@ -1,7 +1,6 @@
 package com.eerussianguy.firmalife.render;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import com.eerussianguy.firmalife.te.TEOven;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import com.eerussianguy.firmalife.te.TEOven;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
 import static com.eerussianguy.firmalife.te.TEOven.*;
@@ -22,19 +21,15 @@ import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 
 @ParametersAreNonnullByDefault
 @SideOnly(Side.CLIENT)
-public class TESROven extends TileEntitySpecialRenderer<TEOven>
-{
+public class TESROven extends TileEntitySpecialRenderer<TEOven> {
     @Override
-    public void render(TEOven te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TEOven te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
-        if (te.hasWorld())
-        {
+        if (te.hasWorld()) {
             IBlockState state = te.getWorld().getBlockState(te.getPos());
             IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (cap != null)
-            {
+            if (cap != null) {
                 int rotation = te.getBlockMetadata();
                 if (state.getValue(LIT))
                     rotation -= 4;
@@ -47,8 +42,7 @@ public class TESROven extends TileEntitySpecialRenderer<TEOven>
                 GlStateManager.rotate(90f, 1f, 0f, 0f);
                 GlStateManager.rotate(90f * rotation, 0f, 0f, 1f);
 
-                switch (rotation)
-                {
+                switch (rotation) {
                     case 0: //south
                         GlStateManager.translate(0.5f, 1.3f, 0f);
                     case 1: //west
@@ -61,18 +55,15 @@ public class TESROven extends TileEntitySpecialRenderer<TEOven>
                 ItemStack fuel2 = cap.getStackInSlot(SLOT_FUEL_2);
                 ItemStack main = cap.getStackInSlot(SLOT_MAIN);
                 RenderItem renderer = Minecraft.getMinecraft().getRenderItem();
-                if (!fuel1.isEmpty())
-                {
+                if (!fuel1.isEmpty()) {
                     renderer.renderItem(fuel1, ItemCameraTransforms.TransformType.FIXED);
                 }
                 GlStateManager.translate(-1f, 0f, 0f);
-                if (!fuel2.isEmpty())
-                {
+                if (!fuel2.isEmpty()) {
                     renderer.renderItem(fuel2, ItemCameraTransforms.TransformType.FIXED);
                 }
                 GlStateManager.translate(0.5f, 1.8f, 0f);
-                if (!main.isEmpty())
-                {
+                if (!main.isEmpty()) {
                     renderer.renderItem(main, ItemCameraTransforms.TransformType.FIXED);
                 }
                 GlStateManager.popMatrix();

@@ -1,69 +1,59 @@
 package com.eerussianguy.firmalife.player;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class PlayerDataFL implements ICapabilitySerializable<NBTTagCompound>, IPlayerDataFL
-{
+public class PlayerDataFL implements ICapabilitySerializable<NBTTagCompound>, IPlayerDataFL {
     private long nutted;
     private BlockPos nutPosition;
 
-    public PlayerDataFL()
-    {
+    public PlayerDataFL() {
         this.nutted = 0;
         this.nutPosition = new BlockPos(0, 0, 0);
     }
 
     @Override
-    public void setNuttedTime()
-    {
+    public void setNuttedTime() {
         nutted = CalendarTFC.CALENDAR_TIME.getTicks();
     }
 
     @Override
-    public long getNuttedTime()
-    {
+    public long getNuttedTime() {
         return nutted;
     }
 
     @Override
-    public void setNutPosition(BlockPos pos)
-    {
+    public void setNutPosition(BlockPos pos) {
         nutPosition = pos;
     }
 
     @Override
-    public int getNutDistance(BlockPos pos)
-    {
+    public int getNutDistance(BlockPos pos) {
         return (int) Math.sqrt(nutPosition.distanceSq(pos));
     }
 
     @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
-    {
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityPlayerData.CAPABILITY;
     }
 
     @Nullable
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
-    {
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
         return capability == CapPlayerDataFL.CAPABILITY ? (T) this : null;
     }
 
     @Override
-    public NBTTagCompound serializeNBT()
-    {
+    public NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setLong("nutted", nutted);
         nbt.setLong("pos", nutPosition.toLong());
@@ -71,10 +61,8 @@ public class PlayerDataFL implements ICapabilitySerializable<NBTTagCompound>, IP
     }
 
     @Override
-    public void deserializeNBT(NBTTagCompound nbt)
-    {
-        if (nbt != null)
-        {
+    public void deserializeNBT(NBTTagCompound nbt) {
+        if (nbt != null) {
             nutted = nbt.getLong("nutted");
             nutPosition = BlockPos.fromLong(nbt.getLong("pos"));
         }

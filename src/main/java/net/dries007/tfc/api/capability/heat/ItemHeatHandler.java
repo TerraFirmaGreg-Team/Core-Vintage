@@ -5,23 +5,21 @@
 
 package net.dries007.tfc.api.capability.heat;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * This is an implementation of ItemHeat that automatically cools down over time
  * Prefer extending or using this than implementing IItemHeat directly
  * Exceptions if you want to extend another capability object (see SmallVessel) but you should still implement this functionality somewhere
  */
-public class ItemHeatHandler implements ICapabilitySerializable<NBTTagCompound>, IItemHeat
-{
+public class ItemHeatHandler implements ICapabilitySerializable<NBTTagCompound>, IItemHeat {
     // These are "constants". Some implementations will want to change these based on other factors. (See ItemMold)
     protected float heatCapacity;
     protected float meltTemp;
@@ -38,8 +36,7 @@ public class ItemHeatHandler implements ICapabilitySerializable<NBTTagCompound>,
      * @param heatCapacity The heat capacity
      * @param meltTemp     The melting point
      */
-    public ItemHeatHandler(@Nullable NBTTagCompound nbt, float heatCapacity, float meltTemp)
-    {
+    public ItemHeatHandler(@Nullable NBTTagCompound nbt, float heatCapacity, float meltTemp) {
         this.heatCapacity = heatCapacity;
         this.meltTemp = meltTemp;
 
@@ -55,8 +52,7 @@ public class ItemHeatHandler implements ICapabilitySerializable<NBTTagCompound>,
      * @return The current temperature
      */
     @Override
-    public float getTemperature()
-    {
+    public float getTemperature() {
         return CapabilityItemHeat.adjustTemp(temperature, heatCapacity, CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick);
     }
 
@@ -66,57 +62,47 @@ public class ItemHeatHandler implements ICapabilitySerializable<NBTTagCompound>,
      * @param temperature the temperature to set. Between 0 - 1600
      */
     @Override
-    public void setTemperature(float temperature)
-    {
+    public void setTemperature(float temperature) {
         this.temperature = temperature;
         this.lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
     }
 
     @Override
-    public float getHeatCapacity()
-    {
+    public float getHeatCapacity() {
         return heatCapacity;
     }
 
     @Override
-    public float getMeltTemp()
-    {
+    public float getMeltTemp() {
         return meltTemp;
     }
 
     @Override
-    public boolean isMolten()
-    {
+    public boolean isMolten() {
         return getTemperature() >= meltTemp;
     }
 
     @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
-    {
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
     }
 
     @Nullable
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
-    {
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
         return hasCapability(capability, facing) ? (T) this : null;
     }
 
     @Override
     @Nonnull
-    public NBTTagCompound serializeNBT()
-    {
+    public NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        if (getTemperature() <= 0)
-        {
+        if (getTemperature() <= 0) {
             // Reset temperature to zero
             nbt.setLong("ticks", -1);
             nbt.setFloat("heat", 0);
-        }
-        else
-        {
+        } else {
             // Serialize existing values - this is intentionally lazy (and not using the result of getTemperature())
             // Why? So we don't update the serialization unnecessarily. Important for not sending unnecessary client syncs.
             nbt.setLong("ticks", lastUpdateTick);
@@ -126,10 +112,8 @@ public class ItemHeatHandler implements ICapabilitySerializable<NBTTagCompound>,
     }
 
     @Override
-    public void deserializeNBT(@Nullable NBTTagCompound nbt)
-    {
-        if (nbt != null)
-        {
+    public void deserializeNBT(@Nullable NBTTagCompound nbt) {
+        if (nbt != null) {
             temperature = nbt.getFloat("heat");
             lastUpdateTick = nbt.getLong("ticks");
         }

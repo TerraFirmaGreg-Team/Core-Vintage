@@ -1,23 +1,10 @@
 package com.eerussianguy.firmalife.registry;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.google.common.base.CaseFormat;
-import com.google.common.collect.ImmutableList;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.registries.IForgeRegistry;
-
 import com.eerussianguy.firmalife.blocks.BlockFruitDoor;
 import com.eerussianguy.firmalife.init.*;
 import com.eerussianguy.firmalife.items.*;
+import com.google.common.base.CaseFormat;
+import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -30,14 +17,25 @@ import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.objects.items.wood.ItemWoodenBucket;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.FruitTree;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 @GameRegistry.ObjectHolder(MOD_ID)
-public class ItemsFL
-{
+public class ItemsFL {
     @GameRegistry.ObjectHolder("unfired_mallet_mold")
     public static final ItemPottery UNFIRED_MALLET_MOLD = Helpers.getNull();
     @GameRegistry.ObjectHolder("mallet_mold")
@@ -139,54 +137,45 @@ public class ItemsFL
     private static ImmutableList<ItemFruitDoor> allFruitDoors;
     private static ImmutableList<Item> unused;
 
-    public static ImmutableList<Item> getAllEasyItems()
-    {
+    public static ImmutableList<Item> getAllEasyItems() {
         return allEasyItems;
     }
 
-    public static ImmutableList<ItemFruitDoor> getAllFruitDoors() { return allFruitDoors; }
+    public static ImmutableList<ItemFruitDoor> getAllFruitDoors() {return allFruitDoors;}
 
-    public static ItemMetalMalletHead getMetalMalletHead(Metal metal) { return malletHeads.get(metal); }
+    public static ItemMetalMalletHead getMetalMalletHead(Metal metal) {return malletHeads.get(metal);}
 
-    public static Item getDriedFruit(Fruit fruit)
-    {
+    public static Item getDriedFruit(Fruit fruit) {
         return driedFruits.get(fruit);
     }
 
-    public static ItemFoodFL getFood(FoodFL food)
-    {
+    public static ItemFoodFL getFood(FoodFL food) {
         return foods.get(food);
     }
 
-    public static Item getUnused(int idx)
-    {
+    public static Item getUnused(int idx) {
         return unused.get(idx);
     }
 
 
     @SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Item> event)
-    {
+    public static void registerItems(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> r = event.getRegistry();
 
         ImmutableList.Builder<Item> easyItems = ImmutableList.builder();
         ImmutableList.Builder<ItemFruitDoor> fruitDoors = ImmutableList.builder();
         ImmutableList.Builder<Item> unu = ImmutableList.builder();
 
-        for (FoodFL food : FoodFL.values())
-        {
+        for (FoodFL food : FoodFL.values()) {
             FoodData data = food.getData();
             ItemFoodFL foodItem = new ItemFoodFL(data);
             easyItems.add(register(r, food.name().toLowerCase(), foodItem, CT_FOOD));
             OreDictionary.registerOre(convert(food.name()), foodItem);
             String[] nameOverrides = food.getNameOverrides();
-            if (nameOverrides != null)
-            {
+            if (nameOverrides != null) {
                 for (String name : nameOverrides)
                     OreDictionary.registerOre(name, foodItem);
-            }
-            else if (!food.isReplacingOres())
-            {
+            } else if (!food.isReplacingOres()) {
                 addCategories(foodItem, data);
             }
             foods.put(food, foodItem);
@@ -208,10 +197,8 @@ public class ItemsFL
         OreDictionary.registerOre("categoryMeal", pizza);
 
         //Dried Berries
-        for (Fruit fruit : Fruit.values())
-        {
-            if (fruit.canDry())
-            {
+        for (Fruit fruit : Fruit.values()) {
+            if (fruit.canDry()) {
                 ItemFoodFL dried = new ItemFoodFL(fruit.getDriedData());
                 easyItems.add(register(r, "dried_" + fruit.name().toLowerCase(), dried, CT_FOOD));
                 OreDictionary.registerOre("dried_" + fruit.name().toLowerCase(), dried);
@@ -221,8 +208,7 @@ public class ItemsFL
             }
         }
 
-        for (String grain : new String[] {"barley", "corn", "oat", "rice", "rye", "wheat"})
-        {
+        for (String grain : new String[]{"barley", "corn", "oat", "rice", "rye", "wheat"}) {
             ItemFoodFL flatbread_dough = new ItemFoodFL(FoodDataFL.DOUGH);
             easyItems.add(register(r, grain + "_flatbread_dough", flatbread_dough, CT_FOOD));
             OreDictionary.registerOre(grain + "_flatbread_dough", flatbread_dough);
@@ -279,8 +265,7 @@ public class ItemsFL
         easyItems.add(register(r, "treated_lumber", new ItemMisc(Size.SMALL, Weight.MEDIUM), CT_MISC));
         easyItems.add(register(r, "beeswax", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_FOOD));
 
-        for (int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++) {
             ItemMisc item = register(r, "unused" + i, new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT));
             easyItems.add(item);
             unu.add(item);
@@ -298,8 +283,7 @@ public class ItemsFL
             fruitDoors.add(register(r, door.getRegistryName().getPath(), new ItemFruitDoor(door), CT_DECORATIONS));
 
         for (Metal metal : TFCRegistries.METALS.getValuesCollection())
-            if (metal.isToolMetal())
-            {
+            if (metal.isToolMetal()) {
                 ItemMetalMallet mallet = register(r, metal.toString() + "_mallet", new ItemMetalMallet(metal), CT_METAL);
                 OreDictionary.registerOre("tool", mallet);
                 easyItems.add(mallet);
@@ -316,8 +300,7 @@ public class ItemsFL
         BlocksFL.getAllIBs().forEach((x) -> registerIB(r, x));
         BlocksFL.getAllInventoryIBs().forEach((x) -> easyItems.add(registerIB(r, new ItemBlock(x))));
 
-        for (StemCrop crop : StemCrop.values())
-        {
+        for (StemCrop crop : StemCrop.values()) {
             easyItems.add(register(r, "crop/seeds/" + crop.name().toLowerCase(), new ItemSeedsTFC(crop), CT_FOOD));
         }
         allEasyItems = easyItems.build();
@@ -325,13 +308,11 @@ public class ItemsFL
         unused = unu.build();
     }
 
-    private static String convert(String in)
-    {
+    private static String convert(String in) {
         return CaseFormat.UPPER_UNDERSCORE.converterTo(CaseFormat.LOWER_CAMEL).convert(in);
     }
 
-    private static void addCategories(Item foodItem, FoodData data)
-    {
+    private static void addCategories(Item foodItem, FoodData data) {
         float[] nutrients = data.getNutrients();
         if (nutrients[0] > 0)
             OreDictionary.registerOre("categoryGrain", foodItem);
@@ -343,8 +324,7 @@ public class ItemsFL
             OreDictionary.registerOre("categoryDairy", foodItem);
     }
 
-    private static ItemFruitPole registerPole(IForgeRegistry<Item> r, IFruitTree fruitTree)
-    {
+    private static ItemFruitPole registerPole(IForgeRegistry<Item> r, IFruitTree fruitTree) {
         String name = fruitTree.getName().toLowerCase();
         ItemFruitPole pole = new ItemFruitPole(fruitTree);
         ItemFruitPole entry = register(r, name + "_pole", pole, CT_MISC);
@@ -352,8 +332,7 @@ public class ItemsFL
         return entry;
     }
 
-    private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct)
-    {
+    private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
         item.setRegistryName(MOD_ID, name);
         item.setCreativeTab(ct);
         item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
@@ -361,16 +340,14 @@ public class ItemsFL
         return item;
     }
 
-    private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item)
-    {
+    private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item) {
         item.setRegistryName(MOD_ID, name);
         item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
         r.register(item);
         return item;
     }
 
-    private static <T extends ItemBlock> T registerIB(IForgeRegistry<Item> r, T item)
-    {
+    private static <T extends ItemBlock> T registerIB(IForgeRegistry<Item> r, T item) {
         item.setRegistryName(item.getBlock().getRegistryName());
         item.setCreativeTab(item.getBlock().getCreativeTab());
         r.register(item);

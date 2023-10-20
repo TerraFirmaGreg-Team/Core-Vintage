@@ -1,9 +1,8 @@
 package com.eerussianguy.firmalife.blocks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import com.eerussianguy.firmalife.te.TETurntable;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -17,25 +16,22 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import com.eerussianguy.firmalife.te.TETurntable;
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CLAY;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockTurntable extends BlockNonCube
-{
+public class BlockTurntable extends BlockNonCube {
     private static final AxisAlignedBB SHAPE = new AxisAlignedBB(4.0D / 16, 0.0D, 4.0D / 16, 12.0D / 16, 5.0D / 16, 12.0D / 16);
 
-    public BlockTurntable()
-    {
+    public BlockTurntable() {
         super(Material.IRON);
         setHardness(1.0F);
         setResistance(1.0F);
@@ -43,44 +39,32 @@ public class BlockTurntable extends BlockNonCube
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-    {
-        if (!world.isRemote && hand == EnumHand.MAIN_HAND)
-        {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
             ItemStack held = player.getHeldItem(hand);
-            if (player.isSneaking())
-            {
+            if (player.isSneaking()) {
                 TETurntable te = Helpers.getTE(world, pos, TETurntable.class);
                 if (te != null && te.hasPottery()) te.rotate();
                 return true;
             }
-            if (held.getItem() == Items.CLAY_BALL)
-            {
+            if (held.getItem() == Items.CLAY_BALL) {
                 int clay = state.getValue(CLAY);
-                if (clay < 4 && held.getCount() > 5)
-                {
+                if (clay < 4 && held.getCount() > 5) {
                     held.shrink(5);
                     world.setBlockState(pos, state.withProperty(CLAY, clay + 1));
                     return true;
                 }
-            }
-            else
-            {
+            } else {
                 TETurntable te = Helpers.getTE(world, pos, TETurntable.class);
-                if (te != null)
-                {
+                if (te != null) {
                     IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                    if (cap != null)
-                    {
+                    if (cap != null) {
                         ItemStack invStack = cap.getStackInSlot(0);
-                        if (invStack.isEmpty() && TETurntable.isPottery(held))
-                        {
+                        if (invStack.isEmpty() && TETurntable.isPottery(held)) {
                             ItemStack leftover = cap.insertItem(0, held.splitStack(1), false);
                             ItemHandlerHelper.giveItemToPlayer(player, leftover);
                             return true;
-                        }
-                        else if (!invStack.isEmpty() && held.isEmpty())
-                        {
+                        } else if (!invStack.isEmpty() && held.isEmpty()) {
                             ItemStack leftover = cap.extractItem(0, 1, false);
                             ItemHandlerHelper.giveItemToPlayer(player, leftover);
                             return true;
@@ -94,43 +78,36 @@ public class BlockTurntable extends BlockNonCube
 
     @Override
     @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(CLAY, meta);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return state.getValue(CLAY);
     }
 
     @Override
     @Nonnull
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, CLAY);
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state)
-    {
+    public boolean hasTileEntity(IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
-    {
+    public TileEntity createTileEntity(World world, IBlockState state) {
         return new TETurntable();
     }
 
     @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state)
-    {
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
         TETurntable te = Helpers.getTE(world, pos, TETurntable.class);
-        if (te != null)
-        {
+        if (te != null) {
             te.onBreakBlock(world, pos, state);
         }
         super.breakBlock(world, pos, state);
@@ -138,8 +115,7 @@ public class BlockTurntable extends BlockNonCube
 
     @Override
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return SHAPE;
     }
 }

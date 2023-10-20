@@ -5,8 +5,6 @@
 
 package net.dries007.tfc.client.model;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.PositionTextureVertex;
@@ -15,12 +13,12 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelIngot extends ModelBox
-{
+import javax.annotation.Nonnull;
+
+public class ModelIngot extends ModelBox {
     private final TexturedQuad[] quadList;
 
-    public ModelIngot(ModelRenderer renderer, int textureOffsetX, int textureOffsetY)
-    {
+    public ModelIngot(ModelRenderer renderer, int textureOffsetX, int textureOffsetY) {
         super(renderer, textureOffsetX, textureOffsetY, 0.5F, 0, 0.5F, 15, 4, 7, 0);
 
         float originX = .5f;
@@ -52,26 +50,24 @@ public class ModelIngot extends ModelBox
         int y4 = textureOffsetY + 20;
         int y5 = textureOffsetY + 28;
 
-        this.quadList[0] = new TexturedQuad(new PositionTextureVertex[] {vert5, vert1, vert2, vert6},
-            x3, y1, x4, y2, renderer.textureWidth, renderer.textureHeight); // petit
-        this.quadList[1] = new TexturedQuad(new PositionTextureVertex[] {vert0, vert4, vert7, vert3},
-            x1, y1, x2, y2, renderer.textureWidth, renderer.textureHeight); // petit
-        this.quadList[2] = new TexturedQuad(new PositionTextureVertex[] {vert5, vert4, vert0, vert1},
-            x2, y4, x3, y5, renderer.textureWidth, renderer.textureHeight); // bottom
-        this.quadList[3] = new TexturedQuad(new PositionTextureVertex[] {vert2, vert3, vert7, vert6},
-            x2, y2, x3, y3, renderer.textureWidth, renderer.textureHeight); // top
-        this.quadList[4] = new TexturedQuad(new PositionTextureVertex[] {vert1, vert0, vert3, vert2},
-            x2, y1, x3, y2, renderer.textureWidth, renderer.textureHeight); // long
-        this.quadList[5] = new TexturedQuad(new PositionTextureVertex[] {vert4, vert5, vert6, vert7},
-            x3, y4, x2, y3, renderer.textureWidth, renderer.textureHeight); // long
+        this.quadList[0] = new TexturedQuad(new PositionTextureVertex[]{vert5, vert1, vert2, vert6},
+                x3, y1, x4, y2, renderer.textureWidth, renderer.textureHeight); // petit
+        this.quadList[1] = new TexturedQuad(new PositionTextureVertex[]{vert0, vert4, vert7, vert3},
+                x1, y1, x2, y2, renderer.textureWidth, renderer.textureHeight); // petit
+        this.quadList[2] = new TexturedQuad(new PositionTextureVertex[]{vert5, vert4, vert0, vert1},
+                x2, y4, x3, y5, renderer.textureWidth, renderer.textureHeight); // bottom
+        this.quadList[3] = new TexturedQuad(new PositionTextureVertex[]{vert2, vert3, vert7, vert6},
+                x2, y2, x3, y3, renderer.textureWidth, renderer.textureHeight); // top
+        this.quadList[4] = new TexturedQuad(new PositionTextureVertex[]{vert1, vert0, vert3, vert2},
+                x2, y1, x3, y2, renderer.textureWidth, renderer.textureHeight); // long
+        this.quadList[5] = new TexturedQuad(new PositionTextureVertex[]{vert4, vert5, vert6, vert7},
+                x3, y4, x2, y3, renderer.textureWidth, renderer.textureHeight); // long
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void render(@Nonnull BufferBuilder renderer, float scale)
-    {
-        for (TexturedQuad quad : quadList)
-        {
+    public void render(@Nonnull BufferBuilder renderer, float scale) {
+        for (TexturedQuad quad : quadList) {
             quad.draw(renderer, scale);
         }
     }

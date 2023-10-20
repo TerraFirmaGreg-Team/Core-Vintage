@@ -5,8 +5,11 @@
 
 package net.dries007.tfc.network;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import gnu.trove.map.TIntObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -17,11 +20,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.objects.container.CapabilityContainerListener;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * This is a packet which is sent to the client to sync capability data
@@ -31,8 +30,7 @@ import net.dries007.tfc.objects.container.CapabilityContainerListener;
  * @author AlcatrazEscapee
  */
 @ParametersAreNonnullByDefault
-public class PacketCapabilityContainerUpdate implements IMessage
-{
+public class PacketCapabilityContainerUpdate implements IMessage {
     private final TIntObjectMap<NBTTagCompound> capabilityData = new TIntObjectHashMap<>();
     private int windowID;
 
@@ -40,39 +38,32 @@ public class PacketCapabilityContainerUpdate implements IMessage
     @Deprecated
     public PacketCapabilityContainerUpdate() {}
 
-    public PacketCapabilityContainerUpdate(int windowID, int slotID, ItemStack stack)
-    {
+    public PacketCapabilityContainerUpdate(int windowID, int slotID, ItemStack stack) {
         this.windowID = windowID;
 
         final NBTTagCompound data = CapabilityContainerListener.readCapabilityData(stack);
-        if (!data.isEmpty())
-        {
+        if (!data.isEmpty()) {
             capabilityData.put(slotID, data);
         }
     }
 
-    public PacketCapabilityContainerUpdate(int windowID, NonNullList<ItemStack> items)
-    {
+    public PacketCapabilityContainerUpdate(int windowID, NonNullList<ItemStack> items) {
         this.windowID = windowID;
 
-        for (int i = 0; i < items.size(); i++)
-        {
+        for (int i = 0; i < items.size(); i++) {
             final NBTTagCompound nbt = CapabilityContainerListener.readCapabilityData(items.get(i));
-            if (!nbt.isEmpty())
-            {
+            if (!nbt.isEmpty()) {
                 capabilityData.put(i, nbt);
             }
         }
     }
 
     @Override
-    public final void fromBytes(final ByteBuf buf)
-    {
+    public final void fromBytes(final ByteBuf buf) {
         windowID = buf.readInt();
 
         final int numEntries = buf.readInt();
-        for (int i = 0; i < numEntries; i++)
-        {
+        for (int i = 0; i < numEntries; i++) {
             final int index = buf.readInt();
             final NBTTagCompound data = ByteBufUtils.readTag(buf);
             capabilityData.put(index, data);
@@ -80,8 +71,7 @@ public class PacketCapabilityContainerUpdate implements IMessage
     }
 
     @Override
-    public final void toBytes(final ByteBuf buf)
-    {
+    public final void toBytes(final ByteBuf buf) {
         buf.writeInt(windowID);
 
         buf.writeInt(capabilityData.size());
@@ -92,35 +82,26 @@ public class PacketCapabilityContainerUpdate implements IMessage
         });
     }
 
-    public final boolean hasData()
-    {
+    public final boolean hasData() {
         return !capabilityData.isEmpty();
     }
 
     @ParametersAreNonnullByDefault
-    public static class Handler implements IMessageHandler<PacketCapabilityContainerUpdate, IMessage>
-    {
+    public static class Handler implements IMessageHandler<PacketCapabilityContainerUpdate, IMessage> {
         @Override
-        public IMessage onMessage(final PacketCapabilityContainerUpdate message, final MessageContext ctx)
-        {
+        public IMessage onMessage(final PacketCapabilityContainerUpdate message, final MessageContext ctx) {
             if (!message.hasData()) return null; // Don't do anything if no data was sent
 
             TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                 final EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
                 final Container container;
 
-                if (player != null)
-                {
-                    if (message.windowID == 0)
-                    {
+                if (player != null) {
+                    if (message.windowID == 0) {
                         container = player.inventoryContainer;
-                    }
-                    else if (message.windowID == player.openContainer.windowId)
-                    {
+                    } else if (message.windowID == player.openContainer.windowId) {
                         container = player.openContainer;
-                    }
-                    else
-                    {
+                    } else {
                         return;
                     }
 

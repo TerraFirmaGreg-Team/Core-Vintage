@@ -7,20 +7,6 @@ package net.dries007.tfc.objects.items;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemSnow;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.registries.IForgeRegistry;
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
@@ -53,6 +39,19 @@ import net.dries007.tfc.objects.items.wood.ItemWoodenBucket;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemSnow;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
@@ -60,8 +59,7 @@ import static net.dries007.tfc.util.Helpers.getNull;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 @GameRegistry.ObjectHolder(MOD_ID)
-public final class ItemsTFC
-{
+public final class ItemsTFC {
     public static final ItemGoldPan GOLDPAN = getNull();
     public static final ItemMisc STRAW = getNull();
     public static final Item HANDSTONE = getNull();
@@ -178,25 +176,21 @@ public final class ItemsTFC
     private static ImmutableList<ItemOreTFC> allOreItems;
     private static ImmutableList<ItemGem> allGemItems;
 
-    public static ImmutableList<Item> getAllSimpleItems()
-    {
+    public static ImmutableList<Item> getAllSimpleItems() {
         return allSimpleItems;
     }
 
-    public static ImmutableList<ItemOreTFC> getAllOreItems()
-    {
+    public static ImmutableList<ItemOreTFC> getAllOreItems() {
         return allOreItems;
     }
 
-    public static ImmutableList<ItemGem> getAllGemItems()
-    {
+    public static ImmutableList<ItemGem> getAllGemItems() {
         return allGemItems;
     }
 
     @SuppressWarnings("ConstantConditions")
     @SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Item> event)
-    {
+    public static void registerItems(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> r = event.getRegistry();
         Builder<Item> simpleItems = ImmutableList.builder();
 
@@ -216,11 +210,9 @@ public final class ItemsTFC
 
         {
             Builder<ItemOreTFC> b = new Builder<>();
-            for (Ore ore : TFCRegistries.ORES.getValuesCollection())
-            {
+            for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
                 b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_ROCK_ITEMS));
-                if (ore.isGraded())
-                {
+                if (ore.isGraded()) {
                     simpleItems.add(register(r, "ore/small/" + ore.getRegistryName().getPath(), new ItemSmallOre(ore), CT_ROCK_ITEMS));
                 }
             }
@@ -235,10 +227,8 @@ public final class ItemsTFC
             allGemItems = b.build();
         }
 
-        for (Metal.ItemType type : Metal.ItemType.values())
-        {
-            for (Metal metal : TFCRegistries.METALS.getValuesCollection())
-            {
+        for (Metal.ItemType type : Metal.ItemType.values()) {
+            for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
                 if (type != Metal.ItemType.BUCKET && type.hasType(metal)) // buckets registered separately
                 {
                     simpleItems.add(register(r, "metal/" + type.name().toLowerCase() + "/" + metal.getRegistryName().getPath(), Metal.ItemType.create(metal, type), CT_METAL));
@@ -259,8 +249,7 @@ public final class ItemsTFC
         for (BlockSlabTFC.Half slab : BlocksTFC.getAllSlabBlocks())
             simpleItems.add(register(r, slab.getRegistryName().getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_DECORATIONS));
 
-        for (Tree wood : TFCRegistries.TREES.getValuesCollection())
-        {
+        for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
             simpleItems.add(register(r, "wood/lumber/" + wood.getRegistryName().getPath(), new ItemLumberTFC(wood), CT_WOOD));
             simpleItems.add(register(r, "wood/boat/" + wood.getRegistryName().getPath(), new ItemBoatTFC(wood), CT_WOOD));
         }
@@ -269,10 +258,8 @@ public final class ItemsTFC
         simpleItems.add(register(r, "stick_bundle", new ItemMisc(Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"), CT_WOOD));
         simpleItems.add(register(r, "wood_ash", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_WOOD));
 
-        for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection())
-        {
-            for (Rock.ToolType type : Rock.ToolType.values())
-            {
+        for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection()) {
+            for (Rock.ToolType type : Rock.ToolType.values()) {
                 simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getRegistryName().getPath(), type.create(cat), CT_ROCK_ITEMS));
                 simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "_head/" + cat.getRegistryName().getPath(), new ItemRockToolHead(cat, type), CT_ROCK_ITEMS));
             }
@@ -282,10 +269,8 @@ public final class ItemsTFC
             simpleItems.add(register(r, "powder/" + powder.name().toLowerCase(), new ItemPowder(powder), CT_MISC));
 
         { // POTTERY
-            for (Metal.ItemType type : Metal.ItemType.values())
-            {
-                if (type.hasMold(null))
-                {
+            for (Metal.ItemType type : Metal.ItemType.values()) {
+                if (type.hasMold(null)) {
                     // Not using registerPottery here because the ItemMold uses a custom ItemModelMesher, meaning it can't be in simpleItems
                     ItemPottery item = new ItemMold(type);
                     register(r, "ceramics/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY);
@@ -319,8 +304,7 @@ public final class ItemsTFC
 
         }
 
-        for (Crop crop : Crop.values())
-        {
+        for (Crop crop : Crop.values()) {
             simpleItems.add(register(r, "crop/seeds/" + crop.name().toLowerCase(), new ItemSeedsTFC(crop), CT_FOOD));
         }
 
@@ -329,24 +313,19 @@ public final class ItemsTFC
         simpleItems.add(register(r, "crop/product/burlap_cloth", new ItemMisc(Size.SMALL, Weight.VERY_LIGHT), CT_MISC));
 
         // All simple foods (not meals) just use ItemFood and are registered here
-        for (Food food : Food.values())
-        {
-            if (food.getCategory() != Food.Category.MEAL)
-            {
+        for (Food food : Food.values()) {
+            if (food.getCategory() != Food.Category.MEAL) {
                 simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemFoodTFC(food), CT_FOOD));
             }
         }
         // Complex foods that require special classes go here
-        for (Food food : new Food[] {Food.BARLEY_BREAD_SANDWICH, Food.CORNBREAD_SANDWICH, Food.OAT_BREAD_SANDWICH, Food.RICE_BREAD_SANDWICH, Food.RYE_BREAD_SANDWICH, Food.WHEAT_BREAD_SANDWICH})
-        {
+        for (Food food : new Food[]{Food.BARLEY_BREAD_SANDWICH, Food.CORNBREAD_SANDWICH, Food.OAT_BREAD_SANDWICH, Food.RICE_BREAD_SANDWICH, Food.RYE_BREAD_SANDWICH, Food.WHEAT_BREAD_SANDWICH}) {
             simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemSandwich(food), CT_FOOD));
         }
-        for (Food food : new Food[] {Food.SOUP_GRAIN, Food.SOUP_FRUIT, Food.SOUP_VEGETABLE, Food.SOUP_MEAT, Food.SOUP_DAIRY})
-        {
+        for (Food food : new Food[]{Food.SOUP_GRAIN, Food.SOUP_FRUIT, Food.SOUP_VEGETABLE, Food.SOUP_MEAT, Food.SOUP_DAIRY}) {
             simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemDynamicBowlFood(food), CT_FOOD));
         }
-        for (Food food : new Food[] {Food.SALAD_GRAIN, Food.SALAD_FRUIT, Food.SALAD_VEGETABLE, Food.SALAD_MEAT, Food.SALAD_DAIRY})
-        {
+        for (Food food : new Food[]{Food.SALAD_GRAIN, Food.SALAD_FRUIT, Food.SALAD_VEGETABLE, Food.SALAD_MEAT, Food.SALAD_DAIRY}) {
             simpleItems.add(register(r, "food/" + food.name().toLowerCase(), new ItemDynamicBowlFood(food), CT_FOOD));
         }
 
@@ -368,10 +347,8 @@ public final class ItemsTFC
         simpleItems.add(register(r, "bloom/refined", new ItemBloom(true), CT_MISC));
 
         // Animal Hides
-        for (ItemAnimalHide.HideSize size : ItemAnimalHide.HideSize.values())
-        {
-            for (ItemAnimalHide.HideType type : ItemAnimalHide.HideType.values())
-            {
+        for (ItemAnimalHide.HideSize size : ItemAnimalHide.HideSize.values()) {
+            for (ItemAnimalHide.HideType type : ItemAnimalHide.HideType.values()) {
                 simpleItems.add(register(r, ("hide/" + type.name() + "/" + size.name()).toLowerCase(), new ItemAnimalHide(type, size), CT_MISC));
             }
         }
@@ -401,54 +378,46 @@ public final class ItemsTFC
 
     @SuppressWarnings("ConstantConditions")
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void registerVanillaOverrides(RegistryEvent.Register<Item> event)
-    {
+    public static void registerVanillaOverrides(RegistryEvent.Register<Item> event) {
         // Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
         TerraFirmaCraft.getLog().info("The below warnings about unintended overrides are normal. The override is intended. ;)");
         event.getRegistry().registerAll(
-            new ItemSnow(Blocks.SNOW_LAYER).setRegistryName("minecraft", "snow_layer"),
-            new ItemGlassBottleTFC().setRegistryName(Items.GLASS_BOTTLE.getRegistryName()).setTranslationKey("glassBottle")
+                new ItemSnow(Blocks.SNOW_LAYER).setRegistryName("minecraft", "snow_layer"),
+                new ItemGlassBottleTFC().setRegistryName(Items.GLASS_BOTTLE.getRegistryName()).setTranslationKey("glassBottle")
         );
 
-        if (ConfigTFC.General.OVERRIDES.enableTorchOverride)
-        {
+        if (ConfigTFC.General.OVERRIDES.enableTorchOverride) {
             event.getRegistry().register(new ItemBlockTorch(Blocks.TORCH).setRegistryName("minecraft", "torch"));
         }
     }
 
-    public static void init()
-    {
+    public static void init() {
         for (Metal metal : TFCRegistries.METALS.getValuesCollection())
             if (metal.getToolMetal() != null)
                 metal.getToolMetal().setRepairItem(new ItemStack(ItemMetal.get(metal, Metal.ItemType.SCRAP)));
     }
 
-    private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired)
-    {
+    private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired) {
         registerPottery(items, r, nameUnfired, nameFired, new ItemPottery(), new ItemPottery());
     }
 
-    private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired, ItemPottery unfiredItem, ItemPottery firedItem)
-    {
+    private static void registerPottery(Builder<Item> items, IForgeRegistry<Item> r, String nameUnfired, String nameFired, ItemPottery unfiredItem, ItemPottery firedItem) {
         register(r, nameFired, firedItem, CT_POTTERY);
         register(r, nameUnfired, unfiredItem, CT_POTTERY);
 
-        if (items != null)
-        {
+        if (items != null) {
             items.add(firedItem, unfiredItem);
         }
     }
 
     @SuppressWarnings("ConstantConditions")
-    private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item)
-    {
+    private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item) {
         item.setRegistryName(item.getBlock().getRegistryName());
         item.setCreativeTab(item.getBlock().getCreativeTab());
         r.register(item);
     }
 
-    private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct)
-    {
+    private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
         item.setRegistryName(MOD_ID, name);
         item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
         item.setCreativeTab(ct);

@@ -1,43 +1,36 @@
 package com.eerussianguy.firmalife.recipe;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-
+import com.eerussianguy.firmalife.items.ItemPizza;
 import com.google.gson.JsonObject;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.objects.recipes.RecipeUtils;
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 
-import com.eerussianguy.firmalife.items.ItemPizza;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.recipes.RecipeUtils;
-import net.dries007.tfc.objects.recipes.ShapedDamageRecipe;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PizzaRecipe extends SandwichBasedRecipe
-{
-    public PizzaRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @Nonnull ItemStack result, int damage)
-    {
+public class PizzaRecipe extends SandwichBasedRecipe {
+    public PizzaRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @Nonnull ItemStack result, int damage) {
         super(group, input, result, damage);
     }
 
     @Nonnull
     @Override
-    public ItemStack getCraftingResult(@Nonnull InventoryCrafting inv)
-    {
+    public ItemStack getCraftingResult(@Nonnull InventoryCrafting inv) {
         ItemStack output = super.getCraftingResult(inv);
         IFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
-        if (food instanceof ItemPizza.PizzaHandler)
-        {
+        if (food instanceof ItemPizza.PizzaHandler) {
             ItemPizza.PizzaHandler trailMix = (ItemPizza.PizzaHandler) food;
             List<FoodData> ingredients = new ArrayList<>();
             getIngredients(inv, ingredients);
@@ -50,11 +43,9 @@ public class PizzaRecipe extends SandwichBasedRecipe
     }
 
     @SuppressWarnings("unused")
-    public static class Factory implements IRecipeFactory
-    {
+    public static class Factory implements IRecipeFactory {
         @Override
-        public IRecipe parse(final JsonContext context, final JsonObject json)
-        {
+        public IRecipe parse(final JsonContext context, final JsonObject json) {
             String group = JsonUtils.getString(json, "group", "");
 
             CraftingHelper.ShapedPrimer primer = RecipeUtils.parsePhaped(context, json);

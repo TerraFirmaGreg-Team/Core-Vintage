@@ -8,8 +8,7 @@ package net.dries007.tfc.util.config;
 /**
  * Used in config to toggle modes instead of an integer
  */
-public enum TimeTooltipMode
-{
+public enum TimeTooltipMode {
     NONE("None"),
     TICKS("Ticks"),
     MINECRAFT_HOURS("Minecraft Hours"),
@@ -17,8 +16,7 @@ public enum TimeTooltipMode
 
     private final String name;
 
-    TimeTooltipMode(String name)
-    {
+    TimeTooltipMode(String name) {
         this.name = name;
     }
 
@@ -26,8 +24,7 @@ public enum TimeTooltipMode
      * Shows this text in config instead of the enum name
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return name;
     }
 }

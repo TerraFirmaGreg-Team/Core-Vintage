@@ -1,6 +1,5 @@
 package com.eerussianguy.firmalife.util;
 
-public interface IWaterable
-{
+public interface IWaterable {
     void setWater(int amount);
 }

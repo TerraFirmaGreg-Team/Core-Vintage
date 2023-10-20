@@ -33,7 +33,7 @@ public class CTCracking {
 
             @Override
             public String describe() {
-                return "Adding Cracking recipe " +recipe.getRegistryName().toString();
+                return "Adding Cracking recipe " + recipe.getRegistryName().toString();
             }
         });
     }
@@ -43,7 +43,7 @@ public class CTCracking {
 
         CrackingRecipe recipe = RegistriesFL.CRACKING.getValue(new ResourceLocation(recipe_name));
 
-        if(recipe != null) {
+        if (recipe != null) {
             CraftTweakerAPI.apply(new IAction() {
                 @Override
                 public void apply() {
@@ -69,7 +69,7 @@ public class CTCracking {
                 .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
                 .forEach(removeList::add);
 
-        for(CrackingRecipe recipe : removeList) {
+        for (CrackingRecipe recipe : removeList) {
             CraftTweakerAPI.apply(new IAction() {
                 @Override
                 public void apply() {

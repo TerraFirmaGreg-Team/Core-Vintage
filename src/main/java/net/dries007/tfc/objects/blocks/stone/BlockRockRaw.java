@@ -5,8 +5,14 @@
 
 package net.dries007.tfc.objects.blocks.stone;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.objects.Gem;
+import net.dries007.tfc.objects.items.ItemGem;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -20,24 +26,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.objects.Gem;
-import net.dries007.tfc.objects.items.ItemGem;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockRockRaw extends BlockRockVariant
-{
+public class BlockRockRaw extends BlockRockVariant {
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
     public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
 
-    public BlockRockRaw(Rock.Type type, Rock rock)
-    {
+    public BlockRockRaw(Rock.Type type, Rock rock) {
         super(type, rock);
 
         FallingBlockManager.Specification spec = new FallingBlockManager.Specification(type.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
@@ -48,38 +45,29 @@ public class BlockRockRaw extends BlockRockVariant
 
     @Override
     @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(CAN_FALL, meta == 0);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        if (state.getBlock() != this)
-        {
+    public int getMetaFromState(IBlockState state) {
+        if (state.getBlock() != this) {
             return 0;
-        }
-        else
-        {
+        } else {
             return state.getValue(CAN_FALL) ? 0 : 1;
         }
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         // Raw blocks that can't fall also can't pop off
-        if (state.getValue(CAN_FALL))
-        {
-            for (EnumFacing face : EnumFacing.VALUES)
-            {
+        if (state.getValue(CAN_FALL)) {
+            for (EnumFacing face : EnumFacing.VALUES) {
                 BlockPos offsetPos = pos.offset(face);
                 IBlockState faceState = worldIn.getBlockState(offsetPos);
-                if (faceState.getBlock().isSideSolid(faceState, worldIn, offsetPos, face.getOpposite()))
-                {
+                if (faceState.getBlock().isSideSolid(faceState, worldIn, offsetPos, face.getOpposite())) {
                     return;
                 }
             }
@@ -91,17 +79,13 @@ public class BlockRockRaw extends BlockRockVariant
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItemMainhand();
-        if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && OreDictionaryHelper.doesStackMatchOre(stack, "hammer") && !worldIn.isBlockNormalCube(pos.up(), true))
-        {
-            if (!worldIn.isRemote)
-            {
+        if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && OreDictionaryHelper.doesStackMatchOre(stack, "hammer") && !worldIn.isBlockNormalCube(pos.up(), true)) {
+            if (!worldIn.isRemote) {
                 // Create a stone anvil
                 BlockRockVariant anvil = BlockRockVariant.get(this.rock, Rock.Type.ANVIL);
-                if (anvil instanceof BlockStoneAnvil)
-                {
+                if (anvil instanceof BlockStoneAnvil) {
                     worldIn.setBlockState(pos, anvil.getDefaultState());
                 }
             }
@@ -111,25 +95,21 @@ public class BlockRockRaw extends BlockRockVariant
     }
 
     @Override
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, CAN_FALL);
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         super.getDrops(drops, world, pos, state, fortune);
         // Raw rocks drop random gems
-        if (RANDOM.nextDouble() < ConfigTFC.General.MISC.stoneGemDropChance)
-        {
+        if (RANDOM.nextDouble() < ConfigTFC.General.MISC.stoneGemDropChance) {
             drops.add(ItemGem.get(Gem.getRandomDropGem(RANDOM), Gem.Grade.randomGrade(RANDOM), 1));
         }
     }
 
     @Override
-    public int damageDropped(IBlockState state)
-    {
+    public int damageDropped(IBlockState state) {
         return 0;
     }
 }

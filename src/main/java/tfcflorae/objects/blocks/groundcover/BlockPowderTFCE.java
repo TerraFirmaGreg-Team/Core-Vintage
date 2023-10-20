@@ -1,12 +1,6 @@
 package tfcflorae.objects.blocks.groundcover;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -29,50 +23,39 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.util.Helpers;
-
 import tfcelementia.objects.PowderTFCE;
 import tfcelementia.objects.items.ItemPowderTFCE;
-
 import tfcflorae.objects.te.TEPowderTFCE;
 import tfcflorae.util.OreDictionaryHelper;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.EnumMap;
+import java.util.List;
+
 @ParametersAreNonnullByDefault
-public class BlockPowderTFCE extends Block
-{
-    public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[] {
-        PropertyBool.create("down"),
-        PropertyBool.create("up"),
-        PropertyBool.create("north"),
-        PropertyBool.create("south"),
-        PropertyBool.create("west"),
-        PropertyBool.create("east")
+public class BlockPowderTFCE extends Block {
+    public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{
+            PropertyBool.create("down"),
+            PropertyBool.create("up"),
+            PropertyBool.create("north"),
+            PropertyBool.create("south"),
+            PropertyBool.create("west"),
+            PropertyBool.create("east")
     };
     private static final EnumMap<PowderTFCE, BlockPowderTFCE> MAP = new EnumMap<>(PowderTFCE.class);
-    private static final AxisAlignedBB[] SULFUR_AABB = new AxisAlignedBB[] {
-        new AxisAlignedBB(0d, 0.9375d, 0d, 1d, 1d, 1d),
-        new AxisAlignedBB(0d, 0d, 0d, 1d, 0.0625d, 1d),
-        new AxisAlignedBB(0d, 0d, 0.9375d, 1d, 1d, 1d),
-        new AxisAlignedBB(0d, 0d, 0d, 1d, 1d, 0.0625d),
-        new AxisAlignedBB(0.9375d, 0d, 0d, 1d, 1d, 1d),
-        new AxisAlignedBB(0d, 0d, 0d, 0.0625d, 1d, 1d)
+    private static final AxisAlignedBB[] SULFUR_AABB = new AxisAlignedBB[]{
+            new AxisAlignedBB(0d, 0.9375d, 0d, 1d, 1d, 1d),
+            new AxisAlignedBB(0d, 0d, 0d, 1d, 0.0625d, 1d),
+            new AxisAlignedBB(0d, 0d, 0.9375d, 1d, 1d, 1d),
+            new AxisAlignedBB(0d, 0d, 0d, 1d, 1d, 0.0625d),
+            new AxisAlignedBB(0.9375d, 0d, 0d, 1d, 1d, 1d),
+            new AxisAlignedBB(0d, 0d, 0d, 0.0625d, 1d, 1d)
     };
-
-    public static BlockPowderTFCE get(PowderTFCE powder)
-    {
-        return MAP.get(powder);
-    }
-
-    public static ItemStack get(PowderTFCE powder, int amount)
-    {
-        return new ItemStack(MAP.get(powder), amount);
-    }
-
     private final PowderTFCE powder;
 
-    public BlockPowderTFCE(PowderTFCE powder)
-    {
+    public BlockPowderTFCE(PowderTFCE powder) {
         super(Material.GROUND);
 
         this.powder = powder;
@@ -87,35 +70,37 @@ public class BlockPowderTFCE extends Block
         setDefaultState(this.blockState.getBaseState().withProperty(FACE_PROPERTIES[0], false).withProperty(FACE_PROPERTIES[1], false).withProperty(FACE_PROPERTIES[2], false).withProperty(FACE_PROPERTIES[3], false).withProperty(FACE_PROPERTIES[4], false).withProperty(FACE_PROPERTIES[5], false));
     }
 
+    public static BlockPowderTFCE get(PowderTFCE powder) {
+        return MAP.get(powder);
+    }
+
+    public static ItemStack get(PowderTFCE powder, int amount) {
+        return new ItemStack(MAP.get(powder), amount);
+    }
+
     @Nonnull
-    public PowderTFCE getPowder()
-    {
+    public PowderTFCE getPowder() {
         return powder;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isTopSolid(IBlockState state)
-    {
+    public boolean isTopSolid(IBlockState state) {
         return false;
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return 0;
     }
 
     @SuppressWarnings("deprecation")
     @Override
     @Nonnull
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         TEPowderTFCE tile = Helpers.getTE(worldIn, pos, TEPowderTFCE.class);
-        if (tile != null)
-        {
-            for (EnumFacing face : EnumFacing.values())
-            {
+        if (tile != null) {
+            for (EnumFacing face : EnumFacing.values()) {
                 state = state.withProperty(FACE_PROPERTIES[face.getIndex()], tile.getFace(face));
             }
         }
@@ -124,52 +109,41 @@ public class BlockPowderTFCE extends Block
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isBlockNormalCube(IBlockState state)
-    {
+    public boolean isBlockNormalCube(IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isNormalCube(IBlockState state)
-    {
+    public boolean isNormalCube(IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state)
-    {
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
-    {
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         return false;
     }
 
     @Override
     @Nonnull
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         TEPowderTFCE tile = Helpers.getTE(source, pos, TEPowderTFCE.class);
         int sheets = 0;
         AxisAlignedBB boundingBox = FULL_BLOCK_AABB;
-        if (tile != null)
-        {
-            for (EnumFacing face : EnumFacing.values())
-            {
-                if (tile.getFace(face))
-                {
-                    if (sheets == 1)
-                    {
+        if (tile != null) {
+            for (EnumFacing face : EnumFacing.values()) {
+                if (tile.getFace(face)) {
+                    if (sheets == 1) {
                         return FULL_BLOCK_AABB;
-                    }
-                    else
-                    {
+                    } else {
                         boundingBox = SULFUR_AABB[face.getIndex()];
                         sheets++;
                     }
@@ -183,22 +157,17 @@ public class BlockPowderTFCE extends Block
     @Override
     @Nonnull
     @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState)
-    {
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
         TEPowderTFCE tile = Helpers.getTE(worldIn, pos, TEPowderTFCE.class);
-        if (tile != null)
-        {
-            for (EnumFacing face : EnumFacing.values())
-            {
-                if (tile.getFace(face))
-                {
+        if (tile != null) {
+            for (EnumFacing face : EnumFacing.values()) {
+                if (tile.getFace(face)) {
                     addCollisionBoxToList(pos, entityBox, collidingBoxes, SULFUR_AABB[face.getIndex()]);
                 }
             }
@@ -208,8 +177,7 @@ public class BlockPowderTFCE extends Block
     @Nullable
     @Override
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-    {
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return NULL_AABB;
     }
 
@@ -217,35 +185,28 @@ public class BlockPowderTFCE extends Block
     @Override
     @Nonnull
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
-    {
+    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
         return getBoundingBox(state, worldIn, pos);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         TEPowderTFCE tile = Helpers.getTE(worldIn, pos, TEPowderTFCE.class);
-        if (tile != null)
-        {
-            for (EnumFacing face : EnumFacing.values())
-            {
-                if (tile.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face))
-                {
+        if (tile != null) {
+            for (EnumFacing face : EnumFacing.values()) {
+                if (tile.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face)) {
                     InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemPowderTFCE.get(powder)));
                     tile.setFace(face, false);
                 }
             }
-            if (tile.getFaceCount() == 0)
-            {
+            if (tile.getFaceCount() == 0) {
                 // Remove the block
                 worldIn.setBlockToAir(pos);
             }
@@ -253,8 +214,7 @@ public class BlockPowderTFCE extends Block
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TEPowderTFCE te = Helpers.getTE(worldIn, pos, TEPowderTFCE.class);
         if (te != null) te.onBreakBlock(this.powder);
         super.breakBlock(worldIn, pos, state);
@@ -263,18 +223,13 @@ public class BlockPowderTFCE extends Block
     @Nullable
     @Override
     @SuppressWarnings("deprecation")
-    public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end)
-    {
+    public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
         TEPowderTFCE tile = Helpers.getTE(worldIn, pos, TEPowderTFCE.class);
-        if (tile != null)
-        {
-            for (EnumFacing face : EnumFacing.values())
-            {
-                if (tile.getFace(face))
-                {
+        if (tile != null) {
+            for (EnumFacing face : EnumFacing.values()) {
+                if (tile.getFace(face)) {
                     RayTraceResult result = rayTrace(pos, start, end, SULFUR_AABB[face.getIndex()]);
-                    if (result != null)
-                    {
+                    if (result != null) {
                         return result;
                     }
                 }
@@ -285,55 +240,47 @@ public class BlockPowderTFCE extends Block
 
     @Override
     @Nonnull
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACE_PROPERTIES);
     }
 
     @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos)
-    {
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos, EnumFacing side)
-    {
+    public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return false;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public BlockRenderLayer getRenderLayer()
-    {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
     @Override
-    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
-    {
+    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
         return true;
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state)
-    {
+    public boolean hasTileEntity(IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
-    {
+    public TileEntity createTileEntity(World world, IBlockState state) {
         return new TEPowderTFCE();
     }
 
     @Nonnull
     @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(ItemPowderTFCE.get(powder));
     }
 }

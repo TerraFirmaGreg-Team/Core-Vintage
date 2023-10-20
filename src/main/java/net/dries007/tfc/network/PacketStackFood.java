@@ -5,14 +5,12 @@
 
 package net.dries007.tfc.network;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.IFood;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
@@ -20,49 +18,40 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
-public class PacketStackFood implements IMessage
-{
+public class PacketStackFood implements IMessage {
     private int slotNumber;
 
     @SuppressWarnings("unused")
     @Deprecated
-    public PacketStackFood()
-    {
+    public PacketStackFood() {
     }
 
-    public PacketStackFood(int slotNumber)
-    {
+    public PacketStackFood(int slotNumber) {
         this.slotNumber = slotNumber;
     }
 
     @Override
-    public void fromBytes(ByteBuf byteBuf)
-    {
+    public void fromBytes(ByteBuf byteBuf) {
         slotNumber = byteBuf.readInt();
     }
 
     @Override
-    public void toBytes(ByteBuf byteBuf)
-    {
+    public void toBytes(ByteBuf byteBuf) {
         byteBuf.writeInt(slotNumber);
     }
 
-    public static final class Handler implements IMessageHandler<PacketStackFood, IMessage>
-    {
+    public static final class Handler implements IMessageHandler<PacketStackFood, IMessage> {
         @Override
-        public IMessage onMessage(PacketStackFood message, MessageContext ctx)
-        {
+        public IMessage onMessage(PacketStackFood message, MessageContext ctx) {
             TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                 EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-                if (player != null)
-                {
-                    if (!(player.openContainer instanceof ContainerPlayer) || message.slotNumber < 0 || message.slotNumber >= player.openContainer.inventorySlots.size())
-                    {
+                if (player != null) {
+                    if (!(player.openContainer instanceof ContainerPlayer) || message.slotNumber < 0 || message.slotNumber >= player.openContainer.inventorySlots.size()) {
                         return;
                     }
 
@@ -70,8 +59,7 @@ public class PacketStackFood implements IMessage
                     ItemStack targetStack = targetSlot.getStack();
                     IFood targetCap = targetStack.getCapability(CapabilityFood.CAPABILITY, null);
 
-                    if (targetCap == null || targetStack.getMaxStackSize() == targetStack.getCount() || targetCap.isRotten())
-                    {
+                    if (targetCap == null || targetStack.getMaxStackSize() == targetStack.getCount() || targetCap.isRotten()) {
                         return;
                     }
 
@@ -81,27 +69,22 @@ public class PacketStackFood implements IMessage
                     long minCreationDate = targetCap.getCreationDate();
 
                     Iterator<Slot> slotIterator = stackableSlots.iterator();
-                    while (remaining > 0 && slotIterator.hasNext())
-                    {
+                    while (remaining > 0 && slotIterator.hasNext()) {
                         Slot slot = slotIterator.next();
                         ItemStack stack = slot.getStack();
                         IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 
                         if (cap == null || cap.isRotten()) continue;
 
-                        if (cap.getCreationDate() < minCreationDate)
-                        {
+                        if (cap.getCreationDate() < minCreationDate) {
                             minCreationDate = cap.getCreationDate();
                         }
 
-                        if (remaining < stack.getCount())
-                        {
+                        if (remaining < stack.getCount()) {
                             currentAmount += remaining;
                             stack.shrink(remaining);
                             remaining = 0;
-                        }
-                        else
-                        {
+                        } else {
                             currentAmount += stack.getCount();
                             remaining -= stack.getCount();
                             stack.shrink(stack.getCount());
@@ -117,16 +100,12 @@ public class PacketStackFood implements IMessage
             return null;
         }
 
-        private List<Slot> getStackableSlots(Slot targetSlot, List<Slot> inventorySlots)
-        {
+        private List<Slot> getStackableSlots(Slot targetSlot, List<Slot> inventorySlots) {
             List<Slot> stackableSlots = new ArrayList<>();
-            for (Slot slot : inventorySlots)
-            {
-                if (slot.getSlotIndex() != targetSlot.getSlotIndex() && !(slot instanceof SlotCrafting))
-                {
+            for (Slot slot : inventorySlots) {
+                if (slot.getSlotIndex() != targetSlot.getSlotIndex() && !(slot instanceof SlotCrafting)) {
                     ItemStack stack = slot.getStack();
-                    if (CapabilityFood.areStacksStackableExceptCreationDate(targetSlot.getStack(), stack))
-                    {
+                    if (CapabilityFood.areStacksStackableExceptCreationDate(targetSlot.getStack(), stack)) {
                         stackableSlots.add(slot);
                     }
                 }

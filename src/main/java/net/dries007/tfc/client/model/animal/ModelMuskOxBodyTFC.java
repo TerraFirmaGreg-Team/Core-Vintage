@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityMuskOxTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,8 +15,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityMuskOxTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelMuskOxTFC
@@ -26,8 +25,7 @@ import net.dries007.tfc.objects.entity.animal.EntityMuskOxTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelMuskOxBodyTFC extends ModelBase
-{
+public class ModelMuskOxBodyTFC extends ModelBase {
     public ModelRenderer bodyMain;
     public ModelRenderer legBackLeft;
     public ModelRenderer legBackRight;
@@ -57,8 +55,7 @@ public class ModelMuskOxBodyTFC extends ModelBase
     public ModelRenderer mouthBottomA;
     public ModelRenderer mouthBottomB;
 
-    public ModelMuskOxBodyTFC()
-    {
+    public ModelMuskOxBodyTFC() {
         textureWidth = 128;
         textureHeight = 128;
 
@@ -187,18 +184,15 @@ public class ModelMuskOxBodyTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
         EntityMuskOxTFC muskox = ((EntityMuskOxTFC) entity);
 
         float percent = (float) muskox.getPercentToAdulthood();
         float ageScale = 2.0F - percent;
 
-        if (muskox.getGender() == EntityAnimalTFC.Gender.MALE)
-        {
-            if (percent < 0.5)
-            {
+        if (muskox.getGender() == EntityAnimalTFC.Gender.MALE) {
+            if (percent < 0.5) {
                 hornCenter.isHidden = true;
                 hornRightBase.isHidden = true;
                 hornLeftBase.isHidden = true;
@@ -212,9 +206,7 @@ public class ModelMuskOxBodyTFC extends ModelBase
                 hornLeft1.isHidden = true;
                 hornLeft2.isHidden = true;
                 hornLeft3.isHidden = true;
-            }
-            else if (percent < 0.75)
-            {
+            } else if (percent < 0.75) {
                 hornRightF1.isHidden = true;
                 hornRightF2.isHidden = true;
                 hornLeftF1.isHidden = true;
@@ -225,21 +217,14 @@ public class ModelMuskOxBodyTFC extends ModelBase
                 hornLeft1.isHidden = true;
                 hornLeft2.isHidden = true;
                 hornLeft3.isHidden = true;
-            }
-
-            else
-            {
+            } else {
                 hornRightF1.isHidden = true;
                 hornRightF2.isHidden = true;
                 hornLeftF1.isHidden = true;
                 hornLeftF2.isHidden = true;
             }
-        }
-
-        else
-        {
-            if (percent < 0.5)
-            {
+        } else {
+            if (percent < 0.5) {
                 hornCenter.isHidden = true;
                 hornRightBase.isHidden = true;
                 hornLeftBase.isHidden = true;
@@ -253,9 +238,7 @@ public class ModelMuskOxBodyTFC extends ModelBase
                 hornLeft1.isHidden = true;
                 hornLeft2.isHidden = true;
                 hornLeft3.isHidden = true;
-            }
-            else if (percent < 0.75)
-            {
+            } else if (percent < 0.75) {
                 hornRightF1.isHidden = true;
                 hornRightF2.isHidden = true;
                 hornLeftF1.isHidden = true;
@@ -266,9 +249,7 @@ public class ModelMuskOxBodyTFC extends ModelBase
                 hornLeft1.isHidden = true;
                 hornLeft2.isHidden = true;
                 hornLeft3.isHidden = true;
-            }
-            else
-            {
+            } else {
                 hornRight2.isHidden = true;
                 hornRight3.isHidden = true;
                 hornLeft2.isHidden = true;
@@ -293,8 +274,7 @@ public class ModelMuskOxBodyTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
         this.headBase.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.headBase.rotateAngleY = par4 / (180F / (float) Math.PI);
         this.legFrontRight.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
@@ -317,8 +297,7 @@ public class ModelMuskOxBodyTFC extends ModelBase
         hornLeft3.isHidden = false;
     }
 
-    private void setRotateAngle(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotateAngle(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

@@ -5,12 +5,11 @@
 
 package net.dries007.tfc.objects.container;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.nbt.NBTTagCompound;
 
-public interface IButtonHandler
-{
+import javax.annotation.Nullable;
+
+public interface IButtonHandler {
     /**
      * An interface for containers that need to receive button presses from a client-side GUI
      * If you implement this interface you should also use {@link net.dries007.tfc.network.PacketGuiButton} to send update packets from the GUI

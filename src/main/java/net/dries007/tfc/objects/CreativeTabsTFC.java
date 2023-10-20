@@ -5,8 +5,8 @@
 
 package net.dries007.tfc.objects;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -15,13 +15,11 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
+import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
-public final class CreativeTabsTFC
-{
+public final class CreativeTabsTFC {
     public static final CreativeTabs CT_ROCK_BLOCKS = new TFCCreativeTab("rock.blocks", "tfc:smooth/granite");
     public static final CreativeTabs CT_ROCK_ITEMS = new TFCCreativeTab("rock.items", "tfc:ore/tetrahedrite");
     public static final CreativeTabs CT_WOOD = new TFCCreativeTab("wood", "tfc:wood/log/pine");
@@ -33,12 +31,10 @@ public final class CreativeTabsTFC
     public static final CreativeTabs CT_MISC = new TFCCreativeTab("misc", "tfc:wand");
     public static final CreativeTabs CT_FLORA = new TFCCreativeTab("flora", "tfc:plants/goldenrod");
 
-    private static class TFCCreativeTab extends CreativeTabs
-    {
+    private static class TFCCreativeTab extends CreativeTabs {
         private final ResourceLocation iconResourceLocation;
 
-        private TFCCreativeTab(String label, String icon)
-        {
+        private TFCCreativeTab(String label, String icon) {
             super(MOD_ID + "." + label);
             iconResourceLocation = new ResourceLocation(icon);
         }
@@ -46,12 +42,10 @@ public final class CreativeTabsTFC
         @SideOnly(Side.CLIENT)
         @Override
         @Nonnull
-        public ItemStack createIcon()
-        {
+        public ItemStack createIcon() {
             //noinspection ConstantConditions
             ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(iconResourceLocation));
-            if (!stack.isEmpty())
-            {
+            if (!stack.isEmpty()) {
                 // Food stacks shouldn't rot in creative tabs, and these are created on demand instead of beforehand and cached
                 CapabilityFood.setStackNonDecaying(stack);
                 return stack;

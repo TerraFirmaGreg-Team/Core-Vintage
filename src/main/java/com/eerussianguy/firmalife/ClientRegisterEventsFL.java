@@ -1,7 +1,28 @@
 package com.eerussianguy.firmalife;
 
-import javax.annotation.Nonnull;
-
+import com.eerussianguy.firmalife.blocks.BlockBonsai;
+import com.eerussianguy.firmalife.blocks.BlockFruitDoor;
+import com.eerussianguy.firmalife.blocks.BlockFruitFenceGate;
+import com.eerussianguy.firmalife.blocks.BlockStemCrop;
+import com.eerussianguy.firmalife.init.RegistriesFL;
+import com.eerussianguy.firmalife.init.StatePropertiesFL;
+import com.eerussianguy.firmalife.items.ItemFruitDoor;
+import com.eerussianguy.firmalife.items.ItemMetalMalletMold;
+import com.eerussianguy.firmalife.recipe.PlanterRecipe;
+import com.eerussianguy.firmalife.registry.BlocksFL;
+import com.eerussianguy.firmalife.registry.ItemsFL;
+import com.eerussianguy.firmalife.render.*;
+import com.eerussianguy.firmalife.te.TELeafMat;
+import com.eerussianguy.firmalife.te.TEOven;
+import com.eerussianguy.firmalife.te.TEString;
+import com.eerussianguy.firmalife.te.TETurntable;
+import net.dries007.tfc.api.capability.IMoldHandler;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.client.GrassColorHandler;
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
+import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
+import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.minecraft.block.*;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -29,41 +50,17 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.eerussianguy.firmalife.blocks.BlockBonsai;
-import com.eerussianguy.firmalife.blocks.BlockFruitDoor;
-import com.eerussianguy.firmalife.blocks.BlockFruitFenceGate;
-import com.eerussianguy.firmalife.blocks.BlockStemCrop;
-import com.eerussianguy.firmalife.init.RegistriesFL;
-import com.eerussianguy.firmalife.init.StatePropertiesFL;
-import com.eerussianguy.firmalife.items.ItemFruitDoor;
-import com.eerussianguy.firmalife.items.ItemMetalMalletMold;
-import com.eerussianguy.firmalife.recipe.PlanterRecipe;
-import com.eerussianguy.firmalife.registry.BlocksFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
-import com.eerussianguy.firmalife.render.*;
-import com.eerussianguy.firmalife.te.TELeafMat;
-import com.eerussianguy.firmalife.te.TEOven;
-import com.eerussianguy.firmalife.te.TEString;
-import com.eerussianguy.firmalife.te.TETurntable;
-import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.client.GrassColorHandler;
-import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
-import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+import javax.annotation.Nonnull;
 
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = FirmaLife.MOD_ID)
-public class ClientRegisterEventsFL
-{
+public class ClientRegisterEventsFL {
     public ClientRegisterEventsFL() {}
 
     @SubscribeEvent
-    public static void registerModels(ModelRegistryEvent event)
-    {
+    public static void registerModels(ModelRegistryEvent event) {
         //Setting the model resource location for items
         for (Item i : ItemsFL.getAllEasyItems())
             ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName().toString()));
@@ -88,24 +85,20 @@ public class ClientRegisterEventsFL
         ItemMetalMalletMold item = ItemsFL.malletMold;
         ModelBakery.registerItemVariants(item, new ModelResourceLocation(item.getRegistryName().toString()));
         ModelBakery.registerItemVariants(item, TFCRegistries.METALS.getValuesCollection()
-            .stream()
-            .filter(Metal.ItemType.PROPICK_HEAD::hasMold)
-            .map(x -> new ModelResourceLocation(FirmaLife.MOD_ID + ":" + x.getRegistryName().getPath() + "_" + item.getRegistryName().getPath()))
-            .toArray(ModelResourceLocation[]::new));
-        ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition()
-        {
+                .stream()
+                .filter(Metal.ItemType.PROPICK_HEAD::hasMold)
+                .map(x -> new ModelResourceLocation(FirmaLife.MOD_ID + ":" + x.getRegistryName().getPath() + "_" + item.getRegistryName().getPath()))
+                .toArray(ModelResourceLocation[]::new));
+        ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
             private final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName().toString());
 
             @Override
             @Nonnull
-            public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack)
-            {
+            public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
                 IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                if (cap instanceof IMoldHandler)
-                {
+                if (cap instanceof IMoldHandler) {
                     Metal metal = ((IMoldHandler) cap).getMetal();
-                    if (metal != null)
-                    {
+                    if (metal != null) {
                         return new ModelResourceLocation(FirmaLife.MOD_ID + ":" + metal.getRegistryName().getPath() + "_" + stack.getItem().getRegistryName().getPath());
                     }
                 }
@@ -145,28 +138,26 @@ public class ClientRegisterEventsFL
     @SuppressWarnings("deprecation")
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
-    public static void registerColorHandlerItems(ColorHandlerEvent.Item event)
-    {
+    public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
         ItemColors itemColors = event.getItemColors();
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-            BlocksFL.getAllFruitLeaves().toArray(new BlockFruitTreeLeaves[0])
+                        event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                BlocksFL.getAllFruitLeaves().toArray(new BlockFruitTreeLeaves[0])
         );
         itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-            BlocksFL.getAllBonsai().toArray(new BlockBonsai[0])
+                        event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                BlocksFL.getAllBonsai().toArray(new BlockBonsai[0])
         );
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-            BlocksFL.CINNAMON_LEAVES);
+                        event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                BlocksFL.CINNAMON_LEAVES);
     }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
-    public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event)
-    {
+    public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
         BlockColors blockColors = event.getBlockColors();
         IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
 
@@ -174,8 +165,7 @@ public class ClientRegisterEventsFL
         blockColors.registerBlockColorHandler(foliageColor, BlocksFL.getAllBonsai().toArray(new Block[0]));
 
         //use vanilla stem coloring for stemcrops
-        for (BlockStemCrop block : BlocksFL.getAllCropBlocks())
-        {
+        for (BlockStemCrop block : BlocksFL.getAllCropBlocks()) {
             blockColors.registerBlockColorHandler((state, world, pos, tintIndex) ->
             {
                 int vanillaAge = VanillaStemStateMapper.getVanillaAge(state);
@@ -185,29 +175,23 @@ public class ClientRegisterEventsFL
             }, block);
         }
 
-        for (BlockCropDead block : BlocksFL.getAllDeadCrops())
-        {
+        for (BlockCropDead block : BlocksFL.getAllDeadCrops()) {
             blockColors.registerBlockColorHandler((state, world, os, tintIndex) -> 0xCC7400, block);
         }
         blockColors.registerBlockColorHandler(foliageColor, BlocksFL.CINNAMON_LEAVES);
     }
 
     @SubscribeEvent
-    public static void onModelBake(ModelBakeEvent event)
-    {
+    public static void onModelBake(ModelBakeEvent event) {
         event.getModelRegistry().putObject(new ModelResourceLocation(MOD_ID + ":quad_planter"), new QuadPlanterBakedModel());
         event.getModelRegistry().putObject(new ModelResourceLocation(MOD_ID + ":large_planter"), new LargePlanterBakedModel());
     }
 
     @SubscribeEvent
-    public static void onTextureStitchEvent(TextureStitchEvent.Pre event)
-    {
-        for (PlanterRecipe crop : RegistriesFL.PLANTER_QUAD.getValuesCollection())
-        {
-            if (crop.getRegistryName() != null)
-            {
-                for (int stage = 0; stage <= PlanterRecipe.getMaxStage(crop); stage++)
-                {
+    public static void onTextureStitchEvent(TextureStitchEvent.Pre event) {
+        for (PlanterRecipe crop : RegistriesFL.PLANTER_QUAD.getValuesCollection()) {
+            if (crop.getRegistryName() != null) {
+                for (int stage = 0; stage <= PlanterRecipe.getMaxStage(crop); stage++) {
                     event.getMap().registerSprite(new ResourceLocation(MOD_ID, "blocks/crop/" + crop.getRegistryName().getPath() + "_" + stage));
                 }
             }

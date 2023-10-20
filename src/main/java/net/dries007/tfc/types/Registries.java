@@ -5,9 +5,14 @@
 
 package net.dries007.tfc.types;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import net.dries007.tfc.api.recipes.*;
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.api.recipes.heat.HeatRecipe;
+import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
+import net.dries007.tfc.api.recipes.quern.QuernRecipe;
+import net.dries007.tfc.api.registries.TFCRegistryEvent;
+import net.dries007.tfc.api.types.*;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,26 +24,18 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
 
-import net.dries007.tfc.api.recipes.*;
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
-import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.api.registries.TFCRegistryEvent;
-import net.dries007.tfc.api.types.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.*;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public final class Registries
-{
+public final class Registries {
     private static final Map<ResourceLocation, IForgeRegistry<?>> preBlockRegistries = new LinkedHashMap<>(); // Needs to respect insertion order
 
     @SubscribeEvent
-    public static void onNewRegistryEvent(RegistryEvent.NewRegistry event)
-    {
+    public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
         // Pre Block registries (dirty hack)
 
         newRegistry(ROCK_TYPE, RockCategory.class, true); // Required before: ROCK
@@ -66,16 +63,13 @@ public final class Registries
      * Danger: dirty hack.
      */
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onRegisterBlock(RegistryEvent.Register<Block> event)
-    {
+    public static void onRegisterBlock(RegistryEvent.Register<Block> event) {
         preBlockRegistries.forEach((e, r) -> MinecraftForge.EVENT_BUS.post(new TFCRegistryEvent.RegisterPreBlock<>(e, r)));
     }
 
-    private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass, boolean isPreBlockRegistry)
-    {
+    private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass, boolean isPreBlockRegistry) {
         IForgeRegistry<T> reg = new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
-        if (isPreBlockRegistry)
-        {
+        if (isPreBlockRegistry) {
             preBlockRegistries.put(name, reg);
         }
     }

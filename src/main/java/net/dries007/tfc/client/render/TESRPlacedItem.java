@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.client.render;
 
+import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -18,14 +19,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.te.TEPlacedItem;
-
 @SideOnly(Side.CLIENT)
-public class TESRPlacedItem extends TileEntitySpecialRenderer<TEPlacedItem>
-{
+public class TESRPlacedItem extends TileEntitySpecialRenderer<TEPlacedItem> {
     @Override
-    public void render(TEPlacedItem te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TEPlacedItem te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
         World world = te.getWorld();
         //noinspection ConstantConditions
@@ -38,30 +35,24 @@ public class TESRPlacedItem extends TileEntitySpecialRenderer<TEPlacedItem>
 
         GlStateManager.pushMatrix();
         IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (cap != null)
-        {
+        if (cap != null) {
             float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
             GlStateManager.translate(0.25, 0.25, 0.25);
             RenderHelper.enableStandardItemLighting();
             GlStateManager.pushAttrib();
 
-            if (te.holdingLargeItem())
-            {
+            if (te.holdingLargeItem()) {
                 ItemStack stack = cap.getStackInSlot(0);
-                if (!stack.isEmpty())
-                {
+                if (!stack.isEmpty()) {
                     GlStateManager.pushMatrix();
                     GlStateManager.translate(0.25, 0, 0.25);
                     GlStateManager.rotate(timeD, 0, 1, 0);
                     renderItem.renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
                     GlStateManager.popMatrix();
                 }
-            }
-            else
-            {
+            } else {
                 GlStateManager.scale(0.5F, 0.5F, 0.5F);
-                for (int i = 0; i < cap.getSlots(); i++)
-                {
+                for (int i = 0; i < cap.getSlots(); i++) {
                     ItemStack stack = cap.getStackInSlot(i);
                     if (stack.isEmpty()) continue;
                     GlStateManager.pushMatrix();

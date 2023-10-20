@@ -5,26 +5,23 @@
 
 package net.dries007.tfc.compat.waila.providers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class InfoProvider implements IWailaBlock
-{
+public class InfoProvider implements IWailaBlock {
     @Nonnull
     @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt)
-    {
+    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
         int temperature = Math.round(ClimateTFC.getActualTemp(world, pos, 0));
         int rainfall = Math.round(ClimateTFC.getRainfall(world, pos));
@@ -35,8 +32,7 @@ public class InfoProvider implements IWailaBlock
 
     @Nonnull
     @Override
-    public List<Class<?>> getLookupClass()
-    {
+    public List<Class<?>> getLookupClass() {
         return Collections.singletonList(BlockRockVariant.class);
     }
 }

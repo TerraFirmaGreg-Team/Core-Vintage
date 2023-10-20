@@ -1,7 +1,6 @@
 package tfcflorae.world.worldgen.structures;
 
-public class StructureList
-{
+public class StructureList {
     public static final StructureGenerator STONE_CIRCLE_RUIN = new StructureGenerator("stone_circle_ruin");
     public static final StructureGenerator STONE_CIRCLE_RUIN_A = new StructureGenerator("stone_circle_ruin_a");
     public static final StructureGenerator STONE_CIRCLE_RUIN_B = new StructureGenerator("stone_circle_ruin_b");

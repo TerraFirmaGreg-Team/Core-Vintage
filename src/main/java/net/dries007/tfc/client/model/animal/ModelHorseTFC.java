@@ -5,8 +5,10 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.types.IAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
+import net.dries007.tfc.objects.entity.animal.EntityHorseTFC;
+import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;
 import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,18 +20,14 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
-import net.dries007.tfc.objects.entity.animal.EntityHorseTFC;
-import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;
+import javax.annotation.Nonnull;
 
 /**
  * Need this for not insta-growing
  * This is a copy paste from vanilla, changing only the re-scale while animal is growing
  */
 @SideOnly(Side.CLIENT)
-public class ModelHorseTFC extends ModelHorse
-{
+public class ModelHorseTFC extends ModelHorse {
     private final ModelRenderer head;
     private final ModelRenderer upperMouth;
     private final ModelRenderer lowerMouth;
@@ -70,8 +68,7 @@ public class ModelHorseTFC extends ModelHorse
     private final ModelRenderer horseLeftRein;
     private final ModelRenderer horseRightRein;
 
-    public ModelHorseTFC()
-    {
+    public ModelHorseTFC() {
         this.textureWidth = 128;
         this.textureHeight = 128;
 
@@ -216,14 +213,11 @@ public class ModelHorseTFC extends ModelHorse
     }
 
     @Override
-    public void render(@Nonnull Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
+    public void render(@Nonnull Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         AbstractHorse horse = (AbstractHorse) entityIn;
         IAnimalTFC animal = (IAnimalTFC) horse;
-        if (animal.getAge() != IAnimalTFC.Age.CHILD)
-        {
-            if (horse.isHorseSaddled())
-            {
+        if (animal.getAge() != IAnimalTFC.Age.CHILD) {
+            if (horse.isHorseSaddled()) {
                 this.horseFaceRopes.render(scale);
                 this.horseSaddleBottom.render(scale);
                 this.horseSaddleFront.render(scale);
@@ -234,19 +228,15 @@ public class ModelHorseTFC extends ModelHorse
                 this.horseRightSaddleMetal.render(scale);
                 this.horseLeftFaceMetal.render(scale);
                 this.horseRightFaceMetal.render(scale);
-                if (horse.isBeingRidden())
-                {
+                if (horse.isBeingRidden()) {
                     this.horseLeftRein.render(scale);
                     this.horseRightRein.render(scale);
                 }
-            }
-            else
-            {
+            } else {
                 // Checks for halter
                 if ((horse instanceof EntityHorseTFC && ((EntityHorseTFC) horse).isHalter()) ||
-                    (horse instanceof EntityMuleTFC && ((EntityMuleTFC) horse).isHalter()) ||
-                    (horse instanceof EntityDonkeyTFC && ((EntityDonkeyTFC) horse).isHalter()))
-                {
+                        (horse instanceof EntityMuleTFC && ((EntityMuleTFC) horse).isHalter()) ||
+                        (horse instanceof EntityDonkeyTFC && ((EntityDonkeyTFC) horse).isHalter())) {
                     this.horseFaceRopes.render(scale);
                     this.horseLeftFaceMetal.render(scale);
                     this.horseRightFaceMetal.render(scale);
@@ -281,13 +271,10 @@ public class ModelHorseTFC extends ModelHorse
         this.neck.render(scale);
         this.mane.render(scale);
 
-        if (horse instanceof AbstractChestHorse)
-        {
+        if (horse instanceof AbstractChestHorse) {
             this.muleLeftEar.render(scale);
             this.muleRightEar.render(scale);
-        }
-        else
-        {
+        } else {
             this.horseLeftEar.render(scale);
             this.horseRightEar.render(scale);
         }
@@ -295,34 +282,29 @@ public class ModelHorseTFC extends ModelHorse
         this.head.render(scale);
         GlStateManager.popMatrix();
 
-        if (!this.isChild && horse instanceof AbstractChestHorse && ((AbstractChestHorse) horse).hasChest())
-        {
+        if (!this.isChild && horse instanceof AbstractChestHorse && ((AbstractChestHorse) horse).hasChest()) {
             this.muleLeftChest.render(scale);
             this.muleRightChest.render(scale);
         }
     }
 
     @Override
-    public void setLivingAnimations(@Nonnull EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
-    {
+    public void setLivingAnimations(@Nonnull EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
         float f = this.updateHorseRotation(entitylivingbaseIn.prevRenderYawOffset, entitylivingbaseIn.renderYawOffset, partialTickTime);
         float f1 = this.updateHorseRotation(entitylivingbaseIn.prevRotationYawHead, entitylivingbaseIn.rotationYawHead, partialTickTime);
         float f2 = entitylivingbaseIn.prevRotationPitch + (entitylivingbaseIn.rotationPitch - entitylivingbaseIn.prevRotationPitch) * partialTickTime;
         float f3 = f1 - f;
         float f4 = f2 * 0.017453292F;
-        if (f3 > 20.0F)
-        {
+        if (f3 > 20.0F) {
             f3 = 20.0F;
         }
 
-        if (f3 < -20.0F)
-        {
+        if (f3 < -20.0F) {
             f3 = -20.0F;
         }
 
-        if (limbSwingAmount > 0.2F)
-        {
+        if (limbSwingAmount > 0.2F) {
             f4 += MathHelper.cos(limbSwing * 0.4F) * 0.15F * limbSwingAmount;
         }
 
@@ -425,8 +407,7 @@ public class ModelHorseTFC extends ModelHorse
         this.frontLeftHoof.rotationPointZ = this.frontLeftShin.rotationPointZ;
         this.frontRightHoof.rotationPointY = this.frontRightShin.rotationPointY;
         this.frontRightHoof.rotationPointZ = this.frontRightShin.rotationPointZ;
-        if (flag1)
-        {
+        if (flag1) {
             this.horseSaddleBottom.rotationPointY = f6 * 0.5F + f7 * 2.0F;
             this.horseSaddleBottom.rotationPointZ = f6 * 11.0F + f7 * 2.0F;
             this.horseSaddleFront.rotationPointY = this.horseSaddleBottom.rotationPointY;
@@ -466,8 +447,7 @@ public class ModelHorseTFC extends ModelHorse
             this.horseLeftRein.rotateAngleY = this.head.rotateAngleY;
             this.horseRightFaceMetal.rotateAngleY = this.head.rotateAngleY;
             this.horseRightRein.rotateAngleY = this.head.rotateAngleY;
-            if (flag2)
-            {
+            if (flag2) {
                 this.horseLeftSaddleRope.rotateAngleX = -1.0471976F;
                 this.horseLeftSaddleMetal.rotateAngleX = -1.0471976F;
                 this.horseRightSaddleRope.rotateAngleX = -1.0471976F;
@@ -476,9 +456,7 @@ public class ModelHorseTFC extends ModelHorse
                 this.horseLeftSaddleMetal.rotateAngleZ = 0.0F;
                 this.horseRightSaddleRope.rotateAngleZ = 0.0F;
                 this.horseRightSaddleMetal.rotateAngleZ = 0.0F;
-            }
-            else
-            {
+            } else {
                 this.horseLeftSaddleRope.rotateAngleX = f11 / 3.0F;
                 this.horseLeftSaddleMetal.rotateAngleX = f11 / 3.0F;
                 this.horseRightSaddleRope.rotateAngleX = f11 / 3.0F;
@@ -488,11 +466,9 @@ public class ModelHorseTFC extends ModelHorse
                 this.horseRightSaddleRope.rotateAngleZ = -f11 / 5.0F;
                 this.horseRightSaddleMetal.rotateAngleZ = -f11 / 5.0F;
             }
-        }
-        else if ((abstracthorse instanceof EntityHorseTFC && ((EntityHorseTFC) abstracthorse).isHalter()) ||
-            (abstracthorse instanceof EntityMuleTFC && ((EntityMuleTFC) abstracthorse).isHalter()) ||
-            (abstracthorse instanceof EntityDonkeyTFC && ((EntityDonkeyTFC) abstracthorse).isHalter()))
-        {
+        } else if ((abstracthorse instanceof EntityHorseTFC && ((EntityHorseTFC) abstracthorse).isHalter()) ||
+                (abstracthorse instanceof EntityMuleTFC && ((EntityMuleTFC) abstracthorse).isHalter()) ||
+                (abstracthorse instanceof EntityDonkeyTFC && ((EntityDonkeyTFC) abstracthorse).isHalter())) {
             this.horseFaceRopes.rotationPointY = this.head.rotationPointY;
             this.horseFaceRopes.rotationPointZ = this.head.rotationPointZ;
             this.horseFaceRopes.rotateAngleX = this.head.rotateAngleX;
@@ -508,18 +484,14 @@ public class ModelHorseTFC extends ModelHorse
         }
 
         f12 = -1.3089969F + limbSwingAmount * 1.5F;
-        if (f12 > 0.0F)
-        {
+        if (f12 > 0.0F) {
             f12 = 0.0F;
         }
 
-        if (flag)
-        {
+        if (flag) {
             this.tailBase.rotateAngleY = MathHelper.cos(f9 * 0.7F);
             f12 = 0.0F;
-        }
-        else
-        {
+        } else {
             this.tailBase.rotateAngleY = 0.0F;
         }
 
@@ -534,16 +506,13 @@ public class ModelHorseTFC extends ModelHorse
         this.tailTip.rotateAngleX = -0.2617994F + f12;
     }
 
-    private float updateHorseRotation(float p_110683_1_, float p_110683_2_, float p_110683_3_)
-    {
+    private float updateHorseRotation(float p_110683_1_, float p_110683_2_, float p_110683_3_) {
         float f = p_110683_2_ - p_110683_1_;
 
-        while (f < -180.0F)
-        {
+        while (f < -180.0F) {
             f += 360.0F;
         }
-        while (f >= 180.0F)
-        {
+        while (f >= 180.0F) {
             f -= 360.0F;
         }
 

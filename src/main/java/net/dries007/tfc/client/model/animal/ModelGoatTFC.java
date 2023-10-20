@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityGoatTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -17,8 +16,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityGoatTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelGoatTFC
@@ -27,8 +26,7 @@ import net.dries007.tfc.objects.entity.animal.EntityGoatTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelGoatTFC extends ModelBase
-{
+public class ModelGoatTFC extends ModelBase {
     private final ModelRenderer babyhorn1;
     private final ModelRenderer babyhorn2;
     private final ModelRenderer horn1f;
@@ -51,8 +49,7 @@ public class ModelGoatTFC extends ModelBase
     private final ModelRenderer leg4;
 
 
-    public ModelGoatTFC()
-    {
+    public ModelGoatTFC() {
         textureWidth = 64;
         textureHeight = 64;
 
@@ -173,8 +170,7 @@ public class ModelGoatTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
         EntityGoatTFC goat = ((EntityGoatTFC) entity);
@@ -182,10 +178,8 @@ public class ModelGoatTFC extends ModelBase
         float percent = (float) goat.getPercentToAdulthood();
         float ageScale = 2.0F - percent;
 
-        if (goat.getGender() == EntityAnimalTFC.Gender.MALE)
-        {
-            if (percent < 0.5)
-            {
+        if (goat.getGender() == EntityAnimalTFC.Gender.MALE) {
+            if (percent < 0.5) {
                 babyhorn1.isHidden = false;
                 babyhorn2.isHidden = false;
                 horn1f.isHidden = true;
@@ -195,10 +189,7 @@ public class ModelGoatTFC extends ModelBase
                 horn2ma.isHidden = true;
                 horn2mb.isHidden = true;
                 udders.isHidden = true;
-            }
-            else if (percent < 0.75)
-
-            {
+            } else if (percent < 0.75) {
                 babyhorn1.isHidden = true;
                 babyhorn2.isHidden = true;
                 horn1f.isHidden = true;
@@ -209,9 +200,7 @@ public class ModelGoatTFC extends ModelBase
                 horn2mb.isHidden = true;
                 udders.isHidden = true;
 
-            }
-            else
-            {
+            } else {
                 babyhorn1.isHidden = true;
                 babyhorn2.isHidden = true;
                 udders.isHidden = true;
@@ -222,12 +211,8 @@ public class ModelGoatTFC extends ModelBase
                 horn2ma.isHidden = false;
                 horn2mb.isHidden = false;
             }
-        }
-
-        else
-        {
-            if (percent < 0.5)
-            {
+        } else {
+            if (percent < 0.5) {
                 babyhorn1.isHidden = false;
                 babyhorn2.isHidden = false;
                 horn1f.isHidden = true;
@@ -237,9 +222,7 @@ public class ModelGoatTFC extends ModelBase
                 horn2ma.isHidden = true;
                 horn2mb.isHidden = true;
                 udders.isHidden = true;
-            }
-            else
-            {
+            } else {
                 babyhorn1.isHidden = true;
                 babyhorn2.isHidden = true;
                 horn1ma.isHidden = true;
@@ -270,10 +253,8 @@ public class ModelGoatTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent)
-    {
-        if (!(((EntityGoatTFC) ent).sheepTimer > 0))
-        {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
+        if (!(((EntityGoatTFC) ent).sheepTimer > 0)) {
             this.head1.rotateAngleX = par5 / (180F / (float) Math.PI);
             this.head2.rotateAngleX = par5 / (180F / (float) Math.PI);
         }
@@ -288,8 +269,7 @@ public class ModelGoatTFC extends ModelBase
     }
 
     @Override
-    public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks)
-    {
+    public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks) {
         super.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
         head2.rotationPointZ = ((EntityGoatTFC) entity).sheepTimer > 0 ? -7.0F : -5.0F;
         neck.rotationPointY = ((EntityGoatTFC) entity).sheepTimer > 0 ? 13.0F : 10.0F;
@@ -299,8 +279,7 @@ public class ModelGoatTFC extends ModelBase
         head2.rotateAngleX = rotX;
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

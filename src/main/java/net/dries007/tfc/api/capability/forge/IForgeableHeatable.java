@@ -5,17 +5,16 @@
 
 package net.dries007.tfc.api.capability.forge;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
+import javax.annotation.Nonnull;
+import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
@@ -24,15 +23,13 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
  * If you implement this capability, you MUST implement {@link net.dries007.tfc.api.capability.heat.CapabilityItemHeat} as well
  * You should return the same instance from the getCapability calls
  */
-public interface IForgeableHeatable extends IForgeable, IItemHeat
-{
+public interface IForgeableHeatable extends IForgeable, IItemHeat {
     /**
      * Gets the working temperature of the item
      *
      * @return a temperature
      */
-    default float getWorkTemp()
-    {
+    default float getWorkTemp() {
         return getMeltTemp() * 0.6f;
     }
 
@@ -42,8 +39,7 @@ public interface IForgeableHeatable extends IForgeable, IItemHeat
      * @return true if the item is workable
      */
     @Override
-    default boolean isWorkable()
-    {
+    default boolean isWorkable() {
         return getTemperature() > getWorkTemp();
     }
 
@@ -53,8 +49,7 @@ public interface IForgeableHeatable extends IForgeable, IItemHeat
      * @return true if the item is weldable
      */
     @Override
-    default boolean isWeldable()
-    {
+    default boolean isWeldable() {
         return getTemperature() > getWeldTemp();
     }
 
@@ -63,35 +58,26 @@ public interface IForgeableHeatable extends IForgeable, IItemHeat
      *
      * @return a temperature
      */
-    default float getWeldTemp()
-    {
+    default float getWeldTemp() {
         return getMeltTemp() * 0.8f;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    default void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text)
-    {
+    default void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
         float temperature = getTemperature();
         String tooltip = Heat.getTooltip(temperature);
-        if (tooltip != null)
-        {
+        if (tooltip != null) {
             tooltip += TextFormatting.WHITE;
-            if (temperature > getMeltTemp())
-            {
+            if (temperature > getMeltTemp()) {
                 tooltip += " - " + I18n.format(MOD_ID + ".tooltip.liquid");
-            }
-            else if (temperature > getWeldTemp())
-            {
+            } else if (temperature > getWeldTemp()) {
                 tooltip += " - " + I18n.format(MOD_ID + ".tooltip.weldable");
-            }
-            else if (temperature > getWorkTemp())
-            {
+            } else if (temperature > getWorkTemp()) {
                 tooltip += " - " + I18n.format(MOD_ID + ".tooltip.workable");
             }
 
-            if (temperature > 0.9 * getMeltTemp())
-            {
+            if (temperature > 0.9 * getMeltTemp()) {
                 tooltip += " (" + I18n.format(MOD_ID + ".tooltip.danger") + ")";
             }
             text.add(tooltip);

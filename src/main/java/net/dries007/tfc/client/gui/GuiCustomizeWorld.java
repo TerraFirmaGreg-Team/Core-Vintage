@@ -5,25 +5,23 @@
 
 package net.dries007.tfc.client.gui;
 
-import java.io.IOException;
-
 import com.google.common.base.Strings;
 import com.google.gson.JsonParseException;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.world.classic.WorldGenSettings;
+import net.dries007.tfc.world.classic.WorldGenSettings.WorldGenSettingsBuilder;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.world.classic.WorldGenSettings;
-import net.dries007.tfc.world.classic.WorldGenSettings.WorldGenSettingsBuilder;
+import java.io.IOException;
 
 /**
  * todo: remove, won't be supported in 1.13 by vanilla anyway, there will be something else in 1.14.
  */
 @SideOnly(Side.CLIENT)
-public class GuiCustomizeWorld extends GuiScreen implements GuiSlider.FormatHelper, GuiPageButtonList.GuiResponder
-{
+public class GuiCustomizeWorld extends GuiScreen implements GuiSlider.FormatHelper, GuiPageButtonList.GuiResponder {
     private static final int ID_DONE = 0;
     private static final int ID_CANCEL = 1;
     private static final int ID_DEFAULTS = 2;
@@ -54,15 +52,13 @@ public class GuiCustomizeWorld extends GuiScreen implements GuiSlider.FormatHelp
 
     private WorldGenSettingsBuilder settings;
 
-    public GuiCustomizeWorld(GuiCreateWorld guiCreateWorld, String prevSettings)
-    {
+    public GuiCustomizeWorld(GuiCreateWorld guiCreateWorld, String prevSettings) {
         parent = guiCreateWorld;
         settings = loadSettings(prevSettings);
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground();
         drawCenteredString(fontRenderer, title, width / 2, 8, 16777215);
         this.list.drawScreen(mouseX, mouseY, partialTicks);
@@ -70,32 +66,27 @@ public class GuiCustomizeWorld extends GuiScreen implements GuiSlider.FormatHelp
     }
 
     @Override
-    protected void keyTyped(char typedChar, int keyCode)
-    {
+    protected void keyTyped(char typedChar, int keyCode) {
         list.onKeyPressed(typedChar, keyCode);
     }
 
     @Override
-    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
-    {
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         list.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     @Override
-    protected void mouseReleased(int mouseX, int mouseY, int state)
-    {
+    protected void mouseReleased(int mouseX, int mouseY, int state) {
         super.mouseReleased(mouseX, mouseY, state);
         list.mouseReleased(mouseX, mouseY, state);
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException
-    {
+    protected void actionPerformed(GuiButton button) throws IOException {
         if (!button.enabled) return;
 
-        switch (button.id)
-        {
+        switch (button.id) {
             case ID_DONE:
                 parent.chunkProviderSettingsJson = settings.build().toString();
                 mc.displayGuiScreen(parent);
@@ -114,8 +105,7 @@ public class GuiCustomizeWorld extends GuiScreen implements GuiSlider.FormatHelp
     }
 
     @Override
-    public void initGui()
-    {
+    public void initGui() {
         super.initGui();
 
         title = I18n.format("options.customizeTitle");
@@ -124,40 +114,37 @@ public class GuiCustomizeWorld extends GuiScreen implements GuiSlider.FormatHelp
         cancelBtn = addButton(new GuiButton(ID_CANCEL, width / 2 + 5, height - 28, 150, 20, I18n.format("gui.cancel")));
         defaultsBtn = addButton(new GuiButton(ID_DEFAULTS, 20, 5, 80, 20, I18n.format("createWorld.customize.custom.defaults")));
 
-        GuiPageButtonList.GuiListEntry[] page1 = new GuiPageButtonList.GuiListEntry[] {
-            new GuiPageButtonList.GuiSlideEntry(ID_SPAWN_FUZZ, I18n.format("createWorld.customize.custom.spawnfuzz"), true, this, 0, 2500, settings.spawnFuzz),
-            new GuiPageButtonList.GuiButtonEntry(ID_FLAT_BEDROCK, I18n.format("createWorld.customize.custom.flatbedrock"), true, settings.flatBedrock),
-            new GuiPageButtonList.GuiSlideEntry(ID_ROCK_LAYERS, I18n.format("createWorld.customize.custom.smallrocklayer"), true,  this, 1, 11,settings.rockLayerSize),
+        GuiPageButtonList.GuiListEntry[] page1 = new GuiPageButtonList.GuiListEntry[]{
+                new GuiPageButtonList.GuiSlideEntry(ID_SPAWN_FUZZ, I18n.format("createWorld.customize.custom.spawnfuzz"), true, this, 0, 2500, settings.spawnFuzz),
+                new GuiPageButtonList.GuiButtonEntry(ID_FLAT_BEDROCK, I18n.format("createWorld.customize.custom.flatbedrock"), true, settings.flatBedrock),
+                new GuiPageButtonList.GuiSlideEntry(ID_ROCK_LAYERS, I18n.format("createWorld.customize.custom.smallrocklayer"), true, this, 1, 11, settings.rockLayerSize),
 
-            new GuiPageButtonList.GuiSlideEntry(ID_RAVINE_RARITY, I18n.format("createWorld.customize.custom.ravineRarity"), true, this, 0, 250, settings.ravineRarity),
-            new GuiPageButtonList.GuiSlideEntry(ID_RAVINE_HEIGHT, I18n.format("createWorld.customize.custom.ravineHeight"), true, this, 0, 50, settings.ravineHeight),
-            new GuiPageButtonList.GuiSlideEntry(ID_RAVINE_VARIABILITY, I18n.format("createWorld.customize.custom.ravineVariability"), true, this, 0, 100, settings.ravineVariability),
+                new GuiPageButtonList.GuiSlideEntry(ID_RAVINE_RARITY, I18n.format("createWorld.customize.custom.ravineRarity"), true, this, 0, 250, settings.ravineRarity),
+                new GuiPageButtonList.GuiSlideEntry(ID_RAVINE_HEIGHT, I18n.format("createWorld.customize.custom.ravineHeight"), true, this, 0, 50, settings.ravineHeight),
+                new GuiPageButtonList.GuiSlideEntry(ID_RAVINE_VARIABILITY, I18n.format("createWorld.customize.custom.ravineVariability"), true, this, 0, 100, settings.ravineVariability),
 
-            new GuiPageButtonList.GuiSlideEntry(ID_SURFACE_RAVINE_RARITY, I18n.format("createWorld.customize.custom.surfaceRavineRarity"), true, this, 0, 250, settings.surfaceRavineRarity),
-            new GuiPageButtonList.GuiSlideEntry(ID_SURFACE_RAVINE_HEIGHT, I18n.format("createWorld.customize.custom.surfaceRavineHeight"), true, this, 0, 250, settings.surfaceRavineHeight),
-            new GuiPageButtonList.GuiSlideEntry(ID_SURFACE_RAVINE_VARIABILITY, I18n.format("createWorld.customize.custom.surfaceRavineVariability"), true, this, 0, 100, settings.surfaceRavineVariability),
+                new GuiPageButtonList.GuiSlideEntry(ID_SURFACE_RAVINE_RARITY, I18n.format("createWorld.customize.custom.surfaceRavineRarity"), true, this, 0, 250, settings.surfaceRavineRarity),
+                new GuiPageButtonList.GuiSlideEntry(ID_SURFACE_RAVINE_HEIGHT, I18n.format("createWorld.customize.custom.surfaceRavineHeight"), true, this, 0, 250, settings.surfaceRavineHeight),
+                new GuiPageButtonList.GuiSlideEntry(ID_SURFACE_RAVINE_VARIABILITY, I18n.format("createWorld.customize.custom.surfaceRavineVariability"), true, this, 0, 100, settings.surfaceRavineVariability),
 
-            new GuiPageButtonList.GuiSlideEntry(ID_RIVER_RAVINE_RARITY, I18n.format("createWorld.customize.custom.riverRavineRarity"), true, this, 0, 500, settings.riverRavineRarity),
+                new GuiPageButtonList.GuiSlideEntry(ID_RIVER_RAVINE_RARITY, I18n.format("createWorld.customize.custom.riverRavineRarity"), true, this, 0, 500, settings.riverRavineRarity),
         };
-        list = new GuiPageButtonList(mc, width, height, 32, height - 32, 25, this, new GuiPageButtonList.GuiListEntry[][] {
-            page1
+        list = new GuiPageButtonList(mc, width, height, 32, height - 32, 25, this, new GuiPageButtonList.GuiListEntry[][]{
+                page1
         });
 
         update();
     }
 
     @Override
-    public void handleMouseInput() throws IOException
-    {
+    public void handleMouseInput() throws IOException {
         super.handleMouseInput();
         this.list.handleMouseInput();
     }
 
     @Override
-    public void setEntryValue(int id, boolean value)
-    {
-        switch (id)
-        {
+    public void setEntryValue(int id, boolean value) {
+        switch (id) {
             case ID_FLAT_BEDROCK:
                 settings.flatBedrock = value;
                 break;
@@ -166,10 +153,8 @@ public class GuiCustomizeWorld extends GuiScreen implements GuiSlider.FormatHelp
     }
 
     @Override
-    public void setEntryValue(int id, float value)
-    {
-        switch (id)
-        {
+    public void setEntryValue(int id, float value) {
+        switch (id) {
             case ID_SPAWN_FUZZ:
                 settings.spawnFuzz = Math.round(value);
                 break;
@@ -205,32 +190,24 @@ public class GuiCustomizeWorld extends GuiScreen implements GuiSlider.FormatHelp
     }
 
     @Override
-    public void setEntryValue(int id, String value)
-    {
+    public void setEntryValue(int id, String value) {
         update();
     }
 
     @Override
-    public String getText(int id, String name, float value)
-    {
+    public String getText(int id, String name, float value) {
         return name + ": " + this.getFormattedValue(id, value);
     }
 
-    private void update()
-    {
+    private void update() {
         defaultsBtn.enabled = !settings.isDefault();
     }
 
-    private WorldGenSettingsBuilder loadSettings(String str)
-    {
-        if (!Strings.isNullOrEmpty(str))
-        {
-            try
-            {
+    private WorldGenSettingsBuilder loadSettings(String str) {
+        if (!Strings.isNullOrEmpty(str)) {
+            try {
                 return WorldGenSettings.fromString(str);
-            }
-            catch (JsonParseException e)
-            {
+            } catch (JsonParseException e) {
                 TerraFirmaCraft.getLog().error("Error parsing s: {}", str);
                 TerraFirmaCraft.getLog().catching(e);
             }
@@ -238,10 +215,8 @@ public class GuiCustomizeWorld extends GuiScreen implements GuiSlider.FormatHelp
         return new WorldGenSettingsBuilder();
     }
 
-    private String getFormattedValue(int id, float value)
-    {
-        switch (id)
-        {
+    private String getFormattedValue(int id, float value) {
+        switch (id) {
             case ID_SPAWN_FUZZ:
             case ID_RAVINE_RARITY:
             case ID_RAVINE_HEIGHT:

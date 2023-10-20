@@ -5,10 +5,8 @@
 
 package net.dries007.tfc.api.capability.forge;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Metal;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,27 +15,25 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Extension of forgeable heatable handler for blooms
  */
-public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler implements IForgeableMeasurableMetal
-{
+public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler implements IForgeableMeasurableMetal {
     private int metalAmount;
     private Metal metal;
 
-    public ForgeableMeasurableMetalHandler(Metal metal, int metalAmount)
-    {
+    public ForgeableMeasurableMetalHandler(Metal metal, int metalAmount) {
         this.metalAmount = metalAmount;
         this.metal = metal;
         this.heatCapacity = metal.getSpecificHeat();
         this.meltTemp = metal.getMeltTemp();
     }
 
-    public ForgeableMeasurableMetalHandler(@Nonnull NBTTagCompound nbt)
-    {
+    public ForgeableMeasurableMetalHandler(@Nonnull NBTTagCompound nbt) {
         this.metalAmount = 0;
         this.metal = Metal.UNKNOWN;
         this.heatCapacity = Metal.UNKNOWN.getSpecificHeat();
@@ -45,30 +41,25 @@ public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler im
         deserializeNBT(nbt);
     }
 
-    public int getMetalAmount()
-    {
+    public int getMetalAmount() {
         return metalAmount;
     }
 
-    public void setMetalAmount(int metalAmount)
-    {
+    public void setMetalAmount(int metalAmount) {
         this.metalAmount = metalAmount;
     }
 
-    public Metal getMetal()
-    {
+    public Metal getMetal() {
         return metal;
     }
 
-    public void setMetal(Metal metal)
-    {
+    public void setMetal(Metal metal) {
         this.metal = metal;
     }
 
     @Override
     @Nonnull
-    public NBTTagCompound serializeNBT()
-    {
+    public NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = super.serializeNBT();
         nbt.setInteger("metalAmount", metalAmount);
         //noinspection ConstantConditions
@@ -77,15 +68,12 @@ public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler im
     }
 
     @Override
-    public void deserializeNBT(@Nullable NBTTagCompound nbt)
-    {
-        if (nbt != null)
-        {
+    public void deserializeNBT(@Nullable NBTTagCompound nbt) {
+        if (nbt != null) {
             metalAmount = nbt.getInteger("metalAmount");
             ResourceLocation location = new ResourceLocation(nbt.getString("metal"));
             metal = TFCRegistries.METALS.getValue(location);
-            if (metal == null)
-            {
+            if (metal == null) {
                 metal = Metal.UNKNOWN;
             }
             this.meltTemp = metal.getMeltTemp();
@@ -96,8 +84,7 @@ public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler im
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text)
-    {
+    public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
         String desc = TextFormatting.WHITE + I18n.format("tfc.tooltip.units", metalAmount);
         text.add(desc);
         super.addHeatInfo(stack, text);

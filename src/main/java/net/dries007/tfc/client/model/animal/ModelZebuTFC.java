@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,8 +15,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelZebuTFC
@@ -26,8 +25,7 @@ import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelZebuTFC extends ModelBase
-{
+public class ModelZebuTFC extends ModelBase {
     public ModelRenderer maleNeck;
     public ModelRenderer headNode;
     public ModelRenderer legRFrontTop;
@@ -93,8 +91,7 @@ public class ModelZebuTFC extends ModelBase
     public ModelRenderer hornLeftF1D;
     public ModelRenderer hornLeftF2;
 
-    public ModelZebuTFC()
-    {
+    public ModelZebuTFC() {
         textureWidth = 128;
         textureHeight = 128;
 
@@ -426,18 +423,15 @@ public class ModelZebuTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
         EntityZebuTFC zebu = ((EntityZebuTFC) entity);
 
         float percent = (float) zebu.getPercentToAdulthood();
         float ageScale = 2.0F - percent;
 
-        if (zebu.getGender() == EntityAnimalTFC.Gender.MALE)
-        {
-            if (percent < 0.5)
-            {
+        if (zebu.getGender() == EntityAnimalTFC.Gender.MALE) {
+            if (percent < 0.5) {
                 hornML1.isHidden = true;
                 hornML2.isHidden = true;
                 hornML3a.isHidden = true;
@@ -464,9 +458,7 @@ public class ModelZebuTFC extends ModelBase
                 hornLeftF2.isHidden = true;
                 udders.isHidden = true;
                 maleNeck.isHidden = true;
-            }
-            else if (percent < 0.75)
-            {
+            } else if (percent < 0.75) {
                 hornML3a.isHidden = true;
                 hornML3b.isHidden = true;
                 hornML3c.isHidden = true;
@@ -488,9 +480,7 @@ public class ModelZebuTFC extends ModelBase
                 hornLeftF1D.isHidden = true;
                 hornLeftF2.isHidden = true;
                 udders.isHidden = true;
-            }
-            else
-            {
+            } else {
                 hornRightF1A.isHidden = true;
                 hornRightF1B.isHidden = true;
                 hornRightF1C.isHidden = true;
@@ -503,12 +493,8 @@ public class ModelZebuTFC extends ModelBase
                 hornLeftF2.isHidden = true;
                 udders.isHidden = true;
             }
-        }
-
-        else
-        {
-            if (percent < 0.5)
-            {
+        } else {
+            if (percent < 0.5) {
                 hornML1.isHidden = true;
                 hornML2.isHidden = true;
                 hornML3a.isHidden = true;
@@ -535,9 +521,7 @@ public class ModelZebuTFC extends ModelBase
                 hornLeftF2.isHidden = true;
                 udders.isHidden = true;
                 maleNeck.isHidden = true;
-            }
-            else if (percent < 0.75)
-            {
+            } else if (percent < 0.75) {
                 hornML1.isHidden = true;
                 hornML2.isHidden = true;
                 hornML3a.isHidden = true;
@@ -555,9 +539,7 @@ public class ModelZebuTFC extends ModelBase
                 hornRightF2.isHidden = true;
                 hornLeftF2.isHidden = true;
                 maleNeck.isHidden = true;
-            }
-            else
-            {
+            } else {
                 hornMR1.isHidden = true;
                 hornML1.isHidden = true;
                 maleNeck.isHidden = true;
@@ -583,8 +565,7 @@ public class ModelZebuTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         setRotateAngle(headNode, f4 / (180F / (float) Math.PI), f3 / (180F / (float) Math.PI), 0F);
         setRotateAngle(neck, f4 / (1.5F * (180F / (float) Math.PI)) + -0.7475245186291712F, f3 / (1.5F * (180F / (float) Math.PI)), 0F);
 
@@ -622,8 +603,7 @@ public class ModelZebuTFC extends ModelBase
         maleNeck.isHidden = false;
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

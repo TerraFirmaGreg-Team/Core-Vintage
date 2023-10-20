@@ -1,21 +1,16 @@
 package tfcflorae.util.agriculture;
 
-import net.minecraft.item.Item;
-
 import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.objects.items.food.ItemFoodTFC;
-import net.dries007.tfc.util.agriculture.Food;
+import net.minecraft.item.Item;
+import tfcflorae.objects.items.ItemsTFCF;
+import tfcflorae.objects.items.food.ItemFoodTFCF;
 
-import tfcflorae.objects.items.*;
-import tfcflorae.objects.items.food.*;
-
-import static tfcflorae.util.agriculture.FoodDataTFCF.*;
+import static tfcflorae.util.agriculture.FoodDataTFCF.DRIED_FRUIT_DECAY;
 
 /**
  * This is an easy way to wrap all the TFC fruits with our data
  */
-public enum FruitsTFCF
-{
+public enum FruitsTFCF {
     // TFC Foods
     /*
     BANANA(ItemFoodTFC.get(Food.BANANA), true, DRIED_FRUIT_DECAY, true),
@@ -121,31 +116,27 @@ public enum FruitsTFCF
     GREEN_GRAPE(ItemFoodTFCF.get(ItemsTFCF.GREEN_GRAPE), true, DRIED_FRUIT_DECAY, false),
     PURPLE_GRAPE(ItemFoodTFCF.get(ItemsTFCF.PURPLE_GRAPE), true, DRIED_FRUIT_DECAY, false);
 
+    public final boolean isVanillaFood;
     private final Item fruit;
     private final boolean dry;
     private final FoodData driedData;
-    public final boolean isVanillaFood;
 
-    FruitsTFCF(Item fruit, boolean dry, FoodData driedData, boolean isVanillaFood)
-    {
+    FruitsTFCF(Item fruit, boolean dry, FoodData driedData, boolean isVanillaFood) {
         this.fruit = fruit;
         this.dry = dry;
         this.driedData = driedData;
         this.isVanillaFood = isVanillaFood;
     }
 
-    public Item getFruit()
-    {
+    public Item getFruit() {
         return this.fruit;
     }
 
-    public boolean canDry()
-    {
+    public boolean canDry() {
         return this.dry;
     }
 
-    public FoodData getDriedData()
-    {
+    public FoodData getDriedData() {
         return this.driedData;
     }
 }

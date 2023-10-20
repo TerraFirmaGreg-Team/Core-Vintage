@@ -5,18 +5,16 @@
 
 package net.dries007.tfc.api.util;
 
-import java.util.Random;
-
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.world.classic.worldgen.trees.FruitTreeGen;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.world.classic.worldgen.trees.FruitTreeGen;
+import java.util.Random;
 
-public interface IFruitTreeGenerator
-{
+public interface IFruitTreeGenerator {
     IFruitTreeGenerator DEFAULT = new FruitTreeGen();
 
     /**
@@ -38,8 +36,7 @@ public interface IFruitTreeGenerator
      * @param treeType The tree type (for checking if the tree can generate)
      * @return true if the tree can generate.
      */
-    default boolean canGenerateTree(World world, BlockPos pos, IFruitTree treeType)
-    {
+    default boolean canGenerateTree(World world, BlockPos pos, IFruitTree treeType) {
         // Check if there is room directly upwards
         for (int y = 1; y <= 5; y++)
             if (!world.getBlockState(pos.up(y)).getMaterial().isReplaceable())
@@ -50,8 +47,7 @@ public interface IFruitTreeGenerator
             return false;
 
         // Check the position for liquids, etc.
-        if (world.getBlockState(pos).getMaterial().isLiquid() || !world.getBlockState(pos).getMaterial().isReplaceable())
-        {
+        if (world.getBlockState(pos).getMaterial().isLiquid() || !world.getBlockState(pos).getMaterial().isReplaceable()) {
             return false;
         }
 

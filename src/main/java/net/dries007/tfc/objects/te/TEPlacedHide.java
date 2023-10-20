@@ -5,34 +5,29 @@
 
 package net.dries007.tfc.objects.te;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.nbt.NBTTagCompound;
-
 
 @ParametersAreNonnullByDefault
-public class TEPlacedHide extends TEBase
-{
+public class TEPlacedHide extends TEBase {
     private short positions; // essentially a boolean[16]
 
-    public TEPlacedHide()
-    {
+    public TEPlacedHide() {
         positions = 0;
     }
 
-    public boolean isComplete()
-    {
+    public boolean isComplete() {
         return positions == -1;
     }
 
-    public short getScrapedPositions()
-    {
+    public short getScrapedPositions() {
         return positions;
     }
 
-    public void onClicked(float hitX, float hitZ)
-    {
+    public void onClicked(float hitX, float hitZ) {
         // This needs to change on both client and server
         int xPos = (int) (hitX * 4);
         int zPos = (int) (hitZ * 4);
@@ -41,16 +36,14 @@ public class TEPlacedHide extends TEBase
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
+    public void readFromNBT(NBTTagCompound nbt) {
         positions = nbt.getShort("positions");
         super.readFromNBT(nbt);
     }
 
     @Override
     @Nonnull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-    {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setShort("positions", positions);
         return super.writeToNBT(nbt);
     }

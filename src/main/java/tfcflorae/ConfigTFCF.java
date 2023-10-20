@@ -6,18 +6,13 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import net.dries007.tfc.TerraFirmaCraft;
-
 import static tfcflorae.TFCFlorae.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID)
-public class ConfigTFCF
-{
+public class ConfigTFCF {
     @SubscribeEvent
-    public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
-    {
-        if (event.getModID().equals(MODID))
-        {
+    public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.getModID().equals(MODID)) {
             TFCFlorae.getLog().warn("Config changed");
             ConfigManager.sync(MODID, Config.Type.INSTANCE);
         }
@@ -25,8 +20,7 @@ public class ConfigTFCF
 
     @Config(modid = MODID, category = "general", name = "TFCFlorae - General")
     @Config.LangKey("config." + MODID + ".general")
-    public static final class General
-    {
+    public static final class General {
         @Config.Comment("World generation settings")
         @Config.LangKey("config." + MODID + ".general.world")
         public static final WorldCFG WORLD = new WorldCFG();
@@ -35,8 +29,7 @@ public class ConfigTFCF
         @Config.LangKey("config." + MODID + ".general.structures")
         public static final StructuresCFG STRUCTURES = new StructuresCFG();
 
-        public static final class WorldCFG
-        {
+        public static final class WorldCFG {
             @Config.Comment("The rarity for humus pits to occur. On average 1 / N chunks will have a humus deposit, if the chunk in question is valid for humus to spawn.")
             @Config.RangeInt(min = 1)
             @Config.LangKey("config." + MODID + ".general.world.humusRarity")
@@ -577,8 +570,7 @@ public class ConfigTFCF
             public boolean enableAllWaterPlants = true;
         }
 
-        public static final class StructuresCFG
-        {
+        public static final class StructuresCFG {
             @Config.Comment(value = "Activate structure generation?")
             @Config.LangKey("config." + MODID + ".general.structures.activateStructureGeneration")
             public boolean activateStructureGeneration = true;

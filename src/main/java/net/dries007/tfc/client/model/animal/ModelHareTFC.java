@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
+import net.dries007.tfc.objects.entity.animal.EntityHareTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,16 +15,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityHareTFC;
-
 /**
  * ModelHareTFC
  * Created using Tabula 7.1.0
  */
 
 @SideOnly(Side.CLIENT)
-public class ModelHareTFC extends ModelBase
-{
+public class ModelHareTFC extends ModelBase {
     public ModelRenderer hareHead;
     public ModelRenderer hareNose;
     public ModelRenderer hareRightFoot;
@@ -38,8 +36,7 @@ public class ModelHareTFC extends ModelBase
     public ModelRenderer hareRightEar;
     private float jumpRotation;
 
-    public ModelHareTFC()
-    {
+    public ModelHareTFC() {
         textureWidth = 64;
         textureHeight = 32;
 
@@ -96,12 +93,10 @@ public class ModelHareTFC extends ModelBase
         hareHead.addChild(this.hareRightEar);
     }
 
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
 
-        if (this.isChild)
-        {
+        if (this.isChild) {
             GlStateManager.pushMatrix();
             GlStateManager.scale(0.56666666F, 0.56666666F, 0.56666666F);
             GlStateManager.translate(0.0F, 22.0F * scale, 2.0F * scale);
@@ -120,9 +115,7 @@ public class ModelHareTFC extends ModelBase
             hareRightArm.render(scale);
             hareTail.render(scale);
             GlStateManager.popMatrix();
-        }
-        else
-        {
+        } else {
             GlStateManager.pushMatrix();
             GlStateManager.scale(0.6F, 0.6F, 0.6F);
             GlStateManager.translate(0.0F, 16.0F * scale, 0.0F);
@@ -140,8 +133,7 @@ public class ModelHareTFC extends ModelBase
         }
     }
 
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
-    {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
         float f = ageInTicks - (float) entityIn.ticksExisted;
         EntityHareTFC EntityHareTFC = (EntityHareTFC) entityIn;
         this.hareNose.rotateAngleX = headPitch * 0.017453292F;
@@ -157,14 +149,12 @@ public class ModelHareTFC extends ModelBase
         this.hareRightArm.rotateAngleX = (this.jumpRotation * -40.0F - 11.0F) * 0.017453292F;
     }
 
-    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
-    {
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
         this.jumpRotation = MathHelper.sin(((EntityHareTFC) entitylivingbaseIn).getJumpCompletion(partialTickTime) * (float) Math.PI);
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

@@ -5,12 +5,10 @@
 
 package net.dries007.tfc.api.types;
 
+import net.dries007.tfc.util.calendar.Month;
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.util.calendar.Month;
-
-public interface IBerryBush
-{
+public interface IBerryBush {
     /**
      * @return the minimum time the bush will take to grow one bush/fruit ripe (in hours)
      */
@@ -63,8 +61,7 @@ public interface IBerryBush
      */
     boolean isSpiky();
 
-    enum Size
-    {
+    enum Size {
         SMALL, MEDIUM, LARGE
     }
 }

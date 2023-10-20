@@ -5,11 +5,13 @@
 
 package net.dries007.tfc.world.classic.worldgen.trees;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+import net.dries007.tfc.world.classic.StructureHelper;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -20,26 +22,21 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.world.classic.StructureHelper;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 
-public class TreeGenAcacia implements ITreeGenerator
-{
+public class TreeGenAcacia implements ITreeGenerator {
     private static final PlacementSettings settings = StructureHelper.getDefaultSettings();
     private IBlockState trunk;
     private IBlockState bark;
 
     @Override
-    public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen)
-    {
+    public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen) {
         trunk = BlockLogTFC.get(tree).getDefaultState().withProperty(PLACED, false);
         bark = BlockLogTFC.get(tree).getDefaultState().withProperty(PLACED, false).withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
 
@@ -51,14 +48,12 @@ public class TreeGenAcacia implements ITreeGenerator
 
         int x1, y1, y2 = 0, y3 = 0;
         EnumFacing side = EnumFacing.UP;
-        if (smallBranch)
-        {
+        if (smallBranch) {
             y3 = rand.nextInt(3) + 2;
             side = sides.get(rand.nextInt(sides.size()));
             placeBranch(manager, world, pos.offset(side).add(0, y3, 0), tree.getRegistryName() + "/branch3");
         }
-        for (int i = 0; i < branches; i++)
-        {
+        for (int i = 0; i < branches; i++) {
             x1 = 2 + rand.nextInt(3);
             y1 = 4 + rand.nextInt(height - 2);
             if (y1 > y2)
@@ -69,10 +64,8 @@ public class TreeGenAcacia implements ITreeGenerator
             int branch = 1 + rand.nextInt(2);
             placeBranch(manager, world, pos.add(0, y1, 0).offset(face, x1), tree.getRegistryName() + "/branch" + branch);
         }
-        for (int i = 0; i < height; i++)
-        {
-            if (smallBranch && i == y3)
-            {
+        for (int i = 0; i < height; i++) {
+            if (smallBranch && i == y3) {
                 placeLog(world, pos.add(0, i - 1, 0), true);
                 pos = pos.offset(side.getOpposite());
                 placeLog(world, pos.add(0, i, 0), true);
@@ -83,13 +76,11 @@ public class TreeGenAcacia implements ITreeGenerator
         placeBranch(manager, world, pos.add(0, height, 0), tree.getRegistryName() + "/branch3");
     }
 
-    private void placeBranch(TemplateManager manager, World world, BlockPos pos, String name)
-    {
+    private void placeBranch(TemplateManager manager, World world, BlockPos pos, String name) {
         ResourceLocation base = new ResourceLocation(name);
         Template structureBase = manager.get(world.getMinecraftServer(), base);
 
-        if (structureBase == null)
-        {
+        if (structureBase == null) {
             TerraFirmaCraft.getLog().warn("Unable to find a template for " + base.toString());
             return;
         }
@@ -99,8 +90,7 @@ public class TreeGenAcacia implements ITreeGenerator
         StructureHelper.addStructureToWorld(world, pos, structureBase, settings);
     }
 
-    private void placeLog(World world, BlockPos pos, boolean useBark)
-    {
+    private void placeLog(World world, BlockPos pos, boolean useBark) {
         if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos).getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos).getBlock() instanceof BlockLeavesTFC)
             world.setBlockState(pos, useBark ? bark : trunk);
     }

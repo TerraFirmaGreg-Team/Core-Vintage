@@ -5,19 +5,16 @@
 
 package net.dries007.tfc.client.gui;
 
+import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-import net.dries007.tfc.objects.container.ContainerChestTFC;
-
-public class GuiChestTFC extends GuiContainerTFC
-{
+public class GuiChestTFC extends GuiContainerTFC {
     private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation("textures/gui/container/generic_54.png");
     private final int inventoryRows;
 
-    public GuiChestTFC(ContainerChestTFC container, InventoryPlayer playerInv)
-    {
+    public GuiChestTFC(ContainerChestTFC container, InventoryPlayer playerInv) {
         super(container, playerInv, CHEST_GUI_TEXTURE);
         this.allowUserInput = false;
         this.inventoryRows = container.getLowerChestInventory().getSizeInventory() / 9;
@@ -25,8 +22,7 @@ public class GuiChestTFC extends GuiContainerTFC
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-    {
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(CHEST_GUI_TEXTURE);
         int i = (this.width - this.xSize) / 2;

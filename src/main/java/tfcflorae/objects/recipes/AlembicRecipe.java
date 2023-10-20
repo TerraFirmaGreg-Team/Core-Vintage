@@ -1,10 +1,7 @@
 package tfcflorae.objects.recipes;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -12,30 +9,14 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.Helpers;
-
 import tfcflorae.api.registries.TFCFRegistries;
 
-public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe>
-{
-    @Nullable
-    public static AlembicRecipe get(ItemStack stack, FluidStack fluidStack)
-    {
-        return TFCFRegistries.ALEMBIC.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack) && x.getDuration() != 0).findFirst().orElse(null);
-    }
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
-    /**
-     * Checks if a fluidstack is an ingredient for any recipe
-     * Used as a complement to alembic's whitelist
-     */
-    public static boolean isAlembicFluid(FluidStack fluidStack)
-    {
-        return TFCFRegistries.ALEMBIC.getValuesCollection().stream().filter(x -> x.inputFluid.testIgnoreCount(fluidStack)).findFirst().orElse(null) != null;
-    }
-
+public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe> {
     protected final IIngredient<FluidStack> inputFluid;
     private final FluidStack outputFluid;
     private final ItemStack outputStack;
@@ -51,8 +32,7 @@ public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe>
      * @param duration    the duration, in ticks, for this recipe to complete.
      * @param evaporation the temperature at which the inputFluid starts converting (boiling/evaporating) into the outputFluid.
      */
-    public AlembicRecipe(@Nonnull IIngredient<FluidStack> inputFluid, @Nullable FluidStack outputFluid, @Nonnull ItemStack outputStack, int duration, float evaporationTemp)
-    {
+    public AlembicRecipe(@Nonnull IIngredient<FluidStack> inputFluid, @Nullable FluidStack outputFluid, @Nonnull ItemStack outputStack, int duration, float evaporationTemp) {
         this.inputFluid = inputFluid;
         this.outputFluid = outputFluid;
         this.outputStack = outputStack;
@@ -60,13 +40,24 @@ public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe>
         this.evaporationTemp = evaporationTemp;
     }
 
-    public boolean isValidInput(@Nullable FluidStack inputFluid)
-    {
+    @Nullable
+    public static AlembicRecipe get(ItemStack stack, FluidStack fluidStack) {
+        return TFCFRegistries.ALEMBIC.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack) && x.getDuration() != 0).findFirst().orElse(null);
+    }
+
+    /**
+     * Checks if a fluidstack is an ingredient for any recipe
+     * Used as a complement to alembic's whitelist
+     */
+    public static boolean isAlembicFluid(FluidStack fluidStack) {
+        return TFCFRegistries.ALEMBIC.getValuesCollection().stream().filter(x -> x.inputFluid.testIgnoreCount(fluidStack)).findFirst().orElse(null) != null;
+    }
+
+    public boolean isValidInput(@Nullable FluidStack inputFluid) {
         return this.inputFluid.test(inputFluid);
     }
 
-    public int getDuration()
-    {
+    public int getDuration() {
         return duration;
     }
 
@@ -74,8 +65,7 @@ public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe>
      * @param temperature a temperature
      * @return true if the recipe should evaporate / transform at this temperature
      */
-    public boolean isValidTemperature(float temperature)
-    {
+    public boolean isValidTemperature(float temperature) {
         return temperature >= evaporationTemp;
     }
 
@@ -85,8 +75,7 @@ public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe>
      * @return The output fluid stack
      */
     @Nullable
-    public FluidStack getOutputFluid()
-    {
+    public FluidStack getOutputFluid() {
         return outputFluid != null ? outputFluid.copy() : null;
     }
 
@@ -96,32 +85,25 @@ public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe>
      * @return the output item stack
      */
     @Nonnull
-    public ItemStack getOutputStack()
-    {
+    public ItemStack getOutputStack() {
         return outputStack;
     }
 
     @Nonnull
-    public IIngredient<FluidStack> getFluidIngredient()
-    {
+    public IIngredient<FluidStack> getFluidIngredient() {
         return inputFluid;
     }
 
     @Nullable
-    public FluidStack getOutputFluid(FluidStack inputFluid, ItemStack inputStack)
-    {
-        if (outputFluid != null)
-        {
+    public FluidStack getOutputFluid(FluidStack inputFluid, ItemStack inputStack) {
+        if (outputFluid != null) {
             // Ignore input and replace with output
             int outputAmount = Math.min(outputFluid.amount, 1000);
             return new FluidStack(outputFluid.getFluid(), outputAmount);
-        }
-        else
-        {
+        } else {
             // Try and keep as much of the original input as possible
             int retainAmount = inputFluid.amount - (this.inputFluid.getAmount());
-            if (retainAmount > 0)
-            {
+            if (retainAmount > 0) {
                 return new FluidStack(inputFluid.getFluid(), inputFluid.amount - (this.inputFluid.getAmount()));
             }
         }
@@ -129,33 +111,25 @@ public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe>
     }
 
     @Nonnull
-    public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack)
-    {
+    public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
         List<ItemStack> outputList = new ArrayList<>();
-        if (!this.outputStack.isEmpty())
-        {
+        if (!this.outputStack.isEmpty()) {
             // Ignore input and replace with output
             int outputCount = outputStack.getCount();
-            do
-            {
+            do {
                 int count = Math.min(outputCount, outputStack.getMaxStackSize());
                 ItemStack output = outputStack.copy();
                 output.setCount(count);
                 outputCount -= count;
                 outputList.add(output);
             } while (outputCount > 0);
-        }
-        else
-        {
+        } else {
             // Try and keep as much of the original input as possible
             int retainCount = inputStack.getCount();
-            if (retainCount > 0)
-            {
+            if (retainCount > 0) {
                 inputStack.setCount(retainCount);
                 outputList.add(inputStack);
-            }
-            else
-            {
+            } else {
                 outputList.add(ItemStack.EMPTY);
             }
         }
@@ -174,7 +148,7 @@ public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe>
     /**
      * Called by TEAlembic when the alembic just sealed
      * Use this if you want to do something to the input (like add a food trait) when the recipe "just started"
-     *
+     * <p>
      * You shouldn't consume the input here (use on unsealed if needed), otherwise, you're gonna keep consuming when the alembic reloads
      *
      * @param inputFluid the fluid that is in the alembic when it got sealed
@@ -192,8 +166,7 @@ public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe>
      * @return a fluid to replace the input when the alembic is unsealed
      */
     @Nullable
-    public FluidStack getOutputFluidOnUnseal(FluidStack inputFluid, ItemStack inputStack)
-    {
+    public FluidStack getOutputFluidOnUnseal(FluidStack inputFluid, ItemStack inputStack) {
         return inputFluid;
     }
 
@@ -206,8 +179,7 @@ public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe>
      * @return a list of items to replace the input when the alembic is unsealed
      */
     @Nonnull
-    public List<ItemStack> getOutputItemOnUnseal(FluidStack inputFluid, ItemStack inputStack)
-    {
+    public List<ItemStack> getOutputItemOnUnseal(FluidStack inputFluid, ItemStack inputStack) {
         return Helpers.listOf(inputStack);
     }
 
@@ -217,22 +189,15 @@ public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe>
      * @return the name of the item stack produced, or the fluid produced, or a custom name if needed
      */
     @SideOnly(Side.CLIENT)
-    public String getResultName()
-    {
+    public String getResultName() {
         ItemStack resultStack = getOutputStack();
-        if (!resultStack.isEmpty())
-        {
+        if (!resultStack.isEmpty()) {
             return resultStack.getDisplayName();
-        }
-        else
-        {
+        } else {
             FluidStack fluid = getOutputFluid();
-            if (fluid == null)
-            {
+            if (fluid == null) {
                 return "???";
-            }
-            else
-            {
+            } else {
                 return fluid.getFluid().getLocalizedName(fluid);
             }
         }

@@ -5,9 +5,8 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.entity.animal.EntityGrouseTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,8 +15,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityGrouseTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelGrouseTFC
@@ -26,8 +25,7 @@ import net.dries007.tfc.objects.entity.animal.EntityGrouseTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelGrouseTFC extends ModelBase
-{
+public class ModelGrouseTFC extends ModelBase {
     public ModelRenderer tails5;
     public ModelRenderer tails6;
     public ModelRenderer tails3;
@@ -56,8 +54,7 @@ public class ModelGrouseTFC extends ModelBase
     public ModelRenderer wingRChild;
     public ModelRenderer wingLChild;
 
-    public ModelGrouseTFC()
-    {
+    public ModelGrouseTFC() {
         textureWidth = 64;
         textureHeight = 32;
 
@@ -183,8 +180,7 @@ public class ModelGrouseTFC extends ModelBase
     }
 
     @Override
-    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
         EntityGrouseTFC grouse = ((EntityGrouseTFC) entity);
@@ -192,10 +188,8 @@ public class ModelGrouseTFC extends ModelBase
         float percent = (float) grouse.getPercentToAdulthood();
         float ageScale = 2.0F - percent;
 
-        if (grouse.getGender() == EntityAnimalTFC.Gender.MALE)
-        {
-            if (percent < 0.5)
-            {
+        if (grouse.getGender() == EntityAnimalTFC.Gender.MALE) {
+            if (percent < 0.5) {
                 tailFTip.isHidden = true;
                 maleMane.isHidden = true;
                 tails1.isHidden = true;
@@ -207,9 +201,7 @@ public class ModelGrouseTFC extends ModelBase
                 tails7.isHidden = true;
                 tails8.isHidden = true;
                 tails9.isHidden = true;
-            }
-            else
-            {
+            } else {
                 tailFTip.isHidden = true;
                 maleMane.isHidden = false;
                 tails1.isHidden = false;
@@ -223,16 +215,10 @@ public class ModelGrouseTFC extends ModelBase
                 tails9.isHidden = false;
 
             }
-        }
-
-        else
-        {
-            if (percent < 0.5)
-            {
+        } else {
+            if (percent < 0.5) {
                 tailFTip.isHidden = true;
-            }
-            else
-            {
+            } else {
                 tailFTip.isHidden = false;
                 maleMane.isHidden = true;
                 tails1.isHidden = true;
@@ -272,8 +258,7 @@ public class ModelGrouseTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
         this.head.rotateAngleX = -(par5 / (180F / (float) Math.PI));
         this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
 
@@ -299,8 +284,7 @@ public class ModelGrouseTFC extends ModelBase
         tails9.isHidden = false;
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

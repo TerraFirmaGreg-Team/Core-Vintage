@@ -5,18 +5,16 @@
 
 package net.dries007.tfc.util.agriculture;
 
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.item.ItemStack;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.item.ItemStack;
-
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.util.OreDictionaryHelper;
-
 import static net.dries007.tfc.util.agriculture.Food.Category.*;
 
-public enum Food
-{
+public enum Food {
     BANANA(FRUIT, 4, 0.2f, 0f, 0f, 0f, 1f, 0f, 0f, 2f),
     BLACKBERRY(FRUIT, 4, 0.2f, 5f, 0f, 0f, 0.75f, 0f, 0f, 4.9f),
     BLUEBERRY(FRUIT, 4, 0.2f, 5f, 0f, 0f, 0.75f, 0f, 0f, 4.9f),
@@ -140,13 +138,11 @@ public enum Food
 
     private final String[] oreDictNames;
 
-    Food(@Nonnull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy, float decayModifier, String... oreNames)
-    {
+    Food(@Nonnull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy, float decayModifier, String... oreNames) {
         this(category, hunger, saturation, water, grain, veg, fruit, meat, dairy, decayModifier, 0, -1, oreNames);
     }
 
-    Food(@Nonnull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy, float decayModifier, float heatCapacity, float cookingTemp, String... oreNames)
-    {
+    Food(@Nonnull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy, float decayModifier, float heatCapacity, float cookingTemp, String... oreNames) {
         this.category = category;
         this.foodData = new FoodData(hunger, water, saturation, grain, fruit, veg, meat, dairy, decayModifier);
 
@@ -158,40 +154,33 @@ public enum Food
     }
 
     @Nonnull
-    public Category getCategory()
-    {
+    public Category getCategory() {
         return category;
     }
 
     @Nonnull
-    public FoodData getData()
-    {
+    public FoodData getData() {
         return foodData;
     }
 
-    public boolean isHeatable()
-    {
+    public boolean isHeatable() {
         return heatable;
     }
 
-    public float getHeatCapacity()
-    {
+    public float getHeatCapacity() {
         return heatCapacity;
     }
 
-    public float getCookingTemp()
-    {
+    public float getCookingTemp() {
         return cookingTemp;
     }
 
     @Nullable
-    public String[] getOreDictNames()
-    {
+    public String[] getOreDictNames() {
         return oreDictNames;
     }
 
-    public enum Category
-    {
+    public enum Category {
         FRUIT,
         GRAIN,
         BREAD,
@@ -202,12 +191,9 @@ public enum Food
         MEAL,
         OTHER; // Provided for addons / other mods
 
-        public static boolean doesStackMatchCategories(ItemStack stack, Category... categories)
-        {
-            for (Category cat : categories)
-            {
-                if (OreDictionaryHelper.doesStackMatchOre(stack, OreDictionaryHelper.toString("category_" + cat.name())))
-                {
+        public static boolean doesStackMatchCategories(ItemStack stack, Category... categories) {
+            for (Category cat : categories) {
+                if (OreDictionaryHelper.doesStackMatchOre(stack, OreDictionaryHelper.toString("category_" + cat.name()))) {
                     return true;
                 }
             }

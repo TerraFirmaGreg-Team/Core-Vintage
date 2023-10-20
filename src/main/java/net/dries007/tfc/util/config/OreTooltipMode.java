@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.util.config;
 
-public enum OreTooltipMode
-{
+public enum OreTooltipMode {
     HIDE("Hide ore information"),
     UNIT_ONLY("Show only the ore units"),
     TOTAL_ONLY("Show only the stack total units"),
@@ -15,8 +14,7 @@ public enum OreTooltipMode
 
     private final String name;
 
-    OreTooltipMode(String name)
-    {
+    OreTooltipMode(String name) {
         this.name = name;
     }
 
@@ -24,8 +22,7 @@ public enum OreTooltipMode
      * Shows this text in config instead of the enum name
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return name;
     }
 }

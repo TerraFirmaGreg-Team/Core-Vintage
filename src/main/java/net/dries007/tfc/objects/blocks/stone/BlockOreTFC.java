@@ -5,12 +5,9 @@
 
 package net.dries007.tfc.objects.blocks.stone;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.Ore;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyEnum;
@@ -27,33 +24,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.items.metal.ItemOreTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
-public class BlockOreTFC extends Block
-{
+public class BlockOreTFC extends Block {
     public static final PropertyEnum<Ore.Grade> GRADE = PropertyEnum.create("grade", Ore.Grade.class);
     private static final Map<Ore, Map<Rock, BlockOreTFC>> TABLE = new HashMap<>();
-
-    public static BlockOreTFC get(Ore ore, Rock rock)
-    {
-        return TABLE.get(ore).get(rock);
-    }
-
-    public static IBlockState get(Ore ore, Rock rock, Ore.Grade grade)
-    {
-        IBlockState state = TABLE.get(ore).get(rock).getDefaultState();
-        if (!ore.isGraded()) return state;
-        return state.withProperty(GRADE, grade);
-    }
-
     public final Ore ore;
     public final Rock rock;
 
-    public BlockOreTFC(Ore ore, Rock rock)
-    {
+    public BlockOreTFC(Ore ore, Rock rock) {
         super(Rock.Type.RAW.material);
 
         if (!TABLE.containsKey(ore))
@@ -68,38 +52,43 @@ public class BlockOreTFC extends Block
         setHarvestLevel("pickaxe", 0);
     }
 
+    public static BlockOreTFC get(Ore ore, Rock rock) {
+        return TABLE.get(ore).get(rock);
+    }
+
+    public static IBlockState get(Ore ore, Rock rock, Ore.Grade grade) {
+        IBlockState state = TABLE.get(ore).get(rock).getDefaultState();
+        if (!ore.isGraded()) return state;
+        return state.withProperty(GRADE, grade);
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     @Nonnull
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(GRADE, Ore.Grade.valueOf(meta));
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return state.getValue(GRADE).getMeta();
     }
 
     @Override
     @Nonnull
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return ItemOreTFC.get(ore);
     }
 
     @Override
-    public int damageDropped(IBlockState state)
-    {
+    public int damageDropped(IBlockState state) {
         return getMetaFromState(state);
     }
 
     @Override
     @Nonnull
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer()
-    {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -107,15 +96,13 @@ public class BlockOreTFC extends Block
      * Handle drops separately, so will always drop
      */
     @Override
-    public boolean canDropFromExplosion(Explosion explosionIn)
-    {
+    public boolean canDropFromExplosion(Explosion explosionIn) {
         return false;
     }
 
     @Override
     @Nonnull
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, GRADE);
     }
 
@@ -123,10 +110,8 @@ public class BlockOreTFC extends Block
      * Ore blocks should always drop from explosions, see #1325
      */
     @Override
-    public void onBlockExploded(World world, BlockPos pos, Explosion explosion)
-    {
-        if (!world.isRemote)
-        {
+    public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
+        if (!world.isRemote) {
             dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
         }
         super.onBlockExploded(world, pos, explosion);
@@ -134,8 +119,7 @@ public class BlockOreTFC extends Block
 
     @Override
     @Nonnull
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(state.getBlock());
     }
 }

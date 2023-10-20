@@ -5,17 +5,17 @@
 
 package net.dries007.tfc.objects.items.metal;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.events.ProspectEvent;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.network.PacketProspectResult;
-
+import net.dries007.tfc.util.skills.ProspectingSkill;
+import net.dries007.tfc.util.skills.SkillType;
+import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
+import net.dries007.tfc.world.classic.worldgen.vein.VeinType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -26,48 +26,39 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.util.skills.ProspectingSkill;
-import net.dries007.tfc.util.skills.SkillType;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinType;
-
 import net.minecraftforge.common.MinecraftForge;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 @ParametersAreNonnullByDefault
-public class ItemProspectorPick extends ItemMetalTool
-{
+public class ItemProspectorPick extends ItemMetalTool {
     private static final int PROSPECT_RADIUS = 12;
     private static final int COOLDOWN = 10;
     private static final Random RANDOM = new Random();
 
-    public ItemProspectorPick(Metal metal, Metal.ItemType type)
-    {
+    public ItemProspectorPick(Metal metal, Metal.ItemType type) {
         super(metal, type);
     }
 
     @Override
     @Nonnull
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, @Nullable EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, @Nullable EnumFacing facing, float hitX, float hitY, float hitZ) {
         IBlockState state = worldIn.getBlockState(pos);
-        if (facing != null)
-        {
+        if (facing != null) {
             SoundType soundType = state.getBlock().getSoundType(state, worldIn, pos, player);
             worldIn.playSound(player, pos, soundType.getHitSound(), SoundCategory.BLOCKS, 1.0f, soundType.getPitch());
 
-            if (!worldIn.isRemote)
-            {
+            if (!worldIn.isRemote) {
                 ProspectEvent event;
                 float falseNegativeChance = 0.3f; //Classic value was random(100) >= (60 + rank)
                 ProspectingSkill skill = CapabilityPlayerData.getSkill(player, SkillType.PROSPECTING);
-                if (skill != null)
-                {
+                if (skill != null) {
                     falseNegativeChance = 0.3f - (0.1f * skill.getTier().ordinal());
                 }
 
@@ -83,40 +74,29 @@ public class ItemProspectorPick extends ItemMetalTool
                  */
                 RANDOM.setSeed((pos.getX() * 92853) ^ (pos.getY() * 1959302) ^ (pos.getZ() * 2839402));
                 ItemStack targetStack = getOreStack(worldIn, pos, state, false);
-                if (!targetStack.isEmpty())
-                {
+                if (!targetStack.isEmpty()) {
                     // Just clicked on an ore block
                     event = new ProspectEvent.Server(player, pos, ProspectResult.Type.FOUND, targetStack);
 
                     // Increment skill
-                    if (skill != null)
-                    {
+                    if (skill != null) {
                         skill.addSkill(pos);
                     }
-                }
-                else if (RANDOM.nextFloat() < falseNegativeChance)
-                {
+                } else if (RANDOM.nextFloat() < falseNegativeChance) {
                     // False negative
                     event = new ProspectEvent.Server(player, pos, ProspectResult.Type.NOTHING, null);
-                }
-                else
-                {
+                } else {
                     Collection<ProspectResult> results = scanSurroundingBlocks(worldIn, pos);
-                    if (results.isEmpty())
-                    {
+                    if (results.isEmpty()) {
                         // Found nothing
                         event = new ProspectEvent.Server(player, pos, ProspectResult.Type.NOTHING, null);
-                    }
-                    else
-                    {
+                    } else {
                         // Found something
                         ProspectResult result = (ProspectResult) results.toArray()[RANDOM.nextInt(results.size())];
                         event = new ProspectEvent.Server(player, pos, result.getType(), result.ore);
 
-                        if (ConfigTFC.General.DEBUG.enable)
-                        {
-                            for (ProspectResult debugResult : results)
-                            {
+                        if (ConfigTFC.General.DEBUG.enable) {
+                            for (ProspectResult debugResult : results) {
                                 TerraFirmaCraft.getLog().debug(debugResult.ore.getDisplayName() + ": " + String.format("%.02f", debugResult.score));
                             }
                         }
@@ -126,9 +106,7 @@ public class ItemProspectorPick extends ItemMetalTool
                 MinecraftForge.EVENT_BUS.post(event);
                 PacketProspectResult packet = new PacketProspectResult(event.getBlockPos(), event.getResultType(), event.getVein());
                 TerraFirmaCraft.getNetwork().sendTo(packet, (EntityPlayerMP) player);
-            }
-            else
-            {
+            } else {
                 //client side, add hit particles
                 addHitBlockParticle(worldIn, pos, facing, state);
             }
@@ -145,21 +123,15 @@ public class ItemProspectorPick extends ItemMetalTool
      * @return the collection of results
      */
     @Nonnull
-    private Collection<ProspectResult> scanSurroundingBlocks(World world, BlockPos center)
-    {
+    private Collection<ProspectResult> scanSurroundingBlocks(World world, BlockPos center) {
         Map<String, ProspectResult> results = new HashMap<>();
-        for (BlockPos.MutableBlockPos pos : BlockPos.MutableBlockPos.getAllInBoxMutable(center.add(-PROSPECT_RADIUS, -PROSPECT_RADIUS, -PROSPECT_RADIUS), center.add(PROSPECT_RADIUS, PROSPECT_RADIUS, PROSPECT_RADIUS)))
-        {
+        for (BlockPos.MutableBlockPos pos : BlockPos.MutableBlockPos.getAllInBoxMutable(center.add(-PROSPECT_RADIUS, -PROSPECT_RADIUS, -PROSPECT_RADIUS), center.add(PROSPECT_RADIUS, PROSPECT_RADIUS, PROSPECT_RADIUS))) {
             ItemStack stack = getOreStack(world, pos, world.getBlockState(pos), true);
-            if (!stack.isEmpty())
-            {
+            if (!stack.isEmpty()) {
                 String oreName = stack.getDisplayName();
-                if (results.containsKey(oreName))
-                {
+                if (results.containsKey(oreName)) {
                     results.get(oreName).score += 1;
-                }
-                else
-                {
+                } else {
                     results.put(oreName, new ProspectResult(stack, 1));
                 }
             }
@@ -168,21 +140,15 @@ public class ItemProspectorPick extends ItemMetalTool
     }
 
     @Nonnull
-    private ItemStack getOreStack(World world, BlockPos pos, IBlockState state, boolean ignoreGrade)
-    {
-        for (VeinType vein : VeinRegistry.INSTANCE.getVeins().values())
-        {
-            if (vein.isOreBlock(state))
-            {
+    private ItemStack getOreStack(World world, BlockPos pos, IBlockState state, boolean ignoreGrade) {
+        for (VeinType vein : VeinRegistry.INSTANCE.getVeins().values()) {
+            if (vein.isOreBlock(state)) {
                 Block block = state.getBlock();
-                if (vein.getOre() != null && vein.getOre().isGraded() && !ignoreGrade)
-                {
+                if (vein.getOre() != null && vein.getOre().isGraded() && !ignoreGrade) {
                     ItemStack result = block.getPickBlock(state, null, world, pos, null);
                     result.setItemDamage(Ore.Grade.NORMAL.getMeta()); // ignore grade
                     return result;
-                }
-                else
-                {
+                } else {
                     return block.getPickBlock(state, null, world, pos, null);
                 }
             }
@@ -190,20 +156,17 @@ public class ItemProspectorPick extends ItemMetalTool
         return ItemStack.EMPTY;
     }
 
-    private void addHitBlockParticle(World world, BlockPos pos, EnumFacing side, IBlockState state)
-    {
+    private void addHitBlockParticle(World world, BlockPos pos, EnumFacing side, IBlockState state) {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
         AxisAlignedBB axisalignedbb = state.getBoundingBox(world, pos);
-        for (int i = 0; i < 2; i++)
-        {
+        for (int i = 0; i < 2; i++) {
             double xOffset = x + RANDOM.nextDouble() * (axisalignedbb.maxX - axisalignedbb.minX - 0.2D) + 0.1D + axisalignedbb.minX;
             double yOffset = y + RANDOM.nextDouble() * (axisalignedbb.maxY - axisalignedbb.minY - 0.2D) + 0.1D + axisalignedbb.minY;
             double zOffset = z + RANDOM.nextDouble() * (axisalignedbb.maxZ - axisalignedbb.minZ - 0.2D) + 0.1D + axisalignedbb.minZ;
 
-            switch (side)
-            {
+            switch (side) {
                 case WEST:
                     xOffset = x + axisalignedbb.minX - 0.1D;
                     break;
@@ -228,43 +191,30 @@ public class ItemProspectorPick extends ItemMetalTool
         }
     }
 
-    public static final class ProspectResult
-    {
+    public static final class ProspectResult {
         private final ItemStack ore;
         private double score;
 
-        ProspectResult(ItemStack itemStack, double num)
-        {
+        ProspectResult(ItemStack itemStack, double num) {
             ore = itemStack;
             score = num;
         }
 
-        public Type getType()
-        {
-            if (score < 10)
-            {
+        public Type getType() {
+            if (score < 10) {
                 return Type.TRACES;
-            }
-            else if (score < 20)
-            {
+            } else if (score < 20) {
                 return Type.SMALL;
-            }
-            else if (score < 40)
-            {
+            } else if (score < 40) {
                 return Type.MEDIUM;
-            }
-            else if (score < 80)
-            {
+            } else if (score < 80) {
                 return Type.LARGE;
-            }
-            else
-            {
+            } else {
                 return Type.VERY_LARGE;
             }
         }
 
-        public enum Type
-        {
+        public enum Type {
             VERY_LARGE("tfc.propick.found_very_large"),
             LARGE("tfc.propick.found_large"),
             MEDIUM("tfc.propick.found_medium"),
@@ -277,13 +227,11 @@ public class ItemProspectorPick extends ItemMetalTool
             private static final Type[] VALUES = values();
             public final String translation;
 
-            Type(String translation)
-            {
+            Type(String translation) {
                 this.translation = translation;
             }
 
-            public static Type valueOf(int ordinal)
-            {
+            public static Type valueOf(int ordinal) {
                 return VALUES[ordinal];
             }
         }

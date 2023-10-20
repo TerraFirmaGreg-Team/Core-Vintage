@@ -8,18 +8,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 @SuppressWarnings("unused")
-public class ClientProxy extends CommonProxy
-{
+public class ClientProxy extends CommonProxy {
     @Override
-    public void preInit(FMLPreInitializationEvent e)
-    {
+    public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void postInit(FMLPostInitializationEvent e)
-    {
+    public void postInit(FMLPostInitializationEvent e) {
 
     }
 }

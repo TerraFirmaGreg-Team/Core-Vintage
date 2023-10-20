@@ -1,9 +1,11 @@
 package tfcflorae.objects.te;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.recipes.LoomRecipe;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.objects.te.TEInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,19 +14,14 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.api.recipes.LoomRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.te.TEInventory;
-
 import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitLoom;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 @ParametersAreNonnullByDefault
-public class TEFruitLoom extends TEInventory implements ITickable
-{
+public class TEFruitLoom extends TEInventory implements ITickable {
     private IFruitTree cachedWood;
     private Tree cachedTree;
 
@@ -34,18 +31,14 @@ public class TEFruitLoom extends TEInventory implements ITickable
     private long lastPushed = 0L;
     private boolean needsUpdate = false;
 
-    public TEFruitLoom()
-    {
+    public TEFruitLoom() {
         super(2);
     }
 
     @Nullable
-    public IFruitTree getWood()
-    {
-        if (cachedWood == null)
-        {
-            if (world != null)
-            {
+    public IFruitTree getWood() {
+        if (cachedWood == null) {
+            if (world != null) {
                 cachedWood = ((BlockFruitLoom) world.getBlockState(pos).getBlock()).wood;
             }
         }
@@ -53,12 +46,9 @@ public class TEFruitLoom extends TEInventory implements ITickable
     }
 
     @Nullable
-    public Tree getTree()
-    {
-        if (cachedTree == null)
-        {
-            if (world != null)
-            {
+    public Tree getTree() {
+        if (cachedTree == null) {
+            if (world != null) {
                 cachedTree = ((BlockFruitLoom) world.getBlockState(pos).getBlock()).tree;
             }
         }
@@ -66,8 +56,7 @@ public class TEFruitLoom extends TEInventory implements ITickable
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
+    public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         progress = nbt.getInteger("progress");
         lastPushed = nbt.getLong("lastPushed");
@@ -76,13 +65,11 @@ public class TEFruitLoom extends TEInventory implements ITickable
 
     @Override
     @Nonnull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-    {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         nbt.setInteger("progress", progress);
         nbt.setLong("lastPushed", lastPushed);
-        if (recipe != null)
-        {
+        if (recipe != null) {
             //noinspection ConstantConditions
             nbt.setString("recipe", recipe.getRegistryName().toString());
         }
@@ -90,56 +77,43 @@ public class TEFruitLoom extends TEInventory implements ITickable
     }
 
     @SideOnly(Side.CLIENT)
-    public double getAnimPos()
-    {
+    public double getAnimPos() {
         int time = (int) (world.getTotalWorldTime() - lastPushed);
-        if (time < 10)
-        {
+        if (time < 10) {
             return Math.sin((Math.PI / 20) * time) * 0.23125;
-        }
-        else if (time < 20)
-        {
+        } else if (time < 20) {
             return Math.sin((Math.PI / 20) * (20 - time)) * 0.23125;
         }
         return 0;
     }
 
     @SideOnly(Side.CLIENT)
-    public String getAnimElement()
-    {
+    public String getAnimElement() {
         return (progress % 2 == 0) ? "u" : "l";
     }
 
-    public boolean onRightClick(EntityPlayer player)
-    {
-        if (player.isSneaking())
-        {
-            if (!inventory.getStackInSlot(0).isEmpty() && progress == 0)
-            {
+    public boolean onRightClick(EntityPlayer player) {
+        if (player.isSneaking()) {
+            if (!inventory.getStackInSlot(0).isEmpty() && progress == 0) {
                 ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
 
-                if (heldItem.isEmpty())
-                {
+                if (heldItem.isEmpty()) {
                     ItemStack temp = inventory.getStackInSlot(0).copy();
                     temp.setCount(1);
                     player.addItemStackToInventory(temp);
                     inventory.getStackInSlot(0).shrink(1);
 
-                    if (inventory.getStackInSlot(0).isEmpty())
-                    {
+                    if (inventory.getStackInSlot(0).isEmpty()) {
                         recipe = null;
                     }
                     markForBlockUpdate();
                     return true;
                 }
             }
-        }
-        else
-        {
+        } else {
             ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
 
-            if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty() && LoomRecipe.get(heldItem) != null)
-            {
+            if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty() && LoomRecipe.get(heldItem) != null) {
                 inventory.setStackInSlot(0, heldItem.copy());
                 inventory.getStackInSlot(0).setCount(1);
                 heldItem.shrink(1);
@@ -147,11 +121,8 @@ public class TEFruitLoom extends TEInventory implements ITickable
 
                 markForBlockUpdate();
                 return true;
-            }
-            else if (!inventory.getStackInSlot(0).isEmpty())
-            {
-                if (IIngredient.of(inventory.getStackInSlot(0)).testIgnoreCount(heldItem) && recipe.getInputCount() > inventory.getStackInSlot(0).getCount())
-                {
+            } else if (!inventory.getStackInSlot(0).isEmpty()) {
+                if (IIngredient.of(inventory.getStackInSlot(0)).testIgnoreCount(heldItem) && recipe.getInputCount() > inventory.getStackInSlot(0).getCount()) {
                     heldItem.shrink(1);
                     inventory.getStackInSlot(0).grow(1);
 
@@ -160,15 +131,11 @@ public class TEFruitLoom extends TEInventory implements ITickable
                 }
             }
 
-            if (recipe != null && heldItem.isEmpty())
-            {
-                if (recipe.getInputCount() == inventory.getStackInSlot(0).getCount() && progress < recipe.getStepCount() && !needsUpdate)
-                {
-                    if (!world.isRemote)
-                    {
+            if (recipe != null && heldItem.isEmpty()) {
+                if (recipe.getInputCount() == inventory.getStackInSlot(0).getCount() && progress < recipe.getStepCount() && !needsUpdate) {
+                    if (!world.isRemote) {
                         long time = world.getTotalWorldTime() - lastPushed;
-                        if (time < 20)
-                        {
+                        if (time < 20) {
                             return true;
                         }
                         lastPushed = world.getTotalWorldTime();
@@ -179,10 +146,8 @@ public class TEFruitLoom extends TEInventory implements ITickable
                 }
             }
 
-            if (!inventory.getStackInSlot(1).isEmpty())
-            {
-                if (heldItem.isEmpty())
-                {
+            if (!inventory.getStackInSlot(1).isEmpty()) {
+                if (heldItem.isEmpty()) {
                     player.addItemStackToInventory(inventory.getStackInSlot(1).copy());
                     inventory.setStackInSlot(1, ItemStack.EMPTY);
                     progress = 0;
@@ -196,20 +161,15 @@ public class TEFruitLoom extends TEInventory implements ITickable
     }
 
     @Override
-    public void update()
-    {
-        if (recipe != null)
-        {
+    public void update() {
+        if (recipe != null) {
             LoomRecipe recipe = this.recipe; // Avoids NPE on slot changes
-            if (needsUpdate)
-            {
-                if (world.getTotalWorldTime() - lastPushed >= 20)
-                {
+            if (needsUpdate) {
+                if (world.getTotalWorldTime() - lastPushed >= 20) {
                     needsUpdate = false;
                     progress++;
 
-                    if (progress == recipe.getStepCount())
-                    {
+                    if (progress == recipe.getStepCount()) {
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                         inventory.setStackInSlot(1, recipe.getOutputItem());
                     }
@@ -219,33 +179,27 @@ public class TEFruitLoom extends TEInventory implements ITickable
         }
     }
 
-    public int getMaxInputCount()
-    {
+    public int getMaxInputCount() {
         return (recipe == null) ? 1 : recipe.getInputCount();
     }
 
-    public int getCount()
-    {
+    public int getCount() {
         return inventory.getStackInSlot(0).getCount();
     }
 
-    public int getMaxProgress()
-    {
+    public int getMaxProgress() {
         return (recipe == null) ? 1 : recipe.getStepCount();
     }
 
-    public int getProgress()
-    {
+    public int getProgress() {
         return progress;
     }
 
-    public boolean hasRecipe()
-    {
+    public boolean hasRecipe() {
         return recipe != null;
     }
 
-    public ResourceLocation getInProgressTexture()
-    {
+    public ResourceLocation getInProgressTexture() {
         return recipe.getInProgressTexture();
     }
 }

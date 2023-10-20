@@ -5,25 +5,20 @@
 
 package net.dries007.tfc.objects.recipes;
 
+import net.dries007.tfc.ConfigTFC;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
-import net.dries007.tfc.ConfigTFC;
-
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public class RecipeRegistryEvents
-{
+public class RecipeRegistryEvents {
     @SubscribeEvent
-    public static void onRecipeRegister(RegistryEvent.Register<IRecipe> event)
-    {
-        if (ConfigTFC.General.OVERRIDES.removeVanillaRecipes)
-        {
+    public static void onRecipeRegister(RegistryEvent.Register<IRecipe> event) {
+        if (ConfigTFC.General.OVERRIDES.removeVanillaRecipes) {
             IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
 
             //misc AKA too lazy to categorize somehow

@@ -5,8 +5,8 @@
 
 package net.dries007.tfc.client.button;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,34 +14,27 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.network.PacketGuiButton;
+import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
-public class GuiButtonKnapping extends GuiButton
-{
+public class GuiButtonKnapping extends GuiButton {
     private final ResourceLocation texture;
 
-    public GuiButtonKnapping(int id, int x, int y, int width, int height, ResourceLocation texture)
-    {
+    public GuiButtonKnapping(int id, int x, int y, int width, int height, ResourceLocation texture) {
         super(id, x, y, width, height, "");
         this.texture = texture;
     }
 
-    public void onClick()
-    {
-        if (this.enabled)
-        {
+    public void onClick() {
+        if (this.enabled) {
             this.visible = false;
             TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(this.id));
         }
     }
 
     @Override
-    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks)
-    {
-        if (this.visible)
-        {
+    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+        if (this.visible) {
             GlStateManager.color(1, 1, 1, 1);
             mc.getTextureManager().bindTexture(texture);
 

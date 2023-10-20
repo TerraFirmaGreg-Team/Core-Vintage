@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
+import net.dries007.tfc.objects.entity.animal.EntityRabbitTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,11 +15,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityRabbitTFC;
-
 @SideOnly(Side.CLIENT)
-public class ModelRabbitTFC extends ModelBase
-{
+public class ModelRabbitTFC extends ModelBase {
     private final ModelRenderer rabbitLeftFoot;
     private final ModelRenderer rabbitRightFoot;
     private final ModelRenderer rabbitLeftThigh;
@@ -33,8 +31,7 @@ public class ModelRabbitTFC extends ModelBase
     private final ModelRenderer rabbitNose;
     private float jumpRotation;
 
-    public ModelRabbitTFC()
-    {
+    public ModelRabbitTFC() {
         this.setTextureOffset("head.main", 0, 0);
         this.setTextureOffset("head.nose", 0, 24);
         this.setTextureOffset("head.ear1", 0, 10);
@@ -101,12 +98,10 @@ public class ModelRabbitTFC extends ModelBase
         this.setRotationOffset(this.rabbitNose, 0.0F, 0.0F, 0.0F);
     }
 
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
 
-        if (this.isChild)
-        {
+        if (this.isChild) {
             GlStateManager.pushMatrix();
             GlStateManager.scale(0.56666666F, 0.56666666F, 0.56666666F);
             GlStateManager.translate(0.0F, 22.0F * scale, 2.0F * scale);
@@ -127,9 +122,7 @@ public class ModelRabbitTFC extends ModelBase
             this.rabbitRightArm.render(scale);
             this.rabbitTail.render(scale);
             GlStateManager.popMatrix();
-        }
-        else
-        {
+        } else {
             GlStateManager.pushMatrix();
             GlStateManager.scale(0.6F, 0.6F, 0.6F);
             GlStateManager.translate(0.0F, 16.0F * scale, 0.0F);
@@ -149,8 +142,7 @@ public class ModelRabbitTFC extends ModelBase
         }
     }
 
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
-    {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
         float f = ageInTicks - (float) entityIn.ticksExisted;
         EntityRabbitTFC EntityRabbitTFC = (EntityRabbitTFC) entityIn;
         this.rabbitNose.rotateAngleX = headPitch * 0.017453292F;
@@ -170,14 +162,12 @@ public class ModelRabbitTFC extends ModelBase
         this.rabbitRightArm.rotateAngleX = (this.jumpRotation * -40.0F - 11.0F) * 0.017453292F;
     }
 
-    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
-    {
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
         this.jumpRotation = MathHelper.sin(((EntityRabbitTFC) entitylivingbaseIn).getJumpCompletion(partialTickTime) * (float) Math.PI);
     }
 
-    private void setRotationOffset(ModelRenderer renderer, float x, float y, float z)
-    {
+    private void setRotationOffset(ModelRenderer renderer, float x, float y, float z) {
         renderer.rotateAngleX = x;
         renderer.rotateAngleY = y;
         renderer.rotateAngleZ = z;

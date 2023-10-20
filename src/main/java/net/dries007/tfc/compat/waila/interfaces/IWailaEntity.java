@@ -5,17 +5,16 @@
 
 package net.dries007.tfc.compat.waila.interfaces;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * Interfaces waila behavior to TOP and Hwyla
  */
-public interface IWailaEntity
-{
+public interface IWailaEntity {
     /**
      * Returns a list of tooltips to write on the Hwyla or TOP panel's body.
      *
@@ -34,8 +33,7 @@ public interface IWailaEntity
      * @return the title
      */
     @Nonnull
-    default String getTitle(@Nonnull Entity entity, @Nonnull NBTTagCompound nbt)
-    {
+    default String getTitle(@Nonnull Entity entity, @Nonnull NBTTagCompound nbt) {
         return "";
     }
 
@@ -52,8 +50,7 @@ public interface IWailaEntity
      *
      * @return true if you wish to override the name of the entity you're looking at
      */
-    default boolean overrideTitle()
-    {
+    default boolean overrideTitle() {
         return false;
     }
 }

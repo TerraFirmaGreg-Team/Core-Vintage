@@ -2,8 +2,7 @@ package tfcflorae.api.knapping;
 
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 
-public final class KnappingTypes
-{
+public final class KnappingTypes {
     public static final KnappingType PINEAPPLE_LEATHER = new KnappingType(1, false);
     public static final KnappingType BURLAP_CLOTH = new KnappingType(1, false);
     public static final KnappingType WOOL_CLOTH = new KnappingType(1, false);

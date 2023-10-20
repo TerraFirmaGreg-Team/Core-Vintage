@@ -5,21 +5,20 @@
 
 package net.dries007.tfc.api.capability.heat;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import java.util.List;
+
 /**
  * It is recommended that if you extend {@link ItemHeatHandler} rather than implement this directly.
  * If you do extend this, look at ItemHeatHandler to observe how heat decays over time.
  */
-public interface IItemHeat extends INBTSerializable<NBTTagCompound>
-{
+public interface IItemHeat extends INBTSerializable<NBTTagCompound> {
     /**
      * Gets the current temperature. Should call {@link CapabilityItemHeat#adjustTemp(float, float, long)} internally
      *
@@ -56,8 +55,7 @@ public interface IItemHeat extends INBTSerializable<NBTTagCompound>
      *
      * @return is the object transformed.
      */
-    default boolean isMolten()
-    {
+    default boolean isMolten() {
         return getTemperature() > getMeltTemp();
     }
 
@@ -69,11 +67,9 @@ public interface IItemHeat extends INBTSerializable<NBTTagCompound>
      * @param text  The list of tooltips
      */
     @SideOnly(Side.CLIENT)
-    default void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text)
-    {
+    default void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
         String tooltip = Heat.getTooltip(getTemperature());
-        if (tooltip != null)
-        {
+        if (tooltip != null) {
             text.add(tooltip);
         }
     }

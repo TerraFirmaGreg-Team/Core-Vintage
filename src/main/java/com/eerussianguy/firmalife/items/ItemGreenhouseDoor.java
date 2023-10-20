@@ -1,8 +1,10 @@
 package com.eerussianguy.firmalife.items;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import com.eerussianguy.firmalife.blocks.BlockGreenhouseDoor;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -16,20 +18,15 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.eerussianguy.firmalife.blocks.BlockGreenhouseDoor;
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemGreenhouseDoor extends ItemDoor implements IItemSize
-{
+public class ItemGreenhouseDoor extends ItemDoor implements IItemSize {
     private final Block block; // let's just duplicate the variable instead of using an AT
 
-    public ItemGreenhouseDoor(BlockGreenhouseDoor door)
-    {
+    public ItemGreenhouseDoor(BlockGreenhouseDoor door) {
         super(door);
         this.block = door;
     }
@@ -38,26 +35,20 @@ public class ItemGreenhouseDoor extends ItemDoor implements IItemSize
      * Copypasta to reverse the facing direction it chooses
      */
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        if (facing != EnumFacing.UP)
-        {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (facing != EnumFacing.UP) {
             return EnumActionResult.FAIL;
-        }
-        else
-        {
+        } else {
             IBlockState iblockstate = worldIn.getBlockState(pos);
             Block block = iblockstate.getBlock();
 
-            if (!block.isReplaceable(worldIn, pos))
-            {
+            if (!block.isReplaceable(worldIn, pos)) {
                 pos = pos.offset(facing);
             }
 
             ItemStack itemstack = player.getHeldItem(hand);
 
-            if (player.canPlayerEdit(pos, facing, itemstack) && this.block.canPlaceBlockAt(worldIn, pos))
-            {
+            if (player.canPlayerEdit(pos, facing, itemstack) && this.block.canPlaceBlockAt(worldIn, pos)) {
                 EnumFacing enumfacing = EnumFacing.fromAngle(player.rotationYaw);
                 int i = enumfacing.getXOffset();
                 int j = enumfacing.getZOffset();
@@ -67,28 +58,23 @@ public class ItemGreenhouseDoor extends ItemDoor implements IItemSize
                 worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
                 itemstack.shrink(1);
                 return EnumActionResult.SUCCESS;
-            }
-            else
-            {
+            } else {
                 return EnumActionResult.FAIL;
             }
         }
     }
 
     @Nonnull
-    public Size getSize(ItemStack stack)
-    {
+    public Size getSize(ItemStack stack) {
         return Size.VERY_LARGE;
     }
 
     @Nonnull
-    public Weight getWeight(ItemStack stack)
-    {
+    public Weight getWeight(ItemStack stack) {
         return Weight.HEAVY;
     }
 
-    public int getItemStackLimit(ItemStack stack)
-    {
+    public int getItemStackLimit(ItemStack stack) {
         return this.getStackSize(stack);
     }
 }

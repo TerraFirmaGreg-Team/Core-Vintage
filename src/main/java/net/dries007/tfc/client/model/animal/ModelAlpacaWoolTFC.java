@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.entity.animal.EntityAlpacaTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -15,7 +14,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.entity.animal.EntityAlpacaTFC;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelAlpacaWoolTFC
@@ -24,8 +23,7 @@ import net.dries007.tfc.objects.entity.animal.EntityAlpacaTFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
-public class ModelAlpacaWoolTFC extends ModelBase
-{
+public class ModelAlpacaWoolTFC extends ModelBase {
     private final ModelRenderer head;
     private final ModelRenderer neck1;
     private final ModelRenderer neck2;
@@ -37,8 +35,7 @@ public class ModelAlpacaWoolTFC extends ModelBase
     private final ModelRenderer leg3;
     private final ModelRenderer leg4;
 
-    public ModelAlpacaWoolTFC()
-    {
+    public ModelAlpacaWoolTFC() {
         textureWidth = 128;
         textureHeight = 64;
 
@@ -86,8 +83,7 @@ public class ModelAlpacaWoolTFC extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
         EntityAlpacaTFC alpaca = ((EntityAlpacaTFC) entity);
 
@@ -112,8 +108,7 @@ public class ModelAlpacaWoolTFC extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
         this.head.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
         this.body.rotateAngleX = (float) Math.PI / 2F;
@@ -123,8 +118,7 @@ public class ModelAlpacaWoolTFC extends ModelBase
         this.leg4.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.2F * par2;
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

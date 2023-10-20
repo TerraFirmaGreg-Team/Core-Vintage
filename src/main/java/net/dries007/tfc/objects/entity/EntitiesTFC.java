@@ -5,8 +5,10 @@
 
 package net.dries007.tfc.objects.entity;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.objects.entity.animal.*;
+import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
@@ -19,39 +21,30 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DataSerializerEntry;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.objects.entity.animal.*;
-import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public class EntitiesTFC
-{
+public class EntitiesTFC {
     @GameRegistry.ObjectHolder("tfc:long")
     public static final DataSerializerEntry LONG_DATA_SERIALIZER_ENTRY = Helpers.getNull();
 
-    private static final DataSerializer<Long> LONG_DATA_SERIALIZER = new DataSerializer<Long>()
-    {
-        public void write(PacketBuffer buf, @Nonnull Long value)
-        {
+    private static final DataSerializer<Long> LONG_DATA_SERIALIZER = new DataSerializer<Long>() {
+        public void write(PacketBuffer buf, @Nonnull Long value) {
             buf.writeLong(value);
         }
 
-        public Long read(PacketBuffer buf)
-        {
+        public Long read(PacketBuffer buf) {
             return buf.readLong();
         }
 
-        public DataParameter<Long> createKey(int id)
-        {
+        public DataParameter<Long> createKey(int id) {
             return new DataParameter<>(id, this);
         }
 
         @Nonnull
-        public Long copyValue(@Nonnull Long value)
-        {
+        public Long copyValue(@Nonnull Long value) {
             return value;
         }
     };
@@ -59,19 +52,16 @@ public class EntitiesTFC
     private static int id = 1; // don't use id 0, it's easier to debug if something goes wrong
 
     @SuppressWarnings("unchecked")
-    public static DataSerializer<Long> getLongDataSerializer()
-    {
+    public static DataSerializer<Long> getLongDataSerializer() {
         return (DataSerializer<Long>) LONG_DATA_SERIALIZER_ENTRY.getSerializer();
     }
 
     @SubscribeEvent
-    public static void registerDataSerializers(RegistryEvent.Register<DataSerializerEntry> event)
-    {
+    public static void registerDataSerializers(RegistryEvent.Register<DataSerializerEntry> event) {
         event.getRegistry().register(new DataSerializerEntry(LONG_DATA_SERIALIZER).setRegistryName("long"));
     }
 
-    public static void preInit()
-    {
+    public static void preInit() {
         register("sitblock", EntitySeatOn.class);
         register("falling_block", EntityFallingBlockTFC.class);
         register("thrown_javelin", EntityThrownJavelin.class);
@@ -118,13 +108,11 @@ public class EntitiesTFC
         registerLiving("coyotetfc", EntityCoyoteTFC.class, 0xb7bc88, 0xdac213);
     }
 
-    private static void register(String name, Class<? extends Entity> cls)
-    {
+    private static void register(String name, Class<? extends Entity> cls) {
         EntityRegistry.registerModEntity(new ResourceLocation(MOD_ID, name), cls, name, id++, TerraFirmaCraft.getInstance(), 160, 20, true);
     }
 
-    private static void registerLiving(String name, Class<? extends Entity> cls, int eggPrimaryColor, int eggSecondaryColor)
-    {
+    private static void registerLiving(String name, Class<? extends Entity> cls, int eggPrimaryColor, int eggSecondaryColor) {
         //Register entity and create a spawn egg for creative
         EntityRegistry.registerModEntity(new ResourceLocation(MOD_ID, name), cls, name, id++, TerraFirmaCraft.getInstance(), 80, 3, true, eggPrimaryColor, eggSecondaryColor);
     }

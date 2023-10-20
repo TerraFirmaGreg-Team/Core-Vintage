@@ -5,12 +5,6 @@
 
 package net.dries007.tfc.compat.jei.categories;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -22,18 +16,21 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 import net.dries007.tfc.objects.items.ItemsTFC;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class QuernCategory extends BaseRecipeCategory<SimpleRecipeWrapper>
-{
+public class QuernCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
     private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MOD_ID, "textures/gui/icons/jei.png");
 
     private final IDrawableStatic slot;
     private final IDrawableStatic arrow;
     private final IDrawableAnimated arrowAnimated;
 
-    public QuernCategory(IGuiHelper helper, String Uid)
-    {
+    public QuernCategory(IGuiHelper helper, String Uid) {
         super(helper.createBlankDrawable(120, 38), Uid);
         arrow = helper.createDrawable(ICONS, 0, 14, 22, 16);
         IDrawableStatic arrowAnimated = helper.createDrawable(ICONS, 22, 14, 22, 16);
@@ -42,8 +39,7 @@ public class QuernCategory extends BaseRecipeCategory<SimpleRecipeWrapper>
     }
 
     @Override
-    public void drawExtras(Minecraft minecraft)
-    {
+    public void drawExtras(Minecraft minecraft) {
         arrow.draw(minecraft, 50, 16);
         arrowAnimated.draw(minecraft, 50, 16);
         slot.draw(minecraft, 0, 16);
@@ -52,8 +48,7 @@ public class QuernCategory extends BaseRecipeCategory<SimpleRecipeWrapper>
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, SimpleRecipeWrapper recipeWrapper, IIngredients ingredients)
-    {
+    public void setRecipe(IRecipeLayout recipeLayout, SimpleRecipeWrapper recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
         itemStackGroup.init(0, true, 0, 16);
         itemStackGroup.init(1, true, 20, 16);

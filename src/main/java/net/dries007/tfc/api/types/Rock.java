@@ -5,27 +5,25 @@
 
 package net.dries007.tfc.api.types;
 
-import java.util.function.Function;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.util.FallingBlockManager.Specification;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.items.rock.*;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.util.FallingBlockManager.Specification;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.items.rock.*;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.function.Function;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 
 
-public class Rock extends IForgeRegistryEntry.Impl<Rock>
-{
+public class Rock extends IForgeRegistryEntry.Impl<Rock> {
     @GameRegistry.ObjectHolder("tfc:granite")
     public static final Rock GRANITE = Helpers.getNull();
     @GameRegistry.ObjectHolder("tfc:basalt")
@@ -40,8 +38,7 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock>
     private final boolean isFluxStone;
     private final boolean isNaturallyGenerating;
 
-    public Rock(@Nonnull ResourceLocation name, @Nonnull RockCategory rockCategory, boolean isFluxStone, boolean isNaturallyGenerating)
-    {
+    public Rock(@Nonnull ResourceLocation name, @Nonnull RockCategory rockCategory, boolean isFluxStone, boolean isNaturallyGenerating) {
         //noinspection ConstantConditions
         if (rockCategory == null)
             throw new IllegalArgumentException("Rock category is not allowed to be null (on rock " + name + ")");
@@ -53,13 +50,11 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock>
         this.isNaturallyGenerating = isNaturallyGenerating;
     }
 
-    public Rock(@Nonnull ResourceLocation name, @Nonnull RockCategory rockCategory, boolean isFluxStone)
-    {
+    public Rock(@Nonnull ResourceLocation name, @Nonnull RockCategory rockCategory, boolean isFluxStone) {
         this(name, rockCategory, isFluxStone, true);
     }
 
-    public Rock(@Nonnull ResourceLocation name, @Nonnull ResourceLocation categoryName, boolean isFluxStone)
-    {
+    public Rock(@Nonnull ResourceLocation name, @Nonnull ResourceLocation categoryName, boolean isFluxStone) {
         //noinspection ConstantConditions
         this(name, TFCRegistries.ROCK_CATEGORIES.getValue(categoryName), isFluxStone, true);
     }
@@ -69,35 +64,29 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock>
      *
      * @return a texture resource location
      */
-    public ResourceLocation getTexture()
-    {
+    public ResourceLocation getTexture() {
         return textureLocation;
     }
 
-    public RockCategory getRockCategory()
-    {
+    public RockCategory getRockCategory() {
         return rockCategory;
     }
 
-    public boolean isFluxStone()
-    {
+    public boolean isFluxStone() {
         return isFluxStone;
     }
 
-    public boolean isNaturallyGenerating()
-    {
+    public boolean isNaturallyGenerating() {
         return isNaturallyGenerating;
     }
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public String toString()
-    {
+    public String toString() {
         return getRegistryName().getPath();
     }
 
-    public enum ToolType
-    {
+    public enum ToolType {
         AXE(ItemRockAxe::new, " X   ", "XXXX ", "XXXXX", "XXXX ", " X   "),
         SHOVEL(ItemRockShovel::new, "XXX", "XXX", "XXX", "XXX", " X "),
         HOE(ItemRockHoe::new, "XXXXX", "   XX"),
@@ -108,25 +97,21 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock>
         private final Function<RockCategory, Item> supplier;
         private final String[] pattern;
 
-        ToolType(@Nonnull Function<RockCategory, Item> supplier, String... pattern)
-        {
+        ToolType(@Nonnull Function<RockCategory, Item> supplier, String... pattern) {
             this.supplier = supplier;
             this.pattern = pattern;
         }
 
-        public Item create(RockCategory category)
-        {
+        public Item create(RockCategory category) {
             return supplier.apply(category);
         }
 
-        public String[] getPattern()
-        {
+        public String[] getPattern() {
             return pattern;
         }
     }
 
-    public enum Type
-    {
+    public enum Type {
         RAW(Material.ROCK, false, Specification.COLLAPSABLE),
         ANVIL(Material.ROCK, false, Specification.COLLAPSABLE),
         SPIKE(Material.ROCK, false, null),
@@ -146,35 +131,30 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock>
         public final Material material;
         public final boolean isGrass;
 
-        @Nullable private final Specification fallingSpecification;
+        @Nullable
+        private final Specification fallingSpecification;
 
-        Type(Material material, boolean isGrass, @Nullable Specification fallingSpecification)
-        {
+        Type(Material material, boolean isGrass, @Nullable Specification fallingSpecification) {
             this.material = material;
             this.isGrass = isGrass;
             this.fallingSpecification = fallingSpecification;
         }
 
-        public boolean canFall()
-        {
+        public boolean canFall() {
             return fallingSpecification != null;
         }
 
-        public boolean canFallHorizontal()
-        {
+        public boolean canFallHorizontal() {
             return fallingSpecification != null && fallingSpecification.canFallHorizontally();
         }
 
-        public boolean canFallHorizontally()
-        {
+        public boolean canFallHorizontally() {
             return fallingSpecification != null && fallingSpecification.canFallHorizontally();
         }
 
-        public Type getNonGrassVersion()
-        {
+        public Type getNonGrassVersion() {
             if (!isGrass) return this;
-            switch (this)
-            {
+            switch (this) {
                 case GRASS:
                     return DIRT;
                 case DRY_GRASS:
@@ -185,11 +165,9 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock>
             throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
         }
 
-        public Type getGrassVersion(Type spreader)
-        {
+        public Type getGrassVersion(Type spreader) {
             if (!spreader.isGrass) throw new IllegalArgumentException("Non-grass can't spread.");
-            switch (this)
-            {
+            switch (this) {
                 case DIRT:
                     return spreader == DRY_GRASS ? DRY_GRASS : GRASS;
                 case CLAY:
@@ -199,8 +177,7 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock>
         }
 
         @Nullable
-        public Specification getFallingSpecification()
-        {
+        public Specification getFallingSpecification() {
             return fallingSpecification;
         }
     }

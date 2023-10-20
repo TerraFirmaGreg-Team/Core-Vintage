@@ -5,15 +5,13 @@
 
 package net.dries007.tfc.util.config;
 
-public enum TemperatureMode
-{
+public enum TemperatureMode {
     CYCLIC("Cyclic"),
     ENDLESS("Endless");
 
     private final String name;
 
-    TemperatureMode(String name)
-    {
+    TemperatureMode(String name) {
         this.name = name;
     }
 
@@ -21,8 +19,7 @@ public enum TemperatureMode
      * Shows this text in config instead of the enum name
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return name;
     }
 }

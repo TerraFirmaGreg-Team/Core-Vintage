@@ -1,6 +1,5 @@
 package tfcflorae.objects.blocks.wood.cinnamon;
 
-import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -12,7 +11,8 @@ import tfcflorae.types.TreesTFCF;
 
 import java.util.Random;
 
-public class BlockCassiaCinnamonSapling extends BlockSaplingTFC implements IGrowingPlant {
+public class BlockCassiaCinnamonSapling extends BlockSaplingTFC {
+
     public BlockCassiaCinnamonSapling() {
         super(TreesTFCF.CASSIA_CINNAMON_TREE);
         setSoundType(SoundType.WOOD);
@@ -41,10 +41,5 @@ public class BlockCassiaCinnamonSapling extends BlockSaplingTFC implements IGrow
             }
         }
         world.setBlockState(pos.offset(EnumFacing.UP, height), leaves);
-    }
-
-    @Override
-    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-        return GrowthStatus.GROWING;
     }
 }

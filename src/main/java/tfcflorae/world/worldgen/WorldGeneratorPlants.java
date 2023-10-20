@@ -35,7 +35,6 @@ public class WorldGeneratorPlants implements IWorldGenerator {
     private int tallGrassCount = 1;
     private int tallCount = 1;
     private int epiphyteCount = 1;
-    private int dryCount = 1;
     private int standardCount = 1;
 
     private float waterCountConfig = ConfigTFCF.General.WORLD.waterCount;
@@ -50,7 +49,6 @@ public class WorldGeneratorPlants implements IWorldGenerator {
     private float tallCountConfig = ConfigTFCF.General.WORLD.tallPlantCount;
     private float epiphyteCountConfig = ConfigTFCF.General.WORLD.epiphyteCount;
     private float standardCountConfig = ConfigTFCF.General.WORLD.standardCount;
-    private float sporeBlossomUndergroundCount = ConfigTFCF.General.WORLD.sporeBlossomUndergroundCount;
 
     public WorldGeneratorPlants() {
         plantGen = new WorldGenPlants();
@@ -79,10 +77,6 @@ public class WorldGeneratorPlants implements IWorldGenerator {
                     break;
                 case EPIPHYTE:
                     epiphyteCount++;
-                    break;
-                case DRY:
-                case DRY_TALL_PLANT:
-                    dryCount++;
                     break;
                 default:
                     standardCount++;
@@ -184,19 +178,12 @@ public class WorldGeneratorPlants implements IWorldGenerator {
                                         }
                                     }
                                 }
-                            } else if (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.SPORE_BLOSSOM) && floraDensity >= 0.3f) {
-                                for (float i = rng.nextInt(Math.round((epiphyteCount + 64) / floraDiversity)); i < (1 + floraDensity) * sporeBlossomUndergroundCount; i++) {
-                                    BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
-                                    IBlockState blockPosState = world.getBlockState(blockPos.down());
-                                    if (!(blockPosState instanceof BlockHardenedClay || blockPosState instanceof BlockStainedHardenedClay)) {
-                                        plantGen.generate(world, rng, blockPos);
-                                    }
-                                }
                             }
                             break;
                         }
                         case HANGING: {
-                            if (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.HANGING_VINE) ||
+                            if (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.GLOW_VINE) ||
+                                    plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.HANGING_VINE) ||
                                     plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.JUNGLE_VINE) ||
                                     plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.LIANA)) {
                                 for (float i = rng.nextInt(Math.round((hangingCount + floraDensity) / floraDiversity)); i < (3 + floraDensity + floraDiversity) * hangingCountConfig; i++) {
@@ -240,20 +227,6 @@ public class WorldGeneratorPlants implements IWorldGenerator {
                                     plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.MARIGOLD)) {
                                 for (float i = rng.nextInt(Math.round((tallCount + 2) / floraDiversity)); i < (2 + floraDensity + floraDiversity) * tallCountConfig; i++) {
                                     if (floraDensity <= Math.abs(0.2f - (rng.nextGaussian() / 20)) && b == BiomesTFC.MEADOWS) {
-                                        BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
-                                        IBlockState blockPosState = world.getBlockState(blockPos.down());
-                                        if (!(blockPosState instanceof BlockHardenedClay || blockPosState instanceof BlockStainedHardenedClay)) {
-                                            plantGen.generate(world, rng, blockPos);
-                                        }
-                                    }
-                                }
-                            }
-                            break;
-                        }
-                        case DRY: {
-                            if (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.CHAPARRAL_SHRUB)) {
-                                for (float i = rng.nextInt(Math.round((dryCount + 8) / floraDiversity)); i < (3 + floraDensity) * tallGrassCountConfig; i++) {
-                                    if (floraDensity <= Math.abs(0.3f - (rng.nextGaussian() / 20)) && (b != BiomesTFC.BEACH || b != BiomesTFC.GRAVEL_BEACH || b != BiomesTFC.MESA || b != BiomesTFC.MESA_BRYCE || b != BiomesTFC.MESA_PLATEAU || b != BiomesTFC.MESA_PLATEAU_M)) {
                                         BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
                                         IBlockState blockPosState = world.getBlockState(blockPos.down());
                                         if (!(blockPosState instanceof BlockHardenedClay || blockPosState instanceof BlockStainedHardenedClay)) {

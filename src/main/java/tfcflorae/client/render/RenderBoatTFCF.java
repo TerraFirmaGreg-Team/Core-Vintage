@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tfcflorae.objects.entity.EntityBoatTFCF;
+import tfcflorae.objects.blocks.entity.EntityBoatTFCF;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

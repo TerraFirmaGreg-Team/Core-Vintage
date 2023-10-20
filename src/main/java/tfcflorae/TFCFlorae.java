@@ -5,37 +5,35 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import org.apache.logging.log4j.Logger;
 import tfcflorae.client.ClientEvents;
 import tfcflorae.client.GuiHandler;
-import tfcflorae.objects.LootTablesTFCF;
-import tfcflorae.objects.entity.EntitiesTFCF;
+import tfcflorae.objects.blocks.entity.EntitiesTFCF;
 import tfcflorae.proxy.CommonProxy;
 import tfcflorae.util.CapabilityHeatHandler;
+import tfcflorae.util.ClassAdder;
 import tfcflorae.util.HelpersTFCF;
-import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.fuel.FuelsTFCF;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-@Mod(modid = TFCFlorae.MODID, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES)
+@Mod(modid = TFCFlorae.MODID, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES, certificateFingerprint = TFCFlorae.SIGNING_KEY)
 public class TFCFlorae {
     public static final String MODID = "tfcflorae";
     public static final String NAME = "TFC Florae";
     public static final String VERSION = "@VERSION@";
+    public static final String SIGNING_KEY = "@FINGERPRINT@";
     public static final String DEPENDENCIES = "required-after:tfc@[1.7,);"
             + "after:firmalife;"
             + "after:tfcelementia;"
-            + "after:tfc_ph_compat;";
+            + "after:tfc_ph_compat;"
+            + "required-after:loliasm;";
 
     @Mod.Instance
     public static TFCFlorae instance;
     public static Logger logger;
+    public static boolean signedBuild = true;
 
     public static boolean FirmaLifeAdded = false;
     public static boolean TFCElementiaAdded = false;
@@ -43,33 +41,30 @@ public class TFCFlorae {
 
     @SidedProxy(serverSide = "tfcflorae.proxy.CommonProxy", clientSide = "tfcflorae.proxy.ClientProxy")
     public static CommonProxy proxy;
-    private SimpleNetworkWrapper network;
 
     public static Logger getLog() {
         return logger;
-    }
-
-    public static CommonProxy getProxy() {
-        return proxy;
     }
 
     public static TFCFlorae getInstance() {
         return instance;
     }
 
-    public static SimpleNetworkWrapper getNetwork() {
-        return instance.network;
+    @EventHandler
+    public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
+        /*if (!event.isDirectory())
+        {
+            signedBuild = false; // todo disabled for the time being
+        }*/
     }
-
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        //ClassAdder.addClasses(event.getModConfigurationDirectory());
+        ClassAdder.addClasses(event.getModConfigurationDirectory());
         logger = event.getModLog();
-
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-        network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-        int id = 0;
+        if (!signedBuild) {
+            logger.error("INVALID FINGERPRINT DETECTED!");
+        }
 
         for (ModContainer Mod : Loader.instance().getActiveModList()) {
             if (Mod.getModId().equals("firmalife"))
@@ -99,8 +94,8 @@ public class TFCFlorae {
         }
         */
 
-        EntitiesTFCF.preInit();
         proxy.preInit(event);
+        EntitiesTFCF.preInit();
 
         if (event.getSide().isClient()) {
             ClientEvents.preInit();
@@ -112,8 +107,6 @@ public class TFCFlorae {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-        OreDictionaryHelper.init();
-        LootTablesTFCF.init();
         CapabilityHeatHandler.init();
         proxy.init(event);
     }

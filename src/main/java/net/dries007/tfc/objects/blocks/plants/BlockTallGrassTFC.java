@@ -9,8 +9,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
@@ -20,7 +18,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
@@ -64,13 +61,12 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
     @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         IBlockState soil = worldIn.getBlockState(pos.down());
-        if (worldIn.getBlockState(pos.down(this.plant.getMaxHeight())).getBlock() == this) {
-            return false;
-        } else if (state.getBlock() != this) {
-            return this.canSustainBush(soil);
-        } else {
-            return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) && this.plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && this.plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+
+        if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) return false;
+        if (state.getBlock() == this) {
+            return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
         }
+        return this.canSustainBush(soil);
     }
 
     @Override
@@ -122,28 +118,17 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
 
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-        Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
-        int currentStage = state.getValue(this.growthStageProperty);
-        this.plant.getStageForMonth(currentMonth);
-        int age = state.getValue(AGE);
-        if (!worldIn.isRemote) {
+        if (!worldIn.isRemote && player != null) {
             ItemStack stack = player.getHeldItemMainhand();
-            int i;
-            if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem().getHarvestLevel(stack, "scythe", player, state) == -1) {
-                if (stack.getItem() == Items.SHEARS) {
-                    for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
-                        spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
-                    }
-                }
-            } else {
-                for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
-                    if (Constants.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
+            if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1) {
+                for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
+                    if (Constants.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i)).getValue(AGE) + 1) / 4.0D) //+25% change for each age
+                    {
                         spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
                     }
                 }
             }
         }
-
     }
 
     @Override

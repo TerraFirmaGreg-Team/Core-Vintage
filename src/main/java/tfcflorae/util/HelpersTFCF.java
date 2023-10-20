@@ -2,9 +2,6 @@ package tfcflorae.util;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -93,10 +90,6 @@ public class HelpersTFCF {
                 "sunflower_seed_oil",
                 "opium_poppy_seed_oil",
                 "wort",
-                "sweet_sap",
-                "sweet_syrup",
-                "resin",
-                "kino",
                 "firma_cola",
                 "juice_blackberry",
                 "juice_blueberry",
@@ -149,14 +142,5 @@ public class HelpersTFCF {
             fuelSet.add(a);
         }
         ConfigTFC.Devices.LAMP.fuels = fuelSet.toArray(new String[]{});
-    }
-
-    public static ItemStack updateFoodFuzzed(ItemStack oldStack, ItemStack newStack) {
-        ItemStack output = CapabilityFood.updateFoodFromPrevious(oldStack, newStack);
-        IFood cap = output.getCapability(CapabilityFood.CAPABILITY, null);
-        if (cap != null && !cap.isRotten()) {
-            cap.setCreationDate(cap.getCreationDate() - (cap.getCreationDate() % ICalendar.HOURS_IN_DAY));
-        }
-        return output;
     }
 }

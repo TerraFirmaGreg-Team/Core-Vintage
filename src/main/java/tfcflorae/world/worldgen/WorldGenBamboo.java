@@ -49,9 +49,12 @@ public class WorldGenBamboo extends WorldGenerator {
             generateGoldenBamboo(world, rand, genPos);
         } else if (gen == 5) {
             generateNarrowLeafBamboo(world, rand, genPos);
-        } else if (gen == 6) {
+        }
+        /*else if (gen == 6)
+        {
             generateRedBamboo(world, rand, genPos);
-        } else if (gen == 7) {
+        }*/
+        else if (gen == 7) {
             generateTempleBamboo(world, rand, genPos);
         } else if (gen == 8) {
             generateThornyBamboo(world, rand, genPos);

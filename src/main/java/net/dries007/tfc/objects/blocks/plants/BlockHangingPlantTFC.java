@@ -8,16 +8,11 @@ package net.dries007.tfc.objects.blocks.plants;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -25,7 +20,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
@@ -249,29 +243,5 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
         Material material = iblockstate.getMaterial();
 
         return world.getBlockState(pos.down()).getBlock() != this && !material.isSolid();
-    }
-
-    @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!this.canBlockStay(worldIn, pos, state)) {
-            worldIn.destroyBlock(pos, false);
-        }
-
-    }
-
-    @Override
-    public void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
-        if (!this.canBlockStay(worldIn, pos, state)) {
-            worldIn.destroyBlock(pos, false);
-        }
-
-    }
-
-    @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        if (!worldIn.isRemote && (stack.getItem() == Items.SHEARS || stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1)) {
-            spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
-        }
-
     }
 }

@@ -9,14 +9,11 @@ import net.dries007.tfc.world.classic.DataLayer;
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
 import net.minecraft.world.gen.layer.IntCache;
 
-import javax.annotation.Nonnull;
-
 public class GenLayerStabilityInit extends GenLayerTFC {
     public GenLayerStabilityInit(long par1) {
         super(par1);
     }
 
-    @Nonnull
     @Override
     public int[] getInts(int par1, int par2, int maxX, int maxZ) {
         int[] cache = IntCache.getIntCache(maxX * maxZ);

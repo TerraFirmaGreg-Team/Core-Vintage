@@ -61,7 +61,6 @@ public final class PlantsTFCF {
     //public static final ResourceLocation WILD_RICE = new ResourceLocation(MODID, "wild_rice");
     //public static final ResourceLocation WILD_WHEAT = new ResourceLocation(MODID, "wild_wheat");
     public static final ResourceLocation SAWGRASS = new ResourceLocation(MODID, "sawgrass");
-    public static final ResourceLocation SAGUARO_CACTUS = new ResourceLocation(MODID, "saguaro_cactus");
 
     public static final ResourceLocation CAVE_VINES = new ResourceLocation(MODID, "cave_vines");
     public static final ResourceLocation GLOW_VINES = new ResourceLocation(MODID, "glow_vines");
@@ -105,7 +104,6 @@ public final class PlantsTFCF {
     public static final ResourceLocation TAMPA_BUTTERFLY_ORCHID = new ResourceLocation(MODID, "tampa_butterfly_orchid");
     public static final ResourceLocation TURKEY_TAIL = new ResourceLocation(MODID, "turkey_tail");
     public static final ResourceLocation WILDFIRE = new ResourceLocation(MODID, "wildfire");
-    public static final ResourceLocation SPORE_BLOSSOM = new ResourceLocation(MODID, "spore_blossom");
 
     // Water Plants
     public static final ResourceLocation BADDERLOCKS = new ResourceLocation(MODID, "badderlocks");
@@ -263,7 +261,6 @@ public final class PlantsTFCF {
                 //new Plant(WILD_WHEAT, Plant.PlantType.SHORT_GRASS, new int[] {0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0}, false, false, 0f, 30f, -2f, 34f, 100f, 350f, 0, 15, 1, 0.7D, null),
                 new Plant(WOOLLY_BUSH, Plant.PlantType.SHORT_GRASS, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, false, false, 20f, 30f, 5f, 33f, 85f, 190f, 0, 15, 1, 0.7D, null),
                 new Plant(SAWGRASS, Plant.PlantType.TALL_GRASS, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, false, false, -16f, 32f, -36f, 50f, 100f, 500f, 0, 15, 2, 1, 1, 0.7D, null),
-                new Plant(SAGUARO_CACTUS, Plant.PlantType.CACTUS, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, false, false, 18f, 40f, -6f, 50f, 0f, 75f, 12, 15, 15, 0D, "blockCactus"),
 
                 // Epiphytes
                 new Plant(APACHE_DWARF, Plant.PlantType.EPIPHYTE, new int[]{0, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 0}, false, false, 0f, 40f, 5f, 50f, 100f, 500f, 0, 15, 1, 0.8D, null),
@@ -284,7 +281,6 @@ public final class PlantsTFCF {
                 new Plant(TAMPA_BUTTERFLY_ORCHID, Plant.PlantType.EPIPHYTE, new int[]{0, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 0}, false, false, 0f, 40f, -5f, 50f, 190f, 500f, 0, 15, 1, 0.8D, null),
                 new Plant(TURKEY_TAIL, Plant.PlantType.EPIPHYTE, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, false, false, 0f, 40f, -12f, 50f, 200f, 500f, 0, 15, 1, 0.8D, "epiphyte_turkey_tail"),
                 new Plant(WILDFIRE, Plant.PlantType.EPIPHYTE, new int[]{0, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 0}, false, false, 15f, 40f, 10f, 50f, 130f, 300f, 0, 15, 1, 0.8D, null),
-                new Plant(SPORE_BLOSSOM, Plant.PlantType.EPIPHYTE, new int[]{0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0}, false, false, 0f, 40f, -15f, 50f, 180f, 500f, 0, 15, 1, 0.9D, null),
 
                 // Mushrooms
                 new Plant(AMANITA, Plant.PlantType.MUSHROOM, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, false, false, -11f, 48f, -13f, 50f, 250f, 500f, 0, 12, 1, 0.8D, "mushroom_red"),

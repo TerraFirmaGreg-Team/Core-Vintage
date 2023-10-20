@@ -6,14 +6,11 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -42,10 +39,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.types.PlantsTFCF;
-import tfcflorae.util.agriculture.CropTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -71,7 +64,6 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
     public final PropertyInteger growthStageProperty;
     protected final Plant plant;
     protected final BlockStateContainer blockState;
-
     public BlockPlantTFC(Plant plant) {
         super(plant.getMaterial());
         if (MAP.put(plant, this) != null) throw new IllegalStateException("There can only be one.");
@@ -171,31 +163,9 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
     @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
-        int currentStage = state.getValue(this.growthStageProperty);
-        int expectedStage = this.plant.getStageForMonth(currentMonth);
-        if (!this.plant.getOreDictName().isPresent() && !worldIn.isRemote && (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1) && this.plant.getPlantType() != Plant.PlantType.SHORT_GRASS && this.plant.getPlantType() != Plant.PlantType.TALL_GRASS) {
-            if (this.plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BLUE_GINGER)) {
-                int chance;
-                if (currentStage != 0 && expectedStage != 0) {
-                    chance = Constants.RNG.nextInt(2);
-                    if (chance == 0) {
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), Constants.RNG.nextInt(2)));
-                    }
-                } else {
-                    chance = Constants.RNG.nextInt(2);
-                    if (chance == 0) {
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.GINGER, 1 + Constants.RNG.nextInt(2)));
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), Constants.RNG.nextInt(2)));
-                    } else if (chance == 1) {
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), 1 + Constants.RNG.nextInt(2)));
-                    }
-                }
-            } else {
-                spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
-            }
+        if (!plant.getOreDictName().isPresent() && !worldIn.isRemote && (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1) && plant.getPlantType() != Plant.PlantType.SHORT_GRASS && plant.getPlantType() != Plant.PlantType.TALL_GRASS) {
+            spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
         }
-
         super.harvestBlock(worldIn, player, pos, state, te, stack);
     }
 
@@ -358,34 +328,29 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
     }
 
     private boolean isValidSoil(IBlockState state) {
-        switch (this.plant.getPlantType()) {
+        switch (plant.getPlantType()) {
+            case CACTUS:
+            case DESERT:
+            case DESERT_TALL_PLANT:
+                return BlocksTFC.isSand(state);
+            case DRY:
+            case DRY_TALL_PLANT:
+                return BlocksTFC.isSand(state) || BlocksTFC.isDryGrass(state);
             case REED:
             case REED_SEA:
             case TALL_REED:
             case TALL_REED_SEA:
-                return BlocksTFC.isSand(state) || BlocksTFC.isSoil(state) || BlocksTFCF.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            case SHORT_GRASS:
-            case TALL_GRASS:
-            case FLOATING:
-            case FLOATING_SEA:
-            case MUSHROOM:
-            default:
-                return BlocksTFC.isSoil(state) || BlocksTFCF.isSoil(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            case CACTUS:
-            case DESERT:
-            case DESERT_TALL_PLANT:
-                return BlocksTFC.isSand(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
-            case DRY:
-            case DRY_TALL_PLANT:
-                return BlocksTFC.isSand(state) || BlocksTFC.isDryGrass(state) || BlocksTFCF.isDryGrass(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+                return BlocksTFC.isSand(state) || BlocksTFC.isSoil(state);
             case WATER:
             case TALL_WATER:
             case EMERGENT_TALL_WATER:
-                return BlocksTFC.isSand(state) || BlocksTFC.isSoilOrGravel(state) || BlocksTFC.isSoil(state) || BlocksTFC.isGround(state) || BlocksTFCF.isSoilOrGravel(state) || BlocksTFCF.isSoil(state) || BlocksTFCF.isGround(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+                return BlocksTFC.isSoilOrGravel(state);
             case WATER_SEA:
             case TALL_WATER_SEA:
             case EMERGENT_TALL_WATER_SEA:
-                return BlocksTFC.isSand(state) || BlocksTFC.isSoilOrGravel(state) || BlocksTFC.isSoil(state) || BlocksTFC.isGround(state) || BlocksTFCF.isSoilOrGravel(state) || BlocksTFCF.isSoil(state) || BlocksTFCF.isGround(state) || state.getBlock() == Blocks.HARDENED_CLAY || state.getBlock() == Blocks.STAINED_HARDENED_CLAY;
+                return BlocksTFC.isSand(state) || BlocksTFC.isSoilOrGravel(state);
+            default:
+                return BlocksTFC.isSoil(state);
         }
     }
 }

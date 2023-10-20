@@ -8,17 +8,12 @@ package net.dries007.tfc.objects.blocks.agriculture;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
-import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -34,7 +29,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
-import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -138,25 +132,9 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
     }
 
     @Override
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-        IBlockState soil;
-        if (this.crop != Crop.RICE) {
-            soil = worldIn.getBlockState(pos.down());
-            return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
-        } else {
-            soil = worldIn.getBlockState(pos.down());
-            if (!(soil.getBlock() instanceof BlockWaterPlantTFCF) && !(soil.getBlock() instanceof BlockWaterPlantTFC)) {
-                if (state.getBlock() != this) {
-                    return this.canSustainBush(soil);
-                } else {
-                    IBlockState stateDown = worldIn.getBlockState(pos.down());
-                    Material material = stateDown.getMaterial();
-                    return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) || material == Material.WATER && (Integer) stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == ChunkGenTFC.FRESH_WATER || material == Material.ICE || material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
-                }
-            } else {
-                return false;
-            }
-        }
+    public boolean canBlockStay(World world, BlockPos pos, IBlockState state) {
+        IBlockState soil = world.getBlockState(pos.down());
+        return soil.getBlock().canSustainPlant(soil, world, pos.down(), EnumFacing.UP, this);
     }
 
     @Override
@@ -164,22 +142,6 @@ public class BlockCropDead extends BlockBush implements IGrowingPlant {
     @SuppressWarnings("deprecation")
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
-    }
-
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        if (this.crop != Crop.RICE) {
-            return super.canPlaceBlockAt(worldIn, pos);
-        } else {
-            return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
-        }
-    }
-
-    protected boolean canSustainBush(IBlockState state) {
-        if (this.crop != Crop.RICE) {
-            return super.canSustainBush(state);
-        } else {
-            return BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenTFC.FRESH_WATER || state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
-        }
     }
 
     @Nonnull

@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 public class ContainerBag extends ContainerItemStack implements ISlotCallback {
     public ContainerBag(InventoryPlayer playerInv, ItemStack stack) {
         super(playerInv, stack);
-        this.itemIndex += 8;
+        this.itemIndex += 6;
     }
 
     @Override
@@ -26,14 +26,12 @@ public class ContainerBag extends ContainerItemStack implements ISlotCallback {
         IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (inventory instanceof ISlotCallback) {
             ISlotCallback callback = (ISlotCallback) inventory;
-            addSlotToContainer(new SlotCallback(inventory, 0, 53, 23, callback));
-            addSlotToContainer(new SlotCallback(inventory, 1, 71, 23, callback));
-            addSlotToContainer(new SlotCallback(inventory, 2, 89, 23, callback));
-            addSlotToContainer(new SlotCallback(inventory, 3, 107, 23, callback));
-            addSlotToContainer(new SlotCallback(inventory, 4, 53, 41, callback));
-            addSlotToContainer(new SlotCallback(inventory, 5, 71, 41, callback));
-            addSlotToContainer(new SlotCallback(inventory, 6, 89, 41, callback));
-            addSlotToContainer(new SlotCallback(inventory, 7, 107, 41, callback));
+            addSlotToContainer(new SlotCallback(inventory, 0, 62, 23, callback));
+            addSlotToContainer(new SlotCallback(inventory, 1, 80, 23, callback));
+            addSlotToContainer(new SlotCallback(inventory, 2, 98, 23, callback));
+            addSlotToContainer(new SlotCallback(inventory, 3, 62, 41, callback));
+            addSlotToContainer(new SlotCallback(inventory, 4, 80, 41, callback));
+            addSlotToContainer(new SlotCallback(inventory, 5, 98, 41, callback));
         }
     }
 

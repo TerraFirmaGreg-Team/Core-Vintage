@@ -27,9 +27,6 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
 public final class BiomesTFC {
     public static final BiomeTFC OCEAN = Helpers.getNull();
     public static final BiomeTFC RIVER = Helpers.getNull();
-    public static final BiomeTFC RIVERBANK = Helpers.getNull();
-    public static final BiomeTFC RIVER_SOURCE = Helpers.getNull();
-    public static final BiomeTFC ESTUARY = Helpers.getNull();
     public static final BiomeTFC BEACH = Helpers.getNull();
     public static final BiomeTFC GRAVEL_BEACH = Helpers.getNull();
     public static final BiomeTFC HIGH_HILLS = Helpers.getNull();
@@ -42,26 +39,20 @@ public final class BiomesTFC {
     public static final BiomeTFC HIGH_PLAINS = Helpers.getNull();
     public static final BiomeTFC DEEP_OCEAN = Helpers.getNull();
     public static final BiomeTFC LAKE = Helpers.getNull();
-    public static final BiomeTFC LAKESHORE = Helpers.getNull();
-    public static final BiomeTFC SHORE = Helpers.getNull();
     public static final BiomeTFC FLATLANDS = Helpers.getNull();
     public static final BiomeTFC FIELDS = Helpers.getNull();
     public static final BiomeTFC MEADOWS = Helpers.getNull();
     public static final BiomeTFC BAYOU = Helpers.getNull();
     public static final BiomeTFC MANGROVE = Helpers.getNull();
     public static final BiomeTFC MARSH = Helpers.getNull();
-    public static final BiomeTFC MOUNTAIN_RANGE = Helpers.getNull();
-    public static final BiomeTFC MOUNTAIN_RANGE_EDGE = Helpers.getNull();
-    public static final BiomeTFC FOOTHILLS = Helpers.getNull();
     public static final BiomeMesaTFC CRAG = Helpers.getNull();
     public static final BiomeMesaTFC MESA = Helpers.getNull();
     public static final BiomeMesaTFC MESA_PLATEAU = Helpers.getNull();
     public static final BiomeMesaTFC MESA_BRYCE = Helpers.getNull();
     public static final BiomeMesaTFC MESA_PLATEAU_M = Helpers.getNull();
+    private static final List<Biome> SPAWN_BIOMES = new ArrayList();
+    private static final List<Biome> WORLD_GEN_BIOMES = new ArrayList();
 
-
-    private static final List<Biome> SPAWN_BIOMES = new ArrayList<>();
-    private static final List<Biome> WORLD_GEN_BIOMES = new ArrayList<>();
 
     private BiomesTFC() {}
 
@@ -83,22 +74,17 @@ public final class BiomesTFC {
         register(r, new BiomeTFC(0x225031, new Biome.BiomeProperties(MOD_NAME + " High Plains").setBaseHeight(-1.3f).setHeightVariation(-2.27f)).setSpawnBiome(), true, true, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.PLAINS);
         register(r, new BiomeTFC(0x000080, new Biome.BiomeProperties(MOD_NAME + " Deep Ocean").setBaseHeight(-3.2f).setHeightVariation(-2.49999f).setBaseBiome("tfc:ocean")), false, false, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
         register(r, new BiomeTFC(0x5D8C8D, new Biome.BiomeProperties(MOD_NAME + " Lake").setBaseHeight(-2.4f).setHeightVariation(-2.5990001f).setBaseBiome("tfc:ocean"), 4, 5), false, false, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
-        register(r, new BiomeTFC(6537171, (new Biome.BiomeProperties(MOD_NAME + " Lakeshore")).setBaseHeight(-2.1F).setHeightVariation(-3.0F).setBaseBiome("tfc:ocean"), 4, 5), false, false, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
-        register(r, new BiomeTFC(35071, (new Biome.BiomeProperties(MOD_NAME + " Shore")).setBaseHeight(-2.15F).setHeightVariation(-2.9F), 8, 20), false, false, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
         register(r, (new BiomeTFC(6013240, (new Biome.BiomeProperties(MOD_NAME + " Flatlands")).setBaseHeight(-1.7F).setHeightVariation(-2.88F))).setSpawnBiome(), true, true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
         register(r, (new BiomeTFC(6013240, (new Biome.BiomeProperties(MOD_NAME + " Fields")).setBaseHeight(-1.7F).setHeightVariation(-2.88F))).setSpawnBiome(), true, true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
         register(r, (new BiomeTFC(6013240, (new Biome.BiomeProperties(MOD_NAME + " Meadows")).setBaseHeight(-1.7F).setHeightVariation(-2.88F))).setSpawnBiome(), true, true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
-        register(r, new BiomeTFC(6975545, (new Biome.BiomeProperties(MOD_NAME + " Bayou")).setBaseHeight(-2.21F).setHeightVariation(-2.75F).setWaterColor(16767282), 16, 45), true, true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER, BiomeDictionary.Type.LUSH);
+        register(r, (new BiomeTFC(6975545, (new Biome.BiomeProperties(MOD_NAME + " Bayou")).setBaseHeight(-2.21F).setHeightVariation(-2.75F).setWaterColor(16767282), 16, 45)).setSpawnBiome(), true, true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER, BiomeDictionary.Type.LUSH);
         register(r, new BiomeTFC(8236369, (new Biome.BiomeProperties(MOD_NAME + " Mangrove")).setBaseHeight(-2.21F).setHeightVariation(-2.75F).setWaterColor(16767282), 16, 45), true, true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER, BiomeDictionary.Type.LUSH);
         register(r, (new BiomeTFC(6725742, (new Biome.BiomeProperties(MOD_NAME + " Marsh")).setBaseHeight(-1.9F).setHeightVariation(-2.95F), 8, 20)).setSpawnBiome(), true, true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER, BiomeDictionary.Type.LUSH);
-        register(r, (new BiomeTFC(16742752, (new Biome.BiomeProperties(MOD_NAME + " Mountain Range")).setBaseHeight(0.6F).setHeightVariation(-2.0F))).setSpawnBiome(), true, true, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.SPARSE);
-        register(r, (new BiomeTFC(16711870, (new Biome.BiomeProperties(MOD_NAME + " Mountain Range Edge")).setBaseHeight(0.1F).setHeightVariation(-2.45F))).setSpawnBiome(), true, true, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.SPARSE);
-        register(r, (new BiomeTFC(11141310, (new Biome.BiomeProperties(MOD_NAME + " Foothills")).setBaseHeight(-1.0F).setHeightVariation(-2.9F))).setSpawnBiome(), true, true, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.SPARSE);
-        register(r, (new BiomeMesaTFC(true, true, 9090697, (new Biome.BiomeProperties(MOD_NAME + " Crag")).setBaseHeight(1.0F).setHeightVariation(-1.7F))).setSpawnBiome(), true, true, BiomeDictionary.Type.MOUNTAIN);
-        register(r, (new BiomeMesaTFC(false, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa")).setBaseHeight(-1.1F).setHeightVariation(-1.85F))).setSpawnBiome(), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.DRY, BiomeDictionary.Type.LUSH);
-        register(r, (new BiomeMesaTFC(false, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa Plateau")).setBaseHeight(-0.6F).setHeightVariation(-2.63F))).setSpawnBiome(), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.DRY, BiomeDictionary.Type.LUSH);
-        register(r, (new BiomeMesaTFC(true, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa Bryce")).setBaseBiome("tfc:mesa"))).setSpawnBiome(), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.MOUNTAIN);
-        register(r, (new BiomeMesaTFC(false, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa Plateau M")).setBaseBiome("tfc:mesa_plateau").setBaseHeight(-0.1F).setHeightVariation(-1.5F))).setSpawnBiome(), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.MOUNTAIN);
+        register(r, (new BiomeMesaTFC(true, true, 9090697, (new Biome.BiomeProperties(MOD_NAME + " Crag")).setBaseHeight(-0.8F).setHeightVariation(1.0F))).setSpawnBiome(), true, true, BiomeDictionary.Type.MOUNTAIN);
+        register(r, new BiomeMesaTFC(false, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa")).setBaseHeight(-1.7F).setHeightVariation(-1.4F)), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.DRY, BiomeDictionary.Type.LUSH);
+        register(r, new BiomeMesaTFC(false, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa Plateau")).setBaseHeight(-0.6F).setHeightVariation(-2.63F)), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.DRY, BiomeDictionary.Type.LUSH);
+        register(r, new BiomeMesaTFC(true, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa Bryce")).setBaseBiome("tfc:mesa")), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.MOUNTAIN);
+        register(r, new BiomeMesaTFC(false, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa Plateau M")).setBaseBiome("tfc:mesa_plateau").setBaseHeight(-0.1F).setHeightVariation(-1.5F)), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.MOUNTAIN);
     }
 
     public static boolean isMesaBiome(Biome b) {
@@ -106,19 +92,19 @@ public final class BiomesTFC {
     }
 
     public static boolean isOceanicBiome(Biome b) {
-        return OCEAN == b || DEEP_OCEAN == b || MANGROVE == b || ESTUARY == b || SHORE == b;
+        return OCEAN == b || DEEP_OCEAN == b || MANGROVE == b;
     }
 
     public static boolean isRiverBiome(Biome b) {
-        return RIVER == b || RIVERBANK == b || RIVER_SOURCE == b;
+        return RIVER == b;
     }
 
     public static boolean isLakeBiome(Biome b) {
-        return LAKE == b || LAKESHORE == b;
+        return LAKE == b;
     }
 
     public static boolean isMountainBiome(Biome b) {
-        return MOUNTAINS == b || MOUNTAINS_EDGE == b || CRAG == b || MOUNTAIN_RANGE == b || MOUNTAIN_RANGE_EDGE == b;
+        return MOUNTAINS == b || MOUNTAINS_EDGE == b || CRAG == b;
     }
 
     public static boolean isBeachBiome(Biome b) {

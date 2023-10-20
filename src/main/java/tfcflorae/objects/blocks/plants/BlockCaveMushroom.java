@@ -64,7 +64,6 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
     static final PropertyBool EAST = PropertyBool.create("east");
     static final PropertyBool SOUTH = PropertyBool.create("south");
     static final PropertyBool WEST = PropertyBool.create("west");
-    private static final Map<BlockCaveMushroom, ItemFoodTFCF> MAP = new HashMap<>();
     private static final PropertyBool[] ALL_FACES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
     private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.1D, 0.2D, 0.1D, 0.9D, 1.0D, 0.9D);
     private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
@@ -72,6 +71,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
     private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.1D, 0.1D, 0.2D, 0.9D, 0.9D, 1.0D);
     private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.2D, 0.1D, 0.1D, 1.0D, 0.9D, 0.9D);
     private static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.1D, 0.1D, 0.8D, 0.9D, 0.9D);
+    private static final Map<BlockCaveMushroom, ItemFoodTFCF> MAP = new HashMap<>();
     protected final BlockStateContainer blockState;
     public FoodData data;
     ArrayList<PotionEffectToHave> PotionEffects = new ArrayList<PotionEffectToHave>();

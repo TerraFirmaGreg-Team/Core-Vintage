@@ -82,19 +82,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
         MOSSY_RAW(Material.ROCK, false, Specification.COLLAPSABLE),
         MUD_BRICKS(Material.ROCK, false, null),
         MUD(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        LOAMY_SAND_PATH(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        SANDY_LOAM_PATH(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        LOAM_PATH(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        SILT_LOAM_PATH(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        SILT_PATH(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        HUMUS_PATH(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        ROOTED_DIRT(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        ROOTED_LOAMY_SAND(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        ROOTED_SANDY_LOAM(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        ROOTED_LOAM(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        ROOTED_SILT_LOAM(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        ROOTED_SILT(Material.GROUND, false, Specification.VERTICAL_ONLY),
-        ROOTED_HUMUS(Material.GROUND, false, Specification.VERTICAL_ONLY),
         BOG_IRON(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
         BOG_IRON_GRASS(Material.GRASS, true, Specification.VERTICAL_AND_HORIZONTAL),
         DRY_BOG_IRON_GRASS(Material.GRASS, true, Specification.VERTICAL_AND_HORIZONTAL),
@@ -595,7 +582,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case MOSSY_RAW:
                 case MUD_BRICKS:
                 case MUD:
-                case ROOTED_DIRT:
                 case PODZOL:
                 case SPARSE_GRASS:
                 case COARSE_DIRT:
@@ -757,15 +743,11 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case DRY_LOAMY_SAND_GRASS:
                 case LOAMY_SAND_GRASS:
                 case LOAMY_SAND_PODZOL:
-                case ROOTED_LOAMY_SAND:
-                case LOAMY_SAND_PATH:
                     return LOAMY_SAND;
                 case SPARSE_SANDY_LOAM_GRASS:
                 case DRY_SANDY_LOAM_GRASS:
                 case SANDY_LOAM_GRASS:
                 case SANDY_LOAM_PODZOL:
-                case ROOTED_SANDY_LOAM:
-                case SANDY_LOAM_PATH:
                     return SANDY_LOAM;
                 case SPARSE_SANDY_CLAY_LOAM_GRASS:
                 case DRY_SANDY_CLAY_LOAM_GRASS:
@@ -811,8 +793,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case DRY_LOAM_GRASS:
                 case LOAM_GRASS:
                 case LOAM_PODZOL:
-                case ROOTED_LOAM:
-                case LOAM_PATH:
                     return LOAM;
                 case SPARSE_CLAY_LOAM_GRASS:
                 case DRY_CLAY_LOAM_GRASS:
@@ -878,15 +858,11 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case DRY_SILT_LOAM_GRASS:
                 case SILT_LOAM_GRASS:
                 case SILT_LOAM_PODZOL:
-                case ROOTED_SILT_LOAM:
-                case SILT_LOAM_PATH:
                     return SILT_LOAM;
                 case SPARSE_SILT_GRASS:
                 case DRY_SILT_GRASS:
                 case SILT_GRASS:
                 case SILT_PODZOL:
-                case ROOTED_SILT:
-                case SILT_PATH:
                     return SILT;
                 case EARTHENWARE_CLAY_GRASS:
                 case SPARSE_EARTHENWARE_CLAY_GRASS:
@@ -906,8 +882,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case HUMUS_GRASS:
                 case SPARSE_HUMUS_GRASS:
                 case DRY_HUMUS_GRASS:
-                case ROOTED_HUMUS:
-                case HUMUS_PATH:
                     return HUMUS;
                 case CLAY_HUMUS_GRASS:
                 case SPARSE_CLAY_HUMUS_GRASS:
@@ -925,7 +899,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case SPARSE_STONEWARE_CLAY_HUMUS_GRASS:
                 case DRY_STONEWARE_CLAY_HUMUS_GRASS:
                     return STONEWARE_CLAY_HUMUS;
-                case ROOTED_DIRT:
                 case SPARSE_GRASS:
                 case SPARSE_CLAY_GRASS:
                 case DRY_CLAY_GRASS:
@@ -943,7 +916,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case DRY_CLAY_GRASS:
                 case CLAY_PODZOL:
                     return Rock.Type.CLAY;
-                case ROOTED_DIRT:
                 case SPARSE_GRASS:
                 case PODZOL:
                     return Rock.Type.DIRT;

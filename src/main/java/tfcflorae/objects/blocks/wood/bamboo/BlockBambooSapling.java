@@ -1,7 +1,6 @@
 package tfcflorae.objects.blocks.wood.bamboo;
 
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -12,7 +11,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockBambooSapling extends BlockSaplingTFC implements IGrowingPlant {
+public class BlockBambooSapling extends BlockSaplingTFC {
     Block leaves;
     Block log;
 
@@ -46,10 +45,5 @@ public class BlockBambooSapling extends BlockSaplingTFC implements IGrowingPlant
             }
         }
         world.setBlockState(pos.offset(EnumFacing.UP, height), leaves);
-    }
-
-    @Override
-    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-        return GrowthStatus.GROWING;
     }
 }

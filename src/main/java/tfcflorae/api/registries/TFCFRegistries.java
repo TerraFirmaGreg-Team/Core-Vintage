@@ -1,11 +1,7 @@
 package tfcflorae.api.registries;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import tfcflorae.TFCFlorae;
-import tfcflorae.objects.recipes.AlembicRecipe;
-import tfcflorae.objects.recipes.DryingRecipe;
-import tfcflorae.objects.recipes.StickBundleRecipe;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -14,10 +10,6 @@ import java.lang.reflect.Modifier;
  * This is where we initialize our registry instances!
  */
 public class TFCFRegistries {
-    public static final IForgeRegistry<AlembicRecipe> ALEMBIC = GameRegistry.findRegistry(AlembicRecipe.class);
-    public static final IForgeRegistry<DryingRecipe> DRYING = GameRegistry.findRegistry(DryingRecipe.class);
-    public static final IForgeRegistry<StickBundleRecipe> STICK_BUNDLE = GameRegistry.findRegistry(StickBundleRecipe.class);
-
     /*This is kindly hijacked from TerraFirmCraft TFCRegistries.java*/
     static {
         // Make sure all public static final fields have values, should stop people from prematurely loading this class.

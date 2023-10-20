@@ -81,7 +81,7 @@ public class ItemSack extends ItemTFCF {
     @Nonnull
     @Override
     public Size getSize(ItemStack stack) {
-        return Size.HUGE; // Can't be stored in itself
+        return Size.NORMAL; // Can't be stored in itself
     }
 
     @Nonnull
@@ -154,7 +154,7 @@ public class ItemSack extends ItemTFCF {
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
             IItemSize size = CapabilityItemSize.getIItemSize(stack);
             if (size != null) {
-                return size.getSize(stack).isSmallerThan(Size.HUGE);
+                return size.getSize(stack).isSmallerThan(Size.NORMAL);
             }
             return false;
         }
@@ -162,9 +162,10 @@ public class ItemSack extends ItemTFCF {
         @Override
         public NBTTagCompound serializeNBT() {
             NBTTagCompound nbt = new NBTTagCompound();
-
-            // Save item data
-            nbt.setTag("items", super.serializeNBT());
+            {
+                // Save item data
+                nbt.setTag("items", super.serializeNBT());
+            }
             return nbt;
         }
 

@@ -24,86 +24,37 @@ public class GenLayerBiomeEdge extends GenLayerTFC {
             for (int xx = 0; xx < xSize; ++xx) {
                 this.initChunkSeed(xx + x, zz + z);
                 int thisID = inCache[xx + 1 + (zz + 1) * (xSize + 2)];
-                int zn = inCache[xx + 1 + (zz + 1 - 1) * (xSize + 2)];
-                int xp = inCache[xx + 1 + 1 + (zz + 1) * (xSize + 2)];
-                int xn = inCache[xx + 1 - 1 + (zz + 1) * (xSize + 2)];
-                int zp = inCache[xx + 1 + (zz + 1 + 1) * (xSize + 2)];
-                if (thisID == this.highHillsID) {
-                    if (zn == this.highHillsID && xp == this.highHillsID && xn == this.highHillsID && zp == this.highHillsID) {
+
+                int zn = inCache[xx + 1 + (zz + 1 - 1) * (xSize + 2)]; // z - 1
+                int xp = inCache[xx + 1 + 1 + (zz + 1) * (xSize + 2)]; // x + 1
+                int xn = inCache[xx + 1 - 1 + (zz + 1) * (xSize + 2)]; // x - 1
+                int zp = inCache[xx + 1 + (zz + 1 + 1) * (xSize + 2)]; // z + 1
+
+                if (thisID == highHillsID) {
+                    if (zn == highHillsID && xp == highHillsID && xn == highHillsID && zp == highHillsID)
                         outCache[xx + zz * xSize] = thisID;
-                    } else {
-                        outCache[xx + zz * xSize] = this.highHillsEdgeID;
-                    }
-                } else if (thisID == this.mountainRangeID) {
-                    if (zn == this.mountainRangeID && xp == this.mountainRangeID && xn == this.mountainRangeID && zp == this.mountainRangeID) {
+                    else
+                        outCache[xx + zz * xSize] = highHillsEdgeID;
+                } else if (thisID == mountainsID) {
+                    if (zn == mountainsID && xp == mountainsID && xn == mountainsID && zp == mountainsID)
                         outCache[xx + zz * xSize] = thisID;
-                    } else {
-                        outCache[xx + zz * xSize] = this.mountainsID;
-                    }
-                } else if (thisID == this.cragID) {
-                    if (zn == this.cragID && xp == this.cragID && xn == this.cragID && zp == this.cragID) {
+                    else
+                        outCache[xx + zz * xSize] = mountainsEdgeID;
+                } else if (thisID == swamplandID) {
+                    if (zn == swamplandID && xp == swamplandID && xn == swamplandID && zp == swamplandID)
                         outCache[xx + zz * xSize] = thisID;
-                    } else {
-                        outCache[xx + zz * xSize] = this.mountainsID;
-                    }
-                } else if (thisID == this.mountainsID) {
-                    if (zn == this.mountainsID && xp == this.mountainsID && xn == this.mountainsID && zp == this.mountainsID) {
+                    else
+                        outCache[xx + zz * xSize] = plainsID;
+                } else if (thisID == highPlainsID) {
+                    if (zn == highPlainsID && xp == highPlainsID && xn == highPlainsID && zp == highPlainsID)
                         outCache[xx + zz * xSize] = thisID;
-                    } else {
-                        outCache[xx + zz * xSize] = this.mountainsEdgeID;
-                    }
-                } else if (thisID == this.swamplandID) {
-                    if (zn == this.swamplandID && xp == this.swamplandID && xn == this.swamplandID && zp == this.swamplandID) {
-                        outCache[xx + zz * xSize] = thisID;
-                    } else {
-                        outCache[xx + zz * xSize] = this.plainsID;
-                    }
-                } else if (thisID == this.bayouID) {
-                    if (zn == this.bayouID && xp == this.bayouID && xn == this.bayouID && zp == this.bayouID) {
-                        outCache[xx + zz * xSize] = thisID;
-                    } else {
-                        outCache[xx + zz * xSize] = this.marshID;
-                    }
-                } else if (thisID == this.marshID) {
-                    if (zn == this.marshID && xp == this.marshID && xn == this.marshID && zp == this.marshID) {
-                        outCache[xx + zz * xSize] = thisID;
-                    } else {
-                        outCache[xx + zz * xSize] = this.swamplandID;
-                    }
-                } else if (thisID == this.highPlainsID) {
-                    if (zn == this.highPlainsID && xp == this.highPlainsID && xn == this.highPlainsID && zp == this.highPlainsID) {
-                        outCache[xx + zz * xSize] = thisID;
-                    } else {
-                        outCache[xx + zz * xSize] = this.plainsID;
-                    }
-                } else if (thisID == this.plainsID) {
-                    if (zn == this.plainsID && xp == this.plainsID && xn == this.plainsID && zp == this.plainsID) {
-                        outCache[xx + zz * xSize] = thisID;
-                    } else {
-                        outCache[xx + zz * xSize] = this.fieldsID;
-                    }
-                } else if (thisID == this.rollingHillsID) {
-                    if (zn == this.rollingHillsID && xp == this.rollingHillsID && xn == this.rollingHillsID && zp == this.rollingHillsID) {
-                        outCache[xx + zz * xSize] = thisID;
-                    } else {
-                        outCache[xx + zz * xSize] = this.flatlandsID;
-                    }
-                } else if (thisID != this.flatlandsID && thisID != this.fieldsID) {
-                    if (thisID != this.mesaPlateauMID && thisID != this.mesaPlateauID && thisID != this.mesaBryceID) {
-                        outCache[xx + zz * xSize] = thisID;
-                    } else if ((zn != this.mesaPlateauMID || xp != this.mesaPlateauMID || xn != this.mesaPlateauMID || zp != this.mesaPlateauMID) && (zn != this.mesaPlateauID || xp != this.mesaPlateauID || xn != this.mesaPlateauID || zp != this.mesaPlateauID) && (zn != this.mesaBryceID || xp != this.mesaBryceID || xn != this.mesaBryceID || zp != this.mesaBryceID)) {
-                        outCache[xx + zz * xSize] = this.mesaID;
-                    } else {
-                        outCache[xx + zz * xSize] = thisID;
-                    }
-                } else if ((zn != this.flatlandsID || xp != this.flatlandsID || xn != this.flatlandsID || zp != this.flatlandsID) && (zn != this.fieldsID || xp != this.fieldsID || xn != this.fieldsID || zp != this.fieldsID)) {
-                    outCache[xx + zz * xSize] = this.meadowsID;
+                    else
+                        outCache[xx + zz * xSize] = plainsID;
                 } else {
                     outCache[xx + zz * xSize] = thisID;
                 }
             }
         }
-
         return outCache;
     }
 }

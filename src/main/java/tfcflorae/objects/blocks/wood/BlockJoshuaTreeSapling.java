@@ -1,7 +1,6 @@
 package tfcflorae.objects.blocks.wood;
 
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
@@ -39,7 +38,7 @@ import java.util.Map;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
-public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable, IGrowingPlant {
+public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
     private static final Map<Tree, BlockJoshuaTreeSapling> MAP = new HashMap<>();
@@ -205,10 +204,5 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable, IGro
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         wood.addInfo(stack, worldIn, tooltip, flagIn);
-    }
-
-    @Override
-    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-        return GrowthStatus.GROWING;
     }
 }

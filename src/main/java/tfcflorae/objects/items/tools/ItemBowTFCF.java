@@ -32,6 +32,7 @@ public class ItemBowTFCF extends ItemBow implements IItemSize {
     private float Damage;
 
     public ItemBowTFCF(Size size, Weight weight, int Durability, float Damage, Object... oreNameParts) {
+        //super();
         this(size, weight);
         this.maxStackSize = 1;
         this.setMaxDamage(Durability);

@@ -133,10 +133,10 @@ public class ItemFireStarter extends ItemTFC {
         if (world.isRemote) // Client
         {
             if (itemRand.nextFloat() + 0.3 < count / (double) total) {
-                world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, result.hitVec.x, result.hitVec.y, result.hitVec.z, 0.0, 0.10000000149011612, 0.0);
+                world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, result.hitVec.x, result.hitVec.y, result.hitVec.z, 0.0F, 0.1F, 0.0F);
             }
             if (countLeft < 10 && itemRand.nextFloat() + 0.3 < count / (double) total) {
-                world.spawnParticle(EnumParticleTypes.FLAME, result.hitVec.x, result.hitVec.y, result.hitVec.z, 0.0, 0.0, 0.0);
+                world.spawnParticle(EnumParticleTypes.FLAME, result.hitVec.x, result.hitVec.y, result.hitVec.z, 0.0F, 0.0F, 0.0F);
             }
 
             if (count % 3 == 1) {

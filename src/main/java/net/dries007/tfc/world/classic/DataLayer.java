@@ -30,15 +30,11 @@ public final class DataLayer {
     public static final DataLayer PH_NEUTRAL = newIntDataLayer(132, "Neutral", 2);
     public static final DataLayer PH_ALKALINE_LOW = newIntDataLayer(133, "Low Alkalinity", 3);
     public static final DataLayer PH_ALKALINE_HIGH = newIntDataLayer(134, "High Alkalinity", 4);
-    public static final DataLayer RIVER0 = newIntDataLayer(253, "River0", 1);
-    public static final DataLayer RIVER1 = newIntDataLayer(254, "River1", 2);
-    public static final DataLayer RIVER2 = newIntDataLayer(255, "River2", 3);
     public final int layerID;
     public final BlockRockVariant block;
     public final String name;
     public final int valueInt;
     public final float valueFloat;
-
     private DataLayer(int i, BlockRockVariant block, String name, int valueInt, float valueFloat) {
         this.layerID = i;
         this.block = block;

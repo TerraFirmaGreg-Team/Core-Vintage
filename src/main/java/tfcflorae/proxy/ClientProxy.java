@@ -13,13 +13,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tfcflorae.TFCFlorae;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import static tfcflorae.TFCFlorae.MODID;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = TFCFlorae.MODID)
 public class ClientProxy extends CommonProxy implements IProxy {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {

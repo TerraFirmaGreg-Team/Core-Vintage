@@ -10,6 +10,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.*;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
@@ -27,7 +28,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.tileentity.MobSpawnerBaseLogic;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ClassInheritanceMultiMap;
 import net.minecraft.util.math.BlockPos;
@@ -46,11 +49,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import tfcflorae.util.RegenWildCropsTFCF;
 
 import java.util.*;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
-import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.
@@ -63,6 +66,7 @@ public class WorldRegenHandler {
     public static final WorldGenPlantTFC PLANT_GEN = new WorldGenPlantTFC();
     private static final RegenRocksSticks ROCKS_GEN = new RegenRocksSticks(true);
     private static final RegenWildCrops CROPS_GEN = new RegenWildCrops();
+    private static final RegenWildCropsTFCF CROPSTFCF_GEN = new RegenWildCropsTFCF();
     private static final WorldGenBerryBushes BUSH_GEN = new WorldGenBerryBushes();
     private static final Random RANDOM = new Random();
     private static final List<ChunkPos> POSITIONS = new LinkedList<>();
@@ -81,85 +85,73 @@ public class WorldRegenHandler {
 
     @SubscribeEvent
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
-        if (!event.world.isRemote && event.phase == TickEvent.Phase.END) {
-            if (!POSITIONS.isEmpty()) {
-                double tps = Helpers.getTPS(event.world, 0);
-                ChunkPos pos = POSITIONS.remove(0);
-                if (tps > ConfigTFC.General.WORLD_REGEN.minRegenTps) {
-                    Chunk chunk = event.world.getChunk(pos.x, pos.z);
-                    BlockPos blockPos = pos.getBlock(0, 0, 0);
-                    ChunkDataTFC chunkDataTFC = ChunkDataTFC.get(event.world, pos.getBlock(0, 0, 0));
-                    IChunkProvider chunkProvider = event.world.getChunkProvider();
-                    IChunkGenerator chunkGenerator = ((ChunkProviderServer) chunkProvider).chunkGenerator;
-
-                    if (CalendarTFC.CALENDAR_TIME.getMonthOfYear().isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected() && CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
-                        if (ConfigTFC.General.WORLD_REGEN.sticksRocksModifier > 0) {
-                            //Nuke any rocks and sticks in chunk.
-                            removeAllPlacedItems(event.world, pos);
-                            double rockModifier = ConfigTFC.General.WORLD_REGEN.sticksRocksModifier;
-                            ROCKS_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
-
-                            final float density = chunkDataTFC.getFloraDensity();
-                            List<Tree> trees = chunkDataTFC.getValidTrees();
-                            int stickDensity = 3 + (int) (4f * density + 1.5f * trees.size() * rockModifier);
-                            if (trees.isEmpty()) {
-                                stickDensity = 1 + (int) (1.5f * density * rockModifier);
-                            }
-                            WorldGenTrees.generateLooseSticks(RANDOM, pos.x, pos.z, event.world, stickDensity);
+        if (!event.world.isRemote && event.phase == TickEvent.Phase.END && !POSITIONS.isEmpty()) {
+            double tps = Helpers.getTPS(event.world, 0);
+            ChunkPos pos = (ChunkPos) POSITIONS.remove(0);
+            if (tps > (double) ConfigTFC.General.WORLD_REGEN.minRegenTps) {
+                Chunk chunk = event.world.getChunk(pos.x, pos.z);
+                BlockPos blockPos = pos.getBlock(0, 0, 0);
+                ChunkDataTFC chunkDataTFC = ChunkDataTFC.get(event.world, pos.getBlock(0, 0, 0));
+                IChunkProvider chunkProvider = event.world.getChunkProvider();
+                IChunkGenerator chunkGenerator = ((ChunkProviderServer) chunkProvider).chunkGenerator;
+                if (CalendarTFC.CALENDAR_TIME.getMonthOfYear().isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected() && CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
+                    int worldZ;
+                    if (ConfigTFC.General.WORLD_REGEN.sticksRocksModifier > 0.0) {
+                        removeAllPlacedItems(event.world, pos);
+                        double rockModifier = ConfigTFC.General.WORLD_REGEN.sticksRocksModifier;
+                        ROCKS_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+                        float density = chunkDataTFC.getFloraDensity();
+                        List<Tree> trees = chunkDataTFC.getValidTrees();
+                        worldZ = 3 + (int) ((double) (4.0F * density) + (double) (1.5F * (float) trees.size()) * rockModifier);
+                        if (trees.isEmpty()) {
+                            worldZ = 1 + (int) ((double) (1.5F * density) * rockModifier);
                         }
 
-                        //Nuke crops/mushrooms/dead crops (not sure the latter is working.
-                        removeCropsAndMushrooms(event.world, pos);
-                        removeSeedBags(event.world, pos);
-
-                        float floraDensity = chunkDataTFC.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)
-                        float floraDiversity = chunkDataTFC.getFloraDiversity();
-                        Plant mushroom = TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI);
-                        if (mushroom != null) PLANT_GEN.setGeneratedPlant(mushroom);
-                        for (float i = RANDOM.nextInt(Math.round(3 / floraDiversity)); i < (1 + floraDensity) * 5; i++) {
-                            BlockPos blockMushroomPos = event.world.getHeight(blockPos.add(RANDOM.nextInt(16) + 8, 0, RANDOM.nextInt(16) + 8));
-                            PLANT_GEN.generate(event.world, RANDOM, blockMushroomPos);
-                        }
-                        CROPS_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
-                        int worldX = pos.x << 4;
-                        int worldZ = pos.z << 4;
-                        BlockPos blockpos = new BlockPos(worldX, 0, worldZ);
-                        Biome biome = event.world.getBiome(blockpos.add(16, 0, 16));
-                        removePredators(event.world, pos);
-                        regenPredators(event.world, biome, worldX + 8, worldZ + 8, 16, 16, RANDOM);
-
-                        // notably missing: berry bushes
-                        chunkDataTFC.resetLastUpdateYear();
+                        WorldGenTrees.generateLooseSticks(RANDOM, pos.x, pos.z, event.world, worldZ);
                     }
-                    chunk.markDirty();
-                    ((ChunkProviderServer) chunkProvider).queueUnload(chunk);
+
+                    removeCropsAndMushrooms(event.world, pos);
+                    removeSeedBags(event.world, pos);
+                    float floraDensity = chunkDataTFC.getFloraDensity();
+                    float floraDiversity = chunkDataTFC.getFloraDiversity();
+                    Plant mushroom = (Plant) TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI);
+                    if (mushroom != null) {
+                        PLANT_GEN.setGeneratedPlant(mushroom);
+                    }
+
+                    for (float i = (float) RANDOM.nextInt(Math.round(3.0F / floraDiversity)); i < (1.0F + floraDensity) * 5.0F; ++i) {
+                        BlockPos blockMushroomPos = event.world.getHeight(blockPos.add(RANDOM.nextInt(16) + 8, 0, RANDOM.nextInt(16) + 8));
+                        PLANT_GEN.generate(event.world, RANDOM, blockMushroomPos);
+                    }
+
+                    CROPS_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+                    CROPSTFCF_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+                    BUSH_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+                    int worldX = pos.x << 4;
+                    worldZ = pos.z << 4;
+                    BlockPos blockpos = new BlockPos(worldX, 0, worldZ);
+                    Biome biome = event.world.getBiome(blockpos.add(16, 0, 16));
+                    regenPredators(event.world, biome, worldX + 8, worldZ + 8, 16, 16, RANDOM);
+                    chunkDataTFC.resetLastUpdateYear();
                 }
+
+                chunk.markDirty();
+                ((ChunkProviderServer) chunkProvider).queueUnload(chunk);
             }
         }
-    }
 
-    private static void removePredators(World world, ChunkPos pos) {
-        for (ClassInheritanceMultiMap<Entity> target : world.getChunk(pos.x, pos.z).getEntityLists())
-            target.forEach(entity -> {
-                if (entity instanceof IPredator || entity instanceof IHuntable && !entity.hasCustomName()) {
-                    entity.setDropItemsWhenDead(false);
-                    entity.setDead();
-                }
-            });
     }
 
     private static void removeCropsAndMushrooms(World world, ChunkPos pos) {
         for (int xX = 0; xX < 16; ++xX) {
             for (int zZ = 0; zZ < 16; ++zZ) {
                 BlockPos topPos = world.getTopSolidOrLiquidBlock(pos.getBlock(xX, 0, zZ));
-                //If I'm not completely missing the point, then we have the top block for each in a chunk. Which is apparently not the top solid block ffs.
                 IBlockState topState = world.getBlockState(topPos);
                 Block topBlock = topState.getBlock();
                 if (!topState.getMaterial().isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockMushroomTFC)) {
                     IBlockState soil = world.getBlockState(topPos.down());
                     if (soil.getBlock() instanceof BlockRockVariant) {
                         BlockRockVariant soilRock = (BlockRockVariant) soil.getBlock();
-                        //Stop removing dead crops from farmland please!
                         if (soilRock.getType() != Rock.Type.FARMLAND) {
                             world.removeTileEntity(topPos);
                             world.setBlockToAir(topPos);
@@ -168,55 +160,74 @@ public class WorldRegenHandler {
                 }
             }
         }
-        //Remove all the crops
+
         Map<BlockPos, TileEntity> teTargets = world.getChunk(pos.x, pos.z).getTileEntityMap();
-        List<BlockPos> removals = new ArrayList<>();
-        teTargets.forEach((tePos, te) -> {
-            IBlockState state = world.getBlockState(tePos);
-            if (te instanceof TECropBase && state.getProperties().containsKey(WILD) && state.getValue(WILD)) {
-                removals.add(tePos);
+        List<BlockPos> removals = new ArrayList();
+        teTargets.forEach((tePosx, te) -> {
+            IBlockState state = world.getBlockState(tePosx);
+            if (te instanceof TECropBase && state.getProperties().containsKey(BlockCropTFC.WILD) && (Boolean) state.getValue(BlockCropTFC.WILD)) {
+                removals.add(tePosx);
             }
+
         });
-        for (BlockPos tePos : removals) {
+        Iterator var11 = removals.iterator();
+
+        while (var11.hasNext()) {
+            BlockPos tePos = (BlockPos) var11.next();
             world.removeTileEntity(tePos);
             world.setBlockToAir(tePos);
         }
+
     }
 
-
     private static void removeSeedBags(World world, ChunkPos pos) {
-        List<Entity> removals = new ArrayList<>();
-        for (ClassInheritanceMultiMap<Entity> target : world.getChunk(pos.x, pos.z).getEntityLists()) {
-            target.forEach(entity -> {
+        List<Entity> removals = new ArrayList();
+        ClassInheritanceMultiMap[] var3 = world.getChunk(pos.x, pos.z).getEntityLists();
+        int var4 = var3.length;
+
+        for (int var5 = 0; var5 < var4; ++var5) {
+            ClassInheritanceMultiMap<Entity> target = var3[var5];
+            target.forEach((entity) -> {
                 if (entity instanceof EntityItem && ((EntityItem) entity).getItem().getItem() instanceof ItemSeedsTFC) {
                     removals.add(entity);
                 }
+
             });
         }
-        for (Entity e : removals) {
+
+        Iterator var7 = removals.iterator();
+
+        while (var7.hasNext()) {
+            Entity e = (Entity) var7.next();
             world.removeEntity(e);
         }
+
     }
 
     private static void removeAllPlacedItems(World world, ChunkPos pos) {
-        List<BlockPos> removals = new ArrayList<>();
-        world.getChunk(pos.x, pos.z).getTileEntityMap().forEach((tePos, te) -> {
+        List<BlockPos> removals = new ArrayList();
+        world.getChunk(pos.x, pos.z).getTileEntityMap().forEach((tePosx, te) -> {
             if (te instanceof TEPlacedItemFlat) {
-                removals.add(tePos);
+                removals.add(tePosx);
             }
+
         });
-        for (BlockPos tePos : removals) {
+        Iterator var3 = removals.iterator();
+
+        while (var3.hasNext()) {
+            BlockPos tePos = (BlockPos) var3.next();
             world.removeTileEntity(tePos);
             world.setBlockToAir(tePos);
         }
+
     }
 
     public static void regenPredators(World worldIn, Biome biomeIn, int centerX, int centerZ, int diameterX, int diameterZ, Random randomIn) {
-        final BlockPos chunkBlockPos = new BlockPos(centerX, 0, centerZ);
-        final float temperature = ClimateTFC.getAvgTemp(worldIn, chunkBlockPos);
-        final float rainfall = ChunkDataTFC.getRainfall(worldIn, chunkBlockPos);
-        final float floraDensity = ChunkDataTFC.getFloraDensity(worldIn, chunkBlockPos);
-        final float floraDiversity = ChunkDataTFC.getFloraDiversity(worldIn, chunkBlockPos);
+        BlockPos chunkBlockPos = new BlockPos(centerX, 0, centerZ);
+        float temperature = ClimateTFC.getAvgTemp(worldIn, chunkBlockPos);
+        float rainfall = ChunkDataTFC.getRainfall(worldIn, chunkBlockPos);
+        float floraDensity = ChunkDataTFC.getFloraDensity(worldIn, chunkBlockPos);
+        float floraDiversity = ChunkDataTFC.getFloraDiversity(worldIn, chunkBlockPos);
         ForgeRegistries.ENTITIES.getValuesCollection().stream().filter((x) -> {
             if (ICreatureTFC.class.isAssignableFrom(x.getEntityClass())) {
                 Entity ent = x.newInstance(worldIn);
@@ -225,8 +236,11 @@ public class WorldRegenHandler {
                     return weight > 0 && randomIn.nextInt(weight) == 0;
                 }
             }
+
             return false;
-        }).findAny().ifPresent((entityEntry) -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn));
+        }).findAny().ifPresent((entityEntry) -> {
+            doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn);
+        });
     }
 
     private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random rand) {
@@ -241,19 +255,18 @@ public class WorldRegenHandler {
                 int i = centerX + rand.nextInt(diameterX);
                 int k = centerZ + rand.nextInt(diameterZ);
                 BlockPos blockpos = worldIn.getTopSolidOrLiquidBlock(new BlockPos(i, 0, k));
-                creature.setLocationAndAngles((float) i + 0.5F, blockpos.getY(), (float) k + 0.5F, rand.nextFloat() * 360.0F, 0.0F);
+                creature.setLocationAndAngles((double) ((float) i + 0.5F), (double) blockpos.getY(), (double) ((float) k + 0.5F), rand.nextFloat() * 360.0F, 0.0F);
                 if (creature.getCanSpawnHere()) {
-                    if (ForgeEventFactory.canEntitySpawn(creature, worldIn, (float) i + 0.5F, (float) blockpos.getY(), (float) k + 0.5F, null) == Event.Result.DENY) {
+                    if (ForgeEventFactory.canEntitySpawn(creature, worldIn, (float) i + 0.5F, (float) blockpos.getY(), (float) k + 0.5F, (MobSpawnerBaseLogic) null) == Event.Result.DENY) {
                         --fallback;
-                        if (fallback > 0) {
-                            continue;
+                        if (fallback <= 0) {
+                            break;
                         }
-                        break;
                     } else {
                         fallback = 5;
                         worldIn.spawnEntity(creature);
                         group.add(creature);
-                        creature.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(creature)), null);
+                        creature.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(creature)), (IEntityLivingData) null);
                         --individuals;
                         if (individuals > 0) {
                             creature = (EntityLiving) entityEntry.newInstance(worldIn);
@@ -270,6 +283,7 @@ public class WorldRegenHandler {
 
             creatureTFC.getGroupingRules().accept(group, rand);
         }
+
     }
 }
 

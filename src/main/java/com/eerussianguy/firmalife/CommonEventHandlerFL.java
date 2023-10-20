@@ -46,9 +46,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 
-import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
-
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = FirmaLife.MOD_ID)
 public class CommonEventHandlerFL {
     @SubscribeEvent
     public static void onBlockHarvestDrops(BlockEvent.HarvestDropsEvent event) {

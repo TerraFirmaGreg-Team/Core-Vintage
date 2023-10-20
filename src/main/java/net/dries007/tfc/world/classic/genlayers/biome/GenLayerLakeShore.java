@@ -1,21 +1,16 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.genlayers.biome;
 
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
+import net.minecraft.world.gen.layer.GenLayer;
 
-public class GenLayerShoreTFC extends GenLayerTFC {
-    public GenLayerShoreTFC(long seed, GenLayerTFC parent) {
+public class GenLayerLakeShore extends GenLayerTFC {
+    public GenLayerLakeShore(long seed, GenLayer par3GenLayer) {
         super(seed);
-        this.parent = parent;
+        super.parent = par3GenLayer;
     }
 
-    @Override
     public int[] getInts(int xCoord, int zCoord, int xSize, int zSize) {
-        int areaRadius = 8;
+        int areaRadius = 2;
         int parentXCoord = xCoord - areaRadius;
         int parentZCoord = zCoord - areaRadius;
         int parentXSize = xSize + 2 * areaRadius;
@@ -29,13 +24,13 @@ public class GenLayerShoreTFC extends GenLayerTFC {
                 boolean same = true;
                 boolean initialVal = false;
                 int initialValue = parentCache[x + areaRadius + (z + areaRadius) * (areaRadius * 2 + xSize)];
-                if (initialValue != this.oceanID) {
+                if (initialValue != this.lakeID) {
                     outCache[x + z * xSize] = parentCache[x + areaRadius + (z + areaRadius) * (areaRadius * 2 + xSize)];
                 } else {
                     for (int rX = 0; rX < areaRadius * 2 + 1 && same; ++rX) {
                         for (int rZ = 0; rZ < areaRadius * 2 + 1 && same; ++rZ) {
                             if (Math.abs(rX - areaRadius) + Math.abs(rZ - areaRadius) <= areaRadius) {
-                                same = parentCache[x + rX + (z + rZ) * parentXSize] != this.beachID && parentCache[x + rX + (z + rZ) * parentXSize] != this.gravelBeachID && parentCache[x + rX + (z + rZ) * parentXSize] != this.mangroveID;
+                                same = this.isWaterBiome(parentCache[x + rX + (z + rZ) * parentXSize]);
                             }
                         }
                     }
@@ -43,7 +38,7 @@ public class GenLayerShoreTFC extends GenLayerTFC {
                     if (same) {
                         outCache[x + z * xSize] = parentCache[x + areaRadius + (z + areaRadius) * (areaRadius * 2 + xSize)];
                     } else {
-                        outCache[x + z * xSize] = this.shoreID;
+                        outCache[x + z * xSize] = this.lakeshoreID;
                     }
                 }
             }

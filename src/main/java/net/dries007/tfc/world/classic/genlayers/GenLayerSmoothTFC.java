@@ -8,12 +8,15 @@ package net.dries007.tfc.world.classic.genlayers;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
+import javax.annotation.Nonnull;
+
 public class GenLayerSmoothTFC extends GenLayerTFC {
     public GenLayerSmoothTFC(long par1, GenLayer par3GenLayer) {
         super(par1);
         super.parent = par3GenLayer;
     }
 
+    @Nonnull
     @Override
     public int[] getInts(int par1, int par2, int par3, int par4) {
         int var5 = par1 - 1;

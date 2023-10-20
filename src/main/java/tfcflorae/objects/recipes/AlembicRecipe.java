@@ -26,11 +26,11 @@ public class AlembicRecipe extends IForgeRegistryEntry.Impl<AlembicRecipe> {
     /**
      * Creates a alembic recipe
      *
-     * @param inputFluid  fluid ingredients used to check if it is valid.
-     * @param outputFluid the output fluid, when this recipe is completed. Drain fluid to the connected alembic condenser's fluid reservoir/tank. If the condenser has a bucket (or any other functioning fluid container) in the proper item slot, the fluid will transfer to that. If there's no item, then the distillate will spill on a random adjacent block.
-     * @param outputStack the output stack, when this recipe is completed. If an item output is defined, produce said item after the distillation process has finished.
-     * @param duration    the duration, in ticks, for this recipe to complete.
-     * @param evaporation the temperature at which the inputFluid starts converting (boiling/evaporating) into the outputFluid.
+     * @param inputFluid      fluid ingredients used to check if it is valid.
+     * @param outputFluid     the output fluid, when this recipe is completed. Drain fluid to the connected alembic condenser's fluid reservoir/tank. If the condenser has a bucket (or any other functioning fluid container) in the proper item slot, the fluid will transfer to that. If there's no item, then the distillate will spill on a random adjacent block.
+     * @param outputStack     the output stack, when this recipe is completed. If an item output is defined, produce said item after the distillation process has finished.
+     * @param duration        the duration, in ticks, for this recipe to complete.
+     * @param evaporationTemp the temperature at which the inputFluid starts converting (boiling/evaporating) into the outputFluid.
      */
     public AlembicRecipe(@Nonnull IIngredient<FluidStack> inputFluid, @Nullable FluidStack outputFluid, @Nonnull ItemStack outputStack, int duration, float evaporationTemp) {
         this.inputFluid = inputFluid;

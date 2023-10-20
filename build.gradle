@@ -95,6 +95,7 @@ minecraft {
         args << '-Dmixin.hotSwap=true'
         args << '-Dmixin.checks.interfaces=true'
         args << '-Dmixin.debug.export=true'
+        args << '-Xmx20G'
     }
     extraRunJvmArguments.addAll(args)
     extraRunJvmArguments.addAll(propertyStringList('extra_jvm_args'))
@@ -197,6 +198,7 @@ processResources {
 }
 
 jar {
+    zip64 = true
     manifest {
         def attribute_map = [:]
         if (propertyBool('is_coremod')) {

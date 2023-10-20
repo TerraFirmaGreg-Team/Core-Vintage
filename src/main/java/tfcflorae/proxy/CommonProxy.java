@@ -27,7 +27,7 @@ import tfcflorae.world.worldgen.structures.WorldGenStructuresCorals;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = TFCFlorae.MODID)
 public class CommonProxy implements IProxy {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {

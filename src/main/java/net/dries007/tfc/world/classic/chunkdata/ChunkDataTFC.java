@@ -209,6 +209,10 @@ public final class ChunkDataTFC {
         return getStabilityLayer(x, z).valueInt == 0;
     }
 
+    public int getStability(int x, int z) {
+        return getStabilityLayer(x, z).valueInt;
+    }
+
     public int getDrainage(int x, int z) {
         return getDrainageLayer(x, z).valueInt;
     }

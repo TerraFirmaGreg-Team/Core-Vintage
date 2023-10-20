@@ -5,7 +5,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import org.apache.logging.log4j.Logger;
@@ -20,12 +23,11 @@ import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.fuel.FuelsTFCF;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-@Mod(modid = TFCFlorae.MODID, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES, certificateFingerprint = TFCFlorae.SIGNING_KEY)
+@Mod(modid = TFCFlorae.MODID, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES)
 public class TFCFlorae {
     public static final String MODID = "tfcflorae";
     public static final String NAME = "TFC Florae";
     public static final String VERSION = "@VERSION@";
-    public static final String SIGNING_KEY = "@FINGERPRINT@";
     public static final String DEPENDENCIES = "required-after:tfc@[1.7,);"
             + "after:firmalife;"
             + "after:tfcelementia;"
@@ -34,7 +36,6 @@ public class TFCFlorae {
     @Mod.Instance
     public static TFCFlorae instance;
     public static Logger logger;
-    public static boolean signedBuild = true;
 
     public static boolean FirmaLifeAdded = false;
     public static boolean TFCElementiaAdded = false;
@@ -60,13 +61,6 @@ public class TFCFlorae {
         return instance.network;
     }
 
-    @EventHandler
-    public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
-        /*if (!event.isDirectory())
-        {
-            signedBuild = false; // todo disabled for the time being
-        }*/
-    }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -76,10 +70,6 @@ public class TFCFlorae {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         int id = 0;
-
-        if (!signedBuild) {
-            logger.error("INVALID FINGERPRINT DETECTED!");
-        }
 
         for (ModContainer Mod : Loader.instance().getActiveModList()) {
             if (Mod.getModId().equals("firmalife"))

@@ -47,6 +47,8 @@ import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.registries.ForgeRegistry;
+import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
+import tfcflorae.types.BlockTypesTFCF;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -504,16 +506,264 @@ public class ChunkGenTFC implements IChunkGenerator {
                 int noise = (int) (noise4[colIndex] / 3.0D + 6.0D);
                 int smooth = -1;
 
-                IBlockState surfaceBlock = BlockRockVariant.get(rock1, rainfall + 1.3 * rand.nextGaussian() >= 150f ? Rock.Type.GRASS : Rock.Type.DRY_GRASS).getDefaultState();
-                IBlockState subSurfaceBlock = BlockRockVariant.get(rock1, Rock.Type.DIRT).getDefaultState();
+                float floraDiversity = MathHelper.clamp(0.5F + 0.5F * this.floraDiversitySpread * (float) this.noiseGen9.getValue((double) chunkX * 0.005, (double) chunkZ * 0.005), 0.0F, 1.0F);
+                float floraDensity = MathHelper.clamp(0.3F + 0.2F * this.rainfall / 500.0F + 0.4F * this.floraDensitySpread * (float) this.noiseGen8.getValue((double) chunkX * 0.05, (double) chunkZ * 0.05), 0.0F, 1.0F);
 
+                IBlockState surfaceBlock; // = BlockRockVariant.get(rock1, rainfall + 1.3 * rand.nextGaussian() >= 150f ? Rock.Type.GRASS : Rock.Type.DRY_GRASS).getDefaultState();
+                IBlockState subSurfaceBlock; // = BlockRockVariant.get(rock1, Rock.Type.DIRT).getDefaultState();
+
+                int nonRiverTiles;
+                if (tfcflorae.ConfigTFCF.General.WORLD.enableAllBlockTypes && tfcflorae.ConfigTFCF.General.WORLD.enableSoilPits) {
+                    if (biome != BiomesTFC.MOUNTAIN_RANGE && biome != BiomesTFC.MOUNTAIN_RANGE_EDGE && biome != BiomesTFC.CRAG && biome != BiomesTFC.MOUNTAINS && biome != BiomesTFC.RIVERBANK && biome != BiomesTFC.LAKESHORE) {
+                        double g;
+                        double p;
+                        if ((double) floraDiversity < 0.25 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                            if ((double) this.rainfall + 3.299999952316284 * this.rand.nextGaussian() >= 150.0) {
+                                surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SANDY_LOAM_GRASS).getDefaultState();
+                            } else {
+                                p = (double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian();
+                                if (p < 0.25 && (double) this.rainfall + 4.0 * this.rand.nextGaussian() <= 115.0) {
+                                    g = this.rand.nextGaussian();
+                                    if (g > 0.5) {
+                                        surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                                    } else {
+                                        surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SANDY_LOAM).getDefaultState();
+                                    }
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.DRY_SANDY_LOAM_GRASS).getDefaultState();
+                                }
+                            }
+                        } else if ((double) floraDiversity > 0.25 + 0.05000000074505806 * this.rand.nextGaussian() && (double) floraDiversity < 0.4000000059604645 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                            if ((double) this.rainfall + 3.299999952316284 * this.rand.nextGaussian() >= 150.0) {
+                                surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.LOAMY_SAND_GRASS).getDefaultState();
+                            } else {
+                                p = (double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian();
+                                if (p < 0.25 && (double) this.rainfall + 4.0 * this.rand.nextGaussian() <= 115.0) {
+                                    g = this.rand.nextGaussian();
+                                    if (g > 0.5) {
+                                        surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                                    } else {
+                                        surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_LOAMY_SAND).getDefaultState();
+                                    }
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.DRY_LOAMY_SAND_GRASS).getDefaultState();
+                                }
+                            }
+                        } else if ((double) floraDiversity > 0.4000000059604645 + 0.05000000074505806 * this.rand.nextGaussian() && (double) floraDiversity < 0.550000011920929 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                            if ((double) this.rainfall + 3.299999952316284 * this.rand.nextGaussian() >= 150.0) {
+                                surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.LOAM_GRASS).getDefaultState();
+                            } else {
+                                p = (double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian();
+                                if (p < 0.25 && (double) this.rainfall + 4.0 * this.rand.nextGaussian() <= 115.0) {
+                                    g = this.rand.nextGaussian();
+                                    if (g > 0.5) {
+                                        surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                                    } else {
+                                        surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_LOAM).getDefaultState();
+                                    }
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.DRY_LOAM_GRASS).getDefaultState();
+                                }
+                            }
+                        } else if ((double) floraDiversity > 0.550000011920929 + 0.05000000074505806 * this.rand.nextGaussian() && (double) floraDiversity < 0.800000011920929 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                            if ((double) this.rainfall + 3.299999952316284 * this.rand.nextGaussian() >= 150.0) {
+                                surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SILT_LOAM_GRASS).getDefaultState();
+                            } else {
+                                p = (double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian();
+                                if (p < 0.25 && (double) this.rainfall + 4.0 * this.rand.nextGaussian() <= 115.0) {
+                                    g = this.rand.nextGaussian();
+                                    if (g > 0.5) {
+                                        surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                                    } else {
+                                        surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SILT_LOAM).getDefaultState();
+                                    }
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.DRY_SILT_LOAM_GRASS).getDefaultState();
+                                }
+                            }
+                        } else if ((double) floraDiversity > 0.550000011920929 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                            if ((double) this.rainfall + 3.299999952316284 * this.rand.nextGaussian() >= 150.0) {
+                                surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SILT_GRASS).getDefaultState();
+                            } else {
+                                p = (double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian();
+                                if (p < 0.25 && (double) this.rainfall + 4.0 * this.rand.nextGaussian() <= 115.0) {
+                                    g = this.rand.nextGaussian();
+                                    if (g > 0.5) {
+                                        surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                                    } else {
+                                        surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SILT).getDefaultState();
+                                    }
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.DRY_SILT_GRASS).getDefaultState();
+                                }
+                            }
+                        } else if ((double) this.rainfall + 3.299999952316284 * this.rand.nextGaussian() >= 150.0) {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRASS).getDefaultState();
+                        } else {
+                            p = (double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian();
+                            if (p < 0.25 && (double) this.rainfall + 4.0 * this.rand.nextGaussian() <= 115.0) {
+                                g = this.rand.nextGaussian();
+                                if (g > 0.5) {
+                                    surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_DIRT).getDefaultState();
+                                }
+                            } else {
+                                surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.DRY_GRASS).getDefaultState();
+                            }
+                        }
+                    } else if ((double) floraDiversity < 0.25 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                        nonRiverTiles = this.rand.nextInt(4);
+                        if ((double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian() >= 0.20000000298023224) {
+                            if (stability.valueInt > 1 + this.rand.nextInt()) {
+                                if (nonRiverTiles >= 1) {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SPARSE_SANDY_LOAM_GRASS).getDefaultState();
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SANDY_LOAM).getDefaultState();
+                                }
+                            } else if (nonRiverTiles >= 1) {
+                                surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SANDY_LOAM).getDefaultState();
+                            } else {
+                                surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                            }
+                        } else if (nonRiverTiles >= 2 && stability.valueInt >= 2 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SANDY_LOAM).getDefaultState();
+                        } else if (nonRiverTiles <= 1 && stability.valueInt >= 1 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                        } else {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.COBBLE).getDefaultState();
+                        }
+                    } else if ((double) floraDiversity > 0.25 + 0.05000000074505806 * this.rand.nextGaussian() && (double) floraDiversity < 0.4000000059604645 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                        nonRiverTiles = this.rand.nextInt(4);
+                        if ((double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian() >= 0.20000000298023224) {
+                            if (stability.valueInt > 1 + this.rand.nextInt()) {
+                                if (nonRiverTiles >= 1) {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SPARSE_LOAMY_SAND_GRASS).getDefaultState();
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_LOAMY_SAND).getDefaultState();
+                                }
+                            } else if (nonRiverTiles >= 1) {
+                                surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_LOAMY_SAND).getDefaultState();
+                            } else {
+                                surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                            }
+                        } else if (nonRiverTiles >= 2 && stability.valueInt >= 2 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_LOAMY_SAND).getDefaultState();
+                        } else if (nonRiverTiles <= 1 && stability.valueInt >= 1 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                        } else {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.COBBLE).getDefaultState();
+                        }
+                    } else if ((double) floraDiversity > 0.4000000059604645 + 0.05000000074505806 * this.rand.nextGaussian() && (double) floraDiversity < 0.550000011920929 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                        nonRiverTiles = this.rand.nextInt(4);
+                        if ((double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian() >= 0.20000000298023224) {
+                            if (stability.valueInt > 1 + this.rand.nextInt()) {
+                                if (nonRiverTiles >= 1) {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SPARSE_LOAM_GRASS).getDefaultState();
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_LOAM).getDefaultState();
+                                }
+                            } else if (nonRiverTiles >= 1) {
+                                surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_LOAM).getDefaultState();
+                            } else {
+                                surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                            }
+                        } else if (nonRiverTiles >= 2 && stability.valueInt >= 2 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_LOAM).getDefaultState();
+                        } else if (nonRiverTiles <= 1 && stability.valueInt >= 1 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                        } else {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.COBBLE).getDefaultState();
+                        }
+                    } else if ((double) floraDiversity > 0.550000011920929 + 0.05000000074505806 * this.rand.nextGaussian() && (double) floraDiversity < 0.800000011920929 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                        nonRiverTiles = this.rand.nextInt(4);
+                        if ((double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian() >= 0.20000000298023224) {
+                            if (stability.valueInt > 1 + this.rand.nextInt()) {
+                                if (nonRiverTiles >= 1) {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SPARSE_SILT_LOAM_GRASS).getDefaultState();
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SILT_LOAM).getDefaultState();
+                                }
+                            } else if (nonRiverTiles >= 1) {
+                                surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SILT_LOAM).getDefaultState();
+                            } else {
+                                surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                            }
+                        } else if (nonRiverTiles >= 2 && stability.valueInt >= 2 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SILT_LOAM).getDefaultState();
+                        } else if (nonRiverTiles <= 1 && stability.valueInt >= 1 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                        } else {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.COBBLE).getDefaultState();
+                        }
+                    } else if ((double) floraDiversity > 0.550000011920929 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                        nonRiverTiles = this.rand.nextInt(4);
+                        if ((double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian() >= 0.20000000298023224) {
+                            if (stability.valueInt > 1 + this.rand.nextInt()) {
+                                if (nonRiverTiles >= 1) {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SPARSE_SILT_GRASS).getDefaultState();
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SILT).getDefaultState();
+                                }
+                            } else if (nonRiverTiles >= 1) {
+                                surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SILT).getDefaultState();
+                            } else {
+                                surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                            }
+                        } else if (nonRiverTiles >= 2 && stability.valueInt >= 2 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_SILT).getDefaultState();
+                        } else if (nonRiverTiles <= 1 && stability.valueInt >= 1 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                        } else {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.COBBLE).getDefaultState();
+                        }
+                    } else {
+                        nonRiverTiles = this.rand.nextInt(4);
+                        if ((double) floraDensity + 0.05000000074505806 * this.rand.nextGaussian() >= 0.20000000298023224) {
+                            if (stability.valueInt > 1 + this.rand.nextInt()) {
+                                if (nonRiverTiles >= 1) {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SPARSE_GRASS).getDefaultState();
+                                } else {
+                                    surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_DIRT).getDefaultState();
+                                }
+                            } else if (nonRiverTiles >= 1) {
+                                surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_DIRT).getDefaultState();
+                            } else {
+                                surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                            }
+                        } else if (nonRiverTiles >= 2 && stability.valueInt >= 2 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.COARSE_DIRT).getDefaultState();
+                        } else if (nonRiverTiles <= 1 && stability.valueInt >= 1 + this.rand.nextInt()) {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.GRAVEL).getDefaultState();
+                        } else {
+                            surfaceBlock = BlockRockVariant.get(rock1, Rock.Type.COBBLE).getDefaultState();
+                        }
+                    }
+
+                    if ((double) floraDiversity < 0.25 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                        subSurfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SANDY_LOAM).getDefaultState();
+                    } else if ((double) floraDiversity > 0.25 + 0.05000000074505806 * this.rand.nextGaussian() && (double) floraDiversity < 0.4000000059604645 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                        subSurfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.LOAMY_SAND).getDefaultState();
+                    } else if ((double) floraDiversity > 0.4000000059604645 + 0.05000000074505806 * this.rand.nextGaussian() && (double) floraDiversity < 0.550000011920929 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                        subSurfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.LOAM).getDefaultState();
+                    } else if ((double) floraDiversity > 0.550000011920929 + 0.05000000074505806 * this.rand.nextGaussian() && (double) floraDiversity < 0.800000011920929 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                        subSurfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SILT_LOAM).getDefaultState();
+                    } else if ((double) floraDiversity > 0.550000011920929 + 0.05000000074505806 * this.rand.nextGaussian()) {
+                        subSurfaceBlock = BlockRockVariantTFCF.get(rock1, BlockTypesTFCF.RockTFCF.SILT).getDefaultState();
+                    } else {
+                        subSurfaceBlock = BlockRockVariant.get(rock1, Rock.Type.DIRT).getDefaultState();
+                    }
+                } else {
+                    surfaceBlock = BlockRockVariant.get(rock1, (double) this.rainfall + 3.299999952316284 * this.rand.nextGaussian() >= 150.0 ? Rock.Type.GRASS : Rock.Type.DRY_GRASS).getDefaultState();
+                    subSurfaceBlock = BlockRockVariant.get(rock1, Rock.Type.DIRT).getDefaultState();
+                }
                 if (BiomesTFC.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x + 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z + 1)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z - 1))) {
                     if (!BiomesTFC.isBeachBiome(getBiomeOffset(x, z))) cliffMap[colIndex] = true;
                 }
 
 
                 //Used to make better rivers
-                int nonRiverTiles = 0;
+                nonRiverTiles = 0;
                 int nonBeachTiles = 0;
                 for (int a = x - 1; a <= x + 1; a++) {
                     for (int b = z - 1; b <= z + 1; b++) {
@@ -698,5 +948,8 @@ public class ChunkGenTFC implements IChunkGenerator {
                 }
             }
         }
+
     }
+
+
 }

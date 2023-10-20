@@ -22,7 +22,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
@@ -62,7 +61,7 @@ public class ItemBowTFCF extends ItemBow implements IItemSize {
     }
 
     @Override
-    protected @NotNull ItemStack findAmmo(EntityPlayer player) {
+    protected ItemStack findAmmo(EntityPlayer player) {
         if (this.isArrow(player.getHeldItem(EnumHand.OFF_HAND))) {
             return player.getHeldItem(EnumHand.OFF_HAND);
         } else if (this.isArrow(player.getHeldItem(EnumHand.MAIN_HAND))) {

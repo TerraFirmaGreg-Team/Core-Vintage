@@ -8,6 +8,8 @@ package net.dries007.tfc.objects.blocks.plants;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
@@ -51,15 +53,20 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 
     @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        if (!worldIn.isRemote && stack.getItem() == Items.SHEARS) {
-            spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
-        } else if (!worldIn.isRemote && stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1) {
-            if (Constants.RNG.nextDouble() <= (state.getValue(AGE) + 1) / 4.0D) //+25% change for each age
-            {
+        Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+        int currentStage = state.getValue(this.growthStageProperty);
+        this.plant.getStageForMonth(currentMonth);
+        int age = state.getValue(AGE);
+        if (!worldIn.isRemote) {
+            if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem().getHarvestLevel(stack, "scythe", player, state) == -1) {
+                if (stack.getItem() == Items.SHEARS) {
+                    spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
+                }
+            } else if (Constants.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
                 spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
             }
         }
-        super.harvestBlock(worldIn, player, pos, state, te, stack);
+
     }
 
     @Override
@@ -100,16 +107,12 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
     @Override
     @Nonnull
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        switch (state.getValue(AGE)) {
-            case 0:
-                return SHORTEST_GRASS_AABB.offset(state.getOffset(source, pos));
-            case 1:
-                return SHORTER_GRASS_AABB.offset(state.getOffset(source, pos));
-            case 2:
-                return SHORT_GRASS_AABB.offset(state.getOffset(source, pos));
-            default:
-                return GRASS_AABB.offset(state.getOffset(source, pos));
-        }
+        return switch (state.getValue(AGE)) {
+            case 0 -> SHORTEST_GRASS_AABB.offset(state.getOffset(source, pos));
+            case 1 -> SHORTER_GRASS_AABB.offset(state.getOffset(source, pos));
+            case 2 -> SHORT_GRASS_AABB.offset(state.getOffset(source, pos));
+            default -> GRASS_AABB.offset(state.getOffset(source, pos));
+        };
     }
 
     @Override

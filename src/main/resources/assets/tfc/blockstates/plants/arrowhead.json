@@ -1,0 +1,12 @@
+{
+  "multipart":[
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": {
+        "model":"tfc:plants/arrowhead_0"
+	  }
+    }
+  ]
+}

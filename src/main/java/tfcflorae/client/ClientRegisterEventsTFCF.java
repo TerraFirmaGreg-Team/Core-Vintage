@@ -56,7 +56,6 @@ import tfcflorae.objects.blocks.groundcover.BlockSurfaceOreDeposit;
 import tfcflorae.objects.blocks.plants.*;
 import tfcflorae.objects.blocks.plants.BlockPlant.BlockPlantDummy1;
 import tfcflorae.objects.blocks.wood.BlockFenceGateLog;
-import tfcflorae.objects.blocks.wood.BlockJoshuaTreeSapling;
 import tfcflorae.objects.blocks.wood.BlockLeavesTFCF;
 import tfcflorae.objects.blocks.wood.BlockLogTFCF;
 import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitDoor;
@@ -185,8 +184,8 @@ public class ClientRegisterEventsTFCF {
                 ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSurfaceOreDeposit.GRADE).build());
         }
 
-        for (Block block : BlocksTFCF.getAllJoshuaTreeSaplingBlocks())
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockJoshuaTreeSapling.STAGE).build());
+//        for (Block block : BlocksTFCF.getAllJoshuaTreeSaplingBlocks())
+//            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockJoshuaTreeSapling.STAGE).build());
 
         for (BlockFruitTreeLeaves leaves : BlocksTFCF.getAllFruitLeaves())
             ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE).ignore(BlockFruitTreeLeaves.HARVESTABLE).build());

@@ -578,35 +578,8 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
         }
 
         public boolean shouldRockify() {
-            switch (this) {
-                case MOSSY_RAW:
-                case MUD_BRICKS:
-                case MUD:
-                case PODZOL:
-                case SPARSE_GRASS:
-                case COARSE_DIRT:
-                case CLAY_PODZOL:
-                case DRY_CLAY_GRASS:
-                case SPARSE_CLAY_GRASS:
-                case COARSE_CLAY:
-                case EARTHENWARE_CLAY:
-                case EARTHENWARE_CLAY_GRASS:
-                case EARTHENWARE_CLAY_PODZOL:
-                case DRY_EARTHENWARE_CLAY_GRASS:
-                case SPARSE_EARTHENWARE_CLAY_GRASS:
-                case COARSE_EARTHENWARE_CLAY:
-                case KAOLINITE_CLAY:
-                case KAOLINITE_CLAY_GRASS:
-                case KAOLINITE_CLAY_PODZOL:
-                case DRY_KAOLINITE_CLAY_GRASS:
-                case SPARSE_KAOLINITE_CLAY_GRASS:
-                case COARSE_KAOLINITE_CLAY:
-                case STONEWARE_CLAY:
-                case STONEWARE_CLAY_GRASS:
-                case STONEWARE_CLAY_PODZOL:
-                case DRY_STONEWARE_CLAY_GRASS:
-                case SPARSE_STONEWARE_CLAY_GRASS:
-                case COARSE_STONEWARE_CLAY:
+            return switch (this) {
+                case MOSSY_RAW, MUD_BRICKS, MUD, PODZOL, SPARSE_GRASS, COARSE_DIRT, CLAY_PODZOL, DRY_CLAY_GRASS, SPARSE_CLAY_GRASS, COARSE_CLAY, EARTHENWARE_CLAY, EARTHENWARE_CLAY_GRASS, EARTHENWARE_CLAY_PODZOL, DRY_EARTHENWARE_CLAY_GRASS, SPARSE_EARTHENWARE_CLAY_GRASS, COARSE_EARTHENWARE_CLAY, KAOLINITE_CLAY, KAOLINITE_CLAY_GRASS, KAOLINITE_CLAY_PODZOL, DRY_KAOLINITE_CLAY_GRASS, SPARSE_KAOLINITE_CLAY_GRASS, COARSE_KAOLINITE_CLAY, STONEWARE_CLAY, STONEWARE_CLAY_GRASS, STONEWARE_CLAY_PODZOL, DRY_STONEWARE_CLAY_GRASS, SPARSE_STONEWARE_CLAY_GRASS, COARSE_STONEWARE_CLAY ->
                 /*
                 case BOG_IRON:
                 case BOG_IRON_GRASS:
@@ -725,10 +698,9 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case SILT_FARMLAND:
                 case HUMUS_FARMLAND:
                 */
-                    return true;
-                default:
-                    return false;
-            }
+                        true;
+                default -> false;
+            };
         }
 
         public RockTFCF getNonGrassVersion() {

@@ -866,8 +866,7 @@ public final class BlocksTFCF {
                                 plant == TFCRegistries.PLANTS.getValue(DefaultPlants.MOSS) ||
                                 plant == TFCRegistries.PLANTS.getValue(DefaultPlants.REINDEER_LICHEN))) {
                     plantCreepingBlock.add(register(r, "plants/" + plant.getRegistryName().getPath(), new BlockCreepingPlantTFCF(plant), CT_FLORA));
-                } else if (plant.getPlantType() == Plant.PlantType.TALL_GRASS && (
-                        plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.SAWGRASS))) {
+                } else if (plant.getPlantType() == Plant.PlantType.TALL_GRASS/* && (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.SAWGRASS))*/) {
                     plantTallGrassWaterBlock.add(register(r, "plants/" + plant.getRegistryName().getPath(), new BlockTallGrassWater(plant), CT_FLORA));
                 }
                 /*else if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS && (
@@ -1095,17 +1094,17 @@ public final class BlocksTFCF {
                 if (fruitTree.isCustomLog) {
                     normalTreeLog.add(register(r, "wood/log/" + name, new BlockLogTFCF(fruitTree.normalTree, fruitTree), CT_WOOD));
                 }
-                if (fruitTree.normalTree == TreesTFCF.JOSHUA_TREE_TREE) {
-                    Builder<BlockJoshuaTreeFlower> flowerJoshuaTree = ImmutableList.builder();
-                    String name1 = fruitTree.getName().toLowerCase();
-
-                    flowerJoshuaTree.add(register(r, "wood/leaves/" + name1, new BlockJoshuaTreeFlower(fruitTree.normalTree, fruitTree), CT_WOOD));
-
-                    allJoshuaTreeFlowerBlocks = flowerJoshuaTree.build();
-                    for (BlockJoshuaTreeFlower blockJoshuaTreeFlower : allJoshuaTreeFlowerBlocks) {
-                        normalItemBlocks.add(new ItemBlockTFC(blockJoshuaTreeFlower));
-                    }
-                }
+//                if (fruitTree.normalTree == TreesTFCF.JOSHUA_TREE_TREE) {
+//                    Builder<BlockJoshuaTreeFlower> flowerJoshuaTree = ImmutableList.builder();
+//                    String name1 = fruitTree.getName().toLowerCase();
+//
+//                    flowerJoshuaTree.add(register(r, "wood/leaves/" + name1, new BlockJoshuaTreeFlower(fruitTree.normalTree, fruitTree), CT_WOOD));
+//
+//                    allJoshuaTreeFlowerBlocks = flowerJoshuaTree.build();
+//                    for (BlockJoshuaTreeFlower blockJoshuaTreeFlower : allJoshuaTreeFlowerBlocks) {
+//                        normalItemBlocks.add(new ItemBlockTFC(blockJoshuaTreeFlower));
+//                    }
+//                }
             }
             /*else
             {
@@ -1303,22 +1302,22 @@ public final class BlocksTFCF {
         for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
             fenceGatesLog.add(register(r, "wood/fence_gate_log/" + wood.getRegistryName().getPath(), new BlockFenceGateLog(wood), CT_DECORATIONS));
 
-            if (wood == TFCRegistries.TREES.getValue(TreesTFCF.JOSHUA_TREE)) {
-                Builder<BlockJoshuaTreeLog> logJoshuaTree = ImmutableList.builder();
-                Builder<BlockJoshuaTreeSapling> saplingJoshuaTree = ImmutableList.builder();
-
-                logJoshuaTree.add(register(r, "wood/log/" + wood.getRegistryName().getPath(), new BlockJoshuaTreeLog(wood), CT_WOOD));
-                saplingJoshuaTree.add(register(r, "wood/sapling/" + wood.getRegistryName().getPath(), new BlockJoshuaTreeSapling(wood), CT_WOOD));
-
-                allJoshuaTreeLogBlocks = logJoshuaTree.build();
-                for (BlockJoshuaTreeLog blockJoshuaTreeLog : allJoshuaTreeLogBlocks) {
-                    normalItemBlocks.add(new ItemBlockTFC(blockJoshuaTreeLog));
-                }
-                allJoshuaTreeSaplingBlocks = saplingJoshuaTree.build();
-                for (BlockJoshuaTreeSapling blockJoshuaTreeSapling : allJoshuaTreeSaplingBlocks) {
-                    normalItemBlocks.add(new ItemBlockTFC(blockJoshuaTreeSapling));
-                }
-            }
+//            if (wood == TFCRegistries.TREES.getValue(TreesTFCF.JOSHUA_TREE)) {
+//                Builder<BlockJoshuaTreeLog> logJoshuaTree = ImmutableList.builder();
+//                Builder<BlockJoshuaTreeSapling> saplingJoshuaTree = ImmutableList.builder();
+//
+//                logJoshuaTree.add(register(r, "wood/log/" + wood.getRegistryName().getPath(), new BlockJoshuaTreeLog(wood), CT_WOOD));
+//                saplingJoshuaTree.add(register(r, "wood/sapling/" + wood.getRegistryName().getPath(), new BlockJoshuaTreeSapling(wood), CT_WOOD));
+//
+//                allJoshuaTreeLogBlocks = logJoshuaTree.build();
+//                for (BlockJoshuaTreeLog blockJoshuaTreeLog : allJoshuaTreeLogBlocks) {
+//                    normalItemBlocks.add(new ItemBlockTFC(blockJoshuaTreeLog));
+//                }
+//                allJoshuaTreeSaplingBlocks = saplingJoshuaTree.build();
+//                for (BlockJoshuaTreeSapling blockJoshuaTreeSapling : allJoshuaTreeSaplingBlocks) {
+//                    normalItemBlocks.add(new ItemBlockTFC(blockJoshuaTreeSapling));
+//                }
+//            }
         }
 
         {

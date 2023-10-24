@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "LLL",
+        "LRL"
+    ],
+    "key": {
+        "R": {
+            "type": "forge:ore_dict",
+            "ore": "rock"
+        },
+        "L": {
+            "type": "forge:ore_dict",
+            "ore": "lumber"
+        }
+    },
+    "result": {
+        "item": "tfcalloycalc:alloy_calculator"
+    }
+}

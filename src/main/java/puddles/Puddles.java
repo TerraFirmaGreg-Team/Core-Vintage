@@ -2,12 +2,12 @@ package puddles;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EnumFacing;
@@ -26,7 +26,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -34,7 +33,6 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Iterator;
 import java.util.Random;
@@ -45,21 +43,17 @@ public class Puddles {
     public static final String NAME = "Puddles";
     public static final String VERSION = "1.1";
 
-    public static Logger logger;
-
     public static Block puddle;
-    public static Item socks, wet_socks;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
-        logger.info("splish spash you have puddles installed");
         puddle = new BlockPuddle().setTranslationKey("puddle").setRegistryName(new ResourceLocation(MODID, "puddle"));
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new PuddlesConfig.ConfigEventHandler());
     }
 
     @SubscribeEvent
+    @SuppressWarnings("ConstantConditions")
     public void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().register(puddle);
     }
@@ -69,25 +63,13 @@ public class Puddles {
         ItemBlock puddle_item = new ItemBlock(puddle);
         puddle_item.setRegistryName(new ResourceLocation(MODID, "puddle"));
         event.getRegistry().register(puddle_item);
-
-        socks = new ItemSocks(false);
-        socks.setRegistryName(new ResourceLocation(MODID, "socks"));
-        socks.setTranslationKey("socks");
-        event.getRegistry().register(socks);
-
-        wet_socks = new ItemSocks(true);
-        wet_socks.setTranslationKey("wet_socks");
-        wet_socks.setRegistryName(new ResourceLocation(MODID, "wet_socks"));
-        event.getRegistry().register(wet_socks);
     }
 
     @SubscribeEvent
-    public void registerItemModels(ModelRegistryEvent event) {
+    public void registerModels(ModelRegistryEvent event) {
         Item puddle_item = Item.getItemFromBlock(puddle);
         ModelLoader.setCustomModelResourceLocation(puddle_item, 0, new ModelResourceLocation(puddle_item.getRegistryName(), "inventory"));
-
-        ModelLoader.setCustomModelResourceLocation(socks, 0, new ModelResourceLocation(socks.getRegistryName(), "inventory"));
-        ModelLoader.setCustomModelResourceLocation(wet_socks, 0, new ModelResourceLocation(wet_socks.getRegistryName(), "inventory"));
+        ModelLoader.setCustomStateMapper(puddle, new StateMap.Builder().build());
     }
 
     @SubscribeEvent
@@ -163,14 +145,12 @@ public class Puddles {
                     }
                 }
             }
-            if (stack.getItem() instanceof ItemHoe) {
+            if (stack.getItem() instanceof ItemHoe hoe) {
                 world.setBlockToAir(pos);
-                ItemHoe hoe = (ItemHoe) stack.getItem();
                 hoe.onItemUse(player, world, pos.down(), event.getHand(), event.getFace(), 0, 0, 0);
             }
-            if (stack.getItem() instanceof ItemSpade) {
+            if (stack.getItem() instanceof ItemSpade shovel) {
                 world.setBlockToAir(pos);
-                ItemSpade shovel = (ItemSpade) stack.getItem();
                 shovel.onItemUse(player, world, pos.down(), event.getHand(), event.getFace(), 0, 0, 0);
             }
         }
@@ -201,31 +181,6 @@ public class Puddles {
                     }
                     ((WorldServer) world).spawnParticle(EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, i, 0.0D, 0.0D, 0.0D, 0.4D, Block.getStateId(Puddles.puddle.getDefaultState()));
                     world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-                }
-            }
-        }
-    }
-
-    //WET SOCKS
-    @SubscribeEvent
-    public void makeSocksWet(LivingUpdateEvent event) {
-        if (event.getEntityLiving() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-            BlockPos pos = player.getPosition();
-            World world = player.getEntityWorld();
-            if (world.getBlockState(pos).getBlock() == Puddles.puddle) {
-                Iterator<ItemStack> armor = player.getArmorInventoryList().iterator();
-                ItemStack socks = null;
-                while (armor.hasNext()) {
-                    ItemStack temp = armor.next();
-                    if (temp.getItem() == Puddles.socks) {
-                        socks = temp;
-                        break;
-                    }
-                }
-
-                if (socks != null) {
-                    player.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(Puddles.wet_socks));
                 }
             }
         }

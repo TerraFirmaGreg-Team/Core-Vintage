@@ -12,8 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.lang.reflect.Method;
 
 @Mod(modid = DeathDairyDespair.MODID, name = DeathDairyDespair.NAME, version = DeathDairyDespair.VERSION)
-public class DeathDairyDespair
-{
+public class DeathDairyDespair {
     public static final String MODID = "deathdairydespair";
     public static final String NAME = "Death, Dairy and Despair";
     public static final String VERSION = "0.1";
@@ -32,7 +31,7 @@ public class DeathDairyDespair
 
         try {
 
-            writePlayerData = PlayerList.class.getDeclaredMethod("func_72391_b",EntityPlayerMP.class);
+            writePlayerData = PlayerList.class.getDeclaredMethod("writePlayerData", EntityPlayerMP.class);
             writePlayerData.setAccessible(true);
 
         } catch (Exception err) {
@@ -41,10 +40,10 @@ public class DeathDairyDespair
 
     }
 
-    public void invokeWritePlayerData (PlayerList list,EntityPlayerMP player) {
+    public void invokeWritePlayerData(PlayerList list, EntityPlayerMP player) {
         if (list == null) return;
         try {
-            writePlayerData.invoke(list,player);
+            writePlayerData.invoke(list, player);
         } catch (Exception err) {
             err.printStackTrace();
         }
@@ -56,7 +55,7 @@ public class DeathDairyDespair
     public void onPlayerDeath(LivingDeathEvent event) {
         if (event.getEntity() instanceof EntityPlayerMP) {
             System.out.println("A");
-            invokeWritePlayerData(event.getEntity().world.getMinecraftServer().getPlayerList(),(EntityPlayerMP)event.getEntity());
+            invokeWritePlayerData(event.getEntity().world.getMinecraftServer().getPlayerList(), (EntityPlayerMP) event.getEntity());
         }
     }
 

@@ -56,7 +56,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     private static final AxisAlignedBB MEDIUM_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.5D, 1D);
 
     private static final Map<IBerryBush, BlockBerryBush> MAP = new HashMap<>();
-    private final IBerryBush bush;
+    public final IBerryBush bush;
 
     public BlockBerryBush(IBerryBush bush) {
         super(Material.PLANTS);

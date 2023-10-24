@@ -48,7 +48,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
     public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", BlockFruitTreeLeaves.EnumLeafState.class);
     public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
     private static final Map<IFruitTree, BlockFruitTreeLeaves> MAP = new HashMap<>();
-    private final IFruitTree tree;
+    public final IFruitTree tree;
 
     public BlockFruitTreeLeaves(IFruitTree tree) {
         this.tree = tree;

@@ -1,0 +1,8 @@
+{
+  "type": "hotornot:unmold_recipe",
+  "ingredients": [
+    {
+      "item": "hotornot:ceramics/fired/mold/tongs_jaw"
+    }
+  ]
+}

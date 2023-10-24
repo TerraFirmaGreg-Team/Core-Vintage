@@ -1,0 +1,20 @@
+{
+  "type": "tfc:shaped_skill",
+  "pattern": [
+    "I I",
+    " S ",
+    "S S"
+  ],
+  "key": {
+    "I": {
+      "item": "hotornot:metal/tongs_jaw/bronze"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    }
+  },
+  "result": {
+    "item": "hotornot:metal/tongs/bronze"
+  }
+}

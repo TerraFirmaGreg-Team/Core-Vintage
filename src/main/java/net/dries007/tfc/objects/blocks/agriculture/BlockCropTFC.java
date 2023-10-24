@@ -8,7 +8,9 @@ package net.dries007.tfc.objects.blocks.agriculture;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
@@ -17,9 +19,11 @@ import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
+import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -29,6 +33,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -36,6 +41,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
+import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -46,7 +52,7 @@ import java.util.Random;
 import java.util.Set;
 
 @ParametersAreNonnullByDefault
-public abstract class BlockCropTFC extends BlockBush implements IGrowingPlant {
+public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlant
     // stage properties
     public static final PropertyInteger STAGE_8 = PropertyInteger.create("stage", 0, 7);
     public static final PropertyInteger STAGE_7 = PropertyInteger.create("stage", 0, 6);
@@ -262,19 +268,40 @@ public abstract class BlockCropTFC extends BlockBush implements IGrowingPlant {
         return EnumPlantType.Crop;
     }
 
-    public abstract PropertyInteger getStageProperty();
-
-    @Override
-    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-        float temp = ClimateTFC.getActualTemp(world, pos);
-        float rainfall = ChunkDataTFC.getRainfall(world, pos);
-        if (state.getValue(getStageProperty()) >= crop.getMaxStage()) {
-            return GrowthStatus.FULLY_GROWN;
-        } else if (!crop.isValidConditions(temp, rainfall) || !world.canSeeSky(pos)) {
-            return GrowthStatus.NOT_GROWING;
-        } else if (crop.isValidForGrowth(temp, rainfall)) {
-            return GrowthStatus.GROWING;
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+        if (this.crop != Crop.RICE) {
+            return super.canPlaceBlockAt(worldIn, pos);
+        } else {
+            return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
         }
-        return GrowthStatus.CAN_GROW;
     }
+
+    protected boolean canSustainBush(IBlockState state) {
+        if (this.crop != Crop.RICE) {
+            return super.canSustainBush(state);
+        } else {
+            return BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenTFC.FRESH_WATER || state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
+        }
+    }
+
+    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+        if (this.crop != Crop.RICE) {
+            return super.canBlockStay(worldIn, pos, state);
+        } else {
+            IBlockState soil = worldIn.getBlockState(pos.down());
+            if (!(soil.getBlock() instanceof BlockWaterPlantTFCF) && !(soil.getBlock() instanceof BlockWaterPlantTFC)) {
+                if (state.getBlock() != this) {
+                    return this.canSustainBush(soil);
+                } else {
+                    IBlockState stateDown = worldIn.getBlockState(pos.down());
+                    Material material = stateDown.getMaterial();
+                    return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) || material == Material.WATER && (Integer) stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == ChunkGenTFC.FRESH_WATER || material == Material.ICE || material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public abstract PropertyInteger getStageProperty();
 }

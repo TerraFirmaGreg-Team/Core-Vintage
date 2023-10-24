@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:ceramics/fired/pot"
+    }
+  ],
+  "result": {
+    "item": "tfctech:ceramics/fluid_bowl",
+    "count": 1
+  }
+}

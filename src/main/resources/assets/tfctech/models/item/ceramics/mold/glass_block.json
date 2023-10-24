@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "tfctech:items/ceramics/mold/glass_block",
+    "layer1": "tfctech:items/ceramics/mold/glass_block_fluid"
+  }
+}

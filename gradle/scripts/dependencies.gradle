@@ -59,6 +59,7 @@ dependencies {
         compileOnly rfg.deobf("curse.maven:hwyla-253449:2568751")
         compileOnly rfg.deobf("curse.maven:patchouli-306770:3162874")
         compileOnly rfg.deobf("curse.maven:nyx-rotn-edition-437663:3840824")
+        compileOnly rfg.deobf("curse.maven:industrial-craft-242638:3838713")
 
 //        compileOnly files("libs/TerraFirmaCraft-MC1.12.2-1.7.23.181-deobf.jar")
 //        compileOnly files("libs/TerraFirmaCraft-MC1.12.2-1.7.21.179-deobf.jar")

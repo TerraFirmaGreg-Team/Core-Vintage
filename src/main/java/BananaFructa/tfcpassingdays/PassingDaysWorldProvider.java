@@ -10,7 +10,7 @@ public class PassingDaysWorldProvider extends WorldProvider {
 
     public PassingDaysWorldProvider(WorldProvider provider) {
         oldProvider = provider;
-        this.setWorld(Utils.readDeclaredField(WorldProvider.class,provider,"field_76579_a"));
+        this.setWorld(Utils.readDeclaredField(WorldProvider.class, provider, "world"));
         init();
         this.doesWaterVaporize = provider.doesWaterVaporize();
         this.nether = provider.isNether();
@@ -26,16 +26,16 @@ public class PassingDaysWorldProvider extends WorldProvider {
         return Math.sin((z - 20000) * Math.PI / 80000) * 0.4 + 0.5;
     }
 
-    public double getDayPrecentege(double month,double solticeDecemberDayPrecentege) {
-        return 0.5 - Math.sin((month - 2.0/3.0)*(Math.PI/6)) * (0.5 - solticeDecemberDayPrecentege);
+    public double getDayPrecentege(double month, double solticeDecemberDayPrecentege) {
+        return 0.5 - Math.sin((month - 2.0 / 3.0) * (Math.PI / 6)) * (0.5 - solticeDecemberDayPrecentege);
     }
 
     public int translateToLocalizedCelestialTime(int ticks, double dayPrecentege) {
         double x = ticks / 24000.0;
         if (x <= dayPrecentege) {
-            return (int)(24000.0 * x * Math.pow(2*dayPrecentege,-1));
+            return (int) (24000.0 * x * Math.pow(2 * dayPrecentege, -1));
         } else {
-            return (int)(24000.0 * ((x * Math.pow(2 * (1 - dayPrecentege),-1)) + (0.5 - dayPrecentege)/(1 - dayPrecentege)));
+            return (int) (24000.0 * ((x * Math.pow(2 * (1 - dayPrecentege), -1)) + (0.5 - dayPrecentege) / (1 - dayPrecentege)));
         }
     }
 

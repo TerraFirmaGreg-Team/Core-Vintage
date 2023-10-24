@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LSL",
+    "#H#",
+    "#B#"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:lead"
+    },
+    "S": {
+      "item": "#STICKS"
+    },
+    "#": {
+      "item": "#PLANKS"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "B": {
+      "type": "tfc:fluid",
+      "fluid": "fresh_water"
+    }
+  },
+  "result": {
+    "item": "horsepower:press"
+  }
+}

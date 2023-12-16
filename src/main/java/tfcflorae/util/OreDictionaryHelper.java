@@ -9,6 +9,7 @@ import com.google.common.collect.Multimap;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.items.ItemsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -67,6 +68,15 @@ public class OreDictionaryHelper {
         MAP.forEach((t, s) -> OreDictionary.registerOre(s, t.toItemStack()));
         MAP.clear(); // No need to keep this stuff around
 
+        OreDictionary.registerOre("cloth", new ItemStack(ItemsTFC.BURLAP_CLOTH));
+        OreDictionary.registerOre("cloth", new ItemStack(ItemsTFC.WOOL_CLOTH));
+        OreDictionary.registerOre("cloth", new ItemStack(ItemsTFC.SILK_CLOTH));
+        OreDictionary.registerOre("fabric", new ItemStack(ItemsTFC.BURLAP_CLOTH));
+        OreDictionary.registerOre("fabric", new ItemStack(ItemsTFC.WOOL_CLOTH));
+        OreDictionary.registerOre("fabric", new ItemStack(ItemsTFC.SILK_CLOTH));
+
+        //OreDictionary.registerOre("stickBunch", new ItemStack(ItemsTFC.STICK_BUNCH));
+        //OreDictionary.registerOre("stickBundle", new ItemStack(ItemsTFC.STICK_BUNCH));
         OreDictionary.registerOre("thatch", new ItemStack(Blocks.HAY_BLOCK));
         OreDictionary.registerOre("bale", new ItemStack(Blocks.HAY_BLOCK));
         OreDictionary.registerOre("baleHay", new ItemStack(Blocks.HAY_BLOCK));
@@ -217,6 +227,16 @@ public class OreDictionaryHelper {
             case MUD_BRICKS:
                 MAP.put(thing, toString(prefixParts, rockTFCF));
                 //MAP.put(thing, toString(prefixParts, "mud_bricks", rock));
+                break;
+            case ROOTED_DIRT:
+            case ROOTED_LOAMY_SAND:
+            case ROOTED_SANDY_LOAM:
+            case ROOTED_LOAM:
+            case ROOTED_SILT_LOAM:
+            case ROOTED_SILT:
+            case ROOTED_HUMUS:
+                MAP.put(thing, toString(prefixParts, rockTFCF));
+                MAP.put(thing, toString(prefixParts, "rooted_dirt"));
                 break;
             case COARSE_DIRT:
             case COARSE_LOAMY_SAND:

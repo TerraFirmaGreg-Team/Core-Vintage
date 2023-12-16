@@ -5,20 +5,17 @@
 
 package tfcflorae.objects.blocks.plants.BlockPlant;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockHardenedClay;
+import net.minecraft.block.BlockStainedHardenedClay;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -39,12 +36,28 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
-import tfcflorae.objects.blocks.BlocksTFCF;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Random;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.util.agriculture.Crop;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.calendar.Month;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+
+import tfcflorae.objects.blocks.BlocksTFCF;
+import tfcflorae.objects.items.ItemsTFCF;
+import tfcflorae.types.PlantsTFCF;
+import tfcflorae.util.agriculture.CropTFCF;
 
 @ParametersAreNonnullByDefault
 public class BlockPlantTFCF extends BlockBush implements IItemSize {
@@ -325,7 +338,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
         return new BlockStateContainer(this, growthStageProperty, DAYPERIOD, AGE);
     }
 
-    int getDayPeriod() {
+    public int getDayPeriod() {
         return CalendarTFC.CALENDAR_TIME.getHourOfDay() / (ICalendar.HOURS_IN_DAY / 4);
     }
 

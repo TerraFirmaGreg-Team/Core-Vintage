@@ -1,18 +1,20 @@
 package tfcflorae.objects.blocks.blocktype;
 
-import net.dries007.tfc.api.types.Rock;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Nonnull;
+
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+
+import net.dries007.tfc.api.types.Rock;
+
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
-
-import javax.annotation.Nonnull;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
 
 public class BlockWallTFCF extends BlockWall {
     private static final Map<Rock, EnumMap<RockTFCF, BlockWallTFCF>> TABLE = new HashMap<>();

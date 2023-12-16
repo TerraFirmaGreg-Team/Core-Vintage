@@ -1,14 +1,9 @@
 package tfcflorae.objects.te;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.container.ContainerChestTFC;
-import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
-import net.dries007.tfc.objects.inventory.capability.TFCDoubleChestItemHandler;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
@@ -26,11 +21,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
-import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitChestTFCF;
+import mcp.MethodsReturnNonnullByDefault;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import net.dries007.tfc.api.capability.size.CapabilityItemSize;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
+import net.dries007.tfc.objects.container.ContainerChestTFC;
+import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
+import net.dries007.tfc.objects.inventory.capability.TFCDoubleChestItemHandler;
+
+import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitChestTFCF;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

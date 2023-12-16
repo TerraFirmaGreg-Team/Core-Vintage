@@ -1,12 +1,13 @@
 package tfcflorae.objects.blocks.wood;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -19,6 +20,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -26,19 +28,23 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.te.TETickCounter;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+
 import tfcflorae.objects.blocks.BlocksTFCF;
+import tfcflorae.types.TreesTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 @ParametersAreNonnullByDefault
-public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
+public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable, IGrowingPlant {
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
     private static final Map<Tree, BlockJoshuaTreeSapling> MAP = new HashMap<>();
@@ -204,5 +210,10 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         wood.addInfo(stack, worldIn, tooltip, flagIn);
+    }
+
+    @Override
+    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
+        return GrowthStatus.GROWING;
     }
 }

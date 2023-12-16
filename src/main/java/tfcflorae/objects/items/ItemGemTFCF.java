@@ -1,18 +1,20 @@
 package tfcflorae.objects.items;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import tfcflorae.objects.GemTFCF;
-import tfcflorae.util.OreDictionaryHelper;
-
+import java.util.EnumMap;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.EnumMap;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.objects.items.ItemTFC;
+import tfcflorae.util.OreDictionaryHelper;
+import tfcflorae.objects.GemTFCF;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

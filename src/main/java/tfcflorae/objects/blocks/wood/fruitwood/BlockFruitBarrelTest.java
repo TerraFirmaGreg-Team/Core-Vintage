@@ -1,7 +1,8 @@
 package tfcflorae.objects.blocks.wood.fruitwood;
 
-import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
 import net.minecraft.init.Blocks;
+import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
+
 import tfcflorae.util.OreDictionaryHelper;
 
 public class BlockFruitBarrelTest extends BlockBarrel {

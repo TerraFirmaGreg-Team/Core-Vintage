@@ -1,15 +1,9 @@
 package tfcflorae.objects.fluids;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
-import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.potion.PotionEffect;
@@ -17,7 +11,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import javax.annotation.Nonnull;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.api.capability.food.FoodStatsTFC;
+import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
+import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
+
+import net.dries007.tfc.TerraFirmaCraft;
 
 public final class FluidsTFCF {
     private static final ResourceLocation STILL = new ResourceLocation(TerraFirmaCraft.MOD_ID, "blocks/fluid_still");
@@ -100,12 +102,18 @@ public final class FluidsTFCF {
     public static FluidWrapper SUNFLOWER_SEED_WATER;
     public static FluidWrapper OPIUM_POPPY_SEED_WATER;
     public static FluidWrapper SUGAR_BEET_WATER;
+    public static FluidWrapper SUGAR_CANE_WATER;
     public static FluidWrapper SOY_MILK;
     public static FluidWrapper LINSEED_OIL;
     public static FluidWrapper RAPE_SEED_OIL;
     public static FluidWrapper SUNFLOWER_SEED_OIL;
     public static FluidWrapper OPIUM_POPPY_SEED_OIL;
     public static FluidWrapper WORT;
+    public static FluidWrapper SWEET_SAP;
+    public static FluidWrapper SWEET_SYRUP;
+    public static FluidWrapper RESIN;
+    public static FluidWrapper KINO;
+    public static FluidWrapper SALAMMONIAC;
 
     // Juice - Berries
     public static FluidWrapper JUICE_BLACKBERRY;
@@ -214,6 +222,20 @@ public final class FluidsTFCF {
                 }
             }
         });
+        SWEET_SAP = registerFluid(new Fluid("sweet_sap", STILL, FLOW, 0xFFFBC754)).with(DrinkableProperty.DRINKABLE, player -> {
+            if (player.getFoodStats() instanceof FoodStatsTFC) {
+                ((FoodStatsTFC) player.getFoodStats()).addThirst(10);
+                player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 1));
+            }
+        });
+        SWEET_SYRUP = registerFluid(new Fluid("sweet_syrup", STILL, FLOW, 0xFFE84E00)).with(DrinkableProperty.DRINKABLE, player -> {
+            if (player.getFoodStats() instanceof FoodStatsTFC) {
+                player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 800, 2));
+            }
+        });
+        RESIN = registerFluid(new Fluid("resin", STILL, FLOW, 0xFFFABF0B));
+        KINO = registerFluid(new Fluid("kino", STILL, FLOW, 0xFFA00814));
+        SALAMMONIAC = registerFluid(new Fluid("salammoniac", STILL, FLOW, 0xFFF4F4F4));
 
         DrinkableProperty teaProperty = player -> {
             if (player.getFoodStats() instanceof FoodStatsTFC) {
@@ -266,6 +288,7 @@ public final class FluidsTFCF {
                         SUNFLOWER_SEED_WATER = registerFluid(new Fluid("sunflower_seed_water", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(DrinkableProperty.DRINKABLE, miscFluidsProperty),
                         OPIUM_POPPY_SEED_WATER = registerFluid(new Fluid("opium_poppy_seed_water", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(DrinkableProperty.DRINKABLE, miscFluidsProperty),
                         SUGAR_BEET_WATER = registerFluid(new Fluid("sugar_beet_water", STILL, FLOW, 0xFFEEEFDF).setRarity(EnumRarity.UNCOMMON)).with(DrinkableProperty.DRINKABLE, miscFluidsProperty),
+                        SUGAR_CANE_WATER = registerFluid(new Fluid("sugar_cane_water", STILL, FLOW, 0xFFEEEFDF).setRarity(EnumRarity.UNCOMMON)).with(DrinkableProperty.DRINKABLE, miscFluidsProperty),
                         SOY_MILK = registerFluid(new Fluid("soy_milk", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(DrinkableProperty.DRINKABLE, miscFluidsProperty),
                         LINSEED_OIL = registerFluid(new Fluid("linseed_oil", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(DrinkableProperty.DRINKABLE, miscFluidsProperty),
                         RAPE_SEED_OIL = registerFluid(new Fluid("rape_seed_oil", STILL, FLOW, 0xFFDBD7CB).setRarity(EnumRarity.UNCOMMON)).with(DrinkableProperty.DRINKABLE, miscFluidsProperty),

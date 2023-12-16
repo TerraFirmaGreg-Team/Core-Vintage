@@ -1,18 +1,12 @@
 package tfcflorae.objects.blocks.blocktype;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.items.metal.ItemSmallOre;
-import net.dries007.tfc.objects.items.rock.ItemRock;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -28,18 +22,27 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import mcp.MethodsReturnNonnullByDefault;
+
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.types.Ore;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.objects.items.metal.ItemSmallOre;
+import net.dries007.tfc.objects.items.rock.ItemRock;
+
 import tfcflorae.objects.blocks.blocktype.farmland.*;
+import tfcflorae.objects.blocks.blocktype.path.*;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.objects.items.rock.ItemMud;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
@@ -72,7 +75,6 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
                 setHardness(rock.getRockCategory().getHardness()).setResistance(rock.getRockCategory().getResistance());
                 setHarvestLevel("pickaxe", 0);
                 break;
-            case COARSE_DIRT:
             case MUD:
                 setSoundType(SoundType.GROUND);
                 setHardness(rock.getRockCategory().getHardness() * 0.15F);
@@ -90,6 +92,12 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
             case SILT_LOAM_FARMLAND:
             case SILT_FARMLAND:
             case HUMUS_FARMLAND:
+            case LOAMY_SAND_PATH:
+            case SANDY_LOAM_PATH:
+            case LOAM_PATH:
+            case SILT_LOAM_PATH:
+            case SILT_PATH:
+            case HUMUS_PATH:
                 setSoundType(SoundType.GROUND);
                 setHardness(1.5F * 0.15F);
                 setHarvestLevel("shovel", 0);
@@ -105,12 +113,20 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
                 setHardness(rock.getRockCategory().getHardness() * 0.2F);
                 setHarvestLevel("shovel", 0);
                 break;
+            case ROOTED_DIRT:
+            case ROOTED_LOAMY_SAND:
+            case ROOTED_SANDY_LOAM:
+            case ROOTED_LOAM:
+            case ROOTED_SILT_LOAM:
+            case ROOTED_SILT:
+            case ROOTED_HUMUS:
             case BOG_IRON:
             case SANDY_CLAY_LOAM:
             case SANDY_CLAY:
             case CLAY_LOAM:
             case SILTY_CLAY_LOAM:
             case SILTY_CLAY:
+            case COARSE_DIRT:
             case COARSE_LOAMY_SAND:
             case COARSE_SANDY_LOAM:
             case COARSE_SANDY_CLAY_LOAM:
@@ -328,21 +344,252 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
     }
 
     public static BlockRockVariantTFCF create(Rock rock, RockTFCF rockTFCF) {
-        return switch (rockTFCF) {
-            case MOSSY_RAW -> new BlockRockRawTFCF(rockTFCF, rock);
-            case MUD -> new BlockRockMud(rockTFCF, rock);
-            case COARSE_DIRT, BOG_IRON, BOG_IRON_GRASS, DRY_BOG_IRON_GRASS, SPARSE_BOG_IRON_GRASS, BOG_IRON_PODZOL, LOAMY_SAND, COARSE_LOAMY_SAND, SANDY_LOAM, COARSE_SANDY_LOAM, SANDY_CLAY_LOAM, COARSE_SANDY_CLAY_LOAM, SANDY_CLAY, COARSE_SANDY_CLAY, LOAM, COARSE_LOAM, CLAY_LOAM, COARSE_CLAY_LOAM, COARSE_CLAY, SILTY_CLAY, COARSE_SILTY_CLAY, SILTY_CLAY_LOAM, COARSE_SILTY_CLAY_LOAM, SILT_LOAM, COARSE_SILT_LOAM, SILT, COARSE_SILT, HUMUS, COARSE_HUMUS, CLAY_HUMUS, COARSE_CLAY_HUMUS, EARTHENWARE_CLAY, SANDY_EARTHENWARE_CLAY_LOAM, COARSE_SANDY_EARTHENWARE_CLAY_LOAM, SANDY_EARTHENWARE_CLAY, COARSE_SANDY_EARTHENWARE_CLAY, EARTHENWARE_CLAY_LOAM, COARSE_EARTHENWARE_CLAY_LOAM, COARSE_EARTHENWARE_CLAY, SILTY_EARTHENWARE_CLAY, COARSE_SILTY_EARTHENWARE_CLAY, SILTY_EARTHENWARE_CLAY_LOAM, COARSE_SILTY_EARTHENWARE_CLAY_LOAM, EARTHENWARE_CLAY_HUMUS, COARSE_EARTHENWARE_CLAY_HUMUS, KAOLINITE_CLAY, SANDY_KAOLINITE_CLAY_LOAM, COARSE_SANDY_KAOLINITE_CLAY_LOAM, SANDY_KAOLINITE_CLAY, COARSE_SANDY_KAOLINITE_CLAY, KAOLINITE_CLAY_LOAM, COARSE_KAOLINITE_CLAY_LOAM, COARSE_KAOLINITE_CLAY, SILTY_KAOLINITE_CLAY, COARSE_SILTY_KAOLINITE_CLAY, SILTY_KAOLINITE_CLAY_LOAM, COARSE_SILTY_KAOLINITE_CLAY_LOAM, KAOLINITE_CLAY_HUMUS, COARSE_KAOLINITE_CLAY_HUMUS, STONEWARE_CLAY, SANDY_STONEWARE_CLAY_LOAM, COARSE_SANDY_STONEWARE_CLAY_LOAM, SANDY_STONEWARE_CLAY, COARSE_SANDY_STONEWARE_CLAY, STONEWARE_CLAY_LOAM, COARSE_STONEWARE_CLAY_LOAM, COARSE_STONEWARE_CLAY, SILTY_STONEWARE_CLAY, COARSE_SILTY_STONEWARE_CLAY, SILTY_STONEWARE_CLAY_LOAM, COARSE_SILTY_STONEWARE_CLAY_LOAM, STONEWARE_CLAY_HUMUS, COARSE_STONEWARE_CLAY_HUMUS ->
-                    new BlockRockVariantFallableTFCF(rockTFCF, rock);
-            case PODZOL, LOAMY_SAND_GRASS, LOAMY_SAND_PODZOL, SANDY_LOAM_GRASS, SANDY_LOAM_PODZOL, SANDY_CLAY_LOAM_GRASS, SANDY_CLAY_LOAM_PODZOL, SANDY_CLAY_GRASS, SANDY_CLAY_PODZOL, LOAM_GRASS, LOAM_PODZOL, CLAY_LOAM_GRASS, CLAY_LOAM_PODZOL, CLAY_PODZOL, SILTY_CLAY_GRASS, SILTY_CLAY_PODZOL, SILTY_CLAY_LOAM_GRASS, SILTY_CLAY_LOAM_PODZOL, SILT_LOAM_GRASS, SILT_LOAM_PODZOL, SILT_GRASS, SILT_PODZOL, DRY_LOAMY_SAND_GRASS, DRY_SANDY_LOAM_GRASS, DRY_SANDY_CLAY_LOAM_GRASS, DRY_SANDY_CLAY_GRASS, DRY_LOAM_GRASS, DRY_CLAY_LOAM_GRASS, DRY_CLAY_GRASS, DRY_SILTY_CLAY_GRASS, DRY_SILTY_CLAY_LOAM_GRASS, DRY_SILT_LOAM_GRASS, DRY_SILT_GRASS, HUMUS_GRASS, DRY_HUMUS_GRASS, CLAY_HUMUS_GRASS, DRY_CLAY_HUMUS_GRASS, EARTHENWARE_CLAY_GRASS, SANDY_EARTHENWARE_CLAY_LOAM_GRASS, SANDY_EARTHENWARE_CLAY_LOAM_PODZOL, SANDY_EARTHENWARE_CLAY_GRASS, SANDY_EARTHENWARE_CLAY_PODZOL, EARTHENWARE_CLAY_LOAM_GRASS, EARTHENWARE_CLAY_LOAM_PODZOL, EARTHENWARE_CLAY_PODZOL, SILTY_EARTHENWARE_CLAY_GRASS, SILTY_EARTHENWARE_CLAY_PODZOL, SILTY_EARTHENWARE_CLAY_LOAM_GRASS, SILTY_EARTHENWARE_CLAY_LOAM_PODZOL, DRY_SANDY_EARTHENWARE_CLAY_LOAM_GRASS, DRY_SANDY_EARTHENWARE_CLAY_GRASS, DRY_EARTHENWARE_CLAY_LOAM_GRASS, DRY_EARTHENWARE_CLAY_GRASS, DRY_SILTY_EARTHENWARE_CLAY_GRASS, DRY_SILTY_EARTHENWARE_CLAY_LOAM_GRASS, EARTHENWARE_CLAY_HUMUS_GRASS, DRY_EARTHENWARE_CLAY_HUMUS_GRASS, KAOLINITE_CLAY_GRASS, SANDY_KAOLINITE_CLAY_LOAM_GRASS, SANDY_KAOLINITE_CLAY_LOAM_PODZOL, SANDY_KAOLINITE_CLAY_GRASS, SANDY_KAOLINITE_CLAY_PODZOL, KAOLINITE_CLAY_LOAM_GRASS, KAOLINITE_CLAY_LOAM_PODZOL, KAOLINITE_CLAY_PODZOL, SILTY_KAOLINITE_CLAY_GRASS, SILTY_KAOLINITE_CLAY_PODZOL, SILTY_KAOLINITE_CLAY_LOAM_GRASS, SILTY_KAOLINITE_CLAY_LOAM_PODZOL, DRY_SANDY_KAOLINITE_CLAY_LOAM_GRASS, DRY_SANDY_KAOLINITE_CLAY_GRASS, DRY_KAOLINITE_CLAY_LOAM_GRASS, DRY_KAOLINITE_CLAY_GRASS, DRY_SILTY_KAOLINITE_CLAY_GRASS, DRY_SILTY_KAOLINITE_CLAY_LOAM_GRASS, KAOLINITE_CLAY_HUMUS_GRASS, DRY_KAOLINITE_CLAY_HUMUS_GRASS, STONEWARE_CLAY_GRASS, SANDY_STONEWARE_CLAY_LOAM_GRASS, SANDY_STONEWARE_CLAY_LOAM_PODZOL, SANDY_STONEWARE_CLAY_GRASS, SANDY_STONEWARE_CLAY_PODZOL, STONEWARE_CLAY_LOAM_GRASS, STONEWARE_CLAY_LOAM_PODZOL, STONEWARE_CLAY_PODZOL, SILTY_STONEWARE_CLAY_GRASS, SILTY_STONEWARE_CLAY_PODZOL, SILTY_STONEWARE_CLAY_LOAM_GRASS, SILTY_STONEWARE_CLAY_LOAM_PODZOL, DRY_SANDY_STONEWARE_CLAY_LOAM_GRASS, DRY_SANDY_STONEWARE_CLAY_GRASS, DRY_STONEWARE_CLAY_LOAM_GRASS, DRY_STONEWARE_CLAY_GRASS, DRY_SILTY_STONEWARE_CLAY_GRASS, DRY_SILTY_STONEWARE_CLAY_LOAM_GRASS, STONEWARE_CLAY_HUMUS_GRASS, DRY_STONEWARE_CLAY_HUMUS_GRASS, SPARSE_GRASS, SPARSE_CLAY_GRASS, SPARSE_LOAMY_SAND_GRASS, SPARSE_SANDY_LOAM_GRASS, SPARSE_SANDY_CLAY_LOAM_GRASS, SPARSE_SANDY_CLAY_GRASS, SPARSE_LOAM_GRASS, SPARSE_CLAY_LOAM_GRASS, SPARSE_SILTY_CLAY_GRASS, SPARSE_SILTY_CLAY_LOAM_GRASS, SPARSE_SILT_LOAM_GRASS, SPARSE_SILT_GRASS, SPARSE_HUMUS_GRASS, SPARSE_CLAY_HUMUS_GRASS, SPARSE_SANDY_EARTHENWARE_CLAY_LOAM_GRASS, SPARSE_SANDY_EARTHENWARE_CLAY_GRASS, SPARSE_EARTHENWARE_CLAY_LOAM_GRASS, SPARSE_EARTHENWARE_CLAY_GRASS, SPARSE_SILTY_EARTHENWARE_CLAY_GRASS, SPARSE_SILTY_EARTHENWARE_CLAY_LOAM_GRASS, SPARSE_EARTHENWARE_CLAY_HUMUS_GRASS, SPARSE_SANDY_KAOLINITE_CLAY_LOAM_GRASS, SPARSE_SANDY_KAOLINITE_CLAY_GRASS, SPARSE_KAOLINITE_CLAY_LOAM_GRASS, SPARSE_KAOLINITE_CLAY_GRASS, SPARSE_SILTY_KAOLINITE_CLAY_GRASS, SPARSE_SILTY_KAOLINITE_CLAY_LOAM_GRASS, SPARSE_KAOLINITE_CLAY_HUMUS_GRASS, SPARSE_SANDY_STONEWARE_CLAY_LOAM_GRASS, SPARSE_SANDY_STONEWARE_CLAY_GRASS, SPARSE_STONEWARE_CLAY_LOAM_GRASS, SPARSE_STONEWARE_CLAY_GRASS, SPARSE_SILTY_STONEWARE_CLAY_GRASS, SPARSE_SILTY_STONEWARE_CLAY_LOAM_GRASS, SPARSE_STONEWARE_CLAY_HUMUS_GRASS ->
-                    new BlockRockVariantConnectedTFCF(rockTFCF, rock);
-            case LOAMY_SAND_FARMLAND -> new BlockLoamySandFarmland(rockTFCF, rock);
-            case SANDY_LOAM_FARMLAND -> new BlockSandyLoamFarmland(rockTFCF, rock);
-            case LOAM_FARMLAND -> new BlockLoamFarmland(rockTFCF, rock);
-            case SILT_LOAM_FARMLAND -> new BlockSiltLoamFarmland(rockTFCF, rock);
-            case SILT_FARMLAND -> new BlockSiltFarmland(rockTFCF, rock);
-            case HUMUS_FARMLAND -> new BlockHumusFarmland(rockTFCF, rock);
-            default -> new BlockRockVariantTFCF(rockTFCF, rock);
-        };
+        switch (rockTFCF) {
+            case MOSSY_RAW:
+                return new BlockRockRawTFCF(rockTFCF, rock);
+            case MUD:
+                return new BlockRockMud(rockTFCF, rock);
+            case LOAMY_SAND_PATH:
+                return new BlockLoamySandPath(rockTFCF, rock);
+            case SANDY_LOAM_PATH:
+                return new BlockSandyLoamPath(rockTFCF, rock);
+            case LOAM_PATH:
+                return new BlockLoamPath(rockTFCF, rock);
+            case SILT_LOAM_PATH:
+                return new BlockSiltLoamPath(rockTFCF, rock);
+            case SILT_PATH:
+                return new BlockSiltPath(rockTFCF, rock);
+            case HUMUS_PATH:
+                return new BlockHumusPath(rockTFCF, rock);
+            case ROOTED_DIRT:
+            case ROOTED_LOAMY_SAND:
+            case ROOTED_SANDY_LOAM:
+            case ROOTED_LOAM:
+            case ROOTED_SILT_LOAM:
+            case ROOTED_SILT:
+            case ROOTED_HUMUS:
+            case COARSE_DIRT:
+            case BOG_IRON:
+            case BOG_IRON_GRASS:
+            case DRY_BOG_IRON_GRASS:
+            case SPARSE_BOG_IRON_GRASS:
+            case BOG_IRON_PODZOL:
+            case LOAMY_SAND:
+            case COARSE_LOAMY_SAND:
+            case SANDY_LOAM:
+            case COARSE_SANDY_LOAM:
+            case SANDY_CLAY_LOAM:
+            case COARSE_SANDY_CLAY_LOAM:
+            case SANDY_CLAY:
+            case COARSE_SANDY_CLAY:
+            case LOAM:
+            case COARSE_LOAM:
+            case CLAY_LOAM:
+            case COARSE_CLAY_LOAM:
+            case COARSE_CLAY:
+            case SILTY_CLAY:
+            case COARSE_SILTY_CLAY:
+            case SILTY_CLAY_LOAM:
+            case COARSE_SILTY_CLAY_LOAM:
+            case SILT_LOAM:
+            case COARSE_SILT_LOAM:
+            case SILT:
+            case COARSE_SILT:
+            case HUMUS:
+            case COARSE_HUMUS:
+            case CLAY_HUMUS:
+            case COARSE_CLAY_HUMUS:
+            case EARTHENWARE_CLAY:
+            case SANDY_EARTHENWARE_CLAY_LOAM:
+            case COARSE_SANDY_EARTHENWARE_CLAY_LOAM:
+            case SANDY_EARTHENWARE_CLAY:
+            case COARSE_SANDY_EARTHENWARE_CLAY:
+            case EARTHENWARE_CLAY_LOAM:
+            case COARSE_EARTHENWARE_CLAY_LOAM:
+            case COARSE_EARTHENWARE_CLAY:
+            case SILTY_EARTHENWARE_CLAY:
+            case COARSE_SILTY_EARTHENWARE_CLAY:
+            case SILTY_EARTHENWARE_CLAY_LOAM:
+            case COARSE_SILTY_EARTHENWARE_CLAY_LOAM:
+            case EARTHENWARE_CLAY_HUMUS:
+            case COARSE_EARTHENWARE_CLAY_HUMUS:
+            case KAOLINITE_CLAY:
+            case SANDY_KAOLINITE_CLAY_LOAM:
+            case COARSE_SANDY_KAOLINITE_CLAY_LOAM:
+            case SANDY_KAOLINITE_CLAY:
+            case COARSE_SANDY_KAOLINITE_CLAY:
+            case KAOLINITE_CLAY_LOAM:
+            case COARSE_KAOLINITE_CLAY_LOAM:
+            case COARSE_KAOLINITE_CLAY:
+            case SILTY_KAOLINITE_CLAY:
+            case COARSE_SILTY_KAOLINITE_CLAY:
+            case SILTY_KAOLINITE_CLAY_LOAM:
+            case COARSE_SILTY_KAOLINITE_CLAY_LOAM:
+            case KAOLINITE_CLAY_HUMUS:
+            case COARSE_KAOLINITE_CLAY_HUMUS:
+            case STONEWARE_CLAY:
+            case SANDY_STONEWARE_CLAY_LOAM:
+            case COARSE_SANDY_STONEWARE_CLAY_LOAM:
+            case SANDY_STONEWARE_CLAY:
+            case COARSE_SANDY_STONEWARE_CLAY:
+            case STONEWARE_CLAY_LOAM:
+            case COARSE_STONEWARE_CLAY_LOAM:
+            case COARSE_STONEWARE_CLAY:
+            case SILTY_STONEWARE_CLAY:
+            case COARSE_SILTY_STONEWARE_CLAY:
+            case SILTY_STONEWARE_CLAY_LOAM:
+            case COARSE_SILTY_STONEWARE_CLAY_LOAM:
+            case STONEWARE_CLAY_HUMUS:
+            case COARSE_STONEWARE_CLAY_HUMUS:
+                return new BlockRockVariantFallableTFCF(rockTFCF, rock);
+            case PODZOL:
+            case LOAMY_SAND_GRASS:
+            case LOAMY_SAND_PODZOL:
+            case SANDY_LOAM_GRASS:
+            case SANDY_LOAM_PODZOL:
+            case SANDY_CLAY_LOAM_GRASS:
+            case SANDY_CLAY_LOAM_PODZOL:
+            case SANDY_CLAY_GRASS:
+            case SANDY_CLAY_PODZOL:
+            case LOAM_GRASS:
+            case LOAM_PODZOL:
+            case CLAY_LOAM_GRASS:
+            case CLAY_LOAM_PODZOL:
+            case CLAY_PODZOL:
+            case SILTY_CLAY_GRASS:
+            case SILTY_CLAY_PODZOL:
+            case SILTY_CLAY_LOAM_GRASS:
+            case SILTY_CLAY_LOAM_PODZOL:
+            case SILT_LOAM_GRASS:
+            case SILT_LOAM_PODZOL:
+            case SILT_GRASS:
+            case SILT_PODZOL:
+            case DRY_LOAMY_SAND_GRASS:
+            case DRY_SANDY_LOAM_GRASS:
+            case DRY_SANDY_CLAY_LOAM_GRASS:
+            case DRY_SANDY_CLAY_GRASS:
+            case DRY_LOAM_GRASS:
+            case DRY_CLAY_LOAM_GRASS:
+            case DRY_CLAY_GRASS:
+            case DRY_SILTY_CLAY_GRASS:
+            case DRY_SILTY_CLAY_LOAM_GRASS:
+            case DRY_SILT_LOAM_GRASS:
+            case DRY_SILT_GRASS:
+            case HUMUS_GRASS:
+            case DRY_HUMUS_GRASS:
+            case CLAY_HUMUS_GRASS:
+            case DRY_CLAY_HUMUS_GRASS:
+            case EARTHENWARE_CLAY_GRASS:
+            case SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case SANDY_EARTHENWARE_CLAY_LOAM_PODZOL:
+            case SANDY_EARTHENWARE_CLAY_GRASS:
+            case SANDY_EARTHENWARE_CLAY_PODZOL:
+            case EARTHENWARE_CLAY_LOAM_GRASS:
+            case EARTHENWARE_CLAY_LOAM_PODZOL:
+            case EARTHENWARE_CLAY_PODZOL:
+            case SILTY_EARTHENWARE_CLAY_GRASS:
+            case SILTY_EARTHENWARE_CLAY_PODZOL:
+            case SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case SILTY_EARTHENWARE_CLAY_LOAM_PODZOL:
+            case DRY_SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case DRY_SANDY_EARTHENWARE_CLAY_GRASS:
+            case DRY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case DRY_EARTHENWARE_CLAY_GRASS:
+            case DRY_SILTY_EARTHENWARE_CLAY_GRASS:
+            case DRY_SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case EARTHENWARE_CLAY_HUMUS_GRASS:
+            case DRY_EARTHENWARE_CLAY_HUMUS_GRASS:
+            case KAOLINITE_CLAY_GRASS:
+            case SANDY_KAOLINITE_CLAY_LOAM_GRASS:
+            case SANDY_KAOLINITE_CLAY_LOAM_PODZOL:
+            case SANDY_KAOLINITE_CLAY_GRASS:
+            case SANDY_KAOLINITE_CLAY_PODZOL:
+            case KAOLINITE_CLAY_LOAM_GRASS:
+            case KAOLINITE_CLAY_LOAM_PODZOL:
+            case KAOLINITE_CLAY_PODZOL:
+            case SILTY_KAOLINITE_CLAY_GRASS:
+            case SILTY_KAOLINITE_CLAY_PODZOL:
+            case SILTY_KAOLINITE_CLAY_LOAM_GRASS:
+            case SILTY_KAOLINITE_CLAY_LOAM_PODZOL:
+            case DRY_SANDY_KAOLINITE_CLAY_LOAM_GRASS:
+            case DRY_SANDY_KAOLINITE_CLAY_GRASS:
+            case DRY_KAOLINITE_CLAY_LOAM_GRASS:
+            case DRY_KAOLINITE_CLAY_GRASS:
+            case DRY_SILTY_KAOLINITE_CLAY_GRASS:
+            case DRY_SILTY_KAOLINITE_CLAY_LOAM_GRASS:
+            case KAOLINITE_CLAY_HUMUS_GRASS:
+            case DRY_KAOLINITE_CLAY_HUMUS_GRASS:
+            case STONEWARE_CLAY_GRASS:
+            case SANDY_STONEWARE_CLAY_LOAM_GRASS:
+            case SANDY_STONEWARE_CLAY_LOAM_PODZOL:
+            case SANDY_STONEWARE_CLAY_GRASS:
+            case SANDY_STONEWARE_CLAY_PODZOL:
+            case STONEWARE_CLAY_LOAM_GRASS:
+            case STONEWARE_CLAY_LOAM_PODZOL:
+            case STONEWARE_CLAY_PODZOL:
+            case SILTY_STONEWARE_CLAY_GRASS:
+            case SILTY_STONEWARE_CLAY_PODZOL:
+            case SILTY_STONEWARE_CLAY_LOAM_GRASS:
+            case SILTY_STONEWARE_CLAY_LOAM_PODZOL:
+            case DRY_SANDY_STONEWARE_CLAY_LOAM_GRASS:
+            case DRY_SANDY_STONEWARE_CLAY_GRASS:
+            case DRY_STONEWARE_CLAY_LOAM_GRASS:
+            case DRY_STONEWARE_CLAY_GRASS:
+            case DRY_SILTY_STONEWARE_CLAY_GRASS:
+            case DRY_SILTY_STONEWARE_CLAY_LOAM_GRASS:
+            case STONEWARE_CLAY_HUMUS_GRASS:
+            case DRY_STONEWARE_CLAY_HUMUS_GRASS:
+            case SPARSE_GRASS:
+            case SPARSE_CLAY_GRASS:
+            case SPARSE_LOAMY_SAND_GRASS:
+            case SPARSE_SANDY_LOAM_GRASS:
+            case SPARSE_SANDY_CLAY_LOAM_GRASS:
+            case SPARSE_SANDY_CLAY_GRASS:
+            case SPARSE_LOAM_GRASS:
+            case SPARSE_CLAY_LOAM_GRASS:
+            case SPARSE_SILTY_CLAY_GRASS:
+            case SPARSE_SILTY_CLAY_LOAM_GRASS:
+            case SPARSE_SILT_LOAM_GRASS:
+            case SPARSE_SILT_GRASS:
+            case SPARSE_HUMUS_GRASS:
+            case SPARSE_CLAY_HUMUS_GRASS:
+            case SPARSE_SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case SPARSE_SANDY_EARTHENWARE_CLAY_GRASS:
+            case SPARSE_EARTHENWARE_CLAY_LOAM_GRASS:
+            case SPARSE_EARTHENWARE_CLAY_GRASS:
+            case SPARSE_SILTY_EARTHENWARE_CLAY_GRASS:
+            case SPARSE_SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case SPARSE_EARTHENWARE_CLAY_HUMUS_GRASS:
+            case SPARSE_SANDY_KAOLINITE_CLAY_LOAM_GRASS:
+            case SPARSE_SANDY_KAOLINITE_CLAY_GRASS:
+            case SPARSE_KAOLINITE_CLAY_LOAM_GRASS:
+            case SPARSE_KAOLINITE_CLAY_GRASS:
+            case SPARSE_SILTY_KAOLINITE_CLAY_GRASS:
+            case SPARSE_SILTY_KAOLINITE_CLAY_LOAM_GRASS:
+            case SPARSE_KAOLINITE_CLAY_HUMUS_GRASS:
+            case SPARSE_SANDY_STONEWARE_CLAY_LOAM_GRASS:
+            case SPARSE_SANDY_STONEWARE_CLAY_GRASS:
+            case SPARSE_STONEWARE_CLAY_LOAM_GRASS:
+            case SPARSE_STONEWARE_CLAY_GRASS:
+            case SPARSE_SILTY_STONEWARE_CLAY_GRASS:
+            case SPARSE_SILTY_STONEWARE_CLAY_LOAM_GRASS:
+            case SPARSE_STONEWARE_CLAY_HUMUS_GRASS:
+                return new BlockRockVariantConnectedTFCF(rockTFCF, rock);
+            case LOAMY_SAND_FARMLAND:
+                return new BlockLoamySandFarmland(rockTFCF, rock);
+            case SANDY_LOAM_FARMLAND:
+                return new BlockSandyLoamFarmland(rockTFCF, rock);
+            case LOAM_FARMLAND:
+                return new BlockLoamFarmland(rockTFCF, rock);
+            case SILT_LOAM_FARMLAND:
+                return new BlockSiltLoamFarmland(rockTFCF, rock);
+            case SILT_FARMLAND:
+                return new BlockSiltFarmland(rockTFCF, rock);
+            case HUMUS_FARMLAND:
+                return new BlockHumusFarmland(rockTFCF, rock);
+            default:
+                return new BlockRockVariantTFCF(rockTFCF, rock);
+        }
     }
 
     public RockTFCF getRockType() {
@@ -360,6 +607,12 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
     @SuppressWarnings("deprecation")
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         switch (this.rockTFCF) {
+            case LOAMY_SAND_PATH:
+            case SANDY_LOAM_PATH:
+            case LOAM_PATH:
+            case SILT_LOAM_PATH:
+            case SILT_PATH:
+            case HUMUS_PATH:
             case LOAMY_SAND_FARMLAND:
             case SANDY_LOAM_FARMLAND:
             case LOAM_FARMLAND:
@@ -376,10 +629,27 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
                         IBlockState state = world.getBlockState(pos.offset(side));
                         Block block = state.getBlock();
                         if (state.isOpaqueCube()) return false;
-                        if (block instanceof BlockLoamySandFarmland || block instanceof BlockSandyLoamFarmland || block instanceof BlockLoamFarmland || block instanceof BlockSiltLoamFarmland || block instanceof BlockSiltFarmland || block instanceof BlockHumusFarmland)
+                        if (block instanceof BlockLoamySandFarmland ||
+                                block instanceof BlockSandyLoamFarmland ||
+                                block instanceof BlockLoamFarmland ||
+                                block instanceof BlockSiltLoamFarmland ||
+                                block instanceof BlockSiltFarmland ||
+                                block instanceof BlockHumusFarmland /*||
+                            block instanceof BlockLoamySandPath || 
+                            block instanceof BlockSandyLoamPath || 
+                            block instanceof BlockLoamPath || 
+                            block instanceof BlockSiltLoamPath || 
+                            block instanceof BlockSiltPath || 
+                            block instanceof BlockHumusPath*/)
                             return false;
                         if (block instanceof BlockRockVariantTFCF) {
                             switch (((BlockRockVariantTFCF) block).rockTFCF) {
+                                case LOAMY_SAND_PATH:
+                                case SANDY_LOAM_PATH:
+                                case LOAM_PATH:
+                                case SILT_LOAM_PATH:
+                                case SILT_PATH:
+                                case HUMUS_PATH:
                                 case LOAMY_SAND_FARMLAND:
                                 case SANDY_LOAM_FARMLAND:
                                 case LOAM_FARMLAND:
@@ -409,36 +679,227 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return switch (rockTFCF) {
-            case MOSSY_RAW -> ItemRock.get(rock);
-            case MUD -> ItemMud.get(rock);
-            case BOG_IRON, BOG_IRON_GRASS, DRY_BOG_IRON_GRASS, SPARSE_BOG_IRON_GRASS, BOG_IRON_PODZOL ->
-                    ItemSmallOre.get(Ore.LIMONITE);
-            case SPARSE_LOAMY_SAND_GRASS, DRY_LOAMY_SAND_GRASS, LOAMY_SAND_GRASS, LOAMY_SAND_PODZOL ->
-                    Item.getItemFromBlock(get(null, RockTFCF.LOAMY_SAND));
-            case SPARSE_SANDY_LOAM_GRASS, DRY_SANDY_LOAM_GRASS, SANDY_LOAM_GRASS, SANDY_LOAM_PODZOL ->
-                    Item.getItemFromBlock(get(null, RockTFCF.SANDY_LOAM));
-            case SPARSE_LOAM_GRASS, DRY_LOAM_GRASS, LOAM_GRASS, LOAM_PODZOL ->
-                    Item.getItemFromBlock(get(null, RockTFCF.LOAM));
-            case SPARSE_SILT_LOAM_GRASS, DRY_SILT_LOAM_GRASS, SILT_LOAM_GRASS, SILT_LOAM_PODZOL ->
-                    Item.getItemFromBlock(get(null, RockTFCF.SILT_LOAM));
-            case SPARSE_SILT_GRASS, DRY_SILT_GRASS, SILT_GRASS, SILT_PODZOL ->
-                    Item.getItemFromBlock(get(null, RockTFCF.SILT));
-            case SPARSE_HUMUS_GRASS, HUMUS, HUMUS_GRASS, DRY_HUMUS_GRASS ->
-                    Item.getItemFromBlock(get(null, RockTFCF.HUMUS));
-            case SANDY_CLAY_LOAM, SANDY_CLAY, CLAY_LOAM, SILTY_CLAY_LOAM, SILTY_CLAY, COARSE_SANDY_CLAY_LOAM, COARSE_SANDY_CLAY, COARSE_CLAY_LOAM, COARSE_CLAY, COARSE_SILTY_CLAY, COARSE_SILTY_CLAY_LOAM, COARSE_CLAY_HUMUS, SANDY_CLAY_LOAM_GRASS, SANDY_CLAY_LOAM_PODZOL, SANDY_CLAY_GRASS, SANDY_CLAY_PODZOL, CLAY_LOAM_GRASS, CLAY_LOAM_PODZOL, CLAY_PODZOL, SILTY_CLAY_GRASS, SILTY_CLAY_PODZOL, SILTY_CLAY_LOAM_GRASS, SILTY_CLAY_LOAM_PODZOL, DRY_SANDY_CLAY_LOAM_GRASS, DRY_SANDY_CLAY_GRASS, DRY_CLAY_LOAM_GRASS, DRY_CLAY_GRASS, DRY_SILTY_CLAY_GRASS, DRY_SILTY_CLAY_LOAM_GRASS, CLAY_HUMUS, CLAY_HUMUS_GRASS, DRY_CLAY_HUMUS_GRASS, SPARSE_SANDY_CLAY_LOAM_GRASS, SPARSE_SANDY_CLAY_GRASS, SPARSE_CLAY_LOAM_GRASS, SPARSE_SILTY_CLAY_GRASS, SPARSE_SILTY_CLAY_LOAM_GRASS, SPARSE_CLAY_HUMUS_GRASS, SPARSE_CLAY_GRASS ->
-                    Items.CLAY_BALL;
-            case EARTHENWARE_CLAY, SANDY_EARTHENWARE_CLAY_LOAM, COARSE_SANDY_EARTHENWARE_CLAY_LOAM, SANDY_EARTHENWARE_CLAY, COARSE_SANDY_EARTHENWARE_CLAY, EARTHENWARE_CLAY_LOAM, COARSE_EARTHENWARE_CLAY_LOAM, COARSE_EARTHENWARE_CLAY, SILTY_EARTHENWARE_CLAY, COARSE_SILTY_EARTHENWARE_CLAY, SILTY_EARTHENWARE_CLAY_LOAM, COARSE_SILTY_EARTHENWARE_CLAY_LOAM, EARTHENWARE_CLAY_HUMUS, COARSE_EARTHENWARE_CLAY_HUMUS, EARTHENWARE_CLAY_GRASS, SANDY_EARTHENWARE_CLAY_LOAM_GRASS, SANDY_EARTHENWARE_CLAY_LOAM_PODZOL, SANDY_EARTHENWARE_CLAY_GRASS, SANDY_EARTHENWARE_CLAY_PODZOL, EARTHENWARE_CLAY_LOAM_GRASS, EARTHENWARE_CLAY_LOAM_PODZOL, EARTHENWARE_CLAY_PODZOL, SILTY_EARTHENWARE_CLAY_GRASS, SILTY_EARTHENWARE_CLAY_PODZOL, SILTY_EARTHENWARE_CLAY_LOAM_GRASS, SILTY_EARTHENWARE_CLAY_LOAM_PODZOL, DRY_SANDY_EARTHENWARE_CLAY_LOAM_GRASS, DRY_SANDY_EARTHENWARE_CLAY_GRASS, DRY_EARTHENWARE_CLAY_LOAM_GRASS, DRY_EARTHENWARE_CLAY_GRASS, DRY_SILTY_EARTHENWARE_CLAY_GRASS, DRY_SILTY_EARTHENWARE_CLAY_LOAM_GRASS, EARTHENWARE_CLAY_HUMUS_GRASS, DRY_EARTHENWARE_CLAY_HUMUS_GRASS, SPARSE_SANDY_EARTHENWARE_CLAY_LOAM_GRASS, SPARSE_SANDY_EARTHENWARE_CLAY_GRASS, SPARSE_EARTHENWARE_CLAY_LOAM_GRASS, SPARSE_EARTHENWARE_CLAY_GRASS, SPARSE_SILTY_EARTHENWARE_CLAY_GRASS, SPARSE_SILTY_EARTHENWARE_CLAY_LOAM_GRASS, SPARSE_EARTHENWARE_CLAY_HUMUS_GRASS ->
-                    ItemsTFCF.EARTHENWARE_CLAY;
-            case KAOLINITE_CLAY, SANDY_KAOLINITE_CLAY_LOAM, COARSE_SANDY_KAOLINITE_CLAY_LOAM, SANDY_KAOLINITE_CLAY, COARSE_SANDY_KAOLINITE_CLAY, KAOLINITE_CLAY_LOAM, COARSE_KAOLINITE_CLAY_LOAM, COARSE_KAOLINITE_CLAY, SILTY_KAOLINITE_CLAY, COARSE_SILTY_KAOLINITE_CLAY, SILTY_KAOLINITE_CLAY_LOAM, COARSE_SILTY_KAOLINITE_CLAY_LOAM, KAOLINITE_CLAY_HUMUS, COARSE_KAOLINITE_CLAY_HUMUS, KAOLINITE_CLAY_GRASS, SANDY_KAOLINITE_CLAY_LOAM_GRASS, SANDY_KAOLINITE_CLAY_LOAM_PODZOL, SANDY_KAOLINITE_CLAY_GRASS, SANDY_KAOLINITE_CLAY_PODZOL, KAOLINITE_CLAY_LOAM_GRASS, KAOLINITE_CLAY_LOAM_PODZOL, KAOLINITE_CLAY_PODZOL, SILTY_KAOLINITE_CLAY_GRASS, SILTY_KAOLINITE_CLAY_PODZOL, SILTY_KAOLINITE_CLAY_LOAM_GRASS, SILTY_KAOLINITE_CLAY_LOAM_PODZOL, DRY_SANDY_KAOLINITE_CLAY_LOAM_GRASS, DRY_SANDY_KAOLINITE_CLAY_GRASS, DRY_KAOLINITE_CLAY_LOAM_GRASS, DRY_KAOLINITE_CLAY_GRASS, DRY_SILTY_KAOLINITE_CLAY_GRASS, DRY_SILTY_KAOLINITE_CLAY_LOAM_GRASS, KAOLINITE_CLAY_HUMUS_GRASS, DRY_KAOLINITE_CLAY_HUMUS_GRASS, SPARSE_SANDY_KAOLINITE_CLAY_LOAM_GRASS, SPARSE_SANDY_KAOLINITE_CLAY_GRASS, SPARSE_KAOLINITE_CLAY_LOAM_GRASS, SPARSE_KAOLINITE_CLAY_GRASS, SPARSE_SILTY_KAOLINITE_CLAY_GRASS, SPARSE_SILTY_KAOLINITE_CLAY_LOAM_GRASS, SPARSE_KAOLINITE_CLAY_HUMUS_GRASS ->
-                    ItemsTFCF.KAOLINITE_CLAY;
-            case STONEWARE_CLAY, SANDY_STONEWARE_CLAY_LOAM, COARSE_SANDY_STONEWARE_CLAY_LOAM, SANDY_STONEWARE_CLAY, COARSE_SANDY_STONEWARE_CLAY, STONEWARE_CLAY_LOAM, COARSE_STONEWARE_CLAY_LOAM, COARSE_STONEWARE_CLAY, SILTY_STONEWARE_CLAY, COARSE_SILTY_STONEWARE_CLAY, SILTY_STONEWARE_CLAY_LOAM, COARSE_SILTY_STONEWARE_CLAY_LOAM, STONEWARE_CLAY_HUMUS, COARSE_STONEWARE_CLAY_HUMUS, STONEWARE_CLAY_GRASS, SANDY_STONEWARE_CLAY_LOAM_GRASS, SANDY_STONEWARE_CLAY_LOAM_PODZOL, SANDY_STONEWARE_CLAY_GRASS, SANDY_STONEWARE_CLAY_PODZOL, STONEWARE_CLAY_LOAM_GRASS, STONEWARE_CLAY_LOAM_PODZOL, STONEWARE_CLAY_PODZOL, SILTY_STONEWARE_CLAY_GRASS, SILTY_STONEWARE_CLAY_PODZOL, SILTY_STONEWARE_CLAY_LOAM_GRASS, SILTY_STONEWARE_CLAY_LOAM_PODZOL, DRY_SANDY_STONEWARE_CLAY_LOAM_GRASS, DRY_SANDY_STONEWARE_CLAY_GRASS, DRY_STONEWARE_CLAY_LOAM_GRASS, DRY_STONEWARE_CLAY_GRASS, DRY_SILTY_STONEWARE_CLAY_GRASS, DRY_SILTY_STONEWARE_CLAY_LOAM_GRASS, STONEWARE_CLAY_HUMUS_GRASS, DRY_STONEWARE_CLAY_HUMUS_GRASS, SPARSE_SANDY_STONEWARE_CLAY_LOAM_GRASS, SPARSE_SANDY_STONEWARE_CLAY_GRASS, SPARSE_STONEWARE_CLAY_LOAM_GRASS, SPARSE_STONEWARE_CLAY_GRASS, SPARSE_SILTY_STONEWARE_CLAY_GRASS, SPARSE_SILTY_STONEWARE_CLAY_LOAM_GRASS, SPARSE_STONEWARE_CLAY_HUMUS_GRASS ->
-                    ItemsTFCF.STONEWARE_CLAY;
-            case COARSE_DIRT -> Item.getItemFromBlock(get(rock, RockTFCF.COARSE_DIRT));
-            case PODZOL, SPARSE_GRASS ->
-                    Item.getItemFromBlock(BlockRockVariant.get(((BlockRockVariantTFCF) state.getBlock()).rock, Rock.Type.DIRT));
-            default -> super.getItemDropped(state, rand, fortune);
-        };
+        switch (rockTFCF) {
+            case MOSSY_RAW:
+                return ItemRock.get(rock);
+            case MUD:
+                return ItemMud.get(rock);
+            case BOG_IRON:
+            case BOG_IRON_GRASS:
+            case DRY_BOG_IRON_GRASS:
+            case SPARSE_BOG_IRON_GRASS:
+            case BOG_IRON_PODZOL:
+                return ItemSmallOre.get(Ore.LIMONITE);
+            case SPARSE_LOAMY_SAND_GRASS:
+            case DRY_LOAMY_SAND_GRASS:
+            case LOAMY_SAND_GRASS:
+            case LOAMY_SAND_PODZOL:
+            case LOAMY_SAND_PATH:
+                return Item.getItemFromBlock(get(null, RockTFCF.LOAMY_SAND));
+            case SPARSE_SANDY_LOAM_GRASS:
+            case DRY_SANDY_LOAM_GRASS:
+            case SANDY_LOAM_GRASS:
+            case SANDY_LOAM_PODZOL:
+            case SANDY_LOAM_PATH:
+                return Item.getItemFromBlock(get(null, RockTFCF.SANDY_LOAM));
+            case SPARSE_LOAM_GRASS:
+            case DRY_LOAM_GRASS:
+            case LOAM_GRASS:
+            case LOAM_PODZOL:
+            case LOAM_PATH:
+                return Item.getItemFromBlock(get(null, RockTFCF.LOAM));
+            case SPARSE_SILT_LOAM_GRASS:
+            case DRY_SILT_LOAM_GRASS:
+            case SILT_LOAM_GRASS:
+            case SILT_LOAM_PODZOL:
+            case SILT_LOAM_PATH:
+                return Item.getItemFromBlock(get(null, RockTFCF.SILT_LOAM));
+            case SPARSE_SILT_GRASS:
+            case DRY_SILT_GRASS:
+            case SILT_GRASS:
+            case SILT_PODZOL:
+            case SILT_PATH:
+                return Item.getItemFromBlock(get(null, RockTFCF.SILT));
+            case SPARSE_HUMUS_GRASS:
+            case HUMUS:
+            case HUMUS_GRASS:
+            case DRY_HUMUS_GRASS:
+            case HUMUS_PATH:
+                return Item.getItemFromBlock(get(null, RockTFCF.HUMUS));
+            case SANDY_CLAY_LOAM:
+            case SANDY_CLAY:
+            case CLAY_LOAM:
+            case SILTY_CLAY_LOAM:
+            case SILTY_CLAY:
+            case COARSE_SANDY_CLAY_LOAM:
+            case COARSE_SANDY_CLAY:
+            case COARSE_CLAY_LOAM:
+            case COARSE_CLAY:
+            case COARSE_SILTY_CLAY:
+            case COARSE_SILTY_CLAY_LOAM:
+            case COARSE_CLAY_HUMUS:
+            case SANDY_CLAY_LOAM_GRASS:
+            case SANDY_CLAY_LOAM_PODZOL:
+            case SANDY_CLAY_GRASS:
+            case SANDY_CLAY_PODZOL:
+            case CLAY_LOAM_GRASS:
+            case CLAY_LOAM_PODZOL:
+            case CLAY_PODZOL:
+            case SILTY_CLAY_GRASS:
+            case SILTY_CLAY_PODZOL:
+            case SILTY_CLAY_LOAM_GRASS:
+            case SILTY_CLAY_LOAM_PODZOL:
+            case DRY_SANDY_CLAY_LOAM_GRASS:
+            case DRY_SANDY_CLAY_GRASS:
+            case DRY_CLAY_LOAM_GRASS:
+            case DRY_CLAY_GRASS:
+            case DRY_SILTY_CLAY_GRASS:
+            case DRY_SILTY_CLAY_LOAM_GRASS:
+            case CLAY_HUMUS:
+            case CLAY_HUMUS_GRASS:
+            case DRY_CLAY_HUMUS_GRASS:
+            case SPARSE_SANDY_CLAY_LOAM_GRASS:
+            case SPARSE_SANDY_CLAY_GRASS:
+            case SPARSE_CLAY_LOAM_GRASS:
+            case SPARSE_SILTY_CLAY_GRASS:
+            case SPARSE_SILTY_CLAY_LOAM_GRASS:
+            case SPARSE_CLAY_HUMUS_GRASS:
+            case SPARSE_CLAY_GRASS:
+                return Items.CLAY_BALL;
+            case EARTHENWARE_CLAY:
+            case SANDY_EARTHENWARE_CLAY_LOAM:
+            case COARSE_SANDY_EARTHENWARE_CLAY_LOAM:
+            case SANDY_EARTHENWARE_CLAY:
+            case COARSE_SANDY_EARTHENWARE_CLAY:
+            case EARTHENWARE_CLAY_LOAM:
+            case COARSE_EARTHENWARE_CLAY_LOAM:
+            case COARSE_EARTHENWARE_CLAY:
+            case SILTY_EARTHENWARE_CLAY:
+            case COARSE_SILTY_EARTHENWARE_CLAY:
+            case SILTY_EARTHENWARE_CLAY_LOAM:
+            case COARSE_SILTY_EARTHENWARE_CLAY_LOAM:
+            case EARTHENWARE_CLAY_HUMUS:
+            case COARSE_EARTHENWARE_CLAY_HUMUS:
+            case EARTHENWARE_CLAY_GRASS:
+            case SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case SANDY_EARTHENWARE_CLAY_LOAM_PODZOL:
+            case SANDY_EARTHENWARE_CLAY_GRASS:
+            case SANDY_EARTHENWARE_CLAY_PODZOL:
+            case EARTHENWARE_CLAY_LOAM_GRASS:
+            case EARTHENWARE_CLAY_LOAM_PODZOL:
+            case EARTHENWARE_CLAY_PODZOL:
+            case SILTY_EARTHENWARE_CLAY_GRASS:
+            case SILTY_EARTHENWARE_CLAY_PODZOL:
+            case SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case SILTY_EARTHENWARE_CLAY_LOAM_PODZOL:
+            case DRY_SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case DRY_SANDY_EARTHENWARE_CLAY_GRASS:
+            case DRY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case DRY_EARTHENWARE_CLAY_GRASS:
+            case DRY_SILTY_EARTHENWARE_CLAY_GRASS:
+            case DRY_SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case EARTHENWARE_CLAY_HUMUS_GRASS:
+            case DRY_EARTHENWARE_CLAY_HUMUS_GRASS:
+            case SPARSE_SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case SPARSE_SANDY_EARTHENWARE_CLAY_GRASS:
+            case SPARSE_EARTHENWARE_CLAY_LOAM_GRASS:
+            case SPARSE_EARTHENWARE_CLAY_GRASS:
+            case SPARSE_SILTY_EARTHENWARE_CLAY_GRASS:
+            case SPARSE_SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
+            case SPARSE_EARTHENWARE_CLAY_HUMUS_GRASS:
+                return ItemsTFCF.EARTHENWARE_CLAY;
+            case KAOLINITE_CLAY:
+            case SANDY_KAOLINITE_CLAY_LOAM:
+            case COARSE_SANDY_KAOLINITE_CLAY_LOAM:
+            case SANDY_KAOLINITE_CLAY:
+            case COARSE_SANDY_KAOLINITE_CLAY:
+            case KAOLINITE_CLAY_LOAM:
+            case COARSE_KAOLINITE_CLAY_LOAM:
+            case COARSE_KAOLINITE_CLAY:
+            case SILTY_KAOLINITE_CLAY:
+            case COARSE_SILTY_KAOLINITE_CLAY:
+            case SILTY_KAOLINITE_CLAY_LOAM:
+            case COARSE_SILTY_KAOLINITE_CLAY_LOAM:
+            case KAOLINITE_CLAY_HUMUS:
+            case COARSE_KAOLINITE_CLAY_HUMUS:
+            case KAOLINITE_CLAY_GRASS:
+            case SANDY_KAOLINITE_CLAY_LOAM_GRASS:
+            case SANDY_KAOLINITE_CLAY_LOAM_PODZOL:
+            case SANDY_KAOLINITE_CLAY_GRASS:
+            case SANDY_KAOLINITE_CLAY_PODZOL:
+            case KAOLINITE_CLAY_LOAM_GRASS:
+            case KAOLINITE_CLAY_LOAM_PODZOL:
+            case KAOLINITE_CLAY_PODZOL:
+            case SILTY_KAOLINITE_CLAY_GRASS:
+            case SILTY_KAOLINITE_CLAY_PODZOL:
+            case SILTY_KAOLINITE_CLAY_LOAM_GRASS:
+            case SILTY_KAOLINITE_CLAY_LOAM_PODZOL:
+            case DRY_SANDY_KAOLINITE_CLAY_LOAM_GRASS:
+            case DRY_SANDY_KAOLINITE_CLAY_GRASS:
+            case DRY_KAOLINITE_CLAY_LOAM_GRASS:
+            case DRY_KAOLINITE_CLAY_GRASS:
+            case DRY_SILTY_KAOLINITE_CLAY_GRASS:
+            case DRY_SILTY_KAOLINITE_CLAY_LOAM_GRASS:
+            case KAOLINITE_CLAY_HUMUS_GRASS:
+            case DRY_KAOLINITE_CLAY_HUMUS_GRASS:
+            case SPARSE_SANDY_KAOLINITE_CLAY_LOAM_GRASS:
+            case SPARSE_SANDY_KAOLINITE_CLAY_GRASS:
+            case SPARSE_KAOLINITE_CLAY_LOAM_GRASS:
+            case SPARSE_KAOLINITE_CLAY_GRASS:
+            case SPARSE_SILTY_KAOLINITE_CLAY_GRASS:
+            case SPARSE_SILTY_KAOLINITE_CLAY_LOAM_GRASS:
+            case SPARSE_KAOLINITE_CLAY_HUMUS_GRASS:
+                return ItemsTFCF.KAOLINITE_CLAY;
+            case STONEWARE_CLAY:
+            case SANDY_STONEWARE_CLAY_LOAM:
+            case COARSE_SANDY_STONEWARE_CLAY_LOAM:
+            case SANDY_STONEWARE_CLAY:
+            case COARSE_SANDY_STONEWARE_CLAY:
+            case STONEWARE_CLAY_LOAM:
+            case COARSE_STONEWARE_CLAY_LOAM:
+            case COARSE_STONEWARE_CLAY:
+            case SILTY_STONEWARE_CLAY:
+            case COARSE_SILTY_STONEWARE_CLAY:
+            case SILTY_STONEWARE_CLAY_LOAM:
+            case COARSE_SILTY_STONEWARE_CLAY_LOAM:
+            case STONEWARE_CLAY_HUMUS:
+            case COARSE_STONEWARE_CLAY_HUMUS:
+            case STONEWARE_CLAY_GRASS:
+            case SANDY_STONEWARE_CLAY_LOAM_GRASS:
+            case SANDY_STONEWARE_CLAY_LOAM_PODZOL:
+            case SANDY_STONEWARE_CLAY_GRASS:
+            case SANDY_STONEWARE_CLAY_PODZOL:
+            case STONEWARE_CLAY_LOAM_GRASS:
+            case STONEWARE_CLAY_LOAM_PODZOL:
+            case STONEWARE_CLAY_PODZOL:
+            case SILTY_STONEWARE_CLAY_GRASS:
+            case SILTY_STONEWARE_CLAY_PODZOL:
+            case SILTY_STONEWARE_CLAY_LOAM_GRASS:
+            case SILTY_STONEWARE_CLAY_LOAM_PODZOL:
+            case DRY_SANDY_STONEWARE_CLAY_LOAM_GRASS:
+            case DRY_SANDY_STONEWARE_CLAY_GRASS:
+            case DRY_STONEWARE_CLAY_LOAM_GRASS:
+            case DRY_STONEWARE_CLAY_GRASS:
+            case DRY_SILTY_STONEWARE_CLAY_GRASS:
+            case DRY_SILTY_STONEWARE_CLAY_LOAM_GRASS:
+            case STONEWARE_CLAY_HUMUS_GRASS:
+            case DRY_STONEWARE_CLAY_HUMUS_GRASS:
+            case SPARSE_SANDY_STONEWARE_CLAY_LOAM_GRASS:
+            case SPARSE_SANDY_STONEWARE_CLAY_GRASS:
+            case SPARSE_STONEWARE_CLAY_LOAM_GRASS:
+            case SPARSE_STONEWARE_CLAY_GRASS:
+            case SPARSE_SILTY_STONEWARE_CLAY_GRASS:
+            case SPARSE_SILTY_STONEWARE_CLAY_LOAM_GRASS:
+            case SPARSE_STONEWARE_CLAY_HUMUS_GRASS:
+                return ItemsTFCF.STONEWARE_CLAY;
+            case COARSE_DIRT:
+                return Item.getItemFromBlock(get(rock, RockTFCF.COARSE_DIRT));
+            case PODZOL:
+            case SPARSE_GRASS:
+                return Item.getItemFromBlock(BlockRockVariant.get(((BlockRockVariantTFCF) state.getBlock()).rock, Rock.Type.DIRT));
+            default:
+                return super.getItemDropped(state, rand, fortune);
+        }
     }
 
     @Override
@@ -643,6 +1104,13 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
                     return
                             rockTFCF == RockTFCF.COARSE_DIRT ||
                                     rockTFCF == RockTFCF.MUD ||
+                                    rockTFCF == RockTFCF.ROOTED_DIRT ||
+                                    rockTFCF == RockTFCF.ROOTED_LOAMY_SAND ||
+                                    rockTFCF == RockTFCF.ROOTED_SANDY_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_SILT_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_SILT ||
+                                    rockTFCF == RockTFCF.ROOTED_HUMUS ||
                                     rockTFCF == RockTFCF.BOG_IRON ||
                                     rockTFCF == RockTFCF.BOG_IRON_GRASS ||
                                     rockTFCF == RockTFCF.DRY_BOG_IRON_GRASS ||
@@ -1099,7 +1567,14 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
                                     rockTFCF == RockTFCF.SPARSE_STONEWARE_CLAY_HUMUS_GRASS;
                 case DRY:
                     return
-                            rockTFCF == RockTFCF.COARSE_DIRT ||
+                            rockTFCF == RockTFCF.ROOTED_DIRT ||
+                                    rockTFCF == RockTFCF.ROOTED_LOAMY_SAND ||
+                                    rockTFCF == RockTFCF.ROOTED_SANDY_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_SILT_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_SILT ||
+                                    rockTFCF == RockTFCF.ROOTED_HUMUS ||
+                                    rockTFCF == RockTFCF.COARSE_DIRT ||
                                     rockTFCF == RockTFCF.MUD ||
                                     rockTFCF == RockTFCF.BOG_IRON ||
                                     rockTFCF == RockTFCF.BOG_IRON_GRASS ||
@@ -1134,7 +1609,14 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
                                     rockTFCF == RockTFCF.SPARSE_HUMUS_GRASS;
                 case FRESH_WATER:
                     return
-                            rockTFCF == RockTFCF.COARSE_DIRT ||
+                            rockTFCF == RockTFCF.ROOTED_DIRT ||
+                                    rockTFCF == RockTFCF.ROOTED_LOAMY_SAND ||
+                                    rockTFCF == RockTFCF.ROOTED_SANDY_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_SILT_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_SILT ||
+                                    rockTFCF == RockTFCF.ROOTED_HUMUS ||
+                                    rockTFCF == RockTFCF.COARSE_DIRT ||
                                     rockTFCF == RockTFCF.MUD ||
                                     rockTFCF == RockTFCF.BOG_IRON ||
                                     rockTFCF == RockTFCF.BOG_IRON_GRASS ||
@@ -1180,7 +1662,14 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
                                     rockTFCF == RockTFCF.SPARSE_HUMUS_GRASS;
                 case SALT_WATER:
                     return
-                            rockTFCF == RockTFCF.COARSE_DIRT ||
+                            rockTFCF == RockTFCF.ROOTED_DIRT ||
+                                    rockTFCF == RockTFCF.ROOTED_LOAMY_SAND ||
+                                    rockTFCF == RockTFCF.ROOTED_SANDY_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_SILT_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_SILT ||
+                                    rockTFCF == RockTFCF.ROOTED_HUMUS ||
+                                    rockTFCF == RockTFCF.COARSE_DIRT ||
                                     rockTFCF == RockTFCF.MUD ||
                                     rockTFCF == RockTFCF.BOG_IRON ||
                                     rockTFCF == RockTFCF.BOG_IRON_GRASS ||
@@ -1236,7 +1725,14 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
                     }
                     return
                             (
-                                    rockTFCF == RockTFCF.COARSE_DIRT ||
+                                    rockTFCF == RockTFCF.ROOTED_DIRT ||
+                                            rockTFCF == RockTFCF.ROOTED_LOAMY_SAND ||
+                                            rockTFCF == RockTFCF.ROOTED_SANDY_LOAM ||
+                                            rockTFCF == RockTFCF.ROOTED_LOAM ||
+                                            rockTFCF == RockTFCF.ROOTED_SILT_LOAM ||
+                                            rockTFCF == RockTFCF.ROOTED_SILT ||
+                                            rockTFCF == RockTFCF.ROOTED_HUMUS ||
+                                            rockTFCF == RockTFCF.COARSE_DIRT ||
                                             rockTFCF == RockTFCF.MUD ||
                                             rockTFCF == RockTFCF.BOG_IRON ||
                                             rockTFCF == RockTFCF.BOG_IRON_GRASS ||
@@ -1292,7 +1788,14 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
                     }
                     return
                             (
-                                    rockTFCF == RockTFCF.COARSE_DIRT ||
+                                    rockTFCF == RockTFCF.ROOTED_DIRT ||
+                                            rockTFCF == RockTFCF.ROOTED_LOAMY_SAND ||
+                                            rockTFCF == RockTFCF.ROOTED_SANDY_LOAM ||
+                                            rockTFCF == RockTFCF.ROOTED_LOAM ||
+                                            rockTFCF == RockTFCF.ROOTED_SILT_LOAM ||
+                                            rockTFCF == RockTFCF.ROOTED_SILT ||
+                                            rockTFCF == RockTFCF.ROOTED_HUMUS ||
+                                            rockTFCF == RockTFCF.COARSE_DIRT ||
                                             rockTFCF == RockTFCF.MUD ||
                                             rockTFCF == RockTFCF.BOG_IRON ||
                                             rockTFCF == RockTFCF.BOG_IRON_GRASS ||
@@ -1346,7 +1849,14 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
                 if (isWild) {
                     if
                     (
-                            rockTFCF == RockTFCF.BOG_IRON ||
+                            rockTFCF == RockTFCF.ROOTED_DIRT ||
+                                    rockTFCF == RockTFCF.ROOTED_LOAMY_SAND ||
+                                    rockTFCF == RockTFCF.ROOTED_SANDY_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_SILT_LOAM ||
+                                    rockTFCF == RockTFCF.ROOTED_SILT ||
+                                    rockTFCF == RockTFCF.ROOTED_HUMUS ||
+                                    rockTFCF == RockTFCF.BOG_IRON ||
                                     rockTFCF == RockTFCF.BOG_IRON_GRASS ||
                                     rockTFCF == RockTFCF.DRY_BOG_IRON_GRASS ||
                                     rockTFCF == RockTFCF.SPARSE_BOG_IRON_GRASS ||
@@ -1568,7 +2078,14 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
         switch (plantable.getPlantType(world, pos.offset(direction))) {
             case Plains:
                 return
-                        rockTFCF == RockTFCF.COARSE_DIRT ||
+                        rockTFCF == RockTFCF.ROOTED_DIRT ||
+                                rockTFCF == RockTFCF.ROOTED_LOAMY_SAND ||
+                                rockTFCF == RockTFCF.ROOTED_SANDY_LOAM ||
+                                rockTFCF == RockTFCF.ROOTED_LOAM ||
+                                rockTFCF == RockTFCF.ROOTED_SILT_LOAM ||
+                                rockTFCF == RockTFCF.ROOTED_SILT ||
+                                rockTFCF == RockTFCF.ROOTED_HUMUS ||
+                                rockTFCF == RockTFCF.COARSE_DIRT ||
                                 rockTFCF == RockTFCF.MUD ||
                                 rockTFCF == RockTFCF.BOG_IRON ||
                                 rockTFCF == RockTFCF.BOG_IRON_GRASS ||
@@ -1802,7 +2319,14 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
                 }
                 return
                         (
-                                rockTFCF == RockTFCF.COARSE_DIRT ||
+                                rockTFCF == RockTFCF.ROOTED_DIRT ||
+                                        rockTFCF == RockTFCF.ROOTED_LOAMY_SAND ||
+                                        rockTFCF == RockTFCF.ROOTED_SANDY_LOAM ||
+                                        rockTFCF == RockTFCF.ROOTED_LOAM ||
+                                        rockTFCF == RockTFCF.ROOTED_SILT_LOAM ||
+                                        rockTFCF == RockTFCF.ROOTED_SILT ||
+                                        rockTFCF == RockTFCF.ROOTED_HUMUS ||
+                                        rockTFCF == RockTFCF.COARSE_DIRT ||
                                         rockTFCF == RockTFCF.MUD ||
                                         rockTFCF == RockTFCF.BOG_IRON ||
                                         rockTFCF == RockTFCF.BOG_IRON_GRASS ||
@@ -1879,6 +2403,13 @@ public class BlockRockVariantTFCF extends Block implements IItemSize {
         switch (rockTFCF) {
             case COARSE_DIRT:
             case MUD:
+            case ROOTED_DIRT:
+            case ROOTED_LOAMY_SAND:
+            case ROOTED_SANDY_LOAM:
+            case ROOTED_LOAM:
+            case ROOTED_SILT_LOAM:
+            case ROOTED_SILT:
+            case ROOTED_HUMUS:
             case BOG_IRON:
             case BOG_IRON_GRASS:
             case DRY_BOG_IRON_GRASS:

@@ -57,6 +57,7 @@ public final class TreesTFCF {
     public static final ResourceLocation MARBLEWOOD = new ResourceLocation(TerraFirmaCraft.MOD_ID, "marblewood");
     public static final ResourceLocation MESSMATE = new ResourceLocation(TerraFirmaCraft.MOD_ID, "messmate");
     public static final ResourceLocation MOUNTAIN_ASH = new ResourceLocation(TerraFirmaCraft.MOD_ID, "mountain_ash");
+    public static final ResourceLocation MULBERRY = new ResourceLocation(TerraFirmaCraft.MOD_ID, "mulberry");
     public static final ResourceLocation NORDMANN_FIR = new ResourceLocation(TerraFirmaCraft.MOD_ID, "nordmann_fir");
     public static final ResourceLocation NORWAY_SPRUCE = new ResourceLocation(TerraFirmaCraft.MOD_ID, "norway_spruce");
     public static final ResourceLocation PINK_CHERRY = new ResourceLocation(TerraFirmaCraft.MOD_ID, "pink_cherry");
@@ -126,6 +127,7 @@ public final class TreesTFCF {
     public static final ITreeGenerator GEN_MARBLEWOOD = new TreeGenVariants(true, 24);
     public static final ITreeGenerator GEN_MESSMATE = new TreeGenVariants(true, 18);
     public static final ITreeGenerator GEN_MOUNTAIN_ASH = new TreeGenVariants(true, 20);
+    public static final ITreeGenerator GEN_MULBERRY = new TreeGenVariants(true, 15);
     public static final ITreeGenerator GEN_NORDMANN_FIR = new TreeGenVariants(true, 26);
     public static final ITreeGenerator GEN_NORWAY_SPRUCE = new TreeGenVariants(true, 16);
     public static final ITreeGenerator GEN_PINK_CHERRY = new TreeGenVariants(true, 45);
@@ -169,7 +171,8 @@ public final class TreesTFCF {
     public static final Tree BAOBAB_TREE = new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "baobab"), 10f, 150f, 21f, 40f, GEN_BAOBAB).setDecayDist(6).setGrowthTime(20).setDensity(0.1f, 0.3f).setBurnInfo(478f, 1000).build();
     public static final Tree EUCALYPTUS_TREE = new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "eucalyptus"), 120f, 300f, 18f, 39f, GEN_EUCALYPTUS).setGrowthTime(8).setBushes().setDensity(0.35f, 2f).setBurnInfo(705f, 1000).build();
     public static final Tree HAWTHORN_TREE = new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "hawthorn"), 180f, 400f, -8f, 14f, GEN_HAWTHORN).setGrowthTime(8).setDensity(0.25f, 1f).setBurnInfo(683f, 1500).build();
-    public static final Tree MACLURA_TREE = new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "maclura"), 140f, 400f, -1f, 17f, GEN_MACLURA).setGrowthTime(8).setBushes().setDensity(0.25f, 1f).setBurnInfo(773f, 1000).build();
+    public static final Tree MULBERRY_TREE = new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "mulberry"), 140f, 420f, -30f, 28f, GEN_MULBERRY).setGrowthTime(10).setDensity(0.25f, 1f).setBurnInfo(705f, 1860).build();
+    public static final Tree MACLURA_TREE = new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "maclura"), 140f, 400f, -1f, 17f, GEN_MACLURA).setGrowthTime(8).setBushes().setDensity(0.25f, 1f).setBurnInfo(773f, 1930).build();
     public static final Tree MAHOGANY_TREE = new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "mahogany"), 270f, 500f, 23f, 42f, GEN_MAHOGANY).setRadius(1).setDecayDist(6).setGrowthTime(18).setBushes().setDensity(0.5f, 2f).setBurnInfo(773f, 1000).build();
     public static final Tree PINK_IVORY_TREE = new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "pink_ivory"), 210f, 500f, 18f, 31f, GEN_PINK_IVORY).setDecayDist(6).setGrowthTime(18).setBushes().setDensity(0.2f, 2f).setBurnInfo(773f, 1000).build();
     public static final Tree RED_CEDAR_TREE = new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "red_cedar"), 10f, 240f, -8f, 17f, GEN_RED_CEDAR).setDecayDist(6).setGrowthTime(18).setBushes().setConifer().setBushes().setTannin().setDensity(0.4f, 2f).setBurnInfo(618f, 1750).build();
@@ -246,7 +249,7 @@ public final class TreesTFCF {
         event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "limba"), 290f, 550f, 14f, 37f, GEN_LIMBA).setGrowthTime(9).setBushes().setDensity(0.25f, 1f).setBurnInfo(710f, 1000).build());
         event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "logwood"), 180f, 430f, 12f, 35f, GEN_LOGWOOD).setGrowthTime(8).setBushes().setDensity(0.25f, 1f).setBurnInfo(695f, 1000).build());
         event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "mahoe"), 180f, 350f, 13f, 32f, GEN_MAHOE).setHeight(16).setGrowthTime(8).setBushes().setBurnInfo(783f, 1100).build());
-        //event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "mangrove"), 200f, 500f, 15f, 40f, GEN_MANGROVE).setDominance(0f).setDensity(0f, 0f).setRadius(1).setGrowthTime(8).setBushes().setBurnInfo(783f, 1100).build());
+        event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "mangrove"), 200f, 500f, 15f, 40f, GEN_MANGROVE).setDominance(0f).setDensity(0f, 0f).setRadius(1).setGrowthTime(8).setBushes().setBurnInfo(783f, 1100).build());
         event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "marblewood"), 180f, 500f, 16f, 35f, GEN_MARBLEWOOD).setDecayDist(6).setGrowthTime(18).setBushes().setDensity(0.2f, 2f).setBurnInfo(837f, 1200).build());
         event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "messmate"), 120f, 270f, 2f, 27f, GEN_MESSMATE).setGrowthTime(10).setBushes().setDensity(0.2f, 2f).setBurnInfo(696f, 1250).build());
         event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "mountain_ash"), 80f, 270f, 9f, 33f, GEN_MOUNTAIN_ASH).setGrowthTime(10).setBushes().setDensity(0.4f, 2f).setBurnInfo(696f, 1250).build());
@@ -258,7 +261,7 @@ public final class TreesTFCF {
         event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "zebrawood"), 280f, 500f, 23f, 50f, GEN_ZEBRAWOOD).setRadius(1).setDecayDist(6).setGrowthTime(18).setBushes().setDensity(0.5f, 2f).setBurnInfo(822f, 1570).build());
 
         // Coniferous Trees
-        //event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "bald_cypress"), 180f, 500f, 10f, 38f, GEN_BALD_CYPRESS).setDominance(0f).setDensity(0f, 0f).setGrowthTime(8).setBushes().setConifer().setBurnInfo(770f, 1300).build());
+        event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "bald_cypress"), 180f, 500f, 10f, 38f, GEN_BALD_CYPRESS).setDominance(0f).setDensity(0f, 0f).setGrowthTime(8).setBushes().setConifer().setBurnInfo(770f, 1300).build());
         event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "cypress"), 140f, 350f, 4f, 33f, GEN_CYPRESS).setGrowthTime(8).setBushes().setConifer().setBurnInfo(783f, 1100).build());
         event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "hemlock"), 140f, 400f, -9f, 10f, GEN_HEMLOCK).setGrowthTime(8).setConifer().setDensity(0.25f, 1f).setBurnInfo(609f, 1000).build());
         event.getRegistry().registerAll(new Tree.Builder(new ResourceLocation(TerraFirmaCraft.MOD_ID, "nordmann_fir"), 100f, 380f, -16f, 7f, GEN_NORDMANN_FIR).setGrowthTime(8).setConifer().setDensity(0.1f, 0.9f).setBurnInfo(628f, 1500).build());
@@ -275,11 +278,12 @@ public final class TreesTFCF {
         event.getRegistry().registerAll(OAK_TREE);
         event.getRegistry().registerAll(SYCAMORE_TREE);
         event.getRegistry().registerAll(WHITE_CEDAR_TREE);
-        //event.getRegistry().registerAll(JOSHUA_TREE_TREE);
+        event.getRegistry().registerAll(JOSHUA_TREE_TREE);
 
         event.getRegistry().registerAll(BAOBAB_TREE);
         event.getRegistry().registerAll(EUCALYPTUS_TREE);
         event.getRegistry().registerAll(HAWTHORN_TREE);
+        event.getRegistry().registerAll(MULBERRY_TREE);
         event.getRegistry().registerAll(MACLURA_TREE);
         event.getRegistry().registerAll(MAHOGANY_TREE);
         event.getRegistry().registerAll(PINK_IVORY_TREE);

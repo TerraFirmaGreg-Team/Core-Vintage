@@ -1,18 +1,26 @@
 package tfcflorae.objects.recipes;
 
-import com.google.common.collect.Lists;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.NonNullList;
-import net.minecraft.world.World;
-import net.minecraftforge.oredict.DyeUtils;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-import tfcflorae.objects.items.ItemArmorTFCF;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
+
+import com.google.common.collect.Lists;
+
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.oredict.DyeUtils;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import tfcflorae.objects.ArmorMaterialsTFCF;
+import tfcflorae.objects.items.ItemArmorTFCF;
 
 @SuppressWarnings("unused")
 @ParametersAreNonnullByDefault

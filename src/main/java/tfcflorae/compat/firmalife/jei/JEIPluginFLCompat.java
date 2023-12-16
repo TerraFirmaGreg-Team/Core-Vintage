@@ -1,19 +1,19 @@
 package tfcflorae.compat.firmalife.jei;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import tfcflorae.TFCFlorae;
-import tfcflorae.compat.firmalife.jei.category.CastingCategoryEarthenwareFLCompat;
-import tfcflorae.compat.firmalife.jei.category.CastingCategoryKaoliniteFLCompat;
-import tfcflorae.compat.firmalife.jei.category.CastingCategoryStonewareFLCompat;
-import tfcflorae.compat.firmalife.jei.wrappers.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import tfcflorae.TFCFlorae;
+import tfcflorae.compat.firmalife.jei.category.*;
+import tfcflorae.compat.firmalife.jei.wrappers.*;
 
 import static tfcflorae.TFCFlorae.MODID;
 

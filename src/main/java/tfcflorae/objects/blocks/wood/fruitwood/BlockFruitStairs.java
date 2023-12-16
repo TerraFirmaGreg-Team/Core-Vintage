@@ -1,6 +1,10 @@
 package tfcflorae.objects.blocks.wood.fruitwood;
 
-import net.dries007.tfc.api.types.IFruitTree;
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
@@ -8,13 +12,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import net.dries007.tfc.api.types.IFruitTree;
+
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class BlockFruitStairs extends BlockStairs {

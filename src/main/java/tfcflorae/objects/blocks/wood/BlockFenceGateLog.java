@@ -1,13 +1,15 @@
 package tfcflorae.objects.blocks.wood;
 
-import net.dries007.tfc.api.types.Tree;
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.init.Blocks;
-import tfcflorae.util.OreDictionaryHelper;
 
-import java.util.HashMap;
-import java.util.Map;
+import net.dries007.tfc.api.types.Tree;
+
+import tfcflorae.util.OreDictionaryHelper;
 
 public class BlockFenceGateLog extends BlockFenceGate {
     private static final Map<Tree, BlockFenceGateLog> MAP = new HashMap<>();

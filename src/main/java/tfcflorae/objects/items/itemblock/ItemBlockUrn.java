@@ -1,15 +1,18 @@
 package tfcflorae.objects.items.itemblock;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import tfcflorae.objects.blocks.BlockUrn;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+
+import tfcflorae.objects.blocks.BlockUrn;
 
 @ParametersAreNonnullByDefault
 public class ItemBlockUrn extends ItemBlockTFC implements IItemSize {

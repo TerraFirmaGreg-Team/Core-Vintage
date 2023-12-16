@@ -1,9 +1,10 @@
 package tfcflorae.compat.tfcelementia.ceramics;
 
-import net.dries007.tfc.objects.items.ceramics.ItemPottery;
-import tfcelementia.objects.items.metal.ItemMetalTFCE;
-
 import java.util.EnumMap;
+
+import net.dries007.tfc.objects.items.ceramics.ItemPottery;
+
+import tfcelementia.objects.items.metal.ItemMetalTFCE;
 
 public class ItemUnfiredKaoliniteMoldTFCE extends ItemPottery {
     private static final EnumMap<ItemMetalTFCE.ItemType, ItemUnfiredKaoliniteMoldTFCE> MAP = new EnumMap<>(ItemMetalTFCE.ItemType.class);

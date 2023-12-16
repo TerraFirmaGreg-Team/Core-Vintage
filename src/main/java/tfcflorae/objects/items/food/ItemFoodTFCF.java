@@ -1,21 +1,25 @@
 package tfcflorae.objects.items.food;
 
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodHeatHandler;
-import net.dries007.tfc.api.capability.food.IItemFoodTFC;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import tfcflorae.objects.items.ItemTFCF;
-import tfcflorae.util.OreDictionaryHelper;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.api.capability.food.FoodHandler;
+import net.dries007.tfc.api.capability.food.FoodHeatHandler;
+import net.dries007.tfc.api.capability.food.IItemFoodTFC;
+
+import tfcflorae.objects.items.*;
+import tfcflorae.objects.items.food.PotionEffectToHave;
+import tfcflorae.util.OreDictionaryHelper;
 
 public class ItemFoodTFCF extends ItemFood implements IItemFoodTFC {
     private static final Map<ItemTFCF, ItemFoodTFCF> MAP = new HashMap<>();

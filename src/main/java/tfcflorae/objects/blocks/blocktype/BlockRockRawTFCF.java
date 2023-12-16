@@ -1,14 +1,7 @@
 package tfcflorae.objects.blocks.blocktype;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.objects.Gem;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
-import net.dries007.tfc.objects.items.ItemGem;
-import net.dries007.tfc.util.Helpers;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -21,10 +14,19 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import mcp.MethodsReturnNonnullByDefault;
+
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.objects.Gem;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
+import net.dries007.tfc.objects.items.ItemGem;
+import net.dries007.tfc.util.Helpers;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

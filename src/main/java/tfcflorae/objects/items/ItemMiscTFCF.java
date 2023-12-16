@@ -1,12 +1,15 @@
 package tfcflorae.objects.items;
 
+import javax.annotation.Nonnull;
+
+import net.minecraft.item.ItemStack;
+
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.minecraft.item.ItemStack;
-import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
+import tfcflorae.objects.items.ItemMiscTFCF;
+import tfcflorae.util.OreDictionaryHelper;
 
 @SuppressWarnings("WeakerAccess")
 //public class ItemMiscTFCF extends ItemMisc

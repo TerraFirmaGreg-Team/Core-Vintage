@@ -1,19 +1,23 @@
 package tfcflorae.compat.crafttweaker;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.IForgeRegistryModifiable;
+
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.api.item.IItemStack;
+import stanhebben.zenscript.annotations.ZenMethod;
+
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.IForgeRegistryModifiable;
-import tfcflorae.api.knapping.KnappingTypes;
 
-import java.util.ArrayList;
-import java.util.List;
+import tfcflorae.api.knapping.KnappingTypes;
 
 public class KnappingHelperTFCF {
     public static void addRecipe(ResourceLocation registryName, KnappingType type, IItemStack output, String... pattern) {
@@ -81,33 +85,33 @@ public class KnappingHelperTFCF {
 
     public static KnappingType getType(String type) {
         switch (type) {
-            case "pineapple_leather":
+            case "PineappleLeather":
                 return KnappingTypes.PINEAPPLE_LEATHER;
-            case "burlap_cloth":
+            case "BurlapCloth":
                 return KnappingTypes.BURLAP_CLOTH;
-            case "wool_cloth":
+            case "WoolCloth":
                 return KnappingTypes.WOOL_CLOTH;
-            case "silk_cloth":
+            case "SilkCloth":
                 return KnappingTypes.SILK_CLOTH;
-            case "sisal_cloth":
+            case "SisalCloth":
                 return KnappingTypes.SISAL_CLOTH;
-            case "cotton_cloth":
+            case "CottonCloth":
                 return KnappingTypes.COTTON_CLOTH;
-            case "linen_cloth":
+            case "LinenCloth":
                 return KnappingTypes.LINEN_CLOTH;
-            case "hemp_cloth":
+            case "HempCloth":
                 return KnappingTypes.HEMP_CLOTH;
-            case "yucca_canvas":
+            case "YuccaCanvas":
                 return KnappingTypes.YUCCA_CANVAS;
-            case "mud":
+            case "Mud":
                 return KnappingTypes.MUD;
-            case "earthenware_clay":
+            case "EarthenwareClay":
                 return KnappingTypes.EARTHENWARE_CLAY;
-            case "kaolinite_clay":
+            case "KaoliniteClay":
                 return KnappingTypes.KAOLINITE_CLAY;
-            case "stoneware_clay":
+            case "StonewareClay":
                 return KnappingTypes.STONEWARE_CLAY;
-            case "flint":
+            case "Flint":
                 return KnappingTypes.FLINT;
         }
         return null;

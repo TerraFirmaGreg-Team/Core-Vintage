@@ -1,15 +1,17 @@
 package tfcflorae.objects.blocks.wood.fruitwood;
 
-import net.dries007.tfc.api.types.IFruitTree;
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+
+import net.dries007.tfc.api.types.IFruitTree;
+
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class BlockFruitPlanks extends Block {
     private static final Map<SeasonalTrees, BlockFruitPlanks> MAP_TFCF = new HashMap<>();

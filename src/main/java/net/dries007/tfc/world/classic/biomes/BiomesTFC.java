@@ -50,8 +50,8 @@ public final class BiomesTFC {
     public static final BiomeMesaTFC MESA_PLATEAU = Helpers.getNull();
     public static final BiomeMesaTFC MESA_BRYCE = Helpers.getNull();
     public static final BiomeMesaTFC MESA_PLATEAU_M = Helpers.getNull();
-    private static final List<Biome> SPAWN_BIOMES = new ArrayList();
-    private static final List<Biome> WORLD_GEN_BIOMES = new ArrayList();
+    private static final List<Biome> SPAWN_BIOMES = new ArrayList<>();
+    private static final List<Biome> WORLD_GEN_BIOMES = new ArrayList<>();
 
 
     private BiomesTFC() {}

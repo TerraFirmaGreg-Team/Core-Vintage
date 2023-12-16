@@ -37,6 +37,7 @@ import tfcelementia.objects.items.metal.ItemMetalTFCE.ItemType;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.TFCFlorae;
 import tfcflorae.api.stateproperty.StatePropertiesTFCF;
+import tfcflorae.client.render.TESRDryer;
 import tfcflorae.client.render.TESRFruitChestTFCF;
 import tfcflorae.client.render.TESRFruitLoomTFCF;
 import tfcflorae.compat.firmalife.ceramics.ItemEarthenwareMalletMoldFL;
@@ -56,6 +57,7 @@ import tfcflorae.objects.blocks.groundcover.BlockSurfaceOreDeposit;
 import tfcflorae.objects.blocks.plants.*;
 import tfcflorae.objects.blocks.plants.BlockPlant.BlockPlantDummy1;
 import tfcflorae.objects.blocks.wood.BlockFenceGateLog;
+import tfcflorae.objects.blocks.wood.BlockJoshuaTreeSapling;
 import tfcflorae.objects.blocks.wood.BlockLeavesTFCF;
 import tfcflorae.objects.blocks.wood.BlockLogTFCF;
 import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitDoor;
@@ -69,6 +71,7 @@ import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.objects.items.ceramics.ItemEarthenwareMold;
 import tfcflorae.objects.items.ceramics.ItemKaoliniteMold;
 import tfcflorae.objects.items.ceramics.ItemStonewareMold;
+import tfcflorae.objects.te.TEDryer;
 import tfcflorae.objects.te.TEFruitChest;
 import tfcflorae.objects.te.TEFruitLoom;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
@@ -109,8 +112,8 @@ public class ClientRegisterEventsTFCF {
             for (GemTFCF.Grade grade : GemTFCF.Grade.values())
                 registerEnumBasedMetaItems("gem", grade, item);
 
-        for (Item item : ItemsTFCF.getAllItemBows())
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
+        /*for (Item item : ItemsTFCF.getAllItemBows())
+            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));*/
 
         for (ItemFruitDoor item : ItemsTFCF.getAllFruitDoors())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
@@ -134,6 +137,9 @@ public class ClientRegisterEventsTFCF {
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
 
         // BLOCKS
+
+        for (ItemBlock itemBlock : BlocksTFCF.getAllItemBlockCondenser())
+            ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName().toString()));
 
         for (ItemBlock itemBlock : BlocksTFCF.getAllNormalItemBlocks())
             ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName().toString()));
@@ -184,8 +190,8 @@ public class ClientRegisterEventsTFCF {
                 ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSurfaceOreDeposit.GRADE).build());
         }
 
-//        for (Block block : BlocksTFCF.getAllJoshuaTreeSaplingBlocks())
-//            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockJoshuaTreeSapling.STAGE).build());
+        for (Block block : BlocksTFCF.getAllJoshuaTreeSaplingBlocks())
+            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockJoshuaTreeSapling.STAGE).build());
 
         for (BlockFruitTreeLeaves leaves : BlocksTFCF.getAllFruitLeaves())
             ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE).ignore(BlockFruitTreeLeaves.HARVESTABLE).build());
@@ -618,6 +624,7 @@ public class ClientRegisterEventsTFCF {
         //TESRs
         ClientRegistry.bindTileEntitySpecialRenderer(TEFruitChest.class, new TESRFruitChestTFCF());
         ClientRegistry.bindTileEntitySpecialRenderer(TEFruitLoom.class, new TESRFruitLoomTFCF());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEDryer.class, new TESRDryer());
     }
 
     @SuppressWarnings("deprecation")
@@ -825,7 +832,9 @@ public class ClientRegisterEventsTFCF {
         blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.CEYLON_CINNAMON_LEAVES);
         blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllWaterPlantBlocks().toArray(new BlockWaterPlantTFCF[0]));
         blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllHangingPlantBlocks().toArray(new BlockHangingPlantTFCF[0]));
+        blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllHangingGlowingPlantBlocks().toArray(new BlockHangingGlowingPlant[0]));
         blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllHangingCreepingPlantBlocks().toArray(new BlockHangingCreepingPlantTFCF[0]));
+        blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllHangingGlowingCreepingPlantBlocks().toArray(new BlockHangingGlowingCreepingPlant[0]));
         blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllCreepingPlantBlocks().toArray(new BlockCreepingPlantTFCF[0]));
         blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllTallGrassWaterBlocks().toArray(new BlockTallGrassWater[0]));
         //blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllStandardBlocks().toArray(new BlockPlantTFCF[0]));

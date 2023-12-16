@@ -1,11 +1,14 @@
 package tfcflorae.objects.blocks.groundcover;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
-import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -20,8 +23,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -31,15 +37,22 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import net.dries007.tfc.api.types.Ore;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.types.RockCategory;
+import net.dries007.tfc.api.util.IRockObject;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
+import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.objects.items.metal.ItemOreTFC;
+import net.dries007.tfc.objects.items.metal.ItemSmallOre;
+import net.dries007.tfc.objects.items.rock.ItemRock;
+
+import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -50,7 +63,6 @@ public class BlockSurfaceOreDeposit extends BlockBush {
     public final Ore ore;
     public final Rock rock;
     private Ore.Grade grade;
-
     public BlockSurfaceOreDeposit(Ore ore, Rock rock) {
         super(Material.GROUND);
         //super(Rock.Type.RAW.material);

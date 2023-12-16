@@ -1,19 +1,19 @@
 package tfcflorae.objects.blocks.plants;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodHeatHandler;
-import net.dries007.tfc.api.capability.food.IItemFoodTFC;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.minecraft.block.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
@@ -35,17 +35,25 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.api.capability.food.FoodHeatHandler;
+import net.dries007.tfc.api.capability.food.IItemFoodTFC;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+
+import tfcflorae.objects.blocks.plants.BlockCaveMushroom;
 import tfcflorae.objects.items.food.ItemFoodTFCF;
 import tfcflorae.objects.items.food.PotionEffectToHave;
 import tfcflorae.util.OreDictionaryHelper;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize, IItemFoodTFC {
@@ -64,6 +72,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
     static final PropertyBool EAST = PropertyBool.create("east");
     static final PropertyBool SOUTH = PropertyBool.create("south");
     static final PropertyBool WEST = PropertyBool.create("west");
+    private static final Map<BlockCaveMushroom, ItemFoodTFCF> MAP = new HashMap<>();
     private static final PropertyBool[] ALL_FACES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
     private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.1D, 0.2D, 0.1D, 0.9D, 1.0D, 0.9D);
     private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
@@ -71,7 +80,6 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
     private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.1D, 0.1D, 0.2D, 0.9D, 0.9D, 1.0D);
     private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.2D, 0.1D, 0.1D, 1.0D, 0.9D, 0.9D);
     private static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.1D, 0.1D, 0.8D, 0.9D, 0.9D);
-    private static final Map<BlockCaveMushroom, ItemFoodTFCF> MAP = new HashMap<>();
     protected final BlockStateContainer blockState;
     public FoodData data;
     ArrayList<PotionEffectToHave> PotionEffects = new ArrayList<PotionEffectToHave>();

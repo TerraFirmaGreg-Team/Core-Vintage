@@ -1,7 +1,11 @@
 package tfcflorae.objects.blocks.blocktype;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Rock;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -15,14 +19,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import mcp.MethodsReturnNonnullByDefault;
+
+import net.dries007.tfc.api.types.Rock;
+
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
-
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

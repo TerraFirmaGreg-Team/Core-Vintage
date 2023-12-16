@@ -1,14 +1,9 @@
 package tfcflorae.compat.firmalife.recipes;
 
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.google.gson.JsonObject;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.recipes.RecipeUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -26,10 +21,18 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import tfcflorae.compat.firmalife.ceramics.ItemEarthenwareMalletMoldFL;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.IMoldHandler;
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.recipes.RecipeUtils;
+
+import com.eerussianguy.firmalife.registry.ItemsFL;
+
+import tfcflorae.compat.firmalife.ceramics.ItemEarthenwareMalletMoldFL;
 
 public class UnmoldEarthenwareMalletRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
     private final NonNullList<Ingredient> input;

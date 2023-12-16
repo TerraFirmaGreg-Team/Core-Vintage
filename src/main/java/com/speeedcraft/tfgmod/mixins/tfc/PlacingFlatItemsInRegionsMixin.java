@@ -34,8 +34,10 @@ public class PlacingFlatItemsInRegionsMixin implements IMessageEmpty {
 			TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
 
 				final World world = player.getEntityWorld();
-				final RayTraceResult rayTrace = Helpers.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), 1);
-				final ItemStack stack = player.getHeldItemMainhand().isEmpty() ? player.getHeldItemOffhand() : player.getHeldItemMainhand();
+				final RayTraceResult rayTrace = Helpers.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
+				                                                               .getAttributeValue(), 1);
+				final ItemStack stack = player.getHeldItemMainhand()
+				                              .isEmpty() ? player.getHeldItemOffhand() : player.getHeldItemMainhand();
 
 				if (rayTrace != null) {
 					BlockPos pos = rayTrace.getBlockPos();
@@ -53,7 +55,10 @@ public class PlacingFlatItemsInRegionsMixin implements IMessageEmpty {
 							if (tile != null) {
 								tile.onRightClick(player, stack, rayTrace);
 							}
-						} else if (!stack.isEmpty() && world.getBlockState(pos.offset(hitFace).down()).isSideSolid(world, pos.offset(hitFace).down(), EnumFacing.UP) && offsetState.getBlock().isAir(offsetState, world, pos)) {
+						} else if (!stack.isEmpty() && world.getBlockState(pos.offset(hitFace).down())
+						                                    .isSideSolid(world, pos.offset(hitFace)
+						                                                           .down(), EnumFacing.UP) && offsetState.getBlock()
+						                                                                                                 .isAir(offsetState, world, pos)) {
 							// FTB-Utils Fix
 							if (!ClaimedChunks.blockBlockEditing(player, pos, offsetState)) {
 								// Можно взять и поднять

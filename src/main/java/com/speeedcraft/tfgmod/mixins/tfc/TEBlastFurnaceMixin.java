@@ -35,6 +35,7 @@ public abstract class TEBlastFurnaceMixin extends TETickableInventory implements
 	private final Alloy alloy;
 	@Shadow
 	private int airTicks;
+
 	protected TEBlastFurnaceMixin(int inventorySize, int airTicks, List<ItemStack> fuelStacks, List<ItemStack> oreStacks, Alloy alloy) {
 		super(inventorySize);
 		this.airTicks = airTicks;

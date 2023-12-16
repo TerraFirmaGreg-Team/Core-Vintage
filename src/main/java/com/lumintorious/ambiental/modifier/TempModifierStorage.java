@@ -4,25 +4,26 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class TempModifierStorage implements Iterable<TempModifier>{
+public class TempModifierStorage implements Iterable<TempModifier> {
 	private List<TempModifier> list = new LinkedList<>();
 
 	public TempModifierStorage keepOnlyNEach(int n) {
-		Map<String, List<TempModifier>> grouped = list.stream().collect(Collectors.groupingBy(TempModifier::getUnlocalizedName));
+		Map<String, List<TempModifier>> grouped = list.stream()
+		                                              .collect(Collectors.groupingBy(TempModifier::getUnlocalizedName));
 		this.list = grouped
 				.entrySet()
 				.stream()
 				.flatMap(entry ->
 						entry.getValue()
-								.stream()
-								.sorted(Comparator.reverseOrder())
-								.limit(n)
+						     .stream()
+						     .sorted(Comparator.reverseOrder())
+						     .limit(n)
 				).collect(Collectors.toList());
 		return this;
 	}
 
 	public void add(TempModifier value) {
-		if(value == null) {
+		if (value == null) {
 			return;
 		}
 		list.add(value);
@@ -42,7 +43,7 @@ public class TempModifierStorage implements Iterable<TempModifier>{
 
 	public float getTotalPotency() {
 		float potency = 1f;
-		for(TempModifier mod : list) {
+		for (TempModifier mod : list) {
 			potency += mod.getPotency();
 		}
 		return potency;
@@ -50,7 +51,7 @@ public class TempModifierStorage implements Iterable<TempModifier>{
 
 	public float getTargetTemperature() {
 		float change = 1f;
-		for(TempModifier mod : list) {
+		for (TempModifier mod : list) {
 			change += mod.getChange();
 		}
 		return change;

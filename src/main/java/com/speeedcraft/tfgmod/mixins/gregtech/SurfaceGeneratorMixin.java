@@ -22,29 +22,29 @@ import java.util.Set;
 @Mixin(value = SurfaceRockPopulator.class, remap = false)
 public class SurfaceGeneratorMixin {
 
-    @Inject(method = "hasUndergroundMaterials", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    private static void findUndergroundMaterials(Collection<IBlockState> generatedBlocks, CallbackInfoReturnable<Set<Material>> cir) {
-        Set<Material> result = new HashSet<>();
-        for (IBlockState blockState : generatedBlocks) {
-            Material resultMaterial;
-            if (blockState.getBlock() instanceof IFluidBlock || blockState.getBlock() instanceof BlockLiquid) {
-                Fluid fluid = FluidRegistry.lookupFluidForBlock(blockState.getBlock());
-                resultMaterial = fluid == null ? null : FluidUnifier.getMaterialFromFluid(fluid);
-            } else if (blockState.getBlock() instanceof BlockOre blockOre) {
-                if (blockOre.material != null && blockOre.material.hasProperty(PropertyKey.ORE))
-                    resultMaterial = blockOre.material;
-                else
-                    resultMaterial = null;
-            } else {
-                resultMaterial = null;
-            }
+	@Inject(method = "hasUndergroundMaterials", at = @At(value = "HEAD"), remap = false, cancellable = true)
+	private static void findUndergroundMaterials(Collection<IBlockState> generatedBlocks, CallbackInfoReturnable<Set<Material>> cir) {
+		Set<Material> result = new HashSet<>();
+		for (IBlockState blockState : generatedBlocks) {
+			Material resultMaterial;
+			if (blockState.getBlock() instanceof IFluidBlock || blockState.getBlock() instanceof BlockLiquid) {
+				Fluid fluid = FluidRegistry.lookupFluidForBlock(blockState.getBlock());
+				resultMaterial = fluid == null ? null : FluidUnifier.getMaterialFromFluid(fluid);
+			} else if (blockState.getBlock() instanceof BlockOre blockOre) {
+				if (blockOre.material != null && blockOre.material.hasProperty(PropertyKey.ORE))
+					resultMaterial = blockOre.material;
+				else
+					resultMaterial = null;
+			} else {
+				resultMaterial = null;
+			}
 
-            if (resultMaterial != null) {
-                result.add(resultMaterial);
-            }
+			if (resultMaterial != null) {
+				result.add(resultMaterial);
+			}
 
-        }
+		}
 
-        cir.setReturnValue(result);
-    }
+		cir.setReturnValue(result);
+	}
 }

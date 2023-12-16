@@ -1,18 +1,18 @@
 package com.lumintorious.ambiental.api;
 
+import com.lumintorious.ambiental.compat.Cellars;
+import com.lumintorious.ambiental.compat.FirmaLife;
+import com.lumintorious.ambiental.compat.TFC;
+import com.lumintorious.ambiental.compat.TFCTech;
+import com.lumintorious.ambiental.modifier.EnvironmentalModifier;
+import com.lumintorious.ambiental.modifier.TempModifier;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.EnumSkyBlock;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Optional;
-
-import com.lumintorious.ambiental.compat.TFC;
-import com.lumintorious.ambiental.modifier.*;
-
-import com.lumintorious.ambiental.compat.Cellars;
-import com.lumintorious.ambiental.compat.FirmaLife;
-import com.lumintorious.ambiental.compat.TFCTech;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.EnumSkyBlock;
 
 
 public class AmbientalRegistry<Type> implements Iterable<Type> {
@@ -38,12 +38,18 @@ public class AmbientalRegistry<Type> implements Iterable<Type> {
 //		BLOCKS.register((state, pos, player) -> state.equals(MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.TRINIUM)) ? new BlockModifier("trinium_coil", 3f, 3f) : null);
 //		BLOCKS.register((state, pos, player) -> state.equals(MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.TRITANIUM)) ? new BlockModifier("tritanium_coil", 3f, 3f) : null);
 
-		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("torch", 3f, 0f)).filter((mod) -> state.getBlock() == Blocks.TORCH));
-		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("fire", 3f, 0f)).filter((mod) -> state.getBlock() == Blocks.FIRE));
-		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("lava", 3f, 0f)).filter((mod) -> state.getBlock() == Blocks.LAVA));
-		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("flowing_lava", 3f, 0f)).filter((mod) -> state.getBlock() == Blocks.FLOWING_LAVA));
-		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("snow", -1.5f, 0.2f)).filter((mod) -> state.getBlock() == Blocks.SNOW_LAYER));
-		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("snow", -0.5f, 0.2f)).filter((mod) -> state.getBlock() == Blocks.SNOW && player.world.getLightFor(EnumSkyBlock.SKY, pos) == 15));
+		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("torch", 3f, 0f))
+		                                                .filter((mod) -> state.getBlock() == Blocks.TORCH));
+		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("fire", 3f, 0f))
+		                                                .filter((mod) -> state.getBlock() == Blocks.FIRE));
+		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("lava", 3f, 0f))
+		                                                .filter((mod) -> state.getBlock() == Blocks.LAVA));
+		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("flowing_lava", 3f, 0f))
+		                                                .filter((mod) -> state.getBlock() == Blocks.FLOWING_LAVA));
+		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("snow", -1.5f, 0.2f))
+		                                                .filter((mod) -> state.getBlock() == Blocks.SNOW_LAYER));
+		BLOCKS.register((player, pos, state) -> Optional.of(new TempModifier("snow", -0.5f, 0.2f))
+		                                                .filter((mod) -> state.getBlock() == Blocks.SNOW && player.world.getLightFor(EnumSkyBlock.SKY, pos) == 15));
 
 		// TFC-Tech
 		TILE_ENTITIES.register(TFCTech::handleSmelteryFirebox); // Топило для печи для стекла
@@ -79,15 +85,16 @@ public class AmbientalRegistry<Type> implements Iterable<Type> {
 		ENVIRONMENT.register(EnvironmentalModifier::handleUnderground);
 		ENVIRONMENT.register(EnvironmentalModifier::handlePotionEffects);
 	}
-	
+
 	private final ArrayList<Type> list = new ArrayList<>();
 	private final HashMap<String, Type> map = new HashMap<>();
+
 	private AmbientalRegistry() {}
 
 	public void register(Type type) {
 		list.add(type);
 	}
-	
+
 	public boolean has(Type type) {
 		return map.containsValue(type) || list.contains(type);
 	}
@@ -107,9 +114,9 @@ public class AmbientalRegistry<Type> implements Iterable<Type> {
 			public Type next() {
 				return (Type) listIterator.next();
 			}
-			
+
 		};
 	}
-	
-	
+
+
 }

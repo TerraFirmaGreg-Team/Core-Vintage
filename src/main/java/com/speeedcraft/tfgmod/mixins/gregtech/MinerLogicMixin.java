@@ -4,7 +4,6 @@ import com.speeedcraft.tfgmod.gregtech.oreprefix.TFGOrePrefix;
 import gregtech.api.capability.impl.miner.MinerLogic;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.common.blocks.BlockOre;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

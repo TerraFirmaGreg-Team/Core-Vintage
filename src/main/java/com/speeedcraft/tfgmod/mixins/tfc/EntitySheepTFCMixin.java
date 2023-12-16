@@ -51,7 +51,8 @@ public abstract class EntitySheepTFCMixin extends EntityAnimalMammal implements 
 				} else {
 					TextComponentTranslation tooltip = getTooltip();
 					if (tooltip != null) {
-						TerraFirmaCraft.getNetwork().sendTo(new PacketSimpleMessage(PacketSimpleMessage.MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+						TerraFirmaCraft.getNetwork()
+						               .sendTo(new PacketSimpleMessage(PacketSimpleMessage.MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
 					}
 				}
 			}
@@ -61,7 +62,8 @@ public abstract class EntitySheepTFCMixin extends EntityAnimalMammal implements 
 				if (!isReadyForAnimalProduct()) {
 					TextComponentTranslation tooltip = getTooltip();
 					if (tooltip != null) {
-						TerraFirmaCraft.getNetwork().sendTo(new PacketSimpleMessage(PacketSimpleMessage.MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+						TerraFirmaCraft.getNetwork()
+						               .sendTo(new PacketSimpleMessage(PacketSimpleMessage.MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
 					}
 				}
 			}

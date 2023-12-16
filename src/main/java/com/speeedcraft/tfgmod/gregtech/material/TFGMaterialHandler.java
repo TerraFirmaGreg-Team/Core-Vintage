@@ -1,6 +1,5 @@
 package com.speeedcraft.tfgmod.gregtech.material;
 
-import gregicality.multiblocks.api.fluids.GCYMFluidStorageKeys;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;

@@ -85,11 +85,15 @@ public class TFGRecipes {
 		TFG_OREPREFIX_REGISTRY.forEach(s -> {
 
 			// This covers all stone -> single tool head recipes
-			r.register(new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(s.getOrePrefix(), Materials.Stone), s.getStoneKnappingRecipe()).setRegistryName(MOD_ID, s.getOrePrefix().name().toLowerCase() + "_stone_head"));
+			r.register(new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(s.getOrePrefix(), Materials.Stone), s.getStoneKnappingRecipe()).setRegistryName(MOD_ID, s.getOrePrefix()
+			                                                                                                                                                                             .name()
+			                                                                                                                                                                             .toLowerCase() + "_stone_head"));
 
 			// This covers all flint -> single tool head recipes
 			if (s.getOrePrefix() != TFGOrePrefix.toolHeadHammer)
-				r.register(new KnappingRecipeSimple(KnappingTypes.FLINT, true, OreDictUnifier.get(s.getOrePrefix(), Materials.Flint), s.getStoneKnappingRecipe()).setRegistryName(MOD_ID, s.getOrePrefix().name().toLowerCase() + "_flint_head"));
+				r.register(new KnappingRecipeSimple(KnappingTypes.FLINT, true, OreDictUnifier.get(s.getOrePrefix(), Materials.Flint), s.getStoneKnappingRecipe()).setRegistryName(MOD_ID, s.getOrePrefix()
+				                                                                                                                                                                           .name()
+				                                                                                                                                                                           .toLowerCase() + "_flint_head"));
 		});
 
 		// these recipes cover all cases where multiple stone and flint items can be made

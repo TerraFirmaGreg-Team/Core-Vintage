@@ -22,6 +22,7 @@ public abstract class MetaTileEntityPrimitiveWaterPumpMixin extends MultiblockCo
 	private IFluidTank waterTank;
 	@Shadow
 	private int biomeModifier = 0;
+
 	public MetaTileEntityPrimitiveWaterPumpMixin(ResourceLocation metaTileEntityId) {
 		super(metaTileEntityId);
 	}

@@ -12,7 +12,6 @@ import tfcflorae.util.ClassAdder;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Objects;
 
 @Mixin(value = ClassAdder.class, remap = false)
@@ -324,119 +323,148 @@ public class FixVersionTFCMixin {
 
 		try {
 			if (itemFireStarter.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/items/ItemFireStarter.class")), itemFireStarter);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/items/ItemFireStarter.class")), itemFireStarter);
 			}
 
 			if (itemSeeds.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/items/ItemSeedsTFC.class")), itemSeeds);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/items/ItemSeedsTFC.class")), itemSeeds);
 			}
 
 			if (itemBlockCropWaterDead.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/items/itemblock/ItemBlockCropDeadWaterTFC.class")), itemBlockCropWaterDead);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/items/itemblock/ItemBlockCropDeadWaterTFC.class")), itemBlockCropWaterDead);
 			}
 
 			if (itemBlockCropWater.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/items/itemblock/ItemBlockCropWaterTFC.class")), itemBlockCropWater);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/items/itemblock/ItemBlockCropWaterTFC.class")), itemBlockCropWater);
 			}
 
 			if (blockBlocksTFC1.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/BlocksTFC$1.class")), blockBlocksTFC1);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/BlocksTFC$1.class")), blockBlocksTFC1);
 			}
 
 			if (blockBlocksTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/BlocksTFC.class")), blockBlocksTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/BlocksTFC.class")), blockBlocksTFC);
 			}
 
 			if (blockCropDead.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/agriculture/BlockCropDead.class")), blockCropDead);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/agriculture/BlockCropDead.class")), blockCropDead);
 			}
 
 			if (blockCrop.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/agriculture/BlockCropTFC.class")), blockCrop);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/agriculture/BlockCropTFC.class")), blockCrop);
 			}
 
 			if (blockPlantTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/plants/BlockPlantTFC.class")), blockPlantTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/plants/BlockPlantTFC.class")), blockPlantTFC);
 			}
 
 			if (blockPlantTFC1.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/plants/BlockPlantTFC$1.class")), blockPlantTFC1);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/plants/BlockPlantTFC$1.class")), blockPlantTFC1);
 			}
 
 			if (blockShortGrassTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/plants/BlockShortGrassTFC.class")), blockShortGrassTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/plants/BlockShortGrassTFC.class")), blockShortGrassTFC);
 			}
 
 			if (blockTallGrassTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/plants/BlockTallGrassTFC.class")), blockTallGrassTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/plants/BlockTallGrassTFC.class")), blockTallGrassTFC);
 			}
 
 			if (blockHangingTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/plants/BlockHangingPlantTFC.class")), blockHangingTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/objects/blocks/plants/BlockHangingPlantTFC.class")), blockHangingTFC);
 			}
 
 			if (worldRegenHandler.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/util/WorldRegenHandler.class")), worldRegenHandler);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/util/WorldRegenHandler.class")), worldRegenHandler);
 			}
 
 			if (chunkGenTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/ChunkGenTFC.class")), chunkGenTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/ChunkGenTFC.class")), chunkGenTFC);
 			}
 
 			if (dataLayer.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/DataLayer.class")), dataLayer);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/DataLayer.class")), dataLayer);
 			}
 
 			if (biomeDecoratorTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/biomes/BiomeDecoratorTFC.class")), biomeDecoratorTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/biomes/BiomeDecoratorTFC.class")), biomeDecoratorTFC);
 			}
 
 			if (biomeDecoratorTFC1.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/biomes/BiomeDecoratorTFC$1.class")), biomeDecoratorTFC1);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/biomes/BiomeDecoratorTFC$1.class")), biomeDecoratorTFC1);
 			}
 
 			if (biomeMesaTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/biomes/BiomeMesaTFC.class")), biomeMesaTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/biomes/BiomeMesaTFC.class")), biomeMesaTFC);
 			}
 
 			if (biomesTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/biomes/BiomesTFC.class")), biomesTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/biomes/BiomesTFC.class")), biomesTFC);
 			}
 
 			if (biomeTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/biomes/BiomeTFC.class")), biomeTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/biomes/BiomeTFC.class")), biomeTFC);
 			}
 
 			if (chunkDataTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/chunkdata/ChunkDataTFC.class")), chunkDataTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/chunkdata/ChunkDataTFC.class")), chunkDataTFC);
 			}
 
 			if (chunkDataTFCStorage.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/chunkdata/ChunkDataTFC$ChunkDataStorage.class")), chunkDataTFCStorage);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/chunkdata/ChunkDataTFC$ChunkDataStorage.class")), chunkDataTFCStorage);
 			}
 
 			if (genLayerTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/genlayers/GenLayerTFC.class")), genLayerTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/genlayers/GenLayerTFC.class")), genLayerTFC);
 			}
 
 			if (genLayerBiomeEdge.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/genlayers/biome/GenLayerBiomeEdge.class")), genLayerBiomeEdge);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/genlayers/biome/GenLayerBiomeEdge.class")), genLayerBiomeEdge);
 			}
 
 			if (genLayerShoreTFC.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/genlayers/biome/GenLayerShoreTFC.class")), genLayerShoreTFC);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/genlayers/biome/GenLayerShoreTFC.class")), genLayerShoreTFC);
 			}
 
 			if (genLayerTreeInit.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/genlayers/datalayers/tree/GenLayerTreeInit.class")), genLayerTreeInit);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/genlayers/datalayers/tree/GenLayerTreeInit.class")), genLayerTreeInit);
 			}
 
 			if (genRiverLayer.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/genlayers/datalayers/tree/GenRiverLayer.class")), genRiverLayer);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/genlayers/datalayers/tree/GenRiverLayer.class")), genRiverLayer);
 			}
 
 			if (genWildCrops.createNewFile()) {
-				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader().getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/worldgen/WorldGenWildCrops.class")), genWildCrops);
+				FileUtils.copyInputStreamToFile(Objects.requireNonNull(ClassAdder.class.getClassLoader()
+				                                                                       .getResourceAsStream("assets/tfcflorae/bansoukou/TerraFirmaCraft-MC1.12.2-1.7.21.179/net/dries007/tfc/world/classic/worldgen/WorldGenWildCrops.class")), genWildCrops);
 			}
 
 		} catch (IOException var55) {

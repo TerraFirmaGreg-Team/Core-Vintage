@@ -5,13 +5,31 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class TempModifier implements Comparable<TempModifier>{
+public class TempModifier implements Comparable<TempModifier> {
 	private String unlocalizedName;
 	private float change = 0f;
 	private float potency = 0f;
 	private int count = 1;
 	private float multiplier = 1f;
-	
+
+	public TempModifier(String unlocalizedName) {
+		this.unlocalizedName = unlocalizedName;
+	}
+
+	public TempModifier(String unlocalizedName, float change, float potency) {
+		this.unlocalizedName = unlocalizedName;
+		this.change = change;
+		this.potency = potency;
+	}
+
+	public static Optional<TempModifier> defined(String unlocalizedName, float change, float potency) {
+		return Optional.of(new TempModifier(unlocalizedName, change, potency));
+	}
+
+	public static Optional<TempModifier> none() {
+		return Optional.empty();
+	}
+
 	public float getMultiplier() {
 		return multiplier;
 	}
@@ -19,7 +37,7 @@ public class TempModifier implements Comparable<TempModifier>{
 	public void setMultiplier(float multiplier) {
 		this.multiplier = multiplier;
 	}
-	
+
 	public void addMultiplier(float multiplier) {
 		this.setMultiplier(this.getMultiplier() * multiplier);
 	}
@@ -53,44 +71,27 @@ public class TempModifier implements Comparable<TempModifier>{
 		this.potency += modifier.potency;
 		this.addMultiplier(modifier.getMultiplier());
 	}
-	
+
 	public int getCount() {
 		return count;
 	}
-	
+
 	public String getUnlocalizedName() {
 		return unlocalizedName;
-	}
-	
-	public TempModifier(String unlocalizedName) {
-		this.unlocalizedName = unlocalizedName;
-	}
-	
-	public TempModifier(String unlocalizedName, float change, float potency) {
-		this.unlocalizedName = unlocalizedName;
-		this.change = change;
-		this.potency = potency;
-	}
-
-	public static Optional<TempModifier> defined(String unlocalizedName, float change, float potency) {
-		return Optional.of(new TempModifier(unlocalizedName, change, potency));
-	}
-
-	public static Optional<TempModifier> none() {
-		return Optional.empty();
 	}
 
 //    public String getDisplayName() {
 //        return Util.translate(TFCAmbiental.MODID + ".modifier." + this.unlocalizedName);
 //    }
-	
+
 	public void apply(TemperatureCapability temp) {
 		// nothing;
 	}
-	
+
 	public void cancel(TemperatureCapability temp) {
 		// nothing;
 	}
+
 	@Override
 	public int compareTo(@NotNull TempModifier o) {
 		return Float.compare(this.change, o.change);

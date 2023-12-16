@@ -36,6 +36,7 @@ public class PropickBehavior implements IToolBehavior {
 	private static final Random RANDOM = new Random();
 	private static final int PROSPECT_RADIUS = 30;
 	private static final int COOLDOWN = 10;
+
 	protected PropickBehavior() {/**/}
 
 	@Override
@@ -85,11 +86,13 @@ public class PropickBehavior implements IToolBehavior {
 					} else {
 						// Found something
 						ProspectResult result = (ProspectResult) results.toArray()[RANDOM.nextInt(results.size())];
-						event = new ProspectEvent.Server(player, pos, ItemProspectorPick.ProspectResult.Type.values()[result.getType().ordinal()], result.ore);
+						event = new ProspectEvent.Server(player, pos, ItemProspectorPick.ProspectResult.Type.values()[result.getType()
+						                                                                                                    .ordinal()], result.ore);
 
 						if (ConfigTFC.General.DEBUG.enable) {
 							for (ProspectResult debugResult : results) {
-								TerraFirmaCraft.getLog().debug(debugResult.ore.getDisplayName() + ": " + String.format("%.02f", debugResult.score));
+								TerraFirmaCraft.getLog()
+								               .debug(debugResult.ore.getDisplayName() + ": " + String.format("%.02f", debugResult.score));
 							}
 						}
 					}

@@ -61,7 +61,8 @@ public class StoneTypeHandler {
 		for (Triple<String, OrePrefix, Material> triple : rockTypes) {
 			new StoneType(
 					counter, "tfc_" + triple.getLeft(), SoundType.STONE, triple.getMiddle(), triple.getRight(),
-					() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("tfc:raw/" + triple.getLeft())).getDefaultState(),
+					() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("tfc:raw/" + triple.getLeft()))
+					                            .getDefaultState(),
 					state -> state.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("tfc:raw/" + triple.getLeft())),
 					false
 			);

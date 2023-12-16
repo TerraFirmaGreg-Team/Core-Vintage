@@ -42,7 +42,8 @@ public class ArmorUtilsMixin {
 
 			if (cap != null && !cap.isRotten()) {
 				// Use this method to add stats for compat with TFC, who overrides addStats(int amount, float saturation) for their food and does nothing
-				player.getFoodStats().addStats(new ItemFood(foodItem.getHealAmount(food), saturation, foodItem.isWolfsFavoriteMeat()), food);
+				player.getFoodStats()
+				      .addStats(new ItemFood(foodItem.getHealAmount(food), saturation, foodItem.isWolfsFavoriteMeat()), food);
 			}
 			cir.setReturnValue(new ActionResult<>(EnumActionResult.SUCCESS, food));
 		} else {

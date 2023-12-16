@@ -24,10 +24,8 @@ import static com.lumintorious.ambiental.TFCAmbiental.MODID;
 public class TFCAmbientalEventHandler {
 
 	@SubscribeEvent
-	public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
-	{
-		if (event.getModID().equals(MODID))
-		{
+	public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+		if (event.getModID().equals(MODID)) {
 			ConfigManager.sync(MODID, Config.Type.INSTANCE);
 			TemperatureCapability.AVERAGE = TFCAmbientalConfig.GENERAL.averageTemperature;
 			TemperatureCapability.HOT_THRESHOLD = TFCAmbientalConfig.GENERAL.hotThreshold;
@@ -41,44 +39,42 @@ public class TFCAmbientalEventHandler {
 
 	@SubscribeEvent
 	public void onPlayerDeath(LivingDeathEvent event) {
-		if(event.getEntityLiving().world.isRemote) {
+		if (event.getEntityLiving().world.isRemote) {
 			return;
 		}
-		if(!(event.getEntityLiving() instanceof EntityPlayer)) {
+		if (!(event.getEntityLiving() instanceof EntityPlayer)) {
 			return;
 		}
 		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-		if(player.hasCapability(TemperatureCapability.CAPABILITY, null)) {
-			TemperatureCapability cap = (TemperatureCapability)player.getCapability(TemperatureCapability.CAPABILITY, null);
+		if (player.hasCapability(TemperatureCapability.CAPABILITY, null)) {
+			TemperatureCapability cap = (TemperatureCapability) player.getCapability(TemperatureCapability.CAPABILITY, null);
 			cap.bodyTemperature = TemperatureCapability.AVERAGE;
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onPlayerSpawn(LivingSpawnEvent event) {
-		if(event.getEntityLiving().world.isRemote) {
+		if (event.getEntityLiving().world.isRemote) {
 			return;
 		}
-		if(!(event.getEntityLiving() instanceof EntityPlayer)) {
+		if (!(event.getEntityLiving() instanceof EntityPlayer)) {
 			return;
 		}
 		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 		player.sendMessage(new TextComponentString("respawned"));
 	}
-	
+
 	@SubscribeEvent
-    public void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event)
-    {
-        if (event.getObject() instanceof EntityPlayer)
-        {
-            EntityPlayer player = (EntityPlayer)event.getObject();
+	public void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
+		if (event.getObject() instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.getObject();
 
-                ResourceLocation loc = new ResourceLocation(MODID, "temperature");
+			ResourceLocation loc = new ResourceLocation(MODID, "temperature");
 
-                // Each player should have their own instance for each stat, as associated values may vary
-                if (!event.getCapabilities().containsKey(loc))
-                    event.addCapability(loc, new TemperatureCapability(player));
-        }
+			// Each player should have their own instance for each stat, as associated values may vary
+			if (!event.getCapabilities().containsKey(loc))
+				event.addCapability(loc, new TemperatureCapability(player));
+		}
 //		if (event.getObject() instanceof EntityPlayer)
 //		{
 //			EntityPlayer player = (EntityPlayer)event.getObject();
@@ -86,7 +82,7 @@ public class TFCAmbientalEventHandler {
 //			capability.setPlayer(player);
 //			event.addCapability(TemperatureCapability.KEY, capability);
 //		}
-    }
+	}
 
 	@SubscribeEvent
 	public void onPlayerUpdate(LivingUpdateEvent event) {
@@ -101,19 +97,17 @@ public class TFCAmbientalEventHandler {
 			return;
 		}
 
-		if (!ArrayUtils.contains(TFCAmbientalConfig.GENERAL.allowedDims, player.dimension))
-		{
+		if (!ArrayUtils.contains(TFCAmbientalConfig.GENERAL.allowedDims, player.dimension)) {
 			return;
 		}
 
-		TemperatureCapability temp = (TemperatureCapability)player.getCapability(TemperatureCapability.CAPABILITY, null);
+		TemperatureCapability temp = (TemperatureCapability) player.getCapability(TemperatureCapability.CAPABILITY, null);
 
 		temp.update();
 	}
 
 	@SubscribeEvent
-	public void registerPotions(RegistryEvent.Register<Potion> event)
-	{
+	public void registerPotions(RegistryEvent.Register<Potion> event) {
 		event.getRegistry().register(TempEffect.WARM);
 		event.getRegistry().register(TempEffect.COOL);
 	}

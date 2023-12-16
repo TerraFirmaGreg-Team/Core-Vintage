@@ -57,7 +57,6 @@ public class TFCAmbientalConfig {
 		public float badTemperatureChangeSpeed = 1F;
 
 
-
 		@Config.Comment("How potent are multipliers with more than one instance. (Eg. 2 fire pits nearby means they have 2 * this effectiveness). Default = 0.7")
 		public float diminishedModifierMultiplier = 0.7F;
 
@@ -71,7 +70,7 @@ public class TFCAmbientalConfig {
 		public int nanoOrQuarkTemp = 20;
 
 		@Config.Comment("Allowed Dims")
-		public int[] allowedDims = new int[] {0};
+		public int[] allowedDims = new int[]{0};
 
 		@Config.Comment("If true, you will start taking damage when below freezing or above burning temperatures. Default = true")
 		public boolean takeDamage = false;

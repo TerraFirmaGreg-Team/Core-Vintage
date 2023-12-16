@@ -51,9 +51,10 @@ public class TFCJEIPluginMixin implements IModPlugin {
 
 		// Add TFC Propicks to HEI GT ore spawn Tab
 		List<Metal> tierOrdered = TFCRegistries.METALS.getValuesCollection()
-				.stream()
-				.sorted(Comparator.comparingInt(metal -> metal.getTier().ordinal()))
-				.collect(Collectors.toList());
+		                                              .stream()
+		                                              .sorted(Comparator.comparingInt(metal -> metal.getTier()
+		                                                                                            .ordinal()))
+		                                              .collect(Collectors.toList());
 
 		for (Metal metal : tierOrdered)
 			if (Metal.ItemType.PROPICK.hasType(metal))

@@ -30,7 +30,7 @@ public class ExtraPlanetsRecipesMixin {
 		GalacticraftRegistry.registerSpaceStation(new SpaceStationType(Config.MERCURY_SPACE_STATION_ID, Config.MERCURY_ID, new SpaceStationRecipe(inputMap)));
 
 		// Venus
-		inputMap = new HashMap<Object, Integer>();
+		inputMap = new HashMap<>();
 		inputMap.put("circuitHv", 32);
 		inputMap.put("plateDoubleAluminium", 64);
 		inputMap.put("plateDoubleTitanium", 64);

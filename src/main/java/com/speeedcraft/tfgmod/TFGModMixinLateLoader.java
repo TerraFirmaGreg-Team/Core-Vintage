@@ -12,10 +12,6 @@ public class TFGModMixinLateLoader implements ILateMixinLoader {
 	public List<String> getMixinConfigs() {
 		final List<String> mixinList = new ArrayList<>();
 
-
-		if (Loader.isModLoaded("astralsorcery"))
-			mixinList.add("mixin.tfgmod.astralsorcery.json");
-
 		if (Loader.isModLoaded("cellars"))
 			mixinList.add("mixin.tfgmod.cellars.json");
 

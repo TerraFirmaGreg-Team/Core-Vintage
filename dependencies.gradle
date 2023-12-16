@@ -15,8 +15,8 @@ repositories {
 
 dependencies {
 
-    compileOnlyApi 'org.jetbrains:annotations:23.0.0'
-    annotationProcessor 'org.jetbrains:annotations:23.0.0'
+    compileOnlyApi 'org.jetbrains:annotations:24.0.1'
+    annotationProcessor 'org.jetbrains:annotations:24.0.1'
 
     compileOnly rfg.deobf("curse.maven:the-one-probe-community-edition-885670:4746213")
     compileOnly rfg.deobf("curse.maven:had-enough-items-557549:4571247")
@@ -41,8 +41,6 @@ dependencies {
     compileOnly rfg.deobf("curse.maven:item-filters-309674:3003364")
 
     compileOnly rfg.deobf("curse.maven:puddles-312039:2668151")
-
-    compileOnly rfg.deobf("curse.maven:astral-sorcery-241721:3044416")
 
     compileOnly rfg.deobf("curse.maven:galacticraft-legacy-564236:4671122")
     compileOnly rfg.deobf("curse.maven:extra-planets-241291:4466284")

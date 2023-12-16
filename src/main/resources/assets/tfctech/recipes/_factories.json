@@ -1,6 +1,0 @@
-{
-  "recipes": {
-    "unmold_recipe": "tfctech.objects.recipes.UnmoldRecipe$Factory",
-    "unmoldglass_recipe": "tfctech.objects.recipes.UnmoldGlassRecipe$Factory"
-  }
-}

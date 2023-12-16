@@ -11,18 +11,17 @@ import org.spongepowered.asm.mixin.Overwrite;
 @Mixin(value = TEAnvilTFC.class, remap = false)
 public class TEAnvilTFCMixin {
 
+	/**
+	 * @author SpeeeDCraft
+	 * @reason
+	 */
 	@Overwrite
 	public boolean isItemValid(int slot, ItemStack stack) {
-		switch (slot) {
-			case 0:
-			case 1:
-				return stack.hasCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-			case 2:
-				return stack.getItem() == ToolItems.HARD_HAMMER;
-			case 3:
-				return OreDictionaryHelper.doesStackMatchOre(stack, "dustFlux");
-			default:
-				return false;
-		}
+		return switch (slot) {
+			case 0, 1 -> stack.hasCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+			case 2 -> stack.getItem() == ToolItems.HARD_HAMMER;
+			case 3 -> OreDictionaryHelper.doesStackMatchOre(stack, "dustFlux");
+			default -> false;
+		};
 	}
 }

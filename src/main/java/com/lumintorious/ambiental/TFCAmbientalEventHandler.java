@@ -16,11 +16,13 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.commons.lang3.ArrayUtils;
 
 import static com.lumintorious.ambiental.TFCAmbiental.MODID;
 
+@Mod.EventBusSubscriber(modid = MODID)
 public class TFCAmbientalEventHandler {
 
 	@SubscribeEvent
@@ -42,10 +44,9 @@ public class TFCAmbientalEventHandler {
 		if (event.getEntityLiving().world.isRemote) {
 			return;
 		}
-		if (!(event.getEntityLiving() instanceof EntityPlayer)) {
+		if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
 			return;
 		}
-		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 		if (player.hasCapability(TemperatureCapability.CAPABILITY, null)) {
 			TemperatureCapability cap = (TemperatureCapability) player.getCapability(TemperatureCapability.CAPABILITY, null);
 			cap.bodyTemperature = TemperatureCapability.AVERAGE;
@@ -57,17 +58,15 @@ public class TFCAmbientalEventHandler {
 		if (event.getEntityLiving().world.isRemote) {
 			return;
 		}
-		if (!(event.getEntityLiving() instanceof EntityPlayer)) {
+		if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
 			return;
 		}
-		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 		player.sendMessage(new TextComponentString("respawned"));
 	}
 
 	@SubscribeEvent
 	public void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-		if (event.getObject() instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) event.getObject();
+		if (event.getObject() instanceof EntityPlayer player) {
 
 			ResourceLocation loc = new ResourceLocation(MODID, "temperature");
 
@@ -88,11 +87,10 @@ public class TFCAmbientalEventHandler {
 	public void onPlayerUpdate(LivingUpdateEvent event) {
 
 		EntityLivingBase entityLiving = event.getEntityLiving();
-		if (!(entityLiving instanceof EntityPlayer)) {
+		if (!(entityLiving instanceof EntityPlayer player)) {
 			return;
 		}
 
-		EntityPlayer player = (EntityPlayer) entityLiving;
 		if (player.isCreative()) {
 			return;
 		}

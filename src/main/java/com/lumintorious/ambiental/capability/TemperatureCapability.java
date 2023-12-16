@@ -20,6 +20,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import org.jetbrains.annotations.NotNull;
 
 public class TemperatureCapability implements ICapabilitySerializable<NBTTagCompound> {
 
@@ -176,12 +177,12 @@ public class TemperatureCapability implements ICapabilitySerializable<NBTTagComp
 	}
 
 	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, EnumFacing facing) {
 		return capability != null && capability == CAPABILITY;
 	}
 
 	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, EnumFacing facing) {
 		return capability == CAPABILITY ? (T) (this) : null;
 	}
 
@@ -240,8 +241,7 @@ public class TemperatureCapability implements ICapabilitySerializable<NBTTagComp
 						}
 					}
 					if (TFCAmbientalConfig.GENERAL.loseHungerThirst) {
-						if (player.getFoodStats() instanceof FoodStatsTFC) {
-							FoodStatsTFC stats = (FoodStatsTFC) player.getFoodStats();
+						if (player.getFoodStats() instanceof FoodStatsTFC stats) {
 							if (this.getTemperature() > BURN_THRESHOLD) {
 								stats.addThirst(-8);
 							} else if (this.getTemperature() < FREEZE_THRESHOLD) {

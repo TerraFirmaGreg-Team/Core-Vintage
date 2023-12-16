@@ -71,7 +71,7 @@ public class TFCAmbientalGuiRenderer {
 			return;
 		}
 
-		TemperatureCapability tempSystem = (TemperatureCapability) player.getCapability(CAPABILITY, null);
+		TemperatureCapability tempSystem = player.getCapability(CAPABILITY, null);
 		ScaledResolution resolution = event.getResolution();
 		int width = resolution.getScaledWidth();
 		int height = resolution.getScaledHeight();

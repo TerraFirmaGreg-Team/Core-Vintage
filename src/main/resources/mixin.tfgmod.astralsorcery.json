@@ -1,0 +1,10 @@
+{
+  "package": "com.speeedcraft.tfgmod.mixins.astralsorcery",
+  "refmap": "mixins.tfgmod.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "EventHandlerServerMixin"
+  ]
+}

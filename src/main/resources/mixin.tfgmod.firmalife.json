@@ -1,0 +1,14 @@
+{
+  "package": "com.speeedcraft.tfgmod.mixins.firmalife",
+  "refmap": "mixins.tfgmod.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "ItemMetalMalletMoldMixin",
+    "IUnmoldRecipeFLInvoker",
+    "UnmoldRecipesFLMixin",
+    "jei.CastingRecipeWrapperFLMixin",
+    "jei.UnmoldRecipeWrapperFLMixin"
+  ]
+}

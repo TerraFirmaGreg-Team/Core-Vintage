@@ -1,6 +1,0 @@
-{
-  "parent": "gregtech:item/material_sets/metallic/ingot_hex",
-  "textures": {
-    "layer0": "gregtech:items/material_sets/magnetic/magnetic_overlay"
-  }
-}

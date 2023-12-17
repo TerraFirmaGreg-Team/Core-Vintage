@@ -22,7 +22,7 @@ public class TFCFlorae {
     public static final String MODID = "tfcflorae";
     public static final String NAME = "TFC Florae";
     public static final String VERSION = "@VERSION@";
-    public static final String DEPENDENCIES = "required-after:tfc@[1.7,);"
+    public static final String DEPENDENCIES = "required-after:tfc;"
             + "after:firmalife;"
             + "after:tfcelementia;"
             + "after:tfc_ph_compat;";

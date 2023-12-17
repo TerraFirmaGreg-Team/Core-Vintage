@@ -10,12 +10,16 @@ import java.time.LocalDate
 plugins {
     id 'java'
     id 'java-library'
+    id 'base'
     id 'maven-publish'
-    id 'com.diffplug.spotless' version '6.19.0' apply false
     id 'org.jetbrains.gradle.plugin.idea-ext' version '1.1.7'
     id 'com.gtnewhorizons.retrofuturagradle' version '1.3.24'
-    id 'com.matthewprenger.cursegradle' version '1.4.0' apply false
-    id 'com.modrinth.minotaur' version '2.+' apply false
+    id 'net.darkhax.curseforgegradle' version '1.1.16' apply false
+    id 'com.modrinth.minotaur' version '2.8.4' apply false
+    id 'com.diffplug.spotless' version '6.19.0' apply false
+    id 'com.palantir.git-version' version '3.0.0' apply false
+    id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
+    id 'com.google.devtools.ksp' version '1.8.0-1.0.9' apply false
     id 'org.jetbrains.changelog' version '2.2.0'
 }
 
@@ -88,14 +92,10 @@ minecraft {
 
     // Add various JVM arguments here for runtime
     def args = ['-ea:' + group]
-    if (propertyBool('is_coremod')) {
-        args << '-Dfml.coreMods.load=' + propertyString('coremod_plugin_class_name')
-    }
     if (propertyBool('use_mixins')) {
         args << '-Dmixin.hotSwap=true'
         args << '-Dmixin.checks.interfaces=true'
         args << '-Dmixin.debug.export=true'
-        args << '-Xmx20G'
     }
     extraRunJvmArguments.addAll(args)
     extraRunJvmArguments.addAll(propertyStringList('extra_jvm_args'))
@@ -119,6 +119,50 @@ repositories {
         name 'Mod Maven'
         url 'https://modmaven.dev'
     }
+    exclusiveContent {
+        forRepository {
+            //noinspection ForeignDelegate
+            maven {
+                name = 'Curse Maven'
+                url = 'https://www.cursemaven.com'
+                // url = 'https://beta.cursemaven.com'
+            }
+        }
+        filter {
+            includeGroup 'curse.maven'
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            //noinspection ForeignDelegate
+            maven {
+                name = 'Modrinth'
+                url = 'https://api.modrinth.com/maven'
+            }
+        }
+        filter {
+            includeGroup 'maven.modrinth'
+        }
+    }
+    maven {
+        name 'Cleanroom Maven'
+        url 'https://maven.cleanroommc.com'
+    }
+    maven {
+        name 'BlameJared Maven'
+        url 'https://maven.blamejared.com'
+    }
+    maven {
+        name 'GTNH Maven'
+        url 'http://jenkins.usrv.eu:8081/nexus/content/groups/public'
+        allowInsecureProtocol = true
+    }
+
+    mavenLocal() // Must be last for caching to work
+
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -136,6 +180,7 @@ dependencies {
         testCompileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
             transitive = false // We only care about the 1 annotation class
         }
+        testCompileOnly "me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0"
     }
     if (propertyBool('use_asset_mover')) {
         implementation "com.cleanroommc:assetmover:${propertyString('asset_mover_version')}"
@@ -146,15 +191,29 @@ dependencies {
             transitive = false
         }
         annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
-        annotationProcessor 'com.google.guava:guava:24.1.1-jre'
-        annotationProcessor 'com.google.code.gson:gson:2.8.6'
+        annotationProcessor 'com.google.guava:guava:30.0-jre'
+        annotationProcessor 'com.google.code.gson:gson:2.8.9'
         annotationProcessor(mixin) {
             transitive = false
         }
     }
+
+    patchedMinecraft('net.minecraft:launchwrapper:1.17.2') {
+        transitive = false
+    }
     implementation 'it.unimi.dsi:fastutil:8.5.+'
     implementation "info.loenwind.autoconfig:AutoConfig:1.12.2-1.0.2"
     implementation "info.loenwind.autosave:AutoSave:1.12.2-1.0.11"
+
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    compileOnlyApi 'org.jetbrains:annotations:24.0.1'
+    annotationProcessor 'org.jetbrains:annotations:24.0.1'
 }
 
 apply from: 'gradle/scripts/dependencies.gradle'
@@ -180,9 +239,9 @@ processResources {
                 'mod_name': propertyString('mod_name'),
                 'mod_version': propertyString('mod_version'),
                 'mod_description': propertyString('mod_description'),
-                'mod_authors': "[${authors}]",
                 'mod_credits': propertyString('mod_credits'),
                 'mod_url': propertyString('mod_url'),
+                'mod_authors': "[${authors}]",
                 'mod_update_json': propertyString('mod_update_json'),
                 'mod_logo_path': propertyString('mod_logo_path'),
                 'mixin_refmap': propertyString('mixin_refmap'),
@@ -353,6 +412,20 @@ tasks.named('injectTags', InjectTagsTask).configure {
         return propertyBool('use_tags') && !it.getTags().get().isEmpty()
     }
     it.outputClassName.set(propertyString('tag_class_name'))
+}
+
+tasks.named('prepareObfModsFolder').configure {
+    finalizedBy 'prioritizeCoremods'
+}
+tasks.register('prioritizeCoremods') {
+    dependsOn 'prepareObfModsFolder'
+    doLast {
+        fileTree('run/obfuscated').forEach {
+            if (it.isFile() && it.name =~ '(mixinbooter|configanytime)(-)([0-9])+\\.+([0-9])+(.jar)') {
+                it.renameTo(new File(it.parentFile, "!${it.name}"))
+            }
+        }
+    }
 }
 
 idea.project.settings {

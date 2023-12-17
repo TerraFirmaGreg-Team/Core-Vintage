@@ -23,7 +23,7 @@ public class TFCTech {
     public static final String MODID = "tfctech";
     public static final String NAME = "TFCTech Unofficial";
     public static final String VERSION = "@VERSION@";
-    public static final String DEPENDENCIES = "required-after:tfc@[1.0.0,);after:ic2;after:gregtech";
+    public static final String DEPENDENCIES = "required-after:tfc;after:ic2;after:gregtech";
     private static final boolean signedBuild = true;
     @SuppressWarnings("FieldMayBeFinal")
     @Mod.Instance

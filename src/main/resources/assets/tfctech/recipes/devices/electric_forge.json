@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XWX",
+    "ICI",
+    "XWX"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "inductorCopper"
+    },
+    "C": {
+      "item": "tfc:fire_bricks"
+    },
+    "W": {
+      "type": "forge:ore_dict",
+      "ore": "wireCopper"
+    },
+    "X": {
+      "type": "forge:ore_dict",
+      "ore": "sheetSteel"
+    }
+  },
+  "result": {
+    "item": "tfctech:electric_forge",
+    "count": 1
+  }
+}

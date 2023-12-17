@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XIX",
+    "XDX",
+    "XIX"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "inductorCopper"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "sheetDoubleWroughtIron"
+    },
+    "X": {
+      "type": "forge:ore_dict",
+      "ore": "sheetSteel"
+    }
+  },
+  "result": {
+    "item": "tfctech:fridge",
+    "count": 1
+  }
+}

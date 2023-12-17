@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "R R",
+    "S S",
+    "R R"
+  ],
+
+  "key":
+  {
+    "R":
+    {
+      "type": "forge:ore_dict",
+      "ore": "lumber"
+    },
+    "S":
+    {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    }
+  },
+
+  "result":
+  {
+    "item": "cellars:ice_bunker",
+    "count": 1
+  }
+}

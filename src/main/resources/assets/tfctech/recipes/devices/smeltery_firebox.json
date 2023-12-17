@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IBI",
+    "BSB",
+    "IBI"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "stickLongWroughtIron"
+    },
+    "B": {
+      "item": "tfc:ceramics/fired/fire_brick"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "sheetWroughtIron"
+    }
+  },
+  "result": {
+    "item": "tfctech:smeltery_firebox",
+    "count": 1
+  }
+}

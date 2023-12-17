@@ -1,22 +1,13 @@
 package tfcflorae.objects.items.tools;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
-import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.objects.items.ItemTFC;
-
+import net.minecraft.item.ItemStack;
 import tfcflorae.util.OreDictionaryHelper;
+
+import javax.annotation.Nonnull;
 
 public class ItemToolHeadTFCF extends ItemTFC implements IItemSize {
     private final Size size;

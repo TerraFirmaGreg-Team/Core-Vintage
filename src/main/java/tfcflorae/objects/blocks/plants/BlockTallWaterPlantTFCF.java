@@ -1,16 +1,12 @@
 package tfcflorae.objects.blocks.plants;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.property.ITallPlant;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -23,17 +19,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fluids.Fluid;
-
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
-import net.dries007.tfc.objects.blocks.property.ITallPlant;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-
 import tfcflorae.util.OreDictionaryHelper;
 
-import static net.minecraft.block.BlockLiquid.LEVEL;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
 @ParametersAreNonnullByDefault

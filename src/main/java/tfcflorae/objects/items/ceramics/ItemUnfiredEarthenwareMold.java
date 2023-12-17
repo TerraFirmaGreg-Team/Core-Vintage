@@ -1,9 +1,9 @@
 package tfcflorae.objects.items.ceramics;
 
-import java.util.EnumMap;
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
+
+import java.util.EnumMap;
 
 public class ItemUnfiredEarthenwareMold extends ItemPottery {
     private static final EnumMap<Metal.ItemType, ItemUnfiredEarthenwareMold> MAP = new EnumMap<>(Metal.ItemType.class);

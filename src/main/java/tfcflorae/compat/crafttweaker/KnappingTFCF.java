@@ -1,19 +1,16 @@
 package tfcflorae.compat.crafttweaker;
 
-import net.minecraft.util.ResourceLocation;
-
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
+import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
-
 import tfcflorae.TFCFlorae;
 
 @ZenRegister
-@ZenClass("mods.tfcflorae.Knapping")
+@ZenClass("mods.tfcflorae.knapping")
 public class KnappingTFCF {
     @ZenMethod
     public static void add(String type, String name, IItemStack output, String... pattern) {

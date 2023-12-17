@@ -1,8 +1,6 @@
 package tfcflorae.objects.items.itemblock;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -19,10 +17,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-
-import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-
 import tfcflorae.objects.blocks.plants.BlockTallGrassWater;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ItemBlockTallGrassWater extends ItemBlockTFC {

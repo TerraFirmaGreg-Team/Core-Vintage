@@ -1,18 +1,15 @@
 package tfcflorae.objects.items.groundcover;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import mcp.MethodsReturnNonnullByDefault;
-
-import net.minecraft.item.ItemStack;
-
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-
+import net.minecraft.item.ItemStack;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceBones;
 import tfcflorae.util.OreDictionaryHelper;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

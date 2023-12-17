@@ -1,11 +1,11 @@
 package tfcflorae.objects.blocks.wood.fruitwood;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.inventory.capability.TFCInventoryLargeChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
@@ -24,17 +24,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
-
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.inventory.capability.TFCInventoryLargeChest;
-
 import tfcflorae.client.GuiHandler;
 import tfcflorae.objects.te.TEFruitChest;
 import tfcflorae.util.OreDictionaryHelper;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class BlockFruitChestTFCF extends BlockChest implements IItemSize {

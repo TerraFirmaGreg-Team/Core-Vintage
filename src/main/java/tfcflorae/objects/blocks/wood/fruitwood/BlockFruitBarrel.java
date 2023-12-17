@@ -1,9 +1,12 @@
 package tfcflorae.objects.blocks.wood.fruitwood;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.objects.te.TEBarrel;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneComparator;
 import net.minecraft.block.SoundType;
@@ -30,16 +33,11 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.util.Helpers;
-
 import tfcflorae.util.OreDictionaryHelper;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes.

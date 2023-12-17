@@ -1,18 +1,15 @@
 package tfcflorae.objects.items;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import mcp.MethodsReturnNonnullByDefault;
-
-import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemStack;
-
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-
+import net.minecraft.item.ItemDoor;
+import net.minecraft.item.ItemStack;
 import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitDoor;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

@@ -1,23 +1,20 @@
 package tfcflorae.objects.blocks.wood;
 
-import java.util.*;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import mcp.*;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -27,19 +24,16 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.util.Helpers;
-import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.types.TreesTFCF;
 import tfcflorae.util.OreDictionaryHelper;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -58,7 +52,13 @@ public class BlockJoshuaTreeLog extends Block {
         this.wood = wood;
         if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
 
-        this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(UP, Boolean.valueOf(false)).withProperty(DOWN, Boolean.valueOf(false)));
+        this.setDefaultState(this.blockState.getBaseState()
+                .withProperty(NORTH, Boolean.FALSE)
+                .withProperty(EAST, Boolean.FALSE)
+                .withProperty(SOUTH, Boolean.FALSE)
+                .withProperty(WEST, Boolean.FALSE)
+                .withProperty(UP, Boolean.FALSE)
+                .withProperty(DOWN, Boolean.FALSE));
         this.setHarvestLevel("axe", 0);
         this.setHardness(20.0F);
         this.setResistance(5.0F);
@@ -101,13 +101,13 @@ public class BlockJoshuaTreeLog extends Block {
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         state = state.getActualState(source, pos);
         float f = 0.1875F;
-        float f1 = ((Boolean) state.getValue(WEST)).booleanValue() ? 0.0F : 0.1875F;
-        float f2 = ((Boolean) state.getValue(DOWN)).booleanValue() ? 0.0F : 0.1875F;
-        float f3 = ((Boolean) state.getValue(NORTH)).booleanValue() ? 0.0F : 0.1875F;
-        float f4 = ((Boolean) state.getValue(EAST)).booleanValue() ? 1.0F : 0.8125F;
-        float f5 = ((Boolean) state.getValue(UP)).booleanValue() ? 1.0F : 0.8125F;
-        float f6 = ((Boolean) state.getValue(SOUTH)).booleanValue() ? 1.0F : 0.8125F;
-        return new AxisAlignedBB((double) f1, (double) f2, (double) f3, (double) f4, (double) f5, (double) f6);
+        float f1 = state.getValue(WEST).booleanValue() ? 0.0F : 0.1875F;
+        float f2 = state.getValue(DOWN).booleanValue() ? 0.0F : 0.1875F;
+        float f3 = state.getValue(NORTH).booleanValue() ? 0.0F : 0.1875F;
+        float f4 = state.getValue(EAST).booleanValue() ? 1.0F : 0.8125F;
+        float f5 = state.getValue(UP).booleanValue() ? 1.0F : 0.8125F;
+        float f6 = state.getValue(SOUTH).booleanValue() ? 1.0F : 0.8125F;
+        return new AxisAlignedBB(f1, f2, f3, f4, f5, f6);
     }
 
     @SuppressWarnings("deprecation")
@@ -121,27 +121,27 @@ public class BlockJoshuaTreeLog extends Block {
         float f1 = 0.8125F;
         addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875D, 0.1875D, 0.1875D, 0.8125D, 0.8125D, 0.8125D));
 
-        if (((Boolean) state.getValue(WEST)).booleanValue()) {
+        if (state.getValue(WEST).booleanValue()) {
             addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0D, 0.1875D, 0.1875D, 0.1875D, 0.8125D, 0.8125D));
         }
 
-        if (((Boolean) state.getValue(EAST)).booleanValue()) {
+        if (state.getValue(EAST).booleanValue()) {
             addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.8125D, 0.1875D, 0.1875D, 1.0D, 0.8125D, 0.8125D));
         }
 
-        if (((Boolean) state.getValue(UP)).booleanValue()) {
+        if (state.getValue(UP).booleanValue()) {
             addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875D, 0.8125D, 0.1875D, 0.8125D, 1.0D, 0.8125D));
         }
 
-        if (((Boolean) state.getValue(DOWN)).booleanValue()) {
+        if (state.getValue(DOWN).booleanValue()) {
             addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.1875D, 0.8125D));
         }
 
-        if (((Boolean) state.getValue(NORTH)).booleanValue()) {
+        if (state.getValue(NORTH).booleanValue()) {
             addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875D, 0.1875D, 0.0D, 0.8125D, 0.8125D, 0.1875D));
         }
 
-        if (((Boolean) state.getValue(SOUTH)).booleanValue()) {
+        if (state.getValue(SOUTH).booleanValue()) {
             addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875D, 0.1875D, 0.8125D, 0.8125D, 0.8125D, 1.0D));
         }
     }

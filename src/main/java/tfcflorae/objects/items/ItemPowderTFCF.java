@@ -1,17 +1,14 @@
 package tfcflorae.objects.items;
 
-import java.util.EnumMap;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.item.ItemStack;
-
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.items.ItemTFC;
-
-import tfcflorae.util.OreDictionaryHelper;
+import net.minecraft.item.ItemStack;
 import tfcflorae.objects.PowderTFCF;
+import tfcflorae.util.OreDictionaryHelper;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.EnumMap;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
@@ -24,7 +21,6 @@ public class ItemPowderTFCF extends ItemTFCF {
         if (MAP.put(powder, this) != null) throw new IllegalStateException("There can only be one.");
         setMaxDamage(0);
         OreDictionaryHelper.register(this, "dust", powder);
-        OreDictionaryHelper.register(this, "powder", powder);
     }
 
     public static ItemPowderTFCF get(PowderTFCF powder) {

@@ -1,11 +1,12 @@
 package tfcflorae.compat.tfcelementia.recipes;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.gson.JsonObject;
-
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.IMoldHandler;
+import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.recipes.RecipeUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -16,24 +17,18 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.recipes.RecipeUtils;
-
 import tfcelementia.objects.items.metal.ItemMetalTFCE;
-
 import tfcflorae.compat.tfcelementia.ceramics.ItemKaoliniteMoldTFCE;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;

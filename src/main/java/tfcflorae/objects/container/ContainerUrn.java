@@ -1,18 +1,16 @@
 package tfcflorae.objects.container;
 
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.objects.container.ContainerTE;
+import net.dries007.tfc.objects.container.IButtonHandler;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import net.dries007.tfc.objects.container.ContainerTE;
-import net.dries007.tfc.objects.container.IButtonHandler;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-
 import tfcflorae.objects.blocks.BlockUrn;
 import tfcflorae.objects.te.TEUrn;
+
+import javax.annotation.Nullable;
 
 public class ContainerUrn extends ContainerTE<TEUrn> implements IButtonHandler {
     public ContainerUrn(InventoryPlayer playerInv, TEUrn tile) {

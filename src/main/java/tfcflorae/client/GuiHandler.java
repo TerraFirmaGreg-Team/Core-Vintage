@@ -1,6 +1,7 @@
 package tfcflorae.client;
 
 import net.dries007.tfc.client.gui.GuiChestTFC;
+import net.dries007.tfc.client.gui.GuiContainerTFC;
 import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.dries007.tfc.objects.container.ContainerKnapping;
 import net.dries007.tfc.util.Helpers;
@@ -14,13 +15,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import tfcflorae.TFCFlorae;
 import tfcflorae.api.knapping.KnappingTypes;
-import tfcflorae.client.gui.*;
+import tfcflorae.client.gui.GuiCrate;
+import tfcflorae.client.gui.GuiUrn;
 import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitChestTFCF;
-import tfcflorae.objects.container.*;
+import tfcflorae.objects.container.ContainerBag;
+import tfcflorae.objects.container.ContainerCrate;
+import tfcflorae.objects.container.ContainerSack;
+import tfcflorae.objects.container.ContainerUrn;
 import tfcflorae.objects.items.ItemBag;
 import tfcflorae.objects.items.ItemSack;
 import tfcflorae.objects.items.rock.ItemMud;
-import tfcflorae.objects.te.TECondenser;
 import tfcflorae.objects.te.TECrate;
 import tfcflorae.objects.te.TEUrn;
 import tfcflorae.util.OreDictionaryHelper;
@@ -109,8 +113,6 @@ public class GuiHandler implements IGuiHandler {
                     return new ContainerChestTFC(player.inventory, chestContainer, player);
                 }
                 return null;
-            case CONDENSER:
-                return new ContainerCondenser(player.inventory, Helpers.getTE(world, pos, TECondenser.class));
             default:
                 return null;
         }
@@ -124,9 +126,9 @@ public class GuiHandler implements IGuiHandler {
         BlockPos pos = new BlockPos(x, y, z);
         switch (type) {
             case SACK:
-                return new GuiSack(container, player.inventory, SACK_INVENTORY_BACKGROUND);
+                return new GuiContainerTFC(container, player.inventory, SACK_INVENTORY_BACKGROUND);
             case BAG:
-                return new GuiBag(container, player.inventory, BAG_INVENTORY_BACKGROUND);
+                return new GuiContainerTFC(container, player.inventory, BAG_INVENTORY_BACKGROUND);
             case PINEAPPLE_LEATHER:
                 return new GuiKnappingTFCF(container, player, KnappingTypes.PINEAPPLE_LEATHER, PINEAPPLE_LEATHER_TEXTURE);
             case BURLAP_CLOTH:
@@ -167,8 +169,6 @@ public class GuiHandler implements IGuiHandler {
                     return new GuiChestTFC((ContainerChestTFC) container, player.inventory);
                 }
                 return null;
-            case CONDENSER:
-                return new GuiCondenser(container, player.inventory, Helpers.getTE(world, pos, TECondenser.class), world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
             default:
                 return null;
         }
@@ -194,7 +194,6 @@ public class GuiHandler implements IGuiHandler {
         CHEST,
         URN,
         CRATE,
-        CONDENSER,
         NULL;
 
         private static final Type[] values = values();

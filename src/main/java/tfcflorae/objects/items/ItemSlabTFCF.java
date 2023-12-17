@@ -1,19 +1,16 @@
 package tfcflorae.objects.items;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.item.ItemSlab;
-import net.minecraft.item.ItemStack;
-
 import mcp.MethodsReturnNonnullByDefault;
-
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-
+import net.minecraft.item.ItemSlab;
+import net.minecraft.item.ItemStack;
 import tfcflorae.objects.blocks.blocktype.BlockSlabTFCF;
 import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitSlab;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

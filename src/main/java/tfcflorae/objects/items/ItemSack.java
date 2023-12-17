@@ -1,72 +1,32 @@
 package tfcflorae.objects.items;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.client.resources.I18n;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.FluidTankPropertiesWrapper;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidTankProperties;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.ISmallVesselHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.network.PacketSimpleMessage;
-import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.objects.items.ItemTFC;
-import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ClickType;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.*;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import tfcflorae.client.GuiHandler;
 import tfcflorae.util.OreDictionaryHelper;
 
-import static tfcflorae.TFCFlorae.MODID;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ItemSack extends ItemTFCF {
@@ -121,7 +81,7 @@ public class ItemSack extends ItemTFCF {
     @Nonnull
     @Override
     public Size getSize(ItemStack stack) {
-        return Size.HUGE; // Can't be stored in itself
+        return Size.NORMAL; // Can't be stored in itself
     }
 
     @Nonnull
@@ -194,7 +154,7 @@ public class ItemSack extends ItemTFCF {
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
             IItemSize size = CapabilityItemSize.getIItemSize(stack);
             if (size != null) {
-                return size.getSize(stack).isSmallerThan(Size.HUGE);
+                return size.getSize(stack).isSmallerThan(Size.NORMAL);
             }
             return false;
         }
@@ -202,9 +162,10 @@ public class ItemSack extends ItemTFCF {
         @Override
         public NBTTagCompound serializeNBT() {
             NBTTagCompound nbt = new NBTTagCompound();
-
-            // Save item data
-            nbt.setTag("items", super.serializeNBT());
+            {
+                // Save item data
+                nbt.setTag("items", super.serializeNBT());
+            }
             return nbt;
         }
 

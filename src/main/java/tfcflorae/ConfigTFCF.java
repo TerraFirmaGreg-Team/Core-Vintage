@@ -6,8 +6,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import net.dries007.tfc.TerraFirmaCraft;
-
 import static tfcflorae.TFCFlorae.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID)
@@ -257,41 +255,6 @@ public class ConfigTFCF {
             @Config.LangKey("config." + MODID + ".general.world.coarseHumusRarity")
             public int coarseHumusRarity = 15;
 
-            @Config.Comment("The rarity for rooted dirt pits to occur. On average 1 / N chunks will have a rooted dirt deposit, if the chunk in question is valid for rooted dirt to spawn.")
-            @Config.RangeInt(min = 1)
-            @Config.LangKey("config." + MODID + ".general.world.rootedDirtRarity")
-            public int rootedDirtRarity = 10;
-
-            @Config.Comment("The rarity for rooted loamy sand pits to occur. On average 1 / N chunks will have a rooted loamy sand deposit, if the chunk in question is valid for rooted loamy sand to spawn.")
-            @Config.RangeInt(min = 1)
-            @Config.LangKey("config." + MODID + ".general.world.rootedLoamySandRarity")
-            public int rootedLoamySandRarity = 10;
-
-            @Config.Comment("The rarity for rooted sandy loam pits to occur. On average 1 / N chunks will have a rooted sandy loam deposit, if the chunk in question is valid for rooted sandy loam to spawn.")
-            @Config.RangeInt(min = 1)
-            @Config.LangKey("config." + MODID + ".general.world.rootedSandyLoamRarity")
-            public int rootedSandyLoamRarity = 10;
-
-            @Config.Comment("The rarity for rooted loam pits to occur. On average 1 / N chunks will have a rooted loam deposit, if the chunk in question is valid for rooted loam to spawn.")
-            @Config.RangeInt(min = 1)
-            @Config.LangKey("config." + MODID + ".general.world.rootedLoamRarity")
-            public int rootedLoamRarity = 10;
-
-            @Config.Comment("The rarity for rooted silt loam pits to occur. On average 1 / N chunks will have a rooted silt loam deposit, if the chunk in question is valid for rooted silt loam to spawn.")
-            @Config.RangeInt(min = 1)
-            @Config.LangKey("config." + MODID + ".general.world.rootedSiltLoamRarity")
-            public int rootedSiltLoamRarity = 10;
-
-            @Config.Comment("The rarity for rooted silt pits to occur. On average 1 / N chunks will have a rooted silt deposit, if the chunk in question is valid for rooted silt to spawn.")
-            @Config.RangeInt(min = 1)
-            @Config.LangKey("config." + MODID + ".general.world.rootedSiltRarity")
-            public int rootedSiltRarity = 10;
-
-            @Config.Comment("The rarity for rooted humus pits to occur. On average 1 / N chunks will have a rooted humus deposit, if the chunk in question is valid for rooted humus to spawn.")
-            @Config.RangeInt(min = 1)
-            @Config.LangKey("config." + MODID + ".general.world.rootedHumusRarity")
-            public int rootedHumusRarity = 10;
-
             @Config.Comment("The number of attempts per chunk to spawn bones.")
             @Config.RangeInt(min = 1)
             @Config.LangKey("config." + MODID + ".general.world.groundcoverBonesFrequency")
@@ -412,11 +375,6 @@ public class ConfigTFCF {
             @Config.LangKey("config." + MODID + ".general.world.creepingUndergroundCount")
             public float creepingUndergroundCount = 5f;
 
-            @Config.Comment("The underground spore blossom plant generation frequency. Higher value equals higher frequency.")
-            @Config.RangeDouble(min = 0)
-            @Config.LangKey("config." + MODID + ".general.world.sporeBlossomUndergroundCount")
-            public float sporeBlossomUndergroundCount = 2f;
-
             @Config.Comment("The rarity for bamboo trees to generate. On average 1 / N chunks will have a bamboo tree, if the chunk in question is valid for bamboo to generate.")
             @Config.RangeInt(min = 1)
             @Config.LangKey("config." + MODID + ".general.world.bambooRarity")
@@ -534,10 +492,6 @@ public class ConfigTFCF {
             @Config.Comment("Enable coarse soil blocks?")
             @Config.LangKey("config." + MODID + ".general.world.enableAllCoarse")
             public boolean enableAllCoarse = true;
-
-            @Config.Comment("Enable rooted soil blocks?")
-            @Config.LangKey("config." + MODID + ".general.world.enableAllRooted")
-            public boolean enableAllRooted = true;
 
             @Config.Comment("Enable podzol blocks?")
             @Config.LangKey("config." + MODID + ".general.world.enableAllPodzol")

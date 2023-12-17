@@ -1,9 +1,11 @@
 package tfcflorae.objects.te;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.recipes.LoomRecipe;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.objects.te.TEInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,15 +14,11 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.api.recipes.LoomRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.te.TEInventory;
-
 import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitLoom;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class TEFruitLoom extends TEInventory implements ITickable {

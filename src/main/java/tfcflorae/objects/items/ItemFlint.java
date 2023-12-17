@@ -1,7 +1,8 @@
 package tfcflorae.objects.items;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -9,14 +10,10 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.items.ItemTFC;
-
 import tfcflorae.client.GuiHandler;
 import tfcflorae.util.OreDictionaryHelper;
+
+import javax.annotation.Nonnull;
 
 public class ItemFlint extends ItemTFCF implements IItemSize {
     private final Size size;

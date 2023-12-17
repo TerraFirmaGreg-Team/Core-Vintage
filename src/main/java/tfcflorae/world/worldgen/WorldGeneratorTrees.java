@@ -56,11 +56,6 @@ public class WorldGeneratorTrees implements IWorldGenerator {
         trees.removeIf(t -> !t.hasBushes());
 
         // Dense foliage chaparral/shrubland forests in dry & sparsely populated mountain regions
-        if ((b == BiomesTFC.CRAG || b == BiomesTFC.MOUNTAINS || b == BiomesTFC.MOUNTAINS_EDGE)) {
-            genBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.3f, 60f + gauss, 200f + gauss, 8 + random.nextInt(20), trees);
-        }
-
-        // Dense foliage chaparral/shrubland forests in dry & sparsely populated mountain regions
         // Similarly to Mediterranean and Californian areas 
         if ((b == BiomesTFC.MOUNTAINS || b == BiomesTFC.MOUNTAINS_EDGE || b == BiomesTFC.HIGH_HILLS || b == BiomesTFC.HIGH_HILLS_EDGE) && (avgTemperature >= 4 + gauss)) {
             genBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.3f, 60f + gauss, 200f + gauss, 4 + random.nextInt(10), trees);
@@ -123,7 +118,7 @@ public class WorldGeneratorTrees implements IWorldGenerator {
                 final int z = (chunkZ << 4) + random.nextInt(16) + 8;
                 BlockPos blockPos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
                 IBlockState down = world.getBlockState(blockPos.down());
-                Biome b1 = world.getBiome(blockPos);
+                final Biome b1 = world.getBiome(blockPos);
                 //BlockPos blockPos = world.getHeight(chunkPos.add(random.nextInt(16) + 8, (random.nextInt(7) - random.nextInt(7)) * -1, random.nextInt(16) + 8));
 
                 if ((BlocksTFC.isGround(down) || BlocksTFCF.isGround(down) || world.getBlockState(blockPos).getBlock() == ChunkGenTFC.SALT_WATER.getBlock()) && b1 == BiomesTFC.MANGROVE) {

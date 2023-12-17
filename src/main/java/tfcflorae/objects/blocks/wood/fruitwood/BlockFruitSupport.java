@@ -1,10 +1,6 @@
 package tfcflorae.objects.blocks.wood.fruitwood;
 
-import java.util.*;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.ConfigTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,10 +21,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import net.dries007.tfc.ConfigTFC;
-
 import tfcflorae.util.OreDictionaryHelper;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @ParametersAreNonnullByDefault
 public class BlockFruitSupport extends Block {

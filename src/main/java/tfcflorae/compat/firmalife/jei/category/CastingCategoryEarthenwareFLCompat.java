@@ -1,15 +1,12 @@
 package tfcflorae.compat.firmalife.jei.category;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
-
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
 import tfcflorae.compat.firmalife.jei.wrappers.CastingRecipeWrapperEarthenwareFL;
 
 public class CastingCategoryEarthenwareFLCompat extends BaseRecipeCategory<CastingRecipeWrapperEarthenwareFL> {

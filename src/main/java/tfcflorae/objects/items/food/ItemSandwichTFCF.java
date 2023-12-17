@@ -1,16 +1,13 @@
 package tfcflorae.objects.items.food;
 
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.objects.items.food.ItemSandwich;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.objects.items.food.ItemSandwich;
-
-import tfcflorae.objects.items.food.ItemFoodTFCF;
 import tfcflorae.util.OreDictionaryHelper;
+
+import javax.annotation.Nullable;
 
 public class ItemSandwichTFCF extends ItemFoodTFCF {
     private final FoodData data;

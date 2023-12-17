@@ -1,10 +1,11 @@
 package tfcflorae.objects.items.rock;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.types.RockCategory;
+import net.dries007.tfc.api.util.IRockObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -13,16 +14,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.RockCategory;
-import net.dries007.tfc.api.util.IRockObject;
-
 import tfcflorae.client.GuiHandler;
 import tfcflorae.objects.items.ItemTFCF;
 import tfcflorae.util.OreDictionaryHelper;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
 
 import static tfcflorae.TFCFlorae.MODID;
 

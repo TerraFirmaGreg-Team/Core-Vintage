@@ -73,7 +73,7 @@ dependencies {
 
         //TFC
         compileOnly rfg.deobf("curse.maven:tfc-pams-harvestcraft-compatibility-mod-452032:3257786")
-        implementation rfg.deobf("curse.maven:tfc-elementia-389225:3574322")
+        compileOnly rfg.deobf("curse.maven:tfc-elementia-389225:3574322")
     }
 
     // GregTech dependencies

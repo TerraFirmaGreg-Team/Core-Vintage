@@ -1,9 +1,14 @@
 package tfcflorae.compat.firmalife.ceramics;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.capability.IMoldHandler;
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.objects.items.ceramics.ItemPottery;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,15 +24,9 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.items.ceramics.ItemPottery;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemStonewareMalletMoldFL extends ItemPottery {
     private final String toolName;

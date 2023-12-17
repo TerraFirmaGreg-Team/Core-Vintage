@@ -1,7 +1,7 @@
 package tfcflorae.objects.blocks.wood.bamboo;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.items.ItemMisc;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -18,14 +18,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.items.ItemMisc;
-
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import static tfcflorae.api.stateproperty.StatePropertiesTFCF.*;
+import javax.annotation.Nonnull;
+
+import static tfcflorae.api.stateproperty.StatePropertiesTFCF.CONNECTED;
+import static tfcflorae.api.stateproperty.StatePropertiesTFCF.GROWN;
 
 public class BlockBambooLog extends Block {
     public static final AxisAlignedBB SMALL_LOG = new AxisAlignedBB(0.3, 0, 0.3, 0.7, 1, 0.7);

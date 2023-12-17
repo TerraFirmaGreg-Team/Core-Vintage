@@ -1,11 +1,11 @@
-package tfcflorae.objects.entity;
-
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+package tfcflorae.objects.blocks.entity;
 
 import com.eerussianguy.firmalife.init.FruitTreeFL;
 import com.eerussianguy.firmalife.init.PlantsFL;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.util.agriculture.FruitTree;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,18 +18,13 @@ import net.minecraft.network.play.client.CPacketSteerBoat;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import mcp.MethodsReturnNonnullByDefault;
-
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.util.agriculture.FruitTree;
-
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.items.ItemBoatTFCF;
 import tfcflorae.types.TreesTFCF;
-import tfcflorae.util.agriculture.SeasonalTrees;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

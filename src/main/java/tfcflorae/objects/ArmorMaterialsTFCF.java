@@ -1,13 +1,12 @@
 package tfcflorae.objects;
 
-import javax.annotation.Nonnull;
-
+import net.dries007.tfc.api.types.IArmorMaterialTFC;
+import net.dries007.tfc.objects.ArmorMaterialTFC;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
-import net.dries007.tfc.api.types.IArmorMaterialTFC;
-import net.dries007.tfc.objects.ArmorMaterialTFC;
+import javax.annotation.Nonnull;
 
 import static tfcflorae.TFCFlorae.MODID;
 

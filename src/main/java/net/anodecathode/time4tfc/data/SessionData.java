@@ -1,15 +1,13 @@
 package net.anodecathode.time4tfc.data;
 
-import net.minecraftforge.common.config.Configuration;
-
 import io.netty.buffer.ByteBuf;
 import net.anodecathode.time4tfc.time4tfc;
+import net.minecraftforge.common.config.Configuration;
 
 /**
  * @author Anodecathode, dmillerw
  */
-public class SessionData
-{
+public class SessionData {
 
     public static boolean modEnabled = true;
 
@@ -34,8 +32,7 @@ public class SessionData
     public static int November;
     public static int December;
 
-    public static void writeToBuffer(ByteBuf buffer)
-    {
+    public static void writeToBuffer(ByteBuf buffer) {
         buffer.writeInt(dayDuration);
         buffer.writeInt(nightDuration);
         buffer.writeBoolean(staticMoon);
@@ -43,8 +40,7 @@ public class SessionData
         buffer.writeBoolean(tfcSeasons);
     }
 
-    public static void readFromBuffer(ByteBuf buffer)
-    {
+    public static void readFromBuffer(ByteBuf buffer) {
         dayDuration = buffer.readInt();
         nightDuration = buffer.readInt();
         staticMoon = buffer.readBoolean();
@@ -52,8 +48,7 @@ public class SessionData
         tfcSeasons = buffer.readBoolean();
     }
 
-    public static void loadFromConfiguration(Configuration configuration)
-    {
+    public static void loadFromConfiguration(Configuration configuration) {
         modEnabled = true;
         dayDuration = configuration.get("general", "dayDuration", 12000, "Constant duration for each Minecraft day").getInt();
         nightDuration = configuration.get("general", "nightDuration", 12000, "Constant duration for each Minecraft night").getInt();
@@ -72,38 +67,30 @@ public class SessionData
         October = Math.min(configuration.get("MonthLength", "10.October,", 14400, "Daylight length in ticks for October. Cannot be greater than 18000").getInt(), 18000);
         November = Math.min(configuration.get("MonthLength", "11.November,", 13200, "Daylight length in ticks for November. Cannot be greater than 18000").getInt(), 18000);
         December = Math.min(configuration.get("MonthLength", "12.December,", 12000, "Daylight length in ticks for December. Cannot be greater than 18000").getInt(), 18000);
-        if (dayDuration <= 0)
-        {
+        if (dayDuration <= 0) {
             dayDuration = 12000;
         }
 
-        if (nightDuration <= 0)
-        {
+        if (nightDuration <= 0) {
             nightDuration = 12000;
         }
 
-        if (staticAngle < -1)
-        {
+        if (staticAngle < -1) {
             staticAngle = -1;
-        }
-        else if (staticAngle > 180)
-        {
+        } else if (staticAngle > 180) {
             staticAngle = 180;
         }
 
-        if (configuration.hasChanged())
-        {
+        if (configuration.hasChanged()) {
             configuration.save();
         }
     }
 
-    public static void setConfigurationProperty(String category, String key, int value)
-    {
+    public static void setConfigurationProperty(String category, String key, int value) {
         time4tfc.configuration.getCategory(category).get(key).setValue(value);
     }
 
-    public static void setConfigurationProperty(String category, String key, boolean value)
-    {
+    public static void setConfigurationProperty(String category, String key, boolean value) {
         time4tfc.configuration.getCategory(category).get(key).setValue(value);
     }
 }

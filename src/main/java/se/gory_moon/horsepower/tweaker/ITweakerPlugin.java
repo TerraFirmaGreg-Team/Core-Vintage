@@ -1,8 +1,7 @@
 package se.gory_moon.horsepower.tweaker;
 
 
-public interface ITweakerPlugin
-{
+public interface ITweakerPlugin {
 
     void applyTweaker();
 

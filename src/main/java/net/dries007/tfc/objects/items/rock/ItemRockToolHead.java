@@ -24,6 +24,7 @@ public class ItemRockToolHead extends ItemTFC implements IRockObject {
     private static final EnumMap<Rock.ToolType, Map<RockCategory, ItemRockToolHead>> TABLE = new EnumMap<>(Rock.ToolType.class);
     private final RockCategory category;
     private final Rock.ToolType type;
+
     public ItemRockToolHead(RockCategory category, Rock.ToolType type) {
         this.type = type;
         this.category = category;

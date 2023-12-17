@@ -1,11 +1,5 @@
 package se.gory_moon.horsepower.jei;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.oredict.OreDictionary;
-
 import mezz.jei.api.*;
 import mezz.jei.api.gui.ICraftingGridHelper;
 import mezz.jei.api.ingredients.IIngredientRegistry;
@@ -13,6 +7,11 @@ import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.oredict.OreDictionary;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
 import se.gory_moon.horsepower.blocks.ModBlocks;
@@ -30,8 +29,7 @@ import se.gory_moon.horsepower.jei.press.PressRecipeWrapper;
 import se.gory_moon.horsepower.recipes.*;
 
 @JEIPlugin
-public class HorsePowerPlugin implements IModPlugin
-{
+public class HorsePowerPlugin implements IModPlugin {
     public static final String HAND_GRINDING = "horsepower.hand_grinding";
     public static final String GRINDING = "horsepower.grinding";
     public static final String MANUAL_CHOPPING = "horsepower.manual_chopping";
@@ -46,13 +44,11 @@ public class HorsePowerPlugin implements IModPlugin
     public static IIngredientRegistry ingredientRegistry;
 
     @Override
-    public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry)
-    {
+    public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
         subtypeRegistry.registerSubtypeInterpreter(Item.getItemFromBlock(ModBlocks.BLOCK_CHOPPER), itemStack ->
         {
             NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
-            if (itemStack.getMetadata() == OreDictionary.WILDCARD_VALUE || nbtTagCompound == null || nbtTagCompound.isEmpty())
-            {
+            if (itemStack.getMetadata() == OreDictionary.WILDCARD_VALUE || nbtTagCompound == null || nbtTagCompound.isEmpty()) {
                 return null;
             }
             return nbtTagCompound.toString();
@@ -60,8 +56,7 @@ public class HorsePowerPlugin implements IModPlugin
         subtypeRegistry.registerSubtypeInterpreter(Item.getItemFromBlock(ModBlocks.BLOCK_MANUAL_CHOPPER), itemStack ->
         {
             NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
-            if (itemStack.getMetadata() == OreDictionary.WILDCARD_VALUE || nbtTagCompound == null || nbtTagCompound.isEmpty())
-            {
+            if (itemStack.getMetadata() == OreDictionary.WILDCARD_VALUE || nbtTagCompound == null || nbtTagCompound.isEmpty()) {
                 return null;
             }
             return nbtTagCompound.toString();
@@ -69,14 +64,12 @@ public class HorsePowerPlugin implements IModPlugin
     }
 
     @Override
-    public void registerIngredients(IModIngredientRegistration registry)
-    {
+    public void registerIngredients(IModIngredientRegistration registry) {
 
     }
 
     @Override
-    public void registerCategories(IRecipeCategoryRegistration registry)
-    {
+    public void registerCategories(IRecipeCategoryRegistration registry) {
         if (Configs.recipes.useSeperateGrindstoneRecipes)
             registry.addRecipeCategories(new HorsePowerGrindingCategory(registry.getJeiHelpers().getGuiHelper(), true));
         registry.addRecipeCategories(new HorsePowerGrindingCategory(registry.getJeiHelpers().getGuiHelper(), false));
@@ -89,21 +82,18 @@ public class HorsePowerPlugin implements IModPlugin
     }
 
     @Override
-    public void register(IModRegistry registry)
-    {
+    public void register(IModRegistry registry) {
         ingredientRegistry = registry.getIngredientRegistry();
         jeiHelpers = registry.getJeiHelpers();
         guiHelper = jeiHelpers.getGuiHelper();
         craftingGridHelper = guiHelper.createCraftingGridHelper(1, 0);
 
-        if (Configs.recipes.useSeperateGrindstoneRecipes)
-        {
+        if (Configs.recipes.useSeperateGrindstoneRecipes) {
             registry.handleRecipes(HandGrindstoneRecipe.class, GrindstoneRecipeWrapper::new, HAND_GRINDING);
             registry.addRecipes(GrindingRecipeMaker.getGrindstoneRecipes(jeiHelpers, true), HAND_GRINDING);
         }
 
-        if (Configs.general.enableHandChoppingBlock)
-        {
+        if (Configs.general.enableHandChoppingBlock) {
             ManualChoppingRecipeWrapper.setAxes();
             registry.handleRecipes(ChoppingBlockRecipe.class, ManualChoppingRecipeWrapper::new, MANUAL_CHOPPING);
             if (Configs.recipes.useSeperateChoppingRecipes)
@@ -130,8 +120,7 @@ public class HorsePowerPlugin implements IModPlugin
             registry.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_HAND_GRINDSTONE), HAND_GRINDING);
         else
             registry.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_HAND_GRINDSTONE), GRINDING);
-        if (Configs.general.enableHandChoppingBlock)
-        {
+        if (Configs.general.enableHandChoppingBlock) {
             ItemStack itemStackManualChopper = BlockHPChoppingBase.createItemStack(ModBlocks.BLOCK_MANUAL_CHOPPER, 1, new ItemStack(Item.getItemFromBlock(Blocks.LOG)));
             registry.addRecipeCatalyst(itemStackManualChopper, MANUAL_CHOPPING);
         }
@@ -146,8 +135,7 @@ public class HorsePowerPlugin implements IModPlugin
     }
 
     @Override
-    public void onRuntimeAvailable(IJeiRuntime jeiRuntime)
-    {
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
         recipeRegistry = jeiRuntime.getRecipeRegistry();
     }
 }

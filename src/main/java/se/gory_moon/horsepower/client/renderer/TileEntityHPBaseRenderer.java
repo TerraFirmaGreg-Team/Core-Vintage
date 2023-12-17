@@ -1,8 +1,5 @@
 package se.gory_moon.horsepower.client.renderer;
 
-import java.util.Arrays;
-
-import org.lwjgl.opengl.GL11;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -27,41 +24,37 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-
+import org.lwjgl.opengl.GL11;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockFiller;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
 import se.gory_moon.horsepower.util.Localization;
 
-public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> extends TileEntitySpecialRenderer<T>
-{
+import java.util.Arrays;
+
+public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> extends TileEntitySpecialRenderer<T> {
     public static ITextComponent LEAD_LOOKUP = new TextComponentTranslation(Localization.INFO.ITEM_REVEAL.key()).setStyle(new Style().setColor(TextFormatting.RED));
     private static TextureAtlasSprite[] destroyBlockIcons = new TextureAtlasSprite[10];
 
-    public static TextureAtlasSprite getDestroyBlockIcon(int destroyState)
-    {
-        if (destroyBlockIcons[destroyState] == null)
-        {
+    public static TextureAtlasSprite getDestroyBlockIcon(int destroyState) {
+        if (destroyBlockIcons[destroyState] == null) {
             destroyBlockIcons = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, Minecraft.getMinecraft().renderGlobal, "destroyBlockIcons", "field_94141_F");
         }
         return destroyBlockIcons[destroyState];
     }
 
-    public static void clearDestroyStageicons()
-    {
+    public static void clearDestroyStageicons() {
         Arrays.stream(destroyBlockIcons).forEach(textureAtlasSprite -> textureAtlasSprite = null);
     }
 
-    public void drawString(TileEntityHPBase te, String str, double x, double y, double z)
-    {
+    public void drawString(TileEntityHPBase te, String str, double x, double y, double z) {
         if (!canShowAmount(te))
             return;
         setLightmapDisabled(true);
         Entity entity = this.rendererDispatcher.entity;
         double d0 = te.getDistanceSq(entity.posX, entity.posY, entity.posZ);
 
-        if (d0 <= (double) (14 * 14))
-        {
+        if (d0 <= (double) (14 * 14)) {
             float f = this.rendererDispatcher.entityYaw;
             float f1 = this.rendererDispatcher.entityPitch;
             FontRenderer fontRenderer = getFontRenderer();
@@ -94,25 +87,21 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
         setLightmapDisabled(false);
     }
 
-    public boolean canShowAmount(TileEntityHPBase te)
-    {
+    public boolean canShowAmount(TileEntityHPBase te) {
         return Configs.client.renderItemAmount && (!Configs.client.mustLookAtBlock || this.rendererDispatcher.cameraHitResult != null && (te.getPos().equals(this.rendererDispatcher.cameraHitResult.getBlockPos()) || (te.getWorld().getBlockState(te.getPos().up()).getBlock() instanceof BlockFiller && te.getPos().up().equals(this.rendererDispatcher.cameraHitResult.getBlockPos()))));
     }
 
-    public void renderBlockDamage(IBlockState state, BlockPos pos, TextureAtlasSprite texture, IBlockAccess blockAccess)
-    {
+    public void renderBlockDamage(IBlockState state, BlockPos pos, TextureAtlasSprite texture, IBlockAccess blockAccess) {
         state = state.getActualState(blockAccess, pos);
         IBakedModel ibakedmodel = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(state);
         IBakedModel ibakedmodel1 = net.minecraftforge.client.ForgeHooksClient.getDamageModel(ibakedmodel, texture, state, blockAccess, pos);
         Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer().renderModel(blockAccess, ibakedmodel1, state, pos, Tessellator.getInstance().getBuffer(), true);
     }
 
-    public void drawDisplayText(TileEntity te, double x, double y, double z)
-    {
+    public void drawDisplayText(TileEntity te, double x, double y, double z) {
         ITextComponent itextcomponent = te.getDisplayName();
 
-        if (itextcomponent != null && this.rendererDispatcher.cameraHitResult != null && te.getPos().equals(this.rendererDispatcher.cameraHitResult.getBlockPos()))
-        {
+        if (itextcomponent != null && this.rendererDispatcher.cameraHitResult != null && te.getPos().equals(this.rendererDispatcher.cameraHitResult.getBlockPos())) {
             this.setLightmapDisabled(true);
             this.drawCustomNameplate(te, itextcomponent.getFormattedText(), x, y, z, 12, 0);
             this.drawCustomNameplate(te, LEAD_LOOKUP.getFormattedText(), x, y, z, 12, -0.25F);
@@ -120,18 +109,15 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
         }
     }
 
-    protected void renderStillItem(TileEntityHPBase te, ItemStack stack, float x, float y, float z, float scale)
-    {
+    protected void renderStillItem(TileEntityHPBase te, ItemStack stack, float x, float y, float z, float scale) {
         renderItem(te, stack, x, y, z, scale, false);
     }
 
-    protected void renderItem(TileEntityHPBase te, ItemStack stack, float x, float y, float z, float scale)
-    {
+    protected void renderItem(TileEntityHPBase te, ItemStack stack, float x, float y, float z, float scale) {
         renderItem(te, stack, x, y, z, scale, true);
     }
 
-    protected void renderItemWithFacing(World world, TileEntityHPBase tile, ItemStack stack, double ox, double oy, double oz, float x, float y, float z, float scale)
-    {
+    protected void renderItemWithFacing(World world, TileEntityHPBase tile, ItemStack stack, double ox, double oy, double oz, float x, float y, float z, float scale) {
         if (stack.isEmpty())
             return;
         GlStateManager.pushMatrix();
@@ -152,8 +138,7 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
         GlStateManager.popMatrix();
     }
 
-    protected void renderBaseModel(TileEntityHPBase te, Tessellator tessellator, BufferBuilder buffer, double x, double y, double z)
-    {
+    protected void renderBaseModel(TileEntityHPBase te, Tessellator tessellator, BufferBuilder buffer, double x, double y, double z) {
         // Most of this is blatantly copied from FastTESR
         setRenderSettings();
 
@@ -171,8 +156,7 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
         GlStateManager.popMatrix();
     }
 
-    protected void renderBaseModelWithFacing(TileEntityHPBase te, IBlockState blockState, Tessellator tessellator, BufferBuilder buffer, double x, double y, double z, int destroyStage)
-    {
+    protected void renderBaseModelWithFacing(TileEntityHPBase te, IBlockState blockState, Tessellator tessellator, BufferBuilder buffer, double x, double y, double z, int destroyStage) {
         // Most of this is blatantly copied from FastTESR
         preDestroyRender(destroyStage);
         setRenderSettings();
@@ -183,12 +167,10 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
         buffer.setTranslation(-te.getPos().getX(), -te.getPos().getY(), -te.getPos().getZ());
 
-        if (destroyStage >= 0)
-        {
+        if (destroyStage >= 0) {
             buffer.noColor();
             renderBlockDamage(blockState, te.getPos(), getDestroyBlockIcon(destroyStage), te.getWorld());
-        }
-        else
+        } else
             dispatcher.getBlockModelRenderer().renderModel(te.getWorld(), model, blockState, te.getPos(), buffer, false);
 
         buffer.setTranslation(0, 0, 0);
@@ -209,28 +191,22 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
         RenderHelper.enableStandardItemLighting();
     }
 
-    protected void setRenderSettings()
-    {
+    protected void setRenderSettings() {
         this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         RenderHelper.disableStandardItemLighting();
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GlStateManager.enableBlend();
         GlStateManager.disableCull();
 
-        if (Minecraft.isAmbientOcclusionEnabled())
-        {
+        if (Minecraft.isAmbientOcclusionEnabled()) {
             GlStateManager.shadeModel(GL11.GL_SMOOTH);
-        }
-        else
-        {
+        } else {
             GlStateManager.shadeModel(GL11.GL_FLAT);
         }
     }
 
-    protected void preDestroyRender(int destroyStage)
-    {
-        if (destroyStage >= 0)
-        {
+    protected void preDestroyRender(int destroyStage) {
+        if (destroyStage >= 0) {
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
             Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
@@ -246,10 +222,8 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
         }
     }
 
-    protected void postDestroyRender(int destroyStage)
-    {
-        if (destroyStage >= 0)
-        {
+    protected void postDestroyRender(int destroyStage) {
+        if (destroyStage >= 0) {
 
             GlStateManager.disableAlpha();
             GlStateManager.doPolygonOffset(0.0F, 0.0F);
@@ -263,10 +237,8 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
         }
     }
 
-    protected void renderLeash(EntityCreature entity, double ox, double oy, double oz, double x, double y, double z, float partialTicks, BlockPos pos)
-    {
-        if (entity != null)
-        {
+    protected void renderLeash(EntityCreature entity, double ox, double oy, double oz, double x, double y, double z, float partialTicks, BlockPos pos) {
+        if (entity != null) {
             oy = oy - 0.7D;
             double d2 = 0.0D;
             double d3 = 0.0D;
@@ -292,8 +264,7 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
         }
     }
 
-    protected void renderLeach(double x1, double y1, double z1, double ox, double oy, double oz, double x2, double y2, double z2)
-    {
+    protected void renderLeach(double x1, double y1, double z1, double ox, double oy, double oz, double x2, double y2, double z2) {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder vertexbuffer = tessellator.getBuffer();
 
@@ -307,14 +278,12 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
 
         vertexbuffer.begin(5, DefaultVertexFormats.POSITION_COLOR);
 
-        for (int j = 0; j <= 24; ++j)
-        {
+        for (int j = 0; j <= 24; ++j) {
             float f = 0.5F;
             float f1 = 0.4F;
             float f2 = 0.3F;
 
-            if (j % 2 == 0)
-            {
+            if (j % 2 == 0) {
                 f *= 0.7F;
                 f1 *= 0.7F;
                 f2 *= 0.7F;
@@ -328,14 +297,12 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
         tessellator.draw();
         vertexbuffer.begin(5, DefaultVertexFormats.POSITION_COLOR);
 
-        for (int k = 0; k <= 24; ++k)
-        {
+        for (int k = 0; k <= 24; ++k) {
             float f4 = 0.5F;
             float f5 = 0.4F;
             float f6 = 0.3F;
 
-            if (k % 2 == 0)
-            {
+            if (k % 2 == 0) {
                 f4 *= 0.7F;
                 f5 *= 0.7F;
                 f6 *= 0.7F;
@@ -352,24 +319,20 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
         GlStateManager.enableCull();
     }
 
-    protected void drawCustomNameplate(TileEntity te, String str, double x, double y, double z, int maxDistance, float offset)
-    {
+    protected void drawCustomNameplate(TileEntity te, String str, double x, double y, double z, int maxDistance, float offset) {
         Entity entity = this.rendererDispatcher.entity;
         double d0 = te.getDistanceSq(entity.posX, entity.posY, entity.posZ);
 
-        if (d0 <= (double) (maxDistance * maxDistance))
-        {
+        if (d0 <= (double) (maxDistance * maxDistance)) {
             float f = this.rendererDispatcher.entityYaw;
             float f1 = this.rendererDispatcher.entityPitch;
             EntityRenderer.drawNameplate(this.getFontRenderer(), str, (float) x + 0.5F, (float) y + 1.5F + offset, (float) z + 0.5F, 0, f, f1, false, false);
         }
     }
 
-    private void renderItem(TileEntityHPBase te, ItemStack stack, float x, float y, float z, float scale, boolean rotate)
-    {
+    private void renderItem(TileEntityHPBase te, ItemStack stack, float x, float y, float z, float scale, boolean rotate) {
         RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
-        if (stack != null)
-        {
+        if (stack != null) {
             GlStateManager.translate(x, y, z);
             EntityItem entityitem = new EntityItem(te.getWorld(), 0.0D, 0.0D, 0.0D, stack.copy());
             entityitem.hoverStart = 0.0F;
@@ -395,8 +358,7 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
     /**
      * Gets the value between start and end according to pct
      */
-    private double interpolateValue(double start, double end, double pct)
-    {
+    private double interpolateValue(double start, double end, double pct) {
         return start + (end - start) * pct;
     }
 }

@@ -37,6 +37,7 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
     public KnappingRecipeWrapper(KnappingRecipe recipe, IGuiHelper guiHelper) {
         this(recipe, guiHelper, getHighTexture(recipe.getType()), getLowTexture(recipe.getType()));
     }
+
     protected KnappingRecipeWrapper(KnappingRecipe recipe, IGuiHelper helper, @Nullable ResourceLocation highTexture, @Nullable ResourceLocation lowTexture) {
         this.recipe = recipe;
 

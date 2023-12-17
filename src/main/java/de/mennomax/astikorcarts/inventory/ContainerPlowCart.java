@@ -1,5 +1,7 @@
 package de.mennomax.astikorcarts.inventory;
 
+import de.mennomax.astikorcarts.entity.AbstractDrawn;
+import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -9,16 +11,11 @@ import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 
-import de.mennomax.astikorcarts.entity.AbstractDrawn;
-import net.dries007.tfc.objects.items.metal.ItemMetalTool;
-
-public class ContainerPlowCart extends Container
-{
+public class ContainerPlowCart extends Container {
     private final IInventory plowInventory;
     private final AbstractDrawn drawn;
 
-    public ContainerPlowCart(InventoryPlayer playerInventory, IInventory plowInventory, AbstractDrawn drawn, EntityPlayer player)
-    {
+    public ContainerPlowCart(InventoryPlayer playerInventory, IInventory plowInventory, AbstractDrawn drawn, EntityPlayer player) {
         this.plowInventory = plowInventory;
         this.drawn = drawn;
         plowInventory.openInventory(player);
@@ -27,47 +24,35 @@ public class ContainerPlowCart extends Container
         this.addSlotToContainer(new ContainerPlowCart.Tool(plowInventory, 2, 103, 24));
 
         int k;
-        for (k = 0; k < 3; ++k)
-        {
-            for (int j = 0; j < 9; ++j)
-            {
+        for (k = 0; k < 3; ++k) {
+            for (int j = 0; j < 9; ++j) {
                 this.addSlotToContainer(new Slot(playerInventory, j + k * 9 + 9, 8 + j * 18, 84 + k * 18));
             }
         }
 
-        for (k = 0; k < 9; ++k)
-        {
+        for (k = 0; k < 9; ++k) {
             this.addSlotToContainer(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
 
     }
 
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
-    {
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack())
-        {
+        if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
-            if (index < 3)
-            {
-                if (!this.mergeItemStack(itemstack1, 3, this.inventorySlots.size(), true))
-                {
+            if (index < 3) {
+                if (!this.mergeItemStack(itemstack1, 3, this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            }
-            else if (!this.mergeItemStack(itemstack1, 0, 3, false))
-            {
+            } else if (!this.mergeItemStack(itemstack1, 0, 3, false)) {
                 return ItemStack.EMPTY;
             }
 
-            if (itemstack1.isEmpty())
-            {
+            if (itemstack1.isEmpty()) {
                 slot.putStack(ItemStack.EMPTY);
-            }
-            else
-            {
+            } else {
                 slot.onSlotChanged();
             }
         }
@@ -75,31 +60,25 @@ public class ContainerPlowCart extends Container
         return itemstack;
     }
 
-    public void onContainerClosed(EntityPlayer playerIn)
-    {
+    public void onContainerClosed(EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
         this.plowInventory.closeInventory(playerIn);
     }
 
-    public boolean canInteractWith(EntityPlayer playerIn)
-    {
+    public boolean canInteractWith(EntityPlayer playerIn) {
         return this.plowInventory.isUsableByPlayer(playerIn) && this.drawn.isEntityAlive() && this.drawn.getDistance(playerIn) < 8.0F;
     }
 
-    static class Tool extends Slot
-    {
-        public Tool(IInventory inventory, int index, int x, int y)
-        {
+    static class Tool extends Slot {
+        public Tool(IInventory inventory, int index, int x, int y) {
             super(inventory, index, x, y);
         }
 
-        public boolean isItemValid(ItemStack stack)
-        {
+        public boolean isItemValid(ItemStack stack) {
             return stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemSpade || stack.getItem() instanceof ItemMetalTool;
         }
 
-        public int getSlotStackLimit()
-        {
+        public int getSlotStackLimit() {
             return 1;
         }
     }

@@ -1,10 +1,7 @@
 package net.sharkbark.cellars.init;
 
-import net.dries007.tfc.objects.blocks.BlockIceTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
 import net.sharkbark.cellars.blocks.*;
 
 import java.util.ArrayList;

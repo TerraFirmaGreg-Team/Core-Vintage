@@ -60,7 +60,7 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {FACING});
+        return new BlockStateContainer(this, new IProperty[]{FACING});
     }
 
     @Nonnull
@@ -69,7 +69,7 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
     }
 
     public int getMetaFromState(IBlockState state) {
-        return ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
+        return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex();
     }
 
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
@@ -91,8 +91,7 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
         if (block != Blocks.BARRIER) {
             BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP);
             return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down());
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -102,18 +101,18 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
             TileEntityGrindstone teGrindstone = (TileEntityGrindstone) Helpers.getTE(world, pos, TileEntityGrindstone.class);
             if (teGrindstone != null) {
                 ItemStack heldStack = playerIn.getHeldItem(hand);
-                IItemHandler inventory = (IItemHandler)teGrindstone.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing)null);
+                IItemHandler inventory = (IItemHandler) teGrindstone.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
                 if (inventory != null) {
 
                     int slot = inventory.getStackInSlot(TileEntityGrindstone.SLOT_GRINDSTONE).isEmpty() && inventory.getStackInSlot(TileEntityGrindstone.SLOT_INPUT).isEmpty() ? TileEntityGrindstone.SLOT_GRINDSTONE : TileEntityGrindstone.SLOT_INPUT;
 
                     if (slot == TileEntityGrindstone.SLOT_INPUT) {
-                        if(inventory.isItemValid(slot, heldStack)) {
+                        if (inventory.isItemValid(slot, heldStack)) {
                             playerIn.setHeldItem(EnumHand.MAIN_HAND, teGrindstone.insertOrSwapItem(slot, heldStack));
                             teGrindstone.setAndUpdateSlots(slot);
                             return true;
                         } else {
-                            if(!inventory.getStackInSlot(slot).isEmpty()) {
+                            if (!inventory.getStackInSlot(slot).isEmpty()) {
                                 ItemHandlerHelper.giveItemToPlayer(playerIn, inventory.extractItem(slot, inventory.getStackInSlot(slot).getCount(), false));
                                 return true;
                             }
@@ -133,7 +132,7 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
     }
 
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TileEntityGrindstone grindstone = (TileEntityGrindstone)Helpers.getTE(world, pos, TileEntityGrindstone.class);
+        TileEntityGrindstone grindstone = (TileEntityGrindstone) Helpers.getTE(world, pos, TileEntityGrindstone.class);
         if (grindstone != null) {
             grindstone.onBreakBlock(world, pos, state);
         }

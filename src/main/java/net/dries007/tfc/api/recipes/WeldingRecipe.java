@@ -35,6 +35,7 @@ public class WeldingRecipe extends IForgeRegistryEntry.Impl<WeldingRecipe> imple
     private final IIngredient<ItemStack> input2;
     private final ItemStack output;
     private final SmithingSkill.Type skillType;
+
     public WeldingRecipe(ResourceLocation name, IIngredient<ItemStack> input1, IIngredient<ItemStack> input2, ItemStack output, Metal.Tier minTier) {
         this(name, input1, input2, output, minTier, null);
     }

@@ -12,8 +12,7 @@ import static net.doubledoordev.oiisa.OversizedItemInStorageArea.MOD_ID;
 @Config(modid = MOD_ID, category = "All")
 @Mod.EventBusSubscriber(modid = MOD_ID)
 @Config.LangKey("oiisa.config.title")
-public class ModConfig
-{
+public class ModConfig {
     @Config.Name("Debug Options")
     @Config.Comment("Debug options.")
     public static final DebugOptions debugOptions = new DebugOptions();
@@ -30,25 +29,21 @@ public class ModConfig
     @Config.LangKey("oiisa.config.blocked.slots")
     @Config.Comment("DO NOT ENTER InventoryBasic SLOTS HERE! Full Class path names of slots that are excluded from ALL checks. TURN ON DEBUG TO GET THESE NAMES")
     public static String[] slotClassNames = new String[3];
+    @Config.LangKey("oiisa.config.blocked.items")
+    @Config.Comment("Items that are excluded from ALL checks. F3+H to get names.")
+    public static String[] ignoredItems = new String[1];
 
-    static
-    {
+    static {
         slotClassNames[0] = "net.minecraft.entity.player.InventoryPlayer";
         slotClassNames[1] = "net.minecraft.inventory.InventoryCrafting";
         slotClassNames[2] = "net.minecraft.inventory.InventoryCraftResult";
     }
 
-    @Config.LangKey("oiisa.config.blocked.items")
-    @Config.Comment("Items that are excluded from ALL checks. F3+H to get names.")
-    public static String[] ignoredItems = new String[1];
-
-    static
-    {
+    static {
         ignoredItems[0] = "minecraft:dirt";
     }
 
-    public static class DebugOptions
-    {
+    public static class DebugOptions {
         @Config.LangKey("oiisa.config.debug")
         @Config.Comment("Turns on/off ALL debugging.")
         public Boolean debug = false;
@@ -71,8 +66,7 @@ public class ModConfig
 
     }
 
-    public static class SizeLimitOptions
-    {
+    public static class SizeLimitOptions {
         @Config.LangKey("oiisa.config.size.message.eject")
         @Config.Comment("The message displayed in-game when items are ejected from the inventory.")
         public String sizeEjectMessage = "This trunk could not handle your junk!";
@@ -110,6 +104,12 @@ public class ModConfig
         @Config.LangKey("oiisa.config.size.inventories")
         @Config.Comment("Full Class path names of inventories that are ignored/checked (depends on sizeBlacklist) for oversize items. TURN ON DEBUG TO GET THESE NAMES")
         public String[] sizeContainers = new String[8];
+        @Config.LangKey("oiisa.config.size.inventoryarray")
+        @Config.Comment({"Full Class path names of inventories that are checked for size limits. TURN ON DEBUG TO GET THE NAMES",
+                "Size to start kicking items out of an inventory at. 0 = Tiny, 1 = Very Small, 2 = Small, 3 = Normal, 4 = Large 5 = Very Large, 6 = Huge",
+                "Ignored inventories WILL NOT get checked! Adding them here DOES NOT MAKE THEM BE CHECKED!"
+        })
+        public String[] sizeInventoryArray = new String[1];
 
         {
             //TFC containers
@@ -124,20 +124,12 @@ public class ModConfig
             sizeContainers[7] = "com.feed_the_beast.ftbutilities.command.InvSeeInventory";
         }
 
-        @Config.LangKey("oiisa.config.size.inventoryarray")
-        @Config.Comment({"Full Class path names of inventories that are checked for size limits. TURN ON DEBUG TO GET THE NAMES",
-                "Size to start kicking items out of an inventory at. 0 = Tiny, 1 = Very Small, 2 = Small, 3 = Normal, 4 = Large 5 = Very Large, 6 = Huge",
-                "Ignored inventories WILL NOT get checked! Adding them here DOES NOT MAKE THEM BE CHECKED!"
-        })
-        public String[] sizeInventoryArray = new String[1];
-
         {
             sizeInventoryArray[0] = "net.dries007.tfc.objects.container.ContainerChestTFC, 3";
         }
     }
 
-    public static class WeightLimitOptions
-    {
+    public static class WeightLimitOptions {
         @Config.LangKey("oiisa.config.weight.message.eject")
         @Config.Comment("The message displayed in-game when items are ejected from the inventory.")
         public String weightEjectMessage = "This trunk could not handle your junk!";
@@ -191,8 +183,7 @@ public class ModConfig
         }
     }
 
-    public static class OverheatOptions
-    {
+    public static class OverheatOptions {
         @Config.LangKey("oiisa.config.heat.makefire")
         @Config.Comment({"Blocks that will burn up from a fire will be consumed by fire if an overheated item is placed inside.",
                 "True = Fire. False = No Fire."
@@ -249,13 +240,10 @@ public class ModConfig
     }
 
     @Mod.EventBusSubscriber
-    public static class SyncConfig
-    {
+    public static class SyncConfig {
         @SubscribeEvent
-        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
-        {
-            if (event.getModID().equals(MOD_ID))
-            {
+        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+            if (event.getModID().equals(MOD_ID)) {
                 ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
                 INSTANCE.splitConfig();
             }

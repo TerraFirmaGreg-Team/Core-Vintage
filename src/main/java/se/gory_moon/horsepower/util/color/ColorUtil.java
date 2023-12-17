@@ -7,16 +7,18 @@ import java.awt.*;
  *
  * @author Mezz
  */
-public final class ColorUtil
-{
+public final class ColorUtil {
+    private ColorUtil() {
+
+    }
+
     /**
      * http://www.compuphase.com/cmetric.htm
      * http://stackoverflow.com/a/6334454
      * Returns 0 for equal colors, nonzero for colors that look different.
      * The return value is farther from 0 the more different the colors look.
      */
-    public static double fastPerceptualColorDistanceSquared(int[] color1, int[] color2)
-    {
+    public static double fastPerceptualColorDistanceSquared(int[] color1, int[] color2) {
         final int red1 = color1[0];
         final int red2 = color2[0];
         final int redMean = (red1 + red2) >> 1;
@@ -34,8 +36,7 @@ public final class ColorUtil
      * <p>
      * Weighs the distance from grey more heavily, to avoid matching grey and colorful colors together.
      */
-    public static double slowPerceptualColorDistanceSquared(int[] color1, int[] color2)
-    {
+    public static double slowPerceptualColorDistanceSquared(int[] color1, int[] color2) {
         final double colorDistance = fastPerceptualColorDistanceSquared(color1, color2);
 
         final double grey1 = (color1[0] + color1[1] + color1[2]) / 3;
@@ -47,15 +48,9 @@ public final class ColorUtil
         return colorDistance + (greyDistance * greyDistance / 10.0);
     }
 
-    public static double slowPerceptualColorDistanceSquared(Color color1, Color color2)
-    {
+    public static double slowPerceptualColorDistanceSquared(Color color1, Color color2) {
         final int[] colorInts1 = {color1.getRed(), color1.getGreen(), color1.getBlue()};
         final int[] colorInts2 = {color2.getRed(), color2.getGreen(), color2.getBlue()};
         return slowPerceptualColorDistanceSquared(colorInts1, colorInts2);
-    }
-
-    private ColorUtil()
-    {
-
     }
 }

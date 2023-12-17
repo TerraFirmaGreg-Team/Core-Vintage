@@ -56,6 +56,7 @@ public class BlockJoshuaTreeFlower extends Block {
     private static final Map<Tree, BlockJoshuaTreeFlower> MAP = new HashMap<>();
     public final SeasonalTrees fruitTree;
     private final Tree wood;
+
     public BlockJoshuaTreeFlower(Tree wood, SeasonalTrees tree) {
         super(Material.LEAVES);
         this.wood = wood;

@@ -10,8 +10,8 @@ import javax.annotation.Nullable;
 
 public class SharpnessHandler implements ISharpness {
 
-    protected ItemStack container;
     public static final String SHARPNESS_NBT_KEY = "Sharpness";
+    protected ItemStack container;
 
     public SharpnessHandler(ItemStack container) {
         this.container = container;
@@ -27,7 +27,7 @@ public class SharpnessHandler implements ISharpness {
 
     public int getCharges() {
         NBTTagCompound tag = container.getTagCompound();
-        if(tag != null && tag.hasKey(SHARPNESS_NBT_KEY)) {
+        if (tag != null && tag.hasKey(SHARPNESS_NBT_KEY)) {
             return tag.getInteger(SHARPNESS_NBT_KEY);
         }
         return 0;
@@ -45,7 +45,7 @@ public class SharpnessHandler implements ISharpness {
     }
 
     public void removeCharge() {
-        if(getCharges() > 0) {
+        if (getCharges() > 0) {
             setCharges(getCharges() - 1);
         }
     }
@@ -58,6 +58,6 @@ public class SharpnessHandler implements ISharpness {
     @Nullable
     @Override
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilitySharpness.SHARPNESS_CAPABILITY ? (T)this : null;
+        return capability == CapabilitySharpness.SHARPNESS_CAPABILITY ? (T) this : null;
     }
 }

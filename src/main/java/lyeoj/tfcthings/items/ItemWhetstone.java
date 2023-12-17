@@ -74,10 +74,11 @@ public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOr
     public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.BOW;
     }
+
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if(handIn.equals(EnumHand.MAIN_HAND)) {
-            if(playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand().hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+        if (handIn.equals(EnumHand.MAIN_HAND)) {
+            if (playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand().hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
                 playerIn.setActiveHand(handIn);
                 return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
             }
@@ -88,23 +89,23 @@ public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOr
 
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
         if (entityLiving instanceof EntityPlayer) {
-            EntityPlayer playerIn = (EntityPlayer)entityLiving;
-            if(timeLeft < 985 && playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand().hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+            EntityPlayer playerIn = (EntityPlayer) entityLiving;
+            if (timeLeft < 985 && playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand().hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
                 ItemStack item = playerIn.getHeldItemOffhand();
                 ISharpness capability = TFCThingsEventHandler.getSharpnessCapability(item);
-                if(capability != null && capability.getCharges() < getMaxCharges()) {
-                    for(int i = 0; i < tier; i++) {
-                        if(capability.getCharges() >= getMaxCharges())
+                if (capability != null && capability.getCharges() < getMaxCharges()) {
+                    for (int i = 0; i < tier; i++) {
+                        if (capability.getCharges() >= getMaxCharges())
                             break;
                         capability.addCharge();
                     }
-                    if(Math.random() < 0.8) {
+                    if (Math.random() < 0.8) {
                         item.damageItem(1, entityLiving);
                     }
                     stack.damageItem(1, entityLiving);
                     playerIn.playSound(TFCThingsSoundEvents.WHETSTONE_SHARPEN, 1.0f, 1.0f);
                 } else {
-                    if(!worldIn.isRemote) {
+                    if (!worldIn.isRemote) {
                         playerIn.sendMessage(new TextComponentTranslation("tfcthings.tooltip.maximum_sharpness", new Object[0]));
                     }
                 }
@@ -113,7 +114,7 @@ public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOr
     }
 
     private int getMaxCharges() {
-        switch(tier) {
+        switch (tier) {
             case 2:
                 return 256;
             case 3:
@@ -137,10 +138,10 @@ public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOr
 
     @Override
     public int getSmeltAmount(ItemStack itemStack) {
-        if(tier > 1) {
+        if (tier > 1) {
             if (this.isDamageable() && itemStack.isItemDamaged()) {
-                double d = (double)(itemStack.getMaxDamage() - itemStack.getItemDamage()) / (double)itemStack.getMaxDamage() - 0.1D;
-                return d < 0.0D ? 0 : MathHelper.floor((double)200 * d);
+                double d = (double) (itemStack.getMaxDamage() - itemStack.getItemDamage()) / (double) itemStack.getMaxDamage() - 0.1D;
+                return d < 0.0D ? 0 : MathHelper.floor((double) 200 * d);
             } else {
                 return 200;
             }

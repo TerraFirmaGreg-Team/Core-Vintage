@@ -228,6 +228,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
         private final boolean hasMold;
         private final BiFunction<Metal, ItemType, Item> supplier;
         private final String[] pattern;
+
         ItemType(boolean toolItem, int armorSlot, int smeltAmount, @Nonnull BiFunction<Metal, ItemType, Item> supplier, boolean hasMold, String... moldPattern) {
             this.toolItem = toolItem;
             this.armorSlot = armorSlot;

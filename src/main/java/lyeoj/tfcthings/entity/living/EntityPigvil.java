@@ -64,24 +64,21 @@ public class EntityPigvil extends EntityCreature {
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if(source.equals(DamageSource.OUT_OF_WORLD)|| source.equals(DamageSource.LAVA) || source.equals(DamageSource.IN_FIRE) || source.equals((DamageSource.DROWN))) {
+        if (source.equals(DamageSource.OUT_OF_WORLD) || source.equals(DamageSource.LAVA) || source.equals(DamageSource.IN_FIRE) || source.equals((DamageSource.DROWN))) {
             return super.attackEntityFrom(source, amount);
         }
         return false;
     }
 
-    protected SoundEvent getAmbientSound()
-    {
+    protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_PIG_AMBIENT;
     }
 
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn)
-    {
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
         return SoundEvents.ENTITY_PIG_HURT;
     }
 
-    protected SoundEvent getDeathSound()
-    {
+    protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_PIG_DEATH;
     }
 
@@ -104,7 +101,7 @@ public class EntityPigvil extends EntityCreature {
     }
 
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
-        if(player.isSneaking()) {
+        if (player.isSneaking()) {
             return super.processInteract(player, hand);
         }
         int i = MathHelper.floor(this.posX);
@@ -122,7 +119,7 @@ public class EntityPigvil extends EntityCreature {
 
     public EnumFacing getAdjustedHorizontalFacing() {
         EnumFacing facing = this.getHorizontalFacing();
-        switch(facing) {
+        switch (facing) {
             case WEST:
                 return EnumFacing.SOUTH;
             case NORTH:
@@ -135,7 +132,7 @@ public class EntityPigvil extends EntityCreature {
     }
 
     public void onCollideWithPlayer(EntityPlayer playerIn) {
-        if(this.fallDistance > 3 && this.posY > playerIn.posY) {
+        if (this.fallDistance > 3 && this.posY > playerIn.posY) {
             playerIn.attackEntityFrom(TFCThingsDamageSources.PIGVIL, fallDistance * 3.0f);
         }
     }

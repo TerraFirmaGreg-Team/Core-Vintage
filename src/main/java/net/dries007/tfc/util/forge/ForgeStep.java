@@ -23,6 +23,7 @@ public enum ForgeStep {
     private static final ForgeStep[] VALUES = values();
     private final int stepAmount;
     private final int x, y, u, v;
+
     ForgeStep(int stepAmount, int x, int y, int u, int v) {
         this.stepAmount = stepAmount;
         this.x = x;

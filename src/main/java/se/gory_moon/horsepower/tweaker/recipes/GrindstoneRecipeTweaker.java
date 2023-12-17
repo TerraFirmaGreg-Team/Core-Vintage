@@ -26,27 +26,23 @@ import static crafttweaker.api.minecraft.CraftTweakerMC.getItemStacks;
 
 
 @ZenClass("mods.horsepower.Grindstone")
-public class GrindstoneRecipeTweaker
-{
+public class GrindstoneRecipeTweaker {
 
     @ZenMethod
-    public static void add(IIngredient input, IItemStack output, int time, @Optional boolean hand, @Optional IItemStack secondary, @Optional int secondaryChance)
-    {
+    public static void add(IIngredient input, IItemStack output, int time, @Optional boolean hand, @Optional IItemStack secondary, @Optional int secondaryChance) {
         AddGrindstoneRecipe recipe = new AddGrindstoneRecipe(input, output, secondary, secondaryChance, time, hand);
         TweakerPluginImpl.toAdd.add(recipe);
         TweakerPluginImpl.actions.add(recipe);
     }
 
     @ZenMethod
-    public static void remove(IIngredient output, @Optional boolean hand)
-    {
+    public static void remove(IIngredient output, @Optional boolean hand) {
         RemoveGrindstoneRecipe recipe = new RemoveGrindstoneRecipe(output, hand);
         TweakerPluginImpl.toRemove.add(recipe);
         TweakerPluginImpl.actions.add(recipe);
     }
 
-    private static class AddGrindstoneRecipe extends BaseHPAction
-    {
+    private static class AddGrindstoneRecipe extends BaseHPAction {
 
         private final IIngredient input;
         private final IItemStack output;
@@ -55,8 +51,7 @@ public class GrindstoneRecipeTweaker
         private final int time;
         private final boolean hand;
 
-        public AddGrindstoneRecipe(IIngredient input, IItemStack output2, IItemStack secondary, int secondaryChance, int time, boolean hand)
-        {
+        public AddGrindstoneRecipe(IIngredient input, IItemStack output2, IItemStack secondary, int secondaryChance, int time, boolean hand) {
             this.input = input;
             this.output = output2;
             this.secondary = secondary;
@@ -66,16 +61,13 @@ public class GrindstoneRecipeTweaker
         }
 
         @Override
-        public void apply()
-        {
-            if (input == null)
-            {
+        public void apply() {
+            if (input == null) {
                 CraftTweakerAPI.logError("Input item is null");
                 return;
             }
             List<IItemStack> inputs = input.getItems();
-            if (inputs == null)
-            {
+            if (inputs == null) {
                 HorsePowerMod.logger.error("Cannot turn " + input + " into a grinding recipe");
                 return;
             }
@@ -84,56 +76,47 @@ public class GrindstoneRecipeTweaker
             ItemStack output2 = getItemStack(output);
             ItemStack secondary2 = getItemStack(secondary);
 
-            for (ItemStack stack : items)
-            {
+            for (ItemStack stack : items) {
                 GrindstoneRecipe recipe = new GrindstoneRecipe(stack, output2, secondary2, secondary2.isEmpty() ? 0 : secondaryChance, time);
                 HPRecipes.instance().addGrindstoneRecipe(recipe, hand);
             }
         }
 
         @Override
-        public String describe()
-        {
+        public String describe() {
             return "Adding grindstone recipe for " + input;
         }
     }
 
-    private static class RemoveGrindstoneRecipe extends BaseHPAction
-    {
+    private static class RemoveGrindstoneRecipe extends BaseHPAction {
 
         private final IIngredient output;
         private final boolean hand;
 
-        public RemoveGrindstoneRecipe(IIngredient output, boolean hand)
-        {
+        public RemoveGrindstoneRecipe(IIngredient output, boolean hand) {
             this.output = output;
             this.hand = hand;
         }
 
         @Override
-        public void apply()
-        {
+        public void apply() {
             ArrayList<GrindstoneRecipe> toRemove = new ArrayList<>();
             Collection<GrindstoneRecipe> recipeList = hand && Configs.recipes.useSeperateGrindstoneRecipes ? HPRecipes.instance().getHandGrindstoneRecipes() : HPRecipes.instance().getGrindstoneRecipes();
 
-            for (GrindstoneRecipe recipe : recipeList)
-            {
-                if (OreDictionary.itemMatches(CraftTweakerMC.getItemStack(output), recipe.getOutput(), false))
-                {
+            for (GrindstoneRecipe recipe : recipeList) {
+                if (OreDictionary.itemMatches(CraftTweakerMC.getItemStack(output), recipe.getOutput(), false)) {
                     toRemove.add(recipe);
                 }
             }
 
 
-            for (int i = toRemove.size() - 1; i >= 0; --i)
-            {
+            for (int i = toRemove.size() - 1; i >= 0; --i) {
                 recipeList.remove(toRemove.get(i));
             }
         }
 
         @Override
-        public String describe()
-        {
+        public String describe() {
             return "Removing grindstone recipes for " + output;
         }
     }

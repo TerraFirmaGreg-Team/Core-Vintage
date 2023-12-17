@@ -6,8 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public interface IMachineSoundEffect
-{
+public interface IMachineSoundEffect {
     @SideOnly(Side.CLIENT)
     SoundEvent getSoundEvent();
 
@@ -21,17 +20,13 @@ public interface IMachineSoundEffect
     BlockPos getSoundPos();
 
     @SideOnly(Side.CLIENT)
-    default void update()
-    {
-        if (shouldPlay() && !isPlaying())
-        {
+    default void update() {
+        if (shouldPlay() && !isPlaying()) {
             setPlaying(true);
             MachineSound sound = new MachineSound(this);
             // Play sound on client side
             Minecraft.getMinecraft().getSoundHandler().playSound(sound);
-        }
-        else if (!shouldPlay())
-        {
+        } else if (!shouldPlay()) {
             setPlaying(false);
         }
     }

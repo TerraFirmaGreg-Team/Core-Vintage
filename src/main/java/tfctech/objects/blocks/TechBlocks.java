@@ -1,6 +1,8 @@
 package tfctech.objects.blocks;
 
 import com.google.common.collect.ImmutableList;
+import net.dries007.tfc.objects.blocks.BlockFluidTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,9 +14,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
-
-import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import tfctech.objects.blocks.devices.*;
 import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.itemblocks.ItemBlockFridge;
@@ -28,8 +27,7 @@ import static tfctech.TFCTech.MODID;
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID)
 @GameRegistry.ObjectHolder(MODID)
-public final class TechBlocks
-{
+public final class TechBlocks {
     public static final BlockElectricForge ELECTRIC_FORGE = getNull();
     public static final BlockInductionCrucible INDUCTION_CRUCIBLE = getNull();
     public static final BlockLatexExtractor LATEX_EXTRACTOR = getNull();
@@ -41,31 +39,26 @@ public final class TechBlocks
     private static ImmutableList<ItemBlock> allInventoryItemBlocks, allTEISRBlocks;
     private static ImmutableList<BlockFluidBase> allFluidBlocks;
 
-    public static ImmutableList<ItemBlock> getAllInventoryItemBlocks()
-    {
+    public static ImmutableList<ItemBlock> getAllInventoryItemBlocks() {
         return allInventoryItemBlocks;
     }
 
-    public static ImmutableList<ItemBlock> getAllTEISRBlocks()
-    {
+    public static ImmutableList<ItemBlock> getAllTEISRBlocks() {
         return allTEISRBlocks;
     }
 
-    public static ImmutableList<BlockFluidBase> getAllFluidBlocks()
-    {
+    public static ImmutableList<BlockFluidBase> getAllFluidBlocks() {
         return allFluidBlocks;
     }
 
     @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<Block> event)
-    {
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
 
         IForgeRegistry<Block> r = event.getRegistry();
         TechFluids.registerFluids();
 
         ImmutableList.Builder<BlockFluidBase> b = ImmutableList.builder();
-        if (TechFluids.LATEX.isDefault())
-        {
+        if (TechFluids.LATEX.isDefault()) {
             b.add(register(r, "fluid/" + TechFluids.LATEX.get().getName(), new BlockFluidTFC(TechFluids.LATEX.get(), Material.WATER)));
         }
         allFluidBlocks = b.build();
@@ -102,22 +95,19 @@ public final class TechBlocks
         register(TESmelteryFirebox.class, "smeltery_firebox");
     }
 
-    private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block, CreativeTabs ct)
-    {
+    private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block, CreativeTabs ct) {
         block.setCreativeTab(ct);
         return register(r, name, block);
     }
 
-    private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block)
-    {
+    private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block) {
         block.setRegistryName(MODID, name);
         block.setTranslationKey(MODID + "." + name.replace('/', '.'));
         r.register(block);
         return block;
     }
 
-    private static <T extends TileEntity> void register(Class<T> te, String name)
-    {
+    private static <T extends TileEntity> void register(Class<T> te, String name) {
         TileEntity.register(MODID + ":" + name, te);
     }
 }

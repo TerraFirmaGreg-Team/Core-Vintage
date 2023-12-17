@@ -22,6 +22,20 @@ public class ConfigTFCThings {
         }
     }
 
+    public static void addBirthday(String birthday) {
+        if (birthday != null) {
+            String[] text = birthday.split(" ");
+            String day = text[0];
+            String name = "";
+            for (int i = 1; i < text.length; i++) {
+                name += " " + text[i];
+            }
+            if (CalendarTFC.BIRTHDAYS.get(day) == null) {
+                CalendarTFC.BIRTHDAYS.put(day, name);
+            }
+        }
+    }
+
     @Config(
             modid = TFCThings.MODID,
             category = "items",
@@ -56,7 +70,7 @@ public class ConfigTFCThings {
 
         public static final class SlingCFG {
             @Config.Comment({"Damage multiplier against predator animals and skeletons.", "New damage = sling damage * multiplier"})
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 1.0D,
                     max = 10.0D
             )
@@ -64,14 +78,14 @@ public class ConfigTFCThings {
             public double predatorMultiplier = 2.0D;
 
             @Config.Comment({"The maximum power a sling can be charged up to.", "A fully charged sling will deal damage equal to maximum power, but projectile speed is fixed to the ratio: current power / max power."})
-            @Config.RangeInt (
+            @Config.RangeInt(
                     min = 1
             )
             @Config.LangKey("config.tfcthings.items.maxPower")
             public int maxPower = 8;
 
             @Config.Comment({"The speed at which the sling charges.", "Value represents number of ticks per power level (lower = faster)."})
-            @Config.RangeInt (
+            @Config.RangeInt(
                     min = 1
             )
             @Config.LangKey("config.tfcthings.items.chargeSpeed")
@@ -80,7 +94,7 @@ public class ConfigTFCThings {
 
         public static final class BearTrapCFG {
             @Config.Comment("Percent chance for a bear trap to break when harvested after being activated (a predator breakout will attempt to break the trap with double this chance).")
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 0.0D,
                     max = 1.0D
             )
@@ -88,7 +102,7 @@ public class ConfigTFCThings {
             public double breakChance = 0.1D;
 
             @Config.Comment({"The chance a predator has to break out of a bear trap each tick.", "0 = no breakouts. If this number isn't kept very small then breakouts will happen very fast. 1 = instant breakout."})
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 0.0D,
                     max = 1.0D
             )
@@ -96,14 +110,14 @@ public class ConfigTFCThings {
             public double breakoutChance = 0.001D;
 
             @Config.Comment({"The duration of the debuffs applied by the bear trap in ticks.", "Set to 0 to disable the debuffs."})
-            @Config.RangeInt (
+            @Config.RangeInt(
                     min = 0
             )
             @Config.LangKey("config.tfcthings.items.debuffDuration")
             public int debuffDuration = 1000;
 
             @Config.Comment({"The fraction of an entity's health that is dealt as damage when stepping in a trap.", "E.g. 3 = 1/3 current health dealt as damage. Less than 1 will deal more damage than current health, probably an instakill. Set to 0 to do no damage."})
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 0.0D,
                     max = 20.0D
             )
@@ -111,7 +125,7 @@ public class ConfigTFCThings {
             public double healthCut = 3.0D;
             @Config.LangKey("config.tfcthings.items.fixedDamage")
             @Config.Comment({"The amount of damage points dealt by a bear trap.", "This will override the fractional health cut setting if set to a value greater than 0"})
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 0.0D
             )
             public double fixedDamage = 0.0D;
@@ -119,7 +133,7 @@ public class ConfigTFCThings {
 
         public static final class SnareCFG {
             @Config.Comment("Percent chance for a snare to break when harvested after being tripped.")
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 0.0D,
                     max = 1.0D
             )
@@ -127,7 +141,7 @@ public class ConfigTFCThings {
             public double breakChance = 0.2D;
 
             @Config.Comment({"The chance for a snare to capture a random small animal when loaded with bait. Happens on random block ticks."})
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 0.0D,
                     max = 1.0D
             )
@@ -135,7 +149,7 @@ public class ConfigTFCThings {
             public double baitCaptureChance = 0.05D;
 
             @Config.Comment({"The chance for a piece of bait in a snare to be consumed if the snare fails to capture a random animal."})
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 0.0D,
                     max = 1.0D
             )
@@ -149,14 +163,14 @@ public class ConfigTFCThings {
             public String[] canSharpen = new String[0];
 
             @Config.Comment("The additional mining speed added to a sharpened tool.")
-            @Config.RangeInt (
+            @Config.RangeInt(
                     min = 0
             )
             @Config.LangKey("config.tfcthings.items.bonusSpeed")
             public int bonusSpeed = 4;
 
             @Config.Comment("The amount of extra damage a weapon does when sharpened.")
-            @Config.RangeInt (
+            @Config.RangeInt(
                     min = 0
             )
             @Config.LangKey("config.tfcthings.items.damageBoost")
@@ -165,14 +179,14 @@ public class ConfigTFCThings {
 
         public static final class SnowShoesCFG {
             @Config.Comment({"The number of ticks of walking through snow required to apply one damage to the shoes", "0 = snow shoes won't get damaged by walking through snow"})
-            @Config.RangeInt (
+            @Config.RangeInt(
                     min = 0
             )
             @Config.LangKey("config.tfcthings.items.damageTicks")
             public int damageTicks = 500;
 
             @Config.Comment({"The percentage of the TFC slowdown effect that the snow shoes will negate", "1 = no slowdown when walking through snow", "0 = the shoes are useless D:"})
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 0,
                     max = 1
             )
@@ -183,14 +197,14 @@ public class ConfigTFCThings {
 
         public static final class HikingBootsCFG {
             @Config.Comment({"The number of ticks of walking through plants required to apply one damage to the shoes", "0 = hiking boots won't get damaged by walking through plants"})
-            @Config.RangeInt (
+            @Config.RangeInt(
                     min = 0
             )
             @Config.LangKey("config.tfcthings.items.damageTicks")
             public int damageTicks = 500;
 
             @Config.Comment({"The percentage of the TFC slowdown effect that the hiking boots will negate", "1 = no slowdown when walking through plants", "0 = the boots are useless D:"})
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 0,
                     max = 1
             )
@@ -200,7 +214,7 @@ public class ConfigTFCThings {
         }
 
         public static final class RopeBridgeCFG {
-            @Config.RangeInt (
+            @Config.RangeInt(
                     min = 1,
                     max = 64
             )
@@ -283,7 +297,7 @@ public class ConfigTFCThings {
 
         public static final class PigvilCFG {
             @Config.Comment("The percent chance to create a Pigvil when feeding a pig iron carrot to a male pig")
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 0.0D,
                     max = 1.0D
             )
@@ -291,7 +305,7 @@ public class ConfigTFCThings {
             public double convertChance = 0.25D;
 
             @Config.Comment({"The level of familiarity required for a male pig to be eligible for conversion into a Pigvil.", "The default value, 0.35 is the adult familiarity cap", "Levels higher than 0.35 require raising a baby pig", "Set to 0 to require no familiarity"})
-            @Config.RangeDouble (
+            @Config.RangeDouble(
                     min = 0.0D,
                     max = 1.0D
             )
@@ -299,20 +313,6 @@ public class ConfigTFCThings {
             public double familiarityLevel = 0.35D;
         }
 
-    }
-
-    public static void addBirthday(String birthday) {
-        if(birthday != null) {
-            String[] text = birthday.split(" ");
-            String day = text[0];
-            String name = "";
-            for(int i = 1; i < text.length; i++) {
-                name += " " + text[i];
-            }
-            if(CalendarTFC.BIRTHDAYS.get(day) == null) {
-                CalendarTFC.BIRTHDAYS.put(day, name);
-            }
-        }
     }
 
 }

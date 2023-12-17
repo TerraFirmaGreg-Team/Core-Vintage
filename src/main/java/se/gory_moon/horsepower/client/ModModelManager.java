@@ -1,8 +1,5 @@
 package se.gory_moon.horsepower.client;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -22,23 +19,36 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import se.gory_moon.horsepower.blocks.ModBlocks;
 import se.gory_moon.horsepower.client.model.BakedChopperModel;
 import se.gory_moon.horsepower.items.ModItems;
 import se.gory_moon.horsepower.lib.Reference;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = Reference.MODID)
-public class ModModelManager
-{
+public class ModModelManager {
     public static final ModModelManager INSTANCE = new ModModelManager();
     private static final ResourceLocation MODEL_ChoppingBlock = new ResourceLocation("horsepower", "block/chopper");
     private static final ResourceLocation MODEL_ManualChoppingBlock = new ResourceLocation("horsepower", "block/chopping_block");
+    private final Set<Item> itemsRegistered = new HashSet<>();
+    /**
+     * A {@link StateMapperBase} used to create property strings.
+     */
+    private final StateMapperBase propertyStringMapper = new StateMapperBase() {
+        @Override
+        protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+            return new ModelResourceLocation("minecraft:air");
+        }
+    };
+
+    public ModModelManager() {
+    }
 
     @SubscribeEvent
-    public static void onModelBake(ModelBakeEvent event)
-    {
+    public static void onModelBake(ModelBakeEvent event) {
         replaceChoppingModel(new ModelResourceLocation("horsepower:chopper", "facing=north,part=base"), MODEL_ChoppingBlock, event);
         replaceChoppingModel(new ModelResourceLocation("horsepower:chopper", "facing=south,part=base"), MODEL_ChoppingBlock, event);
         replaceChoppingModel(new ModelResourceLocation("horsepower:chopper", "facing=west,part=base"), MODEL_ChoppingBlock, event);
@@ -53,63 +63,37 @@ public class ModModelManager
     }
 
     @SubscribeEvent
-    public static void registerAllModels(ModelRegistryEvent event)
-    {
+    public static void registerAllModels(ModelRegistryEvent event) {
         INSTANCE.registerBlockModels();
         INSTANCE.registerItemModels();
     }
 
-    public static ModelResourceLocation getModel(String resource)
-    {
+    public static ModelResourceLocation getModel(String resource) {
         return new ModelResourceLocation(Reference.MODID + ":" + resource, "inventory");
     }
 
-    public static void replaceChoppingModel(ModelResourceLocation modelVariantLocation, ResourceLocation modelLocation, ModelBakeEvent event)
-    {
-        try
-        {
+    public static void replaceChoppingModel(ModelResourceLocation modelVariantLocation, ResourceLocation modelLocation, ModelBakeEvent event) {
+        try {
             IModel model = ModelLoaderRegistry.getModel(modelLocation);
             IBakedModel standard = event.getModelRegistry().getObject(modelVariantLocation);
-            if (standard != null)
-            {
+            if (standard != null) {
                 IBakedModel finalModel = new BakedChopperModel(standard, model, DefaultVertexFormats.BLOCK);
 
                 event.getModelRegistry().putObject(modelVariantLocation, finalModel);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private final Set<Item> itemsRegistered = new HashSet<>();
-    /**
-     * A {@link StateMapperBase} used to create property strings.
-     */
-    private final StateMapperBase propertyStringMapper = new StateMapperBase()
-    {
-        @Override
-        protected ModelResourceLocation getModelResourceLocation(IBlockState state)
-        {
-            return new ModelResourceLocation("minecraft:air");
-        }
-    };
-
-    public ModModelManager()
-    {
-    }
-
-    private void registerBlockModels()
-    {
+    private void registerBlockModels() {
         ModBlocks.RegistrationHandler.ITEM_BLOCKS.stream().filter(item -> !itemsRegistered.contains(item)).forEach(this::registerItemModel);
     }
 
     /**
      * Register this mod's {@link Item} models.
      */
-    private void registerItemModels()
-    {
+    private void registerItemModels() {
         // Then register items with default model names
         ModItems.RegistrationHandler.ITEMS.stream().filter(item -> !itemsRegistered.contains(item)).forEach(this::registerItemModel);
     }
@@ -144,13 +128,11 @@ public class ModModelManager
      *
      * @param state The state to use as the variant
      */
-    private void registerBlockItemModel(IBlockState state)
-    {
+    private void registerBlockItemModel(IBlockState state) {
         final Block block = state.getBlock();
         final Item item = Item.getItemFromBlock(block);
 
-        if (item != null)
-        {
+        if (item != null) {
             registerItemModel(item, new ModelResourceLocation(block.getRegistryName(), propertyStringMapper.getPropertyString(state.getProperties())));
         }
     }
@@ -163,12 +145,10 @@ public class ModModelManager
      * @param state    The state to use as the variant
      * @param metadata The items metadata to register the model for
      */
-    private void registerBlockItemModelForMeta(IBlockState state, int metadata)
-    {
+    private void registerBlockItemModelForMeta(IBlockState state, int metadata) {
         final Item item = Item.getItemFromBlock(state.getBlock());
 
-        if (item != null)
-        {
+        if (item != null) {
             registerItemModelForMeta(item, metadata, propertyStringMapper.getPropertyString(state.getProperties()));
         }
     }
@@ -180,8 +160,7 @@ public class ModModelManager
      *
      * @param item The Item
      */
-    private void registerItemModel(Item item)
-    {
+    private void registerItemModel(Item item) {
         registerItemModel(item, item.getRegistryName().toString());
     }
 
@@ -193,8 +172,7 @@ public class ModModelManager
      * @param item          The Item
      * @param modelLocation The model location
      */
-    private void registerItemModel(Item item, String modelLocation)
-    {
+    private void registerItemModel(Item item, String modelLocation) {
         final ModelResourceLocation fullModelLocation = new ModelResourceLocation(modelLocation, "inventory");
         registerItemModel(item, fullModelLocation);
     }
@@ -207,8 +185,7 @@ public class ModModelManager
      * @param item              The Item
      * @param fullModelLocation The full model location
      */
-    private void registerItemModel(Item item, ModelResourceLocation fullModelLocation)
-    {
+    private void registerItemModel(Item item, ModelResourceLocation fullModelLocation) {
         ModelBakery.registerItemVariants(item, fullModelLocation); // Ensure the custom model is loaded and prevent the default model from being loaded
         registerItemModel(item, MeshDefinitionFix.create(stack -> fullModelLocation));
     }
@@ -219,8 +196,7 @@ public class ModModelManager
      * @param item           The Item
      * @param meshDefinition The ItemMeshDefinition
      */
-    private void registerItemModel(Item item, ItemMeshDefinition meshDefinition)
-    {
+    private void registerItemModel(Item item, ItemMeshDefinition meshDefinition) {
         itemsRegistered.add(item);
         ModelLoader.setCustomMeshDefinition(item, meshDefinition);
     }
@@ -234,8 +210,7 @@ public class ModModelManager
      * @param metadata The metadata
      * @param variant  The variant
      */
-    private void registerItemModelForMeta(Item item, int metadata, String variant)
-    {
+    private void registerItemModelForMeta(Item item, int metadata, String variant) {
         registerItemModelForMeta(item, metadata, new ModelResourceLocation(item.getRegistryName(), variant));
     }
 
@@ -248,8 +223,7 @@ public class ModModelManager
      * @param metadata              The metadata
      * @param modelResourceLocation The full model location
      */
-    private void registerItemModelForMeta(Item item, int metadata, ModelResourceLocation modelResourceLocation)
-    {
+    private void registerItemModelForMeta(Item item, int metadata, ModelResourceLocation modelResourceLocation) {
         itemsRegistered.add(item);
         ModelLoader.setCustomModelResourceLocation(item, metadata, modelResourceLocation);
     }

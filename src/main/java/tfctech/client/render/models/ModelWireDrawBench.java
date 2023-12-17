@@ -1,22 +1,20 @@
 package tfctech.client.render.models;
 
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.types.Metal;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumFacing;
 
-import net.dries007.tfc.api.types.Metal;
+import javax.annotation.Nullable;
 
 /**
  * ModelWireDrawBench - TFCTech
  * Created using Tabula 7.0.0
  */
 
-public class ModelWireDrawBench extends ModelBase
-{
+public class ModelWireDrawBench extends ModelBase {
     private static final float P = 0.0625F;
     private static final ModelRenderer[] DRAW_PLATES = new ModelRenderer[3];
 
@@ -57,8 +55,7 @@ public class ModelWireDrawBench extends ModelBase
 
     private EnumFacing rotation = EnumFacing.NORTH;
 
-    public ModelWireDrawBench()
-    {
+    public ModelWireDrawBench() {
         this.textureWidth = 128;
         this.textureHeight = 64;
 
@@ -153,31 +150,24 @@ public class ModelWireDrawBench extends ModelBase
 
     }
 
-    public void setRotation(EnumFacing rotation)
-    {
+    public void setRotation(EnumFacing rotation) {
         this.rotation = rotation;
     }
 
-    public void setWire(int color)
-    {
+    public void setWire(int color) {
         wireColor = color;
     }
 
-    public void setProgress(float value, float lastValue, float partialTicks)
-    {
-        if (value == lastValue)
-        {
+    public void setProgress(float value, float lastValue, float partialTicks) {
+        if (value == lastValue) {
             progress = value;
-        }
-        else
-        {
+        } else {
             progress = lastValue + (value - lastValue) * partialTicks;
         }
     }
 
     @Override
-    public void render(@Nullable Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(@Nullable Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         //noinspection ConstantConditions
         super.render(entity, f, f1, f2, f3, f4, f5);
 
@@ -185,8 +175,7 @@ public class ModelWireDrawBench extends ModelBase
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(0.5f, 1.86f, 0.5f);
-        switch (this.rotation)
-        {
+        switch (this.rotation) {
             case SOUTH:
                 GlStateManager.rotate(-180F, 0, 1, 0);
                 break;
@@ -238,8 +227,7 @@ public class ModelWireDrawBench extends ModelBase
         setBeltOffset(this.Belt2, 75);
         setBeltOffset(this.Belt3, 90);
 
-        if (this.progress > 99)
-        {
+        if (this.progress > 99) {
 
             setBeltFall(this.Ring1, false);
             setBeltFall(this.Ring2, false);
@@ -251,9 +239,7 @@ public class ModelWireDrawBench extends ModelBase
             setBeltFall(this.wire, false);
             setBeltFall(this.Belt, true);
 
-        }
-        else
-        {
+        } else {
 
             this.Ring1.offsetY = 0;
             this.Ring2.offsetY = 0;
@@ -279,15 +265,13 @@ public class ModelWireDrawBench extends ModelBase
         this.Tongs2.render(f5);
         this.Tongs3.render(f5);
 
-        if (isDrawplateInstalled)
-        {
+        if (isDrawplateInstalled) {
             ModelRenderer drawplate = DRAW_PLATES[this.drawplateMetal];
             drawplate.render(f5);
         }
 
 
-        if (wireColor != 0x00000000)
-        {
+        if (wireColor != 0x00000000) {
             float r = ((wireColor >> 16) & 0xFF) / 255F;
             float g = ((wireColor >> 8) & 0xFF) / 255F;
             float b = (wireColor & 0xFF) / 255F;
@@ -302,64 +286,49 @@ public class ModelWireDrawBench extends ModelBase
         GlStateManager.popMatrix();
     }
 
-    public void setDrawplateMetal(@Nullable Metal metal)
-    {
+    public void setDrawplateMetal(@Nullable Metal metal) {
         drawplateMetal = 0;
         isDrawplateInstalled = false;
-        if (metal != null)
-        {
-            if (metal.getTier() == Metal.Tier.TIER_III)
-            {
+        if (metal != null) {
+            if (metal.getTier() == Metal.Tier.TIER_III) {
                 drawplateMetal = 0;
-            }
-            else if (metal.getTier() == Metal.Tier.TIER_IV)
-            {
+            } else if (metal.getTier() == Metal.Tier.TIER_IV) {
                 drawplateMetal = 1;
-            }
-            else if (metal.getTier() == Metal.Tier.TIER_V)
-            {
+            } else if (metal.getTier() == Metal.Tier.TIER_V) {
                 drawplateMetal = 2;
             }
             isDrawplateInstalled = true;
         }
     }
 
-    private ModelRenderer getDrawplateModel(int offsetY)
-    {
+    private ModelRenderer getDrawplateModel(int offsetY) {
         ModelRenderer result = new ModelRenderer(this, 95, offsetY);
         result.setRotationPoint(-4.5F, 13.5F, 16.0F);
         result.addBox(0.0F, 0.0F, 0.0F, 7, 2, 1, 0.0F);
         return result;
     }
 
-    private void setBeltOffset(ModelRenderer modelRenderer, int maxProgress)
-    {
+    private void setBeltOffset(ModelRenderer modelRenderer, int maxProgress) {
         float off = 7F * P / 99F * Math.min(this.progress, maxProgress);
         modelRenderer.offsetZ = -off;
     }
 
-    private void setBeltFall(ModelRenderer modelRenderer, boolean belt)
-    {
-        if (belt)
-        {
+    private void setBeltFall(ModelRenderer modelRenderer, boolean belt) {
+        if (belt) {
             setRotateAngleInDegrees(modelRenderer, -15, 0, 0);
-        }
-        else
-        {
+        } else {
             modelRenderer.offsetZ = -8F * P;
             modelRenderer.offsetY = P;
         }
     }
 
-    private void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    private void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
     }
 
-    private void setRotateAngleInDegrees(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    private void setRotateAngleInDegrees(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = (float) (x * Math.PI / 180);
         modelRenderer.rotateAngleY = (float) (y * Math.PI / 180);
         modelRenderer.rotateAngleZ = (float) (z * Math.PI / 180);

@@ -1,22 +1,17 @@
 package se.gory_moon.horsepower.jei.chopping.manual;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.google.common.collect.Lists;
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockChoppingBlock;
 import se.gory_moon.horsepower.jei.HorsePowerCategory;
@@ -25,35 +20,22 @@ import se.gory_moon.horsepower.recipes.ChoppingBlockRecipe;
 import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
 import se.gory_moon.horsepower.util.Localization;
 
-public class ManualChoppingRecipeWrapper implements IRecipeWrapper
-{
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ManualChoppingRecipeWrapper implements IRecipeWrapper {
 
     private static final List<ItemStack> axes = new ArrayList<>();
-
-    public static void setAxes()
-    {
-        axes.clear();
-        for (ItemStack stack : HorsePowerPlugin.ingredientRegistry.getAllIngredients(VanillaTypes.ITEM))
-        {
-            if (!stack.isEmpty() && BlockChoppingBlock.isValidChoppingTool(stack, null))
-            {
-                axes.add(stack);
-            }
-        }
-    }
-
     private final List<ItemStack> inputs;
     private final ItemStack output;
     private final int time;
     private final IDrawableAnimated arrow;
-
-    public ManualChoppingRecipeWrapper(ChoppingBlockRecipe recipe)
-    {
+    public ManualChoppingRecipeWrapper(ChoppingBlockRecipe recipe) {
         this(Collections.singletonList(recipe.getInput()), recipe.getOutput(), recipe.getTime());
     }
 
-    public ManualChoppingRecipeWrapper(List<ItemStack> inputs, ItemStack output, int time)
-    {
+    public ManualChoppingRecipeWrapper(List<ItemStack> inputs, ItemStack output, int time) {
         this.inputs = inputs;
         this.output = output;
         this.time = time;
@@ -63,17 +45,24 @@ public class ManualChoppingRecipeWrapper implements IRecipeWrapper
         arrow = guiHelper.createAnimatedDrawable(arrowDrawable, 50, IDrawableAnimated.StartDirection.LEFT, false);
     }
 
+    public static void setAxes() {
+        axes.clear();
+        for (ItemStack stack : HorsePowerPlugin.ingredientRegistry.getAllIngredients(VanillaTypes.ITEM)) {
+            if (!stack.isEmpty() && BlockChoppingBlock.isValidChoppingTool(stack, null)) {
+                axes.add(stack);
+            }
+        }
+    }
+
     @Override
-    public void getIngredients(IIngredients ingredients)
-    {
+    public void getIngredients(IIngredients ingredients) {
         List<List<ItemStack>> inputLists = new ArrayList<>();
         List<List<ItemStack>> outputLists = new ArrayList<>();
 
         inputLists.add(inputs);
         inputLists.add(axes);
         List<ItemStack> outputs = new ArrayList<>(axes.size());
-        for (ItemStack stack : axes)
-        {
+        for (ItemStack stack : axes) {
             ItemStack result = output.copy();
             double base = TileEntityManualChopper.getBaseAmount(stack, null) / 100D;
 
@@ -88,25 +77,21 @@ public class ManualChoppingRecipeWrapper implements IRecipeWrapper
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
-    {
+    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         arrow.draw(minecraft, 23, 22);
     }
 
     @Override
-    public List<String> getTooltipStrings(int mouseX, int mouseY)
-    {
+    public List<String> getTooltipStrings(int mouseX, int mouseY) {
         List<String> tooltip = Lists.newArrayList();
-        if (mouseX >= 23 && mouseY >= 22 && mouseX < 47 && mouseY < 39)
-        {
+        if (mouseX >= 23 && mouseY >= 22 && mouseX < 47 && mouseY < 39) {
             tooltip.add(Localization.GUI.JEI.MANUAL_CHOPPING.translate(getChoppingAmount()));
         }
         return tooltip;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int result = inputs.hashCode() + 1;
         result = 31 * result + output.hashCode();
         result = 31 * result + time;
@@ -114,17 +99,14 @@ public class ManualChoppingRecipeWrapper implements IRecipeWrapper
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ManualChoppingRecipeWrapper)) return false;
 
         ManualChoppingRecipeWrapper that = (ManualChoppingRecipeWrapper) o;
         boolean flag = true;
-        for (ItemStack stack : inputs)
-        {
-            for (ItemStack stack1 : that.inputs)
-            {
+        for (ItemStack stack : inputs) {
+            for (ItemStack stack1 : that.inputs) {
                 if (stack1.getMetadata() == OreDictionary.WILDCARD_VALUE && !OreDictionary.itemMatches(stack, stack1, false))
                     flag = false;
             }
@@ -133,8 +115,7 @@ public class ManualChoppingRecipeWrapper implements IRecipeWrapper
         return time == that.time && flag && output.equals(that.output);
     }
 
-    private int getChoppingAmount()
-    {
+    private int getChoppingAmount() {
         int mult = Configs.recipes.useSeperateChoppingRecipes ? 1 : Configs.general.choppMultiplier;
         return time * mult;
     }

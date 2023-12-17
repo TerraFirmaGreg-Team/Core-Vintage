@@ -42,6 +42,7 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
     protected final Metal.Tier minTier;
     protected final long workingSeed;
     protected final SmithingSkill.Type skillBonusType;
+
     public AnvilRecipe(ResourceLocation name, IIngredient<ItemStack> ingredient, ItemStack output, Metal.Tier minTier, @Nullable SmithingSkill.Type skillBonusType, ForgeRule... rules) {
         this.ingredient = ingredient;
         this.output = output;

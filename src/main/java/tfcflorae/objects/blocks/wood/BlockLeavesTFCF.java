@@ -52,6 +52,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
     private static final Map<SeasonalTrees, BlockLeavesTFCF> MAP = new HashMap<>();
     public final Tree wood;
     public final SeasonalTrees fruitTree;
+
     public BlockLeavesTFCF(Tree wood, SeasonalTrees tree) {
         this.wood = wood;
         this.fruitTree = tree;

@@ -51,17 +51,16 @@ public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem 
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        int i = ((Integer)blockState.getValue(OFFSET)).intValue();
-        return new AxisAlignedBB(0, (double)((float)i * 0.125F), 0, 1, (double)((float)i * 0.125F + (3 * 0.0625F)), 1);
+        int i = ((Integer) blockState.getValue(OFFSET)).intValue();
+        return new AxisAlignedBB(0, (double) ((float) i * 0.125F), 0, 1, (double) ((float) i * 0.125F + (3 * 0.0625F)), 1);
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {OFFSET, AXIS});
+        return new BlockStateContainer(this, new IProperty[]{OFFSET, AXIS});
     }
 
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return TFCThingsItems.ITEM_ROPE_BRIDGE;
     }
 
@@ -84,28 +83,28 @@ public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem 
     }
 
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if(OreDictionaryHelper.doesStackMatchOre(playerIn.getHeldItem(hand), "stickWood")) {
+        if (OreDictionaryHelper.doesStackMatchOre(playerIn.getHeldItem(hand), "stickWood")) {
             state = state.cycleProperty(OFFSET);
             worldIn.setBlockState(pos, state, 2);
             return true;
         }
-        if(playerIn.isSneaking()) {
+        if (playerIn.isSneaking()) {
             int dir = getDir(worldIn, pos, state);
-            if(dir == 0) {
+            if (dir == 0) {
                 return false;
             }
             ItemStack bridgeStack = new ItemStack(TFCThingsItems.ITEM_ROPE_BRIDGE, 0);
             BlockPos next = pos;
-            while(worldIn.getBlockState(next).getBlock() instanceof BlockRopeBridge) {
+            while (worldIn.getBlockState(next).getBlock() instanceof BlockRopeBridge) {
                 bridgeStack.grow(1);
 
-                if(worldIn.getBlockState(moveInDirection(next, dir)).getBlock() instanceof BlockRopeBridge) {
+                if (worldIn.getBlockState(moveInDirection(next, dir)).getBlock() instanceof BlockRopeBridge) {
                     worldIn.setBlockToAir(next);
                     next = moveInDirection(next, dir);
-                } else if(worldIn.getBlockState(next).getValue(OFFSET) == 0) {
+                } else if (worldIn.getBlockState(next).getValue(OFFSET) == 0) {
                     worldIn.setBlockToAir(next);
                     next = moveInDirection(next, dir).down();
-                } else if(worldIn.getBlockState(next).getValue(OFFSET) == 7) {
+                } else if (worldIn.getBlockState(next).getValue(OFFSET) == 7) {
                     worldIn.setBlockToAir(next);
                     next = moveInDirection(next, dir).up();
                 }
@@ -117,7 +116,7 @@ public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem 
     }
 
     private BlockPos moveInDirection(BlockPos pos, int dir) {
-        switch(dir) {
+        switch (dir) {
             case 1:
                 return pos.north();
             case 2:
@@ -132,8 +131,8 @@ public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem 
     private int getDir(World worldIn, BlockPos pos, IBlockState state) {
         ArrayList<Integer> dirs = new ArrayList<>();
         BlockPos side1;
-        BlockPos side2 ;
-        if(state.getValue(AXIS)) {
+        BlockPos side2;
+        if (state.getValue(AXIS)) {
             side1 = pos.north();
             side2 = pos.south();
         } else {
@@ -141,29 +140,29 @@ public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem 
             side2 = pos.west();
         }
 
-        if(worldIn.getBlockState(side1).getBlock() instanceof BlockRopeBridge) {
+        if (worldIn.getBlockState(side1).getBlock() instanceof BlockRopeBridge) {
             dirs.add(1);
         }
-        if(worldIn.getBlockState(side2).getBlock() instanceof BlockRopeBridge) {
+        if (worldIn.getBlockState(side2).getBlock() instanceof BlockRopeBridge) {
             dirs.add(2);
         }
-        if(state.getValue(OFFSET) == 0) {
-            if(worldIn.getBlockState(side1.down()).getBlock() instanceof BlockRopeBridge) {
+        if (state.getValue(OFFSET) == 0) {
+            if (worldIn.getBlockState(side1.down()).getBlock() instanceof BlockRopeBridge) {
                 dirs.add(1);
             }
-            if(worldIn.getBlockState(side2.down()).getBlock() instanceof BlockRopeBridge) {
+            if (worldIn.getBlockState(side2.down()).getBlock() instanceof BlockRopeBridge) {
                 dirs.add(2);
             }
         }
-        if(state.getValue(OFFSET) == 7) {
-            if(worldIn.getBlockState(side1.up()).getBlock() instanceof BlockRopeBridge) {
+        if (state.getValue(OFFSET) == 7) {
+            if (worldIn.getBlockState(side1.up()).getBlock() instanceof BlockRopeBridge) {
                 dirs.add(1);
             }
-            if(worldIn.getBlockState(side2.up()).getBlock() instanceof BlockRopeBridge) {
+            if (worldIn.getBlockState(side2.up()).getBlock() instanceof BlockRopeBridge) {
                 dirs.add(2);
             }
         }
-        if(dirs.size() == 1) {
+        if (dirs.size() == 1) {
             return dirs.get(0) + (state.getValue(AXIS) ? 0 : 2);
         } else {
             return 0;

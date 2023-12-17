@@ -34,23 +34,21 @@ import java.util.Map;
 
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
-public class ItemTFCThingsMold  extends ItemPottery {
+public class ItemTFCThingsMold extends ItemPottery {
 
     private static final Map<String, ItemTFCThingsMold> MAP = new HashMap<>();
     private final String toolName;
 
-    public static ItemTFCThingsMold get(String toolName)
-    {
-        return MAP.get(toolName);
-    }
-
-    public ItemTFCThingsMold(String toolName)
-    {
+    public ItemTFCThingsMold(String toolName) {
         this.toolName = toolName;
         if (MAP.put(toolName, this) != null) throw new IllegalStateException("There can only be one.");
         setCreativeTab(CreativeTabsTFC.CT_POTTERY);
         setRegistryName("mold/" + toolName);
         setTranslationKey("mold_" + toolName);
+    }
+
+    public static ItemTFCThingsMold get(String toolName) {
+        return MAP.get(toolName);
     }
 
     public String getToolName() {
@@ -59,14 +57,11 @@ public class ItemTFCThingsMold  extends ItemPottery {
 
     @Override
     @Nonnull
-    public String getItemStackDisplayName(@Nonnull ItemStack stack)
-    {
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         IFluidHandler capFluidHandler = stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
-        if (capFluidHandler instanceof IMoldHandler)
-        {
+        if (capFluidHandler instanceof IMoldHandler) {
             Metal metal = ((IMoldHandler) capFluidHandler).getMetal();
-            if (metal != null)
-            {
+            if (metal != null) {
                 //noinspection ConstantConditions
                 String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName().getPath().toLowerCase())).getFormattedText();
                 return (new TextComponentTranslation("item.tfcthings.mold." + toolName.toLowerCase() + "." + metal.getRegistryName().getPath(), metalName)).getFormattedText();
@@ -77,17 +72,14 @@ public class ItemTFCThingsMold  extends ItemPottery {
 
     @Nullable
     @Override
-    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt)
-    {
+    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
         return new FilledMoldCapability(nbt);
     }
 
     @Override
-    public int getItemStackLimit(ItemStack stack)
-    {
+    public int getItemStackLimit(ItemStack stack) {
         IMoldHandler moldHandler = (IMoldHandler) stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
-        if (moldHandler != null && moldHandler.getMetal() != null)
-        {
+        if (moldHandler != null && moldHandler.getMetal() != null) {
             return 1;
         }
         return super.getItemStackLimit(stack);
@@ -96,13 +88,11 @@ public class ItemTFCThingsMold  extends ItemPottery {
     // Extends ItemHeatHandler for ease of use
 
 
-    public class FilledMoldCapability extends ItemHeatHandler implements ICapabilityProvider, IMoldHandler
-    {
+    public class FilledMoldCapability extends ItemHeatHandler implements ICapabilityProvider, IMoldHandler {
         private final FluidTank tank;
         private IFluidTankProperties[] fluidTankProperties;
 
-        public FilledMoldCapability(@Nullable NBTTagCompound nbt)
-        {
+        public FilledMoldCapability(@Nullable NBTTagCompound nbt) {
             tank = new FluidTank(100);
 
             if (nbt != null)
@@ -111,23 +101,19 @@ public class ItemTFCThingsMold  extends ItemPottery {
 
         @Nullable
         @Override
-        public Metal getMetal()
-        {
+        public Metal getMetal() {
             return tank.getFluid() != null ? FluidsTFC.getMetalFromFluid(tank.getFluid().getFluid()) : null;
         }
 
         @Override
-        public int getAmount()
-        {
+        public int getAmount() {
             return tank.getFluidAmount();
         }
 
         @Override
-        public IFluidTankProperties[] getTankProperties()
-        {
-            if (fluidTankProperties == null)
-            {
-                fluidTankProperties = new IFluidTankProperties[] {new FluidTankPropertiesWrapper(tank)};
+        public IFluidTankProperties[] getTankProperties() {
+            if (fluidTankProperties == null) {
+                fluidTankProperties = new IFluidTankProperties[]{new FluidTankPropertiesWrapper(tank)};
             }
             return fluidTankProperties;
         }
@@ -150,20 +136,16 @@ public class ItemTFCThingsMold  extends ItemPottery {
 
         @Nullable
         @Override
-        public FluidStack drain(FluidStack resource, boolean doDrain)
-        {
+        public FluidStack drain(FluidStack resource, boolean doDrain) {
             return getTemperature() >= meltTemp ? tank.drain(resource, doDrain) : null;
         }
 
         @Nullable
         @Override
-        public FluidStack drain(int maxDrain, boolean doDrain)
-        {
-            if (getTemperature() > meltTemp)
-            {
+        public FluidStack drain(int maxDrain, boolean doDrain) {
+            if (getTemperature() > meltTemp) {
                 FluidStack stack = tank.drain(maxDrain, doDrain);
-                if (tank.getFluidAmount() == 0)
-                {
+                if (tank.getFluidAmount() == 0) {
                     updateFluidData();
                 }
                 return stack;
@@ -173,14 +155,11 @@ public class ItemTFCThingsMold  extends ItemPottery {
 
         @SideOnly(Side.CLIENT)
         @Override
-        public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text)
-        {
+        public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
             Metal metal = getMetal();
-            if (metal != null)
-            {
+            if (metal != null) {
                 String desc = TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
-                if (isMolten())
-                {
+                if (isMolten()) {
                     desc += I18n.format("tfc.tooltip.liquid");
                 }
                 text.add(desc);
@@ -189,20 +168,17 @@ public class ItemTFCThingsMold  extends ItemPottery {
         }
 
         @Override
-        public float getHeatCapacity()
-        {
+        public float getHeatCapacity() {
             return heatCapacity;
         }
 
         @Override
-        public float getMeltTemp()
-        {
+        public float getMeltTemp() {
             return meltTemp;
         }
 
         @Override
-        public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
-        {
+        public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
             return capability == FLUID_HANDLER_CAPABILITY
                     || capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
         }
@@ -210,34 +186,27 @@ public class ItemTFCThingsMold  extends ItemPottery {
         @Nullable
         @Override
         @SuppressWarnings("unchecked")
-        public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
-        {
+        public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
             return hasCapability(capability, facing) ? (T) this : null;
         }
 
         @Override
         @Nonnull
-        public NBTTagCompound serializeNBT()
-        {
+        public NBTTagCompound serializeNBT() {
             NBTTagCompound nbt = new NBTTagCompound();
             float temp = getTemperature();
             nbt.setFloat("heat", temp);
-            if (temp <= 0)
-            {
+            if (temp <= 0) {
                 nbt.setLong("ticks", -1);
-            }
-            else
-            {
+            } else {
                 nbt.setLong("ticks", CalendarTFC.PLAYER_TIME.getTicks());
             }
             return tank.writeToNBT(nbt);
         }
 
         @Override
-        public void deserializeNBT(NBTTagCompound nbt)
-        {
-            if (nbt != null)
-            {
+        public void deserializeNBT(NBTTagCompound nbt) {
+            if (nbt != null) {
                 temperature = nbt.getFloat("heat");
                 lastUpdateTick = nbt.getLong("ticks");
                 tank.readFromNBT(nbt);
@@ -245,21 +214,17 @@ public class ItemTFCThingsMold  extends ItemPottery {
             updateFluidData();
         }
 
-        private void updateFluidData()
-        {
+        private void updateFluidData() {
             updateFluidData(tank.getFluid());
         }
 
         @SuppressWarnings("ConstantConditions")
-        private void updateFluidData(FluidStack fluid)
-        {
+        private void updateFluidData(FluidStack fluid) {
             meltTemp = Heat.maxVisibleTemperature();
             heatCapacity = 1;
-            if (fluid != null)
-            {
+            if (fluid != null) {
                 Metal metal = FluidsTFC.getMetalFromFluid(fluid.getFluid());
-                if (metal != null)
-                {
+                if (metal != null) {
                     meltTemp = metal.getMeltTemp();
                     heatCapacity = metal.getSpecificHeat();
                 }

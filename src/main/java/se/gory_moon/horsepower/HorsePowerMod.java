@@ -23,8 +23,7 @@ import se.gory_moon.horsepower.util.Utils;
 
 @Mod(modid = Reference.MODID, version = Reference.VERSION, name = Reference.NAME, acceptedMinecraftVersions = "[1.12]", dependencies = "required-after:tfc;after:crafttweaker;after:jei;after:waila;after:theoneprobe;")
 @EventBusSubscriber
-public class HorsePowerMod
-{
+public class HorsePowerMod {
     @Instance(Reference.MODID)
     public static HorsePowerMod instance;
 
@@ -36,8 +35,7 @@ public class HorsePowerMod
     public static Logger logger = LogManager.getLogger("HorsePower");
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit();
         PacketHandler.init();
 
@@ -52,15 +50,13 @@ public class HorsePowerMod
     }
 
     @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event) {
         proxy.init();
         ModItems.registerRecipes();
     }
 
     @EventHandler
-    public void loadComplete(FMLPostInitializationEvent event)
-    {
+    public void loadComplete(FMLPostInitializationEvent event) {
         tweakerPlugin.run();
 
         HPEventHandler.reloadConfig();
@@ -68,8 +64,7 @@ public class HorsePowerMod
     }
 
     @EventHandler
-    public void serverLoad(FMLServerAboutToStartEvent event)
-    {
+    public void serverLoad(FMLServerAboutToStartEvent event) {
         HPRecipes.instance().reloadRecipes();
         Utils.sendSavedErrors();
     }

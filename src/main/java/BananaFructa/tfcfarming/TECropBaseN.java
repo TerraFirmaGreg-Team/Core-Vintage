@@ -8,12 +8,7 @@ import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.nbt.NBTTagCompound;
-import org.lwjgl.Sys;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,23 +50,23 @@ public class TECropBaseN extends TECropBase {
 
         NutrientValues nutrientValues = TFCFarming.INSTANCE.worldStorage.getNutrientValues(pos.getX(), pos.getZ());
 
-        double newFactor = processFactor(nutrientValues,nValues); // 1
+        double newFactor = processFactor(nutrientValues, nValues); // 1
 
-        long dg = (long)(super.getTicksSinceUpdate() * factor);
+        long dg = (long) (super.getTicksSinceUpdate() * factor);
 
         if (newFactor != virtualFactor && dg < growthPhaseInterval) {
 
-            addFactor(virtualFactor,super.getTicksSinceUpdate());
+            addFactor(virtualFactor, super.getTicksSinceUpdate());
             virtualFactor = newFactor;
-            factor = getAverageFactor(virtualFactor,super.getTicksSinceUpdate());
+            factor = getAverageFactor(virtualFactor, super.getTicksSinceUpdate());
         }
 
-        return (long)(super.getTicksSinceUpdate() * factor);
+        return (long) (super.getTicksSinceUpdate() * factor);
     }
 
     private void resetFactor() {
         NutrientValues nutrientValues = TFCFarming.INSTANCE.worldStorage.getNutrientValues(pos.getX(), pos.getZ());
-        factor = processFactor(nutrientValues,nValues);
+        factor = processFactor(nutrientValues, nValues);
         virtualFactor = factor;
         factorList.clear();
     }
@@ -86,10 +81,10 @@ public class TECropBaseN extends TECropBase {
         else return factorList.get(i * 2 + 1) - factorList.get((i - 1) * 2 + 1);
     }
 
-    private double getAverageFactor(double current,double currentTicks) {
+    private double getAverageFactor(double current, double currentTicks) {
         double rest = growthPhaseInterval;
 
-        for (int i = 0;i < factorList.size()/2;i++) {
+        for (int i = 0; i < factorList.size() / 2; i++) {
             //         V speed                 V time
             double r = factorList.get(i * 2) * getDeltaAt(i);
             rest -= r;
@@ -101,7 +96,7 @@ public class TECropBaseN extends TECropBase {
 
     @Override
     public void reduceCounter(long amount) {
-        super.reduceCounter((long)(amount / factor));
+        super.reduceCounter((long) (amount / factor));
 
         float temp = ClimateTFC.getActualTemp(getWorld(), pos, -getTicksSinceUpdate());
         float rainfall = ChunkDataTFC.getRainfall(getWorld(), pos);
@@ -109,7 +104,7 @@ public class TECropBaseN extends TECropBase {
             NutrientValues nutrientValues = TFCFarming.INSTANCE.worldStorage.getNutrientValues(pos.getX(), pos.getZ());
 
             if (nutrientValues.getNPKSet()[nValues.favouriteNutrient.ordinal()] >= nValues.stepCost) {
-                nutrientValues.addNutrient(nValues.favouriteNutrient,-nValues.stepCost);
+                nutrientValues.addNutrient(nValues.favouriteNutrient, -nValues.stepCost);
             }
 
             TFCFarming.INSTANCE.worldStorage.setNutrientValues(pos.getX(), pos.getZ(), nutrientValues);
@@ -125,7 +120,7 @@ public class TECropBaseN extends TECropBase {
         Gson gson = new Gson();
 
         try {
-            factorList = gson.fromJson(compound.getString("factorList"),new TypeToken<List<Double>>(){}.getType());
+            factorList = gson.fromJson(compound.getString("factorList"), new TypeToken<List<Double>>() {}.getType());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,8 +130,8 @@ public class TECropBaseN extends TECropBase {
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setDouble("growthUnitFactor",factor);
-        compound.setDouble("virtualGrowthFactor",virtualFactor);
+        compound.setDouble("growthUnitFactor", factor);
+        compound.setDouble("virtualGrowthFactor", virtualFactor);
 
         Gson gson = new Gson();
 

@@ -1,10 +1,15 @@
 package tfctech.objects.tileentities;
 
-import java.util.Arrays;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import gregtech.api.capability.GregtechCapabilities;
+import ic2.api.energy.tile.IEnergyEmitter;
+import ic2.api.energy.tile.IEnergySink;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.api.capability.metal.IMetalItem;
+import net.dries007.tfc.api.recipes.heat.HeatRecipe;
+import net.dries007.tfc.objects.te.ITileFields;
+import net.dries007.tfc.objects.te.TEInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,18 +27,6 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import gregtech.api.capability.GregtechCapabilities;
-import ic2.api.energy.tile.IEnergyEmitter;
-import ic2.api.energy.tile.IEnergySink;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TEInventory;
 import tfctech.TFCTech;
 import tfctech.TechConfig;
 import tfctech.client.TechSounds;
@@ -41,13 +34,17 @@ import tfctech.client.audio.IMachineSoundEffect;
 import tfctech.objects.blocks.devices.BlockElectricForge;
 import tfctech.objects.storage.MachineEnergyContainer;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Arrays;
+
 import static tfctech.objects.blocks.devices.BlockElectricForge.LIT;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
 @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
-public class TEElectricForge extends TEInventory implements ITickable, ITileFields, IMachineSoundEffect, IEnergySink
-{
+public class TEElectricForge extends TEInventory implements ITickable, ITileFields, IMachineSoundEffect, IEnergySink {
     public static final int SLOT_INPUT_MIN = 0;
     public static final int SLOT_INPUT_MAX = 8;
     public static final int SLOT_EXTRA_MIN = 9;
@@ -60,15 +57,13 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 
     private boolean addedToIc2Network = false;
 
-    public TEElectricForge()
-    {
+    public TEElectricForge() {
         super(12);
         energyContainer = new MachineEnergyContainer(TechConfig.DEVICES.electricForgeEnergyCapacity, TechConfig.DEVICES.electricForgeEnergyCapacity, 0);
         Arrays.fill(cachedRecipes, null);
     }
 
-    public void addTargetTemperature(int value)
-    {
+    public void addTargetTemperature(int value) {
         targetTemperature += value;
         if (targetTemperature > (float) TechConfig.DEVICES.electricForgeMaxTemperature)
             targetTemperature = (float) TechConfig.DEVICES.electricForgeMaxTemperature;
@@ -77,11 +72,9 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 
     @Optional.Method(modid = "ic2")
     @Override
-    public void invalidate()
-    {
+    public void invalidate() {
         super.invalidate();
-        if (!world.isRemote && addedToIc2Network)
-        {
+        if (!world.isRemote && addedToIc2Network) {
             MinecraftForge.EVENT_BUS.post(new ic2.api.energy.event.EnergyTileUnloadEvent(this));
             addedToIc2Network = false;
         }
@@ -89,39 +82,32 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 
     @Optional.Method(modid = "ic2")
     @Override
-    public void validate()
-    {
+    public void validate() {
         super.validate();
-        if (!world.isRemote && TechConfig.DEVICES.acceptIc2EU && !addedToIc2Network)
-        {
+        if (!world.isRemote && TechConfig.DEVICES.acceptIc2EU && !addedToIc2Network) {
             MinecraftForge.EVENT_BUS.post(new ic2.api.energy.event.EnergyTileLoadEvent(this));
             addedToIc2Network = true;
         }
     }
 
     @Override
-    public void update()
-    {
-        if (world.isRemote)
-        {
+    public void update() {
+        if (world.isRemote) {
             IMachineSoundEffect.super.update();
             return;
         }
         IBlockState state = world.getBlockState(pos);
         int energyUsage = (int) ((float) TechConfig.DEVICES.electricForgeEnergyConsumption * targetTemperature / 100);
         if (energyUsage < 1) energyUsage = 1;
-        for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++)
-        {
+        for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
             ItemStack stack = inventory.getStackInSlot(i);
             IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
             float modifier = stack.getItem() instanceof IMetalItem ? ((IMetalItem) stack.getItem()).getSmeltAmount(stack) / 100.0F : 1.0F;
-            if (cap != null)
-            {
+            if (cap != null) {
                 // Update temperature of item
                 float itemTemp = cap.getTemperature();
                 int energy = (int) (energyUsage * modifier);
-                if (targetTemperature > itemTemp && energyContainer.consumeEnergy(energy, false))
-                {
+                if (targetTemperature > itemTemp && energyContainer.consumeEnergy(energy, false)) {
                     float heatSpeed = (float) TechConfig.DEVICES.electricForgeSpeed * 15.0F;
                     float temp = cap.getTemperature() + heatSpeed * cap.getHeatCapacity() * (float) ConfigTFC.Devices.TEMPERATURE.globalModifier;
                     cap.setTemperature(Math.min(temp, targetTemperature));
@@ -130,29 +116,24 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
                 handleInputMelting(stack, i);
             }
         }
-        if (--litTime <= 0)
-        {
+        if (--litTime <= 0) {
             litTime = 0;
             state = state.withProperty(LIT, false);
             world.setBlockState(pos, state, 2);
-        }
-        else
-        {
+        } else {
             state = state.withProperty(LIT, true);
             world.setBlockState(pos, state, 2);
         }
     }
 
     @Override
-    public void setAndUpdateSlots(int slot)
-    {
+    public void setAndUpdateSlots(int slot) {
         this.markDirty();
         updateCachedRecipes();
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
+    public void readFromNBT(NBTTagCompound nbt) {
         targetTemperature = nbt.getFloat("targetTemperature");
         energyContainer.deserializeNBT(nbt.getCompoundTag("energyContainer"));
         super.readFromNBT(nbt);
@@ -162,24 +143,18 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 
     @Override
     @Nonnull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-    {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setFloat("targetTemperature", targetTemperature);
         nbt.setTag("energyContainer", energyContainer.serializeNBT());
         return super.writeToNBT(nbt);
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
-    {
-        if (facing == null || facing == EnumFacing.UP || facing == EnumFacing.DOWN || facing == world.getBlockState(pos).getValue(BlockElectricForge.FACING).getOpposite())
-        {
-            if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY)
-            {
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        if (facing == null || facing == EnumFacing.UP || facing == EnumFacing.DOWN || facing == world.getBlockState(pos).getValue(BlockElectricForge.FACING).getOpposite()) {
+            if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
                 return true;
-            }
-            else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") && capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER)
-            {
+            } else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") && capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
                 return true;
             }
         }
@@ -188,16 +163,11 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
-    {
-        if (facing == null || facing == EnumFacing.UP || facing == EnumFacing.DOWN || facing == world.getBlockState(pos).getValue(BlockElectricForge.FACING).getOpposite())
-        {
-            if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY)
-            {
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        if (facing == null || facing == EnumFacing.UP || facing == EnumFacing.DOWN || facing == world.getBlockState(pos).getValue(BlockElectricForge.FACING).getOpposite()) {
+            if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
                 return (T) this.energyContainer;
-            }
-            else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") && capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER)
-            {
+            } else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") && capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
                 return (T) this.energyContainer.getGTCEHandler();
             }
         }
@@ -205,82 +175,60 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
     }
 
     @Override
-    public int getSlotLimit(int slot)
-    {
+    public int getSlotLimit(int slot) {
         return 1;
     }
 
     @Override
-    public boolean isItemValid(int slot, @Nonnull ItemStack stack)
-    {
-        if (slot <= SLOT_INPUT_MAX)
-        {
+    public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+        if (slot <= SLOT_INPUT_MAX) {
             return stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-        }
-        else
-        {
+        } else {
             return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) && stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
         }
     }
 
     @Override
-    public int getFieldCount()
-    {
+    public int getFieldCount() {
         return 2;
     }
 
     @Override
-    public void setField(int index, int value)
-    {
-        if (index == 0)
-        {
+    public void setField(int index, int value) {
+        if (index == 0) {
             this.targetTemperature = (float) value;
-        }
-        else if (index == 1)
-        {
+        } else if (index == 1) {
             this.energyContainer.setEnergy(value);
-        }
-        else
-        {
+        } else {
             TFCTech.getLog().warn("Invalid field ID {} in TEElectricForge#setField", index);
         }
     }
 
     @Override
-    public int getField(int index)
-    {
-        if (index == 0)
-        {
+    public int getField(int index) {
+        if (index == 0) {
             return (int) this.targetTemperature;
-        }
-        else if (index == 1)
-        {
+        } else if (index == 1) {
             return this.energyContainer.getEnergyStored();
-        }
-        else
-        {
+        } else {
             TFCTech.getLog().warn("Invalid field ID {} in TEElectricForge#setField", index);
             return 0;
         }
     }
 
-    public int getEnergyCapacity()
-    {
+    public int getEnergyCapacity() {
         return energyContainer.getMaxEnergyStored();
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public SoundEvent getSoundEvent()
-    {
+    public SoundEvent getSoundEvent() {
         return TechSounds.INDUCTION_WORK;
     }
 
     @Override
-    public boolean shouldPlay()
-    {
-        if(!this.isInvalid())
-        {
+    public boolean shouldPlay() {
+        if (!this.isInvalid()) {
             return false;
         }
         IBlockState state = world.getBlockState(pos);
@@ -288,90 +236,74 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
     }
 
     @Override
-    public boolean isPlaying()
-    {
+    public boolean isPlaying() {
         return soundPlay;
     }
 
     @Override
-    public void setPlaying(boolean value)
-    {
+    public void setPlaying(boolean value) {
         soundPlay = value;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockPos getSoundPos()
-    {
+    public BlockPos getSoundPos() {
         return this.getPos();
     }
 
-    public int getEnergyStored()
-    {
+    public int getEnergyStored() {
         return energyContainer.getEnergyStored();
     }
 
     @Override
-    public double getDemandedEnergy()
-    {
+    public double getDemandedEnergy() {
         return Math.ceil(energyContainer.receiveEnergy(Integer.MAX_VALUE, true) / (double) TechConfig.DEVICES.ratioIc2);
     }
 
     @Override
-    public int getSinkTier()
-    {
+    public int getSinkTier() {
         return TechConfig.DEVICES.ic2Voltage;
     }
 
     @Override
-    public double injectEnergy(EnumFacing facing, double amount, double voltage)
-    {
+    public double injectEnergy(EnumFacing facing, double amount, double voltage) {
         energyContainer.receiveEnergy((int) Math.ceil(amount) * TechConfig.DEVICES.ratioIc2, false);
         return 0;
     }
 
     @Optional.Method(modid = "ic2")
     @Override
-    public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing)
-    {
+    public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing) {
         return TechConfig.DEVICES.acceptIc2EU && (facing == EnumFacing.UP || facing == EnumFacing.DOWN || facing == world.getBlockState(pos).getValue(BlockElectricForge.FACING).getOpposite());
     }
 
-    private void handleInputMelting(ItemStack stack, int index)
-    {
+    private void handleInputMelting(ItemStack stack, int index) {
         HeatRecipe recipe = cachedRecipes[index];
         IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
 
-        if (recipe != null && cap != null && recipe.isValidTemperature(cap.getTemperature()))
-        {
+        if (recipe != null && cap != null && recipe.isValidTemperature(cap.getTemperature())) {
             // Handle possible metal output
             FluidStack fluidStack = recipe.getOutputFluid(stack);
             float itemTemperature = cap.getTemperature();
-            if (fluidStack != null)
-            {
+            if (fluidStack != null) {
                 // Loop through all input slots
-                for (int i = SLOT_EXTRA_MIN; i <= SLOT_EXTRA_MAX; i++)
-                {
+                for (int i = SLOT_EXTRA_MIN; i <= SLOT_EXTRA_MAX; i++) {
                     // While the fluid is still waiting
-                    if (fluidStack.amount <= 0)
-                    {
+                    if (fluidStack.amount <= 0) {
                         break;
                     }
                     // Try an output slot
                     ItemStack output = inventory.getStackInSlot(i);
                     // Fill the fluid
                     IFluidHandler fluidHandler = output.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                    if (fluidHandler != null)
-                    {
+                    if (fluidHandler != null) {
                         int amountFilled = fluidHandler.fill(fluidStack.copy(), true);
-                        if (amountFilled > 0)
-                        {
+                        if (amountFilled > 0) {
                             fluidStack.amount -= amountFilled;
 
                             // If the fluid was filled, make sure to make it the same temperature
                             IItemHeat heatHandler = output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-                            if (heatHandler != null)
-                            {
+                            if (heatHandler != null) {
                                 heatHandler.setTemperature(itemTemperature);
                             }
                         }
@@ -384,14 +316,11 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
         }
     }
 
-    private void updateCachedRecipes()
-    {
-        for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; ++i)
-        {
+    private void updateCachedRecipes() {
+        for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; ++i) {
             this.cachedRecipes[i] = null;
             ItemStack inputStack = this.inventory.getStackInSlot(i);
-            if (!inputStack.isEmpty())
-            {
+            if (!inputStack.isEmpty()) {
                 this.cachedRecipes[i] = HeatRecipe.get(inputStack);
             }
         }

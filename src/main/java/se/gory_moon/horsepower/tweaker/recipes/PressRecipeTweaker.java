@@ -23,60 +23,51 @@ import stanhebben.zenscript.annotations.ZenMethod;
 import static crafttweaker.api.minecraft.CraftTweakerMC.*;
 
 @ZenClass("mods.horsepower.Press")
-public class PressRecipeTweaker
-{
+public class PressRecipeTweaker {
 
     @ZenMethod
-    public static void add(IIngredient input, IItemStack output)
-    {
+    public static void add(IIngredient input, IItemStack output) {
         AddPressRecipe recipe = new AddPressRecipe(input, output);
         TweakerPluginImpl.toAdd.add(recipe);
         TweakerPluginImpl.actions.add(recipe);
     }
 
     @ZenMethod
-    public static void add(IIngredient input, ILiquidStack output)
-    {
+    public static void add(IIngredient input, ILiquidStack output) {
         AddPressRecipe recipe = new AddPressRecipe(input, output);
         TweakerPluginImpl.toAdd.add(recipe);
         TweakerPluginImpl.actions.add(recipe);
     }
 
     @ZenMethod
-    public static void remove(IIngredient output)
-    {
+    public static void remove(IIngredient output) {
         RemovePressRecipe recipe = new RemovePressRecipe(output);
         TweakerPluginImpl.toRemove.add(recipe);
         TweakerPluginImpl.actions.add(recipe);
     }
 
-    private static class AddPressRecipe extends BaseHPAction
-    {
+    private static class AddPressRecipe extends BaseHPAction {
 
         private final IIngredient input;
         private final IItemStack output;
         private final ILiquidStack fluidOuput;
 
-        public AddPressRecipe(IIngredient input, IItemStack output)
-        {
+        public AddPressRecipe(IIngredient input, IItemStack output) {
             this.input = input;
             this.output = output;
             this.fluidOuput = null;
         }
 
-        public AddPressRecipe(IIngredient input, ILiquidStack output)
-        {
+        public AddPressRecipe(IIngredient input, ILiquidStack output) {
             this.input = input;
             this.fluidOuput = output;
             this.output = null;
         }
 
         @Override
-        public void apply()
-        {
+        public void apply() {
             List<IItemStack> items = input.getItems();
-            if (items == null)
-            {
+            if (items == null) {
                 HorsePowerMod.logger.error("Cannot turn " + input + " into a press recipe");
             }
 
@@ -84,8 +75,7 @@ public class PressRecipeTweaker
             ItemStack output2 = getItemStack(output);
             FluidStack fluidStack = getLiquidStack(fluidOuput);
 
-            for (ItemStack stack : items2)
-            {
+            for (ItemStack stack : items2) {
                 PressRecipe recipe;
                 if (fluidStack == null)
                     recipe = new PressRecipe(stack, output2, ItemStack.EMPTY, 0, 0);
@@ -96,45 +86,37 @@ public class PressRecipeTweaker
         }
 
         @Override
-        public String describe()
-        {
+        public String describe() {
             return "Adding press recipe for " + input;
         }
     }
 
-    private static class RemovePressRecipe extends BaseHPAction
-    {
+    private static class RemovePressRecipe extends BaseHPAction {
 
         private final IIngredient output;
 
-        public RemovePressRecipe(IIngredient output)
-        {
+        public RemovePressRecipe(IIngredient output) {
             this.output = output;
         }
 
         @Override
-        public void apply()
-        {
+        public void apply() {
             ArrayList<PressRecipe> toRemove = new ArrayList<>();
             Collection<PressRecipe> recipeList = HPRecipes.instance().getPressRecipes();
 
-            for (PressRecipe recipe : recipeList)
-            {
-                if (OreDictionary.itemMatches(CraftTweakerMC.getItemStack(output), recipe.getOutput(), false))
-                {
+            for (PressRecipe recipe : recipeList) {
+                if (OreDictionary.itemMatches(CraftTweakerMC.getItemStack(output), recipe.getOutput(), false)) {
                     toRemove.add(recipe);
                 }
             }
 
-            for (int i = toRemove.size() - 1; i >= 0; --i)
-            {
+            for (int i = toRemove.size() - 1; i >= 0; --i) {
                 recipeList.remove(toRemove.get(i));
             }
         }
 
         @Override
-        public String describe()
-        {
+        public String describe() {
             return "Removing press recipes for " + output;
         }
     }

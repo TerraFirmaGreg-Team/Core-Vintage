@@ -13,7 +13,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -81,7 +80,7 @@ public class ItemCrown extends ItemArmor implements IItemSize, IDamageResistance
 
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        if(gem == null) {
+        if (gem == null) {
             tooltip.add(I18n.format("tfcthings.tooltip.crown.gem.empty", new Object[0]));
             tooltip.add(I18n.format("tfcthings.tooltip.crown.missing", new Object[0]));
         } else {

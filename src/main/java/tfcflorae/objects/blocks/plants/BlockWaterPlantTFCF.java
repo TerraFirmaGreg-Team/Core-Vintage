@@ -70,6 +70,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements IItemSize, IPl
     public final PropertyInteger growthStageProperty;
     protected final Plant plant;
     protected final BlockStateContainer blockState;
+
     public BlockWaterPlantTFCF(Fluid fluid, Plant plant) {
         this(fluid, Material.WATER, plant);
     }

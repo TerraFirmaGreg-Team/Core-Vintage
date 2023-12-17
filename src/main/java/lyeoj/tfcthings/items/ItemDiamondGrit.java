@@ -1,7 +1,6 @@
 package lyeoj.tfcthings.items;
 
 import net.dries007.tfc.api.capability.forge.ForgeableHandler;
-import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -20,6 +19,7 @@ public class ItemDiamondGrit extends ItemTFC {
         this.setTranslationKey("diamond_grit");
         this.setCreativeTab(CreativeTabsTFC.CT_MISC);
     }
+
     @Nonnull
     @Override
     public Size getSize(@Nonnull ItemStack itemStack) {

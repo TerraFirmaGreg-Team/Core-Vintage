@@ -39,7 +39,7 @@ public class BlockIceBunker extends BlockContainer implements IHasModel {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY, float hitZ) {
 
-        if(!worldIn.isRemote){
+        if (!worldIn.isRemote) {
             player.openGui(Main.INSTANCE, Reference.GUI_ICE_BUNKER, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
 
@@ -49,17 +49,17 @@ public class BlockIceBunker extends BlockContainer implements IHasModel {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEIceBunker tile = (TEIceBunker)worldIn.getTileEntity(pos);
+        TEIceBunker tile = (TEIceBunker) worldIn.getTileEntity(pos);
         InventoryHelper.dropInventoryItems(worldIn, pos, tile);
         super.breakBlock(worldIn, pos, state);
     }
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        if(stack.hasDisplayName()){
+        if (stack.hasDisplayName()) {
             TileEntity entity = worldIn.getTileEntity(pos);
 
-            if(entity instanceof TEIceBunker){
+            if (entity instanceof TEIceBunker) {
                 //((TECellarShelf)entity).setCustomName(stack.getDisplayName());
             }
         }
@@ -79,6 +79,6 @@ public class BlockIceBunker extends BlockContainer implements IHasModel {
 
     @Override
     public void registerModels() {
-        Main.proxy.registerItemRenderer(Item.getItemFromBlock(this),0,"inventory");
+        Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 }

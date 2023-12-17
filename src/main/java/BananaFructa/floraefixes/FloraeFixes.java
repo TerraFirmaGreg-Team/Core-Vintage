@@ -21,7 +21,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
@@ -34,10 +33,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Supplier;
 
-import static net.minecraftforge.fml.common.eventhandler.EventPriority.HIGHEST;
 import static net.minecraftforge.fml.common.eventhandler.EventPriority.LOW;
 
-@Mod(name = FloraeFixes.name,version = FloraeFixes.version,modid = FloraeFixes.modId,dependencies = "after:firmalife;after:tfcflorae")
+@Mod(name = FloraeFixes.name, version = FloraeFixes.version, modid = FloraeFixes.modId, dependencies = "after:firmalife;after:tfcflorae")
 public class FloraeFixes {
     public static final String name = "TFC Florae Fixes";
     public static final String version = "1.0";
@@ -47,18 +45,33 @@ public class FloraeFixes {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    public static void removeRecipe(Item i) {
+        ItemStack output = new ItemStack(i);
+        ArrayList<PlanterRecipe> removeList = new ArrayList();
+        RegistriesFL.PLANTER_QUAD.getValuesCollection().stream().filter((x) -> {
+            return x.getOutputItem(ItemStack.EMPTY).isItemEqual(output);
+        }).forEach(removeList::add);
+        Iterator var2 = removeList.iterator();
+
+        while (var2.hasNext()) {
+            final PlanterRecipe recipe = (PlanterRecipe) var2.next();
+            IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable) RegistriesFL.PLANTER_QUAD;
+            Planter.remove(recipe.getRegistryName());
+        }
+    }
+
     public void fixCropItemSupplierTFCFlorae(Class<?> objType, Object obj, ItemFoodTFCF food) {
         Supplier<ItemStack> foodDrop = () -> {
             return new ItemStack(food);
         };
-        Utils.writeDeclaredField(objType,obj,"foodDrop",foodDrop,true);
+        Utils.writeDeclaredField(objType, obj, "foodDrop", foodDrop, true);
     }
 
-    public void fixCropPartialItemSupplierTFCFlorae(Class<?> objType, Object obj,ItemFoodTFCF food) {
+    public void fixCropPartialItemSupplierTFCFlorae(Class<?> objType, Object obj, ItemFoodTFCF food) {
         Supplier<ItemStack> foodDrop = () -> {
             return new ItemStack(food);
         };
-        Utils.writeDeclaredField(objType,obj,"foodDropEarly",foodDrop,true);
+        Utils.writeDeclaredField(objType, obj, "foodDropEarly", foodDrop, true);
     }
 
     @Mod.EventHandler
@@ -66,29 +79,28 @@ public class FloraeFixes {
         Config.init(event.getModConfigurationDirectory());
     }
 
-    
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         if (!Config.cropSupplier) return;
-        fixCropItemSupplierTFCFlorae(CropTFCF.AMARANTH.getClass(),CropTFCF.AMARANTH, ItemsTFCF.AMARANTH);
-        fixCropItemSupplierTFCFlorae(CropTFCF.BUCKWHEAT.getClass(),CropTFCF.BUCKWHEAT,ItemsTFCF.BUCKWHEAT);
-        fixCropItemSupplierTFCFlorae(CropTFCF.FONIO.getClass(),CropTFCF.FONIO,ItemsTFCF.FONIO);
-        fixCropItemSupplierTFCFlorae(CropTFCF.MILLET.getClass(),CropTFCF.MILLET,ItemsTFCF.MILLET);
-        fixCropItemSupplierTFCFlorae(CropTFCF.QUINOA.getClass(),CropTFCF.QUINOA,ItemsTFCF.QUINOA);
-        fixCropItemSupplierTFCFlorae(CropTFCF.SPELT.getClass(),CropTFCF.SPELT,ItemsTFCF.SPELT);
-        fixCropItemSupplierTFCFlorae(CropTFCF.BLACK_EYED_PEAS.getClass(),CropTFCF.BLACK_EYED_PEAS,ItemsTFCF.BLACK_EYED_PEAS);
+        fixCropItemSupplierTFCFlorae(CropTFCF.AMARANTH.getClass(), CropTFCF.AMARANTH, ItemsTFCF.AMARANTH);
+        fixCropItemSupplierTFCFlorae(CropTFCF.BUCKWHEAT.getClass(), CropTFCF.BUCKWHEAT, ItemsTFCF.BUCKWHEAT);
+        fixCropItemSupplierTFCFlorae(CropTFCF.FONIO.getClass(), CropTFCF.FONIO, ItemsTFCF.FONIO);
+        fixCropItemSupplierTFCFlorae(CropTFCF.MILLET.getClass(), CropTFCF.MILLET, ItemsTFCF.MILLET);
+        fixCropItemSupplierTFCFlorae(CropTFCF.QUINOA.getClass(), CropTFCF.QUINOA, ItemsTFCF.QUINOA);
+        fixCropItemSupplierTFCFlorae(CropTFCF.SPELT.getClass(), CropTFCF.SPELT, ItemsTFCF.SPELT);
+        fixCropItemSupplierTFCFlorae(CropTFCF.BLACK_EYED_PEAS.getClass(), CropTFCF.BLACK_EYED_PEAS, ItemsTFCF.BLACK_EYED_PEAS);
 
-        fixCropItemSupplierTFCFlorae(CropTFCF.CAYENNE_PEPPER.getClass(),CropTFCF.CAYENNE_PEPPER,ItemsTFCF.RED_CAYENNE_PEPPER);
-        fixCropPartialItemSupplierTFCFlorae(CropTFCF.CAYENNE_PEPPER.getClass(),CropTFCF.CAYENNE_PEPPER,ItemsTFCF.GREEN_CAYENNE_PEPPER);
+        fixCropItemSupplierTFCFlorae(CropTFCF.CAYENNE_PEPPER.getClass(), CropTFCF.CAYENNE_PEPPER, ItemsTFCF.RED_CAYENNE_PEPPER);
+        fixCropPartialItemSupplierTFCFlorae(CropTFCF.CAYENNE_PEPPER.getClass(), CropTFCF.CAYENNE_PEPPER, ItemsTFCF.GREEN_CAYENNE_PEPPER);
 
-        fixCropItemSupplierTFCFlorae(CropTFCF.GINGER.getClass(),CropTFCF.GINGER,ItemsTFCF.GINGER);
-        fixCropItemSupplierTFCFlorae(CropTFCF.GINSENG.getClass(),CropTFCF.GINSENG,ItemsTFCF.GINSENG);
-        fixCropItemSupplierTFCFlorae(CropTFCF.RUTABAGA.getClass(),CropTFCF.RUTABAGA,ItemsTFCF.RUTABAGA);
-        fixCropItemSupplierTFCFlorae(CropTFCF.TURNIP.getClass(),CropTFCF.TURNIP,ItemsTFCF.TURNIP);
-        fixCropItemSupplierTFCFlorae(CropTFCF.SUGAR_BEET.getClass(),CropTFCF.SUGAR_BEET,ItemsTFCF.SUGAR_BEET);
-        fixCropItemSupplierTFCFlorae(CropTFCF.PURPLE_GRAPE.getClass(),CropTFCF.PURPLE_GRAPE,ItemsTFCF.PURPLE_GRAPE);
-        fixCropItemSupplierTFCFlorae(CropTFCF.GREEN_GRAPE.getClass(),CropTFCF.GREEN_GRAPE,ItemsTFCF.GREEN_GRAPE);
-        fixCropItemSupplierTFCFlorae(CropTFCF.LIQUORICE_ROOT.getClass(),CropTFCF.LIQUORICE_ROOT,ItemsTFCF.LIQUORICE_ROOT);
+        fixCropItemSupplierTFCFlorae(CropTFCF.GINGER.getClass(), CropTFCF.GINGER, ItemsTFCF.GINGER);
+        fixCropItemSupplierTFCFlorae(CropTFCF.GINSENG.getClass(), CropTFCF.GINSENG, ItemsTFCF.GINSENG);
+        fixCropItemSupplierTFCFlorae(CropTFCF.RUTABAGA.getClass(), CropTFCF.RUTABAGA, ItemsTFCF.RUTABAGA);
+        fixCropItemSupplierTFCFlorae(CropTFCF.TURNIP.getClass(), CropTFCF.TURNIP, ItemsTFCF.TURNIP);
+        fixCropItemSupplierTFCFlorae(CropTFCF.SUGAR_BEET.getClass(), CropTFCF.SUGAR_BEET, ItemsTFCF.SUGAR_BEET);
+        fixCropItemSupplierTFCFlorae(CropTFCF.PURPLE_GRAPE.getClass(), CropTFCF.PURPLE_GRAPE, ItemsTFCF.PURPLE_GRAPE);
+        fixCropItemSupplierTFCFlorae(CropTFCF.GREEN_GRAPE.getClass(), CropTFCF.GREEN_GRAPE, ItemsTFCF.GREEN_GRAPE);
+        fixCropItemSupplierTFCFlorae(CropTFCF.LIQUORICE_ROOT.getClass(), CropTFCF.LIQUORICE_ROOT, ItemsTFCF.LIQUORICE_ROOT);
     }
 
     @SubscribeEvent
@@ -105,19 +117,21 @@ public class FloraeFixes {
         }
     }
 
-    /** Fixed TFCF rice placement */
+    /**
+     * Fixed TFCF rice placement
+     */
     @SubscribeEvent
     public void onItemRightClick(PlayerInteractEvent.RightClickItem event) {
         if (!Config.ricePlacing) return;
         if (event.getItemStack().getItem() instanceof ItemSeedsTFC) {
             if (ItemSeedsTFC.get(Crop.RICE) == event.getItemStack().getItem()) {
                 event.setCanceled(true);
-                RayTraceResult result = Utils.rayTrace(event.getWorld(),event.getEntityPlayer(),false);
+                RayTraceResult result = Utils.rayTrace(event.getWorld(), event.getEntityPlayer(), false);
                 if (result != null) {
                     BlockPos pos = result.getBlockPos();
                     Block down = event.getWorld().getBlockState(pos).getBlock();
                     if ((down instanceof BlockFarmlandTFC || down instanceof FarmlandTFCF) && event.getWorld().getBlockState(pos.up()).getBlock().getMaterial(null) == Material.WATER) {
-                        Utils.ricePlaceFixed(Crop.RICE,event.getItemStack().getItem(),event.getWorld(),event.getEntityPlayer(),event.getHand());
+                        Utils.ricePlaceFixed(Crop.RICE, event.getItemStack().getItem(), event.getWorld(), event.getEntityPlayer(), event.getHand());
                     }
                 }
             }
@@ -137,9 +151,9 @@ public class FloraeFixes {
                 "food/sandwich_slice/wild_rice"
         };
         IForgeRegistryModifiable registry;
-        registry = (IForgeRegistryModifiable)event.getRegistry();
+        registry = (IForgeRegistryModifiable) event.getRegistry();
         for (String s : sandwiches) {
-            IRecipe recipe = (IRecipe)registry.getValue(new ResourceLocation("tfcflorae", s));
+            IRecipe recipe = (IRecipe) registry.getValue(new ResourceLocation("tfcflorae", s));
             if (recipe != null) {
                 registry.remove(recipe.getRegistryName());
             }
@@ -149,7 +163,7 @@ public class FloraeFixes {
     @SubscribeEvent
     public void onRegisterPlanterEvent(RegistryEvent.Register<PlanterRecipe> event) {
         if (!Config.planterRecipes) return;
-        Item[] preAdded = new Item[] {
+        Item[] preAdded = new Item[]{
                 ItemsTFCF.BLACK_EYED_PEAS,
                 ItemsTFCF.RED_CAYENNE_PEPPER,
                 ItemsTFCF.GINSENG,
@@ -179,54 +193,39 @@ public class FloraeFixes {
             removeRecipe(s);
         }
         IForgeRegistry<PlanterRecipe> r = event.getRegistry();
-        registerPlanterRecipe(r,CropTFCF.AGAVE,ItemsTFCF.AGAVE,5,false,"agave");
-        registerPlanterRecipe(r,CropTFCF.AMARANTH,ItemsTFCF.AMARANTH,7,true,"amaranth");
-        registerPlanterRecipe(r,CropTFCF.BLACK_EYED_PEAS,ItemsTFCF.BLACK_EYED_PEAS,6,true,"black_eyed_peas");
-        registerPlanterRecipe(r,CropTFCF.BUCKWHEAT,ItemsTFCF.BUCKWHEAT,7,true,"buckwheat");
-        registerPlanterRecipe(r,CropTFCF.CAYENNE_PEPPER,ItemsTFCF.RED_CAYENNE_PEPPER,6,true,"cayenne_pepper"); // check planter
-        registerPlanterRecipe(r,CropTFCF.COCA,ItemsTFCF.COCA_LEAF,5,true,"coca");
-        registerPlanterRecipe(r,CropTFCF.COFFEA,ItemsTFCF.COFFEA_CHERRIES,7,false,"coffea"); // dead missing texture
-        registerPlanterRecipe(r,CropTFCF.COTTON,ItemsTFCF.COTTON_BOLL,5,true,"cotton");
-        registerPlanterRecipe(r,CropTFCF.FLAX,ItemsTFCF.FLAX,6,true,"flax");
-        registerPlanterRecipe(r,CropTFCF.FONIO,ItemsTFCF.FONIO,7,true,"fonio");
-        registerPlanterRecipe(r,CropTFCF.GINGER,ItemsTFCF.GINGER,6,false,"ginger");
-        registerPlanterRecipe(r,CropTFCF.GINSENG,ItemsTFCF.GINSENG,4,false,"ginseng");
-        registerPlanterRecipe(r,CropTFCF.GREEN_GRAPE,ItemsTFCF.GREEN_GRAPE,8,true,"green_grape");
-        registerPlanterRecipe(r,CropTFCF.HEMP,ItemsTFCF.HEMP,4,true,"hemp");
-        registerPlanterRecipe(r,CropTFCF.HOP,ItemsTFCF.HOPS,5,true,"hop");
-        registerPlanterRecipe(r,CropTFCF.INDIGO,ItemsTFCF.INDIGO,5,true,"indigo");
-        registerPlanterRecipe(r,CropTFCF.LIQUORICE_ROOT,ItemsTFCF.LIQUORICE_ROOT,7,false,"liquorice_root");
-        registerPlanterRecipe(r,CropTFCF.MADDER,ItemsTFCF.MADDER,4,false,"madder");
-        registerPlanterRecipe(r,CropTFCF.MILLET,ItemsTFCF.MILLET,7,true,"millet");
-        registerPlanterRecipe(r,CropTFCF.PURPLE_GRAPE,ItemsTFCF.PURPLE_GRAPE,8,true,"purple_grape");
-        registerPlanterRecipe(r,CropTFCF.QUINOA,ItemsTFCF.QUINOA,7,true,"quinoa");
-        registerPlanterRecipe(r,CropTFCF.RAPE,ItemsTFCF.RAPE,5,false,"rape");
-        registerPlanterRecipe(r,CropTFCF.RUTABAGA,ItemsTFCF.RUTABAGA,6,false,"rutabaga");
-        registerPlanterRecipe(r,CropTFCF.SPELT,ItemsTFCF.SPELT,7,true,"spelt");
-        registerPlanterRecipe(r,CropTFCF.SUGAR_BEET,ItemsTFCF.SUGAR_BEET,6,true,"sugar_beet");
-        registerPlanterRecipe(r,CropTFCF.TOBACCO,ItemsTFCF.TOBACCO_LEAF,6,true,"tobacco");
-        registerPlanterRecipe(r,CropTFCF.TURNIP,ItemsTFCF.TURNIP,7,false,"turnip");
-        registerPlanterRecipe(r,CropTFCF.WELD,ItemsTFCF.WELD,4,false,"weld");
-        registerPlanterRecipe(r,CropTFCF.WOAD,ItemsTFCF.WOAD,5,false,"woad");
+        registerPlanterRecipe(r, CropTFCF.AGAVE, ItemsTFCF.AGAVE, 5, false, "agave");
+        registerPlanterRecipe(r, CropTFCF.AMARANTH, ItemsTFCF.AMARANTH, 7, true, "amaranth");
+        registerPlanterRecipe(r, CropTFCF.BLACK_EYED_PEAS, ItemsTFCF.BLACK_EYED_PEAS, 6, true, "black_eyed_peas");
+        registerPlanterRecipe(r, CropTFCF.BUCKWHEAT, ItemsTFCF.BUCKWHEAT, 7, true, "buckwheat");
+        registerPlanterRecipe(r, CropTFCF.CAYENNE_PEPPER, ItemsTFCF.RED_CAYENNE_PEPPER, 6, true, "cayenne_pepper"); // check planter
+        registerPlanterRecipe(r, CropTFCF.COCA, ItemsTFCF.COCA_LEAF, 5, true, "coca");
+        registerPlanterRecipe(r, CropTFCF.COFFEA, ItemsTFCF.COFFEA_CHERRIES, 7, false, "coffea"); // dead missing texture
+        registerPlanterRecipe(r, CropTFCF.COTTON, ItemsTFCF.COTTON_BOLL, 5, true, "cotton");
+        registerPlanterRecipe(r, CropTFCF.FLAX, ItemsTFCF.FLAX, 6, true, "flax");
+        registerPlanterRecipe(r, CropTFCF.FONIO, ItemsTFCF.FONIO, 7, true, "fonio");
+        registerPlanterRecipe(r, CropTFCF.GINGER, ItemsTFCF.GINGER, 6, false, "ginger");
+        registerPlanterRecipe(r, CropTFCF.GINSENG, ItemsTFCF.GINSENG, 4, false, "ginseng");
+        registerPlanterRecipe(r, CropTFCF.GREEN_GRAPE, ItemsTFCF.GREEN_GRAPE, 8, true, "green_grape");
+        registerPlanterRecipe(r, CropTFCF.HEMP, ItemsTFCF.HEMP, 4, true, "hemp");
+        registerPlanterRecipe(r, CropTFCF.HOP, ItemsTFCF.HOPS, 5, true, "hop");
+        registerPlanterRecipe(r, CropTFCF.INDIGO, ItemsTFCF.INDIGO, 5, true, "indigo");
+        registerPlanterRecipe(r, CropTFCF.LIQUORICE_ROOT, ItemsTFCF.LIQUORICE_ROOT, 7, false, "liquorice_root");
+        registerPlanterRecipe(r, CropTFCF.MADDER, ItemsTFCF.MADDER, 4, false, "madder");
+        registerPlanterRecipe(r, CropTFCF.MILLET, ItemsTFCF.MILLET, 7, true, "millet");
+        registerPlanterRecipe(r, CropTFCF.PURPLE_GRAPE, ItemsTFCF.PURPLE_GRAPE, 8, true, "purple_grape");
+        registerPlanterRecipe(r, CropTFCF.QUINOA, ItemsTFCF.QUINOA, 7, true, "quinoa");
+        registerPlanterRecipe(r, CropTFCF.RAPE, ItemsTFCF.RAPE, 5, false, "rape");
+        registerPlanterRecipe(r, CropTFCF.RUTABAGA, ItemsTFCF.RUTABAGA, 6, false, "rutabaga");
+        registerPlanterRecipe(r, CropTFCF.SPELT, ItemsTFCF.SPELT, 7, true, "spelt");
+        registerPlanterRecipe(r, CropTFCF.SUGAR_BEET, ItemsTFCF.SUGAR_BEET, 6, true, "sugar_beet");
+        registerPlanterRecipe(r, CropTFCF.TOBACCO, ItemsTFCF.TOBACCO_LEAF, 6, true, "tobacco");
+        registerPlanterRecipe(r, CropTFCF.TURNIP, ItemsTFCF.TURNIP, 7, false, "turnip");
+        registerPlanterRecipe(r, CropTFCF.WELD, ItemsTFCF.WELD, 4, false, "weld");
+        registerPlanterRecipe(r, CropTFCF.WOAD, ItemsTFCF.WOAD, 5, false, "woad");
     }
 
     private void registerPlanterRecipe(IForgeRegistry<PlanterRecipe> r, CropTFCF crop, Item i, int s, boolean p, String name) {
-        r.registerAll((PlanterRecipe)(new PlanterRecipe(IIngredient.of(ItemSeedsTFC.get(crop)), new ItemStack(i), s, p)).setRegistryName("firmalife",name));
-    }
-
-    public static void removeRecipe(Item i) {
-        ItemStack output = new ItemStack(i);
-        ArrayList<PlanterRecipe> removeList = new ArrayList();
-        RegistriesFL.PLANTER_QUAD.getValuesCollection().stream().filter((x) -> {
-            return x.getOutputItem(ItemStack.EMPTY).isItemEqual(output);
-        }).forEach(removeList::add);
-        Iterator var2 = removeList.iterator();
-
-        while (var2.hasNext()) {
-            final PlanterRecipe recipe = (PlanterRecipe) var2.next();
-            IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable) RegistriesFL.PLANTER_QUAD;
-            Planter.remove(recipe.getRegistryName());
-        }
+        r.registerAll((PlanterRecipe) (new PlanterRecipe(IIngredient.of(ItemSeedsTFC.get(crop)), new ItemStack(i), s, p)).setRegistryName("firmalife", name));
     }
 
 }

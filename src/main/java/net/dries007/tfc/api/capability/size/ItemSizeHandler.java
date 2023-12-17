@@ -20,6 +20,7 @@ public class ItemSizeHandler implements ICapabilityProvider, IItemSize {
     private final Size size;
     private final Weight weight;
     private final boolean canStack;
+
     public ItemSizeHandler(Size size, Weight weight, boolean canStack) {
         this.size = size;
         this.weight = weight;

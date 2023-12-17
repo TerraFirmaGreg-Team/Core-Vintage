@@ -1,37 +1,32 @@
 package tfctech.compat.jei.wrappers;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraftforge.fluids.FluidStack;
-
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.fluids.FluidStack;
 import tfctech.api.recipes.SmelteryRecipe;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
+
 @ParametersAreNonnullByDefault
-public class SmelteryRecipeWrapper implements IRecipeWrapper
-{
+public class SmelteryRecipeWrapper implements IRecipeWrapper {
     private final SmelteryRecipe recipe;
 
-    public SmelteryRecipeWrapper(SmelteryRecipe recipe)
-    {
+    public SmelteryRecipeWrapper(SmelteryRecipe recipe) {
         this.recipe = recipe;
     }
 
     @Override
-    public void getIngredients(IIngredients ingredients)
-    {
+    public void getIngredients(IIngredients ingredients) {
         List<List<ItemStack>> allInputs = new ArrayList<>();
-        for (IIngredient<ItemStack> ingredient : recipe.getIngredients())
-        {
+        for (IIngredient<ItemStack> ingredient : recipe.getIngredients()) {
             allInputs.add(ingredient.getValidIngredients());
         }
         ingredients.setInputLists(VanillaTypes.ITEM, allInputs);
@@ -42,8 +37,7 @@ public class SmelteryRecipeWrapper implements IRecipeWrapper
     }
 
     @Override
-    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
-    {
+    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         float x = 44f;
         float y = 3f;
         String text = Heat.getTooltip(recipe.getMeltTemp());

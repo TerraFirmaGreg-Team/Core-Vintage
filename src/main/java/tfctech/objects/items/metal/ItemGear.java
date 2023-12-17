@@ -1,23 +1,18 @@
 package tfctech.objects.items.metal;
 
-import net.minecraft.util.ResourceLocation;
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
+import net.minecraft.util.ResourceLocation;
 
 @SuppressWarnings("WeakerAccess")
-public class ItemGear extends ItemTechMetal
-{
-    public ItemGear(Metal metal, ItemType type)
-    {
+public class ItemGear extends ItemTechMetal {
+    public ItemGear(Metal metal, ItemType type) {
         super(metal, type);
     }
 
-    public Metal getSleeveMetal()
-    {
-        switch (this.metal.getTier())
-        {
+    public Metal getSleeveMetal() {
+        switch (this.metal.getTier()) {
             default:
             case TIER_0:
             case TIER_I:

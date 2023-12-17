@@ -1,11 +1,9 @@
 package tfctech.client;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.objects.container.ContainerCrucible;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -24,11 +22,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.container.ContainerCrucible;
-import net.dries007.tfc.util.Helpers;
+import org.lwjgl.opengl.GL11;
 import tfctech.TFCTech;
 import tfctech.client.gui.*;
 import tfctech.objects.container.ContainerElectricForge;
@@ -41,26 +35,27 @@ import tfctech.objects.tileentities.TEInductionCrucible;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 import tfctech.objects.tileentities.TESmelteryFirebox;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+
 import static tfctech.TFCTech.MODID;
 
-public class TechGuiHandler implements IGuiHandler
-{
+public class TechGuiHandler implements IGuiHandler {
     public static final ResourceLocation GUI_ELEMENTS = new ResourceLocation(MODID, "textures/gui/elements.png");
 
-    public static void openGui(World world, BlockPos pos, EntityPlayer player, Type type)
-    {
+    public static void openGui(World world, BlockPos pos, EntityPlayer player, Type type) {
         player.openGui(TFCTech.getInstance(), type.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
     }
 
     @Nullable
     @Override
-    public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-    {
+    public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
         ItemStack stack = player.getHeldItemMainhand();
         Type type = Type.valueOf(ID);
-        switch (type)
-        {
+        switch (type) {
             case ELECTRIC_FORGE:
                 TEElectricForge teElectricForge = Helpers.getTE(world, pos, TEElectricForge.class);
                 return teElectricForge == null ? null : new ContainerElectricForge(player.inventory, teElectricForge);
@@ -83,13 +78,11 @@ public class TechGuiHandler implements IGuiHandler
 
     @Override
     @Nullable
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-    {
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         Container container = getServerGuiElement(ID, player, world, x, y, z);
         Type type = Type.valueOf(ID);
         BlockPos pos = new BlockPos(x, y, z);
-        switch (type)
-        {
+        switch (type) {
             case ELECTRIC_FORGE:
                 return new GuiElectricForge(container, player.inventory, Helpers.getTE(world, pos, TEElectricForge.class));
             case INDUCTION_CRUCIBLE:
@@ -105,8 +98,7 @@ public class TechGuiHandler implements IGuiHandler
         }
     }
 
-    public enum Type
-    {
+    public enum Type {
         ELECTRIC_FORGE,
         INDUCTION_CRUCIBLE,
         SMELTERY_CAULDRON,
@@ -116,8 +108,7 @@ public class TechGuiHandler implements IGuiHandler
         private static final Type[] values = values();
 
         @Nonnull
-        public static Type valueOf(int id)
-        {
+        public static Type valueOf(int id) {
             while (id >= values.length) id -= values.length;
             while (id < 0) id += values.length;
             return values[id];
@@ -128,8 +119,7 @@ public class TechGuiHandler implements IGuiHandler
      * Some helper functions to alleviate the design of new GUIs
      */
     @SideOnly(Side.CLIENT)
-    public static abstract class Drawing
-    {
+    public static abstract class Drawing {
         /**
          * Draw the temperature bar onscreen
          *
@@ -139,8 +129,7 @@ public class TechGuiHandler implements IGuiHandler
          * @param posY        the y coords to draw (don't forget guiTop!)
          * @param temperature the temperature to draw the indicator
          */
-        public static void drawTemperatureBar(Minecraft minecraft, Gui guiElement, int posX, int posY, float temperature)
-        {
+        public static void drawTemperatureBar(Minecraft minecraft, Gui guiElement, int posX, int posY, float temperature) {
             // The bar
             minecraft.getTextureManager().bindTexture(TechGuiHandler.GUI_ELEMENTS);
             guiElement.drawTexturedModalRect(posX, posY, 39, 1, 9, 52);
@@ -160,16 +149,14 @@ public class TechGuiHandler implements IGuiHandler
          * @param capacity   the capacity of this tank
          * @param fluid      the fluid if you want to draw it, null otherwise
          */
-        public static void drawTank(Minecraft minecraft, Gui guiElement, int posX, int posY, int capacity, @Nullable FluidStack fluid)
-        {
+        public static void drawTank(Minecraft minecraft, Gui guiElement, int posX, int posY, int capacity, @Nullable FluidStack fluid) {
             minecraft.getTextureManager().bindTexture(TechGuiHandler.GUI_ELEMENTS);
 
             // Draw the background
             guiElement.drawTexturedModalRect(posX, posY, 0, 102, 18, 49);
 
             // Draw fluid
-            if (fluid != null)
-            {
+            if (fluid != null) {
                 // Fluid
                 int fillPixels = (int) Math.min(Math.ceil((fluid.amount / (float) capacity) * 47), 47);
                 TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(fluid.getFluid());
@@ -221,10 +208,8 @@ public class TechGuiHandler implements IGuiHandler
          * @param posY   the tank's y coords (without guiTop!)
          */
         @Nullable
-        public static List<String> getFluidTooltip(@Nullable FluidStack fluid, int mouseX, int mouseY, int posX, int posY)
-        {
-            if (fluid != null && mouseX >= posX && mouseX <= posX + 18 && mouseY >= posY && mouseY <= posY + 49)
-            {
+        public static List<String> getFluidTooltip(@Nullable FluidStack fluid, int mouseX, int mouseY, int posX, int posY) {
+            if (fluid != null && mouseX >= posX && mouseX <= posX + 18 && mouseY >= posY && mouseY <= posY + 49) {
                 List<String> tooltip = new ArrayList<>();
                 tooltip.add(fluid.getLocalizedName());
                 tooltip.add(fluid.amount + " / " + TESmelteryCauldron.FLUID_CAPACITY);

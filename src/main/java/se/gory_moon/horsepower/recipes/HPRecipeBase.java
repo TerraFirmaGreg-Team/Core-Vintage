@@ -6,23 +6,14 @@ import net.minecraftforge.fluids.FluidStack;
 
 import se.gory_moon.horsepower.util.Utils;
 
-public abstract class HPRecipeBase
-{
-    public static ItemStack getWithSize(ItemStack stack, int size)
-    {
-        stack.setCount(size);
-        return stack;
-    }
-
+public abstract class HPRecipeBase {
     private final ItemStack input;
     private final ItemStack output;
     private final ItemStack secondary;
     private final int time;
     private FluidStack outputFluid;
     private int secondaryChance;
-
-    public HPRecipeBase(ItemStack input, ItemStack output, ItemStack secondary, int secondaryChance, int time)
-    {
+    public HPRecipeBase(ItemStack input, ItemStack output, ItemStack secondary, int secondaryChance, int time) {
         this.input = input;
         this.output = output;
         this.time = time;
@@ -30,8 +21,7 @@ public abstract class HPRecipeBase
         this.secondaryChance = MathHelper.clamp(secondaryChance, 0, 100);
     }
 
-    public HPRecipeBase(ItemStack input, FluidStack output, int time)
-    {
+    public HPRecipeBase(ItemStack input, FluidStack output, int time) {
         this.input = input;
         this.output = ItemStack.EMPTY;
         this.outputFluid = output;
@@ -39,39 +29,37 @@ public abstract class HPRecipeBase
         this.time = time;
     }
 
-    public ItemStack getInput()
-    {
+    public static ItemStack getWithSize(ItemStack stack, int size) {
+        stack.setCount(size);
+        return stack;
+    }
+
+    public ItemStack getInput() {
         return input;
     }
 
-    public ItemStack getOutput()
-    {
+    public ItemStack getOutput() {
         return output;
     }
 
-    public FluidStack getOutputFluid()
-    {
+    public FluidStack getOutputFluid() {
         return outputFluid;
     }
 
-    public ItemStack getSecondary()
-    {
+    public ItemStack getSecondary() {
         return secondary;
     }
 
-    public int getSecondaryChance()
-    {
+    public int getSecondaryChance() {
         return secondaryChance;
     }
 
-    public int getTime()
-    {
+    public int getTime() {
         return time;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int result = Utils.getItemStackHashCode(input);
         result = 31 * result + Utils.getItemStackHashCode(output);
         result = 31 * result + Utils.getItemStackHashCode(secondary);
@@ -81,8 +69,7 @@ public abstract class HPRecipeBase
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof HPRecipeBase)) return false;
 
@@ -92,10 +79,9 @@ public abstract class HPRecipeBase
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return input + " -> " + output +
-            (time > -1 ? " = " + time : "") +
-            (!secondary.isEmpty() ? "{" + secondary + "->" + secondaryChance + "%}" : "");
+                (time > -1 ? " = " + time : "") +
+                (!secondary.isEmpty() ? "{" + secondary + "->" + secondaryChance + "%}" : "");
     }
 }

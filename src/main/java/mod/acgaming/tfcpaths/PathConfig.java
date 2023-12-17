@@ -7,8 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Config(modid = TFCPaths.MODID, name = "TFCPaths")
-public class PathConfig
-{
+public class PathConfig {
     @Config.Comment("General Settings")
     public static GeneralSettings general_settings = new GeneralSettings();
 
@@ -18,8 +17,7 @@ public class PathConfig
     @Config.Comment("Mob Settings")
     public static MobSettings mob_settings = new MobSettings();
 
-    public static class GeneralSettings
-    {
+    public static class GeneralSettings {
         @Config.Name("Destroy Vegetation")
         @Config.Comment("When enabled, vegetation like tall grass or loose rocks gets destroyed")
         public boolean DESTROY_VEGETATION = true;
@@ -33,8 +31,7 @@ public class PathConfig
         public boolean DEBUG = false;
     }
 
-    public static class PlayerSettings
-    {
+    public static class PlayerSettings {
         @Config.Name("Grass -> Dirt")
         @Config.Comment("Chance per mille for grass to turn into dirt, set to 0.0 to disable")
         @Config.RangeDouble(min = 0.0, max = 1000.0)
@@ -51,8 +48,7 @@ public class PathConfig
         public double PATH_TO_GRAVEL = 2.0;
     }
 
-    public static class MobSettings
-    {
+    public static class MobSettings {
         @Config.Name("Grass -> Dirt")
         @Config.Comment("Chance per mille for grass to turn into dirt, set to 0.0 to disable")
         @Config.RangeDouble(min = 0.0, max = 1000.0)
@@ -70,13 +66,10 @@ public class PathConfig
     }
 
     @Mod.EventBusSubscriber(modid = TFCPaths.MODID)
-    public static class EventHandler
-    {
+    public static class EventHandler {
         @SubscribeEvent
-        public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event)
-        {
-            if (event.getModID().equals(TFCPaths.MODID))
-            {
+        public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
+            if (event.getModID().equals(TFCPaths.MODID)) {
                 ConfigManager.sync(TFCPaths.MODID, Config.Type.INSTANCE);
             }
         }

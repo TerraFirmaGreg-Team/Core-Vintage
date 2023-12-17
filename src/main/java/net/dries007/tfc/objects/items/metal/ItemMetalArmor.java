@@ -27,6 +27,7 @@ public class ItemMetalArmor extends ItemArmorTFC implements IMetalItem, IItemSiz
     private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetalArmor>> TABLE = new HashMap<>();
     private final Metal metal;
     private final Metal.ItemType type;
+
     public ItemMetalArmor(Metal metal, Metal.ItemType type) {
         //noinspection ConstantConditions
         super(metal.getArmorMetal(), type.getArmorSlot(), type.getEquipmentSlot());

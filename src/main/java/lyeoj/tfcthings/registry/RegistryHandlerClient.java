@@ -28,11 +28,11 @@ public class RegistryHandlerClient {
 
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
-        for(int i = 0; i < TFCThingsItems.ITEMLIST.length; i++) {
+        for (int i = 0; i < TFCThingsItems.ITEMLIST.length; i++) {
             registerItemModel(TFCThingsItems.ITEMLIST[i]);
         }
 
-        for(int i = 0; i < TFCThingsBlocks.BLOCKLIST.length; i++) {
+        for (int i = 0; i < TFCThingsBlocks.BLOCKLIST.length; i++) {
             registerBlockModel(TFCThingsBlocks.BLOCKLIST[i]);
         }
 
@@ -43,20 +43,16 @@ public class RegistryHandlerClient {
                 .filter(Metal.ItemType.PROPICK_HEAD::hasMold)
                 .map(x -> new ModelResourceLocation(item.getRegistryName().toString() + "/" + x.getRegistryName().getPath()))
                 .toArray(ModelResourceLocation[]::new));
-        ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition()
-        {
+        ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
             private final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName().toString() + "/empty");
 
             @Override
             @Nonnull
-            public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack)
-            {
+            public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
                 IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                if (cap instanceof IMoldHandler)
-                {
+                if (cap instanceof IMoldHandler) {
                     Metal metal = ((IMoldHandler) cap).getMetal();
-                    if (metal != null)
-                    {
+                    if (metal != null) {
                         return new ModelResourceLocation(stack.getItem().getRegistryName() + "/" + metal.getRegistryName().getPath());
                     }
                 }

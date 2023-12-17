@@ -1,21 +1,17 @@
 package se.gory_moon.horsepower.jei.chopping;
 
-import java.util.Collections;
-import java.util.List;
-
 import com.google.common.collect.Lists;
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.jei.HorsePowerCategory;
 import se.gory_moon.horsepower.jei.HorsePowerPlugin;
@@ -23,8 +19,10 @@ import se.gory_moon.horsepower.recipes.ChoppingBlockRecipe;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
 
-public class ChoppingRecipeWrapper implements IRecipeWrapper
-{
+import java.util.Collections;
+import java.util.List;
+
+public class ChoppingRecipeWrapper implements IRecipeWrapper {
 
     private final List<List<ItemStack>> inputs;
     private final ItemStack output;
@@ -32,13 +30,11 @@ public class ChoppingRecipeWrapper implements IRecipeWrapper
     private final double printLaps;
     private final IDrawableAnimated arrow;
 
-    public ChoppingRecipeWrapper(ChoppingBlockRecipe recipe)
-    {
+    public ChoppingRecipeWrapper(ChoppingBlockRecipe recipe) {
         this(Collections.singletonList(recipe.getInput()), recipe.getOutput(), recipe.getTime());
     }
 
-    public ChoppingRecipeWrapper(List<ItemStack> inputs, ItemStack output, int time)
-    {
+    public ChoppingRecipeWrapper(List<ItemStack> inputs, ItemStack output, int time) {
         this.inputs = Collections.singletonList(inputs);
         this.output = output;
         this.time = time;
@@ -52,34 +48,29 @@ public class ChoppingRecipeWrapper implements IRecipeWrapper
     }
 
     @Override
-    public void getIngredients(IIngredients ingredients)
-    {
+    public void getIngredients(IIngredients ingredients) {
         ingredients.setInputLists(VanillaTypes.ITEM, inputs);
         ingredients.setOutput(VanillaTypes.ITEM, output);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
-    {
+    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         arrow.draw(minecraft, 57, 32);
         minecraft.fontRenderer.drawStringWithShadow("x" + printLaps, 58, 23, Colors.WHITE.getRGB());
     }
 
     @Override
-    public List<String> getTooltipStrings(int mouseX, int mouseY)
-    {
+    public List<String> getTooltipStrings(int mouseX, int mouseY) {
         List<String> tooltip = Lists.newArrayList();
-        if (mouseX >= 55 && mouseY >= 21 && mouseX < 80 && mouseY < 33)
-        {
+        if (mouseX >= 55 && mouseY >= 21 && mouseX < 80 && mouseY < 33) {
             tooltip.add(Localization.GUI.JEI.CHOPPING.translate(printLaps, printLaps >= 2D));
         }
         return tooltip;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int result = inputs.hashCode();
         result = 31 * result + output.hashCode();
         result = 31 * result + time;
@@ -87,17 +78,14 @@ public class ChoppingRecipeWrapper implements IRecipeWrapper
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ChoppingRecipeWrapper)) return false;
 
         ChoppingRecipeWrapper that = (ChoppingRecipeWrapper) o;
         boolean flag = true;
-        for (ItemStack stack : inputs.get(0))
-        {
-            for (ItemStack stack1 : that.inputs.get(0))
-            {
+        for (ItemStack stack : inputs.get(0)) {
+            for (ItemStack stack1 : that.inputs.get(0)) {
                 if (stack1.getMetadata() == OreDictionary.WILDCARD_VALUE && !OreDictionary.itemMatches(stack, stack1, false))
                     flag = false;
             }

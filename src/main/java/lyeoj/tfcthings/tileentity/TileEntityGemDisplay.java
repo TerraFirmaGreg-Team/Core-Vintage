@@ -33,8 +33,8 @@ public class TileEntityGemDisplay extends TEBase {
     public boolean isItemEligible(@Nullable ItemStack stack) {
         if (stack != null && !stack.isEmpty()) {
             Item item = stack.getItem();
-            if(item instanceof ItemGem) {
-                if(size == 0) {
+            if (item instanceof ItemGem) {
+                if (size == 0) {
                     grade = Gem.Grade.valueOf(stack.getItemDamage()).ordinal();
                     return true;
                 }
@@ -50,7 +50,7 @@ public class TileEntityGemDisplay extends TEBase {
 
     public void onBreakBlock() {
         this.items.forEach((i) -> {
-            InventoryHelper.spawnItemStack(this.world, (double)this.pos.getX(), (double)this.pos.getY(), (double)this.pos.getZ(), i);
+            InventoryHelper.spawnItemStack(this.world, (double) this.pos.getX(), (double) this.pos.getY(), (double) this.pos.getZ(), i);
         });
     }
 
@@ -78,12 +78,12 @@ public class TileEntityGemDisplay extends TEBase {
 
     public boolean onRightClick(EntityPlayer player, EnumHand hand) {
         ItemStack heldItem = player.getHeldItem(hand);
-        if(heldItem.isEmpty() && size > 0) {
+        if (heldItem.isEmpty() && size > 0) {
             ItemHandlerHelper.giveItemToPlayer(player, items.get(size - 1));
             this.items.set(size - 1, ItemStack.EMPTY);
             size--;
-        } else if(isItemEligible(heldItem) && size < getMaxStackSize()) {
-            if(player.isCreative()) {
+        } else if (isItemEligible(heldItem) && size < getMaxStackSize()) {
+            if (player.isCreative()) {
                 ItemStack temp = heldItem.copy();
                 temp.setCount(1);
                 this.items.set(size, temp);
@@ -106,7 +106,7 @@ public class TileEntityGemDisplay extends TEBase {
 
     public int getMaxStackSize() {
         Gem.Grade currentGrade = Gem.Grade.valueOf(grade);
-        switch(currentGrade) {
+        switch (currentGrade) {
             case CHIPPED:
                 return 8;
             case FLAWED:

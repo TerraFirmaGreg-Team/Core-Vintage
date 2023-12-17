@@ -19,15 +19,13 @@ public class ItemIronFlask extends ItemFlask {
 
     @Nonnull
     @Override
-    public Size getSize(@Nonnull ItemStack stack)
-    {
+    public Size getSize(@Nonnull ItemStack stack) {
         return Size.NORMAL;
     }
 
     @Nonnull
     @Override
-    public Weight getWeight(@Nonnull ItemStack stack)
-    {
+    public Weight getWeight(@Nonnull ItemStack stack) {
         return Weight.HEAVY;
     }
 

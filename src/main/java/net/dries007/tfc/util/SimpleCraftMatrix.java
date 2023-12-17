@@ -28,6 +28,7 @@ public class SimpleCraftMatrix {
     private final int width;
     private final int height;
     private final int area;
+
     /**
      * Create a empty max size craft matrix
      */

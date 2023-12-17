@@ -5,8 +5,7 @@ import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelFridge extends ModelBase
-{
+public class ModelFridge extends ModelBase {
     private final ModelRenderer outside_box;
     private final ModelRenderer machine;
     private final ModelRenderer coils1;
@@ -28,8 +27,7 @@ public class ModelFridge extends ModelBase
 
     private float open = 0.0F;
 
-    public ModelFridge()
-    {
+    public ModelFridge() {
         textureWidth = 128;
         textureHeight = 64;
 
@@ -221,8 +219,7 @@ public class ModelFridge extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         outside_box.render(f5);
         machine.render(f5);
         coils1.render(f5);
@@ -238,27 +235,21 @@ public class ModelFridge extends ModelBase
         stand4.render(f5);
     }
 
-    public void setOpen(float value, float lastValue, float partialTicks)
-    {
-        if (value == lastValue)
-        {
+    public void setOpen(float value, float lastValue, float partialTicks) {
+        if (value == lastValue) {
             open = value;
-        }
-        else
-        {
+        } else {
             open = lastValue + (value - lastValue) * partialTicks;
         }
     }
 
-    private void setRotateAngleInDegrees(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    private void setRotateAngleInDegrees(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = (float) (x * Math.PI / 180);
         modelRenderer.rotateAngleY = (float) (y * Math.PI / 180);
         modelRenderer.rotateAngleZ = (float) (z * Math.PI / 180);
     }
 
-    private void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    private void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

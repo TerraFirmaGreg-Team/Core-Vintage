@@ -31,6 +31,7 @@ public class ItemAnimalHide extends ItemTFC {
     private static final Map<HideType, Map<HideSize, ItemAnimalHide>> TABLE = new HashMap<>();
     protected final HideSize size;
     private final HideType type;
+
     public ItemAnimalHide(HideType type, HideSize size) {
         this.type = type;
         this.size = size;

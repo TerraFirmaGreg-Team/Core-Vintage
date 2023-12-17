@@ -21,7 +21,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -41,19 +43,18 @@ import static net.sharkbark.cellars.blocks.FreezeDryer.FACING;
 
 public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallback, ITickable {
 
-    private float localTemperature;
     public boolean overheating = false;
+    public int overheatTick;
+    public boolean initialized;
+    private float localTemperature;
     private int tick;
-
     private float temperature;
     private double pressure;
     private double localPressure;
     private float coolant;
     private boolean sealed;
     private boolean pump;
-    public int overheatTick;
     private int ticksSealed;
-    public boolean initialized;
 
     public TEFreezeDryer() {
         super(new TEFreezeDryer.FreezeDryerItemStackHandler(10));
@@ -61,16 +62,15 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
     }
 
 
-
     @Override
     public void update() {
-        if(!initialized){
-            initialized=true;
+        if (!initialized) {
+            initialized = true;
             localTemperature = ClimateTFC.getActualTemp(this.getPos());
             temperature = localTemperature;
-            localPressure = (ModConfig.seaLevelPressure + ((-(this.getPos().getY()-ModConfig.seaLevel)) * ModConfig.pressureChange));
-            System.out.println("Local pos: "+ this.getPos());
-            System.out.println("Local pressure is: "+ localPressure);
+            localPressure = (ModConfig.seaLevelPressure + ((-(this.getPos().getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
+            System.out.println("Local pos: " + this.getPos());
+            System.out.println("Local pressure is: " + localPressure);
             pressure = localPressure;
             sealed = false;
             pump = false;
@@ -78,7 +78,7 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
         }
 
         //Slow machine ticking
-        if((++tick)%20==0){
+        if ((++tick) % 20 == 0) {
             return;
         }
 
@@ -92,11 +92,11 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
         handleCoolant();
 
         //Dissipate Heat
-        if(coolant > ModConfig.coolantConsumptionMultiplier * Math.abs(temperature - localTemperature) && pump) {
+        if (coolant > ModConfig.coolantConsumptionMultiplier * Math.abs(temperature - localTemperature) && pump) {
             temperature = temperature + ModConfig.temperatureDissipation * (localTemperature - temperature);
 
             //Only consume coolant if needed.
-            if(temperature >= ModConfig.maxTemp){
+            if (temperature >= ModConfig.maxTemp) {
                 coolant = coolant - ModConfig.coolantConsumptionMultiplier * Math.abs(temperature - localTemperature);
                 temperature = temperature - (ModConfig.temperatureDissipation * temperature);
             }
@@ -105,35 +105,35 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
         }
 
         //Disabled till it cools back down
-        if(overheating){
+        if (overheating) {
             overheatTick();
         }
 
         //Handle pumping action
-        if(world.isBlockPowered(this.getPos()) && !overheating && pump) {
+        if (world.isBlockPowered(this.getPos()) && !overheating && pump) {
 
             //Increase heat
             temperature = temperature + (ModConfig.heatPerPower * getPowerLevel());
 
             //Decrease pressure
-            if(sealed) {
-                pressure = pressure - (getPowerLevel()*ModConfig.workPerPower*pressure)/Math.pow(localPressure,2);
+            if (sealed) {
+                pressure = pressure - (getPowerLevel() * ModConfig.workPerPower * pressure) / Math.pow(localPressure, 2);
             }
 
-            if(pressure < ModConfig.targetPressure){
+            if (pressure < ModConfig.targetPressure) {
                 pressure = ModConfig.targetPressure;
             }
 
             spawnParticles();
         }
 
-        if(temperature >= ModConfig.maxTemp){
+        if (temperature >= ModConfig.maxTemp) {
             overheating = true;
         }
 
-        if (sealed && pressure <= ModConfig.targetPressure){
-            if(ticksSealed < ModConfig.sealedDuration){
-                ticksSealed+=1;
+        if (sealed && pressure <= ModConfig.targetPressure) {
+            if (ticksSealed < ModConfig.sealedDuration) {
+                ticksSealed += 1;
             }
         }
 
@@ -159,7 +159,7 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
             } else if ((Block.getBlockFromItem(item) == Blocks.SNOW) && coolant < ModConfig.coolantMax - ModConfig.snowCoolant) {
                 coolant = coolant + ModConfig.snowCoolant;
                 inventory.extractItem(9, 1, false);
-            }else if ((item == Items.SNOWBALL) && coolant < ModConfig.coolantMax - ModConfig.snowBallCoolant) {
+            } else if ((item == Items.SNOWBALL) && coolant < ModConfig.coolantMax - ModConfig.snowBallCoolant) {
                 coolant = coolant + ModConfig.snowBallCoolant;
                 inventory.extractItem(9, 1, false);
             }
@@ -167,13 +167,13 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
     }
 
     private void overheatTick() {
-        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX()+0.5, this.pos.getY()+0.5, this.pos.getZ()+0.5, 0, Math.random(), 0);
-        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX()+0.5, this.pos.getY()+0.5, this.pos.getZ()+0.5, 0, Math.random(), 0);
-        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX()+0.5, this.pos.getY()+0.5, this.pos.getZ()+0.5, 0, Math.random(), 0);
-        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX()+0.5, this.pos.getY()+0.5, this.pos.getZ()+0.5, 0, Math.random(), 0);
-        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX()+0.5, this.pos.getY()+0.5, this.pos.getZ()+0.5, 0, Math.random(), 0);
-        if(temperature <= localTemperature) {
-            if((++overheatTick)%100 != 0){
+        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 0, Math.random(), 0);
+        if (temperature <= localTemperature) {
+            if ((++overheatTick) % 100 != 0) {
                 return;
             }
             overheatTick = 0;
@@ -183,14 +183,14 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
 
     public int getPowerLevel() {
         EnumFacing facing = world.getBlockState(this.getPos()).getValue(FACING);
-        if(world.isBlockPowered(this.getPos())){
-            if(EnumFacing.NORTH == facing) {
+        if (world.isBlockPowered(this.getPos())) {
+            if (EnumFacing.NORTH == facing) {
                 return world.getRedstonePower(getPos().offset(EnumFacing.SOUTH), EnumFacing.SOUTH);
-            } else if(EnumFacing.EAST == facing) {
+            } else if (EnumFacing.EAST == facing) {
                 return world.getRedstonePower(getPos().offset(EnumFacing.WEST), EnumFacing.WEST);
-            } else if(EnumFacing.SOUTH == facing) {
+            } else if (EnumFacing.SOUTH == facing) {
                 return world.getRedstonePower(getPos().offset(EnumFacing.NORTH), EnumFacing.NORTH);
-            } else if(EnumFacing.WEST == facing) {
+            } else if (EnumFacing.WEST == facing) {
                 return world.getRedstonePower(getPos().offset(EnumFacing.EAST), EnumFacing.EAST);
             }
         } else {
@@ -214,35 +214,37 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
         }
     }
 
-    private void applyTrait(ItemStack stack, FoodTrait trait){
-        IFood food = (IFood)stack.getCapability(CapabilityFood.CAPABILITY, (EnumFacing)null);
+    private void applyTrait(ItemStack stack, FoodTrait trait) {
+        IFood food = (IFood) stack.getCapability(CapabilityFood.CAPABILITY, (EnumFacing) null);
         if (!stack.isEmpty() && food != null) {
-            if(trait == Reference.PRESERVING && (food.getTraits().contains(Reference.DRY))){
+            if (trait == Reference.PRESERVING && (food.getTraits().contains(Reference.DRY))) {
                 return;
             }
         }
         CapabilityFood.applyTrait(stack, trait);
     }
-    private void removeTrait(ItemStack stack, FoodTrait trait){
+
+    private void removeTrait(ItemStack stack, FoodTrait trait) {
         CapabilityFood.removeTrait(stack, trait);
     }
 
     private void applyTraits() {
-        for (int x = 0; x < inventory.getSlots()-1; x++) {
-                ItemStack stack = inventory.getStackInSlot(x);
-                applyTrait(stack, Reference.PRESERVING);
+        for (int x = 0; x < inventory.getSlots() - 1; x++) {
+            ItemStack stack = inventory.getStackInSlot(x);
+            applyTrait(stack, Reference.PRESERVING);
         }
     }
+
     private void removeTraits() {
-        for (int x = 0; x < inventory.getSlots()-1; x++) {
-                ItemStack stack = inventory.getStackInSlot(x);
-                removeTrait(stack, Reference.PRESERVING);
+        for (int x = 0; x < inventory.getSlots() - 1; x++) {
+            ItemStack stack = inventory.getStackInSlot(x);
+            removeTrait(stack, Reference.PRESERVING);
         }
     }
 
     private void updateTraits() {
-        if(ticksSealed >= ModConfig.sealedDuration) {
-            for (int x = 0; x < inventory.getSlots()-1; x++) {
+        if (ticksSealed >= ModConfig.sealedDuration) {
+            for (int x = 0; x < inventory.getSlots() - 1; x++) {
                 ItemStack stack = inventory.getStackInSlot(x);
 
                 removeTrait(stack, Reference.PRESERVING);
@@ -254,35 +256,42 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
     public double getTemperature() {
         return temperature;
     }
+
     public double getPressure() {
         return pressure;
     }
+
     public double getCoolant() {
         return coolant;
     }
+
     public double getLocalPressure() {
         return localPressure;
     }
+
     public double getLocalTemperature() {
         return localTemperature;
     }
+
     public boolean getSeal() {
         return sealed;
     }
+
     public int getPower() {
         return getPowerLevel();
     }
+
     public Boolean getPump() {
         return pump;
     }
 
-    public void seal(){
+    public void seal() {
         sealed = true;
         applyTraits();
         this.markForSync();
     }
 
-    public void unseal(){
+    public void unseal() {
         sealed = false;
         pump = false;
         ticksSealed = 0;
@@ -291,12 +300,12 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
         this.markForSync();
     }
 
-    public void startPump(){
+    public void startPump() {
         pump = true;
         this.markForSync();
     }
 
-    public void stopPump(){
+    public void stopPump() {
         pump = false;
         this.markForSync();
     }
@@ -313,6 +322,7 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
         tagCompound.setBoolean("Overheating", overheating);
         tagCompound.setBoolean("Initialized", initialized);
     }
+
     private void readSyncData(NBTTagCompound tagCompound) {
         temperature = tagCompound.getFloat("Temperature");
         pressure = tagCompound.getDouble("Pressure");
@@ -341,6 +351,7 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
         overheating = tagCompound.getBoolean("Overheating");
         initialized = tagCompound.getBoolean("Initialized");
     }
+
     public NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
 
@@ -366,6 +377,7 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
         writeSyncData(tagCompound);
         return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, tagCompound);
     }
+
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
         readFromNBT(packet.getNbtCompound());
@@ -373,29 +385,25 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
     }
 
     @Override
-    public void onBreakBlock(World world, BlockPos pos, IBlockState state)
-    {
-        for(int i = 0; i < 10; ++i) {
+    public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
+        for (int i = 0; i < 10; ++i) {
             ItemStack stack = inventory.getStackInSlot(i);
 
             removeTraits();
 
-            InventoryHelper.spawnItemStack(world, (double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), stack);
+            InventoryHelper.spawnItemStack(world, (double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), stack);
         }
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
-    {
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
-    {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-        {
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return (T) new ItemHandlerSidedWrapper(this, inventory, facing);
         }
         return super.getCapability(capability, facing);
@@ -404,18 +412,18 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
     @Override
     public boolean canInsert(int i, ItemStack itemStack, EnumFacing enumFacing) {
 
-        if (sealed && i < 9){
+        if (sealed && i < 9) {
             return false;
         }
 
         if ((itemStack.getItem() == ModItems.SEA_ICE_SHARD ||
-            itemStack.getItem() == ModItems.PACKED_ICE_SHARD ||
-            itemStack.getItem() == ModItems.ICE_SHARD ||
-            itemStack.getItem() == Items.SNOWBALL ||
-            itemStack.getItem() == Item.getItemFromBlock(Blocks.ICE) ||
-            itemStack.getItem() == Item.getItemFromBlock(Blocks.PACKED_ICE) ||
-            itemStack.getItem() == Item.getItemFromBlock(BlocksTFC.SEA_ICE) ||
-            itemStack.getItem() == Item.getItemFromBlock(Blocks.SNOW)) && i != 9){
+                itemStack.getItem() == ModItems.PACKED_ICE_SHARD ||
+                itemStack.getItem() == ModItems.ICE_SHARD ||
+                itemStack.getItem() == Items.SNOWBALL ||
+                itemStack.getItem() == Item.getItemFromBlock(Blocks.ICE) ||
+                itemStack.getItem() == Item.getItemFromBlock(Blocks.PACKED_ICE) ||
+                itemStack.getItem() == Item.getItemFromBlock(BlocksTFC.SEA_ICE) ||
+                itemStack.getItem() == Item.getItemFromBlock(Blocks.SNOW)) && i != 9) {
 
             return false;
         }
@@ -425,18 +433,16 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
 
     @Override
     public boolean canExtract(int i, EnumFacing enumFacing) {
-        if (sealed && i < 9){
+        if (sealed && i < 9) {
             return false;
         }
         return true;
     }
 
     @Override
-    public boolean isItemValid(int slot, ItemStack stack)
-    {
+    public boolean isItemValid(int slot, ItemStack stack) {
         IItemSize sizeCap = CapabilityItemSize.getIItemSize(stack);
-        if (sizeCap != null)
-        {
+        if (sizeCap != null) {
             return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
         }
         return true;
@@ -451,8 +457,7 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
     }
 
 
-    private static class FreezeDryerItemStackHandler extends ItemStackHandler implements IItemHandlerModifiable, IItemHandler, INBTSerializable<NBTTagCompound>
-    {
+    private static class FreezeDryerItemStackHandler extends ItemStackHandler implements IItemHandlerModifiable, IItemHandler, INBTSerializable<NBTTagCompound> {
         public FreezeDryerItemStackHandler(int size) {
             super(size);
             this.deserializeNBT(new NBTTagCompound());
@@ -462,8 +467,7 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
             return super.insertItem(slot, stack, simulate);
         }
 
-        public ItemStack extractItem(int slot, int amount, boolean simulate)
-        {
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
             ItemStack stack = super.extractItem(slot, amount, simulate);
             CapabilityFood.removeTrait(stack, Reference.PRESERVING);
             return stack;

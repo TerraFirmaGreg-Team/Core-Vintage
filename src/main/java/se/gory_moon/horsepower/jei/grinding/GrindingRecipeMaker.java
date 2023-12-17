@@ -1,28 +1,27 @@
 package se.gory_moon.horsepower.jei.grinding;
 
+import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.recipe.IStackHelper;
+import net.minecraft.item.ItemStack;
+import se.gory_moon.horsepower.recipes.GrindstoneRecipe;
+import se.gory_moon.horsepower.recipes.HPRecipes;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import net.minecraft.item.ItemStack;
+public class GrindingRecipeMaker {
 
-import mezz.jei.api.IJeiHelpers;
-import mezz.jei.api.recipe.IStackHelper;
-import se.gory_moon.horsepower.recipes.GrindstoneRecipe;
-import se.gory_moon.horsepower.recipes.HPRecipes;
+    public GrindingRecipeMaker() {
+    }
 
-public class GrindingRecipeMaker
-{
-
-    public static List<GrindstoneRecipeWrapper> getGrindstoneRecipes(IJeiHelpers helpers, boolean hand)
-    {
+    public static List<GrindstoneRecipeWrapper> getGrindstoneRecipes(IJeiHelpers helpers, boolean hand) {
         IStackHelper stackHelper = helpers.getStackHelper();
         Collection<GrindstoneRecipe> grindingRecipes = hand ? HPRecipes.instance().getHandGrindstoneRecipes() : HPRecipes.instance().getGrindstoneRecipes();
 
         List<GrindstoneRecipeWrapper> recipes = new ArrayList<>();
 
-        for (GrindstoneRecipe recipe : grindingRecipes)
-        {
+        for (GrindstoneRecipe recipe : grindingRecipes) {
             ItemStack input = recipe.getInput();
             ItemStack output = recipe.getOutput();
             ItemStack secondary = recipe.getSecondary();
@@ -33,9 +32,5 @@ public class GrindingRecipeMaker
         }
 
         return recipes;
-    }
-
-    public GrindingRecipeMaker()
-    {
     }
 }

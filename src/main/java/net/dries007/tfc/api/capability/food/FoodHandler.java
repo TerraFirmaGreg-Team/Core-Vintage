@@ -30,6 +30,7 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
     protected FoodData data;
     protected long creationDate;
     protected boolean isNonDecaying; // This is intentionally not serialized, as we don't want it to preserve over `ItemStack.copy()` operations
+
     public FoodHandler() {
         this(null, new FoodData(4, 0, 0, 0, 0, 0, 0, 0, 1));
     }

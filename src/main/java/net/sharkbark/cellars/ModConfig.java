@@ -42,7 +42,7 @@ public class ModConfig {
         config.load();
 
         config.setCategoryComment(Configuration.CATEGORY_GENERAL,
-                "###BEWARE CHANGING TRAIT MODIFIERS CAN SPOIL FOOD STORED IN SHELVES###"+
+                "###BEWARE CHANGING TRAIT MODIFIERS CAN SPOIL FOOD STORED IN SHELVES###" +
                         "\nDebug: Will enable all debug text." +
                         "\nSpecial Ice Traits: Makes using sea ice and packed ice effect temperature of the cellars." +
                         "\nMonth Average Temperature: This will cause the temperature calculation, for cellars, to be based on the average temperature of the month. Instead of actual current temperature" +

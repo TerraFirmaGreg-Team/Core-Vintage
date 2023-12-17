@@ -58,7 +58,7 @@ public class TileEntityGrindstone extends TEInventory implements ITickable {
     }
 
     public boolean isItemValid(int slot, ItemStack stack) {
-        switch(slot) {
+        switch (slot) {
             case SLOT_GRINDSTONE:
                 return stack.getItem() instanceof ItemGrindstone;
             case SLOT_INPUT:
@@ -95,25 +95,25 @@ public class TileEntityGrindstone extends TEInventory implements ITickable {
     public void update() {
         ItemStack inputStack = this.inventory.getStackInSlot(SLOT_INPUT);
         ItemStack grindstoneStack = this.inventory.getStackInSlot(SLOT_GRINDSTONE);
-        if(shouldStartGrinding(inputStack, grindstoneStack)) {
-            if(this.rotationTimer > 0) {
+        if (shouldStartGrinding(inputStack, grindstoneStack)) {
+            if (this.rotationTimer > 0) {
                 --this.rotationTimer;
             }
-            if(this.rotationTimer == 1) {
+            if (this.rotationTimer == 1) {
                 sharpenItem(inputStack, grindstoneStack);
-                world.playSound((EntityPlayer)null, pos, TFCThingsSoundEvents.WHETSTONE_SHARPEN, SoundCategory.BLOCKS, 0.2F, 0.6F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
+                world.playSound((EntityPlayer) null, pos, TFCThingsSoundEvents.WHETSTONE_SHARPEN, SoundCategory.BLOCKS, 0.2F, 0.6F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
                 if (grindstoneStack.isEmpty()) {
-                    for(int i = 0; i < 15; ++i) {
-                        this.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, (double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.875D, (double)this.pos.getZ() + 0.5D, (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D, this.world.rand.nextDouble() / 4.0D, (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D, new int[]{Item.getIdFromItem(TFCThingsItems.ITEM_GRINDSTONE_QUARTZ)});
+                    for (int i = 0; i < 15; ++i) {
+                        this.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, (double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.875D, (double) this.pos.getZ() + 0.5D, (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D, this.world.rand.nextDouble() / 4.0D, (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D, new int[]{Item.getIdFromItem(TFCThingsItems.ITEM_GRINDSTONE_QUARTZ)});
                     }
-                    this.world.playSound((EntityPlayer)null, this.pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1.0F, 0.8F);
-                    this.world.playSound((EntityPlayer)null, this.pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.7F, 0.6F);
+                    this.world.playSound((EntityPlayer) null, this.pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1.0F, 0.8F);
+                    this.world.playSound((EntityPlayer) null, this.pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.7F, 0.6F);
                 }
                 this.setAndUpdateSlots(0);
             }
-            if(this.rotationTimer == 0) {
+            if (this.rotationTimer == 0) {
                 this.rotationTimer = 90;
-                world.playSound((EntityPlayer)null, pos, TFCSounds.QUERN_USE, SoundCategory.BLOCKS, 0.2F, 0.8F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
+                world.playSound((EntityPlayer) null, pos, TFCSounds.QUERN_USE, SoundCategory.BLOCKS, 0.2F, 0.8F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
             }
         } else {
             this.rotationTimer = 0;
@@ -124,7 +124,7 @@ public class TileEntityGrindstone extends TEInventory implements ITickable {
     private BlockPos getFluidLocation() {
         int dir = getBlockMetadata();
         BlockPos check = pos.down();
-        switch(dir) {
+        switch (dir) {
             case 0:
                 check = check.east();
                 break;
@@ -142,20 +142,20 @@ public class TileEntityGrindstone extends TEInventory implements ITickable {
 
 
     public int getFlowDirection() {
-        if(world.getBlockState(getFluidLocation()).getBlock() instanceof BlockFluidWater) {
-            BlockFluidWater water = (BlockFluidWater)world.getBlockState(getFluidLocation()).getBlock();
-            if(getBlockMetadata() == 0 || getBlockMetadata() == 2) {
+        if (world.getBlockState(getFluidLocation()).getBlock() instanceof BlockFluidWater) {
+            BlockFluidWater water = (BlockFluidWater) world.getBlockState(getFluidLocation()).getBlock();
+            if (getBlockMetadata() == 0 || getBlockMetadata() == 2) {
                 double flow = water.getFlowVector(world, getFluidLocation()).z;
-                if(flow > 0) {
+                if (flow > 0) {
                     return 2;
-                } else if(flow < 0) {
+                } else if (flow < 0) {
                     return 1;
                 }
             } else {
                 double flow = water.getFlowVector(world, getFluidLocation()).x;
-                if(flow > 0) {
+                if (flow > 0) {
                     return 3;
-                } else if(flow < 0) {
+                } else if (flow < 0) {
                     return 4;
                 }
             }
@@ -164,12 +164,12 @@ public class TileEntityGrindstone extends TEInventory implements ITickable {
     }
 
     private boolean shouldStartGrinding(ItemStack inputStack, ItemStack grindstoneStack) {
-        if(inputStack.isEmpty() || grindstoneStack.isEmpty() || getFlowDirection() == 0) {
+        if (inputStack.isEmpty() || grindstoneStack.isEmpty() || getFlowDirection() == 0) {
             return false;
         }
-        if(inputStack.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+        if (inputStack.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
             ISharpness capability = TFCThingsEventHandler.getSharpnessCapability(inputStack);
-            ItemGrindstone grindstone = (ItemGrindstone)grindstoneStack.getItem();
+            ItemGrindstone grindstone = (ItemGrindstone) grindstoneStack.getItem();
             return inputStack.getMaxDamage() - inputStack.getItemDamage() > 1 && capability.getCharges() < grindstone.getMaxCharges();
         }
         return false;
@@ -177,8 +177,8 @@ public class TileEntityGrindstone extends TEInventory implements ITickable {
 
     private void sharpenItem(ItemStack inputStack, ItemStack grindstoneStack) {
         ISharpness capability = TFCThingsEventHandler.getSharpnessCapability(inputStack);
-        ItemGrindstone grindstone = (ItemGrindstone)grindstoneStack.getItem();
-        if(capability != null && capability.getCharges() < grindstone.getMaxCharges()) {
+        ItemGrindstone grindstone = (ItemGrindstone) grindstoneStack.getItem();
+        if (capability != null && capability.getCharges() < grindstone.getMaxCharges()) {
             for (int i = 0; i < grindstone.getTier(); i++) {
                 if (capability.getCharges() >= grindstone.getMaxCharges())
                     break;

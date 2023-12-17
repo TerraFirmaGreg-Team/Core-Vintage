@@ -1,9 +1,8 @@
 package se.gory_moon.horsepower.blocks;
 
-import java.util.ArrayList;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -23,70 +22,59 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
-
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import se.gory_moon.horsepower.HorsePowerMod;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
 import se.gory_moon.horsepower.tileentity.TileEntityHPHorseBase;
 import se.gory_moon.horsepower.util.Utils;
 
-public abstract class BlockHPBase extends Block implements IItemSize
-{
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+
+public abstract class BlockHPBase extends Block implements IItemSize {
     public static final AxisAlignedBB EMPTY_AABB = new AxisAlignedBB(0, 0, 0, 0, 0, 0);
     protected static boolean keepInventory = false;
 
-    public BlockHPBase(Material materialIn)
-    {
+    public BlockHPBase(Material materialIn) {
         super(materialIn);
         setCreativeTab(HorsePowerMod.creativeTab);
     }
 
     @Nonnull
-    public Size getSize(@Nonnull ItemStack stack)
-    {
+    public Size getSize(@Nonnull ItemStack stack) {
         return Size.LARGE;
     }
 
     @Nonnull
-    public Weight getWeight(@Nonnull ItemStack stack)
-    {
+    public Weight getWeight(@Nonnull ItemStack stack) {
         return Weight.HEAVY;
     }
 
     public abstract void emptiedOutput(World world, BlockPos pos);
 
-    public int getSlot(IBlockState state, float hitX, float hitY, float hitZ)
-    {
+    public int getSlot(IBlockState state, float hitX, float hitY, float hitZ) {
         return -1;
     }
 
-    public void onWorkerAttached(EntityPlayer playerIn, EntityCreature creature)
-    {
+    public void onWorkerAttached(EntityPlayer playerIn, EntityCreature creature) {
     }
 
     @Override
-    public boolean isFullCube(IBlockState state)
-    {
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
-        if (!keepInventory && !worldIn.isRemote)
-        {
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        if (!keepInventory && !worldIn.isRemote) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
 
-            if (tileentity instanceof TileEntityHPBase)
-            {
+            if (tileentity instanceof TileEntityHPBase) {
                 worldIn.updateComparatorOutputLevel(pos, this);
             }
         }
@@ -94,8 +82,7 @@ public abstract class BlockHPBase extends Block implements IItemSize
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItem(hand);
         TileEntityHPBase te = (TileEntityHPBase) worldIn.getTileEntity(pos);
         TileEntityHPHorseBase teH = null;
@@ -107,19 +94,14 @@ public abstract class BlockHPBase extends Block implements IItemSize
         int z = pos.getZ();
 
         EntityCreature creature = null;
-        if (teH != null)
-        {
+        if (teH != null) {
             ArrayList<Class<? extends EntityCreature>> clazzes = Utils.getCreatureClasses();
             search:
-            for (Class<? extends Entity> clazz : clazzes)
-            {
-                for (Object entity : worldIn.getEntitiesWithinAABB(clazz, new AxisAlignedBB((double) x - 7.0D, (double) y - 7.0D, (double) z - 7.0D, (double) x + 7.0D, (double) y + 7.0D, (double) z + 7.0D)))
-                {
-                    if (entity instanceof EntityCreature)
-                    {
+            for (Class<? extends Entity> clazz : clazzes) {
+                for (Object entity : worldIn.getEntitiesWithinAABB(clazz, new AxisAlignedBB((double) x - 7.0D, (double) y - 7.0D, (double) z - 7.0D, (double) x + 7.0D, (double) y + 7.0D, (double) z + 7.0D))) {
+                    if (entity instanceof EntityCreature) {
                         EntityCreature tmp = (EntityCreature) entity;
-                        if ((tmp.getLeashed() && tmp.getLeashHolder() == playerIn))
-                        {
+                        if ((tmp.getLeashed() && tmp.getLeashHolder() == playerIn)) {
                             creature = tmp;
                             break search;
                         }
@@ -127,33 +109,24 @@ public abstract class BlockHPBase extends Block implements IItemSize
                 }
             }
         }
-        if (teH != null && ((stack.getItem() instanceof ItemLead && creature != null) || creature != null))
-        {
-            if (!teH.hasWorker())
-            {
+        if (teH != null && ((stack.getItem() instanceof ItemLead && creature != null) || creature != null)) {
+            if (!teH.hasWorker()) {
                 creature.clearLeashed(true, false);
                 teH.setWorker(creature);
                 onWorkerAttached(playerIn, creature);
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        else if (!stack.isEmpty() && te.isItemValidForSlot(0, stack))
-        {
+        } else if (!stack.isEmpty() && te.isItemValidForSlot(0, stack)) {
             ItemStack itemStack = te.getStackInSlot(0);
             boolean flag = false;
 
-            if (itemStack.isEmpty())
-            {
+            if (itemStack.isEmpty()) {
                 te.setInventorySlotContents(0, stack.copy());
                 stack.setCount(stack.getCount() - te.getInventoryStackLimit(stack));
                 flag = true;
-            }
-            else if (TileEntityHPBase.canCombine(itemStack, stack))
-            {
+            } else if (TileEntityHPBase.canCombine(itemStack, stack)) {
                 int i = Math.min(te.getInventoryStackLimit(stack), stack.getMaxStackSize()) - itemStack.getCount();
                 int j = Math.min(stack.getCount(), i);
                 stack.shrink(j);
@@ -167,18 +140,13 @@ public abstract class BlockHPBase extends Block implements IItemSize
 
         int slot = getSlot(state.getBlock().getExtendedState(state, worldIn, pos), hitX, hitY, hitZ);
         ItemStack result = ItemStack.EMPTY;
-        if (slot > -1)
-        {
+        if (slot > -1) {
             result = te.removeStackFromSlot(slot);
-        }
-        else if (slot > -2)
-        {
+        } else if (slot > -2) {
             result = te.removeStackFromSlot(1);
-            if (result.isEmpty())
-            {
+            if (result.isEmpty()) {
                 result = te.removeStackFromSlot(2);
-                if (result.isEmpty() && stack.isEmpty() && hand != EnumHand.OFF_HAND)
-                {
+                if (result.isEmpty() && stack.isEmpty() && hand != EnumHand.OFF_HAND) {
                     result = te.removeStackFromSlot(0);
                 }
             }
@@ -186,8 +154,7 @@ public abstract class BlockHPBase extends Block implements IItemSize
                 emptiedOutput(worldIn, pos);
         }
 
-        if (result.isEmpty())
-        {
+        if (result.isEmpty()) {
             if (!stack.isEmpty())
                 return false;
             if (teH != null)
@@ -202,16 +169,13 @@ public abstract class BlockHPBase extends Block implements IItemSize
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
-    {
+    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         super.onBlockHarvested(worldIn, pos, state, player);
 
-        if (!player.capabilities.isCreativeMode && !worldIn.isRemote)
-        {
+        if (!player.capabilities.isCreativeMode && !worldIn.isRemote) {
             TileEntityHPBase te = getTileEntity(worldIn, pos);
 
-            if (te != null)
-            {
+            if (te != null) {
                 InventoryHelper.dropInventoryItems(worldIn, pos, te.getInventory());
                 if (te instanceof TileEntityHPHorseBase && ((TileEntityHPHorseBase) te).hasWorker())
                     InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 1, pos.getZ(), new ItemStack(Items.LEAD));
@@ -220,14 +184,12 @@ public abstract class BlockHPBase extends Block implements IItemSize
     }
 
     @Override
-    public boolean removedByPlayer(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player, boolean willHarvest)
-    {
+    public boolean removedByPlayer(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player, boolean willHarvest) {
         // we pull up a few calls to this point in time because we still have the TE here
         // the execution otherwise is equivalent to vanilla order
         this.onPlayerDestroy(world, pos, state);
         onBlockHarvested(world, pos, state, player);
-        if (willHarvest)
-        {
+        if (willHarvest) {
             this.harvestBlock(world, player, pos, state, world.getTileEntity(pos), player.getHeldItemMainhand());
         }
 
@@ -237,21 +199,16 @@ public abstract class BlockHPBase extends Block implements IItemSize
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state)
-    {
+    public boolean hasTileEntity(IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
-    {
-        try
-        {
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        try {
             return (TileEntity) getTileClass().newInstance();
-        }
-        catch (InstantiationException | IllegalAccessException e)
-        {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return null;
@@ -260,8 +217,7 @@ public abstract class BlockHPBase extends Block implements IItemSize
     @Nonnull
     public abstract Class<?> getTileClass();
 
-    protected <T extends TileEntityHPBase> T getTileEntity(IBlockAccess worldIn, BlockPos pos)
-    {
+    protected <T extends TileEntityHPBase> T getTileEntity(IBlockAccess worldIn, BlockPos pos) {
         TileEntity tileentity = worldIn.getTileEntity(pos);
         return (tileentity != null && getTileClass().isAssignableFrom(tileentity.getClass())) ? (T) tileentity : null;
     }

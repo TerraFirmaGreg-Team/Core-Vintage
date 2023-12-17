@@ -25,6 +25,7 @@ public class WorldGenSettings {
     public final int lavaFissureClusterRarity = 400; //todo
     public final int waterFissureClusterRarity = 225; //todo
     public final int largeRockRarity = 20; //todo
+
     public WorldGenSettings(WorldGenSettingsBuilder b) {
         spawnFuzz = b.spawnFuzz;
         flatBedrock = b.flatBedrock;

@@ -1,10 +1,8 @@
 package net.sharkbark.cellars.blocks;
 
-import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

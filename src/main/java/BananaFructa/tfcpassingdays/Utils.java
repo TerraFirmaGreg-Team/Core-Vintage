@@ -15,7 +15,7 @@ public class Utils {
         }
     }
 
-    public static void writeDeclaredField(Class<?> targetType, Object target, String name, Object value,boolean final_) {
+    public static void writeDeclaredField(Class<?> targetType, Object target, String name, Object value, boolean final_) {
         try {
             Field f = targetType.getDeclaredField(name);
             f.setAccessible(true);
@@ -24,7 +24,7 @@ public class Utils {
                 modifiersField.setAccessible(true);
                 modifiersField.setInt(f, f.getModifiers() & ~Modifier.FINAL);
             }
-            f.set(target,value);
+            f.set(target, value);
 
         } catch (Exception err) {
             err.printStackTrace();

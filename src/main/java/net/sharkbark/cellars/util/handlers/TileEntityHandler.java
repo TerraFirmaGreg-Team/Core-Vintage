@@ -10,9 +10,9 @@ import net.sharkbark.cellars.util.Reference;
 
 public class TileEntityHandler {
     public static void registerTileEntities() {
-        GameRegistry.registerTileEntity(TECellarShelf.class,new ResourceLocation(Reference.MOD_ID+":cellar_shelf"));
-        GameRegistry.registerTileEntity(TEIceBunker.class,new ResourceLocation(Reference.MOD_ID+":ice_shelf"));
-        GameRegistry.registerTileEntity(TEFreezeDryer.class,new ResourceLocation(Reference.MOD_ID+":freeze_dryer"));
-        GameRegistry.registerTileEntity(TEInfectedAir.class,new ResourceLocation(Reference.MOD_ID+":infected_air"));
+        GameRegistry.registerTileEntity(TECellarShelf.class, new ResourceLocation(Reference.MOD_ID + ":cellar_shelf"));
+        GameRegistry.registerTileEntity(TEIceBunker.class, new ResourceLocation(Reference.MOD_ID + ":ice_shelf"));
+        GameRegistry.registerTileEntity(TEFreezeDryer.class, new ResourceLocation(Reference.MOD_ID + ":freeze_dryer"));
+        GameRegistry.registerTileEntity(TEInfectedAir.class, new ResourceLocation(Reference.MOD_ID + ":infected_air"));
     }
 }

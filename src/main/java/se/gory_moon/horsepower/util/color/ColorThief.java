@@ -18,14 +18,13 @@ package se.gory_moon.horsepower.util.color;
  * available at http://lokeshdhakar.com/projects/color-thief/
  */
 
+import javax.annotation.Nullable;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.util.Arrays;
-import javax.annotation.Nullable;
 
 @SuppressWarnings("ALL")
-public class ColorThief
-{
+public class ColorThief {
 
     private static final int DEFAULT_QUALITY = 2;
     private static final boolean DEFAULT_IGNORE_WHITE = false;
@@ -38,11 +37,9 @@ public class ColorThief
      * @return the dominant color as RGB array
      */
     @Nullable
-    public static int[] getColor(BufferedImage sourceImage)
-    {
+    public static int[] getColor(BufferedImage sourceImage) {
         int[][] palette = getPalette(sourceImage, 5);
-        if (palette == null)
-        {
+        if (palette == null) {
             return null;
         }
         int[] dominantColor = palette[0];
@@ -63,11 +60,9 @@ public class ColorThief
      * @return the dominant color as RGB array
      */
     @Nullable
-    public static int[] getColor(BufferedImage sourceImage, int quality, boolean ignoreWhite)
-    {
+    public static int[] getColor(BufferedImage sourceImage, int quality, boolean ignoreWhite) {
         int[][] palette = getPalette(sourceImage, 5, quality, ignoreWhite);
-        if (palette == null)
-        {
+        if (palette == null) {
             return null;
         }
         int[] dominantColor = palette[0];
@@ -82,11 +77,9 @@ public class ColorThief
      * @return the palette as array of RGB arrays
      */
     @Nullable
-    public static int[][] getPalette(BufferedImage sourceImage, int colorCount)
-    {
+    public static int[][] getPalette(BufferedImage sourceImage, int colorCount) {
         MMCQ.CMap cmap = getColorMap(sourceImage, colorCount);
-        if (cmap == null)
-        {
+        if (cmap == null) {
             return null;
         }
         return cmap.palette();
@@ -105,11 +98,9 @@ public class ColorThief
      * @return the palette as array of RGB arrays
      */
     @Nullable
-    public static int[][] getPalette(BufferedImage sourceImage, int colorCount, int quality, boolean ignoreWhite)
-    {
+    public static int[][] getPalette(BufferedImage sourceImage, int colorCount, int quality, boolean ignoreWhite) {
         MMCQ.CMap cmap = getColorMap(sourceImage, colorCount, quality, ignoreWhite);
-        if (cmap == null)
-        {
+        if (cmap == null) {
             return null;
         }
         return cmap.palette();
@@ -123,8 +114,7 @@ public class ColorThief
      * @return the color map
      */
     @Nullable
-    public static MMCQ.CMap getColorMap(BufferedImage sourceImage, int colorCount)
-    {
+    public static MMCQ.CMap getColorMap(BufferedImage sourceImage, int colorCount) {
         return getColorMap(sourceImage, colorCount, DEFAULT_QUALITY, DEFAULT_IGNORE_WHITE);
     }
 
@@ -141,12 +131,10 @@ public class ColorThief
      * @return the color map
      */
     @Nullable
-    public static MMCQ.CMap getColorMap(BufferedImage sourceImage, int colorCount, int quality, boolean ignoreWhite)
-    {
+    public static MMCQ.CMap getColorMap(BufferedImage sourceImage, int colorCount, int quality, boolean ignoreWhite) {
         int[][] pixelArray;
 
-        switch (sourceImage.getType())
-        {
+        switch (sourceImage.getType()) {
             case BufferedImage.TYPE_3BYTE_BGR:
             case BufferedImage.TYPE_4BYTE_ABGR:
                 pixelArray = getPixelsFast(sourceImage, quality, ignoreWhite);
@@ -174,18 +162,16 @@ public class ColorThief
      * @param ignoreWhite if <code>true</code>, white pixels are ignored
      * @return an array of pixels (each an RGB int array)
      */
-    private static int[][] getPixelsFast(BufferedImage sourceImage, int quality, boolean ignoreWhite)
-    {
+    private static int[][] getPixelsFast(BufferedImage sourceImage, int quality, boolean ignoreWhite) {
         DataBufferByte imageData = (DataBufferByte) sourceImage
-            .getRaster()
-            .getDataBuffer();
+                .getRaster()
+                .getDataBuffer();
         byte[] pixels = imageData.getData();
         int pixelCount = sourceImage.getWidth() * sourceImage.getHeight();
 
         int colorDepth;
         int type = sourceImage.getType();
-        switch (type)
-        {
+        switch (type) {
             case BufferedImage.TYPE_3BYTE_BGR:
                 colorDepth = 3;
                 break;
@@ -199,11 +185,10 @@ public class ColorThief
         }
 
         int expectedDataLength = pixelCount * colorDepth;
-        if (expectedDataLength != pixels.length)
-        {
+        if (expectedDataLength != pixels.length) {
             throw new IllegalArgumentException("(expectedDataLength = "
-                + expectedDataLength + ") != (pixels.length = "
-                + pixels.length + ")");
+                    + expectedDataLength + ") != (pixels.length = "
+                    + pixels.length + ")");
         }
 
         // Store the RGB values in an array format suitable for quantize
@@ -218,28 +203,24 @@ public class ColorThief
         int offset, r, g, b, a;
 
         // Do the switch outside of the loop, that's much faster
-        switch (type)
-        {
+        switch (type) {
             case BufferedImage.TYPE_3BYTE_BGR:
-                for (int i = 0; i < pixelCount; i += quality)
-                {
+                for (int i = 0; i < pixelCount; i += quality) {
                     offset = i * 3;
                     b = pixels[offset] & 0xFF;
                     g = pixels[offset + 1] & 0xFF;
                     r = pixels[offset + 2] & 0xFF;
 
                     // If pixel is not white
-                    if (!(ignoreWhite && r > 250 && g > 250 && b > 250))
-                    {
-                        pixelArray[numUsedPixels] = new int[] {r, g, b};
+                    if (!(ignoreWhite && r > 250 && g > 250 && b > 250)) {
+                        pixelArray[numUsedPixels] = new int[]{r, g, b};
                         numUsedPixels++;
                     }
                 }
                 break;
 
             case BufferedImage.TYPE_4BYTE_ABGR:
-                for (int i = 0; i < pixelCount; i += quality)
-                {
+                for (int i = 0; i < pixelCount; i += quality) {
                     offset = i * 4;
                     a = pixels[offset] & 0xFF;
                     b = pixels[offset + 1] & 0xFF;
@@ -247,9 +228,8 @@ public class ColorThief
                     r = pixels[offset + 3] & 0xFF;
 
                     // If pixel is mostly opaque and not white
-                    if (a >= 125 && !(ignoreWhite && r > 250 && g > 250 && b > 250))
-                    {
-                        pixelArray[numUsedPixels] = new int[] {r, g, b};
+                    if (a >= 125 && !(ignoreWhite && r > 250 && g > 250 && b > 250)) {
+                        pixelArray[numUsedPixels] = new int[]{r, g, b};
                         numUsedPixels++;
                     }
                 }
@@ -275,8 +255,7 @@ public class ColorThief
      * @param ignoreWhite if <code>true</code>, white pixels are ignored
      * @return an array of pixels (each an RGB int array)
      */
-    private static int[][] getPixelsSlow(BufferedImage sourceImage, int quality, boolean ignoreWhite)
-    {
+    private static int[][] getPixelsSlow(BufferedImage sourceImage, int quality, boolean ignoreWhite) {
         int width = sourceImage.getWidth();
         int height = sourceImage.getHeight();
 
@@ -291,8 +270,7 @@ public class ColorThief
         int[][] res = new int[numRegardedPixels][];
         int r, g, b;
 
-        for (int i = 0; i < pixelCount; i += quality)
-        {
+        for (int i = 0; i < pixelCount; i += quality) {
             int row = i / width;
             int col = i % width;
             int rgb = sourceImage.getRGB(col, row);
@@ -300,9 +278,8 @@ public class ColorThief
             r = (rgb >> 16) & 0xFF;
             g = (rgb >> 8) & 0xFF;
             b = (rgb) & 0xFF;
-            if (!(ignoreWhite && r > 250 && r > 250 && r > 250))
-            {
-                res[numUsedPixels] = new int[] {r, g, b};
+            if (!(ignoreWhite && r > 250 && r > 250 && r > 250)) {
+                res[numUsedPixels] = new int[]{r, g, b};
                 numUsedPixels++;
             }
         }

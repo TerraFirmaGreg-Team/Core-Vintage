@@ -69,7 +69,7 @@ public class BlockGemDisplay extends Block implements IItemSize, TFCThingsConfig
     }
 
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {FACING, TOP});
+        return new BlockStateContainer(this, new IProperty[]{FACING, TOP});
     }
 
     public IBlockState getStateFromMeta(int meta) {
@@ -77,7 +77,7 @@ public class BlockGemDisplay extends Block implements IItemSize, TFCThingsConfig
     }
 
     public int getMetaFromState(IBlockState state) {
-        return ((EnumFacing)state.getValue(FACING)).getHorizontalIndex() + ((Boolean)state.getValue(TOP) ? 4 : 0);
+        return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex() + ((Boolean) state.getValue(TOP) ? 4 : 0);
     }
 
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
@@ -114,7 +114,7 @@ public class BlockGemDisplay extends Block implements IItemSize, TFCThingsConfig
     }
 
     public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-        TileEntityGemDisplay te = (TileEntityGemDisplay)Helpers.getTE(worldIn, pos, TileEntityGemDisplay.class);
+        TileEntityGemDisplay te = (TileEntityGemDisplay) Helpers.getTE(worldIn, pos, TileEntityGemDisplay.class);
         if (te != null) {
             te.onBreakBlock();
         }
@@ -122,8 +122,8 @@ public class BlockGemDisplay extends Block implements IItemSize, TFCThingsConfig
     }
 
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if(fromPos.equals(pos.up())) {
-            if(worldIn.getBlockState(fromPos).getBlock() instanceof BlockAir) {
+        if (fromPos.equals(pos.up())) {
+            if (worldIn.getBlockState(fromPos).getBlock() instanceof BlockAir) {
                 state = state.withProperty(TOP, Boolean.valueOf(true));
             } else {
                 state = state.withProperty(TOP, Boolean.valueOf(false));
@@ -138,9 +138,9 @@ public class BlockGemDisplay extends Block implements IItemSize, TFCThingsConfig
     }
 
     @Override
-    public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos){
+    public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
         TileEntityGemDisplay te = (TileEntityGemDisplay) world.getTileEntity(pos);
-        return (int)Math.floor(15 * ((double)te.getSize() / (double)te.getMaxStackSize()));
+        return (int) Math.floor(15 * ((double) te.getSize() / (double) te.getMaxStackSize()));
     }
 
     @Override

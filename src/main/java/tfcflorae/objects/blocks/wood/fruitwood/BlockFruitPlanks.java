@@ -30,6 +30,7 @@ public class BlockFruitPlanks extends Block {
         OreDictionaryHelper.register(this, "planks");
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
+
     public BlockFruitPlanks(IFruitTree tree) {
         super(Material.WOOD, Material.WOOD.getMaterialMapColor());
         if (MAP_TFC.put(tree, this) != null) throw new IllegalStateException("There can only be one.");

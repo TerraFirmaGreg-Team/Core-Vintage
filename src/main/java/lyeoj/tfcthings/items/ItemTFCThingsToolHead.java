@@ -24,23 +24,23 @@ public class ItemTFCThingsToolHead extends ItemTFC implements IMetalItem, TFCThi
     private final int smeltAmount;
     private boolean isEnabled;
 
-    public ItemTFCThingsToolHead(Metal metal, int smeltAmount, boolean enabled, String...name) {
+    public ItemTFCThingsToolHead(Metal metal, int smeltAmount, boolean enabled, String... name) {
         this.metal = metal;
         this.smeltAmount = smeltAmount;
         this.isEnabled = enabled;
         String registryName = "";
         String translationKey = "";
-        if(TFCThingsItems.TOOLS_HEADS_BY_METAL.containsKey(name[0])) {
+        if (TFCThingsItems.TOOLS_HEADS_BY_METAL.containsKey(name[0])) {
             TFCThingsItems.TOOLS_HEADS_BY_METAL.get(name[0]).put(metal, this);
         } else {
             Map<Metal, Item> toolMap = new HashMap<>();
             toolMap.put(metal, this);
             TFCThingsItems.TOOLS_HEADS_BY_METAL.put(name[0], toolMap);
         }
-        for(int i = 0; i < name.length; i++) {
+        for (int i = 0; i < name.length; i++) {
             registryName += name[i];
             translationKey += name[i];
-            if(i + 1 < name.length) {
+            if (i + 1 < name.length) {
                 registryName += "/";
                 translationKey += "_";
             }

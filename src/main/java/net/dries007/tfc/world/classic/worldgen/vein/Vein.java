@@ -17,6 +17,7 @@ public class Vein {
     protected final BlockPos pos;
     protected final VeinType type;
     protected final Ore.Grade grade;
+
     Vein(BlockPos pos, VeinType type, Ore.Grade grade) {
         this.pos = pos;
         this.type = type;

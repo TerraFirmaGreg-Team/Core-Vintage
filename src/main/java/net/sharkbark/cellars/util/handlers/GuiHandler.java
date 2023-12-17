@@ -19,17 +19,21 @@ import net.sharkbark.cellars.util.Reference;
 import javax.annotation.Nullable;
 
 public class GuiHandler implements IGuiHandler {
+    public static void registerGUIs() {
+
+    }
+
     @Nullable
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer entityPlayer, World world, int x, int y, int z) {
-        if(ID == Reference.GUI_CELLAR_SHELF){
-            return new ContainerCellarShelf(entityPlayer.inventory, (TECellarShelf)world.getTileEntity(new BlockPos(x,y,z)), entityPlayer);
+        if (ID == Reference.GUI_CELLAR_SHELF) {
+            return new ContainerCellarShelf(entityPlayer.inventory, (TECellarShelf) world.getTileEntity(new BlockPos(x, y, z)), entityPlayer);
         }
-        if(ID == Reference.GUI_ICE_BUNKER){
-            return new ContainerIceBunker(entityPlayer.inventory, (TEIceBunker) world.getTileEntity(new BlockPos(x,y,z)), entityPlayer);
+        if (ID == Reference.GUI_ICE_BUNKER) {
+            return new ContainerIceBunker(entityPlayer.inventory, (TEIceBunker) world.getTileEntity(new BlockPos(x, y, z)), entityPlayer);
         }
-        if(ID == Reference.GUI_FREEZE_DRYER){
-            return new ContainerFreezeDryer(entityPlayer.inventory, (TEFreezeDryer) world.getTileEntity(new BlockPos(x,y,z)), entityPlayer);
+        if (ID == Reference.GUI_FREEZE_DRYER) {
+            return new ContainerFreezeDryer(entityPlayer.inventory, (TEFreezeDryer) world.getTileEntity(new BlockPos(x, y, z)), entityPlayer);
         }
         return null;
     }
@@ -39,25 +43,21 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer entityPlayer, World world, int x, int y, int z) {
         Container container = (Container) getServerGuiElement(ID, entityPlayer, world, x, y, z);
 
-        if(ID == Reference.GUI_CELLAR_SHELF){
-            TECellarShelf te = (TECellarShelf)world.getTileEntity(new BlockPos(x,y,z));
+        if (ID == Reference.GUI_CELLAR_SHELF) {
+            TECellarShelf te = (TECellarShelf) world.getTileEntity(new BlockPos(x, y, z));
             //te.isOpen += 1;
-            return new GuiCellarShelf(container ,entityPlayer.inventory, te, world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
+            return new GuiCellarShelf(container, entityPlayer.inventory, te, world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
         }
-        if(ID == Reference.GUI_ICE_BUNKER){
-            TEIceBunker te = (TEIceBunker)world.getTileEntity(new BlockPos(x,y,z));
-            return new GuiIceBunker(container ,entityPlayer.inventory, te, world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
+        if (ID == Reference.GUI_ICE_BUNKER) {
+            TEIceBunker te = (TEIceBunker) world.getTileEntity(new BlockPos(x, y, z));
+            return new GuiIceBunker(container, entityPlayer.inventory, te, world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
         }
 
-        if(ID == Reference.GUI_FREEZE_DRYER){
-            TEFreezeDryer te = (TEFreezeDryer)world.getTileEntity(new BlockPos(x,y,z));
-            return new GuiFreezeDryer(container ,entityPlayer.inventory, te, world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
+        if (ID == Reference.GUI_FREEZE_DRYER) {
+            TEFreezeDryer te = (TEFreezeDryer) world.getTileEntity(new BlockPos(x, y, z));
+            return new GuiFreezeDryer(container, entityPlayer.inventory, te, world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
         }
         return null;
-    }
-
-    public static void registerGUIs() {
-
     }
 
 }

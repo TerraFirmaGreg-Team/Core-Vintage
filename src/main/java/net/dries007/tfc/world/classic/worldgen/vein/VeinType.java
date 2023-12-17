@@ -67,13 +67,10 @@ public class VeinType {
                 grade = Ore.Grade.POOR;
             }
         }
-        switch (shape) {
-            case SPHERE:
-                return new VeinSphere(startPos, this, grade, rand);
-            case CLUSTER:
-                return new VeinCluster(startPos, this, grade, rand);
-        }
-        throw new IllegalStateException("Shape is missing!");
+        return switch (shape) {
+            case SPHERE -> new VeinSphere(startPos, this, grade, rand);
+            case CLUSTER -> new VeinCluster(startPos, this, grade, rand);
+        };
     }
 
     /**

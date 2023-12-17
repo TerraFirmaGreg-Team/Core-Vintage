@@ -13,21 +13,17 @@ import net.minecraftforge.common.capabilities.Capability;
 import se.gory_moon.horsepower.blocks.BlockFiller;
 import se.gory_moon.horsepower.blocks.BlockHPBase;
 
-public class TileEntityFiller extends TileEntity
-{
-    public TileEntityHPBase getFilledTileEntity()
-    {
+public class TileEntityFiller extends TileEntity {
+    public TileEntityHPBase getFilledTileEntity() {
         BlockPos pos = getFilledPos();
         TileEntity tileEntity = getWorld().getTileEntity(pos);
-        if (tileEntity instanceof TileEntityHPBase)
-        {
+        if (tileEntity instanceof TileEntityHPBase) {
             return (TileEntityHPBase) tileEntity;
         }
         return null;
     }
 
-    public BlockPos getFilledPos()
-    {
+    public BlockPos getFilledPos() {
         IBlockState state = getWorld().getBlockState(getPos());
         if (!(state.getBlock() instanceof BlockFiller)) return getPos();
         EnumFacing facing = state.getValue(BlockDirectional.FACING);
@@ -37,8 +33,7 @@ public class TileEntityFiller extends TileEntity
     }
 
     @Override
-    public void markDirty()
-    {
+    public void markDirty() {
         TileEntityHPBase te = getFilledTileEntity();
         if (te != null)
             te.markDirty();
@@ -46,8 +41,7 @@ public class TileEntityFiller extends TileEntity
     }
 
     @Override
-    public ITextComponent getDisplayName()
-    {
+    public ITextComponent getDisplayName() {
         TileEntityHPBase te = getFilledTileEntity();
         if (te != null)
             return te.getDisplayName();
@@ -55,8 +49,7 @@ public class TileEntityFiller extends TileEntity
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
-    {
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         TileEntityHPBase te = getFilledTileEntity();
         if (te != null)
             return te.hasCapability(capability, facing);
@@ -65,8 +58,7 @@ public class TileEntityFiller extends TileEntity
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @javax.annotation.Nullable net.minecraft.util.EnumFacing facing)
-    {
+    public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @javax.annotation.Nullable net.minecraft.util.EnumFacing facing) {
         TileEntityHPBase te = getFilledTileEntity();
         if (te != null)
             return te.getCapability(capability, facing);

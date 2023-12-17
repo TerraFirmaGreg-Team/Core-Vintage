@@ -1,36 +1,28 @@
 package tfctech.objects.container;
 
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.objects.container.ContainerTE;
+import net.dries007.tfc.objects.container.IButtonHandler;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import net.dries007.tfc.objects.container.ContainerTE;
-import net.dries007.tfc.objects.container.IButtonHandler;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import tfctech.objects.tileentities.TEElectricForge;
 
-public class ContainerElectricForge extends ContainerTE<TEElectricForge> implements IButtonHandler
-{
-    public ContainerElectricForge(InventoryPlayer playerInv, TEElectricForge te)
-    {
+import javax.annotation.Nullable;
+
+public class ContainerElectricForge extends ContainerTE<TEElectricForge> implements IButtonHandler {
+    public ContainerElectricForge(InventoryPlayer playerInv, TEElectricForge te) {
         super(playerInv, te);
     }
 
     @Override
-    public void onButtonPress(int i, @Nullable NBTTagCompound nbtTagCompound)
-    {
+    public void onButtonPress(int i, @Nullable NBTTagCompound nbtTagCompound) {
         int value = i % 2 == 0 ? 1 : -1;
-        if (i / 4 < 1)
-        {
-            if (i / 2 < 1)
-            {
+        if (i / 4 < 1) {
+            if (i / 2 < 1) {
                 value *= 50;
-            }
-            else
-            {
+            } else {
                 value *= 200;
             }
         }
@@ -38,13 +30,10 @@ public class ContainerElectricForge extends ContainerTE<TEElectricForge> impleme
     }
 
     @Override
-    protected void addContainerSlots()
-    {
+    protected void addContainerSlots() {
         IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (inventory != null)
-        {
-            for (int i = 0; i < 9; i++)
-            {
+        if (inventory != null) {
+            for (int i = 0; i < 9; i++) {
                 int row = i / 3;
                 int column = i % 3;
                 int x = 62 + column * 18;

@@ -1,9 +1,9 @@
 package tfctech.objects.blocks.devices;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,22 +21,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TEElectricForge;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockElectricForge extends BlockHorizontal implements IItemSize
-{
+public class BlockElectricForge extends BlockHorizontal implements IItemSize {
     public static final PropertyBool LIT = PropertyBool.create("lit");
 
-    public BlockElectricForge()
-    {
+    public BlockElectricForge() {
         super(Material.IRON);
         setSoundType(SoundType.METAL);
         setHardness(4);
@@ -47,31 +44,25 @@ public class BlockElectricForge extends BlockHorizontal implements IItemSize
     @Override
     @SuppressWarnings("deprecation")
     @Nonnull
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4)).withProperty(LIT, meta >= 4);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getRenderLayer()
-    {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-    {
-        if (!player.isSneaking())
-        {
-            if (!world.isRemote)
-            {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!player.isSneaking()) {
+            if (!world.isRemote) {
                 TechGuiHandler.openGui(world, pos, player, TechGuiHandler.Type.ELECTRIC_FORGE);
             }
             return true;
@@ -81,47 +72,40 @@ public class BlockElectricForge extends BlockHorizontal implements IItemSize
 
     @Override
     @Nonnull
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING, LIT);
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state)
-    {
+    public boolean hasTileEntity(IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
-    {
+    public TileEntity createTileEntity(World world, IBlockState state) {
         return new TEElectricForge();
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
-    {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
     @Nonnull
     @Override
-    public Size getSize(@Nonnull ItemStack itemStack)
-    {
+    public Size getSize(@Nonnull ItemStack itemStack) {
         return Size.LARGE;
     }
 
     @Nonnull
     @Override
-    public Weight getWeight(@Nonnull ItemStack itemStack)
-    {
+    public Weight getWeight(@Nonnull ItemStack itemStack) {
         return Weight.MEDIUM;
     }
 
     @Override
-    public boolean canStack(@Nonnull ItemStack stack)
-    {
+    public boolean canStack(@Nonnull ItemStack stack) {
         return false;
     }
 }

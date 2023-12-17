@@ -67,13 +67,13 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
     @Override
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {
-            if(result.getBlockPos() == null) {
-                this.world.setEntityState(this, (byte)3);
+            if (result.getBlockPos() == null) {
+                this.world.setEntityState(this, (byte) 3);
                 this.setDead();
                 return;
             }
-            if(result.getBlockPos() != null && world.getBlockState(result.getBlockPos()).getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB) {
-                if(getThrower() != null) {
+            if (result.getBlockPos() != null && world.getBlockState(result.getBlockPos()).getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB) {
+                if (getThrower() != null) {
                     BlockPos end = result.getBlockPos().up();
                     BlockPos start = getThrower().getPosition();
                     int xDif = end.getX() - start.getX();
@@ -82,17 +82,17 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
                     int length = axis ? Math.abs(zDif) : Math.abs(xDif);
                     boolean diagonal = false;
                     int yDif = start.getY() - end.getY();
-                    if(length - 1 > bridges.getCount()) {
+                    if (length - 1 > bridges.getCount()) {
                         getThrower().sendMessage(new TextComponentTranslation("tfcthings.tooltip.rope_bridge_too_long", new Object[0]));
-                    } else if(((length - 2) / 8) < Math.abs(yDif)) {
+                    } else if (((length - 2) / 8) < Math.abs(yDif)) {
                         getThrower().sendMessage(new TextComponentTranslation("tfcthings.tooltip.rope_bridge_too_steep", new Object[0]));
                     } else {
-                        if(axis) {
-                            if(Math.abs(xDif) < 3) {
+                        if (axis) {
+                            if (Math.abs(xDif) < 3) {
                                 BlockPos tempEnd = new BlockPos(start.getX(), end.getY(), end.getZ());
-                                if(shouldReplaceBlock(tempEnd.down(), world)) {
+                                if (shouldReplaceBlock(tempEnd.down(), world)) {
                                     BlockPos tempStart = new BlockPos(end.getX(), start.getY(), start.getZ());
-                                    if(shouldReplaceBlock(tempStart.down(), world)) {
+                                    if (shouldReplaceBlock(tempStart.down(), world)) {
                                         getThrower().sendMessage(new TextComponentTranslation("tfcthings.tooltip.rope_bridge_bad_connection", new Object[0]));
                                         diagonal = true;
                                     } else {
@@ -107,11 +107,11 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
                             }
 
                         } else {
-                            if(Math.abs(zDif) < 3) {
+                            if (Math.abs(zDif) < 3) {
                                 BlockPos tempEnd = new BlockPos(end.getX(), end.getY(), start.getZ());
-                                if(shouldReplaceBlock(tempEnd.down(), world)) {
+                                if (shouldReplaceBlock(tempEnd.down(), world)) {
                                     BlockPos tempStart = new BlockPos(start.getX(), start.getY(), end.getZ());
-                                    if(shouldReplaceBlock(tempStart.down(), world)) {
+                                    if (shouldReplaceBlock(tempStart.down(), world)) {
                                         getThrower().sendMessage(new TextComponentTranslation("tfcthings.tooltip.rope_bridge_bad_connection", new Object[0]));
                                         diagonal = true;
                                     } else {
@@ -126,7 +126,7 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
                             }
                         }
                         EnumFacing direction = axis ? (zDif > 0 ? EnumFacing.SOUTH : EnumFacing.NORTH) : (xDif > 0 ? EnumFacing.EAST : EnumFacing.WEST);
-                        switch(direction) {
+                        switch (direction) {
                             case SOUTH:
                                 start = start.south();
                                 end = end.north();
@@ -143,12 +143,12 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
                                 start = start.west();
                                 end = end.east();
                         }
-                        if(!diagonal) {
+                        if (!diagonal) {
                             buildBridge(start, end, axis, direction, yDif, length);
                         }
                     }
                 }
-                this.world.setEntityState(this, (byte)3);
+                this.world.setEntityState(this, (byte) 3);
                 this.setDead();
             }
         }
@@ -161,24 +161,24 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
         int startDif = yDif > 0 ? yDif + 1 : 1;
         int endDif = yDif < 0 ? Math.abs(yDif) + 1 : 1;
         int remainingPieces = length;
-        while(remainingPieces > 1) {
-            if(startDif == endDif) {
-                if(shouldReplaceBlock(start, world)) {
+        while (remainingPieces > 1) {
+            if (startDif == endDif) {
+                if (shouldReplaceBlock(start, world)) {
                     bridgePath.add(new BridgeInfo(start, startHeight));
                     start = moveInDirection(direction, start, false);
-                    if(startHeight == 0) {
-                        if(startDif > 0 && shouldReplaceBlock(start.down(), world)) {
+                    if (startHeight == 0) {
+                        if (startDif > 0 && shouldReplaceBlock(start.down(), world)) {
                             startHeight = 7;
                             start = start.down();
                             startDif--;
-                        } else if(startHeight < endHeight) {
-                            if(endHeight - startHeight >= remainingPieces / 2) {
+                        } else if (startHeight < endHeight) {
+                            if (endHeight - startHeight >= remainingPieces / 2) {
                                 startHeight++;
                             }
                         }
                     } else {
-                        if(startHeight < endHeight) {
-                            if(endHeight - startHeight >= remainingPieces / 2) {
+                        if (startHeight < endHeight) {
+                            if (endHeight - startHeight >= remainingPieces / 2) {
                                 startHeight++;
                             }
                         } else {
@@ -190,26 +190,26 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
                     getThrower().sendMessage(new TextComponentTranslation("tfcthings.tooltip.rope_bridge_interrupted", new Object[0]));
                     return;
                 }
-                if(remainingPieces > 0) {
-                    if(shouldReplaceBlock(end, world)) {
-                        if(remainingPieces == 1 && endHeight < 7) {
+                if (remainingPieces > 0) {
+                    if (shouldReplaceBlock(end, world)) {
+                        if (remainingPieces == 1 && endHeight < 7) {
                             endHeight++;
                         }
                         bridgePath.add(new BridgeInfo(end, endHeight));
                         end = moveInDirection(direction, end, true);
-                        if(endHeight == 0) {
-                            if(endDif > 0 && shouldReplaceBlock(end.down(), world)) {
+                        if (endHeight == 0) {
+                            if (endDif > 0 && shouldReplaceBlock(end.down(), world)) {
                                 endHeight = 7;
                                 end = end.down();
                                 endDif--;
-                            } else if(endHeight < startHeight) {
-                                if(startHeight - endHeight >= remainingPieces / 2) {
+                            } else if (endHeight < startHeight) {
+                                if (startHeight - endHeight >= remainingPieces / 2) {
                                     endHeight++;
                                 }
                             }
                         } else {
-                            if(endHeight < startHeight) {
-                                if(startHeight - endHeight >= remainingPieces / 2) {
+                            if (endHeight < startHeight) {
+                                if (startHeight - endHeight >= remainingPieces / 2) {
                                     endHeight++;
                                 }
                             } else {
@@ -222,16 +222,16 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
                         return;
                     }
                 }
-            } else if(startDif > endDif) {
-                if(shouldReplaceBlock(start, world)) {
+            } else if (startDif > endDif) {
+                if (shouldReplaceBlock(start, world)) {
                     bridgePath.add(new BridgeInfo(start, startHeight));
                     start = moveInDirection(direction, start, false);
-                    if(startHeight == 0) {
-                        if(startDif > 0 && shouldReplaceBlock(start.down(), world)) {
+                    if (startHeight == 0) {
+                        if (startDif > 0 && shouldReplaceBlock(start.down(), world)) {
                             startHeight = 7;
                             start = start.down();
                             startDif--;
-                        } else if(((remainingPieces - 1) / 8) < startDif - 1){
+                        } else if (((remainingPieces - 1) / 8) < startDif - 1) {
                             getThrower().sendMessage(new TextComponentTranslation("tfcthings.tooltip.rope_bridge_too_steep", new Object[0]));
                             return;
                         }
@@ -244,15 +244,15 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
                     return;
                 }
             } else {
-                if(shouldReplaceBlock(end, world)) {
+                if (shouldReplaceBlock(end, world)) {
                     bridgePath.add(new BridgeInfo(end, endHeight));
                     end = moveInDirection(direction, end, true);
-                    if(endHeight == 0) {
-                        if(endDif > 0 && shouldReplaceBlock(end.down(), world)) {
+                    if (endHeight == 0) {
+                        if (endDif > 0 && shouldReplaceBlock(end.down(), world)) {
                             endHeight = 7;
                             end = end.down();
                             endDif--;
-                        } else if(((remainingPieces - 1) / 8) < endDif - 1){
+                        } else if (((remainingPieces - 1) / 8) < endDif - 1) {
                             getThrower().sendMessage(new TextComponentTranslation("tfcthings.tooltip.rope_bridge_too_steep", new Object[0]));
                             return;
                         }
@@ -266,40 +266,40 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
                 }
             }
         }
-        for(BridgeInfo info : bridgePath) {
+        for (BridgeInfo info : bridgePath) {
             world.setBlockState(info.pos, TFCThingsBlocks.ROPE_BRIDGE_BLOCK.getDefaultState().withProperty(BlockRopeBridge.AXIS, axis).withProperty(BlockRopeBridge.OFFSET, info.height));
         }
-        if(getThrower() instanceof EntityPlayer && !(((EntityPlayer) getThrower()).isCreative())) {
+        if (getThrower() instanceof EntityPlayer && !(((EntityPlayer) getThrower()).isCreative())) {
             bridges.setCount(bridges.getCount() - (length - 1));
         }
     }
 
     private BlockPos moveInDirection(EnumFacing direction, BlockPos pos, boolean flip) {
         BlockPos value;
-        switch(direction) {
+        switch (direction) {
             case SOUTH:
-                if(flip) {
+                if (flip) {
                     value = pos.north();
                 } else {
                     value = pos.south();
                 }
                 break;
             case NORTH:
-                if(flip) {
+                if (flip) {
                     value = pos.south();
                 } else {
                     value = pos.north();
                 }
                 break;
             case EAST:
-                if(flip) {
+                if (flip) {
                     value = pos.west();
                 } else {
                     value = pos.east();
                 }
                 break;
             default:
-                if(flip) {
+                if (flip) {
                     value = pos.east();
                 } else {
                     value = pos.west();
@@ -311,7 +311,7 @@ public class EntityRopeBridgeThrown extends EntityThrowable {
     private boolean shouldReplaceBlock(BlockPos pos, World world) {
         IBlockState iblockstate = world.getBlockState(pos);
         Material material = iblockstate.getMaterial();
-        if(material == Material.LAVA || material == Material.WATER) {
+        if (material == Material.LAVA || material == Material.WATER) {
             return false;
         }
         return world.getBlockState(pos).getBlock().isReplaceable(world, pos);

@@ -9,42 +9,36 @@ import se.gory_moon.horsepower.jei.HorsePowerPlugin;
 import se.gory_moon.horsepower.lib.Reference;
 import se.gory_moon.horsepower.util.Localization;
 
-public class HPChoppingCategory extends HorsePowerCategory<ChoppingRecipeWrapper>
-{
+public class HPChoppingCategory extends HorsePowerCategory<ChoppingRecipeWrapper> {
 
     private static final int inputSlot = 0;
     private static final int outputSlot = 1;
 
     private final String localizedName;
 
-    public HPChoppingCategory(IGuiHelper guiHelper)
-    {
+    public HPChoppingCategory(IGuiHelper guiHelper) {
         super(guiHelper);
         localizedName = Localization.GUI.CATEGORY_CHOPPING.translate();
     }
 
     @Override
-    public String getUid()
-    {
+    public String getUid() {
         return HorsePowerPlugin.CHOPPING;
     }
 
     @Override
-    public String getTitle()
-    {
+    public String getTitle() {
         return localizedName;
     }
 
     @Override
-    public String getModName()
-    {
+    public String getModName() {
         return Reference.NAME;
     }
 
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, ChoppingRecipeWrapper recipeWrapper, IIngredients ingredients)
-    {
+    public void setRecipe(IRecipeLayout recipeLayout, ChoppingRecipeWrapper recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
         guiItemStacks.init(inputSlot, true, 34, 32);

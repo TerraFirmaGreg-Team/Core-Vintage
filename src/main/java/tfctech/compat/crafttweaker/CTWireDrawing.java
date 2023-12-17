@@ -1,12 +1,5 @@
 package tfctech.compat.crafttweaker;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.IForgeRegistryModifiable;
-
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
@@ -15,18 +8,22 @@ import crafttweaker.api.liquid.ILiquidStack;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.crafttweaker.CTHelper;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.IForgeRegistryModifiable;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import tfctech.api.recipes.WireDrawingRecipe;
 import tfctech.registry.TechRegistries;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @ZenClass("mods.tfctech.WireDrawing")
 @ZenRegister
-public class CTWireDrawing
-{
+public class CTWireDrawing {
     @ZenMethod
-    public static void addRecipe(String registryName, crafttweaker.api.item.IIngredient input, int minTier, IItemStack output, int color)
-    {
+    public static void addRecipe(String registryName, crafttweaker.api.item.IIngredient input, int minTier, IItemStack output, int color) {
         if (output == null || input == null)
             throw new IllegalArgumentException("Input and output are not allowed to be empty");
         if (input instanceof ILiquidStack)
@@ -37,46 +34,38 @@ public class CTWireDrawing
         ItemStack outputItem = (ItemStack) output.getInternal();
         //noinspection unchecked
         WireDrawingRecipe recipe = new WireDrawingRecipe(new ResourceLocation(registryName), ingredient, tier, outputItem, color);
-        CraftTweakerAPI.apply(new IAction()
-        {
+        CraftTweakerAPI.apply(new IAction() {
             @Override
-            public void apply()
-            {
+            public void apply() {
                 TechRegistries.WIRE_DRAWING.register(recipe);
             }
 
             @Override
-            public String describe()
-            {
+            public String describe() {
                 return "Adding wire drawing recipe for " + outputItem.getDisplayName();
             }
         });
     }
 
     @ZenMethod
-    public static void removeRecipe(IItemStack output)
-    {
+    public static void removeRecipe(IItemStack output) {
         if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
         ItemStack item = (ItemStack) output.getInternal();
         List<WireDrawingRecipe> removeList = new ArrayList<>();
         TechRegistries.WIRE_DRAWING.getValuesCollection()
-            .stream()
-            .filter(x -> x.getOutputs().get(0).isItemEqual(item))
-            .forEach(removeList::add);
-        for (WireDrawingRecipe rem : removeList)
-        {
-            CraftTweakerAPI.apply(new IAction()
-            {
+                .stream()
+                .filter(x -> x.getOutputs().get(0).isItemEqual(item))
+                .forEach(removeList::add);
+        for (WireDrawingRecipe rem : removeList) {
+            CraftTweakerAPI.apply(new IAction() {
                 @Override
-                public void apply()
-                {
-                    IForgeRegistryModifiable<WireDrawingRecipe> modRegistry = (IForgeRegistryModifiable<WireDrawingRecipe>)TechRegistries.WIRE_DRAWING;
+                public void apply() {
+                    IForgeRegistryModifiable<WireDrawingRecipe> modRegistry = (IForgeRegistryModifiable<WireDrawingRecipe>) TechRegistries.WIRE_DRAWING;
                     modRegistry.remove(rem.getRegistryName());
                 }
 
                 @Override
-                public String describe()
-                {
+                public String describe() {
                     //noinspection ConstantConditions
                     return "Removing wire drawing recipe " + rem.getRegistryName().toString();
                 }
@@ -85,23 +74,18 @@ public class CTWireDrawing
     }
 
     @ZenMethod
-    public static void removeRecipe(String registryName)
-    {
+    public static void removeRecipe(String registryName) {
         WireDrawingRecipe recipe = TechRegistries.WIRE_DRAWING.getValue(new ResourceLocation(registryName));
-        if (recipe != null)
-        {
-            CraftTweakerAPI.apply(new IAction()
-            {
+        if (recipe != null) {
+            CraftTweakerAPI.apply(new IAction() {
                 @Override
-                public void apply()
-                {
+                public void apply() {
                     IForgeRegistryModifiable<WireDrawingRecipe> modRegistry = (IForgeRegistryModifiable<WireDrawingRecipe>) TechRegistries.WIRE_DRAWING;
                     modRegistry.remove(recipe.getRegistryName());
                 }
 
                 @Override
-                public String describe()
-                {
+                public String describe() {
                     //noinspection ConstantConditions
                     return "Removing wire drawing recipe " + recipe.getRegistryName().toString();
                 }

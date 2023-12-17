@@ -45,6 +45,7 @@ public class ItemMetalSword extends ItemSword implements IMetalItem, IItemSize {
     public final ToolMaterial material;
     private final Metal metal;
     private final float attackDamage;
+
     public ItemMetalSword(Metal metal) {
         //noinspection ConstantConditions
         super(metal.getToolMetal());

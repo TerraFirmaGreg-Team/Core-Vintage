@@ -1,22 +1,19 @@
 package se.gory_moon.horsepower.client.renderer;
 
-import org.lwjgl.opengl.GL11;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-
+import org.lwjgl.opengl.GL11;
 import se.gory_moon.horsepower.blocks.BlockHPBase;
 import se.gory_moon.horsepower.blocks.BlockHandGrindstone;
 import se.gory_moon.horsepower.client.model.modelvariants.HandGrindstoneModels;
 import se.gory_moon.horsepower.tileentity.TileEntityHandGrindstone;
 
-public class TileEntityHandGrindstoneRender extends TileEntityHPBaseRenderer<TileEntityHandGrindstone>
-{
+public class TileEntityHandGrindstoneRender extends TileEntityHPBaseRenderer<TileEntityHandGrindstone> {
     @Override
-    public void render(TileEntityHandGrindstone te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TileEntityHandGrindstone te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
         BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
@@ -34,12 +31,10 @@ public class TileEntityHandGrindstoneRender extends TileEntityHPBaseRenderer<Til
         // This makes the translations that follow much easier
         buffer.setTranslation(-te.getPos().getX(), -te.getPos().getY(), -te.getPos().getZ());
 
-        if (destroyStage >= 0)
-        {
+        if (destroyStage >= 0) {
             buffer.noColor();
             renderBlockDamage(centerState, te.getPos(), getDestroyBlockIcon(destroyStage), te.getWorld());
-        }
-        else
+        } else
             dispatcher.getBlockModelRenderer().renderModel(te.getWorld(), centerModel, centerState, te.getPos(), buffer, false);
 
         buffer.setTranslation(0, 0, 0);

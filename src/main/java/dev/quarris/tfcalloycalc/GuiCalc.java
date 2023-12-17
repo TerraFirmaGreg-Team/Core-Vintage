@@ -5,8 +5,6 @@ import net.dries007.tfc.util.Alloy;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -44,8 +42,8 @@ public class GuiCalc extends GuiContainer {
             GlStateManager.pushMatrix();
             GlStateManager.scale(scale, scale, scale);
             this.fontRenderer.drawString(
-                I18n.format(result.getTranslationKey()) + " - " + alloy.getAmount() + " units",
-                8 / scale, 18 / scale, 0x404040, false
+                    I18n.format(result.getTranslationKey()) + " - " + alloy.getAmount() + " units",
+                    8 / scale, 18 / scale, 0x404040, false
             );
             GlStateManager.popMatrix();
             scale = 0.7f;
@@ -57,9 +55,9 @@ public class GuiCalc extends GuiContainer {
                 Metal metal = entry.getKey();
                 double amount = entry.getValue();
                 this.fontRenderer.drawString(
-                    String.format("%5.2f%%", (amount / alloy.getAmount()) * 100) + " - " + I18n.format(metal.getTranslationKey()) + " " + (int) amount,
-                    70 / scale,
-                    (20 + this.fontRenderer.FONT_HEIGHT + i * (this.fontRenderer.FONT_HEIGHT - 1)) / scale, 0x404040, false
+                        String.format("%5.2f%%", (amount / alloy.getAmount()) * 100) + " - " + I18n.format(metal.getTranslationKey()) + " " + (int) amount,
+                        70 / scale,
+                        (20 + this.fontRenderer.FONT_HEIGHT + i * (this.fontRenderer.FONT_HEIGHT - 1)) / scale, 0x404040, false
                 );
                 i++;
             }

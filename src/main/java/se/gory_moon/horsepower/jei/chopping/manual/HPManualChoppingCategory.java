@@ -1,10 +1,5 @@
 package se.gory_moon.horsepower.jei.chopping.manual;
 
-import java.util.List;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -14,14 +9,17 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IStackHelper;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import se.gory_moon.horsepower.jei.HorsePowerPlugin;
 import se.gory_moon.horsepower.lib.Reference;
 import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
 
-public class HPManualChoppingCategory implements IRecipeCategory<ManualChoppingRecipeWrapper>
-{
+import java.util.List;
+
+public class HPManualChoppingCategory implements IRecipeCategory<ManualChoppingRecipeWrapper> {
 
     private static final int inputSlot = 0;
     private static final int outputSlot = 1;
@@ -30,45 +28,38 @@ public class HPManualChoppingCategory implements IRecipeCategory<ManualChoppingR
     private final String localizedName;
     protected IDrawable background;
 
-    public HPManualChoppingCategory(IGuiHelper guiHelper)
-    {
+    public HPManualChoppingCategory(IGuiHelper guiHelper) {
         final ResourceLocation location = new ResourceLocation("horsepower", "textures/gui/jei_manual_chopping.png");
         background = guiHelper.createDrawable(location, 0, 0, 78, 44);
         localizedName = Localization.GUI.CATEGORY_MANUAL_CHOPPING.translate();
     }
 
     @Override
-    public String getUid()
-    {
+    public String getUid() {
         return HorsePowerPlugin.MANUAL_CHOPPING;
     }
 
     @Override
-    public String getTitle()
-    {
+    public String getTitle() {
         return localizedName;
     }
 
     @Override
-    public String getModName()
-    {
+    public String getModName() {
         return Reference.NAME;
     }
 
     @Override
-    public IDrawable getBackground()
-    {
+    public IDrawable getBackground() {
         return background;
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, ManualChoppingRecipeWrapper recipeWrapper, IIngredients ingredients)
-    {
+    public void setRecipe(IRecipeLayout recipeLayout, ManualChoppingRecipeWrapper recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
         recipeLayout.getItemStacks().addTooltipCallback((slotIndex, input, ingredient, tooltip) ->
         {
-            if (slotIndex == axeSlot)
-            {
+            if (slotIndex == axeSlot) {
                 int base = TileEntityManualChopper.getBaseAmount(ingredient, null);
                 int chance = TileEntityManualChopper.getChance(ingredient, null);
                 tooltip.add(Colors.LIGHTGRAY + Localization.GUI.JEI.MANUAL_CHOPPING_DESC_1.translate(Colors.WHITE.toString() + base));
@@ -86,24 +77,19 @@ public class HPManualChoppingCategory implements IRecipeCategory<ManualChoppingR
         List<List<ItemStack>> outputs = ingredients.getOutputs(VanillaTypes.ITEM);
 
         IStackHelper stackHelper = HorsePowerPlugin.jeiHelpers.getStackHelper();
-        if (focus != null && focus.getValue() instanceof ItemStack)
-        {
+        if (focus != null && focus.getValue() instanceof ItemStack) {
             ItemStack stack = (ItemStack) focus.getValue();
 
-            if (focus.getMode() == IFocus.Mode.INPUT)
-            {
+            if (focus.getMode() == IFocus.Mode.INPUT) {
                 int index = -1;
                 final List<ItemStack> stacks = inputs.get(1);
-                for (int i = 0; i < stacks.size(); i++)
-                {
-                    if (stackHelper.isEquivalent(stacks.get(i), stack))
-                    {
+                for (int i = 0; i < stacks.size(); i++) {
+                    if (stackHelper.isEquivalent(stacks.get(i), stack)) {
                         index = i;
                         break;
                     }
                 }
-                if (index > -1)
-                {
+                if (index > -1) {
                     inputs.get(1).removeIf(itemStack -> !stackHelper.isEquivalent(stack, itemStack));
                     final ItemStack output = outputs.get(0).get(index);
                     outputs.get(0).removeIf(itemStack -> output != itemStack);

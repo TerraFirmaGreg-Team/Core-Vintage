@@ -22,10 +22,8 @@ public class ConfigFlasks {
     public static final GeneralCFG GENERAL = new GeneralCFG();
 
     @SubscribeEvent
-    public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
-    {
-        if (event.getModID().equals(MOD_ID))
-        {
+    public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.getModID().equals(MOD_ID)) {
             LogManager.getLogger(MOD_ID).warn("Config changed");
             ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
         }

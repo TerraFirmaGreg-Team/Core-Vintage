@@ -29,7 +29,7 @@ public class CapabilitySharpness {
 
         @Override
         public void readNBT(Capability<ISharpness> capability, ISharpness instance, EnumFacing side, NBTBase nbt) {
-            instance.setCharges(((NBTPrimitive)nbt).getInt());
+            instance.setCharges(((NBTPrimitive) nbt).getInt());
         }
     }
 

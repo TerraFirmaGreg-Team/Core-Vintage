@@ -1,6 +1,6 @@
 package tfctech.client.render.tesr;
 
-import org.lwjgl.opengl.GL11;
+import net.dries007.tfc.client.FluidSpriteCache;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
@@ -14,8 +14,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.fluids.Fluid;
-
-import net.dries007.tfc.client.FluidSpriteCache;
+import org.lwjgl.opengl.GL11;
 import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.tileentities.TELatexExtractor;
 
@@ -23,13 +22,10 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 import static tfctech.objects.blocks.devices.BlockLatexExtractor.*;
 import static tfctech.objects.tileentities.TELatexExtractor.MAX_FLUID;
 
-public class TESRLatexExtractor extends TileEntitySpecialRenderer<TELatexExtractor>
-{
+public class TESRLatexExtractor extends TileEntitySpecialRenderer<TELatexExtractor> {
     @Override
-    public void render(TELatexExtractor te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
-        if (te.hasWorld())
-        {
+    public void render(TELatexExtractor te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        if (te.hasWorld()) {
             IBlockState state = te.getBlockState();
             Fluid flowing = TechFluids.LATEX.get();
 
@@ -37,8 +33,8 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TELatexExtract
 
             //noinspection ConstantConditions
             state = state.withProperty(BASE, te.hasBase())
-                .withProperty(POT, te.hasPot())
-                .withProperty(CUT, te.cutState());
+                    .withProperty(POT, te.hasPot())
+                    .withProperty(CUT, te.cutState());
 
             Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             BlockRendererDispatcher renderer = Minecraft.getMinecraft().getBlockRendererDispatcher();
@@ -78,8 +74,7 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TELatexExtract
             double yPos = (te.getFluidAmount() / (double) MAX_FLUID) * (yMax - yMin) + yMin;
 
 
-            switch (state.getValue(FACING))
-            {
+            switch (state.getValue(FACING)) {
                 case NORTH:
                     GlStateManager.rotate(180, 0, 1, 0);
                     GlStateManager.translate(-1, 0, -1);
@@ -96,10 +91,8 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TELatexExtract
                     break;
             }
             //From bark
-            if (te.cutState() > 1)
-            {
-                for (double zPos = 1.075D; zPos <= 1.375D; zPos += 0.075D)
-                {
+            if (te.cutState() > 1) {
+                for (double zPos = 1.075D; zPos <= 1.375D; zPos += 0.075D) {
                     buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
                     buffer.pos(0.46625D, 0.57125D, zPos - 0.075D).tex(sprite.getMinU(), sprite.getMinV()).normal(0, 1, 0).endVertex();
@@ -131,8 +124,7 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TELatexExtract
                 Tessellator.getInstance().draw();
 
                 double lastPos = 0D;
-                for (double yyPos = 0.42625D; yyPos > yPos; yyPos -= 0.075D)
-                {
+                for (double yyPos = 0.42625D; yyPos > yPos; yyPos -= 0.075D) {
                     //To pot
                     buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
@@ -180,8 +172,7 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TELatexExtract
             }
 
             //Draws pot contents
-            if (te.hasFluid())
-            {
+            if (te.hasFluid()) {
                 sprite = FluidSpriteCache.getStillSprite(flowing);
 
                 buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_TEX_NORMAL);

@@ -1,45 +1,39 @@
 package tfctech.client.gui;
 
-import java.io.IOException;
-
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.client.gui.GuiContainerTE;
+import net.dries007.tfc.network.PacketGuiButton;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
-
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.client.gui.GuiContainerTE;
-import net.dries007.tfc.network.PacketGuiButton;
 import tfctech.client.TechGuiHandler;
 import tfctech.client.gui.button.GuiButtonSetter;
 import tfctech.objects.tileentities.TEElectricForge;
 
+import java.io.IOException;
+
 import static tfctech.TFCTech.MODID;
 
-public class GuiElectricForge extends GuiContainerTE<TEElectricForge>
-{
+public class GuiElectricForge extends GuiContainerTE<TEElectricForge> {
     private static final ResourceLocation ELECTRIC_FORGE_BACKGROUND = new ResourceLocation(MODID, "textures/gui/electric_forge.png");
 
-    public GuiElectricForge(Container container, InventoryPlayer playerInv, TEElectricForge tile)
-    {
+    public GuiElectricForge(Container container, InventoryPlayer playerInv, TEElectricForge tile) {
         super(container, playerInv, tile, ELECTRIC_FORGE_BACKGROUND);
     }
 
     @Override
-    public void initGui()
-    {
+    public void initGui() {
         super.initGui();
         addButton(new GuiButtonSetter(0, guiLeft + 34, guiTop + 27, true));
         addButton(new GuiButtonSetter(1, guiLeft + 34, guiTop + 46, false));
     }
 
     @Override
-    protected void renderHoveredToolTip(int mouseX, int mouseY)
-    {
-        if (mouseX >= guiLeft + 153 && mouseX <= guiLeft + 153 + 18 && mouseY >= guiTop + 6 && mouseY <= guiTop + 6 + 59)
-        {
+    protected void renderHoveredToolTip(int mouseX, int mouseY) {
+        if (mouseX >= guiLeft + 153 && mouseX <= guiLeft + 153 + 18 && mouseY >= guiTop + 6 && mouseY <= guiTop + 6 + 59) {
             int energy = tile.getField(1);
             drawHoveringText(I18n.format("tooltip.tfctech.gui.energy_format", energy, tile.getEnergyCapacity()), mouseX, mouseY);
         }
@@ -47,8 +41,7 @@ public class GuiElectricForge extends GuiContainerTE<TEElectricForge>
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException
-    {
+    protected void actionPerformed(GuiButton button) throws IOException {
         int shift = isShiftKeyDown() ? 2 : 0;
         int ctrl = isCtrlKeyDown() ? 4 : 0;
         int value = button.id + (ctrl > 0 ? ctrl : shift);
@@ -57,8 +50,7 @@ public class GuiElectricForge extends GuiContainerTE<TEElectricForge>
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-    {
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
         //Draw the temperature bar
@@ -71,7 +63,7 @@ public class GuiElectricForge extends GuiContainerTE<TEElectricForge>
         drawTexturedModalRect(guiLeft + 8, guiTop + 66 - temperaturePixels, 36, 54, 15, 5);
 
         // Draw the energy bar
-        int energyPixels = Math.round(60 * tile.getField(1) / (float)tile.getEnergyCapacity());
+        int energyPixels = Math.round(60 * tile.getField(1) / (float) tile.getEnergyCapacity());
         int emptyPixels = 60 - energyPixels;
         drawTexturedModalRect(guiLeft + 153, guiTop + 6, 0, 0, 18, emptyPixels);
         drawTexturedModalRect(guiLeft + 153, guiTop + 6 + emptyPixels, 18, emptyPixels, 18, energyPixels);

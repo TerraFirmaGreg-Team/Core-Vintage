@@ -2,9 +2,10 @@ package org.labellum.mc.waterflasks.item;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
-
-import static net.dries007.tfc.objects.CreativeTabsTFC.*;
 import org.labellum.mc.waterflasks.ConfigFlasks;
+
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 
 public class ModItems {
 
@@ -40,5 +41,5 @@ public class ModItems {
             ironFlask.registerItemModel();
             brokenIronFlask.registerItemModel();
         }
-	}
+    }
 }

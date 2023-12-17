@@ -12,7 +12,7 @@ public class ItemBase extends Item {
 
     public ItemBase(String name) {
         this.name = name;
-        setTranslationKey(MOD_ID+"."+name);
+        setTranslationKey(MOD_ID + "." + name);
         setRegistryName(name);
 
         setCreativeTab(CreativeTabs.MATERIALS);
@@ -21,12 +21,12 @@ public class ItemBase extends Item {
 
     public void registerItemModel() {
         Waterflasks.proxy.registerItemRenderer(this, 0, name);
-	}
+    }
 
-	@Override
-	public ItemBase setCreativeTab(CreativeTabs tab) {
-		super.setCreativeTab(tab);
-		return this;
-	}
+    @Override
+    public ItemBase setCreativeTab(CreativeTabs tab) {
+        super.setCreativeTab(tab);
+        return this;
+    }
 
 }

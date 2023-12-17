@@ -32,7 +32,7 @@ public class ItemGrindstone extends ItemTFC implements TFCThingsConfigurableItem
     }
 
     public int getMaxCharges() {
-        switch(tier) {
+        switch (tier) {
             case 2:
                 return 256;
             case 3:
@@ -61,7 +61,7 @@ public class ItemGrindstone extends ItemTFC implements TFCThingsConfigurableItem
 
 
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        if(tier == 1) {
+        if (tier == 1) {
             return new ForgeableHandler(nbt);
         } else {
             return null;

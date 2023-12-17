@@ -1,15 +1,6 @@
 package se.gory_moon.horsepower.jei;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.NonNullList;
-import net.minecraftforge.oredict.OreDictionary;
-
 import mezz.jei.api.gui.IGuiIngredientGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -18,29 +9,32 @@ import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IStackHelper;
 import mezz.jei.api.recipe.wrapper.ICustomCraftingRecipeWrapper;
 import mezz.jei.api.recipe.wrapper.IShapedCraftingRecipeWrapper;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.oredict.OreDictionary;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockChopper;
 import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
 import se.gory_moon.horsepower.recipes.ShapedChoppingRecipe;
 
-public class ShapedChoppingCraftingWrapper implements IShapedCraftingRecipeWrapper, ICustomCraftingRecipeWrapper
-{
+import java.util.List;
+
+public class ShapedChoppingCraftingWrapper implements IShapedCraftingRecipeWrapper, ICustomCraftingRecipeWrapper {
     private final ShapedChoppingRecipe recipe;
     private final int width;
     private final int height;
     private final List<List<ItemStack>> outputs;
 
-    public ShapedChoppingCraftingWrapper(ShapedChoppingRecipe recipe)
-    {
+    public ShapedChoppingCraftingWrapper(ShapedChoppingRecipe recipe) {
         this.recipe = recipe;
 
-        for (Object input : this.recipe.getIngredients())
-        {
-            if (input instanceof ItemStack)
-            {
+        for (Object input : this.recipe.getIngredients()) {
+            if (input instanceof ItemStack) {
                 ItemStack itemStack = (ItemStack) input;
-                if (itemStack.getCount() != 1)
-                {
+                if (itemStack.getCount() != 1) {
                     itemStack.setCount(1);
                 }
             }
@@ -49,32 +43,23 @@ public class ShapedChoppingCraftingWrapper implements IShapedCraftingRecipeWrapp
         this.height = recipe.getHeight();
 
         ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
-        for (ItemStack stack : recipe.outputBlocks)
-        {
+        for (ItemStack stack : recipe.outputBlocks) {
             BlockHPChoppingBase block = (BlockHPChoppingBase) Block.getBlockFromItem(recipe.getSimpleRecipeOutput().getItem());
-            if (!Configs.general.useDynamicCrafting && !"tfc".equals(stack.getItem().getRegistryName().getNamespace()))
-            {
+            if (!Configs.general.useDynamicCrafting && !"tfc".equals(stack.getItem().getRegistryName().getNamespace())) {
                 builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput().getCount(), new ItemStack(Blocks.LOG)));
                 break;
             }
-            if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
-            {
-                for (ItemStack sub : HorsePowerPlugin.jeiHelpers.getStackHelper().getSubtypes(stack))
-                {
+            if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+                for (ItemStack sub : HorsePowerPlugin.jeiHelpers.getStackHelper().getSubtypes(stack)) {
                     builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput().getCount(), sub));
                 }
-            }
-            else if (Block.getBlockFromItem(stack.getItem()) instanceof BlockHPChoppingBase)
-            {
+            } else if (Block.getBlockFromItem(stack.getItem()) instanceof BlockHPChoppingBase) {
                 NonNullList<ItemStack> stacks = NonNullList.create();
                 Block.getBlockFromItem(stack.getItem()).getSubBlocks(null, stacks);
-                for (ItemStack sub : stacks)
-                {
+                for (ItemStack sub : stacks) {
                     builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput().getCount(), sub));
                 }
-            }
-            else
-            {
+            } else {
                 builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput().getCount(), stack));
             }
         }
@@ -82,8 +67,7 @@ public class ShapedChoppingCraftingWrapper implements IShapedCraftingRecipeWrapp
     }
 
     @Override
-    public void getIngredients(IIngredients ingredients)
-    {
+    public void getIngredients(IIngredients ingredients) {
         IStackHelper stackHelper = HorsePowerPlugin.jeiHelpers.getStackHelper();
 
         List<List<ItemStack>> inputs = stackHelper.expandRecipeItemStackInputs(recipe.getIngredients());
@@ -94,20 +78,17 @@ public class ShapedChoppingCraftingWrapper implements IShapedCraftingRecipeWrapp
     }
 
     @Override
-    public int getWidth()
-    {
+    public int getWidth() {
         return width;
     }
 
     @Override
-    public int getHeight()
-    {
+    public int getHeight() {
         return height;
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, IIngredients ingredients)
-    {
+    public void setRecipe(IRecipeLayout recipeLayout, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
         List<List<ItemStack>> inputs = ingredients.getInputs(ItemStack.class);
@@ -118,15 +99,13 @@ public class ShapedChoppingCraftingWrapper implements IShapedCraftingRecipeWrapp
         Object focusObj = ifocus.getValue();
 
         // if the thing in focus is an itemstack
-        if (focusObj instanceof ItemStack)
-        {
+        if (focusObj instanceof ItemStack) {
             IGuiIngredientGroup<ItemStack> guiIngredients = recipeLayout.getIngredientsGroup(ItemStack.class);
             ItemStack focus = (ItemStack) focusObj;
             IFocus.Mode mode = ifocus.getMode();
 
             // input means we clicked on an ingredient, make sure it is one that affects the base
-            if (mode == IFocus.Mode.INPUT && isOutputBlock(focus))
-            {
+            if (mode == IFocus.Mode.INPUT && isOutputBlock(focus)) {
                 // first, get the output recipe
                 BlockHPChoppingBase block = (BlockHPChoppingBase) Block.getBlockFromItem(recipe.getSimpleRecipeOutput().getItem());
 
@@ -138,19 +117,16 @@ public class ShapedChoppingCraftingWrapper implements IShapedCraftingRecipeWrapp
             }
 
             // if we clicked the chopping block, remove all items which affect the base textures that are not the base item
-            else if (mode == IFocus.Mode.OUTPUT)
-            {
+            else if (mode == IFocus.Mode.OUTPUT) {
                 // so determine the base
                 ItemStack base = new ItemStack(focus.hasTagCompound() ? focus.getTagCompound().getCompoundTag("textureBlock") : new NBTTagCompound());
-                if (Block.getBlockFromItem(recipe.outputBlocks.get(0).getItem()) instanceof BlockHPChoppingBase)
-                {
+                if (Block.getBlockFromItem(recipe.outputBlocks.get(0).getItem()) instanceof BlockHPChoppingBase) {
                     base = recipe.outputBlocks.get(0).copy();
                     NBTTagCompound tag = new NBTTagCompound();
                     tag.setTag("textureBlock", focus.hasTagCompound() ? focus.getTagCompound().getCompoundTag("textureBlock") : new NBTTagCompound());
                     base.setTagCompound(tag);
                 }
-                if (!base.isEmpty())
-                {
+                if (!base.isEmpty()) {
                     // and loop through all slots removing leg affecting inputs which don't match
                     guiIngredients.setOverrideDisplayFocus(HorsePowerPlugin.recipeRegistry.createFocus(IFocus.Mode.INPUT, base));
                 }
@@ -162,18 +138,14 @@ public class ShapedChoppingCraftingWrapper implements IShapedCraftingRecipeWrapp
         recipeLayout.getItemStacks().set(0, outputs);
     }
 
-    private boolean isOutputBlock(ItemStack stack)
-    {
-        if (stack.isEmpty())
-        {
+    private boolean isOutputBlock(ItemStack stack) {
+        if (stack.isEmpty()) {
             return false;
         }
 
-        for (ItemStack output : recipe.outputBlocks)
-        {
+        for (ItemStack output : recipe.outputBlocks) {
             // if the item matches the oredict entry, it is an output block
-            if (OreDictionary.itemMatches(output, stack, false))
-            {
+            if (OreDictionary.itemMatches(output, stack, false)) {
                 return true;
             }
         }

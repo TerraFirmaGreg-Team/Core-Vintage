@@ -27,13 +27,13 @@ public class RenderPigvil extends RenderLiving<EntityPigvil> {
     @Override
     protected ResourceLocation getEntityTexture(EntityPigvil entity) {
         Block anvil = entity.getAnvil();
-        if(anvil.getRegistryName() == TFCThingsBlocks.PIGVIL_BLOCK.getRegistryName()) {
+        if (anvil.getRegistryName() == TFCThingsBlocks.PIGVIL_BLOCK.getRegistryName()) {
             return PIGVIL;
-        } else if(anvil.getRegistryName() == TFCThingsBlocks.PIGVIL_BLOCK_BLACK.getRegistryName()) {
+        } else if (anvil.getRegistryName() == TFCThingsBlocks.PIGVIL_BLOCK_BLACK.getRegistryName()) {
             return PIGVIL_BLACK;
-        } else if(anvil.getRegistryName() == TFCThingsBlocks.PIGVIL_BLOCK_BLUE.getRegistryName()) {
+        } else if (anvil.getRegistryName() == TFCThingsBlocks.PIGVIL_BLOCK_BLUE.getRegistryName()) {
             return PIGVIL_BLUE;
-        } else if(anvil.getRegistryName() == TFCThingsBlocks.PIGVIL_BLOCK_RED.getRegistryName()) {
+        } else if (anvil.getRegistryName() == TFCThingsBlocks.PIGVIL_BLOCK_RED.getRegistryName()) {
             return PIGVIL_RED;
         } else {
             return PIGVIL_PURPLE;

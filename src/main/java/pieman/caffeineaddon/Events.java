@@ -1,6 +1,5 @@
 package pieman.caffeineaddon;
 
-import net.minecraft.item.ItemFood;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -9,16 +8,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class Events {
 
     @SubscribeEvent
-    public static void onFoodStartEating(LivingEntityUseItemEvent.Start event)
-    {
+    public static void onFoodStartEating(LivingEntityUseItemEvent.Start event) {
         //if (AppleCoreAPI.accessor.isFood(event.getItem()))
         //{
-            //int hunger = ((ItemFood)(event.getItem())).;
+        //int hunger = ((ItemFood)(event.getItem())).;
 
-            //if (hunger > 0)
-            //{
-                //event.setDuration(1);
-            //}
+        //if (hunger > 0)
+        //{
+        //event.setDuration(1);
+        //}
         //}
     }
 }

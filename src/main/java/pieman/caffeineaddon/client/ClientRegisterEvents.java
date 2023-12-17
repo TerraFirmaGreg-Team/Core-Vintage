@@ -1,9 +1,6 @@
 package pieman.caffeineaddon.client;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.util.climate.ClimateTFC;
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -20,19 +17,16 @@ import pieman.caffeineaddon.init.ModBlocks;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = Reference.MOD_ID)
-public final class ClientRegisterEvents
-{
+public final class ClientRegisterEvents {
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
-    public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event)
-    {
+    public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
         BlockColors blockColors = event.getBlockColors();
 
         // Grass Colors
         IBlockColor grassColor = (state, worldIn, pos, tintIndex) -> {
-            if (pos != null)
-            {
+            if (pos != null) {
                 double temp = MathHelper.clamp((ClimateTFC.getMonthlyTemp(pos) + 30) / 60, 0, 1);
                 double rain = MathHelper.clamp((ClimateTFC.getRainfall(pos) - 50) / 400, 0, 1);
                 return ColorizerGrass.getGrassColor(temp, rain);
@@ -43,8 +37,7 @@ public final class ClientRegisterEvents
         // Foliage Color
         // todo: do something different for conifers - they should have a different color mapping through the seasons
         IBlockColor foliageColor = (state, worldIn, pos, tintIndex) -> {
-            if (pos != null)
-            {
+            if (pos != null) {
                 double temp = MathHelper.clamp((ClimateTFC.getMonthlyTemp(pos) + 30) / 60, 0, 1);
                 double rain = MathHelper.clamp((ClimateTFC.getRainfall(pos) - 50) / 400, 0, 1);
                 return ColorizerGrass.getGrassColor(temp, rain);
@@ -59,13 +52,12 @@ public final class ClientRegisterEvents
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("deprecation")
-    public static void registerColorHandlerItems(ColorHandlerEvent.Item event)
-    {
+    public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
         ItemColors itemColors = event.getItemColors();
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-            ModBlocks.LEAVES);
+                        event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                ModBlocks.LEAVES);
     }
 
 }

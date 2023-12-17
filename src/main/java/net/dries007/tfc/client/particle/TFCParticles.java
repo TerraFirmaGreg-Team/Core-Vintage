@@ -43,6 +43,7 @@ public enum TFCParticles {
     private final ResourceLocation location;
     private final Supplier<IParticleFactoryTFC> factorySupplier;
     private TextureAtlasSprite sprite;
+
     /**
      * Register a new particle to have it's texture atlas initialized and be ready to be used by TFC
      *

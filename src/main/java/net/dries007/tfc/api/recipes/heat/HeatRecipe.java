@@ -33,6 +33,7 @@ public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> im
     protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp) {
         this(ingredient, transformTemp, Metal.Tier.TIER_0);
     }
+
     protected HeatRecipe(IIngredient<ItemStack> ingredient, float transformTemp, Metal.Tier minTier) {
         this.ingredient = ingredient;
         this.transformTemp = transformTemp;

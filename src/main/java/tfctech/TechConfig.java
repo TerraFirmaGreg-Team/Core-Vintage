@@ -3,7 +3,6 @@ package tfctech;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -13,8 +12,7 @@ import static tfctech.TFCTech.MODID;
 @Config(modid = MODID, category = "")
 @Config.LangKey("config." + MODID)
 @Mod.EventBusSubscriber(modid = MODID)
-public final class TechConfig
-{
+public final class TechConfig {
     @Config.Comment("Devices configuration")
     @Config.LangKey("config." + MODID + ".devices")
     public static Devices DEVICES = new Devices();
@@ -24,27 +22,23 @@ public final class TechConfig
     public static Tweaks TWEAKS = new Tweaks();
 
     @SubscribeEvent
-    public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
-    {
-        if (event.getModID().equals(MODID))
-        {
+    public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.getModID().equals(MODID)) {
             ConfigManager.sync(MODID, Config.Type.INSTANCE);
         }
     }
 
-    public static class Tweaks
-    {
+    public static class Tweaks {
         @Config.Comment({"Should TFCTech remove TFC and vanilla glass recipes?"})
         @Config.LangKey("config." + MODID + ".tweaks.removeGlassRecipes")
         public boolean removeGlassRecipes = true;
 
         @Config.Comment({"Which blocks are considered valid for rubber tapping?"})
         @Config.LangKey("config." + MODID + ".tweaks.validRubberTrees")
-        public String[] rubberTrees = new String[] {"tfc:wood/log/hevea{placed=false,axis=y}", "dynamictreestfc:branch/hevea{radius=8}"};
+        public String[] rubberTrees = new String[]{"tfc:wood/log/hevea{placed=false,axis=y}", "dynamictreestfc:branch/hevea{radius=8}"};
     }
 
-    public static class Devices
-    {
+    public static class Devices {
         @Config.Comment({"Should TFCTech machines accepts IC2 EU?"})
         @Config.LangKey("config." + MODID + ".devices.acceptIc2EU")
         public boolean acceptIc2EU = true;

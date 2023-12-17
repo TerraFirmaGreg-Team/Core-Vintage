@@ -13,8 +13,7 @@ public class EntitySlingStoneMetalLight extends EntitySlingStone {
         super(worldIn, throwerIn, power);
     }
 
-    protected float getGravityVelocity()
-    {
+    protected float getGravityVelocity() {
         return 0.02F;
     }
 

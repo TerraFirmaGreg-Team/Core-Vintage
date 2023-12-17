@@ -28,8 +28,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 import static crafttweaker.api.minecraft.CraftTweakerMC.getItemStacks;
 
 @ZenClass("mods.horsepower.Recipes")
-public class TweakerPluginImpl implements ITweakerPlugin
-{
+public class TweakerPluginImpl implements ITweakerPlugin {
 
     public static final List<IAction> LATE_ADDITIONS = new LinkedList<>();
     private static final IntSet usedHashes = new IntOpenHashSet();
@@ -37,32 +36,30 @@ public class TweakerPluginImpl implements ITweakerPlugin
     public static List<IHPAction> toRemove = new ArrayList<>();
     public static List<IAction> actions = new LinkedList<>();
 
+    public TweakerPluginImpl() {
+    }
+
     @ZenMethod
-    public static void addShaped(String name, IIngredient ore, IItemStack output, IIngredient[][] ingredients)
-    {
+    public static void addShaped(String name, IIngredient ore, IItemStack output, IIngredient[][] ingredients) {
         LATE_ADDITIONS.add(new AddShapedChoppingRecipe(name, ore, output, ingredients));
     }
 
     @ZenMethod
-    public static void addShaped(IIngredient ore, IItemStack output, IIngredient[][] ingredients)
-    {
+    public static void addShaped(IIngredient ore, IItemStack output, IIngredient[][] ingredients) {
         LATE_ADDITIONS.add(new AddShapedChoppingRecipe(ore, output, ingredients));
     }
 
     @ZenMethod
-    public static void addShapeless(String name, IIngredient ore, IItemStack output, IIngredient[] ingredients)
-    {
+    public static void addShapeless(String name, IIngredient ore, IItemStack output, IIngredient[] ingredients) {
         LATE_ADDITIONS.add(new AddShapelessChoppingRecipe(name, ore, output, ingredients));
     }
 
     @ZenMethod
-    public static void addShapeless(IIngredient ore, IItemStack output, IIngredient[] ingredients)
-    {
+    public static void addShapeless(IIngredient ore, IItemStack output, IIngredient[] ingredients) {
         LATE_ADDITIONS.add(new AddShapelessChoppingRecipe(ore, output, ingredients));
     }
 
-    public static ShapedChoppingRecipe convert(CTShapedChoppingRecipe recipe, ResourceLocation name)
-    {
+    public static ShapedChoppingRecipe convert(CTShapedChoppingRecipe recipe, ResourceLocation name) {
         IIngredient[] ingredients = recipe.getIngredients();
         byte[] posx = recipe.getIngredientsX();
         byte[] posy = recipe.getIngredientsY();
@@ -70,8 +67,7 @@ public class TweakerPluginImpl implements ITweakerPlugin
 
         Object[] converted = new Object[recipe.getHeight() * recipe.getWidth()];
 
-        for (counter = 0; counter < ingredients.length; ++counter)
-        {
+        for (counter = 0; counter < ingredients.length; ++counter) {
             converted[posx[counter] + posy[counter] * recipe.getWidth()] = ingredients[counter].getInternal();
         }
 
@@ -79,19 +75,14 @@ public class TweakerPluginImpl implements ITweakerPlugin
         String[] parts = new String[recipe.getHeight()];
         ArrayList rarguments = new ArrayList();
 
-        for (int i = 0; i < recipe.getHeight(); ++i)
-        {
+        for (int i = 0; i < recipe.getHeight(); ++i) {
             char[] pattern = new char[recipe.getWidth()];
 
-            for (int j = 0; j < recipe.getWidth(); ++j)
-            {
+            for (int j = 0; j < recipe.getWidth(); ++j) {
                 int off = i * recipe.getWidth() + j;
-                if (converted[off] == null)
-                {
+                if (converted[off] == null) {
                     pattern[j] = 32;
-                }
-                else
-                {
+                } else {
                     pattern[j] = (char) (65 + counter);
                     rarguments.add(Character.valueOf(pattern[j]));
                     rarguments.add(converted[off]);
@@ -106,31 +97,23 @@ public class TweakerPluginImpl implements ITweakerPlugin
         return new ShapedChoppingRecipe(name, Lists.newArrayList(getItemStacks(recipe.getOre().getItems())), (ItemStack) recipe.getOutput().getInternal(), rarguments.toArray());
     }
 
-    public static ShapelessChoppingRecipe convert(CTShapelessChoppingRecipe recipe, ResourceLocation name)
-    {
+    public static ShapelessChoppingRecipe convert(CTShapelessChoppingRecipe recipe, ResourceLocation name) {
         IIngredient[] ingredients = recipe.getIngredients();
         Object[] items = new Object[ingredients.length];
-        for (int i = 0; i < ingredients.length; i++)
-        {
+        for (int i = 0; i < ingredients.length; i++) {
             items[i] = ingredients[i].getInternal();
         }
         return new ShapelessChoppingRecipe(name, Lists.newArrayList(getItemStacks(recipe.getOre().getItems())), (ItemStack) recipe.getOutput().getInternal(), items);
     }
 
-    public TweakerPluginImpl()
-    {
-    }
-
     @Override
-    public void applyTweaker()
-    {
+    public void applyTweaker() {
         for (IAction action : actions)
             action.apply();
     }
 
     @Override
-    public void register()
-    {
+    public void register() {
         CraftTweakerAPI.registerClass(GrindstoneRecipeTweaker.class);
         CraftTweakerAPI.registerClass(ChoppingRecipeTweaker.class);
         CraftTweakerAPI.registerClass(PressRecipeTweaker.class);
@@ -138,44 +121,36 @@ public class TweakerPluginImpl implements ITweakerPlugin
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         toRemove.forEach(IHPAction::run);
         toAdd.forEach(IHPAction::run);
         LATE_ADDITIONS.forEach(IAction::apply);
     }
 
-    private static class AddShapedChoppingRecipe implements IAction
-    {
+    private static class AddShapedChoppingRecipe implements IAction {
 
         private final IIngredient ore;
         private final IItemStack output;
         private final IIngredient[][] ingredients;
         private final String name;
 
-        public AddShapedChoppingRecipe(IIngredient ore, IItemStack output, IIngredient[][] ingredients)
-        {
+        public AddShapedChoppingRecipe(IIngredient ore, IItemStack output, IIngredient[][] ingredients) {
             this(null, ore, output, ingredients);
         }
 
-        public AddShapedChoppingRecipe(String name, IIngredient ore, IItemStack output, IIngredient[][] ingredients)
-        {
+        public AddShapedChoppingRecipe(String name, IIngredient ore, IItemStack output, IIngredient[][] ingredients) {
             this.ore = ore;
             this.output = output;
             this.ingredients = ingredients;
-            if (name == null)
-            {
+            if (name == null) {
                 this.name = calculateName();
-            }
-            else
-            {
+            } else {
                 this.name = name.replace(":", "_");
             }
         }
 
         @Override
-        public void apply()
-        {
+        public void apply() {
             CTShapedChoppingRecipe ctRecipe = new CTShapedChoppingRecipe(ore, name, output, ingredients);
             IRecipe recipe = convert(ctRecipe, new ResourceLocation("horsepower", name));
 
@@ -184,26 +159,19 @@ public class TweakerPluginImpl implements ITweakerPlugin
         }
 
         @Override
-        public String describe()
-        {
-            if (output != null)
-            {
+        public String describe() {
+            if (output != null) {
                 return "Adding shaped recipe for " + output.getDisplayName() + " with name " + name;
-            }
-            else
-            {
+            } else {
                 return "Trying to add shaped recipe without correct output";
             }
         }
 
-        private String calculateName()
-        {
+        private String calculateName() {
             StringBuilder sb = new StringBuilder();
             sb.append(output);
-            for (IIngredient[] ingredientArray : ingredients)
-            {
-                for (IIngredient ingredient : ingredientArray)
-                {
+            for (IIngredient[] ingredientArray : ingredients) {
+                for (IIngredient ingredient : ingredientArray) {
                     sb.append(ingredient.toCommandString());
                 }
             }
@@ -217,37 +185,30 @@ public class TweakerPluginImpl implements ITweakerPlugin
         }
     }
 
-    private static class AddShapelessChoppingRecipe implements IAction
-    {
+    private static class AddShapelessChoppingRecipe implements IAction {
 
         private final IIngredient ore;
         private final IItemStack output;
         private final IIngredient[] ingredients;
         private final String name;
 
-        public AddShapelessChoppingRecipe(IIngredient ore, IItemStack output, IIngredient[] ingredients)
-        {
+        public AddShapelessChoppingRecipe(IIngredient ore, IItemStack output, IIngredient[] ingredients) {
             this(null, ore, output, ingredients);
         }
 
-        public AddShapelessChoppingRecipe(String name, IIngredient ore, IItemStack output, IIngredient[] ingredients)
-        {
+        public AddShapelessChoppingRecipe(String name, IIngredient ore, IItemStack output, IIngredient[] ingredients) {
             this.ore = ore;
             this.output = output;
             this.ingredients = ingredients;
-            if (name == null)
-            {
+            if (name == null) {
                 this.name = calculateName();
-            }
-            else
-            {
+            } else {
                 this.name = name.replace(":", "_");
             }
         }
 
         @Override
-        public void apply()
-        {
+        public void apply() {
             CTShapelessChoppingRecipe ctRecipe = new CTShapelessChoppingRecipe(ore, name, output, ingredients);
             IRecipe recipe = convert(ctRecipe, new ResourceLocation("horsepower", name));
 
@@ -256,24 +217,18 @@ public class TweakerPluginImpl implements ITweakerPlugin
         }
 
         @Override
-        public String describe()
-        {
-            if (output != null)
-            {
+        public String describe() {
+            if (output != null) {
                 return "Adding shapeless recipe for " + output.getDisplayName() + " with name " + name;
-            }
-            else
-            {
+            } else {
                 return "Trying to add shapeless recipe without correct output";
             }
         }
 
-        private String calculateName()
-        {
+        private String calculateName() {
             StringBuilder sb = new StringBuilder();
             sb.append(output);
-            for (IIngredient ingredient : ingredients)
-            {
+            for (IIngredient ingredient : ingredients) {
                 sb.append(ingredient.toCommandString());
             }
 

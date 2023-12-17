@@ -17,7 +17,7 @@ public class TFCThingsCapabilityHandler {
 
     @SubscribeEvent
     public void attachCapability(AttachCapabilitiesEvent<ItemStack> event) {
-        if(event.getObject().getItem() instanceof ItemMetalTool
+        if (event.getObject().getItem() instanceof ItemMetalTool
                 || event.getObject().getItem() instanceof ItemMetalSword
                 || event.getObject().getItem() instanceof ItemRopeJavelin
                 || (event.getObject().getItem().getRegistryName() != null

@@ -9,8 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.sharkbark.cellars.blocks.tileentity.TEFreezeDryer;
 
-public class FDPacket implements IMessage
-{
+public class FDPacket implements IMessage {
 
 
     private int xCoord;
@@ -19,10 +18,9 @@ public class FDPacket implements IMessage
     private int bool;
     private boolean mode;
 
-    public FDPacket() { }
+    public FDPacket() {}
 
-    public FDPacket(int xCoord, int yCoord, int zCoord, int bool, boolean mode)
-    {
+    public FDPacket(int xCoord, int yCoord, int zCoord, int bool, boolean mode) {
         System.out.println("Packet Readout: " + xCoord);
         System.out.println("Packet Readout: " + yCoord);
         System.out.println("Packet Readout: " + zCoord);
@@ -36,8 +34,7 @@ public class FDPacket implements IMessage
     }
 
     @Override
-    public void fromBytes(ByteBuf buf)
-    {
+    public void fromBytes(ByteBuf buf) {
         xCoord = buf.readInt();
         yCoord = buf.readInt();
         zCoord = buf.readInt();
@@ -51,8 +48,7 @@ public class FDPacket implements IMessage
     }
 
     @Override
-    public void toBytes(ByteBuf buf)
-    {
+    public void toBytes(ByteBuf buf) {
         System.out.println("Packet Readout: " + xCoord);
         System.out.println("Packet Readout: " + yCoord);
         System.out.println("Packet Readout: " + zCoord);
@@ -65,11 +61,9 @@ public class FDPacket implements IMessage
         buf.writeBoolean(mode);
     }
 
-    public static class Handler implements IMessageHandler<FDPacket, IMessage>
-    {
+    public static class Handler implements IMessageHandler<FDPacket, IMessage> {
         @Override
-        public IMessage onMessage(FDPacket msg, MessageContext ctx)
-        {
+        public IMessage onMessage(FDPacket msg, MessageContext ctx) {
             System.out.println("Packet Readout: " + msg.xCoord);
             System.out.println("Packet Readout: " + msg.yCoord);
             System.out.println("Packet Readout: " + msg.zCoord);
@@ -84,7 +78,7 @@ public class FDPacket implements IMessage
                     if (msg.mode) {
                         System.out.println("Server Sealed Freeze Dryer");
                         freezeDryer.seal();
-                    } else{
+                    } else {
                         System.out.println("Server Unsealed Freeze Dryer");
                         freezeDryer.unseal();
                     }

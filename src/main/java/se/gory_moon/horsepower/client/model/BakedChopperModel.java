@@ -1,19 +1,11 @@
 package se.gory_moon.horsepower.client.model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.vecmath.Matrix4f;
-
 import com.google.common.base.Function;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import org.apache.commons.lang3.tuple.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -34,13 +26,19 @@ import net.minecraftforge.client.model.SimpleModelState;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
-
+import org.apache.commons.lang3.tuple.Pair;
 import se.gory_moon.horsepower.blocks.BlockChopper;
 import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
 import se.gory_moon.horsepower.util.RenderUtils;
 
-public class BakedChopperModel implements IBakedModel
-{
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.vecmath.Matrix4f;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
+public class BakedChopperModel implements IBakedModel {
     private final IBakedModel standard;
     private final IModel choppingModel;
     private final VertexFormat format;
@@ -51,8 +49,7 @@ public class BakedChopperModel implements IBakedModel
 
     private final Cache<TableCombinationCacheKey, IBakedModel> tableCombinedCache = CacheBuilder.newBuilder().maximumSize(20).build();
 
-    public BakedChopperModel(IBakedModel standard, IModel choppingModel, VertexFormat format)
-    {
+    public BakedChopperModel(IBakedModel standard, IModel choppingModel, VertexFormat format) {
         this.standard = standard;
         this.choppingModel = choppingModel;
         this.format = format;
@@ -66,30 +63,26 @@ public class BakedChopperModel implements IBakedModel
     }
 
     @Override
-    public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand)
-    {
+    public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
         // get texture from state
         String side_texture = null;
         String top_texture = null;
         EnumFacing face = EnumFacing.SOUTH;
 
-        if (state instanceof IExtendedBlockState)
-        {
+        if (state instanceof IExtendedBlockState) {
             IExtendedBlockState extendedState = (IExtendedBlockState) state;
             if (extendedState.getUnlistedNames().contains(BlockHPChoppingBase.SIDE_TEXTURE))
                 side_texture = extendedState.getValue(BlockHPChoppingBase.SIDE_TEXTURE);
             if (extendedState.getUnlistedNames().contains(BlockHPChoppingBase.TOP_TEXTURE))
                 top_texture = extendedState.getValue(BlockHPChoppingBase.TOP_TEXTURE);
 
-            if (extendedState.getPropertyKeys().contains(BlockChopper.FACING))
-            {
+            if (extendedState.getPropertyKeys().contains(BlockChopper.FACING)) {
                 face = extendedState.getValue(BlockChopper.FACING);
             }
         }
 
         // models are symmetric, no need to rotate if there's nothing on it where rotation matters, so we just use default
-        if (side_texture == null)
-        {
+        if (side_texture == null) {
             return standard.getQuads(state, side, rand);
         }
 
@@ -98,60 +91,48 @@ public class BakedChopperModel implements IBakedModel
     }
 
     @Override
-    public boolean isAmbientOcclusion()
-    {
+    public boolean isAmbientOcclusion() {
         return standard.isAmbientOcclusion();
     }
 
     @Override
-    public boolean isGui3d()
-    {
+    public boolean isGui3d() {
         return standard.isGui3d();
     }
 
     @Override
-    public boolean isBuiltInRenderer()
-    {
+    public boolean isBuiltInRenderer() {
         return standard.isBuiltInRenderer();
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture()
-    {
+    public TextureAtlasSprite getParticleTexture() {
         return standard.getParticleTexture();
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms()
-    {
+    public ItemCameraTransforms getItemCameraTransforms() {
         return standard.getItemCameraTransforms();
     }
 
     @Override
-    public ItemOverrideList getOverrides()
-    {
+    public ItemOverrideList getOverrides() {
         return ChopperItemOverrideList.INSTANCE;
     }
 
     @Override
-    public Pair<? extends IBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType)
-    {
+    public Pair<? extends IBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
         Pair<? extends IBakedModel, Matrix4f> pair = standard.handlePerspective(cameraTransformType);
         return Pair.of(this, pair.getRight());
     }
 
-    protected IBakedModel getActualModel(String texture, String top_texture, EnumFacing facing)
-    {
+    protected IBakedModel getActualModel(String texture, String top_texture, EnumFacing facing) {
         IBakedModel bakedModel = standard;
 
-        if (texture != null)
-        {
-            if (cache.containsKey(texture))
-            {
+        if (texture != null) {
+            if (cache.containsKey(texture)) {
                 bakedModel = cache.get(texture);
-            }
-            else if (choppingModel != null)
-            {
+            } else if (choppingModel != null) {
                 ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
                 builder.put("2", texture);
                 builder.put("1", top_texture);
@@ -164,48 +145,38 @@ public class BakedChopperModel implements IBakedModel
         }
 
         final IBakedModel parentModel = bakedModel;
-        try
-        {
+        try {
             bakedModel = tableCombinedCache.get(new TableCombinationCacheKey(bakedModel, facing), () -> getCombinedBakedModel(facing, parentModel));
-        }
-        catch (ExecutionException ignored)
-        {
+        } catch (ExecutionException ignored) {
         }
 
         return bakedModel;
     }
 
-    private IBakedModel getCombinedBakedModel(EnumFacing facing, IBakedModel parentModel)
-    {
+    private IBakedModel getCombinedBakedModel(EnumFacing facing, IBakedModel parentModel) {
         IBakedModel out = parentModel;
 
-        if (facing != null)
-        {
+        if (facing != null) {
             out = new TRSRBakedModel(out, facing);
         }
         return out;
     }
 
-    private static class ChopperItemOverrideList extends ItemOverrideList
-    {
+    private static class ChopperItemOverrideList extends ItemOverrideList {
 
         static ChopperItemOverrideList INSTANCE = new ChopperItemOverrideList();
 
-        private ChopperItemOverrideList()
-        {
+        private ChopperItemOverrideList() {
             super(ImmutableList.of());
         }
 
         @Nonnull
         @Override
-        public IBakedModel handleItemState(@Nonnull IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity)
-        {
-            if (originalModel instanceof BakedChopperModel)
-            {
+        public IBakedModel handleItemState(@Nonnull IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
+            if (originalModel instanceof BakedChopperModel) {
                 // read out the data on the itemstack
                 ItemStack blockStack = new ItemStack(stack.hasTagCompound() ? stack.getTagCompound().getCompoundTag("textureBlock") : new NBTTagCompound());
-                if (!blockStack.isEmpty())
-                {
+                if (!blockStack.isEmpty()) {
                     // get model from data
                     Block block = Block.getBlockFromItem(blockStack.getItem());
                     IBlockState state = block.getStateFromMeta(blockStack.getItemDamage());
@@ -219,34 +190,28 @@ public class BakedChopperModel implements IBakedModel
         }
     }
 
-    private static class TableCombinationCacheKey
-    {
+    private static class TableCombinationCacheKey {
         private final IBakedModel bakedBaseModel;
         private final EnumFacing facing;
 
-        public TableCombinationCacheKey(IBakedModel bakedBaseModel, EnumFacing facing)
-        {
+        public TableCombinationCacheKey(IBakedModel bakedBaseModel, EnumFacing facing) {
             this.bakedBaseModel = bakedBaseModel;
             this.facing = facing;
         }
 
         @Override
-        public int hashCode()
-        {
+        public int hashCode() {
             int result = (bakedBaseModel != null ? bakedBaseModel.hashCode() : 0);
             result = 31 * result + (facing != null ? facing.hashCode() : 0);
             return result;
         }
 
         @Override
-        public boolean equals(Object o)
-        {
-            if (this == o)
-            {
+        public boolean equals(Object o) {
+            if (this == o) {
                 return true;
             }
-            if (o == null || getClass() != o.getClass())
-            {
+            if (o == null || getClass() != o.getClass()) {
                 return false;
             }
 

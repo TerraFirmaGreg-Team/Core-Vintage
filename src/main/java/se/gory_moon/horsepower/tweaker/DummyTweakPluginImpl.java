@@ -1,23 +1,19 @@
 package se.gory_moon.horsepower.tweaker;
 
-public class DummyTweakPluginImpl implements ITweakerPlugin
-{
+public class DummyTweakPluginImpl implements ITweakerPlugin {
 
     @Override
-    public void applyTweaker()
-    {
+    public void applyTweaker() {
 
     }
 
     @Override
-    public void register()
-    {
+    public void register() {
 
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
 
     }
 }

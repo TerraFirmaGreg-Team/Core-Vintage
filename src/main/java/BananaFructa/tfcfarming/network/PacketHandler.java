@@ -10,8 +10,8 @@ public class PacketHandler {
     public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(TFCFarming.modId);
 
     public static void registerPackets() {
-        INSTANCE.registerMessage(SPacketNutrientDataResponseHandler.class,SPacketNutrientDataResponse.class,0, Side.CLIENT);
-        INSTANCE.registerMessage(CPacketRequestNutrientDataHandler.class,CPacketRequestNutrientData.class,1,Side.SERVER);
+        INSTANCE.registerMessage(SPacketNutrientDataResponseHandler.class, SPacketNutrientDataResponse.class, 0, Side.CLIENT);
+        INSTANCE.registerMessage(CPacketRequestNutrientDataHandler.class, CPacketRequestNutrientData.class, 1, Side.SERVER);
     }
 
 }

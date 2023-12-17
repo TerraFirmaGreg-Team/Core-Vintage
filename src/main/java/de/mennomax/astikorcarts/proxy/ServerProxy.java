@@ -1,22 +1,18 @@
 package de.mennomax.astikorcarts.proxy;
 
-public class ServerProxy implements IProxy
-{
+public class ServerProxy implements IProxy {
     @Override
-    public void preInit()
-    {
+    public void preInit() {
 
     }
 
     @Override
-    public void init()
-    {
+    public void init() {
 
     }
 
     @Override
-    public void postInit()
-    {
+    public void postInit() {
 
     }
 }

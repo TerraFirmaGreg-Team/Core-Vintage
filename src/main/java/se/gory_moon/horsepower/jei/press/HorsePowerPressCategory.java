@@ -1,20 +1,18 @@
 package se.gory_moon.horsepower.jei.press;
 
-import net.minecraft.util.ResourceLocation;
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import net.minecraft.util.ResourceLocation;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.jei.HorsePowerCategory;
 import se.gory_moon.horsepower.jei.HorsePowerPlugin;
 import se.gory_moon.horsepower.lib.Reference;
 import se.gory_moon.horsepower.util.Localization;
 
-public class HorsePowerPressCategory extends HorsePowerCategory<PressRecipeWrapper>
-{
+public class HorsePowerPressCategory extends HorsePowerCategory<PressRecipeWrapper> {
 
     private static final int inputSlot = 0;
     private static final int outputSlot = 1;
@@ -22,8 +20,7 @@ public class HorsePowerPressCategory extends HorsePowerCategory<PressRecipeWrapp
     private final String localizedName;
     private final boolean isLiquid;
 
-    public HorsePowerPressCategory(IGuiHelper guiHelper, boolean isLiquid)
-    {
+    public HorsePowerPressCategory(IGuiHelper guiHelper, boolean isLiquid) {
         super(guiHelper);
         this.isLiquid = isLiquid;
         if (isLiquid)
@@ -32,26 +29,22 @@ public class HorsePowerPressCategory extends HorsePowerCategory<PressRecipeWrapp
     }
 
     @Override
-    public String getUid()
-    {
+    public String getUid() {
         return isLiquid ? HorsePowerPlugin.PRESS_FLUID : HorsePowerPlugin.PRESS_ITEM;
     }
 
     @Override
-    public String getTitle()
-    {
+    public String getTitle() {
         return localizedName;
     }
 
     @Override
-    public String getModName()
-    {
+    public String getModName() {
         return Reference.NAME;
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, PressRecipeWrapper recipeWrapper, IIngredients ingredients)
-    {
+    public void setRecipe(IRecipeLayout recipeLayout, PressRecipeWrapper recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
         IGuiFluidStackGroup guiFluidStack = recipeLayout.getFluidStacks();
 

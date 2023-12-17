@@ -47,6 +47,7 @@ public class FoodTrait {
     private final String name;
     private final float decayModifier;
     private final boolean hasTooltip;
+
     public FoodTrait(@Nonnull String name, float decayModifier) {
         this(name, decayModifier, true);
     }

@@ -1,7 +1,5 @@
 package pieman.caffeineaddon;
 
-import java.util.Random;
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IFruitTreeGenerator;
@@ -13,18 +11,18 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
+import java.util.Random;
+
 public class CoffeeTreeGen implements IFruitTreeGenerator {
-	
+
     private static final PlacementSettings SETTINGS = StructureHelper.getDefaultSettings();
 
     @Override
-    public void generateTree(TemplateManager manager, World world, BlockPos pos, IFruitTree tree, Random rand)
-    {
+    public void generateTree(TemplateManager manager, World world, BlockPos pos, IFruitTree tree, Random rand) {
         ResourceLocation base = new ResourceLocation("ca:fruit_trees/" + tree.getName());
         Template structureBase = manager.get(world.getMinecraftServer(), base);
 
-        if (structureBase == null)
-        {
+        if (structureBase == null) {
             TerraFirmaCraft.getLog().warn("Unable to find a template for " + base.toString());
             return;
         }

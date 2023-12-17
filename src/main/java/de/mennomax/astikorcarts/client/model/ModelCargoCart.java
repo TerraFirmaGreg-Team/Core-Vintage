@@ -1,13 +1,11 @@
 package de.mennomax.astikorcarts.client.model;
 
+import de.mennomax.astikorcarts.entity.EntityCargoCart;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-import de.mennomax.astikorcarts.entity.EntityCargoCart;
-
-public class ModelCargoCart extends ModelBase
-{
+public class ModelCargoCart extends ModelBase {
     private final ModelRenderer boardBottom;
     private final ModelRenderer axis;
     private final ModelRenderer shaft;
@@ -18,8 +16,7 @@ public class ModelCargoCart extends ModelBase
     private final ModelRenderer leftWheel;
     private final ModelRenderer rightWheel;
 
-    public ModelCargoCart()
-    {
+    public ModelCargoCart() {
         this.textureWidth = 128;
         this.textureHeight = 64;
 
@@ -96,8 +93,7 @@ public class ModelCargoCart extends ModelBase
         this.leftWheel = new ModelRenderer(this, 54, 23);
         this.leftWheel.setRotationPoint(14.5F, 5.0F, 1.0F);
         this.leftWheel.addBox(-2.0F, -1.0F, -1.0F, 1, 2, 2);
-        for (int i = 0; i < 8; i++)
-        {
+        for (int i = 0; i < 8; i++) {
             ModelRenderer rim = new ModelRenderer(this, 60, 0);
             rim.addBox(-1.5F, -4.5F, 9.86F, 1, 9, 1);
             rim.rotateAngleX = i * (float) Math.PI / 4.0F;
@@ -114,8 +110,7 @@ public class ModelCargoCart extends ModelBase
         this.rightWheel.mirror = true;
         this.rightWheel.setRotationPoint(-14.5F, 5.0F, 1.0F);
         this.rightWheel.addBox(1.0F, -1.0F, -1.0F, 1, 2, 2);
-        for (int i = 0; i < 8; i++)
-        {
+        for (int i = 0; i < 8; i++) {
             ModelRenderer rim = new ModelRenderer(this, 60, 0);
             rim.addBox(0.5F, -4.5F, 9.86F, 1, 9, 1);
             rim.rotateAngleX = i * (float) Math.PI / 4.0F;
@@ -129,26 +124,22 @@ public class ModelCargoCart extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale)
-    {
+    public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch, scale, entity);
         this.axis.render(scale);
         this.shaft.renderWithRotation(scale);
         this.boardBottom.render(scale);
         this.boardFront.render(scale);
-        for (int i = 0; i < 2; ++i)
-        {
+        for (int i = 0; i < 2; ++i) {
             this.boardsRear[i].render(scale);
         }
-        for (int i = 0; i < 4; ++i)
-        {
+        for (int i = 0; i < 4; ++i) {
             this.boardsSide[i].render(scale);
         }
     }
 
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale, Entity entity)
-    {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale, Entity entity) {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch, scale, entity);
         this.leftWheel.rotateAngleX = ((EntityCargoCart) entity).getWheelRotation();
         this.rightWheel.rotateAngleX = this.leftWheel.rotateAngleX;
@@ -156,8 +147,7 @@ public class ModelCargoCart extends ModelBase
         this.leftWheel.render(scale);
         this.rightWheel.render(scale);
 
-        for (int i = 0; i < ((EntityCargoCart) entity).getCargo(); i++)
-        {
+        for (int i = 0; i < ((EntityCargoCart) entity).getCargo(); i++) {
             this.cargo[i].render(scale);
         }
     }

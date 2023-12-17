@@ -14,34 +14,28 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import tfctech.objects.blocks.devices.BlockFridge;
 
 import static tfctech.TFCTech.MODID;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID)
-public final class ClientEvents
-{
+public final class ClientEvents {
     @SubscribeEvent
-    public static void drawBlockHighlight(DrawBlockHighlightEvent event)
-    {
+    public static void drawBlockHighlight(DrawBlockHighlightEvent event) {
         if (event.getTarget() == null || event.getTarget().typeOfHit != RayTraceResult.Type.BLOCK) return;
         BlockPos pos = event.getTarget().getBlockPos();
         World world = event.getPlayer().world;
         EntityPlayer player = event.getPlayer();
         IBlockState state = world.getBlockState(pos);
 
-        if (state.getBlock() instanceof BlockFridge)
-        {
+        if (state.getBlock() instanceof BlockFridge) {
             BlockFridge fridge = (BlockFridge) state.getBlock();
-            if (state.getValue(BlockFridge.UPPER))
-            {
+            if (state.getValue(BlockFridge.UPPER)) {
                 pos = pos.down();
             }
             int slot = BlockFridge.getPlayerLookingItem(pos, player, state.getValue(BlockFridge.FACING));
-            if (slot > -1)
-            {
+            if (slot > -1) {
                 Vec3d itemPos = BlockFridge.getItems(state.getValue(BlockFridge.FACING))[slot];
                 double d3 = player.lastTickPosX + (player.posX - player.lastTickPosX) * (double) event.getPartialTicks();
                 double d4 = player.lastTickPosY + (player.posY - player.lastTickPosY) * (double) event.getPartialTicks();

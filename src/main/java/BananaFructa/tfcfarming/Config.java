@@ -3,9 +3,7 @@ package BananaFructa.tfcfarming;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
-import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Config {
@@ -26,18 +24,18 @@ public class Config {
     public static List<Integer> allowedDimensions;
 
     public static void load(File configDirectory) {
-        config = new Configuration(new File(configDirectory,"tfcfarming.cfg"));
+        config = new Configuration(new File(configDirectory, "tfcfarming.cfg"));
 
-        nPassive = config.getInt("n_passive","general",8,0,255,"The amount the N nutrient passively grows each month.");
-        pPassive = config.getInt("p_passive","general",8,0,255,"The amount the P nutrient passively grows each month.");
-        kPassive = config.getInt("k_passive","general",8,0,255,"The amount the K nutrient passively grows each month.");
-        growthDead = config.getFloat("penalty_dead_crop","general",0.8f,0,1,"The growth factor when a dead crop is let to exist on the soil.");
-        hangingPlanters = config.getBoolean("hanging_planter","general",false,"True if the hanging planters should also have nutrient values");
-        nutrientConsumptionInGreenhouse = config.getFloat("nutrient_in_greenhouse","general",1,0,10,"The rate at which crops consume nutrients while in Firmalife's greenhouse");
-        nutrientConsumptionHangingPlanter = config.getFloat("nutrient_int_hanging","general",1,0,10,"The rate at which hanging planters consume nutrients");
-        enforceTemperature = config.getBoolean("enforce_temperature","general",false,"Plants in the greenhouse cannot grow in too hot of a climate");
-        String[] fertilizerData = config.getStringList("fertilizers","general",new String[]{"tfc:powder/saltpeter~N~128","tfcfarming:fertilizer_p~P~128","tfc:powder/fertilizer~K~128"},"Fertilizer list: <item name>~<N/P/K>~<fertilizer value between 0~255>");
-        String[] dimensionData = config.getStringList("allowed_dimensions","general",new String[]{"0"},"In what dimensions are crops allowed to grow.");
+        nPassive = config.getInt("n_passive", "general", 8, 0, 255, "The amount the N nutrient passively grows each month.");
+        pPassive = config.getInt("p_passive", "general", 8, 0, 255, "The amount the P nutrient passively grows each month.");
+        kPassive = config.getInt("k_passive", "general", 8, 0, 255, "The amount the K nutrient passively grows each month.");
+        growthDead = config.getFloat("penalty_dead_crop", "general", 0.8f, 0, 1, "The growth factor when a dead crop is let to exist on the soil.");
+        hangingPlanters = config.getBoolean("hanging_planter", "general", false, "True if the hanging planters should also have nutrient values");
+        nutrientConsumptionInGreenhouse = config.getFloat("nutrient_in_greenhouse", "general", 1, 0, 10, "The rate at which crops consume nutrients while in Firmalife's greenhouse");
+        nutrientConsumptionHangingPlanter = config.getFloat("nutrient_int_hanging", "general", 1, 0, 10, "The rate at which hanging planters consume nutrients");
+        enforceTemperature = config.getBoolean("enforce_temperature", "general", false, "Plants in the greenhouse cannot grow in too hot of a climate");
+        String[] fertilizerData = config.getStringList("fertilizers", "general", new String[]{"tfc:powder/saltpeter~N~128", "tfcfarming:fertilizer_p~P~128", "tfc:powder/fertilizer~K~128"}, "Fertilizer list: <item name>~<N/P/K>~<fertilizer value between 0~255>");
+        String[] dimensionData = config.getStringList("allowed_dimensions", "general", new String[]{"0"}, "In what dimensions are crops allowed to grow.");
         allowedDimensions = new ArrayList<Integer>();
         for (String s : dimensionData) {
             try {
@@ -56,7 +54,7 @@ public class Config {
                 if (split.length == 3) {
                     String item = split[0];
                     NutrientClass nutrientClass;
-                    int value = Math.max(0,Math.min(255,Integer.parseInt(split[2])));
+                    int value = Math.max(0, Math.min(255, Integer.parseInt(split[2])));
                     switch (split[1]) {
                         case "N":
                             nutrientClass = NutrientClass.NITROGEN;

@@ -1,27 +1,24 @@
 package tfctech.objects.tileentities;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
-
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.objects.te.TETickableInventory;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ITickable;
 import tfctech.objects.blocks.devices.BlockSmelteryCauldron;
+
+import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 
-public class TESmelteryFirebox extends TETickableInventory implements ITickable, ICalendarTickable, ITileFields
-{
+public class TESmelteryFirebox extends TETickableInventory implements ITickable, ICalendarTickable, ITileFields {
     private float temperature;
     private float burnTemperature;
     private int burnTicks;
@@ -30,8 +27,7 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
 
     private int reload;
 
-    public TESmelteryFirebox()
-    {
+    public TESmelteryFirebox() {
         super(8);
         temperature = 0;
         burnTemperature = 0;
@@ -42,16 +38,13 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
     }
 
     @Override
-    public int getFieldCount()
-    {
+    public int getFieldCount() {
         return 2;
     }
 
     @Override
-    public void setField(int index, int value)
-    {
-        switch (index)
-        {
+    public void setField(int index, int value) {
+        switch (index) {
             case 0:
                 temperature = value;
                 break;
@@ -62,10 +55,8 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
     }
 
     @Override
-    public int getField(int index)
-    {
-        switch (index)
-        {
+    public int getField(int index) {
+        switch (index) {
             case 0:
                 return (int) temperature;
             case 1:
@@ -75,45 +66,35 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
     }
 
     @Override
-    public void update()
-    {
+    public void update() {
         super.update();
         checkForCalendarUpdate();
-        if (!world.isRemote)
-        {
+        if (!world.isRemote) {
             IBlockState state = world.getBlockState(pos);
-            if (state.getValue(LIT))
-            {
+            if (state.getValue(LIT)) {
                 burnTicks -= airTicks > 0 ? 2 : 1;
                 if (--airTicks <= 0) airTicks = 0;
-                if (burnTicks <= 0)
-                {
+                if (burnTicks <= 0) {
                     consumeFuel();
                 }
-                if (reload++ >= 20)
-                {
+                if (reload++ >= 20) {
                     reload = 0;
-                    if (!(world.getBlockState(pos.up()).getBlock() instanceof BlockSmelteryCauldron))
-                    {
+                    if (!(world.getBlockState(pos.up()).getBlock() instanceof BlockSmelteryCauldron)) {
                         temperature = 0;
                         world.setBlockState(pos, state.withProperty(LIT, false));
                         burnTicks = 0;
                         airTicks = 0;
                     }
                 }
-            }
-            else
-            {
+            } else {
                 burnTemperature = 0;
                 burnTicks = 0;
                 airTicks = 0;
             }
-            if (temperature > 0 || burnTemperature > 0)
-            {
+            if (temperature > 0 || burnTemperature > 0) {
                 // Update temperature
                 float targetTemperature = burnTemperature + airTicks;
-                if (temperature != targetTemperature)
-                {
+                if (temperature != targetTemperature) {
                     float delta = (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier;
                     temperature = CapabilityItemHeat.adjustTempTowards(temperature, targetTemperature, delta * (airTicks > 0 ? 2 : 1));
                 }
@@ -121,21 +102,17 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
         }
     }
 
-    public float getTemperature()
-    {
+    public float getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(float temperature)
-    {
+    public void setTemperature(float temperature) {
         this.temperature = temperature;
     }
 
-    public boolean onIgnite()
-    {
+    public boolean onIgnite() {
         IBlockState state = world.getBlockState(pos);
-        if (!state.getValue(LIT))
-        {
+        if (!state.getValue(LIT)) {
             consumeFuel();
             return state.getValue(LIT);
         }
@@ -143,24 +120,18 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
     }
 
     @Override
-    public void onCalendarUpdate(long deltaPlayerTicks)
-    {
+    public void onCalendarUpdate(long deltaPlayerTicks) {
         IBlockState state = world.getBlockState(pos);
-        if (!state.getValue(LIT))
-        {
+        if (!state.getValue(LIT)) {
             return;
         }
-        while (deltaPlayerTicks > 0)
-        {
-            if (burnTicks > deltaPlayerTicks)
-            {
+        while (deltaPlayerTicks > 0) {
+            if (burnTicks > deltaPlayerTicks) {
                 burnTicks -= deltaPlayerTicks;
                 float delta = (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier * deltaPlayerTicks;
                 temperature = CapabilityItemHeat.adjustTempTowards(temperature, burnTemperature, delta, delta);
                 deltaPlayerTicks = 0;
-            }
-            else
-            {
+            } else {
                 deltaPlayerTicks -= burnTicks;
                 float delta = (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier * burnTicks;
                 temperature = CapabilityItemHeat.adjustTempTowards(temperature, burnTemperature, delta, delta);
@@ -170,32 +141,27 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
     }
 
     @Override
-    public long getLastUpdateTick()
-    {
+    public long getLastUpdateTick() {
         return lastPlayerTick;
     }
 
     @Override
-    public void setLastUpdateTick(long ticks)
-    {
+    public void setLastUpdateTick(long ticks) {
         lastPlayerTick = ticks;
     }
 
     @Override
-    public int getSlotLimit(int slot)
-    {
+    public int getSlotLimit(int slot) {
         return 1;
     }
 
     @Override
-    public boolean isItemValid(int slot, @Nonnull ItemStack stack)
-    {
+    public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
         return FuelManager.isItemFuel(stack);
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
+    public void readFromNBT(NBTTagCompound nbt) {
         temperature = nbt.getFloat("temperature");
         burnTemperature = nbt.getFloat("burnTemperature");
         burnTicks = nbt.getInteger("burnTicks");
@@ -206,8 +172,7 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
 
     @Nonnull
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-    {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setFloat("temperature", temperature);
         nbt.setInteger("burnTicks", burnTicks);
         nbt.setFloat("burnTemperature", burnTemperature);
@@ -216,24 +181,19 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
         return super.writeToNBT(nbt);
     }
 
-    public void onAirIntake(int airAmount)
-    {
+    public void onAirIntake(int airAmount) {
         airTicks += airAmount;
-        if (airTicks > 600)
-        {
+        if (airTicks > 600) {
             airTicks = 600;
         }
     }
 
-    private void consumeFuel()
-    {
+    private void consumeFuel() {
         burnTicks = 0;
         IBlockState state = world.getBlockState(pos);
-        for (int i = 0; i < 8; i++)
-        {
+        for (int i = 0; i < 8; i++) {
             ItemStack stack = inventory.extractItem(i, 1, false);
-            if (!stack.isEmpty())
-            {
+            if (!stack.isEmpty()) {
                 Fuel fuel = FuelManager.getFuel(stack);
                 burnTicks = fuel.getAmount();
                 burnTemperature = fuel.getTemperature();
@@ -242,8 +202,7 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
             }
         }
         // Didn't find a fuel to consume
-        if (burnTicks <= 0)
-        {
+        if (burnTicks <= 0) {
             world.setBlockState(pos, state.withProperty(LIT, false));
             burnTicks = 0;
             airTicks = 0;

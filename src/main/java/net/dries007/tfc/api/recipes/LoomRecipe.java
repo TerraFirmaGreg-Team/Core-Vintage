@@ -20,6 +20,7 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
     private final ItemStack outputItem;
     private final int stepCount;
     private final ResourceLocation inProgressTexture;
+
     public LoomRecipe(ResourceLocation name, IIngredient<ItemStack> input, ItemStack output, int stepsRequired, ResourceLocation inProgressTexture) {
         this.inputItem = input;
         this.outputItem = output;

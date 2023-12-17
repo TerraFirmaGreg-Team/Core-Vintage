@@ -1,7 +1,6 @@
 package se.gory_moon.horsepower.lib;
 
-public class Reference
-{
+public class Reference {
     public static final String MODID = "horsepower";
     public static final String NAME = "Horse Power TFC";
     public static final String VERSION = "@MOD_VERSION@";

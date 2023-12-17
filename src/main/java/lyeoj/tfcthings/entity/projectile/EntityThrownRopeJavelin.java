@@ -26,9 +26,9 @@ import net.minecraftforge.fml.common.registry.IThrowableEntity;
 import javax.annotation.Nonnull;
 
 public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData {
+    protected double effectiveRange = 1024;
     private ItemStack weapon;
     private int knockbackStrength;
-    protected double effectiveRange = 1024;
 
     public EntityThrownRopeJavelin(World world) {
         super(world);
@@ -76,16 +76,16 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
     }
 
     public void onUpdate() {
-        if(getWeapon().getItem() instanceof ItemRopeJavelin) {
+        if (getWeapon().getItem() instanceof ItemRopeJavelin) {
             ItemRopeJavelin javelin = (ItemRopeJavelin) getWeapon().getItem();
-            if(getThrower() == null) {
+            if (getThrower() == null) {
                 javelin.retractJavelin(getWeapon(), world);
             }
-            if(javelin.getCapturedEntity(getWeapon(), getEntityWorld()) != null && this.getDistanceSq(getThrower()) <= effectiveRange) {
+            if (javelin.getCapturedEntity(getWeapon(), getEntityWorld()) != null && this.getDistanceSq(getThrower()) <= effectiveRange) {
                 this.setNoGravity(true);
                 Entity caughtEntity = javelin.getCapturedEntity(getWeapon(), getEntityWorld());
                 this.posX = caughtEntity.posX;
-                double d2 = (double)caughtEntity.height;
+                double d2 = (double) caughtEntity.height;
                 this.posY = caughtEntity.getEntityBoundingBox().minY + d2 * 0.8D;
                 this.posZ = caughtEntity.posZ;
                 this.setPositionAndUpdate(this.posX, this.posY, this.posZ);
@@ -95,7 +95,7 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
                 this.performAdditionalUpdates();
             }
         }
-        if(this.shouldRetract(getWeapon(), this.world)) {
+        if (this.shouldRetract(getWeapon(), this.world)) {
             this.onEntityUpdate();
             return;
         }
@@ -107,12 +107,12 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
     }
 
     protected void onHit(@Nonnull RayTraceResult raytraceResultIn) {
-        if(getWeapon().getItem() instanceof ItemRopeJavelin) {
-            ItemRopeJavelin javelin = (ItemRopeJavelin)getWeapon().getItem();
+        if (getWeapon().getItem() instanceof ItemRopeJavelin) {
+            ItemRopeJavelin javelin = (ItemRopeJavelin) getWeapon().getItem();
 
             Entity entity = raytraceResultIn.entityHit;
             if (this.getThrower() instanceof EntityLivingBase && javelin.getCapturedEntity(getWeapon(), getEntityWorld()) == null) {
-                EntityLivingBase thrower = (EntityLivingBase)this.getThrower();
+                EntityLivingBase thrower = (EntityLivingBase) this.getThrower();
                 float skillModifier = SmithingSkill.getSkillBonus(getWeapon(), SmithingSkill.Type.WEAPONS) / 2.0F;
                 int damageAmount = 1;
                 if (skillModifier > 0.0F && Constants.RNG.nextFloat() < skillModifier) {
@@ -128,7 +128,7 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
             if (entity != null) {
                 ItemStack weapon = this.getWeapon();
                 float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-                float finalDamage = f * (float)this.getDamage();
+                float finalDamage = f * (float) this.getDamage();
                 if (this.getIsCritical()) {
                     finalDamage *= 2.0F;
                 }
@@ -144,21 +144,21 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
                     entity.setFire(5);
                 }
 
-                if(javelin.getCapturedEntity(getWeapon(), getEntityWorld()) == null) {
+                if (javelin.getCapturedEntity(getWeapon(), getEntityWorld()) == null) {
                     if (entity.attackEntityFrom(damagesource, finalDamage)) {
                         javelin.setCapturedEntity(getWeapon(), entity);
                         if (entity instanceof EntityLivingBase) {
-                            EntityLivingBase entitylivingbase = (EntityLivingBase)entity;
+                            EntityLivingBase entitylivingbase = (EntityLivingBase) entity;
                             if (this.knockbackStrength > 0) {
                                 float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
                                 if (f1 > 0.0F) {
-                                    entitylivingbase.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1);
+                                    entitylivingbase.addVelocity(this.motionX * (double) this.knockbackStrength * 0.6000000238418579D / (double) f1, 0.1D, this.motionZ * (double) this.knockbackStrength * 0.6000000238418579D / (double) f1);
                                 }
                             }
 
                             this.arrowHit(entitylivingbase);
                             if (this.shootingEntity != null && entitylivingbase != this.shootingEntity && entitylivingbase instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP) {
-                                ((EntityPlayerMP)this.shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
+                                ((EntityPlayerMP) this.shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
                             }
                         }
 
@@ -175,7 +175,7 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
                     }
                 }
             } else {
-                if(javelin.getCapturedEntity(getWeapon(), getEntityWorld()) == null) {
+                if (javelin.getCapturedEntity(getWeapon(), getEntityWorld()) == null) {
                     super.onHit(raytraceResultIn);
                 }
             }
@@ -204,12 +204,11 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
         this.knockbackStrength = knockbackStrength;
     }
 
-    private boolean shouldRetract(ItemStack stack, World world)
-    {
-        if(stack != null && stack.getItem() instanceof ItemRopeJavelin) {
-            ItemRopeJavelin javelin = (ItemRopeJavelin)getWeapon().getItem();
-            if(this.getThrower() instanceof EntityLivingBase) {
-                EntityLivingBase thrower = (EntityLivingBase)getThrower();
+    private boolean shouldRetract(ItemStack stack, World world) {
+        if (stack != null && stack.getItem() instanceof ItemRopeJavelin) {
+            ItemRopeJavelin javelin = (ItemRopeJavelin) getWeapon().getItem();
+            if (this.getThrower() instanceof EntityLivingBase) {
+                EntityLivingBase thrower = (EntityLivingBase) getThrower();
                 ItemStack itemstack = thrower.getHeldItemMainhand();
                 ItemStack itemstack1 = thrower.getHeldItemOffhand();
                 boolean flag = ItemStack.areItemStacksEqual(itemstack, getWeapon());
@@ -221,9 +220,7 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
 
                 if (thrower.isEntityAlive() && (flag || flag1) && this.getDistanceSq(thrower) <= effectiveRange) {
                     return false;
-                }
-                else
-                {
+                } else {
                     javelin.retractJavelin(stack, world);
                     return true;
                 }
@@ -232,7 +229,7 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
                 return true;
             }
         }
-        if(!world.isRemote) {
+        if (!world.isRemote) {
             this.setDead();
         }
         return true;

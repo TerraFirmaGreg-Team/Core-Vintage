@@ -1,7 +1,10 @@
 package de.mennomax.astikorcarts.entity;
 
-import java.util.UUID;
-
+import de.mennomax.astikorcarts.capabilities.PullProvider;
+import de.mennomax.astikorcarts.config.ModConfig;
+import de.mennomax.astikorcarts.handler.PacketHandler;
+import de.mennomax.astikorcarts.packets.SPacketDrawnUpdate;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -25,14 +28,9 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import de.mennomax.astikorcarts.capabilities.PullProvider;
-import de.mennomax.astikorcarts.config.ModConfig;
-import de.mennomax.astikorcarts.handler.PacketHandler;
-import de.mennomax.astikorcarts.packets.SPacketDrawnUpdate;
-import io.netty.buffer.ByteBuf;
+import java.util.UUID;
 
-public abstract class AbstractDrawn extends Entity implements IEntityAdditionalSpawnData
-{
+public abstract class AbstractDrawn extends Entity implements IEntityAdditionalSpawnData {
     public static final UUID PULL_SLOWLY_MODIFIER_UUID = UUID.fromString("49B0E52E-48F2-4D89-BED7-4F5DF26F1263");
     public static final AttributeModifier PULL_SLOWLY_MODIFIER = (new AttributeModifier(PULL_SLOWLY_MODIFIER_UUID, "Pull slowly modifier", ModConfig.speedModifier, 2)).setSaved(false);
     private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.createKey(AbstractDrawn.class, DataSerializers.VARINT);
@@ -54,12 +52,10 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
     private float wheelrot;
     private boolean fellLastTick;
 
-    public AbstractDrawn(World worldIn)
-    {
+    public AbstractDrawn(World worldIn) {
         super(worldIn);
         this.stepHeight = 1.2F;
-        if (worldIn.isRemote)
-        {
+        if (worldIn.isRemote) {
             this.firstPullingId = -1;
         }
     }
@@ -69,16 +65,14 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
      *
      * @param targetVecIn
      */
-    public void handleRotation(Vec3d targetVecIn)
-    {
+    public void handleRotation(Vec3d targetVecIn) {
         this.rotationYaw = (float) Math.toDegrees(-Math.atan2(targetVecIn.x - this.posX, targetVecIn.z - this.posZ));
     }
 
     /**
      * @return The position this cart should always face and travel towards.
      */
-    public Vec3d getTargetVec()
-    {
+    public Vec3d getTargetVec() {
         return new Vec3d(this.pulling.posX, this.pulling.posY, this.pulling.posZ);
     }
 
@@ -87,42 +81,31 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
      * @return {@code true}, if the entity is able pull this cart, {@code false}
      * else.
      */
-    public boolean canBePulledBy(Entity pullingIn)
-    {
+    public boolean canBePulledBy(Entity pullingIn) {
         return false;
     }
 
-    public Entity getPulling()
-    {
+    public Entity getPulling() {
         return this.pulling;
     }
 
     /**
      * @param entityIn {@link Entity} that should pull this cart.
      */
-    public void setPulling(Entity entityIn)
-    {
-        if (this.pulling == null || entityIn == null)
-        {
-            if (!this.world.isRemote)
-            {
-                if (entityIn == null)
-                {
-                    if (this.pulling != null)
-                    {
-                        if (this.pulling instanceof EntityLivingBase)
-                        {
+    public void setPulling(Entity entityIn) {
+        if (this.pulling == null || entityIn == null) {
+            if (!this.world.isRemote) {
+                if (entityIn == null) {
+                    if (this.pulling != null) {
+                        if (this.pulling instanceof EntityLivingBase) {
                             ((EntityLivingBase) this.pulling).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER);
                         }
                         this.pulling.getCapability(PullProvider.PULL, null).setDrawn(null);
                         this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.5F, 0.1F);
                     }
                     ((WorldServer) this.world).getEntityTracker().sendToTracking(this, PacketHandler.INSTANCE.getPacketFrom(new SPacketDrawnUpdate(-1, this.getEntityId())));
-                }
-                else
-                {
-                    if (entityIn instanceof EntityLiving)
-                    {
+                } else {
+                    if (entityIn instanceof EntityLiving) {
                         ((EntityLiving) entityIn).getNavigator().clearPath();
                     }
                     entityIn.getCapability(PullProvider.PULL, null).setDrawn(this);
@@ -141,11 +124,9 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
      * @return {@code true} if the entity existed in the client world, {@code false} else.
      */
     @SideOnly(Side.CLIENT)
-    public boolean setPullingId(int entityId)
-    {
+    public boolean setPullingId(int entityId) {
         Entity entity = this.world.getEntityByID(entityId);
-        if (entity != null)
-        {
+        if (entity != null) {
             this.setPulling(entity);
             return true;
         }
@@ -156,32 +137,26 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
      * @return The current wheel rotation angle.
      */
     @SideOnly(Side.CLIENT)
-    public float getWheelRotation()
-    {
-        if (this.pulling != null && !Minecraft.getMinecraft().isGamePaused())
-        {
+    public float getWheelRotation() {
+        if (this.pulling != null && !Minecraft.getMinecraft().isGamePaused()) {
             this.wheelrot -= 0.12F * this.factor;
         }
         return this.wheelrot;
     }
 
-    public float getDamageTaken()
-    {
+    public float getDamageTaken() {
         return this.dataManager.get(DAMAGE_TAKEN);
     }
 
-    public void setDamageTaken(float damageTaken)
-    {
+    public void setDamageTaken(float damageTaken) {
         this.dataManager.set(DAMAGE_TAKEN, damageTaken);
     }
 
-    public int getTimeSinceHit()
-    {
+    public int getTimeSinceHit() {
         return this.dataManager.get(TIME_SINCE_HIT);
     }
 
-    public void setTimeSinceHit(int timeSinceHit)
-    {
+    public void setTimeSinceHit(int timeSinceHit) {
         this.dataManager.set(TIME_SINCE_HIT, timeSinceHit);
     }
 
@@ -193,29 +168,22 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
      * @param source           The damage source.
      * @param byCreativePlayer Whether or not this entity was destroyed by a player in creative mode.
      */
-    public void onDestroyed(DamageSource source, boolean byCreativePlayer)
-    {
-        if (!byCreativePlayer && this.world.getGameRules().getBoolean("doEntityDrops"))
-        {
+    public void onDestroyed(DamageSource source, boolean byCreativePlayer) {
+        if (!byCreativePlayer && this.world.getGameRules().getBoolean("doEntityDrops")) {
             this.dropItemWithOffset(this.getCartItem(), 1, 0.0F);
         }
     }
 
-    public void writeSpawnData(ByteBuf buffer)
-    {
-        if (this.pulling != null)
-        {
+    public void writeSpawnData(ByteBuf buffer) {
+        if (this.pulling != null) {
             buffer.writeInt(this.pulling.getEntityId());
         }
     }
 
-    public void readSpawnData(ByteBuf additionalData)
-    {
-        if (additionalData.readableBytes() >= 4)
-        {
+    public void readSpawnData(ByteBuf additionalData) {
+        if (additionalData.readableBytes() >= 4) {
             int entityId = additionalData.readInt();
-            if (!this.setPullingId(entityId))
-            {
+            if (!this.setPullingId(entityId)) {
                 this.firstPullingId = entityId;
             }
         }
@@ -224,14 +192,11 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
     /**
      * @return Whether the currently pulling entity should stop pulling this cart.
      */
-    protected boolean shouldRemovePulling()
-    {
-        if (this.pulling != null)
-        {
+    protected boolean shouldRemovePulling() {
+        if (this.pulling != null) {
             if (this.pulling.isRiding())
                 return true;
-            if (this.collidedHorizontally)
-            {
+            if (this.collidedHorizontally) {
                 RayTraceResult result = this.world.rayTraceBlocks(new Vec3d(this.posX, this.posY + this.height, this.posZ), new Vec3d(this.pulling.posX, this.pulling.posY + (this.height / 2.0F), this.pulling.posZ), false, true, false);
                 if (result != null)
                     if (result.typeOfHit == RayTraceResult.Type.BLOCK)
@@ -242,25 +207,20 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
     }
 
     @Override
-    protected void entityInit()
-    {
+    protected void entityInit() {
         this.dataManager.register(TIME_SINCE_HIT, 0);
         this.dataManager.register(DAMAGE_TAKEN, 0.0F);
     }
 
     @Override
-    public void onUpdate()
-    {
-        if (this.getTimeSinceHit() > 0)
-        {
+    public void onUpdate() {
+        if (this.getTimeSinceHit() > 0) {
             this.setTimeSinceHit(this.getTimeSinceHit() - 1);
         }
-        if (!this.hasNoGravity())
-        {
+        if (!this.hasNoGravity()) {
             this.motionY -= 0.04D;
         }
-        if (this.getDamageTaken() > 0.0F)
-        {
+        if (this.getDamageTaken() > 0.0F) {
             this.setDamageTaken(this.getDamageTaken() - 1.0F);
         }
         this.prevPosX = this.posX;
@@ -268,12 +228,9 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
         this.prevPosZ = this.posZ;
         super.onUpdate();
         this.tickLerp();
-        if (this.pulling != null)
-        {
-            if (!this.world.isRemote)
-            {
-                if (this.shouldRemovePulling())
-                {
+        if (this.pulling != null) {
+            if (!this.world.isRemote) {
+                if (this.shouldRemovePulling()) {
                     this.setPulling(null);
                     return;
                 }
@@ -281,12 +238,9 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
             Vec3d targetVec = this.getTargetVec();
             this.handleRotation(targetVec);
             double dRotation = this.prevRotationYaw - this.rotationYaw;
-            if (dRotation < -180.0D)
-            {
+            if (dRotation < -180.0D) {
                 this.prevRotationYaw += 360.0F;
-            }
-            else if (dRotation >= 180.0D)
-            {
+            } else if (dRotation >= 180.0D) {
                 this.prevRotationYaw -= 360.0F;
             }
             double lookX = MathHelper.sin(-this.rotationYaw * 0.017453292F - (float) Math.PI);
@@ -298,57 +252,42 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
 //            {
 //                System.out.println(this.pulling.fallDistance);
 //            }
-            if (!this.pulling.onGround && this.pulling.fallDistance == 0.0F)
-            {
+            if (!this.pulling.onGround && this.pulling.fallDistance == 0.0F) {
                 this.motionY = targetVec.y - this.posY;
                 this.fallDistance = 0.0F;
                 this.fellLastTick = false;
-            }
-            else if (!fellLastTick)
-            {
+            } else if (!fellLastTick) {
                 this.motionY = 0.0D;
                 this.fellLastTick = true;
             }
             this.motionZ = moveZ;
-            if (this.world.isRemote)
-            {
+            if (this.world.isRemote) {
                 this.factor = Math.sqrt((moveX + lookX) * (moveX + lookX) + (moveZ + lookZ) * (moveZ + lookZ)) > 1 ? Math.sqrt(moveX * moveX + moveZ * moveZ) : -Math.sqrt(moveX * moveX + moveZ * moveZ);
             }
-        }
-        else
-        {
+        } else {
             this.motionX = 0.0D;
             this.motionZ = 0.0D;
             this.attemptReattach();
         }
         this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-        for (Entity entity : this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox(), EntitySelectors.getTeamCollisionPredicate(this)))
-        {
+        for (Entity entity : this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox(), EntitySelectors.getTeamCollisionPredicate(this))) {
             this.applyEntityCollision(entity);
         }
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource source, float amount)
-    {
-        if (this.isEntityInvulnerable(source))
-        {
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (this.isEntityInvulnerable(source)) {
             return false;
-        }
-        else if (!this.world.isRemote && !this.isDead)
-        {
-            if (source instanceof EntityDamageSourceIndirect && source.getTrueSource() != null && this.isPassenger(source.getTrueSource()))
-            {
+        } else if (!this.world.isRemote && !this.isDead) {
+            if (source instanceof EntityDamageSourceIndirect && source.getTrueSource() != null && this.isPassenger(source.getTrueSource())) {
                 return false;
-            }
-            else
-            {
+            } else {
                 this.setTimeSinceHit(10);
                 this.setDamageTaken(this.getDamageTaken() + amount * 10.0F);
                 boolean flag = source.getTrueSource() instanceof EntityPlayer && ((EntityPlayer) source.getTrueSource()).capabilities.isCreativeMode;
 
-                if (flag || this.getDamageTaken() > 40.0F)
-                {
+                if (flag || this.getDamageTaken() > 40.0F) {
                     this.onDestroyed(source, flag);
                     this.setPulling(null);
                     this.setDead();
@@ -361,38 +300,31 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
     }
 
     @Override
-    public boolean canBeCollidedWith()
-    {
+    public boolean canBeCollidedWith() {
         return true;
     }
 
     @Override
-    public boolean canBePushed()
-    {
+    public boolean canBePushed() {
         return true;
     }
 
     @Override
-    protected void readEntityFromNBT(NBTTagCompound compound)
-    {
+    protected void readEntityFromNBT(NBTTagCompound compound) {
         this.firstPullingUUID = compound.getUniqueId("FirstPullingUUID");
     }
 
     @Override
-    protected void writeEntityToNBT(NBTTagCompound compound)
-    {
-        if (this.pulling != null)
-        {
+    protected void writeEntityToNBT(NBTTagCompound compound) {
+        if (this.pulling != null) {
             compound.setUniqueId("FirstPullingUUID", this.pulling.getUniqueID());
         }
     }
 
     @Override
-    protected void addPassenger(Entity passenger)
-    {
+    protected void addPassenger(Entity passenger) {
         super.addPassenger(passenger);
-        if (this.canPassengerSteer() && this.lerpSteps > 0)
-        {
+        if (this.canPassengerSteer() && this.lerpSteps > 0) {
             this.lerpSteps = 0;
             this.posX = this.lerpX;
             this.posY = this.lerpY;
@@ -403,8 +335,7 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void setPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean teleport)
-    {
+    public void setPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean teleport) {
         this.lerpX = x;
         this.lerpY = y;
         this.lerpZ = z;
@@ -413,30 +344,21 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
     }
 
     @Override
-    public ItemStack getPickedResult(RayTraceResult target)
-    {
+    public ItemStack getPickedResult(RayTraceResult target) {
         return new ItemStack(this.getCartItem());
     }
 
-    private void attemptReattach()
-    {
-        if (this.world.isRemote)
-        {
-            if (this.firstPullingId != -1)
-            {
-                if (this.setPullingId(this.firstPullingId))
-                {
+    private void attemptReattach() {
+        if (this.world.isRemote) {
+            if (this.firstPullingId != -1) {
+                if (this.setPullingId(this.firstPullingId)) {
                     this.firstPullingId = -1;
                 }
             }
-        }
-        else
-        {
-            if (this.firstPullingUUID != null)
-            {
+        } else {
+            if (this.firstPullingUUID != null) {
                 Entity pulling = ((WorldServer) this.world).getEntityFromUuid(this.firstPullingUUID);
-                if (pulling != null)
-                {
+                if (pulling != null) {
                     this.setPulling(pulling);
                     this.firstPullingUUID = null;
                 }
@@ -445,10 +367,8 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
 
     }
 
-    private void tickLerp()
-    {
-        if (this.lerpSteps > 0)
-        {
+    private void tickLerp() {
+        if (this.lerpSteps > 0) {
             double dx = this.posX + (this.lerpX - this.posX) / this.lerpSteps;
             double dy = this.posY + (this.lerpY - this.posY) / this.lerpSteps;
             double dz = this.posZ + (this.lerpZ - this.posZ) / this.lerpSteps;

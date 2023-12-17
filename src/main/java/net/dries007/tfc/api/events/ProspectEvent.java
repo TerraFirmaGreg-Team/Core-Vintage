@@ -19,6 +19,7 @@ public abstract class ProspectEvent extends Event {
     private BlockPos pos;
     private Type type;
     private ItemStack vein;
+
     protected ProspectEvent(Side side, EntityPlayer player, BlockPos pos, Type type, ItemStack vein) {
         this.side = side;
         this.player = player;

@@ -42,6 +42,7 @@ public class ItemBoatTFCF extends ItemTFCF {
         this.tree = null;
         if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
     }
+
     public ItemBoatTFCF(Tree tree) {
         this.tree = tree;
         this.wood = null;

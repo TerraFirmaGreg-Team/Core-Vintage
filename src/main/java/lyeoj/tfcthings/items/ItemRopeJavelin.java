@@ -36,34 +36,31 @@ import java.util.UUID;
 
 public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
 
-    private final Metal metal;
-    public final ToolMaterial material;
-    protected final double attackDamage;
-    protected final float attackSpeed;
-    protected double pullStrength = 0.1;
-
     private static final String THROWN_NBT_KEY = "Thrown";
     private static final String JAVELIN_NBT_KEY = "JavelinID";
     private static final String CAPTURED_NBT_KEY = "CapturedID";
+    public final ToolMaterial material;
+    protected final double attackDamage;
+    protected final float attackSpeed;
+    private final Metal metal;
+    protected double pullStrength = 0.1;
 
     public ItemRopeJavelin(Metal metal, String name) {
         this.metal = metal;
         this.material = metal.getToolMetal();
         setCreativeTab(CreativeTabsTFC.CT_METAL);
-        this.setMaxDamage((int)((double)material.getMaxUses() * 0.1D));
-        this.attackDamage = (double)(0.7 * this.material.getAttackDamage());
+        this.setMaxDamage((int) ((double) material.getMaxUses() * 0.1D));
+        this.attackDamage = (double) (0.7 * this.material.getAttackDamage());
         this.attackSpeed = -1.8F;
         this.setTranslationKey(getNamePrefix() + "_" + name);
         this.setRegistryName(getNamePrefix() + "/" + name);
         this.setMaxStackSize(1);
         this.addPropertyOverride(new ResourceLocation("thrown"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
-            {
+            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 if (entityIn == null) {
                     return 0.0F;
-                }
-                else {
+                } else {
 
                     boolean flag = entityIn.getHeldItemMainhand() == stack;
                     boolean flag1 = entityIn.getHeldItemOffhand() == stack;
@@ -113,7 +110,7 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
         Multimap<String, AttributeModifier> multimap = HashMultimap.create();
         if (slot == EntityEquipmentSlot.MAINHAND && !isThrown(stack)) {
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, 0));
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", (double)this.attackSpeed, 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", (double) this.attackSpeed, 0));
         }
 
         return multimap;
@@ -122,12 +119,12 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
     @Nonnull
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if(isThrown(itemstack)) {
+        if (isThrown(itemstack)) {
             EntityThrownRopeJavelin javelin = getJavelin(itemstack, worldIn);
-            if(javelin != null) {
-                if(getCapturedEntity(itemstack, worldIn) != null) {
+            if (javelin != null) {
+                if (getCapturedEntity(itemstack, worldIn) != null) {
                     Entity entity = getCapturedEntity(itemstack, worldIn);
-                    if(entity.isRiding()) {
+                    if (entity.isRiding()) {
                         entity.dismountRidingEntity();
                     }
                     double d0 = playerIn.posX - javelin.posX;
@@ -156,7 +153,7 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
 
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
         if (entityLiving instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer)entityLiving;
+            EntityPlayer player = (EntityPlayer) entityLiving;
             int charge = this.getMaxItemUseDuration(stack) - timeLeft;
             if (charge > 5) {
                 float f = ItemBow.getArrowVelocity(charge);
@@ -181,10 +178,10 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
     }
 
     public boolean isThrown(ItemStack stack) {
-        if(!stack.hasTagCompound()) {
+        if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         }
-        if(!stack.getTagCompound().hasKey(THROWN_NBT_KEY)) {
+        if (!stack.getTagCompound().hasKey(THROWN_NBT_KEY)) {
             return false;
         }
         return stack.getTagCompound().getBoolean(THROWN_NBT_KEY);
@@ -198,24 +195,24 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
     }
 
     public EntityThrownRopeJavelin getJavelin(ItemStack stack, World world) {
-        if(!stack.hasTagCompound()) {
+        if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         }
         UUID javelinID = stack.getTagCompound().getUniqueId(JAVELIN_NBT_KEY);
-        if(javelinID != null && world instanceof WorldServer) {
-            Entity entity = ((WorldServer)world).getEntityFromUuid(javelinID);
-            if(entity instanceof EntityThrownRopeJavelin) {
-                return (EntityThrownRopeJavelin)entity;
+        if (javelinID != null && world instanceof WorldServer) {
+            Entity entity = ((WorldServer) world).getEntityFromUuid(javelinID);
+            if (entity instanceof EntityThrownRopeJavelin) {
+                return (EntityThrownRopeJavelin) entity;
             }
         }
         return null;
     }
 
     public void setJavelin(ItemStack stack, EntityThrownRopeJavelin javelin) {
-        if(!stack.hasTagCompound()) {
+        if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         }
-        if(javelin != null) {
+        if (javelin != null) {
             stack.getTagCompound().setUniqueId(JAVELIN_NBT_KEY, javelin.getUniqueID());
         } else {
             stack.getTagCompound().setUniqueId(JAVELIN_NBT_KEY, UUID.randomUUID());
@@ -223,22 +220,22 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
     }
 
     public Entity getCapturedEntity(ItemStack stack, World world) {
-        if(!stack.hasTagCompound()) {
+        if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         }
         UUID capturedID = stack.getTagCompound().getUniqueId(CAPTURED_NBT_KEY);
-        if(capturedID != null && world instanceof WorldServer) {
-            return ((WorldServer)world).getEntityFromUuid(capturedID);
+        if (capturedID != null && world instanceof WorldServer) {
+            return ((WorldServer) world).getEntityFromUuid(capturedID);
 
         }
         return null;
     }
 
     public void setCapturedEntity(ItemStack stack, Entity entity) {
-        if(!stack.hasTagCompound()) {
+        if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         }
-        if(entity != null) {
+        if (entity != null) {
             stack.getTagCompound().setUniqueId(CAPTURED_NBT_KEY, entity.getUniqueID());
         } else {
             stack.getTagCompound().setUniqueId(CAPTURED_NBT_KEY, UUID.randomUUID());
@@ -248,7 +245,7 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
     public void retractJavelin(ItemStack stack, World world) {
         setThrown(stack, false);
         setCapturedEntity(stack, null);
-        if(getJavelin(stack, world) != null) {
+        if (getJavelin(stack, world) != null) {
             getJavelin(stack, world).setDead();
             setJavelin(stack, null);
         }

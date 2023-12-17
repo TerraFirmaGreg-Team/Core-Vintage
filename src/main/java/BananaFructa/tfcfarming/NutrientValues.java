@@ -4,14 +4,14 @@ import java.util.Arrays;
 
 public class NutrientValues {
 
-    int[] NPK = new int[] {0,0,0};
+    int[] NPK = new int[]{0, 0, 0};
 
-    public NutrientValues(int nitrogen,int phosphorus,int potassium) {
-        NPK = new int[] {nitrogen,phosphorus,potassium};
+    public NutrientValues(int nitrogen, int phosphorus, int potassium) {
+        NPK = new int[]{nitrogen, phosphorus, potassium};
     }
 
     public NutrientValues(int[] NPK) {
-        this.NPK = Arrays.copyOf(NPK,NPK.length);
+        this.NPK = Arrays.copyOf(NPK, NPK.length);
     }
 
     public NutrientValues(int packed) {
@@ -28,10 +28,10 @@ public class NutrientValues {
         return i;
     }
 
-    public boolean addNutrient(NutrientClass nutrientClass,int amount) {
+    public boolean addNutrient(NutrientClass nutrientClass, int amount) {
         if (NPK[nutrientClass.ordinal()] == 255 && amount > 0) return false;
         if (NPK[nutrientClass.ordinal()] == 0 && amount < 0) return false;
-        NPK[nutrientClass.ordinal()] = Math.max(Math.min(NPK[nutrientClass.ordinal()] + amount,255),0);
+        NPK[nutrientClass.ordinal()] = Math.max(Math.min(NPK[nutrientClass.ordinal()] + amount, 255), 0);
         return true;
     }
 

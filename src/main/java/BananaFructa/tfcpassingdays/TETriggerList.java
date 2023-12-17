@@ -1,7 +1,6 @@
 package BananaFructa.tfcpassingdays;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class TETriggerList extends ArrayList<TileEntity> {
         @Override
         public boolean hasNext() {
             boolean hasNext = iteratorInner.hasNext();
-            if (!hasNext) ((PassingDayWorldProviderServer)worldParent.provider).shouldInterceptCalls(false);
+            if (!hasNext) ((PassingDayWorldProviderServer) worldParent.provider).shouldInterceptCalls(false);
             worldParent.calculateInitialSkylight();
             return hasNext;
         }
@@ -41,8 +40,8 @@ public class TETriggerList extends ArrayList<TileEntity> {
         @Override
         public TileEntity next() {
             TileEntity te = iteratorInner.next();
-            ((PassingDayWorldProviderServer)worldParent.provider).shouldInterceptCalls(true);
-            ((PassingDayWorldProviderServer)worldParent.provider).setZIntercept(te.getPos().getZ());
+            ((PassingDayWorldProviderServer) worldParent.provider).shouldInterceptCalls(true);
+            ((PassingDayWorldProviderServer) worldParent.provider).setZIntercept(te.getPos().getZ());
             worldParent.calculateInitialSkylight();
             return te;
         }

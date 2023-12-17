@@ -9,7 +9,7 @@ public class ItemWithSubType {
     public Item i;
     public int meta;
 
-    public ItemWithSubType(Item i,int meta) {
+    public ItemWithSubType(Item i, int meta) {
         this.i = i;
         this.meta = meta;
     }

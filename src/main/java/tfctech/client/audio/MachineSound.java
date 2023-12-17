@@ -8,12 +8,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("WeakerAccess")
-public class MachineSound extends PositionedSound implements ITickableSound
-{
+public class MachineSound extends PositionedSound implements ITickableSound {
     protected IMachineSoundEffect machine;
 
-    public MachineSound(IMachineSoundEffect machine)
-    {
+    public MachineSound(IMachineSoundEffect machine) {
         super(machine.getSoundEvent(), SoundCategory.BLOCKS);
         volume = 0.5F;
         repeat = true;
@@ -25,29 +23,24 @@ public class MachineSound extends PositionedSound implements ITickableSound
     }
 
     @Override
-    public void update()
-    {
+    public void update() {
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return machine.hashCode();
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if (!(obj instanceof MachineSound))
-        {
+    public boolean equals(Object obj) {
+        if (!(obj instanceof MachineSound)) {
             return false;
         }
         return ((MachineSound) obj).machine.equals(machine);
     }
 
     @Override
-    public boolean isDonePlaying()
-    {
+    public boolean isDonePlaying() {
         return !machine.shouldPlay();
     }
 }

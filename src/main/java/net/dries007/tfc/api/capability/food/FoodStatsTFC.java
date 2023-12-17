@@ -39,6 +39,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
     private long lastDrinkTick;
     private float thirst;
     private int healTimer;
+
     public FoodStatsTFC(EntityPlayer sourcePlayer, FoodStats originalStats) {
         this.sourcePlayer = sourcePlayer;
         this.originalStats = originalStats;

@@ -3,8 +3,7 @@ package se.gory_moon.horsepower.tweaker;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 
-public class CTShapedChoppingRecipe
-{
+public class CTShapedChoppingRecipe {
 
     private final int width;
     private final int height;
@@ -15,8 +14,7 @@ public class CTShapedChoppingRecipe
     private final IIngredient[] ingredients;
     private final String name;
 
-    public CTShapedChoppingRecipe(IIngredient ore, String name, IItemStack output, IIngredient[][] ingredients)
-    {
+    public CTShapedChoppingRecipe(IIngredient ore, String name, IItemStack output, IIngredient[][] ingredients) {
         int numIngredients = 0;
         IIngredient[][] var8 = ingredients;
         int height1 = ingredients.length;
@@ -24,17 +22,14 @@ public class CTShapedChoppingRecipe
         int ix;
         IIngredient[] row;
         int i;
-        for (ix = 0; ix < height1; ++ix)
-        {
+        for (ix = 0; ix < height1; ++ix) {
             IIngredient[] ingredient = var8[ix];
             row = ingredient;
             i = ingredient.length;
 
-            for (int var14 = 0; var14 < i; ++var14)
-            {
+            for (int var14 = 0; var14 < i; ++var14) {
                 IIngredient anIngredient = row[var14];
-                if (anIngredient != null)
-                {
+                if (anIngredient != null) {
                     ++numIngredients;
                 }
             }
@@ -49,15 +44,12 @@ public class CTShapedChoppingRecipe
         height1 = ingredients.length;
         ix = 0;
 
-        for (int j = 0; j < ingredients.length; ++j)
-        {
+        for (int j = 0; j < ingredients.length; ++j) {
             row = ingredients[j];
             width1 = Math.max(width1, row.length);
 
-            for (i = 0; i < row.length; ++i)
-            {
-                if (row[i] != null)
-                {
+            for (i = 0; i < row.length; ++i) {
+                if (row[i] != null) {
                     this.posx[ix] = (byte) i;
                     this.posy[ix] = (byte) j;
                     this.ingredients[ix] = row[i];
@@ -71,43 +63,35 @@ public class CTShapedChoppingRecipe
         this.ore = ore;
     }
 
-    public int getWidth()
-    {
+    public int getWidth() {
         return this.width;
     }
 
-    public int getHeight()
-    {
+    public int getHeight() {
         return this.height;
     }
 
-    public IIngredient[] getIngredients()
-    {
+    public IIngredient[] getIngredients() {
         return this.ingredients;
     }
 
-    public byte[] getIngredientsX()
-    {
+    public byte[] getIngredientsX() {
         return this.posx;
     }
 
-    public byte[] getIngredientsY()
-    {
+    public byte[] getIngredientsY() {
         return this.posy;
     }
 
-    public IItemStack getOutput()
-    {
+    public IItemStack getOutput() {
         return this.output;
     }
 
-    public IIngredient getOre()
-    {
+    public IIngredient getOre() {
         return ore;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 

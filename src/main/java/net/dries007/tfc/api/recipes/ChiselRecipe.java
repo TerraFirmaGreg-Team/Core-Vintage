@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 public class ChiselRecipe extends IForgeRegistryEntry.Impl<ChiselRecipe> {
     private final IIngredient<IBlockState> ingredient;
     private final IBlockState stateOut;
+
     public ChiselRecipe(Block blockIn, IBlockState stateOut) {
         this(state -> state.getBlock() == blockIn, stateOut);
     }

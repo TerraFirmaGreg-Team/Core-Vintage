@@ -46,7 +46,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        switch ((EnumFacing)state.getValue(FACING)) {
+        switch ((EnumFacing) state.getValue(FACING)) {
             case NORTH:
                 return LADDER_NORTH_AABB;
             case SOUTH:
@@ -61,7 +61,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {FACING});
+        return new BlockStateContainer(this, new IProperty[]{FACING});
     }
 
     @Nonnull
@@ -70,17 +70,16 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
     }
 
     public int getMetaFromState(IBlockState state) {
-        return ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
+        return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex();
     }
 
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        if(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockRopeLadder) {
+        if (worldIn.getBlockState(pos.down()).getBlock() instanceof BlockRopeLadder) {
             return this.getDefaultState().withProperty(FACING, worldIn.getBlockState(pos.down()).getValue(FACING));
         }
         if (facing.getAxis().isHorizontal() && this.canAttachTo(worldIn, pos.offset(facing.getOpposite()), facing)) {
             return this.getDefaultState().withProperty(FACING, facing);
-        }
-        else {
+        } else {
             for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
                 if (this.canAttachTo(worldIn, pos.offset(enumfacing.getOpposite()), enumfacing)) {
                     return this.getDefaultState().withProperty(FACING, enumfacing);
@@ -104,7 +103,8 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
         return false;
     }
 
-    @Override public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity) { return true; }
+    @Override
+    public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity) {return true;}
 
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
@@ -113,14 +113,14 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
         BlockPos nextPos = pos;
-        for(int i = 0; i < 32; i++) {
-            if(stack.getCount() <= 1) {
+        for (int i = 0; i < 32; i++) {
+            if (stack.getCount() <= 1) {
                 break;
             }
             nextPos = nextPos.down();
-            if(worldIn.getBlockState(nextPos).getBlock().isReplaceable(worldIn, nextPos) && nextPos.getY() >= 0) {
+            if (worldIn.getBlockState(nextPos).getBlock().isReplaceable(worldIn, nextPos) && nextPos.getY() >= 0) {
                 worldIn.setBlockState(nextPos, TFCThingsBlocks.ROPE_LADDER_BLOCK.getDefaultState().withProperty(FACING, state.getValue(FACING)));
-                if(!((EntityPlayer)placer).isCreative()) {
+                if (!((EntityPlayer) placer).isCreative()) {
                     stack.shrink(1);
                 }
             } else {
@@ -128,23 +128,23 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
             }
 
         }
-        if(!((EntityPlayer)placer).isCreative()) {
+        if (!((EntityPlayer) placer).isCreative()) {
             stack.setCount(0);
         }
-        ItemStack ladderStack = findMoreLadders((EntityPlayer)placer);
+        ItemStack ladderStack = findMoreLadders((EntityPlayer) placer);
         nextPos = nextPos.down();
-        while(!ladderStack.isEmpty()) {
-            if(worldIn.getBlockState(nextPos).getBlock().isReplaceable(worldIn, nextPos) && nextPos.getY() >= 0) {
+        while (!ladderStack.isEmpty()) {
+            if (worldIn.getBlockState(nextPos).getBlock().isReplaceable(worldIn, nextPos) && nextPos.getY() >= 0) {
                 worldIn.setBlockState(nextPos, TFCThingsBlocks.ROPE_LADDER_BLOCK.getDefaultState().withProperty(FACING, state.getValue(FACING)));
-                if(!((EntityPlayer)placer).isCreative()) {
+                if (!((EntityPlayer) placer).isCreative()) {
                     ladderStack.shrink(1);
                 }
             } else {
                 return;
             }
             nextPos = nextPos.down();
-            if(ladderStack.isEmpty()) {
-                ladderStack = findMoreLadders((EntityPlayer)placer);
+            if (ladderStack.isEmpty()) {
+                ladderStack = findMoreLadders((EntityPlayer) placer);
             }
         }
 
@@ -153,7 +153,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
     private ItemStack findMoreLadders(EntityPlayer player) {
         for (int i = 0; i < player.inventory.getSizeInventory(); ++i) {
             ItemStack itemstack = player.inventory.getStackInSlot(i);
-            if (!itemstack.isEmpty() && itemstack.getItem() instanceof ItemBlock && ((ItemBlock)itemstack.getItem()).getBlock() instanceof BlockRopeLadder) {
+            if (!itemstack.isEmpty() && itemstack.getItem() instanceof ItemBlock && ((ItemBlock) itemstack.getItem()).getBlock() instanceof BlockRopeLadder) {
                 return itemstack;
             }
         }
@@ -161,23 +161,23 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
     }
 
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if(playerIn.isSneaking()) {
-            if(worldIn.getBlockState(pos.up()).getBlock() instanceof BlockRopeLadder && worldIn.getBlockState(pos.down()).getBlock() instanceof BlockRopeLadder) {
+        if (playerIn.isSneaking()) {
+            if (worldIn.getBlockState(pos.up()).getBlock() instanceof BlockRopeLadder && worldIn.getBlockState(pos.down()).getBlock() instanceof BlockRopeLadder) {
                 return false;
             }
             BlockPos next = pos;
-            if(!(worldIn.getBlockState(pos.up()).getBlock() instanceof BlockRopeLadder)) {
+            if (!(worldIn.getBlockState(pos.up()).getBlock() instanceof BlockRopeLadder)) {
                 do {
                     giveLadderToPlayer(playerIn, next);
                     worldIn.setBlockToAir(next);
                     next = next.down();
-                } while(worldIn.getBlockState(next).getBlock() instanceof BlockRopeLadder);
+                } while (worldIn.getBlockState(next).getBlock() instanceof BlockRopeLadder);
             } else {
                 do {
                     giveLadderToPlayer(playerIn, next);
                     worldIn.setBlockToAir(next);
                     next = next.up();
-                } while(worldIn.getBlockState(next).getBlock() instanceof BlockRopeLadder);
+                } while (worldIn.getBlockState(next).getBlock() instanceof BlockRopeLadder);
             }
             return true;
         }
@@ -186,8 +186,8 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
 
     private void giveLadderToPlayer(EntityPlayer player, BlockPos pos) {
         ItemStack ladderStack = new ItemStack(TFCThingsBlocks.ROPE_LADDER_ITEM, 1);
-        if(!player.inventory.addItemStackToInventory(ladderStack) && !player.world.isRemote) {
-            InventoryHelper.spawnItemStack(player.world, (double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), ladderStack);
+        if (!player.inventory.addItemStackToInventory(ladderStack) && !player.world.isRemote) {
+            InventoryHelper.spawnItemStack(player.world, (double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), ladderStack);
         }
     }
 

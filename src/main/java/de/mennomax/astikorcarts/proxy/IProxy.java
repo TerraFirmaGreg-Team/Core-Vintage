@@ -1,7 +1,6 @@
 package de.mennomax.astikorcarts.proxy;
 
-public interface IProxy
-{
+public interface IProxy {
     void preInit();
 
     void init();

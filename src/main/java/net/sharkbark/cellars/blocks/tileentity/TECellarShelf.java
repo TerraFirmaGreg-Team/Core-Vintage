@@ -2,31 +2,23 @@ package net.sharkbark.cellars.blocks.tileentity;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
-import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.objects.te.TELargeVessel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -35,14 +27,12 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.sharkbark.cellars.ModConfig;
 import net.sharkbark.cellars.util.Reference;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
 
 public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallback, ITickable {
+    public float temperature = -1;
     //private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(14, ItemStack.EMPTY);
     private int cellarTick = -240;    //Because a bunker may be not in the same chunk
-    public float temperature = -1;
     //public int isOpen = 0;
     private int updateTickCounter = 120;
     private int lastUpdate = -1;
@@ -54,20 +44,20 @@ public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallb
 
     @Override
     public void update() {
-        if(world.isRemote || Reference.initialized == false) {
+        if (world.isRemote || Reference.initialized == false) {
             //System.out.println("I shouldn't update.");
             return;
         }
 
-        if (updateTickCounter % 100 == 0 || lastUpdate == 240){
+        if (updateTickCounter % 100 == 0 || lastUpdate == 240) {
             handleItemTicking();
         }
         updateTickCounter++;
 
-        if(lastUpdate >= 0){
+        if (lastUpdate >= 0) {
             lastUpdate--;
         }
-        if(lastUpdate == -1 && temperature > -1000){
+        if (lastUpdate == -1 && temperature > -1000) {
             temperature = -1000;
         }
     }
@@ -94,36 +84,36 @@ public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallb
         }
     }
 
-    private String getTrait(ItemStack stack, NBTTagCompound nbt){
+    private String getTrait(ItemStack stack, NBTTagCompound nbt) {
         String string = nbt.getString("CellarAddonTemperature");
-        if(string.compareTo("cool") == 0){
+        if (string.compareTo("cool") == 0) {
             return "cool";
         }
-        if(string.compareTo("icy") == 0){
+        if (string.compareTo("icy") == 0) {
             return "icy";
         }
-        if(string.compareTo("freezing") == 0){
+        if (string.compareTo("freezing") == 0) {
             return "freezing";
         }
         return "";
     }
 
-    private void removeTrait(ItemStack stack, NBTTagCompound nbt){
+    private void removeTrait(ItemStack stack, NBTTagCompound nbt) {
         String string = nbt.getString("CellarAddonTemperature");
-        if(string.compareTo("cool") == 0){
+        if (string.compareTo("cool") == 0) {
             CapabilityFood.removeTrait(stack, Reference.COOL);
         }
-        if(string.compareTo("icy") == 0){
+        if (string.compareTo("icy") == 0) {
             CapabilityFood.removeTrait(stack, Reference.ICY);
         }
-        if(string.compareTo("freezing") == 0){
+        if (string.compareTo("freezing") == 0) {
             CapabilityFood.removeTrait(stack, Reference.FREEZING);
         }
         nbt.removeTag("CellarAddonTemperature");
         stack.setTagCompound(nbt);
     }
 
-    private void applyTrait(ItemStack stack, NBTTagCompound nbt, String string, FoodTrait trait){
+    private void applyTrait(ItemStack stack, NBTTagCompound nbt, String string, FoodTrait trait) {
         nbt.setString("CellarAddonTemperature", string);
         CapabilityFood.applyTrait(stack, trait);
         stack.setTagCompound(nbt);
@@ -133,9 +123,9 @@ public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallb
         for (int x = 0; x < inventory.getSlots(); x++) {
             ItemStack stack = inventory.getStackInSlot(x);
             NBTTagCompound nbt;
-            if(stack.hasTagCompound()){
+            if (stack.hasTagCompound()) {
                 nbt = stack.getTagCompound();
-            }else{
+            } else {
                 nbt = new NBTTagCompound();
             }
 
@@ -143,16 +133,13 @@ public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallb
 
             if (temperature > ModConfig.coolMaxThreshold || temperature <= -1000) {
                 removeTrait(stack, nbt);
-            } else
-            if ((temperature <= ModConfig.frozenMaxThreshold && temperature > -1000) && string.compareTo("freezing") != 0) {
+            } else if ((temperature <= ModConfig.frozenMaxThreshold && temperature > -1000) && string.compareTo("freezing") != 0) {
                 removeTrait(stack, nbt);
                 applyTrait(stack, nbt, "freezing", Reference.FREEZING);
-            } else
-            if ((temperature <= ModConfig.icyMaxThreshold && temperature > ModConfig.frozenMaxThreshold) && string.compareTo("icy") != 0) {
+            } else if ((temperature <= ModConfig.icyMaxThreshold && temperature > ModConfig.frozenMaxThreshold) && string.compareTo("icy") != 0) {
                 removeTrait(stack, nbt);
                 applyTrait(stack, nbt, "icy", Reference.ICY);
-            } else
-            if ((temperature <= ModConfig.coolMaxThreshold && temperature > ModConfig.icyMaxThreshold) && string.compareTo("cool") != 0) {
+            } else if ((temperature <= ModConfig.coolMaxThreshold && temperature > ModConfig.icyMaxThreshold) && string.compareTo("cool") != 0) {
                 removeTrait(stack, nbt);
                 applyTrait(stack, nbt, "cool", Reference.COOL);
             }
@@ -198,35 +185,31 @@ public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallb
     }
 
     @Override
-    public void onBreakBlock(World world, BlockPos pos, IBlockState state)
-    {
-        for(int i = 0; i < 14; ++i) {
+    public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
+        for (int i = 0; i < 14; ++i) {
             ItemStack stack = inventory.getStackInSlot(i);
             NBTTagCompound nbt;
-            if(stack.hasTagCompound()){
+            if (stack.hasTagCompound()) {
                 nbt = stack.getTagCompound();
-            }else{
+            } else {
                 nbt = new NBTTagCompound();
             }
 
             removeTrait(stack, nbt);
             stack.setTagCompound(null);
-            InventoryHelper.spawnItemStack(world, (double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), stack);
+            InventoryHelper.spawnItemStack(world, (double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), stack);
         }
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
-    {
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
-    {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-        {
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return (T) new ItemHandlerSidedWrapper(this, inventory, facing);
         }
         return super.getCapability(capability, facing);
@@ -243,44 +226,39 @@ public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallb
     }
 
     @Override
-    public boolean isItemValid(int slot, ItemStack stack)
-    {
+    public boolean isItemValid(int slot, ItemStack stack) {
         IItemSize sizeCap = CapabilityItemSize.getIItemSize(stack);
-        if (sizeCap != null)
-        {
+        if (sizeCap != null) {
             return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
         }
         return true;
     }
 
 
-
-    private static class CellarShelfItemStackHandler extends ItemStackHandler implements IItemHandlerModifiable, IItemHandler, INBTSerializable<NBTTagCompound>
-    {
+    private static class CellarShelfItemStackHandler extends ItemStackHandler implements IItemHandlerModifiable, IItemHandler, INBTSerializable<NBTTagCompound> {
         public CellarShelfItemStackHandler(int size) {
             super(size);
             this.deserializeNBT(new NBTTagCompound());
         }
 
-        public ItemStack extractItem(int slot, int amount, boolean simulate)
-        {
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
             ItemStack stack = super.extractItem(slot, amount, simulate);
 
             NBTTagCompound nbt;
-            if(stack.hasTagCompound()){
+            if (stack.hasTagCompound()) {
                 nbt = stack.getTagCompound();
-            }else{
+            } else {
                 nbt = new NBTTagCompound();
             }
 
             String string = nbt.getString("CellarAddonTemperature");
-            if(string.compareTo("cool") == 0){
+            if (string.compareTo("cool") == 0) {
                 CapabilityFood.removeTrait(stack, Reference.COOL);
             }
-            if(string.compareTo("icy") == 0){
+            if (string.compareTo("icy") == 0) {
                 CapabilityFood.removeTrait(stack, Reference.ICY);
             }
-            if(string.compareTo("freezing") == 0){
+            if (string.compareTo("freezing") == 0) {
                 CapabilityFood.removeTrait(stack, Reference.FREEZING);
             }
             nbt.removeTag("CellarAddonTemperature");

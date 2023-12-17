@@ -59,6 +59,7 @@ public class TEAnvilTFC extends TEInventory {
     private ForgeSteps steps;
     private int workingProgress = 0;
     private int workingTarget = 0;
+
     public TEAnvilTFC() {
         super(AnvilItemHandler::new, 4);
 

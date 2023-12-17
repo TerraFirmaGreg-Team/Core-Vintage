@@ -28,6 +28,7 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
     private final FluidStack outputFluid;
     private final ItemStack outputStack;
     private final int duration;
+
     /**
      * Creates a barrel recipe
      *

@@ -1,28 +1,6 @@
 package tfctech.objects.items;
 
-import java.util.function.Function;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableList;
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.registries.IForgeRegistry;
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.size.Size;
@@ -37,6 +15,22 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 import tfctech.objects.blocks.TechBlocks;
 import tfctech.objects.items.ceramics.ItemFluidBowl;
 import tfctech.objects.items.ceramics.ItemTechMold;
@@ -45,6 +39,10 @@ import tfctech.objects.items.glassworking.ItemGlassMolder;
 import tfctech.objects.items.metal.ItemGroove;
 import tfctech.objects.items.metal.ItemTechMetal;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.function.Function;
+
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
 import static net.dries007.tfc.util.Helpers.getNull;
 import static tfctech.TFCTech.MODID;
@@ -52,8 +50,7 @@ import static tfctech.TFCTech.MODID;
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID)
 @GameRegistry.ObjectHolder(MODID)
-public final class TechItems
-{
+public final class TechItems {
     @GameRegistry.ObjectHolder("metal/iron_groove")
     public static final ItemGroove IRON_GROOVE = getNull();
     @GameRegistry.ObjectHolder("metal/iron_bowl_mount")
@@ -126,40 +123,33 @@ public final class TechItems
     private static ImmutableList<Item> allMetalItems;
     private static ImmutableList<Item> allCeramicMoldItems;
 
-    public static ImmutableList<Item> getAllSimpleItems()
-    {
+    public static ImmutableList<Item> getAllSimpleItems() {
         return allSimpleItems;
     }
 
-    public static ImmutableList<Item> getAllMetalItems()
-    {
+    public static ImmutableList<Item> getAllMetalItems() {
         return allMetalItems;
     }
 
-    public static ImmutableList<Item> getAllCeramicMoldItems()
-    {
+    public static ImmutableList<Item> getAllCeramicMoldItems() {
         return allCeramicMoldItems;
     }
 
     @SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Item> event)
-    {
+    public static void registerItems(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> r = event.getRegistry();
         ImmutableList.Builder<Item> simpleItems = ImmutableList.builder();
 
         simpleItems.add(register(r, "pot_ash", new ItemPottery(), CT_MISC));
-        simpleItems.add(register(r, "pot_potash", new ItemPottery()
-        {
+        simpleItems.add(register(r, "pot_potash", new ItemPottery() {
             @Nonnull
             @Override
-            public ItemStack getContainerItem(@Nonnull ItemStack itemStack)
-            {
+            public ItemStack getContainerItem(@Nonnull ItemStack itemStack) {
                 return new ItemStack(ItemsTFC.FIRED_POT);
             }
 
             @Override
-            public boolean hasContainerItem(@Nonnull ItemStack stack)
-            {
+            public boolean hasContainerItem(@Nonnull ItemStack stack) {
                 return true;
             }
         }, CT_MISC));
@@ -187,35 +177,27 @@ public final class TechItems
         ceramicItems.add(register(r, "ceramics/mold/rackwheel_piece", new ItemTechMold(ItemTechMetal.ItemType.RACKWHEEL_PIECE), CT_MISC));
         // This one is special since we only have 3 sleeves: tin, brass and steel
         // In 1.15, refactor the mod to properly use recipes instead of this ugly code
-        ItemTechMold sleeveMold = new ItemTechMold(ItemTechMetal.ItemType.SLEEVE)
-        {
+        ItemTechMold sleeveMold = new ItemTechMold(ItemTechMetal.ItemType.SLEEVE) {
             @Override
-            public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt)
-            {
-                return new FilledMoldCapability(nbt)
-                {
+            public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+                return new FilledMoldCapability(nbt) {
                     @Override
-                    public int fill(FluidStack resource, boolean doFill)
-                    {
-                        if (resource != null)
-                        {
+                    public int fill(FluidStack resource, boolean doFill) {
+                        if (resource != null) {
                             Metal metal = FluidsTFC.getMetalFromFluid(resource.getFluid());
-                            if (isValidMetal(metal))
-                            {
+                            if (isValidMetal(metal)) {
                                 return super.fill(resource, doFill);
                             }
                         }
                         return 0;
                     }
 
-                    private boolean isValidMetal(@Nullable Metal metal)
-                    {
-                        if (metal != null)
-                        {
+                    private boolean isValidMetal(@Nullable Metal metal) {
+                        if (metal != null) {
                             //noinspection ConstantConditions
                             return "tin".equals(metal.getRegistryName().getPath()) ||
-                                "brass".equals(metal.getRegistryName().getPath()) ||
-                                "steel".equals(metal.getRegistryName().getPath());
+                                    "brass".equals(metal.getRegistryName().getPath()) ||
+                                    "steel".equals(metal.getRegistryName().getPath());
                         }
                         return false;
                     }
@@ -241,8 +223,7 @@ public final class TechItems
         metalItems.add(register(r, "metal/brass_sleeve", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(TerraFirmaCraft.MOD_ID, "brass")), ItemTechMetal.ItemType.SLEEVE), CT_METAL));
         metalItems.add(register(r, "metal/steel_sleeve", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(TerraFirmaCraft.MOD_ID, "steel")), ItemTechMetal.ItemType.SLEEVE), CT_METAL));
 
-        for (Metal metal : TFCRegistries.METALS.getValuesCollection())
-        {
+        for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
             if (ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable").equals(false))
                 continue;
             //noinspection ConstantConditions
@@ -255,8 +236,7 @@ public final class TechItems
             metalItems.add(register(r, "metal/" + metal.getRegistryName().getPath().toLowerCase() + "_rod", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.ROD), CT_METAL));
             metalItems.add(register(r, "metal/" + metal.getRegistryName().getPath().toLowerCase() + "_bolt", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.BOLT), CT_METAL));
             metalItems.add(register(r, "metal/" + metal.getRegistryName().getPath().toLowerCase() + "_screw", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.SCREW), CT_METAL));
-            if (metal.getTier().isAtLeast(Metal.Tier.TIER_III) && metal.getToolMetal() != null)
-            {
+            if (metal.getTier().isAtLeast(Metal.Tier.TIER_III) && metal.getToolMetal() != null) {
                 metalItems.add(register(r, "metal/" + metal.getRegistryName().getPath().toLowerCase() + "_blowpipe", new ItemBlowpipe(metal), CT_METAL));
             }
         }
@@ -269,35 +249,24 @@ public final class TechItems
         TechBlocks.getAllTEISRBlocks().forEach(x -> registerItemBlock(r, x));
 
         //Register oredict for metal item components
-        for (Item metalItem : allMetalItems)
-        {
-            if (metalItem instanceof ItemTechMetal)
-            {
+        for (Item metalItem : allMetalItems) {
+            if (metalItem instanceof ItemTechMetal) {
                 ItemTechMetal techMetal = (ItemTechMetal) metalItem;
-                if(techMetal.getType() == ItemTechMetal.ItemType.ROD)
-                {
+                if (techMetal.getType() == ItemTechMetal.ItemType.ROD) {
                     OreDictionary.registerOre(OreDictionaryHelper.toString("stick", techMetal.getMetal(ItemStack.EMPTY)), new ItemStack(metalItem, 1, 0));
-                }
-                else if(techMetal.getType() == ItemTechMetal.ItemType.LONG_ROD)
-                {
+                } else if (techMetal.getType() == ItemTechMetal.ItemType.LONG_ROD) {
                     OreDictionary.registerOre(OreDictionaryHelper.toString("stick", "long", techMetal.getMetal(ItemStack.EMPTY)), new ItemStack(metalItem, 1, 0));
-                }
-                else
-                {
+                } else {
                     OreDictionary.registerOre(OreDictionaryHelper.toString(techMetal.getType(), techMetal.getMetal(ItemStack.EMPTY)), new ItemStack(metalItem, 1, 0));
                 }
-            }
-            else
-            {
+            } else {
                 Metal metal = ((IMetalItem) metalItem).getMetal(ItemStack.EMPTY);
                 OreDictionary.registerOre(OreDictionaryHelper.toString("blowpipe"), new ItemStack(metalItem, 1, 0));
             }
         }
 
-        for (Item item : allSimpleItems)
-        {
-            if (item instanceof ItemMiscTech && ((ItemMiscTech) item).getOreDictionary() != null)
-            {
+        for (Item item : allSimpleItems) {
+            if (item instanceof ItemMiscTech && ((ItemMiscTech) item).getOreDictionary() != null) {
                 OreDictionary.registerOre(((ItemMiscTech) item).getOreDictionary(), item);
             }
         }
@@ -308,29 +277,25 @@ public final class TechItems
     /**
      * Register new ore dictionaries to TFC
      */
-    private static void registerTFCOreDict()
-    {
+    private static void registerTFCOreDict() {
         BlocksTFC.getAllBlockRockVariants().forEach(x -> {
-            if (x.getType() == Rock.Type.SAND && isSilica(x))
-            {
+            if (x.getType() == Rock.Type.SAND && isSilica(x)) {
                 OreDictionary.registerOre("sandSilica", x);
             }
         });
     }
 
-    private static boolean isSilica(BlockRockVariant block)
-    {
+    private static boolean isSilica(BlockRockVariant block) {
         //noinspection ConstantConditions
         String rockName = block.getRock().getRegistryName().getPath().toLowerCase();
         return rockName.equalsIgnoreCase("chert") ||
-            rockName.equalsIgnoreCase("granite") ||
-            rockName.equalsIgnoreCase("quartzite") ||
-            rockName.equalsIgnoreCase("rhyolite") ||
-            rockName.equalsIgnoreCase("phyllite");
+                rockName.equalsIgnoreCase("granite") ||
+                rockName.equalsIgnoreCase("quartzite") ||
+                rockName.equalsIgnoreCase("rhyolite") ||
+                rockName.equalsIgnoreCase("phyllite");
     }
 
-    private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer)
-    {
+    private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
         ItemBlock itemBlock = producer.apply(block);
         //noinspection ConstantConditions
         itemBlock.setRegistryName(block.getRegistryName());
@@ -338,15 +303,13 @@ public final class TechItems
     }
 
     @SuppressWarnings("ConstantConditions")
-    private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item)
-    {
+    private static void registerItemBlock(IForgeRegistry<Item> r, ItemBlock item) {
         item.setRegistryName(item.getBlock().getRegistryName());
         item.setCreativeTab(item.getBlock().getCreativeTab());
         r.register(item);
     }
 
-    private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct)
-    {
+    private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
         item.setRegistryName(MODID, name);
         item.setTranslationKey(MODID + "." + name.replace('/', '.'));
         item.setCreativeTab(ct);

@@ -7,7 +7,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.BlockSnowBlock;
 import net.minecraft.block.material.Material;
@@ -20,30 +19,25 @@ import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class FarmingWorldStorage extends WorldSavedData {
 
     public static final String dataName = TFCFarming.modId + "_WORLD_STORAGE";
-    private Random random = new Random();
-    public TETickCounter teTickCounter = new TETickCounter();
-    private final int[] maximumNaturalNPK = {255,255,255};
-
     private static long ft = 0;
+
     static {
-        for (int i = 7*4 - 1;i >= 0;i--) {
+        for (int i = 7 * 4 - 1; i >= 0; i--) {
             ft >>= i;
             ft |= 1;
             ft <<= i;
         }
     }
 
-
+    private final int[] maximumNaturalNPK = {255, 255, 255};
+    public TETickCounter teTickCounter = new TETickCounter();
     public HashMap<Long, Integer> nutrientMap;
+    private Random random = new Random();
 
     public FarmingWorldStorage(String name) {
         super(name);
@@ -56,15 +50,15 @@ public class FarmingWorldStorage extends WorldSavedData {
 
     public static FarmingWorldStorage get(World world) {
         MapStorage storage = world.getMapStorage();
-        FarmingWorldStorage farmingWorldStorage = (FarmingWorldStorage)storage.getOrLoadData(FarmingWorldStorage.class,dataName);
+        FarmingWorldStorage farmingWorldStorage = (FarmingWorldStorage) storage.getOrLoadData(FarmingWorldStorage.class, dataName);
         if (farmingWorldStorage == null) {
             farmingWorldStorage = new FarmingWorldStorage();
-            storage.setData(dataName,farmingWorldStorage);
+            storage.setData(dataName, farmingWorldStorage);
         }
         return farmingWorldStorage;
     }
 
-    private long convertPosition(int x,int z) {
+    private long convertPosition(int x, int z) {
         long v = 0;
         v |= x + 30000000;
         v <<= 7 * 4;
@@ -72,11 +66,11 @@ public class FarmingWorldStorage extends WorldSavedData {
         return v;
     }
 
-    private Tuple<Integer,Integer> getPosition(long v) {
-        int z = (int)(v & ft) - 30000000;
-        v >>= 7*4;
-        int x = (int)(v & ft) - 30000000;
-        return new Tuple<>(x,z);
+    private Tuple<Integer, Integer> getPosition(long v) {
+        int z = (int) (v & ft) - 30000000;
+        v >>= 7 * 4;
+        int x = (int) (v & ft) - 30000000;
+        return new Tuple<>(x, z);
     }
 
     public void performCleanup() {
@@ -101,7 +95,7 @@ public class FarmingWorldStorage extends WorldSavedData {
         return new NutrientValues(maximumNaturalNPK);
     }
 
-    public void globalIncreaseUpdate(World world,NutrientClass nutrientClass,int amount) {
+    public void globalIncreaseUpdate(World world, NutrientClass nutrientClass, int amount) {
         synchronized (nutrientMap) {
 
             Set<Long> keySet = nutrientMap.keySet();
@@ -117,7 +111,8 @@ public class FarmingWorldStorage extends WorldSavedData {
                 for (BlockPos p = new BlockPos(pos.getFirst(), 255, pos.getSecond()); p.getY() > -1; p = p.down()) {
                     Block b = world.getBlockState(p).getBlock();
                     if (b != Blocks.AIR) {
-                        if (b instanceof BlockSnow || b instanceof BlockSnowBlock || world.getBlockState(p).getMaterial() == Material.WATER) continue;
+                        if (b instanceof BlockSnow || b instanceof BlockSnowBlock || world.getBlockState(p).getMaterial() == Material.WATER)
+                            continue;
                         if (b instanceof BlockCropDead) {
                             deadCrop = true;
                             continue;
@@ -135,7 +130,7 @@ public class FarmingWorldStorage extends WorldSavedData {
                     }
                 }
                 if (!found) continue;
-                fertilizerBlock(l, nutrientClass, (int)(amount * (deadCrop ? Config.growthDead : 1))); // the block is equivalent to default, remove
+                fertilizerBlock(l, nutrientClass, (int) (amount * (deadCrop ? Config.growthDead : 1))); // the block is equivalent to default, remove
 
             }
         }
@@ -146,7 +141,7 @@ public class FarmingWorldStorage extends WorldSavedData {
         markDirty();
     }
 
-    public NutrientValues getNutrientValues(int x,int z) {
+    public NutrientValues getNutrientValues(int x, int z) {
         synchronized (nutrientMap) {
             long pos = convertPosition(x, z);
             if (!nutrientMap.containsKey(pos)) {
@@ -157,7 +152,7 @@ public class FarmingWorldStorage extends WorldSavedData {
         }
     }
 
-    public void setNutrientValues(int x,int z,NutrientValues values) {
+    public void setNutrientValues(int x, int z, NutrientValues values) {
         synchronized (nutrientMap) {
             long pos = convertPosition(x, z);
             nutrientMap.put(pos, values.packToInt());
@@ -165,7 +160,7 @@ public class FarmingWorldStorage extends WorldSavedData {
         markDirty();
     }
 
-    public boolean fertilizerBlock(long l,NutrientClass nutrientClass, int amount) {
+    public boolean fertilizerBlock(long l, NutrientClass nutrientClass, int amount) {
         synchronized (nutrientMap) {
             if (nutrientMap.containsKey(l)) {
                 NutrientValues nutrientValues = new NutrientValues(nutrientMap.get(l));
@@ -180,9 +175,9 @@ public class FarmingWorldStorage extends WorldSavedData {
         }
     }
 
-    public boolean fertilizerBlock(int x,int y,NutrientClass nutrientClass, int amount) {
-        long l = convertPosition(x,y);
-        return fertilizerBlock(l,nutrientClass,amount);
+    public boolean fertilizerBlock(int x, int y, NutrientClass nutrientClass, int amount) {
+        long l = convertPosition(x, y);
+        return fertilizerBlock(l, nutrientClass, amount);
     }
 
     @Override
@@ -191,7 +186,7 @@ public class FarmingWorldStorage extends WorldSavedData {
         Gson gson = new Gson();
 
         try {
-            nutrientMap = gson.fromJson(nbt.getString("nutrientMap"),new TypeToken<HashMap<Long, Integer>>(){}.getType());
+            nutrientMap = gson.fromJson(nbt.getString("nutrientMap"), new TypeToken<HashMap<Long, Integer>>() {}.getType());
         } catch (Exception e) {
             e.printStackTrace();
         }

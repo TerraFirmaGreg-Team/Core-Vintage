@@ -14,7 +14,7 @@ public class SPacketNutrientDataResponseHandler implements IMessageHandler<SPack
             Minecraft.getMinecraft().addScheduledTask(new Runnable() {
                 @Override
                 public void run() {
-                    ((ClientProxy)TFCFarming.proxy).setLastResponse(message);
+                    ((ClientProxy) TFCFarming.proxy).setLastResponse(message);
                 }
             });
         }

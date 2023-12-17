@@ -1,6 +1,5 @@
 package se.gory_moon.horsepower.client.renderer;
 
-import org.lwjgl.opengl.GL11;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
@@ -10,7 +9,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
-
+import org.lwjgl.opengl.GL11;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockHPBase;
 import se.gory_moon.horsepower.blocks.BlockPress;
@@ -18,11 +17,9 @@ import se.gory_moon.horsepower.client.model.modelvariants.PressModels;
 import se.gory_moon.horsepower.tileentity.TileEntityPress;
 import se.gory_moon.horsepower.util.RenderUtils;
 
-public class TileEntityPressRender extends TileEntityHPBaseRenderer<TileEntityPress>
-{
+public class TileEntityPressRender extends TileEntityHPBaseRenderer<TileEntityPress> {
     @Override
-    public void render(TileEntityPress te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TileEntityPress te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
         BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
@@ -40,12 +37,10 @@ public class TileEntityPressRender extends TileEntityHPBaseRenderer<TileEntityPr
         // This makes the translations that follow much easier
         buffer.setTranslation(-te.getPos().getX(), -te.getPos().getY(), -te.getPos().getZ());
 
-        if (destroyStage >= 0)
-        {
+        if (destroyStage >= 0) {
             buffer.noColor();
             renderBlockDamage(topState, te.getPos(), getDestroyBlockIcon(destroyStage), te.getWorld());
-        }
-        else
+        } else
             dispatcher.getBlockModelRenderer().renderModel(te.getWorld(), pressModel, blockState, te.getPos(), buffer, false);
 
         buffer.setTranslation(0, 0, 0);
@@ -71,14 +66,12 @@ public class TileEntityPressRender extends TileEntityHPBaseRenderer<TileEntityPr
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);
-        if (!te.getStackInSlot(0).isEmpty() && move <= 0.25)
-        {
+        if (!te.getStackInSlot(0).isEmpty() && move <= 0.25) {
             renderItem(te, te.getStackInSlot(0), 0.5F, 0.5F, 0.5F, 1F);
             drawString(te, String.valueOf(te.getStackInSlot(0).getCount()), 0, 0.35, 0);
         }
 
-        if (!te.getStackInSlot(1).isEmpty() && move <= 0.25)
-        {
+        if (!te.getStackInSlot(1).isEmpty() && move <= 0.25) {
             renderItem(te, te.getStackInSlot(1), 0.5F, 0.5F, 0.5F, 1F);
             drawString(te, String.valueOf(te.getStackInSlot(1).getCount()), 0, 0.35, 0);
         }
@@ -87,8 +80,7 @@ public class TileEntityPressRender extends TileEntityHPBaseRenderer<TileEntityPr
 
         IFluidTankProperties tankProperties = te.getTankFluidStack()[0];
         FluidStack stack = tankProperties.getContents();
-        if (stack != null && move <= 0.25)
-        {
+        if (stack != null && move <= 0.25) {
             float amount = (0.75F / ((float) tankProperties.getCapacity())) * stack.amount;
             TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(stack.getFluid().getStill().toString());
             int fluidColor = stack.getFluid().getColor(stack);

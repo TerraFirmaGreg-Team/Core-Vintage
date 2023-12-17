@@ -19,6 +19,10 @@ package org.labellum.mc.waterflasks;
     along with WaterFlasks.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -37,11 +41,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
-import net.dries007.tfc.util.Helpers;
 import org.labellum.mc.waterflasks.item.ModItems;
 import org.labellum.mc.waterflasks.proxy.CommonProxy;
 import org.labellum.mc.waterflasks.recipe.ModRecipes;
@@ -58,19 +57,15 @@ public class Waterflasks {
     public static final String MOD_NAME = "WaterFlasks";
     public static final String VERSION = "1.9";
     public static final String DEPENDENCIES = "required-after:" + TerraFirmaCraft.MOD_ID +
-        "@[" + "1.0.0.127" + ",)";
-
+            "@[" + "1.0.0.127" + ",)";
+    @GameRegistry.ObjectHolder("waterflasks:item.flaskbreak")
+    public static final SoundEvent FLASK_BREAK = (SoundEvent) Helpers.getNull();
     /**
      * Many thanks to Shadowfacts' 1.12.2 modding tutorial. Fingerprints from it remain...
      */
 
     @Mod.Instance(MOD_ID)
     public static Waterflasks INSTANCE;
-
-    @GameRegistry.ObjectHolder("waterflasks:item.flaskbreak")
-    public static final SoundEvent FLASK_BREAK = (SoundEvent) Helpers.getNull();
-
-
     @SidedProxy(serverSide = "org.labellum.mc.waterflasks.proxy.CommonProxy",
             clientSide = "org.labellum.mc.waterflasks.proxy.ClientProxy")
     public static CommonProxy proxy;
@@ -131,10 +126,8 @@ public class Waterflasks {
         }
 
         @SubscribeEvent
-        public static void onLootTableLoad(LootTableLoadEvent event)
-        {
-            if (event.getName().toString().startsWith("tfc:"))
-            {
+        public static void onLootTableLoad(LootTableLoadEvent event) {
+            if (event.getName().toString().startsWith("tfc:")) {
                 switch (event.getName().toString().substring(4)) {
                     case "animals/cow":
                     case "animals/muskox":
@@ -170,12 +163,11 @@ public class Waterflasks {
             }
         }
 
-        private static void addPool(LootTableLoadEvent event, String tableName)
-        {
-            LootEntry entry = new LootEntryTable(new ResourceLocation("waterflasks:"+tableName),
+        private static void addPool(LootTableLoadEvent event, String tableName) {
+            LootEntry entry = new LootEntryTable(new ResourceLocation("waterflasks:" + tableName),
                     1, 0, new LootCondition[0], "waterflasks_bladder_entry");
 
-            LootPool newPool = new LootPool(new LootEntry [] {entry}, new LootCondition[0],
+            LootPool newPool = new LootPool(new LootEntry[]{entry}, new LootCondition[0],
                     new RandomValueRange(1), new RandomValueRange(0), "waterflasks_bladder_pool");
             //weights here seemed screwy. Implemented own skill function, applied in json data
             event.getTable().addPool(newPool);

@@ -39,6 +39,7 @@ public class ItemMetal extends ItemTFC implements IMetalItem {
     private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetal>> TABLE = new HashMap<>();
     protected final Metal metal;
     protected final Metal.ItemType type;
+
     @SuppressWarnings("ConstantConditions")
     public ItemMetal(Metal metal, Metal.ItemType type) {
         this.metal = metal;

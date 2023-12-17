@@ -58,7 +58,7 @@ public class ItemRopeBridge extends ItemTFC implements TFCThingsConfigurableItem
         int charge = this.getMaxItemUseDuration(stack) - timeLeft;
         if (charge > 5) {
             float f = ItemBow.getArrowVelocity(charge);
-            if(!worldIn.isRemote) {
+            if (!worldIn.isRemote) {
                 EntityRopeBridgeThrown bridge = new EntityRopeBridgeThrown(worldIn, entityLiving, stack);
                 bridge.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0f, f * 1.5f, 0.0f);
                 worldIn.spawnEntity(bridge);

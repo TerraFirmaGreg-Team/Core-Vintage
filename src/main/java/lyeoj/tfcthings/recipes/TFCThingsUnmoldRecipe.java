@@ -28,7 +28,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe{
+public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
     private final NonNullList<Ingredient> input;
     private final ResourceLocation group;
     private final String type;
@@ -44,20 +44,20 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
     public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
         boolean foundMold = false;
 
-        for(int slot = 0; slot < inv.getSizeInventory(); ++slot) {
+        for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
             ItemStack stack = inv.getStackInSlot(slot);
             if (!stack.isEmpty()) {
                 if (!(stack.getItem() instanceof ItemTFCThingsMold)) {
                     return false;
                 }
 
-                ItemTFCThingsMold moldItem = (ItemTFCThingsMold)stack.getItem();
-                IFluidHandler cap = (IFluidHandler)stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, (EnumFacing)null);
+                ItemTFCThingsMold moldItem = (ItemTFCThingsMold) stack.getItem();
+                IFluidHandler cap = (IFluidHandler) stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, (EnumFacing) null);
                 if (!(cap instanceof IMoldHandler)) {
                     return false;
                 }
 
-                IMoldHandler moldHandler = (IMoldHandler)cap;
+                IMoldHandler moldHandler = (IMoldHandler) cap;
                 if (moldHandler.isMolten()) {
                     return false;
                 }
@@ -78,14 +78,14 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
     public ItemStack getCraftingResult(InventoryCrafting inv) {
         ItemStack moldStack = null;
 
-        for(int slot = 0; slot < inv.getSizeInventory(); ++slot) {
+        for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
             ItemStack stack = inv.getStackInSlot(slot);
             if (!stack.isEmpty()) {
                 if (!(stack.getItem() instanceof ItemTFCThingsMold)) {
                     return ItemStack.EMPTY;
                 }
 
-                ItemTFCThingsMold tmp = (ItemTFCThingsMold)stack.getItem();
+                ItemTFCThingsMold tmp = (ItemTFCThingsMold) stack.getItem();
                 if (!tmp.getToolName().equals(this.type) || moldStack != null) {
                     return ItemStack.EMPTY;
                 }
@@ -95,9 +95,9 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
         }
 
         if (moldStack != null) {
-            IFluidHandler moldCap = (IFluidHandler)moldStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, (EnumFacing)null);
+            IFluidHandler moldCap = (IFluidHandler) moldStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, (EnumFacing) null);
             if (moldCap instanceof IMoldHandler) {
-                IMoldHandler moldHandler = (IMoldHandler)moldCap;
+                IMoldHandler moldHandler = (IMoldHandler) moldCap;
                 if (!moldHandler.isMolten() && moldHandler.getAmount() == 100) {
                     return this.getOutputItem(moldHandler);
                 }
@@ -118,7 +118,7 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
 
     @Nonnull
     public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
-        for(int slot = 0; slot < inv.getSizeInventory(); ++slot) {
+        for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
             ItemStack stack = inv.getStackInSlot(slot);
             if (!stack.isEmpty() && stack.getItem() instanceof ItemTFCThingsMold) {
                 EntityPlayer player = ForgeHooks.getCraftingPlayer();
@@ -127,7 +127,7 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
                     if (!stack.isEmpty()) {
                         ItemHandlerHelper.giveItemToPlayer(player, stack);
                     } else {
-                        player.world.playSound((EntityPlayer)null, player.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                        player.world.playSound((EntityPlayer) null, player.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0F, 1.0F);
                     }
                 }
             }
@@ -166,7 +166,7 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
         Metal m = moldHandler.getMetal();
         if (m != null) {
             ItemStack output = new ItemStack(TFCThingsItems.TOOLS_HEADS_BY_METAL.get(type).get(m));
-            IItemHeat heat = (IItemHeat)output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, (EnumFacing)null);
+            IItemHeat heat = (IItemHeat) output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, (EnumFacing) null);
             if (heat != null) {
                 heat.setTemperature(moldHandler.getTemperature());
             }

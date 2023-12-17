@@ -24,6 +24,30 @@ public class TFCThingsEntities {
             new NonMobEntityInfo("slingstonemetallight", EntitySlingStoneMetalLight.class, 7, 64, 1, true)
     };
 
+    public static void registerEntities() {
+        for (MobInfo info : MOB_ENTITY_INFOS) {
+            EntityRegistry.registerModEntity(new ResourceLocation(TFCThings.MODID, info.name),
+                    info.entityClass, info.name, info.id, TFCThings.instance, info.trackingRange,
+                    info.updateFrequency, info.sendsVelocityUpdates, info.eggP, info.eggS);
+        }
+        for (NonMobEntityInfo info : NON_MOB_ENTITY_INFOS) {
+            EntityRegistry.registerModEntity(new ResourceLocation(TFCThings.MODID, info.name),
+                    info.entityClass, info.name, info.id, TFCThings.instance, info.trackingRange,
+                    info.updateFrequency, info.sendsVelocityUpdates);
+        }
+    }
+
+    public static void registerEntityModels() {
+        RenderingRegistry.registerEntityRenderingHandler(EntityPigvil.class, RenderPigvil::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntitySlingStone.class, RenderSlingStone::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityUnknownProjectile.class, RenderUnknownProjectile::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityThrownRopeJavelin.class, RenderThrownRopeJavelin::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityThrownHookJavelin.class, RenderThrownRopeJavelin::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityRopeBridgeThrown.class, RenderThrownRopeBridge::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntitySlingStoneMetal.class, RenderSlingStoneMetal::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntitySlingStoneMetalLight.class, RenderSlingStoneMetal::new);
+    }
+
     public static class MobInfo {
         public String name;
         public Class entityClass;
@@ -64,30 +88,6 @@ public class TFCThingsEntities {
             this.updateFrequency = updateFrequency;
             this.sendsVelocityUpdates = sendsVelocityUpdates;
         }
-    }
-
-    public static void registerEntities() {
-        for(MobInfo info : MOB_ENTITY_INFOS) {
-            EntityRegistry.registerModEntity(new ResourceLocation(TFCThings.MODID, info.name),
-                    info.entityClass, info.name, info.id, TFCThings.instance, info.trackingRange,
-                    info.updateFrequency, info.sendsVelocityUpdates, info.eggP, info.eggS);
-        }
-        for(NonMobEntityInfo info : NON_MOB_ENTITY_INFOS) {
-            EntityRegistry.registerModEntity(new ResourceLocation(TFCThings.MODID, info.name),
-                    info.entityClass, info.name, info.id, TFCThings.instance, info.trackingRange,
-                    info.updateFrequency, info.sendsVelocityUpdates);
-        }
-    }
-
-    public static void registerEntityModels() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityPigvil.class, RenderPigvil::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntitySlingStone.class, RenderSlingStone::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityUnknownProjectile.class, RenderUnknownProjectile::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityThrownRopeJavelin.class, RenderThrownRopeJavelin::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityThrownHookJavelin.class, RenderThrownRopeJavelin::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityRopeBridgeThrown.class, RenderThrownRopeBridge::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntitySlingStoneMetal.class, RenderSlingStoneMetal::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntitySlingStoneMetalLight.class, RenderSlingStoneMetal::new);
     }
 
 }

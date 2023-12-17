@@ -1,16 +1,14 @@
 package de.mennomax.astikorcarts.client.model;
 
+import de.mennomax.astikorcarts.entity.EntityMobCart;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import de.mennomax.astikorcarts.entity.EntityMobCart;
-
 @SideOnly(Side.CLIENT)
-public class ModelMobCart extends ModelBase
-{
+public class ModelMobCart extends ModelBase {
     private final ModelRenderer axis;
     private final ModelRenderer boardBottom;
     private final ModelRenderer shaft;
@@ -21,8 +19,7 @@ public class ModelMobCart extends ModelBase
     private final ModelRenderer leftWheel;
     private final ModelRenderer rightWheel;
 
-    public ModelMobCart()
-    {
+    public ModelMobCart() {
         this.textureWidth = 128;
         this.textureHeight = 64;
 
@@ -60,8 +57,7 @@ public class ModelMobCart extends ModelBase
         this.leftWheel = new ModelRenderer(this, 54, 21);
         this.leftWheel.setRotationPoint(14.5F, 5.0F, 1.0F);
         this.leftWheel.addBox(-2.0F, -1.0F, -1.0F, 1, 2, 2);
-        for (int i = 0; i < 8; i++)
-        {
+        for (int i = 0; i < 8; i++) {
             ModelRenderer rim = new ModelRenderer(this, 60, 0);
             rim.addBox(-1.5F, -4.5F, 9.86F, 1, 9, 1);
             rim.rotateAngleX = i * (float) Math.PI / 4.0F;
@@ -77,8 +73,7 @@ public class ModelMobCart extends ModelBase
         this.rightWheel.mirror = true;
         this.rightWheel.setRotationPoint(-14.5F, 5.0F, 1.0F);
         this.rightWheel.addBox(1.0F, -1.0F, -1.0F, 1, 2, 2);
-        for (int i = 0; i < 8; i++)
-        {
+        for (int i = 0; i < 8; i++) {
             ModelRenderer rim = new ModelRenderer(this, 60, 0);
             rim.addBox(0.5F, -4.5F, 9.86F, 1, 9, 1);
             rim.rotateAngleX = i * (float) Math.PI / 4.0F;
@@ -93,8 +88,7 @@ public class ModelMobCart extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale)
-    {
+    public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch, scale, entity);
 
         this.leftWheel.rotateAngleX = ((EntityMobCart) entity).getWheelRotation();

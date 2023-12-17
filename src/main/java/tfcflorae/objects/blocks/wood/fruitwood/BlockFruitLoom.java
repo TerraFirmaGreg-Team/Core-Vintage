@@ -57,6 +57,7 @@ public class BlockFruitLoom extends BlockContainer implements IItemSize {
         setResistance(3f);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
+
     public BlockFruitLoom(Tree tree) {
         super(WOOD, MapColor.AIR);
         if (MAP_TREE.put(tree, this) != null) throw new IllegalStateException("There can only be one.");

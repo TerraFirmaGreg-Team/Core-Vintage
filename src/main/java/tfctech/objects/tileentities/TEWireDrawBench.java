@@ -1,8 +1,8 @@
 package tfctech.objects.tileentities;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.te.TEInventory;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,10 +15,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.te.TEInventory;
 import tfctech.TFCTech;
 import tfctech.api.recipes.WireDrawingRecipe;
 import tfctech.client.TechSounds;
@@ -26,69 +22,59 @@ import tfctech.network.PacketTileEntityUpdate;
 import tfctech.objects.items.metal.ItemTechMetal;
 import tfctech.registry.TechRegistries;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 @SuppressWarnings("WeakerAccess")
-public class TEWireDrawBench extends TEInventory implements ITickable
-{
+public class TEWireDrawBench extends TEInventory implements ITickable {
     private int progress = 0;
     private int lastProgress = 0;
     private boolean working = false;
     private int cachedWireColor = 0x00000000;
 
-    public TEWireDrawBench()
-    {
+    public TEWireDrawBench() {
         super(2);
     }
 
     @Override
-    public boolean isItemValid(int slot, @Nonnull ItemStack stack)
-    {
-        switch (slot)
-        {
+    public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+        switch (slot) {
             case 0:
                 return stack.getItem() instanceof ItemTechMetal && ((ItemTechMetal) stack.getItem()).getType() == ItemTechMetal.ItemType.DRAW_PLATE;
             case 1:
                 WireDrawingRecipe recipe = TechRegistries.WIRE_DRAWING.getValuesCollection().stream()
-                    .filter(x -> x.matches(stack)).findFirst().orElse(null);
+                        .filter(x -> x.matches(stack)).findFirst().orElse(null);
                 return recipe != null;
         }
         return false;
     }
 
-    public boolean hasDrawPlate()
-    {
+    public boolean hasDrawPlate() {
         return inventory.getStackInSlot(0) != ItemStack.EMPTY;
     }
 
-    public boolean hasWire()
-    {
+    public boolean hasWire() {
         WireDrawingRecipe recipe = TechRegistries.WIRE_DRAWING.getValuesCollection().stream()
-            .filter(x -> x.matches(inventory.getStackInSlot(1))).findFirst().orElse(null);
+                .filter(x -> x.matches(inventory.getStackInSlot(1))).findFirst().orElse(null);
         return recipe != null;
     }
 
-    public boolean startWork(EntityPlayer player)
-    {
-        if (canWork())
-        {
-            if (progress == 0)
-            {
+    public boolean startWork(EntityPlayer player) {
+        if (canWork()) {
+            if (progress == 0) {
                 WireDrawingRecipe recipe = TechRegistries.WIRE_DRAWING.getValuesCollection().stream()
-                    .filter(x -> x.matches(inventory.getStackInSlot(1))).findFirst().orElse(null);
+                        .filter(x -> x.matches(inventory.getStackInSlot(1))).findFirst().orElse(null);
                 Metal.Tier workableTier = ((ItemTechMetal) inventory.getStackInSlot(0).getItem()).getMetal(inventory.getStackInSlot(0)).getTier();
-                if (recipe == null)
-                {
+                if (recipe == null) {
                     player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.wiredraw.no_recipe"), true);
                     return false;
-                }
-                else if (!recipe.getTier().isAtMost(workableTier))
-                {
+                } else if (!recipe.getTier().isAtMost(workableTier)) {
                     world.playSound(null, pos, TechSounds.WIREDRAW_TONGS_FALL, SoundCategory.BLOCKS, 1.0F, 2.0F);
                     player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.wiredraw.low_tier"), true);
                     return true;
                 }
             }
-            if (!world.isRemote)
-            {
+            if (!world.isRemote) {
                 world.playSound(null, pos, TechSounds.WIREDRAW_DRAWING, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 working = true;
                 setAndUpdateSlots(0);
@@ -98,17 +84,14 @@ public class TEWireDrawBench extends TEInventory implements ITickable
         return false;
     }
 
-    public ItemStack insertWire(@Nonnull ItemStack stack, boolean simulate)
-    {
-        if (!hasWire() && hasDrawPlate() && isItemValid(1, stack))
-        {
+    public ItemStack insertWire(@Nonnull ItemStack stack, boolean simulate) {
+        if (!hasWire() && hasDrawPlate() && isItemValid(1, stack)) {
             ItemStack output = inventory.insertItem(1, stack, simulate);
-            if (!simulate)
-            {
+            if (!simulate) {
                 cachedWireColor = 0x00000000;
                 TechRegistries.WIRE_DRAWING.getValuesCollection().stream()
-                    .filter(x -> x.matches(stack))
-                    .findFirst().ifPresent(x -> cachedWireColor = x.getWireColor());
+                        .filter(x -> x.matches(stack))
+                        .findFirst().ifPresent(x -> cachedWireColor = x.getWireColor());
                 setAndUpdateSlots(0);
             }
             return output;
@@ -116,13 +99,10 @@ public class TEWireDrawBench extends TEInventory implements ITickable
         return stack;
     }
 
-    public ItemStack insertDrawPlate(@Nonnull ItemStack stack, boolean simulate)
-    {
-        if (!hasDrawPlate() && isItemValid(0, stack))
-        {
+    public ItemStack insertDrawPlate(@Nonnull ItemStack stack, boolean simulate) {
+        if (!hasDrawPlate() && isItemValid(0, stack)) {
             ItemStack output = inventory.insertItem(0, stack, simulate);
-            if (!simulate)
-            {
+            if (!simulate) {
                 setAndUpdateSlots(0);
             }
             return output;
@@ -131,15 +111,13 @@ public class TEWireDrawBench extends TEInventory implements ITickable
     }
 
     @Override
-    public void setAndUpdateSlots(int slot)
-    {
+    public void setAndUpdateSlots(int slot) {
         TFCTech.getNetwork().sendToAllTracking(new PacketTileEntityUpdate(this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
         super.setAndUpdateSlots(slot);
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
+    public void readFromNBT(NBTTagCompound nbt) {
         cachedWireColor = nbt.getInteger("wireColor");
         working = nbt.getBoolean("working");
         progress = nbt.getInteger("progress");
@@ -149,8 +127,7 @@ public class TEWireDrawBench extends TEInventory implements ITickable
 
     @Nonnull
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-    {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("wireColor", cachedWireColor);
         nbt.setBoolean("working", working);
         nbt.setInteger("progress", progress);
@@ -158,75 +135,60 @@ public class TEWireDrawBench extends TEInventory implements ITickable
     }
 
     @Nonnull
-    public ItemStack extractItem(int slot, boolean simulate)
-    {
-        if (slot < 0 || slot > 1 || (progress > 0 && progress < 100))
-        {
+    public ItemStack extractItem(int slot, boolean simulate) {
+        if (slot < 0 || slot > 1 || (progress > 0 && progress < 100)) {
             return ItemStack.EMPTY;
         }
-        if (slot == 1 && !simulate)
-        {
+        if (slot == 1 && !simulate) {
             cachedWireColor = 0x00000000;
             progress = 0;
         }
         ItemStack output = inventory.extractItem(slot, 64, simulate);
-        if (!simulate)
-        {
+        if (!simulate) {
             setAndUpdateSlots(slot);
         }
         return output;
     }
 
     @Nullable
-    public Metal getDrawPlateMetal()
-    {
+    public Metal getDrawPlateMetal() {
         ItemStack stack = inventory.getStackInSlot(0);
-        if (stack.getItem() instanceof ItemTechMetal)
-        {
+        if (stack.getItem() instanceof ItemTechMetal) {
             return ((ItemTechMetal) stack.getItem()).getMetal(stack);
         }
         return null;
     }
 
-    public int getProgress()
-    {
+    public int getProgress() {
         return this.progress;
     }
 
-    public int getLastProgress()
-    {
+    public int getLastProgress() {
         return lastProgress;
     }
 
-    public int getWireColor()
-    {
+    public int getWireColor() {
         return inventory.getStackInSlot(1) != ItemStack.EMPTY ? cachedWireColor : 0x00000000;
     }
 
-    public EnumFacing getRotation()
-    {
+    public EnumFacing getRotation() {
         return world.getBlockState(pos).getValue(BlockHorizontal.FACING);
     }
 
     @Override
-    public void update()
-    {
+    public void update() {
         lastProgress = progress;
-        if (working)
-        {
-            if (++progress % 25 == 0)
-            {
+        if (working) {
+            if (++progress % 25 == 0) {
                 working = false;
-                if (progress >= 100 && !world.isRemote)
-                {
+                if (progress >= 100 && !world.isRemote) {
                     world.playSound(null, pos, TechSounds.WIREDRAW_TONGS_FALL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    if (inventory.getStackInSlot(0).attemptDamageItem(32, Constants.RNG, null))
-                    {
+                    if (inventory.getStackInSlot(0).attemptDamageItem(32, Constants.RNG, null)) {
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                     }
                     TechRegistries.WIRE_DRAWING.getValuesCollection().stream()
-                        .filter(x -> x.matches(inventory.getStackInSlot(1)))
-                        .findFirst().ifPresent(recipe -> inventory.setStackInSlot(1, recipe.getOutput()));
+                            .filter(x -> x.matches(inventory.getStackInSlot(1)))
+                            .findFirst().ifPresent(recipe -> inventory.setStackInSlot(1, recipe.getOutput()));
                     setAndUpdateSlots(1);
                 }
             }
@@ -236,19 +198,16 @@ public class TEWireDrawBench extends TEInventory implements ITickable
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public AxisAlignedBB getRenderBoundingBox()
-    {
+    public AxisAlignedBB getRenderBoundingBox() {
         return INFINITE_EXTENT_AABB;
     }
 
-    private boolean canWork()
-    {
+    private boolean canWork() {
         return hasDrawPlate() && hasWire() && !working && progress < 100;
     }
 
     @Override
-    public int getSlotLimit(int slot)
-    {
+    public int getSlotLimit(int slot) {
         return 1;
     }
 }

@@ -1,21 +1,19 @@
 package tfctech.compat.jei.categories;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
 import tfctech.TFCTech;
 import tfctech.compat.jei.wrappers.SmelteryRecipeWrapper;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 @ParametersAreNonnullByDefault
-public class SmelteryCategory extends BaseRecipeCategory<SmelteryRecipeWrapper>
-{
+public class SmelteryCategory extends BaseRecipeCategory<SmelteryRecipeWrapper> {
     private static final ResourceLocation ICONS = new ResourceLocation(TFCTech.MODID, "textures/gui/elements.png");
 
     private final IDrawableStatic fluidSlotBackground;
@@ -23,8 +21,7 @@ public class SmelteryCategory extends BaseRecipeCategory<SmelteryRecipeWrapper>
     private final IDrawableStatic fire;
     private final IDrawableAnimated fireAnimated;
 
-    public SmelteryCategory(IGuiHelper helper, String Uid)
-    {
+    public SmelteryCategory(IGuiHelper helper, String Uid) {
         super(helper.createBlankDrawable(114, 72), Uid);
         fluidSlotBackground = helper.createDrawable(ICONS, 0, 102, 18, 49);
         //fluidSlot = helper.createDrawable(ICONS, 18, 102, 18, 49);
@@ -35,8 +32,7 @@ public class SmelteryCategory extends BaseRecipeCategory<SmelteryRecipeWrapper>
     }
 
     @Override
-    public void drawExtras(Minecraft minecraft)
-    {
+    public void drawExtras(Minecraft minecraft) {
         //Input
         slot.draw(minecraft, 5, 17);
         slot.draw(minecraft, 23, 17);
@@ -61,8 +57,7 @@ public class SmelteryCategory extends BaseRecipeCategory<SmelteryRecipeWrapper>
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, SmelteryRecipeWrapper recipeWrapper, IIngredients ingredients)
-    {
+    public void setRecipe(IRecipeLayout recipeLayout, SmelteryRecipeWrapper recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
         itemStackGroup.init(0, true, 5, 17);
         itemStackGroup.init(1, true, 23, 17);
@@ -73,8 +68,7 @@ public class SmelteryCategory extends BaseRecipeCategory<SmelteryRecipeWrapper>
         itemStackGroup.init(6, true, 41, 35);
         itemStackGroup.init(7, true, 59, 35);
 
-        for (int i = 0; i < ingredients.getInputs(VanillaTypes.ITEM).size(); i++)
-        {
+        for (int i = 0; i < ingredients.getInputs(VanillaTypes.ITEM).size(); i++) {
             itemStackGroup.set(i, ingredients.getInputs(VanillaTypes.ITEM).get(i));
         }
 

@@ -1,7 +1,6 @@
 package se.gory_moon.horsepower.waila;
 
-import java.util.List;
-
+import mcp.mobius.waila.api.*;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,18 +11,16 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import mcp.mobius.waila.api.*;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.*;
 import se.gory_moon.horsepower.lib.Reference;
 import se.gory_moon.horsepower.tileentity.*;
 import se.gory_moon.horsepower.util.Localization;
 
-public class Provider implements IWailaDataProvider
-{
-    public static void callbackRegister(IWailaRegistrar registrar)
-    {
+import java.util.List;
+
+public class Provider implements IWailaDataProvider {
+    public static void callbackRegister(IWailaRegistrar registrar) {
         Provider provider = new Provider();
 
         //registrar.registerStackProvider(provider, BlockFiller.class);
@@ -42,34 +39,28 @@ public class Provider implements IWailaDataProvider
     }
 
     @Override
-    public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
-    {
+    public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
         if (accessor.getBlock().equals(ModBlocks.BLOCK_CHOPPER_FILLER))
             return accessor.getBlock().getPickBlock(accessor.getBlockState(), accessor.getMOP(), accessor.getWorld(), accessor.getPosition(), accessor.getPlayer());
         return null;
     }
 
     @Override
-    public List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
-    {
+    public List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
         return null;
     }
 
     @Override
-    public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
-    {
+    public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
         NBTTagCompound nbt = accessor.getNBTData();
-        if (nbt.hasKey("horsepower:grindstone", 10))
-        {
+        if (nbt.hasKey("horsepower:grindstone", 10)) {
             nbt = nbt.getCompoundTag("horsepower:grindstone");
 
             double total = nbt.getInteger("totalMillTime");
             double current = nbt.getInteger("millTime");
             double progress = Math.round(((current / total) * 100D) * 100D) / 100D;
             currenttip.add(Localization.WAILA.GRINDSTONE_PROGRESS.translate(progress));
-        }
-        else if (nbt.hasKey("horsepower:chopper", 10))
-        {
+        } else if (nbt.hasKey("horsepower:chopper", 10)) {
             nbt = nbt.getCompoundTag("horsepower:chopper");
 
             double totalWindup = Configs.general.pointsForWindup > 0 ? Configs.general.pointsForWindup : 1;
@@ -81,13 +72,10 @@ public class Provider implements IWailaDataProvider
 
             if (accessor.getTileEntity() instanceof TileEntityChopper || accessor.getTileEntity() instanceof TileEntityFiller)
                 currenttip.add(Localization.WAILA.WINDUP_PROGRESS.translate(progressWindup));
-            if (total > 1 || accessor.getTileEntity() instanceof TileEntityManualChopper)
-            {
+            if (total > 1 || accessor.getTileEntity() instanceof TileEntityManualChopper) {
                 currenttip.add(Localization.WAILA.CHOPPING_PROGRESS.translate(progressChopping));
             }
-        }
-        else if (nbt.hasKey("horsepower:press"))
-        {
+        } else if (nbt.hasKey("horsepower:press")) {
             nbt = nbt.getCompoundTag("horsepower:press");
             double current = nbt.getInteger("currentPressStatus");
             double total = Configs.general.pointsForPress > 0 ? Configs.general.pointsForPress : 1;
@@ -95,14 +83,11 @@ public class Provider implements IWailaDataProvider
             currenttip.add(Localization.WAILA.PRESS_PROGRESS.translate(progress));
         }
 
-        if (config.getConfig("horsepower:showItems") && (accessor.getTileEntity() instanceof TileEntityHPBase || accessor.getTileEntity() instanceof TileEntityFiller) && accessor.getPlayer().isSneaking())
-        {
+        if (config.getConfig("horsepower:showItems") && (accessor.getTileEntity() instanceof TileEntityHPBase || accessor.getTileEntity() instanceof TileEntityFiller) && accessor.getPlayer().isSneaking()) {
             TileEntity te = accessor.getTileEntity();
-            if (te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP))
-            {
+            if (te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP)) {
                 IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-                if (itemHandler != null)
-                {
+                if (itemHandler != null) {
                     {
                         final ItemStack stack = itemHandler.getStackInSlot(0);
                         final String name = stack.getItem().getRegistryName().toString();
@@ -128,14 +113,12 @@ public class Provider implements IWailaDataProvider
     }
 
     @Override
-    public List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
-    {
+    public List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
         return null;
     }
 
     @Override
-    public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos)
-    {
+    public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos) {
         NBTTagCompound tile = new NBTTagCompound();
         if (te instanceof TileEntityFiller)
             te = ((TileEntityFiller) te).getFilledTileEntity();

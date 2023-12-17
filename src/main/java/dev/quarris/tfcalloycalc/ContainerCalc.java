@@ -8,13 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-import javax.annotation.Nonnull;
-
 public class ContainerCalc extends Container {
 
+    public final TileEntityCalc tile;
     private final InventoryPlayer inv;
     private final IItemHandler stacks;
-    public final TileEntityCalc tile;
 
     public ContainerCalc(InventoryPlayer playerInv, TileEntityCalc tile) {
         this.tile = tile;

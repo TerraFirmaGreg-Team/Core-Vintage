@@ -18,7 +18,7 @@ public class SPacketNutrientDataResponse implements IMessage {
 
     }
 
-    public SPacketNutrientDataResponse(boolean accepted, int n, int p, int k,int x,int z) {
+    public SPacketNutrientDataResponse(boolean accepted, int n, int p, int k, int x, int z) {
         this.accepted = accepted;
         this.n = n;
         this.p = p;
@@ -26,7 +26,8 @@ public class SPacketNutrientDataResponse implements IMessage {
         this.x = x;
         this.z = z;
     }
-    public SPacketNutrientDataResponse(boolean accepted, int n, int p, int k,int x,int y,int z,boolean lowInPlanter) {
+
+    public SPacketNutrientDataResponse(boolean accepted, int n, int p, int k, int x, int y, int z, boolean lowInPlanter) {
         this(accepted, n, p, k, x, z);
         this.y = y;
         this.lowInPlanter = lowInPlanter;

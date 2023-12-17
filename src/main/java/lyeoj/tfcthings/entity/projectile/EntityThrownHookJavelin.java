@@ -39,19 +39,19 @@ public class EntityThrownHookJavelin extends EntityThrownRopeJavelin {
         this.dataManager.register(LENGTH, 0.0f);
     }
 
+    public float getLength() {
+        return this.getDataManager().get(LENGTH);
+    }
+
     public void setLength(float length) {
-        if(length < 1.0f) {
+        if (length < 1.0f) {
             this.getDataManager().set(LENGTH, 1.0f);
-        } else if(length > 60) {
+        } else if (length > 60) {
             this.getDataManager().set(LENGTH, 60.0f);
         } else {
             this.getDataManager().set(LENGTH, length);
         }
 
-    }
-
-    public float getLength() {
-        return this.getDataManager().get(LENGTH);
     }
 
     public void writeEntityToNBT(NBTTagCompound compound) {
@@ -60,7 +60,7 @@ public class EntityThrownHookJavelin extends EntityThrownRopeJavelin {
     }
 
     public void readEntityFromNBT(NBTTagCompound compound) {
-        if(compound.hasKey(LENGTH_NBT_KEY, 99)) {
+        if (compound.hasKey(LENGTH_NBT_KEY, 99)) {
             setLength(compound.getFloat(LENGTH_NBT_KEY));
         }
         super.readEntityFromNBT(compound);
@@ -71,38 +71,38 @@ public class EntityThrownHookJavelin extends EntityThrownRopeJavelin {
     }
 
     protected void performAdditionalUpdates() {
-        if(getWeapon().getItem() instanceof ItemHookJavelin && getThrower() != null) {
+        if (getWeapon().getItem() instanceof ItemHookJavelin && getThrower() != null) {
             EntityLivingBase thrower = (EntityLivingBase) this.getThrower();
             float length = getLength();
-            if(!world.isRemote && (inGroundSynced != inGround)) {
+            if (!world.isRemote && (inGroundSynced != inGround)) {
                 inGroundSynced = inGround;
-                TFCThings.network.sendTo(new MessageHookJavelinUpdate(getEntityId(), inGroundSynced), (EntityPlayerMP)thrower);
+                TFCThings.network.sendTo(new MessageHookJavelinUpdate(getEntityId(), inGroundSynced), (EntityPlayerMP) thrower);
             }
-            if(thrower != null && (inGround || inGroundSynced) && this.posY > thrower.posY && getDistance(thrower) > length && !thrower.onGround) {
+            if (thrower != null && (inGround || inGroundSynced) && this.posY > thrower.posY && getDistance(thrower) > length && !thrower.onGround) {
                 thrower.fallDistance = 0;
                 Vec3d rope = thrower.getPositionVector().subtract(this.getPositionVector()).normalize();
                 Vec3d velocity = new Vec3d(thrower.motionX, thrower.motionY, thrower.motionZ);
                 Vec3d motion = velocity.normalize().subtract(rope);
                 double speed = velocity.length();
                 thrower.motionX = motion.x * speed;
-                if(Math.abs(thrower.motionX) > 1.4) {
+                if (Math.abs(thrower.motionX) > 1.4) {
                     thrower.motionX = thrower.motionX > 0 ? 1.4 : -1.4;
                 }
                 thrower.motionY = motion.y * speed;
-                if(thrower.motionY > 1.0) {
+                if (thrower.motionY > 1.0) {
                     thrower.motionY = 1.0;
                 }
                 thrower.motionZ = motion.z * speed;
-                if(Math.abs(thrower.motionZ) > 1.4) {
+                if (Math.abs(thrower.motionZ) > 1.4) {
                     thrower.motionZ = thrower.motionZ > 0 ? 1.4 : -1.4;
                 }
-                if(speed < 0.09 && getDistance(thrower) > length + 0.3) {
+                if (speed < 0.09 && getDistance(thrower) > length + 0.3) {
                     thrower.motionY = 0.1;
                 }
-            } else if(thrower != null && thrower.onGround && getDistance(thrower) > length) {
+            } else if (thrower != null && thrower.onGround && getDistance(thrower) > length) {
                 setLength(getDistance(thrower));
             }
-            if(thrower != null && thrower.isSneaking()) {
+            if (thrower != null && thrower.isSneaking()) {
                 setLength(getLength() + 0.2f);
             }
         }
@@ -111,8 +111,8 @@ public class EntityThrownHookJavelin extends EntityThrownRopeJavelin {
 
     protected void onHit(@Nonnull RayTraceResult raytraceResultIn) {
         super.onHit(raytraceResultIn);
-        if(getWeapon().getItem() instanceof ItemHookJavelin) {
-            EntityLivingBase thrower = (EntityLivingBase)this.getThrower();
+        if (getWeapon().getItem() instanceof ItemHookJavelin) {
+            EntityLivingBase thrower = (EntityLivingBase) this.getThrower();
             setLength(getDistance(thrower));
         }
     }

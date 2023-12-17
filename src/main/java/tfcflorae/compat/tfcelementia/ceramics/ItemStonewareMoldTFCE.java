@@ -50,6 +50,7 @@ public class ItemStonewareMoldTFCE extends ItemPottery {
     private static final EnumMap<ItemMetalTFCE.ItemType, ItemStonewareMoldTFCE> MAP = new EnumMap<>(ItemMetalTFCE.ItemType.class);
     private final ItemMetalTFCE.ItemType type;
     protected int fluidCapacity = 100;
+
     public ItemStonewareMoldTFCE(ItemMetalTFCE.ItemType type) {
         this.type = type;
         if (MAP.put(type, this) != null) {

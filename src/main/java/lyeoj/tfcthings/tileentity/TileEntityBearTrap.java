@@ -41,7 +41,7 @@ public class TileEntityBearTrap extends TileEntity {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setBoolean("open", open);
-        if(this.capturedEntity != null) {
+        if (this.capturedEntity != null) {
             compound.setUniqueId("capturedId", this.capturedEntity.getUniqueID());
         }
         return super.writeToNBT(compound);
@@ -57,19 +57,19 @@ public class TileEntityBearTrap extends TileEntity {
     protected void sendUpdates() {
         this.world.markBlockRangeForRenderUpdate(pos, pos);
         this.world.notifyBlockUpdate(pos, this.world.getBlockState(pos), this.world.getBlockState(pos), 3);
-        this.world.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
+        this.world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
         markDirty();
     }
 
     private void readCapturedEntity() {
-        if(this.capturedId != null) {
-            if(this.world.getPlayerEntityByUUID(capturedId) != null) {
+        if (this.capturedId != null) {
+            if (this.world.getPlayerEntityByUUID(capturedId) != null) {
                 EntityLivingBase entity = this.world.getPlayerEntityByUUID(capturedId);
                 this.capturedEntity = entity;
-            } else if(this.world instanceof WorldServer) {
-                Entity entity = ((WorldServer)this.world).getEntityFromUuid(this.capturedId);
-                if(entity instanceof EntityLivingBase) {
-                    this.capturedEntity = (EntityLivingBase)entity;
+            } else if (this.world instanceof WorldServer) {
+                Entity entity = ((WorldServer) this.world).getEntityFromUuid(this.capturedId);
+                if (entity instanceof EntityLivingBase) {
+                    this.capturedEntity = (EntityLivingBase) entity;
                 }
             }
         }
@@ -92,7 +92,7 @@ public class TileEntityBearTrap extends TileEntity {
     public void setCapturedEntity(EntityLivingBase entity) {
 
         this.capturedEntity = entity;
-        if(entity != null) {
+        if (entity != null) {
             this.capturedId = entity.getUniqueID();
         } else {
             this.capturedId = UUID.randomUUID();

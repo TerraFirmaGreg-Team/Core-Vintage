@@ -71,6 +71,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
     private int daysInMonth;
     private boolean doDaylightCycle, arePlayersLoggedOn;
     private MinecraftServer server;
+
     public CalendarTFC() {
         // Initialize to default values
         daysInMonth = ConfigTFC.General.MISC.defaultMonthLength;

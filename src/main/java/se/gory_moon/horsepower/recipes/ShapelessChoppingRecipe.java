@@ -18,23 +18,17 @@ import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
 
 import static se.gory_moon.horsepower.blocks.BlockHPChoppingBase.createItemStack;
 
-public class ShapelessChoppingRecipe extends ShapelessOreRecipe
-{
+public class ShapelessChoppingRecipe extends ShapelessOreRecipe {
     public final List<ItemStack> outputBlocks;
 
-    public ShapelessChoppingRecipe(ResourceLocation location, List<ItemStack> variantItems, ItemStack result, Object... recipe)
-    {
+    public ShapelessChoppingRecipe(ResourceLocation location, List<ItemStack> variantItems, ItemStack result, Object... recipe) {
         super(location, result, recipe);
         this.outputBlocks = variantItems;
-        for (ItemStack stack : outputBlocks)
-        {
-            if (Block.getBlockFromItem(stack.getItem()) instanceof BlockHPChoppingBase)
-            {
-                for (int i = 0; i < input.size(); i++)
-                {
+        for (ItemStack stack : outputBlocks) {
+            if (Block.getBlockFromItem(stack.getItem()) instanceof BlockHPChoppingBase) {
+                for (int i = 0; i < input.size(); i++) {
                     Ingredient ingredient = input.get(i);
-                    if (ingredient.apply(stack))
-                    {
+                    if (ingredient.apply(stack)) {
                         NonNullList<ItemStack> stacks = NonNullList.create();
                         Block.getBlockFromItem(stack.getItem()).getSubBlocks(null, stacks);
                         input.set(i, Ingredient.fromStacks(stacks.toArray(new ItemStack[stacks.size()])));
@@ -46,10 +40,8 @@ public class ShapelessChoppingRecipe extends ShapelessOreRecipe
 
     @Nonnull
     @Override
-    public ItemStack getRecipeOutput()
-    {
-        if (!outputBlocks.isEmpty() && !output.isEmpty())
-        {
+    public ItemStack getRecipeOutput() {
+        if (!outputBlocks.isEmpty() && !output.isEmpty()) {
             ItemStack stack = outputBlocks.get(0).copy();
             BlockHPChoppingBase block = (BlockHPChoppingBase) Block.getBlockFromItem(output.getItem());
             int meta = stack.getMetadata();
@@ -63,24 +55,19 @@ public class ShapelessChoppingRecipe extends ShapelessOreRecipe
 
     @Nonnull
     @Override
-    public ItemStack getCraftingResult(@Nonnull InventoryCrafting craftMatrix)
-    {
+    public ItemStack getCraftingResult(@Nonnull InventoryCrafting craftMatrix) {
         /*boolean isTypeChopping = false;
         for (ItemStack outputBlock : outputBlocks)
         {
             if (((ItemBlock) outputBlock.getItem()).getBlock() instanceof BlockHPChoppingBase)
                 isTypeChopping = true;
         }*/
-        for (int i = 0; i < craftMatrix.getSizeInventory(); i++)
-        {
-            for (ItemStack ore : outputBlocks)
-            {
+        for (int i = 0; i < craftMatrix.getSizeInventory(); i++) {
+            for (ItemStack ore : outputBlocks) {
                 ItemStack stack = craftMatrix.getStackInSlot(i);
-                if ((OreDictionary.itemMatches(ore, stack, false) || (/*isTypeChopping && */(Block.getBlockFromItem(stack.getItem())) instanceof BlockHPChoppingBase)) && Block.getBlockFromItem(stack.getItem()) != Blocks.AIR)
-                {
+                if ((OreDictionary.itemMatches(ore, stack, false) || (/*isTypeChopping && */(Block.getBlockFromItem(stack.getItem())) instanceof BlockHPChoppingBase)) && Block.getBlockFromItem(stack.getItem()) != Blocks.AIR) {
                     BlockHPChoppingBase block = (BlockHPChoppingBase) Block.getBlockFromItem(getSimpleRecipeOutput().getItem());
-                    if (!Configs.general.useDynamicCrafting)
-                    {
+                    if (!Configs.general.useDynamicCrafting) {
                         if ("tfc".equals(ore.getItem().getRegistryName().getNamespace()))
                             return createItemStack(block, getSimpleRecipeOutput().getCount(), stack);
                         else
@@ -93,8 +80,7 @@ public class ShapelessChoppingRecipe extends ShapelessOreRecipe
         return super.getCraftingResult(craftMatrix);
     }
 
-    public ItemStack getSimpleRecipeOutput()
-    {
+    public ItemStack getSimpleRecipeOutput() {
         return output;
     }
 }

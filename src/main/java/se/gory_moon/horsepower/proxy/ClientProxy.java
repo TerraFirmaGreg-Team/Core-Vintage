@@ -10,7 +10,6 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-
 import se.gory_moon.horsepower.blocks.ModBlocks;
 import se.gory_moon.horsepower.client.renderer.*;
 import se.gory_moon.horsepower.tileentity.*;
@@ -18,11 +17,9 @@ import se.gory_moon.horsepower.util.HorsePowerCommand;
 import se.gory_moon.horsepower.util.color.ColorGetter;
 
 @SideOnly(Side.CLIENT)
-public class ClientProxy extends CommonProxy
-{
+public class ClientProxy extends CommonProxy {
     @Override
-    public void preInit()
-    {
+    public void preInit() {
         super.preInit();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrindstone.class, new TileEntityGrindstoneRender());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChopper.class, new TileEntityChopperRender());
@@ -33,14 +30,12 @@ public class ClientProxy extends CommonProxy
     }
 
     @Override
-    public void init()
-    {
+    public void init() {
         MinecraftForge.EVENT_BUS.register(ClientHandler.class);
     }
 
     @Override
-    public void loadComplete()
-    {
+    public void loadComplete() {
         ClientCommandHandler.instance.registerCommand(new HorsePowerCommand());
 
         ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(resourceManager ->
@@ -50,18 +45,15 @@ public class ClientProxy extends CommonProxy
 
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
         {
-            if (worldIn != null && pos != null)
-            {
+            if (worldIn != null && pos != null) {
                 TileEntity tileEntity = worldIn.getTileEntity(pos);
-                if (tileEntity instanceof TileEntityGrindstone)
-                {
+                if (tileEntity instanceof TileEntityGrindstone) {
                     TileEntityGrindstone te = (TileEntityGrindstone) tileEntity;
                     ItemStack outputStack = te.getStackInSlot(1);
                     ItemStack secondaryStack = te.getStackInSlot(2);
                     if (outputStack.getCount() < secondaryStack.getCount())
                         outputStack = secondaryStack;
-                    if (!OreDictionary.itemMatches(te.renderStack, outputStack, true))
-                    {
+                    if (!OreDictionary.itemMatches(te.renderStack, outputStack, true)) {
                         te.renderStack = outputStack;
                         if (!outputStack.isEmpty())
                             te.grindColor = ColorGetter.getColors(outputStack, 2).get(0);

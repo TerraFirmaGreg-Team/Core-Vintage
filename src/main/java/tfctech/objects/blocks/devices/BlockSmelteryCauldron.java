@@ -1,9 +1,11 @@
 package tfctech.objects.blocks.devices;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,23 +27,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.Helpers;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 @ParametersAreNonnullByDefault
-public class BlockSmelteryCauldron extends BlockHorizontal implements IItemSize
-{
+public class BlockSmelteryCauldron extends BlockHorizontal implements IItemSize {
     public static final PropertyBool LIT = PropertyBool.create("lit");
 
-    public BlockSmelteryCauldron()
-    {
+    public BlockSmelteryCauldron() {
         super(Material.IRON);
         setHardness(3.0F);
         setSoundType(SoundType.STONE);
@@ -52,95 +49,75 @@ public class BlockSmelteryCauldron extends BlockHorizontal implements IItemSize
     @Override
     @SuppressWarnings("deprecation")
     @Nonnull
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState()
-            .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-            .withProperty(LIT, meta / 4 % 2 != 0);
+                .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+                .withProperty(LIT, meta / 4 % 2 != 0);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getHorizontalIndex()
-            + (state.getValue(LIT) ? 4 : 0);
+                + (state.getValue(LIT) ? 4 : 0);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state)
-    {
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Nonnull
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return FULL_BLOCK_AABB;
     }
 
     @Override
     @Nonnull
     @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return face == EnumFacing.UP ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TESmelteryCauldron te = Helpers.getTE(worldIn, pos, TESmelteryCauldron.class);
-        if (te != null)
-        {
+        if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-    {
-        if (!player.isSneaking())
-        {
-            if (!world.isRemote)
-            {
-                if (world.getBlockState(pos.down()).getBlock() instanceof BlockSmelteryFirebox)
-                {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!player.isSneaking()) {
+            if (!world.isRemote) {
+                if (world.getBlockState(pos.down()).getBlock() instanceof BlockSmelteryFirebox) {
                     TESmelteryCauldron smeltery = Helpers.getTE(world, pos, TESmelteryCauldron.class);
                     ItemStack held = player.getHeldItem(hand);
-                    if (held.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
-                    {
+                    if (held.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
                         IFluidHandler fluidHandler = smeltery.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
-                        if (fluidHandler != null)
-                        {
-                            if (FluidUtil.interactWithFluidHandler(player, hand, fluidHandler))
-                            {
+                        if (fluidHandler != null) {
+                            if (FluidUtil.interactWithFluidHandler(player, hand, fluidHandler)) {
                                 held = player.getHeldItem(hand); // Forge update item in hand
                                 IItemHeat cap = held.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-                                if (cap != null)
-                                {
+                                if (cap != null) {
                                     cap.setTemperature(smeltery.getTemp());
                                 }
                             }
                         }
-                    }
-                    else
-                    {
+                    } else {
                         TechGuiHandler.openGui(world, pos, player, TechGuiHandler.Type.SMELTERY_CAULDRON);
                     }
-                }
-                else
-                {
+                } else {
                     player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);
                 }
             }
@@ -151,42 +128,36 @@ public class BlockSmelteryCauldron extends BlockHorizontal implements IItemSize
 
     @Nonnull
     @Override
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, LIT, FACING);
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state)
-    {
+    public boolean hasTileEntity(IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
-    {
+    public TileEntity createTileEntity(World world, IBlockState state) {
         return new TESmelteryCauldron();
     }
 
     @Nonnull
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
-    {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
     @Nonnull
     @Override
-    public Size getSize(@Nonnull ItemStack itemStack)
-    {
+    public Size getSize(@Nonnull ItemStack itemStack) {
         return Size.LARGE;
     }
 
     @Nonnull
     @Override
-    public Weight getWeight(@Nonnull ItemStack itemStack)
-    {
+    public Weight getWeight(@Nonnull ItemStack itemStack) {
         return Weight.MEDIUM;
     }
 }

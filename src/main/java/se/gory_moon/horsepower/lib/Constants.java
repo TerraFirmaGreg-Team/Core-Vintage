@@ -1,8 +1,7 @@
 package se.gory_moon.horsepower.lib;
 
 
-public class Constants
-{
+public class Constants {
     public static final String GRINDSTONE_BLOCK = "grindstone";
     public static final String HAND_GRINDSTONE_BLOCK = "hand_grindstone";
     public static final String HAND_CHOPPING_BLOCK = "chopping_block";

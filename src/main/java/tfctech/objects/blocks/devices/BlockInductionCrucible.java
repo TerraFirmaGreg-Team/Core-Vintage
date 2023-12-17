@@ -1,10 +1,9 @@
 package tfctech.objects.blocks.devices;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -26,20 +25,19 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TEInductionCrucible;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockInductionCrucible extends Block implements IItemSize
-{
+public class BlockInductionCrucible extends Block implements IItemSize {
     public static final PropertyBool LIT = PropertyBool.create("lit");
 
     private static final AxisAlignedBB CRUCIBLE_AABB = new AxisAlignedBB(0.0625, 0, 0.0625, 0.9375, 0.9375, 0.9375);
@@ -49,8 +47,7 @@ public class BlockInductionCrucible extends Block implements IItemSize
     private static final AxisAlignedBB AABB_WALL_EAST = new AxisAlignedBB(0.8125D, 0.0D, 0.0625D, 0.9375D, 0.9375D, 0.9375D);
     private static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.1875D, 0.9375D, 0.9375D);
 
-    public BlockInductionCrucible()
-    {
+    public BlockInductionCrucible() {
         super(Material.IRON);
 
         setHardness(3.0f);
@@ -62,66 +59,56 @@ public class BlockInductionCrucible extends Block implements IItemSize
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isTopSolid(IBlockState state)
-    {
+    public boolean isTopSolid(IBlockState state) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isFullBlock(IBlockState state)
-    {
+    public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
     @Nonnull
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4)).withProperty(LIT, meta >= 4);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isBlockNormalCube(IBlockState state)
-    {
+    public boolean isBlockNormalCube(IBlockState state) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isNormalCube(IBlockState state)
-    {
+    public boolean isNormalCube(IBlockState state) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isFullCube(IBlockState state)
-    {
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return CRUCIBLE_AABB;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
-        if (face == EnumFacing.UP)
-        {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        if (face == EnumFacing.UP) {
             return BlockFaceShape.BOWL;
         }
         return isSideSolid(state, worldIn, pos, face) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
@@ -129,8 +116,7 @@ public class BlockInductionCrucible extends Block implements IItemSize
 
     @SuppressWarnings("deprecation")
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState)
-    {
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_LEGS);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_NORTH);
@@ -141,41 +127,34 @@ public class BlockInductionCrucible extends Block implements IItemSize
     @SuppressWarnings("deprecation")
     @Nullable
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-    {
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return CRUCIBLE_AABB;
     }
 
     @SuppressWarnings("deprecation")
     @SideOnly(Side.CLIENT)
     @Override
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
-    {
+    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
         return CRUCIBLE_AABB;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public BlockRenderLayer getRenderLayer()
-    {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        if (!player.isSneaking())
-        {
-            if (!world.isRemote)
-            {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!player.isSneaking()) {
+            if (!world.isRemote) {
                 TechGuiHandler.openGui(world, pos, player, TechGuiHandler.Type.INDUCTION_CRUCIBLE);
             }
             return true;
@@ -184,58 +163,49 @@ public class BlockInductionCrucible extends Block implements IItemSize
     }
 
     @Override
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING, LIT);
     }
 
     @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos)
-    {
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos, EnumFacing side)
-    {
+    public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return side == baseState.getValue(FACING);
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state)
-    {
+    public boolean hasTileEntity(IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
-    {
+    public TileEntity createTileEntity(World world, IBlockState state) {
         return new TEInductionCrucible();
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
-    {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
     @Override
-    public Size getSize(@Nonnull ItemStack itemStack)
-    {
+    public Size getSize(@Nonnull ItemStack itemStack) {
         return Size.LARGE;
     }
 
     @Override
-    public Weight getWeight(ItemStack itemStack)
-    {
+    public Weight getWeight(ItemStack itemStack) {
         return Weight.MEDIUM;
     }
 
     @Override
-    public boolean canStack(ItemStack stack)
-    {
+    public boolean canStack(ItemStack stack) {
         return false;
     }
 }

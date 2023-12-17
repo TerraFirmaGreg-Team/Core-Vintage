@@ -1,29 +1,25 @@
 package se.gory_moon.horsepower.jei.press;
 
+import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.recipe.IStackHelper;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+import se.gory_moon.horsepower.recipes.HPRecipes;
+import se.gory_moon.horsepower.recipes.PressRecipe;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
+public class PressRecipeMaker {
 
-import mezz.jei.api.IJeiHelpers;
-import mezz.jei.api.recipe.IStackHelper;
-import se.gory_moon.horsepower.recipes.HPRecipes;
-import se.gory_moon.horsepower.recipes.PressRecipe;
-
-public class PressRecipeMaker
-{
-
-    public static List<PressRecipeWrapper> getPressItemRecipes(IJeiHelpers helpers)
-    {
+    public static List<PressRecipeWrapper> getPressItemRecipes(IJeiHelpers helpers) {
         IStackHelper stackHelper = helpers.getStackHelper();
         Collection<PressRecipe> pressRecipes = HPRecipes.instance().getPressRecipes();
 
         List<PressRecipeWrapper> recipes = new ArrayList<>();
 
-        for (PressRecipe recipe : pressRecipes)
-        {
+        for (PressRecipe recipe : pressRecipes) {
             if (recipe.isLiquidRecipe()) continue;
             ItemStack input = recipe.getInput();
             ItemStack output = recipe.getOutput();
@@ -36,15 +32,13 @@ public class PressRecipeMaker
         return recipes;
     }
 
-    public static List<PressRecipeWrapper> getPressFluidRecipes(IJeiHelpers helpers)
-    {
+    public static List<PressRecipeWrapper> getPressFluidRecipes(IJeiHelpers helpers) {
         IStackHelper stackHelper = helpers.getStackHelper();
         Collection<PressRecipe> pressRecipes = HPRecipes.instance().getPressRecipes();
 
         List<PressRecipeWrapper> recipes = new ArrayList<>();
 
-        for (PressRecipe recipe : pressRecipes)
-        {
+        for (PressRecipe recipe : pressRecipes) {
             if (!recipe.isLiquidRecipe()) continue;
             ItemStack input = recipe.getInput();
             FluidStack fluidOutput = recipe.getOutputFluid();

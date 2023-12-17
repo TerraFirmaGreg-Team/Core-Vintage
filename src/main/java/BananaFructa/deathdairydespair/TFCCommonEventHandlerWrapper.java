@@ -32,7 +32,6 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -125,7 +124,7 @@ public class TFCCommonEventHandlerWrapper {
     @SubscribeEvent
     public static void onPlayerRespawn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
         if (event.player instanceof EntityPlayerMP) {
-            EntityPlayerMP player = (EntityPlayerMP)event.player;
+            EntityPlayerMP player = (EntityPlayerMP) event.player;
             CapabilityContainerListener.addTo(player.inventoryContainer, player);
             FoodStatsTFC.replaceFoodStats(player);
 
@@ -141,7 +140,7 @@ public class TFCCommonEventHandlerWrapper {
 
                         FoodStatsTFC tfc = (FoodStatsTFC) player.getFoodStats();
 
-                        tfc.setFoodLevel(Config.respawnHungerLevel/5);
+                        tfc.setFoodLevel(Config.respawnHungerLevel / 5);
                         tfc.setThirst(Config.respawnThirstLevel); // Why isn't this also on an 0 - 20 interval ?
                     }
                 }
@@ -149,14 +148,14 @@ public class TFCCommonEventHandlerWrapper {
 
             // =========================================
 
-            IPlayerData cap = (IPlayerData)player.getCapability(CapabilityPlayerData.CAPABILITY, (EnumFacing)null);
+            IPlayerData cap = (IPlayerData) player.getCapability(CapabilityPlayerData.CAPABILITY, (EnumFacing) null);
             if (cap != null) {
                 if (Loader.isModLoaded("patchouli") && !event.isEndConquered() && !player.world.getGameRules().getBoolean("keepInventory") && ConfigTFC.General.MISC.giveBook) {
                     TFCPatchouliPlugin.giveBookToPlayer(player);
                     cap.setHasBook(true);
                 }
 
-                TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate((NBTTagCompound)cap.serializeNBT()), player);
+                TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate((NBTTagCompound) cap.serializeNBT()), player);
             }
         }
     }

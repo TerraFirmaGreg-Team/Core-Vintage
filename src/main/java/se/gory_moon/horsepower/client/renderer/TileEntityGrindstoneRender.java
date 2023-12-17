@@ -1,24 +1,21 @@
 package se.gory_moon.horsepower.client.renderer;
 
-import org.lwjgl.opengl.GL11;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
-
+import org.lwjgl.opengl.GL11;
 import se.gory_moon.horsepower.blocks.BlockGrindstone;
 import se.gory_moon.horsepower.blocks.BlockHPBase;
 import se.gory_moon.horsepower.client.model.modelvariants.GrindStoneModels;
 import se.gory_moon.horsepower.tileentity.TileEntityGrindstone;
 import se.gory_moon.horsepower.util.RenderUtils;
 
-public class TileEntityGrindstoneRender extends TileEntityHPBaseRenderer<TileEntityGrindstone>
-{
+public class TileEntityGrindstoneRender extends TileEntityHPBaseRenderer<TileEntityGrindstone> {
     @Override
-    public void render(TileEntityGrindstone te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-    {
+    public void render(TileEntityGrindstone te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         IBlockState blockState = te.getWorld().getBlockState(te.getPos());
         if (!(blockState.getBlock() instanceof BlockHPBase)) return;
         ItemStack outputStack = te.getStackInSlot(1);
@@ -26,8 +23,7 @@ public class TileEntityGrindstoneRender extends TileEntityHPBaseRenderer<TileEnt
         if (outputStack.getCount() < secondaryStack.getCount())
             outputStack = secondaryStack;
 
-        if (blockState.getValue(BlockGrindstone.FILLED))
-        {
+        if (blockState.getValue(BlockGrindstone.FILLED)) {
             IBlockState filledState = blockState.withProperty(BlockGrindstone.PART, GrindStoneModels.FILLED);
             if (!(filledState.getBlock() instanceof BlockHPBase)) return;
 
@@ -57,9 +53,7 @@ public class TileEntityGrindstoneRender extends TileEntityHPBaseRenderer<TileEnt
             GlStateManager.popMatrix();
             buffer.setTranslation(0.0D, 0.0D, 0.0D);
             RenderHelper.enableStandardItemLighting();
-        }
-        else if (outputStack.isEmpty())
-        {
+        } else if (outputStack.isEmpty()) {
             te.renderStack = ItemStack.EMPTY;
             te.grindColor = null;
         }
@@ -69,8 +63,7 @@ public class TileEntityGrindstoneRender extends TileEntityHPBaseRenderer<TileEnt
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);
-        if (!te.getStackInSlot(0).isEmpty())
-        {
+        if (!te.getStackInSlot(0).isEmpty()) {
             renderItem(te, te.getStackInSlot(0), 0.5F, 1F, 0.5F, 1F);
             if (getWorld().isAirBlock(te.getPos().up()))
                 drawString(te, String.valueOf(te.getStackInSlot(0).getCount()), 0, 0.35, 0);

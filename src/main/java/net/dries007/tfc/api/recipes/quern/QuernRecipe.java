@@ -19,6 +19,7 @@ import javax.annotation.Nullable;
 public class QuernRecipe extends IForgeRegistryEntry.Impl<QuernRecipe> implements IJEISimpleRecipe {
     protected IIngredient<ItemStack> inputItem;
     protected ItemStack outputItem;
+
     public QuernRecipe(IIngredient<ItemStack> input, ItemStack output) {
         this.inputItem = input;
         this.outputItem = output;

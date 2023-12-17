@@ -28,7 +28,7 @@ public class BlockPigvil extends BlockAnvilTFC {
 
     public BlockPigvil(Metal metal) {
         super(new Metal(new ResourceLocation(TFCThings.MODID + ":pigvil_" + metal), metal.getTier(), false, 10, 100, 0, null, null));
-        if(metal != TFCRegistries.METALS.getValue(DefaultMetals.STEEL)) {
+        if (metal != TFCRegistries.METALS.getValue(DefaultMetals.STEEL)) {
             this.setTranslationKey("pigvil_" + metal);
             this.setRegistryName("pigvil_" + metal);
         } else {
@@ -69,13 +69,13 @@ public class BlockPigvil extends BlockAnvilTFC {
     }
 
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        if(this.getTranslationKey().equals("tile.pigvil_black_steel")) {
+        if (this.getTranslationKey().equals("tile.pigvil_black_steel")) {
             return new ItemStack(TFCThingsBlocks.PIGVIL_BLOCK_BLACK);
-        } else if(this.getTranslationKey().equals("tile.pigvil_blue_steel")) {
+        } else if (this.getTranslationKey().equals("tile.pigvil_blue_steel")) {
             return new ItemStack(TFCThingsBlocks.PIGVIL_BLOCK_BLUE);
-        } else if(this.getTranslationKey().equals("tile.pigvil_red_steel")) {
+        } else if (this.getTranslationKey().equals("tile.pigvil_red_steel")) {
             return new ItemStack(TFCThingsBlocks.PIGVIL_BLOCK_RED);
-        } else if(this.getTranslationKey().equals("tile.pigvil_purple_steel")) {
+        } else if (this.getTranslationKey().equals("tile.pigvil_purple_steel")) {
             return new ItemStack(TFCThingsBlocks.PIGVIL_BLOCK_PURPLE);
         } else {
             return new ItemStack(TFCThingsBlocks.PIGVIL_BLOCK);

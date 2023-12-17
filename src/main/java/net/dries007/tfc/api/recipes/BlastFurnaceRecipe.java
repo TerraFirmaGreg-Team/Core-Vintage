@@ -23,6 +23,7 @@ public class BlastFurnaceRecipe extends IForgeRegistryEntry.Impl<BlastFurnaceRec
     protected Metal output;
     protected Metal input;
     protected IIngredient<ItemStack> additive;
+
     /**
      * Creates a new blast furnace recipe
      *

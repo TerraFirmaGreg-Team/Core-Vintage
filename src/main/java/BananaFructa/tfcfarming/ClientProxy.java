@@ -13,7 +13,6 @@ import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalHoe;
 import net.dries007.tfc.objects.items.rock.ItemRockHoe;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -36,6 +35,8 @@ import java.util.HashMap;
 public class ClientProxy extends CommonProxy {
 
     public HashMap<ItemSeedsTFC, ICrop> cropCache = new HashMap<>();
+    boolean wasRendering = false;
+    float time = 0;
     private SPacketNutrientDataResponse lastResponse = null;
     private long ticksSinceLastResponse = 0;
 
@@ -56,7 +57,7 @@ public class ClientProxy extends CommonProxy {
             Item i = event.getItemStack().getItem();
             int prc = 0;
             int val = TFCFarmingContent.getFertilizerValue(event.getItemStack());
-            prc = ((int)(val/255.0f * 100));
+            prc = ((int) (val / 255.0f * 100));
             String line = "\u00A79Fertilizer value: " + TFCFarmingContent.getFertilizerClass(event.getItemStack()).name + "  \u00A7b" + prc + "%\u00A7r";
             event.getToolTip().add(line);
         }
@@ -73,18 +74,15 @@ public class ClientProxy extends CommonProxy {
 
         if (event.getItemStack().getItem() instanceof ItemRockHoe || event.getItemStack().getItem() instanceof ItemMetalHoe) {
             if (GuiScreen.isShiftKeyDown()) {
-                event.getToolTip().add(1,"\u00a73Sneak while looking at a block to see nutrient info");
+                event.getToolTip().add(1, "\u00a73Sneak while looking at a block to see nutrient info");
                 // TODO:                                                                     V config
-                event.getToolTip().add(2,"\u00a73Farming skill must be at least Adept!");
+                event.getToolTip().add(2, "\u00a73Farming skill must be at least Adept!");
             } else {
-                event.getToolTip().add(1,"\u00a77Hold (Shift) for more information");
+                event.getToolTip().add(1, "\u00a77Hold (Shift) for more information");
             }
         }
 
     }
-
-    boolean wasRendering = false;
-    float time = 0;
 
     private void rectangleAt(int x, int y, int width, int height, int color) {
         GlStateManager.pushMatrix();
@@ -112,13 +110,13 @@ public class ClientProxy extends CommonProxy {
         EntityPlayer player = Minecraft.getMinecraft().player;
         if (
                 player.isSneaking() &&
-                mc.objectMouseOver != null &&
-                mc.objectMouseOver.typeOfHit == RayTraceResult.Type.BLOCK &&
-                mc.objectMouseOver.getBlockPos() != null &&
+                        mc.objectMouseOver != null &&
+                        mc.objectMouseOver.typeOfHit == RayTraceResult.Type.BLOCK &&
+                        mc.objectMouseOver.getBlockPos() != null &&
                         (
                                 mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemRockHoe ||
-                                mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemMetalHoe ||
-                                (TFCFarming.tfcfloraeLoaded && mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemHoeTFCF )
+                                        mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemMetalHoe ||
+                                        (TFCFarming.tfcfloraeLoaded && mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemHoeTFCF)
                         )
 
         ) {
@@ -135,10 +133,10 @@ public class ClientProxy extends CommonProxy {
             if (!(isFarmlandTFC || isFarmlandTFCF || isPlanter || isTFCCrop || isTFCDeadCrop)) return;
 
             boolean invalidResponse = lastResponse == null ||
-                                      lastResponse.x != blockpos.getX() ||
-                                      lastResponse.z != blockpos.getZ() ||
-                                      !lastResponse.accepted ||
-                                      (isPlanter && lastResponse.y != blockpos.getY());
+                    lastResponse.x != blockpos.getX() ||
+                    lastResponse.z != blockpos.getZ() ||
+                    !lastResponse.accepted ||
+                    (isPlanter && lastResponse.y != blockpos.getY());
 
             if (invalidResponse || ticksSinceLastResponse > 20) {
                 Minecraft.getMinecraft().addScheduledTask(new Runnable() {
@@ -151,9 +149,10 @@ public class ClientProxy extends CommonProxy {
                         }
                     }
                 });
-                if (!wasRendering || lastResponse == null) return; // if were already rendering and the response is not null keep rendering
-                                                                   // to avoid flickering
-                                                                   // if we were not to check if we were rendering before the animation might look scuffed
+                if (!wasRendering || lastResponse == null)
+                    return; // if were already rendering and the response is not null keep rendering
+                // to avoid flickering
+                // if we were not to check if we were rendering before the animation might look scuffed
             }
 
             if (!wasRendering) time = 0;
@@ -177,11 +176,11 @@ public class ClientProxy extends CommonProxy {
 
             // TODO: planter warnings
             if (!enoughNutrients) {
-                y = drawTextBox(mc,x,y,"\u00a7cLow nutrients!","\u00a7c30% growth speed!");
+                y = drawTextBox(mc, x, y, "\u00a7cLow nutrients!", "\u00a7c30% growth speed!");
             }
 
             if (isTFCDeadCrop) {
-                y = drawTextBox(mc,x,y,"\u00a7cDead crop!","\u00a7c" + (int)(Config.growthDead * 100) + "% nutrient recovery rate!");
+                y = drawTextBox(mc, x, y, "\u00a7cDead crop!", "\u00a7c" + (int) (Config.growthDead * 100) + "% nutrient recovery rate!");
             }
 
             if (isPlanter) {
@@ -213,7 +212,8 @@ public class ClientProxy extends CommonProxy {
             wasRendering = false;
         }
     }
-    private int drawTextBox(Minecraft mc,int x,int y,String... text) {
+
+    private int drawTextBox(Minecraft mc, int x, int y, String... text) {
         y -= -2 + 10 * text.length;
         int maxL = 0;
         for (String s : text) {
@@ -221,7 +221,7 @@ public class ClientProxy extends CommonProxy {
             if (l > maxL) maxL = l;
         }
         Utils.drawTooltipBox(x, y + 13, maxL + 2, 10 * text.length, 0xF0100010, 0x505000FF, 0x5028007F);
-        for (int i = 0;i < text.length;i++) {
+        for (int i = 0; i < text.length; i++) {
             mc.fontRenderer.drawStringWithShadow(text[i], x + 2, y + 14 + 10 * i, 0xffffffff);
         }
         return y;

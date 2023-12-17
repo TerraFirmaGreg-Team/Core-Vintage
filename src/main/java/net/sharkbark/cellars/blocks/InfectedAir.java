@@ -1,7 +1,5 @@
 package net.sharkbark.cellars.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -55,7 +53,7 @@ public class InfectedAir extends BlockBase {
 
     @Override
     public void registerModels() {
-        Main.proxy.registerItemRenderer(Item.getItemFromBlock(this),0,"inventory");
+        Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
 }

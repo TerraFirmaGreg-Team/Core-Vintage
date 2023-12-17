@@ -36,7 +36,6 @@ import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.ProbeMode;
 import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.advancements.Manager;
 import se.gory_moon.horsepower.client.model.modelvariants.PressModels;
 import se.gory_moon.horsepower.lib.Constants;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
@@ -154,13 +153,6 @@ public class BlockPress extends BlockHPBase implements IProbeInfoAccessor
     @Override
     public void emptiedOutput(World world, BlockPos pos)
     {
-    }
-
-    @Override
-    public void onWorkerAttached(EntityPlayer playerIn, EntityCreature creature)
-    {
-        if (playerIn instanceof EntityPlayerMP)
-            Manager.USE_PRESS.trigger((EntityPlayerMP) playerIn);
     }
 
     @Override

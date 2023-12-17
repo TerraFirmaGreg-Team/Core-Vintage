@@ -27,7 +27,6 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.ProbeMode;
 import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
-import se.gory_moon.horsepower.advancements.Manager;
 import se.gory_moon.horsepower.client.model.modelvariants.GrindStoneModels;
 import se.gory_moon.horsepower.lib.Constants;
 import se.gory_moon.horsepower.tileentity.TileEntityGrindstone;
@@ -135,12 +134,6 @@ public class BlockGrindstone extends BlockHPBase implements IProbeInfoAccessor
         BlockGrindstone.setState(false, world, pos);
     }
 
-    @Override
-    public void onWorkerAttached(EntityPlayer playerIn, EntityCreature creature)
-    {
-        if (playerIn instanceof EntityPlayerMP)
-            Manager.USE_GRINDSTONE.trigger((EntityPlayerMP) playerIn);
-    }
 
     @Nonnull
     @Override

@@ -8,7 +8,6 @@ package net.dries007.tfc.objects.blocks.devices;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlockFireBrick;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
@@ -24,7 +23,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -131,7 +129,6 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
                     return true;
                 ItemStack held = playerIn.getHeldItem(hand);
                 if (te.canIgnite() && ItemFireStarter.onIgnition(held)) {
-                    TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) playerIn, state.getBlock()); // Trigger lit block
                     worldIn.setBlockState(pos, state.withProperty(LIT, true));
                     //te.onIgnite();
                     return true;

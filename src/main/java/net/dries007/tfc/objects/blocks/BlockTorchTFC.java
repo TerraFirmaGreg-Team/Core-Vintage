@@ -9,7 +9,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -121,7 +120,6 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBl
                 }
             } else {
                 if (BlockTorchTFC.canLight(stack)) {
-                    TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) playerIn, state.getBlock()); // Trigger lit block
                     worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
                     TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
                     if (tile != null) {

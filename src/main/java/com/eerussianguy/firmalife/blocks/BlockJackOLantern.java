@@ -6,7 +6,6 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -104,7 +103,6 @@ public class BlockJackOLantern extends BlockHorizontal implements IItemSize, ILi
             ItemStack stack = playerIn.getHeldItem(hand);
             TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
             if (BlockTorchTFC.canLight(stack)) {
-                TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) playerIn, state.getBlock()); // Trigger lit block
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
                 if (tile != null)
                     tile.resetCounter();

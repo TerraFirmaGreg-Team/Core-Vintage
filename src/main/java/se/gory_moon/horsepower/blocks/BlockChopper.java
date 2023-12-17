@@ -34,7 +34,6 @@ import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.ProbeMode;
 import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.advancements.Manager;
 import se.gory_moon.horsepower.client.model.modelvariants.ChopperModels;
 import se.gory_moon.horsepower.lib.Constants;
 import se.gory_moon.horsepower.tileentity.TileEntityChopper;
@@ -155,13 +154,6 @@ public class BlockChopper extends BlockHPChoppingBase implements IProbeInfoAcces
     @Override
     public void emptiedOutput(World world, BlockPos pos)
     {
-    }
-
-    @Override
-    public void onWorkerAttached(EntityPlayer playerIn, EntityCreature creature)
-    {
-        if (playerIn instanceof EntityPlayerMP)
-            Manager.USE_CHOPPER.trigger((EntityPlayerMP) playerIn);
     }
 
     @Nonnull

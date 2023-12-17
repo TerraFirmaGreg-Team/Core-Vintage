@@ -7,7 +7,6 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.util.DamageSourcesTFC;
@@ -158,7 +157,6 @@ public class BlockOven extends Block implements ILightableBlock, IItemSize {
                 TEOven te = Helpers.getTE(world, pos, TEOven.class);
                 if (te == null) return false;
                 if (isValidHorizontal(world, pos, false) && hasChimney(world, pos, false) && ItemFireStarter.onIgnition(held)) {
-                    TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
                     world.setBlockState(pos, state.withProperty(LIT, true));
                     te.light();
                     return true;

@@ -7,7 +7,6 @@ package net.dries007.tfc.objects.blocks.metal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TELamp;
@@ -223,7 +222,6 @@ public class BlockMetalLamp extends Block implements ILightableBlock {
                 }
             } else if (BlockTorchTFC.canLight(stack)) {
                 if (lightWithFuel(worldIn, pos, state, tel)) {
-                    TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) playerIn, state.getBlock()); // Trigger lit block
                 }
             }
         }

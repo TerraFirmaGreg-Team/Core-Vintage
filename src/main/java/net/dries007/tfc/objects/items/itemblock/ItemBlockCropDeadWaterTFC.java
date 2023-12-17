@@ -2,12 +2,10 @@ package net.dries007.tfc.objects.items.itemblock;
 
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -54,9 +52,6 @@ public class ItemBlockCropDeadWaterTFC extends ItemBlockTFC {
                     }
 
                     worldIn.setBlockState(blockpos1, this.block.getDefaultState(), 11);
-                    if (playerIn instanceof EntityPlayerMP) {
-                        CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) playerIn, blockpos1, itemstack);
-                    }
 
                     if (!playerIn.capabilities.isCreativeMode) {
                         itemstack.shrink(1);

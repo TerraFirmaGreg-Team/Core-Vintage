@@ -23,7 +23,6 @@ import net.dries007.tfc.command.*;
 import net.dries007.tfc.compat.patchouli.TFCPatchouliPlugin;
 import net.dries007.tfc.network.*;
 import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.proxy.IProxy;
@@ -151,7 +150,6 @@ public final class TerraFirmaCraft {
         ItemsTFC.init();
         LootTablesTFC.init();
         CapabilityFood.init();
-        TFCTriggers.init();
 
         if (event.getSide().isClient()) {
             TFCKeybindings.init();

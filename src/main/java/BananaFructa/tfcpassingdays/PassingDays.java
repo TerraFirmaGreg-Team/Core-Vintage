@@ -38,7 +38,7 @@ public class PassingDays {
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         if (await && Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null) {
-            Utils.writeDeclaredField(World.class, Minecraft.getMinecraft().world, "field_73011_w", new PassingDayWorldProviderClient(Minecraft.getMinecraft().world.provider), true);
+            Utils.writeDeclaredField(World.class, Minecraft.getMinecraft().world, "provider", new PassingDayWorldProviderClient(Minecraft.getMinecraft().world.provider), true);
             await = false;
         }
     }
@@ -49,12 +49,12 @@ public class PassingDays {
         if (awaitingServer) {
             World world = DimensionManager.getWorld(0);
             if (world != null && !world.isRemote && world.provider != null) {
-                Utils.writeDeclaredField(World.class, world, "field_73011_w", new PassingDayWorldProviderServer(world.provider), true);
+                Utils.writeDeclaredField(World.class, world, "provider", new PassingDayWorldProviderServer(world.provider), true);
                 awaitingServer = false;
                 List<TileEntity> teList = world.tickableTileEntities;
                 List<TileEntity> newTeList = new TETriggerList(world);
                 newTeList.addAll(teList);
-                Utils.writeDeclaredField(World.class,world,"field_175730_i",newTeList,true);
+                Utils.writeDeclaredField(World.class,world,"tickableTileEntities",newTeList,true);
             }
         }
     }

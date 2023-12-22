@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.api.capability.size;
 
+import lombok.Getter;
+
+@Getter
 public enum Weight {
     VERY_LIGHT("very_light", 64),
     LIGHT("light", 32),

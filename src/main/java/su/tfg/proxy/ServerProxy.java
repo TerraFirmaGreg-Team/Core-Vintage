@@ -1,19 +1,14 @@
 package su.tfg.proxy;
 
-import gregtech.api.GTValues;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import static su.tfg.Tags.MOD_ID;
 
 @SuppressWarnings("unused")
 @SideOnly(Side.SERVER)

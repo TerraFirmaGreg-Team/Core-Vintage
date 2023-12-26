@@ -23,7 +23,7 @@ dependencies {
         implementation rfg.deobf("curse.maven:mod-debug-world-type-313045:2705823")
 
         implementation rfg.deobf("curse.maven:bookshelf-228525:2836960-sources-2836961-javadoc-2836962")
-        implementation rfg.deobf("curse.maven:athenaeum-284350:4633750")
+//        implementation rfg.deobf("curse.maven:athenaeum-284350:4633750")
 
         implementation rfg.deobf("curse.maven:tabula-minecraft-modeler-229092:2801271")
         implementation rfg.deobf("curse.maven:ichunutil-229060:2801263")
@@ -40,8 +40,8 @@ dependencies {
 
     // Util dependencies
     if (use_util.toBoolean()) {
-        compileOnly rfg.deobf("curse.maven:dropt-284973:3758733")
-        compileOnly rfg.deobf("curse.maven:game-stages-268655:2951840")
+//        compileOnly rfg.deobf("curse.maven:dropt-284973:3758733")
+//        compileOnly rfg.deobf("curse.maven:game-stages-268655:2951840")
 //        implementation rfg.deobf("curse.maven:realistic-terrain-generation-unofficial-648514:4696300")
 
 //        implementation rfg.deobf("curse.maven:future-mc-310059:3924863")
@@ -76,7 +76,6 @@ dependencies {
         compileOnly rfg.deobf("curse.maven:tfc-pams-harvestcraft-compatibility-mod-452032:3257786")
         compileOnly rfg.deobf("curse.maven:tfc-elementia-389225:3574322")
     }
-
 
 
     // Dramatic Trees dependencies

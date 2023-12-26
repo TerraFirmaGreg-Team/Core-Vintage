@@ -1,7 +1,9 @@
 package su.tfg.api.modules;
 
+import net.minecraftforge.fml.common.LoaderState;
+
 /**
- * Basically {@link net.minecraftforge.fml.common.LoaderState} but only for launch stages.
+ * Basically {@link LoaderState} but only for launch stages.
  * Also includes early module stages.
  */
 public enum ModuleStage {

@@ -9,7 +9,7 @@ import su.tfg.api.modules.ModuleContainerRegistryEvent;
 import su.tfg.api.modules.ModuleManager;
 import su.tfg.modules.TFGModules;
 
-import static net.minecraftforge.fml.common.Mod.*;
+import static net.minecraftforge.fml.common.Mod.EventHandler;
 import static su.tfg.Tags.*;
 
 @Mod(modid = MOD_ID, version = VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)

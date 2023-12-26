@@ -1,11 +1,5 @@
 package su.tfg.api.modules;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
-import gregtech.api.GTValues;
-
-import gregtech.api.modules.GregTechModule;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -14,6 +8,8 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.*;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,27 +17,41 @@ import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static su.tfg.Tags.MOD_ID;
+
 public class ModuleManager implements IModuleManager {
 
     private static final ModuleManager INSTANCE = new ModuleManager();
     private static final String MODULE_CFG_FILE_NAME = "modules.cfg";
     private static final String MODULE_CFG_CATEGORY_NAME = "modules";
     private static File configFolder;
-
-    private Map<String, IModuleContainer> containers = new LinkedHashMap<>();
     private final Map<ResourceLocation, ITFGModule> sortedModules = new LinkedHashMap<>();
     private final Set<ITFGModule> loadedModules = new LinkedHashSet<>();
-
+    private final Logger logger = LogManager.getLogger("TFG Module Loader");
+    private Map<String, IModuleContainer> containers = new LinkedHashMap<>();
     private IModuleContainer currentContainer;
-
     private ModuleStage currentStage = ModuleStage.C_SETUP;
-    private final Logger logger = LogManager.getLogger("GregTech Module Loader");
     private Configuration config;
 
     private ModuleManager() {}
 
     public static ModuleManager getInstance() {
         return INSTANCE;
+    }
+
+    private static ITFGModule getCoreModule(List<ITFGModule> modules) {
+        for (ITFGModule module : modules) {
+            TFGModule annotation = module.getClass().getAnnotation(TFGModule.class);
+            if (annotation.coreModule()) {
+                return module;
+            }
+        }
+        return null;
+    }
+
+    private static String getContainerID(ITFGModule module) {
+        TFGModule annotation = module.getClass().getAnnotation(TFGModule.class);
+        return annotation.containerID();
     }
 
     @Override
@@ -92,7 +102,7 @@ public class ModuleManager implements IModuleManager {
                         Map.Entry::getKey, Map.Entry::getValue, (a, b) -> a, LinkedHashMap::new));
 
         currentStage = ModuleStage.M_SETUP;
-        configFolder = new File(configDirectory, GTValues.MODID);
+        configFolder = new File(configDirectory, MOD_ID);
         Map<String, List<ITFGModule>> modules = getModules(asmDataTable);
         configureModules(modules);
 
@@ -223,7 +233,7 @@ public class ModuleManager implements IModuleManager {
         Configuration config = getConfiguration();
         config.load();
         config.addCustomCategoryComment(MODULE_CFG_CATEGORY_NAME,
-                "Module configuration file. Can individually enable/disable modules from GregTech and its addons");
+                "Module configuration file. Can individually enable/disable modules from TFG and its addons");
 
         for (IModuleContainer container : containers.values()) {
             String containerID = container.getID();
@@ -296,21 +306,6 @@ public class ModuleManager implements IModuleManager {
             config.save();
         }
         Locale.setDefault(locale);
-    }
-
-    private static ITFGModule getCoreModule(List<ITFGModule> modules) {
-        for (ITFGModule module : modules) {
-            TFGModule annotation = module.getClass().getAnnotation(TFGModule.class);
-            if (annotation.coreModule()) {
-                return module;
-            }
-        }
-        return null;
-    }
-
-    private static String getContainerID(ITFGModule module) {
-        TFGModule annotation = module.getClass().getAnnotation(TFGModule.class);
-        return annotation.containerID();
     }
 
     private Map<String, List<ITFGModule>> getModules(ASMDataTable table) {

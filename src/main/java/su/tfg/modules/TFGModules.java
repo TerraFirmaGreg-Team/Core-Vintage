@@ -2,7 +2,9 @@ package su.tfg.modules;
 
 
 import su.tfg.api.modules.IModuleContainer;
+import su.tfg.api.modules.ModuleContainer;
 
+@ModuleContainer
 public class TFGModules implements IModuleContainer {
 
     public static final String MODULE_CORE = "core";

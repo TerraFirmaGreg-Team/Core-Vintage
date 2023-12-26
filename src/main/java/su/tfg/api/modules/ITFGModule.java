@@ -21,8 +21,8 @@ public interface ITFGModule {
     /**
      * What other modules this module depends on.
      * <p>
-     * e.g. <code>new ResourceLocation("gregtech", "foo_module")</code> represents a dependency on the module
-     * "foo_module" in the container "gregtech"
+     * e.g. <code>new ResourceLocation("tfg", "foo_module")</code> represents a dependency on the module
+     * "foo_module" in the container "tfg"
      */
     @NotNull
     default Set<ResourceLocation> getDependencyUids() {
@@ -50,13 +50,13 @@ public interface ITFGModule {
     default void serverStopped(FMLServerStoppedEvent event) {}
 
     /**
-     * Register packets using GregTech's packet handling API here.
+     * Register packets using TFG's packet handling API here.
      */
     default void registerPackets() {}
 
     /**
      * @return A list of classes to subscribe to the Forge event bus.
-     *         As the class gets subscribed, not any specific instance, event handlers must be static!
+     * As the class gets subscribed, not any specific instance, event handlers must be static!
      */
     @NotNull
     default List<Class<?>> getEventBusSubscribers() {

@@ -1,11 +1,11 @@
 package su.terrafirmagreg.core.modules.ambiental.api;
 
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifierStorage;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifierStorage;
 
 import java.util.Optional;
 

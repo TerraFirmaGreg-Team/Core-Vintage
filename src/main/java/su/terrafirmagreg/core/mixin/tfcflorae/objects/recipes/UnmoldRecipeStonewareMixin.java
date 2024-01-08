@@ -1,6 +1,5 @@
 package su.terrafirmagreg.core.mixin.tfcflorae.objects.recipes;
 
-import su.terrafirmagreg.core.util.TFGModUtils;
 import gregtech.api.unification.OreDictUnifier;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
@@ -19,6 +18,7 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import su.terrafirmagreg.core.util.TFGModUtils;
 import tfcflorae.compat.tfcelementia.recipes.UnmoldRecipeStoneware;
 import tfcflorae.objects.items.ceramics.ItemStonewareMold;
 

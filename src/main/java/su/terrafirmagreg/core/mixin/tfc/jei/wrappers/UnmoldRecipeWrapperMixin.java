@@ -1,6 +1,5 @@
 package su.terrafirmagreg.core.mixin.tfc.jei.wrappers;
 
-import su.terrafirmagreg.core.util.TFGModUtils;
 import gregtech.api.unification.OreDictUnifier;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -23,6 +22,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import su.terrafirmagreg.core.util.TFGModUtils;
 
 @Mixin(value = UnmoldRecipeWrapper.class, remap = false)
 public class UnmoldRecipeWrapperMixin implements IRecipeWrapper {

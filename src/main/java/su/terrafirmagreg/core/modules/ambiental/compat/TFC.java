@@ -1,11 +1,11 @@
 package su.terrafirmagreg.core.modules.ambiental.compat;
 
-import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
-import su.terrafirmagreg.core.modules.ambiental.modifier.EnvironmentalModifier;
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
 import net.dries007.tfc.objects.te.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
+import su.terrafirmagreg.core.modules.ambiental.modifier.EnvironmentalModifier;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
 
 import java.util.Optional;
 

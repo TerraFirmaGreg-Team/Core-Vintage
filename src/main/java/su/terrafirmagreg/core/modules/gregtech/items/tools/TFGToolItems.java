@@ -1,12 +1,12 @@
 package su.terrafirmagreg.core.modules.gregtech.items.tools;
 
-import su.terrafirmagreg.core.modules.gregtech.items.tools.behaviors.ChiselBehavior;
-import su.terrafirmagreg.core.modules.gregtech.items.tools.behaviors.PropickBehavior;
 import gregtech.api.GTValues;
 import gregtech.api.items.toolitem.IGTTool;
 import gregtech.api.items.toolitem.ItemGTTool;
 import gregtech.common.items.ToolItems;
 import gregtech.core.sound.GTSoundEvents;
+import su.terrafirmagreg.core.modules.gregtech.items.tools.behaviors.ChiselBehavior;
+import su.terrafirmagreg.core.modules.gregtech.items.tools.behaviors.PropickBehavior;
 
 public final class TFGToolItems {
 

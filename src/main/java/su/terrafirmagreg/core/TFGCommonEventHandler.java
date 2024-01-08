@@ -1,9 +1,5 @@
 package su.terrafirmagreg.core;
 
-import su.terrafirmagreg.core.modules.gregtech.material.TFGMaterialHandler;
-import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefixHandler;
-import su.terrafirmagreg.core.modules.gregtech.recipes.TFGRecipeHandlerList;
-import su.terrafirmagreg.core.modules.gregtech.stonetypes.StoneTypeHandler;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.event.MaterialEvent;
@@ -16,6 +12,10 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.core.modules.gregtech.material.TFGMaterialHandler;
+import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefixHandler;
+import su.terrafirmagreg.core.modules.gregtech.recipes.TFGRecipeHandlerList;
+import su.terrafirmagreg.core.modules.gregtech.stonetypes.StoneTypeHandler;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public final class TFGCommonEventHandler {

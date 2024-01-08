@@ -1,12 +1,12 @@
 package su.terrafirmagreg.core.modules.ambiental.api;
 
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifierStorage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifierStorage;
 
 import java.util.Optional;
 

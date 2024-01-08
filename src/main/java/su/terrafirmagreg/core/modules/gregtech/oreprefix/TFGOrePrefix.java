@@ -1,11 +1,11 @@
 package su.terrafirmagreg.core.modules.gregtech.oreprefix;
 
-import su.terrafirmagreg.core.modules.gregtech.material.TFGMaterialIconType;
-import su.terrafirmagreg.core.modules.gregtech.material.TFGMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialIconType;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
+import su.terrafirmagreg.core.modules.gregtech.material.TFGMaterialIconType;
+import su.terrafirmagreg.core.modules.gregtech.material.TFGMaterials;
 
 import static gregtech.api.GTValues.M;
 import static gregtech.api.unification.ore.OrePrefix.Conditions.*;

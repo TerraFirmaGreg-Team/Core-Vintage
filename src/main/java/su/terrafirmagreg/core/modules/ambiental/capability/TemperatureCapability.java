@@ -1,14 +1,5 @@
 package su.terrafirmagreg.core.modules.ambiental.capability;
 
-import su.terrafirmagreg.core.modules.ambiental.AmbientalDamage;
-import su.terrafirmagreg.core.TFGConfig;
-import su.terrafirmagreg.core.modules.ambiental.api.IBlockTemperatureProvider;
-import su.terrafirmagreg.core.modules.ambiental.api.IEquipmentTemperatureProvider;
-import su.terrafirmagreg.core.modules.ambiental.api.IItemTemperatureProvider;
-import su.terrafirmagreg.core.modules.ambiental.api.ITileEntityTemperatureProvider;
-import su.terrafirmagreg.core.modules.ambiental.modifier.EnvironmentalModifier;
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifierStorage;
 import gregtech.common.items.MetaItems;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
@@ -21,6 +12,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.modules.ambiental.AmbientalDamage;
+import su.terrafirmagreg.core.modules.ambiental.api.IBlockTemperatureProvider;
+import su.terrafirmagreg.core.modules.ambiental.api.IEquipmentTemperatureProvider;
+import su.terrafirmagreg.core.modules.ambiental.api.IItemTemperatureProvider;
+import su.terrafirmagreg.core.modules.ambiental.api.ITileEntityTemperatureProvider;
+import su.terrafirmagreg.core.modules.ambiental.modifier.EnvironmentalModifier;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifierStorage;
 
 public class TemperatureCapability implements ICapabilitySerializable<NBTTagCompound> {
 
@@ -43,7 +43,7 @@ public class TemperatureCapability implements ICapabilitySerializable<NBTTagComp
 	public float bodyTemperature = AVERAGE;
 	public TempModifierStorage modifiers = new TempModifierStorage();
 	private int damageTick = 0;
-	private int durabilityTick = 0;
+	private final int durabilityTick = 0;
 	private EntityPlayer player;
 
 	public TemperatureCapability(EntityPlayer player) {
@@ -69,8 +69,7 @@ public class TemperatureCapability implements ICapabilitySerializable<NBTTagComp
 		Item quantumBoots = MetaItems.QUANTUM_BOOTS.getStackForm().getItem();
 
 		// Nano Armor
-		if (
-				head.equals(nanoHelmet) &&
+		if (head.equals(nanoHelmet) &&
 						(chest.equals(nanoChestplate) || chest.equals(nanoAdvancedChestplate)) &&
 						legs.equals(nanoLeggings) &&
 						feet.equals(nanoBoots)
@@ -79,16 +78,10 @@ public class TemperatureCapability implements ICapabilitySerializable<NBTTagComp
 		}
 
 		// Quark Armor
-		if (
-				head.equals(quantumHelmet) &&
-						(chest.equals(quantumChestplate) || chest.equals(quantumAdvancedChestplate)) &&
-						legs.equals(quantumLeggings) &&
-						feet.equals(quantumBoots)
-		) {
-			return true;
-		}
-
-		return false;
+		return head.equals(quantumHelmet) &&
+				(chest.equals(quantumChestplate) || chest.equals(quantumAdvancedChestplate)) &&
+				legs.equals(quantumLeggings) &&
+				feet.equals(quantumBoots);
 	}
 
 	public float getChange() {

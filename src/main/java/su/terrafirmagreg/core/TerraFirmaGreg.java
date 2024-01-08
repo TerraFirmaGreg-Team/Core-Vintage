@@ -4,25 +4,23 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import su.terrafirmagreg.core.modules.ambiental.TFCAmbientalEventHandler;
-import su.terrafirmagreg.core.modules.ambiental.TFCAmbientalGuiRenderer;
-import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
-import su.terrafirmagreg.core.modules.ambiental.capability.TemperaturePacket;
-import su.terrafirmagreg.core.modules.gregtech.items.TFGModMetaItem;
-import su.terrafirmagreg.core.modules.gregtech.items.tools.TFGToolItems;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import su.terrafirmagreg.core.modules.ambiental.TFCAmbientalEventHandler;
+import su.terrafirmagreg.core.modules.ambiental.TFCAmbientalGuiRenderer;
+import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
+import su.terrafirmagreg.core.modules.ambiental.capability.TemperaturePacket;
+import su.terrafirmagreg.core.modules.gregtech.items.TFGModMetaItem;
+import su.terrafirmagreg.core.modules.gregtech.items.tools.TFGToolItems;
 
 import static su.terrafirmagreg.Tags.*;
-import static su.terrafirmagreg.Tags.MOD_ID;
 
 @Mod(modid = MOD_ID, name = MOD_NAME, version = VERSION, dependencies = TerraFirmaGreg.DEPENDENCIES)
 public class TerraFirmaGreg {

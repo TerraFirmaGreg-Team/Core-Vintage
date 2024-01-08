@@ -1,10 +1,10 @@
 package su.terrafirmagreg.core.modules.ambiental.compat;
 
 
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
 import net.dries007.tfc.objects.te.TECrucible;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
 import tfctech.objects.tileentities.*;
 
 import java.util.Optional;

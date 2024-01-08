@@ -1,13 +1,13 @@
 package su.terrafirmagreg.core.modules.ambiental.api;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.world.EnumSkyBlock;
 import su.terrafirmagreg.core.modules.ambiental.compat.Cellars;
 import su.terrafirmagreg.core.modules.ambiental.compat.FirmaLife;
 import su.terrafirmagreg.core.modules.ambiental.compat.TFC;
 import su.terrafirmagreg.core.modules.ambiental.compat.TFCTech;
 import su.terrafirmagreg.core.modules.ambiental.modifier.EnvironmentalModifier;
 import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.EnumSkyBlock;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -103,7 +103,7 @@ public class AmbientalRegistry<Type> implements Iterable<Type> {
 	public Iterator<Type> iterator() {
 		return new Iterator<Type>() {
 
-			private Iterator listIterator = list.iterator();
+			private final Iterator listIterator = list.iterator();
 
 			@Override
 			public boolean hasNext() {

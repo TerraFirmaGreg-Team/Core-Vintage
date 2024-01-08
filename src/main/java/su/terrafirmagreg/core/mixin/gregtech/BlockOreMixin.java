@@ -1,6 +1,5 @@
 package su.terrafirmagreg.core.mixin.gregtech;
 
-import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.common.blocks.BlockOre;
@@ -12,6 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 
 import java.util.Random;
 

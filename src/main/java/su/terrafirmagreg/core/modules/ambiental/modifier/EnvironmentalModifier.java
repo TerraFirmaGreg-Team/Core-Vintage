@@ -1,9 +1,5 @@
 package su.terrafirmagreg.core.modules.ambiental.modifier;
 
-import su.terrafirmagreg.core.TFGConfig;
-import su.terrafirmagreg.core.modules.ambiental.api.AmbientalRegistry;
-import su.terrafirmagreg.core.modules.ambiental.api.IEnvironmentalTemperatureProvider;
-import su.terrafirmagreg.core.modules.ambiental.effects.TempEffect;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -14,6 +10,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.modules.ambiental.api.AmbientalRegistry;
+import su.terrafirmagreg.core.modules.ambiental.api.IEnvironmentalTemperatureProvider;
+import su.terrafirmagreg.core.modules.ambiental.effects.TempEffect;
 
 import java.util.Optional;
 
@@ -133,8 +133,7 @@ public class EnvironmentalModifier {
 	}
 
 	public static Optional<TempModifier> handleThirst(EntityPlayer player) {
-		if (player.getFoodStats() instanceof IFoodStatsTFC) {
-			IFoodStatsTFC stats = (IFoodStatsTFC) player.getFoodStats();
+		if (player.getFoodStats() instanceof IFoodStatsTFC stats) {
 			if (getEnvironmentTemperatureWithTimeOfDay(player) > AVERAGE + 3 && stats.getThirst() > 80f) {
 				return TempModifier.defined("well_hidrated", -2.5f, 0f);
 			}
@@ -151,8 +150,7 @@ public class EnvironmentalModifier {
 	}
 
 	public static Optional<TempModifier> handleDiet(EntityPlayer player) {
-		if (player.getFoodStats() instanceof IFoodStatsTFC) {
-			IFoodStatsTFC stats = (IFoodStatsTFC) player.getFoodStats();
+		if (player.getFoodStats() instanceof IFoodStatsTFC stats) {
 			if (getEnvironmentTemperatureWithTimeOfDay(player) < TFGConfig.GENERAL.coolThreshold) {
 				float grainLevel = stats.getNutrition().getNutrient(Nutrient.GRAIN);
 				float meatLevel = stats.getNutrition().getNutrient(Nutrient.PROTEIN);

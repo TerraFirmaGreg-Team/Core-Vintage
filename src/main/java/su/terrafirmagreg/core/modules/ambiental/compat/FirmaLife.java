@@ -1,10 +1,10 @@
 package su.terrafirmagreg.core.modules.ambiental.compat;
 
 import com.eerussianguy.firmalife.te.TEOven;
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
 
 import java.util.Optional;
 

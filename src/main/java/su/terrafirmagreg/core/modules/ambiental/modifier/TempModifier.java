@@ -1,12 +1,12 @@
 package su.terrafirmagreg.core.modules.ambiental.modifier;
 
-import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
 
 import java.util.Optional;
 
 public class TempModifier implements Comparable<TempModifier> {
-	private String unlocalizedName;
+	private final String unlocalizedName;
 	private float change = 0f;
 	private float potency = 0f;
 	private int count = 1;

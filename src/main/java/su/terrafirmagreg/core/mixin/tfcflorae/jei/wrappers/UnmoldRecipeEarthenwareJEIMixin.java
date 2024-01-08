@@ -1,6 +1,5 @@
 package su.terrafirmagreg.core.mixin.tfcflorae.jei.wrappers;
 
-import su.terrafirmagreg.core.util.TFGModUtils;
 import gregtech.api.unification.OreDictUnifier;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -21,6 +20,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import su.terrafirmagreg.core.util.TFGModUtils;
 import tfcflorae.compat.jei.wrappers.UnmoldRecipeWrapperEarthenwareTFCF;
 import tfcflorae.objects.items.ceramics.ItemEarthenwareMold;
 

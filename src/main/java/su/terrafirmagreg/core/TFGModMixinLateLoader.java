@@ -1,6 +1,5 @@
 package su.terrafirmagreg.core;
 
-import net.minecraftforge.fml.common.Loader;
 import zone.rong.mixinbooter.ILateMixinLoader;
 
 import java.util.ArrayList;

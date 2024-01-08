@@ -1,7 +1,5 @@
 package su.terrafirmagreg.core.modules.ambiental;
 
-import su.terrafirmagreg.core.TFGConfig;
-import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -22,6 +20,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 
@@ -142,7 +142,7 @@ public class TFCAmbientalGuiRenderer {
 			}
 		}
 		if ((player.isSneaking() || !TFGConfig.CLIENT.SNEAKY_DETAILS) && tempSystem instanceof TemperatureCapability) {
-			TemperatureCapability sys = (TemperatureCapability) tempSystem;
+			TemperatureCapability sys = tempSystem;
 			float targetFormatted = sys.getTarget();
 			float tempFormatted = sys.getTemperature();
 			float changeFormatted = sys.getChange();

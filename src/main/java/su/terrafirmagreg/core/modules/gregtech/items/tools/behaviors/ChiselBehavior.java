@@ -1,6 +1,5 @@
 package su.terrafirmagreg.core.modules.gregtech.items.tools.behaviors;
 
-import su.terrafirmagreg.core.modules.gregtech.items.tools.TFGToolHelper;
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import net.dries007.tfc.ConfigTFC;
@@ -35,6 +34,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.core.modules.gregtech.items.tools.TFGToolHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

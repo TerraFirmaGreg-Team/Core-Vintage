@@ -1,8 +1,5 @@
 package su.terrafirmagreg.core.modules.gregtech.recipes;
 
-import su.terrafirmagreg.core.modules.gregtech.items.TFGMetaItems;
-import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
-import su.terrafirmagreg.core.mixin.gregtech.IMaterialRecipeHandlerInvoker;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
@@ -11,6 +8,9 @@ import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
+import su.terrafirmagreg.core.mixin.gregtech.IMaterialRecipeHandlerInvoker;
+import su.terrafirmagreg.core.modules.gregtech.items.TFGMetaItems;
+import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 
 import static gregtech.api.unification.material.properties.PropertyKey.GEM;
 

@@ -1,6 +1,5 @@
 package su.terrafirmagreg.core;
 
-import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
@@ -22,12 +21,13 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
+import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 import tfcflorae.api.knapping.KnappingTypes;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.core.util.TFGModUtils.TFG_OREPREFIX_REGISTRY;
 import static gregtech.api.recipes.RecipeMaps.MACERATOR_RECIPES;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
+import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.core.util.TFGModUtils.TFG_OREPREFIX_REGISTRY;
 
 public class TFGRecipes {
 

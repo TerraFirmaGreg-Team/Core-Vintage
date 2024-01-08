@@ -1,6 +1,5 @@
 package su.terrafirmagreg.core.mixin.tfcflorae.firmalife.recipes;
 
-import su.terrafirmagreg.core.mixin.tfcflorae.firmalife.IUnmoldKaoliniteMalletRecipeMixin;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -11,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.spongepowered.asm.mixin.*;
+import su.terrafirmagreg.core.mixin.tfcflorae.firmalife.IUnmoldKaoliniteMalletRecipeMixin;
 import tfcflorae.compat.firmalife.ceramics.ItemKaoliniteMalletMoldFL;
 import tfcflorae.compat.firmalife.recipes.UnmoldKaoliniteMalletRecipe;
 

@@ -32,7 +32,7 @@ public class TFCAmbientalEventHandler {
 			return;
 		}
 		if (player.hasCapability(TemperatureCapability.CAPABILITY, null)) {
-			TemperatureCapability cap = (TemperatureCapability) player.getCapability(TemperatureCapability.CAPABILITY, null);
+			TemperatureCapability cap = player.getCapability(TemperatureCapability.CAPABILITY, null);
 			cap.bodyTemperature = TemperatureCapability.AVERAGE;
 		}
 	}
@@ -83,7 +83,7 @@ public class TFCAmbientalEventHandler {
 			return;
 		}
 
-		TemperatureCapability temp = (TemperatureCapability) player.getCapability(TemperatureCapability.CAPABILITY, null);
+		TemperatureCapability temp = player.getCapability(TemperatureCapability.CAPABILITY, null);
 
 		temp.update();
 	}

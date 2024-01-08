@@ -1,6 +1,5 @@
 package su.terrafirmagreg.core.modules.gregtech.items.tools.behaviors;
 
-import su.terrafirmagreg.core.modules.gregtech.items.tools.TFGToolHelper;
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import gregtech.common.blocks.BlockOre;
@@ -26,6 +25,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import su.terrafirmagreg.core.modules.gregtech.items.tools.TFGToolHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -1,8 +1,5 @@
 package su.terrafirmagreg.core.modules.ambiental.api;
 
-import su.terrafirmagreg.core.modules.ambiental.modifier.EnvironmentalModifier;
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifierStorage;
 import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.minecraft.block.Block;
@@ -11,6 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import su.terrafirmagreg.core.modules.ambiental.modifier.EnvironmentalModifier;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifierStorage;
 
 import java.util.Optional;
 

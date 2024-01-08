@@ -1,7 +1,5 @@
 package su.terrafirmagreg.core.mixin.tfc.objects.blocks;
 
-import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.core.mixin.tfc.ICalculatePointInvoker;
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.objects.blocks.BlockPlacedHide;
@@ -18,8 +16,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import su.terrafirmagreg.core.mixin.tfc.ICalculatePointInvoker;
 
 @Mixin(value = BlockPlacedHide.class, remap = false)
 public class BlockPlacedHideMixin extends Block {

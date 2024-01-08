@@ -1,8 +1,8 @@
 package su.terrafirmagreg.core.util;
 
-import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 import net.dries007.tfc.api.types.Metal;
 import org.apache.commons.lang3.StringUtils;
+import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 
 import java.util.Arrays;
 import java.util.HashMap;

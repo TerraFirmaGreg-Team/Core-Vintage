@@ -1,20 +1,20 @@
 package su.terrafirmagreg.core.modules.gregtech.stonetypes;
 
-import su.terrafirmagreg.core.util.Triple;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.ore.StoneType;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import su.terrafirmagreg.core.util.Triple;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import static su.terrafirmagreg.core.modules.gregtech.material.TFGMaterials.*;
-import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static su.terrafirmagreg.core.modules.gregtech.material.TFGMaterials.*;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.*;
 
 public class StoneTypeHandler {
 

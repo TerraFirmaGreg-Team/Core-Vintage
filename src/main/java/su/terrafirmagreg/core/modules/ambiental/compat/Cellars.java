@@ -1,11 +1,11 @@
 package su.terrafirmagreg.core.modules.ambiental.compat;
 
 
-import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.sharkbark.cellars.blocks.tileentity.TEIceBunker;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
 
 import java.util.Optional;
 

@@ -15,7 +15,9 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@EventBusSubscriber
+import static su.terrafirmagreg.Constants.MODID_TFCPATHS;
+
+@EventBusSubscriber(modid = MODID_TFCPATHS)
 public class PathEvent {
 	private static int player_debug_cooldown = 100;
 	private static int mob_debug_cooldown = 1000;

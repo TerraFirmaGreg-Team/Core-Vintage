@@ -239,7 +239,7 @@ public class ModConfig {
 		}
 	}
 
-	@Mod.EventBusSubscriber
+	@Mod.EventBusSubscriber(modid = MODID_OSA)
 	public static class SyncConfig {
 		@SubscribeEvent
 		public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {

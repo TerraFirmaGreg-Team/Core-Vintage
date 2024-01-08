@@ -48,10 +48,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.Tags.VERSION;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber
-@Mod(modid = MODID_TFC, name = TerraFirmaCraft.MOD_NAME, useMetadata = true, guiFactory = Constants.GUI_FACTORY, dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
+@Mod(modid = MODID_TFC, name = TerraFirmaCraft.MOD_NAME, version = VERSION, useMetadata = true, guiFactory = Constants.GUI_FACTORY, dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
 public final class TerraFirmaCraft {
 	public static final String MOD_NAME = "TerraFirmaCraft";
 

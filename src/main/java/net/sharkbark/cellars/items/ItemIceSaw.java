@@ -27,7 +27,9 @@ import net.sharkbark.cellars.init.ModItems;
 
 import javax.annotation.Nullable;
 
-@Mod.EventBusSubscriber()
+import static su.terrafirmagreg.Constants.MODID_CELLARS;
+
+@Mod.EventBusSubscriber(modid = MODID_CELLARS)
 public class ItemIceSaw extends ItemBase implements IMetalItem {
 	private final Metal metal;
 	private final double attackDamage;

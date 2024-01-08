@@ -69,7 +69,7 @@ public class ModConfig {
 		};
 	}
 
-	@Mod.EventBusSubscriber
+	@Mod.EventBusSubscriber(modid = MODID_ASTIKORCARTS)
 	private static class EventHandler {
 		@SubscribeEvent
 		public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {

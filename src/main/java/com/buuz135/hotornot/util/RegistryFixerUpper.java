@@ -9,8 +9,10 @@ import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import static su.terrafirmagreg.Constants.MODID_HOTORNOT;
+
 // TODO remove at some point? Only needed to transition to the new names
-@EventBusSubscriber
+@EventBusSubscriber(modid = MODID_HOTORNOT)
 public final class RegistryFixerUpper {
 
 	@SubscribeEvent

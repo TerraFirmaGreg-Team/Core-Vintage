@@ -1,7 +1,6 @@
 package mod.acgaming.tfcpaths;
 
 import net.minecraftforge.fml.common.Mod;
-import su.terrafirmagreg.Constants;
 import su.terrafirmagreg.Tags;
 
 import static su.terrafirmagreg.Constants.MODID_TFCPATHS;

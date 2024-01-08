@@ -1,6 +1,5 @@
 package com.lumintorious.ambiental.modifiers;
 
-import com.lumintorious.ambiental.TFCAmbiental;
 import com.lumintorious.ambiental.TFCAmbientalConfig;
 import com.lumintorious.ambiental.Util;
 import com.lumintorious.ambiental.capability.TemperatureCapability;

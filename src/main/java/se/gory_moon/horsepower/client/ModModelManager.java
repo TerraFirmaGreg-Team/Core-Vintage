@@ -22,7 +22,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import se.gory_moon.horsepower.blocks.ModBlocks;
 import se.gory_moon.horsepower.client.model.BakedChopperModel;
 import se.gory_moon.horsepower.items.ModItems;
-import su.terrafirmagreg.Constants;
 
 import java.util.HashSet;
 import java.util.Set;

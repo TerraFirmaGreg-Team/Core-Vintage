@@ -18,7 +18,6 @@ import se.gory_moon.horsepower.tweaker.DummyTweakPluginImpl;
 import se.gory_moon.horsepower.tweaker.ITweakerPlugin;
 import se.gory_moon.horsepower.tweaker.TweakerPluginImpl;
 import se.gory_moon.horsepower.util.Utils;
-import su.terrafirmagreg.Constants;
 import su.terrafirmagreg.Tags;
 
 import static se.gory_moon.horsepower.lib.Reference.*;

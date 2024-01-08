@@ -1,5 +1,33 @@
 apply from: 'gradle/scripts/helpers.gradle'
 
+repositories {
+    // Other repositories described by default:
+    // CleanroomMC: https://maven.cleanroommc.com
+    exclusiveContent {
+        forRepository {
+            maven {
+                name 'CurseMaven'
+                url 'https://cursemaven.com'
+            }
+        }
+        filter {
+            includeGroup 'curse.maven'
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name 'Modrinth'
+                url 'https://api.modrinth.com/maven'
+            }
+        }
+        filter {
+            includeGroup 'maven.modrinth'
+        }
+    }
+    mavenLocal() // Must be last for caching to work
+}
+
 // Using mods
 def use_gregtech = true
 def use_dramatic_trees = true
@@ -16,13 +44,14 @@ dependencies {
         implementation rfg.deobf("curse.maven:had-enough-items-557549:4810661")
         implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:4746213")
         implementation rfg.deobf("curse.maven:reid-629017:4505486")
-
         implementation rfg.deobf("curse.maven:configanytime-870276:4576653")
         implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
+        implementation rfg.deobf("curse.maven:bookshelf-228525:2836960-sources-2836961-javadoc-2836962")
+
         implementation rfg.deobf("curse.maven:nbt-tooltip-274816:2567902")
         implementation rfg.deobf("curse.maven:mod-debug-world-type-313045:2705823")
 
-        implementation rfg.deobf("curse.maven:bookshelf-228525:2836960-sources-2836961-javadoc-2836962")
+
 //        implementation rfg.deobf("curse.maven:athenaeum-284350:4633750")
 
         implementation rfg.deobf("curse.maven:tabula-minecraft-modeler-229092:2801271")
@@ -41,7 +70,7 @@ dependencies {
     // Util dependencies
     if (use_util.toBoolean()) {
 //        compileOnly rfg.deobf("curse.maven:dropt-284973:3758733")
-//        compileOnly rfg.deobf("curse.maven:game-stages-268655:2951840")
+        compileOnly rfg.deobf("curse.maven:game-stages-268655:2951840")
 //        implementation rfg.deobf("curse.maven:realistic-terrain-generation-unofficial-648514:4696300")
 
 //        implementation rfg.deobf("curse.maven:future-mc-310059:3924863")

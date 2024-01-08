@@ -1,0 +1,71 @@
+apply from: 'gradle/scripts/helpers.gradle'
+
+repositories {
+    // Other repositories described by default:
+    // CleanroomMC: https://maven.cleanroommc.com
+    exclusiveContent {
+        forRepository {
+            maven {
+                name 'CurseMaven'
+                url 'https://cursemaven.com'
+            }
+        }
+        filter {
+            includeGroup 'curse.maven'
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name 'Modrinth'
+                url 'https://api.modrinth.com/maven'
+            }
+        }
+        filter {
+            includeGroup 'maven.modrinth'
+        }
+    }
+    mavenLocal() // Must be last for caching to work
+}
+
+// Using mods
+def use_gregtech = true
+def use_dramatic_trees = true
+def use_tconstruct = false
+def use_forestry = false
+def use_pams = false
+def use_immersive = false
+def use_util = true
+
+dependencies {
+
+    compileOnly rfg.deobf("curse.maven:the-one-probe-community-edition-885670:4746213")
+    compileOnly rfg.deobf("curse.maven:had-enough-items-557549:4571247")
+
+    compileOnly rfg.deobf("curse.maven:3.2.3.358-codechicken-lib-1-8-242818:2779848")
+    compileOnly rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:4924179-sources-4924181")
+    compileOnly rfg.deobf("curse.maven:gregicality-multiblocks-564858:4910674-sources-4910676")
+
+    compileOnly rfg.deobf("curse.maven:groovyscript-687577:4691853")
+    compileOnly rfg.deobf("curse.maven:ctm-267602:2915363")
+
+    compileOnly rfg.deobf("curse.maven:terrafirmacraft-302973:3645502")
+    compileOnly rfg.deobf("curse.maven:firmalife-453394:3612887")
+    compileOnly rfg.deobf("curse.maven:tfc-florae-389228:3590520")
+    compileOnly rfg.deobf("curse.maven:tfctech-unofficial-340660:3209033")
+    compileOnly rfg.deobf("curse.maven:tfc-cellars-add-on-431185:3640604")
+    compileOnly rfg.deobf("curse.maven:tfc-things-386285:3378687")
+
+    compileOnly rfg.deobf("curse.maven:ftb-utilities-forge-237102:3157548")
+    compileOnly rfg.deobf("curse.maven:ftb-quests-forge-289412:3156637")
+    compileOnly rfg.deobf("curse.maven:ftb-library-legacy-forge-237167:2985811")
+    compileOnly rfg.deobf("curse.maven:item-filters-309674:3003364")
+
+    compileOnly rfg.deobf("curse.maven:puddles-312039:2668151")
+
+    compileOnly rfg.deobf("curse.maven:galacticraft-legacy-564236:4671122")
+    compileOnly rfg.deobf("curse.maven:extra-planets-241291:4466284")
+
+    compileOnly rfg.deobf("curse.maven:ic2_classic-242942:3014827")
+
+}

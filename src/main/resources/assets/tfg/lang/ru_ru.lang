@@ -1,0 +1,66 @@
+# Lang by SpeeeDCraft and Xikaro
+
+# Tool
+metaitem.tool.tongs.name=Щипцы (%s)
+
+# Stuff
+gui.advancements=Квесты
+
+metaitem.rocket.body.tier.1.name=Прочный ракетный корпус T1
+metaitem.rocket.body.tier.2.name=Прочный ракетный корпус T2
+metaitem.rocket.body.tier.3.name=Прочный ракетный корпус T3
+metaitem.rocket.body.tier.4.name=Прочный ракетный корпус T4
+metaitem.rocket.body.tier.5.name=Прочный ракетный корпус T5
+metaitem.rocket.body.tier.6.name=Прочный ракетный корпус T6
+metaitem.rocket.body.tier.7.name=Прочный ракетный корпус T7
+metaitem.rocket.body.tier.8.name=Прочный ракетный корпус T8
+metaitem.rocket.body.tier.9.name=Прочный ракетный корпус T9
+metaitem.rocket.body.tier.10.name=Прочный ракетный корпус T10
+metaitem.rocket.body.tier.11.name=Прочный ракетный корпус T11
+
+metaitem.lander.tier.1.name=Посадочный модуль T1
+metaitem.lander.tier.2.name=Посадочный модуль T2
+metaitem.lander.tier.3.name=Посадочный модуль T3
+
+metaitem.alloy.ingot.tier.1.name=Прочный сплав корпуса ракеты T1
+metaitem.alloy.ingot.tier.2.name=Прочный сплав корпуса ракеты T2
+metaitem.alloy.ingot.tier.3.name=Прочный сплав корпуса ракеты T3
+metaitem.alloy.ingot.tier.4.name=Прочный сплав корпуса ракеты T4
+metaitem.alloy.ingot.tier.5.name=Прочный сплав корпуса ракеты T5
+metaitem.alloy.ingot.tier.6.name=Прочный сплав корпуса ракеты T6
+metaitem.alloy.ingot.tier.7.name=Прочный сплав корпуса ракеты T7
+metaitem.alloy.ingot.tier.8.name=Прочный сплав корпуса ракеты T8
+metaitem.alloy.ingot.tier.9.name=Прочный сплав корпуса ракеты T9
+metaitem.alloy.ingot.tier.10.name=Прочный сплав корпуса ракеты T10
+metaitem.alloy.ingot.tier.11.name=Прочный сплав корпуса ракеты T11
+
+metaitem.rocket.control.computer.tier.1.name=Контролер комьютера ракеты T1
+metaitem.rocket.control.computer.tier.2.name=Контролер комьютера ракеты T2
+metaitem.rocket.control.computer.tier.3.name=Контролер комьютера ракеты T3
+metaitem.rocket.control.computer.tier.4.name=Контролер комьютера ракеты T4
+metaitem.rocket.control.computer.tier.5.name=Контролер комьютера ракеты T5
+metaitem.rocket.control.computer.tier.6.name=Контролер комьютера ракеты T6
+metaitem.rocket.control.computer.tier.7.name=Контролер комьютера ракеты T7
+metaitem.rocket.control.computer.tier.8.name=Контролер комьютера ракеты T8
+metaitem.rocket.control.computer.tier.9.name=Контролер комьютера ракеты T9
+metaitem.rocket.control.computer.tier.10.name=Контролер комьютера ракеты T10
+metaitem.rocket.control.computer.tier.11.name=Контролер комьютера ракеты T11
+
+metaitem.schematic.blank.name=Пустой бланк схемы
+
+metaitem.shape.mold.knife.name=Форма (Оголовье ножа)
+metaitem.shape.extruder.sense.name=Форма экструдера (Оголовье косы)
+metaitem.wooden.bucket.with.salt.name=Деревянное ведро с солью
+metaitem.fluid.housing.name=ME Жидкостный корпус ячейки хранения
+
+metaitem.astro.miner.computer.name=Контролер комьютера астро майнера
+metaitem.moon.buggy.computer.name=Контролер комьютера лунного багги
+metaitem.mars.rover.computer.name=Контролер комьютера марсианского ровера
+metaitem.venus.rover.computer.name=Контролер комьютера венерианского ровера
+metaitem.cargo.rocket.computer.name=Контролер комьютера грузовой ракеты
+
+death.attack.hypothermia=%1$s замер.
+death.attack.hyperthermia=%1$s умер от сердечного приступа.
+
+effect.tfg.cool.name=Остываете
+effect.tfg.warm.name=Нагреваетесь

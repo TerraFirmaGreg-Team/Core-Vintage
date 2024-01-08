@@ -1,19 +1,17 @@
 [
-{
-  "modid": "tfgmod",
-  "name": "TerraFirmaGreg",
-  "description": "Mod from the creators of the TerraFirmaGreg modpack, which allows TFC and GTCEu to work with each other.",
-  "version": "${version}",
-  "mcversion": "1.12.2",
-  "url": "https://www.curseforge.com/minecraft/mc-mods/tfg-mod",
-  "updateUrl": "",
-  "authorList": [
-    "SpeeeDCraft",
-    "Xikaro"
-  ],
-  "credits": "",
-  "logoFile": "assets/tfgmod/textures/logo.png",
-  "screenshots": [],
-  "dependencies": []
-}
+  {
+    "modid": "${mod_id}",
+    "name": "${mod_name}",
+    "description": "${mod_description}",
+    "version": "${mod_version}",
+    "mcversion": "1.12.2",
+    "logoFile": "${mod_logo_path}",
+    "url": "${mod_url}",
+    "updateJson": "${mod_update_json}",
+    "authorList": [
+      "Exception",
+      "Xikaro"
+    ],
+    "credits": "${mod_credits}"
+  }
 ]

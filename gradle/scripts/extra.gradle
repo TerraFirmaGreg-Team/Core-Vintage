@@ -1,0 +1,73 @@
+// You may write any gradle buildscript component in this file
+// This file is automatically applied after build.gradle + dependencies.gradle is ran
+
+// If you wish to use the default helper methods, uncomment the line below
+// apply from: 'gradle/scripts/helpers.gradle'
+
+def stones = [
+        rocktype: [
+                RockVariant  : ["raw", "cobble", "brick", "cracked", "chiseled", "smooth", "gravel", "sand", "anvil", "pressure_plate", "button", "loose", "speleothem"],
+                RockBlockType: ["mossy"      : ["cobble", "brick"],
+                                "stairs"     : ["raw", "cobble", "brick", "smooth"],
+                                "slab"       : ["raw", "cobble", "brick", "smooth"],
+                                "slab_double": ["raw", "cobble", "brick", "smooth"],
+                                "wall"       : ["raw", "cobble", "brick", "smooth"]],
+                RockType     : [
+                        // igneous_intrusive
+                        "granite", "diorite", "gabbro",
+                        // sedimentary
+                        "shale", "claystone", "limestone", "conglomerate", "dolomite", "chert", "chalk",
+                        // igneous_extrusive
+                        "rhyolite", "basalt", "andesite", "dacite",
+                        // metamorphic"
+                        "quartzite", "slate", "phyllite", "schist", "gneiss", "marble"]
+        ],
+        soiltype: [
+                SoilVariant: ["dirt", "grass", "dry_grass", "path", "clay", "clay_grass", "farmland", "rooted_dirt", "mud", "mud_bricks", "drying_bricks"],
+                SoilType   : ["silt", "loam", "sandy_loam", "silty_loam"]
+        ]
+]
+
+
+task processResourceTemplates(type: Copy, group: "tfg utils", description: "Creates Resources from templates") {
+    doLast {
+        println sourceSets.main.resources.srcDirs
+    }
+}
+
+stones.each { key, value ->
+    value.RockVariant.each { rockVariant ->
+        task "processBlockstateTemplatesFor${key.capitalize()}${rockVariant.capitalize()}"(type: Copy) {
+            from "resources_templates"
+            into "src/main/resources"
+            include "**/blockstates/rock/${rockVariant}.json"
+            rename "(.*)", "${rockVariant}.json"
+            expand(rock_type: value.RockType)
+        }
+        processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${rockVariant.capitalize()}"
+    }
+    value.RockBlockType.each { rockBlocktype, rockVariant ->
+        rockVariant.each { rock_variant ->
+            task "processBlockstateTemplatesFor${key.capitalize()}${rockBlocktype.capitalize()}${rock_variant.capitalize()}"(type: Copy) {
+                from "resources_templates"
+                into "src/main/resources"
+                include "**/blockstates/rock/${rockBlocktype}.json"
+                rename "(.*)", "${rockBlocktype}/${rock_variant}.json"
+                expand(rock_type: value.RockType, rock_variant: rock_variant)
+            }
+            processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${rockBlocktype.capitalize()}${rock_variant.capitalize()}"
+        }
+    }
+    value.SoilVariant.each { soilVariant ->
+        task "processBlockstateTemplatesFor${key.capitalize()}${soilVariant.capitalize()}"(type: Copy) {
+            from "resources_templates"
+            into "src/main/resources"
+            include "**/blockstates/soil/${soilVariant}.json"
+            rename "(.*)", "${soilVariant}.json"
+            expand(soil_types: value.SoilType, soil_variant: soilVariant)
+        }
+        processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${soilVariant.capitalize()}"
+    }
+}
+
+processResources.dependsOn processResourceTemplates
